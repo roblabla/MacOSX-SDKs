@@ -1,6 +1,6 @@
 /* CoreAnimation - CAMetalLayer.h
 
-   Copyright (c) 2013-2015, Apple Inc.
+   Copyright (c) 2013-2016, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 /* Note: The default value of the `opaque' property for CAMetalLayer
  * instances is true. */
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+CA_CLASS_AVAILABLE (10.11, 8.0, 9.0, 2.0)
 @interface CAMetalLayer : CALayer
 {
 @private
@@ -93,7 +93,8 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  * If non-nil, the rendered content will be colormatched to the colorspace of
  * the context containing this layer (typically the display's colorspace). */
 
-@property CGColorSpaceRef colorspace;
+@property (nullable) CGColorSpaceRef colorspace;
+
 
 /* If any rendering context on the screen has this enabled, all content will be
  * clamped to its NSScreen’s maximumExtendedDynamicRangeColorComponentValue

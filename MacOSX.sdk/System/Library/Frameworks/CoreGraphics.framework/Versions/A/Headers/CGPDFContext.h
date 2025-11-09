@@ -27,7 +27,7 @@ CF_ASSUME_NONNULL_BEGIN
    value overrides the value of `kCGPDFContextMediaBox' if specified in the
    `auxiliaryInfo' dictionary. */
 
-CG_EXTERN CGContextRef __nullable CGPDFContextCreate(CGDataConsumerRef __nullable consumer,
+CG_EXTERN CGContextRef __nullable CGPDFContextCreate(CGDataConsumerRef cg_nullable consumer,
   const CGRect *__nullable mediaBox, CFDictionaryRef __nullable auxiliaryInfo)
   CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
@@ -35,7 +35,7 @@ CG_EXTERN CGContextRef __nullable CGPDFContextCreate(CGDataConsumerRef __nullabl
    same manner as the above function, except that the output data will be
    written to `url'. */
 
-CG_EXTERN CGContextRef __nullable CGPDFContextCreateWithURL(CFURLRef __nullable url,
+CG_EXTERN CGContextRef __nullable CGPDFContextCreateWithURL(CFURLRef cg_nullable url,
   const CGRect * __nullable mediaBox, CFDictionaryRef __nullable auxiliaryInfo)
   CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
@@ -44,18 +44,18 @@ CG_EXTERN CGContextRef __nullable CGPDFContextCreateWithURL(CFURLRef __nullable 
    additional data will be written to the context's destionation after
    closing. */
 
-CG_EXTERN void CGPDFContextClose(CGContextRef __nullable context)
+CG_EXTERN void CGPDFContextClose(CGContextRef cg_nullable context)
   CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Begin a new page in the PDF context `context'. */
 
-CG_EXTERN void CGPDFContextBeginPage(CGContextRef __nullable context,
+CG_EXTERN void CGPDFContextBeginPage(CGContextRef cg_nullable context,
   CFDictionaryRef __nullable pageInfo)
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* End the current page in the PDF context `context'. */
 
-CG_EXTERN void CGPDFContextEndPage(CGContextRef __nullable context)
+CG_EXTERN void CGPDFContextEndPage(CGContextRef cg_nullable context)
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Add the metadata stream specified by `metadata' to the document catalog
@@ -65,26 +65,26 @@ CG_EXTERN void CGPDFContextEndPage(CGContextRef __nullable context)
    described in section 10.2.2, "Metadata Streams", of the PDF 1.7
    specification. */
 
-CG_EXTERN void CGPDFContextAddDocumentMetadata(CGContextRef __nullable context,
+CG_EXTERN void CGPDFContextAddDocumentMetadata(CGContextRef cg_nullable context,
   CFDataRef __nullable metadata) CG_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_4_0);
 
 /* Set the URL associated with `rect' to `url' in the PDF context
    `context'. */
 
-CG_EXTERN void CGPDFContextSetURLForRect(CGContextRef __nullable context, CFURLRef  url,
+CG_EXTERN void CGPDFContextSetURLForRect(CGContextRef cg_nullable context, CFURLRef  url,
   CGRect rect) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Create a PDF destination named `name' at `point' in the current page of
    the PDF context `context'. */
 
-CG_EXTERN void CGPDFContextAddDestinationAtPoint(CGContextRef __nullable context,
+CG_EXTERN void CGPDFContextAddDestinationAtPoint(CGContextRef cg_nullable context,
   CFStringRef  name, CGPoint point)
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Specify a destination named `name' to jump to when clicking in `rect' of
    the current page of the PDF context `context'. */
 
-CG_EXTERN void CGPDFContextSetDestinationForRect(CGContextRef __nullable context,
+CG_EXTERN void CGPDFContextSetDestinationForRect(CGContextRef cg_nullable context,
   CFStringRef  name, CGRect rect)
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 

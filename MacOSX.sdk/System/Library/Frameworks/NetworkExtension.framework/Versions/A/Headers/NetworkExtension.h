@@ -22,12 +22,14 @@
 #import <NetworkExtension/NEFilterManager.h>
 #import <NetworkExtension/NEFilterProvider.h>
 #import <NetworkExtension/NEFilterProviderConfiguration.h>
+#import <NetworkExtension/NEFlowMetaData.h>
 #if TARGET_OS_IPHONE
 #import <NetworkExtension/NEHotspotHelper.h>
 #endif
 #import <NetworkExtension/NEIPv4Settings.h>
 #import <NetworkExtension/NEIPv6Settings.h>
 #import <NetworkExtension/NEOnDemandRule.h>
+#import <NetworkExtension/NEPacket.h>
 #import <NetworkExtension/NEPacketTunnelFlow.h>
 #import <NetworkExtension/NEPacketTunnelNetworkSettings.h>
 #import <NetworkExtension/NEPacketTunnelProvider.h>

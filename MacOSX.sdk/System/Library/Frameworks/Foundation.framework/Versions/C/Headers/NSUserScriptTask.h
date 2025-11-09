@@ -1,6 +1,6 @@
 /*
 	NSUserScriptTask.h
-	Copyright (c) 2012-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2012-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -35,7 +35,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @property (readonly, copy) NSURL *scriptURL;
 
 // Execute the script with no input and ignoring any result.  This and the other "execute" methods below may be called at most once on any given instance.  If the script completed normally, the completion handler's "error" parameter will be nil.
-typedef void (^NSUserScriptTaskCompletionHandler)(NSError * __nullable error);
+typedef void (^NSUserScriptTaskCompletionHandler)(NSError * _Nullable error);
 - (void)executeWithCompletionHandler:(nullable NSUserScriptTaskCompletionHandler)handler;
 
 @end
@@ -52,7 +52,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @property (nullable, retain) NSFileHandle *standardError;
 
 // Execute the file with the given arguments.  "arguments" is an array of NSStrings.  The arguments do not undergo shell expansion, so you do not need to do special quoting, and shell variables are not resolved.
-typedef void (^NSUserUnixTaskCompletionHandler)(NSError *__nullable error);
+typedef void (^NSUserUnixTaskCompletionHandler)(NSError *_Nullable error);
 - (void)executeWithArguments:(nullable NSArray<NSString *> *)arguments completionHandler:(nullable NSUserUnixTaskCompletionHandler)handler;
 
 @end
@@ -67,7 +67,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 }
 
 // Execute the AppleScript script by sending it the given Apple event.  Pass nil to execute the script's default "run" handler.
-typedef void (^NSUserAppleScriptTaskCompletionHandler)(NSAppleEventDescriptor * __nullable result, NSError * __nullable error);
+typedef void (^NSUserAppleScriptTaskCompletionHandler)(NSAppleEventDescriptor * _Nullable result, NSError * _Nullable error);
 - (void)executeWithAppleEvent:(nullable NSAppleEventDescriptor *)event completionHandler:(nullable NSUserAppleScriptTaskCompletionHandler)handler;
 
 @end
@@ -85,7 +85,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @property (nullable, copy) NSDictionary<NSString *, id> *variables;
 
 // Execute the Automator workflow, passing it the given input.
-typedef void (^NSUserAutomatorTaskCompletionHandler)(id __nullable result, NSError * __nullable error);
+typedef void (^NSUserAutomatorTaskCompletionHandler)(id _Nullable result, NSError * _Nullable error);
 - (void)executeWithInput:(nullable id <NSSecureCoding>)input completionHandler:(nullable NSUserAutomatorTaskCompletionHandler)handler;
 
 @end

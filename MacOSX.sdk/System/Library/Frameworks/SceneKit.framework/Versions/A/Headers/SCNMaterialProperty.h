@@ -1,10 +1,11 @@
 //
 //  SCNMaterialProperty.h
 //
-//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <SceneKit/SceneKitTypes.h>
+#import <SceneKit/SCNAnimation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -12,40 +13,45 @@ NS_ASSUME_NONNULL_BEGIN
     @abstract Filtering modes
 */
 typedef NS_ENUM(NSInteger, SCNFilterMode) {
-    SCNFilterModeNone    NS_ENUM_AVAILABLE(10_9, 8_0) = 0,
-    SCNFilterModeNearest NS_ENUM_AVAILABLE(10_9, 8_0) = 1,
-    SCNFilterModeLinear  NS_ENUM_AVAILABLE(10_9, 8_0) = 2
-};
+    SCNFilterModeNone    = 0,
+    SCNFilterModeNearest = 1,
+    SCNFilterModeLinear  = 2
+} API_AVAILABLE(macosx(10.9));
 
 /*! @enum SCNWrapeMode
  @abstract Wrap modes
  */
 typedef NS_ENUM(NSInteger, SCNWrapMode) {
-    SCNWrapModeClamp NS_ENUM_AVAILABLE(10_9, 8_0) = 1,
-    SCNWrapModeRepeat NS_ENUM_AVAILABLE(10_9, 8_0) = 2,
-    SCNWrapModeClampToBorder NS_ENUM_AVAILABLE(10_9, 9_0) = 3,
-    SCNWrapModeMirror NS_ENUM_AVAILABLE(10_9, 8_0) = 4,
-};
+    SCNWrapModeClamp         = 1,
+    SCNWrapModeRepeat        = 2,
+    SCNWrapModeClampToBorder = 3,
+    SCNWrapModeMirror        = 4
+} API_AVAILABLE(macosx(10.9));
 
 /*! @class SCNMaterialProperty
     @abstract The contents of a SCNMaterial slot
     @discussion This can be used to specify the various properties of SCNMaterial slots such as diffuse, ambient, etc.
 */
 
-NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNMaterialProperty : NSObject <SCNAnimatable, NSSecureCoding>
 
 /*!
  @method materialPropertyWithContents:
  @abstract Creates and initialize a property instance with the specified contents.
  */
-+ (instancetype)materialPropertyWithContents:(id)contents NS_AVAILABLE(10_9, 8_0);
++ (instancetype)materialPropertyWithContents:(id)contents API_AVAILABLE(macosx(10.9));
 
 /*! 
  @property contents
- @abstract Specifies the receiver's contents. This can be a color (NSColor/UIColor), an image (NSImage/CGImageRef), a layer (CALayer), a path (NSString or NSURL), a SpriteKit scene (SKScene) or a texture (SKTexture, id<MTLTexture> or GLKTextureInfo). Animatable when set to a color.
- @discussion CGColorRef and CGImageRef can also be set. An array (NSArray) of 6 images is allowed for cube maps, only for reflective property. This array must contain images of the exact same dimensions, in the following order, in a left-handed coordinate system : +X, -X, +Y, -Y, +Z, -Z or if you prefer Right, Left, Top, Bottom, Front, Back. 
-     Setting the contents to an instance of SKTexture will automatically update the wrapS, wrapT, contentsTransform, minification, magnification and mip filters according to the SKTexture settings.
+ @abstract Specifies the receiver's contents. This can be a color (NSColor, UIColor, CGColorRef), an image (NSImage, UIImage, CGImageRef), a layer (CALayer), a path (NSString or NSURL), a SpriteKit scene (SKScene), a texture (SKTexture, id<MTLTexture> or GLKTextureInfo), or a floating value between 0 and 1 (NSNumber) for metalness and roughness properties. Animatable when set to a color.
+ @discussion Setting the contents to an instance of SKTexture will automatically update the wrapS, wrapT, contentsTransform, minification, magnification and mip filters according to the SKTexture settings.
+             When a cube map is expected (e.g. SCNMaterial.reflective, SCNScene.background, SCNScene.lightingEnvironment) you can use
+               1. A horizontal strip image  where `6 * image.height ==     image.width`
+               2. A vertical strip image    where `    image.height == 6 * image.width`
+               3. A horizontal cross image  where `4 * image.height == 3 * image.width`
+               4. A vertical cross image    where `3 * image.height == 4 * image.width`
+               5. A lat/long image          where `    image.height == 2 * image.width`
+               6. A NSArray of 6 images. This array must contain images of the exact same dimensions, in the following order, in a left-handed coordinate system: +X, -X, +Y, -Y, +Z, -Z (or Right, Left, Top, Bottom, Front, Back).
  */
 @property(nonatomic, retain, nullable) id contents;
 
@@ -55,7 +61,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  It dims the diffuse, specular and emission properties, it varies the bumpiness of the normal property and the
  filter property is blended with white. Default value is 1.0. Animatable.
  */
-@property(nonatomic) CGFloat intensity NS_AVAILABLE(10_9, 8_0);
+@property(nonatomic) CGFloat intensity API_AVAILABLE(macosx(10.9));
 
 /*! 
  @property minificationFilter
@@ -74,7 +80,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
 /*! 
  @property mipFilter
  @abstract Specifies the mipmap filter to use during minification.
- @discussion Defaults to SCNFilterModeNone.
+ @discussion Defaults to SCNFilterModeNone on macOS 10.11 and iOS 9 or earlier, SCNFilterModeNearest starting in macOS 10.12 and iOS 10.
  */
 @property(nonatomic) SCNFilterMode mipFilter;
 
@@ -101,7 +107,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Determines the receiver's border color (CGColorRef or NSColor). Animatable.
  @discussion The border color is ignored on iOS and is always considered as clear color (0,0,0,0) when the texture has an alpha channel and opaque back (0,0,0,1) otherwise.
  */
-@property(nonatomic, retain, nullable) id borderColor;
+@property(nonatomic, retain, nullable) id borderColor API_DEPRECATED("Deprecated", macosx(10.8, 10.12), ios(8.0, 10.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*! 
  @property mappingChannel
@@ -115,7 +121,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Specifies the receiver's max anisotropy. Defaults to MAXFLOAT.
  @discussion Anisotropic filtering reduces blur and preserves detail at extreme viewing angles.
  */
-@property(nonatomic) CGFloat maxAnisotropy NS_AVAILABLE(10_9, 8_0);
+@property(nonatomic) CGFloat maxAnisotropy API_AVAILABLE(macosx(10.9));
 
 @end
     

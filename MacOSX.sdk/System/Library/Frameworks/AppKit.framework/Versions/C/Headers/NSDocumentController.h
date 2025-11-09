@@ -1,7 +1,7 @@
 /*
 	NSDocumentController.h
 	Application Kit
-	Copyright (c) 1997-2015, Apple Inc.
+	Copyright (c) 1997-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -257,7 +257,7 @@ For backward binary compatibility with Mac OS 10.4 and earlier, the default impl
 
 /* Conformance to the NSUserInterfaceValidations protocol. NSDocumentController's implementation of this method conditionally enables menu items for all of the action methods listed in this header file, as well as the private action method for Open Recent menu items.
 */
-- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)anItem;
+- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)item;
 
 @end
 

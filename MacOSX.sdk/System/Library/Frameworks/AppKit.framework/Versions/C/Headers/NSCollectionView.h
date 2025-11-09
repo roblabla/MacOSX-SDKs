@@ -1,7 +1,7 @@
 /*
     NSCollectionView.h
     Application Kit
-    Copyright (c) 2005-2015, Apple Inc.
+    Copyright (c) 2005-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -44,7 +44,7 @@ typedef NS_OPTIONS(NSUInteger, NSCollectionViewScrollPosition) {
     NSCollectionViewScrollPositionNearestVerticalEdge  = 1 << 8, /* Nearer of Leading,Trailing */
 };
 
-@class NSCollectionView, NSCollectionViewLayout, NSCollectionViewLayoutAttributes, NSCollectionViewTransitionLayout, NSDraggingImageComponent, NSImageView, NSIndexSet, NSMutableIndexSet, NSNib, NSTextField;
+@class NSButton, NSCollectionView, NSCollectionViewLayout, NSCollectionViewLayoutAttributes, NSCollectionViewTransitionLayout, NSDraggingImageComponent, NSImageView, NSIndexSet, NSMutableIndexSet, NSNib, NSTextField;
 @protocol NSCollectionViewDataSource, NSCollectionViewDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -73,6 +73,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/* Section header views can conform to this protocol, to enable a CollectionView to find the section collapse toggle button (when present).
+*/
+@protocol NSCollectionViewSectionHeaderView <NSCollectionViewElement>
+@optional
+
+/* If your header contains a button that's set up to toggle section collapse, wire this outlet to it.  This enables CollectionView to automatically show and hide the button, based on whether the section's items all fit.
+*/
+@property (nullable, assign) IBOutlet NSButton *sectionCollapseButton NS_AVAILABLE_MAC(10_12);
+
+@end
+
 /* An NSCollectionViewItem associates a visual representation (view subtree) with a representedObject of arbitrary type.  It also tracks whether the representedObject is part of the enclosing NSCollectionView's current selection.  Note that NSCollectionViewItem inherits some useful properties -- in particular, "representedObject" and "view" -- from NSViewController.
 */
 
@@ -90,10 +101,11 @@ NS_CLASS_AVAILABLE_MAC(10_5)
         unsigned int stayHiddenAfterReuse:1;
         unsigned int updateAnimationCount:16;
         unsigned int dragging:1;
-        unsigned int reserved:7;
+        unsigned int isTransientAccessibilityElement:1;
+        unsigned int reserved:6;
     } _cviFlags;
     NSData *_cachedArchive;
-    id _reserved2;
+    id _reserved2 __unused;
 }
 
 /* Non-retained backlink to the containing CollectionView.
@@ -156,7 +168,11 @@ NS_CLASS_AVAILABLE_MAC(10_5)
         unsigned int scheduledResize:1;
         unsigned int isOpaque:1;
         unsigned int observingClipFrameChanges:1;
-        unsigned int reserved:15;
+        unsigned int allowsSectionDrop:1;
+        unsigned int backgroundViewScrollsWithContent:1;
+        unsigned int opensGaps:1;
+        unsigned int visMode:1;
+        unsigned int reserved:11;
     } _cvFlags;
     id _delegate;
     NSMutableArray *_backgroundLayers;
@@ -208,12 +224,18 @@ Each corresponding "item" instantiated by the CollectionView will have its repre
 
 /* An optional, non-retained delegate object, that will have the opportunity to influence the CollectionView's drag-and-drop, selection, highlighting, and layout transitioning behaviors.  See the NSCollectionViewDelegate protocol, declared below, for the methods this delegate may implement.  Defaults to nil, which leaves the CollectionView to determine its own behaviors.
 */
-@property (nullable, assign) id<NSCollectionViewDelegate> delegate;
+@property (nullable, weak) id<NSCollectionViewDelegate> delegate;
 
 
 #pragma mark *** Decoration ***
 
-@property (nullable, strong) NSView *backgroundView NS_AVAILABLE_MAC(10_11); // will be automatically resized to track the size of the collection view and placed behind all items and supplementary views.
+/* An optional background view that's positioned underneath all of the CollectionView's content.  Defaults to nil.  The backgroundView's scrolling behavior and frame are determined by the "backgroundViewScrollsWithContent" property, as described below.  If "backgroundColors" are also specified for the CollectionView, backgroundColor[0] is drawn anywhere the backgroundView's content allows it to show through.
+*/
+@property (nullable, strong) NSView *backgroundView NS_AVAILABLE_MAC(10_11);
+
+/* When YES, the CollectionView's backgroundView (if any) will match the CollectionView's frame and scroll with the CollectionView's items and other content.  When NO (the default, compatible with the behavior on OS X 10.11), the backgroundView is made to fill the CollectionView's visible area, and remains stationary when the CollectionView's content is scrolled.  Archived with the CollectionView's other persistent properties.
+*/
+@property BOOL backgroundViewScrollsWithContent NS_AVAILABLE_MAC(10_12);
 
 
 #pragma mark *** Layout ***
@@ -222,7 +244,7 @@ Each corresponding "item" instantiated by the CollectionView will have its repre
 
 To get an animated transition to the new layout, use [[collectionView animator] setCollectionViewLayout:].  You can use NSAnimationContext's completionHandler provisions to notify you when the transition is complete.
 */
-@property (nullable, strong) NSCollectionViewLayout *collectionViewLayout NS_AVAILABLE_MAC(10_11);
+@property (nullable, strong) __kindof NSCollectionViewLayout *collectionViewLayout NS_AVAILABLE_MAC(10_11);
 
 /* Returns the layout information for the item at the specified index path (or nil if no such item exists).  Use this method to retrieve the layout information for a particular item.  You should always use this method instead of querying the layout object directly.
 */
@@ -349,7 +371,7 @@ Use this method to retrieve the layout information for a particular supplementar
 */
 - (nullable NSCollectionViewItem *)itemAtIndex:(NSUInteger)index NS_AVAILABLE_MAC(10_6);
 
-/* Returns the NSCollectionViewItem associated with the represented object at the given indexPath.
+/* Returns the NSCollectionViewItem (if any) associated with the represented object at the given indexPath.  This method returns nil if the CollectionView isn't currently maintaining an NSCollectionViewItem instance for the given indexPath, as may be the case if the specified item is outside the CollectionView's visibleRect.
 */
 - (nullable NSCollectionViewItem *)itemAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
 
@@ -460,7 +482,14 @@ Deletes are processed before inserts in batch operations. This means the indexes
 
 Invocations of this method can be nested.
 */
-- (void)performBatchUpdates:(void (^__nullable)(void))updates completionHandler:(void (^__nullable)(BOOL finished))completionHandler NS_AVAILABLE_MAC(10_11);
+- (void)performBatchUpdates:(void (NS_NOESCAPE ^__nullable)(void))updates completionHandler:(void (^__nullable)(BOOL finished))completionHandler NS_AVAILABLE_MAC(10_11);
+
+
+#pragma mark *** Section Collapse ***
+
+/* Toggles collapse of the CollectionView section that the sender resides in.  Typically you'll wire this action from a section header view's "sectionCollapse" button.  (See the NSCollectionViewSectionHeaderView protocol.)
+ */
+- (IBAction)toggleSectionCollapse:(id)sender NS_AVAILABLE_MAC(10_12);
 
 
 #pragma mark *** Scrolling ***
@@ -682,7 +711,7 @@ Multi-image drag and drop: If draggingInfo.animatesToDestination is set to YES, 
 
 /* Executes the given block for each NSIndexPath in the set.  The index paths are enumerated in the order defined by NSIndexPath's -compare: method.  For CollectionView item index paths, this means all index paths in section 0, in ascending order, followed by all index paths in section 1, and so on.  You may pass the NSEnumerationReverse option to enumerate in the reverse order.  Set *stop = YES if desired, to halt the enumeration early.
  */
-- (void)enumerateIndexPathsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(NSIndexPath *indexPath, BOOL *stop))block NS_AVAILABLE_MAC(10_11);
+- (void)enumerateIndexPathsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(NSIndexPath *indexPath, BOOL *stop))block NS_AVAILABLE_MAC(10_11);
 
 @end
 

@@ -3,7 +3,7 @@
  
  Node that controls camera movement, zoom and rotation.
  
- @copyright 2015 Apple, Inc. All rights reserve.
+ @copyright 2015 Apple, Inc. All rights reserved.
  
  */
 

@@ -13,8 +13,8 @@
 #include <VideoToolbox/VTMultiPassStorage.h>
 #include <VideoToolbox/VTVideoEncoderList.h>
 #include <VideoToolbox/VTUtilities.h>
-#if !TARGET_OS_IPHONE
 #include <VideoToolbox/VTPixelTransferProperties.h>
+#if !TARGET_OS_IPHONE
 #include <VideoToolbox/VTPixelTransferSession.h>
 #include <VideoToolbox/VTProfessionalVideoWorkflow.h>
 #endif // !TARGET_OS_IPHONE

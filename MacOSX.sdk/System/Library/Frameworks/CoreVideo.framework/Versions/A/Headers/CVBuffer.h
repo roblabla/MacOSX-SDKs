@@ -50,12 +50,7 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVBufferTimeScaleKey __OSX_AVAILABLE_STA
 
 #pragma mark CVBufferRef
 
-typedef uint32_t CVAttachmentMode;
-#if COREVIDEO_USE_DERIVED_ENUMS_FOR_CONSTANTS
-enum : CVAttachmentMode
-#else
-enum
-#endif
+typedef CF_ENUM(uint32_t, CVAttachmentMode)
 {
 	kCVAttachmentMode_ShouldNotPropagate    = 0,
 	kCVAttachmentMode_ShouldPropagate       = 1
@@ -135,7 +130,7 @@ CV_EXPORT void	CVBufferRemoveAllAttachments( CVBufferRef CV_NONNULL buffer ) __O
     @result     A CFDictionary with all buffer attachments identified by there keys. If no attachment is present, the dictionary is empty.  Returns NULL
 		for invalid attachment mode.
 */
-CV_EXPORT CFDictionaryRef CV_NULLABLE CVBufferGetAttachments( CVBufferRef CV_NONNULL buffer, CVAttachmentMode attachmentMode ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CFDictionaryRef CF_RETURNS_NOT_RETAINED CV_NULLABLE CVBufferGetAttachments( CVBufferRef CV_NONNULL buffer, CVAttachmentMode attachmentMode ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVBufferSetAttachments

@@ -1,7 +1,7 @@
 //
 //  SCNAnimation.h
 //
-//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
 //
 
 #import <QuartzCore/QuartzCore.h>
@@ -19,7 +19,7 @@ typedef void (^SCNAnimationEventBlock)(CAAnimation *animation, id animatedObject
  @abstract SCNAnimationEvent encapsulate a block to trigger at a specific time.
  */
 
-NS_CLASS_AVAILABLE(10_9, 8_0)
+API_AVAILABLE(macosx(10.9))
 @interface SCNAnimationEvent : NSObject
 
 /*!
@@ -80,21 +80,21 @@ NS_CLASS_AVAILABLE(10_9, 8_0)
  @abstract Pause the animation with the given identifier.
  @param key The identifier for the animation to pause.
  */
-- (void)pauseAnimationForKey:(NSString *)key NS_AVAILABLE(10_9, 8_0);
+- (void)pauseAnimationForKey:(NSString *)key API_AVAILABLE(macosx(10.9));
 
 /*!
  @method resumeAnimationForKey:
  @abstract Resume the animation with the given identifier.
  @param key The identifier for the animation to resume.
  */
-- (void)resumeAnimationForKey:(NSString *)key NS_AVAILABLE(10_9, 8_0);
+- (void)resumeAnimationForKey:(NSString *)key API_AVAILABLE(macosx(10.9));
 
 /*!
  @method isAnimationForKeyPaused:
  @abstract Returns whether the animation for the specified identifier is paused.
  @param key The identifier for the animation to query.
  */
-- (BOOL)isAnimationForKeyPaused:(NSString *)key NS_AVAILABLE(10_9, 8_0);
+- (BOOL)isAnimationForKeyPaused:(NSString *)key API_AVAILABLE(macosx(10.9));
 
 /*!
  @method removeAnimationForKey:fadeOutDuration:
@@ -102,7 +102,15 @@ NS_CLASS_AVAILABLE(10_9, 8_0)
  @param key The identifier for the animation to remove.
  @param duration The fade out duration used to remove the animation.
  */
-- (void)removeAnimationForKey:(NSString *)key fadeOutDuration:(CGFloat)duration NS_AVAILABLE(10_10, 8_0);
+- (void)removeAnimationForKey:(NSString *)key fadeOutDuration:(CGFloat)duration API_AVAILABLE(macosx(10.10));
+
+/*!
+ @method setSpeed:forAnimationKey:
+ @abstract Update the animation speed of the animation with the given identifier.
+ @param speed The new speed of the animation.
+ @param key The identifier for the animation to update.
+ */
+- (void)setSpeed:(CGFloat)speed forAnimationKey:(NSString *)key API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
 
 @end
 
@@ -124,20 +132,20 @@ NS_CLASS_AVAILABLE(10_9, 8_0)
  @abstract Determines the receiver's fade-in duration.
  @discussion When the fadeInDuration is greater than zero, the effect of the animation progressively increase from 0% to 100% during the specified duration.
  */
-@property CGFloat fadeInDuration NS_AVAILABLE(10_9, 8_0);
+@property CGFloat fadeInDuration API_AVAILABLE(macosx(10.9));
  
 /*!
  @property fadeOutDuration
  @abstract Determines the receiver's fade-out duration.
  @discussion When the fadeOutDuration is greater than zero, the effect of the animation progressively decrease from 100% to 0% at the end of the animation duration.
  */
-@property CGFloat fadeOutDuration NS_AVAILABLE(10_9, 8_0);
+@property CGFloat fadeOutDuration API_AVAILABLE(macosx(10.9));
 
 /*!
  @property animationEvents
  @abstract Specifies the animation events attached to the receiver.
  */
-@property(nonatomic, copy, nullable) NSArray<SCNAnimationEvent *> *animationEvents NS_AVAILABLE(10_9, 8_0);
+@property(nonatomic, copy, nullable) NSArray<SCNAnimationEvent *> *animationEvents API_AVAILABLE(macosx(10.9));
 
 @end
 

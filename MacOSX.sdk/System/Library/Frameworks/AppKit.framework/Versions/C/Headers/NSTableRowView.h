@@ -1,7 +1,7 @@
 /*
     NSTableRowView.h
     Application Kit
-    Copyright (c) 2008-2015, Apple Inc.
+    Copyright (c) 2008-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSTableRowView : NSView <NSAccessibilityRow> {
 @private
-    NSView **_columnViews;
+    __unsafe_unretained NSView **_columnViews;
     NSInteger _columnCount;
     
     NSTableViewSelectionHighlightStyle _selectionHighlightStyle;

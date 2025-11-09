@@ -1,7 +1,7 @@
 /*
     NSMappingModel.h
     Core Data
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -15,8 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSManagedObjectModel;
 @class NSEntityMapping;
 
-NS_CLASS_AVAILABLE(10_5,3_0)
+API_AVAILABLE(macosx(10.5),ios(3.0))
 @interface NSMappingModel: NSObject {
+#if (!__OBJC2__)
     @private
     void *_reserved;
     void *_reserved1;
@@ -27,7 +28,7 @@ NS_CLASS_AVAILABLE(10_5,3_0)
         unsigned int _isInUse:1;
         unsigned int _reservedModelMapping:31;
     } _modelMappingFlags;
-
+#endif
 }
 
 /* Returns the mapping model to translate data from the source to the destination model.  This method is a companion to the mergedModelFromBundles: methods;  in this case, the framework uses the version information from the models to locate the appropriate mapping model in the available bundles.  If the mapping model for the models cannot be found, this method returns nil. 
@@ -36,7 +37,7 @@ NS_CLASS_AVAILABLE(10_5,3_0)
 
 /* Returns a newly created mapping model to translate data from the source to the destination model, if possible.  The differences between the source and destination model are compared and if all changes are simple enough to be able to reasonably infer a data migration mapping model, such a model is created and returned.  If the mapping model can not be created, nil is returned and an error code is returned to indicate why inferring a mapping model automatically failed.
  */
-+ (nullable NSMappingModel *)inferredMappingModelForSourceModel:(NSManagedObjectModel *)sourceModel destinationModel:(NSManagedObjectModel *)destinationModel error:(NSError **)error NS_AVAILABLE(10_6,3_0);
++ (nullable NSMappingModel *)inferredMappingModelForSourceModel:(NSManagedObjectModel *)sourceModel destinationModel:(NSManagedObjectModel *)destinationModel error:(NSError **)error API_AVAILABLE(macosx(10.6),ios(3.0));
 
 /* Loads the mapping model from the specified URL.
 */

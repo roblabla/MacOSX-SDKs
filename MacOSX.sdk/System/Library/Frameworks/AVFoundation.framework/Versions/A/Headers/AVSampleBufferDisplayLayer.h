@@ -31,19 +31,19 @@ NS_ASSUME_NONNULL_BEGIN
 	@constant	 AVQueuedSampleBufferRenderingStatusRendering
 	Indicates at least one sample buffer has been enqueued on the receiver.
 	@constant	 AVQueuedSampleBufferRenderingStatusFailed
-	Terminal state indicating that the receiver can no longer render sample buffers because of an error. The error is described by
+	Indicates that the receiver cannot currently enqueue or render sample buffers because of an error. The error is described by
 	the value of AVSampleBufferDisplayLayer's error property.
  */
 typedef NS_ENUM(NSInteger, AVQueuedSampleBufferRenderingStatus) {
 	AVQueuedSampleBufferRenderingStatusUnknown,
 	AVQueuedSampleBufferRenderingStatusRendering,
 	AVQueuedSampleBufferRenderingStatusFailed
-} NS_AVAILABLE(10_10, 8_0);
+} NS_AVAILABLE(10_10, 8_0) __TVOS_PROHIBITED;
 
-AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotification NS_AVAILABLE(10_10, 8_0); // decode failed, see NSError in notification payload
-AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey NS_AVAILABLE(10_10, 8_0); // NSError
+AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotification NS_AVAILABLE(10_10, 8_0) __TVOS_PROHIBITED; // decode failed, see NSError in notification payload
+AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey NS_AVAILABLE(10_10, 8_0) __TVOS_PROHIBITED; // NSError
 
-NS_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0) __TVOS_PROHIBITED
 @interface AVSampleBufferDisplayLayer : CALayer
 {
 @private
@@ -81,7 +81,9 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
 /*!
 	@property		status
 	@abstract		The ability of the display layer to be used for enqueuing sample buffers.
-	@discussion		The value of this property is an AVQueuedSampleBufferRenderingStatus that indicates whether the receiver can be used for enqueuing sample buffers. When the value of this property is AVQueuedSampleBufferRenderingStatusFailed, the receiver can no longer be used and a new instance needs to be created in its place. When this happens, clients can check the value of the error property to determine the failure. This property is key value observable.
+	@discussion		The value of this property is an AVQueuedSampleBufferRenderingStatus that indicates whether the receiver can be used for enqueuing and rendering sample buffers. When the value of this property is AVQueuedSampleBufferRenderingStatusFailed, clients can check the value of the error property to determine the failure. To resume rendering sample buffers using the display layer after a failure, clients must first reset the status to AVQueuedSampleBufferRenderingStatusUnknown. This can be achieved by invoking -flush on the display layer.
+		
+					This property is key value observable.
  */
 @property (nonatomic, readonly) AVQueuedSampleBufferRenderingStatus status NS_AVAILABLE(10_10, 8_0);
 

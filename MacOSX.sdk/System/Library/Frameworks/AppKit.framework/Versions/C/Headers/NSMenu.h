@@ -1,7 +1,7 @@
 /*
  NSMenu.h
  Application Kit
- Copyright (c) 1996-2015, Apple Inc.
+ Copyright (c) 1996-2016, Apple Inc.
  All rights reserved.
 */
 
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSMenu;
 @protocol NSMenuDelegate;
 
-@interface NSMenu : NSObject <NSCopying, NSCoding>
+@interface NSMenu : NSObject <NSCopying, NSCoding, NSUserInterfaceItemIdentification, NSAccessibilityElement, NSAccessibility>
 {
     /*All instance variables are private*/
     @private
@@ -45,14 +45,16 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int noBottomPadding:1;
 	unsigned int hasNCStyle:1;
 	unsigned int delegateIsUnsafeUnretained:1;
-        unsigned int RESERVED:11;
+        unsigned int avoidUsingCache:1;
+        unsigned int RESERVED:10;
     } _mFlags;
     NSString *_uiid;
 }
 
 /* Designated initializer.  If this menu is used as a submenu of an item in the application's main menu, then the title is what appears in the menu bar.  Otherwise, the title is ignored.  Do not pass nil (an exception will result), but you may pass an empty string.
  */
-- (instancetype)initWithTitle:(NSString *)aTitle;
+- (instancetype)initWithTitle:(NSString *)title NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)decoder NS_DESIGNATED_INITIALIZER;
 
 /* Set and get the menu's title.  The titles of the submenus of the application's main menu items appear in the menu bar. */
 @property (copy) NSString *title;
@@ -87,10 +89,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Inserts a new menu item with the given title, action, and key equivalent, at the given index.  The index must be at least zero and no more than the receiver's item count.  The title and key equivalent must not be nil (pass the empty string to indicate no key equivalent). This returns the new item.
  */
-- (nullable NSMenuItem *)insertItemWithTitle:(NSString *)aString action:(nullable SEL)aSelector keyEquivalent:(NSString *)charCode atIndex:(NSInteger)index;
+- (NSMenuItem *)insertItemWithTitle:(NSString *)string action:(nullable SEL)selector keyEquivalent:(NSString *)charCode atIndex:(NSInteger)index;
 
 /* Appends a new menu item with the given properties to the end of the menu. */
-- (nullable NSMenuItem *)addItemWithTitle:(NSString *)aString action:(nullable SEL)aSelector keyEquivalent:(NSString *)charCode;
+- (NSMenuItem *)addItemWithTitle:(NSString *)string action:(nullable SEL)selector keyEquivalent:(NSString *)charCode;
 
 /* Removes the item at the given index, which must be at least zero and less than the number of items.  All subsequent items will shift down one index. */
 - (void)removeItemAtIndex:(NSInteger)index;
@@ -98,8 +100,8 @@ NS_ASSUME_NONNULL_BEGIN
 /* Removes the item from the menu.  If the item is nil, or is not present in the receiver, an exception will be raised. */
 - (void)removeItem:(NSMenuItem *)item;
 
-/* Same as [anItem setSubmenu:aMenu].  anItem may not be nil. */
-- (void)setSubmenu:(nullable NSMenu *)aMenu forItem:(NSMenuItem *)anItem;
+/* Same as [item setSubmenu:menu].  item may not be nil. */
+- (void)setSubmenu:(nullable NSMenu *)menu forItem:(NSMenuItem *)item;
 
 /* Removes all items.  This is more efficient than removing items one by one.  This does not post NSMenuDidRemoveItemNotification, for efficiency.
 */
@@ -118,14 +120,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)indexOfItem:(NSMenuItem *)item;
 
 /* Returns the first item in the menu that matches the given property, or -1 if no item in the menu matches. */
-- (NSInteger)indexOfItemWithTitle:(NSString *)aTitle;
-- (NSInteger)indexOfItemWithTag:(NSInteger)aTag;
+- (NSInteger)indexOfItemWithTitle:(NSString *)title;
+- (NSInteger)indexOfItemWithTag:(NSInteger)tag;
 - (NSInteger)indexOfItemWithRepresentedObject:(id)object;
 - (NSInteger)indexOfItemWithSubmenu:(nullable NSMenu *)submenu;
-- (NSInteger)indexOfItemWithTarget:(nullable id)target andAction:(SEL)actionSelector;
+- (NSInteger)indexOfItemWithTarget:(nullable id)target andAction:(nullable SEL)actionSelector;
 
 /* Returns the first item in the menu with the given property, or nil if no item in the menu matches. */
-- (nullable NSMenuItem *)itemWithTitle:(NSString *)aTitle;
+- (nullable NSMenuItem *)itemWithTitle:(NSString *)title;
 - (nullable NSMenuItem *)itemWithTag:(NSInteger)tag;
 
 /* Set and get whether the menu autoenables items.  If a menu autoenables items, then calls to -[NSMenuItem setEnabled:] are ignored, and the enabled state is computed via the NSMenuValidation informal protocol below.  Autoenabling is on by default. */
@@ -134,9 +136,9 @@ NS_ASSUME_NONNULL_BEGIN
  /* If the receiver is set to autoenable items, then this triggers autovalidation of all menu items according to the NSMenuValidation informal protocol; otherwise this does nothing.  It is normally not necessary to call this; it will be called for you at the right time. */
 - (void)update;
   
-/* Attempts to perform the given key equivalent.  If the event is a key down event that matches the key equivalent of a menu item in the receiver or, recursively, any menu item in a submenu of the receiver, then this triggers that menu item's action and returns YES.  Otherwise, this returns NO.
+/* Attempts to perform the given key equivalent.  If the event is a key down event that matches the key equivalent of a menu item in the receiver or, recursively, any menu item in a submenu of the receiver, then this triggers that menu item's action (if the item is enabled) and returns YES.  Otherwise, this returns NO.
 */
-- (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
+- (BOOL)performKeyEquivalent:(NSEvent *)event;
 
 /* This method is called when a menu item's enabled state, submenu, title, attributed title, image, key equivalent, key equivalent modifier mask, alternate status, indent, tooltip, view, or visibility (via isHidden) changes.  This method posts NSMenuDidChangeItemNotification.  Future properties will likely not call this method when they change, because posting a notification when a property changes is rather expensive.
  */
@@ -146,8 +148,8 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)performActionForItemAtIndex:(NSInteger)index;
 
-/* Set and get the delegate for the menu.  See the NSMenuDelegate protocol for methods that the delegate may implement. */
-@property (nullable, assign) id<NSMenuDelegate> delegate;
+/* Set and get the delegate for the menu. The delegate is weakly referenced for zeroing-weak compatible objects on 10.9 and later. Otherwise the behavior of this property is 'assign'. See the NSMenuDelegate protocol for methods that the delegate may implement. */
+@property (nullable, weak) id<NSMenuDelegate> delegate;
 
 /* If called on the main menu, returns the height of the menu bar in pixels.  If called on any other menu, returns 0.
  */
@@ -237,16 +239,16 @@ typedef NS_OPTIONS(NSUInteger, NSMenuProperties) {
 @property (readonly) NSMenuProperties propertiesToUpdate NS_AVAILABLE_MAC(10_6);
 @end
 
-APPKIT_EXTERN NSString *NSMenuWillSendActionNotification;
-APPKIT_EXTERN NSString *NSMenuDidSendActionNotification;
+APPKIT_EXTERN NSNotificationName NSMenuWillSendActionNotification;
+APPKIT_EXTERN NSNotificationName NSMenuDidSendActionNotification;
 
-APPKIT_EXTERN NSString *NSMenuDidAddItemNotification;
-APPKIT_EXTERN NSString *NSMenuDidRemoveItemNotification;
-APPKIT_EXTERN NSString *NSMenuDidChangeItemNotification;
+APPKIT_EXTERN NSNotificationName NSMenuDidAddItemNotification;
+APPKIT_EXTERN NSNotificationName NSMenuDidRemoveItemNotification;
+APPKIT_EXTERN NSNotificationName NSMenuDidChangeItemNotification;
 // All three of these have a user info key NSMenuItemIndex with a NSNumber value.
 
-APPKIT_EXTERN NSString *NSMenuDidBeginTrackingNotification;
-APPKIT_EXTERN NSString *NSMenuDidEndTrackingNotification;
+APPKIT_EXTERN NSNotificationName NSMenuDidBeginTrackingNotification;
+APPKIT_EXTERN NSNotificationName NSMenuDidEndTrackingNotification;
 
 // The remainder of this file contains deprecated methods
 @interface NSMenu (NSDeprecated)
@@ -262,12 +264,12 @@ APPKIT_EXTERN NSString *NSMenuDidEndTrackingNotification;
 
 /* Returns the zone used to allocate NSMenu objects.  This is left in for compatibility and has returned NSDefaultMallocZone() since OS X 10.2.  It is not necessary to use this - menus can be allocated the usual way. */
 + (null_unspecified NSZone *)menuZone NS_DEPRECATED_MAC(10_0, 10_11);
-+ (void)setMenuZone:(null_unspecified NSZone *)aZone NS_DEPRECATED_MAC(10_0, 10_2);
++ (void)setMenuZone:(null_unspecified NSZone *)zone NS_DEPRECATED_MAC(10_0, 10_2);
 
 - (null_unspecified NSMenu *)attachedMenu NS_DEPRECATED_MAC(10_0, 10_2);
 - (BOOL)isAttached NS_DEPRECATED_MAC(10_0, 10_2);
 - (void)sizeToFit NS_DEPRECATED_MAC(10_0, 10_2);
-- (NSPoint)locationForSubmenu:(null_unspecified NSMenu *)aSubmenu NS_DEPRECATED_MAC(10_0, 10_2);
+- (NSPoint)locationForSubmenu:(null_unspecified NSMenu *)submenu NS_DEPRECATED_MAC(10_0, 10_2);
 
 /* In OS X 10.6 and later, the following methods no longer do anything useful. */
 @property BOOL menuChangedMessagesEnabled NS_DEPRECATED_MAC(10_0, 10_11);

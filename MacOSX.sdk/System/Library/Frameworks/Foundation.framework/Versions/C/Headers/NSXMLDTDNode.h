@@ -1,5 +1,5 @@
 /*	NSXMLDTDNode.h
-	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -59,7 +59,7 @@ typedef NS_ENUM(NSUInteger, NSXMLDTDNodeKind) {
 */
 - (nullable instancetype)initWithXMLString:(NSString *)string NS_DESIGNATED_INITIALIZER; //primitive
 
-- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSUInteger)options NS_DESIGNATED_INITIALIZER; //primitive
+- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSXMLNodeOptions)options NS_DESIGNATED_INITIALIZER; //primitive
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 

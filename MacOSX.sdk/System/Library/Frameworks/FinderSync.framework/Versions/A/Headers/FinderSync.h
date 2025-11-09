@@ -1,7 +1,7 @@
 /*
     FinderSync.h
 
-    Copyright (c) 2014-2015, Apple Inc.
+    Copyright (c) 2014-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger, FIMenuKind) {
 
 /* The extension should build a list of menu items to be displayed in the specified kind of menu. See FIFinderSyncController's -targetedURL and -selectedItemURLs. This will be called for any of the menu kinds when the target or selection is inside the directoryURLs. For FIToolbarItemMenu it will always be called, even if the target and selection are not related to the extension. The extension's principal object provides a method for each menu item's assigned action.
 
-    Specific menu item properties are used: title, action, image, and enabled. Starting in OS X 10.11: tag, state, and indentationLevel also work, and submenus are allowed.
+    Specific menu item properties are used: title, action, image, and enabled. Starting in 10.11: tag, state, and indentationLevel also work, and submenus are allowed.
  */
 - (nullable NSMenu*)menuForMenuKind:(FIMenuKind)menu;
 

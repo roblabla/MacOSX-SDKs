@@ -58,7 +58,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 @protocol SBApplicationDelegate
 
-- (id) eventDidFail:(const AppleEvent *)event withError:(NSError *)error;
+- (nullable id) eventDidFail:(const AppleEvent *)event withError:(NSError *)error;
 	// The target application failed to handle the event.  If you return a result,
 	// it will become the result of the -sendEvent that failed.
 

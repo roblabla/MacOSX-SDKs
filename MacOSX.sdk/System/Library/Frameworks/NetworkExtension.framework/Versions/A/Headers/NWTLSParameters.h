@@ -1,13 +1,17 @@
 //
-//  NWUDPSession.h
-//  Network
+//  NWTLSParameters.h
+//  NetworkExtension
 //
-//  Copyright (c) 2015 Apple. All rights reserved.
+//  Copyright (c) 2015-2016 Apple. All rights reserved.
 //
 
 #ifndef __NE_INDIRECT__
 #error "Please import the NetworkExtension module instead of this file directly."
-#endif
+#endif // __NE_INDIRECT__
+
+#ifndef __NWTLSParameters_h_
+#define __NWTLSParameters_h_
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -46,3 +50,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // __NWTLSParameters_h_

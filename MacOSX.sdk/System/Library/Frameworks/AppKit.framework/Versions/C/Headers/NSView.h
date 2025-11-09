@@ -1,7 +1,7 @@
 /*
     NSView.h
     Application Kit
-    Copyright (c) 1994-2015, Apple Inc.
+    Copyright (c) 1994-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -17,6 +17,7 @@
 #import <AppKit/NSUserInterfaceItemIdentification.h>
 #import <AppKit/NSDragging.h>
 #import <AppKit/NSAppearance.h>
+#import <AppKit/NSTouch.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -155,21 +156,21 @@ typedef NSInteger NSToolTipTag;
 @property (nullable, readonly, assign) NSWindow *window;
 @property (nullable, readonly, assign) NSView *superview;
 @property (copy) NSArray<__kindof NSView *> *subviews;
-- (BOOL)isDescendantOf:(NSView *)aView;
-- (nullable NSView *)ancestorSharedWithView:(NSView *)aView;
+- (BOOL)isDescendantOf:(NSView *)view;
+- (nullable NSView *)ancestorSharedWithView:(NSView *)view;
 @property (nullable, readonly, assign) NSView *opaqueAncestor;
 @property (getter=isHidden) BOOL hidden;
 @property (getter=isHiddenOrHasHiddenAncestor, readonly) BOOL hiddenOrHasHiddenAncestor;
 
 - (void)getRectsBeingDrawn:(const NSRect * __nullable * __nullable)rects count:(nullable NSInteger *)count;
-- (BOOL)needsToDrawRect:(NSRect)aRect;
+- (BOOL)needsToDrawRect:(NSRect)rect;
 @property (readonly) BOOL wantsDefaultClipping;
 - (void)viewDidHide NS_AVAILABLE_MAC(10_5);
 - (void)viewDidUnhide NS_AVAILABLE_MAC(10_5);
 
-- (void)addSubview:(NSView *)aView;
-- (void)addSubview:(NSView *)aView positioned:(NSWindowOrderingMode)place relativeTo:(nullable NSView *)otherView;
-- (void)sortSubviewsUsingFunction:(NSComparisonResult (*)(__kindof NSView *, __kindof NSView *,  void * __nullable))compare context:(nullable void *)context;
+- (void)addSubview:(NSView *)view;
+- (void)addSubview:(NSView *)view positioned:(NSWindowOrderingMode)place relativeTo:(nullable NSView *)otherView;
+- (void)sortSubviewsUsingFunction:(NSComparisonResult (NS_NOESCAPE *)(__kindof NSView *, __kindof NSView *,  void * __nullable))compare context:(nullable void *)context;
 
 /* NOTE: In general, it is good practice to call 'super' for the viewWill* and viewDid* methods. Some AppKit subclasses, such as NSTableView, depend on this behavior, and calling super is required for things to work properly.
  */
@@ -215,35 +216,35 @@ typedef NSInteger NSToolTipTag;
  */
 @property (getter=isOpaque, readonly) BOOL opaque;
 
-- (NSPoint)convertPoint:(NSPoint)aPoint fromView:(nullable NSView *)aView;
-- (NSPoint)convertPoint:(NSPoint)aPoint toView:(nullable NSView *)aView;
-- (NSSize)convertSize:(NSSize)aSize fromView:(nullable NSView *)aView;
-- (NSSize)convertSize:(NSSize)aSize toView:(nullable NSView *)aView;
-- (NSRect)convertRect:(NSRect)aRect fromView:(nullable NSView *)aView;
-- (NSRect)convertRect:(NSRect)aRect toView:(nullable NSView *)aView;
+- (NSPoint)convertPoint:(NSPoint)point fromView:(nullable NSView *)view;
+- (NSPoint)convertPoint:(NSPoint)point toView:(nullable NSView *)view;
+- (NSSize)convertSize:(NSSize)size fromView:(nullable NSView *)view;
+- (NSSize)convertSize:(NSSize)size toView:(nullable NSView *)view;
+- (NSRect)convertRect:(NSRect)rect fromView:(nullable NSView *)view;
+- (NSRect)convertRect:(NSRect)rect toView:(nullable NSView *)view;
 
 /* Uses NSIntegralRectWithOptions() to produce a backing store pixel aligned rectangle from the given input rectangle in local view coordinates.
  */
-- (NSRect)backingAlignedRect:(NSRect)aRect options:(NSAlignmentOptions)options NS_AVAILABLE_MAC(10_7);
-- (NSRect)centerScanRect:(NSRect)aRect;
+- (NSRect)backingAlignedRect:(NSRect)rect options:(NSAlignmentOptions)options NS_AVAILABLE_MAC(10_7);
+- (NSRect)centerScanRect:(NSRect)rect;
 
 /* New methods for converting to and from backing store pixels */
 
-- (NSPoint)convertPointToBacking:(NSPoint)aPoint NS_AVAILABLE_MAC(10_7);
-- (NSPoint)convertPointFromBacking:(NSPoint)aPoint NS_AVAILABLE_MAC(10_7);
-- (NSSize)convertSizeToBacking:(NSSize)aSize NS_AVAILABLE_MAC(10_7);
-- (NSSize)convertSizeFromBacking:(NSSize)aSize NS_AVAILABLE_MAC(10_7);
-- (NSRect)convertRectToBacking:(NSRect)aRect NS_AVAILABLE_MAC(10_7);
-- (NSRect)convertRectFromBacking:(NSRect)aRect NS_AVAILABLE_MAC(10_7);
+- (NSPoint)convertPointToBacking:(NSPoint)point NS_AVAILABLE_MAC(10_7);
+- (NSPoint)convertPointFromBacking:(NSPoint)point NS_AVAILABLE_MAC(10_7);
+- (NSSize)convertSizeToBacking:(NSSize)size NS_AVAILABLE_MAC(10_7);
+- (NSSize)convertSizeFromBacking:(NSSize)size NS_AVAILABLE_MAC(10_7);
+- (NSRect)convertRectToBacking:(NSRect)rect NS_AVAILABLE_MAC(10_7);
+- (NSRect)convertRectFromBacking:(NSRect)rect NS_AVAILABLE_MAC(10_7);
 
 /* Use these methods to transform geometry between a view's interior (bounds) coordinate space and its layer's interior coordinate space.  The layer's space is virtual, and doesn't take into account the layer's contentsScale setting.  For conversion between view space and layer pixels, use -convert(Point/Size/Rect)(To/From)Backing: instead.
 */
-- (NSPoint)convertPointToLayer:(NSPoint)aPoint NS_AVAILABLE_MAC(10_7);
-- (NSPoint)convertPointFromLayer:(NSPoint)aPoint NS_AVAILABLE_MAC(10_7);
-- (NSSize)convertSizeToLayer:(NSSize)aSize NS_AVAILABLE_MAC(10_7);
-- (NSSize)convertSizeFromLayer:(NSSize)aSize NS_AVAILABLE_MAC(10_7);
-- (NSRect)convertRectToLayer:(NSRect)aRect NS_AVAILABLE_MAC(10_7);
-- (NSRect)convertRectFromLayer:(NSRect)aRect NS_AVAILABLE_MAC(10_7);
+- (NSPoint)convertPointToLayer:(NSPoint)point NS_AVAILABLE_MAC(10_7);
+- (NSPoint)convertPointFromLayer:(NSPoint)point NS_AVAILABLE_MAC(10_7);
+- (NSSize)convertSizeToLayer:(NSSize)size NS_AVAILABLE_MAC(10_7);
+- (NSSize)convertSizeFromLayer:(NSSize)size NS_AVAILABLE_MAC(10_7);
+- (NSRect)convertRectToLayer:(NSRect)rect NS_AVAILABLE_MAC(10_7);
+- (NSRect)convertRectFromLayer:(NSRect)rect NS_AVAILABLE_MAC(10_7);
 
 /* Reports whether AppKit may invoke the view's -drawRect: method on a background thread, where it would otherwise be invoked on the main thread.  Defaults to NO.
 */
@@ -269,43 +270,42 @@ typedef NSInteger NSToolTipTag;
 - (void)displayRectIgnoringOpacity:(NSRect)rect;
 - (void)displayIfNeededInRectIgnoringOpacity:(NSRect)rect;
 - (void)drawRect:(NSRect)dirtyRect;
-- (void)displayRectIgnoringOpacity:(NSRect)aRect inContext:(NSGraphicsContext *)context;
+- (void)displayRectIgnoringOpacity:(NSRect)rect inContext:(NSGraphicsContext *)context;
 
 - (nullable NSBitmapImageRep *)bitmapImageRepForCachingDisplayInRect:(NSRect)rect;
 - (void)cacheDisplayInRect:(NSRect)rect toBitmapImageRep:(NSBitmapImageRep *)bitmapImageRep;
 - (void)viewWillDraw NS_AVAILABLE_MAC(10_5);
 
-- (void)scrollPoint:(NSPoint)aPoint;
-- (BOOL)scrollRectToVisible:(NSRect)aRect;
-- (BOOL)autoscroll:(NSEvent *)theEvent;
+- (void)scrollPoint:(NSPoint)point;
+- (BOOL)scrollRectToVisible:(NSRect)rect;
+- (BOOL)autoscroll:(NSEvent *)event;
 - (NSRect)adjustScroll:(NSRect)newVisible;
-- (void)scrollRect:(NSRect)aRect by:(NSSize)delta;
+- (void)scrollRect:(NSRect)rect by:(NSSize)delta;
 - (void)translateRectsNeedingDisplayInRect:(NSRect)clipRect by:(NSSize)delta NS_AVAILABLE_MAC(10_5);
 
-- (nullable NSView *)hitTest:(NSPoint)aPoint;
-- (BOOL)mouse:(NSPoint)aPoint inRect:(NSRect)aRect;
-- (nullable __kindof NSView *)viewWithTag:(NSInteger)aTag;
+- (nullable NSView *)hitTest:(NSPoint)point;
+- (BOOL)mouse:(NSPoint)point inRect:(NSRect)rect;
+- (nullable __kindof NSView *)viewWithTag:(NSInteger)tag;
 @property (readonly) NSInteger tag;
-- (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
-- (BOOL)acceptsFirstMouse:(nullable NSEvent *)theEvent;
-- (BOOL)shouldDelayWindowOrderingForEvent:(NSEvent *)theEvent;
+- (BOOL)performKeyEquivalent:(NSEvent *)event;
+- (BOOL)acceptsFirstMouse:(nullable NSEvent *)event;
+- (BOOL)shouldDelayWindowOrderingForEvent:(NSEvent *)event;
 @property (readonly) BOOL needsPanelToBecomeKey;
 @property (readonly) BOOL mouseDownCanMoveWindow;
 
-/* By default, views do not accept touch events
-*/
-@property BOOL acceptsTouchEvents NS_AVAILABLE_MAC(10_6);
+/* Deprecated in favor of allowedTouchTypes. Return YES if allowedTouchTypes includes NSTouchTypeMaskIndirect */
+@property BOOL acceptsTouchEvents NS_DEPRECATED_MAC(10_6, 10_12_2);
 
 /* In some cases, the user may rest a thumb or other touch on the device. By default, these touches are not delivered and are not included in the event's set of touches. Touches may transition in and out of resting at any time. Unless the view wants restingTouches, began / ended events are simlulated as touches transition from resting to active and vice versa.
 */
 @property BOOL wantsRestingTouches NS_AVAILABLE_MAC(10_6);
 
-- (void)addCursorRect:(NSRect)aRect cursor:(NSCursor *)anObj;
-- (void)removeCursorRect:(NSRect)aRect cursor:(NSCursor *)anObj;
+- (void)addCursorRect:(NSRect)rect cursor:(NSCursor *)object;
+- (void)removeCursorRect:(NSRect)rect cursor:(NSCursor *)object;
 - (void)discardCursorRects;
 - (void)resetCursorRects;
 
-- (NSTrackingRectTag)addTrackingRect:(NSRect)aRect owner:(id)anObject userData:(nullable void *)data assumeInside:(BOOL)flag;
+- (NSTrackingRectTag)addTrackingRect:(NSRect)rect owner:(id)owner userData:(nullable void *)data assumeInside:(BOOL)flag;
 - (void)removeTrackingRect:(NSTrackingRectTag)tag;
 
 - (CALayer *)makeBackingLayer NS_AVAILABLE_MAC(10_6);
@@ -384,7 +384,7 @@ typedef NSInteger NSToolTipTag;
 - (void)didCloseMenu:(NSMenu *)menu withEvent:(nullable NSEvent *)event NS_AVAILABLE_MAC(10_11);
 
 @property (nullable, copy) NSString *toolTip;
-- (NSToolTipTag)addToolTipRect:(NSRect)aRect owner:(id)anObject userData:(nullable void *)data;
+- (NSToolTipTag)addToolTipRect:(NSRect)rect owner:(id)owner userData:(nullable void *)data;
 - (void)removeToolTip:(NSToolTipTag)tag;
 - (void)removeAllToolTips;
 
@@ -501,7 +501,7 @@ typedef NSInteger NSToolTipTag;
 - (void)adjustPageWidthNew:(CGFloat *)newRight left:(CGFloat)oldLeft right:(CGFloat)oldRight limit:(CGFloat)rightLimit;
 - (void)adjustPageHeightNew:(CGFloat *)newBottom top:(CGFloat)oldTop bottom:(CGFloat)oldBottom limit:(CGFloat)bottomLimit;
 - (NSRect)rectForPage:(NSInteger)page;
-- (NSPoint)locationOfPrintRect:(NSRect)aRect;
+- (NSPoint)locationOfPrintRect:(NSRect)rect;
 - (void)drawPageBorderWithSize:(NSSize)borderSize;
 @property (readonly, copy) NSAttributedString *pageHeader;
 @property (readonly, copy) NSAttributedString *pageFooter;
@@ -515,7 +515,7 @@ typedef NSInteger NSToolTipTag;
 - (void)beginDocument;
 - (void)endDocument;
 
-- (void)beginPageInRect:(NSRect)aRect atPlacement:(NSPoint)location;
+- (void)beginPageInRect:(NSRect)rect atPlacement:(NSPoint)location;
 - (void)endPage;
 @end
 
@@ -529,8 +529,8 @@ typedef NSInteger NSToolTipTag;
 - (void)registerForDraggedTypes:(NSArray<NSString *> *)newTypes;
 - (void)unregisterDraggedTypes;
 
-- (BOOL)dragFile:(NSString *)filename fromRect:(NSRect)rect slideBack:(BOOL)aFlag event:(NSEvent *)event;
-- (BOOL)dragPromisedFilesOfTypes:(NSArray<NSString *> *)typeArray fromRect:(NSRect)rect source:(id)sourceObject slideBack:(BOOL)aFlag event:(NSEvent *)event;
+- (BOOL)dragFile:(NSString *)filename fromRect:(NSRect)rect slideBack:(BOOL)flag event:(NSEvent *)event;
+- (BOOL)dragPromisedFilesOfTypes:(NSArray<NSString *> *)typeArray fromRect:(NSRect)rect source:(id)sourceObject slideBack:(BOOL)flag event:(NSEvent *)event;
 @end
 
 @interface NSView (NSFullScreenMode) 
@@ -589,23 +589,28 @@ APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeDictionaryApplication
 - (void)removeGestureRecognizer:(NSGestureRecognizer *)gestureRecognizer NS_AVAILABLE_MAC(10_10);
 @end
 
+@interface NSView (NSTouchBar)
+/* Defaults to NSTouchTypeDirect if linked on or after 10_12, 0 otherwise */
+@property NSTouchTypeMask allowedTouchTypes NS_AVAILABLE_MAC(10_12_2);
+@end
+
 @interface NSView(NSDeprecated)
 
 /* This drag method as been deprecated in favor of beginDraggingSessionWithItems:event:source:
  */
-- (void)dragImage:(NSImage *)anImage at:(NSPoint)viewLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag NS_DEPRECATED_MAC(10_0, 10_7, "Use -beginDraggingSessionWithItems:event:source: instead");
+- (void)dragImage:(NSImage *)image at:(NSPoint)viewLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag NS_DEPRECATED_MAC(10_0, 10_7, "Use -beginDraggingSessionWithItems:event:source: instead");
 
 /* These methods are deprecated on 10.7 and later. */
-- (NSPoint)convertPointToBase:(NSPoint)aPoint NS_DEPRECATED_MAC(10_5, 10_7);
-- (NSPoint)convertPointFromBase:(NSPoint)aPoint NS_DEPRECATED_MAC(10_5, 10_7);
-- (NSSize)convertSizeToBase:(NSSize)aSize NS_DEPRECATED_MAC(10_5, 10_7);
-- (NSSize)convertSizeFromBase:(NSSize)aSize NS_DEPRECATED_MAC(10_5, 10_7);
-- (NSRect)convertRectToBase:(NSRect)aRect NS_DEPRECATED_MAC(10_5, 10_7);
-- (NSRect)convertRectFromBase:(NSRect)aRect NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSPoint)convertPointToBase:(NSPoint)point NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSPoint)convertPointFromBase:(NSPoint)point NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSSize)convertSizeToBase:(NSSize)size NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSSize)convertSizeFromBase:(NSSize)size NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSRect)convertRectToBase:(NSRect)rect NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSRect)convertRectFromBase:(NSRect)rect NS_DEPRECATED_MAC(10_5, 10_7);
 
 /* This method is deprecated in 10.8 and higher. On MacOS it has historically not done anything.
  */
-- (BOOL)performMnemonic:(NSString *)theString NS_DEPRECATED_MAC(10_0, 10_8);
+- (BOOL)performMnemonic:(NSString *)string NS_DEPRECATED_MAC(10_0, 10_8);
 
 /* shouldDrawColor is no longer used by AppKit.
  */
@@ -626,20 +631,20 @@ APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeDictionaryApplication
 
 /* Sent when the frame changes for a view. This is only sent if postsFrameChangedNotifications is set to YES.
  */
-APPKIT_EXTERN NSString *NSViewFrameDidChangeNotification;
-APPKIT_EXTERN NSString *NSViewFocusDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSViewFrameDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSViewFocusDidChangeNotification;
 
 /* This notification is sent whenever the views bounds change and the frame does not.  That is, it is sent whenever the view's bounds are translated, scaled or rotated, but NOT when the bounds change as a result of, for example, setFrameSize:.
  */
-APPKIT_EXTERN NSString *NSViewBoundsDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSViewBoundsDidChangeNotification;
 
 /* This notification is sent whenever an NSView that has an attached NSSurface changes size or changes screens (thus potentially changing graphics hardware drivers.)
  */
-APPKIT_EXTERN NSString *NSViewGlobalFrameDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSViewGlobalFrameDidChangeNotification;
     
 /* This notification is sent whenever tracking areas should be recalculated for the view.  It is sent after the view receives -updateTrackingAreas.
  */
-APPKIT_EXTERN NSString *NSViewDidUpdateTrackingAreasNotification NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSNotificationName NSViewDidUpdateTrackingAreasNotification NS_AVAILABLE_MAC(10_5);
 
 NS_ASSUME_NONNULL_END
 

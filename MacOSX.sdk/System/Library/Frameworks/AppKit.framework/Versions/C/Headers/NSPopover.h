@@ -1,7 +1,7 @@
 /*
     NSPopover.h
     Application Kit
-    Copyright (c) 2010-2015, Apple Inc.
+    Copyright (c) 2010-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -59,7 +59,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 #endif
 @private
     id _bindingAdaptor;
-    id <NSPopoverDelegate> _delegate;
+    id _delegate;
     id _visualRepresentation;
     NSView *_positioningView;
     NSViewController *_contentViewController;
@@ -117,7 +117,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /*  The delegate of the popover. The delegate is not retained. 
  */
-@property(nullable, assign) IBOutlet id <NSPopoverDelegate> delegate;
+@property(nullable, weak) IBOutlet id <NSPopoverDelegate> delegate;
 
 #if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_10
 
@@ -205,19 +205,19 @@ APPKIT_EXTERN NSString * const NSPopoverCloseReasonDetachToWindow NS_AVAILABLE_M
 
 /*  Sent before the popover is shown. 
  */
-APPKIT_EXTERN NSString * const NSPopoverWillShowNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSNotificationName const NSPopoverWillShowNotification NS_AVAILABLE_MAC(10_7);
 
 /*  Sent after the popover has finished animating onscreen. 
  */
-APPKIT_EXTERN NSString * const NSPopoverDidShowNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSNotificationName const NSPopoverDidShowNotification NS_AVAILABLE_MAC(10_7);
 
 /*  Sent before the popover is closed. The userInfo key NSPopoverCloseReasonKey specifies the reason for closing.  It can currently be either NSPopoverCloseReasonStandard or NSPopoverCloseReasonDetachToWindow, although more reasons for closing may be added in the future. 
  */
-APPKIT_EXTERN NSString * const NSPopoverWillCloseNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSNotificationName const NSPopoverWillCloseNotification NS_AVAILABLE_MAC(10_7);
 
 /*  Sent after the popover has finished animating offscreen.  This notification has the same user info keys as NSPopoverWillCloseNotification. 
  */
-APPKIT_EXTERN NSString * const NSPopoverDidCloseNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSNotificationName const NSPopoverDidCloseNotification NS_AVAILABLE_MAC(10_7);
 
 #pragma mark -
 #pragma mark Delegate Methods

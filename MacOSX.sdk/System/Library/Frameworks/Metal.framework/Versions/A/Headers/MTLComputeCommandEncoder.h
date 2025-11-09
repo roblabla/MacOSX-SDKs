@@ -11,6 +11,7 @@
 #import <Metal/MTLCommandEncoder.h>
 #import <Metal/MTLTexture.h>
 #import <Metal/MTLCommandBuffer.h>
+#import <Metal/MTLFence.h>
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol MTLFunction;
@@ -59,7 +60,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setBuffers:offsets:withRange:
  @brief Set an array of global buffers for all compute kernels with the given bind point range.
  */
-- (void)setBuffers:(const id <MTLBuffer> __nullable [__nullable])buffers offsets:(const NSUInteger [__nullable])offsets withRange:(NSRange)range;
+- (void)setBuffers:(const id <MTLBuffer> __nullable [])buffers offsets:(const NSUInteger [])offsets withRange:(NSRange)range;
 
 /*!
  @method setTexture:atIndex:
@@ -103,6 +104,10 @@ NS_AVAILABLE(10_11, 8_0)
  */
 - (void)setThreadgroupMemoryLength:(NSUInteger)length atIndex:(NSUInteger)index;
 
+
+
+- (void)setStageInRegion:(MTLRegion)region NS_AVAILABLE(10_12, 10_0);
+
 /*
  @method dispatchThreadgroups:threadsPerThreadgroup:
  @abstract Enqueue a compute function dispatch.
@@ -115,8 +120,24 @@ NS_AVAILABLE(10_11, 8_0)
  @param indirectBuffer A buffer object that the device will read dispatchThreadgroups arguments from, see MTLDispatchThreadgroupsIndirectArguments.
  @param indirectBufferOffset Byte offset within @a indirectBuffer to read arguments from.  @a indirectBufferOffset must be a multiple of 4.
  */
-- (void)dispatchThreadgroupsWithIndirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset threadsPerThreadgroup:(MTLSize)threadsPerThreadgroup NS_AVAILABLE(10_11, NA);
+- (void)dispatchThreadgroupsWithIndirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset threadsPerThreadgroup:(MTLSize)threadsPerThreadgroup NS_AVAILABLE(10_11, 9_0);
 
+
+/*!
+ @method updateFence:
+ @abstract Update the event to capture all GPU work so far enqueued by this encoder.
+ @discussion The event is updated at kernel submission to maintain global order and prevent deadlock.
+ Drivers may delay fence updates until the end of the encoder. Drivers may also wait on fences at the beginning of an encoder. It is therefore illegal to wait on a fence after it has been updated in the same encoder.
+ */
+- (void)updateFence:(id <MTLFence>)fence NS_AVAILABLE(NA, 10_0);
+
+/*!
+ @method waitForFence:
+ @abstract Prevent further GPU work until the event is reached.
+ @discussion The event is evaluated at kernel submision to maintain global order and prevent deadlock.
+ Drivers may delay fence updates until the end of the encoder. Drivers may also wait on fences at the beginning of an encoder. It is therefore illegal to wait on a fence after it has been updated in the same encoder.
+ */
+- (void)waitForFence:(id <MTLFence>)fence NS_AVAILABLE(NA, 10_0);
 
 @end
 NS_ASSUME_NONNULL_END

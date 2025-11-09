@@ -25,7 +25,7 @@ extern NSString* const QCViewDidStopRenderingNotification;
 @interface QCView : NSView <QCCompositionRenderer>
 {
 @private
-	__strong void*				_QCViewPrivate;
+	void*				_QCViewPrivate;
 }
 
 /*

@@ -1,7 +1,7 @@
 /*
 	NSClipView.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -55,14 +55,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (copy) NSColor *backgroundColor;
 @property BOOL drawsBackground;
-@property (nullable, assign) id /* NSView * */ documentView;
+@property (nullable, assign) __kindof NSView *documentView;
 @property (readonly) NSRect documentRect;
 @property (nullable, strong) NSCursor *documentCursor;
 @property (readonly) NSRect documentVisibleRect;
 - (void)viewFrameChanged:(NSNotification *)notification;
 - (void)viewBoundsChanged:(NSNotification *)notification;
 @property BOOL copiesOnScroll;
-- (BOOL)autoscroll:(NSEvent *)theEvent;
+- (BOOL)autoscroll:(NSEvent *)event;
 - (void)scrollToPoint:(NSPoint)newOrigin;
 
 /* This is used to constrain the bounds of the clip view under magnification and scrolling. This also comes with the deprecation of -constrainScrollPoint:. The logic of an existing -constrainScrollPoint: can be moved to -constrainBoundsRect: by adjusting the proposedBound's origin (as opposed to 'newOrigin').
@@ -88,8 +88,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface NSView(NSClipViewSuperview)
-- (void)reflectScrolledClipView:(NSClipView *)aClipView;
-- (void)scrollClipView:(NSClipView *)aClipView toPoint:(NSPoint)aPoint;
+- (void)reflectScrolledClipView:(NSClipView *)clipView;
+- (void)scrollClipView:(NSClipView *)clipView toPoint:(NSPoint)point;
 @end
 
 NS_ASSUME_NONNULL_END

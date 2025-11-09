@@ -75,6 +75,21 @@ NS_CLASS_AVAILABLE(10_8, NA)
  */
 @property (copy) AVBMACAddress *sourceMAC;
 
+/*!
+	@method		errorForStatusCode:
+	@abstract	This method returns an NSError filled out with an appropriate description for the passed in status code.
+	@result		An NSError instance within the AVBErrorDomain with the status code and an appropriate description.
+				Will return nil if status code is success or in progress.
+ */
++ (nullable NSError *)errorForStatusCode:(AVB17221AECPStatusCode)statusCode;
+
+/*!
+	@method		errorForStatusCode
+	@abstract	This method returns an NSError filled out with an appropriate description for the message's status code.
+	@result		An NSError instance within the AVBErrorDomain with the status code and an appropriate description.
+				Will return nil if status code is success or in progress.
+ */
+- (nullable NSError *)errorForStatusCode;
 
 @end
 

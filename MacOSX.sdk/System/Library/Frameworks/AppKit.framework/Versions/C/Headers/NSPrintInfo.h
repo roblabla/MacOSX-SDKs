@@ -1,7 +1,7 @@
 /*
 	NSPrintInfo.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -91,7 +91,9 @@ APPKIT_EXTERN NSString * const NSPrintHeaderAndFooter; // a boolean NSNumber for
 
 /* Given a dictionary that contains attribute entries, initialize. Attributes that are recognized by the NSPrintInfo class will be silently validated in the context of the printer selected by the attributes dictionary, or the default printer if the attributes dictionary selects no printer. Attributes that are not recognized by the NSPrintInfo class will be preserved, and returned in the dictionary returned by the -dictionary method, but otherwise ignored. This is the designated initializer for this class.
 */
-- (instancetype)initWithDictionary:(NSDictionary<NSString *, id> *)attributes;
+- (instancetype)initWithDictionary:(NSDictionary<NSString *, id> *)attributes NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)inDecoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)init; // Convience method that calls through to initWithDictionary:nil
 
 /* Return a dictionary that contains attribute entries. This dictionary may contain attributes that were not specified in the dictionary originally passed to this object by -initWithDictionary. Changes to this dictionary will be reflected in the values returned by subsequent invocations of other of this class' methods.
 */

@@ -1,6 +1,6 @@
 /* CoreAnimation - CAConstraintLayoutManager.h
 
-   Copyright (c) 2006-2015, Apple Inc.
+   Copyright (c) 2006-2016, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -56,7 +56,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** The constraint-based layout manager. **/
 
-@interface CAConstraintLayoutManager : NSObject
+CA_CLASS_AVAILABLE (10.5)
+@interface CAConstraintLayoutManager : NSObject <CALayoutManager>
 
 /* Returns a new layout manager object. */
 
@@ -66,6 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** The class representing a single layout constraint. **/
 
+CA_CLASS_AVAILABLE (10.5)
 @interface CAConstraint : NSObject <NSCoding>
 {
 @private

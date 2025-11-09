@@ -1,7 +1,7 @@
 /*
         NSAffineTransform.h
         Application Kit
-        Copyright (c) 1997-2015, Apple Inc.
+        Copyright (c) 1997-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSAffineTransform (NSAppKitAdditons)
 // Transform a path
-- (NSBezierPath *)transformBezierPath:(NSBezierPath *)aPath;
+- (NSBezierPath *)transformBezierPath:(NSBezierPath *)path;
 
 // Setting a transform in NSGraphicsContext
 - (void)set;

@@ -1,5 +1,5 @@
 /*	NSUserActivity.h
-	Copyright (c) 2014-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2014-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -18,11 +18,11 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 /* Initializes and returns a newly created NSUserActivity with the given activityType. A user activity may be continued only in an application that (1) has the same developer Team ID as the activity's source application and (2) supports the activity's type. Supported activity types are specified in the application's Info.plist under the NSUserActivityTypes key. When receiving a user activity for continuation, the system locates the appropriate application to launch by finding applications with the target Team ID, then filtering on the incoming activity's type identifier.
 */
-- (instancetype)initWithActivityType:(NSString *)activityType;
+- (instancetype)initWithActivityType:(NSString *)activityType NS_DESIGNATED_INITIALIZER;
 
 /* Initializes and returns a newly created NSUserActivity with the first activityType from the NSUserActivityTypes key in the application’s Info.plist.
 */
-- (instancetype)init;
+- (instancetype)init API_DEPRECATED("Use initWithActivityType: with a specific activity type string", macosx(10.10, 10.12), ios(8.0, 10.0), watchos(2.0, 3.0), tvos(9.0, 10.0));
 
 /* The activityType the user activity was created with.
 */
@@ -78,7 +78,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 /* When an app is launched for a continuation event it can request streams back to the originating side. Streams can only be successfully retrieved from the NSUserActivity in the NS/UIApplication delegate that is called for a continuation event. This functionality is optional and is not expected to be needed in most continuation cases. The streams returned in the completion handler will be in an unopened state. The streams should be opened immediately to start requesting information from the other side.
 */
-- (void)getContinuationStreamsWithCompletionHandler:(void (^)(NSInputStream * __nullable inputStream, NSOutputStream * __nullable outputStream, NSError * __nullable error))completionHandler;
+- (void)getContinuationStreamsWithCompletionHandler:(void (^)(NSInputStream * _Nullable inputStream, NSOutputStream * _Nullable outputStream, NSError * _Nullable error))completionHandler;
 
 /* Set to YES if this user activity should be eligible to be handed off to another device */
 @property (getter=isEligibleForHandoff) BOOL eligibleForHandoff NS_AVAILABLE(10_11, 9_0);

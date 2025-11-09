@@ -1,6 +1,6 @@
 /* CoreAnimation - CARenderer.h
 
-   Copyright (c) 2007-2015, Apple Inc.
+   Copyright (c) 2007-2016, Apple Inc.
    All rights reserved. */
 
 /* This class lets an application manually drive the rendering of a
@@ -37,6 +37,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+CA_CLASS_AVAILABLE (10.5)
 @interface CARenderer : NSObject
 {
 @private

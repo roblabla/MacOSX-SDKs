@@ -186,6 +186,53 @@ a location is inferred from the given
 Valid only if
 .Cm --distribution
 is not specified.
+.\"                                                                             --component-compression
+.It Cm --component-compression Ar compression-mode
+Allows control of compression used for storing any components added via the
+.Cm --component
+option. This option does not affect the compression used for plugins or scripts. Three
+.Ar compression-mode
+arguments are supported:
+.El
+.Bl -bullet -offset indent-two
+.It
+.Sy legacy
+forces a 10.5-compatible compression algorithm for all components.
+.It
+.Sy auto
+enables
+.Nm
+to automatically select newer, more efficient compression algorithms based on properties of the component,
+such as supported operating system versions. (See
+.Sy os
+in the
+.Sx PRE-INSTALL REQUIREMENTS PROPERTY LIST
+section for more details on specifying operating system requirements.)
+.It
+.Sy default
+provides identical behavior to omitting
+.Cm --component-compression
+entirely. It is currently equivalent to
+.Sy legacy
+but may change in future releases of OS X.
+.Bl -tag
+.El
+.Pp
+Note that the Mac App Store may override the specified
+.Ar compression-mode
+for submitted product archives.
+.Pp
+Valid with
+.Cm --component
+only. To control compression of component packages with
+.Cm --distribution
+or
+.Cm --root
+use
+.Xr pkgbuild 1
+and reference each component package in a distribution file.
+.El
+.Bl -tag
 .\"                                                                             --content
 .It Cm --content Ar content-path
 The contents of the directory at

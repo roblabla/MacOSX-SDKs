@@ -21,16 +21,18 @@ CSEXTERN CFStringRef kColorSyncGenericGrayProfile;          /* com.apple.ColorSy
 CSEXTERN CFStringRef kColorSyncGenericGrayGamma22Profile;   /* com.apple.ColorSync.GenericGrayGamma2.2  */
 CSEXTERN CFStringRef kColorSyncGenericRGBProfile;           /* com.apple.ColorSync.GenericRGB   */
 CSEXTERN CFStringRef kColorSyncGenericCMYKProfile;          /* com.apple.ColorSync.GenericCMYK  */
+CSEXTERN CFStringRef kColorSyncDisplayP3Profile;            /* com.apple.ColorSync.DisplayP3 */
 CSEXTERN CFStringRef kColorSyncSRGBProfile;                 /* com.apple.ColorSync.sRGB         */
 CSEXTERN CFStringRef kColorSyncAdobeRGB1998Profile;         /* com.apple.ColorSync.AdobeRGB1998 */
 CSEXTERN CFStringRef kColorSyncGenericLabProfile;           /* com.apple.ColorSync.GenericLab */
 CSEXTERN CFStringRef kColorSyncGenericXYZProfile;           /* com.apple.ColorSync.GenericXYZ */
 
 CSEXTERN CFStringRef kColorSyncACESCGLinearProfile;         /* com.apple.ColorSync.ACESCGLinear */
+CSEXTERN CFStringRef kColorSyncDCIP3Profile;                /* com.apple.ColorSync.DCIP3 */
 CSEXTERN CFStringRef kColorSyncITUR709Profile;              /* com.apple.ColorSync.ITUR709 */
 CSEXTERN CFStringRef kColorSyncITUR2020Profile;             /* com.apple.ColorSync.ITUR2020 */
 CSEXTERN CFStringRef kColorSyncROMMRGBProfile;              /* com.apple.ColorSync.ROMMRGB */
-    
+
 CSEXTERN CFStringRef kColorSyncProfileHeader;      /* com.apple.ColorSync.ProfileHeader */
 CSEXTERN CFStringRef kColorSyncProfileClass;       /* com.apple.ColorSync.ProfileClass */
 CSEXTERN CFStringRef kColorSyncProfileColorSpace;  /* com.apple.ColorSync.ProfileColorSpace */

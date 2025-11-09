@@ -32,10 +32,14 @@
 #ifndef _KERN_LEDGER_H_
 #define _KERN_LEDGER_H_
 
+#include <mach/mach_types.h>	/* ledger_t */
+
 #define	LEDGER_INFO		0
 #define	LEDGER_ENTRY_INFO	1
 #define	LEDGER_TEMPLATE_INFO	2
 #define	LEDGER_LIMIT		3
+/* LEDGER_MAX_CMD always tracks the index of the last ledger command. */
+#define	LEDGER_MAX_CMD		LEDGER_LIMIT
 
 #define	LEDGER_NAME_MAX	32
 
@@ -52,11 +56,11 @@ struct ledger_template_info {
 };
 
 struct ledger_entry_info {
-        int64_t		lei_balance;
-        int64_t		lei_credit;
-        int64_t		lei_debit;
-        uint64_t	lei_limit;
-	uint64_t	lei_refill_period;	/* In milliseconds */
+	int64_t		lei_balance;
+	int64_t		lei_credit;
+	int64_t		lei_debit;
+	uint64_t	lei_limit;
+	uint64_t	lei_refill_period;	/* In nanoseconds */
 	uint64_t	lei_last_refill;	/* Time since last refill */
 };
 

@@ -630,6 +630,7 @@ Product Revision Level as reported in the INQUIRY data.
 */
 #define kIOPropertySCSIProductRevisionLevel			"Product Revision Level"
 
+#ifndef __OPEN_SOURCE__
 
 /*!
 @enum INQUIRY Page Codes
@@ -643,6 +644,16 @@ Page Code 80h.
 Page Code 83h.
 @constant kINQUIRY_Page89_PageCode
 Page Code 89h.
+@constant kINQUIRY_PageB0_PageCode
+Page Code B0h.
+@constant kINQUIRY_PageB1_PageCode
+Page Code B1h.
+@constant kINQUIRY_PageB2_PageCode
+Page Code B2h.
+@constant kINQUIRY_PageC0_PageCode
+Page Code C0h.
+@constant kINQUIRY_PageC1_PageCode
+Page Code C1h.
 */
 enum
 {
@@ -650,8 +661,46 @@ enum
 	kINQUIRY_Page80_PageCode				= 0x80,
 	kINQUIRY_Page83_PageCode				= 0x83,
 	kINQUIRY_Page89_PageCode				= 0x89,
-	kINQUIRY_PageB1_PageCode				= 0xB1
-};	
+	kINQUIRY_PageB0_PageCode				= 0xB0,
+	kINQUIRY_PageB1_PageCode				= 0xB1,
+	kINQUIRY_PageB2_PageCode				= 0xB2,
+	kINQUIRY_PageC0_PageCode				= 0xC0,
+	kINQUIRY_PageC1_PageCode				= 0xC1
+};
+
+#else
+
+/*!
+ @enum INQUIRY Page Codes
+ @discussion INQUIRY Page Codes to be used when EVPD is set in the
+ INQUIRY command.
+ @constant kINQUIRY_Page00_PageCode
+ Page Code 00h.
+ @constant kINQUIRY_Page80_PageCode
+ Page Code 80h.
+ @constant kINQUIRY_Page83_PageCode
+ Page Code 83h.
+ @constant kINQUIRY_Page89_PageCode
+ Page Code 89h.
+ @constant kINQUIRY_PageB0_PageCode
+ Page Code B0h.
+ @constant kINQUIRY_PageB1_PageCode
+ Page Code B1h.
+ @constant kINQUIRY_PageB2_PageCode
+ Page Code B2h.
+ */
+enum
+{
+    kINQUIRY_Page00_PageCode				= 0x00,
+    kINQUIRY_Page80_PageCode				= 0x80,
+    kINQUIRY_Page83_PageCode				= 0x83,
+    kINQUIRY_Page89_PageCode				= 0x89,
+    kINQUIRY_PageB0_PageCode				= 0xB0,
+    kINQUIRY_PageB1_PageCode				= 0xB1,
+    kINQUIRY_PageB2_PageCode				= 0xB2,
+};
+
+#endif /* __OPEN_SOURCE__ */
 
 
 /*!
@@ -977,7 +1026,7 @@ typedef struct SCSICmd_INQUIRY_Page83_LogicalUnitGroup_Identifier
 /*!
 @struct SCSICmd_INQUIRY_Page89_Data
 @discussion INQUIRY Page 89h data as defined in the SAT 1.0
-specification. This section contians all structures and
+specification. This section contains all structures and
 definitions used by the INQUIRY command in response to a request
 for page 89h - ATA information VPD Page.
 */
@@ -996,11 +1045,44 @@ typedef struct SCSICmd_INQUIRY_Page89_Data
 	UInt8		IDENTIFY_DATA[512];
 } SCSICmd_INQUIRY_Page89_Data;
 
+#pragma pack(push, 1)
+
+/*!
+ @struct SCSICmd_INQUIRY_PageB0_Data
+ @discussion INQUIRY Page B0h data as defined in the SBC
+ specification. This section contains all structures and
+ definitions used by the INQUIRY command in response to a request
+ for page B0h - Block Limits VPD Page.
+ */
+typedef struct SCSICmd_INQUIRY_PageB0_Data
+{
+	UInt8 		PERIPHERAL_DEVICE_TYPE;					// 7-5 = Qualifier. 4-0 = Device type.
+	UInt8 		PAGE_CODE;								// Must be equal to B0h
+	UInt16 		PAGE_LENGTH;							// Must be equal to 3Ch
+	UInt8 		WSNZ;									// 0 = WSNZ, 7-1 = Reserved.
+	UInt8 		MAXIMUM_COMPARE_AND_WRITE_LENGTH;
+	UInt16 		OPTIMAL_TRANSFER_LENGTH_GRANULARITY;
+	UInt32		MAXIMUM_TRANSFER_LENGTH;
+	UInt32 		OPTIMAL_TRANSFER_LENGTH;
+	UInt32 		MAXIMUM_PREFETCH_LENGTH;
+	UInt32 		MAXIMUM_UNMAP_LBA_COUNT;
+	UInt32 		MAXIMUM_UNMAP_BLOCK_DESCRIPTOR_COUNT;
+	UInt32 		OPTIMAL_UNMAP_GRANULARITY;
+	UInt32 		UNMAP_GRANULARITY_ALIGNMENT;
+	UInt64 		MAXIMUM_WRITE_SAME_LENGTH;
+	UInt32		MAXIMUM_ATOMIC_TRANSFER_LENGTH;
+	UInt32		ATOMIC_ALIGNMENT;
+	UInt32		ATOMIC_TRANSFER_LENGTH_GRANULARITY;
+	UInt32		MAXIMUM_ATOMIC_TRANSFER_LENGTH_WITH_ATOMIC_BOUNDARY;
+	UInt32		MAXIMUM_ATOMIC_BOUNDARY_SIZE;
+} SCSICmd_INQUIRY_PageB0_Data;
+
+#pragma pack(pop)
 
 /*!
 @struct SCSICmd_INQUIRY_PageB1_Data
 @discussion INQUIRY Page B1h data as defined in the SBC 
-specification. This section contians all structures and
+specification. This section contains all structures and
 definitions used by the INQUIRY command in response to a request
 for page B1h - Block Device Characteristics VPD Page.
 */
@@ -1019,6 +1101,104 @@ enum
 	kINQUIRY_PageB1_Page_Length	= 0x3C
 };
 
+#pragma pack(push, 1)
+
+/*!
+ @struct SCSICmd_INQUIRY_PageB2_Data
+ @discussion INQUIRY Page B2h data as defined in the SBC
+ specification. This section contains all structures and
+ definitions used by the INQUIRY command in response to a request
+ for page B2h - Logical Block Provisioning VPD Page.
+ */
+typedef struct SCSICmd_INQUIRY_PageB2_Data
+{
+	UInt8 		PERIPHERAL_DEVICE_TYPE;			// 7-5 = Qualifier. 4-0 = Device type.
+	UInt8 		PAGE_CODE;						// Must be equal to B2h.
+	UInt16 		PAGE_LENGTH;					// Must be n-3.
+	UInt8 		THRESHOLD_EXPONENT;
+	UInt8 		LBP_FLAGS;						// 7 = LBPU, 6 = LBPWS, 5 = LBPWS10,
+												// 4-2 = LBPRZ, 1 = ANC_SUP, 0 = DP.
+	UInt8 		MINIMUM_PERCENTAGE;				// 7-3 = MINIMUM PERCENTAGE,
+												// 2-0 = PROVISIONING TYPE.
+	UInt8		THRESHOLD_PERCENTAGE;
+} SCSICmd_INQUIRY_PageB2_Data;
+
+typedef struct SCSICmd_INQUIRY_PageB2_Provisioning_Group_Descriptor
+{
+	UInt8	DESIGNATION_DESCRIPTOR[20];
+	UInt8	RESERVED[18];
+} SCSICmd_INQUIRY_PageB2_Provisioning_Group_Descriptor;
+
+#pragma pack(pop)
+
+#ifndef __OPEN_SOURCE__
+
+#pragma pack(push, 1)
+
+enum
+{
+	kC0DataMaxStringLen = 32,
+};
+
+typedef struct  SCSICmd_INQUIRY_PageCx_Header
+{
+
+	UInt8		PERIPHERAL_DEVICE_TYPE; 	// 7-5 = Qualifier. 4-0 = Device type.
+	UInt8		PAGE_CODE;					// Must be equal to C0h or C1h
+	UInt8		RESERVED;
+	UInt8		PAGE_LENGTH;
+
+} SCSICmd_INQUIRY_PAGECx_Header;
+
+/*!
+ @struct SCSICmd_INQUIRY_PageC0_Data
+ @discussion INQUIRY Page C0h data as defined in Apple Target
+ Disk Mode specification. This is a vendor specific data structure.
+ This section contains all structures and definitions used by 
+ the INQUIRY command in response to a request for page C0h.
+ */
+
+typedef struct SCSICmd_INQUIRY_PageC0_Data
+{
+
+	SCSICmd_INQUIRY_PAGECx_Header	fHeader;
+	UInt8							fTdmPageVersion;
+	UInt8							fTdmProtocolVersion;
+	UInt8							fReserved1;
+	UInt8							fReserved2;
+	UInt8							fMacModelId[kC0DataMaxStringLen];
+	UInt8							fSerialNumber[kC0DataMaxStringLen];
+	UInt32							fMaxReadSize;
+	UInt32							fMaxWriteSize;
+	UInt32							fNativeBlockSize;
+    UInt8                           Reserved3[4];
+	UInt64							fFeatures;
+	UInt64							fWorkArounds;
+
+} SCSICmd_INQUIRY_PageC0_Data;
+
+/*!
+ @struct SCSICmd_INQUIRY_PageC1_Data
+ @discussion INQUIRY Page C1h data as defined in Apple Target
+ Disk Mode specification. This is a vendor specific data structure.
+ This section contains all structures and definitions used by
+ the INQUIRY command in response to a request for page C1h.
+ */
+
+typedef struct SCSICmd_INQUIRY_PageC1_Data
+{
+
+	SCSICmd_INQUIRY_PAGECx_Header	fHeader;
+	UInt8							fTdmPowerRequirementsPageVersion;
+	UInt8							fReserved1;
+	UInt16							fReserved2;
+	UInt32							fPowerRequired;
+
+} SCSICmd_INQUIRY_PageC1_Data;
+
+#pragma pack(pop)
+
+#endif /* __OPEN_SOURCE__ */
 
 /*!
 @define kIOPropertySATVendorIdentification

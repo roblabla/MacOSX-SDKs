@@ -1,7 +1,7 @@
 /*
         NSStatusBar.h
         Application Kit
-        Copyright (c) 1997-2015, Apple Inc.
+        Copyright (c) 1997-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -23,7 +23,7 @@ static const CGFloat NSSquareStatusItemLength = -2.0;
  @private
     id             _items;
     void           *_fReserved1;
-    void           *_fReserved2;
+    void           *_fReserved2 __unused;
     NSInteger      _registeredForNote;
 }
 

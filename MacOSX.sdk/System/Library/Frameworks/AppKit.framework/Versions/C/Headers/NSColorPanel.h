@@ -1,7 +1,7 @@
 /*
 	NSColorPanel.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,16 +13,16 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSColorList, NSMutableArray;
 
 typedef NS_ENUM(NSInteger, NSColorPanelMode) {
-    /* If the color panel is not displaying a mode, the NSNoModeColorPanel will be returned */
-    NSNoModeColorPanel NS_ENUM_AVAILABLE_MAC(10_5) = -1,
-    NSGrayModeColorPanel		= 0,
-    NSRGBModeColorPanel			= 1,
-    NSCMYKModeColorPanel		= 2,
-    NSHSBModeColorPanel			= 3,
-    NSCustomPaletteModeColorPanel	= 4,
-    NSColorListModeColorPanel		= 5,
-    NSWheelModeColorPanel		= 6,
-    NSCrayonModeColorPanel		= 7
+    /* If the color panel is not displaying a mode, the NSColorPanelModeNone will be returned */
+    NSColorPanelModeNone NS_ENUM_AVAILABLE_MAC(10_5) = -1,
+    NSColorPanelModeGray            = 0,
+    NSColorPanelModeRGB             = 1,
+    NSColorPanelModeCMYK            = 2,
+    NSColorPanelModeHSB             = 3,
+    NSColorPanelModeCustomPalette   = 4,
+    NSColorPanelModeColorList       = 5,
+    NSColorPanelModeWheel           = 6,
+    NSColorPanelModeCrayon          = 7
 };
 
 typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
@@ -80,7 +80,7 @@ typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
 
 + (NSColorPanel *)sharedColorPanel;
 + (BOOL)sharedColorPanelExists;
-+ (BOOL)dragColor:(NSColor *)color withEvent:(NSEvent *)theEvent fromView:(NSView *)sourceView;
++ (BOOL)dragColor:(NSColor *)color withEvent:(NSEvent *)event fromView:(NSView *)sourceView;
 + (void)setPickerMask:(NSColorPanelOptions)mask;
 + (void)setPickerMode:(NSColorPanelMode)mode;
 
@@ -90,8 +90,8 @@ typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
 @property NSColorPanelMode mode;
 @property (copy) NSColor *color;
 @property (readonly) CGFloat alpha;
-- (void)setAction:(nullable SEL)aSelector;
-- (void)setTarget:(nullable id)anObject;
+- (void)setAction:(nullable SEL)selector;
+- (void)setTarget:(nullable id)target;
 - (void)attachColorList:(NSColorList *)colorList;
 - (void)detachColorList:(NSColorList *)colorList;
 @end
@@ -105,7 +105,18 @@ typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
 @end
 
 /* Notifications */
-APPKIT_EXTERN NSString * NSColorPanelColorDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSColorPanelColorDidChangeNotification;
+
+
+static const NSColorPanelMode NSNoModeColorPanel NS_AVAILABLE_MAC(10_5) /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeNone", macosx(10.5, 10.12))*/ = NSColorPanelModeNone;
+static const NSColorPanelMode NSGrayModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeGray", macosx(10.0, 10.12))*/ = NSColorPanelModeGray;
+static const NSColorPanelMode NSRGBModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeRGB", macosx(10.0, 10.12))*/ = NSColorPanelModeRGB;
+static const NSColorPanelMode NSCMYKModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeCMYK", macosx(10.0, 10.12))*/ = NSColorPanelModeCMYK;
+static const NSColorPanelMode NSHSBModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeHSB", macosx(10.0, 10.12))*/ = NSColorPanelModeHSB;
+static const NSColorPanelMode NSCustomPaletteModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeCustomPalette", macosx(10.0, 10.12))*/ = NSColorPanelModeCustomPalette;
+static const NSColorPanelMode NSColorListModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeColorList", macosx(10.0, 10.12))*/ = NSColorPanelModeColorList;
+static const NSColorPanelMode NSWheelModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeWheel", macosx(10.0, 10.12))*/ = NSColorPanelModeWheel;
+static const NSColorPanelMode NSCrayonModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeCrayon", macosx(10.0, 10.12))*/ = NSColorPanelModeCrayon;
 
 NS_ASSUME_NONNULL_END
 

@@ -8,6 +8,9 @@
 #define __COLORSYNCBASE__
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {

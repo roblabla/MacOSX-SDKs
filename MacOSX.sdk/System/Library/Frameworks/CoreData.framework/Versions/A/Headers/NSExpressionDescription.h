@@ -1,7 +1,7 @@
 /*
  NSExpressionDescription.h
  Core Data
- Copyright (c) 2004-2015, Apple Inc.
+ Copyright (c) 2004-2016, Apple Inc.
  All rights reserved.
  */
 
@@ -17,8 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
    An NSExpressionDescription describes a column to be returned from a fetch that may not appear 
    directly as an attribute or relationship on an entity. Examples would be: upper(attribute) or
    max(attribute). NSExpressionDescriptions cannot be set as properties on NSEntityDescription. */
-NS_CLASS_AVAILABLE(10_6,3_0)
+API_AVAILABLE(macosx(10.6),ios(3.0))
 @interface NSExpressionDescription : NSPropertyDescription {
+#if (!__OBJC2__)
 	@private
 	id _reservedtype1_1;
 	id _reservedtype1_2;
@@ -31,6 +32,7 @@ NS_CLASS_AVAILABLE(10_6,3_0)
 	void *_reservedtype2_3;
 	NSExpression *_expression;
 	NSAttributeType _expressionResultType;
+#endif
 }
 
 @property (nullable, strong) NSExpression *expression;

@@ -1,7 +1,7 @@
 /*
 	NSColorSpace.h
 	Application Kit
-	Copyright (c) 2004-2015, Apple Inc.
+	Copyright (c) 2004-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -15,17 +15,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSData;
 
+// By default class properties are enabled and available for Swift 3 and ObjC apps
+#define NSCOLORSPACE_USE_CLASS_PROPERTIES APPKIT_SWIFT_SDK_EPOCH_AT_LEAST(2)
 
 
 typedef NS_ENUM(NSInteger, NSColorSpaceModel) {
-    NSUnknownColorSpaceModel = -1,
-    NSGrayColorSpaceModel,
-    NSRGBColorSpaceModel,
-    NSCMYKColorSpaceModel,
-    NSLABColorSpaceModel,
-    NSDeviceNColorSpaceModel,
-    NSIndexedColorSpaceModel,
-    NSPatternColorSpaceModel
+    NSColorSpaceModelUnknown = -1,
+    NSColorSpaceModelGray,
+    NSColorSpaceModelRGB,
+    NSColorSpaceModelCMYK,
+    NSColorSpaceModelLAB,
+    NSColorSpaceModelDeviceN,
+    NSColorSpaceModelIndexed,
+    NSColorSpaceModelPatterned
 };
 
 
@@ -62,25 +64,43 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 @property (readonly) NSInteger numberOfColorComponents;		// Does not include alpha
 @property (readonly) NSColorSpaceModel colorSpaceModel;
-@property (nullable, readonly, copy) NSString *localizedName;			// Will return nil if no localized name
+@property (nullable, readonly, copy) NSString *localizedName;	// Will return nil if no localized name
 
-+ (NSColorSpace *)genericRGBColorSpace;		// NSColorSpace corresponding to Cocoa color space name NSCalibratedRGBColorSpace
-+ (NSColorSpace *)genericGrayColorSpace;	// NSColorSpace corresponding to Cocoa color space name NSCalibratedWhiteColorSpace
-+ (NSColorSpace *)genericCMYKColorSpace;
-+ (NSColorSpace *)deviceRGBColorSpace;		// NSColorSpace corresponding to Cocoa color space name NSDeviceRGBColorSpace
-+ (NSColorSpace *)deviceGrayColorSpace;		// NSColorSpace corresponding to Cocoa color space name NSDeviceWhiteColorSpace
-+ (NSColorSpace *)deviceCMYKColorSpace;		// NSColorSpace corresponding to Cocoa color space name NSDeviceCMYKColorSpace
+#if NSCOLORSPACE_USE_CLASS_PROPERTIES
+@property (class, strong, readonly) NSColorSpace *sRGBColorSpace NS_AVAILABLE_MAC(10_5);
+@property (class, strong, readonly) NSColorSpace *genericGamma22GrayColorSpace NS_AVAILABLE_MAC(10_6);             // The grayscale color space with gamma 2.2, compatible with sRGB
 
-+ (NSColorSpace *)sRGBColorSpace  NS_AVAILABLE_MAC(10_5);
-+ (NSColorSpace *)genericGamma22GrayColorSpace  NS_AVAILABLE_MAC(10_6);  // The "generic" color space with gamma 2.2.
+@property (class, strong, readonly) NSColorSpace *extendedSRGBColorSpace NS_AVAILABLE_MAC(10_12);                  // sRGB compatible color space that allows specifying components beyond the range of [0.0, 1.0]
+@property (class, strong, readonly) NSColorSpace *extendedGenericGamma22GrayColorSpace NS_AVAILABLE_MAC(10_12);    // sRGB compatible gray color space that allows specifying components beyond the range of [0.0, 1.0]
 
-+ (NSColorSpace *)adobeRGB1998ColorSpace  NS_AVAILABLE_MAC(10_5);
+@property (class, strong, readonly) NSColorSpace *displayP3ColorSpace NS_AVAILABLE_MAC(10_12);     // Standard DCI-P3 primaries, a D65 white point, and the same gamma curve as the sRGB IEC61966-2.1 color space
 
-/* Return the list of color spaces available on the system that are displayed by the color panel, in the order they are displayed in the color panel. Doesn't return arbitrary color spaces which may have been created on the fly, or spaces without user displayable names. Pass model==NSUnknownColorSpaceModel to get all color spaces. Empty array is returned if no color spaces are available for the specified model. 
+@property (class, strong, readonly) NSColorSpace *adobeRGB1998ColorSpace NS_AVAILABLE_MAC(10_5);
+
+@property (class, strong, readonly) NSColorSpace *genericRGBColorSpace;		// NSColorSpace corresponding to Cocoa color space name NSCalibratedRGBColorSpace
+@property (class, strong, readonly) NSColorSpace *genericGrayColorSpace;	// NSColorSpace corresponding to Cocoa color space name NSCalibratedWhiteColorSpace
+@property (class, strong, readonly) NSColorSpace *genericCMYKColorSpace;
+@property (class, strong, readonly) NSColorSpace *deviceRGBColorSpace;		// NSColorSpace corresponding to Cocoa color space name NSDeviceRGBColorSpace
+@property (class, strong, readonly) NSColorSpace *deviceGrayColorSpace;		// NSColorSpace corresponding to Cocoa color space name NSDeviceWhiteColorSpace
+@property (class, strong, readonly) NSColorSpace *deviceCMYKColorSpace;		// NSColorSpace corresponding to Cocoa color space name NSDeviceCMYKColorSpace
+#endif
+
+/* Return the list of color spaces available on the system that are displayed by the color panel, in the order they are displayed in the color panel. Doesn't return arbitrary color spaces which may have been created on the fly, or spaces without user displayable names. Pass model==NSUnknownColorSpaceModel to get all color spaces. Empty array is returned if no color spaces are available for the specified model.
 */
 + (NSArray<NSColorSpace *> *)availableColorSpacesWithModel:(NSColorSpaceModel)model  NS_AVAILABLE_MAC(10_6);
 
 @end
+
+
+static const NSColorSpaceModel NSUnknownColorSpaceModel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorSpaceModelUnknown", macosx(10.0, 10.12))*/ = NSColorSpaceModelUnknown;
+static const NSColorSpaceModel NSGrayColorSpaceModel    /*API_DEPRECATED_WITH_REPLACEMENT("NSColorSpaceModelGray", macosx(10.0, 10.12))*/ = NSColorSpaceModelGray;
+static const NSColorSpaceModel NSRGBColorSpaceModel     /*API_DEPRECATED_WITH_REPLACEMENT("NSColorSpaceModelRGB", macosx(10.0, 10.12))*/ = NSColorSpaceModelRGB;
+static const NSColorSpaceModel NSCMYKColorSpaceModel    /*API_DEPRECATED_WITH_REPLACEMENT("NSColorSpaceModelCMYK", macosx(10.0, 10.12))*/ = NSColorSpaceModelCMYK;
+static const NSColorSpaceModel NSLABColorSpaceModel     /*API_DEPRECATED_WITH_REPLACEMENT("NSColorSpaceModelLAB", macosx(10.0, 10.12))*/ = NSColorSpaceModelLAB;
+static const NSColorSpaceModel NSDeviceNColorSpaceModel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorSpaceModelDeviceN", macosx(10.0, 10.12))*/ = NSColorSpaceModelDeviceN;
+static const NSColorSpaceModel NSIndexedColorSpaceModel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorSpaceModelIndexed", macosx(10.0, 10.12))*/ = NSColorSpaceModelIndexed;
+static const NSColorSpaceModel NSPatternColorSpaceModel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorSpaceModelPatterned", macosx(10.0, 10.12))*/ = NSColorSpaceModelPatterned;
+
 
 NS_ASSUME_NONNULL_END
 

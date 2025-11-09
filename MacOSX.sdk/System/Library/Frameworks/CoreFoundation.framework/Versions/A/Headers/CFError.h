@@ -1,5 +1,5 @@
 /*	CFError.h
-	Copyright (c) 2006-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2016, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -36,6 +36,8 @@
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
+typedef CFStringRef CFErrorDomain CF_EXTENSIBLE_STRING_ENUM;
+
 /*!
 	@typedef CFErrorRef
 	    This is the type of a reference to CFErrors.  CFErrorRef is toll-free bridged with NSError.
@@ -51,10 +53,10 @@ CFTypeID CFErrorGetTypeID(void) CF_AVAILABLE(10_5, 2_0);
 
 
 // Predefined domains; value of "code" will correspond to preexisting values in these domains.
-CF_EXPORT const CFStringRef kCFErrorDomainPOSIX		    CF_AVAILABLE(10_5, 2_0);
-CF_EXPORT const CFStringRef kCFErrorDomainOSStatus	    CF_AVAILABLE(10_5, 2_0);
-CF_EXPORT const CFStringRef kCFErrorDomainMach		    CF_AVAILABLE(10_5, 2_0);
-CF_EXPORT const CFStringRef kCFErrorDomainCocoa		    CF_AVAILABLE(10_5, 2_0);
+CF_EXPORT const CFErrorDomain kCFErrorDomainPOSIX		    CF_AVAILABLE(10_5, 2_0);
+CF_EXPORT const CFErrorDomain kCFErrorDomainOSStatus	    CF_AVAILABLE(10_5, 2_0);
+CF_EXPORT const CFErrorDomain kCFErrorDomainMach		    CF_AVAILABLE(10_5, 2_0);
+CF_EXPORT const CFErrorDomain kCFErrorDomainCocoa		    CF_AVAILABLE(10_5, 2_0);
 
 // Keys in userInfo for localizable, end-user presentable error messages. At minimum provide one of first two; ideally provide all three.
 CF_EXPORT const CFStringRef kCFErrorLocalizedDescriptionKey         CF_AVAILABLE(10_5, 2_0);   // Key to identify the end user-presentable description in userInfo.
@@ -82,7 +84,7 @@ CF_EXPORT const CFStringRef kCFErrorFilePathKey                     CF_AVAILABLE
 	@result A reference to the new CFError.
 */
 CF_EXPORT
-CFErrorRef CFErrorCreate(CFAllocatorRef allocator, CFStringRef domain, CFIndex code, CFDictionaryRef userInfo) CF_AVAILABLE(10_5, 2_0);
+CFErrorRef CFErrorCreate(CFAllocatorRef allocator, CFErrorDomain domain, CFIndex code, CFDictionaryRef userInfo) CF_AVAILABLE(10_5, 2_0);
 
 /*!
 	@function CFErrorCreateWithUserInfoKeysAndValues
@@ -97,7 +99,7 @@ CFErrorRef CFErrorCreate(CFAllocatorRef allocator, CFStringRef domain, CFIndex c
 	@result A reference to the new CFError. numUserInfoValues CF types are gathered from each of userInfoKeys and userInfoValues to create the userInfo dictionary.
 */
 CF_EXPORT
-CFErrorRef CFErrorCreateWithUserInfoKeysAndValues(CFAllocatorRef allocator, CFStringRef domain, CFIndex code, const void *const *userInfoKeys, const void *const *userInfoValues, CFIndex numUserInfoValues) CF_AVAILABLE(10_5, 2_0);
+CFErrorRef CFErrorCreateWithUserInfoKeysAndValues(CFAllocatorRef allocator, CFErrorDomain domain, CFIndex code, const void *const *userInfoKeys, const void *const *userInfoValues, CFIndex numUserInfoValues) CF_AVAILABLE(10_5, 2_0);
 
 /*!
 	@function CFErrorGetDomain
@@ -106,7 +108,7 @@ CFErrorRef CFErrorCreateWithUserInfoKeysAndValues(CFAllocatorRef allocator, CFSt
 	@result The error domain of the CFError. Since this is a "Get" function, the caller shouldn't CFRelease the return value.
 */
 CF_EXPORT
-CFStringRef CFErrorGetDomain(CFErrorRef err) CF_AVAILABLE(10_5, 2_0);
+CFErrorDomain CFErrorGetDomain(CFErrorRef err) CF_AVAILABLE(10_5, 2_0);
 
 /*!
 	@function CFErrorGetCode

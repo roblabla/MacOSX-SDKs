@@ -22,7 +22,7 @@
 @interface QCPlugInViewController : NSViewController
 {
 @private
-	__strong void*				_private;
+	void*				_private;
 }
 
 /*

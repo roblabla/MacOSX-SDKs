@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2016 Apple Inc. All rights reserved.
 
 */
 
@@ -101,11 +101,11 @@ AV_INIT_UNAVAILABLE
 
 /* indicates the language associated with the track, as an ISO 639-2/T language code;
    may be nil if no language is indicated */
-@property (nonatomic, readonly) NSString *languageCode;
+@property (nonatomic, readonly, nullable) NSString *languageCode;
 
 /* indicates the language tag associated with the track, as an IETF BCP 47 (RFC 4646) language identifier;
    may be nil if no language tag is indicated */
-@property (nonatomic, readonly) NSString *extendedLanguageTag;
+@property (nonatomic, readonly, nullable) NSString *extendedLanguageTag;
 
 @end
 

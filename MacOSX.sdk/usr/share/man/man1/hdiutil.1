@@ -1,7 +1,7 @@
-.Dd 20 Mar 2015
-.\" 10.11 revision includes information on the new ULFO/lzfse format
+.Dd 13 Jun 2016
+.\" 10.12 revision: macOS, apfs, srm, fullfsync, pmap -diagnostic, -atomic/-noatomic
 .\" preview changes to this file with 'man Documentation/hdiutil.1'
-.Os "OS X"
+.Os "macOS"
 .Dt HDIUTIL 1
 .Sh NAME
 .Nm hdiutil
@@ -54,7 +54,7 @@ distinction is critical to understanding how disk images work.  The terms
 connected to and disconnected from a system.  "Mount" and "unmount" are
 the parallel filesystems options.
 .Pp
-For example, when you double-click a disk image in the OS X Finder,
+For example, when you double-click a disk image in the macOS Finder,
 two separate things happen.  First, the image is "attached" to the system
 just like an external drive.  Then, the kernel and Disk Arbitration probe
 the new device for recognized file structures.  If any are discovered that
@@ -283,7 +283,7 @@ attach with a helper process.  This is (again) the default as of Mac OS
 X 10.5.
 .It Fl kernel
 attempt to attach this image without a helper process; fail if unsupported.
-Only UDRW, UDRO, UDZO, and UDSP images are supported in-kernel.  Encryption
+Only UDRW, UDRO, UDZO, ULFO, and UDSP images are supported in-kernel.  Encryption
 and HTTP are supported by the kernel driver.
 .\"
 .It Fl notremovable
@@ -326,7 +326,7 @@ See
 for ways a system administrator can make particular volumes automatically
 mount in particular filesystem locations by editing the file /etc/fstab.
 .It Fl nobrowse
-render any volumes invisible in applications such as the OS X Finder.
+render any volumes invisible in applications such as the macOS Finder.
 .It Fl owners Ar on|off
 specify that owners on any filesystems be honored or not.
 .It Fl drivekey Ar key=value
@@ -603,7 +603,7 @@ The amount of data that can be stored in either type of sparse image is
 additionally bounded by the filesystem in the image and by any partition
 map.
 .Sy compact
-can reclaim unused bands in sparse images backing HFS+ filesystems.
+can reclaim unused bands in sparse images backing APFS or HFS+ filesystems.
 .Sy resize
 will only change the virtual size of a sparse image.  See also USING
 PERSISTENT SPARSE IMAGES below.
@@ -612,7 +612,11 @@ PERSISTENT SPARSE IMAGES below.
 .br
 where
 .Ar filesystem
-is one of HFS+, HFS+J (JHFS+), HFSX, JHFS+X, FAT32, ExFAT, or UDF.
+is one of several options such as HFS+, HFS+J (JHFS+), HFSX, JHFS+X,
+APFS, FAT32, ExFAT, or UDF.  A full list of supported filesystems can
+be found in 
+.Sy create
+.Fl help .
 .Fl fs
 causes a filesystem of the specified type to be written to the image.
 .Fl fs
@@ -622,9 +626,6 @@ will not make any size adjustments: if the image is the wrong size for the
 specified filesystem,
 .Sy create
 will fail.
-.Sy create
-.Fl help
-lists all supported filesystems.
 .Fl fs
 is invalid and ignored when using
 .Fl srcdevice .
@@ -632,8 +633,8 @@ is invalid and ignored when using
 .br
 The newly-created filesystem will be named
 .Ar "volname".
-The default depends the filesystem being used; HFS+'s default volume name
-is
+The default depends the filesystem being used; The default volume name
+in both HFS+ and APFS is
 .Ql untitled .
 .Fl volname
 is invalid and ignored when using
@@ -677,22 +678,12 @@ is invalid and ignored when using
 .Fl srcdevice .
 .It Fl fsargs Ar newfs_args
 .br
-additional arguments to pass to whatever newfs program is implied by
+additional arguments to pass to whichever newfs program is implied by
 .Fl "fs".
+As an example with HFS+, 
 .Xr newfs_hfs 8
-has a number of options that can reduce the amount of space needed by the
-filesystem's data structures.  Suppressing the journal with
-.Fl fs Ar HFS+
-and passing arguments such as
-.Ar "-c c=64,a=16,e=16"
-to
-.Fl fsargs
-will minimize gaps at the front of the filesystem, allowing
-.Sy resize
-to squeeze more space from the filesystem.  For truly optimal filesystems,
-use
-.Sy makehybrid .
-.Pp
+has a number of options that can control the amount of space used by the
+filesystem's data structures.
 .It Fl layout Ar layout
 .br
 Specify the partition layout of the image.
@@ -785,6 +776,8 @@ do not fail if the user invoking
 can't ensure correct file ownership for the files in the image.
 .It Fl skipunreadable
 skip files that can't be read by the copying user and don't authenticate.
+.It Fl [no]atomic
+do [not] copy files to a temporary location and then rename them to their destination.  Atomic copies are the default.  Non-atomic copying may be slightly faster.
 .It Fl copyuid Ar user
 perform the copy as the given user.  Requires root privilege.  If
 .Ar user
@@ -862,7 +855,7 @@ DC42 - Disk Copy 4.2 image (obsolete format)
 .El
 .Pp
 In addition to the compression offered by some formats, the UDIF and NDIF
-read-only formats skip unused space in HFS, ExFAT, and MS-DOS (FAT, FAT32)
+read-only formats skip unused space in HFS, APFS, ExFAT, and MS-DOS (FAT, FAT32)
 filesystems.  For UDZO,
 .Fl imagekey Ar zlib-level=value
 allows the zlib compression level to be specified a la
@@ -1057,7 +1050,7 @@ Filesystem options:
 Generate an HFS+ filesystem.  This filesystem can be present on an image
 simultaneously with an ISO9660 or Joliet or UDF filesystem.  On operating
 systems that understand HFS+ as well as ISO9660 and UDF, like Mac OS 9
-or OS X, HFS+ is usually the preferred filesystem.
+or OS X, HFS+ is usually the preferred filesystem for hybrid images.
 .It Fl iso
 Generate an ISO9660 Level 2 filesystem with Rock Ridge extensions.  This
 filesystem can be present on an image simultaneously with an HFS+ or
@@ -1287,9 +1280,9 @@ and must have an 8.3 name for compatibility with ISO9660 Level 1.
 .It Sy compact Ar image Op Ar options
 .br
 scans the bands of a sparse (SPARSE or SPARSEBUNDLE) disk image containing
-an HFS+ filesystem, removing those parts of the image which are no longer
-being used by the filesystem.  Depending on the location of files in the
-hosted filesystem,
+an APFS or HFS+ filesystem, removing those parts of the image which are no
+longer being used by the filesystem.  Depending on the location of files in
+the hosted filesystem,
 .Sy compact
 may or may not shrink the image.  For SPARSEBUNDLE images, completely
 unused band files are simply removed.
@@ -1297,10 +1290,13 @@ unused band files are simply removed.
 Options:
 .Bl -hang -width "batteryallowed" -compact
 .It Fl batteryallowed
-allow compacting on battery power. SPARSE images could be damaged if power is
-lost during a compact operation. The default is not allowed.
+allow compacting on battery power.  SPARSE images could be damaged if power is
+lost during a compact operation.  The default is not allowed.
+.Pp
 .It Fl sleepallowed
-allow machine to sleep while compacting. The default is not allowed.
+allow machine to idle sleep while compacting, which cancels the compact
+operation.  The default is not allowed, which prevents idle sleep until compact
+completes.  User-initiated sleep, such as a lid close, will always cancel compact.
 .El
 .Pp
 Common options:
@@ -1387,15 +1383,13 @@ to be read from the standard input in the same manner as with
 .\"             -- erasekeys --
 .It Sy erasekeys Ar image
 .br
-securely overwrite keys used to access an encrypted image, quickly
-rendering the image inaccessible.  This does not prevent other copies of
-the keys from later being broken and used to decrypt the data.  In addition
-to additional copies of the image, modern storage systems such as solid
-state disks do not overwrite data.  As a result,
+delete keys used to access an encrypted image, quickly rendering the image
+inaccessible.  This does not prevent other copies of the keys from later
+being broken and used to decrypt the data, such as from a copy or backup
+of the image.  In addition, modern storage systems such as solid state
+disks do not securely overwrite data.  As a result,
 .Sy erasekeys
-cannot protect against all attacks.  For higher security, a tool like
-.Xr srm 1
-should be used on the entire file.
+cannot protect against all attacks, but it may prevent trivial access.
 .Pp
 Common options:
 .Fl "plist"
@@ -1753,10 +1747,13 @@ generate MediaKit's minimal report: basic partition types, names, and sizes in
 human-readable units.
 .It Fl standard
 generate MediaKit's standard report, which adds partition offsets and
-uses 512-byte sectors.
+uses 512-byte sectors.  This is the default.
 .It Fl complete
 generate MediaKit's comprehensive report, with end offsets,
 significant free space, etc.
+.It Fl diagnostic
+generate MediaKit's diagnostic report, which shows all partition schemes
+encountered.  Useful for Boot Camp troubleshooting.
 .Pp
 .It Fl endoffsets
 indicate last block of each partition.
@@ -1848,7 +1845,7 @@ the file extension .sparsebundle.
 .Ed
 .Bd -literal -offset indent -compact
 hdiutil convert files.sparsebundle -format UDZO \\
-    -imagekey zlib-level 5 -o files
+    -imagekey zlib-level=5 -o files
 .Ed
 .Bd -ragged -offset indent-two -compact
 converts files.sparsebundle to files.dmg: a read-only,
@@ -2214,7 +2211,7 @@ mounting (the journal will be permanently dirty).
 Some filesystems support permissions including users and groups.  While
 important for security on a managed filesystem, users and groups ("owners")
 pose challenges for unmanaged, shared filesystems such as those typically
-present in disk images.  OS X's solution to this problem is to make owners
+present in disk images.  macOS's solution to this problem is to make owners
 optional, both while creating files and enforcing permissions.
 .Pp
 By default, unknown HFS+ filesystems on "external" devices (including
@@ -2232,7 +2229,7 @@ the owner of all files in a filesystem mount for which owners are ignored
 is the user attaching the disk image.  The attaching owner is also used
 when creating new files.
 .Pp
-On modern OS X systems, root (UID 0) can "see through" the "owners ignored"
+On modern macOS systems, root (UID 0) can "see through" the "owners ignored"
 user mappings.  Thus
 .Dl sudo ls -l /Volumes/imageVol
 will show whatever is really stored in the filesystem (possibly _unknown)
@@ -2300,9 +2297,9 @@ Mac OS X
 .Sy compact
 quickly but are not recognized by previous OS versions.  Mac OS X 10.6
 removed support for attaching SPARSEBUNDLE images from network file
-servers that don't support F_FULLFSYNC.  OS X 10.7 removed double-click
-support for images using legacy metadata; these can be rehabilitated
-using
+servers that don't support F_FULLFSYNC, although this requirement was relaxed
+in macOS 10.12.  OS X 10.7 removed double-click support for images using legacy
+metadata; these can be rehabilitated using
 .Sy flatten
 and
 .Sy unflatten Ns ,
@@ -2313,6 +2310,13 @@ OS X 10.11 introduced lzfse compression in the ULFO format, providing
 faster, more efficient compression and smaller images compared to UDZO.
 These images are also supported in-kernel, but will not work on any
 earlier versions of the OS.
+.Pp
+macOS 10.12 included a pre-release version of the Apple File System
+called APFS which is meant for evaluation and development purposes only.
+Files stored in APFS-based images may not be accessible in future
+releases of macOS, and won't work in past ones.  All data to be stored
+in APFS volumes should be backed up prior to using APFS and regularly
+backed up while using APFS.
 .\"
 .Sh HISTORY
 Disk images were first invented to electronically store and transmit
@@ -2340,13 +2344,23 @@ resource fork in the data fork.  UDIF is the native image format for OS
 X.
 .Pp
 Raw disk images from other operating systems (e.g. .iso files) will be
-recognized as disk images and can be attached and mounted if OS X
+recognized as disk images and can be attached and mounted if macOS
 recognizes the filesystems.  They can also be burned with
 .Nm
 .Ns Sy burn .
 .\"
 .Sh WHAT'S NEW
-OS X 10.11 adds ULFO format images compressed with lzfse.  These images are
+macOS 10.12 introduces the pre-release APFS for evaluation (see COMPATIBILITY
+above).  10.12 also adds an option to disable atomic copying during image from
+folder operations, 
+.Fl noatomic Ns ,
+which may result in slightly faster image creation.
+.Sy pmap
+added a new switch,
+.Fl diagnostic Ns ,
+which captures troubleshooting information for Boot Camp configurations.
+.Pp
+OS X 10.11 added ULFO format images compressed with lzfse.  These images are
 more efficient and smaller than comparable UDZO images compressed with zlib,
 and retain kernel compatibility, but are not usable on earlier OSes.
 .Pp
@@ -2377,13 +2391,14 @@ return the /dev without mounting the volume.  This change effectively
 removes the ability to create a second /dev node from an existing one.
 .\"
 .Sh SEE ALSO
-.Ns Xr authopen 1 ,
 .Ns Xr diskutil 8 ,
-.Ns Xr ditto 8 ,
 .Ns Xr asr 8 ,
 .Ns Xr ioreg 8 ,
-.Ns Xr drutil 1 ,
+.Ns Xr hfs.util 8 ,
+.Ns Xr apfs.util 8 ,
 .Ns Xr msdos.util 8 ,
 .Ns Xr exfat.util 8 ,
-.Ns Xr hfs.util 8 ,
+.Ns Xr authopen 1 ,
+.Ns Xr ditto 8 ,
+.Ns Xr drutil 1 ,
 .Ns Xr diskarbitrationd 8 .

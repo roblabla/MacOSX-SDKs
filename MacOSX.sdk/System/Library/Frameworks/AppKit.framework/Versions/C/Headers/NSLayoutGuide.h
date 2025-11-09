@@ -1,11 +1,12 @@
 /*
 	NSLayoutGuide.h
 	Application Kit
-	Copyright (c) 2015, Apple Inc.
+	Copyright (c) 2015-2016, Apple Inc.
 	All rights reserved.
  */
 
 #import <AppKit/NSView.h>
+#import <AppKit/NSLayoutConstraint.h>
 #import <AppKit/NSLayoutAnchor.h>
 
 
@@ -36,12 +37,14 @@ NS_CLASS_AVAILABLE_MAC(10_11)
     NSLayoutYAxisAnchor *_centerY;
     
     NSRect  _frame;
-    id  _reserved1;
-    id  _reserved2;
+    id _aux;
+    id  _reserved2 __unused;
+
     unsigned int    _shouldBeArchived:1;
     unsigned int    _weakHelper:1;
     unsigned int    _frameNeedsUpdate:1;
-    unsigned int    _reservedFlags:29;
+    unsigned int    _frameIsObserved:1;
+    unsigned int    _reservedFlags:28 __unused;
 }
 
 
@@ -71,6 +74,12 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @property (readonly, strong) NSLayoutDimension *heightAnchor;
 @property (readonly, strong) NSLayoutXAxisAnchor *centerXAnchor;
 @property (readonly, strong) NSLayoutYAxisAnchor *centerYAnchor;
+
+
+// For debugging purposes:
+@property (readonly) BOOL hasAmbiguousLayout NS_AVAILABLE_MAC(10_12);
+- (NSArray<NSLayoutConstraint *> *)constraintsAffectingLayoutForOrientation:(NSLayoutConstraintOrientation)orientation NS_AVAILABLE_MAC(10_12);
+
 
 @end
 

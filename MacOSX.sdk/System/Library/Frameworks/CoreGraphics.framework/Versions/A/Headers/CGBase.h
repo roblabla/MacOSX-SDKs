@@ -8,6 +8,9 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <float.h>
+#include <TargetConditionals.h>
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
 
 /* Definition of `__CG_HAS_COMPILER_ATTRIBUTE'. */
 
@@ -134,8 +137,8 @@
 /* Definition of `__CG_DEPRECATED_WITH_MSG'. */
 
 #if !defined(__CG_DEPRECATED_WITH_MSG)
-# if __CG_HAS_COMPILER_ATTRIBUTE(deprecated)				      \
-    && __CG_HAS_COMPILER_EXTENSION(attribute_deprecated_with_message)	      \
+# if __CG_HAS_COMPILER_ATTRIBUTE(deprecated)                            \
+    && __CG_HAS_COMPILER_EXTENSION(attribute_deprecated_with_message)   \
     && !defined(CG_BUILDING_CG)
 #  define __CG_DEPRECATED_WITH_MSG(msg) __attribute__((deprecated(msg)))
 # else
@@ -146,8 +149,8 @@
 /* Definition of `__CG_DEPRECATED_ENUMERATOR'. */
 
 #if !defined(__CG_DEPRECATED_ENUMERATOR)
-# if __CG_HAS_COMPILER_ATTRIBUTE(deprecated)				      \
-   && __CG_HAS_COMPILER_EXTENSION(enumerator_attributes)		      \
+# if __CG_HAS_COMPILER_ATTRIBUTE(deprecated)                        \
+   && __CG_HAS_COMPILER_EXTENSION(enumerator_attributes)            \
    && !defined(CG_BUILDING_CG)
 #  define __CG_DEPRECATED_ENUMERATOR __attribute__((deprecated))
 # else
@@ -158,9 +161,9 @@
 /* Definition of `__CG_DEPRECATED_ENUMERATOR_WITH_MSG'. */
 
 #if !defined(__CG_DEPRECATED_ENUMERATOR_WITH_MSG)
-# if __CG_HAS_COMPILER_ATTRIBUTE(deprecated)				      \
+# if __CG_HAS_COMPILER_ATTRIBUTE(deprecated)                      \
 && __CG_HAS_COMPILER_EXTENSION(attribute_deprecated_with_message) \
-&& __CG_HAS_COMPILER_EXTENSION(enumerator_attributes)		      \
+&& __CG_HAS_COMPILER_EXTENSION(enumerator_attributes)             \
 && !defined(CG_BUILDING_CG)
 #  define __CG_DEPRECATED_ENUMERATOR_WITH_MSG(msg) __attribute__((deprecated(msg)))
 # else
@@ -183,10 +186,10 @@
 
 #if !defined(__CG_STATIC_ASSERT)
 # if defined(__cplusplus) && __CG_HAS_COMPILER_EXTENSION(cxx_static_assert)
-#  define __CG_STATIC_ASSERT(constant_expression)			      \
+#  define __CG_STATIC_ASSERT(constant_expression)                 \
      static_assert(constant_expression, #constant_expression)
 # elif !defined(__cplusplus) && __CG_HAS_COMPILER_EXTENSION(c_static_assert)
-#  define __CG_STATIC_ASSERT(constant_expression)			      \
+#  define __CG_STATIC_ASSERT(constant_expression)                 \
      _Static_assert(constant_expression, #constant_expression)
 # else
 #  define __CG_STATIC_ASSERT(constant_expression)
@@ -223,8 +226,8 @@
 
 #if !defined(__CG_FORMAT_PRINTF)
 # if __CG_HAS_COMPILER_ATTRIBUTE(format)
-#  define __CG_FORMAT_PRINTF(FORMAT_STRING, STARTING_ARG)		      \
-     __attribute__((format(printf, FORMAT_STRING, STARTING_ARG)))	      \
+#  define __CG_FORMAT_PRINTF(FORMAT_STRING, STARTING_ARG)           \
+     __attribute__((format(printf, FORMAT_STRING, STARTING_ARG)))   \
      __attribute__((nonnull(FORMAT_STRING)))
 # else
 #  define __CG_FORMAT_PRINTF(FORMAT_STRING, STARTING_ARG)
@@ -235,7 +238,7 @@
 
 #if !defined(__CG_FORMAT_VPRINTF)
 # if __CG_HAS_COMPILER_ATTRIBUTE(format)
-#  define __CG_FORMAT_VPRINTF(FORMAT_STRING)				      \
+#  define __CG_FORMAT_VPRINTF(FORMAT_STRING)                        \
      __attribute__((format(printf, FORMAT_STRING, 0)))
 # else
 #  define __CG_FORMAT_VPRINTF(FORMAT_STRING)
@@ -273,5 +276,21 @@ typedef CGFLOAT_TYPE CGFloat;
 #if !defined(CG_PRIVATE_EXTERN) && !defined(CG_BUILDING_CG)
 # define CG_PRIVATE_EXTERN CG_LOCAL
 #endif
+
+#if !TARGET_IPHONE_SIMULATOR
+
+typedef struct  CF_BRIDGED_TYPE(id) __IOSurface *IOSurfaceRef __attribute__((swift_name("IOSurfaceRef")));
+
+#endif
+
+/* 'cg_nullable' will be dropped for new Swift clients. All others get currently the old behavior */
+
+#if defined(SWIFT_SDK_OVERLAY_COREGRAPHICS_EPOCH) && SWIFT_SDK_OVERLAY_COREGRAPHICS_EPOCH >= 0
+#   define cg_nullable
+#else
+#   define cg_nullable __nullable
+#endif
+
+
 
 #endif /* CGBASE_H_ */

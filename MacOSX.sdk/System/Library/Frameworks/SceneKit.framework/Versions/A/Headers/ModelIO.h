@@ -1,7 +1,7 @@
 //
 //  ModelIO.h
 //
-//  Copyright (c) 2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2015-2016 Apple Inc. All rights reserved.
 //
 
 #import <ModelIO/ModelIO.h>
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MDLAsset (SCNModelIO)
 + (instancetype)assetWithSCNScene:(SCNScene *)scnScene NS_AVAILABLE(10_11, 9_0);
++ (instancetype)assetWithSCNScene:(SCNScene *)scnScene bufferAllocator:(nullable id <MDLMeshBufferAllocator>)bufferAllocator NS_AVAILABLE(10_12, 10_0);
 @end
 
 @interface SCNNode (SCNModelIO)
@@ -27,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MDLObject (SCNModelIO)
 + (instancetype)objectWithSCNNode:(SCNNode *)scnNode NS_AVAILABLE(10_11, 9_0);
++ (instancetype)objectWithSCNNode:(SCNNode *)scnNode bufferAllocator:(nullable id <MDLMeshBufferAllocator>)bufferAllocator NS_AVAILABLE(10_12, 10_0);
 @end
 
 @interface SCNGeometry (SCNModelIO)
@@ -35,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MDLMesh (SCNModelIO)
 + (instancetype)meshWithSCNGeometry:(SCNGeometry *)scnGeometry NS_AVAILABLE(10_11, 9_0);
++ (instancetype)meshWithSCNGeometry:(SCNGeometry *)scnGeometry bufferAllocator:(nullable id <MDLMeshBufferAllocator>)bufferAllocator NS_AVAILABLE(10_12, 10_0);
 @end
 
 @interface SCNGeometryElement (SCNModelIO)
@@ -43,6 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MDLSubmesh (SCNModelIO)
 + (instancetype)submeshWithSCNGeometryElement:(SCNGeometryElement *)scnGeometryElement NS_AVAILABLE(10_11, 9_0);
++ (instancetype)submeshWithSCNGeometryElement:(SCNGeometryElement *)scnGeometryElement bufferAllocator:(nullable id <MDLMeshBufferAllocator>)bufferAllocator NS_AVAILABLE(10_12, 10_0);
 @end
 
 @interface SCNMaterial (SCNModelIO)

@@ -1,15 +1,34 @@
-//
-//  IOUSBHostIOSource.h
-//  IOUSBHostFamily
-//
-//  Created by Dan Wilson on 2/17/14.
-//
-//
+/*
+ * Copyright (c) 1998-2016 Apple Inc. All rights reserved.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
+ *
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
+ *
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ *
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
+ */
 
 /*!
- * @header IOUSBHostIOSource.h
- *
- * @brief Provides IOUSBHostIOSource API
+ @header     IOUSBHostIOSource.h
+ @brief      IOUSBHostIOSource is the base class for objects that perform USB IO.
  */
 
 #ifndef IOUSBHostFamily_IOUSBHostIOSource_h
@@ -26,6 +45,14 @@ class IOUSBHostDevice;
 class AppleUSBHostRequestPool;
 
 typedef void (*IOUSBHostCompletionAction)(void* owner, void* parameter, IOReturn status, uint32_t bytesTransferred);
+
+/*!
+ * @struct      IOUSBHostCompletion
+ * @discussion  Struture describing the completion callback for an asynchronous bulk, control, or interrupt IO operation
+ * @field       owner Pointer to an object that owns the transfer.  May be used as <code>this</code> for an action passed via OSMemberFunctionCast.
+ * @field       action IOUSBHostCompletionAction to run when the IO request completes.
+ * @field       parameter Pointer to be used as context within the completion action.
+ */
 struct IOUSBHostCompletion
 {
     void* owner;
@@ -34,15 +61,12 @@ struct IOUSBHostCompletion
 };
 
 /*!
- * @typedef IOUSBHostIsochronousFrame
- * @discussion Structure representing a single frame in an isochronous transfer.
- * @param status Completion status for this individual frame.  IOUSBHostFamily will initialize this to kIOReturnInvalid
- * and will update the field with a valid status code upon completion of the frame.
- * @param requestCount The number of bytes requested to transfer for this frame.  This field must be initialized by the caller
- * before this structure is submitted to IOUSBHostFamily.
- * @param completeCount The number of bytes actually transferred for this frame.  IOUSBHostFamily will update this field
- * upon completion of the frame.
- * @param timeStamp The observed AbsoluteTime for this frame's completion.
+ * @struct      IOUSBHostIsochronousFrame
+ * @discussion  Structure representing a single frame in an isochronous transfer.
+ * @field       status Completion status for this individual frame.  IOUSBHostFamily will initialize this to kIOReturnInvalid and will update the field with a valid status code upon completion of the frame.
+ * @field       requestCount The number of bytes requested to transfer for this frame.  This field must be initialized by the caller before this structure is submitted to IOUSBHostFamily.
+ * @field       completeCount The number of bytes actually transferred for this frame.  IOUSBHostFamily will update this field upon completion of the frame.
+ * @field       timeStamp The observed AbsoluteTime for this frame's completion.  Note that interrupt latency and system load may result in more than one frame completing with the same timestamp.
  */
 struct IOUSBHostIsochronousFrame
 {
@@ -53,6 +77,14 @@ struct IOUSBHostIsochronousFrame
 };
 
 typedef void (*IOUSBHostIsochronousCompletionAction)(void* owner, void* parameter, IOReturn status, IOUSBHostIsochronousFrame* frameList);
+
+/*!
+ * @struct      IOUSBHostIsochronousCompletion
+ * @discussion  Struture describing the completion callback for an asynchronous isochronous operation
+ * @field       owner Pointer to an object that owns the transfer.  May be used as <code>this</code> for an action passed via OSMemberFunctionCast.
+ * @field       action IOUSBHostIsochronousCompletionAction to run when the IO request completes.
+ * @field       parameter Pointer to be used as context within the completion action.
+ */
 struct IOUSBHostIsochronousCompletion
 {
     void* owner;
@@ -61,11 +93,9 @@ struct IOUSBHostIsochronousCompletion
 };
 
 /*!
- * @class IOUSBHostIOSource
- *
- * @brief IOUSBHostIOSource object
- *
- * @discussion Provides the base class API for controlling pipe policy and performing I/O.
+ * @class       IOUSBHostIOSource
+ * @brief       The base class for objects that perform USB IO.
+ * @discussion  This class provides functionality to transfer data across USB.  Function drivers should not subclass IOUSBHostIOSource.
  */
 class IOUSBHostIOSource : public OSObject
 {
@@ -78,12 +108,20 @@ protected:
     virtual void free();
     
     virtual bool initWithOwners(AppleUSBHostController* controller, IOUSBHostDevice* device);
-    
+
+    OSMetaClassDeclareReservedUsed(IOUSBHostIOSource, 0);
+    virtual IOReturn open();
+
+    OSMetaClassDeclareReservedUsed(IOUSBHostIOSource, 1);
+    virtual IOReturn openGated();
+
+    OSMetaClassDeclareReservedUsed(IOUSBHostIOSource, 2);
+    virtual IOReturn destroy();
+
+    OSMetaClassDeclareReservedUsed(IOUSBHostIOSource, 3);
+    virtual IOReturn destroyGated();
+
     // Pad slots for future expansion
-    OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 0);
-    OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 1);
-    OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 2);
-    OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 3);
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 4);
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 5);
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 6);
@@ -93,33 +131,34 @@ protected:
     
 public:
     /*!
-     * @brief Return value for <code>getState()</code>
-     *
-     * @constant kStateReady The I/O source is idle and fully-functional.
-     * @constant kStateRunningCompletions The I/O source is currently running completions.
-     * @constant kStateAborting The I/O source is currently aborting all requests.
-     * @constant kStateInactive The I/O source has been closed.
+     * @enum        tState
+     * @namespace   IOUSBHostIOSource
+     * @brief       Return value for <code>getState()</code>
+     * @constant    kStateReady The I/O source is idle and fully-functional.
+     * @constant    kStateRunningCompletions The I/O source is currently running completions.
+     * @constant    kStateAborting The I/O source is currently aborting all requests.
+     * @constant    kStateInactive The I/O source has been closed.
      */
     enum tState
     {
         kStateReady,
         kStateRunningCompletions,
         kStateAborting,
-        kStateInactive
+        kStateInactive,
+        kStateDestroyed
     };
 
     /*!
-     * @brief Returns the current state of the I/O source.
-     *
-     * @return @link tState @/link
+     * @brief   Returns the current state of the I/O source.
+     * @return  @link tState @/link
      */
     virtual tState getState();
 
     /*!
-     * @brief Options for <code>abort()</code>
-     *
-     * @constant kAbortAsynchronous the abort should occur asynchronously.
-     * @constant kAbortSynchronous the abort should occur synchronously.
+     * @enum        tAbortOptions
+     * @brief       Options for <code>abort()</code>
+     * @constant    kAbortAsynchronous abort() should return immediately without waiting for the aborted IO to complete
+     * @constant    kAbortSynchronous abort() should not return until the aborted IO has completed
      */
     enum tAbortOptions
     {
@@ -128,20 +167,12 @@ public:
     };
 
     /*!
-     * @brief Abort pending I/O requests.
-     *
-     * @discussion This method will abort all pending I/O requests.  If <code>options</code> is  <code>kAbortSynchronous</code>
-     * this method will block any new requests that are not submitted from one of the aborted request's callback until the abort
-     * completes.
-     *
-     * @param options Whether the abort operation should be synchronous or not.
-     *
-     * @param withError Error code which will be passed to any request which hasn't successfully completed.
-     *
-     * @param forClient Service for which to abort requests.  If NULL, all requests will be aborted.  Only control endpoints can
-     * specify a non-NULL value.
-     *
-     * @return IOReturn result code
+     * @brief       Abort pending I/O requests.
+     * @discussion  This method will abort all pending I/O requests.  If <code>options</code> includes <code>kAbortSynchronous</code>, this method will block any new IO requests unless they are submitted from an aborted IO's completion routine.
+     * @param       options tAbortOptions
+     * @param       withError IOReturn error value to return with the requests.  The default value of kIOReturnAborted should be used.
+     * @param       forClient Service for which to abort requests.  If NULL, all requests will be aborted.  Only control endpoints can specify a non-NULL value.
+     * @return      IOReturn result code
      */
     virtual IOReturn abort(IOOptionBits options = kAbortAsynchronous, IOReturn withError = kIOReturnAborted, IOService* forClient = NULL);
     
@@ -205,43 +236,24 @@ protected:
 #pragma mark IO
 public:
     /*!
-     * @brief Issue an asynchronous I/O request on the source.
-     *
-     * @discussion This method is used to issue an asynchronous I/O request on a bulk or interrupt pipe.
-     *
-     * See IOUSBHostPipe::io and IOUSBHostStream::io for object-specific interface notes.
-     *
-     * @param dataBuffer Pointer to a valid memory descriptor to use as the backing store for the I/O.
-     *
-     * @param dataBufferLength Length of the request.  Must be >= <code>dataBuffer->getLength()</code>
-     *
-     * @param completion Pointer to a valid, non NULL, IOUSBHostCompletion object.  This will be copied and can therefore be stack-allocated.
-     *
-     * @param completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.
-     * Must be 0 for interrupt pipes and streams.
-     *
-     * @return IOReturn result code
+     * @brief       Enqueue an IO request on the source
+     * @discussion  This method is used to issue an asynchronous I/O request on a bulk or interrupt pipe.  See IOUSBHostPipe::io and IOUSBHostStream::io for object-specific interface notes.
+     * @param       dataBuffer IOMemoryDescriptor pointer containing the buffer to use for the transfer
+     * @param       dataBufferLength Length of the request.  Must be <= <code>dataBuffer->getLength()</code>
+     * @param       completion Pointer to a IOUSBHostCompletion structure.  This will be copied and can therefore be stack-allocated.
+     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt pipes and streams.
+     * @return      kIOReuturnSuccess if the completion will be called in the future, otherwise error
      */
     virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, IOUSBHostCompletion* completion, uint32_t completionTimeoutMs = 0);
     
     /*!
-     * @brief Issue a synchronous I/O request on the source.
-     *
-     * @discussion This method is used to issue a synchronous I/O request on a bulk or interrupt pipe.  Although this
-     * is a synchronous call, it is permitted to be called from the completion callback of an asynchronous request.
-     *
-     * See IOUSBHostPipe::io and IOUSBHostStream::io for object-specific interface notes.
-     *
-     * @param dataBuffer Pointer to the memory to be used for the I/O.
-     *
-     * @param dataBufferLength Length of the request.  Must be >= the amount of memory allocated to <code>dataBuffer</code>
-     *
-     * @param bytesTransferred Reference which will be updated with the bytes transferred during the request.
-     *
-     * @param completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.
-     * Must be 0 for interrupt pipes and streams.
-     *
-     * @return IOReturn result code
+     * @brief       Perform an IO request on the source
+     * @discussion  This method will send a synchronous request on the IO source, and will not return until the request is complete.  This method will acquire the service's workloop lock, and will call commandSleep to send the request.  See IOUSBHostPipe::io and IOUSBHostStream::io for object-specific interface notes.
+     * @param       dataBuffer IOMemoryDescriptor pointer containing the buffer to use for the transfer
+     * @param       dataBufferLength Length of the request.  Must be <= <code>dataBuffer->getLength()</code>
+     * @param       bytesTransferred uint32_t reference which will be updated with the bytes transferred during the request
+     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt pipes and streams.
+     * @return      IOReturn value indicating the result of the IO request
      */
     virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, uint32_t& bytesTransferred, uint32_t completionTimeoutMs = 0);
     

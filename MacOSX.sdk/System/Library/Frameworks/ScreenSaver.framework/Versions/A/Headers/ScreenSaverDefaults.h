@@ -1,7 +1,7 @@
 /*
 	ScreenSaverDefaults.h
 	ScreenSaver
-	Copyright (c) 2000-2, Apple Computer, Inc.
+	Copyright (c) 2000-2016, Apple Inc.
 	All rights reserved.
 */
 

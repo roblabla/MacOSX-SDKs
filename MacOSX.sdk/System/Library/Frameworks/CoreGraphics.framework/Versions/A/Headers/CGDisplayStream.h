@@ -5,12 +5,12 @@
 #ifndef CGDISPLAYSTREAM_H_
 #define CGDISPLAYSTREAM_H_
 
-#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
+#include <dispatch/dispatch.h>
 
 #include <CoreGraphics/CGDirectDisplay.h>
-#include <IOSurface/IOSurfaceAPI.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -111,7 +111,7 @@ CG_EXTERN const CGRect * __nullable CGDisplayStreamUpdateGetRects(CGDisplayStrea
  @function CGDisplayStreamUpdateCreateMerged
  @abstract Merge two CGDisplayUpdateRefs into a new one.
  @discussion In cases where the client wishes to drop certain frame updates, this function may be used to merge two
- CGDisplayUpdateRefs together.  The core bit of functionailty here is generating a new set of refresh/move/dirty
+ CGDisplayUpdateRefs together.  The core bit of functionality here is generating a new set of refresh/move/dirty
  rectangle arrays that properly represent the union of the deltas between the two frames.  Note that the ordering of
  the two refs is important.
   
@@ -270,7 +270,7 @@ CG_EXTERN CGDisplayStreamRef __nullable CGDisplayStreamCreateWithDispatchQueue(C
  @param The CGDisplayStream to be started
  @result kCGErrorSuccess If the display stream was started, otherwise an error.
 */
-CG_EXTERN CGError CGDisplayStreamStart(CGDisplayStreamRef __nullable displayStream)
+CG_EXTERN CGError CGDisplayStreamStart(CGDisplayStreamRef cg_nullable displayStream)
     CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /*!
@@ -282,7 +282,7 @@ CG_EXTERN CGError CGDisplayStreamStart(CGDisplayStreamRef __nullable displayStre
  status of kCGDisplayStreamFrameStatusStopped.  After that point it is safe to release the CGDisplayStream.
  It is safe to call this function from within the handler block, but the previous caveat still applies.
 */
-CG_EXTERN CGError CGDisplayStreamStop(CGDisplayStreamRef __nullable displayStream)
+CG_EXTERN CGError CGDisplayStreamStop(CGDisplayStreamRef cg_nullable displayStream)
     CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /*!
@@ -292,7 +292,7 @@ CG_EXTERN CGError CGDisplayStreamStop(CGDisplayStreamRef __nullable displayStrea
  @result The CFRunLoopSource for this displayStream.  Note: This function will return NULL if the
  display stream was created via  CGDisplayStreamCreateWithDispatchQueue().
 */
-CG_EXTERN CFRunLoopSourceRef __nullable CGDisplayStreamGetRunLoopSource(CGDisplayStreamRef __nullable displayStream)
+CG_EXTERN CFRunLoopSourceRef __nullable CGDisplayStreamGetRunLoopSource(CGDisplayStreamRef cg_nullable displayStream)
     CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 #endif /* __BLOCKS__ */

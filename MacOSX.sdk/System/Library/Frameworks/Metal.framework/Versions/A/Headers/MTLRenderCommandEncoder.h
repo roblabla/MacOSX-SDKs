@@ -9,6 +9,9 @@
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLCommandEncoder.h>
 #import <Metal/MTLCommandBuffer.h>
+#import <Metal/MTLRenderPass.h>
+#import <Metal/MTLFence.h>
+#import <Metal/MTLStageInputOutputDescriptor.h>
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol MTLDevice;
@@ -28,15 +31,10 @@ typedef NS_ENUM(NSUInteger, MTLPrimitiveType) {
     MTLPrimitiveTypeTriangleStrip = 4,
 } NS_ENUM_AVAILABLE(10_11, 8_0);
 
-typedef NS_ENUM(NSUInteger, MTLIndexType) {
-    MTLIndexTypeUInt16 = 0,
-    MTLIndexTypeUInt32 = 1,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
-
 typedef NS_ENUM(NSUInteger, MTLVisibilityResultMode) {
     MTLVisibilityResultModeDisabled = 0,
     MTLVisibilityResultModeBoolean = 1,
-    MTLVisibilityResultModeCounting NS_ENUM_AVAILABLE(10_11, NA) = 2,
+    MTLVisibilityResultModeCounting NS_ENUM_AVAILABLE(10_11, 9_0) = 2,
 } NS_ENUM_AVAILABLE(10_11, 8_0);
 
 typedef struct {
@@ -83,6 +81,36 @@ typedef struct {
     uint32_t baseInstance;
 } MTLDrawIndexedPrimitivesIndirectArguments;
 
+typedef struct {
+    uint32_t patchCount;
+    uint32_t instanceCount;
+    uint32_t patchStart;
+    uint32_t baseInstance;
+} MTLDrawPatchIndirectArguments;
+
+typedef struct {
+    /* NOTE: edgeTessellationFactor and insideTessellationFactor are interpreted as half (16-bit floats) */
+    uint16_t edgeTessellationFactor[4];
+    uint16_t insideTessellationFactor[2];
+} MTLQuadTessellationFactorsHalf;
+
+typedef struct {
+    /* NOTE: edgeTessellationFactor and insideTessellationFactor are interpreted as half (16-bit floats) */
+    uint16_t edgeTessellationFactor[3];
+    uint16_t insideTessellationFactor;
+} MTLTriangleTessellationFactorsHalf;
+
+/*!
+ @abstract Points at which a fence may be waited on or signaled.
+ @constant MTLRenderStageVertex   All vertex work prior to rasterization has completed.
+ @constant MTLRenderStageFragment All rendering work has completed.
+ */
+typedef NS_OPTIONS(NSUInteger, MTLRenderStages)
+{
+    MTLRenderStageVertex   = (1UL << 0),
+    MTLRenderStageFragment = (1UL << 1),
+} NS_ENUM_AVAILABLE_IOS(10_0);
+
 /*!
  @protocol MTLRenderCommandEncoder
  @discussion MTLRenderCommandEncoder is a container for graphics rendering state and the code to translate the state into a command format that the device can execute. 
@@ -120,7 +148,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setVertexBuffers:offsets:withRange:
  @brief Set an array of global buffers for all vertex shaders with the given bind point range.
  */
-- (void)setVertexBuffers:(const id <MTLBuffer> __nullable [__nullable])buffers offsets:(const NSUInteger [__nullable])offsets withRange:(NSRange)range;
+- (void)setVertexBuffers:(const id <MTLBuffer> __nullable [])buffers offsets:(const NSUInteger [])offsets withRange:(NSRange)range;
 
 /*!
  @method setVertexTexture:atIndex:
@@ -158,8 +186,6 @@ NS_AVAILABLE(10_11, 8_0)
  */
 - (void)setVertexSamplerStates:(const id <MTLSamplerState> __nullable [__nullable])samplers lodMinClamps:(const float [__nullable])lodMinClamps lodMaxClamps:(const float [__nullable])lodMaxClamps withRange:(NSRange)range;
 
-/* Vertex Shaders */
-
 /*!
  @method setViewport:
  @brief Set the viewport, which is used to transform vertexes from normalized device coordinates to window coordinates.  Fragments that lie outside of the viewport are clipped, and optionally clamped for fragments outside of znear/zfar.
@@ -182,7 +208,7 @@ NS_AVAILABLE(10_11, 8_0)
 @method setDepthClipMode:
 @brief Controls what is done with fragments outside of the near or far planes.
 */
-- (void)setDepthClipMode:(MTLDepthClipMode)depthClipMode NS_AVAILABLE(10_11, 9_0);
+- (void)setDepthClipMode:(MTLDepthClipMode)depthClipMode NS_AVAILABLE(10_11, NA);
 
 /*!
  @method setDepthBias:slopeScale:clamp:
@@ -226,7 +252,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setFragmentBuffers:offsets:withRange:
  @brief Set an array of global buffers for all fragment shaders with the given bind point range.
  */
-- (void)setFragmentBuffers:(const id <MTLBuffer> __nullable [__nullable])buffers offsets:(const NSUInteger [__nullable])offset withRange:(NSRange)range;
+- (void)setFragmentBuffers:(const id <MTLBuffer> __nullable [])buffers offsets:(const NSUInteger [])offset withRange:(NSRange)range;
 
 /*!
  @method setFragmentTexture:atIndex:
@@ -283,8 +309,7 @@ NS_AVAILABLE(10_11, 8_0)
  */
 - (void)setStencilReferenceValue:(uint32_t)referenceValue;
 
-
-/*! 
+/*!
  @method setStencilFrontReferenceValue:backReferenceValue:
  @brief Set the stencil reference value for the back and front stencil buffers independently.
  */
@@ -297,6 +322,29 @@ NS_AVAILABLE(10_11, 8_0)
  @param offset The offset relative to the occlusion query buffer provided when the command encoder was created.  offset must be a multiple of 8.
  */
 - (void)setVisibilityResultMode:(MTLVisibilityResultMode)mode offset:(NSUInteger)offset;
+
+/*!
+ @method setColorStoreAction:atIndex:
+ @brief If the the store action for a given color attachment was set to MTLStoreActionUnknown when the render command encoder was created,
+ setColorStoreAction:atIndex: must be used to finalize the store action before endEncoding is called.
+ @param storeAction The desired store action for the given color attachment.  This may be set to any value other than MTLStoreActionUnknown.
+ @param colorAttachmentIndex The index of the color attachment
+*/
+- (void)setColorStoreAction:(MTLStoreAction)storeAction atIndex:(NSUInteger)colorAttachmentIndex NS_AVAILABLE(10_12, 10_0);
+
+/*!
+ @method setDepthStoreAction:
+ @brief If the the store action for the depth attachment was set to MTLStoreActionUnknown when the render command encoder was created,
+ setDepthStoreAction: must be used to finalize the store action before endEncoding is called.
+*/
+- (void)setDepthStoreAction:(MTLStoreAction)storeAction NS_AVAILABLE(10_12, 10_0);
+
+/*!
+ @method setStencilStoreAction:
+ @brief If the the store action for the stencil attachment was set to MTLStoreActionUnknown when the render command encoder was created,
+ setStencilStoreAction: must be used to finalize the store action before endEncoding is called.
+*/
+- (void)setStencilStoreAction:(MTLStoreAction)storeAction NS_AVAILABLE(10_12, 10_0);
 
 /* Drawing */
 
@@ -311,7 +359,7 @@ NS_AVAILABLE(10_11, 8_0)
 - (void)drawPrimitives:(MTLPrimitiveType)primitiveType vertexStart:(NSUInteger)vertexStart vertexCount:(NSUInteger)vertexCount instanceCount:(NSUInteger)instanceCount;
 
 /*!
- @method drawPrimitives:vertexStart:vertexCount:instanceCount:
+ @method drawPrimitives:vertexStart:vertexCount:
  @brief Draw primitives without an index list.
  @param primitiveType The type of primitives that elements are assembled into.
  @param vertexStart For each instance, the first index to draw
@@ -332,7 +380,7 @@ NS_AVAILABLE(10_11, 8_0)
 - (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id <MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount;
 
 /*!
- @method drawIndexedPrimitives:indexCount:indexType:indexBuffer:indexBufferOffset:instanceCount:
+ @method drawIndexedPrimitives:indexCount:indexType:indexBuffer:indexBufferOffset:
  @brief Draw primitives with an index list.
  @param primitiveType The type of primitives that elements are assembled into.
  @param indexCount The number of indexes to read from the index buffer for each instance.
@@ -343,7 +391,7 @@ NS_AVAILABLE(10_11, 8_0)
 - (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id <MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset;
 
 /*!
- @method drawPrimitives:vertexStart:vertexCount:instanceCount:
+ @method drawPrimitives:vertexStart:vertexCount:instanceCount:baseInstance:
  @brief Draw primitives without an index list.
  @param primitiveType The type of primitives that elements are assembled into.
  @param vertexStart For each instance, the first index to draw
@@ -351,10 +399,10 @@ NS_AVAILABLE(10_11, 8_0)
  @param instanceCount The number of instances drawn.
  @param baseInstance Offset for instance_id.
  */
-- (void)drawPrimitives:(MTLPrimitiveType)primitiveType vertexStart:(NSUInteger)vertexStart vertexCount:(NSUInteger)vertexCount instanceCount:(NSUInteger)instanceCount baseInstance:(NSUInteger)baseInstance NS_AVAILABLE(10_11, NA);
+- (void)drawPrimitives:(MTLPrimitiveType)primitiveType vertexStart:(NSUInteger)vertexStart vertexCount:(NSUInteger)vertexCount instanceCount:(NSUInteger)instanceCount baseInstance:(NSUInteger)baseInstance NS_AVAILABLE(10_11, 9_0);
 
 /*!
- @method drawIndexedPrimitives:indexCount:indexType:indexBuffer:indexBufferOffset:instanceCount:
+ @method drawIndexedPrimitives:indexCount:indexType:indexBuffer:indexBufferOffset:instanceCount:baseVertex:baseInstance:
  @brief Draw primitives with an index list.
  @param primitiveType The type of primitives that elements are assembled into.
  @param indexCount The number of indexes to read from the index buffer for each instance.
@@ -365,7 +413,7 @@ NS_AVAILABLE(10_11, 8_0)
  @param baseVertex Offset for vertex_id. NOTE: this can be negative
  @param baseInstance Offset for instance_id.
  */
-- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id <MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance NS_AVAILABLE(10_11, NA);
+- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id <MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance NS_AVAILABLE(10_11, 9_0);
 
 /*!
  @method drawPrimitives:indirectBuffer:indirectBufferOffset:
@@ -374,7 +422,7 @@ NS_AVAILABLE(10_11, 8_0)
  @param indirectBuffer A buffer object that the device will read drawPrimitives arguments from, see MTLDrawPrimitivesIndirectArguments.
  @param indirectBufferOffset Byte offset within @a indirectBuffer to start reading indexes from.  @a indirectBufferOffset must be a multiple of 4.
  */
-- (void)drawPrimitives:(MTLPrimitiveType)primitiveType indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset NS_AVAILABLE(10_11, NA);
+- (void)drawPrimitives:(MTLPrimitiveType)primitiveType indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset NS_AVAILABLE(10_11, 9_0);
 
 /*!
  @method drawIndexedPrimitives:indexType:indexBuffer:indexBufferOffset:indirectBuffer:indirectBufferOffset:
@@ -386,13 +434,41 @@ NS_AVAILABLE(10_11, 8_0)
  @param indirectBuffer A buffer object that the device will read drawIndexedPrimitives arguments from, see MTLDrawIndexedPrimitivesIndirectArguments.
  @param indirectBufferOffset Byte offset within @a indirectBuffer to start reading indexes from.  @a indirectBufferOffset must be a multiple of 4.
  */
-- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexType:(MTLIndexType)indexType indexBuffer:(id <MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset NS_AVAILABLE(10_11, NA);
+- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexType:(MTLIndexType)indexType indexBuffer:(id <MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset NS_AVAILABLE(10_11, 9_0);
 
 /*!
  @method textureBarrier:
  @brief Ensure that following fragment shaders can read textures written by previous draw calls (in particular the framebuffer)
  */
 - (void)textureBarrier NS_AVAILABLE_MAC(10_11);
+
+/*!
+ @method updateFence:afterStages:
+ @abstract Update the event to capture all GPU work so far enqueued by this encoder for the given stages.
+ @discussion Unlike <st>updateFence:</st>, this method will update the event when the given stage(s) complete, allowing for commands to overlap in execution.
+ On iOS, render command encoder fence updates are always delayed until the end of the encoder.
+ */
+- (void)updateFence:(id <MTLFence>)fence afterStages:(MTLRenderStages)stages NS_AVAILABLE_IOS(10_0);
+
+/*!
+ @method waitForFence:beforeStages:
+ @abstract Prevent further GPU work until the event is reached for the given stages.
+ @discussion Unlike <st>waitForFence:</st>, this method will only block commands assoicated with the given stage(s), allowing for commands to overlap in execution.
+ On iOS, render command encoder fence waits always occur the beginning of the encoder.
+ */
+- (void)waitForFence:(id <MTLFence>)fence beforeStages:(MTLRenderStages)stages NS_AVAILABLE_IOS(10_0);
+
+-(void)setTessellationFactorBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset instanceStride:(NSUInteger)instanceStride NS_AVAILABLE(10_12, 10_0);
+
+-(void)setTessellationFactorScale:(float)scale NS_AVAILABLE(10_12, 10_0);
+
+-(void)drawPatches:(NSUInteger)numberOfPatchControlPoints patchStart:(NSUInteger)patchStart patchCount:(NSUInteger)patchCount patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset instanceCount:(NSUInteger)instanceCount baseInstance:(NSUInteger)baseInstance NS_AVAILABLE(10_12, 10_0);
+
+-(void)drawPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset NS_AVAILABLE(10_12, NA);
+
+-(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchStart:(NSUInteger)patchStart patchCount:(NSUInteger)patchCount patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset instanceCount:(NSUInteger)instanceCount baseInstance:(NSUInteger)baseInstance NS_AVAILABLE(10_12, 10_0);
+
+-(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset NS_AVAILABLE(10_12, NA);
 
 @end
 NS_ASSUME_NONNULL_END

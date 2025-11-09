@@ -1,7 +1,7 @@
 /*
     NSTextFieldCell.h
     Application Kit
-    Copyright (c) 1994-2015, Apple Inc.
+    Copyright (c) 1994-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -39,9 +39,15 @@ typedef NS_ENUM(NSUInteger, NSTextFieldBezelStyle) {
         unsigned int thcHighlighted:1;
         unsigned int shouldNotClipToBounds:1;
         unsigned int allowsDefaultTightening:1;
-        unsigned int reservedTextFieldCell:9;
+        unsigned int enableCP:1;
+        unsigned int automaticCompletionDisabled:1;
+        unsigned int reservedTextFieldCell:7;
     } _tfFlags;
 }
+
+- (instancetype)initTextCell:(NSString *)string NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initImageCell:(nullable NSImage *)image NS_UNAVAILABLE; // Use the designated initializer initTextCell:
 
 @property (nullable, copy) NSColor *backgroundColor;
 @property BOOL drawsBackground;

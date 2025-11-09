@@ -1,7 +1,7 @@
 /*
     NSSavePanel.h
     Application Kit
-    Copyright (c) 1994-2015, Apple Inc.
+    Copyright (c) 1994-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -89,7 +89,7 @@ typedef struct __SPFlags {
     NSSavePanelAuxiliary *_spAuxiliaryStorage;
     
 @private
-    char _unused:1;
+    char _unused:1 __unused;
 #if !__LP64__
     char _reserved[4];
 #endif

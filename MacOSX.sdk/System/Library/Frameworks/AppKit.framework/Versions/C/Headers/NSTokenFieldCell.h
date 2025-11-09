@@ -1,7 +1,7 @@
 /*
 	NSTokenFieldCell.h
 	Application Kit
-	Copyright (c) 2004-2015, Apple Inc.
+	Copyright (c) 2004-2016, Apple Inc.
 	All rights reserved.
 
 */
@@ -39,7 +39,7 @@ static const NSTokenStyle NSRoundedTokenStyle = NSTokenStyleRounded;
     id _lastCell;
     NSRect _lastCellFrame;
     BOOL *_autoCompleteCancel;
-    id _reserved[6];
+    id _reserved[6] __unused;
     struct {
         unsigned int _style:4;
 

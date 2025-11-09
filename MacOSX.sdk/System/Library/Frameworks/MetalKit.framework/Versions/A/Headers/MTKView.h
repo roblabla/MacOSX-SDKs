@@ -21,7 +21,7 @@
  @abstract View for rendering metal content
  */
 NS_CLASS_AVAILABLE(10_11, 9_0)
-@interface MTKView : NSView <NSCoding>
+@interface MTKView : NSView <NSCoding,CALayerDelegate>
 
 /*!
  @method initWithFrame:device
@@ -74,7 +74,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 
 /*!
  @property colorPixelFormat
- @abstract The pixelFormat for the drawable's texture
+ @abstract The pixelFormat for the drawable's texture.
  */
 @property (nonatomic) MTLPixelFormat colorPixelFormat;
 
@@ -174,6 +174,13 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @discussion If true, the delegate will receive drawInMTKView: messages or the subclass will receive drawRect: messages at a rate of preferredFramesPerSecond based on an internal timer. The default value is false.
  */
 @property (nonatomic, getter=isPaused) BOOL paused;
+
+/*!
+ @property colorspace
+ @abstract The colorspace of the rendered frames. '
+ @discussion If nil, no colormatching occurs.  If non-nil, the rendered content will be colormatched to the colorspace of the context containing this layer (typically the display's colorspace).  This property aliases the olorspace property or the view's CAMetalLayer
+ */
+@property (nonatomic, nullable) CGColorSpaceRef colorspace NS_AVAILABLE_MAC(10_12);
 
 /*!
  @method draw

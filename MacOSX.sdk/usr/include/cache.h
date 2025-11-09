@@ -117,7 +117,7 @@ typedef size_t cache_cost_t;
  * 
  *@result Returns 0 for success, non-zero for failure.
  */
-CACHE_PUBLIC_API int cache_create(const char *name, cache_attributes_t *attrs, cache_t **cache_out);
+CACHE_PUBLIC_API int cache_create(const char *name, const cache_attributes_t *attrs, cache_t **cache_out);
 
 /*!
  * @function cache_set_and_retain

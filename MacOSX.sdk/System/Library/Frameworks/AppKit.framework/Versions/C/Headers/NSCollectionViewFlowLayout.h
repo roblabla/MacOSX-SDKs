@@ -1,7 +1,7 @@
 /*
     NSCollectionViewFlowLayout.h
     Application Kit
-    Copyright (c) 2015, Apple Inc.
+    Copyright (c) 2015-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -63,6 +63,10 @@ NS_CLASS_AVAILABLE_MAC(10_11)
         unsigned int layoutDataIsValid:1;
         unsigned int delegateInfoIsValid:1;
         unsigned int roundsToScreenScale:1;
+        unsigned int sectionHeadersFloat:1;
+        unsigned int sectionFootersFloat:1;
+        unsigned int isSingleColumnOrRow:1;
+        unsigned int collapsesSectionsToFirstItem:1;
     } _gridLayoutFlags;
     
     CGFloat _interitemSpacing;
@@ -102,6 +106,26 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @property NSSize headerReferenceSize;
 @property NSSize footerReferenceSize;
 @property NSEdgeInsets sectionInset;
+
+/* Set these properties to YES to get headers that pin to the top of the visible area and footers that pin to the bottom while scrolling.  Archived with the layout's other persistent properties.  Enabling this feature may affect the parenting of header and footer views.
+*/
+@property BOOL sectionHeadersPinToVisibleBounds NS_AVAILABLE_MAC(10_12);
+@property BOOL sectionFootersPinToVisibleBounds NS_AVAILABLE_MAC(10_12);
+
+
+#pragma mark *** Section Collapse ***
+
+/* Returns YES if the specified section is currently collapsed; NO if not, or if there is no such section.  Defaults to NO.
+*/
+- (BOOL)sectionAtIndexIsCollapsed:(NSUInteger)sectionIndex NS_AVAILABLE_MAC(10_12);
+
+/* Collapses the specified section to a single row, if it is not already collapsed.
+*/
+- (void)collapseSectionAtIndex:(NSUInteger)sectionIndex NS_AVAILABLE_MAC(10_12);
+
+/* Un-collapses the specified section, if it is currently collapsed.
+*/
+- (void)expandSectionAtIndex:(NSUInteger)sectionIndex NS_AVAILABLE_MAC(10_12);
 
 @end
 

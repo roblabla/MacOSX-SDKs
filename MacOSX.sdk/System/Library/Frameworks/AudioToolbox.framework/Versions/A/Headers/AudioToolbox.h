@@ -5,6 +5,7 @@
 	@abstract	Umbrella header for AudioToolbox framework.
 */
 
+
 #ifndef AudioToolbox_AudioToolbox_h
 #define AudioToolbox_AudioToolbox_h
 
@@ -13,36 +14,85 @@
 #include <Availability.h>
 #include <TargetConditionals.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
+	#include <AudioToolbox/AUComponent.h>
+	#include <AudioToolbox/AUGraph.h>
+	#include <AudioToolbox/AudioComponent.h>
+	#include <AudioToolbox/AudioConverter.h>
 	#include <AudioToolbox/AudioFile.h>
 	#include <AudioToolbox/AudioFileStream.h>
 	#include <AudioToolbox/AudioFormat.h>
+	#include <AudioToolbox/AudioOutputUnit.h>
 	#include <AudioToolbox/AudioQueue.h>
 	#include <AudioToolbox/AudioServices.h>
-	#include <AudioToolbox/AUGraph.h>
-	#include <AudioToolbox/AudioConverter.h>
-	#include <AudioToolbox/ExtendedAudioFile.h>
-	#include <AudioToolbox/MusicPlayer.h>
+	#include <AudioToolbox/AudioUnitParameters.h>
+	#include <AudioToolbox/AudioUnitProperties.h>
 	#include <AudioToolbox/CAFFile.h>
+	#include <AudioToolbox/ExtendedAudioFile.h>
+	#include <AudioToolbox/MusicDevice.h>
+	#include <AudioToolbox/MusicPlayer.h>
+
+		// OS X only
+		#include <AudioToolbox/AudioCodec.h>
 		#include <AudioToolbox/AudioFileComponent.h>
 		#include <AudioToolbox/AudioUnitUtilities.h>
 		#include <AudioToolbox/AUMIDIController.h>
 		#include <AudioToolbox/CoreAudioClock.h>
+
+	#ifdef __OBJC2__
+		// iOS (all architectures), OS X 64-bit only
+		#import <AudioToolbox/AUAudioUnit.h>
+		#import <AudioToolbox/AUAudioUnitImplementation.h>
+		#import <AudioToolbox/AUParameters.h>
+	#endif
+
 #else
+	#include <AUComponent.h>
+	#include <AUGraph.h>
+	#include <AudioComponent.h>
 	#include <AudioConverter.h>
 	#include <AudioFile.h>
 	#include <AudioFileComponent.h>
 	#include <AudioFileStream.h>
 	#include <AudioFormat.h>
+	#include <AudioOutputUnit.h>
 	#include <AudioQueue.h>
-	#include <AudioUnitUtilities.h>
-	#include <AUGraph.h>
-	#include <AUMIDIController.h>
-	#include <CAFFile.h>
-	#include <CoreAudioClock.h>
-	#include <ExtendedAudioFile.h>
-	#include <MusicPlayer.h>
 	#include <AudioServices.h>
+	#include <AudioUnitParameters.h>
+	#include <AudioUnitProperties.h>
+	#include <CAFFile.h>
+	#include <ExtendedAudioFile.h>
+	#include <MusicDevice.h>
+	#include <MusicPlayer.h>
+
+	#include <AudioCodec.h>
+	#include <AudioUnitUtilities.h>
+	#include <AUMIDIController.h>
+	#include <CoreAudioClock.h>
 #endif
+
+/*!	@mainpage
+
+	@section section_intro			Introduction
+
+	The AudioUnit framework contains a set of related API's dealing with:
+	
+	- Audio components, providing various types of plug-in functionality.
+	- Audio Units, audio processing plug-ins.
+	- Audio codecs, plug-ins which decode and encode compressed audio.
+	
+	@section section_component		Audio Components
+	
+	See AudioComponent.h for API's to find and use audio components, as well as information
+	on how audio components are packaged and built.
+	
+	In addition, `<AVFoundation/AVAudioUnitComponent.h>` provides a higher-level interface for
+	finding audio unit components.
+	
+	See @ref AUExtensionPackaging and AUAudioUnitImplementation.h for information on creating
+	version 3 audio units.
+	
+	@section section_audiounit		Audio Units
+*/
 
 #include <stdio.h>
 

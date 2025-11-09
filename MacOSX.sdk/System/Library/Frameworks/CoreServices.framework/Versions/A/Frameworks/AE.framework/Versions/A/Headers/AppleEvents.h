@@ -46,7 +46,7 @@ extern "C" {
 
 #pragma pack(push, 2)
 
-enum {
+CF_ENUM(AEKeyword) {
                                         /* Keywords for Apple event parameters */
   keyDirectObject               = '----',
   keyErrorNumber                = 'errn',
@@ -61,12 +61,12 @@ enum {
 };
 
 /* Event Class */
-enum {
+CF_ENUM(DescType) {
   kCoreEventClass               = 'aevt'
 };
 
 /* Event ID's */
-enum {
+CF_ENUM(AEEventID) {
   kAEOpenApplication            = 'oapp',
   kAEOpenDocuments              = 'odoc',
   kAEPrintDocuments             = 'pdoc',
@@ -78,7 +78,7 @@ enum {
 };
 
 /* Constants for recording */
-enum {
+CF_ENUM(AEEventID) {
   kAEStartRecording             = 'reca', /* available only in vers 1.0.1 and greater */
   kAEStopRecording              = 'recc', /* available only in vers 1.0.1 and greater */
   kAENotifyStartRecording       = 'rec1', /* available only in vers 1.0.1 and greater */

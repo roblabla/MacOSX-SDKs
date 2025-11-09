@@ -87,7 +87,6 @@
 #define	M_IFADDR	9	/* interface address (IOFireWireIP)*/
 #define	M_LOCKF		40	/* Byte-range locking structures (msdos) */ 
 #define	M_TEMP		80	/* misc temporary data buffers */
-#define	M_HFSMNT	75	/* HFS mount structure (afpfs) */
 #define M_KAUTH		100	/* kauth subsystem (smb) */
 #define	M_SONAME	11	/* socket name (smb) */
 #define	M_PCB		4	/* protocol control block (smb) */

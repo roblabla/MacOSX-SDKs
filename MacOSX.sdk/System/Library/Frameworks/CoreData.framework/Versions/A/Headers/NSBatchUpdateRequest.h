@@ -1,7 +1,7 @@
 /*
  NSBatchUpdateRequest.h
  Core Data
- Copyright (c) 2004-2015, Apple Inc.
+ Copyright (c) 2004-2016, Apple Inc.
  All rights reserved.
  */
 
@@ -20,8 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 //  WARNING:
 //  It is up to the developer creating the request to ensure that changes made by the request to
 //  the underlying store do not violate any validation rules specified in the model.
-NS_CLASS_AVAILABLE(10_10,8_0)
+API_AVAILABLE(macosx(10.10),ios(8.0))
 @interface NSBatchUpdateRequest : NSPersistentStoreRequest {
+#if (!__OBJC2__)
     @private
     id _entity;
     NSPredicate *_predicate;
@@ -32,12 +33,13 @@ NS_CLASS_AVAILABLE(10_10,8_0)
         unsigned int _RESERVED:28;
     } _flags;
     NSDictionary *_columnsToUpdate;
+#endif
 }
 
 + (instancetype)batchUpdateRequestWithEntityName:(NSString*)entityName;
 
-- (instancetype)initWithEntityName:(NSString *)entityName;
-- (instancetype)initWithEntity:(NSEntityDescription *)entity;
+- (instancetype)initWithEntityName:(NSString *)entityName NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithEntity:(NSEntityDescription *)entity NS_DESIGNATED_INITIALIZER;
 
 @property (copy, readonly) NSString* entityName;
 @property (strong, readonly) NSEntityDescription *entity;

@@ -1,7 +1,7 @@
 /*
         NSProgressIndicator.h
         Application Kit
-        Copyright (c) 1997-2015, Apple Inc.
+        Copyright (c) 1997-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -61,7 +61,7 @@ typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
     CGFloat     _drawingWidth;
 
     id		_roundColor;
-    id          _reserved;
+    id          _reserved __unused;
 
     volatile struct __progressIndicatorFlags {
         unsigned int isSpinning:1;
@@ -83,7 +83,7 @@ typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
     } _progressIndicatorFlags;
 
     /* For future use */
-    id _NSProgressIndicatorReserved1;
+    id _NSProgressIndicatorReserved1 __unused;
 }
 
 	/* Options */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -152,10 +152,7 @@ public:
     @discussion systemPowerEventOccurred is a richer alternative to receivePowerNotification()
         Only Apple-owned kexts should have reason to call systemPowerEventOccurred.
     @param event An OSSymbol describing the type of power event.
-    @param value A 32-bit integer value associated with the event.
-    @param shouldUpdate indicates whether the root domain should send a notification
-        to interested parties. Pass false if you're calling systemPowerEventOccurred
-        several times in succession; and pass true only on the last invocatino.
+    @param intValue A 32-bit integer value associated with the event.
     @result kIOReturnSuccess on success */
 
     IOReturn            systemPowerEventOccurred(
@@ -260,7 +257,7 @@ public:
 
 /*! @function createPMAssertion
     @abstract Creates an assertion to influence system power behavior.
-    @param whichAssertionBits A bitfield specify the assertion that the caller requests.
+    @param whichAssertionsBits A bitfield specify the assertion that the caller requests.
     @param assertionLevel An integer detailing the initial assertion level, kIOPMDriverAssertionLevelOn
         or kIOPMDriverAssertionLevelOff.
     @param ownerService A pointer to the caller's IOService class, for tracking.

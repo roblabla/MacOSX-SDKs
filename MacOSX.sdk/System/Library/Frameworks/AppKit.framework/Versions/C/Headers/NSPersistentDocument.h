@@ -1,7 +1,7 @@
 /*
 	NSPersistentDocument.h
 	Application Kit
-	Copyright (c) 2004-2015, Apple Inc.
+	Copyright (c) 2004-2016, Apple Inc.
 	All rights reserved.
  */
 
@@ -20,8 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
     id _store;
     uintptr_t _pDocFlags;
     id _relatedRequestURLs;
-    void *_reserved3;
-    void *_reserved4;
+    void *_reserved3 __unused;
+    void *_reserved4 __unused;
 }
 
 // Persistent documents always have a managed context (and a persistent store coordinator through that context).

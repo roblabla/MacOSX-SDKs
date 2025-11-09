@@ -11,3 +11,5 @@
 #import <Photos/PHContentEditingInput.h>
 #import <Photos/PHContentEditingOutput.h>
 #import <Photos/PHAdjustmentData.h>
+#import <Photos/PHLivePhoto.h>
+#import <Photos/PHLivePhotoEditingContext.h>

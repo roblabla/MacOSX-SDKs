@@ -1,7 +1,7 @@
 /*
 	NSControl.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -58,9 +58,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 - (void)sizeToFit;
-- (NSInteger)sendActionOn:(NSInteger)mask;
 
-- (BOOL)sendAction:(SEL)theAction to:(nullable id)theTarget;
+#if __LP64__
+- (NSInteger)sendActionOn:(NSEventMask)mask;
+#else
+- (NSInteger)sendActionOn:(NSInteger)mask;
+#endif
+
+- (BOOL)sendAction:(nullable SEL)action to:(nullable id)target;
 - (void)takeIntValueFrom:(nullable id)sender;
 - (void)takeFloatValueFrom:(nullable id)sender;
 - (void)takeDoubleValueFrom:(nullable id)sender;
@@ -68,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)takeObjectValueFrom:(nullable id)sender;
 - (void)takeIntegerValueFrom:(nullable id)sender NS_AVAILABLE_MAC(10_5);
 
-- (void)mouseDown:(NSEvent *)theEvent;
+- (void)mouseDown:(NSEvent *)event;
 
 @end
 
@@ -111,8 +116,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)abortEditing;
 - (void)validateEditing;
 
-- (void)editWithFrame:(NSRect)aRect editor:(NSText *)textObj delegate:(nullable id)anObject event:(NSEvent *)theEvent NS_AVAILABLE_MAC(10_10);
-- (void)selectWithFrame:(NSRect)aRect editor:(NSText *)textObj delegate:(nullable id)anObject start:(NSInteger)selStart length:(NSInteger)selLength NS_AVAILABLE_MAC(10_10);
+- (void)editWithFrame:(NSRect)rect editor:(NSText *)textObj delegate:(nullable id)delegate event:(NSEvent *)event NS_AVAILABLE_MAC(10_10);
+- (void)selectWithFrame:(NSRect)rect editor:(NSText *)textObj delegate:(nullable id)delegate start:(NSInteger)selStart length:(NSInteger)selLength NS_AVAILABLE_MAC(10_10);
 - (void)endEditing:(NSText *)textObj NS_AVAILABLE_MAC(10_10);
 @end
 
@@ -132,16 +137,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor;
 - (BOOL)control:(NSControl *)control didFailToFormatString:(NSString *)string errorDescription:(nullable NSString *)error;
 - (void)control:(NSControl *)control didFailToValidatePartialString:(NSString *)string errorDescription:(nullable NSString *)error;
-- (BOOL)control:(NSControl *)control isValidObject:(id)obj;
+- (BOOL)control:(NSControl *)control isValidObject:(nullable id)obj;
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector;
 - (NSArray<NSString *> *)control:(NSControl *)control textView:(NSTextView *)textView completions:(NSArray<NSString *> *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(NSInteger *)index;
 @end
 
                                                                     // userInfo keys:
-APPKIT_EXTERN NSString * NSControlTextDidBeginEditingNotification;	//	@"NSFieldEditor"
-APPKIT_EXTERN NSString * NSControlTextDidEndEditingNotification;	//	@"NSFieldEditor"
-APPKIT_EXTERN NSString * NSControlTextDidChangeNotification;		//	@"NSFieldEditor"
+APPKIT_EXTERN NSNotificationName NSControlTextDidBeginEditingNotification;	//	@"NSFieldEditor"
+APPKIT_EXTERN NSNotificationName NSControlTextDidEndEditingNotification;	//	@"NSFieldEditor"
+APPKIT_EXTERN NSNotificationName NSControlTextDidChangeNotification;		//	@"NSFieldEditor"
 
 
 @interface NSControl (NSDeprecated)
@@ -160,11 +165,11 @@ APPKIT_EXTERN NSString * NSControlTextDidChangeNotification;		//	@"NSFieldEditor
 - (void)setNeedsDisplay;    // Use setNeedsDisplay:YES instead.
 - (void)calcSize;
 
-- (void)updateCell:(NSCell *)aCell;
-- (void)updateCellInside:(NSCell *)aCell;
-- (void)drawCellInside:(NSCell *)aCell;
-- (void)drawCell:(NSCell *)aCell;
-- (void)selectCell:(NSCell *)aCell;
+- (void)updateCell:(NSCell *)cell;
+- (void)updateCellInside:(NSCell *)cell;
+- (void)drawCellInside:(NSCell *)cell;
+- (void)drawCell:(NSCell *)cell;
+- (void)selectCell:(NSCell *)cell;
 
 @end
 

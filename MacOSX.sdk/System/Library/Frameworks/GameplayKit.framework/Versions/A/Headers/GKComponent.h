@@ -1,12 +1,11 @@
 //
 //  GKComponent.h
-//  GameLogic
+//  GameplayKit
 //
 //  Copyright (c) 2014 Apple. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "GameplayKitBase.h"
+#import <GameplayKit/GameplayKitBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @see GKComponentSystem
  */
-GK_BASE_AVAILABILITY @interface GKComponent : NSObject <NSCopying>
+GK_BASE_AVAILABILITY @interface GKComponent : NSObject <NSCopying, NSCoding>
 
 /**
  * The entity that this component belongs to. Defaults to nil until the component is added to an entity.
@@ -33,6 +32,16 @@ GK_BASE_AVAILABILITY @interface GKComponent : NSObject <NSCopying>
  * perform its time-based logic in this method.
  */
 - (void)updateWithDeltaTime:(NSTimeInterval)seconds;
+
+/**
+ * Override this to perform game logic when this component is added to an entity
+ */
+-(void)didAddToEntity;
+
+/**
+ * Override this to perform game logic before this entity is removed from it's entity
+ */
+-(void)willRemoveFromEntity;
 
 @end
 
@@ -109,6 +118,11 @@ GK_BASE_AVAILABILITY @interface GKComponentSystem<ComponentType : GKComponent *>
  * based logic with a single message.
  */
 - (void)updateWithDeltaTime:(NSTimeInterval)seconds;
+
+/**
+ * Returns the class of the specified generic index
+ */
+- (nonnull Class)classForGenericArgumentAtIndex:(NSUInteger)index;
 
 @end
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -73,14 +73,27 @@ class OSString;
  */
 class OSData : public OSObject
 {
-    OSDeclareDefaultStructors(OSData)
     friend class OSSerialize;
+
+    OSDeclareDefaultStructors(OSData)
+
+#if APPLE_KEXT_ALIGN_CONTAINERS
+
+protected:
+    unsigned int   length;
+    unsigned int   capacity;
+    unsigned int   capacityIncrement;
+    void         * data;
+
+#else /* APPLE_KEXT_ALIGN_CONTAINERS */
 
 protected:
     void         * data;
     unsigned int   length;
     unsigned int   capacity;
     unsigned int   capacityIncrement;
+
+#endif /* APPLE_KEXT_ALIGN_CONTAINERS */
 
 private:
     typedef void (*DeallocFunction)(void * ptr, unsigned int length);
@@ -152,7 +165,7 @@ public:
     * @result
     * A instance of OSData that shares the provided byte array,
     * with a reference count of 1;
-    * <code>NULL</coe> on failure.
+    * <code>NULL</code> on failure.
     *
     * @discussion
     * An OSData object created with this function
@@ -721,6 +734,7 @@ public:
 private:
     virtual void setDeallocFunction(DeallocFunction func);
     OSMetaClassDeclareReservedUsed(OSData, 0);
+    bool isSerializable(void);
 
 private:
     OSMetaClassDeclareReservedUnused(OSData, 1);

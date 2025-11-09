@@ -2,7 +2,7 @@
 //  GKFriendRequestComposeViewController.h
 //  Game Center
 //
-//  Copyright 2010-2015 Apple Inc. All rights reserved.
+//  Copyright 2010-2016 Apple Inc. All rights reserved.
 //
 
 #if TARGET_OS_IPHONE
@@ -18,13 +18,13 @@
 // Standard view controller for sending friend requests to other players. Present modally from the top view controller.
 #if TARGET_OS_IPHONE
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_8, 4_2) 
+NS_CLASS_DEPRECATED(10_8, 10_12, 4_2, 10_0) 
 @interface GKFriendRequestComposeViewController : UINavigationController
 @end
 #else
 #import <GameKit/GKDialogController.h>
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_8, 4_2)
+NS_CLASS_DEPRECATED(10_8, 10_12, 4_2, 10_0)
 @interface GKFriendRequestComposeViewController : NSViewController <GKViewController> {
     id _remoteViewController;
     id<GKFriendRequestComposeViewControllerDelegate> _composeViewDelegateWeak;
@@ -54,6 +54,6 @@ NS_CLASS_AVAILABLE(10_8, 4_2)
 // Optional delegate
 @protocol GKFriendRequestComposeViewControllerDelegate
 // The compose view has finished
-- (void)friendRequestComposeViewControllerDidFinish:(GKFriendRequestComposeViewController *)viewController NS_AVAILABLE(10_8, 4_2) ;
+- (void)friendRequestComposeViewControllerDidFinish:(GKFriendRequestComposeViewController *)viewController NS_DEPRECATED(10_8, 10_12, 4_2, 10_0) ;
 @end
 NS_ASSUME_NONNULL_END

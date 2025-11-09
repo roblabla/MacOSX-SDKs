@@ -94,6 +94,14 @@ AVF_EXPORT NSString *const AVMediaCharacteristicLegible     NS_AVAILABLE(10_7, 4
 AVF_EXPORT NSString *const AVMediaCharacteristicFrameBased  NS_AVAILABLE(10_7, 4_0);
 
 /*!
+ @constant AVMediaCharacteristicUsesWideGamutColorSpace
+ @abstract A media characteristic that indicates that a track uses a wide gamut color space and therefore may make use of colors that cannot be accurately represented otherwise.
+ @discussion
+ A wide color space such as AVVideo*_P3_D65 contains additional dynamic range that may benefit from special treatment when compositing. Care should be taken to avoid clamping. Non-wide spaces include AVVideo*_ITU_R_709_2 and AVVideo*_SMPTE_C.
+*/
+AVF_EXPORT NSString *const AVMediaCharacteristicUsesWideGamutColorSpace NS_AVAILABLE(10_12, 10_0);
+
+/*!
  @constant AVMediaCharacteristicIsMainProgramContent
  @abstract A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as intrinsic to the presentation of the asset.
  @discussion

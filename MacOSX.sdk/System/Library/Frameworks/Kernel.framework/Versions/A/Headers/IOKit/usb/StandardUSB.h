@@ -1,17 +1,41 @@
-//
-//  StandardUSB.h
-//  IOUSBHostFamily
-//
-//  Created by Dan Wilson on 12/11/13.
-//
-//
+/*
+ * Copyright (c) 1998-2016 Apple Inc. All rights reserved.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
+ *
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
+ *
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ *
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
+ */
+
+/*! @header     StandardUSB.h
+    @brief      StandardUSB defines structures and constants to reflect the USB specification
+ */
 
 #ifndef IOUSBHostFamily_StandardUSB_h
 #define IOUSBHostFamily_StandardUSB_h
 
 #include <IOKit/IOTypes.h>
-#include <libkern/OSByteOrder.h>
 #include <IOKit/IOReturn.h>
+#include <libkern/OSByteOrder.h>
 
 #pragma mark Platform endianness and bitmask macros
 
@@ -38,8 +62,11 @@ namespace StandardUSB
 #endif // __cplusplus
     
 #pragma mark Descriptor definitions
-    // USB 2.0 Table 9-5
-    // USB 3.0 Table 9-6
+    /*!
+     * @enum        tDescriptorType
+     * @namespace   StandardUSB
+     * @brief       Descriptor types defined by USB 2.0 Table 9-5 and USB 3.0 Table 9-6
+     */
     enum tDescriptorType
     {
         kDescriptorTypeDevice = 1,
@@ -57,11 +84,17 @@ namespace StandardUSB
         kDescriptorTypeDeviceCapability = 16,
         kDescriptorTypeHub = 41,
         kDescriptorTypeSuperSpeedHub = 42,
-        kDescriptorTypeSuperSpeedUSBEndpointCompanion = 48
+        kDescriptorTypeSuperSpeedUSBEndpointCompanion = 48,
+        kDescriptorTypeSuperSpeedPlusIsochronousEndpointCompanion = 49
     };
     
     typedef enum tDescriptorType tDescriptorType;
-    
+
+    /*!
+     * @enum        tDescriptorSize
+     * @namespace   StandardUSB
+     * @brief       Size in bytes for descriptor structures
+     */
     enum tDescriptorSize
     {
         kDescriptorSize = 2,
@@ -69,6 +102,8 @@ namespace StandardUSB
         kDescriptorSizeConfiguration = 9,
         kDescriptorSizeInterface = 9,
         kDescriptorSizeEndpoint = 7,
+        kDescriptorSizeStringMinimum = kDescriptorSize,
+        kDescriptorSizeStringMaximum = 255,
         kDescriptorSizeDeviceQualifier = 10,
         kDescriptorSizeInterfaceAssociation = 8,
         kDescriptorSizeBOS = 5,
@@ -80,12 +115,19 @@ namespace StandardUSB
         kDescriptorSizeHubMaximum = 21,
         kDescriptorSizeSuperSpeedHub = 12,
         kDescriptorSizeSuperSpeedUSBEndpointCompanion = 6,
-        kDescriptorSizeLargestStandard = kDescriptorSizeHubMaximum
+        kDescriptorSizeSuperSpeedPlusIsochronousEndpointCompanion = 8,
+        kDescriptorSizeBillboardDeviceMinimum = 44,
+        kDescriptorSizeBillboardDeviceMaximum = 256
     };
     
     typedef enum tDescriptorSize tDescriptorSize;
-    
-    // USB 2.0 9.5: Descriptors
+
+    /*!
+     * @struct      Descriptor
+     * @namespace   StandardUSB
+     * @brief       Base descriptor defined by USB 2.0 9.5
+     * @discussion  StandardUSB.h declares structs to represent a variety of USB standard descriptors.  Each of thes structs is derived from the Descriptor base struct, and can therefore be passed to methods accepting a Descriptor pointer without explicit casting.  For the C language, each struct is defined independently to include the bLength and bDescriptorType fields expected for all USB descriptors.
+     */
     struct Descriptor
     {
         uint8_t bLength;
@@ -275,13 +317,25 @@ namespace StandardUSB
     typedef struct StringDescriptor StringDescriptor;
     
     
-    // USB 3.0 Table 9-13
     enum tDeviceCapabilityType
     {
-        kDeviceCapabilityTypeWireless       = 1,
-        kDeviceCapabilityTypeUSB20Extension = 2,
-        kDeviceCapabilityTypeSuperSpeed     = 3,
-        kDeviceCapabilityTypeContainerID    = 4
+        // USB 3.0 Table 9-13
+        kDeviceCapabilityTypeWireless               = 1,
+        kDeviceCapabilityTypeUSB20Extension         = 2,
+        kDeviceCapabilityTypeSuperSpeed             = 3,
+        kDeviceCapabilityTypeContainerID            = 4,
+        
+        // USB 3.1 Table 9-14
+        kDeviceCapabilityTypePlatform               = 5,
+        kDeviceCapabilityTypePowerDelivery          = 6,
+        kDeviceCapabilityTypeBatteryInfo            = 7,
+        kDeviceCapabilityTypePdConsumerPort         = 8,
+        kDeviceCapabilityTypePdProviderPort         = 9,
+        kDeviceCapabilityTypeSuperSpeedPlus         = 10,
+        kDeviceCapabilityTypePrecisionMeasurement   = 11,
+        kDeviceCapabilityTypeWirelessExt            = 12,
+        kDeviceCapabilityTypeBillboard              = 13,
+        kDeviceCapabilityTypeBillboardAltMode       = 15
     };
     
     typedef enum tDeviceCapabilityType tDeviceCapabilityType;
@@ -302,8 +356,8 @@ namespace StandardUSB
     } __attribute__((packed));
         
     typedef struct BOSDescriptor BOSDescriptor;
-        
-        
+
+
 #ifdef __cplusplus
     // USB 3.0 9.6.2: Binary Device Object Store (BOS)
     struct DeviceCapabilityDescriptor : public Descriptor
@@ -329,6 +383,7 @@ namespace StandardUSB
     {
         uint8_t     bLength;
         uint8_t     bDescriptorType;
+        uint8_t     bDevCapabilityType;
 #endif
         uint32_t    bmAttributes;
     } __attribute__((packed));
@@ -351,6 +406,7 @@ namespace StandardUSB
     {
         uint8_t     bLength;
         uint8_t     bDescriptorType;
+        uint8_t     bDevCapabilityType;
 #endif
         uint8_t     bmAttributes;
         uint16_t    wSpeedsSupported;
@@ -379,7 +435,70 @@ namespace StandardUSB
         kSuperSpeedDeviceCapabilityU1DevExitLatMax = 0xa,
         kSuperSpeedDeviceCapabilityU2DevExitLatMax = 0x7ff
     };
+        
+#ifdef __cplusplus
+    // USB 3.1 9.6.2.5: SuperSpeedPlus USB Device Capability
+    struct SuperSpeedPlusUSBDeviceCapabilityDescriptor : public DeviceCapabilityDescriptor
+    {
+#else
+    struct SuperSpeedPlusUSBDeviceCapabilityDescriptor
+    {
+        uint8_t     bLength;
+        uint8_t     bDescriptorType;
+        uint8_t     bDevCapabilityType;
+#endif
+        uint8_t     bReserved;
+        uint32_t    bmAttributes;
+        uint16_t    wFunctionalitySupport;
+        uint16_t    wReserved;
+        uint32_t    bmSublinkSpeedAttr[1];
+        
+    } __attribute__((packed));
+
+    typedef struct SuperSpeedPlusUSBDeviceCapabilityDescriptor SuperSpeedPlusUSBDeviceCapabilityDescriptor;
     
+    enum
+    {
+        //bmAttributes
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedAttrCount = StandardUSBBitRange(0, 4),
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedAttrCountPhase = StandardUSBBitRangePhase(0, 4),
+        
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedIdCount = StandardUSBBitRange(5, 8),
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedIdCountPhase = StandardUSBBitRangePhase(5, 8),
+        
+        //wFunctionalitySupport
+        kSuperSpeedPlusDeviceCapabilitySublinkMinSpeedId = StandardUSBBitRange(0, 3),
+        kSuperSpeedPlusDeviceCapabilitySublinkMinSpeedIdPhase = StandardUSBBitRangePhase(0, 3),
+        
+        kSuperSpeedPlusDeviceCapabilityReserved = StandardUSBBitRange(4, 7),
+        kSuperSpeedPlusDeviceCapabilityReservedPhase = StandardUSBBitRangePhase(4, 7),
+        
+        kSuperSpeedPlusDeviceCapabilityMinRxLaneCount = StandardUSBBitRange(8, 11),
+        kSuperSpeedPlusDeviceCapabilityMinRxLaneCountPhase = StandardUSBBitRangePhase(8, 11),
+        
+        kSuperSpeedPlusDeviceCapabilityMinTxLaneCount = StandardUSBBitRange(12, 15),
+        kSuperSpeedPlusDeviceCapabilityMinTxLaneCountPhase = StandardUSBBitRangePhase(12, 15),
+        
+        //bmSublinkSpeedAttr
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedId = StandardUSBBitRange(0, 3),
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedIdPhase = StandardUSBBitRangePhase(0, 3),
+        
+        kSuperSpeedPlusDeviceCapabilitySublinkLSE = StandardUSBBitRange(4, 5),
+        kSuperSpeedPlusDeviceCapabilitySublinkLSEPhase = StandardUSBBitRangePhase(4, 5),
+        
+        kSuperSpeedPlusDeviceCapabilitySublinkType = StandardUSBBitRange(6, 7),
+        kSuperSpeedPlusDeviceCapabilitySublinkTypePhase = StandardUSBBitRangePhase(6, 7),
+        
+        kSuperSpeedPlusDeviceCapabilitySublinkReserved = StandardUSBBitRange(8, 13),
+        kSuperSpeedPlusDeviceCapabilitySublinkReservedPhase = StandardUSBBitRangePhase(8, 13),
+        
+        kSuperSpeedPlusDeviceCapabilitySublinkProtocol = StandardUSBBitRange(14, 15),
+        kSuperSpeedPlusDeviceCapabilitySublinkProtocolPhase = StandardUSBBitRangePhase(14, 15),
+        
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedMantissa = StandardUSBBitRange(16, 31),
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedMantissaPhase = StandardUSBBitRangePhase(16, 31),
+    };
+
         
 #ifdef __cplusplus
     // USB 3.0 9.6.2.3: Container ID
@@ -390,14 +509,78 @@ namespace StandardUSB
     {
         uint8_t     bLength;
         uint8_t     bDescriptorType;
+        uint8_t     bDevCapabilityType;
 #endif
         uint8_t  bReserved;
         uint32_t containerID[4];
     } __attribute__((packed));
         
     typedef struct ContainerIDCapabilityDescriptor ContainerIDCapabilityDescriptor;
-        
-    
+
+
+    // USB Billboard 3.1.6.2: Billboard Capability Descriptor V1.2
+    struct BillboardAltModeCapabilityCompatibility
+    {
+        uint16_t  wSVID;
+        uint32_t  dwAlternateMode;
+        uint8_t   iAlternateModeString;
+    }__attribute__((packed));
+
+    typedef struct BillboardAltModeCapabilityCompatibility BillboardAltModeCapabilityCompatibility;
+
+    // USB Billboard 3.1.6.2: Billboard Capability Descriptor V1.1 and 1.21+
+    struct BillboardAltModeCapability
+    {
+        uint16_t  wSVID;
+        uint8_t   bAlternateMode;
+        uint8_t   iAlternateModeString;
+    }__attribute__((packed));
+
+    typedef struct BillboardAltModeCapability BillboardAltModeCapability;
+
+#ifdef __cplusplus
+    // USB Billboard 3.1.6.2: Billboard Capability Descriptor
+    struct BillboardCapabilityDescriptor : public DeviceCapabilityDescriptor
+    {
+#else
+    struct BillboardCapabilityDescriptor
+    {
+        uint8_t  bLength;
+        uint8_t  bDescriptorType;
+        uint8_t  bDevCapabilityType;
+#endif
+        uint8_t  iAddtionalInfoURL;
+        uint8_t  bNumberOfAlternateModes;
+        uint8_t  bPreferredAlternateMode;
+        uint16_t VCONNPower;
+        uint8_t  bmConfigured[32];
+        uint16_t bcdVersion;
+        uint8_t  bAdditonalFailureInfo;
+        uint8_t  bReserved;
+        uint8_t  altModeCapabilities[];
+    }__attribute__((packed));
+
+    typedef struct BillboardCapabilityDescriptor BillboardCapabilityDescriptor;
+
+#ifdef __cplusplus
+    // USB Billboard 3.1.6.3: Billboard Capability Descriptor V1.21
+    struct BillboardAltModeCapabilityDescriptor : public DeviceCapabilityDescriptor
+    {
+#else
+    struct BillboardAltModeCapabilityDescriptor
+    {
+        uint8_t   bLength;
+        uint8_t   bDescriptorType;
+        uint8_t   bDevCapabilityType;
+#endif
+        uint8_t   bIndex;
+        uint16_t  dwAlternateModeVdo;
+    }__attribute__((packed));
+
+    typedef struct BillboardAltModeCapabilityDescriptor BillboardAltModeCapabilityDescriptor;
+
+
+
 #ifdef __cplusplus
     // USB 3.0 9.6.4: Interface Association
     struct InterfaceAssociationDescriptor: public Descriptor
@@ -420,7 +603,7 @@ namespace StandardUSB
         
     
 #ifdef __cplusplus
-    // USB 3.0 9.6.7: SuperSpeed Endpoint Companion
+    // USB 3.1 9.6.7: SuperSpeed Endpoint Companion
     struct SuperSpeedEndpointCompanionDescriptor : public Descriptor
     {
 #else
@@ -429,9 +612,9 @@ namespace StandardUSB
         uint8_t     bLength;
         uint8_t     bDescriptorType;
 #endif
-        uint8_t  bMaxBurst;
-        uint8_t  bmAttributes;
-        uint16_t wBytesPerInterval;
+        uint8_t     bMaxBurst;
+        uint8_t     bmAttributes;
+        uint16_t    wBytesPerInterval;
     } __attribute__((packed));
         
     typedef struct SuperSpeedEndpointCompanionDescriptor SuperSpeedEndpointCompanionDescriptor;
@@ -448,10 +631,28 @@ namespace StandardUSB
         kSuperSpeedEndpointCompanionDescriptorBulkReservedPhase   = StandardUSBBitRangePhase(5, 7),
         kSuperSpeedEndpointCompanionDescriptorIsocMult            = StandardUSBBitRange(0, 1),
         kSuperSpeedEndpointCompanionDescriptorIsocMultPhase       = StandardUSBBitRangePhase(0, 1),
-        kSuperSpeedEndpointCompanionDescriptorIsocReserved        = StandardUSBBitRange(2, 7),
-        kSuperSpeedEndpointCompanionDescriptorIsocReservedPhase   = StandardUSBBitRangePhase(2, 7)
+        kSuperSpeedEndpointCompanionDescriptorIsocReserved        = StandardUSBBitRange(2, 6),
+        kSuperSpeedEndpointCompanionDescriptorIsocReservedPhase   = StandardUSBBitRangePhase(2, 6),
+        kSuperSpeedEndpointCompanionDescriptorSSPIsocCompanion    = StandardUSBBit(7)
     };
-    
+
+
+#ifdef __cplusplus
+    // USB 3.1 9.6.8: SuperSpeedPlus Isochronous Endpoint Companion
+    struct SuperSpeedPlusIsochronousEndpointCompanionDescriptor : public Descriptor
+    {
+#else
+    struct SuperSpeedPlusIsochronousEndpointCompanionDescriptor
+    {
+        uint8_t     bLength;
+        uint8_t     bDescriptorType;
+#endif
+        uint16_t    wReserved;
+        uint32_t    dwBytesPerInterval;
+    } __attribute__((packed));
+
+    typedef struct SuperSpeedPlusIsochronousEndpointCompanionDescriptor SuperSpeedPlusIsochronousEndpointCompanionDescriptor;
+
         
 #ifdef __cplusplus
     // USB 2.0 11.23.2.1: Hub Descriptor
@@ -513,59 +714,363 @@ namespace StandardUSB
     
 #ifdef __cplusplus
 #pragma mark Descriptor list parsing
+    /*!
+     * @brief       Get the next descriptor in a configuration descriptor
+     * @discussion  This method will advance currentDescriptor by its bLength, and validate that the new descriptor fits withing the bounds of configurationDescriptor.  Using NULL for currentDescriptor will return the first descriptor after the configuration descriptor.
+     * @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through
+     * @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL
+     * @return      Descriptor pointer, or NULL if no descriptor can be returned
+     */
     const Descriptor* getNextDescriptor(const ConfigurationDescriptor* configurationDescriptor, const Descriptor* currentDescriptor);
+
+    /*!
+     * @brief       Find the next descriptor matching a given type within a configuration descriptor
+     * @discussion  This method uses getNextDescriptor, and further validates that the returned descriptor's bDescriptorType field matches the type parameter.
+     * @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through
+     * @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL
+     * @param       type tDescriptorType representing the descriptor type to find
+     * @return      Descriptor pointer, or NULL if no matching descriptor can be found
+     */
     const Descriptor* getNextDescriptorWithType(const ConfigurationDescriptor* configurationDescriptor, const Descriptor* currentDescriptor, const uint8_t type);
+
+    /*!
+     * @brief       Get the next descriptor in a configuration descriptor that belongs to another container descriptor
+     * @discussion  This method uses getNextDescriptor, but will return NULL if another descriptor is found whose bDescriptorType field matches the value used for parentDescriptor's bDescriptorType.  Using NULL for currentDescriptor will return the first descriptor after parentDescriptor.
+     * @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through
+     * @param       parentDescriptor A descriptor pointer within the bounds of configurationDescriptor
+     * @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL
+     * @return      Descriptor pointer, or NULL if no descriptor can be returned
+     */
     const Descriptor* getNextAssociatedDescriptor(const ConfigurationDescriptor* configurationDescriptor, const Descriptor* parentDescriptor, const Descriptor* currentDescriptor);
+
+    /*!
+     * @brief       Find the next descriptor matching a given type within a configuration descriptor that belongs to another container descriptor
+     * @discussion  This method uses getNextAssociatedDescriptor, and further validates that the returned descriptor's bDescriptorType field matches the type passed parameter.
+     * @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through
+     * @param       parentDescriptor A descriptor pointer within the bounds of configurationDescriptor
+     * @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL
+     * @param       type tDescriptorType representing the descriptor type to find
+     * @return      Descriptor pointer, or NULL if no matching descriptor can be found
+     */
     const Descriptor* getNextAssociatedDescriptorWithType(const ConfigurationDescriptor* configurationDescriptor, const Descriptor* parentDescriptor, const Descriptor* currentDescriptor, const uint8_t type);
+
+    /*!
+     * @brief       Find the next interface association descriptor in a configuration descriptor
+     * @discussion  This method uses getNextDescriptorWithType to fetch the next interface association descriptor
+     * @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through
+     * @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL
+     * @return      InterfaceAssociationDescriptor pointer, or NULL if no matching descriptor can be found
+     */
     const InterfaceAssociationDescriptor* getNextInterfaceAssociationDescriptor(const ConfigurationDescriptor* configurationDescriptor, const Descriptor* currentDescriptor);
+    
+    /*!
+     * @brief       Find the next interface descriptor in a configuration descriptor
+     * @discussion  This method uses getNextDescriptorWithType to fetch the next interface descriptor
+     * @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through
+     * @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL
+     * @return      InterfaceDescriptor pointer, or NULL if no matching descriptor can be found
+     */
     const InterfaceDescriptor* getNextInterfaceDescriptor(const ConfigurationDescriptor* configurationDescriptor, const Descriptor* currentDescriptor);
+        
+    /*!
+     * @brief       Find the next endpoint descriptor associated with an interface descriptor
+     * @discussion  This method uses getNextAssociatedDescriptorWithType to fetch the next endpoint descriptor associated with a specific interface descriptor
+     * @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through
+     * @param       interfaceDescriptor An interface descriptor within the bounds of configurationDescriptor
+     * @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL
+     * @return      EndpointDescriptor pointer, or NULL if no matching descriptor can be found
+     */
     const EndpointDescriptor* getNextEndpointDescriptor(const ConfigurationDescriptor* configurationDescriptor, const InterfaceDescriptor* interfaceDescriptor, const Descriptor* currentDescriptor);
     
+    /*!
+     * @brief       Get the next device capability descriptor in a BOS descriptor
+     * @discussion  This method will advance currentDescriptor by its bLength, and validate that the new descriptor fits withing the bounds of bosDescriptor.  Using NULL for currentDescriptor will return the first descriptor after the BOS descriptor.
+     * @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through
+     * @param       currentDescriptor A descriptor pointer within the bounds of bosDescriptor, or NULL
+     * @return      DeviceCapabilityDescriptor pointer, or NULL if no descriptor can be returned
+     */
     const DeviceCapabilityDescriptor* getNextCapabilityDescriptor(const BOSDescriptor* bosDescriptor, const DeviceCapabilityDescriptor* currentDescriptor);
-    const DeviceCapabilityDescriptor* getNextCapabilityDescriptorWithType(const BOSDescriptor* bosDescriptor, const DeviceCapabilityDescriptor* currentDescriptor, const uint8_t type);
-    const USB20ExtensionCapabilityDescriptor* getUSB20ExtensionDeviceCapabilityDescriptor(const BOSDescriptor* bosDescriptor);
-    const SuperSpeedUSBDeviceCapabilityDescriptor* getSuperSpeedDeviceCapabilityDescriptor(const BOSDescriptor* bosDescriptor);
-    const ContainerIDCapabilityDescriptor* getContainerIDDescriptor(const BOSDescriptor* bosDescriptor);
     
+    /*!
+     * @brief       Find the next descriptor matching a given type within a BOS descriptor
+     * @discussion  This method uses getNextCapabilityDescriptor, and further validates that the returned descriptor's bDevCapabilityType field matches the type parameter.
+     * @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through
+     * @param       currentDescriptor A descriptor pointer within the bounds of bosDescriptor, or NULL
+     * @param       type tDeviceCapabilityType representing the descriptor type to find
+     * @return      DeviceCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
+     */
+    const DeviceCapabilityDescriptor* getNextCapabilityDescriptorWithType(const BOSDescriptor* bosDescriptor, const DeviceCapabilityDescriptor* currentDescriptor, const uint8_t type);
+        
+    /*!
+     * @brief       Find the first USB20ExtensionCapabilityDescriptor in a BOS descriptor
+     * @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first USB20ExtensionCapabilityDescriptor
+     * @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through
+     * @return      USB20ExtensionCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
+     */
+    const USB20ExtensionCapabilityDescriptor* getUSB20ExtensionDeviceCapabilityDescriptor(const BOSDescriptor* bosDescriptor);
+
+    /*!
+     * @brief       Find the first SuperSpeedUSBDeviceCapabilityDescriptor in a BOS descriptor
+     * @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first SuperSpeedUSBDeviceCapabilityDescriptor
+     * @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through
+     * @return      SuperSpeedUSBDeviceCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
+     */
+    const SuperSpeedUSBDeviceCapabilityDescriptor* getSuperSpeedDeviceCapabilityDescriptor(const BOSDescriptor* bosDescriptor);
+
+    /*!
+     * @brief       Find the first SuperSpeedPlusUSBDeviceCapabilityDescriptor in a BOS descriptor
+     * @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first SuperSpeedPlusUSBDeviceCapabilityDescriptor
+     * @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through
+     * @return      SuperSpeedPlusUSBDeviceCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
+     */
+    const SuperSpeedPlusUSBDeviceCapabilityDescriptor* getSuperSpeedPlusDeviceCapabilityDescriptor(const BOSDescriptor* bosDescriptor);
+
+    /*!
+     * @brief       Find the first ContainerIDCapabilityDescriptor in a BOS descriptor
+     * @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first ContainerIDCapabilityDescriptor
+     * @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through
+     * @return      ContainerIDCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
+     */
+    const ContainerIDCapabilityDescriptor* getContainerIDDescriptor(const BOSDescriptor* bosDescriptor);
+        
+    /*!
+     * @brief       Find the first BillboardCapabilityDescriptor in a BOS descriptor
+     * @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first BillboardCapabilityDescriptor
+     * @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through
+     * @return      BillboardCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
+     */
+    const BillboardCapabilityDescriptor* getBillboardDescriptor(const BOSDescriptor* bosDescriptor);
+
 #pragma mark Device descriptor parsing
+    /*!
+     * @brief       Validate the contents of a device descriptor
+     * @discussion  This method parses a device descriptor and validates its contents.  If repairable validation errors are encountered, the descriptor passed in may be modified.
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The descriptor to validate
+     * @return      bool true if the descriptor passed validation, false if it did not
+     */
     bool validateDeviceDescriptor(uint32_t usbDeviceSpeed, const DeviceDescriptor* descriptor);
     
 #pragma mark Endpoint descriptor parsing
+    /*!
+     * @brief       Extract the direction of an endpoint from an endpoint descriptor
+     * @discussion  This method parses an endpoint descriptor to determine its transfer direction
+     * @param       descriptor The descriptor to parse
+     * @return      tEndpointDirection indicating the direction found.  Control endpoints return tEndpointDirection.
+     */
     uint8_t getEndpointDirection(const EndpointDescriptor* descriptor);
+        
+    /*!
+     * @brief       Extract the direction and number of an endpoint from an endpoint descriptor
+     * @discussion  This method parses an endpoint descriptor to determine its address
+     * @param       descriptor The descriptor to parse
+     * @return      uint8_t representing direction and endpoint number
+     */
     uint8_t getEndpointAddress(const EndpointDescriptor* descriptor);
+    
+    /*!
+     * @brief       Extract the number of an endpoint from an endpoint descriptor
+     * @discussion  This method parses an endpoint descriptor to determine its number, excluding direction
+     * @param       descriptor The descriptor to parse
+     * @return      uint8_t representing endpoint number
+     */
     uint8_t getEndpointNumber(const EndpointDescriptor* descriptor);
+        
+    /*!
+     * @brief       Extract the type of an endpoint from an endpoint descriptor
+     * @discussion  This method parses an endpoint descriptor to determine its type
+     * @param       descriptor The descriptor to parse
+     * @return      tEndpointType indicating the type found.
+     */
     uint8_t getEndpointType(const EndpointDescriptor* descriptor);
+        
+    /*!
+     * @brief       Validate the max packet size of an endpoint descriptor
+     * @discussion  This method parses an endpoint descriptor and validates the max packet size.  If repairable validation errors are encountered, the descriptor passed in may be modified.
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The descriptor to validate
+     * @return      bool true if the descriptor passed validation, false if it did not
+     */
     bool validateEndpointMaxPacketSize(uint32_t usbDeviceSpeed, const EndpointDescriptor* descriptor);
+        
+    /*!
+     * @brief       Extract the max packet size from an endpoint descriptor
+     * @discussion  This method parses an endpoint descriptor to determine its max packet size, which does not take into account mult or burst factors.
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The descriptor to parse
+     * @return      uint16_t The max packet size in bytes
+     */
     uint16_t getEndpointMaxPacketSize(uint32_t usbDeviceSpeed, const EndpointDescriptor* descriptor);
+        
+    /*!
+     * @brief       Validate the burst size of endpoint descriptors
+     * @discussion  This method parses endpoint descriptors and validates the burst size.  If repairable validation errors are encountered, the descriptors passed in may be modified.
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The EndpointDescriptor to validate
+     * @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to validate, or NULL
+     * @return      bool true if the descriptor passed validation, false if it did not
+     */
     bool validateEndpointBurstSize(uint32_t usbDeviceSpeed, const EndpointDescriptor* descriptor, const SuperSpeedEndpointCompanionDescriptor* companionDescriptor);
+        
+    /*!
+     * @brief       Validate the burst size of endpoint descriptors
+     * @discussion  This method parses endpoint descriptors and validates the burst size.  If repairable validation errors are encountered, the descriptors passed in may be modified.
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The EndpointDescriptor to validate
+     * @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to validate, or NULL
+     * @param       sspCompanionDescriptor The SuperSpeedPlusIsochronousEndpointCompanionDescriptor to validate, or NULL
+     * @return      bool true if the descriptor passed validation, false if it did not
+     */
+    bool validateEndpointBurstSize(uint32_t usbDeviceSpeed,
+                                   const EndpointDescriptor* descriptor,
+                                   const SuperSpeedEndpointCompanionDescriptor* companionDescriptor,
+                                   const SuperSpeedPlusIsochronousEndpointCompanionDescriptor* sspCompanionDescriptor);
+    
+    /*!
+     * @brief       Extract the burst size from endpoint descriptors
+     * @discussion  This method parses endpoint descriptors to determine burst size, which includes mult and burst factors as applicable.
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The EndpointDescriptor to parse
+     * @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to parse, or NULL
+     * @return      uint16_t The burst size in bytes
+     */
     uint16_t getEndpointBurstSize(uint32_t usbDeviceSpeed, const EndpointDescriptor* descriptor, const SuperSpeedEndpointCompanionDescriptor* companionDescriptor);
+        
+    /*!
+     * @brief       Extract the burst size from endpoint descriptors
+     * @discussion  This method parses endpoint descriptors to determine burst size, which includes mult and burst factors as applicable.  SuperSpeed Plus isochronous endpoints will return the dwBytesPerInterval field from the SuperSpeedPlusIsochronousEndpointCompanionDescriptor parameter.
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The EndpointDescriptor to parse
+     * @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to parse, or NULL
+     * @param       sspCompanionDescriptor The SuperSpeedPlusIsochronousEndpointCompanionDescriptor to parse, or NULL
+     * @return      uint32_t The burst size in bytes
+     */
+    uint32_t getEndpointBurstSize32(uint32_t usbDeviceSpeed,
+                                    const EndpointDescriptor* descriptor,
+                                    const SuperSpeedEndpointCompanionDescriptor* companionDescriptor = NULL,
+                                    const SuperSpeedPlusIsochronousEndpointCompanionDescriptor* sspCompanionDescriptor = NULL);
+        
+    /*!
+     * @brief       Extract the mult count from endpoint descriptors
+     * @discussion  This method parses endpoint descriptors to determine mult
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The EndpointDescriptor to parse
+     * @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to parse, or NULL
+     * @param       sspCompanionDescriptor The SuperSpeedPlusIsochronousEndpointCompanionDescriptor to parse, or NULL
+     * @return      uint8_t The mult count
+     */
+    uint8_t getEndpointMult(uint32_t usbDeviceSpeed,
+                            const EndpointDescriptor* descriptor,
+                            const SuperSpeedEndpointCompanionDescriptor* companionDescriptor = NULL,
+                            const SuperSpeedPlusIsochronousEndpointCompanionDescriptor* sspCompanionDescriptor = NULL);
+        
+    /*!
+     * @brief       Validate the interval of an endpoint descriptor
+     * @discussion  This method parses an endpoint descriptor and validates the interval.  If repairable validation errors are encountered, the descriptor passed in may be modified.
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The EndpointDescriptor to validate
+     * @return      bool true if the descriptor passed validation, false if it did not
+     */
     bool validateEndpointInterval(uint32_t usbDeviceSpeed, const EndpointDescriptor* descriptor);
+        
+    /*!
+     * @brief       Extract the interval of an endpoint descriptor
+     * @discussion  This method parses an endpoint descriptor and returns the service interval as n in (2^(n-1)) microframes
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The EndpointDescriptor to parse
+     * @return      uint32_t Encoded endpoint interval
+     */
     uint32_t getEndpointIntervalEncodedMicroframes(uint32_t usbDeviceSpeed, const EndpointDescriptor* descriptor);
+
+    /*!
+     * @brief       Extract the interval of an endpoint descriptor
+     * @discussion  This method parses an endpoint descriptor and returns the service interval in microframes
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The EndpointDescriptor to parse
+     * @return      uint32_t Endpoint interval in microframes
+     */
     uint32_t getEndpointIntervalMicroframes(uint32_t usbDeviceSpeed, const EndpointDescriptor* descriptor);
+        
+    /*!
+     * @brief       Extract the interval of an endpoint descriptor
+     * @discussion  This method parses an endpoint descriptor and returns the service interval in frames
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The EndpointDescriptor to parse
+     * @return      uint32_t Endpoint interval in frames
+     */
     uint32_t getEndpointIntervalFrames(uint32_t usbDeviceSpeed, const EndpointDescriptor* descriptor);
+        
+    /*!
+     * @brief       Extract the number of streams supported by an endpoint
+     * @discussion  This method parses endpoint descriptors and returns the number of streams supported as n in (2^n)
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The EndpointDescriptor to parse
+     * @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to parse
+     * @return      uint32_t Encoded number of streams
+     */
     uint32_t getEndpointMaxStreamsEncoded(uint32_t usbDeviceSpeed, const EndpointDescriptor* descriptor, const SuperSpeedEndpointCompanionDescriptor* companionDescriptor);
+
+    /*!
+     * @brief       Extract the number of streams supported by an endpoint
+     * @discussion  This method parses endpoint descriptors and returns the number of streams supported
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The EndpointDescriptor to parse
+     * @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to parse
+     * @return      uint32_t Number of streams
+     */
     uint32_t getEndpointMaxStreams(uint32_t usbDeviceSpeed, const EndpointDescriptor* descriptor, const SuperSpeedEndpointCompanionDescriptor* companionDescriptor);
+        
+    /*!
+     * @brief       Extract the maximum bus current required by a configuration descriptor
+     * @discussion  This method parses a configuration descriptor and returns the number of milliamps required to power the device
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The ConfigurationDescriptor to parse
+     * @return      uint32_t milliamps required
+     */
     uint32_t getConfigurationMaxPowerMilliAmps(uint32_t usbDeviceSpeed, const ConfigurationDescriptor* descriptor);
+        
+    /*!
+     * @brief       Validate the contents of an endpoint descriptor
+     * @discussion  This method parses an endpoint descriptor and validates its contents.  If repairable validation errors are encountered, the descriptor passed in may be modified.
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The EndpointDescriptor to validate
+     * @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to validate, or NULL
+     * @return      bool true if the descriptor passed validation, false if it did not
+     */
     bool validateEndpointDescriptor(uint32_t usbDeviceSpeed, const EndpointDescriptor* descriptor, const SuperSpeedEndpointCompanionDescriptor* companionDescriptor);
+        
+    /*!
+     * @brief       Validate the contents of an endpoint descriptor
+     * @discussion  This method parses an endpoint descriptor and validates its contents.  If repairable validation errors are encountered, the descriptor passed in may be modified.
+     * @param       usbDeviceSpeed The operational speed of the device
+     * @param       descriptor The EndpointDescriptor to validate
+     * @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to validate, or NULL
+     * @param       sspCompanionDescriptor The SuperSpeedPlusIsochronousEndpointCompanionDescriptor to validate, or NULL
+     * @return      bool true if the descriptor passed validation, false if it did not
+     */
+    bool validateEndpointDescriptor(uint32_t usbDeviceSpeed,
+                                    const EndpointDescriptor* descriptor,
+                                    const SuperSpeedEndpointCompanionDescriptor* companionDescriptor,
+                                    const SuperSpeedPlusIsochronousEndpointCompanionDescriptor* sspCompanionDescriptor);
     
 #pragma mark String descriptor parsing
     /*!
-     * @brief Convert a USB string descriptor to a UTF8 character string
-     *
-     * @discussion This method uses utf8_encodestr with appropriate options to convert a USB string descriptor to a UTF8 string.
-     *
-     * @param stringDescriptor Descriptor to convert
-     *
-     * @param stringBuffer Buffer to write the UTF8 string to
-     *
-     * @param length Reference to size_t.  As input it is the size stringBuffer.  As output it is the number of character written to stringBuffer.
-     *
-     * @return IOReturn result code.  kIOReturnSuccess if any portion of the string could be converted and placed in stringBuffer.  kIOReturnError if the
-     * string descriptor contains characters that cannot be converted to UTF8
+     * @brief       Convert a USB string descriptor to a UTF8 character string
+     * @discussion  This method uses utf8_encodestr with appropriate options to convert a USB string descriptor to a UTF8 string.
+     * @param       stringDescriptor Descriptor to convert
+     * @param       stringBuffer Buffer to write the UTF8 string to
+     * @param       length Reference to size_t.  As input it is the size stringBuffer.  As output it is the number of character written to stringBuffer.
+     * @return      IOReturn result code.  kIOReturnSuccess if any portion of the string could be converted and placed in stringBuffer.  kIOReturnError if the string descriptor cannot be converted to UTF8.
      */
     IOReturn stringDescriptorToUTF8(const StringDescriptor* stringDescriptor, char* stringBuffer, size_t& length);
     
 #pragma mark Capability descriptor parsing
+    /*!
+     * @brief       Validate the contents of a BOS descriptor
+     * @discussion  This method parses a BOS descriptor and validates its contents, as well as the contents of its associated device capability descriptors.  If repairable validation errors are encountered, the descriptor passed in may be modified.
+     * @param       bosDescriptor The BOSDescriptor to validate
+     * @return      bool true if the descriptor passed validation, false if it did not
+     */
     bool validateDeviceCapabilityDescriptors(const BOSDescriptor* bosDescriptor);
         
 #endif // __cplusplus
@@ -659,6 +1164,11 @@ namespace StandardUSB
     {
         kInterfaceSuspendLowPower           = StandardUSBBit(0),
         kInterfaceSuspendRemoteWakeEnable   = StandardUSBBit(1)
+    };
+
+    enum tBusVoltage
+    {
+        kBusVoltageDefault                  = 5
     };
         
 #ifdef __cplusplus

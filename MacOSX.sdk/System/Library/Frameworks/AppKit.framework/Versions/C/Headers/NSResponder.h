@@ -1,7 +1,7 @@
 /*
         NSResponder.h
         Application Kit
-        Copyright (c) 1994-2015, Apple Inc.
+        Copyright (c) 1994-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -24,27 +24,27 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @property (nullable, assign) NSResponder *nextResponder;
-- (BOOL)tryToPerform:(SEL)anAction with:(nullable id)anObject;
-- (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
+- (BOOL)tryToPerform:(SEL)action with:(nullable id)object;
+- (BOOL)performKeyEquivalent:(NSEvent *)event;
 - (nullable id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType;
-- (void)mouseDown:(NSEvent *)theEvent;
-- (void)rightMouseDown:(NSEvent *)theEvent;
-- (void)otherMouseDown:(NSEvent *)theEvent;
-- (void)mouseUp:(NSEvent *)theEvent;
-- (void)rightMouseUp:(NSEvent *)theEvent;
-- (void)otherMouseUp:(NSEvent *)theEvent;
-- (void)mouseMoved:(NSEvent *)theEvent;
-- (void)mouseDragged:(NSEvent *)theEvent;
-- (void)scrollWheel:(NSEvent *)theEvent;
-- (void)rightMouseDragged:(NSEvent *)theEvent;
-- (void)otherMouseDragged:(NSEvent *)theEvent;
-- (void)mouseEntered:(NSEvent *)theEvent;
-- (void)mouseExited:(NSEvent *)theEvent;
-- (void)keyDown:(NSEvent *)theEvent;
-- (void)keyUp:(NSEvent *)theEvent;
-- (void)flagsChanged:(NSEvent *)theEvent;
-- (void)tabletPoint:(NSEvent *)theEvent;
-- (void)tabletProximity:(NSEvent *)theEvent;
+- (void)mouseDown:(NSEvent *)event;
+- (void)rightMouseDown:(NSEvent *)event;
+- (void)otherMouseDown:(NSEvent *)event;
+- (void)mouseUp:(NSEvent *)event;
+- (void)rightMouseUp:(NSEvent *)event;
+- (void)otherMouseUp:(NSEvent *)event;
+- (void)mouseMoved:(NSEvent *)event;
+- (void)mouseDragged:(NSEvent *)event;
+- (void)scrollWheel:(NSEvent *)event;
+- (void)rightMouseDragged:(NSEvent *)event;
+- (void)otherMouseDragged:(NSEvent *)event;
+- (void)mouseEntered:(NSEvent *)event;
+- (void)mouseExited:(NSEvent *)event;
+- (void)keyDown:(NSEvent *)event;
+- (void)keyUp:(NSEvent *)event;
+- (void)flagsChanged:(NSEvent *)event;
+- (void)tabletPoint:(NSEvent *)event;
+- (void)tabletProximity:(NSEvent *)event;
 - (void)cursorUpdate:(NSEvent *)event NS_AVAILABLE_MAC(10_5);
 /* The following *WithEvent methods are available on 10.5.2 or later, and will be sent only on hardware capable of generating the corresponding NSEvent types 
 */
@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)helpRequested:(NSEvent *)eventPtr;
 
-- (BOOL)shouldBeTreatedAsInkEvent:(NSEvent *)theEvent;
+- (BOOL)shouldBeTreatedAsInkEvent:(NSEvent *)event;
 
 /* Some views process gesture scroll events to perform elastic scrolling. In some cases, you may want to track gesture scroll events like a swipe. (see -trackSwipeEventWithOptions:dampenAmountThresholdMin:max:usingHandler: in NSEvent.h) Implement this method and return YES in your swipe controller and views that perform elastic scrolling will forward gesture scroll events up the responder chain on the following condition: the content to be scrolled is already at the edge of the scrolled direction at the beginning of the scroll gesture. Otherwise, the view will perform elastic scrolling. Default implementation returns NO.
 */
@@ -116,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)insertText:(id)insertString;
     // When key events have been passed off to the key binding mechanism through interpretKeyEvents:, they end up back in the view through either this method or the below doCommand... methods.  insertText: is used to pass through text that was not a command.
 
-- (void)doCommandBySelector:(SEL)aSelector;
+- (void)doCommandBySelector:(SEL)selector;
     // Performs the given selector if possible.
 
 /************************* Standard bindable commands *************************/
@@ -255,6 +255,7 @@ NS_ASSUME_NONNULL_BEGIN
 /* Perform a Quick Look on the text cursor position, selection, or whatever is appropriate for your view. If there are no Quick Look items, then call [[self nextResponder] tryToPerform:_cmd with:sender]; to pass the request up the responder chain. Eventually AppKit will attempt to perform a dictionary look up. Also see quickLookWithEvent: above.
 */
 - (void)quickLookPreviewItems:(nullable id)sender NS_AVAILABLE_MAC(10_8);
+
 @end
 
 @interface NSResponder(NSUndoSupport)
@@ -277,7 +278,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     - (void)didPresentErrorWithRecovery:(BOOL)didRecover contextInfo:(void *)contextInfo;
 
-The default implementation of this method always invokes [self willPresentError:error] to give subclassers an opportunity to customize error presentation. It then forwards the message, passing the customized error, to the next responder or, if there is no next responder, NSApp. NSApplication's override of this method invokes [[NSAlert alertWithError:theErrorToPresent] beginSheetModalForWindow:window modalDelegate:self didEndSelector:selectorForAPrivateMethod contextInfo:privateContextInfo]. When the user has dismissed the alert, the error's recovery attempter is sent an -attemptRecoveryFromError:optionIndex:delegate:didRecoverSelector:contextInfo: message, if the error had recovery options and a recovery delegate.
+The default implementation of this method always invokes [self willPresentError:error] to give subclassers an opportunity to customize error presentation. It then forwards the message, passing the customized error, to the next responder or, if there is no next responder, NSApp. NSApplication's override of this method invokes [[NSAlert alertWithError:errorToPresent] beginSheetModalForWindow:window modalDelegate:self didEndSelector:selectorForAPrivateMethod contextInfo:privateContextInfo]. When the user has dismissed the alert, the error's recovery attempter is sent an -attemptRecoveryFromError:optionIndex:delegate:didRecoverSelector:contextInfo: message, if the error had recovery options and a recovery delegate.
 
 Errors for which ([[error domain] isEqualToString:NSCocoaErrorDomain] && [error code]==NSUserCancelledError) are a special case,  because they do not actually represent errors and should not be presented as such to the user. NSApplication's override of this method does not present an alert to the user for these kinds of errors. Instead it merely invokes the delegate specifying didRecover==NO.
 
@@ -322,11 +323,20 @@ You can override this method to customize the presentation of errors by examinin
 @end
 
 
+@interface NSResponder(NSWindowTabbing)
+
+/* For automatic window tabbing: This method can be implemented in the responder chain. It is automatically called for tabbed windows when the plus button is clicked, and the next window that is created and shown will be placed in a tab. This can be implemented in an NSDocumentController subclass, or somewhere in the responder chain starting at NSWindow (such as NSWindow, the window delegate, the windowController, the NSApp delegate, etc. A plus button on tabbed windows will only be shown if this method exists in the responder chain.
+ */
+- (IBAction)newWindowForTab:(nullable id)sender NS_AVAILABLE_MAC(10_12);
+
+@end
+
+
 @interface NSResponder(NSDeprecated)
 
 /* This method is deprecated in 10.8 and higher. Historically it has always returned NO and not done anything on MacOS.
  */
-- (BOOL)performMnemonic:(NSString *)theString NS_DEPRECATED_MAC(10_0, 10_8);
+- (BOOL)performMnemonic:(NSString *)string NS_DEPRECATED_MAC(10_0, 10_8);
 
 @end
 

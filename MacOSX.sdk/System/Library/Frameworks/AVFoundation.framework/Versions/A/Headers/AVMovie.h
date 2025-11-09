@@ -3,7 +3,7 @@
 
 	Framework:		AVFoundation
  
-	Copyright 2009-2015 Apple Inc. All rights reserved.
+	Copyright 2009-2016 Apple Inc. All rights reserved.
 
 */
 
@@ -185,7 +185,7 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 	@result			An NSData object.
 	@discussion     The movie header will be a pure reference movie, with no base URL, suitable for use on the pasteboard.
 */
-- (nullable NSData *)movieHeaderWithFileType:(NSString *)fileType error:(NSError * __nullable * __nullable)outError NS_AVAILABLE_MAC(10_11);
+- (nullable NSData *)movieHeaderWithFileType:(NSString *)fileType error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE_MAC(10_11);
 
 /*!
 	@method			writeMovieHeaderToURL:fileType:options:error:
@@ -200,7 +200,7 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 					If an error occurs writing the movie header, describes the nature of the failure.
 	@discussion		Data references in the output movie header are adjusted to be relative to the destination URL. Note that modifications to instances of AVMutableMovie, to their constituent AVMutableMovieTracks, or to their collections of metadata are committed to storage when their movie headers are written.
 */
-- (BOOL)writeMovieHeaderToURL:(NSURL *)URL fileType:(NSString *)fileType options:(AVMovieWritingOptions)options error:(NSError * __nullable * __nullable)outError NS_AVAILABLE_MAC(10_11);
+- (BOOL)writeMovieHeaderToURL:(NSURL *)URL fileType:(NSString *)fileType options:(AVMovieWritingOptions)options error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE_MAC(10_11);
 
 /*!
 	@method			isCompatibleWithFileType:
@@ -283,7 +283,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
                     If you want to create an AVMutableMovie from a file and then append sample buffers to any of its tracks, you must first set one of these properties 
                     to indicate where the sample data should be written.
 */
-+ (nullable instancetype)movieWithURL:(NSURL *)URL options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * __nullable * __nullable)outError;
++ (nullable instancetype)movieWithURL:(NSURL *)URL options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError;
 
 /*!
 	@method			initWithURL:options:error:
@@ -299,7 +299,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
                     If you want to create an AVMutableMovie from a file and then append sample buffers to any of its tracks, you must first set one of these properties 
                     to indicate where the sample data should be written.
 */
-- (nullable instancetype)initWithURL:(NSURL *)URL options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * __nullable * __nullable)outError NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithURL:(NSURL *)URL options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError NS_DESIGNATED_INITIALIZER;
 
 /*!
 	@method			movieWithData:options:error:
@@ -315,7 +315,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
  
                     By default, the defaultMediaDataStorage property will be nil and each associated AVMutableMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 */
-+ (nullable instancetype)movieWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * __nullable * __nullable)outError NS_AVAILABLE_MAC(10_11);
++ (nullable instancetype)movieWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE_MAC(10_11);
 
 /*!
 	@method			initWithData:options:error:
@@ -331,7 +331,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
  
                     By default, the defaultMediaDataStorage property will be nil and each associated AVMutableMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 */
-- (nullable instancetype)initWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * __nullable * __nullable)outError NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError NS_DESIGNATED_INITIALIZER;
 
 /*!
 	@method			movieWithSettingsFromMovie:options:error:
@@ -347,7 +347,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
                     By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil.
                     If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 */
-+ (nullable instancetype)movieWithSettingsFromMovie:(nullable AVMovie *)movie options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * __nullable * __nullable)outError;
++ (nullable instancetype)movieWithSettingsFromMovie:(nullable AVMovie *)movie options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError;
 
 /*!
 	@method			initWithSettingsFromMovie:options:error:
@@ -363,7 +363,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
                     By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil.
                     If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 */
-- (nullable instancetype)initWithSettingsFromMovie:(nullable AVMovie *)movie options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * __nullable * __nullable)outError NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithSettingsFromMovie:(nullable AVMovie *)movie options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError NS_DESIGNATED_INITIALIZER;
 
 /*!
 	@property       preferredRate
@@ -448,7 +448,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 	@discussion		This method may add new tracks to the target movie to ensure that all tracks of the asset are represented in the inserted timeRange.
 					Existing content at the specified startTime will be pushed out by the duration of timeRange.
 */
-- (BOOL)insertTimeRange:(CMTimeRange)timeRange ofAsset:(AVAsset *)asset atTime:(CMTime)startTime copySampleData:(BOOL)copySampleData error:(NSError * __nullable * __nullable)outError;
+- (BOOL)insertTimeRange:(CMTimeRange)timeRange ofAsset:(AVAsset *)asset atTime:(CMTime)startTime copySampleData:(BOOL)copySampleData error:(NSError * _Nullable * _Nullable)outError;
 
 /*!
 	@method			insertEmptyTimeRange:

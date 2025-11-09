@@ -27,6 +27,18 @@ extern "C" {
 #define OPENGL_NONNULL
 #endif
 
+#if __has_attribute(objc_bridge) && __has_feature(objc_bridge_id) && __has_feature(objc_bridge_id_on_typedefs)
+#define OPENGL_BRIDGED_TYPE(T)		__attribute__((objc_bridge(T)))
+#else
+#define OPENGL_BRIDGED_TYPE(T)
+#endif
+
+#if __has_feature(objc_class_property)
+#define OPENGL_SWIFT_NAME(name) __attribute__((swift_name(#name)))
+#else
+#define OPENGL_SWIFT_NAME(name)
+#endif
+
 /*
 ** CGL opaque data.
 */

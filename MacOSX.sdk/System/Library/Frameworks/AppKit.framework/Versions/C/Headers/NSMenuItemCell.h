@@ -1,7 +1,7 @@
 /*
         NSMenuItemCell.h
         Application Kit
-        Copyright (c) 1997-2015, Apple Inc.
+        Copyright (c) 1997-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -35,6 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int RESERVED:12;
     } _micFlags;
 }
+
+- (instancetype)initTextCell:(NSString *)string NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @property (nullable, strong) NSMenuItem *menuItem;
 

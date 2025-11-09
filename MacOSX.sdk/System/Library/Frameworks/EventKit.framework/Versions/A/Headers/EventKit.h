@@ -6,6 +6,9 @@
  *
  */
 
+#import <TargetConditionals.h>
+#import <Availability.h>
+
 #if __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED || !TARGET_OS_IPHONE
 
 #import <EventKit/EventKitDefines.h>

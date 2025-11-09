@@ -1,6 +1,6 @@
 /*
         NSTextTable.h
-        Copyright (c) 2004-2015, Apple Inc.
+        Copyright (c) 2004-2016, Apple Inc.
         All rights reserved.
 
         Classes to represent text tables and other text blocks.
@@ -67,7 +67,7 @@ typedef NS_ENUM(NSUInteger, NSTextTableLayoutAlgorithm) {
     void *_blockSecondary;
 }
 
-- (instancetype)init;     // Designated initializer
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /* Content size */
 - (void)setValue:(CGFloat)val type:(NSTextBlockValueType)type forDimension:(NSTextBlockDimension)dimension;
@@ -114,7 +114,7 @@ typedef NS_ENUM(NSUInteger, NSTextTableLayoutAlgorithm) {
     void *_tableBlockSecondary;
 }
 
-- (instancetype)initWithTable:(NSTextTable *)table startingRow:(NSInteger)row rowSpan:(NSInteger)rowSpan startingColumn:(NSInteger)col columnSpan:(NSInteger)colSpan;     // Designated initializer
+- (instancetype)initWithTable:(NSTextTable *)table startingRow:(NSInteger)row rowSpan:(NSInteger)rowSpan startingColumn:(NSInteger)col columnSpan:(NSInteger)colSpan NS_DESIGNATED_INITIALIZER;     // Designated initializer
 
 /* These methods determine the block's role in its enclosing table. */
 @property (readonly, strong) NSTextTable *table;

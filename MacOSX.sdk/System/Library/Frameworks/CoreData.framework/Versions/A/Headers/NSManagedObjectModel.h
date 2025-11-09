@@ -1,7 +1,7 @@
 /*
     NSManagedObjectModel.h
     Core Data
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -17,8 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSBundle;
 
 // Models describe object graphs to be managed. Models (and their entities/properties/fetch request templates) are editable until they are used by a persistent store coordinator, allowing developers to create/modify them dynamically. However, once a model is being used, it MUST NOT be changed. When the persistent store coordinator first fetches data using a model, it will become uneditable. Any attempt to mutate a model or any of its subobjects after that point will cause an exception to be thrown. If you need to modify a model that is in use, create a copy, modify the copy, and then discard the objects with the old model.
-NS_CLASS_AVAILABLE(10_4,3_0)
+API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSManagedObjectModel : NSObject <NSCoding, NSCopying, NSFastEnumeration> {
+#if (!__OBJC2__)
 @private
 	id _dataForOptimization;
 	id *_optimizationHints; 
@@ -34,6 +35,7 @@ NS_CLASS_AVAILABLE(10_4,3_0)
         unsigned int _hasEntityWithConstraints:1;
         unsigned int _reservedEntityDescription:28;
     } _managedObjectModelFlags;
+#endif
 }
 
 + (nullable NSManagedObjectModel *)mergedModelFromBundles:(nullable NSArray<NSBundle *> *)bundles;  // looks up all models in the specified bundles and merges them; if nil is specified as argument, uses the main bundle
@@ -74,31 +76,31 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 
 /* Returns the managed object model used to create the store for the specified metadata.  This method is a companion to the mergedModelFromBundles: method;  in this case, the framework uses the version information stored in the metadata for a store to locate the models/entities used to create the store in the available bundles, and return the model.  If the model for the store cannot be found, this method will return nil.
 */
-+ (nullable NSManagedObjectModel *)mergedModelFromBundles:(nullable NSArray<NSBundle *> *)bundles forStoreMetadata:(NSDictionary<NSString *, id> *)metadata NS_AVAILABLE(10_5,3_0);
++ (nullable NSManagedObjectModel *)mergedModelFromBundles:(nullable NSArray<NSBundle *> *)bundles forStoreMetadata:(NSDictionary<NSString *, id> *)metadata API_AVAILABLE(macosx(10.5),ios(3.0));
 
 
 /* Returns a merged model from the specified array for the version information in the provided metadata.  (This is the companion method to mergedModelFromBundles:forStoreMetadata:)  If a model cannot be created to match the version information in the specified metadata, this method will return nil.  
 */
-+ (nullable NSManagedObjectModel *)modelByMergingModels:(NSArray<NSManagedObjectModel *> *)models forStoreMetadata:(NSDictionary<NSString *, id> *)metadata NS_AVAILABLE(10_5,3_0);
++ (nullable NSManagedObjectModel *)modelByMergingModels:(NSArray<NSManagedObjectModel *> *)models forStoreMetadata:(NSDictionary<NSString *, id> *)metadata API_AVAILABLE(macosx(10.5),ios(3.0));
 
 
 /* Returns the dictionary of fetch request templates, keyed by name, for the model.  If the template contains a predicate with substitution variables, you should instead use fetchRequestFromTemplateWithName:substitutionVariables: to create a new fetch request.
 */
-@property (readonly, copy) NSDictionary<NSString *, NSFetchRequest *> *fetchRequestTemplatesByName NS_AVAILABLE(10_5,3_0);
+@property (readonly, copy) NSDictionary<NSString *, NSFetchRequest *> *fetchRequestTemplatesByName API_AVAILABLE(macosx(10.5),ios(3.0));
 
 /* Returns the collection of developer-defined version identifiers for the model.  For models created in Xcode, this value is set by the developer in the model inspector. Merged models return the combined  collection of identifiers. This value is meant to be used as a debugging hint to help developers determine the models that were combined to create a merged model. The framework does not give models a default identifier, nor does it depend this value at runtime.
 */
-@property (copy) NSSet *versionIdentifiers NS_AVAILABLE(10_5,3_0);
+@property (copy) NSSet *versionIdentifiers API_AVAILABLE(macosx(10.5),ios(3.0));
 
 
 /* Compares the version information in the store metadata with the entity version of a given configuration. Returns NO if there are differences between the version information.  (For information on specific differences, developers should utilize the entityVersionHashesByName method, and perform a comparison.)
 */
-- (BOOL)isConfiguration:(nullable NSString *)configuration compatibleWithStoreMetadata:(NSDictionary<NSString *, id> *)metadata NS_AVAILABLE(10_5,3_0);
+- (BOOL)isConfiguration:(nullable NSString *)configuration compatibleWithStoreMetadata:(NSDictionary<NSString *, id> *)metadata API_AVAILABLE(macosx(10.5),ios(3.0));
 
 
 /* Returns a dictionary of the version hashes for the entities in the model, keyed by entity name.  (The dictionary of version hash information is used by Core Data to determine schema compatibility.)
 */
-@property (readonly, copy) NSDictionary<NSString *, NSData *> *entityVersionHashesByName NS_AVAILABLE(10_5,3_0);
+@property (readonly, copy) NSDictionary<NSString *, NSData *> *entityVersionHashesByName API_AVAILABLE(macosx(10.5),ios(3.0));
 
 @end
 

@@ -1,7 +1,9 @@
----
+--- !tapi-tbd-v2
 archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 5DD67832-A567-3DD5-ACB6-12789CA90C9A' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/ManagedEvent.framework/Versions/A/ManagedEvent
+objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _kSymptomConfigKeyChangeTarget, _kSymptomConfigKeyConditionDNS, 
@@ -13,31 +15,29 @@ exports:
                        _kSymptomConfigValNotificationCombinationDemo, _kSymptomConfigValNotificationConnectionFailures, 
                        _kSymptomConfigValNotificationDNS, _kSymptomConfigValNotificationDisconnectTrigger, 
                        _kSymptomConfigValNotificationPassthroughDemo, _kSymptomConfigValNotificationThroughputDrop, 
+                       _kSymptomManagedEventARPAliveNotification, _kSymptomManagedEventARPFailureNotification, 
                        _kSymptomManagedEventCaptivityNotification, _kSymptomManagedEventCellWhileWiFiNotification, 
+                       _kSymptomManagedEventDNSAliveNotification, _kSymptomManagedEventDNSFailureNotification, 
                        _kSymptomManagedEventKeyAWDARPFailureCount, _kSymptomManagedEventKeyAWDGateOpenDuration, 
-                       _kSymptomManagedEventKeyAWDTrafficWatchDuration, 
-                       _kSymptomManagedEventKeyAWDTrafficWatchRxCount, 
-                       _kSymptomManagedEventKeyAWDTrafficWatchTimeSince, 
-                       _kSymptomManagedEventKeyAWDValidState, _kSymptomManagedEventKeyAWDWiFiDNSImpactedServers, 
-                       _kSymptomManagedEventKeyAWDWiFiDNSTotalServers, 
+                       _kSymptomManagedEventKeyAWDTrafficWatchDuration, _kSymptomManagedEventKeyAWDTrafficWatchRxCount, 
+                       _kSymptomManagedEventKeyAWDTrafficWatchTimeSince, _kSymptomManagedEventKeyAWDValidState, 
+                       _kSymptomManagedEventKeyAWDWiFiDNSImpactedServers, _kSymptomManagedEventKeyAWDWiFiDNSTotalServers, 
                        _kSymptomManagedEventKeyBundleDetails, _kSymptomManagedEventKeyDefRouteRTTVals, 
                        _kSymptomManagedEventKeyFlowScoreDetails, _kSymptomManagedEventKeyFlowUsageDetails, 
                        _kSymptomManagedEventKeyNumReportingProcesses, _kSymptomManagedEventKeyTriggerARPState, 
                        _kSymptomManagedEventKeyTriggerAWDInfo, _kSymptomManagedEventKeyTriggerBundleInput, 
                        _kSymptomManagedEventKeyTriggerDNSState, _kSymptomManagedEventKeyTriggerDetails, 
-                       _kSymptomManagedEventKeyTriggerElapsedSinceClose, 
-                       _kSymptomManagedEventKeyTriggerFlowState, _kSymptomManagedEventKeyTriggerImpact, 
-                       _kSymptomManagedEventKeyTriggerImpactFlags, _kSymptomManagedEventKeyTriggerImpactReasons, 
-                       _kSymptomManagedEventKeyTriggerND6State, _kSymptomManagedEventKeyTriggerNetScore, 
-                       _kSymptomManagedEventKeyTriggerNetScoreReasons, 
+                       _kSymptomManagedEventKeyTriggerElapsedSinceClose, _kSymptomManagedEventKeyTriggerFlowState, 
+                       _kSymptomManagedEventKeyTriggerImpact, _kSymptomManagedEventKeyTriggerImpactFlags, 
+                       _kSymptomManagedEventKeyTriggerImpactReasons, _kSymptomManagedEventKeyTriggerND6State, 
+                       _kSymptomManagedEventKeyTriggerNetScore, _kSymptomManagedEventKeyTriggerNetScoreReasons, 
                        _kSymptomManagedEventKeyTriggerPollFlowState, _kSymptomManagedEventKeyTriggerRTTState, 
                        _kSymptomManagedEventKeyTriggerScore, _kSymptomManagedEventKeyTriggerScoreInfo, 
                        _kSymptomManagedEventKeyTriggerTCP3WHSStuck, _kSymptomManagedEventKeyTriggerTCPExtraState, 
                        _kSymptomManagedEventKeyTriggerTCPReadStuck, _kSymptomManagedEventKeyTriggerTCPWriteStuck, 
-                       _kSymptomManagedEventWiFiDNSTriggerNotification, 
-                       _kSymptomManagedEventWiFiShortFlowsTriggerNotification, 
-                       _kSymptomManagedEventWiFiTriggerDisconnectNotification, 
-                       _managed_event_fetch, _managed_event_fetch_series, 
-                       _managed_event_param_change, _managed_event_param_change_multiple, 
-                       _managed_event_param_read, _managed_event_param_read_multiple ]
+                       _kSymptomManagedEventWiFiDNSTriggerNotification, _kSymptomManagedEventWiFiShortFlowsTriggerNotification, 
+                       _kSymptomManagedEventWiFiTriggerDisconnectNotification, _managed_event_fetch, 
+                       _managed_event_fetch_series, _managed_event_param_change, 
+                       _managed_event_param_change_multiple, _managed_event_param_read, 
+                       _managed_event_param_read_multiple ]
 ...

@@ -1,17 +1,19 @@
 /* CoreAnimation - CAAnimation.h
 
-   Copyright (c) 2006-2015, Apple Inc.
+   Copyright (c) 2006-2016, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
 #import <Foundation/NSObject.h>
 
 @class NSArray, NSString, CAMediaTimingFunction, CAValueFunction;
+@protocol CAAnimationDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /** The base animation class. **/
 
+CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 @interface CAAnimation : NSObject
     <NSCoding, NSCopying, CAMediaTiming, CAAction>
 {
@@ -39,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  * lifetime of the animation object. Defaults to nil. See below for the
  * supported delegate methods. */
 
-@property(nullable, strong) id delegate;
+@property(nullable, strong) id <CAAnimationDelegate> delegate;
 
 /* When true, the animation is removed from the render tree once its
  * active duration has passed. Defaults to YES. */
@@ -50,7 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Delegate methods for CAAnimation. */
 
-@interface NSObject (CAAnimationDelegate)
+@protocol CAAnimationDelegate <NSObject>
+@optional
 
 /* Called when the animation begins its active duration. */
 
@@ -68,6 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Subclass for property-based animations. **/
 
+CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 @interface CAPropertyAnimation : CAAnimation
 
 /* Creates a new animation object with its `keyPath' property set to
@@ -106,6 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Subclass for basic (single-keyframe) animations. **/
 
+CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 @interface CABasicAnimation : CAPropertyAnimation
 
 /* The objects defining the property values being interpolated between.
@@ -141,6 +146,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** General keyframe animation class. **/
 
+CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 @interface CAKeyframeAnimation : CAPropertyAnimation
 
 /* An array of objects providing the value of the animation function for
@@ -214,25 +220,26 @@ NS_ASSUME_NONNULL_BEGIN
 /* `calculationMode' strings. */
 
 CA_EXTERN NSString * const kCAAnimationLinear
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAAnimationDiscrete
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAAnimationPaced
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAAnimationCubic
-    __OSX_AVAILABLE_STARTING (__MAC_10_7, __IPHONE_4_0);
+    CA_AVAILABLE_STARTING (10.7, 4.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAAnimationCubicPaced
-    __OSX_AVAILABLE_STARTING (__MAC_10_7, __IPHONE_4_0);
+    CA_AVAILABLE_STARTING (10.7, 4.0, 9.0, 2.0);
 
 /* `rotationMode' strings. */
 
 CA_EXTERN NSString * const kCAAnimationRotateAuto
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAAnimationRotateAutoReverse
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 
 /** Subclass for mass-spring animations. */
 
+CA_CLASS_AVAILABLE (10.11, 9.0, 9.0, 2.0)
 @interface CASpringAnimation : CABasicAnimation
 
 /* The mass of the object attached to the end of the spring. Must be greater
@@ -268,6 +275,7 @@ CA_EXTERN NSString * const kCAAnimationRotateAutoReverse
 
 /** Transition animation subclass. **/
 
+CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 @interface CATransition : CAAnimation
 
 /* The name of the transition. Current legal transition types include
@@ -304,28 +312,29 @@ CA_EXTERN NSString * const kCAAnimationRotateAutoReverse
 /* Common transition types. */
 
 CA_EXTERN NSString * const kCATransitionFade
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCATransitionMoveIn
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCATransitionPush
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCATransitionReveal
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 
 /* Common transition subtypes. */
 
 CA_EXTERN NSString * const kCATransitionFromRight
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCATransitionFromLeft
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCATransitionFromTop
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCATransitionFromBottom
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 
 
 /** Animation subclass for grouped animations. **/
 
+CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 @interface CAAnimationGroup : CAAnimation
 
 /* An array of CAAnimation objects. Each member of the array will run

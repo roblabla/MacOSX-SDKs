@@ -429,10 +429,7 @@ UTTypeCopyAllTagsWithClass(
  *  Discussion:
  *    Compares two identified types for equality. Types are equal if
  *    their identifier strings are equal using a case-insensitive
- *    comparison. In addition, if one or both of the identifiers is a
- *    dynamic identifier, then the types are equal if either
- *    identifier's tag specification is a subset of the other
- *    identifier's tag specification.
+ *    comparison.
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.3

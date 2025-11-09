@@ -79,7 +79,7 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
 
 /*!
     @property       calendarIdentifier;
-    @description    Calendar used by this recurrence rule.
+    @discussion     Calendar used by this recurrence rule.
 */
 @property(nonatomic, readonly) NSString *calendarIdentifier;
 

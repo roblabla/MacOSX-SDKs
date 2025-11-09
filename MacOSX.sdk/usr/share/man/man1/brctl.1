@@ -24,6 +24,14 @@ understands the following commands:
     [<diagnosis-output-path>]
                          Specifies the output path of the diagnosis; -n becomes useless.
 .Pp
+.Sy download
+.Ao Ar path Ac
+    download a local copy of the document at this path
+.Pp
+.Sy evict
+.Ao Ar path Ac
+    evict the local copy of the document at this path
+.Pp
 .Sy log
 .Op options
 .Op Ao Ar command Ac
@@ -60,6 +68,15 @@ understands the following commands:
 .Pp
     -S,--scope=<scope>
                          restrict the NSMDQ scope to DOCS, DATA, or BOTH
+.Pp
+.Sy versions
+.Op options
+.Ao Ar path Ac
+.Op ALL|etags...
+    list the non-local versions of the document at this path.
+.Pp
+    -a,--all             List all non-local versions including those that
+                         are locally cached
 .Pp
 .Sh SEE ALSO
 .Xr bird 8

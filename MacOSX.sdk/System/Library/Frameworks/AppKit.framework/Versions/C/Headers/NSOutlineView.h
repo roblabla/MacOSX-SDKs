@@ -1,7 +1,7 @@
 /*
     NSOutlineView.h
     Application Kit
-    Copyright (c) 1997-2015, Apple Inc.
+    Copyright (c) 1997-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -36,7 +36,7 @@ typedef struct __OvFlags {
     unsigned int delegateWillDisplayOutlineCell:1;
     unsigned int subclassRowForItem:1;
     unsigned int selectionAdjustmentDisabled:1;
-    unsigned int unused:1;
+    unsigned int stronglyReferencesItems:1;
     unsigned int animateExpandAndCollapse:1;
     unsigned int delegateHeightOfRowByItem:1;
     unsigned int delayRowEntryFreeDisabled:1;
@@ -54,9 +54,9 @@ typedef struct __OvFlags {
     unsigned int dontRedisplayOnFrameChange:1;
     unsigned int allowAutomaticAnimations:1;
     unsigned int dataSourceObjectValueByItem:1;
-    unsigned int allItemsLoaded:1;
+    unsigned int unused3:1;
 #else
-    unsigned int allItemsLoaded:1;
+    unsigned int unused3:1;
     unsigned int dataSourceObjectValueByItem:1;
     unsigned int allowAutomaticAnimations:1;
     unsigned int dontRedisplayOnFrameChange:1;
@@ -74,7 +74,7 @@ typedef struct __OvFlags {
     unsigned int delayRowEntryFreeDisabled:1;
     unsigned int delegateHeightOfRowByItem:1;
     unsigned int animateExpandAndCollapse:1;
-    unsigned int unused:1;
+    unsigned int stronglyReferencesItems:1;
     unsigned int selectionAdjustmentDisabled:1;
     unsigned int subclassRowForItem:1;
     unsigned int delegateWillDisplayOutlineCell:1;
@@ -102,7 +102,7 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
     NSInteger            _numberOfRows;    
     _NSOVRowEntry       *_rowEntryTree;
     NSMapTable          *_itemToEntryMap;
-    __strong CFMutableArrayRef _rowEntryArray;
+    CFMutableArrayRef    _rowEntryArray;
     NSInteger            _firstRowIndexDrawn;
     id                   _autoExpandTimerItem;
     NSTableColumn        *_outlineTableColumn;
@@ -115,7 +115,7 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
     NSMutableArray       *_draggedItems;
     _OVFlags             _ovFlags;
     id                   _ovLock;
-    __strong long       *_indentArray;
+    long                *_indentArray;
     long                 _originalWidth;
     id                   _expandSet;
     id                   _expandSetToExpandItemsInto;
@@ -125,11 +125,9 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
     id                   _ovReserved;
 }
 
-- (void)setDelegate:(nullable id <NSOutlineViewDelegate>)anObject;
-- (nullable id <NSOutlineViewDelegate>)delegate;
 
-- (void)setDataSource:(nullable id <NSOutlineViewDataSource>)aSource;
-- (nullable id <NSOutlineViewDataSource>)dataSource;
+@property (nullable, weak) id <NSOutlineViewDelegate> delegate;
+@property (nullable, weak) id <NSOutlineViewDataSource> dataSource;
 
 /* The 'outlineTableColumn' is the column that displays data in a hierarchical fashion, indented one identationlevel per level, decorated with indentation marker (disclosure triangle) on rows that are expandable. A nil 'outlineTableColumn' is silently ignored. On 10.5 and higher, this value is saved in encodeWithCoder: and restored in initWithCoder:.
 */
@@ -247,6 +245,10 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 /* Get and set the user interface layout direction. When set to NSUserInterfaceLayoutDirectionRightToLeft, the Outline View will show the disclosure triangle to the right of the cell instead of the left. The default value is NSUserInterfaceLayoutDirectionLeftToRight. This method is available for NSOutlineView on 10.7 and higher.
  */
 @property NSUserInterfaceLayoutDirection userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_7);
+
+/* When YES, the NSOutlineView will retain and release the objects returned to it from the dataSource (outlineView:child:ofItem:). When NO, it only treats the objects as opaque items and assume the client has a retain on them. The default value is YES for applications linked on 10.12 and later, and NO for previous applications. This value is not encoded in the nib, and must be explicitly set to NO in code if one requires the legacy behavior and is linking on 10.12 and later. In general, this is required if the items themselves create a retain cycle.
+ */
+@property BOOL stronglyReferencesItems NS_AVAILABLE_MAC(10_12);
 
 @end
 
@@ -480,19 +482,19 @@ APPKIT_EXTERN NSString * const NSOutlineViewShowHideButtonKey NS_AVAILABLE_MAC(1
 
 /* Notifications
 */
-APPKIT_EXTERN NSString * NSOutlineViewSelectionDidChangeNotification;
-APPKIT_EXTERN NSString * NSOutlineViewColumnDidMoveNotification;                                // @"NSOldColumn", @"NSNewColumn"
-APPKIT_EXTERN NSString * NSOutlineViewColumnDidResizeNotification;                // @"NSTableColumn", @"NSOldWidth"
-APPKIT_EXTERN NSString * NSOutlineViewSelectionIsChangingNotification;
+APPKIT_EXTERN NSNotificationName NSOutlineViewSelectionDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSOutlineViewColumnDidMoveNotification;                                // @"NSOldColumn", @"NSNewColumn"
+APPKIT_EXTERN NSNotificationName NSOutlineViewColumnDidResizeNotification;                // @"NSTableColumn", @"NSOldWidth"
+APPKIT_EXTERN NSNotificationName NSOutlineViewSelectionIsChangingNotification;
 
 
 /* Note for the following NSOutlineViewItem*Notifications:
    The 'userInfo' dictionary in the notification will have an @"NSObject" key where the value is the changed (id)item.
 */
-APPKIT_EXTERN NSString * NSOutlineViewItemWillExpandNotification;
-APPKIT_EXTERN NSString * NSOutlineViewItemDidExpandNotification;
-APPKIT_EXTERN NSString * NSOutlineViewItemWillCollapseNotification;
-APPKIT_EXTERN NSString * NSOutlineViewItemDidCollapseNotification;
+APPKIT_EXTERN NSNotificationName NSOutlineViewItemWillExpandNotification;
+APPKIT_EXTERN NSNotificationName NSOutlineViewItemDidExpandNotification;
+APPKIT_EXTERN NSNotificationName NSOutlineViewItemWillCollapseNotification;
+APPKIT_EXTERN NSNotificationName NSOutlineViewItemDidCollapseNotification;
 
 NS_ASSUME_NONNULL_END
 

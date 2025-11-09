@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2000-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
@@ -11,10 +11,10 @@
  * unlawful or unlicensed copies of an Apple operating system, or to
  * circumvent, violate, or enable the circumvention or violation of, any
  * terms of an Apple operating system software license agreement.
- * 
+ *
  * Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -22,7 +22,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /* Copyright (c) 1995, 1997 Apple Computer, Inc. All Rights Reserved */
@@ -98,15 +98,17 @@ extern void wakeup_one(caddr_t chan);
 extern int proc_selfpid(void);
 /* this routine returns the pid of the parent of the current process */
 extern int proc_selfppid(void);
+/* this routine returns the csflags of the current process */
+extern int proc_selfcsflags(void);
 /* this routine returns sends a signal signum to the process identified by the pid */
 extern void proc_signal(int pid, int signum);
 /* this routine checks whether any signal identified by the mask are pending in the  process identified by the pid. The check is  on all threads of the process. */
 extern int proc_issignal(int pid, sigset_t mask);
 /* this routine returns 1 if the pid1 is inferior of pid2 */
 extern int proc_isinferior(int pid1, int pid2);
-/* this routine copies the process's name of the executable to the passed in buffer. It 
- * is always null terminated. The size of the buffer is to be passed in as well. This 
- * routine is to be used typically for debugging 
+/* this routine copies the process's name of the executable to the passed in buffer. It
+ * is always null terminated. The size of the buffer is to be passed in as well. This
+ * routine is to be used typically for debugging
  */
 void proc_name(int pid, char * buf, int size);
 /* This routine is simillar to proc_name except it returns for current process */
@@ -153,7 +155,7 @@ pid_t proc_selfpgrpid(void);
  @param p Process whose pgrpid to grab.
  @return pgrpid for "p".
  */
-pid_t proc_pgrpid(proc_t);
+pid_t proc_pgrpid(proc_t p);
 
 
 

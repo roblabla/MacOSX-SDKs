@@ -187,10 +187,25 @@ extern void				lck_mtx_assert(
 									lck_mtx_t		*lck,
 									unsigned int	type);
 
+#if MACH_ASSERT
+#define LCK_MTX_ASSERT(lck,type) lck_mtx_assert((lck),(type))
+#else /* MACH_ASSERT */
+#define LCK_MTX_ASSERT(lck,type)
+#endif /* MACH_ASSERT */
+
+#if DEBUG
+#define LCK_MTX_ASSERT_DEBUG(lck,type) lck_mtx_assert((lck),(type))
+#else /* DEBUG */
+#define LCK_MTX_ASSERT_DEBUG(lck,type)
+#endif /* DEBUG */
+
 __END_DECLS
 
-#define	LCK_MTX_ASSERT_OWNED	0x01
-#define	LCK_MTX_ASSERT_NOTOWNED	0x02
+#define	LCK_ASSERT_OWNED		1
+#define	LCK_ASSERT_NOTOWNED		2
+
+#define	LCK_MTX_ASSERT_OWNED	LCK_ASSERT_OWNED
+#define	LCK_MTX_ASSERT_NOTOWNED	LCK_ASSERT_NOTOWNED
 
 
 #define decl_lck_rw_data(class,name)     class lck_rw_t name;

@@ -1,5 +1,5 @@
 /*	NSMapTable.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPointerFunctions.h>
@@ -77,22 +77,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 /****************	void * Map table operations	****************/
 
-typedef struct {NSUInteger _pi; NSUInteger _si; void * __nullable _bs;} NSMapEnumerator;
+typedef struct {NSUInteger _pi; NSUInteger _si; void * _Nullable _bs;} NSMapEnumerator;
 
 
 
 FOUNDATION_EXPORT void NSFreeMapTable(NSMapTable *table);
 FOUNDATION_EXPORT void NSResetMapTable(NSMapTable *table);
 FOUNDATION_EXPORT BOOL NSCompareMapTables(NSMapTable *table1, NSMapTable *table2);
-FOUNDATION_EXPORT NSMapTable *NSCopyMapTableWithZone(NSMapTable *table, NSZone * __nullable zone);
-FOUNDATION_EXPORT BOOL NSMapMember(NSMapTable *table, const void *key, void * __nullable * __nullable originalKey, void * __nullable * __nullable value);
-FOUNDATION_EXPORT void * __nullable NSMapGet(NSMapTable *table, const void * __nullable key);
-FOUNDATION_EXPORT void NSMapInsert(NSMapTable *table, const void * __nullable key, const void * __nullable value);
-FOUNDATION_EXPORT void NSMapInsertKnownAbsent(NSMapTable *table, const void * __nullable key, const void * __nullable value);
-FOUNDATION_EXPORT void * __nullable NSMapInsertIfAbsent(NSMapTable *table, const void * __nullable key, const void * __nullable value);
-FOUNDATION_EXPORT void NSMapRemove(NSMapTable *table, const void * __nullable key);
+FOUNDATION_EXPORT NSMapTable *NSCopyMapTableWithZone(NSMapTable *table, NSZone * _Nullable zone);
+FOUNDATION_EXPORT BOOL NSMapMember(NSMapTable *table, const void *key, void * _Nullable * _Nullable originalKey, void * _Nullable * _Nullable value);
+FOUNDATION_EXPORT void * _Nullable NSMapGet(NSMapTable *table, const void * _Nullable key);
+FOUNDATION_EXPORT void NSMapInsert(NSMapTable *table, const void * _Nullable key, const void * _Nullable value);
+FOUNDATION_EXPORT void NSMapInsertKnownAbsent(NSMapTable *table, const void * _Nullable key, const void * _Nullable value);
+FOUNDATION_EXPORT void * _Nullable NSMapInsertIfAbsent(NSMapTable *table, const void * _Nullable key, const void * _Nullable value);
+FOUNDATION_EXPORT void NSMapRemove(NSMapTable *table, const void * _Nullable key);
 FOUNDATION_EXPORT NSMapEnumerator NSEnumerateMapTable(NSMapTable *table);
-FOUNDATION_EXPORT BOOL NSNextMapEnumeratorPair(NSMapEnumerator *enumerator, void * __nullable * __nullable key, void * __nullable * __nullable value);
+FOUNDATION_EXPORT BOOL NSNextMapEnumeratorPair(NSMapEnumerator *enumerator, void * _Nullable * _Nullable key, void * _Nullable * _Nullable value);
 FOUNDATION_EXPORT void NSEndMapTableEnumeration(NSMapEnumerator *enumerator);
 FOUNDATION_EXPORT NSUInteger NSCountMapTable(NSMapTable *table);
 FOUNDATION_EXPORT NSString *NSStringFromMapTable(NSMapTable *table);
@@ -103,12 +103,12 @@ FOUNDATION_EXPORT NSArray *NSAllMapTableValues(NSMapTable *table);
 /****************     Legacy     ***************************************/
 
 typedef struct {
-    NSUInteger	(* __nullable hash)(NSMapTable *table, const void *);
-    BOOL	(* __nullable isEqual)(NSMapTable *table, const void *, const void *);
-    void	(* __nullable retain)(NSMapTable *table, const void *);
-    void	(* __nullable release)(NSMapTable *table, void *);
-    NSString 	* __nullable (* __nullable describe)(NSMapTable *table, const void *);
-    const void	* __nullable notAKeyMarker;
+    NSUInteger	(* _Nullable hash)(NSMapTable *table, const void *);
+    BOOL	(* _Nullable isEqual)(NSMapTable *table, const void *, const void *);
+    void	(* _Nullable retain)(NSMapTable *table, const void *);
+    void	(* _Nullable release)(NSMapTable *table, void *);
+    NSString 	* _Nullable (* _Nullable describe)(NSMapTable *table, const void *);
+    const void	* _Nullable notAKeyMarker;
 } NSMapTableKeyCallBacks;
     
 #define NSNotAnIntMapKey	((const void *)NSIntegerMin)
@@ -116,12 +116,12 @@ typedef struct {
 #define NSNotAPointerMapKey	((const void *)UINTPTR_MAX)
 
 typedef struct {
-    void	(* __nullable retain)(NSMapTable *table, const void *);
-    void	(* __nullable release)(NSMapTable *table, void *);
-    NSString 	* __nullable(* __nullable describe)(NSMapTable *table, const void *);
+    void	(* _Nullable retain)(NSMapTable *table, const void *);
+    void	(* _Nullable release)(NSMapTable *table, void *);
+    NSString 	* _Nullable(* _Nullable describe)(NSMapTable *table, const void *);
 } NSMapTableValueCallBacks;
 
-FOUNDATION_EXPORT NSMapTable *NSCreateMapTableWithZone(NSMapTableKeyCallBacks keyCallBacks, NSMapTableValueCallBacks valueCallBacks, NSUInteger capacity, NSZone * __nullable zone);
+FOUNDATION_EXPORT NSMapTable *NSCreateMapTableWithZone(NSMapTableKeyCallBacks keyCallBacks, NSMapTableValueCallBacks valueCallBacks, NSUInteger capacity, NSZone * _Nullable zone);
 FOUNDATION_EXPORT NSMapTable *NSCreateMapTable(NSMapTableKeyCallBacks keyCallBacks, NSMapTableValueCallBacks valueCallBacks, NSUInteger capacity);
 
 

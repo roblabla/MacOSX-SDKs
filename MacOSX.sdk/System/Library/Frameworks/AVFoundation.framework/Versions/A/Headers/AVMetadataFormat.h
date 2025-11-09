@@ -89,6 +89,13 @@ AVF_EXPORT NSString *const AVMetadataKeySpaceISOUserData								 NS_AVAILABLE(10
 // ISO UserData keys (includes 3GPP keys)
 AVF_EXPORT NSString *const AVMetadataISOUserDataKeyCopyright                             NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadataISOUserDataKeyTaggedCharacteristic                  NS_AVAILABLE(10_10, 8_0);
+
+/*!
+ @constant		AVMetadataISOUserDataKeyDate
+ @abstract		ISO User data key for the content creation date/time.
+ @discussion	The value is date and time, formatted according to ISO 8601, when the content was created. For clips captured by recording devices, this is typically the date and time when the clip’s recording started. When stored in AV(Mutable)MetadataItem, the value type must be either NSDate or NSString. When NSString is used, the value uses one of ISO 8601 formats such as "2016-01-11T17:31:10Z".
+*/
+AVF_EXPORT NSString *const AVMetadataISOUserDataKeyDate                                  NS_AVAILABLE(10_12, 10_0);
 AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyCopyright                             NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyAuthor                                NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyPerformer                             NS_AVAILABLE(10_7, 4_0);
@@ -314,6 +321,8 @@ AVF_EXPORT NSString *const AVMetadataIcyMetadataKeyStreamURL                    
 // HTTP Live Streaming metadata
 AVF_EXPORT NSString *const AVMetadataFormatHLSMetadata                                   NS_AVAILABLE(10_10, 8_0);
 // HLS Metadata does not define its own keySpace or keys. Use of the keySpace AVMetadataKeySpaceQuickTimeMetadata and its keys is recommended.
+AVF_EXPORT NSString *const AVMetadataKeySpaceHLSDateRange								NS_AVAILABLE(10_11_3, 9_3);
+
 
 // Extra attribute keys
 

@@ -24,7 +24,7 @@
 @interface QCCompositionLayer : CAOpenGLLayer <QCCompositionRenderer>
 {
 @private
-	__strong void*				_QCCompositionLayerPrivate;
+	void*				_QCCompositionLayerPrivate;
 }
 
 /*

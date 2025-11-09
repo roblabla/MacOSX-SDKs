@@ -3,18 +3,17 @@
 // =====================================================================================================================
 
 
-#import <AppKit/AppKit.h>
+#import <PDFKit/PDFKitPlatform.h>
+
 #import <PDFKit/PDFAction.h>
 
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+NS_ASSUME_NONNULL_BEGIN
 
 @class PDFActionNamedPrivateVars;
 
-
 // Action names.
-typedef NSInteger PDFActionNamedName;
-enum
+NS_ENUM_AVAILABLE_MAC(10_5)
+typedef NS_ENUM(NSInteger, PDFActionNamedName)
 {
     kPDFActionNamedNone = 0, 
     kPDFActionNamedNextPage = 1, 
@@ -30,17 +29,17 @@ enum
     kPDFActionNamedZoomOut = 11
 };
 
-
+NS_CLASS_AVAILABLE_MAC(10_5)
 @interface PDFActionNamed : PDFAction <NSCopying>
 {
 @private
-    PDFActionNamedPrivateVars *_pdfPriv2;
+    PDFActionNamedPrivateVars *_private2;
 }
 
-- (id) initWithName: (PDFActionNamedName) name;
-- (PDFActionNamedName) name;
-- (void) setName: (PDFActionNamedName) name;
+- (instancetype) initWithName: (PDFActionNamedName) name;
+
+@property(nonatomic, assign) PDFActionNamedName name;
 
 @end
 
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+NS_ASSUME_NONNULL_END

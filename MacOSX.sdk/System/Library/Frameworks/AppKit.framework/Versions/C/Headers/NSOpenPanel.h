@@ -1,7 +1,7 @@
 /*
     NSOpenPanel.h
     Application Kit
-    Copyright (c) 1994-2015, Apple Inc.
+    Copyright (c) 1994-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSOpenPanel : NSSavePanel {
 @private
-    char _reservedOpenPanel[4];
-    void *_privateOpenPanel;
+    char _reservedOpenPanel[4] __unused;
+    void *_privateOpenPanel __unused;
 }
 
 /* Creates a new instance of the NSOpenPanel. This class is not a singleton. 

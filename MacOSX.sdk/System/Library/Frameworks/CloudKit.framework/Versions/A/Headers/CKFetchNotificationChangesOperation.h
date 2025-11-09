@@ -18,6 +18,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
     since that anchor will be fetched.
    If this is your first fetch, pass nil for the change anchor.
    Change anchors are opaque tokens and clients should not infer any behavior based on their content. */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithPreviousServerChangeToken:(nullable CKServerChangeToken *)previousServerChangeToken;
 
 @property (nonatomic, copy, nullable) CKServerChangeToken *previousServerChangeToken;
@@ -35,7 +36,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
     block so that already fetched notifications don't need to be re-downloaded on a subsequent operation.
    If the server returns a CKErrorChangeTokenExpired error, the previousServerChangeToken value was too old and the client should toss its local cache and
    re-fetch notification changes starting with a nil previousServerChangeToken. */
-@property (nonatomic, copy, nullable) void (^fetchNotificationChangesCompletionBlock)(CKServerChangeToken * __nullable serverChangeToken, NSError * __nullable operationError);
+@property (nonatomic, copy, nullable) void (^fetchNotificationChangesCompletionBlock)(CKServerChangeToken * _Nullable serverChangeToken, NSError * _Nullable operationError);
 
 @end
 NS_ASSUME_NONNULL_END

@@ -31,6 +31,7 @@
 #import <AppKit/AppKit.h>
 
 @class DOMCSSStyleDeclaration;
+@class DOMNode;
 @class DOMRange;
 @class WebView;
 
@@ -43,9 +44,7 @@ typedef NS_ENUM(NSInteger, WebViewInsertAction) {
 @protocol WebEditingDelegate <NSObject>
 
 @optional
-@end
 
-@interface NSObject (WebEditingDelegate)
 - (BOOL)webView:(WebView *)webView shouldBeginEditingInDOMRange:(DOMRange *)range;
 - (BOOL)webView:(WebView *)webView shouldEndEditingInDOMRange:(DOMRange *)range;
 - (BOOL)webView:(WebView *)webView shouldInsertNode:(DOMNode *)node replacingDOMRange:(DOMRange *)range givenAction:(WebViewInsertAction)action;
@@ -61,4 +60,5 @@ typedef NS_ENUM(NSInteger, WebViewInsertAction) {
 - (void)webViewDidChangeTypingStyle:(NSNotification *)notification;
 - (void)webViewDidChangeSelection:(NSNotification *)notification;
 - (NSUndoManager *)undoManagerForWebView:(WebView *)webView;
+
 @end

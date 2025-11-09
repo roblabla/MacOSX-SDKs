@@ -1,7 +1,7 @@
 /*
 	NSUserInterfaceValidation.h
 	Application Kit
-	Copyright (c) 1999-2015, Apple Inc.
+	Copyright (c) 1999-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -18,16 +18,16 @@ You can extend this functionality by introducing a new set of protocols that are
     i.e.
         @protocol NSValidatedToobarItem <NSValidatedUserInterfaceItem>
         - (NSImage *)image;
-        - (void)setImage:(NSImage *)theImage
+        - (void)setImage:(NSImage *)image
         - (NSString *)toolTip;
-        - (void)setToolTip:(NSString *)theToolTip;
+        - (void)setToolTip:(NSString *)toolTip;
         @end
 
  2) Declare validation method for validators
     You should declare your new selector that takes your object as the argument.
     i.e.
         @protocol NSToolbarItemValidations
-        - (BOOL)validateToolbarItem:(id <NSValidatedToobarItem>)theItem;
+        - (BOOL)validateToolbarItem:(id <NSValidatedToobarItem>)item;
         @end
 
  3) Implement your -update method
@@ -54,8 +54,8 @@ You can extend this functionality by introducing a new set of protocols that are
     i.e.
         @implementation NSTextView (NSToolbarValidation)
     
-        - (BOOL)validateToolbarItem:(id <NSValidatedToobarItem>)theItem {
-            BOOL returnValue = [self validateUserInterfaceItem:theItem];
+        - (BOOL)validateToolbarItem:(id <NSValidatedToobarItem>)item {
+            BOOL returnValue = [self validateUserInterfaceItem:item];
 
             // Your own validation
         
@@ -68,13 +68,13 @@ You can extend this functionality by introducing a new set of protocols that are
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol NSValidatedUserInterfaceItem
-- (nullable SEL)action;
-- (NSInteger)tag;
+@property (readonly, nullable) SEL action;
+@property (readonly) NSInteger tag;
 @end
 
 /* Protocol implemented by validator objects */
 @protocol NSUserInterfaceValidations
-- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)anItem;
+- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)item;
 @end
 
 NS_ASSUME_NONNULL_END

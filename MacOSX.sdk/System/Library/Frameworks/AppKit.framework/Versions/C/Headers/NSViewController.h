@@ -1,7 +1,7 @@
 /*
 	NSViewController.h
 	Application Kit
-	Copyright (c) 2006-2015, Apple Inc.
+	Copyright (c) 2006-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -57,7 +57,8 @@ NS_CLASS_AVAILABLE(10_5, NA)
     unsigned int _viewIsAppearing:1;
     unsigned int _delayViewDidAppear:1;
     unsigned int _isContentViewController:1;
-    unsigned int _reserved:29;
+    unsigned int _shouldDirtyLayoutOnSizeChanges:1;
+    unsigned int _reserved:28 __unused;
 }
 
 /* The designated initializer. The specified nib should typically have the class of the file's owner set to NSViewController, or a subclass of yours, with the "view" outlet connected to a view. If you pass in a nil nib name then -nibName will return nil. -loadView can be used to assign a view before -view is invoked. If you pass in a nil bundle then -nibBundle will return nil and -loadView will interpret it using the same rules as -[NSNib initWithNibNamed:bundle:].
@@ -154,13 +155,13 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 */
 - (void)dismissViewController:(NSViewController *)viewController NS_AVAILABLE_MAC(10_10);
 
-/* Dismisses the ViewController.  If the presenter is a ViewController, it will be sent a -dismissViewController: message with this ViewController as the parameter.  Does nothing if the receiver is not currently presented.
+/* Dismisses the receiver.  If the receiver’s presenter is an NSViewController, it will be sent a -dismissViewController: message with this receiver as the parameter.  Does nothing if the receiver is not currently presented.
 */
 - (IBAction)dismissController:(nullable id)sender NS_AVAILABLE_MAC(10_10);
 
 /* The view controllers that were presented by this view controller. In other words, 'self' displayed each of the items in the array. This is a one-to-many relationship.
 */
-@property (nullable, readonly, assign) NSArray<__kindof NSViewController *> *presentedViewControllers NS_AVAILABLE_MAC(10_10);
+@property (nullable, readonly) NSArray<__kindof NSViewController *> *presentedViewControllers NS_AVAILABLE_MAC(10_10);
 
 /* The view controller that presented this view controller (or its farthest ancestor). In other words, 'presentingViewController' is the one that displayed 'self' to screen.
 */

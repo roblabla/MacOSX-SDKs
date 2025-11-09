@@ -1,7 +1,7 @@
 /*
 	NSErrors.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,41 +13,41 @@ NS_ASSUME_NONNULL_BEGIN
 
 // The following strings are the names of exceptions the AppKit can raise
 
-APPKIT_EXTERN NSString *NSTextLineTooLongException;
-APPKIT_EXTERN NSString *NSTextNoSelectionException;
-APPKIT_EXTERN NSString *NSWordTablesWriteException;
-APPKIT_EXTERN NSString *NSWordTablesReadException;
-APPKIT_EXTERN NSString *NSTextReadException;
-APPKIT_EXTERN NSString *NSTextWriteException;
-APPKIT_EXTERN NSString *NSPasteboardCommunicationException;
-APPKIT_EXTERN NSString *NSPrintingCommunicationException;
-APPKIT_EXTERN NSString *NSAbortModalException;
-APPKIT_EXTERN NSString *NSAbortPrintingException;
-APPKIT_EXTERN NSString *NSIllegalSelectorException;
-APPKIT_EXTERN NSString *NSAppKitVirtualMemoryException;
-APPKIT_EXTERN NSString *NSBadRTFDirectiveException;
-APPKIT_EXTERN NSString *NSBadRTFFontTableException;
-APPKIT_EXTERN NSString *NSBadRTFStyleSheetException;
-APPKIT_EXTERN NSString *NSTypedStreamVersionException;
-APPKIT_EXTERN NSString *NSTIFFException;
-APPKIT_EXTERN NSString *NSPrintPackageException;
-APPKIT_EXTERN NSString *NSBadRTFColorTableException;
-APPKIT_EXTERN NSString *NSDraggingException;
-APPKIT_EXTERN NSString *NSColorListIOException;
-APPKIT_EXTERN NSString *NSColorListNotEditableException;
-APPKIT_EXTERN NSString *NSBadBitmapParametersException;
-APPKIT_EXTERN NSString *NSWindowServerCommunicationException;
-APPKIT_EXTERN NSString *NSFontUnavailableException;
-APPKIT_EXTERN NSString *NSPPDIncludeNotFoundException;
-APPKIT_EXTERN NSString *NSPPDParseException;
-APPKIT_EXTERN NSString *NSPPDIncludeStackOverflowException;
-APPKIT_EXTERN NSString *NSPPDIncludeStackUnderflowException;
-APPKIT_EXTERN NSString *NSRTFPropertyStackOverflowException;
-APPKIT_EXTERN NSString *NSAppKitIgnoredException;
-APPKIT_EXTERN NSString *NSBadComparisonException;
-APPKIT_EXTERN NSString *NSImageCacheException;
-APPKIT_EXTERN NSString *NSNibLoadingException;
-APPKIT_EXTERN NSString *NSBrowserIllegalDelegateException;
-APPKIT_EXTERN NSString *NSAccessibilityException NS_DEPRECATED_MAC(10_1, 10_11, "Exceptions are no longer appropriate for indicating errors in accessibility API. Unexpected values should be handled through appropriate type checking.");
+APPKIT_EXTERN NSExceptionName NSTextLineTooLongException;
+APPKIT_EXTERN NSExceptionName NSTextNoSelectionException;
+APPKIT_EXTERN NSExceptionName NSWordTablesWriteException;
+APPKIT_EXTERN NSExceptionName NSWordTablesReadException;
+APPKIT_EXTERN NSExceptionName NSTextReadException;
+APPKIT_EXTERN NSExceptionName NSTextWriteException;
+APPKIT_EXTERN NSExceptionName NSPasteboardCommunicationException;
+APPKIT_EXTERN NSExceptionName NSPrintingCommunicationException;
+APPKIT_EXTERN NSExceptionName NSAbortModalException;
+APPKIT_EXTERN NSExceptionName NSAbortPrintingException;
+APPKIT_EXTERN NSExceptionName NSIllegalSelectorException;
+APPKIT_EXTERN NSExceptionName NSAppKitVirtualMemoryException;
+APPKIT_EXTERN NSExceptionName NSBadRTFDirectiveException;
+APPKIT_EXTERN NSExceptionName NSBadRTFFontTableException;
+APPKIT_EXTERN NSExceptionName NSBadRTFStyleSheetException;
+APPKIT_EXTERN NSExceptionName NSTypedStreamVersionException;
+APPKIT_EXTERN NSExceptionName NSTIFFException;
+APPKIT_EXTERN NSExceptionName NSPrintPackageException;
+APPKIT_EXTERN NSExceptionName NSBadRTFColorTableException;
+APPKIT_EXTERN NSExceptionName NSDraggingException;
+APPKIT_EXTERN NSExceptionName NSColorListIOException;
+APPKIT_EXTERN NSExceptionName NSColorListNotEditableException;
+APPKIT_EXTERN NSExceptionName NSBadBitmapParametersException;
+APPKIT_EXTERN NSExceptionName NSWindowServerCommunicationException;
+APPKIT_EXTERN NSExceptionName NSFontUnavailableException;
+APPKIT_EXTERN NSExceptionName NSPPDIncludeNotFoundException;
+APPKIT_EXTERN NSExceptionName NSPPDParseException;
+APPKIT_EXTERN NSExceptionName NSPPDIncludeStackOverflowException;
+APPKIT_EXTERN NSExceptionName NSPPDIncludeStackUnderflowException;
+APPKIT_EXTERN NSExceptionName NSRTFPropertyStackOverflowException;
+APPKIT_EXTERN NSExceptionName NSAppKitIgnoredException;
+APPKIT_EXTERN NSExceptionName NSBadComparisonException;
+APPKIT_EXTERN NSExceptionName NSImageCacheException;
+APPKIT_EXTERN NSExceptionName NSNibLoadingException;
+APPKIT_EXTERN NSExceptionName NSBrowserIllegalDelegateException;
+APPKIT_EXTERN NSExceptionName NSAccessibilityException NS_DEPRECATED_MAC(10_1, 10_11, "Exceptions are no longer appropriate for indicating errors in accessibility API. Unexpected values should be handled through appropriate type checking.");
 
 NS_ASSUME_NONNULL_END

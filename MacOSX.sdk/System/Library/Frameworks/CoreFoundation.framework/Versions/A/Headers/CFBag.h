@@ -1,5 +1,5 @@
 /*	CFBag.h
-	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2016, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBAG__)
@@ -68,7 +68,7 @@ CF_EXPORT
 void CFBagGetValues(CFBagRef theBag, const void **values);
 
 CF_EXPORT
-void CFBagApplyFunction(CFBagRef theBag, CFBagApplierFunction applier, void *context);
+void CFBagApplyFunction(CFBagRef theBag, CFBagApplierFunction CF_NOESCAPE applier, void *context);
 
 CF_EXPORT
 void CFBagAddValue(CFMutableBagRef theBag, const void *value);

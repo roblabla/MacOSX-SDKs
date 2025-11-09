@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -256,6 +256,7 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 #define VM_FLAGS_FIXED		0x0000
 #define VM_FLAGS_ANYWHERE	0x0001
 #define VM_FLAGS_PURGABLE	0x0002
+#define VM_FLAGS_RANDOM_ADDR	0x0008
 #define VM_FLAGS_NO_CACHE	0x0010
 #define VM_FLAGS_RESILIENT_CODESIGN	0x0020
 #define VM_FLAGS_RESILIENT_MEDIA	0x0040
@@ -279,6 +280,7 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 #define VM_FLAGS_USER_ALLOCATE	(VM_FLAGS_FIXED |		\
 				 VM_FLAGS_ANYWHERE |		\
 				 VM_FLAGS_PURGABLE |		\
+				 VM_FLAGS_RANDOM_ADDR |		\
 				 VM_FLAGS_NO_CACHE |		\
 				 VM_FLAGS_OVERWRITE |		\
 				 VM_FLAGS_SUPERPAGE_MASK |	\
@@ -288,6 +290,7 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 				 VM_FLAGS_RETURN_DATA_ADDR)
 #define VM_FLAGS_USER_REMAP	(VM_FLAGS_FIXED |    \
 				 VM_FLAGS_ANYWHERE | \
+				 VM_FLAGS_RANDOM_ADDR | \
 				 VM_FLAGS_OVERWRITE| \
 				 VM_FLAGS_RETURN_DATA_ADDR |\
 				 VM_FLAGS_RESILIENT_CODESIGN)
@@ -354,6 +357,9 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 /* Window backing stores, custom shadow data, and compressed backing stores */
 #define VM_MEMORY_COREGRAPHICS_BACKINGSTORES	57
 
+/* x-alloc'd memory */
+#define VM_MEMORY_COREGRAPHICS_XALLOC 58
+
 /* catch-all for other uses, such as the read-only shared data page */
 #define VM_MEMORY_COREGRAPHICS_MISC VM_MEMORY_COREGRAPHICS
 
@@ -418,6 +424,22 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 
 /* Apple System Logger (ASL) messages */
 #define VM_MEMORY_ASL 81
+
+/* Swift runtime */
+#define VM_MEMORY_SWIFT_RUNTIME 82
+
+/* Swift metadata */
+#define VM_MEMORY_SWIFT_METADATA 83
+
+/* DHMM data */
+#define VM_MEMORY_DHMM 84
+
+
+/* memory allocated by SceneKit.framework */
+#define VM_MEMORY_SCENEKIT 86
+
+/* memory allocated by skywalk networking */
+#define VM_MEMORY_SKYWALK 87
 
 /* Reserve 240-255 for application */
 #define VM_MEMORY_APPLICATION_SPECIFIC_1 240

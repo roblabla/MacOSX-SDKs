@@ -17,6 +17,7 @@ extern "C" {
 #include <CoreFoundation/CoreFoundation.h>
 #include <ApplicationServices/ApplicationServices.h>
 CF_ASSUME_NONNULL_BEGIN
+CF_IMPLICIT_BRIDGING_ENABLED
     
 /*! @header AXUIElement.h
  @discussion
@@ -548,6 +549,7 @@ extern AXError AXObserverRemoveNotification (AXObserverRef observer, AXUIElement
  */
 extern CFRunLoopSourceRef AXObserverGetRunLoopSource (AXObserverRef observer);
 
+CF_IMPLICIT_BRIDGING_DISABLED
 CF_ASSUME_NONNULL_END
     
 #ifdef __cplusplus

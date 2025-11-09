@@ -1,5 +1,5 @@
 /*	NSRegularExpression.h
-	Copyright (c) 2009-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2009-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -24,7 +24,7 @@ typedef NS_OPTIONS(NSUInteger, NSRegularExpressionOptions) {
 };
 
 NS_CLASS_AVAILABLE(10_7, 4_0)
-@interface NSRegularExpression : NSObject <NSCopying, NSCoding> {
+@interface NSRegularExpression : NSObject <NSCopying, NSSecureCoding> {
     @protected   // all instance variables are private
     NSString *_pattern;
     NSUInteger _options;
@@ -71,7 +71,7 @@ typedef NS_OPTIONS(NSUInteger, NSMatchingFlags) {
 /* The fundamental matching method on NSRegularExpression is a block iterator.  There are several additional convenience methods, for returning all matches at once, the number of matches, the first match, or the range of the first match.  Each match is specified by an instance of NSTextCheckingResult (of type NSTextCheckingTypeRegularExpression) in which the overall match range is given by the range property (equivalent to rangeAtIndex:0) and any capture group ranges are given by rangeAtIndex: for indexes from 1 to numberOfCaptureGroups.  {NSNotFound, 0} is used if a particular capture group does not participate in the match.
 */
 
-- (void)enumerateMatchesInString:(NSString *)string options:(NSMatchingOptions)options range:(NSRange)range usingBlock:(void (^)(NSTextCheckingResult * __nullable result, NSMatchingFlags flags, BOOL *stop))block;
+- (void)enumerateMatchesInString:(NSString *)string options:(NSMatchingOptions)options range:(NSRange)range usingBlock:(void (NS_NOESCAPE ^)(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL *stop))block;
 
 - (NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)string options:(NSMatchingOptions)options range:(NSRange)range;
 - (NSUInteger)numberOfMatchesInString:(NSString *)string options:(NSMatchingOptions)options range:(NSRange)range;

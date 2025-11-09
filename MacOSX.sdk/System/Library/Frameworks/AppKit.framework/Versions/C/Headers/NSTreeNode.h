@@ -1,7 +1,7 @@
 /*
         NSTreeNode.h
 	AppKit
-	Copyright (c) 2007-2015, Apple Inc.
+	Copyright (c) 2007-2016, Apple Inc.
 	All rights reserved.
  */
 
@@ -16,7 +16,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSTreeNode : NSObject {
     id _childNodesProxy;
     id _representedObject;
-    __strong void *_observationInfo;
+    void *_observationInfo;
     id _reserved2;
     NSMutableArray *_childNodes;
     NSTreeNode *_parentNode;//not retained

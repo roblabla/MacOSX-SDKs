@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
@@ -11,10 +11,10 @@
  * unlawful or unlicensed copies of an Apple operating system, or to
  * circumvent, violate, or enable the circumvention or violation of, any
  * terms of an Apple operating system software license agreement.
- * 
+ *
  * Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -22,7 +22,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*
@@ -75,7 +75,7 @@
 #define _TCPCB_LIST_HEAD(name, type)	\
 struct name {				\
 	u_int32_t	lh_first;	\
-};
+}
 #else
 #define _TCPCB_PTR(x)			x
 #define _TCPCB_LIST_HEAD(name, type)	LIST_HEAD(name, type)
@@ -109,7 +109,7 @@ struct tcpcb {
 #define	TF_NOPUSH	0x01000		/* don't push */
 #define	TF_REQ_CC	0x02000		/* have/will request CC */
 #define	TF_RCVD_CC	0x04000		/* a CC was received in SYN */
-#define	TF_SENDCCNEW	0x08000		/* send CCnew instead of CC in SYN */
+#define	TF_SENDCCNEW	0x08000		/* Not implemented */
 #define	TF_MORETOCOME	0x10000		/* More data to be appended to sock */
 #define	TF_LQ_OVERFLOW	0x20000		/* listen queue overflow */
 #define	TF_RXWIN0SENT	0x40000		/* sent a receiver win 0 in response */
@@ -385,6 +385,9 @@ struct	tcpstat {
 	u_int32_t	tcps_ecn_conn_plnoce;	/* Number of connections that received no CE and sufferred packet loss */
 	u_int32_t	tcps_ecn_conn_pl_ce;	/* Number of connections that received CE and sufferred packet loss */
 	u_int32_t	tcps_ecn_conn_nopl_ce;	/* Number of connections that received CE and sufferred no packet loss */
+	u_int32_t	tcps_ecn_fallback_synloss; /* Number of times we did fall back due to SYN-Loss */
+	u_int32_t	tcps_ecn_fallback_reorder; /* Number of times we fallback because we detected the PAWS-issue */
+	u_int32_t	tcps_ecn_fallback_ce;	/* Number of times we fallback because we received too many CEs */
 
 	/* TFO-related statistics */
 	u_int32_t	tcps_tfo_syn_data_rcv;	/* Received a SYN+data with valid cookie */
@@ -397,7 +400,17 @@ struct	tcpstat {
 	u_int32_t	tcps_tfo_syn_data_acked;/* SYN+data has been acknowledged */
 	u_int32_t	tcps_tfo_syn_loss;	/* SYN+TFO has been lost and we fallback */
 	u_int32_t	tcps_tfo_blackhole;	/* TFO got blackholed by a middlebox. */
+	u_int32_t	tcps_tfo_cookie_wrong;	/* TFO-cookie we sent was wrong */
+	u_int32_t	tcps_tfo_no_cookie_rcv;	/* We asked for a cookie but didn't get one */
+	u_int32_t	tcps_tfo_heuristics_disable; /* TFO got disabled due to heuristics */
+	u_int32_t	tcps_tfo_sndblackhole;	/* TFO got blackholed in the sending direction */
+	u_int32_t	tcps_mss_to_default;	/* Change MSS to default using link status report */
+	u_int32_t	tcps_mss_to_medium;	/* Change MSS to medium using link status report */
+	u_int32_t	tcps_mss_to_low;	/* Change MSS to low using link status report */
+	u_int32_t	tcps_ecn_fallback_droprst; /* ECN fallback caused by connection drop due to RST */
+	u_int32_t	tcps_ecn_fallback_droprxmt; /* ECN fallback due to drop after multiple retransmits */
 };
+
 
 struct tcpstat_local {
 	u_int64_t badformat;

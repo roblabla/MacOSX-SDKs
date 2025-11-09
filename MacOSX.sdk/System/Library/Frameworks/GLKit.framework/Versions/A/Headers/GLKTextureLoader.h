@@ -124,7 +124,8 @@ typedef NS_ENUM(GLuint, GLKTextureLoaderError)
     GLKTextureLoaderErrorReorientationFailure = 15,
     GLKTextureLoaderErrorAlphaPremultiplicationFailure = 16,
     GLKTextureLoaderErrorInvalidEAGLContext = 17,
-    GLKTextureLoaderErrorIncompatibleFormatSRGB = 18
+    GLKTextureLoaderErrorIncompatibleFormatSRGB = 18,
+    GLKTextureLoaderErrorUnsupportedTextureTarget = 19,
 } NS_ENUM_AVAILABLE(10_8, 5_0);
 
 #pragma mark -
@@ -162,18 +163,24 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
     GLenum                      target;
     GLuint                      width;
     GLuint                      height;
+    GLuint                      depth;
     GLKTextureInfoAlphaState    alphaState;
     GLKTextureInfoOrigin        textureOrigin;
     BOOL                        containsMipmaps;
+    GLuint                      mimapLevelCount;
+    GLuint                      arrayLength;
 }
 
 @property (readonly) GLuint                     name;
 @property (readonly) GLenum                     target;
 @property (readonly) GLuint                     width;
 @property (readonly) GLuint                     height;
+@property (readonly) GLuint                     depth;
 @property (readonly) GLKTextureInfoAlphaState   alphaState;
 @property (readonly) GLKTextureInfoOrigin       textureOrigin;
 @property (readonly) BOOL                       containsMipmaps;
+@property (readonly) GLuint                     mimapLevelCount;
+@property (readonly) GLuint                     arrayLength;
 
 @end
 
@@ -203,6 +210,17 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 + (nullable GLKTextureInfo *)textureWithContentsOfURL:(NSURL *)url                                           /* The URL from which to read. */
                                               options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
                                                 error:(NSError * __nullable * __nullable)outError;           /* Error description. */
+
+/*
+ Synchronously load a named texture asset from a given bundled into an OpenGL texture
+ Returns the generated texture object when the operation is complete, or the operation terminates with an error (returning nil).
+ Returned error can be queried via 'error', which is nil otherwise.
+ */
++ (nullable GLKTextureInfo *)textureWithName:(NSString *)name                                       /* The asset name */
+                                 scaleFactor:(CGFloat)scaleFactor                                   /* scale factor of asset to be retrieved */
+                                      bundle:(nullable NSBundle*)bundle                             /* The bundle where the named texture is located */
+                                     options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                                       error:(NSError * __nullable * __nullable)outError;           /* Error description. */
 
 /*
  Synchronously create a texture from data residing in memory.
@@ -276,6 +294,17 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
                          options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
                            queue:(nullable dispatch_queue_t)queue                       /* Dispatch queue, or NULL to use the main queue. */
                completionHandler:(GLKTextureLoaderCallback)block;                       /* Block to be invoked on the above dispatch queue. */
+
+/*
+ Asynchronously load a named texture asset from a given bundled into an OpenGL texture
+ Invokes the block on the provided queue when the operation is complete. If queue is NULL, the main queue will be used.
+ */
+- (void)textureWithName:(NSString *)name                                       /* The asset name */
+            scaleFactor:(CGFloat)scaleFactor                                   /* scale factor of asset to be retrieved */
+                 bundle:(nullable NSBundle*)bundle                             /* The bundle where the named texture is located */
+                options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                  queue:(nullable dispatch_queue_t)queue                       /* Dispatch queue, or NULL to use the main queue. */
+      completionHandler:(GLKTextureLoaderCallback)block;                       /* Block to be invoked on the above dispatch queue. */
 
 /*
  Asynchronously create a texture from data residing in memory.

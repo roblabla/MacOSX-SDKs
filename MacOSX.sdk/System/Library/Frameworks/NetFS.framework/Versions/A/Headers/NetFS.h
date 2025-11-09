@@ -223,6 +223,8 @@ typedef SInt32 netfsError;
  *     and we've always supported NFS submounts, so we continue to do so)
  *     the kNetFSAllowSubMountsKey has no effect, as there's no notion of
  *     submounts
+ * 4)  kNetFSOpenURLMountKey is set to true to indicate that the mount is a
+ *     result of an "openURL" event, and as such may be subject to auto-quarantine.
  */
 //#define kNetFSNoUserPreferencesKey	CFSTR("NoUserPreferences")	/* defined for GetServerInfo above */
 #define kNetFSPasswordKey		CFSTR("Password")
@@ -231,6 +233,7 @@ typedef SInt32 netfsError;
 #define kNetFSMountFlagsKey		CFSTR("MountFlags")
 #define kNetFSAllowSubMountsKey		CFSTR("AllowSubMounts")
 #define kNetFSMountAtMountDirKey	CFSTR("MountAtMountDir")
+#define kNetFSOpenURLMountKey           CFSTR("OpenURLMount")
 
 /*
  * Dictionary keys for the mount information dictionary returned by

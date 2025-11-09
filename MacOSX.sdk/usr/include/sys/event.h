@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2003-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -73,8 +73,9 @@
 					/* (-11) unused */
 #define EVFILT_VM		(-12)	/* Virtual memory events */
 
+#define EVFILT_EXCEPT		(-15)	/* Exception events */
 
-#define EVFILT_SYSCOUNT		14
+#define EVFILT_SYSCOUNT		15
 #define EVFILT_THREADMARKER	EVFILT_SYSCOUNT /* Internal use only */
 
 #pragma pack(4)
@@ -126,38 +127,44 @@ struct kevent64_s {
 
 
 /* kevent system call flags */
-#define KEVENT_FLAG_NONE		0x00	/* no flag value */
-#define KEVENT_FLAG_IMMEDIATE		0x01	/* immediate timeout */
-#define KEVENT_FLAG_ERROR_EVENTS	0x02	/* output events only include change errors */
+#define KEVENT_FLAG_NONE               0x000	/* no flag value */
+#define KEVENT_FLAG_IMMEDIATE          0x001	/* immediate timeout */
+#define KEVENT_FLAG_ERROR_EVENTS       0x002	/* output events only include change errors */
 
 
 /* actions */
-#define EV_ADD			0x0001		/* add event to kq (implies enable) */
-#define EV_DELETE		0x0002		/* delete event from kq */
-#define EV_ENABLE		0x0004		/* enable event */
-#define EV_DISABLE		0x0008		/* disable event (not reported) */
+#define EV_ADD              0x0001		/* add event to kq (implies enable) */
+#define EV_DELETE           0x0002		/* delete event from kq */
+#define EV_ENABLE           0x0004		/* enable event */
+#define EV_DISABLE          0x0008		/* disable event (not reported) */
 
 /* flags */
-#define EV_ONESHOT		0x0010		/* only report one occurrence */
-#define EV_CLEAR		0x0020		/* clear event state after reporting */
-#define EV_RECEIPT		0x0040		/* force EV_ERROR on success, data == 0 */
-#define EV_DISPATCH     0x0080      /* disable event after reporting */
+#define EV_ONESHOT          0x0010		/* only report one occurrence */
+#define EV_CLEAR            0x0020		/* clear event state after reporting */
+#define EV_RECEIPT          0x0040		/* force immediate event output */
+                                		/* ... with or without EV_ERROR */
+                                  		/* ... use KEVENT_FLAG_ERROR_EVENTS */
+                                		/*     on syscalls supporting flags */
 
-#define EV_UDATA_SPECIFIC	0x0100          /* unique kevent per udata value */
-                                            /* ... in combination with EV_DELETE */
-                                            /* will defer delete until udata-specific */
-                                            /* event enabled. EINPROGRESS will be */
-                                            /* returned to indicate the deferral */
+#define EV_DISPATCH         0x0080		/* disable event after reporting */
+#define EV_UDATA_SPECIFIC   0x0100		/* unique kevent per udata value */
 
-#define EV_DISPATCH2		(EV_DISPATCH | EV_UDATA_SPECIFIC)
+#define EV_DISPATCH2        (EV_DISPATCH | EV_UDATA_SPECIFIC)
+                                  		/* ... in combination with EV_DELETE */
+                                  		/* will defer delete until udata-specific */
+                                  		/* event enabled. EINPROGRESS will be */
+                                  		/* returned to indicate the deferral */
 
-#define EV_SYSFLAGS		0xF000		/* reserved by system */
-#define EV_FLAG0		0x1000		/* filter-specific flag */
-#define EV_FLAG1		0x2000		/* filter-specific flag */
+#define EV_VANISHED         0x0200		/* report that source has vanished  */
+                                  		/* ... only valid with EV_DISPATCH2 */
+
+#define EV_SYSFLAGS         0xF000		/* reserved by system */
+#define EV_FLAG0            0x1000		/* filter-specific flag */
+#define EV_FLAG1            0x2000		/* filter-specific flag */
 
 /* returned values */
-#define EV_EOF			0x8000		/* EOF detected */
-#define EV_ERROR		0x4000		/* error, data contains errno */
+#define EV_EOF              0x8000		/* EOF detected */
+#define EV_ERROR            0x4000		/* error, data contains errno */
 
 /*
  * Filter specific flags for EVFILT_READ
@@ -218,6 +225,9 @@ struct kevent64_s {
  */
 #define NOTE_LOWAT	0x00000001		/* low water mark */
 
+/* data/hint flags for EVFILT_EXCEPT, shared with userspace */
+#define NOTE_OOB	0x00000002		/* OOB data */
+
 /*
  * data/hint fflags for EVFILT_VNODE, shared with userspace
  */
@@ -229,6 +239,7 @@ struct kevent64_s {
 #define	NOTE_RENAME	0x00000020		/* vnode was renamed */
 #define	NOTE_REVOKE	0x00000040		/* vnode access was revoked */
 #define NOTE_NONE	0x00000080		/* No specific vnode event: to test for EVFILT_READ activation*/
+#define NOTE_FUNLOCK	0x00000100		/* vnode was unlocked by flock(2) */
 
 /*
  * data/hint fflags for EVFILT_PROC, shared with userspace
@@ -296,6 +307,7 @@ enum {
 #define NOTE_LEEWAY	0x00000010		/* ext[1] holds leeway for power aware timers */
 #define NOTE_CRITICAL	0x00000020		/* system does minimal timer coalescing */
 #define NOTE_BACKGROUND	0x00000040		/* system does maximum timer coalescing */
+#define NOTE_MACH_CONTINUOUS_TIME	0x00000080		/* use continuous time base */
 
 /*
  * data/hint fflags for EVFILT_MACHPORT, shared with userspace.

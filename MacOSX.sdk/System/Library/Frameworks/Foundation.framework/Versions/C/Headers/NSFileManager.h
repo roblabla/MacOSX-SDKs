@@ -1,15 +1,22 @@
 /*	NSFileManager.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSEnumerator.h>
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSPathUtilities.h>
+#import <Foundation/NSNotification.h>
+#import <Foundation/NSError.h>
+#import <Foundation/NSURL.h>
 #import <CoreFoundation/CFBase.h>
 
 @class NSArray<ObjectType>, NSData, NSDate, NSDirectoryEnumerator<ObjectType>, NSError, NSNumber;
 @protocol NSFileManagerDelegate;
+
+typedef NSString * NSFileAttributeKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSFileAttributeType NS_STRING_ENUM;
+typedef NSString * NSFileProtectionType NS_STRING_ENUM;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -69,25 +76,31 @@ typedef NS_OPTIONS(NSUInteger, NSFileManagerUnmountOptions) {
 } NS_ENUM_AVAILABLE(10_11, NA);
 
 /* If unmountVolumeAtURL:options:completionHandler: fails, the process identifier of the dissenter can be found in the  NSError's userInfo dictionary with this key */
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(7)
 FOUNDATION_EXPORT NSString *const NSFileManagerUnmountDissentingProcessIdentifierErrorKey NS_AVAILABLE(10_11, NA); // value is NSNumber containing the process identifier of the dissenter
+#else
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSFileManagerUnmountDissentingProcessIdentifierErrorKey NS_AVAILABLE(10_11, NA);
+#endif
 
 /* Notification sent after the current ubiquity identity has changed.
 */
-extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_8, 6_0);
+extern NSNotificationName const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_8, 6_0);
 
 @interface NSFileManager : NSObject
 
 /* Returns the default singleton instance.
 */
-+ (NSFileManager *)defaultManager;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, strong) NSFileManager *defaultManager;
+#endif
 
 /* -mountedVolumeURLsIncludingResourceValuesForKeys:options: returns an NSArray of NSURLs locating the mounted volumes available on the computer. The property keys that can be requested are available in <Foundation/NSURL.h>.
  */
-- (nullable NSArray<NSURL *> *)mountedVolumeURLsIncludingResourceValuesForKeys:(nullable NSArray<NSString *> *)propertyKeys options:(NSVolumeEnumerationOptions)options NS_AVAILABLE(10_6, 4_0);
+- (nullable NSArray<NSURL *> *)mountedVolumeURLsIncludingResourceValuesForKeys:(nullable NSArray<NSURLResourceKey> *)propertyKeys options:(NSVolumeEnumerationOptions)options NS_AVAILABLE(10_6, 4_0);
 
 /* This method starts the process of unmounting the volume specified by url. If the volume is encrypted, it is re-locked after being unmounted. The completionHandler will be executed when the operation is complete. If the operation was successful, the block’s errorOrNil argument will be nil; otherwise, errorOrNil will be an error object indicating why the unmount operation failed.
  */
-- (void)unmountVolumeAtURL:(NSURL *)url options:(NSFileManagerUnmountOptions)mask completionHandler:(void (^)(NSError * __nullable errorOrNil))completionHandler NS_AVAILABLE(10_11, NA);
+- (void)unmountVolumeAtURL:(NSURL *)url options:(NSFileManagerUnmountOptions)mask completionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_AVAILABLE(10_11, NA);
 
 /* -contentsOfDirectoryAtURL:includingPropertiesForKeys:options:error: returns an NSArray of NSURLs identifying the the directory entries. If this method returns nil, an NSError will be returned by reference in the 'error' parameter. If the directory contains no entries, this method will return the empty array. When an array is specified for the 'keys' parameter, the specified property values will be pre-fetched and cached with each enumerated URL.
  
@@ -95,7 +108,7 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
  
     If you wish to only receive the URLs and no other attributes, then pass '0' for 'options' and an empty NSArray ('[NSArray array]') for 'keys'. If you wish to have the property caches of the vended URLs pre-populated with a default set of attributes, then pass '0' for 'options' and 'nil' for 'keys'.
  */
-- (nullable NSArray<NSURL *> *)contentsOfDirectoryAtURL:(NSURL *)url includingPropertiesForKeys:(nullable NSArray<NSString *> *)keys options:(NSDirectoryEnumerationOptions)mask error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
+- (nullable NSArray<NSURL *> *)contentsOfDirectoryAtURL:(NSURL *)url includingPropertiesForKeys:(nullable NSArray<NSURLResourceKey> *)keys options:(NSDirectoryEnumerationOptions)mask error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 
 
 /* -URLsForDirectory:inDomains: is analogous to NSSearchPathForDirectoriesInDomains(), but returns an array of NSURL instances for use with URL-taking APIs. This API is suitable when you need to search for a file or files which may live in one of a variety of locations in the domains specified.
@@ -132,7 +145,9 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
  
     This method replaces changeFileAttributes:atPath:.
  */
-- (BOOL)setAttributes:(NSDictionary<NSString *, id> *)attributes ofItemAtPath:(NSString *)path error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+- (BOOL)setAttributes:(NSDictionary<NSFileAttributeKey, id> *)attributes ofItemAtPath:(NSString *)path error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
+#endif
 
 /* createDirectoryAtPath:withIntermediateDirectories:attributes:error: creates a directory at the specified path. If you pass 'NO' for createIntermediates, the directory must not exist at the time this call is made. Passing 'YES' for 'createIntermediates' will create any necessary intermediate directories. This method returns YES if all directories specified in 'path' were created and attributes were set. Directories are created with attributes specified by the dictionary passed to 'attributes'. If no dictionary is supplied, directories are created according to the umask of the process. This method returns NO if a failure occurs at any stage of the operation. If an error parameter was provided, a presentable NSError will be returned by reference.
  
@@ -156,13 +171,17 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
  
     This method replaces fileAttributesAtPath:traverseLink:.
  */
-- (nullable NSDictionary<NSString *, id> *)attributesOfItemAtPath:(NSString *)path error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+- (nullable NSDictionary<NSFileAttributeKey, id> *)attributesOfItemAtPath:(NSString *)path error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
+#endif
 
 /* attributesOfFileSystemForPath:error: returns an NSDictionary of key/value pairs containing the attributes of the filesystem containing the provided path. If this method returns 'nil', an NSError will be returned by reference in the 'error' parameter. This method does not traverse a terminal symlink.
  
     This method replaces fileSystemAttributesAtPath:.
  */
-- (nullable NSDictionary<NSString *, id> *)attributesOfFileSystemForPath:(NSString *)path error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+- (nullable NSDictionary<NSFileAttributeKey, id> *)attributesOfFileSystemForPath:(NSString *)path error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
+#endif
 
 /* createSymbolicLinkAtPath:withDestination:error: returns YES if the symbolic link that point at 'destPath' was able to be created at the location specified by 'path'. If this method returns NO, the link was unable to be created and an NSError will be returned by reference in the 'error' parameter. This method does not traverse a terminal symlink.
  
@@ -194,7 +213,7 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
 
     To easily discover if an item is in the Trash, you may use [fileManager getRelationship:&result ofDirectory:NSTrashDirectory inDomain:0 toItemAtURL:url error:&error] && result == NSURLRelationshipContains.
  */
-- (BOOL)trashItemAtURL:(NSURL *)url resultingItemURL:(NSURL * __nullable * __nullable)outResultingURL error:(NSError **)error NS_AVAILABLE_MAC(10_8);
+- (BOOL)trashItemAtURL:(NSURL *)url resultingItemURL:(NSURL * _Nullable * _Nullable)outResultingURL error:(NSError **)error NS_AVAILABLE_MAC(10_8);
 
 /* The following methods are deprecated on Mac OS X 10.5. Their URL-based and/or error-returning replacements are listed above.
  */
@@ -247,7 +266,7 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
 
     If you wish to only receive the URLs and no other attributes, then pass '0' for 'options' and an empty NSArray ('[NSArray array]') for 'keys'. If you wish to have the property caches of the vended URLs pre-populated with a default set of attributes, then pass '0' for 'options' and 'nil' for 'keys'.
  */
-- (nullable NSDirectoryEnumerator<NSURL *> *)enumeratorAtURL:(NSURL *)url includingPropertiesForKeys:(nullable NSArray<NSString *> *)keys options:(NSDirectoryEnumerationOptions)mask errorHandler:(nullable BOOL (^)(NSURL *url, NSError *error))handler NS_AVAILABLE(10_6, 4_0);
+- (nullable NSDirectoryEnumerator<NSURL *> *)enumeratorAtURL:(NSURL *)url includingPropertiesForKeys:(nullable NSArray<NSURLResourceKey> *)keys options:(NSDirectoryEnumerationOptions)mask errorHandler:(nullable BOOL (^)(NSURL *url, NSError *error))handler NS_AVAILABLE(10_6, 4_0);
 
 /* subpathsAtPath: returns an NSArray of all contents and subpaths recursively from the provided path. This may be very expensive to compute for deep filesystem hierarchies, and should probably be avoided.
  */
@@ -260,7 +279,7 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
 
 /* fileSystemRepresentationWithPath: returns an array of characters suitable for passing to lower-level POSIX style APIs. The string is provided in the representation most appropriate for the filesystem in question.
  */
-- (__strong const char *)fileSystemRepresentationWithPath:(NSString *)path NS_RETURNS_INNER_POINTER;
+- (const char *)fileSystemRepresentationWithPath:(NSString *)path NS_RETURNS_INNER_POINTER;
 
 /* stringWithFileSystemRepresentation:length: returns an NSString created from an array of bytes that are in the filesystem representation.
  */
@@ -273,7 +292,7 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
     If `backupItemName` is provided, that name will be used to create a backup of the original item. The backup is placed in the same directory as the original item. If an error occurs during the creation of the backup item, the operation will fail. If there is already an item with the same name as the backup item, that item will be removed. The backup item will be removed in the event of success unless the `NSFileManagerItemReplacementWithoutDeletingBackupItem` option is provided in `options`.
     For `options`, pass `0` to get the default behavior, which uses only the metadata from the new item while adjusting some properties using values from the original item. Pass `NSFileManagerItemReplacementUsingNewMetadataOnly` in order to use all possible metadata from the new item.
  */
-- (BOOL)replaceItemAtURL:(NSURL *)originalItemURL withItemAtURL:(NSURL *)newItemURL backupItemName:(nullable NSString *)backupItemName options:(NSFileManagerItemReplacementOptions)options resultingItemURL:(NSURL * __nullable * __nullable)resultingURL error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
+- (BOOL)replaceItemAtURL:(NSURL *)originalItemURL withItemAtURL:(NSURL *)newItemURL backupItemName:(nullable NSString *)backupItemName options:(NSFileManagerItemReplacementOptions)options resultingItemURL:(NSURL * _Nullable * _Nullable)resultingURL error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 
 
 /* Changes whether the item for the specified URL is ubiquitous and moves the item to the destination URL. When making an item ubiquitous, the destination URL must be prefixed with a URL from -URLForUbiquityContainerIdentifier:. Returns YES if the change is successful, NO otherwise.
@@ -298,7 +317,7 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
 
 /* Returns a URL that can be shared with other users to allow them download a copy of the specified ubiquitous item. Also returns the date after which the item will no longer be accessible at the returned URL. The URL must be prefixed with a URL from -URLForUbiquityContainerIdentifier:.
  */
-- (nullable NSURL *)URLForPublishingUbiquitousItemAtURL:(NSURL *)url expirationDate:(NSDate * __nullable * __nullable)outDate error:(NSError **)error NS_AVAILABLE(10_7, 5_0);
+- (nullable NSURL *)URLForPublishingUbiquitousItemAtURL:(NSURL *)url expirationDate:(NSDate * _Nullable * _Nullable)outDate error:(NSError **)error NS_AVAILABLE(10_7, 5_0);
 
 /* Returns an opaque token that represents the current ubiquity identity. This object can be copied, encoded, or compared with isEqual:. When ubiquity containers are unavailable because the user has disabled them, or when the user is simply not logged in, this method will return nil. The NSUbiquityIdentityDidChangeNotification notification is posted after this value changes.
 
@@ -310,6 +329,15 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
  */
 - (nullable NSURL *)containerURLForSecurityApplicationGroupIdentifier:(NSString *)groupIdentifier NS_AVAILABLE(10_8, 7_0); // Available for OS X in 10.8.3.
 
+
+@end
+
+@interface NSFileManager (NSUserInformation)
+
+@property (readonly, copy) NSURL *homeDirectoryForCurrentUser API_AVAILABLE(macosx(10.12)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (readonly, copy) NSURL *temporaryDirectory API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+
+- (nullable NSURL *)homeDirectoryForUser:(NSString *)userName API_AVAILABLE(macosx(10.12)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
@@ -387,8 +415,10 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
 
 /* For NSDirectoryEnumerators created with -enumeratorAtPath:, the -fileAttributes and -directoryAttributes methods return an NSDictionary containing the keys listed below. For NSDirectoryEnumerators created with -enumeratorAtURL:includingPropertiesForKeys:options:errorHandler:, these two methods return nil.
  */
-@property (nullable, readonly, copy) NSDictionary<NSString *, id> *fileAttributes;
-@property (nullable, readonly, copy) NSDictionary<NSString *, id> *directoryAttributes;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (nullable, readonly, copy) NSDictionary<NSFileAttributeKey, id> *fileAttributes;
+@property (nullable, readonly, copy) NSDictionary<NSFileAttributeKey, id> *directoryAttributes;
+#endif
 
 - (void)skipDescendents;
 
@@ -402,42 +432,42 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSFileType;
-FOUNDATION_EXPORT NSString * const NSFileTypeDirectory;
-FOUNDATION_EXPORT NSString * const NSFileTypeRegular;
-FOUNDATION_EXPORT NSString * const NSFileTypeSymbolicLink;
-FOUNDATION_EXPORT NSString * const NSFileTypeSocket;
-FOUNDATION_EXPORT NSString * const NSFileTypeCharacterSpecial;
-FOUNDATION_EXPORT NSString * const NSFileTypeBlockSpecial;
-FOUNDATION_EXPORT NSString * const NSFileTypeUnknown;
-FOUNDATION_EXPORT NSString * const NSFileSize;
-FOUNDATION_EXPORT NSString * const NSFileModificationDate;
-FOUNDATION_EXPORT NSString * const NSFileReferenceCount;
-FOUNDATION_EXPORT NSString * const NSFileDeviceIdentifier;
-FOUNDATION_EXPORT NSString * const NSFileOwnerAccountName;
-FOUNDATION_EXPORT NSString * const NSFileGroupOwnerAccountName;
-FOUNDATION_EXPORT NSString * const NSFilePosixPermissions;
-FOUNDATION_EXPORT NSString * const NSFileSystemNumber;
-FOUNDATION_EXPORT NSString * const NSFileSystemFileNumber;
-FOUNDATION_EXPORT NSString * const NSFileExtensionHidden;
-FOUNDATION_EXPORT NSString * const NSFileHFSCreatorCode;
-FOUNDATION_EXPORT NSString * const NSFileHFSTypeCode;
-FOUNDATION_EXPORT NSString * const NSFileImmutable;
-FOUNDATION_EXPORT NSString * const NSFileAppendOnly;
-FOUNDATION_EXPORT NSString * const NSFileCreationDate;
-FOUNDATION_EXPORT NSString * const NSFileOwnerAccountID;
-FOUNDATION_EXPORT NSString * const NSFileGroupOwnerAccountID;
-FOUNDATION_EXPORT NSString * const NSFileBusy;
-FOUNDATION_EXPORT NSString * const NSFileProtectionKey NS_AVAILABLE_IOS(4_0);
-FOUNDATION_EXPORT NSString * const NSFileProtectionNone NS_AVAILABLE_IOS(4_0);
-FOUNDATION_EXPORT NSString * const NSFileProtectionComplete NS_AVAILABLE_IOS(4_0);
-FOUNDATION_EXPORT NSString * const NSFileProtectionCompleteUnlessOpen NS_AVAILABLE_IOS(5_0);
-FOUNDATION_EXPORT NSString * const NSFileProtectionCompleteUntilFirstUserAuthentication NS_AVAILABLE_IOS(5_0);
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileType;
+FOUNDATION_EXPORT NSFileAttributeType const NSFileTypeDirectory;
+FOUNDATION_EXPORT NSFileAttributeType const NSFileTypeRegular;
+FOUNDATION_EXPORT NSFileAttributeType const NSFileTypeSymbolicLink;
+FOUNDATION_EXPORT NSFileAttributeType const NSFileTypeSocket;
+FOUNDATION_EXPORT NSFileAttributeType const NSFileTypeCharacterSpecial;
+FOUNDATION_EXPORT NSFileAttributeType const NSFileTypeBlockSpecial;
+FOUNDATION_EXPORT NSFileAttributeType const NSFileTypeUnknown;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileSize;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileModificationDate;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileReferenceCount;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileDeviceIdentifier;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileOwnerAccountName;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileGroupOwnerAccountName;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFilePosixPermissions;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileSystemNumber;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileSystemFileNumber;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileExtensionHidden;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileHFSCreatorCode;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileHFSTypeCode;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileImmutable;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileAppendOnly;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileCreationDate;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileOwnerAccountID;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileGroupOwnerAccountID;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileBusy;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileProtectionKey NS_AVAILABLE_IOS(4_0);
+FOUNDATION_EXPORT NSFileProtectionType const NSFileProtectionNone NS_AVAILABLE_IOS(4_0);
+FOUNDATION_EXPORT NSFileProtectionType const NSFileProtectionComplete NS_AVAILABLE_IOS(4_0);
+FOUNDATION_EXPORT NSFileProtectionType const NSFileProtectionCompleteUnlessOpen NS_AVAILABLE_IOS(5_0);
+FOUNDATION_EXPORT NSFileProtectionType const NSFileProtectionCompleteUntilFirstUserAuthentication NS_AVAILABLE_IOS(5_0);
 
-FOUNDATION_EXPORT NSString * const NSFileSystemSize;
-FOUNDATION_EXPORT NSString * const NSFileSystemFreeSize;
-FOUNDATION_EXPORT NSString * const NSFileSystemNodes;
-FOUNDATION_EXPORT NSString * const NSFileSystemFreeNodes;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileSystemSize;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileSystemFreeSize;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileSystemNodes;
+FOUNDATION_EXPORT NSFileAttributeKey const NSFileSystemFreeNodes;
 
 @interface NSDictionary<KeyType, ObjectType> (NSFileAttributes)
 

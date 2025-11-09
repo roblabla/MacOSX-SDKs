@@ -2,14 +2,14 @@
 //  GKChallengeEventHandler.h
 //  Game Center
 //
-//  Copyright 2012-2015 Apple Inc. All rights reserved.
+//  Copyright 2012-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <GameKit/GKChallenge.h>
 
 // GKChallengeEventHandler's delegate must implement the following protocol to be notified of challenge-related events. All of these methods are called on the main thread.
-NS_DEPRECATED(10_8, 10_10, 6_0, 7_0, "You should instead implement the GKChallengeListener protocol and register a listener with GKLocalPlayer.") 
+NS_DEPRECATED(10_8, 10_10, 6_0, 7_0, "You should instead implement the GKChallengeListener protocol and register a listener with GKLocalPlayer.") __WATCHOS_PROHIBITED 
 @protocol GKChallengeEventHandlerDelegate <NSObject>
 
 @optional
@@ -37,6 +37,7 @@ NS_DEPRECATED(10_8, 10_10, 6_0, 7_0, "You should instead implement the GKChallen
 
 @end
 
+#if !TARGET_OS_WATCH
 
 NS_CLASS_DEPRECATED(10_8, 10_10, 6_0, 7_0, "You should instead implement the GKChallengeListener protocol and register a listener with GKLocalPlayer.") 
 // A singleton object responsible for dispatching challenge-related events to its delegate
@@ -46,3 +47,4 @@ NS_CLASS_DEPRECATED(10_8, 10_10, 6_0, 7_0, "You should instead implement the GKC
 
 @property (nonatomic, assign) id<GKChallengeEventHandlerDelegate> delegate NS_DEPRECATED(10_8, 10_10, 6_0, 7_0); // It is not safe to read or write this property on anything other than the main thread
 @end
+#endif

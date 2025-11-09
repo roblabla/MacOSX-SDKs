@@ -313,34 +313,33 @@ struct ctlname {
 #define KERN_TFP_POLICY_DEFAULT 	2	/* Default  Mode: related ones allowed and upcall authentication */
 
 /* KERN_KDEBUG types */
-#define KERN_KDEFLAGS		1
-#define KERN_KDDFLAGS		2
-#define KERN_KDENABLE		3
-#define KERN_KDSETBUF		4
-#define KERN_KDGETBUF		5
-#define KERN_KDSETUP		6
-#define KERN_KDREMOVE		7
-#define KERN_KDSETREG		8
-#define KERN_KDGETREG		9
-#define KERN_KDREADTR		10
-#define KERN_KDPIDTR		11
-#define KERN_KDTHRMAP           12
+#define KERN_KDEFLAGS         1
+#define KERN_KDDFLAGS         2
+#define KERN_KDENABLE         3
+#define KERN_KDSETBUF         4
+#define KERN_KDGETBUF         5
+#define KERN_KDSETUP          6
+#define KERN_KDREMOVE         7
+#define KERN_KDSETREG         8
+#define KERN_KDGETREG         9
+#define KERN_KDREADTR         10
+#define KERN_KDPIDTR          11
+#define KERN_KDTHRMAP         12
 /* Don't use 13 as it is overloaded with KERN_VNODE */
-#define KERN_KDPIDEX            14
-#define KERN_KDSETRTCDEC        15
-#define KERN_KDGETENTROPY       16		/* Obsolescent */
-#define KERN_KDWRITETR		17
-#define KERN_KDWRITEMAP		18
-#define KERN_KDENABLE_BG_TRACE	19
-#define KERN_KDDISABLE_BG_TRACE	20
-#define KERN_KDREADCURTHRMAP	21
-#define KERN_KDSET_TYPEFILTER   22
-#define KERN_KDBUFWAIT		23
-#define KERN_KDCPUMAP		24
-#define KERN_KDWAIT_BG_TRACE_RESET 25
-#define KERN_KDSET_BG_TYPEFILTER   26
-#define KERN_KDWRITEMAP_V3	27
-#define KERN_KDWRITETR_V3	28
+#define KERN_KDPIDEX          14
+#define KERN_KDSETRTCDEC      15 /* obsolete */
+#define KERN_KDGETENTROPY     16 /* obsolete */
+#define KERN_KDWRITETR        17
+#define KERN_KDWRITEMAP       18
+#define KERN_KDTEST           19
+/* 20 unused */
+#define KERN_KDREADCURTHRMAP  21
+#define KERN_KDSET_TYPEFILTER 22
+#define KERN_KDBUFWAIT        23
+#define KERN_KDCPUMAP         24
+/* 25 - 26 unused */
+#define KERN_KDWRITEMAP_V3    27
+#define KERN_KDWRITETR_V3     28
 
 #define CTL_KERN_NAMES { \
 	{ 0, 0 }, \

@@ -6,7 +6,7 @@
  *
  *  See vImage/vImage.h for more on how to view the headerdoc documentation for functions declared herein.
  *
- *  @copyright Copyright (c) 2012-2015 by Apple Inc. All rights reserved.
+ *  @copyright Copyright (c) 2012-2016 by Apple Inc. All rights reserved.
  *
  *  @discussion These interfaces provide methods to help exchange data between CoreGraphics and vImage
  *              and provides conversion routines to convert nearly any image format to nearly any 
@@ -575,7 +575,7 @@ void vImageConverter_Release( vImageConverterRef converter ) __OSX_AVAILABLE_STA
 
 /*!
  *  @function vImageConverter_CreateWithCGImageFormat
- *  @abstract Create a vImageConverterRef to convert from ome vImage_CGImageFormat to another
+ *  @abstract Create a vImageConverterRef to convert from one vImage_CGImageFormat to another
  *  @discussion vImageConverter_CreateWithCGImageFormat creates a vImageConverter to convert between
  *              image formats describable with a vImage_CGImageFormat.  The vImageConverter is intended
  *              to be used (and reused, possibly reentrantly) with vImageConvert_AnyToAny() to convert 
@@ -633,7 +633,7 @@ void vImageConverter_Release( vImageConverterRef converter ) __OSX_AVAILABLE_STA
  *                      from one alpha containing format to another, then the image will be premultiplied or 
  *                      unpremultiplied as necessary and no background color is necessary. (For unpremultiplication, 
  *                      the result color value for pixels with alpha 0 is 0.)  Likewise, when converting between
- *                      alpha-none formats, a background color is not use. In the case of kCGImageAlphaNone ->
+ *                      alpha-none formats, a background color is not used. In the case of kCGImageAlphaNone ->
  *                      kCGImageAlphaNoneSkipFirst/Last, the vacant alpha channel is filled in with 1.0. If NULL
  *                      is passed here, then 0 will be used for the color channels. 
  *

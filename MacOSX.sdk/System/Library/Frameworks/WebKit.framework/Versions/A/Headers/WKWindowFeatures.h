@@ -33,7 +33,7 @@
  */
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+WK_EXTERN API_AVAILABLE(macosx(10.10), ios(8.0))
 @interface WKWindowFeatures : NSObject
 
 /*! @abstract BOOL. Whether the menu bar should be visible. nil if menu bar visibility was not specified.

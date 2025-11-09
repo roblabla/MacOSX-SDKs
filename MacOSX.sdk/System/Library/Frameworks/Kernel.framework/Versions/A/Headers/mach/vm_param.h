@@ -74,6 +74,9 @@
 #include <mach/vm_types.h>
 #endif	/* ASSEMBLER */
 
+#include <os/base.h>
+#include <os/overflow.h>
+
 /*
  *	The machine independent pages are refered to as PAGES.  A page
  *	is some number of hardware pages, depending on the target machine.
@@ -117,6 +120,18 @@
  */
 #define mach_vm_round_page(x) (((mach_vm_offset_t)(x) + PAGE_MASK) & ~((signed)PAGE_MASK))
 #define mach_vm_trunc_page(x) ((mach_vm_offset_t)(x) & ~((signed)PAGE_MASK))
+
+#define round_page_overflow(in, out) __os_warn_unused(({ \
+		bool __ovr = os_add_overflow(in, (__typeof__(*out))PAGE_MASK, out); \
+		*out &= ~((__typeof__(*out))PAGE_MASK); \
+		__ovr; \
+	}))
+
+static inline int OS_WARN_RESULT
+mach_vm_round_page_overflow(mach_vm_offset_t in, mach_vm_offset_t *out)
+{
+	return round_page_overflow(in, out);
+}
 
 #define memory_object_round_page(x) (((memory_object_offset_t)(x) + PAGE_MASK) & ~((signed)PAGE_MASK))
 #define memory_object_trunc_page(x) ((memory_object_offset_t)(x) & ~((signed)PAGE_MASK))

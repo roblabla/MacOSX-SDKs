@@ -49,10 +49,10 @@ NS_ASSUME_NONNULL_BEGIN
  Used to configure @link WKWebView @/link instances.
  */
 #if TARGET_OS_IPHONE
-NS_CLASS_AVAILABLE(10_10, 8_0)
+WK_EXTERN API_AVAILABLE(macosx(10.10), ios(8.0))
 @interface WKWebView : UIView
 #else
-NS_CLASS_AVAILABLE(10_10, 8_0)
+WK_EXTERN API_AVAILABLE(macosx(10.10), ios(8.0))
 @interface WKWebView : NSView
 #endif
 
@@ -83,7 +83,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (instancetype)initWithFrame:(CGRect)frame configuration:(WKWebViewConfiguration *)configuration NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithCoder:(NSCoder *)coder NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 /*! @abstract Navigates to a requested URL.
  @param request The request specifying the URL to which to navigate.
@@ -98,7 +98,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  If readAccessURL references a directory, files inside that file may be loaded by WebKit.
  @result A new navigation for the given file URL.
  */
-- (nullable WKNavigation *)loadFileURL:(NSURL *)URL allowingReadAccessToURL:(NSURL *)readAccessURL NS_AVAILABLE(10_11, 9_0);
+- (nullable WKNavigation *)loadFileURL:(NSURL *)URL allowingReadAccessToURL:(NSURL *)readAccessURL API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*! @abstract Sets the webpage contents and base URL.
  @param string The string to use as the contents of the webpage.
@@ -114,7 +114,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @param baseURL A URL that is used to resolve relative URLs within the document.
  @result A new navigation.
  */
-- (nullable WKNavigation *)loadData:(NSData *)data MIMEType:(NSString *)MIMEType characterEncodingName:(NSString *)characterEncodingName baseURL:(NSURL *)baseURL NS_AVAILABLE(10_11, 9_0);
+- (nullable WKNavigation *)loadData:(NSData *)data MIMEType:(NSString *)MIMEType characterEncodingName:(NSString *)characterEncodingName baseURL:(NSURL *)baseURL API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*! @abstract Navigates to an item from the back-forward list and sets it
  as the current item.
@@ -164,12 +164,11 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 @property (nonatomic, readonly) BOOL hasOnlySecureContent;
 
-/*! @abstract An array of SecCertificateRef objects forming the certificate
- chain for the currently committed navigation.
- @discussion The certificates are ordered from leaf (at index 0) to anchor.
- @link WKWebView @/link is key-value observing (KVO) compliant for this property.
+/*! @abstract A SecTrustRef for the currently committed navigation.
+ @discussion @link WKWebView @/link is key-value observing (KVO) compliant 
+ for this property.
  */
-@property (nonatomic, readonly, copy) NSArray *certificateChain NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readonly, nullable) SecTrustRef serverTrust API_AVAILABLE(macosx(10.12), ios(10.0));
 
 /*! @abstract A Boolean value indicating whether there is a back item in
  the back-forward list that can be navigated to.
@@ -219,7 +218,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @param completionHandler A block to invoke when script evaluation completes or fails.
  @discussion The completionHandler is passed the result of the script evaluation or an error.
 */
-- (void)evaluateJavaScript:(NSString *)javaScriptString completionHandler:(void (^ __nullable)(__nullable id, NSError * __nullable error))completionHandler;
+- (void)evaluateJavaScript:(NSString *)javaScriptString completionHandler:(void (^ _Nullable)(_Nullable id, NSError * _Nullable error))completionHandler;
 
 /*! @abstract A Boolean value indicating whether horizontal swipe gestures
  will trigger back-forward list navigations.
@@ -229,13 +228,13 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 /*! @abstract The custom user agent string or nil if no custom user agent string has been set.
 */
-@property (nullable, nonatomic, copy) NSString *customUserAgent NS_AVAILABLE(10_11, 9_0);
+@property (nullable, nonatomic, copy) NSString *customUserAgent API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*! @abstract A Boolean value indicating whether link preview is allowed for any
  links inside this WKWebView.
- @discussion The default value is NO on iOS and YES on Mac.
+ @discussion The default value is YES on Mac and iOS.
  */
-@property (nonatomic) BOOL allowsLinkPreview NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic) BOOL allowsLinkPreview API_AVAILABLE(macosx(10.11), ios(9.0));
 
 #if TARGET_OS_IPHONE
 /*! @abstract The scroll view associated with the web view.
@@ -304,6 +303,12 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @end
 
 #endif
+
+@interface WKWebView (WKDeprecated)
+
+@property (nonatomic, readonly, copy) NSArray *certificateChain API_DEPRECATED_WITH_REPLACEMENT("serverTrust", macosx(10.11, 10.12), ios(9.0, 10.0));
+
+@end
 
 NS_ASSUME_NONNULL_END
 

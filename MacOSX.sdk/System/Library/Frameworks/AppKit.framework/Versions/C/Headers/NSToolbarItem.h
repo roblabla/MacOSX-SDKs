@@ -1,7 +1,7 @@
 /*
 	NSToolbarItem.h
 	Application Kit
-	Copyright (c) 2000-2015, Apple Inc.
+	Copyright (c) 2000-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NSToolbarItemViewer, NSMenuItem, NSView, NSImage;
+@class NSToolbarItemViewer, NSMenuItem, NSView, NSImage, CKShare;
 
 @interface NSToolbarItem : NSObject <NSCopying, NSValidatedUserInterfaceItem> {
 @private
@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSSize		_minSize;
     NSSize		_maxSize;
 #if __LP64__
-    id			_toolbarItemReserved;
+    id			_toolbarItemReserved __unused;
 #endif
 }
 
@@ -147,7 +147,14 @@ enum {
 @interface NSObject (NSToolbarItemValidation)
 
 /* NSToolbarItemValidation extends the standard validation idea by introducing this new method which is sent to validators for each visible standard NSToolbarItem with a valid target/action pair.  Note: This message is sent from NSToolbarItem's validate method, however validate will not send this message for items that have custom views. */
-- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem;
+- (BOOL)validateToolbarItem:(NSToolbarItem *)item;
+
+@end
+
+@protocol NSCloudSharingValidation <NSObject>
+
+/* NSToolbarItems created with NSToolbarCloudSharingItemIdentifier use this method for further validation after sending `-validateToolbarItem:` or `-validateUserInterfaceItem:`. The validator for the item's action should return the current CKShare corresponding to the selected item, if any. The state of the item will be changed reflect the state of the CKShare. */
+- (nullable CKShare *)cloudShareForUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)item;
 
 @end
 
@@ -163,5 +170,8 @@ APPKIT_EXTERN NSString * NSToolbarShowFontsItemIdentifier;         // Shows the 
 APPKIT_EXTERN NSString * NSToolbarCustomizeToolbarItemIdentifier;  // Puts the current toolbar into customize mode.
 APPKIT_EXTERN NSString * NSToolbarPrintItemIdentifier;             // Sends printDocument: to firstResponder, but you can change this in toolbarWillAddItem: if you need to do so.
 APPKIT_EXTERN NSString * NSToolbarToggleSidebarItemIdentifier NS_AVAILABLE_MAC(10_11);  // A standard toolbar item identifier for sidebars. It sends -toggleSidebar: to the firstResponder.
+APPKIT_EXTERN NSString * NSToolbarCloudSharingItemIdentifier API_AVAILABLE(macosx(10.12)); // A standard toolbar item identifier for cloud sharing via NSSharingServiceNameCloudSharing. It validates itself and modifies its appearance by using the NSCloudSharingValidation protocol. It sends -performCloudSharing: to the firstResponder.
+
+
 
 NS_ASSUME_NONNULL_END

@@ -73,13 +73,6 @@ extern NSString *const ICCameraDeviceCanReceiveFile;
 */
 extern NSString *const ICCameraDeviceCanAcceptPTPCommands;
 
-/*!
- @const      ICCameraDeviceSupportsFastPTP
- @abstract   ICCameraDeviceSupportsFastPTP
- @discussion Indicates that the camera supports fast PTP commands.
- */
-extern NSString *const ICCameraDeviceSupportsFastPTP;
-
 //------------------------------------------------------------------------------------------------------------------------------
 // Allowed keys in the options dictionary used when downloading a file from the camera
 
@@ -338,14 +331,14 @@ extern NSString *const ICDownloadSidecarFiles;
     @discussion Use 'requestEnableTethering' and 'requestDisableTethering' to enable or disable tethered capture on the device.
 
 */
-@property             BOOL            tetheredCaptureEnabled;
+@property(readonly)             BOOL            tetheredCaptureEnabled;
 
 /*! 
   @method filesOfType:
   @abstract This method returns an array of files on the camera of type fileType. 
   @discussion The fileType string is one of the following Uniform Type Identifier strings: kUTTypeImage, kUTTypeMovie, kUTTypeAudio, or kUTTypeData.
 */
-- ( NSArray<NSString*>*)filesOfType:( NSString*)fileUTType;
+- (nullable NSArray<NSString*>*)filesOfType:( NSString*)fileUTType;
 
 /*! 
   @method requestSyncClock

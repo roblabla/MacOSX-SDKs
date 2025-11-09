@@ -520,6 +520,16 @@ typedef CF_ENUM(UInt32, AudioHardwarePowerHint)
                         property's data. Note that an error is not returned if the UID doesn't refer
                         to any AudioBoxes. Rather, this property will return kAudioObjectUnknown
                         as the value of the property.
+    @constant       kAudioHardwarePropertyClockDeviceList
+                        An array of AudioObjectIDs that represent all the AudioClockDevice objects 
+                        currently provided by the system.
+    @constant       kAudioHardwarePropertyTranslateUIDToClockDevice
+                        This property fetches the AudioObjectID that corresponds to the AudioClockDevice
+                        that has the given UID. The UID is passed in via the qualifier as a CFString
+                        while the AudioObjectID for the AudioClockDevice is returned to the caller
+                        as the property's data. Note that an error is not returned if the UID doesn't
+                        refer to any AudioClockDevice. Rather, this property will return 
+                        kAudioObjectUnknown as the value of the property.
     @constant       kAudioHardwarePropertyProcessIsMaster
                         A UInt32 where 1 means that the current process contains the master instance
                         of the HAL. The master instance of the HAL is the only instance in which
@@ -584,6 +594,8 @@ CF_ENUM(AudioObjectPropertySelector)
     kAudioHardwarePropertyTranslateBundleIDToTransportManager   = 'tmbi',
     kAudioHardwarePropertyBoxList                               = 'box#',
     kAudioHardwarePropertyTranslateUIDToBox                     = 'uidb',
+    kAudioHardwarePropertyClockDeviceList                       = 'clk#',
+    kAudioHardwarePropertyTranslateUIDToClockDevice             = 'uidc',
     kAudioHardwarePropertyProcessIsMaster                       = 'mast',
     kAudioHardwarePropertyIsInitingOrExiting                    = 'inot',
     kAudioHardwarePropertyUserIDChanged                         = 'euid',
@@ -940,6 +952,10 @@ CF_ENUM(UInt32)
     @constant       kAudioDevicePropertyActualSampleRate
                         A Float64 that indicates the current actual sample rate of the AudioDevice
                         as measured by its time stamps.
+    @constant       kAudioDevicePropertyClockDevice
+                        A CFString that contains the UID for the AudioClockDevice that is currently
+                        serving as the master time base of the device. The caller is responsible
+                        for releasing the returned CFObject.
 */
 CF_ENUM(AudioObjectPropertySelector)
 {
@@ -955,7 +971,8 @@ CF_ENUM(AudioObjectPropertySelector)
     kAudioDevicePropertyIOCycleUsage                    = 'ncyc',
     kAudioDevicePropertyStreamConfiguration             = 'slay',
     kAudioDevicePropertyIOProcStreamUsage               = 'suse',
-    kAudioDevicePropertyActualSampleRate                = 'asrt'
+    kAudioDevicePropertyActualSampleRate                = 'asrt',
+	kAudioDevicePropertyClockDevice						= 'apcd'
 };
 
 /*!
@@ -1514,6 +1531,16 @@ CF_ENUM(AudioClassID)
 #define kAudioAggregateDeviceMasterSubDeviceKey "master"
 
 /*!
+    @defined        kAudioAggregateDeviceClockDeviceKey
+    @discussion     The key used in a CFDictionary that describes the composition of an
+                    AudioAggregateDevice. The value for this key is a CFString that contains the
+                    UID for the clock device that is the master time source for the
+                    AudioAggregateDevice. If the aggregate device includes both a master audio
+                    device and a clock device, the clock device will control the master time base.
+*/
+#define kAudioAggregateDeviceClockDeviceKey "clock"
+
+/*!
     @defined        kAudioAggregateDeviceIsPrivateKey
     @discussion     The key used in a CFDictionary that describes the composition of an
                     AudioAggregateDevice. The value for this key is a CFNumber where a value of 0
@@ -1560,13 +1587,21 @@ CF_ENUM(AudioClassID)
                         A CFString that contains the UID for the AudioDevice that is currently
                         serving as the master time base of the aggregate device. The caller is
                         responsible for releasing the returned CFObject.
+    @constant       kAudioAggregateDevicePropertyClockDevice
+                        A CFString that contains the UID for the AudioClockDevice that is currently
+                        serving as the master time base of the aggregate device. If the aggregate
+                        device includes both a master audio device and a clock device, the clock
+                        device will control the master time base. Setting this property will enable
+                        drift correction for all subdevices in the aggregate device. The caller is
+                        responsible for releasing the returned CFObject.
 */
 CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioAggregateDevicePropertyFullSubDeviceList      = 'grup',
     kAudioAggregateDevicePropertyActiveSubDeviceList    = 'agrp',
     kAudioAggregateDevicePropertyComposition            = 'acom',
-    kAudioAggregateDevicePropertyMasterSubDevice        = 'amst'
+    kAudioAggregateDevicePropertyMasterSubDevice        = 'amst',
+    kAudioAggregateDevicePropertyClockDevice            = 'apcd'
 };
 
 //==================================================================================================

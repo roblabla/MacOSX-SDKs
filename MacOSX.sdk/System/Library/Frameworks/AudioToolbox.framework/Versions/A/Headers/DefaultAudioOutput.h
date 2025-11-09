@@ -12,7 +12,7 @@
 
 #include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <AudioUnit/AudioUnit.h>
+	#include <AudioToolbox/AudioUnit.h>
 #else
 	#include <AudioUnit.h>
 #endif

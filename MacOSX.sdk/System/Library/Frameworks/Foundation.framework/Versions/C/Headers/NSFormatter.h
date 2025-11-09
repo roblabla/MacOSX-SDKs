@@ -1,5 +1,5 @@
 /*	NSFormatter.h
-	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -46,18 +46,18 @@ typedef NS_ENUM(NSInteger, NSFormattingUnitStyle) {
 
 @interface NSFormatter : NSObject <NSCopying, NSCoding>
 
-- (nullable NSString *)stringForObjectValue:(id)obj;
+- (nullable NSString *)stringForObjectValue:(nullable id)obj;
 
 - (nullable NSAttributedString *)attributedStringForObjectValue:(id)obj withDefaultAttributes:(nullable NSDictionary<NSString *, id> *)attrs;
 
 - (nullable NSString *)editingStringForObjectValue:(id)obj;
 
-- (BOOL)getObjectValue:(out id __nullable * __nullable)obj forString:(NSString *)string errorDescription:(out NSString * __nullable * __nullable)error;
+- (BOOL)getObjectValue:(out id _Nullable * _Nullable)obj forString:(NSString *)string errorDescription:(out NSString * _Nullable * _Nullable)error;
 
-- (BOOL)isPartialStringValid:(NSString *)partialString newEditingString:(NSString * __nullable * __nullable)newString errorDescription:(NSString * __nullable * __nullable)error;
+- (BOOL)isPartialStringValid:(NSString *)partialString newEditingString:(NSString * _Nullable * _Nullable)newString errorDescription:(NSString * _Nullable * _Nullable)error;
     // Compatibility method.  If a subclass overrides this and does not override the new method below, this will be called as before (the new method just calls this one by default).  The selection range will always be set to the end of the text with this method if replacement occurs.
 
-- (BOOL)isPartialStringValid:(NSString * __nonnull * __nonnull)partialStringPtr proposedSelectedRange:(nullable NSRangePointer)proposedSelRangePtr originalString:(NSString *)origString originalSelectedRange:(NSRange)origSelRange errorDescription:(NSString * __nullable * __nullable)error;
+- (BOOL)isPartialStringValid:(NSString * _Nonnull * _Nonnull)partialStringPtr proposedSelectedRange:(nullable NSRangePointer)proposedSelRangePtr originalString:(NSString *)origString originalSelectedRange:(NSRange)origSelRange errorDescription:(NSString * _Nullable * _Nullable)error;
 
 @end
 

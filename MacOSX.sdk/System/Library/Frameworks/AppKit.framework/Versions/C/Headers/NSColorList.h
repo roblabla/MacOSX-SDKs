@@ -1,7 +1,7 @@
 /*
 	NSColorList.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -14,6 +14,7 @@ NSColorLists post "NSColorListDidChangeNotification" when changed.
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSNotification.h>
 #import <AppKit/AppKitDefines.h>
 #import <CoreFoundation/CFDictionary.h>
 
@@ -87,18 +88,24 @@ NS_ASSUME_NONNULL_BEGIN
 */
 @property (getter=isEditable, readonly) BOOL editable;
 
-/* Use "nil" to save to the user's private colorlists directory. If the color list is named, this method will also insert the color list into availableColorLists.
+/* Save the color list using secure keyed archive format. Specify nil to save to the user's private colorlists directory (and also update availableColorLists), using the name of the color list.
+ */
+- (BOOL)writeToURL:(nullable NSURL *)url error:(NSError **)errPtr NS_AVAILABLE_MAC(10_11);
+
+/* Save the color list using unkeyed archive format. Specify nil to save to the user's private colorlists directory (and also update availableColorLists), using the name of the color list.
+ 
+   Use of the unkeyed archive format (and hence this API) is discouraged since it cannot represent some colors (including custom colorspace based ones) without loss. Use writeToURL:error: instead.
 */
 - (BOOL)writeToFile:(nullable NSString *)path;	
 
-/* If the color list is in the user's path, removes the corresponding file in user's private colorlists directory. Also removes the color list from availableColorLists. If there are no outstanding references to the color list this might deallocate the object as well.
+/* If the color list is in the user's private colorlists directory, removes the corresponding file and the color list from availableColorLists. If there are no outstanding references to the color list this might deallocate the object as well.
 */
 - (void)removeFile;
 
 @end
 
 /* Notifications */
-APPKIT_EXTERN NSString * NSColorListDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSColorListDidChangeNotification;
 
 NS_ASSUME_NONNULL_END
 

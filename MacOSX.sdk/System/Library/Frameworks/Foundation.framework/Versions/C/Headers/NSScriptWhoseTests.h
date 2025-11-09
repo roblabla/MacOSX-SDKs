@@ -1,6 +1,6 @@
 /*
 	NSScriptWhoseTests.h
-	Copyright (c) 1997-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>

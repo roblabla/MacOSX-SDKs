@@ -22,7 +22,7 @@ extern NSString* const QCCompositionPickerViewDidSelectCompositionNotification; 
 @interface QCCompositionPickerView : NSView
 {
 @private
-	__strong void*				_QCCompositionPickerViewPrivate;
+	void*				_QCCompositionPickerViewPrivate;
 }
 
 /*

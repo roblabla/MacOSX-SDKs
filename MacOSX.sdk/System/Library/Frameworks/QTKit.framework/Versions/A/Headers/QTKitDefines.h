@@ -1,7 +1,7 @@
 /*
 	File:		QTKitDefines.h
 
-	Copyright:	(c)2004-2012 by Apple Inc., all rights reserved.
+	Copyright:	(c)2004-2015 by Apple Inc., all rights reserved.
 
 */
 

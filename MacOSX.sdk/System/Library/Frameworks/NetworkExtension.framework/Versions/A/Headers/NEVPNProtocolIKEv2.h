@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2EncryptionAlgorithm) {
 	NEVPNIKEv2EncryptionAlgorithmAES128GCM NS_ENUM_AVAILABLE(10_11, 8_3) = 5,
 	/*! @const NEVPNIKEv2EncryptionAlgorithmAES256GCM Advanced Encryption Standard 256 bit (AES256GCM) */
 	NEVPNIKEv2EncryptionAlgorithmAES256GCM NS_ENUM_AVAILABLE(10_11, 8_3) = 6,
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} NS_ENUM_AVAILABLE(10_11, 8_0);
 
 /*!
  * @typedef NEVPNIKEv2IntegrityAlgorithm
@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2IntegrityAlgorithm) {
 	NEVPNIKEv2IntegrityAlgorithmSHA384 = 4,
 	/*! @const NEVPNIKEv2IntegrityAlgorithmSHA512 SHA-2 512 bit */
 	NEVPNIKEv2IntegrityAlgorithmSHA512 = 5,
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} NS_ENUM_AVAILABLE(10_11, 8_0);
 
 /*!
  * @typedef NEVPNIKEv2DeadPeerDetectionRate
@@ -60,15 +60,15 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2DeadPeerDetectionRate) {
 	NEVPNIKEv2DeadPeerDetectionRateMedium = 2,
 	/*! @const NEVPNIKEv2DeadPeerDetectionRateHigh Run dead peer detection once every 1 minute. If the peer does not respond, retry 5 times at 1 second intervals before declaring the peer dead */
 	NEVPNIKEv2DeadPeerDetectionRateHigh = 3,
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} NS_ENUM_AVAILABLE(10_11, 8_0);
 
 /*!
  * @typedef NEVPNIKEv2DiffieHellmanGroup
  * @abstract IKEv2 Diffie Hellman groups
  */
 typedef NS_ENUM(NSInteger, NEVPNIKEv2DiffieHellmanGroup) {
-	/*! @const NEVPNIKEv2DiffieHellmanGroup0 Diffie Hellman group 0 */
-	NEVPNIKEv2DiffieHellmanGroup0 = 0,
+	/*! @const NEVPNIKEv2DiffieHellmanGroupInvalid Diffie Hellman group 0 is not a valid DH group*/
+	NEVPNIKEv2DiffieHellmanGroupInvalid = 0,
 	/*! @const NEVPNIKEv2DiffieHellmanGroup1 Diffie Hellman group 1 */
 	NEVPNIKEv2DiffieHellmanGroup1 = 1,
 	/*! @const NEVPNIKEv2DiffieHellmanGroup2 Diffie Hellman group 2 */
@@ -92,7 +92,7 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2DiffieHellmanGroup) {
 	/*! @const NEVPNIKEv2DiffieHellmanGroup21 Diffie Hellman group 21 */
 	NEVPNIKEv2DiffieHellmanGroup21 = 21,
 	
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} NS_ENUM_AVAILABLE(10_11, 8_0);
 
 /*!
  * @typedef NEVPNIKEv2CertificateType
@@ -115,32 +115,32 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2CertificateType) {
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_11, 8_0)
 @interface NEVPNIKEv2SecurityAssociationParameters : NSObject <NSSecureCoding,NSCopying>
 
 /*!
  * @property encryptionAlgorithm
  * @discussion The algorithm used by the Security Association to encrypt and decrypt data. Default is NEVPNIKEv2EncryptionAlgorithm3DES.
  */
-@property NEVPNIKEv2EncryptionAlgorithm encryptionAlgorithm NS_AVAILABLE(10_10, 8_0);
+@property NEVPNIKEv2EncryptionAlgorithm encryptionAlgorithm NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property integrityAlgorithm
  * @discussion The algorithm used by the Security Association to verify the integrity of data. Default is NEVPNIKEv2IntegrityAlgorithmSHA96. The IKE psedo-random function algorithm will be inferred based on the integrity algorithm.
  */
-@property NEVPNIKEv2IntegrityAlgorithm integrityAlgorithm NS_AVAILABLE(10_10, 8_0);
+@property NEVPNIKEv2IntegrityAlgorithm integrityAlgorithm NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property diffieHellmanGroup
  * @discussion The Diffie Hellman group used by the Security Association. Default is NEVPNIKEv2DiffieHellmanGroup2.
  */
-@property NEVPNIKEv2DiffieHellmanGroup diffieHellmanGroup NS_AVAILABLE(10_10, 8_0);
+@property NEVPNIKEv2DiffieHellmanGroup diffieHellmanGroup NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property lifetimeMinutes
  * @discussion The life time of the Security Association, in minutes. Default is 60 for IKE Security Associations, and 30 for Child Security Associations. Before the lifetime is reached, IKEv2 will attempt to rekey the Security Association to maintain the connection.
  */
-@property int32_t lifetimeMinutes NS_AVAILABLE(10_10, 8_0);
+@property int32_t lifetimeMinutes NS_AVAILABLE(10_11, 8_0);
 
 @end
 
@@ -151,26 +151,26 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  * Instances of this class use IKE version 2 for key negotiation.
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_11, 8_0)
 @interface NEVPNProtocolIKEv2 : NEVPNProtocolIPSec
 
 /*!
  * @property deadPeerDetectionRate
  * @discussion How frequently the IKEv2 client will run the dead peer detection algorithm.  Default is NEVPNIKEv2DeadPeerDetectionRateMedium.
  */
-@property NEVPNIKEv2DeadPeerDetectionRate deadPeerDetectionRate NS_AVAILABLE(10_10, 8_0);
+@property NEVPNIKEv2DeadPeerDetectionRate deadPeerDetectionRate NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property serverCertificateIssuerCommonName
  * @discussion A string containing the Subject Common Name field of the Certificate Authority certificate that issued the IKEv2 server's certificate.
  */
-@property (copy, nullable) NSString *serverCertificateIssuerCommonName NS_AVAILABLE(10_10, 8_0);
+@property (copy, nullable) NSString *serverCertificateIssuerCommonName NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property serverCertificateCommonName
  * @discussion A string containing the value to verify in the IKEv2 server certificate's Subject Common Name field.
  */
-@property (copy, nullable) NSString *serverCertificateCommonName NS_AVAILABLE(10_10, 8_0);
+@property (copy, nullable) NSString *serverCertificateCommonName NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property certificateType
@@ -188,13 +188,13 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  * @property IKESecurityAssociationParameters
  * @discussion Parameters for the IKE SA
  */
-@property (readonly) NEVPNIKEv2SecurityAssociationParameters *IKESecurityAssociationParameters NS_AVAILABLE(10_10, 8_0);
+@property (readonly) NEVPNIKEv2SecurityAssociationParameters *IKESecurityAssociationParameters NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property childSecurityAssociationParameters
  * @discussion Parameters for the child SA
  */
-@property (readonly) NEVPNIKEv2SecurityAssociationParameters *childSecurityAssociationParameters NS_AVAILABLE(10_10, 8_0);
+@property (readonly) NEVPNIKEv2SecurityAssociationParameters *childSecurityAssociationParameters NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property disableMOBIKE

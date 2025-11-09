@@ -18,8 +18,10 @@
 NS_CLASS_AVAILABLE(10_8, NA)
 @interface AVBEthernetInterface : AVBInterface
 {
+#if AVB_LEGACY_OBJC_RUNTIME
 @private
-	io_object_t _notification;
+	void *_ethernetInterfaceImpl;
+#endif
 }
 
 @end

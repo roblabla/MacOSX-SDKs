@@ -1,7 +1,7 @@
 /*
 	NSPrintPanel.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -83,7 +83,7 @@ APPKIT_EXTERN NSString * const NSPrintPanelAccessorySummaryItemDescriptionKey NS
     NSPrintInfo *_presentedPrintInfo;
     NSWindowController *_windowController;
 #if __LP64__
-    id _reserved[2];
+    id _reserved[2] __unused;
 #else
     unsigned char _compatibilityPadding[192];
 #endif

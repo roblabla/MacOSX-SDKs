@@ -1,7 +1,7 @@
 /*
 	NSPageLayout.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSPrintInfo *_presentedPrintInfo;
     NSWindowController *_windowController;
 #if __LP64__
-    id _reserved[4];
+    id _reserved[4] __unused;
 #else
     unsigned char _compatibilityPadding[156];
 #endif

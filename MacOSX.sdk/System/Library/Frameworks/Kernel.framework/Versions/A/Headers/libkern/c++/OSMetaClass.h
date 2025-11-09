@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -63,6 +63,8 @@ class OSSerialize;
 #define APPLE_KEXT_VTABLE_PADDING   1
 #endif /* TARGET_OS_EMBEDDED */
 
+
+#define APPLE_KEXT_ALIGN_CONTAINERS     (0 == APPLE_KEXT_VTABLE_PADDING)
 
 #if defined(__LP64__)
 /*! @parseOnly */
@@ -285,11 +287,9 @@ public:
 #define OSCheckTypeInst(typeinst, inst) \
     OSMetaClassBase::checkTypeInst(inst, typeinst)
 
-/*! @function OSSafeRelease
- *  @abstract Release an object if not <code>NULL</code>.
- *  @param    inst  Instance of an OSObject, may be <code>NULL</code>.
- */
-#define OSSafeRelease(inst)       do { if (inst) (inst)->release(); } while (0)
+#define OSSafeRelease(inst) \
+  do { int OSSafeRelease __attribute__ ((deprecated("Use OSSafeReleaseNULL"))); (OSSafeRelease); \
+	if (inst) (inst)->release(); } while (0)
 
 /*! @function OSSafeReleaseNULL
  *  @abstract Release an object if not <code>NULL</code>, then set it to <code>NULL</code>.
@@ -779,9 +779,7 @@ private:
  * OSMetaClass manages run-time type information
  * for Libkern and I/O Kit C++ classes.
  *
- * @discussion
- *
- * OSMetaClass manages run-time type information
+ * @discussion OSMetaClass manages run-time type information
  * for Libkern and I/O Kit C++ classes.
  * An instance of OSMetaClass exists for (nearly) every such C++ class,
  * keeping track of inheritance relationships, class lookup by name,
@@ -1097,7 +1095,7 @@ protected:
 
     // Needs to be overriden as NULL as all OSMetaClass objects are allocated
     // statically at compile time, don't accidently try to free them.
-    void operator delete(void *, size_t) { };
+    void operator delete(void *, size_t) { }
 
 public:
     static const OSMetaClass * const metaClass;

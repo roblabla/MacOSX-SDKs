@@ -1,7 +1,7 @@
 /*
 	NSAccessibility.h
 	Application Kit
-	Copyright (c) 2001-2015, Apple Inc.
+	Copyright (c) 2001-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -95,10 +95,16 @@ NS_ASSUME_NONNULL_BEGIN
 /* Get the current accessibility display option for reduce transparency. If this property's value is true, UI (mainly window) backgrounds should not be semi-transparent; they should be opaque. You may listen for NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification to be notified when this changes. */
 @property (readonly) BOOL accessibilityDisplayShouldReduceTransparency NS_AVAILABLE_MAC(10_10);
 
+/* Get the current accessibility display option for reduce motion. If this property's value is true, UI should avoid large animations, especially those that simulate the third dimension. You may listen for NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification to be notified when this changes. */
+@property (readonly) BOOL accessibilityDisplayShouldReduceMotion NS_AVAILABLE_MAC(10_12);
+
+/* Get the current accessibility display option for invert colors. If this property's value is true then the display will be inverted. In these cases it may be needed for UI drawing to be adjusted to in order to display optimally when inverted.  You may listen for NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification to be notified when this changes. */
+@property (readonly) BOOL accessibilityDisplayShouldInvertColors NS_AVAILABLE_MAC(10_12);
+
 @end
 
 /* Notification posted to the NSWorkspace notification center when any accessibility display options have changed. */
-APPKIT_EXTERN NSString * const NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification NS_AVAILABLE_MAC(10_10);
+APPKIT_EXTERN NSNotificationName const NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification NS_AVAILABLE_MAC(10_10);
 
 
 /*** Accessibility Related Methods ***/

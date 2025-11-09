@@ -136,7 +136,7 @@ __BEGIN_DECLS
  * 		[1] remqueue
  * 		[1] insque
  * 		[1] remque
- * 		[1] re_queue
+ * 		[1] re_queue_head
  * 		[1] re_queue_tail
  * 		[1] movqueue
  * 		[1] qe_element
@@ -491,6 +491,7 @@ re_queue_tail(queue_t que, queue_entry_t elt)
 	         (elt = qe_element((head)->next, typeof(*(elt)), field)); \
 	     &((elt)->field) != (head); \
 	     elt = _nelt, _nelt = qe_element((elt)->field.next, typeof(*(elt)), field)) \
+
 
 /*
  *	Macro:		queue_init

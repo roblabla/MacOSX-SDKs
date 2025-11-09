@@ -1,7 +1,7 @@
 /*
 	NSMatrix.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -120,8 +120,8 @@ typedef struct __MFlags {
 
 
 - (instancetype)initWithFrame:(NSRect)frameRect;
-- (instancetype)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)aMode prototype:(NSCell *)aCell numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide;
-- (instancetype)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)aMode cellClass:(nullable Class)factoryId numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide;
+- (instancetype)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)mode prototype:(NSCell *)cell numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide;
+- (instancetype)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)mode cellClass:(nullable Class)factoryId numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide;
 
 
 @property (assign) Class cellClass;
@@ -129,10 +129,10 @@ typedef struct __MFlags {
 - (NSCell *)makeCellAtRow:(NSInteger)row column:(NSInteger)col;
 @property NSMatrixMode mode;
 @property BOOL allowsEmptySelection;
-- (void)sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;
+- (void)sendAction:(SEL)selector to:(id)object forAllCells:(BOOL)flag;
 @property (readonly, copy) NSArray<NSCell *> *cells;
 - (void)sortUsingSelector:(SEL)comparator;
-- (void)sortUsingFunction:(NSInteger (*)(id, id, void * __nullable))compare context:(nullable void *)context;
+- (void)sortUsingFunction:(NSInteger (NS_NOESCAPE *)(id, id, void * __nullable))compare context:(nullable void *)context;
 @property (nullable, readonly, strong) __kindof NSCell *selectedCell;
 @property (readonly, copy) NSArray<__kindof NSCell *> *selectedCells;
 @property (readonly) NSInteger selectedRow;
@@ -143,7 +143,7 @@ typedef struct __MFlags {
 - (void)deselectAllCells;
 - (void)selectCellAtRow:(NSInteger)row column:(NSInteger)col;
 - (void)selectAll:(nullable id)sender;
-- (BOOL)selectCellWithTag:(NSInteger)anInt;
+- (BOOL)selectCellWithTag:(NSInteger)tag;
 @property NSSize cellSize;
 @property NSSize intercellSpacing;
 - (void)setScrollable:(BOOL)flag;
@@ -157,21 +157,21 @@ typedef struct __MFlags {
 @property (readonly) NSInteger numberOfColumns;
 - (nullable __kindof NSCell *)cellAtRow:(NSInteger)row column:(NSInteger)col;
 - (NSRect)cellFrameAtRow:(NSInteger)row column:(NSInteger)col;
-- (BOOL)getRow:(NSInteger *)row column:(NSInteger *)col ofCell:(NSCell *)aCell;
-- (BOOL)getRow:(NSInteger *)row column:(NSInteger *)col forPoint:(NSPoint)aPoint;
+- (BOOL)getRow:(NSInteger *)row column:(NSInteger *)col ofCell:(NSCell *)cell;
+- (BOOL)getRow:(NSInteger *)row column:(NSInteger *)col forPoint:(NSPoint)point;
 - (void)renewRows:(NSInteger)newRows columns:(NSInteger)newCols;
 - (void)putCell:(NSCell *)newCell atRow:(NSInteger)row column:(NSInteger)col;
 - (void)addRow;
 - (void)addRowWithCells:(NSArray<NSCell *> *)newCells;
 - (void)insertRow:(NSInteger)row;
-- (void)insertRow:(NSInteger)row withCells:(NSArray<NSCell *> *)newCells;
+- (void)insertRow:(NSInteger)row withCells:(nullable NSArray<NSCell *> *)newCells;
 - (void)removeRow:(NSInteger)row;
 - (void)addColumn;
 - (void)addColumnWithCells:(NSArray<NSCell *> *)newCells;
 - (void)insertColumn:(NSInteger)column;
-- (void)insertColumn:(NSInteger)column withCells:(NSArray<NSCell *> *)newCells;
+- (void)insertColumn:(NSInteger)column withCells:(nullable NSArray<NSCell *> *)newCells;
 - (void)removeColumn:(NSInteger)col;
-- (nullable __kindof NSCell *)cellWithTag:(NSInteger)anInt;
+- (nullable __kindof NSCell *)cellWithTag:(NSInteger)tag;
 @property (nullable) SEL doubleAction;
 @property BOOL autosizesCells;
 - (void)sizeToCells;
@@ -182,8 +182,8 @@ typedef struct __MFlags {
 @property (getter=isAutoscroll) BOOL autoscroll;
 - (void)scrollCellToVisibleAtRow:(NSInteger)row column:(NSInteger)col;
 @property (readonly) NSInteger mouseDownFlags;
-- (void)mouseDown:(NSEvent *)theEvent;
-- (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
+- (void)mouseDown:(NSEvent *)event;
+- (BOOL)performKeyEquivalent:(NSEvent *)event;
 - (BOOL)sendAction;
 - (void)sendDoubleAction;
 @property (nullable, assign) id<NSMatrixDelegate> delegate;
@@ -194,7 +194,7 @@ typedef struct __MFlags {
 - (void)textDidChange:(NSNotification *)notification;
 - (void)selectText:(nullable id)sender;
 - (nullable __kindof NSCell *)selectTextAtRow:(NSInteger)row column:(NSInteger)col;
-- (BOOL)acceptsFirstMouse:(nullable NSEvent *)theEvent;
+- (BOOL)acceptsFirstMouse:(nullable NSEvent *)event;
 - (void)resetCursorRects;
 - (void)setToolTip:(nullable NSString *)toolTipString forCell:(NSCell *)cell;
 - (nullable NSString *)toolTipForCell:(NSCell *)cell;

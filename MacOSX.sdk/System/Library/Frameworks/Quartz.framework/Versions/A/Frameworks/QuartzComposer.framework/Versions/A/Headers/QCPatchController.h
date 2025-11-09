@@ -13,7 +13,7 @@
 @interface QCPatchController : NSController
 {
 @private
-	__strong void*			_QCPatchControllerPrivate;
+	void*			_QCPatchControllerPrivate;
 }
 
 @end

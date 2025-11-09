@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Apple Inc.
+ * Copyright (c) 2015, 2016 Apple Inc.
  * All rights reserved.
  */
 
@@ -74,15 +74,17 @@ NS_CLASS_AVAILABLE(NA, 9_0)
 @interface NEFilterSocketFlow : NEFilterFlow <NSSecureCoding,NSCopying>
 /*!
  * @property remoteEndpoint
- * @discussion The flow's remote endpoint.
+ * @discussion The flow's remote endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data.
+		In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
  */
-@property (readonly) NWEndpoint *remoteEndpoint NS_AVAILABLE(NA, 9_0);
+@property (readonly, nullable) NWEndpoint *remoteEndpoint NS_AVAILABLE(NA, 9_0);
 
 /*!
  * @property localEndpoint
- * @discussion The flow's local endpoint.
+ * @discussion The flow's local endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data.
+		In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
  */
-@property (readonly) NWEndpoint *localEndpoint NS_AVAILABLE(NA, 9_0);
+@property (readonly, nullable) NWEndpoint *localEndpoint NS_AVAILABLE(NA, 9_0);
 
 /*!
  *	@property socketFamily

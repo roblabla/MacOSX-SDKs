@@ -1,6 +1,6 @@
 /*	
     NSURLRequest.h
-    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -130,6 +130,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestCachePolicy)
 
  @constant NSURLNetworkServiceTypeVoice Specifies that the request is for voice data.
 
+ @constant NSURLNetworkServiceTypeCallSignaling Specifies that the request is for call signaling.
 */
 typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 {
@@ -137,7 +138,8 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     NSURLNetworkServiceTypeVoIP = 1,	// Voice over IP control traffic
     NSURLNetworkServiceTypeVideo = 2,	// Video traffic
     NSURLNetworkServiceTypeBackground = 3, // Background traffic
-    NSURLNetworkServiceTypeVoice = 4	   // Voice data
+    NSURLNetworkServiceTypeVoice = 4,	   // Voice data
+    NSURLNetworkServiceTypeCallSignaling API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = 11, // Call Signaling
 };
 
 
@@ -190,13 +192,14 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 */
 + (instancetype)requestWithURL:(NSURL *)URL;
 
-/*
-    @method supportsSecureCoding
+/*!
+    @property supportsSecureCoding
     @abstract Indicates that NSURLRequest implements the NSSecureCoding protocol.
     @result A BOOL value set to YES.
 */
-+ (BOOL)supportsSecureCoding;
-
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly) BOOL supportsSecureCoding;
+#endif
 /*!
     @method requestWithURL:cachePolicy:timeoutInterval:
     @abstract Allocates and initializes a NSURLRequest with the given

@@ -1,6 +1,6 @@
 /* CoreAnimation - CAEmitterLayer.h
 
-   Copyright (c) 2007-2015, Apple Inc.
+   Copyright (c) 2007-2016, Apple Inc.
    All rights reserved. */
 
 /* Particle emitter layer.
@@ -20,6 +20,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+CA_CLASS_AVAILABLE (10.6, 5.0, 9.0, 2.0)
 @interface CAEmitterLayer : CALayer
 
 /* The array of emitter cells attached to the layer. Each object must
@@ -103,40 +104,40 @@ NS_ASSUME_NONNULL_BEGIN
 /** `emitterShape' values. **/
 
 CA_EXTERN NSString * const kCAEmitterLayerPoint
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAEmitterLayerLine
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAEmitterLayerRectangle
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAEmitterLayerCuboid
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAEmitterLayerCircle
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAEmitterLayerSphere
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 
 /** `emitterMode' values. **/
 
 CA_EXTERN NSString * const kCAEmitterLayerPoints
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAEmitterLayerOutline
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAEmitterLayerSurface
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAEmitterLayerVolume
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 
 /** `renderMode' values. **/
 
 CA_EXTERN NSString * const kCAEmitterLayerUnordered
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAEmitterLayerOldestFirst
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAEmitterLayerOldestLast
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAEmitterLayerBackToFront
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAEmitterLayerAdditive
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
 
 NS_ASSUME_NONNULL_END

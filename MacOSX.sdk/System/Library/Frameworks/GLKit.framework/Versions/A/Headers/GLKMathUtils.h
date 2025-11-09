@@ -26,7 +26,7 @@ GLK_INLINE float GLKMathDegreesToRadians(float degrees) { return degrees * (M_PI
 GLK_INLINE float GLKMathRadiansToDegrees(float radians) { return radians * (180 / M_PI); };
     
 GLKVector3 GLKMathProject(GLKVector3 object, GLKMatrix4 model, GLKMatrix4 projection, int *viewport);
-GLKVector3 GLKMathUnproject(GLKVector3 window, GLKMatrix4 model, GLKMatrix4 projection, int *viewport, bool *success);
+GLKVector3 GLKMathUnproject(GLKVector3 window, GLKMatrix4 model, GLKMatrix4 projection, int *viewport, bool  * __nullable success);
 
 #ifdef __OBJC__
 NSString * NSStringFromGLKMatrix2(GLKMatrix2 matrix);

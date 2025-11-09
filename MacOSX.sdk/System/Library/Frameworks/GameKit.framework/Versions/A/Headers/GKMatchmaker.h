@@ -2,7 +2,7 @@
 //  GKMatchmaker.h
 //  Game Center
 //
-//  Copyright 2010-2015 Apple Inc. All rights reserved.
+//  Copyright 2010-2016 Apple Inc. All rights reserved.
 //
 
 #include <Foundation/Foundation.h>
@@ -33,7 +33,7 @@ typedef GKInviteRecipientResponse GKInviteeResponse;
 
 NS_ASSUME_NONNULL_BEGIN
 // GKMatchRequest represents the parameters needed to create the match.
-NS_CLASS_AVAILABLE(10_8, 4_1)
+NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 @interface GKMatchRequest : NSObject
 
 @property(assign) NSUInteger minPlayers;     // Minimum number of players for the match
@@ -66,7 +66,7 @@ typedef NS_ENUM(NSUInteger, GKMatchType) {
 
 
 // GKInvite represents an accepted game invite, it is used to create a GKMatchmakerViewController
-NS_CLASS_AVAILABLE(10_8, 4_1)
+NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 @interface GKInvite : NSObject
 
 @property(readonly, retain, NS_NONATOMIC_IOSONLY) GKPlayer *sender NS_AVAILABLE(10_10, 8_0);
@@ -83,17 +83,17 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 @optional
 
 // player:didAcceptInvite: gets called when another player accepts the invite from the local player
-- (void)player:(GKPlayer *)player didAcceptInvite:(GKInvite *)invite NS_AVAILABLE(10_10, 7_0);
+- (void)player:(GKPlayer *)player didAcceptInvite:(GKInvite *)invite NS_AVAILABLE(10_10, 7_0) __WATCHOS_PROHIBITED;
 
 // didRequestMatchWithRecipients: gets called when the player chooses to play with another player from Game Center and it launches the game to start matchmaking
-- (void)player:(GKPlayer *)player didRequestMatchWithRecipients:(NSArray<GKPlayer *> *)recipientPlayers NS_AVAILABLE(10_10, 8_0);
+- (void)player:(GKPlayer *)player didRequestMatchWithRecipients:(NSArray<GKPlayer *> *)recipientPlayers NS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED;
 - (void)player:(GKPlayer *)player didRequestMatchWithPlayers:(NSArray<NSString *> *)playerIDsToInvite NS_DEPRECATED_IOS(7_0, 8_0, "use player:didRequestMatchWithRecipients:") ;
 
 @end
 
 
 // GKMatchmaker is a singleton object to manage match creation from invites and auto-matching.
-NS_CLASS_AVAILABLE(10_8, 4_1)
+NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 @interface GKMatchmaker : NSObject
 
 // The shared matchmaker

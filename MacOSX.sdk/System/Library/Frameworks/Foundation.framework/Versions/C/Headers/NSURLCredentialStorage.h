@@ -1,12 +1,13 @@
 /*	
     NSURLCredentialStorage.h
-    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
     
     Public header file.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSURLProtectionSpace.h>
+#import <Foundation/NSNotification.h>
 
 @class NSDictionary<KeyType, ObjectType>;
 @class NSString;
@@ -29,11 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 /*!
-    @method sharedCredentialStorage
+    @property sharedCredentialStorage
     @abstract Get the shared singleton authentication storage
     @result the shared authentication storage
 */
-+ (NSURLCredentialStorage *)sharedCredentialStorage;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, strong) NSURLCredentialStorage *sharedCredentialStorage;
+#endif
 
 /*!
     @method credentialsForProtectionSpace:
@@ -106,10 +109,10 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface NSURLCredentialStorage (NSURLSessionTaskAdditions)
-- (void)getCredentialsForProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task completionHandler:(void (^) (NSDictionary<NSString *, NSURLCredential *> * __nullable credentials))completionHandler NS_AVAILABLE(10_10, 8_0);
+- (void)getCredentialsForProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task completionHandler:(void (^) (NSDictionary<NSString *, NSURLCredential *> * _Nullable credentials))completionHandler NS_AVAILABLE(10_10, 8_0);
 - (void)setCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
 - (void)removeCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace options:(nullable NSDictionary<NSString *, id> *)options task:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
-- (void)getDefaultCredentialForProtectionSpace:(NSURLProtectionSpace *)space task:(NSURLSessionTask *)task completionHandler:(void (^) (NSURLCredential * __nullable credential))completionHandler NS_AVAILABLE(10_10, 8_0);
+- (void)getDefaultCredentialForProtectionSpace:(NSURLProtectionSpace *)space task:(NSURLSessionTask *)task completionHandler:(void (^) (NSURLCredential * _Nullable credential))completionHandler NS_AVAILABLE(10_10, 8_0);
 - (void)setDefaultCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
 @end
 
@@ -118,7 +121,7 @@ NS_ASSUME_NONNULL_BEGIN
     @abstract This notification is sent on the main thread whenever
     the set of stored credentials changes.
 */
-FOUNDATION_EXPORT NSString *const NSURLCredentialStorageChangedNotification;
+FOUNDATION_EXPORT NSNotificationName const NSURLCredentialStorageChangedNotification;
 
 /*
  *  NSURLCredentialStorageRemoveSynchronizableCredentials - (NSNumber value)
@@ -127,6 +130,5 @@ FOUNDATION_EXPORT NSString *const NSURLCredentialStorageChangedNotification;
  *		to remove such a credential.
  */
 FOUNDATION_EXPORT NSString *const NSURLCredentialStorageRemoveSynchronizableCredentials NS_AVAILABLE(10_9, 7_0);
-
 
 NS_ASSUME_NONNULL_END

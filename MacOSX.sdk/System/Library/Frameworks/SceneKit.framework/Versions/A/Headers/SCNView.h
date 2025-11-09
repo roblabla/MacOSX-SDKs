@@ -1,7 +1,7 @@
 //
 //  SCNView.h
 //
-//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
 //
 
 #import <AppKit/AppKit.h>
@@ -11,43 +11,39 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*! 
- @enum SCNAntialiasingMode
- @abstract antialiasing modes for SCNView
- */
-typedef NS_ENUM(NSUInteger, SCNAntialiasingMode) {
-    SCNAntialiasingModeNone,
-    SCNAntialiasingModeMultisampling2X,
-    SCNAntialiasingModeMultisampling4X,
-    SCNAntialiasingModeMultisampling8X,
-    SCNAntialiasingModeMultisampling16X
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
+typedef NSString * SCNViewOption NS_STRING_ENUM;
+#else
+typedef NSString * SCNViewOption;
+#endif
 
-/*! @group View initialization options
- @constant SCNPreferredRenderingAPIKey Specifies the preferred rendering API to be used by the renderer.
+/*!
+ @constant SCNViewOptionPreferredRenderingAPI Specifies the preferred rendering API to be used by the renderer.
  @discussion Pass it as the key in the options dictionary given to initWithFrame:options:. The value is a NSNumber wrapping a SCNRenderingAPI. You can also select the preferred rendering API directly from the SCNView inspector in InterfaceBuilder.
  */
-SCN_EXTERN NSString * const SCNPreferredRenderingAPIKey NS_AVAILABLE(10_11, 9_0);
+FOUNDATION_EXTERN SCNViewOption const SCNPreferredRenderingAPIKey API_AVAILABLE(macosx(10.11), ios(9.0)) __WATCHOS_UNAVAILABLE;
 
 /*!
- @constant SCNPreferredDeviceKey Specifies the preferred metal device to be used by the renderer.
+ @constant SCNViewOptionPreferredDevice Specifies the preferred metal device to be used by the renderer.
  @discussion The value is directly a id <MTLDevice>.
  */
-SCN_EXTERN NSString * const SCNPreferredDeviceKey NS_AVAILABLE(10_11, 9_0);
+FOUNDATION_EXTERN SCNViewOption const SCNPreferredDeviceKey API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
- @constant SCNPreferLowPowerDeviceKey Specifies if the renderer should prefer a low power metal device.
+ @constant SCNViewOptionPreferLowPowerDevice Specifies if the renderer should prefer a low power metal device.
  @discussion The value is a NSNumber wrapping a BOOL. Defaults to NO.
  */
-SCN_EXTERN NSString * const SCNPreferLowPowerDeviceKey NS_AVAILABLE(10_11, 9_0);
+FOUNDATION_EXTERN SCNViewOption const SCNPreferLowPowerDeviceKey API_AVAILABLE(macosx(10.11), ios(9.0));
+
+#define SCNViewOptionPreferredRenderingAPI SCNPreferredRenderingAPIKey
+#define SCNViewOptionPreferredDevice       SCNPreferredDeviceKey
+#define SCNViewOptionPreferLowPowerDevice  SCNPreferLowPowerDeviceKey
 
 /*!
  @class SCNView
  @abstract A SCNView is a subclass of NSView that can display a SCNScene
  */
-NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNView : NSView <SCNSceneRenderer, SCNTechniqueSupport>
-
 
 /*! 
  @method initWithFrame:options:
@@ -81,7 +77,8 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
        - use the scroll wheel or alt+drag the mouse to translate the camera on its local X,Y plan.
        - alt+scroll wheel to move the camera forward/backward
        - rotate gesture (trackpad only) to roll the camera (rotation on the Z axis).
-       - pinch gesture (trackpad only) to zoom-in / zoom-out (change the fov of the camera).
+       - pinch gesture (trackpad only) move the camera forward/backward.
+       - alt + pinch gesture (trackpad only) to zoom-in / zoom-out (change the fov of the camera).
  */
 @property(nonatomic) BOOL allowsCameraControl;
 
@@ -90,7 +87,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Draws the contents of the view and returns them as a new image object
  @discussion This method is thread-safe and may be called at any time.
  */
-- (NSImage *)snapshot NS_AVAILABLE(10_10, 8_0);
+- (NSImage *)snapshot API_AVAILABLE(macosx(10.10));
 
 /*! 
  @functiongroup Actions
@@ -119,6 +116,14 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
 - (IBAction)stop:(nullable id)sender;
 
 /*!
+ @property preferredFramesPerSecond
+ @abstract The rate you want the view to redraw its contents.
+ @discussion When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain.
+             The default value is 0 which means the display link will fire at the native cadence of the display hardware.
+ */
+@property(nonatomic) NSInteger preferredFramesPerSecond API_AVAILABLE(macosx(10.12));
+
+/*!
  @property openGLContext
  @abstract Specifies the OpenGL context associated with the receiver.
  @discussion This property returns nil and has no effect if the current API is Metal.
@@ -127,9 +132,9 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
 
 /*!
  @property antialiasingMode
- @abstract Defaults to SCNAntialiasingModeMultisampling4X on OSX and SCNAntialiasingModeNone on iOS.
+ @abstract Defaults to SCNAntialiasingModeMultisampling4X on macOS and SCNAntialiasingModeNone on iOS.
  */
-@property(nonatomic) SCNAntialiasingMode antialiasingMode NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) SCNAntialiasingMode antialiasingMode API_AVAILABLE(macosx(10.10));
 
 /*!
  @property pixelFormat

@@ -1,7 +1,7 @@
 /*
         NSPDFImageRep.h
         Application Kit
-        Copyright (c) 1999-2015, Apple Inc.
+        Copyright (c) 1999-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 {
   @private
     NSData* _pdfData;
-    int     _reserved1;
-    int     _reserved2;
+    int     _reserved1 __unused;
+    int     _reserved2 __unused;
 
     id      _private;
 }

@@ -16,7 +16,7 @@
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_MALLOC XPC_RETURNS_RETAINED XPC_WARN_RESULT XPC_NONNULL1
-xpc_endpoint_t
-xpc_endpoint_create(xpc_connection_t connection);
+xpc_endpoint_t _Nonnull
+xpc_endpoint_create(xpc_connection_t _Nonnull connection);
 
 #endif // __XPC_ENDPOINT_H__ 

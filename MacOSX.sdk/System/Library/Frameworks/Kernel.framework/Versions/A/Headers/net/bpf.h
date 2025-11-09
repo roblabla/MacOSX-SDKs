@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -1231,7 +1231,7 @@ typedef u_int32_t bpf_tap_mode;
 		link type are specified. The callback is responsible for
 		releasing the mbuf whether or not it returns an error.
 	@param interface The interface the packet is being sent on.
-	@param dlt The data link type the bpf device is attached to.
+	@param data_link_type The data link type the bpf device is attached to.
 	@param packet The packet to be sent.
  */
 typedef errno_t (*bpf_send_func)(ifnet_t interface, u_int32_t data_link_type,
@@ -1249,7 +1249,7 @@ typedef errno_t (*bpf_send_func)(ifnet_t interface, u_int32_t data_link_type,
 		decreasing (tap in or out is stopping), the error will be
 		ignored.
 	@param interface The interface being tapped.
-	@param dlt The data link type being tapped.
+	@param data_link_type The data link type being tapped.
 	@param direction The direction of the tap.
  */
 typedef errno_t (*bpf_tap_func)(ifnet_t interface, u_int32_t data_link_type,
@@ -1299,7 +1299,7 @@ extern errno_t  bpf_attach(ifnet_t interface, u_int32_t data_link_type,
 	@param dlt The data link type of the packet.
 	@param packet The packet received.
 	@param header An optional pointer to a header that will be prepended.
-	@param headerlen If the header was specified, the length of the header.
+	@param header_len If the header was specified, the length of the header.
  */
 extern void bpf_tap_in(ifnet_t interface, u_int32_t dlt, mbuf_t packet,
     void *header, size_t header_len);
@@ -1313,7 +1313,7 @@ extern void bpf_tap_in(ifnet_t interface, u_int32_t dlt, mbuf_t packet,
 	@param dlt The data link type of the packet.
 	@param packet The packet received.
 	@param header An optional pointer to a header that will be prepended.
-	@param headerlen If the header was specified, the length of the header.
+	@param header_len If the header was specified, the length of the header.
  */
 extern void bpf_tap_out(ifnet_t interface, u_int32_t dlt, mbuf_t packet,
     void *header, size_t header_len);

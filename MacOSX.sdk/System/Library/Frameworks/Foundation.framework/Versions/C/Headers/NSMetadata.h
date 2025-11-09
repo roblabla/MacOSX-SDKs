@@ -1,11 +1,12 @@
 /*	NSMetadata.h
-	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSMetadataAttributes.h>
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
+#import <Foundation/NSNotification.h>
 
 @class NSString, NSURL, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSPredicate, NSOperationQueue, NSSortDescriptor;
 @class NSMetadataItem, NSMetadataQueryAttributeValueTuple, NSMetadataQueryResultGroup;
@@ -19,7 +20,7 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
     NSUInteger _flags;
     NSTimeInterval _interval;
     id _private[11];
-    __strong void *_reserved;
+    void *_reserved;
 }
 
 @property (nullable, assign) id<NSMetadataQueryDelegate> delegate;
@@ -57,8 +58,8 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 @property (readonly) NSUInteger resultCount;
 - (id)resultAtIndex:(NSUInteger)idx;
 
-- (void)enumerateResultsUsingBlock:(void (^)(id result, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_9, 7_0);
-- (void)enumerateResultsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id result, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_9, 7_0);
+- (void)enumerateResultsUsingBlock:(void (NS_NOESCAPE ^)(id result, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_9, 7_0);
+- (void)enumerateResultsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(id result, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_9, 7_0);
 
 @property (readonly, copy) NSArray *results;   // this is for K-V Bindings, and causes side-effects on the query
 
@@ -81,10 +82,10 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 @end
 
 // notifications
-FOUNDATION_EXPORT NSString * const NSMetadataQueryDidStartGatheringNotification NS_AVAILABLE(10_4, 5_0);
-FOUNDATION_EXPORT NSString * const NSMetadataQueryGatheringProgressNotification NS_AVAILABLE(10_4, 5_0);
-FOUNDATION_EXPORT NSString * const NSMetadataQueryDidFinishGatheringNotification NS_AVAILABLE(10_4, 5_0);
-FOUNDATION_EXPORT NSString * const NSMetadataQueryDidUpdateNotification NS_AVAILABLE(10_4, 5_0);
+FOUNDATION_EXPORT NSNotificationName const NSMetadataQueryDidStartGatheringNotification NS_AVAILABLE(10_4, 5_0);
+FOUNDATION_EXPORT NSNotificationName const NSMetadataQueryGatheringProgressNotification NS_AVAILABLE(10_4, 5_0);
+FOUNDATION_EXPORT NSNotificationName const NSMetadataQueryDidFinishGatheringNotification NS_AVAILABLE(10_4, 5_0);
+FOUNDATION_EXPORT NSNotificationName const NSMetadataQueryDidUpdateNotification NS_AVAILABLE(10_4, 5_0);
 
 // keys for use with notification info dictionary
 FOUNDATION_EXPORT NSString * const NSMetadataQueryUpdateAddedItemsKey NS_AVAILABLE(10_9, 8_0);
@@ -111,7 +112,7 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 @interface NSMetadataItem : NSObject {
 @private
     id _item;
-    __strong void *_reserved;
+    void *_reserved;
 }
 
 - (nullable instancetype)initWithURL:(NSURL *)url NS_DESIGNATED_INITIALIZER NS_AVAILABLE_MAC(10_9);

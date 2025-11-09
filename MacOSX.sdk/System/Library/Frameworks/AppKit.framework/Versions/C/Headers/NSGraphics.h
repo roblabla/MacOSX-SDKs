@@ -1,7 +1,7 @@
 /*
 	NSGraphics.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -18,42 +18,76 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, NSCompositingOperation) {
     /* Porter-Duff compositing operations */
     /* http://www.w3.org/TR/2014/CR-compositing-1-20140220/#porterduffcompositingoperators */
-    NSCompositeClear,		
-    NSCompositeCopy,		
-    NSCompositeSourceOver,	
-    NSCompositeSourceIn,	
-    NSCompositeSourceOut,	
-    NSCompositeSourceAtop,	
-    NSCompositeDestinationOver,	
-    NSCompositeDestinationIn,	
-    NSCompositeDestinationOut,	
-    NSCompositeDestinationAtop,	
-    NSCompositeXOR,		
-    NSCompositePlusDarker,
-    NSCompositeHighlight	NS_DEPRECATED_MAC(10_0, 10_0, "Use NSCompositeSourceOver instead"),
-    NSCompositePlusLighter,
+    NSCompositingOperationClear,
+    NSCompositingOperationCopy,		
+    NSCompositingOperationSourceOver,	
+    NSCompositingOperationSourceIn,	
+    NSCompositingOperationSourceOut,	
+    NSCompositingOperationSourceAtop,	
+    NSCompositingOperationDestinationOver,	
+    NSCompositingOperationDestinationIn,	
+    NSCompositingOperationDestinationOut,	
+    NSCompositingOperationDestinationAtop,	
+    NSCompositingOperationXOR,		
+    NSCompositingOperationPlusDarker,
+    NSCompositingOperationHighlight NS_DEPRECATED_MAC(10_0, 10_0, "Use NSCompositingOperationSourceOver instead"),
+    NSCompositingOperationPlusLighter,
     
     /* Separable blend-modes */
     /* http://www.w3.org/TR/2014/CR-compositing-1-20140220/#blendingseparable */
-    NSCompositeMultiply		NS_AVAILABLE_MAC(10_10),
-    NSCompositeScreen		NS_AVAILABLE_MAC(10_10),
-    NSCompositeOverlay		NS_AVAILABLE_MAC(10_10),
-    NSCompositeDarken		NS_AVAILABLE_MAC(10_10),
-    NSCompositeLighten		NS_AVAILABLE_MAC(10_10),
-    NSCompositeColorDodge	NS_AVAILABLE_MAC(10_10),
-    NSCompositeColorBurn	NS_AVAILABLE_MAC(10_10),
-    NSCompositeSoftLight	NS_AVAILABLE_MAC(10_10),
-    NSCompositeHardLight	NS_AVAILABLE_MAC(10_10),
-    NSCompositeDifference	NS_AVAILABLE_MAC(10_10),
-    NSCompositeExclusion	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationMultiply	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationScreen	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationOverlay	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationDarken	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationLighten	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationColorDodge	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationColorBurn	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationSoftLight	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationHardLight	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationDifference	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationExclusion	NS_AVAILABLE_MAC(10_10),
     
     /* Non-separable blend-modes */
     /* http://www.w3.org/TR/2014/CR-compositing-1-20140220/#blendingnonseparable */
-    NSCompositeHue		NS_AVAILABLE_MAC(10_10),
-    NSCompositeSaturation	NS_AVAILABLE_MAC(10_10),
-    NSCompositeColor		NS_AVAILABLE_MAC(10_10),
-    NSCompositeLuminosity	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationHue		NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationSaturation	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationColor		NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationLuminosity	NS_AVAILABLE_MAC(10_10),
 };
+
+
+static const NSCompositingOperation NSCompositeClear API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationClear", macosx(10.0, 10.12)) = NSCompositingOperationClear;
+static const NSCompositingOperation NSCompositeCopy API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationCopy", macosx(10.0, 10.12)) = NSCompositingOperationCopy;
+static const NSCompositingOperation NSCompositeSourceOver API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationSourceOver", macosx(10.0, 10.12)) = NSCompositingOperationSourceOver;
+static const NSCompositingOperation NSCompositeSourceIn API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationSourceIn", macosx(10.0, 10.12)) = NSCompositingOperationSourceIn;
+static const NSCompositingOperation NSCompositeSourceOut API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationSourceOut", macosx(10.0, 10.12)) = NSCompositingOperationSourceOut;
+static const NSCompositingOperation NSCompositeSourceAtop API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationSourceAtop", macosx(10.0, 10.12)) = NSCompositingOperationSourceAtop;
+static const NSCompositingOperation NSCompositeDestinationOver API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationDestinationOver", macosx(10.0, 10.12)) = NSCompositingOperationDestinationOver;
+static const NSCompositingOperation NSCompositeDestinationIn API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationDestinationIn", macosx(10.0, 10.12)) = NSCompositingOperationDestinationIn;
+static const NSCompositingOperation NSCompositeDestinationOut API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationDestinationOut", macosx(10.0, 10.12)) = NSCompositingOperationDestinationOut;
+static const NSCompositingOperation NSCompositeDestinationAtop API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationDestinationAtop", macosx(10.0, 10.12)) = NSCompositingOperationDestinationAtop;
+static const NSCompositingOperation NSCompositeXOR API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationXOR", macosx(10.0, 10.12)) = NSCompositingOperationXOR;
+static const NSCompositingOperation NSCompositePlusDarker API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationPlusDarker", macosx(10.0, 10.12)) = NSCompositingOperationPlusDarker;
+static const NSCompositingOperation NSCompositeHighlight NS_DEPRECATED_MAC(10_0, 10_0, "Use NSCompositingOperationHighlight instead") = NSCompositingOperationHighlight;
+static const NSCompositingOperation NSCompositePlusLighter API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationPlusLighter", macosx(10.0, 10.12)) = NSCompositingOperationPlusLighter;
+static const NSCompositingOperation NSCompositeMultiply	API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationMultiply", macosx(10.0, 10.12)) = NSCompositingOperationMultiply;
+static const NSCompositingOperation NSCompositeScreen API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationScreen", macosx(10.0, 10.12)) = NSCompositingOperationScreen;
+static const NSCompositingOperation NSCompositeOverlay API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationOverlay", macosx(10.0, 10.12)) = NSCompositingOperationOverlay;
+static const NSCompositingOperation NSCompositeDarken API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationDarken", macosx(10.0, 10.12)) = NSCompositingOperationDarken;
+static const NSCompositingOperation NSCompositeLighten API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationLighten", macosx(10.0, 10.12)) = NSCompositingOperationLighten;
+static const NSCompositingOperation NSCompositeColorDodge API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationColorDodge", macosx(10.0, 10.12)) = NSCompositingOperationColorDodge;
+static const NSCompositingOperation NSCompositeColorBurn API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationColorBurn", macosx(10.0, 10.12)) = NSCompositingOperationColorBurn;
+static const NSCompositingOperation NSCompositeSoftLight API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationSoftLight", macosx(10.0, 10.12)) = NSCompositingOperationSoftLight;
+static const NSCompositingOperation NSCompositeHardLight API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationHardLight", macosx(10.0, 10.12)) = NSCompositingOperationHardLight;
+static const NSCompositingOperation NSCompositeDifference API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationDifference", macosx(10.0, 10.12)) = NSCompositingOperationDifference;
+static const NSCompositingOperation NSCompositeExclusion API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationExclusion", macosx(10.0, 10.12)) = NSCompositingOperationExclusion;
+
+static const NSCompositingOperation NSCompositeHue API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationHue", macosx(10.0, 10.12)) = NSCompositingOperationHue;
+static const NSCompositingOperation NSCompositeSaturation API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationSaturation", macosx(10.0, 10.12)) = NSCompositingOperationSaturation;
+static const NSCompositingOperation NSCompositeColor API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationColor", macosx(10.0, 10.12)) = NSCompositingOperationColor;
+static const NSCompositingOperation NSCompositeLuminosity API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationLuminosity", macosx(10.0, 10.12)) = NSCompositingOperationLuminosity;
+
+
 
 
 /* types of window backing store */
@@ -142,6 +176,12 @@ APPKIT_EXTERN const CGFloat NSLightGray;
 APPKIT_EXTERN const CGFloat NSDarkGray;
 APPKIT_EXTERN const CGFloat NSBlack;
 
+/* Approximate color gamut for use by NSScreen and NSWindow
+ */
+typedef NS_ENUM(NSInteger, NSDisplayGamut) {
+    NSDisplayGamutSRGB NS_SWIFT_NAME(sRGB) = 1,
+    NSDisplayGamutP3 NS_SWIFT_NAME(p3)
+} NS_ENUM_AVAILABLE_MAC(10_12);
 
 /* Keys for deviceDescription dictionaries.
 */
@@ -155,39 +195,39 @@ APPKIT_EXTERN NSString *NSDeviceSize;			/* NSValue containing NSSize */
 
 /* Graphics functions
 */
-APPKIT_EXTERN void NSRectFill(NSRect aRect);
+APPKIT_EXTERN void NSRectFill(NSRect rect);
 APPKIT_EXTERN void NSRectFillList(const NSRect *rects, NSInteger count);
 APPKIT_EXTERN void NSRectFillListWithGrays(const NSRect *rects, const CGFloat *grays, NSInteger num);
 APPKIT_EXTERN void NSRectFillListWithColors(const NSRect *rects,  NSColor * const __nonnull * __nonnull colors, NSInteger num);
-APPKIT_EXTERN void NSRectFillUsingOperation(NSRect aRect, NSCompositingOperation op);
+APPKIT_EXTERN void NSRectFillUsingOperation(NSRect rect, NSCompositingOperation op);
 APPKIT_EXTERN void NSRectFillListUsingOperation(const NSRect *rects, NSInteger count, NSCompositingOperation op);
 APPKIT_EXTERN void NSRectFillListWithColorsUsingOperation(const NSRect *rects, NSColor * const __nonnull * __nonnull colors, NSInteger num, NSCompositingOperation op);
-APPKIT_EXTERN void NSFrameRect(NSRect aRect);
-APPKIT_EXTERN void NSFrameRectWithWidth(NSRect aRect, CGFloat frameWidth);
-APPKIT_EXTERN void NSFrameRectWithWidthUsingOperation(NSRect aRect, CGFloat frameWidth, NSCompositingOperation op);
-APPKIT_EXTERN void NSRectClip(NSRect aRect);
+APPKIT_EXTERN void NSFrameRect(NSRect rect);
+APPKIT_EXTERN void NSFrameRectWithWidth(NSRect rect, CGFloat frameWidth);
+APPKIT_EXTERN void NSFrameRectWithWidthUsingOperation(NSRect rect, CGFloat frameWidth, NSCompositingOperation op);
+APPKIT_EXTERN void NSRectClip(NSRect rect);
 APPKIT_EXTERN void NSRectClipList(const NSRect *rects, NSInteger count);
 APPKIT_EXTERN NSRect NSDrawTiledRects(NSRect boundsRect, NSRect clipRect, const NSRectEdge *sides, const CGFloat *grays, NSInteger count);
-APPKIT_EXTERN void NSDrawGrayBezel(NSRect aRect, NSRect clipRect);
-APPKIT_EXTERN void NSDrawGroove(NSRect aRect, NSRect clipRect);
-APPKIT_EXTERN void NSDrawWhiteBezel(NSRect aRect, NSRect clipRect);
-APPKIT_EXTERN void NSDrawButton(NSRect aRect, NSRect clipRect);
-APPKIT_EXTERN void NSEraseRect(NSRect aRect);
+APPKIT_EXTERN void NSDrawGrayBezel(NSRect rect, NSRect clipRect);
+APPKIT_EXTERN void NSDrawGroove(NSRect rect, NSRect clipRect);
+APPKIT_EXTERN void NSDrawWhiteBezel(NSRect rect, NSRect clipRect);
+APPKIT_EXTERN void NSDrawButton(NSRect rect, NSRect clipRect);
+APPKIT_EXTERN void NSEraseRect(NSRect rect);
 APPKIT_EXTERN NSColor * __nullable NSReadPixel(NSPoint passedPoint);
 APPKIT_EXTERN void NSDrawBitmap(NSRect rect, NSInteger width, NSInteger height, NSInteger bps, NSInteger spp, NSInteger bpp, NSInteger bpr, BOOL isPlanar, BOOL hasAlpha, NSString *colorSpaceName, const unsigned char *const __nullable data[5]);
 
-APPKIT_EXTERN void NSHighlightRect(NSRect aRect) NS_DEPRECATED_MAC(10_0, 10_0);
+APPKIT_EXTERN void NSHighlightRect(NSRect rect) NS_DEPRECATED_MAC(10_0, 10_0);
 APPKIT_EXTERN void NSBeep(void);
 
 /* gets performance stats about window server memory usage */
 APPKIT_EXTERN NSInteger NSGetWindowServerMemory(NSInteger context, NSInteger *virtualMemory, NSInteger *windowBackingMemory,   NSString * __nonnull * __nonnull windowDumpString); // Deprecated; doesn't return anything useful (as of 10.0)
 
 APPKIT_EXTERN NSRect NSDrawColorTiledRects(NSRect boundsRect, NSRect clipRect, const NSRectEdge *sides, NSColor * __nonnull * __nonnull colors, NSInteger count);
-APPKIT_EXTERN void NSDrawDarkBezel(NSRect aRect, NSRect clipRect);
-APPKIT_EXTERN void NSDrawLightBezel(NSRect aRect, NSRect clipRect);
-APPKIT_EXTERN void NSDottedFrameRect(NSRect aRect);
+APPKIT_EXTERN void NSDrawDarkBezel(NSRect rect, NSRect clipRect);
+APPKIT_EXTERN void NSDrawLightBezel(NSRect rect, NSRect clipRect);
+APPKIT_EXTERN void NSDottedFrameRect(NSRect rect);
 
-APPKIT_EXTERN void NSDrawWindowBackground(NSRect aRect);
+APPKIT_EXTERN void NSDrawWindowBackground(NSRect rect);
 APPKIT_EXTERN void NSSetFocusRingStyle(NSFocusRingPlacement placement);
 
 /* Disable and reenable screen updates.  

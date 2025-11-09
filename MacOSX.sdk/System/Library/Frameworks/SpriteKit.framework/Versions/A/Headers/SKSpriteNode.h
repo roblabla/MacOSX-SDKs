@@ -16,6 +16,7 @@
 
 #import <SpriteKit/SKNode.h>
 #import <SpriteKit/SKShader.h>
+#import <SpriteKit/SKWarpGeometry.h>
 #import <SpriteKit/SpriteKitBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -29,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  See <a href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)">wiki</a> for a definition of a Sprite.
  
  */
-SK_EXPORT @interface SKSpriteNode : SKNode
+SK_EXPORT @interface SKSpriteNode : SKNode <SKWarpable>
 
 /**
  Create a sprite with an SKTexture and the specified size.
@@ -161,7 +162,21 @@ SK_EXPORT @interface SKSpriteNode : SKNode
  */
 @property (nonatomic) CGSize size;
 
+/**
+ Adjust the sprite's xScale & yScale to achieve the desired size (in parent's coordinate space)
+ */
+- (void)scaleToSize:(CGSize)size NS_AVAILABLE(10_12, 10_0);
+
 @property (nonatomic, retain, nullable) SKShader *shader NS_AVAILABLE(10_10, 8_0);
+
+/**
+ Optional dictionary of SKAttributeValues
+ Attributes can be used with custom SKShaders.
+ */
+@property (nonatomic, nonnull, copy) NSDictionary<NSString *, SKAttributeValue *> *attributeValues;
+
+- (nullable SKAttributeValue*)valueForAttributeNamed:(nonnull NSString *)key;
+- (void)setValue:(SKAttributeValue*)value forAttributeNamed:(nonnull NSString *)key NS_SWIFT_NAME(setValue(_:forAttribute:));
 
 @end
 

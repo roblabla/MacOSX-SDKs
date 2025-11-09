@@ -70,6 +70,7 @@ uint32_t CTGetCoreTextVersion( void ) CT_AVAILABLE(10_5, 3_2);
 #define kCTVersionNumber10_9 0x00060000
 #define kCTVersionNumber10_10 0x00070000
 #define kCTVersionNumber10_11 0x00080000
+#define kCTVersionNumber10_12 0x00090000
 
 CF_EXTERN_C_END
 

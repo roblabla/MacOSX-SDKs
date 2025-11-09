@@ -1,7 +1,7 @@
 //
 //  NSMergePolicy.h
 //  Core Data
-//  Copyright (c) 2004-2015, Apple Inc. All rights reserved.
+//  Copyright (c) 2004-2016, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/NSArray.h>
@@ -15,19 +15,19 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSManagedObject;
 
 // Default policy for all managed object contexts - save returns with an error that contains the object IDs of the objects that had conflicts(NSInsertedObjectsKey, NSUpdatedObjectsKey).
-COREDATA_EXTERN id NSErrorMergePolicy NS_AVAILABLE(10_4, 3_0);
+COREDATA_EXTERN id NSErrorMergePolicy API_AVAILABLE(macosx(10.4),ios(3.0));
 
 // This singleton policy merges conflicts between the persistent store's version of the object and the current in memory version. The merge occurs by individual property. For properties which have been changed in both the external source and in memory, the external changes trump the in memory ones.
-COREDATA_EXTERN id NSMergeByPropertyStoreTrumpMergePolicy NS_AVAILABLE(10_4, 3_0);    
+COREDATA_EXTERN id NSMergeByPropertyStoreTrumpMergePolicy API_AVAILABLE(macosx(10.4),ios(3.0));    
 
 // This singleton policy merges conflicts between the persistent store's version of the object and the current in memory version. The merge occurs by individual property. For properties which have been changed in both the external source and in memory, the in memory changes trump the external ones.
-COREDATA_EXTERN id NSMergeByPropertyObjectTrumpMergePolicy NS_AVAILABLE(10_4, 3_0);    
+COREDATA_EXTERN id NSMergeByPropertyObjectTrumpMergePolicy API_AVAILABLE(macosx(10.4),ios(3.0));    
 
 // This singleton policy overwrites all state for the changed objects in conflict The current object's state is pushed upon the persistent store.
-COREDATA_EXTERN id NSOverwriteMergePolicy NS_AVAILABLE(10_4, 3_0);    
+COREDATA_EXTERN id NSOverwriteMergePolicy API_AVAILABLE(macosx(10.4),ios(3.0));    
 
 // This singleton policy discards all state for the changed objects in conflict. The persistent store's version of the object is used.
-COREDATA_EXTERN id NSRollbackMergePolicy NS_AVAILABLE(10_4, 3_0);    
+COREDATA_EXTERN id NSRollbackMergePolicy API_AVAILABLE(macosx(10.4),ios(3.0));    
 
 
 typedef NS_ENUM(NSUInteger, NSMergePolicyType) {
@@ -38,8 +38,9 @@ typedef NS_ENUM(NSUInteger, NSMergePolicyType) {
     NSRollbackMergePolicyType                   = 0x04
 };
 
-NS_CLASS_AVAILABLE(10_7, 5_0)
+API_AVAILABLE(macosx(10.7),ios(5.0))
 @interface NSMergeConflict : NSObject {
+#if (!__OBJC2__)
 @private
     id _source;
     id _snapshot1;
@@ -47,6 +48,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
     id _snapshot3;
     NSUInteger _newVersion;
     NSUInteger _oldVersion;
+#endif
 }
 
 @property (readonly, retain) NSManagedObject* sourceObject;
@@ -78,8 +80,9 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 /* Used to report uniqueness constraint violations. Optimistic locking failures will be reported separately from uniquness conflicts and will be resolved first. Each constraint violated will result in a separate NSConstraintConflict, although if an entity hierarchy has a constraint which is extended in subentities, all constraint violations for that constraint will be collapsed into a single report.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macosx(10.11),ios(9.0))
 @interface NSConstraintConflict : NSObject {
+#if (!__OBJC2__)
 @private
     NSArray *_constraint;
     NSManagedObject *_databaseObject;
@@ -87,6 +90,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
     NSDictionary *_conflictedValues;
     NSArray *_conflictingObjects;
     NSArray *_conflictingSnapshots;
+#endif
 }
 
 @property (readonly, copy) NSArray <NSString *> *constraint; // The constraint which has been violated.
@@ -115,13 +119,21 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @end
 
 
-NS_CLASS_AVAILABLE(10_7, 5_0)
+API_AVAILABLE(macosx(10.7),ios(5.0))
 @interface NSMergePolicy : NSObject {
+#if (!__OBJC2__)
 @private
     NSUInteger _type;
     void* _reserved2;
     void* _reserved3;
+#endif
 }
+
+@property (class, readonly, strong) NSMergePolicy *errorMergePolicy API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
+@property (class, readonly, strong) NSMergePolicy *rollbackMergePolicy API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
+@property (class, readonly, strong) NSMergePolicy *overwriteMergePolicy API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
+@property (class, readonly, strong) NSMergePolicy *mergeByPropertyObjectTrumpMergePolicy API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
+@property (class, readonly, strong) NSMergePolicy *mergeByPropertyStoreTrumpMergePolicy API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
 
 @property (readonly) NSMergePolicyType mergeType;
 
@@ -145,12 +157,12 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  *  any mistakes will cause permanent data corruption in the form of dangling foreign keys.
  * Will be called before -resolveConstraintConflicts:error:
  */
- - (BOOL)resolveOptimisticLockingVersionConflicts:(NSArray<NSMergeConflict *> *)list error:(NSError **)error NS_AVAILABLE(10_11, 9_0);
+ - (BOOL)resolveOptimisticLockingVersionConflicts:(NSArray<NSMergeConflict *> *)list error:(NSError **)error API_AVAILABLE(macosx(10.11),ios(9.0));
 
 /* Resolve uniqueness constraint violations for the list of failures.
  *  Will be called after -resolveOptimisticLockingVersionConflicts:error:
  */
-- (BOOL)resolveConstraintConflicts:(NSArray<NSConstraintConflict *> *)list error:(NSError **)error NS_AVAILABLE(10_11, 9_0);
+- (BOOL)resolveConstraintConflicts:(NSArray<NSConstraintConflict *> *)list error:(NSError **)error API_AVAILABLE(macosx(10.11),ios(9.0));
 
 @end
 

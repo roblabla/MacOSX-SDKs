@@ -1,7 +1,7 @@
 /*
 	NSPrinter.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -27,11 +27,11 @@ typedef NS_ENUM(NSUInteger, NSPrinterTableStatus) {
     NSString *_printerName;
     void *_printer;
     NSDictionary *_cachedDeviceDescription;
-    int _ppdCreationNum;
-    void *_ppdNodes;
-    void *_ppdPriv;
+    int _ppdCreationNum __unused;
+    void *_ppdNodes __unused;
+    void *_ppdPriv __unused;
 #if __LP64__
-    id _reserved[3];
+    id _reserved[3] __unused;
 #else
     unsigned char _compatibilityPadding[20];
 #endif

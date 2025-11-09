@@ -2,14 +2,18 @@
  *  SFNTLayoutTypes.h
  *  CoreText
  *
- *  Copyright 1994-2015 Apple Inc. All rights reserved.
+ *  Copyright 1994-2016 Apple Inc. All rights reserved.
  *
  */
 
 #ifndef __SFNTLAYOUTTYPES__
 #define __SFNTLAYOUTTYPES__
 
+#if !TARGET_OS_WIN32
 #include <MacTypes.h>
+#elif !defined(__MACTYPES__)
+typedef SInt32 Fixed;
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -23,7 +27,7 @@ extern "C" {
     The following values can be used to set run feature values. Note that unless the
     feature is defaulted differently in different fonts, the zero value for the
     selectors represents the default value. Consult the following URL for further info:
-    <http://developer.apple.com/fonts/registry/>
+    <https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html>
 */
 
 
@@ -638,7 +642,8 @@ enum {
   kSFNTLookupSegmentSingle      = 2,    /* segment mapping to single value */
   kSFNTLookupSegmentArray       = 4,    /* segment mapping to lookup array */
   kSFNTLookupSingleTable        = 6,    /* sorted list of glyph, value pairs */
-  kSFNTLookupTrimmedArray       = 8     /* a simple trimmed array indexed by glyph code */
+  kSFNTLookupTrimmedArray       = 8,    /* a simple trimmed array indexed by glyph code */
+  kSFNTLookupVector             = 10    /* a simple trimmed vector indexed by glyph code */
 };
 
 typedef UInt16                          SFNTLookupTableFormat;
@@ -671,6 +676,14 @@ struct SFNTLookupTrimmedArrayHeader {
   SFNTLookupValue     valueArray[1];
 };
 typedef struct SFNTLookupTrimmedArrayHeader SFNTLookupTrimmedArrayHeader;
+/* A format 10 lookup table maps some range of glyphs in the font to lookup values of the specified size */
+struct SFNTLookupVectorHeader {
+  UInt16              valueSize;
+  UInt16              firstGlyph;
+  UInt16              count;
+  UInt8               values[1];
+};
+typedef struct SFNTLookupVectorHeader SFNTLookupVectorHeader;
 /*
     Format 2 and format 4 lookup tables map ranges of glyphs to either single lookup
     values (format 2), or per-glyph lookup values (format 4). Since both formats
@@ -705,6 +718,7 @@ union SFNTLookupFormatSpecificHeader {
   SFNTLookupSegmentHeader  segment;
   SFNTLookupSingleHeader  single;
   SFNTLookupTrimmedArrayHeader  trimmedArray;
+  SFNTLookupVectorHeader  vector;
 };
 typedef union SFNTLookupFormatSpecificHeader SFNTLookupFormatSpecificHeader;
 /* The overall subtable header */
@@ -1465,8 +1479,8 @@ enum {
   kKERXOrderedList              = 0,    /* ordered list of kerning pairs */
   kKERXStateTable               = 1,    /* state table for n-way contextual kerning */
   kKERXSimpleArray              = 2,    /* simple n X m array of kerning values */
-  kKERXIndexArray               = 3,    /* modified version of SimpleArray */
-  kKERXControlPoint             = 4     /* state table for control point positioning */
+  kKERXControlPoint             = 4,    /* state table for control point positioning */
+  kKERXIndexArray               = 6     /* index-based n X m array of kerning values */
 };
 
 /* Message Type Flags */
@@ -1488,6 +1502,11 @@ enum {
   kKERXActionTypeCoordinates    = (2U << 30), /* Actions have control point coordinates */
   kKERXUnusedFlags              = 0x3F000000, /* Unused, must be zero */
   kKERXActionOffsetMask         = 0x00FFFFFF, /* Mask to extract offset to action table */
+};
+
+/* Flags in KerxIndexArrayHeader */
+enum {
+  kKERXValuesAreLong            = 0x00000001
 };
 
 /* TYPES */
@@ -1599,15 +1618,13 @@ struct KerxSimpleArrayHeader {
 typedef struct KerxSimpleArrayHeader    KerxSimpleArrayHeader;
 /* Index Array */
 struct KerxIndexArrayHeader {
-  UInt16              glyphCount;
-  UInt16              kernValueCount;
-  UInt16              leftClassCount;
-  UInt16              rightClassCount;
-  UInt16              flags;                  /* set to 0 for now */
-  SInt16              kernValue[1];           /* actual kerning values reference by index in kernIndex */
-  UInt16              leftClass[1];           /* maps left glyph to offset into kern index */
-  UInt16              rightClass[1];          /* maps right glyph to offset into kern index */
-  UInt16              kernIndex[1];           /* contains indicies into kernValue */
+  UInt32              flags;
+  UInt16              rowCount;
+  UInt16              columnCount;
+  UInt32              rowIndexTableOffset;    /* offset to row index lookup table */
+  UInt32              columnIndexTableOffset; /* offset to column index offset table */
+  UInt32              kerningArrayOffset;     /* offset to start of kerning array */
+  UInt32              kerningVectorOffset;    /* offset to start of kerning vectors (if tupleCount is 1 or more) */
 };
 typedef struct KerxIndexArrayHeader     KerxIndexArrayHeader;
 /* format specific part of subtable header */
@@ -1617,14 +1634,13 @@ union KerxFormatSpecificHeader {
   KerxSimpleArrayHeader  simpleArray;
   KerxIndexArrayHeader  indexArray;
   KerxControlPointHeader  controlPoint;
-
 };
 typedef union KerxFormatSpecificHeader  KerxFormatSpecificHeader;
 /* Overall Subtable header format */
 struct KerxSubtableHeader {
   UInt32              length;                 /* length in bytes (including this header) */
   KerxSubtableCoverage  stInfo;               /* subtable coverage */
-  UInt32              tupleIndex;             /* tuple index for variation subtables */
+  UInt32              tupleCount;             /* tuple count for variation subtables (ignored if the 'kerx' table version is less than 4) */
   KerxFormatSpecificHeader  fsHeader;         /* format specific sub-header */
 };
 typedef struct KerxSubtableHeader       KerxSubtableHeader;

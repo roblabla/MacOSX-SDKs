@@ -2,7 +2,7 @@
  *  CTDefines.h
  *  CoreText
  *
- *  Copyright (c) 2010-2015 Apple Inc. All rights reserved.
+ *  Copyright (c) 2010-2016 Apple Inc. All rights reserved.
  *
  */
 
@@ -19,7 +19,7 @@
 # define __has_attribute(x) 0
 #endif
 
-#if defined(CT_BUILDING_CoreText)
+#if defined(CT_BUILDING_CoreText) || TARGET_OS_WIN32
 # define CT_AVAILABLE(_mac, _ios)
 # define CT_AVAILABLE_MAC(_mac)
 # define CT_AVAILABLE_IOS(_ios)
@@ -67,5 +67,28 @@
 @class NSTextTab;
 # endif /* defined(__OBJC__) */
 #endif /*  __has_attribute(objc_bridge) */
+
+#if TARGET_OS_WIN32
+#define __nullable
+
+#define CF_BRIDGED_TYPE(T)
+#define CF_BRIDGED_MUTABLE_TYPE(T)
+#define CF_RELATED_TYPE(T,C,I)
+
+#define CF_ASSUME_NONNULL_BEGIN
+#define CF_ASSUME_NONNULL_END
+
+# if defined(CT_BUILDING_CoreText) && defined(__cplusplus)
+#  define CT_EXPORT extern "C" __declspec(dllexport)
+# elif defined(CT_BUILDING_CoreText) && !defined(__cplusplus)
+#  define CT_EXPORT extern __declspec(dllexport)
+# elif defined(__cplusplus)
+#  define CT_EXPORT extern "C" __declspec(dllimport)
+# else
+#  define CT_EXPORT extern __declspec(dllimport)
+# endif
+#else
+# define CT_EXPORT extern
+#endif
 
 #endif

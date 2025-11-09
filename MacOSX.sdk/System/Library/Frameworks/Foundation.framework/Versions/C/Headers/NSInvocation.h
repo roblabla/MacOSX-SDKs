@@ -1,5 +1,5 @@
 /*	NSInvocation.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 NS_SWIFT_UNAVAILABLE("NSInvocation and related APIs not available")
 @interface NSInvocation : NSObject {
 @private
-    __strong void *_frame;
-    __strong void *_retdata;
+    void *_frame;
+    void *_retdata;
     id _signature;
     id _container;
     uint8_t _retainedArgs;

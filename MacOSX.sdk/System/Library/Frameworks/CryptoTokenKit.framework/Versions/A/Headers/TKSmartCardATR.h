@@ -5,6 +5,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "TKTLVRecord.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /// Bitmask of available smartcard protocols.
@@ -65,6 +67,14 @@ NS_CLASS_AVAILABLE(10_10, 9_0)
 
 /// Just historical bytes of ATR, without Tck and interface bytes.
 @property (nonatomic, readonly) NSData *historicalBytes;
+
+/// An array of TKCompactTLVRecord instances with TLV records parsed from historical bytes.  If historical bytes are
+/// not structured using Compact TLV encoding, nil is returned.
+/// @note In case that ATR historical bytes begin with 0x00, the last three bytes (status indicator) are automatically
+///       appended into the returned records as if historical bytes would begin with 0x80 and 0x8 record is present
+///       in historical bytes.
+@property (nonatomic, readonly, nullable) NSArray<TKCompactTLVRecord *> *historicalRecords
+__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_UNAVAILABLE __WATCHOS_UNAVAILABLE;
 
 @end
 

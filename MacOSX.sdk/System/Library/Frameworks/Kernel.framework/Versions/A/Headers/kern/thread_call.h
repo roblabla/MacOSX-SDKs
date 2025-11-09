@@ -64,10 +64,10 @@ typedef void (*thread_call_func_t)(
  @constant THREAD_CALL_PRIORITY_LOW Very low importance.
  */
 typedef enum {
-	THREAD_CALL_PRIORITY_HIGH 	= 0,
-	THREAD_CALL_PRIORITY_KERNEL 	= 1,
-	THREAD_CALL_PRIORITY_USER 	= 2,
-	THREAD_CALL_PRIORITY_LOW 	= 3
+	THREAD_CALL_PRIORITY_HIGH   = 0,
+	THREAD_CALL_PRIORITY_KERNEL = 1,
+	THREAD_CALL_PRIORITY_USER   = 2,
+	THREAD_CALL_PRIORITY_LOW    = 3
 } thread_call_priority_t;
 
 __BEGIN_DECLS

@@ -62,7 +62,7 @@ __BEGIN_DECLS
 Boolean
 SCPreferencesSetComputerName		(
 					SCPreferencesRef	prefs,
-					CFStringRef		name,
+					CFStringRef __nullable	name,
 					CFStringEncoding	nameEncoding
 					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
@@ -84,7 +84,7 @@ SCPreferencesSetComputerName		(
 Boolean
 SCPreferencesSetLocalHostName		(
 					SCPreferencesRef	prefs,
-					CFStringRef		name
+					CFStringRef __nullable	name
 					)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 __END_DECLS

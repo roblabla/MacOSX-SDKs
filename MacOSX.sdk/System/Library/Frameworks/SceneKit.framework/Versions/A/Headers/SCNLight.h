@@ -1,7 +1,7 @@
 //
 //  SCNLight.h
 //
-//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -10,20 +10,25 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class SCNMaterialProperty;
+
 /*!
  @group Light Types
  @abstract Describes the various light types available.
  */
 
-/*! @constant SCNLightTypeAmbient Ambient light */
-SCN_EXTERN NSString * const SCNLightTypeAmbient;
-/*! @constant SCNLightTypeOmni Omnidirectional light */
-SCN_EXTERN NSString * const SCNLightTypeOmni;
-/*! @constant SCNLightTypeDirectional Directional light */
-SCN_EXTERN NSString * const SCNLightTypeDirectional;
-/*! @constant SCNLightTypeSpot Spot light */
-SCN_EXTERN NSString * const SCNLightTypeSpot;
+#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
+typedef NSString * SCNLightType NS_STRING_ENUM;
+#else
+typedef NSString * SCNLightType;
+#endif
 
+FOUNDATION_EXTERN SCNLightType const SCNLightTypeAmbient;                                                   // Ambient light
+FOUNDATION_EXTERN SCNLightType const SCNLightTypeOmni;                                                      // Omnidirectional light
+FOUNDATION_EXTERN SCNLightType const SCNLightTypeDirectional;                                               // Directional light
+FOUNDATION_EXTERN SCNLightType const SCNLightTypeSpot;                                                      // Spot light
+FOUNDATION_EXTERN SCNLightType const SCNLightTypeIES API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));   // IES light
+FOUNDATION_EXTERN SCNLightType const SCNLightTypeProbe API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0)); // Light probe
 
 /*! @enum SCNShadowMode
  @abstract The different modes available to compute shadows.
@@ -35,14 +40,13 @@ typedef NS_ENUM(NSInteger, SCNShadowMode) {
     SCNShadowModeForward   = 0,
     SCNShadowModeDeferred  = 1,
     SCNShadowModeModulated = 2
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} API_AVAILABLE(macosx(10.10));
 
 /*!
  @class SCNLight
  @abstract SCNLight represents a light that can be attached to a SCNNode. 
  */
 
-NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNLight : NSObject <SCNAnimatable, SCNTechniqueSupport, NSCopying, NSSecureCoding>
 
 /*! 
@@ -54,16 +58,30 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
 /*! 
  @property type
  @abstract Specifies the receiver's type.
- @discussion A light type can be one of the "Light Types" constants. Defaults to SCNLightTypeOmni on iOS 8 and later, and on OSX 10.10 and later (otherwise defaults to SCNLightTypeAmbient).
+ @discussion Defaults to SCNLightTypeOmni on iOS 8 and later, and on macOS 10.10 and later (otherwise defaults to SCNLightTypeAmbient).
  */
-@property(nonatomic, copy) NSString *type;
+@property(nonatomic, copy) SCNLightType type;
 
 /*! 
  @property color
  @abstract Specifies the receiver's color (NSColor or CGColorRef). Animatable. Defaults to white.
- @discussion The initial value is a NSColor.
+ @discussion The initial value is a NSColor. The renderer multiplies the light's color is by the color derived from the light's temperature.
  */
 @property(nonatomic, retain) id color;
+
+/*!
+ @property temperature
+ @abstract Specifies the receiver's temperature.
+ @discussion This specifies the temperature of the light in Kelvin. The renderer multiplies the light's color by the color derived from the light's temperature. Defaults to 6500 (pure white). Animatable.
+ */
+@property(nonatomic) CGFloat temperature API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
+
+/*!
+ @property intensity
+ @abstract Specifies the receiver's intensity.
+ @discussion This intensity is used to modulate the light color. When used with a physically-based material, this corresponds to the luminous flux of the light, expressed in lumens (lm). Defaults to 1000. Animatable.
+ */
+@property(nonatomic) CGFloat intensity API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
 
 /*!
  @property name
@@ -83,7 +101,8 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
 
 /*! 
  @property shadowColor
- @abstract Specifies the color (CGColorRef or NSColor) of the shadow casted by the receiver. Default is 50% transparent black. Animatable.
+ @abstract Specifies the color (CGColorRef or NSColor) of the shadow casted by the receiver. Defaults to black. Animatable.
+ @discussion on iOS 9 / macOS 10.11 or earlier, this defaults to black 50% transparent.
  */
 @property(nonatomic, retain) id shadowColor;
 
@@ -98,25 +117,27 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Specifies the size of the shadow map.
  @discussion The larger the shadow map is the more precise the shadows are but the slower the computation is. If set to {0,0} the size of the shadow map is automatically chosen. Defaults to {0,0}.
  */
-@property(nonatomic) CGSize shadowMapSize NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGSize shadowMapSize API_AVAILABLE(macosx(10.10));
 
 /*!
  @property shadowSampleCount
- @abstract Specifies the number of sample per fragment to compute the shadow map. Defaults to 16.
+ @abstract Specifies the number of sample per fragment to compute the shadow map. Defaults to 0.
+ @discussion on macOS 10.11 or lower, the shadowSampleCount defaults to 16. On iOS 9 or lower it defaults to 1.0.
+ On macOS 10.12, iOS 10 and greater, when the shadowSampleCount is set to 0, a default sample count is chosen depending on the platform.
  */
-@property(nonatomic) NSUInteger shadowSampleCount NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) NSUInteger shadowSampleCount API_AVAILABLE(macosx(10.10));
 
 /*!
  @property shadowMode
  @abstract Specified the mode to use to cast shadows. See above for the available modes and their description. Defaults to SCNShadowModeDefered on 10.9 and before, defaults to SCNShadowModeForward otherwise.
  */
-@property(nonatomic) SCNShadowMode shadowMode NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) SCNShadowMode shadowMode API_AVAILABLE(macosx(10.10));
 
 /*!
  @property shadowBias
  @abstrat Specifies the correction to apply to the shadow map to correct acne artefacts. It is multiplied by an implementation-specific value to create a constant depth offset. Defaults to 1.0
  */
-@property(nonatomic) CGFloat shadowBias NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat shadowBias API_AVAILABLE(macosx(10.10));
 
 
 #pragma mark - Light projection settings for shadows
@@ -126,19 +147,19 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Specifies the orthographic scale used to render from the directional light into the shadow map. Defaults to 1.
  @discussion This is only applicable for directional lights.
  */
-@property(nonatomic) CGFloat orthographicScale NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat orthographicScale API_AVAILABLE(macosx(10.10));
 
 /*!
  @property zNear
  @abstract Specifies the minimal distance between the light and the surface to cast shadow on.  If a surface is closer to the light than this minimal distance, then the surface won't be shadowed. The near value must be different than zero. Animatable. Defaults to 1.
  */
-@property(nonatomic) CGFloat zNear NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat zNear API_AVAILABLE(macosx(10.10));
 
 /*!
  @property zFar
  @abstract Specifies the maximal distance between the light and a visible surface to cast shadow on. If a surface is further from the light than this maximal distance, then the surface won't be shadowed. Animatable. Defaults to 100.
  */
-@property(nonatomic) CGFloat zFar NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat zFar API_AVAILABLE(macosx(10.10));
 
 
 #pragma mark - Attenuation
@@ -147,19 +168,19 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @property attenuationStartDistance
  @abstract The distance at which the attenuation starts (Omni or Spot light types only). Animatable. Defaults to 0.
  */
-@property(nonatomic) CGFloat attenuationStartDistance NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat attenuationStartDistance API_AVAILABLE(macosx(10.10));
 
 /*!
  @property attenuationEndDistance
  @abstract The distance at which the attenuation ends (Omni or Spot light types only). Animatable. Defaults to 0.
  */
-@property(nonatomic) CGFloat attenuationEndDistance NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat attenuationEndDistance API_AVAILABLE(macosx(10.10));
 
 /*!
  @property attenuationFalloffExponent
  @abstract Specifies the attenuation between the start and end attenuation distances. 0 means a constant attenuation, 1 a linear attenuation and 2 a quadratic attenuation, but any positive value will work (Omni or Spot light types only). Animatable. Defaults to 2.
  */
-@property(nonatomic) CGFloat attenuationFalloffExponent NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat attenuationFalloffExponent API_AVAILABLE(macosx(10.10));
 
 
 #pragma mark - Spot parameters
@@ -168,13 +189,13 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @property spotInnerAngle
  @abstract The angle in degrees between the spot direction and the lit element below which the lighting is at full strength. Animatable. Defaults to 0.
  */
-@property(nonatomic) CGFloat spotInnerAngle  NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat spotInnerAngle  API_AVAILABLE(macosx(10.10));
 
 /*!
  @property spotOuterAngle
  @abstract The angle in degrees between the spot direction and the lit element after which the lighting is at zero strength. Animatable. Defaults to 45 degrees.
  */
-@property(nonatomic) CGFloat spotOuterAngle  NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat spotOuterAngle  API_AVAILABLE(macosx(10.10));
 
 
 #pragma mark - Other
@@ -184,13 +205,19 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Specifies the gobo (or "cookie") of the light, used to control the shape of emitted light. Defaults to nil.
  @discussion Gobos are only supported by spot lights.
  */
-@property(nonatomic, readonly, nullable) SCNMaterialProperty *gobo NS_AVAILABLE(10_9, 8_0);
+@property(nonatomic, readonly, nullable) SCNMaterialProperty *gobo API_AVAILABLE(macosx(10.9));
+
+/*!
+ @property IESProfileURL
+ @abstract Specifies the IES file from which the shape, direction, and intensity of illumination is determined. Defaults to nil.
+ */
+@property(nonatomic, retain, nullable) NSURL *IESProfileURL API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
 
 /*!
  @property categoryBitMask
  @abstract Determines the node categories that will be lit by the receiver. Defaults to all bit set.
  */
-@property(nonatomic) NSUInteger categoryBitMask NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) NSUInteger categoryBitMask API_AVAILABLE(macosx(10.10));
 
 #pragma mark - Deprecated
 
@@ -199,7 +226,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param key The key for which to return the corresponding attribute.
  @abstract Returns the attribute for the specified key. The valid keys are described in the "Light Attributes" constants.
  */
-- (nullable id)attributeForKey:(NSString *)key NS_DEPRECATED(10_8, 10_10, NA, NA);
+- (nullable id)attributeForKey:(NSString *)key API_DEPRECATED("Use SCNLight properties instead", macosx(10.8, 10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @method setAttribute:forKey:
@@ -207,7 +234,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param key The name of a property.
  @abstract Set the specified attribute for the specified key. The valid keys are described in the "Light Attributes" constants.
  */
-- (void)setAttribute:(nullable id)attribute forKey:(NSString *)key NS_DEPRECATED(10_8, 10_10, NA, NA);
+- (void)setAttribute:(nullable id)attribute forKey:(NSString *)key API_DEPRECATED("Use SCNLight properties instead", macosx(10.8, 10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
@@ -217,25 +244,25 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @discussion These keys are deprecated in 10.10. Please use the properties of SCNLight instead.
  */
 /*! @constant SCNLightAttenuationStartKey The distance at which the attenuation starts (Omni or Spot light types only). Animatable as "attenuationStart". Defaults to 0. */
-SCN_EXTERN NSString * const SCNLightAttenuationStartKey NS_DEPRECATED(10_8, 10_10, NA, NA);
+FOUNDATION_EXTERN NSString * const SCNLightAttenuationStartKey API_DEPRECATED("Use SCNLight.attenuationStartDistance instead", macosx(10.8, 10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*! @constant SCNLightAttenuationEndKey The distance at which the attenuation ends (Omni or Spot light types only). Animatable as "attenuationEnd". Defaults to 0. */
-SCN_EXTERN NSString * const SCNLightAttenuationEndKey NS_DEPRECATED(10_8, 10_10, NA, NA);
+FOUNDATION_EXTERN NSString * const SCNLightAttenuationEndKey API_DEPRECATED("Use SCNLight.attenuationEndDistance instead", macosx(10.8, 10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*! @constant SCNLightAttenuationFalloffExponentKey Controls the attenuation between the start and end attenuation distances. 0 means a constant attenuation, 1 a linear attenuation and 2 a quadratic attenuation, but any positive value will work (Omni or Spot light types only). Animatable as "attenuationFalloffExponent". Defaults to 2. */
-SCN_EXTERN NSString * const SCNLightAttenuationFalloffExponentKey NS_DEPRECATED(10_8, 10_10, NA, NA);
+FOUNDATION_EXTERN NSString * const SCNLightAttenuationFalloffExponentKey API_DEPRECATED("Use SCNLight.attenuationFalloffExponent instead", macosx(10.8, 10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*! @constant SCNLightSpotInnerAngleKey The angle in degrees between the spot direction and the lit element below which the lighting is at full strength. Animatable as "spotInnerAngle". Defaults to 0. */
-SCN_EXTERN NSString * const SCNLightSpotInnerAngleKey NS_DEPRECATED(10_8, 10_10, NA, NA);
+FOUNDATION_EXTERN NSString * const SCNLightSpotInnerAngleKey API_DEPRECATED("Use SCNLight.spotInnerAngle instead", macosx(10.8, 10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*! @constant SCNLightSpotOuterAngleKey The angle in degrees between the spot direction and the lit element after which the lighting is at zero strength. Animatable as "spotOuterAngle". Defaults to 45 degrees. */
-SCN_EXTERN NSString * const SCNLightSpotOuterAngleKey NS_DEPRECATED(10_8, 10_10, NA, NA);
+FOUNDATION_EXTERN NSString * const SCNLightSpotOuterAngleKey API_DEPRECATED("Use SCNLight.spotOuterAngle instead", macosx(10.8, 10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*! @constant SCNLightShadowNearClippingKey Specifies the minimal distance between the light and the surface to cast shadow on.  If a surface is closer to the light than this minimal distance, then the surface won't be shadowed. The near value must be different than zero. Animatable as "zNear". Defaults to 1. */
-SCN_EXTERN NSString * const SCNLightShadowNearClippingKey NS_DEPRECATED(10_8, 10_10, NA, NA);
+FOUNDATION_EXTERN NSString * const SCNLightShadowNearClippingKey API_DEPRECATED("Use SCNLight.zNear instead", macosx(10.8, 10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*! @constant SCNLightShadowFarClippingKey Specifies the maximal distance between the light and a visible surface to cast shadow on. If a surface is further from the light than this maximal distance, then the surface won't be shadowed. Animatable as "zFar". Defaults to 100. */
-SCN_EXTERN NSString * const SCNLightShadowFarClippingKey NS_DEPRECATED(10_8, 10_10, NA, NA);
+FOUNDATION_EXTERN NSString * const SCNLightShadowFarClippingKey API_DEPRECATED("Use SCNLight.zFar instead", macosx(10.8, 10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 NS_ASSUME_NONNULL_END

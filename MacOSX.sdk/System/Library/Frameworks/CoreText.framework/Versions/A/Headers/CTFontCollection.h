@@ -76,21 +76,21 @@ typedef CFComparisonResult (*CTFontCollectionSortDescriptorsCallback)(
     @abstract   Option key to specify filtering of duplicates.
     @discussion Specify this option key in the options dictionary with a non- zero value to enable automatic filtering of duplicate font descriptors.
 */
-extern const CFStringRef kCTFontCollectionRemoveDuplicatesOption CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontCollectionRemoveDuplicatesOption CT_AVAILABLE(10_5, 3_2);
 
 /*!
     @defined    kCTFontCollectionIncludeDisabledFontsOption
     @abstract   Option key to include disabled fonts in the matching results.
     @discussion Specify this option key in the options dictionary with a non-zero value to enable matching of disabled fonts. You can pass font descriptors specifying disabled fonts to CTFontManagerEnableFontDescriptors, but you cannot use such a font descriptor to query font attributes from the system database or create a CTFontRef.
 */
-extern const CFStringRef kCTFontCollectionIncludeDisabledFontsOption CT_AVAILABLE_MAC(10_7);
+CT_EXPORT const CFStringRef kCTFontCollectionIncludeDisabledFontsOption CT_AVAILABLE_MAC(10_7);
 
 /*!
     @defined    kCTFontCollectionDisallowAutoActivationOption
     @abstract   Option key to avoid auto-activating fonts.
     @discussion Specify this option key in the options dictionary with a non-zero value to disallow searches for missing fonts (font descriptors returning no results).
 */
-extern const CFStringRef kCTFontCollectionDisallowAutoActivationOption CT_AVAILABLE_MAC(10_7);
+CT_EXPORT const CFStringRef kCTFontCollectionDisallowAutoActivationOption CT_AVAILABLE_MAC(10_7);
 
 /*! --------------------------------------------------------------------------
     @group Collection Creation

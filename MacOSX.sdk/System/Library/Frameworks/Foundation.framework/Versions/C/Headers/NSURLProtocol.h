@@ -1,6 +1,6 @@
 /*	
     NSURLProtocol.h
-    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -214,8 +214,7 @@ implementors.
     @discussion A concrete subclass should inspect the given request and
     determine whether or not the implementation can perform a load with
     that request. This is an abstract method. Sublasses must provide an
-    implementation. The implementation in this class calls
-    NSRequestConcreteImplementation.
+    implementation.
     @param request A request to inspect.
     @result YES if the protocol can handle the given request, NO if not.
 */
@@ -234,8 +233,7 @@ implementors.
     equality checks between NSURLRequest objects.
     <p>
     This is an abstract method; sublasses must provide an
-    implementation. The implementation in this class calls
-    NSRequestConcreteImplementation.
+    implementation.
     @param request A request to make canonical.
     @result The canonical form of the given request. 
 */

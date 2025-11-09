@@ -44,6 +44,10 @@ typedef NS_ENUM(NSInteger, NEAppProxyFlowError) {
 	NEAppProxyFlowErrorTimedOut = 7,
 	/*! @const NEAppProxyFlowErrorInternal An internal error occurred. */
 	NEAppProxyFlowErrorInternal = 8,
+	/*! @const NEAppProxyFlowErrorDatagramTooLarge An attempt was made to write a datagram that is larger than the socket's receive window */
+	NEAppProxyFlowErrorDatagramTooLarge NS_AVAILABLE(10_11, 9_3) = 9,
+	/*! @const NEAppProxyFlowErrorReadAlreadyPending A read operation on the flow is already pending */
+	NEAppProxyFlowErrorReadAlreadyPending NS_AVAILABLE(10_11, 9_3) = 10,
 } NS_ENUM_AVAILABLE(10_11, 9_0);
 
 /*! @const NEAppProxyErrorDomain The NEAppProxyFlow error domain */
@@ -87,27 +91,6 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @discussion An NEFlowMetaData object containing meta data for the flow.
  */
 @property (readonly) NEFlowMetaData *metaData NS_AVAILABLE(10_11, 9_0);
-
-@end
-
-/*!
- * @interface NEFlowMetaData
- * @discussion The NEFlowMetaData class declares the programmatic interface for an object that contains extra information about a flow.
- */
-NS_CLASS_AVAILABLE(10_11, 9_0)
-@interface NEFlowMetaData : NSObject
-
-/*!
- * @property sourceAppUniqueIdentifier
- * @discussion A blob of bytes that uniquely identifies the source app binary of the flow. This value is unique across multiple versions of the same app.
- */
-@property (readonly) NSData *sourceAppUniqueIdentifier NS_AVAILABLE(10_11, 9_0);
-
-/*!
- * @property sourceAppSigningIdentifier
- * @discussion A string containing the signing identifier (almost always equivalent to the bundle identifier) of the source app of the flow.
- */
-@property (readonly) NSString *sourceAppSigningIdentifier NS_AVAILABLE(10_11, 9_0);
 
 @end
 

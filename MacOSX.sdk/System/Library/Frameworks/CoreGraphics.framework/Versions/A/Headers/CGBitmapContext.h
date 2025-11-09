@@ -40,7 +40,7 @@ typedef void (*CGBitmapContextReleaseDataCallback)(void * __nullable releaseInfo
 
 CG_EXTERN CGContextRef __nullable CGBitmapContextCreateWithData(
     void * __nullable data, size_t width, size_t height, size_t bitsPerComponent,
-    size_t bytesPerRow, CGColorSpaceRef __nullable space, uint32_t bitmapInfo,
+    size_t bytesPerRow, CGColorSpaceRef cg_nullable space, uint32_t bitmapInfo,
     CGBitmapContextReleaseDataCallback __nullable releaseCallback,
     void * __nullable releaseInfo)
     CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
@@ -62,64 +62,64 @@ CG_EXTERN CGContextRef __nullable CGBitmapContextCreateWithData(
 
 CG_EXTERN CGContextRef __nullable CGBitmapContextCreate(void * __nullable data,
     size_t width, size_t height, size_t bitsPerComponent, size_t bytesPerRow,
-    CGColorSpaceRef __nullable space, uint32_t bitmapInfo)
+    CGColorSpaceRef cg_nullable space, uint32_t bitmapInfo)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the data associated with the bitmap context `context', or NULL if
    `context' is not a bitmap context. */
 
-CG_EXTERN void * __nullable CGBitmapContextGetData(CGContextRef __nullable context)
+CG_EXTERN void * __nullable CGBitmapContextGetData(CGContextRef cg_nullable context)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Return the width of the bitmap context `context', or 0 if `context' is
    not a bitmap context. */
 
-CG_EXTERN size_t CGBitmapContextGetWidth(CGContextRef __nullable context)
+CG_EXTERN size_t CGBitmapContextGetWidth(CGContextRef cg_nullable context)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Return the height of the bitmap context `context', or 0 if `context' is
    not a bitmap context. */
 
-CG_EXTERN size_t CGBitmapContextGetHeight(CGContextRef __nullable context)
+CG_EXTERN size_t CGBitmapContextGetHeight(CGContextRef cg_nullable context)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Return the bits per component of the bitmap context `context', or 0 if
    `context' is not a bitmap context. */
 
-CG_EXTERN size_t CGBitmapContextGetBitsPerComponent(CGContextRef __nullable context)
+CG_EXTERN size_t CGBitmapContextGetBitsPerComponent(CGContextRef cg_nullable context)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Return the bits per pixel of the bitmap context `context', or 0 if
    `context' is not a bitmap context. */
 
-CG_EXTERN size_t CGBitmapContextGetBitsPerPixel(CGContextRef __nullable context)
+CG_EXTERN size_t CGBitmapContextGetBitsPerPixel(CGContextRef cg_nullable context)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Return the bytes per row of the bitmap context `context', or 0 if
    `context' is not a bitmap context. */
 
-CG_EXTERN size_t CGBitmapContextGetBytesPerRow(CGContextRef __nullable context)
+CG_EXTERN size_t CGBitmapContextGetBytesPerRow(CGContextRef cg_nullable context)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Return the color space of the bitmap context `context', or NULL if
    `context' is not a bitmap context. */
 
 CG_EXTERN CGColorSpaceRef __nullable CGBitmapContextGetColorSpace(
-    CGContextRef __nullable context)
+    CGContextRef cg_nullable context)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Return the alpha info of the bitmap context `context', or
    "kCGImageAlphaNone" if `context' is not a bitmap context. */
 
 CG_EXTERN CGImageAlphaInfo CGBitmapContextGetAlphaInfo(
-    CGContextRef __nullable context)
+    CGContextRef cg_nullable context)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Return the bitmap info of the bitmap context `context', or 0 if `context'
    is not a bitmap context. */
 
 CG_EXTERN CGBitmapInfo CGBitmapContextGetBitmapInfo(
-    CGContextRef __nullable context)
+    CGContextRef cg_nullable context)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Return an image containing a snapshot of the bitmap context `context'. If
@@ -136,7 +136,7 @@ CG_EXTERN CGBitmapInfo CGBitmapContextGetBitmapInfo(
    actual physical copy of the data may be avoided. */
 
 CG_EXTERN CGImageRef __nullable CGBitmapContextCreateImage(
-    CGContextRef __nullable context)
+    CGContextRef cg_nullable context)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 CF_ASSUME_NONNULL_END

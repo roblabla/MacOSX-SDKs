@@ -64,7 +64,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 @property(nonatomic, copy, nullable) NSURL *URL NS_AVAILABLE(10_8, 5_0);
 
 @property(nonatomic, readonly, nullable) NSDate *lastModifiedDate;
-@property(nonatomic, readonly, nullable) NSDate *creationDate NS_AVAILABLE(10_8, 5_0);
+@property(nonatomic, readonly, nullable, strong) NSDate *creationDate NS_AVAILABLE(10_8, 5_0);
 @property(nonatomic, copy, nullable) NSTimeZone *timeZone  NS_AVAILABLE(10_8, 5_0);
 
 // These exist to do simple checks for the presence of data without

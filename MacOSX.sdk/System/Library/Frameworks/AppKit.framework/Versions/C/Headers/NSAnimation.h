@@ -1,7 +1,7 @@
 /*
     NSAnimation.h
     Application Kit
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, NSAnimationBlockingMode) {
 
 typedef float NSAnimationProgress;
 
-APPKIT_EXTERN NSString * NSAnimationProgressMarkNotification; // has single entry in user info dictionary
+APPKIT_EXTERN NSNotificationName NSAnimationProgressMarkNotification; // has single entry in user info dictionary
 APPKIT_EXTERN NSString * NSAnimationProgressMark; // NSNumber(float) with NSAnimationProgress
 
 @interface NSAnimation : NSObject <NSCopying, NSCoding> {
@@ -52,7 +52,8 @@ APPKIT_EXTERN NSString * NSAnimationProgressMark; // NSNumber(float) with NSAnim
 	unsigned int animating:1;
 	unsigned int blocking:1;
         unsigned int sendProgressAllTheTime:1;
-	unsigned int reserved:24;
+        unsigned int hasHandler:1;
+	unsigned int reserved:23;
     } _aFlags;
     struct __aSettings {
 	unsigned int animationCurve:8;
@@ -60,12 +61,15 @@ APPKIT_EXTERN NSString * NSAnimationProgressMark; // NSNumber(float) with NSAnim
 	unsigned int reserved:22;
     } _aSettings;
     NSRunLoop *_scheduledRunLoop;
+#ifndef __OBJC2__
     NSInteger _reserved2;
     NSInteger _reserved3;
     NSInteger _reserved4;
+#endif
 }
 
-- (instancetype)initWithDuration:(NSTimeInterval)duration animationCurve:(NSAnimationCurve)animationCurve;
+- (instancetype)initWithDuration:(NSTimeInterval)duration animationCurve:(NSAnimationCurve)animationCurve NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 - (void)startAnimation;
 - (void)stopAnimation;
@@ -96,7 +100,7 @@ APPKIT_EXTERN NSString * NSAnimationProgressMark; // NSNumber(float) with NSAnim
 - (void)clearStartAnimation;
 - (void)clearStopAnimation;
 
-@property (nullable, readonly, copy) NSArray<NSString *> *runLoopModesForAnimating;
+@property (nullable, readonly, copy) NSArray<NSRunLoopMode> *runLoopModesForAnimating;
 
 @end
 
@@ -123,6 +127,7 @@ APPKIT_EXTERN NSString * NSViewAnimationFadeOutEffect;
     NSArray                *_viewAnimations;
     id                      _viewAnimationInfo;
     id                      _windowAnimationInfo;
+#ifndef __OBJC2__
     NSUInteger                  _reserved4a;
     NSUInteger                  _reserved4b;
     NSUInteger                  _reserved4c;
@@ -132,7 +137,8 @@ APPKIT_EXTERN NSString * NSViewAnimationFadeOutEffect;
     NSUInteger                  _reserved5;
     NSUInteger                  _reserved6;
     NSUInteger                  _reserved7;
-    NSUInteger                  _reserved8;    
+    NSUInteger                  _reserved8;
+#endif
 }
 
 - (instancetype)initWithViewAnimations:(NSArray<NSDictionary<NSString *, id> *> *)viewAnimations;

@@ -1,7 +1,7 @@
 /*
 	ScreenSaverView.h
 	ScreenSaver
-	Copyright (c) 2000-2, Apple Computer, Inc.
+	Copyright (c) 2000-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -65,11 +65,11 @@ static __inline__ NSPoint SSRandomPointForSizeWithinRect(NSSize size, NSRect rec
 static __inline__ NSRect SSCenteredRectInRect(NSRect innerRect, NSRect outerRect)
 {
 #if CGFLOAT_IS_DOUBLE
-    innerRect.origin.x = floor((outerRect.size.width - innerRect.size.width) / (CGFloat) 2.0);
-    innerRect.origin.y = floor((outerRect.size.height - innerRect.size.height) / (CGFloat) 2.0);
+    innerRect.origin.x = outerRect.origin.x + floorf((outerRect.size.width - innerRect.size.width) / 2);
+    innerRect.origin.y = outerRect.origin.y + floorf((outerRect.size.height - innerRect.size.height) / 2);
 #else
-    innerRect.origin.x = floorf((outerRect.size.width - innerRect.size.width) / (CGFloat) 2.0);
-    innerRect.origin.y = floorf((outerRect.size.height - innerRect.size.height) / (CGFloat) 2.0);
+    innerRect.origin.x = outerRect.origin.x + floorf((outerRect.size.width - innerRect.size.width) / 2);
+    innerRect.origin.y = outerRect.origin.y + floorf((outerRect.size.height - innerRect.size.height) / 2);
 #endif
     return innerRect;
 }

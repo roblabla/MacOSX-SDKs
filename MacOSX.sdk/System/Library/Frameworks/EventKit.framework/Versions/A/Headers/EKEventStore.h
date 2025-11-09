@@ -324,7 +324,7 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @discussion Creates a simple query predicate to search for events within a certain date range. At present,
                 this will return events in the default time zone ([NSTimeZone defaultTimeZone]).
 
-                OS X Only: For performance reasons, this method will only return events within a four year timespan.
+                For performance reasons, this method will only return events within a four year timespan.
                 If the date range between the startDate and endDate is greater than four years, then it will be shortened 
                 to the first four years.
  

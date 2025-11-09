@@ -134,13 +134,19 @@ typedef void (^GCMotionValueChangedHandler)(GCMotion *motion);
 
 /**
  The current attitude of the controller.
+ 
+ @note Remotes can not determine a stable attitude so the values will be (0,0,0,1) at all times.
+ @see GCMicroGamepad
  */
-@property (nonatomic, assign, readonly) GCQuaternion attitude;
+@property (nonatomic, assign, readonly) GCQuaternion attitude __TVOS_UNAVAILABLE;
 
 /**
  The current rotation rate of the controller.
+ 
+ @note Remotes can not determine a stable rotation rate so the values will be (0,0,0) at all times.
+ @see GCMicroGamepad
  */
-@property (nonatomic, assign, readonly) GCRotationRate rotationRate;
+@property (nonatomic, assign, readonly) GCRotationRate rotationRate __TVOS_UNAVAILABLE;
 
 @end
 

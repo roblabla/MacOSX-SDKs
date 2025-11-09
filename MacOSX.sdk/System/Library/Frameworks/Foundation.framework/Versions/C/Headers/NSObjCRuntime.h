@@ -1,5 +1,5 @@
 /*	NSObjCRuntime.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #include <TargetConditionals.h>
@@ -224,6 +224,12 @@
 #endif
 #endif
 
+#if __has_attribute(not_tail_called)
+#define NS_NO_TAIL_CALL __attribute__((not_tail_called))
+#else
+#define NS_NO_TAIL_CALL
+#endif
+
 #if !__has_feature(objc_instancetype)
 #undef instancetype
 #define instancetype id
@@ -254,6 +260,8 @@
 #define NS_DEPRECATED_MAC(_macIntro, _macDep, ...) CF_DEPRECATED_MAC(_macIntro, _macDep, __VA_ARGS__)
 #define NS_DEPRECATED_IOS(_iosIntro, _iosDep, ...) CF_DEPRECATED_IOS(_iosIntro, _iosDep, __VA_ARGS__)
 
+#define NS_DEPRECATED_WITH_REPLACEMENT_MAC(_rep, _macIntroduced, _macDeprecated) API_DEPRECATED_WITH_REPLACEMENT(_rep, macosx(_macIntroduced, _macDeprecated)) API_UNAVAILABLE(ios, watchos, tvos)
+
 #define NS_ENUM_AVAILABLE(_mac, _ios) CF_ENUM_AVAILABLE(_mac, _ios)
 #define NS_ENUM_AVAILABLE_MAC(_mac) CF_ENUM_AVAILABLE_MAC(_mac)
 #define NS_ENUM_AVAILABLE_IOS(_ios) CF_ENUM_AVAILABLE_IOS(_ios)
@@ -279,6 +287,34 @@ NS_ENUM(NSInteger) {
 */
 #define NS_ENUM(...) CF_ENUM(__VA_ARGS__)
 #define NS_OPTIONS(_type, _name) CF_OPTIONS(_type, _name)
+
+
+#ifndef CF_STRING_ENUM
+#if __has_attribute(swift_wrapper)
+#define _CF_TYPED_ENUM __attribute__((swift_wrapper(enum)))
+#else
+#define _CF_TYPED_ENUM
+#endif
+
+#define CF_STRING_ENUM _CF_TYPED_ENUM
+#endif
+
+#ifndef CF_EXTENSIBLE_STRING_ENUM
+#if __has_attribute(swift_wrapper)
+#define _CF_TYPED_EXTENSIBLE_ENUM __attribute__((swift_wrapper(struct)))
+#else
+#define _CF_TYPED_EXTENSIBLE_ENUM
+#endif
+
+#define CF_EXTENSIBLE_STRING_ENUM _CF_TYPED_EXTENSIBLE_ENUM
+#endif
+/* */
+
+#define _NS_TYPED_ENUM _CF_TYPED_ENUM
+#define _NS_TYPED_EXTENSIBLE_ENUM _CF_TYPED_EXTENSIBLE_ENUM
+
+#define NS_STRING_ENUM _NS_TYPED_ENUM
+#define NS_EXTENSIBLE_STRING_ENUM _NS_TYPED_EXTENSIBLE_ENUM
 
 // This macro is to be used by system frameworks to support the weak linking of classes. Weak linking is supported on iOS 3.1 and Mac OS X 10.6.8 or later.
 #if (__MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_6 || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_3_1) && \
@@ -311,12 +347,16 @@ NS_ENUM(NSInteger) {
 
 #define NS_SWIFT_NAME(_name) CF_SWIFT_NAME(_name)
 
+#define NS_NOESCAPE CF_NOESCAPE
+
 #if __has_attribute(swift_error)
 #define NS_SWIFT_NOTHROW __attribute__((swift_error(none)))
 #else
 #define NS_SWIFT_NOTHROW
 #endif
 
+#define FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(__epoch__) (!defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_FOUNDATION_EPOCH) && (SWIFT_SDK_OVERLAY_FOUNDATION_EPOCH >= __epoch__)))
+#define FOUNDATION_SWIFT_SDK_EPOCH_LESS_THAN(__epoch__) (! FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(__epoch__) )
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -396,6 +436,15 @@ FOUNDATION_EXPORT double NSFoundationVersionNumber;
 #define NSFoundationVersionNumber10_10_1 1151.16
 #define NSFoundationVersionNumber10_10_2 1152.14
 #define NSFoundationVersionNumber10_10_3 1153.20
+#define NSFoundationVersionNumber10_10_4 1153.20
+#define NSFoundationVersionNumber10_10_5 1154
+#define NSFoundationVersionNumber10_10_Max 1199
+#define NSFoundationVersionNumber10_11   1252
+#define NSFoundationVersionNumber10_11_1 1255.1
+#define NSFoundationVersionNumber10_11_2 1256.1
+#define NSFoundationVersionNumber10_11_3 1256.1
+#define NSFoundationVersionNumber10_11_4 1258
+#define NSFoundationVersionNumber10_11_Max 1299
 #endif
 
 #if TARGET_OS_IPHONE
@@ -419,6 +468,14 @@ FOUNDATION_EXPORT double NSFoundationVersionNumber;
 #define NSFoundationVersionNumber_iOS_8_1 1141.1
 #define NSFoundationVersionNumber_iOS_8_2 1142.14
 #define NSFoundationVersionNumber_iOS_8_3 1144.17
+#define NSFoundationVersionNumber_iOS_8_4 1144.17
+#define NSFoundationVersionNumber_iOS_8_x_Max 1199
+#define NSFoundationVersionNumber_iOS_9_0 1240.1
+#define NSFoundationVersionNumber_iOS_9_1 1241.14
+#define NSFoundationVersionNumber_iOS_9_2 1242.12
+#define NSFoundationVersionNumber_iOS_9_3 1242.12
+#define NSFoundationVersionNumber_iOS_9_4 1280.25
+#define NSFoundationVersionNumber_iOS_9_x_Max 1299
 #endif
 
 #if TARGET_OS_WIN32
@@ -434,19 +491,22 @@ typedef unsigned long NSUInteger;
 
 @class NSString, Protocol;
 
+typedef NSString * NSExceptionName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSRunLoopMode NS_EXTENSIBLE_STRING_ENUM;
+
 FOUNDATION_EXPORT NSString *NSStringFromSelector(SEL aSelector);
 FOUNDATION_EXPORT SEL NSSelectorFromString(NSString *aSelectorName);
 
 FOUNDATION_EXPORT NSString *NSStringFromClass(Class aClass);
-FOUNDATION_EXPORT Class __nullable NSClassFromString(NSString *aClassName);
+FOUNDATION_EXPORT Class _Nullable NSClassFromString(NSString *aClassName);
 
 FOUNDATION_EXPORT NSString *NSStringFromProtocol(Protocol *proto) NS_AVAILABLE(10_5, 2_0);
-FOUNDATION_EXPORT Protocol * __nullable NSProtocolFromString(NSString *namestr) NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT Protocol * _Nullable NSProtocolFromString(NSString *namestr) NS_AVAILABLE(10_5, 2_0);
 
-FOUNDATION_EXPORT const char *NSGetSizeAndAlignment(const char *typePtr, NSUInteger * __nullable sizep, NSUInteger * __nullable alignp);
+FOUNDATION_EXPORT const char *NSGetSizeAndAlignment(const char *typePtr, NSUInteger * _Nullable sizep, NSUInteger * _Nullable alignp);
 
-FOUNDATION_EXPORT void NSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
-FOUNDATION_EXPORT void NSLogv(NSString *format, va_list args) NS_FORMAT_FUNCTION(1,0);
+FOUNDATION_EXPORT void NSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1,2) NS_NO_TAIL_CALL;
+FOUNDATION_EXPORT void NSLogv(NSString *format, va_list args) NS_FORMAT_FUNCTION(1,0) NS_NO_TAIL_CALL;
 
 typedef NS_ENUM(NSInteger, NSComparisonResult) {NSOrderedAscending = -1L, NSOrderedSame, NSOrderedDescending};
 

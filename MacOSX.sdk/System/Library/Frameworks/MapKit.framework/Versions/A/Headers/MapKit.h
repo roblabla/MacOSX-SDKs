@@ -12,6 +12,7 @@
 #import <MapKit/MKGeometry.h>
 #import <MapKit/MKMapItem.h>
 #import <MapKit/MKPlacemark.h>
+#import <MapKit/NSUserActivity+MKMapItem.h>
 
 #if __has_include(<MapKit/MKMapView.h>)
 #import <MapKit/MKAnnotationView.h>
@@ -32,6 +33,7 @@
 #import <MapKit/MKPolylineRenderer.h>
 #import <MapKit/MKCircleRenderer.h>
 #import <MapKit/MKLocalSearch.h>
+#import <MapKit/MKLocalSearchCompleter.h>
 #import <MapKit/MKLocalSearchRequest.h>
 #import <MapKit/MKLocalSearchResponse.h>
 #import <MapKit/MKDirectionsRequest.h>

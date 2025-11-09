@@ -49,7 +49,7 @@ The HFS+ volume that contains Time Machine backups.
 .\" - - - - - - - - - - - - - - BACKUP DESTINATION  - - - - - - - - - - - - - -
 .It Em backup destination
 .br
-\&In the case of a local destination, a synonym for backup disk. For network destinations, this is the AFP share on which the backup disk image resides.
+\&In the case of a local destination, a synonym for backup disk. For network destinations, this is the AFP or SMB share on which the backup disk image resides.
 .\" - - - - - - - - - - - - - - BACKUP DISK IMAGE - - - - - - - - - - - - - - -
 .It Em backup disk image
 (or
@@ -98,7 +98,7 @@ Each verb is listed with its description and individual arguments.
 .It Sy setdestination Op Fl ap
 .Ar arg
 .br
-Configure a local HFS+ volume or AFP share as a backup destination. Requires root privileges.
+Configure a local HFS+ volume, AFP share, or SMB share as a backup destination. Requires root privileges.
 .Pp
 When the
 .Fl Sy a
@@ -111,13 +111,13 @@ option is not provided, the current list of destinations will be replaced by
 .Pp
 If you wish to set an HFS+ volume as the backup destination,
 .Ar arg
-should be the mount point of the volume in question. When setting an AFP destination
+should be the mount point of the volume in question. When setting an AFP or SMB destination
 .Ar arg
 takes the form:
 .Pp
-.Pa afp://user[:pass]@host/share
+.Pa protocol://user[:pass]@host/share
 .Pp
-In the AFP case, the password component of the URL is optional; you may instead specify the
+In the AFP and SMB cases, the password component of the URL is optional; you may instead specify the
 .Fl Sy p
 option to enter the password at a non-echoing interactive prompt. This is of particular interest to the security-conscious, as all arguments provided to a program are visible by all users on the system via the
 .Sy ps
@@ -159,33 +159,30 @@ Remove the destination with the specified unique identifier from the Time Machin
 To obtain the unique identifier for a destination, see
 .Sy destinationinfo.
 .\" - - - - - - - - - - - - - - - ADDEXCLUSION - - - - - - - - - - - - - - - - - 
-.It Sy addexclusion Op Fl p
+.It Sy addexclusion Op Fl pv
 .Ar item ...
 .br
 Configure an exclusion that tells Time Machine not to back up a file, directory, or volume during future backups.
 .Pp
-There are two kinds of user-configurable exclusions in Time Machine. The first, which is the default behavior for the
+There are three kinds of user-configurable exclusions in Time Machine:
+.Pp
+The first kind of exclusion, which is the default behavior for the
 .Sy addexclusion
 verb, is a location-independent ("sticky") exclusion that follows a file or directory. When the file or directory is moved, the exclusion goes with the item to the new location. Additionally, when the item is copied, the copy retains the exclusion.
 .Pp
-The second kind of exclusion is what is known as a fixed-path exclusion. In this scenario, you tell Time Machine that you want a specific path to be excluded, agnostic of the item at that path. If there is no file or directory at the specified path, the exclusion has no effect; if the item previously at the path has been moved or renamed, the item is not excluded, because it does not currently reside at the excluded path. As a consequence of these semantics, moving a file or directory
+The second kind of exclusion is a fixed-path exclusion. With this, you tell Time Machine that you want a specific path to be excluded, agnostic of the item at that path. If there is no file or directory at the specified path, the exclusion has no effect; if the item previously at the path has been moved or renamed, the item is not excluded, because it does not currently reside at the excluded path. As a consequence of these semantics, moving a file or directory
 .Em to
 the path will cause the item to be excluded--fixed-path exclusions are not automatically cleaned up when items are moved or deleted and will take effect again once an item exists at an excluded path.
 .Pp
+The third kind of exclusion is a volume exclusion. These track volumes based on file system UUID, which is persistent across volume name and mount path changes. Erasing the volume will cause Time Machine to apply default behavior for the newly erased volume.
+.Pp
 The
 .Fl Sy p
-option sets a fixed-path exclusion as described above. Requires root privileges.
-.Pp
-Volume exclusions can be set with the
-.Sy addexclusion
-verb. The
-.Fl Sy p
-option is ignored for volumes; exclusions set on volumes track the volume regardless of volume name or mount path changes. Erasing the volume will cause it to be included in future backups. (See
-.Sy associatedisk Ns
-\&.)
-Requires root privileges.
-.\" - - - - - - - - - - - - - - REMOVEEXCLUSION - - - - - - - - - - - - - - - - 
-.It Sy removeexclusion Op Fl p
+option configures fixed-path exclusions. The
+.Fl Sy v
+option configures volume exclusions. Both require root privileges.
+.\" - - - - - - - - - - - - - - REMOVEEXCLUSION - - - - - - - - - - - - - - - -
+.It Sy removeexclusion Op Fl pv
 .Ar item ...
 .br
 Configure Time Machine to back up a file, directory, or volume during future backups. This verb follows the same usage, exclusion style, and privilege semantics as
@@ -435,7 +432,7 @@ A concrete example of when and how you would use
 .Sy associatedisk Ns
 :
 .Pp
-After having problems with a volume, you decide to erase it and manually restore its contents from a Time Machine backup or copy of another nature. (I.e., not via the Mac OS X installer's System Restore feature or Migration Assistant.) On your next incremental backup, the data will be copied anew, as though none of it had been backed up before. Technically, it is true that the data has not been backed up, given the new UUID. However, this is probably not what you want Time Machine to do. You would then use
+After having problems with a volume, you decide to erase it and manually restore its contents from a Time Machine backup or copy of another nature. (I.e., not via Time Machine System Restore or Migration Assistant.) On your next incremental backup, the data will be copied anew, as though none of it had been backed up before. Technically, it is true that the data has not been backed up, given the new UUID. However, this is probably not what you want Time Machine to do. You would then use
 .Sy associatedisk
 to reconfigure the backup so it appears that this volume has been backed up previously:
 .Pp

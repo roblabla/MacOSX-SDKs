@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -126,6 +126,7 @@ struct	ipstat {
 	u_int32_t ips_rxc_chainsz_gt2;	/* rx chain size greater than 2 */
 	u_int32_t ips_rxc_chainsz_gt4;  /* rx chain size greater than 4 */
 	u_int32_t ips_rxc_notlist;	/* count of pkts through ip_input */
+	u_int32_t ips_raw_sappend_fail;	/* sock append failed */
 
 };
 

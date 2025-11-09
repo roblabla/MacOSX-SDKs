@@ -285,7 +285,7 @@ enum
     kICACapabilityCanCameraSyncClock            = 'sclk',
     kICACapabilityCanCameraUploadData           = 'load',
     kICACapabilityMayStoreNewImagesInTempStore  = 'temp',
-    kICACapabilityMessageCameraSupportsFastPTP  = 'fptp'
+    kICACapabilityMessageCameraSupportsApplePTP = 'aptp'
 };
 
 //------------------------------------------------------------------------------------------------------------------------------

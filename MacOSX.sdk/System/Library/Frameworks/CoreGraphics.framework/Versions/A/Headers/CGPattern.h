@@ -46,7 +46,7 @@ typedef CF_ENUM (int32_t, CGPatternTiling) {
     `releaseInfo' is called when the pattern is deallocated. */
 
 typedef void (*CGPatternDrawPatternCallback)(void * __nullable info,
-                                             CGContextRef __nullable context);
+                                             CGContextRef cg_nullable context);
 typedef void (*CGPatternReleaseInfoCallback)(void * __nullable info);
 
 struct CGPatternCallbacks {
@@ -66,19 +66,19 @@ CG_EXTERN CFTypeID CGPatternGetTypeID(void)
 CG_EXTERN CGPatternRef __nullable CGPatternCreate(void * __nullable info,
     CGRect bounds, CGAffineTransform matrix, CGFloat xStep, CGFloat yStep,
     CGPatternTiling tiling, bool isColored,
-    const CGPatternCallbacks * __nullable callbacks)
+    const CGPatternCallbacks * cg_nullable callbacks)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain(pattern)', except it doesn't crash (as CF does)
    if `pattern' is NULL. */
 
-CG_EXTERN CGPatternRef __nullable CGPatternRetain(CGPatternRef __nullable pattern)
+CG_EXTERN CGPatternRef cg_nullable CGPatternRetain(CGPatternRef cg_nullable pattern)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(pattern)', except it doesn't crash (as CF does)
    if `pattern' is NULL. */
 
-CG_EXTERN void CGPatternRelease(CGPatternRef __nullable pattern)
+CG_EXTERN void CGPatternRelease(CGPatternRef cg_nullable pattern)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 CF_ASSUME_NONNULL_END

@@ -76,7 +76,7 @@ typedef NS_ENUM(NSInteger, IKCameraDeviceViewTransferMode)
  @property delegate
  @abstract Delegate of the IKCameraDeviceView.
  */
-@property (assign) id<IKCameraDeviceViewDelegate> delegate;
+@property (assign) IBOutlet id<IKCameraDeviceViewDelegate> delegate;
 
 /*!
  @property cameraDevice

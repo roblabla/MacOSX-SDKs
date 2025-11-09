@@ -31,9 +31,7 @@
 .Os Darwin
 .Sh NAME
 .Nm os_activity_initiate ,
-.Nm os_activity_initiate_f ,
-.Nm os_activity_start ,
-.Nm os_activity_end
+.Nm os_activity_initiate_f
 .Nd activity related routines
 .Sh SYNOPSIS
 .In os/activity.h
@@ -41,14 +39,8 @@
 .Fn os_activity_initiate "const char *description" "uint32_t flags" "void (^activity_block)(void)"
 .Ft void
 .Fn os_activity_initiate_f "const char *description" "uint32_t flags" "void *ctx" "void function(void *ctx)"
-.Ft os_activity_t
-.Fn os_activity_start "const char *description" "uint32_t flags"
-.Ft void
-.Fn os_activity_end "os_activity_t activity"
 .Sh DESCRIPTION
-An activity is essentially an identifier that is created by the system. The identifier is transported with work via GCD, XPC and other mechanisms. Activities also have a ring buffer associated with them to log all related
-.Xr os_trace 3
-messages. This technique makes debugging a programs easier since it correlates the log messages to the area in question. Although an activity appears to have a start/end, it is only finished when no other work related to it is enqueued to be processed. Activity functions only allow static strings for performance and privacy, similar to
+An activity is essentially an identifier that is created by the system. The identifier is transported with work via GCD, XPC and other mechanisms.  The identifier simplifies debugging programs since it correlates the trace and log messages to the area in question. Although an activity appears to have a start/end, it is only finished when no other work related to it is enqueued to be processed. Activity functions only allow constant strings for performance and privacy, similar to
 .Xr os_trace 3 .
 .Pp
 Supported Activity Name:
@@ -69,16 +61,7 @@ os_activity_initiate(buffer, OS_ACTIVITY_FLAG_DEFAULT, ^(void) {
 .Nm
 and
 .Nm os_activity_initiate_f
-wraps a new activity begin and end in a simple call. Useful if caller does not care about identifier.
-.Pp
-.Nm os_activity_start
-and
-.Nm os_activity_end
-can be used for situations where a context is involved or work is handled asynchronously. Calling
-.Nm os_activity_end
-with the result from
-.Nm os_activity_start
-only signifies that control returned to the caller.  An activity is not "complete" until all enqueued work is finished.
+wraps the block or function with a new activity.
 .Sh EXAMPLES
 Example use of activity with a message.
 .Pp
@@ -96,4 +79,5 @@ Example use of activity with a message.
 .Ed
 .Sh SEE ALSO
 .Xr ostraceutil 1 ,
-.Xr os_trace 3
+.Xr os_trace 3 ,
+.Xr os_log 3

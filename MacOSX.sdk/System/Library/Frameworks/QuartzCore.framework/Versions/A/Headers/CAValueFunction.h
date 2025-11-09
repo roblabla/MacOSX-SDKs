@@ -1,6 +1,6 @@
 /* CoreAnimation - CAValueFunction.h
 
-   Copyright (c) 2008-2015, Apple Inc.
+   Copyright (c) 2008-2016, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>
@@ -8,6 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+CA_CLASS_AVAILABLE (10.6, 3.0, 9.0, 2.0)
 @interface CAValueFunction : NSObject <NSCoding>
 {
 @protected
@@ -28,44 +29,44 @@ NS_ASSUME_NONNULL_BEGIN
  * corresponding rotation matrix. */
 
 CA_EXTERN NSString * const kCAValueFunctionRotateX
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAValueFunctionRotateY
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAValueFunctionRotateZ
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
 
 /* The `scale' function takes three input values and constructs a
  * 4x4 matrix representing the corresponding scale matrix. */
 
 CA_EXTERN NSString * const kCAValueFunctionScale
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
 
 /* The `scaleX', `scaleY', `scaleZ' functions take a single input value
  * and construct a 4x4 matrix representing the corresponding scaling
  * matrix. */
 
 CA_EXTERN NSString * const kCAValueFunctionScaleX
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAValueFunctionScaleY
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAValueFunctionScaleZ
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
 
 /* The `translate' function takes three input values and constructs a
  * 4x4 matrix representing the corresponding scale matrix. */
 
 CA_EXTERN NSString * const kCAValueFunctionTranslate
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
 
 /* The `translateX', `translateY', `translateZ' functions take a single
  * input value and construct a 4x4 matrix representing the corresponding
  * translation matrix. */
 
 CA_EXTERN NSString * const kCAValueFunctionTranslateX
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAValueFunctionTranslateY
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAValueFunctionTranslateZ
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
 
 NS_ASSUME_NONNULL_END

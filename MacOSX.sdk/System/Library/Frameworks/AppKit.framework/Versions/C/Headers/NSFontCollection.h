@@ -1,7 +1,7 @@
 /*
 	NSFontCollection.h
 	Application Kit
-	Copyright (c) 2010-2015, Apple Inc.
+	Copyright (c) 2010-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -153,7 +153,7 @@ APPKIT_EXTERN NSString * const NSFontCollectionDisallowAutoActivationOption NS_A
  This notification is sent to the local notification center when a named, persistent collection is modified.
  User info key NSFontCollectionNotificationAction describes the nature of the change.
  */
-APPKIT_EXTERN NSString * const NSFontCollectionDidChangeNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSNotificationName const NSFontCollectionDidChangeNotification NS_AVAILABLE_MAC(10_7);
 
 // Notification user info dictionary keys
 APPKIT_EXTERN NSString * const NSFontCollectionActionKey NS_AVAILABLE_MAC(10_7);			// NSString: action taken

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2016 Apple Inc. All rights reserved.
 
 */
 
@@ -84,7 +84,7 @@ AV_INIT_UNAVAILABLE
 	
 	UTIs for container formats that can be written are declared in AVMediaFormat.h.
  */
-+ (nullable instancetype)assetWriterWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError * __nullable * __nullable)outError;
++ (nullable instancetype)assetWriterWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError * _Nullable * _Nullable)outError;
 
 /*!
  @method initWithURL:fileType:error:
@@ -105,7 +105,7 @@ AV_INIT_UNAVAILABLE
 	
 	UTIs for container formats that can be written are declared in AVMediaFormat.h.
  */
-- (nullable instancetype)initWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError * __nullable * __nullable)outError NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError * _Nullable * _Nullable)outError NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property outputURL

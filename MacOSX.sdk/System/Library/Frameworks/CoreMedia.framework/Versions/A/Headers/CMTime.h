@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright 2005-2015 Apple Inc. All rights reserved.
+    Copyright 2005-2016 Apple Inc. All rights reserved.
  
 */
 
@@ -217,7 +217,7 @@ CMTime CMTimeMakeWithEpoch(
 /*!
 	@function	CMTimeMakeWithSeconds
 	@abstract	Make a CMTime from a Float64 number of seconds, and a preferred timescale.
-	@discussion	The epoch of the result will be zero.  If preferredTimeScale is <= 0, the result
+	@discussion	The epoch of the result will be zero.  If preferredTimescale is <= 0, the result
 				will be an invalid CMTime.  If the preferred timescale will cause an overflow, the
 				timescale will be halved repeatedly until the overflow goes away, or the timescale
 				is 1.  If it still overflows at that point, the result will be +/- infinity.  The
@@ -228,7 +228,7 @@ CMTime CMTimeMakeWithEpoch(
 CM_EXPORT 
 CMTime CMTimeMakeWithSeconds(
 				Float64 seconds,
-				int32_t preferredTimeScale)
+				int32_t preferredTimescale)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!

@@ -1,7 +1,7 @@
 /*
     NSApplication.h
     Application Kit
-    Copyright (c) 1994-2015, Apple Inc.
+    Copyright (c) 1994-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSGraphicsContext, NSImage, NSPasteboard, NSWindow;
 @class NSDockTile;
 @class NSUserActivity;
+@class CKShareMetadata;
 @protocol NSApplicationDelegate;
 
 /* The version of the AppKit framework */
@@ -55,10 +56,17 @@ APPKIT_EXTERN const double NSAppKitVersionNumber;
 #define NSAppKitVersionNumber10_10_4 1348
 #define NSAppKitVersionNumber10_10_5 1348
 #define NSAppKitVersionNumber10_10_Max 1349
+#define NSAppKitVersionNumber10_11 1404
+#define NSAppKitVersionNumber10_11_1 1404.13
+#define NSAppKitVersionNumber10_11_2 1404.34
+#define NSAppKitVersionNumber10_11_3 1404.34
+#define NSAppKitVersionNumber10_12 1504
+#define NSAppKitVersionNumber10_12_1 1504.60
+
 
 /* Modes passed to NSRunLoop */
-APPKIT_EXTERN NSString *NSModalPanelRunLoopMode;
-APPKIT_EXTERN NSString *NSEventTrackingRunLoopMode;
+APPKIT_EXTERN NSRunLoopMode NSModalPanelRunLoopMode;
+APPKIT_EXTERN NSRunLoopMode NSEventTrackingRunLoopMode;
 
 
 /* Pre-defined return values for -runModalFor: and -runModalSession:. The system also reserves all values below these. Other values can be used. */
@@ -89,17 +97,22 @@ typedef NS_OPTIONS(NSUInteger, NSApplicationPresentationOptions) {
     NSApplicationPresentationDisableForceQuit           = (1 <<  6),    // Cmd+Opt+Esc panel is disabled
     NSApplicationPresentationDisableSessionTermination  = (1 <<  7),    // PowerKey panel and Restart/Shut Down/Log Out disabled
     NSApplicationPresentationDisableHideApplication     = (1 <<  8),    // Application "Hide" menu item is disabled
-    NSApplicationPresentationDisableMenuBarTransparency = (1 <<  9),     // Menu Bar's transparent appearance is disabled
+    NSApplicationPresentationDisableMenuBarTransparency = (1 <<  9),    // Menu Bar's transparent appearance is disabled
 
-    NSApplicationPresentationFullScreen NS_ENUM_AVAILABLE_MAC(10_7) = (1 << 10),                     // Application is in fullscreen mode
-    NSApplicationPresentationAutoHideToolbar NS_ENUM_AVAILABLE_MAC(10_7) = (1 << 11)                 // Fullscreen window toolbar is detached from window and hides/shows with autoHidden menuBar.  May be used only when both NSApplicationPresentationFullScreen and NSApplicationPresentationAutoHideMenuBar are also set
+    NSApplicationPresentationFullScreen NS_ENUM_AVAILABLE_MAC(10_7) = (1 << 10),         // Application is in fullscreen mode
+    NSApplicationPresentationAutoHideToolbar NS_ENUM_AVAILABLE_MAC(10_7) = (1 << 11),    // Fullscreen window toolbar is detached from window and hides/shows with autoHidden menuBar.  May be used only when both NSApplicationPresentationFullScreen and NSApplicationPresentationAutoHideMenuBar are also set
     
+    NSApplicationPresentationDisableCursorLocationAssistance NS_ENUM_AVAILABLE_MAC(10_11_2) = (1 << 12)    // "Shake mouse pointer to locate" is disabled for this application
 } NS_ENUM_AVAILABLE_MAC(10_6);
 
 typedef NS_OPTIONS(NSUInteger, NSApplicationOcclusionState) {
     // If set, at least part of any window owned by this application is visible. If not set, all parts of all windows owned by this application are completely occluded. The menu bar does not count as a window owned by this application, so if only the menu bar is showing then the application is considered not visible. Status items, however, have windows owned by your application. If the status item is present in the menu bar, your application will be considered visible as long as the menu bar is visible.
     NSApplicationOcclusionStateVisible = 1UL << 1,
 } NS_ENUM_AVAILABLE_MAC(10_9);
+
+typedef NS_OPTIONS(NSInteger, NSWindowListOptions) {
+    NSWindowListOrderedFrontToBack = (1 << 0), /* Onscreen application windows in front to back order. By default, -[NSApp windows] is used. */
+} NS_ENUM_AVAILABLE_MAC(10_12);
 
 /* Information used by the system during modal sessions */
 typedef struct _NSModalSession *NSModalSession;
@@ -114,11 +127,11 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
     id                  _keyWindow;
     id                  _mainWindow;
     id                  _delegate;
-    id            	*_hiddenList;
-    int                 _hiddenCount;
+    id            	_hiddenList;
+    int                 _hiddenCount __unused;
     NSInteger               _context;
     void		*_appleEventSuspensionID;
-    __weak id			_previousKeyWindow;
+    NSWindow            *_previousKeyWindowX;
     short               _unusedApp;
     short               _running;
     struct __appFlags {
@@ -155,8 +168,7 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
         unsigned int        _mightBeSwitching:1;
     }                   _appFlags;
     id                  _mainMenu;
-    id                  _appIcon;
-    void                *_unused;
+    id                  _unused[2];
     id                  _eventDelegate;
     _NSThreadPrivate     *_threadingSupport;
 }
@@ -165,7 +177,6 @@ APPKIT_EXTERN __kindof NSApplication * __null_unspecified NSApp;
 
 + (__kindof NSApplication *)sharedApplication;
 @property (nullable, assign) id<NSApplicationDelegate> delegate;
-@property (nullable, readonly, strong) NSGraphicsContext *context;
 - (void)hide:(nullable id)sender;
 - (void)unhide:(nullable id)sender;
 - (void)unhideWithoutActivation;
@@ -183,13 +194,13 @@ APPKIT_EXTERN __kindof NSApplication * __null_unspecified NSApp;
 
 - (void)finishLaunching;
 - (void)run;
-- (NSInteger)runModalForWindow:(NSWindow *)theWindow;
+- (NSInteger)runModalForWindow:(NSWindow *)window;
 - (void)stop:(nullable id)sender;
 - (void)stopModal;
 - (void)stopModalWithCode:(NSInteger)returnCode;
 - (void)abortModal;
 @property (nullable, readonly, strong) NSWindow *modalWindow;
-- (NSModalSession)beginModalSessionForWindow:(NSWindow *)theWindow NS_RETURNS_INNER_POINTER;
+- (NSModalSession)beginModalSessionForWindow:(NSWindow *)window NS_RETURNS_INNER_POINTER;
 - (NSInteger)runModalSession:(NSModalSession)session;
 - (void)endModalSession:(NSModalSession)session;
 - (void)terminate:(nullable id)sender;
@@ -203,15 +214,11 @@ typedef NS_ENUM(NSUInteger, NSRequestUserAttentionType) {
 - (NSInteger)requestUserAttention:(NSRequestUserAttentionType)requestType;
 - (void)cancelUserAttentionRequest:(NSInteger)request;
 
+/*  Execute a block for each of the app's windows. Set *stop = YES if desired, to halt the enumeration early.
+ */
+- (void)enumerateWindowsWithOptions:(NSWindowListOptions)options usingBlock:(void (NS_NOESCAPE ^) (NSWindow *window, BOOL *stop))block NS_AVAILABLE_MAC(10_12);
 
-- (nullable NSEvent *)nextEventMatchingMask:(NSUInteger)mask untilDate:(nullable NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag;
-- (void)discardEventsMatchingMask:(NSUInteger)mask beforeEvent:(nullable NSEvent *)lastEvent;
-- (void)postEvent:(NSEvent *)event atStart:(BOOL)flag;
-@property (nullable, readonly, strong) NSEvent *currentEvent;
-
-- (void)sendEvent:(NSEvent *)theEvent;
 - (void)preventWindowOrdering;
-- (nullable NSWindow *)makeWindowsPerform:(SEL)aSelector inOrder:(BOOL)flag;
 @property (readonly, copy) NSArray<NSWindow *> *windows;
 - (void)setWindowsNeedUpdate:(BOOL)needUpdate;
 - (void)updateWindows;
@@ -236,13 +243,7 @@ typedef NS_ENUM(NSUInteger, NSRequestUserAttentionType) {
 
 @property (readonly, strong) NSDockTile *dockTile NS_AVAILABLE_MAC(10_5);
 
-- (BOOL)sendAction:(SEL)theAction to:(nullable id)theTarget from:(nullable id)sender;
-- (nullable id)targetForAction:(SEL)theAction;
-- (nullable id)targetForAction:(SEL)theAction to:(nullable id)theTarget from:(nullable id)sender;
-- (BOOL)tryToPerform:(SEL)anAction with:(nullable id)anObject;
-- (nullable id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType;
-
-- (void)reportException:(NSException *)theException;
+- (void)reportException:(NSException *)exception;
 + (void)detachDrawingThread:(SEL)selector toTarget:(id)target withObject:(nullable id)argument;
 
 /*  If an application delegate returns NSTerminateLater from -applicationShouldTerminate:, -replyToApplicationShouldTerminate: must be called with YES or NO once the application decides if it can terminate */
@@ -273,12 +274,33 @@ typedef NS_ENUM(NSUInteger, NSApplicationDelegateReply) {
 
 @end
 
+@interface NSApplication(NSEvent)
+- (void)sendEvent:(NSEvent *)event;
+- (void)postEvent:(NSEvent *)event atStart:(BOOL)flag;
+@property (nullable, readonly, strong) NSEvent *currentEvent;
+#if __LP64__
+- (nullable NSEvent *)nextEventMatchingMask:(NSEventMask)mask untilDate:(nullable NSDate *)expiration inMode:(NSRunLoopMode)mode dequeue:(BOOL)deqFlag;
+- (void)discardEventsMatchingMask:(NSEventMask)mask beforeEvent:(nullable NSEvent *)lastEvent;
+#else
+- (nullable NSEvent *)nextEventMatchingMask:(NSUInteger)mask untilDate:(nullable NSDate *)expiration inMode:(NSRunLoopMode)mode dequeue:(BOOL)deqFlag;
+- (void)discardEventsMatchingMask:(NSUInteger)mask beforeEvent:(nullable NSEvent *)lastEvent;
+#endif
+@end
+
+@interface NSApplication(NSResponder)
+- (BOOL)sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender;
+- (nullable id)targetForAction:(SEL)action;
+- (nullable id)targetForAction:(SEL)action to:(nullable id)target from:(nullable id)sender;
+- (BOOL)tryToPerform:(SEL)action with:(nullable id)object;
+- (nullable id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType;
+@end
+
 @interface NSApplication(NSWindowsMenu)
 @property (nullable, strong) NSMenu *windowsMenu;
 - (void)arrangeInFront:(nullable id)sender;
 - (void)removeWindowsItem:(NSWindow *)win;
-- (void)addWindowsItem:(NSWindow *)win title:(NSString *)aString filename:(BOOL)isFilename;
-- (void)changeWindowsItem:(NSWindow *)win title:(NSString *)aString filename:(BOOL)isFilename;
+- (void)addWindowsItem:(NSWindow *)win title:(NSString *)string filename:(BOOL)isFilename;
+- (void)changeWindowsItem:(NSWindow *)win title:(NSString *)string filename:(BOOL)isFilename;
 - (void)updateWindowsItem:(NSWindow *)win;
 - (void)miniaturizeAll:(nullable id)sender;
 @end
@@ -364,6 +386,13 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
 
 /* This will be called on the main thread when a user activity managed by AppKit/UIKit has been updated. You should use this as a last chance to add additional data to the userActivity. */
 - (void)application:(NSApplication *)application didUpdateUserActivity:(NSUserActivity *)userActivity NS_AVAILABLE_MAC(10_10);
+
+
+/* This will be called on the main thread after the user indicates they want to accept a CloudKit sharing invitation in your application.
+ 
+ You should use the CKShareMetadata object's shareURL and containerIdentifier to schedule a CKAcceptSharesOperation, then start using the resulting CKShare and its associated record(s), which will appear in the CKContainer's shared database in a zone matching that of the record's owner.
+*/
+- (void)application:(NSApplication *)application userDidAcceptCloudKitShareWithMetadata:(CKShareMetadata *)metadata NS_AVAILABLE_MAC(10_12);
 
 /* Notifications:
  */
@@ -466,6 +495,7 @@ typedef NS_OPTIONS(NSUInteger, NSRemoteNotificationType) {
 @property (readonly) NSRemoteNotificationType enabledRemoteNotificationTypes NS_AVAILABLE_MAC(10_7);
 @end
 
+
 /* An Application's startup function */
 
 APPKIT_EXTERN int NSApplicationMain(int argc, const char *argv[]);
@@ -489,20 +519,20 @@ APPKIT_EXTERN void NSRegisterServicesProvider(id __nullable provider, NSString *
 APPKIT_EXTERN void NSUnregisterServicesProvider(NSString *name);
 
 /* Notifications */
-APPKIT_EXTERN NSString *NSApplicationDidBecomeActiveNotification;
-APPKIT_EXTERN NSString *NSApplicationDidHideNotification;
-APPKIT_EXTERN NSString *NSApplicationDidFinishLaunchingNotification;
-APPKIT_EXTERN NSString *NSApplicationDidResignActiveNotification;
-APPKIT_EXTERN NSString *NSApplicationDidUnhideNotification;
-APPKIT_EXTERN NSString *NSApplicationDidUpdateNotification;
-APPKIT_EXTERN NSString *NSApplicationWillBecomeActiveNotification;
-APPKIT_EXTERN NSString *NSApplicationWillHideNotification;
-APPKIT_EXTERN NSString *NSApplicationWillFinishLaunchingNotification;
-APPKIT_EXTERN NSString *NSApplicationWillResignActiveNotification;
-APPKIT_EXTERN NSString *NSApplicationWillUnhideNotification;
-APPKIT_EXTERN NSString *NSApplicationWillUpdateNotification;
-APPKIT_EXTERN NSString *NSApplicationWillTerminateNotification;
-APPKIT_EXTERN NSString *NSApplicationDidChangeScreenParametersNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationDidBecomeActiveNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationDidHideNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationDidFinishLaunchingNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationDidResignActiveNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationDidUnhideNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationDidUpdateNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationWillBecomeActiveNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationWillHideNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationWillFinishLaunchingNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationWillResignActiveNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationWillUnhideNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationWillUpdateNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationWillTerminateNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationDidChangeScreenParametersNotification;
 
 /* User info keys for NSApplicationDidFinishLaunchingNotification */
 
@@ -528,13 +558,13 @@ APPKIT_EXTERN NSString * const NSApplicationDidChangeOcclusionStateNotification 
  ** runModalForWindow:relativeToWindow: was deprecated in Mac OS 10.0.  
  ** Please use -[NSWindow beginSheet:completionHandler:] instead
  */
-- (NSInteger)runModalForWindow:(null_unspecified NSWindow *)theWindow relativeToWindow:(null_unspecified NSWindow *)docWindow NS_DEPRECATED_MAC(10_0, 10_0);
+- (NSInteger)runModalForWindow:(null_unspecified NSWindow *)window relativeToWindow:(null_unspecified NSWindow *)docWindow NS_DEPRECATED_MAC(10_0, 10_0);
 
 /* 
  ** beginModalSessionForWindow:relativeToWindow: was deprecated in Mac OS 10.0.
  ** Please use -[NSWindow beginSheet:completionHandler:] instead
  */
-- (NSModalSession)beginModalSessionForWindow:(null_unspecified NSWindow *)theWindow relativeToWindow:(null_unspecified NSWindow *)docWindow NS_RETURNS_INNER_POINTER NS_DEPRECATED_MAC(10_0, 10_0);
+- (NSModalSession)beginModalSessionForWindow:(null_unspecified NSWindow *)window relativeToWindow:(null_unspecified NSWindow *)docWindow NS_RETURNS_INNER_POINTER NS_DEPRECATED_MAC(10_0, 10_0);
 
 // -application:printFiles: was deprecated in Mac OS 10.4. Implement application:printFiles:withSettings:showPrintPanels: in your application delegate instead.
 - (void)application:(null_unspecified NSApplication *)sender printFiles:(null_unspecified NSArray<NSString *> *)filenames NS_DEPRECATED_MAC(10_3, 10_4);
@@ -554,6 +584,13 @@ enum {
 - (void)endSheet:(NSWindow *)sheet NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow endSheet:] instead");
 - (void)endSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow endSheet:returnCode:] instead");
 
+/* This method is soft deprecated starting with OS X 10.12. It will be officially deprecated in a future release. Use -enumerateWindowsWithOptions:usingBlock: instead.
+ */
+- (nullable NSWindow *)makeWindowsPerform:(SEL)selector inOrder:(BOOL)flag;
+
+/* This method is deprecated as of OS X 10.12. Beginning in OS X 10.11 it would always return nil. Prior to this it would return an undefined graphics context that was not generally suitable for drawing.
+ */
+@property (nullable, readonly, strong) NSGraphicsContext *context NS_DEPRECATED_MAC(10_0, 10_12, "This method always returns nil. If you need access to the current drawing context, use [NSGraphicsContext currentContext] inside of a draw operation.");
 
 @end
 

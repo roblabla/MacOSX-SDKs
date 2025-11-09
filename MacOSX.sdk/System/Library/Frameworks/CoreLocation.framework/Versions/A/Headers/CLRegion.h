@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, CLRegionState) {
 	CLRegionStateUnknown,
 	CLRegionStateInside,
 	CLRegionStateOutside
-} NS_ENUM_AVAILABLE(10_10, 7_0);
+} NS_ENUM_AVAILABLE(10_10, 7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  * CLProximity
@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, CLProximity) {
 	CLProximityImmediate,
 	CLProximityNear,
 	CLProximityFar
-} NS_ENUM_AVAILABLE(NA, 7_0);
+} NS_ENUM_AVAILABLE(NA, 7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  CLRegion
@@ -64,8 +64,8 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  *    This method has been deprecated, please see CLCircularRegion.
  */
 - (instancetype)initCircularRegionWithCenter:(CLLocationCoordinate2D)center
-                                      radius:(CLLocationDistance)radius
-                                  identifier:(NSString *)identifier __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0);
+									  radius:(CLLocationDistance)radius
+								  identifier:(NSString *)identifier __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0) __TVOS_PROHIBITED;
 
 /*
  *  center
@@ -75,7 +75,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  *
  *    This method has been deprecated, please see CLCircularRegion.
  */
-@property (readonly, nonatomic) CLLocationCoordinate2D center __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0);
+@property (readonly, nonatomic) CLLocationCoordinate2D center __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0) __TVOS_PROHIBITED;
 
 /*
  *  radius
@@ -85,7 +85,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  *
  *    This method has been deprecated, please see CLCircularRegion.
  */
-@property (readonly, nonatomic) CLLocationDistance radius __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0);
+@property (readonly, nonatomic) CLLocationDistance radius __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0) __TVOS_PROHIBITED;
 
 /*
  *  identifier
@@ -121,7 +121,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  *
  *    This method has been deprecated, please see CLCircularRegion.
  */
-- (BOOL)containsCoordinate:(CLLocationCoordinate2D)coordinate __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0);
+- (BOOL)containsCoordinate:(CLLocationCoordinate2D)coordinate __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0) __TVOS_PROHIBITED;
 
 @end
 

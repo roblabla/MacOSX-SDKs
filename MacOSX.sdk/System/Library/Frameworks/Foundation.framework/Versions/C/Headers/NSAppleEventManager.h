@@ -1,10 +1,11 @@
 /*
 	NSAppleEventManager.h
-	Copyright (c) 1997-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <ApplicationServices/ApplicationServices.h>
+#import <Foundation/NSNotification.h>
 
 @class NSAppleEventDescriptor;
 
@@ -15,7 +16,7 @@ typedef const struct __NSAppleEventManagerSuspension* NSAppleEventManagerSuspens
 extern const double NSAppleEventTimeOutDefault;
 extern const double NSAppleEventTimeOutNone;
 
-extern NSString *NSAppleEventManagerWillProcessFirstEventNotification;
+extern NSNotificationName NSAppleEventManagerWillProcessFirstEventNotification;
 
 @interface NSAppleEventManager : NSObject {
     @private

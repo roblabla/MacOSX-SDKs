@@ -1,24 +1,29 @@
 //
 //  SCNConstraint.h
 //
-//  Copyright (c) 2013-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2016 Apple Inc. All rights reserved.
 //
 
+#import <SceneKit/SceneKitTypes.h>
+#import <SceneKit/SCNAnimation.h>
+
 NS_ASSUME_NONNULL_BEGIN
+
+@class SCNNode;
 
 /*!
  @class SCNConstraint
  @abstract A SCNConstraint is an abstract class that represents a single constraint that can be applied to a node.
  */
 
-NS_CLASS_AVAILABLE(10_9, 8_0)
+API_AVAILABLE(macosx(10.9))
 @interface SCNConstraint : NSObject <NSCopying, NSSecureCoding, SCNAnimatable>
 
 /*!
  @property influenceFactor
  @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
  */
-@property(nonatomic) CGFloat influenceFactor NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat influenceFactor API_AVAILABLE(macosx(10.10));
 
 @end
 
@@ -27,7 +32,7 @@ NS_CLASS_AVAILABLE(10_9, 8_0)
  @abstract A SCNLookAtConstraint applies on a node's orientation so that it always look at another node.
  */
 
-NS_CLASS_AVAILABLE(10_9, 8_0)
+API_AVAILABLE(macosx(10.9))
 @interface SCNLookAtConstraint : SCNConstraint
 
 /*!
@@ -35,13 +40,15 @@ NS_CLASS_AVAILABLE(10_9, 8_0)
  @abstract Creates and returns a SCNLookAtConstraint object with the specified target.
  @param target The target node to look at.
  */
-+ (instancetype)lookAtConstraintWithTarget:(SCNNode *)target;
++ (instancetype)lookAtConstraintWithTarget:(nullable SCNNode *)target;
 
 /*!
  @property target
  @abstract Defines the target node to look at.
  */
-@property(nonatomic, readonly) SCNNode *target;
+@property(nonatomic, retain, nullable) SCNNode *target;
+- (nullable SCNNode *)target;
+- (void)setTarget:(nullable SCNNode *)target API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
 
 /*!
  @property gimbalLockEnabled
@@ -59,7 +66,7 @@ typedef NS_OPTIONS(NSUInteger, SCNBillboardAxis) {
     SCNBillboardAxisAll = SCNBillboardAxisX | SCNBillboardAxisY | SCNBillboardAxisZ
 };
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macosx(10.11), ios(9.0))
 @interface SCNBillboardConstraint : SCNConstraint
 
 /*!
@@ -81,7 +88,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @class SCNTransformConstraint
  @abstract A SCNTransformConstraint applies on the transform of a node via a custom block.
  */
-NS_CLASS_AVAILABLE(10_9, 8_0)
+API_AVAILABLE(macosx(10.9))
 @interface SCNTransformConstraint : SCNConstraint
 
 /*!
@@ -100,7 +107,7 @@ NS_CLASS_AVAILABLE(10_9, 8_0)
  @class SCNIKConstraint
  @abstract A SCNIKConstraint applies an inverse kinematics constraint
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macosx(10.10))
 @interface SCNIKConstraint : SCNConstraint
 
 /*!
@@ -109,7 +116,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @param chainRootNode The root node of the kinematic chain.
  @discussion "chainRootNode" must be an ancestor of the node on which the constraint is applied.
  */
-- (instancetype)initWithChainRootNode:(SCNNode *)chainRootNode NS_AVAILABLE(10_11, 9_0);
+- (instancetype)initWithChainRootNode:(SCNNode *)chainRootNode API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @method inverseKinematicsConstraintWithChainRootNode:

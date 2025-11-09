@@ -1,8 +1,10 @@
----
+--- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
+uuids:           [ 'i386: 8CA14C98-BA0F-382A-939D-18A8EA71DA6F', 'x86_64: D697A702-E764-39D3-B5A7-F22E28C268D1' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/AppleScriptObjC.framework/Versions/A/AppleScriptObjC
 current-version: 32.0
+objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _BAFunctionInvocation._arg_types, _BAFunctionInvocation._arg_values, 
@@ -25,12 +27,11 @@ exports:
   - archs:           [ i386, x86_64 ]
     symbols:         [ _AddressOfSymbol, _BAActiveProc, _BACreateClassForOSAIDInComponent, 
                        _BAHandleEvent, _BAHandleEventInternal, _BAObjCIDForOSAIDInComponent, 
-                       _BAResumeProc, _BASendProc, _dataForDescriptor, 
-                       _descriptorForObject, _gOriginalRefcon, _gOriginalSendProc, 
-                       _mungeCPointer, _objcInstanceForSpecifier, _objectForData, 
-                       _objectForDescriptor, _shimForObject, _unqualified_type_encoding ]
+                       _BAResumeProc, _BASendProc, _dataForDescriptor, _descriptorForObject, 
+                       _gOriginalRefcon, _gOriginalSendProc, _mungeCPointer, _objcInstanceForSpecifier, 
+                       _objectForData, _objectForDescriptor, _shimForObject, _unqualified_type_encoding ]
     objc-classes:    [ _BAFunctionInvocation, _BAFunctionSignature, _BAGenericObject, 
-                       _BAGenericObjectNoDeleteOSAID, _BAImmediateData, 
-                       _BAMetadataManager, _BAMethodSignature, _BAObjectManager, 
-                       _BAObjectProto, _BAReferenceParameter, _BAXMLContext ]
+                       _BAGenericObjectNoDeleteOSAID, _BAImmediateData, _BAMetadataManager, 
+                       _BAMethodSignature, _BAObjectManager, _BAObjectProto, _BAReferenceParameter, 
+                       _BAXMLContext ]
 ...

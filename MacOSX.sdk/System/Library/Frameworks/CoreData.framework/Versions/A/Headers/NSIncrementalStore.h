@@ -1,7 +1,7 @@
 /*
  NSIncrementalStore.h
  Core Data
- Copyright (c) 2004-2015, Apple Inc.
+ Copyright (c) 2004-2016, Apple Inc.
  All rights reserved.
  */
 
@@ -21,13 +21,15 @@ NS_ASSUME_NONNULL_BEGIN
 // Abstract class defining the API through which Core Data communicates with a store. 
 // This API is designed to allow users to create persistent stores which load and save 
 // data incrementally, allowing for the management of large and/or shared datasets.
-NS_CLASS_AVAILABLE(10_7,5_0)
+API_AVAILABLE(macosx(10.7),ios(5.0))
 @interface NSIncrementalStore : NSPersistentStore {
-	@private
+#if (!__OBJC2__)
+@private
 	NSDictionary *_storeMetadata;
 	uint64_t _lastIdentifier;
 	void* _reserveda;
 	void* _reservedb;
+#endif
 }
 
 // CoreData expects loadMetadata: to validate that the URL used to create the store is usable

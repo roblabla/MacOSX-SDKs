@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger, TKErrorCode) {
     TKErrorCodeObjectNotFound        = -6,
     TKErrorCodeTokenNotFound         = -7,
     TKErrorCodeBadParameter          = -8,
+    TKErrorCodeAuthenticationNeeded  = -9,
 
     TKErrorAuthenticationFailed NS_ENUM_DEPRECATED(10_10, 10_11, 9_0, 9_0, "Use TKErrorCodeAuthenticationFailed")
       = TKErrorCodeAuthenticationFailed,

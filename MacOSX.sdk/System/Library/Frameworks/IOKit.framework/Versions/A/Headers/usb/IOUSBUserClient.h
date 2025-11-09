@@ -95,6 +95,8 @@ enum {
     kUSBInterfaceUserClientUnregisterNotification,
     kUSBInterfaceUserClientAcknowledgeNotification,
     kUSBInterfaceUserClientRegisterDriver,
+    kUSBInterfaceUserClientSetDeviceIdlePolicy,
+    kUSBInterfaceUserClientSetPipeIdlePolicy,
     kIOUSBLibInterfaceUserClientNumCommands
 };
 

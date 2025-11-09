@@ -1,7 +1,7 @@
 /*
 	NSComboBox.h
 	Application Kit
-	Copyright (c) 1996-2015, Apple Inc.
+	Copyright (c) 1996-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,12 +10,33 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-APPKIT_EXTERN NSString * NSComboBoxWillPopUpNotification;
-APPKIT_EXTERN NSString * NSComboBoxWillDismissNotification;
-APPKIT_EXTERN NSString * NSComboBoxSelectionDidChangeNotification;
-APPKIT_EXTERN NSString * NSComboBoxSelectionIsChangingNotification;
+APPKIT_EXTERN NSNotificationName NSComboBoxWillPopUpNotification;
+APPKIT_EXTERN NSNotificationName NSComboBoxWillDismissNotification;
+APPKIT_EXTERN NSNotificationName NSComboBoxSelectionDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSComboBoxSelectionIsChangingNotification;
 
-@protocol NSComboBoxDelegate, NSComboBoxDataSource;
+@class NSComboBox;
+
+@protocol NSComboBoxDataSource <NSObject>
+@optional
+/* These two methods are required when not using bindings */
+- (NSInteger)numberOfItemsInComboBox:(NSComboBox *)comboBox;
+- (nullable id)comboBox:(NSComboBox *)comboBox objectValueForItemAtIndex:(NSInteger)index;
+
+- (NSUInteger)comboBox:(NSComboBox *)comboBox indexOfItemWithStringValue:(NSString *)string;
+- (nullable NSString *)comboBox:(NSComboBox *)comboBox completedString:(NSString *)string;
+@end
+
+@protocol NSComboBoxDelegate <NSTextFieldDelegate>
+@optional
+
+/* Notifications */
+- (void)comboBoxWillPopUp:(NSNotification *)notification;
+- (void)comboBoxWillDismiss:(NSNotification *)notification;
+- (void)comboBoxSelectionDidChange:(NSNotification *)notification;
+- (void)comboBoxSelectionIsChanging:(NSNotification *)notification;
+
+@end
 
 @interface NSComboBox : NSTextField {
     /*All instance variables are private*/
@@ -44,10 +65,9 @@ APPKIT_EXTERN NSString * NSComboBoxSelectionIsChangingNotification;
 
 @property BOOL completes;
 
-- (nullable id <NSComboBoxDelegate>)delegate;
-- (void)setDelegate:(nullable id <NSComboBoxDelegate>)anObject;
+@property (nullable, assign) id<NSComboBoxDelegate> delegate;
 
-/* These two methods can only be used when usesDataSource is YES */
+/* The dataSource will only be used when usesDataSource is YES */
 @property (nullable, assign) id<NSComboBoxDataSource> dataSource;
 
 /* These methods can only be used when usesDataSource is NO */
@@ -62,27 +82,6 @@ APPKIT_EXTERN NSString * NSComboBoxSelectionIsChangingNotification;
 @property (nullable, readonly, strong) id objectValueOfSelectedItem;
 - (NSInteger)indexOfItemWithObjectValue:(id)object;
 @property (readonly, copy) NSArray *objectValues;
-
-@end
-
-@protocol NSComboBoxDataSource <NSObject>
-@optional
-/* These two methods are required when not using bindings */
-- (NSInteger)numberOfItemsInComboBox:(NSComboBox *)aComboBox;
-- (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index;
-
-- (NSUInteger)comboBox:(NSComboBox *)aComboBox indexOfItemWithStringValue:(NSString *)string;
-- (nullable NSString *)comboBox:(NSComboBox *)aComboBox completedString:(NSString *)string;
-@end
-
-@protocol NSComboBoxDelegate <NSTextFieldDelegate>
-@optional
-
-/* Notifications */
-- (void)comboBoxWillPopUp:(NSNotification *)notification;
-- (void)comboBoxWillDismiss:(NSNotification *)notification;
-- (void)comboBoxSelectionDidChange:(NSNotification *)notification;
-- (void)comboBoxSelectionIsChanging:(NSNotification *)notification;
 
 @end
 

@@ -1,7 +1,7 @@
 /*
 	CoreDataErrors.h
 	Core Data
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
 	All rights reserved.
  */
 
@@ -15,19 +15,19 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // User info keys for errors created by Core Data:
-COREDATA_EXTERN NSString * const NSDetailedErrorsKey NS_AVAILABLE(10_4,3_0);           // if multiple validation errors occur in one operation, they are collected in an array and added with this key to the "top-level error" of the operation
+COREDATA_EXTERN NSString * const NSDetailedErrorsKey API_AVAILABLE(macosx(10.4),ios(3.0));           // if multiple validation errors occur in one operation, they are collected in an array and added with this key to the "top-level error" of the operation
 
-COREDATA_EXTERN NSString * const NSValidationObjectErrorKey NS_AVAILABLE(10_4,3_0);    // object that failed to validate for a validation error
-COREDATA_EXTERN NSString * const NSValidationKeyErrorKey NS_AVAILABLE(10_4,3_0);       // key that failed to validate for a validation error
-COREDATA_EXTERN NSString * const NSValidationPredicateErrorKey NS_AVAILABLE(10_4,3_0); // for predicate-based validation, the predicate for the condition that failed to validate
-COREDATA_EXTERN NSString * const NSValidationValueErrorKey NS_AVAILABLE(10_4,3_0);     // if non-nil, the value for the key that failed to validate for a validation error
+COREDATA_EXTERN NSString * const NSValidationObjectErrorKey API_AVAILABLE(macosx(10.4),ios(3.0));    // object that failed to validate for a validation error
+COREDATA_EXTERN NSString * const NSValidationKeyErrorKey API_AVAILABLE(macosx(10.4),ios(3.0));       // key that failed to validate for a validation error
+COREDATA_EXTERN NSString * const NSValidationPredicateErrorKey API_AVAILABLE(macosx(10.4),ios(3.0)); // for predicate-based validation, the predicate for the condition that failed to validate
+COREDATA_EXTERN NSString * const NSValidationValueErrorKey API_AVAILABLE(macosx(10.4),ios(3.0));     // if non-nil, the value for the key that failed to validate for a validation error
 
-COREDATA_EXTERN NSString * const NSAffectedStoresErrorKey NS_AVAILABLE(10_4,3_0);      // stores prompting an error
-COREDATA_EXTERN NSString * const NSAffectedObjectsErrorKey NS_AVAILABLE(10_4,3_0);     // objects prompting an error
+COREDATA_EXTERN NSString * const NSAffectedStoresErrorKey API_AVAILABLE(macosx(10.4),ios(3.0));      // stores prompting an error
+COREDATA_EXTERN NSString * const NSAffectedObjectsErrorKey API_AVAILABLE(macosx(10.4),ios(3.0));     // objects prompting an error
 
-COREDATA_EXTERN NSString * const NSPersistentStoreSaveConflictsErrorKey NS_AVAILABLE(10_7, 5_0);     // key in NSError's userInfo specifying the NSArray of NSMergeConflict
+COREDATA_EXTERN NSString * const NSPersistentStoreSaveConflictsErrorKey API_AVAILABLE(macosx(10.7),ios(5.0));     // key in NSError's userInfo specifying the NSArray of NSMergeConflict
 
-COREDATA_EXTERN NSString * const NSSQLiteErrorDomain NS_AVAILABLE(10_5,3_0);           // Predefined domain for SQLite errors, value of "code" will correspond to preexisting values in SQLite.
+COREDATA_EXTERN NSString * const NSSQLiteErrorDomain API_AVAILABLE(macosx(10.5),ios(3.0));           // Predefined domain for SQLite errors, value of "code" will correspond to preexisting values in SQLite.
 
 enum : NSInteger {
     NSManagedObjectValidationError                   = 1550,   // generic validation error

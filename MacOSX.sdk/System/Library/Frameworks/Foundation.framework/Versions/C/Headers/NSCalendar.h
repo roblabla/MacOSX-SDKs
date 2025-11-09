@@ -1,10 +1,11 @@
 /*	NSCalendar.h
-	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
 #import <Foundation/NSDate.h>
+#import <Foundation/NSNotification.h>
 #include <CoreFoundation/CFCalendar.h>
 
 @class NSDateComponents, NSLocale, NSTimeZone, NSString, NSArray<ObjectType>;
@@ -23,24 +24,26 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 #endif
 
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierGregorian  NS_AVAILABLE(10_6, 4_0); // the common calendar in Europe, the Western Hemisphere, and elsewhere
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierBuddhist            NS_AVAILABLE(10_6, 4_0);
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierChinese             NS_AVAILABLE(10_6, 4_0);
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierCoptic              NS_AVAILABLE(10_6, 4_0);
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierEthiopicAmeteMihret NS_AVAILABLE(10_6, 4_0);
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierEthiopicAmeteAlem   NS_AVAILABLE(10_6, 4_0);
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierHebrew              NS_AVAILABLE(10_6, 4_0);
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierISO8601             NS_AVAILABLE(10_6, 4_0);
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierIndian              NS_AVAILABLE(10_6, 4_0);
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierIslamic             NS_AVAILABLE(10_6, 4_0);
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierIslamicCivil        NS_AVAILABLE(10_6, 4_0);
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierJapanese            NS_AVAILABLE(10_6, 4_0);
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierPersian             NS_AVAILABLE(10_6, 4_0);
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierRepublicOfChina     NS_AVAILABLE(10_6, 4_0);
+typedef NSString * NSCalendarIdentifier NS_EXTENSIBLE_STRING_ENUM;
+
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierGregorian  NS_AVAILABLE(10_6, 4_0); // the common calendar in Europe, the Western Hemisphere, and elsewhere
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierBuddhist            NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierChinese             NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierCoptic              NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierEthiopicAmeteMihret NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierEthiopicAmeteAlem   NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierHebrew              NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierISO8601             NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierIndian              NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierIslamic             NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierIslamicCivil        NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierJapanese            NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierPersian             NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierRepublicOfChina     NS_AVAILABLE(10_6, 4_0);
 // A simple tabular Islamic calendar using the astronomical/Thursday epoch of CE 622 July 15
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierIslamicTabular      NS_AVAILABLE(10_10, 8_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierIslamicTabular      NS_AVAILABLE(10_10, 8_0);
 // The Islamic Umm al-Qura calendar used in Saudi Arabia. This is based on astronomical calculation, instead of tabular behavior.
-FOUNDATION_EXPORT NSString * const NSCalendarIdentifierIslamicUmmAlQura    NS_AVAILABLE(10_10, 8_0);
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierIslamicUmmAlQura    NS_AVAILABLE(10_10, 8_0);
 
 
 typedef NS_OPTIONS(NSUInteger, NSCalendarUnit) {
@@ -101,20 +104,22 @@ enum {
 @interface NSCalendar : NSObject <NSCopying, NSSecureCoding>
 
 
-+ (NSCalendar *)currentCalendar;					// user's preferred calendar
-+ (NSCalendar *)autoupdatingCurrentCalendar NS_AVAILABLE(10_5, 2_0); // tracks changes to user's preferred calendar identifier
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, copy) NSCalendar *currentCalendar;					// user's preferred calendar
+@property (class, readonly, strong) NSCalendar *autoupdatingCurrentCalendar NS_AVAILABLE(10_5, 2_0); // tracks changes to user's preferred calendar identifier
+#endif
 
 /*
 	This method returns a new autoreleased calendar object of the given type, specified by a calendar identifier constant.
 	The calendar defaults to having the current locale and default time zone, for those properties.
 */
-+ (nullable NSCalendar *)calendarWithIdentifier:(NSString *)calendarIdentifierConstant NS_AVAILABLE(10_9, 8_0);
++ (nullable NSCalendar *)calendarWithIdentifier:(NSCalendarIdentifier)calendarIdentifierConstant NS_AVAILABLE(10_9, 8_0);
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (nullable id)initWithCalendarIdentifier:(NSString *)ident NS_DESIGNATED_INITIALIZER;
+- (nullable id)initWithCalendarIdentifier:(NSCalendarIdentifier)ident NS_DESIGNATED_INITIALIZER;
 
-@property (readonly, copy) NSString *calendarIdentifier;
+@property (readonly, copy) NSCalendarIdentifier calendarIdentifier;
 @property (nullable, copy) NSLocale *locale;
 @property (copy) NSTimeZone *timeZone;
 @property NSUInteger firstWeekday;
@@ -156,7 +161,7 @@ enum {
 - (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date;
 - (NSUInteger)ordinalityOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date;
 
-- (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate * __nullable * __nullable)datep interval:(nullable NSTimeInterval *)tip forDate:(NSDate *)date NS_AVAILABLE(10_5, 2_0);
+- (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate * _Nullable * _Nullable)datep interval:(nullable NSTimeInterval *)tip forDate:(NSDate *)date NS_AVAILABLE(10_5, 2_0);
 
 - (nullable NSDate *)dateFromComponents:(NSDateComponents *)comps;
 - (NSDateComponents *)components:(NSCalendarUnit)unitFlags fromDate:(NSDate *)date;
@@ -270,7 +275,7 @@ enum {
 	Returns NO if the given date is not in a weekend.
 	Note that a given entire Day within a calendar is not necessarily all in a weekend or not; weekends can start in the middle of a Day in some calendars and locales.
 */
-- (BOOL)rangeOfWeekendStartDate:(out NSDate * __nullable * __nullable)datep interval:(out nullable NSTimeInterval *)tip containingDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
+- (BOOL)rangeOfWeekendStartDate:(out NSDate * _Nullable * _Nullable)datep interval:(out nullable NSTimeInterval *)tip containingDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
 
 
 /*
@@ -279,7 +284,7 @@ enum {
 	Returns NO if there are no such things as weekend in the calendar and its locale.
 	Note that a given entire Day within a calendar is not necessarily all in a weekend or not; weekends can start in the middle of a Day in some calendars and locales.
 */
-- (BOOL)nextWeekendStartDate:(out NSDate * __nullable * __nullable)datep interval:(out nullable NSTimeInterval *)tip options:(NSCalendarOptions)options afterDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
+- (BOOL)nextWeekendStartDate:(out NSDate * _Nullable * _Nullable)datep interval:(out nullable NSTimeInterval *)tip options:(NSCalendarOptions)options afterDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
 
 
 /* 
@@ -321,7 +326,7 @@ enum {
 	Result dates have an integer number of seconds (as if 0 was specified for the nanoseconds property of the NSDateComponents matching parameter), unless a value was set in the nanoseconds property, in which case the result date will have that number of nanoseconds (or as close as possible with floating point numbers).
 	The enumeration is stopped by setting *stop = YES in the block and return.  It is not necessary to set *stop to NO to keep the enumeration going.
 */
-- (void)enumerateDatesStartingAfterDate:(NSDate *)start matchingComponents:(NSDateComponents *)comps options:(NSCalendarOptions)opts usingBlock:(void (^)(NSDate * __nullable date, BOOL exactMatch, BOOL *stop))block NS_AVAILABLE(10_9, 8_0);
+- (void)enumerateDatesStartingAfterDate:(NSDate *)start matchingComponents:(NSDateComponents *)comps options:(NSCalendarOptions)opts usingBlock:(void (NS_NOESCAPE ^)(NSDate * _Nullable date, BOOL exactMatch, BOOL *stop))block NS_AVAILABLE(10_9, 8_0);
 
 /*
 	This method computes the next date which matches (or most closely matches) a given set of components.
@@ -378,12 +383,12 @@ enum {
 // notification. If the computer/device is asleep when the day changed,
 // this will be posted on wakeup. You'll get just one of these if the
 // machine has been asleep for several days. The definition of "Day" is
-// relative to the current calendar ([NSCalendar currentCalendar]) of the
+// relative to the current calendar (NSCalendar.currentCalendar) of the
 // process and its locale and time zone. There are no guarantees that this
 // notification is received by observers in a "timely" manner, same as
 // with distributed notifications.
 
-FOUNDATION_EXPORT NSString * const NSCalendarDayChangedNotification NS_AVAILABLE(10_9, 8_0);
+FOUNDATION_EXPORT NSNotificationName const NSCalendarDayChangedNotification NS_AVAILABLE(10_9, 8_0);
 
 
 

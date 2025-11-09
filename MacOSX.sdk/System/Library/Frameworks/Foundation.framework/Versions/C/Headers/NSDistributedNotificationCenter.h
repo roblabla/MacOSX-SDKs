@@ -1,5 +1,5 @@
 /*	NSDistributedNotificationCenter.h
-	Copyright (c) 1996-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSNotification.h>
@@ -8,7 +8,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString * const NSLocalNotificationCenterType;
+typedef NSString * NSDistributedNotificationCenterType NS_EXTENSIBLE_STRING_ENUM;
+
+FOUNDATION_EXPORT NSDistributedNotificationCenterType const NSLocalNotificationCenterType;
 // Distributes notifications to all tasks on the sender's machine.
 
 typedef NS_ENUM(NSUInteger, NSNotificationSuspensionBehavior) {
@@ -33,20 +35,20 @@ static const NSDistributedNotificationOptions NSNotificationPostToAllSessions = 
 
 @interface NSDistributedNotificationCenter : NSNotificationCenter
 
-+ (NSDistributedNotificationCenter *)notificationCenterForType:(NSString *)notificationCenterType;
++ (NSDistributedNotificationCenter *)notificationCenterForType:(NSDistributedNotificationCenterType)notificationCenterType;
 // Currently there is only one type.
 
 + (NSDistributedNotificationCenter *)defaultCenter;
 // Returns the default distributed notification center - cover for [NSDistributedNotificationCenter notificationCenterForType:NSLocalNotificationCenterType]
 
-- (void)addObserver:(id)observer selector:(SEL)selector name:(nullable NSString *)name object:(nullable NSString *)object suspensionBehavior:(NSNotificationSuspensionBehavior)suspensionBehavior;
+- (void)addObserver:(id)observer selector:(SEL)selector name:(nullable NSNotificationName)name object:(nullable NSString *)object suspensionBehavior:(NSNotificationSuspensionBehavior)suspensionBehavior;
 // All other registration methods are covers of this one, with the default for suspensionBehavior = NSNotificationSuspensionBehaviorCoalesce.
 
-- (void)postNotificationName:(NSString *)name object:(nullable NSString *)object userInfo:(nullable NSDictionary *)userInfo deliverImmediately:(BOOL)deliverImmediately;
+- (void)postNotificationName:(NSNotificationName)name object:(nullable NSString *)object userInfo:(nullable NSDictionary *)userInfo deliverImmediately:(BOOL)deliverImmediately;
 // All other posting methods are covers of this one.  The deliverImmediately argument causes the notification to be received in the same manner as if matching registrants had registered with suspension
 // behavior NSNotificationSuspensionBehaviorDeliverImmediately.  The default in covers is deliverImmediately = NO (respect suspension behavior of registrants).
 
-- (void)postNotificationName:(NSString *)name object:(nullable NSString *)object userInfo:(nullable NSDictionary *)userInfo options:(NSDistributedNotificationOptions)options;
+- (void)postNotificationName:(NSNotificationName)name object:(nullable NSString *)object userInfo:(nullable NSDictionary *)userInfo options:(NSDistributedNotificationOptions)options;
 
 
 
@@ -55,11 +57,11 @@ static const NSDistributedNotificationOptions NSNotificationPostToAllSessions = 
 @property BOOL suspended;
 
 // Methods from NSNotificationCenter that are re-declared in part because the anObject argument is typed to be an NSString.
-- (void)addObserver:(id)observer selector:(SEL)aSelector name:(nullable NSString *)aName object:(nullable NSString *)anObject;
+- (void)addObserver:(id)observer selector:(SEL)aSelector name:(nullable NSNotificationName)aName object:(nullable NSString *)anObject;
 
-- (void)postNotificationName:(NSString *)aName object:(nullable NSString *)anObject;
-- (void)postNotificationName:(NSString *)aName object:(nullable NSString *)anObject userInfo:(nullable NSDictionary *)aUserInfo;
-- (void)removeObserver:(id)observer name:(nullable NSString *)aName object:(nullable NSString *)anObject;
+- (void)postNotificationName:(NSNotificationName)aName object:(nullable NSString *)anObject;
+- (void)postNotificationName:(NSNotificationName)aName object:(nullable NSString *)anObject userInfo:(nullable NSDictionary *)aUserInfo;
+- (void)removeObserver:(id)observer name:(nullable NSNotificationName)aName object:(nullable NSString *)anObject;
 
 @end
 

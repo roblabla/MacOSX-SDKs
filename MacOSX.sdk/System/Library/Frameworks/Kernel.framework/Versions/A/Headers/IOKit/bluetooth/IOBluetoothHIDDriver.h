@@ -129,8 +129,12 @@ class IOBluetoothHIDDriver : public IOHIDDevice
 		IOTimerEventSource*		mReadyToSleepTimer;
 		
 		bool					mHandleStopBeingCalled;
-
 		
+		bool					mHandleStartCompleted;
+
+		bool					mHIDSuspendSent;
+		
+		IOReturn				mExitHIDSuspendResult;
     };
     ExpansionData	*_expansionData;
 	

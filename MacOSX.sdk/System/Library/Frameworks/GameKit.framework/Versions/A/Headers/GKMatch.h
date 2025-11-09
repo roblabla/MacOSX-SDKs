@@ -2,7 +2,7 @@
 //  GKMatch.h
 //  Game Center
 //
-//  Copyright 2010-2015 Apple Inc. All rights reserved.
+//  Copyright 2010-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, GKPlayerConnectionState) {
 
 NS_ASSUME_NONNULL_BEGIN
 // GKMatch represents an active networking sessions between players. It handles network communications and can report player connection status. All matches are created by a GKMatchmaker.
-NS_CLASS_AVAILABLE(10_8, 4_1)
+NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 @interface GKMatch : NSObject
 
 @property(nonatomic, readonly) NSArray<GKPlayer *> *players NS_AVAILABLE(10_10, 8_0);    // GKPlayers in the match
@@ -59,6 +59,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 
 @end
 
+__WATCHOS_PROHIBITED
 @protocol GKMatchDelegate <NSObject>
 @optional
 

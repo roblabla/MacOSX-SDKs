@@ -16,6 +16,8 @@ typedef NS_OPTIONS(NSUInteger, CKRecordZoneCapabilities) {
     CKRecordZoneCapabilityFetchChanges   = 1 << 0,
     /* Batched changes to this zone happen atomically */
     CKRecordZoneCapabilityAtomic         = 1 << 1,
+    /* Records in this zone can be shared */
+    CKRecordZoneCapabilitySharing        NS_AVAILABLE(10_12, 10_0) = 1 << 2,
 } NS_AVAILABLE(10_10, 8_0);
 
 /* The default zone has no capabilities */

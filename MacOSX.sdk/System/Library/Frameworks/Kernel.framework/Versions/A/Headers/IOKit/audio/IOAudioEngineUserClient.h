@@ -45,6 +45,9 @@ class IOAudioEngineUserClient;
 class IOAudioClientBufferSet;
 struct IOAudioFormatNotification;
 
+
+#define kDriverHelper_DriverHostEntitlement	"com.apple.private.audio.driver-host"		// XXX copied from AudioHAL/DriverHelper/DriverHelper.h
+
 typedef struct IOAudioClientBuffer
 {
     IOAudioEngineUserClient		*userClient;
@@ -121,10 +124,10 @@ protected:
 protected:
 	struct ExpansionData {
 		IOAudioClientBufferExtendedInfo64	*extendedInfo;
-		IOExternalMethod					methods[kIOAudioEngineNumCalls];		// This size can be changed, this is the new methods pointer
 		UInt32								classicMode;
 		UInt32								commandGateStatus;						// <rdar://8518215>
 		SInt32								commandGateUsage;						// <rdar://8518215>
+		UInt32								connectionID;
 	};
 
 // <rdar://101000004> START

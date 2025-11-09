@@ -3,7 +3,8 @@
 // =====================================================================================================================
 
 
-#import <AppKit/AppKit.h>
+#import <PDFKit/PDFKitPlatform.h>
+
 #import <PDFKit/PDFAnnotation.h>
 
 
@@ -11,8 +12,8 @@
 
 
 // Type of control.
-typedef NSInteger PDFWidgetControlType;
-enum
+NS_ENUM_DEPRECATED_MAC(10_4, 10_12)
+typedef NS_ENUM(NSInteger, PDFWidgetControlType)
 {
 	kPDFWidgetUnknownControl = -1, 
     kPDFWidgetPushButtonControl = 0, 
@@ -20,55 +21,44 @@ enum
     kPDFWidgetCheckBoxControl = 2
 };
 
+// Cell state.
+typedef NS_ENUM(NSInteger, PDFWidgetCellState)
+{
+    kPDFWidgetMixedState = -1,
+    kPDFWidgetOffState = 0,
+    kPDFWidgetOnState = 1,
+};
 
+NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
 @interface PDFAnnotationButtonWidget : PDFAnnotation <NSCopying>
 {
 @private
-    PDFAnnotationButtonWidgetPrivateVars *_pdfPriv2;
+    PDFAnnotationButtonWidgetPrivateVars *_private2;
 }
 
 // -------- accessors
 - (PDFWidgetControlType) controlType;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 - (void) setControlType: (PDFWidgetControlType) type;
-
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 - (NSInteger) state;
 - (void) setState: (NSInteger) value;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 - (BOOL) isHighlighted;
 
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 - (void) setHighlighted: (BOOL) flag;
-- (NSColor *) backgroundColor;
-- (void) setBackgroundColor: (NSColor *) color;
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (PDFKitPlatformColor *) backgroundColor;
+- (void) setBackgroundColor: (PDFKitPlatformColor *) color;
 
 // For radio buttons, indicates whether clicking on widget whose state is already On toggles it Off.
 - (BOOL) allowsToggleToOff;
-
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-
 - (void) setAllowsToggleToOff: (BOOL) allowOff;
 
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 // Font attributes.
-- (NSFont *) font;
-- (void) setFont: (NSFont *) font;
-- (NSColor *) fontColor;
-- (void) setFontColor: (NSColor *) color;
+- (PDFKitPlatformFont *) font;
+- (void) setFont: (PDFKitPlatformFont *) font;
+- (PDFKitPlatformColor *) fontColor;
+- (void) setFontColor: (PDFKitPlatformColor *) color;
 
 // Label for the button.  Applies to kPDFWidgetPushButtonControl only.
 - (NSString *) caption;
@@ -85,8 +75,5 @@ enum
 // "MaritalStatus").
 - (NSString *) onStateValue;
 - (void) setOnStateValue: (NSString *) name;
-
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 
 @end

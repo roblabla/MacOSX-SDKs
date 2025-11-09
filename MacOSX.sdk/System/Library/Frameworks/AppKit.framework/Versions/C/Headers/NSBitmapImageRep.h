@@ -1,7 +1,7 @@
 /*
 	NSBitmapImageRep.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -28,12 +28,12 @@ typedef NS_ENUM(NSUInteger, NSTIFFCompression) {
 };
 
 typedef NS_ENUM(NSUInteger, NSBitmapImageFileType) {
-    NSTIFFFileType,
-    NSBMPFileType,
-    NSGIFFileType,
-    NSJPEGFileType,
-    NSPNGFileType,
-    NSJPEG2000FileType
+    NSBitmapImageFileTypeTIFF,
+    NSBitmapImageFileTypeBMP,
+    NSBitmapImageFileTypeGIF,
+    NSBitmapImageFileTypeJPEG,
+    NSBitmapImageFileTypePNG,
+    NSBitmapImageFileTypeJPEG2000
 };
 
 typedef NS_ENUM(NSInteger, NSImageRepLoadStatus) {
@@ -46,14 +46,14 @@ typedef NS_ENUM(NSInteger, NSImageRepLoadStatus) {
 };
 
 typedef NS_OPTIONS(NSUInteger, NSBitmapFormat) {
-    NSAlphaFirstBitmapFormat            = 1 << 0,       // 0 means is alpha last (RGBA, CMYKA, etc.)
-    NSAlphaNonpremultipliedBitmapFormat = 1 << 1,       // 0 means is premultiplied
-    NSFloatingPointSamplesBitmapFormat  = 1 << 2,	// 0 is integer
-    
-    NS16BitLittleEndianBitmapFormat NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 8),
-    NS32BitLittleEndianBitmapFormat NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 9),
-    NS16BitBigEndianBitmapFormat NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 10),
-    NS32BitBigEndianBitmapFormat NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 11)
+    NSBitmapFormatAlphaFirst            = 1 << 0,       // 0 means is alpha last (RGBA, CMYKA, etc.)
+    NSBitmapFormatAlphaNonpremultiplied = 1 << 1,       // 0 means is premultiplied
+    NSBitmapFormatFloatingPointSamples  = 1 << 2,  // 0 is integer
+
+    NSBitmapFormatSixteenBitLittleEndian NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 8),
+    NSBitmapFormatThirtyTwoBitLittleEndian NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 9),
+    NSBitmapFormatSixteenBitBigEndian NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 10),
+    NSBitmapFormatThirtyTwoBitBigEndian NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 11)
 };
 
 APPKIT_EXTERN NSString *NSImageCompressionMethod;	// TIFF input/output (NSTIFFCompression in NSNumber)
@@ -166,5 +166,22 @@ Works on images with 8-bit SPP; thus either 8-bit gray or 24-bit color (with opt
 - (nullable id)valueForProperty:(NSString *)property;
 
 @end
+
+
+static const NSBitmapImageFileType NSTIFFFileType /*API_DEPRECATED_WITH_REPLACEMENT("NSBitmapImageFileTypeTIFF", macosx(10.0, 10.12))*/ = NSBitmapImageFileTypeTIFF;
+static const NSBitmapImageFileType NSBMPFileType /*API_DEPRECATED_WITH_REPLACEMENT("NSBitmapImageFileTypeBMP", macosx(10.0, 10.12))*/ = NSBitmapImageFileTypeBMP;
+static const NSBitmapImageFileType NSGIFFileType /*API_DEPRECATED_WITH_REPLACEMENT("NSBitmapImageFileTypeGIF", macosx(10.0, 10.12))*/ = NSBitmapImageFileTypeGIF;
+static const NSBitmapImageFileType NSJPEGFileType /*API_DEPRECATED_WITH_REPLACEMENT("NSBitmapImageFileTypeJPEG", macosx(10.0, 10.12))*/ = NSBitmapImageFileTypeJPEG;
+static const NSBitmapImageFileType NSPNGFileType /*API_DEPRECATED_WITH_REPLACEMENT("NSBitmapImageFileTypePNG", macosx(10.0, 10.12))*/ = NSBitmapImageFileTypePNG;
+static const NSBitmapImageFileType NSJPEG2000FileType /*API_DEPRECATED_WITH_REPLACEMENT("NSBitmapImageFileTypeJPEG2000", macosx(10.0, 10.12))*/ = NSBitmapImageFileTypeJPEG2000;
+
+static const NSBitmapFormat NSAlphaFirstBitmapFormat /*API_DEPRECATED_WITH_REPLACEMENT("NSBitmapFormatAlphaFirst", macosx(10.5, 10.12))*/ = NSBitmapFormatAlphaFirst;
+static const NSBitmapFormat NSAlphaNonpremultipliedBitmapFormat /*API_DEPRECATED_WITH_REPLACEMENT("NSBitmapFormatAlphaNonpremultiplied", macosx(10.0, 10.12))*/ = NSBitmapFormatAlphaNonpremultiplied;
+static const NSBitmapFormat NSFloatingPointSamplesBitmapFormat /*API_DEPRECATED_WITH_REPLACEMENT("NSBitmapFormatFloatingPointSamples", macosx(10.0, 10.12))*/ = NSBitmapFormatFloatingPointSamples;
+static const NSBitmapFormat NS16BitLittleEndianBitmapFormat /*API_DEPRECATED_WITH_REPLACEMENT("NSBitmapFormatSixteenBitLittleEndian", macosx(10.5, 10.12))*/ = NSBitmapFormatSixteenBitLittleEndian;
+static const NSBitmapFormat NS32BitLittleEndianBitmapFormat /*API_DEPRECATED_WITH_REPLACEMENT("NSBitmapFormatThirtyTwoBitLittleEndian", macosx(10.0, 10.12))*/ = NSBitmapFormatThirtyTwoBitLittleEndian;
+static const NSBitmapFormat NS16BitBigEndianBitmapFormat /*API_DEPRECATED_WITH_REPLACEMENT("NSBitmapFormatSixteenBitBigEndian", macosx(10.0, 10.12))*/ = NSBitmapFormatSixteenBitBigEndian;
+static const NSBitmapFormat NS32BitBigEndianBitmapFormat /*API_DEPRECATED_WITH_REPLACEMENT("NSBitmapFormatThirtyTwoBitBigEndian", macosx(10.0, 10.12))*/ = NSBitmapFormatThirtyTwoBitBigEndian;
+
 
 NS_ASSUME_NONNULL_END

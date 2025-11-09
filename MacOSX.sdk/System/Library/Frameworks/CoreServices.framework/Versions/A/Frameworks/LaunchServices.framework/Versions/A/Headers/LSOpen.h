@@ -60,22 +60,15 @@ CF_ASSUME_NONNULL_BEGIN
 /* ======================================================================================================== */
 
 typedef CF_OPTIONS(OptionBits, LSLaunchFlags) {
-  kLSLaunchDefaults             = 0x00000001, /* Defaults = open, async, use Info.plist*/
+  kLSLaunchDefaults             = 0x00000001, /* Defaults = open, async*/
   kLSLaunchAndPrint             = 0x00000002, /* Print items instead of open them*/
-  kLSLaunchReserved2            = 0x00000004,
-  kLSLaunchReserved3            = 0x00000008,
-  kLSLaunchReserved4            = 0x00000010,
-  kLSLaunchReserved5            = 0x00000020,
   kLSLaunchAndDisplayErrors     = 0x00000040, /* Report launch/open failures in the UI*/
-  kLSLaunchInhibitBGOnly        = 0x00000080, /* Causes launch to fail if target is background-only.*/
   kLSLaunchDontAddToRecents     = 0x00000100, /* Do not add app or documents to recents menus.*/
   kLSLaunchDontSwitch           = 0x00000200, /* Do not bring new app to the foreground.*/
-  kLSLaunchNoParams             = 0x00000800, /* Use Info.plist to determine launch parameters*/
   kLSLaunchAsync                = 0x00010000, /* Asynchronous launch; return as soon as the app starts launching.*/
   kLSLaunchNewInstance          = 0x00080000, /* Instantiate app even if it is already running.*/
   kLSLaunchAndHide              = 0x00100000, /* Send child a "hide" request as soon as it checks in.*/
   kLSLaunchAndHideOthers        = 0x00200000, /* Hide all other apps when the app checks in.*/
-  kLSLaunchHasUntrustedContents = 0x00400000, /* Mark items to be opened as untrusted*/
 };
 
 #if !TARGET_OS_IPHONE

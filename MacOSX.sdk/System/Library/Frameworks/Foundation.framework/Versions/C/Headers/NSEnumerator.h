@@ -1,5 +1,5 @@
 /*	NSEnumerator.h
-	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -20,14 +20,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef struct {
     unsigned long state;
-    id __unsafe_unretained __nullable * __nullable itemsPtr;
-    unsigned long * __nullable mutationsPtr;
+    id __unsafe_unretained _Nullable * _Nullable itemsPtr;
+    unsigned long * _Nullable mutationsPtr;
     unsigned long extra[5];
 } NSFastEnumerationState;
 
 @protocol NSFastEnumeration
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained [])buffer count:(NSUInteger)len;
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained _Nullable [_Nonnull])buffer count:(NSUInteger)len;
 
 @end
 

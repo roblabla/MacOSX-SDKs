@@ -18,7 +18,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 /*  This block is called when the operation completes.
     The [NSOperation completionBlock] will also be called if both are set. */
-@property (nonatomic, copy, nullable) void (^modifyBadgeCompletionBlock)(NSError * __nullable operationError);
+@property (nonatomic, copy, nullable) void (^modifyBadgeCompletionBlock)(NSError * _Nullable operationError);
 
 @end
 NS_ASSUME_NONNULL_END

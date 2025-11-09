@@ -1,12 +1,11 @@
 //
 //  GKRandomSource.h
-//  GameLogic
+//  GameplayKit
 //
 //  Copyright (c) 2014 Apple. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "GameplayKitBase.h"
+#import <GameplayKit/GameplayKitBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -129,6 +128,20 @@ GK_BASE_AVAILABILITY @interface GKRandomSource : NSObject <GKRandom, NSSecureCod
  * array.count is suitable for this shuffle.
  */
 - (NSArray *)arrayByShufflingObjectsInArray:(NSArray *)array;
+
+@end
+
+@interface NSArray<ObjectType> (GameplayKit)
+
+/*
+ * Returns a shuffled instance of this array using the given random source.
+ */
+- (NSArray<ObjectType>*)shuffledArrayWithRandomSource:(GKRandomSource*)randomSource;
+
+/*
+ * Returns a shuffled instance of this array using the systems underlying random source, as with [GKRandomSource sharedRandom]
+ */
+- (NSArray<ObjectType>*)shuffledArray;
 
 @end
 

@@ -13,17 +13,13 @@
  * API, including submitting, removing, starting, stopping and listing jobs.
  */
 
-#ifndef __XPC_INDIRECT__
-#define __XPC_INDIRECT__
-#endif // __XPC_INDIRECT__
-
 #if XPC_BUILDING_LAUNCHD
 // Temporary hack to resolve conflicting availability with launchd's existing
 // internal headers.
 #pragma GCC diagnostic ignored "-Wavailability"
 #endif // XPC_BUILDING_LAUNCHD
 
-#include <xpc/base.h>
+#include <os/base.h>
 #include <Availability.h>
 
 #include <mach/mach.h>
@@ -31,6 +27,9 @@
 #include <stdbool.h>
 #include <sys/cdefs.h>
 
+#if __has_feature(assume_nonnull)
+_Pragma("clang assume_nonnull begin")
+#endif
 __BEGIN_DECLS
 
 #define LAUNCH_KEY_SUBMITJOB "SubmitJob"
@@ -192,13 +191,14 @@ __BEGIN_DECLS
  * EALREADY -> The socket has already been activated by the caller.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1 XPC_NONNULL2 XPC_NONNULL3
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1 OS_NONNULL2 OS_NONNULL3
 int
-launch_activate_socket(const char *name, int **fds, size_t *cnt);
+launch_activate_socket(const char *name,
+	int * _Nonnull * _Nullable fds, size_t *cnt);
 
 typedef struct _launch_data *launch_data_t;
 typedef void (*launch_data_dict_iterator_t)(const launch_data_t lval,
-	const char *key, void *ctx);
+	const char *key, void * _Nullable ctx);
 
 typedef enum {
 	LAUNCH_DATA_DICTIONARY = 1,
@@ -214,193 +214,196 @@ typedef enum {
 } launch_data_type_t;
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_MALLOC XPC_WARN_RESULT
+OS_EXPORT OS_MALLOC OS_WARN_RESULT
 launch_data_t
 launch_data_alloc(launch_data_type_t type);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_MALLOC XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_MALLOC OS_WARN_RESULT OS_NONNULL1
 launch_data_t
 launch_data_copy(launch_data_t ld);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1
 launch_data_type_t
 launch_data_get_type(const launch_data_t ld);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_NONNULL1
+OS_EXPORT OS_NONNULL1
 void
 launch_data_free(launch_data_t ld);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_NONNULL1 XPC_NONNULL2 XPC_NONNULL3
+OS_EXPORT OS_NONNULL1 OS_NONNULL2 OS_NONNULL3
 bool
 launch_data_dict_insert(launch_data_t ldict, const launch_data_t lval,
 	const char *key);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1 XPC_NONNULL2
-launch_data_t
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1 OS_NONNULL2
+launch_data_t _Nullable
 launch_data_dict_lookup(const launch_data_t ldict, const char *key);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_NONNULL1 XPC_NONNULL2
+OS_EXPORT OS_NONNULL1 OS_NONNULL2
 bool
 launch_data_dict_remove(launch_data_t ldict, const char *key);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_NONNULL1 XPC_NONNULL2
+OS_EXPORT OS_NONNULL1 OS_NONNULL2
 void
 launch_data_dict_iterate(const launch_data_t ldict,
-	launch_data_dict_iterator_t iterator, void *ctx);
+	launch_data_dict_iterator_t iterator, void * _Nullable ctx);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1
 size_t
 launch_data_dict_get_count(const launch_data_t ldict);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_NONNULL1
+OS_EXPORT OS_NONNULL1 OS_NONNULL2
 bool
 launch_data_array_set_index(launch_data_t larray, const launch_data_t lval,
 	size_t idx);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1
 launch_data_t
 launch_data_array_get_index(const launch_data_t larray, size_t idx);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1
 size_t
 launch_data_array_get_count(const launch_data_t larray);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_MALLOC XPC_WARN_RESULT
+OS_EXPORT OS_MALLOC OS_WARN_RESULT
 launch_data_t
 launch_data_new_fd(int fd);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_MALLOC XPC_WARN_RESULT
+OS_EXPORT OS_MALLOC OS_WARN_RESULT
 launch_data_t
 launch_data_new_machport(mach_port_t val);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_MALLOC XPC_WARN_RESULT
+OS_EXPORT OS_MALLOC OS_WARN_RESULT
 launch_data_t
 launch_data_new_integer(long long val);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_MALLOC XPC_WARN_RESULT
+OS_EXPORT OS_MALLOC OS_WARN_RESULT
 launch_data_t
 launch_data_new_bool(bool val);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_MALLOC XPC_WARN_RESULT
+OS_EXPORT OS_MALLOC OS_WARN_RESULT
 launch_data_t
 launch_data_new_real(double val);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_MALLOC XPC_WARN_RESULT
+OS_EXPORT OS_MALLOC OS_WARN_RESULT
 launch_data_t
 launch_data_new_string(const char *val);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_MALLOC XPC_WARN_RESULT
+OS_EXPORT OS_MALLOC OS_WARN_RESULT
 launch_data_t
 launch_data_new_opaque(const void *bytes, size_t sz);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_NONNULL1
+OS_EXPORT OS_NONNULL1
 bool
 launch_data_set_fd(launch_data_t ld, int fd);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_NONNULL1
+OS_EXPORT OS_NONNULL1
 bool
 launch_data_set_machport(launch_data_t ld, mach_port_t mp);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_NONNULL1
+OS_EXPORT OS_NONNULL1
 bool
 launch_data_set_integer(launch_data_t ld, long long val);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_NONNULL1
+OS_EXPORT OS_NONNULL1
 bool
 launch_data_set_bool(launch_data_t ld, bool val);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_NONNULL1
+OS_EXPORT OS_NONNULL1
 bool
 launch_data_set_real(launch_data_t ld, double val);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_NONNULL1
+OS_EXPORT OS_NONNULL1
 bool
 launch_data_set_string(launch_data_t ld, const char *val);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_NONNULL1
+OS_EXPORT OS_NONNULL1
 bool
 launch_data_set_opaque(launch_data_t ld, const void *bytes, size_t sz);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1
 int
 launch_data_get_fd(const launch_data_t ld);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1
 mach_port_t
 launch_data_get_machport(const launch_data_t ld);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1
 long long
 launch_data_get_integer(const launch_data_t ld);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1
 bool
 launch_data_get_bool(const launch_data_t ld);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1
 double
 launch_data_get_real(const launch_data_t ld);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1
 const char *
 launch_data_get_string(const launch_data_t ld);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1
 void *
 launch_data_get_opaque(const launch_data_t ld);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1
 size_t
 launch_data_get_opaque_size(const launch_data_t ld);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_WARN_RESULT OS_NONNULL1
 int
 launch_data_get_errno(const launch_data_t ld);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_WARN_RESULT
+OS_EXPORT OS_WARN_RESULT
 int
 launch_get_fd(void);
 
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_10, __IPHONE_2_0, __IPHONE_8_0)
-XPC_EXPORT XPC_MALLOC XPC_WARN_RESULT XPC_NONNULL1
+OS_EXPORT OS_MALLOC OS_WARN_RESULT OS_NONNULL1
 launch_data_t
 launch_msg(const launch_data_t request);
 
 __END_DECLS
+#if __has_feature(assume_nonnull)
+_Pragma("clang assume_nonnull end")
+#endif
 
-#endif // __XPC_LAUNCH_H__ 
+#endif // __XPC_LAUNCH_H__

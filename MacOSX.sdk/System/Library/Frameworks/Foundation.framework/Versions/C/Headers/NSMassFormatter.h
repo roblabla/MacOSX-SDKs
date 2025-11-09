@@ -1,5 +1,5 @@
 /*      NSMassFormatter.h
-        Copyright (c) 2014-2015, Apple Inc. All rights reserved.
+        Copyright (c) 2014-2016, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSFormatter.h>
@@ -41,7 +41,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 - (NSString *)unitStringFromKilograms:(double)numberInKilograms usedUnit:(nullable NSMassFormatterUnit *)unitp;
 
 // No parsing is supported. This method will return NO.
-- (BOOL)getObjectValue:(out id __nullable * __nullable)obj forString:(NSString *)string errorDescription:(out NSString * __nullable * __nullable)error;
+- (BOOL)getObjectValue:(out id _Nullable * _Nullable)obj forString:(NSString *)string errorDescription:(out NSString * _Nullable * _Nullable)error;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -3,24 +3,25 @@
 // =====================================================================================================================
 
 
-#import <AppKit/AppKit.h>
+#import <PDFKit/PDFKitPlatform.h>
+
 #import <PDFKit/PDFAction.h>
 
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+NS_ASSUME_NONNULL_BEGIN
 
 @class PDFDestination, PDFActionGoToPrivateVars;
 
-
+NS_CLASS_AVAILABLE_MAC(10_5)
 @interface PDFActionGoTo : PDFAction <NSCopying>
 {
 @private
-    PDFActionGoToPrivateVars *_pdfPriv2;
+    PDFActionGoToPrivateVars *_private2;
 }
 
-- (id) initWithDestination: (PDFDestination *) destination;
-- (PDFDestination *) destination;
-- (void) setDestination: (PDFDestination *) destination;
+- (instancetype) initWithDestination: (PDFDestination *) destination;
+
+@property(nonatomic, retain) PDFDestination* destination;
+
 @end
 
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+NS_ASSUME_NONNULL_END

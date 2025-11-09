@@ -49,7 +49,13 @@ extern "C" {
 typedef struct { __CLPK_real r, i; } __CLPK_complex;
 typedef struct { __CLPK_doublereal r, i; } __CLPK_doublecomplex;
 
-#include <Availability.h>
+#include <stdint.h>
+#if __has_include(<Availability.h>)
+	#include <Availability.h>
+#else // __has_include(<Availability.h>)
+	#define	__OSX_AVAILABLE_STARTING( x, y ) /* Nothing */
+	#define	__OSX_AVAILABLE_BUT_DEPRECATED( x, y, z, w ) /* Nothing */
+#endif // __has_include(<Availability.h>)
 
 int cbdsqr_(char *__uplo, __CLPK_integer *__n, __CLPK_integer *__ncvt,
         __CLPK_integer *__nru, __CLPK_integer *__ncc, __CLPK_real *__d__,

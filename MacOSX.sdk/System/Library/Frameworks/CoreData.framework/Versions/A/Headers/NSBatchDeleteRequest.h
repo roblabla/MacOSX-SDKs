@@ -1,7 +1,7 @@
 /*
     NSBatchDeleteRequest.h
     Core Data
-    Copyright (c) 2015-2015, Apple Inc.
+    Copyright (c) 2015-2016, Apple Inc.
     All rights reserved.
  */
 
@@ -23,12 +23,14 @@ NS_ASSUME_NONNULL_BEGIN
 //  It is up to the developer creating the request to ensure that changes made by the request to
 //  the underlying store do not violate any validation rules specified in the model beyond basic
 //  delete rules (for example, minimum relationship counts).
-NS_CLASS_AVAILABLE(10_11,9_0)
+API_AVAILABLE(macosx(10.11),ios(9.0))
 @interface NSBatchDeleteRequest : NSPersistentStoreRequest {
+#if (!__OBJC2__)
     @private
     NSBatchDeleteRequestResultType _resultType;
     NSFetchRequest *_deleteTarget;
     void *_reserved;
+#endif
 }
 
 - (instancetype)init NS_UNAVAILABLE;

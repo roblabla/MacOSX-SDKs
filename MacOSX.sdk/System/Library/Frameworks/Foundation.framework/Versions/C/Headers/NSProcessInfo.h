@@ -1,9 +1,10 @@
 /*	NSProcessInfo.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
+#import <Foundation/NSNotification.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -34,7 +35,9 @@ typedef struct {
     NSInteger		automaticTerminationOptOutCounter;
 }
 
-+ (NSProcessInfo *)processInfo;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, strong) NSProcessInfo *processInfo;
+#endif
 
 @property (readonly, copy) NSDictionary<NSString *, NSString *> *environment;
 @property (readonly, copy) NSArray<NSString *> *arguments;
@@ -102,15 +105,15 @@ typedef struct {
  
  This API can also be used to control auto termination or sudden termination. 
  
-    id activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityAutomaticTerminationDisabled reason:@"Good Reason"];
+    id activity = [NSProcessInfo.processInfo beginActivityWithOptions:NSActivityAutomaticTerminationDisabled reason:@"Good Reason"];
     // work
-    [[NSProcessInfo processInfo] endActivity:activity];
+    [NSProcessInfo.processInfo endActivity:activity];
  
  is equivalent to:
  
-    [[NSProcessInfo processInfo] disableAutomaticTermination:@"Good Reason"];
+    [NSProcessInfo.processInfo disableAutomaticTermination:@"Good Reason"];
     // work
-    [[NSProcessInfo processInfo] enableAutomaticTermination:@"Good Reason"]
+    [NSProcessInfo.processInfo enableAutomaticTermination:@"Good Reason"]
  
  Since this API returns an object, it may be easier to pair begins and ends. If the object is deallocated before the -endActivity: call, the activity will be automatically ended.
  
@@ -176,6 +179,13 @@ typedef NS_OPTIONS(uint64_t, NSActivityOptions) {
 
 @end
 
+@interface NSProcessInfo (NSUserInformation)
+
+@property (readonly, copy) NSString *userName API_AVAILABLE(macosx(10.12)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (readonly, copy) NSString *fullUserName API_AVAILABLE(macosx(10.12)) API_UNAVAILABLE(ios, watchos, tvos);
+
+@end
+
 // Describes the current thermal state of the system.
 typedef NS_ENUM(NSInteger, NSProcessInfoThermalState) {
     // No corrective action is needed.
@@ -210,17 +220,17 @@ typedef NS_ENUM(NSInteger, NSProcessInfoThermalState) {
  
  You can use this opportunity to take corrective action in your application to help cool the system down. Work that could be done in the background or at opportunistic times should be using the Quality of Service levels in NSOperation or the NSBackgroundActivityScheduler API.
  
- This notification is posted on the global dispatch queue. Register for it using the default notification center. The object associated with the notification is +[NSProcessInfo processInfo].
+ This notification is posted on the global dispatch queue. Register for it using the default notification center. The object associated with the notification is NSProcessInfo.processInfo.
 */
-FOUNDATION_EXTERN NSString * const NSProcessInfoThermalStateDidChangeNotification NS_AVAILABLE(10_10_3, NA);
+FOUNDATION_EXTERN NSNotificationName const NSProcessInfoThermalStateDidChangeNotification NS_AVAILABLE(10_10_3, NA);
 
 /*
  NSProcessInfoPowerStateDidChangeNotification is posted once any power usage mode of the system has changed. Once the notification is posted, use the isLowPowerModeEnabled property to retrieve the current state of the low power mode setting of the system.
  
  When this notification is posted your application should attempt to reduce power usage by reducing potentially costly computation and other power using activities like network activity or keeping the screen on if the low power mode setting is enabled.
  
- This notification is posted on the global dispatch queue. Register for it using the default notification center. The object associated with the notification is +[NSProcessInfo processInfo].
+ This notification is posted on the global dispatch queue. Register for it using the default notification center. The object associated with the notification is NSProcessInfo.processInfo.
  */
-FOUNDATION_EXTERN NSString * const NSProcessInfoPowerStateDidChangeNotification NS_AVAILABLE(NA, 9_0);
+FOUNDATION_EXTERN NSNotificationName const NSProcessInfoPowerStateDidChangeNotification NS_AVAILABLE(NA, 9_0);
 
 NS_ASSUME_NONNULL_END

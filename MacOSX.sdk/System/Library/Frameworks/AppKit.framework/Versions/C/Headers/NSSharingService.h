@@ -1,17 +1,21 @@
 /*
  NSSharingService.h
  Application Kit
- Copyright (c) 2011-2015, Apple Inc.
+ Copyright (c) 2011-2016, Apple Inc.
  All rights reserved.
  */
 
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSPasteboard.h>
 #import <Foundation/NSGeometry.h>
+#import <Foundation/NSItemProvider.h>
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
 
+#define NS_SHARING_SERVICE_DELEGATE_TRANSITION_IMAGE_FOR_SHARE_ITEM_DECLARES_NULLABILITY (1)
+
 @class NSString, NSImage, NSView, NSError, NSWindow;
+@class CKShare, CKContainer;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,6 +44,12 @@ APPKIT_EXTERN NSString * const NSSharingServiceNamePostImageOnFlickr NS_AVAILABL
 APPKIT_EXTERN NSString * const NSSharingServiceNamePostVideoOnVimeo NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSString * const NSSharingServiceNamePostVideoOnYouku NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSString * const NSSharingServiceNamePostVideoOnTudou NS_AVAILABLE_MAC(10_8);
+
+/* This service differs from other NSSharingServices in that it allows the user to establishes a persistent sharing session for the specified items with potentially many participants, instead of sending a copy of the items. You can invoke this service with an NSItemProvider that has registered a CKShare & CKContainer via either -registerCloudKitShare:container: or -registerCloudKitShareWithPreparationHandler:. (Registering other types on the same provider to enable other sharing services is allowed.)
+ 
+When performed, this service gives the user the opportunity to invite participants and start sharing. If the content is already shared it instead allows the user to view or modify participation or stop sharing. To detect changes the service makes to the CKShare, implement -sharingService:didSaveShare: and -sharingService:didStopSharing:.
+ */
+APPKIT_EXTERN NSString * const NSSharingServiceNameCloudSharing NS_AVAILABLE_MAC(10_12);
 
 
 @protocol NSSharingServiceDelegate;
@@ -131,12 +141,76 @@ typedef NS_ENUM(NSInteger, NSSharingContentScope) {
 /* The following methods are invoked when the service is performed and the sharing window pops up, to present a transition between the original items and the sharing window.
  */
 - (NSRect)sharingService:(NSSharingService *)sharingService sourceFrameOnScreenForShareItem:(id)item;
+#if NS_SHARING_SERVICE_DELEGATE_TRANSITION_IMAGE_FOR_SHARE_ITEM_DECLARES_NULLABILITY
+/* When non-nil, the image returned would be used for the transitioning animation. When nil, the transitioning animation is disabled.
+ */
+- (nullable NSImage *)sharingService:(NSSharingService *)sharingService transitionImageForShareItem:(id)item contentRect:(NSRect *)contentRect;
+#else
 - (NSImage *)sharingService:(NSSharingService *)sharingService transitionImageForShareItem:(id)item contentRect:(NSRect *)contentRect;
+#endif
 - (nullable NSWindow *)sharingService:(NSSharingService *)sharingService sourceWindowForShareItems:(NSArray *)items sharingContentScope:(NSSharingContentScope *)sharingContentScope;
+
+/* The following method is invoked when the service is performed and wants to display its contents in a popover. The delegate should return the view that will act as the anchor of the popover, along with the target rectangle within the bounds of that view and preferred edge of that rectangle for the popover to appear. The delegate may also return nil, indicating that there is no anchoring view currently available, in which case the service may attempt to display the service via some other means.
+ 
+ The service named NSSharingServiceNameCloudSharing prefers to display itself using a popover anchored to an "Add People" or "Share" button. If no such button is available or visible, return nil.
+ */
+- (nullable NSView *)anchoringViewForSharingService:(NSSharingService *)sharingService showRelativeToRect:(NSRect *)positioningRect preferredEdge:(NSRectEdge *)preferredEdge;
 
 @end
 
 
+typedef NS_OPTIONS(NSUInteger, NSCloudKitSharingServiceOptions) {
+    NSCloudKitSharingServiceStandard = 0, // Allow the user to configure the share with the standard set of options
+    
+    NSCloudKitSharingServiceAllowPublic = 1 << 0, // The user is allowed to share publicly
+    NSCloudKitSharingServiceAllowPrivate = 1 << 1, // The user is allowed to share privately
+    
+    NSCloudKitSharingServiceAllowReadOnly = 1 << 4, // The user is allowed to grant participants read-only permissions
+    NSCloudKitSharingServiceAllowReadWrite = 1 << 5, // The user is allowed to grant participants read/write permissions.
+    
+} NS_ENUM_AVAILABLE_MAC(10_12);
+
+@protocol NSCloudSharingServiceDelegate <NSSharingServiceDelegate>
+@optional
+
+/* When an NSSharingServiceNameCloudSharing sharing service is dismissed it will invoke this method on the delegate, with an error if there was any. If the delegate implements this method, NSSharingServiceNameCloudSharing will not send -sharingService:didFailToShareItems:error: or -sharingService:didShareItems:.
+ */
+- (void)sharingService:(NSSharingService *)sharingService didCompleteForItems:(NSArray *)items error:(nullable NSError *)error;
+
+#if __OBJC2__
+
+/* The options returned by this method describe how the user is allowed to configure the share: whether the share is public or private, and whether participants have read-only or read/write permissions. If this method is not implemented, NSCloudKitSharingServiceStandard is assumed.
+ */
+- (NSCloudKitSharingServiceOptions)optionsForSharingService:(NSSharingService *)cloudKitSharingService shareProvider:(NSItemProvider *)provider;
+
+#endif
+
+/* When an NSSharingServiceNameCloudSharing sharing service successfully saves modifications to the CKShare, it will invoke this method on the delegate with the last-known state of the CKShare on the server.
+ */
+- (void)sharingService:(NSSharingService *)sharingService didSaveShare:(CKShare *)share;
+
+/* When an NSSharingServiceNameCloudSharing sharing service stops sharing it will delete the CKShare from the server, then invoke this method on the delegate with the last-known state of the CKShare.
+ */
+- (void)sharingService:(NSSharingService *)sharingService didStopSharing:(CKShare *)share;
+
+@end
+
+
+#if __OBJC2__
+
+@interface NSItemProvider (NSCloudKitSharing)
+
+/* Use this method when you want to share a collection of CKRecords but don't currently have a CKShare. When the preparationHandler is called, you should create a new CKShare with the appropriate root CKRecord. After ensuring the share and all records have been saved to the server, invoke the preparationCompletionHandler with either the resulting CKShare and its CKContainer, or an NSError if saving failed. Invoking the service with a CKShare registered with this method will prompt the user to start sharing.
+ */
+- (void)registerCloudKitShareWithPreparationHandler:(void (^_Nonnull)(void (^ _Nonnull preparationCompletionHandler)(CKShare * _Nullable, CKContainer * _Nullable, NSError * _Nullable)))preparationHandler NS_AVAILABLE_MAC(10_12);
+
+/* Use this method when you have a CKShare that is already saved to the server. Invoking the service with a CKShare registerd with this method will allow the owner to make modifications to the share settings, or will allow a participant to view the share settings.
+ */
+- (void)registerCloudKitShare:(CKShare *)share container:(CKContainer *)container NS_AVAILABLE_MAC(10_12);
+
+@end
+
+#endif
 
 
 

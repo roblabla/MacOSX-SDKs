@@ -44,7 +44,7 @@ typedef uint16_t CLBeaconMinorValue;
  *    value.
  *
  */
-NS_CLASS_AVAILABLE(NA, 7_0)
+NS_CLASS_AVAILABLE(NA, 7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
 @interface CLBeaconRegion : CLRegion
 
 /*
@@ -87,7 +87,7 @@ NS_CLASS_AVAILABLE(NA, 7_0)
  *    If not specified, it will default to a pre-determined value for the device.
  *
  */
-- (NSMutableDictionary *)peripheralDataWithMeasuredPower:(nullable NSNumber *)measuredPower;
+- (NSMutableDictionary<NSString *, id> *)peripheralDataWithMeasuredPower:(nullable NSNumber *)measuredPower;
 
 /*
  *  proximityUUID
@@ -136,7 +136,7 @@ NS_CLASS_AVAILABLE(NA, 7_0)
  *    A single beacon within a CLBeaconRegion.
  *
  */
-NS_CLASS_AVAILABLE(NA, 7_0)
+NS_CLASS_AVAILABLE(NA, 7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
 @interface CLBeacon : NSObject <NSCopying, NSSecureCoding>
 {
 	CLBeaconInternal *_internal;

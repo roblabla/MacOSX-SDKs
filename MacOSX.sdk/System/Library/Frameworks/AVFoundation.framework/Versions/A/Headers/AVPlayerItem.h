@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2016 Apple Inc. All rights reserved.
 
 */
 
@@ -94,7 +94,7 @@ AV_INIT_UNAVAILABLE
  @result		An instance of AVPlayerItem.
  @discussion	Equivalent to +playerItemWithAsset:, passing [AVAsset assetWithURL:URL] as the value of asset.
  */
-+ (AVPlayerItem *)playerItemWithURL:(NSURL *)URL;
++ (instancetype)playerItemWithURL:(NSURL *)URL;
 
 /*!
  @method		playerItemWithAsset:
@@ -103,7 +103,7 @@ AV_INIT_UNAVAILABLE
  @result		An instance of AVPlayerItem.
  @discussion	Equivalent to +playerItemWithAsset:automaticallyLoadedAssetKeys:, passing @[ @"duration" ] as the value of automaticallyLoadedAssetKeys.
   */
-+ (AVPlayerItem *)playerItemWithAsset:(AVAsset *)asset;
++ (instancetype)playerItemWithAsset:(AVAsset *)asset;
 
 /*!
  @method		playerItemWithAsset:automaticallyLoadedAssetKeys:
@@ -114,7 +114,7 @@ AV_INIT_UNAVAILABLE
  @result		An instance of AVPlayerItem.
  @discussion	The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading.
  */
-+ (AVPlayerItem *)playerItemWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(nullable NSArray<NSString *> *)automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
++ (instancetype)playerItemWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(nullable NSArray<NSString *> *)automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @method		initWithURL:
@@ -332,6 +332,7 @@ AV_INIT_UNAVAILABLE
  @param				time
  @discussion		Use this method to seek to a specified time for the item.
 					The time seeked to may differ from the specified time for efficiency. For sample accurate seeking see seekToTime:toleranceBefore:toleranceAfter:.
+					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled.
  */
 - (void)seekToTime:(CMTime)time;
 
@@ -344,6 +345,7 @@ AV_INIT_UNAVAILABLE
  					The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter 
  					set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified 
  					completion handler will be invoked with the finished parameter set to YES. 
+					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled and the completion handler will be invoked with the finished parameter set to NO.
  */
 - (void)seekToTime:(CMTime)time completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_7, 5_0);
 
@@ -359,6 +361,7 @@ AV_INIT_UNAVAILABLE
 					Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly.
 					Seeking is constrained by the collection of seekable time ranges. If you seek to a time outside all of the seekable ranges the seek will result in a currentTime
 					within the seekable ranges.
+					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled.
  */
 - (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter;
 
@@ -376,6 +379,7 @@ AV_INIT_UNAVAILABLE
 					The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter set to NO. If the new 
 					request completes without being interrupted by another seek request or by any other operation the specified completion handler will be invoked with the 
 					finished parameter set to YES.
+					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled and the completion handler will be invoked with the finished parameter set to NO.
  */
 - (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_7, 5_0);
 
@@ -558,6 +562,14 @@ AV_INIT_UNAVAILABLE
  */
 @property (nonatomic, assign) BOOL canUseNetworkResourcesForLiveStreamingWhilePaused NS_AVAILABLE(10_11, 9_0);
 
+/*!
+@property	preferredForwardBufferDuration
+@abstract	Indicates the media duration the caller prefers the player to buffer from the network ahead of the playhead to guard against playback disruption. 
+@discussion	The value is in seconds. If it is set to 0, the player will choose an appropriate level of buffering for most use cases.
+			Note that setting this property to a low value will increase the chance that playback will stall and re-buffer, while setting it to a high value will increase demand on system resources.
+*/
+@property (nonatomic) NSTimeInterval preferredForwardBufferDuration NS_AVAILABLE(10_12, 10_0);
+
 @end
 
 
@@ -687,6 +699,36 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+@class AVPlayerItemMediaDataCollector;
+
+@interface AVPlayerItem (AVPlayerItemMediaDataCollectors)
+
+/*!
+ @method		addMediaDataCollector:
+ @abstract		Adds the specified instance of AVPlayerItemMediaDataCollector to the receiver's collection of mediaDataCollectors.
+ @discussion
+	This method may incur additional I/O to collect the requested media data asynchronously.
+ @param			collector
+				An instance of AVPlayerItemMediaDataCollector
+*/
+- (void)addMediaDataCollector:(AVPlayerItemMediaDataCollector *)collector NS_AVAILABLE(10_11_3, 9_3);
+
+/*!
+ @method		removeMediaDataCollector:
+ @abstract		Removes the specified instance of AVPlayerItemMediaDataCollector from the receiver's collection of mediaDataCollectors.
+ @param			collector
+				An instance of AVPlayerItemMediaDataCollector
+*/
+- (void)removeMediaDataCollector:(AVPlayerItemMediaDataCollector *)collector NS_AVAILABLE(10_11_3, 9_3);
+
+/*!
+ @property		mediaDataCollectors
+ @abstract		The collection of associated mediaDataCollectors.
+*/
+@property (nonatomic, readonly) NSArray<AVPlayerItemMediaDataCollector *> *mediaDataCollectors NS_AVAILABLE(10_11_3, 9_3);;
+
+@end
+
 @class AVPlayerItemAccessLogEvent;
 
 /*!
@@ -702,6 +744,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
 @private
 	AVPlayerItemAccessLogInternal	*_playerItemAccessLog;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method		extendedLogData
@@ -744,6 +787,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
 @private
 	AVPlayerItemErrorLogInternal	*_playerItemErrorLog;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method		extendedLogData
@@ -787,6 +831,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
 @private
 	AVPlayerItemAccessLogEventInternal	*_playerItemAccessLogEvent;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @property		numberOfSegmentsDownloaded
@@ -912,6 +957,30 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
 @property (nonatomic, readonly) double indicatedBitrate;
 
 /*!
+ @property		indicatedAverageBitrate
+ @abstract		Average throughput required to play the stream, as advertised by the server. Measured in bits per second.
+ @discussion	Value is negative if unknown. Corresponds to "sc-indicated-avg-bitrate".
+ This property is not observable.
+ */
+@property (nonatomic, readonly) double indicatedAverageBitrate NS_AVAILABLE(10_12, 10_0);
+
+/*!
+ @property		averageVideoBitrate
+ @abstract		The average bitrate of video track if it is unmuxed. Average bitrate of combined content if muxed. Measured in bits per second.
+ @discussion	Value is negative if unknown. Corresponds to "c-avg-video-bitrate".
+ This property is not observable.
+ */
+@property (nonatomic, readonly) double averageVideoBitrate NS_AVAILABLE(10_12, 10_0);
+
+/*!
+ @property		averageAudioBitrate
+ @abstract		The average bitrate of audio track. This is not available if audio is muxed with video. Measured in bits per second.
+ @discussion	Value is negative if unknown. Corresponds to "c-avg-audio-bitrate".
+ This property is not observable.
+ */
+@property (nonatomic, readonly) double averageAudioBitrate NS_AVAILABLE(10_12, 10_0);
+
+/*!
  @property		numberOfDroppedVideoFrames
  @abstract		The total number of dropped video frames.
  @discussion	Value is negative if unknown. Corresponds to "c-frames-dropped".
@@ -997,6 +1066,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
 @private
 	AVPlayerItemErrorLogEventInternal	*_playerItemErrorLogEvent;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @property		date

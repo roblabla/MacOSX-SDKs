@@ -1,21 +1,21 @@
 //
 //  GKBehavior.h
-//  GameLogic
+//  GameplayKit
 //
 //  Copyright © 2015 Apple. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "GameplayKitBase.h"
+#import <GameplayKit/GameplayKitBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class GKGoal;
 
 /**
- * A collection of GKGoals and weights that can be applied to a GKAgent
+ * A collection of GKGoals or GKBehaviors with weights that can be applied to a GKAgent
+ * The sub-goals or sub-behaviors are summed to produce a total force to be applied to an agent
  */
-GK_BASE_AVAILABILITY @interface GKBehavior : NSObject<NSFastEnumeration>
+GK_BASE_AVAILABILITY @interface GKBehavior : NSObject<NSFastEnumeration, NSCopying>
 
 /*
  * The number of GKGoals in this behavior
@@ -79,7 +79,7 @@ GK_BASE_AVAILABILITY @interface GKBehavior : NSObject<NSFastEnumeration>
 /**
  * Supports getting a weight via a [goal] subscript.
  */
-- (NSNumber *)objectForKeyedSubscript:(GKGoal *)goal;
+- (nullable NSNumber *)objectForKeyedSubscript:(GKGoal *)goal;
 
 @end
 

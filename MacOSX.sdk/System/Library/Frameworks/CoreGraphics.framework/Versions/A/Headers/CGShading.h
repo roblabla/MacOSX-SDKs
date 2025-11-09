@@ -42,8 +42,8 @@ CG_EXTERN CFTypeID CGShadingGetTypeID(void)
    shading will extend beyond the ending point of the axis. */
 
 CG_EXTERN CGShadingRef __nullable CGShadingCreateAxial(
-    CGColorSpaceRef __nullable space, CGPoint start, CGPoint end,
-    CGFunctionRef __nullable function, bool extendStart, bool extendEnd)
+    CGColorSpaceRef cg_nullable space, CGPoint start, CGPoint end,
+    CGFunctionRef cg_nullable function, bool extendStart, bool extendEnd)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Create a shading defining a color blend which varies between two circles.
@@ -62,21 +62,21 @@ CG_EXTERN CGShadingRef __nullable CGShadingCreateAxial(
    circle. */
 
 CG_EXTERN CGShadingRef __nullable CGShadingCreateRadial(
-    CGColorSpaceRef __nullable space,
+    CGColorSpaceRef cg_nullable space,
     CGPoint start, CGFloat startRadius, CGPoint end, CGFloat endRadius,
-    CGFunctionRef __nullable function, bool extendStart, bool extendEnd)
+    CGFunctionRef cg_nullable function, bool extendStart, bool extendEnd)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain(shading)', except it doesn't crash (as CFRetain
    does) if `shading' is NULL. */
 
-CG_EXTERN CGShadingRef __nullable CGShadingRetain(CGShadingRef __nullable shading)
+CG_EXTERN CGShadingRef cg_nullable CGShadingRetain(CGShadingRef cg_nullable shading)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(shading)', except it doesn't crash (as CFRelease
    does) if `shading' is NULL. */
 
-CG_EXTERN void CGShadingRelease(CGShadingRef __nullable shading)
+CG_EXTERN void CGShadingRelease(CGShadingRef cg_nullable shading)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 CF_ASSUME_NONNULL_END

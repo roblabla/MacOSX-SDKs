@@ -9,11 +9,12 @@
 #import <StoreKit/StoreKitDefines.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
 
-extern NSString * const SKErrorDomain NS_AVAILABLE(10_7, NA);
+SK_EXTERN NSString * const SKErrorDomain NS_AVAILABLE_MAC(10_7);
 
 // error codes for the SKErrorDomain
-enum {
+typedef NS_ENUM(NSInteger, SKErrorCode) {
     SKErrorUnknown,
     SKErrorClientInvalid,       // client is not allowed to issue the request, etc.
     SKErrorPaymentCancelled,    // user cancelled the request, etc.
@@ -21,3 +22,4 @@ enum {
     SKErrorPaymentNotAllowed    // this machine is not allowed to make the payment
 };
 
+NS_ASSUME_NONNULL_END

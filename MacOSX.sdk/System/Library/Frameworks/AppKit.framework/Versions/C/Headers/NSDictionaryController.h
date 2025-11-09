@@ -1,7 +1,7 @@
 /*
 	NSDictionaryController.h
 	Application Kit
-	Copyright (c) 2002-2015, Apple Inc.
+	Copyright (c) 2002-2016, Apple Inc.
 	All rights reserved.
  */
 
@@ -31,9 +31,9 @@ NS_CLASS_AVAILABLE(10_11, NA)
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSDictionaryController : NSArrayController {
 @private
-    void *_reserved5;
-    void *_reserved6;
-    void *_reserved7;
+    void *_reserved5 __unused;
+    void *_reserved6 __unused;
+    void *_reserved7 __unused;
 	id _contentDictionary;
 	NSString *_initialKey;
 	id _initialValue;

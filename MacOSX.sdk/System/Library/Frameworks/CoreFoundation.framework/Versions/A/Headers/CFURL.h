@@ -1,5 +1,5 @@
 /*	CFURL.h
-	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2016, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFURL__)
@@ -55,7 +55,7 @@ CFURLRef CFURLCreateWithBytes(CFAllocatorRef allocator, const UInt8 *URLBytes, C
 CF_EXPORT
 CFDataRef CFURLCreateData(CFAllocatorRef allocator, CFURLRef url, CFStringEncoding encoding, Boolean escapeWhitespace);
 
-/* Any escape sequences in URLString will be interpreted via UTF-8. */
+/* Any percent-escape sequences in URLString will be interpreted via UTF-8. URLString must be a valid URL string. */
 CF_EXPORT
 CFURLRef CFURLCreateWithString(CFAllocatorRef allocator, CFStringRef URLString, CFURLRef baseURL);
 
@@ -116,7 +116,7 @@ Boolean CFURLGetFileSystemRepresentation(CFURLRef url, Boolean resolveAgainstBas
 CF_EXPORT
 CFURLRef CFURLCopyAbsoluteURL(CFURLRef relativeURL);
 
-/* Returns the URL's string. */
+/* Returns the URL's string. Percent-escape sequences are not removed. */
 CF_EXPORT
 CFStringRef CFURLGetString(CFURLRef anURL);
 
@@ -148,38 +148,38 @@ a relative URL against its base).  The full URL is therefore
 If a given CFURL can be decomposed (that is, conforms to RFC 1808), you
 can ask for each of the four basic pieces (scheme, net location, path,
 and resource specifer) separately, as well as for its base URL.  The
-basic pieces are returned with any percent escape sequences still in
+basic pieces are returned with any percent-escape sequences still in
 place (although note that the scheme may not legally include any
-percent escapes); this is to allow the caller to distinguish between
-percent sequences that may have syntactic meaning if replaced by the
+percent-escapes); this is to allow the caller to distinguish between
+percent-escape sequences that may have syntactic meaning if replaced by the
 character being escaped (for instance, a '/' in a path component).
 Since only the individual schemes know which characters are
-syntactically significant, CFURL cannot safely replace any percent
+syntactically significant, CFURL cannot safely replace any percent-
 escape sequences.  However, you can use
 CFURLCreateStringByReplacingPercentEscapes() to create a new string with
-the percent escapes removed; see below.
+the percent-escapes removed; see below.
 
 If a given CFURL can not be decomposed, you can ask for its scheme and its
 resource specifier; asking it for its net location or path will return NULL.
 
 To get more refined information about the components of a decomposable
 CFURL, you may ask for more specific pieces of the URL, expressed with
-the percent escapes removed.  The available functions are CFURLCopyHostName(),
+the percent-escapes removed.  The available functions are CFURLCopyHostName(),
 CFURLGetPortNumber() (returns an Int32), CFURLCopyUserName(),
 CFURLCopyPassword(), CFURLCopyQuery(), CFURLCopyParameters(), and
 CFURLCopyFragment().  Because the parameters, query, and fragment of an
 URL may contain scheme-specific syntaxes, these methods take a second
 argument, giving a list of characters which should NOT be replaced if
-percent escaped.  For instance, the ftp parameter syntax gives simple
+percent-escaped.  For instance, the ftp parameter syntax gives simple
 key-value pairs as "<key>=<value>;"  Clearly if a key or value includes
 either '=' or ';', it must be escaped to avoid corrupting the meaning of
 the parameters, so the caller may request the parameter string as
 
 CFStringRef myParams = CFURLCopyParameters(ftpURL, CFSTR("=;%"));
 
-requesting that all percent escape sequences be replaced by the represented
+requesting that all percent-escape sequences be replaced by the represented
 characters, except for escaped '=', '%' or ';' characters.  Pass the empty
-string (CFSTR("")) to request that all percent escapes be replaced, or NULL
+string (CFSTR("")) to request that all percent-escapes be replaced, or NULL
 to request that none be.
 */
 
@@ -187,12 +187,10 @@ to request that none be.
 CF_EXPORT
 Boolean CFURLCanBeDecomposed(CFURLRef anURL); 
 
-/* The next several methods leave any percent escape sequences intact */
-
 CF_EXPORT
 CFStringRef CFURLCopyScheme(CFURLRef anURL);
 
-/* NULL if CFURLCanBeDecomposed(anURL) is false */
+/* Percent-escape sequences are not removed. NULL if CFURLCanBeDecomposed(anURL) is false */
 CF_EXPORT
 CFStringRef CFURLCopyNetLocation(CFURLRef anURL); 
 
@@ -204,15 +202,17 @@ CFStringRef CFURLCopyNetLocation(CFURLRef anURL);
 /* the normal POSIX appearance); CFURLCopyStrictPath()'s return value omits any */
 /* leading slash, and uses isAbsolute to report whether the URL's path is absolute. */
 
-/* CFURLCopyFileSystemPath() returns the URL's path as a file system path for the */
-/* given path style.  All percent escape sequences are replaced.  The URL is not */
-/* resolved against its base before computing the path. */
+/* Percent-escape sequences are not removed. */
 CF_EXPORT
 CFStringRef CFURLCopyPath(CFURLRef anURL);
 
+/* Percent-escape sequences are not removed. */
 CF_EXPORT
 CFStringRef CFURLCopyStrictPath(CFURLRef anURL, Boolean *isAbsolute);
 
+/* CFURLCopyFileSystemPath() returns the URL's path as a file system path for the */
+/* given path style.  All percent-escape sequences are removed.  The URL is not */
+/* resolved against its base before computing the path. */
 CF_EXPORT
 CFStringRef CFURLCopyFileSystemPath(CFURLRef anURL, CFURLPathStyle pathStyle);
 
@@ -223,24 +223,29 @@ Boolean CFURLHasDirectoryPath(CFURLRef anURL);
 
 /* Any additional resource specifiers after the path.  For URLs */
 /* that cannot be decomposed, this is everything except the scheme itself. */
+/* Percent-escape sequences are not removed. */
 CF_EXPORT
 CFStringRef CFURLCopyResourceSpecifier(CFURLRef anURL); 
 
+/* Percent-escape sequences are removed. */
 CF_EXPORT
 CFStringRef CFURLCopyHostName(CFURLRef anURL);
 
 CF_EXPORT
 SInt32 CFURLGetPortNumber(CFURLRef anURL); /* Returns -1 if no port number is specified */
 
+/* Percent-escape sequences are removed. */
 CF_EXPORT
 CFStringRef CFURLCopyUserName(CFURLRef anURL);
 
+/* Percent-escape sequences are removed. */
 CF_EXPORT
 CFStringRef CFURLCopyPassword(CFURLRef anURL);
 
-/* These remove all percent escape sequences except those for */
+/* CFURLCopyParameterString, CFURLCopyQueryString, and CFURLCopyFragment */
+/* remove all percent-escape sequences except those for */
 /* characters in charactersToLeaveEscaped.  If charactersToLeaveEscaped */
-/* is empty (""), all percent escape sequences are replaced by their */
+/* is empty (""), all percent-escape sequences are replaced by their */
 /* corresponding characters.  If charactersToLeaveEscaped is NULL, */
 /* then no escape sequences are removed at all */
 CF_EXPORT
@@ -252,15 +257,13 @@ CFStringRef CFURLCopyQueryString(CFURLRef anURL, CFStringRef charactersToLeaveEs
 CF_EXPORT
 CFStringRef CFURLCopyFragment(CFURLRef anURL, CFStringRef charactersToLeaveEscaped);
 
+/* Percent-escape sequences are removed. */
 CF_EXPORT
 CFStringRef CFURLCopyLastPathComponent(CFURLRef url);
 
+/* Percent-escape sequences are removed. */
 CF_EXPORT
 CFStringRef CFURLCopyPathExtension(CFURLRef url);
-
-/* These functions all treat the base URL of the supplied url as */
-/* invariant.  In other words, the URL returned will always have */
-/* the same base as the URL supplied as an argument. */
 
 CF_EXPORT
 CFURLRef CFURLCreateCopyAppendingPathComponent(CFAllocatorRef allocator, CFURLRef url, CFStringRef pathComponent, Boolean isDirectory);
@@ -365,23 +368,23 @@ fragment            (60, 8)             (59, 9)
 CF_EXPORT
 CFRange CFURLGetByteRangeForComponent(CFURLRef url, CFURLComponentType component, CFRange *rangeIncludingSeparators);
 
-/* Returns a string with any percent escape sequences that do NOT */
+/* Returns a string with any percent-escape sequences that do NOT */
 /* correspond to characters in charactersToLeaveEscaped with their */
-/* equivalent.  Returns NULL on failure (if an invalid percent sequence */
+/* equivalent.  Returns NULL on failure (if an invalid percent-escape sequence */
 /* is encountered), or the original string (retained) if no characters */
-/* need to be replaced. Pass NULL to request that no percent escapes be */
-/* replaced, or the empty string (CFSTR("")) to request that all percent */
-/* escapes be replaced.  Uses UTF8 to interpret percent escapes. */
+/* need to be replaced. Pass NULL to request that no percent-escapes be */
+/* replaced, or the empty string (CFSTR("")) to request that all percent- */
+/* escapes be replaced.  Uses UTF8 to interpret percent-escapes. */
 CF_EXPORT
 CFStringRef CFURLCreateStringByReplacingPercentEscapes(CFAllocatorRef allocator, CFStringRef originalString, CFStringRef charactersToLeaveEscaped);
 
-/* As above, but allows you to specify the encoding to use when interpreting percent escapes */
+/* As above, but allows you to specify the encoding to use when interpreting percent-escapes */
 CF_EXPORT
 CFStringRef CFURLCreateStringByReplacingPercentEscapesUsingEncoding(CFAllocatorRef allocator, CFStringRef origString, CFStringRef charsToLeaveEscaped, CFStringEncoding encoding) CF_DEPRECATED(10_0, 10_11, 2_0, 9_0, "Use [NSString stringByRemovingPercentEncoding] or CFURLCreateStringByReplacingPercentEscapes() instead, which always uses the recommended UTF-8 encoding.");
 
 /* Creates a copy or originalString, replacing certain characters with */
-/* the equivalent percent escape sequence based on the encoding specified. */
-/* If the originalString does not need to be modified (no percent escape */
+/* the equivalent percent-escape sequence based on the encoding specified. */
+/* If the originalString does not need to be modified (no percent-escape */
 /* sequences are missing), may retain and return originalString. */
 /* If you are uncertain of the correct encoding, you should use UTF-8, */
 /* which is the encoding designated by RFC 2396 as the correct encoding */
@@ -744,7 +747,7 @@ const CFStringRef kCFURLContentModificationDateKey CF_AVAILABLE(10_6, 4_0);
 
 CF_EXPORT
 const CFStringRef kCFURLAttributeModificationDateKey CF_AVAILABLE(10_6, 4_0);
-    /* The time the resource's attributes were last modified (Read-write, value type CFDate) */
+    /* The time the resource's attributes were last modified (Read-only, value type CFDate) */
 
 CF_EXPORT
 const CFStringRef kCFURLLinkCountKey CF_AVAILABLE(10_6, 4_0);
@@ -771,20 +774,20 @@ const CFStringRef kCFURLLabelNumberKey CF_AVAILABLE(10_6, 4_0);
     /* The label number assigned to the resource (Read-write, value type CFNumber) */
 
 CF_EXPORT
-const CFStringRef kCFURLLabelColorKey CF_AVAILABLE(10_6, 4_0);
-    /* The color of the assigned label (Currently not implemented, value type CGColorRef, must link with Application Services) */
+const CFStringRef kCFURLLabelColorKey API_DEPRECATED("Use NSURLLabelColorKey", macosx(10.6, 10.12), ios(4.0, 10.0), watchos(2.0, 3.0), tvos(9.0, 10.0));
+    /* not implemented */
 
 CF_EXPORT
 const CFStringRef kCFURLLocalizedLabelKey CF_AVAILABLE(10_6, 4_0);
     /* The user-visible label text (Read-only, value type CFString) */
 
 CF_EXPORT
-const CFStringRef kCFURLEffectiveIconKey CF_AVAILABLE(10_6, 4_0);
-    /* The icon normally displayed for the resource (Read-only, value type CGImageRef, must link with Application Services) */
+const CFStringRef kCFURLEffectiveIconKey API_DEPRECATED("Use NSURLEffectiveIconKey", macosx(10.6, 10.12), ios(4.0, 10.0), watchos(2.0, 3.0), tvos(9.0, 10.0));
+    /* not implemented */
 
 CF_EXPORT
-const CFStringRef kCFURLCustomIconKey CF_AVAILABLE(10_6, 4_0);
-    /* The custom icon assigned to the resource, if any (Currently not implemented, value type CGImageRef, must link with Application Services) */
+const CFStringRef kCFURLCustomIconKey API_DEPRECATED("Use NSURLCustomIconKey", macosx(10.6, 10.12), ios(4.0, 10.0), watchos(2.0, 3.0), tvos(9.0, 10.0));
+    /* not implemented */
 
 CF_EXPORT
 const CFStringRef kCFURLFileResourceIdentifierKey CF_AVAILABLE(10_7, 5_0);
@@ -825,6 +828,10 @@ const CFStringRef kCFURLTagNamesKey CF_AVAILABLE(10_9, NA);
 CF_EXPORT
 const CFStringRef kCFURLPathKey CF_AVAILABLE(10_8, 6_0);
     /* the URL's path as a file system path (Read-only, value type CFString) */
+
+CF_EXPORT
+const CFStringRef kCFURLCanonicalPathKey API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+    /* the URL's path as a canonical absolute file system path (Read-only, value type CFString) */
 
 CF_EXPORT
 const CFStringRef kCFURLIsMountTriggerKey CF_AVAILABLE(10_7, 4_0);
@@ -1034,6 +1041,30 @@ const CFStringRef kCFURLVolumeNameKey CF_AVAILABLE(10_7, 5_0);
 CF_EXPORT
 const CFStringRef kCFURLVolumeLocalizedNameKey CF_AVAILABLE(10_7, 5_0);
     /* The user-presentable name of the volume (Read-only, value type CFString) */
+
+CF_EXPORT
+const CFStringRef kCFURLVolumeIsEncryptedKey API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+    /* true if the volume is encrypted. (Read-only, value type CFBoolean) */
+
+CF_EXPORT
+const CFStringRef kCFURLVolumeIsRootFileSystemKey API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+    /* true if the volume is the root filesystem. (Read-only, value type CFBoolean) */
+
+CF_EXPORT
+const CFStringRef kCFURLVolumeSupportsCompressionKey API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+    /* true if the volume supports transparent decompression of compressed files using decmpfs. (Read-only, value type CFBoolean) */
+
+CF_EXPORT
+const CFStringRef kCFURLVolumeSupportsFileCloningKey API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+    /* true if the volume supports clonefile(2) (Read-only, value type CFBoolean) */
+
+CF_EXPORT
+const CFStringRef kCFURLVolumeSupportsSwapRenamingKey API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+    /* true if the volume supports renamex_np(2)'s RENAME_SWAP option (Read-only, value type CFBoolean) */
+
+CF_EXPORT
+const CFStringRef kCFURLVolumeSupportsExclusiveRenamingKey API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+    /* true if the volume supports renamex_np(2)'s RENAME_EXCL option (Read-only, value type CFBoolean) */
 
 /* UbiquitousItem Properties */
 

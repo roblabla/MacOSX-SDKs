@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2004, 2012-2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2004, 2012-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -444,7 +444,7 @@ ctl_getenqueuespace(kern_ctl_ref kctlref, u_int32_t unit, size_t *space);
 	low-water mark for the socket receive buffer.
  @param kctlref The control reference of the kernel control.
  @param unit The unit number of the kernel control instance.
- @param u_int32_t The address at which to return the current difference
+ @param difference The address at which to return the current difference
 	between the low-water mark for the socket and the number of bytes
 	enqueued. 0 indicates that the socket is readable by the client
 	(the number of bytes in the buffer is above the low-water mark).

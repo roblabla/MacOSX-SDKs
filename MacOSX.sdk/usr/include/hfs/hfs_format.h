@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -30,15 +30,12 @@
 
 #include <sys/types.h>
 #include <sys/appleapiopts.h>
-#include <hfs/hfs_unistr.h>
+#include "hfs_unistr.h"
 
 /*
  * hfs_format.h
  *
  * This file describes the on-disk format for HFS and HFS Plus volumes.
- * The HFS Plus volume format is desciibed in detail in Apple Technote 1150.
- *
- * http://developer.apple.com/technotes/tn/tn1150.html
  *
  * Note: Starting 10.9, definition of struct HFSUniStr255 exists in hfs_unitstr.h
  *

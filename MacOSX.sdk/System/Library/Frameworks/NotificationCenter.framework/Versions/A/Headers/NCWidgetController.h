@@ -1,10 +1,12 @@
 /*
  * NCWidgetController.h
  * NotificationCenter.framework
- * Copyright (c) 2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2014-2015 Apple Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /* The NCWidgetController provides an interface available to both the widget
    and the providing app can coordinate whether there is widget content
@@ -30,3 +32,5 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 - (void)setHasContent:(BOOL)flag forWidgetWithBundleIdentifier:(NSString *)bundleID;
 
 @end
+
+NS_ASSUME_NONNULL_END

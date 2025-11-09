@@ -177,6 +177,23 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 - (instancetype)initWithPixelBufferAttributes:(nullable NSDictionary<NSString *, id> *)pixelBufferAttributes NS_DESIGNATED_INITIALIZER;
 
 /*!
+	@method			initWithOutputSettings:
+	@abstract		Returns an instance of AVPlayerItemVideoOutput, initialized with the specified output settings, for video image output.
+	@param			outputSettings
+					The client requirements for output CVPixelBuffers, expressed using the constants in AVVideoSettings.h.
+ 
+					For uncompressed video output, start with kCVPixelBuffer* keys in <CoreVideo/CVPixelBuffer.h>.
+	
+					In addition to the keys in CVPixelBuffer.h, uncompressed video settings dictionaries may also contain the following keys:
+ 
+					AVVideoAllowWideColorKey
+ 
+	@result			An instance of AVPlayerItemVideoOutput.
+ */
+
+- (instancetype)initWithOutputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings NS_AVAILABLE(10_12, 10_0) NS_DESIGNATED_INITIALIZER;
+
+/*!
 	@method			hasNewPixelBufferForItemTime:
 	@abstract		Query if any new video output is available for an item time.
 	@discussion

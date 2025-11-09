@@ -1,7 +1,7 @@
 /*
         NSMovie.h
         Application Kit
-        Copyright (c) 2000-2015, Apple Inc.
+        Copyright (c) 2000-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -26,12 +26,14 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_5, "Use QTMovie instead")
   @private
     void*    _movie;
     NSURL*   _url;
+#ifndef __OBJC2__
     struct {
 	int dispose:1;
 	int reserved:31;
     } _movieFlags;
     long     _reserved1;
     long     _reserved2;
+#endif
 }
 
 #if !__LP64__

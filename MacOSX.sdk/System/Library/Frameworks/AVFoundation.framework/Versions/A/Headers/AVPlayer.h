@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2016 Apple Inc. All rights reserved.
 
 */
 
@@ -83,7 +83,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@result			An instance of AVPlayer
 	@discussion		Useful in order to play items for which an AVAsset has previously been created. See -[AVPlayerItem initWithAsset:].
 */
-+ (instancetype)playerWithPlayerItem:(AVPlayerItem *)item;
++ (instancetype)playerWithPlayerItem:(nullable AVPlayerItem *)item;
 
 /*!
 	@method			initWithURL:
@@ -101,7 +101,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@result			An instance of AVPlayer
 	@discussion		Useful in order to play items for which an AVAsset has previously been created. See -[AVPlayerItem initWithAsset:].
 */
-- (instancetype)initWithPlayerItem:(AVPlayerItem *)item;
+- (instancetype)initWithPlayerItem:(nullable AVPlayerItem *)item;
 
 /*!
  @property status
@@ -132,22 +132,112 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @interface AVPlayer (AVPlayerPlaybackControl)
 
-/* indicates the current rate of playback; 0.0 means "stopped", 1.0 means "play at the natural rate of the current item" */
+/*!
+ @property		rate
+ @abstract		Indicates the desired rate of playback; 0.0 means "paused", 1.0 indicates a desire to play at the natural rate of the current item.
+ @discussion
+ Setting the value of rate to 0.0 pauses playback, causing the value of timeControlStatus to change to AVPlayerTimeControlStatusPaused.
+ Setting the rate to a non-zero value causes the value of timeControlStatus to become either AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate or AVPlayerTimeControlStatusPlaying, depending on whether sufficient media data has been buffered for playback to occur and whether the player's default behavior of waiting in order to minimize stalling is permitted. See discussion of AVPlayerTimeControlStatus for more details.
+ 
+ AVPlayer can reset the desired rate to 0.0 when a change in overall state requires playback to be halted, such as when an interruption occurs on iOS, as announced by AVAudioSession, or when the playback buffer becomes empty and playback stalls while automaticallyWaitsToMinimizeStalling is NO.
+
+ The effective rate of playback may differ from the desired rate even while timeControlStatus is AVPlayerTimeControlStatusPlaying, if the processing algorithm in use for managing audio pitch requires quantization of playback rate. For information about quantization of rates for audio processing, see AVAudioProcessingSettings.h. You can always obtain the effective rate of playback from the currentItem's timebase; see the timebase property of AVPlayerItem.
+ */
 @property (nonatomic) float rate;
 
 /*!
-	@method			play
-	@abstract		Begins playback of the current item.
-	@discussion		Same as setting rate to 1.0.
-*/
+ @method		play
+ @abstract		Signals the desire to begin playback at the current item's natural rate.
+ @discussion	Equivalent to setting the value of rate to 1.0.
+ */
 - (void)play;
 
 /*!
-	@method			pause
-	@abstract		Pauses playback.
-	@discussion		Same as setting rate to 0.0.
-*/
+ @method		pause
+ @abstract		Pauses playback.
+ @discussion	Equivalent to setting the value of rate to 0.0.
+ */
 - (void)pause;
+
+/*!
+ @enum AVPlayerTimeControlStatus
+ @abstract
+	These constants are the allowable values of AVPlayer's timeControlStatus property. This discussion pertains when automaticallyWaitsToMinimizeStalling is YES, the default setting, and exceptions are discussed in connection with automaticallyWaitsToMinimizeStalling.
+ 
+ @constant	 AVPlayerTimeControlStatusPaused
+	This state is entered upon receipt of a -pause message, an invocation of -setRate: with a value of 0.0, when a change in overall state requires playback to be halted, such as when an interruption occurs on iOS, as announced by AVAudioSession.
+    In this state, playback is paused indefinitely and will not resume until 1) a subsequent -play message is received or 2) a -setRate: or -playImmediatelyAtRate: message with a non-zero value for rate is received and sufficient media data has been buffered for playback to proceed.
+ @constant	 AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate
+    This state is entered when 1) the playback buffer becomes empty and playback stalls in AVPlayerTimeControlStatusPlaying, 2) when rate is set from zero to non-zero in AVPlayerTimeControlStatusPaused and insufficient media data has been buffered for playback to occur, or 3) when the player has no item to play, i.e. when the receiver's currentItem is nil.
+    In this state, the value of the rate property is not currently effective but instead indicates the rate at which playback will start or resume. Refer to the value of reasonForWaitingToPlay for details about why the receiver is waiting and the conditions that allow waitStatus to change to AVPlayerWaitStatusPlaying.
+	While waiting for buffering, you can attempt to start playback of any available media data via -playImmediatelyAtRate:.
+ @constant	 AVPlayerTimeControlStatusPlaying
+	In this state, playback is currently progressing and rate changes will take effect immediately. Should playback stall because of insufficient media data, timeControlStatus will change to AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate.
+ */
+typedef NS_ENUM(NSInteger, AVPlayerTimeControlStatus) {
+	AVPlayerTimeControlStatusPaused,
+	AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate,
+	AVPlayerTimeControlStatusPlaying
+} NS_ENUM_AVAILABLE(10_12, 10_0);
+
+
+/*!
+ @property		timeControlStatus
+ @abstract		Indicates whether playback is currently paused indefinitely, suspend while waiting for appropriate conditions, or in progress.
+ @discussion    For possible values and discussion, see AVPlayerTimeControlStatus.
+ 
+When automaticallyWaitsToMinimizeStalling is YES, absent intervention in the form of invocations of -setRate: or -pause or, on iOS, an interruption that requires user intervention before playback can resume, the value of the property timeControlStatus automatically changes between AVPlayerTimeControlStatusPlaying and AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate depending on whether sufficient media data is available to continue playback. This property is key value observable.
+*/
+@property (nonatomic, readonly) AVPlayerTimeControlStatus timeControlStatus NS_AVAILABLE(10_12, 10_0);
+
+/*!
+ @constant AVPlayerWaitingToMinimizeStallsReason
+ @abstract Indicates that the player is waiting for appropriate playback buffer conditions before starting playback
+ @discussion
+	The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and playback at the specified rate would likely cause the playback buffer to become empty before playback completes. Playback will resume when 1) playback at the specified rate will likely complete without a stall or 2) the playback buffer becomes full, meaning no forther buffering of media data is possible.
+	When the value of automaticallyWaitsToMinimizeStalling is NO, timeControlStatus cannot become AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate for this reason.
+ */
+AVF_EXPORT NSString *const AVPlayerWaitingToMinimizeStallsReason NS_AVAILABLE(10_12, 10_0);
+
+/*!
+ @constant AVPlayerWaitingWhileEvaluatingBufferingRateReason
+ @abstract Indicates that the player is monitoring the playback buffer fill rate to determine if playback is likely to complete without interruptions.
+ @discussion
+	The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and it has not yet determined if starting playback at the specified rate would likely cause the buffer to become empty. When the brief initial monitoring period is over, either playback will begin or the value of reasonForWaitingToPlayAtSpecifiedRate will switch to AVPlayerWaitingToMinimizeStallsReason.
+	Recommended practice is not to show UI indicating the waiting state to the user while the value of reasonForWaitingToPlayAtSpecifiedRate is AVPlayerWaitingWhileEvaluatingBufferingRateReason.
+ */
+AVF_EXPORT NSString *const AVPlayerWaitingWhileEvaluatingBufferingRateReason NS_AVAILABLE(10_12, 10_0);
+
+/*!
+ @constant AVPlayerWaitingWithNoItemToPlayReason
+ @abstract Indicates that the AVPlayer is waiting because its currentItem is nil
+ @discussion
+	The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and the value of currentItem is nil. When an item becomes available, either because of a call to -replaceCurrentItemWithPlayerItem: or  -insertItem: afterItem:, playback will begin or the value of reasonForWaitingToPlay will change.
+ */
+AVF_EXPORT NSString *const AVPlayerWaitingWithNoItemToPlayReason NS_AVAILABLE(10_12, 10_0);
+
+
+/*!
+ @property		reasonForWaitingToPlay
+ @abstract		Indicates the reason for waiting when the value of timeControlStatus is AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate
+ @discussion
+    When the value of timeControlStatus is AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate, this property describes why the player is currently waiting. It is nil otherwise.
+    You can use the value of reasonForWaitingToPlay to show UI indicating the player's waiting state conditionally.
+    This property is key value observable.
+    Possible values are AVPlayerWaitingWithNoItemToPlayReason, AVPlayerWaitingWhileEvaluatingBufferingRateReason, and AVPlayerWaitingToMinimizeStallsReason.
+*/
+
+@property (nonatomic, readonly, nullable) NSString *reasonForWaitingToPlay NS_AVAILABLE(10_12, 10_0);
+
+
+/*!
+ @method		playImmediatelyAtRate:
+ @abstract		Immediately plays the available media data at the specified rate.
+ @discussion
+ When the player's currentItem has a value of NO for playbackBufferEmpty, this method causes the value of rate to change to the specified rate, the value of timeControlStatus to change to AVPlayerTimeControlStatusPlaying, and the receiver to play the available media immediately, whether or not prior buffering of media data is sufficient to ensure smooth playback.
+ If insufficient media data is buffered for playback to start (e.g. if the current item has a value of YES for playbackBufferEmpty), the receiver will act as if the buffer became empty during playback, except that no AVPlayerItemPlaybackStalledNotification will be posted.
+ */
+- (void)playImmediatelyAtRate:(float)rate NS_AVAILABLE(10_12, 10_0);
 
 @end
 
@@ -282,6 +372,31 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 
 @interface AVPlayer (AVPlayerAdvancedRateControl)
 
+
+/*!
+ @property		automaticallyWaitsToMinimizeStalling
+ @abstract		Indicates that the player is allowed to delay playback at the specified rate in order to minimize stalling
+ @discussion
+ 
+ When this property is YES, whenever 1) the rate is set from zero to non-zero or 2) the playback buffer becomes empty and playback stalls, the player will attempt to determine if, at the specified rate, its currentItem will play to the end without interruptions. Should it determine that such interruptions would occur and these interruptions can be avoided by delaying the start or resumption of playback, the value of timeControlStatus will become AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate and playback will start automatically when the likelihood of stalling has been minimized.
+ 
+ You may want to set this property to NO when you need precise control over playback start times, e.g., when synchronizing multiple instances of AVPlayer, and you should set it to NO if you use an AVAssetResourceLoader delegate to load media data (more on this below). If the value of this property is NO, reasonForWaitingToPlay cannot assume a value of AVPlayerWaitingToMinimizeStallsReason.
+ This implies that setting rate to a non-zero value in AVPlayerTimeControlStatusPaused will cause playback to start immediately as long as the playback buffer is not empty. When the playback buffer becomes empty during AVPlayerTimeControlStatusPlaying and playback stalls, playback state will switch to AVPlayerTimeControlStatusPaused and the rate will become 0.0.
+ 
+ Changing the value of this property to NO while the value of timeControlStatus is AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate with a reasonForWaitingToPlay of AVPlayerWaitingToMinimizeStallsReason will cause the player to attempt playback at the specified rate immediately.
+ 
+ For clients linked against iOS 10.0 and running on that version or later or linked against OS X 10.12 and running on that version or later, the default value of this property is YES.
+ In versions of iOS prior to iOS 10.0 and versions of OS X prior to 10.12, this property is unavailable, and the behavior of the AVPlayer corresponds to the type of content being played. For streaming content, including HTTP Live Streaming, the AVPlayer acts as if automaticallyWaitsToMinimizeStalling is YES. For file-based content, including file-based content accessed via progressive http download, the AVPlayer acts as if automaticallyWaitsToMinimizeStalling is NO.
+
+ If you employ an AVAssetResourceLoader delegate that loads media data for playback, you should set the value of your AVPlayer’s automaticallyWaitsToMinimizeStalling property to NO. Allowing the value of automaticallyWaitsToMinimizeStalling to remain YES when an AVAssetResourceLoader delegate is used for the loading of media data can result in poor start-up times for playback and poor recovery from stalls, because the behaviors provided by AVPlayer when automaticallyWaitsToMinimizeStalling has a value of YES depend on predictions of the future availability of media data that that do not function as expected when data is loaded via a client-controlled means, using the AVAssetResourceLoader delegate interface.
+
+ You can allow the value of automaticallyWaitsToMinimizeStalling to remain YES if you use an AVAssetResourceLoader delegate to manage content keys for FairPlay Streaming, to provide dynamically-generated master playlists for HTTP Live Streaming, or to respond to authentication challenges, but not to load media data for playback.
+*/
+
+@property (nonatomic) BOOL automaticallyWaitsToMinimizeStalling NS_AVAILABLE(10_12, 10_0);
+
+
+
 /*!
 	@method			setRate:time:atHostTime:
 	@abstract		Simultaneously sets the playback rate and the relationship between the current item's current time and host time.
@@ -290,14 +405,14 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 					The current item's timebase is adjusted so that its time will be (or was) itemTime when host time is (or was) hostClockTime.
 					In other words: if hostClockTime is in the past, the timebase's time will be interpolated as though the timebase has been running at the requested rate since that time.  If hostClockTime is in the future, the timebase will immediately start running at the requested rate from an earlier time so that it will reach the requested itemTime at the requested hostClockTime.  (Note that the item's time will not jump backwards, but instead will sit at itemTime until the timebase reaches that time.)
 
-					Note that advanced rate control is not currently supported for HTTP Live Streaming.
+					Note that setRate:time:atHostTime: is not currently supported for HTTP Live Streaming or when automaticallyWaitsToMinimizeStalling is YES. For clients linked against iOS 10.0 and later or OS X 12.0 and later, invoking setRate:time:atHostTime: when automaticallyWaitsToMinimizeStalling is YES will raise an NSInvalidArgument exception.
 	@param itemTime	The time to start playback from, specified precisely (i.e., with zero tolerance).
 					Pass kCMTimeInvalid to use the current item's current time.
 	@param hostClockTime
 					The host time at which to start playback.
 					If hostClockTime is specified, the player will not ensure that media data is loaded before the timebase starts moving.
 					If hostClockTime is kCMTimeInvalid, the rate and time will be set together, but without external synchronization;
-					a host time in the near future will be used, allowing some time for data media loading.
+					a host time in the near future will be used, allowing some time for media data loading.
 */
 - (void)setRate:(float)rate time:(CMTime)itemTime atHostTime:(CMTime)hostClockTime NS_AVAILABLE(10_8, 6_0);
 
@@ -519,6 +634,8 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 
 @end
 
+#endif // TARGET_OS_IPHONE
+
 /*
 	@category		AVPlayer (AVPlayerProtectedContent)
 	@abstract		Methods supporting protected content.
@@ -542,11 +659,9 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 		current item. These requirements are inherent to the content itself and cannot be externally specified.
 		If the current item does not require external protection, the value of this property will be NO.
  */
-@property (nonatomic, readonly) BOOL outputObscuredDueToInsufficientExternalProtection NS_AVAILABLE_IOS(6_0);
+@property (nonatomic, readonly) BOOL outputObscuredDueToInsufficientExternalProtection NS_AVAILABLE(10_12, 6_0);
 
 @end
-
-#endif // TARGET_OS_IPHONE
 
 /*!
 	@class			AVQueuePlayer

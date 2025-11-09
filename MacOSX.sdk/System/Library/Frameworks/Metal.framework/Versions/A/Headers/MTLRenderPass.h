@@ -21,6 +21,8 @@ typedef NS_ENUM(NSUInteger, MTLStoreAction) {
     MTLStoreActionDontCare = 0,
     MTLStoreActionStore = 1,
     MTLStoreActionMultisampleResolve = 2,
+    MTLStoreActionStoreAndMultisampleResolve NS_ENUM_AVAILABLE(10_12,10_0) = 3,
+    MTLStoreActionUnknown NS_ENUM_AVAILABLE(10_12,10_0) = 4,
 } NS_ENUM_AVAILABLE(10_11, 8_0);
 
 typedef struct
@@ -116,6 +118,17 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 
 @end
 
+/*!
+ @enum MTLMultisampleDepthResolveFilter
+ @abstract Controls the MSAA depth resolve operation. Supported on iOS GPU Family 3 and later.
+ */
+typedef NS_ENUM(NSUInteger, MTLMultisampleDepthResolveFilter)
+{
+    MTLMultisampleDepthResolveFilterSample0 = 0,
+    MTLMultisampleDepthResolveFilterMin = 1,
+    MTLMultisampleDepthResolveFilterMax = 2,
+} NS_ENUM_AVAILABLE_IOS(9_0);
+
 NS_CLASS_AVAILABLE(10_11, 8_0)
 @interface MTLRenderPassDepthAttachmentDescriptor : MTLRenderPassAttachmentDescriptor
 
@@ -124,6 +137,12 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @abstract The clear depth value to be used if the loadAction property is MTLLoadActionClear
  */
 @property (nonatomic) double clearDepth;
+
+/*!
+ @property resolveFilter
+ @abstract The filter to be used for depth multisample resolve.  Defaults to MTLMultisampleDepthResolveFilterSample0.
+ */
+@property (nonatomic) MTLMultisampleDepthResolveFilter depthResolveFilter NS_AVAILABLE_IOS(9_0);
 
 @end
 
@@ -191,4 +210,5 @@ MTL_INLINE MTLClearColor MTLClearColorMake(double red, double green, double blue
     result.alpha = alpha;
     return result;
 }
+
 NS_ASSUME_NONNULL_END

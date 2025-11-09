@@ -1,7 +1,7 @@
 /*
 	NSGradient.h
 	Application Kit
-	Copyright (c) 2006-2015, Apple Inc.
+	Copyright (c) 2006-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -15,9 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSBezierPath, NSColor, NSColorSpace;
 
-typedef NSUInteger NSGradientDrawingOptions;
-
-enum {
+typedef NS_OPTIONS(NSUInteger, NSGradientDrawingOptions) {
     NSGradientDrawsBeforeStartingLocation =   (1 << 0),
     NSGradientDrawsAfterEndingLocation =    (1 << 1),
 };
@@ -53,11 +51,11 @@ NS_CLASS_AVAILABLE(10_5, NA)
 @private
     NSArray *_colorArray;
     NSColorSpace *_colorSpace;
-    __strong void *_functionRef;
+    void *_functionRef;
     void *_componentArray;
-    void *_reserved1;
-    void *_reserved2;
-    void *_reserved3;
+    void *_reserved1 __unused;
+    void *_reserved2 __unused;
+    void *_reserved3 __unused;
 }
 
 
@@ -82,7 +80,9 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* Initializes a gradient by pairing the colors provided in the color array with the locations provided in the locations array.    Each location should be a CGFloat between 0.0 and 1.0.  The color array and location array should not be empty, and should contain the same number of items.  If no color is provided for 0.0 or 1.0, the created color gradient will use the color provided at the locations closest to 0.0 and 1.0 for those values.  This is the designated initializer.
 */
-- (nullable instancetype)initWithColors:(NSArray<NSColor *> *)colorArray atLocations:(nullable const CGFloat *)locations colorSpace:(NSColorSpace *)colorSpace;
+- (nullable instancetype)initWithColors:(NSArray<NSColor *> *)colorArray atLocations:(nullable const CGFloat *)locations colorSpace:(NSColorSpace *)colorSpace NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithCoder:(NSCoder *)decoder NS_DESIGNATED_INITIALIZER;
 
 
 /* DRAWING LINEAR GRADIENTS */

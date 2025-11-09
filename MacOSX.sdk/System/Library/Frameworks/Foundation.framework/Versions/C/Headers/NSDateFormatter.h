@@ -1,5 +1,5 @@
 /*	NSDateFormatter.h
-	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSDateFormatter : NSFormatter {
 @private
     NSMutableDictionary *_attributes;
-    __strong CFDateFormatterRef _formatter;
+    CFDateFormatterRef _formatter;
     NSUInteger _counter;
 }
 
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Report the used range of the string and an NSError, in addition to the usual stuff from NSFormatter
 
-- (BOOL)getObjectValue:(out id __nullable * __nullable)obj forString:(NSString *)string range:(inout nullable NSRange *)rangep error:(out NSError **)error;
+- (BOOL)getObjectValue:(out id _Nullable * _Nullable)obj forString:(NSString *)string range:(inout nullable NSRange *)rangep error:(out NSError **)error;
 
 // Even though NSDateFormatter responds to the usual NSFormatter methods,
 //   here are some convenience methods which are a little more obvious.
@@ -66,9 +66,9 @@ typedef NS_ENUM(NSUInteger, NSDateFormatterBehavior) {
 	// no options defined, pass 0 for now
 
 // Attributes of an NSDateFormatter
-
-+ (NSDateFormatterBehavior)defaultFormatterBehavior;
-+ (void)setDefaultFormatterBehavior:(NSDateFormatterBehavior)behavior;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class) NSDateFormatterBehavior defaultFormatterBehavior;
+#endif
 
 /*
  A convenient way to generate an appropriate localized date format, and set it, in a single operation.

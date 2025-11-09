@@ -3,6 +3,15 @@
 #ifndef __LA_OBJECT_HEADER__
 #define __LA_OBJECT_HEADER__
 
+#if __has_feature(assume_nonnull)
+////  If assume_nonnull is available, use it and use nullability qualifiers.
+_Pragma("clang assume_nonnull begin")
+#else
+////  Otherwise, neuter the nullability qualifiers.
+#define __nullable
+#define __nonnull
+#endif
+
 /*!
  @class la_object_t
 
@@ -31,7 +40,7 @@
  call free( ) on LinearAlgebra objects; this will typically result in leaks.
  */
 #if OS_OBJECT_USE_OBJC
-    OS_OBJECT_DECL(la_object,);
+    OS_OBJECT_DECL(la_object);
 #   define LA_RETURNS_RETAINED OS_OBJECT_RETURNS_RETAINED
 #else
 typedef struct la_s *la_object_t;
@@ -52,7 +61,7 @@ typedef struct la_s *la_object_t;
  On a platform with the modern Objective-C runtime this is exactly equivalent
  to sending the object the -[retain] message.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY
+LA_FUNCTION LA_AVAILABILITY
 la_object_t la_retain(la_object_t object);
 #if OS_OBJECT_USE_OBJC
 #   undef la_retain
@@ -70,7 +79,7 @@ la_object_t la_retain(la_object_t object);
  On a platform with the modern Objective-C runtime this is exactly equivalent
  to sending the object the -[release] message.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY
+LA_FUNCTION LA_AVAILABILITY
 void la_release(la_object_t object);
 #if OS_OBJECT_USE_OBJC
 #   undef la_release
@@ -101,7 +110,7 @@ void la_release(la_object_t object);
  This function is not reentrant or thread-safe.  Attempting to add or remove
  attributes from multiple threads will have unpredictable results.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY
+LA_FUNCTION LA_AVAILABILITY
 void la_add_attributes(la_object_t object, la_attribute_t attributes);
 
 /*!
@@ -124,7 +133,7 @@ void la_add_attributes(la_object_t object, la_attribute_t attributes);
  This function is not reentrant or thread-safe.  Attempting to add or remove
  attributes from multiple threads will have unpredictable results.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY
+LA_FUNCTION LA_AVAILABILITY
 void la_remove_attributes(la_object_t object, la_attribute_t attributes);
 
 /*!
@@ -165,7 +174,11 @@ void la_remove_attributes(la_object_t object, la_attribute_t attributes);
  Querying status may force evaluation of parts of your computation that might
  otherwise be deferred until their results were actually needed.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY
+LA_FUNCTION LA_AVAILABILITY
 la_status_t la_status(la_object_t object);
+
+#if __has_feature(assume_nonnull)
+_Pragma("clang assume_nonnull end")
+#endif
 
 #endif // __LA_OBJECTS_HEADER__

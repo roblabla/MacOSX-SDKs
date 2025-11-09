@@ -1,5 +1,5 @@
 /*	NSRunLoop.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,8 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString * const NSDefaultRunLoopMode;
-FOUNDATION_EXPORT NSString * const NSRunLoopCommonModes NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSRunLoopMode const NSDefaultRunLoopMode;
+FOUNDATION_EXPORT NSRunLoopMode const NSRunLoopCommonModes NS_AVAILABLE(10_5, 2_0);
 
 @interface NSRunLoop : NSObject {
 @private
@@ -23,20 +23,22 @@ FOUNDATION_EXPORT NSString * const NSRunLoopCommonModes NS_AVAILABLE(10_5, 2_0);
     void	*_reserved[6];
 }
 
-+ (NSRunLoop *)currentRunLoop;
-+ (NSRunLoop *)mainRunLoop NS_AVAILABLE(10_5, 2_0);
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, strong) NSRunLoop *currentRunLoop;
+@property (class, readonly, strong) NSRunLoop *mainRunLoop NS_AVAILABLE(10_5, 2_0);
+#endif
 
-@property (nullable, readonly, copy) NSString *currentMode;
+@property (nullable, readonly, copy) NSRunLoopMode currentMode;
 
 - (CFRunLoopRef)getCFRunLoop CF_RETURNS_NOT_RETAINED;
 
-- (void)addTimer:(NSTimer *)timer forMode:(NSString *)mode;
+- (void)addTimer:(NSTimer *)timer forMode:(NSRunLoopMode)mode;
 
-- (void)addPort:(NSPort *)aPort forMode:(NSString *)mode;
-- (void)removePort:(NSPort *)aPort forMode:(NSString *)mode;
+- (void)addPort:(NSPort *)aPort forMode:(NSRunLoopMode)mode;
+- (void)removePort:(NSPort *)aPort forMode:(NSRunLoopMode)mode;
 
-- (nullable NSDate *)limitDateForMode:(NSString *)mode;
-- (void)acceptInputForMode:(NSString *)mode beforeDate:(NSDate *)limitDate;
+- (nullable NSDate *)limitDateForMode:(NSRunLoopMode)mode;
+- (void)acceptInputForMode:(NSRunLoopMode)mode beforeDate:(NSDate *)limitDate;
 
 @end
 
@@ -44,11 +46,20 @@ FOUNDATION_EXPORT NSString * const NSRunLoopCommonModes NS_AVAILABLE(10_5, 2_0);
 
 - (void)run; 
 - (void)runUntilDate:(NSDate *)limitDate;
-- (BOOL)runMode:(NSString *)mode beforeDate:(NSDate *)limitDate;
+- (BOOL)runMode:(NSRunLoopMode)mode beforeDate:(NSDate *)limitDate;
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 - (void)configureAsServer NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
 #endif
+
+/// Schedules the execution of a block on the target run loop in given modes.
+/// - parameter: modes   An array of input modes for which the block may be executed.
+/// - parameter: block   The block to execute
+- (void)performInModes:(NSArray<NSRunLoopMode> *)modes block:(void (^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+
+/// Schedules the execution of a block on the target run loop.
+/// - parameter: block   The block to execute
+- (void)performBlock:(void (^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 @end
 
@@ -56,7 +67,7 @@ FOUNDATION_EXPORT NSString * const NSRunLoopCommonModes NS_AVAILABLE(10_5, 2_0);
 
 @interface NSObject (NSDelayedPerforming)
 
-- (void)performSelector:(SEL)aSelector withObject:(nullable id)anArgument afterDelay:(NSTimeInterval)delay inModes:(NSArray<NSString *> *)modes;
+- (void)performSelector:(SEL)aSelector withObject:(nullable id)anArgument afterDelay:(NSTimeInterval)delay inModes:(NSArray<NSRunLoopMode> *)modes;
 - (void)performSelector:(SEL)aSelector withObject:(nullable id)anArgument afterDelay:(NSTimeInterval)delay;
 + (void)cancelPreviousPerformRequestsWithTarget:(id)aTarget selector:(SEL)aSelector object:(nullable id)anArgument;
 + (void)cancelPreviousPerformRequestsWithTarget:(id)aTarget;
@@ -65,7 +76,7 @@ FOUNDATION_EXPORT NSString * const NSRunLoopCommonModes NS_AVAILABLE(10_5, 2_0);
 
 @interface NSRunLoop (NSOrderedPerform)
 
-- (void)performSelector:(SEL)aSelector target:(id)target argument:(nullable id)arg order:(NSUInteger)order modes:(NSArray<NSString *> *)modes;
+- (void)performSelector:(SEL)aSelector target:(id)target argument:(nullable id)arg order:(NSUInteger)order modes:(NSArray<NSRunLoopMode> *)modes;
 - (void)cancelPerformSelector:(SEL)aSelector target:(id)target argument:(nullable id)arg;
 - (void)cancelPerformSelectorsWithTarget:(id)target;
 

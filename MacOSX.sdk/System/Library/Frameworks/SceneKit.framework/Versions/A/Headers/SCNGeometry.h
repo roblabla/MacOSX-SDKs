@@ -1,10 +1,9 @@
 //
 //  SCNGeometry.h
 //
-//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <SceneKit/SceneKitTypes.h>
 #import <SceneKit/SCNAnimation.h>
 #import <SceneKit/SCNBoundingVolume.h>
@@ -18,27 +17,40 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLBuffer;
 
 typedef NS_ENUM(NSInteger, SCNGeometryPrimitiveType) {
-	SCNGeometryPrimitiveTypeTriangles     = 0,
-	SCNGeometryPrimitiveTypeTriangleStrip = 1,
-	SCNGeometryPrimitiveTypeLine          = 2,
-	SCNGeometryPrimitiveTypePoint         = 3
+	SCNGeometryPrimitiveTypeTriangles                                                   = 0,
+	SCNGeometryPrimitiveTypeTriangleStrip                                               = 1,
+	SCNGeometryPrimitiveTypeLine                                                        = 2,
+	SCNGeometryPrimitiveTypePoint                                                       = 3,
+#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 2
+    SCNGeometryPrimitiveTypePolygon API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0)) = 4
+#endif
 };
 
-SCN_EXTERN NSString * const SCNGeometrySourceSemanticVertex;
-SCN_EXTERN NSString * const SCNGeometrySourceSemanticNormal;
-SCN_EXTERN NSString * const SCNGeometrySourceSemanticColor;
-SCN_EXTERN NSString * const SCNGeometrySourceSemanticTexcoord;
-SCN_EXTERN NSString * const SCNGeometrySourceSemanticVertexCrease NS_AVAILABLE(10_10, 8_0);
-SCN_EXTERN NSString * const SCNGeometrySourceSemanticEdgeCrease NS_AVAILABLE(10_10, 8_0);
-SCN_EXTERN NSString * const SCNGeometrySourceSemanticBoneWeights NS_AVAILABLE(10_10, 8_0);
-SCN_EXTERN NSString * const SCNGeometrySourceSemanticBoneIndices NS_AVAILABLE(10_10, 8_0);
+#if !(defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 2)
+#define SCNGeometryPrimitiveTypePolygon (SCNGeometryPrimitiveType)4
+#endif
+
+#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
+typedef NSString * SCNGeometrySourceSemantic NS_EXTENSIBLE_STRING_ENUM;
+#else
+typedef NSString * SCNGeometrySourceSemantic;
+#endif
+
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticVertex;
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticNormal;
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticColor;
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticTexcoord;
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticTangent API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticVertexCrease API_AVAILABLE(macosx(10.10));
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticEdgeCrease API_AVAILABLE(macosx(10.10));
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneWeights API_AVAILABLE(macosx(10.10));
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneIndices API_AVAILABLE(macosx(10.10));
 
 /*!
  @class SCNGeometry
  @abstract SCNGeometry is an abstract class that represents the geometry that can be attached to a SCNNode. 
  */
 
-NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNGeometry : NSObject <SCNAnimatable, SCNBoundingVolume, SCNShadable, NSCopying, NSSecureCoding>
 
 /*!
@@ -46,7 +58,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Creates and returns an empty geometry object.
  @discussion An empty geometry may be used as the lowest level of detail of a geometry.
  */
-+ (instancetype)geometry NS_AVAILABLE(10_9, 8_0);
++ (instancetype)geometry API_AVAILABLE(macosx(10.9));
 
 /*!
  @property name
@@ -105,13 +117,13 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param elements An array of geometry elements. The sort order in the array determines the mapping between materials and geometry elements.
  @discussion A geometry is made of geometry sources (at least vertices) and at least one geometry element. Multiple sources for texture coordinates are accepted. In that case the mappingChannel is implicitly set based on the order of the texture sources, starting at index 0.
 */
-+ (instancetype)geometryWithSources:(NSArray<SCNGeometrySource *> *)sources elements:(NSArray<SCNGeometryElement *> *)elements;
++ (instancetype)geometryWithSources:(NSArray<SCNGeometrySource *> *)sources elements:(nullable NSArray<SCNGeometryElement *> *)elements;
 
 /*!
  @property geometrySources
  @abstract The array of geometry sources of the receiver.
  */
-@property(nonatomic, readonly) NSArray<SCNGeometrySource *> *geometrySources NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, readonly) NSArray<SCNGeometrySource *> *geometrySources API_AVAILABLE(macosx(10.10));
 
 /*! 
  @method geometrySourcesForSemantic:
@@ -119,13 +131,13 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param semantic The semantic of the geometry sources that should be retrieved.
  @discussion Returns nil if no geometry source is found for the given semantic. May return more than one source, typically for multiple texture coordinate sources.
  */
-- (NSArray<SCNGeometrySource *> *)geometrySourcesForSemantic:(NSString *)semantic;
+- (NSArray<SCNGeometrySource *> *)geometrySourcesForSemantic:(SCNGeometrySourceSemantic)semantic;
 
 /*!
  @property geometryElements
  @abstract The array of geometry elements of the receiver.
  */
-@property(nonatomic, readonly) NSArray<SCNGeometryElement *> *geometryElements NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, readonly) NSArray<SCNGeometryElement *> *geometryElements API_AVAILABLE(macosx(10.10));
 
 /*!
  @property geometryElementCount
@@ -144,28 +156,28 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @property levelsOfDetail
  @abstract Determines the receiver's levels of detail. Defaults to nil.
  */
-@property(nonatomic, copy, nullable) NSArray<SCNLevelOfDetail *> *levelsOfDetail NS_AVAILABLE(10_9, 8_0);
+@property(nonatomic, copy, nullable) NSArray<SCNLevelOfDetail *> *levelsOfDetail API_AVAILABLE(macosx(10.9));
 
 /*!
  @property subdivisionLevel
  @abstract Specifies the subdivision level of the receiver. Defaults to 0.
  @discussion A subdivision level of 0 means no subdivision.
  */
-@property(nonatomic) NSUInteger subdivisionLevel NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) NSUInteger subdivisionLevel API_AVAILABLE(macosx(10.10));
 
 /*!
  @property edgeCreasesElement
  @abstract Specifies the edges creases that control the subdivision. Defaults to nil.
  @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
  */
-@property(nonatomic, retain, nullable) SCNGeometryElement *edgeCreasesElement NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, retain, nullable) SCNGeometryElement *edgeCreasesElement API_AVAILABLE(macosx(10.10));
 
 /*!
  @property edgeCreasesSource
  @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil.
  @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
  */
-@property(nonatomic, retain, nullable) SCNGeometrySource *edgeCreasesSource NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, retain, nullable) SCNGeometrySource *edgeCreasesSource API_AVAILABLE(macosx(10.10));
 
 @end
 
@@ -175,7 +187,6 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract A geometry source contains geometry data for a specific semantic. The data format is described by properties.
  */
 
-NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNGeometrySource : NSObject <NSSecureCoding>
 
 /*! 
@@ -190,7 +201,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param offset The offset from the beginning of the data. In bytes.
  @param stride The number of bytes from a vector to the next one in the data.
  */
-+ (instancetype)geometrySourceWithData:(NSData *)data semantic:(NSString *)semantic vectorCount:(NSInteger)vectorCount floatComponents:(BOOL)floatComponents componentsPerVector:(NSInteger)componentsPerVector bytesPerComponent:(NSInteger)bytesPerComponent dataOffset:(NSInteger)offset dataStride:(NSInteger)stride;
++ (instancetype)geometrySourceWithData:(NSData *)data semantic:(SCNGeometrySourceSemantic)semantic vectorCount:(NSInteger)vectorCount floatComponents:(BOOL)floatComponents componentsPerVector:(NSInteger)componentsPerVector bytesPerComponent:(NSInteger)bytesPerComponent dataOffset:(NSInteger)offset dataStride:(NSInteger)stride;
 
 /*!
  @method geometrySourceWithVertices:count:
@@ -251,7 +262,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  }
  
  */
-+ (instancetype)geometrySourceWithBuffer:(id <MTLBuffer>)mtlBuffer vertexFormat:(MTLVertexFormat)vertexFormat semantic:(NSString *)semantic vertexCount:(NSInteger)vertexCount dataOffset:(NSInteger)offset dataStride:(NSInteger)stride NS_AVAILABLE(10_11, 9_0);
++ (instancetype)geometrySourceWithBuffer:(id <MTLBuffer>)mtlBuffer vertexFormat:(MTLVertexFormat)vertexFormat semantic:(SCNGeometrySourceSemantic)semantic vertexCount:(NSInteger)vertexCount dataOffset:(NSInteger)offset dataStride:(NSInteger)stride API_AVAILABLE(macosx(10.11), ios(9.0));
 #endif
 
 /*! 
@@ -264,7 +275,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @property semantic
  @abstract The semantic of the geometry source
  */
-@property(nonatomic, readonly) NSString *semantic;
+@property(nonatomic, readonly) SCNGeometrySourceSemantic semantic;
 
 /*! 
  @property vectorCount
@@ -310,7 +321,6 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract A geometry element describes how vertices from a geometry source are connected together.
  */
 
-NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNGeometryElement : NSObject <NSSecureCoding>
 
 /*!

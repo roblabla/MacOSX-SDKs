@@ -28,7 +28,7 @@ typedef CGFloat CGPDFReal;
 
 /* A type to hold any object. */
 
-typedef union CGPDFObject *CGPDFObjectRef;
+typedef struct CGPDFObject *CGPDFObjectRef;
 
 /* An identifier to describe an object's type. */
 
@@ -46,7 +46,7 @@ typedef CF_ENUM (int32_t, CGPDFObjectType) {
 
 /* Return the type of `object'. */
 
-CG_EXTERN CGPDFObjectType CGPDFObjectGetType(CGPDFObjectRef __nullable object)
+CG_EXTERN CGPDFObjectType CGPDFObjectGetType(CGPDFObjectRef cg_nullable object)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Get the value of `object'. If the type of `object' is equal to `type',
@@ -56,7 +56,7 @@ CG_EXTERN CGPDFObjectType CGPDFObjectGetType(CGPDFObjectRef __nullable object)
    `object' to floating point and copy the result to `value' (if it's
    non-NULL) and return true. Otherwise, return false. */
 
-CG_EXTERN bool CGPDFObjectGetValue(CGPDFObjectRef __nullable object,
+CG_EXTERN bool CGPDFObjectGetValue(CGPDFObjectRef cg_nullable object,
     CGPDFObjectType type, void * __nullable value)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 

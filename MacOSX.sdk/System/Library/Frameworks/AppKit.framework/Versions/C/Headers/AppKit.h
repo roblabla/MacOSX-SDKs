@@ -1,7 +1,7 @@
 /*
 	AppKit.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 
 	This file is included by all AppKit application source files for easy building.  Using this file is preferred over importing individual files because it will use a precompiled version.
@@ -21,6 +21,7 @@
 #import <AppKit/NSBox.h>
 #import <AppKit/NSButton.h>
 #import <AppKit/NSButtonCell.h>
+#import <AppKit/NSCandidateListTouchBarItem.h>
 #import <AppKit/NSCell.h>
 #import <AppKit/NSClipView.h>
 #import <AppKit/NSCollectionView.h>
@@ -51,14 +52,18 @@
 #import <AppKit/NSColorPanel.h>
 #import <AppKit/NSColorPicking.h>
 #import <AppKit/NSColorPicker.h>
+#import <AppKit/NSColorPickerTouchBarItem.h>
 #import <AppKit/NSColorWell.h>
 #import <AppKit/NSCursor.h>
 #import <AppKit/NSCustomImageRep.h>
+#import <AppKit/NSCustomTouchBarItem.h>
 #import <AppKit/NSDocument.h>
 #import <AppKit/NSDocumentController.h>
 #import <AppKit/NSDragging.h>
 #import <AppKit/NSDraggingItem.h>
 #import <AppKit/NSDraggingSession.h>
+#import <AppKit/NSFilePromiseProvider.h>
+#import <AppKit/NSFilePromiseReceiver.h>
 #import <AppKit/NSEPSImageRep.h>
 #import <AppKit/NSErrors.h>
 #import <AppKit/NSEvent.h>
@@ -66,6 +71,7 @@
 #import <AppKit/NSHelpManager.h>
 #import <AppKit/NSGradient.h>
 #import <AppKit/NSGraphics.h>
+#import <AppKit/NSGroupTouchBarItem.h>
 #import <AppKit/NSGestureRecognizer.h>
 #import <AppKit/NSClickGestureRecognizer.h>
 #import <AppKit/NSPanGestureRecognizer.h>
@@ -81,6 +87,12 @@
 #import <AppKit/NSNib.h>
 #import <AppKit/NSNibLoading.h>
 #import <AppKit/NSPrinter.h>
+#import <AppKit/NSScrubber.h>
+#import <AppKit/NSScrubberItemView.h>
+#import <AppKit/NSScrubberLayout.h>
+#import <AppKit/NSSharingServicePickerTouchBarItem.h>
+#import <AppKit/NSSliderAccessory.h>
+#import <AppKit/NSSliderTouchBarItem.h>
 #import <AppKit/NSSpeechRecognizer.h>
 #import <AppKit/NSSpeechSynthesizer.h>
 #import <AppKit/NSSpellChecker.h>
@@ -91,6 +103,7 @@
 #import <AppKit/NSPanel.h>
 #import <AppKit/NSPasteboard.h>
 #import <AppKit/NSPasteboardItem.h>
+#import <AppKit/NSPopoverTouchBarItem.h>
 #import <AppKit/NSPopUpButton.h>
 #import <AppKit/NSPrintInfo.h>
 #import <AppKit/NSPrintOperation.h>
@@ -110,12 +123,15 @@
 #import <AppKit/NSSliderCell.h>
 #import <AppKit/NSSpellProtocol.h>
 #import <AppKit/NSStackView.h>
+#import <AppKit/NSGridView.h>
 #import <AppKit/NSText.h>
 #import <AppKit/NSTextField.h>
 #import <AppKit/NSTextFieldCell.h>
 #import <AppKit/NSText.h>
 #import <AppKit/NSTokenField.h>
 #import <AppKit/NSTokenFieldCell.h>
+#import <AppKit/NSTouchBar.h>
+#import <AppKit/NSTouchBarItem.h>
 #import <AppKit/NSTrackingArea.h>
 #import <AppKit/NSUserActivity.h>
 #import <AppKit/NSView.h>
@@ -227,3 +243,4 @@
 #import <AppKit/NSAlignmentFeedbackFilter.h>
 #import <AppKit/NSHapticFeedback.h>
 #import <AppKit/NSPressureConfiguration.h>
+#import <AppKit/AppKitLegacySwiftCompatibility.h>

@@ -51,6 +51,7 @@ private:
         
     UInt32                      _bootSupport;
     bool                        _multipleReports;
+    bool                        _authenticatedDevice;
     bool                        _reservedBool   __unused;
     UInt32                      _reservedUInt32 __unused;
     bool                        _reservedBool1  __unused;
@@ -76,12 +77,17 @@ private:
         struct {
             OSArray *           elements;
             UInt8               bootMouseData[4];
+            bool                appleVendorSupported;
         } keyboard;
         
         struct {
             IOHIDElement *      deviceModeElement;
             OSArray *           transducers;
+            IOHIDElement *      touchCancelElement;
             bool                native;
+            bool                collectionDispatch;
+            IOFixed             centroidX;
+            IOFixed             centroidY;
         } digitizer;
         
         struct {
@@ -103,6 +109,7 @@ private:
         
         struct {
             bool                extended;
+            bool                formFitting;
             OSArray *           elements;
             UInt32              capable;
             UInt32              sendingReportID;
@@ -136,7 +143,13 @@ private:
             } shoulder;
 
         } gameController;
-        
+      
+        struct {
+            OSArray *           elements;
+            OSArray *           pendingEvents;
+        } vendorMessage;
+
+        UInt64  lastReportTime;
     };
     ExpansionData *             _reserved;
     
@@ -152,7 +165,8 @@ private:
     bool                    parseUnicodeElement(IOHIDElement * element);
     bool                    parseLegacyUnicodeElement(IOHIDElement * element);
     bool                    parseGestureUnicodeElement(IOHIDElement * element);
-    
+    bool                    parseVendorMessageElement(IOHIDElement * element);
+  
     void                    processDigitizerElements();
     void                    processMultiAxisElements();
     void                    processGameControllerElements();
@@ -166,6 +180,8 @@ private:
     void                    setLEDProperties();
     void                    setKeyboardProperties();
     void                    setUnicodeProperties();
+    void                    setAccelerationProperties();
+    void                    setVendorMessageProperties();
 
     UInt32                  checkGameControllerElement(IOHIDElement * element);
     UInt32                  checkMultiAxisElement(IOHIDElement * element);
@@ -177,16 +193,22 @@ private:
     void                    handleRelativeReport(AbsoluteTime timeStamp, UInt32 reportID);
     void                    handleGameControllerReport(AbsoluteTime timeStamp, UInt32 reportID);
     void                    handleMultiAxisPointerReport(AbsoluteTime timeStamp, UInt32 reportID);
+    void                    handleDigitizerCollectionReport(AbsoluteTime timeStamp, UInt32 reportID);
     void                    handleDigitizerReport(AbsoluteTime timeStamp, UInt32 reportID);
-    void                    handleDigitizerTransducerReport(DigitizerTransducer * transducer, AbsoluteTime timeStamp, UInt32 reportID);
+    IOHIDEvent*             handleDigitizerTransducerReport(DigitizerTransducer * transducer, AbsoluteTime timeStamp, UInt32 reportID);
     void                    handleScrollReport(AbsoluteTime timeStamp, UInt32 reportID);
     void                    handleKeboardReport(AbsoluteTime timeStamp, UInt32 reportID);
     void                    handleUnicodeReport(AbsoluteTime timeStamp, UInt32 reportID);
     void                    handleUnicodeLegacyReport(AbsoluteTime timeStamp, UInt32 reportID);
     void                    handleUnicodeGestureReport(AbsoluteTime timeStamp, UInt32 reportID);
     IOHIDEvent *            handleUnicodeGestureCandidateReport(EventElementCollection * candidate, AbsoluteTime timeStamp, UInt32 reportID);
-    
+
+    void                    handleVendorMessageReport(AbsoluteTime timeStamp, IOMemoryDescriptor * report, UInt32 reportID, int phase);
+  
     bool                    serializeCharacterGestureState(void * ref, OSSerialize * serializer);
+    bool                    conformTo (UInt32 usagePage, UInt32 usage);
+    IOHIDEvent*             createDigitizerTransducerEventForReport(DigitizerTransducer * transducer, AbsoluteTime timeStamp, UInt32 reportID);
+    bool                    serializeDebugState(void * ref, OSSerialize * serializer);
 
 protected:
 
@@ -224,7 +246,7 @@ protected:
 
     virtual OSString *      getSerialNumber ();
 
-    virtual void            setElementValue (
+    virtual IOReturn        setElementValue (
                                 UInt32                      usagePage,
                                 UInt32                      usage,
                                 UInt32                      value );
@@ -232,6 +254,8 @@ protected:
     virtual UInt32          getElementValue ( 
                                 UInt32                      usagePage,
                                 UInt32                      usage );
+
+    virtual void            dispatchEvent(IOHIDEvent * event, IOOptionBits options=0);
 
 public:
 
@@ -244,7 +268,8 @@ public:
                                 bool *                      defer );
 
     virtual IOReturn        setProperties( OSObject * properties );
-    
+  
+  
     OSMetaClassDeclareReservedUnused(IOHIDEventDriver,  0);
     OSMetaClassDeclareReservedUnused(IOHIDEventDriver,  1);
     OSMetaClassDeclareReservedUnused(IOHIDEventDriver,  2);

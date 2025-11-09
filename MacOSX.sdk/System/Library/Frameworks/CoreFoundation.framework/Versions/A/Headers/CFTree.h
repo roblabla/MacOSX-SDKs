@@ -1,5 +1,5 @@
 /*	CFTree.h
-	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2016, Apple Inc. All rights reserved.
 */
 /*!
         @header CFTree
@@ -211,7 +211,7 @@ void CFTreeGetChildren(CFTreeRef tree, CFTreeRef *children);
 		undefined.
 */
 CF_EXPORT
-void CFTreeApplyFunctionToChildren(CFTreeRef tree, CFTreeApplierFunction applier, void *context);
+void CFTreeApplyFunctionToChildren(CFTreeRef tree, CFTreeApplierFunction CF_NOESCAPE applier, void *context);
 
 /*!
         @function CFTreeFindRoot

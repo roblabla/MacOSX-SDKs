@@ -1,7 +1,7 @@
 /*
  * NCWidgetProviding.h
  * NotificationCenter.framework
- * Copyright (c) 2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2014-2015 Apple Inc. All rights reserved.
  */
 
 #import <AppKit/AppKit.h>
@@ -24,6 +24,9 @@ typedef NS_ENUM(NSUInteger, NCUpdateResult) {
     NCUpdateResultNoData,  // The update did not result in any new data since the last update.
     NCUpdateResultFailed   // The update attempt failed.
 } NS_ENUM_AVAILABLE_MAC(10_10);
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 
 /* NCWidgetProviding is an optional protocol for further customizing aspects
@@ -63,3 +66,5 @@ typedef NS_ENUM(NSUInteger, NCUpdateResult) {
 - (void)presentViewControllerInWidget:(NSViewController *)viewController NS_AVAILABLE_MAC(10_10);
 
 @end
+
+NS_ASSUME_NONNULL_END

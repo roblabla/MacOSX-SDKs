@@ -1,7 +1,7 @@
 /*
         NSMenuItem.h
         Application Kit
-        Copyright (c) 1996-2015, Apple Inc.
+        Copyright (c) 1996-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -10,13 +10,14 @@
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <AppKit/NSView.h>
+#import <AppKit/NSCell.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSMenu;
 @class NSImage, NSAttributedString, NSView;
 
-@interface NSMenuItem : NSObject <NSCopying, NSCoding, NSValidatedUserInterfaceItem>
+@interface NSMenuItem : NSObject <NSCopying, NSCoding, NSValidatedUserInterfaceItem, NSUserInterfaceItemIdentification, NSAccessibilityElement, NSAccessibility>
 {
     /*All instance variables are private*/
     @private
@@ -73,10 +74,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSMenuItem *)separatorItem;
 
-- (instancetype)initWithTitle:(NSString *)aString action:(nullable SEL)aSelector keyEquivalent:(NSString *)charCode;
+- (instancetype)initWithTitle:(NSString *)string action:(nullable SEL)selector keyEquivalent:(NSString *)charCode NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)decoder NS_DESIGNATED_INITIALIZER;
 
+/* Never call the set method directly it is there only for subclassers.
+ */
 @property (nullable, assign) NSMenu *menu;
-    // Never call the set method directly it is there only for subclassers.
 
 
 @property (readonly) BOOL hasSubmenu;
@@ -92,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (getter=isSeparatorItem, readonly) BOOL separatorItem;
 
 @property (copy) NSString *keyEquivalent;
-@property NSUInteger keyEquivalentModifierMask;
+@property NSEventModifierFlags keyEquivalentModifierMask;
 
 @property (readonly, copy) NSString *userKeyEquivalent;
 
@@ -102,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property NSInteger state;
 @property (null_resettable, strong) NSImage *onStateImage; // checkmark by default
-@property (null_resettable, strong) NSImage *offStateImage; // none by default
+@property (nullable, strong) NSImage *offStateImage; // none by default
 @property (null_resettable, strong) NSImage *mixedStateImage; // horizontal line by default?
 
 @property (getter=isEnabled) BOOL enabled;

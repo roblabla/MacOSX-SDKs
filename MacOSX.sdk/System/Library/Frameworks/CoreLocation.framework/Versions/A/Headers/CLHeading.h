@@ -1,4 +1,3 @@
-
 /*
  *  CLHeading.h
  *  CoreLocation
@@ -38,7 +37,7 @@ extern const CLLocationDegrees kCLHeadingFilterNone;
  *  Discussion:
  *    Represents a vector pointing to magnetic North constructed from axis component values x, y, and z. An accuracy of the heading calculation is also provided along with timestamp information.
  */
-NS_CLASS_AVAILABLE(10_7, 3_0)
+NS_CLASS_AVAILABLE(10_7, 3_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
 @interface CLHeading : NSObject <NSCopying, NSSecureCoding>
 {
 @private
@@ -111,14 +110,6 @@ NS_CLASS_AVAILABLE(10_7, 3_0)
  *    Returns a timestamp for when the magnetic heading was determined.
  */
 @property(readonly, nonatomic, copy) NSDate *timestamp;
-
-/*
- *  description
- *  
- *  Discussion:
- *    Returns a string representation of the heading.
- */
-@property (nonatomic, readonly, copy) NSString *description;
 
 @end
 

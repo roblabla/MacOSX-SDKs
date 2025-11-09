@@ -5,7 +5,7 @@
  Nodes are the base scene graph nodes used in the SpriteKit scene graph.
  
  
- @copyright 2011 Apple, Inc. All rights reserve.
+ @copyright 2011 Apple, Inc. All rights reserved.
  
  */
 
@@ -13,7 +13,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SKView, SKAction, SKScene, SKTexture, SKPhysicsBody, SKFieldNode, SKReachConstraints, SKConstraint, GKPolygonObstacle;
+@class SKAction, SKScene, SKTexture, SKPhysicsBody, SKFieldNode;
+@class SKReachConstraints, SKConstraint, SKAttributeValue, SKWarpGeometry;
+@protocol UIFocusItem;
 
 /**
  Blend modes that the SKNode uses to compose with the framebuffer to produce blended colors.
@@ -34,7 +36,11 @@ typedef NS_ENUM(NSInteger, SKBlendMode) {
  All nodes have one and exactly one parent unless they are the root node of a graph tree. Leaf nodes have no children and contain some sort of sharable data that guarantee the DAG condition.
  */
 #if TARGET_OS_IPHONE
-SK_EXPORT @interface SKNode : UIResponder <NSCopying, NSCoding>
+#if SKVIEW_AVAILABLE
+SK_EXPORT @interface SKNode : UIResponder <NSCopying, NSCoding, UIFocusItem>
+#else
+SK_EXPORT @interface SKNode : NSObject <NSCopying, NSCoding>
+#endif
 #else
 SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 #endif
@@ -178,7 +184,7 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 - (void)removeAllChildren;
 
 - (void)removeFromParent;
-- (void)moveToParent:(SKNode *)parent;
+- (void)moveToParent:(SKNode *)parent NS_AVAILABLE(10_11, 9_0);
 
 - (nullable SKNode *)childNodeWithName:(NSString *)name;
 
@@ -232,15 +238,6 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 
 - (BOOL)isEqualToNode:(SKNode *)node;
 
-/* Returns an array of GKPolygonObstacles from a group of SKSpriteNode's textures in scene space. For use with GPObstacleGraph in GameplayKit */
-+ (NSArray<GKPolygonObstacle*> *)obstaclesFromSpriteTextures:(NSArray<SKNode*>*)sprites accuracy:(float)accuracy;
-
-/* Returns an array of GKPolygonObstacles from a group of SKNode's transformed bounds in scene space. For use with GPObstacleGraph in GameplayKit */
-+ (NSArray<GKPolygonObstacle*> *)obstaclesFromNodeBounds:(NSArray<SKNode*>*)nodes;
-
-/* Returns an array of GKPolygonObstacles from a group of SKNode's physics bodies in scene space. For use with GPObstacleGraph in GameplayKit */
-+ (NSArray<GKPolygonObstacle*> *)obstaclesFromNodePhysicsBodies:(NSArray<SKNode*>*)nodes;
-
 @end
 
 
@@ -248,17 +245,17 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
  Provided for easy transformation of UITouches coordinates to SKNode coordinates should you choose to handle touch events natively.
  */
 #if TARGET_OS_IPHONE
+#if __has_include(<UIKit/UITouch.h>)
 //Allow conversion of UITouch coordinates to scene-space
 @interface UITouch (SKNodeTouches)
 - (CGPoint)locationInNode:(SKNode *)node;
 - (CGPoint)previousLocationInNode:(SKNode *)node;
 @end
+#endif
 #else
 @interface NSEvent (SKNodeEvent)
 - (CGPoint)locationInNode:(SKNode *)node;
 @end
 #endif
-
-
 
 NS_ASSUME_NONNULL_END

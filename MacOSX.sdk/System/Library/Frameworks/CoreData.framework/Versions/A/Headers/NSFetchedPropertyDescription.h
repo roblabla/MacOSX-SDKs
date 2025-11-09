@@ -1,7 +1,7 @@
 /*
     NSFetchedPropertyDescription.h
     Core Data
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -13,13 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSFetchRequest;
 
 // Fetched properties allow to specify related objects through a "weakly" resolved property, so there is no actual join necessary.
-NS_CLASS_AVAILABLE(10_4,3_0)
+API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSFetchedPropertyDescription : NSPropertyDescription {
+#if (!__OBJC2__)
 @private
 	void *_reserved5;
 	void *_reserved6;
     NSFetchRequest *_fetchRequest;
     NSString *_lazyFetchRequestEntityName;
+#endif
 }
 
 // As part of the predicate for a fetched property, you can use the two variables $FETCH_SOURCE (which is the managed object fetching the property) and $FETCHED_PROPERTY (which is the NSFetchedPropertyDescription instance).

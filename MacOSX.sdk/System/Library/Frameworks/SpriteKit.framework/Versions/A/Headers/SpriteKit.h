@@ -23,7 +23,14 @@
 #import <SpriteKit/SKRegion.h>
 #import <SpriteKit/SKView.h>
 #import <SpriteKit/SKTransition.h>
+#import <SpriteKit/SKShader.h>
+#import <SpriteKit/SKUniform.h>
+#import <SpriteKit/SKAttribute.h>
+#import <SpriteKit/SKWarpGeometry.h>
 
+#import <SpriteKit/SKTileDefinition.h>
+#import <SpriteKit/SKTileSet.h>
+#import <SpriteKit/SKTileMapNode.h>
 
 #import <SpriteKit/SKTexture.h>
 #import <SpriteKit/SKMutableTexture.h>
@@ -37,3 +44,7 @@
 #import <SpriteKit/SKPhysicsBody.h>
 #import <SpriteKit/SKPhysicsJoint.h>
 #import <SpriteKit/SKPhysicsWorld.h>
+
+#if !TARGET_OS_IPHONE
+#import <SpriteKit/SKNode+NSAccessibility.h>
+#endif

@@ -1,6 +1,6 @@
 /* CoreAnimation - CAMediaTimingFunction.h
 
-   Copyright (c) 2006-2015, Apple Inc.
+   Copyright (c) 2006-2016, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CAMediaTiming.h>
@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  * to define the pacing of an animation over its duration (or over the
  * duration of one keyframe). */
 
+CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 @interface CAMediaTimingFunction : NSObject <NSCoding>
 {
 @private
@@ -47,14 +48,14 @@ NS_ASSUME_NONNULL_BEGIN
 /** Timing function names. **/
 
 CA_EXTERN NSString * const kCAMediaTimingFunctionLinear
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAMediaTimingFunctionEaseIn
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAMediaTimingFunctionEaseOut
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAMediaTimingFunctionEaseInEaseOut
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAMediaTimingFunctionDefault
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
 
 NS_ASSUME_NONNULL_END

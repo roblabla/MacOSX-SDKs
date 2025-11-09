@@ -5,7 +5,7 @@
  Node that can crop its children's contents with a mask
  
  
- @copyright 2011 Apple, Inc. All rights reserve.
+ @copyright 2011 Apple, Inc. All rights reserved.
  
  */
 

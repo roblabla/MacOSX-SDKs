@@ -3,17 +3,20 @@
 // =====================================================================================================================
 
 
-#import <AppKit/AppKit.h>
+#import <PDFKit/PDFKitPlatform.h>
+
 #import <PDFKit/PDFAnnotation.h>
+
+#import <Availability.h>
 
 
 @class PDFAnnotationTextWidgetPrivateVars;
 
-
+NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
 @interface PDFAnnotationTextWidget : PDFAnnotation <NSCopying>
 {
 @private
-    PDFAnnotationTextWidgetPrivateVars	*_pdfPriv2;
+    PDFAnnotationTextWidgetPrivateVars	*_private2;
 }
 
 // -------- accessors
@@ -21,36 +24,26 @@
 // String value associated with text field.
 - (NSString *) stringValue;
 - (void) setStringValue: (NSString *) value;
+
 // Attributed string associated with text field ( font / fontColor)
 - (NSAttributedString*) attributedStringValue;
 - (void) setAttributedStringValue: (NSAttributedString*) value;
 
- 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
-- (NSColor *) backgroundColor;
-- (void) setBackgroundColor: (NSColor *) color;
+- (PDFKitPlatformColor *) backgroundColor;
+- (void) setBackgroundColor: (PDFKitPlatformColor *) color;
 - (int) rotation;
 - (void) setRotation: (int) rotation;
 
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 // Font characteristics associated with the text field.
-- (NSFont *) font;
-- (void) setFont: (NSFont *) font;
+- (PDFKitPlatformFont *) font;
+- (void) setFont: (PDFKitPlatformFont *) font;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
-- (NSColor *) fontColor;
-- (void) setFontColor: (NSColor *) color;
-
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (PDFKitPlatformColor *) fontColor;
+- (void) setFontColor: (PDFKitPlatformColor *) color;
 
 // Alignment of text.  Supported: NSLeftTextAlignment, NSRightTextAlignment and NSCenterTextAlignment.
 - (NSTextAlignment) alignment;
 - (void) setAlignment: (NSTextAlignment) alignment;
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 // Maximum characters allowed (optional, zero indicates no specified maximum).
 - (NSUInteger) maximumLength;
@@ -60,14 +53,8 @@
 - (NSString *) fieldName;
 - (void) setFieldName: (NSString *) name;
 
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_9
-
 // Configuring multiline PDF text fields
 - (BOOL) isMultiline;
 - (void) setIsMultiline: (BOOL) multiline;
-
-#endif // MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_9
 
 @end

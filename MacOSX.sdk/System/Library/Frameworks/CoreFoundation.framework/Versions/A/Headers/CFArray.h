@@ -1,5 +1,5 @@
 /*	CFArray.h
-	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2016, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -384,7 +384,7 @@ void CFArrayGetValues(CFArrayRef theArray, CFRange range, const void **values);
 		undefined.
 */
 CF_EXPORT
-void CFArrayApplyFunction(CFArrayRef theArray, CFRange range, CFArrayApplierFunction applier, void *context);
+void CFArrayApplyFunction(CFArrayRef theArray, CFRange range, CFArrayApplierFunction CF_NOESCAPE applier, void *context);
 
 /*!
 	@function CFArrayGetFirstIndexOfValue

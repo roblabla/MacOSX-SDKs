@@ -149,8 +149,9 @@ CSEXTERN CFStringRef kColorSyncConvertQuality;
         CSEXTERN CFStringRef kColorSyncDraftQuality;     /* coalesce all transforms, do not interpolate */
 
 /* Conversion options */
-CSEXTERN CFStringRef kColorSyncConvertThreadCount; /* applies to large amounts of data; 0 for number of CPUs */
+CSEXTERN CFStringRef kColorSyncConvertThreadCount;   /* applies to large amounts of data; 0 for number of CPUs */
 CSEXTERN CFStringRef kColorSyncConvertUseVectorUnit; /* applies to large amounts of data; CFBooleanRef value; default true*/
+CSEXTERN CFStringRef kColorSyncConvertUseExtendedRange; /* applies to large amounts of data; CFBooleanRef value; default true*/
 
 /* Public keys for copying transform properties */
 
@@ -185,7 +186,7 @@ CSEXTERN CFStringRef kColorSyncTranformInfo;         /* dictionary with the foll
  * Types of Code Fragments:
  *
  * 1. Full conversion: all non-NULL components based on all the tags from the
- *                     sequence of profiles passed to create the ColorWorld with
+ *                     sequence of profiles passed to create the ColorSyncTransform with
  *                     an exception of adjacent matrices that can be collapsed to
  *                     one matrix.
  * 2. Parametric:      same as above, except that the returned code fragment consists

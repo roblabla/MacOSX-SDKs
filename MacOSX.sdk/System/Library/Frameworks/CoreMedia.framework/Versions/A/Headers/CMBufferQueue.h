@@ -464,7 +464,7 @@ CM_EXPORT CMTime CMBufferQueueGetMinPresentationTimeStamp(
 
 /*!
 	@function	CMBufferQueueGetFirstPresentationTimeStamp
-	@abstract	Gets the decode timestamp of the first buffer in a CMBufferQueue.
+	@abstract	Gets the presentation timestamp of the first buffer in a CMBufferQueue.
 	@discussion	This API is is a faster alternative to GetMinPresentationTimeStamp,
 				but only works if you know your queue is sorted by presentation
 				timestamp. If the getPresentationTimeStamp callback is NULL,
@@ -561,6 +561,7 @@ typedef void (*CMBufferQueueTriggerCallback)(
 	@constant	kCMBufferQueueTrigger_WhenReset									Trigger fires when CMBufferQueueReset called.  (triggerTime is ignored.)
 	@constant	kCMBufferQueueTrigger_WhenBufferCountBecomesLessThan			Trigger fires when buffer count becomes < the specified threshold number.
 	@constant	kCMBufferQueueTrigger_WhenBufferCountBecomesGreaterThan			Trigger fires when buffer count becomes > the specified threshold number.
+	@constant	kCMBufferQueueTrigger_WhenDurationBecomesGreaterThanOrEqualToAndBufferCountBecomesGreaterThan	Trigger fires when queue duration becomes >= the specified duration and buffer count becomes > the specified threshold number.
 */
 typedef int32_t CMBufferQueueTriggerCondition;
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
@@ -580,6 +581,7 @@ enum
 	kCMBufferQueueTrigger_WhenReset = 9,
 	kCMBufferQueueTrigger_WhenBufferCountBecomesLessThan = 10,
 	kCMBufferQueueTrigger_WhenBufferCountBecomesGreaterThan = 11,
+	kCMBufferQueueTrigger_WhenDurationBecomesGreaterThanOrEqualToAndBufferCountBecomesGreaterThan = 12,
 };
 
 /*!
@@ -612,7 +614,7 @@ CM_EXPORT OSStatus CMBufferQueueInstallTrigger(
 															Must be numeric (ie. not invalid, indefinite, or infinite),
 															except for certain trigger conditions which ignore it
 															(eg, kCMBufferQueueTrigger_WhenMinPresentationTimeStampChanges). */
-	CMBufferQueueTriggerToken CM_NULLABLE * CM_NONNULL triggerTokenOut )	/*! @param triggerTokenOut
+	CMBufferQueueTriggerToken CM_NULLABLE * CM_NULLABLE triggerTokenOut )	/*! @param triggerTokenOut
 															Address where created trigger token will be written.
 															Can be NULL, if client has no need to explicitly test
 															or remove the trigger. Cannot be NULL if triggerCallback
@@ -642,7 +644,7 @@ CM_EXPORT OSStatus CMBufferQueueInstallTriggerWithIntegerThreshold(
 																				Must be a valid condition for an integer threshold. */
 	CMItemCount triggerThreshold,											/*! @param triggerThreshold
 																				The integer value to compare against when evaluating the trigger. */
-	CMBufferQueueTriggerToken CM_NULLABLE * CM_NONNULL triggerTokenOut )	/*! @param triggerTokenOut
+	CMBufferQueueTriggerToken CM_NULLABLE * CM_NULLABLE triggerTokenOut )	/*! @param triggerTokenOut
 																				Address where created trigger token will be written.
 																				Can be NULL, if client has no need to explicitly test
 																				or remove the trigger. Cannot be NULL if triggerCallback

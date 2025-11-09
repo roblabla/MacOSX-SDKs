@@ -1,5 +1,5 @@
 /*	NSException.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -13,24 +13,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 /***************	Generic Exception names		***************/
 
-FOUNDATION_EXPORT NSString * const NSGenericException;
-FOUNDATION_EXPORT NSString * const NSRangeException;
-FOUNDATION_EXPORT NSString * const NSInvalidArgumentException;
-FOUNDATION_EXPORT NSString * const NSInternalInconsistencyException;
+FOUNDATION_EXPORT NSExceptionName const NSGenericException;
+FOUNDATION_EXPORT NSExceptionName const NSRangeException;
+FOUNDATION_EXPORT NSExceptionName const NSInvalidArgumentException;
+FOUNDATION_EXPORT NSExceptionName const NSInternalInconsistencyException;
 
-FOUNDATION_EXPORT NSString * const NSMallocException;
+FOUNDATION_EXPORT NSExceptionName const NSMallocException;
 
-FOUNDATION_EXPORT NSString * const NSObjectInaccessibleException;
-FOUNDATION_EXPORT NSString * const NSObjectNotAvailableException;
-FOUNDATION_EXPORT NSString * const NSDestinationInvalidException;
+FOUNDATION_EXPORT NSExceptionName const NSObjectInaccessibleException;
+FOUNDATION_EXPORT NSExceptionName const NSObjectNotAvailableException;
+FOUNDATION_EXPORT NSExceptionName const NSDestinationInvalidException;
     
-FOUNDATION_EXPORT NSString * const NSPortTimeoutException;
-FOUNDATION_EXPORT NSString * const NSInvalidSendPortException;
-FOUNDATION_EXPORT NSString * const NSInvalidReceivePortException;
-FOUNDATION_EXPORT NSString * const NSPortSendException;
-FOUNDATION_EXPORT NSString * const NSPortReceiveException;
+FOUNDATION_EXPORT NSExceptionName const NSPortTimeoutException;
+FOUNDATION_EXPORT NSExceptionName const NSInvalidSendPortException;
+FOUNDATION_EXPORT NSExceptionName const NSInvalidReceivePortException;
+FOUNDATION_EXPORT NSExceptionName const NSPortSendException;
+FOUNDATION_EXPORT NSExceptionName const NSPortReceiveException;
 
-FOUNDATION_EXPORT NSString * const NSOldStyleException;
+FOUNDATION_EXPORT NSExceptionName const NSOldStyleException;
 
 /***************	Exception object	***************/
 
@@ -45,10 +45,10 @@ __attribute__((__objc_exception__))
     id			reserved;
 }
 
-+ (NSException *)exceptionWithName:(NSString *)name reason:(nullable NSString *)reason userInfo:(nullable NSDictionary *)userInfo;
-- (instancetype)initWithName:(NSString *)aName reason:(nullable NSString *)aReason userInfo:(nullable NSDictionary *)aUserInfo NS_DESIGNATED_INITIALIZER;
++ (NSException *)exceptionWithName:(NSExceptionName)name reason:(nullable NSString *)reason userInfo:(nullable NSDictionary *)userInfo;
+- (instancetype)initWithName:(NSExceptionName)aName reason:(nullable NSString *)aReason userInfo:(nullable NSDictionary *)aUserInfo NS_DESIGNATED_INITIALIZER;
 
-@property (readonly, copy) NSString *name;
+@property (readonly, copy) NSExceptionName name;
 @property (nullable, readonly, copy) NSString *reason;
 @property (nullable, readonly, copy) NSDictionary *userInfo;
 
@@ -61,8 +61,8 @@ __attribute__((__objc_exception__))
 
 @interface NSException (NSExceptionRaisingConveniences)
 
-+ (void)raise:(NSString *)name format:(NSString *)format, ... NS_FORMAT_FUNCTION(2,3);
-+ (void)raise:(NSString *)name format:(NSString *)format arguments:(va_list)argList NS_FORMAT_FUNCTION(2,0);
++ (void)raise:(NSExceptionName)name format:(NSString *)format, ... NS_FORMAT_FUNCTION(2,3);
++ (void)raise:(NSExceptionName)name format:(NSString *)format arguments:(va_list)argList NS_FORMAT_FUNCTION(2,0);
 
 @end
 
@@ -76,8 +76,8 @@ __attribute__((__objc_exception__))
 
 typedef void NSUncaughtExceptionHandler(NSException *exception);
 
-FOUNDATION_EXPORT NSUncaughtExceptionHandler * __nullable NSGetUncaughtExceptionHandler(void);
-FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler * __nullable);
+FOUNDATION_EXPORT NSUncaughtExceptionHandler * _Nullable NSGetUncaughtExceptionHandler(void);
+FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler * _Nullable);
 
 
 #if __clang__
@@ -293,7 +293,9 @@ FOUNDATION_EXPORT NSString * const NSAssertionHandlerKey NS_AVAILABLE(10_6, 4_0)
     void *_reserved;
 }
 
-+ (NSAssertionHandler *)currentHandler;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, strong) NSAssertionHandler *currentHandler;
+#endif
 
 - (void)handleFailureInMethod:(SEL)selector object:(id)object file:(NSString *)fileName lineNumber:(NSInteger)line description:(nullable NSString *)format,... NS_FORMAT_FUNCTION(5,6);
 

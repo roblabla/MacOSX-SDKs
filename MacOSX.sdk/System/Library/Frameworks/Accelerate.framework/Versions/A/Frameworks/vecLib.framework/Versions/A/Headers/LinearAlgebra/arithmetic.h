@@ -3,6 +3,15 @@
 #ifndef __LA_ARITHMETIC_HEADER__
 #define __LA_ARITHMETIC_HEADER__
 
+#if __has_feature(assume_nonnull)
+////  If assume_nonnull is available, use it and use nullability qualifiers.
+_Pragma("clang assume_nonnull begin")
+#else
+////  Otherwise, neuter the nullability qualifiers.
+#define __nullable
+#define __nonnull
+#endif
+
 /*!
  @abstract
  Transpose a vector or matrix.
@@ -12,7 +21,7 @@
  source object is not a vector or matrix, the returned object will have status
  LA_INVALID_PARAMETER_ERROR.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_transpose(la_object_t matrix);
 
 /*!
@@ -28,7 +37,7 @@ la_object_t la_transpose(la_object_t matrix);
  If the scalar type of matrix is not float LA_PRECISION_MISMATCH_ERROR is 
  returned.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_scale_with_float(la_object_t matrix, float scalar);
 
 /*!
@@ -44,7 +53,7 @@ la_object_t la_scale_with_float(la_object_t matrix, float scalar);
  If the scalar type of matrix is not double LA_PRECISION_MISMATCH_ERROR is
  returned.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_scale_with_double(la_object_t matrix, double scalar);
 
 /*!
@@ -64,7 +73,7 @@ la_object_t la_scale_with_double(la_object_t matrix, double scalar);
  The result has the same dimensions as the operands, and each element in
  the result is the sum of the corresponding elements in the source operands.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_sum(la_object_t obj_left, la_object_t obj_right);
 
 /*!
@@ -85,7 +94,7 @@ la_object_t la_sum(la_object_t obj_left, la_object_t obj_right);
  the result is given by subtracting the corresponding element of obj_right
  from the corresponding element of obj_left.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_difference(la_object_t obj_left, la_object_t obj_right);
 
 /*!
@@ -105,7 +114,7 @@ la_object_t la_difference(la_object_t obj_left, la_object_t obj_right);
  The result has the same dimensions as the operands, and each element in
  the result is the product of the corresponding elements in the source operands.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_elementwise_product(la_object_t obj_left, la_object_t obj_right);
 
 /*!
@@ -126,7 +135,7 @@ la_object_t la_elementwise_product(la_object_t obj_left, la_object_t obj_right);
  
         sum_{i=0...length} vector_left[i] * vector_right[i]
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_inner_product(la_object_t vector_left, la_object_t vector_right);
 
 /*!
@@ -147,7 +156,7 @@ la_object_t la_inner_product(la_object_t vector_left, la_object_t vector_right);
  length(vector_left) rows and length(vector_right) columns.  The i,jth
  element of the matrix is vector_left[i] * vector_right[j].
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_outer_product(la_object_t vector_left, la_object_t vector_right);
 
 /*!
@@ -187,8 +196,12 @@ la_object_t la_outer_product(la_object_t vector_left, la_object_t vector_right);
  	sum_{k=0...cols(matrix_left)} matrix_left[i,k] * matrix_right[0,k]
  
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_matrix_product(la_object_t matrix_left,
                               la_object_t matrix_right);
+
+#if __has_feature(assume_nonnull)
+_Pragma("clang assume_nonnull end")
+#endif
 
 #endif // __LA_ARITHMETIC_HEADER__

@@ -17,8 +17,18 @@
 #include <CoreFoundation/CoreFoundation.h>
 
 #ifndef VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER
-#define VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER ( TARGET_OS_MAC && ! TARGET_OS_IPHONE && ( MAC_OS_X_VERSION_MIN_REQUIRED >= 1080 ) )
-#endif // VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER
+#if TARGET_OS_TV
+#define VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER (__TV_OS_VERSION_MIN_REQUIRED >= 93000)
+#elif TARGET_OS_WATCH
+#define VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER 0
+#elif TARGET_OS_IPHONE
+#define VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER (__IPHONE_OS_VERSION_MIN_REQUIRED >= 93000)
+#elif TARGET_OS_MAC
+#define VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER (__MAC_OS_X_VERSION_MIN_REQUIRED >= 1080)
+#else
+#define VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER 0
+#endif
+#endif
 
 #if defined(__cplusplus)
 extern "C"
@@ -135,8 +145,6 @@ VT_EXPORT const CFStringRef kVTDownsamplingMode_Average __OSX_AVAILABLE_STARTING
 
 // Properties for color information
 
-#if VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER
-
 /*!
 	@constant	kVTPixelTransferPropertyKey_DestinationColorPrimaries
 	@abstract
@@ -158,7 +166,7 @@ VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_DestinationColorPrimarie
 		the destination.
 */
 VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_DestinationTransferFunction __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_9_0); // Read/write, CFString (see kCMFormatDescriptionExtension_TransferFunction), Optional
-
+	
 /*!
 	@constant	kVTPixelTransferPropertyKey_DestinationICCProfile
 	@abstract
@@ -169,8 +177,6 @@ VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_DestinationTransferFunct
 		the destination.
 */
 VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_DestinationICCProfile __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_9_0); // Read/write, CFData (see kCMFormatDescriptionExtension_ICCProfile), Optional
-
-#endif // VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER
     
 /*!
 	@constant	kVTPixelTransferPropertyKey_DestinationYCbCrMatrix

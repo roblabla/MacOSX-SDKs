@@ -20,14 +20,14 @@ CF_ASSUME_NONNULL_BEGIN
     @abstract   CFError domain for CTFontManager errors
     @discussion CFErrors with this domain will have error codes corresponding to one of the CTFontManagerErrors above.
 */
-extern const CFStringRef kCTFontManagerErrorDomain CT_AVAILABLE(10_6, 3_2);
+CT_EXPORT const CFStringRef kCTFontManagerErrorDomain CT_AVAILABLE(10_6, 3_2);
 
 /*!
     @constant   kCTFontManagerErrorFontURLsKey
     @abstract   User info key to be used with CFError references returned from registration functions.
     @discussion The value associated with this key in the user info dictionary of a CFError is a CFArray of font URLs that failed with given error.
 */
-extern const CFStringRef kCTFontManagerErrorFontURLsKey CT_AVAILABLE(10_6, 3_2);
+CT_EXPORT const CFStringRef kCTFontManagerErrorFontURLsKey CT_AVAILABLE(10_6, 3_2);
 
 /*!
     @enum
@@ -43,10 +43,6 @@ extern const CFStringRef kCTFontManagerErrorFontURLsKey CT_AVAILABLE(10_6, 3_2);
                 The file contains invalid font data that could cause system problems.
     @constant   kCTFontManagerErrorAlreadyRegistered
                 The file has already been registered in the specified scope.
-*/
-/*!
-    @enum
-    @abstract   Font un-registration errors
     @discussion Errors that would prevent un-registration of fonts for a specified font file URL.
     @constant   kCTFontManagerErrorNotRegistered
                 The file is not registered in the specified scope.

@@ -1,7 +1,7 @@
 /*
 	NSFontPanel.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -87,8 +87,11 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
     id _fontEffectsBox;
     int _sizeStyle;
 
+    id _fontPanelToolbar;
+    id _fontPanelContentView;
+
 #if !__LP64__
-    id _fpUnused[72];
+    id _fpUnused[70];
 #endif /* !__LP64__ */
 }
 

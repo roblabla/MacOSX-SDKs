@@ -381,14 +381,15 @@ typedef enum dtrace_probespec {
 #define	DIF_SUBR_INET_NTOA6		43
 #define	DIF_SUBR_TOUPPER		44
 #define	DIF_SUBR_TOLOWER		45
-#define	DIF_SUBR_VM_KERNEL_ADDRPERM	46
-#if !defined(__APPLE__)
-
 #define DIF_SUBR_MAX			46      /* max subroutine value */
-#else
-#define DIF_SUBR_COREPROFILE		47
 
-#define DIF_SUBR_MAX			47      /* max subroutine value */
+/* Apple-specific subroutines */
+#if defined(__APPLE__)
+#define DIF_SUBR_APPLE_MIN		200	/* min apple-specific subroutine value */
+#define DIF_SUBR_VM_KERNEL_ADDRPERM	200
+#define DIF_SUBR_KDEBUG_TRACE		201
+#define DIF_SUBR_KDEBUG_TRACE_STRING	202
+#define DIF_SUBR_APPLE_MAX		202      /* max apple-specific subroutine value */
 #endif /* __APPLE__ */
 
 typedef uint32_t dif_instr_t;
@@ -1032,13 +1033,20 @@ typedef struct dtrace_actdesc {
         int dtad_refcnt;                        /* reference count */
 } dtrace_actdesc_t;
 
+
 typedef struct dtrace_ecbdesc {
         dtrace_actdesc_t *dted_action;          /* action description(s) */
         dtrace_preddesc_t dted_pred;            /* predicate description */
         dtrace_probedesc_t dted_probe;          /* probe description */
         uint64_t dted_uarg;                     /* library argument */
         int dted_refcnt;                        /* reference count */
+        uint64_t dted_probegen;                 /* matched probe generation */
 } dtrace_ecbdesc_t;
+
+/*
+ * APPLE NOTE: The kernel always rebuild dtrace_ecbdesc structures
+ * coming from userspace, so there is no dted_probegen manipulation risk
+ */
 
 /*
  * DTrace Metadata Description Structures
@@ -1150,7 +1158,8 @@ typedef struct dtrace_fmtdesc {
 #define DTRACEOPT_MAX           31      /* number of options */
 #else
 #define DTRACEOPT_STACKSYMBOLS  31      /* clear to prevent stack symbolication */
-#define DTRACEOPT_MAX           32      /* number of options */
+#define DTRACEOPT_BUFLIMIT      32	/* buffer signaling limit in % of the size */
+#define DTRACEOPT_MAX           33      /* number of options */
 #endif /* __APPLE__ */
 
 #define	DTRACEOPT_UNSET		(dtrace_optval_t)-2	/* unset option */
@@ -1415,6 +1424,8 @@ typedef struct dtrace_providerdesc {
 #define DTRACEIOC_MODUUIDSLIST	(DTRACEIOC | 30)	/* APPLE ONLY, query for modules with missing symbols */
 #define DTRACEIOC_PROVMODSYMS	(DTRACEIOC | 31)	/* APPLE ONLY, provide missing symbols for a given module */
 #define DTRACEIOC_PROCWAITFOR	(DTRACEIOC | 32)	/* APPLE ONLY, wait for process exec */
+#define DTRACEIOC_SLEEP 	(DTRACEIOC | 33)	/* APPLE ONLY, sleep */
+#define DTRACEIOC_SIGNAL	(DTRACEIOC | 34)	/* APPLE ONLY, signal sleeping process */
 
 /*
  * The following structs are used to provide symbol information to the kernel from userspace.
@@ -1448,6 +1459,15 @@ typedef struct dtrace_procdesc {
 	int		p_name_length;
 	pid_t		p_pid;
 } dtrace_procdesc_t;
+
+/**
+ * DTrace wake reasons.
+ * This is used in userspace to determine what's the reason why it woke up,
+ * to start aggregating / switching buffer right away if it is because a buffer
+ * got over its limit
+ */
+#define DTRACE_WAKE_TIMEOUT 0 /* dtrace client woke up because of a timeout */
+#define DTRACE_WAKE_BUF_LIMIT 1 /* dtrace client woke up because of a over limit buffer */
 
 #endif /* __APPLE__ */
 
@@ -2304,8 +2324,8 @@ extern void dtrace_probe(dtrace_id_t, uint64_t arg0, uint64_t arg1,
  * a meta provider. This structure consists of the following members:
  *
  *   dtms_create_probe()        <-- Add a new probe to a created provider
- *   dtms_provide_pid()         <-- Create a new provider for a given process
- *   dtms_remove_pid()          <-- Remove a previously created provider
+ *   dtms_provide_proc()         <-- Create a new provider for a given process
+ *   dtms_remove_proc()          <-- Remove a previously created provider
  *
  * 1.2  void dtms_create_probe(void *arg, void *parg,
  *           dtrace_helper_probedesc_t *probedesc);
@@ -2319,7 +2339,7 @@ extern void dtrace_probe(dtrace_id_t, uint64_t arg0, uint64_t arg1,
  *
  *   The first argument is the cookie as passed to dtrace_meta_register().
  *   The second argument is the provider cookie for the associated provider;
- *   this is obtained from the return value of dtms_provide_pid(). The third
+ *   this is obtained from the return value of dtms_provide_proc(). The third
  *   argument is the helper probe description.
  *
  * 1.2.3  Return value
@@ -2335,8 +2355,8 @@ extern void dtrace_probe(dtrace_id_t, uint64_t arg0, uint64_t arg1,
  *   such that the provider may (and is expected to) call provider-related
  *   DTrace provider APIs including dtrace_probe_create().
  *
- * 1.3  void *dtms_provide_pid(void *arg, dtrace_meta_provider_t *mprov,
- *            pid_t pid)
+ * 1.3  void *dtms_provide_proc(void *arg, dtrace_meta_provider_t *mprov,
+ *            proc_t *proc)
  *
  * 1.3.1  Overview
  *
@@ -2362,15 +2382,15 @@ extern void dtrace_probe(dtrace_id_t, uint64_t arg0, uint64_t arg1,
  *
  * 1.3.4  Caller's context
  *
- *   dtms_provide_pid() is called from either ioctl() or module load context.
+ *   dtms_provide_proc() is called from either ioctl() or module load context.
  *   The DTrace framework is locked in such a way that meta providers may not
  *   register or unregister. This means that the meta provider cannot call
  *   dtrace_meta_register() or dtrace_meta_unregister(). However, the context
  *   is such that the provider may -- and is expected to --  call
  *   provider-related DTrace provider APIs including dtrace_register().
  *
- * 1.4  void dtms_remove_pid(void *arg, dtrace_meta_provider_t *mprov,
- *           pid_t pid)
+ * 1.4  void dtms_remove_proc(void *arg, dtrace_meta_provider_t *mprov,
+ *           proc_t proc)
  *
  * 1.4.1  Overview
  *
@@ -2393,7 +2413,7 @@ extern void dtrace_probe(dtrace_id_t, uint64_t arg0, uint64_t arg1,
  *
  * 1.4.4  Caller's context
  *
- *   dtms_remove_pid() is called from either ioctl() or exit() context.
+ *   dtms_remove_proc() is called from either ioctl() or exit() context.
  *   The DTrace framework is locked in such a way that meta providers may not
  *   register or unregister. This means that the meta provider cannot call
  *   dtrace_meta_register() or dtrace_meta_unregister(). However, the context
@@ -2426,10 +2446,19 @@ typedef struct dtrace_helper_provdesc {
         dtrace_pattr_t dthpv_pattr;             /* stability attributes */
 } dtrace_helper_provdesc_t;
 
+/*
+ * APPLE NOTE: dtms_provide_pid and dtms_remove_pid are replaced with
+ * dtms_provide_proc on Darwin, and a proc reference need to be held
+ * for the duration of the call.
+ *
+ * This is due to the fact that proc_find is not re-entrant on Darwin.
+ */
+
 typedef struct dtrace_mops {
         void (*dtms_create_probe)(void *, void *, dtrace_helper_probedesc_t *);
-        void *(*dtms_provide_pid)(void *, dtrace_helper_provdesc_t *, pid_t);
-        void (*dtms_remove_pid)(void *, dtrace_helper_provdesc_t *, pid_t);
+        void *(*dtms_provide_proc)(void *, dtrace_helper_provdesc_t *, proc_t*);
+        void (*dtms_remove_proc)(void *, dtrace_helper_provdesc_t *, proc_t*);
+        char* (*dtms_provider_name)(void *);
 } dtrace_mops_t;
 
 typedef uintptr_t       dtrace_meta_provider_id_t;

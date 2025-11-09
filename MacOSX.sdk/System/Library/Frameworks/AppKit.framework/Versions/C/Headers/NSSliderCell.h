@@ -1,22 +1,21 @@
 /*
 	NSSliderCell.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSActionCell.h>
 
 typedef NS_ENUM(NSUInteger, NSTickMarkPosition) {
-    NSTickMarkBelow = 0,
-    NSTickMarkAbove = 1,
-    NSTickMarkLeft  = NSTickMarkAbove,
-    NSTickMarkRight = NSTickMarkBelow
+    NSTickMarkPositionBelow = 0,
+    NSTickMarkPositionAbove = 1,
+    NSTickMarkPositionLeading = NSTickMarkPositionAbove,
+    NSTickMarkPositionTrailing = NSTickMarkPositionBelow
 };
-
 typedef NS_ENUM(NSUInteger, NSSliderType) {
-    NSLinearSlider   = 0,
-    NSCircularSlider = 1
+    NSSliderTypeLinear = 0,
+    NSSliderTypeCircular = 1,
 };
 
 @interface NSSliderCell : NSActionCell
@@ -34,7 +33,7 @@ typedef NS_ENUM(NSUInteger, NSSliderType) {
     struct __sliderCellFlags {
         unsigned int weAreVertical:1;
         unsigned int weAreVerticalSet:1;
-        unsigned int reserved1:1;
+        unsigned int weHaveStickyOrientation:1;
         unsigned int isPressed:1;
         unsigned int allowsTickMarkValuesOnly:1;
         unsigned int tickMarkPosition:1;
@@ -44,7 +43,9 @@ typedef NS_ENUM(NSUInteger, NSSliderType) {
         unsigned int snappedToPreviousValue:1;
         unsigned int snappedToDefaultValue:1;
         unsigned int snappingAllowed:1;
-        unsigned int reserved2:19;
+        unsigned int collapseOnResize:1;
+        unsigned int startedOnAccessory:1;
+        unsigned int reserved2:17;
     } _scFlags;
 }
 
@@ -55,27 +56,23 @@ typedef NS_ENUM(NSUInteger, NSSliderType) {
 @property double altIncrementValue;
 
 @property NSSliderType sliderType;
-@property (getter=isVertical, readonly) NSInteger vertical;
+@property (readwrite, getter=isVertical) BOOL vertical NS_AVAILABLE_MAC(10_11);
 
 @property (readonly) NSRect trackRect;
 
 @property (readonly) CGFloat knobThickness;
+
 - (NSRect)knobRectFlipped:(BOOL)flipped;
+- (NSRect)barRectFlipped:(BOOL)flipped NS_AVAILABLE_MAC(10_9);
+
 - (void)drawKnob:(NSRect)knobRect;
 - (void)drawKnob;
-- (NSRect)barRectFlipped:(BOOL)flipped NS_AVAILABLE_MAC(10_9);
-- (void)drawBarInside:(NSRect)aRect flipped:(BOOL)flipped;
+- (void)drawBarInside:(NSRect)rect flipped:(BOOL)flipped;
 
-/* These methods have never done anything, and are formally deprecated as of 10.9*/
-- (void)setTitleColor:(NSColor *)newColor NS_DEPRECATED_MAC(10_0, 10_9);
-- (NSColor *)titleColor NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitleFont:(NSFont *)fontObj NS_DEPRECATED_MAC(10_0, 10_9);
-- (NSFont *)titleFont NS_DEPRECATED_MAC(10_0, 10_9);
-- (NSString *)title NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitle:(NSString *)aString NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitleCell:(NSCell *)aCell NS_DEPRECATED_MAC(10_0, 10_9);
-- (id)titleCell NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setKnobThickness:(CGFloat)aFloat NS_DEPRECATED_MAC(10_0, 10_9);
+@end
+
+@interface NSSliderCell (NSSliderCellVerticalGetter)
+@property (readonly, getter=isVertical) BOOL vertical NS_AVAILABLE_MAC(10_0);
 @end
 
 @interface NSSliderCell(NSTickMarkSupport)
@@ -111,3 +108,24 @@ typedef NS_ENUM(NSUInteger, NSSliderType) {
 - (void)drawTickMarks NS_AVAILABLE_MAC(10_9);
 
 @end
+
+/* These methods have never done anything, and are formally deprecated as of 10.9 */
+@interface NSSliderCell (NSDeprecated)
+- (void)setTitleColor:(NSColor *)newColor NS_DEPRECATED_MAC(10_0, 10_9);
+- (NSColor *)titleColor NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitleFont:(NSFont *)fontObj NS_DEPRECATED_MAC(10_0, 10_9);
+- (NSFont *)titleFont NS_DEPRECATED_MAC(10_0, 10_9);
+- (NSString *)title NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitle:(NSString *)string NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitleCell:(NSCell *)cell NS_DEPRECATED_MAC(10_0, 10_9);
+- (id)titleCell NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setKnobThickness:(CGFloat)thickness NS_DEPRECATED_MAC(10_0, 10_9);
+@end
+
+static const NSTickMarkPosition NSTickMarkBelow API_DEPRECATED_WITH_REPLACEMENT("NSTickMarkPositionBelow", macosx(10.0, 10.12)) = NSTickMarkPositionBelow;
+static const NSTickMarkPosition NSTickMarkAbove API_DEPRECATED_WITH_REPLACEMENT("NSTickMarkPositionAbove", macosx(10.0, 10.12)) = NSTickMarkPositionAbove;
+static const NSTickMarkPosition NSTickMarkLeft API_DEPRECATED_WITH_REPLACEMENT("NSTickMarkPositionLeading", macosx(10.0, 10.12)) = NSTickMarkPositionLeading;
+static const NSTickMarkPosition NSTickMarkRight API_DEPRECATED_WITH_REPLACEMENT("NSTickMarkPositionTrailing", macosx(10.0, 10.12)) = NSTickMarkPositionTrailing;
+
+static const NSSliderType NSLinearSlider API_DEPRECATED_WITH_REPLACEMENT("NSSliderTypeLinear", macosx(10.0, 10.12)) = NSSliderTypeLinear;
+static const NSSliderType NSCircularSlider API_DEPRECATED_WITH_REPLACEMENT("NSSliderTypeCircular", macosx(10.0, 10.12)) = NSSliderTypeCircular;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -93,6 +93,7 @@
 #ifndef _NETINET6_IN6_VAR_H_
 #define	_NETINET6_IN6_VAR_H_
 #include <sys/appleapiopts.h>
+#include <net/net_kev.h>
 
 #include <netinet6/scope6_var.h>
 #include <sys/kern_event.h>
@@ -153,6 +154,7 @@ struct in6_ifstat {
 	u_quad_t ifs6_reass_ok;		/* # of reassembled packets */
 					/* NOTE: this is # after reass */
 					/* NOTE: increment on final dst if */
+	u_quad_t ifs6_atmfrag_rcvd;	/* # of atomic fragments received */
 	u_quad_t ifs6_reass_fail;	/* # of reass failures */
 					/* NOTE: may not be packet count */
 					/* NOTE: increment on final dst if */
@@ -374,18 +376,6 @@ struct kev_in6_data {
 	uint8_t	ia_mac[ETHER_ADDR_LEN];
 };
 
-/*
- * Define inet6 event subclass and specific inet6 events.
- */
-#define	KEV_INET6_SUBCLASS		6 /* inet6 subclass identifier */
-
-#define	KEV_INET6_NEW_USER_ADDR		1 /* Userland configured IPv6 address */
-#define	KEV_INET6_CHANGED_ADDR		2 /* Address changed event (future) */
-#define	KEV_INET6_ADDR_DELETED		3 /* IPv6 address was deleted */
-#define	KEV_INET6_NEW_LL_ADDR		4 /* Autoconf LL address appeared */
-#define	KEV_INET6_NEW_RTADV_ADDR	5 /* Autoconf address has appeared */
-#define	KEV_INET6_DEFROUTER		6 /* Default router detected */
-
 
 #define	SIOCSIFADDR_IN6		 _IOW('i', 12, struct in6_ifreq)
 #define	SIOCGIFADDR_IN6		_IOWR('i', 33, struct in6_ifreq)
@@ -478,6 +468,9 @@ struct kev_in6_data {
 
 /* do not input/output */
 #define	IN6_IFF_NOTREADY	(IN6_IFF_TENTATIVE|IN6_IFF_DUPLICATED)
+
+/* SLAAC/DHCPv6 address */
+#define IN6_IFF_NOTMANUAL	(IN6_IFF_AUTOCONF|IN6_IFF_DYNAMIC)
 
 #define	IN6_ARE_SCOPE_CMP(a, b)		((a) - (b))
 #define	IN6_ARE_SCOPE_EQUAL(a, b)	((a) == (b))

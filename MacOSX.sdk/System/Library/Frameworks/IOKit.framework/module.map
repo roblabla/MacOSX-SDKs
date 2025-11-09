@@ -18,11 +18,6 @@ framework module IOKit [extern_c] {
 
   export *
 
-  explicit module DV {
-    header "DV/DVFamily.h"
-    export *
-  }
-  
   explicit module audio {
     header "audio/IOAudioDefines.h"
     header "audio/IOAudioLib.h"

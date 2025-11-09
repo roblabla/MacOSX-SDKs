@@ -4,7 +4,7 @@
  *
  *  See vImage/vImage.h for more on how to better view the headerdoc documentation for functions declared herein.
  *
- *  @copyright Copyright (c) 2003-2015 by Apple Inc. All rights reserved.
+ *  @copyright Copyright (c) 2003-2016 by Apple Inc. All rights reserved.
  *
  *  @discussion   Transform.h defines a number of interfaces that do linear and nonlinear operations
  *                to images.  Matrix multiply operations treat each pixel as a short vector and 
@@ -368,15 +368,10 @@ vImage_Error vImageMatrixMultiply_ARGBFFFF(         const vImage_Buffer *src,
  *                                              error.
  *      @/textblock</pre>
  *
- *  @return     The following error codes may be returned:
- *      <pre> @textblock
- *          kvImageNoError                      Success.
- *          0                                   If kvImageGetTempBufferSize was passed, 0 is returned and no work is done on the image.
- *
- *          kvImageRoiLargerThanInputBuffer     dest->width and height must be less than or equal to the corresponding dimension of src.
- *
- *          kvImageUnknownFlagsBit              A flag not from the above list of flags was passed in.
- *      @/textblock </pre>
+ *  @return kvImageNoError                      Success.
+ *  @return kvImageRoiLargerThanInputBuffer     dest->width and height must be less than or equal to the corresponding dimension of src.
+ *  @return kvImageUnknownFlagsBit              A flag not from the above list of flags was passed in.
+ *  @return If kvImageGetTempBufferSize was passed, 0 is returned and no work is done on the image.
  */
 vImage_Error vImageMatrixMultiply_ARGB8888ToPlanar8( const vImage_Buffer *src,
                                                      const vImage_Buffer *dest,
@@ -386,7 +381,8 @@ vImage_Error vImageMatrixMultiply_ARGB8888ToPlanar8( const vImage_Buffer *src,
                                                      int32_t             post_bias,
                                                      vImage_Flags        flags )
                                                      VIMAGE_NON_NULL(1,2,3)
-                                                     __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 );
+                                                     __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 )
+                                                     __WATCHOS_AVAILABLE(__WATCHOS_2_0);
 
     
 /*!
@@ -396,12 +392,12 @@ vImage_Error vImageMatrixMultiply_ARGB8888ToPlanar8( const vImage_Buffer *src,
  *             only a single channel of output. It is intended to produce grayscale images from four channel content,
  *             but can be used for other purposes.
  *  <pre>@textblock
- *                  for each pixel[y][x] in image:
- *                      float p =   (pixel[y][x][0] + pre_bias[0]) * matrix[0]  +
- *                                  (pixel[y][x][1] + pre_bias[1]) * matrix[1]  +
- *                                  (pixel[y][x][2] + pre_bias[2]) * matrix[2]  +
- *                                  (pixel[y][x][3] + pre_bias[3]) * matrix[3];
- *                      result[y][x] = p + post_bias;
+for each pixel[y][x] in image:
+    float p =   (pixel[y][x][0] + pre_bias[0]) * matrix[0]  +
+                (pixel[y][x][1] + pre_bias[1]) * matrix[1]  +
+                (pixel[y][x][2] + pre_bias[2]) * matrix[2]  +
+                (pixel[y][x][3] + pre_bias[3]) * matrix[3];
+    result[y][x] = p + post_bias;
  *  @/textblock </pre>
  *             vImage reserves the right to reorder computation from the above formulation to improve performance.
  *             If you intend to just extract a single channel without modification (e.g. alpha), please see
@@ -416,29 +412,24 @@ vImage_Error vImageMatrixMultiply_ARGB8888ToPlanar8( const vImage_Buffer *src,
  *
  *  @param      pre_bias    A set of values used to correct the input image so that 0 is encoded as 0.
  *                          If NULL, {0,0,0,0} will be used.
-*
+ *
  *  @param      post_bias   A value added to the sum at the end to provide both for rounding control and for
  *                          allowing for a bias to be encoded into the image format.  Typically, this is just
  *                          zero.
  *
  *  @param      flags       The following flags are allowed:
- *      <pre> @textblock
+ *      @textblock
  *          kvImageNoFlags                      Default operation
  *          kvImageDoNotTile                    Disable internal multithreading.
  *          kvImageGetTempBufferSize            return 0, do no work
  *          kvImagePrintDiagnosticsToConsole    Might print more helpful diagnostic info to the console in the event of an
  *                                              error.
- *      @/textblock</pre>
+ *      @/textblock
  *
- *  @return     The following error codes may be returned:
- *      <pre> @textblock
- *          kvImageNoError                      Success.
- *          0                                   If kvImageGetTempBufferSize was passed, 0 is returned and no work is done on the image.
- *
- *          kvImageRoiLargerThanInputBuffer     dest->width and height must be less than or equal to the corresponding dimension of src.
- *
- *          kvImageUnknownFlagsBit              A flag not from the above list of flags was passed in.
- *      @/textblock </pre>
+ *  @return kvImageNoError                      Success.
+ *  @return kvImageRoiLargerThanInputBuffer     dest->width and height must be less than or equal to the corresponding dimension of src.
+ *  @return kvImageUnknownFlagsBit              A flag not from the above list of flags was passed in.
+ *  @return If kvImageGetTempBufferSize was passed, 0 is returned and no work is done on the image.
  */
 vImage_Error vImageMatrixMultiply_ARGBFFFFToPlanarF( const vImage_Buffer *src,
                                                      const vImage_Buffer *dest,
@@ -447,7 +438,8 @@ vImage_Error vImageMatrixMultiply_ARGBFFFFToPlanarF( const vImage_Buffer *src,
                                                      float               post_bias,
                                                      vImage_Flags        flags )
                                                      VIMAGE_NON_NULL(1,2,3)
-                                                     __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 );
+                                                     __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 )
+                                                     __WATCHOS_AVAILABLE(__WATCHOS_2_0);
 
     
 /*
@@ -560,15 +552,12 @@ vImage_Error    vImageGamma_PlanarF(                const vImage_Buffer *src,
  * The operation can be described as follows:
  *
  *  For each source pixel value x:
- *    sign = x < 0 ? -1 : 1
- *    absx = x < 0 ? -x : x
- *    if absx < cutoff:
- *      output pixel value = sign * (linearCoeffs[0]*absx + linearCoeffs[1])
+ *    if x < cutoff:
+ *      r = linearCoeffs[0]*x + linearCoeffs[1]
  *    else:
- *      y = exponentialCoeffs[0]*absx + exponentialCoeffs[1]
- *      output pixel value = sign * (pow(y, gamma) + exponentialCoeffs[2])
- *
- * If y is negative, the result is undefined.
+ *      t = exponentialCoeffs[0]*x + exponentialCoeffs[1]
+ *      r = pow(t, gamma) + exponentialCoeffs[2]
+ *    output pixel value = r
  *
  * If the source format is Planar8, we multiply by 1/255.0 to get the "input"
  * value used in the expression above; if the destination format is Planar8,
@@ -677,6 +666,88 @@ vImage_Error vImagePiecewiseGamma_PlanarFtoPlanar8(const vImage_Buffer *src,
                                                    const float         boundary,
                                                    vImage_Flags        flags) VIMAGE_NON_NULL(1,2,3,5) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
 
+/* vImageSymmetricPiecewiseGamma_Planar16Q12
+ * vImageSymmetricPiecewiseGamma_PlanarF
+ *
+ * The symmetric piecewise gamma calculation combines a linear and an exponential
+ * (gamma) curve on two regions of the input interval, separated by a user-supplied
+ * boundary value. When the input magnitude is greater or equal to the boundary
+ * value, the gamma curve is used to generate the output. Otherwise, the linear
+ * curve is used. The result is clamped to [0, FMT_MAX] and assigned the sign
+ * of the input value. This creates a curve which is symmetric about the origin,
+ * with discontinuities flattened to the x-axis.
+ *
+ * The operation can be described as follows:
+ *
+ *  For each source pixel value x:
+ *    y = fabsf(x)
+ *    if y < cutoff:
+ *      t = linearCoeffs[0]*y + linearCoeffs[1]
+ *    else:
+ *      s = exponentialCoeffs[0]*y + exponentialCoeffs[1]
+ *      t = pow(t, gamma) + exponentialCoeffs[2]
+ *    r = MAX(t, 0) * copysignf(1.0f, x)
+ *    output pixel value = r
+ *
+ * If the source format is Planar16Q12, we multiply by 1/4096.0 to get the
+ * input value; we clamp to [-8, 8), multiply by 4096.0, and round to nearest
+ * to get the stored to the destination buffer.
+ *
+ * Regardless of the input or output pixel type, the parameters describing the
+ * piecewise gamma function are 32-bit floats, with the single exception of the
+ * boundary parameter.
+ *
+ *  Operands:
+ *  ---------
+ *      src                 A pointer to a vImage_Buffer that references the source pixels
+ *
+ *      dest                A pointer to a vImage_Buffer that references the destination pixels
+ *
+ *      exponentialCoeffs   An array of three floating point coefficients for the gamma curve
+ *
+ *      gamma               The exponent of a power function for calculating gamma correction
+ *
+ *      linearCoeffs        An array of two floating point coefficients for the linear curve
+ *
+ *      boundary            The boundary value for switching from linear to gamma curve
+ *
+ *      flags               The following flags are allowed:
+ *
+ *          kvImageDoNotTile            Turns off internal multithreading. You may
+ *                                      wish to do this if you have your own
+ *                                      multithreading scheme to avoid having the
+ *                                      two interfere with one another.
+ *
+ *          kvImageGetTempBufferSize    Does no work and returns zero.
+ *
+ *  Return Value:
+ *  -------------
+ *      kvImageNoError                  Success!
+ *      kvImageNullPointerArgument      src, dest, exponentialCoeffs, or linearCoeffs pointer is NULL.
+ *      kvImageBufferSizeMismatch       The destination buffer size (width or
+ *                                      height) is larger than the source buffer.
+ *      kvImageUnknownFlagsBit          An unknown or invalid flag was passed. See flags above.
+ *
+ *  All variants of this routine operate in place so long as the source and
+ *  dest image scanlines overlap exactly.
+ */
+vImage_Error vImageSymmetricPiecewiseGamma_Planar16Q12(const vImage_Buffer *src,
+                                                       const vImage_Buffer *dest,
+                                                       const float         exponentialCoeffs[3],
+                                                       const float         gamma,
+                                                       const float         linearCoeffs[2],
+                                                       const Pixel_16S     boundary,
+                                                       vImage_Flags        flags) VIMAGE_NON_NULL(1,2,3,5)
+    __OSX_AVAILABLE_STARTING( __MAC_10_12, __IPHONE_10_0 ) __WATCHOS_AVAILABLE(__WATCHOS_3_0) __TVOS_AVAILABLE(__TVOS_10_0);
+vImage_Error vImageSymmetricPiecewiseGamma_PlanarF(const vImage_Buffer *src,
+                                                   const vImage_Buffer *dest,
+                                                   const float         exponentialCoeffs[3],
+                                                   const float         gamma,
+                                                   const float         linearCoeffs[2],
+                                                   const float         boundary,
+                                                   vImage_Flags        flags) VIMAGE_NON_NULL(1,2,3,5)
+    __OSX_AVAILABLE_STARTING( __MAC_10_12, __IPHONE_10_0 ) __WATCHOS_AVAILABLE(__WATCHOS_3_0) __TVOS_AVAILABLE(__TVOS_10_0);
+
 /*
  *  vImagePiecewisePolynomial*
  *
@@ -684,7 +755,7 @@ vImage_Error vImagePiecewiseGamma_PlanarFtoPlanar8(const vImage_Buffer *src,
  *
  *  vImagePiecewisePolynomial_Planar8toPlanarF uses 8 bit data on input and produces floating point data.
  *  vImagePiecewisePolynomial_PlanarFtoPlanar8 uses floating point data on input and produces 8-bit data with saturated clamping at 0 and 255 to prevent modulo overflow.
- *  vImagePiecewisePolynomial_PlanarF floating point data on both input and output.
+ *  vImagePiecewisePolynomial_PlanarF uses floating point data on both input and output.
  *  vImageTableLookUp_Planar8 uses 8 bit data and produces 8 bit data. In certain cases, the matrix multiply function may also be appropriate.
  *
  *  No other arithmetic is done. If you wish a /255 or *255 operation to be done as part of the calculation, you must incorporate that into your polynomial.
@@ -972,7 +1043,8 @@ vImage_Error    vImageSymmetricPiecewisePolynomial_PlanarF( const vImage_Buffer 
                                                             uint32_t            log2segments,
                                                             vImage_Flags        flags )
                                                             VIMAGE_NON_NULL(1,2,3,4)
-                                                            __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 );
+                                                            __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 )
+                                                            __WATCHOS_AVAILABLE(__WATCHOS_2_0);
 
     
 /*
@@ -1058,6 +1130,173 @@ vImage_Error vImageLookupTable_Planar8toPlanar16(const vImage_Buffer *src,
                                                  const Pixel_16U      table[256],
                                                  vImage_Flags         flags)
     VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+    
+/*
+ *  vImageLookupTable_Planar8toPlanar24
+ *
+ *  Use a lookup table to remap 0..255 values in the source image to a
+ *  different set of 3 channel 8-bit unsigned integer values in the destination.
+ *
+ *          uint32_t table[256];       // 32-bits per pixel & 8-bit per channel
+ *          uint8_t *t_ptr = (uint8_t*)(table + srcRow[i]);
+ *          uint8_t r = t_ptr[1];
+ *          uint8_t g = t_ptr[2];
+ *          uint8_t b = t_ptr[3];
+ *          dstRow[3*i+0] = r;
+ *          dstRow[3*i+1] = g;
+ *          dstRow[3*i+2] = b;
+ *
+ *      src         A pointer to a vImage_Buffer that references 8-bit source pixels
+ *
+ *      dest        A pointer to a vImage_Buffer that references 3 channel 8-bit destination pixels
+ *
+ *      table       A pointer to the lookup table. 256 elements / 32-bits per entry / 4 8-bit values per entry.
+ *
+ *      flags       The following flags are allowed:
+ *
+ *          kvImageDoNotTile         Turns off internal multithreading. You may
+ *                                   wish to do this if you have your own
+ *                                   multithreading scheme to avoid having the
+ *                                   two interfere with one another.
+ *
+ *  Return Value:
+ *  -------------
+ *      kvImageNoError                  Success!
+ *      kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
+ *      kvImageNullPointerArgument      src, dest or table pointer is NULL.
+ *
+ *  This routine will not work in place.
+ *
+ */
+
+vImage_Error vImageLookupTable_Planar8toPlanar24( const vImage_Buffer *src, const vImage_Buffer *dest,  const uint32_t table[256], vImage_Flags flags )  VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+
+
+/*
+ *  vImageLookupTable_Planar8toPlanar48
+ *
+ *  Use a lookup table to remap 0..255 values in the source image to a
+ *  different set of 3 channel 16-bit unsigned integer values in the destination.
+ *
+ *          uint64_t table[256];       // 64-bits per pixel & 16-bit per channel
+ *          uint16_t *t_ptr = (uint16_t*)(table + srcRow[i]);
+ *          uint16_t r = t_ptr[1];
+ *          uint16_t g = t_ptr[2];
+ *          uint16_t b = t_ptr[3];
+ *          dstRow[3*i+0] = r;
+ *          dstRow[3*i+1] = g;
+ *          dstRow[3*i+2] = b;
+ *
+ *      src         A pointer to a vImage_Buffer that references 8-bit source pixels
+ *
+ *      dest        A pointer to a vImage_Buffer that references 3 channel 16-bit destination pixels
+ *
+ *      table       A pointer to the lookup table. 256 elements / 64-bits per entry / 4 16-bit values per entry.
+ *
+ *      flags       The following flags are allowed:
+ *
+ *          kvImageDoNotTile         Turns off internal multithreading. You may
+ *                                   wish to do this if you have your own
+ *                                   multithreading scheme to avoid having the
+ *                                   two interfere with one another.
+ *
+ *  Return Value:
+ *  -------------
+ *      kvImageNoError                  Success!
+ *      kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
+ *      kvImageNullPointerArgument      src, dest or table pointer is NULL.
+ *
+ *  This routine will not work in place.
+ *
+ */
+
+vImage_Error vImageLookupTable_Planar8toPlanar48( const vImage_Buffer *src, const vImage_Buffer *dest,  const uint64_t table[256], vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+
+
+/*
+ *  vImageLookupTable_Planar8toPlanar96
+ *
+ *  Use a lookup table to remap 0..255 values in the source image to a
+ *  different set of 3 channel 32-bit unsigned integer values in the destination.
+ *
+ *          uint32_t table[256*4];       // 128-bits per pixel & 32-bit per channel
+ *          uint32_t *t_ptr = (uint32_t*)(table + 4 * srcRow[i]);
+ *          uint32_t r = t_ptr[1];
+ *          uint32_t g = t_ptr[2];
+ *          uint32_t b = t_ptr[3];
+ *          dstRow[3*i+0] = r;
+ *          dstRow[3*i+1] = g;
+ *          dstRow[3*i+2] = b;
+ *
+ *      src         A pointer to a vImage_Buffer that references 8-bit source pixels
+ *
+ *      dest        A pointer to a vImage_Buffer that references 3 channel 32-bit destination pixels.
+ *
+ *      table       A pointer to the lookup table. 256 elements / 128-bits per entry / 4 32-bit values per entry.
+ *
+ *      flags       The following flags are allowed:
+ *
+ *          kvImageDoNotTile         Turns off internal multithreading. You may
+ *                                   wish to do this if you have your own
+ *                                   multithreading scheme to avoid having the
+ *                                   two interfere with one another.
+ *
+ *  Return Value:
+ *  -------------
+ *      kvImageNoError                  Success!
+ *      kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
+ *      kvImageNullPointerArgument      src, dest or table pointer is NULL.
+ *
+ *  This routine will not work in place.
+ *  dest.data must be 4-byte aligned at least.
+ *
+ */
+
+vImage_Error vImageLookupTable_Planar8toPlanar96( const vImage_Buffer *src, const vImage_Buffer *dest,  const Pixel_FFFF table[256], vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+
+
+/*
+ *  vImageLookupTable_Planar8toPlanar128
+ *
+ *  Use a lookup table to remap 0..255 values in the source image to a
+ *  different set of 4 channel 32-bit unsigned integer values in the destination.
+ *
+ *          uint32_t table[256*4];       // 128-bits per pixel & 32-bit per channel
+ *          uint32_t *t_ptr = (uint32_t*)(table + 4 * srcRow[i]);
+ *          uint32_t a = t_ptr[0];
+ *          uint32_t r = t_ptr[1];
+ *          uint32_t g = t_ptr[2];
+ *          uint32_t b = t_ptr[3];
+ *          dstRow[3*i+0] = a;
+ *          dstRow[3*i+1] = r;
+ *          dstRow[3*i+2] = g;
+ *          dstRow[3*i+3] = b;
+ *
+ *      src         A pointer to a vImage_Buffer that references 8-bit source pixels
+ *
+ *      dest        A pointer to a vImage_Buffer that references 4 channel 32-bit destination pixels.
+ *
+ *      table       A pointer to the lookup table. 256 elements / 128-bits per entry / 4 32-bit values per entry.
+ *
+ *      flags       The following flags are allowed:
+ *
+ *          kvImageDoNotTile         Turns off internal multithreading. You may
+ *                                   wish to do this if you have your own
+ *                                   multithreading scheme to avoid having the
+ *                                   two interfere with one another.
+ *
+ *  Return Value:
+ *  -------------
+ *      kvImageNoError                  Success!
+ *      kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
+ *      kvImageNullPointerArgument      src, dest or table pointer is NULL.
+ *
+ *  This routine will not work in place.
+ *  dest.data must be 4-byte aligned at least.
+ *
+ */
+
+vImage_Error vImageLookupTable_Planar8toPlanar128( const vImage_Buffer *src, const vImage_Buffer *dest,  const Pixel_FFFF table[256], vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
     
 /*
  *  A simple lookup table:
@@ -1147,6 +1386,39 @@ vImageLookupTable_8to64U(
     vImage_Flags flags)
     VIMAGE_NON_NULL(1,2,3)   __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
 
+/*
+ *  vImageLookupTable_Planar16
+ *
+ *  Use a lookup table to remap 0..0xffff values in the source image to a
+ *  different set of 16-bit unsigned integer values in the destination.
+ *
+ *          Pixel_16U table[0x10000];
+ *          Pixel_16U result_pixel = table[ input_16_bit_pixel ];
+ *
+ *      src         A pointer to a vImage_Buffer that references the source pixels
+ *
+ *      dest        A pointer to a vImage_Buffer that references the destination pixels
+ *
+ *      table       A pointer to the lookup table. The table should be an array with 65536 elements.
+ *
+ *      flags       The following flags are allowed:
+ *
+ *          kvImageDoNotTile         Turns off internal multithreading. You may
+ *                                   wish to do this if you have your own
+ *                                   multithreading scheme to avoid having the
+ *                                   two interfere with one another.
+ *
+ *  Return Value:
+ *  -------------
+ *      kvImageNoError                  Success!
+ *      kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
+ *      kvImageNullPointerArgument      src, dest or table pointer is NULL.
+ *
+ *  This routine will not work in place.
+ *
+ */
+
+vImage_Error vImageLookupTable_Planar16(const vImage_Buffer *src, const vImage_Buffer *dest, const Pixel_16U table[0x10000], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 
 /*
  *  vImageInterpolatedLookupTable_PlanarF

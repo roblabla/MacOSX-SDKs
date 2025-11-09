@@ -1,8 +1,10 @@
----
+--- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
+uuids:           [ 'i386: C01C298A-DD25-3FBC-968A-5715EB73C2BB', 'x86_64: 9BBB5C4D-7D27-385E-B1B7-38AA77E2F1B3' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CommonUtilities.framework/Versions/A/CommonUtilities
 current-version: 800.0
+objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _CUTNetworkInterfaceListener._IPv4Addresses, _CUTNetworkInterfaceListener._IPv6Addresses, 
@@ -19,18 +21,15 @@ exports:
                        _CUTGetXPCIntFromDictionary, _CUTGetXPCStringFromDictionary, 
                        _CUTInsertBoolsToXPCDictionary, _CUTInsertDatasToXPCDictionary, 
                        _CUTInsertDoublesToXPCDictionary, _CUTInsertIntsToXPCDictionary, 
-                       _CUTInsertNSStringsToXPCDictionary, _CUTLogBacktrace, 
-                       _CUTLogBacktraceToDepth, _CUTPrintf, _CUTProcessNameForPid, 
-                       _CUTPropertyListFromNSData, _CUTSafeArrayOfStrings, 
-                       _CUTSetXPCConnectionContext, _CUTTemporaryPath, 
+                       _CUTInsertNSStringsToXPCDictionary, _CUTLogBacktrace, _CUTLogBacktraceToDepth, 
+                       _CUTPrintf, _CUTProcessNameForPid, _CUTPropertyListFromNSData, 
+                       _CUTSafeArrayOfStrings, _CUTSetXPCConnectionContext, _CUTTemporaryPath, 
                        _CUTWeakLinkClass, _CUTWeakLinkSymbol, _CUTWiFiManagerMaxMeasurementErrorKey, 
-                       _CUTWiFiManagerPMDurationKey, _CUTWiFiManagerSSIDKey, 
-                       _CUTWiFiManagerTotalDurationKey, _CUTXPCAlert, _CUTXPCAlertv, 
-                       _CUTXPCConfigureConnection, _CUTXPCConnectionSetEventHandlers, 
+                       _CUTWiFiManagerPMDurationKey, _CUTWiFiManagerSSIDKey, _CUTWiFiManagerTotalDurationKey, 
+                       _CUTXPCAlert, _CUTXPCAlertv, _CUTXPCConfigureConnection, _CUTXPCConnectionSetEventHandlers, 
                        _CUTXPCCreateConnectionForService, _CUTXPCCreateConnectionForServiceWithQueue, 
-                       _CUTXPCCreateServerConnection, __CUTAlwaysLog, __CUTLog, 
-                       __CUTLogCategoryFromMessage, __CUTLogForceEnable, 
-                       __CUTLogForceEnableCategory, __CUTLogForceEnableEverything, 
+                       _CUTXPCCreateServerConnection, __CUTAlwaysLog, __CUTLog, __CUTLogCategoryFromMessage, 
+                       __CUTLogForceEnable, __CUTLogForceEnableCategory, __CUTLogForceEnableEverything, 
                        __CUTLogForceWriteToStdout, __CUTLogLevel, __CUTLogMessageFromMessage, 
                        __CUTSyncLoggingSettings, __CUTWarn, __CUTWillLog ]
     objc-classes:    [ _CUTFileCopier, _CUTNetworkInterfaceListener, _CUTPowerAssertion, 

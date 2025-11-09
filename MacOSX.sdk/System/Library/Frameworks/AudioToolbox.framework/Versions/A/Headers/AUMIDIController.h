@@ -8,10 +8,12 @@
 #ifndef AudioToolbox_AUMIDIController_h
 #define AudioToolbox_AUMIDIController_h
 
-#if !__LP64__
+#include <TargetConditionals.h>
+
+#if !TARGET_RT_64_BIT
 // This API set is not available for 64-bit
 
-#include <AudioUnit/AudioUnit.h>
+#include <AudioToolbox/AudioUnit.h>
 #include <CoreMIDI/CoreMIDI.h>
 #include <AudioToolbox/AudioUnitUtilities.h>
 
@@ -100,7 +102,7 @@ AUMIDIControllerExportXMLNames(		AUMIDIControllerRef		inController,
 }
 #endif
 
-#endif // !__LP64__
+#endif // !TARGET_RT_64_BIT
 
 #endif // AudioToolbox_AUMIDIController_h
 

@@ -1,7 +1,7 @@
 //
 //  SCNMaterial.h
 //
-//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -78,19 +78,29 @@ NS_ASSUME_NONNULL_BEGIN
      <diffuse> — The 'diffuse' property of the SCNMaterial instance
  */
 
-SCN_EXTERN NSString * const SCNLightingModelPhong;
-SCN_EXTERN NSString * const SCNLightingModelBlinn;
-SCN_EXTERN NSString * const SCNLightingModelLambert;
-SCN_EXTERN NSString * const SCNLightingModelConstant;
+#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
+typedef NSString * SCNLightingModel NS_STRING_ENUM;
+#else
+typedef NSString * SCNLightingModel;
+#endif
+
+FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelPhong;
+FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelBlinn;
+FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelLambert;
+FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelConstant;
+FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelPhysicallyBased API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
 
 typedef NS_ENUM(NSInteger, SCNCullMode) {
-	SCNCullBack  = 0,
-	SCNCullFront = 1,
+	SCNCullModeBack  = 0,
+	SCNCullModeFront = 1
 };
+
+#define SCNCullBack  SCNCullModeBack
+#define SCNCullFront SCNCullModeFront
 
 typedef NS_ENUM(NSInteger, SCNTransparencyMode) {
 	SCNTransparencyModeAOne    = 0, 
-	SCNTransparencyModeRGBZero = 1, 
+	SCNTransparencyModeRGBZero = 1
 };
 
 /*! 
@@ -104,7 +114,7 @@ typedef NS_ENUM(NSInteger, SCNBlendMode) {
     SCNBlendModeMultiply     = 3, // Blends the source and destination colors by multiplying them.
     SCNBlendModeScreen       = 4, // Blends the source and destination colors by multiplying one minus the source with the destination and adding the source.
     SCNBlendModeReplace      = 5  // Replaces the destination with the source (ignores alpha).
-} NS_ENUM_AVAILABLE(10_11, 9_0);
+} API_AVAILABLE(macosx(10.11), ios(9.0));
 
 @class SCNMaterialProperty;
 @class SCNProgram;
@@ -116,7 +126,6 @@ typedef NS_ENUM(NSInteger, SCNBlendMode) {
  @abstract A SCNMaterial determines how a geometry is rendered. It encapsulates the colors and textures that define the appearance of 3d geometries.
  */
 
-NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNMaterial : NSObject <SCNAnimatable, SCNShadable, NSCopying, NSSecureCoding>
 
 /*! 
@@ -187,13 +196,25 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @property ambientOcclusion
  @abstract The ambientOcclusion property specifies the ambient occlusion of the surface. The ambient occlusion is multiplied with the ambient light, then the result is added to the lighting contribution. This property has no visual impact on scenes that have no ambient light. When an ambient occlusion map is set, the ambient property is ignored.
  */
-@property(nonatomic, readonly) SCNMaterialProperty *ambientOcclusion NS_ENUM_AVAILABLE(10_11, 9_0);
+@property(nonatomic, readonly) SCNMaterialProperty *ambientOcclusion API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @property selfIllumination
  @abstract The selfIllumination property specifies a texture or a color that is added to the lighting contribution of the surface. When a selfIllumination is set, the emission property is ignored.
  */
-@property(nonatomic, readonly) SCNMaterialProperty *selfIllumination NS_ENUM_AVAILABLE(10_11, 9_0);
+@property(nonatomic, readonly) SCNMaterialProperty *selfIllumination API_AVAILABLE(macosx(10.11), ios(9.0));
+
+/*!
+ @property metalness
+ @abstract The metalness property specifies how metallic the material's surface appears. Lower values (darker colors) cause the material to appear more like a dielectric surface. Higher values (brighter colors) cause the surface to appear more metallic. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
+ */
+@property(nonatomic, readonly) SCNMaterialProperty *metalness API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
+
+/*!
+ @property roughness
+ @abstract The roughness property specifies the apparent smoothness of the surface. Lower values (darker colors) cause the material to appear shiny, with well-defined specular highlights. Higher values (brighter colors) cause specular highlights to spread out and the diffuse property of the material to become more retroreflective. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
+ */
+@property(nonatomic, readonly) SCNMaterialProperty *roughness API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
 
 /*! 
  @property shininess
@@ -208,11 +229,11 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  */
 @property(nonatomic) CGFloat transparency;
 
-/*! 
+/*!
  @property lightingModelName
  @abstract Determines the receiver's lighting model. See above for the list of lighting models. Defaults to SCNLightingModelBlinn.
  */
-@property(nonatomic, copy) NSString *lightingModelName;
+@property(nonatomic, copy) SCNLightingModel lightingModelName;
 
 /*! 
  @property litPerPixel
@@ -256,20 +277,20 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @property readsFromDepthBuffer
  @abstract Determines whether the receiver reads from the depth buffer when rendered. Defaults to YES.
  */
-@property(nonatomic) BOOL readsFromDepthBuffer NS_AVAILABLE(10_9, 8_0);
+@property(nonatomic) BOOL readsFromDepthBuffer API_AVAILABLE(macosx(10.9));
 
 /*!
  @property fresnelExponent
  @abstract Specifies the receiver's fresnel exponent value. Defaults to 0.0. Animatable.
  @discussion The effect of the reflectivity property is modulated by this property. The fresnelExponent changes the exponent of the reflectance. The bigger the exponent, the more concentrated the reflection is around the edges.
  */
-@property(nonatomic) CGFloat fresnelExponent NS_AVAILABLE(10_9, 8_0);
+@property(nonatomic) CGFloat fresnelExponent API_AVAILABLE(macosx(10.9));
 
 /*!
  @property blendMode
  @abstract Specifies the receiver's blend mode. Defaults to SCNBlendModeAlpha.
  */
-@property(nonatomic) SCNBlendMode blendMode NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic) SCNBlendMode blendMode API_AVAILABLE(macosx(10.11), ios(9.0));
 
 @end
     

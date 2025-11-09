@@ -18,7 +18,8 @@ typedef NS_ENUM(NSInteger, LAPolicy)
     ///             policy evaluation will fail. If Touch ID is locked out, passcode is required as
     ///             the first step to unlock the Touch ID.
     ///
-    ///             Touch ID authentication dialog contains a cancel button and a fallback button with
+    ///             Touch ID authentication dialog contains a cancel button with default title "Cancel"
+    ///             which can be customized using localizedCancelTitle property and a fallback button with
     ///             default title "Enter Password" which can be customized using localizedFallbackTitle
     ///             property. Fallback button is initially hidden and shows up after first unsuccessful
     ///             Touch ID attempt. Tapping cancel button or fallback button causes evaluatePolicy call
@@ -26,7 +27,7 @@ typedef NS_ENUM(NSInteger, LAPolicy)
     ///
     ///             Biometric authentication will get locked after 5 unsuccessful attempts. After that,
     ///             users have to unlock it by entering passcode.
-    LAPolicyDeviceOwnerAuthenticationWithBiometrics NS_ENUM_AVAILABLE(NA, 8_0) = kLAPolicyDeviceOwnerAuthenticationWithBiometrics,
+    LAPolicyDeviceOwnerAuthenticationWithBiometrics NS_ENUM_AVAILABLE(10_12, 8_0) __WATCHOS_AVAILABLE(3.0) __TVOS_AVAILABLE(10.0) = kLAPolicyDeviceOwnerAuthenticationWithBiometrics,
 
     /// Device owner was authenticated by Touch ID or device passcode.
     ///
@@ -43,17 +44,17 @@ typedef NS_ENUM(NSInteger, LAPolicy)
     ///             increased backoff delay.
     LAPolicyDeviceOwnerAuthentication NS_ENUM_AVAILABLE(10_11, 9_0) = kLAPolicyDeviceOwnerAuthentication
 
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} NS_ENUM_AVAILABLE(10_10, 8_0) __WATCHOS_AVAILABLE(3.0) __TVOS_AVAILABLE(10.0);
 
 /// The maximum value for LAContext touchIDAuthenticationAllowableReuseDuration property.
-extern const NSTimeInterval LATouchIDAuthenticationMaximumAllowableReuseDuration NS_AVAILABLE_IOS(9_0);
+extern const NSTimeInterval LATouchIDAuthenticationMaximumAllowableReuseDuration NS_AVAILABLE(10_12, 9_0) __WATCHOS_UNAVAILABLE __TVOS_UNAVAILABLE;
 
 /// Class that represents an authentication context.
 ///
 /// @discussion This context can be used for evaluating policies.
 ///
 /// @see LAPolicy
-NS_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_AVAILABLE(3.0) __TVOS_AVAILABLE(10.0)
 @interface LAContext : NSObject
 
 /// Determines if a particular policy can be evaluated.
@@ -98,17 +99,15 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 /// @param policy Policy to be evaluated.
 ///
 /// @param reply Reply block that is executed when policy evaluation finishes.
+///              success Reply parameter that is YES if the policy has been evaluated successfully or
+///                      NO if the evaluation failed.
+///              error Reply parameter that is nil if the policy has been evaluated successfully, or it
+///                    contains error information about the evaluation failure.
 ///
 /// @param localizedReason Application reason for authentication. This string must be provided in correct
 ///                        localization and should be short and clear. It will be eventually displayed in
-///                        the authentication dialog subtitle. A name of the calling application will be
-///                        already displayed in title, so it should not be duplicated here.
-///
-/// @param success Reply parameter that is YES if the policy has been evaluated successfully or NO if
-///                the evaluation failed.
-///
-/// @param error Reply parameter that is nil if the policy has been evaluated successfully, or it contains
-///              error information about the evaluation failure.
+///                        the authentication dialog. A name of the calling application will be already
+///                        displayed in title, so it should not be duplicated here.
 ///
 /// @warning localizedReason parameter is mandatory and the call will throw NSInvalidArgumentException if
 ///          nil or empty string is specified.
@@ -145,8 +144,8 @@ typedef NS_ENUM(NSInteger, LACredentialType)
     ///             LocalAuthentication will not show password entry user interface.
     ///             When entered from the LocalAuthentication user interface, the password is stored as
     ///             UTF-8 encoded string.
-    LACredentialTypeApplicationPassword = 0,
-} NS_ENUM_AVAILABLE(10_11, 9_0);
+    LACredentialTypeApplicationPassword __TVOS_UNAVAILABLE = 0,
+} NS_ENUM_AVAILABLE(10_11, 9_0) __WATCHOS_AVAILABLE(3.0) __TVOS_AVAILABLE(10.0);
 
 /// Sets a credential to this context.
 ///
@@ -161,7 +160,7 @@ typedef NS_ENUM(NSInteger, LACredentialType)
 /// @return YES if the credential was set successfully, NO otherwise.
 ///
 - (BOOL)setCredential:(nullable NSData *)credential
-                type:(LACredentialType)type NS_AVAILABLE(10_11, 9_0);
+                 type:(LACredentialType)type NS_AVAILABLE(10_11, 9_0) __WATCHOS_AVAILABLE(3.0) __TVOS_UNAVAILABLE;
 
 /// Reveals if credential was set with this context.
 ///
@@ -169,7 +168,7 @@ typedef NS_ENUM(NSInteger, LACredentialType)
 ///
 /// @return YES on success, NO otherwise.
 ///
-- (BOOL)isCredentialSet:(LACredentialType)type NS_AVAILABLE(10_11, 9_0);
+- (BOOL)isCredentialSet:(LACredentialType)type NS_AVAILABLE(10_11, 9_0) __WATCHOS_AVAILABLE(3.0) __TVOS_UNAVAILABLE;
 
 typedef NS_ENUM(NSInteger, LAAccessControlOperation)
 {
@@ -182,9 +181,15 @@ typedef NS_ENUM(NSInteger, LAAccessControlOperation)
     /// Access control will be used for key creation.
     LAAccessControlOperationCreateKey,
 
-    /// Access control will be used for accessing existing key.
-    LAAccessControlOperationUseKeySign
-} NS_ENUM_AVAILABLE(10_11, 9_0);
+    /// Access control will be used for sign operation with existing key.
+    LAAccessControlOperationUseKeySign,
+    
+    /// Access control will be used for data decryption using existing key.
+    LAAccessControlOperationUseKeyDecrypt NS_ENUM_AVAILABLE(10_12, 10_0),
+
+    /// Access control will be used for key exchange.
+    LAAccessControlOperationUseKeyKeyExchange NS_ENUM_AVAILABLE(10_12, 10_0),
+} NS_ENUM_AVAILABLE(10_11, 9_0) __WATCHOS_AVAILABLE(3.0) __TVOS_AVAILABLE(10.0);
 
 /// Evaluates access control object for the specified operation.
 ///
@@ -212,16 +217,14 @@ typedef NS_ENUM(NSInteger, LAAccessControlOperation)
 ///
 /// @param localizedReason Application reason for authentication. This string must be provided in correct
 ///                        localization and should be short and clear. It will be eventually displayed in
-///                        the authentication dialog subtitle. A name of the calling application will be
-///                        already displayed in title, so it should not be duplicated here.
+///                        the authentication dialog. A name of the calling application will be already
+///                        displayed in title, so it should not be duplicated here.
 ///
 /// @param reply Reply block that is executed when access control evaluation finishes.
-///
-/// @param success Reply parameter that is YES if the access control has been evaluated successfully or NO
-///                if the evaluation failed.
-///
-/// @param error Reply parameter that is nil if the access control has been evaluated successfully, or it
-///              contains error information about the evaluation failure.
+///              success Reply parameter that is YES if the access control has been evaluated successfully or
+///                      NO if the evaluation failed.
+///              error Reply parameter that is nil if the access control has been evaluated successfully, or
+///                    it contains error information about the evaluation failure.
 ///
 /// @warning localizedReason parameter is mandatory and the call will throw NSInvalidArgumentException if
 ///          nil or empty string is specified.
@@ -229,12 +232,17 @@ typedef NS_ENUM(NSInteger, LAAccessControlOperation)
                     operation:(LAAccessControlOperation)operation
               localizedReason:(NSString *)localizedReason
                         reply:(void(^)(BOOL success, NSError * __nullable error))reply
-                        NS_AVAILABLE(10_11, 9_0);
+                        NS_AVAILABLE(10_11, 9_0) __WATCHOS_AVAILABLE(3.0) __TVOS_UNAVAILABLE;
 
 /// Fallback button title.
 /// @discussion Allows fallback button title customization. A default title "Enter Password" is used when
 ///             this property is left nil. If set to empty string, the button will be hidden.
 @property (nonatomic, nullable, copy) NSString *localizedFallbackTitle;
+
+/// Cancel button title.
+/// @discussion Allows cancel button title customization. A default title "Cancel" is used when
+///             this property is left nil or is set to empty string.
+@property (nonatomic, nullable, copy) NSString *localizedCancelTitle NS_AVAILABLE(10_12, 10_0);
 
 /// Allows setting the limit for the number of failures during biometric authentication.
 ///
@@ -244,7 +252,7 @@ typedef NS_ENUM(NSInteger, LAAccessControlOperation)
 ///
 /// @warning Please note that setting this property with high values does not prevent biometry lockout after 5
 ///          wrong attempts.
-@property (nonatomic, nullable) NSNumber *maxBiometryFailures NS_DEPRECATED_IOS(8_3, 9_0);
+@property (nonatomic, nullable) NSNumber *maxBiometryFailures NS_DEPRECATED_IOS(8_3, 9_0) __WATCHOS_UNAVAILABLE __TVOS_UNAVAILABLE;
 
 /// Contains policy domain state.
 ///
@@ -255,21 +263,26 @@ typedef NS_ENUM(NSInteger, LAAccessControlOperation)
 ///              data will change. Nature of such database changes cannot be determined
 ///              but comparing data of evaluatedPolicyDomainState after different evaluatePolicy
 ///              will reveal the fact database was changed between calls.
-@property (nonatomic, nullable, readonly) NSData *evaluatedPolicyDomainState NS_AVAILABLE(10_11, 9_0);
+/// @warning Please note that the value returned by this property can also change between OS versions even if
+///          there was no change of the enrolled fingerprints.
+@property (nonatomic, nullable, readonly) NSData *evaluatedPolicyDomainState NS_AVAILABLE(10_11, 9_0) __WATCHOS_UNAVAILABLE __TVOS_UNAVAILABLE;
 
-/// Time interval for accepting a successful Touch ID unlock from the past.
+/// Time interval for accepting a successful Touch ID device unlock (on the lock screen) from the past.
 ///
 /// @discussion This property can be set with a time interval in seconds. If the device was successfully unlocked by
 ///             Touch ID within this time interval, then Touch ID authentication on this context will succeed
 ///             automatically and the reply block will be called without prompting user for Touch ID.
 ///
-///             The default value is 0, meaning that no previous TouchID authentication can be reused.
+///             The default value is 0, meaning that no previous TouchID unlock can be reused.
+///
+///             This property is meant only for reusing Touch ID matches from the device lock screen.
+///             It does not allow reusing previous Touch ID matches in application or between applications.
 ///
 ///             The maximum supported interval is 5 minutes and setting the value beyond 5 minutes does not increase
 ///             the accepted interval.
 ///
 /// @see LATouchIDAuthenticationMaximumAllowableReuseDuration
-@property (nonatomic) NSTimeInterval touchIDAuthenticationAllowableReuseDuration NS_AVAILABLE_IOS(9_0);
+@property (nonatomic) NSTimeInterval touchIDAuthenticationAllowableReuseDuration NS_AVAILABLE(10_12, 9_0) __WATCHOS_UNAVAILABLE __TVOS_UNAVAILABLE;
 
 @end
 

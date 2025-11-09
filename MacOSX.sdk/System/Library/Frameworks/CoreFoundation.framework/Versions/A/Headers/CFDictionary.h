@@ -1,5 +1,5 @@
 /*	CFDictionary.h
-	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2016, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -574,7 +574,7 @@ void CFDictionaryGetKeysAndValues(CFDictionaryRef theDict, const void **keys, co
 		undefined.
 */
 CF_EXPORT
-void CFDictionaryApplyFunction(CFDictionaryRef theDict, CFDictionaryApplierFunction applier, void *context);
+void CFDictionaryApplyFunction(CFDictionaryRef theDict, CFDictionaryApplierFunction CF_NOESCAPE applier, void *context);
 
 /*!
 	@function CFDictionaryAddValue

@@ -1,7 +1,7 @@
 /*
     NSBrowser.h
     Application Kit
-    Copyright (c) 1994-2015, Apple Inc.
+    Copyright (c) 1994-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -180,7 +180,7 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
  */
 - (void)scrollRowToVisible:(NSInteger)row inColumn:(NSInteger)column NS_AVAILABLE_MAC(10_6);
 
-- (void)setTitle:(NSString *)aString ofColumn:(NSInteger)column;
+- (void)setTitle:(NSString *)string ofColumn:(NSInteger)column;
 - (nullable NSString *)titleOfColumn:(NSInteger)column;
 @property (copy) NSString *pathSeparator;
 - (BOOL)setPath:(NSString *)path;
@@ -250,7 +250,7 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 - (BOOL)sendAction;
 
 - (NSRect)titleFrameOfColumn:(NSInteger)column;
-- (void)drawTitleOfColumn:(NSInteger)column inRect:(NSRect)aRect;
+- (void)drawTitleOfColumn:(NSInteger)column inRect:(NSRect)rect;
 @property (readonly) CGFloat titleHeight;
 - (NSRect)frameOfColumn:(NSInteger)column;
 - (NSRect)frameOfInsideOfColumn:(NSInteger)column;
@@ -329,9 +329,9 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
  */
 @property (strong) NSColor *backgroundColor NS_AVAILABLE_MAC(10_5);
 
-/* Begins editing the item at the specified path. theEvent may be nil if programatically editing. The cell's contents will be selected if select is YES. Overriding this method will not affect the editing behavior of the browser.
+/* Begins editing the item at the specified path. event may be nil if programatically editing. The cell's contents will be selected if select is YES. Overriding this method will not affect the editing behavior of the browser.
  */
-- (void)editItemAtIndexPath:(NSIndexPath *)indexPath withEvent:(NSEvent *)theEvent select:(BOOL)select NS_AVAILABLE_MAC(10_6);
+- (void)editItemAtIndexPath:(NSIndexPath *)indexPath withEvent:(nullable NSEvent *)event select:(BOOL)select NS_AVAILABLE_MAC(10_6);
 
 @end
 
@@ -340,7 +340,7 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 
 /* The -object in the NSNotification is the browser whose column sizes need to be persisted. There is no userInfo.
  */
-APPKIT_EXTERN NSString * NSBrowserColumnConfigurationDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSBrowserColumnConfigurationDidChangeNotification;
 
 #pragma mark -
 #pragma mark **** Delegate methods ****

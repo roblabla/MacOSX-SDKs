@@ -29,7 +29,7 @@
 
 #pragma pack(push, 2)
 
-enum {
+CF_ENUM(OSType) {
   kAEUserTerminology            = 'aeut', /*  0x61657574  */
   kAETerminologyExtension       = 'aete', /*  0x61657465  */
   kAEScriptingSizeResource      = 'scsz', /*  0x7363737a  */

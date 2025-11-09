@@ -119,6 +119,8 @@ enum
 		Metadata keyspace for ID3 keys.
 	@const kCMMetadataKeySpace_Icy
 		Metadata keyspace for ShoutCast keys.
+	@const kCMMetadataKeySpace_HLSDateRange
+		Metadata keyspace for HLS DateRange tags.
 */
 CM_ASSUME_NONNULL_BEGIN
 
@@ -134,6 +136,8 @@ CM_EXPORT const CFStringRef kCMMetadataKeySpace_ID3
 								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_Icy
 								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+CM_EXPORT const CFStringRef kCMMetadataKeySpace_HLSDateRange
+								__OSX_AVAILABLE_STARTING(__MAC_10_11_3, __IPHONE_9_3);
 
 /*!
 	@const kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709

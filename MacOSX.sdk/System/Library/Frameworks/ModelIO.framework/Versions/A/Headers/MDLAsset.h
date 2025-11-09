@@ -2,7 +2,7 @@
  @header MDLAsset.h
  @framework ModelIO
  @abstract Structures for representing contents of 3d model files
- @copyright Copyright © 2015 Apple, Inc. All rights reserved.
+ @copyright Copyright © 2016 Apple, Inc. All rights reserved.
  */
 
 #import <ModelIO/ModelIOExports.h>
@@ -12,16 +12,17 @@
 #import <Foundation/NSURL.h>
 #import <simd/simd.h>
 
+@class MDLLightProbe;
+@class MDLTexture;
+
 /*!
  @class MDLAsset
  
  @abstract An MDLAsset represents the contents of a model file.
  
-@discussion
-
- Each asset contains a collection of hierarchies of objects, where each object 
- in the asset is the top level of a hierarchy. Objects include transforms, 
- lights, cameras, and meshes.
+ @discussion Each asset contains a collection of hierarchies of objects, where 
+             each object in the asset is the top level of a hierarchy. Objects 
+             include transforms, lights, cameras, and meshes.
  
  MDLAssets are typically instantiated from NSURLs that refer to a model resource.
 
@@ -81,8 +82,15 @@ MDL_EXPORT
            vertexDescriptor:(nullable MDLVertexDescriptor*)vertexDescriptor
             bufferAllocator:(nullable id<MDLMeshBufferAllocator>)bufferAllocator;
 
+/*!
+ @method initWithBufferAllocator:
+ @abstract Initialize an empty MDLAsset with a buffer allocator to be used during
+           other operations.
+ */
+- (instancetype)initWithBufferAllocator:(nullable id<MDLMeshBufferAllocator>)bufferAllocator;
+
 /*! 
- @method initWithURL:vertexDescriptor:bufferAllocator:preserveTopology
+ @method initWithURL:vertexDescriptor:bufferAllocator:preserveTopology:error:
  @abstract Same as initWithURL:vertexDescriptor:bufferAllocator: except that
            if preserveTopology is YES, a topology buffer might be created on the
            submeshes.
@@ -95,7 +103,6 @@ MDL_EXPORT
              MDLGeometryTypeVariableTopology, and a faceTopologyBuffer will be
              created.
  */
-
 - (instancetype)initWithURL:(NSURL *)URL
            vertexDescriptor:(nullable MDLVertexDescriptor*)vertexDescriptor
             bufferAllocator:(nullable id<MDLMeshBufferAllocator>)bufferAllocator
@@ -108,7 +115,13 @@ MDL_EXPORT
  @abstract Export an asset to the specified URL.
  @return YES is returned if exporting proceeded successfully,
  */
-- (BOOL)exportAssetToURL:(NSURL *)URL;
+- (BOOL)exportAssetToURL:(NSURL *)URL NS_SWIFT_UNAVAILABLE("Use exportAssetToURL:error");
+
+/*!
+ @method exportAssetToURL:error:
+ @abstract Export an asset to the specified URL.
+ @return YES is returned if exporting proceeded successfully,
+ */
 - (BOOL)exportAssetToURL:(NSURL *)URL error:(NSError * __nullable * __nullable)error;
 
 /*!
@@ -130,13 +143,23 @@ MDL_EXPORT
 + (BOOL)canExportFileExtension:(NSString *)extension;
 
 /*!
+ @method childObjectsOfClass:
+ @abstract Inspects an asset's hierarchy for objects of the specified class type
+ @return returns an NSArray of all objects in the asset matching the requested class
+ @discussion This can be used to get references to all MDLMesh objects, MDLLights,
+             etc. if objectClass is not a subclass of MDLObject, an exception will be
+             raised.
+ */
+- (NSArray<MDLObject*>*)childObjectsOfClass:(Class)objectClass;
+
+/*!
  @method boundingBoxAtTime:
  @abstract The bounds of the MDLAsset at the specified time
  */
 - (MDLAxisAlignedBoundingBox)boundingBoxAtTime:(NSTimeInterval)time;
 
 /*!
- @property bounds
+ @property boundingBox
  @abstract The bounds of the MDLAsset at the earliest time sample
  */
 @property (nonatomic, readonly) MDLAxisAlignedBoundingBox boundingBox;
@@ -153,7 +176,9 @@ MDL_EXPORT
  @property startTime
  @abstract Start time bracket of animation data
  @discussion If no animation data was specified by resource or resource incapable 
-             of specifying animation data, this value defaults to 0
+             of specifying animation data, this value defaults to 0. If startTime
+             was set explicitly, then the value of startTime will be the lesser
+             of the set value and the animated values.
  */
 @property (nonatomic, readwrite) NSTimeInterval startTime;
 
@@ -161,13 +186,15 @@ MDL_EXPORT
  @property endTime
  @abstract End time bracket of animation data
  @discussion If no animation data was specified by resource or resource incapable
-             of specifying animation data, this value defaults to 0
+             of specifying animation data, this value defaults to 0. If the
+             endTime was set explicitly, then the value of endTime will be the
+             greater of the set value and the animated values.
  */
 @property (nonatomic, readwrite) NSTimeInterval endTime;
 
 /*!
  @property URL
- @abstract  URL used to create the asset
+ @abstract URL used to create the asset
  @discussion If no animation data was specified by resource or resource incapable 
              of specifying animation data, this value defaults to 0
  */
@@ -181,7 +208,7 @@ MDL_EXPORT
 
 /*!
  @property vertexDescriptor
- @abstract  Vertex descriptor set upon asset initialization
+ @abstract Vertex descriptor set upon asset initialization
  @discussion Will be nil if there was no descriptor set
  */
 @property (nonatomic, readonly, retain, nullable) MDLVertexDescriptor *vertexDescriptor;
@@ -201,7 +228,8 @@ MDL_EXPORT
 - (void)removeObject:(MDLObject *)object;
 
 /*!
- The number of top level objects
+ @property count
+ @abstract The number of top level objects
  */
 @property (nonatomic, readonly) NSUInteger count;
 
@@ -217,6 +245,52 @@ MDL_EXPORT
  */
 - (MDLObject *)objectAtIndex:(NSUInteger)index;
 
+/*!
+ @property masters
+ @abstract Master objects that can be instanced into the asset's object hierarchy
+ 
+ @see MDLObjectContainerComponent
+ */
+@property (nonatomic, retain) id<MDLObjectContainerComponent> masters;
+
+
+@end
+
+@protocol MDLLightProbeIrradianceDataSource <NSObject>
+/**
+ Bounding box of the source scene for which you are adding light probes.
+ */
+@property MDLAxisAlignedBoundingBox boundingBox;
+
+@optional
+/**
+ Spherical harmonics level used to calculate the spherical harmonics coefficients.
+ */
+@property NSUInteger sphericalHarmonicsLevel;
+
+/**
+ Given a position in the source scene, returns the spherical harmonics coefficients
+ at that point.
+ 
+ The data returned is an array of 32-bit floating-point values, containing three non-interleaved 
+ data sets corresponding to the red, green, and blue sets of coefficients. The array’s length is 
+ determined by the sphericalHarmonicsLevel property.
+ */
+-(NSData *)sphericalHarmonicsCoefficientsAtPosition:(vector_float3)position;
+@end
+
+/**
+ Given a light probe density, method places light probes in the scene according to the
+ passed in placement heuristic type. The higher the density, the greater the number of 
+ light probes placed in the scene.
+ 
+ Using the placement heuristic MDLProbePlacementUniformGrid places the light probes in the
+ scene as a uniform grid. The placement heuristic MDLProbePlacementIrradianceDistribution 
+ places the light probes in areas of greatest irradiance change. 
+ */
+@interface MDLAsset (MDLLightBaking)
++ (NSArray<MDLLightProbe *> *)placeLightProbesWithDensity:(float)value heuristic:(MDLProbePlacement)type
+                                usingIrradianceDataSource:(id<MDLLightProbeIrradianceDataSource>)dataSource;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -24,7 +24,9 @@
 #import <CoreLocation/CLLocation.h>
 #import <CoreLocation/CLLocationManager.h>
 #import <CoreLocation/CLLocationManagerDelegate.h>
+#import <CoreLocation/CLLocationManager+CLVisitExtensions.h>
 #import <CoreLocation/CLPlacemark.h>
 #import <CoreLocation/CLGeocoder.h>
+#import <CoreLocation/CLVisit.h>
 
 #endif /* __CORELOCATION__ */

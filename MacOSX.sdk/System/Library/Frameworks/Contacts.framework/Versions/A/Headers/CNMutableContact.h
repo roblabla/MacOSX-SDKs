@@ -30,13 +30,14 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @property (copy, NS_NONATOMIC_IOSONLY) NSString *nameSuffix;
 @property (copy, NS_NONATOMIC_IOSONLY) NSString *nickname;
 
-@property (copy, NS_NONATOMIC_IOSONLY) NSString *phoneticGivenName;
-@property (copy, NS_NONATOMIC_IOSONLY) NSString *phoneticMiddleName;
-@property (copy, NS_NONATOMIC_IOSONLY) NSString *phoneticFamilyName;
-
 @property (copy, NS_NONATOMIC_IOSONLY) NSString *organizationName;
 @property (copy, NS_NONATOMIC_IOSONLY) NSString *departmentName;
 @property (copy, NS_NONATOMIC_IOSONLY) NSString *jobTitle;
+
+@property (copy, NS_NONATOMIC_IOSONLY) NSString *phoneticGivenName;
+@property (copy, NS_NONATOMIC_IOSONLY) NSString *phoneticMiddleName;
+@property (copy, NS_NONATOMIC_IOSONLY) NSString *phoneticFamilyName;
+@property (copy, NS_NONATOMIC_IOSONLY) NSString *phoneticOrganizationName;
 
 @property (copy, NS_NONATOMIC_IOSONLY) NSString *note;
 

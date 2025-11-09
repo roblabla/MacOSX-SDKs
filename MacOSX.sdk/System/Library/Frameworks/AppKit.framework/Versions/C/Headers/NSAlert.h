@@ -1,7 +1,7 @@
 /*
 	NSAlert.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,12 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NSAlertDelegate;
 
 
-/* The default alert style is NSWarningAlertStyle.  NSCriticalAlertStyle should be reserved for critical alerts and will cause the icon to be badged with a caution icon.
+/* The default alert style is NSAlertStyleWarning.  NSAlertStyleCritical should be reserved for critical alerts and will cause the icon to be badged with a caution icon.
 */
 typedef NS_ENUM(NSUInteger, NSAlertStyle) {
-    NSWarningAlertStyle = 0,
-    NSInformationalAlertStyle = 1,
-    NSCriticalAlertStyle = 2
+    NSAlertStyleWarning = 0,
+    NSAlertStyleInformational = 1,
+    NSAlertStyleCritical = 2
 };
 
 @interface NSAlert : NSObject
@@ -55,7 +55,9 @@ typedef NS_ENUM(NSUInteger, NSAlertStyle) {
     BOOL _layoutDone;
     BOOL _showsHelp;
     BOOL _showsSuppressionButton;
+#ifndef __OBJC2__
     BOOL reserved;
+#endif
     id _suppressionButton;
     id _accessoryView;
 }
@@ -64,14 +66,6 @@ typedef NS_ENUM(NSUInteger, NSAlertStyle) {
 /* Given an NSError, create an NSAlert that can be used to present the error to the user. The error's localized description, recovery suggestion, and recovery options will be used to set the alert's message text, informative text, and button titles, respectively.
 */
 + (NSAlert *)alertWithError:(NSError *)error;
-
-
-/* This method is deprecated in 10.9 and will be formally deprecated in the following release.
- This was intended for use by apps migrating from the C-based API.  This uses alternate return codes that were compatible with this C-based API, but not with modern alerts, see NSAlertDefaultReturn, etc. in NSPanel.h
- Alerts should be created with the -init method and setting properties.
- */
-+ (NSAlert *)alertWithMessageText:(nullable NSString *)message defaultButton:(nullable NSString *)defaultButton alternateButton:(nullable NSString *)alternateButton otherButton:(nullable NSString *)otherButton informativeTextWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(5,6) NS_DEPRECATED_MAC(10_3, 10_10, "Use -init instead");
-
 
 @property (copy) NSString *messageText;
 @property (copy) NSString *informativeText;
@@ -122,7 +116,10 @@ enum {
 
 @property NSAlertStyle alertStyle;
 
-@property (nullable, assign) id<NSAlertDelegate> delegate;
+/* The delegate of the receiver, currently only allows for custom help behavior of the alert.
+   For apps linked against 10.12, this property has zeroing weak memory semantics. When linked against an older SDK this back to having `retain` semantics, matching legacy behavior.
+ */
+@property (nullable, weak) id<NSAlertDelegate> delegate;
 
 /* -setShowsSuppressionButton: indicates whether or not the alert should contain a suppression checkbox.  The default is NO.  This checkbox is typically used to give the user an option to not show this alert again.  If shown, the suppression button will have a default localized title similar to @"Do not show this message again".  You can customize this title using [[alert suppressionButton] setTitle:].  When the alert is dismissed, you can get the state of the suppression button, using [[alert suppressionButton] state] and store the result in user defaults, for example.  This setting can then be checked before showing the alert again.  By default, the suppression button is positioned below the informative text, and above the accessory view (if any) and the alert buttons, and left-aligned with the informative text.  However do not count on the placement of this button, since it might be moved if the alert panel user interface is changed in the future. If you need a checkbox for purposes other than suppression text, it is recommended you create your own using an accessory view.
 */
@@ -146,13 +143,8 @@ enum {
 */
 - (NSModalResponse)runModal;
 
-/* This method is deprecated in 10.9 and will be formally deprecated in the following release.
- -beginSheetModalForWindow:completionHandler: should be used instead.
- */
-- (void)beginSheetModalForWindow:(NSWindow *)window modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED_MAC(10_3, 10_10, "Use -beginSheetModalForWindow:completionHandler: instead");
-
 /* Begins a sheet on the doc window using NSWindow's sheet API.
-   If the alert has an alertStyle of NSCriticalAlertStyle, it will be shown as a "critical" sheet; it will otherwise be presented as a normal sheet.
+   If the alert has an alertStyle of NSAlertStyleCritical, it will be shown as a "critical" sheet; it will otherwise be presented as a normal sheet.
  */
 - (void)beginSheetModalForWindow:(NSWindow *)sheetWindow completionHandler:(void (^ __nullable)(NSModalResponse returnCode))handler NS_AVAILABLE_MAC(10_9);
 
@@ -168,6 +160,26 @@ enum {
 */
 - (BOOL)alertShowHelp:(NSAlert *)alert;
 @end
+
+
+@interface NSAlert (NSAlertDeprecated)
+
+/* This method is deprecated in 10.9 and will be formally deprecated in the following release.
+ This was intended for use by apps migrating from the C-based API.  This uses alternate return codes that were compatible with this C-based API, but not with modern alerts, see NSAlertDefaultReturn, etc. in NSPanel.h
+ Alerts should be created with the -init method and setting properties.
+ */
++ (NSAlert *)alertWithMessageText:(nullable NSString *)message defaultButton:(nullable NSString *)defaultButton alternateButton:(nullable NSString *)alternateButton otherButton:(nullable NSString *)otherButton informativeTextWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(5,6) NS_DEPRECATED_MAC(10_3, 10_10, "Use -init instead");
+
+/* This method is deprecated in 10.9 and will be formally deprecated in the following release.
+ -beginSheetModalForWindow:completionHandler: should be used instead.
+ */
+- (void)beginSheetModalForWindow:(NSWindow *)window modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED_MAC(10_3, 10_10, "Use -beginSheetModalForWindow:completionHandler: instead");
+
+@end
+
+static const NSAlertStyle NSWarningAlertStyle API_DEPRECATED_WITH_REPLACEMENT("NSAlertStyleWarning", macosx(10.3, 10.12)) = NSAlertStyleWarning;
+static const NSAlertStyle NSInformationalAlertStyle API_DEPRECATED_WITH_REPLACEMENT("NSAlertStyleInformational", macosx(10.3, 10.12)) = NSAlertStyleInformational;
+static const NSAlertStyle NSCriticalAlertStyle API_DEPRECATED_WITH_REPLACEMENT("NSAlertStyleCritical", macosx(10.3, 10.12)) = NSAlertStyleCritical;
 
 NS_ASSUME_NONNULL_END
 

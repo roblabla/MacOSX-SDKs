@@ -1,7 +1,7 @@
 /*
 	NSSplitView.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -39,9 +39,10 @@ typedef NS_ENUM(NSInteger, NSSplitViewDividerStyle) {
 @property (nullable, copy) NSString *autosaveName NS_AVAILABLE_MAC(10_5);
 
 
-/* Set or get the delegate of the split view. The delegate will be sent NSSplitViewDelegate messages to which it responds.
+/* Set or get the delegate of the split view. The delegate will be sent NSSplitViewDelegate messages to which it responds. 
+   For apps linked against 10.12, this property has zeroing weak memory semantics. When linked against an older SDK, or with objects that do not support zeroing weak references this falls back to having `assign` semantics.
 */
-@property (nullable, assign) id<NSSplitViewDelegate> delegate;
+@property (nullable, weak) id<NSSplitViewDelegate> delegate;
 
 /* Draw the divider between two of the split view's subviews. The rectangle describes the entire divider rectangle in the receiver's coordinates. You can override this method to change the appearance of dividers.
 */
@@ -188,11 +189,11 @@ Delegates that respond to this message should adjust the frames of the uncollaps
 
 /* A notification that is posted to the default notification center by NSSplitView when a split view is about to resize its subviews either as a result of its own resizing or during the dragging of one of its dividers by the user. Starting in Mac OS 10.5, if the notification is being sent because the user is dragging a divider, the notification's user info dictionary contains an entry whose key is @"NSSplitViewDividerIndex" and whose value is an NSInteger-wrapping NSNumber that is the index of the divider being dragged.
 */
-APPKIT_EXTERN NSString * NSSplitViewWillResizeSubviewsNotification;
+APPKIT_EXTERN NSNotificationName NSSplitViewWillResizeSubviewsNotification;
 
 /* A notification that is posted to the default notification center by NSSplitView when a split view has just resized its subviews either as a result of its own resizing or during the dragging of one of its dividers by the user. Starting in Mac OS 10.5, if the notification is being sent because the user is dragging a divider, the notification's user info dictionary contains an entry whose key is @"NSSplitViewDividerIndex" and whose value is an NSInteger-wrapping NSNumber that is the index of the divider being dragged.
 */
-APPKIT_EXTERN NSString * NSSplitViewDidResizeSubviewsNotification;
+APPKIT_EXTERN NSNotificationName NSSplitViewDidResizeSubviewsNotification;
 
 
 @interface NSSplitView (NSDeprecated)

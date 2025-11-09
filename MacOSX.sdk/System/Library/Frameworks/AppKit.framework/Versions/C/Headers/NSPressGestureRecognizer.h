@@ -1,7 +1,7 @@
 /*
     NSPressGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2015, Apple Inc.
+    Copyright (c) 2013-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -19,9 +19,7 @@ NS_CLASS_AVAILABLE(10_10, NA)
     CGFloat _allowableMovement;
     NSInteger _buttonCount;
     NSInteger _lcflags;
-#ifndef __OBJC2__
-    NSInteger _reserved1;
-#endif
+    id _reserved1;
 }
 
 /* bitfield of the button(s) required to recognize this click where bit 0 is the primary button, 1 is the secondary button, etc...
@@ -36,6 +34,7 @@ NS_CLASS_AVAILABLE(10_10, NA)
 */
 @property CGFloat allowableMovement; // in screen points. Defaults to double-click distance
 
+@property NSInteger numberOfTouchesRequired NS_AVAILABLE_MAC(10_12_2);
 @end
 
 NS_ASSUME_NONNULL_END

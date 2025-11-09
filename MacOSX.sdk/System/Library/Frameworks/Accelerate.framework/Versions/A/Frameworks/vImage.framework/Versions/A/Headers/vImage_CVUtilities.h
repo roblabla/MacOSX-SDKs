@@ -6,7 +6,7 @@
  *
  *  See vImage/vImage.h for more on how to view the headerdoc documentation for functions declared herein.
  *
- *  @copyright Copyright (c) 2013-2015 by Apple Inc. All rights reserved.
+ *  @copyright Copyright (c) 2013-2016 by Apple Inc. All rights reserved.
  *
  *  @discussion vImage_CVUtilities.h provides a suite of high level APIs to facilitate conversion between CVPixelBufferRef
  *  formats and the set of formats describable by CoreGraphics types, including the core formats used by vImage for most
@@ -528,7 +528,7 @@ typedef VIMAGE_CHOICE_ENUM( vImageMatrixType, uint32_t )
  *              video range.
  *  @param format   The vImageCVImageFormatRef for which the 4 character code is desired.
  *  @return  A 4CC in host-endian format.
- *  @seealso See CoreVideo/CVPixelBuffer.h for a list of defined 4 character image type codes.
+ *  @seealso //apple_ref/doc/constant_group/Pixel_Format_Types CoreVideo/CVPixelBuffer.h
  */
 uint32_t        vImageCVImageFormat_GetFormatCode( vImageConstCVImageFormatRef format )  VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
     
@@ -551,7 +551,7 @@ uint32_t        vImageCVImageFormat_GetChannelCount( vImageConstCVImageFormatRef
  *              This function is not useful to discover the correct vImage_Buffer order for a call to vImageConvert_AnyToAny().
  *  @param format   The vImageCVImageFormatRef for which the channel names are desired.
  *  @return  A const pointer to an array of vImageBufferTypeCodes indicating the names of the channels in the image.
- *  @seealso  vImageConverter_GetSourceBufferOrder
+ *  @seealso vImageConverter_GetSourceBufferOrder
  *  @seealso vImageConverter_GetDestinationBufferOrder
  */
 const vImageBufferTypeCode *vImageCVImageFormat_GetChannelNames( vImageConstCVImageFormatRef format)  VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
@@ -592,7 +592,7 @@ vImage_Error    vImageCVImageFormat_SetColorSpace( vImageCVImageFormatRef format
  *  @param format       The vImageCVImageFormatRef for which the chroma siting information is desired.
  *  @return  Returns a CFStringRef that describes the positioning of the chroma samples. Eligible string return values are listed 
  *           in CoreVideo/CVImageBuffer.h.   The result is NULL if the chroma siting information is missing.
- *  @seealso kCVImageBufferChromaLocationTopFieldKey
+ *  @seealso //apple_ref/c/data/kCVImageBufferChromaLocationTopFieldKey kCVImageBufferChromaLocationTopFieldKey
  */
 CFStringRef     vImageCVImageFormat_GetChromaSiting( vImageConstCVImageFormatRef format ) VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
 
@@ -614,7 +614,7 @@ CFStringRef     vImageCVImageFormat_GetChromaSiting( vImageConstCVImageFormatRef
  *          kvImageInvalidParameter         siting is not a recognized CFStringRef from the set of values appearing in CoreVideo/CVImageBuffer.h.
  *      @/textblock
  *      </pre>
- *  @seealso kCVImageBufferChromaLocationTopFieldKey
+ *  @seealso //apple_ref/c/data/kCVImageBufferChromaLocationTopFieldKey kCVImageBufferChromaLocationTopFieldKey
  */
 vImage_Error    vImageCVImageFormat_SetChromaSiting( vImageCVImageFormatRef format, CFStringRef siting) VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
  
@@ -654,7 +654,8 @@ vImage_Error    vImageCVImageFormat_SetChromaSiting( vImageCVImageFormatRef form
  *
  *          The matrix is owned by the vImageCvImageFormatRef and will cease to be valid when the vImageCvImageFormatRef is destroyed.
  *
- *  @seealso vImage_ARGBToYpCbCrMatrix and vImageMatrixType
+ *  @seealso vImage_ARGBToYpCbCrMatrix
+ *  @seealso vImageMatrixType
  */
 const           void * vImageCVImageFormat_GetConversionMatrix( vImageConstCVImageFormatRef format, vImageMatrixType *outType)  VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
 
@@ -831,14 +832,13 @@ void *          vImageCVImageFormat_GetUserData( vImageConstCVImageFormatRef for
  *              copy will not have userData attached to it.
  *
  *  @param format       The vImageCVImageFormatRef to get the userData from.
- *  @param userdata     The new userData pointer.
+ *  @param userData     The new userData pointer.
+ *  @param userDataReleaseCallback  The callback that is called when the vImageCVImageFormatRef is destroyed, or
+ *                                  when the userData is replaced with another one.
+ *  @param callback_fmt             The vImageCVImageFormatRef that the userData is attached to.
+ *  @param callback_userData        The userData field attached to callback_fmt.
  *  @return  kvImageNoError - Success
- *
- *           kvImageInvalidImageFormat  -format is NULL
- *  @param     userDataReleaseCallback   The callback that is called when the vImageCVImageFormatRef is destroyed, or when the userData is replaced with
- *                                      another one.
- *  @param     callback_fmt The vImageCVImageFormatRef that the userData is attached to.
- *  @param     callback_userData    The userData field attached to callback_fmt.
+ *  @return  kvImageInvalidImageFormat  - Format is NULL
  *
  */
 vImage_Error    vImageCVImageFormat_SetUserData(vImageCVImageFormatRef format, void * userData, void (*userDataReleaseCallback)(vImageCVImageFormatRef callback_fmt, void *callback_userData) )   VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
@@ -1213,7 +1213,7 @@ vImageConverterRef vImageConverter_CreateForCVToCGImageFormat( vImageCVImageForm
  *          @/textblock
  *          </pre>
  *
- * @seealso ImageConverter_GetDestinationBufferOrder for another method to initialize the vImage_Buffers in the right order for vImageConvert_AnyToAny.
+ * @seealso vImageConverter_GetDestinationBufferOrder for another method to initialize the vImage_Buffers in the right order for vImageConvert_AnyToAny.
  *
  */
 vImage_Error vImageBuffer_InitForCopyToCVPixelBuffer( vImage_Buffer *buffers,

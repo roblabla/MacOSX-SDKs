@@ -1969,8 +1969,8 @@ MIDIObjectRemoveProperty(		MIDIObjectRef 		obj,
 */
 extern OSStatus
 MIDIObjectFindByUniqueID(	MIDIUniqueID 		inUniqueID,
-							MIDIObjectRef *		outObject,
-							MIDIObjectType *	outObjectType)
+							MIDIObjectRef * __nullable outObject,
+							MIDIObjectType * __nullable outObjectType)
 							
 															__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 

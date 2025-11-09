@@ -225,7 +225,6 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @return An object conforming to the MDLMeshBuffer protocol.  Returns nil the 
          buffer could not be allocated in the zone given.
  @param zone Zone from which to allocate the memory
- @param data Values with which to fill the buffer
  @param type Type of data to be stored in this buffer
  @discussion An implementing MDLMeshBufferAllocator object may increase the size 
              of the zone if the buffer could not be allocated with the current 

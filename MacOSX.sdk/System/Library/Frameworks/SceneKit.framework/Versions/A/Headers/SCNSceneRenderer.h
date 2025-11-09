@@ -1,53 +1,49 @@
 //
 //  SCNSceneRenderer.h
 //
-//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
 //
+
+#import <SceneKit/SceneKitTypes.h>
+#import <SceneKit/SCNHitTest.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SCNScene;
 @class SCNNode;
+@class SCNScene;
+@protocol SCNSceneRendererDelegate;
 @class SKScene;
 @class SKTransition;
-@protocol SCNSceneRendererDelegate;
+@class MTLRenderPassDescriptor;
 @protocol MTLRenderCommandEncoder;
 @protocol MTLCommandBuffer;
-@class MTLRenderPassDescriptor;
 @class AVAudioEngine;
 @class AVAudioEnvironmentNode;
 
-/*! @group Hit test options */
-
-/*! If set to YES, returns the first object found. This object is not necessarily the nearest. Defaults to NO. */
-SCN_EXTERN NSString * const SCNHitTestFirstFoundOnlyKey;
-/*! Determines whether the results should be sorted. If set to YES sorts nearest objects first. Defaults to YES. */
-SCN_EXTERN NSString * const SCNHitTestSortResultsKey;
-/*! If set to YES ignores the objects clipped by the zNear/zFar range of the current point of view. Defaults to YES. */
-SCN_EXTERN NSString * const SCNHitTestClipToZRangeKey;
-/*! If set to YES ignores the faces not facing to the camera. Defaults to YES. */
-SCN_EXTERN NSString * const SCNHitTestBackFaceCullingKey;
-/*!  If set to YES only tests the bounding boxes of the 3D objects. Defaults to NO. */
-SCN_EXTERN NSString * const SCNHitTestBoundingBoxOnlyKey;
-/*! Determines whether the child nodes are ignored. Defaults to NO. */
-SCN_EXTERN NSString * const SCNHitTestIgnoreChildNodesKey;
-/*! Specifies the root node to use for the hit test. Defaults to the root node of the scene. */
-SCN_EXTERN NSString * const SCNHitTestRootNodeKey;
-/*! Determines whether hidden nodes should be ignored. Defaults to YES. */
-SCN_EXTERN NSString * const SCNHitTestIgnoreHiddenNodesKey NS_AVAILABLE(10_9, 8_0);
+/*!
+ @enum SCNAntialiasingMode
+ @abstract antialiasing modes for scene renderers
+ */
+typedef NS_ENUM(NSUInteger, SCNAntialiasingMode) {
+    SCNAntialiasingModeNone,
+    SCNAntialiasingModeMultisampling2X,
+    SCNAntialiasingModeMultisampling4X,
+    SCNAntialiasingModeMultisampling8X,
+    SCNAntialiasingModeMultisampling16X
+} API_AVAILABLE(macosx(10.10));
 
 /*!
  @enum SCNRenderingAPI
  @abstract rendering API used by SCNView and SCNRenderer.
- @discussion Default preferred API is SCNRenderingAPIMetal on iOS and it depends on the configuration on OS X.
- If Metal is requested but not available then it fallbacks to SCNRenderingAPIOpenGLES2 on iOS and to SCNRenderingAPIOpenGLLegacy on OS X.
+ @discussion Default preferred API is SCNRenderingAPIMetal on iOS and it depends on the configuration on macOS.
+ If Metal is requested but not available then it fallbacks to SCNRenderingAPIOpenGLES2 on iOS and to SCNRenderingAPIOpenGLLegacy on macOS.
  */
 typedef NS_ENUM(NSUInteger, SCNRenderingAPI) {
     SCNRenderingAPIMetal,
     SCNRenderingAPIOpenGLLegacy,
     SCNRenderingAPIOpenGLCore32,
     SCNRenderingAPIOpenGLCore41
-} NS_ENUM_AVAILABLE(10_11, 9_0);
+} API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @enum SCNDebugOptions
@@ -61,48 +57,7 @@ typedef NS_OPTIONS(NSUInteger, SCNDebugOptions) {
     SCNDebugOptionShowLightExtents    = 1 << 3,
     SCNDebugOptionShowPhysicsFields   = 1 << 4,
     SCNDebugOptionShowWireframe       = 1 << 5
-} NS_ENUM_AVAILABLE(10_11, 9_0);
-
-
-/*! @class SCNHitTestResult
-    @abstract Results returned by the hit test methods.
- */
-
-NS_CLASS_AVAILABLE(10_8, 8_0)
-@interface SCNHitTestResult : NSObject
-
-/*! The node hit. */
-@property(nonatomic, readonly) SCNNode *node;
-
-/*! Index of the geometry hit. */
-@property(nonatomic, readonly) NSInteger geometryIndex;
-
-/*! Index of the face hit. */
-@property(nonatomic, readonly) NSInteger faceIndex;
-
-/*! Intersection point in the node local coordinate system. */
-@property(nonatomic, readonly) SCNVector3 localCoordinates;
-
-/*! Intersection point in the world coordinate system. */
-@property(nonatomic, readonly) SCNVector3 worldCoordinates;
-
-/*! Intersection normal in the node local coordinate system. */
-@property(nonatomic, readonly) SCNVector3 localNormal;
-
-/*! Intersection normal in the world coordinate system. */
-@property(nonatomic, readonly) SCNVector3 worldNormal;
-
-/*! World transform of the node intersected. */
-@property(nonatomic, readonly) SCNMatrix4 modelTransform;
-
-/*! 
- @method textureCoordinatesWithMappingChannel:
- @abstract Returns the texture coordinates at the point of intersection, for a given mapping channel.
- @param channel The texture coordinates source index of the geometry to use. The channel must exists on the geometry otherwise {0,0} will be returned.
- */
-- (CGPoint)textureCoordinatesWithMappingChannel:(NSInteger)channel;
-
-@end
+} API_AVAILABLE(macosx(10.11), ios(9.0));
 
 
 
@@ -126,14 +81,14 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param pointOfView the point of view to use to render the new scene.
  @param completionHandler the block invoked on completion.
  */
-- (void)presentScene:(SCNScene *)scene withTransition:(SKTransition *)transition incomingPointOfView:(nullable SCNNode *)pointOfView completionHandler:(nullable void (^)())completionHandler NS_AVAILABLE(10_11, 9_0);
+- (void)presentScene:(SCNScene *)scene withTransition:(SKTransition *)transition incomingPointOfView:(nullable SCNNode *)pointOfView completionHandler:(nullable void (^)())completionHandler API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @property sceneTime
  @abstract Specifies the current "scene time" to display the scene.
  @discussion The scene time only affect scene time based animations (see SCNAnimation.h "usesSceneTimeBase" and SCNSceneSource.h "SCNSceneSourceAnimationImportPolicyKey" for how to create scene time based animations). Scene time based animations and this property are typically used by tools and viewer to ease seeking in time while previewing a scene.
  */
-@property(nonatomic) NSTimeInterval sceneTime NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) NSTimeInterval sceneTime API_AVAILABLE(macosx(10.10));
 
 /*! 
  @property delegate
@@ -147,7 +102,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param point A point in the coordinate system of the receiver.
  @param options Optional parameters (see the "Hit test options" group for the available options).
  */
-- (NSArray<SCNHitTestResult *> *)hitTest:(CGPoint)point options:(nullable NSDictionary<NSString *, id> *)options;
+- (NSArray<SCNHitTestResult *> *)hitTest:(CGPoint)point options:(nullable NSDictionary<SCNHitTestOption, id> *)options;
 
 /*!
  @method isNodeInsideFrustum:withPointOfView:
@@ -156,7 +111,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param pointOfView The point of view used to test the visibility.
  @discussion Return YES if the node is inside or intersects the clipping planes of the point of view. This method doesn't test if 'node' is occluded by another node.
  */
-- (BOOL)isNodeInsideFrustum:(SCNNode *)node withPointOfView:(SCNNode *)pointOfView NS_AVAILABLE(10_9, 8_0);
+- (BOOL)isNodeInsideFrustum:(SCNNode *)node withPointOfView:(SCNNode *)pointOfView API_AVAILABLE(macosx(10.9));
 
 /*!
  @method nodesInsideFrustumWithPointOfView:
@@ -164,7 +119,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param pointOfView The point of view used to test the visibility.
  @discussion Returns an array of all the nodes that are inside or intersects the clipping planes of the point of view.
  */
-- (NSArray<SCNNode *> *)nodesInsideFrustumWithPointOfView:(SCNNode *)pointOfView NS_AVAILABLE(10_11, 9_0);
+- (NSArray<SCNNode *> *)nodesInsideFrustumWithPointOfView:(SCNNode *)pointOfView API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @method projectPoint
@@ -172,7 +127,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param point The world position to be projected.
  @discussion A point projected from the near (resp. far) clip plane will have a z component of 0 (resp. 1).
  */
-- (SCNVector3)projectPoint:(SCNVector3)point NS_AVAILABLE(10_9, 8_0);
+- (SCNVector3)projectPoint:(SCNVector3)point API_AVAILABLE(macosx(10.9));
 
 /*!
  @method unprojectPoint
@@ -180,7 +135,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param point The screenspace position to be unprojected.
  @discussion A point whose z component is 0 (resp. 1) is unprojected on the near (resp. far) clip plane.
  */
-- (SCNVector3)unprojectPoint:(SCNVector3)point NS_AVAILABLE(10_9, 8_0);
+- (SCNVector3)unprojectPoint:(SCNVector3)point API_AVAILABLE(macosx(10.9));
 
 /*! 
  @property playing
@@ -223,7 +178,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param block This block will be called repeatedly while the object is prepared. Return YES if you want the operation to abort.
  @discussion Returns YES if the object was prepared successfully, NO if it was canceled. This method may be triggered from a secondary thread. This method is observable using NSProgress.
  */
-- (BOOL)prepareObject:(id)object shouldAbortBlock:(nullable BOOL (^)())block NS_AVAILABLE(10_9, 8_0);
+- (BOOL)prepareObject:(id)object shouldAbortBlock:(nullable NS_NOESCAPE BOOL (^)())block API_AVAILABLE(macosx(10.9));
 
 /*!
  @method prepareObjects:withCompletionHandler:
@@ -232,37 +187,37 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param completionHandler This block will be called when all objects has been prepared, or on failure.
  @discussion This method is observable using NSProgress.
  */
-- (void)prepareObjects:(NSArray *)objects withCompletionHandler:(nullable void (^)(BOOL success))completionHandler NS_AVAILABLE(10_10, 8_0);
+- (void)prepareObjects:(NSArray *)objects withCompletionHandler:(nullable void (^)(BOOL success))completionHandler API_AVAILABLE(macosx(10.10));
 
 /*!
  @property showsStatistics
  @abstract Determines whether the receiver should display statistics info like FPS. Defaults to NO.
  @discussion  When set to YES, statistics are displayed in a overlay on top of the rendered scene.
  */
-@property(nonatomic) BOOL showsStatistics NS_AVAILABLE(10_9, 8_0);
+@property(nonatomic) BOOL showsStatistics API_AVAILABLE(macosx(10.9));
 
 /*!
  @property debugOptions
  @abstract Specifies the debug options of the receiver. Defaults to SCNDebugOptionNone.
  */
-@property(nonatomic) SCNDebugOptions debugOptions NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic) SCNDebugOptions debugOptions API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @property overlaySKScene
  @abstract Specifies the overlay of the receiver as a SpriteKit scene instance. Defaults to nil.
  */
-@property(nonatomic, retain, nullable) SKScene *overlaySKScene NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, retain, nullable) SKScene *overlaySKScene API_AVAILABLE(macosx(10.10));
 
 /*!
  @property renderingAPI
  @abstract Specifies the rendering API associated to the receiver.
  @discussion This is the rendering API effectively used by the receiver. You can specify a preferred rendering API when initializing a view programmatically (see SCNPreferredRenderingAPI in SCNSceneRenderer.h) or using Interface Builder's SCNView inspector.
  */
-@property(nonatomic, readonly) SCNRenderingAPI renderingAPI NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, readonly) SCNRenderingAPI renderingAPI API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @property context
- @abstract A Core OpenGL render context that is used as the render target (a CGLContextObj on OS X, an EAGLContext on iOS).
+ @abstract A Core OpenGL render context that is used as the render target (a CGLContextObj on macOS, an EAGLContext on iOS).
  */
 @property(nonatomic, readonly, nullable) void *context;
 
@@ -272,37 +227,37 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @property currentRenderCommandEncoder
  @abstract The current render command encoder if any. This property is only valid within the SCNSceneRendererDelegate methods and when renderering with Metal. Otherwise it is set to nil.
  */
-@property(nonatomic, readonly, nullable) id <MTLRenderCommandEncoder> currentRenderCommandEncoder NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, readonly, nullable) id <MTLRenderCommandEncoder> currentRenderCommandEncoder API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @property device
  @abstract The metal device of the renderer. This property is only valid on a renderer created with a Metal device. Otherwise it is set to nil.
  */
-@property(nonatomic, readonly, nullable) id <MTLDevice> device NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, readonly, nullable) id <MTLDevice> device API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @property colorPixelFormat
  @abstract The pixel format of the color attachment 0 of the renderer. This property is only valid on a renderer created with a Metal device.
  */
-@property(nonatomic, readonly) MTLPixelFormat colorPixelFormat NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, readonly) MTLPixelFormat colorPixelFormat API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @property depthPixelFormat
  @abstract The pixel format of the depth attachment of the renderer. This property is only valid on a renderer created with a Metal device.
  */
-@property(nonatomic, readonly) MTLPixelFormat depthPixelFormat NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, readonly) MTLPixelFormat depthPixelFormat API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @property stencilPixelFormat
  @abstract The pixel format of the stencil attachment of the renderer. This property is only valid on a renderer created with a Metal device.
  */
-@property(nonatomic, readonly) MTLPixelFormat stencilPixelFormat NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, readonly) MTLPixelFormat stencilPixelFormat API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @property commandQueue
  @abstract The command queue of the renderer. This property is only valid on a renderer created with a Metal device. Otherwise it is set to nil.
  */
-@property(nonatomic, readonly, nullable) id <MTLCommandQueue> commandQueue NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, readonly, nullable) id <MTLCommandQueue> commandQueue API_AVAILABLE(macosx(10.11), ios(9.0));
 
 #endif
 
@@ -311,19 +266,19 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Contains the instance of audio engine used by the scene.
  @discussion The audio engine can be used to add custom nodes to the audio graph.
  */
-@property(nonatomic, readonly) AVAudioEngine *audioEngine NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, readonly) AVAudioEngine *audioEngine API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @property audioEnvironmentNode
  @abstract Contains the instance of audio environment node used by the scene to spacialize sounds.
  */
-@property(nonatomic, readonly) AVAudioEnvironmentNode *audioEnvironmentNode NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, readonly) AVAudioEnvironmentNode *audioEnvironmentNode API_AVAILABLE(macosx(10.11), ios(9.0)) __WATCHOS_PROHIBITED;
 
 /*!
  @property audioListener
  @abstract Use this property to set the audio node to use as the listener position and orientation when rendering positional audio for this scene. The default is nil which means that the current point of view will be used dynamically.
  */
-@property(nonatomic, retain, nullable) SCNNode *audioListener NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, retain, nullable) SCNNode *audioListener API_AVAILABLE(macosx(10.11), ios(9.0));
 
 
 #pragma mark Deprecated
@@ -333,7 +288,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Specifies the current time to display the scene.
  @discussion Deprecated, use "sceneTime" instead.
  */
-@property(nonatomic) NSTimeInterval currentTime NS_DEPRECATED(10_8, 10_10, NA, NA);
+@property(nonatomic) NSTimeInterval currentTime API_DEPRECATED_WITH_REPLACEMENT("sceneTime", macosx(10.8, 10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
@@ -353,7 +308,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param time The time at which to update the scene.
  @discussion All modifications done within this method don't go through the transaction model, they are directly applied on the presentation tree.
  */
-- (void)renderer:(id <SCNSceneRenderer>)renderer updateAtTime:(NSTimeInterval)time NS_AVAILABLE(10_10, 8_0);
+- (void)renderer:(id <SCNSceneRenderer>)renderer updateAtTime:(NSTimeInterval)time API_AVAILABLE(macosx(10.10));
 
 /*!
  @method renderer:didApplyAnimationsAtTime:
@@ -362,7 +317,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param time The time at which the animations were applied.
  @discussion All modifications done within this method don't go through the transaction model, they are directly applied on the presentation tree.
  */
-- (void)renderer:(id <SCNSceneRenderer>)renderer didApplyAnimationsAtTime:(NSTimeInterval)time NS_AVAILABLE(10_10, 8_0);
+- (void)renderer:(id <SCNSceneRenderer>)renderer didApplyAnimationsAtTime:(NSTimeInterval)time API_AVAILABLE(macosx(10.10));
 
 /*!
  @method renderer:didSimulatePhysicsAtTime:
@@ -371,7 +326,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param time The time at which the physics were simulated.
  @discussion All modifications done within this method don't go through the transaction model, they are directly applied on the presentation tree.
  */
-- (void)renderer:(id <SCNSceneRenderer>)renderer didSimulatePhysicsAtTime:(NSTimeInterval)time NS_AVAILABLE(10_10, 8_0);
+- (void)renderer:(id <SCNSceneRenderer>)renderer didSimulatePhysicsAtTime:(NSTimeInterval)time API_AVAILABLE(macosx(10.10));
 
 /*!
  @method renderer:willRenderScene:atTime:

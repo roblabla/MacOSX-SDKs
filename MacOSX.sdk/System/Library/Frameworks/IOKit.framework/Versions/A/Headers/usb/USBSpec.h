@@ -21,7 +21,6 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-
 /*
  * Constants that both OS9 and OSX want to define, and whose values are
  * specified by the USB Standard.
@@ -149,7 +148,8 @@ enum {
 		kUSBDeviceCapabilityWirelessUSB		= 1,
 		kUSBDeviceCapabilityUSB20Extension	= 2,
 		kUSBDeviceCapabilitySuperSpeedUSB	= 3,
-		kUSBDeviceCapabilityContainerID		= 4
+		kUSBDeviceCapabilityContainerID		= 4,
+        kUSBDeviceCapabilityBillboard       = 13
 };
 
     /*!
@@ -480,7 +480,41 @@ enum {
 		kUSBSuperSpeedSupportsHS	=	2,		// Value of wSpeedSupported indicating that the device supports high speed
 		kUSBSuperSpeedSupportsSS	=	3,		// Value of wSpeedSupported indicating that the device supports 5 Gbps
 	};
-		
+
+    /*!
+     @enum USB Device Billboard Capability Vconn Power constants
+     @discussion Power needed by the adapter for full functionality
+     */
+    enum {
+        kUSBBillboardVConn1Watt     =   0,
+        kUSBBillboardVConn1P5Watt   =   1,
+        kUSBBillboardVConn2Watt     =   2,
+        kUSBBillboardVConn3Watt     =   3,
+        kUSBBillboardVConn4Watt     =   4,
+        kUSBBillboardVConn5Watt     =   5,
+        kUSBBillboardVConn6Watt     =   6,
+        kUSBBillboardVConnReserved  =   7
+    };
+    /*!
+     @defineblock USB Billboard Capability Descriptor Constant
+     @define	kUSBBillboardVConnNoPowerReq	bit position for No Power Required, VConn b2:0 are ignored when this bit is set
+     */
+
+#define kUSBBillboardVConnNoPowerReq    15
+
+    /*! @/defineblock */
+
+    /*!
+     @enum USB Device Billboard Capability bmConfigured constants
+     @ A bit pair signifying the state of Alternate Modes
+     */
+    enum {
+        kUSBBillboardUnspecifiedError     =   0,
+        kUSBBillboardConfigNotAttempted   =   1,
+        kUSBBillboardConfigUnsuccessful   =   2,
+        kUSBBillboardAltModeConfigSuccess =   3
+    };
+
 	/*!
 	 @defineblock USB Descriptor and IORegistry constants
 	 @discussion 	Various constants used to describe the fields in the various USB Device Descriptors and IORegistry names used for some of those fields 
@@ -516,6 +550,7 @@ enum {
 #define kUSBDeviceSubClass          "bDeviceSubClass"
 #define kUSBDeviceProtocol          "bDeviceProtocol"
 #define kUSBDeviceMaxPacketSize     "bMaxPacketSize0"
+#define kUSBCompatibilityMatch      "USBCompatibilityMatch"
 #define kUSBVendorID                "idVendor"          // good name
 #define kUSBVendorName              kUSBVendorID        // bad name - keep for backward compatibility
 #define kUSBProductID               "idProduct"         // good name

@@ -1,7 +1,7 @@
 /*
 	NSSearchFieldCell.h
 	Application Kit
-	Copyright (c) 2003-2015, Apple Inc.
+	Copyright (c) 2003-2016, Apple Inc.
 	All rights reserved.
  */
 
@@ -58,8 +58,13 @@ NS_ASSUME_NONNULL_BEGIN
     unsigned int _reserved1;
     unsigned int _reserved2;
     unsigned int _reserved3;
-    unsigned int _reserved4;    
+    unsigned int _reserved4 __unused;
 }
+
+
+- (instancetype)initTextCell:(NSString *)string NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initImageCell:(nullable NSImage *)image NS_UNAVAILABLE;
 
 @property (nullable, strong) NSButtonCell *searchButtonCell;
     // can modify, set or cancel search button.

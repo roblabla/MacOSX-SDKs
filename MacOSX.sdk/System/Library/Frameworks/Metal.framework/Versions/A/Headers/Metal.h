@@ -24,3 +24,4 @@
 #import <Metal/MTLRenderCommandEncoder.h>
 #import <Metal/MTLSampler.h>
 #import <Metal/MTLTexture.h>
+#import <Metal/MTLHeap.h>

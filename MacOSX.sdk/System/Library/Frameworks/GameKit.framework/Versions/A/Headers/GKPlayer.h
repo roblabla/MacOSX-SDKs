@@ -2,10 +2,11 @@
 //  GKPlayer.h
 //  Game Center
 //
-//  Copyright 2010-2015 Apple Inc. All rights reserved.
+//  Copyright 2010-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <GameKit/GKBasePlayer.h>
 #import <GameKit/GKDefines.h>
 #import <GameKit/GKError.h>
 
@@ -13,8 +14,8 @@
 @class GKGame;
 @class GKLocalPlayer;
 
-NS_CLASS_AVAILABLE(10_8, 4_1)
-@interface GKPlayer : NSObject
+NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
+@interface GKPlayer : GKBasePlayer
 
 // Load the Game Center players for the playerIDs provided. Error will be nil on success.
 // Possible reasons for error:
@@ -26,13 +27,13 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 @property(readonly, nullable, retain, NS_NONATOMIC_IOSONLY)  NSString    *playerID;
 
 // This player's full name as displayed in the Game Center in-game UI. Use this when you need to display the player's name. The display name may be very long, so be sure to use appropriate string truncation API when drawing.
-@property(readonly, nullable, NS_NONATOMIC_IOSONLY)          NSString    *displayName NS_AVAILABLE(10_8, 6_0);
+@property(readonly, nullable, NS_NONATOMIC_IOSONLY)          NSString    *displayName NS_AVAILABLE(10_8, 6_0) __WATCHOS_AVAILABLE(3_0);
 
 // The alias property contains the player's nickname. When you need to display the name to the user, consider using displayName instead. The nickname is unique but not invariant: the player may change their nickname. The nickname may be very long, so be sure to use appropriate string truncation API when drawing.
 @property(readonly, copy, nullable, NS_NONATOMIC_IOSONLY)    NSString    *alias;
 
-+ (nonnull instancetype)anonymousGuestPlayerWithIdentifier:(nonnull NSString *)guestIdentifier NS_AVAILABLE(10_11, 9_0);
-@property(readonly, nullable, NS_NONATOMIC_IOSONLY) NSString *guestIdentifier NS_AVAILABLE(10_11, 9_0);
++ (nonnull instancetype)anonymousGuestPlayerWithIdentifier:(nonnull NSString *)guestIdentifier NS_AVAILABLE(10_11, 9_0) __WATCHOS_PROHIBITED;
+@property(readonly, nullable, NS_NONATOMIC_IOSONLY) NSString *guestIdentifier NS_AVAILABLE(10_11, 9_0) __WATCHOS_PROHIBITED;
 
 @end
 

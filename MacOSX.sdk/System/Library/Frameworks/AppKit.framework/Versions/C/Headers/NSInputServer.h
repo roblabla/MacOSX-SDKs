@@ -1,7 +1,7 @@
 /*
 	NSInputServer.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol NSInputServiceProvider
 
-- (void) insertText:(null_unspecified id)aString client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
-- (void) doCommandBySelector:(null_unspecified SEL)aSelector client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) insertText:(null_unspecified id)string client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) doCommandBySelector:(null_unspecified SEL)selector client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
 - (void) markedTextAbandoned:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_6);
 - (void) markedTextSelectionChanged:(NSRange)newSel client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
 - (void) terminate:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_6);
@@ -53,12 +53,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-/* These methods are sent to input servers that return YES to wantsToHandleMouseEvents.  thePoint is in screen coordinate.
+/* These methods are sent to input servers that return YES to wantsToHandleMouseEvents.  point is in screen coordinate.
 */
 @protocol NSInputServerMouseTracker
-- (BOOL) mouseDownOnCharacterIndex:(NSUInteger)theIndex atCoordinate:(NSPoint)thePoint withModifier:(NSUInteger)theFlags client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
-- (BOOL) mouseDraggedOnCharacterIndex:(NSUInteger)theIndex atCoordinate:(NSPoint)thePoint withModifier:(NSUInteger)theFlags client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
-- (void) mouseUpOnCharacterIndex:(NSUInteger)theIndex atCoordinate:(NSPoint)thePoint withModifier:(NSUInteger)theFlags client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (BOOL) mouseDownOnCharacterIndex:(NSUInteger)index atCoordinate:(NSPoint)point withModifier:(NSUInteger)flags client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (BOOL) mouseDraggedOnCharacterIndex:(NSUInteger)index atCoordinate:(NSPoint)point withModifier:(NSUInteger)flags client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) mouseUpOnCharacterIndex:(NSUInteger)index atCoordinate:(NSPoint)point withModifier:(NSUInteger)flags client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
 @end
 
 NS_CLASS_DEPRECATED_MAC(10_0, 10_6)
@@ -67,7 +67,7 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_6)
     id _delegate;
 }
 
-- initWithDelegate:(null_unspecified id)aDelegate name:(null_unspecified NSString *)name NS_DEPRECATED_MAC(10_0, 10_6);
+- initWithDelegate:(null_unspecified id)delegate name:(null_unspecified NSString *)name NS_DEPRECATED_MAC(10_0, 10_6);
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,7 +1,7 @@
 /*
         NSRuleEditor.h
 	Application Kit
-	Copyright (c) 2006-2015, Apple Inc.
+	Copyright (c) 2006-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -68,7 +68,7 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
     NSInteger _subviewIndexOfDropLine;
     id _dropLineView;
     NSViewAnimation *_currentAnimation;
-    id _unused1;
+    id _unused1 __unused;
     NSString *_stringsFileName;
     id _standardLocalizer;
     id _headerLocalizer;
@@ -96,9 +96,9 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
     Class _rowClass;
     id _boundArrayOwner;
     NSString *_boundArrayKeyPath;
-    id _ruleReserved1;
+    id _ruleReserved1 __unused;
     NSInteger _lastRow;
-    id _ruleReserved2;
+    id _ruleReserved2 __unused;
 }
 
 /* -- Configuring NSRuleEditor -- */
@@ -246,7 +246,7 @@ APPKIT_EXTERN NSString * const NSRuleEditorPredicateCompoundType; /* NSNumber re
 
 /* Posted to the default notification center whenever the view's rows change.
  * The object is the NSRuleEditor; there is no userInfo */
-APPKIT_EXTERN NSString * const NSRuleEditorRowsDidChangeNotification;
+APPKIT_EXTERN NSNotificationName const NSRuleEditorRowsDidChangeNotification;
 
 NS_ASSUME_NONNULL_END
 

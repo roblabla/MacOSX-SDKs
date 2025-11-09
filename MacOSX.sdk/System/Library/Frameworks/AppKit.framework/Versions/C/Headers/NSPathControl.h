@@ -1,7 +1,7 @@
 /*
     NSPathControl.h
     Application Kit
-    Copyright (c) 2005-2015, Apple Inc.
+    Copyright (c) 2005-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -43,7 +43,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 @private
     NSDragOperation _draggingSourceOperationMaskForLocal;
     NSDragOperation _draggingSourceOperationMaskForNonLocal;
-    NSInteger _reserved;
+    NSInteger _reserved __unused;
     id _delegate;
     id _pathAux;
 }

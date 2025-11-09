@@ -16,7 +16,6 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @interface IOBluetoothHandsFreeAudioGateway : IOBluetoothHandsFree {
 	BOOL				_indicatorMode;
 	BOOL				_indicatorEventReporting;
-    
     IOBluetoothHandsFreeAudioGatewayExpansion *	_expansion;
 }
 

@@ -5,7 +5,7 @@
  3D Nodes are used to display 3D content in a SKScene.
  
  
- @copyright 2011 Apple, Inc. All rights reserve.
+ @copyright 2011 Apple, Inc. All rights reserved.
  
  */
 

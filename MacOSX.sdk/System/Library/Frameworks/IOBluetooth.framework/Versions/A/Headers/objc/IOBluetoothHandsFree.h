@@ -14,12 +14,12 @@
 /*!
  @header
  @abstract	Hands free superclass. Superclass of IOBluetoothHandsFreeDevice or IOBluetoothHandsFreeAudioGateway.
- 			Contains the common code used to support the Bluetoooth hands free profile.
+ Contains the common code used to support the Bluetoooth hands free profile.
  @copyright	(c) 2010 by Apple Inc. All rights reserved.
  */
 
 // HFP spec 5.3
-enum  {
+typedef NS_ENUM(uint32_t, IOBluetoothHandsFreeDeviceFeatures) {
 	IOBluetoothHandsFreeDeviceFeatureNone					= (0),
 	IOBluetoothHandsFreeDeviceFeatureECAndOrNRFunction		= (1<<0),
 	IOBluetoothHandsFreeDeviceFeatureThreeWayCalling		= (1<<1),
@@ -27,13 +27,12 @@ enum  {
 	IOBluetoothHandsFreeDeviceFeatureVoiceRecognition		= (1<<3),
 	IOBluetoothHandsFreeDeviceFeatureRemoteVolumeControl	= (1<<4),
 	IOBluetoothHandsFreeDeviceFeatureEnhancedCallStatus		= (1<<5),
-	IOBluetoothHandsFreeDeviceFeatureEnhancedCallControl	= (1<<6)
+	IOBluetoothHandsFreeDeviceFeatureEnhancedCallControl	= (1<<6),
+	IOBluetoothHandsFreeDeviceFeatureCodecNegotiation		= (1<<7)
 };
 
-typedef NSUInteger IOBluetoothHandsFreeDeviceFeatures;
-
 //HFP spec 5.3
-enum {
+typedef NS_ENUM(uint32_t, IOBluetoothHandsFreeAudioGatewayFeatures) {
 	IOBluetoothHandsFreeAudioGatewayFeatureNone						= (0),
 	IOBluetoothHandsFreeAudioGatewayFeatureThreeWayCalling			= (1<<0),
 	IOBluetoothHandsFreeAudioGatewayFeatureECAndOrNRFunction		= (1<<1),
@@ -43,13 +42,12 @@ enum {
 	IOBluetoothHandsFreeAudioGatewayFeatureRejectCallCapability		= (1<<5),
 	IOBluetoothHandsFreeAudioGatewayFeatureEnhancedCallStatus		= (1<<6),
 	IOBluetoothHandsFreeAudioGatewayFeatureEnhancedCallControl		= (1<<7),
-	IOBluetoothHandsFreeAudioGatewayFeatureExtendedErrorResultCodes	= (1<<8)
+	IOBluetoothHandsFreeAudioGatewayFeatureExtendedErrorResultCodes	= (1<<8),
+	IOBluetoothHandsFreeAudioGatewayFeatureCodecNegotiation			= (1<<9)
 };
 
-typedef NSUInteger IOBluetoothHandsFreeAudioGatewayFeatures;
-
 // HFP spec 4.33.2
-enum {
+typedef NS_ENUM(NSUInteger, IOBluetoothHandsFreeCallHoldModes) {
 	IOBluetoothHandsFreeCallHoldMode0	= 1<<0,		// Releases all held calls or sets User Determined User Busy for a waiting call
 	IOBluetoothHandsFreeCallHoldMode1	= 1<<1,		// Releases all active calls (if any exist) and accepts the other (held or waiting) call
 	IOBluetoothHandsFreeCallHoldMode1idx= 1<<2,		// Releases specified active call only (<idx>)
@@ -59,7 +57,11 @@ enum {
 	IOBluetoothHandsFreeCallHoldMode4	= 1<<6		// Connectes the two calls and disconnects the subscriber from both calls (Explicit call transfer).
 };
 
-typedef NSUInteger IOBluetoothHandsFreeCallHoldModes;
+typedef NS_ENUM(uint8_t, IOBluetoothHandsFreeCodecID) {
+	IOBluetoothHandsFreeCodecIDCVSD		= 0x01,
+	IOBluetoothHandsFreeCodecIDmSBC		= 0x02,
+	IOBluetoothHandsFreeCodecIDAACELD	= 0x80
+};
 
 // HandsFreeIndicators (AT+CIND?) HFP spec 4.33.2
 // Hands free indicator constants
@@ -81,32 +83,26 @@ IOBLUETOOTH_EXPORT NSString * const IOBluetoothHandsFreeCallNumber;			/* Optiona
 IOBLUETOOTH_EXPORT NSString * const IOBluetoothHandsFreeCallType;			/* Optional - the format of the number */
 IOBLUETOOTH_EXPORT NSString * const IOBluetoothHandsFreeCallName;			/* Optional - the remote caller's name */
 
-enum {
+typedef NS_ENUM(NSUInteger, IOBluetoothSMSMode) {
 	IOBluetoothSMSModePDU,
 	IOBluetoothSMSModeText
 };
 
-typedef NSUInteger IOBluetoothSMSMode;
-
 // 3GPP TS 07.05 v7.0.1
 // +CSMS
-enum {
+typedef NS_ENUM(NSUInteger, IOBluetoothHandsFreeSMSSupport) {
 	IOBluetoothHandsFreePhase2SMSSupport				= 1<<0,
 	IOBluetoothHandsFreePhase2pSMSSupport				= 1<<1,
 	IOBluetoothHandsFreeManufactureSpecificSMSSupport	= 1<<2
 };
 
-typedef NSUInteger IOBluetoothHandsFreeSMSSupport;
-
-enum {
+typedef NS_ENUM(NSUInteger, IOBluetoothHandsFreePDUMessageStatus) {
 	IOBluetoothHandsFreePDUStatusRecUnread	= 0,
 	IOBluetoothHandsFreePDUStatusRecRead	= 1,
 	IOBluetoothHandsFreePDUStatusStoUnsent	= 2,
 	IOBluetoothHandsFreePDUStatusStoSent	= 3,
 	IOBluetoothHandsFreePDUStatusAll		= 4
 };
-
-typedef NSUInteger IOBluetoothHandsFreePDUMessageStatus;
 
 // Hands free SMS dictionary keys
 // 3GPP TS 03.40 9.2.2.1 and 9.2.3
@@ -130,23 +126,23 @@ IOBLUETOOTH_EXPORT NSString * const IOBluetoothPDUUserData;					/* PDU's payload
  @class IOBluetoothHandsFree
  @abstract Hands free profile class.
  @discussion Superclass of IOBluetoothHandsFreeDevice and IOBluetoothHandsFreeAudioGateway classes.
-			 Contains the common code used to support the bluetoooth hands free profile.
+ Contains the common code used to support the bluetoooth hands free profile.
  @coclass IOBluetoothHandsFreeDevice
  @coclass IOBluetoothHandsFreeAudioGateway
  */
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface IOBluetoothHandsFree : NSObject {
-    IOBluetoothRFCOMMChannel *		_rfcommChannel;
+	IOBluetoothRFCOMMChannel *		_rfcommChannel;
 	IOBluetoothUserNotification *	_rfcommChannelNotification;
-    
+	
 	uint32_t						_supportedFeatures;
 	
 	void *							_reserved1;
-    
+	
 	float							_previousInputVolume;
 	float							_previousOutputVolume;
 	BOOL							_previousOutputMuted;
-    
+	
 	IOBluetoothDevice *				_device;
 	BluetoothRFCOMMChannelID		_deviceRFCOMMChannelID;
 	uint32_t						_deviceSupportedFeatures;
@@ -157,10 +153,10 @@ NS_CLASS_AVAILABLE(10_7, NA)
 	int								_handsFreeState;
 	IOBluetoothSMSMode				_SMSMode;
 	BOOL							_SMSEnabled;
-    
-    BOOL							_connectSCOAfterSLCConnected;
-
-    IOBluetoothHandsFreeExpansion *	_reserved;
+	
+	BOOL							_connectSCOAfterSLCConnected;
+	
+	IOBluetoothHandsFreeExpansion *	_reserved;
 }
 
 
@@ -328,7 +324,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
  @method		connect
  @abstract		Connect to the device
  @discussion	Connects to the device and sets up a service level connection (RFCOMM channel).
- 				Delegate methods will be called once the connection is complete or a failure occurs.
+ Delegate methods will be called once the connection is complete or a failure occurs.
  */
 - (void)connect NS_AVAILABLE_MAC(10_7);
 
@@ -336,7 +332,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
  @method		disconnect
  @abstract		Disconnect from the device
  @discussion	Disconnects from the device, closes the SCO and service level connection if they are connected.
- 				Delegate methods will be called once the disconnection is complete.
+ Delegate methods will be called once the disconnection is complete.
  */
 - (void)disconnect NS_AVAILABLE_MAC(10_7);
 
@@ -346,13 +342,13 @@ NS_CLASS_AVAILABLE(10_7, NA)
  @discussion	Determines if there is a serivice level connection to the device.
  @result		YES if there is a serivice level connection to the device; otherwise, NO.
  */
-- (BOOL)isConnected NS_AVAILABLE_MAC(10_7);
+@property (readonly, getter=isConnected) BOOL connected NS_AVAILABLE_MAC(10_7);
 
 /*!
  @method		connectSCO
  @abstract		Open a SCO connection with the device
  @discussion	Opens a SCO connection with the device. The device must already have a service level connection or this will return immediately.
- 				Delegate methods will be called once the connection is complete of a failure occurs.
+ Delegate methods will be called once the connection is complete of a failure occurs.
  */
 - (void)connectSCO NS_AVAILABLE_MAC(10_7);
 
@@ -360,7 +356,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
  @method		disconnectSCO
  @abstract		Disconnect the SCO connection with the device
  @discussion	Disconnects the SCO connection with the device (if one exists).
- 				Delegate methods will be called once the disconnection is complete.
+ Delegate methods will be called once the disconnection is complete.
  */
 - (void)disconnectSCO NS_AVAILABLE_MAC(10_7);
 

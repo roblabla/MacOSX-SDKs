@@ -1,5 +1,5 @@
 /*	CFTimeZone.h
-	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2016, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFTIMEZONE__)
@@ -11,6 +11,8 @@
 #include <CoreFoundation/CFDate.h>
 #include <CoreFoundation/CFDictionary.h>
 #include <CoreFoundation/CFString.h>
+#include <CoreFoundation/CFNotificationCenter.h>
+#include <CoreFoundation/CFLocale.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
@@ -82,7 +84,7 @@ CF_EXPORT
 CFStringRef CFTimeZoneCopyLocalizedName(CFTimeZoneRef tz, CFTimeZoneNameStyle style, CFLocaleRef locale) CF_AVAILABLE(10_5, 2_0);
 
 CF_EXPORT
-const CFStringRef kCFTimeZoneSystemTimeZoneDidChangeNotification CF_AVAILABLE(10_5, 2_0);
+const CFNotificationName kCFTimeZoneSystemTimeZoneDidChangeNotification CF_AVAILABLE(10_5, 2_0);
 
 CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED

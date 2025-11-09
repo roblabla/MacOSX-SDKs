@@ -8,7 +8,7 @@
  */
 
 #import <SpriteKit/SpriteKitBase.h>
-#import <SpriteKit/SKUniform.h>
+@class SKUniform, SKAttribute;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -86,6 +86,8 @@ SK_EXPORT @interface SKShader : NSObject <NSCopying, NSCoding>
 - (void)addUniform:(SKUniform *)uniform;
 - (nullable SKUniform *)uniformNamed:(NSString *)name;
 - (void)removeUniformNamed:(NSString *)name;
+
+@property (nonatomic, copy, nonnull) NSArray<SKAttribute*> *attributes NS_AVAILABLE(10_11, 9_0);
 
 @end
 

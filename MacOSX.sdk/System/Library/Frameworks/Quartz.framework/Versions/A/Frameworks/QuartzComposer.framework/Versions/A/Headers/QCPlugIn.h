@@ -328,7 +328,7 @@ The rendering must save / restore all the OpenGL states it changes except the on
 @interface QCPlugIn : NSObject
 {
 @private
-	__strong void*			_private;
+	void*			_private;
 }
 
 /*

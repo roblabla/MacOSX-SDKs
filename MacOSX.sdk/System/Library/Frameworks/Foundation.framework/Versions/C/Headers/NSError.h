@@ -1,25 +1,37 @@
 /*	NSError.h
-	Copyright (c) 2003-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSDictionary, NSArray<ObjectType>, NSString;
 
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(7)
+typedef NSString *NSErrorDomain;
+#else
+typedef NSString *NSErrorDomain NS_EXTENSIBLE_STRING_ENUM;
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
 // Predefined domain for errors from most AppKit and Foundation APIs.
-FOUNDATION_EXPORT NSString *const NSCocoaErrorDomain;
+FOUNDATION_EXPORT NSErrorDomain const NSCocoaErrorDomain;
 
 // Other predefined domains; value of "code" will correspond to preexisting values in these domains.
-FOUNDATION_EXPORT NSString *const NSPOSIXErrorDomain;
-FOUNDATION_EXPORT NSString *const NSOSStatusErrorDomain;
-FOUNDATION_EXPORT NSString *const NSMachErrorDomain;
+FOUNDATION_EXPORT NSErrorDomain const NSPOSIXErrorDomain;
+FOUNDATION_EXPORT NSErrorDomain const NSOSStatusErrorDomain;
+FOUNDATION_EXPORT NSErrorDomain const NSMachErrorDomain;
 
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(7)
 // Key in userInfo. A recommended standard way to embed NSErrors from underlying calls. The value of this key should be an NSError.
 FOUNDATION_EXPORT NSString *const NSUnderlyingErrorKey;
+#else
+typedef NSString *NSErrorUserInfoKey NS_EXTENSIBLE_STRING_ENUM;
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSUnderlyingErrorKey;
+#endif
 
 // Keys in userInfo, for subsystems wishing to provide their error messages up-front. Note that NSError will also consult the userInfoValueProvider for the domain when these values are not present in the userInfo dictionary.
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(7)
 FOUNDATION_EXPORT NSString *const NSLocalizedDescriptionKey;             // NSString
 FOUNDATION_EXPORT NSString *const NSLocalizedFailureReasonErrorKey;      // NSString
 FOUNDATION_EXPORT NSString *const NSLocalizedRecoverySuggestionErrorKey; // NSString
@@ -31,7 +43,19 @@ FOUNDATION_EXPORT NSString *const NSHelpAnchorErrorKey;                  // NSSt
 FOUNDATION_EXPORT NSString *const NSStringEncodingErrorKey ;  // NSNumber containing NSStringEncoding
 FOUNDATION_EXPORT NSString *const NSURLErrorKey;              // NSURL
 FOUNDATION_EXPORT NSString *const NSFilePathErrorKey;         // NSString
+#else
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedDescriptionKey;             // NSString
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedFailureReasonErrorKey;      // NSString
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedRecoverySuggestionErrorKey; // NSString
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedRecoveryOptionsErrorKey;    // NSArray of NSStrings
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSRecoveryAttempterErrorKey;           // Instance of a subclass of NSObject that conforms to the NSErrorRecoveryAttempting informal protocol
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSHelpAnchorErrorKey;                  // NSString containing a help anchor
 
+// Other standard keys in userInfo, for various error codes
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSStringEncodingErrorKey ;  // NSNumber containing NSStringEncoding
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSURLErrorKey;              // NSURL
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSFilePathErrorKey;         // NSString
+#endif
 
 
 @interface NSError : NSObject <NSCopying, NSSecureCoding> {
@@ -44,12 +68,12 @@ FOUNDATION_EXPORT NSString *const NSFilePathErrorKey;         // NSString
 
 /* Domain cannot be nil; dict may be nil if no userInfo desired.
 */
-- (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code userInfo:(nullable NSDictionary *)dict NS_DESIGNATED_INITIALIZER;
-+ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code userInfo:(nullable NSDictionary *)dict;
+- (instancetype)initWithDomain:(NSErrorDomain)domain code:(NSInteger)code userInfo:(nullable NSDictionary *)dict NS_DESIGNATED_INITIALIZER;
++ (instancetype)errorWithDomain:(NSErrorDomain)domain code:(NSInteger)code userInfo:(nullable NSDictionary *)dict;
 
 /* These define the error. Domains are described by names that are arbitrary strings used to differentiate groups of codes; for custom domain using reverse-DNS naming will help avoid conflicts. Codes are domain-specific.
 */
-@property (readonly, copy) NSString *domain;
+@property (readonly, copy) NSErrorDomain domain;
 @property (readonly) NSInteger code;
 
 /* Additional info which may be used to describe the error further. Examples of keys that might be included in here are "Line Number", "Failed URL", etc. Embedding other errors in here can also be used as a way to communicate underlying reasons for failures; for instance "File System Error" embedded in the userInfo of an NSError returned from a higher level document object. If the embedded error information is itself NSError, the standard key NSUnderlyingErrorKey can be used.
@@ -91,8 +115,10 @@ It is expected that only the “owner” of an NSError domain specifies the prov
  
 If an appropriate result for the requested key cannot be provided, return nil rather than choosing to manufacture a generic fallback response such as "Operation could not be completed, error 42." NSError will take care of the fallback cases.
 */
-+ (void)setUserInfoValueProviderForDomain:(NSString *)errorDomain provider:(id __nullable (^ __nullable)(NSError *err, NSString *userInfoKey))provider NS_AVAILABLE(10_11, 9_0);
-+ (id __nullable (^ __nullable)(NSError *err, NSString *userInfoKey))userInfoValueProviderForDomain:(NSString *)errorDomain NS_AVAILABLE(10_11, 9_0);
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(7)
++ (void)setUserInfoValueProviderForDomain:(NSErrorDomain)errorDomain provider:(id _Nullable (^ _Nullable)(NSError *err, NSString *userInfoKey))provider NS_AVAILABLE(10_11, 9_0);
++ (id _Nullable (^ _Nullable)(NSError *err, NSString *userInfoKey))userInfoValueProviderForDomain:(NSErrorDomain)errorDomain NS_AVAILABLE(10_11, 9_0);
+#endif
 
 @end
 

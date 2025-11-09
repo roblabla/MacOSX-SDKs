@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  A profile maps the hardware notion of a controller into a logical controller. One that a developer can design for
  and depend on, no matter the underlying hardware.
  */
+NS_CLASS_DEPRECATED(10_9, 10_12, 7_0, 10_0)
 GAMECONTROLLER_EXPORT
 @interface GCGamepad : NSObject
 

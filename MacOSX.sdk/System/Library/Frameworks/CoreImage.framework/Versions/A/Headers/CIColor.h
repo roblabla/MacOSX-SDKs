@@ -27,6 +27,11 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 + (instancetype)colorWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b alpha:(CGFloat)a;
 + (instancetype)colorWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b;
 
+/* Create a new color object in a given colorspace. 
+ * Will return null if the colorspace is not kCGColorSpaceModelRGB. */
++ (nullable instancetype)colorWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b alpha:(CGFloat)a colorSpace:(CGColorSpaceRef)colorSpace NS_AVAILABLE(10_12, 10_0);
++ (nullable instancetype)colorWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b colorSpace:(CGColorSpaceRef)colorSpace NS_AVAILABLE(10_12, 10_0);
+
 /* Create a new color object, 'representation' should be a string in one of
  * the formats returned by the stringRepresentation method. */
 + (instancetype)colorWithString:(NSString *)representation;
@@ -41,6 +46,10 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 - (instancetype)initWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b alpha:(CGFloat)a;
 - (instancetype)initWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b NS_AVAILABLE(10_11, 9_0);
 
+/* Initialize a new color object in a given colorspace.
+ * Will return null if the colorspace is not kCGColorSpaceModelRGB. */
+- (nullable instancetype)initWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b alpha:(CGFloat)a colorSpace:(CGColorSpaceRef)colorSpace NS_AVAILABLE(10_12, 10_0);
+- (nullable instancetype)initWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b colorSpace:(CGColorSpaceRef)colorSpace NS_AVAILABLE(10_12, 10_0);
 
 /* Return the number of color components (including alpha). */
 @property (readonly) size_t numberOfComponents;
@@ -64,6 +73,18 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
  * This property is not KVO-safe because it returns a new NSString each time.
  * The value of the NSString will be the same each time it is called. */
 @property (readonly) NSString *stringRepresentation;
+
+// Some convenience methods to create CIColors in the sRGB colorspace.
++ (instancetype)blackColor NS_AVAILABLE(10_12, 10_0);
++ (instancetype)whiteColor NS_AVAILABLE(10_12, 10_0);
++ (instancetype)grayColor NS_AVAILABLE(10_12, 10_0);
++ (instancetype)redColor NS_AVAILABLE(10_12, 10_0);
++ (instancetype)greenColor NS_AVAILABLE(10_12, 10_0);
++ (instancetype)blueColor NS_AVAILABLE(10_12, 10_0);
++ (instancetype)cyanColor NS_AVAILABLE(10_12, 10_0);
++ (instancetype)magentaColor NS_AVAILABLE(10_12, 10_0);
++ (instancetype)yellowColor NS_AVAILABLE(10_12, 10_0);
++ (instancetype)clearColor NS_AVAILABLE(10_12, 10_0);
 
 @end
 

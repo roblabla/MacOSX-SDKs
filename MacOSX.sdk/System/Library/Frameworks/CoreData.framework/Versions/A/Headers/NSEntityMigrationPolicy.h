@@ -1,7 +1,7 @@
 /*
     NSEntityMigrationPolicy.h
     Core Data
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -20,19 +20,19 @@ NS_ASSUME_NONNULL_BEGIN
  NSMigrationPropertyMappingKey   $propertyMapping
  NSMigrationEntityPolicyKey      $entityPolicy
 */
-COREDATA_EXTERN NSString * const NSMigrationManagerKey NS_AVAILABLE(10_5,3_0);
-COREDATA_EXTERN NSString * const NSMigrationSourceObjectKey NS_AVAILABLE(10_5,3_0);
-COREDATA_EXTERN NSString * const NSMigrationDestinationObjectKey NS_AVAILABLE(10_5,3_0);
-COREDATA_EXTERN NSString * const NSMigrationEntityMappingKey NS_AVAILABLE(10_5,3_0);
-COREDATA_EXTERN NSString * const NSMigrationPropertyMappingKey NS_AVAILABLE(10_5,3_0);
-COREDATA_EXTERN NSString * const NSMigrationEntityPolicyKey NS_AVAILABLE(10_5,3_0);
+COREDATA_EXTERN NSString * const NSMigrationManagerKey API_AVAILABLE(macosx(10.5),ios(3.0));
+COREDATA_EXTERN NSString * const NSMigrationSourceObjectKey API_AVAILABLE(macosx(10.5),ios(3.0));
+COREDATA_EXTERN NSString * const NSMigrationDestinationObjectKey API_AVAILABLE(macosx(10.5),ios(3.0));
+COREDATA_EXTERN NSString * const NSMigrationEntityMappingKey API_AVAILABLE(macosx(10.5),ios(3.0));
+COREDATA_EXTERN NSString * const NSMigrationPropertyMappingKey API_AVAILABLE(macosx(10.5),ios(3.0));
+COREDATA_EXTERN NSString * const NSMigrationEntityPolicyKey API_AVAILABLE(macosx(10.5),ios(3.0));
 
 @class NSManagedObject;
 @class NSEntityMapping;
 @class NSMigrationManager;
 @class NSError;
 
-NS_CLASS_AVAILABLE(10_5,3_0)
+API_AVAILABLE(macosx(10.5),ios(3.0))
 @interface NSEntityMigrationPolicy : NSObject
 
 

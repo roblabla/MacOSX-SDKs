@@ -9,7 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#if __has_include(<CoreImage/CIFilter.h>)
 @class CIFilter;
+#endif
 
 typedef NS_ENUM(NSInteger, SKTransitionDirection) {
     SKTransitionDirectionUp,
@@ -43,9 +45,11 @@ SK_EXPORT @interface SKTransition : NSObject <NSCopying>
 
 + (SKTransition *)doorwayWithDuration:(NSTimeInterval)sec;
 
+#if __has_include(<CoreImage/CIFilter.h>)
 /* Create a transition with a CIFilter. The filter must be a transition filter which requires only two images (inputImage, inputTargetImage) and generates a single image (outputImage). SpriteKit sets the inputImage, inputTargetImage, and inputTime properties when rendering, all others must be setup beforehand. */
 
 + (SKTransition *)transitionWithCIFilter:(CIFilter*)filter duration:(NSTimeInterval)sec;
+#endif
 
 /**
  Pause the incoming Scene during the transition, defaults to YES.

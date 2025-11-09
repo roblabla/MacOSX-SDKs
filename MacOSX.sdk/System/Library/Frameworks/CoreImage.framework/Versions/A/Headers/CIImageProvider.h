@@ -1,33 +1,27 @@
-/* 
+/*
    CoreImage - CIImageProvider.h
 
    Copyright (c) 2015 Apple, Inc.
-   All rights reserved. 
+   All rights reserved.
 */
 
 #import <CoreImage/CIImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-#if __has_feature(objc_generics)
-# define CI_DICTIONARY(KeyType, ValueType) NSDictionary<KeyType, ValueType>
-# define CI_ARRAY(ValueType) NSArray <ValueType>
-#else
-# define CI_DICTIONARY(KeyType, ValueType) NSDictionary
-# define CI_ARRAY(ValueType) NSArray
-#endif
-
-
 @interface CIImage (CIImageProvider)
 
-/* Create a new CIImage lazily populated with with data provided by 'p' when
- * required. 'p' is retained until the image is deallocated. */
+/* Create a new CIImage populated when rendered with  data provided by 'p'.
+ * The provider object 'p' is retained until the image is deallocated. 
+ * The 'options' dictionary supports kCIImageProviderTileSize as well as
+ * other options defined in CIImage.h 
+ */
 + (CIImage *)imageWithImageProvider:(id)p
 							   size:(size_t)width
                                    :(size_t)height
 							 format:(CIFormat)f
 						 colorSpace:(nullable CGColorSpaceRef)cs
-                            options:(nullable CI_DICTIONARY(NSString*,id) *)options
+                            options:(nullable NSDictionary<NSString *,id> *)options
     NS_AVAILABLE(10_4, 9_0);
 
 - (instancetype)initWithImageProvider:(id)p
@@ -35,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
                                      :(size_t)height
                                format:(CIFormat)f
                            colorSpace:(nullable CGColorSpaceRef)cs
-                              options:(nullable CI_DICTIONARY(NSString*,id) *)options
+                              options:(nullable NSDictionary<NSString *,id> *)options
     NS_AVAILABLE(10_4, 9_0);
 
 @end
@@ -50,13 +44,13 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * By default, this method will be called to requests the full image
  * data regardless of what subregion is needed for the current render.
- * All of the image is loaded or none of it is. 
+ * All of the image is loaded or none of it is.
  *
  * If the kCIImageProviderTileSize option is specified, then only the
  * tiles that are needed are requested.
  *
  * Changing the virtual memory mapping of the supplied buffer (e.g. using
- * vm_copy () to modify it) will give undefined behavior. 
+ * vm_copy () to modify it) will give undefined behavior.
  */
 - (void)provideImageData:(void *)data
 			 bytesPerRow:(size_t)rowbytes
@@ -86,8 +80,5 @@ CORE_IMAGE_EXPORT NSString * const kCIImageProviderTileSize NS_AVAILABLE(10_4, 9
  * It is retained until the image is deallocated.
  */
 CORE_IMAGE_EXPORT NSString * const kCIImageProviderUserInfo NS_AVAILABLE(10_4, 9_0);
-
-#undef CI_DICTIONARY
-#undef CI_ARRAY
 
 NS_ASSUME_NONNULL_END

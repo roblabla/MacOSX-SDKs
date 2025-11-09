@@ -42,7 +42,20 @@
 	#define AV_PARAMETERIZED_TYPE(TYPENAME, TYPEBOUNDS) TYPEBOUNDS
 #endif
 
+// Pre-10.12
+#ifndef __NSi_10_12
+	#define __NSi_10_12 introduced=10.12
+#endif
+
+#ifndef __NSd_10_12
+	#define __NSd_10_12 ,deprecated=10.12
+#endif
+
 // Pre-10.11
+#ifndef __NSi_10_11_3
+	#define __NSi_10_11_3 introduced=10.11.3
+#endif
+
 #ifndef __NSi_10_11
 	#define __NSi_10_11 introduced=10.11
 #endif
@@ -185,3 +198,8 @@
     #define NS_DEPRECATED(a, b, c, d)
 #endif
 
+#ifndef SDK_HIDE_TIDE
+#ifndef __TVOS_PROHIBITED
+	#define __TVOS_PROHIBITED
+#endif
+#endif

@@ -1,8 +1,10 @@
 //
 //  SCNReferenceNode.h
 //
-//  Copyright (c) 2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2015-2016 Apple Inc. All rights reserved.
 //
+
+#import <SceneKit/SCNNode.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,13 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, SCNReferenceLoadingPolicy) {
     SCNReferenceLoadingPolicyImmediate = 0,
     SCNReferenceLoadingPolicyOnDemand  = 1
-} NS_ENUM_AVAILABLE(10_11, 9_0);
+} API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @class SCNReferenceNode
  @abstract Node that references an external file.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macosx(10.11), ios(9.0))
 @interface SCNReferenceNode : SCNNode
 
 /*!

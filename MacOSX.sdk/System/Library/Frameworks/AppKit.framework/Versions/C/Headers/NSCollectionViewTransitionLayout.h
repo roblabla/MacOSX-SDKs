@@ -1,7 +1,7 @@
 /*
     NSCollectionViewTransitionLayout.h
     Application Kit
-    Copyright (c) 2015, Apple Inc.
+    Copyright (c) 2015-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -34,7 +34,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
     
     CGFloat _accuracy;
 }
-#endif // TARGET_OS_IPHONE || __OBJC2__
+#endif
 
 @property (assign) CGFloat transitionProgress;
 @property (readonly) NSCollectionViewLayout *currentLayout;

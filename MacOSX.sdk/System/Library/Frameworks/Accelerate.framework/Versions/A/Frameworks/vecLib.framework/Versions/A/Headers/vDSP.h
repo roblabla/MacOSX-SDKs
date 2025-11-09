@@ -3,9 +3,9 @@
 
     Contains:   AltiVec DSP Interfaces
 
-    Version:    vecLib-563.3
+    Version:    vecLib-600.0
 
-    Copyright:  Copyright (c) 2000-2015 by Apple Inc. All rights reserved.
+    Copyright:  Copyright (c) 2000-2016 by Apple Inc. All rights reserved.
 
     For vDSP documentation, search for "vDSP" at <http://developer.apple.com>
     or search for one of the routine names below.
@@ -215,6 +215,10 @@ extern "C" {
 #endif
 
 
+#include <CoreFoundation/CFAvailability.h>
+#define vDSP_ENUM   CF_ENUM
+
+
 #if !defined __has_feature
     #define __has_feature(f)    0
 #endif
@@ -226,22 +230,6 @@ extern "C" {
 #endif
 
 
-/*  The following is reproduced from CFAvailability.h to provide
-    Swift-compatibility enum declarations.  CFAvailability.h itself is not
-    included to creating a dependency on it in the kernel version of vDSP.h,
-    which cannot include CoreFoundation headers.
-*/
-#define __CF_ENUM_GET_MACRO(_1, _2, NAME, ...) NAME
-#if (__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
-#define __CF_NAMED_ENUM(_type, _name)     enum _name : _type _name; enum _name : _type
-#define __CF_ANON_ENUM(_type)             enum : _type
-#else
-#define __CF_NAMED_ENUM(_type, _name) _type _name; enum
-#define __CF_ANON_ENUM(_type) enum
-#endif
-#define CF_ENUM(...) __CF_ENUM_GET_MACRO(__VA_ARGS__, __CF_NAMED_ENUM, __CF_ANON_ENUM)(__VA_ARGS__)
-
-
 #pragma options align=power
 
 
@@ -250,8 +238,8 @@ extern "C" {
     vDSP_Version0 is a major version number.
     vDSP_Version1 is a minor version number.
 */
-#define vDSP_Version0   563
-#define vDSP_Version1   3
+#define vDSP_Version0   600
+#define vDSP_Version1   0
 
 
 /*  Define types:
@@ -3320,7 +3308,7 @@ extern void vDSP_veqvi(
 extern void vDSP_vfill(
     const float *__A,
     float       *__C,
-    vDSP_Stride  __IA,
+    vDSP_Stride  __IC,
     vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 extern void vDSP_vfillD(
@@ -4792,20 +4780,20 @@ extern void vDSP_vdbconD(
 // Vector distance.
 extern void vDSP_vdist(
     const float *__A,
-    vDSP_Stride  __I,
+    vDSP_Stride  __IA,
     const float *__B,
-    vDSP_Stride  __J,
+    vDSP_Stride  __IB,
     float       *__C,
-    vDSP_Stride  __K,
+    vDSP_Stride  __IC,
     vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 extern void vDSP_vdistD(
     const double *__A,
-    vDSP_Stride   __I,
+    vDSP_Stride   __IA,
     const double *__B,
-    vDSP_Stride   __J,
+    vDSP_Stride   __IB,
     double       *__C,
-    vDSP_Stride   __K,
+    vDSP_Stride   __IC,
     vDSP_Length   __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
@@ -6185,8 +6173,8 @@ extern void vDSP_vsmsaD(
     vDSP_Stride   __IA,
     const double *__B,
     const double *__C,
-    double       *__ID,
-    vDSP_Stride   __L,
+    double       *__D,
+    vDSP_Stride   __ID,
     vDSP_Length   __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
@@ -6201,22 +6189,22 @@ extern void vDSP_vsmsaD(
 // Vector scalar multiply and vector subtract.
 extern void vDSP_vsmsb(
     const float *__A,
-    vDSP_Stride  __I,
+    vDSP_Stride  __IA,
     const float *__B,
     const float *__C,
-    vDSP_Stride  __K,
+    vDSP_Stride  __IC,
     float       *__D,
-    vDSP_Stride  __L,
+    vDSP_Stride  __ID,
     vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 extern void vDSP_vsmsbD(
     const double *__A,
-    vDSP_Stride   __I,
+    vDSP_Stride   __IA,
     const double *__B,
     const double *__C,
-    vDSP_Stride   __K,
+    vDSP_Stride   __IC,
     double       *__D,
-    vDSP_Stride   __L,
+    vDSP_Stride   __ID,
     vDSP_Length   __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
@@ -6373,8 +6361,8 @@ extern void vDSP_vtabiD(
     const double *__S2,
     const double *__C,
     vDSP_Length   __M,
-    double       *__ID,
-    vDSP_Stride   __L,
+    double       *__D,
+    vDSP_Stride   __ID,
     vDSP_Length   __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
@@ -6784,7 +6772,7 @@ typedef struct vDSP_DFT_SetupStructD *vDSP_DFT_SetupD;
 
 
 // DFT direction may be specified as vDSP_DFT_FORWARD or vDSP_DFT_INVERSE.
-typedef CF_ENUM(int, vDSP_DFT_Direction)
+typedef vDSP_ENUM(int, vDSP_DFT_Direction)
     { vDSP_DFT_FORWARD = +1, vDSP_DFT_INVERSE = -1 };
 
 
@@ -7321,7 +7309,7 @@ void vDSP_DFT_ExecuteD(
     Do not call this routine while any DFT or DCT routine sharing setup data
     might be executing.
 */
-typedef CF_ENUM(int, vDSP_DCT_Type)
+typedef vDSP_ENUM(int, vDSP_DCT_Type)
 {
     vDSP_DCT_II  = 2,
     vDSP_DCT_III = 3,
@@ -7418,12 +7406,12 @@ void vDSP_DCT_Execute(
         The results are written to *C0 and *C1.
 */
 void vDSP_dotpr2(
-    const float *__A0, vDSP_Stride __A0Stride,
-    const float *__A1, vDSP_Stride __A1Stride,
-    const float *__B,  vDSP_Stride __BStride,
-    float *__C0,
-    float *__C1,
-    vDSP_Length __Length)
+    const float *__A0, vDSP_Stride __IA0,
+    const float *__A1, vDSP_Stride __IA1,
+    const float *__B,  vDSP_Stride __IB,
+    float       *__C0,
+    float       *__C1,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
 
 
@@ -7478,12 +7466,12 @@ void vDSP_dotpr2(
         The results are written to *C0 and *C1.
 */
 void vDSP_dotpr2D(
-    const double *__A0, vDSP_Stride __A0Stride,
-    const double *__A1, vDSP_Stride __A1Stride,
-    const double *__B,  vDSP_Stride __BStride,
-    double *__C0,
-    double *__C1,
-    vDSP_Length __Length)
+    const double *__A0, vDSP_Stride __IA0,
+    const double *__A1, vDSP_Stride __IA1,
+    const double *__B,  vDSP_Stride __IB,
+    double       *__C0,
+    double       *__C1,
+    vDSP_Length   __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
 
@@ -7529,10 +7517,10 @@ void vDSP_dotpr2D(
         The result is written to *C.
 */
 void vDSP_dotpr_s1_15(
-    const short int *__A, vDSP_Stride __AStride,
-    const short int *__B, vDSP_Stride __BStride,
-    short int *__C,
-    vDSP_Length __N)
+    const short int *__A, vDSP_Stride __IA,
+    const short int *__B, vDSP_Stride __IB,
+    short int       *__C,
+    vDSP_Length      __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
 
 
@@ -7591,12 +7579,12 @@ void vDSP_dotpr_s1_15(
         The results are written to *C0 and *C1.
 */
 void vDSP_dotpr2_s1_15(
-    const short int *__A0, vDSP_Stride __A0Stride,
-    const short int *__A1, vDSP_Stride __A1Stride,
-    const short int *__B,  vDSP_Stride __BStride,
-    short int *__C0,
-    short int *__C1,
-    vDSP_Length __N)
+    const short int *__A0, vDSP_Stride __IA0,
+    const short int *__A1, vDSP_Stride __IA1,
+    const short int *__B,  vDSP_Stride __IB,
+    short int       *__C0,
+    short int       *__C1,
+    vDSP_Length      __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
 
 
@@ -7642,9 +7630,9 @@ void vDSP_dotpr2_s1_15(
         The result is written to *C.
 */
 void vDSP_dotpr_s8_24(
-    const int *__A, vDSP_Stride __AStride,
-    const int *__B, vDSP_Stride __BStride,
-    int *__C,
+    const int  *__A, vDSP_Stride __IA,
+    const int  *__B, vDSP_Stride __IB,
+    int        *__C,
     vDSP_Length __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
 
@@ -7704,11 +7692,11 @@ void vDSP_dotpr_s8_24(
         The results are written to *C0 and *C1.
 */
 void vDSP_dotpr2_s8_24(
-    const int *__A0, vDSP_Stride __A0Stride,
-    const int *__A1, vDSP_Stride __A1Stride,
-    const int *__B,  vDSP_Stride __BStride,
-    int *__C0,
-    int *__C1,
+    const int  *__A0, vDSP_Stride __IA0,
+    const int  *__A1, vDSP_Stride __IA1,
+    const int  *__B,  vDSP_Stride __IB,
+    int        *__C0,
+    int        *__C1,
     vDSP_Length __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
 

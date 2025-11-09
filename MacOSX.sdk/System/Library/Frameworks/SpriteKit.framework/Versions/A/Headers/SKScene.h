@@ -9,7 +9,11 @@
 #import <SpriteKit/SKEffectNode.h>
 #import <SpriteKit/SpriteKitBase.h>
 
-@class SKView, SKPhysicsWorld, AVAudioEngine;
+#if SKVIEW_AVAILABLE
+@class SKView;
+#endif
+
+@class SKPhysicsWorld, AVAudioEngine;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,17 +42,18 @@ NS_AVAILABLE(10_10, 8_0) @protocol SKSceneDelegate <NSObject>
 SK_EXPORT @interface SKScene : SKEffectNode
 
 /**
- Called once when the scene is created, do your one-time setup here.
- 
  A scene is infinitely large, but it has a viewport that is the frame through which you present the content of the scene.
  The passed in size defines the size of this viewport that you use to present the scene.
- To display different portions of your scene, move the contents relative to the viewport. One way to do that is to create a SKNode to function as a viewport transformation. That node should have all visible conents parented under it.
  
  @param size a size in points that signifies the viewport into the scene that defines your framing of the scene.
  */
 - (instancetype)initWithSize:(CGSize)size;
 
 + (instancetype)sceneWithSize:(CGSize)size;
+
+/* This is called once after the scene has been initialized or decoded,
+ this is the recommended place to perform one-time setup */
+- (void)sceneDidLoad NS_AVAILABLE(10_12, 10_0);
 
 @property (nonatomic) CGSize size;
 
@@ -71,14 +76,16 @@ SK_EXPORT @interface SKScene : SKEffectNode
 /**
  The audio engine that the listener and the scene's audio nodes use to process their sound through.
  */
+#if __has_include(<AVFoundation/AVAudioEngine.h>)
 @property (nonatomic, retain, readonly) AVAudioEngine *audioEngine NS_AVAILABLE(10_11, 9_0);
+#endif
 
 /**
  Background color, defaults to gray
  */
 @property (nonatomic, retain) SKColor *backgroundColor;
 
-@property (nonatomic, assign, nullable) id<SKSceneDelegate> delegate NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, weak, nullable) id<SKSceneDelegate> delegate NS_AVAILABLE(10_10, 8_0);
 
 /**
  Used to choose the origin of the scene's coordinate system
@@ -90,13 +97,16 @@ SK_EXPORT @interface SKScene : SKEffectNode
  */
 @property (nonatomic, readonly) SKPhysicsWorld *physicsWorld;
 
-- (CGPoint)convertPointFromView:(CGPoint)point;
-- (CGPoint)convertPointToView:(CGPoint)point;
 
+#if SKVIEW_AVAILABLE
 /**
  The SKView this scene is currently presented in, or nil if it is not being presented.
  */
 @property (nonatomic, weak, readonly, nullable) SKView *view;
+
+- (CGPoint)convertPointFromView:(CGPoint)point;
+- (CGPoint)convertPointToView:(CGPoint)point;
+#endif
 
 /**
  Override this to perform per-frame game logic. Called exactly once per frame before any actions are evaluated and any physics are simulated.
@@ -127,8 +137,11 @@ SK_EXPORT @interface SKScene : SKEffectNode
  */
 - (void)didFinishUpdate NS_AVAILABLE(10_10, 8_0);
 
+#if SKVIEW_AVAILABLE
 - (void)didMoveToView:(SKView *)view;
 - (void)willMoveFromView:(SKView *)view;
+#endif
+
 - (void)didChangeSize:(CGSize)oldSize;
 
 @end

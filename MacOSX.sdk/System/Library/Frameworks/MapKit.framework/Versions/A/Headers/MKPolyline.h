@@ -11,11 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-MK_CLASS_AVAILABLE(10_9, 4_0) __WATCHOS_PROHIBITED
+NS_CLASS_AVAILABLE(10_9, 4_0) __TVOS_AVAILABLE(9_2) __WATCHOS_PROHIBITED
 @interface MKPolyline : MKMultiPoint <MKOverlay>
 
-+ (instancetype)polylineWithPoints:(MKMapPoint *)points count:(NSUInteger)count;
-+ (instancetype)polylineWithCoordinates:(CLLocationCoordinate2D *)coords count:(NSUInteger)count;
++ (instancetype)polylineWithPoints:(const MKMapPoint *)points count:(NSUInteger)count;
++ (instancetype)polylineWithCoordinates:(const CLLocationCoordinate2D *)coords count:(NSUInteger)count;
 
 @end
 

@@ -112,7 +112,7 @@ typedef UInt32                          AudioConverterPropertyID;
                     DEPRECATED: please use kAudioConverterSampleRateConverterComplexity instead
     @constant   kAudioConverterSampleRateConverterComplexity
                     An OSType that specifies the sample rate converter algorithm to use (as defined in
-                    AudioUnit/AudioUnitProperties.h)
+                    AudioToolbox/AudioUnitProperties.h)
     @constant   kAudioConverterSampleRateConverterQuality
                     A UInt32 that specifies rendering quality of the sample rate converter (see
                     enum constants below)
@@ -302,16 +302,21 @@ CF_ENUM(UInt32)
     @enum           Sample Rate Converter Complexity
     @constant       kAudioConverterSampleRateConverterComplexity_Linear
     @discussion         Linear interpolation. lowest quality, cheapest.
+						InitialPhase and PrimeMethod properties are not operative with this mode.
     @constant       kAudioConverterSampleRateConverterComplexity_Normal
     @discussion         Normal quality sample rate conversion.
     @constant       kAudioConverterSampleRateConverterComplexity_Mastering
     @discussion         Mastering quality sample rate conversion. More expensive.
+    @constant       kAudioConverterSampleRateConverterComplexity_MinimumPhase
+    @discussion         Minimum phase impulse response. Stopband attenuation varies with quality setting.
+						InitialPhase and PrimeMethod properties are not operative with this mode.
 */
 CF_ENUM(UInt32)
 {
     kAudioConverterSampleRateConverterComplexity_Linear             = 'line',   // linear interpolation
     kAudioConverterSampleRateConverterComplexity_Normal             = 'norm',   // normal quality range, the default
     kAudioConverterSampleRateConverterComplexity_Mastering          = 'bats',   // higher quality range, more expensive
+    kAudioConverterSampleRateConverterComplexity_MinimumPhase       = 'minp'	// minimum phase impulse response.
 };
 
 

@@ -311,7 +311,7 @@ typedef CALLBACK_API_C( void , CFNetServiceClientCallBack )(CFNetServiceRef theS
  *	  Client's info reference which was passed into the client
  *	  context.
  */
-typedef CALLBACK_API_C( void , CFNetServiceMonitorClientCallBack )(CFNetServiceMonitorRef theMonitor, CFNetServiceRef theService, CFNetServiceMonitorType typeInfo, CFDataRef rdata, CFStreamError * __nullable error, void * __nullable info);
+typedef CALLBACK_API_C( void , CFNetServiceMonitorClientCallBack )(CFNetServiceMonitorRef theMonitor, CFNetServiceRef __nullable theService, CFNetServiceMonitorType typeInfo, CFDataRef __nullable rdata, CFStreamError * __nullable error, void * __nullable info);
 
 /*
  *  CFNetServiceBrowserClientCallBack
@@ -341,7 +341,7 @@ typedef CALLBACK_API_C( void , CFNetServiceMonitorClientCallBack )(CFNetServiceM
  *	  Client's info reference which was passed into the client
  *	  context.
  */
-typedef CALLBACK_API_C( void , CFNetServiceBrowserClientCallBack )(CFNetServiceBrowserRef browser, CFOptionFlags flags, CFTypeRef domainOrService, CFStreamError * __nullable error, void * __nullable info);
+typedef CALLBACK_API_C( void , CFNetServiceBrowserClientCallBack )(CFNetServiceBrowserRef browser, CFOptionFlags flags, CFTypeRef __nullable domainOrService, CFStreamError * __nullable error, void * __nullable info);
 
 /*
  *  CFNetServiceGetTypeID()

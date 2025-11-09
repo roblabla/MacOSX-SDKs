@@ -1,6 +1,6 @@
 /* CoreAnimation - CALayer.h
 
-   Copyright (c) 2006-2015, Apple Inc.
+   Copyright (c) 2006-2016, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CAMediaTiming.h>
@@ -11,7 +11,8 @@
 #import <Foundation/NSDictionary.h>
 
 @class NSEnumerator, CAAnimation, CALayerArray;
-@protocol CAAction;
+@protocol CAAction, CALayerDelegate;
+@protocol CALayoutManager;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,6 +41,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
 
 /** The base layer class. **/
 
+CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 @interface CALayer : NSObject <NSCoding, CAMediaTiming>
 {
 @private
@@ -84,7 +86,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * on the result of the -presentationLayer will query the presentation
  * values of the layer tree. */
 
-- (nullable id)presentationLayer;
+- (nullable instancetype)presentationLayer;
 
 /* When called on the result of the -presentationLayer method, returns
  * the underlying layer with the current model values. When called on a
@@ -92,7 +94,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * this method after the transaction that produced the presentation
  * layer has completed is undefined. */
 
-- (id)modelLayer;
+- (instancetype)modelLayer;
 
 /** Property methods. **/
 
@@ -341,7 +343,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * as large as the layer bounds). Defaults to one. Animatable. */
 
 @property CGFloat contentsScale
-  __OSX_AVAILABLE_STARTING (__MAC_10_7, __IPHONE_4_0);
+  CA_AVAILABLE_STARTING (10.7, 4.0, 9.0, 2.0);
 
 /* A rectangle in normalized image coordinates defining the scaled
  * center part of the `contents' image.
@@ -363,6 +365,13 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * undefined. Animatable. */
 
 @property CGRect contentsCenter;
+
+/* A hint for the desired storage format of the layer contents provided by
+ * -drawLayerInContext. Defaults to kCAContentsFormatRGBA8Uint. Note that this
+ * does not affect the interpretation of the `contents' property directly. */
+
+@property(copy) NSString *contentsFormat
+  CA_AVAILABLE_STARTING (10.12, 10.0, 10.0, 3.0);
 
 /* The filter types to use when rendering the `contents' property of
  * the layer. The minification filter is used when to reduce the size
@@ -419,7 +428,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * default value is NO. */
 
 @property BOOL drawsAsynchronously
-  __OSX_AVAILABLE_STARTING (__MAC_10_8, __IPHONE_6_0);
+  CA_AVAILABLE_STARTING (10.8, 6.0, 9.0, 2.0);
 
 /* Called via the -display method when the `contents' property is being
  * updated. Default implementation does nothing. The context may be
@@ -567,7 +576,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * When nil (the default value) only the autoresizing style of layout
  * is done (unless a subclass overrides -layoutSublayers). */
 
-@property(nullable, strong) id layoutManager;
+@property(nullable, strong) id <CALayoutManager> layoutManager;
 
 /* Returns the preferred frame size of the layer in the coordinate
  * space of the superlayer. The default implementation calls the layout
@@ -724,7 +733,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * below (for those that it implements). The value of this property is
  * not retained. Default value is nil. */
 
-@property(nullable, weak) id delegate;
+@property(nullable, weak) id <CALayerDelegate> delegate;
 
 /* When non-nil, a dictionary dereferenced to find property values that
  * aren't explicitly defined by the layer. (This dictionary may in turn
@@ -742,7 +751,8 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
 
 /** Layout manager protocol. **/
 
-@interface NSObject (CALayoutManager)
+@protocol CALayoutManager <NSObject>
+@optional
 
 /* Called when the preferred size of 'layer' may have changed. The
  * receiver is responsible for recomputing the preferred size and
@@ -785,7 +795,8 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
 
 /** Delegate methods. **/
 
-@interface NSObject (CALayerDelegate)
+@protocol CALayerDelegate <NSObject>
+@optional
 
 /* If defined, called by the default implementation of the -display
  * method, in which case it should implement the entire display
@@ -796,6 +807,14 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
 /* If defined, called by the default implementation of -drawInContext: */
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx;
+
+/* If defined, called by the default implementation of the -display method.
+ * Allows the delegate to configure any layer state affecting contents prior
+ * to -drawLayer:InContext: such as `contentsFormat' and `opaque'. It will not
+ * be called if the delegate implements -displayLayer. */
+
+- (void)layerWillDraw:(CALayer *)layer
+  CA_AVAILABLE_STARTING (10.12, 10.0, 10.0, 3.0);
 
 /* Called by the default -layoutSublayers implementation before the layout
  * manager is checked. Note that if the delegate method is invoked, the
@@ -817,54 +836,63 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
 /** Layer `contentsGravity' values. **/
 
 CA_EXTERN NSString * const kCAGravityCenter
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAGravityTop
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAGravityBottom
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAGravityLeft
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAGravityRight
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAGravityTopLeft
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAGravityTopRight
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAGravityBottomLeft
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAGravityBottomRight
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAGravityResize
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAGravityResizeAspect
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAGravityResizeAspectFill
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
+
+/** Layer `contentsFormat` values. **/
+
+CA_EXTERN NSString * const kCAContentsFormatRGBA8Uint /* RGBA UInt8 per component */
+  CA_AVAILABLE_STARTING (10.12, 10.0, 10.0, 3.0);
+CA_EXTERN NSString * const kCAContentsFormatRGBA16Float /* RGBA half-float 16-bit per component */
+  CA_AVAILABLE_STARTING (10.12, 10.0, 10.0, 3.0);
+CA_EXTERN NSString * const kCAContentsFormatGray8Uint /* Grayscale with alpha (if not opaque) UInt8 per component */
+  CA_AVAILABLE_STARTING (10.12, 10.0, 10.0, 3.0);
 
 /** Contents filter names. **/
 
 CA_EXTERN NSString * const kCAFilterNearest
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAFilterLinear
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 
 /* Trilinear minification filter. Enables mipmap generation. Some
  * renderers may ignore this, or impose additional restrictions, such
  * as source images requiring power-of-two dimensions. */
 
 CA_EXTERN NSString * const kCAFilterTrilinear
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
 
 /** Layer event names. **/
 
 CA_EXTERN NSString * const kCAOnOrderIn
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 CA_EXTERN NSString * const kCAOnOrderOut
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 
 /** The animation key used for transitions. **/
 
 CA_EXTERN NSString * const kCATransition
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
 
 NS_ASSUME_NONNULL_END

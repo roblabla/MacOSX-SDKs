@@ -9,6 +9,7 @@
 
 #ifdef __BLOCKS__
 
+XPC_ASSUME_NONNULL_BEGIN
 __BEGIN_DECLS
 
 /*
@@ -140,7 +141,10 @@ const char *XPC_ACTIVITY_ALLOW_BATTERY;
 /*!
  * @constant XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP
  * A Boolean value indicating whether the activity should only be performed
- * while the primary screen is in sleep mode. Defaults to false.
+ * while device appears to be asleep.  Note that the definition of screen sleep
+ * may very by platform and may include states where the device is known to be
+ * idle despite the fact that the display itself is still powered.  Defaults to
+ * false.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
 XPC_EXPORT
@@ -201,6 +205,7 @@ XPC_DECL(xpc_activity);
  * @abstract
  * A block that is called when an XPC activity becomes eligible to run.
  */
+XPC_NONNULL1
 typedef void (^xpc_activity_handler_t)(xpc_activity_t activity);
 
 /*!
@@ -264,8 +269,8 @@ xpc_activity_register(const char *identifier, xpc_object_t criteria,
  * when checking in to an event that finished and was not rescheduled.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_RETURNS_RETAINED
-xpc_object_t
+XPC_EXPORT XPC_WARN_RESULT XPC_RETURNS_RETAINED XPC_NONNULL1
+xpc_object_t _Nullable
 xpc_activity_copy_criteria(xpc_activity_t activity);
 
 /*!
@@ -394,7 +399,7 @@ xpc_activity_set_state(xpc_activity_t activity, xpc_activity_state_t state);
  * Returns true if the activity should be deferred.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
-XPC_EXPORT
+XPC_EXPORT XPC_NONNULL1
 bool
 xpc_activity_should_defer(xpc_activity_t activity);
 
@@ -422,6 +427,7 @@ void
 xpc_activity_unregister(const char *identifier);
 
 __END_DECLS
+XPC_ASSUME_NONNULL_END
 
 #endif // __BLOCKS__
 

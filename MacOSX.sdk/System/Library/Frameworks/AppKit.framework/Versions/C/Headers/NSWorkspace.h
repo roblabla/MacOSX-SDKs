@@ -1,7 +1,7 @@
 /*
 	NSWorkspace.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -254,13 +254,13 @@ APPKIT_EXTERN NSString * const NSWorkspaceDesktopImageFillColorKey NS_AVAILABLE_
  */
 APPKIT_EXTERN NSString * const NSWorkspaceApplicationKey NS_AVAILABLE_MAC(10_6);
 
-APPKIT_EXTERN NSString * NSWorkspaceWillLaunchApplicationNotification;	//	see above
-APPKIT_EXTERN NSString * NSWorkspaceDidLaunchApplicationNotification;	//	see above
-APPKIT_EXTERN NSString * NSWorkspaceDidTerminateApplicationNotification;	//	see above
-APPKIT_EXTERN NSString * const NSWorkspaceDidHideApplicationNotification NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSString * const NSWorkspaceDidUnhideApplicationNotification NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSString * const NSWorkspaceDidActivateApplicationNotification NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSString * const NSWorkspaceDidDeactivateApplicationNotification NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSNotificationName NSWorkspaceWillLaunchApplicationNotification;	//	see above
+APPKIT_EXTERN NSNotificationName NSWorkspaceDidLaunchApplicationNotification;	//	see above
+APPKIT_EXTERN NSNotificationName NSWorkspaceDidTerminateApplicationNotification;	//	see above
+APPKIT_EXTERN NSNotificationName const NSWorkspaceDidHideApplicationNotification NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSNotificationName const NSWorkspaceDidUnhideApplicationNotification NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSNotificationName const NSWorkspaceDidActivateApplicationNotification NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSNotificationName const NSWorkspaceDidDeactivateApplicationNotification NS_AVAILABLE_MAC(10_6);
 
 
 /* Volume notifications */
@@ -275,36 +275,36 @@ APPKIT_EXTERN NSString * const NSWorkspaceVolumeURLKey NS_AVAILABLE_MAC(10_6);  
 APPKIT_EXTERN NSString * const NSWorkspaceVolumeOldLocalizedNameKey NS_AVAILABLE_MAC(10_6); //NSString containing the old user-visible name of the volume
 APPKIT_EXTERN NSString * const NSWorkspaceVolumeOldURLKey NS_AVAILABLE_MAC(10_6);  //NSURL containing the old mount path of the volume
 
-APPKIT_EXTERN NSString * NSWorkspaceDidMountNotification;		//	@"NSDevicePath"
-APPKIT_EXTERN NSString * NSWorkspaceDidUnmountNotification;		//	@"NSDevicePath"
-APPKIT_EXTERN NSString * NSWorkspaceWillUnmountNotification;		//	@"NSDevicePath"
+APPKIT_EXTERN NSNotificationName NSWorkspaceDidMountNotification;		//	@"NSDevicePath"
+APPKIT_EXTERN NSNotificationName NSWorkspaceDidUnmountNotification;		//	@"NSDevicePath"
+APPKIT_EXTERN NSNotificationName NSWorkspaceWillUnmountNotification;		//	@"NSDevicePath"
 
 /* NSWorkspaceDidRenameVolumeNotification is posted when a volume changes its name and/or mount path.  These typically change simultaneously, in which case only one notification is posted.
  */
-APPKIT_EXTERN NSString * const NSWorkspaceDidRenameVolumeNotification NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSNotificationName const NSWorkspaceDidRenameVolumeNotification NS_AVAILABLE_MAC(10_6);
 
 
 /* Power notifications */
-APPKIT_EXTERN NSString * const NSWorkspaceWillPowerOffNotification;
+APPKIT_EXTERN NSNotificationName const NSWorkspaceWillPowerOffNotification;
 
-APPKIT_EXTERN NSString * NSWorkspaceWillSleepNotification;
-APPKIT_EXTERN NSString * NSWorkspaceDidWakeNotification;
+APPKIT_EXTERN NSNotificationName NSWorkspaceWillSleepNotification;
+APPKIT_EXTERN NSNotificationName NSWorkspaceDidWakeNotification;
 
-APPKIT_EXTERN NSString * const NSWorkspaceScreensDidSleepNotification	NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSString * const NSWorkspaceScreensDidWakeNotification	NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSNotificationName const NSWorkspaceScreensDidSleepNotification	NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSNotificationName const NSWorkspaceScreensDidWakeNotification	NS_AVAILABLE_MAC(10_6);
 
 /* Session notifications */
-APPKIT_EXTERN NSString * NSWorkspaceSessionDidBecomeActiveNotification;
-APPKIT_EXTERN NSString * NSWorkspaceSessionDidResignActiveNotification;
+APPKIT_EXTERN NSNotificationName NSWorkspaceSessionDidBecomeActiveNotification;
+APPKIT_EXTERN NSNotificationName NSWorkspaceSessionDidResignActiveNotification;
 
 
 /* Miscellaneous notifications */
 
 /* NSWorkspaceDidChangeFileLabelsNotification is posted when the user changes a file label color name or the color itself.  The notification object is always NSWorkspace, and there is no user info.
  */
-APPKIT_EXTERN NSString * const NSWorkspaceDidChangeFileLabelsNotification NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSNotificationName const NSWorkspaceDidChangeFileLabelsNotification NS_AVAILABLE_MAC(10_6);
 
-APPKIT_EXTERN NSString * const NSWorkspaceActiveSpaceDidChangeNotification NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSNotificationName const NSWorkspaceActiveSpaceDidChangeNotification NS_AVAILABLE_MAC(10_6);
 
 
 /* The following keys can be used in the configuration dictionary of the launchApplicationAtURL:, openURL:, and openURL:withApplicationAtURL: methods.  Each key is optional, and if omitted, default behavior is applied. */
@@ -354,7 +354,7 @@ APPKIT_EXTERN NSString * const NSWorkspaceLaunchConfigurationArchitecture NS_AVA
 - (nullable NSArray *)launchedApplications NS_DEPRECATED_MAC(10_0, 10_7, "Use -[NSWorkspace runningApplications] instead.");
 
 /* Open a file with an animation.  This currently does the same thing as openFile: and its use is discouraged. */
-- (BOOL)openFile:(NSString *)fullPath fromImage:(nullable NSImage *)anImage at:(NSPoint)point inView:(nullable NSView *)aView NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSWorkspace openURL:] instead.");
+- (BOOL)openFile:(NSString *)fullPath fromImage:(nullable NSImage *)image at:(NSPoint)point inView:(nullable NSView *)view NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSWorkspace openURL:] instead.");
 
 
 /* Performs the given file operation, blocking until complete.  source should be the directory containing the file(s).  For operations that require a destination, such as Move and Copy, destination should be the destination directory; otherwise it should be nil.  files is an array of file names that are in the source directory.
@@ -377,7 +377,7 @@ APPKIT_EXTERN NSString * NSWorkspaceDestroyOperation NS_DEPRECATED_MAC(10_0, 10_
 APPKIT_EXTERN NSString * NSWorkspaceRecycleOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSWorkspace recycleURLs:completionHandler:] instead.");
 APPKIT_EXTERN NSString * NSWorkspaceDuplicateOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSWorkspace duplicateURLs:completionHandler:] instead.");
 
-APPKIT_EXTERN NSString * NSWorkspaceDidPerformFileOperationNotification NS_DEPRECATED_MAC(10_0, 10_11);	//	@"NSOperationNumber"
+APPKIT_EXTERN NSNotificationName NSWorkspaceDidPerformFileOperationNotification NS_DEPRECATED_MAC(10_0, 10_11);	//	@"NSOperationNumber"
 
 APPKIT_EXTERN NSString * NSPlainFileType NS_DEPRECATED_MAC(10_0, 10_6);
 APPKIT_EXTERN NSString * NSDirectoryFileType NS_DEPRECATED_MAC(10_0, 10_6);

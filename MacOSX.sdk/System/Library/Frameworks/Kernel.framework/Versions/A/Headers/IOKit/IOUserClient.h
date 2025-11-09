@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -173,7 +173,6 @@ enum {
     @abstract   Provides a basis for communication between client applications and I/O Kit objects.
 */
 
-
 class IOUserClient : public IOService
 {
     OSDeclareAbstractStructors(IOUserClient)
@@ -201,10 +200,7 @@ protected:
     bool reserve();
 
 private:
-    OSSet * mappings;
-    UInt8   sharedInstance;
-    UInt8   __reservedA[3];
-    void  * __reserved[7];
+    void  * __reserved[9];
 
 public:
    virtual IOReturn externalMethod( uint32_t selector, IOExternalMethodArguments * arguments,
@@ -290,7 +286,7 @@ public:
         @function releaseNotificationPort
 	@abstract Release the mach_port_t passed to registerNotificationPort().
 	@discussion The mach_port_t passed to the registerNotificationPort() methods should be released to balance each call to registerNotificationPort(). Behavior is undefined if these calls are not correctly balanced.
-        @param reference The mach_port_t argument previously passed to the subclass implementation of registerNotificationPort().
+        @param port The mach_port_t argument previously passed to the subclass implementation of registerNotificationPort().
         @result A return code.
     */
     static IOReturn releaseNotificationPort(mach_port_t port);

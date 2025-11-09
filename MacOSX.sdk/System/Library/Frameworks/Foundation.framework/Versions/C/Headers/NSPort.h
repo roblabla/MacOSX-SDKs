@@ -1,8 +1,10 @@
 /*	NSPort.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSNotification.h>
+#import <Foundation/NSRunLoop.h>
 
 typedef int NSSocketNativeHandle;
 
@@ -13,7 +15,7 @@ typedef int NSSocketNativeHandle;
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
+FOUNDATION_EXPORT NSNotificationName const NSPortDidBecomeInvalidNotification;
 
 @interface NSPort : NSObject <NSCopying, NSCoding>
 
@@ -35,8 +37,8 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 // to setup monitoring of the port when added to a run loop,
 // and stop monitoring if needed when removed;
 // These methods should not be called directly!
-- (void)scheduleInRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
-- (void)removeFromRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
+- (void)scheduleInRunLoop:(NSRunLoop *)runLoop forMode:(NSRunLoopMode)mode;
+- (void)removeFromRunLoop:(NSRunLoop *)runLoop forMode:(NSRunLoopMode)mode;
 
 // DO Transport API; subclassers should implement these methods
 // default is 0
@@ -55,8 +57,8 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 	// being used in the same program, this requires some care.
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_WIN32)
-- (void)addConnection:(NSConnection *)conn toRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
-- (void)removeConnection:(NSConnection *)conn fromRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
+- (void)addConnection:(NSConnection *)conn toRunLoop:(NSRunLoop *)runLoop forMode:(NSRunLoopMode)mode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
+- (void)removeConnection:(NSConnection *)conn fromRunLoop:(NSRunLoop *)runLoop forMode:(NSRunLoopMode)mode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
 	// The default implementation of these two methods is to
 	// simply add the receiving port to the run loop in the
 	// given mode.  Subclassers need not override these methods,
@@ -102,8 +104,8 @@ typedef NS_OPTIONS(NSUInteger, NSMachPortOptions) {
 
 @property (readonly) uint32_t machPort;
 
-- (void)scheduleInRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
-- (void)removeFromRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
+- (void)scheduleInRunLoop:(NSRunLoop *)runLoop forMode:(NSRunLoopMode)mode;
+- (void)removeFromRunLoop:(NSRunLoop *)runLoop forMode:(NSRunLoopMode)mode;
 	// If you subclass NSMachPort, you have to override these 2
 	// methods from NSPort; since this is complicated, subclassing
 	// NSMachPort is not recommended
@@ -126,7 +128,7 @@ typedef NS_OPTIONS(NSUInteger, NSMachPortOptions) {
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE 
 @interface NSMessagePort : NSPort {
     @private
-    void * __strong _port;
+    void *_port;
     id _delegate;
 }
 
@@ -139,10 +141,10 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 @interface NSSocketPort : NSPort {
     @private
-    void * __strong _receiver;
+    void *_receiver;
     id _connectors;
-    void * __strong _loops;
-    void * __strong _data;
+    void *_loops;
+    void *_data;
     id _signature;
     id _delegate;
     id _lock;

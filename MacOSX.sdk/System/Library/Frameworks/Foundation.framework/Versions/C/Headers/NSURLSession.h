@@ -1,5 +1,5 @@
 /*	NSURLSession.h
-	Copyright (c) 2013-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2013-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -98,6 +98,9 @@
 @class NSURLSessionConfiguration;
 @protocol NSURLSessionDelegate;
 
+@class NSURLSessionTaskMetrics;
+@class NSDateInterval;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /*
@@ -122,7 +125,9 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
  * The shared session uses the currently set global NSURLCache,
  * NSHTTPCookieStorage and NSURLCredentialStorage objects.
  */
-+ (NSURLSession *)sharedSession;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, strong) NSURLSession *sharedSession;
+#endif
 
 /*
  * Customization of NSURLSession occurs during creation of a new session.
@@ -203,12 +208,12 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
 
 /* Creates a bidirectional stream task to a given host and port.
  */
-- (NSURLSessionStreamTask *)streamTaskWithHostName:(NSString *)hostname port:(NSInteger)port NS_AVAILABLE(10_11, 9_0);
+- (NSURLSessionStreamTask *)streamTaskWithHostName:(NSString *)hostname port:(NSInteger)port NS_AVAILABLE(10_11, 9_0) __WATCHOS_PROHIBITED;
 
 /* Creates a bidirectional stream task with an NSNetService to identify the endpoint.
  * The NSNetService will be resolved before any IO completes.
  */
-- (NSURLSessionStreamTask *)streamTaskWithNetService:(NSNetService *)service NS_AVAILABLE(10_11, 9_0);
+- (NSURLSessionStreamTask *)streamTaskWithNetService:(NSNetService *)service NS_AVAILABLE(10_11, 9_0) __WATCHOS_PROHIBITED;
 
 @end
 
@@ -230,14 +235,14 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
  * see <Foundation/NSURLError.h>.  The delegate, if any, will still be
  * called for authentication challenges.
  */
-- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error))completionHandler;
-- (NSURLSessionDataTask *)dataTaskWithURL:(NSURL *)url completionHandler:(void (^)(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error))completionHandler;
+- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+- (NSURLSessionDataTask *)dataTaskWithURL:(NSURL *)url completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
 
 /*
  * upload convenience method.
  */
-- (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL completionHandler:(void (^)(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error))completionHandler;
-- (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request fromData:(nullable NSData *)bodyData completionHandler:(void (^)(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error))completionHandler;
+- (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+- (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request fromData:(nullable NSData *)bodyData completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
 
 /*
  * download task convenience methods.  When a download successfully
@@ -245,9 +250,9 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
  * copied during the invocation of the completion routine.  The file
  * will be removed automatically.
  */
-- (NSURLSessionDownloadTask *)downloadTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSURL * __nullable location, NSURLResponse * __nullable response, NSError * __nullable error))completionHandler;
-- (NSURLSessionDownloadTask *)downloadTaskWithURL:(NSURL *)url completionHandler:(void (^)(NSURL * __nullable location, NSURLResponse * __nullable response, NSError * __nullable error))completionHandler;
-- (NSURLSessionDownloadTask *)downloadTaskWithResumeData:(NSData *)resumeData completionHandler:(void (^)(NSURL * __nullable location, NSURLResponse * __nullable response, NSError * __nullable error))completionHandler;
+- (NSURLSessionDownloadTask *)downloadTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+- (NSURLSessionDownloadTask *)downloadTaskWithURL:(NSURL *)url completionHandler:(void (^)(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+- (NSURLSessionDownloadTask *)downloadTaskWithResumeData:(NSData *)resumeData completionHandler:(void (^)(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
 
 @end
 
@@ -377,7 +382,7 @@ FOUNDATION_EXPORT const float NSURLSessionTaskPriorityHigh NS_AVAILABLE(10_10, 8
  * If resume data cannot be created, the completion handler will be
  * called with nil resumeData.
  */
-- (void)cancelByProducingResumeData:(void (^)(NSData * __nullable resumeData))completionHandler;
+- (void)cancelByProducingResumeData:(void (^)(NSData * _Nullable resumeData))completionHandler;
 
 @end
 
@@ -412,14 +417,14 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * If an error occurs, any outstanding reads will also fail, and new
  * read requests will error out immediately.
  */
-- (void)readDataOfMinLength:(NSUInteger)minBytes maxLength:(NSUInteger)maxBytes timeout:(NSTimeInterval)timeout completionHandler:(void (^) (NSData * __nullable data, BOOL atEOF, NSError * __nullable error))completionHandler;
+- (void)readDataOfMinLength:(NSUInteger)minBytes maxLength:(NSUInteger)maxBytes timeout:(NSTimeInterval)timeout completionHandler:(void (^) (NSData * _Nullable data, BOOL atEOF, NSError * _Nullable error))completionHandler;
 
 /* Write the data completely to the underlying socket.  If all the
  * bytes have not been written by the timeout, a timeout error will
  * occur.  Note that invocation of the completion handler does not
  * guarantee that the remote side has received all the bytes, only
  * that they have been written to the kernel. */
-- (void)writeData:(NSData *)data timeout:(NSTimeInterval)timeout completionHandler:(void (^) (NSError * __nullable error))completionHandler;
+- (void)writeData:(NSData *)data timeout:(NSTimeInterval)timeout completionHandler:(void (^) (NSError * _Nullable error))completionHandler;
 
 /* -captureStreams completes any already enqueued reads
  * and writes, and then invokes the
@@ -475,8 +480,11 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
 @interface NSURLSessionConfiguration : NSObject <NSCopying>
 
-+ (NSURLSessionConfiguration *)defaultSessionConfiguration;
-+ (NSURLSessionConfiguration *)ephemeralSessionConfiguration;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, strong) NSURLSessionConfiguration *defaultSessionConfiguration;
+@property (class, readonly, strong) NSURLSessionConfiguration *ephemeralSessionConfiguration;
+#endif
+
 + (NSURLSessionConfiguration *)backgroundSessionConfigurationWithIdentifier:(NSString *)identifier NS_AVAILABLE(10_10, 8_0);
 
 /* identifier for the background session configuration */
@@ -611,7 +619,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
  * interaction. 
  */
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
-                                             completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * __nullable credential))completionHandler;
+                                             completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler;
 
 /* If an application has received an
  * -application:handleEventsForBackgroundURLSession:completionHandler:
@@ -643,7 +651,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
                      willPerformHTTPRedirection:(NSHTTPURLResponse *)response
                                      newRequest:(NSURLRequest *)request
-                              completionHandler:(void (^)(NSURLRequest * __nullable))completionHandler;
+                              completionHandler:(void (^)(NSURLRequest * _Nullable))completionHandler;
 
 /* The task has received a request specific authentication challenge.
  * If this delegate is not implemented, the session specific authentication challenge
@@ -652,14 +660,14 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
  */
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
                             didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge 
-                              completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * __nullable credential))completionHandler;
+                              completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler;
 
 /* Sent if a task requires a new, unopened body stream.  This may be
  * necessary when authentication has failed for any request that
  * involves a body stream. 
  */
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
-                              needNewBodyStream:(void (^)(NSInputStream * __nullable bodyStream))completionHandler;
+                              needNewBodyStream:(void (^)(NSInputStream * _Nullable bodyStream))completionHandler;
 
 /* Sent periodically to notify the delegate of upload progress.  This
  * information is also available as properties of the task.
@@ -668,6 +676,11 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
                                 didSendBodyData:(int64_t)bytesSent
                                  totalBytesSent:(int64_t)totalBytesSent
                        totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
+
+/*
+ * Sent when complete statistics information has been collected for the task.
+ */
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didFinishCollectingMetrics:(NSURLSessionTaskMetrics *)metrics API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /* Sent as the last message related to a specific task.  Error may be
  * nil, which implies that no error occurred and this task is complete. 
@@ -736,7 +749,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
  */
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
                                   willCacheResponse:(NSCachedURLResponse *)proposedResponse 
-                                  completionHandler:(void (^)(NSCachedURLResponse * __nullable cachedResponse))completionHandler;
+                                  completionHandler:(void (^)(NSCachedURLResponse * _Nullable cachedResponse))completionHandler;
 
 @end
 
@@ -815,6 +828,175 @@ FOUNDATION_EXPORT NSString * const NSURLSessionDownloadTaskResumeData NS_AVAILAB
 
 @interface NSURLSessionConfiguration (NSURLSessionDeprecated)
 + (NSURLSessionConfiguration *)backgroundSessionConfiguration:(NSString *)identifier NS_DEPRECATED(NSURLSESSION_AVAILABLE, 10_10, 7_0, 8_0, "Please use backgroundSessionConfigurationWithIdentifier: instead");
+@end
+
+/*
+ * The resource fetch type.
+ */
+typedef NS_ENUM(NSInteger, NSURLSessionTaskMetricsResourceFetchType) {
+    NSURLSessionTaskMetricsResourceFetchTypeUnknown,
+    NSURLSessionTaskMetricsResourceFetchTypeNetworkLoad,   /* The resource was loaded over the network. */
+    NSURLSessionTaskMetricsResourceFetchTypeServerPush,    /* The resource was pushed by the server to the client. */
+    NSURLSessionTaskMetricsResourceFetchTypeLocalCache,    /* The resource was retrieved from the local storage. */
+} API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+
+/*
+ * This class defines the performance metrics collected for a request/response transaction during the task execution.
+ */
+API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
+@interface NSURLSessionTaskTransactionMetrics : NSObject
+
+/*
+ * Represents the transaction request.
+ */
+@property (copy, readonly) NSURLRequest *request;
+
+/*
+ * Represents the transaction response. Can be nil if error occurred and no response was generated.
+ */
+@property (nullable, copy, readonly) NSURLResponse *response;
+
+/*
+ * For all NSDate metrics below, if that aspect of the task could not be completed, then the corresponding “EndDate” metric will be nil.
+ * For example, if a name lookup was started but the name lookup timed out, failed, or the client canceled the task before the name could be resolved -- then while domainLookupStartDate may be set, domainLookupEndDate will be nil along with all later metrics.
+ */
+
+/*
+ * fetchStartDate returns the time when the user agent started fetching the resource, whether or not the resource was retrieved from the server or local resources.
+ *
+ * The following metrics will be set to nil, if a persistent connection was used or the resource was retrieved from local resources:
+ *
+ *   domainLookupStartDate
+ *   domainLookupEndDate
+ *   connectStartDate
+ *   connectEndDate
+ *   secureConnectionStartDate
+ *   secureConnectionEndDate
+ */
+@property (nullable, copy, readonly) NSDate *fetchStartDate;
+
+/*
+ * domainLookupStartDate returns the time immediately before the user agent started the name lookup for the resource.
+ */
+@property (nullable, copy, readonly) NSDate *domainLookupStartDate;
+
+/*
+ * domainLookupEndDate returns the time after the name lookup was completed.
+ */
+@property (nullable, copy, readonly) NSDate *domainLookupEndDate;
+
+/*
+ * connectStartDate is the time immediately before the user agent started establishing the connection to the server.
+ *
+ * For example, this would correspond to the time immediately before the user agent started trying to establish the TCP connection.
+ */
+@property (nullable, copy, readonly) NSDate *connectStartDate;
+
+/*
+ * If an encrypted connection was used, secureConnectionStartDate is the time immediately before the user agent started the security handshake to secure the current connection.
+ *
+ * For example, this would correspond to the time immediately before the user agent started the TLS handshake.
+ *
+ * If an encrypted connection was not used, this attribute is set to nil.
+ */
+@property (nullable, copy, readonly) NSDate *secureConnectionStartDate;
+
+/*
+ * If an encrypted connection was used, secureConnectionEndDate is the time immediately after the security handshake completed.
+ *
+ * If an encrypted connection was not used, this attribute is set to nil.
+ */
+@property (nullable, copy, readonly) NSDate *secureConnectionEndDate;
+
+/*
+ * connectEndDate is the time immediately after the user agent finished establishing the connection to the server, including completion of security-related and other handshakes.
+ */
+@property (nullable, copy, readonly) NSDate *connectEndDate;
+
+/*
+ * requestStartDate is the time immediately before the user agent started requesting the source, regardless of whether the resource was retrieved from the server or local resources.
+ *
+ * For example, this would correspond to the time immediately before the user agent sent an HTTP GET request.
+ */
+@property (nullable, copy, readonly) NSDate *requestStartDate;
+
+/*
+ * requestEndDate is the time immediately after the user agent finished requesting the source, regardless of whether the resource was retrieved from the server or local resources.
+ *
+ * For example, this would correspond to the time immediately after the user agent finished sending the last byte of the request.
+ */
+@property (nullable, copy, readonly) NSDate *requestEndDate;
+
+/*
+ * responseStartDate is the time immediately after the user agent received the first byte of the response from the server or from local resources.
+ *
+ * For example, this would correspond to the time immediately after the user agent received the first byte of an HTTP response.
+ */
+@property (nullable, copy, readonly) NSDate *responseStartDate;
+
+/*
+ * responseEndDate is the time immediately after the user agent received the last byte of the resource.
+ */
+@property (nullable, copy, readonly) NSDate *responseEndDate;
+
+/*
+ * The network protocol used to fetch the resource, as identified by the ALPN Protocol ID Identification Sequence [RFC7301].
+ * E.g., h2, http/1.1, spdy/3.1.
+ *
+ * When a proxy is configured AND a tunnel connection is established, then this attribute returns the value for the tunneled protocol.
+ *
+ * For example:
+ * If no proxy were used, and HTTP/2 was negotiated, then h2 would be returned.
+ * If HTTP/1.1 were used to the proxy, and the tunneled connection was HTTP/2, then h2 would be returned.
+ * If HTTP/1.1 were used to the proxy, and there were no tunnel, then http/1.1 would be returned.
+ *
+ */
+@property (nullable, copy, readonly) NSString *networkProtocolName;
+
+/*
+ * This property is set to YES if a proxy connection was used to fetch the resource.
+ */
+@property (assign, readonly, getter=isProxyConnection) BOOL proxyConnection;
+
+/*
+ * This property is set to YES if a persistent connection was used to fetch the resource.
+ */
+@property (assign, readonly, getter=isReusedConnection) BOOL reusedConnection;
+
+/*
+ * Indicates whether the resource was loaded, pushed or retrieved from the local cache.
+ */
+@property (assign, readonly) NSURLSessionTaskMetricsResourceFetchType resourceFetchType;
+
+
+-(instancetype)init;
+
+
+@end
+
+
+API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
+@interface NSURLSessionTaskMetrics : NSObject
+
+/*
+ * transactionMetrics array contains the metrics collected for every request/response transaction created during the task execution.
+ */
+@property (copy, readonly) NSArray<NSURLSessionTaskTransactionMetrics *> *transactionMetrics;
+
+/*
+ * Interval from the task creation time to the task completion time.
+ * Task creation time is the time when the task was instantiated.
+ * Task completion time is the time when the task is about to change its internal state to completed.
+ */
+@property (copy, readonly) NSDateInterval *taskInterval;
+
+/*
+ * redirectCount is the number of redirects that were recorded.
+ */
+@property (assign, readonly) NSUInteger redirectCount;
+
+-(instancetype)init;
+
 @end
 
 NS_ASSUME_NONNULL_END

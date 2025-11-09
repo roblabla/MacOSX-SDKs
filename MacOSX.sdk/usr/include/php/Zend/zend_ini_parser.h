@@ -14,5 +14,6 @@
 #define	TC_QUOTED_STRING	267
 #define	BOOL_TRUE	268
 #define	BOOL_FALSE	269
-#define	END_OF_LINE	270
+#define	NULL_NULL	270
+#define	END_OF_LINE	271
 

@@ -37,7 +37,7 @@
  */
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+WK_EXTERN API_AVAILABLE(macosx(10.10), ios(8.0))
 @interface WKFrameInfo : NSObject <NSCopying>
 
 /*! @abstract A Boolean value indicating whether the frame is the main frame
@@ -51,7 +51,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 /*! @abstract The frame's current security origin.
  */
-@property (nonatomic, readonly) WKSecurityOrigin *securityOrigin NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readonly) WKSecurityOrigin *securityOrigin API_AVAILABLE(macosx(10.11), ios(9.0));
 
 @end
 

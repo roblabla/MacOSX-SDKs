@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -252,18 +252,21 @@ struct tcp_connection_info {
         u_int32_t	tcpi_srtt;      /* average RTT in ms */
         u_int32_t	tcpi_rttvar;    /* RTT variance */
 	u_int32_t
-			/* Client-side information */
 			tcpi_tfo_cookie_req:1, /* Cookie requested? */
 			tcpi_tfo_cookie_rcv:1, /* Cookie received? */
 			tcpi_tfo_syn_loss:1,   /* Fallback to reg. TCP after SYN-loss */
 			tcpi_tfo_syn_data_sent:1, /* SYN+data has been sent out */
 			tcpi_tfo_syn_data_acked:1, /* SYN+data has been fully acknowledged */
-			/* And the following are for server-side information (must be set on the listener socket) */
 			tcpi_tfo_syn_data_rcv:1, /* Server received SYN+data with a valid cookie */
 			tcpi_tfo_cookie_req_rcv:1, /* Server received cookie-request */
 			tcpi_tfo_cookie_sent:1, /* Server announced cookie */
 			tcpi_tfo_cookie_invalid:1, /* Server received an invalid cookie */
-			__pad2:23;
+			tcpi_tfo_cookie_wrong:1, /* Our sent cookie was wrong */
+			tcpi_tfo_no_cookie_rcv:1, /* We did not receive a cookie upon our request */
+			tcpi_tfo_heuristics_disable:1, /* TFO-heuristics disabled it */
+			tcpi_tfo_send_blackhole:1, /* A sending-blackhole got detected */
+			tcpi_tfo_recv_blackhole:1, /* A receiver-blackhole got detected */
+			__pad2:18;
         u_int64_t	tcpi_txpackets __attribute__((aligned(8)));
         u_int64_t	tcpi_txbytes __attribute__((aligned(8)));
         u_int64_t	tcpi_txretransmitbytes __attribute__((aligned(8)));

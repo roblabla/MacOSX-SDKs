@@ -12,6 +12,29 @@
 #include <mach/message.h>
 #include <mach/mig_errors.h>
 #include <mach/port.h>
+	
+/* BEGIN MIG_STRNCPY_ZEROFILL CODE */
+
+#if defined(__has_include)
+#if __has_include(<mach/mig_strncpy_zerofill_support.h>)
+#ifndef USING_MIG_STRNCPY_ZEROFILL
+#define USING_MIG_STRNCPY_ZEROFILL
+#endif
+#ifndef __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS__
+#define __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS__
+#ifdef __cplusplus
+extern "C" {
+#endif
+	extern int mig_strncpy_zerofill(char *dest, const char *src, int len) __attribute__((weak_import));
+#ifdef __cplusplus
+}
+#endif
+#endif /* __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS__ */
+#endif /* __has_include(<mach/mig_strncpy_zerofill_support.h>) */
+#endif /* __has_include */
+	
+/* END MIG_STRNCPY_ZEROFILL CODE */
+
 #if	(__MigKernelSpecificCode) || (_MIG_KERNEL_SPECIFIC_CODE_)
 #include <kern/ipc_mig.h>
 #endif /* __MigKernelSpecificCode */
@@ -29,7 +52,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	gssd_mach_MSG_COUNT
-#define	gssd_mach_MSG_COUNT	8
+#define	gssd_mach_MSG_COUNT	9
 #endif	/* gssd_mach_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -175,6 +198,41 @@ kern_return_t mach_gss_accept_sec_context_v2
 	mach_msg_type_number_t *keyCnt,
 	gssd_byte_buffer *outtoken,
 	mach_msg_type_number_t *outtokenCnt,
+	uint32_t *major_stat,
+	uint32_t *minor_stat
+);
+
+/* Routine mach_gss_init_sec_context_v3 */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_gss_init_sec_context_v3
+(
+	mach_port_t server,
+	gssd_mechtype mech,
+	gssd_byte_buffer intoken,
+	mach_msg_type_number_t intokenCnt,
+	uint32_t uid,
+	gssd_nametype clnt_nt,
+	gssd_byte_buffer clnt_princ,
+	mach_msg_type_number_t clnt_princCnt,
+	gssd_nametype svc_nt,
+	gssd_byte_buffer svc_princ,
+	mach_msg_type_number_t svc_princCnt,
+	uint32_t flags,
+	gssd_etype_list etypes,
+	mach_msg_type_number_t etypesCnt,
+	uint32_t *gssd_flags,
+	gssd_ctx *context,
+	gssd_cred *cred_handle,
+	uint32_t *ret_flags,
+	gssd_byte_buffer *key,
+	mach_msg_type_number_t *keyCnt,
+	gssd_byte_buffer *outtoken,
+	mach_msg_type_number_t *outtokenCnt,
+	gssd_dstring displayname,
 	uint32_t *major_stat,
 	uint32_t *minor_stat
 );
@@ -372,6 +430,36 @@ __END_DECLS
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
 		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t intoken;
+		mach_msg_ool_descriptor_t clnt_princ;
+		mach_msg_ool_descriptor_t svc_princ;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		gssd_mechtype mech;
+		mach_msg_type_number_t intokenCnt;
+		uint32_t uid;
+		gssd_nametype clnt_nt;
+		mach_msg_type_number_t clnt_princCnt;
+		gssd_nametype svc_nt;
+		mach_msg_type_number_t svc_princCnt;
+		uint32_t flags;
+		mach_msg_type_number_t etypesCnt;
+		int32_t etypes[64];
+		uint32_t gssd_flags;
+		gssd_ctx context;
+		gssd_cred cred_handle;
+	} __Request__mach_gss_init_sec_context_v3_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
 		mach_msg_ool_descriptor_t princ;
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
@@ -425,6 +513,7 @@ union __RequestUnion__gssd_mach_subsystem {
 	__Request__mach_gss_log_error_t Request_mach_gss_log_error;
 	__Request__mach_gss_init_sec_context_v2_t Request_mach_gss_init_sec_context_v2;
 	__Request__mach_gss_accept_sec_context_v2_t Request_mach_gss_accept_sec_context_v2;
+	__Request__mach_gss_init_sec_context_v3_t Request_mach_gss_init_sec_context_v3;
 	__Request__mach_gss_hold_cred_t Request_mach_gss_hold_cred;
 	__Request__mach_gss_unhold_cred_t Request_mach_gss_unhold_cred;
 	__Request__mach_gss_lookup_t Request_mach_gss_lookup;
@@ -555,6 +644,33 @@ union __RequestUnion__gssd_mach_subsystem {
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t key;
+		mach_msg_ool_descriptor_t outtoken;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		uint32_t gssd_flags;
+		gssd_ctx context;
+		gssd_cred cred_handle;
+		uint32_t ret_flags;
+		mach_msg_type_number_t keyCnt;
+		mach_msg_type_number_t outtokenCnt;
+		mach_msg_type_number_t displaynameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t displaynameCnt;
+		char displayname[128];
+		uint32_t major_stat;
+		uint32_t minor_stat;
+	} __Reply__mach_gss_init_sec_context_v3_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		uint32_t major_stat;
@@ -603,6 +719,7 @@ union __ReplyUnion__gssd_mach_subsystem {
 	__Reply__mach_gss_log_error_t Reply_mach_gss_log_error;
 	__Reply__mach_gss_init_sec_context_v2_t Reply_mach_gss_init_sec_context_v2;
 	__Reply__mach_gss_accept_sec_context_v2_t Reply_mach_gss_accept_sec_context_v2;
+	__Reply__mach_gss_init_sec_context_v3_t Reply_mach_gss_init_sec_context_v3;
 	__Reply__mach_gss_hold_cred_t Reply_mach_gss_hold_cred;
 	__Reply__mach_gss_unhold_cred_t Reply_mach_gss_unhold_cred;
 	__Reply__mach_gss_lookup_t Reply_mach_gss_lookup;
@@ -616,9 +733,10 @@ union __ReplyUnion__gssd_mach_subsystem {
     { "mach_gss_log_error", 1001 },\
     { "mach_gss_init_sec_context_v2", 1002 },\
     { "mach_gss_accept_sec_context_v2", 1003 },\
-    { "mach_gss_hold_cred", 1004 },\
-    { "mach_gss_unhold_cred", 1005 },\
-    { "mach_gss_lookup", 1006 }
+    { "mach_gss_init_sec_context_v3", 1004 },\
+    { "mach_gss_hold_cred", 1005 },\
+    { "mach_gss_unhold_cred", 1006 },\
+    { "mach_gss_lookup", 1007 }
 #endif
 
 #ifdef __AfterMigUserHeader

@@ -4,16 +4,15 @@
  *
  *  Copyright (c) 2010 Apple Inc. All rights reserved.
  */
+
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CLAvailability.h>
 
-// The CLPlacemark API is very heavily nullable
+NS_ASSUME_NONNULL_BEGIN
 
 @class CLLocation;
 @class CLRegion;
 @class CLPlacemarkInternal;
-
-NS_ASSUME_NONNULL_BEGIN
 
 /*
  *  CLPlacemark
@@ -36,7 +35,7 @@ NS_CLASS_AVAILABLE(10_8,5_0)
  * Discussion:
  *   Initialize a newly allocated placemark from another placemark, copying its data.
  */
-- (instancetype)initWithPlacemark:(CLPlacemark *)placemark;
+- (instancetype)initWithPlacemark:(CLPlacemark *) placemark;
 
 /*
  *  location
@@ -55,10 +54,10 @@ NS_CLASS_AVAILABLE(10_8,5_0)
 @property (nonatomic, readonly, copy, nullable) CLRegion *region;
 
 /*
- * timeZone
+ *  timeZone
  *
- * Discussion:
- *    Returns the time zone associated with the placemark.
+ *  Discussion:
+ *		Returns the time zone associated with the placemark.
  */
 @property (nonatomic, readonly, copy, nullable) NSTimeZone *timeZone NS_AVAILABLE(10_11,9_0);
 

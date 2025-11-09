@@ -37,6 +37,7 @@
 #define XPLUGIN_VERSION 6
 
 #include <Availability.h>
+
 #if defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && !defined(XPLUGIN_VERSION_MIN_REQUIRED)
 #if __MAC_OS_X_VERSION_MIN_REQUIRED >= 1082
 #define XPLUGIN_VERSION_MIN_REQUIRED 6
@@ -53,41 +54,45 @@
 #endif
 #endif /* __MAC_OS_X_VERSION_MIN_REQUIRED && !XPLUGIN_VERSION_MIN_REQUIRED */
 
+#define XPLUGIN_AVAILABILITY __attribute__((deprecated))
+
 #if XPLUGIN_VERSION_MIN_REQUIRED >= 6 || !defined(XPLUGIN_VERSION_MIN_REQUIRED)
-#define XPLUGIN_VERSION_6
+#define XPLUGIN_VERSION_6 XPLUGIN_AVAILABILITY
 #else
-#define XPLUGIN_VERSION_6 __attribute__((weak_import))
+#define XPLUGIN_VERSION_6 XPLUGIN_AVAILABILITY __attribute__((weak_import))
 #endif
 
 #if XPLUGIN_VERSION_MIN_REQUIRED >= 5 || !defined(XPLUGIN_VERSION_MIN_REQUIRED)
-#define XPLUGIN_VERSION_5
+#define XPLUGIN_VERSION_5 XPLUGIN_AVAILABILITY
 #else
-#define XPLUGIN_VERSION_5 __attribute__((weak_import))
+#define XPLUGIN_VERSION_5 XPLUGIN_AVAILABILITY __attribute__((weak_import))
 #endif
 
 #if XPLUGIN_VERSION_MIN_REQUIRED >= 4 || !defined(XPLUGIN_VERSION_MIN_REQUIRED)
-#define XPLUGIN_VERSION_4
+#define XPLUGIN_VERSION_4 XPLUGIN_AVAILABILITY
 #else
-#define XPLUGIN_VERSION_4 __attribute__((weak_import))
+#define XPLUGIN_VERSION_4 XPLUGIN_AVAILABILITY __attribute__((weak_import))
 #endif
 
 #if XPLUGIN_VERSION_MIN_REQUIRED >= 3 || !defined(XPLUGIN_VERSION_MIN_REQUIRED)
-#define XPLUGIN_VERSION_3
+#define XPLUGIN_VERSION_3 XPLUGIN_AVAILABILITY
 #else
-#define XPLUGIN_VERSION_3 __attribute__((weak_import))
+#define XPLUGIN_VERSION_3 XPLUGIN_AVAILABILITY __attribute__((weak_import))
 #endif
 
 #if XPLUGIN_VERSION_MIN_REQUIRED >= 2 || !defined(XPLUGIN_VERSION_MIN_REQUIRED)
-#define XPLUGIN_VERSION_2
+#define XPLUGIN_VERSION_2 XPLUGIN_AVAILABILITY
 #else
-#define XPLUGIN_VERSION_2 __attribute__((weak_import))
+#define XPLUGIN_VERSION_2 XPLUGIN_AVAILABILITY __attribute__((weak_import))
 #endif
 
 #if XPLUGIN_VERSION_MIN_REQUIRED >= 1 || !defined(XPLUGIN_VERSION_MIN_REQUIRED)
-#define XPLUGIN_VERSION_1
+#define XPLUGIN_VERSION_1 XPLUGIN_AVAILABILITY
 #else
-#define XPLUGIN_VERSION_1 __attribute__((weak_import))
+#define XPLUGIN_VERSION_1 XPLUGIN_AVAILABILITY __attribute__((weak_import))
 #endif
+
+#define XPLUGIN_VERSION_0 XPLUGIN_AVAILABILITY
 
 #include <stdint.h>
 
@@ -321,6 +326,7 @@ enum xp_init_options_enum {
 /* Initialize the plugin library. Only the copy/fill/composite functions
    may be called without having previously called xp_init () */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_init (unsigned int options);
 
 /* Sets the current set of requested notifications to MASK. When any of
@@ -328,19 +334,23 @@ extern xp_error xp_init (unsigned int options);
    calling this function cancels any previously requested notifications
    that aren't set in MASK. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_select_events (unsigned int mask,
 				  xp_event_fun *callback,
 				  void *callback_data);
 
 /* Waits for all initiated operations to complete. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_synchronize (void);
 
 /* Causes any display update initiated through the plugin libary to be
    queued until update is reenabled. Note that calls to these functions
    nest. */
-  
+
+XPLUGIN_VERSION_0
 extern xp_error xp_disable_update (void);
+XPLUGIN_VERSION_0
 extern xp_error xp_reenable_update (void);
 
 
@@ -352,6 +362,7 @@ extern xp_error xp_reenable_update (void);
    specify the offset to the cursor's hot spot from its top-left
    corner. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_set_cursor (unsigned int width, unsigned int height,
 			       unsigned int hot_x, unsigned int hot_y,
 			       const uint32_t *argb_data,
@@ -360,7 +371,9 @@ extern xp_error xp_set_cursor (unsigned int width, unsigned int height,
 /* Hide and show the cursor if it's owned by the current process. Calls
    to these functions nest. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_hide_cursor (void);
+XPLUGIN_VERSION_0
 extern xp_error xp_show_cursor (void);
 
 
@@ -371,16 +384,19 @@ extern xp_error xp_show_cursor (void);
    XP_BOUNDS or an error is raised. The id of the newly created window
    is stored in *RET-ID if this function returns XP_Success. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_create_window (unsigned int mask,
 				  const xp_window_changes *values,
 				  xp_window_id *ret_id);
 
 /* Destroys the window identified by ID. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_destroy_window (xp_window_id id);
 
 /* Reconfigures the given window according to MASK and VALUES. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_configure_window (xp_window_id id, unsigned int mask,
 				     const xp_window_changes *values);
 
@@ -388,12 +404,14 @@ extern xp_error xp_configure_window (xp_window_id id, unsigned int mask,
 /* Returns true if NATIVE-ID is a window created by the plugin library.
    If so and RET-ID is non-null, stores the id of the window in *RET-ID. */
 
+XPLUGIN_VERSION_0
 extern xp_bool xp_lookup_native_window (xp_native_window_id native_id,
 					xp_window_id *ret_id);
 
 /* If ID names a window created by the plugin library, stores it's native
    window id in *RET-NATIVE-ID. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_get_native_window (xp_window_id id,
 				      xp_native_window_id *ret_native_id);
 
@@ -419,6 +437,7 @@ extern xp_error xp_get_native_window (xp_window_id id,
    window. While the window is locked, the only operations that may
    be performed on it are to modify, access or flush its marked region. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_lock_window (xp_window_id id,
 				const xp_box *in_rect,
 				unsigned int *depth,
@@ -430,6 +449,7 @@ extern xp_error xp_lock_window (xp_window_id id,
    SHAPE-TX, and SHAPE-TY in the specified window has been updated, and
    will need to subsequently be redisplayed. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_mark_window (xp_window_id id, int shape_nrects,
 				const xp_box *shape_rects,
 				int shape_tx, int shape_ty);
@@ -438,10 +458,12 @@ extern xp_error xp_mark_window (xp_window_id id, int shape_nrects,
    regions are immediately redisplayed. Note that it's an error to
    unlock an already unlocked window. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_unlock_window (xp_window_id id, xp_bool flush);
 
 /* If anything is marked in the given window for redisplay, do it now. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_flush_window (xp_window_id id);
 
 /* Moves the contents of the region DX,DY pixels away from that specified
@@ -449,6 +471,7 @@ extern xp_error xp_flush_window (xp_window_id id);
    destination region in the window DST-ID. Note that currently source
    and destination windows must be the same. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_copy_window (xp_window_id src_id, xp_window_id dst_id,
 				int dst_nrects, const xp_box *dst_rects,
 				int dx, int dy);
@@ -456,14 +479,17 @@ extern xp_error xp_copy_window (xp_window_id src_id, xp_window_id dst_id,
 /* Returns true if the given window has any regions marked for
    redisplay. */
 
+XPLUGIN_VERSION_0
 extern xp_bool xp_is_window_marked (xp_window_id id);
 
 /* If successful returns a superset of the region marked for update in
    the given window. Use xp_free_region () to release the returned data. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_get_marked_shape (xp_window_id id,
 				     int *ret_nrects, xp_box **ret_rects);
 
+XPLUGIN_VERSION_0
 extern void xp_free_shape (int nrects, xp_box *rects);
 
 /* Searches for the first window below ABOVE-ID containing the point X,Y,
@@ -471,11 +497,13 @@ extern void xp_free_shape (int nrects, xp_box *rects);
    is set to zero. If ABOVE-ID is zero, finds the topmost window
    containing the given point. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_find_window (int x, int y, xp_window_id above_id,
 				xp_window_id *ret_id);
 
 /* Returns the current origin and size of the window ID in *BOUNDS-RET if
    successful. */
+XPLUGIN_VERSION_0
 extern xp_error xp_get_window_bounds (xp_window_id id, xp_box *bounds_ret);
 
 
@@ -485,21 +513,25 @@ extern xp_error xp_get_window_bounds (xp_window_id id, xp_box *bounds_ret);
 /* Create a new VRAM surface on the specified window. If successful,
    returns the identifier of the new surface in *RET-SID. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_create_surface (xp_window_id id, xp_surface_id *ret_sid);
 
 /* Destroys the specified surface. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_destroy_surface (xp_surface_id sid);
 
 /* Reconfigures the specified surface as defined by MASK and VALUES.
    Note that specifying XP_DEPTH is an error. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_configure_surface (xp_surface_id sid, unsigned int mask,
 				      const xp_window_changes *values);
 
 /* If successful, places the client identifier of the current process
    in *RET-CLIENT. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_get_client_id (xp_client_id *ret_client);
 
 /* Given a valid window,surface combination created by the current
@@ -507,6 +539,7 @@ extern xp_error xp_get_client_id (xp_client_id *ret_client);
    to that surface. If successful, returns two integers in RET-KEY
    which the client can use to import the surface into their process. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_export_surface (xp_window_id wid, xp_surface_id sid,
 				   xp_client_id client,
 				   unsigned int ret_key[2]);
@@ -515,24 +548,27 @@ extern xp_error xp_export_surface (xp_window_id wid, xp_surface_id sid,
    to import the surface into the current process. If successful the
    local surface identifier is stored in *SID-RET. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_import_surface (const unsigned int key[2],
 				   xp_surface_id *sid_ret);
 
 /* If successful, stores the number of surfaces attached to the
    specified window in *RET. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_get_window_surface_count (xp_window_id id,
 					     unsigned int *ret);
 
 /* Attaches the CGLContextObj CGL-CTX to the specified surface. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_attach_gl_context (void *cgl_ctx, xp_surface_id sid);
 
 /* Updates the CGLContextObj CGL-CTX to reflect any recent changes to
    the surface it's attached to. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_update_gl_context (void *cgl_ctx);
-
 
 
 /* Window frame functions. */
@@ -607,11 +643,16 @@ typedef enum xp_frame_attr_enum xp_frame_attr;
 					 XP_FRAME_ATTRS_ANY_BUTTON | \
 					 XP_FRAME_ATTRS_ANY_CLICKED)
 
+XPLUGIN_VERSION_0
 extern xp_error xp_frame_get_rect (xp_frame_rect type, xp_frame_class class, const xp_box *outer,
 				   const xp_box *inner, xp_box *ret);
+
+XPLUGIN_VERSION_0
 extern xp_error xp_frame_hit_test (xp_frame_class class, int x, int y,
 				   const xp_box *outer,
 				   const xp_box *inner, int *ret);
+
+XPLUGIN_VERSION_0
 extern xp_error xp_frame_draw (xp_window_id wid, xp_frame_class class, xp_frame_attr attr,
 			       const xp_box *outer, const xp_box *inner,
 			       unsigned int title_len,
@@ -648,6 +689,7 @@ enum xp_composite_op_enum {
 
    Operations that are not supported will return XP_BadImplementation. */
 
+XPLUGIN_VERSION_0
 extern xp_error xp_composite_pixels (unsigned int width, unsigned int height,
 				     unsigned int function,
 				     void *src[2], unsigned int src_rowbytes[2],
@@ -658,6 +700,7 @@ extern xp_error xp_composite_pixels (unsigned int width, unsigned int height,
    bytes filled with the 32-bit pattern VALUE. Each row is DST-ROWBYTES
    wide in total. */
 
+XPLUGIN_VERSION_0
 extern void xp_fill_bytes (unsigned int width,
 			   unsigned int height, uint32_t value,
 			   void *dst, unsigned int dst_rowbytes);
@@ -665,6 +708,7 @@ extern void xp_fill_bytes (unsigned int width,
 /* Copy HEIGHT rows of bytes from SRC to DST. Each row will have WIDTH
    bytes copied. SRC and DST may overlap, and the right thing will happen. */
 
+XPLUGIN_VERSION_0
 extern void xp_copy_bytes (unsigned int width, unsigned int height,
 			   const void *src, unsigned int src_rowbytes,
 			   void *dst, unsigned int dst_rowbytes);
@@ -672,6 +716,7 @@ extern void xp_copy_bytes (unsigned int width, unsigned int height,
 /* Suggestions for the minimum number of bytes or pixels for which it
    makes sense to use some of the xp_ functions */
 
+XPLUGIN_VERSION_0
 extern unsigned int xp_fill_bytes_threshold, xp_copy_bytes_threshold,
     xp_composite_area_threshold, xp_scroll_area_threshold;
 

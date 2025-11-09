@@ -30,10 +30,16 @@ MDL_EXPORT
 /** The matrix, at minimumTime */
 @property (nonatomic, assign) matrix_float4x4 matrix;
 
-/** If no animation data is present, minimumTime and maximumTime will be zero
- */
+/** if YES, this transform is intended to be in global space, not parent space */
+@property (nonatomic, assign) BOOL resetsTransform;
+
+/** If no animation data is present, minimumTime and maximumTime will be zero */
 @property (nonatomic, readonly) NSTimeInterval minimumTime;
 @property (nonatomic, readonly) NSTimeInterval maximumTime;
+
+/** An array of sample times for which a key has been stored
+    If no animation data is present, the array will contain a single value of zero */
+@property (nonatomic, readonly, copy) NSArray<NSNumber*> *keyTimes;
 
 @optional
 - (void)setLocalTransform:(matrix_float4x4)transform forTime:(NSTimeInterval)time;
@@ -70,10 +76,12 @@ MDL_EXPORT
 
 NS_CLASS_AVAILABLE(10_11, 9_0)
 MDL_EXPORT
-@interface MDLTransform : NSObject <MDLTransformComponent>
+@interface MDLTransform : NSObject <NSCopying, MDLTransformComponent>
 
 - (instancetype)initWithIdentity NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithTransformComponent:(id<MDLTransformComponent>)component;
+- (instancetype)initWithTransformComponent:(id<MDLTransformComponent>)component
+                           resetsTransform:(BOOL)resetsTransform;
 
 /**
  Initialization with a matrix assumes the matrix is an invertible, homogeneous 
@@ -81,6 +89,7 @@ MDL_EXPORT
  with a non-affine matrix will yield those of the identity transform.
  */
 - (instancetype)initWithMatrix:(matrix_float4x4)matrix;
+- (instancetype)initWithMatrix:(matrix_float4x4)matrix resetsTransform:(BOOL)resetsTransform;
 
 /**
  Set all transform components to identity

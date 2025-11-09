@@ -7,15 +7,17 @@
 
 #import <CloudKit/CKDatabaseOperation.h>
 
+@class CKRecordZone, CKRecordZoneID;
+
 NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface CKModifyRecordZonesOperation : CKDatabaseOperation
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithRecordZonesToSave:(nullable NSArray <CKRecordZone *> *)recordZonesToSave recordZoneIDsToDelete:(nullable NSArray <CKRecordZoneID *> *)recordZoneIDsToDelete;
+- (instancetype)initWithRecordZonesToSave:(nullable NSArray<CKRecordZone *> *)recordZonesToSave recordZoneIDsToDelete:(nullable NSArray<CKRecordZoneID *> *)recordZoneIDsToDelete;
 
-@property (nonatomic, copy, nullable) NSArray <CKRecordZone *> *recordZonesToSave;
-@property (nonatomic, copy, nullable) NSArray <CKRecordZoneID *> *recordZoneIDsToDelete;
+@property (nonatomic, copy, nullable) NSArray<CKRecordZone *> *recordZonesToSave;
+@property (nonatomic, copy, nullable) NSArray<CKRecordZoneID *> *recordZoneIDsToDelete;
 
 /*  This block is called when the operation completes.
  The [NSOperation completionBlock] will also be called if both are set.
@@ -25,7 +27,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  seen all record changes, and may be invoked while the server is processing the side effects
  of those changes.
  */
-@property (nonatomic, copy, nullable) void (^modifyRecordZonesCompletionBlock)(NSArray <CKRecordZone *> * __nullable savedRecordZones, NSArray <CKRecordZoneID *> * __nullable deletedRecordZoneIDs, NSError * __nullable operationError);
+@property (nonatomic, copy, nullable) void (^modifyRecordZonesCompletionBlock)(NSArray<CKRecordZone *> * _Nullable savedRecordZones, NSArray<CKRecordZoneID *> * _Nullable deletedRecordZoneIDs, NSError * _Nullable operationError);
 
 @end
 NS_ASSUME_NONNULL_END

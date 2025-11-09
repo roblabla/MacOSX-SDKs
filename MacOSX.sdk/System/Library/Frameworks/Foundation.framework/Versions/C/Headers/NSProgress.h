@@ -1,12 +1,21 @@
 /*
 	NSProgress.h
-	Copyright (c) 2011-2015, Apple Inc.
+	Copyright (c) 2011-2016, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSDictionary.h>
 
 @class NSDictionary, NSMutableDictionary, NSMutableSet, NSURL, NSUUID, NSXPCConnection, NSLock;
+
+typedef NSString * NSProgressKind NS_EXTENSIBLE_STRING_ENUM;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+typedef NSString * NSProgressUserInfoKey NS_EXTENSIBLE_STRING_ENUM;
+#else
+typedef NSString * NSProgressKey NS_EXTENSIBLE_STRING_ENUM;
+#endif
+typedef NSString * NSProgressFileOperationKind NS_EXTENSIBLE_STRING_ENUM;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_9, 7_0)
 @interface NSProgress : NSObject {
 @private
-    __weak NSProgress *_parent;
+    NSProgress *_parent;
     int64_t _reserved4;
     id _values;
     void (^ _resumingHandler)(void);
@@ -41,11 +50,11 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
     uint64_t _flags;
     id _userInfoProxy;
     NSString *_publisherID;
-    NSXPCConnection *_connection;
-    NSInteger _unpublishingBlockageCount;
-    NSInteger _disconnectingBlockageCount;
-    NSInteger _remoteObserverCount;
-    NSMutableDictionary *_acknowledgementHandlersByBundleID;
+    id _reserved5;
+    NSInteger _reserved6;
+    NSInteger _reserved7;
+    NSInteger _reserved8;
+    NSMutableDictionary *_acknowledgementHandlersByLowercaseBundleID;
     NSMutableDictionary *_lastNotificationTimesByKey;
     NSMutableDictionary *_userInfoLastNotificationTimesByKey;
     NSLock *_lock;
@@ -142,7 +151,11 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* Set a value in the dictionary returned by invocations of -userInfo, with appropriate KVO notification for properties whose values can depend on values in the user info dictionary, like localizedDescription. If a nil value is passed then the dictionary entry is removed.
 */
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+- (void)setUserInfoObject:(nullable id)objectOrNil forKey:(NSProgressUserInfoKey)key;
+#else
 - (void)setUserInfoObject:(nullable id)objectOrNil forKey:(NSString *)key;
+#endif
 
 #pragma mark *** Observing and Controlling Progress ***
 
@@ -168,11 +181,15 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* Arbitrary values associated with the receiver. Returns a KVO-compliant dictionary that changes as -setUserInfoObject:forKey: is sent to the receiver. The dictionary will send all of its KVO notifications on the thread which updates the property. The result will never be nil, but may be an empty dictionary. Some entries have meanings that are recognized by the NSProgress class itself. See the NSProgress...Key string constants listed below.
 */
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (readonly, copy) NSDictionary<NSProgressUserInfoKey, id> *userInfo;
+#else
 @property (readonly, copy) NSDictionary *userInfo;
+#endif
 
 /* Either a string identifying what kind of progress is being made, like NSProgressKindFile, or nil. If the value of the localizedDescription property has not been set to a non-nil value then the default implementation of -localizedDescription uses the progress kind to determine how to use the values of other properties, as well as values in the user info dictionary, to create a string that is presentable to the user. This is most useful when -localizedDescription is actually being invoked in another process, whose localization language may be different, as a result of using the publish and subscribe mechanism described here.
 */
-@property (nullable, copy) NSString *kind;
+@property (nullable, copy) NSProgressKind kind;
 
 #pragma mark *** Reporting Progress to Other Processes (OS X Only) ***
 
@@ -191,7 +208,7 @@ You can publish an instance of NSProgress at most once.
 #pragma mark *** Observing and Controlling File Progress by Other Processes (OS X Only) ***
 
 typedef void (^NSProgressUnpublishingHandler)(void);
-typedef __nullable NSProgressUnpublishingHandler (^NSProgressPublishingHandler)(NSProgress *progress);
+typedef _Nullable NSProgressUnpublishingHandler (^NSProgressPublishingHandler)(NSProgress *progress);
 
 /* Register to hear about file progress. The passed-in block will be invoked when -publish has been sent to an NSProgress whose NSProgressFileURLKey user info dictionary entry is an NSURL locating the same item located by the passed-in NSURL, or an item directly contained by it. The NSProgress passed to your block will be a proxy of the one that was published. The passed-in block may return another block. If it does, then that returned block will be invoked when the corresponding invocation of -unpublish is made, or the publishing process terminates, or +removeSubscriber: is invoked. Your blocks will be invoked on the main thread.
 */
@@ -219,45 +236,74 @@ Note that there is no reliable definition of "before" in this case, which involv
 
 /* How much time is probably left in the operation, as an NSNumber containing a number of seconds.
 */
-FOUNDATION_EXPORT NSString *const NSProgressEstimatedTimeRemainingKey NS_AVAILABLE(10_9, 7_0);
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressEstimatedTimeRemainingKey NS_AVAILABLE(10_9, 7_0);
+#else
+FOUNDATION_EXPORT NSProgressKey const NSProgressEstimatedTimeRemainingKey NS_AVAILABLE(10_9, 7_0);
+#endif
 
 /* How fast data is being processed, as an NSNumber containing bytes per second.
 */
-FOUNDATION_EXPORT NSString *const NSProgressThroughputKey NS_AVAILABLE(10_9, 7_0);
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressThroughputKey NS_AVAILABLE(10_9, 7_0);
+#else
+FOUNDATION_EXPORT NSProgressKey const NSProgressThroughputKey NS_AVAILABLE(10_9, 7_0);
+#endif
 
 #pragma mark *** Details of File Progress ***
 
 /* The value for the kind property that indicates that the work being done is one of the kind of file operations listed below. NSProgress of this kind is assumed to use bytes as the unit of work being done and the default implementation of -localizedDescription takes advantage of that to return more specific text than it could otherwise. The NSProgressFileTotalCountKey and NSProgressFileCompletedCountKey keys in the userInfo dictionary are used for the overall count of files.
 */
-FOUNDATION_EXPORT NSString *const NSProgressKindFile NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressKind const NSProgressKindFile NS_AVAILABLE(10_9, 7_0);
 
 /* A user info dictionary key, for an entry that is required when the value for the kind property is NSProgressKindFile. The value must be one of the strings listed in the next section. The default implementations of of -localizedDescription and -localizedItemDescription use this value to determine the text that they return.
 */
-FOUNDATION_EXPORT NSString *const NSProgressFileOperationKindKey NS_AVAILABLE(10_9, 7_0);
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileOperationKindKey NS_AVAILABLE(10_9, 7_0);
+#else
+FOUNDATION_EXPORT NSProgressKey const NSProgressFileOperationKindKey NS_AVAILABLE(10_9, 7_0);
+#endif
 
 /* Possible values for NSProgressFileOperationKindKey entries.
 */
-FOUNDATION_EXPORT NSString *const NSProgressFileOperationKindDownloading NS_AVAILABLE(10_9, 7_0);
-FOUNDATION_EXPORT NSString *const NSProgressFileOperationKindDecompressingAfterDownloading NS_AVAILABLE(10_9, 7_0);
-FOUNDATION_EXPORT NSString *const NSProgressFileOperationKindReceiving NS_AVAILABLE(10_9, 7_0);
-FOUNDATION_EXPORT NSString *const NSProgressFileOperationKindCopying NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindDownloading NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindDecompressingAfterDownloading NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindReceiving NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindCopying NS_AVAILABLE(10_9, 7_0);
 
 /* A user info dictionary key. The value must be an NSURL identifying the item on which progress is being made. This is required for any NSProgress that is published using -publish to be reported to subscribers registered with +addSubscriberForFileURL:withPublishingHandler:.
 */
-FOUNDATION_EXPORT NSString *const NSProgressFileURLKey NS_AVAILABLE(10_9, 7_0);
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileURLKey NS_AVAILABLE(10_9, 7_0);
+#else
+FOUNDATION_EXPORT NSProgressKey const NSProgressFileURLKey NS_AVAILABLE(10_9, 7_0);
+#endif
 
 /* User info dictionary keys. The values must be NSNumbers containing integers. These entries are optional but if they are both present then the default implementation of -localizedAdditionalDescription uses them to determine the text that it returns.
 */
-FOUNDATION_EXPORT NSString *const NSProgressFileTotalCountKey NS_AVAILABLE(10_9, 7_0);
-FOUNDATION_EXPORT NSString *const NSProgressFileCompletedCountKey NS_AVAILABLE(10_9, 7_0);
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileTotalCountKey NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileCompletedCountKey NS_AVAILABLE(10_9, 7_0);
+#else
+FOUNDATION_EXPORT NSProgressKey const NSProgressFileTotalCountKey NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressKey const NSProgressFileCompletedCountKey NS_AVAILABLE(10_9, 7_0);
+#endif
 
 /* User info dictionary keys. The value for the first entry must be an NSImage, typically an icon. The value for the second entry must be an NSValue containing an NSRect, in screen coordinates, locating the image where it initially appears on the screen.
 */
-FOUNDATION_EXPORT NSString *const NSProgressFileAnimationImageKey NS_AVAILABLE(10_9, NA);
-FOUNDATION_EXPORT NSString *const NSProgressFileAnimationImageOriginalRectKey NS_AVAILABLE(10_9, NA);
-
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileAnimationImageKey NS_AVAILABLE(10_9, NA);
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileAnimationImageOriginalRectKey NS_AVAILABLE(10_9, NA);
+#else
+FOUNDATION_EXPORT NSProgressKey const NSProgressFileAnimationImageKey NS_AVAILABLE(10_9, NA);
+FOUNDATION_EXPORT NSProgressKey const NSProgressFileAnimationImageOriginalRectKey NS_AVAILABLE(10_9, NA);
+#endif
 /* A user info dictionary key. The value must be an NSImage containing an icon. This entry is optional but, if it is present, the Finder will use it to show the icon of a file while progress is being made on that file. For example, the App Store uses this to specify an icon for an application being downloaded before the icon can be gotten from the application bundle itself.
 */
-FOUNDATION_EXPORT NSString *const NSProgressFileIconKey NS_AVAILABLE(10_9, NA);
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileIconKey NS_AVAILABLE(10_9, NA);
+#else
+FOUNDATION_EXPORT NSProgressKey const NSProgressFileIconKey NS_AVAILABLE(10_9, NA);
+#endif
 
 NS_ASSUME_NONNULL_END

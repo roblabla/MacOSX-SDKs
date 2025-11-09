@@ -1,5 +1,5 @@
 .\"
-.\" Copyright (c) 1998-2015 Apple Inc. All rights reserved.
+.\" Copyright (c) 1998-2016 Apple Inc. All rights reserved.
 .\"
 .\" This file contains Original Code and/or Modifications of Original Code
 .\" as defined in and that are subject to the Apple Public Source License
@@ -16,8 +16,8 @@
 .\" Please see the License for the specific language governing rights and
 .\" limitations under the License.
 .\"
-.Dd 6 July 2015
-.Os "Mac OS X"
+.Dd 20 July 2016
+.Os "macOS"
 .Dt DISKUTIL 8
 .Pp
 .Sh NAME
@@ -38,7 +38,7 @@
 .Nm
 manipulates the structure of local disks.  It provides information about, and allows the administration of,
 the partitioning schemes, layouts, and formats of disks. This includes hard disks, solid state disks, optical discs,
-CoreStorage volumes, and AppleRAID sets.
+APFS volumes, CoreStorage volumes, and AppleRAID sets.
 It generally manipulates whole volumes instead of individual files and directories.
 .\"
 .\"
@@ -50,24 +50,32 @@ Each verb is listed with its description and individual arguments.
 .Bl -hang -width "imageinfo"
 .\"             -- list --
 .It Sy list Op Nm -plist
-.Op Ar device 
+.Op Nm internal | external
+.Op Nm physical | virtual
+.Op Ar device
 .br
-List disks.  If no argument is given, then all disks and all of their partitions are listed.
+List disks, including internal and external disks, whole disks and partitions,
+and various kinds of virtual or offline disks.
+.Pp
+If no argument is given, then all whole disks and their partitions are listed.
+.Pp
+You can limit the number of disks shown by specifying filtering arguments such as
+.Sy internal
+above, and/or a
+.Ar device
+disk. When limiting by a disk, you can specify either a whole disk, e.g. disk0, or any of its slices,
+e.g. disk0s3, but filtering is only done at the whole disk level (disk0s3 is a synonym for disk0 in this case).
 .Pp
 If
 .Sy -plist
 is specified, then a property list will be emitted instead of the normal user-readable
 output.
-If a
-.Ar device
-is specified, then instead of listing all families of whole disks and their partitions, only one such
-family is listed.  In that case, specifying either the whole disk or any of its slices will work.
 .Pp
-A script could interpret the results of the
+A script could interpret the results of
 .Sy diskutil
 .Sy list
 .Sy -plist
-output and use
+and use
 .Sy diskutil
 .Sy info
 .Sy -plist
@@ -77,6 +85,18 @@ as well as
 .Sy -plist
 for more detailed information.
 .Pp
+The top-to-bottom appearance of all whole disks is sorted in numerical order by unit (whole disk) number.
+However, within each whole disk's "sublist" of partitions, the ordering
+indicates actual on-disk location. The first disk item listed represents the partition which is located most near the beginning
+of its encompassing whole disk, and so on.
+.Pp
+When viewed this way, the slice (partition) parts of the
+BSD disk identifiers may, in certain circumstances, not appear in numerical order.
+This is normal and is likely the result of a recent partition map
+editing operation in which volumes were kept mounted.
+.Pp
+Note that both human-readable and plist output are sorted as described above.
+.Pp
 See the
 .Sy DEVICES
 section below for the various forms that the
@@ -84,20 +104,12 @@ section below for the various forms that the
 specification may take for this and all of the other
 .Nm
 verbs.
-.Pp
-The top-to-bottom appearance of partitions in
-.Sy diskutil
-.Sy list
-always indicates the on-disk ordering.
-BSD disk identifiers may, in certain circumstances, not appear in slice-numerical order
-when viewed this way.  This is normal and is likely the result of a recent partition map
-editing operation in which volumes were kept mounted.
 .\"
 .\"             -- info --
 .It Sy info | information
-.Op Nm -plist
+.Op Sy -plist
 .Ar device |
-.Nm -all
+.Sy -all
 .br
 Get detailed information about a specific whole disk or partition.
 If
@@ -159,7 +171,10 @@ will force-unmount the volume (less kind to any open files; see also
 .Op Nm force 
 .Ar device
 .br
-Unmount an entire disk (all volumes).
+Unmount all volumes on the given partition map; that is,
+an unmount is attempted on the directly-mountable volume, if any, on each of the whole disk's
+partitions. However, "virtual" volumes, such as those are implied by e.g. Core Storage
+Physical Volumes, AppleRAID Members, etc., are not handled.
 .Sy Force
 will force-unmount the volumes (less kind to any open files; see also
 .Sy umount
@@ -197,7 +212,10 @@ be used as the view into the volume file content; a directory at that path must 
 .\"             -- mountDisk --
 .It Sy mountDisk Ar device
 .br
-Mount an entire disk (all mountable volumes).
+Mount all mountable and UI-browsable volumes on the given partition map; that is,
+a mount is attempted on the directly-mountable volume, if any, on each of the whole disk's
+partitions. However, "virtual" volumes, such as those are implied by e.g. Core Storage
+Physical Volumes, AppleRAID Members, etc., are not handled.
 You should specify a whole disk, but all volumes of the whole disk are attempted to be mounted even if you specify a partition.
 .\"
 .\"             -- rename --
@@ -388,9 +406,9 @@ Ownership of the affected disk is required.
 .Ar device
 .br
 Erase a device, writing zeros to the media.  The device can be a whole-disk or a partition.
-In either case, in order to be useful again, zero'd whole-disks
+In either case, in order to be useful again, zeroed whole-disks
 will need to be (re)partitioned, or
-zero'd partitions will need to be (re)formatted with a file system, e.g. by using the
+zeroed partitions will need to be (re)formatted with a file system, e.g. by using the
 .Sy partitionDisk,
 .Sy eraseDisk,
 or
@@ -404,8 +422,8 @@ The
 .Sy force
 parameter causes best-effort, non-error-terminating, forced unmounts and shared-mode writes to be attempted;
 however, this is still no guarantee against drivers which claim the disk exclusively. In such cases, you
-may have to first unmount all overlying logical volumes (e.g. CoreStorage or AppleRAID), or, if a disk is partially
-damaged in just the wrong way, even un-install a kext or erase the disk elsewhere.
+may have to first unmount all overlying logical volumes (e.g. CoreStorage or AppleRAID). If a disk is partially
+damaged in just a certain unlucky way, you might even have to un-install a kext or erase the disk elsewhere.
 Ownership of the affected disk is required.
 .\"
 .\"             -- randomDisk --
@@ -420,9 +438,10 @@ The device can be a whole-disk or a partition.
 In either case, in order to be useful again, randomized whole-disks
 will need to be (re)partitioned, or
 randomized partitions will need to be (re)formatted with a file system, e.g. by using the
-.Sy partitionDisk
+.Sy partitionDisk,
+.Sy eraseDisk,
 or
-.Sy eraseDisk
+.Sy eraseVolume
 verbs.
 If you desire a more sophisticated erase algorithm or if you need
 to erase only free space not in use for files, use the
@@ -436,13 +455,16 @@ Ownership of the affected disk is required.
 .Ar level
 .Ar device
 .br
-Erase, using a secure method,
-either a whole-disk (including any and all partitions), or,
+Erase, using a "secure" (but see the NOTE below) method,
+either a whole-disk (including all of its partitions if partitioned), or,
 only the free space (not in use for files) on a currently-mounted volume.
+Secure erasing makes it harder to recover data using "file recovery" software.
+.Pp
 Erasing a whole-disk will leave it useless until it is partitioned again.
-Erasing freespace on a volume will leave it exactly as it was from an end-user perspective,
-with the exception that it will not be possible to recover deleted files
-or data using utility software.
+Erasing freespace on a volume will leave your files intact,
+indeed, from an end-user perspective, it will appear unchanged,
+with the exception that it will have attempted to make it impossible to recover deleted files.
+.Pp
 If you need to erase all contents of a partition but not its hosting
 whole-disk, use the
 .Sy zeroDisk
@@ -467,6 +489,11 @@ should be one of the following:
 4 - US DoE algorithm 3-pass secure erase.
 .\" List-End-SecureEraseOptions
 .El
+.Pp
+NOTE: This kind of secure erase is no longer considered safe because modern devices have wear-leveling,
+block-sparing, and possibly-persistent cache hardware. The modern solution for quickly and securely
+erasing your data is strong encryption, with which mere destruction of the key more or
+less instantly renders your data irretrievable in practical terms.
 .\"
 .\"             -- partitionDisk --
 .It Sy partitionDisk Ar device
@@ -684,6 +711,13 @@ parameters in the same manner as the triplet description for the
 .Sy partitionDisk
 verb.
 .Pp
+For one of your triplets, you can optionally specify the
+.Sy R
+meta-size in lieu of a constant number value for the
+.Ar size
+parameter: the substituted value will be exactly the amount of space necessary to complete the
+re-filling of the original partition with all of your triplets.
+.Pp
 .Ar Device
 refers to a volume.
 Ownership of the affected disk is required.
@@ -734,6 +768,214 @@ for the actual on-disk ordering).
 All partitions in the range, except for the first one, must be unmountable.
 Ownership of the affected disk is required.
 .\"
+.\"             -- APFS --
+.It Sy APFS | ap Ar apfsVerb Op ...
+.br
+APFS verbs can be used to create, manipulate and destroy APFS Containers and their APFS Volumes.
+.Pp
+WARNING:
+.Pp
+With these verbs, you are creating APFS volumes. That is, you are using
+a pre-release version of the Apple File System called
+APFS which is meant for evaluation and development purposes only.
+Files stored on APFS volumes may not be accessible in future releases
+of macOS.
+.Pp
+You should back up all of your data before using APFS and
+regularly back up data while using APFS, including before upgrading
+to future releases of macOS.
+.Pp
+Apple APFS defines these types of objects:
+.\" List-Begin-APFSObjects
+.Bl -bullet -offset indent
+.It
+Container - An APFS Container imports one or more
+APFS Physical Store disks and exports zero or more APFS Volume disks.
+Zero or more APFS Containers can exist in (might be attached to) the system at any one time.
+.Pp
+While attached, an APFS Container is identified by its APFS Container Reference disk.
+A Container Reference disk is one of its Physical Store disks; however, because in the future
+there might be more than one Physical Store disk per Container, you must never assume
+that a disk which you obtained as a Physical Store disk is necessarily a Container Reference
+disk. You must only use a disk which was given to you as an APFS Container Reference.
+.It
+Physical Store - An APFS Physical Store is a disk which is imported into (that is, which makes up)
+an APFS Container. Presently, there is always exactly one Physical Store per Container,
+but this may change in the future.
+.Pp
+An APFS Physical Store disk is not necessarily a disk from a partition map; it could be
+e.g. an AppleRAID Set disk. Therefore, you must never assume that
+an APFS Physical Store's disk identifier is a 2-part form such as disk0s2.
+.It
+Volume - An APFS Volume is an [un]mountable file system volume which is exported from an APFS Container.
+Zero or more APFS Volumes may be exported out of an APFS Container.
+.Pp
+Volumes may be dynamic ("space-sharing") or fixed in size.
+File copy cloning (copy-on-write) is supported (see
+.Sy copyfile
+(3)).
+.Pp
+The advantage of a space-sharing APFS Volume is that it
+uses only the amount of storage required for its files
+at any one time (this can fluctuate dynamically to draw more or less from its parent Container);
+its disadvantage is that competition for space with the Container's other Volumes, cloning, sparse
+files, etc, all can result in possibly-unexpected out of space errors when APFS needs to find
+physical space for data that was formerly sparse or shared.
+.Pp
+The advantage of a fixed-size APFS Volume is that it
+has pre-allocated capacity and is thus guaranteed to be free from space competition from other Volumes;
+its disadvantage is that it is limited to its size (fixed-size APFS Volumes cannot be resized).
+.Pp
+The format of an APFS Volume's device identifier is that of its APFS Container Reference
+plus an "s" plus a (possibly multi-digit)
+decimal number assigned starting with 1; depending on if the Container Reference is a 1-part or 2-part form,
+this will be a 2-part form ("disk5s2") or 3-part form ("disk0s2s1"), respectively.
+.Pp
+Although it has a device node, an APFS Volume's data may only be accessed through its files;
+you cannot open an APFS Volume device node to "directly" access its on-disk bytes.
+.\" List-End-APFSObjects
+.El
+.Pp
+APFS itself has no provision for backing up your data.
+Backups should be always be performed on a regular basis and before modifying any APFS Container using these commands.
+.Pp
+The following is a list of
+.Sy APFS
+sub-verbs with their descriptions and individual arguments.
+.br
+.\"
+.\" List-Begin-APFSVerbs
+.Bl -hang -width "imageinfo"
+.\"
+.\"             -- APFS > list --
+.It Sy list Op Nm -plist
+.br
+Display, as a tree, all current APFS objects in the system with any associated disks and status.
+.Pp
+The visual format is subject to change.
+.\"
+.\"             -- APFS > create  --
+.It Sy create Ar device Ar name
+.br
+Convenience verb which creates an empty APFS Container and then adds one non-encrypted, non-quick-erase, space-sharing APFS
+Volume with the given name. This is a combination of the
+.Nm diskutil apfs createContainer
+and
+.Nm diskutil apfs addVolume
+verbs.
+.Pp
+Ownership of the affected disks is required.
+.\"
+.\"             -- APFS > createContainer --
+.It Sy createContainer
+.Ar device
+.br
+Create an empty APFS Container. You may then add APFS Volumes with the
+.Nm diskutil apfs addVolume
+verb.
+.Pp
+Ownership of the affected disks is required.
+.\"
+.\"             -- APFS > deleteContainer  --
+.It Sy deleteContainer
+.Ar containerReferenceDevice
+.Op Ar name
+.br
+Destroy an existing APFS Container, including all of its APFS Volumes.
+The APFS Volumes are unmounted first; this process may not succeed if one or more is busy. If this
+happens, the operation is aborted and everything is left intact.
+Otherwise, all APFS Volumes are deleted as well as its APFS Container, and
+the APFS Container's former Physical Store disks will be reformatted as HFS; data on all
+APFS Volumes will be lost.
+.Pp
+You can optionally specify a new
+.Ar name ,
+or else "Untitled" will be chosen.
+If there were multiple Physical Stores, a space and a number suffix is added for each.
+.Pp
+Ownership of the affected disks is required.
+.\"
+.\"             -- APFS > resizeContainer  --
+.It Sy resizeContainer
+.Ar physicalStoreDevice
+.Ar size
+.Op Ar part1Format Ar part1Name Ar part1Size Ar part2Format Ar part2Name Ar part2Size Ar part3Format part3Name part3Size Ar ...
+.br
+Resize an existing APFS Container by specifying an APFS Physical Store partition
+to shrink or grow. The operation is live, non-destructive, and does not mount or unmount any APFS Volumes.
+.Pp
+Shrinks are constrained by the amount of data usage by all APFS Volumes on the APFS Container.
+Grows are constrained by the amount of partition map free space trailing the Physical Store partition.
+.Pp
+When shrinking, new partitions may optionally be created to fill the newly-freed space.
+To do this, specify the
+.Ar format,
+.Ar name,
+and
+.Ar size
+parameters in the same manner as the triplet description for the
+.Sy partitionDisk
+verb.
+.Pp
+You can specify a
+.Ar size
+of zero
+.Sy (0)
+to grow the APFS Physical Store to fill up
+all remaining space to the next partition or the end of the partition map.
+.Pp
+Ownership of the affected disks is required.
+.\"
+.\"             -- APFS > addVolume --
+.It Sy addVolume
+.Ar containerReferenceDevice
+.Ar filesystem
+.Ar name
+.Op Ar size
+.Op Nm fileEncryption|encryption|crypt | effaceable|efface|eff
+.br
+Add a new APFS Volume to an existing APFS Container. You should specify
+.Sy APFS
+for the
+.Ar filesystem
+parameter. APFS Volumes normally have no fixed size and allocate backing store on an as-needed basis
+unless you specify the
+.Ar size
+parameter, in which case your volume is guaranteed that minimum amount of space, but is also limited to that amount.
+The
+.Sy fileEncryption
+and
+.Sy effaceable
+options are mutually exclusive.
+.Pp
+Ownership of the affected disks is required.
+.\"
+.\"             -- APFS > deleteVolume --
+.It Sy deleteVolume
+.Ar volumeDevice
+.br
+Remove the given APFS Volume from its APFS Container. All of the Volume's data will be lost.
+.Pp
+Ownership of the affected disks is required.
+.\"
+.\"             -- APFS > eraseVolume --
+.It Sy eraseVolume
+.Ar volumeDevice
+.Op Nm -reformat Ar filesystem
+.Op Nm -rename Ar name
+.Op Nm -resize Nm shared | Ar size
+.br
+Erase the contents of an existing APFS Volume; all of its data will be lost.
+Unlike
+.Nm diskutil apfs deleteVolume ,
+the APFS Volume is not removed from its APFS Container.
+The "new" APFS Volume will inherit format, name, and shared or fixed-size attributes
+from the old APFS Volume, unless you override one or more of them.
+.Pp
+Ownership of the affected disks is required.
+.\" List-End-APFSVerbs
+.El
+.\"
 .\"             -- appleRAID --
 .It Sy appleRAID | ar Ar raidVerb Op ...
 .br
@@ -783,7 +1025,9 @@ change over time when disks are added, disks are removed or when the system is r
 If RAID members have been physically disconnected from the system or are no longer responding, 
 you must use the member's UUID as the command argument.
 Messages in the system log will refer to RAID sets and their member disks by UUID.
-For more information on specifying device arguments see the "DEVICES" section below.
+For more information on specifying device arguments, see the
+.Sy DEVICES
+section below.
 .Pp
 AppleRAID is not a replacement for backing up your data.
 Backups should be always be performed on a regular basis and before modifying any RAID set using these commands.
@@ -1081,6 +1325,12 @@ the standard input is read for the passphrase so that a program could execute
 .Sy diskutil
 and send the passphrase through a pipe without having to expose it as a command-line parameter.
 .Pp
+The volume is encrypted with an FDE "Disk" passphrase, which is distinct from the
+"User" ID and passphrase combination which FileVault associates with a volume.
+Therefore, if you want to encrypt a macOS "OS-bearing" volume
+(with its user accounts), you must use FileVault in Security Preferences
+or the contextual menu in the Finder.
+.Pp
 The volume must be resizable (the above types are) and also mounted. Conversion is done live and in-place;
 targeting the boot volume is supported; as much of the conversion as possible is done before an eject or
 reboot is necessary.
@@ -1109,7 +1359,7 @@ to be usable. Encryption progress may be monitored with
 .Sy coreStorage
 .Sy list.
 .Pp
-When encryption is finished, a passphrase will be required the next time the LV is ejected and re-attached.
+When encryption is finished, a Disk passphrase will be required the next time the LV is ejected and re-attached.
 If the LV is hosting the boot volume, this passphrase requirement will thus occur at the next reboot.
 .Pp
 Note that all on-disk data is not secured immediately; it is a deliberate
@@ -1132,7 +1382,7 @@ The volume must have been created by means of conversion, e.g. with
 .Sy convert.
 .Pp
 If the volume was not created with a passphrase, then simple ownership of the affected disk is required;
-otherwise, a passphrase must be supplied, either interactively or via one of the parameters or a keychain
+otherwise, a Disk passphrase must be supplied, either interactively or via one of the parameters or a keychain
 file in the same manner as
 .Sy diskutil
 .Sy coreStorage
@@ -1229,6 +1479,12 @@ or interactively entering a passphrase is mandatory; you do so in the same manne
 .Sy coreStorage
 .Sy convert
 above.
+.Pp
+The volume is encrypted with an FDE "Disk" passphrase, which is distinct from the
+"User" ID and passphrase combination which FileVault associates with a volume.
+Therefore, if you want to encrypt a macOS "OS-bearing" volume
+(with its user accounts), you must use FileVault in Security Preferences
+or the contextual menu in the Finder.
 .\"
 .\"             -- coreStorage > decryptVolume --
 .It Sy decryptVolume | decryptLV
@@ -1254,13 +1510,16 @@ Credentials must be supplied; you can use
 .Sy -passphrase
 or
 .Sy -stdinpassphrase
-or specify that a recovery keychain file be used, in the same manner as
+to supply a Disk passphrase,
+or you can specify that a recovery keychain file be used, in the same manner as
 .Sy diskutil
 .Sy coreStorage
 .Sy unlockVolume.
 .\"
 .\"             -- coreStorage > unlockVolume --
-.It Sy unlockVolume | unlockLV Ar lvUUID
+.It Sy unlockVolume | unlockLV
+.Op Nm -nomount
+.Ar lvUUID
 .Op Nm -stdinpassphrase
 |
 .Op Nm -passphrase Ar passphrase
@@ -1276,13 +1535,16 @@ The locked state means that the CoreStorage driver has not been given authentica
 information (a passphrase) to interpret the encrypted bytes on disk and thus export a dev node.
 This verb unlocks a logical volume family (LVF) and its logical volumes (LVs) by providing that
 authentication; as the LVs thus appear as dev nodes,
-any file systems upon them are automatically mounted.
+any file systems upon them are automatically mounted unless the
+.Sy -nomount
+option is given.
 .Pp
 To "re-lock" the volume, make it offline again by ejecting it, e.g. with
 .Sy diskutil
 .Sy eject.
 .Pp
-Credentials must be supplied. You must either enter a passphrase interactively, specify one of the
+Credentials must be supplied. You must either supply a Disk passphrase interactively,
+with one of the
 .Sy -passphrase
 or
 .Sy -stdinpassphrase
@@ -1290,7 +1552,7 @@ parameters in the same manner as with
 .Sy diskutil
 .Sy coreStorage
 .Sy convert
-above, or specify that a recovery keychain file be used.
+above, or you must specify that a recovery keychain file be used.
 .Pp
 You can specify
 .Sy -recoverykeychain
@@ -1306,7 +1568,7 @@ for more information.
 .Op Nm -newpassphrase Ar newpassphrase
 .Op Nm -stdinpassphrase
 .br
-Change the passphrase of an existing encrypted volume. It need not be unlocked nor mounted. The parameters, while variously optional,
+Change the Disk passphrase of an existing encrypted volume. It need not be unlocked nor mounted. The parameters, while variously optional,
 must be given in the above order.
 .Pp
 You must authenticate either via the
@@ -1323,12 +1585,15 @@ Alternatively, you can authenticate by specifying
 .Sy -recoverykeychain
 with a path to a keychain file.
 .Pp
-A new passphrase must be supplied, again via one of the three methods above (interactive,
+A new passphrase must then be supplied, again via one of the three methods above (interactive,
 .Sy -newpassphrase,
 or
 .Sy -stdinpassphrase).
 .Pp
 If you are supplying both the old and new passphrases via stdin, they must be separated with a newline character.
+.Pp
+Only the Disk passphrase is supported; you cannot change passphrases for various users that were set up with
+FileVault or the Finder.
 .\"
 .\"             -- coreStorage > resizeVolume --
 .It Sy resizeVolume | resizeLV
@@ -1452,7 +1717,7 @@ or to the end of the partition map, if possible.
 .\"
 .\"
 .Sh DEVICES
-A device parameter to any of the above commands (except where explicitly required otherwise) can usually
+A device parameter for any of the above commands (except where explicitly required otherwise) can usually
 be any of the following:
 .\" List-Begin-DeviceSpecifiers
 .Bl -bullet -offset indent
@@ -1468,11 +1733,12 @@ e.g.
 The device node entry containing the
 .Sy disk identifier .
 Any entry of the form of
-.Pa /dev/disk* ,
+.Pa /dev/[r]disk* ,
 e.g.
 .Pa /dev/disk2 .
 .It
-The volume mount point.  Any entry of the form of
+The volume mount point.
+Any entry of the form of
 .Pa /Volumes/* , 
 e.g.
 .Pa /Volumes/Untitled .
@@ -1491,28 +1757,44 @@ e.g.
 .Pa 11111111-2222-3333-4444-555555555555 .
 The UUID can be a "media" UUID which IOKit places in an IOMedia node as derived from e.g. a GPT map's partition UUID,
 or it can be an AppleRAID (or CoreStorage) set (LV) or member (PV) UUID.
+.It
+A volume name,
+e.g.
+.Pa Untitled .
+This match is only attempted if the given device is not of the form
+.Pa [/dev/][r]disk* ,
+nor
+.Pa [/Volumes/]* .
+The match attempt is against the intrinsic volume label, not against
+the terminal component, if mounted, of its mount point.
 .\" List-End-DeviceSpecifiers
 .El
 .\"
 .\"
 .\"
 .Sh DISK IDENTIFIER
-The
+The (BSD)
 .Sy disk identifier
-string variously identifies a device unit, a session upon that device, or a partition (slice) upon that session.
+string variously identifies a physical or logical device unit,
+a session (if any) upon that device,
+a partition (slice) upon that session (if any),
+or a virtual logical volume.
 It may take the form of
 .Pa diskU,
 .Pa diskUsS,
 .Pa diskUsQ,
-or
+.Pa diskUsV,
 .Pa diskUsQsS,
-where U, S, and Q
+or
+.Pa diskUsSsV
+where U, S, Q and V
 are positive decimal integers (possibly multi-digit), and where:
 .\" List-Begin-BSDComponents
 .Bl -bullet -offset indent
 .It
 .Pa U
-is the device unit.  It may refer to hardware (e.g. a hard drive, optical drive, or memory card) or a "drive"
+is the device unit.
+It may refer to hardware (e.g. a hard drive, optical drive, or memory card) or a "drive"
 constructed by software (e.g. an AppleRAID set or a disk image).
 .It
 .Pa Q
@@ -1520,9 +1802,18 @@ is the session and is only included for optical media; it refers to the number o
 place on the currently-inserted medium (disc).
 .It
 .Pa S
-is the slice; it refers to a partition.  Upon this partition, the raw data that underlies a user-visible file system is
+is the slice; it refers to a partition.
+Upon this partition, the raw data that underlies a user-visible file system is
 usually present, but it may also contain specialized data for certain 3rd-party database programs, or data required for
-the system software (e.g. EFI or booter partitions, or APM partition map data).
+the system software (e.g. EFI partitions, booter partitions, APM partition map data, etc). Of note, it might contain
+backing-store physical volumes for AppleRAID, CoreStorage, APFS, or 3rd-party Storage Systems.
+.It
+.Pa V
+is part of a form that represents an APFS "Volume"; it refers to a virtual logical volume.
+If an Apple_APFS-typed partition is on e.g. disk5s2,
+then disk5s2 is termed the APFS "Physical Store" which is imported into an APFS "Container". The Container might then export
+e.g. disk5s2s1, which is termed an APFS "Volume", which is mountable as a file system. Multiple APFS Volumes can be exported
+from a single APFS Container.
 .\" List-End-BSDComponents
 .El
 .Pp
@@ -1645,21 +1936,37 @@ where the multiplier is 1152921504606846976 (1 x 2^60).
 .\" List-End-SizeSuffixes-2
 .El
 .Pp
-In certain contexts (such as when specifying partition triplets) you can provide a relative value as follows:
+In certain contexts (e.g. when specifying partition triplets) you can provide a relative value as follows:
 .\" List-Begin-SizeSuffixes-3
 .Bl -bullet -offset indent
 .It
 .Sy %
 (with a preceding number) is a
 .Sy percentage
-of the whole-disk size.
+of the whole-disk size, the partition map size, or other allocatable size, as appropriate by context.
+Use of
+.Sy %
+is not supported in all situations.
 .It
 .Sy R
 (with no preceding number) specifies the
 .Sy remainder
-of the whole-disk size after all other triplets in the group are taken into account.
+of the whole-disk size or other allocatable size after all other triplets in the group are taken into account.
 It need not be in the last triplet.  It must only appear in at most one triplet among all triplets.
+Use of
+.Sy R
+is not supported in all situations.
 .\" List-End-SizeSuffixes-3
+.El
+.Pp
+You can provide an operating system-defined constant value as follows:
+.\" List-Begin-SizeSuffixes-4
+.Bl -bullet -offset indent
+.It
+.Sy %recovery%
+(with no preceding number) is the
+customary size of macOS Recovery Partitions.
+.\" List-End-SizeSuffixes-4
 .El
 .Pp
 Note again that
@@ -1680,18 +1987,21 @@ Examples: 10G (10 gigabytes), 4.23tb (4.23 terabytes), 5M (5 megabytes), 4GiB (e
 126000 (exactly 126000 bytes), 25.4% (25.4 percent of whole disk size).
 .Sh FORMAT
 The
-.Sy format
+.Pa format
 parameter for the erasing and partitioning verbs is the file system personality name.
 You can determine this name by looking in a file system bundle's
 .Pa /System/Library/Filesystems/<fs>.fs/Contents/Info.plist
-or by using the
+and looking at the keys for the
+.Sy FSPersonalities
+dictionary, or by using the
 .Sy listFilesystems
 verb, which also lists shortcut aliases for common
 personalities (these shortcuts are defined by
 .Sy diskutil
 for use with it only).
 .Pp
-Common examples include JHFS+, MS-DOS, etc.
+Common examples include JHFS+, JHFSX, MS-DOS, etc, as nicknames for the canonical
+forms from the file system bundles such as "Case-sensitive HFS+".
 .Pp
 .Sh EXAMPLES
 Erase a disk 
@@ -1778,6 +2088,10 @@ diskutil repairMirror /Volumes/MirroredVolume disk3
 Convert volume into RAID volume
 .br
 diskutil enableRAID mirror /Volumes/ExistingVolume
+.Pp
+Erase a partition and shrink to add an associated Recovery Partition
+.br
+diskutil splitPartition disk8s2 JHFS+ MacHD R %Apple_Boot% %noformat% %recovery%
 .\"
 .\"
 .\"
@@ -1829,3 +2143,10 @@ In the past this has been power-of-2, regardless of the suffix (e.g. G, Gi, GiB)
 Starting with Mac OS X 10.11, the
 .Sy B
 suffix is optional even for "bare" numeric values.
+.Pp
+Starting with macOS 10.12, the plist output of partitions from
+.Sy diskutil list -plist
+is presented in on-disk (not BSD slice) order, as the human-readable output always has been. This
+mimics the order of outputs from programs such as
+.Sy gpt
+(1).

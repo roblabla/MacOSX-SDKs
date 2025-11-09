@@ -1,6 +1,6 @@
 /*	
     NSURLError.h
-    Copyright (c) 2003-2015, Apple Inc. All rights reserved.
+    Copyright (c) 2003-2016, Apple Inc. All rights reserved.
     
     Public header file.
 */
@@ -15,6 +15,7 @@
 #endif
 
 #import <Foundation/NSObjCRuntime.h>
+#import <Foundation/NSError.h>
 
 @class NSString;
 
@@ -24,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
     @discussion Constants used by NSError to differentiate between "domains" of error codes, serving as a discriminator for error codes that originate from different subsystems or sources.
     @constant NSURLErrorDomain Indicates an NSURL error.
 */
-FOUNDATION_EXPORT NSString * const NSURLErrorDomain;
+FOUNDATION_EXPORT NSErrorDomain const NSURLErrorDomain;
 
 /*!
     @const NSURLErrorFailingURLErrorKey

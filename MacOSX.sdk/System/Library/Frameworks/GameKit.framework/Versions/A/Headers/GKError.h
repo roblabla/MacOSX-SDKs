@@ -2,7 +2,7 @@
 //  GKError.h
 //  Game Center
 //
-//  Copyright 2010-2015 Apple Inc. All rights reserved.
+//  Copyright 2010-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -37,6 +37,8 @@ typedef NS_ENUM(NSInteger, GKErrorCode) {
     GKErrorTurnBasedInvalidState                = 24,
     GKErrorInvitationsDisabled                  = 25,
     GKErrorPlayerPhotoFailure                   = 26,
-    GKErrorUbiquityContainerUnavailable         = 27
+    GKErrorUbiquityContainerUnavailable         = 27,
+    GKErrorMatchNotConnected                    = 28,
+    GKErrorGameSessionRequestInvalid            = 29
 };
 

@@ -3,18 +3,17 @@
 // =====================================================================================================================
 
 
-#import <AppKit/AppKit.h>
+#import <PDFKit/PDFKitPlatform.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+@class PDFActionPrivate;
 
-@class PDFActionPrivateVars;
-
-
+NS_CLASS_AVAILABLE_MAC(10_5)
 @interface PDFAction : NSObject <NSCopying>
 {
 @private
-    PDFActionPrivateVars *_pdfPriv;
+    PDFActionPrivate* _private;
 }
 
 // Type of action.  These won't always correspond to the PDFAction subclass in the way you might expect.  For example, 
@@ -25,4 +24,4 @@
 
 @end
 
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+NS_ASSUME_NONNULL_END

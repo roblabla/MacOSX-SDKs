@@ -694,61 +694,61 @@ double sparse_matrix_trace_double( sparse_matrix_double A, sparse_index offset )
  @abstract
  Multiplies the dense matrix B by the sparse matrix A and adds the result to
  the dense matrix C.
- 
+
  C = alpha * op(A) * B + C; where op(A) is either A or the transpose of A
- 
+
  @param order
  Specified the storage order for the dense matrices B and C. Must be one of
  CblasRowMajor or CblasColMajor.
- 
+
  @param transa
  Specifies whether to perform the operation with A or the transpose of A.
  Must be one of CblasNoTrans or CblasTrans.
- 
+
  @param n
  The number of columns of the matrices B and C.
- 
+
  @param alpha
  Scalar multiplier of A.
- 
+
  @param A
  The sparse matrix.
- 
+
  @param B
  Pointer to the dense matrix B. The number of rows must be equal to the number
- of columns of A and the number of columns is n.  Behavior undefined if this 
+ of columns of A and the number of columns is n.  Behavior undefined if this
  is not met. The argument ldb describes how many elements to move between one
  row (row major) or column (column major).
- 
+
  @param ldb
- Increment in elements between rows (row major) or columns (column major) of B. 
- Must be greater than or equal to n when row major, or number of columns of 
+ Increment in elements between rows (row major) or columns (column major) of B.
+ Must be greater than or equal to n when row major, or number of columns of
  A when column major.
- 
+
  @param C
  Pointer to the dense matrix C. The number of rows must be equal to the number
  of rows of A and the number of columns is n.  Behavior undefined if this
  is not met. The argument ldc describes how many elements to move between one
  row (row major) or column (column major).  C is updated with the result of the
  operation.
- 
+
  @param ldc
  Increment in elements between rows (row major) or columns (column major) of C.
  Must be greater than or equal to n when row major, or number of rows of
  A when column major.
- 
+
  @result
- On success, SPARSE_SUCCESS is returned and C has been updated with result of the 
- operation.  Will return SPARSE_ILLEGAL_PARAMETER if order or transa is not valid 
- or the leading dimension parameters do not meet their dimension requirements.  
+ On success, SPARSE_SUCCESS is returned and C has been updated with result of the
+ operation.  Will return SPARSE_ILLEGAL_PARAMETER if order or transa is not valid
+ or the leading dimension parameters do not meet their dimension requirements.
  On error, C is unchanged.
- 
+
  @discussion
  Multiplies the dense matrix B by the sparse matrix A and adds the result to
  the dense matrix C (C = alpha * op(A) * B + C, where op(A) is either A
- or the transpose of A). If A is of size M x N, then B is of size N x n and C is 
+ or the transpose of A). If A is of size M x N, then B is of size N x n and C is
  of size M x n.
- 
+
  If the desired operation is C = A * B, then an efficient option is to create
  the C buffer of zeros as C = calloc(sizeof(..)*rows*cols) and then perform
  the operation with the zero filled C.
@@ -769,6 +769,73 @@ sparse_status sparse_matrix_product_dense_double( enum CBLAS_ORDER order,
                                             sparse_dimension ldb,
                                             double * __restrict C,
                                             sparse_dimension ldc );
+
+/*!
+ @abstract
+ Multiplies the sparse matrix B by the sparse matrix A and adds the result to
+ the dense matrix C.
+
+ C = alpha * op(A) * B + C; where op(A) is either A or the transpose of A
+
+ @param order
+ Specified the storage order for the dense matrix C. Must be one of
+ CblasRowMajor or CblasColMajor.
+
+ @param transa
+ Specifies whether to perform the operation with A or the transpose of A.
+ Must be one of CblasNoTrans or CblasTrans.
+
+ @param alpha
+ Scalar multiplier of A.
+
+ @param A
+ The sparse matrix A.
+
+ @param B
+ The sparse matrix B.
+
+ @param C
+ Pointer to the dense matrix C. The number of rows must be equal to the number
+ of rows of A and the number of columns must be equal to the number
+ of columns of B.  Behavior undefined if this is not met.
+ The argument ldc describes how many elements to move between one row (row major)
+ or column (column major).  C is updated with the result of the operation.
+
+ @param ldc
+ Increment in elements between rows (row major) or columns (column major) of C.
+ Must be greater than or equal to n when row major, or number of rows of
+ A when column major.
+
+ @result
+ On success, SPARSE_SUCCESS is returned and C has been updated with result of the
+ operation.  Will return SPARSE_ILLEGAL_PARAMETER if order or transa is not valid
+ or the leading dimension parameters do not meet their dimension requirements.
+ On error, C is unchanged.
+
+ @discussion
+ Multiplies the sparse matrix B by the sparse matrix A and adds the result to
+ the dense matrix C (C = alpha * op(A) * B + C, where op(A) is either A
+ or the transpose of A). If A is of size M x K, then B is of size K x N and C is
+ of size M x N.
+
+ If the desired operation is C = A * B, then an efficient option is to create
+ the C buffer of zeros as C = calloc(sizeof(..)*rows*cols) and then perform
+ the operation with the zero filled C.
+ */
+sparse_status sparse_matrix_product_sparse_float(enum CBLAS_ORDER order,
+                                                 enum CBLAS_TRANSPOSE transa,
+                                                 float alpha,
+                                                 sparse_matrix_float A,
+                                                 sparse_matrix_float B,
+                                                 float * __restrict C,
+                                                 sparse_dimension ldc );
+sparse_status sparse_matrix_product_sparse_double(enum CBLAS_ORDER order,
+                                                  enum CBLAS_TRANSPOSE transa,
+                                                  double alpha,
+                                                  sparse_matrix_double A,
+                                                  sparse_matrix_double B,
+                                                  double * __restrict C,
+                                                  sparse_dimension ldc );
 
 /*!
  @abstract

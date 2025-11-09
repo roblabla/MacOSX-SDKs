@@ -3,24 +3,23 @@
 // =====================================================================================================================
 
 
-#import <AppKit/AppKit.h>
 #import <PDFKit/PDFAction.h>
 
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+NS_ASSUME_NONNULL_BEGIN
 
 @class PDFActionURLPrivateVars;
 
-
+NS_CLASS_AVAILABLE_MAC(10_5)
 @interface PDFActionURL : PDFAction <NSCopying>
 {
 @private
-    PDFActionURLPrivateVars *_pdfPriv2;
+    PDFActionURLPrivateVars *_private2;
 }
 
-- (id) initWithURL: (NSURL *) url;
-- (NSURL *) URL;
-- (void) setURL: (NSURL *) url;
+- (nullable instancetype) initWithURL: (NSURL *) url;
+
+@property(nonatomic, retain) NSURL* URL;
+
 @end
 
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+NS_ASSUME_NONNULL_END

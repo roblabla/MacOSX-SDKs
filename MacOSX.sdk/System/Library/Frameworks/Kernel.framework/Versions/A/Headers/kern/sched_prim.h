@@ -126,13 +126,6 @@ extern kern_return_t	thread_wakeup_prim(
 							boolean_t			one_thread,
 							wait_result_t			result);
 
-extern kern_return_t    thread_wakeup_prim_internal(
-	                                                event_t				event,
-							boolean_t			one_thread,
-							wait_result_t			result,
-							int				priority);
-
-
 #define thread_wakeup(x)					\
 			thread_wakeup_prim((x), FALSE, THREAD_AWAKENED)
 #define thread_wakeup_with_result(x, z)		\
@@ -140,8 +133,10 @@ extern kern_return_t    thread_wakeup_prim_internal(
 #define thread_wakeup_one(x)				\
 			thread_wakeup_prim((x), TRUE, THREAD_AWAKENED)
 
+/* Wakeup the specified thread if it is waiting on this event */
+extern kern_return_t thread_wakeup_thread(event_t event, thread_t thread);
 
-extern boolean_t		preemption_enabled(void);
+extern boolean_t preemption_enabled(void);
 
 
 __END_DECLS

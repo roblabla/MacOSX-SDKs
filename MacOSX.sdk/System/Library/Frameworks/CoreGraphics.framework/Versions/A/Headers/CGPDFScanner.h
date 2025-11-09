@@ -27,20 +27,20 @@ CG_EXTERN CGPDFScannerRef  CGPDFScannerCreate(
 
 /* Retain `scanner'. */
 
-CG_EXTERN CGPDFScannerRef __nullable CGPDFScannerRetain(
-    CGPDFScannerRef __nullable scanner)
+CG_EXTERN CGPDFScannerRef cg_nullable CGPDFScannerRetain(
+    CGPDFScannerRef cg_nullable scanner)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Release `scanner'. */
 
-CG_EXTERN void CGPDFScannerRelease(CGPDFScannerRef __nullable scanner)
+CG_EXTERN void CGPDFScannerRelease(CGPDFScannerRef cg_nullable scanner)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Scan the content stream of `scanner'. Returns true if the entire stream
    was scanned successfully; false if scanning failed for some reason (for
    example, if the stream's data is corrupted). */
 
-CG_EXTERN bool CGPDFScannerScan(CGPDFScannerRef __nullable scanner)
+CG_EXTERN bool CGPDFScannerScan(CGPDFScannerRef cg_nullable scanner)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Return the content stream associated with `scanner'. */

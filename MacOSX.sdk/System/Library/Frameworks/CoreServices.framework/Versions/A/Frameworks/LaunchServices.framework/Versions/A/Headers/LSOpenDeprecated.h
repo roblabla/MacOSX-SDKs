@@ -24,8 +24,11 @@ extern "C" {
 
 
 enum {
+  kLSLaunchInhibitBGOnly        __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_12, __IPHONE_NA, __IPHONE_NA, "This option does nothing.") = 0x00000080, /* Does nothing.*/
+  kLSLaunchNoParams             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_12, __IPHONE_NA, __IPHONE_NA, "This option does nothing.") = 0x00000800, /* Does nothing.*/
   kLSLaunchStartClassic         __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "The Classic environment is no longer supported.") = 0x00020000, /* Does nothing.*/
   kLSLaunchInClassic            __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "The Classic environment is no longer supported.") = 0x00040000, /* Always fails with kLSNoClassicEnvironmentErr.*/
+  kLSLaunchHasUntrustedContents __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_12, __IPHONE_NA, __IPHONE_NA, "This option does nothing.") = 0x00400000, /* Does nothing.*/
 };
 
 

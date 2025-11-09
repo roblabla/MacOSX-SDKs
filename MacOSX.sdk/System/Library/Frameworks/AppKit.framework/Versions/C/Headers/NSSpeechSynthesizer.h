@@ -1,7 +1,7 @@
 /*
 	NSSpeechSynthesizer.h
 	Application Kit
-	Copyright (c) 2003-2015, Apple Inc.
+	Copyright (c) 2003-2016, Apple Inc.
 	All rights reserved.
 */
 

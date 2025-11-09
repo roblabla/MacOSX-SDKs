@@ -1,5 +1,10 @@
 /*	CoreFoundation.h
-	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2016, Apple Inc. All rights reserved.
+ 
+	Portions Copyright (c) 2014-2016 Apple Inc. and the Swift project authors
+	Licensed under Apache License v2.0 with Runtime Library Exception
+	See http://swift.org/LICENSE.txt for license information
+	See http://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
 */
 
 #if !defined(__COREFOUNDATION_COREFOUNDATION__)
@@ -62,14 +67,15 @@
 #include <CoreFoundation/CFURLAccess.h>
 #include <CoreFoundation/CFUUID.h>
 #include <CoreFoundation/CFUtilities.h>
+#include <CoreFoundation/CFBundle.h>
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || TARGET_OS_WIN32
-#include <CoreFoundation/CFBundle.h>
 #include <CoreFoundation/CFMessagePort.h>
 #include <CoreFoundation/CFPlugIn.h>
 #include <CoreFoundation/CFRunLoop.h>
 #include <CoreFoundation/CFStream.h>
 #include <CoreFoundation/CFSocket.h>
+#include <CoreFoundation/CFMachPort.h>
 
 #ifndef CF_OPEN_SOURCE
 #include <CoreFoundation/CFAttributedString.h>
@@ -82,7 +88,6 @@
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
 #ifndef CF_OPEN_SOURCE
 #include <CoreFoundation/CFFileSecurity.h>
-#include <CoreFoundation/CFMachPort.h>
 #include <CoreFoundation/CFStringTokenizer.h>
 #include <CoreFoundation/CFFileDescriptor.h>
 #endif

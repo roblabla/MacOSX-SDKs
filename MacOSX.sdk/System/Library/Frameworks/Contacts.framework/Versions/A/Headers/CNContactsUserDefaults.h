@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  * @abstract The user defaults for contacts.
+ *
+ * @note This class is not thread safe.
  */
 NS_CLASS_AVAILABLE(10_11, 9_0)
 @interface CNContactsUserDefaults : NSObject

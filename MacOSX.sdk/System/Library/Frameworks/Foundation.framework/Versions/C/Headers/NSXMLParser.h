@@ -1,8 +1,9 @@
 /*	NSXMLParser.h
-        Copyright (c) 2003-2015, Apple Inc. All rights reserved.
+        Copyright (c) 2003-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSError.h>
 
 @class NSData, NSDictionary<KeyType, ObjectType>, NSError, NSString, NSURL, NSInputStream, NSSet<ObjectType>;
 @protocol NSXMLParserDelegate;
@@ -143,7 +144,7 @@ typedef NS_ENUM(NSUInteger, NSXMLParserExternalEntityResolvingPolicy) {
     // If validation is on, this will report a fatal validation error to the delegate. The parser will stop parsing.
 @end
 
-FOUNDATION_EXPORT NSString * const NSXMLParserErrorDomain	NS_AVAILABLE(10_3, 2_0);  // for use with NSError.
+FOUNDATION_EXPORT NSErrorDomain const NSXMLParserErrorDomain	NS_AVAILABLE(10_3, 2_0);  // for use with NSError.
 
 // Error reporting
 typedef NS_ENUM(NSInteger, NSXMLParserError) {

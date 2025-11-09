@@ -32,6 +32,16 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 
 @end
 
+@interface AVMetadataGroup (AVMetadataGroupIdentification)
+
+/* indicates the classifyingLabel of the group; nil if no classifyingLabel is indicated */
+@property (nonatomic, readonly, nullable) NSString *classifyingLabel NS_AVAILABLE(10_11_3, 9_3);
+
+/* indicates the unique identifier of the group; nil if no unique identifier is indicated */
+@property (nonatomic, readonly, nullable) NSString *uniqueID NS_AVAILABLE(10_11_3, 9_3);
+
+@end
+
 /*!
 	@class		AVTimedMetadataGroup
  

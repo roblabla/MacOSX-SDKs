@@ -3,11 +3,13 @@
  
  Node that holds an AVAudioEngine sound graph, including from a single sound source or URL.
  
- @copyright 2015 Apple, Inc. All rights reserve.
+ @copyright 2015 Apple, Inc. All rights reserved.
  
  */
 
 #import <SpriteKit/SpriteKit.h>
+
+#if __has_include(<AVFoundation/AVAudioEngine.h>)
 
 @class AVAudioNode;
 
@@ -85,3 +87,5 @@ SK_EXPORT NS_AVAILABLE(10_11, 9_0) @interface SKAudioNode : SKNode <NSCoding>
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

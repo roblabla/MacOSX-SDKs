@@ -1,23 +1,213 @@
 /*
- * Copyright (c) 1998-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2016 Apple Inc. All rights reserved.
  *
- * @APPLE_LICENSE_HEADER_START@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.2 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
  *
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ *
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
  *
- * @APPLE_LICENSE_HEADER_END@
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
+ */
+
+/*! 
+ @header     IOUSBHostDevice.h
+ @brief      IOUSBHostDevice is an IOService representing a USB device.
+ @discussion 
+ 
+ <h3>Session Management</h3>
+ 
+ A driver that has successfully matched on an IOUSBHostDevice is able to take ownership of the device by calling the <code>open</code> method defined by IOService on the IOUSBHostDevice.  Once <code>open</code> has completed successfully, the driver has an open session, and may use the deviceRequest interface to send control requests, and the setConfiguration interface to create or destroy child IOUSBHostInterface services.
+ 
+ When the driver is finished with control of the IOUSBHostDevice, it must call <code>close</code> to end its session.  Calling <code>close</code> will synchronously abort that session's outstanding IO on the control endpoint.  If the device is terminating for any reason, such as being unplugged, termination of the IOUSBHostDevice will be blocked until the driver calls <code>close</code>.  The willTerminate call into the driver is the recommended location to call <code>close</code>.
+ 
+ Drivers that match on an IOUSBHostInterface service do not need to open a session to the IOUSBHostDevice, as the IOUSBHostInterface will open a session to the IOUSBHostDevice on the driver's behalf.
+ 
+ <h3>deviceRequest Interface</h3>
+ 
+ The <code>deviceRequest</code> methods are used to send control requests to the device's default endpoint.  The <code>deviceRequest</code> methods may not be used for the following standard requests:
+ <ul>
+    <li>CLEAR_FEATURE ENDPOINT_HALT (USB 2.0 9.4.1) - Use <code>IOUSBHostPipe::clearStall</code> to send this request</li>
+    <li>SET_ADDRESS (USB 2.0 9.4.6)</li>
+    <li>SET_CONFIGURATION (USB 2.0 9.4.7) - Use <code>setConfiguration</code> to send this request</li>
+    <li>SET_INTERFACE (USB 2.0 9.4.10) - Use <code>IOUSBHostInterface::selectAlternateSetting</code> to send this request</li>
+ </ul>
+ 
+ <h3>IOUSBDevice Migration</h3>
+ 
+ IOUSBHostDevice serves as a replacement for IOUSBDevice.  Clients that previously matched on IOUSBDevice can use the following guide to convert to IOUSBHostDevice.
+ 
+ <code>virtual UInt16 IOUSBDevice::GetbcdUSB();</code><br>
+ Replacement: <code>USBToHost16(getDeviceDescriptor()->bcdUSB);</code>
+ 
+ <code>virtual UInt8 IOUSBDevice::GetDeviceClass();</code><br>
+ Replacement: <code>getDeviceDescriptor()->bDeviceClass;</code>
+ 
+ <code>virtual UInt8 IOUSBDevice::GetDeviceSubClass();</code><br>
+ Replacement: <code>getDeviceDescriptor()->bDeviceSubClass</code>
+ 
+ <code>virtual UInt8 IOUSBDevice::GetProtocol();</code><br>
+ Replacement: <code>getDeviceDescriptor()->bDeviceProtocol</code>
+ 
+ <code>virtual UInt8 IOUSBDevice::GetMaxPacketSize();</code><br>
+ Replacement: <code>getDeviceDescriptor->bMaxPacketSize0</code>
+ 
+ <code>virtual UInt16 IOUSBDevice::GetVendorID();</code><br>
+ Replacement: <code>USBToHost16(getDeviceDescriptor()->idVendor)</code>
+ 
+ <code>virtual UInt16 IOUSBDevice::GetProductID();</code><br>
+ Replacement: <code>USBToHost16(getDeviceDescriptor()->idProduct)</code>
+ 
+ <code>virtual UInt16 IOUSBDevice::GetDeviceRelease();</code><br>
+ Replacement: <code>USBToHost16(getDeviceDescriptor()->bcdDevice)</code>
+ 
+ <code>virtual UInt8 IOUSBDevice::GetNumConfigurations();</code><br>
+ Replacement: <code>getDeviceDescriptor()->bNumConfigurations</code>
+ 
+ <code>virtual UInt8 IOUSBDevice::GetManufacturerStringIndex();</code><br>
+ Replacement: <code>getDeviceDescriptor()->iManufacturer</code>
+ 
+ <code>virtual UInt8 IOUSBDevice::GetProductStringIndex();</code><br>
+ Replacement: <code>getDeviceDescriptor()->iProduct</code>
+ 
+ <code>virtual UInt8 IOUSBDevice::GetSerialNumberStringIndex();</code><br>
+ Replacement: <code>getDeviceDescriptor()->iSerialNumber</code>
+ 
+ <code>virtual IOReturn IOUSBDevice::FindNextInterfaceDescriptor(const IOUSBConfigurationDescriptor*, const IOUSBInterfaceDescriptor*, const IOUSBFindInterfaceRequest*, IOUSBInterfaceDescriptor**);</code><br>
+ Replacement:<br>
+ <pre>ConfigurationDescriptor* confDesc = getConfigurationDescriptor();
+InterfaceDescriptor* intDesc = NULL;
+while((intDesc = StandardUSB::getNextInterfaceDescriptor(confDesc, intDesc)) != NULL)
+{
+    if(intDesc->bInterfaceClass == kMyClass)
+    {
+        break;
+    }
+}</pre>
+ 
+ <code>virtual const IOUSBConfigurationDescriptor* IOUSBDevice::GetCachedConfigurationDescriptor(UInt8 configIndex);</code><br>
+ <code>virtual const IOUSBConfigurationDescriptor* IOUSBDevice::GetFullConfigurationDescriptor(UInt8 configIndex);</code><br>
+ Replacement: <code>getConfigurationDescriptor(configIndex)</code>
+ 
+ <code>virtual IOReturn IOUSBDevice::GetConfigurationDescriptor(UInt8 configValue, void* data, UInt32 len);</code><br>
+ Replacement: <code>getConfigurationDescriptorWithValue(configValue);</code>
+ 
+ <code>virtual IOUSBHostInterface* IOUSBDevice::FindNextInterface(IOUSBHostInterface*, IOUSBFindInterfaceRequest* request);</code><br>
+ <code>virtual OSIterator* IOUSBDevice::CreateInterfaceIterator(IOUSBFindInterfaceRequest* request);</code><br>
+ Replacement:<br>
+ <pre>OSIterator* iterator = _device->getChildIterator(gIOServicePlane);
+OSObject* candidate = NULL;
+while(iterator != NULL && (candidate = iterator->getNextObject()) != NULL)
+{
+    IOUSBHostInterface* interfaceCandidate = OSDynamicCast(IOUSBHostInterface, candidate);
+    if(   interfaceCandidate != NULL
+       && interfaceCandidate->getInterfaceDescriptor()->bInterfaceClass == kMyClass)
+    {
+        _interface = interfaceCandidate;
+        break;
+    }
+}
+OSSafeReleaseNULL(iterator);</pre>
+ 
+ <code>virtual IOReturn IOUSBDevice::SetConfiguration(IOService*, UInt8, bool);</code><br>
+ Replacement: <code>setConfiguration(configNumber, startMatchingInterfaces);</code>
+ 
+ <code>virtual UInt8 IOUSBDevice::GetSpeed();</code><br>
+ Replacement: <code>getSpeed();</code>
+ 
+ <code>virtual IOUSBController* IOUSBDevice::GetBus();</code><br>
+ Replacement: The controller cannot be directly accessed.  Use <code>getFrameNumber(...)</code> and <code>createIOBuffer(...)</code> instead.
+ 
+ <code>virtual UInt32 IOUSBDevice::GetBusPowerAvailable();</code><br>
+ Replacement: <code>allocateDownstreamBusCurrent(...);</code>
+ 
+ <code>virtual IOReturn IOUSBDevice::DeviceRequest(IOUSBDevRequest*, IOUSBCompletion*);<br>
+ virtual IOReturn IOUSBDevice::DeviceRequest(IOUSBDevRequestDesc*, IOUSBCompletion*);<br>
+ virtual IOReturn IOUSBDevice::DeviceRequest(IOUSBDevRequest*, UInt32, UInt32, IOUSBCompletion*);<br>
+ virtual IOReturn IOUSBDevice::DeviceRequest(IOUSBDevRequestDesc*, UInt32, UInt32, IOUSBCompletion*);<br></code>
+ Replacment: <code>deviceRequest(...);</code>
+ 
+ <code>virtual IOReturn IOUSBDevice::GetConfiguration(UInt8*);</code><br>
+ Replacment:
+ <pre>uint8_t configNumber  = 0;
+StandardUSB::DeviceRequest request;
+request.bmRequestType = makeDeviceRequestbmRequestType(kRequestDirectionIn, kRequestTypeStandard, kRequestRecipientDevice);
+request.bRequest      = kDeviceRequestGetConfiguration;
+request.wValue        = 0;
+request.wIndex        = 0;
+request.wLength       = sizeof(configNumber);
+ 
+uint32_t bytesTransferred = 0;
+ 
+deviceRequest(this, request, &configNumber, bytesTransferred, kUSBHostStandardRequestCompletionTimeout);</pre>
+ 
+ <code>virtual IOReturn IOUSBDevice::GetDeviceStatus(USBStatus*);</code><br>
+ Replacement:
+ <pre>uint16_t status       = 0;
+StandardUSB::DeviceRequest request;
+request.bmRequestType = makeDeviceRequestbmRequestType(kRequestDirectionIn, kRequestTypeStandard, kRequestRecipientDevice);
+request.bRequest      = kDeviceRequestGetStatus;
+request.wValue        = 0;
+request.wIndex        = 0;
+request.wLength       = sizeof(status);
+ 
+uint32_t bytesTransferred = 0;
+ 
+deviceRequest(this, request, &status, bytesTransferred, kUSBHostStandardRequestCompletionTimeout);</pre>
+ 
+ <code>virtual IOUSBPipe* IOUSBDevice::GetPipeZero();</code><br>
+ Replacement: The IOUSBHostPipe representing the default control endpoint is not accessible.  Use <code>deviceRequest(...)</code> and <code>abortDeviceRequests(...)</code> interfaces to interact with the default control endpoint.
+ 
+ <code>virtual IOReturn IOUSBDevice::GetStringDescriptor(UInt8, char*, int, UInt16);</code><br>
+ Replacement:
+ <pre>char stringBuffer[256] = { 0 };
+size_t stringLength = sizeof(stringBuffer);
+const StringDescriptor* stringDescriptor = getStringDescriptor(index);
+if(   stringDescriptor != NULL
+   && stringDescriptor->bLength > StandardUSB::kDescriptorSize)
+{
+   StandardUB::stringDescriptorToUTF8(stringDescriptor, stringBuffer, stringLength);
+}</pre>
+ 
+ <code>virtual const IOUSBDescriptorHeader* IOUSBDevice::FindNextDescriptor(const void*, UInt8);</code><br>
+ Replacement: <code>StandardUSB::getNextDescriptorWithType(getConfigurationDescriptor(), currentDescriptor, descriptorType);</code>
+ 
+ <code>virtual IOReturn IOUSBDevice::SuspendDevice(bool);</code><br>
+ Replacement: Power management should be done using the idling system described in IOUSBHostFamily.h.
+ 
+ <code>virtual IOReturn IOUSBDevice::ReEnumerateDevice(UInt32);</code><br>
+ Replacement: <code>reset();</code>
+ 
+ <code>virtual IOReturn IOUSBDevice::GetDeviceInformation(UInt32*);</code><br>
+ Replacement: <code>getPortStatus();</code>
+ 
+ <code>virtual UInt32 IOUSBDevice::RequestExtraPower(UInt32, UInt32);<br>
+ virtual IOReturn IOUSBDevice::ReturnExtraPower(UInt32, UInt32);</code><br>
+ Replacement: <code>allocateDownstreamBusCurrent(...);</code>
+ 
+ <code>virtual tUSBHostDeviceAddress IOUSBDevice::GetAddress(void);</code><br>
+ Replacement: <code>getAddress();</code>
+ 
+ <code>virtual IOReturn IOUSBDevice::ResetDevice();<br>
+ virtual UInt32 IOUSBDevice::GetExtraPowerAllocated(UInt32);<br>
+ void IOUSBDevice::SetBusPowerAvailable(UInt32);</code><br>
+ Replacement: none
  */
 
 #ifndef IOUSBHostFamily_IOUSBHostDevice_h
@@ -54,21 +244,13 @@ class AppleUSBHostSynchronousRequestCompleter;
 class AppleUSBHostPort;
 class AppleUSBHostDescriptorCache;
 class AppleUSBHostResources;
+class IOSimpleReporter;
+class IOStateReporter;
 
 /*!
-    @class IOUSBHostDevice
-    @abstract The IOService object representing a device on the USB bus.
-    @discussion This class provides functionality to configure a device and to create
-        IOUSBHostInterface objects to represent the interfaces of the device.
- */
-
-/*!
- * @class IOUSBHostDevice
- *
- * @brief The IOService object representing a device on the USB bus.
- *
- * @discussion  This class provides functionality to configure a device and to create IOUSBHostInterface objects to 
- * represent the interfaces of the device.
+ * @class       IOUSBHostDevice
+ * @brief       The IOService object representing a USB device
+ * @discussion  This class provides functionality to send control requests to the default control endpoint, as well as create IOUSBHostInterface objects to represent the interfaces contained in the selected configuration.  Function drivers should not subclass IOUSBHostDevice.
  */
 class IOUSBHostDevice : public IOService
 {
@@ -84,13 +266,12 @@ class IOUSBHostDevice : public IOService
 
 public:
     /*!
-     * @brief Powerstates supported by an IOUSBHostDevice
-     *
-     * @constant kPowerStateOff The device has been powered off and is likely in the process of terminating
-     * @constant kPowerStateSuspended The device is suspended.  All I/O has been paused and the bus will be
-     * suspended once its AppleUSBHostPort power parent enters the suspend state.
-     * @constant kPowerStateOn The device is powered on and I/O is possible.
-     * @constant kPowerStateCount Number of possible power states 
+     * @namespace   IOUSBHostDevice
+     * @brief       Powerstates supported by an IOUSBHostDevice
+     * @constant    kPowerStateOff The device has been powered off and will be terminated.
+     * @constant    kPowerStateSuspended The device is suspended.  All I/O has been paused and the bus will be suspended once its AppleUSBHostPort power parent enters the suspend state.
+     * @constant    kPowerStateOn The device is powered on and I/O is possible.
+     * @constant    kPowerStateCount Number of possible power states.
      */
     enum tPowerState
     {
@@ -100,16 +281,13 @@ public:
         kPowerStateCount
     };
 
-    /*!
-     * @brief Factory method for creating an IOUSBHostDevice object
-     *
-     * @param controller Controller to which the USB device is attached
-     *
-     * @param speed Speed at which the device enumerated
-     *
-     * @param address Address that was assigned during enumeration
-     *
-     * @return Pointer to an IOUSBHostDevice object is successful
+    /*
+     * @brief       Factory method for creating an IOUSBHostDevice object
+     * @discussion  This method should not be called by function drivers.  IOUSBHostDevice objects are created by AppleUSBHostPort services when a device is connected.
+     * @param       controller Controller to which the USB device is attached
+     * @param       speed Speed at which the device enumerated
+     * @param       address tUSBHostDeviceAddress that has been allocated by the controller
+     * @return      Pointer to an IOUSBHostDevice object if successful, otherwise NULL
      */
     static IOUSBHostDevice* withController(AppleUSBHostController* controller, UInt8 speed, tUSBHostDeviceAddress address);
 
@@ -130,6 +308,11 @@ protected:
     
 #pragma mark IOService overrides
 public:
+    /*!
+     * @functiongroup   IOService overrides
+     * @discussion      For a discussion of proper usage for <code>open</code> and <code>close</code>, see the discussion of "Session Management" above.
+     */
+
     virtual bool attach(IOService* provider);
     virtual bool start(IOService* provider);
     virtual bool terminate(IOOptionBits options = 0);
@@ -140,15 +323,44 @@ public:
     virtual bool compareProperty(OSDictionary* matching, const OSString* key);
     virtual bool matchPropertyTable(OSDictionary* table, SInt32* score);
 
+    virtual IOReturn setProperties(OSObject* properties);
+
+    /*!
+     * @brief       Open a session to the IOUSBHostDevice
+     * @discussion  This method opens a session to an IOUSBHostDevice.  It will acquire the service's workloop lock.  Child IOUSBHostInterfaces may open simultaneous sessions, but only one other service may open a session.
+     * @param       forClient The IOService that is opening a session.
+     * @param       options See IOService.h
+     * @param       arg See IOService.h
+     * @return      bool true if the session could be opened, otherwise false.
+     */
     virtual bool open(IOService* forClient, IOOptionBits options = 0, void* arg = 0);
     virtual bool handleOpen(IOService* forClient, IOOptionBits options, void* arg);
     virtual bool handleIsOpen(const IOService* forClient) const;
+    
+    /*!
+     * @brief       Close a session to the IOUSBHostDevice
+     * @discussion  This method closes an open session to an IOUSBHostDevice.  It will acquire the service's workloop lock, abort any IO associated with the specified client, and may call commandSleep to allow processing of aborted control requests before returning.
+     * @param       forClient The IOService that is closing its session.  Any IO associated with the specified client will be aborted.
+     * @param       options See IOService.h
+     */
     virtual void close(IOService* forClient, IOOptionBits options = 0);
     virtual void handleClose(IOService* forClient, IOOptionBits options);
     
     virtual IOReturn message(UInt32 type, IOService* provider,  void* argument = 0);
 
-    virtual const char* stringFromReturn(IOReturn rtn);
+    virtual const char* stringFromReturn(IOReturn code);
+
+    virtual bool setProperty(const OSSymbol* aKey, OSObject*   anObject);
+    virtual bool setProperty(const OSString* aKey, OSObject*   anObject);
+    virtual bool setProperty(const char*     aKey, OSObject*   anObject);
+    virtual bool setProperty(const char*     aKey, const char* aString);
+    virtual bool setProperty(const char*     aKey, bool        aBoolean);
+
+    virtual bool setProperty(const char* aKey, unsigned long long aValue, unsigned int aNumberOfBits);
+    virtual bool setProperty(const char* aKey, void*      	      bytes,  unsigned int length);
+
+    virtual IOReturn configureReport(IOReportChannelList* channels, IOReportConfigureAction action, void* result, void* destination);
+    virtual IOReturn updateReport(IOReportChannelList*channels, IOReportUpdateAction action, void* result, void* destination);
 
 protected:
     virtual IOReturn terminateGated(IOOptionBits options = 0);
@@ -180,12 +392,9 @@ protected:
 #pragma mark Power management
 public:
     /*!
-     * @methodgroup Power management
-     *
-     * @discussion The following mthods should be considered private and should not be called by client drivers.
-     * In general the below methods are overriden IOService power methods used internally to implement idling
-     * and maintain proper device state.
+     * @functiongroup Power management
      */
+
     virtual void          registerPowerService();
     virtual IOReturn      addPowerChild(IOService* theChild);
     virtual IOReturn      removePowerChild(IOPowerConnection* theChild);
@@ -197,26 +406,14 @@ public:
     virtual IOReturn      forcePower(tPowerState powerState, bool clamp, uint32_t timeoutMs = 0);
     
     /*!
-     * @brief Allocate bus current in addition to the bMaxPower value specified by the configuration descriptor
-     *
-     * @discussion Some hosts are able to source more than the standard-defined bus current to attached devices, or
-     * may use less current than defined in the bMaxPower field of the configuration descriptor.
-     *
-     * Devices can use this interface to request more or less bus current.  The parameters passed in are abolute values
-     * of current required for operation in kPowerStateOn and kPowerStateSuspended IOUSBHostDevice power levels, and
-     * override the bMaxPower field in the configuration descriptor.  For example, if bMaxPower indicates the device
-     * requires 500mA to operate, then a request for 1000mA will double the allocated power for the device.
-     *
-     * A setConfiguration(0) call to unconfigure the device will reset these overrides.
-     *
-     * The parameters are passed by reference, and may be modified by the software stack before being returned.
-     * If more bus current is being requested than is available, the value may be reduced to stay within system limits.
-     *
-     * @param wakeUnits The number of extra mA requested when the device is in kPowerStateOn
-     *
-     * @param sleepUnits The number of extra mA requested when the device is in kPowerStateSuspended
-     *
-     * @return IOReturn kIOReturnSuccess if the device's allocation amounts were updated
+     * @brief       Allocate bus current that does not match the bMaxPower value specified by the device's configuration descriptor
+     * @discussion 
+     * Devices can use this interface to request more or less bus current than what is specified in the selected configuration descriptor's bMaxPower field.  The parameters passed in are abolute values of current required for operation in kPowerStateOn and kPowerStateSuspended IOUSBHostDevice power levels, and override the bMaxPower field in the configuration descriptor.  For example, if bMaxPower indicates the device requires 500mA to operate, then a request for 1000mA will double the allocated power for the device.
+     * A setConfiguration call to select a different configuration or unconfigure the device will reset the bus current allocations.
+     * The parameters are passed by reference, and may be modified before being returned.  If more bus current is being requested than is available, the values may be reduced to stay within system limits.
+     * @param       wakeUnits As input, the number of mA requested when the device is in kPowerStateOn.  As output, the number of mA allocated to the device in kPowerStateOn.
+     * @param       sleepUnits As input, the number of mA requested when the device is in kPowerStateSuspended.  As output, the number of mA allocated to the device in kPowerStateSuspended.
+     * @return      IOReturn kIOReturnSuccess if the device's allocation amounts were updated, otherwise an error code
      */
     virtual IOReturn allocateDownstreamBusCurrent(uint32_t& wakeUnits, uint32_t& sleepUnits);
     
@@ -225,6 +422,9 @@ public:
         kIdleAssertionInhibit = 0,
         kIdleAssertionPermit
     };
+    /*!
+     * @brief       This method should be considered private and should not be called by function drivers.
+     */
     virtual IOReturn idleAssertion(IOService* forService, tIdleAssertion assertion);
 
     // Public pad slots for power management
@@ -283,50 +483,31 @@ protected:
 
 #pragma mark Descriptors
 public:
+    /*! @functiongroup Descriptors */
+
     /*!
-     * @brief Store the provided descriptor in the set of cached descriptors.
-     *
-     * @discussion This method will store the provided descriptor in the set of caced descriptors.  Internally,
-     * the cache is an OSDictionary containing OSSets indexted by the bDescriptorType field.  There can only be
-     * one cached descriptor in the set with identical <code>bDescriptorType</code>, <code>index</code>, and 
-     * <code>languageID</code>.  The descriptor is copied into the cache.
-     *
-     * @param descriptor Pointer to the descriptor to cache
-     *
-     * @param length Length of the descriptor, if 0 the length will be extracted from the descriptor itself.
-     *
-     * @param index Descriptor index value.  Low byte of <code>wValue</code> of the SET_DESCRIPTOR control request described
-     * in section 9.4.8 of the USB 2.0 specification.
-     *
-     * @param languageID Descriptor language ID.  <code>wIndex</code> of the SET_DESCRIPTOR control request described in 
-     * section 9.4.8 of the USB 2.0 specification.
-     *
-     * @return IOReturn result code
+     * @brief       Store the provided descriptor in the set of cached descriptors.
+     * @discussion  This method will store a descriptor in a set of cached descriptors.  If a descriptor with an identical <code>bDescriptorType</code>, <code>index</code>, and <code>languageID</code> already exists in the cache, it will be replaced.  The provided descriptor is copied, and may be discarded after being stored in the cache.  Future descriptor fetch calls such as getDescriptor will return the cached value.  Future GET_DESCRIPTOR control requests (USB 2.0 9.4.3) will also return the cached descriptor.  SET_DESCRIPTOR control requests (USB 2.0 9.4.8) will remove the cached descriptor.
+     * @param       descriptor Pointer to the descriptor to cache
+     * @param       length Length of the descriptor, or 0 the descriptor's bLength field should be used.
+     * @param       index Descriptor index value.  Low byte of <code>wValue</code> of the SET_DESCRIPTOR control request (USB 2.0 9.4.8).
+     * @param       languageID Descriptor language ID.  <code>wIndex</code> of the SET_DESCRIPTOR control request (USB 2.0 9.4.8).
+     * @return      IOReturn result code
      */
     virtual IOReturn cacheDescriptor(const StandardUSB::Descriptor* descriptor, uint16_t length = 0, uint8_t index = 0, uint16_t languageID = 0);
     
     /*!
-     * @brief Search the cache for the descriptor
-     *
-     * @discussion This method will search the descriptor cache for the descriptor that matches the input arguments.  If
-     * the descriptor is not in the cache, a device request will be issued to retrieve the descriptor from the USB device.
-     * If the device request is successful, the resulting descriptor will be added to the cache.
-     *
-     * @param type <bDescriptorType> of the descriptor to find.
-     *
-     * @param length Reference to a uint16_t which will be updated with the length of the descriptor
-     *
-     * @param index Descriptor index value.  Low byte of <code>wValue</code> of the GET_DESCRIPTOR control request described
-     * in section 9.4.3 of the USB 2.0 specification.
-     *
-     * @param languageID Descriptor language ID.  <code>wIndex</code> of the GET_DESCRIPTOR control request described in
-     * section 9.4.3 of the USB 2.0 specification.
-     *
-     * @param requestType tDeviceRequestType to be used for the GET_DESCRIPTOR control request
-     *
-     * @param requestRecipient tDeviceRequestRecipient to be used for the GET_DESCRIPTOR control request
-     *
-     * @return Pointer to the descriptor if found.
+     * @brief       Retrieve a descriptor from the cache or the device
+     * @discussion  
+     * This method will search the descriptor cache for the descriptor that matches the input arguments.  If the descriptor is not in the cache, a GET_DESCRIPTOR control request (USB 2.0 9.4.3) will be issued to retrieve the descriptor from the device.  If the device request is successful, the retrieved descriptor will be added to the cache.
+     * This method will acquire the service's workloop lock, and may call commandSleep to perform the GET_DESCRIPTOR control request.
+     * @param       type <code>bDescriptorType</code> of the descriptor to find.
+     * @param       length Reference to a uint16_t which will be updated with the length of the descriptor.  As input, used as <code>wLength</code> when fetching variable-length configuration or BOS descriptors, or when fetching nonstandard descriptor types.
+     * @param       index Descriptor index value.  Low byte of <code>wValue</code> of the SET_DESCRIPTOR control request (USB 2.0 9.4.8).
+     * @param       languageID Descriptor language ID.  <code>wIndex</code> of the SET_DESCRIPTOR control request (USB 2.0 9.4.8).
+     * @param       requestType tDeviceRequestType to be used for a GET_DESCRIPTOR control request.
+     * @param       requestRecipient tDeviceRequestRecipient to be used for a GET_DESCRIPTOR control request.
+     * @return      Pointer to the cached descriptor if found, otherwise NULL.
      */
     virtual const StandardUSB::Descriptor* getDescriptor(uint8_t type,
                                                          uint16_t& length,
@@ -335,76 +516,49 @@ public:
                                                          tDeviceRequestType requestType = kRequestTypeStandard,
                                                          tDeviceRequestRecipient requestRecipient = kRequestRecipientDevice);
     
-    // Retrieve and cache the entire length of standard descriptor types
-    // TODO: We are handing out pointers to cached descriptors, which could theoretically be invalidated
-    // TODO: We might want to make it so cached descriptors can't be replaced or removed by anyone but us
     /*!
-     * @brief Return the device descriptor
-     *
-     * @discussion This method is simply a convenience method to retrieve the device descriptor.  Internally this method
-     * simply calls @link getDescriptor @/link.
-     *
-     * @return Pointer to the device descriptor if found.
+     * @brief       Return the device descriptor
+     * @discussion  This method uses getDescriptor to retrieve the device descriptor.
+     * @return      Pointer to the device descriptor.
      */
     virtual const StandardUSB::DeviceDescriptor* getDeviceDescriptor();
 
     /*!
-     * @brief Return the configuration descriptor with the specified index
-     *
-     * @discussion This method is simply a convenience method to retrieve the configuration descriptor.  Internally this method
-     * simply calls @link getDescriptor @/link.
-     *
-     * @param index  Descriptor index value.  Low byte of <code>wValue</code> of the GET_DESCRIPTOR control request described
-     * in section 9.4.3 of the USB 2.0 specification.
-     *
-     * @return Pointer to the configuration descriptor if found
+     * @brief       Return the configuration descriptor with the specified index
+     * @discussion  This method uses getDescriptor to retrieve a configuration descriptor.
+     * @param       index Descriptor index value
+     * @return      Pointer to the configuration descriptor if found
      */
     virtual const StandardUSB::ConfigurationDescriptor* getConfigurationDescriptor(uint8_t index);
 
     /*!
-     * @brief Return the configuration descriptor with the specified <code>bConfigurationValue</code>
-     *
-     * @discussion This method will iterate through all configuration descriptors by index looking for the one whose
-     * <code>bConfigurationValue</code> matches the input value.
-     *
-     * @param bConfigurationValue Value to match
-     *
-     * @return Pointer to the configuration descriptor if found
+     * @brief       Return the configuration descriptor with the specified <code>bConfigurationValue</code>
+     * @discussion  This method uses getDescriptor to search for a configuration descriptor with a specific <code>bConfigurationValue</code> field.
+     * @param       bConfigurationValue Value to match
+     * @return      Pointer to the configuration descriptor if found
      */
     virtual const StandardUSB::ConfigurationDescriptor* getConfigurationDescriptorWithValue(uint8_t bConfigurationValue);
     
     /*!
-     * @brief Return the currently selected configuration descriptor
-     *
-     * @discussion This method will return the configuration descriptor currently selected by a successful setConfiguration call
-     *
-     * @return Pointer to the configuration descriptor if found, or NULL if the device is not configured
+     * @brief       Return the currently selected configuration descriptor
+     * @discussion  This method uses getDescriptor to return the configuration descriptor currently selected after a successful setConfiguration call
+     * @return      Pointer to the configuration descriptor if found, or NULL if the device is not configured
      */
     virtual const StandardUSB::ConfigurationDescriptor* getConfigurationDescriptor();
 
     /*!
-     * @brief Return the capability descriptors of the device
-     *
-     * @discussion This method will attempt to return the Binary Device Object Store descriptors described in section
-     * 9.6.2 of the USB 3.1 specification.
-     *
-     * @return Pointer to the BOS descriptor if found
+     * @brief       Return the capability descriptors of the device
+     * @discussion  This method uses getDescriptor to return the device's BOS descriptors
+     * @return      Pointer to the BOS descriptor if found, otherwise NULL
      */
     virtual const StandardUSB::BOSDescriptor* getCapabilityDescriptors();
 
     /*!
-     * @brief Return a string descriptor from the device
-     *
-     * @discussion This method is simply a convenience method to retieve the desired string descriptor.  Internally this method
-     * simply calls @link getDescriptor @/link.
-     *
-     * @param index  Descriptor index value.  Low byte of <code>wValue</code> of the GET_DESCRIPTOR control request described
-     * in section 9.4.3 of the USB 2.0 specification.
-     *
-     * @param languageID  Descriptor language ID.  <code>wIndex</code> of the GET_DESCRIPTOR control request described in 
-     * section 9.4.3 of the USB 2.0 specification.
-     *
-     * @return Pointer to the descriptor if found
+     * @brief       Return a string descriptor from the device
+     * @discussion  This method uses getDescriptor to return a string descriptor.
+     * @param       index Descriptor index value.  Low byte of <code>wValue</code> of the SET_DESCRIPTOR control request (USB 2.0 9.4.8).
+     * @param       languageID Descriptor language ID.  <code>wIndex</code> of the SET_DESCRIPTOR control request (USB 2.0 9.4.8).     *
+     * @return      Pointer to the descriptor if found
      */
     virtual const StandardUSB::StringDescriptor* getStringDescriptor(uint8_t index, uint16_t languageID = StandardUSB::kLanguageIDEnglishUS);
 
@@ -450,166 +604,58 @@ protected:
     
 #pragma mark Configuration, interface, and pipe management
 public:
+    /*! @functiongroup Configuration, interface, and pipe management */
+    
     /*!
-     * @brief Select a new configuration for the device
-     *
-     * @discussion This method will select a new configuration for a device.  If the device was previously configured all
-     * child interfaces will be terminated prior to setting the new configuration.  This method will send the SET_CONFIGURATION
-     * request to the device as described by section 9.4.7 of the USB 2.0 specification.
-     *
-     * @param bConfigurationValue Configuration to select
-     *
-     * @param matchInterfaces If true, any interfaces within the new configuration will be registered for matching.
-     *
-     * @return IOReturn result code
+     * @brief       Select a new configuration for the device
+     * @discussion
+     * This method will select a new configuration for a device.  If the device was previously configured all child interfaces will be terminated prior to setting the new configuration.  This method will send the SET_CONFIGURATION control request (USB 2.0 9.4.7) to the device.
+     * This method will acquire the service's workloop lock, and may call commandSleep to perform the SET_CONFIGURATION control request.
+     * @param       bConfigurationValue Configuration to select
+     * @param       matchInterfaces If true, any interfaces within the new configuration will be registered for matching.
+     * @return      IOReturn result code
      */
     virtual IOReturn setConfiguration(uint8_t bConfigurationValue, bool matchInterfaces = true);
     
     /*!
-     * @brief Factory method to create IOUSBHostPipe objects
-     *
-     * @param descriptor Endpoint descriptor for this pipe (used to decide direction, bandwidth requirements, etc).
-     *
-     * @param companionDescriptor Companion descriptor for the endpint
-     *
-     * @param interface Interface to which the endpoint belongs
-     *
-     * @return Pointer to the newly created IOUSBHostPipe object
+     * @brief       The following method should be considered private and should not be called by function drivers.
+     * @discussion  Drivers should use <code>IOUSBHostInterface::copyPipe</code> to retrieve handles to IOUSBHostPipe objects.
      */
     virtual IOUSBHostPipe* createPipe(const StandardUSB::EndpointDescriptor* descriptor, const StandardUSB::SuperSpeedEndpointCompanionDescriptor* companionDescriptor, IOUSBHostInterface* interface);
-    
-    /*!
-     * @brief Issue an aynchronous setup request on the default control pipe
-     *
-     * @discussion This method will issue an asynchronous control request on the defaul pipe.
-     *
-     * <pre>
-     * @textblock
-     * The following request types are reserved and cannot be made as generic control requests, the appropriate API call should be used instead.
-     *
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientDevice), kDeviceRequestSetAddress Ñ reserved, this request cannot be sent by drivers.
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientDevice), kDeviceRequestSetConfiguration Ñ see setConfiguration().
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientInterface), kDeviceRequestSetInterface Ñ see IOUSBHostInterface::selectAlternateSetting().
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientEndpoint), kRequestRecipientEndpoint Ñ see IOUSBHostPipe::clearStall().
-     *
-     * @/textblock
-     * </pre>
-     *
-     * @param forClient The object issuing the request (generally the <code>this</code> pointer).
-     *
-     * @param request Reference to a valid StandardUSB::DeviceRequest object.  This will be copied and can therefore be stack-allocated.
-     *
-     * @param dataBuffer Pointer to the memory to be used for the I/O.
-     *
-     * @param completion Pointer to a valid, non NULL, IOUSBHostCompletion object.  This will be copied and can therefore be stack-allocated.
-     *
-     * @param completionTimeoutMs Time-out of the request in milliseconds.  If 0, the request will never time-out.
-     *
-     * @return IOReturn result code
-     */
-    virtual IOReturn deviceRequest(IOService* forClient, StandardUSB::DeviceRequest& request, void* dataBuffer, IOUSBHostCompletion* completion, uint32_t completionTimeoutMs = kUSBHostDefaultControlCompletionTimeoutMS);
 
     /*!
-     * @brief Issue an aynchronous setup request on the default control pipe
-     *
-     * @discussion This method will issue an asynchronous control request on the defaul pipe.
-     * <pre>
-     * @textblock
-     * The following request types are reserved and cannot be made as generic control requests, the appropriate API call should be used instead.
-     *
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientDevice), kDeviceRequestSetAddress Ñ reserved, this request cannot be sent by drivers.
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientDevice), kDeviceRequestSetConfiguration Ñ see setConfiguration().
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientInterface), kDeviceRequestSetInterface Ñ see IOUSBHostInterface::selectAlternateSetting().
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientEndpoint), kRequestRecipientEndpoint Ñ see IOUSBHostPipe::clearStall().
-     *
-     * @/textblock
-     * </pre>
-     *
-     * @param forClient The object issuing the request (generally the <code>this</code> pointer).
-     *
-     * @param request Reference to a valid StandardUSB::DeviceRequest object.  This will be copied and can therefore be stack-allocated.
-     *
-     * @param dataBuffer Pointer to an IOMemoryDescriptor for the memory to be used for the I/O.
-     *
-     * @param completion Pointer to a valid, non NULL, IOUSBHostCompletion object.  This will be copied and can therefore be stack-allocated.
-     *
-     * @param completionTimeoutMs Time-out of the request in milliseconds.  If 0, the request will never time-out.
-     *
-     * @return IOReturn result code
+     * @brief       Enqueue a request on the default control endpoint
+     * @discussion  This method will enqueue an asynchronous request on the default control endpoint.  If successful, the provided completion routine will be called to report the status of the completed IO.
+     * @param       forClient The service with an open session issuing the request.
+     * @param       request Reference to a valid StandardUSB::DeviceRequest structure.  The structure is copied and can therefore be stack-allocated.
+     * @param       dataBuffer A void* or IOMemoryDescriptor* defining the memory to use for the request's data phase.
+     * @param       completion Pointer to a IOUSBHostCompletion structure.  This will be copied and can therefore be stack-allocated.
+     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.
+     * @return      kIOReuturnSuccess if the completion will be called in the future, otherwise error
      */
+    virtual IOReturn deviceRequest(IOService* forClient, StandardUSB::DeviceRequest& request, void* dataBuffer, IOUSBHostCompletion* completion, uint32_t completionTimeoutMs = kUSBHostDefaultControlCompletionTimeoutMS);
     virtual IOReturn deviceRequest(IOService* forClient, StandardUSB::DeviceRequest& request, IOMemoryDescriptor* dataBuffer, IOUSBHostCompletion* completion, uint32_t completionTimeoutMs = kUSBHostDefaultControlCompletionTimeoutMS);
     
     /*!
-     * @brief Issue a synchronous setup request on the default control pipe.
-     *
-     * <pre>
-     * @textblock
-     * The following request types are reserved and cannot be made as generic control requests, the appropriate API call should be used instead.
-     *
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientDevice), kDeviceRequestSetAddress Ñ reserved, this request cannot be sent by drivers.
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientDevice), kDeviceRequestSetConfiguration Ñ see setConfiguration().
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientInterface), kDeviceRequestSetInterface Ñ see IOUSBHostInterface::selectAlternateSetting().
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientEndpoint), kRequestRecipientEndpoint Ñ see IOUSBHostPipe::clearStall().
-     *
-     * @/textblock
-     * </pre>
-     *
-     * @param forClient The object issuing the request (generally the <code>this</code> pointer).
-     *
-     * @param request Reference to a valid StandardUSB::DeviceRequest object.  This will be copied and can therefore be stack-allocated.
-     *
-     * @param dataBuffer Pointer to the memory to be used for the I/O.
-     *
-     * @param bytesTransferred Reference which will be updated with the bytes transferred during the request.
-     *
-     * @param completionTimeoutMs Time-out of the request in milliseconds.  If 0, the request will never time-out.
-     *
-     * @return IOReturn result code
+     * @brief       Send a request on the default control endpoint
+     * @discussion  This method will send a synchronous request on the default control endpoint, and will not return until the request is complete.  This method will acquire the service's workloop lock, and will call commandSleep to send the control request.
+     * @param       forClient The service with an open session issuing the request.
+     * @param       request Reference to a valid StandardUSB::DeviceRequest structure.
+     * @param       dataBuffer A void* or IOMemoryDescriptor* defining the memory to use for the request's data phase.
+     * @param       bytesTransferred A uint32_t reference which will be updated with the byte count of the completed data phase.
+     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.
+     * @return      IOReturn value indicating the result of the IO request
      */
     virtual IOReturn deviceRequest(IOService* forClient, StandardUSB::DeviceRequest& request, void* dataBuffer, uint32_t& bytesTransferred, uint32_t completionTimeoutMs = kUSBHostDefaultControlCompletionTimeoutMS);
-
-    /*!
-     * @brief Issue a synchronous setup request on the default control pipe.
-     *
-     * <pre>
-     * @textblock
-     * The following request types are reserved and cannot be made as generic control requests, the appropriate API call should be used instead.
-     *
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientDevice), kDeviceRequestSetAddress Ñ reserved, this request cannot be sent by drivers.
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientDevice), kDeviceRequestSetConfiguration Ñ see setConfiguration().
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientInterface), kDeviceRequestSetInterface Ñ see IOUSBHostInterface::selectAlternateSetting().
-     *    (kRequestDirectionOut, kRequestTypeStandard, kRequestRecipientEndpoint), kRequestRecipientEndpoint Ñ see IOUSBHostPipe::clearStall().
-     *
-     * @/textblock
-     * </pre>
-     *
-     * @param forClient The object issuing the request (generally the <code>this</code> pointer).
-     *
-     * @param request Reference to a valid StandardUSB::DeviceRequest object.  This will be copied and can therefore be stack-allocated.
-     *
-     * @param dataBuffer Pointer to an IOMemoryDescriptor for the memory to be used for the I/O.
-     *
-     * @param bytesTransferred Reference which will be updated with the bytes transferred during the request.
-     *
-     * @param completionTimeoutMs Time-out of the request in milliseconds.  If 0, the request will never time-out.
-     *
-     * @return IOReturn result code
-     */
     virtual IOReturn deviceRequest(IOService* forClient, StandardUSB::DeviceRequest& request, IOMemoryDescriptor* dataBuffer, uint32_t& bytesTransferred, uint32_t completionTimeoutMs = kUSBHostDefaultControlCompletionTimeoutMS);
 
     /*!
-     * @brief Abort device requests made via the @link deviceRequest @\link methods by <code>forClient</code>
-     *
-     * @discussion This method will abort any requests made via the @link deviceRequest @\link methods.  It will not abort
-     * requests made through other interface objects.
-     *
-     * @param forClient Client which issued the requests
-     *
-     * @param options IOUSBHostIOSource::tAbortOptions
-     *
-     * @param withError IOReturn error value to return with the requests.
-     *
-     * @return IOReturn result code
+     * @brief       Abort device requests made via the @link deviceRequest @/link methods by <code>forClient</code>
+     * @discussion  This method will abort any requests associated with a specific client made via the @link deviceRequest @/link methods.  It will not abort requests made by other clients.
+     * @param       forClient Client which issued the requests
+     * @param       options IOUSBHostIOSource::tAbortOptions
+     * @param       withError IOReturn error value to return with the requests.  The default value of kIOReturnAborted should be used.
+     * @return      IOReturn result code
      */
     virtual IOReturn abortDeviceRequests(IOService* forClient = NULL, IOOptionBits options = IOUSBHostIOSource::kAbortAsynchronous, IOReturn withError = kIOReturnAborted);
     
@@ -658,68 +704,48 @@ protected:
 
 #pragma mark Miscellaneous
 public:
+    /*! @functiongroup Provider and state accessors */
+
     /*!
-     * @brief Return the device's address
-     *
-     * @return Current address of the device
+     * @brief   Retrieve the device's address
+     * @return  Current address of the device
      */
     virtual tUSBHostDeviceAddress getAddress() const;
     
     /*!
-     * @brief Return the device's speed
-     *
-     * @return The enumerated speed of the device:
-     * @constant kUSBHostConnectionSpeedLow
-     * @constant kUSBHostConnectionSpeedFull
-     * @constant kUSBHostConnectionSpeedHigh
-     * @constant kUSBHostConnectionSpeedSuper
+     * @brief       Retrieve the device's operational speed
+     * @return      tInternalUSBHostConnectionSpeed
      */
     virtual uint8_t getSpeed() const;
     
     /*!
-     * @brief Return the current frame number of the USB bus
-     *
-     * @description This method will return the current frame number of the USB bus.  This is most useful for
-     * scheduling future isochronous requests.
-     *
-     * @param theTime If not NULL, this will be updated with the current system time
-     *
-     * @return The current frame number
+     * @brief       Return the current frame number of the USB controller
+     * @description This method will return the current frame number of the USB controller, omitting microframe.  This is most useful for scheduling future isochronous requests.
+     * @param       theTime If not NULL, this will be updated with the current system time
+     * @return      The current frame number
      */
     virtual uint64_t getFrameNumber(AbsoluteTime* theTime = NULL);
     
     /*!
-     * @brief Reset and re-emerate the device
-     *
-     * @discussion This function will reset and re-enumerate the USB device.  The current IOUSBHostDevice object and all
-     * of its children will be terminated.  A new IOUSBHostDevice object will be created and registered if the reset
-     * is successful and the previous object has finished terminating.  This function may not be called from the port
-     * workloop thread.
-     *
-     * @return IOReturn result code
+     * @brief       Terminate the device and attempt to reenumerate it
+     * @discussion  This function will reset and attempt to reenumerate the USB device.  The current IOUSBHostDevice object and all of its children will be terminated.  A new IOUSBHostDevice object will be created and registered if the reset is successful and the previous object has finished terminating.  This function may not be called from the port workloop thread.
+     * @return      IOReturn result code
      */
     virtual IOReturn reset();
     
     /*!
-     * @brief Return the current port status
-     *
-     * @discussion This method will return the current port status as a logical OR of bits described by @link tUSBHostPortStatus @\link
-     *
-     * @return port status
+     * @brief       Return the current port status
+     * @discussion  This method will return the current port status as described by @link tUSBHostPortStatus @/link
+     * @return      port status
      */
     virtual uint32_t getPortStatus();
     
     /*!
-     * @brief Allocate a buffer to be used for I/O
-     *
-     * @discussion The underlying host controller hardware may have alignment and fragmentation restrictions.  This
-     * method will return a buffer which is guaranteed to meet the restrictions the host controller may have.
-     *
-     * @param options kIODirectionOut, kIODirectionIn to set the direction of the I/O transfer.
-     *
-     * @param capacity Size of the buffer to allocate
-     *
-     * @return Pointer to the newly allocated memory descriptor or NULL
+     * @brief       Allocate a buffer to be used for I/O
+     * @discussion  This method will allocate an IOBufferMemoryDescriptor optimized for use by the underlying controller hardware.  A buffer allocated by this method will not be bounced to perform DMA operations.
+     * @param       options kIODirectionOut, kIODirectionIn to set the direction of the I/O transfer.
+     * @param       capacity Size of the buffer to allocate
+     * @return      Pointer to an IOBufferMemoryDescriptor if successful, otherwise NULL
      */
     virtual IOBufferMemoryDescriptor* createIOBuffer(IOOptionBits options, mach_vm_size_t capacity);
 
@@ -748,185 +774,6 @@ protected:
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 98);
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 99);
 
-public:
-    // Removed legacy methods
-    
-    // virtual UInt16 GetbcdUSB() __attribute__((deprecated));
-    // Replacement: USBToHost16(getDeviceDescriptor()->bcdUSB);
-    
-    // virtual UInt8  GetDeviceClass() __attribute__((deprecated));
-    // Replacement: getDeviceDescriptor()->bDeviceClass;
-    
-    // virtual UInt8  GetDeviceSubClass() __attribute__((deprecated));
-    // Replacement: getDeviceDescriptor()->bDeviceSubClass
-    
-    // virtual UInt8  GetProtocol() __attribute__((deprecated));
-    // Replacement: getDeviceDescriptor()->bDeviceProtocol
-    
-    // virtual UInt8  GetMaxPacketSize() __attribute__((deprecated));
-    // Replacement: getDeviceDescriptor->bMaxPacketSize0
-    
-    // virtual UInt16 GetVendorID() __attribute__((deprecated));
-    // Replacement: USBToHost16(getDeviceDescriptor()->idVendor)
-    
-    // virtual UInt16 GetProductID() __attribute__((deprecated));
-    // Replacement: USBToHost16(getDeviceDescriptor()->idProduct)
-    
-    // virtual UInt16 GetDeviceRelease() __attribute__((deprecated));
-    // Replacement: USBToHost16(getDeviceDescriptor()->bcdDevice)
-
-    // virtual UInt8  GetNumConfigurations() __attribute__((deprecated));
-    // Replacement: getDeviceDescriptor()->bNumConfigurations
-    
-    // virtual UInt8  GetManufacturerStringIndex() __attribute__((deprecated));
-    // Replacement: getDeviceDescriptor()->iManufacturer
-    
-    // virtual UInt8  GetProductStringIndex() __attribute__((deprecated));
-    // Replacement: getDeviceDescriptor()->iProduct
-
-    // virtual UInt8  GetSerialNumberStringIndex() __attribute__((deprecated));
-    // Replacement: getDeviceDescriptor()->iSerialNumber
-    
-    // virtual IOReturn FindNextInterfaceDescriptor(const IOUSBConfigurationDescriptor* configDescIn,
-    //                                              const IOUSBInterfaceDescriptor*     intfDesc,
-    //                                              const IOUSBFindInterfaceRequest*    request,
-    //                                              IOUSBInterfaceDescriptor**          descOut) __attribute__((deprecated));
-    // Replacement:
-    // ConfigurationDescriptor* confDesc = getConfigurationDescriptor(1);
-    // InterfaceDescriptor* intDesc = NULL;
-    // while((intDesc = getNextInterfaceDescriptor(confDesc, intDesc)) != NULL)
-    // {
-    //     if(intDesc->bInterfaceClass == kMyClass)
-    //     {
-    //         break;
-    //     }
-    // }
-    
-    // virtual const IOUSBConfigurationDescriptor* GetCachedConfigurationDescriptor(UInt8 configIndex) __attribute__((deprecated));
-    // virtual const IOUSBConfigurationDescriptor* GetFullConfigurationDescriptor(UInt8 configIndex) __attribute__((deprecated));
-    // Replacement: getConfigurationDescriptor(configIndex)
-    
-    // virtual IOReturn GetConfigurationDescriptor(UInt8 configValue, void* data, UInt32 len) __attribute__((deprecated));
-    // Replacement: getConfigurationDescriptorWithValue(configValue)
-
-
-    // virtual IOUSBHostInterface* FindNextInterface(IOUSBHostInterface*        current,
-    //                                               IOUSBFindInterfaceRequest* request) __attribute__((deprecated));
-    // virtual OSIterator* CreateInterfaceIterator(IOUSBFindInterfaceRequest* request) __attribute__((deprecated));
-    // Replacement:
-    // OSIterator* iterator = _device->getChildIterator(gIOServicePlane);
-    // OSObject* candidate = NULL;
-    // while(iterator != NULL && (candidate = iterator->getNextObject()) != NULL)
-    // {
-    //     IOUSBHostInterface* interfaceCandidate = OSDynamicCast(IOUSBHostInterface, candidate);
-    //     if(   interfaceCandidate != NULL
-    //        && interfaceCandidate->getInterfaceDescriptor()->bInterfaceClass == kUSBHubClass)
-    //     {
-    //         _interface = interfaceCandidate;
-    //         break;
-    //     }
-    // }
-    // OSSafeReleaseNULL(iterator);
-    
-    // virtual IOReturn SetConfiguration(IOService* forClient, UInt8 configNumber, bool startMatchingInterfaces = true) __attribute__((deprecated));
-    // Replacement: setConfiguration(configNumber, startMatchingInterfaces)
-
-    // No longer supported.
-    // Use getSpeed instead.
-    // virtual UInt8 GetSpeed(void) __attribute__((deprecated));
-
-    // virtual AppleUSBHostController* GetBus(void) __attribute__((deprecated));
-    // Use getFrameNumber and createIOBuffer instead.
-
-    // No longer supported.
-    // Use allocateDownstreamBusCurrent instead.
-    // virtual UInt32 GetBusPowerAvailable(void) __attribute__((deprecated));
-
-    // virtual IOReturn DeviceRequest(IOUSBDevRequest* request,
-    //                                IOUSBCompletion* completion = 0) __attribute__((deprecated));
-    // virtual IOReturn DeviceRequest(IOUSBDevRequestDesc* request,
-    //                                IOUSBCompletion*     completion = 0) __attribute__((deprecated));
-    // virtual IOReturn DeviceRequest(IOUSBDevRequest* request,
-    //                                UInt32           noDataTimeout,
-    //                                UInt32           completionTimeout,
-    //                                IOUSBCompletion* completion = 0) __attribute__((deprecated));
-    // virtual IOReturn DeviceRequest(IOUSBDevRequestDesc* request,
-    //                                UInt32               noDataTimeout,
-    //                                UInt32               completionTimeout,
-    //                                IOUSBCompletion*     completion = 0) __attribute__((deprecated));
-    // Replacment:
-    // deviceRequest(...)
-    
-    // virtual IOReturn GetConfiguration(UInt8* configNumber) __attribute__((deprecated));
-    // Replacment:
-    // uint8_t configNumber  = 0;
-    // StandardUSB::DeviceRequest request;
-    // request.bmRequestType = makeDeviceRequestbmRequestType(kRequestDirectionIn, kRequestTypeStandard, kRequestRecipientDevice);
-    // request.bRequest      = kDeviceRequestGetConfiguration;
-    // request.wValue        = 0;
-    // request.wIndex        = 0;
-    // request.wLength       = sizeof(configNumber);
-    //
-    // uint32_t bytesTransferred = 0;
-    //    
-    // deviceRequest(this, request, &configNumber, bytesTransferred, kUSBHostStandardRequestCompletionTimeout);
-    
-    // virtual IOReturn GetDeviceStatus(USBStatus* status) __attribute__((deprecated));
-    // Replacement:
-    // uint16_t status       = 0;
-    // StandardUSB::DeviceRequest request;
-    // request.bmRequestType = makeDeviceRequestbmRequestType(kRequestDirectionIn, kRequestTypeStandard, kRequestRecipientDevice);
-    // request.bRequest      = kDeviceRequestGetStatus;
-    // request.wValue        = 0;
-    // request.wIndex        = 0;
-    // request.wLength       = sizeof(status);
-    //
-    // uint32_t bytesTransferred = 0;
-    //
-    // deviceRequest(this, request, &status, bytesTransferred, kUSBHostStandardRequestCompletionTimeout);
-    
-    // virtual IOUSBHostPipe* GetPipeZero() __attribute__((deprecated));
-    // virtual IOUSBHostPipe* getPipeZero() __attribute__((deprecated));
-    // Replacement: none.  Use deviceRequest(...) and abortDeviceRequests(...) interfaces to interact with the default endpoint
-
-    // virtual IOReturn GetStringDescriptor(UInt8 index, char* buf, int maxLen, UInt16 lang = 0x409) __attribute__((deprecated));
-    // Replacement: getStringDescriptor(index, languageID)
-    // Use sys/utfconv.h to extract UTF strings from string descriptors:
-    // char stringBuffer[256] = { 0 };
-    // size_t utf8len = 0;
-    // const StringDescriptor* stringDescriptor = getStringDescriptor(index);
-    // if(   stringDescriptor != NULL
-    //    && stringDescriptor->bLength > StandardUSB::kDescriptorSize)
-    // {
-    //     utf8_encodestr(reinterpret_cast<const u_int16_t*>(stringDescriptor->bString), stringDescriptor->bLength - kDescriptorSize,
-    //                    reinterpret_cast<u_int8_t*>(stringBuffer), &utf8len, sizeof(stringBuffer), '/', UTF_LITTLE_ENDIAN);
-    // }
-
-    // virtual const IOUSBDescriptorHeader* FindNextDescriptor(const void* cur, UInt8 descType) __attribute__((deprecated));
-    // Replacement: StandardUSB::getNextDescriptor(getConfigurationDescriptor(currentConfig), cur, descType)
-
-    // virtual IOReturn SuspendDevice(bool suspend) __attribute__((deprecated));
-    // Replacement: forcePower(kPowerStateSuspended, false) or forcePower(kPowerStateOn, false)
-
-    // virtual IOReturn ReEnumerateDevice(UInt32 options) __attribute__((deprecated));
-    // Replacement: reset()
-
-    // virtual IOReturn GetDeviceInformation(UInt32* info) __attribute__((deprecated));
-    // Replacement: getPortStatus()
-
-    // virtual UInt32 RequestExtraPower(UInt32 type, UInt32 requestedPower) __attribute__((deprecated));
-    // virtual IOReturn ReturnExtraPower(UInt32 type, UInt32 returnedPower) __attribute__((deprecated));
-    // TODO: Replacement
-
-    // virtual tUSBHostDeviceAddress GetAddress(void) __attribute__((deprecated));
-    // Replacement: getAddress()
-    
-    // virtual IOReturn ResetDevice() __attribute__((deprecated));
-    // virtual UInt32 GetExtraPowerAllocated(UInt32 type) __attribute__((deprecated));
-    // virtual void ForceIdlePolicy(UInt32 deviceIdleTimeout, UInt32 ioIdleTimeout) __attribute__((deprecated));
-    // void SetBusPowerAvailable(UInt32 newPower) __attribute__((deprecated));
-    // Replacement: none
-
 protected:
     enum
     {
@@ -953,9 +800,13 @@ protected:
     uint32_t                                 _pendingCloseCount;
     
     uint32_t _debugLoggingMask;
+    uint32_t _locationID;
 
     struct tExpansionData
     {
+        OSSet*              _reports;
+        IOStateReporter*    _powerStateReport;
+        IOSimpleReporter*   _idlePolicyReport;
     };
 
     tExpansionData* _expansionData;

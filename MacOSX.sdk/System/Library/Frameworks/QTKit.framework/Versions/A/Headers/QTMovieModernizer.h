@@ -1,14 +1,18 @@
-#ifdef forPublicRelease
 /*
 	File:		QTMovieModernizer.h
 
-	Copyright:	(c) 2013-2014 by Apple Inc. All rights reserved.
+	Copyright:	(c) 2013-2015 by Apple Inc. All rights reserved.
 
 */
-#else // not forPublicRelease
+
 /*
- */
-#endif
+  QTKit has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.  In order to transition your 
+  project from QTKit to AVFoundation please refer to:
+  "Technical Note TN2300 Transitioning QTKit code to AV Foundation".
+*/
 
 #import <Foundation/Foundation.h>
 #import <QTKit/QTKitDefines.h>

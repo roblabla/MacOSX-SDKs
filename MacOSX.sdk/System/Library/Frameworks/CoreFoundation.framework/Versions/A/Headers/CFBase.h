@@ -1,11 +1,20 @@
 /*	CFBase.h
-	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2016, Apple Inc. All rights reserved.
+ 
+	Portions Copyright (c) 2014-2016 Apple Inc. and the Swift project authors
+	Licensed under Apache License v2.0 with Runtime Library Exception
+	See http://swift.org/LICENSE.txt for license information
+	See http://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
 */
 
 #if !defined(__COREFOUNDATION_CFBASE__)
 #define __COREFOUNDATION_CFBASE__ 1
 
+#if DEPLOYMENT_RUNTIME_SWIFT
+#include <CoreFoundation/TargetConditionals.h>
+#else
 #include <TargetConditionals.h>
+#endif
 #include <CoreFoundation/CFAvailability.h>
 
 #if (defined(__CYGWIN32__) || defined(_WIN32)) && !defined(__WIN32__)
@@ -68,14 +77,18 @@
     #include <MacTypes.h>
   #endif
 #else
-  #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+  #if ((TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) && !DEPLOYMENT_RUNTIME_SWIFT
     #include <libkern/OSTypes.h>
   #endif
 #endif
 
 #if !defined(__MACTYPES__)
 #if !defined(_OS_OSTYPES_H)
+#if DEPLOYMENT_RUNTIME_SWIFT
+    typedef _Bool                   Boolean;
+#else
     typedef unsigned char           Boolean;
+#endif
     typedef unsigned char           UInt8;
     typedef signed char             SInt8;
     typedef unsigned short          UInt16;
@@ -271,14 +284,14 @@ CF_EXTERN_C_BEGIN
 
 
 #if !__has_feature(nullability)
-#ifndef __nullable
-#define __nullable
+#ifndef _Nullable
+#define _Nullable
 #endif
-#ifndef __nonnull
-#define __nonnull
+#ifndef _Nonnull
+#define _Nonnull
 #endif
-#ifndef __null_unspecified
-#define __null_unspecified
+#ifndef _Null_unspecified
+#define _Null_unspecified
 #endif
 #endif
 
@@ -296,6 +309,17 @@ CF_EXTERN_C_BEGIN
 # define CF_SWIFT_NAME(_name)
 #endif
 
+#if __has_attribute(noescape)
+#define CF_NOESCAPE __attribute__((noescape))
+#else
+#define CF_NOESCAPE
+#endif
+
+#if __has_attribute(not_tail_called)
+#define CF_NO_TAIL_CALL __attribute__((not_tail_called))
+#else
+#define CF_NO_TAIL_CALL
+#endif
 
 #if !__has_feature(objc_generics_variance)
 #ifndef __covariant
@@ -388,6 +412,15 @@ CF_EXPORT double kCFCoreFoundationVersionNumber;
 #define kCFCoreFoundationVersionNumber10_10_1   1151.16
 #define kCFCoreFoundationVersionNumber10_10_2   1152
 #define kCFCoreFoundationVersionNumber10_10_3   1153.18
+#define kCFCoreFoundationVersionNumber10_10_4   1153.18
+#define kCFCoreFoundationVersionNumber10_10_5   1153.18
+#define kCFCoreFoundationVersionNumber10_10_Max 1199
+#define kCFCoreFoundationVersionNumber10_11     1253
+#define kCFCoreFoundationVersionNumber10_11_1   1255.1
+#define kCFCoreFoundationVersionNumber10_11_2   1256.14
+#define kCFCoreFoundationVersionNumber10_11_3   1256.14
+#define kCFCoreFoundationVersionNumber10_11_4   1258.1
+#define kCFCoreFoundationVersionNumber10_11_Max 1299
 #endif
 
 #if TARGET_OS_IPHONE
@@ -410,6 +443,15 @@ CF_EXPORT double kCFCoreFoundationVersionNumber;
 #define kCFCoreFoundationVersionNumber_iOS_8_0 1140.1
 #define kCFCoreFoundationVersionNumber_iOS_8_1 1141.14
 #define kCFCoreFoundationVersionNumber_iOS_8_2 1142.16
+#define kCFCoreFoundationVersionNumber_iOS_8_3 1144.17
+#define kCFCoreFoundationVersionNumber_iOS_8_4 1145.15
+#define kCFCoreFoundationVersionNumber_iOS_8_x_Max 1199
+#define kCFCoreFoundationVersionNumber_iOS_9_0 1240.1
+#define kCFCoreFoundationVersionNumber_iOS_9_1 1241.11
+#define kCFCoreFoundationVersionNumber_iOS_9_2 1242.13
+#define kCFCoreFoundationVersionNumber_iOS_9_3 1242.13
+#define kCFCoreFoundationVersionNumber_iOS_9_4 1280.38
+#define kCFCoreFoundationVersionNumber_iOS_9_x_Max 1299
 #endif
 
 #if __LLP64__
@@ -617,11 +659,14 @@ CFTypeRef CFRetain(CFTypeRef cf);
 CF_EXPORT
 void CFRelease(CFTypeRef cf);
 
+#if DEPLOYMENT_RUNTIME_SWIFT
+#else
 CF_EXPORT
 CFTypeRef CFAutorelease(CFTypeRef CF_RELEASES_ARGUMENT arg) CF_AVAILABLE(10_9, 7_0);
 
 CF_EXPORT
 CFIndex CFGetRetainCount(CFTypeRef cf);
+#endif
 
 CF_EXPORT
 Boolean CFEqual(CFTypeRef cf1, CFTypeRef cf2);
@@ -637,7 +682,7 @@ CFAllocatorRef CFGetAllocator(CFTypeRef cf);
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
-// This function is unavailable in ARC mode.
+// This function is unavailable in ARC mode. On OS X 10.12 and later, this function simply returns the argument.
 CF_EXPORT
 CFTypeRef CFMakeCollectable(CFTypeRef cf) CF_AUTOMATED_REFCOUNT_UNAVAILABLE;
 

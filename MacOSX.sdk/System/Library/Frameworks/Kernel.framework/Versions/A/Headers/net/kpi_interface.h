@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2004-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -58,7 +58,6 @@ struct ifnet_demux_desc;
 /*!
 	@enum Interface Families
 	@abstract Constants defining interface families.
-	@discussion
 	@constant IFNET_FAMILY_ANY Match interface of any family type.
 	@constant IFNET_FAMILY_LOOPBACK A software loopback interface.
 	@constant IFNET_FAMILY_ETHERNET An Ethernet interface.
@@ -107,7 +106,6 @@ typedef u_int32_t ifnet_family_t;
 /*!
 	@enum BPF tap mode
 	@abstract Constants defining interface families.
-	@discussion
 	@constant BPF_MODE_DISABLED Disable bpf.
 	@constant BPF_MODE_INPUT Enable input only.
 	@constant BPF_MODE_OUTPUT Enable output only.
@@ -136,7 +134,6 @@ typedef u_int32_t protocol_family_t;
 /*!
 	@enum Interface Abilities
 	@abstract Constants defining interface offload support.
-	@discussion
 	@constant IFNET_CSUM_IP Hardware will calculate IPv4 checksums.
 	@constant IFNET_CSUM_TCP Hardware will calculate TCP checksums.
 	@constant IFNET_CSUM_UDP Hardware will calculate UDP checksums.
@@ -192,7 +189,9 @@ enum {
 	IFNET_MULTIPAGES	= 0x00100000,
 	IFNET_TSO_IPV4		= 0x00200000,
 	IFNET_TSO_IPV6		= 0x00400000,
-	IFNET_TX_STATUS		= 0x00800000
+	IFNET_TX_STATUS		= 0x00800000,
+	IFNET_HW_TIMESTAMP	= 0x01000000,
+	IFNET_SW_TIMESTAMP	= 0x02000000
 };
 /*!
 	@typedef ifnet_offload_t
@@ -242,8 +241,6 @@ typedef errno_t (*ifnet_output_func)(ifnet_t interface, mbuf_t data);
 		you need to communicate with your kext using an ioctl, please
 		use SIOCSIFKPI and SIOCGIFKPI.
 	@param interface The interface the ioctl is being sent to.
-	@param proto_family The protocol family to handle the ioctl, may be
-		zero for no protocol_family.
 	@param cmd The ioctl command.
 	@param data A pointer to any data related to the ioctl.
  */
@@ -304,8 +301,6 @@ typedef errno_t (*ifnet_demux_func)(ifnet_t interface, mbuf_t packet,
 	@discussion ifnet_event_func is called when an event occurs on a
 		specific interface.
 	@param interface The interface the event occurred on.
-	@param event_ptr Pointer to a kern_event structure describing the
-		event.
  */
 typedef void (*ifnet_event_func)(ifnet_t interface, const struct kev_msg *msg);
 
@@ -324,9 +319,9 @@ typedef void (*ifnet_event_func)(ifnet_t interface, const struct kev_msg *msg);
 		protocol's pre-output function.
 	@param frame_type The frame type as determined by the protocol's
 		pre-output function.
-	@param prepend_len The length of prepended bytes to the mbuf.
+	@discussion prepend_len The length of prepended bytes to the mbuf.
 		(ONLY used if KPI_INTERFACE_EMBEDDED is defined to 1)
-	@param postpend_len The length of the postpended bytes to the mbuf.
+	@discussion postpend_len The length of the postpended bytes to the mbuf.
 		(ONLY used if KPI_INTERFACE_EMBEDDED is defined to 1)
 	@result
 		If the result is zero, processing will continue normally.
@@ -390,7 +385,7 @@ typedef errno_t (*ifnet_del_proto_func)(ifnet_t interface,
 		To prevent an address from being added to your multicast list,
 		return EADDRNOTAVAIL. If you don't know how to parse/translate
 		the address, return EOPNOTSUPP.
-	@param The interface.
+	@param interface The interface.
 	@param mcast The multicast address.
 	@result
 		Zero upon success, EADDRNOTAVAIL on invalid multicast,
@@ -405,7 +400,7 @@ typedef errno_t (*ifnet_check_multi)(ifnet_t interface,
 		a specific protocol on a specific interface. This function is
 		registered on an interface using ifnet_attach_protocol.
 	@param ifp The interface the packet was received on.
-	@param protocol_family The protocol of the packet received.
+	@param protocol The protocol of the packet received.
 	@param packet The packet being input.
 	@param header The frame header.
 	@result
@@ -427,7 +422,7 @@ typedef errno_t (*proto_media_input)(ifnet_t ifp, protocol_family_t protocol,
 		individual packet. The frame header can be retrieved using
 		mbuf_pkthdr_header.
 	@param ifp The interface the packet was received on.
-	@param protocol_family The protocol of the packet received.
+	@param protocol The protocol of the packet received.
 	@param packet The packet being input.
 	@result
 		If the result is zero, the caller will assume the packets were
@@ -445,7 +440,7 @@ typedef errno_t (*proto_media_input_v2)(ifnet_t ifp, protocol_family_t protocol,
 		opportunity to specify the media specific frame type and
 		destination.
 	@param ifp The interface the packet will be sent on.
-	@param protocol_family The protocol of the packet being sent
+	@param protocol The protocol of the packet being sent
 		(PF_INET/etc...).
 	@param packet The packet being sent.
 	@param dest The protocol level destination address.
@@ -467,8 +462,8 @@ typedef errno_t (*proto_media_preout)(ifnet_t ifp, protocol_family_t protocol,
 	@discussion proto_media_event is called to notify this layer of
 		interface specific events.
 	@param ifp The interface.
-	@param protocol_family The protocol family.
-	@param kev_msg The event.
+	@param protocol The protocol family.
+	@param event The event.
  */
 typedef void (*proto_media_event)(ifnet_t ifp, protocol_family_t protocol,
     const struct kev_msg *event);
@@ -488,7 +483,7 @@ typedef void (*proto_media_event)(ifnet_t ifp, protocol_family_t protocol,
 		you need to communicate with your kext using an ioctl, please
 		use SIOCSIFKPI and SIOCGIFKPI.
 	@param ifp The interface.
-	@param protocol_family The protocol family.
+	@param protocol The protocol family.
 	@param command The ioctl command.
 	@param argument The argument to the ioctl.
 	@result
@@ -502,7 +497,7 @@ typedef errno_t (*proto_media_ioctl)(ifnet_t ifp, protocol_family_t protocol,
 	@discussion proto_media_detached notifies you that your protocol
 		has been detached.
 	@param ifp The interface.
-	@param protocol_family The protocol family.
+	@param protocol The protocol family.
 	@result
 		See the discussion.
  */
@@ -530,8 +525,6 @@ typedef errno_t (*proto_media_resolve_multi)(ifnet_t ifp,
 		function should inspect the parameters and transmit an arp
 		packet using the information passed in.
 	@param ifp The interface the arp packet should be sent on.
-	@param protocol_family The protocol family of the addresses
-		(PF_INET).
 	@param arpop The arp operation (usually ARPOP_REQUEST or
 		ARPOP_REPLY).
 	@param sender_hw The value to use for the sender hardware
@@ -1054,7 +1047,6 @@ extern errno_t ifnet_get_tso_mtu(ifnet_t interface, sa_family_t family,
 /*!
 	@enum Interface wake properties
 	@abstract Constants defining Interface wake properties.
-	@discussion
 	@constant IFNET_WAKE_ON_MAGIC_PACKET Wake on Magic Packet.
 */
 enum {
@@ -1427,7 +1419,7 @@ u_int32_t packets_out, u_int32_t bytes_out, u_int32_t errors_out);
 		The one exception would be the case where a kext wants to zero
 		all of the counters.
 	@param interface The interface.
-	@param counts The new stats values.
+	@param stats The new stats values.
 	@result 0 on success otherwise the errno error.
  */
 extern errno_t ifnet_set_stat(ifnet_t interface,
@@ -1550,11 +1542,10 @@ extern errno_t ifnet_lladdr_copy_bytes(ifnet_t interface, void *lladdr,
 	@param interface The interface.
 	@param addr A buffer to copy the broadcast address in to.
 	@param bufferlen The length of the buffer at addr.
-	@param addr_len On return, the length of the broadcast address.
-	@param lladdr_len The length, in bytes, of the link layer address.
+	@param out_len On return, the length of the broadcast address.
  */
 extern errno_t ifnet_llbroadcast_copy_bytes(ifnet_t interface, void *addr,
-    size_t bufferlen, size_t *addr_len);
+    size_t bufferlen, size_t *out_len);
 
 
 /*!
@@ -1562,7 +1553,7 @@ extern errno_t ifnet_llbroadcast_copy_bytes(ifnet_t interface, void *addr,
 	@discussion Resolves a multicast address for an attached protocol to
 		a link-layer address. If a link-layer address is passed in, the
 		interface will verify that it is a valid multicast address.
-	@param interface The interface.
+	@param ifp The interface.
 	@param proto_addr A protocol address to be converted to a link-layer
 		address.
 	@param ll_addr Storage for the resulting link-layer address.
@@ -1626,7 +1617,7 @@ extern errno_t ifnet_remove_multicast(ifmultiaddr_t multicast);
 		ifnet_free_multicast_list will decrement the reference counts
 		and free the array.
 	@param interface The interface.
-	@param multicasts A pointer to a NULL terminated array of references
+	@param addresses A pointer to a NULL terminated array of references
 		to the multicast addresses.
 	@result 0 on success otherwise the errno error.
  */
@@ -1639,7 +1630,6 @@ extern errno_t ifnet_get_multicast_list(ifnet_t interface,
 		ifnet_get_multicast_list. Decrements the refcount on each
 		multicast address and frees the array.
 	@param multicasts An array of references to the multicast addresses.
-	@result 0 on success otherwise the errno error.
  */
 extern void ifnet_free_multicast_list(ifmultiaddr_t *multicasts);
 
@@ -1648,7 +1638,7 @@ extern void ifnet_free_multicast_list(ifmultiaddr_t *multicasts);
 	@discussion Find an interface by the name including the unit number.
 		Caller must call ifnet_release on any non-null interface return
 		value.
-	@param name The name of the interface, including any unit number
+	@param ifname The name of the interface, including any unit number
 		(i.e. "en0").
 	@param interface A pointer to an interface reference. This will be
 		filled in if a matching interface is found.
@@ -1881,4 +1871,3 @@ extern ifnet_t ifmaddr_ifnet(ifmultiaddr_t ifmaddr);
 __END_DECLS
 
 #endif /* __KPI_INTERFACE__ */
-

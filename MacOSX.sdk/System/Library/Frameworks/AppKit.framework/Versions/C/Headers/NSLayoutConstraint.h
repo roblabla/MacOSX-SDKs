@@ -1,7 +1,7 @@
 /*
 	NSLayoutConstraint.h
 	Application Kit
-	Copyright (c) 2009-2015, Apple Inc.
+	Copyright (c) 2009-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -36,8 +36,8 @@ typedef NS_ENUM(NSInteger, NSLayoutAttribute) {
     NSLayoutAttributeHeight,
     NSLayoutAttributeCenterX,
     NSLayoutAttributeCenterY,
-    NSLayoutAttributeBaseline,
-    NSLayoutAttributeLastBaseline = NSLayoutAttributeBaseline,
+    NSLayoutAttributeLastBaseline,
+    NSLayoutAttributeBaseline NS_SWIFT_UNAVAILABLE("Use '.lastBaseline' instead") = NSLayoutAttributeLastBaseline,
     NSLayoutAttributeFirstBaseline NS_ENUM_AVAILABLE_MAC(10_11),
     
     NSLayoutAttributeNotAnAttribute = 0
@@ -53,7 +53,7 @@ typedef NS_OPTIONS(NSUInteger, NSLayoutFormatOptions) {
     NSLayoutFormatAlignAllTrailing = (1 << NSLayoutAttributeTrailing),
     NSLayoutFormatAlignAllCenterX = (1 << NSLayoutAttributeCenterX),
     NSLayoutFormatAlignAllCenterY = (1 << NSLayoutAttributeCenterY),
-    NSLayoutFormatAlignAllBaseline = (1 << NSLayoutAttributeBaseline),
+    NSLayoutFormatAlignAllBaseline NS_SWIFT_UNAVAILABLE("Use '.alignAllLastBaseline' instead") = (1 << NSLayoutAttributeBaseline),
     NSLayoutFormatAlignAllLastBaseline = NSLayoutFormatAlignAllBaseline,
     NSLayoutFormatAlignAllFirstBaseline NS_ENUM_AVAILABLE_MAC(10_11) = (1 << NSLayoutAttributeFirstBaseline),
     
@@ -140,12 +140,13 @@ APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSS
 
 /* Create constraints explicitly.  Constraints are of the form "view1.attr1 = view2.attr2 * multiplier + constant" 
  If your equation does not have a second view and attribute, use nil and NSLayoutAttributeNotAnAttribute.
+ Use of this method is not recommended. Constraints should be created using anchor objects on views and layout guides.
  */
 + (instancetype)constraintWithItem:(id)view1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toItem:(nullable id)view2 attribute:(NSLayoutAttribute)attr2 multiplier:(CGFloat)multiplier constant:(CGFloat)c;
 
 /* If a constraint's priority level is less than NSLayoutPriorityRequired, then it is optional.  Higher priority constraints are met before lower priority constraints.
  Constraint satisfaction is not all or nothing.  If a constraint 'a == b' is optional, that means we will attempt to minimize 'abs(a-b)'.
- This property may only be modified as part of initial set up.  An exception will be thrown if it is set after a constraint has been added to a view.
+ This property may only be modified as part of initial set up or when optional.  After a constraint has been added to a view, an exception will be thrown if the priority is changed from/to NSLayoutPriorityRequired.
  */
 @property NSLayoutPriority priority;
 
@@ -156,12 +157,19 @@ APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSS
 
 /* accessors
  firstItem.firstAttribute {==,<=,>=} secondItem.secondAttribute * multiplier + constant
+ Access to these properties is not recommended. Use the `firstAnchor` and `secondAnchor` properties instead.
  */
-@property (readonly, assign) id firstItem;
+@property (readonly, assign, nullable) id firstItem;
 @property (readonly) NSLayoutAttribute firstAttribute;
-@property (readonly) NSLayoutRelation relation;
 @property (nullable, readonly, assign) id secondItem;
 @property (readonly) NSLayoutAttribute secondAttribute;
+
+/* accessors
+ firstAnchor{==,<=,>=} secondAnchor * multiplier + constant
+ */
+@property (readonly, copy) NSLayoutAnchor *firstAnchor NS_AVAILABLE(10_12, 10_0);
+@property (readonly, copy, nullable) NSLayoutAnchor *secondAnchor NS_AVAILABLE(10_12, 10_0);
+@property (readonly) NSLayoutRelation relation;
 @property (readonly) CGFloat multiplier;
 
 /* Unlike the other properties, the constant may be modified after constraint creation.  Setting the constant on an existing constraint performs much better than removing the constraint and adding a new one that's just like the old but for having a new constant.
@@ -245,7 +253,7 @@ APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSS
 
 @interface NSView (NSConstraintBasedLayoutCoreMethods) 
 - (void)updateConstraintsForSubtreeIfNeeded NS_AVAILABLE_MAC(10_7);
-- (void)updateConstraints NS_AVAILABLE_MAC(10_7);
+- (void)updateConstraints NS_AVAILABLE_MAC(10_7) NS_REQUIRES_SUPER;
 @property BOOL needsUpdateConstraints NS_AVAILABLE_MAC(10_7);
 
 - (void)layoutSubtreeIfNeeded NS_AVAILABLE_MAC(10_7);
@@ -313,7 +321,7 @@ APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSS
  
  Note that not all views have an intrinsicContentSize.  A horizontal slider has an intrinsic height, but no intrinsic width - the slider artwork has no intrinsic best width.  A horizontal NSSlider returns (NSViewNoIntrinsicMetric, <slider height>) for intrinsicContentSize.  An NSBox returns (NSViewNoIntrinsicMetric, NSViewNoIntrinsicMetric).  The _intrinsic_ content size is concerned only with data that is in the view itself, not in other views.
  */
-APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric; // Deprecated. Use NSViewNoIntrinsicMetric.
+APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric NS_SWIFT_UNAVAILABLE("Use 'NSViewNoIntrinsicMetric' instead"); // Deprecated. Use NSViewNoIntrinsicMetric.
 APPKIT_EXTERN const CGFloat NSViewNoIntrinsicMetric NS_AVAILABLE_MAC(10_11); // -1
 
 @property (readonly) NSSize intrinsicContentSize NS_AVAILABLE_MAC(10_7);

@@ -1,7 +1,7 @@
 /*
 	NSFontDescriptor.h
 	Application Kit
-	Copyright (c) 2003-2015, Apple Inc.
+	Copyright (c) 2003-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -77,7 +77,7 @@ enum {
 @property (nullable, readonly, copy) NSAffineTransform *matrix;
 @property (readonly) NSFontSymbolicTraits symbolicTraits;
 
-- (nullable id)objectForKey:(NSString *)anAttribute;
+- (nullable id)objectForKey:(NSString *)attribute;
 
 @property (readonly, copy) NSDictionary<NSString *, id> *fontAttributes;
 

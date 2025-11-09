@@ -1,5 +1,5 @@
 /*	CFSet.h
-	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2016, Apple Inc. All rights reserved.
 */
 /*!
         @header CFSet
@@ -398,7 +398,7 @@ void CFSetGetValues(CFSetRef theSet, const void **values);
 		undefined.
 */
 CF_EXPORT
-void CFSetApplyFunction(CFSetRef theSet, CFSetApplierFunction applier, void *context);
+void CFSetApplyFunction(CFSetRef theSet, CFSetApplierFunction CF_NOESCAPE applier, void *context);
 
 /*!
 	@function CFSetAddValue

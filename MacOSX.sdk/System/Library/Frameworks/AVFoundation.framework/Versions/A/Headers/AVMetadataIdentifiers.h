@@ -77,6 +77,7 @@ AVF_EXPORT NSString *const AVMetadataIdentifierQuickTimeUserDataTaggedCharacteri
 
 // ISO UserData (includes 3GPP)
 AVF_EXPORT NSString *const AVMetadataIdentifierISOUserDataCopyright                             NS_AVAILABLE(10_10, 8_0);
+AVF_EXPORT NSString *const AVMetadataIdentifierISOUserDataDate                                  NS_AVAILABLE(10_12, 10_0);
 AVF_EXPORT NSString *const AVMetadataIdentifierISOUserDataTaggedCharacteristic                  NS_AVAILABLE(10_10, 8_0);
 AVF_EXPORT NSString *const AVMetadataIdentifier3GPUserDataCopyright                             NS_AVAILABLE(10_10, 8_0);
 AVF_EXPORT NSString *const AVMetadataIdentifier3GPUserDataAuthor                                NS_AVAILABLE(10_10, 8_0);

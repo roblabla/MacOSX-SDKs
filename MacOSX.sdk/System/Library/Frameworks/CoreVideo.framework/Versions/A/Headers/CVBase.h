@@ -2,7 +2,7 @@
  *  CVBase.h
  *  CoreVideo
  *
- *  Copyright (c) 2004-2015 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2016 Apple Inc. All rights reserved.
  *
  */
  
@@ -52,8 +52,16 @@
 #define __AVAILABILITY_INTERNAL__MAC_10_11        __AVAILABILITY_INTERNAL_WEAK_IMPORT
 #endif
 
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_12
+#define __AVAILABILITY_INTERNAL__MAC_10_12        __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
 #ifndef __AVAILABILITY_INTERNAL__IPHONE_9_0
 #define __AVAILABILITY_INTERNAL__IPHONE_9_0        __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_10_0
+#define __AVAILABILITY_INTERNAL__IPHONE_10_0        __AVAILABILITY_INTERNAL_WEAK_IMPORT
 #endif
 
 #include <CoreFoundation/CFBase.h>
@@ -188,7 +196,7 @@ typedef struct CVSMPTETime    CVSMPTETime;
     @constant       kCVSMPTETimeType5994
                         59.94 Frame
 */
-enum
+typedef CF_ENUM(uint32_t, CVSMPTETimeType)
 {
     kCVSMPTETimeType24        = 0,
     kCVSMPTETimeType25        = 1,
@@ -208,14 +216,14 @@ enum
     @constant       kCVSMPTETimeRunning
                         Time is running.
 */
-enum
+typedef CF_OPTIONS(uint32_t, CVSMPTETimeFlags)
 {
     kCVSMPTETimeValid     = (1L << 0),
     kCVSMPTETimeRunning   = (1L << 1)
 };
 
 
-enum {
+typedef CF_OPTIONS(int32_t, CVTimeFlags) {
     kCVTimeIsIndefinite = 1 << 0
 };
 
@@ -267,7 +275,7 @@ typedef struct
 } CVTimeStamp; 
 
 // Flags for the CVTimeStamp structure
-enum
+typedef CF_OPTIONS(uint64_t, CVTimeStampFlags)
 {
     kCVTimeStampVideoTimeValid              = (1L << 0),
     kCVTimeStampHostTimeValid               = (1L << 1),
@@ -277,14 +285,11 @@ enum
     
     // There are flags for each field to make it easier to detect interlaced vs progressive output
     kCVTimeStampTopField                    = (1L << 16),
-    kCVTimeStampBottomField                 = (1L << 17)
-};
+    kCVTimeStampBottomField                 = (1L << 17),
 
-//	Some commonly used combinations of timestamp flags
-enum
-{
-    kCVTimeStampVideoHostTimeValid   = (kCVTimeStampVideoTimeValid | kCVTimeStampHostTimeValid),
-    kCVTimeStampIsInterlaced	     = (kCVTimeStampTopField | kCVTimeStampBottomField)
+    // Some commonly used combinations of timestamp flags
+    kCVTimeStampVideoHostTimeValid          = (kCVTimeStampVideoTimeValid | kCVTimeStampHostTimeValid),
+    kCVTimeStampIsInterlaced                = (kCVTimeStampTopField | kCVTimeStampBottomField)
 };
 
 CV_EXPORT const CVTime kCVZeroTime;

@@ -16,6 +16,11 @@
 #define kLAOptionUserFallback                               1
 #define kLAOptionAuthenticationReason                       2
 
+// Credential types
+#define kLACredentialTypePasscode                          -1
+#define kLACredentialTypePassphrase                        -2
+#define kLACredentialCTKPIN                                -3
+
 // Error codes
 #define kLAErrorAuthenticationFailed                       -1
 #define kLAErrorUserCancel                                 -2

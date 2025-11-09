@@ -1,7 +1,7 @@
 /*
     NSPersistentStore.h
     Core Data
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -21,10 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSPersistentStoreRequest;
 @class NSPersistentStoreCoordinator;
 
-NS_CLASS_AVAILABLE(10_5, 3_0)
+API_AVAILABLE(macosx(10.5),ios(3.0))
 @interface NSPersistentStore : NSObject {
+#if (!__OBJC2__)
     @private
-    __weak NSPersistentStoreCoordinator *_coordinator;
+    NSPersistentStoreCoordinator *_coordinator;
     NSString *_configurationName;
     NSURL *_url;
     NSDictionary *_options;
@@ -38,7 +39,11 @@ NS_CLASS_AVAILABLE(10_5, 3_0)
     } _flags;
 	void *_temporaryIDClass;
 	id _externalRecordsMonitor;
-	void *_reserved3;
+	int32_t _activeRequests;
+#if __LP64__
+    int32_t _reserved32;
+#endif
+#endif
 }
 
 /* Get metadata from the persistent store at url. Must be overriden by subclasses.
@@ -52,7 +57,7 @@ NS_CLASS_AVAILABLE(10_5, 3_0)
 
 /* Returns the NSMigrationManager class optimized for this store class.  Subclasses of NSPersistentStore can override this to provide a custom migration manager subclass (eg to take advantage of store-specific functionality to improve migration performance).
  */
-+ (Class)migrationManagerClass NS_AVAILABLE(10_6, 3_0);
++ (Class)migrationManagerClass API_AVAILABLE(macosx(10.6),ios(3.0));
 
 /* the designated initializer for object stores. */
 - (instancetype)initWithPersistentStoreCoordinator:(nullable NSPersistentStoreCoordinator *)root configurationName:(nullable NSString *)name URL:(NSURL *)url options:(nullable NSDictionary *)options NS_DESIGNATED_INITIALIZER;

@@ -10,6 +10,7 @@
 #include <CoreGraphics/CGAffineTransform.h>
 #include <CoreGraphics/CGBitmapContext.h>
 #include <CoreGraphics/CGColor.h>
+#include <CoreGraphics/CGColorConversionInfo.h>
 #include <CoreGraphics/CGColorSpace.h>
 #include <CoreGraphics/CGContext.h>
 #include <CoreGraphics/CGDataConsumer.h>
@@ -51,4 +52,4 @@
 #include <CoreGraphics/CGWindowLevel.h>
 #include <CoreGraphics/CGDirectDisplayMetal.h>
 
-#endif	/* COREGRAPHICS_H_ */
+#endif  /* COREGRAPHICS_H_ */

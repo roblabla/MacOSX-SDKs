@@ -33,8 +33,7 @@ CORE_IMAGE_EXPORT NSString *const kCIFilterGeneratorExportedKeyName;
 NS_CLASS_AVAILABLE_MAC(10_5)
 @interface CIFilterGenerator : NSObject <NSSecureCoding, NSCopying, CIFilterConstructor>
 {
-    @private
-    struct CIFilterGeneratorStruct *__strong _filterGeneratorStruct;
+    @private struct CIFilterGeneratorStruct *_filterGeneratorStruct;
 }
 
 /** This creates an empty CIFilterGenerator in which you connect filters and images. */
@@ -77,7 +76,7 @@ NS_CLASS_AVAILABLE_MAC(10_5)
  @param      targetKey The key that you assigned the source object to.
 */
 - (void)disconnectObject:(id)sourceObject
-                 withKey:(NSString *)key
+                 withKey:(NSString *)sourceKey
                 toObject:(id)targetObject
                  withKey:(NSString *)targetKey;
 

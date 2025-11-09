@@ -1,12 +1,12 @@
 /*
 	NSFileVersion.h
-	Copyright (c) 2010-2015, Apple Inc.
+	Copyright (c) 2010-2016, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray<ObjectType>, NSDate, NSDictionary, NSError, NSString, NSURL;
+@class NSArray<ObjectType>, NSDate, NSDictionary, NSError, NSString, NSURL, NSPersonNameComponents;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -64,7 +64,7 @@ When a version is successfully downloaded, its contents are cached locally, and 
  
 If you need to get all versions for a document, both local and non-local, you should use an NSFilePresenter that implements -presentedItemDidGainVersion: and -presentedItemDidLoseVersion: and invoke +[NSFileCoordinator addFilePresenter:], +[NSFileVersion otherVersionsOfItemAtURL:], and this method within a single coordinated read.
 */
-+ (void)getNonlocalVersionsOfItemAtURL:(NSURL *)url completionHandler:(void (^)(NSArray<NSFileVersion *> * __nullable nonlocalFileVersions, NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 8_0);
++ (void)getNonlocalVersionsOfItemAtURL:(NSURL *)url completionHandler:(void (^)(NSArray<NSFileVersion *> * _Nullable nonlocalFileVersions, NSError * _Nullable error))completionHandler NS_AVAILABLE(10_10, 8_0);
 
 /* For a file located by a URL, return the NSFileVersion identified by a persistent identifier of the sort returned by -persistentIdentifier, or nil if the version no longer exists.
 */

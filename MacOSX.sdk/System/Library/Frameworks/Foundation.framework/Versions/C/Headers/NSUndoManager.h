@@ -1,5 +1,5 @@
 /*	NSUndoManager.h
-	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2016, Apple Inc. All rights reserved.
 */
 
 
@@ -10,6 +10,8 @@
 
 #import <Foundation/NSObject.h>
 #include <stdint.h>
+#import <Foundation/NSNotification.h>
+#import <Foundation/NSRunLoop.h>
 
 @class NSArray<ObjectType>;
 @class NSString;
@@ -63,7 +65,7 @@ NS_CLASS_AVAILABLE(10_0, 3_0)
 
         /* Run Loop Modes */
 
-@property (copy) NSArray<NSString *> *runLoopModes;
+@property (copy) NSArray<NSRunLoopMode> *runLoopModes;
 
         /* Undo/Redo */
 
@@ -152,21 +154,21 @@ FOUNDATION_EXPORT NSString * const NSUndoManagerGroupIsDiscardableKey NS_AVAILAB
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSUndoManagerCheckpointNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerCheckpointNotification NS_AVAILABLE(10_0, 3_0);
     // This is called before an undo group is begun or ended so any
     // clients that need to lazily register undos can do so in the
     // correct group.
 
-FOUNDATION_EXPORT NSString * const NSUndoManagerWillUndoChangeNotification NS_AVAILABLE(10_0, 3_0);
-FOUNDATION_EXPORT NSString * const NSUndoManagerWillRedoChangeNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerWillUndoChangeNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerWillRedoChangeNotification NS_AVAILABLE(10_0, 3_0);
 
-FOUNDATION_EXPORT NSString * const NSUndoManagerDidUndoChangeNotification NS_AVAILABLE(10_0, 3_0);
-FOUNDATION_EXPORT NSString * const NSUndoManagerDidRedoChangeNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerDidUndoChangeNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerDidRedoChangeNotification NS_AVAILABLE(10_0, 3_0);
 
-FOUNDATION_EXPORT NSString * const NSUndoManagerDidOpenUndoGroupNotification NS_AVAILABLE(10_0, 3_0);
-FOUNDATION_EXPORT NSString * const NSUndoManagerWillCloseUndoGroupNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerDidOpenUndoGroupNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerWillCloseUndoGroupNotification NS_AVAILABLE(10_0, 3_0);
 
 // This notification is sent after an undo group closes. It should be safe to undo at this time.
-FOUNDATION_EXPORT NSString * const NSUndoManagerDidCloseUndoGroupNotification NS_AVAILABLE(10_7, 5_0);
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerDidCloseUndoGroupNotification NS_AVAILABLE(10_7, 5_0);
 
 NS_ASSUME_NONNULL_END

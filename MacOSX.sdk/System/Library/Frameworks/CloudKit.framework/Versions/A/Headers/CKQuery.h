@@ -40,7 +40,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic, readonly, copy) NSString *recordType;
 @property (nonatomic, readonly, copy) NSPredicate *predicate;
 
-@property (nonatomic, copy, nullable) NSArray <NSSortDescriptor *> *sortDescriptors;
+@property (nonatomic, copy, nullable) NSArray<NSSortDescriptor *> *sortDescriptors;
 
 @end
 NS_ASSUME_NONNULL_END

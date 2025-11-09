@@ -34,4 +34,7 @@
 #import <GameController/GCExtendedGamepad.h>
 #import <GameController/GCExtendedGamepadSnapshot.h>
 
+#import <GameController/GCMicroGamepad.h>
+#import <GameController/GCMicroGamepadSnapshot.h>
+
 #import <GameController/GCController.h>

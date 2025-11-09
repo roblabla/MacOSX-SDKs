@@ -1,17 +1,16 @@
 //
 //  SCNNode.h
 //
-//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <QuartzCore/QuartzCore.h>
 #import <SceneKit/SCNAnimation.h>
 #import <SceneKit/SCNBoundingVolume.h>
 #import <SceneKit/SCNAction.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class CIFilter;
 @class SCNLight;
 @class SCNCamera;
 @class SCNGeometry;
@@ -21,20 +20,30 @@ NS_ASSUME_NONNULL_BEGIN
 @class SCNPhysicsBody;
 @class SCNPhysicsField;
 @class SCNPhysicsBody;
-
+@class SCNHitTestResult;
+@class SCNRenderer;
 @protocol SCNNodeRendererDelegate;
 
 /*! @group Rendering arguments
-    @discussion These keys are used in the 'arguments' dictionary of renderNode:renderer:arguments:
-				and in the 'semantic' argument of -[SCNProgram setSemantic:forSymbol:options:].
+    @discussion These keys are used for the 'semantic' argument of -[SCNProgram setSemantic:forSymbol:options:]
                 Transforms are SCNMatrix4 wrapped in NSValues.
  */
-SCN_EXTERN NSString * const SCNModelTransform;
-SCN_EXTERN NSString * const SCNViewTransform;
-SCN_EXTERN NSString * const SCNProjectionTransform;
-SCN_EXTERN NSString * const SCNNormalTransform;
-SCN_EXTERN NSString * const SCNModelViewTransform;
-SCN_EXTERN NSString * const SCNModelViewProjectionTransform;
+FOUNDATION_EXTERN NSString * const SCNModelTransform;
+FOUNDATION_EXTERN NSString * const SCNViewTransform;
+FOUNDATION_EXTERN NSString * const SCNProjectionTransform;
+FOUNDATION_EXTERN NSString * const SCNNormalTransform;
+FOUNDATION_EXTERN NSString * const SCNModelViewTransform;
+FOUNDATION_EXTERN NSString * const SCNModelViewProjectionTransform;
+
+/*! @enum SCNMovabilityHint
+ @abstract The available modes of movability.
+ @discussion Movable nodes are not captured when computing light probes. Fixed nodes are not lit by probes.
+ Also Movable nodes are not blurred by the motion blur.
+ */
+typedef NS_ENUM(NSInteger, SCNMovabilityHint) {
+    SCNMovabilityHintFixed,
+    SCNMovabilityHintMovable,
+} API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
 
 /*!
  @class SCNNode
@@ -43,7 +52,6 @@ SCN_EXTERN NSString * const SCNModelViewProjectionTransform;
 		     The coordinate systems of all the sub-nodes are relative to the one of their parent node.
  */
 
-NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNNode : NSObject <NSCopying, NSSecureCoding, SCNAnimatable, SCNActionable, SCNBoundingVolume>
 
 #pragma mark - Creating a Node
@@ -80,7 +88,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Returns a clone of the node containing a geometry that concatenates all the geometries contained in the node hierarchy.
  The returned clone is autoreleased.
  */
-- (instancetype)flattenedClone NS_AVAILABLE(10_9, 8_0);
+- (instancetype)flattenedClone API_AVAILABLE(macosx(10.9));
 
 
 
@@ -115,17 +123,17 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @property skinner
  @abstract Returns the skinner attached to the receiver.
  */
-@property(nonatomic, retain, nullable) SCNSkinner *skinner NS_AVAILABLE(10_9, 8_0);
+@property(nonatomic, retain, nullable) SCNSkinner *skinner API_AVAILABLE(macosx(10.9));
 
 /*!
  @property morpher
  @abstract Returns the morpher attached to the receiver.
  */
-@property(nonatomic, retain, nullable) SCNMorpher *morpher NS_AVAILABLE(10_9, 8_0);
+@property(nonatomic, retain, nullable) SCNMorpher *morpher API_AVAILABLE(macosx(10.9));
 
 
 
-#pragma mark - Modifying the Node's Transform
+#pragma mark - Modifying the Node′s Transform
 
 /*! 
  @property transform
@@ -151,14 +159,21 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @property orientation
  @abstract Determines the receiver's orientation as a unit quaternion. Animatable.
  */
-@property(nonatomic) SCNQuaternion orientation NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) SCNQuaternion orientation API_AVAILABLE(macosx(10.10));
 
 /*!
  @property eulerAngles
  @abstract Determines the receiver's euler angles. Animatable.
- @dicussion Specify the intrinsic euler angles (in radians). It represents a sequence of 3 rotations about the x, y, and z axis with the following order: z, y, x (or roll, yaw, pitch).
+ @dicussion The order of components in this vector matches the axes of rotation:
+               1. Pitch (the x component) is the rotation about the node's x-axis (in radians)
+               2. Yaw   (the y component) is the rotation about the node's y-axis (in radians)
+               3. Roll  (the z component) is the rotation about the node's z-axis (in radians)
+            SceneKit applies these rotations in the reverse order of the components:
+               1. first roll
+               2. then yaw
+               3. then pitch
  */
-@property(nonatomic) SCNVector3 eulerAngles NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) SCNVector3 eulerAngles API_AVAILABLE(macosx(10.10));
 
 /*! 
  @property scale
@@ -181,7 +196,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
 
 
 
-#pragma mark - Modifying the Node's Visibility
+#pragma mark - Modifying the Node′s Visibility
 
 /*! 
  @property hidden
@@ -206,7 +221,13 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @property castsShadow
  @abstract Determines if the node is rendered in shadow maps. Defaults to YES.
  */
-@property(nonatomic) BOOL castsShadow NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) BOOL castsShadow API_AVAILABLE(macosx(10.10));
+
+/*!
+ @property movabilityHint
+ @abstract Give hints oregarding the movability of the receiver. See enum above for details. Defaults to SCNMovabilityHintFixed.
+ */
+@property (nonatomic) SCNMovabilityHint movabilityHint API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
 
 
 #pragma mark - Managing the Node Hierarchy
@@ -272,15 +293,23 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @discussion The search is recursive and uses a pre-order tree traversal.
  @param predicate The block to apply to child nodes of the receiver. The block takes two arguments: "child" is a child node and "stop" is a reference to a Boolean value. The block can set the value to YES to stop further processing of the node hierarchy. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block. The Block returns a Boolean value that indicates whether "child" passed the test.
  */
-- (NSArray<SCNNode *> *)childNodesPassingTest:(BOOL (^)(SCNNode *child, BOOL *stop))predicate;
+- (NSArray<SCNNode *> *)childNodesPassingTest:(NS_NOESCAPE BOOL (^)(SCNNode *child, BOOL *stop))predicate;
 
 /*!
  @method enumerateChildNodesUsingBlock:
- @abstract Executes a given block using each child node under the receiver.
+ @abstract Executes a given block on each child node under the receiver.
  @discussion The search is recursive and uses a pre-order tree traversal.
  @param block The block to apply to child nodes of the receiver. The block takes two arguments: "child" is a child node and "stop" is a reference to a Boolean value. The block can set the value to YES to stop further processing of the node hierarchy. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block.
  */
-- (void)enumerateChildNodesUsingBlock:(void (^)(SCNNode *child, BOOL *stop))block NS_AVAILABLE(10_10, 8_0);
+- (void)enumerateChildNodesUsingBlock:(NS_NOESCAPE void (^)(SCNNode *child, BOOL *stop))block API_AVAILABLE(macosx(10.10));
+
+/*!
+ @method enumerateHierarchyUsingBlock:
+ @abstract Executes a given block on the receiver and its child nodes.
+ @discussion The search is recursive and uses a pre-order tree traversal.
+ @param block The block to apply to the receiver and its child nodes. The block takes two arguments: "node" is a node in the hierarchy of the receiver (including the receiver) and "stop" is a reference to a Boolean value. The block can set the value to YES to stop further processing of the node hierarchy. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block.
+ */
+- (void)enumerateHierarchyUsingBlock:(NS_NOESCAPE void (^)(SCNNode *node, BOOL *stop))block API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
 
 
 #pragma mark - Converting Between Node Coordinate Systems
@@ -291,7 +320,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param position A position specified in the local coordinate system of the receiver.
  @param node The node into whose coordinate system "position" is to be converted. If "node" is nil, this method instead converts to world coordinates.
  */
-- (SCNVector3)convertPosition:(SCNVector3)position toNode:(nullable SCNNode *)node NS_AVAILABLE(10_9, 8_0);
+- (SCNVector3)convertPosition:(SCNVector3)position toNode:(nullable SCNNode *)node API_AVAILABLE(macosx(10.9));
 
 /*!
  @method convertPosition:fromNode:
@@ -299,7 +328,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param position A position specified in the local coordinate system of "node".
  @param node The node from whose coordinate system "position" is to be converted. If "node" is nil, this method instead converts from world coordinates.
  */
-- (SCNVector3)convertPosition:(SCNVector3)position fromNode:(nullable SCNNode *)node NS_AVAILABLE(10_9, 8_0);
+- (SCNVector3)convertPosition:(SCNVector3)position fromNode:(nullable SCNNode *)node API_AVAILABLE(macosx(10.9));
 
 /*!
  @method convertTransform:toNode:
@@ -307,7 +336,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param transform A transform specified in the local coordinate system of the receiver.
  @param node The node into whose coordinate system "transform" is to be converted. If "node" is nil, this method instead converts to world coordinates.
  */
-- (SCNMatrix4)convertTransform:(SCNMatrix4)transform toNode:(nullable SCNNode *)node NS_AVAILABLE(10_9, 8_0);
+- (SCNMatrix4)convertTransform:(SCNMatrix4)transform toNode:(nullable SCNNode *)node API_AVAILABLE(macosx(10.9));
 
 /*!
  @method convertTransform:fromNode:
@@ -315,49 +344,47 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param transform A transform specified in the local coordinate system of "node".
  @param node The node from whose coordinate system "transform" is to be converted. If "node" is nil, this method instead converts from world coordinates.
  */
-- (SCNMatrix4)convertTransform:(SCNMatrix4)transform fromNode:(nullable SCNNode *)node NS_AVAILABLE(10_9, 8_0);
+- (SCNMatrix4)convertTransform:(SCNMatrix4)transform fromNode:(nullable SCNNode *)node API_AVAILABLE(macosx(10.9));
 
 
-#pragma mark - Managing the SCNNode's physics body
+#pragma mark - Managing the SCNNode′s physics body
 
 /*!
  @property physicsBody
  @abstract The description of the physics body of the receiver.
  @discussion Default is nil.
  */
-@property(nonatomic, retain, nullable) SCNPhysicsBody *physicsBody NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, retain, nullable) SCNPhysicsBody *physicsBody API_AVAILABLE(macosx(10.10));
 
 
-#pragma mark - Managing the Node's Physics Field
+#pragma mark - Managing the Node′s Physics Field
 
 /*!
  @property physicsField
  @abstract The description of the physics field of the receiver.
  @discussion Default is nil.
  */
-@property(nonatomic, retain, nullable) SCNPhysicsField *physicsField NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, retain, nullable) SCNPhysicsField *physicsField API_AVAILABLE(macosx(10.10));
 
 
-#pragma mark - Managing the Node's Constraints
+#pragma mark - Managing the Node′s Constraints
 
 /*!
  @property constraints
  @abstract An array of SCNConstraint that are applied to the receiver.
  @discussion Adding or removing a constraint can be implicitly animated based on the current transaction.
  */
-@property(copy, nullable) NSArray<SCNConstraint *> *constraints NS_AVAILABLE(10_9, 8_0);
+@property(copy, nullable) NSArray<SCNConstraint *> *constraints API_AVAILABLE(macosx(10.9));
 
 
-
-#pragma mark - Accessing the Node's Filters
+#pragma mark - Accessing the Node′s Filters
 
 /*!
  @property filters
  @abstract An array of Core Image filters that are applied to the rendering of the receiver and its child nodes. Animatable.
  @discussion Defaults to nil. Filter properties should be modified by calling setValue:forKeyPath: on each node that the filter is attached to. If the inputs of the filter are modified directly after the filter is attached to a node, the behavior is undefined.
  */
-@property(nonatomic, copy, nullable) NSArray<CIFilter *> *filters NS_AVAILABLE(10_9, 8_0);
-
+@property(nonatomic, copy, nullable) NSArray<CIFilter *> *filters API_AVAILABLE(macosx(10.9)) __WATCHOS_PROHIBITED;
 
 
 #pragma mark - Accessing the Presentation Node
@@ -378,7 +405,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @property paused
  @abstract Controls whether or not the node's actions and animations are updated or paused. Defaults to NO.
  */
-@property(nonatomic, getter=isPaused) BOOL paused NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, getter=isPaused) BOOL paused API_AVAILABLE(macosx(10.10));
 
 
 #pragma mark - Overriding the Rendering with Custom OpenGL Code
@@ -404,7 +431,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param options Optional parameters (see the "Hit test options" section in SCNSceneRenderer.h for the available options).
  @discussion See SCNSceneRenderer.h for a screen-space hit testing method.
  */
-- (NSArray<SCNHitTestResult *> *)hitTestWithSegmentFromPoint:(SCNVector3)pointA toPoint:(SCNVector3)pointB options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE(10_9, 8_0);
+- (NSArray<SCNHitTestResult *> *)hitTestWithSegmentFromPoint:(SCNVector3)pointA toPoint:(SCNVector3)pointB options:(nullable NSDictionary<NSString *, id> *)options API_AVAILABLE(macosx(10.9));
 
 
 #pragma mark - Categories
@@ -412,9 +439,12 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
 /*!
  @property categoryBitMask
  @abstract Defines what logical 'categories' the receiver belongs too. Defaults to 1.
- @discussion Categories can be used to exclude nodes from the influence of a given light (see SCNLight's categoryBitMask). It can also be used to include/exclude nodes from render passes (see SCNTechnique.h).
+ @discussion Categories can be used to
+                1. exclude nodes from the influence of a given light (see SCNLight.categoryBitMask)
+                2. include/exclude nodes from render passes (see SCNTechnique.h)
+                3. specify which nodes to use when hit-testing (see SCNHitTestOptionCategoryBitMask)
  */
-@property(nonatomic) NSUInteger categoryBitMask NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) NSUInteger categoryBitMask API_AVAILABLE(macosx(10.10));
 
 @end
 
@@ -435,9 +465,9 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
              Only drawing calls and the means to achieve them are supposed to be performed during the renderer delegate callback, any changes in the model (nodes, geometry...) would involve unexpected results.
  @param node The node to render.
  @param renderer The scene renderer to render into.
- @param arguments A dictionary that can have any of the entries described at the beginning of this file.
+ @param arguments A dictionary whose values are SCNMatrix4 matrices wrapped in NSValue objects.
  */
-- (void)renderNode:(SCNNode *)node renderer:(SCNRenderer *)renderer arguments:(NSDictionary<NSString *, NSValue *> *)arguments;
+- (void)renderNode:(SCNNode *)node renderer:(SCNRenderer *)renderer arguments:(NSDictionary<NSString *, id> *)arguments;
 
 @end
 

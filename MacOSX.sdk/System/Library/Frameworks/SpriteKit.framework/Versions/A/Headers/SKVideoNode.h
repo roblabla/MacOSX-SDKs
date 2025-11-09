@@ -5,11 +5,12 @@
  Node that can play a video file
  
  
- @copyright 2011 Apple, Inc. All rights reserve.
+ @copyright 2011 Apple, Inc. All rights reserved.
  
  */
 
 @class AVPlayer;
+
 
 #import <SpriteKit/SKSpriteNode.h>
 #import <SpriteKit/SpriteKitBase.h>
@@ -26,14 +27,14 @@ SK_EXPORT @interface SKVideoNode : SKNode
 /**
  Create a video node from a file.
  */
-+ (SKVideoNode *)videoNodeWithVideoFileNamed:(NSString *)videoFile NS_DEPRECATED(10_8, 10_10, 7_0, 8_0);
-+ (SKVideoNode *)videoNodeWithFileNamed:(NSString *)videoFile NS_AVAILABLE(10_10, 8_0);
++ (SKVideoNode *)videoNodeWithVideoFileNamed:(NSString *)videoFile NS_DEPRECATED(10_8, 10_11, 7_0, 9_0);
++ (SKVideoNode *)videoNodeWithFileNamed:(NSString *)videoFile NS_AVAILABLE(10_11, 9_0);
 
 /**
  Create a video node from a URL.
  */
-+ (SKVideoNode *)videoNodeWithVideoURL:(NSURL *)videoURL NS_DEPRECATED(10_8, 10_10, 7_0, 8_0);
-+ (SKVideoNode *)videoNodeWithURL:(NSURL *)videoURL NS_AVAILABLE(10_10, 8_0);
++ (SKVideoNode *)videoNodeWithVideoURL:(NSURL *)videoURL NS_DEPRECATED(10_8, 10_11, 7_0, 9_0);
++ (SKVideoNode *)videoNodeWithURL:(NSURL *)videoURL NS_AVAILABLE(10_11, 9_0);
 
 /**
  Designated Initializer.

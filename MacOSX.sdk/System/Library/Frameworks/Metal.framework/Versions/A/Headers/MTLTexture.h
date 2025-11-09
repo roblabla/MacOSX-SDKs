@@ -151,8 +151,7 @@ NS_AVAILABLE(10_11, 8_0)
  @property rootResource
  @abstract The resource this texture was created from. It may be a texture or a buffer. If this texture is not reusing storage of another MTLResource, then nil is returned.
  */
-@property (nullable, readonly) id <MTLResource> rootResource;
-
+@property (nullable, readonly) id <MTLResource> rootResource NS_DEPRECATED(10_11, 10_12, 8_0, 10_0);
 
 /*!
  @property parentTexture
@@ -176,20 +175,19 @@ NS_AVAILABLE(10_11, 8_0)
  @property buffer
  @abstract The buffer this texture view was created from, or nil if this is not a texture view or it was not created from a buffer.
  */
-@property (nullable, readonly) id <MTLBuffer> buffer NS_AVAILABLE_IOS(9_0);
+@property (nullable, readonly) id <MTLBuffer> buffer NS_AVAILABLE(10_12, 9_0);
 
 /*!
  @property bufferOffset
  @abstract The offset of the buffer this texture view was created from, or 0 if this is not a texture view.
  */
-@property (readonly) NSUInteger bufferOffset NS_AVAILABLE_IOS(9_0);
+@property (readonly) NSUInteger bufferOffset NS_AVAILABLE(10_12, 9_0);
 
 /*!
  @property bufferBytesPerRow
  @abstract The bytesPerRow of the buffer this texture view was created from, or 0 if this is not a texture view.
  */
-@property (readonly) NSUInteger bufferBytesPerRow NS_AVAILABLE_IOS(9_0);
-
+@property (readonly) NSUInteger bufferBytesPerRow NS_AVAILABLE(10_12, 9_0);
 
 
 /*!
@@ -303,8 +301,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method newTextureViewWithPixelFormat:textureType:levels:slices:
  @abstract Create a new texture which shares the same storage as the source texture, but with a different (but compatible) pixel format, texture type, levels and slices.
  */
-- (id<MTLTexture>)newTextureViewWithPixelFormat:(MTLPixelFormat)pixelFormat textureType:(MTLTextureType)textureType levels:(NSRange)levelRange slices:(NSRange)sliceRange;
-
+- (id<MTLTexture>)newTextureViewWithPixelFormat:(MTLPixelFormat)pixelFormat textureType:(MTLTextureType)textureType levels:(NSRange)levelRange slices:(NSRange)sliceRange NS_AVAILABLE(10_11, 9_0);
 
 @end
 NS_ASSUME_NONNULL_END

@@ -84,7 +84,11 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextContainer : NSObject <NSCoding, N
 @property BOOL heightTracksTextView;
 
 // Set/get the view which the container is drawn in.  Having a view is optional.
+#if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_12
 @property (nullable, strong) NSTextView *textView;
+#else
+@property (nullable, weak) NSTextView *textView;
+#endif
 @end
 
 /**************************** Deprecated ****************************/

@@ -9,20 +9,24 @@
 #import <StoreKit/SKRequest.h>
 #import <StoreKit/StoreKitDefines.h>
 
-NS_CLASS_AVAILABLE(10_9, NA)
 NS_ASSUME_NONNULL_BEGIN
+
+SK_EXTERN_CLASS_AVAILABLE(10_9)
 @interface SKReceiptRefreshRequest : SKRequest
 {
     NSDictionary *_properties;
 }
-- (nullable id)initWithReceiptProperties:(NSDictionary<NSString *, id> *)properties;
-@property (nullable, nonatomic, readonly) NSDictionary<NSString *, id> *receiptProperties;
+
+- (instancetype)initWithReceiptProperties:(nullable NSDictionary<NSString *, id> *)properties NS_AVAILABLE_MAC(10_9);
+
+@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> *receiptProperties NS_AVAILABLE_MAC(10_9);
 
 @end
 
 
 // Receipt properties for sandbox testing:
-SK_EXTERN NSString * const SKReceiptPropertyIsExpired;  // NSNumber BOOL, defaults to NO
-SK_EXTERN NSString * const SKReceiptPropertyIsRevoked;  // NSNumber BOOL, defaults to NO
-SK_EXTERN NSString * const SKReceiptPropertyIsVolumePurchase;  // NSNumber BOOL, defaults to NO
+SK_EXTERN NSString * const SKReceiptPropertyIsExpired  NS_AVAILABLE_MAC(10_9);  // NSNumber BOOL, defaults to NO
+SK_EXTERN NSString * const SKReceiptPropertyIsRevoked  NS_AVAILABLE_MAC(10_9);  // NSNumber BOOL, defaults to NO
+SK_EXTERN NSString * const SKReceiptPropertyIsVolumePurchase  NS_AVAILABLE_MAC(10_9);  // NSNumber BOOL, defaults to NO
+
 NS_ASSUME_NONNULL_END

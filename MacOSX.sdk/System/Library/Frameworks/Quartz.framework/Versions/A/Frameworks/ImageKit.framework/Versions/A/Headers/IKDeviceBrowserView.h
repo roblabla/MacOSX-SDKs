@@ -61,7 +61,7 @@ typedef NS_ENUM(NSInteger, IKDeviceBrowserViewDisplayMode)
  @property delegate
  @abstract delegate of the IKDeviceBrowserView.
  */
-@property (assign) id<IKDeviceBrowserViewDelegate> delegate;
+@property (assign) IBOutlet id<IKDeviceBrowserViewDelegate> delegate;
 
 /*!
  @property displaysLocalCameras

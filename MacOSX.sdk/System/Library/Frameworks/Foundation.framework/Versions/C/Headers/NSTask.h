@@ -1,8 +1,9 @@
 /*	NSTask.h
-	Copyright (c) 1996-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSNotification.h>
 
 @class NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSString;
 
@@ -70,6 +71,6 @@ A block to be invoked when the process underlying the NSTask terminates.  Settin
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSTaskDidTerminateNotification;
+FOUNDATION_EXPORT NSNotificationName const NSTaskDidTerminateNotification;
 
 NS_ASSUME_NONNULL_END

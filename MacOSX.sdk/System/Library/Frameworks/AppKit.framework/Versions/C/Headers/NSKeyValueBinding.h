@@ -1,7 +1,7 @@
 /*
 	NSKeyValueBinding.h
 	Application Kit
-	Copyright (c) 2002-2015, Apple Inc.
+	Copyright (c) 2002-2016, Apple Inc.
 	All rights reserved.
  */
 
@@ -50,7 +50,7 @@ APPKIT_EXTERN NSString * NSOptionsKey;
 - The default value shown in the options editor comes from the attribute description's defaultValue.*/
 
 
-- (NSArray<NSAttributeDescription *> *)optionDescriptionsForBinding:(NSString *)aBinding NS_AVAILABLE_MAC(10_5);
+- (NSArray<NSAttributeDescription *> *)optionDescriptionsForBinding:(NSString *)binding NS_AVAILABLE_MAC(10_5);
 
 
 @end

@@ -6,14 +6,14 @@
 .Nd management and supervision daemon for plug-in services
 .Sh SYNOPSIS             \" Section Header - required - don't modify
 .Nm
-.Op Fl v
+.\".Op Fl v
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 .Nm
 manages plug-ins for the PlugInKit subsystem. It is a classic launch agent managed by launchd.
-.Pp
-.Bl -tag -width -indent  \" Differs from above in tag removed
-.It Fl v
-Ask pkd to log more verbosely to the system log.
+.\".Pp
+.\".Bl -tag -width -indent  \" Differs from above in tag removed
+.\".It Fl v
+.\"Ask pkd to log more verbosely to the system log.
 .El                      \" Ends the list
 .Pp
 .\" .Sh ENVIRONMENT      \" May not be needed
@@ -37,3 +37,7 @@ Ask pkd to log more verbosely to the system log.
 None yet.
 .Sh HISTORY           \" Document history if command behaves in a unique manner
 Pkd was first introduced in OS X 10.9.
+.Pp
+Pkd used to have a -v verbose option to increase logging. This is now accomplished
+through the logging system by enabling the "info" or "debug" levels of logging for
+the "com.apple.pluginkit" subsystem.

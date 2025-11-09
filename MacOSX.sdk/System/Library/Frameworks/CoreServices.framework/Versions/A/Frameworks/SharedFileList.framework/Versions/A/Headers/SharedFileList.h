@@ -2,7 +2,6 @@
 //  SharedFileList.h
 //  SharedFileList
 //
-//  Created by Alex Carter on 9/5/13.
 //  Copyright (c) 2013 Apple Inc. All rights reserved.
 //
 

@@ -162,7 +162,7 @@ will be used instead. This key is required in the absence of the
 key.
 .It Sy ProgramArguments <array of strings>
 This key maps to the second argument of
-.Xr execvp 3 .
+.Xr execvp 3
 and specifies the argument vector to be passed to the job when a process is
 spawned. This key is required in the absence of the Program key.
 .Em IMPORTANT:
@@ -222,10 +222,11 @@ default, so a
 .Xr dispatch 3
 source must be used when handling this signal.
 .It Sy OnDemand <boolean>
-This key does nothing if set to false. If set to true, this key is equivalent to
+This key does nothing if set to true. If set to false, this key is equivalent to
 specifying a true value for the
 .Nm KeepAlive
-key. This key should not be used.
+key. This key should not be used. Please remove this key from your
+.Nm .
 .It Sy ServiceIPC <boolean>
 Please remove this key from your
 .Nm .
@@ -709,7 +710,9 @@ appearance of nodes in the IORegistry. Each dictionary within the sub-dictionary
 specifies an event descriptor that is specified to each event subsystem. With
 this key, the job promises to use the
 .Xr xpc_set_event_stream_handler 3
-API to consume events. See that manual page for further details.
+API to consume events. See
+.Xr xpc_events 3
+for more details on event sources.
 .It Sy HopefullyExitsLast <string>
 This key was a hack for jobs which could not properly keep track of their
 clients and is no longer implemented.
@@ -727,7 +730,9 @@ on OS X Mavericks version 10.9 and later, timers created by launchd jobs are
 coalesced. Batching the firing of timers with similar deadlines improves the
 overall energy efficiency of the system. If this key is set to true, timers
 created by the job will opt into less efficient but more precise behavior and
-not be coalesced with other timers.
+not be coalesced with other timers. This key may have no effect if the job's
+.Fa ProcessType
+is not set to Interactive.
 .El
 .Pp
 .Sh DEPENDENCIES
@@ -779,6 +784,13 @@ Per-user agents provided by OS X.
 .It Pa /System/Library/LaunchDaemons
 System-wide daemons provided by OS X.
 .El
+.Sh CAVEATS
+In the description of the
+.Fa OnDemand
+key, an earlier version of this manual page said true when it meant false and
+said false when it meant true. You may only ask one true/false question to
+determine which one is correct. Just kidding! This version of the manual
+page is definitely telling the truth.
 .Sh SEE ALSO 
 .Xr launchctl 1 ,
 .Xr sysctl 3 ,

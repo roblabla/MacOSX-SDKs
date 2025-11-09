@@ -160,7 +160,7 @@ specifies
 .Ar num
 seconds that a multicast client should wait when no payload data has been received over 
 a multicast stream before exiting, allowing the client to stop in case of server failure/stoppage.
-It defaults to 0 (e.g. never time out).
+It defaults to 0 (i.e. never time out).
 .It Fl -puppetstrings
 provide progress output that is easy for another program to parse.
 Any program trying to interpret
@@ -296,6 +296,18 @@ to use
 .Fl -allowfragmentedcatalog,
 but it is provided in case fixing the image is impractical.
 .El
+.It Sy info
+report the image metadata which was placed in the image by a previous
+use of the
+.Sy imagescan
+verb.  Requires
+.Fl -source.
+The report is written to standard output.
+.Bl -tag -width "plist"
+.It Fl -plist
+writes its output as an XML-formatted plist, suitable for parsing by
+another program.
+.El
 .El
 .Sh BUFFERING
 The following options control how
@@ -390,15 +402,14 @@ Basic steps for imaging and restoring a volume:
 .It
 Set up the source volume the way you want it.
 .It
-Use Disk Utility's "Images -> New -> Image from Folder..." function and select
+Use Disk Utility's "File -> New Image -> Image from Folder..." function and select
 the root of the volume.  Save the image as read-only or compressed.
-"Images->New->Image from <device>" is not recommended on 10.3.x.
+"File->New Image->Image from <device>" is not recommended for restorable images.
 .It
-Scan the image with "Images -> Scan Image for Restore."
+Scan the image with "Images -> Scan Image for Restore..."
 .It
-Select an image or volume and click on the "Restore" tab.  Drag the source
-image and destination partition to the source and destination fields.
-Click Restore.
+Select a volume and click on the "Restore" button.  Then click on the "Image..."
+button to select the image you have scanned.  Click Restore.
 .El
 .Pp
 .Sh BLOCK COPY RESTORE REQUIREMENTS

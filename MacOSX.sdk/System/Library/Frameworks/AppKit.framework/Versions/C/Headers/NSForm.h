@@ -1,7 +1,7 @@
 /*
 	NSForm.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -28,7 +28,7 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_10, "Use NSTextField directly instead, and cons
 - (NSFormCell *)addEntry:(NSString *)title;
 - (null_unspecified NSFormCell *)insertEntry:(NSString *)title atIndex:(NSInteger)index;
 - (void)removeEntryAtIndex:(NSInteger)index;
-- (NSInteger)indexOfCellWithTag:(NSInteger)aTag;
+- (NSInteger)indexOfCellWithTag:(NSInteger)tag;
 - (void)selectTextAtIndex:(NSInteger)index;
 - (void)setFrameSize:(NSSize)newSize;
 - (void)setTitleBaseWritingDirection:(NSWritingDirection)writingDirection;

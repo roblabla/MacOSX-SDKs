@@ -66,5 +66,20 @@ NS_AVAILABLE(10_11, 8_0)
 */
 - (id <MTLTexture>)newTextureWithDescriptor:(MTLTextureDescriptor*)descriptor offset:(NSUInteger)offset bytesPerRow:(NSUInteger)bytesPerRow NS_AVAILABLE_IOS(8_0);
 
+/*!
+ @method addDebugMarker:range:
+ @abstract Adds a marker to a specific range in the buffer.
+ When inspecting a buffer in the GPU debugging tools the marker will be shown.
+ @param marker A label used for the marker.
+ @param range The range of bytes the marker is using.
+ */
+- (void)addDebugMarker:(NSString*)marker range:(NSRange)range NS_AVAILABLE(10_12, 10_0);
+
+/*!
+ @method removeAllDebugMarkers
+ @abstract Removes all debug markers from a buffer.
+ */
+- (void)removeAllDebugMarkers NS_AVAILABLE(10_12, 10_0);
+
 @end
 NS_ASSUME_NONNULL_END

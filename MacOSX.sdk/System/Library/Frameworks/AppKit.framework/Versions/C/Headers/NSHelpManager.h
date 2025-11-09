@@ -1,7 +1,7 @@
 /*
 	NSHelpManager.h
 	Application Kit
-	Copyright (c) 1995-2015, Apple Inc.
+	Copyright (c) 1995-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -50,8 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 // Notifications for the activation/deactivation of the context help mode
 //
 
-APPKIT_EXTERN NSString * NSContextHelpModeDidActivateNotification;
-APPKIT_EXTERN NSString * NSContextHelpModeDidDeactivateNotification;
+APPKIT_EXTERN NSNotificationName NSContextHelpModeDidActivateNotification;
+APPKIT_EXTERN NSNotificationName NSContextHelpModeDidDeactivateNotification;
 
 //
 //  Conveniences for accessing Help.plist

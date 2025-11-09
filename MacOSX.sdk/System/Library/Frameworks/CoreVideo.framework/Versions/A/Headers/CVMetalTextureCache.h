@@ -68,7 +68,7 @@ CV_EXPORT CVReturn CVMetalTextureCacheCreate(
 					CFDictionaryRef CV_NULLABLE cacheAttributes,
 					id <MTLDevice> CV_NONNULL metalDevice,
 					CFDictionaryRef CV_NULLABLE textureAttributes,
-					CVMetalTextureCacheRef CV_NULLABLE * CV_NONNULL cacheOut ) __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_8_0);
+					CV_RETURNS_RETAINED_PARAMETER CVMetalTextureCacheRef CV_NULLABLE * CV_NONNULL cacheOut ) __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_8_0);
 
 /*!
     @function   CVMetalTextureCacheCreateTextureFromImage
@@ -115,7 +115,7 @@ CV_EXPORT CVReturn CVMetalTextureCacheCreateTextureFromImage(
 								       size_t width,
 								       size_t height,
 								       size_t planeIndex,
-									   CVMetalTextureRef CV_NULLABLE * CV_NONNULL textureOut ) __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_8_0);
+									   CV_RETURNS_RETAINED_PARAMETER CVMetalTextureRef CV_NULLABLE * CV_NONNULL textureOut ) __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_8_0);
 
 /*!
     @function   CVMetalTextureCacheFlush

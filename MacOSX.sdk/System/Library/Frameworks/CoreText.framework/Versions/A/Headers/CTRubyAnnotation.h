@@ -2,7 +2,7 @@
  *  CTRubyAnnotation.h
  *  CoreText
  *
- *  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
+ *  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
  *
  */
 
@@ -19,6 +19,7 @@
 
 #include <CoreText/CTDefines.h>
 #include <CoreGraphics/CGBase.h>
+#include <CoreFoundation/CFDictionary.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
@@ -164,7 +165,7 @@ typedef CF_ENUM(uint8_t, CTRubyPosition) {
     @param      text
                 An array of CFStringRef, indexed by CTRubyPosition. Supply NULL for any unused positions.
 
-    @result     This function will return a reference to a CTRubyAlignment object.
+    @result     This function will return a reference to a CTRubyAnnotation object.
 */
 
 CTRubyAnnotationRef CTRubyAnnotationCreate(
@@ -172,6 +173,62 @@ CTRubyAnnotationRef CTRubyAnnotationCreate(
     CTRubyOverhang overhang,
     CGFloat sizeFactor,
     CFStringRef text[kCTRubyPositionCount] ) CT_AVAILABLE(10_10, 8_0);
+
+/*!
+    @const      kCTRubyAnnotationSizeFactorAttributeName
+    @abstract   Specifies the size of the annotation text as a percent of the size of the base text.
+
+    @discussion Value must be a CFNumberRef.
+*/
+
+CT_EXPORT const CFStringRef kCTRubyAnnotationSizeFactorAttributeName CT_AVAILABLE(10_12, 10_0);
+
+/*!
+    @const      kCTRubyAnnotationScaleToFitAttributeName
+    @abstract   Treat the size specified in kCTRubyAnnotationSizeFactorAttributeName as the maximum
+                scale factor, when the base text size is smaller than annotation text size, we will
+                try to scale the annotation font size down so that it will fit the base text without
+                overhang or adding extra padding between base text.
+
+    @discussion Value must be a CFBooleanRef. Default is false.
+*/
+
+CT_EXPORT const CFStringRef kCTRubyAnnotationScaleToFitAttributeName CT_AVAILABLE(10_12, 10_0);
+
+/*!
+    @function   CTRubyAnnotationCreateWithAttributes
+    @abstract   Creates an immutable ruby annotation object.
+
+    @discussion Using this function to create a ruby annotation object with more precise
+                control of the annotation text.
+
+    @param      alignment
+                Specifies how the ruby text and the base text should be aligned relative to each other.
+
+    @param      overhang
+                Specifies how the ruby text can overhang adjacent characters.
+
+    @param      position
+                The position of the annotation text.
+
+    @param      string
+                A string without any formatting, its format will be derived from the attrs specified below.
+
+    @param      attributes
+                A attribute dictionary to combine with the string specified above. If you don't specify
+                kCTFontAttributeName, the font used by the Ruby annotation will be deduced from the base
+                text, with a size factor specified by a CFNumberRef value keyed by
+                kCTRubyAnnotationSizeFactorAttributeName.
+
+    @result     This function will return a reference to a CTRubyAnnotation object.
+*/
+
+CTRubyAnnotationRef CTRubyAnnotationCreateWithAttributes(
+    CTRubyAlignment alignment,
+    CTRubyOverhang overhang,
+    CTRubyPosition position,
+    CFStringRef string,
+    CFDictionaryRef attributes ) CT_AVAILABLE(10_12, 10_0);
 
 /*!
     @function   CTRubyAnnotationCreateCopy
@@ -241,7 +298,7 @@ CGFloat CTRubyAnnotationGetSizeFactor(
     @param      rubyAnnotation
                 The ruby annotation object.
 
-    @param      postion
+    @param      position
                 The position for which you want to get the ruby text.
 
     @result     If the "rubyAnnotation" reference and the position are valid, then this

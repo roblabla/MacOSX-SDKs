@@ -3,7 +3,7 @@
 
 	Framework:		AVFoundation
  
-	Copyright 2009-2015 Apple Inc. All rights reserved.
+	Copyright 2009-2016 Apple Inc. All rights reserved.
 
 */
 
@@ -136,7 +136,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @end
 
 
-@interface AVMutableMovieTrack (AVMutableMovieTrack_LanguageProperties)
+@interface AVMutableMovieTrack (AVMutableMovieTrackLanguageProperties)
 
 /*!
 	@property       languageCode
@@ -155,7 +155,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @end
 
 
-@interface AVMutableMovieTrack (AVMutableMovieTrack_PropertiesForVisualCharacteristic)
+@interface AVMutableMovieTrack (AVMutableMovieTrackVisualProperties)
 
 /*!
 	@property       naturalSize
@@ -196,7 +196,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @end
 
 
-@interface AVMutableMovieTrack (AVMutableMovieTrack_PropertiesForAudibleCharacteristic)
+@interface AVMutableMovieTrack (AVMutableMovieTrackAudibleProperties)
 
 /*!
 	@property       preferredVolume
@@ -207,10 +207,10 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @end
 
 
-@interface AVMutableMovieTrack (AVMutableMovieTrack_ChunkProperties)
+@interface AVMutableMovieTrack (AVMutableMovieTrackChunkProperties)
 
 /*!
-	@category		AVMutableMovieTrack(AVMutableMovieTrack_ChunkProperties)
+	@category		AVMutableMovieTrack(AVMutableMovieTrackChunkProperties)
  
 	@discussion		Sample data in a movie file is stored in a series of "chunks". A chunk contains one or more samples, which may have different sizes from one another.
 					The collection of samples into chunks is intended to allow optimized access to the sample data during operations such as movie playback. 
@@ -252,7 +252,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @end
 
 
-@interface AVMutableMovieTrack (AVMutableMovieTrack_TrackLevelEditing)
+@interface AVMutableMovieTrack (AVMutableMovieTrackTrackLevelEditing)
 
 /*!
 	@method			insertTimeRange:ofTrack:atTime:copySampleData:error:
@@ -275,7 +275,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 	@result			A BOOL value that indicates the success of the insertion.
 
 */
-- (BOOL)insertTimeRange:(CMTimeRange)timeRange ofTrack:(AVAssetTrack *)track atTime:(CMTime)startTime copySampleData:(BOOL)copySampleData error:(NSError * __nullable * __nullable)outError;
+- (BOOL)insertTimeRange:(CMTimeRange)timeRange ofTrack:(AVAssetTrack *)track atTime:(CMTime)startTime copySampleData:(BOOL)copySampleData error:(NSError * _Nullable * _Nullable)outError;
 
 /*!
 	@method			insertEmptyTimeRange:
@@ -339,6 +339,62 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 					The type of track association to remove between the receiver and the specified movieTrack (for instance, AVTrackAssociationTypeChapterList).
 */
 - (void)removeTrackAssociationToTrack:(AVMovieTrack *)movieTrack type:(NSString *)trackAssociationType;
+
+@end
+
+
+@interface AVMutableMovieTrack (AVMutableMovieTrackSampleLevelEditing)
+
+/*!
+	@method			appendSampleBuffer:decodeTime:presentationTime:error:
+	@abstract		Appends sample data to a media file and adds sample references for the added data to a track's media sample tables.
+	@param			sampleBuffer
+					The CMSampleBuffer to be appended; this may be obtained from an instance of AVAssetReader.
+	@param			outDecodeTime
+					A pointer to a CMTime structure to receive the decode time in the media of the first sample appended from the sample buffer. Pass NULL if you do not need this information.
+	@param			outPresentationTime
+					A pointer to a CMTime structure to receive the presentation time in the media of the first sample appended from the sample buffer. Pass NULL if you do not need this information.
+	@param			outError
+					If the appending fails, describes the nature of the failure. For example, if the device containing the track's media data storage is full, AVErrorDiskFull is returned.
+	@result			A BOOL value indicating the success of the operation.
+	@discussion
+                    If the sample buffer carries sample data, the sample data is written to the container specified by the track property mediaDataStorage if non-nil,
+                    or else by the movie property defaultMediaDataStorage if non-nil, and sample references will be appended to the track's media.
+                    If both media data storage properties are nil, the method will fail and return NO.
+                    If the sample buffer carries sample references only, sample data will not be written and sample references to the samples in their
+                    original container will be appended to the track's media as necessary.
+
+                    Note regarding sample timing: in a track's media, the first sample's decode timestamp must always be zero.
+                    For an audio track, each sample buffer's duration is used as the sample decode duration.
+                    For other track types, difference between a sample's decode timestamp and the following 
+                    sample's decode timestamp is used as the first sample's decode duration, so as to preserve the relative timing.
+                    
+                    Note that this method does not modify the track's sourceTimeMappings but only appends sample references and sample data to the track's media.  
+                    To make the new samples appear in the track's timeline, invoke -insertMediaTimeRange:intoTimeRange:.
+                    You can retrieve the mediaPresentationTimeRange property before and after appending a sequence of samples,
+                    using CMTimeRangeGetEnd on each to calculate the media TimeRange for -insertMediaTimeRange:intoTimeRange:.
+
+                    It's safe for multiple threads to call this method on different tracks at once.
+*/
+- (BOOL)appendSampleBuffer:(CMSampleBufferRef)sampleBuffer decodeTime:(nullable CMTime *)outDecodeTime presentationTime:(nullable CMTime *)outPresentationTime error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE_MAC(10_12);
+
+/*!
+	@method			insertMediaTimeRange:intoTimeRange:
+	@abstract		Inserts a reference to a media time range into a track.
+	@param			mediaTimeRange
+					The presentation time range of the media to be inserted.
+	@param			trackTimeRange
+					The time range of the track into which the media is to be inserted.
+    @result			A BOOL value indicating the success of the operation.
+	@discussion
+                    Use this method after you have appended samples or sample references to a track's media.
+                    
+                    To specify that the media time range be played at its natural rate, pass mediaTimeRange.duration == trackTimeRange.duration;
+                    otherwise, the ratio between these is used to determine the playback rate.
+                    
+                    Pass kCMTimeInvalid for trackTimeRange.start to indicate that the segment should be appended to the end of the track.
+*/
+- (BOOL)insertMediaTimeRange:(CMTimeRange)mediaTimeRange intoTimeRange:(CMTimeRange)trackTimeRange NS_AVAILABLE_MAC(10_12);
 
 @end
 

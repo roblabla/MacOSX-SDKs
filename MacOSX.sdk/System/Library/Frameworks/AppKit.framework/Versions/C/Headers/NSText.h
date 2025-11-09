@@ -1,7 +1,7 @@
 /*
 	NSText.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -73,7 +73,7 @@ enum {
 
 @property (nullable, copy) NSString *string;
 
-- (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)aString;
+- (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)string;
 - (void)replaceCharactersInRange:(NSRange)range withRTF:(NSData *)rtfData;
 - (void)replaceCharactersInRange:(NSRange)range withRTFD:(NSData *)rtfdData;
 
@@ -149,9 +149,9 @@ enum {
 @end
 
 /* Notifications */
-APPKIT_EXTERN NSString * NSTextDidBeginEditingNotification;
-APPKIT_EXTERN NSString * NSTextDidEndEditingNotification;    // userInfo key:  @"NSTextMovement"
-APPKIT_EXTERN NSString * NSTextDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSTextDidBeginEditingNotification;
+APPKIT_EXTERN NSNotificationName NSTextDidEndEditingNotification;    // userInfo key:  @"NSTextMovement"
+APPKIT_EXTERN NSNotificationName NSTextDidChangeNotification;
 
 
 /* Deprecated */
@@ -161,10 +161,10 @@ enum {
     NSTextWritingDirectionOverride NS_DEPRECATED_MAC(10_0, 10_11, "Use NSWritingDirectionOverride instead")      = (1 << 1)
 };
 
-static const NSTextAlignment NSLeftTextAlignment = NSTextAlignmentLeft;
-static const NSTextAlignment NSRightTextAlignment = NSTextAlignmentRight;
-static const NSTextAlignment NSCenterTextAlignment = NSTextAlignmentCenter;
-static const NSTextAlignment NSJustifiedTextAlignment = NSTextAlignmentJustified;
-static const NSTextAlignment NSNaturalTextAlignment = NSTextAlignmentNatural;
+static const NSTextAlignment NSLeftTextAlignment API_DEPRECATED_WITH_REPLACEMENT("NSTextAlignmentLeft", macosx(10.0, 10.12))  = NSTextAlignmentLeft;
+static const NSTextAlignment NSRightTextAlignment API_DEPRECATED_WITH_REPLACEMENT("NSTextAlignmentRight", macosx(10.0, 10.12))  = NSTextAlignmentRight;
+static const NSTextAlignment NSCenterTextAlignment API_DEPRECATED_WITH_REPLACEMENT("NSTextAlignmentCenter", macosx(10.0, 10.12))  = NSTextAlignmentCenter;
+static const NSTextAlignment NSJustifiedTextAlignment API_DEPRECATED_WITH_REPLACEMENT("NSTextAlignmentJustified", macosx(10.0, 10.12))  = NSTextAlignmentJustified;
+static const NSTextAlignment NSNaturalTextAlignment API_DEPRECATED_WITH_REPLACEMENT("NSTextAlignmentNatural", macosx(10.0, 10.12))  = NSTextAlignmentNatural;
 
 NS_ASSUME_NONNULL_END

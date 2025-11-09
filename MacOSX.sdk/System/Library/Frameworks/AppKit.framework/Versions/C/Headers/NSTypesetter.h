@@ -1,6 +1,6 @@
 /* 
 	NSTypesetter.h
-	Copyright (c) 1994-2015, Apple Inc.  All rights reserved. 
+	Copyright (c) 1994-2016, Apple Inc.  All rights reserved. 
 
 	An abstract class to lay glyphs out in horizontal or vertical boxes	
 */
@@ -130,7 +130,7 @@ typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
 
 /* Factory methods */
 + (id)sharedSystemTypesetter;
-+ (id)sharedSystemTypesetterForBehavior:(NSTypesetterBehavior)theBehavior;
++ (id)sharedSystemTypesetterForBehavior:(NSTypesetterBehavior)behavior;
 + (NSTypesetterBehavior)defaultTypesetterBehavior;
 @end
 

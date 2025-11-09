@@ -1,7 +1,7 @@
 /*
  NSStackView.h
  Application Kit
- Copyright (c) 2012-2015, Apple Inc.
+ Copyright (c) 2012-2016, Apple Inc.
  All rights reserved.
  */
 
@@ -101,7 +101,7 @@ static const CGFloat NSStackViewSpacingUseDefault NS_AVAILABLE_MAC(10_9) = FLT_M
 NS_CLASS_AVAILABLE(10_9, NA)
 @interface NSStackView : NSView {
 @private
-    id<NSStackViewDelegate> _delegate;
+    id _delegate;
     
     NSUserInterfaceLayoutOrientation _orientation;
     NSInteger _alignment;
@@ -113,9 +113,9 @@ NS_CLASS_AVAILABLE(10_9, NA)
     NSLayoutPriority _verticalHuggingPriority;
     NSLayoutPriority _horizontalHuggingPriority;
     
-    BOOL _unused;
-    id _unused2;
-    id _unused3;
+    BOOL _unused __unused;
+    id _unused2 __unused;
+    id _unused3 __unused;
     
     id _private;
     
@@ -131,103 +131,37 @@ NS_CLASS_AVAILABLE(10_9, NA)
 
 #pragma mark General StackView Properties
 
-@property (nullable, assign) id<NSStackViewDelegate> delegate;
-@property NSUserInterfaceLayoutOrientation orientation; // Orientation of the StackView, defaults to NSUserInterfaceLayoutOrientationHorizontal
-@property NSLayoutAttribute alignment; // Describes how subviews are aligned within the StackView, defaults to NSLayoutAttributeCenterY for horizontal stacks, NSLayoutAttributeCenterX for vertical stacks. Setting NSLayoutAttributeNotAnAttribute will cause the internal alignment constraints to not be created, and could result in an ambiguous layout. Setting an inapplicable attribute for the set orientation will result in the alignment being ignored (similar to its handling with NSLayoutAttributeNotAnAttribute). The alignment constraints are established at a priority of NSLayoutPriorityDefaultLow and is therefore overridable on an individual view basis.
-@property NSEdgeInsets edgeInsets; // Default padding inside the StackView, around all of the subviews. Edge insets do not flip or rotate for changes to orientation or R2L languages.
+@property (nullable, weak) id<NSStackViewDelegate> delegate;
 
+/// Orientation of the StackView, defaults to NSUserInterfaceLayoutOrientationHorizontal
+@property NSUserInterfaceLayoutOrientation orientation;
 
-#pragma mark Managing Views
+/// Describes how subviews are aligned within the StackView, defaults to `NSLayoutAttributeCenterY` for horizontal stacks, `NSLayoutAttributeCenterX` for vertical stacks. Setting `NSLayoutAttributeNotAnAttribute` will cause the internal alignment constraints to not be created, and could result in an ambiguous layout. Setting an inapplicable attribute for the set orientation will result in the alignment being ignored (similar to its handling with NSLayoutAttributeNotAnAttribute). The alignment constraints are established at a priority of `NSLayoutPriorityDefaultLow` and are overridable for individual views using external constraints.
+@property NSLayoutAttribute alignment;
 
-/*
- Adds the view to the given gravity area at the end of that gravity area.
- This method will update the StackView's layout, and could result in the StackView changing its size or views being detached / clipped.
- */
-- (void)addView:(NSView *)aView inGravity:(NSStackViewGravity)gravity;
-/*
- Adds the view to the given gravity area at the index within that gravity area.
- Index numbers & counts are specific to each gravity area, and are indexed based on the set userInterfaceLayoutDirection.
- (For a L2R layout, index 0 in the leading gravity is the furthest left index; for a R2L layout index 0 in the leading gravity is the furthest right index)
- This method will update the StackView's layout, and could result in the StackView changing its size or views being detached / clipped.
- An NSRangeException will be raised if the index is out of bounds
- */
-- (void)insertView:(NSView *)aView atIndex:(NSUInteger)index inGravity:(NSStackViewGravity)gravity;
-/*
- Will remove aView from the StackView.
- [aView removeFromSuperview] will have the same behavior in the case that aView is visible (not detached) from the StackView.
- In the case that aView had been detached, this method must be used to remove it from the StackView.
- aView must be managed by the StackView, an exception will be raised if not.
- */
-- (void)removeView:(NSView *)aView;
+/// Default padding inside the StackView, around all of the subviews.
+@property NSEdgeInsets edgeInsets;
 
-- (NSArray<__kindof NSView *> *)viewsInGravity:(NSStackViewGravity)gravity; // Getters will return the views that are contained by the corresponding gravity area, regardless of detach-status.
-- (void)setViews:(NSArray<NSView *> *)views inGravity:(NSStackViewGravity)gravity; // Setters will update the views and the layout for that gravity area.
+/// The spacing and sizing distribution of stacked views along the primary axis. Defaults to GravityAreas.
+@property NSStackViewDistribution distribution NS_AVAILABLE_MAC(10_11);
 
-/*
- Returns an array of all the views managed by this StackView, regardless of detach-status or gravity area.
- This is indexed in the order of indexing within the StackView. Detached views are indexed at the positions they would have been if they were still attached.
- */
-@property (readonly, copy) NSArray<__kindof NSView *> *views;
-@property (readonly, copy) NSArray<__kindof NSView *> *detachedViews; // Returns the list of all of the detached views, regardless of gravity area
-
-/// If YES, when a stacked view's `hidden` property is set to YES, the view will be detached from the stack and reattached when set to NO. Similarly, if the view has a lowered visibility priority and is detached from the stack view, it will be set as `hidden` rather than removed from the view hierarchy. Defaults to YES for apps linked on the 10.11 SDK or later.
-@property BOOL detachesHiddenViews NS_AVAILABLE_MAC(10_11);
-
-/*
- Sets and gets the visibility priorities for views in the StackView.
- When detaching a view, it will first detach views with the lowest visibility priority.
- If multiple views share the same lowest visibility priority, all of them will be dropped.
-
- Defaults to NSStackViewVisibilityPriorityMustHold.
- Setting the visibility priority to NSStackViewVisibilityPriorityNotVisible will force that view to be detached (regardless of available space).
- 
- aView must be managed by the StackView, an exception will be raised if not.
- */
-- (void)setVisibilityPriority:(NSStackViewVisibilityPriority)priority forView:(NSView *)aView;
-- (NSStackViewVisibilityPriority)visibilityPriorityForView:(NSView *)aView;
-
-
-#pragma mark Spacing & Layout
-
-/*
- Spacing within a StackView is managed completely by the StackView.
- However, extra layout constraints can be added in conjunction with the StackView to create a more customized layout.
- Below describes the constraints the StackView uses to space its internal views.
- Spacing between view gravities have constraints with the following constraints:
- - Length >= spacing @ NSLayoutPriorityRequired
- - Length == spacing @ huggingPriority
- Spacing between views (within a gravity) have the following constraints:
- - Length >= spacing @ NSLayoutPriorityRequired
- - Length == spacing @ MAX(NSLayoutPriorityDefaultHigh, huggingPriority)
- */
-@property CGFloat spacing; // Default (minimum) spacing between each view
+/// Default (minimum) spacing between each view
+@property CGFloat spacing;
 
 /*
  Set and get custom spacing after a view. This custom spacing is used instead of the default spacing set with the spacing property.
  This is saved across layout updates, until the view is removed from the StackView or the custom spacing is changed.
  A value of NSStackViewSpacingUseDefault signifies that the spacing is the default spacing set with the StackView property.
- aView must be managed by the StackView, an exception will be raised if not.
+ `view` must be managed by the StackView, an exception will be raised if not.
  */
-- (void)setCustomSpacing:(CGFloat)spacing afterView:(NSView *)aView;
-- (CGFloat)customSpacingAfterView:(NSView *)aView;
+- (void)setCustomSpacing:(CGFloat)spacing afterView:(NSView *)view;
+- (CGFloat)customSpacingAfterView:(NSView *)view;
 
-/// The spacing and sizing distribution of stacked views along the primary axis. Defaults to GravityAreas.
-@property NSStackViewDistribution distribution NS_AVAILABLE_MAC(10_11);
+/// If YES, when a stacked view's `hidden` property is set to YES, the view will be detached from the stack and reattached when set to NO. Similarly, if the view has a lowered visibility priority and is detached from the stack view, it will be set as `hidden` rather than removed from the view hierarchy. Defaults to YES for apps linked on the 10.11 SDK or later.
+@property BOOL detachesHiddenViews NS_AVAILABLE_MAC(10_11);
 
-/*
- Priority at which the StackView will not clip its views, defaults to NSLayoutPriorityRequired
- Clipping begins from the right and bottom sides of the StackView.
- */
-- (NSLayoutPriority)clippingResistancePriorityForOrientation:(NSLayoutConstraintOrientation)orientation;
-- (void)setClippingResistancePriority:(NSLayoutPriority)clippingResistancePriority forOrientation:(NSLayoutConstraintOrientation)orientation;
 
-// Priority at which the StackView wants its internal spacing to be as small as possible, defaults to NSLayoutPriorityDefaultLow
-- (NSLayoutPriority)huggingPriorityForOrientation:(NSLayoutConstraintOrientation)orientation;
-- (void)setHuggingPriority:(NSLayoutPriority)huggingPriority forOrientation:(NSLayoutConstraintOrientation)orientation;
-
-@end
-
-@interface NSStackView (NSStackViewArrangedSubviews)
+#pragma mark Arranged Subviews
 
 /// The list of views that are arranged in a stack by the receiver. They are a subset of \c -subviews, with potential difference in ordering.
 @property (readonly, copy) NSArray<__kindof NSView *> *arrangedSubviews NS_AVAILABLE_MAC(10_11);
@@ -250,7 +184,48 @@ NS_CLASS_AVAILABLE(10_9, NA)
  */
 - (void)removeArrangedSubview:(NSView *)view NS_AVAILABLE_MAC(10_11);
 
+/// The arrangedSubviews that are currently detached/hidden.
+@property (readonly, copy) NSArray<__kindof NSView *> *detachedViews;
+
+
+#pragma mark Custom Priorities
+
+/*
+ Sets and gets the visibility priorities for views in the StackView.
+ When detaching a view, it will first detach views with the lowest visibility priority.
+ If multiple views share the same lowest visibility priority, all of them will be dropped.
+
+ Defaults to `NSStackViewVisibilityPriorityMustHold`.
+ Setting the visibility priority to NSStackViewVisibilityPriorityNotVisible will force that view to be detached (regardless of available space), and will set the view to be hidden if `detachesHiddenViews` is set to `YES`.
+ 
+ `view` must be managed by the StackView, an exception will be raised if not.
+ */
+- (void)setVisibilityPriority:(NSStackViewVisibilityPriority)priority forView:(NSView *)view;
+- (NSStackViewVisibilityPriority)visibilityPriorityForView:(NSView *)view;
+
+/*
+ Priority at which the StackView will not clip its views, defaults to NSLayoutPriorityRequired
+ Clipping begins from the trailing and bottom sides of the StackView.
+ */
+- (NSLayoutPriority)clippingResistancePriorityForOrientation:(NSLayoutConstraintOrientation)orientation;
+- (void)setClippingResistancePriority:(NSLayoutPriority)clippingResistancePriority forOrientation:(NSLayoutConstraintOrientation)orientation;
+
+/* Priority at which the StackView wants its internal spacing to be as small as possible, defaults to NSLayoutPriorityDefaultLow
+ Spacing within a StackView is managed completely by the StackView.
+ However, extra layout constraints can be added in conjunction with the StackView to create a more customized layout.
+ Below describes the constraints the StackView uses to space its internal views.
+ Spacing between view gravities have constraints with the following constraints:
+ - Length >= spacing @ NSLayoutPriorityRequired
+ - Length == spacing @ huggingPriority
+ Spacing between views (within a gravity) have the following constraints:
+ - Length >= spacing @ NSLayoutPriorityRequired
+ - Length == spacing @ MAX(NSLayoutPriorityDefaultHigh, huggingPriority)
+ */
+- (NSLayoutPriority)huggingPriorityForOrientation:(NSLayoutConstraintOrientation)orientation;
+- (void)setHuggingPriority:(NSLayoutPriority)huggingPriority forOrientation:(NSLayoutConstraintOrientation)orientation;
+
 @end
+
 
 #pragma mark - NSStackViewDelegate
 @protocol NSStackViewDelegate <NSObject>
@@ -261,6 +236,41 @@ NS_CLASS_AVAILABLE(10_9, NA)
  */
 - (void)stackView:(NSStackView *)stackView willDetachViews:(NSArray<NSView *> *)views;
 - (void)stackView:(NSStackView *)stackView didReattachViews:(NSArray<NSView *> *)views;
+
+@end
+
+/* API that is intended for use when the `distribution` of the receiver is set to `NSStackViewDistributionGravityAreas`. */
+@interface NSStackView (NSStackViewGravityAreas)
+
+/*
+ Adds the view to the given gravity area at the end of that gravity area.
+ This method will update the StackView's layout, and could result in the StackView changing its size or views being detached / clipped.
+ */
+- (void)addView:(NSView *)view inGravity:(NSStackViewGravity)gravity;
+/*
+ Adds the view to the given gravity area at the index within that gravity area.
+ Index numbers & counts are specific to each gravity area, and are indexed based on the set userInterfaceLayoutDirection.
+ (For a L2R layout, index 0 in the leading gravity is the furthest left index; for a R2L layout index 0 in the leading gravity is the furthest right index)
+ This method will update the StackView's layout, and could result in the StackView changing its size or views being detached / clipped.
+ An NSRangeException will be raised if the index is out of bounds
+ */
+- (void)insertView:(NSView *)view atIndex:(NSUInteger)index inGravity:(NSStackViewGravity)gravity;
+/*
+ Will remove view from the StackView.
+ [view removeFromSuperview] will have the same behavior in the case that view is visible (not detached) from the StackView.
+ In the case that view had been detached, this method must be used to remove it from the StackView.
+ view must be managed by the StackView, an exception will be raised if not.
+ */
+- (void)removeView:(NSView *)view;
+
+- (NSArray<__kindof NSView *> *)viewsInGravity:(NSStackViewGravity)gravity; // Getters will return the views that are contained by the corresponding gravity area, regardless of detach-status.
+- (void)setViews:(NSArray<NSView *> *)views inGravity:(NSStackViewGravity)gravity; // Setters will update the views and the layout for that gravity area.
+
+/*
+ Returns an array of all the views managed by this StackView, regardless of detach-status or gravity area.
+ This is indexed in the order of indexing within the StackView. Detached views are indexed at the positions they would have been if they were still attached.
+ */
+@property (readonly, copy) NSArray<__kindof NSView *> *views;
 
 @end
 

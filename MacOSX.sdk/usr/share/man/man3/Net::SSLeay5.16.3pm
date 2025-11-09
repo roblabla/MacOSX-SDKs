@@ -124,7 +124,7 @@
 .\" ========================================================================
 .\"
 .IX Title "Net::SSLeay 3"
-.TH Net::SSLeay 3 "2012-09-21" "perl v5.16.3" "User Contributed Perl Documentation"
+.TH Net::SSLeay 3 "2015-08-19" "perl v5.16.3" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -238,7 +238,8 @@ the \s-1HTTP\s0 protocol specifications for further details (e.g. \s-1RFC\-2617\
 server. The first four arguments are equal to \f(CW\*(C`get_https()\*(C'\fR (note that
 the empty string (\f(CW\*(Aq\*(Aq\fR) is passed as header argument).
 The fifth argument is the
-contents of the form formatted according to \s-1CGI\s0 specification. In this
+contents of the form formatted according to \s-1CGI\s0 specification. 
+Do not post \s-1UTF\-8\s0 data as content: use utf8::downgrade first. In this
 case the helper function \f(CW\*(C`make_https()\*(C'\fR is used to do the formatting,
 but you could pass any string. \f(CW\*(C`post_https()\*(C'\fR automatically adds
 \&\f(CW\*(C`Content\-Type\*(C'\fR and \f(CW\*(C`Content\-Length\*(C'\fR headers to the request.
@@ -524,6 +525,196 @@ named files.
 \&        error reading CRL....
 \&    }
 .Ve
+.PP
+Usually the URLs where you can download the CRLs is contained in the certificate
+itself and you can extract them with
+.PP
+.Vb 1
+\&    my @url = Net::SSLeay::P_X509_get_crl_distribution_points($cert)
+.Ve
+.PP
+But there is no automatic downloading of the CRLs and often these CRLs are too
+huge to just download them to verify a single certificate.
+Also, these CRLs are often in \s-1DER\s0 format which you need to convert to \s-1PEM\s0 before
+you can use it:
+.PP
+.Vb 1
+\&    openssl crl \-in crl.der \-inform der \-out crl.pem
+.Ve
+.PP
+So as an alternative for faster and timely revocation checks you better use
+the Online Status Revocation Protocol (\s-1OCSP\s0).
+.SS "Certificate verification and Online Status Revocation Protocol (\s-1OCSP\s0)"
+.IX Subsection "Certificate verification and Online Status Revocation Protocol (OCSP)"
+While checking for revoked certificates is possible and fast with Certificate
+Revocation Lists, you need to download the complete and often huge list before
+you can verify a single certificate.
+.PP
+A faster way is to ask the \s-1CA\s0 to check the revocation of just a single or a few
+certificates using \s-1OCSP\s0. Basically you generate for each certificate an
+\&\s-1OCSP_CERTID\s0 based on the certificate itself and its issuer, put the ids
+togetether into an \s-1OCSP_REQUEST\s0 and send the request to the \s-1URL\s0 given in the
+certificate.
+.PP
+As a result you get back an \s-1OCSP_RESPONSE\s0 and need to check the status of the
+response, check that it is valid (e.g. signed by the \s-1CA\s0) and finally extract the
+information about each \s-1OCSP_CERTID\s0 to find out if the certificate is still valid
+or got revoked.
+.PP
+With Net::SSLeay this can be done like this:
+.PP
+.Vb 8
+\&    # get id(s) for given certs, like from get_peer_certificate
+\&    # or get_peer_cert_chain. This will croak if
+\&    # \- one tries to make an OCSP_CERTID for a self\-signed certificate
+\&    # \- the issuer of the certificate cannot be found in the SSL objects
+\&    #   store, nor in the current certificate chain
+\&    my $cert = Net::SSLeay::get_peer_certificate($ssl);
+\&    my $id = eval { Net::SSLeay::OCSP_cert2ids($ssl,$cert) };
+\&    die "failed to make OCSP_CERTID: $@" if $@;
+\&
+\&    # create OCSP_REQUEST from id(s)
+\&    # Multiple can be put into the same request, if the same OCSP responder
+\&    # is responsible for them.
+\&    my $req = Net::SSLeay::OCSP_ids2req($id);
+\&
+\&    # determine URI of OCSP responder
+\&    my $uri = Net::SSLeay::P_X509_get_ocsp_uri($cert);
+\&
+\&    # Send stringified OCSP_REQUEST with POST to $uri.
+\&    # We can ignore certificate verification for https, because the OCSP
+\&    # response itself is signed.
+\&    my $ua = HTTP::Tiny\->new(verify_SSL => 0);
+\&    my $res = $ua\->request( \*(AqPOST\*(Aq,$uri, {
+\&        headers => { \*(AqContent\-type\*(Aq => \*(Aqapplication/ocsp\-request\*(Aq },
+\&        content => Net::SSLeay::i2d_OCSP_REQUEST($req)
+\&    });
+\&    my $content = $res && $res\->{success} && $res\->{content}
+\&        or die "query failed";
+\&
+\&    # Extract OCSP_RESPONSE.
+\&    # this will croak if the string is not an OCSP_RESPONSE
+\&    my $resp = eval { Net::SSLeay::d2i_OCSP_RESPONSE($content) };
+\&
+\&    # Check status of response.
+\&    my $status = Net::SSLeay::OCSP_response_status($resp);
+\&    if ($status != Net::SSLeay::OCSP_RESPONSE_STATUS_SUCCESSFUL())
+\&        die "OCSP response failed: ".
+\&            Net::SSLeay::OCSP_response_status_str($status);
+\&    }
+\&
+\&    # Verify signature of response and if nonce matches request.
+\&    # This will croak if there is a nonce in the response, but it does not match
+\&    # the request. It will return false if the signature could not be verified,
+\&    # in which case details can be retrieved with Net::SSLeay::ERR_get_error.
+\&    # It will not complain if the response does not contain a nonce, which is
+\&    # usually the case with pre\-signed responses.
+\&    if ( ! eval { Net::SSLeay::OCSP_response_verify($ssl,$resp,$req) }) {
+\&        die "OCSP response verification failed";
+\&    }
+\&
+\&    # Extract information from OCSP_RESPONSE for each of the ids.
+\&
+\&    # If called in scalar context it will return the time (as time_t), when the
+\&    # next update is due (minimum of all successful responses inside $resp). It
+\&    # will croak on the following problems:
+\&    # \- response is expired or not yet valid
+\&    # \- no response for given OCSP_CERTID
+\&    # \- certificate status is not good (e.g. revoked or unknown)
+\&    if ( my $nextupd = eval { Net::SSLeay::OCSP_response_results($resp,$id) }) {
+\&        warn "certificate is valid, next update in ".
+\&            ($nextupd\-time())." seconds\en";
+\&    } else {
+\&        die "certificate is not valid: $@";
+\&    }
+\&
+\&    # But in array context it will return detailled information about each given
+\&    # OCSP_CERTID instead croaking on errors:
+\&    # if no @ids are given it will return information about all single responses
+\&    # in the OCSP_RESPONSE
+\&    my @results = Net::SSLeay::OCSP_response_results($resp,@ids);
+\&    for my $r (@results) {
+\&        print Dumper($r);
+\&        # @results are in the same order as the @ids and contain:
+\&        # $r\->[0] \- OCSP_CERTID
+\&        # $r\->[1] \- undef if no error (certificate good) OR error message as string
+\&        # $r\->[2] \- hash with details:
+\&        #   thisUpdate \- time_t of this single response
+\&        #   nextUpdate \- time_t when update is expected
+\&        #   statusType \- integer:
+\&        #      V_OCSP_CERTSTATUS_GOOD(0)
+\&        #      V_OCSP_CERTSTATUS_REVOKED(1)
+\&        #      V_OCSP_CERTSTATUS_UNKNOWN(2)
+\&        #   revocationTime \- time_t (only if revoked)
+\&        #   revocationReason \- integer (only if revoked)
+\&        #   revocationReason_str \- reason as string (only if revoked)
+\&    }
+.Ve
+.PP
+To further speed up certificate revocation checking one can use a \s-1TLS\s0 extension
+to instruct the server to staple the \s-1OCSP\s0 response:
+.PP
+.Vb 3
+\&    # set TLS extension before doing SSL_connect
+\&    Net::SSLeay::set_tlsext_status_type($ssl,
+\&        Net::SSLeay::TLSEXT_STATUSTYPE_ocsp());
+\&
+\&    # setup callback to verify OCSP response
+\&    my $cert_valid = undef;
+\&    Net::SSLeay::CTX_set_tlsext_status_cb($context,sub {
+\&        my ($ssl,$resp) = @_;
+\&        if (!$resp) {
+\&            # Lots of servers don\*(Aqt return an OCSP response.
+\&            # In this case we must check the OCSP status outside the SSL
+\&            # handshake.
+\&            warn "server did not return stapled OCSP response\en";
+\&            return 1;
+\&        }
+\&        # verify status
+\&        my $status = Net::SSLeay::OCSP_response_status($resp);
+\&        if ($status != Net::SSLeay::OCSP_RESPONSE_STATUS_SUCCESSFUL()) {
+\&            warn "OCSP response failure: $status\en";
+\&            return 1;
+\&        }
+\&        # verify signature \- we have no OCSP_REQUEST here to check nonce
+\&        if (!eval { Net::SSLeay::OCSP_response_verify($ssl,$resp) }) {
+\&            warn "OCSP response verify failed\en";
+\&            return 1;
+\&        }
+\&        # check if the certificate is valid
+\&        # we should check here against the peer_certificate
+\&        my $cert = Net::SSLeay::get_peer_certificate();
+\&        my $certid = eval { Net::SSLeay::OCSP_cert2ids($ssl,$cert) } or do {
+\&            warn "cannot get certid from cert: $@";
+\&            $cert_valid = \-1;
+\&            return 1;
+\&        };
+\&
+\&        if ( $nextupd = eval {
+\&            Net::SSLeay::OCSP_response_results($resp,$certid) }) {
+\&            warn "certificate not revoked\en";
+\&            $cert_valid = 1;
+\&        } else {
+\&            warn "certificate not valid: $@";
+\&            $cert_valid = 0;
+\&        }
+\&    });
+\&
+\&    # do SSL handshake here
+\&    ....
+\&    # check if certificate revocation was checked already
+\&    if ( ! defined $cert_valid) {
+\&        # check revocation outside of SSL handshake by asking OCSP responder
+\&        ...
+\&    } elsif ( ! $cert_valid ) {
+\&        die "certificate not valid \- closing SSL connection";
+\&    } elsif ( $cert_valid<0 ) {
+\&        die "cannot verify certificate revocation \- self\-signed ?";
+\&    } else {
+\&        # everything fine
+\&        ...
+\&    }
+.Ve
 .SS "Using Net::SSLeay in multi-threaded applications"
 .IX Subsection "Using Net::SSLeay in multi-threaded applications"
 \&\fB\s-1IMPORTANT:\s0 versions 1.42 or earlier are not thread-safe!\fR
@@ -630,7 +821,7 @@ in multi-threaded applications. It is generally recommended to do any global ini
 of such a module in the main thread before calling \f(CW\*(C`threads\->new(..)\*(C'\fR or
 \&\f(CW\*(C`threads\->create(..)\*(C'\fR but it might differ module by module.
 .PP
-To be play safe you can load and init Net::SSLeay explicitly in the main thread:
+To be safe you can load and init Net::SSLeay explicitly in the main thread:
 .PP
 .Vb 2
 \&    use Net::SSLeay;
@@ -638,8 +829,7 @@ To be play safe you can load and init Net::SSLeay explicitly in the main thread:
 \&
 \&    Net::SSLeay::load_error_strings();
 \&    Net::SSLeay::SSLeay_add_ssl_algorithms();
-\&    Net::SSLeay::randomize();Net::SSLeay::initialize();
-\&    Net::SSLeay::initialize();
+\&    Net::SSLeay::randomize();
 .Ve
 .PP
 Or even safer:
@@ -651,7 +841,7 @@ Or even safer:
 \&    BEGIN {
 \&      Net::SSLeay::load_error_strings();
 \&      Net::SSLeay::SSLeay_add_ssl_algorithms();
-\&      Net::SSLeay::randomize();Net::SSLeay::initialize();
+\&      Net::SSLeay::randomize();
 \&    }
 .Ve
 .PP
@@ -998,13 +1188,16 @@ library_init
 .Sp
 Initialize \s-1SSL\s0 library by registering algorithms.
 .Sp
-.Vb 3
+.Vb 1
 \& my $rv = Net::SSLeay::library_init();
-\& #
-\& # returns: always 1
 .Ve
 .Sp
 Check openssl doc <http://www.openssl.org/docs/ssl/SSL_library_init.html>
+.Sp
+While the original function from OpenSSL always returns 1, Net::SSLeay adds a
+wrapper around it to make sure that the OpenSSL function is only called once.
+Thus the function will return 1 if initialization was done and 0 if not, i.e. if
+initialization was done already before.
 .IP "\(bu" 4
 add_ssl_algorithms
 .Sp
@@ -1243,7 +1436,7 @@ Check openssl doc <http://www.openssl.org/docs/ssl/SSL_alert_type_string.html>
 .IP "\(bu" 4
 SSLv2_method
 .Sp
-Returns \s-1SSL_METHOD\s0 structure corresponding to SSLv2 method, the return value can be later used as a param of \*(L"CTX_new_with_method\*(R".
+Returns \s-1SSL_METHOD\s0 structure corresponding to SSLv2 method, the return value can be later used as a param of \*(L"CTX_new_with_method\*(R". Only available where supported by the underlying openssl.
 .Sp
 .Vb 3
 \& my $rv = Net::SSLeay::SSLv2_method();
@@ -1269,6 +1462,30 @@ Returns \s-1SSL_METHOD\s0 structure corresponding to TLSv1 method, the return va
 .Sp
 .Vb 3
 \& my $rv = Net::SSLeay::TLSv1_method();
+\& #
+\& # returns: value corresponding to openssl\*(Aqs SSL_METHOD structure (0 on failure)
+.Ve
+.Sp
+Check openssl doc <http://www.openssl.org/docs/ssl/SSL_CTX_new.html>
+.IP "\(bu" 4
+TLSv1_1_method
+.Sp
+Returns \s-1SSL_METHOD\s0 structure corresponding to TLSv1_1 method, the return value can be later used as a param of \*(L"CTX_new_with_method\*(R". Only available where supported by the underlying openssl.
+.Sp
+.Vb 3
+\& my $rv = Net::SSLeay::TLSv1_\|_1method();
+\& #
+\& # returns: value corresponding to openssl\*(Aqs SSL_METHOD structure (0 on failure)
+.Ve
+.Sp
+Check openssl doc <http://www.openssl.org/docs/ssl/SSL_CTX_new.html>
+.IP "\(bu" 4
+TLSv1_2_method
+.Sp
+Returns \s-1SSL_METHOD\s0 structure corresponding to TLSv1_2 method, the return value can be later used as a param of \*(L"CTX_new_with_method\*(R". Only available where supported by the underlying openssl.
+.Sp
+.Vb 3
+\& my $rv = Net::SSLeay::TLSv1_2_method();
 \& #
 \& # returns: value corresponding to openssl\*(Aqs SSL_METHOD structure (0 on failure)
 .Ve
@@ -1467,7 +1684,7 @@ PEM_read_bio_X509
 .Sp
 \&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.45 and before
 .Sp
-Loads \s-1PEM\s0 formated X509 certificate via given \s-1BIO\s0 structure.
+Loads \s-1PEM\s0 formatted X509 certificate via given \s-1BIO\s0 structure.
 .Sp
 .Vb 4
 \& my $rv = Net::SSLeay::PEM_read_bio_X509($bio);
@@ -1488,7 +1705,7 @@ PEM_read_bio_X509_REQ
 .Sp
 \&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.45 and before
 .Sp
-Loads \s-1PEM\s0 formated X509_REQ object via given \s-1BIO\s0 structure.
+Loads \s-1PEM\s0 formatted X509_REQ object via given \s-1BIO\s0 structure.
 .Sp
 .Vb 4
 \& my $rv = Net::SSLeay::PEM_read_bio_X509_REQ($bio, $x=NULL, $cb=NULL, $u=NULL);
@@ -1531,7 +1748,7 @@ PEM_read_bio_PrivateKey
 .Sp
 \&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.45 and before
 .Sp
-Loads \s-1PEM\s0 formated private key via given \s-1BIO\s0 structure.
+Loads \s-1PEM\s0 formatted private key via given \s-1BIO\s0 structure.
 .Sp
 .Vb 6
 \& my $rv = Net::SSLeay::PEM_read_bio_PrivateKey($bio, $cb, $data);
@@ -1589,7 +1806,7 @@ PEM_get_string_PrivateKey
 .Sp
 \&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.45 and before
 .Sp
-Converts public key \f(CW$pk\fR into \s-1PEM\s0 formated string (optionally protected with password).
+Converts public key \f(CW$pk\fR into \s-1PEM\s0 formatted string (optionally protected with password).
 .Sp
 .Vb 6
 \& my $rv = Net::SSLeay::PEM_get_string_PrivateKey($pk, $passwd, $enc_alg);
@@ -1597,7 +1814,7 @@ Converts public key \f(CW$pk\fR into \s-1PEM\s0 formated string (optionally prot
 \& # $passwd \- [optional] (string) password to use for key encryption
 \& # $enc_alg \- [optional] algorithm to use for key encryption (default: DES_CBC) \- value corresponding to openssl\*(Aqs EVP_CIPHER structure
 \& #
-\& # returns: PEM formated string
+\& # returns: PEM formatted string
 .Ve
 .Sp
 Examples:
@@ -1612,7 +1829,7 @@ PEM_get_string_X509_CRL
 .Sp
 \&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.45 and before
 .Sp
-Converts X509_CRL object \f(CW$x509_crl\fR into \s-1PEM\s0 formated string.
+Converts X509_CRL object \f(CW$x509_crl\fR into \s-1PEM\s0 formatted string.
 .Sp
 .Vb 4
 \& Net::SSLeay::PEM_get_string_X509_CRL($x509_crl);
@@ -1625,7 +1842,7 @@ PEM_get_string_X509_REQ
 .Sp
 \&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.45 and before
 .Sp
-Converts X509_REQ object \f(CW$x509_crl\fR into \s-1PEM\s0 formated string.
+Converts X509_REQ object \f(CW$x509_crl\fR into \s-1PEM\s0 formatted string.
 .Sp
 .Vb 4
 \& Net::SSLeay::PEM_get_string_X509_REQ($x509_req);
@@ -1641,7 +1858,7 @@ d2i_X509_bio
 .Sp
 \&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.45 and before
 .Sp
-Loads \s-1DER\s0 formated X509 certificate via given \s-1BIO\s0 structure.
+Loads \s-1DER\s0 formatted X509 certificate via given \s-1BIO\s0 structure.
 .Sp
 .Vb 4
 \& my $rv = Net::SSLeay::d2i_X509_bio($bp);
@@ -1664,7 +1881,7 @@ d2i_X509_CRL_bio
 .Sp
 \&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.45 and before
 .Sp
-Loads \s-1DER\s0 formated X509_CRL object via given \s-1BIO\s0 structure.
+Loads \s-1DER\s0 formatted X509_CRL object via given \s-1BIO\s0 structure.
 .Sp
 .Vb 4
 \& my $rv = Net::SSLeay::d2i_X509_CRL_bio($bp);
@@ -1685,7 +1902,7 @@ d2i_X509_REQ_bio
 .Sp
 \&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.45 and before
 .Sp
-Loads \s-1DER\s0 formated X509_REQ object via given \s-1BIO\s0 structure.
+Loads \s-1DER\s0 formatted X509_REQ object via given \s-1BIO\s0 structure.
 .Sp
 .Vb 4
 \& my $rv = Net::SSLeay::d2i_X509_REQ_bio($bp);
@@ -1740,6 +1957,10 @@ Examples:
 \& #BEWARE: THIS IS WRONG \- MEMORY LEAKS! (you cannot free @cachain items)
 \& my ($privkey, $cert) = Net::SSLeay::P_PKCS12_load_file($filename, 1, $password);
 .Ve
+.Sp
+\&\fB\s-1NOTE\s0\fR With some combinations of Windows, perl, compiler and compiler options, you
+may see a runtime error \*(L"no OPENSSL_Applink\*(R", when calling
+Net::SSLeay::P_PKCS12_load_file. See \s-1README\s0.Win32 for more details.
 .PP
 \fILow level \s-1API:\s0 SESSION_* related functions\fR
 .IX Subsection "Low level API: SESSION_* related functions"
@@ -1747,7 +1968,7 @@ Examples:
 d2i_SSL_SESSION
 .Sp
 Transforms the external \s-1ASN1\s0 representation of an \s-1SSL/TLS\s0 session, stored as binary data
-at location pp with length length, into an \s-1SSL_SESSION\s0 object.
+at location pp with length of \f(CW$length\fR, into an \s-1SSL_SESSION\s0 object.
 .Sp
 ??? (does this function really work?)
 .Sp
@@ -1958,7 +2179,7 @@ SESSION_print
 .Sp
 \&\fB\s-1NOTE:\s0\fR Does not exactly correspond to any low level \s-1API\s0 function
 .Sp
-Prints session details (e.g. protocol version, ciprher, session-id ...) to \s-1BIO\s0.
+Prints session details (e.g. protocol version, cipher, session-id ...) to \s-1BIO\s0.
 .Sp
 .Vb 5
 \& my $rv = Net::SSLeay::SESSION_print($fp, $ses);
@@ -1980,7 +2201,7 @@ You have to use necessary \s-1BIO\s0 functions like this:
 .IP "\(bu" 4
 SESSION_print_fp
 .Sp
-Prints session details (e.g. protocol version, ciprher, session-id ...) to file handle.
+Prints session details (e.g. protocol version, cipher, session-id ...) to file handle.
 .Sp
 .Vb 5
 \& my $rv = Net::SSLeay::SESSION_print_fp($fp, $ses);
@@ -2200,6 +2421,36 @@ Internal handling function for \s-1SSL_CTX\s0 objects.
 \& 76 \- SSL_CTRL_GET_RI_SUPPORT
 \& 77 \- SSL_CTRL_CLEAR_OPTIONS
 \& 78 \- SSL_CTRL_CLEAR_MODE
+\&
+\& 82 \- SSL_CTRL_GET_EXTRA_CHAIN_CERTS
+\& 83 \- SSL_CTRL_CLEAR_EXTRA_CHAIN_CERTS
+\&
+\& 88 \- SSL_CTRL_CHAIN
+\& 89 \- SSL_CTRL_CHAIN_CERT
+\&
+\& 90 \- SSL_CTRL_GET_CURVES
+\& 91 \- SSL_CTRL_SET_CURVES
+\& 92 \- SSL_CTRL_SET_CURVES_LIST
+\& 93 \- SSL_CTRL_GET_SHARED_CURVE 
+\& 94 \- SSL_CTRL_SET_ECDH_AUTO
+\& 97 \- SSL_CTRL_SET_SIGALGS
+\& 98 \- SSL_CTRL_SET_SIGALGS_LIST
+\& 99 \- SSL_CTRL_CERT_FLAGS
+\& 100 \- SSL_CTRL_CLEAR_CERT_FLAGS
+\& 101 \- SSL_CTRL_SET_CLIENT_SIGALGS
+\& 102 \- SSL_CTRL_SET_CLIENT_SIGALGS_LIST
+\& 103 \- SSL_CTRL_GET_CLIENT_CERT_TYPES
+\& 104 \- SSL_CTRL_SET_CLIENT_CERT_TYPES
+\& 105 \- SSL_CTRL_BUILD_CERT_CHAIN
+\& 106 \- SSL_CTRL_SET_VERIFY_CERT_STORE
+\& 107 \- SSL_CTRL_SET_CHAIN_CERT_STORE
+\& 108 \- SSL_CTRL_GET_PEER_SIGNATURE_NID
+\& 109 \- SSL_CTRL_GET_SERVER_TMP_KEY
+\& 110 \- SSL_CTRL_GET_RAW_CIPHERLIST
+\& 111 \- SSL_CTRL_GET_EC_POINT_FORMATS
+\& 112 \- SSL_CTRL_GET_TLSA_RECORD
+\& 113 \- SSL_CTRL_SET_TLSA_RECORD
+\& 114 \- SSL_CTRL_PULL_TLSA_RECORD
 .Ve
 .Sp
 Check openssl doc <http://www.openssl.org/docs/ssl/SSL_CTX_ctrl.html>
@@ -2609,6 +2860,28 @@ Creates a new \s-1SSL_CTX\s0 object \- based on \fITLSv1_method()\fR \- as frame
 .Sp
 .Vb 3
 \& my $rv = Net::SSLeay::CTX_tlsv1_new();
+\& #
+\& # returns: value corresponding to openssl\*(Aqs SSL_CTX structure (0 on failure)
+.Ve
+.IP "\(bu" 4
+CTX_tlsv1_1_new
+.Sp
+Creates a new \s-1SSL_CTX\s0 object \- based on \fITLSv1_1_method()\fR \- as framework to establish \s-1TLS/SSL\s0 
+enabled connections. Only available where supported by the underlying openssl.
+.Sp
+.Vb 3
+\& my $rv = Net::SSLeay::CTX_tlsv1_1_new();
+\& #
+\& # returns: value corresponding to openssl\*(Aqs SSL_CTX structure (0 on failure)
+.Ve
+.IP "\(bu" 4
+CTX_tlsv1_2_new
+.Sp
+Creates a new \s-1SSL_CTX\s0 object \- based on \fITLSv1_2_method()\fR \- as framework to establish \s-1TLS/SSL\s0 
+enabled connections. Only available where supported by the underlying openssl.
+.Sp
+.Vb 3
+\& my $rv = Net::SSLeay::CTX_tlsv1_2_new();
 \& #
 \& # returns: value corresponding to openssl\*(Aqs SSL_CTX structure (0 on failure)
 .Ve
@@ -3439,6 +3712,18 @@ Returns a pointer to the \s-1SSL_CTX\s0 object, from which \f(CW$ssl\fR was crea
 .Sp
 Check openssl doc <http://www.openssl.org/docs/ssl/SSL_get_SSL_CTX.html>
 .IP "\(bu" 4
+set_SSL_CTX
+.Sp
+Sets the \s-1SSL_CTX\s0 the corresponds to an \s-1SSL\s0 session.
+.Sp
+.Vb 5
+\& my $the_ssl_ctx = Net::SSLeay::set_SSL_CTX($ssl, $ssl_ctx);
+\& # $ssl \- value corresponding to openssl\*(Aqs SSL structure
+\& # $ssl_ctx \- Change the ssl object to the given ssl_ctx
+\& #
+\& # returns \- the ssl_ctx
+.Ve
+.IP "\(bu" 4
 get_app_data
 .Sp
 Can be used to get application defined value/data.
@@ -3767,6 +4052,19 @@ Get the X509 certificate of the peer.
 .Sp
 Check openssl doc <http://www.openssl.org/docs/ssl/SSL_get_peer_certificate.html>
 .IP "\(bu" 4
+get_peer_cert_chain
+.Sp
+Get the certificate chain of the peer as an array of X509 structures.
+.Sp
+.Vb 4
+\& my @rv = Net::SSLeay::get_peer_cert_chain($ssl);
+\& # $ssl \- value corresponding to openssl\*(Aqs SSL structure
+\& #
+\& # returns: list of X509 structures
+.Ve
+.Sp
+Check openssl doc <http://www.openssl.org/docs/ssl/SSL_get_peer_certificate.html>
+.IP "\(bu" 4
 get_quiet_shutdown
 .Sp
 Returns the 'quiet shutdown' setting of ssl.
@@ -3834,6 +4132,18 @@ Returns internal SSLv3 client_random value.
 \& # $ssl \- value corresponding to openssl\*(Aqs SSL structure
 \& #
 \& # returns: client_random value (binary data)
+.Ve
+.IP "\(bu" 4
+export_keying_material
+.Sp
+Returns a buffer of \f(CW$req_len\fR bytes of keying material based on the constant string \f(CW$label\fR using the
+masterkey and client and server random strings as described in 
+draft\-ietf\-pppext\-eap\-ttls\-01.txt and See rfc2716
+If p is present, it will be concatenated before generating the keying material
+Returns undef on error
+.Sp
+.Vb 1
+\&    my $out = Net::SSLeay::export_keying_material($ssl, $req_len, $label, $p);
 .Ve
 .IP "\(bu" 4
 get_session
@@ -3934,6 +4244,14 @@ Exactly the same as \*(L"get_state\*(R".
 .Sp
 .Vb 1
 \& my $rv = Net::SSLeay::state($ssl);
+.Ve
+.IP "\(bu" 4
+set_state
+.Sp
+Sets the \s-1SSL\s0 connection state.
+.Sp
+.Vb 1
+\& Net::SSLeay::set_state($ssl,Net::SSLeay::SSL_ST_ACCEPT());
 .Ve
 .IP "\(bu" 4
 get_verify_depth
@@ -4072,7 +4390,7 @@ Check openssl doc <http://www.openssl.org/docs/ssl/SSL_get_rbio.html>
 .IP "\(bu" 4
 load_client_CA_file
 .Sp
-Load X509 certificates from file (\s-1PEM\s0 formated).
+Load X509 certificates from file (\s-1PEM\s0 formatted).
 .Sp
 .Vb 4
 \& my $rv = Net::SSLeay::load_client_CA_file($file);
@@ -4130,15 +4448,17 @@ Executes \s-1SSL_CTRL_GET_TOTAL_RENEGOTIATIONS\s0 command on \f(CW$ssl\fR.
 peek
 .Sp
 Copies \f(CW$max\fR bytes from the specified \f(CW$ssl\fR into the returned value.
-In constrast to the \f(CW\*(C`Net::SSLeay::read()\*(C'\fR function, the data in the \s-1SSL\s0
+In contrast to the \f(CW\*(C`Net::SSLeay::read()\*(C'\fR function, the data in the \s-1SSL\s0
 buffer is unmodified after the \fISSL_peek()\fR operation.
 .Sp
-.Vb 5
+.Vb 7
 \& Net::SSLeay::peek($ssl, $max);
 \& # $ssl \- value corresponding to openssl\*(Aqs SSL structure
 \& # $max \- [optional] max bytes to peek (integer) \- default is 32768
 \& #
-\& # returns: read data, undef on error
+\& # in scalar context: data read from the TLS/SSL connection, undef on error
+\& # in list context:   two\-item array consisting of data read (undef on error),
+\& #                      and return code from SSL_read().
 .Ve
 .IP "\(bu" 4
 pending
@@ -4348,14 +4668,27 @@ Check openssl doc <http://www.openssl.org/docs/ssl/SSL_set_fd.html>
 set_info_callback
 .Sp
 Sets the callback function, that can be used to obtain state information for \f(CW$ssl\fR during connection setup and use.
-When callback is 0 (\s-1NULL\s0), the callback setting currently valid for ctx is used.
-.Sp
-??? (does this function really work?)
+When callback is undef, the callback setting currently valid for ctx is used.
 .Sp
 .Vb 5
-\& Net::SSLeay::set_info_callback($ssl, $cb);
+\& Net::SSLeay::set_info_callback($ssl, $cb, [$data]);
 \& # $ssl \- value corresponding to openssl\*(Aqs SSL structure
-\& # $cb \- pointer to function ???
+\& # $cb \- sub { my ($ssl,$where,$ret,$data) = @_; ... }
+\& #
+\& # returns: no return value
+.Ve
+.Sp
+Check openssl doc <http://www.openssl.org/docs/ssl/SSL_CTX_set_info_callback.html>
+.IP "\(bu" 4
+CTX_set_info_callback
+.Sp
+Sets the callback function on ctx, that can be used to obtain state information during ssl connection setup and use.
+When callback is undef, an existing callback will be disabled.
+.Sp
+.Vb 5
+\& Net::SSLeay::CTX_set_info_callback($ssl, $cb, [$data]);
+\& # $ssl \- value corresponding to openssl\*(Aqs SSL structure
+\& # $cb \- sub { my ($ssl,$where,$ret,$data) = @_; ... }
 \& #
 \& # returns: no return value
 .Ve
@@ -4782,7 +5115,7 @@ write_partial
 .Sp
 \&\fB\s-1NOTE:\s0\fR Does not exactly correspond to any low level \s-1API\s0 function
 .Sp
-Writes a fragment of data data from the buffer \f(CW$data\fR into the specified \f(CW$ssl\fR connection.
+Writes a fragment of data in \f(CW$data\fR from the buffer \f(CW$data\fR into the specified \f(CW$ssl\fR connection.
 .Sp
 .Vb 9
 \& my $rv = Net::SSLeay::write_partial($ssl, $from, $count, $data);
@@ -4893,19 +5226,6 @@ Erase the \s-1PRNG\s0 state.
 .Ve
 .Sp
 Check openssl doc <http://www.openssl.org/docs/crypto/RAND_cleanup.html>
-.IP "\(bu" 4
-RAND_egd
-.Sp
-Queries the entropy gathering daemon \s-1EGD\s0 on socket \f(CW$path\fR for 255 bytes.
-.Sp
-.Vb 4
-\& my $rv = Net::SSLeay::RAND_egd($path);
-\& # $path \- path to a socket of entropy gathering daemon EGD
-\& #
-\& # returns: the number of bytes read from the daemon on success, and \-1 on failure
-.Ve
-.Sp
-Check openssl doc <http://www.openssl.org/docs/crypto/RAND_egd.html>
 .IP "\(bu" 4
 RAND_egd_bytes
 .Sp
@@ -5118,7 +5438,7 @@ Check openssl doc <http://www.openssl.org/docs/crypto/OBJ_nid2obj.html>
 .IP "\(bu" 4
 OBJ_txt2nid
 .Sp
-Returns \s-1NID\s0 corresponding to text string \f(CW$s\fR which can be a long name, a short name or the numerical respresentation of an object.
+Returns \s-1NID\s0 corresponding to text string \f(CW$s\fR which can be a long name, a short name or the numerical representation of an object.
 .Sp
 .Vb 4
 \& my $rv = Net::SSLeay::OBJ_txt2nid($s);
@@ -5396,6 +5716,88 @@ Frees up the X509 structure.
 .Ve
 .Sp
 Check openssl doc <http://www.openssl.org/docs/crypto/X509_new.html>
+.IP "\(bu" 4
+X509_check_host
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.68 and before; requires at
+least OpenSSL 1.0.2.
+.Sp
+Checks f the certificate Subject Alternative Name (\s-1SAN\s0) or Subject CommonName
+(\s-1CN\s0) matches the specified host name.
+.Sp
+.Vb 10
+\& my $rv = Net::SSLeay::X509_check_host($cert, $name, $flags, $peername);
+\& # $cert \- value corresponding to openssl\*(Aqs X509 structure
+\& # $name \- host name to check
+\& # $flags (optional, default: 0) \- can be the bitwise OR of:
+\& #   &Net::SSLeay::X509_CHECK_FLAG_ALWAYS_CHECK_SUBJECT
+\& #   &Net::SSLeay::X509_CHECK_FLAG_NO_WILDCARDS
+\& #   &Net::SSLeay::X509_CHECK_FLAG_NO_PARTIAL_WILDCARDS
+\& #   &Net::SSLeay::X509_CHECK_FLAG_MULTI_LABEL_WILDCARDS
+\& #   &Net::SSLeay::X509_CHECK_FLAG_SINGLE_LABEL_SUBDOMAINS
+\& # $peername (optional) \- If not omitted and $host matches $cert,
+\& #                        a copy of the matching SAN or CN from
+\& #                        the peer certificate is stored in $peername.
+\& #
+\& # returns:
+\& #   1 for a successful match
+\& #   0 for a failed match
+\& #  \-1 for an internal error
+\& #  \-2 if the input is malformed
+.Ve
+.Sp
+Check openssl doc <https://www.openssl.org/docs/crypto/X509_check_host.html>.
+.IP "\(bu" 4
+X509_check_email
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.68 and before; requires at least OpenSSL 1.0.2.
+.Sp
+Checks if the certificate matches the specified email address.
+.Sp
+.Vb 6
+\& my $rv = Net::SSLeay::X509_check_email($cert, $address, $flags);
+\& # $cert \- value corresponding to openssl\*(Aqs X509 structure
+\& # $address \- email address to check
+\& # $flags (optional, default: 0) \- see X509_check_host()
+\& #
+\& # returns: see X509_check_host()
+.Ve
+.Sp
+Check openssl doc <https://www.openssl.org/docs/crypto/X509_check_email.html>.
+.IP "\(bu" 4
+X509_check_ip
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.68 and before; requires at least OpenSSL 1.0.2.
+.Sp
+Checks if the certificate matches the specified IPv4 or IPv6 address.
+.Sp
+.Vb 6
+\& my $rv = Net::SSLeay::X509_check_email($cert, $address, $flags);
+\& # $cert \- value corresponding to openssl\*(Aqs X509 structure
+\& # $address \- IP address to check in binary format, in network byte order
+\& # $flags (optional, default: 0) \- see X509_check_host()
+\& #
+\& # returns: see X509_check_host()
+.Ve
+.Sp
+Check openssl doc <https://www.openssl.org/docs/crypto/X509_check_ip.html>.
+.IP "\(bu" 4
+X509_check_ip_asc
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.68 and before; requires at least OpenSSL 1.0.2.
+.Sp
+Checks if the certificate matches the specified IPv4 or IPv6 address.
+.Sp
+.Vb 6
+\& my $rv = Net::SSLeay::X509_check_email($cert, $address, $flags);
+\& # $cert \- value corresponding to openssl\*(Aqs X509 structure
+\& # $address \- IP address to check in text representation
+\& # $flags (optional, default: 0) \- see X509_check_host()
+\& #
+\& # returns: see X509_check_host()
+.Ve
+.Sp
+Check openssl doc <https://www.openssl.org/docs/crypto/X509_check_ip_asc.html>.
 .IP "\(bu" 4
 X509_certificate_type
 .Sp
@@ -5774,6 +6176,8 @@ Returns the list of alternative subject names from X509 certificate \f(CW$cert\f
 \& #          7 \- GEN_IPADD
 \& #          8 \- GEN_RID
 .Ve
+.Sp
+Note: type 7 \- \s-1GEN_IPADD\s0 contains the \s-1IP\s0 address as a packed binary address.
 .IP "\(bu" 4
 X509_get_subject_name
 .Sp
@@ -6464,6 +6868,49 @@ Example:
 \& print "digest=", unpack(\*(AqH*\*(Aq, $digest_value), "\en";
 .Ve
 .IP "\(bu" 4
+X509_CRL_get_ext
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.54 and before
+.Sp
+Returns X509_EXTENSION from \f(CW$x509\fR based on given position/index.
+.Sp
+.Vb 5
+\& my $rv = Net::SSLeay::X509_CRL_get_ext($x509, $index);
+\& # $x509 \- value corresponding to openssl\*(Aqs X509_CRL structure
+\& # $index \- (integer) position/index of extension within $x509
+\& #
+\& # returns: value corresponding to openssl\*(Aqs X509_EXTENSION structure (0 on failure)
+.Ve
+.IP "\(bu" 4
+X509_CRL_get_ext_by_NID
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.54 and before
+.Sp
+Returns X509_EXTENSION from \f(CW$x509\fR based on given \s-1NID\s0.
+.Sp
+.Vb 7
+\& my $rv = Net::SSLeay::X509_CRL_get_ext_by_NID($x509, $nid, $loc);
+\& # $x509 \- value corresponding to openssl\*(Aqs X509_CRL structure
+\& # $nid \- (integer) NID value
+\& # $loc \- (integer) position to start lookup at
+\& #
+\& # returns: position/index of extension, negative value on error
+\& #          call Net::SSLeay::X509_CRL_get_ext($x509, $rv) to get the actual extension
+.Ve
+.IP "\(bu" 4
+X509_CRL_get_ext_count
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.54 and before
+.Sp
+Returns the total number of extensions in X509_CRL object \f(CW$x\fR.
+.Sp
+.Vb 4
+\& my $rv = Net::SSLeay::X509_CRL_get_ext_count($x);
+\& # $x \- value corresponding to openssl\*(Aqs X509_CRL structure
+\& #
+\& # returns: count of extensions
+.Ve
+.IP "\(bu" 4
 X509_CRL_get_issuer
 .Sp
 \&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.45 and before
@@ -6622,7 +7069,7 @@ P_X509_CRL_add_revoked_serial_hex
 .Sp
 \&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.45 and before; requires at least openssl\-0.9.7
 .Sp
-Adds given serian number \f(CW$serial_hex\fR to X509_CRL object \f(CW$crl\fR.
+Adds given serial number \f(CW$serial_hex\fR to X509_CRL object \f(CW$crl\fR.
 .Sp
 .Vb 8
 \& Net::SSLeay::P_X509_CRL_add_revoked_serial_hex($crl, $serial_hex, $rev_time, $reason_code, $comp_time);
@@ -6774,6 +7221,34 @@ Retrieves the field name of \f(CW$ne\fR in and \s-1ASN1_OBJECT\s0 structure.
 .Ve
 .Sp
 Check openssl doc <http://www.openssl.org/docs/crypto/X509_NAME_ENTRY_get_object.html>
+.IP "\(bu" 4
+X509_NAME_new
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.55 and before; requires at least openssl\-0.9.5
+.Sp
+Creates a new X509_NAME structure.
+Adds a field whose name is defined by a string \f(CW$field\fR. The field value to be added is in \f(CW$bytes\fR.
+.Sp
+.Vb 3
+\& my $rv = Net::SSLeay::X509_NAME_new();
+\& #
+\& # returns: value corresponding to openssl\*(Aqs X509_NAME structure (0 on failure)
+.Ve
+.IP "\(bu" 4
+X509_NAME_hash
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.55 and before; requires at least openssl\-0.9.5
+.Sp
+Sort of a checksum of issuer name \f(CW$name\fR.
+The result is not a full hash (e.g. sha\-1), it is kind-of-a-hash truncated to the size of 'unsigned long' (32 bits).
+The resulting value might differ across different openssl versions for the same X509 certificate.
+.Sp
+.Vb 4
+\& my $rv = Net::SSLeay::X509_NAME_hash($name);
+\& # $name \- value corresponding to openssl\*(Aqs X509_NAME structure
+\& #
+\& # returns: number representing checksum
+.Ve
 .IP "\(bu" 4
 X509_NAME_add_entry_by_txt
 .Sp
@@ -6963,7 +7438,7 @@ such entry exists \-1 is returned.
 \&\fBopenssl note:\fR this is a legacy function which has various limitations which
 makes it of minimal use in practice. It can only find the first matching
 entry and will copy the contents of the field verbatim: this can be highly
-confusing if the target is a muticharacter string type like a BMPString or a UTF8String.
+confusing if the target is a multicharacter string type like a BMPString or a UTF8String.
 .Sp
 .Vb 5
 \& Net::SSLeay::X509_NAME_get_text_by_NID($name, $nid);
@@ -7120,7 +7595,7 @@ Is used to store application data at arg for idx into \f(CW$x509_store_ctx\fR.
 .IP "\(bu" 4
 X509_STORE_CTX_set_cert
 .Sp
-Sets the certificate to be vertified in \f(CW$x509_store_ctx\fR to \f(CW$x\fR.
+Sets the certificate to be verified in \f(CW$x509_store_ctx\fR to \f(CW$x\fR.
 .Sp
 .Vb 5
 \& Net::SSLeay::X509_STORE_CTX_set_cert($x509_store_ctx, $x);
@@ -7525,7 +8000,7 @@ P_EVP_MD_list_all
 .Sp
 The returned digest names correspond to values expected by \*(L"EVP_get_digestbyname\*(R".
 .Sp
-Note that some of the digets are available by default and some only after calling \*(L"OpenSSL_add_all_digests\*(R".
+Note that some of the digests are available by default and some only after calling \*(L"OpenSSL_add_all_digests\*(R".
 .IP "\(bu" 4
 EVP_get_digestbyname
 .Sp
@@ -7992,7 +8467,7 @@ Check openssl doc <http://www.openssl.org/docs/crypto/BIO_f_ssl.html>
 .IP "\(bu" 4
 BIO_new_file
 .Sp
-Creates a new file \s-1BIO\s0 with mode mode the meaning of mode is the same
+Creates a new file \s-1BIO\s0 with mode \f(CW$mode\fR the meaning of mode is the same
 as the stdio function \fIfopen()\fR. The \s-1BIO_CLOSE\s0 flag is set on the returned \s-1BIO\s0.
 .Sp
 .Vb 5
@@ -8129,8 +8604,102 @@ Closes down an \s-1SSL\s0 connection on \s-1BIO\s0 chain bio. It does this by lo
 .Sp
 Check openssl doc <http://www.openssl.org/docs/crypto/BIO_f_ssl.html>
 .PP
+\fILow level \s-1API:\s0 Server side Server Name Indication (\s-1SNI\s0) support\fR
+.IX Subsection "Low level API: Server side Server Name Indication (SNI) support"
+.IP "\(bu" 4
+set_tlsext_host_name
+.Sp
+\&\s-1TBA\s0
+.IP "\(bu" 4
+get_servername
+.Sp
+\&\s-1TBA\s0
+.IP "\(bu" 4
+get_servername_type
+.Sp
+\&\s-1TBA\s0
+.IP "\(bu" 4
+CTX_set_tlsext_servername_callback
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR requires at least OpenSSL 0.9.8f
+.Sp
+This function is used in a server to support Server side Server Name Indication (\s-1SNI\s0).
+.Sp
+.Vb 7
+\& Net::SSLeay::CTX_set_tlsext_servername_callback($ctx, $code)
+\& # $ctx \- SSL context
+\& # $code \- reference to a subroutine that will be called when a new connection is being initiated
+\& #
+\& # returns: no return value
+\&On the client side:
+\&use set_tlsext_host_name($ssl, $servername) before initiating the SSL connection.
+.Ve
+.Sp
+On the server side:
+Set up an additional \s-1\fISSL_CTX\s0()\fR for each different certificate;
+.Sp
+Add a servername callback to each \s-1\fISSL_CTX\s0()\fR using \fICTX_set_tlsext_servername_callback()\fR;
+.Sp
+The callback function is required to retrieve the client-supplied servername
+with get_servername(ssl). Figure out the right
+\&\s-1SSL_CTX\s0 to go with that host name, then switch the \s-1SSL\s0 object to that \s-1SSL_CTX\s0
+with \fIset_SSL_CTX()\fR.
+.Sp
+Example:
+.Sp
+.Vb 7
+\& # set callback
+\& Net::SSLeay::CTX_set_tlsext_servername_callback($ctx, 
+\&    sub {
+\&      my $ssl = shift;
+\&      my $h = Net::SSLeay::get_servername($ssl);
+\&      Net::SSLeay::set_SSL_CTX($ssl, $hostnames{$h}\->{ctx}) if exists $hostnames{$h};
+\&    } );
+.Ve
+.Sp
+More complete example:
+.Sp
+.Vb 1
+\& # ... initialize Net::SSLeay
+\&
+\& my %hostnames = (
+\&   \*(Aqsni1\*(Aq => { cert=>\*(Aqsni1.pem\*(Aq, key=>\*(Aqsni1.key\*(Aq },
+\&   \*(Aqsni2\*(Aq => { cert=>\*(Aqsni2.pem\*(Aq, key=>\*(Aqsni2.key\*(Aq },
+\& );
+\&
+\& # create a new context for each certificate/key pair
+\& for my $name (keys %hostnames) {
+\&   $hostnames{$name}\->{ctx} = Net::SSLeay::CTX_new or die;
+\&   Net::SSLeay::CTX_set_cipher_list($hostnames{$name}\->{ctx}, \*(AqALL\*(Aq);
+\&   Net::SSLeay::set_cert_and_key($hostnames{$name}\->{ctx},
+\&   $hostnames{$name}\->{cert}, $hostnames{$name}\->{key}) or die;
+\& }
+\&
+\& # create default context
+\& my $ctx = Net::SSLeay::CTX_new or die;
+\& Net::SSLeay::CTX_set_cipher_list($ctx, \*(AqALL\*(Aq);
+\& Net::SSLeay::set_cert_and_key($ctx, \*(Aqcert.pem\*(Aq,\*(Aqkey.pem\*(Aq) or die;
+\&
+\& # set callback
+\& Net::SSLeay::CTX_set_tlsext_servername_callback($ctx, sub {
+\&   my $ssl = shift;
+\&   my $h = Net::SSLeay::get_servername($ssl);
+\&   Net::SSLeay::set_SSL_CTX($ssl, $hostnames{$h}\->{ctx}) if exists $hostnames{$h};
+\&   } );
+\&
+\& # ... later
+\&
+\& $s = Net::SSLeay::new($ctx);
+\& Net::SSLeay::set_fd($s, fileno($accepted_socket));
+\& Net::SSLeay::accept($s);
+.Ve
+.PP
 \fILow level \s-1API:\s0 \s-1NPN\s0 (next protocol negotiation) related functions\fR
 .IX Subsection "Low level API: NPN (next protocol negotiation) related functions"
+.PP
+\&\s-1NPN\s0 is being replaced with \s-1ALPN\s0, a more recent \s-1TLS\s0 extension for application
+protocol negotiation that's in process of being adopted by \s-1IETF\s0. Please look
+below for \s-1APLN\s0 \s-1API\s0 description.
 .PP
 Simple approach for using \s-1NPN\s0 support looks like this:
 .PP
@@ -8138,7 +8707,7 @@ Simple approach for using \s-1NPN\s0 support looks like this:
 \& ### client side
 \& use Net::SSLeay;
 \& use IO::Socket::INET;
-\& 
+\&
 \& Net::SSLeay::initialize();
 \& my $sock = IO::Socket::INET\->new(PeerAddr=>\*(Aqencrypted.google.com:443\*(Aq) or die;
 \& my $ctx = Net::SSLeay::CTX_tlsv1_new() or die;
@@ -8311,6 +8880,183 @@ Returns the result of the last negotiation for given \s-1SSL\s0 connection \f(CW
 \& #          2 \- OPENSSL_NPN_NO_OVERLAP
 .Ve
 .PP
+\fILow level \s-1API:\s0 \s-1ALPN\s0 (application layer protocol negotiation) related functions\fR
+.IX Subsection "Low level API: ALPN (application layer protocol negotiation) related functions"
+.PP
+Application protocol can be negotiated via two different mechanisms employing
+two different \s-1TLS\s0 extensions: \s-1NPN\s0 (obsolete) and \s-1ALPN\s0 (recommended).
+.PP
+The \s-1API\s0 is rather similar, with slight differences reflecting protocol
+specifics. In particular, with \s-1ALPN\s0 the protocol negotiation takes place on
+server, while with \s-1NPN\s0 the client implements the protocol negotiation logic.
+.PP
+With \s-1ALPN\s0, the most basic implementation looks like this:
+.PP
+.Vb 3
+\& ### client side
+\& use Net::SSLeay;
+\& use IO::Socket::INET;
+\&
+\& Net::SSLeay::initialize();
+\& my $sock = IO::Socket::INET\->new(PeerAddr=>\*(Aqencrypted.google.com:443\*(Aq) or die;
+\& my $ctx = Net::SSLeay::CTX_tlsv1_new() or die;
+\& Net::SSLeay::CTX_set_options($ctx, &Net::SSLeay::OP_ALL);
+\& Net::SSLeay::CTX_set_alpn_protos($ctx, [\*(Aqhttp/1.1\*(Aq, \*(Aqhttp/2.0\*(Aq, \*(Aqspdy/3]);
+\& my $ssl = Net::SSLeay::new($ctx) or die;
+\& Net::SSLeay::set_fd($ssl, fileno($sock)) or die;
+\& Net::SSLeay::connect($ssl);
+\&
+\& warn "client:selected=",Net::SSLeay::P_alpn_selected($ssl), "\en";
+\&
+\& ### server side
+\& use Net::SSLeay;
+\& use IO::Socket::INET;
+\&
+\& Net::SSLeay::initialize();
+\& my $ctx = Net::SSLeay::CTX_tlsv1_new() or die;
+\& Net::SSLeay::CTX_set_options($ctx, &Net::SSLeay::OP_ALL);
+\& Net::SSLeay::set_cert_and_key($ctx, "t/data/cert.pem", "t/data/key.pem");
+\& Net::SSLeay::CTX_set_alpn_select_cb($ctx, [\*(Aqhttp/1.1\*(Aq, \*(Aqhttp/2.0\*(Aq, \*(Aqspdy/3]);
+\& my $sock = IO::Socket::INET\->new(LocalAddr=>\*(Aqlocalhost\*(Aq, LocalPort=>5443, Proto=>\*(Aqtcp\*(Aq, Listen=>20) or die;
+\&
+\& while (1) {
+\&   my $ssl = Net::SSLeay::new($ctx);
+\&   warn("server:waiting for incoming connection...\en");
+\&   my $fd = $sock\->accept();
+\&   Net::SSLeay::set_fd($ssl, $fd\->fileno);
+\&   Net::SSLeay::accept($ssl);
+\&   warn "server:selected=",Net::SSLeay::P_alpn_selected($ssl),"\en";
+\&   my $got = Net::SSLeay::read($ssl);
+\&   Net::SSLeay::ssl_write_all($ssl, "length=".length($got));
+\&   Net::SSLeay::free($ssl);
+\&   $fd\->close();
+\& }
+\& # check with: openssl s_client \-connect localhost:5443 \-alpn spdy/3,http/1.1
+.Ve
+.PP
+Advanced approach allows you to implement your own negotiation algorithm.
+.PP
+.Vb 2
+\& #see below documentation for:
+\& Net::SSleay::CTX_set_alpn_select_cb($ctx, $perl_callback_function, $callback_data);
+.Ve
+.PP
+Detection of \s-1ALPN\s0 support (works even in older Net::SSLeay versions):
+.PP
+.Vb 1
+\& use Net::SSLeay;
+\&
+\& if (exists &Net::SSLeay::P_alpn_selected) {
+\&   # do ALPN stuff
+\& }
+.Ve
+.IP "\(bu" 4
+CTX_set_alpn_select_cb
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.55 and before; requires at least openssl\-1.0.2
+.Sp
+\&\fB\s-1NOTE:\s0\fR You need CTX_set_alpn_select_cb on \fBserver side\fR of \s-1TLS\s0 connection.
+.Sp
+Simple usage \- in this case a \*(L"common\*(R" negotiation algorithm (as implemented by openssl's function SSL_select_next_proto) is used.
+.Sp
+.Vb 5
+\& $rv = Net::SSleay::CTX_set_alpn_select_cb($ctx, $arrayref);
+\& # $ctx \- value corresponding to openssl\*(Aqs SSL_CTX structure
+\& # $arrayref \- list of accepted protocols \- e.g. [\*(Aqhttp/2.0\*(Aq, \*(Aqhttp/1.1\*(Aq, \*(Aqspdy/3\*(Aq]
+\& #
+\& # returns: 0 on success, 1 on failure
+.Ve
+.Sp
+Advanced usage (you probably do not need this):
+.Sp
+.Vb 6
+\& $rv = Net::SSleay::CTX_set_alpn_select_cb($ctx, $perl_callback_function, $callback_data);
+\& # $ctx \- value corresponding to openssl\*(Aqs SSL_CTX structure
+\& # $perl_callback_function \- reference to perl function
+\& # $callback_data \- [optional] data to passed to callback function when invoked
+\& #
+\& # returns: 0 on success, 1 on failure
+\&
+\& # where callback function looks like
+\& sub alpn_select_cb_invoke {
+\&   my ($ssl, $arrayref_proto_list_advertised_by_client, $callback_data) = @_;
+\&   # ...
+\&   if ($negotiated) {
+\&     return \*(Aqhttp/2.0\*(Aq;
+\&   } else {
+\&     return undef;
+\&   }
+\& }
+.Ve
+.Sp
+To undefine/clear this callback use:
+.Sp
+.Vb 1
+\& Net::SSleay::CTX_set_alpn_select_cb($ctx, undef);
+.Ve
+.IP "\(bu" 4
+set_alpn_protos
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.55 and before; requires at least openssl\-1.0.2
+.Sp
+\&\fB\s-1NOTE:\s0\fR You need set_alpn_protos on \fBclient side\fR of \s-1TLS\s0 connection.
+.Sp
+This adds list of supported application layer protocols to ClientHello message sent by a client.
+It advertises the enumeration of supported protocols:
+.Sp
+.Vb 2
+\& Net::SSLeay::set_alpn_protos($ssl, [\*(Aqhttp/1.1\*(Aq, \*(Aqhttp/2.0\*(Aq, \*(Aqspdy/3]);
+\& # returns 0 on success
+.Ve
+.IP "\(bu" 4
+CTX_set_alpn_protos
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.55 and before; requires at least openssl\-1.0.2
+.Sp
+\&\fB\s-1NOTE:\s0\fR You need CTX_set_alpn_protos on \fBclient side\fR of \s-1TLS\s0 connection.
+.Sp
+This adds list of supported application layer protocols to ClientHello message sent by a client.
+It advertises the enumeration of supported protocols:
+.Sp
+.Vb 2
+\& Net::SSLeay::CTX_set_alpn_protos($ctx, [\*(Aqhttp/1.1\*(Aq, \*(Aqhttp/2.0\*(Aq, \*(Aqspdy/3]);
+\& # returns 0 on success
+.Ve
+.IP "\(bu" 4
+P_alpn_selected
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR not available in Net\-SSLeay\-1.55 and before; requires at least openssl\-1.0.2
+.Sp
+Returns the name of negotiated protocol for given \s-1TLS\s0 connection \f(CW$ssl\fR.
+.Sp
+.Vb 4
+\& $rv = Net::SSLeay::P_alpn_selected($ssl)
+\& # $ssl \- value corresponding to openssl\*(Aqs SSL structure
+\& #
+\& # returns: (string) negotiated protocol name (or undef if no negotiation was done or failed with fatal error)
+.Ve
+.PP
+\fILow level \s-1API:\s0 \s-1DANE\s0 Support\fR
+.IX Subsection "Low level API: DANE Support"
+.PP
+OpenSSL version 1.0.2 adds preliminary support \s-1RFC6698\s0 Domain Authentication of
+Named Entities (\s-1DANE\s0) Transport Layer Association within OpenSSL
+.IP "\(bu" 4
+SSL_get_tlsa_record_byname
+.Sp
+\&\fB\s-1COMPATIBILITY:\s0\fR \s-1DELETED\s0 from net-ssleay, since it is not supported by OpenSSL
+.Sp
+In order to facilitate \s-1DANE\s0 there is additional interface,
+SSL_get_tlsa_record_byname, accepting hostname, port and socket type
+that returns packed \s-1TLSA\s0 record. In order to make it even easier there
+is additional SSL_ctrl function that calls SSL_get_tlsa_record_byname
+for you. Latter is recommended for programmers that wish to maintain
+broader binary compatibility, e.g. make application work with both 1.0.2
+and prior version (in which case call to SSL_ctrl with new code
+returning error would have to be ignored when running with prior version).
+.Sp
+Net::SSLeay::get_tlsa_record_byname($name, \f(CW$port\fR, \f(CW$type\fR);
+.PP
 \fILow level \s-1API:\s0 Other functions\fR
 .IX Subsection "Low level API: Other functions"
 .IP "\(bu" 4
@@ -8346,6 +9092,30 @@ Frees the \s-1DH\s0 structure and its components. The values are erased before t
 .Ve
 .Sp
 Check openssl doc <http://www.openssl.org/docs/crypto/DH_new.html>
+.IP "\(bu" 4
+FIPS_mode_set
+.Sp
+Enable or disable \s-1FIPS\s0 mode in a \s-1FIPS\s0 capable OpenSSL.
+.Sp
+.Vb 2
+\& Net::SSLeay:: FIPS_mode_set($enable);
+\& # $enable \- (integer) 1 to enable, 0 to disable
+.Ve
+.PP
+\fILow level \s-1API:\s0 \s-1EC\s0 related functions\fR
+.IX Subsection "Low level API: EC related functions"
+.IP "\(bu" 4
+CTX_set_tmp_ecdh
+.Sp
+\&\s-1TBA\s0
+.IP "\(bu" 4
+EC_KEY_free
+.Sp
+\&\s-1TBA\s0
+.IP "\(bu" 4
+EC_KEY_new_by_curve_name
+.Sp
+\&\s-1TBA\s0
 .SS "Constants"
 .IX Subsection "Constants"
 There are many openssl constants available in Net::SSLeay. You can use them like this:
@@ -8374,144 +9144,153 @@ have name with \f(CW\*(C`SSL_\*(C'\fR part stripped \- e.g. openssl's constant \
 The list of all available constant names:
 .PP
 .Vb 10
-\& ASN1_STRFLGS_ESC_CTRL           NID_ext_req                            OP_CISCO_ANYCONNECT
-\& ASN1_STRFLGS_ESC_MSB            NID_friendlyName                       OP_COOKIE_EXCHANGE
-\& ASN1_STRFLGS_ESC_QUOTE          NID_givenName                          OP_CRYPTOPRO_TLSEXT_BUG
-\& ASN1_STRFLGS_RFC2253            NID_hmacWithSHA1                       OP_DONT_INSERT_EMPTY_FRAGMENTS
-\& CB_ACCEPT_EXIT                  NID_id_ad                              OP_EPHEMERAL_RSA
-\& CB_ACCEPT_LOOP                  NID_id_ce                              OP_LEGACY_SERVER_CONNECT
-\& CB_CONNECT_EXIT                 NID_id_kp                              OP_MICROSOFT_BIG_SSLV3_BUFFER
-\& CB_CONNECT_LOOP                 NID_id_pbkdf2                          OP_MICROSOFT_SESS_ID_BUG
-\& ERROR_NONE                      NID_id_pe                              OP_MSIE_SSLV2_RSA_PADDING
-\& ERROR_SSL                       NID_id_pkix                            OP_NETSCAPE_CA_DN_BUG
-\& ERROR_SYSCALL                   NID_id_qt_cps                          OP_NETSCAPE_CHALLENGE_BUG
-\& ERROR_WANT_ACCEPT               NID_id_qt_unotice                      OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG
-\& ERROR_WANT_CONNECT              NID_idea_cbc                           OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG
-\& ERROR_WANT_READ                 NID_idea_cfb64                         OP_NON_EXPORT_FIRST
-\& ERROR_WANT_WRITE                NID_idea_ecb                           OP_NO_COMPRESSION
-\& ERROR_WANT_X509_LOOKUP          NID_idea_ofb64                         OP_NO_QUERY_MTU
-\& ERROR_ZERO_RETURN               NID_info_access                        OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION
-\& EVP_PKS_DSA                     NID_initials                           OP_NO_SSLv2
-\& EVP_PKS_EC                      NID_invalidity_date                    OP_NO_SSLv3
-\& EVP_PKS_RSA                     NID_issuer_alt_name                    OP_NO_TICKET
-\& EVP_PKT_ENC                     NID_keyBag                             OP_NO_TLSv1
-\& EVP_PKT_EXCH                    NID_key_usage                          OP_NO_TLSv1_1
-\& EVP_PKT_EXP                     NID_localKeyID                         OP_NO_TLSv1_2
-\& EVP_PKT_SIGN                    NID_localityName                       OP_PKCS1_CHECK_1
-\& EVP_PK_DH                       NID_md2                                OP_PKCS1_CHECK_2
-\& EVP_PK_DSA                      NID_md2WithRSAEncryption               OP_SINGLE_DH_USE
-\& EVP_PK_EC                       NID_md5                                OP_SINGLE_ECDH_USE
-\& EVP_PK_RSA                      NID_md5WithRSA                         OP_SSLEAY_080_CLIENT_DH_BUG
-\& FILETYPE_ASN1                   NID_md5WithRSAEncryption               OP_SSLREF2_REUSE_CERT_TYPE_BUG
-\& FILETYPE_PEM                    NID_md5_sha1                           OP_TLS_BLOCK_PADDING_BUG
-\& F_CLIENT_CERTIFICATE            NID_mdc2                               OP_TLS_D5_BUG
-\& F_CLIENT_HELLO                  NID_mdc2WithRSA                        OP_TLS_ROLLBACK_BUG
-\& F_CLIENT_MASTER_KEY             NID_ms_code_com                        READING
-\& F_D2I_SSL_SESSION               NID_ms_code_ind                        RECEIVED_SHUTDOWN
-\& F_GET_CLIENT_FINISHED           NID_ms_ctl_sign                        RSA_3
-\& F_GET_CLIENT_HELLO              NID_ms_efs                             RSA_F4
-\& F_GET_CLIENT_MASTER_KEY         NID_ms_ext_req                         R_BAD_AUTHENTICATION_TYPE
-\& F_GET_SERVER_FINISHED           NID_ms_sgc                             R_BAD_CHECKSUM
-\& F_GET_SERVER_HELLO              NID_name                               R_BAD_MAC_DECODE
-\& F_GET_SERVER_VERIFY             NID_netscape                           R_BAD_RESPONSE_ARGUMENT
-\& F_I2D_SSL_SESSION               NID_netscape_base_url                  R_BAD_SSL_FILETYPE
-\& F_READ_N                        NID_netscape_ca_policy_url             R_BAD_SSL_SESSION_ID_LENGTH
-\& F_REQUEST_CERTIFICATE           NID_netscape_ca_revocation_url         R_BAD_STATE
-\& F_SERVER_HELLO                  NID_netscape_cert_extension            R_BAD_WRITE_RETRY
-\& F_SSL_CERT_NEW                  NID_netscape_cert_sequence             R_CHALLENGE_IS_DIFFERENT
-\& F_SSL_GET_NEW_SESSION           NID_netscape_cert_type                 R_CIPHER_TABLE_SRC_ERROR
-\& F_SSL_NEW                       NID_netscape_comment                   R_INVALID_CHALLENGE_LENGTH
-\& F_SSL_READ                      NID_netscape_data_type                 R_NO_CERTIFICATE_SET
-\& F_SSL_RSA_PRIVATE_DECRYPT       NID_netscape_renewal_url               R_NO_CERTIFICATE_SPECIFIED
-\& F_SSL_RSA_PUBLIC_ENCRYPT        NID_netscape_revocation_url            R_NO_CIPHER_LIST
-\& F_SSL_SESSION_NEW               NID_netscape_ssl_server_name           R_NO_CIPHER_MATCH
-\& F_SSL_SESSION_PRINT_FP          NID_ns_sgc                             R_NO_PRIVATEKEY
-\& F_SSL_SET_FD                    NID_organizationName                   R_NO_PUBLICKEY
-\& F_SSL_SET_RFD                   NID_organizationalUnitName             R_NULL_SSL_CTX
-\& F_SSL_SET_WFD                   NID_pbeWithMD2AndDES_CBC               R_PEER_DID_NOT_RETURN_A_CERTIFICATE
-\& F_SSL_USE_CERTIFICATE           NID_pbeWithMD2AndRC2_CBC               R_PEER_ERROR
-\& F_SSL_USE_CERTIFICATE_ASN1      NID_pbeWithMD5AndCast5_CBC             R_PEER_ERROR_CERTIFICATE
-\& F_SSL_USE_CERTIFICATE_FILE      NID_pbeWithMD5AndDES_CBC               R_PEER_ERROR_NO_CIPHER
-\& F_SSL_USE_PRIVATEKEY            NID_pbeWithMD5AndRC2_CBC               R_PEER_ERROR_UNSUPPORTED_CERTIFICATE_TYPE
-\& F_SSL_USE_PRIVATEKEY_ASN1       NID_pbeWithSHA1AndDES_CBC              R_PUBLIC_KEY_ENCRYPT_ERROR
-\& F_SSL_USE_PRIVATEKEY_FILE       NID_pbeWithSHA1AndRC2_CBC              R_PUBLIC_KEY_IS_NOT_RSA
-\& F_SSL_USE_RSAPRIVATEKEY         NID_pbe_WithSHA1And128BitRC2_CBC       R_READ_WRONG_PACKET_TYPE
-\& F_SSL_USE_RSAPRIVATEKEY_ASN1    NID_pbe_WithSHA1And128BitRC4           R_SHORT_READ
-\& F_SSL_USE_RSAPRIVATEKEY_FILE    NID_pbe_WithSHA1And2_Key_TripleDES_CBC R_SSL_SESSION_ID_IS_DIFFERENT
-\& F_WRITE_PENDING                 NID_pbe_WithSHA1And3_Key_TripleDES_CBC R_UNABLE_TO_EXTRACT_PUBLIC_KEY
-\& GEN_DIRNAME                     NID_pbe_WithSHA1And40BitRC2_CBC        R_UNKNOWN_REMOTE_ERROR_TYPE
-\& GEN_DNS                         NID_pbe_WithSHA1And40BitRC4            R_UNKNOWN_STATE
-\& GEN_EDIPARTY                    NID_pbes2                              R_X509_LIB
-\& GEN_EMAIL                       NID_pbmac1                             SENT_SHUTDOWN
-\& GEN_IPADD                       NID_pkcs                               SESSION_ASN1_VERSION
-\& GEN_OTHERNAME                   NID_pkcs3                              ST_ACCEPT
-\& GEN_RID                         NID_pkcs7                              ST_BEFORE
-\& GEN_URI                         NID_pkcs7_data                         ST_CONNECT
-\& GEN_X400                        NID_pkcs7_digest                       ST_INIT
-\& MBSTRING_ASC                    NID_pkcs7_encrypted                    ST_OK
-\& MBSTRING_BMP                    NID_pkcs7_enveloped                    ST_READ_BODY
-\& MBSTRING_FLAG                   NID_pkcs7_signed                       ST_READ_HEADER
-\& MBSTRING_UNIV                   NID_pkcs7_signedAndEnveloped           VERIFY_CLIENT_ONCE
-\& MBSTRING_UTF8                   NID_pkcs8ShroudedKeyBag                VERIFY_FAIL_IF_NO_PEER_CERT
-\& MIN_RSA_MODULUS_LENGTH_IN_BYTES NID_pkcs9                              VERIFY_NONE
-\& MODE_ACCEPT_MOVING_WRITE_BUFFER NID_pkcs9_challengePassword            VERIFY_PEER
-\& MODE_AUTO_RETRY                 NID_pkcs9_contentType                  WRITING
-\& MODE_ENABLE_PARTIAL_WRITE       NID_pkcs9_countersignature             X509_LOOKUP
-\& MODE_RELEASE_BUFFERS            NID_pkcs9_emailAddress                 X509_PURPOSE_ANY
-\& NID_OCSP_sign                   NID_pkcs9_extCertAttributes            X509_PURPOSE_CRL_SIGN
-\& NID_SMIMECapabilities           NID_pkcs9_messageDigest                X509_PURPOSE_NS_SSL_SERVER
-\& NID_X500                        NID_pkcs9_signingTime                  X509_PURPOSE_OCSP_HELPER
-\& NID_X509                        NID_pkcs9_unstructuredAddress          X509_PURPOSE_SMIME_ENCRYPT
-\& NID_ad_OCSP                     NID_pkcs9_unstructuredName             X509_PURPOSE_SMIME_SIGN
-\& NID_ad_ca_issuers               NID_private_key_usage_period           X509_PURPOSE_SSL_CLIENT
-\& NID_algorithm                   NID_rc2_40_cbc                         X509_PURPOSE_SSL_SERVER
-\& NID_authority_key_identifier    NID_rc2_64_cbc                         X509_PURPOSE_TIMESTAMP_SIGN
-\& NID_basic_constraints           NID_rc2_cbc                            X509_TRUST_COMPAT
-\& NID_bf_cbc                      NID_rc2_cfb64                          X509_TRUST_EMAIL
-\& NID_bf_cfb64                    NID_rc2_ecb                            X509_TRUST_OBJECT_SIGN
-\& NID_bf_ecb                      NID_rc2_ofb64                          X509_TRUST_OCSP_REQUEST
-\& NID_bf_ofb64                    NID_rc4                                X509_TRUST_OCSP_SIGN
-\& NID_cast5_cbc                   NID_rc4_40                             X509_TRUST_SSL_CLIENT
-\& NID_cast5_cfb64                 NID_rc5_cbc                            X509_TRUST_SSL_SERVER
-\& NID_cast5_ecb                   NID_rc5_cfb64                          X509_TRUST_TSA
-\& NID_cast5_ofb64                 NID_rc5_ecb                            X509_V_FLAG_ALLOW_PROXY_CERTS
-\& NID_certBag                     NID_rc5_ofb64                          X509_V_FLAG_CB_ISSUER_CHECK
-\& NID_certificate_policies        NID_ripemd160                          X509_V_FLAG_CHECK_SS_SIGNATURE
-\& NID_client_auth                 NID_ripemd160WithRSA                   X509_V_FLAG_CRL_CHECK
-\& NID_code_sign                   NID_rle_compression                    X509_V_FLAG_CRL_CHECK_ALL
-\& NID_commonName                  NID_rsa                                X509_V_FLAG_EXPLICIT_POLICY
-\& NID_countryName                 NID_rsaEncryption                      X509_V_FLAG_EXTENDED_CRL_SUPPORT
-\& NID_crlBag                      NID_rsadsi                             X509_V_FLAG_IGNORE_CRITICAL
-\& NID_crl_distribution_points     NID_safeContentsBag                    X509_V_FLAG_INHIBIT_ANY
-\& NID_crl_number                  NID_sdsiCertificate                    X509_V_FLAG_INHIBIT_MAP
-\& NID_crl_reason                  NID_secretBag                          X509_V_FLAG_NOTIFY_POLICY
-\& NID_delta_crl                   NID_serialNumber                       X509_V_FLAG_POLICY_CHECK
-\& NID_des_cbc                     NID_server_auth                        X509_V_FLAG_POLICY_MASK
-\& NID_des_cfb64                   NID_sha                                X509_V_FLAG_USE_CHECK_TIME
-\& NID_des_ecb                     NID_sha1                               X509_V_FLAG_USE_DELTAS
-\& NID_des_ede                     NID_sha1WithRSA                        X509_V_FLAG_X509_STRICT
-\& NID_des_ede3                    NID_sha1WithRSAEncryption              X509_V_OK
-\& NID_des_ede3_cbc                NID_shaWithRSAEncryption               XN_FLAG_COMPAT
-\& NID_des_ede3_cfb64              NID_stateOrProvinceName                XN_FLAG_DN_REV
-\& NID_des_ede3_ofb64              NID_subject_alt_name                   XN_FLAG_DUMP_UNKNOWN_FIELDS
-\& NID_des_ede_cbc                 NID_subject_key_identifier             XN_FLAG_FN_ALIGN
-\& NID_des_ede_cfb64               NID_surname                            XN_FLAG_FN_LN
-\& NID_des_ede_ofb64               NID_sxnet                              XN_FLAG_FN_MASK
-\& NID_des_ofb64                   NID_time_stamp                         XN_FLAG_FN_NONE
-\& NID_description                 NID_title                              XN_FLAG_FN_OID
-\& NID_desx_cbc                    NID_undef                              XN_FLAG_FN_SN
-\& NID_dhKeyAgreement              NID_uniqueIdentifier                   XN_FLAG_MULTILINE
-\& NID_dnQualifier                 NID_x509Certificate                    XN_FLAG_ONELINE
-\& NID_dsa                         NID_x509Crl                            XN_FLAG_RFC2253
-\& NID_dsaWithSHA                  NID_zlib_compression                   XN_FLAG_SEP_COMMA_PLUS
-\& NID_dsaWithSHA1                 NOTHING                                XN_FLAG_SEP_CPLUS_SPC
-\& NID_dsaWithSHA1_2               OPENSSL_VERSION_NUMBER                 XN_FLAG_SEP_MASK
-\& NID_dsa_2                       OP_ALL                                 XN_FLAG_SEP_MULTILINE
-\& NID_email_protect               OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION   XN_FLAG_SEP_SPLUS_SPC
-\& NID_ext_key_usage               OP_CIPHER_SERVER_PREFERENCE            XN_FLAG_SPC_EQ
+\& ASN1_STRFLGS_ESC_CTRL           NID_ext_key_usage                      OP_CRYPTOPRO_TLSEXT_BUG
+\& ASN1_STRFLGS_ESC_MSB            NID_ext_req                            OP_DONT_INSERT_EMPTY_FRAGMENTS
+\& ASN1_STRFLGS_ESC_QUOTE          NID_friendlyName                       OP_EPHEMERAL_RSA
+\& ASN1_STRFLGS_RFC2253            NID_givenName                          OP_LEGACY_SERVER_CONNECT
+\& CB_ACCEPT_EXIT                  NID_hmacWithSHA1                       OP_MICROSOFT_BIG_SSLV3_BUFFER
+\& CB_ACCEPT_LOOP                  NID_id_ad                              OP_MICROSOFT_SESS_ID_BUG
+\& CB_ALERT                        NID_id_ce                              OP_MSIE_SSLV2_RSA_PADDING
+\& CB_CONNECT_EXIT                 NID_id_kp                              OP_NETSCAPE_CA_DN_BUG
+\& CB_CONNECT_LOOP                 NID_id_pbkdf2                          OP_NETSCAPE_CHALLENGE_BUG
+\& CB_EXIT                         NID_id_pe                              OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG
+\& CB_HANDSHAKE_DONE               NID_id_pkix                            OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG
+\& CB_HANDSHAKE_START              NID_id_qt_cps                          OP_NON_EXPORT_FIRST
+\& CB_LOOP                         NID_id_qt_unotice                      OP_NO_COMPRESSION
+\& CB_READ                         NID_idea_cbc                           OP_NO_QUERY_MTU
+\& CB_READ_ALERT                   NID_idea_cfb64                         OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION
+\& CB_WRITE                        NID_idea_ecb                           OP_NO_SSLv2
+\& CB_WRITE_ALERT                  NID_idea_ofb64                         OP_NO_SSLv3
+\& ERROR_NONE                      NID_info_access                        OP_NO_TICKET
+\& ERROR_SSL                       NID_initials                           OP_NO_TLSv1
+\& ERROR_SYSCALL                   NID_invalidity_date                    OP_NO_TLSv1_1
+\& ERROR_WANT_ACCEPT               NID_issuer_alt_name                    OP_NO_TLSv1_2
+\& ERROR_WANT_CONNECT              NID_keyBag                             OP_PKCS1_CHECK_1
+\& ERROR_WANT_READ                 NID_key_usage                          OP_PKCS1_CHECK_2
+\& ERROR_WANT_WRITE                NID_localKeyID                         OP_SINGLE_DH_USE
+\& ERROR_WANT_X509_LOOKUP          NID_localityName                       OP_SINGLE_ECDH_USE
+\& ERROR_ZERO_RETURN               NID_md2                                OP_SSLEAY_080_CLIENT_DH_BUG
+\& EVP_PKS_DSA                     NID_md2WithRSAEncryption               OP_SSLREF2_REUSE_CERT_TYPE_BUG
+\& EVP_PKS_EC                      NID_md5                                OP_TLS_BLOCK_PADDING_BUG
+\& EVP_PKS_RSA                     NID_md5WithRSA                         OP_TLS_D5_BUG
+\& EVP_PKT_ENC                     NID_md5WithRSAEncryption               OP_TLS_ROLLBACK_BUG
+\& EVP_PKT_EXCH                    NID_md5_sha1                           READING
+\& EVP_PKT_EXP                     NID_mdc2                               RECEIVED_SHUTDOWN
+\& EVP_PKT_SIGN                    NID_mdc2WithRSA                        RSA_3
+\& EVP_PK_DH                       NID_ms_code_com                        RSA_F4
+\& EVP_PK_DSA                      NID_ms_code_ind                        R_BAD_AUTHENTICATION_TYPE
+\& EVP_PK_EC                       NID_ms_ctl_sign                        R_BAD_CHECKSUM
+\& EVP_PK_RSA                      NID_ms_efs                             R_BAD_MAC_DECODE
+\& FILETYPE_ASN1                   NID_ms_ext_req                         R_BAD_RESPONSE_ARGUMENT
+\& FILETYPE_PEM                    NID_ms_sgc                             R_BAD_SSL_FILETYPE
+\& F_CLIENT_CERTIFICATE            NID_name                               R_BAD_SSL_SESSION_ID_LENGTH
+\& F_CLIENT_HELLO                  NID_netscape                           R_BAD_STATE
+\& F_CLIENT_MASTER_KEY             NID_netscape_base_url                  R_BAD_WRITE_RETRY
+\& F_D2I_SSL_SESSION               NID_netscape_ca_policy_url             R_CHALLENGE_IS_DIFFERENT
+\& F_GET_CLIENT_FINISHED           NID_netscape_ca_revocation_url         R_CIPHER_TABLE_SRC_ERROR
+\& F_GET_CLIENT_HELLO              NID_netscape_cert_extension            R_INVALID_CHALLENGE_LENGTH
+\& F_GET_CLIENT_MASTER_KEY         NID_netscape_cert_sequence             R_NO_CERTIFICATE_SET
+\& F_GET_SERVER_FINISHED           NID_netscape_cert_type                 R_NO_CERTIFICATE_SPECIFIED
+\& F_GET_SERVER_HELLO              NID_netscape_comment                   R_NO_CIPHER_LIST
+\& F_GET_SERVER_VERIFY             NID_netscape_data_type                 R_NO_CIPHER_MATCH
+\& F_I2D_SSL_SESSION               NID_netscape_renewal_url               R_NO_PRIVATEKEY
+\& F_READ_N                        NID_netscape_revocation_url            R_NO_PUBLICKEY
+\& F_REQUEST_CERTIFICATE           NID_netscape_ssl_server_name           R_NULL_SSL_CTX
+\& F_SERVER_HELLO                  NID_ns_sgc                             R_PEER_DID_NOT_RETURN_A_CERTIFICATE
+\& F_SSL_CERT_NEW                  NID_organizationName                   R_PEER_ERROR
+\& F_SSL_GET_NEW_SESSION           NID_organizationalUnitName             R_PEER_ERROR_CERTIFICATE
+\& F_SSL_NEW                       NID_pbeWithMD2AndDES_CBC               R_PEER_ERROR_NO_CIPHER
+\& F_SSL_READ                      NID_pbeWithMD2AndRC2_CBC               R_PEER_ERROR_UNSUPPORTED_CERTIFICATE_TYPE
+\& F_SSL_RSA_PRIVATE_DECRYPT       NID_pbeWithMD5AndCast5_CBC             R_PUBLIC_KEY_ENCRYPT_ERROR
+\& F_SSL_RSA_PUBLIC_ENCRYPT        NID_pbeWithMD5AndDES_CBC               R_PUBLIC_KEY_IS_NOT_RSA
+\& F_SSL_SESSION_NEW               NID_pbeWithMD5AndRC2_CBC               R_READ_WRONG_PACKET_TYPE
+\& F_SSL_SESSION_PRINT_FP          NID_pbeWithSHA1AndDES_CBC              R_SHORT_READ
+\& F_SSL_SET_FD                    NID_pbeWithSHA1AndRC2_CBC              R_SSL_SESSION_ID_IS_DIFFERENT
+\& F_SSL_SET_RFD                   NID_pbe_WithSHA1And128BitRC2_CBC       R_UNABLE_TO_EXTRACT_PUBLIC_KEY
+\& F_SSL_SET_WFD                   NID_pbe_WithSHA1And128BitRC4           R_UNKNOWN_REMOTE_ERROR_TYPE
+\& F_SSL_USE_CERTIFICATE           NID_pbe_WithSHA1And2_Key_TripleDES_CBC R_UNKNOWN_STATE
+\& F_SSL_USE_CERTIFICATE_ASN1      NID_pbe_WithSHA1And3_Key_TripleDES_CBC R_X509_LIB
+\& F_SSL_USE_CERTIFICATE_FILE      NID_pbe_WithSHA1And40BitRC2_CBC        SENT_SHUTDOWN
+\& F_SSL_USE_PRIVATEKEY            NID_pbe_WithSHA1And40BitRC4            SESSION_ASN1_VERSION
+\& F_SSL_USE_PRIVATEKEY_ASN1       NID_pbes2                              ST_ACCEPT
+\& F_SSL_USE_PRIVATEKEY_FILE       NID_pbmac1                             ST_BEFORE
+\& F_SSL_USE_RSAPRIVATEKEY         NID_pkcs                               ST_CONNECT
+\& F_SSL_USE_RSAPRIVATEKEY_ASN1    NID_pkcs3                              ST_INIT
+\& F_SSL_USE_RSAPRIVATEKEY_FILE    NID_pkcs7                              ST_OK
+\& F_WRITE_PENDING                 NID_pkcs7_data                         ST_READ_BODY
+\& GEN_DIRNAME                     NID_pkcs7_digest                       ST_READ_HEADER
+\& GEN_DNS                         NID_pkcs7_encrypted                    TLSEXT_STATUSTYPE_ocsp
+\& GEN_EDIPARTY                    NID_pkcs7_enveloped                    VERIFY_CLIENT_ONCE
+\& GEN_EMAIL                       NID_pkcs7_signed                       VERIFY_FAIL_IF_NO_PEER_CERT
+\& GEN_IPADD                       NID_pkcs7_signedAndEnveloped           VERIFY_NONE
+\& GEN_OTHERNAME                   NID_pkcs8ShroudedKeyBag                VERIFY_PEER
+\& GEN_RID                         NID_pkcs9                              V_OCSP_CERTSTATUS_GOOD
+\& GEN_URI                         NID_pkcs9_challengePassword            V_OCSP_CERTSTATUS_REVOKED
+\& GEN_X400                        NID_pkcs9_contentType                  V_OCSP_CERTSTATUS_UNKNOWN
+\& LIBRESSL_VERSION_NUMBER         NID_pkcs9_countersignature             WRITING
+\& MBSTRING_ASC                    NID_pkcs9_emailAddress                 X509_CHECK_FLAG_ALWAYS_CHECK_SUBJECT
+\& MBSTRING_BMP                    NID_pkcs9_extCertAttributes            X509_CHECK_FLAG_MULTI_LABEL_WILDCARDS
+\& MBSTRING_FLAG                   NID_pkcs9_messageDigest                X509_CHECK_FLAG_NO_PARTIAL_WILDCARDS
+\& MBSTRING_UNIV                   NID_pkcs9_signingTime                  X509_CHECK_FLAG_NO_WILDCARDS
+\& MBSTRING_UTF8                   NID_pkcs9_unstructuredAddress          X509_CHECK_FLAG_SINGLE_LABEL_SUBDOMAINS
+\& MIN_RSA_MODULUS_LENGTH_IN_BYTES NID_pkcs9_unstructuredName             X509_LOOKUP
+\& MODE_ACCEPT_MOVING_WRITE_BUFFER NID_private_key_usage_period           X509_PURPOSE_ANY
+\& MODE_AUTO_RETRY                 NID_rc2_40_cbc                         X509_PURPOSE_CRL_SIGN
+\& MODE_ENABLE_PARTIAL_WRITE       NID_rc2_64_cbc                         X509_PURPOSE_NS_SSL_SERVER
+\& MODE_RELEASE_BUFFERS            NID_rc2_cbc                            X509_PURPOSE_OCSP_HELPER
+\& NID_OCSP_sign                   NID_rc2_cfb64                          X509_PURPOSE_SMIME_ENCRYPT
+\& NID_SMIMECapabilities           NID_rc2_ecb                            X509_PURPOSE_SMIME_SIGN
+\& NID_X500                        NID_rc2_ofb64                          X509_PURPOSE_SSL_CLIENT
+\& NID_X509                        NID_rc4                                X509_PURPOSE_SSL_SERVER
+\& NID_ad_OCSP                     NID_rc4_40                             X509_PURPOSE_TIMESTAMP_SIGN
+\& NID_ad_ca_issuers               NID_rc5_cbc                            X509_TRUST_COMPAT
+\& NID_algorithm                   NID_rc5_cfb64                          X509_TRUST_EMAIL
+\& NID_authority_key_identifier    NID_rc5_ecb                            X509_TRUST_OBJECT_SIGN
+\& NID_basic_constraints           NID_rc5_ofb64                          X509_TRUST_OCSP_REQUEST
+\& NID_bf_cbc                      NID_ripemd160                          X509_TRUST_OCSP_SIGN
+\& NID_bf_cfb64                    NID_ripemd160WithRSA                   X509_TRUST_SSL_CLIENT
+\& NID_bf_ecb                      NID_rle_compression                    X509_TRUST_SSL_SERVER
+\& NID_bf_ofb64                    NID_rsa                                X509_TRUST_TSA
+\& NID_cast5_cbc                   NID_rsaEncryption                      X509_V_FLAG_ALLOW_PROXY_CERTS
+\& NID_cast5_cfb64                 NID_rsadsi                             X509_V_FLAG_CB_ISSUER_CHECK
+\& NID_cast5_ecb                   NID_safeContentsBag                    X509_V_FLAG_CHECK_SS_SIGNATURE
+\& NID_cast5_ofb64                 NID_sdsiCertificate                    X509_V_FLAG_CRL_CHECK
+\& NID_certBag                     NID_secretBag                          X509_V_FLAG_CRL_CHECK_ALL
+\& NID_certificate_policies        NID_serialNumber                       X509_V_FLAG_EXPLICIT_POLICY
+\& NID_client_auth                 NID_server_auth                        X509_V_FLAG_EXTENDED_CRL_SUPPORT
+\& NID_code_sign                   NID_sha                                X509_V_FLAG_IGNORE_CRITICAL
+\& NID_commonName                  NID_sha1                               X509_V_FLAG_INHIBIT_ANY
+\& NID_countryName                 NID_sha1WithRSA                        X509_V_FLAG_INHIBIT_MAP
+\& NID_crlBag                      NID_sha1WithRSAEncryption              X509_V_FLAG_NOTIFY_POLICY
+\& NID_crl_distribution_points     NID_shaWithRSAEncryption               X509_V_FLAG_POLICY_CHECK
+\& NID_crl_number                  NID_stateOrProvinceName                X509_V_FLAG_POLICY_MASK
+\& NID_crl_reason                  NID_subject_alt_name                   X509_V_FLAG_TRUSTED_FIRST
+\& NID_delta_crl                   NID_subject_key_identifier             X509_V_FLAG_USE_CHECK_TIME
+\& NID_des_cbc                     NID_surname                            X509_V_FLAG_USE_DELTAS
+\& NID_des_cfb64                   NID_sxnet                              X509_V_FLAG_X509_STRICT
+\& NID_des_ecb                     NID_time_stamp                         X509_V_OK
+\& NID_des_ede                     NID_title                              XN_FLAG_COMPAT
+\& NID_des_ede3                    NID_undef                              XN_FLAG_DN_REV
+\& NID_des_ede3_cbc                NID_uniqueIdentifier                   XN_FLAG_DUMP_UNKNOWN_FIELDS
+\& NID_des_ede3_cfb64              NID_x509Certificate                    XN_FLAG_FN_ALIGN
+\& NID_des_ede3_ofb64              NID_x509Crl                            XN_FLAG_FN_LN
+\& NID_des_ede_cbc                 NID_zlib_compression                   XN_FLAG_FN_MASK
+\& NID_des_ede_cfb64               NOTHING                                XN_FLAG_FN_NONE
+\& NID_des_ede_ofb64               OCSP_RESPONSE_STATUS_INTERNALERROR     XN_FLAG_FN_OID
+\& NID_des_ofb64                   OCSP_RESPONSE_STATUS_MALFORMEDREQUEST  XN_FLAG_FN_SN
+\& NID_description                 OCSP_RESPONSE_STATUS_SIGREQUIRED       XN_FLAG_MULTILINE
+\& NID_desx_cbc                    OCSP_RESPONSE_STATUS_SUCCESSFUL        XN_FLAG_ONELINE
+\& NID_dhKeyAgreement              OCSP_RESPONSE_STATUS_TRYLATER          XN_FLAG_RFC2253
+\& NID_dnQualifier                 OCSP_RESPONSE_STATUS_UNAUTHORIZED      XN_FLAG_SEP_COMMA_PLUS
+\& NID_dsa                         OPENSSL_VERSION_NUMBER                 XN_FLAG_SEP_CPLUS_SPC
+\& NID_dsaWithSHA                  OP_ALL                                 XN_FLAG_SEP_MASK
+\& NID_dsaWithSHA1                 OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION   XN_FLAG_SEP_MULTILINE
+\& NID_dsaWithSHA1_2               OP_CIPHER_SERVER_PREFERENCE            XN_FLAG_SEP_SPLUS_SPC
+\& NID_dsa_2                       OP_CISCO_ANYCONNECT                    XN_FLAG_SPC_EQ
+\& NID_email_protect               OP_COOKIE_EXCHANGE                     
+\&=head2 INTERNAL ONLY functions (do not use these)
 .Ve
-.SS "\s-1INTERNAL\s0 \s-1ONLY\s0 functions (do not use these)"
-.IX Subsection "INTERNAL ONLY functions (do not use these)"
+.PP
 The following functions are not intended for use from outside of Net::SSLeay module.
 They might be removed, renamed or changed without prior notice in future version.
 .PP
@@ -8736,6 +9515,10 @@ Or alternatively you can just use the following convenience functions:
 .Ve
 .SH "KNOWN BUGS AND CAVEATS"
 .IX Header "KNOWN BUGS AND CAVEATS"
+An OpenSSL bug \s-1CVE\-2015\-0290\s0 \*(L"OpenSSL Multiblock Corrupted Pointer Issue\*(R" 
+can cause \s-1POST\s0 requests of over 90kB to fail or crash. This bug is reported to be fixed in
+OpenSSL 1.0.2a.
+.PP
 Autoloader emits a
 .PP
 .Vb 1
@@ -8898,7 +9681,7 @@ do this (or just study examples/makecert.pl which is used
 during \f(CW\*(C`make test\*(C'\fR to do just that).
 .SH "SECURITY"
 .IX Header "SECURITY"
-You can mitigate some of the security vulnerabilites that might be present in your \s-1SSL/TLS\s0 application:
+You can mitigate some of the security vulnerabilities that might be present in your \s-1SSL/TLS\s0 application:
 .SS "\s-1BEAST\s0 Attack"
 .IX Subsection "BEAST Attack"
 http://blogs.cisco.com/security/beat\-the\-beast\-with\-tls/
@@ -8915,7 +9698,7 @@ Compile with OpenSSL versions 0.9.6d or later, which enables \s-1SSL_OP_ALL\s0 b
 .IP "\(bu" 4
 Ensure \s-1SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS\s0 is not enabled (its not enabled by default)
 .IP "\(bu" 4
-Dont support SSLv2, SSLv3
+Don't support SSLv2, SSLv3
 .IP "\(bu" 4
 Actively control the ciphers your server supports with set_cipher_list:
 .PP
@@ -8998,23 +9781,28 @@ Copyright (c) 1996\-2003 Sampo Kelloma\*:ki <sampo@symlabs.com>
 .PP
 Copyright (C) 2005\-2006 Florian Ragwitz <rafl@debian.org>
 .PP
-Copyright (C) 2005 Mike McCauley <mikem@open.com.au>
+Copyright (C) 2005 Mike McCauley <mikem@airspayce.com>
 .PP
 All Rights Reserved.
 .PP
 Distribution and use of this module is under the same terms as the
 OpenSSL package itself (i.e. free, but mandatory attribution; \s-1NO\s0
-\&\s-1WARRANTY\s0). Please consult \s-1LICENSE\s0 file in the root of the OpenSSL
-distribution.
+\&\s-1WARRANTY\s0). Please consult \s-1LICENSE\s0 file in the root of the Net-SSLeay
+distribution, and also included in this distribution.
 .PP
-While the source distribution of this perl module does not contain
-Eric's or OpenSSL's code, if you use this module you will use OpenSSL
-library. Please give Eric and OpenSSL team credit (as required by
-their licenses).
+The Authors credit Eric Young and the OpenSSL team with the development of the
+excellent OpenSSL library, which this Perl package uses.
 .PP
 And remember, you, and nobody else but you, are responsible for
 auditing this module and OpenSSL library for security problems,
 backdoors, and general suitability for your application.
+.SH "LICENSE"
+.IX Header "LICENSE"
+From version
+1.66 onwards, this Net-SSLeay library is issued under the \*(L"Perl Artistic
+License 2.0\*(R", the same license as Perl itself.
+.PP
+(ignore this line: this is to keep kwalitee happy by saying: Not \s-1GPL\s0)
 .SH "SEE ALSO"
 .IX Header "SEE ALSO"
 .Vb 10

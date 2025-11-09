@@ -1,8 +1,9 @@
 /*	NSDateIntervalFormatter.h
-        Copyright (c) 2013-2015, Apple Inc. All rights reserved.
+        Copyright (c) 2013-2016, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSFormatter.h>
+#import <Foundation/NSDateInterval.h>
 #include <dispatch/dispatch.h>
 @class NSLocale, NSCalendar, NSTimeZone, NSDate;
 
@@ -63,6 +64,8 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
         for en_GB, "4-8 Mar"
 */
 - (NSString *)stringFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate;
+
+- (nullable NSString *)stringFromDateInterval:(NSDateInterval *)dateInterval API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 @end
 

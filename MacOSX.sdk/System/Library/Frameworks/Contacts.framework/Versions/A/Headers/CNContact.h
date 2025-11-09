@@ -67,19 +67,20 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *nameSuffix;
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *nickname;
 
-@property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *phoneticGivenName;
-@property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *phoneticMiddleName;
-@property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *phoneticFamilyName;
-
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *organizationName;
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *departmentName;
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *jobTitle;
+
+@property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *phoneticGivenName;
+@property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *phoneticMiddleName;
+@property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *phoneticFamilyName;
+@property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *phoneticOrganizationName NS_AVAILABLE(10_12, 10_0);
 
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *note;
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSData *imageData;
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSData *thumbnailImageData;
-@property (readonly, NS_NONATOMIC_IOSONLY) BOOL imageDataAvailable NS_AVAILABLE(NA, 9_0);
+@property (readonly, NS_NONATOMIC_IOSONLY) BOOL imageDataAvailable NS_AVAILABLE(10_12, 9_0);
 
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSArray<CNLabeledValue<CNPhoneNumber*>*>             *phoneNumbers;
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSArray<CNLabeledValue<NSString*>*>                  *emailAddresses;
@@ -142,18 +143,19 @@ CONTACTS_EXTERN NSString * const CNContactFamilyNameKey                      NS_
 CONTACTS_EXTERN NSString * const CNContactPreviousFamilyNameKey              NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNContactNameSuffixKey                      NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNContactNicknameKey                        NS_AVAILABLE(10_11, 9_0);
-CONTACTS_EXTERN NSString * const CNContactPhoneticGivenNameKey               NS_AVAILABLE(10_11, 9_0);
-CONTACTS_EXTERN NSString * const CNContactPhoneticMiddleNameKey              NS_AVAILABLE(10_11, 9_0);
-CONTACTS_EXTERN NSString * const CNContactPhoneticFamilyNameKey              NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNContactOrganizationNameKey                NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNContactDepartmentNameKey                  NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNContactJobTitleKey                        NS_AVAILABLE(10_11, 9_0);
+CONTACTS_EXTERN NSString * const CNContactPhoneticGivenNameKey               NS_AVAILABLE(10_11, 9_0);
+CONTACTS_EXTERN NSString * const CNContactPhoneticMiddleNameKey              NS_AVAILABLE(10_11, 9_0);
+CONTACTS_EXTERN NSString * const CNContactPhoneticFamilyNameKey              NS_AVAILABLE(10_11, 9_0);
+CONTACTS_EXTERN NSString * const CNContactPhoneticOrganizationNameKey        NS_AVAILABLE(10_12, 10_0);
 CONTACTS_EXTERN NSString * const CNContactBirthdayKey                        NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNContactNonGregorianBirthdayKey            NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNContactNoteKey                            NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNContactImageDataKey                       NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNContactThumbnailImageDataKey              NS_AVAILABLE(10_11, 9_0);
-CONTACTS_EXTERN NSString * const CNContactImageDataAvailableKey              NS_AVAILABLE(NA, 9_0);
+CONTACTS_EXTERN NSString * const CNContactImageDataAvailableKey              NS_AVAILABLE(10_12, 9_0);
 CONTACTS_EXTERN NSString * const CNContactTypeKey                            NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNContactPhoneNumbersKey                    NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNContactEmailAddressesKey                  NS_AVAILABLE(10_11, 9_0);

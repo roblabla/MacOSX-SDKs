@@ -2,7 +2,7 @@
  *  CTFontManager.h
  *  CoreText
  *
- *  Copyright (c) 2008-2015 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2016 Apple Inc. All rights reserved.
  *
  */
 
@@ -40,7 +40,7 @@ CF_ASSUME_NONNULL_BEGIN
  
     @result     An array of CFStrings.
 */
-CFArrayRef CTFontManagerCopyAvailablePostScriptNames( void ) CT_AVAILABLE_MAC(10_6);
+CFArrayRef CTFontManagerCopyAvailablePostScriptNames( void ) CT_AVAILABLE(10_6, 10_0);
 
 /*!
     @function   CTFontManagerCopyAvailableFontFamilyNames
@@ -48,7 +48,7 @@ CFArrayRef CTFontManagerCopyAvailablePostScriptNames( void ) CT_AVAILABLE_MAC(10
 
     @result     An array of CFStrings.
 */
-CFArrayRef CTFontManagerCopyAvailableFontFamilyNames( void ) CT_AVAILABLE_MAC(10_6);
+CFArrayRef CTFontManagerCopyAvailableFontFamilyNames( void ) CT_AVAILABLE(10_6, 10_0);
 
 /*!
     @function   CTFontManagerCopyAvailableFontURLs
@@ -165,7 +165,7 @@ bool CTFontManagerUnregisterFontsForURL(
 /*!
     @function   CTFontManagerRegisterGraphicsFont
     @abstract   Registers the specified graphics font with the font manager. Registered fonts are discoverable through font descriptor matching.
-                Attempts to register a font that is either already registered or contains the same Postscript of an already registered font will fail.
+                Attempts to register a font that is either already registered or contains the same PostScript name of an already registered font will fail.
                 This functionality is useful for fonts that may be embedded in documents or present/constructed in memory. A graphics font is obtained
                 by calling CGFontCreateWithDataProvider. Fonts that are backed by files should be registered using CTFontManagerRegisterFontsForURL.
  
@@ -300,7 +300,7 @@ CFRunLoopSourceRef __nullable CTFontManagerCreateFontRequestRunLoopSource(
     @abstract   CTFontManage bundle identifier
     @discussion The CTFontManager bundle identifier to be used with get or set global auto-activation settings.
 */
-extern const CFStringRef kCTFontManagerBundleIdentifier CT_AVAILABLE_MAC(10_6);
+CT_EXPORT const CFStringRef kCTFontManagerBundleIdentifier CT_AVAILABLE_MAC(10_6);
 
 /*!
     @enum
@@ -331,7 +331,7 @@ typedef CF_ENUM(uint32_t, CTFontManagerAutoActivationSetting) {
                 will set the global auto-activation settings.
     @param      setting
                 The new setting.
-    @result     Function will apply the setting to the appropriate preferences location.
+    @discussion Function will apply the setting to the appropriate preferences location.
 */
 void CTFontManagerSetAutoActivationSetting(
     CFStringRef __nullable              bundleIdentifier,
@@ -362,7 +362,7 @@ CTFontManagerAutoActivationSetting CTFontManagerGetAutoActivationSetting(
                 for changes in session or user scopes and with the local notification center for changes in process scope.
                 iOS clients should register as an observer of the notification with the local notification center for all changes.
 */
-extern const CFStringRef kCTFontManagerRegisteredFontsChangedNotification CT_AVAILABLE(10_6, 7_0);
+CT_EXPORT const CFStringRef kCTFontManagerRegisteredFontsChangedNotification CT_AVAILABLE(10_6, 7_0);
 
 CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END

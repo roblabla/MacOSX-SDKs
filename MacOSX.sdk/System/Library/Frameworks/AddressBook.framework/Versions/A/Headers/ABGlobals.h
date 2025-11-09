@@ -37,6 +37,8 @@ extern NSString * const kABBirthdayComponentsProperty AVAILABLE_MAC_OS_X_VERSION
 extern NSString * const kABAlternateBirthdayComponentsProperty; //Alternate non-Gregorian birth date - kABDateComponentsProperty
 
 extern NSString * const kABOrganizationProperty;          // Company name - kABStringProperty
+extern NSString * const kABOrganizationPhoneticProperty;   // Company name phonetic - kABStringProperty
+
 
 extern NSString * const kABJobTitleProperty;              // Job Title - kABStringProperty
 

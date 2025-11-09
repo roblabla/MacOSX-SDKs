@@ -2,7 +2,7 @@
 //  GKAchievementDescription.h
 //  Game Center
 //
-//  Copyright 2010-2015 Apple Inc. All rights reserved.
+//  Copyright 2010-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 // GKAchievementDescription is a full description of the achievement as defined before app submission in iTunes Connect.
-NS_CLASS_AVAILABLE(10_8, 4_1)
+NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 @interface GKAchievementDescription : NSObject <NSCoding, NSSecureCoding>
 
 // Asynchronously load all achievement descriptions

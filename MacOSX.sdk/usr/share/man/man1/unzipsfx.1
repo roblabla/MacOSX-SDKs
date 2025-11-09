@@ -1,6 +1,6 @@
-.\"  Copyright (c) 1990-2005 Info-ZIP.  All rights reserved.
+.\"  Copyright (c) 1990-2009 Info-ZIP.  All rights reserved.
 .\"
-.\"  See the accompanying file LICENSE, version 2000-Apr-09 or later
+.\"  See the accompanying file LICENSE, version 2009-Jan-02 or later
 .\"  (the contents of which are also included in unzip.h) for terms of use.
 .\"  If, for some reason, all these files are missing, the Info-ZIP license
 .\"  also may be found at:  ftp://ftp.info-zip.org/pub/infozip/license.html
@@ -20,7 +20,7 @@
 .in -4n
 ..
 .\" =========================================================================
-.TH UNZIPSFX 1L "28 February 2005 (v5.52)" "Info-ZIP"
+.TH UNZIPSFX 1L "20 April 2009 (v6.0)" "Info-ZIP"
 .SH NAME
 unzipsfx \- self-extracting stub for prepending to ZIP archives
 .PD
@@ -42,7 +42,7 @@ the listing and diagnostic functions (\fB\-l\fP and \fB\-v\fP), the ability
 to decompress older compression formats (the ``reduce,'' ``shrink'' and
 ``implode'' methods).  The ability to extract to a directory other than
 the current one can be selected as a compile-time option, which is now enabled
-by default since UnZipSFX version 5.5.  Similary, decryption is supported as
+by default since UnZipSFX version 5.5.  Similarly, decryption is supported as
 a compile-time option but should be avoided unless the attached archive
 contains encrypted files. Starting with release 5.5, another compile-time
 option adds a simple ``run command after extraction'' feature.  This feature
@@ -163,15 +163,15 @@ Zip archive comment, using the following format:
 $AUTORUN$>[command line string]
 .EE
 .PP
-When \fIunzipsfx\P recognizes the ``$AUTORUN$>'' token at the beginning
+When \fIunzipsfx\fP recognizes the ``$AUTORUN$>'' token at the beginning
 of the Zip archive comment, the remainder of the first line of the comment
 (until the first newline character) is passed as a shell command to the
 operating system using the C rtl ``system'' function. Before executing
-the command, \fIunzipsfx\P displays the command on the console and prompts
+the command, \fIunzipsfx\fP displays the command on the console and prompts
 the user for confirmation.  When the user has switched off prompting by
 specifying the \fB-q\fP option, autorun commands are never executed.
 .PP
-In case the archive comment contains additonal lines of text, the remainder
+In case the archive comment contains additional lines of text, the remainder
 of the archive comment following the first line is displayed normally, unless
 quiet operation was requested by supplying a \fB-q\fP option.
 .PD

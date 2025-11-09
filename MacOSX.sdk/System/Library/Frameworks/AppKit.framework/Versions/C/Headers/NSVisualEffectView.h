@@ -1,7 +1,7 @@
 /*
     NSVisualEffectView.h
     Application Kit
-    Copyright (c) 2014-2015, Apple Inc.
+    Copyright (c) 2014-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -17,6 +17,9 @@ typedef NS_ENUM(NSInteger, NSVisualEffectMaterial) {
     // Many of these colors are dynamic and depend on the current NSAppearance set on the view (or its parent view)
     NSVisualEffectMaterialAppearanceBased = 0, // Maps to Light or Dark, depending on the appearance set on the view
     NSVisualEffectMaterialTitlebar = 3, // Mainly designed to be used for NSVisualEffectBlendingModeWithinWindow
+    /* A special material for selection. The material will vary depending on the effectiveAppearance, active state, and emphasized state.
+     */
+    NSVisualEffectMaterialSelection = 4,
     NSVisualEffectMaterialMenu NS_ENUM_AVAILABLE_MAC(10_11) = 5,
     NSVisualEffectMaterialPopover NS_ENUM_AVAILABLE_MAC(10_11) = 6,
     NSVisualEffectMaterialSidebar NS_ENUM_AVAILABLE_MAC(10_11) = 7,
@@ -48,14 +51,16 @@ typedef NS_ENUM(NSInteger, NSVisualEffectState) {
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface NSVisualEffectView : NSView {
 @private
-    __strong struct NSVisualEffectViewInternal *_NSVisualEffectViewInternal;
+    struct NSVisualEffectViewInternal *_NSVisualEffectViewInternal;
     
 #if !__LP64__
-    uint8_t _reserved[48];
+    uint8_t _reserved[40];
 #endif
     CALayer *_darkenLayer;
     CALayer *_maskLayer;
     CALayer *_clearCopyLayer;
+    CALayer *_backdropLayer;
+    CALayer *_backdropLayerForMask;
     
     unsigned int _dirty:1;
     unsigned int _hasMask:1;
@@ -71,7 +76,8 @@ NS_CLASS_AVAILABLE_MAC(10_10)
     unsigned int _appearsDarker:1;
     unsigned int _inheritsBlendGroup:1;
     unsigned int _registeredForFrameChanges:1;
-    unsigned int _reservedFlags:18;
+    unsigned int _needsClearProxy:1;
+    unsigned int _reservedFlags:17 __unused;
 }
 
 /* The default value is NSVisualEffectMaterialAppearanceBased; the material is updated to be the correct material based on the appearance set on this view.
@@ -95,6 +101,10 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 /* The mask image masks this view. It is best to set this to the smallest mask image possible and properly set the image.capInsets to inform the image on how to stretch the contents when it is used as a mask. Setting the maskImage on an NSVisualEffectView that is the window.contentView will correctly set the window's shadow.
  */
 @property(nullable, retain) NSImage *maskImage;
+
+/* Some materials (currently only the Selection material) have a different look when the view is emphasized, meaning the view that is showing the selection has firstResponder status. The default value is NO.
+ */
+@property (getter=isEmphasized) BOOL emphasized NS_AVAILABLE_MAC(10_12);
 
 /* Some things this class overrides; it is required to call super if you subclass and override these.
  */

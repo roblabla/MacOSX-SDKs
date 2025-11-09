@@ -28,7 +28,7 @@
 #include <TargetConditionals.h>
 
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <AudioUnit/AudioComponent.h>
+	#include <AudioToolbox/AudioComponent.h>
 	#include <AudioToolbox/AudioFile.h>
 #else
 	#include "AudioComponent.h"

@@ -1,11 +1,12 @@
 /*    
     NSURLConnection.h
-    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
     
     Public header file.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSRunLoop.h>
 
 @class NSArray;
 @class NSURL;
@@ -114,10 +115,10 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 /* Designated initializer */
-- (nullable instancetype)initWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate startImmediately:(BOOL)startImmediately NS_DEPRECATED(10_5, 10_11, 2_0, 9_0, "Use NSURLSession (see NSURLSession.h)");
+- (nullable instancetype)initWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate startImmediately:(BOOL)startImmediately NS_DEPRECATED(10_5, 10_11, 2_0, 9_0, "Use NSURLSession (see NSURLSession.h)") __WATCHOS_PROHIBITED;
 
-- (nullable instancetype)initWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use NSURLSession (see NSURLSession.h)");
-+ (nullable NSURLConnection*)connectionWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use NSURLSession (see NSURLSession.h)");
+- (nullable instancetype)initWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use NSURLSession (see NSURLSession.h)") __WATCHOS_PROHIBITED;
++ (nullable NSURLConnection*)connectionWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use NSURLSession (see NSURLSession.h)") __WATCHOS_PROHIBITED;
 
 @property (readonly, copy) NSURLRequest *originalRequest NS_AVAILABLE(10_8, 5_0);
 @property (readonly, copy) NSURLRequest *currentRequest NS_AVAILABLE(10_8, 5_0);
@@ -125,8 +126,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)start NS_AVAILABLE(10_5, 2_0);
 - (void)cancel;
 
-- (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode NS_AVAILABLE(10_5, 2_0);
-- (void)unscheduleFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode NS_AVAILABLE(10_5, 2_0);
+- (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSRunLoopMode)mode NS_AVAILABLE(10_5, 2_0);
+- (void)unscheduleFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSRunLoopMode)mode NS_AVAILABLE(10_5, 2_0);
 - (void)setDelegateQueue:(nullable NSOperationQueue*) queue NS_AVAILABLE(10_7, 5_0);
 
 
@@ -404,7 +405,7 @@ NS_ASSUME_NONNULL_BEGIN
     @result      The content of the URL resulting from performing the load,
                  or nil if the load failed.
 */
-+ (nullable NSData *)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse * __nullable * __nullable)response error:(NSError **)error NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h");
++ (nullable NSData *)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse * _Nullable * _Nullable)response error:(NSError **)error NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h") __WATCHOS_PROHIBITED;
 
 @end
 
@@ -455,7 +456,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)sendAsynchronousRequest:(NSURLRequest*) request
                           queue:(NSOperationQueue*) queue
-              completionHandler:(void (^)(NSURLResponse* __nullable response, NSData* __nullable data, NSError* __nullable connectionError)) handler NS_DEPRECATED(10_7, 10_11, 5_0, 9_0, "Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h");
+              completionHandler:(void (^)(NSURLResponse* _Nullable response, NSData* _Nullable data, NSError* _Nullable connectionError)) handler NS_DEPRECATED(10_7, 10_11, 5_0, 9_0, "Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h") __WATCHOS_PROHIBITED;
            
 @end
 

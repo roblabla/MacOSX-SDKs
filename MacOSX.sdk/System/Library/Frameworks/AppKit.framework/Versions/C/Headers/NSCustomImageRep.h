@@ -1,7 +1,7 @@
 /*
 	NSCustomImageRep.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithSize:(NSSize)size flipped:(BOOL)drawingHandlerShouldBeCalledWithFlippedContext drawingHandler:(BOOL (^)(NSRect dstRect))drawingHandler NS_AVAILABLE_MAC(10_8);
 @property (nullable, readonly, copy) BOOL (^drawingHandler)(NSRect) NS_AVAILABLE_MAC(10_8);
 
-- (instancetype)initWithDrawSelector:(SEL)aMethod delegate:(id)anObject;
+- (instancetype)initWithDrawSelector:(SEL)selector delegate:(id)delegate;
 @property (nullable, readonly) SEL drawSelector;
 @property (nullable, readonly, assign) id delegate;
 

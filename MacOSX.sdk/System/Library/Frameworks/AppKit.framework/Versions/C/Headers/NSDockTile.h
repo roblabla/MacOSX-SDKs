@@ -1,7 +1,7 @@
 /*
 	NSDockTile.h
 	Application Kit
-	Copyright (c) 2006-2015, Apple Inc.
+	Copyright (c) 2006-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSDockTile : NSObject {
-    @private;
+    @private
     id _owner;
     void *_dockContextRef;
     NSView *_contentView;
@@ -31,7 +31,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
     } _dFlags;
     NSSize _dockTileSize;
     id _miniViewController;
-    id reserved[4];
+    id reserved[4] __unused;
 }
 
 /* get the size of the dock tile, in screen coordinates

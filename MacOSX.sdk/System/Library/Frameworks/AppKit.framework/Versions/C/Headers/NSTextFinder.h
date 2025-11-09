@@ -1,7 +1,7 @@
 /*
         NSTextFinder.h
         Application Kit
-        Copyright (c) 2003-2015, Apple Inc.
+        Copyright (c) 2003-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -57,10 +57,11 @@ NS_CLASS_AVAILABLE(10_7, NA)
     BOOL _incrementalEnabled;
     BOOL _shouldDim;
     
-    id _private;
+    id _private __unused;
 }
 
-- (instancetype)init;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)decoder NS_DESIGNATED_INITIALIZER;
 
 /* A text finder must be associated with an object which implements the NSTextFinderClient protocol for it to function. The client is responsible for providing the string to be searched, the location for the find bar, and methods which control feedback to the user about the search results. */
 @property (nullable, assign) IBOutlet id <NSTextFinderClient> client;

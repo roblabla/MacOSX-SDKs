@@ -7,7 +7,7 @@
  *    iOS:  https://developer.apple.com/library/ios/documentation/Performance/Conceptual/vImage/Introduction/Introduction.html                                  *
  *                                                                                                                                                              *
  *  However, that resource, generously provided by ADC, is updated infrequently. In order to provide more timely documentation for newer vImage API, these      *
- *  headers contain additional headerdoc documentation in the comments.  The vImage headerdoc documentation can be viewed in lovely HTML as follows:            *
+ *  headers contain additional headerdoc documentation in the comments. The vImage headerdoc documentation can be viewed in lovely HTML as follows:             *
  *                                                                                                                                                              *
  *    /usr/bin/headerdoc2html -o ~/vImage_docs \                                                                                                                *
  *            `xcrun --sdk {iphoneos|macosx} --show-sdk-path`/System/Library/Frameworks/Accelerate.framework/Frameworks/vImage.framework/Headers                *
@@ -19,9 +19,9 @@
  *  For more on using headerdoc:                                                                                                                                *
  *    https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/HeaderDoc/usage/usage.html#//apple_ref/doc/uid/TP40001215-CH337-CDEBBJJA  *
  *                                                                                                                                                              *
- *  vImage headerdoc documentation is a work in progress, and currently only covers recent additions. (Documenting old features already present in the vImage   *
- *  Programming Guide would compete for engineering time against vImage development itself.) Most functions not covered in headerdoc should be documented in    *
- *  the vImage Programming Guide. Please file a bug if you encounter a function documented in neither resource.    http://bugreporter.apple.com                 *
+ *  vImage headerdoc documentation is a work in progress, and currently only covers recent additions. Most functions not covered in headerdoc should be         *
+ *  documented in the vImage Programming Guide. Please file a bug report if you encounter a function documented in neither resource.                            *
+ *  http://bugreport.apple.com                                                                                                                                  *
  *                                                                                                                                                              *
  *  Option clicking a vImage symbol in Xcode will often bring up online help with information assembled from both resources.                                    *
  *                                                                                                                                                              *
@@ -32,7 +32,7 @@
 
 /*!
  *  @header vImage.h
- *  @copyright Copyright (c) 2002-2015 by Apple Inc. All rights reserved.
+ *  @copyright Copyright (c) 2002-2016 by Apple Inc. All rights reserved.
  *  @compilerflag  -framework Accelerate
  *  @charset utf-8
  *

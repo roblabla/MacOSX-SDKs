@@ -131,4 +131,7 @@
 #define	T_NS_C	384
 #define	T_DIR	385
 #define	T_NS_SEPARATOR	386
+#define	T_ELLIPSIS	387
+#define	T_POW	388
+#define	T_POW_EQUAL	389
 

@@ -1,7 +1,7 @@
 /*
         NSTextView.h
         Application Kit
-        Copyright (c) 1994-2015, Apple Inc.
+        Copyright (c) 1994-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -20,6 +20,8 @@
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSTextCheckingResult.h>
+#import <AppKit/NSTouchBarItem.h>
+#import <AppKit/NSCandidateListTouchBarItem.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -54,7 +56,9 @@ typedef NS_ENUM(NSUInteger, NSSelectionAffinity) {
 */
 APPKIT_EXTERN NSString * NSAllRomanInputSourcesLocaleIdentifier NS_AVAILABLE_MAC(10_5);
 
+#if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_12
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
+#endif
 @interface NSTextView : NSText <NSUserInterfaceValidations, NSTextInputClient, NSTextLayoutOrientationProvider, NSDraggingSource, NSTextInput, NSAccessibilityNavigableStaticText>
 
 /**************************** Initializing ****************************/
@@ -178,7 +182,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 /************************* Vertical text support *************************/
 
 // Changes the receiver's layout orientation and invalidates the contents.  Unlike other NSTextView properties, this is not shared by sibling views.  It also rotates the bounds 90 degrees, swaps horizontal and vertical bits of the autoresizing mask, and reconfigures isHorizontallyResizable and isVerticallyResizable properties accordingly.  Also, if -enclosingScrollView returns non-nil, it reconfigures horizontal and vertical ruler views, horizontal and vertical scrollers, and the frame.
-- (void)setLayoutOrientation:(NSTextLayoutOrientation)theOrientation NS_AVAILABLE_MAC(10_7);
+- (void)setLayoutOrientation:(NSTextLayoutOrientation)orientation NS_AVAILABLE_MAC(10_7);
 
 // An action method that calls -setLayoutOrientation: with the sender's tag as the orientation.
 - (void)changeLayoutOrientation:(nullable id)sender NS_AVAILABLE_MAC(10_7);
@@ -187,6 +191,10 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 // Here point is in view coordinates, and the return value is a character index appropriate for placing a zero-length selection for an insertion point associated with the mouse at the given point.  The NSTextInput method characterIndexForPoint: is not suitable for this role.
 - (NSUInteger)characterIndexForInsertionAtPoint:(NSPoint)point NS_AVAILABLE_MAC(10_5);
+
+/**************************** Ownership policy ****************************/
+// Returns whether instances of the class operate in the object ownership policy introduced with macOS Sierra and later. When YES, the new object owner policy is used. Under the policy, each text view strongly retains its text storage and its text container weakly references the view. Also, the text views are compatible with __weak storage. The default is YES.
+@property (readonly, class) BOOL stronglyReferencesTextStorage NS_AVAILABLE_MAC(10_12);
 
 @end
 
@@ -450,6 +458,33 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 @end
 
+
+#pragma mark NSTouchBar support
+/* NSTextView provides support for text formatting and inputting touch bar items. -[NSTextView makeTouchBar] instantiates an NSTouchBar configured based on settings such as -automaticTextCompletionEnabled and -richText. NSTextView conforms to NSTouchBarDelegate and supplies touch bar items via -touchBar:makeItemForIdentifier:.
+ */
+@interface NSTextView (NSTextView_TouchBar) <NSCandidateListTouchBarItemDelegate, NSTouchBarDelegate>
+
+// Enables automatic completion touch bar item. YES by default. When YES, NSTextView displays the candidates for the text selection in its NSCandidateListTouchBarItem returned from -candidateListTouchBarItem. Invokes -updateTouchBarItemIdentifiers.
+@property (getter=isAutomaticTextCompletionEnabled) BOOL automaticTextCompletionEnabled NS_AVAILABLE_MAC(10_12_2);
+- (IBAction)toggleAutomaticTextCompletion:(nullable id)sender NS_AVAILABLE_MAC(10_12_2);
+
+// When Yes, NSTouchBarItemIdentifierCharacterPicker is included in -[NSTouchBar itemIdentifiers] for its touch bar. Default is YES. Invokes -updateTouchBarItemIdentifiers.
+@property BOOL allowsCharacterPickerTouchBarItem NS_AVAILABLE_MAC(10_12_2);
+
+// This message should be sent whenever a property affecting touch bar item states is changed. It updates -itemIdentifiers for its touch bar.
+- (void)updateTouchBarItemIdentifiers NS_AVAILABLE_MAC(10_12_2);
+
+// Updates state of text formatting touch bar items such as NSTouchBarItemIdentifierTextStyle and NSTouchBarItemIdentifierTextAlignment for the receiver based on the current selection.
+- (void)updateTextTouchBarItems NS_AVAILABLE_MAC(10_12_2);
+
+// Updates the candidates for -candidateListTouchBarItem.
+- (void)updateCandidates NS_AVAILABLE_MAC(10_12_2);
+
+// -[NSTextView candidateListTouchBarItem] returns an NSCandidateTouchBarItem instance owned by the receiver. The touch bar item is instantiated in -[NSTextView touchBar:makeItemForIdentifier:] with NSTouchBarItemIdentifierCandidateLit.
+@property (nullable, readonly, strong) NSCandidateListTouchBarItem *candidateListTouchBarItem NS_AVAILABLE_MAC(10_12_2);
+@end
+
+
 @interface NSTextView (NSDeprecated)
 
 // toggleBaseWritingDirection: will be deprecated in favor of the new NSResponder methods makeBaseWritingDirectionNatural:, makeBaseWritingDirectionLeftToRight:, and makeBaseWritingDirectionRightToLeft:, which NSTextView now implements.
@@ -527,6 +562,20 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 - (nullable NSUndoManager *)undoManagerForTextView:(NSTextView *)view;
 
+
+// Delegate only. Invoked from -updateTouchBarItemIdentifiers before setting the item identifiers for textView's touch bar.
+- (NSArray<NSTouchBarItemIdentifier> *)textView:(NSTextView *)textView shouldUpdateTouchBarItemIdentifiers:(NSArray<NSTouchBarItemIdentifier> *)identifiers NS_AVAILABLE_MAC(10_12_2);
+
+// Delegate only. Provides customized list of candidates to textView.candidateListTouchBarItem. Invoked from -updateCandidates. NSTextView uses the candidates returned from this method and suppress its built-in candidate generation. Returning nil from this delegate method allows NSTextView to query candidates from NSSpellChecker.
+- (nullable NSArray *)textView:(NSTextView *)textView candidatesForSelectedRange:(NSRange)selectedRange NS_AVAILABLE_MAC(10_12_2);
+
+// Delegate only. Allows customizing the candidate list queried from NSSpellChecker.
+- (NSArray<NSTextCheckingResult *> *)textView:(NSTextView *)textView candidates:(NSArray<NSTextCheckingResult *> *)candidates forSelectedRange:(NSRange)selectedRange NS_AVAILABLE_MAC(10_12_2);
+
+// Delegate only. Notifies the delegate that the user selected the candidate at index in -[NSCandidateListTouchBarItem candidates] for textView.candidateListTouchBarItem. When no candidate selected, index is NSNotFound. Returning YES allows textView to insert the candidate into the text storage if it's NSString, NSAttributedString, or NSTextCheckingResult.
+- (BOOL)textView:(NSTextView *)textView shouldSelectCandidateAtIndex:(NSUInteger)index NS_AVAILABLE_MAC(10_12_2);
+
+
 // The following delegate-only methods are deprecated in favor of the more verbose ones above.
 - (BOOL)textView:(NSTextView *)textView clickedOnLink:(null_unspecified id)link NS_DEPRECATED_MAC(10_0, 10_6, "Use -textView:clickedOnLink:atIndex: instead");
 - (void)textView:(NSTextView *)textView clickedOnCell:(null_unspecified id <NSTextAttachmentCell>)cell inRect:(NSRect)cellFrame NS_DEPRECATED_MAC(10_0, 10_6, "Use -textView:clickedOnCell:inRect:atIndex: instead");
@@ -535,13 +584,36 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 @end
 
+
+#pragma mark Touch Bar Item Identifiers
+/* Standard Touch Bar Item Identifiers */
+// A touch bar item identifier for a control selecting special characters (i.e. Emoji). -[NSTouchBar itemForIdentifier:] recognizes the identifier.
+APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierCharacterPicker NS_AVAILABLE_MAC(10_12_2);
+
+/* Identifiers recognized by -[NSTextView touchBar:makeItemForIdentifier:] */
+// A touch bar item identifier for a control selecting the text color.
+APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextColorPicker NS_AVAILABLE_MAC(10_12_2);
+
+// A touch bar item identifier for a control selecting the text style.
+APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextStyle NS_AVAILABLE_MAC(10_12_2);
+
+// A touch bar item identifier for a control selecting the text alignment. -[NSTextView touchBarItemForIdentifier:] returns an NSPopoverTouchBarItem.
+APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextAlignment NS_AVAILABLE_MAC(10_12_2);
+
+// A touch bar item identifier for a control inserting the text list style. -[NSTextView touchBarItemForIdentifier:] returns an NSPopoverTouchBarItem.
+APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextList NS_AVAILABLE_MAC(10_12_2);
+
+// A touch bar item identifier for a group of text format controls.
+APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextFormat NS_AVAILABLE_MAC(10_12_2);
+
+
 // NSOldNotifyingTextView -> the old view, NSNewNotifyingTextView -> the new view.  The text view delegate is not automatically registered to receive this notification because the text machinery will automatically switch over the delegate to observe the new first text view as the first text view changes.
-APPKIT_EXTERN NSString * NSTextViewWillChangeNotifyingTextViewNotification;
+APPKIT_EXTERN NSNotificationName NSTextViewWillChangeNotifyingTextViewNotification;
 
 // NSOldSelectedCharacterRange -> NSValue with old range.
-APPKIT_EXTERN NSString * NSTextViewDidChangeSelectionNotification;
+APPKIT_EXTERN NSNotificationName NSTextViewDidChangeSelectionNotification;
 
-APPKIT_EXTERN NSString * NSTextViewDidChangeTypingAttributesNotification;
+APPKIT_EXTERN NSNotificationName NSTextViewDidChangeTypingAttributesNotification;
 
 
 /* These constants are deprecated in favor of their NSTextFinder equivalents. */

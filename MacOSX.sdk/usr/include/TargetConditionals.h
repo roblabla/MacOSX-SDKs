@@ -55,15 +55,18 @@
     run.  Indention is used to show which conditionals are evolutionary subclasses.  
     
     The MAC/WIN32/UNIX conditionals are mutually exclusive.
-    The IOS/WATCH conditionals are mutually exclusive.
+    The IOS/TV/WATCH conditionals are mutually exclusive.
     
     
         TARGET_OS_WIN32           - Generated code will run under 32-bit Windows
         TARGET_OS_UNIX            - Generated code will run under some Unix (not OSX) 
         TARGET_OS_MAC             - Generated code will run under Mac OS X variant
-           TARGET_OS_IPHONE          - Generated code for firmware, devices, or simulator 
+           TARGET_OS_OSX          - Generated code will run under OS X devices
+           TARGET_OS_IPHONE          - Generated code for firmware, devices, or simulator
               TARGET_OS_IOS             - Generated code will run under iOS 
+              TARGET_OS_TV              - Generated code will run under Apple TV OS
               TARGET_OS_WATCH           - Generated code will run under Apple Watch OS
+                 TARGET_OS_BRIDGE          - Generated code will run under Bridge devices
            TARGET_OS_SIMULATOR      - Generated code will run under a simulator
            TARGET_OS_EMBEDDED       - Generated code for firmware
        
@@ -92,9 +95,12 @@
     #define TARGET_OS_MAC               1
     #define TARGET_OS_WIN32             0
     #define TARGET_OS_UNIX              0
-    #define TARGET_OS_IPHONE            0 
+    #define TARGET_OS_OSX               1
+    #define TARGET_OS_IPHONE            0
     #define TARGET_OS_IOS               0
     #define TARGET_OS_WATCH             0
+    #define TARGET_OS_BRIDGE            0
+    #define TARGET_OS_TV                0
     #define TARGET_OS_SIMULATOR         0
     #define TARGET_OS_EMBEDDED          0 
     #define TARGET_IPHONE_SIMULATOR     TARGET_OS_SIMULATOR /* deprecated */

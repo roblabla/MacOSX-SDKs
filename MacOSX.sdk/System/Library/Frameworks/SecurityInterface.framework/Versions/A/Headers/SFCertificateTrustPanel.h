@@ -29,10 +29,11 @@
 #if defined (__LP64__)
 	id _reserved_SFCertificateTrustPanel;
 #else
-	IBOutlet NSSplitView *_splitView;		
-	IBOutlet NSTextField *_messageView;		
+    IBOutlet NSStackView *_stackView;
+	IBOutlet NSSplitView *_splitView;
 	IBOutlet NSButton *_saveChangesButton;
-	IBOutlet NSButton *_cancelButton;	
+	IBOutlet NSButton *_cancelButton;
+    IBOutlet NSLayoutConstraint *_discloseContentHeightConstraint;
 	NSString *_defaultMessage;
 	BOOL _saveChanges;
 	id _reserved_SFCertificateTrustPanel;

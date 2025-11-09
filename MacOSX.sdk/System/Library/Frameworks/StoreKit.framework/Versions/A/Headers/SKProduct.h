@@ -8,29 +8,34 @@
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKitDefines.h>
 
-NS_CLASS_AVAILABLE(10_7, NA)
-@interface SKProduct : NSObject {
+NS_ASSUME_NONNULL_BEGIN
+
+SK_EXTERN_CLASS_AVAILABLE(10_7)
+@interface SKProduct : NSObject
+{
 @private
     id _internal;
 }
 
-@property(nullable, readonly) NSString *localizedDescription;
+@property(nonatomic, readonly) NSString *localizedDescription NS_AVAILABLE_MAC(10_7);
 
-@property(nullable, readonly) NSString *localizedTitle;
+@property(nonatomic, readonly) NSString *localizedTitle NS_AVAILABLE_MAC(10_7);
 
-@property(nullable, readonly) NSDecimalNumber *price;
+@property(nonatomic, readonly) NSDecimalNumber *price NS_AVAILABLE_MAC(10_7);
 
-@property(nullable, readonly) NSLocale *priceLocale;
+@property(nonatomic, readonly) NSLocale *priceLocale NS_AVAILABLE_MAC(10_7);
 
-@property(nullable, readonly) NSString *productIdentifier;
+@property(nonatomic, readonly) NSString *productIdentifier NS_AVAILABLE_MAC(10_7);
 
 // YES if the product's assets are hosted by the App Store. NO otherwise. 
-@property(readonly) BOOL downloadable;
+@property(nonatomic, readonly) BOOL downloadable NS_AVAILABLE_MAC(10_8);
 
 // Version string of the product
-@property(nullable, readonly) NSString* contentVersion;
+@property(nonatomic, readonly) NSString *contentVersion NS_AVAILABLE_MAC(10_8);
 
 // An array of filesizes of the assets associated with the product
-@property(nullable, readonly) NSArray<NSNumber *> *contentLengths;
+@property(nonatomic, readonly) NSArray<NSNumber *> *contentLengths NS_AVAILABLE_MAC(10_8);
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,12 +1,13 @@
 /* CoreAnimation - CAEmitterBehavior.h
 
-   Copyright (c) 2013-2015, Apple Inc.
+   Copyright (c) 2013-2016, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+CA_CLASS_AVAILABLE (10.9, 7.0, 9.0, 2.0)
 @interface CAEmitterBehavior : NSObject <NSCoding>
 {
 @private
@@ -110,9 +111,7 @@ CA_EXTERN NSString * const kCAEmitterBehaviorColorOverLife;
  *
  * For spot-lights:
  *   NSNumber directionLatitude, directionLongitude: the light's direction.
- *   NSNumber coneAngle, coneEdgeSoftness: the spot's lighting cone.
- *
- * See CALight.h for more description of the lighting behavior. */
+ *   NSNumber coneAngle, coneEdgeSoftness: the spot's lighting cone. */
 
 CA_EXTERN NSString * const kCAEmitterBehaviorLight;
 
@@ -128,5 +127,14 @@ CA_EXTERN NSString * const kCAEmitterBehaviorLight;
  * NSNumber falloff, falloffDistance: falloff values. */
 
 CA_EXTERN NSString * const kCAEmitterBehaviorAttractor;
+
+/* `simpleAttractor': simple radial force field.
+ *
+ * NSNumber stiffness: the spring stiffness.
+ * NSNumber radius: attractor radius, no effect inside.
+ * CGPoint position: the attractor's 2D position.
+ * NSNumber falloff: falloff value. */
+
+CA_EXTERN NSString * const kCAEmitterBehaviorSimpleAttractor;
 
 NS_ASSUME_NONNULL_END

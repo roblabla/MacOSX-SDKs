@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -43,6 +43,7 @@
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 #include <mach/machine.h>
+#include <uuid/uuid.h>
 
 
 __BEGIN_DECLS
@@ -230,9 +231,9 @@ struct proc_workqueueinfo {
 /*
  *	workqueue state (pwq_state field)
  */
-#define WQ_EXCEEDED_CONSTRAINED_THREAD_LIMIT	0x1
-#define WQ_EXCEEDED_TOTAL_THREAD_LIMIT		0x2
-
+#define WQ_EXCEEDED_CONSTRAINED_THREAD_LIMIT 0x1
+#define WQ_EXCEEDED_TOTAL_THREAD_LIMIT 0x2
+#define WQ_FLAGS_AVAILABLE 0x4
 
 struct proc_fileinfo {
 	uint32_t		fi_openflags;
@@ -252,6 +253,21 @@ struct proc_fileinfo {
 #define PROC_FI_GUARD_DUP		(1u << 1)
 #define PROC_FI_GUARD_SOCKET_IPC	(1u << 2)
 #define PROC_FI_GUARD_FILEPORT		(1u << 3)
+
+struct proc_exitreasonbasicinfo {
+	uint32_t			beri_namespace;
+	uint64_t			beri_code;
+	uint64_t			beri_flags;
+	uint32_t			beri_reason_buf_size;
+} __attribute__((packed));
+
+struct proc_exitreasoninfo {
+	uint32_t			eri_namespace;
+	uint64_t			eri_code;
+	uint64_t			eri_flags;
+	uint32_t			eri_reason_buf_size;
+	uint64_t			eri_kcd_buf;
+} __attribute__((packed));
 
 /*
  * A copy of stat64 with static sized fields.
@@ -600,6 +616,7 @@ struct appletalk_fdinfo {
 #define PROX_FDTYPE_KQUEUE	5
 #define PROX_FDTYPE_PIPE	6
 #define PROX_FDTYPE_FSEVENTS	7
+#define PROX_FDTYPE_NETPOLICY	9
 
 struct proc_fdinfo {
 	int32_t			proc_fd;
@@ -610,6 +627,7 @@ struct proc_fileportinfo {
 	uint32_t		proc_fileport;
 	uint32_t		proc_fdtype;
 };
+
 
 /* Flavors for proc_pidinfo() */
 #define PROC_PIDLISTFDS			1
@@ -688,6 +706,7 @@ struct proc_fileportinfo {
 
 #define PROC_PIDFDATALKINFO		8
 #define PROC_PIDFDATALKINFO_SIZE	(sizeof(struct appletalk_fdinfo))
+
 
 
 /* Flavors for proc_pidfileportinfo */

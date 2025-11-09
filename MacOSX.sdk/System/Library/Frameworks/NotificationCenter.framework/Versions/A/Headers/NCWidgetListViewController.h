@@ -8,11 +8,12 @@
 
 @protocol NCWidgetListViewDelegate;
 
+NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface NCWidgetListViewController : NSViewController
 
-@property (weak) IBOutlet id<NCWidgetListViewDelegate> delegate;
+@property (nullable, weak) IBOutlet id<NCWidgetListViewDelegate> delegate;
 
 /* Set the contents array in order to provide contents for display in the list
    view. The list view controller will request a new content view controller
@@ -21,7 +22,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  
    As an optimization, when resetting contents, the list view controller may
    re-use content view controllers for identical objects already in contents. */
-@property (copy) NSArray *contents;
+@property (copy) NSArray<id> *contents;
 
 /* The minimum number of visible rows to display. When this property is set and
    the count of contetns is greater than this number, the list view controller
@@ -86,3 +87,5 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 - (void)widgetList:(NCWidgetListViewController *)list didRemoveRow:(NSUInteger)row;
 
 @end
+
+NS_ASSUME_NONNULL_END

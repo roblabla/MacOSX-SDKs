@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -64,47 +64,13 @@
 #define	_NET_IF_H_
 
 #include <sys/cdefs.h>
+#include <net/net_kev.h>
 
 #define	IF_NAMESIZE	16
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #include <sys/appleapiopts.h>
 #ifdef __APPLE__
-/*
- * Define Data-Link event subclass, and associated
- * events.
- */
-
-#define	KEV_DL_SUBCLASS 2
-
-#define	KEV_DL_SIFFLAGS				1
-#define	KEV_DL_SIFMETRICS			2
-#define	KEV_DL_SIFMTU				3
-#define	KEV_DL_SIFPHYS				4
-#define	KEV_DL_SIFMEDIA				5
-#define	KEV_DL_SIFGENERIC			6
-#define	KEV_DL_ADDMULTI				7
-#define	KEV_DL_DELMULTI				8
-#define	KEV_DL_IF_ATTACHED			9
-#define	KEV_DL_IF_DETACHING			10
-#define	KEV_DL_IF_DETACHED			11
-#define	KEV_DL_LINK_OFF				12
-#define	KEV_DL_LINK_ON				13
-#define	KEV_DL_PROTO_ATTACHED			14
-#define	KEV_DL_PROTO_DETACHED			15
-#define	KEV_DL_LINK_ADDRESS_CHANGED		16
-#define	KEV_DL_WAKEFLAGS_CHANGED		17
-#define	KEV_DL_IF_IDLE_ROUTE_REFCNT		18
-#define	KEV_DL_IFCAP_CHANGED			19
-#define	KEV_DL_LINK_QUALITY_METRIC_CHANGED	20
-#define	KEV_DL_NODE_PRESENCE			21
-#define	KEV_DL_NODE_ABSENCE			22
-#define	KEV_DL_MASTER_ELECTED			23
-#define	KEV_DL_ISSUES				24
-#define	KEV_DL_IFDELEGATE_CHANGED		25
-#define	KEV_DL_AWDL_RESTRICTED			26
-#define	KEV_DL_AWDL_UNRESTRICTED		27
-#define	KEV_DL_RRC_STATE_CHANGED		28
 
 #include <net/if_var.h>
 #include <sys/types.h>
@@ -167,12 +133,16 @@ struct if_clonereq {
 #define	IFCAP_LRO		0x00080	/* can do Large Receive Offload */
 #define	IFCAP_AV		0x00100	/* can do 802.1 AV Bridging */
 #define	IFCAP_TXSTATUS		0x00200	/* can return linklevel xmit status */
+#define	IFCAP_SKYWALK		0x00400	/* Skywalk mode supported/enabled */
+#define	IFCAP_HW_TIMESTAMP	0x00800	/* Time stamping in hardware */
+#define	IFCAP_SW_TIMESTAMP	0x01000	/* Time stamping in software */
 
 #define	IFCAP_HWCSUM	(IFCAP_RXCSUM | IFCAP_TXCSUM)
 #define	IFCAP_TSO	(IFCAP_TSO4 | IFCAP_TSO6)
 
 #define	IFCAP_VALID (IFCAP_HWCSUM | IFCAP_TSO | IFCAP_LRO | IFCAP_VLAN_MTU | \
-	IFCAP_VLAN_HWTAGGING | IFCAP_JUMBO_MTU | IFCAP_AV | IFCAP_TXSTATUS)
+	IFCAP_VLAN_HWTAGGING | IFCAP_JUMBO_MTU | IFCAP_AV | IFCAP_TXSTATUS | \
+	IFCAP_SKYWALK | IFCAP_SW_TIMESTAMP | IFCAP_HW_TIMESTAMP)
 
 #define	IFQ_MAXLEN	128
 #define	IFNET_SLOWHZ	1	/* granularity is 1 second */

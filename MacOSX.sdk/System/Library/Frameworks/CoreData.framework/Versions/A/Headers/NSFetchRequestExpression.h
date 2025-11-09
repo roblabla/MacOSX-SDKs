@@ -1,7 +1,7 @@
 /*
     NSFetchRequestExpression.h
     Core Data
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -13,8 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 static const NSExpressionType NSFetchRequestExpressionType = (NSExpressionType)50;
 
-NS_CLASS_AVAILABLE(10_5,3_0)
+API_AVAILABLE(macosx(10.5),ios(3.0))
 @interface NSFetchRequestExpression : NSExpression {
+#if (!__OBJC2__)
 @private
     void* _reserved1;
     void* _reserved2;
@@ -26,6 +27,7 @@ NS_CLASS_AVAILABLE(10_5,3_0)
         unsigned int isCountOnly:1;
         unsigned int _RESERVED:31;
     } _flags;
+#endif
 }
 
 /* Returns an expression which will evaluate to the result of executing a fetch request on a context.  The first argument must be an expression which evaluates to an NSFetchRequest *, and the second must be an expression which evaluates to an NSManagedObjectContext *.  If the desired result is simply the count for the request, the "countOnly" argument should be YES.

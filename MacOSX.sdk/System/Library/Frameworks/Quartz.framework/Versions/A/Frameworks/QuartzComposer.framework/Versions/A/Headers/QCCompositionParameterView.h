@@ -16,7 +16,7 @@
 @interface QCCompositionParameterView : NSView
 {
 @private
-	__strong void*				_QCCompositionParameterViewPrivate;
+	void*				_QCCompositionParameterViewPrivate;
 }
 
 /*

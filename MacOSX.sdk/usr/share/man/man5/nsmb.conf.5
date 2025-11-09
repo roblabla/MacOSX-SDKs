@@ -91,10 +91,12 @@ Possible keywords may include:
 .It Va soft               Ta "+ + +"  Ta ""       Ta "Make the mount soft"
 .It Va notify_off         Ta "+ + +"  Ta "no"     Ta "Turn off using notifications"
 .It Va kloglevel          Ta "+ - -"  Ta "0"      Ta "Turn on smb kernel logging"
-.It Va smb_neg            Ta "+ - -"  Ta "normal" Ta "How to negotiate SMB 1/2/3"
-.It Va signing_required   Ta  "+ - -" Ta "false"  Ta "Turn off smb client signing"
+.It Va protocol_vers_map  Ta  "+ - -" Ta "7"      Ta "Bitmap of SMB Versions that are enabled"
+.It Va signing_required   Ta  "+ - -" Ta "yes"    Ta "Turn off smb client signing"
+.It Va signing_req_vers   Ta  "+ - -" Ta "6"      Ta "Bitmap of SMB Versions that have signing required"
 .It Va validate_neg_off   Ta "+ - -"  Ta "no"     Ta "Turn off using validate negotiate"
 .It Va max_resp_timeout   Ta "+ + -"  Ta "30s"    Ta "Max time to wait for any response from server"
+.It Va submounts_off      Ta "+ + +"  Ta "no"     Ta "Turn off using submounts"
 .It Va read_async_cnt  Ta "+ + -"  Ta "4"   Ta "Max async number of reads"
 .It Va write_async_cnt  Ta "+ + -"  Ta "4"   Ta "Max async number of writes"
 .It Va dir_cache_async_cnt  Ta "+ + -"  Ta "10"   Ta "Max async queries to fill dir cache"
@@ -144,16 +146,24 @@ Attempt to connect via port 445. If that is
 unsuccessful, do not try to connect via NetBIOS.
 .El
 .Pp
-"How to negotiate SMB 1/2/3" can be one of:
-.Bl -tag -width ".Li smb2_only"
-.It Li normal
-Negotiate with SMB 1 and attempt to negotiate to SMB 2/3.
-.It Li smb1_only
-Negotiate with only SMB 1.
-.It Li smb2_only
-Negotiate with only SMB 2. This also will set no_netbios.
-.It Li smb3_only
-Negotiate with only SMB 3. This also will set no_netbios.
+"Bitmap of SMB Versions that are enabled" can be one of:
+.Bl -tag -width ".Li 7"
+.It Li 7 == 0111
+SMB 1/2/3 should be enabled
+.It Li 6 == 0110
+SMB 2/3 should be enabled
+.It Li 4 == 0100
+SMB 3 should be enabled
+.El
+.Pp
+"Bitmap of SMB Versions that have signing required" can be one of:
+.Bl -tag -width ".Li 7"
+.It Li 7
+Signing required for SMB 1/2/3.
+.It Li 6
+Signing required for SMB 2/3.
+.It Li 4
+Signing required for SMB 3.
 .El
 .Sh FILES
 .Bl -tag -width ".Pa /etc/nsmb.conf"

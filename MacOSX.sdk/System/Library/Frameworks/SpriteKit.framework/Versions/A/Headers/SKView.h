@@ -5,9 +5,15 @@
 //  Copyright (c) 2011 Apple Inc. All rights reserved.
 //
 
+
 #import <SpriteKit/SpriteKitBase.h>
 
+
+/* SKView is not available on WatchOS, please see WKInterfaceSpriteKit */
+#if SKVIEW_AVAILABLE
+
 @class SKScene, SKTransition, SKTexture, SKNode;
+@protocol SKViewDelegate;
 
 /**
  The view to present your SKScene nodes in.
@@ -69,10 +75,30 @@ SK_EXPORT @interface SKView : NSView
  */
 @property (nonatomic) BOOL ignoresSiblingOrder;
 
+
 @property (nonatomic) BOOL shouldCullNonVisibleNodes NS_AVAILABLE(10_10, 8_0);
 
-/* Number of hardware vsyncs between callbacks, same behaviour as CADisplayLink. Defaults to 1 (render every vsync) */
-@property (nonatomic) NSInteger frameInterval;
+
+/* Defines the desired rate for this SKView to it's content. 
+ Actual rate maybe be limited by hardware or other software. */
+@property (nonatomic) NSInteger preferredFramesPerSecond NS_AVAILABLE(10_12, 10_0);
+
+
+/**
+ Optional view delegate, see SKViewDelegate.
+ */
+@property (nonatomic, weak, nullable) NSObject<SKViewDelegate> *delegate NS_AVAILABLE(10_12, 10_0);
+
+
+/* Deprecated, please use preferredFramesPerSecond.
+ Number of frames to skip between renders, defaults to 1 (render every frame)
+ Actual requested rate will be preferredFramesPerSecond / frameInterval.  */
+@property (nonatomic) NSInteger frameInterval NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+
+/* Deprecated, please use preferredFramesPerSecond. */
+/* FIXME: remove from public headers once all clinets adopt preferredFramesPerSecond. */
+@property(nonatomic) float preferredFrameRate NS_DEPRECATED(10_12, 10_12, 10_0, 10_0);
+
 
 /**
  Present an SKScene in the view, replacing the current scene.
@@ -129,4 +155,20 @@ SK_EXPORT @interface SKView : NSView
 
 @end
 
+
+
+SK_EXPORT NS_AVAILABLE(10_12, 10_0) @protocol SKViewDelegate <NSObject>
+@optional
+/**
+ Allows the client to dynamically control the render rate.
+ 
+ return YES to initiate an update and render for the target time.
+ return NO to skip update and render for this target time.
+ */
+- (BOOL)view:(SKView *)view shouldRenderAtTime:(NSTimeInterval)time;
+@end
+
+
 NS_ASSUME_NONNULL_END
+
+#endif

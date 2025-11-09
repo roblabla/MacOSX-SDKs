@@ -23,42 +23,41 @@
 A list of flags and their descriptions:
 .Bl -tag -width -indent  \" Differs from above in tag removed 
 .It Fl a Ar <path>                \"-a flag as a list item
-add a new share point for the directory specified by <path>.
+Add a new share point for the directory specified by <path>.
 .It Fl e Ar <share point name>
-edit the share point record specified by <share point name>.
+Edit the share point record specified by <share point name>.
 .It Fl r Ar <share point name>
-delete the share point record specified by <share point name>.
+Delete the share point record specified by <share point name>.
 .It Fl l
-list all existing share point records. 
+List all existing share point records. 
 .El                      \" Ends the list
 .Pp
 The following options modify share point record attributes:
 .Bl -tag -width -indent  \" Differs from above in tag removed 
 .It Fl A Ar <afp name> 
-use customized name <afp name> when using share point with afp.
+Use customized name <afp name> when using share point with afp.
 .It Fl F Ar <ftp name> 
-use customized name <ftp name> when using share point with ftp.
+Use customized name <ftp name> when using share point with ftp.
 .It Fl S Ar <smb name> 
-use customized name <smb name> when using share points with smb.
+Use customized name <smb name> when using share points with smb.
 .It Fl s Ar <flags> 
 Use this option to enable and disable sharing via afp, ftp, and smb.
 By default a share point is enabled for afp, ftp, and smb protocols.
 To enable and disable particular services, combine (binary AND) the following flags as required: \
-100 (enable sharing for afp), 010 (enable sharing for smb), and 001 (enable sharing for ftp).
+100 (enable sharing for afp), 010 (enable sharing for ftp), and 001 (enable sharing for smb).
 Specify 000 to turn off sharing of a share point altogether.
-Use a customized name <smb name> if appropriate when using share points with smb.
 .It Fl g Ar <guest flag> 
 Use this option to enable and disable guest access for afp, ftp, and smb.
 By default guest access is enabled for afp, ftp, and smb.
 To enable and disable guest access to particular services, combine (binary AND) the following flags as required: \
-100 (enable guest for afp), 010 (enable guest for smb), and 001 (enable guest for ftp).
+100 (enable guest for afp), 010 (enable guest for ftp), and 001 (enable guest for smb).
 Specify 000 to turn off guest access for a share point altogether.
 .It Fl i Ar <inherit privileges flag> 
-Use this option to enable and disable the "inherit privileges" attribute for afp, ftp, and smb.
-By default "inherit privileges" is enabled for ftp only.
-To enable and disable guest access to particular services, combine (binary AND) the following flags as required: \
-100 ("inherit privileges" for afp), 010 ("inherit privileges" for smb), and 001 ("inherit privileges" for ftp).
-Specify 000 to turn off "inherit privileges" for a share point altogether.
+Use this option to enable and disable the "inherit privileges" attribute for afp.
+By default "inherit privileges" is enabled for afp.
+To enable "inherit privileges", combine (binary AND) the following flags as required: \
+10 ("inherit privileges" for afp).
+Specify 00 to turn off "inherit privileges" for a share point altogether.
 .It Fl n Ar <customized record name>
 Specify a <customized record name> to be used as the share point record name.
 By default the record name is the name of the directory pointed to by the share point record. 

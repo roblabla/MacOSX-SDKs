@@ -33,8 +33,12 @@ extern "C" {
 
 #pragma pack(push, 2)
 
+/* Apple event manager data types */
+typedef ResType                         DescType;
+typedef FourCharCode                    AEKeyword;
+
 /* Apple event descriptor types */
-enum {
+CF_ENUM(DescType) {
   typeBoolean                   = 'bool',
   typeChar                      = 'TEXT' /* Deprecated, use typeUTF8Text instead. */
 };
@@ -43,7 +47,7 @@ enum {
  * The following descriptor types are deprecated due to their lack of
  * explicit encoding or byte order definition.  Please use
  * typeUTF16ExternalRepresentation or typeUTF8Text instead. */
-enum {
+CF_ENUM(DescType) {
   typeStyledUnicodeText         = 'sutx', /* Not implemented */
   typeEncodedString             = 'encs', /* Not implemented */
   typeUnicodeText               = 'utxt', /* native byte ordering, optional BOM */
@@ -54,13 +58,13 @@ enum {
 /*
  * The preferred unicode text types.  In both cases, there is no explicit null termination or length byte.
  */
-enum {
+CF_ENUM(DescType) {
   typeUTF16ExternalRepresentation = 'ut16', /* big-endian 16 bit unicode with optional byte-order-mark, or little-endian 16 bit unicode with required byte-order-mark. */
   typeUTF8Text                  = 'utf8' /* 8 bit unicode */
 };
 
 /* Preferred numeric Apple event descriptor types */
-enum {
+CF_ENUM(DescType) {
   typeSInt16                    = 'shor', /* SInt16 : signed, 16 bit integer */
   typeUInt16                    = 'ushr', /* UInt16 : unsigned, 16 bit integer */
   typeSInt32                    = 'long', /* SInt32 : signed, 32 bit integer */
@@ -98,7 +102,7 @@ enum {
 
 */
 #else
-enum {
+CF_ENUM(OSType) {
   typeSMInt                     = typeSInt16,
   typeShortInteger              = typeSInt16,
   typeInteger                   = typeSInt32,
@@ -115,7 +119,7 @@ enum {
 #endif  /* __LP64__ */
 
 /* More Apple event descriptor types */
-enum {
+CF_ENUM(DescType) {
   typeAEList                    = 'list',
   typeAERecord                  = 'reco',
   typeAppleEvent                = 'aevt',
@@ -147,13 +151,13 @@ enum {
     your code to use typeFileURL or typeFileBookmark.  In __LP64__ code, coercions into typeFSS is not supported,
     and coercion from typeFSS is not guaranteed to work correctly in all cases.
 */
-enum {
+CF_ENUM(DescType) {
   typeFSS                       = 'fss ' /* FSSpec */
 };
 
 #endif  /* !__LP64__ */
 
-enum {
+CF_ENUM(DescType) {
   typeCFAttributedStringRef     = 'cfas',
   typeCFMutableAttributedStringRef = 'cfaa',
   typeCFStringRef               = 'cfst',
@@ -168,23 +172,23 @@ enum {
 };
 
 /* New addressing modes for MacOS X */
-enum {
+CF_ENUM(DescType) {
   typeKernelProcessID           = 'kpid',
   typeMachPort                  = 'port'
 };
 
 	
-enum {
+CF_ENUM(DescType) {
 	typeAuditToken			= 'tokn',	/* Mac OS X 10.8, returned as keyAuditTokenAttr and is a typedef audit_token_t */
 };
 										 
 /* Targeting applications by bundle ID is only available in Mac OS X 10.3 or later. */
-enum {
+CF_ENUM(DescType) {
   typeApplicationBundleID       = 'bund'
 };
 
 /* Keywords for Apple event attributes */
-enum {
+CF_ENUM(AEKeyword) {
 	keyTransactionIDAttr          = 'tran', /* AETransactionID */
 	keyReturnIDAttr               = 'rtid', /* AEReturnID */
 	keyEventClassAttr             = 'evcl', /* AEEventClass */
@@ -232,7 +236,7 @@ enum {
   kSOAP2001Schema               = 'ss01'
 };
 
-enum {
+CF_ENUM(AEKeyword) {
                                         /* outgoing event attributes */
   keyUserNameAttr               = 'unam',
   keyUserPasswordAttr           = 'pass', /* not sent with the event */
@@ -277,7 +281,7 @@ enum {
     </myStruct>
 
 */
-enum {
+CF_ENUM(AEKeyword) {
   keySOAPStructureMetaData      = '/smd',
   keySOAPSMDNamespace           = 'ssns', /* "myNamespace"*/
   keySOAPSMDNamespaceURI        = 'ssnu', /* "http://myUri.org/xsd"*/
@@ -335,9 +339,6 @@ enum {
   kAnyTransactionID             = 0     /* no transaction is in use */
 };
 
-/* Apple event manager data types */
-typedef ResType                         DescType;
-typedef FourCharCode                    AEKeyword;
 #if OPAQUE_TOOLBOX_STRUCTS
 typedef struct OpaqueAEDataStorageType*  AEDataStorageType;
 #else

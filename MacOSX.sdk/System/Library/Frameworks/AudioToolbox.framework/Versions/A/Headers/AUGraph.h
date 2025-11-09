@@ -31,10 +31,10 @@
 #include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <CoreAudio/CoreAudioTypes.h>
-	#include <AudioUnit/AudioUnit.h>
+	#include <AudioToolbox/AudioUnit.h>
 #else
 	#include <CoreAudioTypes.h>
-	#include <AudioUnit.h>
+	#include <AUComponent.h>
 #endif
 
 CF_ASSUME_NONNULL_BEGIN

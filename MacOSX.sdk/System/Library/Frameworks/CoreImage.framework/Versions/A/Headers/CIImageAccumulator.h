@@ -11,13 +11,32 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_4, 9_0)
 @interface CIImageAccumulator : NSObject
 {
-    __strong void *_state;
+    void *_state;
 }
 
 /* Create a new accumulator object. 
    For pixel format options see CIImage.h.
    The specified color space is used to render the image. 
-   If no color space is specified, no color matching is done. */
+   If no color space is specified, no color matching is done. 
+   The return values will be null if the format is unsupported or the extent is too big.
+*/
+#if !defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH) && SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH >= 2)
++ (nullable instancetype)imageAccumulatorWithExtent:(CGRect)extent
+                                             format:(CIFormat)format;
+
++ (nullable instancetype)imageAccumulatorWithExtent:(CGRect)extent
+                                             format:(CIFormat)format
+                                         colorSpace:(CGColorSpaceRef)colorSpace
+NS_AVAILABLE(10_7, 9_0);
+
+- (nullable instancetype)initWithExtent:(CGRect)extent
+                                 format:(CIFormat)format;
+
+- (nullable instancetype)initWithExtent:(CGRect)extent
+                                 format:(CIFormat)format
+                             colorSpace:(CGColorSpaceRef)colorSpace
+NS_AVAILABLE(10_7, 9_0);
+#else
 + (instancetype)imageAccumulatorWithExtent:(CGRect)extent
                                     format:(CIFormat)format;
 
@@ -26,12 +45,14 @@ NS_CLASS_AVAILABLE(10_4, 9_0)
                                 colorSpace:(CGColorSpaceRef)colorSpace
 NS_AVAILABLE(10_7, 9_0);
 
-- (instancetype)initWithExtent:(CGRect)extent format:(CIFormat)format;
+- (instancetype)initWithExtent:(CGRect)extent
+                        format:(CIFormat)format;
 
 - (instancetype)initWithExtent:(CGRect)extent
                         format:(CIFormat)format
                     colorSpace:(CGColorSpaceRef)colorSpace
 NS_AVAILABLE(10_7, 9_0);
+#endif
 
 /* Return the extent of the accumulator. */
 @property (readonly) CGRect extent;

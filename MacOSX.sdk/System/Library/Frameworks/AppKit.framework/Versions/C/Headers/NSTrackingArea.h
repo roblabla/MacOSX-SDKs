@@ -1,7 +1,7 @@
 /*
         NSTrackingArea.h
         Application Kit
-        Copyright (c) 2006-2015, Apple Inc.
+        Copyright (c) 2006-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -41,7 +41,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 {
 @private
     NSRect _rect;
-    __weak id _owner;
+    id _owner;
     NSDictionary * _userInfo;
     NSTrackingAreaOptions _options;
     NSInteger _privateFlags;

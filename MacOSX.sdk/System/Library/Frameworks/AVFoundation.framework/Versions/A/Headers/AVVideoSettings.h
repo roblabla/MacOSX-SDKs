@@ -27,6 +27,7 @@
 		AVVideoCleanApertureKey
 		AVVideoScalingModeKey
 		AVVideoColorPropertiesKey
+		AVVideoAllowWideColorKey
  
 	It is an error to add any other AVVideoSettings.h keys to an uncompressed video settings dictionary.
 */
@@ -79,8 +80,6 @@ AVF_EXPORT NSString *const AVVideoScalingModeKey /* NSString */								NS_AVAILA
 	/* AVVideoScalingModeResizeAspectFill - Preserve aspect ratio of the source, and crop picture to fit destination dimensions. */
 	AVF_EXPORT NSString *const AVVideoScalingModeResizeAspectFill							NS_AVAILABLE(10_7, 5_0);
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
-
 /*
 	Clients who specify AVVideoColorPropertiesKey must specify a color primary, transfer function, and Y'CbCr matrix.
 	Most clients will want to specify HD, which consists of:
@@ -95,23 +94,48 @@ AVF_EXPORT NSString *const AVVideoScalingModeKey /* NSString */								NS_AVAILA
 		AVVideoTransferFunction_ITU_R_709_2
 		AVVideoYCbCrMatrix_ITU_R_601_4
  
-	AVFoundation will color match if the source and destination color properties differ.
-	It is important that the source be tagged.
+	If you require wide gamut HD colorimetry, you can use:
+ 
+		 AVVideoColorPrimaries_P3_D65
+		 AVVideoTransferFunction_ITU_R_709_2
+		 AVVideoYCbCrMatrix_ITU_R_709_2
+ 
+	AVFoundation will color match if the source and destination color properties differ according to the following rules:
+ 
+	If you want to override the tagging of color properties in the video that you will be processing, set a value for AVVideoColorPropertiesKey:
+ 
+	If AVVideoColorPropertiesKey is set in the output settings and the source buffers are not tagged with color properties, then the output will be tagged according to the AVVideoColorPropertiesKey color properties.
+	If AVVideoColorPropertiesKey is set in the output settings and the source buffers are also tagged with color properties, then if necessary the source buffers will be color converted to match the color properties specified by AVVideoColorPropertiesKey, and the output will be tagged according to the AVVideoColorPropertiesKey color properties.
+ 
+	If you do not want to override the tagging of color properties in the video that you will be processing, do not set a value for AVVideoColorPropertiesKey:
+ 
+	If AVVideoColorPropertiesKey is not set in the output settings and the source buffers are tagged with color properties, then the output will be tagged according to the source buffer color properties.
+	If AVVideoColorPropertiesKey is not set in the output settings and the source buffers are not tagged with color properties, then the output will not be tagged with any color properties.
+ 
+	 It is important that the source be tagged.
 */
-AVF_EXPORT NSString *const AVVideoColorPropertiesKey /* NSDictionary, all 3 below keys required */           NS_AVAILABLE(10_7, NA);
-	AVF_EXPORT NSString *const AVVideoColorPrimariesKey /* NSString */                                       NS_AVAILABLE(10_7, NA);
-		AVF_EXPORT NSString *const AVVideoColorPrimaries_ITU_R_709_2                                         NS_AVAILABLE(10_7, NA);
+AVF_EXPORT NSString *const AVVideoColorPropertiesKey /* NSDictionary, all 3 below keys required */           NS_AVAILABLE(10_7, 10_0);
+	AVF_EXPORT NSString *const AVVideoColorPrimariesKey /* NSString */                                       NS_AVAILABLE(10_7, 10_0);
+		AVF_EXPORT NSString *const AVVideoColorPrimaries_ITU_R_709_2                                         NS_AVAILABLE(10_7, 10_0);
 		AVF_EXPORT NSString *const AVVideoColorPrimaries_EBU_3213                                            NS_AVAILABLE(10_7, NA);
-		AVF_EXPORT NSString *const AVVideoColorPrimaries_SMPTE_C                                             NS_AVAILABLE(10_7, NA);
-	AVF_EXPORT NSString *const AVVideoTransferFunctionKey /* NSString */                                     NS_AVAILABLE(10_7, NA);
-		AVF_EXPORT NSString *const AVVideoTransferFunction_ITU_R_709_2                                       NS_AVAILABLE(10_7, NA);
+		AVF_EXPORT NSString *const AVVideoColorPrimaries_SMPTE_C                                             NS_AVAILABLE(10_7, 10_0);
+		AVF_EXPORT NSString *const AVVideoColorPrimaries_P3_D65                                              NS_AVAILABLE(10_12, 10_0);
+	AVF_EXPORT NSString *const AVVideoTransferFunctionKey /* NSString */                                     NS_AVAILABLE(10_7, 10_0);
+		AVF_EXPORT NSString *const AVVideoTransferFunction_ITU_R_709_2                                       NS_AVAILABLE(10_7, 10_0);
 		AVF_EXPORT NSString *const AVVideoTransferFunction_SMPTE_240M_1995                                   NS_AVAILABLE(10_7, NA);
-	AVF_EXPORT NSString *const AVVideoYCbCrMatrixKey /* NSString */                                          NS_AVAILABLE(10_7, NA);
-		AVF_EXPORT NSString *const AVVideoYCbCrMatrix_ITU_R_709_2                                            NS_AVAILABLE(10_7, NA);
-		AVF_EXPORT NSString *const AVVideoYCbCrMatrix_ITU_R_601_4                                            NS_AVAILABLE(10_7, NA);
+	AVF_EXPORT NSString *const AVVideoYCbCrMatrixKey /* NSString */                                          NS_AVAILABLE(10_7, 10_0);
+		AVF_EXPORT NSString *const AVVideoYCbCrMatrix_ITU_R_709_2                                            NS_AVAILABLE(10_7, 10_0);
+		AVF_EXPORT NSString *const AVVideoYCbCrMatrix_ITU_R_601_4                                            NS_AVAILABLE(10_7, 10_0);
 		AVF_EXPORT NSString *const AVVideoYCbCrMatrix_SMPTE_240M_1995                                        NS_AVAILABLE(10_7, NA);
-
-#endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+/*!
+ @constant	AVVideoAllowWideColorKey
+ @abstract	Indicates whether the client can process wide color
+ @discussion
+	Clients who wish to process wide color content should set the value of this key to @YES, or specify AVVideoColorPropertiesKey.
+ 
+	The default value, @NO, permits implicit color conversions to occur to a non-wide gamut color space.
+ */
+AVF_EXPORT NSString *const AVVideoAllowWideColorKey /* NSNumber(BOOL)	*/					NS_AVAILABLE(10_12, 10_0);
 
 /*!
  @constant	AVVideoCompressionPropertiesKey

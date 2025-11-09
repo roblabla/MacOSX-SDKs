@@ -1,6 +1,6 @@
 /*	
      NSUserNotification.h
-     Copyright (c) 2011-2015, Apple Inc. All rights reserved.
+     Copyright (c) 2011-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -119,7 +119,9 @@ NS_CLASS_AVAILABLE(10_8, NA)
 }
 
 // Get a singleton user notification center that posts notifications for this process.
-+ (NSUserNotificationCenter *)defaultUserNotificationCenter;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, strong) NSUserNotificationCenter *defaultUserNotificationCenter;
+#endif
 
 @property (nullable, assign) id <NSUserNotificationCenterDelegate> delegate;
 

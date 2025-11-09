@@ -1,6 +1,6 @@
 /*
 	NSAppleScript.h
-	Copyright (c) 2002-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2002-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -26,7 +26,7 @@ FOUNDATION_EXPORT NSString *const NSAppleScriptErrorRange NS_AVAILABLE(10_2, NA)
 }
 
 // Given a URL that locates a script, in either text or compiled form, initialize.  Return nil and a pointer to an error information dictionary if an error occurs.  This is a designated initializer for this class.
-- (nullable instancetype)initWithContentsOfURL:(NSURL *)url error:(NSDictionary<NSString *, id> * __nullable * __nullable)errorInfo NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)url error:(NSDictionary<NSString *, id> * _Nullable * _Nullable)errorInfo NS_DESIGNATED_INITIALIZER;
 
 // Given a string containing the AppleScript source code of a script, initialize.  Return nil if an error occurs.  This is also a designated initializer for this class.
 - (nullable instancetype)initWithSource:(NSString *)source NS_DESIGNATED_INITIALIZER;
@@ -38,13 +38,13 @@ FOUNDATION_EXPORT NSString *const NSAppleScriptErrorRange NS_AVAILABLE(10_2, NA)
 @property (readonly, getter=isCompiled) BOOL compiled;
 
 // Compile the script, if it is not already compiled.  Return yes for success or if the script was already compiled, no and a pointer to an error information dictionary otherwise.
-- (BOOL)compileAndReturnError:(NSDictionary<NSString *, id> * __nullable * __nullable)errorInfo;
+- (BOOL)compileAndReturnError:(NSDictionary<NSString *, id> * _Nullable * _Nullable)errorInfo;
 
 // Execute the script, compiling it first if it is not already compiled.  Return the result of executing the script, or nil and a pointer to an error information dictionary for failure.
-- (NSAppleEventDescriptor *)executeAndReturnError:(NSDictionary<NSString *, id> * __nullable * __nullable)errorInfo;
+- (NSAppleEventDescriptor *)executeAndReturnError:(NSDictionary<NSString *, id> * _Nullable * _Nullable)errorInfo;
 
 // Execute an Apple event in the context of the script, compiling the script first if it is not already compiled.  Return the result of executing the event, or nil and a pointer to an error information dictionary for failure.
-- (NSAppleEventDescriptor *)executeAppleEvent:(NSAppleEventDescriptor *)event error:(NSDictionary<NSString *, id> * __nullable * __nullable)errorInfo;
+- (NSAppleEventDescriptor *)executeAppleEvent:(NSAppleEventDescriptor *)event error:(NSDictionary<NSString *, id> * _Nullable * _Nullable)errorInfo;
 
 @end
 

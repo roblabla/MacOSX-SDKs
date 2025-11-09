@@ -80,12 +80,12 @@ extern "C" {
  * thread safety.
  *
  **/
-enum {
+CF_ENUM(AEKeyword) {
   keyReplyPortAttr              = 'repp'
 };
 
 /* typeReplyPortAttr was misnamed and is deprecated; use keyReplyPortAttr instead. */
-enum {
+CF_ENUM(DescType) {
   typeReplyPortAttr             = keyReplyPortAttr
 };
 

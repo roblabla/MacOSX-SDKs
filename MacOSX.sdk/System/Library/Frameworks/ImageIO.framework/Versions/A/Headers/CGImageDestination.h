@@ -1,6 +1,6 @@
 /*
  * ImageIO - CGImageDestination.h
- * Copyright (c) 2004-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 2004-2016 Apple Inc. All rights reserved.
  *
  */
 
@@ -50,6 +50,13 @@ IMAGEIO_EXTERN const CFStringRef kCGImageDestinationImageMaxPixelSize  IMAGEIO_A
  * The value should be kCFBooleanTrue or kCFBooleanFalse. Defaults to kCFBooleanFalse */
 
 IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEmbedThumbnail  IMAGEIO_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+
+
+/* Create an image using a colorspace, that has is compatible with older devices
+ * The value should be kCFBooleanTrue or kCFBooleanFalse
+ * Defaults to kCFBooleanFalse = don't do any color conversion
+ */
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationOptimizeColorForSharing  IMAGEIO_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_9_3);
 
 CF_ASSUME_NONNULL_END
 

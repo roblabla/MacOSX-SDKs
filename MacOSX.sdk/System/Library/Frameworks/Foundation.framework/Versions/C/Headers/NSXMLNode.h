@@ -1,5 +1,5 @@
 /*	NSXMLNode.h
-	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -22,7 +22,11 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
 	NSXMLProcessingInstructionKind,
 	NSXMLCommentKind,
 	NSXMLTextKind,
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 	NSXMLDTDKind NS_SWIFT_NAME(DTDKind),
+#else
+        NSXMLDTDKind NS_SWIFT_NAME(dtd),
+#endif
 	NSXMLEntityDeclarationKind,
 	NSXMLAttributeDeclarationKind,
 	NSXMLElementDeclarationKind,
@@ -79,7 +83,7 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
     @method initWithKind:options:
     @abstract Inits a node with fidelity options as description NSXMLNodeOptions.h
 */
-- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSUInteger)options NS_DESIGNATED_INITIALIZER; //primitive
+- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSXMLNodeOptions)options NS_DESIGNATED_INITIALIZER; //primitive
 
 /*!
     @method document:
@@ -271,7 +275,7 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
 - (void)detach; //primitive
 
 /*!
-    @method detach:
+    @method XPath
     @abstract Returns the XPath to this node, for example foo/bar[2]/baz.
 */
 @property (nullable, readonly, copy) NSString *XPath;

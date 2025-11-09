@@ -1,8 +1,9 @@
 /*	NSUbiquitousKeyValueStore.h
-	Copyright (c) 2011-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2011-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSNotification.h>
 
 @class NSArray, NSDictionary<KeyType, ObjectType>, NSData, NSString;
 
@@ -50,7 +51,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSUbiquitousKeyValueStoreDidChangeExternallyNotification NS_AVAILABLE(10_7, 5_0);
+FOUNDATION_EXPORT NSNotificationName const NSUbiquitousKeyValueStoreDidChangeExternallyNotification NS_AVAILABLE(10_7, 5_0);
 FOUNDATION_EXPORT NSString * const NSUbiquitousKeyValueStoreChangeReasonKey NS_AVAILABLE(10_7, 5_0);
 FOUNDATION_EXPORT NSString * const NSUbiquitousKeyValueStoreChangedKeysKey NS_AVAILABLE(10_7, 5_0);
 

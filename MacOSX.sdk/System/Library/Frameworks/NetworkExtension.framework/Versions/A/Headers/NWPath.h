@@ -2,12 +2,16 @@
 //  NWPath.h
 //  Network
 //
-//  Copyright (c) 2014, 2015 Apple. All rights reserved.
+//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
 //
 
 #ifndef __NE_INDIRECT__
 #error "Please import the NetworkExtension module instead of this file directly."
-#endif
+#endif // __NE_INDIRECT__
+
+#ifndef __NWPath_h_
+#define __NWPath_h_
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,8 +33,8 @@ typedef NS_ENUM(NSInteger, NWPathStatus) {
 
 /*!
  * @interface NWPath
- * @discussion A network path, represented with NWPath, expresses the viability status and 
- *		properties of the path that a networking connection will take on the device. For example, 
+ * @discussion A network path, represented with NWPath, expresses the viability status and
+ *		properties of the path that a networking connection will take on the device. For example,
  *		if the path status is NWPathStatusSatisfied, then a connection could use that path.
  */
 NS_CLASS_AVAILABLE(10_11, 9_0)
@@ -58,3 +62,5 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // __NWPath_h_

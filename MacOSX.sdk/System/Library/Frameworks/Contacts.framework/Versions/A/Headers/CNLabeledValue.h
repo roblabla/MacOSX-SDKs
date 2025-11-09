@@ -20,7 +20,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 /*! The identifier is unique among contacts on the device. It can be saved and used for finding labeled values next application launch. */
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *identifier;
 
-@property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *label;
+@property (readonly, nullable, copy, NS_NONATOMIC_IOSONLY) NSString *label;
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) ValueType value;
 
 /*! Returns a new CNLabeledValue with a new identifier. */

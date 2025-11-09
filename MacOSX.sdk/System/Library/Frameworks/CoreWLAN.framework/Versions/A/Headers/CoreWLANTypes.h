@@ -402,6 +402,9 @@ typedef NS_ENUM(NSInteger, CWKeychainDomain)
  * @constant CWEventTypeCountryCodeDidChange
  * Posted when the adopted country code of any Wi-Fi interface changes.
  *
+ * @constant CWEventTypeVirtualInterfaceStateChanged
+ * Posted when any state of any Wi-Fi virtual interface changes.
+ *
  * @constant CWEventTypeLinkDidChange 
  * Posted when the link state for any Wi-Fi interface changes.
  *
@@ -413,6 +416,9 @@ typedef NS_ENUM(NSInteger, CWKeychainDomain)
  *
  * @constant CWEventTypeScanCacheUpdated
  * Posted when the scan cache of any Wi-Fi interface is updated with new scan results.
+ *
+ * @constant CWEventTypeRangingEvent
+ * Posted when WiFi ranging measurement completed.
  *
  * @constant CWEventTypeUnknown
  * Unknown event type.
@@ -428,6 +434,8 @@ typedef NS_ENUM(NSInteger, CWEventType)
     CWEventTypeLinkQualityDidChange     = 6,
     CWEventTypeModeDidChange            = 7,
     CWEventTypeScanCacheUpdated         = 8,
+    CWEventTypeVirtualInterfaceStateChanged = 9,
+    CWEventTypeRangingReportEvent       = 10,
     CWEventTypeUnknown                  = NSIntegerMax,
 } NS_ENUM_AVAILABLE_MAC(10_10);
 

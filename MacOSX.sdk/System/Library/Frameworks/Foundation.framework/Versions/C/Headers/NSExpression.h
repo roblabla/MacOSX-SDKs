@@ -1,5 +1,5 @@
 /*	NSExpression.h
-	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -100,7 +100,7 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 + (NSExpression *)expressionForSubquery:(NSExpression *)expression usingIteratorVariable:(NSString *)variable predicate:(id)predicate NS_AVAILABLE(10_5, 3_0); // Expression that filters a collection by storing elements in the collection in the variable variable and keeping the elements for which qualifer returns true; variable is used as a local variable, and will shadow any instances of variable in the bindings dictionary, the variable is removed or the old value replaced once evaluation completes
 + (NSExpression *)expressionForFunction:(NSExpression *)target selectorName:(NSString *)name arguments:(nullable NSArray *)parameters NS_AVAILABLE(10_5, 3_0);    // Expression that invokes the selector on target with parameters. Will throw at runtime if target does not implement selector or if parameters are wrong.
 + (NSExpression *)expressionForAnyKey NS_AVAILABLE(10_9, 7_0);
-+ (NSExpression *)expressionForBlock:(id (^)(id __nullable evaluatedObject, NSArray *expressions, NSMutableDictionary * __nullable context))block arguments:(nullable NSArray<NSExpression *> *)arguments NS_AVAILABLE(10_6, 4_0); // Expression that invokes the block with the parameters; note that block expressions are not encodable or representable as parseable strings.
++ (NSExpression *)expressionForBlock:(id (^)(id _Nullable evaluatedObject, NSArray *expressions, NSMutableDictionary * _Nullable context))block arguments:(nullable NSArray<NSExpression *> *)arguments NS_AVAILABLE(10_6, 4_0); // Expression that invokes the block with the parameters; note that block expressions are not encodable or representable as parseable strings.
 + (NSExpression *)expressionForConditional:(NSPredicate *)predicate trueExpression:(NSExpression *)trueExpression falseExpression:(NSExpression *)falseExpression  NS_AVAILABLE(10_11, 9_0); // Expression that will return the result of trueExpression or falseExpression depending on the value of predicate
 
 - (instancetype)initWithExpressionType:(NSExpressionType)type NS_DESIGNATED_INITIALIZER;
@@ -108,7 +108,9 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 
 // accessors for individual parameters - raise if not applicable
 @property (readonly) NSExpressionType expressionType;
-@property (readonly, retain) id constantValue;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(6)
+@property (nullable, readonly, retain) id constantValue;
+#endif
 @property (readonly, copy) NSString *keyPath;
 @property (readonly, copy) NSString *function;
 @property (readonly, copy) NSString *variable;
@@ -124,10 +126,12 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 @property (readonly, copy) NSExpression *trueExpression NS_AVAILABLE(10_11, 9_0); // expression which will be evaluated if a conditional expression's predicate evaluates to true
 @property (readonly, copy) NSExpression *falseExpression NS_AVAILABLE(10_11, 9_0); // expression which will be evaluated if a conditional expression's predicate evaluates to false
 
-@property (readonly, copy) id (^expressionBlock)(id __nullable, NSArray *, NSMutableDictionary * __nullable) NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) id (^expressionBlock)(id _Nullable, NSArray *, NSMutableDictionary * _Nullable) NS_AVAILABLE(10_6, 4_0);
 
 // evaluate the expression using the object and bindings- note that context is mutable here and can be used by expressions to store temporary state for one predicate evaluation
-- (id)expressionValueWithObject:(nullable id)object context:(nullable NSMutableDictionary *)context;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(6)
+- (nullable id)expressionValueWithObject:(nullable id)object context:(nullable NSMutableDictionary *)context;
+#endif
 
 - (void)allowEvaluation NS_AVAILABLE(10_9, 7_0); // Force an expression which was securely decoded to allow evaluation
 

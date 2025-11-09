@@ -1,18 +1,22 @@
 //
 //  SCNSkinner.h
 //
-//  Copyright (c) 2013-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2016 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <SceneKit/SceneKitTypes.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class SCNNode;
+@class SCNGeometry;
+@class SCNGeometrySource;
 
 /*!
  @class SCNSkinner
  @abstract SCNSkinner controls the deformation of skinned geometries */
 
-NS_CLASS_AVAILABLE(10_9, 8_0)
+API_AVAILABLE(macosx(10.9))
 @interface SCNSkinner : NSObject <NSSecureCoding>
 
 /*!
@@ -31,7 +35,7 @@ NS_CLASS_AVAILABLE(10_9, 8_0)
  @param boneWeights A buffer of weights. This contains the weights of every influence of every vertex. The number of influence per vertex is controlled by the number of component in the geometry source.
  @param boneIndices A buffer of bone indexes. This buffer contains the corresponding index in the bones array for every weight in the weights buffer.
  */
-+ (instancetype)skinnerWithBaseGeometry:(nullable SCNGeometry *)baseGeometry bones:(NSArray<SCNNode *> *)bones boneInverseBindTransforms:(nullable NSArray<NSValue *> *)boneInverseBindTransforms boneWeights:(SCNGeometrySource *)boneWeights boneIndices:(SCNGeometrySource *)boneIndices NS_AVAILABLE(10_10, 8_0);
++ (instancetype)skinnerWithBaseGeometry:(nullable SCNGeometry *)baseGeometry bones:(NSArray<SCNNode *> *)bones boneInverseBindTransforms:(nullable NSArray<NSValue *> *)boneInverseBindTransforms boneWeights:(SCNGeometrySource *)boneWeights boneIndices:(SCNGeometrySource *)boneIndices API_AVAILABLE(macosx(10.10));
 
 /*!
  @property baseGeometry
@@ -41,38 +45,38 @@ NS_CLASS_AVAILABLE(10_9, 8_0)
  Access this property if you want a whole new geometry (which will necessarily be shared among the skinner instances), with
  different sources, for instance.
  */
-@property(retain, nonatomic, nullable) SCNGeometry *baseGeometry NS_AVAILABLE(10_9, 8_0);
+@property(retain, nonatomic, nullable) SCNGeometry *baseGeometry API_AVAILABLE(macosx(10.9));
 
 /*!
  @property baseGeometryBindTransform
  @abstract Specifies the transform of the baseGeometry at the time when the mesh was bound to a skeleton. This transforms the baseGeometry from object space to a space on which the skinning then applies.
  */
-@property(nonatomic) SCNMatrix4 baseGeometryBindTransform NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) SCNMatrix4 baseGeometryBindTransform API_AVAILABLE(macosx(10.10));
 
 /*!
  @property boneInverseBindTransforms
  @abstract The inverse of the bone’s bind-space transformation matrix at the time the bind shape was bound to this bone.
  @discussion boneInverseBindTransforms is an array of SCNMatrix4 wrapped into instances of NSValue.
  */
-@property(readonly, nonatomic, nullable) NSArray<NSValue *> *boneInverseBindTransforms NS_AVAILABLE(10_10, 8_0);
+@property(readonly, nonatomic, nullable) NSArray<NSValue *> *boneInverseBindTransforms API_AVAILABLE(macosx(10.10));
 
 /*!
  @property bones
  @abstract The bones of the skinner.
  */
-@property(readonly, nonatomic) NSArray<SCNNode *> *bones NS_AVAILABLE(10_10, 8_0);
+@property(readonly, nonatomic) NSArray<SCNNode *> *bones API_AVAILABLE(macosx(10.10));
 
 /*!
  @property boneWeights
  @abstract The bone weights of the receiver.
  */
-@property(readonly, nonatomic) SCNGeometrySource *boneWeights NS_AVAILABLE(10_10, 8_0);
+@property(readonly, nonatomic) SCNGeometrySource *boneWeights API_AVAILABLE(macosx(10.10));
 
 /*!
  @property boneIndices
  @abstract The bone indices of the receiver.
  */
-@property(readonly, nonatomic) SCNGeometrySource *boneIndices NS_AVAILABLE(10_10, 8_0);
+@property(readonly, nonatomic) SCNGeometrySource *boneIndices API_AVAILABLE(macosx(10.10));
 
 @end
 

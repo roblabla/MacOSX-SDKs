@@ -1,6 +1,6 @@
 /*
  * ImageIO - ImageIOBase.h
- * Copyright (c) 2009-2010 Apple Inc. 
+ * Copyright (c) 2009-2016 Apple Inc. 
  * All rights reserved.
  *
  */

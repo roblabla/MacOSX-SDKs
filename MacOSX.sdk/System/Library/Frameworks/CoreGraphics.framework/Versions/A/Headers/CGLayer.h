@@ -24,46 +24,46 @@ CF_ASSUME_NONNULL_BEGIN
    expansion. */
 
 CG_EXTERN CGLayerRef __nullable CGLayerCreateWithContext(
-    CGContextRef __nullable context,
+    CGContextRef cg_nullable context,
     CGSize size, CFDictionaryRef __nullable auxiliaryInfo)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain(layer)', except it doesn't crash (as CFRetain
    does) if `layer' is NULL. */
 
-CG_EXTERN CGLayerRef __nullable CGLayerRetain(CGLayerRef __nullable layer)
+CG_EXTERN CGLayerRef cg_nullable CGLayerRetain(CGLayerRef cg_nullable layer)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(layer)', except it doesn't crash (as CFRelease
    does) if `layer' is NULL. */
 
-CG_EXTERN void CGLayerRelease(CGLayerRef __nullable layer)
+CG_EXTERN void CGLayerRelease(CGLayerRef cg_nullable layer)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Return the size of the layer `layer'. CGSizeZero if invalid `layer'. */
 
-CG_EXTERN CGSize CGLayerGetSize(CGLayerRef __nullable layer)
+CG_EXTERN CGSize CGLayerGetSize(CGLayerRef cg_nullable layer)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Return the context of `layer'. */
 
-CG_EXTERN CGContextRef __nullable CGLayerGetContext(CGLayerRef __nullable layer)
+CG_EXTERN CGContextRef __nullable CGLayerGetContext(CGLayerRef cg_nullable layer)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Draw the contents of `layer' into `rect' of `context'. The contents are
    scaled, if necessary, to fit into `rect'; the rectangle `rect' is in user
    space. */
 
-CG_EXTERN void CGContextDrawLayerInRect(CGContextRef __nullable context,
-    CGRect rect, CGLayerRef __nullable layer)
+CG_EXTERN void CGContextDrawLayerInRect(CGContextRef cg_nullable context,
+    CGRect rect, CGLayerRef cg_nullable layer)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Draw the contents of `layer' at `point' in `context'. This is equivalent
    to calling "CGContextDrawLayerInRect" with a rectangle having origin at
    `point' and size equal to the size of `layer'. */
 
-CG_EXTERN void CGContextDrawLayerAtPoint(CGContextRef __nullable context,
-    CGPoint point, CGLayerRef __nullable layer)
+CG_EXTERN void CGContextDrawLayerAtPoint(CGContextRef cg_nullable context,
+    CGPoint point, CGLayerRef cg_nullable layer)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Return the CFTypeID for CGLayerRefs. */
@@ -75,4 +75,4 @@ CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
-#endif	/* CGLAYER_H_ */
+#endif  /* CGLAYER_H_ */

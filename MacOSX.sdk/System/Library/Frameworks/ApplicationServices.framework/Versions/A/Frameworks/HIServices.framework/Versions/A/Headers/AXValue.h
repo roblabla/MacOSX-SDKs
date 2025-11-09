@@ -17,7 +17,9 @@ extern "C" {
 
 #include <CoreServices/CoreServices.h>
 #include <CoreFoundation/CoreFoundation.h>
+    
 CF_ASSUME_NONNULL_BEGIN
+CF_IMPLICIT_BRIDGING_ENABLED
     
 /* Need discussion for following */
 
@@ -117,7 +119,7 @@ extern AXValueType 	AXValueGetType(AXValueRef value);
 */
 extern Boolean 		AXValueGetValue(AXValueRef value, AXValueType theType, void *valuePtr);
 
-
+CF_IMPLICIT_BRIDGING_DISABLED
 CF_ASSUME_NONNULL_END
     
 #ifdef __cplusplus

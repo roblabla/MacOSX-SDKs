@@ -30,8 +30,8 @@
 #define	_MACH_MACH_TIME_H_
 
 #include <mach/mach_types.h>
-
 #include <sys/cdefs.h>
+#include <Availability.h>
 
 struct mach_timebase_info {
 	uint32_t	numer;
@@ -44,7 +44,23 @@ typedef struct mach_timebase_info	mach_timebase_info_data_t;
 __BEGIN_DECLS
 
 uint64_t			mach_absolute_time(void);
+
+__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_8_0)
 uint64_t			mach_approximate_time(void);
+
+/*
+ * like mach_absolute_time, but advances during sleep
+ */
+__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0)
+uint64_t			mach_continuous_time(void);
+
+/*
+ * like mach_approximate_time, but advances during sleep
+ */
+__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0)
+uint64_t			mach_continuous_approximate_time(void);
+
+
 __END_DECLS
 
 #endif /* _MACH_MACH_TIME_H_ */

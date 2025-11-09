@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -263,6 +263,7 @@ typedef struct memory_object_attr_info	memory_object_attr_info_data_t;
 			& 0xFF000000) | ((flags) & 0xFFFFFF));
 
 /* leave room for vm_prot bits */
+#define MAP_MEM_GRAB_SECLUDED	0x008000 /* can grab secluded pages */
 #define MAP_MEM_ONLY		0x010000 /* change processor caching  */
 #define MAP_MEM_NAMED_CREATE	0x020000 /* create extant object      */
 #define MAP_MEM_PURGABLE	0x040000 /* create a purgable VM object */

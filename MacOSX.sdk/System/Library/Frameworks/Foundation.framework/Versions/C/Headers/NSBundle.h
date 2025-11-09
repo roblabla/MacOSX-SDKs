@@ -1,5 +1,5 @@
 /*	NSBundle.h
-	Copyright (c) 1994-2015, Apple Inc.  All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc.  All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -8,6 +8,7 @@
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSSet.h>
 #import <Foundation/NSProgress.h>
+#import <Foundation/NSNotification.h>
 
 @class NSString, NSURL, NSError, NSUUID, NSLock, NSNumber;
 
@@ -28,7 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 /* Methods for creating or retrieving bundle instances. */
-+ (NSBundle *)mainBundle;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, strong) NSBundle *mainBundle;
+#endif
+
 + (nullable instancetype)bundleWithPath:(NSString *)path;
 - (nullable instancetype)initWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
 
@@ -38,8 +42,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSBundle *)bundleForClass:(Class)aClass;
 + (nullable NSBundle *)bundleWithIdentifier:(NSString *)identifier;
 
-+ (NSArray<NSBundle *> *)allBundles;
-+ (NSArray<NSBundle *> *)allFrameworks;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, copy) NSArray<NSBundle *> *allBundles;
+@property (class, readonly, copy) NSArray<NSBundle *> *allFrameworks;
+#endif
 
 /* Methods for loading and unloading bundles. */
 - (BOOL)load;
@@ -127,9 +133,9 @@ enum {
 @end
 
 #define NSLocalizedString(key, comment) \
-	    [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]
+	    [NSBundle.mainBundle localizedStringForKey:(key) value:@"" table:nil]
 #define NSLocalizedStringFromTable(key, tbl, comment) \
-	    [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:(tbl)]
+	    [NSBundle.mainBundle localizedStringForKey:(key) value:@"" table:(tbl)]
 #define NSLocalizedStringFromTableInBundle(key, tbl, bundle, comment) \
 	    [bundle localizedStringForKey:(key) value:@"" table:(tbl)]
 #define NSLocalizedStringWithDefaultValue(key, tbl, bundle, val, comment) \
@@ -143,7 +149,7 @@ enum {
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSBundleDidLoadNotification;
+FOUNDATION_EXPORT NSNotificationName const NSBundleDidLoadNotification;
 FOUNDATION_EXPORT NSString * const NSLoadedClasses;	// notification key
 
 
@@ -199,7 +205,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  
  If you want to access the resources again, create a new NSBundleResourceRequest object.
  */
-- (void)beginAccessingResourcesWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler;
+- (void)beginAccessingResourcesWithCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler;
 
 /*
  Inform the system that you wish to begin accessing the resources that are part of this request, but do not attempt to download any content over the network. The completion handler will be invoked with a YES argument if the resources are available.
@@ -240,7 +246,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  
  Note that this notification may not be the same as low disk space on the system, as applications can have a smaller quota.
  */
-FOUNDATION_EXPORT NSString * const NSBundleResourceRequestLowDiskSpaceNotification NS_AVAILABLE(NA, 9_0);
+FOUNDATION_EXPORT NSNotificationName const NSBundleResourceRequestLowDiskSpaceNotification NS_AVAILABLE(NA, 9_0);
 
 /* Use this value for the loadingPriority property if the user is doing nothing but waiting on the result of this request. The system will dedicate the maximum amount of resources available to finishing this request as soon as possible.
  */

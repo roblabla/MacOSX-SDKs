@@ -3,52 +3,38 @@
 // =====================================================================================================================
 
 
-#import <AppKit/AppKit.h>
+#import <PDFKit/PDFKitPlatform.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
-@class PDFPage, PDFDestinationPrivateVars;
-
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+@class PDFPage, PDFDestinationPrivate;
 
 // To specify a destination point where you don't care about the x or y value (or either), use this value.
-#define kPDFDestinationUnspecifiedValue		FLT_MAX
+#define kPDFDestinationUnspecifiedValue FLT_MAX
 
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
-
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface PDFDestination : NSObject <NSCopying>
 {
 @private
-    PDFDestinationPrivateVars *_pdfPriv;
+    PDFDestinationPrivate* _private;
 }
 
 // -------- initializer
 
 // Initializer.  You do not often create PDFDestinations but get them from link annotations or PDF outline items.
-- (id) initWithPage: (PDFPage *) page atPoint: (NSPoint) point;
+- (instancetype) initWithPage: (PDFPage *) page atPoint: (PDFPoint) point;
 
 // -------- accessors
 
 // Page the destination refers to (destination page).
-- (PDFPage *) page;
+@property(nonatomic, weak, readonly) PDFPage* page;
 
 // Destination point on the page above (in page space).
-- (NSPoint) point;
+@property(nonatomic, readonly) PDFPoint point;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
-
-// Returns the scale factor the PDF viewer should assume for this destination.
+// Get / set the scale factor the PDF viewer should assume for this destination.
 // kPDFDestinationUnspecifiedValue indicates the scale factor is unaffected.
-- (CGFloat) zoom;
-
-// Specify the scale factor the PDF viewer should assume for this destination.
-// kPDFDestinationUnspecifiedValue indicates the scale factor is unaffected.
-- (void) setZoom: (CGFloat) zoom;
-
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+@property(nonatomic, assign) CGFloat zoom PDFKIT_AVAILABLE(10_7);
 
 // If destination passed in is further along in the document than the receiver we return NSOrderedAscending.  If 
 // destination passed in precedes receiver we return NSOrderedDescending.  Otherwise if the desitnation passed in 
@@ -57,9 +43,8 @@
 // destination point will be treated as the top point on the destination page.
 // Will raise an exception if either destination does not have a page associated with it or if the pages of the two 
 // destinations are assciated with different documents.
-- (NSComparisonResult) compare: (PDFDestination *) destination;
-
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
+- (NSComparisonResult) compare: (PDFDestination *) destination PDFKIT_AVAILABLE(10_5);
 
 @end
+
+NS_ASSUME_NONNULL_END

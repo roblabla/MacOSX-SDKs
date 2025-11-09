@@ -1,7 +1,7 @@
 /*
     NSPanGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2015, Apple Inc.
+    Copyright (c) 2013-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -18,15 +18,14 @@ NS_CLASS_AVAILABLE(10_10, NA)
     NSUInteger _buttonMask;
     NSInteger _buttonCount;
     id _velocityFilter;
-    CGFloat private0;
-    CGFloat private1;
+    CGFloat private0 __unused;
+    CGFloat private1 __unused;
     struct __pgrFlags {
-        unsigned int    reserved:32;
-    } __pgrFlags;
+        unsigned int    reserved0:1;
+        unsigned int    reserved:31;
+    } __pgrFlags __unused;
     id _reserved0;
-#ifndef __OBJC2__
-    NSInteger _reserved1;
-#endif
+    id _reserved1 __unused;
 }
 
 /* bitfield of the button(s) required to recognize this click where bit 0 is the primary button, 1 is the secondary button, etc...
@@ -41,6 +40,10 @@ NS_CLASS_AVAILABLE(10_10, NA)
 /* velocity of the pan in points/second in the coordinate system of the specified view */
 - (NSPoint)velocityInView:(nullable NSView*)view;
 
+@end
+
+@interface NSPanGestureRecognizer (NSTouchBar)
+@property NSInteger numberOfTouchesRequired NS_AVAILABLE_MAC(10_12_2);
 @end
 
 NS_ASSUME_NONNULL_END

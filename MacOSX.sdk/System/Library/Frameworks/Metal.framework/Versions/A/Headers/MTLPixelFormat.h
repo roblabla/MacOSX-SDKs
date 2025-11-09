@@ -74,6 +74,9 @@ typedef NS_ENUM(NSUInteger, MTLPixelFormat)
     MTLPixelFormatRG11B10Float = 92,
     MTLPixelFormatRGB9E5Float = 93,
 
+    MTLPixelFormatBGR10_XR      NS_AVAILABLE_IOS(10_0) = 554,
+    MTLPixelFormatBGR10_XR_sRGB NS_AVAILABLE_IOS(10_0) = 555,
+
     /* Normal 64 bit formats */
 
     MTLPixelFormatRG32Uint  = 103,
@@ -85,6 +88,9 @@ typedef NS_ENUM(NSUInteger, MTLPixelFormat)
     MTLPixelFormatRGBA16Uint   = 113,
     MTLPixelFormatRGBA16Sint   = 114,
     MTLPixelFormatRGBA16Float  = 115,
+
+    MTLPixelFormatBGRA10_XR      NS_AVAILABLE_IOS(10_0) = 552,
+    MTLPixelFormatBGRA10_XR_sRGB NS_AVAILABLE_IOS(10_0) = 553,
 
     /* Normal 128 bit formats */
 
@@ -184,6 +190,7 @@ typedef NS_ENUM(NSUInteger, MTLPixelFormat)
 
     /* Depth */
 
+    MTLPixelFormatDepth16Unorm          NS_AVAILABLE_MAC(10_12) = 250,
     MTLPixelFormatDepth32Float  = 252,
 
     /* Stencil */
@@ -195,5 +202,9 @@ typedef NS_ENUM(NSUInteger, MTLPixelFormat)
     MTLPixelFormatDepth24Unorm_Stencil8  NS_AVAILABLE_MAC(10_11) = 255,
     MTLPixelFormatDepth32Float_Stencil8  NS_AVAILABLE(10_11, 9_0) = 260,
 
+    MTLPixelFormatX32_Stencil8  NS_AVAILABLE(10_12, 10_0) = 261,
+    MTLPixelFormatX24_Stencil8  NS_AVAILABLE_MAC(10_12) = 262,
+
 } NS_ENUM_AVAILABLE(10_11, 8_0);
+
 NS_ASSUME_NONNULL_END

@@ -1,7 +1,7 @@
 /*
 	NSComboBoxCell.h
 	Application Kit
-	Copyright (c) 1996-2015, Apple Inc.
+	Copyright (c) 1996-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSScrollView *_scrollView;
     NSWindow *_popUp;
     NSMutableArray *_popUpList;
-    __strong NSRect *_cellFrame;
+    NSRect *_cellFrame;
     void *_reserved;
  }
 
@@ -82,10 +82,10 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 /* These two methods are required when not using bindings */
 - (NSInteger)numberOfItemsInComboBoxCell:(NSComboBoxCell *)comboBoxCell;
-- (id)comboBoxCell:(NSComboBoxCell *)aComboBoxCell objectValueForItemAtIndex:(NSInteger)index;
+- (id)comboBoxCell:(NSComboBoxCell *)comboBoxCell objectValueForItemAtIndex:(NSInteger)index;
 
-- (NSUInteger)comboBoxCell:(NSComboBoxCell *)aComboBoxCell indexOfItemWithStringValue:(NSString *)string;
-- (nullable NSString *)comboBoxCell:(NSComboBoxCell *)aComboBoxCell completedString:(NSString *)uncompletedString; 
+- (NSUInteger)comboBoxCell:(NSComboBoxCell *)comboBoxCell indexOfItemWithStringValue:(NSString *)string;
+- (nullable NSString *)comboBoxCell:(NSComboBoxCell *)comboBoxCell completedString:(NSString *)uncompletedString; 
 @end
 
 NS_ASSUME_NONNULL_END

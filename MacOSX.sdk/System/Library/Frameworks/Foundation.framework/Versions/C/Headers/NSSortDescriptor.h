@@ -1,7 +1,7 @@
 /*
 	NSSortDescriptor.h
 	Foundation
-	Copyright (c) 2002-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2002-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSArray.h>

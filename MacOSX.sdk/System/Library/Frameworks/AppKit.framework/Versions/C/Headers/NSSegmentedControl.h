@@ -1,7 +1,7 @@
 /*
 	NSSegmentedControl.h
 	Application Kit
-	Copyright (c) 2003-2015, Apple Inc.
+	Copyright (c) 2003-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, NSSegmentStyle) {
     NSInteger _reserved1;
     NSInteger _reserved2;
     NSInteger _reserved3;
-    NSInteger _reserved4;
+    id        _scAux;
 }
 
 @property NSInteger segmentCount;
@@ -78,6 +78,32 @@ typedef NS_ENUM(NSInteger, NSSegmentStyle) {
 /*  This message is valid only for trackingMode=NSSegmentSwitchTrackingMomentaryAccelerator and provides the double value for the selected segment.
  */
 @property (readonly) double doubleValueForSelectedSegment NS_AVAILABLE_MAC(10_10_3);
+
+@property (nullable, copy) NSColor *selectedSegmentBezelColor NS_AVAILABLE_MAC(10_12_2); // The color of the selected segment's bevel, in appearances that support it
+
+@end
+
+@interface NSSegmentedControl (NSSegmentedControlConvenience)
+
+/*!
+ Creates a standard segmented control containing one segment for each of the provided labels.
+ @param labels An array of localized label strings to use for the control's segments.
+ @param trackingMode The selection mode for the control. The NSSegmentSwitchTracking enum describes the possible values and their effects.
+ @param target The target object that receives action messages from the control.
+ @param action The action message sent by the control.
+ @return An initialized segmented control.
+ */
++ (instancetype)segmentedControlWithLabels:(NSArray<NSString *> *)labels trackingMode:(NSSegmentSwitchTracking)trackingMode target:(nullable id)target action:(nullable SEL)action NS_AVAILABLE_MAC(10_12);
+
+/*!
+ Creates a standard segmented control containing one segment for each of the provided images. To ensure accessibility for this control, set the accessibilityDescription property on each of the provided images.
+ @param images An array of image objects to use for the control's segments.
+ @param trackingMode The selection mode for the control. The NSSegmentSwitchTracking enum describes the possible values and their effects.
+ @param target The target object that receives action messages from the control.
+ @param action The action message sent by the control.
+ @return An initialized segmented control.
+ */
++ (instancetype)segmentedControlWithImages:(NSArray<NSImage *> *)images trackingMode:(NSSegmentSwitchTracking)trackingMode target:(nullable id)target action:(nullable SEL)action NS_AVAILABLE_MAC(10_12);
 
 @end
 

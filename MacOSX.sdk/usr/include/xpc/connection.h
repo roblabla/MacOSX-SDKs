@@ -3,14 +3,15 @@
 
 #ifndef __XPC_INDIRECT__
 #error "Please #include <xpc/xpc.h> instead of this file directly."
-// For HeaderDoc. 
+// For HeaderDoc.
 #include <xpc/base.h>
-#endif // __XPC_INDIRECT__ 
+#endif // __XPC_INDIRECT__
 
 #ifndef __BLOCKS__
 #error "XPC connections require Blocks support."
 #endif // __BLOCKS__
 
+XPC_ASSUME_NONNULL_BEGIN
 __BEGIN_DECLS
 
 /*!
@@ -108,16 +109,16 @@ const struct _xpc_dictionary_s _xpc_error_termination_imminent;
  * @param value
  * The context object that is to be disposed of.
  */
-typedef void (*xpc_finalizer_t)(void *value);
+typedef void (*xpc_finalizer_t)(void * _Nullable value);
 
 /*!
  * @function xpc_connection_create
  * Creates a new connection object.
- * 
+ *
  * @param name
  * If non-NULL, the name of the service with which to connect. The returned
  * connection will be a peer.
- * 
+ *
  * If NULL, an anonymous listener connection will be created. You can embed the
  * ability to create new peer connections in an endpoint, which can be inserted
  * into a message and sent to another process .
@@ -135,24 +136,25 @@ typedef void (*xpc_finalizer_t)(void *value);
  *
  * @discussion
  * This method will succeed even if the named service does not exist. This is
- * because the XPC namespace is not queried for the service name until
- * the first call to xpc_connection_resume().
+ * because the XPC namespace is not queried for the service name until the
+ * connection has been activated. See {@link xpc_connection_activate()}.
  *
- * XPC connections, like dispatch sources, are returned in a suspended state, so 
- * you must call {@link xpc_connection_resume()} in order to begin receiving
+ * XPC connections, like dispatch sources, are returned in an inactive state, so
+ * you must call {@link xpc_connection_activate()} in order to begin receiving
  * events from the connection. Also like dispatch sources, connections must be
- * resumed in order to be safely released. It is a programming error to release
- * a suspended connection.
+ * activated and not suspended in order to be safely released. It is
+ * a programming error to release an inactive or suspended connection.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_MALLOC XPC_RETURNS_RETAINED XPC_WARN_RESULT
 xpc_connection_t
-xpc_connection_create(const char *name, dispatch_queue_t targetq);
+xpc_connection_create(const char * _Nullable name,
+	dispatch_queue_t _Nullable targetq);
 
 /*!
  * @function xpc_connection_create_mach_service
  * Creates a new connection object representing a Mach service.
- * 
+ *
  * @param name
  * The name of the remote service with which to connect. The service name must
  * exist in a Mach bootstrap that is accessible to the process and be advertised
@@ -169,7 +171,7 @@ xpc_connection_create(const char *name, dispatch_queue_t targetq);
  * Additional attributes with which to create the connection.
  *
  * @result
- * A new connection object. 
+ * A new connection object.
  *
  * @discussion
  * If the XPC_CONNECTION_MACH_SERVICE_LISTENER flag is given to this method,
@@ -177,28 +179,28 @@ xpc_connection_create(const char *name, dispatch_queue_t targetq);
  * connection will be returned. See the documentation for
  * {@link xpc_connection_set_event_handler()} for the semantics of listener
  * connections versus peer connections.
- * 
+ *
  * This method will succeed even if the named service does not exist. This is
  * because the Mach namespace is not queried for the service name until the
- * first call to {@link xpc_connection_resume()}.
+ * connection has been activated. See {@link xpc_connection_activate()}.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_MALLOC XPC_RETURNS_RETAINED XPC_WARN_RESULT XPC_NONNULL1
 xpc_connection_t
-xpc_connection_create_mach_service(const char *name, dispatch_queue_t targetq,
-	uint64_t flags);
+xpc_connection_create_mach_service(const char *name,
+	dispatch_queue_t _Nullable targetq, uint64_t flags);
 
 /*!
  * @function xpc_connection_create_from_endpoint
  * Creates a new connection from the given endpoint.
- * 
+ *
  * @param endpoint
  * The endpoint from which to create the new connection.
  *
  * @result
  * A new peer connection to the listener represented by the given endpoint.
- * 
- * The same responsibilities of setting an event handler and resuming the 
+ *
+ * The same responsibilities of setting an event handler and activating the
  * connection after calling xpc_connection_create() apply to the connection
  * returned by this API. Since the connection yielded by this API is not
  * associated with a name (and therefore is not rediscoverable), this connection
@@ -213,7 +215,7 @@ xpc_connection_create_from_endpoint(xpc_endpoint_t endpoint);
 /*!
  * @function xpc_connection_set_target_queue
  * Sets the target queue of the given connection.
- * 
+ *
  * @param connection
  * The connection object which is to be manipulated.
  *
@@ -238,7 +240,7 @@ xpc_connection_create_from_endpoint(xpc_endpoint_t endpoint);
  * IMPORTANT: When called from within the event handler block,
  * dispatch_get_current_queue(3) is NOT guaranteed to return a pointer to the
  * queue set with this method.
- * 
+ *
  * Despite this seeming inconsistency, the XPC runtime guarantees that, when the
  * target queue is a serial queue, the event handler block will execute
  * synchonously with respect to other blocks submitted to that same queue. When
@@ -251,12 +253,12 @@ __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL1
 void
 xpc_connection_set_target_queue(xpc_connection_t connection,
-	dispatch_queue_t targetq);
+	dispatch_queue_t _Nullable targetq);
 
 /*!
  * @function xpc_connection_set_event_handler
  * Sets the event handler block for the connection.
- * 
+ *
  * @param connection
  * The connection object which is to be manipulated.
  *
@@ -286,16 +288,16 @@ xpc_connection_set_target_queue(xpc_connection_t connection,
  *
  * A connection may receive different events depending upon whether it is a
  * listener or not. Any connection may receive an error in its event handler.
- * But while normal connections may receive messages in addition to errors, 
+ * But while normal connections may receive messages in addition to errors,
  * listener connections will receive connections and and not messages.
  *
  * Connections received by listeners are equivalent to those returned by
  * xpc_connection_create() with a non-NULL name argument and a NULL targetq
  * argument with the exception that you do not hold a reference on them.
- * You must set an event handler and resume the connection. If you do not wish
+ * You must set an event handler and activate the connection. If you do not wish
  * to accept the connection, you may simply call xpc_connection_cancel() on it
  * and return. The runtime will dispose of it for you.
- * 
+ *
  * If there is an error in the connection, this handler will be invoked with the
  * error dictionary as its argument. This dictionary will be one of the well-
  * known XPC_ERROR_* dictionaries.
@@ -312,8 +314,33 @@ xpc_connection_set_target_queue(xpc_connection_t connection,
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL_ALL
 void
-xpc_connection_set_event_handler(xpc_connection_t connection, 
+xpc_connection_set_event_handler(xpc_connection_t connection,
 	xpc_handler_t handler);
+
+/*!
+ * @function xpc_connection_activate
+ * Activates the connection. Connections start in an inactive state, so you must
+ * call xpc_connection_activate() on a connection before it will send or receive
+ * any messages.
+ *
+ * @param connection
+ * The connection object which is to be manipulated.
+ *
+ * @discussion
+ * Calling xpc_connection_activate() on an active connection has no effect.
+ * Releasing the last reference on an inactive connection that was created with
+ * an xpc_connection_create*() call is undefined.
+ *
+ * For backward compatibility reasons, xpc_connection_resume() on an inactive
+ * and not otherwise suspended xpc connection has the same effect as calling
+ * xpc_connection_activate(). For new code, using xpc_connection_activate()
+ * is preferred.
+ */
+__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0)
+__TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0)
+XPC_EXPORT XPC_NONNULL_ALL
+void
+xpc_connection_activate(xpc_connection_t connection);
 
 /*!
  * @function xpc_connection_suspend
@@ -322,7 +349,7 @@ xpc_connection_set_event_handler(xpc_connection_t connection,
  * queue. All calls to xpc_connection_suspend() must be balanced with calls to
  * xpc_connection_resume() before releasing the last reference to the
  * connection.
- * 
+ *
  * @param connection
  * The connection object which is to be manipulated.
  *
@@ -344,20 +371,23 @@ xpc_connection_suspend(xpc_connection_t connection);
 
 /*!
  * @function xpc_connection_resume
- * Resumes the connection. Connections start in a suspended state, so you must
- * call xpc_connection_resume() on a connection before it will send or receive
- * any messages.
- * 
+ * Resumes the connection.
+ *
  * @param connection
  * The connection object which is to be manipulated.
  *
  * @discussion
  * In order for a connection to become live, every call to
- * xpc_connection_suspend() must be balanced with a call to 
- * xpc_connection_resume() after the initial call to xpc_connection_resume().
- * After the initial resume of the connection, calling xpc_connection_resume()
- * more times than xpc_connection_suspend() has been called is considered an
- * error.
+ * xpc_connection_suspend() must be balanced with a call to
+ * xpc_connection_resume().
+ *
+ * For backward compatibility reasons, xpc_connection_resume() on an inactive
+ * and not otherwise suspended xpc connection has the same effect as calling
+ * xpc_connection_activate(). For new code, using xpc_connection_activate()
+ * is preferred.
+ *
+ * Calling xpc_connection_resume() more times than xpc_connection_suspend()
+ * has been called is otherwise considered an error.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL_ALL
@@ -367,7 +397,7 @@ xpc_connection_resume(xpc_connection_t connection);
 /*!
  * @function xpc_connection_send_message
  * Sends a message over the connection to the destination service.
- * 
+ *
  * @param connection
  * The connection over which the message shall be sent.
  *
@@ -403,7 +433,7 @@ xpc_connection_send_message(xpc_connection_t connection, xpc_object_t message);
 /*!
  * @function xpc_connection_send_barrier
  * Issues a barrier against the connection's message-send activity.
- * 
+ *
  * @param connection
  * The connection against which the barrier is to be issued.
  *
@@ -449,14 +479,14 @@ xpc_connection_send_message(xpc_connection_t connection, xpc_object_t message);
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL_ALL
 void
-xpc_connection_send_barrier(xpc_connection_t connection, 
+xpc_connection_send_barrier(xpc_connection_t connection,
 	dispatch_block_t barrier);
 
 /*!
  * @function xpc_connection_send_message_with_reply
  * Sends a message over the connection to the destination service and associates
  * a handler to be invoked when the remote service sends a reply message.
- * 
+ *
  * @param connection
  * The connection over which the message shall be sent.
  *
@@ -488,13 +518,14 @@ __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL1 XPC_NONNULL2 XPC_NONNULL4
 void
 xpc_connection_send_message_with_reply(xpc_connection_t connection,
-	xpc_object_t message, dispatch_queue_t replyq, xpc_handler_t handler);
+	xpc_object_t message, dispatch_queue_t _Nullable replyq,
+	xpc_handler_t handler);
 
 /*!
  * @function xpc_connection_send_message_with_reply_sync
  * Sends a message over the connection and blocks the caller until a reply is
  * received.
- * 
+ *
  * @param connection
  * The connection over which the message shall be sent.
  *
@@ -514,7 +545,7 @@ xpc_connection_send_message_with_reply(xpc_connection_t connection,
  * This API is primarily for transitional purposes. Its implementation is
  * conceptually equivalent to calling xpc_connection_send_message_with_reply()
  * and then immediately blocking the calling thread on a semaphore and
- * signaling the semaphore from the reply block. 
+ * signaling the semaphore from the reply block.
  *
  * Be judicious about your use of this API. It can block indefinitely, so if you
  * are using it to implement an API that can be called from the main thread, you
@@ -534,7 +565,7 @@ xpc_connection_send_message_with_reply_sync(xpc_connection_t connection,
  * discarded, and the connection will be unwound. If there are messages that are
  * awaiting replies, they will have their reply handlers invoked with the
  * XPC_ERROR_CONNECTION_INVALID error.
- * 
+ *
  * @param connection
  * The connection object which is to be manipulated.
  *
@@ -558,7 +589,7 @@ xpc_connection_cancel(xpc_connection_t connection);
 /*!
  * @function xpc_connection_get_name
  * Returns the name of the service with which the connections was created.
- * 
+ *
  * @param connection
  * The connection object which is to be examined.
  *
@@ -568,13 +599,13 @@ xpc_connection_cancel(xpc_connection_t connection);
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL_ALL XPC_WARN_RESULT
-const char *
+const char * _Nullable
 xpc_connection_get_name(xpc_connection_t connection);
 
 /*!
  * @function xpc_connection_get_euid
  * Returns the EUID of the remote peer.
- * 
+ *
  * @param connection
  * The connection object which is to be examined.
  *
@@ -589,7 +620,7 @@ xpc_connection_get_euid(xpc_connection_t connection);
 /*!
  * @function xpc_connection_get_egid
  * Returns the EGID of the remote peer.
- * 
+ *
  * @param connection
  * The connection object which is to be examined.
  *
@@ -604,7 +635,7 @@ xpc_connection_get_egid(xpc_connection_t connection);
 /*!
  * @function xpc_connection_get_pid
  * Returns the PID of the remote peer.
- * 
+ *
  * @param connection
  * The connection object which is to be examined.
  *
@@ -630,7 +661,7 @@ xpc_connection_get_pid(xpc_connection_t connection);
 /*!
  * @function xpc_connection_get_asid
  * Returns the audit session identifier of the remote peer.
- * 
+ *
  * @param connection
  * The connection object which is to be examined.
  *
@@ -660,12 +691,13 @@ xpc_connection_get_asid(xpc_connection_t connection);
  *
  * It is recommended that, instead of changing the actual context pointer
  * associated with the object, you instead change the state of the context
- * object itself. 
+ * object itself.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL1
 void
-xpc_connection_set_context(xpc_connection_t connection, void *context);
+xpc_connection_set_context(xpc_connection_t connection,
+	void * _Nullable context);
 
 /*!
  * @function xpc_connection_get_context
@@ -680,7 +712,7 @@ xpc_connection_set_context(xpc_connection_t connection, void *context);
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL_ALL XPC_WARN_RESULT
-void *
+void * _Nullable
 xpc_connection_get_context(xpc_connection_t connection);
 
 /*!
@@ -707,8 +739,9 @@ __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL1
 void
 xpc_connection_set_finalizer_f(xpc_connection_t connection,
-	xpc_finalizer_t finalizer);
+	xpc_finalizer_t _Nullable finalizer);
 
 __END_DECLS
+XPC_ASSUME_NONNULL_END
 
-#endif // __XPC_CONNECTION_H__ 
+#endif // __XPC_CONNECTION_H__

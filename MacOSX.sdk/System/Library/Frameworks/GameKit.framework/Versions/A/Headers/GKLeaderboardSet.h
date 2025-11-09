@@ -2,7 +2,7 @@
 //  GKLeaderboardSet.h
 //  Game Center
 //
-//  Copyright 2012-2015 Apple Inc. All rights reserved.
+//  Copyright 2012-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 // GKLeaderboardSet represents the sets that leaderboards can be broken out into. 
-NS_CLASS_AVAILABLE(10_10, 7_0)
+NS_CLASS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0)
 @interface GKLeaderboardSet : NSObject <NSCoding, NSSecureCoding>
 
 @property(readonly, copy, NS_NONATOMIC_IOSONLY)    NSString                    *title;               // Localized set title.
@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_END
 
 // Asynchronously load the image. Error will be nil on success.
 #if TARGET_OS_IPHONE
-- (void)loadImageWithCompletionHandler:(void(^__nullable)(UIImage * __nullable image, NSError * __nullable error))completionHandler;
+- (void)loadImageWithCompletionHandler:(void(^__nullable)(UIImage * __nullable image, NSError * __nullable error))completionHandler __TVOS_UNAVAILABLE;
 #else
 - (void)loadImageWithCompletionHandler:(void(^__nullable)(NSImage * __nullable image, NSError * __nullable error))completionHandler;
 #endif

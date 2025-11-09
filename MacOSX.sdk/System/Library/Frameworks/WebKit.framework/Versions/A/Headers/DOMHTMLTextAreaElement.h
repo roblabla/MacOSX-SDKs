@@ -32,12 +32,12 @@
 NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMHTMLTextAreaElement : DOMHTMLElement
 @property BOOL autofocus NS_AVAILABLE_MAC(10_6);
-@property int cols;
 @property BOOL disabled;
 @property (readonly, strong) DOMHTMLFormElement *form;
 @property (copy) NSString *name;
 @property BOOL readOnly;
 @property int rows;
+@property int cols;
 @property (readonly, copy) NSString *type;
 @property (copy) NSString *defaultValue;
 @property (copy) NSString *value;

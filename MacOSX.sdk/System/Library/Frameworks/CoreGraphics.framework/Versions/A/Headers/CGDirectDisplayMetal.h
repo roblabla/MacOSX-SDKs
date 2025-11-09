@@ -15,7 +15,7 @@
 /* Return the Metal device for the GPU currently being used to drive a given display */
 /* Note: On systems with automatic graphics switching enabled, this value can change at
    almost any time. */
-CG_EXTERN id<MTLDevice> __nullable CGDirectDisplayCopyCurrentMetalDevice(CGDirectDisplayID display) CG_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_NA);
+CG_EXTERN id<MTLDevice> __nullable CGDirectDisplayCopyCurrentMetalDevice(CGDirectDisplayID display) CF_RETURNS_RETAINED CG_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_NA);
 
 #endif /* __OBJC__ */
 

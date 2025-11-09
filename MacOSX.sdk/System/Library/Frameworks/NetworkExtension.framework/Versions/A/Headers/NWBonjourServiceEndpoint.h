@@ -1,23 +1,25 @@
 //
-//  NWBonjourService.h
+//  NWBonjourServiceEndpoint.h
 //  Network
 //
-//  Copyright (c) 2014, 2015 Apple. All rights reserved.
+//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
 //
 
 #ifndef __NE_INDIRECT__
 #error "Please import the NetworkExtension module instead of this file directly."
-#endif
+#endif // __NE_INDIRECT__
+
+#ifndef __NWBonjourServiceEndpoint_h_
+#define __NWBonjourServiceEndpoint_h_
+
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NWEndpoint;
-
 /*!
  * @interface NWBonjourServiceEndpoint
- * @discussion NWBonjourServiceEndpoint is a subclass of NWEndpoint. It represents an endpoint 
- *		backed by a Bonjour service, specified with a name, type, and domain. For example, the 
- *		Bonjour service MyMusicStudio._music._tcp.local. has the name "MyMusicStudio", 
+ * @discussion NWBonjourServiceEndpoint is a subclass of NWEndpoint. It represents an endpoint
+ *		backed by a Bonjour service, specified with a name, type, and domain. For example, the
+ *		Bonjour service MyMusicStudio._music._tcp.local. has the name "MyMusicStudio",
  *		the type "_music._tcp", and the domain "local".
  */
 NS_CLASS_AVAILABLE(10_11, 9_0)
@@ -55,3 +57,5 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // __NWBonjourServiceEndpoint_h_

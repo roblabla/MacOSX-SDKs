@@ -29,12 +29,12 @@ typedef NS_ENUM(NSInteger, LAError)
     LAErrorTouchIDNotAvailable  = kLAErrorTouchIDNotAvailable,
     
     /// Authentication could not start, because Touch ID has no enrolled fingers.
-    LAErrorTouchIDNotEnrolled   = kLAErrorTouchIDNotEnrolled,
+    LAErrorTouchIDNotEnrolled = kLAErrorTouchIDNotEnrolled,
 
     /// Authentication was not successful, because there were too many failed Touch ID attempts and
     /// Touch ID is now locked. Passcode is required to unlock Touch ID, e.g. evaluating
     /// LAPolicyDeviceOwnerAuthenticationWithBiometrics will ask for passcode as a prerequisite.
-    LAErrorTouchIDLockout   NS_ENUM_AVAILABLE(10_11, 9_0) = kLAErrorTouchIDLockout,
+    LAErrorTouchIDLockout   NS_ENUM_AVAILABLE(10_11, 9_0) __WATCHOS_AVAILABLE(3.0) __TVOS_AVAILABLE(10.0) = kLAErrorTouchIDLockout,
 
     /// Authentication was canceled by application (e.g. invalidate was called while
     /// authentication was in progress).
@@ -42,7 +42,8 @@ typedef NS_ENUM(NSInteger, LAError)
 
     /// LAContext passed to this call has been previously invalidated.
     LAErrorInvalidContext   NS_ENUM_AVAILABLE(10_11, 9_0) = kLAErrorInvalidContext
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} NS_ENUM_AVAILABLE(10_10, 8_0) __WATCHOS_AVAILABLE(3.0) __TVOS_AVAILABLE(10.0);
 
 /// LocalAuthentication error domain.
-extern NSString *const __nonnull LAErrorDomain NS_AVAILABLE(10_10, 8_0);
+extern NSString *const __nonnull LAErrorDomain
+NS_AVAILABLE(10_10, 8_3) __WATCHOS_AVAILABLE(3.0) __TVOS_AVAILABLE(10.0);

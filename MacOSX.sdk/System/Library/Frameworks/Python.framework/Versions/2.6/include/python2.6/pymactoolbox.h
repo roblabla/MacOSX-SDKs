@@ -9,12 +9,6 @@
 
 #include <Carbon/Carbon.h>
 
-#ifndef __LP64__
-#ifndef __LP64__
-#include <QuickTime/QuickTime.h>
-#endif /* !__LP64__ */
-#endif /* !__LP64__ */
-
 /*
 ** Helper routines for error codes and such.
 */
@@ -155,24 +149,6 @@ extern int QdRGB_Convert(PyObject *, RGBColor *);
 #ifndef __LP64__
 extern PyObject *GWorldObj_New(GWorldPtr);
 extern int GWorldObj_Convert(PyObject *, GWorldPtr *);
-#endif /* !__LP64__ */
-
-#ifndef __LP64__
-/* Qt exports */
-#ifndef __LP64__
-extern PyObject *TrackObj_New(Track);
-extern int TrackObj_Convert(PyObject *, Track *);
-extern PyObject *MovieObj_New(Movie);
-extern int MovieObj_Convert(PyObject *, Movie *);
-extern PyObject *MovieCtlObj_New(MovieController);
-extern int MovieCtlObj_Convert(PyObject *, MovieController *);
-extern PyObject *TimeBaseObj_New(TimeBase);
-extern int TimeBaseObj_Convert(PyObject *, TimeBase *);
-extern PyObject *UserDataObj_New(UserData);
-extern int UserDataObj_Convert(PyObject *, UserData *);
-extern PyObject *MediaObj_New(Media);
-extern int MediaObj_Convert(PyObject *, Media *);
-#endif /* !__LP64__ */
 #endif /* !__LP64__ */
 
 /* Res exports */

@@ -2,20 +2,20 @@
 //  NWTCPConnection.h
 //  Network
 //
-//  Copyright (c) 2014, 2015 Apple. All rights reserved.
+//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
 //
 
 #ifndef __NE_INDIRECT__
 #error "Please import the NetworkExtension module instead of this file directly."
-#endif
+#endif // __NE_INDIRECT__
+
+#ifndef __NWTCPConnection_h_
+#define __NWTCPConnection_h_
 
 #import <Security/Security.h>
 
-NS_ASSUME_NONNULL_BEGIN
 
-@class NWEndpoint;
-@class NWPath;
-@class NWTCPConnection;
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  * @typedef NWTCPConnectionState
@@ -280,3 +280,5 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // __NWTCPConnection_h_

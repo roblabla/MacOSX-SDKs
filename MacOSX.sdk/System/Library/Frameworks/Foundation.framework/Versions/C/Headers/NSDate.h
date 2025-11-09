@@ -1,14 +1,15 @@
 /*	NSDate.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSNotification.h>
 
 @class NSString;
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString * const NSSystemClockDidChangeNotification NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSNotificationName const NSSystemClockDidChangeNotification NS_AVAILABLE(10_6, 4_0);
 
 typedef double NSTimeInterval;
 
@@ -41,7 +42,9 @@ typedef double NSTimeInterval;
 @property (readonly, copy) NSString *description;
 - (NSString *)descriptionWithLocale:(nullable id)locale;
 
-+ (NSTimeInterval)timeIntervalSinceReferenceDate;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly) NSTimeInterval timeIntervalSinceReferenceDate;
+#endif
 
 @end
 
@@ -53,8 +56,10 @@ typedef double NSTimeInterval;
 + (instancetype)dateWithTimeIntervalSince1970:(NSTimeInterval)secs;
 + (instancetype)dateWithTimeInterval:(NSTimeInterval)secsToBeAdded sinceDate:(NSDate *)date;
 
-+ (NSDate *)distantFuture;
-+ (NSDate *)distantPast;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, copy) NSDate *distantFuture;
+@property (class, readonly, copy) NSDate *distantPast;
+#endif
 
 - (instancetype)initWithTimeIntervalSinceNow:(NSTimeInterval)secs;
 - (instancetype)initWithTimeIntervalSince1970:(NSTimeInterval)secs;

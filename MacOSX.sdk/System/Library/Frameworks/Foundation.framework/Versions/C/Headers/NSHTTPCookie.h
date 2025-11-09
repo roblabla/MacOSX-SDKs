@@ -1,6 +1,6 @@
 /*	
     NSHTTPCookie.h
-    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -14,85 +14,87 @@
 @class NSString;
 @class NSURL;
 
+typedef NSString * NSHTTPCookiePropertyKey NS_EXTENSIBLE_STRING_ENUM;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
     @const NSHTTPCookieName
     @discussion Key for cookie name
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookieName;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieName;
 
 /*!
     @const NSHTTPCookieValue
     @discussion Key for cookie value
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookieValue;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieValue;
 
 /*!
     @const NSHTTPCookieOriginURL
     @discussion Key for cookie origin URL
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookieOriginURL;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieOriginURL;
 
 /*!
     @const NSHTTPCookieVersion
     @discussion Key for cookie version
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookieVersion;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieVersion;
 
 /*!
     @const NSHTTPCookieDomain
     @discussion Key for cookie domain
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookieDomain;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieDomain;
 
 /*!
     @const NSHTTPCookiePath
     @discussion Key for cookie path
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookiePath;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePath;
 
 /*!
     @const NSHTTPCookieSecure
     @discussion Key for cookie secure flag
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookieSecure;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieSecure;
 
 /*!
     @const NSHTTPCookieExpires
     @discussion Key for cookie expiration date
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookieExpires;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieExpires;
 
 /*!
     @const NSHTTPCookieComment
     @discussion Key for cookie comment text
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookieComment;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieComment;
 
 /*!
     @const NSHTTPCookieCommentURL
     @discussion Key for cookie comment URL
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookieCommentURL;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieCommentURL;
 
 /*!
     @const NSHTTPCookieDiscard
     @discussion Key for cookie discard (session-only) flag
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookieDiscard;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieDiscard;
 
 /*!
     @const NSHTTPCookieMaximumAge
     @discussion Key for cookie maximum age (an alternate way of specifying the expiration)
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookieMaximumAge;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieMaximumAge;
 
 /*!
     @const NSHTTPCookiePort
     @discussion Key for cookie ports
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
 
 
 @class NSHTTPCookieInternal;
@@ -235,7 +237,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     dictionary keys is invalid, for example because a required key is
     missing, or a recognized key maps to an illegal value.
 */
-- (nullable instancetype)initWithProperties:(NSDictionary<NSString *, id> *)properties;
+- (nullable instancetype)initWithProperties:(NSDictionary<NSHTTPCookiePropertyKey, id> *)properties;
 
 /*!
     @method cookieWithProperties:
@@ -250,7 +252,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     a required key is missing, or a recognized key maps to an illegal
     value.
 */
-+ (nullable NSHTTPCookie *)cookieWithProperties:(NSDictionary<NSString *, id> *)properties;
++ (nullable NSHTTPCookie *)cookieWithProperties:(NSDictionary<NSHTTPCookiePropertyKey, id> *)properties;
 
 /*!
     @method requestHeaderFieldsWithCookies:
@@ -285,7 +287,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     for descriptions of the supported keys and values.
     @result The dictionary representation of the receiver.
 */
-@property (nullable, readonly, copy) NSDictionary<NSString *, id> *properties;
+@property (nullable, readonly, copy) NSDictionary<NSHTTPCookiePropertyKey, id> *properties;
 
 /*!
     @method version

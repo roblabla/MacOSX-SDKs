@@ -3,7 +3,7 @@
  
      Contains:   Pasteboard Manager Interfaces.
  
-     Copyright:  © 2003-2012 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 2003-2012 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,9 +21,6 @@
 #ifndef __CGGEOMETRY__
 #include <CoreGraphics/CGGeometry.h>
 #endif
-
-
-
 #include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
@@ -33,6 +30,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+    
+CF_ASSUME_NONNULL_BEGIN
+CF_IMPLICIT_BRIDGING_ENABLED
+
 
 
 /*
@@ -95,7 +96,7 @@ extern "C" {
  *    transported, provide a type inheritance mechanism and allow
  *    namespacing with a reverse DNS scheme.
  */
-typedef struct OpaquePasteboardRef*     PasteboardRef;
+typedef struct CF_BRIDGED_TYPE(id) OpaquePasteboardRef*     PasteboardRef;
 typedef void *                          PasteboardItemID;
 /* Pasteboard Manager error codes*/
 enum {
@@ -117,8 +118,7 @@ enum {
  *    routine to indicate the status of the local pasteboard reference
  *    in relation to the global, cross process pasteboard resource.
  */
-typedef OptionBits PasteboardSyncFlags;
-enum {
+typedef CF_OPTIONS(OptionBits, PasteboardSyncFlags) {
 
   /*
    * Indicates that the global pasteboard resource has been modified
@@ -202,8 +202,7 @@ enum {
  *    the client via PasteboardPutItemFlavor(). They may all be
  *    received via PasteboardGetItemFlavorFlags().
  */
-typedef OptionBits PasteboardFlavorFlags;
-enum {
+typedef CF_OPTIONS(OptionBits, PasteboardFlavorFlags)  {
 
   /*
    * No additional information exists for this flavor.
@@ -275,8 +274,7 @@ enum {
  *  Discussion:
  *    The following constants define common "meta" paste locations.
  */
-typedef OSType PasteboardStandardLocation;
-enum {
+typedef CF_ENUM(OSType, PasteboardStandardLocation) {
 
   /*
    * The paste or drop location was in the trash.  This is set when a
@@ -362,8 +360,8 @@ PasteboardGetTypeID(void)                                     AVAILABLE_MAC_OS_X
  */
 extern OSStatus 
 PasteboardCreate(
-  CFStringRef      inName,              /* can be NULL */
-  PasteboardRef *  outPasteboard)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef _Nullable     inName,              /* can be NULL */
+  PasteboardRef _Nullable * _Nonnull outPasteboard CF_RETURNS_RETAINED)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -459,7 +457,7 @@ PasteboardClear(PasteboardRef inPasteboard)                   AVAILABLE_MAC_OS_X
 extern OSStatus 
 PasteboardCopyName(
   PasteboardRef   inPasteboard,
-  CFStringRef *   outName)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFStringRef _Nullable * _Nonnull outName CF_RETURNS_RETAINED)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
 /*
@@ -527,7 +525,7 @@ extern OSStatus
 PasteboardGetItemIdentifier(
   PasteboardRef       inPasteboard,
   CFIndex             inIndex,
-  PasteboardItemID *  outItem)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  PasteboardItemID _Nullable *  _Nonnull outItem)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -565,7 +563,7 @@ extern OSStatus
 PasteboardCopyItemFlavors(
   PasteboardRef      inPasteboard,
   PasteboardItemID   inItem,
-  CFArrayRef *       outFlavorTypes)                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFArrayRef _Nullable *  _Nonnull outFlavorTypes CF_RETURNS_RETAINED)                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -645,10 +643,10 @@ PasteboardGetItemFlavorFlags(
  */
 extern OSStatus 
 PasteboardCopyItemFlavorData(
-  PasteboardRef      inPasteboard,
-  PasteboardItemID   inItem,
-  CFStringRef        inFlavorType,
-  CFDataRef *        outData)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  PasteboardRef         inPasteboard,
+  PasteboardItemID      inItem,
+  CFStringRef           inFlavorType,
+  CFDataRef _Nullable *  _Nonnull outData CF_RETURNS_RETAINED)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 #define kPasteboardPromisedData             (CFDataRef)NULL
@@ -708,7 +706,7 @@ PasteboardPutItemFlavor(
   PasteboardRef           inPasteboard,
   PasteboardItemID        inItem,
   CFStringRef             inFlavorType,
-  CFDataRef               inData,             /* can be NULL */
+  CFDataRef  _Nullable    inData,             /* can be NULL */
   PasteboardFlavorFlags   inFlags)                            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
@@ -741,8 +739,8 @@ PasteboardPutItemFlavor(
  */
 extern OSStatus 
 PasteboardCopyPasteLocation(
-  PasteboardRef   inPasteboard,
-  CFURLRef *      outPasteLocation)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  PasteboardRef         inPasteboard,
+  CFURLRef _Nullable *  _Nonnull  outPasteLocation CF_RETURNS_RETAINED)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -805,7 +803,7 @@ PasteboardSetPasteLocation(
  *  Result:
  *    An operating system result code.
  */
-typedef CALLBACK_API_C( OSStatus , PasteboardPromiseKeeperProcPtr )(PasteboardRef pasteboard, PasteboardItemID item, CFStringRef flavorType, void *context);
+typedef CALLBACK_API_C( OSStatus , PasteboardPromiseKeeperProcPtr )(PasteboardRef pasteboard, PasteboardItemID item, CFStringRef flavorType, void * _Nullable context);
 /*
  *  PasteboardSetPromiseKeeper()
  *  
@@ -841,7 +839,7 @@ extern OSStatus
 PasteboardSetPromiseKeeper(
   PasteboardRef                    inPasteboard,
   PasteboardPromiseKeeperProcPtr   inPromiseKeeper,
-  void *                           inContext)                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  void *  _Nullable                inContext)                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 #define kPasteboardResolveAllPromises           (PasteboardRef)NULL
@@ -876,6 +874,9 @@ PasteboardSetPromiseKeeper(
 extern OSStatus 
 PasteboardResolvePromises(PasteboardRef inPasteboard)         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
+
+CF_IMPLICIT_BRIDGING_DISABLED
+CF_ASSUME_NONNULL_END
 
 
 #ifdef __cplusplus

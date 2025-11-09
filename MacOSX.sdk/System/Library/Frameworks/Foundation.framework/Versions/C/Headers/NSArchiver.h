@@ -1,8 +1,9 @@
 /*	NSArchiver.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
+#import <Foundation/NSException.h>
 
 @class NSString, NSData, NSMutableData, NSMutableDictionary, NSMutableArray;
 
@@ -12,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSArchiver : NSCoder {
 @private
-    void		* __strong mdata;
+    void		*mdata;
     void		*pointerTable;
     void		*stringTable;
     void		*ids;
@@ -85,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /************		Exceptions		****************/
 
-FOUNDATION_EXPORT NSString * const NSInconsistentArchiveException;
+FOUNDATION_EXPORT NSExceptionName const NSInconsistentArchiveException;
 
 /************		Object call back		****************/
 

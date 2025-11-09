@@ -1,12 +1,11 @@
 //
 //  GKGoal.h
-//  GameLogic
+//  GameplayKit
 //
 //  Copyright © 2015 Apple. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "GameplayKitBase.h"
+#import <GameplayKit/GameplayKitBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -60,6 +60,8 @@ NS_CLASS_AVAILABLE_MAC(10_7)
     NSInteger       _roamingProfileType;
     
     BOOL            _isPersonalHotspot;
+    
+    NSArray         *_bssidList;
 }
 
 /*!

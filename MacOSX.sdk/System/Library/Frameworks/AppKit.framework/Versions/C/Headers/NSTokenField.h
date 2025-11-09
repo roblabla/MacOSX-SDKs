@@ -1,7 +1,7 @@
 /*
 	NSTokenField.h
 	Application Kit
-	Copyright (c) 2004-2015, Apple Inc.
+	Copyright (c) 2004-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,35 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol NSTokenFieldDelegate;
+@class NSTokenField;
 
-
-@interface NSTokenField : NSTextField {    
-    BOOL _reserved1;
-    BOOL _reserved2;
-    BOOL _reserved3;
-    BOOL _reserved4;
-
-    NSTrackingRectTag  _trackingRectTag;
-    id _reserved5;
-    id _reserved6;
-    id _reserved7;
-}
-
-- (void)setDelegate:(nullable id <NSTokenFieldDelegate>)anObject;
-- (nullable id <NSTokenFieldDelegate>)delegate;
-
-/* Sets the default token style used for each new token.  However, if the delegate implements tokenField:styleForRepresentedObject:, that return value will be used instead.
-*/
-@property NSTokenStyle tokenStyle;
-
-@property NSTimeInterval completionDelay;
-+ (NSTimeInterval)defaultCompletionDelay;
-
-@property (null_resettable, copy) NSCharacterSet *tokenizingCharacterSet;
-+ (NSCharacterSet *)defaultTokenizingCharacterSet;
-
-@end
 
 @protocol NSTokenFieldDelegate <NSTextFieldDelegate>
 
@@ -48,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Each element in the array should be an NSString or an array of NSStrings.
 // substring is the partial string that is being completed.  tokenIndex is the index of the token being completed.
-// selectedIndex allows you to return by reference an index specifying which of the completions should be selected initially. 
+// selectedIndex allows you to return by reference an index specifying which of the completions should be selected initially.
 // The default behavior is not to have any completions.
 - (nullable NSArray *)tokenField:(NSTokenField *)tokenField completionsForSubstring:(NSString *)substring indexOfToken:(NSInteger)tokenIndex indexOfSelectedItem:(nullable NSInteger *)selectedIndex;
 
@@ -63,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)tokenField:(NSTokenField *)tokenField editingStringForRepresentedObject:(id)representedObject;
 - (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString: (NSString *)editingString;
 
-// We put the string on the pasteboard before calling this delegate method. 
+// We put the string on the pasteboard before calling this delegate method.
 // By default, we write the NSStringPboardType as well as an array of NSStrings.
 - (BOOL)tokenField:(NSTokenField *)tokenField writeRepresentedObjects:(NSArray *)objects toPasteboard:(NSPasteboard *)pboard;
 
@@ -72,11 +45,39 @@ NS_ASSUME_NONNULL_BEGIN
 
 // By default the tokens have no menu.
 - (nullable NSMenu *)tokenField:(NSTokenField *)tokenField menuForRepresentedObject:(id)representedObject;
-- (BOOL)tokenField:(NSTokenField *)tokenField hasMenuForRepresentedObject:(id)representedObject; 
+- (BOOL)tokenField:(NSTokenField *)tokenField hasMenuForRepresentedObject:(id)representedObject;
 
 // This method allows you to change the style for individual tokens as well as have mixed text and tokens.
 - (NSTokenStyle)tokenField:(NSTokenField *)tokenField styleForRepresentedObject:(id)representedObject;
 
+
+@end
+
+
+@interface NSTokenField : NSTextField {    
+    BOOL _reserved1;
+    BOOL _reserved2;
+    BOOL _reserved3;
+    BOOL _reserved4;
+
+    NSTrackingRectTag  _trackingRectTag;
+    id _reserved5;
+    id _reserved6;
+    id _reserved7;
+}
+
+/* For apps linked against 10.12, this property has zeroing weak memory semantics. When linked against an older SDK, or with objects that do not support zeroing weak references this falls back to having `assign` semantics. */
+@property (nullable, assign) id<NSTokenFieldDelegate> delegate;
+
+/* Sets the default token style used for each new token.  However, if the delegate implements tokenField:styleForRepresentedObject:, that return value will be used instead.
+*/
+@property NSTokenStyle tokenStyle;
+
+@property NSTimeInterval completionDelay;
++ (NSTimeInterval)defaultCompletionDelay;
+
+@property (null_resettable, copy) NSCharacterSet *tokenizingCharacterSet;
++ (NSCharacterSet *)defaultTokenizingCharacterSet;
 
 @end
 

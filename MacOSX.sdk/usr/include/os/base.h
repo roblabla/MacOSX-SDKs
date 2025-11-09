@@ -39,6 +39,7 @@
 #define __has_extension(x) 0
 #endif
 
+#undef OS_INLINE // <sys/_types/_os_inline.h>
 #if __GNUC__
 #define OS_NORETURN __attribute__((__noreturn__))
 #define OS_NOTHROW __attribute__((__nothrow__))
@@ -65,6 +66,7 @@
 #define OS_MALLOC __attribute__((__malloc__))
 #define OS_USED __attribute__((__used__))
 #define OS_UNUSED __attribute__((__unused__))
+#define OS_COLD __attribute__((__cold__))
 #define OS_WEAK __attribute__((__weak__))
 #define OS_WEAK_IMPORT __attribute__((__weak_import__))
 #define OS_NOINLINE __attribute__((__noinline__))
@@ -101,6 +103,7 @@
 #define OS_MALLOC
 #define OS_USED
 #define OS_UNUSED
+#define OS_COLD
 #define OS_WEAK
 #define OS_WEAK_IMPORT
 #define OS_NOINLINE
@@ -111,6 +114,26 @@
 #define OS_EXPORT extern
 #define OS_INLINE static inline
 #define OS_EXPECT(x, v) (x)
+#endif
+
+#if __has_attribute(noescape)
+#define OS_NOESCAPE __attribute__((__noescape__))
+#else
+#define OS_NOESCAPE
+#endif
+
+#if __has_feature(assume_nonnull)
+#define OS_ASSUME_NONNULL_BEGIN _Pragma("clang assume_nonnull begin")
+#define OS_ASSUME_NONNULL_END   _Pragma("clang assume_nonnull end")
+#else
+#define OS_ASSUME_NONNULL_BEGIN
+#define OS_ASSUME_NONNULL_END
+#endif
+
+#if __has_builtin(__builtin_assume)
+#define OS_COMPILER_CAN_ASSUME(expr) __builtin_assume(expr)
+#else
+#define OS_COMPILER_CAN_ASSUME(expr) ((void)(expr))
 #endif
 
 #if __has_extension(attribute_overloadable)
@@ -127,9 +150,91 @@
 		enum { __VA_ARGS__ }; typedef _type _name##_t
 #endif
 
+#if __has_feature(attribute_availability_swift)
+// equivalent to __SWIFT_UNAVAILABLE from Availability.h
+#define OS_SWIFT_UNAVAILABLE(_msg) \
+		__attribute__((__availability__(swift, unavailable, message=_msg)))
+#else
+#define OS_SWIFT_UNAVAILABLE(_msg)
+#endif
+
+#if __has_attribute(swift_private)
+# define OS_REFINED_FOR_SWIFT __attribute__((__swift_private__))
+#else
+# define OS_REFINED_FOR_SWIFT
+#endif
+
+#if __has_attribute(swift_name)
+# define OS_SWIFT_NAME(_name) __attribute__((__swift_name__(#_name)))
+#else
+# define OS_SWIFT_NAME(_name)
+#endif
+
 #define __OS_STRINGIFY(s) #s
 #define OS_STRINGIFY(s) __OS_STRINGIFY(s)
 #define __OS_CONCAT(x, y) x ## y
 #define OS_CONCAT(x, y) __OS_CONCAT(x, y)
+
+#ifdef __GNUC__
+#define os_prevent_tail_call_optimization()  __asm__("")
+#define os_is_compile_time_constant(expr)  __builtin_constant_p(expr)
+#define os_compiler_barrier()  __asm__ __volatile__("" ::: "memory")
+#else
+#define os_prevent_tail_call_optimization()  do { } while (0)
+#define os_is_compile_time_constant(expr)  0
+#define os_compiler_barrier()  do { } while (0)
+#endif
+
+#if __has_attribute(not_tail_called)
+#define OS_NOT_TAIL_CALLED __attribute__((__not_tail_called__))
+#else
+#define OS_NOT_TAIL_CALLED
+#endif
+
+typedef void (*os_function_t)(void *_Nullable);
+
+#ifdef __BLOCKS__
+/*!
+ * @typedef os_block_t
+ *
+ * @abstract
+ * Generic type for a block taking no arguments and returning no value.
+ *
+ * @discussion
+ * When not building with Objective-C ARC, a block object allocated on or
+ * copied to the heap must be released with a -[release] message or the
+ * Block_release() function.
+ *
+ * The declaration of a block literal allocates storage on the stack.
+ * Therefore, this is an invalid construct:
+ * <code>
+ * os_block_t block;
+ * if (x) {
+ *     block = ^{ printf("true\n"); };
+ * } else {
+ *     block = ^{ printf("false\n"); };
+ * }
+ * block(); // unsafe!!!
+ * </code>
+ *
+ * What is happening behind the scenes:
+ * <code>
+ * if (x) {
+ *     struct Block __tmp_1 = ...; // setup details
+ *     block = &__tmp_1;
+ * } else {
+ *     struct Block __tmp_2 = ...; // setup details
+ *     block = &__tmp_2;
+ * }
+ * </code>
+ *
+ * As the example demonstrates, the address of a stack variable is escaping the
+ * scope in which it is allocated. That is a classic C bug.
+ *
+ * Instead, the block literal must be copied to the heap with the Block_copy()
+ * function or by sending it a -[copy] message.
+ */
+typedef void (^os_block_t)(void);
+#endif
 
 #endif // __OS_BASE__

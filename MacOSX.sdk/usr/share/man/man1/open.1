@@ -16,6 +16,7 @@
 .Op Fl n 
 .Op Fl g
 .Op Fl h
+.Op Fl s Ar sdk
 .Op Fl b Ar bundle_identifier
 .Op Fl a Ar application
 .Ar
@@ -69,6 +70,8 @@ Open a new instance of the application(s) even if one is already running.
 Do not bring the application to the foreground.
 .It Fl h
 Searches header locations for a header whose name matches the given string and then opens it.  Pass a full header name (such as NSView.h) for increased performance.
+.It Fl s
+For -h, partial or full SDK name to use; if supplied, only SDKs whose names contain the argument value are searched. Otherwise the highest versioned SDK in each platform is used.
 .It Fl Fl args
 All remaining arguments are passed to the opened application in the argv parameter to main().  These arguments are not opened or interpreted by the
 .Nm
@@ -94,6 +97,8 @@ tool.
 "open 'file://localhost/Volumes/Macintosh HD/Applications/'" opens that directory in the Finder.
 .Pp
 "open -h NSView" lists headers whose names contain NSView and allows you to choose which ones to open.
+.Pp
+"open -h NSView -s OSX10.12" lists headers whose names contain NSView in the MacOSX 10.12 SDK and allows you to choose which ones to open.
 .Pp
 "open -a Xcode -h NSString.h" quickly opens /System/Library/Frameworks/Foundation.framework/Headers/NSString.h in Xcode.
 .Pp

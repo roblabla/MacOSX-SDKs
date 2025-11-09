@@ -1,7 +1,7 @@
 /*
         NSPredicateEditorRowTemplate.h
 	Application Kit
-	Copyright (c) 2006-2015, Apple Inc.
+	Copyright (c) 2006-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -32,7 +32,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 	unsigned reserved:30;
     } _ptFlags;
     
-    id _patternReserved;
+    id _patternReserved __unused;
 }
 
 /* returns a positive number if the template can represent the predicate, and zero if it cannot.  The highest match determines which template is responsible for displaying the predicate.  Developers can override this to determine which predicates their custom template handles.  By default, this returns values in the range [0., 1.]

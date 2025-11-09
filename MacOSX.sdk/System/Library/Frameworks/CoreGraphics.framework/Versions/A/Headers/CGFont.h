@@ -62,15 +62,15 @@ CG_EXTERN CFTypeID CGFontGetTypeID(void)
    should be a pointer to an ATSFontRef. */
 
 CG_EXTERN CGFontRef __nullable CGFontCreateWithPlatformFont(
-    void * __nullable platformFontReference)
+    void * cg_nullable platformFontReference)
     CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
                                 __IPHONE_NA, __IPHONE_NA);
 
 /* Return the font defined by the data provided by `provider', or NULL if
    the font can't be created. */
 
-CG_EXTERN CGFontRef __nullable CGFontCreateWithDataProvider(
-    CGDataProviderRef __nullable provider)
+CG_EXTERN CGFontRef cg_nullable CGFontCreateWithDataProvider(
+    CGDataProviderRef cg_nullable provider)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return the font identified by `name', corresponding to the font's
@@ -78,7 +78,7 @@ CG_EXTERN CGFontRef __nullable CGFontCreateWithDataProvider(
    created. */
 
 CG_EXTERN CGFontRef __nullable CGFontCreateWithFontName(
-    CFStringRef __nullable name)
+    CFStringRef cg_nullable name)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return a font based on `font' with the variation specification dictionary
@@ -90,93 +90,93 @@ CG_EXTERN CGFontRef __nullable CGFontCreateWithFontName(
    then the current value from `font' is used. */
 
 CG_EXTERN CGFontRef __nullable CGFontCreateCopyWithVariations(
-    CGFontRef __nullable font, CFDictionaryRef __nullable variations)
+    CGFontRef cg_nullable font, CFDictionaryRef __nullable variations)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain(font)', except it doesn't crash (as CFRetain
    does) if `font' is NULL. */
 
-CG_EXTERN CGFontRef __nullable CGFontRetain(CGFontRef __nullable font)
+CG_EXTERN CGFontRef cg_nullable CGFontRetain(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(font)', except it doesn't crash (as CFRelease
    does) if `font' is NULL. */
 
-CG_EXTERN void CGFontRelease(CGFontRef __nullable font)
+CG_EXTERN void CGFontRelease(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the number of glyphs in `font'. */
 
-CG_EXTERN size_t CGFontGetNumberOfGlyphs(CGFontRef __nullable font)
+CG_EXTERN size_t CGFontGetNumberOfGlyphs(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the glyph space units/em for `font'. */
 
-CG_EXTERN int CGFontGetUnitsPerEm(CGFontRef __nullable font)
+CG_EXTERN int CGFontGetUnitsPerEm(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the PostScript name of `font'. */
 
-CG_EXTERN CFStringRef __nullable CGFontCopyPostScriptName(CGFontRef __nullable font)
+CG_EXTERN CFStringRef __nullable CGFontCopyPostScriptName(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Return the "full name" of `font'. */
 
-CG_EXTERN CFStringRef __nullable CGFontCopyFullName(CGFontRef __nullable font)
+CG_EXTERN CFStringRef __nullable CGFontCopyFullName(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return the ascent of `font'. The ascent is the maximum distance above the
    baseline of glyphs in a font. The value is specified in glyph space
    units. */
 
-CG_EXTERN int CGFontGetAscent(CGFontRef __nullable font)
+CG_EXTERN int CGFontGetAscent(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return the descent of `font'. The descent is the maximum distance below
    the baseline of glyphs in a font. The value is specified in glyph space
    units. */
 
-CG_EXTERN int CGFontGetDescent(CGFontRef __nullable font)
+CG_EXTERN int CGFontGetDescent(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return the leading of `font'. The leading is the spacing between
    consecutive lines of text in a font. The value is specified in glyph
    space units. */
 
-CG_EXTERN int CGFontGetLeading(CGFontRef __nullable font)
+CG_EXTERN int CGFontGetLeading(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return the cap height of `font'. The cap height is the distance above the
    baseline of the top of flat capital letters of glyphs in a font. The
    value is specified in glyph space units. */
 
-CG_EXTERN int CGFontGetCapHeight(CGFontRef __nullable font)
+CG_EXTERN int CGFontGetCapHeight(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return the x-height of `font'. The x-height is the distance above the
    baseline of the top of flat, non-ascending lowercase letters (such as
    "x") of glyphs in a font. The value is specified in glyph space units. */
 
-CG_EXTERN int CGFontGetXHeight(CGFontRef __nullable font)
+CG_EXTERN int CGFontGetXHeight(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return the font bounding box of `font'. The font bounding box is the
    union of all of the bounding boxes for all the glyphs in a font. The
    value is specified in glyph space units. */
 
-CG_EXTERN CGRect CGFontGetFontBBox(CGFontRef __nullable font)
+CG_EXTERN CGRect CGFontGetFontBBox(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return the italic angle of `font', measured in degrees counter-clockwise
    from the vertical. */
 
-CG_EXTERN CGFloat CGFontGetItalicAngle(CGFontRef __nullable font)
+CG_EXTERN CGFloat CGFontGetItalicAngle(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return the thickness of the dominant vertical stems of glyphs in `font'.
    The value is specified in glyph space units. */
 
-CG_EXTERN CGFloat CGFontGetStemV(CGFontRef __nullable font)
+CG_EXTERN CGFloat CGFontGetStemV(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return an array of the variation axis dictionaries for `font'. Each
@@ -184,7 +184,7 @@ CG_EXTERN CGFloat CGFontGetStemV(CGFontRef __nullable font)
    listed below. This function returns NULL if `font' doesn't support
    variations. */
 
-CG_EXTERN CFArrayRef __nullable CGFontCopyVariationAxes(CGFontRef __nullable font)
+CG_EXTERN CFArrayRef __nullable CGFontCopyVariationAxes(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Return the variation specification dictionary from `font'. This
@@ -194,7 +194,7 @@ CG_EXTERN CFArrayRef __nullable CGFontCopyVariationAxes(CGFontRef __nullable fon
    CFNumberRef. This function returns NULL if `font' doesn't support
    variations. */
 
-CG_EXTERN CFDictionaryRef __nullable CGFontCopyVariations(CGFontRef __nullable font)
+CG_EXTERN CFDictionaryRef __nullable CGFontCopyVariations(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Get the advance of each glyph in `glyphs', an array of `count' glyphs,
@@ -202,7 +202,7 @@ CG_EXTERN CFDictionaryRef __nullable CGFontCopyVariations(CGFontRef __nullable f
    `count' integers. The advances are specified in glyph space. Returns
    false if advances can't be retrieved for any reason; true otherwise. */
 
-CG_EXTERN bool CGFontGetGlyphAdvances(CGFontRef __nullable font,
+CG_EXTERN bool CGFontGetGlyphAdvances(CGFontRef cg_nullable font,
     const CGGlyph *  glyphs, size_t count, int *  advances)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
@@ -212,7 +212,7 @@ CG_EXTERN bool CGFontGetGlyphAdvances(CGFontRef __nullable font,
    Returns false if bounding boxes can't be retrieved for any reason; true
    otherwise. */
 
-CG_EXTERN bool CGFontGetGlyphBBoxes(CGFontRef __nullable font,
+CG_EXTERN bool CGFontGetGlyphBBoxes(CGFontRef cg_nullable font,
     const CGGlyph *  glyphs, size_t count, CGRect *  bboxes)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
@@ -220,20 +220,20 @@ CG_EXTERN bool CGFontGetGlyphBBoxes(CGFontRef __nullable font,
    in the font, return 0. */
 
 CG_EXTERN CGGlyph CGFontGetGlyphWithGlyphName(
-    CGFontRef __nullable font, CFStringRef __nullable name)
+    CGFontRef cg_nullable font, CFStringRef cg_nullable name)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return the glyph name of `glyph' in `font', or NULL if `glyph' does not
    appear in `font'. */
 
 CG_EXTERN CFStringRef __nullable CGFontCopyGlyphNameForGlyph(
-    CGFontRef __nullable font, CGGlyph glyph)
+    CGFontRef cg_nullable font, CGGlyph glyph)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return true if a subset in the PostScript format `format' can be created
    for `font'; false otherwise. */
 
-CG_EXTERN bool CGFontCanCreatePostScriptSubset(CGFontRef __nullable font,
+CG_EXTERN bool CGFontCanCreatePostScriptSubset(CGFontRef cg_nullable font,
     CGFontPostScriptFormat format)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
@@ -243,7 +243,7 @@ CG_EXTERN bool CGFontCanCreatePostScriptSubset(CGFontRef __nullable font,
    encoding for the subset. */
 
 CG_EXTERN CFDataRef __nullable CGFontCreatePostScriptSubset(
-    CGFontRef __nullable font, CFStringRef __nullable subsetName,
+    CGFontRef cg_nullable font, CFStringRef cg_nullable subsetName,
     CGFontPostScriptFormat format, const CGGlyph * __nullable glyphs,
     size_t count, const CGGlyph encoding[256])
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
@@ -252,21 +252,21 @@ CG_EXTERN CFDataRef __nullable CGFontCreatePostScriptSubset(
    `encoding'. */
 
 CG_EXTERN CFDataRef __nullable CGFontCreatePostScriptEncoding(
-    CGFontRef __nullable font, const CGGlyph encoding[256])
+    CGFontRef cg_nullable font, const CGGlyph encoding[256])
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Return an array of font table tags in `font'. Each entry in the array is
    a four-byte value representing a single TrueType or OpenType font table
    tag. */
 
-CG_EXTERN CFArrayRef __nullable CGFontCopyTableTags(CGFontRef __nullable font)
+CG_EXTERN CFArrayRef __nullable CGFontCopyTableTags(CGFontRef cg_nullable font)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return the table in `font' corresponding to `tag', or NULL if no such
    table exists. */
 
 CG_EXTERN CFDataRef __nullable CGFontCopyTableForTag(
-    CGFontRef __nullable font, uint32_t tag)
+    CGFontRef cg_nullable font, uint32_t tag)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /*** Keys for the font variation axis dictionary. ***/
@@ -301,7 +301,7 @@ CG_EXTERN const CFStringRef  kCGFontVariationAxisDefaultValue
 
 /* Obsolete; don't use these. */
 
-typedef CF_ENUM (int32_t, CGGlypDeprecatedEnum) {
+typedef CF_ENUM (int32_t, CGGlyphDeprecatedEnum) {
   CGGlyphMin __CG_DEPRECATED_ENUMERATOR,
   CGGlyphMax __CG_DEPRECATED_ENUMERATOR
 };

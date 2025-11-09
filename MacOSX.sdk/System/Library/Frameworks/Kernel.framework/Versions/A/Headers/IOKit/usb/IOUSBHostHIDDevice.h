@@ -99,6 +99,8 @@ enum
 
 #define kUSBHID_IoIdleTimeout "I/O Idle Timeout"
 
+#define kUSBHostHIDDevicePropertyIdlePolicy "kUSBHIDDeviceIdlePolicy"
+
 /*!
  @typedef IOUSBHostHIDDescriptor
  @discussion USB HID Descriptor.  See the USB HID Specification at <a href="http://www.usb.org"TARGET="_blank">http://www.usb.org</a>.  (This structure
@@ -138,7 +140,7 @@ class IOUSBHostHIDDevice : public IOHIDDevice
 private:
     typedef struct IOUSBHidExpansionData
     {
-        
+        uint8_t _bInterfaceNumber;
     } tIOUSBHidExpansionData;
     
     tIOUSBHidExpansionData *_expansionData;
@@ -213,6 +215,20 @@ public:
     virtual void stop (IOService *provider);
     
     virtual void free (void);
+
+    virtual bool setProperty(const OSSymbol* aKey, OSObject* anObject);
+
+    virtual bool setProperty(const OSString* aKey, OSObject* anObject);
+
+    virtual bool setProperty(const char* aKey, OSObject* anObject);
+
+    virtual bool setProperty(const char* aKey, const char * aString);
+
+    virtual bool setProperty(const char* aKey, bool aBoolean);
+
+    virtual bool setProperty(const char* aKey, unsigned long long aValue, unsigned int aNumberOfBits);
+
+    virtual bool setProperty(const char* aKey, void* bytes, unsigned int length);
     
     
     // IOHIDDevice Methods

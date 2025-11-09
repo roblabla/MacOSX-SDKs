@@ -25,7 +25,7 @@ enum : OSStatus
 #else
 enum
 #endif // COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
-	{
+{
 	kVTPropertyNotSupportedErr				= -12900,
 	kVTPropertyReadOnlyErr					= -12901,
 	kVTParameterErr							= -12902,
@@ -55,6 +55,7 @@ enum
 	kVTFrameSiloInvalidTimeRangeErr			= -12216,
 	kVTCouldNotFindTemporalFilterErr		= -12217,
 	kVTPixelTransferNotPermittedErr			= -12218,
+	kVTColorCorrectionImageRotationFailedErr	= -12219,
 };
 
 /*!

@@ -1,7 +1,7 @@
 /*
 	NSPasteboardItem.h
 	Application Kit
-	Copyright (c) 2008-2015, Apple Inc.
+	Copyright (c) 2008-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -41,7 +41,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
     NSUInteger	    _index;
     NSInteger	    _gen;
     id		    _auxObject;
-    void	    *_reserved;
+    void	    *_reserved __unused;
 }
 
 /* Returns an array of UTI strings of the data types supported by the receiver.

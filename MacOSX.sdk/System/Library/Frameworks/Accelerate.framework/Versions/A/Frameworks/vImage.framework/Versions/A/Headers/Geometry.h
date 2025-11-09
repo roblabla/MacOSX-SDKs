@@ -2,7 +2,7 @@
  *  Geometry.h
  *  vImage_Framework
  *
- *  Copyright (c) 2002-2015 by Apple Inc. All rights reserved.
+ *  Copyright (c) 2002-2016 by Apple Inc. All rights reserved.
  *
  */
 
@@ -149,27 +149,44 @@ vImage_Error	vImageRotate_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffe
 /*
  * vImageScale_<fmt>
  * =================
- * vImageScale_<fmt> is a convenience function to provide facile resizing of images. The operation can also be done with vImageWarp_<fmt>, or by using appropriate
- * low level vImageHorizontal/VerticalShear_<fmt> interfaces. vImageWarp_<fmt> may be appropriate if you wish to use an edging mode other than kvImageEdgeExtend.
- * vImageHorizontal/VerticalShear_<fmt> will provide the greatest detail in control, since it allows for alternative sampling methods, and also the opportunity to
- * control how tiling is done. This might allow for better cache utilization in cases where a format conversion (or other fast filter) is required either before or after
- * the scaling operation and you wish to incorporate it into your tiling design.
+ * vImageScale_<fmt> is a convenience function to provide facile resizing of images. 
+ * The operation can also be done with vImageWarp_<fmt>, or by using appropriate
+ * low level vImageHorizontal/VerticalShear_<fmt> interfaces. vImageWarp_<fmt> 
+ * may be appropriate if you wish to use an edging mode other than kvImageEdgeExtend.
+ * vImageHorizontal/VerticalShear_<fmt> will provide the greatest detail in control, 
+ * since it allows for alternative sampling methods, and also the opportunity to
+ * control how tiling is done. This might allow for better cache utilization in 
+ * cases where a format conversion (or other fast filter) is required either before 
+ * or after the scaling operation and you wish to incorporate it into your tiling design.
  *
- * To avoid artifacts in high frequency regions of the image, the data should be non-premultiplied, or at minimum have the same alpha over the entire image. For integer
- * formats with constant alpha < PIXEL_MAX, it is possible for result color values to be greater than alpha.  vImageClipToAlpha_<fmt> can be used to correct that problem.
- * Some other functions like vImageUnpremultiplyData_<fmt> will correct the problem as part of their operation, if they appear later in your image pipeline.
- * Otherwise, integer formats are clamped in the range [PIXEL_MIN,PIXEL_MAX] and can not experience modulo overflow problems. For floating-point formats, it is always possible to
- * produce out-of-gamut or greater than alpha results, most often in high-frequency regions of the image. Out-of-gamut results are often resolved when the floating-point
- * format is converted to an integer format in a later vImage call -- all conversions to integer format are clamped to the representable range. However, color values
- * greater than alpha will persist if the alpha is less than fully opaque, and can be fixed by vImageClipToAlpha_<fmt> as with the integer formats.
- * vImageUnpremultiplyData_<fmt> and vImagePremultiplyData_<fmt> are much, much faster than vImageScale_<fmt> and typically only add a few percent to the overall cost 
+ * To avoid artifacts in high frequency regions of the image, the data should be 
+ * non-premultiplied, or at minimum have the same alpha over the entire image. 
+ * For integer formats with constant alpha < PIXEL_MAX, it is possible for result 
+ * color values to be greater than alpha. 
+ * vImageClipToAlpha_<fmt> can be used to correct that problem.
+ * Some other functions like vImageUnpremultiplyData_<fmt> will correct the problem 
+ * as part of their operation, if they appear later in your image pipeline.
+ * Otherwise, integer formats are clamped in the range [PIXEL_MIN,PIXEL_MAX] and can not 
+ * experience modulo overflow problems. For floating-point formats, it is always 
+ * possible to produce out-of-gamut or greater than alpha results, most often in 
+ * high-frequency regions of the image. Out-of-gamut results are often resolved 
+ * when the floating-point format is converted to an integer format in a later vImage 
+ * call -- all conversions to integer format are clamped to the representable range. 
+ * However, color values greater than alpha will persist if the alpha is less than 
+ * fully opaque, and can be fixed by vImageClipToAlpha_<fmt> as with the integer formats.
+ * vImageUnpremultiplyData_<fmt> and vImagePremultiplyData_<fmt> are much, much faster 
+ * than vImageScale_<fmt> and typically only add a few percent to the overall cost
  * of the filter.
  *
  * vImageScale_<fmt>() does not work in place
- * The ARGB8888, ARGB16U, ARGB16S and ARGBFFFF functions work equally well on other channel orderings of 4-channel images, such as RGBA or BGRA.
+ * The ARGB8888, ARGB16U, ARGB16S and ARGBFFFF functions work equally well on 
+ * other channel orderings of 4-channel images, such as RGBA or BGRA.
  *
- * Acceptable flags are kvImageEdgeExtend, kvImageDoNotTile, kvImageHighQualityResampling, kvImageNoFlags. If no edging mode is passed, kvImageEdgeExtend is used.
- * Developers using vImageScale_<fmt> on MacOS X.3 should pass kvImageEdgeExtend in the flags field to avoid ringing artifacts at the edges of images
+ * Acceptable flags are kvImageEdgeExtend, kvImageDoNotTile, 
+ * kvImageHighQualityResampling, kvImageNoFlags. 
+ * If no edging mode is passed, kvImageEdgeExtend is used.
+ * Developers using vImageScale_<fmt> on MacOS X.3 should pass kvImageEdgeExtend 
+ * in the flags field to avoid ringing artifacts at the edges of images
  */                                                                                                                                                                          
 vImage_Error	vImageScale_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 vImage_Error	vImageScale_Planar16S( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
@@ -179,6 +196,30 @@ vImage_Error	vImageScale_ARGB8888( const vImage_Buffer *src, const vImage_Buffer
 vImage_Error	vImageScale_ARGB16U( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
 vImage_Error	vImageScale_ARGB16S( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
 vImage_Error	vImageScale_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+
+vImage_Error
+vImageScale_CbCr8(
+	const vImage_Buffer *src,
+	const vImage_Buffer *dest,
+	void *tempBuffer,
+	vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+    __OSX_AVAILABLE_STARTING( __MAC_10_12, __IPHONE_10_0 ) __WATCHOS_AVAILABLE(__WATCHOS_3_0) __TVOS_AVAILABLE(__TVOS_10_0);
+
+vImage_Error
+vImageScale_CbCr16U(
+	const vImage_Buffer *src,
+	const vImage_Buffer *dest,
+	void *tempBuffer,
+	vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+    __OSX_AVAILABLE_STARTING( __MAC_10_12, __IPHONE_10_0 ) __WATCHOS_AVAILABLE(__WATCHOS_3_0) __TVOS_AVAILABLE(__TVOS_10_0);
+
+vImage_Error
+vImageScale_XRGB2101010W(
+	const vImage_Buffer *src,
+	const vImage_Buffer *dest,
+	void *tempBuffer,
+	vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+    __OSX_AVAILABLE_STARTING( __MAC_10_12, __IPHONE_10_0 ) __WATCHOS_AVAILABLE(__WATCHOS_3_0) __TVOS_AVAILABLE(__TVOS_10_0);
 
 /*
  * vImageAffineWarp_<fmt>
@@ -317,24 +358,32 @@ vImage_Error	vImageRotate90_ARGB16S( const vImage_Buffer *src, const vImage_Buff
 vImage_Error	vImageRotate90_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, uint8_t rotationConstant, const Pixel_FFFF backColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,4) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
  
 /*
- *	The Shearing functions use resampling to rescale a image and offset it to fractional pixel offsets. 
- *	The functions actually shear, resize in one dimension and translate. All of it is done with fractional
- *	pixel precision. The shear slope is set using the shearSlope parameter. They are intended to be identical
- *      to the off diagonal components of the AffineWarp matrix for the same shear (i.e. at 1,0 or 0,1). The 
- *      xTranslate or yTranslate variable may be used to adjust the position of the destination image in the x and 
- *      y directions. Scaling (making the image larger or smaller in one dimension) is done by adjusting the resampling kernel.
+ *	The Shearing functions use resampling to rescale a image and offset it to 
+ *  fractional pixel offsets. The functions actually shear, resize in one 
+ *  dimension and translate. All of it is done with fractional pixel precision. 
+ *  The shear slope is set using the shearSlope parameter. They are intended to 
+ *  be identical to the off diagonal components of the AffineWarp matrix for the 
+ *  same shear (i.e. at 1,0 or 0,1). The xTranslate or yTranslate variable may 
+ *  be used to adjust the position of the destination image in the x and y 
+ *  directions. Scaling (making the image larger or smaller in one dimension) 
+ *  is done by adjusting the resampling kernel.
  *
- *  All four channel geometry functions (i.e. those that support ARGB8888, ARGB16U, ARGB16S or ARGBFFFF images) work equally well on
- *  four channel images with other channel orderings such as RGBA or BGRA.
+ *  All four channel geometry functions (i.e. those that support ARGB8888, 
+ *	ARGB16U, ARGB16S or ARGBFFFF images) work equally well on four channel 
+ *	images with other channel orderings such as RGBA or BGRA.
  *
  *  These functions do not work in place.
  *
- *  Acceptable flags are kvImageEdgeExtend, kvImageBackgroundColor, kvImageDoNotTile, kvImageNoFlags.
- *  Only one of kvImageEdgeExtend or kvImageBackgroundColor may be used. If none is used then the edging mode is undefined and results may be unpredictable.
+ *  Acceptable flags are kvImageEdgeExtend, kvImageBackgroundColor, 
+ *  kvImageDoNotTile, kvImageNoFlags.
+ *  Only one of kvImageEdgeExtend or kvImageBackgroundColor may be used. 
+ *  If none is used then the edging mode is undefined and the results may be 
+ *  unpredictable.
  *
- *  The ResamplingFilter is created using vImageNewResamplingFilter or vImageNewResamplingFilterForFunctionUsingBuffer. The latter
- *  gives more precise control over where the memory is allocated and which filter function is used, at the expense of having to 
- *  define / setup the same.
+ *  The ResamplingFilter is created using vImageNewResamplingFilter or 
+ *  vImageNewResamplingFilterForFunctionUsingBuffer. The latter gives more 
+ *  precise control over where the memory is allocated and which filter function 
+ *  is used, at the expense of having to define / setup the same.
  */
 
 vImage_Error	vImageHorizontalShear_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
@@ -369,6 +418,85 @@ vImage_Error	vImageVerticalShearD_ARGB8888( const vImage_Buffer *src, const vIma
 vImage_Error	vImageVerticalShearD_ARGB16U( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter,  const Pixel_ARGB_16U backColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
 vImage_Error	vImageVerticalShearD_ARGB16S( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter,  const Pixel_ARGB_16S backColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
 vImage_Error	vImageVerticalShearD_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter, const Pixel_FFFF backColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_8, __IPHONE_6_0 );
+
+vImage_Error
+vImageHorizontalShear_CbCr8(
+	const vImage_Buffer *src,
+	const vImage_Buffer *dest,
+	vImagePixelCount srcOffsetToROI_X,
+	vImagePixelCount srcOffsetToROI_Y,
+	float xTranslate,
+	float shearSlope,
+	ResamplingFilter filter,
+	const Pixel_88 backColor,
+	vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+    __OSX_AVAILABLE_STARTING( __MAC_10_12, __IPHONE_10_0 ) __WATCHOS_AVAILABLE(__WATCHOS_3_0) __TVOS_AVAILABLE(__TVOS_10_0);
+
+vImage_Error
+vImageHorizontalShear_CbCr16U(
+	const vImage_Buffer *src,
+	const vImage_Buffer *dest,
+	vImagePixelCount srcOffsetToROI_X,
+	vImagePixelCount srcOffsetToROI_Y,
+	float xTranslate,
+	float shearSlope,
+	ResamplingFilter filter,
+	const Pixel_16U16U backColor,
+	vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+    __OSX_AVAILABLE_STARTING( __MAC_10_12, __IPHONE_10_0 ) __WATCHOS_AVAILABLE(__WATCHOS_3_0) __TVOS_AVAILABLE(__TVOS_10_0);
+
+
+vImage_Error
+vImageVerticalShear_CbCr8(
+	const vImage_Buffer *src,
+	const vImage_Buffer *dest,
+	vImagePixelCount srcOffsetToROI_X,
+	vImagePixelCount srcOffsetToROI_Y,
+	float yTranslate,
+	float shearSlope,
+	ResamplingFilter filter,
+	const Pixel_88 backColor,
+	vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+    __OSX_AVAILABLE_STARTING( __MAC_10_12, __IPHONE_10_0 ) __WATCHOS_AVAILABLE(__WATCHOS_3_0) __TVOS_AVAILABLE(__TVOS_10_0);
+
+vImage_Error
+vImageVerticalShear_CbCr16U(
+	const vImage_Buffer *src,
+	const vImage_Buffer *dest,
+	vImagePixelCount srcOffsetToROI_X,
+	vImagePixelCount srcOffsetToROI_Y,
+	float yTranslate,
+	float shearSlope,
+	ResamplingFilter filter,
+	const Pixel_16U16U backColor,
+	vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+    __OSX_AVAILABLE_STARTING( __MAC_10_12, __IPHONE_10_0 ) __WATCHOS_AVAILABLE(__WATCHOS_3_0) __TVOS_AVAILABLE(__TVOS_10_0);
+
+vImage_Error
+vImageHorizontalShear_XRGB2101010W(
+	const vImage_Buffer *src,
+	const vImage_Buffer *dest,
+	vImagePixelCount srcOffsetToROI_X,
+	vImagePixelCount srcOffsetToROI_Y,
+	float xTranslate,
+	float shearSlope,
+	ResamplingFilter filter,
+	const Pixel_32U backColor,
+	vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+    __OSX_AVAILABLE_STARTING( __MAC_10_12, __IPHONE_10_0 ) __WATCHOS_AVAILABLE(__WATCHOS_3_0) __TVOS_AVAILABLE(__TVOS_10_0);
+
+vImage_Error
+vImageVerticalShear_XRGB2101010W(
+	const vImage_Buffer *src,
+	const vImage_Buffer *dest,
+	vImagePixelCount srcOffsetToROI_X,
+	vImagePixelCount srcOffsetToROI_Y,
+	float yTranslate,
+	float shearSlope,
+	ResamplingFilter filter,
+	const Pixel_32U backColor,
+	vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+    __OSX_AVAILABLE_STARTING( __MAC_10_12, __IPHONE_10_0 ) __WATCHOS_AVAILABLE(__WATCHOS_3_0) __TVOS_AVAILABLE(__TVOS_10_0);
 
  
 /*

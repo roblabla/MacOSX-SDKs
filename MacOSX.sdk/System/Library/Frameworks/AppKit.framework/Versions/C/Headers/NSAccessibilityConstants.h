@@ -1,7 +1,7 @@
 /*
 	NSAccessibilityConstants.h
 	Application Kit
-	Copyright (c) 2001-2015, Apple Inc.
+	Copyright (c) 2001-2016, Apple Inc.
 	All rights reserved.
 */
 #import <AppKit/AppKitDefines.h>
@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*** Exception Constants ***/
 
 // name for accessibility exception - declared in NSErrors.h
-// APPKIT_EXTERN NSString *NSAccessibilityException;
+// APPKIT_EXTERN NSExceptionName NSAccessibilityException;
 
 /* userInfo key for error codes in accessibility exceptions
  */
@@ -86,6 +86,7 @@ APPKIT_EXTERN NSString *const NSAccessibilityPlaceholderValueAttribute	//(NSStri
 NS_AVAILABLE_MAC(10_6);
 APPKIT_EXTERN NSString *const NSAccessibilityContainsProtectedContentAttribute NS_AVAILABLE_MAC(10_9);   // (NSNumber *) - (boolValue) contains protected content?
 APPKIT_EXTERN NSString *const NSAccessibilityAlternateUIVisibleAttribute NS_AVAILABLE_MAC(10_10);  //(NSNumber *) - (boolValue)
+APPKIT_EXTERN NSString *const NSAccessibilityRequiredAttribute NS_AVAILABLE_MAC(10_12);  //(NSNumber *) - (boolValue) whether a form field is required to have content for successful submission of the form
 
 
 /* Linkage attributes
@@ -135,6 +136,7 @@ APPKIT_EXTERN NSString *const NSAccessibilityShadowTextAttribute;		//(NSNumber *
 APPKIT_EXTERN NSString *const NSAccessibilityAttachmentTextAttribute;		//id - corresponding element
 APPKIT_EXTERN NSString *const NSAccessibilityLinkTextAttribute;			//id - corresponding element
 APPKIT_EXTERN NSString *const NSAccessibilityAutocorrectedTextAttribute NS_AVAILABLE_MAC(10_7);		//(NSNumber *)	    - (boolValue)
+APPKIT_EXTERN NSString *const NSAccessibilityTextAlignmentAttribute NS_AVAILABLE_MAC(10_12);		//(NSNumber *) - (NSTextAlignment)
 
 /* Textual list attributes and constants. Examples: unordered or ordered lists in a document.
  */
@@ -438,6 +440,7 @@ APPKIT_EXTERN NSString *const NSAccessibilityScrollBarRole;
 APPKIT_EXTERN NSString *const NSAccessibilityValueIndicatorRole;
 APPKIT_EXTERN NSString *const NSAccessibilityImageRole;
 APPKIT_EXTERN NSString *const NSAccessibilityMenuBarRole;
+APPKIT_EXTERN NSString *const NSAccessibilityMenuBarItemRole NS_AVAILABLE_MAC(10_12);
 APPKIT_EXTERN NSString *const NSAccessibilityMenuRole;
 APPKIT_EXTERN NSString *const NSAccessibilityMenuItemRole;
 APPKIT_EXTERN NSString *const NSAccessibilityColumnRole;
@@ -475,7 +478,6 @@ APPKIT_EXTERN NSString *const NSAccessibilityLayoutAreaRole NS_AVAILABLE_MAC(10_
 APPKIT_EXTERN NSString *const NSAccessibilityLayoutItemRole NS_AVAILABLE_MAC(10_6);
 APPKIT_EXTERN NSString *const NSAccessibilityHandleRole NS_AVAILABLE_MAC(10_6);
 
-
 /* Subroles
  */
 APPKIT_EXTERN NSString *const NSAccessibilityUnknownSubrole;
@@ -507,7 +509,6 @@ APPKIT_EXTERN NSString *const NSAccessibilityFullScreenButtonSubrole		NS_AVAILAB
 APPKIT_EXTERN NSString *const NSAccessibilityToggleSubrole                      NS_AVAILABLE_MAC(10_9);
 APPKIT_EXTERN NSString *const NSAccessibilitySwitchSubrole                      NS_AVAILABLE_MAC(10_9);
 APPKIT_EXTERN NSString *const NSAccessibilityDescriptionListSubrole		NS_AVAILABLE_MAC(10_9);
-
 
 
 /* This function allows an accessibility notification to be posted with a user info dictionary.  The user info dictionary can be nil.  Valid contents of the user info dictionary are limited to classes which can be returned to an accessibility client.  That list currently includes NSString, NSNumber, NSArray, NSValues of points, ranges, sizes, rects, and valid NSAccessibility objects.  Most accessibility notifications do not require a user info dictionary.

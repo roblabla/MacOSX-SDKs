@@ -2,7 +2,7 @@
 //  GKChallenge.h
 //  Game Center
 //
-//  Copyright 2012-2015 Apple Inc. All rights reserved.
+//  Copyright 2012-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, GKChallengeState) {
 };
 
 
-NS_CLASS_AVAILABLE(10_8, 6_0)
+NS_CLASS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED
 @interface GKChallenge : NSObject <NSCoding, NSSecureCoding>
 
 // Query challenges for the current game issued to the local player -- equivalent GKChallenge objects are not guaranteed to be pointer equivalent across calls, but equal GKChallenge objects will have equal hashes
@@ -51,13 +51,13 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 
 @end
 
-NS_CLASS_AVAILABLE(10_8, 6_0)
+NS_CLASS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED
 @interface GKScoreChallenge : GKChallenge
 
 @property (nonatomic, readonly, nullable, retain) GKScore *score; // The score to meet to satisfy this challenge
 @end
 
-NS_CLASS_AVAILABLE(10_8, 6_0)
+NS_CLASS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED
 @interface GKAchievementChallenge : GKChallenge
 
 @property (nonatomic, readonly, nullable, retain) GKAchievement *achievement; // The achievement to achieve to satisfy this challenge
@@ -65,7 +65,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 
 
 // Use the following category methods to issue GKScoreChallenges and GKAchievementChallenges to an array of playerIDs. Players may not issue challenges to themselves nor to non-friends. Please see the GameKit reference documentation for further details on these methods.
-
+#if !TARGET_OS_WATCH
 @interface GKScore (GKChallenge)
 
 // Return a challenge compose view controller with pre-selected GKPlayers and a preformatted, player-editable message. Once this view controller is displayed, and the player sends or cancels sending the challenge, the completion handler will be called. This block contains the view controller, the reason why the handler was called, as well as which (if any) GKPlayers the challenge was sent to. Present modally from the top view controller. The completion handler should dismiss the view controller.
@@ -127,4 +127,5 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 #endif
 
 @end
+#endif
 NS_ASSUME_NONNULL_END

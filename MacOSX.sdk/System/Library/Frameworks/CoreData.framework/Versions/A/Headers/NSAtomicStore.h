@@ -1,7 +1,7 @@
 /*
     NSAtomicStore.h
     Core Data
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -21,8 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSEntityDescription;
 @class NSManagedObjectID;
 
-NS_CLASS_AVAILABLE(10_5,3_0)
+API_AVAILABLE(macosx(10.5),ios(3.0))
 @interface NSAtomicStore : NSPersistentStore {
+#if (!__OBJC2__)
 	@private
     NSMutableDictionary *_nodeCache;
     NSMutableDictionary *_entityCache;
@@ -30,6 +31,7 @@ NS_CLASS_AVAILABLE(10_5,3_0)
     NSInteger _nextReference;
 	void *_reserved4;
 	void *_reserved5;
+#endif
 }
 
 // API method that may be overriden by subclasses for custom initialization

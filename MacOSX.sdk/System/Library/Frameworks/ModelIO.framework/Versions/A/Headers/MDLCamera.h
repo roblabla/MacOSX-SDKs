@@ -17,18 +17,15 @@ NS_ASSUME_NONNULL_BEGIN
  
  @summary MDLCamera models a physically plausible camera.
  
- @discussion
-
- Note that values are represented as float in MDLCamera as it offers sufficient 
- precision, and because calculations will be identical on any processor 
+ @discussion Values are represented as float in MDLCamera as it offers sufficient 
+ precision, and because calculations will be identical on any processor
  architecture. This consistency is a requirement of the model.
 
  MDLCamera provides the a model of the parameters governing the physical process 
  of transforming a scene into an image.
 
- This process is modeled as a series of steps, each governed by physically 
- plausible properties.
- 
+ This process is modeled as a series of steps, each governed by the physical
+ properties of real world cameras.
  
  1. The position and orientation of the camera
     @see MDLObject transform property
@@ -96,6 +93,8 @@ NS_ASSUME_NONNULL_BEGIN
     intended amount of chromatic aberration to apply to an image.
  
  4. Geometry of the lens
+ 
+    This is a thin lens model.
  
     @property focalLength
  
@@ -226,6 +225,13 @@ NS_ASSUME_NONNULL_BEGIN
 
  */
 
+typedef NS_ENUM(NSUInteger, MDLCameraProjection)
+{
+    MDLCameraProjectionPerspective = 0,
+    MDLCameraProjectionOrthographic = 1,
+};
+
+
 NS_CLASS_AVAILABLE(10_11, 9_0)
 MDL_EXPORT
 @interface MDLCamera : MDLObject
@@ -236,6 +242,10 @@ MDL_EXPORT
  @see nearVisibilityDistance, nearVisibilityDistance
  */
 @property (nonatomic, readonly) matrix_float4x4 projectionMatrix;
+
+/**
+ */
+@property (nonatomic, assign) MDLCameraProjection projection;
 
 /**
  Move the camera back and orient the camera so that a bounding box is framed 

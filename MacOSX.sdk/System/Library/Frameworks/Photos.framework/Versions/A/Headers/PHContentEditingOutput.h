@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE_MAC(10_11) @interface PHContentEditingOutput : NSObject
+NS_CLASS_AVAILABLE(10_11, 8_0) @interface PHContentEditingOutput : NSObject
 
 - (instancetype)initWithContentEditingInput:(PHContentEditingInput *)contentEditingInput;
 

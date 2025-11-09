@@ -1,7 +1,7 @@
 /*
         NSTableHeaderCell.h
         Application Kit
-        Copyright (c) 1995-2015, Apple Inc.
+        Copyright (c) 1995-2016, Apple Inc.
         All rights reserved.
 */
 #import <AppKit/NSTextFieldCell.h>
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Returns the location to display the sorting indicator given the cellFrame.
 */
-- (NSRect)sortIndicatorRectForBounds:(NSRect)theRect;
+- (NSRect)sortIndicatorRectForBounds:(NSRect)rect;
 
 @end
 

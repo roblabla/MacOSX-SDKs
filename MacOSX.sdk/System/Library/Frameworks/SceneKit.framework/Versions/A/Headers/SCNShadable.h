@@ -1,7 +1,7 @@
 //
 //  SCNShadable.h
 //
-//  Copyright (c) 2013-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -16,7 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol SCNProgramDelegate;
 @protocol SCNShadable;
 
-
+#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
+typedef NSString * SCNShaderModifierEntryPoint NS_STRING_ENUM;
+#else
+typedef NSString * SCNShaderModifierEntryPoint;
+#endif
 
 /*! @enum SCNBufferFrequency
  @abstract The frequency at which the custom program input should be updated.
@@ -28,7 +32,7 @@ typedef NS_ENUM(NSInteger, SCNBufferFrequency) {
     SCNBufferFrequencyPerFrame    = 0,
     SCNBufferFrequencyPerNode     = 1,
     SCNBufferFrequencyPerShadable = 2 // SCNMaterial or SCNGeometry
-} NS_ENUM_AVAILABLE(10_11, 9_0);
+} API_AVAILABLE(macosx(10.11), ios(9.0));
 
 @protocol SCNBufferStream <NSObject>
 - (void)writeBytes:(void *)bytes length:(NSUInteger)length;
@@ -52,7 +56,7 @@ typedef void (^SCNBufferBindingBlock)(id <SCNBufferStream> buffer, SCNNode *node
  @param renderedNode The node currently being rendered.
  @param renderer The renderer that is currently rendering the scene.
  */
-typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, SCNNode *renderedNode, SCNRenderer *renderer);
+typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, SCNNode * _Nullable renderedNode, SCNRenderer *renderer);
 
 
 /*!
@@ -67,7 +71,7 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
  @abstract Specifies a custom program used to render the receiver.
  @discussion When a program is set, it overrides all the rendering parameters such as material settings and shaderModifiers.
  */
-@property(nonatomic, retain, nullable) SCNProgram *program;
+@property(nonatomic, retain, nullable) SCNProgram *program __WATCHOS_PROHIBITED;
 
 /*!
  @method handleBindingOfSymbol:usingBlock:
@@ -76,7 +80,7 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
  @param block The block to call to bind the specified symbol.
  @discussion This method can only be used with OpenGL and OpenGLES based programs.
  */
-- (void)handleBindingOfSymbol:(NSString *)symbol usingBlock:(nullable SCNBindingBlock)block NS_AVAILABLE(10_9, 8_0);
+- (void)handleBindingOfSymbol:(NSString *)symbol usingBlock:(nullable SCNBindingBlock)block API_AVAILABLE(macosx(10.9)) __WATCHOS_PROHIBITED;
 
 /*!
  @method handleUnbindingOfSymbol:usingBlock:
@@ -85,7 +89,7 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
  @param block The block to call to unbind the specified symbol.
  @discussion This method can only be used with OpenGL and OpenGLES based programs.
  */
-- (void)handleUnbindingOfSymbol:(NSString *)symbol usingBlock:(nullable SCNBindingBlock)block NS_AVAILABLE(10_9, 8_0);
+- (void)handleUnbindingOfSymbol:(NSString *)symbol usingBlock:(nullable SCNBindingBlock)block API_AVAILABLE(macosx(10.9)) __WATCHOS_PROHIBITED;
 
 /*!
  @property shaderModifiers
@@ -151,7 +155,7 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
  
  SceneKit declares the following built-in uniforms:
  float u_time;                               // The current time, in seconds
- vec2  u_inverseResolution;                 // 1./screen size (available on iOS 9 and OS X 10.11)
+ vec2  u_inverseResolution;                  // 1./screen size (available since iOS 9 and macOS 10.11)
  -------------------------------------------------------------------------------------
  mat4  u_modelTransform                      // See SCNModelTransform
  mat4  u_viewTransform                       // See SCNViewTransform
@@ -175,9 +179,9 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
  4. fragment
  See below for a detailed explanation of these entry points and the context they provide.
  
- Shader modifiers can be written in GLSL or Metal. Metal shaders won't run on iOS8 and OS X 10.10 or below.
+ Shader modifiers can be written in GLSL or Metal. Metal shaders won't run on iOS 8 and macOS 10.10 or below.
  */
-@property(nonatomic, copy, nullable) NSDictionary<NSString *, NSString *> *shaderModifiers NS_AVAILABLE(10_9, 8_0);
+@property(nonatomic, copy, nullable) NSDictionary<SCNShaderModifierEntryPoint, NSString *> *shaderModifiers API_AVAILABLE(macosx(10.9));
 
 @end
 
@@ -186,13 +190,13 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
  @group Semantic options
  @abstract Valid keys for the option parameter of setSemantic:forSymbol:options:
  */
-SCN_EXTERN NSString * const SCNProgramMappingChannelKey;  /* This key is optional and may be used in association with the SCNGeometrySourceSemanticTexcoord semantic. It allows to associate a mapping channel from the geometry to a symbol from the program source code. The mapping channel allows to plug programs that work with multiple texture coordinates. The associated value must be a NSNumber(integer) greater than zero. */
+FOUNDATION_EXTERN NSString * const SCNProgramMappingChannelKey __WATCHOS_PROHIBITED; /* This key is optional and may be used in association with the SCNGeometrySourceSemanticTexcoord semantic. It allows to associate a mapping channel from the geometry to a symbol from the program source code. The mapping channel allows to plug programs that work with multiple texture coordinates. The associated value must be a NSNumber(integer) greater than zero. */
 
 /*!
  @class SCNProgram
  @abstract A SCNProgram lets you specify custom shaders to use when rendering materials.
  */
-NS_CLASS_AVAILABLE(10_8, 8_0)
+__WATCHOS_PROHIBITED
 @interface SCNProgram : NSObject <NSCopying, NSSecureCoding>
 
 /*!
@@ -217,33 +221,33 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @property tessellationControlShader
  @abstract Determines the receiver's tessellation control shader. Tessellation shaders require OpenGL Core Profile.
  */
-@property(nonatomic, copy, nullable) NSString *tessellationControlShader NS_AVAILABLE(10_10, NA);
+@property(nonatomic, copy, nullable) NSString *tessellationControlShader API_AVAILABLE(macosx(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
  @property tessellationEvaluationShader
  @abstract Determines the receiver's tessellation evaluation shader. Tessellation shaders require OpenGL Core Profile.
  */
-@property(nonatomic, copy, nullable) NSString *tessellationEvaluationShader NS_AVAILABLE(10_10, NA);
+@property(nonatomic, copy, nullable) NSString *tessellationEvaluationShader API_AVAILABLE(macosx(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
  @property geometryShader
  @abstract Determines the receiver's geometry shader. Geometry shaders require OpenGL Core Profile.
  */
-@property(nonatomic, copy, nullable) NSString *geometryShader NS_AVAILABLE(10_10, NA);
+@property(nonatomic, copy, nullable) NSString *geometryShader API_AVAILABLE(macosx(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
  @property vertexFunctionName
  @abstract Determines the receiver's vertex function name.
  @discussion The name of the vertex function (for Metal programs).
  */
-@property(nonatomic, copy, nullable) NSString *vertexFunctionName NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, copy, nullable) NSString *vertexFunctionName API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @property fragmentFunctionName
  @abstract Determines the receiver's fragment function name.
  @discussion The name of the fragment function (for Metal programs).
  */
-@property(nonatomic, copy, nullable) NSString *fragmentFunctionName NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, copy, nullable) NSString *fragmentFunctionName API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @method handleBindingOfBufferNamed:frequency:usingBlock:
@@ -253,14 +257,14 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param block The block that binds the buffer.
  @discussion This method can only be used with Metal based programs.
  */
-- (void)handleBindingOfBufferNamed:(NSString *)name frequency:(SCNBufferFrequency)frequency usingBlock:(SCNBufferBindingBlock)block NS_AVAILABLE(10_11, 9_0);
+- (void)handleBindingOfBufferNamed:(NSString *)name frequency:(SCNBufferFrequency)frequency usingBlock:(SCNBufferBindingBlock)block API_AVAILABLE(macosx(10.11), ios(9.0));
 
 
 /*!
  @property opaque
  @abstract Determines the receiver's fragment are opaque or not. Defaults to YES.
  */
-@property(nonatomic, getter=isOpaque) BOOL opaque NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, getter=isOpaque) BOOL opaque API_AVAILABLE(macosx(10.10));
 
 /*!
  @method setSemantic:forSymbol:options:
@@ -290,7 +294,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Specifies the metal library to use to locate the function names specified above. 
  @discussion If set to nil the default library is used. Defaults to nil.
  */
-@property(nonatomic, retain, nullable) id <MTLLibrary> library NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, retain, nullable) id <MTLLibrary> library API_AVAILABLE(macosx(10.11), ios(9.0));
 
 @end
 
@@ -298,6 +302,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @protocol SCNProgramDelegate
  @abstract The SCNProgramDelegate protocol declares the methods that an instance of SCNProgram invokes to delegate the binding of parameters.
  */
+__WATCHOS_PROHIBITED
 @protocol SCNProgramDelegate <NSObject>
 
 @optional
@@ -310,7 +315,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param programID The program object.
  @param renderer The renderer that is currently rendering the scene.
  */
-- (BOOL)program:(SCNProgram *)program bindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer NS_DEPRECATED(10_8, 10_10, NA, NA);
+- (BOOL)program:(SCNProgram *)program bindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer API_DEPRECATED("Use -[SCNShadable handleBindingOfSymbol:usingBlock:] instead", macosx(10.8, 10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @method program:withID:bindValueForSymbol:atLocation:renderer:
@@ -321,7 +326,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param programID The program object.
  @param renderer The renderer that is currently rendering the scene.
  */
-- (void)program:(SCNProgram *)program unbindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer NS_DEPRECATED(10_8, 10_10, NA, NA);
+- (void)program:(SCNProgram *)program unbindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer API_DEPRECATED("Use -[SCNShadable handleUnbindingOfSymbol:usingBlock:] instead", macosx(10.8, 10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @method handleError
@@ -338,7 +343,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param program The queried program.
  @discussion This is deprecated. Use SCNProgram's opaque property instead.
  */
-- (BOOL)programIsOpaque:(SCNProgram *)program NS_DEPRECATED(10_8, 10_10, NA, NA);
+- (BOOL)programIsOpaque:(SCNProgram *)program API_DEPRECATED("Use SCNProgram.opaque instead", macosx(10.8, 10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
@@ -346,6 +351,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @group Shader Modifier Entry Point
  @abstract Entry points designing the insertion point of the shader code snippet of a shader modifiers dictionary.
  */
+
 /*!
  @constant SCNShaderModifierEntryPointGeometry
  @abstract This is the entry point to operate on the geometry vertices, for example deforming them.
@@ -375,7 +381,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  uniform float Amplitude = 0.1
  _geometry.position.xyz += _geometry.normal * (Amplitude*_geometry.position.y*_geometry.position.x) * sin(u_time);
  */
-SCN_EXTERN NSString * const SCNShaderModifierEntryPointGeometry NS_AVAILABLE(10_9, 8_0);
+FOUNDATION_EXTERN SCNShaderModifierEntryPoint const SCNShaderModifierEntryPointGeometry API_AVAILABLE(macosx(10.9));
 
 /*!
  @constant SCNShaderModifierEntryPointSurface
@@ -388,6 +394,7 @@ SCN_EXTERN NSString * const SCNShaderModifierEntryPointGeometry NS_AVAILABLE(10_
  |    vec3 view;                // Direction from the point on the surface toward the camera (V)
  |    vec3 position;            // Position of the fragment
  |    vec3 normal;              // Normal of the fragment (N)
+ |    vec3 geometryNormal;      // Geometric normal of the fragment (normal map is ignored)
  |    vec3 tangent;             // Tangent of the fragment
  |    vec3 bitangent;           // Bitangent of the fragment
  |    vec4 ambient;             // Ambient property of the fragment
@@ -403,8 +410,12 @@ SCN_EXTERN NSString * const SCNShaderModifierEntryPointGeometry NS_AVAILABLE(10_
  |    vec4 transparent;         // Transparent property of the fragment
  |    vec2 transparentTexcoord; // Transparent texture coordinates
  |    vec4 reflective;          // Reflective property of the fragment
- |    float shininess;          // Shininess property of the fragment.
- |    float fresnel;            // Fresnel property of the fragment.
+ |    float metalness;          // Metalness property of the fragment
+ |    vec2 metalnessTexcoord;   // Metalness texture coordinates
+ |    float roughness;          // Roughness property of the fragment
+ |    vec2 roughnessTexcoord;   // Metalness texture coordinates
+ |    float shininess;          // Shininess property of the fragment
+ |    float fresnel;            // Fresnel property of the fragment
  | } _surface;
  |
  | Access: ReadWrite
@@ -427,7 +438,7 @@ SCN_EXTERN NSString * const SCNShaderModifierEntryPointGeometry NS_AVAILABLE(10_
  f1 = f1 * f1 * 2.0 * (3. * 2. * f1);
  _surface.diffuse = mix(vec4(1.0), vec4(0.0), f1);
  */
-SCN_EXTERN NSString * const SCNShaderModifierEntryPointSurface NS_AVAILABLE(10_9, 8_0);
+FOUNDATION_EXTERN SCNShaderModifierEntryPoint const SCNShaderModifierEntryPointSurface API_AVAILABLE(macosx(10.9));
 
 /*!
  @constant SCNShaderModifierEntryPointLightingModel
@@ -468,7 +479,7 @@ SCN_EXTERN NSString * const SCNShaderModifierEntryPointSurface NS_AVAILABLE(10_9
  dotProduct = max(0.0, pow(max(0.0, dot(_surface.normal, halfVector)), _surface.shininess));
  _lightingContribution.specular += (dotProduct * _light.intensity.rgb);
  */
-SCN_EXTERN NSString * const SCNShaderModifierEntryPointLightingModel NS_AVAILABLE(10_9, 8_0);
+FOUNDATION_EXTERN SCNShaderModifierEntryPoint const SCNShaderModifierEntryPointLightingModel API_AVAILABLE(macosx(10.9));
 
 /*!
  @constant SCNShaderModifierEntryPointFragment
@@ -493,6 +504,6 @@ SCN_EXTERN NSString * const SCNShaderModifierEntryPointLightingModel NS_AVAILABL
  
  _output.color.rgb = vec3(1.0) - _output.color.rgb;
  */
-SCN_EXTERN NSString * const SCNShaderModifierEntryPointFragment NS_AVAILABLE(10_9, 8_0);
+FOUNDATION_EXTERN SCNShaderModifierEntryPoint const SCNShaderModifierEntryPointFragment API_AVAILABLE(macosx(10.9));
 
 NS_ASSUME_NONNULL_END

@@ -3,6 +3,15 @@
 #ifndef __LA_LINEAR_SYSTEMS_HEADER__
 #define __LA_LINEAR_SYSTEMS_HEADER__
 
+#if __has_feature(assume_nonnull)
+////  If assume_nonnull is available, use it and use nullability qualifiers.
+_Pragma("clang assume_nonnull begin")
+#else
+////  Otherwise, neuter the nullability qualifiers.
+#define __nullable
+#define __nonnull
+#endif
+
 /*!
  @abstract
  Solves a system of linear equations
@@ -56,7 +65,11 @@
  occurs fairly frequently), you may accomplish this by transposing A and B,
  solving, and then transposing the result of the solve.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_solve(la_object_t matrix_system, la_object_t obj_rhs);
+
+#if __has_feature(assume_nonnull)
+_Pragma("clang assume_nonnull end")
+#endif
 
 #endif // __LA_ARITHMETIC_HEADER__

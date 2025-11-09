@@ -133,11 +133,11 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
     NSTextView *_firstTextView;
     
     // Cache for rectangle arrays
-    __strong NSRect *_cachedRectArray;
+    NSRect *_cachedRectArray;
     NSUInteger _cachedRectArrayCapacity;
     
     // Cache for glyph strings
-    __strong char *_glyphBuffer;
+    char *_glyphBuffer;
     NSUInteger _glyphBufferSize;
     
     // Cache for faster glyph location lookup
@@ -286,9 +286,9 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 @property(readonly) NSUInteger numberOfGlyphs;
 
 // If non-contiguous layout is not enabled, these will cause generation of all glyphs up to and including glyphIndex.  The first CGGlyphAtIndex variant returns kCGFontIndexInvalid if the requested index is out of the range (0, numberOfGlyphs), and optionally returns a flag indicating whether the requested index is in range.  The second CGGlyphAtIndex variant raises a NSRangeError if the requested index is out of range.
-- (CGGlyph)CGGlyphAtIndex:(NSUInteger)glyphIndex isValidIndex:(nullable BOOL *)isValidIndex;
-- (CGGlyph)CGGlyphAtIndex:(NSUInteger)glyphIndex;
-- (BOOL)isValidGlyphIndex:(NSUInteger)glyphIndex;
+- (CGGlyph)CGGlyphAtIndex:(NSUInteger)glyphIndex isValidIndex:(nullable BOOL *)isValidIndex NS_AVAILABLE(10_11,7_0);
+- (CGGlyph)CGGlyphAtIndex:(NSUInteger)glyphIndex NS_AVAILABLE(10_11,7_0);
+- (BOOL)isValidGlyphIndex:(NSUInteger)glyphIndex NS_AVAILABLE(10_11,7_0);
 
 // If non-contiguous layout is not enabled, this will cause generation of all glyphs up to and including glyphIndex.  It will return the glyph property associated with the glyph at the specified index.
 - (NSGlyphProperty)propertyForGlyphAtIndex:(NSUInteger)glyphIndex NS_AVAILABLE(10_5, 7_0);

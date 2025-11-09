@@ -1,5 +1,5 @@
 /*	Foundation.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 
@@ -16,11 +16,15 @@
 #import <Foundation/NSCoder.h>
 #import <Foundation/NSData.h>
 #import <Foundation/NSDate.h>
+#import <Foundation/NSDateInterval.h>
 #import <Foundation/NSDateFormatter.h>
 #import <Foundation/NSDateIntervalFormatter.h>
+#import <Foundation/NSISO8601DateFormatter.h>
 #import <Foundation/NSMassFormatter.h>
 #import <Foundation/NSLengthFormatter.h>
 #import <Foundation/NSEnergyFormatter.h>
+#import <Foundation/NSMeasurement.h>
+#import <Foundation/NSMeasurementFormatter.h>
 #import <Foundation/NSPersonNameComponents.h>
 #import <Foundation/NSPersonNameComponentsFormatter.h>
 #import <Foundation/NSDecimal.h>
@@ -73,6 +77,7 @@
 #import <Foundation/NSThread.h>
 #import <Foundation/NSTimeZone.h>
 #import <Foundation/NSTimer.h>
+#import <Foundation/NSUnit.h>
 #import <Foundation/NSURL.h>
 #import <Foundation/NSURLAuthenticationChallenge.h>
 #import <Foundation/NSURLCache.h>
@@ -175,3 +180,5 @@
 #import <Foundation/NSXPCConnection.h>
 
 #endif
+
+#import <Foundation/FoundationLegacySwiftCompatibility.h>

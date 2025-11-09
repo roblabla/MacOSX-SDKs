@@ -3,9 +3,9 @@
 
     Contains:   AltiVec DSP Interfaces
 
-    Version:    vecLib-563.3
+    Version:    vecLib-600.0
 
-    Copyright:  Copyright (c) 2000-2015 by Apple Inc. All rights reserved.
+    Copyright:  Copyright (c) 2000-2016 by Apple Inc. All rights reserved.
 
     For vDSP documentation, search for "vDSP" at <http://developer.apple.com>
     or search for one of the routine names below.
@@ -209,6 +209,22 @@ extern "C" {
 #endif
 
 
+/*  The following was reproduced from CFAvailability.h, with “CF” changed to
+    “vDSP”, to provide Swift-compatible enum declarations.  CFAvailability.h
+    itself is not included to creating a dependency on it in the kernel version
+    of vDSP.h, which cannot include CoreFoundation headers.
+*/
+#define __vDSP_ENUM_GET_MACRO(_1, _2, NAME, ...) NAME
+#if (__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
+#define __vDSP_NAMED_ENUM(_type, _name)     enum _name : _type _name; enum _name : _type
+#define __vDSP_ANON_ENUM(_type)             enum : _type
+#else
+#define __vDSP_NAMED_ENUM(_type, _name) _type _name; enum
+#define __vDSP_ANON_ENUM(_type) enum
+#endif
+#define vDSP_ENUM(...) __vDSP_ENUM_GET_MACRO(__VA_ARGS__, __vDSP_NAMED_ENUM, __vDSP_ANON_ENUM)(__VA_ARGS__)
+
+
 #if !defined __has_feature
     #define __has_feature(f)    0
 #endif
@@ -220,22 +236,6 @@ extern "C" {
 #endif
 
 
-/*  The following is reproduced from CFAvailability.h to provide
-    Swift-compatibility enum declarations.  CFAvailability.h itself is not
-    included to creating a dependency on it in the kernel version of vDSP.h,
-    which cannot include CoreFoundation headers.
-*/
-#define __CF_ENUM_GET_MACRO(_1, _2, NAME, ...) NAME
-#if (__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
-#define __CF_NAMED_ENUM(_type, _name)     enum _name : _type _name; enum _name : _type
-#define __CF_ANON_ENUM(_type)             enum : _type
-#else
-#define __CF_NAMED_ENUM(_type, _name) _type _name; enum
-#define __CF_ANON_ENUM(_type) enum
-#endif
-#define CF_ENUM(...) __CF_ENUM_GET_MACRO(__VA_ARGS__, __CF_NAMED_ENUM, __CF_ANON_ENUM)(__VA_ARGS__)
-
-
 #pragma options align=power
 
 
@@ -244,8 +244,8 @@ extern "C" {
     vDSP_Version0 is a major version number.
     vDSP_Version1 is a minor version number.
 */
-#define vDSP_Version0   563
-#define vDSP_Version1   3
+#define vDSP_Version0   600
+#define vDSP_Version1   0
 
 
 /*  Define types:
@@ -868,7 +868,7 @@ extern void vDSP_zvabs(
 extern void vDSP_vfill(
     const float *__A,
     float       *__C,
-    vDSP_Stride  __IA,
+    vDSP_Stride  __IC,
     vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.

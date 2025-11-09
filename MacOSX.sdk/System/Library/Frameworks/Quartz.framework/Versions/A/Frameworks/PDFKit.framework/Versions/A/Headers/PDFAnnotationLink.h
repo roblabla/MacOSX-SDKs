@@ -3,17 +3,18 @@
 // =====================================================================================================================
 
 
-#import <AppKit/AppKit.h>
+#import <PDFKit/PDFKitPlatform.h>
 #import <PDFKit/PDFAnnotation.h>
 
 
 @class PDFDestination, PDFAnnotationLinkPrivateVars;
 
 
+NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
 @interface PDFAnnotationLink : PDFAnnotation <NSCopying>
 {
 @private
-    PDFAnnotationLinkPrivateVars *_pdfPriv2;
+    PDFAnnotationLinkPrivateVars *_private2;
 }
 
 // Destination for the link. May be nil if no destination associated with link; in this case the -[URL] may be valid.

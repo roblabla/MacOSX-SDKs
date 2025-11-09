@@ -1,19 +1,18 @@
 //
 //  GKGraph.h
-//  GameLogic
+//  GameplayKit
 //
 //  Copyright (c) 2014 Apple. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "GameplayKit.h"
+#import <GameplayKit/GameplayKitBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  * A node in a directed graph. Edges are directed and can have variable costs.
  */
-GK_BASE_AVAILABILITY @interface GKGraphNode : NSObject
+GK_BASE_AVAILABILITY @interface GKGraphNode : NSObject <NSCoding>
 
 /**
  * List of other graph nodes that this node has an edge leading to.
@@ -72,20 +71,31 @@ GK_BASE_AVAILABILITY @interface GKGraphNode2D : GKGraphNode
 @property (nonatomic) vector_float2 position;
 
 + (instancetype)nodeWithPoint:(vector_float2)point;
-- (instancetype)initWithPoint:(vector_float2)point NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithPoint:(vector_float2)point;
 
 @end
 
+/**
+ * GKGraphNode coupled with a 3D position
+ */
+GK_BASE_AVAILABILITY_2 @interface GKGraphNode3D : GKGraphNode
+
+@property (nonatomic) vector_float3 position;
+
++ (instancetype)nodeWithPoint:(vector_float3)point;
+- (instancetype)initWithPoint:(vector_float3)point;
+
+@end
 
 /**
  * GKGraphNode coupled with a position on a 2D grid
  */
 GK_BASE_AVAILABILITY @interface GKGridGraphNode : GKGraphNode
 
-@property (nonatomic) vector_int2 gridPosition;
+@property (nonatomic, readonly) vector_int2 gridPosition;
 
 + (instancetype)nodeWithGridPosition:(vector_int2)gridPosition;
-- (instancetype)initWithGridPosition:(vector_int2)gridPosition NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithGridPosition:(vector_int2)gridPosition;
 
 @end
 

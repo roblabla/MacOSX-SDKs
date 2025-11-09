@@ -35,7 +35,7 @@
     #include <CoreFoundation.h>
 #endif
 
-#if defined(__BLOCKS__) && !TARGET_OS_IPHONE
+#if defined(__BLOCKS__)
     #include <dispatch/dispatch.h>
 #endif
 
@@ -145,6 +145,10 @@ typedef struct OpaqueAudioQueueTimeline *   AudioQueueTimelineRef;
     @constant   kAudioQueueErr_BufferEnqueuedTwice  A buffer was enqueued twice on an input queue
                                                     (before being returned as a result of being filled
                                                     or from Reset).
+    @constant   kAudioQueueErr_CannotStartYet       Starting the audio queue failed because an internal
+                                                    reconfiguration (typically initiated by a hardware
+                                                    stream format or sample rate change) was in progress.
+                                                    Sleeping briefly and retrying is recommended.
     @constant   kAudioQueueErr_EnqueueDuringReset   During Reset, Stop, or Dispose, it is not
                                                     permitted to enqueue buffers.
     @constant   kAudioQueueErr_InvalidOfflineMode   The operation requires the queue to be in
@@ -175,6 +179,7 @@ CF_ENUM(OSStatus) {
     kAudioQueueErr_RecordUnderrun       = -66668,
     kAudioQueueErr_InvalidTapType       = -66667,
     kAudioQueueErr_BufferEnqueuedTwice  = -66666,
+    kAudioQueueErr_CannotStartYet       = -66665,
     kAudioQueueErr_EnqueueDuringReset   = -66632,
     kAudioQueueErr_InvalidOfflineMode   = -66626,
 };
@@ -197,6 +202,9 @@ CF_ENUM(OSStatus) {
     @constant   kAudioQueueProperty_CurrentDevice
         A read/write property whose value is a CFStringRef that contains the unique identifier
         (UID) of the associated audio device.
+		If the audio queue is tracking the default system device and the device changes, it will
+		generate a property changed notification for this property. You can then query the HAL 
+		for info on the new default system device.
     @constant   kAudioQueueProperty_MagicCookie
         A read/write property whose value is an audio format magic cookie. If the audio format
         requires a magic cookie, you must set this property before enqueuing any buffers.
@@ -494,7 +502,7 @@ typedef struct OpaqueAudioQueueProcessingTap *   AudioQueueProcessingTapRef;
 //  CALLBACKS
 //==================================================================================================
 
-#if defined(__BLOCKS__) && !TARGET_OS_IPHONE
+#if defined(__BLOCKS__)
 /*!
     @typedef    AudioQueueOutputCallbackBlock
     @abstract   Defines a pointer to a block that is called when a playback audio
@@ -543,7 +551,7 @@ typedef void (^AudioQueueInputCallbackBlock)(
                                     const AudioTimeStamp *          inStartTime,
                                     UInt32                          inNumberPacketDescriptions,
                                     const AudioStreamPacketDescription * __nullable inPacketDescs);
-#endif // defined(__BLOCKS__) && !TARGET_OS_IPHONE
+#endif // defined(__BLOCKS__)
 
 /*!
     @typedef    AudioQueueOutputCallback
@@ -825,7 +833,7 @@ AudioQueueNewInput(                 const AudioStreamBasicDescription *inFormat,
                                     UInt32                          inFlags,
                                     AudioQueueRef __nullable * __nonnull outAQ)          __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
-#if defined(__BLOCKS__) && !TARGET_OS_IPHONE
+#if defined(__BLOCKS__)
 /*!
     @function   AudioQueueNewOutputWithDispatchQueue
     @abstract   Creates a new audio queue for playing audio data.
@@ -855,7 +863,7 @@ AudioQueueNewOutputWithDispatchQueue(AudioQueueRef __nullable * __nonnull outAQ,
                                     const AudioStreamBasicDescription *inFormat,
                                     UInt32                          inFlags,
                                     dispatch_queue_t                inCallbackDispatchQueue,
-                                    AudioQueueOutputCallbackBlock   inCallbackBlock)        __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA);
+                                    AudioQueueOutputCallbackBlock   inCallbackBlock)        __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_10_0);
 
 /*!
     @function   AudioQueueNewInputWithDispatchQueue
@@ -889,8 +897,8 @@ AudioQueueNewInputWithDispatchQueue(AudioQueueRef __nullable * __nonnull outAQ,
                                     const AudioStreamBasicDescription *inFormat,
                                     UInt32                          inFlags,
                                     dispatch_queue_t                inCallbackDispatchQueue,
-                                    AudioQueueInputCallbackBlock    inCallbackBlock)        __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA);
-#endif // defined(__BLOCKS__) && !TARGET_OS_IPHONE
+                                    AudioQueueInputCallbackBlock    inCallbackBlock)        __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_10_0);
+#endif // defined(__BLOCKS__)
 
 /*!
     @function   AudioQueueDispose
@@ -944,8 +952,8 @@ AudioQueueAllocateBuffer(           AudioQueueRef           inAQ,
                                     AudioQueueBufferRef __nullable * __nonnull outBuffer)              __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
-    @function   AudioQueueAllocateBuffer
-    @abstract   Asks an audio queue to allocate a buffer.
+    @function   AudioQueueAllocateBufferWithPacketDescriptions
+    @abstract   Asks an audio queue to allocate a buffer with space for packet descriptions.
     @discussion
         Once allocated, the pointer to the buffer and the buffer's size are fixed and cannot be
         changed. The mAudioDataByteSize field in the audio queue buffer structure,

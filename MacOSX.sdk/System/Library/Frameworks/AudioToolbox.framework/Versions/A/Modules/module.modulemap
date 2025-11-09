@@ -1,4 +1,4 @@
-framework module AudioToolbox [extern_c] {
+framework module AudioToolbox [extern_c] [system] {
 	umbrella header "AudioToolbox.h"
 
 	export *
@@ -6,4 +6,5 @@ framework module AudioToolbox [extern_c] {
 	module * { export * }
 
 	explicit module DefaultAudioOutput { header "DefaultAudioOutput.h" export * }
+	explicit module AUCocoaUIView { header "AUCocoaUIView.h" export * }
 }

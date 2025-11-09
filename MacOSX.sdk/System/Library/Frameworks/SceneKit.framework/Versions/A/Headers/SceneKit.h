@@ -1,16 +1,13 @@
 //
 //  SceneKit.h
 //
-//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
 //
 
 /*! @framework SceneKit
     @abstract A high-level 3D scene framework.
     @discussion SceneKit lets you easily load, manipulate, and render 3D scenes.
  */
-
-//base
-#import <SceneKit/SCNBase.h>
 
 //types
 #import <SceneKit/SceneKitTypes.h>
@@ -51,10 +48,7 @@
 #import <SceneKit/SCNTechnique.h>
 #import <SceneKit/SCNReferenceNode.h>
 #import <SceneKit/SCNAudioSource.h>
-
-//bridges
-#import <SceneKit/SceneKit_simd.h>
+#import <SceneKit/SCNHitTest.h>
 
 //scripting
 #import <SceneKit/SCNJavascript.h>
-

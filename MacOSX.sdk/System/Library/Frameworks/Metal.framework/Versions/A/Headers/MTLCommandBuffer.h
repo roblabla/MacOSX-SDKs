@@ -70,6 +70,7 @@ MTL_EXTERN NSString *const MTLCommandBufferErrorDomain;
  @constant MTLCommandBufferErrorNotPermitted This process does not have access to use this device.
  @constant MTLCommandBufferErrorOutOfMemory Insufficient memory was available to execute this command buffer.
  @constant MTLCommandBufferErrorInvalidResource The command buffer referenced an invalid resource.  This is most commonly caused when the caller deletes a resource before executing a command buffer that refers to it.
+ @constant MTLCommandBufferErrorMemoryless One or more internal resources limits reached that prevent using memoryless render pass attachments. See error string for more detail.
  */
 typedef NS_ENUM(NSUInteger, MTLCommandBufferError)
 {
@@ -81,6 +82,7 @@ typedef NS_ENUM(NSUInteger, MTLCommandBufferError)
     MTLCommandBufferErrorNotPermitted = 7,
     MTLCommandBufferErrorOutOfMemory = 8,
     MTLCommandBufferErrorInvalidResource = 9,
+    MTLCommandBufferErrorMemoryless NS_AVAILABLE_IOS(10_0) = 10 ,
 } NS_ENUM_AVAILABLE(10_11, 8_0);
 
 typedef void (^MTLCommandBufferHandler)(id <MTLCommandBuffer>);
@@ -146,6 +148,7 @@ NS_AVAILABLE(10_11, 8_0)
  */
 - (void)presentDrawable:(id <MTLDrawable>)drawable atTime:(CFTimeInterval)presentationTime;
 
+
 /*!
  @method waitUntilScheduled
  @abstract Synchronously wait for this command buffer to be scheduled.
@@ -183,7 +186,7 @@ NS_AVAILABLE(10_11, 8_0)
 - (id <MTLBlitCommandEncoder>)blitCommandEncoder;
 
 /*!
- @method renderCommandEncoderWithFramebuffer:
+ @method renderCommandEncoderWithDescriptor:
  @abstract returns a render command endcoder to encode into this command buffer.
  */
 - (id <MTLRenderCommandEncoder>)renderCommandEncoderWithDescriptor:(MTLRenderPassDescriptor *)renderPassDescriptor;
@@ -194,8 +197,9 @@ NS_AVAILABLE(10_11, 8_0)
  */
 - (id <MTLComputeCommandEncoder>)computeCommandEncoder;
 
+
 /*!
- @method parallelRenderCommandEncoderWithFramebuffer:
+ @method parallelRenderCommandEncoderWithDescriptor:
  @abstract returns a parallel render pass encoder to encode into this command buffer.
  */
 - (id <MTLParallelRenderCommandEncoder>)parallelRenderCommandEncoderWithDescriptor:(MTLRenderPassDescriptor *)renderPassDescriptor;

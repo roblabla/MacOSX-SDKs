@@ -33,6 +33,10 @@
 .Fa "xpc_handler_t handler"
 .Fc
 .Ft void
+.Fo xpc_connection_activate
+.Fa "xpc_connection_t connection"
+.Fc
+.Ft void
 .Fo xpc_connection_suspend
 .Fa "xpc_connection_t connection"
 .Fc
@@ -232,21 +236,21 @@ cannot be re-created by the XPC runtime, and therefore they will never deliver
 the
 .Ft XPC_ERROR_CONNECTION_INTERRUPTED
 error to their event handlers.
-.Sh SUSPEND AND RESUME
-All connections are created in a suspended state. Therefore, they will not begin
+.Sh ACTIVATE, SUSPEND AND RESUME
+All connections are created in an inactive state. Therefore, they will not begin
 processing messages or events until an initial call to
-.Fn xpc_connection_resume .
-Before making this first call to resume the connection, the caller must set an
-event handler using
+.Fn xpc_connection_activate
+is made.
+Before activating the connection, the caller must set an event handler using
 .Fn xpc_connection_set_event_handler .
-Note that the initial resume does not need to immediately follow setting the
-event handler. The caller is free to delay the initial resume as long as it
+Note that the activation does not need to immediately follow setting the
+event handler. The caller is free to delay the activation as long as it
 chooses.
 .Pp
-Once a connection has been resumed, it may be suspended to halt the processing
-of incoming events and outgoing messages. This behavior is useful to rate-limit
-or throttle over-active clients who are sending too many messages or to allow
-certain synchronization behaviors with the internal state engine.
+A connection may be suspended to halt the processing of incoming events and
+outgoing messages. This behavior is useful to rate-limit or throttle over-active
+clients who are sending too many messages or to allow certain synchronization
+behaviors with the internal state engine.
 .Pp
 Each connection maintains a suspend count, so
 .Fn xpc_connection_suspend
@@ -262,7 +266,7 @@ calls to
 must be balanced by a call to
 .Fn xpc_connection_resume
 before the final reference on a connection is released. It is not valid to
-release the last reference on a suspended connection.
+release the last reference on a suspended or inactive connection.
 .Pp
 .Em Important :
 It is invalid to underflow the suspend count by calling
@@ -270,6 +274,15 @@ It is invalid to underflow the suspend count by calling
 more times than
 .Fn xpc_connection_suspend
 has been called.
+.Pp
+.Em Backward compatibility :
+For backward compatibility reasons, calling
+.Fn xpc_connection_resume
+on an inactive connection that is not otherwise suspended behaves like a call to
+.Fn xpc_connection_activate .
+This behavior is referred to as the
+.Em initial resume
+of the connection in older XPC documentation.
 .Sh CONTEXT
 Connections may have associated context that can be set and retrieved using the
 .Fn xpc_connection_set_context
@@ -380,7 +393,8 @@ block will be submitted to the supplied
 instead of causing the connection's event handler to be invoked. The reply
 handler block may deliver an error to the caller, which indicates that the
 remote end will never send a reply.
-.Pp The remote end must create the reply message by calling
+.Pp
+The remote end must create the reply message by calling
 .Xr xpc_dictionary_create_reply 3
 and sending it to its peer connection as it normally would. The caller must,
 in turn, specify in the message itself whether it expects a reply to be
@@ -633,9 +647,9 @@ main(void)
 		xpc_connection_set_event_handler(peer, ^(xpc_object_t event) {
 			// Handle event, whether it is a message or an error.
 		});
-		xpc_connection_resume(peer);
+		xpc_connection_activate(peer);
 	});
-	xpc_connection_resume(listener);
+	xpc_connection_activate(listener);
 
 	dispatch_main();
 	exit(EXIT_FAILURE);

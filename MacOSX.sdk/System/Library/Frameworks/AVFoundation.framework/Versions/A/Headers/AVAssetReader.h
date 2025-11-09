@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2016 Apple Inc. All rights reserved.
 
 */
 
@@ -78,7 +78,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any asset reading operation are undefined if you mutate the asset after invoking -startReading.
  */
-+ (nullable instancetype)assetReaderWithAsset:(AVAsset *)asset error:(NSError * __nullable * __nullable)outError;
++ (nullable instancetype)assetReaderWithAsset:(AVAsset *)asset error:(NSError * _Nullable * _Nullable)outError;
 
 /*!
  @method initWithAsset:error:
@@ -94,7 +94,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any asset reading operation are undefined if you mutate the asset after invoking -startReading.
  */
-- (nullable instancetype)initWithAsset:(AVAsset *)asset error:(NSError * __nullable * __nullable)outError NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithAsset:(AVAsset *)asset error:(NSError * _Nullable * _Nullable)outError NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property asset

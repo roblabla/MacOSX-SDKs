@@ -1,5 +1,5 @@
 /*  NSIndexPath.h
-    Copyright (c) 2003-2015, Apple Inc. All rights reserved.
+    Copyright (c) 2003-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSIndexPath : NSObject <NSCopying, NSSecureCoding> {
 	@private
-	__strong NSUInteger *_indexes;
+	NSUInteger *_indexes;
 #if !__OBJC2__
 	NSUInteger _hash;
 #endif

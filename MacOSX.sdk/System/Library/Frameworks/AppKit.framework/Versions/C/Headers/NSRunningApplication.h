@@ -1,7 +1,7 @@
 /*
 	NSRunningApplication.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -56,9 +56,9 @@ typedef NS_ENUM(NSInteger, NSApplicationActivationPolicy) {
 NS_CLASS_AVAILABLE(10_6, NA)
 @interface NSRunningApplication : NSObject {
     @private
-    id _superReserved;
-    __strong void *_asn;
-    __strong void **_helpers;
+    id _superReserved __unused;
+    void *_asn;
+    void **_helpers;
     id _obsInfo;
     NSLock *_lock;
     NSString *_bundleID;
@@ -84,7 +84,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 	unsigned activationPolicy:3;
         unsigned reserved1:19;
     } _aflags;
-    id _appReserved;
+    id _appReserved __unused;
 }
 
 /* Indicates that the process is an exited application.  This is observable through KVO. */

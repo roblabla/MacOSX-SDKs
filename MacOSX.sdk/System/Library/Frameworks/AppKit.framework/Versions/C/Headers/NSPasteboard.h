@@ -1,7 +1,7 @@
 /*
 	NSPasteboard.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -43,6 +43,12 @@ APPKIT_EXTERN NSString *NSRulerPboard;
 APPKIT_EXTERN NSString *NSFindPboard;
 APPKIT_EXTERN NSString *NSDragPboard;
 
+/* Options for prepareForNewContentsWithOptions: */
+
+typedef NS_OPTIONS(NSUInteger, NSPasteboardContentsOptions) {
+    NSPasteboardContentsCurrentHostOnly = 1 << 0, // Specifies that the pasteboard contents should not be available to other devices
+} NS_ENUM_AVAILABLE_MAC(10_12);
+
 
 /* An NSPasteboard can contain multiple items.  Any object that implements the NSPasteboardWriting and NSPasteboardReading protocols can be written and read on the pasteboard directly.  This allows common pasteboard classes such as URLs, colors, images, strings, attributed strings, and sounds to be written and read without an intermediary object.  The custom classes of an application can also implement these protocols for use with the pasteboard.
 */
@@ -61,7 +67,7 @@ APPKIT_EXTERN NSString *NSDragPboard;
     NSMutableDictionary *_promiseTypeNamesByIdentifier;
     id			_support;	
     id			_pasteboardItems;
-    void *		_reserved[3];
+    void *		_reserved[3] __unused;
 }
 
 + (NSPasteboard *)generalPasteboard;
@@ -74,8 +80,11 @@ APPKIT_EXTERN NSString *NSDragPboard;
 
 - (oneway void)releaseGlobally;
 
+/* Prepares the pasteboard for new contents, clearing the existing contents of the pasteboard. This is the first step in providing data on the pasteboard. Any options specified will persist until prepareForNewContentsWithOptions: or clearContents is called. Returns the change count of the pasteboard.
+ */
+- (NSInteger)prepareForNewContentsWithOptions:(NSPasteboardContentsOptions)options NS_SWIFT_NAME(prepareForNewContents(with:)) NS_AVAILABLE_MAC(10_12);
 
-/* Clears the existing contents of the pasteboard, preparing it for new contents.  This is the first step in providing data on the pasteboard.  Returns the change count of the pasteboard.
+/* Prepares the pasteboard for new contents, clearing the existing contents of the pasteboard.  This is equivalent to calling prepareForNewContentsWithOptions: with no options.  Returns the change count of the pasteboard.
 */
 - (NSInteger)clearContents NS_AVAILABLE_MAC(10_6);
 

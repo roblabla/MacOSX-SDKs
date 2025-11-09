@@ -1,8 +1,10 @@
 //
 //  SCNBoundingVolume.h
 //
-//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
 //
+
+#import <SceneKit/SceneKitTypes.h>
 
 /*!
  @protocol SCNBoundingVolume
@@ -21,15 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param min A pointer to a SCNVector3 to store the min vertex of the bounding box into.
  @param max A pointer to a SCNVector3 to store the max vertex of the bounding box into.
  */
-- (BOOL)getBoundingBoxMin:(nullable SCNVector3 *)min max:(nullable SCNVector3 *)max;
-
-/*!
- @method getBoundingSphereCenter:radius:
- @abstract Fill the center vector with the center of the bounding sphere and store the radius of the bounding sphere in 'radius'.
- @param center A pointer to a SCNVector3 to store the center of the bounding sphere into.
- @param radius A pointer to a CGFloat to store the radius of the bounding sphere into.
- */
-- (BOOL)getBoundingSphereCenter:(nullable SCNVector3 *)center radius:(nullable CGFloat *)radius;
+- (BOOL)getBoundingBoxMin:(nullable SCNVector3 *)min max:(nullable SCNVector3 *)max NS_REFINED_FOR_SWIFT;
 
 /*!
  @method setBoundingBoxMin:max:
@@ -38,7 +32,15 @@ NS_ASSUME_NONNULL_BEGIN
  @param max A pointer to a SCNVector3 representing the max vertex of the desired bounding box.
  @discussion Passing nil as arguments will recompute the original bounding box of the receiver.
  */
-- (void)setBoundingBoxMin:(nullable SCNVector3 *)min max:(nullable SCNVector3 *)max NS_AVAILABLE(10_9, 8_0);
+- (void)setBoundingBoxMin:(nullable SCNVector3 *)min max:(nullable SCNVector3 *)max API_AVAILABLE(macosx(10.9)) NS_REFINED_FOR_SWIFT;
+
+/*!
+ @method getBoundingSphereCenter:radius:
+ @abstract Fill the center vector with the center of the bounding sphere and store the radius of the bounding sphere in 'radius'.
+ @param center A pointer to a SCNVector3 to store the center of the bounding sphere into.
+ @param radius A pointer to a CGFloat to store the radius of the bounding sphere into.
+ */
+- (BOOL)getBoundingSphereCenter:(nullable SCNVector3 *)center radius:(nullable CGFloat *)radius NS_REFINED_FOR_SWIFT;
 
 @end
 

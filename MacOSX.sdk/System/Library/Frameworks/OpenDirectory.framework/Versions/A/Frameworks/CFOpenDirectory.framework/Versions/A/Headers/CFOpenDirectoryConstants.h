@@ -227,7 +227,7 @@ typedef CFStringRef ODAuthenticationType;
 	@abstract   is used to modify policies on nodes or records
 	@discussion is used to modify policies on nodes or records
 */
-#ifdef __OBJC_
+#ifdef __OBJC__
 typedef NSString *ODPolicyType;
 #else
 typedef CFStringRef ODPolicyType;

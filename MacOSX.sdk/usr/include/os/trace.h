@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2013-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -30,6 +30,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdarg.h>
+#include <mach-o/loader.h>
 #if __has_include(<xpc/xpc.h>)
 #include <xpc/xpc.h>
 #else
@@ -40,395 +41,86 @@ typedef void *xpc_object_t;
 #error "must be GNU C compatible"
 #endif
 
-extern void *__dso_handle;
+__BEGIN_DECLS
 
-OS_ALWAYS_INLINE
-static inline void
-_os_trace_verify_printf(const char *msg, ...) __attribute__((format(printf, 1, 2)))
-{
-#pragma unused(msg)
-}
+extern struct mach_header __dso_handle;
 
 #if !defined OS_COUNT_ARGS
 #define OS_COUNT_ARGS(...) OS_COUNT_ARGS1(, ##__VA_ARGS__, _8, _7, _6, _5, _4, _3, _2, _1, _0)
 #define OS_COUNT_ARGS1(z, a, b, c, d, e, f, g, h, cnt, ...) cnt
 #endif
 
-#define _os_trace_0(_l, _m, _t) __extension__({ \
-	_os_trace_verify_printf(_l); \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, NULL, 0, NULL); \
-	__asm__(""); /* avoid tailcall */ \
-})
+static inline void
+_os_trace_verify_printf(const char *msg, ...) __attribute__((format(os_trace, 1, 2)));
 
-#define _os_trace_1(_l, _m, _t, _1) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	_os_trace_verify_printf(_l, _c1); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		unsigned char _s[2]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._s[1] = 1, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), NULL); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
-})
+OS_ALWAYS_INLINE
+static inline void
+_os_trace_verify_printf(const char *msg, ...)
+{
+#pragma unused(msg)
+}
 
-#define _os_trace_2(_l, _m, _t, _1, _2) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	const __typeof__(_2) _c2 = _2; \
-	_os_trace_verify_printf(_l, _c1, _c2); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		__typeof__(_c2) _f2; \
-		unsigned char _s[3]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._f2 = _c2, ._s[1] = sizeof(_c2), \
-		._s[2] = 2, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), NULL); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
-})
+/* We need at least clang 7.3 or later due to bugs in os_log_format parsing */
+#if __has_builtin(__builtin_os_log_format) && (__clang_major__ > 7 || (__clang_major__ == 7 && __clang_minor__ >= 3))
 
-#define _os_trace_3(_l, _m, _t, _1, _2, _3) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	const __typeof__(_2) _c2 = _2; \
-	const __typeof__(_3) _c3 = _3; \
-	_os_trace_verify_printf(_l, _c1, _c2, _c3); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		__typeof__(_c2) _f2; \
-		__typeof__(_c3) _f3; \
-		unsigned char _s[4]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._f2 = _c2, ._s[1] = sizeof(_c2), \
-		._f3 = _c3, ._s[2] = sizeof(_c3), \
-		._s[3] = 3, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), NULL); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
-})
+/* Previous OSes must go through older style...
+ *
+ * Format:
+ *      Items: [ ]
+ *      Item sizes: [
+ *          8 bits * count
+ *      ]
+ *      Item count: 8 bits
+ */
 
-#define _os_trace_4(_l, _m, _t, _1, _2, _3, _4) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	const __typeof__(_2) _c2 = _2; \
-	const __typeof__(_3) _c3 = _3; \
-	const __typeof__(_4) _c4 = _4; \
-	_os_trace_verify_printf(_l, _c1, _c2, _c3, _c4); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		__typeof__(_c2) _f2; \
-		__typeof__(_c3) _f3; \
-		__typeof__(_c4) _f4; \
-		unsigned char _s[5]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._f2 = _c2, ._s[1] = sizeof(_c2), \
-		._f3 = _c3, ._s[2] = sizeof(_c3), \
-		._f4 = _c4, ._s[3] = sizeof(_c4), \
-		._s[4] = 4, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), NULL); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
+#define OS_TRACE_CALL(_t, _p, _f, ...) __extension__({ \
+    if (os_trace_type_enabled(_t)) { \
+        _os_trace_verify_printf(_f, ##__VA_ARGS__); \
+        __attribute__((section("__TEXT,__oslogstring,cstring_literals"),internal_linkage)) static const char __f[] __asm(OS_STRINGIFY(OS_CONCAT(LOSTRACE_, __COUNTER__))) = _f; \
+        unsigned int __size = (unsigned int) __builtin_os_log_format_buffer_size(_f, ##__VA_ARGS__); \
+        uint8_t _buf[__size]; \
+        __builtin_os_log_format(_buf, _f, ##__VA_ARGS__); \
+        unsigned int tz = 0; \
+        uint8_t tb[__size]; \
+        uint8_t *buff = _buf; \
+        uint8_t *p = ++buff; \
+        uint8_t count = *p++; \
+        uint8_t trailer[count + 1]; \
+        trailer[count] = count; \
+        for (uint8_t ii = 0; ii < count; ii++) { \
+            uint8_t desc = *p++; \
+            uint8_t size = *p++; \
+            uint8_t *value = p; \
+            p += size; \
+            if ((desc >> 4) || (desc & 0x1)) { \
+                size = 0;\
+            }\
+            if (size) {\
+                memcpy(&tb[tz], value, size);\
+                tz += size;\
+            }\
+            trailer[ii] = size;\
+        }\
+        memcpy(&tb[tz], trailer, sizeof(trailer));\
+        tz += sizeof(trailer);\
+        _os_trace_with_buffer(&__dso_handle, __f, _t, tb, tz, _p);\
+    } \
 })
+#else
+#define OS_TRACE_CALL(...)
+#endif
 
-#define _os_trace_5(_l, _m, _t, _1, _2, _3, _4, _5) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	const __typeof__(_2) _c2 = _2; \
-	const __typeof__(_3) _c3 = _3; \
-	const __typeof__(_4) _c4 = _4; \
-	const __typeof__(_5) _c5 = _5; \
-	_os_trace_verify_printf(_l, _c1, _c2, _c3, _c4, _c5); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		__typeof__(_c2) _f2; \
-		__typeof__(_c3) _f3; \
-		__typeof__(_c4) _f4; \
-		__typeof__(_c5) _f5; \
-		unsigned char _s[6]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._f2 = _c2, ._s[1] = sizeof(_c2), \
-		._f3 = _c3, ._s[2] = sizeof(_c3), \
-		._f4 = _c4, ._s[3] = sizeof(_c4), \
-		._f5 = _c5, ._s[4] = sizeof(_c5), \
-		._s[5] = 5, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), NULL); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
-})
+// macros to re-order arguments so we can call log function
+#define _os_trace_with_payload_1(_t, _f, _p) OS_TRACE_CALL(_t, _p, _f)
+#define _os_trace_with_payload_2(_t, _f, _1, _p) OS_TRACE_CALL(_t, _p, _f, _1)
+#define _os_trace_with_payload_3(_t, _f, _1, _2, _p) OS_TRACE_CALL(_t, _p, _f, _1, _2)
+#define _os_trace_with_payload_4(_t, _f, _1, _2, _3, _p) OS_TRACE_CALL(_t, _p, _f, _1, _2, _3)
+#define _os_trace_with_payload_5(_t, _f, _1, _2, _3, _4, _p) OS_TRACE_CALL(_t, _p, _f, _1, _2, _3, _4)
+#define _os_trace_with_payload_6(_t, _f, _1, _2, _3, _4, _5, _p) OS_TRACE_CALL(_t, _p, _f, _1, _2, _3, _4, _5)
+#define _os_trace_with_payload_7(_t, _f, _1, _2, _3, _4, _5, _6, _p) OS_TRACE_CALL(_t, _p, _f, _1, _2, _3, _4, _5, _6)
+#define _os_trace_with_payload_8(_t, _f, _1, _2, _3, _4, _5, _6, _7, _p) OS_TRACE_CALL(_t, _p, _f, _1, _2, _3, _4, _5, _6, _7)
 
-#define _os_trace_6(_l, _m, _t, _1, _2, _3, _4, _5, _6) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	const __typeof__(_2) _c2 = _2; \
-	const __typeof__(_3) _c3 = _3; \
-	const __typeof__(_4) _c4 = _4; \
-	const __typeof__(_5) _c5 = _5; \
-	const __typeof__(_6) _c6 = _6; \
-	_os_trace_verify_printf(_l, _c1, _c2, _c3, _c4, _c5, _c6); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		__typeof__(_c2) _f2; \
-		__typeof__(_c3) _f3; \
-		__typeof__(_c4) _f4; \
-		__typeof__(_c5) _f5; \
-		__typeof__(_c6) _f6; \
-		unsigned char _s[7]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._f2 = _c2, ._s[1] = sizeof(_c2), \
-		._f3 = _c3, ._s[2] = sizeof(_c3), \
-		._f4 = _c4, ._s[3] = sizeof(_c4), \
-		._f5 = _c5, ._s[4] = sizeof(_c5), \
-		._f6 = _c6, ._s[5] = sizeof(_c6), \
-		._s[6] = 6, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), NULL); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
-})
-
-#define _os_trace_7(_l, _m, _t, _1, _2, _3, _4, _5, _6, _7) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	const __typeof__(_2) _c2 = _2; \
-	const __typeof__(_3) _c3 = _3; \
-	const __typeof__(_4) _c4 = _4; \
-	const __typeof__(_5) _c5 = _5; \
-	const __typeof__(_6) _c6 = _6; \
-	const __typeof__(_7) _c7 = _7; \
-	_os_trace_verify_printf(_l, _c1, _c2, _c3, _c4, _c5, _c6, _c7); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		__typeof__(_c2) _f2; \
-		__typeof__(_c3) _f3; \
-		__typeof__(_c4) _f4; \
-		__typeof__(_c5) _f5; \
-		__typeof__(_c6) _f6; \
-		__typeof__(_c7) _f7; \
-		unsigned char _s[8]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._f2 = _c2, ._s[1] = sizeof(_c2), \
-		._f3 = _c3, ._s[2] = sizeof(_c3), \
-		._f4 = _c4, ._s[3] = sizeof(_c4), \
-		._f5 = _c5, ._s[4] = sizeof(_c5), \
-		._f6 = _c6, ._s[5] = sizeof(_c6), \
-		._f7 = _c7, ._s[6] = sizeof(_c7), \
-		._s[7] = 7, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), NULL); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
-})
-
-#define _os_trace_with_payload_1(_l, _m, _t, _payload) __extension__({ \
-	_os_trace_verify_printf(_l); \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, NULL, 0, _payload); \
-	__asm__(""); /* avoid tailcall */ \
-})
-
-#define _os_trace_with_payload_2(_l, _m, _t, _1, _payload) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	_os_trace_verify_printf(_l, _c1); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		unsigned char _s[2]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._s[1] = 1, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), _payload); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
-})
-
-#define _os_trace_with_payload_3(_l, _m, _t, _1, _2, _payload) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	const __typeof__(_2) _c2 = _2; \
-	_os_trace_verify_printf(_l, _c1, _c2); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		__typeof__(_c2) _f2; \
-		unsigned char _s[3]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._f2 = _c2, ._s[1] = sizeof(_c2), \
-		._s[2] = 2, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), _payload); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
-})
-
-#define _os_trace_with_payload_4(_l, _m, _t, _1, _2, _3, _payload) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	const __typeof__(_2) _c2 = _2; \
-	const __typeof__(_3) _c3 = _3; \
-	_os_trace_verify_printf(_l, _c1, _c2, _c3); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		__typeof__(_c2) _f2; \
-		__typeof__(_c3) _f3; \
-		unsigned char _s[4]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._f2 = _c2, ._s[1] = sizeof(_c2), \
-		._f3 = _c3, ._s[2] = sizeof(_c3), \
-		._s[3] = 3, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), _payload); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
-})
-
-#define _os_trace_with_payload_5(_l, _m, _t, _1, _2, _3, _4, _payload) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	const __typeof__(_2) _c2 = _2; \
-	const __typeof__(_3) _c3 = _3; \
-	const __typeof__(_4) _c4 = _4; \
-	_os_trace_verify_printf(_l, _c1, _c2, _c3, _c4); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		__typeof__(_c2) _f2; \
-		__typeof__(_c3) _f3; \
-		__typeof__(_c4) _f4; \
-		unsigned char _s[5]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._f2 = _c2, ._s[1] = sizeof(_c2), \
-		._f3 = _c3, ._s[2] = sizeof(_c3), \
-		._f4 = _c4, ._s[3] = sizeof(_c4), \
-		._s[4] = 4, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), _payload); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
-})
-
-#define _os_trace_with_payload_6(_l, _m, _t, _1, _2, _3, _4, _5, _payload) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	const __typeof__(_2) _c2 = _2; \
-	const __typeof__(_3) _c3 = _3; \
-	const __typeof__(_4) _c4 = _4; \
-	const __typeof__(_4) _c5 = _5; \
-	_os_trace_verify_printf(_l, _c1, _c2, _c3, _c4, _c5); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		__typeof__(_c2) _f2; \
-		__typeof__(_c3) _f3; \
-		__typeof__(_c4) _f4; \
-		__typeof__(_c5) _f5; \
-		unsigned char _s[6]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._f2 = _c2, ._s[1] = sizeof(_c2), \
-		._f3 = _c3, ._s[2] = sizeof(_c3), \
-		._f4 = _c4, ._s[3] = sizeof(_c4), \
-		._f5 = _c5, ._s[4] = sizeof(_c5), \
-		._s[5] = 5, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), _payload); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
-})
-
-#define _os_trace_with_payload_7(_l, _m, _t, _1, _2, _3, _4, _5, _6, _payload) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	const __typeof__(_2) _c2 = _2; \
-	const __typeof__(_3) _c3 = _3; \
-	const __typeof__(_4) _c4 = _4; \
-	const __typeof__(_5) _c5 = _5; \
-	const __typeof__(_6) _c6 = _6; \
-	_os_trace_verify_printf(_l, _c1, _c2, _c3, _c4, _c5, _c6); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		__typeof__(_c2) _f2; \
-		__typeof__(_c3) _f3; \
-		__typeof__(_c4) _f4; \
-		__typeof__(_c5) _f5; \
-		__typeof__(_c6) _f6; \
-		unsigned char _s[7]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._f2 = _c2, ._s[1] = sizeof(_c2), \
-		._f3 = _c3, ._s[2] = sizeof(_c3), \
-		._f4 = _c4, ._s[3] = sizeof(_c4), \
-		._f5 = _c5, ._s[4] = sizeof(_c5), \
-		._f6 = _c6, ._s[5] = sizeof(_c6), \
-		._s[6] = 6, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), _payload); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
-})
-
-#define _os_trace_with_payload_8(_l, _m, _t, _1, _2, _3, _4, _5, _6, _7, _payload) __extension__({ \
-        _Pragma("clang diagnostic push") \
-        _Pragma("clang diagnostic ignored \"-Wpacked\"") \
-	const __typeof__(_1) _c1 = _1; \
-	const __typeof__(_2) _c2 = _2; \
-	const __typeof__(_3) _c3 = _3; \
-	const __typeof__(_4) _c4 = _4; \
-	const __typeof__(_5) _c5 = _5; \
-	const __typeof__(_6) _c6 = _6; \
-	const __typeof__(_7) _c7 = _7; \
-	_os_trace_verify_printf(_l, _c1, _c2, _c3, _c4, _c5, _c6, _c7); \
-	const struct __attribute__((packed)) { \
-		__typeof__(_c1) _f1; \
-		__typeof__(_c2) _f2; \
-		__typeof__(_c3) _f3; \
-		__typeof__(_c4) _f4; \
-		__typeof__(_c5) _f5; \
-		__typeof__(_c6) _f6; \
-		__typeof__(_c7) _f7; \
-		unsigned char _s[8]; \
-	} _buf = { \
-		._f1 = _c1, ._s[0] = sizeof(_c1), \
-		._f2 = _c2, ._s[1] = sizeof(_c2), \
-		._f3 = _c3, ._s[2] = sizeof(_c3), \
-		._f4 = _c4, ._s[3] = sizeof(_c4), \
-		._f5 = _c5, ._s[4] = sizeof(_c5), \
-		._f6 = _c6, ._s[5] = sizeof(_c6), \
-		._f7 = _c7, ._s[6] = sizeof(_c7), \
-		._s[7] = 7, \
-	}; \
-	_os_trace_with_buffer(&__dso_handle, _m, _t, &_buf, sizeof(_buf), _payload); \
-	__asm__(""); /* avoid tailcall */ \
-        _Pragma("clang diagnostic pop") \
-})
+#define _os_trace_call_n(_t, _f, ...) OS_TRACE_CALL(_t, NULL, _f, ##__VA_ARGS__)
 
 /*!
  *
@@ -466,7 +158,7 @@ _os_trace_verify_printf(const char *msg, ...) __attribute__((format(printf, 1, 2
 
 /*!
  * @define OS_TRACE_TYPE_RELEASE
- * Trace messages to be recorded on a typical user install.  These should be
+ * Trace messages to be captured on a typical user install.  These should be
  * limited to things which improve diagnosis of a failure/crash/hang. Trace
  * buffers are generally smaller on a production system.
  */
@@ -474,10 +166,17 @@ _os_trace_verify_printf(const char *msg, ...) __attribute__((format(printf, 1, 2
 
 /*!
  * @define OS_TRACE_TYPE_DEBUG
- * Trace messages to be recorded while debugger or other development tool is
+ * Trace messages to be captured while debugger or other development tool is
  * attached to the originator.
  */
 #define OS_TRACE_TYPE_DEBUG (1u << 1)
+
+/*!
+ * @define OS_TRACE_TYPE_INFO
+ * Trace messages that are captured when a debugger is attached, system or
+ * Application mode has been increased to include additional information.
+ */
+#define OS_TRACE_TYPE_INFO (1u << 2)
 
 /*!
  * @define OS_TRACE_TYPE_ERROR
@@ -492,8 +191,6 @@ _os_trace_verify_printf(const char *msg, ...) __attribute__((format(printf, 1, 2
  * to be initiated.
  */
 #define OS_TRACE_TYPE_FAULT ((1u << 7) | (1u << 6) | (1u << 0))
-
-__BEGIN_DECLS
 
 /*!
  * @typedef os_trace_payload_t
@@ -512,7 +209,7 @@ typedef void (^os_trace_payload_t)(xpc_object_t xdict);
  * @function os_trace
  *
  * @abstract
- * Insert a trace message into a buffer pool for later decoding.
+ * Always inserts a trace message into a buffer pool for later decoding.
  *
  * @discussion
  * Trace message that will be recorded on a typical user install. These should
@@ -525,25 +222,48 @@ typedef void (^os_trace_payload_t)(xpc_object_t xdict);
  * to pass arbitrary strings will store a pointer that is unresolvable and
  * will generate an error during decode.
  *
- *		os_trace("network event: %ld, last seen: %ld, avg: %g", event_id, last_seen, avg);
+ *      os_trace("network event: %ld, last seen: %ld, avg: %g", event_id, last_seen, avg);
  */
-#define os_trace(format, ...) __extension__({                                                           \
-    _Pragma("clang diagnostic push")                                                                    \
-    _Pragma("clang diagnostic ignored \"-Wc++98-compat-pedantic\"")                                     \
-    _Static_assert(__builtin_constant_p(format), "format must be a constant string");                   \
-    __attribute__((section("__TEXT,__os_trace"))) static const char _m[] = format;                      \
-    OS_CONCAT(_os_trace, OS_COUNT_ARGS(__VA_ARGS__))(format, _m, OS_TRACE_TYPE_RELEASE, ##__VA_ARGS__); \
-    _Pragma("clang diagnostic pop")                                                                     \
-})
+#define os_trace(format, ...) OS_TRACE_CALL(OS_TRACE_TYPE_RELEASE, NULL, format, ##__VA_ARGS__)
+
+#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&  __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_10_0) \
+     || (defined(__WATCH_OS_VERSION_MIN_REQUIRED) &&  __WATCH_OS_VERSION_MIN_REQUIRED >= __WATCHOS_3_0) \
+     || (defined(__TV_OS_VERSION_MIN_REQUIRED) && __TV_OS_VERSION_MIN_REQUIRED >= __TVOS_10_0) \
+     || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_12)
+
+/*!
+ * @function os_trace_info
+ *
+ * @abstract
+ * Optionally inserts a trace message containing additional information into a
+ * buffer pool for later decoding.
+ *
+ * @discussion
+ * Trace messages that will be captured when additional information is needed
+ * and are not captured by default.  They will only be captured if the
+ * system/process/activity mode has been increased or if a Development tool has
+ * been attached to the process.
+ *
+ * @param format
+ * A printf-style format string that represents a human-readable message when
+ * the trace line is decoded.  Only scalar types are supported, attempts
+ * to pass arbitrary strings will store a pointer that is unresolvable and
+ * will generate an error during decode.
+ *
+ *      os_trace_info("network interface status %ld", status);
+ */
+#define os_trace_info(format, ...) OS_TRACE_CALL(OS_TRACE_TYPE_INFO, NULL, format, ##__VA_ARGS__)
+
+#endif
 
 /*!
  * @function os_trace_debug
  *
  * @abstract
- * Insert a trace message into a buffer pool for later decoding.
+ * Insert debug trace message into a buffer pool for later decoding.
  *
  * @discussion
- * Trace message to be recorded while debugger or other development tool is
+ * Debug trace message to be recorded while debugger or other development tool is
  * attached to the originator.  This is transported interprocess to help
  * diagnose the entire call chain including external helpers.
  *
@@ -553,13 +273,36 @@ typedef void (^os_trace_payload_t)(xpc_object_t xdict);
  * to pass arbitrary strings will store a pointer that is unresolvable and
  * will generate an error during decode.
  *
- *		os_trace_debug("network interface status %ld", status);
+ *      os_trace_debug("network interface status %ld", status);
  */
-#define os_trace_debug(format, ...) __extension__({                                                     \
-    _Static_assert(__builtin_constant_p(format), "format must be a constant string");                   \
-    __attribute__((section("__TEXT,__os_trace_dbg"))) static const char _m[] = format;                  \
-    OS_CONCAT(_os_trace, OS_COUNT_ARGS(__VA_ARGS__))(format, _m, OS_TRACE_TYPE_DEBUG, ##__VA_ARGS__);   \
-})
+#define os_trace_debug(format, ...) OS_TRACE_CALL(OS_TRACE_TYPE_DEBUG, NULL, format, ##__VA_ARGS__)
+
+/*!
+ * @function os_trace_info_enabled
+ *
+ * @abstract
+ * Avoid unnecessary work for a trace point by checking if additional information
+ * is enabled.
+ *
+ * @discussion
+ * Avoid unnecessary work for a trace point by checking if additional information
+ * is enabled. Generally trace points should not involve expensive operations, but some
+ * circumstances warrant it.  Use this function to avoid doing the work unless
+ * debug level trace messages are requested.
+ *
+ *	if (os_trace_info_enabled()) {
+ *		os_trace_info("value = %d, average = %d",
+ *                            [[dict objectForKey: @"myKey"] intValue],
+ *			      (int) [self getAverage: dict]);
+ *	}
+ *
+ * @result
+ * Returns true if info types are enabled.
+ */
+__API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
+bool
+os_trace_info_enabled(void);
 
 /*!
  * @function os_trace_debug_enabled
@@ -582,10 +325,38 @@ typedef void (^os_trace_payload_t)(xpc_object_t xdict);
  * @result
  * Returns true if debug mode is enabled.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0)
+__API_AVAILABLE(macosx(10.10), ios(8.0), watchos(2.0), tvos(8.0))
 OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 bool
 os_trace_debug_enabled(void);
+
+/*!
+ * @function os_trace_type_enabled
+ *
+ * @abstract
+ * Avoid unnecessary work for a trace point by checking a specific type
+ *
+ * @discussion
+ * Avoid unnecessary work for a trace point by checking a specific type
+ *
+ * @result
+ * Returns true if type is enabled.
+ */
+__API_AVAILABLE(macosx(10.10), ios(8.0), watchos(2.0), tvos(8.0))
+OS_NOTHROW OS_WARN_RESULT OS_ALWAYS_INLINE
+static inline bool
+os_trace_type_enabled(uint8_t type)
+{
+    switch (type) {
+        case OS_TRACE_TYPE_INFO:
+            return os_trace_info_enabled();
+
+        case OS_TRACE_TYPE_DEBUG:
+            return os_trace_debug_enabled();
+    }
+
+    return true;
+}
 
 /*!
  * @function os_trace_error
@@ -604,13 +375,9 @@ os_trace_debug_enabled(void);
  * to pass arbitrary strings will store a pointer that is unresolvable and
  * will generate an error during decode.
  *
- *		os_trace_error("socket %d connection timeout %ld", fd, secs);
+ *      os_trace_error("socket %d connection timeout %ld", fd, secs);
  */
-#define os_trace_error(format, ...) __extension__({                                                     \
-    _Static_assert(__builtin_constant_p(format), "format must be a constant string");                   \
-    __attribute__((section("__TEXT,__os_trace"))) static const char _m[] = format;                      \
-    OS_CONCAT(_os_trace, OS_COUNT_ARGS(__VA_ARGS__))(format, _m, OS_TRACE_TYPE_ERROR, ##__VA_ARGS__);   \
-})
+#define os_trace_error(format, ...) OS_TRACE_CALL(OS_TRACE_TYPE_ERROR, NULL, format, ##__VA_ARGS__)
 
 /*!
  * @function os_trace_fault
@@ -629,13 +396,9 @@ os_trace_debug_enabled(void);
  * to pass arbitrary strings will store a pointer that is unresolvable and
  * will generate an error during decode.
  *
- *		os_trace_fault("failed to lookup uid %d - aborting", uid);
+ *      os_trace_fault("failed to lookup uid %d - aborting", uid);
  */
-#define os_trace_fault(format, ...) __extension__({                                                     \
-    _Static_assert(__builtin_constant_p(format), "format must be a constant string");                   \
-    __attribute__((section("__TEXT,__os_trace"))) static const char _m[] = format;                      \
-    OS_CONCAT(_os_trace, OS_COUNT_ARGS(__VA_ARGS__))(format, _m, OS_TRACE_TYPE_FAULT, ##__VA_ARGS__);   \
-})
+#define os_trace_fault(format, ...) OS_TRACE_CALL(OS_TRACE_TYPE_FAULT, NULL, format, ##__VA_ARGS__)
 
 #if __has_include(<xpc/xpc.h>)
 /*!
@@ -661,33 +424,43 @@ os_trace_debug_enabled(void);
  *
  *   os_trace_with_payload("network event %ld", event, ^(xpc_object_t xdict) {
  *
- *		// validate the network interface and address where what was expected
- *		xpc_dictionary_set_string(xdict, "network", ifp->ifa_name);
- *		xpc_dictionary_set_string(xdict, "ip_address", _get_address(ifp));
+ *      // validate the network interface and address where what was expected
+ *      xpc_dictionary_set_string(xdict, "network", ifp->ifa_name);
+ *      xpc_dictionary_set_string(xdict, "ip_address", _get_address(ifp));
  *   });
  */
-#define os_trace_with_payload(format, ...) __extension__({                                                              \
-    _Static_assert(__builtin_constant_p(format), "format must be a constant string");                                   \
-    __attribute__((section("__TEXT,__os_trace"))) static const char _m[] = format;                                      \
-    OS_CONCAT(_os_trace_with_payload, OS_COUNT_ARGS(__VA_ARGS__))(format, _m, OS_TRACE_TYPE_RELEASE, ##__VA_ARGS__);    \
+#define os_trace_with_payload(format, ...) __extension__({ \
+    OS_CONCAT(_os_trace_with_payload, OS_COUNT_ARGS(__VA_ARGS__))(OS_TRACE_TYPE_RELEASE, format, ##__VA_ARGS__); \
 })
 
-#define os_trace_debug_with_payload(format, ...) __extension__({                                                    \
-    _Static_assert(__builtin_constant_p(format), "format must be a constant string");                               \
-    __attribute__((section("__TEXT,__os_trace_dbg"))) static const char _m[] = format;                              \
-    OS_CONCAT(_os_trace_with_payload, OS_COUNT_ARGS(__VA_ARGS__))(format, _m, OS_TRACE_TYPE_DEBUG, ##__VA_ARGS__);  \
+#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&  __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_10_0) \
+    || (defined(__WATCH_OS_VERSION_MIN_REQUIRED) &&  __WATCH_OS_VERSION_MIN_REQUIRED >= __WATCHOS_3_0) \
+    || (defined(__TV_OS_VERSION_MIN_REQUIRED) && __TV_OS_VERSION_MIN_REQUIRED >= __TVOS_10_0) \
+    || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_12)
+
+#define os_trace_info_with_payload(format, ...) __extension__({ \
+    OS_CONCAT(_os_trace_with_payload, OS_COUNT_ARGS(__VA_ARGS__))(OS_TRACE_TYPE_INFO, format, ##__VA_ARGS__); \
 })
 
-#define os_trace_error_with_payload(format, ...) __extension__({                                                    \
-    _Static_assert(__builtin_constant_p(format), "format must be a constant string");                               \
-    __attribute__((section("__TEXT,__os_trace"))) static const char _m[] = format;                                  \
-    OS_CONCAT(_os_trace_with_payload, OS_COUNT_ARGS(__VA_ARGS__))(format, _m, OS_TRACE_TYPE_ERROR, ##__VA_ARGS__);  \
+#else
+
+__API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
+OS_EXPORT OS_NOTHROW OS_NOT_TAIL_CALLED
+void
+os_trace_info_with_payload(const char *format, ...);
+
+#endif
+
+#define os_trace_debug_with_payload(format, ...) __extension__({ \
+    OS_CONCAT(_os_trace_with_payload, OS_COUNT_ARGS(__VA_ARGS__))(OS_TRACE_TYPE_DEBUG, format, ##__VA_ARGS__); \
 })
 
-#define os_trace_fault_with_payload(format, ...) __extension__({                                                    \
-    _Static_assert(__builtin_constant_p(format), "format must be a constant string");                               \
-    __attribute__((section("__TEXT,__os_trace"))) static const char _m[] = format;                                  \
-    OS_CONCAT(_os_trace_with_payload, OS_COUNT_ARGS(__VA_ARGS__))(format, _m, OS_TRACE_TYPE_FAULT, ##__VA_ARGS__);  \
+#define os_trace_error_with_payload(format, ...) __extension__({ \
+    OS_CONCAT(_os_trace_with_payload, OS_COUNT_ARGS(__VA_ARGS__))(OS_TRACE_TYPE_ERROR, format, ##__VA_ARGS__); \
+})
+
+#define os_trace_fault_with_payload(format, ...) __extension__({ \
+    OS_CONCAT(_os_trace_with_payload, OS_COUNT_ARGS(__VA_ARGS__))(OS_TRACE_TYPE_FAULT, format, ##__VA_ARGS__); \
 })
 
 #endif // __has_include(<xpc/xpc.h>)
@@ -698,8 +471,8 @@ os_trace_debug_enabled(void);
  * @abstract
  * Internal function to support pre-encoded buffer.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0)
-OS_EXPORT OS_NOTHROW
+__API_AVAILABLE(macosx(10.10), ios(8.0), watchos(2.0), tvos(8.0))
+OS_EXPORT OS_NOTHROW OS_NOT_TAIL_CALLED
 void
 _os_trace_with_buffer(void *dso, const char *message, uint8_t type, const void *buffer, size_t buffer_size, os_trace_payload_t payload);
 

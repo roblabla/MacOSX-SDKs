@@ -9,5 +9,6 @@
 #define PhotosUI_PhotosUI_h
 
 #import <PhotosUI/PHContentEditingController.h>
+#import <PhotosUI/PHLivePhotoView.h>
 
 #endif

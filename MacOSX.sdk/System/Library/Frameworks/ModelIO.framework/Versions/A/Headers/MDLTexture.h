@@ -73,6 +73,8 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 MDL_EXPORT
 @interface MDLTexture : NSObject<MDLNamed>
 
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+
 /**
  Creates a texture from a source in the main bundle named in a manner matching
   name.
@@ -97,7 +99,8 @@ MDL_EXPORT
     orientation and demosaiced in all other instances.
  */
 + (nullable instancetype)textureCubeWithImagesNamed:(NSArray<NSString *> *)names;
-+ (nullable instancetype)textureCubeWithImagesNamed:(NSArray<NSString *> *)names bundle:(nullable NSBundle*)bundleOrNil;
++ (nullable instancetype)textureCubeWithImagesNamed:(NSArray<NSString *> *)names
+                                             bundle:(nullable NSBundle*)bundleOrNil;
 
 + (instancetype)irradianceTextureCubeWithTexture:(MDLTexture*)texture
                                             name:(nullable NSString*)name
@@ -137,6 +140,15 @@ MDL_EXPORT
 @property (nonatomic, readonly) NSUInteger mipLevelCount;
 @property (nonatomic, readonly) MDLTextureChannelEncoding channelEncoding;
 @property (nonatomic) BOOL isCube;
+
+/**
+ hasAlphaValues
+ @summary
+ Can be overridden. If not overridden, hasAlpha will be NO if the texture does not
+ have an alpha channel. It wil be YES if the texture has an alpha channel and
+ there is at least one non-opaque texel in it.
+ */
+@property (nonatomic) BOOL hasAlphaValues;
 
 @end
 
@@ -326,6 +338,15 @@ MDL_EXPORT
                               channelEncoding:(MDLTextureChannelEncoding)channelEncoding
                                     grayscale:(BOOL)grayscale;
 
+/**
+ Create a texture containing cellular noise. 
+ 
+ @param frequency How large the cells will be
+ */
+- (instancetype)initCellularNoiseWithFrequency:(float)frequency
+                                          name:(nullable NSString*)name
+                             textureDimensions:(vector_int2)textureDimensions
+                               channelEncoding:(MDLTextureChannelEncoding)channelEncoding;
 
 @end
 

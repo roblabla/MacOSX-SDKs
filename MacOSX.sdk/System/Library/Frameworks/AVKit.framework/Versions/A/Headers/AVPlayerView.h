@@ -3,7 +3,7 @@
 	
 	Framework:  AVKit
 	
-	Copyright 2013-2015 Apple Inc. All rights reserved.
+	Copyright © 2013-2016 Apple Inc. All rights reserved.
 	
  */
 
@@ -100,7 +100,7 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 	@property	actionPopUpButtonMenu
 	@abstract	Clients can set this property in order to show an action pop up button. Default is nil.
  */
-@property (nullable) NSMenu *actionPopUpButtonMenu;
+@property (nullable) IBOutlet NSMenu *actionPopUpButtonMenu;
 
 /*!
 	@property	showsFullScreenToggleButton

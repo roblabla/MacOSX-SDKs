@@ -1,7 +1,7 @@
 /*
 	NSCell.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -47,13 +47,15 @@ typedef NS_ENUM(NSUInteger, NSCellAttribute) {
 
 
 typedef NS_ENUM(NSUInteger, NSCellImagePosition) {
-    NSNoImage				= 0,
-    NSImageOnly				= 1,
-    NSImageLeft				= 2,
-    NSImageRight			= 3,
-    NSImageBelow			= 4,
-    NSImageAbove			= 5,
-    NSImageOverlaps			= 6
+    NSNoImage                           = 0,
+    NSImageOnly                         = 1,
+    NSImageLeft                         = 2,
+    NSImageRight                        = 3,
+    NSImageBelow                        = 4,
+    NSImageAbove                        = 5,
+    NSImageOverlaps                     = 6,
+    NSImageLeading  API_AVAILABLE(macosx(10.12)) = 7,
+    NSImageTrailing API_AVAILABLE(macosx(10.12)) = 8
 };
 
 
@@ -68,16 +70,14 @@ typedef NS_ENUM(NSUInteger, NSImageScaling) {
     NSScaleNone NS_ENUM_DEPRECATED_MAC(10_0, 10_10, "Use NSImageScaleNone instead")
 } NS_ENUM_AVAILABLE_MAC(10_5);
 
-
+typedef NSInteger NSCellStateValue;
 enum {
     NSMixedState = -1,
     NSOffState   =  0,
-    NSOnState    =  1
+    NSOnState    =  1,
 };
-typedef NSInteger NSCellStateValue;
 
-
-/* ButtonCell highlightsBy and showsStateBy mask */
+/* NSButtonCell highlightsBy and showsStateBy mask */
 typedef NS_OPTIONS(NSUInteger, NSCellStyleMask) {
     NSNoCellMask			= 0,
     NSContentsCellMask			= 1,
@@ -95,10 +95,13 @@ typedef NS_ENUM(NSUInteger, NSControlTint) {
 
 
 typedef NS_ENUM(NSUInteger, NSControlSize) {
-    NSRegularControlSize,
-    NSSmallControlSize, 
-    NSMiniControlSize
+    NSControlSizeRegular,
+    NSControlSizeSmall,
+    NSControlSizeMini,
 };
+static const NSControlSize NSRegularControlSize API_DEPRECATED_WITH_REPLACEMENT("NSControlSizeRegular", macosx(10.0, 10.12)) = NSControlSizeRegular;
+static const NSControlSize NSSmallControlSize API_DEPRECATED_WITH_REPLACEMENT("NSControlSizeSmall", macosx(10.0, 10.12)) = NSControlSizeSmall;
+static const NSControlSize NSMiniControlSize API_DEPRECATED_WITH_REPLACEMENT("NSControlSizeMini", macosx(10.0, 10.12)) = NSControlSizeMini;
 
 typedef struct __CFlags {
     unsigned int        state:1;
@@ -169,8 +172,10 @@ typedef struct __CFlags {
 + (BOOL)prefersTrackingUntilMouseUp;
 
 
-- (instancetype)initTextCell:(NSString *)aString;
-- (instancetype)initImageCell:(nullable NSImage *)image;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initTextCell:(NSString *)string NS_DESIGNATED_INITIALIZER;
+- (instancetype)initImageCell:(nullable NSImage *)image NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @property (nullable, assign) NSView *controlView; // Must be an NSControl subclass, non-control view subclasses not allowed!
 @property NSCellType type;
@@ -181,7 +186,13 @@ typedef struct __CFlags {
 @property (copy) NSString *title;
 @property (getter=isOpaque, readonly) BOOL opaque;
 @property (getter=isEnabled) BOOL enabled;
+
+#if __LP64__
+- (NSInteger)sendActionOn:(NSEventMask)mask;
+#else
 - (NSInteger)sendActionOn:(NSInteger)mask;
+#endif
+
 @property (getter=isContinuous) BOOL continuous;
 @property (getter=isEditable) BOOL editable;
 @property (getter=isSelectable) BOOL selectable;
@@ -210,15 +221,15 @@ typedef struct __CFlags {
 @property NSControlTint controlTint;
 @property NSControlSize controlSize;
 @property (nullable, strong) id representedObject;
-- (NSInteger)cellAttribute:(NSCellAttribute)aParameter;
-- (void)setCellAttribute:(NSCellAttribute)aParameter to:(NSInteger)value;
-- (NSRect)imageRectForBounds:(NSRect)theRect;
-- (NSRect)titleRectForBounds:(NSRect)theRect;
-- (NSRect)drawingRectForBounds:(NSRect)theRect;
+- (NSInteger)cellAttribute:(NSCellAttribute)parameter;
+- (void)setCellAttribute:(NSCellAttribute)parameter to:(NSInteger)value;
+- (NSRect)imageRectForBounds:(NSRect)rect;
+- (NSRect)titleRectForBounds:(NSRect)rect;
+- (NSRect)drawingRectForBounds:(NSRect)rect;
 @property (readonly) NSSize cellSize;
-- (NSSize)cellSizeForBounds:(NSRect)aRect;
+- (NSSize)cellSizeForBounds:(NSRect)rect;
 - (NSColor *)highlightColorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
-- (void)calcDrawInfo:(NSRect)aRect;
+- (void)calcDrawInfo:(NSRect)rect;
 - (NSText *)setUpFieldEditorAttributes:(NSText *)textObj;
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
@@ -228,9 +239,9 @@ typedef struct __CFlags {
 - (BOOL)startTrackingAt:(NSPoint)startPoint inView:(NSView *)controlView;
 - (BOOL)continueTracking:(NSPoint)lastPoint at:(NSPoint)currentPoint inView:(NSView *)controlView;
 - (void)stopTracking:(NSPoint)lastPoint at:(NSPoint)stopPoint inView:(NSView *)controlView mouseIsUp:(BOOL)flag;
-- (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)flag;
-- (void)editWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(nullable id)anObject event:(NSEvent *)theEvent;
-- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(nullable id)anObject start:(NSInteger)selStart length:(NSInteger)selLength;
+- (BOOL)trackMouse:(NSEvent *)event inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)flag;
+- (void)editWithFrame:(NSRect)rect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(nullable id)delegate event:(nullable NSEvent *)event;
+- (void)selectWithFrame:(NSRect)rect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(nullable id)delegate start:(NSInteger)selStart length:(NSInteger)selLength;
 - (void)endEditing:(NSText *)textObj;
 - (void)resetCursorRect:(NSRect)cellFrame inView:(NSView *)controlView;
 
@@ -257,9 +268,9 @@ typedef struct __CFlags {
 */
 @property NSUserInterfaceLayoutDirection userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_6);
 
-/* Returns a custom field editor for editing inside aControlView. This is an override point for NSCell subclasses designed to work with its own custom field editor. This message is sent to the selected cell of aControlView in -[NSWindow fieldEditor:forObject:]. Returning non-nil from this method indicates skipping the standard field editor querying processes including -windowWillReturnFieldEditor:toObject: delegation. The default NSCell implementation returns nil. The field editor returned from this method should have isFieldEditor == YES.
+/* Returns a custom field editor for editing inside controlView. This is an override point for NSCell subclasses designed to work with its own custom field editor. This message is sent to the selected cell of controlView in -[NSWindow fieldEditor:forObject:]. Returning non-nil from this method indicates skipping the standard field editor querying processes including -windowWillReturnFieldEditor:toObject: delegation. The default NSCell implementation returns nil. The field editor returned from this method should have isFieldEditor == YES.
  */
-- (nullable NSTextView *)fieldEditorForView:(NSView *)aControlView NS_AVAILABLE_MAC(10_6);
+- (nullable NSTextView *)fieldEditorForView:(NSView *)controlView NS_AVAILABLE_MAC(10_6);
 
 /* Tells the text cell to layout/render its content in single-line. If YES, the cell ignores the return value from -wraps, interprets NSLineBreakByWordWrapping and NSLineBreakByCharWrapping from -lineBreakMode as NSLineBreakByClipping, and configures the field editor to ignore key binding commands that insert paragraph/line separators. Also, the field editor bound to a single line cell filters paragraph/line separator insertion from user actions. Cells in the single line mode use the fixed baseline layout. The text baseline position is determined solely by the control size regardless of content font style/size.
  */
@@ -300,7 +311,7 @@ typedef struct __CFlags {
 - (void)setNextState;			/* toggle/cycle through states */
 @end
 
-APPKIT_EXTERN NSString * NSControlTintDidChangeNotification; /* sent after user changes control tint preference */
+APPKIT_EXTERN NSNotificationName NSControlTintDidChangeNotification; /* sent after user changes control tint preference */
 
 /* Cell Hit testing support */
 
@@ -373,8 +384,8 @@ typedef NS_ENUM(NSInteger, NSBackgroundStyle) {
 
 // Use formatters instead.  See -[NSCell formatter] and -[NSCell setFormatter:].
 - (NSInteger)entryType NS_DEPRECATED_MAC(10_0, 10_0);
-- (void)setEntryType:(NSInteger)aType NS_DEPRECATED_MAC(10_0, 10_0);
-- (BOOL)isEntryAcceptable:(NSString *)aString NS_DEPRECATED_MAC(10_0, 10_0);
+- (void)setEntryType:(NSInteger)type NS_DEPRECATED_MAC(10_0, 10_0);
+- (BOOL)isEntryAcceptable:(NSString *)string NS_DEPRECATED_MAC(10_0, 10_0);
 - (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits NS_DEPRECATED_MAC(10_0, 10_0);
 
 /* In 10.8 and higher, all the *Mnemonic* methods are deprecated. On MacOS they have typically not been used.
@@ -397,7 +408,7 @@ APPKIT_EXTERN void NSDrawThreePartImage(NSRect frame, NSImage * __nullable start
  
  This method is appropriate for the bezel of a control, like a box, that can be resized in both dimensions.
  */
-APPKIT_EXTERN void NSDrawNinePartImage(NSRect frame, NSImage * topLeftCorner, NSImage * topEdgeFill, NSImage * topRightCorner, NSImage * leftEdgeFill, NSImage * centerFill, NSImage * rightEdgeFill, NSImage * bottomLeftCorner, NSImage * bottomEdgeFill, NSImage * bottomRightCorner, NSCompositingOperation op, CGFloat alphaFraction, BOOL flipped) NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN void NSDrawNinePartImage(NSRect frame, NSImage * __nullable topLeftCorner, NSImage * __nullable topEdgeFill, NSImage * __nullable topRightCorner, NSImage * __nullable leftEdgeFill, NSImage * __nullable centerFill, NSImage * __nullable rightEdgeFill, NSImage * __nullable bottomLeftCorner, NSImage * __nullable bottomEdgeFill, NSImage * __nullable bottomRightCorner, NSCompositingOperation op, CGFloat alphaFraction, BOOL flipped) NS_AVAILABLE_MAC(10_5);
 
 enum {
     NSAnyType				= 0,

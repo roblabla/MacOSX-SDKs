@@ -1,7 +1,7 @@
 /*
 	NSToolbar.h
 	Application Kit
-	Copyright (c) 2000-2015, Apple Inc.
+	Copyright (c) 2000-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -35,10 +35,13 @@ typedef NS_ENUM(NSUInteger, NSToolbarSizeMode) {
     NSMutableArray *		_currentItemIdentifiers;
 
     NSView *_fullScreenAccessoryView;
-    id				_res2; 
+    struct {
+        unsigned int _hideBaselineOverride:1;
+        unsigned int _reserved:31;
+    } _tbFlags2;
     
     NSString *			_selectedItemIdentifier;
-    __strong void *		_metrics;
+    void *		_metrics;
 
     id				_delegate;
     NSWindow *			_logicalWindow;
@@ -183,8 +186,8 @@ typedef NS_ENUM(NSUInteger, NSToolbarSizeMode) {
 @end
 
 /* Notifications */
-APPKIT_EXTERN NSString * NSToolbarWillAddItemNotification;
-APPKIT_EXTERN NSString * NSToolbarDidRemoveItemNotification;
+APPKIT_EXTERN NSNotificationName NSToolbarWillAddItemNotification;
+APPKIT_EXTERN NSNotificationName NSToolbarDidRemoveItemNotification;
 
 
 

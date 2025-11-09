@@ -1,7 +1,7 @@
 /*
         NSQuickDrawView.h
         Application Kit
-        Copyright (c) 1999-2015, Apple Inc.
+        Copyright (c) 1999-2016, Apple Inc.
         All rights reserved.
 */
 

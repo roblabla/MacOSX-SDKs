@@ -1,16 +1,21 @@
 //
 //  SCNPhysicsBehavior.h
 //
-//  Copyright (c) 2014-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
 //
 
+#import <SceneKit/SceneKitTypes.h>
+
 NS_ASSUME_NONNULL_BEGIN
+
+@class SCNNode;
+@class SCNPhysicsBody;
 
 /*!
  @class SCNPhysicsBehavior
  @abstract SCNPhysicsBehavior is an abstract class that represents a behavior in the physics world.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macosx(10.10))
 @interface SCNPhysicsBehavior : NSObject <NSSecureCoding>
 @end
 
@@ -18,7 +23,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @class SCNPhysicsHingeJoint
  @abstract SCNPhysicsHingeJoint makes two bodies to move like they are connected by a hinge. It is for example suitable for doors, chains...
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macosx(10.10))
 @interface SCNPhysicsHingeJoint : SCNPhysicsBehavior
 
 //Initializes and returns a physics hinge joint.
@@ -43,7 +48,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @class SCNPhysicsBallSocketJoint
  @abstract SCNPhysicsBallSocketJoint makes two bodies to move like they are connected by a ball-and-socket joint (i.e it allows rotations around all axes).
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macosx(10.10))
 @interface SCNPhysicsBallSocketJoint : SCNPhysicsBehavior
 
 //Initializes and returns a physics ball-and-socket joint.
@@ -66,7 +71,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @class SCNPhysicsSliderJoint
  @abstract SCNPhysicsSliderJoint provides a linear sliding joint between two bodies.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macosx(10.10))
 @interface SCNPhysicsSliderJoint : SCNPhysicsBehavior
 
 //Initializes and returns a physics slider joint.
@@ -106,7 +111,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @class SCNPhysicsVehicleWheel
  @abstract SCNPhysicsVehicleWheel represents a wheel that can be attached to a SCNPhysicsVehicle instance.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macosx(10.10))
 @interface SCNPhysicsVehicleWheel : NSObject <NSCopying, NSSecureCoding>
 
 //Initializes and returns a wheel.
@@ -154,7 +159,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @class SCNPhysicsVehicle
  @abstract SCNPhysicsVehicle provides a vehicle behavior.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macosx(10.10))
 @interface SCNPhysicsVehicle : SCNPhysicsBehavior
 
 // Initializes and returns a physics vehicle that applies on the physics body "chassisBody" with the given wheels.

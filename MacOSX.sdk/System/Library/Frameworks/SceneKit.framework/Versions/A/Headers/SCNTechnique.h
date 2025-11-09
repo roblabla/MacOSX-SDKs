@@ -1,10 +1,10 @@
 //
 //  SCNTechnique.h
 //
-//  Copyright (c) 2014-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <SceneKit/SCNShadable.h>
 #import <SceneKit/SCNAnimation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract SCNTechnique represents a rendering process that may require multiple passes.
  @discussion A technique is generally initialized from a Property List file. It can be set to any object that conforms to the SCNTechniqueSupport protocol.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macosx(10.10))
 @interface SCNTechnique : NSObject <SCNAnimatable, NSCopying, NSSecureCoding>
 
 /*!
@@ -112,7 +112,7 @@ The values can be a single string referencing a symbol or a semantic or a target
 <color states>
  A dictionary with the following optional keys:
  "clear" a boolean specifying whether the color target should be cleared or not
- "clearColor" a string specifying the clear color as 4 float (red, green, blue, alpha), or the string "sceneBackground" to clear with the scene background color.
+ "clearColor" a string specifying the clear color as 4 float ("red green blue alpha"), or the string "sceneBackground" to clear with the scene background color.
  
 <depth states>
  A dictionary with the following optional keys:
@@ -182,20 +182,30 @@ The values can be a single string referencing a symbol or a semantic or a target
 <symbol description>
  A dictionary with the following optional keys and their possible associated values:
  
- semantic: vertex, normal, color, texcoord, time, modelViewProjectionTransform, modelViewTransform, modelTransform, viewTransform, projectionTransform, normalTransform, modelViewProjectionInverseTransform, modelViewInverseTransform, modelInverseTransform, viewInverseTransform, projectionInverseTransform, normalInverseTransform
+ semantic: vertex, normal, color, texcoord, tangent, time, modelViewProjectionTransform, modelViewTransform, modelTransform, viewTransform, projectionTransform, normalTransform, modelViewProjectionInverseTransform, modelViewInverseTransform, modelInverseTransform, viewInverseTransform, projectionInverseTransform, normalInverseTransform
  
  type: float, vec2, vec3, vec4, mat4, int, ivec2, ivec3, ivec4, mat3, sampler2D, none. Every types can also be an array of the given type by adding [N] where N is the number of elements in the array.
  
  image: name of an image located in the application bundle. (only valid when type is sampler2D)
  
  if a semantic is set, no type is required.
+ Note that with Metal shaders you should not provide any semantic. Instead simply declare a struct in you shader and add the members you need named as specified in SceneKit/scn_metal.
+ 
+ For example for a per-node semantic:
+ 
+ struct MyStruct
+ {
+ float4x4 modelTransform;
+ float4x4 modelViewProjectionTransform;
+ };
+ then in your function add an argument that must be named “scn_node” to get the members automatically filed with node semantics (see the documentation in scn_metal).
  
 <target description>
  A dictionary with the following optional keys and their possible associated values:
  
  type: a string specifying the type of the render target. It can be one of the following: color, depth, stencil
  format: a string specifying the format of the render target. It can be:
- - for color targets: rgba32f, r8, r16, rgba(default)
+ - for color targets: rgba32f, r8, r16f, rg16, rgba(default)
  - for depth targets: depth24, depth24stencil8
  - for stencil targets: depth24stencil8
  scaleFactor: a float value (encapsulated in a NSNumber) that controls the size of the render target. default to 1, which means 1x the size of the main viewport.
@@ -244,12 +254,12 @@ The values can be a single string referencing a symbol or a semantic or a target
  vec4          | SCNVector4
  mat4, mat44   | SCNMatrix4
  
- On OS X 10.11 or later and iOS 9 or later you can also use the object subscripting syntax to set values to uniforms.
+ On macOS 10.11 or later and iOS 9 or later you can also use the object subscripting syntax to set values to uniforms.
  For example:
  myTechnique[@"myAmplitude"] = aValue;
  */
-- (nullable id)objectForKeyedSubscript:(id)key NS_AVAILABLE(10_11, 9_0);
-- (void)setObject:(nullable id)obj forKeyedSubscript:(id <NSCopying>)key NS_AVAILABLE(10_11, 9_0);
+- (nullable id)objectForKeyedSubscript:(id)key API_AVAILABLE(macosx(10.11), ios(9.0));
+- (void)setObject:(nullable id)obj forKeyedSubscript:(id <NSCopying>)key API_AVAILABLE(macosx(10.11), ios(9.0));
 
 @end
 
@@ -265,7 +275,7 @@ The values can be a single string referencing a symbol or a semantic or a target
  @property technique
  @abstract Specifies the technique of the receiver. Defaults to nil.
  */
-@property(nonatomic, copy, nullable) SCNTechnique *technique NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, copy, nullable) SCNTechnique *technique API_AVAILABLE(macosx(10.10));
 
 @end
 

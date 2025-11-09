@@ -1,7 +1,7 @@
 /*
 	NSDatePickerCell.h
 	Application Kit
-	Copyright (c) 2004-2015, Apple Inc.
+	Copyright (c) 2004-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -61,12 +61,16 @@ typedef NS_OPTIONS(NSUInteger, NSDatePickerElementFlags) {
     NSColor *_backgroundColor;
     NSColor *_textColor;
     int _indexOfSelectedSubfield;
-    int _reserved0;
+    int _reserved0 __unused;
     id _reserved1;
     id _reserved2;
     id _reserved3;
     id _reserved4;
 }
+
+- (instancetype)initTextCell:(NSString *)string NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initImageCell:(nullable NSImage *)image NS_UNAVAILABLE;
 
 #pragma mark *** Appearance Control ***
 
@@ -112,7 +116,7 @@ typedef NS_OPTIONS(NSUInteger, NSDatePickerElementFlags) {
 
 @protocol NSDatePickerCellDelegate <NSObject>
 @optional
-- (void)datePickerCell:(NSDatePickerCell *)aDatePickerCell validateProposedDateValue:(NSDate * __nonnull *__nonnull)proposedDateValue timeInterval:(nullable NSTimeInterval *)proposedTimeInterval;
+- (void)datePickerCell:(NSDatePickerCell *)datePickerCell validateProposedDateValue:(NSDate * __nonnull *__nonnull)proposedDateValue timeInterval:(nullable NSTimeInterval *)proposedTimeInterval;
 @end
 
 NS_ASSUME_NONNULL_END

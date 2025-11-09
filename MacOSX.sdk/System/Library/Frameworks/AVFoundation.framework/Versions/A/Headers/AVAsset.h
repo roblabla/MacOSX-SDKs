@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2016 Apple Inc. All rights reserved.
 
 */
 
@@ -324,7 +324,10 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 
 @interface AVAsset (AVAssetProtectedContent)
 
-/* Indicates whether or not the asset has protected content.
+/*!
+  @property		hasProtectedContent
+  @abstract		Indicates whether or not the asset has protected content.
+  @discussion	Assets containing protected content may not be playable without successful authorization, even if the value of the "playable" property is YES.  See the properties in the AVAssetUsability category for details on how such an asset may be used.  On OS X, clients can use the interfaces in AVPlayerItemProtectedContentAdditions.h to request authorization to play the asset.
 */
 @property (nonatomic, readonly) BOOL hasProtectedContent NS_AVAILABLE(10_7, 4_2);
 
@@ -343,10 +346,17 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 
 /*!
   @property		containsFragments
-  @abstract		Indicates whether the asset is extended by at least one movie fragment.
+  @abstract		Indicates whether the asset is extended by at least one fragment.
   @discussion	For QuickTime movie files and MPEG-4 files, the value of this property is YES if canContainFragments is YES and at least one 'moof' box is present after the 'moov' box.
 */
 @property (nonatomic, readonly) BOOL containsFragments NS_AVAILABLE(10_11, 9_0);
+
+/*!
+  @property		overallDurationHint
+  @abstract		Indicates the total duration of fragments that either exist now or may be appended in the future in order to extend the duration of the asset.
+  @discussion	For QuickTime movie files and MPEG-4 files, the value of this property is obtained from the 'mehd' box of the 'mvex' box, if present. If no total fragment duration hint is available, the value of this property is kCMTimeInvalid.
+*/
+@property (nonatomic, readonly) CMTime overallDurationHint NS_AVAILABLE(10_12_3, 10_3);
 
 @end
 
@@ -430,6 +440,14 @@ AVF_EXPORT NSString *const AVURLAssetReferenceRestrictionsKey NS_AVAILABLE(10_7,
 	This init option allows the AVURLAsset to use additional HTTP cookies for those HTTP(S) requests.
  */
 AVF_EXPORT NSString *const AVURLAssetHTTPCookiesKey NS_AVAILABLE_IOS(8_0);
+
+/*
+ @constant		AVURLAssetAllowsCellularAccessKey
+ @abstract		Indicates whether network requests on behalf of this asset are allowed to use the cellular interface.
+ @discussion
+ 	Default is YES.
+*/
+AVF_EXPORT NSString *const AVURLAssetAllowsCellularAccessKey NS_AVAILABLE_IOS(10_0);
 
 /*!
   @class		AVURLAsset
@@ -519,6 +537,17 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+@class AVAssetCache;
+
+@interface AVURLAsset (AVURLAssetCache)
+
+/*!
+ @property	assetCache
+ @abstract	Provides access to an instance of AVAssetCache to use for inspection of locally cached media data. Will be nil if an asset has not been configured to store or access media data from disk.
+*/
+@property (nonatomic, readonly, nullable) AVAssetCache *assetCache NS_AVAILABLE(10_12, 10_0);
+
+@end
 
 @interface AVURLAsset (AVAssetCompositionUtility )
 
@@ -589,8 +618,8 @@ AVF_EXPORT NSString *const AVAssetMediaSelectionGroupsDidChangeNotification NS_A
 
 /*!
   @property		associatedWithFragmentMinder
-  @abstract		Indicates whether an AVAsset that supports fragment minding is currently associated with an AVAssetFragmentMinder.
-  @discussion	AVAssets that support fragment minding post change notifications only while associated with an AVAssetFragmentMinder.
+  @abstract		Indicates whether an AVAsset that supports fragment minding is currently associated with a fragment minder, e.g. an instance of AVFragmentedAssetMinder.
+  @discussion	AVAssets that support fragment minding post change notifications only while associated with a fragment minder.
 */
 @property (nonatomic, readonly, getter=isAssociatedWithFragmentMinder) BOOL associatedWithFragmentMinder NS_AVAILABLE_MAC(10_11);
 

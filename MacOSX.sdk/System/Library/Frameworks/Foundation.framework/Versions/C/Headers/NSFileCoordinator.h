@@ -1,6 +1,6 @@
 /*
 	NSFileCoordinator.h
-	Copyright (c) 2010-2015, Apple Inc.
+	Copyright (c) 2010-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -103,7 +103,9 @@ If your application reads an item and then registers a file presenter for it the
 */
 + (void)addFilePresenter:(id<NSFilePresenter>)filePresenter;
 + (void)removeFilePresenter:(id<NSFilePresenter>)filePresenter;
-+ (NSArray<id<NSFilePresenter>> *)filePresenters;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, copy) NSArray<id<NSFilePresenter>> *filePresenters;
+#endif
 
 /* The designated initializer. If an NSFilePresenter is provided then the receiver is considered to have been created by that NSFilePresenter, or on its behalf.
 
@@ -167,7 +169,7 @@ Coordinated writing of an item triggers the sending of messages to NSFilePresent
  
 For both coordinated reading and writing, if there are multiple NSFilePresenters involved then the order in which they are messaged is undefined. If an NSFilePresenter signals failure then waiting will fail and *outError will be set to an NSError describing the failure.
 */
-- (void)coordinateAccessWithIntents:(NSArray<NSFileAccessIntent *> *)intents queue:(NSOperationQueue *)queue byAccessor:(void (^)(NSError * __nullable error))accessor NS_AVAILABLE(10_10, 8_0);
+- (void)coordinateAccessWithIntents:(NSArray<NSFileAccessIntent *> *)intents queue:(NSOperationQueue *)queue byAccessor:(void (^)(NSError * _Nullable error))accessor NS_AVAILABLE(10_10, 8_0);
 
 #pragma mark *** Synchronous File Coordination ***
 

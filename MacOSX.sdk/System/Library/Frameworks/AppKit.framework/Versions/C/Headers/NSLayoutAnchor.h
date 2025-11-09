@@ -1,15 +1,16 @@
 /*
  NSLayoutAnchor.h
  Application Kit
- Copyright (c) 2015, Apple Inc.
+ Copyright (c) 2015-2016, Apple Inc.
  All rights reserved.
  */
 
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSObject.h>
 
-@class NSLayoutConstraint;
+NS_ASSUME_NONNULL_BEGIN
 
+@class NSLayoutConstraint;
 
 /*
  An NSLayoutAnchor represents an edge or dimension of a layout item.  Its concrete subclasses allow concise creation of constraints.  The idea is that instead of invoking +[NSLayoutConstraint constraintWithItem: attribute: relatedBy: toItem: attribute: multiplier: constant:] directly, you can instead do something like this:
@@ -20,7 +21,7 @@
  
  */
 NS_CLASS_AVAILABLE(10_11, 9_0)
-@interface NSLayoutAnchor<AnchorType> : NSObject
+@interface NSLayoutAnchor<AnchorType> : NSObject <NSCopying, NSCoding>
 {
     @private
     id  _item;
@@ -78,4 +79,4 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @end
 
 
-
+NS_ASSUME_NONNULL_END

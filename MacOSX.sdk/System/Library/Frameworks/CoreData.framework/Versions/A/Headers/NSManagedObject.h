@@ -1,7 +1,7 @@
 /*
     NSManagedObject.h
     Core Data
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSError;
 @class NSManagedObjectContext;
 @class NSManagedObjectID;
-
+@class NSFetchRequest;
 
 typedef NS_OPTIONS(NSUInteger, NSSnapshotEventType) {
 	NSSnapshotEventUndoInsertion = 1 << 1,
@@ -27,8 +27,9 @@ typedef NS_OPTIONS(NSUInteger, NSSnapshotEventType) {
 	NSSnapshotEventMergePolicy = 1 << 6
 };
 
-NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
+API_AVAILABLE(macosx(10.4),ios(3.0)) NS_REQUIRES_PROPERTY_DEFINITIONS
 @interface NSManagedObject : NSObject {
+#if (!__OBJC2__)
 @private
     int32_t             _cd_rc;
     uintptr_t           _cd_stateFlags;
@@ -38,17 +39,31 @@ NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
     NSManagedObjectID*  _cd_objectID;
     uintptr_t           _cd_extraFlags;
     id                  _cd_observationInfo;
-    id*                 _cd_snapshots;
+    void*               _cd_extras;
     uintptr_t           _cd_lockingInfo;
     id                  _cd_queueReference;
+#endif
 }
 
 /*  Distinguish between changes that should and should not dirty the object for any key unknown to Core Data.  10.5 & earlier default to NO.  10.6 and later default to YES. */
 /*    Similarly, transient attributes may be individually flagged as not dirtying the object by adding +(BOOL)contextShouldIgnoreChangesFor<key> where <key> is the property name. */
-+ (BOOL)contextShouldIgnoreUnmodeledPropertyChanges NS_AVAILABLE(10_6,3_0);
+@property(class, readonly) BOOL contextShouldIgnoreUnmodeledPropertyChanges API_AVAILABLE(macosx(10.6),ios(3.0));
 
-// The designated initializer.
+
+/* The Entity represented by this subclass. This method is only legal to call on subclasses of NSManagedObject that represent a single entity in the model.
+ */
++ (NSEntityDescription*)entity API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
+
+/* A new fetch request initialized with the Entity represented by this subclass. This property's getter is only legal to call on subclasses of NSManagedObject that represent a single entity in the model.
+ */
++ (NSFetchRequest*)fetchRequest API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
+
+/* The designated initializer. */
 - (__kindof NSManagedObject*)initWithEntity:(NSEntityDescription *)entity insertIntoManagedObjectContext:(nullable NSManagedObjectContext *)context NS_DESIGNATED_INITIALIZER;
+
+/* Returns a new object, inserted into managedObjectContext. This method is only legal to call on subclasses of NSManagedObject that represent a single entity in the model. 
+ */
+-(instancetype)initWithContext:(NSManagedObjectContext*)moc API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
 
 // identity
 @property (nullable, nonatomic, readonly, assign) NSManagedObjectContext *managedObjectContext;
@@ -60,22 +75,22 @@ NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
 @property (nonatomic, getter=isUpdated, readonly) BOOL updated;
 @property (nonatomic, getter=isDeleted, readonly) BOOL deleted;
 
-@property (nonatomic, readonly) BOOL hasChanges NS_AVAILABLE(10_7, 5_0);
+@property (nonatomic, readonly) BOOL hasChanges API_AVAILABLE(macosx(10.7),ios(5.0));
 
 /* returns YES if any persistent properties do not compare isEqual to their last saved state.  Relationship faults will not be unnecessarily fired.  This differs from the existing -hasChanges method which is a simple dirty flag and also includes transient properties */
-@property (nonatomic, readonly) BOOL hasPersistentChangedValues NS_AVAILABLE(10_9,7_0);
+@property (nonatomic, readonly) BOOL hasPersistentChangedValues API_AVAILABLE(macosx(10.9),ios(7.0));
 
 // this information is useful in many situations when computations are optional - this can be used to avoid growing the object graph unnecessarily (which allows to control performance as it can avoid time consuming fetches from databases)
 @property (nonatomic, getter=isFault, readonly) BOOL fault;    
 
 // returns a Boolean indicating if the relationship for the specified key is a fault.  If a value of NO is returned, the resulting relationship is a realized object;  otherwise the relationship is a fault.  If the specified relationship is a fault, calling this method does not result in the fault firing.
-- (BOOL)hasFaultForRelationshipNamed:(NSString *)key NS_AVAILABLE(10_5,3_0); 
+- (BOOL)hasFaultForRelationshipNamed:(NSString *)key API_AVAILABLE(macosx(10.5),ios(3.0)); 
 
 /* returns an array of objectIDs for the contents of a relationship.  to-one relationships will return an NSArray with a single NSManagedObjectID.  Optional relationships may return an empty NSArray.  The objectIDs will be returned in an NSArray regardless of the type of the relationship.  */
-- (NSArray<NSManagedObjectID *> *)objectIDsForRelationshipNamed:(NSString *)key NS_AVAILABLE(10_11,8_3);
+- (NSArray<NSManagedObjectID *> *)objectIDsForRelationshipNamed:(NSString *)key API_AVAILABLE(macosx(10.11),ios(8.3));
 
 /* Allow developers to determine if an object is in a transitional phase when receiving a KVO notification.  Returns 0 if the object is fully initialized as a managed object and not transitioning to or from another state */
-@property (nonatomic, readonly) NSUInteger faultingState NS_AVAILABLE(10_5,3_0);
+@property (nonatomic, readonly) NSUInteger faultingState API_AVAILABLE(macosx(10.5),ios(3.0));
 
 // lifecycle/change management (includes key-value observing methods)
 - (void)willAccessValueForKey:(nullable NSString *)key; // read notification
@@ -94,10 +109,10 @@ NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
 - (void)awakeFromInsert;
 
 /* Callback for undo, redo, and other multi-property state resets */
-- (void)awakeFromSnapshotEvents:(NSSnapshotEventType)flags NS_AVAILABLE(10_6,3_0);
+- (void)awakeFromSnapshotEvents:(NSSnapshotEventType)flags API_AVAILABLE(macosx(10.6),ios(3.0));
 
 /* Callback before delete propagation while the object is still alive.  Useful to perform custom propagation before the relationships are torn down or reconfigure KVO observers. */
-- (void)prepareForDeletion NS_AVAILABLE(10_6,3_0);
+- (void)prepareForDeletion API_AVAILABLE(macosx(10.6),ios(3.0));
 
 // commonly used to compute persisted values from other transient/scratchpad values, to set timestamps, etc. - this method can have "side effects" on the persisted values
 - (void)willSave;    
@@ -106,7 +121,7 @@ NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
 - (void)didSave;    
 
 // invoked automatically by the Core Data framework before receiver is converted (back) to a fault.  This method is the companion of the -didTurnIntoFault method, and may be used to (re)set state which requires access to property values (for example, observers across keypaths.)  The default implementation does nothing.  
-- (void)willTurnIntoFault NS_AVAILABLE(10_5,3_0);
+- (void)willTurnIntoFault API_AVAILABLE(macosx(10.5),ios(3.0));
 
 // commonly used to clear out additional transient values or caches
 - (void)didTurnIntoFault;    
@@ -129,10 +144,10 @@ NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
 // returns a dictionary with the keys and (new) values that have been changed since last fetching or saving the object (this is implemented efficiently without firing relationship faults)
 - (NSDictionary<NSString *, id> *)changedValues;
 
-- (NSDictionary<NSString *, id> *)changedValuesForCurrentEvent NS_AVAILABLE(10_7, 5_0);
+- (NSDictionary<NSString *, id> *)changedValuesForCurrentEvent API_AVAILABLE(macosx(10.7),ios(5.0));
 
 // validation - in addition to KVC validation managed objects have hooks to validate their lifecycle state; validation is a critical piece of functionality and the following methods are likely the most commonly overridden methods in custom subclasses
-- (BOOL)validateValue:(id __nullable * __nonnull)value forKey:(NSString *)key error:(NSError **)error;    // KVC
+- (BOOL)validateValue:(id _Nullable * _Nonnull)value forKey:(NSString *)key error:(NSError **)error;    // KVC
 - (BOOL)validateForDelete:(NSError **)error;
 - (BOOL)validateForInsert:(NSError **)error;
 - (BOOL)validateForUpdate:(NSError **)error;

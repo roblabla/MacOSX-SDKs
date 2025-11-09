@@ -1,10 +1,10 @@
 //
 //  SCNAudioSource.h
 //
-//  Copyright (c) 2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2015-2016 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <SceneKit/SCNNode.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class SCNAudioSource
  @abstract The SCNAudioSource class represents an audio source that can be added to a SCNNode.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macosx(10.11), ios(9.0))
 @interface SCNAudioSource : NSObject <NSCopying, NSSecureCoding>
 
 /*!
@@ -81,7 +81,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 
 @end
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macosx(10.11), ios(9.0))
 @interface SCNAudioPlayer : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -143,25 +143,25 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @method addAudioPlayer:
  @abstract Add an audio player to the node and starts playing it right away.
  */
-- (void)addAudioPlayer:(SCNAudioPlayer *)player NS_AVAILABLE(10_11, 9_0);
+- (void)addAudioPlayer:(SCNAudioPlayer *)player API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @method removeAllAudioPlayers
  @abstract Remove all audio players from this node and stop playing them.
  */
-- (void)removeAllAudioPlayers NS_AVAILABLE(10_11, 9_0);
+- (void)removeAllAudioPlayers API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @method removeAudioPlayer:
  @abstract Remove the given audio player from this node and stop playing it.
  */
-- (void)removeAudioPlayer:(SCNAudioPlayer *)player NS_AVAILABLE(10_11, 9_0);
+- (void)removeAudioPlayer:(SCNAudioPlayer *)player API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @property audioPlayers
  @abstract Get an array with all the audio players connected and playing on this node.
  */
-@property(nonatomic, readonly) NSArray<SCNAudioPlayer *> *audioPlayers NS_AVAILABLE(10_11, 9_0);
+@property(nonatomic, readonly) NSArray<SCNAudioPlayer *> *audioPlayers API_AVAILABLE(macosx(10.11), ios(9.0));
 
 @end
 

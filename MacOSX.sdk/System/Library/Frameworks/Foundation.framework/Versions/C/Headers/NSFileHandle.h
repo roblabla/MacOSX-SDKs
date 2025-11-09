@@ -1,10 +1,13 @@
 /*	NSFileHandle.h
-	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSRange.h>
+#import <Foundation/NSException.h>
+#import <Foundation/NSNotification.h>
+#import <Foundation/NSRunLoop.h>
 
 @class NSString, NSData, NSError;
 
@@ -34,10 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSFileHandle (NSFileHandleCreation)
 
-+ (NSFileHandle *)fileHandleWithStandardInput;
-+ (NSFileHandle *)fileHandleWithStandardOutput;
-+ (NSFileHandle *)fileHandleWithStandardError;
-+ (NSFileHandle *)fileHandleWithNullDevice;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, strong) NSFileHandle *fileHandleWithStandardInput;
+@property (class, readonly, strong) NSFileHandle *fileHandleWithStandardOutput;
+@property (class, readonly, strong) NSFileHandle *fileHandleWithStandardError;
+@property (class, readonly, strong) NSFileHandle *fileHandleWithNullDevice;
+#endif
 
 + (nullable instancetype)fileHandleForReadingAtPath:(NSString *)path;
 + (nullable instancetype)fileHandleForWritingAtPath:(NSString *)path;
@@ -49,12 +54,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSFileHandleOperationException;
+FOUNDATION_EXPORT NSExceptionName const NSFileHandleOperationException;
 
-FOUNDATION_EXPORT NSString * const NSFileHandleReadCompletionNotification;
-FOUNDATION_EXPORT NSString * const NSFileHandleReadToEndOfFileCompletionNotification;
-FOUNDATION_EXPORT NSString * const NSFileHandleConnectionAcceptedNotification;
-FOUNDATION_EXPORT NSString * const NSFileHandleDataAvailableNotification;
+FOUNDATION_EXPORT NSNotificationName const NSFileHandleReadCompletionNotification;
+FOUNDATION_EXPORT NSNotificationName const NSFileHandleReadToEndOfFileCompletionNotification;
+FOUNDATION_EXPORT NSNotificationName const NSFileHandleConnectionAcceptedNotification;
+FOUNDATION_EXPORT NSNotificationName const NSFileHandleDataAvailableNotification;
 
 FOUNDATION_EXPORT NSString * const NSFileHandleNotificationDataItem;
 FOUNDATION_EXPORT NSString * const NSFileHandleNotificationFileHandleItem;
@@ -62,16 +67,16 @@ FOUNDATION_EXPORT NSString * const NSFileHandleNotificationMonitorModes NS_DEPRE
 
 @interface NSFileHandle (NSFileHandleAsynchronousAccess)
 
-- (void)readInBackgroundAndNotifyForModes:(nullable NSArray<NSString *> *)modes;
+- (void)readInBackgroundAndNotifyForModes:(nullable NSArray<NSRunLoopMode> *)modes;
 - (void)readInBackgroundAndNotify;
 
-- (void)readToEndOfFileInBackgroundAndNotifyForModes:(nullable NSArray<NSString *> *)modes;
+- (void)readToEndOfFileInBackgroundAndNotifyForModes:(nullable NSArray<NSRunLoopMode> *)modes;
 - (void)readToEndOfFileInBackgroundAndNotify;
 
-- (void)acceptConnectionInBackgroundAndNotifyForModes:(nullable NSArray<NSString *> *)modes;
+- (void)acceptConnectionInBackgroundAndNotifyForModes:(nullable NSArray<NSRunLoopMode> *)modes;
 - (void)acceptConnectionInBackgroundAndNotify;
 
-- (void)waitForDataInBackgroundAndNotifyForModes:(nullable NSArray<NSString *> *)modes;
+- (void)waitForDataInBackgroundAndNotifyForModes:(nullable NSArray<NSRunLoopMode> *)modes;
 - (void)waitForDataInBackgroundAndNotify;
 
 #ifdef __BLOCKS__

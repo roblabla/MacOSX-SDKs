@@ -1,7 +1,7 @@
 /*
         NSPopUpButton.h
         Application Kit
-        Copyright (c) 1997-2015, Apple Inc.
+        Copyright (c) 1997-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int RESERVED:31;
     } _pbFlags;
 #if __LP64__
-    id _popupReserved;
+    id _popupReserved __unused;
 #endif
 }
 
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)selectItemAtIndex:(NSInteger)index;
 - (void)selectItemWithTitle:(NSString *)title;
 - (BOOL)selectItemWithTag:(NSInteger)tag;
-- (void)setTitle:(NSString *)aString;
+- (void)setTitle:(NSString *)string;
 
 @property (nullable, readonly, strong) NSMenuItem *selectedItem;
 @property (readonly) NSInteger indexOfSelectedItem;
@@ -84,6 +84,6 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /* Notifications */
-APPKIT_EXTERN NSString * NSPopUpButtonWillPopUpNotification;
+APPKIT_EXTERN NSNotificationName NSPopUpButtonWillPopUpNotification;
 
 NS_ASSUME_NONNULL_END

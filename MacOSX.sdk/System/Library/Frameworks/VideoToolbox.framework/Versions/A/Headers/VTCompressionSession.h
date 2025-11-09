@@ -126,6 +126,7 @@ CF_IMPLICIT_BRIDGING_DISABLED
 		it will be necessary to copy image data.)
 	@param	compressedDataAllocator
 		An allocator for the compressed data.  Pass NULL to use the default allocator.
+ 		Note: on MacOS 10.12 and later, using a compressedDataAllocator may trigger an extra buffer copy.
 	@param	outputCallback
 		The callback to be called with compressed frames.
 		This function may be called asynchronously, on a different thread from the one that calls VTCompressionSessionEncodeFrame.

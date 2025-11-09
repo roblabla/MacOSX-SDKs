@@ -126,8 +126,8 @@ lifetime is tracked by the Objective-C static analyzer.
 .El
 .Pp
 Integration of XPC objects with Objective-C requires targeting Mac\ OS\ X
-10.8 or later, and is disabled when building with Objective-C Garbage
-Collection or for the legacy Objective-C runtime. It can also be disabled
+10.8 or later, and is disabled when building
+for the legacy Objective-C runtime. It can also be disabled
 manually by using compiler options to define the
 .Dv OS_OBJECT_USE_OBJC
 preprocessor macro to
@@ -254,9 +254,7 @@ collection type:
 .Xr xpc_array_dup_fd 3
 .It
 .Xr xpc_dictionary_set_connection 3 ,
-.Xr xpc_dictionary_get_connection 3 ,
-.Xr xpc_array_set_connection 3 ,
-.Xr xpc_array_get_connection 3
+.Xr xpc_array_set_connection 3
 .El
 .Pp
 When the requested key or index is not present in the collection, or if the

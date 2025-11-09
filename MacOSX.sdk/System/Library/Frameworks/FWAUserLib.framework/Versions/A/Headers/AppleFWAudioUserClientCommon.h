@@ -14,14 +14,14 @@
 #ifndef _AppleFWAudioUserClientCommon_H
 #define _AppleFWAudioUserClientCommon_H
 
-#define CURRENT_DEVICE_STATUS_VERSION (0x00012000)
+#define CURRENT_DEVICE_STATUS_VERSION	(0x00012000)
 
 #define kNumInputClientBuffers			1
-#define kMIDIInputClientBufferSize 		(2 * 32)
-#define kMIDIInputRingBufferSize 		(8 * kMIDIInputClientBufferSize * kNumInputClientBuffers )
+#define kMIDIInputClientBufferSize		(2 * 32 )
+#define kMIDIInputRingBufferSize		(8 * kMIDIInputClientBufferSize * kNumInputClientBuffers )
 
 #define kNumOutputClientBuffers			1
-#define kMIDIOutputClientBufferSize 	(2 * 32)
+#define kMIDIOutputClientBufferSize		(2 * 32)
 #define kMIDIOutputRingBufferSize		(8 * kMIDIOutputClientBufferSize *  kNumOutputClientBuffers)
 
 #define kFWAStreamIdentSize 			(36)
@@ -32,7 +32,7 @@
 #define kMIDIPropertiesIsPrivateKey		"MIDIPropertyIsPrivate"
 #define kMIDIPropertiesIsEmbeddedKey	"MIDIPropertyIsEmbedded"
 
-#define kFWAGetCurrentClockSourcePlugKey	'clkp'
+#define kFWAGetCurrentClockSourcePlugKey 'clkp'
 
 #define kFWAMaxPropertyKeyLength (256)
 #define kFWAMaxPropertyValueLength (4096 - (kFWAMaxPropertyKeyLength + 8))
@@ -139,7 +139,7 @@ typedef void (*FWAStreamNotificationProc)(UInt32 isochStreamRef, void* refCon);
 
 // Moved to AppleFWAudioUserLib.cpp
 // update this with the version of the driver in xxxx.xxxx
-#define  kFWADeviceStatusCurrentVersion (CURRENT_DEVICE_STATUS_VERSION)
+#define kFWADeviceStatusCurrentVersion (0x00012000)
 
 typedef struct FWADeviceStatus
 {

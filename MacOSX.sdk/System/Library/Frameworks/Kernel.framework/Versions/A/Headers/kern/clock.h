@@ -39,6 +39,7 @@
 #include <mach/clock_types.h>
 #include <mach/message.h>
 #include <mach/mach_time.h>
+#include <mach/boolean.h>
 
 #include <kern/kern_types.h>
 
@@ -101,6 +102,10 @@ extern void				clock_absolutetime_interval_to_deadline(
 							uint64_t		abstime,
 							uint64_t		*result);
 
+extern void				clock_continuoustime_interval_to_deadline(
+							uint64_t		abstime,
+							uint64_t		*result);
+
 extern void				clock_delay_until(
 							uint64_t		deadline);
 
@@ -108,9 +113,27 @@ extern void				absolutetime_to_nanoseconds(
 							uint64_t		abstime,
 							uint64_t		*result);
 
-extern void             nanoseconds_to_absolutetime(
+extern void				nanoseconds_to_absolutetime(
 							uint64_t		nanoseconds,
 							uint64_t		*result);
+
+/*
+ * Absolute <-> Continuous Time conversion routines
+ *
+ * It is the caller's responsibility to ensure that these functions are
+ * synchronized with respect to updates to the continuous timebase.  The
+ * returned value is only valid until the next update to the continuous
+ * timebase.
+ *
+ * If the value to be returned by continuoustime_to_absolutetime would be
+ * negative, zero is returned.  This occurs when the provided continuous time
+ * is less the amount of the time the system spent asleep and /must/ be
+ * handled.
+ */
+extern uint64_t			absolutetime_to_continuoustime(
+							uint64_t		abstime);
+extern uint64_t			continuoustime_to_absolutetime(
+							uint64_t		conttime);
 
 extern uint64_t mach_absolutetime_asleep;
 extern uint64_t mach_absolutetime_last_sleep;

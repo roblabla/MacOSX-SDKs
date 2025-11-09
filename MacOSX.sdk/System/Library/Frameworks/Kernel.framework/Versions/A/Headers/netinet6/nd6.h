@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -57,6 +57,7 @@
 #ifndef _NETINET6_ND6_H_
 #define	_NETINET6_ND6_H_
 #include <sys/appleapiopts.h>
+#include <net/net_kev.h>
 
 /* see net/route.h, or net/if_inarp.h */
 #ifndef RTF_ANNOUNCE
@@ -103,6 +104,7 @@ struct nd_ifinfo {
 #define	ND6_IFF_PROXY_PREFIXES		0x20
 #define	ND6_IFF_IGNORE_NA		0x40
 #define	ND6_IFF_REPLICATED		0x100	/* sleep proxy registered */
+#define	ND6_IFF_DAD			0x200	/* Perform DAD on the interface */
 
 struct in6_nbrinfo {
 	char ifname[IFNAMSIZ];	/* if name, e.g. "en0" */
@@ -133,6 +135,7 @@ struct	in6_drlist {
 #define	NDDRF_INSTALLED	0x1	/* installed in the routing table */
 #define	NDDRF_IFSCOPE	0x2	/* installed as a scoped route */
 #define	NDDRF_STATIC	0x4	/* for internal use only */
+#define	NDDRF_MAPPED	0x8	/* Default router addr is mapped to a different one for routing */
 
 struct	in6_defrouter {
 	struct	sockaddr_in6 rtaddr;

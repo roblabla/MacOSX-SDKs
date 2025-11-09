@@ -279,7 +279,6 @@ ExtAudioFileCreateWithURL(	CFURLRef							inURL,
 							ExtAudioFileRef __nullable * __nonnull outExtAudioFile)
 																			__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_1);
 																			
-#if !TARGET_OS_IPHONE && !CA_NO_CORE_SERVICES
 /*!
 	@function   ExtAudioFileOpen
 	
@@ -335,7 +334,6 @@ ExtAudioFileCreateNew(		const struct FSRef *				inParentDir,
 							const AudioChannelLayout * __nullable inChannelLayout,
 							ExtAudioFileRef __nullable * __nonnull outExtAudioFile)
 																			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
-#endif
 
 /*!
 	@function   ExtAudioFileDispose

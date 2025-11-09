@@ -1,7 +1,7 @@
 /*
  NSIncrementalStoreNode.h
  Core Data
- Copyright (c) 2004-2015, Apple Inc.
+ Copyright (c) 2004-2016, Apple Inc.
  All rights reserved.
  */
 
@@ -13,13 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSPropertyDescription;
 
 // Provides the basic unit of external data that the Core Data stack interacts with.
-NS_CLASS_AVAILABLE(10_7,5_0)
+API_AVAILABLE(macosx(10.7),ios(5.0))
 @interface NSIncrementalStoreNode : NSObject {
+#if (!__OBJC2__)
 @private
     NSManagedObjectID *_objectID;
     uint64_t _versionNumber;
 	id _propertyCache;
 	void *_reserved1;
+#endif
 }
 
 // Returns an object initialized with the following values

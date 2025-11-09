@@ -1,7 +1,7 @@
 /*
     NSTabViewController.h
     Application Kit
-    Copyright (c) 2014-2015, Apple Inc.
+    Copyright (c) 2014-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -43,7 +43,8 @@ NS_CLASS_AVAILABLE_MAC(10_10)
     struct {
         unsigned int _changingSelection:1;
         unsigned int _addingInitialTabViewItems:1;
-        unsigned int __extra:30;
+        unsigned int _tabBarIsDrivingTabMove:1;
+        unsigned int __extra:29;
     } _tabViewControllerFlags;
 }
 

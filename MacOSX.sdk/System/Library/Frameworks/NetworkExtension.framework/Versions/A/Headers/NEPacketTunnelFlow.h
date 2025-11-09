@@ -9,6 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class NEPacket;
+
 /*!
  * @file NEPacketTunnelFlow.h
  * @discussion This file declares the NEPacketTunnelFlow API. The NEPacketTunnelFlow is used by NEPacketTunnelProvider implementations to tunnel IP packets.
@@ -39,6 +41,20 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param protocols An array of NSNumber objects. Each number contains the protocol of the packet in the corresponding index in the packets array.
  */
 - (BOOL)writePackets:(NSArray<NSData *> *)packets withProtocols:(NSArray<NSNumber *> *)protocols NS_AVAILABLE(10_11, 9_0);
+
+/*!
+ * @method readPacketObjectsWithCompletionHandler:
+ * @discussion Read available IP packets from the flow.
+ * @param completionHandler A block that will be executed to handle the packets. This block takes an array of NEPacket objects. If after handling the packets the caller wants to read more packets then the caller must call this method again.
+ */
+- (void)readPacketObjectsWithCompletionHandler:(void (^)(NSArray<NEPacket *> *packets))completionHandler NS_AVAILABLE(10_12, 10_0);
+
+/*!
+ * @method writePacketObjects:
+ * @discussion Write multiple IP packets to the flow.
+ * @param packets An array of NEPacket objects, each containing packet data and protocol family to be written.
+ */
+- (BOOL)writePacketObjects:(NSArray<NEPacket *> *)packets NS_AVAILABLE(10_12, 10_0);
 
 @end
 

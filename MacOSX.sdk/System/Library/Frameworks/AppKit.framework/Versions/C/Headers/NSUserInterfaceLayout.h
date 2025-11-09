@@ -1,7 +1,7 @@
 /*
     NSUserInterfaceLayout.h
     Application Kit
-    Copyright (c) 2015-2015, Apple Inc.
+    Copyright (c) 2015-2016, Apple Inc.
     All rights reserved.
  */
 

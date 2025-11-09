@@ -48,7 +48,7 @@ extern "C" {
 				from the CFAllocator provided for CMBlockBuffer construction.
 	@constant	kCMBlockBufferBlockAllocationFailedErr Returned when the allocator provided to allocate a memory block
 				(as distinct from CMBlockBuffer structures) fails.
-	@constant	kCMBlockBufferBadCustomBlockSourceErr The custom block sourceÕs Allocate() routine was NULL when an allocation was attempted.
+	@constant	kCMBlockBufferBadCustomBlockSourceErr The custom block sourceâ€™s Allocate() routine was NULL when an allocation was attempted.
 	@constant	kCMBlockBufferBadOffsetParameterErr The offset provided to an API is out of the range of the relevent CMBlockBuffer.
 	@constant	kCMBlockBufferBadLengthParameterErr The length provided to an API is out of the range of the relevent CMBlockBuffer,
 				or is not allowed to be zero.
@@ -536,7 +536,7 @@ CM_EXPORT size_t	CMBlockBufferGetDataLength(CMBlockBufferRef CM_NONNULL theBuffe
 	@param	theBuffer		CMBlockBuffer to examine. Must not be NULL
 	@param	offset			Offset within the buffer's offset range.
 	@param	length			Desired number of bytes to access at offset. If zero, the number of bytes available at offset
-							(dataLength Ð offset), contiguous or not, is used.
+							(dataLength â€“ offset), contiguous or not, is used.
 							
 	@result	Returns true if the specified range is contiguous within the CMBlockBuffer, false otherwise. Also returns false if the
 			CMBlockBuffer is NULL or empty.

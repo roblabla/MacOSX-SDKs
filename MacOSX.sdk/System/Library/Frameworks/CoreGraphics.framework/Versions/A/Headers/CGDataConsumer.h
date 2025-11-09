@@ -50,34 +50,34 @@ CG_EXTERN CFTypeID CGDataConsumerGetTypeID(void)
    passed to each of the callback functions. */
 
 CG_EXTERN CGDataConsumerRef __nullable CGDataConsumerCreate(
-    void * __nullable info, const CGDataConsumerCallbacks * __nullable cbks)
+    void * __nullable info, const CGDataConsumerCallbacks * cg_nullable cbks)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Create a data consumer which writes data to `url'. */
 
 CG_EXTERN CGDataConsumerRef __nullable CGDataConsumerCreateWithURL(
-    CFURLRef __nullable url)
+    CFURLRef cg_nullable url)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Create a data consumer which writes to `data'. */
 
 CG_EXTERN CGDataConsumerRef __nullable CGDataConsumerCreateWithCFData(
-    CFMutableDataRef __nullable data)
+    CFMutableDataRef cg_nullable data)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain(consumer)'. */
 
-CG_EXTERN CGDataConsumerRef __nullable CGDataConsumerRetain(
-    CGDataConsumerRef __nullable consumer)
+CG_EXTERN CGDataConsumerRef cg_nullable CGDataConsumerRetain(
+    CGDataConsumerRef cg_nullable consumer)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(consumer)'. */
 
-CG_EXTERN void CGDataConsumerRelease(__nullable CGDataConsumerRef consumer)
+CG_EXTERN void CGDataConsumerRelease(cg_nullable CGDataConsumerRef consumer)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
-#endif	/* CGDATACONSUMER_H_ */
+#endif  /* CGDATACONSUMER_H_ */

@@ -2,35 +2,32 @@
 //  PDFActionResetForm.h
 // =====================================================================================================================
 
+#import <PDFKit/PDFKitPlatform.h>
 
-#import <AppKit/AppKit.h>
 #import <PDFKit/PDFAction.h>
 
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+NS_ASSUME_NONNULL_BEGIN
 
 @class PDFActionResetFormPrivateVars;
 
-
+NS_CLASS_AVAILABLE_MAC(10_5)
 @interface PDFActionResetForm : PDFAction <NSCopying>
 {
 @private
-    PDFActionResetFormPrivateVars *_pdfPriv2;
+    PDFActionResetFormPrivateVars *_private2;
 }
 
 // Initially there will be no fields, and -[fieldsIncludedAreCleared] will be YES.
-- (id) init;
+- (instancetype) init;
 
 // Fields are an array of NSString objects corresponding to the fieldNames of Widget annotations on the page.
 // May return nil.
-- (NSArray *) fields;
-- (void) setFields: (NSArray *) fields;
+@property(nonatomic, assign) NSArray<NSString*>* fields;
 
 // If -[fieldsIncludedAreCleared] is YES, then the fields above are to be cleared when this action is performed.
 // Otherwise, the fields identified are ones not to be cleared: ones to be excluded.
-- (BOOL) fieldsIncludedAreCleared;
-- (void) setFieldsIncludedAreCleared: (BOOL) include;
+@property(nonatomic, assign) BOOL fieldsIncludedAreCleared;
 
 @end
 
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+NS_ASSUME_NONNULL_END

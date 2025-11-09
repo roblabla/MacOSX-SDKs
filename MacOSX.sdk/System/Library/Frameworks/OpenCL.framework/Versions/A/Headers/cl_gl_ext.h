@@ -109,7 +109,11 @@ clCreateEventFromGLsyncKHR(cl_context __nonnull  /* context */,
                            cl_int *   __nullable /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_1;
 
 #ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
-typedef struct __IOSurface* IOSurfaceRef;
+#if __has_feature(objc_class_property)
+typedef struct  __attribute__((objc_bridge(id))) __IOSurface *IOSurfaceRef __attribute__((swift_name("IOSurfaceRef")));
+#else
+typedef struct  __attribute__((objc_bridge(id))) __IOSurface *IOSurfaceRef;
+#endif
 #endif
 
 cl_mem __nullable clCreateImageFromIOSurface2DAPPLE(cl_context __nonnull /* context */,

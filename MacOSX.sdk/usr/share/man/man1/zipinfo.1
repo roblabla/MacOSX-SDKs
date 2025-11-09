@@ -1,6 +1,6 @@
-.\"  Copyright (c) 1990-2005 Info-ZIP.  All rights reserved.
+.\"  Copyright (c) 1990-2009 Info-ZIP.  All rights reserved.
 .\"
-.\"  See the accompanying file LICENSE, version 2000-Apr-09 or later
+.\"  See the accompanying file LICENSE, version 2009-Jan-02 or later
 .\"  (the contents of which are also included in unzip.h) for terms of use.
 .\"  If, for some reason, all these files are missing, the Info-ZIP license
 .\"  also may be found at:  ftp://ftp.info-zip.org/pub/infozip/license.html
@@ -34,7 +34,7 @@
 .in -4n
 ..
 .\" =========================================================================
-.TH ZIPINFO 1L "28 February 2005 (v2.42)" "Info-ZIP"
+.TH ZIPINFO 1L "20 April 2009 (v3.0)" "Info-ZIP"
 .SH NAME
 zipinfo \- list detailed information about a ZIP archive
 .PD
@@ -160,6 +160,17 @@ compressed data.
 print the file dates and times in a sortable decimal format (yymmdd.hhmmss).
 The default date format is a more standard, human-readable version with
 abbreviated month names (see examples below).
+.TP
+.B \-U
+[UNICODE_SUPPORT only] modify or disable UTF-8 handling.
+When UNICODE_SUPPORT is available, the option \fB\-U\fP forces \fIunzip\fP
+to escape all non-ASCII characters from UTF-8 coded filenames as ``#Uxxxx''.
+This option is mainly provided for debugging purpose when the fairly new
+UTF-8 support is suspected to mangle up extracted filenames.
+.IP
+The option \fB\-UU\fP allows to entirely disable the recognition of UTF-8
+encoded filenames.  The handling of filename codings within \fIunzip\fP falls
+back to the behaviour of previous versions.
 .TP
 .B \-z
 include the archive comment (if any) in the listing.

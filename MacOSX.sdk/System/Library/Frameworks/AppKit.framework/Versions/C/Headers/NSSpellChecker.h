@@ -1,7 +1,7 @@
 /*
         NSSpellChecker.h
         Application Kit
-        Copyright (c) 1990-2015, Apple Inc.
+        Copyright (c) 1990-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -33,13 +33,19 @@ The usual usage of this is to implement a checkSpelling: method in an object tha
     id _guessesBrowser;
     id _wordField;
     id _languagePopUp;
+#ifndef __OBJC2__
     id _reserved1;
+#endif
     id _panel;
+#ifndef __OBJC2__
     id _reserved2;
+#endif
     id _correctButton;
     id _guessButton;
     id _ignoreButton;
+#ifndef __OBJC2__
     id _reserved3;
+#endif
     id _languagesBrowser;
     id _quotesBrowser;
     id _replacementsBrowser;
@@ -61,7 +67,9 @@ The usual usage of this is to implement a checkSpelling: method in an object tha
     } _scFlags;
     
     id _substitutionsPanel;
+#ifndef __OBJC2__
     id _reserved4;
+#endif
     id _learnButton;
     id _infoField;
     id _grammarControl;
@@ -91,6 +99,9 @@ The usual usage of this is to implement a checkSpelling: method in an object tha
 /* Requests unified text checking in the background.  The return value is a monotonically increasing sequence number that can be used to keep track of requests in flight.  The completion handler will be called (in an arbitrary context) when results are available, with the sequence number and results.  The arguments and results are otherwise the same as for the previous method. */
 - (NSInteger)requestCheckingOfString:(NSString *)stringToCheck range:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(nullable NSDictionary<NSString *, id> *)options inSpellDocumentWithTag:(NSInteger)tag completionHandler:(void (^ __nullable)(NSInteger sequenceNumber, NSArray<NSTextCheckingResult *> *results, NSOrthography *orthography, NSInteger wordCount))completionHandler NS_AVAILABLE_MAC(10_6);
 
+/* Requests candidate generation in the background.  The return value is a monotonically increasing sequence number that can be used to keep track of requests in flight.  The completion handler will be called (in an arbitrary context) when results are available, with the sequence number and results. */
+- (NSInteger)requestCandidatesForSelectedRange:(NSRange)selectedRange inString:(NSString *)stringToCheck types:(NSTextCheckingTypes)checkingTypes options:(nullable NSDictionary<NSString *, id> *)options inSpellDocumentWithTag:(NSInteger)tag completionHandler:(void (^ __nullable)(NSInteger sequenceNumber, NSArray<NSTextCheckingResult *> *candidates))completionHandler NS_AVAILABLE_MAC(10_12_2);
+
 /* Provides a menu containing contextual menu items suitable for certain kinds of detected results (notably date/time/address results).  The options dictionary allows clients to pass in information associated with the document.  */
 - (nullable NSMenu *)menuForResult:(NSTextCheckingResult *)result string:(NSString *)checkedString options:(nullable NSDictionary<NSString *, id> *)options atLocation:(NSPoint)location inView:(NSView *)view NS_AVAILABLE_MAC(10_6);
 
@@ -104,6 +115,8 @@ APPKIT_EXTERN NSString * NSTextCheckingDocumentURLKey        NS_AVAILABLE_MAC(10
 APPKIT_EXTERN NSString * NSTextCheckingDocumentTitleKey      NS_AVAILABLE_MAC(10_6);  // NSString, a title to be associated with the document
 APPKIT_EXTERN NSString * NSTextCheckingDocumentAuthorKey     NS_AVAILABLE_MAC(10_6);  // NSString, name of an author to be associated with the document
 APPKIT_EXTERN NSString * NSTextCheckingRegularExpressionsKey NS_AVAILABLE_MAC(10_7);  // NSArray of NSRegularExpressions to be matched in the text of the document
+APPKIT_EXTERN NSString * NSTextCheckingSelectedRangeKey      NS_AVAILABLE_MAC(10_12); // NSValue containing NSRange, should be the portion of the selected range intersecting the string being checked, or a zero-length range if there is an insertion point in or adjacent to the string being checked, or NSMakeRange(NSNotFound, 0) if the selection is entirely outside of the string being checked.
+
 
 /* Methods for obtaining the default values for NSTextCheckingQuotesKey and NSTextCheckingReplacementsKey. */
 - (NSArray<NSString *> *)userQuotesArrayForLanguage:(NSString *)language NS_AVAILABLE_MAC(10_6);
@@ -170,6 +183,11 @@ typedef NS_ENUM(NSInteger, NSCorrectionIndicatorType) {
 
 - (void)dismissCorrectionIndicatorForView:(NSView *)view NS_AVAILABLE_MAC(10_7);
 
+/* In some cases the next typing should prevent a pending correction (if it is an @, for example).  This method allows clients to recognize these cases in a standardized way. */
+- (BOOL)preventsAutocorrectionBeforeString:(NSString *)string language:(nullable NSString *)language NS_AVAILABLE_MAC(10_12);
+
+/* In some cases the space automatically inserted after an accepted candidate should be deleted when the next text is typed (e.g. if it is a period or comma).  This method allows clients to recognize these cases in a standardized way. */
+- (BOOL)deletesAutospaceBetweenString:(NSString *)precedingString andString:(NSString *)followingString language:(nullable NSString *)language NS_AVAILABLE_MAC(10_12_2);
 
 /* Entries in the availableLanguages list are all available spellchecking languages in user preference order, as described in the spellchecker's info dictionary, usually language abbreviations such as en_US.  The userPreferredLanguages will be a subset of the availableLanguages, as selected by the user for use with spellchecking, in preference order.  If automaticallyIdentifiesLanguages is YES, then text checking will automatically use these as appropriate; otherwise, it will use the language set by setLanguage:.  The older checkSpellingOfString:... and checkGrammarOfString:... methods will use the language set by setLanguage:, if they are called with a nil language argument.  */
 @property (readonly, copy) NSArray<NSString *> *availableLanguages NS_AVAILABLE_MAC(10_5);
@@ -177,18 +195,21 @@ typedef NS_ENUM(NSInteger, NSCorrectionIndicatorType) {
 @property BOOL automaticallyIdentifiesLanguages NS_AVAILABLE_MAC(10_6);
 
 /* Allows programmatic setting of the misspelled word field. */
-- (void)setWordFieldStringValue:(NSString *)aString;
+- (void)setWordFieldStringValue:(NSString *)string;
 
 /* These allow clients to programmatically instruct the spellchecker to learn and unlearn words, and to determine whether a word has been learned (and hence can potentially be unlearned). */
 - (void)learnWord:(NSString *)word;
 - (BOOL)hasLearnedWord:(NSString *)word NS_AVAILABLE_MAC(10_5);
 - (void)unlearnWord:(NSString *)word NS_AVAILABLE_MAC(10_5);
 
-/* These methods allow clients to determine the global user preference settings for automatic text replacement, spelling correction, quote substitution, and dash substitution.  Text views by default will follow these automatically, but clients may override that by programmatically setting the values on the text view.  These methods will be useful for non-text view clients and others who wish to keep track of the settings.  Notifications are available (see below) when the settings change. */
+/* These methods allow clients to determine the global user preference settings for automatic text replacement, spelling correction, quote substitution, dash substitution, autocapitalization, and double-space-to-period substitution.  Text views by default will follow these automatically, but clients may override that by programmatically setting the values on the text view.  These methods will be useful for non-text view clients and others who wish to keep track of the settings.  Notifications are available (see below) when the settings change. */
 + (BOOL)isAutomaticTextReplacementEnabled NS_AVAILABLE_MAC(10_7);
 + (BOOL)isAutomaticSpellingCorrectionEnabled NS_AVAILABLE_MAC(10_7);
 + (BOOL)isAutomaticQuoteSubstitutionEnabled NS_AVAILABLE_MAC(10_9);
 + (BOOL)isAutomaticDashSubstitutionEnabled NS_AVAILABLE_MAC(10_9);
++ (BOOL)isAutomaticCapitalizationEnabled NS_AVAILABLE_MAC(10_12);
++ (BOOL)isAutomaticPeriodSubstitutionEnabled NS_AVAILABLE_MAC(10_12);
++ (BOOL)isAutomaticTextCompletionEnabled NS_AVAILABLE_MAC(10_12_2);
 
 /* Use of the following methods is discouraged; ordinarily language identification should be allowed to take place automatically, or else a specific language should be passed in to the methods that take such an argument, if the language is known in advance.  -setLanguage: allows programmatic setting of the language to spell-check in, for compatibility use if other methods are called with no language specified.  -setLanguage: accepts any of the language formats used by NSBundle, and tries to find the closest match among the available languages.  If -setLanguage: has been called, then -language will return that match; otherwise, it will return Multilingual if there is more than one element in -userPreferredLanguages, or the one element in that array if there is only one.  */
 
@@ -198,10 +219,13 @@ typedef NS_ENUM(NSInteger, NSCorrectionIndicatorType) {
 @end
 
 /* These notifications are made available via the default notification center when the global user preference settings mentioned above are changed. */
-APPKIT_EXTERN NSString * const NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification NS_AVAILABLE_MAC(10_7);
-APPKIT_EXTERN NSString * const NSSpellCheckerDidChangeAutomaticTextReplacementNotification NS_AVAILABLE_MAC(10_7);
-APPKIT_EXTERN NSString * const NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification NS_AVAILABLE_MAC(10_9);
-APPKIT_EXTERN NSString * const NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSNotificationName const NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSNotificationName const NSSpellCheckerDidChangeAutomaticTextReplacementNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSNotificationName const NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSNotificationName const NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSNotificationName const NSSpellCheckerDidChangeAutomaticCapitalizationNotification NS_AVAILABLE_MAC(10_12);
+APPKIT_EXTERN NSNotificationName const NSSpellCheckerDidChangeAutomaticPeriodSubstitutionNotification NS_AVAILABLE_MAC(10_12);
+APPKIT_EXTERN NSNotificationName const NSSpellCheckerDidChangeAutomaticTextCompletionNotification NS_AVAILABLE_MAC(10_12_2);
 
 
 @interface NSSpellChecker(NSDeprecated)

@@ -3,15 +3,17 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-563.3
+     Version:    vecLib-600.0
  
-     Copyright:  Copyright (c) 2000-2015 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 2000-2016 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
  
+     Various types are defined here to use with vecLib.  For more generally
+     useful vector/SIMD types, please consider the headers in /usr/include/simd.
 */
 #ifndef __VECLIBTYPES__
 #define __VECLIBTYPES__

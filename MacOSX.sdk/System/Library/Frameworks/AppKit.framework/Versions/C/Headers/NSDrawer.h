@@ -1,7 +1,7 @@
 /*
         NSDrawer.h
         Application Kit
-        Copyright (c) 1999-2015, Apple Inc.
+        Copyright (c) 1999-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -49,10 +49,10 @@ typedef NS_ENUM(NSUInteger, NSDrawerState) {
     CFAbsoluteTime 	_drawerStartTime;
     CFTimeInterval 	_drawerTotalTime;
     CFRunLoopRef 	_drawerLoop;
-    __strong CFRunLoopTimerRef 	_drawerTimer;
+    CFRunLoopTimerRef 	_drawerTimer;
     id 			_drawerDelegate;
     unsigned int	_drawerFlags;
-    __strong CFRunLoopObserverRef _drawerObserver;
+    CFRunLoopObserverRef _drawerObserver;
 }
 
 - (instancetype)initWithContentSize:(NSSize)contentSize preferredEdge:(NSRectEdge)edge;
@@ -103,10 +103,10 @@ typedef NS_ENUM(NSUInteger, NSDrawerState) {
 @end
 
 /* Notifications */
-APPKIT_EXTERN NSString * NSDrawerWillOpenNotification;
-APPKIT_EXTERN NSString * NSDrawerDidOpenNotification;
-APPKIT_EXTERN NSString * NSDrawerWillCloseNotification;
-APPKIT_EXTERN NSString * NSDrawerDidCloseNotification;
+APPKIT_EXTERN NSNotificationName NSDrawerWillOpenNotification;
+APPKIT_EXTERN NSNotificationName NSDrawerDidOpenNotification;
+APPKIT_EXTERN NSNotificationName NSDrawerWillCloseNotification;
+APPKIT_EXTERN NSNotificationName NSDrawerDidCloseNotification;
 
 NS_ASSUME_NONNULL_END
 

@@ -137,7 +137,7 @@ struct CFHostClientContext {
    * debugging purposes. This is used by the CFCopyDescription()
    * function.
    */
-  CFAllocatorCopyDescriptionCallBack  copyDescription;
+  CFAllocatorCopyDescriptionCallBack  __nullable copyDescription;
 };
 typedef struct CFHostClientContext	  CFHostClientContext;
 

@@ -1,7 +1,7 @@
 /*
 	NSPrintOperation.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, NSPrintRenderingQuality) {
 
 /* An exception that may be thrown by the factory methods described below.
 */
-APPKIT_EXTERN NSString * NSPrintOperationExistsException;
+APPKIT_EXTERN NSExceptionName NSPrintOperationExistsException;
 
 @interface NSPrintOperation : NSObject {
 }

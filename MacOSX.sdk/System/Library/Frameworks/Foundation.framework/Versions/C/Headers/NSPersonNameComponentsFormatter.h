@@ -1,5 +1,5 @@
 /*	NSPersonNameComponentsFormatter.h
-	Copyright (c) 2015, Apple Inc. All rights reserved.
+	Copyright (c) 2015-2016, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSPersonNameComponents.h>
@@ -63,9 +63,12 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  */
 - (NSAttributedString *)annotatedStringFromPersonNameComponents:(NSPersonNameComponents *)components;
 
-/* NSPersonNameComponentsFormatter currently only implements formatting, not parsing. Until it implements parsing, this will always return NO.
+
+/* Convenience method on getObjectValue:forString:error:. Returns an NSPersonNameComponents object representing the name components found in the provided string.
  */
-- (BOOL)getObjectValue:(out id __nullable * __nullable)obj forString:(NSString *)string errorDescription:(out NSString * __nullable * __nullable)error;
+- (nullable NSPersonNameComponents *)personNameComponentsFromString:(nonnull NSString *)string API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+
+- (BOOL)getObjectValue:(out id _Nullable * _Nullable)obj forString:(NSString *)string errorDescription:(out NSString * _Nullable * _Nullable)error;
 
 @end
 

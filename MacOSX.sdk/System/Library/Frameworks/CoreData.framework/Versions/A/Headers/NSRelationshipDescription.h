@@ -1,7 +1,7 @@
 /*
     NSRelationshipDescription.h
     Core Data
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -20,18 +20,20 @@ typedef NS_ENUM(NSUInteger, NSDeleteRule) {
 } ;
 
 // Relationships represent references to other objects. They usually come in pairs, where the reference back is called the "inverse".
-NS_CLASS_AVAILABLE(10_4,3_0)
+API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSRelationshipDescription : NSPropertyDescription {
+#if (!__OBJC2__)
 @private
 	void *_reserved5;
 	void *_reserved6;
-    __weak NSEntityDescription *_destinationEntity;
+    NSEntityDescription *_destinationEntity;
     NSString *_lazyDestinationEntityName;
     NSRelationshipDescription *_inverseRelationship;
     NSString *_lazyInverseRelationshipName;
     unsigned long _maxCount;
     unsigned long _minCount;
     NSDeleteRule _deleteRule;
+#endif
 }
 
 @property (nullable, nonatomic, assign) NSEntityDescription *destinationEntity;
@@ -46,9 +48,9 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 @property (getter=isToMany, readonly) BOOL toMany;    // convenience method to test whether the relationship is to-one or to-many
 
 // Returns the version hash for the relationship.  This value includes the versionHash information from the NSPropertyDescription superclass, the name of the destination entity and the inverse relationship, and the min and max count.
-@property (readonly, copy) NSData *versionHash NS_AVAILABLE(10_5,3_0);
+@property (readonly, copy) NSData *versionHash API_AVAILABLE(macosx(10.5),ios(3.0));
 
-@property (getter=isOrdered) BOOL ordered NS_AVAILABLE(10_7,  5_0);
+@property (getter=isOrdered) BOOL ordered API_AVAILABLE(macosx(10.7),ios(5.0));
 
 @end
 

@@ -3,9 +3,9 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-563.3
+     Version:    vecLib-600.0
  
-     Copyright:  Copyright (c) 2000-2015 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 2000-2016 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,6 +30,5 @@
 #ifndef __VFORCE_H
 #include <vecLib/vForce.h>
 #endif
-
 
 #endif /* __VECLIB__ */

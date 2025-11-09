@@ -3,27 +3,25 @@
 // =====================================================================================================================
 
 
-#import <AppKit/AppKit.h>
+#import <PDFKit/PDFKitPlatform.h>
 #import <PDFKit/PDFAnnotation.h>
 
-
-@class PDFAnnotationMarkupPrivateVars;
-
-
 // Types of markup annotations.
-typedef NSInteger PDFMarkupType;
-enum
+NS_ENUM_DEPRECATED(10_4, 10_12, NA, NA)
+typedef NS_ENUM(NSInteger, PDFMarkupType)
 {
-    kPDFMarkupTypeHighlight = 0, 
-    kPDFMarkupTypeStrikeOut = 1, 
+    kPDFMarkupTypeHighlight = 0,
+    kPDFMarkupTypeStrikeOut = 1,
     kPDFMarkupTypeUnderline = 2
 };
 
+@class PDFAnnotationMarkupPrivateVars;
 
+NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
 @interface PDFAnnotationMarkup : PDFAnnotation <NSCopying, NSCoding>
 {
 @private
-    PDFAnnotationMarkupPrivateVars *_pdfPriv2;
+    PDFAnnotationMarkupPrivateVars *_private2;
 }
 
 // Array of (n * 4) NSPoints defining n quadrilaterals in page space where n is the number of quad points. 

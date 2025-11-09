@@ -32,7 +32,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /*! @constant WKErrorDomain Indicates a WebKit error. */
-WK_EXTERN NSString * const WKErrorDomain NS_AVAILABLE(10_10, 8_0);
+WK_EXTERN NSString * const WKErrorDomain API_AVAILABLE(macosx(10.10), ios(8.0));
 
 /*! @enum WKErrorCode
  @abstract Constants used by NSError to indicate errors in the WebKit domain.
@@ -47,8 +47,8 @@ typedef NS_ENUM(NSInteger, WKErrorCode) {
     WKErrorWebContentProcessTerminated,
     WKErrorWebViewInvalidated,
     WKErrorJavaScriptExceptionOccurred,
-    WKErrorJavaScriptResultTypeIsUnsupported NS_ENUM_AVAILABLE(10_11, 9_0),
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+    WKErrorJavaScriptResultTypeIsUnsupported API_AVAILABLE(macosx(10.11), ios(9.0)),
+} API_AVAILABLE(macosx(10.10), ios(8.0));
 
 NS_ASSUME_NONNULL_END
 

@@ -154,11 +154,11 @@ typedef enum
 - (NSString *) imageSubtitle;
 
 /*! 
-  @method isSelectable
+  @property selectable
   @abstract Returns whether this item is selectable. 
   @discussion The receiver can implement this methods to forbid selection of this item by returning NO.
 */
-- (BOOL) isSelectable;
+@property (readonly, getter=isSelectable) BOOL selectable;
 
 @end
 
@@ -166,7 +166,8 @@ typedef enum
 /*! 
   @class IKImageBrowserView
   @abstract An IKImageBrowserView object is a view that display and browse images and movies. It supports scrolling and zooming.  
-*/
+  @discussion The IKImageBrowserView will be deprecated soon. Please switch to NSCollectionView.
+ */
 @interface IKImageBrowserView : NSView <NSDraggingSource> {
 @private
 
@@ -193,16 +194,10 @@ typedef enum
 - (id) initWithFrame:(NSRect) frame;
 
 /*!
-  @method setDataSource:
-  @abstract Sets the receiver's data source to <i>source</i>. the data source is not retained by the receiver.
+  @property datasource
+  @abstract The receiver's data source. the data source is not retained by the receiver.
 */
-- (void) setDataSource:(id /*IKImageBrowserDataSource*/) source;
-
-/*!
-  @method dataSource
-  @abstract Returns the receiver's data source.
-*/
-- (id /*IKImageBrowserDataSource */) dataSource;
+@property (assign) IBOutlet id /* <IKImageBrowserDataSource> */ dataSource;
 
 /*!
   @method reloadData
@@ -211,16 +206,10 @@ typedef enum
 - (void) reloadData;
 
 /*!
-  @method setDelegate:
-  @abstract Sets the receiver's delegate to <i>aDelegate</i>. aDelegate is expected to implement the IKImageBrowserDelegate informal protocol.
+  @property delegate
+  @abstract The receiver's delegate. aDelegate is expected to implement the IKImageBrowserDelegate informal protocol.
 */
-- (void) setDelegate: (id) aDelegate;
-
-/*!
-  @method delegate
-  @abstract Returns the receiver's delegate.
-*/
-- (id) delegate;
+@property (assign) IBOutlet id delegate;
 
 @end
 

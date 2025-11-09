@@ -1,7 +1,7 @@
 /*
         NSMenuView.h
         Application Kit
-        Copyright (c) 1997-2015, Apple Inc.
+        Copyright (c) 1997-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -100,7 +100,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (NSMenu *)attachedMenu;
 - (BOOL)isAttached;
 - (BOOL)isTornOff;
-- (NSPoint)locationForSubmenu:(NSMenu *)aSubmenu;
+- (NSPoint)locationForSubmenu:(NSMenu *)submenu;
 
 - (void)setWindowFrameForAttachingToRect:(NSRect)screenRect onScreen:(NSScreen *)screen preferredEdge:(NSRectEdge)edge popUpSelectedItem:(NSInteger)selectedItemIndex;
 - (void)detachSubmenu;

@@ -69,7 +69,7 @@ CFTypeID CTTextTabGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 				optional.
 */
 
-extern const CFStringRef kCTTabColumnTerminatorsAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTTabColumnTerminatorsAttributeName CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */

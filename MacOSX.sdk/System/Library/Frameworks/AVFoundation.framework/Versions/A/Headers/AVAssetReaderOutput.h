@@ -541,7 +541,6 @@ AV_INIT_UNAVAILABLE
 
 @end
 
-
 @class AVAssetReaderSampleReferenceOutputInternal;
 
 /*!

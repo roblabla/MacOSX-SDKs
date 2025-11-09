@@ -9,8 +9,10 @@
 #import <Metal/MTLDevice.h>
 
 NS_ASSUME_NONNULL_BEGIN
-/*
- MTLVertexFormat
+
+/*!
+ @enum MTLVertexFormat
+ @abstract specifies how the vertex attribute data is laid out in memory.
 */
 typedef NS_ENUM(NSUInteger, MTLVertexFormat)
 {
@@ -69,6 +71,8 @@ typedef NS_ENUM(NSUInteger, MTLVertexFormat)
     
     MTLVertexFormatInt1010102Normalized = 40,
     MTLVertexFormatUInt1010102Normalized = 41,
+    
+    
 } NS_ENUM_AVAILABLE(10_11, 8_0);
 
 typedef NS_ENUM(NSUInteger, MTLVertexStepFunction)
@@ -76,6 +80,8 @@ typedef NS_ENUM(NSUInteger, MTLVertexStepFunction)
     MTLVertexStepFunctionConstant = 0,
     MTLVertexStepFunctionPerVertex = 1,
     MTLVertexStepFunctionPerInstance = 2,
+    MTLVertexStepFunctionPerPatch NS_ENUM_AVAILABLE(10_12, 10_0) = 3,
+    MTLVertexStepFunctionPerPatchControlPoint NS_ENUM_AVAILABLE(10_12, 10_0) = 4,
 } NS_ENUM_AVAILABLE(10_11, 8_0);
 
 NS_CLASS_AVAILABLE(10_11, 8_0)

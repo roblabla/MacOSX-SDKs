@@ -1,10 +1,103 @@
-//
-//  IOUSBHostFamily.h
-//  IOUSBHostFamily
-//
-//  Created by Dan Wilson on 1/14/15.
-//
-//
+/*
+ * Copyright (c) 1998-2016 Apple Inc. All rights reserved.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
+ *
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
+ *
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ *
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
+ */
+
+/*! 
+ @header     IOUSBHostFamily.h
+ @brief      IOUSBHostFamily provides support for discovering, enumerating, and communicating with USB devices.
+ @discussion Starting with Mac OS X El Capitan, IOUSBHostFamily serves as a replacement for IOUSBFamily.
+ 
+ <h3>Architecture</h3>
+
+ USB host controller hardware is managed by AppleUSBHostController subclasses such as AppleUSBXHCI and AppleUSBEHCI.  Each AppleUSBHostController is the parent to one or more AppleUSBHostPort services, and each AppleUSBHostPort is able to enumerate a single IOUSBHostDevice service.  IOUSBHostDevice is the parent to zero or more IOUSBHostInterface services, and IOUSBHostInterface provides access to zero or more IOUSBHostPipe objects.  USB 3.0 and newer streaming-capable IOUSBHostPipe objects can generate one or more IOUSBHostStream objects.
+ 
+ AppleUSBHostPort services provide a workloop that is dedicated for use by the port, its enumerated device, and any attached drivers.  As such, drivers should not create or manage their own workloops.
+ 
+ IOUSBHostDevice and IOUSBHostInterface services can be matched on and controlled by third-party drivers, and are documented in IOUSBHostDevice.h and IOUSBHostInterface.h.  IOUSBHostPipe and IOUSBHostStream services share a common IOUSBHostIOSource base class, and are documented in IOUSBHostIOSource.h, IOUSBHostPipe.h, and IOUSBHostStream.h.  AppleUSBHostController and AppleUSBHostPort should be considered opaque classes.
+ 
+ <h3>Matching</h3>
+ 
+ IOUSBHostDevice and IOUSBHostInterface matching uses the same properties as the deprecated IOUSBDevice and IOUSBInterface classes.  See <a href="https://developer.apple.com/library/mac/qa/qa1076/_index.html">QA1076: Tips on USB driver matching for Mac OS X</a> for additional information.
+
+ <h3>Power management</h3>
+
+ IOUSBHostFamily supports more advanced power management capabilities, including pausing IO, and automatic suspend of idle devices.  All of this functionality is guided by idle policies set on IOUSBHostInterface services and IOUSBHostPipe objects.  The idle policy functionality allows most drivers to ignore suspend or resume events on the bus, and makes it unnecessary for them to actively participate in power management.
+
+ <h4>Idle suspend</h4>
+
+ By default, interfaces and pipes do not enable an idle policy, and the device will remain in the active (not suspended) state as long as the host machine is awake.  To enable idle suspend, the driver controlling an IOUSBHostInterface must enable an idle policy with the <code>IOUSBHostInterface::setIdlePolicy</code> API.  In the simple case of a device with only a single interface, when the interface's endpoints have no IO requests pending, the system will wait the time specified in the setIdlePolicy call, and then electrically suspend the device.  A new IO request during the wait period will cancel the suspend, and a new IO request after the device has suspended will immediately resume the device and initiate the IO.
+ 
+ In the more complex case of a device with multiple interfaces, a consensus idle policy must be calculated by finding the largest idle policy for all interfaces, excluding those which have not been opened by a driver.
+ 
+ Selection of an idle policy depends on the individual device, and should factor in resume latency tolerance.  The recommended idle policy for an interface is 50ms or larger.
+ 
+ Idle suspend is disabled if a driver is the power child of the IOUSBHostDevice and resides in a power state with an input power requirement that does not include <code>kIOPMLowPower</code>.
+
+ <h4>Pausing IO</h4>
+ 
+ A more advanced approach to idle suspend allows the device to suspend while transfers are still pending.  This is particularly useful for interfaces with interrupt IN endpoints that always have an IO pending, and otherwise would not idle suspend.  To enable IO pause, endpoints that would otherwise keep the device in the active state must enable an idle policy with the <code>IOUSBHostPipe::setIdlePolicy</code> API.  When an IOUSBHostPipe with an idle policy begins servicing a new IO, but does not complete it within the wait time specified in the idle policy, the IOUSBHostPipe is now considered idle and will not keep the device in the active state.  Idle endpoints are still serviced on the bus, and the IOUSBHostPipe is capable of moving data even when idle.  When all endpoints in the device have no pending IO requests or are idle, the idle suspend wait period begins as described above.
+
+ If the idle suspend period elapses without any new IO requests that would cancel the suspend, IOUSBHostFamily will pause the transfers on the bus and suspend the device.  IO requests are not aborted or returned to the driver when paused in this manner.
+ 
+ After resuming the device due to a remote wake or a new IO request, the pending IO requests are resumed on the bus, and data movement can continue.  If a large transfer is interrupted by a suspend, IOUSBHostFamily will combine the packets from before and after the suspend and return them as a single transfer result.  Note that not all firmware supports a mid-transfer suspend/resume, and pausing IO should only be enabled for devices that have been tested for this use case.
+ 
+ Control and isochronous IOUSBHostPipe objects never enable an idle policy, and pending IO on these endpoints will always prevent idle suspend.
+ 
+ Selection of an idle policy depends on the individual endpoint, and should factor in resume latency tolerance and expected data transfer frequency.  The recommended idle policy for IN-direction bulk and interrupt endpoints is 50ms or larger.  Firmware must be capable of handling a mid-transfer suspend/resume, and should issue a remote wake when data is available to be read.  Enabling an idle policy for OUT-direction bulk or interrupt endpoints is not generally recommended, but if enabled, firmware should have the ability to issue a remote wake when there is space in its endpoint buffer for additional data.
+
+ <h4>System power state changes</h4>
+ 
+ For devices that idle suspend, it may be necessary to perform IO as the system enters the sleep state, for example to enable wake-on-LAN for an Ethernet controller.  Drivers that wish to perform this type of IO should call <code>IOService::registerInterestedDriver</code> on the PM root to be notified of system-level changes.  During the <code>powerStateWillChangeTo</code> notification with a capability flag including <code>kIOPMSleepCapability</code>, the driver can initiate an IO request and resume the device.  Once the driver acknowledges this <code>powerStateWillChangeTo</code> notification, the device may not be able to raise its power state until the system wakes.  Attempting an IO request from other PM root <code>powerStateWillChangeTo</code> and <code>powerStateDidChangeTo</code> notifications may result in a deadlock waiting for a power state change.
+
+ <h3>Comparison to IOUSBFamily</h3>
+ 
+ Developers already familiar with IOUSBFamily can take advantage of new capabilities in IOUSBHostFamily that can simplify driver development and maintenace.
+ 
+ <h4>Workloops</h4>
+ 
+ IOUSBFamily provided a workloop for each controller, and all downstream devices shared that workloop.  By contrast, each AppleUSBHostPort creates a workloop dedicated for its attached device, which significantly reduces lock contention and improves responsiveness for drivers attached to IOUSBHostDevice or IOUSBHostInterface services.  Because the workloop is not shared across many unrelated services, driver developers are discouraged from creating an additional workloop.
+ 
+ <h4>Synchronous IO from completion callbacks</h4>
+ 
+ IOUSBFamily did not permit synchronous IO to be executed from a completion callback, but this restriction has been removed in IOUSBHostFamily.  Driver developers can now issue a sequence of synchronous commands in a completion routine without chaining thread calls or using complex state machines.
+ 
+ <h4>IO bookkeeping</h4>
+ 
+ IOUSBHostFamily now tracks all outstanding IOs for an endpoint, and offers more predictable behavior when aborting transfers or terminating services.  In most cases, driver developers no longer need to track the number of outstanding IOs, and can terminate their services with more determinism.
+
+ <h3>Driver Recommendations</h3>
+ 
+ <ul>
+    <li>Do not create a separate workloop</li>
+    <li>If joining the power plane, reside in a <code>kIOPMLowPower</code> state to enable idle suspend</li>
+    <li>If supporting pausing IO, only enable an idle policy on bulk or interrupt IN endpoints</li>
+    <li>If interested in system power state changes, call <code>registerInterestedDriver</code> on the PM root</li>
+ </ul>
+*/
 
 #ifndef IOUSBHostFamily_IOUSBHostFamily_h
 #define IOUSBHostFamily_IOUSBHostFamily_h
@@ -85,55 +178,52 @@ enum
 };
 
 /*!
+ * @enum tInternalUSBHostConnectionSpeed
  * @brief Connection speeds used internally by IOUSBHostFamily
  */
 enum
 {
-    kUSBHostConnectionSpeedLow   = 0,
-    kUSBHostConnectionSpeedFull  = 1,
-    kUSBHostConnectionSpeedHigh  = 2,
-    kUSBHostConnectionSpeedSuper = 3,
-    kUSBHostConnectionSpeedCount = 4
+    kUSBHostConnectionSpeedLow          = 0,
+    kUSBHostConnectionSpeedFull         = 1,
+    kUSBHostConnectionSpeedHigh         = 2,
+    kUSBHostConnectionSpeedSuper        = 3,
+    kUSBHostConnectionSpeedSuperPlus    = 4,
+    kUSBHostConnectionSpeedCount        = 5
 };
 
-/*!
- @define IOUSBHostFamily message codes
- @discussion Messages specific to the IOUSBHostFamily
- */
-
-// The two most significant bits of the error and message code are used to indicate a USB subgroup.
-#define iokit_usblegacy_group    (0 << StandardUSBBitRangePhase(12, 13))
-#define iokit_usbhost_group      (1 << StandardUSBBitRangePhase(12, 13))
 #define iokit_usb_codemask       StandardUSBBitRange(0, 11)
-
+#define iokit_usbhost_group      (1 << StandardUSBBitRangePhase(12, 13))
+#define iokit_usblegacy_group    (0 << StandardUSBBitRangePhase(12, 13))
+#define iokit_usbhost_err(message) ((IOReturn)(iokit_family_err(sub_iokit_usb, iokit_usbhost_group | (message & iokit_usb_codemask))))
 #define iokit_usbhost_msg(message) ((uint32_t)(iokit_family_msg(sub_iokit_usb, iokit_usbhost_group | (message & iokit_usb_codemask))))
 #define	iokit_usblegacy_err_msg(message)     ((uint32_t)(sys_iokit | sub_iokit_usb | message))
 
+/*!
+ @definedblock  IOUSBHostFamily message codes
+ @discussion    Messages passed between USB services using the <code>IOService::message</code> API.
+ */
 #define kUSBHostMessageConfigurationSet               iokit_usbhost_msg(0x00)       // 0xe0005000  IOUSBHostDevice -> clients upon a setConfiguration call.
 #define kUSBHostMessageRenegotiateCurrent             iokit_usbhost_msg(0x01)       // 0xe0005001  Request clients to renegotiate bus current allocations
 
-#define kUSBHostMessageUpdateIdlePolicy               iokit_usbhost_msg(0x100)      // 0xe0005100  Internal use only.  IOUSBHostInterface -> IOUSBHostDevice to update its idle policy.
-#define kUSBHostMessageRemoteWake                     iokit_usbhost_msg(0x101)      // 0xe0005101  Internal use only.  AppleUSBHostPort -> IOUSBHostDevice upon a remote wake event.
-#define kUSBHostMessageDeviceSuspend                  iokit_usbhost_msg(0x102)      // 0xe0005102  Internal use only.  IOUSBHostDevice -> clients upon a suspend event.
-#define kUSBHostMessageDeviceResume                   iokit_usbhost_msg(0x103)      // 0xe0005103  Internal use only.  IOUSBHostDevice -> clients upon a resume event.
-#define kUSBHostMessagePortsCreated                   iokit_usbhost_msg(0x104)      // 0xe0005104  Internal use only.  AppleUSBHostController and AppleUSBHub -> clients after all ports have been created.
+#define kUSBHostMessageUpdateIdlePolicy               iokit_usbhost_msg(0x100)      // 0xe0005100  Apple Internal use only.  IOUSBHostInterface -> IOUSBHostDevice to update its idle policy.
+#define kUSBHostMessageRemoteWake                     iokit_usbhost_msg(0x101)      // 0xe0005101  Apple Internal use only.  AppleUSBHostPort -> IOUSBHostDevice upon a remote wake event.
+#define kUSBHostMessageDeviceSuspend                  iokit_usbhost_msg(0x102)      // 0xe0005102  Apple Internal use only.  IOUSBHostDevice -> clients upon a suspend event.
+#define kUSBHostMessageDeviceResume                   iokit_usbhost_msg(0x103)      // 0xe0005103  Apple Internal use only.  IOUSBHostDevice -> clients upon a resume event.
+#define kUSBHostMessagePortsCreated                   iokit_usbhost_msg(0x104)      // 0xe0005104  Apple Internal use only.  AppleUSBHostController and AppleUSBHub -> clients after all ports have been created.
 #define kUSBHostMessageDeviceConnected                iokit_usbhost_msg(0x105)      // 0xe0005105  Apple Internal use only.  AppleUSBRemovablePort -> clients after a connect.
 #define kUSBHostMessageDeviceDisconnected             iokit_usbhost_msg(0x106)      // 0xe0005106  Apple Internal use only.  AppleUSBRemovablePort -> clients after a disconnect.
+#define kUSBHostMessageControllerPoweredOn            iokit_usbhost_msg(0x107)      // 0xe0005107  Apple Internal use only.  AppleEmbeddedUSBXHCIFL1100 -> FL1100Boot after a stable power state is reached.
+#define kUSBHostMessageNonInterruptIsochFrame         iokit_usbhost_msg(0x108)      // 0xe0005108  Apple Internal use only. 
 
 // User Message Support
-#define kUSBHostMessageOvercurrentCondition           iokit_usblegacy_err_msg(0x13) // 0xe0004013  Message sent to the clients of the device's hub parent, when a device causes an overcurrent condition.  The message argument contains the locationID of the device
-#define kUSBHostMessageNotEnoughPower                 iokit_usblegacy_err_msg(0x14) // 0xe0004014  Message sent to the clients of the device's hub parent, when a device causes an low power notice to be displayed.  The message argument contains the locationID of the device
-#define kUSBHostMessageEndpointCountExceeded          iokit_usblegacy_err_msg(0x19) // 0xe0004019  Message sent to a device when endpoints cannot be created because the USB controller ran out of resources
-#define kUSBHostMessageDeviceCountExceeded            iokit_usblegacy_err_msg(0x1a) // 0xe000401a  Message sent by a hub when a device cannot be enumerated because the USB controller ran out of resources
-#define kUSBHostMessageUnsupportedConfiguration       iokit_usblegacy_err_msg(0x1c) // 0xe000401c  Message sent to the clients of the device when a device is not supported in the current configuration.  The message argument contains the locationID of the device
-#define kUSBHostMessageHubCountExceeded               iokit_usblegacy_err_msg(0x1d) // 0xe000401d  Message sent when a 6th hub was plugged in and was not enumerated, as the USB spec only support 5 hubs in a chain
-#define kUSBHostMessageTDMLowBattery                  iokit_usblegacy_err_msg(0x1e) // 0xe000401e  Message sent when when an attached TDM system battery is running low.
-
-/*!
- @defined IOUSBHostFamily error codes
- @discussion  Errors specific to the IOUSBHostFamily.  Note that the iokit_usb_err(x) translates to 0xe0004xxx, where xxx is the value in parenthesis as a hex number.
- */
-#define iokit_usbhost_err(message) ((IOReturn)(iokit_family_err(sub_iokit_usb, iokit_usbhost_group | (message & iokit_usb_codemask))))
+#define kUSBHostMessageOvercurrentCondition           iokit_usblegacy_err_msg(0x13) // 0xe0004013  Apple Internal use only.  Message sent to the clients of the device's hub parent, when a device causes an overcurrent condition.  The message argument contains the locationID of the device
+#define kUSBHostMessageNotEnoughPower                 iokit_usblegacy_err_msg(0x14) // 0xe0004014  Apple Internal use only.  Message sent to the clients of the device's hub parent, when a device causes an low power notice to be displayed.  The message argument contains the locationID of the device
+#define kUSBHostMessageEndpointCountExceeded          iokit_usblegacy_err_msg(0x19) // 0xe0004019  Apple Internal use only.  Message sent to a device when endpoints cannot be created because the USB controller ran out of resources
+#define kUSBHostMessageDeviceCountExceeded            iokit_usblegacy_err_msg(0x1a) // 0xe000401a  Apple Internal use only.  Message sent by a hub when a device cannot be enumerated because the USB controller ran out of resources
+#define kUSBHostMessageUnsupportedConfiguration       iokit_usblegacy_err_msg(0x1c) // 0xe000401c  Apple Internal use only.  Message sent to the clients of the device when a device is not supported in the current configuration.  The message argument contains the locationID of the device
+#define kUSBHostMessageHubCountExceeded               iokit_usblegacy_err_msg(0x1d) // 0xe000401d  Apple Internal use only.  Message sent when a 6th hub was plugged in and was not enumerated, as the USB spec only support 5 hubs in a chain
+#define kUSBHostMessageTDMLowBattery                  iokit_usblegacy_err_msg(0x1e) // 0xe000401e  Apple Internal use only.  Message sent when when an attached TDM system battery is running low.
+/*! @/definedblock */
 
 #define kUSBHostReturnPipeStalled   iokit_usbhost_err(0x0)  // 0xe0005000  Pipe has issued a STALL handshake.  Use clearStall to clear this condition.
 #define kUSBHostReturnNoPower       iokit_usbhost_err(0x1)  // 0xe0005001  A setConfiguration call was not able to succeed because all configurations require more power than is available.
@@ -153,6 +243,7 @@ enum tUSBHostPortType
     kUSBHostPortTypeCaptive,
     kUSBHostPortTypeInternal,
     kUSBHostPortTypeAccessory,
+    kUSBHostPortTypeExpressCard,
     kUSBHostPortTypeCount
 };
 
@@ -165,15 +256,17 @@ enum tUSBHostPortType
  * @constant kUSBHostPortConnectionSpeedLow A low-speed (1.5 Mb/s) device is connected
  * @constant kUSBHostPortConnectionSpeedHigh A high-speed (480 Mb/s) device is connected)
  * @constant kUSBHostPortConnectionSpeedSuper A superspeed (5 Gb/s) device is connected)
+ * @constant kUSBHostPortConnectionSpeedSuperPlus A superspeed (10 Gb/s) device is connected)
  */
 enum tUSBHostConnectionSpeed
 {
-    kUSBHostPortConnectionSpeedNone  = 0,
-    kUSBHostPortConnectionSpeedFull  = 1,
-    kUSBHostPortConnectionSpeedLow   = 2,
-    kUSBHostPortConnectionSpeedHigh  = 3,
-    kUSBHostPortConnectionSpeedSuper = 4,
-    kUSBHostPortConnectionSpeedCount = 5
+    kUSBHostPortConnectionSpeedNone         = 0,
+    kUSBHostPortConnectionSpeedFull         = 1,
+    kUSBHostPortConnectionSpeedLow          = 2,
+    kUSBHostPortConnectionSpeedHigh         = 3,
+    kUSBHostPortConnectionSpeedSuper        = 4,
+    kUSBHostPortConnectionSpeedSuperPlus    = 5,
+    kUSBHostPortConnectionSpeedCount        = 6
 };
 
 /*!
@@ -198,30 +291,31 @@ enum tUSBHostConnectionSpeed
  */
 enum tUSBHostPortStatus
 {
-    kUSBHostPortStatusPortTypeMask          = StandardUSBBitRange(0, 3),
-    kUSBHostPortStatusPortTypePhase         = StandardUSBBitRangePhase(0, 3),
-    kUSBHostPortStatusPortTypeStandard      = (kUSBHostPortTypeStandard << StandardUSBBitRangePhase(0, 3)),
-    kUSBHostPortStatusPortTypeCaptive       = (kUSBHostPortTypeCaptive << StandardUSBBitRangePhase(0, 3)),
-    kUSBHostPortStatusPortTypeInternal      = (kUSBHostPortTypeInternal << StandardUSBBitRangePhase(0, 3)),
-    kUSBHostPortStatusPortTypeAccessory     = (kUSBHostPortTypeAccessory << StandardUSBBitRangePhase(0, 3)),
-    kUSBHostPortStatusPortTypeReserved      = StandardUSBBitRange(4, 7),
-    kUSBHostPortStatusConnectedSpeedMask    = StandardUSBBitRange(8, 10),
-    kUSBHostPortStatusConnectedSpeedPhase   = StandardUSBBitRangePhase(8, 10),
-    kUSBHostPortStatusConnectedSpeedNone    = (kUSBHostPortConnectionSpeedNone << StandardUSBBitRangePhase(8, 10)),
-    kUSBHostPortStatusConnectedSpeedFull    = (kUSBHostPortConnectionSpeedFull << StandardUSBBitRangePhase(8, 10)),
-    kUSBHostPortStatusConnectedSpeedLow     = (kUSBHostPortConnectionSpeedLow << StandardUSBBitRangePhase(8, 10)),
-    kUSBHostPortStatusConnectedSpeedHigh    = (kUSBHostPortConnectionSpeedHigh << StandardUSBBitRangePhase(8, 10)),
-    kUSBHostPortStatusConnectedSpeedSuper   = (kUSBHostPortConnectionSpeedSuper << StandardUSBBitRangePhase(8, 10)),
-    kUSBHostPortStatusResetting             = StandardUSBBit(11),
-    kUSBHostPortStatusEnabled               = StandardUSBBit(12),
-    kUSBHostPortStatusSuspended             = StandardUSBBit(13),
-    kUSBHostPortStatusOvercurrent           = StandardUSBBit(14),
-    kUSBHostPortStatusTestMode              = StandardUSBBit(15)
+    kUSBHostPortStatusPortTypeMask              = StandardUSBBitRange(0, 3),
+    kUSBHostPortStatusPortTypePhase             = StandardUSBBitRangePhase(0, 3),
+    kUSBHostPortStatusPortTypeStandard          = (kUSBHostPortTypeStandard << StandardUSBBitRangePhase(0, 3)),
+    kUSBHostPortStatusPortTypeCaptive           = (kUSBHostPortTypeCaptive << StandardUSBBitRangePhase(0, 3)),
+    kUSBHostPortStatusPortTypeInternal          = (kUSBHostPortTypeInternal << StandardUSBBitRangePhase(0, 3)),
+    kUSBHostPortStatusPortTypeAccessory         = (kUSBHostPortTypeAccessory << StandardUSBBitRangePhase(0, 3)),
+    kUSBHostPortStatusPortTypeReserved          = StandardUSBBitRange(4, 7),
+    kUSBHostPortStatusConnectedSpeedMask        = StandardUSBBitRange(8, 10),
+    kUSBHostPortStatusConnectedSpeedPhase       = StandardUSBBitRangePhase(8, 10),
+    kUSBHostPortStatusConnectedSpeedNone        = (kUSBHostPortConnectionSpeedNone << StandardUSBBitRangePhase(8, 10)),
+    kUSBHostPortStatusConnectedSpeedFull        = (kUSBHostPortConnectionSpeedFull << StandardUSBBitRangePhase(8, 10)),
+    kUSBHostPortStatusConnectedSpeedLow         = (kUSBHostPortConnectionSpeedLow << StandardUSBBitRangePhase(8, 10)),
+    kUSBHostPortStatusConnectedSpeedHigh        = (kUSBHostPortConnectionSpeedHigh << StandardUSBBitRangePhase(8, 10)),
+    kUSBHostPortStatusConnectedSpeedSuper       = (kUSBHostPortConnectionSpeedSuper << StandardUSBBitRangePhase(8, 10)),
+    kUSBHostPortStatusConnectedSpeedSuperPlus   = (kUSBHostPortConnectionSpeedSuperPlus << StandardUSBBitRangePhase(8, 10)),
+    kUSBHostPortStatusResetting                 = StandardUSBBit(11),
+    kUSBHostPortStatusEnabled                   = StandardUSBBit(12),
+    kUSBHostPortStatusSuspended                 = StandardUSBBit(13),
+    kUSBHostPortStatusOvercurrent               = StandardUSBBit(14),
+    kUSBHostPortStatusTestMode                  = StandardUSBBit(15)
 };
 
 /*!
- @enum Default control request timeout values in milliseconds
- @discussion default values used for data and completion timeouts.
+ @enum tUSBHostDefaultControlRequestTimeout
+ @brief Default control request timeout values in milliseconds
  */
 enum
 {
@@ -269,7 +363,6 @@ enum
 #define kUSBHostMatchingPropertyInterfaceNumber                 "bInterfaceNumber"
 
 #define kUSBHostPropertyLocationID                              "locationID"
-#define kUSBHostPropertyDataToggleResetOverride                 "kUSBDataToggleResetOverride"
 #define kUSBHostPropertyDebugOptions                            "kUSBDebugOptions"
 #define kUSBHostPropertyWakePowerSupply                         "kUSBWakePowerSupply"
 #define kUSBHostPropertySleepPowerSupply                        "kUSBSleepPowerSupply"
@@ -306,6 +399,22 @@ enum
 #define kUSBHostDevicePropertyConfigurationDescriptorOverride   "kUSBConfigurationDescriptorOverride"
 #define kUSBHostDevicePropertyConfigurationCurrentOverride      "kUSBConfigurationCurrentOverride"
 #define kUSBHostDevicePropertyResetDurationOverride             "kUSBResetDurationOverride"
+#define kUSBHostDevicePropertyDesiredChargingCurrent            "kUSBDesiredChargingCurrent"
+#define kUSBHostDevicePropertyDescriptorOverride                "kUSBDescriptorOverride"
+
+#define kUSBHostBillboardDevicePropertyNumberOfAlternateModes   "bNumberOfAlternateModes"
+#define kUSBHostBillboardDevicePropertyPreferredAlternateMode   "bPreferredAlternateMode"
+#define kUSBHostBillboardDevicePropertyVCONNPower               "VCONNPower"
+#define kUSBHostBillboardDevicePropertyConfigured               "bmConfigured"
+#define kUSBHostBillboardDevicePropertyAdditionalFailureInfo    "bAdditonalFailureInfo"
+#define kUSBHostBillboardDevicePropertyBcdVersion               "BcdVersion"
+#define kUSBHostBillboardDevicePropertySVID                     "wSVID"
+#define kUSBHostBillboardDevicePropertyAlternateMode            "bAlternateMode"
+#define kUSBHostBillboardDevicePropertyAlternateModeStringIndex "iAlternateModeString"
+#define kUSBHostBillboardDevicePropertyAlternateModeString      "AlternateModeString"
+#define kUSBHostBillboardDevicePropertyAddtionalInfoURLIndex    "iAddtionalInfoURL"
+#define kUSBHostBillboardDevicePropertyAddtionalInfoURL         "AddtionalInfoURL"
+#define kUSBHostBillboardDevicePropertydwAlternateModeVdo       "dwAlternateModeVdo"
 
 #if TARGET_OS_EMBEDDED
 #define kUSBHostInterfacePropertyStringIndex                    "iInterface"
@@ -314,6 +423,7 @@ enum
 #endif
 #define kUSBHostInterfacePropertyAlternateSetting               "bAlternateSetting"
 
+#define kUSBHostPortPropertyOvercurrent                         "UsbHostPortOvercurrent"
 #define kUSBHostPortPropertyPortNumber                          "port"
 #define kUSBHostPortPropertyRemovable                           "removable"
 #define kUSBHostPortPropertyTestMode                            "kUSBTestMode"
@@ -324,14 +434,17 @@ enum
 #define kUSBHostPortPropertyConnectorType                       "UsbConnector"
 #define kUSBHostPortPropertyMux                                 "UsbMux"
 #define kUSBHostPortPropertyCompanionIndex                      "kUSBCompanionIndex"
+#define kUSBHostPortPropertyDisconnectInterval                  "kUSBDisconnectInterval"
+#define kUSBHostPortPropertyUsbCPortNumber                      "UsbCPortNumber"
+#define kUSBHostPortPropertyCompanionPortNumber                 "UsbCompanionPortNumber"                // OSData  key to set/get the port number of the companion port
 
 #define kUSBHostHubPropertyPowerSupply                          "kUSBHubPowerSupply"                    // OSNumber mA available for downstream ports, 0 for bus-powered
 #define kUSBHostHubPropertyIdlePolicy                           "kUSBHubIdlePolicy"                     // OSNumber ms to be used as device idle policy
 #define kUSBHostHubPropertyStartupDelay                         "kUSBHubStartupDelay"                   // OSNumber ms delay before creating downstream ports
 #define kUSBHostHubPropertyPortSequenceDelay                    "kUSBHubPortSequenceDelay"              // OSNumber ms delay between port creation
+#define kUSBHostHubPropertyHubPowerSupplyType                   "kUSBHubPowerSupplyType"                // OSNumber for tPowerSupply hub is, 2 for bus-powered, 1 for self
 
 #define kUSBHostControllerPropertyIsochronousRequiresContiguous "kUSBIsochronousRequiresContiguous"
-#define kUSBHostControllerPropertyDebugError                    "kUSBDebugError"
 #define kUSBHostControllerPropertySleepSupported                "kUSBSleepSupported"
 #define kUSBHostControllerPropertyMuxEnabled                    "kUSBMuxEnabled"
 #define kUSBHostControllerPropertyCompanion                     "kUSBCompanion"                         // OSBoolean false to disable all companion controllers
@@ -339,6 +452,8 @@ enum
 #define kUSBHostControllerPropertyFullSpeedCompanion            "kUSBFullSpeedCompanion"                // OSBoolean false to disable full-speed companion controller
 #define kUSBHostControllerPropertyHighSpeedCompanion            "kUSBHighSpeedCompanion"                // OSBoolean false to disable high-speed companion controller
 #define kUSBHostControllerPropertySuperSpeedCompanion           "kUSBSuperSpeedCompanion"               // OSBoolean false to disable superspeed companion controller
+#define kUSBHostControllerPropertyRevision                      "Revision"                              // OSData    Major/minor revision number of controller
+#define kUSBHostControllerPropertyCompanionControllerName       "UsbCompanionControllerName"            // OSString  key to set/get the name of the service, i.e. companion controller dictionary.
 
 #define kUSBHostPortPropertyExternalDeviceResetController       "kUSBHostPortExternalDeviceResetController"
 #define kUSBHostPortPropertyExternalDevicePowerController       "kUSBHostPortExternalDevicePowerController"
@@ -347,19 +462,16 @@ enum
 
 #define kUSBHostPortPropertyOffset                              "kUSBHostPortPropertyOffset"
 
-#if !TARGET_OS_EMBEDDED
-#define kUSBExpressCardCantWake                                 "kUSBExpressCardCantWake"
-#endif
-
 #pragma mark APCI enumerations
 
-// UPC definitions from ACPI Rev 4.0
+// ACPI 5.0a Table 9-227: UPC Return Package Values
 typedef enum
 {
     kUSBHostPortNotConnectable = 0,                 // Port is not connectable
     kUSBHostPortConnectable    = 1                  // Port is connectable either user visible or invisible
 } tUSBHostPortConnectable;
 
+// ACPI 5.0a Table 9-227: UPC Return Package Values
 typedef enum
 {
     kUSBHostConnectorTypeA              = 0x00,
@@ -370,6 +482,7 @@ typedef enum
     kUSBHostConnectorTypeUSB3MicroB     = 0x05,
     kUSBHostConnectorTypeUSB3MicroAB    = 0x06,
     kUSBHostConnectorTypeUSB3PowerB     = 0x07,
+    kUSBHostConnectorTypeUSBTypeC       = 0x09,
     kUSBHostConnectorTypeUnknown        = 0xFE,
     kUSBHostConnectorTypeProprietary    = 0xFF
 } tUSBHostConnectorType;
@@ -401,7 +514,15 @@ typedef enum
 #define kRDYForGPIOTest                                 "RDYG"
 #define kReconfiguredCount                              "RCFG"
 #define kUSBPlatformProperties                          "USBX"
+#define kUSBTypeCCableDetectACPIMethod                  "MODU"
 
+// connection types returned by MODU method
+typedef enum
+{
+    kUSBTypeCCableTypeNone              = 0,
+    kUSBTypeCCableTypeUSB               = 1,
+    kUSBTypeCCableTypeError             = 0xFF
+} tUSBCTypeCableType;
 
 #endif
 

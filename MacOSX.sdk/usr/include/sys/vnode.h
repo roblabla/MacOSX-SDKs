@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -103,10 +103,9 @@ enum vtagtype	{
 	VT_KERNFS, VT_PROCFS, VT_AFS, VT_ISOFS, VT_MOCKFS,
 	/* 16 - 20 */
 	VT_HFS, VT_ZFS, VT_DEVFS, VT_WEBDAV, VT_UDF, 
-	/* 21 - 24 */
-	VT_AFP, VT_CDDA, VT_CIFS, VT_OTHER
+	/* 21 - 25 */
+	VT_AFP, VT_CDDA, VT_CIFS, VT_OTHER, VT_APFS
 };
-
 
 /*
  * flags for VNOP_BLOCKMAP

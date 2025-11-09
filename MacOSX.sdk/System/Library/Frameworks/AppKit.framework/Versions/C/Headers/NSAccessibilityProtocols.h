@@ -1,7 +1,7 @@
 /*
  NSAccessibilityProtocols.h
  Application Kit
- Copyright (c) 2013-2015, Apple Inc.
+ Copyright (c) 2013-2016, Apple Inc.
  All rights reserved.
  */
 
@@ -182,6 +182,7 @@ NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 @protocol NSAccessibilityLayoutArea <NSAccessibilityGroup>
 @required
 - (NSString *)accessibilityLabel;
+
 // All of the layoutItem children
 - (nullable NSArray *)accessibilityChildren;
 
@@ -189,7 +190,7 @@ NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 - (nullable NSArray *)accessibilitySelectedChildren;
 
 // The focused layoutItem
-- (id)accessibilityFocusedUIElement;
+@property (readonly, strong) id accessibilityFocusedUIElement;
 
 @end
 
@@ -382,6 +383,10 @@ NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 // Array of elements with which this element shares keyboard focus
 // Invokes when clients request NSAccessibilitySharedFocusElementsAttribute
 @property (nullable, copy) NSArray *accessibilitySharedFocusElements NS_AVAILABLE_MAC(10_10);
+
+// Returns YES if the UIElement is required to have content for successful submission of a form
+// Invokes when clients request NSAccessibilityRequiredAttribute
+@property (getter=isAccessibilityRequired) BOOL accessibilityRequired NS_AVAILABLE_MAC(10_12);
 
 #pragma mark Application
 

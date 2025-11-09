@@ -12,9 +12,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class MDLSubmesh;
+
 NS_CLASS_AVAILABLE(10_11, 9_0)
 MDL_EXPORT
 @interface MDLSubmeshTopology : NSObject
+
+/*! 
+ @method initWithSubmesh:
+ @abstract create a topology object corresponding to the topology in the submesh
+ */
+- (instancetype) initWithSubmesh:(MDLSubmesh*)submesh;
 
 /*!
  @property faceTopologyBuffer
@@ -160,6 +168,8 @@ MDL_EXPORT
  */
 @property (nonatomic, readonly, retain) id<MDLMeshBuffer> indexBuffer;
 
+- (id<MDLMeshBuffer>)indexBufferAsIndexType:(MDLIndexBitDepth)indexType;
+
 /*!
  @property indexCount
  @abstract Number of indices in the indexBuffer
@@ -194,7 +204,7 @@ MDL_EXPORT
              A submesh of type MDLGeometryTypeVariableTopology with no topology
              data is an empty submesh.
 */
-@property (nonatomic, readonly, retain, nullable) MDLSubmeshTopology *topology;
+@property (nonatomic, retain, nullable) MDLSubmeshTopology *topology;
 
 /*!
  @property name

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2011, 2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2004-2011, 2015, 2016 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -120,7 +120,7 @@ extern const CFStringRef kSCNetworkInterfaceTypePPP						__OSX_AVAILABLE_STARTIN
 /*!
 	@const kSCNetworkInterfaceTypePPTP
  */
-extern const CFStringRef kSCNetworkInterfaceTypePPTP						__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+extern const CFStringRef kSCNetworkInterfaceTypePPTP						__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_12,__IPHONE_NA,__IPHONE_NA);
 
 /*!
 	@const kSCNetworkInterfaceTypeSerial
@@ -233,11 +233,6 @@ typedef SCNetworkInterfaceRef SCVLANInterfaceRef;
 typedef const struct CF_BRIDGED_TYPE(id) __SCNetworkProtocol * SCNetworkProtocolRef;
 
 /* network "protocol" types */
-
-/*!
-	@const kSCNetworkProtocolTypeAppleTalk
- */
-extern const CFStringRef kSCNetworkProtocolTypeAppleTalk					__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
 
 /*!
 	@const kSCNetworkProtocolTypeDNS
@@ -444,7 +439,7 @@ SCNetworkInterfaceGetLocalizedDisplayName	(SCNetworkInterfaceRef		interface)	__O
  */
 Boolean
 SCNetworkInterfaceSetConfiguration		(SCNetworkInterfaceRef		interface,
-						 CFDictionaryRef		config)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+						 CFDictionaryRef __nullable	config)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
 	@function SCNetworkInterfaceSetExtendedConfiguration
@@ -456,7 +451,7 @@ SCNetworkInterfaceSetConfiguration		(SCNetworkInterfaceRef		interface,
 Boolean
 SCNetworkInterfaceSetExtendedConfiguration	(SCNetworkInterfaceRef		interface,
 						 CFStringRef			extendedType,
-						 CFDictionaryRef		config)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+						 CFDictionaryRef __nullable	config)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 #pragma mark -
 
@@ -904,7 +899,7 @@ SCNetworkProtocolGetProtocolType		(SCNetworkProtocolRef		protocol)	__OSX_AVAILAB
  */
 Boolean
 SCNetworkProtocolSetConfiguration		(SCNetworkProtocolRef		protocol,
-						 CFDictionaryRef		config)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+						 CFDictionaryRef __nullable	config)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
 	@function SCNetworkProtocolSetEnabled
@@ -1104,7 +1099,7 @@ SCNetworkServiceSetEnabled			(SCNetworkServiceRef		service,
  */
 Boolean
 SCNetworkServiceSetName				(SCNetworkServiceRef		service,
-						 CFStringRef			name)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+						 CFStringRef __nullable		name)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 
 /* --------------------------------------------------------------------------------
@@ -1282,7 +1277,7 @@ SCNetworkSetSetCurrent				(SCNetworkSetRef		set)		__OSX_AVAILABLE_STARTING(__MAC
  */
 Boolean
 SCNetworkSetSetName				(SCNetworkSetRef		set,
-						 CFStringRef			name)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+						 CFStringRef __nullable		name)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
 	@function SCNetworkSetSetServiceOrder

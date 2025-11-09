@@ -1,5 +1,5 @@
 /*	CFCalendar.h
-	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFCALENDAR__)
@@ -22,12 +22,12 @@ CF_EXPORT
 CFCalendarRef CFCalendarCopyCurrent(void);
 
 CF_EXPORT
-CFCalendarRef CFCalendarCreateWithIdentifier(CFAllocatorRef allocator, CFStringRef identifier);
+CFCalendarRef CFCalendarCreateWithIdentifier(CFAllocatorRef allocator, CFCalendarIdentifier identifier);
 	// Create a calendar.  The identifiers are the kCF*Calendar
 	// constants in CFLocale.h.
 
 CF_EXPORT
-CFStringRef CFCalendarGetIdentifier(CFCalendarRef calendar);
+CFCalendarIdentifier CFCalendarGetIdentifier(CFCalendarRef calendar);
 	// Returns the calendar's identifier.
 
 CF_EXPORT

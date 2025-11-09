@@ -161,6 +161,16 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 */
 - (void)cancelAllPendingVideoCompositionRequests;
 
+/*!
+ @property supportsWideColorSourceFrames
+ @abstract
+	Indicates that clients can handle frames that contains wide color properties.
+ 
+ @discussion 
+	Controls whether the client will receive frames that contain wide color information. Care should be taken to avoid clamping.
+ */
+@property (nonatomic, readonly) BOOL supportsWideColorSourceFrames NS_AVAILABLE(10_12, 10_0);
+
 @end
 
 /*!

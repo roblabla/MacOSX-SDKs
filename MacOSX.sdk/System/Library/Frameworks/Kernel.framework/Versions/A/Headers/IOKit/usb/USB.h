@@ -377,7 +377,7 @@ typedef struct IOUSBLowLatencyIsocCompletion {
 @discussion  Errors specific to the IOUSBFamily.  Note that the iokit_usb_err(x) translates to 0xe0004xxx, where xxx is the value in parenthesis as a hex number.
 */
 
-#define	iokit_usb_err(return)								(sys_iokit|sub_iokit_usb|return)
+#define	iokit_usb_err(return)								(IOReturn)(sys_iokit|sub_iokit_usb|return)
 #define kIOUSBUnknownPipeErr								iokit_usb_err(0x61)									// 0xe0004061  Pipe ref not recognized
 #define kIOUSBTooManyPipesErr								iokit_usb_err(0x60)									// 0xe0004060  Too many pipes
 #define kIOUSBNoAsyncPortErr								iokit_usb_err(0x5f)									// 0xe000405f  no async port
@@ -462,11 +462,12 @@ Completion Code         Error Returned              Description
 #define kIOUSBMessageDeviceCountExceeded			iokit_usb_msg(0x1a)		// 0xe000401a  Message sent by a hub when a device cannot be enumerated because the USB controller ran out of resources
 #define kIOUSBMessageHubPortDeviceDisconnected      iokit_usb_msg(0x1b)		// 0xe000401b  Message sent by a built-in hub when a device was disconnected
 #define kIOUSBMessageUnsupportedConfiguration		iokit_usb_msg(0x1c)     // 0xe000401c  Message sent to the clients of the device when a device is not supported in the current configuration.  The message argument contains the locationID of the device
-#define kIOUSBMessageHubCountExceeded               iokit_usb_err(0x1d)     // 0xe000401d  Message sent when a 6th hub was plugged in and was not enumerated, as the USB spec only support 5 hubs in a chain
-#define kIOUSBMessageTDMLowBattery                  iokit_usb_err(0x1e)     // 0xe000401e  Message sent when when an attached TDM system battery is running low.
-#define kIOUSBMessageLegacySuspendDevice            iokit_usb_err(0x1f)     // 0xe000401f  Message sent to legacy interfaces when SuspedDevice() is called .
-#define kIOUSBMessageLegacyResetDevice              iokit_usb_err(0x20)     // 0xe0004020  Message sent to legacy interfaces when ResetDevice() is called .
-#define kIOUSBMessageLegacyReEnumerateDevice        iokit_usb_err(0x21)     // 0xe0004021  Message sent to legacy interfaces when ReEnumerateDevice() is called .
+#define kIOUSBMessageHubCountExceeded               iokit_usb_msg(0x1d)     // 0xe000401d  Message sent when a 6th hub was plugged in and was not enumerated, as the USB spec only support 5 hubs in a chain
+#define kIOUSBMessageTDMLowBattery                  iokit_usb_msg(0x1e)     // 0xe000401e  Message sent when when an attached TDM system battery is running low.
+#define kIOUSBMessageLegacySuspendDevice            iokit_usb_msg(0x1f)     // 0xe000401f  Message sent to legacy interfaces when SuspedDevice() is called .
+#define kIOUSBMessageLegacyResetDevice              iokit_usb_msg(0x20)     // 0xe0004020  Message sent to legacy interfaces when ResetDevice() is called .
+#define kIOUSBMessageLegacyReEnumerateDevice        iokit_usb_msg(0x21)     // 0xe0004021  Message sent to legacy interfaces when ReEnumerateDevice() is called .
+#define kIOUSBMessageConfigurationSet               iokit_usb_msg(0x22)     // 0xe0004022  Message sent upon a SetConfiguration call 
     
 /*! @/defineblock */
 
@@ -609,6 +610,43 @@ typedef IOUSBDescriptorHeader *			IOUSBDescriptorHeaderPtr;
 	};
 	typedef struct IOUSBDeviceCapabilityContainerID		IOUSBDeviceCapabilityContainerID;
 	typedef IOUSBDeviceCapabilityContainerID *			IOUSBDeviceCapabilityContainerIDPtr;
+
+    /*!
+     @typedef IOUSBDeviceCapabilityBillboardAltConfig
+     @discussion Device Capability Billboard Alternate Setting Info
+     */
+    struct IOUSBDeviceCapabilityBillboardAltConfig {
+        UInt16          wSVID;
+        UInt8           bAltenateMode;
+        UInt8           iAlternateModeString;
+    };
+
+    typedef struct IOUSBDeviceCapabilityBillboardAltConfig		IOUSBDeviceCapabilityBillboardAltConfig;
+    typedef IOUSBDeviceCapabilityBillboardAltConfig *			IOUSBDeviceCapabilityBillboardAltConfigPtr;
+
+    /*!
+     @typedef IOUSBDeviceCapabilityBillboard
+     @discussion Device Capability Billboard
+     */
+    struct IOUSBDeviceCapabilityBillboard {
+        UInt8                                           bLength;
+        UInt8                                           bDescriptorType;
+        UInt8                                           bDevCapabilityType;
+        UInt8                                           iAdditionalInfoURL;
+        UInt8                                           bNumberOfAlternateModes;
+        UInt8                                           bPreferredAlternateMode;
+        UInt16                                          vCONNPower;
+        UInt8                                           bmConfigured[32];
+        UInt16                                          bcdVersion;
+        UInt8                                           bAdditionalFailureInfo;
+        UInt8                                           bReserved;
+        IOUSBDeviceCapabilityBillboardAltConfig         pAltConfigurations[];
+    };
+
+    typedef struct IOUSBDeviceCapabilityBillboard		IOUSBDeviceCapabilityBillboard;
+    typedef IOUSBDeviceCapabilityBillboard *			IOUSBDeviceCapabilityBillboardPtr;
+
+
 #pragma options align=reset
 	
 /*!
@@ -1134,17 +1172,19 @@ enum {
 	/*!
 	 @enum USBDeviceSpeed
 	 @discussion Returns the speed of a particular USB device. 
-	 @constant	kUSBDeviceSpeedLow	The device is a low speed device.
-	 @constant	kUSBDeviceSpeedFull	The device is a full speed device.
-	 @constant	kUSBDeviceSpeedHigh	The device is a high speed device.
-	 @constant	kUSBDeviceSpeedSuper  The device is a SuperSpeed device
+	 @constant	kUSBDeviceSpeedLow        The device is a low speed device.
+	 @constant	kUSBDeviceSpeedFull       The device is a full speed device.
+	 @constant	kUSBDeviceSpeedHigh       The device is a high speed device.
+	 @constant	kUSBDeviceSpeedSuper      The device is a SuperSpeed (Gen 1) 5Gbps device
+     @constant	kUSBDeviceSpeedSuperGen2  The device is a SuperSpeed Plus (Gen 2) 10Gbps device
 	 */
 enum {
-        kUSBDeviceSpeedLow		= 0,
-        kUSBDeviceSpeedFull		= 1,
-		kUSBDeviceSpeedHigh		= 2,
-		kUSBDeviceSpeedSuper	= 3
-        };
+        kUSBDeviceSpeedLow          = 0,
+        kUSBDeviceSpeedFull         = 1,
+		kUSBDeviceSpeedHigh         = 2,
+		kUSBDeviceSpeedSuper        = 3,
+        kUSBDeviceSpeedSuperPlus	= 4
+};
 
 /*!
     @enum MicrosecondsInFrame

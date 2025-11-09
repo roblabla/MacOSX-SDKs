@@ -218,7 +218,7 @@ MDL_EXPORT
 
 NS_CLASS_AVAILABLE(10_11, 9_0)
 MDL_EXPORT
-@interface MDLMaterialProperty : NSObject<MDLNamed>
+@interface MDLMaterialProperty : NSObject<MDLNamed, NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -250,6 +250,60 @@ MDL_EXPORT
 @property (nonatomic, assign) vector_float3 float3Value;
 @property (nonatomic, assign) vector_float4 float4Value;
 @property (nonatomic, assign) matrix_float4x4 matrix4x4;
+@property (nonatomic, assign) float luminance;
+
+@end
+
+NS_CLASS_AVAILABLE(10_12, 10_0)
+MDL_EXPORT
+@interface MDLMaterialPropertyConnection : NSObject<MDLNamed>
+
+- (instancetype)init NS_UNAVAILABLE;
+
+/** Connects the output to the input */
+- (instancetype)initWithOutput:(MDLMaterialProperty*)output
+                         input:(MDLMaterialProperty*)input;
+
+@property (nonatomic, weak, readonly) MDLMaterialProperty *output;
+@property (nonatomic, weak, readonly) MDLMaterialProperty *input;
+
+@end
+
+NS_CLASS_AVAILABLE(10_12, 10_0)
+MDL_EXPORT
+@interface MDLMaterialPropertyNode : NSObject<MDLNamed>
+
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithInputs:(NSArray<MDLMaterialProperty*>*)inputs
+                       outputs:(NSArray<MDLMaterialProperty*>*)outputs
+            evaluationFunction:(void(^)(MDLMaterialPropertyNode*))function;
+
+@property (nonatomic, copy) void(^evaluationFunction)(MDLMaterialPropertyNode*);
+
+@property (nonatomic, readonly) NSArray<MDLMaterialProperty*> *inputs;
+@property (nonatomic, readonly) NSArray<MDLMaterialProperty*> *outputs;
+
+@end
+
+/**
+ @discussion inputs and outputs will contain all of the inputs and outputs
+             external to the graph, which are all the inputs and outputs not
+             internally connected to something
+ */
+NS_CLASS_AVAILABLE(10_12, 10_0)
+MDL_EXPORT
+@interface MDLMaterialPropertyGraph : MDLMaterialPropertyNode
+
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithNodes:(NSArray<MDLMaterialPropertyNode*>*)nodes
+                  connections:(NSArray<MDLMaterialPropertyConnection*>*)connections;
+
+- (void)evaluate;
+
+@property (nonatomic, readonly) NSArray<MDLMaterialPropertyNode*> *nodes;
+@property (nonatomic, readonly) NSArray<MDLMaterialPropertyConnection*> *connections;
 
 @end
 
@@ -297,6 +351,12 @@ MDL_EXPORT
 
 @end
 
+typedef NS_ENUM(NSUInteger, MDLMaterialFace) {
+    MDLMaterialFaceFront = 0,
+    MDLMaterialFaceBack,
+    MDLMaterialFaceDoubleSided
+};
+
 NS_CLASS_AVAILABLE(10_11, 9_0)
 MDL_EXPORT
 @interface MDLMaterial : NSObject<MDLNamed, NSFastEnumeration>
@@ -306,7 +366,11 @@ MDL_EXPORT
 - (void)setProperty:(MDLMaterialProperty*)property;
 - (void)removeProperty:(MDLMaterialProperty*)property;
 - (nullable MDLMaterialProperty*)propertyNamed:(NSString*)name;
+// Returns the first occurence of the property that matches the semantic.
+// Not recommended to use when there are multiple properties with same semantic.
 - (nullable MDLMaterialProperty*)propertyWithSemantic:(MDLMaterialSemantic)semantic;
+// Returns the complete list of properties that match the semantic (e.g. Kd & Kd_map)
+- (NSArray<MDLMaterialProperty *> *)propertiesWithSemantic:(MDLMaterialSemantic)semantic;
 - (void)removeAllProperties;
 
 @property (nonatomic, readonly, retain) MDLScatteringFunction *scatteringFunction;
@@ -323,7 +387,9 @@ MDL_EXPORT
 - (nullable MDLMaterialProperty *)objectForKeyedSubscript:(NSString*)name;
 @property (nonatomic, readonly) NSUInteger count;
 
+// Default is MDLMaterialFaceFront
+@property (nonatomic) MDLMaterialFace materialFace;
+
 @end
 
 NS_ASSUME_NONNULL_END
-

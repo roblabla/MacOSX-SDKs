@@ -86,7 +86,7 @@ typedef CF_ENUM(uint32_t, CTFrameProgression) {
 	@seealso	CTFramesetterCreateFrame
 */
 
-extern const CFStringRef kCTFrameProgressionAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFrameProgressionAttributeName CT_AVAILABLE(10_5, 3_2);
 
 /*!
 	@enum		CTFramePathFillRule
@@ -121,7 +121,7 @@ typedef CF_ENUM(uint32_t, CTFramePathFillRule) {
 	@seealso	CTFramesetterCreateFrame
  */
 
-extern const CFStringRef kCTFramePathFillRuleAttributeName CT_AVAILABLE(10_7, 4_2);
+CT_EXPORT const CFStringRef kCTFramePathFillRuleAttributeName CT_AVAILABLE(10_7, 4_2);
 
 /*!
 	@const		kCTFramePathWidthAttributeName
@@ -134,7 +134,7 @@ extern const CFStringRef kCTFramePathFillRuleAttributeName CT_AVAILABLE(10_7, 4_
 	@seealso	CTFramesetterCreateFrame
  */
 
-extern const CFStringRef kCTFramePathWidthAttributeName CT_AVAILABLE(10_7, 4_2);
+CT_EXPORT const CFStringRef kCTFramePathWidthAttributeName CT_AVAILABLE(10_7, 4_2);
 
 	
 /*!
@@ -148,7 +148,7 @@ extern const CFStringRef kCTFramePathWidthAttributeName CT_AVAILABLE(10_7, 4_2);
 	@seealso	CTFramesetterCreateFrame
 */
 
-extern const CFStringRef kCTFrameClippingPathsAttributeName CT_AVAILABLE(10_7, 4_3);
+CT_EXPORT const CFStringRef kCTFrameClippingPathsAttributeName CT_AVAILABLE(10_7, 4_3);
 
 /*!
 	@const		kCTFramePathClippingPathAttributeName
@@ -160,7 +160,7 @@ extern const CFStringRef kCTFrameClippingPathsAttributeName CT_AVAILABLE(10_7, 4
 	@seealso	kCTFrameClippingPathsAttributeName
  */
 
-extern const CFStringRef kCTFramePathClippingPathAttributeName CT_AVAILABLE(10_7, 4_3);
+CT_EXPORT const CFStringRef kCTFramePathClippingPathAttributeName CT_AVAILABLE(10_7, 4_3);
 
 /* --------------------------------------------------------------------------- */
 /* Frame Accessors */
@@ -314,7 +314,7 @@ void CTFrameGetLineOrigins(
 	@param		context
 				The context to draw the frame to.
 
-	@result		If both the frame and the context are valid, the frame will be
+	@discussion	If both the frame and the context are valid, the frame will be
 				drawn in the context.
 */
 

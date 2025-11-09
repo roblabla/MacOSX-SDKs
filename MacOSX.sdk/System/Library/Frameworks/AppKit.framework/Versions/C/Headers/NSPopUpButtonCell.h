@@ -1,7 +1,7 @@
 /*
         NSPopUpButtonCell.h
         Application Kit
-        Copyright (c) 1997-2015, Apple Inc.
+        Copyright (c) 1997-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -38,11 +38,12 @@ typedef NS_ENUM(NSUInteger, NSPopUpArrowPosition) {
         unsigned int RESERVED:19;
     } _pbcFlags;
 #if __LP64__
-    id _popupReserved;
+    id _popupReserved __unused;
 #endif
 }
 
-- (instancetype)initTextCell:(NSString *)stringValue pullsDown:(BOOL)pullDown;
+- (instancetype)initTextCell:(NSString *)stringValue pullsDown:(BOOL)pullDown NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 // Overrides behavior of NSCell.  This is the menu for the popup, not a context menu.  PopUpButtonCells do not have context menus.
 @property (nullable, strong) NSMenu *menu;
@@ -92,7 +93,7 @@ typedef NS_ENUM(NSUInteger, NSPopUpArrowPosition) {
 - (void)selectItemAtIndex:(NSInteger)index;
 - (void)selectItemWithTitle:(NSString *)title;
 - (BOOL)selectItemWithTag:(NSInteger)tag;
-- (void)setTitle:(nullable NSString *)aString;
+- (void)setTitle:(nullable NSString *)string;
 
 @property (nullable, readonly, strong) NSMenuItem *selectedItem;
 @property (readonly) NSInteger indexOfSelectedItem;
@@ -115,6 +116,6 @@ typedef NS_ENUM(NSUInteger, NSPopUpArrowPosition) {
 
 
 /* Notifications */
-APPKIT_EXTERN NSString * NSPopUpButtonCellWillPopUpNotification;
+APPKIT_EXTERN NSNotificationName NSPopUpButtonCellWillPopUpNotification;
 
 NS_ASSUME_NONNULL_END

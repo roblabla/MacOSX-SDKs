@@ -1,7 +1,7 @@
 /*
     NSTableView.h
     Application Kit
-    Copyright (c) 1995-2015, Apple Inc.
+    Copyright (c) 1995-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -111,7 +111,7 @@ typedef NS_ENUM(NSInteger, NSTableViewRowSizeStyle) {
     
     /* The table will use a row height specified for a small/medium or large table.
      It is required that all sizes be fully tested and supported if NSTableViewRowSizeStyleCustom is not used.
-     Some standard Aqua metrics may be applied to cells based on the current size. */
+     Some standard Aqua metrics may be applied to cells based on the current size. Specifically, the metrics will be applied to the NSTableCellView's textField and imageView outlets. Don't use these and add your own outlets if you wish to control the metrics yourself. */
     NSTableViewRowSizeStyleSmall = 1,
     NSTableViewRowSizeStyleMedium = 2,
     NSTableViewRowSizeStyleLarge = 3,
@@ -165,6 +165,7 @@ typedef NS_ENUM(NSInteger, NSTableRowActionEdge) {
     NSView              *_cornerView;
     NSMutableArray      *_tableColumns;
     NSCell              *_editingCell;
+    // NOTE: accessing the _delegate or _dataSource ivars directly is not supported! They are opaque objects, and may not represent the real delegate.
     id                  _delegate;
     id                  _dataSource;
     NSSize              _intercellSpacing;
@@ -195,13 +196,11 @@ typedef NS_ENUM(NSInteger, NSTableRowActionEdge) {
 
 /* Get and set the dataSource. The dataSource can implement methods in the protocol NSTableViewDataSource. Some methods are required, unless bindings are used, in which case they are optional. The dataSource is a weak reference (non retained) in non garbage collected applications. Under garbage collected apps, it is a strong reference. The default value is 'nil'.
  */
-- (void)setDataSource:(nullable id <NSTableViewDataSource>)aSource;
-- (nullable id <NSTableViewDataSource>)dataSource;
+@property (nullable, weak) id <NSTableViewDataSource> dataSource;
 
 /* Get and set the delegate. The delegate can implement methods in the protocol NSTableViewDelegate. All delegate methods are optional. The delegate is a weak reference (non retained) in non garbage collected applications. Under garbage collected apps, it is a strong reference. The default value is 'nil'.
  */
-- (void)setDelegate:(nullable id <NSTableViewDelegate>)delegate;
-- (nullable id <NSTableViewDelegate>)delegate;
+@property (nullable, weak) id <NSTableViewDelegate> delegate;
 
 /* Get and set the headerView. Calling -setHeaderView:nil will remove the headerView. Calling -setHeaderView: may have the side effect of tiling the enclosingScrollView to accommodate the size change. The default value is a new NSTableHeaderView instance.
  */
@@ -336,7 +335,7 @@ typedef NS_ENUM(NSInteger, NSTableRowActionEdge) {
 
 /* Support for little "indicator" images in table header cells.
 */
-- (void)setIndicatorImage:(nullable NSImage *)anImage inTableColumn:(NSTableColumn *)tableColumn;
+- (void)setIndicatorImage:(nullable NSImage *)image inTableColumn:(NSTableColumn *)tableColumn;
 - (nullable NSImage *)indicatorImageInTableColumn:(NSTableColumn *)tableColumn;
 
 /* Support for highlightable column header, for use with row selection.
@@ -473,14 +472,14 @@ typedef NS_ENUM(NSInteger, NSTableRowActionEdge) {
 /* View Based TableView: This method attempts to make the view at 'column/row' the first responder, which will begin editing if the view supports editing.
    Cell Based TableView: This method edits the NSCell located at 'column/row' by calling the following NSCell method:
  
- - (void)editWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject event:(NSEvent *)theEvent;
+ - (void)editWithFrame:(NSRect)rect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)delegate event:(NSEvent *)event;
  
  or, if 'select' is YES:
  
- - (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength;
+ - (void)selectWithFrame:(NSRect)rect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)delegate start:(NSInteger)selStart length:(NSInteger)selLength;
  
  */
-- (void)editColumn:(NSInteger)column row:(NSInteger)row withEvent:(nullable NSEvent *)theEvent select:(BOOL)select;
+- (void)editColumn:(NSInteger)column row:(NSInteger)row withEvent:(nullable NSEvent *)event select:(BOOL)select;
 
 /* View Based TableView: This method should not be subclassed or overridden for a "View Based TableView". Instead, row drawing customization can be done by subclassing NSTableRowView.
    Cell Based TableView: This method can be overriden to customize drawing for 'row'. 
@@ -524,7 +523,7 @@ typedef NS_ENUM(NSInteger, NSTableRowActionEdge) {
 
 /* Enumerates all available NSTableRowViews. This includes all views in the -visibleRect, however, it may also include ones that are "in flight" due to animations or other various attributes of the table.
  */
-- (void)enumerateAvailableRowViewsUsingBlock:(void (^)(__kindof NSTableRowView *rowView, NSInteger row))handler NS_AVAILABLE_MAC(10_7);
+- (void)enumerateAvailableRowViewsUsingBlock:(void (NS_NOESCAPE ^)(__kindof NSTableRowView *rowView, NSInteger row))handler NS_AVAILABLE_MAC(10_7);
 
 /* View Based TableView: Group rows can optionally appear floating. Group rows are rows that the delegate responds YES to tableView:isGroupRow:. NSOutlineView will only float expandable group rows that are expanded. The default value is YES. This property is encoded and decoded in the nib.
  */
@@ -605,6 +604,10 @@ typedef NS_OPTIONS(NSUInteger, NSTableViewAnimationOptions) {
 /* View Based TableView: The table view keeps all views added to the table around while usesStaticContents=YES. Views can be removed by calling removeRowsAtIndexes:withAnimation:. The datasource does not need to implement numberOfRowsInTableView: when usesStaticContents=YES. Static views are encoded and decoded with the table view. Views can also dynamically be inserted into the table view by using insertRowIndexes:withAnimation:, however, this requires an implementation of tableView:viewForTableColumn:row: to provide the newly inserted view, which is then kept around statically.
  */
 @property BOOL usesStaticContents NS_AVAILABLE_MAC(10_10);
+
+/* Get and set the user interface layout direction. When set to NSUserInterfaceLayoutDirectionRightToLeft, the TableView will flip the visual order of the table columns, while the logical order remains as it was. The default value is NSUserInterfaceLayoutDirectionLeftToRight. This method is available only on 10.12 and higher, and in previous releases it was hardcoded to always return NSUserInterfaceLayoutDirectionLeftToRight. However, NSOutlineView has had a separate implmentation since 10.7.
+ */
+@property NSUserInterfaceLayoutDirection userInterfaceLayoutDirection; // NS_AVAILABLE_MAC(10_12);
 
 @end
 
@@ -746,10 +749,10 @@ typedef NS_OPTIONS(NSUInteger, NSTableViewAnimationOptions) {
 
 @end
 
-APPKIT_EXTERN NSString * NSTableViewSelectionDidChangeNotification;
-APPKIT_EXTERN NSString * NSTableViewColumnDidMoveNotification;       // @"NSOldColumn", @"NSNewColumn"
-APPKIT_EXTERN NSString * NSTableViewColumnDidResizeNotification;     // @"NSTableColumn", @"NSOldWidth"
-APPKIT_EXTERN NSString * NSTableViewSelectionIsChangingNotification;
+APPKIT_EXTERN NSNotificationName NSTableViewSelectionDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSTableViewColumnDidMoveNotification;       // @"NSOldColumn", @"NSNewColumn"
+APPKIT_EXTERN NSNotificationName NSTableViewColumnDidResizeNotification;     // @"NSTableColumn", @"NSOldWidth"
+APPKIT_EXTERN NSNotificationName NSTableViewSelectionIsChangingNotification;
 
 // The NSTableViewRowViewKey is the key that View Based TableView uses to identify the NIB containing the template row view. You can specify a custom row view (without any code) by associating this key with the appropriate NIB name in IB.
 APPKIT_EXTERN NSString * const NSTableViewRowViewKey NS_AVAILABLE_MAC(10_7); // @"NSTableViewRowViewKey"

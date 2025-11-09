@@ -34,7 +34,7 @@ CF_ASSUME_NONNULL_BEGIN
     @discussion Value must be a CTFontRef. Default is Helvetica 12.
 */
 
-extern const CFStringRef kCTFontAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontAttributeName CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -52,7 +52,7 @@ extern const CFStringRef kCTFontAttributeName CT_AVAILABLE(10_5, 3_2);
                 overrides the foreground color.
 */
 
-extern const CFStringRef kCTForegroundColorFromContextAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTForegroundColorFromContextAttributeName CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -69,7 +69,7 @@ extern const CFStringRef kCTForegroundColorFromContextAttributeName CT_AVAILABLE
                 set to 0.0, no kerning will be done at all.
 */
 
-extern const CFStringRef kCTKernAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTKernAttributeName CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -95,7 +95,7 @@ extern const CFStringRef kCTKernAttributeName CT_AVAILABLE(10_5, 3_2);
                 shaping tables (or the lack thereof) are treated as definitive.
 */
 
-extern const CFStringRef kCTLigatureAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTLigatureAttributeName CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -105,7 +105,16 @@ extern const CFStringRef kCTLigatureAttributeName CT_AVAILABLE(10_5, 3_2);
     @discussion Value must be a CGColorRef. Default value is black.
 */
 
-extern const CFStringRef kCTForegroundColorAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTForegroundColorAttributeName CT_AVAILABLE(10_5, 3_2);
+
+/*!
+    @const      kCTBackgroundColorAttributeName
+    @abstract   The background color.
+
+    @discussion Value must be a CGColorRef. Default is no background color.
+*/
+
+CT_EXPORT const CFStringRef kCTBackgroundColorAttributeName CT_AVAILABLE(10_12, 10_0);
 
 
 /*!
@@ -114,11 +123,14 @@ extern const CFStringRef kCTForegroundColorAttributeName CT_AVAILABLE(10_5, 3_2)
                 line alignment, tab rulers, writing direction, etc.
 
     @discussion Value must be a CTParagraphStyleRef. Default is an empty
-                CTParagraphStyle object. See CTParagraphStyle.h for more
-                information.
+                CTParagraphStyle object: see CTParagraphStyle.h for more
+                information. The value of this attribute must be uniform over
+                the range of any paragraphs to which it is applied.
+
+    @seealso    CFStringGetParagraphBounds
 */
 
-extern const CFStringRef kCTParagraphStyleAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTParagraphStyleAttributeName CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -132,7 +144,7 @@ extern const CFStringRef kCTParagraphStyleAttributeName CT_AVAILABLE(10_5, 3_2);
                 typical value for outlined text is 3.0.
 */
 
-extern const CFStringRef kCTStrokeWidthAttributeName CT_AVAILABLE(10_6, 3_2);
+CT_EXPORT const CFStringRef kCTStrokeWidthAttributeName CT_AVAILABLE(10_6, 3_2);
 
 
 /*!
@@ -142,7 +154,7 @@ extern const CFStringRef kCTStrokeWidthAttributeName CT_AVAILABLE(10_6, 3_2);
     @discussion Value must be a CGColorRef. Default is the foreground color.
 */
 
-extern const CFStringRef kCTStrokeColorAttributeName CT_AVAILABLE(10_6, 3_2);
+CT_EXPORT const CFStringRef kCTStrokeColorAttributeName CT_AVAILABLE(10_6, 3_2);
 
 
 /*!
@@ -157,7 +169,7 @@ extern const CFStringRef kCTStrokeColorAttributeName CT_AVAILABLE(10_6, 3_2);
                 will be determined by the text's foreground color.
 */
 
-extern const CFStringRef kCTUnderlineStyleAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTUnderlineStyleAttributeName CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -169,7 +181,7 @@ extern const CFStringRef kCTUnderlineStyleAttributeName CT_AVAILABLE(10_5, 3_2);
                 value of -1 enables subscripting.
 */
 
-extern const CFStringRef kCTSuperscriptAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTSuperscriptAttributeName CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -179,7 +191,7 @@ extern const CFStringRef kCTSuperscriptAttributeName CT_AVAILABLE(10_5, 3_2);
     @discussion Value must be a CGColorRef. Default is the foreground color.
 */
 
-extern const CFStringRef kCTUnderlineColorAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTUnderlineColorAttributeName CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -191,8 +203,20 @@ extern const CFStringRef kCTUnderlineColorAttributeName CT_AVAILABLE(10_5, 3_2);
                 indicates that vertical glyph forms are to be used.
 */
 
-extern const CFStringRef kCTVerticalFormsAttributeName CT_AVAILABLE(10_5, 4_3);
+CT_EXPORT const CFStringRef kCTVerticalFormsAttributeName CT_AVAILABLE(10_5, 4_3);
 
+/*!
+    @const      kCTHorizontalInVerticalFormsAttributeName
+    @abstract   Setting text in tate-chu-yoko form (horizontal numerals in vertical text).
+
+    @discussion Value must be a CFNumberRef. Default is int value 0. A value of 1
+                to 4 indicates the number of digits or letters to set in horizontal
+                form. This is to apply the correct feature settings for the text.
+                This attribute only works when kCTVerticalFormsAttributeName is set
+                to true.
+*/
+
+CT_EXPORT const CFStringRef kCTHorizontalInVerticalFormsAttributeName CT_AVAILABLE(10_12, 10_0);
 
 /*!
     @const      kCTGlyphInfoAttributeName
@@ -205,7 +229,7 @@ extern const CFStringRef kCTVerticalFormsAttributeName CT_AVAILABLE(10_5, 4_3);
                 kCTFontAttributeName. See CTGlyphInfo.h for more information.
 */
 
-extern const CFStringRef kCTGlyphInfoAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTGlyphInfoAttributeName CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -218,7 +242,7 @@ extern const CFStringRef kCTGlyphInfoAttributeName CT_AVAILABLE(10_5, 3_2);
                 an attribute value of 1 corresponds to kTraditionalCharactersSelector.
 */
 
-extern const CFStringRef kCTCharacterShapeAttributeName CT_DEPRECATED(10_5, 10_11, 3_2, 9_0);
+CT_EXPORT const CFStringRef kCTCharacterShapeAttributeName CT_DEPRECATED(10_5, 10_11, 3_2, 9_0);
 
 
 /*!
@@ -231,7 +255,7 @@ extern const CFStringRef kCTCharacterShapeAttributeName CT_DEPRECATED(10_5, 10_1
                 locale-specific line breaking rules.
 */
 
-extern const CFStringRef kCTLanguageAttributeName CT_AVAILABLE(10_9, 7_0);
+CT_EXPORT const CFStringRef kCTLanguageAttributeName CT_AVAILABLE(10_9, 7_0);
 
 
 /*!
@@ -250,7 +274,7 @@ extern const CFStringRef kCTLanguageAttributeName CT_AVAILABLE(10_9, 7_0);
                 CTRunDelegate.h for more information.
 */
 
-extern const CFStringRef kCTRunDelegateAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTRunDelegateAttributeName CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -305,7 +329,7 @@ typedef CF_OPTIONS(int32_t, CTUnderlineStyleModifiers) {
     @seealso    kCTBaselineClassMath
 */
 
-extern const CFStringRef kCTBaselineClassAttributeName CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineClassAttributeName CT_AVAILABLE(10_8, 6_0);
 
 
 /*!
@@ -327,7 +351,7 @@ extern const CFStringRef kCTBaselineClassAttributeName CT_AVAILABLE(10_8, 6_0);
     @seealso    kCTBaselineClassMath
 */
 
-extern const CFStringRef kCTBaselineInfoAttributeName CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineInfoAttributeName CT_AVAILABLE(10_8, 6_0);
 
 
 /*!
@@ -351,7 +375,7 @@ extern const CFStringRef kCTBaselineInfoAttributeName CT_AVAILABLE(10_8, 6_0);
     @seealso    kCTBaselineReferenceFont
 */
 
-extern const CFStringRef kCTBaselineReferenceInfoAttributeName CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineReferenceInfoAttributeName CT_AVAILABLE(10_8, 6_0);
 
 
 /*!
@@ -371,9 +395,9 @@ extern const CFStringRef kCTBaselineReferenceInfoAttributeName CT_AVAILABLE(10_8
                 pair in plain text or a <span dir="rtl"></span> in HTML,
                 (kCTWritingDirectionLeftToRight | kCTWritingDirectionOverride)
                 corresponding to a LRO/PDF pair in plain text or
-                <bdo dir="ltr"></span> in HTML, and (kCTWritingDirectionRightToLeft
+                <bdo dir="ltr"></bdo> in HTML, and (kCTWritingDirectionRightToLeft
                 | kCTWritingDirectionOverride) corresponding to a RLO/PDF
-                pair in plain text or <bdo dir="rtl"></span> in HTML.
+                pair in plain text or <bdo dir="rtl"></bdo> in HTML.
 
     @seealso    kCTWritingDirectionLeftToRight
     @seealso    kCTWritingDirectionRightToLeft
@@ -381,7 +405,7 @@ extern const CFStringRef kCTBaselineReferenceInfoAttributeName CT_AVAILABLE(10_8
     @seealso    kCTWritingDirectionOverride
 */
 
-extern const CFStringRef kCTWritingDirectionAttributeName CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTWritingDirectionAttributeName CT_AVAILABLE(10_8, 6_0);
 
 
 /*!
@@ -408,7 +432,7 @@ enum {
                 more information.
  */
 
-extern const CFStringRef kCTRubyAnnotationAttributeName CT_AVAILABLE(10_10, 8_0);
+CT_EXPORT const CFStringRef kCTRubyAnnotationAttributeName CT_AVAILABLE(10_10, 8_0);
 
 
 CF_ASSUME_NONNULL_END

@@ -1,8 +1,9 @@
 /*	NSOperation.h
-	Copyright (c) 2006-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSException.h>
 #import <sys/qos.h>
 #import <dispatch/dispatch.h>
 
@@ -101,8 +102,8 @@ NS_SWIFT_UNAVAILABLE("NSInvocation and related APIs not available")
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSInvocationOperationVoidResultException NS_AVAILABLE(10_5, 2_0);
-FOUNDATION_EXPORT NSString * const NSInvocationOperationCancelledException NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSExceptionName const NSInvocationOperationVoidResultException NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSExceptionName const NSInvocationOperationCancelledException NS_AVAILABLE(10_5, 2_0);
 
 static const NSInteger NSOperationQueueDefaultMaxConcurrentOperationCount = -1;
 
@@ -135,8 +136,10 @@ NS_CLASS_AVAILABLE(10_5, 2_0)
 
 - (void)waitUntilAllOperationsAreFinished;
 
-+ (nullable NSOperationQueue *)currentQueue NS_AVAILABLE(10_6, 4_0);
-+ (NSOperationQueue *)mainQueue NS_AVAILABLE(10_6, 4_0);
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, strong, nullable) NSOperationQueue *currentQueue NS_AVAILABLE(10_6, 4_0);
+@property (class, readonly, strong) NSOperationQueue *mainQueue NS_AVAILABLE(10_6, 4_0);
+#endif
 
 @end
 

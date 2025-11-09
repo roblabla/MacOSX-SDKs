@@ -1,5 +1,5 @@
 /*	NSScanner.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -34,11 +34,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)scanHexFloat:(nullable float *)result NS_AVAILABLE(10_5, 2_0);                   // Corresponding to %a or %A formatting. Requires "0x" or "0X" prefix.
 - (BOOL)scanHexDouble:(nullable double *)result NS_AVAILABLE(10_5, 2_0);                 // Corresponding to %a or %A formatting. Requires "0x" or "0X" prefix.
 
-- (BOOL)scanString:(NSString *)string intoString:(NSString * __nullable * __nullable)result;
-- (BOOL)scanCharactersFromSet:(NSCharacterSet *)set intoString:(NSString * __nullable * __nullable)result;
+- (BOOL)scanString:(NSString *)string intoString:(NSString * _Nullable * _Nullable)result;
+- (BOOL)scanCharactersFromSet:(NSCharacterSet *)set intoString:(NSString * _Nullable * _Nullable)result;
 
-- (BOOL)scanUpToString:(NSString *)string intoString:(NSString * __nullable * __nullable)result;
-- (BOOL)scanUpToCharactersFromSet:(NSCharacterSet *)set intoString:(NSString * __nullable * __nullable)result;
+- (BOOL)scanUpToString:(NSString *)string intoString:(NSString * _Nullable * _Nullable)result;
+- (BOOL)scanUpToCharactersFromSet:(NSCharacterSet *)set intoString:(NSString * _Nullable * _Nullable)result;
 
 @property (getter=isAtEnd, readonly) BOOL atEnd;
 

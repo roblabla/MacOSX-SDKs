@@ -1,7 +1,9 @@
----
+--- !tapi-tbd-v2
 archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 2BD0102E-532D-3DD8-99CB-B1F338B39114' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/FolderActionsKit.framework/Versions/A/FolderActionsKit
+objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _FolderActionsKitVersionNumber, _FolderActionsKitVersionString ]

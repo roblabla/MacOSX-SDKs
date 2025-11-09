@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @discussion Used with [CNContactStore enumerateContactsWithFetchRequest:error:usingBlock:]. Can combine any of these options to create a contact fetch request.
  */
 NS_CLASS_AVAILABLE(10_11, 9_0)
-@interface CNContactFetchRequest : NSObject
+@interface CNContactFetchRequest : NSObject <NSSecureCoding>
 
 
 /*!
@@ -45,7 +45,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  *
  * @discussion If YES returns CNMutableContact objects, otherwise returns CNContact objects. Default is NO.
  */
-@property (NS_NONATOMIC_IOSONLY) BOOL mutableObjects;
+@property (NS_NONATOMIC_IOSONLY) BOOL mutableObjects NS_AVAILABLE(10_12, 10_0);
 
 /*!
  * @abstract To return linked contacts as unified contacts.

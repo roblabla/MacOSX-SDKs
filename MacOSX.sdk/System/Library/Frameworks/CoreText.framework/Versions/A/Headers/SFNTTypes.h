@@ -9,7 +9,11 @@
 #ifndef __SFNTTYPES__
 #define __SFNTTYPES__
 
+#if !TARGET_OS_WIN32
 #include <MacTypes.h>
+#elif !defined(__MACTYPES__)
+typedef SInt32 Fixed;
+#endif
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,7 +1,7 @@
 /*
 	NSSlider.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -18,21 +18,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property double maxValue;
 @property double altIncrementValue;
 @property (readonly) CGFloat knobThickness;
-@property (getter=isVertical, readonly) NSInteger vertical;
-- (BOOL)acceptsFirstMouse:(nullable NSEvent *)theEvent;
+- (BOOL)acceptsFirstMouse:(nullable NSEvent *)event;
+@property (readwrite, getter=isVertical) BOOL vertical NS_AVAILABLE_MAC(10_12);
 
-/* These methods have never done anything, and are formally deprecated as of 10.9*/
-- (void)setTitleCell:(null_unspecified NSCell *)aCell NS_DEPRECATED_MAC(10_0, 10_9);
-- (null_unspecified id)titleCell NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitleColor:(null_unspecified NSColor *)newColor NS_DEPRECATED_MAC(10_0, 10_9);
-- (null_unspecified NSColor *)titleColor NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitleFont:(null_unspecified NSFont *)fontObj NS_DEPRECATED_MAC(10_0, 10_9);
-- (null_unspecified NSFont *)titleFont NS_DEPRECATED_MAC(10_0, 10_9);
-- (null_unspecified NSString *)title NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitle:(null_unspecified NSString *)aString NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setKnobThickness:(CGFloat)aFloat NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setImage:(null_unspecified NSImage *)backgroundImage NS_DEPRECATED_MAC(10_0, 10_9);
-- (null_unspecified NSImage *)image NS_DEPRECATED_MAC(10_0, 10_9);
+@property (nullable, copy) NSColor *trackFillColor NS_AVAILABLE_MAC(10_12_2); // The color of the filled portion of the track, in appearances that support it
+
+@end
+
+@interface NSSlider (NSSliderVerticalGetter)
+@property (readonly, getter=isVertical) BOOL vertical NS_AVAILABLE_MAC(10_0);
 @end
 
 @interface NSSlider(NSTickMarkSupport)
@@ -65,6 +59,45 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (double)closestTickMarkValueToValue:(double)value;
 
+@end
+
+@interface NSSlider(NSSliderConvenience)
+
+/*!
+ Creates a continuous horizontal slider over the range 0.0 to 1.0. The default value is 0.0.
+ @param target The target object that receives action messages from the control.
+ @param action The action message sent by the control.
+ @return An initialized slider control.
+ */
++ (instancetype)sliderWithTarget:(nullable id)target action:(nullable SEL)action NS_AVAILABLE_MAC(10_12);
+
+/*!
+ Creates a continuous horizontal slider that represents values over a specified range.
+ @param value The initial value displayed by the control.
+ @param minValue The minimum value represented by the control.
+ @param maxValue The maximum value represented by the control.
+ @param target The target object that receives action messages from the control.
+ @param action The action message sent by the control.
+ @return An initialized slider control.
+ */
++ (instancetype)sliderWithValue:(double)value minValue:(double)minValue maxValue:(double)maxValue target:(nullable id)target action:(nullable SEL)action NS_AVAILABLE_MAC(10_12);
+
+
+@end
+
+@interface NSSlider (NSSliderDeprecated)
+/* These methods have never done anything, and are formally deprecated as of 10.9*/
+- (void)setTitleCell:(null_unspecified NSCell *)cell NS_DEPRECATED_MAC(10_0, 10_9);
+- (null_unspecified id)titleCell NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitleColor:(null_unspecified NSColor *)newColor NS_DEPRECATED_MAC(10_0, 10_9);
+- (null_unspecified NSColor *)titleColor NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitleFont:(null_unspecified NSFont *)fontObj NS_DEPRECATED_MAC(10_0, 10_9);
+- (null_unspecified NSFont *)titleFont NS_DEPRECATED_MAC(10_0, 10_9);
+- (null_unspecified NSString *)title NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitle:(null_unspecified NSString *)string NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setKnobThickness:(CGFloat)thickness NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setImage:(null_unspecified NSImage *)backgroundImage NS_DEPRECATED_MAC(10_0, 10_9);
+- (null_unspecified NSImage *)image NS_DEPRECATED_MAC(10_0, 10_9);
 @end
 
 NS_ASSUME_NONNULL_END

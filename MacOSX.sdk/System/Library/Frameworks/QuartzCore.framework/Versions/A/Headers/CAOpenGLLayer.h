@@ -1,6 +1,6 @@
 /* CoreAnimation - CAOpenGLLayer.h
 
-   Copyright (c) 2006-2015, Apple Inc.
+   Copyright (c) 2006-2016, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -9,6 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+CA_CLASS_AVAILABLE (10.5)
 @interface CAOpenGLLayer : CALayer
 {
 @private
@@ -29,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)canDrawInCGLContext:(CGLContextObj)ctx
     pixelFormat:(CGLPixelFormatObj)pf forLayerTime:(CFTimeInterval)t
-    displayTime:(const CVTimeStamp *)ts;
+    displayTime:(nullable const CVTimeStamp *)ts;
 
 /* Called when a new frame needs to be generated for layer time 't'.
  * 'ctx' is attached to the rendering destination. It's state is
@@ -39,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  * after rendering. */
 
 - (void)drawInCGLContext:(CGLContextObj)ctx pixelFormat:(CGLPixelFormatObj)pf
-    forLayerTime:(CFTimeInterval)t displayTime:(const CVTimeStamp *)ts;
+    forLayerTime:(CFTimeInterval)t displayTime:(nullable const CVTimeStamp *)ts;
 
 /* This method will be called by the CAOpenGLLayer implementation when
  * a pixel format object is needed for the layer. Should return an
@@ -72,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
  * If non-nil, the rendered content will be colormatched to the colorspace of
  * the context containing this layer (typically the display's colorspace). */
 
-@property CGColorSpaceRef colorspace;
+@property (nullable) CGColorSpaceRef colorspace;
 
 /* If any rendering context on the screen has this enabled, all content will be
  * clamped to its NSScreen’s maximumExtendedDynamicRangeColorComponentValue

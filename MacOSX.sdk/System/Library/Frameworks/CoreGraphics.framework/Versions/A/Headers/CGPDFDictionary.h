@@ -22,13 +22,13 @@ CF_ASSUME_NONNULL_BEGIN
 
 /* Return the number of entries in `dictionary'. */
 
-CG_EXTERN size_t CGPDFDictionaryGetCount(CGPDFDictionaryRef __nullable dict)
+CG_EXTERN size_t CGPDFDictionaryGetCount(CGPDFDictionaryRef cg_nullable dict)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Look up the object associated with `key' in `dict' and return the result
    in `value'. Return true on success; false otherwise. */
 
-CG_EXTERN bool CGPDFDictionaryGetObject(CGPDFDictionaryRef __nullable dict,
+CG_EXTERN bool CGPDFDictionaryGetObject(CGPDFDictionaryRef cg_nullable dict,
     const char *  key, CGPDFObjectRef __nullable * __nullable value)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
@@ -36,7 +36,7 @@ CG_EXTERN bool CGPDFDictionaryGetObject(CGPDFDictionaryRef __nullable dict,
    boolean, return the result in `value'. Return true on success; false
    otherwise. */
 
-CG_EXTERN bool CGPDFDictionaryGetBoolean(CGPDFDictionaryRef __nullable dict,
+CG_EXTERN bool CGPDFDictionaryGetBoolean(CGPDFDictionaryRef cg_nullable dict,
     const char *  key, CGPDFBoolean * __nullable value)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
@@ -44,7 +44,7 @@ CG_EXTERN bool CGPDFDictionaryGetBoolean(CGPDFDictionaryRef __nullable dict,
    integer, return the result in `value'. Return true on success; false
    otherwise. */
 
-CG_EXTERN bool CGPDFDictionaryGetInteger(CGPDFDictionaryRef __nullable dict,
+CG_EXTERN bool CGPDFDictionaryGetInteger(CGPDFDictionaryRef cg_nullable dict,
     const char *  key, CGPDFInteger * __nullable value)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
@@ -52,28 +52,28 @@ CG_EXTERN bool CGPDFDictionaryGetInteger(CGPDFDictionaryRef __nullable dict,
    (real or integer), return the result in `value'. Return true on success;
    false otherwise. */
 
-CG_EXTERN bool CGPDFDictionaryGetNumber(CGPDFDictionaryRef __nullable dict,
+CG_EXTERN bool CGPDFDictionaryGetNumber(CGPDFDictionaryRef cg_nullable dict,
     const char *  key, CGPDFReal * __nullable value)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Look up the object associated with `key' in `dict' and, if it's a name,
    return the result in `value'. Return true on success; false otherwise. */
 
-CG_EXTERN bool CGPDFDictionaryGetName(CGPDFDictionaryRef __nullable dict,
+CG_EXTERN bool CGPDFDictionaryGetName(CGPDFDictionaryRef cg_nullable dict,
     const char *  key, const char * __nullable * __nullable value)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Look up the object associated with `key' in `dict' and, if it's a string,
    return the result in `value'. Return true on success; false otherwise. */
 
-CG_EXTERN bool CGPDFDictionaryGetString(CGPDFDictionaryRef __nullable dict,
+CG_EXTERN bool CGPDFDictionaryGetString(CGPDFDictionaryRef cg_nullable dict,
     const char *  key, CGPDFStringRef __nullable * __nullable value)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Look up the object associated with `key' in `dict' and, if it's an array,
    return the result in `value'. Return true on success; false otherwise. */
 
-CG_EXTERN bool CGPDFDictionaryGetArray(CGPDFDictionaryRef __nullable dict,
+CG_EXTERN bool CGPDFDictionaryGetArray(CGPDFDictionaryRef cg_nullable dict,
     const char *  key, CGPDFArrayRef __nullable * __nullable value)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
@@ -81,14 +81,14 @@ CG_EXTERN bool CGPDFDictionaryGetArray(CGPDFDictionaryRef __nullable dict,
    dictionary, return the result in `value'. Return true on success; false
    otherwise. */
 
-CG_EXTERN bool CGPDFDictionaryGetDictionary(CGPDFDictionaryRef __nullable dict,
+CG_EXTERN bool CGPDFDictionaryGetDictionary(CGPDFDictionaryRef cg_nullable dict,
     const char *  key, CGPDFDictionaryRef __nullable * __nullable value)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Look up the object associated with `key' in `dict' and, if it's a stream,
    return the result in `value'. Return true on success; false otherwise. */
 
-CG_EXTERN bool CGPDFDictionaryGetStream(CGPDFDictionaryRef __nullable dict,
+CG_EXTERN bool CGPDFDictionaryGetStream(CGPDFDictionaryRef cg_nullable dict,
     const char *  key, CGPDFStreamRef __nullable * __nullable value)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
@@ -103,8 +103,8 @@ typedef void (*CGPDFDictionaryApplierFunction)(const char *  key,
    key/value pair. Passes the current key, the associated value, and `info'
    to `function'. */
 
-CG_EXTERN void CGPDFDictionaryApplyFunction(CGPDFDictionaryRef __nullable dict,
-    CGPDFDictionaryApplierFunction __nullable function, void * __nullable info)
+CG_EXTERN void CGPDFDictionaryApplyFunction(CGPDFDictionaryRef cg_nullable dict,
+    CGPDFDictionaryApplierFunction cg_nullable function, void * __nullable info)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 CF_ASSUME_NONNULL_END

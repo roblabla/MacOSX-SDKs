@@ -4,7 +4,7 @@
  *
  *  See vImage/vImage.h for more on how to view the headerdoc documentation for types declared herein.
  *
- *  @copyright Copyright (c) 2002-2015 by Apple Inc. All rights reserved.
+ *  @copyright Copyright (c) 2002-2016 by Apple Inc. All rights reserved.
  *
  *  @discussion     Defines various types and constants common to vImage.
  */
@@ -212,7 +212,14 @@ typedef uint8_t     Pixel_8;            /* 8 bit planar pixel value */
  @discussion Typically, these have range [0,1] though other values are generally allowed.
 */
 typedef float       Pixel_F;            /* floating point planar pixel value */
-  
+
+/*!
+ @typedef   Pixel_88
+ @abstract  A two channel, 8-bit per channel pixel.
+ @discussion The channel order is generally given by the function that consumes the value.
+ */
+typedef uint8_t     Pixel_88[2];      /* CbCr interleaved (8 bit/channel) pixel value. uint8_t[2] = { Cb, Cr } */
+
 /*!
  @typedef   Pixel_8888
  @abstract  A four channel, 8-bit per channel pixel.
@@ -246,7 +253,21 @@ typedef int16_t     Pixel_16S;          /* 16 bit signed pixel */
  @abstract  A signed 16 bit fixed point number with 12 bits of fractional precision.
  @discussion Normal range is [-4096,4096] meaning [-1.0, 1.0]. Values in the range [-8.0, 8.0) are representable.
  */
-typedef int16_t     Pixel_16Q12;          /* 16 bit signed pixel */
+typedef int16_t     Pixel_16Q12;		/* 16 bit signed pixel */
+
+/*!
+ @typedef   Pixel_16U16U
+ @abstract  A two channel, 16-bit per channel pixel.
+ @discussion The channel order is generally given by the function that consumes the value.
+ */
+typedef uint16_t     Pixel_16U16U[2];	/* CbCr interleaved (16 bit/channel) pixel value. uint16_t[2] = { Cb, Cr } */
+
+/*!
+ @typedef   Pixel_32U
+ @abstract  Type used for XRGB2101010 format.
+ @discussion Typical range for RGB channels is [0,1023] meaning [0.0, 1.0], though most functions tolerate other ranges.
+*/
+typedef uint32_t    Pixel_32U;          /* 32 bit unsigned pixel */
 
 /*!
  @typedef   Pixel_ARGB_16U
@@ -539,7 +560,11 @@ typedef VIMAGE_OPTIONS_ENUM(vImage_Flags, uint32_t)
 
     /* Use methods that are HDR-aware, capable of providing correct results for input images with pixel values
        outside the otherwise limited (typically [-2,2]) range. This may be slower. */
-    kvImageHDRContent                VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 )    =  1024
+    kvImageHDRContent                VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 )    =  1024,
+
+    /* Pass to disable clamping is some conversions to floating point formats. Use this if the input data
+       may describe values outside [0,1] which should be preserved.. */
+    kvImageDoNotClamp                 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_12, __IPHONE_9_3 )     =   2048
 };
     
 /*!

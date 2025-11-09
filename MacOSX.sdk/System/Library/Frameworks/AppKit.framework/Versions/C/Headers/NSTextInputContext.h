@@ -1,14 +1,14 @@
 /*
 	NSTextInputContext.h
 	Application Kit
-	Copyright (c) 2008-2015, Apple Inc.
+	Copyright (c) 2008-2016, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSTextInputClient.h>
-
+#import <Foundation/NSNotification.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,7 +29,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
     NSInteger _documentRefcon;
 
-    id _reserved[2];
+    id _reserved[2] __unused;
     id _auxiliary;
 
     struct {
@@ -63,7 +63,8 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 /* The designated initializer.
  */
-- (instancetype)initWithClient:(id <NSTextInputClient>)theClient;
+- (instancetype)initWithClient:(id <NSTextInputClient>)client NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE; // Use the designated initializer initWithClient:
 
 /**** Properties *****/
 /* Returns the owner of this input context. The owner, typically an NSView, retains its NSTextInputContext instance. NSTextInputContext doesn't retain its client.
@@ -88,13 +89,13 @@ NS_CLASS_AVAILABLE(10_6, NA)
 /**** Input source interface ****/
 /* Tells the Cocoa Text Input system to handle mouse/key events. Returns YES if the system consumed the event.
  */
-- (BOOL)handleEvent:(NSEvent *)theEvent;
+- (BOOL)handleEvent:(NSEvent *)event;
 
 /* Notifies the system to discard the current conversion session. The client should clear its marked range when sending this message.
  */
 - (void)discardMarkedText;
 
-/* Notifies the Cocoa Text Input system that the position information previously queried via methods like -firstRectForCharacterRange:actualRange: needs to be updated.
+/* Notifies the text input system that information related to character positions, including the document's visual coordinates, text selection, and document contents, has been modified. Text engines implementing the NSTextInputClient protocol should send this message whenever any of these changes occur, and -[NSTextInputContext handleEvent:] will not otherwise be called. -handleEvent: serves as an implicit notification that any of these changes could have occurred.
  */
 - (void)invalidateCharacterCoordinates;
 
@@ -121,7 +122,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 /**** Notifications ****/
 /* Notified whenever the selected text input source changes.
  */
-APPKIT_EXTERN NSString * NSTextInputContextKeyboardSelectionDidChangeNotification NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSNotificationName NSTextInputContextKeyboardSelectionDidChangeNotification NS_AVAILABLE_MAC(10_6);
 
 NS_ASSUME_NONNULL_END
 

@@ -14,6 +14,28 @@
 .Nd smart card authorization setup script
 .Sh SYNOPSIS             \" Section Header - required - don't modify
 .Nm
+.Ar pair " "
+.Op Fl v
+.Fl u Ar user
+.Fl h Ar hash
+.Nm
+.Ar unpair
+.Op Fl v
+.Op Fl u Ar user
+.Op Fl h Ar hash
+.Nm
+.Ar pairing_ui
+.Op Fl v
+.Op Fl s Ar enable Ns | Ns Ar disable Ns | Ns Ar status
+.Nm
+.Ar identities
+.Nm
+.Ar list " "
+.Op Fl v
+.Op Fl u Ar user
+.Op Fl d Ar domain
+.Sh SYNOPSIS - legacy             \" Section Header - required - don't modify
+.Nm
 .Ar accept
 .Op Fl v
 .Op Fl u Ar user 
@@ -33,31 +55,40 @@
 .Nm
 .Ar hash " "
 .Op Fl k Ar keyname
-.Nm
-.Ar list " "
-.Op Fl v
-.Op Fl u Ar user
-.Op Fl d Ar domain 
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 .Nm
 configures a local user account to permit authentication using a supported 
 smart card.  Authentication is via asymmetric key (also known as 
 public-key) encryption.  
 .Nm
-works with signing keys, but not encryption keys.  
+works with signing keys, but not encryption keys.
 .Pp
 .Nm
 can perform the following actions:
-.Bl -tag -width -indent  \" Begins a tagged list 
+.Bl -tag -width -indent  \" Begins a tagged list
+.It Ar pair
+Associate a user with a public key. Because user's keychain will be modified to be unlockable by a key, smart card with that key must be present in the reader. The key to use has to be specified by its hash.
+.It Ar unpair
+Remove association with a user and keychain. If no specific hash is provided, all associations with a user are removed.
+.It Ar pairing_ui
+Enable or disable pairing dialog when card with unpaired identities is inserted
+.It Ar identities
+List all identities on all smart cards and display appropriate associations with users (for associated keys) or key names (for unassociated keys).
+.It Ar list
+List all public keys associated with a user.
+.El                      \" Ends the list
+.Pp
+.Sh DESCRIPTION - legacy          \" Section Header - required - don't modify
+.Nm
+can perform the following legacy actions:
+.Bl -tag -width -indent  \" Begins a tagged list
 .It Ar accept
 Associate a user with a public key on a card.  The key to use can be 
-specified either by its name or its hash.  
+specified either by its name or its hash.
 .It Ar remove
-Remove all public keys associated with a user.  
+Remove all public keys associated with a user.
 .It Ar hash
-Print the hashes for all keys on all inserted cards.  
-.It Ar list
-List all public keys associated with a user.  
+Print the hashes for all keys on all inserted cards.
 .El                      \" Ends the list
 .Pp
 .Sh OPTIONS
@@ -81,11 +112,7 @@ suit their local environments.
 .Nm
 is only known to work with a local directory.  Consult the script's source
 for some limited guidance to using remote directories.  
-.Sh BUGS
-.Nm
-.Ar hash
-might display the hashes of encryption keys as well as signing keys, even
-though 
-.Nm
-.Ar accept
-does not work with encryption keys.  
+.Sh SEE ALSO
+.Xr SmartCardServices 7 ,
+.Xr SmartCardServices-legacy 7 ,
+.Xr pam_smartcard 8

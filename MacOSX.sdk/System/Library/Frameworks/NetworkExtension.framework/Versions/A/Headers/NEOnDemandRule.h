@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, NEOnDemandRuleAction) {
 	NEOnDemandRuleActionEvaluateConnection = 3,
 	/*! @const NEOnDemandRuleActionIgnore Do not start the VPN connection, and leave the VPN connection in its current state */
 	NEOnDemandRuleActionIgnore = 4,
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} NS_ENUM_AVAILABLE(10_11, 8_0);
 
 /*!
  * @typedef NEOnDemandRuleInterfaceType
@@ -43,12 +43,12 @@ typedef NS_ENUM(NSInteger, NEOnDemandRuleInterfaceType) {
 	/*! @const NEOnDemandRuleInterfaceTypeAny */
 	NEOnDemandRuleInterfaceTypeAny NS_ENUM_AVAILABLE(10_11, 9_0) = 0,
 	/*! @const NEOnDemandRuleInterfaceTypeEthernet Wired Ethernet */
-	NEOnDemandRuleInterfaceTypeEthernet NS_ENUM_AVAILABLE(10_10, NA) = 1,
+	NEOnDemandRuleInterfaceTypeEthernet NS_ENUM_AVAILABLE(10_11, NA) = 1,
 	/*! @const NEOnDemandRuleInterfaceTypeWiFi WiFi */
-	NEOnDemandRuleInterfaceTypeWiFi NS_ENUM_AVAILABLE(10_10, 8_0) = 2,
+	NEOnDemandRuleInterfaceTypeWiFi NS_ENUM_AVAILABLE(10_11, 8_0) = 2,
 	/*! @const NEOnDemandRuleInterfaceTypeCellular Cellular */
 	NEOnDemandRuleInterfaceTypeCellular NS_ENUM_AVAILABLE(NA, 8_0) = 3,
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} NS_ENUM_AVAILABLE(10_11, 8_0);
 
 /*!
  * @interface NEOnDemandRule
@@ -58,44 +58,44 @@ typedef NS_ENUM(NSInteger, NEOnDemandRuleInterfaceType) {
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_11, 8_0)
 @interface NEOnDemandRule : NSObject <NSSecureCoding,NSCopying>
 
 /*!
  * @property action
  * @discussion The rule's action
  */
-@property (readonly) NEOnDemandRuleAction action NS_AVAILABLE(10_10, 8_0);
+@property (readonly) NEOnDemandRuleAction action NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property DNSSearchDomainMatch
  * @discussion An array of NSString objects. If the current default search domain is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current default search domain does not factor into the rule match.
  */
-@property (copy, nullable) NSArray<NSString *> *DNSSearchDomainMatch NS_AVAILABLE(10_10, 8_0);
+@property (copy, nullable) NSArray<NSString *> *DNSSearchDomainMatch NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property DNSServerAddressMatch
  * @discussion An array of DNS server IP addresses represented as NSString objects. If each of the current default DNS servers is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the default DNS servers do not factor into the rule match.
  */
-@property (copy, nullable) NSArray<NSString *> *DNSServerAddressMatch NS_AVAILABLE(10_10, 8_0);
+@property (copy, nullable) NSArray<NSString *> *DNSServerAddressMatch NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property interfaceTypeMatch
  * @discussion The type of interface that this rule matches. If the current primary network interface is of this type and all of the other conditions in the rule match, then the rule matches. If this property is 0 (the default), then the current primary interface type does not factor into the rule match.
  */
-@property NEOnDemandRuleInterfaceType interfaceTypeMatch NS_AVAILABLE(10_10, 8_0);
+@property NEOnDemandRuleInterfaceType interfaceTypeMatch NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property SSIDMatch
  * @discussion An array of NSString objects. If the Service Set Identifier (SSID) of the current primary connected network matches one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current primary connected network SSID does not factor into the rule match.
  */
-@property (copy, nullable) NSArray<NSString *> *SSIDMatch NS_AVAILABLE(10_10, 8_0);
+@property (copy, nullable) NSArray<NSString *> *SSIDMatch NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property probeURL
  * @discussion An HTTP or HTTPS URL. If a request sent to this URL results in a HTTP 200 OK response and all of the other conditions in the rule match, then then rule matches. If this property is nil (the default), then an HTTP request does not factor into the rule match.
  */
-@property (copy, nullable) NSURL *probeURL NS_AVAILABLE(10_10, 8_0);
+@property (copy, nullable) NSURL *probeURL NS_AVAILABLE(10_11, 8_0);
 
 @end
 
@@ -107,7 +107,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_11, 8_0)
 @interface NEOnDemandRuleConnect : NEOnDemandRule
 @end
 
@@ -119,7 +119,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_11, 8_0)
 @interface NEOnDemandRuleDisconnect : NEOnDemandRule
 @end
 
@@ -131,7 +131,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_11, 8_0)
 @interface NEOnDemandRuleIgnore : NEOnDemandRule
 @end
 
@@ -143,14 +143,14 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_11, 8_0)
 @interface NEOnDemandRuleEvaluateConnection : NEOnDemandRule
 
 /*!
  * @property connectionRules
  * @discussion An array of NEEvaluateConnectionRule objects. Each NEEvaluateConnectionRule object is evaluated in order against the properties of the network connection being established.
  */
-@property (copy, nullable) NSArray<NEEvaluateConnectionRule *> *connectionRules NS_AVAILABLE(10_10, 8_0);
+@property (copy, nullable) NSArray<NEEvaluateConnectionRule *> *connectionRules NS_AVAILABLE(10_11, 8_0);
 
 @end
 
@@ -163,7 +163,7 @@ typedef NS_ENUM(NSInteger, NEEvaluateConnectionRuleAction) {
 	NEEvaluateConnectionRuleActionConnectIfNeeded = 1,
 	/*! @const NEEvaluateConnectionRuleActionNeverConnect Do not start the VPN connection */
 	NEEvaluateConnectionRuleActionNeverConnect = 2,
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} NS_ENUM_AVAILABLE(10_11, 8_0);
 
 /*!
  * @interface NEEvaluateConnectionRule
@@ -171,38 +171,38 @@ typedef NS_ENUM(NSInteger, NEEvaluateConnectionRuleAction) {
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_11, 8_0)
 @interface NEEvaluateConnectionRule : NSObject <NSSecureCoding,NSCopying>
 
 /*!
  * @method initWithMatchDomains:andAction
  * @discussion Initialize an NEEvaluateConnectionRule instance with a list of destination host domains and an action
  */
-- (instancetype)initWithMatchDomains:(NSArray<NSString *> *)domains andAction:(NEEvaluateConnectionRuleAction)action NS_AVAILABLE(10_10, 8_0);
+- (instancetype)initWithMatchDomains:(NSArray<NSString *> *)domains andAction:(NEEvaluateConnectionRuleAction)action NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property action
  * @discussion The action to take if the properties of the network connection being established match the rule.
  */
-@property (readonly) NEEvaluateConnectionRuleAction action NS_AVAILABLE(10_10, 8_0);
+@property (readonly) NEEvaluateConnectionRuleAction action NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property matchDomains
  * @discussion An array of NSString objects. If the host name of the destination of the network connection being established shares a suffix with one of the strings in this array, then the rule matches.
  */
-@property (readonly) NSArray<NSString *> *matchDomains NS_AVAILABLE(10_10, 8_0);
+@property (readonly) NSArray<NSString *> *matchDomains NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property useDNSServers
  * @discussion An array of NSString objects. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded, the DNS servers specified in this array are used to resolve the host name of the destination while evaluating connectivity to the destination. If the resolution fails for any reason, the VPN is started.
  */
-@property (copy, nullable) NSArray<NSString *> *useDNSServers NS_AVAILABLE(10_10, 8_0);
+@property (copy, nullable) NSArray<NSString *> *useDNSServers NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property probeURL
  * @discussion An HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
  */
-@property (copy, nullable) NSURL *probeURL NS_AVAILABLE(10_10, 8_0);
+@property (copy, nullable) NSURL *probeURL NS_AVAILABLE(10_11, 8_0);
 
 @end
 

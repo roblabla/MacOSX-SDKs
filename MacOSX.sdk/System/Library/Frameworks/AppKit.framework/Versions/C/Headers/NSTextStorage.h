@@ -117,8 +117,8 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextStorage : NSMutableAttributedStri
 
 /**** Notifications ****/
 
-APPKIT_EXTERN NSString *  NSTextStorageWillProcessEditingNotification NS_AVAILABLE(10_0, 7_0);
-APPKIT_EXTERN NSString *  NSTextStorageDidProcessEditingNotification NS_AVAILABLE(10_0, 7_0);
+APPKIT_EXTERN NSNotificationName NSTextStorageWillProcessEditingNotification NS_AVAILABLE(10_0, 7_0);
+APPKIT_EXTERN NSNotificationName NSTextStorageDidProcessEditingNotification NS_AVAILABLE(10_0, 7_0);
 
 /**** Deprecations ****/
 // NSTextStorageEditedOptions is deprecated along with -[NSLayoutManager textStorage:edited:range:changeInLength:invalidatedRange:. Use NSTextStorageEditActions.
@@ -126,7 +126,7 @@ typedef NSUInteger NSTextStorageEditedOptions;
 
 @interface NSObject (NSDeprecatedTextStorageDelegateInterface)
 - (void)textStorageWillProcessEditing:(NSNotification *)notification NS_DEPRECATED_MAC(10_0, 10_11, "Use -textStorage:willProcessEditing:range:changeInLength: instead.");
-- (void)textStorageDidProcessEditing:(NSNotification *)notification NS_DEPRECATED_MAC(10_0, 10_11, "Use -textStorage:DidProcessEditing:range:changeInLength: instead.");
+- (void)textStorageDidProcessEditing:(NSNotification *)notification NS_DEPRECATED_MAC(10_0, 10_11, "Use -textStorage:didProcessEditing:range:changeInLength: instead.");
 @end
 
 

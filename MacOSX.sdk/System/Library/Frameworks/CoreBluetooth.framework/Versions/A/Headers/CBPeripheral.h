@@ -67,6 +67,7 @@ CB_EXTERN_CLASS @interface CBPeripheral : NSObject <NSCopying>
 	NSMutableDictionary			*_attributes;
 	BOOL						 _isPaired;
 	BOOL						 _isConnectedToSystem;
+    NSInteger                    role;
 }
 
 /*!
@@ -188,6 +189,15 @@ CB_EXTERN_CLASS @interface CBPeripheral : NSObject <NSCopying>
  *  @see					peripheral:didUpdateValueForCharacteristic:error:
  */
 - (void)readValueForCharacteristic:(CBCharacteristic *)characteristic;
+
+/*!
+ *  @method		maximumWriteValueLengthForType:
+ *
+ *  @discussion	The maximum amount of data, in bytes, that can be sent to a characteristic in a single write type.
+ *
+ *  @see		writeValue:forCharacteristic:type:
+ */
+- (NSUInteger)maximumWriteValueLengthForType:(CBCharacteristicWriteType)type NS_AVAILABLE(10_12, 9_0);
 
 /*!
  *  @method writeValue:forCharacteristic:type:

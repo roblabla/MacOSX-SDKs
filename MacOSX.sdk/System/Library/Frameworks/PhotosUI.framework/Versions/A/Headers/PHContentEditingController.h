@@ -7,8 +7,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class PHAdjustmentData, PHContentEditingInput, PHContentEditingOutput;
+NS_ASSUME_NONNULL_BEGIN
 
+@class PHAdjustmentData, PHContentEditingInput, PHContentEditingOutput;
 
 // Protocol to which the principal view controller of the extension must conform.
 @protocol PHContentEditingController <NSObject>
@@ -21,7 +22,7 @@
 - (void)startContentEditingWithInput:(PHContentEditingInput *)contentEditingInput placeholderImage:(NSImage *)placeholderImage;
 
 // Called when the user finishes the editing session. The receiver should prevent the user from editing the asset further. Also, it should create the editing output and call the completion handler. The completion handler returns after the output has been consumed, so it is safe to perform clean up after it returns. The completion handler can (and should best) be called on a background queue.
-- (void)finishContentEditingWithCompletionHandler:(void (^)(PHContentEditingOutput *))completionHandler;
+- (void)finishContentEditingWithCompletionHandler:(void (^)(PHContentEditingOutput * _Nullable))completionHandler;
 
 // Called if the user cancels the editing session. (Can be called while the receiver is producing the editing output.)
 - (void)cancelContentEditing;
@@ -30,3 +31,5 @@
 @property (readonly, nonatomic) BOOL shouldShowCancelConfirmation;
 
 @end
+
+NS_ASSUME_NONNULL_END

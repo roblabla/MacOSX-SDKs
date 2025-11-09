@@ -21,25 +21,25 @@ CF_ASSUME_NONNULL_BEGIN
     @abstract   Dictionary key to access the symbolic traits value.
     @discussion Use this key to access the symbolic traits value from the font traits dictionary. The value is returned as a CFNumberRef.
 */
-extern const CFStringRef kCTFontSymbolicTrait CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontSymbolicTrait CT_AVAILABLE(10_5, 3_2);
 /*!
     @defined    kCTFontWeightTrait
     @abstract   Dictionary key to access the weight trait value.
     @discussion Use this key to access the normalized weight trait from the font traits dictionary. The value returned is a CFNumberRef representing a float value between -1.0 and 1.0 for normalized weight. The value of 0.0 corresponds to the regular or medium font weight.
 */
-extern const CFStringRef kCTFontWeightTrait CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontWeightTrait CT_AVAILABLE(10_5, 3_2);
 /*!
     @defined    kCTFontWidthTrait
     @abstract   Dictionary key to access the width (condense/expand) trait value.
     @discussion Use this key to access the normalized proportion trait from the font traits dictionary. This value corresponds to the relative inter-glyph spacing for a given font. The value returned is a CFNumberRef representing a float between -1.0 and 1.0. The value of 0.0 corresponds to regular glyph spacing while negative values represent condensed glyph spacing.
 */
-extern const CFStringRef kCTFontWidthTrait CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontWidthTrait CT_AVAILABLE(10_5, 3_2);
 /*!
     @defined    kCTFontSlantTrait
     @abstract   Dictionary key to access the slant trait value.
     @discussion Use this key to access the normalized slant angle from the font traits dictionary. The value returned is a CFNumberRef representing a float value between -1.0 and 1.0 for normalized slant angle. The value or 0.0 corresponds to 0 degree clockwise rotation from the vertical and 1.0 corresponds to 30 degrees clockwise rotation.
 */
-extern const CFStringRef kCTFontSlantTrait CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontSlantTrait CT_AVAILABLE(10_5, 3_2);
 
 /*!
     @const      kCTFontClassMaskShift
@@ -84,7 +84,7 @@ typedef CF_OPTIONS(uint32_t, CTFontSymbolicTraits) {
 /*!
     @enum       CTFontStylisticClass
     @abstract   Stylistic class values.
-    @discussion CTFontStylisticClass classifies certain stylistic qualities of the font. These values correspond closely to the font class values in the OpenType 'OS/2' table. The class values are bundled in the upper four bits of the CTFontSymbolicTraits and can be obtained via the kCTFontClassMaskTrait.
+    @discussion CTFontStylisticClass classifies certain stylistic qualities of the font. These values correspond closely to the font class values in the OpenType 'OS/2' table. The class values are bundled in the upper four bits of the CTFontSymbolicTraits and can be obtained via the kCTFontTraitClassMask.
 */
 typedef CF_OPTIONS(uint32_t, CTFontStylisticClass) {
     kCTFontClassUnknown             = (0 << kCTFontClassMaskShift),

@@ -1,13 +1,13 @@
 /*
 	NSColor.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
 /* NSColors store colors. Often the only NSColor message you send is the "set" method, which makes the receiver the current color in the drawing context. There is usually no need to dive in and get the individual components (for instance, red, green, blue) that make up a color.
 
-An NSColor may be in one of several fixed number of named colorspaces. Different named colorspaces have different ways of getting at the components which define colors in that colorspace. Implementations of NSColors exist for the following named colorspaces:
+An NSColor may be in one of several fixed number of "named" color spaces. Different named color spaces have different ways of getting at the components which define colors in that color space:
 
   NSDeviceCMYKColorSpace	Cyan, magenta, yellow, black, and alpha components
   NSDeviceWhiteColorSpace	White and alpha components
@@ -19,11 +19,11 @@ An NSColor may be in one of several fixed number of named colorspaces. Different
   NSNamedColorSpace		Catalog name, color name components
   NSCustomColorSpace		Color space specified using NSColorSpace, with appropriate number of CGFloat components
 
-The named colorspace NSCustomColorSpace allows flexibility of defining an arbitrary colorspace using an NSColorSpace. 
-
+The named color space NSCustomColorSpace allows flexibility of using an arbitrary color space (specified via an NSColorSpace), and is the way to get colors in sRGB or P3 colorspaces.  These color spaces are preferred over the historical "calibrated" color spaces. Create NSCustomColorSpace colors with +colorSpaceWithColorSpace:components:count:, or the likes of colorWithSRGBRed:green:blue:alpha:.
+ 
 Alpha component defines opacity on devices which support it (1.0 == full opacity). On other devices the alpha is ignored when the color is used.
 
-It's illegal to ask a color for components that are not defined for its colorspace. If you need to ask a color for a certain set of components (for instance, you need to know the RGB components of a color you got from the color panel), you should first convert the color to the appropriate colorspace using colorUsingColorSpace:, or the appropriate named colorspace using  colorUsingColorSpaceName:.  If the color is already in the specified colorspace, you get the same color back; otherwise you get a conversion which is usually lossy or is correct only for the current device. You might also get back nil if the specified conversion cannot be done.
+It's illegal to ask a color for components that are not defined for its colorspace. If you need to ask a color for a certain set of components (for instance, you need to know the RGB components of a color you got from the color panel), you should first convert the color to the appropriate colorspace using colorUsingColorSpace:, or the appropriate named colorspace using  colorUsingColorSpaceName:.  If the color is already in the specified colorspace, you get the same color back; otherwise a conversion occurs. You might also get back nil if the specified conversion cannot be done.
 
 Subclassers of NSColor need to implement the methods colorSpaceName, set, the various methods which return the components for that color space, and the NSCoding protocol. Some other methods such as colorWithAlphaComponent:, isEqual:, colorUsingColorSpaceName:device:, and CGColor may also be implemented if they make sense for the colorspace. If isEqual: is overridden, so should hash (because if [a isEqual:b] then [a hash] == [b hash]). Mutable subclassers (if any) should also implement copyWithZone: to a true copy.
 */
@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define NSAppKitVersionNumberWithPatternColorLeakFix 641.0
 
+// By default class properties are enabled and available for Swift 3 and ObjC apps
+#define NSCOLOR_USE_CLASS_PROPERTIES APPKIT_SWIFT_SDK_EPOCH_AT_LEAST(2)
 
 
 @interface NSColor : NSObject <NSCopying, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting>
@@ -50,118 +52,128 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
-/* Create NSCalibratedWhiteColorSpace colors.
-*/
-+ (NSColor *)colorWithCalibratedWhite:(CGFloat)white alpha:(CGFloat)alpha;
 
-
-/* Create NSCalibratedRGBColorSpace colors.
-*/
-+ (NSColor *)colorWithCalibratedHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha;
-+ (NSColor *)colorWithCalibratedRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
-
-
-/* Create colors in various device color spaces. 
-*/
-+ (NSColor *)colorWithDeviceWhite:(CGFloat)white alpha:(CGFloat)alpha;
-+ (NSColor *)colorWithDeviceHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha;
-+ (NSColor *)colorWithDeviceRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
-+ (NSColor *)colorWithDeviceCyan:(CGFloat)cyan magenta:(CGFloat)magenta yellow:(CGFloat)yellow black:(CGFloat)black alpha:(CGFloat)alpha;
-
-
-/* Create named colors from standard color catalogs (such as Pantone).
-*/
-+ (nullable NSColor *)colorWithCatalogName:(NSString *)listName colorName:(NSString *)colorName;
-
-
-/* Create colors with arbitrary colorspace. The number of components in the provided array should match the number dictated by the specified colorspace, plus one for alpha (supply 1.0 for opaque colors); otherwise an exception will be raised.  If the colorspace is one which cannot be used with NSColors, nil is returned.
+/* Create colors with arbitrary colorspace. The colorspace should be component-based, and the number of components in the provided array should match the number dictated by the specified colorspace, plus one for alpha (supply 1.0 for opaque colors); otherwise an exception will be raised.
 */
 + (NSColor *)colorWithColorSpace:(NSColorSpace *)space components:(const CGFloat *)components count:(NSInteger)numberOfComponents;
 
 
-/* Create NSCustomColorSpace colors in the sRGB or GenericGamma22Gray colorspaces.  
+/* Create NSCustomColorSpace colors in the sRGB, GenericGamma22Gray, or P3 colorspaces.
 */
-+ (NSColor *)colorWithGenericGamma22White:(CGFloat)white alpha:(CGFloat)alpha  NS_AVAILABLE_MAC(10_7);
 + (NSColor *)colorWithSRGBRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha  NS_AVAILABLE_MAC(10_7);
++ (NSColor *)colorWithGenericGamma22White:(CGFloat)white alpha:(CGFloat)alpha  NS_AVAILABLE_MAC(10_7);
++ (NSColor *)colorWithDisplayP3Red:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha NS_AVAILABLE_MAC(10_12);
+
+
+/* Create a RGB-based color using HSB component values. An exception will be raised if the color model of the provided color space is not RGB.
+ */
++ (NSColor *)colorWithColorSpace:(NSColorSpace *)space hue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha NS_AVAILABLE_MAC(10_12);
 
 
 /* Create NSCustomColorSpace colors that are compatible with sRGB colorspace; these variants are provided for easier reuse of code that uses UIColor on iOS. It's typically better to specify the colorspace explicitly with one of the above methods.
+ 
+If red, green, blue, or saturation, brightness, or white values are outside of the 0..1 range, these will create colors in the extended sRGB (or for colorWithWhite:alpha:, extendedGenericGamma22GrayColorSpace) color spaces. This behavior is compatible with iOS UIColor.
 */
 + (NSColor *)colorWithWhite:(CGFloat)white alpha:(CGFloat)alpha NS_AVAILABLE_MAC(10_9);
 + (NSColor *)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha NS_AVAILABLE_MAC(10_9);
 + (NSColor *)colorWithHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha NS_AVAILABLE_MAC(10_9);
 
 
+/* Create NSCalibratedWhiteColorSpace or NSCalibratedRGBColorSpace colors.  In general colors in sRGB or P3 color spaces should be preferred.
+ */
++ (NSColor *)colorWithCalibratedWhite:(CGFloat)white alpha:(CGFloat)alpha;
++ (NSColor *)colorWithCalibratedRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
++ (NSColor *)colorWithCalibratedHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha;
+
+
+/* Create colors in various device color spaces.
+ */
++ (NSColor *)colorWithDeviceWhite:(CGFloat)white alpha:(CGFloat)alpha;
++ (NSColor *)colorWithDeviceRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
++ (NSColor *)colorWithDeviceHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha;
++ (NSColor *)colorWithDeviceCyan:(CGFloat)cyan magenta:(CGFloat)magenta yellow:(CGFloat)yellow black:(CGFloat)black alpha:(CGFloat)alpha;
+
+
+/* Create named colors from standard color catalogs (such as Pantone).
+ */
++ (nullable NSColor *)colorWithCatalogName:(NSString *)listName colorName:(NSString *)colorName;
+
+
+#if NSCOLOR_USE_CLASS_PROPERTIES
 /* Some convenience methods to create colors in the calibrated color spaces...
-*/
-+ (NSColor *)blackColor;	/* 0.0 white */
-+ (NSColor *)darkGrayColor;	/* 0.333 white */
-+ (NSColor *)lightGrayColor;	/* 0.667 white */
-+ (NSColor *)whiteColor;	/* 1.0 white */
-+ (NSColor *)grayColor;		/* 0.5 white */
-+ (NSColor *)redColor;		/* 1.0, 0.0, 0.0 RGB */
-+ (NSColor *)greenColor;	/* 0.0, 1.0, 0.0 RGB */
-+ (NSColor *)blueColor;		/* 0.0, 0.0, 1.0 RGB */
-+ (NSColor *)cyanColor;		/* 0.0, 1.0, 1.0 RGB */
-+ (NSColor *)yellowColor;	/* 1.0, 1.0, 0.0 RGB */
-+ (NSColor *)magentaColor;	/* 1.0, 0.0, 1.0 RGB */
-+ (NSColor *)orangeColor;	/* 1.0, 0.5, 0.0 RGB */
-+ (NSColor *)purpleColor;	/* 0.5, 0.0, 0.5 RGB */
-+ (NSColor *)brownColor;	/* 0.6, 0.4, 0.2 RGB */
-+ (NSColor *)clearColor;	/* 0.0 white, 0.0 alpha */
+ */
+@property (class, strong, readonly) NSColor *blackColor;        /* 0.0 white */
+@property (class, strong, readonly) NSColor *darkGrayColor;     /* 0.333 white */
+@property (class, strong, readonly) NSColor *lightGrayColor;    /* 0.667 white */
+@property (class, strong, readonly) NSColor *whiteColor;        /* 1.0 white */
+@property (class, strong, readonly) NSColor *grayColor;         /* 0.5 white */
+@property (class, strong, readonly) NSColor *redColor;          /* 1.0, 0.0, 0.0 RGB */
+@property (class, strong, readonly) NSColor *greenColor;        /* 0.0, 1.0, 0.0 RGB */
+@property (class, strong, readonly) NSColor *blueColor;         /* 0.0, 0.0, 1.0 RGB */
+@property (class, strong, readonly) NSColor *cyanColor;         /* 0.0, 1.0, 1.0 RGB */
+@property (class, strong, readonly) NSColor *yellowColor;       /* 1.0, 1.0, 0.0 RGB */
+@property (class, strong, readonly) NSColor *magentaColor;      /* 1.0, 0.0, 1.0 RGB */
+@property (class, strong, readonly) NSColor *orangeColor;       /* 1.0, 0.5, 0.0 RGB */
+@property (class, strong, readonly) NSColor *purpleColor;       /* 0.5, 0.0, 0.5 RGB */
+@property (class, strong, readonly) NSColor *brownColor;        /* 0.6, 0.4, 0.2 RGB */
+@property (class, strong, readonly) NSColor *clearColor;        /* 0.0 white, 0.0 alpha */
 
-+ (NSColor *)controlShadowColor;		// Dark border for controls
-+ (NSColor *)controlDarkShadowColor;		// Darker border for controls
-+ (NSColor *)controlColor;			// Control face and old window background color
-+ (NSColor *)controlHighlightColor;		// Light border for controls
-+ (NSColor *)controlLightHighlightColor;	// Lighter border for controls
-+ (NSColor *)controlTextColor;			// Text on controls
-+ (NSColor *)controlBackgroundColor;		// Background of large controls (browser, tableview, clipview, ...)
-+ (NSColor *)selectedControlColor;		// Control face for selected controls
-+ (NSColor *)secondarySelectedControlColor;	// Color for selected controls when control is not active (that is, not focused)
-+ (NSColor *)selectedControlTextColor;		// Text on selected controls
-+ (NSColor *)disabledControlTextColor;		// Text on disabled controls
-+ (NSColor *)textColor;				// Document text
-+ (NSColor *)textBackgroundColor;		// Document text background
-+ (NSColor *)selectedTextColor;			// Selected document text
-+ (NSColor *)selectedTextBackgroundColor;	// Selected document text background
-+ (NSColor *)gridColor;				// Grids in controls
-+ (NSColor *)keyboardFocusIndicatorColor;// Keyboard focus ring around controls
-+ (NSColor *)windowBackgroundColor;		// Background fill for window contents
-+ (NSColor *)underPageBackgroundColor NS_AVAILABLE_MAC(10_8);   // Background areas revealed behind views
+@property (class, strong, readonly) NSColor *controlShadowColor;            // Dark border for controls
+@property (class, strong, readonly) NSColor *controlDarkShadowColor;        // Darker border for controls
+@property (class, strong, readonly) NSColor *controlColor;                  // Control face and old window background color
+@property (class, strong, readonly) NSColor *controlHighlightColor;         // Light border for controls
+@property (class, strong, readonly) NSColor *controlLightHighlightColor;    // Lighter border for controls
+@property (class, strong, readonly) NSColor *controlTextColor;              // Text on controls
+@property (class, strong, readonly) NSColor *controlBackgroundColor;        // Background of large controls (browser, tableview, clipview, ...)
+@property (class, strong, readonly) NSColor *selectedControlColor;          // Control face for selected controls
+@property (class, strong, readonly) NSColor *secondarySelectedControlColor; // Color for selected controls when control is not active (that is, not focused)
+@property (class, strong, readonly) NSColor *selectedControlTextColor;      // Text on selected controls
+@property (class, strong, readonly) NSColor *disabledControlTextColor;      // Text on disabled controls
+@property (class, strong, readonly) NSColor *textColor;                     // Document text
+@property (class, strong, readonly) NSColor *textBackgroundColor;           // Document text background
+@property (class, strong, readonly) NSColor *selectedTextColor;             // Selected document text
+@property (class, strong, readonly) NSColor *selectedTextBackgroundColor;   // Selected document text background
+@property (class, strong, readonly) NSColor *gridColor;                     // Grids in controls
+@property (class, strong, readonly) NSColor *keyboardFocusIndicatorColor;   // Keyboard focus ring around controls
+@property (class, strong, readonly) NSColor *windowBackgroundColor;         // Background fill for window contents
+@property (class, strong, readonly) NSColor *underPageBackgroundColor NS_AVAILABLE_MAC(10_8); // Background areas revealed behind views
 
-+ (NSColor *)labelColor NS_AVAILABLE_MAC(10_10);            // Text color for static text and related elements
-+ (NSColor *)secondaryLabelColor NS_AVAILABLE_MAC(10_10);   // Text color for secondary static text and related elements
-+ (NSColor *)tertiaryLabelColor NS_AVAILABLE_MAC(10_10);    // Text color for disabled static text and related elements
-+ (NSColor *)quaternaryLabelColor NS_AVAILABLE_MAC(10_10);  // Text color for large secondary or disabled static text, separators, large glyphs/icons, etc
+@property (class, strong, readonly) NSColor *labelColor NS_AVAILABLE_MAC(10_10);              // Text color for static text and related elements
+@property (class, strong, readonly) NSColor *secondaryLabelColor NS_AVAILABLE_MAC(10_10);     // Text color for secondary static text and related elements
+@property (class, strong, readonly) NSColor *tertiaryLabelColor NS_AVAILABLE_MAC(10_10);      // Text color for disabled static text and related elements
+@property (class, strong, readonly) NSColor *quaternaryLabelColor NS_AVAILABLE_MAC(10_10);    // Text color for large secondary or disabled static text, separators, large glyphs/icons, etc
 
-+ (NSColor *)scrollBarColor;			// Scroll bar slot color
-+ (NSColor *)knobColor;     			// Knob face color for controls
-+ (NSColor *)selectedKnobColor;       		// Knob face color for selected controls
+@property (class, strong, readonly) NSColor *scrollBarColor;                // Scroll bar slot color
+@property (class, strong, readonly) NSColor *knobColor;                     // Knob face color for controls
+@property (class, strong, readonly) NSColor *selectedKnobColor;             // Knob face color for selected controls
 
-+ (NSColor *)windowFrameColor;			// Window frames
-+ (NSColor *)windowFrameTextColor;		// Text on window frames
+@property (class, strong, readonly) NSColor *windowFrameColor;              // Window frames
+@property (class, strong, readonly) NSColor *windowFrameTextColor;          // Text on window frames
 
-+ (NSColor *)selectedMenuItemColor;		// Highlight color for menus
-+ (NSColor *)selectedMenuItemTextColor;		// Highlight color for menu text
+@property (class, strong, readonly) NSColor *selectedMenuItemColor;         // Highlight color for menus
+@property (class, strong, readonly) NSColor *selectedMenuItemTextColor;     // Highlight color for menu text
 
-+ (NSColor *)highlightColor;     	     	// Highlight color for UI elements (this is abstract and defines the color all highlights tend toward)
-+ (NSColor *)shadowColor;     			// Shadow color for UI elements (this is abstract and defines the color all shadows tend toward)
+@property (class, strong, readonly) NSColor *highlightColor;                // Highlight color for UI elements (this is abstract and defines the color all highlights tend toward)
+@property (class, strong, readonly) NSColor *shadowColor;                   // Shadow color for UI elements (this is abstract and defines the color all shadows tend toward)
 
-+ (NSColor *)headerColor;			// Background color for header cells in Table/OutlineView
-+ (NSColor *)headerTextColor;			// Text color for header cells in Table/OutlineView
+@property (class, strong, readonly) NSColor *headerColor;                   // Background color for header cells in Table/OutlineView
+@property (class, strong, readonly) NSColor *headerTextColor;               // Text color for header cells in Table/OutlineView
 
-+ (NSColor *)alternateSelectedControlColor;	// Similar to selectedControlColor; for use in lists and tables 
-+ (NSColor *)alternateSelectedControlTextColor;		// Similar to selectedControlTextColor; see alternateSelectedControlColor
+@property (class, strong, readonly) NSColor *alternateSelectedControlColor;      // Similar to selectedControlColor; for use in lists and tables
+@property (class, strong, readonly) NSColor *alternateSelectedControlTextColor;  // Similar to selectedControlTextColor; see alternateSelectedControlColor
 
-+ (NSArray<NSColor *> *)controlAlternatingRowBackgroundColors;	// Standard colors for alternating colored rows in tables and lists (for instance, light blue/white; don't assume just two colors)
+@property (class, strong, readonly) NSArray<NSColor *> *controlAlternatingRowBackgroundColors;  // Standard colors for alternating colored rows in tables and lists (for instance, light blue/white; don't assume just two colors)
 
-- (nullable NSColor *)highlightWithLevel:(CGFloat)val;	// val = 0 => receiver, val = 1 => highlightColor
-- (nullable NSColor *)shadowWithLevel:(CGFloat)val;	// val = 0 => receiver, val = 1 => shadowColor
+@property (class, readonly) NSControlTint currentControlTint;   // returns current system control tint
+
+#endif // NSCOLOR_USE_CLASS_PROPERTIES
+
+@property (class, strong, readonly) NSColor *scrubberTexturedBackgroundColor NS_AVAILABLE_MAC(10_12_2); // Patterned background color for use in NSScrubber
 
 + (NSColor *)colorForControlTint:(NSControlTint)controlTint;	// pass in valid tint to get rough color matching. returns default if invalid tint
 
-+ (NSControlTint)currentControlTint;	// returns current system control tint
+- (nullable NSColor *)highlightWithLevel:(CGFloat)val;	// val = 0 => receiver, val = 1 => highlightColor
+- (nullable NSColor *)shadowWithLevel:(CGFloat)val;	// val = 0 => receiver, val = 1 => shadowColor
 
 
 /* Set the color: Sets the fill and stroke colors in the current drawing context. If the color doesn't know about alpha, it's set to 1.0. Should be implemented by subclassers.
@@ -285,8 +297,9 @@ If colorSpace is nil, then the most appropriate color space is used.
 
 This method provides a global approach to removing alpha which might not always be appropriate. Applications which need to import alpha sometimes should set this flag to NO and explicitly make colors opaque in cases where it matters to them.
 */
-+ (void)setIgnoresAlpha:(BOOL)flag;
-+ (BOOL)ignoresAlpha;
+#if NSCOLOR_USE_CLASS_PROPERTIES
+@property (class) BOOL ignoresAlpha;
+#endif
 
 @end
 
@@ -307,6 +320,6 @@ This method provides a global approach to removing alpha which might not always 
 
 @end
 
-APPKIT_EXTERN NSString * NSSystemColorsDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSSystemColorsDidChangeNotification;
 
 NS_ASSUME_NONNULL_END

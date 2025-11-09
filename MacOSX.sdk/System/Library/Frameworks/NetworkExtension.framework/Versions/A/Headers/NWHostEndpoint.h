@@ -2,20 +2,22 @@
 //  NWHostEndpoint.h
 //  Network
 //
-//  Copyright (c) 2014, 2015 Apple. All rights reserved.
+//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
 //
 
 #ifndef __NE_INDIRECT__
 #error "Please import the NetworkExtension module instead of this file directly."
-#endif
+#endif // __NE_INDIRECT__
+
+#ifndef __NWHostEndpoint_h_
+#define __NWHostEndpoint_h_
+
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NWEndpoint;
-
 /*!
  * @interface NWHostEndpoint
- * @discussion NWHostEndpoint is a subclass of NWEndpoint. It represents an endpoint backed by a 
+ * @discussion NWHostEndpoint is a subclass of NWEndpoint. It represents an endpoint backed by a
  *		hostname and port. Note that a hostname string may be an IP or IPv6 address.
  */
 NS_CLASS_AVAILABLE(10_11, 9_0)
@@ -45,3 +47,5 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // __NWHostEndpoint_h_

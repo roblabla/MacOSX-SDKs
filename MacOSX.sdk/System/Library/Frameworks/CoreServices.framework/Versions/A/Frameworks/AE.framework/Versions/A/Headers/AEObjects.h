@@ -65,7 +65,7 @@ enum {
   keyAEKeyData                  = 'seld' /*  0x73656c64  */
 };
 
-enum {
+CF_ENUM(AEKeyword) {
                                         /*    ... for Keywords for getting fields out of Range specifier records. */
   keyAERangeStart               = 'star', /*  0x73746172  */
   keyAERangeStop                = 'stop', /*  0x73746f70  */
@@ -89,6 +89,9 @@ enum {
   formPropertyID                = 'prop', /*  0x70726f70  */
   formName                      = 'name', /*  0x6e616d65  */
   formUniqueID                  = 'ID  ', /*  0x49442020  */
+}
+	;
+CF_ENUM(DescType) {
                                         /*    ... relevant types (some of these are often pared with forms above). */
   typeObjectSpecifier           = 'obj ', /*  0x6f626a20  */
   typeObjectBeingExamined       = 'exmn', /*  0x65786d6e  */

@@ -85,6 +85,12 @@ __BEGIN_DECLS
 #define XPC_DEPRECATED(m) __attribute__((deprecated))
 #endif // __clang 
 
+#if __XPC_TEST__
+#define XPC_TESTSTATIC 
+#else // __XPC_TEST__
+#define XPC_TESTSTATIC static
+#endif // __XPC_TEST__
+
 #if __has_feature(objc_arc)
 #define XPC_GIVES_REFERENCE __strong
 #define XPC_UNRETAINED __unsafe_unretained
@@ -165,7 +171,15 @@ __BEGIN_DECLS
 #define XPC_DEPRECATED
 /*! @parseOnly */
 #define XPC_UNAVAILABLE(m)
-#endif // __GNUC__ 
+#endif // __GNUC__
+
+#if __has_feature(assume_nonnull)
+#define XPC_ASSUME_NONNULL_BEGIN _Pragma("clang assume_nonnull begin")
+#define XPC_ASSUME_NONNULL_END   _Pragma("clang assume_nonnull end")
+#else
+#define XPC_ASSUME_NONNULL_BEGIN
+#define XPC_ASSUME_NONNULL_END
+#endif
 
 __END_DECLS
 

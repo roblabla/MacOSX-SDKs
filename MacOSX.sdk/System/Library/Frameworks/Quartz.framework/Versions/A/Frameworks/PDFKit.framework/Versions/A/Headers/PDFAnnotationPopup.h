@@ -3,24 +3,22 @@
 // =====================================================================================================================
 
 
-#import <AppKit/AppKit.h>
+#import <PDFKit/PDFKitPlatform.h>
+
 #import <PDFKit/PDFAnnotation.h>
 
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 @class PDFAnnotationPopupPrivateVars;
 
 
+NS_CLASS_DEPRECATED_MAC(10_5, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
 @interface PDFAnnotationPopup : PDFAnnotation <NSCopying, NSCoding>
 {
 @private
-    PDFAnnotationPopupPrivateVars	*_pdfPriv2;
+    PDFAnnotationPopupPrivateVars	*_private2;
 }
 
 - (BOOL) isOpen;
 - (void) setIsOpen: (BOOL) isOpen;
 
 @end
-
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5

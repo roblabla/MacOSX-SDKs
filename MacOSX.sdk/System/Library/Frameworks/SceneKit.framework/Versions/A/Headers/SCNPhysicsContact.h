@@ -1,16 +1,20 @@
 //
 //  SCNPhysicsContact.h
 //
-//  Copyright (c) 2014-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
 //
 
+#import <SceneKit/SceneKitTypes.h>
+
 NS_ASSUME_NONNULL_BEGIN
+
+@class SCNNode;
 
 /*!
  @class SCNPhysicsContact
  @abstract SCNPhysicsContact contains information about a physics contact.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macosx(10.10))
 @interface SCNPhysicsContact : NSObject
 
 //The two nodes in contact

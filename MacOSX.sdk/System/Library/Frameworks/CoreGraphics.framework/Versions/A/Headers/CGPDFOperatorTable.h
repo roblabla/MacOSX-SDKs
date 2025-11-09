@@ -27,25 +27,25 @@ CG_EXTERN CGPDFOperatorTableRef __nullable CGPDFOperatorTableCreate(void)
 
 /* Increment the retain count of `table'. */
 
-CG_EXTERN CGPDFOperatorTableRef __nullable CGPDFOperatorTableRetain(
-    CGPDFOperatorTableRef __nullable table)
+CG_EXTERN CGPDFOperatorTableRef cg_nullable CGPDFOperatorTableRetain(
+    CGPDFOperatorTableRef cg_nullable table)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Decrement the retain count of `table'. */
 
 CG_EXTERN void CGPDFOperatorTableRelease(
-    CGPDFOperatorTableRef __nullable table)
+    CGPDFOperatorTableRef cg_nullable table)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Set the callback for the operator named `name' to `callback' */
 
 CG_EXTERN void CGPDFOperatorTableSetCallback(
-    CGPDFOperatorTableRef __nullable table,
-    const char * __nullable name, CGPDFOperatorCallback __nullable callback)
+    CGPDFOperatorTableRef cg_nullable table,
+    const char * cg_nullable name, CGPDFOperatorCallback cg_nullable callback)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
-#endif	/* CGPDFOPERATORTABLE_H_ */
+#endif  /* CGPDFOPERATORTABLE_H_ */

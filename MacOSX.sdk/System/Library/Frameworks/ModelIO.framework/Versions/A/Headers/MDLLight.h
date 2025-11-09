@@ -36,11 +36,14 @@ MDL_EXPORT
 
 /** A utility function that returns the irradiance from the light at a given point.
     @discussion point is world space
+    @property colorSpace name, as defined in CGColorSpace.h. Default is 
+              kCGColorSpaceSRGB
   */
 - (CGColorRef)irradianceAtPoint:(vector_float3)point;
 - (CGColorRef)irradianceAtPoint:(vector_float3)point colorSpace:(CGColorSpaceRef)colorSpace;
 
 @property (nonatomic, readwrite) MDLLightType lightType;
+@property (nonatomic, copy, readwrite) NSString *colorSpace;
 
 @end
 
@@ -56,13 +59,6 @@ MDL_EXPORT
  @property attenuationStartDistance. Within the attenuation start distance, the
            light is maximally bright.
  @property attenuationEndDistance. Beyond this distance, there is no light.
-
- @discussion A good formula to calculate falloff is
- 
-   falloff = clamp((1 - (distance/attenuationStartDistance)^4) ^2), 0, 1) / (distance^2 + 1)
- 
-   Note that adding one to distance in the denominator prevents numerical issues 
-   very close to the light's origin.
  */
 
 NS_CLASS_AVAILABLE(10_11, 9_0)

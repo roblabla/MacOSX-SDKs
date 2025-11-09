@@ -1,5 +1,5 @@
 /*	NSNumberFormatter.h
-	Copyright (c) 1996-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterBehavior) {
 @interface NSNumberFormatter : NSFormatter {
 @private
     NSMutableDictionary	*_attributes;
-    __strong CFNumberFormatterRef _formatter;
+    CFNumberFormatterRef _formatter;
     NSUInteger _counter;
     NSNumberFormatterBehavior _behavior;
     NSRecursiveLock *_lock;
@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterBehavior) {
 
 // Report the used range of the string and an NSError, in addition to the usual stuff from NSFormatter
 
-- (BOOL)getObjectValue:(out id __nullable * __nullable)obj forString:(NSString *)string range:(inout nullable NSRange *)rangep error:(out NSError **)error;
+- (BOOL)getObjectValue:(out id _Nullable * _Nullable)obj forString:(NSString *)string range:(inout nullable NSRange *)rangep error:(out NSError **)error;
 
 // Even though NSNumberFormatter responds to the usual NSFormatter methods,
 //   here are some convenience methods which are a little more obvious.

@@ -1,5 +1,5 @@
 /*	NSDateComponentsFormatter.h
-	Copyright (c) 2014-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2014-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -12,9 +12,10 @@ NS_ENUM_AVAILABLE(10_10, 8_0)
 typedef NS_ENUM(NSInteger, NSDateComponentsFormatterUnitsStyle) {
     NSDateComponentsFormatterUnitsStylePositional = 0, // "1:10; may fall back to abbreviated units in some cases, e.g. 3d"
     NSDateComponentsFormatterUnitsStyleAbbreviated, // "1h 10m"
-    NSDateComponentsFormatterUnitsStyleShort, // "1hr 10min"
+    NSDateComponentsFormatterUnitsStyleShort, // "1hr, 10min"
     NSDateComponentsFormatterUnitsStyleFull, // "1 hour, 10 minutes"
-    NSDateComponentsFormatterUnitsStyleSpellOut // "One hour, ten minutes"
+    NSDateComponentsFormatterUnitsStyleSpellOut, // "One hour, ten minutes"
+    NSDateComponentsFormatterUnitsStyleBrief API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) // "1hr 10min" - Brief is shorter than Short (e.g. in English, it removes the comma)
 };
 
 NS_ENUM_AVAILABLE(10_10, 8_0)
@@ -32,7 +33,7 @@ typedef NS_OPTIONS(NSUInteger, NSDateComponentsFormatterZeroFormattingBehavior) 
 
 /* NSDateComponentsFormatter provides locale-correct and flexible string formatting of quantities of time, such as "1 day" or "1h 10m", as specified by NSDateComponents. For formatting intervals of time (such as "2PM to 5PM"), see NSDateIntervalFormatter. NSDateComponentsFormatter is thread-safe, in that calling methods on it from multiple threads will not cause crashes or incorrect results, but it makes no attempt to prevent confusion when one thread sets something and another thread isn't expecting it to change.
  */
-NS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface NSDateComponentsFormatter : NSFormatter {
     @private
     pthread_mutex_t _lock;
@@ -56,7 +57,7 @@ NS_AVAILABLE(10_10, 8_0)
 
 /* 'obj' must be an instance of NSDateComponents.
  */
-- (nullable NSString *)stringForObjectValue:(id)obj;
+- (nullable NSString *)stringForObjectValue:(nullable id)obj;
 
 - (nullable NSString *)stringFromDateComponents:(NSDateComponents *)components;
 
@@ -139,7 +140,7 @@ NS_AVAILABLE(10_10, 8_0)
 
 /* NSDateComponentsFormatter currently only implements formatting, not parsing. Until it implements parsing, this will always return NO.
  */
-- (BOOL)getObjectValue:(out id __nullable * __nullable)obj forString:(NSString *)string errorDescription:(out NSString * __nullable * __nullable)error;
+- (BOOL)getObjectValue:(out id _Nullable * _Nullable)obj forString:(NSString *)string errorDescription:(out NSString * _Nullable * _Nullable)error;
 
 @end
 

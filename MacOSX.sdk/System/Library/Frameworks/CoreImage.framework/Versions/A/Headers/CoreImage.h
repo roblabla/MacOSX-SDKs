@@ -19,14 +19,15 @@
 #import <CoreImage/CIDetector.h>
 #import <CoreImage/CIFeature.h>
 #import <CoreImage/CIImageProvider.h>
+#import <CoreImage/CIImageProcessor.h>
 #import <CoreImage/CIImageAccumulator.h>
 #import <CoreImage/CIFilterConstructor.h>
 #import <CoreImage/CIFilterShape.h>
 #import <CoreImage/CISampler.h>
+#import <CoreImage/CIRAWFilter.h>
 #if !TARGET_OS_IPHONE
 #import <CoreImage/CIFilterGenerator.h>
 #import <CoreImage/CIPlugIn.h>
-#import <CoreImage/CIRAWFilter.h>
 #endif
 
 #endif /* __OBJC__ */

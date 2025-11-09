@@ -115,7 +115,7 @@ CG_EXTERN CFTypeID CGDataProviderGetTypeID(void)
 
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateSequential(
     void * __nullable info,
-    const CGDataProviderSequentialCallbacks * __nullable callbacks)
+    const CGDataProviderSequentialCallbacks * cg_nullable callbacks)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Create a direct-access data provider using `callbacks' to supply `size'
@@ -124,7 +124,7 @@ CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateSequential(
 
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateDirect(
     void * __nullable info, off_t size,
-    const CGDataProviderDirectCallbacks * __nullable callbacks)
+    const CGDataProviderDirectCallbacks * cg_nullable callbacks)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* The callback used by `CGDataProviderCreateWithData'. */
@@ -137,39 +137,39 @@ typedef void (*CGDataProviderReleaseDataCallback)(void * __nullable info,
    passed `info' as its first argument. */
 
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateWithData(
-    void * __nullable info, const void * __nullable data, size_t size,
-    CGDataProviderReleaseDataCallback __nullable releaseData)
+    void * __nullable info, const void * cg_nullable data, size_t size,
+    CGDataProviderReleaseDataCallback cg_nullable releaseData)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Create a direct-access data provider which reads from `data'. */
 
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateWithCFData(
-    CFDataRef __nullable data)
+    CFDataRef cg_nullable data)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Create a data provider reading from `url'. */
 
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateWithURL(
-    CFURLRef __nullable url)
+    CFURLRef cg_nullable url)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Create a data provider reading from `filename'. */
 
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateWithFilename(
-    const char * __nullable filename)
+    const char * cg_nullable filename)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain(provider)', but doesn't crash (as CFRetain does)
    if `provider' is NULL. */
 
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderRetain(
-    CGDataProviderRef __nullable provider)
+    CGDataProviderRef cg_nullable provider)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(provider)', but doesn't crash (as CFRelease
    does) if `provider' is NULL. */
 
-CG_EXTERN void CGDataProviderRelease(CGDataProviderRef __nullable provider)
+CG_EXTERN void CGDataProviderRelease(CGDataProviderRef cg_nullable provider)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return a copy of the data specified by provider. Returns NULL if a
@@ -177,7 +177,7 @@ CG_EXTERN void CGDataProviderRelease(CGDataProviderRef __nullable provider)
    underlying data is too large to fit in memory). */
 
 CG_EXTERN CFDataRef __nullable CGDataProviderCopyData(
-    CGDataProviderRef __nullable provider)
+    CGDataProviderRef cg_nullable provider)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 CF_ASSUME_NONNULL_END

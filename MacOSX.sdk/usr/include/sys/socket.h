@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
@@ -11,10 +11,10 @@
  * unlawful or unlicensed copies of an Apple operating system, or to
  * circumvent, violate, or enable the circumvention or violation of, any
  * terms of an Apple operating system software license agreement.
- * 
+ *
  * Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -22,7 +22,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /* Copyright (c) 1998, 1999 Apple Computer, Inc. All Rights Reserved */
@@ -75,6 +75,7 @@
 #include <sys/types.h>
 #include <sys/cdefs.h>
 #include <machine/_param.h>
+#include <net/net_kev.h>
 
 
 #include <Availability.h>
@@ -95,7 +96,7 @@
 
 /* XXX Not explicitly defined by POSIX, but function return types are */
 #include <sys/_types/_size_t.h>
- 
+
 /* XXX Not explicitly defined by POSIX, but function return types are */
 #include <sys/_types/_ssize_t.h>
 
@@ -104,7 +105,6 @@
  */
 #include <sys/_types/_iovec_t.h>
 
- 
 /*
  * Types
  */
@@ -127,22 +127,22 @@
 #define	SO_BROADCAST	0x0020		/* permit sending of broadcast msgs */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define	SO_USELOOPBACK	0x0040		/* bypass hardware when possible */
-#define SO_LINGER	0x0080          /* linger on close if data present (in ticks) */
+#define	SO_LINGER	0x0080		/* linger on close if data present (in ticks) */
 #else
-#define SO_LINGER	0x1080          /* linger on close if data present (in seconds) */
+#define	SO_LINGER	0x1080		/* linger on close if data present (in seconds) */
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 #define	SO_OOBINLINE	0x0100		/* leave received OOB data in line */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define	SO_REUSEPORT	0x0200		/* allow local address & port reuse */
 #define	SO_TIMESTAMP	0x0400		/* timestamp received dgram traffic */
-#define SO_TIMESTAMP_MONOTONIC	0x0800	/* Monotonically increasing timestamp on rcvd dgram */
+#define	SO_TIMESTAMP_MONOTONIC	0x0800	/* Monotonically increasing timestamp on rcvd dgram */
 #ifndef __APPLE__
 #define	SO_ACCEPTFILTER	0x1000		/* there is an accept filter */
 #else
-#define SO_DONTTRUNC	0x2000		/* APPLE: Retain unread data */
+#define	SO_DONTTRUNC	0x2000		/* APPLE: Retain unread data */
 					/*  (ATOMIC proto) */
-#define SO_WANTMORE	0x4000		/* APPLE: Give hint when more data ready */
-#define SO_WANTOOBFLAG	0x8000		/* APPLE: Want OOB in MSG_FLAG on receive */
+#define	SO_WANTMORE	0x4000		/* APPLE: Give hint when more data ready */
+#define	SO_WANTOOBFLAG	0x8000		/* APPLE: Want OOB in MSG_FLAG on receive */
 
 
 #endif  /* (!__APPLE__) */
@@ -151,35 +151,137 @@
 /*
  * Additional options, not kept in so_options.
  */
-#define SO_SNDBUF	0x1001		/* send buffer size */
-#define SO_RCVBUF	0x1002		/* receive buffer size */
-#define SO_SNDLOWAT	0x1003		/* send low-water mark */
-#define SO_RCVLOWAT	0x1004		/* receive low-water mark */
-#define SO_SNDTIMEO	0x1005		/* send timeout */
-#define SO_RCVTIMEO	0x1006		/* receive timeout */
+#define	SO_SNDBUF	0x1001		/* send buffer size */
+#define	SO_RCVBUF	0x1002		/* receive buffer size */
+#define	SO_SNDLOWAT	0x1003		/* send low-water mark */
+#define	SO_RCVLOWAT	0x1004		/* receive low-water mark */
+#define	SO_SNDTIMEO	0x1005		/* send timeout */
+#define	SO_RCVTIMEO	0x1006		/* receive timeout */
 #define	SO_ERROR	0x1007		/* get error status and clear */
 #define	SO_TYPE		0x1008		/* get socket type */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-/*efine	SO_PRIVSTATE	0x1009		   get/deny privileged state */
-#define SO_LABEL        0x1010          /* socket's MAC label */
-#define SO_PEERLABEL    0x1011          /* socket's peer MAC label */
+#define	SO_LABEL	0x1010		/* socket's MAC label */
+#define	SO_PEERLABEL    0x1011		/* socket's peer MAC label */
 #ifdef __APPLE__
-#define SO_NREAD	0x1020		/* APPLE: get 1st-packet byte count */
-#define SO_NKE		0x1021		/* APPLE: Install socket-level NKE */
-#define SO_NOSIGPIPE	0x1022		/* APPLE: No SIGPIPE on EPIPE */
-#define SO_NOADDRERR	0x1023		/* APPLE: Returns EADDRNOTAVAIL when src is not available anymore */
-#define SO_NWRITE	0x1024		/* APPLE: Get number of bytes currently in send socket buffer */
-#define SO_REUSESHAREUID	0x1025		/* APPLE: Allow reuse of port/socket by different userids */
+#define	SO_NREAD	0x1020		/* APPLE: get 1st-packet byte count */
+#define	SO_NKE		0x1021		/* APPLE: Install socket-level NKE */
+#define	SO_NOSIGPIPE	0x1022		/* APPLE: No SIGPIPE on EPIPE */
+#define	SO_NOADDRERR	0x1023		/* APPLE: Returns EADDRNOTAVAIL when src is not available anymore */
+#define	SO_NWRITE	0x1024		/* APPLE: Get number of bytes currently in send socket buffer */
+#define	SO_REUSESHAREUID	0x1025		/* APPLE: Allow reuse of port/socket by different userids */
 #ifdef __APPLE_API_PRIVATE
-#define SO_NOTIFYCONFLICT	0x1026	/* APPLE: send notification if there is a bind on a port which is already in use */
+#define	SO_NOTIFYCONFLICT	0x1026	/* APPLE: send notification if there is a bind on a port which is already in use */
 #define	SO_UPCALLCLOSEWAIT	0x1027	/* APPLE: block on close until an upcall returns */
 #endif
-#define SO_LINGER_SEC	0x1080          /* linger on close if data present (in seconds) */
-#define SO_RANDOMPORT   0x1082  /* APPLE: request local port randomization */
-#define SO_NP_EXTENSIONS	0x1083	/* To turn off some POSIX behavior */
+#define	SO_LINGER_SEC	0x1080		/* linger on close if data present (in seconds) */
+#define	SO_RANDOMPORT   0x1082  /* APPLE: request local port randomization */
+#define	SO_NP_EXTENSIONS	0x1083	/* To turn off some POSIX behavior */
 #endif
 
-#define SO_NUMRCVPKT		0x1112	/* number of datagrams in receive socket buffer */
+#define	SO_NUMRCVPKT		0x1112	/* number of datagrams in receive socket buffer */
+
+/*
+ * Network Service Type for option SO_NET_SERVICE_TYPE
+ *
+ * The vast majority of sockets should use Best Effort that is the default
+ * Network Service Type. Other Network Service Types have to be used only if
+ * the traffic actually matches the description of the Network Service Type.
+ *
+ * Network Service Types do not represent priorities but rather describe
+ * different categories of delay, jitter and loss parameters.
+ * Those parameters may influence protocols from layer 4 protocols like TCP
+ * to layer 2 protocols like Wi-Fi. The Network Service Type can determine
+ * how the traffic is queued and scheduled by the host networking stack and
+ * by other entities on the network like switches and routers. For example
+ * for Wi-Fi, the Network Service Type can select the marking of the
+ * layer 2 packet with the appropriate WMM Access Category.
+ *
+ * There is no point in attempting to game the system and use
+ * a Network Service Type that does not correspond to the actual
+ * traffic characteristic but one that seems to have a higher precedence.
+ * The reason is that for service classes that have lower tolerance
+ * for delay and jitter, the queues size is lower than for service
+ * classes that are more tolerant to delay and jitter.
+ *
+ * For example using a voice service type for bulk data transfer will lead
+ * to disastrous results as soon as congestion happens because the voice
+ * queue overflows and packets get dropped. This is not only bad for the bulk
+ * data transfer but it is also bad for VoIP apps that legitimately are using
+ * the voice  service type.
+ *
+ * The characteristics of the Network Service Types are based on the service
+ * classes defined in RFC 4594 "Configuration Guidelines for DiffServ Service
+ * Classes"
+ *
+ * When system detects the outgoing interface belongs to a DiffServ domain
+ * that follows the recommendation of the IETF draft "Guidelines for DiffServ to
+ * IEEE 802.11 Mapping", the packet will marked at layer 3 with a DSCP value
+ * that corresponds to Network Service Type.
+ *
+ * NET_SERVICE_TYPE_BE
+ *	"Best Effort", unclassified/standard.  This is the default service
+ *	class and cover the majority of the traffic.
+ *
+ * NET_SERVICE_TYPE_BK
+ *	"Background", high delay tolerant, loss tolerant. elastic flow,
+ *	variable size & long-lived. E.g: non-interactive network bulk transfer
+ *	like synching or backup.
+ *
+ * NET_SERVICE_TYPE_RD
+ *	"Responsive Data", a notch higher than "Best Effort", medium delay
+ *	tolerant, elastic & inelastic flow, bursty, long-lived. E.g. email,
+ *	instant messaging, for which there is a sense of interactivity and
+ *	urgency (user waiting for output).
+ *
+ * NET_SERVICE_TYPE_OAM
+ *	"Operations, Administration, and Management", medium delay tolerant,
+ *	low-medium loss tolerant, elastic & inelastic flows, variable size.
+ *	E.g. VPN tunnels.
+ *
+ * NET_SERVICE_TYPE_AV
+ *	"Multimedia Audio/Video Streaming", medium delay tolerant, low-medium
+ *	loss tolerant, elastic flow, constant packet interval, variable rate
+ *	and size. E.g. video and audio playback with buffering.
+ *
+ * NET_SERVICE_TYPE_RV
+ *	"Responsive Multimedia Audio/Video", low delay tolerant, low-medium
+ *	loss tolerant, elastic flow, variable packet interval, rate and size.
+ *	E.g. screen sharing.
+ *
+ * NET_SERVICE_TYPE_VI
+ *	"Interactive Video", low delay tolerant, low-medium loss tolerant,
+ *	elastic flow, constant packet interval, variable rate & size. E.g.
+ *	video telephony.
+ *
+ * NET_SERVICE_TYPE_SIG
+ *	"Signaling", low delay tolerant, low loss tolerant, inelastic flow,
+ *	jitter tolerant, rate is bursty but short, variable size. E.g. SIP.
+ *
+ * NET_SERVICE_TYPE_VO
+ *	"Interactive Voice", very low delay tolerant, very low loss tolerant,
+ *	inelastic flow, constant packet rate, somewhat fixed size.
+ *	E.g. VoIP.
+ */
+#define	SO_NET_SERVICE_TYPE	0x1116	/* Network service type */
+
+#define	NET_SERVICE_TYPE_BE	0 /* Best effort */
+#define	NET_SERVICE_TYPE_BK	1 /* Background system initiated */
+#define	NET_SERVICE_TYPE_SIG	2 /* Signaling */
+#define	NET_SERVICE_TYPE_VI	3 /* Interactive Video */
+#define	NET_SERVICE_TYPE_VO	4 /* Interactive Voice */
+#define	NET_SERVICE_TYPE_RV	5 /* Responsive Multimedia Audio/Video */
+#define	NET_SERVICE_TYPE_AV	6 /* Multimedia Audio/Video Streaming */
+#define	NET_SERVICE_TYPE_OAM	7 /* Operations, Administration, and Management */
+#define	NET_SERVICE_TYPE_RD	8 /* Responsive Data */
+
+
+#define	SO_NETSVC_MARKING_LEVEL	0x1119	/* Get QoS marking in effect for socket */
+
+#define	NETSVC_MRKNG_UNKNOWN		0	/* The outgoing network interface is not known */
+#define	NETSVC_MRKNG_LVL_L2		1	/* Default marking at layer 2 (for example Wi-Fi WMM) */
+#define	NETSVC_MRKNG_LVL_L3L2_ALL	2	/* Layer 3 DSCP marking and layer 2 marking for all Network Service Types */
+#define	NETSVC_MRKNG_LVL_L3L2_BK	3	/* The system policy limits layer 3 DSCP marking and layer 2 marking
+						 * to background Network Service Types */
 
 typedef __uint32_t sae_associd_t;
 #define	SAE_ASSOCID_ANY	0
@@ -190,16 +292,16 @@ typedef __uint32_t sae_connid_t;
 #define	SAE_CONNID_ALL	((sae_connid_t)(-1ULL))
 
 /* connectx() flag parameters */
-#define CONNECT_RESUME_ON_READ_WRITE	0x1 /* resume connect() on read/write */
-#define CONNECT_DATA_IDEMPOTENT		0x2 /* data is idempotent */
+#define	CONNECT_RESUME_ON_READ_WRITE	0x1 /* resume connect() on read/write */
+#define	CONNECT_DATA_IDEMPOTENT		0x2 /* data is idempotent */
 
 /* sockaddr endpoints */
 typedef struct sa_endpoints {
-	unsigned int	sae_srcif;      /* optional source interface */
-	struct sockaddr	*sae_srcaddr;   /* optional source address */
-	socklen_t	sae_srcaddrlen; /* size of source address */
-	struct sockaddr	*sae_dstaddr;   /* destination address */
-	socklen_t	sae_dstaddrlen; /* size of destination address */
+	unsigned int		sae_srcif;	/* optional source interface */
+	const struct sockaddr	*sae_srcaddr;   /* optional source address */
+	socklen_t		sae_srcaddrlen; /* size of source address */
+	const struct sockaddr	*sae_dstaddr;   /* destination address */
+	socklen_t		sae_dstaddrlen; /* size of destination address */
 } sa_endpoints_t;
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
@@ -222,14 +324,14 @@ struct	accept_filter_arg {
 #ifdef __APPLE__
 
 /*
- * Structure to control non-portable Sockets extension to POSIX  
+ * Structure to control non-portable Sockets extension to POSIX
  */
 struct so_np_extensions {
 	u_int32_t	npx_flags;
 	u_int32_t	npx_mask;
 };
 
-#define SONPX_SETOPTSHUT	0x000000001     /* flag for allowing setsockopt after shutdown */
+#define	SONPX_SETOPTSHUT	0x000000001	/* flag for allowing setsockopt after shutdown */
 
 
 
@@ -262,9 +364,9 @@ struct so_np_extensions {
 #define	AF_DATAKIT	9		/* datakit protocols */
 #define	AF_CCITT	10		/* CCITT protocols, X.25 etc */
 #define	AF_SNA		11		/* IBM SNA */
-#define AF_DECnet	12		/* DECnet */
-#define AF_DLI		13		/* DEC Direct data link interface */
-#define AF_LAT		14		/* LAT */
+#define	AF_DECnet	12		/* DECnet */
+#define	AF_DLI		13		/* DEC Direct data link interface */
+#define	AF_LAT		14		/* LAT */
 #define	AF_HYLINK	15		/* NSC Hyperchannel */
 #define	AF_APPLETALK	16		/* Apple Talk */
 #define	AF_ROUTE	17		/* Internal Routing Protocol */
@@ -272,27 +374,26 @@ struct so_np_extensions {
 #define	pseudo_AF_XTP	19		/* eXpress Transfer Protocol (no AF) */
 #define	AF_COIP		20		/* connection-oriented IP, aka ST II */
 #define	AF_CNT		21		/* Computer Network Technology */
-#define pseudo_AF_RTIP	22		/* Help Identify RTIP packets */
+#define	pseudo_AF_RTIP	22		/* Help Identify RTIP packets */
 #define	AF_IPX		23		/* Novell Internet Protocol */
 #define	AF_SIP		24		/* Simple Internet Protocol */
-#define pseudo_AF_PIP	25		/* Help Identify PIP packets */
-/*define pseudo_AF_BLUE	26	   Identify packets for Blue Box - Not used */
-#define AF_NDRV		27		/* Network Driver 'raw' access */
-#define	AF_ISDN		28		/* Integrated Services Digital Network*/
+#define	pseudo_AF_PIP	25		/* Help Identify PIP packets */
+#define	AF_NDRV		27		/* Network Driver 'raw' access */
+#define	AF_ISDN		28		/* Integrated Services Digital Network */
 #define	AF_E164		AF_ISDN		/* CCITT E.164 recommendation */
 #define	pseudo_AF_KEY	29		/* Internal key-management function */
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 #define	AF_INET6	30		/* IPv6 */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define	AF_NATM		31		/* native ATM access */
-#define AF_SYSTEM	32		/* Kernel event messages */
-#define AF_NETBIOS	33		/* NetBIOS */
-#define AF_PPP		34		/* PPP communication protocol */
-#define pseudo_AF_HDRCMPLT 35		/* Used by BPF to not rewrite headers
-					 * in interface output routine */
-#define AF_RESERVED_36	36		/* Reserved for internal usage */
-#define AF_IEEE80211    37              /* IEEE 802.11 protocol */
-#define AF_UTUN		38
+#define	AF_SYSTEM	32		/* Kernel event messages */
+#define	AF_NETBIOS	33		/* NetBIOS */
+#define	AF_PPP		34		/* PPP communication protocol */
+#define	pseudo_AF_HDRCMPLT 35		/* Used by BPF to not rewrite headers
+					in interface output routine */
+#define	AF_RESERVED_36	36		/* Reserved for internal usage */
+#define	AF_IEEE80211	37		/* IEEE 802.11 protocol */
+#define	AF_UTUN		38
 #define	AF_MAX		40
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
@@ -316,7 +417,7 @@ struct sockproto {
 	__uint16_t	sp_family;		/* address family */
 	__uint16_t	sp_protocol;		/* protocol */
 };
-#endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE)*/
+#endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /*
  * RFC 2553: protocol-independent placeholder for socket addresses
@@ -358,9 +459,9 @@ struct sockaddr_storage {
 #define	PF_DATAKIT	AF_DATAKIT
 #define	PF_CCITT	AF_CCITT
 #define	PF_SNA		AF_SNA
-#define PF_DECnet	AF_DECnet
-#define PF_DLI		AF_DLI
-#define PF_LAT		AF_LAT
+#define	PF_DECnet	AF_DECnet
+#define	PF_DLI		AF_DLI
+#define	PF_LAT		AF_LAT
 #define	PF_HYLINK	AF_HYLINK
 #define	PF_APPLETALK	AF_APPLETALK
 #define	PF_ROUTE	AF_ROUTE
@@ -370,25 +471,25 @@ struct sockaddr_storage {
 #define	PF_CNT		AF_CNT
 #define	PF_SIP		AF_SIP
 #define	PF_IPX		AF_IPX		/* same format as AF_NS */
-#define PF_RTIP		pseudo_AF_RTIP	/* same format as AF_INET */
-#define PF_PIP		pseudo_AF_PIP
-#define PF_NDRV		AF_NDRV
+#define	PF_RTIP		pseudo_AF_RTIP	/* same format as AF_INET */
+#define	PF_PIP		pseudo_AF_PIP
+#define	PF_NDRV		AF_NDRV
 #define	PF_ISDN		AF_ISDN
 #define	PF_KEY		pseudo_AF_KEY
 #define	PF_INET6	AF_INET6
 #define	PF_NATM		AF_NATM
-#define PF_SYSTEM	AF_SYSTEM
-#define PF_NETBIOS	AF_NETBIOS
-#define PF_PPP		AF_PPP
-#define PF_RESERVED_36  AF_RESERVED_36
-#define PF_UTUN		AF_UTUN
+#define	PF_SYSTEM	AF_SYSTEM
+#define	PF_NETBIOS	AF_NETBIOS
+#define	PF_PPP		AF_PPP
+#define	PF_RESERVED_36  AF_RESERVED_36
+#define	PF_UTUN		AF_UTUN
 #define	PF_MAX		AF_MAX
 
 /*
  * These do not have socket-layer support:
  */
 #define	PF_VLAN		((uint32_t)0x766c616e)	/* 'vlan' */
-#define PF_BOND		((uint32_t)0x626f6e64)	/* 'bond' */
+#define	PF_BOND		((uint32_t)0x626f6e64)	/* 'bond' */
 
 /*
  * Definitions for network related sysctl, CTL_NET.
@@ -399,7 +500,7 @@ struct sockaddr_storage {
  * Further levels are defined by the individual families below.
  */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-#define NET_MAXID	AF_MAX
+#define	NET_MAXID	AF_MAX
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 
@@ -412,13 +513,13 @@ struct sockaddr_storage {
  *	Fifth: type of info, defined below
  *	Sixth: flag(s) to mask with for NET_RT_FLAGS
  */
-#define NET_RT_DUMP		1	/* dump; may limit to a.f. */
-#define NET_RT_FLAGS		2	/* by flags, e.g. RESOLVING */
-#define NET_RT_IFLIST		3	/* survey interface list */
-#define NET_RT_STAT		4	/* routing statistics */
-#define NET_RT_TRASH		5	/* routes not in table but not freed */
-#define NET_RT_IFLIST2		6	/* interface list with addresses */
-#define NET_RT_DUMP2		7	/* dump; may limit to a.f. */
+#define	NET_RT_DUMP		1	/* dump; may limit to a.f. */
+#define	NET_RT_FLAGS		2	/* by flags, e.g. RESOLVING */
+#define	NET_RT_IFLIST		3	/* survey interface list */
+#define	NET_RT_STAT		4	/* routing statistics */
+#define	NET_RT_TRASH		5	/* routes not in table but not freed */
+#define	NET_RT_IFLIST2		6	/* interface list with addresses */
+#define	NET_RT_DUMP2		7	/* dump; may limit to a.f. */
 #define	NET_RT_MAXID		10
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
@@ -456,15 +557,15 @@ struct msghdr {
 #define	MSG_EOF		0x100		/* data completes connection */
 #ifdef __APPLE__
 #ifdef __APPLE_API_OBSOLETE
-#define MSG_WAITSTREAM  0x200           /* wait up to full request.. may return partial */
+#define	MSG_WAITSTREAM	0x200		/* wait up to full request.. may return partial */
 #endif
-#define MSG_FLUSH	0x400		/* Start of 'hold' seq; dump so_temp */
-#define MSG_HOLD	0x800		/* Hold frag in so_temp */
-#define MSG_SEND	0x1000		/* Send the packet in so_temp */
-#define MSG_HAVEMORE	0x2000		/* Data ready to be read */
-#define MSG_RCVMORE	0x4000		/* Data remains in current pkt */
+#define	MSG_FLUSH	0x400		/* Start of 'hold' seq; dump so_temp */
+#define	MSG_HOLD	0x800		/* Hold frag in so_temp */
+#define	MSG_SEND	0x1000		/* Send the packet in so_temp */
+#define	MSG_HAVEMORE	0x2000		/* Data ready to be read */
+#define	MSG_RCVMORE	0x4000		/* Data remains in current pkt */
 #endif
-#define MSG_NEEDSA	0x10000		/* Fail receive if socket address cannot be allocated */
+#define	MSG_NEEDSA	0x10000		/* Fail receive if socket address cannot be allocated */
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /*
@@ -486,8 +587,8 @@ struct cmsghdr {
  * While we may have more groups than this, the cmsgcred struct must
  * be able to fit in an mbuf, and NGROUPS_MAX is too large to allow
  * this.
-*/
-#define CMGROUP_MAX 16
+ */
+#define	CMGROUP_MAX 16
 
 /*
  * Credentials structure, used to verify the identity of a peer
@@ -509,32 +610,32 @@ struct cmsgcred {
 
 /* given pointer to struct cmsghdr, return pointer to data */
 #define	CMSG_DATA(cmsg)		((unsigned char *)(cmsg) + \
-				 __DARWIN_ALIGN32(sizeof(struct cmsghdr)))
+	__DARWIN_ALIGN32(sizeof(struct cmsghdr)))
 
 /*
  * RFC 2292 requires to check msg_controllen, in case that the kernel returns
  * an empty list for some reasons.
  */
-#define CMSG_FIRSTHDR(mhdr) \
-        ((mhdr)->msg_controllen >= sizeof(struct cmsghdr) ? \
-         (struct cmsghdr *)(mhdr)->msg_control : \
-         (struct cmsghdr *)0L)
+#define	CMSG_FIRSTHDR(mhdr) \
+	((mhdr)->msg_controllen >= sizeof(struct cmsghdr) ? \
+	    (struct cmsghdr *)(mhdr)->msg_control : \
+	    (struct cmsghdr *)0L)
 
 
-/* 
+/*
  * Given pointer to struct cmsghdr, return pointer to next cmsghdr
  * RFC 2292 says that CMSG_NXTHDR(mhdr, NULL) is equivalent to CMSG_FIRSTHDR(mhdr)
  */
 #define	CMSG_NXTHDR(mhdr, cmsg)						\
 	((char *)(cmsg) == (char *)0L ? CMSG_FIRSTHDR(mhdr) :		\
-	 ((((unsigned char *)(cmsg) +					\
+	    ((((unsigned char *)(cmsg) +				\
 	    __DARWIN_ALIGN32((__uint32_t)(cmsg)->cmsg_len) +		\
 	    __DARWIN_ALIGN32(sizeof(struct cmsghdr))) >			\
 	    ((unsigned char *)(mhdr)->msg_control +			\
-	     (mhdr)->msg_controllen)) ?					\
-	  (struct cmsghdr *)0L /* NULL */ :				\
-	  (struct cmsghdr *)(void *)((unsigned char *)(cmsg) +		\
-	 		    __DARWIN_ALIGN32((__uint32_t)(cmsg)->cmsg_len))))
+	    (mhdr)->msg_controllen)) ?					\
+		(struct cmsghdr *)0L /* NULL */ :			\
+		(struct cmsghdr *)(void *)((unsigned char *)(cmsg) +	\
+		    __DARWIN_ALIGN32((__uint32_t)(cmsg)->cmsg_len))))
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 /* RFC 2292 additions */
@@ -548,7 +649,7 @@ struct cmsgcred {
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define	SCM_TIMESTAMP			0x02	/* timestamp (struct timeval) */
 #define	SCM_CREDS			0x03	/* process creds (struct cmsgcred) */
-#define	SCM_TIMESTAMP_MONOTONIC		0x04	/* timestamp (uint64_t) */ 
+#define	SCM_TIMESTAMP_MONOTONIC		0x04	/* timestamp (uint64_t) */
 
 
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
@@ -580,7 +681,7 @@ __BEGIN_DECLS
 int	accept(int, struct sockaddr * __restrict, socklen_t * __restrict)
 		__DARWIN_ALIAS_C(accept);
 int	bind(int, const struct sockaddr *, socklen_t) __DARWIN_ALIAS(bind);
-int	connect(int, const struct sockaddr *, socklen_t) __DARWIN_ALIAS_C( connect);
+int	connect(int, const struct sockaddr *, socklen_t) __DARWIN_ALIAS_C(connect);
 int	getpeername(int, struct sockaddr * __restrict, socklen_t * __restrict)
 		__DARWIN_ALIAS(getpeername);
 int	getsockname(int, struct sockaddr * __restrict, socklen_t * __restrict)
@@ -607,9 +708,9 @@ int	sendfile(int, int, off_t, off_t *, struct sf_hdtr *, int);
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 void	pfctlinput(int, struct sockaddr *);
-int connectx(int , const sa_endpoints_t *, sae_associd_t, unsigned int,
+int connectx(int, const sa_endpoints_t *, sae_associd_t, unsigned int,
     const struct iovec *, unsigned int, size_t *, sae_connid_t *);
-int disconnectx(int , sae_associd_t, sae_connid_t);
+int disconnectx(int, sae_associd_t, sae_connid_t);
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 __END_DECLS
 

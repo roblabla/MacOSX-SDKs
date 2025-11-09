@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -26,7 +26,7 @@
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*
- * Copyright (c) 1997-2002 Apple Computer, Inc. All Rights Reserved
+ * Copyright (c) 1997-2002 Apple Inc. All Rights Reserved
  *
  */
 
@@ -71,11 +71,8 @@ struct hfs_mount_args {
  */
 #define HFS_ENCODINGBIAS	1	    /* encoding matching CJK bias */
 #define HFS_EXTEND_FS		2
-#define HFS_ENCODINGHINT	3	    /* guess encoding for string */
 #define HFS_ENABLE_JOURNALING   0x082969
 #define HFS_DISABLE_JOURNALING  0x031272
-#define HFS_GET_JOURNAL_INFO    0x6a6e6c69
-#define HFS_SET_PKG_EXTENSIONS  0x121031
 #define HFS_REPLAY_JOURNAL	0x6a6e6c72
 #define HFS_ENABLE_RESIZE_DEBUG 4	/* enable debug code for volume resizing */
 

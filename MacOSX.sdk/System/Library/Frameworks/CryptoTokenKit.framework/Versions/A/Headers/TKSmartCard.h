@@ -18,7 +18,7 @@ NS_CLASS_AVAILABLE(10_10, 9_0)
 
 /// Global pool of smart card reader slots.
 /// Note that defaultManager instance is accessible only if the calling application has 'com.apple.security.smartcard' entitlement set to Boolean:YES.  If the calling application does not have this entitlement, defaultManager is always set to nil.
-+ (nullable instancetype)defaultManager;
+@property (class, nullable, readonly) TKSmartCardSlotManager *defaultManager;
 
 /// Array of currently known slots in the system.  Slots are identified by NSString name instances.  Use KVO to be notified about slots arrivals and removals.
 @property (readonly) NSArray<NSString *> *slotNames;
@@ -333,26 +333,55 @@ NS_CLASS_AVAILABLE(10_10, 9_0)
 
 @end
 
+/// Extension of base TKSmartCard interface implementing ISO7816-3 and ISO7816-4 structured APDU transmission.
 @interface TKSmartCard (APDULevelTransmit)
 
 /// CLA byte which will be used for sendIns: APDU transmits.  Default value is 0x00.
-@property UInt8 cla;
+@property UInt8 cla
+__OSX_AVAILABLE(10.10) __IOS_AVAILABLE(9.0) __TVOS_UNAVAILABLE __WATCHOS_UNAVAILABLE;
 
-/// Flag indicating whether extended length APDUs should be used. It is automatically enabled only when used slot supports transmitting extended length commands and card announces that extended length APDU are supported in its ATR. However, caller can explicitely override this decision at its will.
-@property BOOL useExtendedLength;
+/// Flag indicating whether extended length APDUs should be used. It is automatically enabled only when used slot supports transmitting extended length commands and card announces that extended length APDU are supported in its ATR. However, caller can explicitly override this decision.
+@property BOOL useExtendedLength
+__OSX_AVAILABLE(10.10) __IOS_AVAILABLE(9.0) __TVOS_UNAVAILABLE __WATCHOS_UNAVAILABLE;
+
+/// Flag indicating whether command chaining of APDU with data field longer than 255 bytes can be used.  It is automatically enabled when card announces that command chaining is supported in its ATR.  However, caller can explicitly override this decision.
+@property BOOL useCommandChaining
+__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_UNAVAILABLE __WATCHOS_UNAVAILABLE;
 
 /// Transmits APDU to the card and returns response.
-/// @discussion Asynchronous high level variant of command for transmitting APDU to the card.  Handles all ISO7816-4 APDU cases translation to proper sequences according to used protocol.  If useExtendedLength is enabled and it is decided that it is beneficial for current set of arguments, extended APDUs are used automatically.
+/// @discussion Asynchronous high level variant of command for transmitting APDU to the card.  Handles all ISO7816-4 APDU cases translation to proper sequences according to used protocol.  Consults useExtendedAPDU and useCommandChaining properties and uses these modes whenever appropriate and beneficial for sending requested APDU request.
 /// @param ins INS code of the APDU
 /// @param p1 P1 code of the APDU
 /// @param p2 P2 code of the APDU
-/// @param requestData Data field of the APDU.  Length of the data serves as Lc field of the APDU
+/// @param requestData Data field of the APDU, or nil if no input data field should be present (i.e case1 or case2 APDUs).  Length of the data serves as Lc field of the APDU.
 /// @param le Expected number of bytes to be returned, or nil if no output data are expected (i.e. case1 or case3 APDUs). To get as much bytes as card provides, pass @0.
 /// @param replyData Block of returned data without SW1SW2 bytes, or nil if an error occured.
-/// @param sw SW1SW2 result code
+/// @param sw SW1SW2 result code, first two bytes of returned card's reply.
 /// @param error Contains error details when nil is returned.  Specific error is also filled in if there was no communication error, but card returned other SW code than 0x9000.
-- (void)sendIns:(UInt8)ins p1:(UInt8)p1 p2:(UInt8)p2 data:(NSData *)requestData le:(nullable NSNumber *)le
-          reply:(void(^)(NSData *__nullable replyData, UInt16 sw, NSError *__nullable error))reply;
+- (void)sendIns:(UInt8)ins p1:(UInt8)p1 p2:(UInt8)p2 data:(nullable NSData *)requestData le:(nullable NSNumber *)le
+          reply:(void(^)(NSData *__nullable replyData, UInt16 sw, NSError *__nullable error))reply
+__OSX_AVAILABLE(10.10) __IOS_AVAILABLE(9.0) __TVOS_UNAVAILABLE __WATCHOS_UNAVAILABLE;
+
+/// Synchronous variant of session creation.  Begins the session, executes given block and ends session.
+/// @param error Error receiving more information when transaction failed to start or block failed for some reason.
+/// @param block Block to be executed when the session was successfully begun.
+/// @return Returns YES if the session was successfully begun and block returned YES, otherwise NO.
+- (BOOL)inSessionWithError:(NSError **)error executeBlock:(BOOL(^)(NSError **error))block
+__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_UNAVAILABLE __WATCHOS_UNAVAILABLE;
+
+/// Transmits APDU to the card and returns response.
+/// @discussion Synchronous high level variant of command for transmitting APDU to the card.  Handles all ISO7816-4 APDU cases translation to proper sequences according to used protocol.  Should be used in block passed to -[TKSmartCard inSessionWithError:executeBlock:] method.
+/// @param ins INS code of the APDU
+/// @param p1 P1 code of the APDU
+/// @param p2 P2 code of the APDU
+/// @param data Data field of the APDU.  Length of the data serves as Lc field of the APDU
+/// @param le Expected number of bytes to be returned, or nil if no output data are expected (i.e. case1 or case3 APDUs). To get as much bytes as card provides, pass @0.
+/// @param sw On output, filled with SW1SW2 result code
+/// @param error Contains error details when nil is returned.  Specific error is also filled in if there was no communication error, but card returned other SW code than 0x9000.
+/// @return Returned data field, excluding SW status bytes.  If an error occured, returns nil.
+- (nullable NSData *)sendIns:(UInt8)ins p1:(UInt8)p1 p2:(UInt8)p2 data:(nullable NSData *)requestData
+                          le:(nullable NSNumber *)le sw:(UInt16 *)sw error:(NSError **)error
+__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_UNAVAILABLE __WATCHOS_UNAVAILABLE;
 
 @end
 

@@ -9,7 +9,11 @@
 
 #import <SpriteKit/SpriteKitBase.h>
 #import <SpriteKit/SKTexture.h>
+#import <simd/simd.h>
+
+#if __has_include(<GLKit/GLKMath.h>)
 #import <GLKit/GLKMath.h>
+#endif
 
 typedef NS_ENUM(NSInteger, SKUniformType) {
     SKUniformTypeNone               =    0,
@@ -42,7 +46,7 @@ SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSCoding>
  @param name the name of the shader uniform.
  @param texture the texture data associated with this uniform.
  */
-+ (instancetype)uniformWithName:(NSString *)name texture:(SKTexture*)texture;
++ (instancetype)uniformWithName:(NSString *)name texture:(nullable SKTexture*)texture;
 
 /**
  Create a shader uniform with a given name, and a float value
@@ -58,7 +62,7 @@ SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSCoding>
  @param name the name of the shader uniform.
  @param value the float vector2 value associated with this uniform.
  */
-+ (instancetype)uniformWithName:(NSString *)name floatVector2:(GLKVector2)value;
++ (instancetype)uniformWithName:(NSString *)name vectorFloat2:(vector_float2)value NS_AVAILABLE(10_12, 10_0);
 
 /**
  Create a shader uniform with a given name, and a float vector3 value
@@ -66,7 +70,7 @@ SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSCoding>
  @param name the name of the shader uniform.
  @param value the float vector3 value associated with this uniform.
  */
-+ (instancetype)uniformWithName:(NSString *)name floatVector3:(GLKVector3)value;
++ (instancetype)uniformWithName:(NSString *)name vectorFloat3:(vector_float3)value NS_AVAILABLE(10_12, 10_0);
 
 /**
  Create a shader uniform with a given name, and a float vector4 value
@@ -74,7 +78,7 @@ SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSCoding>
  @param name the name of the shader uniform.
  @param value the float vector4 value associated with this uniform.
  */
-+ (instancetype)uniformWithName:(NSString *)name floatVector4:(GLKVector4)value;
++ (instancetype)uniformWithName:(NSString *)name vectorFloat4:(vector_float4)value NS_AVAILABLE(10_12, 10_0);
 
 /**
  Create a shader uniform with a given name, and a 2x2 matrix value
@@ -82,7 +86,7 @@ SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSCoding>
  @param name the name of the shader uniform.
  @param value the 2x2 matrix value associated with this uniform.
  */
-+ (instancetype)uniformWithName:(NSString *)name floatMatrix2:(GLKMatrix2)value;
++ (instancetype)uniformWithName:(NSString *)name matrixFloat2x2:(matrix_float2x2)value NS_AVAILABLE(10_12, 10_0);
 
 /**
  Create a shader uniform with a given name, and a 3x3 matrix value
@@ -90,7 +94,7 @@ SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSCoding>
  @param name the name of the shader uniform.
  @param value the 3x3 matrix value associated with this uniform.
  */
-+ (instancetype)uniformWithName:(NSString *)name floatMatrix3:(GLKMatrix3)value;
++ (instancetype)uniformWithName:(NSString *)name matrixFloat3x3:(matrix_float3x3)value NS_AVAILABLE(10_12, 10_0);
 
 /**
  Create a shader uniform with a given name, and a 4x4 matrix value
@@ -98,7 +102,7 @@ SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSCoding>
  @param name the name of the shader uniform.
  @param value the 4x4 matrix value associated with this uniform.
  */
-+ (instancetype)uniformWithName:(NSString *)name floatMatrix4:(GLKMatrix4)value;
++ (instancetype)uniformWithName:(NSString *)name matrixFloat4x4:(matrix_float4x4)value NS_AVAILABLE(10_12, 10_0);
 
 /* The name by which this uniform will be referenced in a shader */
 @property (nonatomic, readonly) NSString *name;
@@ -109,35 +113,47 @@ SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSCoding>
 /* Access to the texture data associated with the current uniform */
 @property (nonatomic, retain, nullable) SKTexture *textureValue;
 
-/* Access to the float value associated with the current uniform */
-@property float floatValue;
-/* Access to the float vector 2 value associated with the current uniform */
-@property GLKVector2 floatVector2Value;
-/* Access to the float vector 3 value associated with the current uniform */
-@property GLKVector3 floatVector3Value;
-/* Access to the float vector 4 value associated with the current uniform */
-@property GLKVector4 floatVector4Value;
-
-/* Access to the 2x2 matrix value associated with the current uniform */
-@property GLKMatrix2 floatMatrix2Value;
-/* Access to the 3x3 matrix value associated with the current uniform */
-@property GLKMatrix3 floatMatrix3Value;
-/* Access to the 4x4 matrix value associated with the current uniform */
-@property GLKMatrix4 floatMatrix4Value;
-
+/* Access to the value associated with the uniform */
+@property (nonatomic) float floatValue;
+@property (nonatomic) vector_float2 vectorFloat2Value NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic) vector_float3 vectorFloat3Value NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic) vector_float4 vectorFloat4Value NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic) matrix_float2x2 matrixFloat2x2Value NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic) matrix_float3x3 matrixFloat3x3Value NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic) matrix_float4x4 matrixFloat4x4Value NS_AVAILABLE(10_12, 10_0);
 
 - (instancetype)initWithName:(NSString *)name;
-
 - (instancetype)initWithName:(NSString *)name texture:(nullable SKTexture*)texture;
-
 - (instancetype)initWithName:(NSString *)name float:(float)value;
-- (instancetype)initWithName:(NSString *)name floatVector2:(GLKVector2)value;
-- (instancetype)initWithName:(NSString *)name floatVector3:(GLKVector3)value;
-- (instancetype)initWithName:(NSString *)name floatVector4:(GLKVector4)value;
+- (instancetype)initWithName:(NSString *)name vectorFloat2:(vector_float2)value NS_AVAILABLE(10_12, 10_0);
+- (instancetype)initWithName:(NSString *)name vectorFloat3:(vector_float3)value NS_AVAILABLE(10_12, 10_0);
+- (instancetype)initWithName:(NSString *)name vectorFloat4:(vector_float4)value NS_AVAILABLE(10_12, 10_0);
+- (instancetype)initWithName:(NSString *)name matrixFloat2x2:(matrix_float2x2)value NS_AVAILABLE(10_12, 10_0);
+- (instancetype)initWithName:(NSString *)name matrixFloat3x3:(matrix_float3x3)value NS_AVAILABLE(10_12, 10_0);
+- (instancetype)initWithName:(NSString *)name matrixFloat4x4:(matrix_float4x4)value NS_AVAILABLE(10_12, 10_0);
 
-- (instancetype)initWithName:(NSString *)name floatMatrix2:(GLKMatrix2)value;
-- (instancetype)initWithName:(NSString *)name floatMatrix3:(GLKMatrix3)value;
-- (instancetype)initWithName:(NSString *)name floatMatrix4:(GLKMatrix4)value;
+#if __has_include(<GLKit/GLKMath.h>)
+@property GLKVector2 floatVector2Value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+@property GLKVector3 floatVector3Value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+@property GLKVector4 floatVector4Value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+@property GLKMatrix2 floatMatrix2Value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+@property GLKMatrix3 floatMatrix3Value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+@property GLKMatrix4 floatMatrix4Value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+
++ (instancetype)uniformWithName:(NSString *)name floatVector2:(GLKVector2)value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
++ (instancetype)uniformWithName:(NSString *)name floatVector3:(GLKVector3)value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
++ (instancetype)uniformWithName:(NSString *)name floatVector4:(GLKVector4)value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
++ (instancetype)uniformWithName:(NSString *)name floatMatrix2:(GLKMatrix2)value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
++ (instancetype)uniformWithName:(NSString *)name floatMatrix3:(GLKMatrix3)value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
++ (instancetype)uniformWithName:(NSString *)name floatMatrix4:(GLKMatrix4)value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+
+- (instancetype)initWithName:(NSString *)name floatVector2:(GLKVector2)value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+- (instancetype)initWithName:(NSString *)name floatVector3:(GLKVector3)value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+- (instancetype)initWithName:(NSString *)name floatVector4:(GLKVector4)value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+- (instancetype)initWithName:(NSString *)name floatMatrix2:(GLKMatrix2)value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+- (instancetype)initWithName:(NSString *)name floatMatrix3:(GLKMatrix3)value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+- (instancetype)initWithName:(NSString *)name floatMatrix4:(GLKMatrix4)value NS_DEPRECATED(10_8, 10_12, 7_0, 10_0);
+#endif
 
 @end
 

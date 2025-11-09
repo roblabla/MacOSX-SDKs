@@ -5,26 +5,33 @@
  Node that can apply an effect to its children
  
  
- @copyright 2011 Apple, Inc. All rights reserve.
+ @copyright 2011 Apple, Inc. All rights reserved.
  
  */
+
+#if __has_include(<CoreImage/CIFilter.h>)
+@class CIFilter;
+#endif
 
 #import <SpriteKit/SKNode.h>
 #import <SpriteKit/SpriteKitBase.h>
 #import <SpriteKit/SKShader.h>
+#import <SpriteKit/SKWarpGeometry.h>
 
 NS_ASSUME_NONNULL_BEGIN
 /**
  A SpriteKit node that applies frame buffer effects to the rendered results of its child nodes. This is done continuously on live content and is not a simple snapshot of the rendered result at one instant of time.
  */
-SK_EXPORT @interface SKEffectNode : SKNode
+SK_EXPORT @interface SKEffectNode : SKNode <SKWarpable>
 
+#if __has_include(<CoreImage/CIFilter.h>)
 /**
  A CIFilter to be used as an effect
  
  Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. The filter is applied to all children of the SKEffectNode. If the filter is nil, the children of this node is flattened before being drawn as long as the SKEffectNode is enabled.
  */
 @property (nonatomic, retain, nullable) CIFilter *filter;
+#endif
 
 /* Controls whether the filter's "inputCenter" (if it exists) should automatically be set to the center of the effect area. Defaults to YES. */
 @property (nonatomic) BOOL shouldCenterFilter;
@@ -50,6 +57,15 @@ SK_EXPORT @interface SKEffectNode : SKNode
 @property (nonatomic) SKBlendMode blendMode;
 
 @property (nonatomic, retain, nullable) SKShader *shader;
+
+/**
+ Optional dictionary of SKAttributeValues
+ Attributes can be used with custom SKShaders.
+ */
+@property (nonatomic, nonnull, copy) NSDictionary<NSString *, SKAttributeValue *> *attributeValues;
+
+- (nullable SKAttributeValue*)valueForAttributeNamed:(nonnull NSString *)key;
+- (void)setValue:(SKAttributeValue*)value forAttributeNamed:(nonnull NSString *)key NS_SWIFT_NAME(setValue(_:forAttribute:));
 
 @end
 

@@ -1,7 +1,7 @@
 /*
         NSSound.h
 	Application Kit
-	Copyright (c) 1997-2015, Apple Inc.
+	Copyright (c) 1997-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -107,7 +107,7 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 @protocol NSSoundDelegate <NSObject>
 @optional
 
-- (void)sound:(NSSound *)sound didFinishPlaying:(BOOL)aBool;
+- (void)sound:(NSSound *)sound didFinishPlaying:(BOOL)flag;
 
 @end
 

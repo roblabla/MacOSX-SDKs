@@ -23,7 +23,7 @@ extern NSString* const QCCompositionPickerPanelDidSelectCompositionNotification;
 @interface QCCompositionPickerPanel : NSPanel
 {
 @private
-	__strong void*				_private;
+	void*				_private;
 }
 
 /*

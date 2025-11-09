@@ -1,7 +1,7 @@
 /*
  *  NSPointerFunctions.h
  *
- *  Copyright (c) 2005-2015, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2016, Apple Inc. All rights reserved.
  *
  */
  
@@ -60,18 +60,21 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 + (NSPointerFunctions *)pointerFunctionsWithOptions:(NSPointerFunctionsOptions)options;
 
 // pointer personality functions
-@property (nullable) NSUInteger (*hashFunction)(const void *item, NSUInteger (* __nullable size)(const void *item));
-@property (nullable) BOOL (*isEqualFunction)(const void *item1, const void*item2, NSUInteger (* __nullable size)(const void *item));
+@property (nullable) NSUInteger (*hashFunction)(const void *item, NSUInteger (* _Nullable size)(const void *item));
+@property (nullable) BOOL (*isEqualFunction)(const void *item1, const void*item2, NSUInteger (* _Nullable size)(const void *item));
 @property (nullable) NSUInteger (*sizeFunction)(const void *item);
-@property (nullable) NSString * __nullable (*descriptionFunction)(const void *item);
+@property (nullable) NSString * _Nullable (*descriptionFunction)(const void *item);
 
 // custom memory configuration
-@property (nullable) void (*relinquishFunction)(const void *item, NSUInteger (* __nullable size)(const void *item));
-@property (nullable) void * __nonnull (*acquireFunction)(const void *src, NSUInteger (* __nullable size)(const void *item), BOOL shouldCopy);
+@property (nullable) void (*relinquishFunction)(const void *item, NSUInteger (* _Nullable size)(const void *item));
+@property (nullable) void * _Nonnull (*acquireFunction)(const void *src, NSUInteger (* _Nullable size)(const void *item), BOOL shouldCopy);
 
-// GC requires that read and write barrier functions be used when pointers are from GC memory
-@property BOOL usesStrongWriteBarrier;             // pointers should (not) be assigned using the GC strong write barrier
-@property BOOL usesWeakReadAndWriteBarriers;       // pointers should (not) use GC weak read and write barriers
+// GC used to require that read and write barrier functions be used when pointers are from GC memory
+@property BOOL usesStrongWriteBarrier // pointers should (not) be assigned using the GC strong write barrier
+    API_DEPRECATED("Garbage collection no longer supported", macosx(10.5, 10.12), ios(2.0, 10.0), watchos(2.0, 3.0), tvos(9.0, 10.0));
+
+@property BOOL usesWeakReadAndWriteBarriers       // pointers should (not) use GC weak read and write barriers
+    API_DEPRECATED("Garbage collection no longer supported", macosx(10.5, 10.12), ios(2.0, 10.0), watchos(2.0, 3.0), tvos(9.0, 10.0));
 @end
 
 NS_ASSUME_NONNULL_END

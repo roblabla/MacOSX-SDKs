@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol CNKeyDescriptor;
+@class CNContact;
 
 /*!
  * @abstract Contact vCard support.
@@ -27,8 +28,8 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  */
 + (id<CNKeyDescriptor>)descriptorForRequiredKeys;
 
-+ (nullable NSData *)dataWithContacts:(NSArray *)contacts error:(NSError *__nullable *__nullable)error;
-+ (nullable NSArray *)contactsWithData:(NSData *)data error:(NSError *__nullable *__nullable)error;
++ (nullable NSData *)dataWithContacts:(NSArray<CNContact *>*)contacts error:(NSError *__nullable *__nullable)error;
++ (nullable NSArray<CNContact *>*)contactsWithData:(NSData *)data error:(NSError *__nullable *__nullable)error;
 
 @end
 

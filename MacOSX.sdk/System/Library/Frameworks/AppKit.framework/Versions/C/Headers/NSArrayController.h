@@ -1,7 +1,7 @@
 /*
 	NSArrayController.h
 	Application Kit
-	Copyright (c) 2002-2015, Apple Inc.
+	Copyright (c) 2002-2016, Apple Inc.
 	All rights reserved.
  */
 
@@ -16,7 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSArrayController : NSObjectController {
 @private
+#ifndef __OBJC2__
     void *_reserved4;
+#endif
     id _rearrangementExtensions;
     NSMutableArray *_temporaryWorkObjects;
     struct __arrayControllerFlags {

@@ -1,6 +1,6 @@
 //
 //  GKRandomDistribution.h
-//  GameLogic
+//  GameplayKit
 //
 //  Copyright © 2015 Apple. All rights reserved.
 //

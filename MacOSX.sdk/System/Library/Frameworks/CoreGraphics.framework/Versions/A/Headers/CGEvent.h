@@ -288,7 +288,7 @@ CG_EXTERN void CGEventSetDoubleValueField(CGEventRef __nullable event,
 
 CG_EXTERN CFMachPortRef __nullable CGEventTapCreate(CGEventTapLocation tap,
     CGEventTapPlacement place, CGEventTapOptions options,
-    CGEventMask eventsOfInterest, CGEventTapCallBack __nullable callback,
+    CGEventMask eventsOfInterest, CGEventTapCallBack callback,
     void * __nullable userInfo)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
@@ -301,14 +301,14 @@ CG_EXTERN CFMachPortRef __nullable CGEventTapCreate(CGEventTapLocation tap,
 CG_EXTERN CFMachPortRef __nullable CGEventTapCreateForPSN(
     void *  processSerialNumber,
     CGEventTapPlacement place, CGEventTapOptions options,
-    CGEventMask eventsOfInterest, CGEventTapCallBack __nullable callback,
+    CGEventMask eventsOfInterest, CGEventTapCallBack callback,
     void *__nullable userInfo)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 CG_EXTERN CFMachPortRef __nullable CGEventTapCreateForPid(pid_t pid,
   CGEventTapPlacement place, CGEventTapOptions options,
   CGEventMask eventsOfInterest, CGEventTapCallBack callback,
-  void *userInfo) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+  void * __nullable userInfo) CG_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_NA);
 
 /* Enable or disable an event tap.
 

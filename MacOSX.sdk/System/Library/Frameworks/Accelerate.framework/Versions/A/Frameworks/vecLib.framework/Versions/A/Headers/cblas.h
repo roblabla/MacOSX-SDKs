@@ -43,7 +43,13 @@ enum CBLAS_SIDE  {CblasLeft=141, CblasRight=142};
 #define CBLAS_H
 #define CBLAS_INDEX int
 
-#include <Availability.h>
+#include <stdint.h>
+#if __has_include(<Availability.h>)
+	#include <Availability.h>
+#else // __has_include(<Availability.h>)
+	#define	__OSX_AVAILABLE_STARTING( x, y ) /* Nothing */
+	#define	__OSX_AVAILABLE_BUT_DEPRECATED( x, y, z, w ) /* Nothing */
+#endif // __has_include(<Availability.h>)
 
 int cblas_errprn(int __ierr, int __info, char *__form, ...) 
         __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_4_0);

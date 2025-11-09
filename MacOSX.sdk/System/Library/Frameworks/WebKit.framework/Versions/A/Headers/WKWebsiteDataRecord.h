@@ -32,31 +32,31 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /*! @constant WKWebsiteDataTypeDiskCache On-disk caches. */
-WK_EXTERN NSString * const WKWebsiteDataTypeDiskCache NS_AVAILABLE(10_11, 9_0);
+WK_EXTERN NSString * const WKWebsiteDataTypeDiskCache API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*! @constant WKWebsiteDataTypeMemoryCache In-memory caches. */
-WK_EXTERN NSString * const WKWebsiteDataTypeMemoryCache NS_AVAILABLE(10_11, 9_0);
+WK_EXTERN NSString * const WKWebsiteDataTypeMemoryCache API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*! @constant WKWebsiteDataTypeOfflineWebApplicationCache HTML offline web application caches. */
-WK_EXTERN NSString * const WKWebsiteDataTypeOfflineWebApplicationCache NS_AVAILABLE(10_11, 9_0);
+WK_EXTERN NSString * const WKWebsiteDataTypeOfflineWebApplicationCache API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*! @constant WKWebsiteDataTypeCookies Cookies. */
-WK_EXTERN NSString * const WKWebsiteDataTypeCookies NS_AVAILABLE(10_11, 9_0);
+WK_EXTERN NSString * const WKWebsiteDataTypeCookies API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*! @constant WKWebsiteDataTypeSessionStorage HTML session storage. */
-WK_EXTERN NSString * const WKWebsiteDataTypeSessionStorage NS_AVAILABLE(10_11, 9_0);
+WK_EXTERN NSString * const WKWebsiteDataTypeSessionStorage API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*! @constant WKWebsiteDataTypeLocalStorage HTML local storage. */
-WK_EXTERN NSString * const WKWebsiteDataTypeLocalStorage NS_AVAILABLE(10_11, 9_0);
+WK_EXTERN NSString * const WKWebsiteDataTypeLocalStorage API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*! @constant WKWebsiteDataTypeWebSQLDatabases WebSQL databases. */
-WK_EXTERN NSString * const WKWebsiteDataTypeWebSQLDatabases NS_AVAILABLE(10_11, 9_0);
+WK_EXTERN NSString * const WKWebsiteDataTypeWebSQLDatabases API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*! @constant WKWebsiteDataTypeIndexedDBDatabases IndexedDB databases. */
-WK_EXTERN NSString * const WKWebsiteDataTypeIndexedDBDatabases NS_AVAILABLE(10_11, 9_0);
+WK_EXTERN NSString * const WKWebsiteDataTypeIndexedDBDatabases API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*! A WKWebsiteDataRecord represents website data, grouped by domain name using the public suffix list. */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+WK_EXTERN API_AVAILABLE(macosx(10.11), ios(9.0))
 @interface WKWebsiteDataRecord : NSObject
 
 /*! @abstract The display name for the data record. This is usually the domain name. */

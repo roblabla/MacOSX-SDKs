@@ -171,6 +171,8 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 MDL_EXPORT
 @interface MDLVertexBufferLayout : NSObject <NSCopying>
 
+- (instancetype) initWithStride:(NSUInteger) stride;
+
 /*!
  @property stride
  @abstract stride in bytes of each vertex element of in the buffer
@@ -228,6 +230,13 @@ MDL_EXPORT
 @property (nonatomic, readwrite) NSUInteger bufferIndex;
 
 /*!
+ @property time
+ @abstract the time the attribute is intended for.
+ @discussion morph targets would store their times here
+ */
+@property (nonatomic, readwrite) NSTimeInterval time;
+
+/*!
  @property initializationValue
  @abstract Value to initialize the attribute to in the vertex buffer if no values
  @discussion This values of this vector will be set in attribute in the vertex
@@ -246,9 +255,7 @@ MDL_EXPORT
 /*!
  @class MDLVertexDescriptor
  @abstract Describes the layout of vertex buffers in MDLMesh objects
- @discussion 
- 
- This object is a property of MDLMesh describing the current state of
+ @discussion This object is a property of MDLMesh describing the current state of
  attributes and buffer layouts of the vertex buffers in the mesh. This must be 
  immutable otherwise even small changes could cause the buffers to be out of sync 
  with the layout described here.
@@ -277,15 +284,21 @@ MDL_EXPORT
 
 /*!
  @method addOrReplaceAttribute:
- @abstract Replace any attribute with the same name, or add it if it does not
+ @abstract Replace any attribute with the same name and time, or add it if it does not
            already exist.
  */
 - (void)addOrReplaceAttribute:(nonnull MDLVertexAttribute*)attribute;
 
+/*!
+ @method removeAttributeNamed:
+ @abstract Remove the named attribute if it exists
+ */
+- (void)removeAttributeNamed:(NSString*)name;
+
 /*! 
  @property attributes
  @abstract An array of MDLVertexAttribute objects
- @discussion An array describing the current attribute state of vertex buffers in an
+ @discussion ay describing the current attribute state of vertex buffers in an
              MDLMesh mesh
  */
 @property (nonatomic, retain) NSMutableArray<MDLVertexAttribute*> *attributes;

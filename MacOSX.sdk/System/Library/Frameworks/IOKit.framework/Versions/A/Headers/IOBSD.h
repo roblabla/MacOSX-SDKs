@@ -32,6 +32,7 @@
  * bsd-related registry properties
  */
 
+#define kIOBSDKey      "IOBSD"     // (BSD subsystem resource)
 #define kIOBSDNameKey  "BSD Name"  // (an OSString)
 #define kIOBSDNamesKey "BSD Names" // (an OSDictionary of OSString's, for links)
 #define kIOBSDMajorKey "BSD Major" // (an OSNumber)

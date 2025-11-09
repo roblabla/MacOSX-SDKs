@@ -170,7 +170,7 @@ enum
     kSCSICmd_REPAIR_TRACK                   = 0x58,
     kSCSICmd_REPORT_DEVICE_IDENTIFIER    	= 0xA3,
     kSCSICmd_REPORT_KEY                     = 0xA4,
-    kSCSICmd_REPORT_LUNS                    = 0xA0, 
+    kSCSICmd_REPORT_LUNS                    = 0xA0,
     kSCSICmd_REQUEST_SENSE                  = 0x03,
     kSCSICmd_RESERVE_6                      = 0x16,
     kSCSICmd_RESERVE_10                     = 0x56,
@@ -207,7 +207,8 @@ enum
     kSCSICmd_SYNCHRONIZE_CACHE              = 0x35,
     kSCSICmd_SYNCHRONIZE_CACHE_16           = 0x91,
     kSCSICmd_TEST_UNIT_READY                = 0x00,
-	kSCSICmd_UPDATE_BLOCK					= 0x3D,
+    kSCSICmd_UPDATE_BLOCK					= 0x3D,
+    kSCSICmd_UNMAP                          = 0x42,
     kSCSICmd_VERIFY_10                      = 0x2F,
     kSCSICmd_VERIFY_12                      = 0xAF,
     kSCSICmd_VERIFY_16                      = 0x8F,
@@ -254,6 +255,7 @@ enum
 	kSCSIServiceAction_REPORT_ALIASES								= 0x0B,
 	kSCSIServiceAction_REPORT_DEVICE_IDENTIFIER						= 0x05,
 	kSCSIServiceAction_REPORT_PRIORITY								= 0x0E,
+	kSCSIServiceAction_REPORT_PROVISIONING_INITIALIZATION_PATTERN   = 0x1D,
 	kSCSIServiceAction_REPORT_SUPPORTED_OPERATION_CODES				= 0x0C,
 	kSCSIServiceAction_REPORT_SUPPORTED_TASK_MANAGEMENT_FUNCTIONS	= 0x0D,
 	kSCSIServiceAction_REPORT_TARGET_PORT_GROUPS					= 0x0A
@@ -271,8 +273,9 @@ enum
 /* Service Action Definitions for the SERVICE ACTION IN (9Eh) command */
 enum
 {
+	kSCSIServiceAction_GET_LBA_STATUS       = 0x12,
 	kSCSIServiceAction_READ_CAPACITY_16		= 0x10,
-	kSCSIServiceAction_READ_LONG_16			= 0x11	
+	kSCSIServiceAction_READ_LONG_16			= 0x11,
 };
 
 /* Service Action Definitions for the SERVICE ACTION OUT (9Fh) command */

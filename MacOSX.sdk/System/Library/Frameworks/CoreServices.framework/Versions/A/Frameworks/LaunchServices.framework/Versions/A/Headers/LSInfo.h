@@ -54,6 +54,7 @@ CF_ENUM(OSStatus) {
   kLSAttributeNotSettableErr    = -10663, /* The attribute is not settable*/
   kLSIncompatibleApplicationVersionErr = -10664, /* The app is incompatible with the current OS*/
   kLSNoRosettaEnvironmentErr    = -10665, /* The Rosetta environment was required not available*/
+  kLSGarbageCollectionUnsupportedErr = -10666, /* Objective-C garbage collection is no longer supported*/
   kLSUnknownErr                 = -10810, /* Unexpected internal error*/
   kLSNotAnApplicationErr        = -10811, /* Item needs to be an application, but is not*/
   kLSNotInitializedErr          = -10812, /* Not used in 10.2 and later*/

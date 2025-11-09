@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -437,6 +437,7 @@ extern errno_t mbuf_alloccluster(mbuf_how_t how, size_t *size, caddr_t *addr);
  */
 extern void mbuf_freecluster(caddr_t addr, size_t size);
 
+
 /*!
 	@function mbuf_getcluster
 	@discussion Allocate a cluster of the requested size and attach it to
@@ -512,7 +513,7 @@ extern errno_t mbuf_mclget(mbuf_how_t how, mbuf_type_t type, mbuf_t *mbuf);
 		pointed to by maxchunks.  E.g. a request for 9018 bytes may
 		result in 1 chunk when jumbo clusters are available, or
 		3 chunks otherwise.
-	@param Upon success, *mbuf will be a reference to the new mbuf.
+	@param mbuf Upon success, *mbuf will be a reference to the new mbuf.
 	@result Returns 0 upon success or the following error code:
 		EINVAL - Invalid parameter
 		ENOMEM - Not enough memory available
@@ -551,7 +552,7 @@ extern errno_t mbuf_allocpacket(mbuf_how_t how, size_t packetlen,
 		pointed to by maxchunks.  E.g. a request for 9018 bytes may
 		result in 1 chunk when jumbo clusters are available, or
 		3 chunks otherwise.
-	@param Upon success, *mbuf will be a reference to the new mbuf.
+	@param mbuf Upon success, *mbuf will be a reference to the new mbuf.
 	@result Returns 0 upon success or the following error code:
 		EINVAL - Invalid parameter
 		ENOMEM - Not enough memory available
@@ -855,7 +856,6 @@ extern size_t mbuf_len(const mbuf_t mbuf);
 		not set the length over the space available in the mbuf.
 	@param mbuf The mbuf.
 	@param len The new length.
-	@result 0 upon success otherwise the errno error.
  */
 extern void mbuf_setlen(mbuf_t mbuf, size_t len);
 
@@ -922,7 +922,7 @@ extern errno_t mbuf_setflags_mask(mbuf_t mbuf, mbuf_flags_t flags,
 	@function mbuf_copy_pkthdr
 	@discussion Copies the packet header from src to dest.
 	@param src The mbuf from which the packet header will be copied.
-	@param mbuf The mbuf to which the packet header will be copied.
+	@param dest The mbuf to which the packet header will be copied.
 	@result 0 upon success otherwise the errno error.
  */
 extern errno_t mbuf_copy_pkthdr(mbuf_t dest, const mbuf_t src);
@@ -972,7 +972,7 @@ extern ifnet_t mbuf_pkthdr_rcvif(const mbuf_t mbuf);
 	@function mbuf_pkthdr_setrcvif
 	@discussion Sets the interface the packet was received on.
 	@param mbuf The mbuf containing the packet header.
-	@param ifnet A reference to an interface.
+	@param ifp A reference to an interface.
 	@result 0 upon success otherwise the errno error.
  */
 extern errno_t mbuf_pkthdr_setrcvif(mbuf_t mbuf, ifnet_t ifp);
@@ -989,8 +989,7 @@ extern void *mbuf_pkthdr_header(const mbuf_t mbuf);
 	@function mbuf_pkthdr_setheader
 	@discussion Sets the pointer to the packet header.
 	@param mbuf The mbuf containing the packet header.
-	@param ifnet A pointer to the header.
-	@result 0 upon success otherwise the errno error.
+	@param header A pointer to the header.
  */
 extern void mbuf_pkthdr_setheader(mbuf_t mbuf, void *header);
 
@@ -1171,7 +1170,7 @@ extern errno_t mbuf_clear_csum_performed(mbuf_t mbuf);
 
 /*!
 	@function mbuf_inet_cksum
-	@discussions Calculates 16-bit 1's complement Internet checksum of the
+	@discussion Calculates 16-bit 1's complement Internet checksum of the
 		transport segment with or without the pseudo header checksum
 		of a given IPv4 packet.  If the caller specifies a non-zero
 		transport protocol, the checksum returned will also include
@@ -1200,7 +1199,7 @@ extern errno_t mbuf_inet_cksum(mbuf_t mbuf, int protocol, u_int32_t offset,
 
 /*!
 	@function mbuf_inet6_cksum
-	@discussions Calculates 16-bit 1's complement Internet checksum of the
+	@discussion Calculates 16-bit 1's complement Internet checksum of the
 		transport segment with or without the pseudo header checksum
 		of a given IPv6 packet.  If the caller specifies a non-zero
 		transport protocol, the checksum returned will also include
@@ -1339,7 +1338,7 @@ extern mbuf_traffic_class_t mbuf_get_traffic_class(mbuf_t mbuf);
 	@function mbuf_set_traffic_class
 	@discussion Set the traffic class of an mbuf packet.
 	@param mbuf The mbuf to set the traffic class on.
-	@tc The traffic class
+	@param tc The traffic class
 	@result 0 on success, EINVAL if bad parameter is passed
 */
 extern errno_t mbuf_set_traffic_class(mbuf_t mbuf, mbuf_traffic_class_t tc);
@@ -1352,6 +1351,7 @@ extern errno_t mbuf_set_traffic_class(mbuf_t mbuf, mbuf_traffic_class_t tc);
 	@result Non-zero if privileged, 0 otherwise.
  */
 extern int mbuf_is_traffic_class_privileged(mbuf_t mbuf);
+
 
 
 

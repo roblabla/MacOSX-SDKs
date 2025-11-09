@@ -2,14 +2,14 @@
 //  GKSavedGame.h
 //  Game Center
 //
-//  Copyright 2010-2015 Apple Inc. All rights reserved.
+//  Copyright 2010-2016 Apple Inc. All rights reserved.
 //
 
 #import <GameKit/GKLocalPlayer.h>
 #import <GameKit/GKSavedGameListener.h>
 
 // Class representing a saved game for the local player, or a version of a saved game when in conflict
-NS_CLASS_AVAILABLE(10_10, 8_0) 
+NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED 
 @interface GKSavedGame : NSObject <NSCopying>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-
+#if !TARGET_OS_WATCH
 @interface GKLocalPlayer (GKSavedGame) <GKSavedGameListener>
 
 // Asynchronously fetch saved games. The handler is called with an array of GKSavedGame objects or an error.
@@ -41,6 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)resolveConflictingSavedGames:(NSArray<GKSavedGame *> *)conflictingSavedGames withData:(NSData *)data completionHandler:(void(^__nullable)(NSArray<GKSavedGame *> * __nullable savedGames, NSError * __nullable error))handler NS_AVAILABLE(10_10, 8_0) ;
 
 @end
-
+#endif
 
 NS_ASSUME_NONNULL_END

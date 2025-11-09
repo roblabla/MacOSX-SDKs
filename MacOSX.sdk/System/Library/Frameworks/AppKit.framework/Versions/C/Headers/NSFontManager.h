@@ -1,7 +1,7 @@
 /*
 	NSFontManager.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -61,7 +61,9 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 /*All instance variables are private*/
 @private
     NSFontPanel * _panel;
+#ifndef __OBJC2__
     unsigned int _fmReserved1;
+#endif
     SEL _action;
     id _actionOrigin;
     id _target;
@@ -72,11 +74,15 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
         unsigned int senderTagMode:2;
 	unsigned int _RESERVED:12;
     } _fmFlags;
+#ifndef __OBJC2__
     unsigned short _fmReserved3;
+#endif
     id _delegate;
     id _collections;
+#ifndef __OBJC2__
     id _hiddenCollections;
     NSUInteger _fmReserved4;
+#endif
 }
 
 + (void)setFontPanelFactory:(nullable Class)factoryId;

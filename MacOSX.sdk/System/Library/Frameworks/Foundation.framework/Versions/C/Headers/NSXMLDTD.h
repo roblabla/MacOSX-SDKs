@@ -1,5 +1,5 @@
 /*	NSXMLDTD.h
-	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSUInteger)options NS_UNAVAILABLE;
+- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSXMLNodeOptions)options NS_UNAVAILABLE;
 - (nullable instancetype)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)mask error:(NSError **)error;
 - (nullable instancetype)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error NS_DESIGNATED_INITIALIZER; //primitive
 

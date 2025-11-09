@@ -11,5 +11,5 @@
 #import <MultipeerConnectivity/MCNearbyServiceAdvertiser.h>
 #import <MultipeerConnectivity/MCNearbyServiceBrowser.h>
 #import <MultipeerConnectivity/MCSession.h>
-#import <MultipeerConnectivity/MCBrowserViewController.h>
 #import <MultipeerConnectivity/MCAdvertiserAssistant.h>
+#import <MultipeerConnectivity/MCBrowserViewController.h>

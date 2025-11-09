@@ -7,9 +7,11 @@
 
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLDevice.h>
+#import <Metal/MTLRenderCommandEncoder.h>
 #import <Metal/MTLRenderPass.h>
 #import <Metal/MTLPixelFormat.h>
 #import <Metal/MTLArgument.h>
+#import <Metal/MTLFunctionConstantValues.h>
 
 NS_ASSUME_NONNULL_BEGIN
 @class MTLVertexDescriptor;
@@ -30,6 +32,10 @@ typedef NS_ENUM(NSUInteger, MTLBlendFactor) {
     MTLBlendFactorOneMinusBlendColor = 12,
     MTLBlendFactorBlendAlpha = 13,
     MTLBlendFactorOneMinusBlendAlpha = 14,
+    MTLBlendFactorSource1Color              NS_AVAILABLE_MAC(10_12) = 15,
+    MTLBlendFactorOneMinusSource1Color      NS_AVAILABLE_MAC(10_12) = 16,
+    MTLBlendFactorSource1Alpha              NS_AVAILABLE_MAC(10_12) = 17,
+    MTLBlendFactorOneMinusSource1Alpha      NS_AVAILABLE_MAC(10_12) = 18,
 } NS_ENUM_AVAILABLE(10_11, 8_0);
 
 typedef NS_ENUM(NSUInteger, MTLBlendOperation) {
@@ -55,6 +61,30 @@ typedef NS_ENUM(NSUInteger, MTLPrimitiveTopologyClass) {
     MTLPrimitiveTopologyClassLine = 2,
     MTLPrimitiveTopologyClassTriangle = 3,
 } NS_ENUM_AVAILABLE_MAC(10_11);
+
+typedef NS_ENUM(NSUInteger, MTLTessellationPartitionMode) {
+    MTLTessellationPartitionModePow2 = 0,
+    MTLTessellationPartitionModeInteger = 1,
+    MTLTessellationPartitionModeFractionalOdd = 2,
+    MTLTessellationPartitionModeFractionalEven = 3,
+} NS_ENUM_AVAILABLE(10_12, 10_0);
+
+typedef NS_ENUM(NSUInteger, MTLTessellationFactorStepFunction) {
+    MTLTessellationFactorStepFunctionConstant = 0,
+    MTLTessellationFactorStepFunctionPerPatch = 1,
+    MTLTessellationFactorStepFunctionPerInstance = 2,
+    MTLTessellationFactorStepFunctionPerPatchAndPerInstance = 3,
+} NS_ENUM_AVAILABLE(10_12, 10_0);
+
+typedef NS_ENUM(NSUInteger, MTLTessellationFactorFormat) {
+    MTLTessellationFactorFormatHalf = 0,
+} NS_ENUM_AVAILABLE(10_12, 10_0);
+
+typedef NS_ENUM(NSUInteger, MTLTessellationControlPointIndexType) {
+    MTLTessellationControlPointIndexTypeNone = 0,
+    MTLTessellationControlPointIndexTypeUInt16 = 1,
+    MTLTessellationControlPointIndexTypeUInt32 = 2,
+} NS_ENUM_AVAILABLE(10_12, 10_0);
 
 @class MTLRenderPipelineColorAttachmentDescriptorArray;
 
@@ -124,6 +154,14 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 
 @property (readwrite, nonatomic) MTLPrimitiveTopologyClass inputPrimitiveTopology NS_AVAILABLE_MAC(10_11);
 
+@property (readwrite, nonatomic) MTLTessellationPartitionMode tessellationPartitionMode NS_AVAILABLE(10_12, 10_0);
+@property (readwrite, nonatomic) NSUInteger maxTessellationFactor NS_AVAILABLE(10_12, 10_0);
+@property (readwrite, nonatomic, getter = isTessellationFactorScaleEnabled) BOOL tessellationFactorScaleEnabled NS_AVAILABLE(10_12, 10_0);
+@property (readwrite, nonatomic) MTLTessellationFactorFormat tessellationFactorFormat NS_AVAILABLE(10_12, 10_0);
+@property (readwrite, nonatomic) MTLTessellationControlPointIndexType tessellationControlPointIndexType NS_AVAILABLE(10_12, 10_0);
+@property (readwrite, nonatomic) MTLTessellationFactorStepFunction tessellationFactorStepFunction NS_AVAILABLE(10_12, 10_0);
+@property (readwrite, nonatomic) MTLWinding tessellationOutputWindingOrder NS_AVAILABLE(10_12, 10_0);
+
 /*!
  @method reset
  @abstract Restore all pipeline descriptor properties to their default values.
@@ -156,4 +194,6 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 - (void)setObject:(nullable MTLRenderPipelineColorAttachmentDescriptor *)attachment atIndexedSubscript:(NSUInteger)attachmentIndex;
 
 @end
+
+
 NS_ASSUME_NONNULL_END

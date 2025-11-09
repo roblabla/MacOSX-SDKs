@@ -1,4 +1,4 @@
-.Dd September 11, 2008
+.Dd April 19, 2016
 .Dt spindump 8
 .Os Darwin
 .Sh NAME
@@ -42,7 +42,7 @@ In timeline format, spindump notes state changes for threads, e.g.:
 .Pp
 <darwinbg, timers coalesced>
 .Pp
-which indicates the change in state for the samples that follow. Any state not mentioned is unchanged from previous samples. The state information spindump reports includes thread QoS, darwinbg, importance inheritance boost, suppression for App Nap, latency QoS (timers), IO throttling tier, and cpu priority.
+which indicates the change in state for the samples that follow. Any state not mentioned is unchanged from previous samples. The state information spindump reports includes thread QoS, darwinbg, importance inheritance boost, suppression for App Nap, latency QoS (timers), I/O throttling tier, and cpu priority.
 .Pp
 Leaf frames will indicate whether the thread was running/runnable or suspended.
 .Pp
@@ -113,7 +113,7 @@ exit after
 .Ar t
 seconds even if the report hasn't been saved
 .Pp
-.Fl stdsout
+.Fl stdout
 print the report to stdout
 .Pp
 .Fl nofile
@@ -121,6 +121,9 @@ do not output to a file. Implies -stdout and will include the binary format in t
 .Pp
 .Fl open Ar appname
 specifies an app in which to open the resulting report
+.Pp
+.Fl reveal
+reveal the resulting report in Finder
 .Pp
 .Fl siginfo
 after sampling, wait for SIGINFO before generating the report

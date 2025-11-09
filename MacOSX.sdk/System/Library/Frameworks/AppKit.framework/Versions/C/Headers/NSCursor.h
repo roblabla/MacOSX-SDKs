@@ -1,7 +1,7 @@
 /*
 	NSCursor.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -57,8 +57,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSCursor *)contextualMenuCursor NS_AVAILABLE_MAC(10_6);
 + (NSCursor *)IBeamCursorForVerticalLayout NS_AVAILABLE_MAC(10_7);
 
-- (instancetype)initWithImage:(NSImage *)newImage hotSpot:(NSPoint)aPoint;
-- (instancetype)initWithImage:(NSImage *)newImage	foregroundColorHint:(nullable NSColor *)fg backgroundColorHint:(nullable NSColor *)bg hotSpot:(NSPoint)hotSpot;
+- (instancetype)initWithImage:(NSImage *)newImage hotSpot:(NSPoint)point NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithImage:(NSImage *)newImage foregroundColorHint:(nullable NSColor *)fg backgroundColorHint:(nullable NSColor *)bg hotSpot:(NSPoint)hotSpot NS_DEPRECATED_MAC(10_0, 10_12, "Color hints are ignored. Use -initWithImage:hotSpot: instead");
 
 + (void)hide;
 + (void)unhide;
@@ -74,8 +76,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setOnMouseEntered:(BOOL)flag;
 @property (getter=isSetOnMouseExited, readonly) BOOL setOnMouseExited;
 @property (getter=isSetOnMouseEntered, readonly) BOOL setOnMouseEntered;
-- (void)mouseEntered:(NSEvent *)theEvent;
-- (void)mouseExited:(NSEvent *)theEvent;
+- (void)mouseEntered:(NSEvent *)event;
+- (void)mouseExited:(NSEvent *)event;
 
 @end
 

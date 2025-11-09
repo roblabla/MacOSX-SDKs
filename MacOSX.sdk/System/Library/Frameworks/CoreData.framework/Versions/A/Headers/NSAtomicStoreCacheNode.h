@@ -1,7 +1,7 @@
 /*
     NSAtomicStoreCacheNode.h
     Core Data
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -18,13 +18,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSEntityDescription;
 
-NS_CLASS_AVAILABLE(10_5,3_0)
+API_AVAILABLE(macosx(10.5),ios(3.0))
 @interface NSAtomicStoreCacheNode : NSObject {
+#if (!__OBJC2__)
     @private
     NSManagedObjectID *_objectID;
     uintptr_t __versionNumber;
 	NSMutableDictionary *_propertyCache;
 	void *_reserved1;
+#endif
 }
 
 /* The designated initializer for the cache node. */

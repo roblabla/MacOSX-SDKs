@@ -1,7 +1,7 @@
 /*
 	NSBrowserCell.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSImage;
 
 @interface NSBrowserCell : NSCell
+
+- (instancetype)initTextCell:(NSString *)string NS_DESIGNATED_INITIALIZER;
+- (instancetype)initImageCell:(nullable NSImage *)image NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 + (nullable NSImage *)branchImage;
 + (nullable NSImage *)highlightedBranchImage;

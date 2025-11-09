@@ -108,7 +108,7 @@ typedef NS_ENUM(NSInteger, IKScannerDeviceViewDisplayMode)
  @property delegate
  @abstract delegate of the IKScannerDeviceView.
  */
-@property (assign) id<IKScannerDeviceViewDelegate> delegate;
+@property (assign) IBOutlet id<IKScannerDeviceViewDelegate> delegate;
 
 /*!
  @property scannerDevice

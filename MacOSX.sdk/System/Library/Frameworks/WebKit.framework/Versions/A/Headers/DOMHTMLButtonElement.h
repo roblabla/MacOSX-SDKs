@@ -34,8 +34,8 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property BOOL autofocus NS_AVAILABLE_MAC(10_6);
 @property BOOL disabled;
 @property (readonly, strong) DOMHTMLFormElement *form;
-@property (copy) NSString *name;
 @property (copy) NSString *type;
+@property (copy) NSString *name;
 @property (copy) NSString *value;
 @property (readonly) BOOL willValidate NS_AVAILABLE_MAC(10_6);
 @property (copy) NSString *accessKey NS_DEPRECATED_MAC(10_4, 10_8);

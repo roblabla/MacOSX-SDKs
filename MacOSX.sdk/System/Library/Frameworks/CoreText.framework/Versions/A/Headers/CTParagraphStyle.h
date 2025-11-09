@@ -160,7 +160,7 @@ typedef CF_ENUM(int8_t, CTWritingDirection) {
                 of the first script contained in the paragraph.
 
                 Type: CTTextAlignment
-                Default: kCTNaturalTextAlignment
+                Default: kCTTextAlignmentNatural
                 Application: CTFramesetter
 
 
@@ -339,7 +339,7 @@ typedef CF_ENUM(uint32_t, CTParagraphStyleSpecifier) {
     kCTParagraphStyleSpecifierLineHeightMultiple = 7,
     kCTParagraphStyleSpecifierMaximumLineHeight = 8,
     kCTParagraphStyleSpecifierMinimumLineHeight = 9,
-    kCTParagraphStyleSpecifierLineSpacing = 10,			/* deprecated */
+    kCTParagraphStyleSpecifierLineSpacing CT_ENUM_DEPRECATED(10_5, 10_8, 3_2, 6_0) = 10,
     kCTParagraphStyleSpecifierParagraphSpacing = 11,
     kCTParagraphStyleSpecifierParagraphSpacingBefore = 12,
     kCTParagraphStyleSpecifierBaseWritingDirection = 13,

@@ -71,7 +71,7 @@ CF_ASSUME_NONNULL_BEGIN
     @abstract ￼The file system path of the item for items on a device with transportType of ICTransportTypeMassStorage.
 
 */
-@property(readonly)                                             NSString*       fileSystemPath;
+@property(nullable,readonly)                                             NSString*       fileSystemPath;
 
 /*!
     @property locked
@@ -99,14 +99,14 @@ CF_ASSUME_NONNULL_BEGIN
     @abstract ￼Creation date of this file. This information is usually the same as the EXIF creation date.
 
 */
-@property(readonly)                                             NSDate*         creationDate;
+@property(nullable,readonly)                                             NSDate*         creationDate;
 
 /*!
     @property modificationDate
     @abstract ￼Modification date of this file. This information is usually the same as the EXIF modification date.
 
 */
-@property(readonly)                                             NSDate*         modificationDate;
+@property(nullable,readonly)                                             NSDate*         modificationDate;
 
 /*!
     @property thumbnailIfAvailable

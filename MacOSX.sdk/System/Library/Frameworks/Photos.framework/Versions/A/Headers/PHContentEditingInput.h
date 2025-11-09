@@ -9,12 +9,14 @@
 #import <Photos/PhotosTypes.h>
 
 @class PHAdjustmentData;
+@class PHLivePhoto;
 @class AVAsset;
 @class CLLocation;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE_MAC(10_11) @interface PHContentEditingInput : NSObject
+NS_CLASS_AVAILABLE(10_11, 8_0)
+@interface PHContentEditingInput : NSObject
 
 @property (readonly, assign) PHAssetMediaType mediaType;
 @property (readonly, assign) PHAssetMediaSubtype mediaSubtypes;
@@ -23,7 +25,7 @@ NS_CLASS_AVAILABLE_MAC(10_11) @interface PHContentEditingInput : NSObject
 @property (readonly, copy, nullable) NSString *uniformTypeIdentifier;
 
 // Adjustments to be applied onto the provided input image or video.
-@property (readonly, strong) PHAdjustmentData *adjustmentData;
+@property (readonly, strong, nullable) PHAdjustmentData *adjustmentData;
 
 // Input image:
 @property (readonly, strong, nullable) NSImage *displaySizeImage;
@@ -33,6 +35,9 @@ NS_CLASS_AVAILABLE_MAC(10_11) @interface PHContentEditingInput : NSObject
 // Input video:
 @property (readonly, strong, nullable) AVAsset *avAsset NS_DEPRECATED_IOS(8_0, 9_0);
 @property (readonly, strong, nullable) AVAsset *audiovisualAsset NS_AVAILABLE(10_11, 9_0);
+
+// Input Live Photo:
+@property (readonly, strong, nullable) PHLivePhoto *livePhoto NS_AVAILABLE(10_12, 10_0);
 
 @end
 

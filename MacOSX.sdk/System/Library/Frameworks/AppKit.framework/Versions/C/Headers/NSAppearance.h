@@ -1,12 +1,14 @@
 /*
         NSAppearance.h
         Application Kit
-        Copyright (c) 2011-2015, Apple Inc.
+        Copyright (c) 2011-2016, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/NSObject.h>
+
+#define NS_APPEARANCE_DECLARES_DESIGNATED_INITIALIZERS APPKIT_SWIFT_SDK_EPOCH_AT_LEAST(2)
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,7 +42,10 @@ NS_CLASS_AVAILABLE_MAC(10_9)
 /* Creates an NSAppearance by searching the specified bundle for a file with the specified name (without path extension).
     If bundle is nil, the main bundle is assumed.
  */
-- (nullable instancetype)initWithAppearanceNamed:(NSString *)name bundle:(nullable NSBundle *)bundle;
+#if NS_APPEARANCE_DECLARES_DESIGNATED_INITIALIZERS
+- (nullable instancetype)initWithAppearanceNamed:(NSString *)name bundle:(nullable NSBundle *)bundle NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+#endif
 
 /* Query allowsVibrancy to see if the given appearance actually needs vibrant drawing. You may want to draw differently if the current apperance is vibrant.
  */

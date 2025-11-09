@@ -3,6 +3,15 @@
 #ifndef __LA_VECTOR_HEADER__
 #define __LA_VECTOR_HEADER__
 
+#if __has_feature(assume_nonnull)
+////  If assume_nonnull is available, use it and use nullability qualifiers.
+_Pragma("clang assume_nonnull begin")
+#else
+////  Otherwise, neuter the nullability qualifiers.
+#define __nullable
+#define __nonnull
+#endif
+
 /*!
  @abstract
  Create a vector using data from a buffer of floats.  Ownership of the buffer
@@ -213,7 +222,7 @@
  dimensions larger than one, nothing is written to the buffer and
  LA_INVALID_PARAMETER_ERROR is returned.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY
+LA_FUNCTION LA_AVAILABILITY
 la_status_t la_vector_to_float_buffer(float *buffer,
                                             la_index_t buffer_stride,
                                             la_object_t vector);
@@ -266,7 +275,7 @@ la_status_t la_vector_to_float_buffer(float *buffer,
  dimensions larger than one, nothing is written to the buffer and
  LA_INVALID_PARAMETER_ERROR is returned.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY
+LA_FUNCTION LA_AVAILABILITY
 la_status_t la_vector_to_double_buffer(double *buffer,
                                              la_index_t buffer_stride,
                                              la_object_t vector);
@@ -282,7 +291,7 @@ la_status_t la_vector_to_double_buffer(double *buffer,
  dimension is returned.
  Otherwise, zero is returned.
  */
-LA_FUNCTION LA_CONST LA_NONNULL LA_AVAILABILITY
+LA_FUNCTION LA_CONST LA_AVAILABILITY
 la_count_t la_vector_length(la_object_t vector);
 
 /*!
@@ -329,7 +338,7 @@ la_count_t la_vector_length(la_object_t vector);
  vector_length x 1, output is vector_length x 1 and if input is
  1 x vector_length, output is 1 x vector_length.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_vector_slice(la_object_t vector,
                                la_index_t vector_first,
                                la_index_t vector_stride,
@@ -346,6 +355,8 @@ la_object_t la_vector_slice(la_object_t vector,
 #define la_vector_reverse(vector) \
 la_vector_slice(vector, la_vector_length(vector)-1, -1, la_vector_length(vector))
 
-
+#if __has_feature(assume_nonnull)
+_Pragma("clang assume_nonnull end")
+#endif
 
 #endif // __LA_VECTOR_HEADER__

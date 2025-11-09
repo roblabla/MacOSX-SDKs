@@ -48,9 +48,6 @@ Matches find all physical instances of a given plug-in known to the system, even
 same version.
 .It Fl i, -identifier Ar identifier
 Specifies a plug-in identifier to match, a short-hand for NSExtensionIdentifier=identifier.
-.It Fl l
-When matching plugins, requests only the latest version of each plugin.
-By default, all known versions are shown.
 .It Fl m -match
 Requests
 .Nm
@@ -69,9 +66,11 @@ Specifies a plug-in protocol to  match, a short-hand for NSExtensionPointName=pr
 Explicitly removes plugins at the file location(s) given. Note that automatic discovery
 procedures may add them back if they are still present.
 .It Fl -raw
-Present replies from the management daemon (pkd) in raw XML form. This is primarily useful for debugging.
+Present replies from the management daemon (pkd) in raw XML form. This is primarily useful for debugging
+and for reporting full state in bug reports.
 .It Fl v
 Asks for more verbose operation. For matching requests, more detail is printed about each matched plug-in.
+This option can be given more than once.
 .El                      \" Ends the list
 
 .Sh DISCOVERY MATCHING

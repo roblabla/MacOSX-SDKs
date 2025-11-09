@@ -1,7 +1,7 @@
 /*
 	NSDocument.h
 	Application Kit
-	Copyright (c) 1997-2015, Apple Inc.
+	Copyright (c) 1997-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -86,8 +86,8 @@ typedef NS_ENUM(NSUInteger, NSSaveOperationType) {
     NSURL *_fileURL;
     NSString *_fileType;
     NSPrintInfo *_printInfo;
-    long _documentReserved;
-    NSView *savePanelAccessory;
+    long _documentReserved __unused;
+    NSView *savePanelAccessory __unused;
     id _displayName;
     id _privateData;
     NSUndoManager *_undoManager;
@@ -201,7 +201,7 @@ Some asynchronous activities, like saving, need to do work on the main thread as
 
 This method is useful when code executed in a block passed to -performActivityWithSynchronousWaiting:usingBlock: may also invoke that method. For example, -saveDocumentWithDelegate:didSaveSelector:contextInfo:, which uses -performActivityWithSynchronousWaiting:usingBlock:, uses this around its invocation of -runModalSavePanelForSaveOperation:delegate:didSaveSelector: or -saveToURL:ofType:forSaveOperation:delegate:didSaveSelector:contextInfo: because both of those methods also use -performActivityWithSynchronousWaiting:usingBlock:. Without the use of this method that inner invocation of -performActivityWithSynchronousWaiting:usingBlock: would wait forever.
 */
-- (void)continueActivityUsingBlock:(void (^)(void))block NS_AVAILABLE_MAC(10_7);
+- (void)continueActivityUsingBlock:(void (NS_NOESCAPE ^)(void))block NS_AVAILABLE_MAC(10_7);
 
 /* Invoke the block on the main thread. If the main thread is blocked by an invocation of -performActivityWithSynchronousWaiting:usingBlock: or -performSynchronousFileAccessUsingBlock:, interrupt that blocking to invoke the block, and then resume blocking when the invocation of the block has returned. Invocations of this method always return before the passed-in block is invoked.
 
@@ -222,11 +222,11 @@ In general you should use this method or -performAsynchronousFileAccessUsingBloc
 - -updateChangeCountWithToken:forSaveOperation: and, sometimes, updateChangeCount:, to make using this mechanism when invoking -isDocumentEdited and -hasUnautosavedChanges meaningful.
 - -backupFileURL, since it depends on -fileURL.
  */
-- (void)performSynchronousFileAccessUsingBlock:(void (^)(void))block NS_AVAILABLE_MAC(10_7);
+- (void)performSynchronousFileAccessUsingBlock:(void (NS_NOESCAPE ^)(void))block NS_AVAILABLE_MAC(10_7);
 
 /* Do the same sort of thing as -performSynchronousFileAccessUsingBlock:, but without ever blocking the main thread, and perhaps not invoking the block until after the method invocation has returned, though still always on the same thread as the method invocation. The block is passed another block, the file access completion handler, which must be invoked when the file access is complete, though it can be invoked from any thread. This method is for use with file access that might begin on one thread but continue on another before it is complete. saveToURL:ofType:forSaveOperation:completionHandler: for for example uses this method instead of -performSynchronousFileAccessUsingBlock: because if it does asynchronous saving then there is no way for it to actually complete all of its file access before returning from the file access block.
 
-The distinction between entire activities and the file accessing part of activities established by having both activity performing methods and file access performing methods is worthwhile because sometimes it is valuable to perform file access without any risk of waiting for the user to dimiss a modal panel. For example, NSDocument's implementation of -[NSFilePresenter relinquishPresentedItemToWriter:] uses -performAsynchronousFileAccessUsingBlock: to ensure that the uses of -performSynchronousFileAccessUsingBlock: described above wait while another process is moving, renaming, or changing the file. Using -performActivityWithSynchronousWaiting:usingBlock: instead would not be appropriate because that would introduce the possibility of the other process' writing being blocked until the user has dismissed a sheet that is being presented as part of a previously scheduled activity.
+The distinction between entire activities and the file accessing part of activities established by having both activity performing methods and file access performing methods is worthwhile because sometimes it is valuable to perform file access without any risk of waiting for the user to dismiss a modal panel. For example, NSDocument's implementation of -[NSFilePresenter relinquishPresentedItemToWriter:] uses -performAsynchronousFileAccessUsingBlock: to ensure that the uses of -performSynchronousFileAccessUsingBlock: described above wait while another process is moving, renaming, or changing the file. Using -performActivityWithSynchronousWaiting:usingBlock: instead would not be appropriate because that would introduce the possibility of the other process' writing being blocked until the user has dismissed a sheet that is being presented as part of a previously scheduled activity.
 */
 - (void)performAsynchronousFileAccessUsingBlock:(void (^)(void (^fileAccessCompletionHandler)(void)))block NS_AVAILABLE_MAC(10_7);
 
@@ -324,7 +324,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 /* Given that a file is being saved, return the attributes that should be written to a file or file package located by a URL, formatted to a specified type, for a particular kind of save operation. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why attributes could not be returned. The set of valid file attributes is a subset of those understood by the NSFileManager class. The default implementation of this method returns an empty dictionary for an NSSaveOperation or NSAutosaveInPlaceOperation, or a dictionary with an appropriate NSFileExtensionHidden entry for any other kind of save operation. You can override this method to customize the attributes that are written to document files.
 
-For backward binary comaptibility with Mac OS 10.5 and earlier the default implementation of this method instead returns a dictionary with NSFileHFSCreatorCode and NSFileHFSTypeCode entries that have a value of 0 for NSSaveOperation, in applications linked against Mac OS 10.5 or earlier.
+For backward binary compatibility with Mac OS 10.5 and earlier the default implementation of this method instead returns a dictionary with NSFileHFSCreatorCode and NSFileHFSTypeCode entries that have a value of 0 for NSSaveOperation, in applications linked against Mac OS 10.5 or earlier.
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self fileAttributesToWriteToFile:[url path] ofType:typeName saveOperation:aSaveOperation] if -fileAttributesToWriteToFile:ofType:saveOperation: is overridden and the URL uses the "file:" scheme. The save operation used in this case will never be one of the autosaving ones; NSSaveToOperation will be used instead.
 
@@ -470,9 +470,17 @@ Returning NO from this method will disable version browsing and -revertDocumentT
 */
 - (IBAction)browseDocumentVersions:(nullable id)sender NS_AVAILABLE_MAC(10_8);
 
+/* Whether the receiver is currently displaying the Versions browser. KVO-compliant.
+*/
+@property (getter=isBrowsingVersions, readonly) BOOL browsingVersions NS_AVAILABLE_MAC(10_12);
+
+/* If the receiver is currently displaying the Versions browser, cleanly stop browsing versions (which includes waiting for any animations to complete). Then invoke the completion handler on the main thread.
+*/
+- (void)stopBrowsingVersionsWithCompletionHandler:(void (^ _Nullable)(void))completionHandler NS_AVAILABLE_MAC(10_12);
+
 /* Return YES if the receiving subclass of NSDocument supports Mac OS 10.8 autosaving of drafts, NO otherwise. The default implementation of this method returns YES for applications linked on or after Mac OS 10.8. You can override it and return YES to declare your NSDocument subclass' ability to do Mac OS 10.8 autosaving of drafts. You can also override it and return NO to opt out of this behavior after linking with 10.8. You should not invoke this method to find out whether autosaving of a draft will be done. Instances of subclasses that return YES from this method should be ready to properly handle save operations with NSAutosaveAsOperation.
 
-AppKit invokes this method at a variety of times. For example, when -updateChangeCount is called with NSChagneDone (without NSChangeDiscardable), NSDocument will the next autosave to use NSAutosaveAsOperation and return the document into a draft.
+AppKit invokes this method at a variety of times. For example, when -updateChangeCount is called with NSChangeDone (without NSChangeDiscardable), NSDocument will the next autosave to use NSAutosaveAsOperation and return the document into a draft.
 */
 + (BOOL)autosavesDrafts NS_AVAILABLE_MAC(10_8);
 
@@ -488,7 +496,7 @@ Starting in Mac OS 10.7 the default implementations of these methods are thread 
 
 #pragma mark *** Closing ***
 
-/* If there are changes that have not yet been saved to the document's file and saving cannot be done without asking the user first, present a panel to the user informing them that the document is modified and asking if it should be saved. If the user indicates that it should be, then try to save it. When saving is completed, regardless of success or failure, or has been rejected one way or another by the user, send the message selected by shouldCloseSelector to the delegate, with the contextInfo as the last argument. If the document is not modified then just send the mesage selected by shouldCloseSelector right away. The method selected by shouldCloseSelector must have the same signature as:
+/* If there are changes that have not yet been saved to the document's file and saving cannot be done without asking the user first, present a panel to the user informing them that the document is modified and asking if it should be saved. If the user indicates that it should be, then try to save it. When saving is completed, regardless of success or failure, or has been rejected one way or another by the user, send the message selected by shouldCloseSelector to the delegate, with the contextInfo as the last argument. If the document is not modified then just send the message selected by shouldCloseSelector right away. The method selected by shouldCloseSelector must have the same signature as:
 
     - (void)document:(NSDocument *)document shouldClose:(BOOL)shouldClose contextInfo:(void *)contextInfo;
 
@@ -743,7 +751,7 @@ The default implementation of this method sends the window controller a -shouldC
 
 /* Returns the name for this document that is fit for presentation to the user. You can override this method, but overriding -[NSWindowController windowTitleForDocumentDisplayName:] is usually better, because a document's display name is used in error alerts, alerts presented during document saving, the alert that's presented when the user attempts to close a document that has unsaved changes, and save panels (as the default value of the "Save As:" field). In those places the document file's actual name really is what should be used.
 */
-@property (readonly, copy) NSString *displayName;
+@property (copy, null_resettable) NSString *displayName;
 
 /* Return the default draft name for the receiver. The default implementation returns the "Untitled" string for the user's current locale.
  
@@ -771,7 +779,7 @@ The default implementation of this method sends the window controller a -shouldC
 
 /* Return the names of the types to which this document can be saved for a kind of save operation. For every kind of save operation except NSSaveToOperation the returned array must only include types for which the the application can play the Editor role. For NSSaveToOperation the returned array may include types for which the application can only play the Viewer role, and other types that the application can merely export. The default implementation of this method returns [[self class] writableTypes] with, except during NSSaveToOperations, types for which +isNativeType returns NO filtered out.
 
-You can override this method to limit the set of writable types when the documently currently contains data that is not representable in all types. For example, you can disallow saving to .rtf files when the document contains an attachment and can only be saved properly to .rtfd files. NSDocument uses this this method during save operations that present save panels, and during scripted save operations that do not. It may be called at additional times in future releases of Mac OS X. 
+You can override this method to limit the set of writable types when the document currently contains data that is not representable in all types. For example, you can disallow saving to .rtf files when the document contains an attachment and can only be saved properly to .rtfd files. NSDocument uses this this method during save operations that present save panels, and during scripted save operations that do not. It may be called at additional times in future releases of Mac OS X. 
 
 You can invoke this method when creating a custom save panel accessory view to easily present the same set of types that NSDocument would in its standard file format popup menu.
 */
@@ -787,7 +795,7 @@ You can override this method to customize the appending of extensions to file na
 
 /* Conformance to the NSUserInterfaceValidations protocol. NSDocument's implementation of this method conditionally enables menu items for all of the action methods listed in this header file.
 */
-- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)anItem;
+- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)item;
 
 #pragma mark *** Ubiquitous Storage ***
 

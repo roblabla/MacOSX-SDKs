@@ -260,6 +260,23 @@ cannot pick and choose individual elements with this option.
 For historical reasons, this option can be given without a value, which preserves all
 of these values as presently known. This use is deprecated and will eventually be removed;
 always specify an explicit list of preserved items.
+.It Fl -strict Ar options
+When validating code, apply additional restrictions beyond the defaults.
+.Bl -tag -width symlinks
+.It symlinks
+Check that symbolic links inside the code bundle point to sealed files inside its bundle.
+This means that broken symbolic links are rejected, as are links to places outside
+the bundle and to places that are not, for whatever reason, sealed by the signature.
+.It sideband
+Check that no resource forks, Finder attributes, or similar sideband data is present in the signed code.
+This is now automatically enforced by signing operations.
+.El
+.br
+Options can be specified as a comma-separated list. Use plain --strict or --strict=all to be as strict
+as possible. Note that --strict=all may include more checking types over time.
+.br
+Not all strictness check make sense in all circumstances, which is why these behaviors
+are not the defualt.
 .It Fl -timestamp Ar [ =URL ]
 During signing, requests that a \fItimestamp authority server\fR
 be contacted to authenticate the time of signing. The server contacted is given by the \fIURL\fR value.

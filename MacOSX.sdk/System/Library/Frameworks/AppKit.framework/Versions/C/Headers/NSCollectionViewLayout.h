@@ -1,7 +1,7 @@
 /*
     NSCollectionViewLayout.h
     Application Kit
-    Copyright (c) 2015, Apple Inc.
+    Copyright (c) 2015-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, NSCollectionElementCategory) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-/* The elementKind used to identify an inter-item gap (for use in indicating a drop target).  A client can customize the default look of the inter-item gap drop target indicator by registering a supplementary view nib or class for this elementKind.
+/* The elementKind that NSCollectionView uses to identify an inter-item gap, when the proposedDropOperation is NSCollectionViewDropBefore.  A client can customize the default look of the inter-item gap drop target indicator by registering a supplementary view nib or class for this elementKind.  If your -collectionView:validateDrop:proposedIndexPath:dropOperation: method disallows NSCollectionViewDropBefore operations, the CollectionView won't show this indicator.
 */
 APPKIT_EXTERN NSString *const NSCollectionElementKindInterItemGapIndicator NS_AVAILABLE_MAC(10_11);
 

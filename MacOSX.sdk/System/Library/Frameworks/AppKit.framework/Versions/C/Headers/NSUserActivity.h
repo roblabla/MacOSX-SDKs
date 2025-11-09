@@ -1,7 +1,7 @@
 /*
     NSUserActivity.h
     Application Kit
-    Copyright (c) 2014-2015, Apple Inc.
+    Copyright (c) 2014-2016, Apple Inc.
     All rights reserved.
 */
 

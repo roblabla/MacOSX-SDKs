@@ -1,7 +1,7 @@
 /*
     NSTableColumn.h
     Application Kit
-    Copyright (c) 1995-2015, Apple Inc.
+    Copyright (c) 1995-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -45,7 +45,8 @@ typedef NS_OPTIONS(NSUInteger, NSTableColumnResizingOptions) {
 
 /* Designated initializer for NSTableColumns. Prior to 10.7, the parameter type was 'id', but it is now an 'NSString *'. See also -setIdentifier: and -identifier, and NSUserInterfaceItemIdentification.
  */
-- (instancetype)initWithIdentifier:(NSString *)identifier;
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 /* Gets and sets the string identifier associated with the NSTableColumn. 'identifier' will be copied. Prior to 10.7, the type was 'id', but was changed to 'NSString *' for NSUserInterfaceItemIdentification.
  */

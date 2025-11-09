@@ -21,32 +21,32 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_11, 8_0)
 @interface NEVPNProtocol : NSObject <NSCopying,NSSecureCoding>
 
 /*!
  * @property serverAddress
  * @discussion The VPN server. Depending on the protocol, may be an IP address, host name, or URL.
  */
-@property (copy, nullable) NSString *serverAddress NS_AVAILABLE(10_10, 8_0);
+@property (copy, nullable) NSString *serverAddress NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property username
  * @discussion The username component of the VPN authentication credential.
  */
-@property (copy, nullable) NSString *username NS_AVAILABLE(10_10, 8_0);
+@property (copy, nullable) NSString *username NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property passwordReference
  * @discussion The password component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassGenericPassword class.
  */
-@property (copy, nullable) NSData *passwordReference NS_AVAILABLE(10_10, 8_0);
+@property (copy, nullable) NSData *passwordReference NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property identityReference
  * @discussion The certificate and private key component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassIdentity class.
  */
-@property (copy, nullable) NSData *identityReference NS_AVAILABLE(10_10, 9_0);
+@property (copy, nullable) NSData *identityReference NS_AVAILABLE(10_11, 9_0);
 
 /*!
  * @property identityData
@@ -64,7 +64,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  * @property disconnectOnSleep
  * @discussion If YES, the VPN connection will be disconnected when the device goes to sleep. The default is NO.
  */
-@property BOOL disconnectOnSleep NS_AVAILABLE(10_10, 8_0);
+@property BOOL disconnectOnSleep NS_AVAILABLE(10_11, 8_0);
 
 /*!
  * @property proxySettings

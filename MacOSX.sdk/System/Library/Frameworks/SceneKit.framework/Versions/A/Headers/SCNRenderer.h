@@ -1,7 +1,7 @@
 //
 //  SCNRenderer.h
 //
-//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SCNSceneRenderer.h>
@@ -9,6 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class NSImage;
 @protocol MTLDevice;
 @protocol MTLCommandQueue;
 @protocol MTLRenderCommandEncoder;
@@ -17,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*! @class SCNRenderer
 	@abstract SCNRenderer lets you use the SceneKit renderer in an OpenGL context or Metal render pass descriptor of your own.
  */
-NS_CLASS_AVAILABLE(10_8, 8_0)
+__WATCHOS_PROHIBITED
 @interface SCNRenderer : NSObject <SCNSceneRenderer, SCNTechniqueSupport>
 
 /*! 
@@ -26,7 +27,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param context The context to render into.
  @param options An optional dictionary for future extensions.
  */
-+ (instancetype)rendererWithContext:(CGLContextObj)context options:(nullable NSDictionary *)options;
++ (instancetype)rendererWithContext:(nullable CGLContextObj)context options:(nullable NSDictionary *)options;
 
 /*!
  @method rendererWithDevice:options:
@@ -34,7 +35,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param device The metal device to use. Pass nil to let SceneKit choose a default device.
  @param options An optional dictionary for future extensions.
  */
-+ (instancetype)rendererWithDevice:(nullable id <MTLDevice>)device options:(nullable NSDictionary *)options NS_AVAILABLE(10_11, 9_0);
++ (instancetype)rendererWithDevice:(nullable id <MTLDevice>)device options:(nullable NSDictionary *)options API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*! 
  @property scene
@@ -47,27 +48,43 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract renders the receiver's scene at the specified time (system time).
  @discussion This method only work if the receiver was allocated with an OpenGL context. Use renderAtTime:withEncoder:pass:commandQueue: to render with Metal.
  */
-- (void)renderAtTime:(CFTimeInterval)time NS_AVAILABLE(10_10, 8_0);
+- (void)renderAtTime:(CFTimeInterval)time API_AVAILABLE(macosx(10.10));
+
+/*!
+ @method snapshotAtTime:withSize:antialiasingMode:
+ @abstract renders the receiver's scene at the specified time (system time) into an image.
+ */
+- (NSImage *)snapshotAtTime:(CFTimeInterval)time withSize:(CGSize)size antialiasingMode:(SCNAntialiasingMode)antialiasingMode API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
 
 /*!
  @method renderAtTime:viewport:commandBuffer:passDescriptor:
  @abstract renders the receiver's scene at the specified time (system time) viewport, metal command buffer and pass descriptor.
  @discussion Use this method to render using Metal.
  */
-- (void)renderAtTime:(CFTimeInterval)time viewport:(CGRect)viewport commandBuffer:(id <MTLCommandBuffer>)commandBuffer passDescriptor:(MTLRenderPassDescriptor *)renderPassDescriptor NS_AVAILABLE(10_11, 9_0);
+- (void)renderAtTime:(CFTimeInterval)time viewport:(CGRect)viewport commandBuffer:(id <MTLCommandBuffer>)commandBuffer passDescriptor:(MTLRenderPassDescriptor *)renderPassDescriptor API_AVAILABLE(macosx(10.11), ios(9.0));
 
 /*!
  @property nextFrameTime
  @abstract Returns the time at which the next update should happen. If infinite no update needs to be scheduled yet. If the current frame time, a continuous animation is running and an update should be scheduled after a "natural" delay.
  */
-@property(nonatomic, readonly) CFTimeInterval nextFrameTime NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, readonly) CFTimeInterval nextFrameTime API_AVAILABLE(macosx(10.10));
 
 /*!
  @method render
  @abstract renders the receiver's scene at the current system time.
- @discussion This method only work if the receiver was allocated with an OpenGL context and it is deprecated (use renderAtIme: instead). Use renderAtTime:withEncoder:pass:commandQueue: to render with Metal.
+ @discussion This method only work if the receiver was allocated with an OpenGL context and it is deprecated (use renderAtTime: instead). Use renderAtTime:withEncoder:pass:commandQueue: to render with Metal.
  */
-- (void)render NS_DEPRECATED(10_8, 10_11, 8_0, 9_0);
+- (void)render API_DEPRECATED_WITH_REPLACEMENT("-renderAtTime:withEncoder:pass:commandQueue:", macosx(10.8, 10.11), ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ @method updateProbes:atTime:
+ @abstract Update the specified probes by computing their incoming irradiance in the receiver's scene at the specified time.
+ @param lightProbes An array of nodes that must have a light probe attached.
+ @param time The time used to render the scene when computing the light probes irradiance.
+ @discussion Light probes are only supported with Metal. This method is observable using NSProgress.
+ */
+- (void)updateProbes:(NSArray<SCNNode*> *)lightProbes atTime:(CFTimeInterval)time API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
+
 
 @end
 

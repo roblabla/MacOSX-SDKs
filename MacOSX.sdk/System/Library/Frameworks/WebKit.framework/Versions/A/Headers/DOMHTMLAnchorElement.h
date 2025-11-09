@@ -33,7 +33,6 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMHTMLAnchorElement : DOMHTMLElement
 @property (copy) NSString *charset;
 @property (copy) NSString *coords;
-@property (copy) NSString *href;
 @property (copy) NSString *hreflang;
 @property (copy) NSString *name;
 @property (copy) NSString *rel;
@@ -42,13 +41,14 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (copy) NSString *target;
 @property (copy) NSString *type;
 @property (copy) NSString *accessKey NS_DEPRECATED_MAC(10_4, 10_8);
-@property (readonly, copy) NSString *hashName NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSString *host NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSString *hostname NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSString *pathname NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSString *port NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSString *protocol NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSString *search NS_AVAILABLE_MAC(10_5);
 @property (readonly, copy) NSString *text NS_AVAILABLE_MAC(10_5);
 @property (readonly, copy) NSURL *absoluteLinkURL NS_AVAILABLE_MAC(10_5);
+@property (copy) NSString *href;
+@property (readonly, copy) NSString *protocol NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *host NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *hostname NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *port NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *pathname NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *search NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *hashName NS_AVAILABLE_MAC(10_5);
 @end

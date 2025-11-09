@@ -1,7 +1,7 @@
 /*
 	NSFont.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -57,7 +57,8 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
         unsigned int _matrixIsIdentity:1;
         unsigned int _renderingMode:3;
         unsigned int _inInstanceCache:1;
-        unsigned int _reserved2:14;
+        unsigned int _appearanceSize:1;
+        unsigned int _reserved2:13;
     } _fFlags;
     id _private;
 }
@@ -78,8 +79,8 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 */
 + (nullable NSFont *)userFontOfSize:(CGFloat)fontSize;	// Application font
 + (nullable NSFont *)userFixedPitchFontOfSize:(CGFloat)fontSize; // fixed-pitch font
-+ (void)setUserFont:(nullable NSFont *)aFont;	// set preference for Application font.
-+ (void)setUserFixedPitchFont:(nullable NSFont *)aFont; // set preference for fixed-pitch.
++ (void)setUserFont:(nullable NSFont *)font;	// set preference for Application font.
++ (void)setUserFixedPitchFont:(nullable NSFont *)font; // set preference for fixed-pitch.
 
 /* UI font settings
 */
@@ -120,7 +121,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 /********* Glyph coverage *********/
 @property (readonly) NSUInteger numberOfGlyphs;
 @property (readonly) NSStringEncoding mostCompatibleStringEncoding;
-- (NSGlyph)glyphWithName:(NSString *)aName;
+- (NSGlyph)glyphWithName:(NSString *)name;
 @property (readonly, strong) NSCharacterSet *coveredCharacterSet;
 
 /********* Font instance-wide metrics *********/
@@ -141,8 +142,8 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @property (getter=isFixedPitch, readonly) BOOL fixedPitch;
 
 /********* Glyph metrics *********/
-- (NSRect)boundingRectForGlyph:(NSGlyph)aGlyph;
-- (NSSize)advancementForGlyph:(NSGlyph)ag;
+- (NSRect)boundingRectForGlyph:(NSGlyph)glyph;
+- (NSSize)advancementForGlyph:(NSGlyph)glyph;
 
 // bulk query
 - (void)getBoundingRects:(NSRectArray)bounds forGlyphs:(const NSGlyph *)glyphs count:(NSUInteger)glyphCount;
@@ -175,11 +176,11 @@ APPKIT_EXTERN NSInteger NSConvertGlyphsToPackedGlyphs(NSGlyph * __nonnull glBuf,
 /********* Notifications *********/
 /* This notification is posted when the antialias threshold is changed by the user.
 */
-APPKIT_EXTERN NSString * NSAntialiasThresholdChangedNotification;
+APPKIT_EXTERN NSNotificationName NSAntialiasThresholdChangedNotification;
 
 /* This notification is posted when the available font set is modified as a result of activation/deactivation.
 */
-APPKIT_EXTERN NSString * NSFontSetChangedNotification;
+APPKIT_EXTERN NSNotificationName NSFontSetChangedNotification;
 
 NS_ASSUME_NONNULL_END
 
@@ -210,7 +211,7 @@ typedef NSUInteger  NSGlyphRelation NS_DEPRECATED_MAC(10_0, 10_4);
 - (CGFloat)widthOfString:(null_unspecified NSString *)string NS_DEPRECATED_MAC(10_0, 10_4); // This API never returns correct value. Use NSStringDrawing API instead.
 - (BOOL)isBaseFont NS_DEPRECATED_MAC(10_0, 10_4);
 - (null_unspecified NSDictionary *)afmDictionary NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)glyphIsEncoded:(NSGlyph)aGlyph NS_DEPRECATED_MAC(10_0, 10_4); // Can be deduced by aGlyph < [NSFont numberOfGlyphs] since only NSNativeShortGlyphPacking is supported.
+- (BOOL)glyphIsEncoded:(NSGlyph)glyph NS_DEPRECATED_MAC(10_0, 10_4); // Can be deduced by aGlyph < [NSFont numberOfGlyphs] since only NSNativeShortGlyphPacking is supported.
 - (CGFloat)defaultLineHeightForFont NS_DEPRECATED_MAC(10_0, 10_4); // Use -[NSLayoutManager defaultLineHeightForFont:] instead.
 + (null_unspecified NSArray *)preferredFontNames NS_DEPRECATED_MAC(10_0, 10_4); // NSFontCascadeListAttribute offers more powerful font substitution management
 + (void)setPreferredFontNames:(null_unspecified NSArray *)fontNameArray NS_DEPRECATED_MAC(10_0, 10_4);
@@ -219,11 +220,11 @@ typedef NSUInteger  NSGlyphRelation NS_DEPRECATED_MAC(10_0, 10_4);
 
 NS_ASSUME_NONNULL_BEGIN
 // The context-sensitive inter-glyph spacing is now performed at the typesetting stage.
-- (NSPoint)positionOfGlyph:(NSGlyph)curGlyph precededByGlyph:(NSGlyph)prevGlyph isNominal:(null_unspecified BOOL *)nominal NS_DEPRECATED_MAC(10_0, 10_4);
+- (NSPoint)positionOfGlyph:(NSGlyph)glyph precededByGlyph:(NSGlyph)prevGlyph isNominal:(null_unspecified BOOL *)nominal NS_DEPRECATED_MAC(10_0, 10_4);
 - (NSInteger)positionsForCompositeSequence:(null_unspecified NSGlyph *)someGlyphs numberOfGlyphs:(NSInteger)numGlyphs pointArray:(NSPointArray)points NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSPoint)positionOfGlyph:(NSGlyph)curGlyph struckOverGlyph:(NSGlyph)prevGlyph metricsExist:(null_unspecified BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSPoint)positionOfGlyph:(NSGlyph)aGlyph struckOverRect:(NSRect)aRect metricsExist:(null_unspecified BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSPoint)positionOfGlyph:(NSGlyph)aGlyph forCharacter:(unichar)aChar struckOverRect:(NSRect)aRect NS_DEPRECATED_MAC(10_0, 10_4);
+- (NSPoint)positionOfGlyph:(NSGlyph)glyph struckOverGlyph:(NSGlyph)prevGlyph metricsExist:(null_unspecified BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
+- (NSPoint)positionOfGlyph:(NSGlyph)glyph struckOverRect:(NSRect)rect metricsExist:(null_unspecified BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
+- (NSPoint)positionOfGlyph:(NSGlyph)glyph forCharacter:(unichar)character struckOverRect:(NSRect)rect NS_DEPRECATED_MAC(10_0, 10_4);
 - (NSPoint)positionOfGlyph:(NSGlyph)thisGlyph withRelation:(NSGlyphRelation)rel toBaseGlyph:(NSGlyph)baseGlyph totalAdvancement:(NSSizePointer)adv metricsExist:(null_unspecified BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
 @end
 

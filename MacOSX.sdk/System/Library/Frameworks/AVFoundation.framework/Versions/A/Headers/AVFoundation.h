@@ -9,10 +9,19 @@
 
 */
 
+#import <TargetConditionals.h>
+#if TARGET_OS_WATCH
+#if ! __has_include(<AVFoundation/AVAnimation.h>)
+#define AVF_IS_WATCHOS_SDK 1
+#endif
+#endif
+
 #import <AVFoundation/AVBase.h>
 
+#if ! AVF_IS_WATCHOS_SDK
 #import <AVFoundation/AVAnimation.h>
 #import <AVFoundation/AVAsset.h>
+#import <AVFoundation/AVAssetCache.h>
 #import <AVFoundation/AVAssetExportSession.h>
 #import <AVFoundation/AVAssetImageGenerator.h>
 #import <AVFoundation/AVAssetReader.h>
@@ -43,7 +52,11 @@
 #import <AVFoundation/AVCompositionTrack.h>
 #import <AVFoundation/AVCompositionTrackSegment.h>
 #import <AVFoundation/AVError.h>
+#endif
+
 #import <AVFoundation/AVFAudio.h>
+
+#if ! AVF_IS_WATCHOS_SDK
 #import <AVFoundation/AVMediaFormat.h>
 #import <AVFoundation/AVMediaSelection.h>
 #import <AVFoundation/AVMediaSelectionGroup.h>
@@ -58,12 +71,14 @@
 #import <AVFoundation/AVOutputSettingsAssistant.h>
 #import <AVFoundation/AVPlayer.h>
 #import <AVFoundation/AVPlayerItem.h>
+#import <AVFoundation/AVPlayerItemMediaDataCollector.h>
 #import <AVFoundation/AVPlayerItemOutput.h>
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 #import <AVFoundation/AVPlayerItemProtectedContentAdditions.h>
 #endif
 #import <AVFoundation/AVPlayerItemTrack.h>
 #import <AVFoundation/AVPlayerLayer.h>
+#import <AVFoundation/AVPlayerLooper.h>
 #import <AVFoundation/AVPlayerMediaSelectionCriteria.h>
 #import <AVFoundation/AVSampleBufferDisplayLayer.h>
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
@@ -78,3 +93,4 @@
 #import <AVFoundation/AVVideoCompositing.h>
 #import <AVFoundation/AVVideoComposition.h>
 #import <AVFoundation/AVVideoSettings.h>
+#endif

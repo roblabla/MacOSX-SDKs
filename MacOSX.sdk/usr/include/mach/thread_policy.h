@@ -225,6 +225,8 @@ struct thread_background_policy {
 	integer_t	priority;
 };
 
+#define THREAD_BACKGROUND_POLICY_DARWIN_BG 0x1000
+
 typedef struct thread_background_policy		thread_background_policy_data_t;
 typedef struct thread_background_policy 	*thread_background_policy_t;
 
@@ -257,6 +259,8 @@ typedef struct thread_throughput_qos_policy 	*thread_throughput_qos_policy_t;
 
 #define THREAD_THROUGHPUT_QOS_POLICY_COUNT	((mach_msg_type_number_t) \
 	    (sizeof (thread_throughput_qos_policy_data_t) / sizeof (integer_t)))
+
+
 
 
 #endif	/* _MACH_THREAD_POLICY_H_ */

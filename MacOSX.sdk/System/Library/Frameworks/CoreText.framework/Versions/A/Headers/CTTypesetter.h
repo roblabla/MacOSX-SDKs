@@ -53,7 +53,7 @@ CFTypeID CTTypesetterGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 				performed and any directional control characters are ignored.
 */
 
-extern const CFStringRef kCTTypesetterOptionDisableBidiProcessing CT_DEPRECATED(10_5, 10_8, 3_2, 6_0);
+CT_EXPORT const CFStringRef kCTTypesetterOptionDisableBidiProcessing CT_DEPRECATED(10_5, 10_8, 3_2, 6_0);
 
 /*!
 	@const		kCTTypesetterOptionForcedEmbeddingLevel
@@ -64,7 +64,7 @@ extern const CFStringRef kCTTypesetterOptionDisableBidiProcessing CT_DEPRECATED(
 				level and any directional control characters are ignored.
 */
 
-extern const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */

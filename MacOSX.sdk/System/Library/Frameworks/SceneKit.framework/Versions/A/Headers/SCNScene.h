@@ -1,11 +1,12 @@
 //
 //  SCNScene.h
 //
-//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SCNAnimation.h>
+#import <SceneKit/SCNSceneSource.h>
 #import <SceneKit/SCNMaterialProperty.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param error Will contain information about the failure if any.
  @param stop Set *stop to YES if you want to abort the operation.
  */
-typedef void (^SCNSceneExportProgressHandler)(float totalProgress, NSError * __nullable error, BOOL *stop);
+typedef void (^SCNSceneExportProgressHandler)(float totalProgress, NSError * _Nullable error, BOOL *stop);
 
 
 /*! @group Scene writing options */
@@ -30,28 +31,33 @@ typedef void (^SCNSceneExportProgressHandler)(float totalProgress, NSError * __n
  @abstract Specifies the final destination (as a NSURL) of the scene being exported.
  @discussion The destination URL is required if the scene is exported to a temporary directory and then moved to a final destination. This enables the exported document to get correct relative paths to referenced images.
  */
-SCN_EXTERN NSString * const SCNSceneExportDestinationURL NS_AVAILABLE(10_9, 8_0);
+FOUNDATION_EXTERN NSString * const SCNSceneExportDestinationURL API_AVAILABLE(macosx(10.9));
 
 
 /*! @group Scene attributes
     @abstract These keys can be used with the -[SCNScene attributeForKey:] method.
  */
+#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
+typedef NSString * SCNSceneAttribute NS_STRING_ENUM;
+#else
+typedef NSString * SCNSceneAttribute;
+#endif
 
-/*! A floating point value, encapsulated in a NSNumber, containing the start time of the scene. */
-SCN_EXTERN NSString * const SCNSceneStartTimeAttributeKey;
-/*! A floating point value, encapsulated in a NSNumber, containing the end time of the scene. */
-SCN_EXTERN NSString * const SCNSceneEndTimeAttributeKey;
-/*! A floating point value, encapsulated in a NSNumber, containing the framerate of the scene. */
-SCN_EXTERN NSString * const SCNSceneFrameRateAttributeKey;
-/*! A vector3 value, encapsulated in a NSValue, containing the up axis of the scene. This is just for information, setting the up axis as no effect */
-SCN_EXTERN NSString * const SCNSceneUpAxisAttributeKey NS_AVAILABLE(10_10, 8_0);
+FOUNDATION_EXTERN SCNSceneAttribute const SCNSceneStartTimeAttributeKey;                           // A floating point value, encapsulated in a NSNumber, containing the start time of the scene.
+FOUNDATION_EXTERN SCNSceneAttribute const SCNSceneEndTimeAttributeKey;                             // A floating point value, encapsulated in a NSNumber, containing the end time of the scene.
+FOUNDATION_EXTERN SCNSceneAttribute const SCNSceneFrameRateAttributeKey;                           // A floating point value, encapsulated in a NSNumber, containing the framerate of the scene.
+FOUNDATION_EXTERN SCNSceneAttribute const SCNSceneUpAxisAttributeKey API_AVAILABLE(macosx(10.10)); // A vector3 value, encapsulated in a NSValue, containing the up axis of the scene. This is just for information, setting the up axis as no effect.
+
+#define SCNSceneAttributeStartTime SCNSceneStartTimeAttributeKey
+#define SCNSceneAttributeEndTime   SCNSceneEndTimeAttributeKey
+#define SCNSceneAttributeFrameRate SCNSceneFrameRateAttributeKey
+#define SCNSceneAttributeUpAxis    SCNSceneUpAxisAttributeKey
 
 /*!
  @class SCNScene
  @abstract SCNScene is the class that describes a 3d scene. It encapsulates a node hierarchy.
  */
 
-NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNScene : NSObject <NSSecureCoding>
 
 + (instancetype)scene;
@@ -70,7 +76,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Specifies the physics world of the receiver.
  @discussion Every scene automatically creates a physics world object to simulate physics on nodes in the scene. You use this property to access the scene’s global physics properties, such as gravity. To add physics to a particular node, see physicsBody.
  */
-@property(nonatomic, readonly) SCNPhysicsWorld *physicsWorld NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, readonly) SCNPhysicsWorld *physicsWorld API_AVAILABLE(macosx(10.10));
 
 /*!
  @method attributeForKey:
@@ -92,9 +98,18 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
 /*!
  @property background
  @abstract Specifies the background of the receiver.
- @discussion The background is rendered before the rest of the scene. The background can be rendered as a skybox by setting a NSArray of six images to its contents (see SCNMaterialProperty.h). Setting a color will have no effect (use SCNView's backgroundColor instead).
+ @discussion The background is rendered before the rest of the scene.
+             The background can be rendered as a skybox by setting a cube map as described in SCNMaterialProperty.h
+             Colors are supported starting macOS 10.12 and iOS 10. Prior to that you can use SCNView.backgroundColor.
  */
-@property(nonatomic, readonly) SCNMaterialProperty *background NS_AVAILABLE(10_9, 8_0);
+@property(nonatomic, readonly) SCNMaterialProperty *background API_AVAILABLE(macosx(10.9));
+
+/*!
+ @property lightingEnvironment
+ @abstract Specifies the receiver's environment for image-based lighting (IBL).
+ @discussion The environment should be a cube map as described in SCNMaterialProperty.h
+ */
+@property(nonatomic, readonly) SCNMaterialProperty *lightingEnvironment API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
 
 
 #pragma mark - Loading
@@ -105,7 +120,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param name The name of the file. The method looks for a file with the specified name in the application’s main bundle.
  @discussion This method initializes with no options and does not check for errors. The resulting object is not cached.
  */
-+ (nullable instancetype)sceneNamed:(NSString *)name NS_AVAILABLE(10_9, 8_0);
++ (nullable instancetype)sceneNamed:(NSString *)name API_AVAILABLE(macosx(10.9));
 
 /*!
  @method sceneNamed:options:
@@ -115,7 +130,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param options An options dictionary. The relevant keys are documented in the SCNSceneSource class.
  @discussion This method initializes with no options and does not check for errors. The resulting object is not cached.
  */
-+ (nullable instancetype)sceneNamed:(NSString *)name inDirectory:(nullable NSString *)directory options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE(10_10, 8_0);
++ (nullable instancetype)sceneNamed:(NSString *)name inDirectory:(nullable NSString *)directory options:(nullable NSDictionary<SCNSceneSourceLoadingOption, id> *)options API_AVAILABLE(macosx(10.10));
 
 /*!
  @method sceneWithURL:options:error:
@@ -126,7 +141,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @discussion This method is here for convenience. It is equivalent to initializing a SCNSceneSource with the specified
  url and options, and asking it for its scene with the same options.
  */
-+ (nullable instancetype)sceneWithURL:(NSURL *)url options:(nullable NSDictionary<NSString *, id> *)options error:(NSError **)error;
++ (nullable instancetype)sceneWithURL:(NSURL *)url options:(nullable NSDictionary<SCNSceneSourceLoadingOption, id> *)options error:(NSError **)error;
 
 #pragma mark - Writing
 
@@ -139,9 +154,11 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param progressHandler an optional block to handle the progress of the operation.
  @return Returns YES if the operation succeeded, NO otherwise. Errors checking can be done via the "error"
  parameter of the 'progressHandler'.
- @discussion Currently only exporting to .dae files is supported.
+ @discussion macOS 10.10 and lower only supports exporting to .dae files.
+             Starting macOS 10.11 exporting supports .dae, .scn as well as file all formats supported by Model I/O.
+             Starting iOS 10 exporting supports .scn as well as all file formats supported by Model I/O.
  */
-- (BOOL)writeToURL:(NSURL *)url options:(nullable NSDictionary<NSString *, id> *)options delegate:(nullable id <SCNSceneExportDelegate>)delegate progressHandler:(nullable SCNSceneExportProgressHandler)progressHandler NS_AVAILABLE(10_9, NA);
+- (BOOL)writeToURL:(NSURL *)url options:(nullable NSDictionary<NSString *, id> *)options delegate:(nullable id <SCNSceneExportDelegate>)delegate progressHandler:(nullable SCNSceneExportProgressHandler)progressHandler API_AVAILABLE(macosx(10.9), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 #pragma mark - Fog
 
@@ -149,27 +166,27 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @property fogStartDistance
  @abstract Specifies the receiver's fog start distance. Animatable. Defaults to 0.
  */
-@property(nonatomic) CGFloat fogStartDistance NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat fogStartDistance API_AVAILABLE(macosx(10.10));
 
 /*!
  @property fogEndDistance
  @abstract Specifies the receiver's fog end distance. Animatable. Defaults to 0.
  */
-@property(nonatomic) CGFloat fogEndDistance NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat fogEndDistance API_AVAILABLE(macosx(10.10));
 
 /*!
  @property fogDensityExponent
  @abstract Specifies the receiver's fog power exponent. Animatable. Defaults to 1.
  @discussion Controls the attenuation between the start and end fog distances. 0 means a constant fog, 1 a linear fog and 2 a quadratic fog, but any positive value will work.
  */
-@property(nonatomic) CGFloat fogDensityExponent NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat fogDensityExponent API_AVAILABLE(macosx(10.10));
 
 /*!
  @property fogColor
  @abstract Specifies the receiver's fog color (NSColor or CGColorRef). Animatable. Defaults to white.
  @discussion The initial value is a NSColor.
  */
-@property(nonatomic, retain) id fogColor NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, retain) id fogColor API_AVAILABLE(macosx(10.10));
 
 
 #pragma mark - Pause
@@ -179,11 +196,12 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Controls whether or not the scene is paused. Defaults to NO.
  @discussion Pausing a scene will pause animations, actions, particles and physics.
  */
-@property(nonatomic, getter=isPaused) BOOL paused NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic, getter=isPaused) BOOL paused API_AVAILABLE(macosx(10.10));
 
 
 @end
 
+API_AVAILABLE(macosx(10.9), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos)
 @protocol SCNSceneExportDelegate <NSObject>
 @optional
 /*!
@@ -194,7 +212,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
  @param originalImageURL The original url for the image. May be nil if the image was not previously loaded from a url.
  @return The delegate must returns the url of the image that was exported or nil if it didn't export any image. If the returned value is nil, the image will be exported to a default destination in a default format.
  */
-- (nullable NSURL *)writeImage:(NSImage *)image withSceneDocumentURL:(NSURL *)documentURL originalImageURL:(nullable NSURL *)originalImageURL NS_AVAILABLE(10_9, NA);
+- (nullable NSURL *)writeImage:(NSImage *)image withSceneDocumentURL:(NSURL *)documentURL originalImageURL:(nullable NSURL *)originalImageURL API_AVAILABLE(macosx(10.9), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 @end
 

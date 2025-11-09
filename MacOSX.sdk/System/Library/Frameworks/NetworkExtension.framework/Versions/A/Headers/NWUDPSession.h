@@ -2,17 +2,19 @@
 //  NWUDPSession.h
 //  Network
 //
-//  Copyright (c) 2014, 2015 Apple. All rights reserved.
+//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
 //
 
 #ifndef __NE_INDIRECT__
 #error "Please import the NetworkExtension module instead of this file directly."
-#endif
+#endif // __NE_INDIRECT__
+
+
+#ifndef __NWUDPSession_h_
+#define __NWUDPSession_h_
+
 
 NS_ASSUME_NONNULL_BEGIN
-
-@class NWEndpoint;
-@class NWPath;
 
 /*!
  * @typedef NWUDPSessionState
@@ -50,7 +52,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @discussion This convenience initializer can be used to create a new session based on the
  *		original session's endpoint and parameters.
  *
- *		The application should create an NWUDPSession and watch the "hasBetterPath" property. 
+ *		The application should create an NWUDPSession and watch the "hasBetterPath" property.
  *		When this property is YES, it should call initWithUpgradeForSession: to create a new
  *		session, with the goal to start transferring data on the new better path as soon as
  *		possible to reduce power and potentially monetary cost. When the new "upgrade" session
@@ -65,9 +67,9 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 
 /*!
  * @property state
- * @discussion The current state of the UDP session. If the state is NWUDPSessionStateReady, 
+ * @discussion The current state of the UDP session. If the state is NWUDPSessionStateReady,
  *		then the connection is eligible for reading and writing. The state will be
- *		NWUDPSessionStateFailed if the endpoint could not be resolved, or all endpoints have been 
+ *		NWUDPSessionStateFailed if the endpoint could not be resolved, or all endpoints have been
  *		rejected. Use KVO to watch for changes.
  */
 @property (readonly) NWUDPSessionState state NS_AVAILABLE(10_11, 9_0);
@@ -86,14 +88,14 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 
 /*!
  * @property viable
- * @discussion YES if the connection can read and write data, NO otherwise. 
+ * @discussion YES if the connection can read and write data, NO otherwise.
  *		Use KVO to watch this property.
  */
 @property (readonly, getter=isViable) BOOL viable NS_AVAILABLE(10_11, 9_0);
 
 /*!
  * @property hasBetterPath
- * @discussion YES if there is another path available that is preferred over the currentPath. 
+ * @discussion YES if there is another path available that is preferred over the currentPath.
  *		To take advantage of this path, create a new UDPSession. Use KVO to watch for changes.
  */
 @property (readonly) BOOL hasBetterPath NS_AVAILABLE(10_11, 9_0);
@@ -106,7 +108,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 
 /*!
  * @method tryNextResolvedEndpoint
- * @discussion Mark the current value of resolvedEndpoint as unusable, and try to switch to the 
+ * @discussion Mark the current value of resolvedEndpoint as unusable, and try to switch to the
  *		next available endpoint. This should be used when the caller has attempted to communicate
  *		with the current resolvedEndpoint, and the caller has determined that it is unusable. If
  *		there are no other resolved endpoints, the session will move to the failed state.
@@ -117,7 +119,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @property maximumDatagramLength
  * @discussion The maximum size of a datagram to be written currently. If a datagram is written
  *		with a longer length, the datagram may be fragmented or encounter an error. Note that this
- *		value is not guaranteed to be the maximum datagram length for end-to-end communication 
+ *		value is not guaranteed to be the maximum datagram length for end-to-end communication
  *		across the network. Use KVO to watch for changes.
  */
 @property (readonly) NSUInteger maximumDatagramLength NS_AVAILABLE(10_11, 9_0);
@@ -162,3 +164,5 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // __NWUDPSession_h_

@@ -1,8 +1,10 @@
 //
 //  SCNPhysicsField.h
 //
-//  Copyright (c) 2014-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
 //
+
+#import <SceneKit/SceneKitTypes.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,13 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, SCNPhysicsFieldScope) {
     SCNPhysicsFieldScopeInsideExtent,
     SCNPhysicsFieldScopeOutsideExtent,
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} API_AVAILABLE(macosx(10.10));
 
 /*!
  @class SCNPhysicsField
  @abstract SCNPhysicsField is an abstract class that describes a force field that applies in the physics world.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macosx(10.10))
 @interface SCNPhysicsField : NSObject <NSCopying, NSSecureCoding>
 
 // The following properties control the behavior of the field
@@ -44,7 +46,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @property categoryBitMask
  @abstract Determines the node categories that will be influenced by the receiver. Defaults to all bit set.
  */
-@property(nonatomic) NSUInteger categoryBitMask NS_AVAILABLE(10_10, 8_0);
+@property(nonatomic) NSUInteger categoryBitMask API_AVAILABLE(macosx(10.10));
 
 
 /**

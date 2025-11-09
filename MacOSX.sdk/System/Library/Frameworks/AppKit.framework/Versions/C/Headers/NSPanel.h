@@ -1,19 +1,11 @@
 /*
     NSPanel.h
     Application Kit
-    Copyright (c) 1994-2015, Apple Inc.
+    Copyright (c) 1994-2016, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSWindow.h>
-
-// Panel specific styleMask options
-enum {
-    NSUtilityWindowMask			= 1 << 4,
-    NSDocModalWindowMask 		= 1 << 6,
-    NSNonactivatingPanelMask		= 1 << 7,           // specify a panel that does not activate owning application
-    NSHUDWindowMask NS_ENUM_AVAILABLE_MAC(10_6) = 1 << 13   // specify a heads up display panel
-};
 
 @interface NSPanel : NSWindow {
 

@@ -1,7 +1,7 @@
 /*
     NSManagedObjectContext.h
     Core Data
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -23,50 +23,54 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSPersistentStore;
 @class NSPersistentStoreCoordinator;
 @class NSPropertyDescription;
+@class NSQueryGenerationToken;
 @class NSUndoManager;
 @class NSNotification;
 
 // Notifications immediately before and immediately after the context saves.  The user info dictionary contains information about the objects that changed and what changed
-COREDATA_EXTERN NSString * const NSManagedObjectContextWillSaveNotification NS_AVAILABLE(10_5, 3_0);
-COREDATA_EXTERN NSString * const NSManagedObjectContextDidSaveNotification NS_AVAILABLE(10_4, 3_0);
+COREDATA_EXTERN NSString * const NSManagedObjectContextWillSaveNotification API_AVAILABLE(macosx(10.5),ios(3.0));
+COREDATA_EXTERN NSString * const NSManagedObjectContextDidSaveNotification API_AVAILABLE(macosx(10.4),ios(3.0));
 
 // Notification when objects in a context changed:  the user info dictionary contains information about the objects that changed and what changed
-COREDATA_EXTERN NSString * const NSManagedObjectContextObjectsDidChangeNotification NS_AVAILABLE(10_4, 3_0);    
+COREDATA_EXTERN NSString * const NSManagedObjectContextObjectsDidChangeNotification API_AVAILABLE(macosx(10.4),ios(3.0));    
 
 // User info keys for NSManagedObjectContextObjectsDidChangeNotification:  the values for these keys are sets of managed objects
-COREDATA_EXTERN NSString * const NSInsertedObjectsKey NS_AVAILABLE(10_4, 3_0);
-COREDATA_EXTERN NSString * const NSUpdatedObjectsKey NS_AVAILABLE(10_4, 3_0);
-COREDATA_EXTERN NSString * const NSDeletedObjectsKey NS_AVAILABLE(10_4, 3_0);
+COREDATA_EXTERN NSString * const NSInsertedObjectsKey API_AVAILABLE(macosx(10.4),ios(3.0));
+COREDATA_EXTERN NSString * const NSUpdatedObjectsKey API_AVAILABLE(macosx(10.4),ios(3.0));
+COREDATA_EXTERN NSString * const NSDeletedObjectsKey API_AVAILABLE(macosx(10.4),ios(3.0));
 
-COREDATA_EXTERN NSString * const NSRefreshedObjectsKey NS_AVAILABLE(10_5, 3_0);
-COREDATA_EXTERN NSString * const NSInvalidatedObjectsKey NS_AVAILABLE(10_5, 3_0);
+COREDATA_EXTERN NSString * const NSRefreshedObjectsKey API_AVAILABLE(macosx(10.5),ios(3.0));
+COREDATA_EXTERN NSString * const NSInvalidatedObjectsKey API_AVAILABLE(macosx(10.5),ios(3.0));
+
+COREDATA_EXTERN NSString * const NSManagedObjectContextQueryGenerationKey API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
 
 // User info keys for NSManagedObjectContextObjectsDidChangeNotification:  the values for these keys are arrays of objectIDs
-COREDATA_EXTERN NSString * const NSInvalidatedAllObjectsKey NS_AVAILABLE(10_5, 3_0); // All objects in the context have been invalidated
+COREDATA_EXTERN NSString * const NSInvalidatedAllObjectsKey API_AVAILABLE(macosx(10.5),ios(3.0)); // All objects in the context have been invalidated
 
 // Default policy for all managed object contexts - save returns with an error that contains the object IDs of the objects that had conflicts(NSInsertedObjectsKey, NSUpdatedObjectsKey).
-COREDATA_EXTERN id NSErrorMergePolicy NS_AVAILABLE(10_4, 3_0);
+COREDATA_EXTERN id NSErrorMergePolicy API_AVAILABLE(macosx(10.4),ios(3.0));
 
 // This singleton policy merges conflicts between the persistent store's version of the object and the current in memory version. The merge occurs by individual property. For properties which have been changed in both the external source and in memory, the external changes trump the in memory ones.
-COREDATA_EXTERN id NSMergeByPropertyStoreTrumpMergePolicy NS_AVAILABLE(10_4, 3_0);    
+COREDATA_EXTERN id NSMergeByPropertyStoreTrumpMergePolicy API_AVAILABLE(macosx(10.4),ios(3.0));    
 
 // This singleton policy merges conflicts between the persistent store's version of the object and the current in memory version. The merge occurs by individual property. For properties which have been changed in both the external source and in memory, the in memory changes trump the external ones.
-COREDATA_EXTERN id NSMergeByPropertyObjectTrumpMergePolicy NS_AVAILABLE(10_4, 3_0);    
+COREDATA_EXTERN id NSMergeByPropertyObjectTrumpMergePolicy API_AVAILABLE(macosx(10.4),ios(3.0));    
 
 // This singleton policy overwrites all state for the changed objects in conflict The current object's state is pushed upon the persistent store.
-COREDATA_EXTERN id NSOverwriteMergePolicy NS_AVAILABLE(10_4, 3_0);    
+COREDATA_EXTERN id NSOverwriteMergePolicy API_AVAILABLE(macosx(10.4),ios(3.0));    
 
 // This singleton policy discards all state for the changed objects in conflict. The persistent store's version of the object is used.
-COREDATA_EXTERN id NSRollbackMergePolicy NS_AVAILABLE(10_4, 3_0);    
+COREDATA_EXTERN id NSRollbackMergePolicy API_AVAILABLE(macosx(10.4),ios(3.0));    
 
 typedef NS_ENUM(NSUInteger, NSManagedObjectContextConcurrencyType) {
-    NSConfinementConcurrencyType NS_ENUM_DEPRECATED(10_4,10_11,3_0,9_0, "Use another NSManagedObjectContextConcurrencyType") = 0x00,
+    NSConfinementConcurrencyType API_DEPRECATED( "Use another NSManagedObjectContextConcurrencyType", macosx(10.4,10.11), ios(3.0,9.0)) = 0x00,
     NSPrivateQueueConcurrencyType		= 0x01,
     NSMainQueueConcurrencyType			= 0x02
-} NS_ENUM_AVAILABLE(10_7,  5_0);
+} API_AVAILABLE(macosx(10.7), ios(5.0));
 
-NS_CLASS_AVAILABLE(10_4,3_0)
+API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSManagedObjectContext : NSObject <NSCoding, NSLocking> {
+#if (!__OBJC2__)
 @private
   volatile id _queueOwner;
   void *_dispatchQueue;
@@ -97,7 +101,9 @@ NS_CLASS_AVAILABLE(10_4,3_0)
       unsigned int _isMerging:1;
       unsigned int _concurrencyType:1;
       unsigned int _deleteInaccessible:1;
-      unsigned int _reservedFlags:9;
+      unsigned int _priority:2;
+      unsigned int _autoMerge:1;
+      unsigned int _reservedFlags:6;
   } _flags;
   NSMutableSet *_unprocessedChanges;
   NSMutableSet *_unprocessedDeletes;
@@ -123,31 +129,32 @@ NS_CLASS_AVAILABLE(10_4,3_0)
   id _reserved6;
   NSString* _contextLabel;
   id* _additionalPrivateIvars;
+#endif
 }
 
-+ (instancetype)new NS_DEPRECATED(10_4,10_11,3_0,9_0, "Use -initWithConcurrencyType: instead");
-- (instancetype)init NS_DEPRECATED(10_4,10_11,3_0,9_0, "Use -initWithConcurrencyType: instead");
-- (instancetype)initWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct NS_DESIGNATED_INITIALIZER  NS_AVAILABLE(10_7,  5_0);
++ (instancetype)new API_DEPRECATED( "Use -initWithConcurrencyType: instead", macosx(10.4,10.11), ios(3.0,9.0));
+- (instancetype)init API_DEPRECATED( "Use -initWithConcurrencyType: instead", macosx(10.4,10.11), ios(3.0,9.0));
+- (instancetype)initWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct NS_DESIGNATED_INITIALIZER  API_AVAILABLE(macosx(10.7),ios(5.0));
 
 /* asynchronously performs the block on the context's queue.  Encapsulates an autorelease pool and a call to processPendingChanges */
-- (void)performBlock:(void (^)())block NS_AVAILABLE(10_7,  5_0);
+- (void)performBlock:(void (^)())block API_AVAILABLE(macosx(10.7),ios(5.0));
 
 /* synchronously performs the block on the context's queue.  May safely be called reentrantly.  */
-- (void)performBlockAndWait:(void (^)())block NS_AVAILABLE(10_7,  5_0);
+- (void)performBlockAndWait:(void (^)())block API_AVAILABLE(macosx(10.7),ios(5.0));
 
 /* coordinator which provides model and handles persistency (multiple contexts can share a coordinator) */
 @property (nullable, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-@property (nullable, strong) NSManagedObjectContext *parentContext NS_AVAILABLE(10_7,  5_0);
+@property (nullable, strong) NSManagedObjectContext *parentContext API_AVAILABLE(macosx(10.7),ios(5.0));
 
 /* custom label for a context.  NSPrivateQueueConcurrencyType contexts will set the label on their queue */
-@property (nullable, copy) NSString *name NS_AVAILABLE(10_10, 8_0);
+@property (nullable, copy) NSString *name API_AVAILABLE(macosx(10.10),ios(8.0));
 
 @property (nullable, nonatomic, strong) NSUndoManager *undoManager;
 
 @property (nonatomic, readonly) BOOL hasChanges;
-@property (nonatomic, readonly, strong) NSMutableDictionary *userInfo NS_AVAILABLE(10_7,  5_0);
-@property (readonly) NSManagedObjectContextConcurrencyType concurrencyType NS_AVAILABLE(10_7,  5_0);
+@property (nonatomic, readonly, strong) NSMutableDictionary *userInfo API_AVAILABLE(macosx(10.7),ios(5.0));
+@property (readonly) NSManagedObjectContextConcurrencyType concurrencyType API_AVAILABLE(macosx(10.7),ios(5.0));
 
 /* returns the object for the specified ID if it is registered in the context already or nil. It never performs I/O. */
 - (nullable __kindof NSManagedObject *)objectRegisteredForID:(NSManagedObjectID *)objectID;
@@ -156,13 +163,13 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 - (__kindof NSManagedObject *)objectWithID:(NSManagedObjectID *)objectID;
 
 /* returns the object for the specified ID if it is already registered in the context, or faults the object into the context.  It might perform I/O if the data is uncached.  If the object cannot be fetched, or does not exist, or cannot be faulted, it returns nil.  Unlike -objectWithID: it never returns a fault.  */
-- (nullable __kindof NSManagedObject*)existingObjectWithID:(NSManagedObjectID*)objectID error:(NSError**)error NS_AVAILABLE(10_6, 3_0);
+- (nullable __kindof NSManagedObject*)existingObjectWithID:(NSManagedObjectID*)objectID error:(NSError**)error API_AVAILABLE(macosx(10.6),ios(3.0));
 
 // method to fetch objects from the persistent stores into the context (fetch request defines the entity and predicate as well as a sort order for the objects); context will match the results from persistent stores with current changes in the context (so inserted objects are returned even if they are not persisted yet); to fetch a single object with an ID if it is not guaranteed to exist and thus -objectWithObjectID: cannot be used, one would create a predicate like [NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"objectID"] rightExpression:[NSExpression expressionForConstantValue:<object id>] modifier:NSPredicateModifierDirect type:NSEqualToPredicateOperatorType options:0]
 - (nullable NSArray *)executeFetchRequest:(NSFetchRequest *)request error:(NSError **)error;
 
 // returns the number of objects a fetch request would have returned if it had been passed to -executeFetchRequest:error:.   If an error occurred during the processing of the request, this method will return NSNotFound. 
-- (NSUInteger) countForFetchRequest: (NSFetchRequest *)request error: (NSError **)error NS_AVAILABLE(10_5, 3_0);    
+- (NSUInteger) countForFetchRequest: (NSFetchRequest *)request error: (NSError **)error API_AVAILABLE(macosx(10.5),ios(3.0)) __attribute__((swift_error(nonnull_error)));
 
 // Method to pass a request to the store without affecting the contents of the managed object context.
 // Will return an NSPersistentStoreResult which may contain additional information about the result of the action
@@ -170,7 +177,7 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 // A request may succeed in some stores and fail in others. In this case, the error will contain information
 // about each individual store failure.
 // Will always reject NSSaveChangesRequests.
-- (nullable __kindof NSPersistentStoreResult *)executeRequest:(NSPersistentStoreRequest*)request error:(NSError **)error NS_AVAILABLE(10_10, 8_0);
+- (nullable __kindof NSPersistentStoreResult *)executeRequest:(NSPersistentStoreRequest*)request error:(NSError **)error API_AVAILABLE(macosx(10.10),ios(8.0));
 
 - (void)insertObject:(NSManagedObject *)object;
 - (void)deleteObject:(NSManagedObject *)object;
@@ -202,11 +209,11 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 - (BOOL)save:(NSError **)error;
 
 /* calls -refreshObject:mergeChanges: on all currently registered objects with this context.  It handles dirtied objects and clearing the context reference queue */
-- (void)refreshAllObjects NS_AVAILABLE(10_11,8_3);
+- (void)refreshAllObjects API_AVAILABLE(macosx(10.11),ios(8.3));
 
-- (void)lock NS_DEPRECATED(10_4, 10_10, 3_0, 8_0, "Use a queue style context and -performBlockAndWait: instead");
-- (void)unlock NS_DEPRECATED(10_4, 10_10, 3_0, 8_0, "Use a queue style context and -performBlockAndWait: instead");
-- (BOOL)tryLock NS_DEPRECATED(10_4, 10_10, 3_0, 8_0, "Use a queue style context and -performBlock: instead");
+- (void)lock API_DEPRECATED( "Use a queue style context and -performBlockAndWait: instead", macosx(10.4,10.10), ios(3.0,8.0));
+- (void)unlock API_DEPRECATED( "Use a queue style context and -performBlockAndWait: instead", macosx(10.4,10.10), ios(3.0,8.0));
+- (BOOL)tryLock API_DEPRECATED( "Use a queue style context and -performBlock: instead", macosx(10.4,10.10), ios(3.0,8.0));
 
 // whether or not the context propagates deletes to related objects at the end of the event, or only at save time
 @property (nonatomic) BOOL propagatesDeletesAtEndOfEvent;   // The default is YES.
@@ -215,10 +222,10 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 @property (nonatomic) BOOL retainsRegisteredObjects;   // The default is NO.
 
 /*  set the rule to handle inaccessible faults.  If YES, then the managed object is marked deleted and all its properties, including scalars, nonnullable, and mandatory properties, will be nil or zero’d out.  If NO, the context will throw an exception. Managed objects that are inaccessible because their context is nil due to memory management issues will throw an exception regardless. */
-@property BOOL shouldDeleteInaccessibleFaults NS_AVAILABLE(10_11,9_0);
+@property BOOL shouldDeleteInaccessibleFaults API_AVAILABLE(macosx(10.11),ios(9.0));
 
 /*  this method will not be called from APIs which return an NSError like -existingObjectWithID:error: nor for managed objects with a nil context (e.g. the fault is inaccessible because the object or its context have been released) this method will not be called if Core Data determines there is an unambiguously correct action to recover.  This might happen if a fault was tripped during delete propagation.  In that case, the fault will simply be deleted.  triggeringProperty may be nil when either all properties are involved, or Core Data is unable to determine the reason for firing the fault. the default implementation logs and then returns the value of -shouldDeleteInaccessibleFaults. */
-- (BOOL)shouldHandleInaccessibleFault:(NSManagedObject*)fault forObjectID:(NSManagedObjectID*)oid triggeredByProperty:(nullable NSPropertyDescription*)property NS_AVAILABLE(10_11,9_0);
+- (BOOL)shouldHandleInaccessibleFault:(NSManagedObject*)fault forObjectID:(NSManagedObjectID*)oid triggeredByProperty:(nullable NSPropertyDescription*)property API_AVAILABLE(macosx(10.11),ios(9.0));
 
 // Staleness interval is the relative time until cached data should be considered stale. The value is applied on a per object basis. For example, a value of 300.0 informs the context to utilize cached information for no more than 5 minutes after that object was originally fetched. This does not affect objects currently in use. Principly, this controls whether fulfilling a fault uses data previously fetched by the application, or issues a new fetch.  It is a hint which may not be supported by all persistent store types.
 @property () NSTimeInterval stalenessInterval; // a negative value is considered infinite.  The default is infinite staleness.
@@ -227,18 +234,51 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 
 /* Converts the object IDs of the specified objects to permanent IDs.  This implementation will convert the object ID of each managed object in the specified array to a permanent ID.  Any object in the target array with a permanent ID will be ignored;  additionally, any managed object in the array not already assigned to a store will be assigned, based on the same rules Core Data uses for assignment during a save operation (first writable store supporting the entity, and appropriate for the instance and its related items.)  Although the object will have a permanent ID, it will still respond positively to -isInserted until it is saved.  If an error is encountered obtaining an identifier, the return value will be NO.
 */
-- (BOOL)obtainPermanentIDsForObjects:(NSArray<NSManagedObject *> *)objects error:(NSError **)error NS_AVAILABLE(10_5, 3_0);
+- (BOOL)obtainPermanentIDsForObjects:(NSArray<NSManagedObject *> *)objects error:(NSError **)error API_AVAILABLE(macosx(10.5),ios(3.0));
 
 /* Merges the changes specified in notification object received from another context's NSManagedObjectContextDidSaveNotification into the receiver.  This method will refresh any objects which have been updated in the other context, fault in any newly inserted objects, and invoke deleteObject: on those which have been deleted.  The developer is only responsible for the thread safety of the receiver.
 */
-- (void)mergeChangesFromContextDidSaveNotification:(NSNotification *)notification NS_AVAILABLE(10_5, 3_0);
+- (void)mergeChangesFromContextDidSaveNotification:(NSNotification *)notification API_AVAILABLE(macosx(10.5),ios(3.0));
 
 /* Similar to mergeChangesFromContextDidSaveNotification, this method handles changes from potentially other processes or serialized state.  It more efficiently
  * merges changes into multiple contexts, as well as nested context. The keys in the dictionary should be one those from an
  *  NSManagedObjectContextObjectsDidChangeNotification: NSInsertedObjectsKey, NSUpdatedObjectsKey, etc.
  *  the values should be an NSArray of either NSManagedObjectID or NSURL objects conforming to valid results from -URIRepresentation
  */
-+ (void)mergeChangesFromRemoteContextSave:(NSDictionary*)changeNotificationData intoContexts:(NSArray<NSManagedObjectContext*> *)contexts NS_AVAILABLE(10_11,9_0);
++ (void)mergeChangesFromRemoteContextSave:(NSDictionary*)changeNotificationData intoContexts:(NSArray<NSManagedObjectContext*> *)contexts API_AVAILABLE(macosx(10.11),ios(9.0));
+
+/* Return the query generation currently in use by this context. Will be one of the following:
+ * - nil, default value => this context is not using generational querying
+ * - an opaque token => specifies the generation of data this context is vending
+ *
+ * All child contexts will return nil.
+ */
+@property (nullable, nonatomic, strong, readonly) NSQueryGenerationToken *queryGenerationToken API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
+
+/* Set the query generation this context should use. Must be one of the following values:
+ * - nil => this context will not use generational querying
+ * - the value returned by +[NSQueryGenerationToken currentQueryGenerationToken] => this context will pin itself to the generation of the database when it first loads data
+ * - the result of calling -[NSManagedObjectContext queryGenerationToken] on another managed object context => this context will be set to whatever query generation the original context is currently using;
+ *
+ * Query generations are for fetched data only; they are not used during saving. If a pinned context saves,
+ * its query generation will be updated after the save. Executing a NSBatchUpdateRequest or NSBatchDeleteRequest 
+ * will not cause the query generation to advance, since these do not otherwise consider or affect the 
+ * managed object context's content.
+ *
+ * All nested contexts will defer to their parent context’s data. It is a programmer error to try to set
+ * the queryGenerationToken on a child context.
+ *
+ * Query generations are tracked across the union of stores. Additions to the persistent store coordinator's
+ * persistent stores will be ignored until the context's query generation is updated to include them.
+ *
+ * May partially fail if one or more stores being tracked by the token are removed from the persistent
+ * store coordinator.
+ */
+- (BOOL)setQueryGenerationFromToken:(nullable NSQueryGenerationToken *)generation error:(NSError **)error API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
+
+/* Whether the context automatically merges changes saved to its coordinator or parent context. Setting this property to YES when the context is pinned to a non-current query generation is not supported.
+ */
+@property (nonatomic) BOOL automaticallyMergesChangesFromParent API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
 
 @end
 

@@ -1,6 +1,6 @@
 /*	
     NSURLCache.h
-    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -125,8 +125,11 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
 }
 
 /*! 
-    @method sharedURLCache
-    @abstract Returns the shared NSURLCache instance.
+    @property sharedURLCache
+    @abstract Returns the shared NSURLCache instance or
+    sets the NSURLCache instance shared by all clients of
+    the current process. This will be the new object returned when
+    calls to the <tt>sharedURLCache</tt> method are made.
     @discussion Unless set explicitly through a call to
     <tt>+setSharedURLCache:</tt>, this method returns an NSURLCache
     instance created with the following default values:
@@ -139,23 +142,16 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
     constraints should find the default shared cache instance
     acceptable. If this default shared cache instance is not
     acceptable, <tt>+setSharedURLCache:</tt> can be called to set a
-    different NSURLCache instance to be returned from this method.
+    different NSURLCache instance to be returned from this method. 
+    Callers should take care to ensure that the setter is called
+    at a time when no other caller has a reference to the previously-set 
+    shared URL cache. This is to prevent storing cache data from 
+    becoming unexpectedly unretrievable.
     @result the shared NSURLCache instance.
 */
-+ (NSURLCache *)sharedURLCache;
-
-/*! 
-    @method setSharedURLCache:
-    @abstract Sets the NSURLCache instance shared by all clients of
-    the current process. This will be the new object returned when
-    calls to the <tt>sharedURLCache</tt> method are made.
-    @discussion Callers should take care to ensure that this method is called
-    at a time when no other caller has a reference to the previously-set shared
-    URL cache. This is to prevent storing cache data from becoming 
-    unexpectedly unretrievable.
-    @param cache the new shared NSURLCache instance.
-*/
-+ (void)setSharedURLCache:(NSURLCache *)cache;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, strong) NSURLCache *sharedURLCache;
+#endif
 
 /*! 
     @method initWithMemoryCapacity:diskCapacity:diskPath:
@@ -257,7 +253,7 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
 
 @interface NSURLCache (NSURLSessionTaskAdditions)
 - (void)storeCachedResponse:(NSCachedURLResponse *)cachedResponse forDataTask:(NSURLSessionDataTask *)dataTask NS_AVAILABLE(10_10, 8_0);
-- (void)getCachedResponseForDataTask:(NSURLSessionDataTask *)dataTask completionHandler:(void (^) (NSCachedURLResponse * __nullable cachedResponse))completionHandler NS_AVAILABLE(10_10, 8_0);
+- (void)getCachedResponseForDataTask:(NSURLSessionDataTask *)dataTask completionHandler:(void (^) (NSCachedURLResponse * _Nullable cachedResponse))completionHandler NS_AVAILABLE(10_10, 8_0);
 - (void)removeCachedResponseForDataTask:(NSURLSessionDataTask *)dataTask NS_AVAILABLE(10_10, 8_0);
 @end
 

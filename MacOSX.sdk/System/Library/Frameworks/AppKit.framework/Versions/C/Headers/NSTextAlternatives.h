@@ -1,12 +1,13 @@
 /*
 	NSTextAlternatives.h
 	Application Kit
-	Copyright (c) 2011-2015, Apple Inc.
+	Copyright (c) 2011-2016, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSNotification.h>
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -30,6 +31,6 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 @end
 
-APPKIT_EXTERN NSString * NSTextAlternativesSelectedAlternativeStringNotification NS_AVAILABLE_MAC(10_8); // @"NSAlternativeString"
+APPKIT_EXTERN NSNotificationName NSTextAlternativesSelectedAlternativeStringNotification NS_AVAILABLE_MAC(10_8); // @"NSAlternativeString"
 
 NS_ASSUME_NONNULL_END

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2016 Apple Inc. All rights reserved.
 
 */
 
@@ -42,6 +42,10 @@ AV_INIT_UNAVAILABLE
 				An object conforming to the AVAssetResourceLoaderDelegate protocol.
  @param			delegateQueue
 				A dispatch queue on which all delegate methods will be invoked.
+ @discussion
+  If you employ an AVAssetResourceLoader delegate that loads media data for playback, you should set the value of your AVPlayer’s automaticallyWaitsToMinimizeStalling property to NO. Allowing the value of automaticallyWaitsToMinimizeStalling to remain YES — its default value — when an AVAssetResourceLoader delegate is used for the loading of media data can result in poor start-up times for playback and poor recovery from stalls, because the behaviors provided by AVPlayer when automaticallyWaitsToMinimizeStalling has a value of YES depend on predictions of the future availability of media data that that do not function as expected when data is loaded via a client-controlled means, using the AVAssetResourceLoader delegate interface.
+
+  You can allow the value of automaticallyWaitsToMinimizeStalling to remain YES if you use an AVAssetResourceLoader delegate to manage content keys for FairPlay Streaming, to provide dynamically-generated master playlists for HTTP Live Streaming, or to respond to authentication challenges, but not to load media data for playback.
 */
 - (void)setDelegate:(nullable id <AVAssetResourceLoaderDelegate>)delegate queue:(nullable dispatch_queue_t)delegateQueue;
 
@@ -373,7 +377,7 @@ AV_INIT_UNAVAILABLE
  				If obtaining the streaming content key request fails, will be set to an instance of NSError describing the failure.
  @result		The key request data that must be transmitted to the key vendor to obtain the content key.
 */
-- (nullable NSData *)streamingContentKeyRequestDataForApp:(NSData *)appIdentifier contentIdentifier:(NSData *)contentIdentifier options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * __nullable * __nullable)outError;
+- (nullable NSData *)streamingContentKeyRequestDataForApp:(NSData *)appIdentifier contentIdentifier:(NSData *)contentIdentifier options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError;
 
 /*! 
  @method 		persistentContentKeyFromKeyVendorResponse:options:error:

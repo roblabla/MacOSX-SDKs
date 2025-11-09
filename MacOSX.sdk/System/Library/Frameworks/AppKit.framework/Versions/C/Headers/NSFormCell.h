@@ -1,7 +1,7 @@
 /*
 	NSFormCell.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -20,9 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 }
 
-- (instancetype)initTextCell:(nullable NSString *)aString;
+- (instancetype)initTextCell:(nullable NSString *)string NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initImageCell:(nullable NSImage *)image NS_UNAVAILABLE;
 
-- (CGFloat)titleWidth:(NSSize)aSize;
+- (CGFloat)titleWidth:(NSSize)size;
 @property CGFloat titleWidth;
 @property (copy) NSString *title;
 @property (strong) NSFont *titleFont;

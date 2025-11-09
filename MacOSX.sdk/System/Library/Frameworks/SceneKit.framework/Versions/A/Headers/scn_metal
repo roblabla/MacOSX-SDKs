@@ -11,7 +11,11 @@ enum {
     SCNVertexSemanticTexcoord0,
     SCNVertexSemanticTexcoord1,
     SCNVertexSemanticTexcoord2,
-    SCNVertexSemanticTexcoord3
+    SCNVertexSemanticTexcoord3,
+    SCNVertexSemanticTexcoord4,
+    SCNVertexSemanticTexcoord5,
+    SCNVertexSemanticTexcoord6,
+    SCNVertexSemanticTexcoord7
 };
 
 // This structure hold all the informations that are constant through a render pass
@@ -30,6 +34,10 @@ struct SCNSceneBuffer {
     float       sinTime;
     float       cosTime;
     float       random01;
+    // new in macOS 10.12 and iOS 10
+    float       environmentIntensity;
+    float4x4    inverseProjectionTransform;
+    float4x4    inverseViewProjectionTransform;
 };
 
 // In custom shaders or in shader modifiers, you also have access to node relative information.

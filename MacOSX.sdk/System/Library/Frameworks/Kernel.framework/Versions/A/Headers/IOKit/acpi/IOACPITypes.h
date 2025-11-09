@@ -31,6 +31,7 @@ extern const OSSymbol *        gIOACPIUniqueIDKey;
 extern const OSSymbol *        gIOACPIAddressKey;
 extern const OSSymbol *        gIOACPIDeviceStatusKey;
 
+#define kIOACPIInterruptTypeValid  (1 << 1)
 #pragma pack(1)
 
 struct IOACPIAddressSpaceDescriptor {

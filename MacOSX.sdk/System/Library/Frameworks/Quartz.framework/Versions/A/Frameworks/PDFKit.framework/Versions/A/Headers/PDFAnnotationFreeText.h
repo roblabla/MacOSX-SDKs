@@ -3,29 +3,25 @@
 // =====================================================================================================================
 
 
-#import <AppKit/AppKit.h>
+#import <PDFKit/PDFKitPlatform.h>
 #import <PDFKit/PDFAnnotation.h>
 
 
 @class PDFAnnotationFreeTextPrivateVars;
 
-
+NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
 @interface PDFAnnotationFreeText : PDFAnnotation <NSCopying, NSCoding>
 {
 @private
-    PDFAnnotationFreeTextPrivateVars *_pdfPriv2;
+    PDFAnnotationFreeTextPrivateVars *_private2;
 }
 
 // Font and font color associated with the text field.
-- (NSFont *) font;
-- (void) setFont: (NSFont *) font;
+- (PDFKitPlatformFont *) font;
+- (void) setFont: (PDFKitPlatformFont *) font;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
-- (NSColor *) fontColor;
-- (void) setFontColor: (NSColor *) color;
-
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+- (PDFKitPlatformColor *) fontColor;
+- (void) setFontColor: (PDFKitPlatformColor *) color;
 
 // Alignment of text within annotation bounds.  Supported: NSLeftTextAlignment, NSRightTextAlignment and 
 // NSCenterTextAlignment.

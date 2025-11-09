@@ -3,7 +3,7 @@
 	
 	Framework:  AVKit
 	
-	Copyright 2013-2015 Apple Inc. All rights reserved.
+	Copyright © 2013-2016 Apple Inc. All rights reserved.
 	
 	To report bugs, go to:  http://developer.apple.com/bugreporter/
 	

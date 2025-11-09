@@ -1,11 +1,12 @@
 /*	
     NSHTTPCookieStorage.h
-    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
     
     Public header file.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSNotification.h>
 
 @class NSArray<ObjectType>;
 @class NSHTTPCookie;
@@ -49,13 +50,15 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
 }
 
 /*!
-    @method sharedHTTPCookieStorage
+    @property sharedHTTPCookieStorage
     @abstract Get the shared cookie storage in the default location.
     @result The shared cookie storage
     @discussion Starting in OS X 10.11, each app has its own sharedHTTPCookieStorage singleton, 
     which will not be shared with other applications.
 */
-+ (NSHTTPCookieStorage *)sharedHTTPCookieStorage;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property(class, readonly, strong) NSHTTPCookieStorage *sharedHTTPCookieStorage;
+#endif
 
 /*!
     @method sharedCookieStorageForGroupContainerIdentifier:
@@ -147,7 +150,7 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
 
 @interface NSHTTPCookieStorage (NSURLSessionTaskAdditions)
 - (void)storeCookies:(NSArray<NSHTTPCookie *> *)cookies forTask:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
-- (void)getCookiesForTask:(NSURLSessionTask *)task completionHandler:(void (^) (NSArray<NSHTTPCookie *> * __nullable cookies))completionHandler NS_AVAILABLE(10_10, 8_0);
+- (void)getCookiesForTask:(NSURLSessionTask *)task completionHandler:(void (^) (NSArray<NSHTTPCookie *> * _Nullable cookies))completionHandler NS_AVAILABLE(10_10, 8_0);
 @end
 
 /*!
@@ -156,12 +159,12 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
     distributed notification center whenever the accept cookies
     preference is changed
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookieManagerAcceptPolicyChangedNotification;
+FOUNDATION_EXPORT NSNotificationName const NSHTTPCookieManagerAcceptPolicyChangedNotification;
 
 /*!
     @const NSHTTPCookieManagerCookiesChangedNotification
     @abstract Notification sent when the set of cookies changes
 */
-FOUNDATION_EXPORT NSString * const NSHTTPCookieManagerCookiesChangedNotification;
+FOUNDATION_EXPORT NSNotificationName const NSHTTPCookieManagerCookiesChangedNotification;
 
 NS_ASSUME_NONNULL_END

@@ -245,7 +245,7 @@ CG_EXTERN CFDictionaryRef  CGPointCreateDictionaryRepresentation(
    `point'. Returns true on success; false otherwise. */
 
 CG_EXTERN bool CGPointMakeWithDictionaryRepresentation(
-    CFDictionaryRef __nullable dict, CGPoint * __nullable point)
+    CFDictionaryRef cg_nullable dict, CGPoint * cg_nullable point)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return a dictionary representation of `size'. */
@@ -258,7 +258,7 @@ CG_EXTERN CFDictionaryRef  CGSizeCreateDictionaryRepresentation(CGSize size)
    `size'. Returns true on success; false otherwise. */
 
 CG_EXTERN bool CGSizeMakeWithDictionaryRepresentation(
-    CFDictionaryRef __nullable dict, CGSize * __nullable size)
+    CFDictionaryRef cg_nullable dict, CGSize * cg_nullable size)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Return a dictionary representation of `rect'. */
@@ -271,7 +271,7 @@ CG_EXTERN CFDictionaryRef  CGRectCreateDictionaryRepresentation(CGRect)
    `rect'. Returns true on success; false otherwise. */
 
 CG_EXTERN bool CGRectMakeWithDictionaryRepresentation(
-    CFDictionaryRef __nullable dict, CGRect * __nullable rect)
+    CFDictionaryRef cg_nullable dict, CGRect * cg_nullable rect)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /*** Definitions of inline functions. ***/

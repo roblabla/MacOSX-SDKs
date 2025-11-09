@@ -1,7 +1,7 @@
 /*
 	NSObjectController.h
 	Application Kit
-	Copyright (c) 2002-2015, Apple Inc.
+	Copyright (c) 2002-2016, Apple Inc.
 	All rights reserved.
  */
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObjectController : NSController {
 @private
-    void *_reserved3;
+    void *_reserved3 __unused;
     id _managedProxy;
     struct __objectControllerFlags {
         unsigned int _editable:1;

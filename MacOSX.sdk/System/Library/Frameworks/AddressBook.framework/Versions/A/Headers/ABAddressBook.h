@@ -52,8 +52,8 @@ extern NSString *ABMultiValueIdentifiersErrorKey AVAILABLE_MAC_OS_X_VERSION_10_7
 @private
     id                   _reserved8;
     
-    void                *_reserved2 __unused;
-    void                *_reserved3 __unused;
+    void                *_reserved2;
+    void                *_reserved3;
     id                   _reserved4;
     NSMutableDictionary *_tableSchemas;
     NSMutableDictionary *_reserved5 __unused;
@@ -63,7 +63,7 @@ extern NSString *ABMultiValueIdentifiersErrorKey AVAILABLE_MAC_OS_X_VERSION_10_7
 
     id                   _reserved1;
 	
-    void                *_reserved6 __unused;
+    void                *_reserved6;
     void                *_reserved7 __unused;
 
     struct __ABBookflags {

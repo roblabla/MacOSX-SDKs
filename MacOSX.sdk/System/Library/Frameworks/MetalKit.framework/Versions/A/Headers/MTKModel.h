@@ -61,7 +61,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @discussion Memory backing these buffer are Metal buffers.  Model I/O will load index and vertex data from from a model asset directly in to the Metal buffer.
  */
 NS_CLASS_AVAILABLE(10_11, 9_0)
-@interface MTKMeshBuffer : NSObject <MDLMeshBuffer>
+@interface MTKMeshBuffer : NSObject <MDLMeshBuffer, MDLNamed>
 
 /*!
  @method init
@@ -169,7 +169,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @abstract Name from the original MDLSubmesh object.
  @discussion Although not directly used by this object, the application may use this to identify the submesh in the renderer/scene/world.
  */
-@property (nonatomic, nonnull) NSString *name;
+@property (nonatomic, copy, nonnull) NSString *name;
 
 @end
 
@@ -241,9 +241,9 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 /*!
  @property name
  @abstract Name of the mesh copies from the originating Model I/O mesh.
- @discussion Can be used by the app to identiry the mesh in its scene/world/renderer etc.
+ @discussion Can be used by the app to identify the mesh in its scene/world/renderer etc.
  */
-@property (nonatomic, nonnull) NSString *name;
+@property (nonatomic, copy, nonnull) NSString *name;
 
 @end
 
@@ -261,11 +261,25 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 MTK_EXTERN MDLVertexDescriptor* __nonnull MTKModelIOVertexDescriptorFromMetal(MTLVertexDescriptor* __nonnull metalDescriptor);
 
 /*!
+ @function MTKModelIOVertexDescriptorFromMetalWithError
+ @abstract Partially converts a Metal vertex descriptor to a Model I/O vertex descriptor
+ @discussion This method can only set vertex format, offset, bufferIndex, and stride information in the produced Model I/O vertex descriptor.  It does not add any semantic information such at attributes names.  Names must be set in the returned Model I/O vertex descriptor before it can be applied to a a Model I/O mesh. If error is nonnull, and the conversion cannot be made, it will be set.
+ */
+MTK_EXTERN MDLVertexDescriptor* __nonnull MTKModelIOVertexDescriptorFromMetalWithError(MTLVertexDescriptor* __nonnull metalDescriptor, NSError * __nullable * __nullable error);
+
+/*!
  @function MTKMetalVertexDescriptorFromModelIO
  @abstract Partially converts a Model I/O vertex descriptor to a Metal vertex descriptor
  @discussion This method can only set vertex format, offset, bufferIndex, and stride information in the produced Metal vertex descriptor. It simply copies attributes 1 for 1. Thus attributes in the given Model I/O vertex descriptor must be arranged in the correct order for the resulting descriptor to properly map mesh data to vertex shader inputs.  Layout stepFunction and stepRates for the resulting MTLVertexDescriptor must also be set by application.
  */
 MTK_EXTERN MTLVertexDescriptor* __nonnull MTKMetalVertexDescriptorFromModelIO(MDLVertexDescriptor* __nonnull modelIODescriptor);
+
+/*!
+ @function MTKMetalVertexDescriptorFromModelIOWithError
+ @abstract Partially converts a Model I/O vertex descriptor to a Metal vertex descriptor
+ @discussion This method can only set vertex format, offset, bufferIndex, and stride information in the produced Metal vertex descriptor. It simply copies attributes 1 for 1. Thus attributes in the given Model I/O vertex descriptor must be arranged in the correct order for the resulting descriptor to properly map mesh data to vertex shader inputs.  Layout stepFunction and stepRates for the resulting MTLVertexDescriptor must also be set by application.  If error is nonnull, and the conversion cannot be made, it will be set.
+ */
+MTK_EXTERN MTLVertexDescriptor* __nonnull MTKMetalVertexDescriptorFromModelIOWithError(MDLVertexDescriptor* __nonnull modelIODescriptor, NSError * __nullable * __nullable error);
 
 /*!
  @function MTKModelIOVertexFormatFromMetal

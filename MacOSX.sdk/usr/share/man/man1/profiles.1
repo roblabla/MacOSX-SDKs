@@ -1,8 +1,8 @@
 .\" see 'man mdoc' for syntax examples
 .\" this should go in /usr/share/man/man1/
-.Dd December 16, 2014
+.Dd June 23, 2016
 .Dt profiles 1
-.Os MacOSX
+.Os macOS
 .Sh NAME
 .Nm profiles
 .Nd Profiles Tool
@@ -23,7 +23,7 @@
 .Op Fl o Ar output_file_path
 .Op Fl Y Ar shortname
 .Oc
-.Op Fl PHDdCchfvxVzY
+.Op Fl PHDdCchfvxVzYe
 .Pp
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 .Nm
@@ -76,8 +76,14 @@ Deletes all existing configuration profiles.  It will not update any existing ma
 Deletes all existing provisioning profiles. (Requires root privileges)
 .It Fl s
 Sets profile for startup. (Requires root privileges)
+.It Fl S
+Sync up and remove any configuration profiles that aren't assigned to any current local user. (Requires root privileges)
 .It Fl Y
 Specify the shortname of a local user that will be enrolled with MDM if the configuration profile being installed contains a MDM payload. Will only be used if the profile is being installed as root.
+.It Fl W
+Attempt to renew the certificates in an installed profile.
+.It Fl e
+Print the Device Enrollment configuration, if any, for the computer. Can be combined with the -o option to write output to a plist.
 .El
 .Pp
 .Sh EXAMPLES

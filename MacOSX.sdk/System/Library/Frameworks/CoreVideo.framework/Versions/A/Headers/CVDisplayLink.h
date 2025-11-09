@@ -138,7 +138,7 @@ CV_EXPORT CGDirectDisplayID CVDisplayLinkGetCurrentCGDisplay( CVDisplayLinkRef C
     @param	userInfo  User data for the callback to identify the context.
     @result     CVReturn. kCVReturnSuccess if successfull.
 */
-CV_EXPORT CVReturn CVDisplayLinkSetOutputCallback( CVDisplayLinkRef CV_NONNULL displayLink, CVDisplayLinkOutputCallback CV_NONNULL callback, void * CV_NULLABLE userInfo ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVDisplayLinkSetOutputCallback( CVDisplayLinkRef CV_NONNULL displayLink, CVDisplayLinkOutputCallback CV_NULLABLE callback, void * CV_NULLABLE userInfo ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
 	 @function   CVDisplayLinkSetOutputHandler

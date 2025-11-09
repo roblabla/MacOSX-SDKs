@@ -15,7 +15,7 @@ extern "C" {
 
 OPENGL_ASSUME_NONNULL_BEGIN
 
-typedef struct __IOSurface *IOSurfaceRef;
+typedef struct  OPENGL_BRIDGED_TYPE(id) __IOSurface *IOSurfaceRef OPENGL_SWIFT_NAME(IOSurfaceRef);
 
 /*!
             @function  CGLTexImageIOSurface2D

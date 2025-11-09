@@ -34,7 +34,7 @@
 
 #pragma pack(push, 2)
 
-enum {
+CF_ENUM(OSType) {
   cAEList                       = 'list', /*  0x6c697374  */
   cApplication                  = 'capp', /*  0x63617070  */
   cArc                          = 'carc', /*  0x63617263  */
@@ -57,7 +57,7 @@ enum {
   cGroupedGraphic               = 'cpic' /*  0x63706963  */
 };
 
-enum {
+CF_ENUM(OSType) {
   cInsertionLoc                 = 'insl', /*  0x696e736c  */
   cInsertionPoint               = 'cins', /*  0x63696e73  */
   cIntlText                     = 'itxt', /*  0x69747874  */
@@ -80,7 +80,7 @@ enum {
   cOval                         = 'covl' /*  0x636f766c  */
 };
 
-enum {
+CF_ENUM(OSType) {
   cParagraph                    = 'cpar', /*  0x63706172  */
   cPICT                         = 'PICT', /*  0x50494354  */
   cPixel                        = 'cpxl', /*  0x6370786c  */
@@ -103,7 +103,7 @@ enum {
   cType                         = 'type' /*  0x74797065  */
 };
 
-enum {
+CF_ENUM(OSType) {
   cVersion                      = 'vers', /*  0x76657273  */
   cWindow                       = 'cwin', /*  0x6377696e  */
   cWord                         = 'cwor', /*  0x63776f72  */
@@ -125,7 +125,7 @@ enum {
   kAEArrowBothEnds              = 'arbo' /*  0x6172626f  */
 };
 
-enum {
+CF_ENUM(OSType) {
   kAEAsk                        = 'ask ', /*  0x61736b20  */
   kAEBefore                     = 'befo', /*  0x6265666f  */
   kAEBeginning                  = 'bgng', /*  0x62676e67  */
@@ -148,7 +148,7 @@ enum {
   kAEDelete                     = 'delo' /*  0x64656c6f  */
 };
 
-enum {
+CF_ENUM(OSType) {
   kAEDoObjectsExist             = 'doex', /*  0x646f6578  */
   kAEDoScript                   = 'dosc', /*  0x646f7363  */
   kAEDrag                       = 'drag', /*  0x64726167  */
@@ -171,7 +171,7 @@ enum {
   kAEGetInfoSelection           = 'sinf' /*  0x73696e66  */
 };
 
-enum {
+CF_ENUM(OSType) {
   kAEGetPrivilegeSelection      = 'sprv', /*  0x73707276  */
   kAEGetSuiteInfo               = 'gtsi', /*  0x67747369  */
   kAEGreaterThan                = '>   ', /*  0x3e202020  */
@@ -194,7 +194,7 @@ enum {
   kAENoArrow                    = 'arno' /*  0x61726e6f  */
 };
 
-enum {
+CF_ENUM(OSType) {
   kAENonmodifiable              = 'nmod', /*  0x6e6d6f64  */
   kAEOpen                       = 'odoc', /*  0x6f646f63  */
   kAEOpenSelection              = 'sope', /*  0x736f7065  */
@@ -217,7 +217,7 @@ enum {
   kAEQDNotCopy                  = 'ncpy' /*  0x6e637079  */
 };
 
-enum {
+CF_ENUM(OSType) {
   kAEQDNotOr                    = 'ntor', /*  0x6e746f72  */
   kAEQDNotXor                   = 'nxor', /*  0x6e786f72  */
   kAEQDOr                       = 'or  ', /*  0x6f722020  */
@@ -241,7 +241,7 @@ enum {
   kAESetData                    = 'setd' /*  0x73657464  */
 };
 
-enum {
+CF_ENUM(OSType) {
   kAESetPosition                = 'posn', /*  0x706f736e  */
   kAEShadow                     = 'shad', /*  0x73686164  */
   kAEShowClipboard              = 'shcl', /*  0x7368636c  */
@@ -263,7 +263,7 @@ enum {
 };
 
 /* events that can be sent to the "system" process (eg, loginwindow) on OS X 10.2 or later */
-enum {
+CF_ENUM(OSType) {
   kAELogOut                     = 'logo',
   kAEReallyLogOut               = 'rlgo',
   kAEShowRestartDialog          = 'rrst',
@@ -271,7 +271,7 @@ enum {
 };
 
 /* EventRecord Classes and EventIDs */
-enum {
+CF_ENUM(OSType) {
   kAEMouseClass                 = 'mous',
   kAEDown                       = 'down',
   kAEUp                         = 'up  ',
@@ -297,12 +297,12 @@ enum {
   kAEHighLevel                  = 'high'
 };
 
-enum {
+CF_ENUM(AEKeyword) {
   keyAEAngle                    = 'kang', /*  0x6b616e67  */
   keyAEArcAngle                 = 'parc' /*  0x70617263  */
 };
 
-enum {
+CF_ENUM(AEKeyword) {
   keyAEBaseAddr                 = 'badd', /*  0x62616464  */
   keyAEBestType                 = 'pbst', /*  0x70627374  */
   keyAEBgndColor                = 'kbcl', /*  0x6b62636c  */
@@ -325,7 +325,7 @@ enum {
   keyAEDoRotate                 = 'kdrt' /*  0x6b647274  */
 };
 
-enum {
+CF_ENUM(AEKeyword) {
   keyAEDoScale                  = 'ksca', /*  0x6b736361  */
   keyAEDoTranslate              = 'ktra', /*  0x6b747261  */
   keyAEEditionFileLoc           = 'eloc', /*  0x656c6f63  */
@@ -348,7 +348,7 @@ enum {
   keyAEKeyForms                 = 'keyf' /*  0x6b657966  */
 };
 
-enum {
+CF_ENUM(AEKeyword) {
   keyAEKeyword                  = 'kywd', /*  0x6b797764  */
   keyAELevel                    = 'levl', /*  0x6c65766c  */
   keyAELineArrow                = 'arro', /*  0x6172726f  */
@@ -371,7 +371,7 @@ enum {
   keyAEPosition                 = 'kpos' /*  0x6b706f73  */
 };
 
-enum {
+CF_ENUM(AEKeyword) {
   keyAEPropData                 = 'prdt', /*  0x70726474  */
   keyAEProperties               = 'qpro', /*  0x7170726f  */
   keyAEProperty                 = 'kprp', /*  0x6b707270  */
@@ -395,7 +395,7 @@ enum {
   keyAEStyles                   = 'ksty' /*  0x6b737479  */
 };
 
-enum {
+CF_ENUM(AEKeyword) {
   keyAESuiteID                  = 'suit', /*  0x73756974  */
   keyAEText                     = 'ktxt', /*  0x6b747874  */
   keyAETextColor                = 'ptxc', /*  0x70747863  */
@@ -415,7 +415,7 @@ enum {
   keyAEWritingCode              = 'wrcd' /*  0x77726364  */
 };
 
-enum {
+CF_ENUM(AEKeyword) {
   keyMiscellaneous              = 'fmsc', /*  0x666d7363  */
   keySelection                  = 'fsel', /*  0x6673656c  */
   keyWindow                     = 'kwnd', /*  0x6b776e64  */
@@ -432,7 +432,7 @@ enum {
   keyHighLevelID                = 'hid '
 };
 
-enum {
+CF_ENUM(OSType) {
   pArcAngle                     = 'parc', /*  0x70617263  */
   pBackgroundColor              = 'pbcl', /*  0x7062636c  */
   pBackgroundPattern            = 'pbpt', /*  0x70627074  */
@@ -455,7 +455,7 @@ enum {
   pFont                         = 'font' /*  0x666f6e74  */
 };
 
-enum {
+CF_ENUM(OSType) {
   pFormula                      = 'pfor', /*  0x70666f72  */
   pGraphicObjects               = 'gobs', /*  0x676f6273  */
   pHasCloseBox                  = 'hclb', /*  0x68636c62  */
@@ -478,7 +478,7 @@ enum {
   pName                         = 'pnam' /*  0x706e616d  */
 };
 
-enum {
+CF_ENUM(OSType) {
   pNewElementLoc                = 'pnel', /*  0x706e656c  */
   pPenColor                     = 'ppcl', /*  0x7070636c  */
   pPenPattern                   = 'pppa', /*  0x70707061  */
@@ -501,7 +501,7 @@ enum {
   pTextPointSize                = 'ptps' /*  0x70747073  */
 };
 
-enum {
+CF_ENUM(OSType) {
   pTextStyles                   = 'txst', /*  0x74787374  */
   pTransferMode                 = 'pptm', /*  0x7070746d  */
   pTranslation                  = 'ptrs', /*  0x70747273  */
@@ -512,7 +512,7 @@ enum {
   pVisible                      = 'pvis' /*  0x70766973  */
 };
 
-enum {
+CF_ENUM(DescType) {
   typeAEText                    = 'tTXT', /*  0x74545854  */
   typeArc                       = 'carc', /*  0x63617263  */
   typeBest                      = 'best', /*  0x62657374  */
@@ -529,7 +529,7 @@ enum {
   typeEventInfo                 = 'evin' /*  0x6576696e  */
 };
 
-enum {
+CF_ENUM(DescType) {
   typeFinderWindow              = 'fwin', /*  0x6677696e  */
   typeFixedPoint                = 'fpnt', /*  0x66706e74  */
   typeFixedRectangle            = 'frct', /*  0x66726374  */
@@ -553,7 +553,7 @@ enum {
   typePict                      = 'PICT' /*  0x50494354  */
 };
 
-enum {
+CF_ENUM(DescType) {
   typePixelMap                  = 'cpix', /*  0x63706978  */
   typePixMapMinus               = 'tpmm', /*  0x74706d6d  */
   typePolygon                   = 'cpgn', /*  0x6370676e  */
@@ -576,14 +576,14 @@ enum {
   typeTextStyles                = 'tsty' /*  0x74737479  */
 };
 
-enum {
+CF_ENUM(DescType) {
   typeTIFF                      = 'TIFF', /*  0x54494646  */
   typeJPEG                      = 'JPEG',
   typeGIF                       = 'GIFf',
   typeVersion                   = 'vers' /*  0x76657273  */
 };
 
-enum {
+CF_ENUM(OSType) {
   kAEMenuClass                  = 'menu',
   kAEMenuSelect                 = 'mhit',
   kAEMouseDown                  = 'mdwn',
@@ -593,7 +593,7 @@ enum {
   kAEPromise                    = 'prom'
 };
 
-enum {
+CF_ENUM(AEKeyword) {
   keyMenuID                     = 'mid ',
   keyMenuItem                   = 'mitm',
   keyCloseAllWindows            = 'caw ',
@@ -602,12 +602,12 @@ enum {
   keyLocalWhere                 = 'lwhr'
 };
 
-enum {
+CF_ENUM(DescType) {
   typeHIMenu                    = 'mobj',
   typeHIWindow                  = 'wobj'
 };
 
-enum {
+CF_ENUM(OSType) {
   kAEQuitPreserveState          = 'stat', /* in a kAEQuitApplication event, this optional parameter hints the application as to whether it should write out */
                                         /* persistent state which may be restored on the next launch. The possible values are kAENo ( the default ), or kAEYes */
   kAEQuitReason                 = 'why?' /* in a kAEQuitApplication event, this parameter if present is the reason the quit is being sent.  The possible values are kAEQuitAll, kAEShutDown, kAERestart, kAEReallyLogOut */
@@ -636,7 +636,7 @@ enum {
   kAEZoomOut                    = 8
 };
 
-enum {
+CF_ENUM(OSType) {
   kTextServiceClass             = 'tsvc',
   kUpdateActiveInputArea        = 'updt', /* update the active input area */
   kShowHideInputWindow          = 'shiw', /* show or hide the input window */
@@ -747,7 +747,7 @@ enum {
 
 #endif  /* OLDROUTINENAMES */
 
-enum {
+CF_ENUM(AEKeyword) {
   keyAEHiliteRange              = 'hrng', /* typeTextRangeArray for System 7, typeHiliteRangeArray for System 8 */
   keyAEPinRange                 = 'pnrg', /* typeTextRange for System 7, typeTextRegionRange for System 8   */
   keyAEClauseOffsets            = 'clau', /* typeOffsetArray for System 7, typeClauseOffsetArray for System 8 */
@@ -766,7 +766,7 @@ enum {
 
 #endif  /* OLDROUTINENAMES */
 
-enum {
+CF_ENUM(DescType) {
                                         /* AppleScript 1.3: Unit types */
   typeMeters                    = 'metr', /* Base Unit */
   typeInches                    = 'inch',
@@ -797,7 +797,7 @@ enum {
   typeDegreesK                  = 'degk'
 };
 
-enum {
+CF_ENUM(OSType) {
                                         /* AppleScript 1.3: Folder Actions */
   kFAServerApp                  = 'ssrv', /* Creator code for Folder Actions Server*/
   kDoFolderActionEvent          = 'fola', /* Event the Finder sends to the Folder Actions FBA*/
@@ -818,19 +818,19 @@ enum {
 };
 
 /* AppleScript 1.3 Internet Suite */
-enum {
+CF_ENUM(OSType) {
                                         /* Suite code */
   kAEInternetSuite              = 'gurl',
   kAEISWebStarSuite             = 0x575757BD
 };
 
-enum {
+CF_ENUM(OSType) {
                                         /* Events */
   kAEISGetURL                   = 'gurl',
   KAEISHandleCGI                = 'sdoc'
 };
 
-enum {
+CF_ENUM(OSType) {
                                         /* Classes */
   cURL                          = 'url ',
   cInternetAddress              = 'IPAD',
@@ -838,7 +838,7 @@ enum {
   cFTPItem                      = 'ftp '
 };
 
-enum {
+CF_ENUM(OSType) {
                                         /* Parameters */
   kAEISHTTPSearchArgs           = 'kfor',
   kAEISPostArgs                 = 'post',
@@ -859,7 +859,7 @@ enum {
   kAEISFullRequest              = 'Kfrq'
 };
 
-enum {
+CF_ENUM(OSType) {
                                         /* Properties */
   pScheme                       = 'pusc',
   pHost                         = 'HOST',
@@ -872,7 +872,7 @@ enum {
   pFTPKind                      = 'kind'
 };
 
-enum {
+CF_ENUM(OSType) {
                                         /* Scheme enumerations */
   eScheme                       = 'esch',
   eurlHTTP                      = 'http', /* RFC 2068 */
@@ -900,7 +900,7 @@ enum {
   eurlUnknown                   = 'url?'
 };
 
-enum {
+CF_ENUM(OSType) {
                                         /* AppleScript 1.3: Connectivity Suite in aeut */
   kConnSuite                    = 'macc',
   cDevSpec                      = 'cdev',
@@ -994,7 +994,7 @@ enum {
   eVideoOut                     = 'ecvo'
 };
 
-enum {
+CF_ENUM(OSType) {
                                         /* AppleScript 1.3: Keystroke class */
   cKeystroke                    = 'kprs',
   pKeystrokeKey                 = 'kMsg',
@@ -1041,7 +1041,7 @@ enum {
   eF15Key                       = 0x6B737100
 };
 
-enum {
+CF_ENUM(AEKeyword) {
   keyAELaunchedAsLogInItem      = 'lgit', /* If present in a kAEOpenApplication event, application was launched as a login item and probably shouldn't open up untitled documents, etc. Mac OS X 10.4 and later. */
   keyAELaunchedAsServiceItem    = 'svit' /* If present in a kAEOpenApplication event, application was launched as a service item and probably shouldn't open up untitled documents, etc. Mac OS X 10.4 and later. */
 };

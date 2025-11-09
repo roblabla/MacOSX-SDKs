@@ -31,7 +31,6 @@
 
 NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMHTMLElement : DOMElement
-@property (copy) NSString *idName;
 @property (copy) NSString *title;
 @property (copy) NSString *lang;
 @property (copy) NSString *dir;
@@ -39,9 +38,10 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (copy) NSString *accessKey NS_AVAILABLE_MAC(10_8);
 @property (copy) NSString *innerText;
 @property (copy) NSString *outerText;
-@property (readonly, strong) DOMHTMLCollection *children;
 @property (copy) NSString *contentEditable;
 @property (readonly) BOOL isContentEditable;
+@property (copy) NSString *idName;
+@property (readonly, strong) DOMHTMLCollection *children;
 @property (readonly, copy) NSString *titleDisplayString NS_AVAILABLE_MAC(10_5);
 
 - (void)click NS_AVAILABLE_MAC(10_8);

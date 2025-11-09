@@ -1,9 +1,11 @@
 /*	NSNetServices.h
-        Copyright (c) 2002-2015, Apple Inc. All rights reserved.
+        Copyright (c) 2002-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
+#import <Foundation/NSError.h>
+#import <Foundation/NSRunLoop.h>
 
 @class NSArray<ObjectType>, NSData, NSDictionary<KeyType, ObjectType>, NSInputStream, NSNumber, NSOutputStream, NSRunLoop, NSString;
 @protocol NSNetServiceDelegate, NSNetServiceBrowserDelegate;
@@ -13,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Error constants
 
 FOUNDATION_EXPORT NSString * const NSNetServicesErrorCode;
-FOUNDATION_EXPORT NSString * const NSNetServicesErrorDomain;
+FOUNDATION_EXPORT NSErrorDomain const NSNetServicesErrorDomain;
 
 typedef NS_ENUM(NSInteger, NSNetServicesError) {
     
@@ -77,6 +79,7 @@ typedef NS_OPTIONS(NSUInteger, NSNetServiceOptions) {
 
 #pragma mark -
 
+__WATCHOS_PROHIBITED
 @interface NSNetService : NSObject {
 @private
     id _netService;
@@ -96,8 +99,8 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 /* NSNetService instances may be scheduled on NSRunLoops to operate in different modes, or in other threads. It is generally not necessary to schedule NSNetServices in other threads. NSNetServices are scheduled in the current thread's NSRunLoop in the NSDefaultRunLoopMode when they are created.
 */
-- (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode;
-- (void)removeFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode;
+- (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSRunLoopMode)mode;
+- (void)removeFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSRunLoopMode)mode;
 
 /* Set a delegate to receive publish, resolve, or monitor events.
  */
@@ -166,7 +169,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 /* Retrieves streams from the NSNetService instance. The instance's delegate methods are not called. Returns YES if the streams requested are created successfully. Returns NO if or any reason the stream could not be created. If only one stream is desired, pass NULL for the address of the other stream. The streams that are created are not open, and are not scheduled in any run loop for any mode.
 */
-- (BOOL)getInputStream:(out __strong NSInputStream * __nullable * __nullable)inputStream outputStream:(out __strong NSOutputStream * __nullable * __nullable)outputStream;
+- (BOOL)getInputStream:(out __strong NSInputStream * _Nullable * _Nullable)inputStream outputStream:(out __strong NSOutputStream * _Nullable * _Nullable)outputStream;
 
 /* Sets the TXT record of the NSNetService instance that has been or will be published. Pass nil to remove the TXT record from the instance.
 */
@@ -189,6 +192,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 #pragma mark -
 
+__WATCHOS_PROHIBITED
 @interface NSNetServiceBrowser : NSObject {
 @private
     id _netServiceBrowser;
@@ -208,8 +212,8 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 /* NSNetServiceBrowser instances may be scheduled on NSRunLoops to operate in different modes, or in other threads. It is generally not necessary to schedule NSNetServiceBrowsers in other threads. NSNetServiceBrowsers are scheduled in the current thread's NSRunLoop in the NSDefaultRunLoopMode when they are created.
 */
-- (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode;
-- (void)removeFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode;
+- (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSRunLoopMode)mode;
+- (void)removeFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSRunLoopMode)mode;
 
 /* Starts a search for domains that are browsable via Bonjour and the computer's network configuration. Discovered domains are reported to the delegate's -netServiceBrowser:didFindDomain:moreComing: method. There may be more than one browsable domain.
 */
@@ -231,6 +235,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 #pragma mark -
 
+__WATCHOS_PROHIBITED
 @protocol NSNetServiceDelegate <NSObject>
 @optional
 
@@ -283,6 +288,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 #pragma mark -
 
+__WATCHOS_PROHIBITED
 @protocol NSNetServiceBrowserDelegate <NSObject>
 @optional
 

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2016 Apple Inc. All rights reserved.
 
 */
 
@@ -90,10 +90,63 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @end
 
+/*
+ @category	   AVVideoCompositionColorimetery
+ @abstract
+    Indicates the color space of the frames output from the video composition.
+ @discussion
+    Collectively the properties colorPrimaries, colorYCbCrMatrix, and colorTransferFunction define the color space that the rendered frames will be tagged with. For custom video compositing these properties are also used to specify the required color space of the source frames.
+
+    For examples of common color spaces see AVVideoSettings.h.
+
+    How to preserve the color space of the source frames:
+ 
+        Decide which color space to be preserved by examining the source asset's video tracks. Copy the source track's primaries, matrix and transfer function into the video composition's colorPrimaries, colorYCbCrMatrix and colorTransferFunction respectively.
+
+        - When using custom video compositing
+			Setting these properties will cause source frames to be converted into the specified color space and tagged as such. New frames allocated using -[AVVideoCompositionRenderContext newPixelBuffer] will also be tagged correctly.
+
+        - When using Core Image via videoCompositionWithAsset:options:applyingCIFiltersWithHandler:
+			Setting these properties will cause source frames to be converted into the specified color space and tagged as such. The source frames provided as CIImages will have the appropriate CGColorSpace applied. The color space is preserved when the output CIImage is finally rendered internally.
+
+        - When using basic compositing (i.e. AVVideoCompositionLayerInstruction)
+			Setting these properties will ensure that the internal compositor renders (or passes through) frames in specified color space and are tagged as such.
+*/
+@interface AVVideoComposition (AVVideoCompositionColorimetery)
+
+/*
+ @property     colorPrimaries
+ @abstract
+    Rendering will use these primaries and frames will be tagged as such. If the value of this property is nil then the source's primaries will be propagated and used.
+ @discussion
+    Default is nil. Valid values are those suitable for AVVideoColorPrimariesKey. Generally set as a triple along with colorYCbCrMatrix and colorTransferFunction.
+*/
+@property (nonatomic, readonly, nullable) NSString *colorPrimaries NS_AVAILABLE(10_12, 10_0);
+
+/*
+ @property     colorYCbCrMatrix
+ @abstract
+    Rendering will use this matrix and frames will be tagged as such. If the value of this property is nil then the source's matrix will be propagated and used.
+ @discussion
+    Default is nil. Valid values are those suitable for AVVideoYCbCrMatrixKey. Generally set as a triple along with colorPrimaries and colorTransferFunction.
+*/
+@property (nonatomic, readonly, nullable) NSString *colorYCbCrMatrix NS_AVAILABLE(10_12, 10_0);
+
+/*
+ @property     colorTransferFunction
+ @abstract
+    Rendering will use this transfer function and frames will be tagged as such. If the value of this property is nil then the source's transfer function will be propagated and used.
+ @discussion
+    Default is nil. Valid values are those suitable for AVVideoTransferFunctionKey. Generally set as a triple along with colorYCbCrMatrix and colorYCbCrMatrix.
+*/
+@property (nonatomic, readonly, nullable) NSString *colorTransferFunction NS_AVAILABLE(10_12, 10_0);
+
+@end
+
 @interface AVVideoComposition (AVVideoCompositionFiltering)
 
 /*  
- @method		videoCompositionWithAsset:options:applyingFiltersWithHandler:
+ @method		videoCompositionWithAsset:options:applyingCIFiltersWithHandler:
  @abstract
 	Returns a new instance of AVVideoComposition with values and instructions that will apply the specified handler block to video frames represented as instances of CIImage.
  @param			asset		An instance of AVAsset. For best performance, ensure that the duration and tracks properties of the asset are already loaded before invoking this method.
@@ -200,10 +253,63 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @end
 
+/*
+ @category	   AVMutableVideoCompositionColorimetery
+ @abstract
+    Indicates the color space of the frames output from the video composition.
+ @discussion
+    Collectively the properties colorPrimaries, colorYCbCrMatrix, and colorTransferFunction define the color space that the rendered frames will be tagged with. For custom video compositing these properties are also used to specify the required color space of the source frames.
+
+    For examples of common color spaces see AVVideoSettings.h.
+
+    How to preserve the color space of the source frames:
+ 
+        Decide which color space to be preserved by examining the source asset's video tracks. Copy the source track's primaries, matrix and transfer function into the video composition's colorPrimaries, colorYCbCrMatrix and colorTransferFunction respectively.
+
+        - When using custom video compositing
+			Setting these properties will cause source frames to be converted into the specified color space and tagged as such. New frames allocated using -[AVVideoCompositionRenderContext newPixelBuffer] will also be tagged correctly.
+
+        - When using Core Image via videoCompositionWithAsset:options:applyingCIFiltersWithHandler:
+			Setting these properties will cause source frames to be converted into the specified color space and tagged as such. The source frames provided as CIImages will have the appropriate CGColorSpace applied. The color space is preserved when the output CIImage is finally rendered internally.
+
+        - When using basic compositing (i.e. AVVideoCompositionLayerInstruction)
+			Setting these properties will ensure that the internal compositor renders (or passes through) frames in specified color space and are tagged as such.
+*/
+@interface AVMutableVideoComposition (AVMutableVideoCompositionColorimetery)
+
+/*
+ @property     colorPrimaries
+ @abstract
+    Rendering will use these primaries and frames will be tagged as such. If the value of this property is nil then the source's primaries will be propagated and used.
+ @discussion
+    Default is nil. Valid values are those suitable for AVVideoColorPrimariesKey. Generally set as a triple along with colorYCbCrMatrix and colorTransferFunction.
+*/
+@property (nonatomic, copy, nullable) NSString *colorPrimaries NS_AVAILABLE(10_12, 10_0);
+
+/*
+ @property     colorYCbCrMatrix
+ @abstract
+    Rendering will use this matrix and frames will be tagged as such. If the value of this property is nil then the source's matrix will be propagated and used.
+ @discussion
+    Default is nil. Valid values are those suitable for AVVideoYCbCrMatrixKey. Generally set as a triple along with colorPrimaries and colorTransferFunction.
+*/
+@property (nonatomic, copy, nullable) NSString *colorYCbCrMatrix NS_AVAILABLE(10_12, 10_0);
+
+/*
+ @property     colorTransferFunction
+ @abstract
+    Rendering will use this transfer function and frames will be tagged as such. If the value of this property is nil then the source's transfer function will be propagated and used.
+ @discussion
+    Default is nil. Valid values are those suitable for AVVideoTransferFunctionKey. Generally set as a triple along with colorYCbCrMatrix and colorYCbCrMatrix.
+*/
+@property (nonatomic, copy, nullable) NSString *colorTransferFunction NS_AVAILABLE(10_12, 10_0);
+
+@end
+
 @interface AVMutableVideoComposition (AVMutableVideoCompositionFiltering)
 
 /*  
- @method		videoCompositionWithAsset:options:applyingFiltersWithHandler:
+ @method		videoCompositionWithAsset:options:applyingCIFiltersWithHandler:
  @abstract
 	Returns a new instance of AVMutableVideoComposition with values and instructions that will apply the specified handler block to video frames represented as instances of CIImage.
  @param			asset		An instance of AVAsset. For best performance, ensure that the duration and tracks properties of the asset are already loaded before invoking this method.
@@ -264,7 +370,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* Indicates the background color of the composition. Solid BGRA colors only are supported; patterns and other color refs that are not supported will be ignored.
    If the background color is not specified the video compositor will use a default backgroundColor of opaque black.
    If the rendered pixel buffer does not have alpha, the alpha value of the backgroundColor will be ignored. */
-@property (nonatomic, readonly, retain, nullable) __attribute__((NSObject)) CGColorRef backgroundColor CF_RETURNS_RETAINED;
+@property (nonatomic, readonly, retain, nullable) __attribute__((NSObject)) CGColorRef backgroundColor;
 
 /* Provides an array of instances of AVVideoCompositionLayerInstruction that specify how video frames from source tracks should be layered and composed.
    Tracks are layered in the composition according to the top-to-bottom order of the layerInstructions array; the track with trackID of the first instruction
@@ -317,7 +423,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* Indicates the background color of the composition. Solid BGRA colors only are supported; patterns and other color refs that are not supported will be ignored.
    If the background color is not specified the video compositor will use a default backgroundColor of opaque black.
    If the rendered pixel buffer does not have alpha, the alpha value of the backgroundColor will be ignored. */
-@property (nonatomic, retain, nullable) __attribute__((NSObject)) CGColorRef backgroundColor CF_RETURNS_RETAINED;
+@property (nonatomic, retain, nullable) __attribute__((NSObject)) CGColorRef backgroundColor;
 
 /* Provides an array of instances of AVVideoCompositionLayerInstruction that specify how video frames from source tracks should be layered and composed.
    Tracks are layered in the composition according to the top-to-bottom order of the layerInstructions array; the track with trackID of the first instruction

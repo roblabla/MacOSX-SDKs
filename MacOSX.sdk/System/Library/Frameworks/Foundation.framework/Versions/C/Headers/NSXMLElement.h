@@ -1,5 +1,5 @@
 /*	NSXMLElement.h
-	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (nullable instancetype)initWithXMLString:(NSString *)string error:(NSError **)error NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSUInteger)options;
+- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSXMLNodeOptions)options;
 
 #if 0
 #pragma mark --- Elements by name ---

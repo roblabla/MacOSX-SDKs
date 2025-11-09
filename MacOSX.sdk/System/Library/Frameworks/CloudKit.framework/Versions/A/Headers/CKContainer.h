@@ -7,13 +7,16 @@
 
 #import <Foundation/Foundation.h>
 #import <CloudKit/CKDefines.h>
+#import <CloudKit/CKDatabase.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class CKDatabase, CKOperation, CKRecordID, CKDiscoveredUserInfo;
+@class CKDatabase, CKOperation, CKRecordID, CKUserIdentity, CKShareParticipant, CKDiscoveredUserInfo, CKShare, CKShareMetadata;
 
 // This constant represents the current user's ID for zone ID
-CK_EXTERN NSString * const CKOwnerDefaultName NS_AVAILABLE(10_10, 8_0);
+CK_EXTERN NSString * const CKCurrentUserDefaultName NS_AVAILABLE(10_12, 10_0);
+
+CK_EXTERN NSString * const CKOwnerDefaultName NS_DEPRECATED(10_10, 10_12, 8_0, 10_0, "Use CKCurrentUserDefaultName instead");
 
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface CKContainer : NSObject
@@ -39,7 +42,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 @interface CKContainer (Database)
 
-/* Public vs. Private databases:
+/* Database properties:
  Records in a public database
  - By default are world readable, owner writable.
  - Can be locked down by Roles, a process done in the Developer Portal, a web interface.  Roles are not present in the client API.
@@ -49,9 +52,17 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  - By default are only owner readable and owner writable.
  - Are not visible to the application developer via the Developer Portal.
  - Are counted towards the owner's iCloud account storage quota.
+ Records in a shared database
+ - Are available to share participants based on the permissions of the enclosing CKShare
+ - Are not visible to the application developer via the Developer Portal.
+ - Are counted towards the originating owner's iCloud account storage quota.
  */
 @property (nonatomic, readonly) CKDatabase *privateCloudDatabase;
 @property (nonatomic, readonly) CKDatabase *publicCloudDatabase;
+@property (nonatomic, readonly) CKDatabase *sharedCloudDatabase NS_AVAILABLE(10_12, 10_0);
+
+/* Convenience method, will return a database that's pointer-equal to one of the above properties */
+- (CKDatabase *)databaseWithDatabaseScope:(CKDatabaseScope)databaseScope NS_AVAILABLE(10_12, 10_0);
 
 @end
 
@@ -74,7 +85,7 @@ CK_EXTERN NSString * const CKAccountChangedNotification NS_AVAILABLE(10_11, 9_0)
 
 @interface CKContainer (AccountStatus)
 
-- (void)accountStatusWithCompletionHandler:(void (^)(CKAccountStatus accountStatus, NSError * __nullable error))completionHandler;
+- (void)accountStatusWithCompletionHandler:(void (^)(CKAccountStatus accountStatus, NSError * _Nullable error))completionHandler;
 
 @end
 
@@ -94,7 +105,7 @@ typedef NS_ENUM(NSInteger, CKApplicationPermissionStatus) {
     CKApplicationPermissionStatusGranted               = 3,
 } NS_ENUM_AVAILABLE(10_10, 8_0);
 
-typedef void(^CKApplicationPermissionBlock)(CKApplicationPermissionStatus applicationPermissionStatus, NSError * __nullable error);
+typedef void(^CKApplicationPermissionBlock)(CKApplicationPermissionStatus applicationPermissionStatus, NSError * _Nullable error);
 
 @interface CKContainer (ApplicationPermission)
 
@@ -108,14 +119,44 @@ typedef void(^CKApplicationPermissionBlock)(CKApplicationPermissionStatus applic
 /* If there is no iCloud account configured, or if access is restricted, a CKErrorNotAuthenticated error will be returned. 
    This work is treated as having NSQualityOfServiceUserInitiated quality of service.
  */
-- (void)fetchUserRecordIDWithCompletionHandler:(void (^)(CKRecordID * __nullable recordID, NSError * __nullable error))completionHandler;
+- (void)fetchUserRecordIDWithCompletionHandler:(void (^)(CKRecordID * _Nullable recordID, NSError * _Nullable error))completionHandler;
 
 /* This fetches all user records that match an entry in the user's address book.
- CKDiscoverAllContactsOperation and CKDiscoverUserInfosOperation are the more configurable,
+ CKDiscoverAllContactsOperation and CKDiscoverUserIdentityOperation are the more configurable,
  CKOperation-based alternatives to these methods */
-- (void)discoverAllContactUserInfosWithCompletionHandler:(void (^)(NSArray <CKDiscoveredUserInfo *> * __nullable userInfos, NSError * __nullable error))completionHandler;
-- (void)discoverUserInfoWithEmailAddress:(NSString *)email completionHandler:(void (^)(CKDiscoveredUserInfo * __nullable userInfo, NSError * __nullable error))completionHandler;
-- (void)discoverUserInfoWithUserRecordID:(CKRecordID *)userRecordID completionHandler:(void (^)(CKDiscoveredUserInfo * __nullable userInfo, NSError * __nullable error))completionHandler;
+- (void)discoverAllIdentitiesWithCompletionHandler:(void (^)(NSArray<CKUserIdentity *> * _Nullable userIdentities, NSError * _Nullable error))completionHandler NS_AVAILABLE(10_12, 10_0) __TVOS_UNAVAILABLE;
+- (void)discoverUserIdentityWithEmailAddress:(NSString *)email completionHandler:(void (^)(CKUserIdentity * _Nullable userInfo, NSError * _Nullable error))completionHandler NS_AVAILABLE(10_12, 10_0);
+- (void)discoverUserIdentityWithPhoneNumber:(NSString *)phoneNumber completionHandler:(void (^)(CKUserIdentity * _Nullable userInfo, NSError * _Nullable error))completionHandler NS_AVAILABLE(10_12, 10_0);
+- (void)discoverUserIdentityWithUserRecordID:(CKRecordID *)userRecordID completionHandler:(void (^)(CKUserIdentity * _Nullable userInfo, NSError * _Nullable error))completionHandler NS_AVAILABLE(10_12, 10_0);
 
+- (void)discoverAllContactUserInfosWithCompletionHandler:(void (^)(NSArray<CKDiscoveredUserInfo *> * _Nullable userInfos, NSError * _Nullable error))completionHandler __TVOS_UNAVAILABLE NS_DEPRECATED(10_10, 10_12, 8_0, 10_0, "Use -[CKContainer discoverAllIdentitiesWithCompletionHandler:] instead");
+- (void)discoverUserInfoWithEmailAddress:(NSString *)email completionHandler:(void (^)(CKDiscoveredUserInfo * _Nullable userInfo, NSError * _Nullable error))completionHandler NS_DEPRECATED(10_10, 10_12, 8_0, 10_0, "Use -[CKContainer discoverUserIdentityWithEmailAddress:completionHandler:] instead");
+- (void)discoverUserInfoWithUserRecordID:(CKRecordID *)userRecordID completionHandler:(void (^)(CKDiscoveredUserInfo * _Nullable userInfo, NSError * _Nullable error))completionHandler NS_DEPRECATED(10_10, 10_12, 8_0, 10_0, "Use -[CKContainer discoverUserIdentityWithUserRecordID:completionHandler:] instead");
+
+@end
+
+@interface CKContainer (Sharing)
+
+/* Fetches share participants matching the provided info .
+ CKFetchShareParticipantsOperation is the more configurable, CKOperation-based alternative to these methods. */
+- (void)fetchShareParticipantWithEmailAddress:(NSString *)emailAddress completionHandler:(void (^)(CKShareParticipant * _Nullable shareParticipant, NSError * _Nullable error))completionHandler NS_AVAILABLE(10_12, 10_0);
+- (void)fetchShareParticipantWithPhoneNumber:(NSString *)phoneNumber completionHandler:(void (^)(CKShareParticipant * _Nullable shareParticipant, NSError *_Nullable error))completionHandler NS_AVAILABLE(10_12, 10_0);
+- (void)fetchShareParticipantWithUserRecordID:(CKRecordID *)userRecordID completionHandler:(void (^)(CKShareParticipant *_Nullable shareParticipant, NSError *_Nullable error))completionHandler NS_AVAILABLE(10_12, 10_0);
+
+- (void)fetchShareMetadataWithURL:(NSURL *)url completionHandler:(void (^)(CKShareMetadata *_Nullable metadata, NSError * _Nullable error))completionHandler NS_AVAILABLE(10_12, 10_0);
+- (void)acceptShareMetadata:(CKShareMetadata *)metadata completionHandler:(void (^)(CKShare *_Nullable acceptedShare, NSError *_Nullable error))completionHandler NS_AVAILABLE(10_12, 10_0);
+
+@end
+
+@interface CKContainer (CKLongLivedOperations)
+/* 
+ Long lived CKOperations returned by this call must be started on an operation queue.
+ Remember to set the callback blocks before starting the operation.
+ If an operation has already completed against the server, and is subsequently resumed, that operation will replay all of
+  its callbacks from the start of the operation, but the request will not be re-sent to the server.
+ If a long lived operation is cancelled or finishes completely it is no longer returned by these calls.
+ */
+- (void)fetchAllLongLivedOperationIDsWithCompletionHandler:(void (^)(NSArray<NSString *> * _Nullable outstandingOperationIDs, NSError * _Nullable error))completionHandler NS_AVAILABLE(10_12, 9_3);
+- (void)fetchLongLivedOperationWithID:(NSString *)operationID completionHandler:(void (^)(CKOperation * _Nullable outstandingOperation, NSError * _Nullable error))completionHandler NS_AVAILABLE(10_12, 9_3);
 @end
 NS_ASSUME_NONNULL_END

@@ -185,8 +185,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 @property (readonly) MTLTextureType textureType; // texture1D, texture2D...
 @property (readonly) MTLDataType    textureDataType; // half, float, int, or uint.
 
+@property (readonly) BOOL           isDepthTexture NS_AVAILABLE(10_12, 10_0); // true for depth textures
+
 @end
 NS_ASSUME_NONNULL_END
-
-
-

@@ -2,7 +2,7 @@
  *  @header Alpha.h
  *  vImage Framework
  *
- *  @copyright Copyright (c) 2003-2015 by Apple Inc. All rights reserved.
+ *  @copyright Copyright (c) 2003-2016 by Apple Inc. All rights reserved.
  *
  *  See vImage/vImage.h for more on how to better view the headerdoc documentation for functions declared herein.
  *
@@ -784,7 +784,7 @@ vImage_Error vImagePremultipliedAlphaBlendWithPermute_RGBA8888(const vImage_Buff
  * @/textblock</pre>
  *
  */
-vImage_Error	vImagePremultipliedAlphaBlendMultiply_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 );
+vImage_Error	vImagePremultipliedAlphaBlendMultiply_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 ) __WATCHOS_AVAILABLE(__WATCHOS_2_0);
 
 /*!
  * @function vImagePremultipliedAlphaBlendScreen_RGBA8888
@@ -826,7 +826,7 @@ vImage_Error	vImagePremultipliedAlphaBlendMultiply_RGBA8888( const vImage_Buffer
  * @/textblock</pre>
  *
  */
-vImage_Error	vImagePremultipliedAlphaBlendScreen_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 );
+vImage_Error	vImagePremultipliedAlphaBlendScreen_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 ) __WATCHOS_AVAILABLE(__WATCHOS_2_0);
 
 /*!
  * @function vImagePremultipliedAlphaBlendDarken_RGBA8888
@@ -869,7 +869,7 @@ vImage_Error	vImagePremultipliedAlphaBlendScreen_RGBA8888( const vImage_Buffer *
  * @/textblock</pre>
  *
  */
-vImage_Error	vImagePremultipliedAlphaBlendDarken_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 );
+vImage_Error	vImagePremultipliedAlphaBlendDarken_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 ) __WATCHOS_AVAILABLE(__WATCHOS_2_0);
 
 /*!
  * @function vImagePremultipliedAlphaBlendLighten_RGBA8888
@@ -911,7 +911,7 @@ vImage_Error	vImagePremultipliedAlphaBlendDarken_RGBA8888( const vImage_Buffer *
  *          kvImageRoiLargerThanInputBuffer     The height and width of the result must be less than or equal to each of the input buffers.
  * @/textblock</pre>
  */
-vImage_Error	vImagePremultipliedAlphaBlendLighten_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 );
+vImage_Error	vImagePremultipliedAlphaBlendLighten_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 ) __WATCHOS_AVAILABLE(__WATCHOS_2_0);
 
 
     

@@ -35,6 +35,44 @@ GAMECONTROLLER_EXTERN NSString *const GCControllerDidConnectNotification;
 GAMECONTROLLER_EXTERN NSString *const GCControllerDidDisconnectNotification;
 
 /**
+ A view controller subclass that allows fine grained control of the user interface system's handling
+ of game controller events. Set an instance of this class as your root view controller if you intend
+ to use GCController APIs for handling game controllers.
+ */
+#if TARGET_OS_IPHONE || TARGET_OS_TV
+NS_CLASS_AVAILABLE(10_11, 9_0)
+@interface GCEventViewController : UIViewController
+#else
+NS_CLASS_AVAILABLE(10_11, 9_0)
+@interface GCEventViewController : NSViewController
+#endif
+
+/**
+ Controllers can be used to control the general UIKit user interface and for many views that is
+ the default behavior. By using a controller event view controller you get fine grained control
+ over whether the controller events go trough the UIEvent & UIResponder chain, or if they are
+ decoupled from the UI and all incoming data is served via GCController.
+
+ Defaults to NO - suppressing UIEvents from game controllers and presenting them via the GCController
+ API whilst this controller's view or any of it's subviews are the first responders. If you are not
+ using any UIView components or UIEvents in your application you should leave this as NO and process
+ your game controller events via the normal GCController API.
+ 
+ If set to YES the controller input will start flowing through UIEvent and the UIResponder
+ chain will be used. This gives you fine grained control over the event handling of the
+ controlled view and its subviews. You should stop using GCController instances and the corresponding
+ profiles if you no longer need to read input from them.
+ 
+ Note that unlike UIView.userInteractionEnabled this only controls the flow of game controller events.
+ 
+ @see GCController
+ @see UIView.userInteractionEnabled
+ */
+@property (nonatomic, assign) BOOL controllerUserInteractionEnabled;
+
+@end
+
+/**
  This is the player index that a connected controller will have if it has never been assigned a player index on the current system.
  Controllers retain the player index they have been assigned between game sessions, so if you wish to unset the player index of a
  controller set it back to this value.
@@ -103,15 +141,13 @@ GAMECONTROLLER_EXPORT
 @property (nonatomic, readonly, getter = isAttachedToDevice) BOOL attachedToDevice;
 
 /**
- A player index for the controller, defaults to GCControllerPlayerIndexUnset, unless the controller previously had
- a player index assigned to it on the current user's system.
+ A player index for the controller, defaults to GCControllerPlayerIndexUnset.
  
  This can be set both for the application to keep track of controllers and as a signal to make a controller display a player
  index on a set of LEDs or some other mechanism.
  
- A controller is not guranteed to have a visual display of the playerIndex, but the API will keep track of the playerIndex
- for a controller while connected and in between being disconnected and connected again. Thus playerIndex persists for a controller
- with regards to a system. This makes it useful for persisting player-controller assignments across game sessions.
+ A controller is not guranteed to have a visual display of the playerIndex, playerIndex does not persist for a controller
+ with regards to a system.
  
  Negative values less than GCControllerPlayerIndexUnset will just map back to GCControllerPlayerIndexUnset when read back.
  */
@@ -134,6 +170,7 @@ GAMECONTROLLER_EXPORT
  @see motion
  */
 @property (nonatomic, retain, readonly, nullable) GCGamepad *gamepad;
+@property (nonatomic, retain, readonly, nullable) GCMicroGamepad *microGamepad;
 @property (nonatomic, retain, readonly, nullable) GCExtendedGamepad *extendedGamepad;
 
 /**

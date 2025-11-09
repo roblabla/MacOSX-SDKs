@@ -74,9 +74,9 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 - (NSString *)toString;
 - (void)detach;
 - (DOMDocumentFragment *)createContextualFragment:(NSString *)html NS_AVAILABLE_MAC(10_5);
-- (BOOL)intersectsNode:(DOMNode *)refNode NS_AVAILABLE_MAC(10_5);
 - (short)compareNode:(DOMNode *)refNode NS_AVAILABLE_MAC(10_5);
 - (short)comparePoint:(DOMNode *)refNode offset:(int)offset NS_AVAILABLE_MAC(10_5);
+- (BOOL)intersectsNode:(DOMNode *)refNode NS_AVAILABLE_MAC(10_5);
 - (BOOL)isPointInRange:(DOMNode *)refNode offset:(int)offset NS_AVAILABLE_MAC(10_5);
 @end
 

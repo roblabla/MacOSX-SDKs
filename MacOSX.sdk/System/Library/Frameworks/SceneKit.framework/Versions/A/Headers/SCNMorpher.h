@@ -1,7 +1,7 @@
 //
 //  SCNMorpher.h
 //
-//  Copyright (c) 2013-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -9,17 +9,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class SCNGeometry;
+
 /*!
  @class SCNMorpher
  @abstract SCNMorpher controls the deformation of morphed geometries
  */
 
 typedef NS_ENUM(NSInteger, SCNMorpherCalculationMode) {
-    SCNMorpherCalculationModeNormalized, // (1 - w0 - w1 - ...) * BaseMesh + w0 * Target0 + w1 * Target1 + ...
-    SCNMorpherCalculationModeAdditive    // BaseMesh + w0 * Target0 + w1 * Target1 + ...
+    SCNMorpherCalculationModeNormalized = 0, // (1 - w0 - w1 - ...) * BaseMesh + w0 * Target0 + w1 * Target1 + ...
+    SCNMorpherCalculationModeAdditive   = 1  // BaseMesh + w0 * Target0 + w1 * Target1 + ...
 };
 
-NS_CLASS_AVAILABLE(10_9, 8_0)
+API_AVAILABLE(macosx(10.9))
 @interface SCNMorpher : NSObject <SCNAnimatable, NSSecureCoding>
 
 /*!

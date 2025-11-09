@@ -1,7 +1,7 @@
 /*
  NSSaveChangesRequest.h
  Core Data
- Copyright (c) 2004-2015, Apple Inc.
+ Copyright (c) 2004-2016, Apple Inc.
  All rights reserved.
  */
 
@@ -14,8 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSPersistentStoreRequest;
 @class NSManagedObject;
 
-NS_CLASS_AVAILABLE(10_7,5_0)
+API_AVAILABLE(macosx(10.7),ios(5.0))
 @interface NSSaveChangesRequest : NSPersistentStoreRequest {
+#if (!__OBJC2__)
 @private
     NSSet *_insertedObjects;
     NSSet *_updatedObjects;
@@ -23,6 +24,7 @@ NS_CLASS_AVAILABLE(10_7,5_0)
     NSSet* _optimisticallyLockedObjects;
 	uintptr_t _flags;
 	void* _reserved1;
+#endif
 }
 
 // Default initializer.

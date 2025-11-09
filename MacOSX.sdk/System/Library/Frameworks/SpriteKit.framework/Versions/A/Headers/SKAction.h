@@ -149,6 +149,11 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
 + (SKAction *)scaleXTo:(CGFloat)scale duration:(NSTimeInterval)sec;
 + (SKAction *)scaleYTo:(CGFloat)scale duration:(NSTimeInterval)sec;
 
+/**
+ Adjust the sprite's xScale & yScale to achieve the desired size (in parent's coordinate space)
+ */
++ (SKAction *)scaleToSize:(CGSize)size duration:(NSTimeInterval)sec NS_AVAILABLE(10_12, 10_0);
+
 /** Creates an action that runs a collection of actions sequentially
  @param sequence An array of SKAction objects
  

@@ -1,5 +1,5 @@
 /*	NSSpellServer.h
-	Copyright (c) 1990-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1990-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -81,7 +81,7 @@ The result should be an array of NSTextCheckingResult objects, of the spelling, 
 
 - (nullable NSArray<NSString *> *)spellServer:(NSSpellServer *)sender suggestCompletionsForPartialWordRange:(NSRange)range inString:(NSString *)string language:(NSString *)language;
 
-- (NSRange)spellServer:(NSSpellServer *)sender checkGrammarInString:(NSString *)stringToCheck language:(nullable NSString *)language details:(NSArray<NSDictionary<NSString *, id> *> * __nullable * __nullable)details NS_AVAILABLE(10_5, NA);
+- (NSRange)spellServer:(NSSpellServer *)sender checkGrammarInString:(NSString *)stringToCheck language:(nullable NSString *)language details:(NSArray<NSDictionary<NSString *, id> *> * _Nullable * _Nullable)details NS_AVAILABLE(10_5, NA);
 
 /* Keys for the dictionaries in the details array. */
 FOUNDATION_EXPORT NSString *const NSGrammarRange NS_AVAILABLE(10_5, NA);

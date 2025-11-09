@@ -87,7 +87,7 @@ enum
 	kCMMediaType_ClosedCaption		= 'clcp',
 	kCMMediaType_Subtitle			= 'sbtl',
 	kCMMediaType_TimeCode			= 'tmcd',
-	kCMMediaType_Metadata			= 'meta'
+	kCMMediaType_Metadata			= 'meta',
 };
 
 /*! 
@@ -658,6 +658,7 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureVerticalOffset 
 #define kCMFormatDescriptionKey_CleanApertureVerticalOffset		kCVImageBufferCleanApertureVerticalOffsetKey	// CFNumber
 
 // These additional keys are used to record the precise numerator and denominator in cases where the number is not an integer.
+// NOTE: Some modules only read the float-valued keys, so if you set any of the ...Rational keys, you should also set the corresponding floating-point keys.
 CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureWidthRational									// CFArray of 2 CFNumbers: numerator, denominator
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureHeightRational									// CFArray of 2 CFNumbers: numerator, denominator
@@ -715,6 +716,8 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_UseGamma __OSX_
 #define kCMFormatDescriptionTransferFunction_UseGamma			kCVImageBufferTransferFunction_UseGamma			// CFString
 CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_ITU_R_2020										// same as kCVImageBufferTransferFunction_ITU_R_2020
 							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_SMPTE_ST_428_1									// same as kCVImageBufferTransferFunction_SMPTE_ST_428_1
+							__OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_10_0);
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_GammaLevel __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 #define kCMFormatDescriptionExtension_GammaLevel				kCVImageBufferGammaLevelKey						// CFNumber describing the gamma level, used in absence of (or ignorance of) kCMFormatDescriptionExtension_TransferFunction
@@ -963,12 +966,12 @@ CM_EXPORT
 CGRect CMVideoFormatDescriptionGetCleanAperture( 
 		CMVideoFormatDescriptionRef CM_NONNULL videoDesc,		/*! @param videoDesc
 																	FormatDescription being interrogated. */
-		Boolean originIsAtTopLeft )								/*! @paramÊoriginIsAtTopLeft
+		Boolean originIsAtTopLeft )								/*! @paramÂ originIsAtTopLeft
 																	Pass true if the CGRect will be used in an environment
 																	where (0,0) is at the top-left corner of an enclosing rectangle
 																	and y coordinates increase as you go down.
-																	Pass false if the CGRect will be used inÊan environment 
-																	where (0,0) is at the bottom-left corner of an enclosing rectangleÊ
+																	Pass false if the CGRect will be used inÂ an environment 
+																	where (0,0) is at the bottom-left corner of an enclosing rectangleÂ 
 																	and y coordinates increase as you go up. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
@@ -1138,7 +1141,7 @@ enum
 #endif
 {
     kCMTextFormatType_QTText           = 'text',
-    kCMTextFormatType_3GText           = 'tx3g'
+    kCMTextFormatType_3GText           = 'tx3g',
 };
 
 /*!
@@ -1301,14 +1304,14 @@ CM_EXPORT
 OSStatus CMTextFormatDescriptionGetDefaultTextBox(
 	CMFormatDescriptionRef CM_NONNULL desc,		/*! @param desc
 													FormatDescription being interrogated. */
-	Boolean originIsAtTopLeft,					/*! @paramÊoriginIsAtTopLeft
+	Boolean originIsAtTopLeft,					/*! @paramÂ originIsAtTopLeft
 													Pass true if the CGRect will be used in an environment
 													where (0,0) is at the top-left corner of an enclosing rectangle
 													and y coordinates increase as you go down.
-													Pass false if the CGRect will be used inÊan environment
+													Pass false if the CGRect will be used inÂ an environment
 													where (0,0) is at the bottom-left corner of an enclosing rectangle
 													and y coordinates increase as you go up. */
-	CGFloat heightOfTextTrack,					/*! @paramÊheightOfTextTrack
+	CGFloat heightOfTextTrack,					/*! @paramÂ heightOfTextTrack
 													If originIsAtTopLeft is false, pass the height of the enclosing text track or destination.
 													This value will be used to properly compute the default text box for the given origin.
 													Ignored if originIsAtTopLeft is true. */
@@ -1550,6 +1553,8 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtensionKey_MetadataKeyTable
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_StructuralDependency	// CFDictionary
 							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_SetupData	// CFData
+							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 
 CM_EXPORT const CFStringRef kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag	// CFBoolean
 							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
@@ -1561,6 +1566,8 @@ CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey
 CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag	// CFString in BCP 47 format
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency	// CFDictionary
+							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData				// CFData
 							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 
 CM_ASSUME_NONNULL_END

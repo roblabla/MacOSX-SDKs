@@ -1,7 +1,7 @@
 /*
     NSManagedObjectID.h
     Core Data
-    Copyright (c) 2004-2015, Apple Inc.
+    Copyright (c) 2004-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSURL;
 
 // Managed object IDs are opaque identifiers for managed objects.
-NS_CLASS_AVAILABLE(10_4,3_0)
+API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSManagedObjectID : NSObject <NSCopying> {
 }
 

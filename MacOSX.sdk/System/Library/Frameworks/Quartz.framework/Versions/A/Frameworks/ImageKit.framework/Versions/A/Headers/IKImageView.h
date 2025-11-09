@@ -38,7 +38,7 @@ extern NSString *const IKOverlayTypeImage;
  @property delegate
  @abstract Specifies the delegate object of the receiver.
  */
-@property(assign) id delegate;
+@property(assign) IBOutlet id delegate;
 
 /*!
  @property zoomFactor

@@ -1,6 +1,6 @@
 /* CoreAnimation - CATextLayer.h
 
-   Copyright (c) 2006-2015, Apple Inc.
+   Copyright (c) 2006-2016, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -11,6 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 @interface CATextLayer : CALayer
 {
 @private
@@ -67,25 +68,25 @@ NS_ASSUME_NONNULL_BEGIN
 /* Truncation modes. */
 
 CA_EXTERN NSString * const kCATruncationNone
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_3_2);
+    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
 CA_EXTERN NSString * const kCATruncationStart
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_3_2);
+    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
 CA_EXTERN NSString * const kCATruncationEnd
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_3_2);
+    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
 CA_EXTERN NSString * const kCATruncationMiddle
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_3_2);
+    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
 
 /* Alignment modes. */
 
 CA_EXTERN NSString * const kCAAlignmentNatural
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_3_2);
+    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
 CA_EXTERN NSString * const kCAAlignmentLeft
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_3_2);
+    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
 CA_EXTERN NSString * const kCAAlignmentRight
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_3_2);
+    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
 CA_EXTERN NSString * const kCAAlignmentCenter
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_3_2);
+    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
 CA_EXTERN NSString * const kCAAlignmentJustified
-    __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_3_2);
+    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
 
 NS_ASSUME_NONNULL_END

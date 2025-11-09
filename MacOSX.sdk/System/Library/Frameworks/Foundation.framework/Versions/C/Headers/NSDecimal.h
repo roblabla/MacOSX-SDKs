@@ -1,5 +1,5 @@
 /*	NSDecimal.h
-	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2016, Apple Inc. All rights reserved.
 */
 
 #include <limits.h>
@@ -84,6 +84,6 @@ FOUNDATION_EXPORT NSCalculationError NSDecimalPower(NSDecimal *result, const NSD
 
 FOUNDATION_EXPORT NSCalculationError NSDecimalMultiplyByPowerOf10(NSDecimal *result, const NSDecimal *number, short power, NSRoundingMode roundingMode);
 
-FOUNDATION_EXPORT NSString *NSDecimalString(const NSDecimal *dcm, id __nullable locale);
+FOUNDATION_EXPORT NSString *NSDecimalString(const NSDecimal *dcm, id _Nullable locale);
 
 NS_ASSUME_NONNULL_END

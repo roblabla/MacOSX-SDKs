@@ -2,7 +2,7 @@
  *  BasicImageTypes.h
  *  vImage Framework
  *
- *  Copyright (c) 2004-2015 by Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2016 by Apple Inc. All rights reserved.
  *
  */
 

@@ -78,7 +78,7 @@ typedef CF_ENUM(uint32_t, CGGesturePhase) {
    created, as well as other event-related states.
 
    Any bits not specified are reserved for future use. */
-typedef CF_ENUM(uint64_t, CGEventFlags) { /* Flags for events */
+typedef CF_OPTIONS(uint64_t, CGEventFlags) { /* Flags for events */
   /* Device-independent modifier key bits. */
   kCGEventFlagMaskAlphaShift =          NX_ALPHASHIFTMASK,
   kCGEventFlagMaskShift =               NX_SHIFTMASK,

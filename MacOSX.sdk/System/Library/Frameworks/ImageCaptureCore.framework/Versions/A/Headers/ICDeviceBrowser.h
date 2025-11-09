@@ -122,7 +122,7 @@ CF_ASSUME_NONNULL_BEGIN
     @abstract This method returns a device object that should be selected by the client application when it is launched.
     @discussion If the client application that calls this method is the auto-launch application associated with a device and that device is the last device attached (through USB, FireWire or network), then that device will be the preferred device. The best place to call this method is in the implmentation of the ICDeviceBrowser delegate method "deviceBrowser:didAddDevice:moreComing:", if the "moreComing" parameter passed to the delegate is "NO"; or in the delegate method "deviceBrowserDidEnumerateLocalDevices:".
 */
-- ( ICDevice*)preferredDevice;
+- ( nullable ICDevice*)preferredDevice;
 
 /*! 
   @method init

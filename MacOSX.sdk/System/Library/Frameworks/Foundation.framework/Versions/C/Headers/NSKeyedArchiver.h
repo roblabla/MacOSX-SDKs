@@ -1,9 +1,10 @@
 /*	NSKeyedArchiver.h
-	Copyright (c) 2001-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2001-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
 #import <Foundation/NSPropertyList.h>
+#import <Foundation/NSException.h>
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 #import <Foundation/NSGeometry.h>
 #endif
@@ -14,8 +15,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString * const NSInvalidArchiveOperationException;
-FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
+FOUNDATION_EXPORT NSExceptionName const NSInvalidArchiveOperationException;
+FOUNDATION_EXPORT NSExceptionName const NSInvalidUnarchiveOperationException;
 // Archives created using the class method archivedRootDataWithObject used this key for the root object in the hierarchy of encoded objects. The NSKeyedUnarchiver class method unarchiveObjectWithData: will look for this root key as well. You can also use it as the key for the root object in your own archives.
 FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9, 7_0);
 
@@ -37,8 +38,11 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
     NSUInteger _estimatedCount;
     void *_reserved2;
     id _visited;
-    void *  __strong _reserved0;
+    void *_reserved0;
 }
+
+/// Initialize the archiver with empty data, ready for writing.
+- (instancetype)init API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 + (NSData *)archivedDataWithRootObject:(id)rootObject;
 + (BOOL)archiveRootObject:(id)rootObject toFile:(NSString *)path;
@@ -48,6 +52,9 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 @property (nullable, assign) id <NSKeyedArchiverDelegate> delegate;
 
 @property NSPropertyListFormat outputFormat;
+
+/// If encoding has not yet finished, then invoking this property will call finishEncoding and return the data. If you initialized the keyed archiver with a specific mutable data instance, then it will be returned from this property after finishEncoding is called.
+@property (readonly, strong) NSData *encodedData API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 - (void)finishEncoding;
 
@@ -91,7 +98,7 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
     const uint8_t *_bytes;
     uint64_t _len;
     id _helper;
-    void *  __strong _reserved0;
+    void *_reserved0;
 }
 
 + (nullable id)unarchiveObjectWithData:(NSData *)data;
@@ -125,6 +132,8 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 
 // Enables secure coding support on this keyed unarchiver. When enabled, anarchiving a disallowed class throws an exception. Once enabled, attempting to set requiresSecureCoding to NO will throw an exception. This is to prevent classes from selectively turning secure coding off. This is designed to be set once at the top level and remain on. Note that the getter is on the superclass, NSCoder. See NSCoder for more information about secure coding.
 @property (readwrite) BOOL requiresSecureCoding NS_AVAILABLE(10_8, 6_0);
+
+@property (readwrite) NSDecodingFailurePolicy decodingFailurePolicy NS_AVAILABLE(10_11, 9_0);
 
 @end
 

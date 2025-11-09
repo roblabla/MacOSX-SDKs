@@ -280,9 +280,9 @@ reason. It may change from release to release without warning.
 Prints the contents of the
 .Nm launchd
 service cache.
-.It Xo Ar print-disabled
+.It Xo Ar print-disabled domain-target
 .Xc
-Prints the list of disabled services.
+Prints the list of disabled services in the specified domain.
 .It Xo Ar plist
 .Op Ar segment,section
 .Ar Mach-O
@@ -380,7 +380,7 @@ This facility cannot be used to set general environment variables for all
 services within the domain. It is intentionally scoped to the PATH environment
 variable and nothing else for security reasons.
 .El
-.It Xo Ar reboot Ar [system|userspace|halt|logout|apps|reroot <mount-point>]
+.It Xo Ar reboot Ar [system|userspace|halt|logout|apps]
 .Xc
 Instructs
 .Nm launchd
@@ -407,34 +407,6 @@ argument given,
 will re-exec itself when userspace has been torn down and bring userspace back
 up. This is useful for rebooting the system quickly under conditions where
 kernel data structures or hardware do not need to be re-initialized.
-.Pp
-With the
-.Ar reroot
-argument given,
-.Nm launchd
-will perform a userspace shutdown as with the
-.Ar userspace
-argument, but it will exec a copy of
-.Nm launchd
-from the specified
-.Ar mount-point .
-This mechanism is a light-weight way of changing boot partitions. As part of
-this process,
-.Nm launchd
-will make
-.Ar mount-point
-the new root partition and bring userspace up as if the kernel had designated
-.Ar mount-point
-as the root partition.
-.Pp
-.Em IMPORTANT :
-This type of reboot will, in no way, affect the already-running kernel on the
-host. Therefore, when using this option to switch to another volume, you should
-only target volumes whose userspace stacks are compatible with the
-already-running kernel.
-.Pp
-.Em NOTE :
-As of the date of this writing, this option does not completely work.
 .Pp
 With the
 .Ar logout
@@ -492,7 +464,7 @@ subcommands are documented as such.
 .Bl -tag -width -indent
 .It Xo Ar load | unload Op Fl wF
 .Op Fl S Ar sessiontype
-.Op Fl D Ar domain
+.Op Fl D Ar searchpath
 .Ar paths ...
 .Xc
 Load the specified configuration files or directories of configuration files.
@@ -532,19 +504,23 @@ contexts. Relevant sessions are Aqua (the default), Background and LoginWindow.
 Background agents may be loaded independently of a GUI login. Aqua agents are
 loaded only when a user has logged in at the GUI. LoginWindow agents are loaded
 when the LoginWindow UI is displaying and currently run as root.
-.It Fl D Ar domain
-Look for
-.Xr plist 5 files ending in *.plist in the domain given. This option may be
-thoughts of as expanding into many individual paths depending on the domain name
-given. Valid domains include "system," "local," "network" and "all." When
-providing a session type, an additional domain is available for use called
-"user." For example, without a session type given, "-D system" would load from
-or unload property list files from
+.It Fl D Ar searchpath
+Load or unload all
+.Xr plist 5 files in the search path given. This option may be thought of as
+expanding into many individual paths depending on the search path given. Valid
+search paths include "system," "local," and "all." When providing a session
+type, an additional search path is available for use called "user." For
+example, without a session type given, "-D system" would load from or unload
+all property list files from
 .Nm /System/Library/LaunchDaemons .
-With a session type passed, it would load from /System/Library/LaunchAgents.
+With a session type passed, it would load from
+.Nm /System/Library/LaunchAgents .
 Note that
 .Nm launchctl
-no longer respects the network domain.
+no longer respects the network search path.
+.Pp
+In a previous version of launchd, these search paths were called "domains",
+hence -D. The word "domain" is now used for a totally different concept.
 .El
 .Pp
 .Em NOTE :
@@ -706,6 +682,16 @@ for more details.
 .It Ar help
 Print out a quick usage statement.
 .El
+.Sh CAVEATS
+The output produced by the "legacy" subcommands (chiefly
+.Ar list )
+should match their output on previous OS X releases. However, the output of
+newer subcommands does not conform to any particular format
+and is not guaranteed to remain stable across releases. These commands are
+intended for use by human developers and system administrators, not for
+automation by programs or scripts. Their output does not constitute an API
+and no promises of forward compatibility are offered to programs that attempt
+to parse it.
 .Sh DEPRECATED AND REMOVED FUNCTIONALITY
 .Nm
 no longer has an interactive mode, nor does it accept commands from stdin. The

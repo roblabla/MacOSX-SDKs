@@ -12,6 +12,29 @@
 #include <mach/message.h>
 #include <mach/mig_errors.h>
 #include <mach/port.h>
+	
+/* BEGIN MIG_STRNCPY_ZEROFILL CODE */
+
+#if defined(__has_include)
+#if __has_include(<mach/mig_strncpy_zerofill_support.h>)
+#ifndef USING_MIG_STRNCPY_ZEROFILL
+#define USING_MIG_STRNCPY_ZEROFILL
+#endif
+#ifndef __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS__
+#define __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS__
+#ifdef __cplusplus
+extern "C" {
+#endif
+	extern int mig_strncpy_zerofill(char *dest, const char *src, int len) __attribute__((weak_import));
+#ifdef __cplusplus
+}
+#endif
+#endif /* __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS__ */
+#endif /* __has_include(<mach/mig_strncpy_zerofill_support.h>) */
+#endif /* __has_include */
+	
+/* END MIG_STRNCPY_ZEROFILL CODE */
+
 
 #ifdef AUTOTEST
 #ifndef FUNCTION_PTR_T
@@ -49,6 +72,7 @@ mig_external
 extern
 #endif	/* mig_external */
 __WATCHOS_PROHIBITED
+__TVOS_PROHIBITED
 kern_return_t thread_terminate
 (
 	thread_act_t target_act
@@ -61,6 +85,7 @@ mig_external
 extern
 #endif	/* mig_external */
 __WATCHOS_PROHIBITED
+__TVOS_PROHIBITED
 kern_return_t act_get_state
 (
 	thread_act_t target_act,
@@ -76,6 +101,7 @@ mig_external
 extern
 #endif	/* mig_external */
 __WATCHOS_PROHIBITED
+__TVOS_PROHIBITED
 kern_return_t act_set_state
 (
 	thread_act_t target_act,
@@ -169,6 +195,7 @@ mig_external
 extern
 #endif	/* mig_external */
 __WATCHOS_PROHIBITED
+__TVOS_PROHIBITED
 kern_return_t thread_depress_abort
 (
 	thread_act_t thread
@@ -181,6 +208,7 @@ mig_external
 extern
 #endif	/* mig_external */
 __WATCHOS_PROHIBITED
+__TVOS_PROHIBITED
 kern_return_t thread_get_special_port
 (
 	thread_act_t thr_act,
@@ -195,6 +223,7 @@ mig_external
 extern
 #endif	/* mig_external */
 __WATCHOS_PROHIBITED
+__TVOS_PROHIBITED
 kern_return_t thread_set_special_port
 (
 	thread_act_t thr_act,
@@ -223,6 +252,7 @@ mig_external
 extern
 #endif	/* mig_external */
 __WATCHOS_PROHIBITED
+__TVOS_PROHIBITED
 kern_return_t thread_set_exception_ports
 (
 	thread_act_t thread,
@@ -239,6 +269,7 @@ mig_external
 extern
 #endif	/* mig_external */
 __WATCHOS_PROHIBITED
+__TVOS_PROHIBITED
 kern_return_t thread_get_exception_ports
 (
 	thread_act_t thread,
@@ -257,6 +288,7 @@ mig_external
 extern
 #endif	/* mig_external */
 __WATCHOS_PROHIBITED
+__TVOS_PROHIBITED
 kern_return_t thread_swap_exception_ports
 (
 	thread_act_t thread,
@@ -398,6 +430,7 @@ mig_external
 extern
 #endif	/* mig_external */
 __WATCHOS_PROHIBITED
+__TVOS_PROHIBITED
 kern_return_t thread_get_mach_voucher
 (
 	thread_act_t thr_act,
@@ -412,6 +445,7 @@ mig_external
 extern
 #endif	/* mig_external */
 __WATCHOS_PROHIBITED
+__TVOS_PROHIBITED
 kern_return_t thread_set_mach_voucher
 (
 	thread_act_t thr_act,
@@ -425,6 +459,7 @@ mig_external
 extern
 #endif	/* mig_external */
 __WATCHOS_PROHIBITED
+__TVOS_PROHIBITED
 kern_return_t thread_swap_mach_voucher
 (
 	thread_act_t thr_act,

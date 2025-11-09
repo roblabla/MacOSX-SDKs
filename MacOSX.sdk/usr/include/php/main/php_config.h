@@ -366,6 +366,9 @@
 /* Whether you use GNU Pth */
 /* #undef GNUPTH */
 
+/* Define to 1 if `TIOCGWINSZ' requires <sys/ioctl.h>. */
+/* #undef GWINSZ_IN_SYS_IOCTL */
+
 /* Whether 3 arg set_rebind_proc() */
 #define HAVE_3ARG_SETREBINDPROC 1
 
@@ -399,6 +402,9 @@
 
 /* */
 /* #undef HAVE_APACHE_HOOKS */
+
+/* do we have apparmor support? */
+/* #undef HAVE_APPARMOR */
 
 /* Define to 1 if you have the <ApplicationServices/ApplicationServices.h>
    header file. */
@@ -507,10 +513,10 @@
 /* #undef HAVE_CLI0EXT_H */
 
 /* do we have clock_gettime? */
-/* #undef HAVE_CLOCK_GETTIME */
+#define HAVE_CLOCK_GETTIME 1
 
 /* do we have clock_get_time? */
-#define HAVE_CLOCK_GET_TIME 1
+/* #undef HAVE_CLOCK_GET_TIME */
 
 /* Whether you have struct cmsghdr */
 #define HAVE_CMSGHDR 1
@@ -687,6 +693,9 @@
 /* Define to 1 if you have the `fpclass' function. */
 /* #undef HAVE_FPCLASS */
 
+/* POSIX Access Control List */
+/* #undef HAVE_FPM_ACL */
+
 /* whether fpsetprec is present and usable */
 /* #undef HAVE_FPSETPREC */
 
@@ -728,6 +737,9 @@
 
 /* */
 #define HAVE_GD_JPG 1
+
+/* */
+/* #undef HAVE_GD_LIBVERSION */
 
 /* */
 #define HAVE_GD_PNG 1
@@ -909,8 +921,29 @@
 /* Define to 1 if you have the `initgroups' function. */
 #define HAVE_INITGROUPS 1
 
+/* Define to 1 if the system has the type `int16'. */
+/* #undef HAVE_INT16 */
+
+/* Define to 1 if the system has the type `int16_t'. */
+#define HAVE_INT16_T 1
+
+/* Define to 1 if the system has the type `int32'. */
+/* #undef HAVE_INT32 */
+
 /* Define if int32_t type is present. */
 #define HAVE_INT32_T 1
+
+/* Define to 1 if the system has the type `int64'. */
+/* #undef HAVE_INT64 */
+
+/* Define to 1 if the system has the type `int64_t'. */
+#define HAVE_INT64_T 1
+
+/* Define to 1 if the system has the type `int8'. */
+/* #undef HAVE_INT8 */
+
+/* Define to 1 if the system has the type `int8_t'. */
+#define HAVE_INT8_T 1
 
 /* Whether intmax_t is available */
 #define HAVE_INTMAX_T 1
@@ -962,6 +995,9 @@
 
 /* */
 #define HAVE_LDAP 1
+
+/* Define to 1 if you have the `ldap_control_find' function. */
+#define HAVE_LDAP_CONTROL_FIND 1
 
 /* Define to 1 if you have the `ldap_parse_reference' function. */
 #define HAVE_LDAP_PARSE_REFERENCE 1
@@ -1026,6 +1062,9 @@
 /* */
 /* #undef HAVE_LIBPAM */
 
+/* Define to 1 if you have the `pq' library (-lpq). */
+#define HAVE_LIBPQ 1
+
 /* */
 /* #undef HAVE_LIBRARYMANAGER_H */
 
@@ -1049,6 +1088,9 @@
 
 /* */
 #define HAVE_LIBXML 1
+
+/* */
+/* #undef HAVE_LIBZIP */
 
 /* Define to 1 if you have the <limits.h> header file. */
 #define HAVE_LIMITS_H 1
@@ -1102,7 +1144,7 @@
 #define HAVE_MBSINIT 1
 
 /* Define if your system has mbstate_t in wchar.h */
-/* #undef HAVE_MBSTATE_T */
+#define HAVE_MBSTATE_T 1
 
 /* whether to have multibyte string support */
 #define HAVE_MBSTRING 1
@@ -1190,8 +1232,11 @@
 /* */
 /* #undef HAVE_NSLDAP */
 
-/* */
+/* Defined to 1 if the PHP OCI8 extension for Oracle Database is configured */
 /* #undef HAVE_OCI8 */
+
+/* Defined to 1 if PHP OCI8 DTrace support was enabled during configuration */
+/* #undef HAVE_OCI8_DTRACE */
 
 /* */
 /* #undef HAVE_OCICOLLASSIGN */
@@ -1208,11 +1253,9 @@
 /* */
 /* #undef HAVE_OCISTMTFETCH2 */
 
-/* */
+/* Defined to 1 if OCI8 configuration located Oracle's Instant Client
+   libraries */
 /* #undef HAVE_OCI_INSTANT_CLIENT */
-
-/* */
-/* #undef HAVE_OCI_LOB_READ2 */
 
 /* */
 /* #undef HAVE_ODBC2 */
@@ -1266,7 +1309,7 @@
 /* #undef HAVE_PDO_FIREBIRD */
 
 /* Whether to build PostgreSQL for PDO support or not */
-/* #undef HAVE_PDO_PGSQL */
+#define HAVE_PDO_PGSQL 1
 
 /* */
 /* #undef HAVE_PDO_SQLITELIB */
@@ -1275,22 +1318,31 @@
 #define HAVE_PERROR 1
 
 /* Whether to build PostgreSQL support or not */
-/* #undef HAVE_PGSQL */
+#define HAVE_PGSQL 1
 
 /* Whether libpq is compiled with --enable-multibyte */
-/* #undef HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT */
+#define HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PGTRANSACTIONSTATUS */
+#define HAVE_PGTRANSACTIONSTATUS 1
 
 /* Whether to have pg_config.h */
-/* #undef HAVE_PG_CONFIG_H */
+#define HAVE_PG_CONFIG_H 1
+
+/* PostgreSQL 9.3 or later */
+#define HAVE_PG_LO64 1
 
 /* PostgreSQL 8.1 or later */
-/* #undef HAVE_PG_LO_CREATE */
+#define HAVE_PG_LO_CREATE 1
 
 /* PostgreSQL 8.4 or later */
-/* #undef HAVE_PG_LO_IMPORT_WITH_OID */
+#define HAVE_PG_LO_IMPORT_WITH_OID 1
+
+/* PostgreSQL 8.3 or later */
+#define HAVE_PG_LO_TRUNCATE 1
+
+/* */
+/* #undef HAVE_PHPDBG */
 
 /* */
 #define HAVE_PHP_SESSION 1
@@ -1311,76 +1363,76 @@
 #define HAVE_POSIX_READDIR_R 1
 
 /* PostgreSQL 7.0.x or later */
-/* #undef HAVE_PQCLIENTENCODING */
+#define HAVE_PQCLIENTENCODING 1
 
 /* Broken libpq under windows */
-/* #undef HAVE_PQCMDTUPLES */
+#define HAVE_PQCMDTUPLES 1
 
 /* PostgreSQL 7.2.0 or later */
-/* #undef HAVE_PQESCAPE */
+#define HAVE_PQESCAPE 1
 
 /* PostgreSQL 9.0 or later */
-/* #undef HAVE_PQESCAPELITERAL */
+#define HAVE_PQESCAPELITERAL 1
 
 /* PostgreSQL 8.1.4 or later */
-/* #undef HAVE_PQESCAPE_BYTEA_CONN */
+#define HAVE_PQESCAPE_BYTEA_CONN 1
 
 /* PostgreSQL 8.1.4 or later */
-/* #undef HAVE_PQESCAPE_CONN */
+#define HAVE_PQESCAPE_CONN 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQEXECPARAMS */
+#define HAVE_PQEXECPARAMS 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQEXECPREPARED */
+#define HAVE_PQEXECPREPARED 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQFREEMEM */
+#define HAVE_PQFREEMEM 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQFTABLE */
+#define HAVE_PQFTABLE 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQGETCOPYDATA */
+#define HAVE_PQGETCOPYDATA 1
 
 /* Older PostgreSQL */
-/* #undef HAVE_PQOIDVALUE */
+#define HAVE_PQOIDVALUE 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQPARAMETERSTATUS */
+#define HAVE_PQPARAMETERSTATUS 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQPREPARE */
+#define HAVE_PQPREPARE 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQPROTOCOLVERSION */
+#define HAVE_PQPROTOCOLVERSION 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQPUTCOPYDATA */
+#define HAVE_PQPUTCOPYDATA 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQPUTCOPYEND */
+#define HAVE_PQPUTCOPYEND 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQRESULTERRORFIELD */
+#define HAVE_PQRESULTERRORFIELD 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQSENDPREPARE */
+#define HAVE_PQSENDPREPARE 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQSENDQUERYPARAMS */
+#define HAVE_PQSENDQUERYPARAMS 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQSENDQUERYPREPARED */
+#define HAVE_PQSENDQUERYPREPARED 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQSETERRORVERBOSITY */
+#define HAVE_PQSETERRORVERBOSITY 1
 
 /* PostgreSQL 7.0.x or later */
-/* #undef HAVE_PQSETNONBLOCKING */
+#define HAVE_PQSETNONBLOCKING 1
 
 /* PostgreSQL 7.3.0 or later */
-/* #undef HAVE_PQUNESCAPEBYTEA */
+#define HAVE_PQUNESCAPEBYTEA 1
 
 /* do we have prctl? */
 /* #undef HAVE_PRCTL */
@@ -1625,7 +1677,7 @@
 /* Define to 1 if you have the `srandom' function. */
 #define HAVE_SRANDOM 1
 
-/* Whether ssize_t is available */
+/* Define to 1 if the system has the type `ssize_t'. */
 #define HAVE_SSIZE_T 1
 
 /* Define to 1 if you have the `statfs' function. */
@@ -1790,6 +1842,9 @@
 /* */
 #define HAVE_SYSVSHM 1
 
+/* Define to 1 if you have the <sys/acl.h> header file. */
+/* #undef HAVE_SYS_ACL_H */
+
 /* Define to 1 if you have the <sys/dir.h> header file, and it defines `DIR'.
    */
 /* #undef HAVE_SYS_DIR_H */
@@ -1894,6 +1949,9 @@
 /* */
 #define HAVE_TIDYOPTGETDOC 1
 
+/* Have timelib_config.h */
+#define HAVE_TIMELIB_CONFIG_H 1
+
 /* do we have times? */
 #define HAVE_TIMES 1
 
@@ -1923,8 +1981,29 @@
 /* */
 /* #undef HAVE_UDBCEXT_H */
 
+/* Define to 1 if the system has the type `uint16'. */
+/* #undef HAVE_UINT16 */
+
+/* Define to 1 if the system has the type `uint16_t'. */
+#define HAVE_UINT16_T 1
+
+/* Define to 1 if the system has the type `uint32'. */
+/* #undef HAVE_UINT32 */
+
 /* Define if uint32_t type is present. */
 #define HAVE_UINT32_T 1
+
+/* Define to 1 if the system has the type `uint64'. */
+/* #undef HAVE_UINT64 */
+
+/* Define to 1 if the system has the type `uint64_t'. */
+#define HAVE_UINT64_T 1
+
+/* Define to 1 if the system has the type `uint8'. */
+/* #undef HAVE_UINT8 */
+
+/* Define to 1 if the system has the type `uint8_t'. */
+#define HAVE_UINT8_T 1
 
 /* Define to 1 if you have the <unistd.h> header file. */
 #define HAVE_UNISTD_H 1
@@ -1961,6 +2040,18 @@
 
 /* Whether struct utsname has domainname */
 /* #undef HAVE_UTSNAME_DOMAINNAME */
+
+/* Define to 1 if the system has the type `u_int16_t'. */
+#define HAVE_U_INT16_T 1
+
+/* Define to 1 if the system has the type `u_int32_t'. */
+#define HAVE_U_INT32_T 1
+
+/* Define to 1 if the system has the type `u_int64_t'. */
+#define HAVE_U_INT64_T 1
+
+/* Define to 1 if the system has the type `u_int8_t'. */
+#define HAVE_U_INT8_T 1
 
 /* Define to 1 if you have the `vasprintf' function. */
 #define HAVE_VASPRINTF 1
@@ -2083,7 +2174,7 @@
 #define MYSQL_USE_MYSQLND 1
 
 /* */
-#define NDBM_INCLUDE_FILE "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.Internal.sdk/usr/include/ndbm.h"
+#define NDBM_INCLUDE_FILE "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.Internal.sdk/usr/include/ndbm.h"
 
 /* */
 /* #undef NEUTRINO */
@@ -2122,7 +2213,10 @@
 #define PHAR_HASH_OK 1
 
 /* */
-/* #undef PHAR_HAVE_OPENSSL */
+#define PHAR_HAVE_OPENSSL 1
+
+/* */
+/* #undef PHPDBG_DEBUG */
 
 /* */
 /* #undef PHP_APACHE_HAVE_CLIENT_FD */
@@ -2131,7 +2225,7 @@
 #define PHP_BLOWFISH_CRYPT 1
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2015-08-22"
+#define PHP_BUILD_DATE "2016-10-23"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
@@ -2148,11 +2242,14 @@
 /* fpm user name */
 #define PHP_FPM_USER "nobody"
 
+/* Checked for stdint types */
+#define PHP_HAVE_STDINT_TYPES 1
+
 /* Whether you have HP-UX 10.x */
 /* #undef PHP_HPUX_TIME_R */
 
 /* Path to iconv.h */
-#define PHP_ICONV_H_PATH </Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.Internal.sdk/usr/include/iconv.h>
+#define PHP_ICONV_H_PATH </Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.Internal.sdk/usr/include/iconv.h>
 
 /* Which iconv implementation to use */
 #define PHP_ICONV_IMPL "libiconv"
@@ -2206,7 +2303,7 @@
 #define PHP_STD_DES_CRYPT 1
 
 /* uname -a output */
-#define PHP_UNAME "Darwin osx004.apple.com 15.0 Darwin Kernel Version 15.0.0: Fri May 22 22:03:51 PDT 2015; root:xnu-3216.0.0.1.11~1/DEVELOPMENT_X86_64 x86_64"
+#define PHP_UNAME "Darwin osx300.apple.com 16.0 Darwin Kernel Version 15.0.0: Wed Apr 6 00:55:38 PDT 2016; root:xnu-3247.1.106.2.8~1/DEVELOPMENT_X86_64 x86_64"
 
 /* Whether PHP has to use its own crypt_r for blowfish, des and ext des */
 #define PHP_USE_PHP_CRYPT_R 1
@@ -2252,6 +2349,9 @@
 
 /* The size of `long long int', as computed by sizeof. */
 #define SIZEOF_LONG_LONG_INT 8
+
+/* The size of `off_t', as computed by sizeof. */
+#define SIZEOF_OFF_T 8
 
 /* Size of ptrdiff_t */
 #define SIZEOF_PTRDIFF_T 8
@@ -2320,6 +2420,9 @@
 
 /* Define if cross-process locking is required by accept() */
 /* #undef USE_LOCKING */
+
+/* Use system default cipher list instead of hardcoded value */
+/* #undef USE_OPENSSL_SYSTEM_CIPHERS */
 
 /* Enable extensions on AIX 3, Interix.  */
 #ifndef _ALL_SOURCE
@@ -2497,4 +2600,18 @@ int zend_sprintf(char *buffer, const char *format, ...);
 #endif
 
 /* #undef PTHREADS */
+
+
+
+#ifndef HAVE_SSIZE_T
+#  if SIZEOF_SIZE_T == SIZEOF_INT
+typedef int ssize_t;
+#  elif SIZEOF_SIZE_T == SIZEOF_LONG
+typedef long ssize_t;
+#  elif SIZEOF_SIZE_T == SIZEOF_LONG_LONG
+typedef long long ssize_t;
+#  else
+#error no suitable type for ssize_t found
+#  endif
+#endif
 

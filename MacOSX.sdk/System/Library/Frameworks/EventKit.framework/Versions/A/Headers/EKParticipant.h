@@ -61,7 +61,7 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
 @property(nonatomic, readonly) EKParticipantType participantType;
 
 /*!
-    @property   isCurrentUser
+    @property   currentUser
     @abstract   A boolean indicating whether this participant represents the
                 owner of this account.
  */

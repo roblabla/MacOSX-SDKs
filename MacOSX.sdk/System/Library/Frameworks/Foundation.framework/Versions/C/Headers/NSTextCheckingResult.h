@@ -1,5 +1,5 @@
 /*	NSTextCheckingResult.h
-	Copyright (c) 2008-2015, Apple Inc. All rights reserved.
+	Copyright (c) 2008-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -36,7 +36,7 @@ NS_ENUM(NSTextCheckingTypes) {
 };
 
 NS_CLASS_AVAILABLE(10_6, 4_0)
-@interface NSTextCheckingResult : NSObject <NSCopying, NSCoding>
+@interface NSTextCheckingResult : NSObject <NSCopying, NSSecureCoding>
 
 /* Mandatory properties, used with all types of results. */
 @property (readonly) NSTextCheckingType resultType;
@@ -48,7 +48,9 @@ NS_CLASS_AVAILABLE(10_6, 4_0)
 
 /* Optional properties, used with certain types of results. */
 @property (nullable, readonly, copy) NSOrthography *orthography;
-@property (nullable, readonly, copy) NSArray<NSString *> *grammarDetails;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (nullable, readonly, copy) NSArray<NSDictionary<NSString *, id> *> *grammarDetails;
+#endif
 @property (nullable, readonly, copy) NSDate *date;
 @property (nullable, readonly, copy) NSTimeZone *timeZone;
 @property (readonly) NSTimeInterval duration;
@@ -89,7 +91,9 @@ FOUNDATION_EXPORT NSString * const NSTextCheckingFlightKey NS_AVAILABLE(10_7, 4_
 /* Methods for creating instances of the various types of results. */
 + (NSTextCheckingResult *)orthographyCheckingResultWithRange:(NSRange)range orthography:(NSOrthography *)orthography;
 + (NSTextCheckingResult *)spellCheckingResultWithRange:(NSRange)range;
-+ (NSTextCheckingResult *)grammarCheckingResultWithRange:(NSRange)range details:(NSArray<NSString *> *)details;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
++ (NSTextCheckingResult *)grammarCheckingResultWithRange:(NSRange)range details:(NSArray<NSDictionary<NSString *, id> *> *)details;
+#endif
 + (NSTextCheckingResult *)dateCheckingResultWithRange:(NSRange)range date:(NSDate *)date;
 + (NSTextCheckingResult *)dateCheckingResultWithRange:(NSRange)range date:(NSDate *)date timeZone:(NSTimeZone *)timeZone duration:(NSTimeInterval)duration;
 + (NSTextCheckingResult *)addressCheckingResultWithRange:(NSRange)range components:(NSDictionary<NSString *, NSString *> *)components;

@@ -1,7 +1,7 @@
 /*
 	NSImageRep.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,8 +9,11 @@
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
+#import <Foundation/NSNotification.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSGraphics.h>
+#import <AppKit/NSColorSpace.h>
+#import <AppKit/NSUserInterfaceLayout.h>
 #import <ApplicationServices/ApplicationServices.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,6 +26,12 @@ enum {
     NSImageRepMatchesDevice = 0
 };
 
+typedef NS_ENUM(NSInteger, NSImageLayoutDirection) {
+    NSImageLayoutDirectionUnspecified = -1,
+    NSImageLayoutDirectionLeftToRight = 2,
+    NSImageLayoutDirectionRightToLeft = 3,
+} NS_AVAILABLE_MAC(10_12);
+
 @interface NSImageRep : NSObject <NSCopying, NSCoding> {
     /*All instance variables are private*/
     struct __repFlags {
@@ -34,7 +43,8 @@ enum {
         unsigned int keepCacheWindow:1 __attribute__((deprecated));
         unsigned int reserved:1;
         unsigned int bitsPerSample:8;
-	unsigned int gsaved:16;
+        unsigned int internalLayoutDirection:2;
+	unsigned int gsaved:14;
     } _repFlags;
     NSString *_colorSpaceName;
     NSSize _size;
@@ -61,6 +71,7 @@ enum {
 @property NSInteger bitsPerSample;
 @property NSInteger pixelsWide;
 @property NSInteger pixelsHigh;
+@property NSImageLayoutDirection layoutDirection NS_AVAILABLE_MAC(10_12); // Default: NSImageLayoutDirectionUnspecified
 
 /* The rest of the methods all deal with subclassers which can read/write data in files or pasteboards. 
 */
@@ -128,7 +139,7 @@ enum {
 
 /* Notifications */
 #define NSImageRepRegistryChangedNotification NSImageRepRegistryDidChangeNotification /* obsolete name */
-APPKIT_EXTERN NSString *NSImageRepRegistryDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSImageRepRegistryDidChangeNotification;
 
 NS_ASSUME_NONNULL_END
 

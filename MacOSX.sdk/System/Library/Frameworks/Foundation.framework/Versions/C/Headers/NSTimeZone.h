@@ -1,9 +1,10 @@
 /*	NSTimeZone.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
+#import <Foundation/NSNotification.h>
 
 @class NSString, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSDate, NSData, NSLocale;
 
@@ -24,20 +25,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSTimeZone (NSExtendedTimeZone)
 
-+ (NSTimeZone *)systemTimeZone;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, readonly, copy) NSTimeZone *systemTimeZone;
+#endif
 + (void)resetSystemTimeZone;
 
-+ (NSTimeZone *)defaultTimeZone;
-+ (void)setDefaultTimeZone:(NSTimeZone *)aTimeZone;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (class, copy) NSTimeZone *defaultTimeZone;
 
-+ (NSTimeZone *)localTimeZone;
+@property (class, readonly, copy) NSTimeZone *localTimeZone;
 
-+ (NSArray<NSString *> *)knownTimeZoneNames;
+@property (class, readonly, copy) NSArray<NSString *> *knownTimeZoneNames;
+
+@property (class, copy) NSDictionary<NSString *, NSString *> *abbreviationDictionary NS_AVAILABLE(10_6, 4_0);
 
 + (NSDictionary<NSString *, NSString *> *)abbreviationDictionary;
-+ (void)setAbbreviationDictionary:(NSDictionary<NSString *, NSString *> *)dict NS_AVAILABLE(10_6, 4_0);
 
-+ (NSString *)timeZoneDataVersion NS_AVAILABLE(10_6, 4_0);
+@property (class, readonly, copy) NSString *timeZoneDataVersion NS_AVAILABLE(10_6, 4_0);
+#endif
 
 @property (readonly) NSInteger secondsFromGMT;
 @property (nullable, readonly, copy) NSString *abbreviation;
@@ -82,6 +87,6 @@ typedef NS_ENUM(NSInteger, NSTimeZoneNameStyle) {
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSSystemTimeZoneDidChangeNotification NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSNotificationName const NSSystemTimeZoneDidChangeNotification NS_AVAILABLE(10_5, 2_0);
 
 NS_ASSUME_NONNULL_END

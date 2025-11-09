@@ -273,6 +273,7 @@ enum {
   kVK_CapsLock                  = 0x39,
   kVK_Option                    = 0x3A,
   kVK_Control                   = 0x3B,
+  kVK_RightCommand              = 0x36,
   kVK_RightShift                = 0x3C,
   kVK_RightOption               = 0x3D,
   kVK_RightControl              = 0x3E,

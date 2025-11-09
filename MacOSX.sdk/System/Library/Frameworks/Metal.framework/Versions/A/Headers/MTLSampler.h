@@ -64,7 +64,31 @@ typedef NS_ENUM(NSUInteger, MTLSamplerAddressMode) {
     MTLSamplerAddressModeRepeat = 2,
     MTLSamplerAddressModeMirrorRepeat = 3,
     MTLSamplerAddressModeClampToZero = 4,
+    /*!
+     @constant MTLSamplerAddressModeClampToBorderColor
+     Clamp to border color returns the value specified by the borderColor variable of the MTLSamplerDesc.
+     */
+    MTLSamplerAddressModeClampToBorderColor NS_AVAILABLE_MAC(10_12) = 5,
 } NS_ENUM_AVAILABLE(10_11, 8_0);
+
+/*!
+ @enum MTLSamplerBorderColor
+ @abstract Specify the color value that will be clamped to when the sampler address mode is MTLSamplerAddressModeClampToBorderColor.
+ 
+ @constant MTLSamplerBorderColorTransparentBlack
+ Transparent black returns {0,0,0,1} for clamped texture values.
+ 
+ @constant MTLSamplerBorderColorOpaqueBlack
+ OpaqueBlack returns {0,0,0,1} for clamped texture values.
+ 
+ @constant MTLSamplerBorderColorOpaqueWhite
+ OpaqueWhite returns {1,1,1,1} for clamped texture values.
+ */
+typedef NS_ENUM(NSUInteger, MTLSamplerBorderColor) {
+    MTLSamplerBorderColorTransparentBlack = 0,  // {0,0,0,0}
+    MTLSamplerBorderColorOpaqueBlack = 1,       // {0,0,0,1}
+    MTLSamplerBorderColorOpaqueWhite = 2,       // {1,1,1,1}
+};
 
 /*!
  @class MTLSamplerDescriptor
@@ -120,6 +144,12 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 @property (nonatomic) MTLSamplerAddressMode rAddressMode;
 
 /*!
+ @property borderColor
+ @abstract Set the color for the MTLSamplerAddressMode to one of the predefined in the MTLSamplerBorderColor enum.
+ */
+@property (nonatomic) MTLSamplerBorderColor borderColor NS_AVAILABLE_MAC(10_12);
+
+/*!
  @property normalizedCoordinates.
  @abstract If YES, texture coordates are from 0 to 1.  If NO, texture coordinates are 0..width, 0..height.
  @discussion normalizedCoordinates defaults to YES.  Non-normalized coordinates should only be used with 1D and 2D textures with the ClampToEdge wrap mode, otherwise the results of sampling are undefined.
@@ -140,6 +170,12 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  */
 @property (nonatomic) float lodMaxClamp;
 
+/*!
+ @property lodAverage
+ @abstract If YES, an average level of detail will be used when sampling from a texture. If NO, no averaging is performed.
+ @discussion lodAverage defaults to NO. This option is a performance hint. An implementation is free to ignore this property.
+ */
+@property (nonatomic) BOOL lodAverage NS_AVAILABLE_IOS(9_0);
 
 /*!
  @property compareFunction

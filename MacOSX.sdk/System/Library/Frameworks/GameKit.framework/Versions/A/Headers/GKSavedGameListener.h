@@ -2,14 +2,14 @@
 //  GKSavedGameListener.h
 //  Game Center
 //
-//  Copyright 2010-2015 Apple Inc. All rights reserved.
+//  Copyright 2010-2016 Apple Inc. All rights reserved.
 //
 
 @class GKPlayer;
 @class GKSavedGame;
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED
 @protocol GKSavedGameListener <NSObject>
 @optional
 

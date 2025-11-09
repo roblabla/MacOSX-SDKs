@@ -1,11 +1,11 @@
 //
 //  GKEntity.h
-//  GameLogic
+//  GameplayKit
 //
 //  Copyright (c) 2014 Apple. All rights reserved.
 //
 
-#import <GameplayKit/GameplayKit.h>
+#import <GameplayKit/GameplayKitBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,12 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
  * An entity is the general purpose object in an entity-component system.
  * Entites have many components but components are associated with only a single entity.
  * 
- * Note: GKEntity supports NSCopying, but your custom GKComponent's must also support NSCopying
+ * Note: GKEntity supports NSCopying and NSCoding, but your custom GKComponent's must also support NSCopying and NSCoding
  *
  * @see GKComponent
  * @see GKComponentSystem
  */
-GK_BASE_AVAILABILITY @interface GKEntity : NSObject <NSCopying>
+GK_BASE_AVAILABILITY @interface GKEntity : NSObject <NSCopying, NSCoding>
 
 /**
  * Creates a new entity ready to have components added to it.
@@ -63,14 +63,21 @@ GK_BASE_AVAILABILITY @interface GKEntity : NSObject <NSCopying>
  * Removes the component of the indicates class from this entity
  * @param componentClass the class of the component you want to remove
  */
+#if (defined(SWIFT_SDK_OVERLAY_GAMEPLAYKIT_EPOCH) && SWIFT_SDK_OVERLAY_GAMEPLAYKIT_EPOCH >= 1)
+- (void)removeComponentForClass:(Class)componentClass NS_REFINED_FOR_SWIFT;
+#else
 - (void)removeComponentForClass:(Class)componentClass;
+#endif
 
 /**
  * Gets the component of the indicated class.  Returns nil if entity does not have this component
  * @param componentClass the class of the component you want to get
  */
+#if (defined(SWIFT_SDK_OVERLAY_GAMEPLAYKIT_EPOCH) && SWIFT_SDK_OVERLAY_GAMEPLAYKIT_EPOCH >= 1)
+- (nullable GKComponent *)componentForClass:(Class)componentClass NS_REFINED_FOR_SWIFT;
+#else
  - (nullable GKComponent *)componentForClass:(Class)componentClass NS_SWIFT_UNAVAILABLE("Exposed in Swift as componentForClass<ComponentType: GKComponent>(componentClass: ComponentType.Type) -> ComponentType?");
-
+#endif
 
 @end
 

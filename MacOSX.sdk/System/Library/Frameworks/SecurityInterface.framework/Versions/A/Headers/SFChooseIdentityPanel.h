@@ -30,6 +30,7 @@
 	IBOutlet SFCertificateView *_certificateView;
 	IBOutlet NSButton *_cancelButton;	
 	IBOutlet NSButton *_okButton;	
+    IBOutlet NSLayoutConstraint *_aboveContentHeightConstraint;
 	int _indexOfChosenIdentity;
 	SecCertificateRef _currCertRefDisplayed;
 	NSArray *_identities;

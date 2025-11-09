@@ -2,7 +2,7 @@
  *  CTTelephonyNetworkInfo.h
  *  CoreTelephony
  *
- *  Copyright 2009 Apple, Inc. All rights reserved.
+ *  Copyright 2009 Apple Inc. All rights reserved.
  *
  */
 

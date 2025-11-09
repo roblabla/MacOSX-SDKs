@@ -50,10 +50,10 @@
  *
  *      C++ Function                    Equivalent C Function
  *      --------------------------------------------------------------------
- *      SIMD::all(comparison)           vector_all(comparison)
- *      SIMD::any(comparison)           vector_any(comparison)
- *      SIMD::select(x,y,mask)          vector_select(x,y,mask)
- *      SIMD::bitselect(x,y,mask)       vector_bitselect(x,y,mask)
+ *      simd::all(comparison)           vector_all(comparison)
+ *      simd::any(comparison)           vector_any(comparison)
+ *      simd::select(x,y,mask)          vector_select(x,y,mask)
+ *      simd::bitselect(x,y,mask)       vector_bitselect(x,y,mask)
  */
 
 #ifndef __SIMD_LOGIC_HEADER__

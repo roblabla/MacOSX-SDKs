@@ -1,7 +1,7 @@
 /*
     NSMagnificationGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2015, Apple Inc.
+    Copyright (c) 2013-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -15,10 +15,10 @@ NS_CLASS_AVAILABLE(10_10, NA)
 @private
     NSPoint _location;
     NSPoint _reserved1;
-    NSInteger _mflags;
+    NSInteger _mflags __unused;
     CGFloat _magnification;
+    id _reserved2;
 #ifndef __OBJC2__
-    NSInteger _reserved2;
     NSInteger _reserved3;
 #endif
 }

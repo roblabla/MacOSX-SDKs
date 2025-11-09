@@ -1,5 +1,5 @@
 /*	CFBinaryHeap.h
-	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2016, Apple Inc. All rights reserved.
 */
 /*!
         @header CFBinaryHeap
@@ -251,7 +251,7 @@ CF_EXPORT void		CFBinaryHeapGetValues(CFBinaryHeapRef heap, const void **values)
 		what is expected by the applier function, the behavior is
 		undefined.
 */
-CF_EXPORT void		CFBinaryHeapApplyFunction(CFBinaryHeapRef heap, CFBinaryHeapApplierFunction applier, void *context);
+CF_EXPORT void		CFBinaryHeapApplyFunction(CFBinaryHeapRef heap, CFBinaryHeapApplierFunction CF_NOESCAPE applier, void *context);
 
 /*!
 	@function CFBinaryHeapAddValue

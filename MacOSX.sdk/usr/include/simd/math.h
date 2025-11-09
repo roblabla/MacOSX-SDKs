@@ -50,21 +50,21 @@
  *  in the second argument position.  This results in better codegen on some
  *  architectures.  E.g. use "fmin(x, 1.0f)" to clamp to the range [-inf,1].
  *
- *  In C++, these overloads are available under the SIMD:: namespace:
+ *  In C++, these overloads are available under the simd:: namespace:
  *
  *      C++ Function                    Equivalent C Function
  *      --------------------------------------------------------------------
- *      SIMD::fabs(x)                   fabs(x)
- *      SIMD::fmax(x,y)                 fmax(x)
- *      SIMD::fmin(x,y)                 fmin(x)
- *      SIMD::copysign(x,y)             copysign(x,y)
- *      SIMD::sqrt(x)                   sqrt(x)
- *      SIMD::ceil(x)                   ceil(x)
- *      SIMD::floor(x)                  floor(x)
- *      SIMD::rint(x)                   rint(x)
- *      SIMD::trunc(x)                  trunc(x)
- *      SIMD::cos(x)                    cos(x)
- *      SIMD::sin(x)                    sin(x)                                 
+ *      simd::fabs(x)                   fabs(x)
+ *      simd::fmax(x,y)                 fmax(x,y)
+ *      simd::fmin(x,y)                 fmin(x,y)
+ *      simd::copysign(x,y)             copysign(x,y)
+ *      simd::sqrt(x)                   sqrt(x)
+ *      simd::ceil(x)                   ceil(x)
+ *      simd::floor(x)                  floor(x)
+ *      simd::rint(x)                   rint(x)
+ *      simd::trunc(x)                  trunc(x)
+ *      simd::cos(x)                    cos(x)
+ *      simd::sin(x)                    sin(x)                                 
  */
 
 #ifndef __SIMD_MATH_HEADER__
@@ -460,17 +460,10 @@ static vector_double2 __SIMD_ATTRIBUTES__ __tg_cos(vector_double2 __x) { return 
 static vector_double2 __SIMD_ATTRIBUTES__ __tg_sin(vector_double2 __x) { return __sin_d2(__x); }
 __SIMD_ELEMENTWISE_UNARY_3_IN_4(__tg_cos, double)
 __SIMD_ELEMENTWISE_UNARY_3_IN_4(__tg_sin, double)
-#if defined __AVX__
-static vector_float8  __SIMD_ATTRIBUTES__ __tg_cos(vector_float8  __x) { return __cos_f8(__x); }
-static vector_float8  __SIMD_ATTRIBUTES__ __tg_sin(vector_float8  __x) { return __sin_f8(__x); }
-static vector_double4 __SIMD_ATTRIBUTES__ __tg_cos(vector_double4 __x) { return __cos_d4(__x); }
-static vector_double4 __SIMD_ATTRIBUTES__ __tg_sin(vector_double4 __x) { return __sin_d4(__x); }
-#else
 __SIMD_ELEMENTWISE_UNARY_8_IN_4(__tg_cos, float)
 __SIMD_ELEMENTWISE_UNARY_8_IN_4(__tg_sin, float)
 __SIMD_ELEMENTWISE_UNARY_4_IN_2(__tg_cos, double)
 __SIMD_ELEMENTWISE_UNARY_4_IN_2(__tg_sin, double)
-#endif
 __SIMD_ELEMENTWISE_UNARY_16_IN_8(__tg_cos, float)
 __SIMD_ELEMENTWISE_UNARY_16_IN_8(__tg_sin, float)
 __SIMD_ELEMENTWISE_UNARY_8_IN_4(__tg_cos, double)

@@ -30,24 +30,24 @@ typedef CF_ENUM (int32_t, CGPDFBox) {
 /* Equivalent to `CFRetain(page)', except it doesn't crash (as CFRetain
    does) if `page' is NULL. */
 
-CG_EXTERN CGPDFPageRef __nullable CGPDFPageRetain(CGPDFPageRef __nullable page)
+CG_EXTERN CGPDFPageRef __nullable CGPDFPageRetain(CGPDFPageRef cg_nullable page)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(page)', except it doesn't crash (as CFRelease
    does) if `page' is NULL. */
 
-CG_EXTERN void CGPDFPageRelease(CGPDFPageRef __nullable page)
+CG_EXTERN void CGPDFPageRelease(CGPDFPageRef cg_nullable page)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return the document of `page'. */
 
 CG_EXTERN CGPDFDocumentRef __nullable CGPDFPageGetDocument(
-    CGPDFPageRef __nullable page)
+    CGPDFPageRef cg_nullable page)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return the page number of `page'. */
 
-CG_EXTERN size_t CGPDFPageGetPageNumber(CGPDFPageRef __nullable page)
+CG_EXTERN size_t CGPDFPageGetPageNumber(CGPDFPageRef cg_nullable page)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return the rectangle associated with `box' in `page'. This is the value
@@ -55,14 +55,14 @@ CG_EXTERN size_t CGPDFPageGetPageNumber(CGPDFPageRef __nullable page)
    page's dictionary. Return CGRectNull if `page' is not a valid CGPDFPageRef
    or `box' is not a valid CGPDFBox. */
 
-CG_EXTERN CGRect CGPDFPageGetBoxRect(CGPDFPageRef __nullable page, CGPDFBox box)
+CG_EXTERN CGRect CGPDFPageGetBoxRect(CGPDFPageRef cg_nullable page, CGPDFBox box)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return the rotation angle (in degrees) of `page'. This is the value of
    the /Rotate entry in the page's dictionary. Return 0 if `page' is not a valid
    CGPDFPageRef. */
 
-CG_EXTERN int CGPDFPageGetRotationAngle(CGPDFPageRef __nullable page)
+CG_EXTERN int CGPDFPageGetRotationAngle(CGPDFPageRef cg_nullable page)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return a transform mapping the box specified by `box' to `rect' as
@@ -79,14 +79,14 @@ CG_EXTERN int CGPDFPageGetRotationAngle(CGPDFPageRef __nullable page)
        restrictive dimension. */
 
 CG_EXTERN CGAffineTransform CGPDFPageGetDrawingTransform(
-    CGPDFPageRef __nullable page, CGPDFBox box, CGRect rect, int rotate,
+    CGPDFPageRef cg_nullable page, CGPDFBox box, CGRect rect, int rotate,
     bool preserveAspectRatio)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return the dictionary of `page'. */
 
 CG_EXTERN CGPDFDictionaryRef __nullable CGPDFPageGetDictionary(
-    CGPDFPageRef __nullable page)
+    CGPDFPageRef cg_nullable page)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return the CFTypeID for CGPDFPageRefs. */

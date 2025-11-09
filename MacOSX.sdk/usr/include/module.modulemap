@@ -1,6 +1,13 @@
+module AppleTextureEncoder [system] [extern_c] {
+	header "AppleTextureEncoder.h"
+	link "ate"
+	export *
+}
+
 module Compression [system] [extern_c] {
 	header "compression.h"
 	export *
+	link "compression"
 }
 
 module Darwin [system] [extern_c] {
@@ -11,6 +18,7 @@ module Darwin [system] [extern_c] {
 
 	module cdefs {
 		header "sys/cdefs.h"
+		textual header "sys/_symbol_aliasing.h"
 		export *
 	}
 
@@ -104,6 +112,11 @@ module Darwin [system] [extern_c] {
 			export *
 		}
 
+		module stdatomic {
+			header "stdatomic.h" // note: supplied by the compiler
+			export *
+		}
+
 		module stdbool {
 			header "stdbool.h" // note: supplied by the compiler
 			export *
@@ -178,7 +191,6 @@ module Darwin [system] [extern_c] {
 			header "sys/_endian.h"
 			header "sys/_posix_availability.h"
 			header "sys/_symbol_aliasing.h"
-
 			export *
 		}
 
@@ -624,6 +636,7 @@ module Darwin [system] [extern_c] {
 
 	module Availability {
 		header "Availability.h"
+		header "os/availability.h"
 		header "AvailabilityMacros.h"
 		header "AvailabilityInternal.h"
 		export *
@@ -1111,6 +1124,9 @@ module Darwin [system] [extern_c] {
 
 		module OSAtomic {
 			header "libkern/OSAtomic.h"
+			header "libkern/OSAtomicDeprecated.h"
+			header "libkern/OSSpinLockDeprecated.h"
+			header "libkern/OSAtomicQueue.h"
 			export *
 		}
 
@@ -1125,9 +1141,17 @@ module Darwin [system] [extern_c] {
 			header "libkern/i386/_OSByteOrder.h"
 			
 		}
+	}
 
-		// note: header OSKextLib.h depends on CoreFoundation and is
-		// therefore not part of this module.
+	module os {
+		module base {
+			header "os/base.h"
+			export *
+		}
+		module lock {
+			header "os/lock.h"
+			export *
+		}
 	}
 
 	module malloc {
@@ -1347,6 +1371,11 @@ module Darwin [system] [extern_c] {
 			export *
 		}
 
+		module kdebug {
+			header "sys/kdebug_signpost.h"
+			export *
+		}
+
 		module lctx {
 			header "sys/lctx.h"
 			export *
@@ -1429,13 +1458,6 @@ module Darwin [system] [extern_c] {
 			header "sys/quota.h"
 			export *
 		}
-		
-		
-		module random {
-			header "sys/random.h"
-			export *
-		}
-		
 		
 		module rbtree {
 			header "sys/rbtree.h"
@@ -1596,20 +1618,45 @@ module Darwin [system] [extern_c] {
 	}
 }
 
+module asl [system] [extern_c] {
+	header "asl.h"
+	export *
+}
+
+module dnssd [system] [extern_c] {
+	header "dns_sd.h"
+	export *
+}
+
+module launch {
+	header "launch.h"
+	export *
+}
+
 module os [system] [extern_c] {
 	module base {
-		header "os/base.h"
-		export *
+		export Darwin.os.base
+	}
+	module lock {
+		export Darwin.os.lock
 	}
 	module object {
-		header "os/object.h"
-		export *
+		export os_object
 	}
 	explicit module activity {
 		header "os/activity.h"
 		export *
 	}
+	explicit module log {
+		header "os/log.h"
+		export *
+	}
 	exclude header "os/trace.h"
+}
+
+module os_object [system] [extern_c] {
+	header "os/object.h"
+	export *
 }
 
 module libkern [system] [extern_c] {
@@ -1633,6 +1680,9 @@ module libkern [system] [extern_c] {
 		header "libkern/OSTypes.h"
 		export *
 	}
+
+	// note: header OSKextLib.h depends on CoreFoundation and is
+	// therefore not part of this module.
 	
 }
 
@@ -1695,12 +1745,5 @@ module krb5 [system] [extern_c] {
 	}
 	
 	exclude header "krb5.h" // deprecated
-}
-
-module XPC [system] [extern_c] {
-	umbrella header "xpc/xpc.h"
-	header "launch.h"
-	module * { export * }
-	export *
 }
 

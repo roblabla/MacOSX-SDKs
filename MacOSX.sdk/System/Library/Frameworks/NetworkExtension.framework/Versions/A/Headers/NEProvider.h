@@ -107,6 +107,14 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 - (NWUDPSession *)createUDPSessionToEndpoint:(NWEndpoint *)remoteEndpoint fromEndpoint:(nullable NWHostEndpoint *)localEndpoint NS_AVAILABLE(10_11, 9_0);
 
 /*!
+ * @method displayMessage:completionHandler:
+ * @discussion This method can be called by subclass implementations to display a message to the user.
+ * @param message The message to be displayed.
+ * @param completionHandler A block that is executed when the user acknowledges the message. If this method is called on a NEFilterDataProvider instance or the message cannot be displayed, then the completion handler block will be executed immediately with success parameter set to NO. If the message was successfully displayed to the user, then the completion handler block is executed with the success parameter set to YES when the user dismisses the message.
+ */
+- (void)displayMessage:(NSString *)message completionHandler:(void (^)(BOOL success))completionHandler NS_AVAILABLE(10_12, 10_0);
+
+/*!
  * @property defaultPath
  * @discussion The current default path for connections created by the provider. Use KVO to watch for network changes.
  */

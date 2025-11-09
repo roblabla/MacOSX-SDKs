@@ -3,19 +3,17 @@
 // =====================================================================================================================
 
 
-#import <AppKit/AppKit.h>
+#import <PDFKit/PDFKitPlatform.h>
+
 #import <PDFKit/PDFAnnotation.h>
-
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 @class PDFAnnotationChoiceWidgetPrivateVars;
 
-
+NS_CLASS_DEPRECATED_MAC(10_5, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
 @interface PDFAnnotationChoiceWidget : PDFAnnotation <NSCopying>
 {
 @private
-    PDFAnnotationChoiceWidgetPrivateVars *_pdfPriv2;
+    PDFAnnotationChoiceWidgetPrivateVars *_private2;
 }
 
 // -------- accessors
@@ -25,16 +23,16 @@
 - (void) setStringValue: (NSString *) value;
 
 // Background color characteristics.
-- (NSColor *) backgroundColor;
-- (void) setBackgroundColor: (NSColor *) color;
+- (PDFKitPlatformColor *) backgroundColor;
+- (void) setBackgroundColor: (PDFKitPlatformColor *) color;
 
 // Font characteristics.
-- (NSFont *) font;
-- (void) setFont: (NSFont *) font;
+- (PDFKitPlatformFont *) font;
+- (void) setFont: (PDFKitPlatformFont *) font;
 
 // Font color characteristics.
-- (NSColor *) fontColor;
-- (void) setFontColor: (NSColor *) color;
+- (PDFKitPlatformColor *) fontColor;
+- (void) setFontColor: (PDFKitPlatformColor *) color;
 
 // Widget annotations backed by form data have (internal) field names with which to associate a value or data.
 - (NSString *) fieldName;
@@ -49,5 +47,3 @@
 - (void) setChoices: (NSArray *) options;
 
 @end
-
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5

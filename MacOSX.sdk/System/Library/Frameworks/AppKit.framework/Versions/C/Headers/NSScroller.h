@@ -1,7 +1,7 @@
 /*
 	NSScroller.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -144,9 +144,9 @@ When it opts in in this manner, an NSScroller subclass certifies that:
 - (void)drawKnob;
 - (void)drawKnobSlotInRect:(NSRect)slotRect highlight:(BOOL)flag;
 - (void)highlight:(BOOL)flag;                                       // has no effect on 10.7
-- (NSScrollerPart)testPart:(NSPoint)thePoint;
-- (void)trackKnob:(NSEvent *)theEvent;
-- (void)trackScrollButtons:(NSEvent *)theEvent;                     // not invoked on 10.7
+- (NSScrollerPart)testPart:(NSPoint)point;
+- (void)trackKnob:(NSEvent *)event;
+- (void)trackScrollButtons:(NSEvent *)event;                     // not invoked on 10.7
 @property (readonly) NSScrollerPart hitPart;
 @property CGFloat knobProportion;
 - (void)setKnobProportion:(CGFloat)proportion NS_AVAILABLE_MAC(10_5);
@@ -156,11 +156,11 @@ When it opts in in this manner, an NSScroller subclass certifies that:
 @interface NSScroller(NSDeprecated)
 /* A method that was deprecated in Mac OS 10.5. To maintain binary compatibility, AppKit will continue to invoke overrides of this method. Code that targets Mac OS 10.5 and later should use -setDoubleValue: and -setKnobProportion: instead, and eliminate any overrides of -setFloatValue:knobProportion:. Code that needs to remain compatible with Mac OS 10.4 and earlier should continue to use -setFloatValue:knobProportion:. 
 */
-- (void)setFloatValue:(float)aFloat knobProportion:(CGFloat)proportion NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)setFloatValue:(float)value knobProportion:(CGFloat)proportion NS_DEPRECATED_MAC(10_0, 10_5);
 @end
 
 /* Posted when the preferred scroller style changes.  The notification object is private; disregard it.  Consult NSScroller's +preferredScrollerStyle method when this notification is received, or thereafter, to determine the new scroller style to use.
 */
-APPKIT_EXTERN NSString * const NSPreferredScrollerStyleDidChangeNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSNotificationName const NSPreferredScrollerStyleDidChangeNotification NS_AVAILABLE_MAC(10_7);
 
 NS_ASSUME_NONNULL_END

@@ -23,7 +23,28 @@
 #endif
 #define __SIMD_OVERLOAD__ __attribute__((__overloadable__))
 
+#if __has_include(<Availability.h>)
 #include <Availability.h>
+
+/*  A number of new features are added in newer releases; most of these are
+ *  inline in the header, which makes them available even when targeting older
+ *  OS versions.  Those that make external calls, however, are only available
+ *  when targeting the release in which they became available.  Because of the
+ *  way in which simd functions are overloaded, the usual weak-linking tricks
+ *  do not work; these functions are simply unavailable when targeting older
+ *  versions of the library.                                                  */
+#if  __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_12   || \
+    __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_10_0 || \
+     __WATCH_OS_VERSION_MIN_REQUIRED >= __WATCHOS_3_0 || \
+        __TV_OS_VERSION_MIN_REQUIRED >= __TVOS_10_0
+# define SIMD_LIBRARY_VERSION 2
+#else
+# define SIMD_LIBRARY_VERSION 1
+#endif
+#else /* __has_include(<Availability.h>) */
+# define SIMD_LIBRARY_VERSION 2
+# define __OSX_AVAILABLE_STARTING(osx,ios) /* Nothing */
+#endif
 
 #if defined __ARM_NEON__
 #include <arm_neon.h>

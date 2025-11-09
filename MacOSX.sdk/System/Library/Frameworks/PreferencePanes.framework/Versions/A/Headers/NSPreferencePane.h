@@ -19,6 +19,10 @@ typedef NS_ENUM(NSUInteger, NSPreferencePaneUnselectReply)
 extern NSString * __nonnull const 	NSPreferencePaneDoUnselectNotification;
 extern NSString * __nonnull const 	NSPreferencePaneCancelUnselectNotification;
 
+extern NSString * __nonnull const	NSPreferencePaneSwitchToPaneNotification;
+extern NSString * __nonnull const	NSPreferencePrefPaneIsAvailableNotification;
+extern NSString * __nonnull const	NSPreferencePaneUpdateHelpMenuNotification;
+
 // Help Menu support
 APPKIT_EXTERN NSString * __nonnull const				NSPrefPaneHelpMenuInfoPListKey;
 APPKIT_EXTERN NSString * __nonnull const				NSPrefPaneHelpMenuTitleKey;
@@ -35,7 +39,7 @@ APPKIT_EXTERN NSString * __nonnull const				NSPrefPaneHelpMenuAnchorKey;
 
 #define	kNSPrefPaneHelpMenuInfoPListKey		@"NSPrefPaneHelpAnchors"
 #define	kNSPrefPaneHelpMenuTitleKey			@"title"		
-#define	kNSPrefPaneHelpMenuAnchorKey		@"anchor"
+#define	kNSPrefPaneHelpMenuAnchorKey			@"anchor"
 
 #endif
 
@@ -50,12 +54,12 @@ APPKIT_EXTERN NSString * __nonnull const				NSPrefPaneHelpMenuAnchorKey;
 	
 		//  Connect these outlets to the initial, first and last keyboard
 		//  focus chain views.  These views MUST be subviews of the main view.
-		IBOutlet NSView * __nullable	_initialKeyView;
-		IBOutlet NSView * __nullable	_firstKeyView;
-		IBOutlet NSView * __nullable	_lastKeyView;
+		IBOutlet NSView * __nullable		_initialKeyView;
+		IBOutlet NSView * __nullable		_firstKeyView;
+		IBOutlet NSView * __nullable		_lastKeyView;
 	
 		NSView * __nonnull		_mainView;
-		NSBundle * __nonnull	_bundle;
+		NSBundle * __nonnull		_bundle;
 	
 		__nullable id _reserved1;
 		__nullable id _reserved2;

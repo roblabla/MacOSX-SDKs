@@ -8,6 +8,7 @@
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLDevice.h>
 #import <Metal/MTLArgument.h>
+#import <Metal/MTLStageInputOutputDescriptor.h>
 
 NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_11, 8_0)
@@ -38,6 +39,13 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @abstract An optimization flag, set if the thread group size will always be a multiple of thread execution width
  */
 @property (readwrite, nonatomic) BOOL threadGroupSizeIsMultipleOfThreadExecutionWidth;
+
+
+/*!
+ @property computeDataDescriptor
+ @abstract An MTLStageInputOutputDescriptor to fetch data from buffers
+ */
+@property (nullable, copy, nonatomic) MTLStageInputOutputDescriptor *stageInputDescriptor NS_AVAILABLE(10_12, 10_0);
 
 /*!
  @method reset
@@ -75,4 +83,3 @@ NS_AVAILABLE(10_11, 8_0)
 
 @end
 NS_ASSUME_NONNULL_END
-

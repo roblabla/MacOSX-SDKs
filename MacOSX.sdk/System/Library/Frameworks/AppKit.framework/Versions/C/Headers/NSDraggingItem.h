@@ -1,7 +1,7 @@
 /*
 	NSDraggingItem.h
 	Application Kit
-	Copyright (c) 2010-2015, Apple Inc.
+	Copyright (c) 2010-2016, Apple Inc.
 	All rights reserved.
 */
 
@@ -30,7 +30,8 @@ NS_CLASS_AVAILABLE(10_7, NA)
 + (NSDraggingImageComponent *)draggingImageComponentWithKey:(NSString *)key;
 
 /* Designated initializer */
-- (instancetype)initWithKey:(NSString *)key;
+- (instancetype)initWithKey:(NSString *)key NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
 
 /* key must be unique for each component in an NSDraggingItem. You can create your own named components, but the following names have special meaning. NSDraggingImageComponentIconKey is an image of the item being dragged. NSDraggingImageComponentLabelKey represents a textual label associate with the item, for example, a file name.
 */
@@ -61,7 +62,8 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /* The designated initializer. When creating an NSDraggingItem the pasteboardWriter must implement the NSPasteboardWriting protocol.
 */
-- (instancetype)initWithPasteboardWriter:(id <NSPasteboardWriting>) pasteboardWriter;
+- (instancetype)initWithPasteboardWriter:(id <NSPasteboardWriting>) pasteboardWriter NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
 
 /* When you create an NSDraggingItem, item is the pasteboardWriter passed to initWithPasteboardWriter. However, when enumerating dragging items in an NSDraggingSession or NSDraggingInfo object, item is not the original pasteboardWriter. It is an instance of one of the classes provided to the enumeration method.
 */
@@ -75,9 +77,9 @@ NS_CLASS_AVAILABLE(10_7, NA)
 */
 @property (nullable, copy) NSArray<NSDraggingImageComponent *> * __nonnull (^imageComponentsProvider)(void);
 
-/* Alternate single image component setter. This method simplifies modifiying the components of an NSDraggingItem when there is only one component. This method will set the draggingFrame and imageComponentsProvider properties. frame is in the same coordinate space that the draggingFrame property is.
+/* Alternate single image component setter. This method simplifies modifiying the components of an NSDraggingItem when there is only one component. This method will set the draggingFrame and imageComponentsProvider properties. frame is in the same coordinate space that the draggingFrame property is. To hide this item, set contents to nil.
 */
-- (void)setDraggingFrame:(NSRect)frame contents:(id)contents;
+- (void)setDraggingFrame:(NSRect)frame contents:(nullable id)contents;
 
 /* An array of NSDraggingImageComponents that are used to create the drag image. Note: the array contains copies of the components. Changes made to these copies are not reflected in the drag. If needed, the imageComponentsProvider block is called to generate the image components.
 */

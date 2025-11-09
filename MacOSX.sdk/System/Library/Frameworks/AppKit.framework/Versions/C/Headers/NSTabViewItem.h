@@ -1,7 +1,7 @@
 /*
     NSTabViewItem.h
     Application Kit
-    Copyright (c) 2000-2015, Apple Inc.
+    Copyright (c) 2000-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -56,9 +56,9 @@ typedef NS_ENUM(NSUInteger, NSTabState) {
 
 /* By default, NSTabViewItem creates a basic NSView for you automatically.
  */
-- (instancetype)initWithIdentifier:(id)identifier; // identifier is retained
+- (instancetype)initWithIdentifier:(nullable id)identifier; // identifier is retained
 
-@property (strong) id identifier;
+@property (strong, nullable) id identifier;
 @property (copy) NSColor *color;
 @property (copy) NSString *label;
 /// Get and set the image for this tab view item. The image may only be used in certain tab view styles and options.  The default value is nil.

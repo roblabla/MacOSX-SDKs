@@ -418,9 +418,9 @@ PMSessionCopyDestinationFormat(
  *    print settings.
  *  
  *  Discussion:
- *    Some destination type support a destination location which
- *    further defines where the output from a pritn job should be sent.
- *    The kPMDestinationFile destiation type, for example, will use a
+ *    Some destination types support a destination location which
+ *    further defines where the output from a print job should be sent.
+ *    The kPMDestinationFile destination type, for example, will use a
  *    file URL to determine where a new file should be created.
  *  
  *  Parameters:
@@ -491,16 +491,16 @@ PMSessionCopyDestinationLocation(
  *      type.
  *    
  *    destType:
- *      The destiation type for a print job associated with the
+ *      The destination type for a print job associated with the
  *      provided print session and print settings. Fax is currently not
  *      supported, but kPMDestinationPrinter, kPMDestinationFile, and
  *      kPMDestinationPreview can be set.
  *    
  *    destFormat:
  *      The MIME type to be generated for the provided destination
- *      type. This parameter can be NULL in which the default format
+ *      type. This parameter can be NULL, in which case the default format
  *      for the requested destination type is used. To obtain a list of
- *      valid formats for a given destiation type, use the function
+ *      valid formats for a given destination type, use the function
  *      PMSessionCopyOutputFormatList.
  *    
  *    destLocation:

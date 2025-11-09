@@ -126,7 +126,7 @@ This mutable dictionary is the same as the one available on the plug-in executio
 @interface QCRenderer : NSObject <QCCompositionRenderer>
 {
 @private
-	__strong void*		_QCRendererPrivate;
+	void*		_QCRendererPrivate;
 }
 
 #if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)

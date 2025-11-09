@@ -1,5 +1,5 @@
 /*	NSPathUtilities.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSString.h>
@@ -31,9 +31,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray<NSString *> *)stringsByAppendingPaths:(NSArray<NSString *> *)paths;
 
-- (NSUInteger)completePathIntoString:(NSString * __nonnull * __nullable)outputName caseSensitive:(BOOL)flag matchesIntoArray:(NSArray<NSString *> * __nonnull * __nullable)outputArray filterTypes:(nullable NSArray<NSString *> *)filterTypes;
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(6)
+- (NSUInteger)completePathIntoString:(NSString * _Nullable * _Nullable)outputName caseSensitive:(BOOL)flag matchesIntoArray:(NSArray<NSString *> * _Nullable * _Nullable)outputArray filterTypes:(nullable NSArray<NSString *> *)filterTypes;
+#endif
 
-@property (readonly) __strong const char *fileSystemRepresentation NS_RETURNS_INNER_POINTER;
+
+@property (readonly) const char *fileSystemRepresentation NS_RETURNS_INNER_POINTER;
 - (BOOL)getFileSystemRepresentation:(char *)cname maxLength:(NSUInteger)max;
 
 @end
@@ -48,7 +51,7 @@ FOUNDATION_EXPORT NSString *NSUserName(void);
 FOUNDATION_EXPORT NSString *NSFullUserName(void);
 
 FOUNDATION_EXPORT NSString *NSHomeDirectory(void);
-FOUNDATION_EXPORT NSString * __nullable NSHomeDirectoryForUser(NSString * __nullable userName);
+FOUNDATION_EXPORT NSString * _Nullable NSHomeDirectoryForUser(NSString * _Nullable userName);
 
 FOUNDATION_EXPORT NSString *NSTemporaryDirectory(void);
 

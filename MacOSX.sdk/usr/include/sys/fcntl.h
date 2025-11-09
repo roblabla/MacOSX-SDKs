@@ -279,6 +279,7 @@
 
 
 #define F_ADDFILESIGS_RETURN	97	/* Add signature from same file, return end offset in structure on sucess */
+#define F_CHECK_LV		98	/* Check if Library Validation allows this Mach-O file to be mapped into the calling process */
 
 
 // FS-specific fcntl()'s numbers begin at 0x00010000 and go up
@@ -385,6 +386,24 @@ typedef struct fsignatures {
 	void		*fs_blob_start;
 	size_t		fs_blob_size;
 } fsignatures_t;
+
+/*
+ * DYLD needs to check if the object is allowed to be combined
+ * into the main binary. This is done between the code signature
+ * is loaded and dyld is doing all the work to process the LOAD commands.
+ *
+ * While this could be done in F_ADDFILESIGS.* family the hook into
+ * the MAC module doesn't say no when LV isn't enabled and then that
+ * is cached on the vnode, and the MAC module never gets change once
+ * a process that library validation enabled.
+ */
+typedef struct fchecklv {
+	off_t		lv_file_start;
+	size_t		lv_error_message_size;
+	void		*lv_error_message;
+} fchecklv_t;
+
+
 
 /* lock operations for flock(2) */
 #define	LOCK_SH		0x01		/* shared file lock */

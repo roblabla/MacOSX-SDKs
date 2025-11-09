@@ -8,51 +8,48 @@
 #import <StoreKit/SKRequest.h>
 
 
-
 @class SKProductsRequest, SKProductsResponse, SKProduct;
 
 NS_ASSUME_NONNULL_BEGIN
+
 @protocol SKProductsRequestDelegate <SKRequestDelegate>
 
 @required
 // Sent immediately before -requestDidFinish:
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response;
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response NS_AVAILABLE_MAC(10_7);
 
 @end
-NS_ASSUME_NONNULL_END
 
 
 // request information about products for your application
-NS_CLASS_AVAILABLE(10_7, NA)
-NS_ASSUME_NONNULL_BEGIN
-@interface SKProductsRequest : SKRequest {
+SK_EXTERN_CLASS_AVAILABLE(10_7)
+@interface SKProductsRequest : SKRequest
+{
 @private
     id _productsRequestInternal;
 }
 
 // Set of string product identifiers
-- (id)initWithProductIdentifiers:(NSSet *)productIdentifiers;
+- (instancetype)initWithProductIdentifiers:(NSSet<NSString *> *)productIdentifiers NS_AVAILABLE_MAC(10_7);
 
-@property(nullable, assign) id <SKProductsRequestDelegate> delegate;
+@property(nonatomic, weak, nullable) id <SKProductsRequestDelegate> delegate NS_AVAILABLE_MAC(10_7);
 
 @end
-NS_ASSUME_NONNULL_END
 
 
-NS_CLASS_AVAILABLE(10_7, NA)
-NS_ASSUME_NONNULL_BEGIN
-@interface SKProductsResponse : NSObject {
+SK_EXTERN_CLASS_AVAILABLE(10_7)
+@interface SKProductsResponse : NSObject
+{
 @private
     id _internal;
 }
 
 // Array of SKProduct instances.
-@property(nullable, readonly) NSArray<SKProduct *> *products;
+@property(nonatomic, readonly) NSArray<SKProduct *> *products NS_AVAILABLE_MAC(10_7);
 
 // Array of invalid product identifiers.
-@property(nullable, readonly) NSArray<NSString *> *invalidProductIdentifiers;
+@property(nonatomic, readonly) NSArray<NSString *> *invalidProductIdentifiers NS_AVAILABLE_MAC(10_7);
 
 @end
+
 NS_ASSUME_NONNULL_END
-
-

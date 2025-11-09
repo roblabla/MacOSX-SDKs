@@ -81,20 +81,20 @@ CG_EXTERN CFTypeID CGFunctionGetTypeID(void)
 CG_EXTERN CGFunctionRef __nullable CGFunctionCreate(void * __nullable info,
     size_t domainDimension, const CGFloat *__nullable domain,
     size_t rangeDimension, const CGFloat * __nullable range,
-    const CGFunctionCallbacks * __nullable callbacks)
+    const CGFunctionCallbacks * cg_nullable callbacks)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain(function)', except it doesn't crash (as CFRetain
    does) if `function' is NULL. */
 
-CG_EXTERN CGFunctionRef __nullable CGFunctionRetain(
-    CGFunctionRef __nullable function)
+CG_EXTERN CGFunctionRef cg_nullable CGFunctionRetain(
+    CGFunctionRef cg_nullable function)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(function)', except it doesn't crash (as
    CFRelease does) if `function' is NULL. */
 
-CG_EXTERN void CGFunctionRelease(CGFunctionRef __nullable function)
+CG_EXTERN void CGFunctionRelease(CGFunctionRef cg_nullable function)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 CF_ASSUME_NONNULL_END

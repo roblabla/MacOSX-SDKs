@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -69,6 +69,10 @@ enum IODirection
 #define IODIRECTIONCOMPLETEWITHDATAVALIDDEFINED	1
      kIODirectionCompleteWithDataValid = 0x00000080,
 };
+
+
+
+
 #ifdef __LP64__
 typedef IOOptionBits IODirection;
 #endif /* __LP64__ */
@@ -100,6 +104,8 @@ enum {
     kIOMemoryPersistent		= 0x00010000,
     kIOMemoryThreadSafe		= 0x00100000,	// Shared with Buffer MD
     kIOMemoryClearEncrypt	= 0x00200000,	// Shared with Buffer MD
+    kIOMemoryUseReserve  	= 0x00800000,	// Shared with Buffer MD
+#define IOMEMORYUSERESERVEDEFINED	1
 
 };
 
@@ -126,6 +132,7 @@ enum
     kIOMemoryPurgeableVolatileBehaviorLifo     = VM_PURGABLE_BEHAVIOR_LIFO,
     kIOMemoryPurgeableVolatileOrderingObsolete = VM_PURGABLE_ORDERING_OBSOLETE,
     kIOMemoryPurgeableVolatileOrderingNormal   = VM_PURGABLE_ORDERING_NORMAL,
+    kIOMemoryPurgeableFaultOnAccess            = VM_PURGABLE_DEBUG_FAULT,
 };
 enum 
 {
@@ -380,7 +387,7 @@ public:
     @abstract Create an IOMemoryDescriptor to describe one virtual range of the specified map.
     @discussion This method creates and initializes an IOMemoryDescriptor for memory consisting of a single virtual memory range mapped into the specified map.  This memory descriptor needs to be prepared before it can be used to extract data from the memory described.
     @param address The virtual address of the first byte in the memory.
-    @param withLength The length of memory.
+    @param length The length of memory.
     @param options
         kIOMemoryDirectionMask (options:direction)	This nibble indicates the I/O direction to be associated with the descriptor, which may affect the operation of the prepare and complete methods on some architectures. 
     @param task The task the virtual ranges are mapped into. Note that unlike IOMemoryDescriptor::withAddress(), kernel_task memory must be explicitly prepared when passed to this api. The task argument may be NULL to specify memory by physical address.
@@ -783,22 +790,22 @@ public:
     @abstract Accessor to the virtual address of the first byte in the mapping.
     @discussion This method returns the virtual address of the first byte in the mapping.
     @result A virtual address. */
+    inline mach_vm_address_t 	getAddress() __attribute__((always_inline));
 /*! @function getSize
     @abstract Accessor to the length of the mapping.
     @discussion This method returns the length of the mapping.
     @result A byte count. */
-    inline mach_vm_address_t 	getAddress() __attribute__((always_inline));
     inline mach_vm_size_t 	getSize() __attribute__((always_inline));
 #else /* !__LP64__ */
 /*! @function getAddress
     @abstract Accessor to the virtual address of the first byte in the mapping.
     @discussion This method returns the virtual address of the first byte in the mapping.
     @result A virtual address. */
+    virtual mach_vm_address_t 	getAddress();
 /*! @function getSize
     @abstract Accessor to the length of the mapping.
     @discussion This method returns the length of the mapping.
     @result A byte count. */
-    virtual mach_vm_address_t 	getAddress();
     virtual mach_vm_size_t 	getSize();
 #endif /* !__LP64__ */
 

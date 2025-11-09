@@ -2,7 +2,7 @@
 //  GKVoiceChat.h
 //  Game Center
 //
-//  Copyright 2010-2015 Apple Inc. All rights reserved.
+//  Copyright 2010-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, GKVoiceChatPlayerState) {
 
 NS_ASSUME_NONNULL_BEGIN
 // GKVoiceChat represents an instance of a named voice communications channel
-NS_CLASS_AVAILABLE(10_8, 4_1)
+NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 @interface GKVoiceChat : NSObject
 
 - (void)start;  // start receiving audio from the chat

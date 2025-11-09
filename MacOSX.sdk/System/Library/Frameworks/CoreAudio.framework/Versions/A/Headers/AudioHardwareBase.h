@@ -383,14 +383,26 @@ CF_ENUM(AudioClassID)
                         property's data. Note that an error is not returned if the UID doesn't refer
                         to any AudioBoxes. Rather, this property will return kAudioObjectUnknown
                         as the value of the property.
+    @constant       kAudioPlugInPropertyClockDeviceList
+                        An array of AudioObjectIDs that represent all the AudioClockDevice objects
+                        currently provided by the plug-in.
+    @constant       kAudioPlugInPropertyTranslateUIDToClockDevice
+                        This property fetches the AudioObjectID that corresponds to the 
+                        AudioClockDevice that has the given UID. The UID is passed in via the 
+                        qualifier as a CFString while the AudioObjectID for the AudioClockDevice is 
+                        returned to the caller as the property's data. Note that an error is not 
+                        returned if the UID doesn't refer to any AudioClockDevices. Rather, this 
+                        property will return kAudioObjectUnknown as the value of the property.
 */
 CF_ENUM(AudioObjectPropertySelector)
 {
-    kAudioPlugInPropertyBundleID                = 'piid',
-    kAudioPlugInPropertyDeviceList              = 'dev#',
-    kAudioPlugInPropertyTranslateUIDToDevice    = 'uidd',
-    kAudioPlugInPropertyBoxList                 = 'box#',
-    kAudioPlugInPropertyTranslateUIDToBox       = 'uidb'
+    kAudioPlugInPropertyBundleID                  = 'piid',
+    kAudioPlugInPropertyDeviceList                = 'dev#',
+    kAudioPlugInPropertyTranslateUIDToDevice      = 'uidd',
+    kAudioPlugInPropertyBoxList                   = 'box#',
+    kAudioPlugInPropertyTranslateUIDToBox         = 'uidb',
+    kAudioPlugInPropertyClockDeviceList           = 'clk#',
+    kAudioPlugInPropertyTranslateUIDToClockDevice = 'uidc'
 };
 
 //==================================================================================================
@@ -503,6 +515,10 @@ CF_ENUM(AudioClassID)
                         An array of AudioObjectIDs that represent all the AudioDevice objects that
                         came out of the given AudioBox. Note that until a box is enabled, this list
                         will be empty.
+    @constant       kAudioBoxPropertyClockDeviceList
+                        An array of AudioObjectIDs that represent all the AudioClockDevice objects
+                        that came out of the given AudioBox. Note that until a box is enabled, this 
+                        list will be empty.
 */
 CF_ENUM(AudioObjectPropertySelector)
 {
@@ -514,7 +530,8 @@ CF_ENUM(AudioObjectPropertySelector)
     kAudioBoxPropertyIsProtected        = 'bpro',
     kAudioBoxPropertyAcquired           = 'bxon',
     kAudioBoxPropertyAcquisitionFailed  = 'bxof',
-    kAudioBoxPropertyDeviceList         = 'bdv#'
+    kAudioBoxPropertyDeviceList         = 'bdv#',
+    kAudioBoxPropertyClockDeviceList    = 'bcl#'
 };
 
 //==================================================================================================
@@ -714,6 +731,81 @@ CF_ENUM(AudioObjectPropertySelector)
     kAudioDevicePropertyPreferredChannelLayout          = 'srnd'
 };
 
+//==================================================================================================
+#pragma mark -
+#pragma mark AudioClockDevice Constants
+    
+/*!
+    @enum           AudioClockDevice Class Constants
+    @abstract       Various constants related to the AudioClockDevice class.
+    @constant       kAudioClockDeviceClassID
+                        The AudioClassID that identifies the AudioClockDevice class.
+*/
+CF_ENUM(AudioObjectPropertySelector)
+{
+    kAudioClockDeviceClassID    = 'aclk'
+};
+    
+    //==================================================================================================
+#pragma mark AudioClockDevice Properties
+    
+/*!
+    @enum           AudioClockDevice Properties
+    @abstract       AudioObjectPropertySelector values provided by the AudioClockDevice class.
+    @discussion     The AudioClockDevice class is a subclass of the AudioObject class. The class has just
+                    the global scope, kAudioObjectPropertyScopeGlobal, and only a master element.
+    @constant       kAudioClockDevicePropertyDeviceUID
+                        A CFString that contains a persistent identifier for the AudioClockDevice.
+                        An AudioClockDevice's UID is persistent across boots. The content of the UID
+                        string is a black box and may contain information that is unique to a
+                        particular instance of an clock's hardware or unique to the CPU. Therefore
+                        they are not suitable for passing between CPUs or for identifying similar
+                        models of hardware. The caller is responsible for releasing the returned
+                        CFObject.
+    @constant       kAudioClockDevicePropertyTransportType
+                        A UInt32 whose value indicates how the AudioClockDevice is connected to the
+                        CPU. Constants for some of the values for this property can be found in the
+                        enum in the AudioDevice Constants section of this file.
+    @constant       kAudioClockDevicePropertyClockDomain
+                        A UInt32 whose value indicates the clock domain to which this
+                        AudioClockDevice belongs. AudioClockDevices and AudioDevices that have the
+                        same value for this property are able to be synchronized in hardware.
+                        However, a value of 0 indicates that the clock domain for the device is
+                        unspecified and should be assumed to be separate from every other device's
+                        clock domain, even if they have the value of 0 as their clock domain as well.
+    @constant       kAudioClockDevicePropertyDeviceIsAlive
+                        A UInt32 where a value of 1 means the device is ready and available and 0
+                        means the device is usable and will most likely go away shortly.
+    @constant       kAudioClockDevicePropertyDeviceIsRunning
+                        A UInt32 where a value of 0 means the AudioClockDevice is not providing
+                        times and a value of 1 means that it is. Note that the notification for this
+                        property is usually sent from the AudioClockDevice's IO thread.
+    @constant       kAudioClockDevicePropertyLatency
+                        A UInt32 containing the number of frames of latency in the AudioClockDevice.
+    @constant       kAudioClockDevicePropertyControlList
+                        An array of AudioObjectIDs that represent the AudioControls of the
+                        AudioClockDevice. Note that if a notification is received for this property,
+                        any cached AudioObjectIDs for the device become invalid and need to be
+                        re-fetched.
+    @constant       kAudioClockDevicePropertyNominalSampleRate
+                        A Float64 that indicates the current nominal sample rate of the
+                        AudioClockDevice.
+    @constant       kAudioClockDevicePropertyAvailableNominalSampleRates
+                        An array of AudioValueRange structs that indicates the valid ranges for the
+                        nominal sample rate of the AudioClockDevice.
+*/
+CF_ENUM(AudioObjectPropertySelector)
+{
+    kAudioClockDevicePropertyDeviceUID                   = 'cuid',
+    kAudioClockDevicePropertyTransportType               = 'tran',
+    kAudioClockDevicePropertyClockDomain                 = 'clkd',
+    kAudioClockDevicePropertyDeviceIsAlive               = 'livn',
+    kAudioClockDevicePropertyDeviceIsRunning             = 'goin',
+    kAudioClockDevicePropertyLatency                     = 'ltnc',
+    kAudioClockDevicePropertyControlList                 = 'ctrl',
+    kAudioClockDevicePropertyNominalSampleRate           = 'nsrt',
+    kAudioClockDevicePropertyAvailableNominalSampleRates = 'nsr#'
+};
 //==================================================================================================
 #pragma mark -
 #pragma mark AudioEndPointDevice Constants

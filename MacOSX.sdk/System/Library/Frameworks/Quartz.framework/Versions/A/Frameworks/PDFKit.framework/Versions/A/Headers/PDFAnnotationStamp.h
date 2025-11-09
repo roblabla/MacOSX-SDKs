@@ -3,19 +3,17 @@
 // =====================================================================================================================
 
 
-#import <AppKit/AppKit.h>
+#import <PDFKit/PDFKitPlatform.h>
 #import <PDFKit/PDFAnnotation.h>
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 @class PDFAnnotationStampPrivateVars;
 
-
+NS_CLASS_DEPRECATED_MAC(10_5, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
 @interface PDFAnnotationStamp : PDFAnnotation <NSCopying>
 {
 @private
-    PDFAnnotationStampPrivateVars	*_pdfPriv2;
+    PDFAnnotationStampPrivateVars	*_private2;
 }
 
 // Name of stamp annotation.  Standard stamps include names like, "Approved", "Draft", "TopSecret", etc.
@@ -25,5 +23,3 @@
 - (void) setName: (NSString *) name;
 
 @end
-
-#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5

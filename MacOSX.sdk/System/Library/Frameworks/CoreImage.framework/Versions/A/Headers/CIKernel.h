@@ -8,14 +8,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#if __has_feature(objc_generics)
-# define CI_DICTIONARY(KeyType, ValueType) NSDictionary<KeyType, ValueType>
-# define CI_ARRAY(ValueType) NSArray <ValueType>
-#else
-# define CI_DICTIONARY(KeyType, ValueType) NSDictionary
-# define CI_ARRAY(ValueType) NSArray
-#endif
-
 /* Block callback used by Core Image to ask what rectangles of a kernel's input images
  * are needed to produce a desired rectangle of the kernel's output image.
  *
@@ -59,7 +51,7 @@ NS_CLASS_AVAILABLE(10_4, 8_0)
  * On OSX after 10.10, the array will contain instances of CIKernel, CIColorKernel or CIWarpKernel classes.
  * On iOS, the array will contain instances of CIKernel, CIColorKernel or CIWarpKernel classes.
  */
-+ (nullable CI_ARRAY(CIKernel*) *)kernelsWithString:(NSString *)string  NS_AVAILABLE(10_4, 8_0);
++ (nullable NSArray<CIKernel *> *)kernelsWithString:(NSString *)string  NS_AVAILABLE(10_4, 8_0);
 
 /* The string argument should contain a program with one kernel.
  * On OSX 10.10 and before, this returns a CIKernel object.
@@ -106,7 +98,7 @@ NS_CLASS_AVAILABLE(10_4, 8_0)
  */
 - (nullable CIImage *)applyWithExtent:(CGRect)extent
                           roiCallback:(CIKernelROICallback)callback
-                            arguments:(nullable CI_ARRAY(id) *)args  NS_AVAILABLE(10_11, 8_0);
+                            arguments:(nullable NSArray<id> *)args  NS_AVAILABLE(10_11, 8_0);
 @end
 
 
@@ -134,7 +126,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  * On iOS9 [CIColorKernel kernelWithString:] will return a CIColorKernel object or nil.
  * On OS X [CIColorKernel kernelWithString:] will return a CIColorKernel object or nil.
  */
-+ (nullable instancetype)kernelWithString:(NSString *)string  NS_AVAILABLE(10_10, 8_0);
++ (nullable instancetype)kernelWithString:(NSString *)string;
 
 /* Apply the receiver CIColorKernel to produce a new CIImage object.
  *
@@ -146,7 +138,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  * then the first object in the array must be a CIImage.
  */
 - (nullable CIImage *)applyWithExtent:(CGRect)extent
-                            arguments:(nullable CI_ARRAY(id) *)args  NS_AVAILABLE(10_11, 8_0);
+                            arguments:(nullable NSArray<id> *)args;
 @end
 
 
@@ -172,7 +164,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  * On iOS9 [CIWarpKernel kernelWithString:] will return a CIWarpKernel object or nil.
  * On OS X [CIWarpKernel kernelWithString:] will return a CIWarpKernel object or nil.
  */
-+ (nullable instancetype)kernelWithString:(NSString *)string  NS_AVAILABLE(10_10, 8_0);
++ (nullable instancetype)kernelWithString:(NSString *)string;
 
 /* Apply the receiver CIWarpKernel to produce a new CIImage object.
  *
@@ -193,10 +185,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 - (nullable CIImage *)applyWithExtent:(CGRect)extent
                           roiCallback:(CIKernelROICallback)callback
                            inputImage:(CIImage*)image
-                            arguments:(nullable CI_ARRAY(id) *)args  NS_AVAILABLE(10_11, 8_0);
+                            arguments:(nullable NSArray<id> *)args;
 @end
-
-#undef CI_DICTIONARY
-#undef CI_ARRAY
 
 NS_ASSUME_NONNULL_END

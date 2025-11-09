@@ -1,7 +1,7 @@
 /*
  NSPageController.h
  Application Kit
- Copyright (c) 2011-2015, Apple Inc.
+ Copyright (c) 2011-2016, Apple Inc.
  All rights reserved.
  */
 
@@ -115,13 +115,13 @@ NS_CLASS_AVAILABLE(10_8, NA)
 /* NOTE: The following 2 methods are only useful if you also implement the above two methods.
  */
 
-/* You only need to implement this if the view frame can differ between arrangedObjects. This method must return immediately. Avoid file, network or any potentially blocking or lengthy work to provide an answer. If this method is not implemented, all arrangedObjects are assumed to have the same frame as the current selectedViewController.view or the bounds of view when selectedViewController is nil.
+/* You only need to implement this if the view frame can differ between arrangedObjects. This method must return immediately. Avoid file, network or any potentially blocking or lengthy work to provide an answer. This method is called with a nil object to get the default frame size. If this method is not implemented, all arrangedObjects are assumed to have the same frame as the current selectedViewController.view or the bounds of view when selectedViewController is nil.
  */
-- (NSRect)pageController:(NSPageController *)pageController frameForObject:(id)object;
+- (NSRect)pageController:(NSPageController *)pageController frameForObject:(nullable id)object;
 
-/* Prepare the viewController and view for drawing. Setup data sources and perform layout. Note: this method is called on the main thread and should return immediately. The view will be asked to draw on a background thread and must support background drawing. If this method is not implemented, then viewController's representedObject is set to the representedObject.
+/* Prepare the viewController and view for drawing. Setup data sources and perform layout. Note: a nil object is passed for the purposes of caching a rendering of a default viewController. Note: this method is called on the main thread and should return immediately. The view will be asked to draw on a background thread and must support background drawing. If this method is not implemented, then viewController's representedObject is set to the representedObject.
  */
-- (void)pageController:(NSPageController *)pageController prepareViewController:(NSViewController *)viewController withObject:(id)object;
+- (void)pageController:(NSPageController *)pageController prepareViewController:(NSViewController *)viewController withObject:(nullable id)object;
 
 /* Note: You may find these useful regardless of which way you use NSPageController (History vs Custom).
  */

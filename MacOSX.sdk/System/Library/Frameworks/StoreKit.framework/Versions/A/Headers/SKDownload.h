@@ -10,7 +10,9 @@
 
 @class SKPaymentTransaction;
 
-typedef enum : NSInteger
+NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_ENUM(NSInteger, SKDownloadState)
 {
 	SKDownloadStateWaiting,
 	SKDownloadStateActive,
@@ -18,50 +20,50 @@ typedef enum : NSInteger
 	SKDownloadStateFinished,
 	SKDownloadStateFailed,
 	SKDownloadStateCancelled
-}
-SKDownloadState;
+} NS_AVAILABLE_MAC(10_8);
 
 
 // Model class to define a download for a particular product
-NS_CLASS_AVAILABLE(10_8, NA) 
-NS_ASSUME_NONNULL_BEGIN
-@interface SKDownload : NSObject {
+SK_EXTERN_CLASS_AVAILABLE(10_8)
+@interface SKDownload : NSObject
+{
 @private
     id _internal;
 }
 
 // Product identifier entered in iTunesConnect
-@property(readonly) NSString *contentIdentifier;
+@property(nonatomic, readonly) NSString *contentIdentifier NS_AVAILABLE_MAC(10_8);
 
 // Download state
-@property(readonly) SKDownloadState state;
+@property(nonatomic, readonly) SKDownloadState state NS_AVAILABLE_MAC(10_8);
 
 // Content URL
-@property(nullable, copy, readonly) NSURL *contentURL;
+@property(nonatomic, readonly, nullable) NSURL *contentURL NS_AVAILABLE_MAC(10_8);
 
 // Download progress 
-@property(readonly) float progress;
+@property(nonatomic, readonly) float progress NS_AVAILABLE_MAC(10_8);
 
 // Last error, can be NULL
-@property(nullable, copy, readonly) NSError *error;
+@property(nonatomic, copy, readonly, nullable) NSError *error NS_AVAILABLE_MAC(10_8);
 
 // Estimated number of seconds remaining in the download
-@property(readonly) NSTimeInterval timeRemaining;
+@property(nonatomic, readonly) NSTimeInterval timeRemaining NS_AVAILABLE_MAC(10_8);
 
 // Filesize of the asset
-@property(copy, readonly) NSNumber *contentLength;
+@property(nonatomic, copy, readonly) NSNumber *contentLength NS_AVAILABLE_MAC(10_8);
 
 // Version string of the product
-@property(nullable, copy, readonly) NSString* contentVersion;
+@property(nonatomic, copy, readonly) NSString *contentVersion NS_AVAILABLE_MAC(10_8);
 
 // The transaction associated with the downloadable file
-@property(nullable, nonatomic, readonly) SKPaymentTransaction *transaction;
+@property(nonatomic, readonly) SKPaymentTransaction *transaction NS_AVAILABLE_MAC(10_11);
 
 //
-+ (nullable NSURL *) contentURLForProductID:(NSString *)productID;
++ (nullable NSURL *) contentURLForProductID:(NSString *)productID NS_AVAILABLE_MAC(10_8);
 
 // Deletes the content for that identifier from disk
-+ (void) deleteContentForProductID:(NSString *)productID;
++ (void) deleteContentForProductID:(NSString *)productID NS_AVAILABLE_MAC(10_8);
 
 @end
+
 NS_ASSUME_NONNULL_END

@@ -1,5 +1,5 @@
 /*	NSCharacterSet.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #import <CoreFoundation/CFCharacterSet.h>
@@ -15,23 +15,25 @@ enum {
     NSOpenStepUnicodeReservedBase = 0xF400
 };
 
-@interface NSCharacterSet : NSObject <NSCopying, NSMutableCopying, NSCoding>
+@interface NSCharacterSet : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
-+ (NSCharacterSet *)controlCharacterSet;
-+ (NSCharacterSet *)whitespaceCharacterSet;
-+ (NSCharacterSet *)whitespaceAndNewlineCharacterSet;
-+ (NSCharacterSet *)decimalDigitCharacterSet;
-+ (NSCharacterSet *)letterCharacterSet;
-+ (NSCharacterSet *)lowercaseLetterCharacterSet;
-+ (NSCharacterSet *)uppercaseLetterCharacterSet;
-+ (NSCharacterSet *)nonBaseCharacterSet;
-+ (NSCharacterSet *)alphanumericCharacterSet;
-+ (NSCharacterSet *)decomposableCharacterSet;
-+ (NSCharacterSet *)illegalCharacterSet;
-+ (NSCharacterSet *)punctuationCharacterSet;
-+ (NSCharacterSet *)capitalizedLetterCharacterSet;
-+ (NSCharacterSet *)symbolCharacterSet;
-+ (NSCharacterSet *)newlineCharacterSet NS_AVAILABLE(10_5, 2_0);
+#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
+@property (readonly, class, copy) NSCharacterSet *controlCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *whitespaceCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *whitespaceAndNewlineCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *decimalDigitCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *letterCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *lowercaseLetterCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *uppercaseLetterCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *nonBaseCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *alphanumericCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *decomposableCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *illegalCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *punctuationCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *capitalizedLetterCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *symbolCharacterSet;
+@property (readonly, class, copy) NSCharacterSet *newlineCharacterSet NS_AVAILABLE(10_5, 2_0);
+#endif
 
 + (NSCharacterSet *)characterSetWithRange:(NSRange)aRange;
 + (NSCharacterSet *)characterSetWithCharactersInString:(NSString *)aString;
@@ -51,7 +53,7 @@ enum {
 - (BOOL)hasMemberInPlane:(uint8_t)thePlane;
 @end
 
-@interface NSMutableCharacterSet : NSCharacterSet <NSCopying, NSMutableCopying>
+@interface NSMutableCharacterSet : NSCharacterSet <NSCopying, NSMutableCopying, NSSecureCoding>
 
 - (void)addCharactersInRange:(NSRange)aRange;
 - (void)removeCharactersInRange:(NSRange)aRange;

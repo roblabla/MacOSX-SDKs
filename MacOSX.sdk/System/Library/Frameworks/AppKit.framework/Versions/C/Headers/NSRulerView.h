@@ -1,8 +1,8 @@
 /*
-        NSRulerView.h
-        Application Kit
-        Copyright (c) 1994-2015, Apple Inc.
-        All rights reserved.
+    NSRulerView.h
+    Application Kit
+    Copyright (c) 1994-2016, Apple Inc.
+    All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
@@ -54,7 +54,9 @@ typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
 
 /**************************** Initialization ****************************/
 
-- (instancetype)initWithScrollView:(nullable NSScrollView *)scrollView orientation:(NSRulerOrientation)orientation;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithScrollView:(nullable NSScrollView *)scrollView orientation:(NSRulerOrientation)orientation NS_DESIGNATED_INITIALIZER;
     // The designated initializer.  A ruler's size is controlled by its NSScrollView. initWithFrame: is overridden to call this.  The view is initialized with an unrealistically small default frame which will be reset in due time by the NSScrollView.
 
 /**************************** Basic setup ****************************/
@@ -161,8 +163,8 @@ typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
     // This is sent to the existing client before it is replaced by the new client.  The existing client can catch this to clean up any cached state it keeps while it is the client of a ruler.
 
 // This additional mapping allows mapping between location and point for clients with rotated coordinate system (i.e. vertical text view)
-- (CGFloat)rulerView:(NSRulerView *)ruler locationForPoint:(NSPoint)aPoint NS_AVAILABLE_MAC(10_7);
-- (NSPoint)rulerView:(NSRulerView *)ruler pointForLocation:(CGFloat)aPoint NS_AVAILABLE_MAC(10_7);
+- (CGFloat)rulerView:(NSRulerView *)ruler locationForPoint:(NSPoint)point NS_AVAILABLE_MAC(10_7);
+- (NSPoint)rulerView:(NSRulerView *)ruler pointForLocation:(CGFloat)point NS_AVAILABLE_MAC(10_7);
 @end
 
 NS_ASSUME_NONNULL_END

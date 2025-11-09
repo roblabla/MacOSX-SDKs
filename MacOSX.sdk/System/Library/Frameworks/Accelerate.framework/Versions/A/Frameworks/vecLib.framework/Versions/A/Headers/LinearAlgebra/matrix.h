@@ -3,6 +3,15 @@
 #ifndef __LA_MATRIX_HEADER__
 #define __LA_MATRIX_HEADER__
 
+#if __has_feature(assume_nonnull)
+////  If assume_nonnull is available, use it and use nullability qualifiers.
+_Pragma("clang assume_nonnull begin")
+#else
+////  Otherwise, neuter the nullability qualifiers.
+#define __nullable
+#define __nonnull
+#endif
+
 /*!
  @brief When creating a matrix object from existing data, these hints allow the
  user to pass useful information about the structure of the matrix.
@@ -78,7 +87,7 @@ typedef unsigned long la_hint_t;
  2. Make a new matrix transpose object from the object created in step 1.  The
  resulting object represents the matrix that you want to work with.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_matrix_from_float_buffer(const float *buffer,
                                            la_count_t matrix_rows,
                                            la_count_t matrix_cols,
@@ -130,7 +139,7 @@ la_object_t la_matrix_from_float_buffer(const float *buffer,
  2. Make a new matrix transpose object from the object created in step 1.  The
  resulting object represents the matrix that you want to work with.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_matrix_from_double_buffer(const double *buffer,
                                             la_count_t matrix_rows,
                                             la_count_t matrix_cols,
@@ -186,13 +195,13 @@ la_object_t la_matrix_from_double_buffer(const double *buffer,
  2. Make a new matrix transpose object from the object created in step 1.  The
  resulting object represents the matrix that you want to work with.
  */
-LA_FUNCTION LA_NONNULL1 LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_matrix_from_float_buffer_nocopy(float *buffer,
                                                   la_count_t matrix_rows,
                                                   la_count_t matrix_cols,
                                                   la_count_t matrix_row_stride,
                                                   la_hint_t matrix_hint,
-                                                  la_deallocator_t deallocator,
+                                                  __nullable la_deallocator_t deallocator,
                                                   la_attribute_t attributes);
 
 /*!
@@ -243,13 +252,13 @@ la_object_t la_matrix_from_float_buffer_nocopy(float *buffer,
  2. Make a new matrix transpose object from the object created in step 1.  The
  resulting object represents the matrix that you want to work with.
  */
-LA_FUNCTION LA_NONNULL1 LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_matrix_from_double_buffer_nocopy(double *buffer,
                                                    la_count_t matrix_rows,
                                                    la_count_t matrix_cols,
                                                    la_count_t matrix_row_stride,
                                                    la_hint_t matrix_hint,
-                                                   la_deallocator_t deallocator,
+                                                   __nullable la_deallocator_t deallocator,
                                                    la_attribute_t attributes);
 
 /*!
@@ -283,7 +292,7 @@ la_object_t la_matrix_from_double_buffer_nocopy(double *buffer,
  If the object is not a matrix or vector, nothing is written to the buffer and
  LA_INVALID_PARAMETER_ERROR is returned.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY
+LA_FUNCTION LA_AVAILABILITY
 la_status_t la_matrix_to_float_buffer(float *buffer,
                                             la_count_t buffer_row_stride,
                                             la_object_t matrix);
@@ -319,7 +328,7 @@ la_status_t la_matrix_to_float_buffer(float *buffer,
  If the object is not a matrix or vector, nothing is written to the buffer and
  LA_INVALID_PARAMETER_ERROR is returned.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY
+LA_FUNCTION LA_AVAILABILITY
 la_status_t la_matrix_to_double_buffer(double *buffer,
                                              la_count_t buffer_row_stride,
                                              la_object_t matrix);
@@ -335,7 +344,7 @@ la_status_t la_matrix_to_double_buffer(double *buffer,
  If the argument is a matrix, the number of rows is returned.
  Otherwise, zero is returned.
  */
-LA_FUNCTION LA_CONST LA_NONNULL LA_AVAILABILITY
+LA_FUNCTION LA_CONST LA_AVAILABILITY
 la_count_t la_matrix_rows(la_object_t matrix);
 
 /*!
@@ -349,7 +358,7 @@ la_count_t la_matrix_rows(la_object_t matrix);
  If the argument is a matrix, the number of columns is returned.
  Otherwise, zero is returned.
  */
-LA_FUNCTION LA_CONST LA_NONNULL LA_AVAILABILITY
+LA_FUNCTION LA_CONST LA_AVAILABILITY
 la_count_t la_matrix_cols(la_object_t matrix);
 
 /*!
@@ -405,7 +414,7 @@ la_count_t la_matrix_cols(la_object_t matrix);
  equal to the dimensions of the matrix, LA_SLICE_OUT_OF_BOUNDS_ERROR is 
  returned.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_matrix_slice(la_object_t matrix,
                                  la_index_t matrix_first_row,
                                  la_index_t matrix_first_col,
@@ -414,7 +423,7 @@ la_object_t la_matrix_slice(la_object_t matrix,
                                  la_count_t slice_rows,
                                  la_count_t slice_cols);
 
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_identity_matrix(la_count_t matrix_size,
                                     la_scalar_type_t scalar_type,
                                     la_attribute_t attributes);
@@ -444,7 +453,7 @@ la_object_t la_identity_matrix(la_count_t matrix_size,
  or is a matrix with both dimensions larger than one, the returned object
  will have status LA_INVALID_PARAMETER_ERROR.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_diagonal_matrix_from_vector(la_object_t vector,
                                             la_index_t matrix_diagonal);
 
@@ -470,7 +479,7 @@ la_object_t la_diagonal_matrix_from_vector(la_object_t vector,
 
  Always returns a 1 x vector_length vector.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_vector_from_matrix_row(la_object_t matrix,
                                            la_count_t matrix_row);
 
@@ -496,7 +505,7 @@ la_object_t la_vector_from_matrix_row(la_object_t matrix,
 
  Always returns a vector_length x 1 vector.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_vector_from_matrix_col(la_object_t matrix,
                                            la_count_t matrix_col);
 
@@ -532,8 +541,12 @@ la_object_t la_vector_from_matrix_col(la_object_t matrix,
 
  Always returns a vector_length x 1 vector.
  */
-LA_FUNCTION LA_NONNULL LA_AVAILABILITY LA_RETURNS_RETAINED
+LA_FUNCTION LA_AVAILABILITY LA_RETURNS_RETAINED
 la_object_t la_vector_from_matrix_diagonal(la_object_t matrix,
                                               la_index_t matrix_diagonal);
+
+#if __has_feature(assume_nonnull)
+_Pragma("clang assume_nonnull end")
+#endif
 
 #endif // __LA_MATRIX_HEADER__

@@ -2,7 +2,7 @@
 //  GKAchievement.h
 //  Game Center
 //
-//  Copyright 2010-2015 Apple Inc. All rights reserved.
+//  Copyright 2010-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 // GKAchievement represents a game achievement that the player has started or completely achieved.
-NS_CLASS_AVAILABLE(10_8, 4_1)
+NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 
 @interface GKAchievement : NSObject <NSCoding, NSSecureCoding>
 
@@ -49,7 +49,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 @property(assign, NS_NONATOMIC_IOSONLY) BOOL showsCompletionBanner NS_AVAILABLE(10_8, 5_0);             // A banner will be momentarily displayed after reporting a completed achievement
 
 // The identifier of the player that earned the achievement.
-@property(readonly, retain, NS_NONATOMIC_IOSONLY) GKPlayer *player NS_AVAILABLE(10_10, 8_0);
+@property(readonly, retain, nullable, NS_NONATOMIC_IOSONLY) GKPlayer *player NS_AVAILABLE(10_10, 8_0);
 
 @end
 

@@ -1,7 +1,7 @@
 /*
 	NSScrollView.h
 	Application Kit
-	Copyright (c) 1994-2015, Apple Inc.
+	Copyright (c) 1994-2016, Apple Inc.
 	All rights reserved.
 */
 #import <Foundation/NSDate.h>
@@ -91,7 +91,7 @@ typedef struct __SFlags {
     NSView *    _cornerView;
     id          _ruler;
     _SFlags     _sFlags;
-    __strong void *_extraIvars;
+    id          _extraIvars;
     
     // new rulers
     NSRulerView *_horizontalRuler;
@@ -103,23 +103,23 @@ typedef struct __SFlags {
 
 /* Returns the NSScrollView frame size that yields the specified contentView frame size.  This method should be used in preference to the deprecated +frameSizeForContentSize:hasHorizontalScroller:hasVerticalScroller:borderType:, which makes assumptions about the scrollers' classes, control size, and style.  The "horizontalScrollerClass" parameter should specify the class of horizontal scroller to use if the NSScrollView will have a horizontal scroller, or Nil if it will not.  Likewise for the "verticalScrollerClass" parameter.
 */
-+ (NSSize)frameSizeForContentSize:(NSSize)cSize horizontalScrollerClass:(nullable Class)horizontalScrollerClass verticalScrollerClass:(nullable Class)verticalScrollerClass borderType:(NSBorderType)aType controlSize:(NSControlSize)controlSize scrollerStyle:(NSScrollerStyle)scrollerStyle NS_AVAILABLE_MAC(10_7);
++ (NSSize)frameSizeForContentSize:(NSSize)cSize horizontalScrollerClass:(nullable Class)horizontalScrollerClass verticalScrollerClass:(nullable Class)verticalScrollerClass borderType:(NSBorderType)type controlSize:(NSControlSize)controlSize scrollerStyle:(NSScrollerStyle)scrollerStyle NS_AVAILABLE_MAC(10_7);
 
 /* Returns the contentView frame size that yields the specified NSScrollView frame size.  This method should be used in preference to the deprecated +contentSizeForFrameSize:hasHorizontalScroller:hasVerticalScroller:borderType: method, which makes assumptions about the scrollers' classes, control size, and style.  The "horizontalScrollerClass" parameter should specify the class of horizontal scroller to use if the NSScrollView will have a horizontal scroller, or Nil if it will not.  Likewise for the "verticalScrollerClass" parameter.
 */
-+ (NSSize)contentSizeForFrameSize:(NSSize)fSize horizontalScrollerClass:(nullable Class)horizontalScrollerClass verticalScrollerClass:(nullable Class)verticalScrollerClass borderType:(NSBorderType)aType controlSize:(NSControlSize)controlSize scrollerStyle:(NSScrollerStyle)scrollerStyle NS_AVAILABLE_MAC(10_7);
++ (NSSize)contentSizeForFrameSize:(NSSize)fSize horizontalScrollerClass:(nullable Class)horizontalScrollerClass verticalScrollerClass:(nullable Class)verticalScrollerClass borderType:(NSBorderType)type controlSize:(NSControlSize)controlSize scrollerStyle:(NSScrollerStyle)scrollerStyle NS_AVAILABLE_MAC(10_7);
 
 /* Returns the NSScrollView frame size that yields the specified contentView frame size.  This method assumes scrollers of NSRegularControlSize, that are not subclassed in a way that affects their metrics (scrollerWidth), and also assumes that scrollers of the current [NSScroller preferredScrollerStyle] will be used, which may not be the case if conditions such as legacy scroller subclassing or presence of accessory views force fallback to NSScrollerStyleLegacy for a particular NSScrollView instance.  Since those assumptions will produce incorrect results for some cases, this method should be considered deprecated; use +frameSizeForContentSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle:, which provides for full specification of the relevant parameters, instead.
 */
-+ (NSSize)frameSizeForContentSize:(NSSize)cSize hasHorizontalScroller:(BOOL)hFlag hasVerticalScroller:(BOOL)vFlag borderType:(NSBorderType)aType NS_DEPRECATED_MAC(10_0, 10_7, "Use +frameSizeForContentSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle: instead");
++ (NSSize)frameSizeForContentSize:(NSSize)cSize hasHorizontalScroller:(BOOL)hFlag hasVerticalScroller:(BOOL)vFlag borderType:(NSBorderType)type NS_DEPRECATED_MAC(10_0, 10_7, "Use +frameSizeForContentSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle: instead");
 
 /*Returns the contentView frame size that yields the specified NSScrollView frame size.  This method assumes scrollers of NSRegularControlSize, that are not subclassed in a way that affects their metrics (scrollerWidth), and also assumes that scrollers of the current [NSScroller preferredScrollerStyle] will be used, which may not be the case if conditions such as legacy scroller subclassing or presence of accessory views force fallback to NSScrollerStyleLegacy for a particular NSScrollView instance.  Since those assumptions will produce incorrect results for some cases, this method should be considered deprecated; use +contentSizeForFrameSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle:, which provides for full specification of the relevant parameters, instead.
 */
-+ (NSSize)contentSizeForFrameSize:(NSSize)fSize hasHorizontalScroller:(BOOL)hFlag hasVerticalScroller:(BOOL)vFlag borderType:(NSBorderType)aType NS_DEPRECATED_MAC(10_0, 10_7, "+contentSizeForFrameSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle: instead");
++ (NSSize)contentSizeForFrameSize:(NSSize)fSize hasHorizontalScroller:(BOOL)hFlag hasVerticalScroller:(BOOL)vFlag borderType:(NSBorderType)type NS_DEPRECATED_MAC(10_0, 10_7, "+contentSizeForFrameSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle: instead");
 
 @property (readonly) NSRect documentVisibleRect;
 @property (readonly) NSSize contentSize;
-@property (nullable, assign) id /* NSView * */ documentView;
+@property (nullable, assign) __kindof NSView *documentView;
 @property (strong) NSClipView *contentView;
 @property (nullable, strong) NSCursor *documentCursor;
 @property NSBorderType borderType;
@@ -139,7 +139,7 @@ typedef struct __SFlags {
 @property BOOL scrollsDynamically;
 - (void)tile;
 - (void)reflectScrolledClipView:(NSClipView *)cView;
-- (void)scrollWheel:(NSEvent *)theEvent;
+- (void)scrollWheel:(NSEvent *)event;
 
 /* An NSScrollView's scrollerStyle determines the style of scrollers that it will use.  AppKit sets this property automatically at runtime, based on the user's "Show scroll bars" setting and (if relevant) the set of connected pointing devices and their configured scroll capabilities, as determined by [NSScroller preferredScrollerStyle].  Setting an NSScrollView's scrollerStyle sets the scrollerStyle of its horizontalScroller and verticalScroller to match the new value.  If the NSScrollView subsequently creates or is assigned a new horizontalScroller or verticalScroller, they will at that time be assigned the same scrollerStyle that was given to the NSScrollView.
 */
@@ -209,27 +209,27 @@ typedef struct __SFlags {
 
 /* This notification is sent at the beginning of a magnify gesture. The notification object is the scroll view performing the magnification.
 */
-APPKIT_EXTERN NSString * const NSScrollViewWillStartLiveMagnifyNotification NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSNotificationName const NSScrollViewWillStartLiveMagnifyNotification NS_AVAILABLE_MAC(10_8);
 
 /* This notification is sent at the end of magnify gesture. The notification object is the scroll view view performing the magnification.
 */
-APPKIT_EXTERN NSString * const NSScrollViewDidEndLiveMagnifyNotification NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSNotificationName const NSScrollViewDidEndLiveMagnifyNotification NS_AVAILABLE_MAC(10_8);
 
 /* This notification is sent on the main thread at the beginning of user initiated live scroll tracking (gesture scroll or scroller tracking, e.g. thumb dragging).
  The notification object is the scroll view performing the scroll.
 */
-APPKIT_EXTERN NSString * const NSScrollViewWillStartLiveScrollNotification NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSNotificationName const NSScrollViewWillStartLiveScrollNotification NS_AVAILABLE_MAC(10_9);
 
 /* This notification is sent on the main thread after changing the clipview bounds origin due to a user initiated event.
  Not all user initiated scrolls are bracketed by a willStart/didEnd notification pair (legacy mice).
  The notification object is the scroll view performing the scroll.
 */
-APPKIT_EXTERN NSString * const NSScrollViewDidLiveScrollNotification NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSNotificationName const NSScrollViewDidLiveScrollNotification NS_AVAILABLE_MAC(10_9);
 
 /* This notification is sent on the main thread at the end of live scroll tracking.
  The notification object is the scroll view performing the scroll.
 */
-APPKIT_EXTERN NSString * const NSScrollViewDidEndLiveScrollNotification NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSNotificationName const NSScrollViewDidEndLiveScrollNotification NS_AVAILABLE_MAC(10_9);
 
 
 @interface NSScrollView(NSRulerSupport)

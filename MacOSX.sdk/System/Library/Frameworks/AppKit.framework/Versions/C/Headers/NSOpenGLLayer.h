@@ -1,7 +1,7 @@
 /*
         NSOpenGLLayer.h
         Application Kit
-        Copyright (c) 2008-2015, Apple Inc.
+        Copyright (c) 2008-2016, Apple Inc.
         All rights reserved.
 */
 
@@ -18,7 +18,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 @private
     NSOpenGLPixelFormat *_openGLPixelFormat;
     NSOpenGLContext *_openGLContext;
-    void *_reserved[5];
+    void *_reserved[5] __unused;
 }
 
 /* Provides access to the layer's associated view.  Subclasses shouldn't invoke -setView:, but can override it if desired to intercept the layer's association to, or dissociation from, a view.

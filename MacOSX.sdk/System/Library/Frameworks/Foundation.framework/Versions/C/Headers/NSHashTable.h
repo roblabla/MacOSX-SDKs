@@ -1,5 +1,5 @@
 /*	NSHashTable.h
-	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPointerFunctions.h>
@@ -82,19 +82,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 /****************	(void *) Hash table operations	****************/
 
-typedef struct {NSUInteger _pi; NSUInteger _si; void * __nullable _bs;} NSHashEnumerator;
+typedef struct {NSUInteger _pi; NSUInteger _si; void * _Nullable _bs;} NSHashEnumerator;
 
 FOUNDATION_EXPORT void NSFreeHashTable(NSHashTable *table);
 FOUNDATION_EXPORT void NSResetHashTable(NSHashTable *table);
 FOUNDATION_EXPORT BOOL NSCompareHashTables(NSHashTable *table1, NSHashTable *table2);
-FOUNDATION_EXPORT NSHashTable *NSCopyHashTableWithZone(NSHashTable *table, NSZone * __nullable zone);
-FOUNDATION_EXPORT void *NSHashGet(NSHashTable *table, const void * __nullable pointer);
-FOUNDATION_EXPORT void NSHashInsert(NSHashTable *table, const void * __nullable pointer);
-FOUNDATION_EXPORT void NSHashInsertKnownAbsent(NSHashTable *table, const void * __nullable pointer);
-FOUNDATION_EXPORT void * __nullable NSHashInsertIfAbsent(NSHashTable *table, const void * __nullable pointer);
-FOUNDATION_EXPORT void NSHashRemove(NSHashTable *table, const void * __nullable pointer);
+FOUNDATION_EXPORT NSHashTable *NSCopyHashTableWithZone(NSHashTable *table, NSZone * _Nullable zone);
+FOUNDATION_EXPORT void *NSHashGet(NSHashTable *table, const void * _Nullable pointer);
+FOUNDATION_EXPORT void NSHashInsert(NSHashTable *table, const void * _Nullable pointer);
+FOUNDATION_EXPORT void NSHashInsertKnownAbsent(NSHashTable *table, const void * _Nullable pointer);
+FOUNDATION_EXPORT void * _Nullable NSHashInsertIfAbsent(NSHashTable *table, const void * _Nullable pointer);
+FOUNDATION_EXPORT void NSHashRemove(NSHashTable *table, const void * _Nullable pointer);
 FOUNDATION_EXPORT NSHashEnumerator NSEnumerateHashTable(NSHashTable *table);
-FOUNDATION_EXPORT void * __nullable NSNextHashEnumeratorItem(NSHashEnumerator *enumerator);
+FOUNDATION_EXPORT void * _Nullable NSNextHashEnumeratorItem(NSHashEnumerator *enumerator);
 FOUNDATION_EXPORT void NSEndHashTableEnumeration(NSHashEnumerator *enumerator);
 FOUNDATION_EXPORT NSUInteger NSCountHashTable(NSHashTable *table);
 FOUNDATION_EXPORT NSString *NSStringFromHashTable(NSHashTable *table);
@@ -104,14 +104,14 @@ FOUNDATION_EXPORT NSArray *NSAllHashTableObjects(NSHashTable *table);
 /****************	Legacy	****************/
 
 typedef struct {
-    NSUInteger	(* __nullable hash)(NSHashTable *table, const void *);
-    BOOL	(* __nullable isEqual)(NSHashTable *table, const void *, const void *);
-    void	(* __nullable retain)(NSHashTable *table, const void *);
-    void	(* __nullable release)(NSHashTable *table, void *);
-    NSString 	* __nullable (* __nullable describe)(NSHashTable *table, const void *);
+    NSUInteger	(* _Nullable hash)(NSHashTable *table, const void *);
+    BOOL	(* _Nullable isEqual)(NSHashTable *table, const void *, const void *);
+    void	(* _Nullable retain)(NSHashTable *table, const void *);
+    void	(* _Nullable release)(NSHashTable *table, void *);
+    NSString 	* _Nullable (* _Nullable describe)(NSHashTable *table, const void *);
 } NSHashTableCallBacks;
 
-FOUNDATION_EXPORT NSHashTable *NSCreateHashTableWithZone(NSHashTableCallBacks callBacks, NSUInteger capacity, NSZone * __nullable zone);
+FOUNDATION_EXPORT NSHashTable *NSCreateHashTableWithZone(NSHashTableCallBacks callBacks, NSUInteger capacity, NSZone * _Nullable zone);
 FOUNDATION_EXPORT NSHashTable *NSCreateHashTable(NSHashTableCallBacks callBacks, NSUInteger capacity);
 
 

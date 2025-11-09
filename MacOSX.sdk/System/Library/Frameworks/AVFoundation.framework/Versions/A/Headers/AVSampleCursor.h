@@ -224,7 +224,7 @@ typedef struct {
 	@abstract		The URL of the storage container of the current sample, as well as other samples that are intended to be loaded in the same operation as a "chunk".
 	@discussion		May be nil; if nil, the storage location of the chunk is the URL of the sample cursor's track's asset, if it has one.
 */
-@property (nonatomic, readonly) NSURL *currentChunkStorageURL;
+@property (nonatomic, readonly, nullable) NSURL *currentChunkStorageURL;
 
 /*!
     @struct		AVSampleCursorStorageRange

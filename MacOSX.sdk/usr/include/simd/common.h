@@ -91,11 +91,11 @@
  *      C++ Function                    Equivalent C Function
  *      --------------------------------------------------------------------
  *      simd::abs(x)                    vector_abs(x)
- *      simd::max(x)                    vector_max(x)
- *      simd::min(x)                    vector_min(x)
+ *      simd::max(x,y)                  vector_max(x,y)
+ *      simd::min(x,y)                  vector_min(x,y)
  *      simd::clamp(x,min,max)          vector_clamp(x,min,max)
  *      simd::sign(x)                   vector_sign(x)
- *      simd::mix(x)                    vector_mix(x)
+ *      simd::mix(x,y,t)                vector_mix(x,y,t)
  *      simd::recip(x)                  vector_recip(x)
  *      simd::rsqrt(x)                  vector_rsqrt(x)
  *      simd::fract(x)                  vector_fract(x)

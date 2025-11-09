@@ -1,7 +1,7 @@
 /*
     NSStatusBarButton.h
     Application Kit
-    Copyright (c) 1997-2015, Apple Inc.
+    Copyright (c) 1997-2016, Apple Inc.
     All rights reserved.
 */
 
@@ -14,7 +14,7 @@
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface NSStatusBarButton : NSButton {
 @private
-    id _statusBarButtonPrivate;
+    id _statusBarButtonPrivate __unused;
 }
 
 /// When YES the status bar icon has a disabled/off appearance while still being functional, such as allowing selection and actions. Defaults to NO.

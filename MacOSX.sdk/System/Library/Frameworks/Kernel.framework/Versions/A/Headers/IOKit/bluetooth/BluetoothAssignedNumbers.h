@@ -390,6 +390,8 @@ enum
     
 	// Range 0x1001-0xFFFF dynamically assigned.
     kBluetoothL2CAPPSMDynamicStart				= 0x1001,
+	// AACP
+	kBluetoothL2CAPPSMAACP						= 0x1001,
 	kBluetoothL2CAPPSMD2D						= 0x100F,
     kBluetoothL2CAPPSMDynamicEnd				= 0xFFFF,
     
@@ -637,13 +639,27 @@ enum BluetoothHCIExtendedInquiryResponseDataTypes
     kBluetoothHCIExtendedInquiryResponseDataTypePublicTargetAddress                         =   0x17,
     kBluetoothHCIExtendedInquiryResponseDataTypeRandomTargetAddress                         =   0x18,
     kBluetoothHCIExtendedInquiryResponseDataTypeAppearance                                  =   0x19,
+    kBluetoothHCIExtendedInquiryResponseDataTypeAdvertisingInterval							=	0x1A,
+    kBluetoothHCIExtendedInquiryResponseDataTypeLEBluetoothDeviceAddress					=	0x1B,
+    kBluetoothHCIExtendedInquiryResponseDataTypeLERole										=	0x1C,
+    kBluetoothHCIExtendedInquiryResponseDataTypeSimplePairingHash							=	0x1D,
+    kBluetoothHCIExtendedInquiryResponseDataTypeSimplePairingRandomizer						=	0x1E,
+    kBluetoothHCIExtendedInquiryResponseDataTypeServiceSolicitation32BitUUIDs				=	0x1F,
+    kBluetoothHCIExtendedInquiryResponseDataTypeServiceData32BitUUID						=	0x20,
+    kBluetoothHCIExtendedInquiryResponseDataTypeServiceData128BitUUID						=	0x21,
+    kBluetoothHCIExtendedInquiryResponseDataTypeSecureConnectionsConfirmationValue			=	0x22,
+    kBluetoothHCIExtendedInquiryResponseDataTypeSecureConnectionsRandomValue				=	0x23,
+    kBluetoothHCIExtendedInquiryResponseDataTypeURI											=	0x24,
+    kBluetoothHCIExtendedInquiryResponseDataTypeIndoorPositioning							=	0x25,
+    kBluetoothHCIExtendedInquiryResponseDataTypeTransportDiscoveryData						=	0x26,
+    kBluetoothHCIExtendedInquiryResponseDataType3DInformationData							=	0x3D,
 	kBluetoothHCIExtendedInquiryResponseDataTypeManufacturerSpecificData					=	0xFF
 };
 
 
 // HCI Versions
 
-enum BluetoothHCIVersions
+typedef enum BluetoothHCIVersions
 {
 	kBluetoothHCIVersionCoreSpecification1_0b												=	0x00,
 	kBluetoothHCIVersionCoreSpecification1_1												=	0x01,
@@ -652,13 +668,14 @@ enum BluetoothHCIVersions
 	kBluetoothHCIVersionCoreSpecification2_1EDR												=	0x04,
 	kBluetoothHCIVersionCoreSpecification3_0HS												=	0x05,
 	kBluetoothHCIVersionCoreSpecification4_0												=	0x06,
-	kBluetoothHCIVersionCoreSpecification4_1												=	0x07
-};
+    kBluetoothHCIVersionCoreSpecification4_1												=	0x07,
+    kBluetoothHCIVersionCoreSpecification4_2												=	0x08
+} BluetoothHCIVersions;
 
 
 // LMP Versions
 
-enum BluetoothLMPVersions
+typedef enum BluetoothLMPVersions
 {
 	kBluetoothLMPVersionCoreSpecification1_0b												=	0x00,
 	kBluetoothLMPVersionCoreSpecification1_1												=	0x01,
@@ -667,8 +684,9 @@ enum BluetoothLMPVersions
 	kBluetoothLMPVersionCoreSpecification2_1EDR												=	0x04,
 	kBluetoothLMPVersionCoreSpecification3_0HS												=	0x05,
 	kBluetoothLMPVersionCoreSpecification4_0												=	0x06,
-	kBluetoothLMPVersionCoreSpecification4_1												=	0x07
-};
+	kBluetoothLMPVersionCoreSpecification4_1												=	0x07,
+    kBluetoothLMPVersionCoreSpecification4_2												=	0x08
+} BluetoothLMPVersions;
 
 #ifdef	__cplusplus
 	}

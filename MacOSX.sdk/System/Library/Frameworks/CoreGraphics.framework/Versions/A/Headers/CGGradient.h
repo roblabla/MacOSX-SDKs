@@ -54,7 +54,7 @@ CG_EXTERN CFTypeID CGGradientGetTypeID(void)
    for those values. */
 
 CG_EXTERN CGGradientRef __nullable CGGradientCreateWithColorComponents(
-    CGColorSpaceRef __nullable space, const CGFloat * __nullable components,
+    CGColorSpaceRef cg_nullable space, const CGFloat * cg_nullable components,
     const CGFloat * __nullable locations, size_t count)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
@@ -75,21 +75,21 @@ CG_EXTERN CGGradientRef __nullable CGGradientCreateWithColorComponents(
    values. */
 
 CG_EXTERN CGGradientRef __nullable CGGradientCreateWithColors(
-    CGColorSpaceRef __nullable space, CFArrayRef __nullable colors,
+    CGColorSpaceRef __nullable space, CFArrayRef cg_nullable colors,
     const CGFloat * __nullable locations)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain' except that it doesn't crash (as `CFRetain'
    does) if `gradient' is NULL. */
 
-CG_EXTERN CGGradientRef __nullable CGGradientRetain(
-    CGGradientRef __nullable gradient)
+CG_EXTERN CGGradientRef cg_nullable CGGradientRetain(
+    CGGradientRef cg_nullable gradient)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease' except that it doesn't crash (as `CFRelease'
    does) if `gradient' is NULL. */
 
-CG_EXTERN void CGGradientRelease(CGGradientRef __nullable gradient)
+CG_EXTERN void CGGradientRelease(CGGradientRef cg_nullable gradient)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 CF_ASSUME_NONNULL_END

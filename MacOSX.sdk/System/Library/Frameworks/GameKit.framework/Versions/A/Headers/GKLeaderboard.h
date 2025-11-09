@@ -2,10 +2,11 @@
 //  GKLeaderboard.h
 //  Game Center
 //
-//  Copyright 2010-2015 Apple Inc. All rights reserved.
+//  Copyright 2010-2016 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <os/lock.h>
 
 typedef NS_ENUM(NSInteger, GKLeaderboardTimeScope) {
     GKLeaderboardTimeScopeToday = 0,
@@ -24,7 +25,7 @@ typedef NS_ENUM(NSInteger, GKLeaderboardPlayerScope) {
 NS_ASSUME_NONNULL_BEGIN
 
 // GKLeaderboard represents the set of high scores for the current game, always including the local player's best score.
-NS_CLASS_AVAILABLE(10_8, 4_1)
+NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 @interface GKLeaderboard : NSObject
 
 @property(assign, NS_NONATOMIC_IOSONLY)            GKLeaderboardTimeScope      timeScope;
@@ -83,7 +84,7 @@ NS_ASSUME_NONNULL_END
  
  // Asynchronously load the image. Error will be nil on success.
 #if TARGET_OS_IPHONE
-- (void)loadImageWithCompletionHandler:(void(^__nullable)(UIImage * __nullable image, NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 7_0);
+- (void)loadImageWithCompletionHandler:(void(^__nullable)(UIImage * __nullable image, NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 7_0) __TVOS_UNAVAILABLE;
 #else
 - (void)loadImageWithCompletionHandler:(void(^__nullable)(NSImage * __nullable image, NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 7_0);
 #endif

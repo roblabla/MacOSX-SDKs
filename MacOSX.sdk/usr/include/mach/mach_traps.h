@@ -119,6 +119,12 @@ extern kern_return_t _kernelrpc_mach_vm_map_trap(
 				vm_prot_t cur_protection
 );
 
+extern kern_return_t _kernelrpc_mach_vm_purgable_control_trap(
+				mach_port_name_t target,
+				mach_vm_offset_t address,
+				vm_purgable_t control,
+				int *state);
+
 extern kern_return_t _kernelrpc_mach_port_allocate_trap(
 				mach_port_name_t target,
 				mach_port_right_t right,
@@ -195,6 +201,12 @@ extern kern_return_t _kernelrpc_mach_port_unguard_trap(
 				uint64_t guard
 );
 
+extern kern_return_t mach_generate_activity_id(
+				mach_port_name_t target,
+				int count,
+				uint64_t *activity_id
+);
+
 extern kern_return_t macx_swapon(
 				uint64_t filename,
 				int flags,
@@ -227,6 +239,18 @@ extern kern_return_t thread_switch(
 				mach_msg_timeout_t option_time);
 
 extern mach_port_name_t task_self_trap(void);
+
+extern kern_return_t host_create_mach_voucher_trap(
+				mach_port_name_t host,
+				mach_voucher_attr_raw_recipe_array_t recipes,
+				int recipes_size,
+				mach_port_name_t *voucher);
+
+extern kern_return_t mach_voucher_extract_attr_recipe_trap(
+				mach_port_name_t voucher_name,
+				mach_voucher_attr_key_t key,
+				mach_voucher_attr_raw_recipe_t recipe,
+				mach_msg_type_number_t *recipe_size);
 
 /*
  *	Obsolete interfaces.

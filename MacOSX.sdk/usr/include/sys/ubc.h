@@ -40,6 +40,7 @@
 #include <mach/memory_object_types.h>
 #include <sys/ucred.h>
 
+
 /* defns for ubc_msync() and ubc_msync */
 
 #define	UBC_PUSHDIRTY	0x01	/* clean any dirty pages in the specified range to the backing store */
@@ -112,6 +113,7 @@ upl_size_t ubc_upl_maxbufsize(void);
 int	is_file_clean(vnode_t, off_t);
 
 errno_t mach_to_bsd_errno(kern_return_t mach_err);
+
 
 __END_DECLS
 

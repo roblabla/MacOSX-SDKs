@@ -3,7 +3,7 @@
  
      Contains:   Types, constants, prototypes for Unicode Utilities (Unicode input and text utils)
  
-     Copyright:  © 1997-2011 by Apple Inc. All rights reserved.
+     Copyright:  © 1997-2016 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -372,6 +372,7 @@ enum {
   kUCTSOptionsNoneMask          = 0,
   kUCTSOptionsReleaseStringMask = 1,
   kUCTSOptionsDataIsOrderedMask = 2
+  // Additional option bits are defined for internal use
 };
 
 

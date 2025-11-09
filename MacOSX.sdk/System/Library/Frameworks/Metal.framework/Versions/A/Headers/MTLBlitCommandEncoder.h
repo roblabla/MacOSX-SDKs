@@ -10,6 +10,7 @@
 #import <Metal/MTLCommandEncoder.h>
 #import <Metal/MTLBuffer.h>
 #import <Metal/MTLTexture.h>
+#import <Metal/MTLFence.h>
 
 NS_ASSUME_NONNULL_BEGIN
 /*!
@@ -104,6 +105,22 @@ NS_AVAILABLE(10_11, 8_0)
  @abstract Basic memory copy between buffers.
  */
 - (void)copyFromBuffer:(id <MTLBuffer>)sourceBuffer sourceOffset:(NSUInteger)sourceOffset toBuffer:(id <MTLBuffer>)destinationBuffer destinationOffset:(NSUInteger)destinationOffset size:(NSUInteger)size;
+
+/*!
+ @method updateFence:
+ @abstract Update the event to capture all GPU work so far enqueued by this encoder.
+ @discussion The event is updated at kernel submission to maintain global order and prevent deadlock.
+ Drivers may delay fence updates until the end of the encoder. Drivers may also wait on fences at the beginning of an encoder. It is therefore illegal to wait on a fence after it has been updated in the same encoder.
+ */
+- (void)updateFence:(id <MTLFence>)fence NS_AVAILABLE(NA, 10_0);
+
+/*!
+ @method waitForFence:
+ @abstract Prevent further GPU work until the event is reached.
+ @discussion The event is evaluated at kernel submision to maintain global order and prevent deadlock.
+ Drivers may delay fence updates until the end of the encoder. Drivers may also wait on fences at the beginning of an encoder. It is therefore illegal to wait on a fence after it has been updated in the same encoder.
+ */
+- (void)waitForFence:(id <MTLFence>)fence NS_AVAILABLE(NA, 10_0);
 
 @end
 NS_ASSUME_NONNULL_END

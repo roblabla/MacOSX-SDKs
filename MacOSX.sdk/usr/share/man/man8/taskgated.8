@@ -9,7 +9,7 @@
 .Nd task_for_pid access control daemon
 .Sh SYNOPSIS             \" Section Header - required - don't modify
 .Nm
-.Op Fl ps                \" [-abcd]
+.Op Fl s                 \" [-abcd]
 .Op Fl t Ar timeout      \" [-t timeout]
 .Op Fl i Ar pid          \" [-i pid]
 .Sh DESCRIPTION          \" Section Header - required - don't modify
@@ -19,10 +19,6 @@ When the kernel is asked for the task port of a process, and preliminary access 
 checks pass, it invokes this daemon (via launchd) to make the decision.
 .Sh OPTIONS
 .Bl -tag -width -indent  \" Differs from above in tag removed 
-.It Fl p
-Accepts the old (Tiger) convention that a process with a primary effective group of
-procmod or procview is allowed to get task ports. Without this option, this legacy
-mode is not supported.
 .It Fl s
 Allow signed applications marked as "safe" to have free access to
 task ports, without having to pass an authorization check. Note that such callers
@@ -82,6 +78,8 @@ startup configuration file for
 .Sh HISTORY
 .Nm
 was first introduced in Mac OS 10.5 (Leopard).
+.Pp
+Procmod and procview support (-p) was removed in 10.11.
 .Pp
 Certain software updates of Mac OS 10.4 (Tiger) introduced the convention
 requiring membership in the procmod or procview groups to control task port

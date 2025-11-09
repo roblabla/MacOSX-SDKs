@@ -44,6 +44,10 @@
 #include <stdint.h>
 
 #include <TargetConditionals.h>
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 #if TARGET_OS_EMBEDDED || TARGET_IPHONE_SIMULATOR
 /* @@@ We need something that tells us which platform we are building
    for that let's us distinguish if we are doing an emulator build. */
@@ -223,7 +227,9 @@ typedef struct SecAsn1Template_struct {
  *
  * "buf"  For decode only; points to the start of the decoded data for 
  *        the current template. Callee can use the tag at this location 
- *        to infer the returned template. Not used on encode. 
+ *        to infer the returned template. Not used on encode.
+ *
+ * "len"  For decode only; the length of buf.
  *
  * "Dest" points to the template-specific item being decoded to 
  *        or encoded from. (This is as opposed to arg, which 
@@ -235,10 +241,13 @@ typedef const SecAsn1Template * SecAsn1TemplateChooser(
 	void *arg, 
 	Boolean enc,
 	const char *buf,
+	size_t len,
 	void *dest);
 
 typedef SecAsn1TemplateChooser * SecAsn1TemplateChooserPtr;
 
 CF_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop
 
 #endif /* _SEC_ASN1_TYPES_H_ */

@@ -25,6 +25,9 @@ MDL_EXPORT NSString * __nonnull const kUTTypePolygon NS_AVAILABLE(10_11, 9_0);
 /* Stereolithography file format, file extension STL, UTI public.standard-tesselated-geometry-format */
 MDL_EXPORT NSString * __nonnull const kUTTypeStereolithography NS_AVAILABLE(10_11, 9_0);
 
+/* Universal Scene Description file format, file extension USDA or USDB, UTI com.pixar.universal-scene-description */
+MDL_EXPORT NSString * __nonnull const kUTTypeUniversalSceneDescription NS_AVAILABLE(10_12, 10_0);
+
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, MDLIndexBitDepth)
 {
@@ -43,12 +46,12 @@ typedef NS_ENUM(NSInteger, MDLGeometryType) {
     MDLGeometryTypeTriangles,
     MDLGeometryTypeTriangleStrips,
     MDLGeometryTypeQuads,
-    MDLGeometryTypeVariableTopology,
-    MDLGeometryKindPoints = 0,        // Legacy enumerations
-    MDLGeometryKindLines,
-    MDLGeometryKindTriangles,
-    MDLGeometryKindTriangleStrips,
-    MDLGeometryKindQuads
+    MDLGeometryTypeVariableTopology
+};
+
+typedef NS_ENUM(NSInteger, MDLProbePlacement) {
+    MDLProbePlacementUniformGrid = 0,
+    MDLProbePlacementIrradianceDistribution
 };
 
 NS_CLASS_AVAILABLE(10_11, 9_0)
