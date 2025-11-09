@@ -25,6 +25,6 @@ exports:
                        _kPrefsPreferredVideoDeviceUID, _kPrefsRecentsList, _kPrefsRecentsVersion, 
                        _kPrefsRequestedAudioInputDeviceUIDBeforeExpanseAutoSwitch, 
                        _kPrefsShowInternalFailureUI, _kPrefsSideListState, _kPrefsSkipValidAccountCheck ]
-    objc-classes:    [ FTDockTileHelper, FTMutableRecentsItem, FTRecentsController, 
-                       FTRecentsItem, FTTelephonyCapabilityManager, Prefs ]
+    objc-classes:    [ FTDockTileHelper, FTRecentsController, FTTelephonyCapabilityManager, 
+                       Prefs ]
 ...

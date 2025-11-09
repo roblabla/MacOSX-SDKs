@@ -3,6 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics'
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN5boost10wrapexceptINS_9gregorian16bad_day_of_monthEEE, 
@@ -31,7 +32,12 @@ exports:
                        __ZTSNSt3__18functionIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _AnalyticsDisableAllTransformSampling, _AnalyticsIsEventUsed, 
+    symbols:         [ '_$s13CoreAnalytics0B14QueryValuesFor9argumentsSo13OS_xpc_object_pSo5NSSetC_tF', 
+                       '_$s13CoreAnalytics0B14XPCQueryClientCACycfC', '_$s13CoreAnalytics0B14XPCQueryClientCACycfc', 
+                       '_$s13CoreAnalytics0B14XPCQueryClientCMa', '_$s13CoreAnalytics0B14XPCQueryClientCMn', 
+                       '_$s13CoreAnalytics0B14XPCQueryClientCMo', '_$s13CoreAnalytics0B14XPCQueryClientCMu', 
+                       '_$s13CoreAnalytics0B14XPCQueryClientCN', '_$s13CoreAnalytics0B14XPCQueryClientCfD', 
+                       _AnalyticsDisableAllTransformSampling, _AnalyticsIsEventUsed, 
                        _AnalyticsNotifyTaskingAvailable, _AnalyticsReenableAllTransformSampling, 
                        _AnalyticsRolloverEvents, _AnalyticsRolloverWithOptions, _AnalyticsSendEvent, 
                        _AnalyticsSendEventLazy, _AnalyticsSendEventLazyHighPriority, 
@@ -85,5 +91,5 @@ exports:
                        _analytics_send_event_lazy_with_options, _analytics_send_event_with_options, 
                        _analytics_send_exploding_event_lazy, _analytics_set_callback_for_queried_event, 
                        _analytics_set_callback_for_queried_event_with_queue, _report_locale_prefs_to_analyticsd ]
-    objc-classes:    [ AnalyticsConfigurationObserver, AnalyticsEventObserver ]
+    objc-classes:    [ AnalyticsConfigurationObserver, AnalyticsEventObserver, _TtC13CoreAnalytics23AnalyticsXPCQueryClient ]
 ...

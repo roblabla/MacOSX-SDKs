@@ -5,6 +5,7 @@
 //  Copyright (c) 2018-2024 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 #import <HealthKit/HKObjectType.h>
 
@@ -60,6 +61,7 @@ HK_EXTERN HKClinicalTypeIdentifier const HKClinicalTypeIdentifierCoverageRecord 
  @abstract      A type that identifies samples that contain clinical record data.
  */
 HK_EXTERN
+NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(12.0), watchos(5.0), macCatalyst(13.0), macos(13.0))
 @interface HKClinicalType : HKSampleType
 @end

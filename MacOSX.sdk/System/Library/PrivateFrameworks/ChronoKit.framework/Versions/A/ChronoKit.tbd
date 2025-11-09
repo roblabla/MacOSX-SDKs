@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ChronoKit.framework/Versions/A/ChronoKit'
-current-version: 530
+current-version: 536.2.14
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1197,6 +1197,8 @@ exports:
                        '_$s9ChronoKit16BaseCacheManagerC13ingestArchive3url3fory10Foundation3URLV_xtKFTq', 
                        '_$s9ChronoKit16BaseCacheManagerC13isDataPresent3forSbx_tFTj', 
                        '_$s9ChronoKit16BaseCacheManagerC13isDataPresent3forSbx_tFTq', 
+                       '_$s9ChronoKit16BaseCacheManagerC14requiresReload3forSbx_tFTj', 
+                       '_$s9ChronoKit16BaseCacheManagerC14requiresReload3forSbx_tFTq', 
                        '_$s9ChronoKit16BaseCacheManagerC17hasDeveloperError3forSbx_tKFTj', 
                        '_$s9ChronoKit16BaseCacheManagerC17hasDeveloperError3forSbx_tKFTq', 
                        '_$s9ChronoKit16BaseCacheManagerC18archiveFilePromise3forAA0gH0_px_tKFTj', 
@@ -1663,8 +1665,6 @@ exports:
                        '_$s9ChronoKit18WidgetCacheManagerC12subdirectory16cacheKeyProvider015protectionLevelI004fileE010forReadingACSS_AA0dH9Providing_pAA0cdH0V0dH0AaIPRts_AA0c5EntryH0V0pH0AMRtsXPAA014DataProtectionkO0_pSo06NSFileE0CSbtcfC', 
                        '_$s9ChronoKit18WidgetCacheManagerC12timelineData3for0cB022TimelineViewCollection_pAA0C8EntryKeyV_tKFTj', 
                        '_$s9ChronoKit18WidgetCacheManagerC12timelineData3for0cB022TimelineViewCollection_pAA0C8EntryKeyV_tKFTq', 
-                       '_$s9ChronoKit18WidgetCacheManagerC14requiresReload3forSbAA0C8EntryKeyV_tFTj', 
-                       '_$s9ChronoKit18WidgetCacheManagerC14requiresReload3forSbAA0C8EntryKeyV_tFTq', 
                        '_$s9ChronoKit18WidgetCacheManagerC24archiveValidationOptions0cB00C8ArchiverC0gH0VvMTj', 
                        '_$s9ChronoKit18WidgetCacheManagerC24archiveValidationOptions0cB00C8ArchiverC0gH0VvMTq', 
                        '_$s9ChronoKit18WidgetCacheManagerC24archiveValidationOptions0cB00C8ArchiverC0gH0VvgTj', 
@@ -1682,7 +1682,14 @@ exports:
                        '_$s9ChronoKit18WidgetUpdateTimingP08scheduleD02ony10Foundation4DateV_tFTq', 
                        '_$s9ChronoKit18WidgetUpdateTimingP9publisher7Combine12AnyPublisherVy10Foundation4DateVs5NeverOGvgTj', 
                        '_$s9ChronoKit18WidgetUpdateTimingP9publisher7Combine12AnyPublisherVy10Foundation4DateVs5NeverOGvgTq', 
-                       '_$s9ChronoKit18WidgetUpdateTimingTL', '_$s9ChronoKit19ControlEntryContentC15copyAsStateOnlyACyFTj', 
+                       '_$s9ChronoKit18WidgetUpdateTimingTL', '_$s9ChronoKit19ControlEntryContentC14requiresReloadSbvMTj', 
+                       '_$s9ChronoKit19ControlEntryContentC14requiresReloadSbvMTq', 
+                       '_$s9ChronoKit19ControlEntryContentC14requiresReloadSbvgTj', 
+                       '_$s9ChronoKit19ControlEntryContentC14requiresReloadSbvgTq', 
+                       '_$s9ChronoKit19ControlEntryContentC14requiresReloadSbvpMV', 
+                       '_$s9ChronoKit19ControlEntryContentC14requiresReloadSbvsTj', 
+                       '_$s9ChronoKit19ControlEntryContentC14requiresReloadSbvsTq', 
+                       '_$s9ChronoKit19ControlEntryContentC15copyAsStateOnlyACyFTj', 
                        '_$s9ChronoKit19ControlEntryContentC15copyAsStateOnlyACyFTq', 
                        '_$s9ChronoKit19ControlEntryContentC17hasDeveloperErrorSbvMTj', 
                        '_$s9ChronoKit19ControlEntryContentC17hasDeveloperErrorSbvMTq', 
@@ -1706,10 +1713,10 @@ exports:
                        '_$s9ChronoKit19ControlEntryContentC7archive06WidgetB00C7Archive_pvpMV', 
                        '_$s9ChronoKit19ControlEntryContentC7archive06WidgetB00C7Archive_pvsTj', 
                        '_$s9ChronoKit19ControlEntryContentC7archive06WidgetB00C7Archive_pvsTq', 
-                       '_$s9ChronoKit19ControlEntryContentC7archive17hasDeveloperErrorAC06WidgetB00C7Archive_p_SbtcfC', 
-                       '_$s9ChronoKit19ControlEntryContentC7archive17hasDeveloperErrorAC06WidgetB00C7Archive_p_SbtcfCTj', 
-                       '_$s9ChronoKit19ControlEntryContentC7archive17hasDeveloperErrorAC06WidgetB00C7Archive_p_SbtcfCTq', 
-                       '_$s9ChronoKit19ControlEntryContentC7archive17hasDeveloperErrorAC06WidgetB00C7Archive_p_Sbtcfc', 
+                       '_$s9ChronoKit19ControlEntryContentC7archive17hasDeveloperError14requiresReloadAC06WidgetB00C7Archive_p_S2btcfC', 
+                       '_$s9ChronoKit19ControlEntryContentC7archive17hasDeveloperError14requiresReloadAC06WidgetB00C7Archive_p_S2btcfCTj', 
+                       '_$s9ChronoKit19ControlEntryContentC7archive17hasDeveloperError14requiresReloadAC06WidgetB00C7Archive_p_S2btcfCTq', 
+                       '_$s9ChronoKit19ControlEntryContentC7archive17hasDeveloperError14requiresReloadAC06WidgetB00C7Archive_p_S2btcfc', 
                        '_$s9ChronoKit19ControlEntryContentC9hashValueSivgTj', '_$s9ChronoKit19ControlEntryContentC9hashValueSivgTq', 
                        '_$s9ChronoKit19ControlEntryContentC9hashValueSivpMV', '_$s9ChronoKit19ControlEntryContentCMa', 
                        '_$s9ChronoKit19ControlEntryContentCMm', '_$s9ChronoKit19ControlEntryContentCMn', 
@@ -2347,7 +2354,7 @@ exports:
                        '_$s9ChronoKit21TintedWidgetViewModelCMm', '_$s9ChronoKit21TintedWidgetViewModelCMn', 
                        '_$s9ChronoKit21TintedWidgetViewModelCMo', '_$s9ChronoKit21TintedWidgetViewModelCMu', 
                        '_$s9ChronoKit21TintedWidgetViewModelCN', '_$s9ChronoKit21TintedWidgetViewModelCfD', 
-                       '_$s9ChronoKit21TintedWidgetViewModelCfd', '_$s9ChronoKit21WatchCompactJindoViewV13isLeftToRight07leadingF008trailingF07spacing24smartStackPlatterPadding20launchRequestHandlerACyxq_GSb_xq_S2dyycSgtcfC', 
+                       '_$s9ChronoKit21TintedWidgetViewModelCfd', '_$s9ChronoKit21WatchCompactJindoViewV07leadingF008trailingF07spacing24smartStackPlatterPadding20launchRequestHandlerACyxq_Gx_q_S2dyycSgtcfC', 
                        '_$s9ChronoKit21WatchCompactJindoViewV4bodyQrvg', '_$s9ChronoKit21WatchCompactJindoViewV4bodyQrvpMV', 
                        '_$s9ChronoKit21WatchCompactJindoViewV4bodyQrvpQOMQ', '_$s9ChronoKit21WatchCompactJindoViewVMa', 
                        '_$s9ChronoKit21WatchCompactJindoViewVMn', '_$s9ChronoKit21WatchCompactJindoViewVyxq_G7SwiftUI0F0AAMc', 
@@ -2488,7 +2495,7 @@ exports:
                        '_$s9ChronoKit22RemoteExtensionStoringP6update012remoteWidgetD4InfoyAA0hdI0V_tKFTq', 
                        '_$s9ChronoKit22RemoteExtensionStoringTL', '_$s9ChronoKit22WatchExpandedJindoViewV4bodyQrvg', 
                        '_$s9ChronoKit22WatchExpandedJindoViewV4bodyQrvpMV', '_$s9ChronoKit22WatchExpandedJindoViewV4bodyQrvpQOMQ', 
-                       '_$s9ChronoKit22WatchExpandedJindoViewV7appName13isLeftToRight07leadingF008trailingF07spacing24smartStackPlatterPadding11titleHeight20launchRequestHandlerACyxq_GSSSg_Sbxq_S3dSgyycSgtcfC', 
+                       '_$s9ChronoKit22WatchExpandedJindoViewV7appName07leadingF008trailingF07spacing24smartStackPlatterPadding0lmnO6Outset11titleHeight20launchRequestHandlerACyxq_GSSSg_xq_S4dSgyycSgtcfC', 
                        '_$s9ChronoKit22WatchExpandedJindoViewVMa', '_$s9ChronoKit22WatchExpandedJindoViewVMn', 
                        '_$s9ChronoKit22WatchExpandedJindoViewVyxq_G7SwiftUI0F0AAMc', 
                        '_$s9ChronoKit22WidgetCacheURLProviderC12subdirectoryACSSSg_tcfC', 

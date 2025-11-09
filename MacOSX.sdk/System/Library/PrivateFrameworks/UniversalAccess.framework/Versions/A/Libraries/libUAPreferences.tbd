@@ -140,7 +140,7 @@ exports:
                        _UAZoomFocusFollowModeKey, _UAZoomFocusFollowsKeyboardKey, 
                        _UAZoomFocusMovementDelayKey, _UAZoomFocusMovementKey, _UAZoomFullscreenTemporaryZoomEnabledKey, 
                        _UAZoomMaximumKey, _UAZoomMinimumKey, _UAZoomModeKey, _UAZoomPanningModeKey, 
-                       _UAZoomRegionFrameKey, _UAZoomScaleKey, _UAZoomShowPreviewKey, 
-                       _UAZoomSmoothImagesKey, _UAZoomSplitScreenModeKey, _UAZoomTemporaryDetachEnabledKey, 
-                       _kUALogLevel ]
+                       _UAZoomRegionFrameKey, _UAZoomScaleKey, _UAZoomScreenShareEnabledKey, 
+                       _UAZoomShowPreviewKey, _UAZoomSmoothImagesKey, _UAZoomSplitScreenModeKey, 
+                       _UAZoomTemporaryDetachEnabledKey, _kUALogLevel ]
 ...

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 272 -module-name VisionKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 272.1 -module-name VisionKit
 import CoreGraphics
 import Foundation
 import Swift
@@ -36,7 +36,7 @@ public enum RecognizedItem : Swift.Identifiable {
     public var observation: Vision.VNRecognizedTextObservation {
       get
     }
-    @available(iOS 16.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    @available(iOS 16.0, *)
     @available(macCatalyst, unavailable)
     public typealias ID = Foundation.UUID
   }
@@ -55,7 +55,7 @@ public enum RecognizedItem : Swift.Identifiable {
     public var observation: Vision.VNBarcodeObservation {
       get
     }
-    @available(iOS 16.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    @available(iOS 16.0, *)
     @available(macCatalyst, unavailable)
     public typealias ID = Foundation.UUID
   }
@@ -67,7 +67,7 @@ public enum RecognizedItem : Swift.Identifiable {
   public var bounds: VisionKit.RecognizedItem.Bounds {
     get
   }
-  @available(iOS 16.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  @available(iOS 16.0, *)
   @available(macCatalyst, unavailable)
   public typealias ID = Foundation.UUID
 }

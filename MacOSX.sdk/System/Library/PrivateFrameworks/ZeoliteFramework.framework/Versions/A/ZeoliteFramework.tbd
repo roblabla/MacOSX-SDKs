@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ZeoliteFramework.framework/Versions/A/ZeoliteFramework'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s16ZeoliteFramework10MetricTreeMp', '_$s16ZeoliteFramework10MetricTreeP4NodeAC_SETn', 
                        '_$s16ZeoliteFramework10MetricTreeP4NodeAC_SeTn', '_$s16ZeoliteFramework10MetricTreeP5nodesSay4NodeQzGvgTj', 
                        '_$s16ZeoliteFramework10MetricTreeP5nodesSay4NodeQzGvgTq', 
@@ -195,8 +193,8 @@ exports:
                        '_$s16ZeoliteFramework14TensorNNScorerCfD', '_$s16ZeoliteFramework14TensorNNScorerCfd', 
                        '_$s16ZeoliteFramework14TensorNNScorerCyxGAA22NearestNeighborsScorerAAMc', 
                        '_$s16ZeoliteFramework14TensorNNScorerCyxGAA22NearestNeighborsScorerAAWP', 
-                       '_$s16ZeoliteFramework14createEmbedder12embedderNameAA0D0_pSgAA0dF0O_tYaF', 
-                       '_$s16ZeoliteFramework14createEmbedder12embedderNameAA0D0_pSgAA0dF0O_tYaFTu', 
+                       '_$s16ZeoliteFramework14createEmbedder12embedderName7versionAA0D0_pSgAA0dF0O_SSSgtYaF', 
+                       '_$s16ZeoliteFramework14createEmbedder12embedderName7versionAA0D0_pSgAA0dF0O_SSSgtYaFTu', 
                        '_$s16ZeoliteFramework14filterBySenderySbAA16ExtractedMessageVF', 
                        '_$s16ZeoliteFramework15JSONLinesLoaderV17makeAsyncIteratorACyxGyF', 
                        '_$s16ZeoliteFramework15JSONLinesLoaderV4nextxSgyYaKF', '_$s16ZeoliteFramework15JSONLinesLoaderV4nextxSgyYaKFTu', 
@@ -206,6 +204,8 @@ exports:
                        '_$s16ZeoliteFramework15MADTextEmbedderV5embed4textSaySfGSgSS_tYaFTu', 
                        '_$s16ZeoliteFramework15MADTextEmbedderV5embed5textsSaySaySfGGSgSaySSG_tYaF', 
                        '_$s16ZeoliteFramework15MADTextEmbedderV5embed5textsSaySaySfGGSgSaySSG_tYaFTu', 
+                       '_$s16ZeoliteFramework15MADTextEmbedderV7versionACSgSSSg_tYacfC', 
+                       '_$s16ZeoliteFramework15MADTextEmbedderV7versionACSgSSSg_tYacfCTu', 
                        '_$s16ZeoliteFramework15MADTextEmbedderVAA0D0AAMc', '_$s16ZeoliteFramework15MADTextEmbedderVAA0D0AAWP', 
                        '_$s16ZeoliteFramework15MADTextEmbedderVACyYacfC', '_$s16ZeoliteFramework15MADTextEmbedderVACyYacfCTu', 
                        '_$s16ZeoliteFramework15MADTextEmbedderVMa', '_$s16ZeoliteFramework15MADTextEmbedderVMn', 
@@ -255,7 +255,7 @@ exports:
                        '_$s16ZeoliteFramework16MessageExtractorV17makeAsyncIteratorACyF', 
                        '_$s16ZeoliteFramework16MessageExtractorV4nextAA09ExtractedC0VSgyYaKF', 
                        '_$s16ZeoliteFramework16MessageExtractorV4nextAA09ExtractedC0VSgyYaKFTu', 
-                       '_$s16ZeoliteFramework16MessageExtractorV8lastDays11maxMessages0G6Length0eC4DateACSi_S2i10Foundation0J0VSgtcfC', 
+                       '_$s16ZeoliteFramework16MessageExtractorV8lastDays11maxMessages0G6Length11cleanupText0eC4DateACSi_S2iSb10Foundation0L0VSgtcfC', 
                        '_$s16ZeoliteFramework16MessageExtractorVMa', '_$s16ZeoliteFramework16MessageExtractorVMn', 
                        '_$s16ZeoliteFramework16MessageExtractorVN', '_$s16ZeoliteFramework16MessageExtractorVScIAAMc', 
                        '_$s16ZeoliteFramework16MessageExtractorVSciAAMc', '_$s16ZeoliteFramework16multiplyMatrices7matrix10E8RowCount0e6ColumnG07matrix20ifG00ihG012resultMatrixySaySfG_S2iAJS2iAJztF', 

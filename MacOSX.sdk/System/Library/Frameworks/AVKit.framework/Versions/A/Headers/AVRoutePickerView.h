@@ -11,7 +11,12 @@
 
 #import <AVFoundation/AVFoundation.h>
 
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #import <AVKit/AVKitDefines.h>
+#else
+#import <AVKit/AVKitDefines.h>
+#endif // TARGET_OS_OSX || TARGET_OS_MACCATALYST
+
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #else

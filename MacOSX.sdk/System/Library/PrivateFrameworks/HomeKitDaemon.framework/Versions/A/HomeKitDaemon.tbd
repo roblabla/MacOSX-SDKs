@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitDaemon.framework/Versions/A/HomeKitDaemon'
-current-version: 1203.1.7
+current-version: 1215.2.15
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -30,6 +30,25 @@ exports:
                        '_$s13HomeKitDaemon0A15UtilTestFailureVMa', '_$s13HomeKitDaemon0A15UtilTestFailureVMn', 
                        '_$s13HomeKitDaemon0A15UtilTestFailureVN', '_$s13HomeKitDaemon0A15UtilTestFailureVSEAAMc', 
                        '_$s13HomeKitDaemon0A15UtilTestFailureVSeAAMc', '_$s13HomeKitDaemon0A15UtilTestFailureVs5ErrorAAMc', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C09hasActiveF0Sbvg', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C09hasActiveF0SbvgTq', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C09hasActiveF0SbvpMV', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C11lockedState33_3447FF08A1619CD35E85D86C7C901A42LL15Synchronization5MutexVyAC06LockedH0AELLVGvpfi', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C17messageDispatcher0G10TargetUUID0G12ReceiveQueue16accessoryBrowser17logEventSubmitterACSo010HMFMessageH0C_10Foundation0J0VSo17OS_dispatch_queueCSo012HMDAccessoryN8Protocol_pSo06HMMLogP10Submitting_ptcfC', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C17messageDispatcher0G10TargetUUID0G12ReceiveQueue16accessoryBrowser17logEventSubmitterACSo010HMFMessageH0C_10Foundation0J0VSo17OS_dispatch_queueCSo012HMDAccessoryN8Protocol_pSo06HMMLogP10Submitting_ptcfc', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C17messageTargetUUID10Foundation0I0Vvg', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C17messageTargetUUID10Foundation0I0VvpMV', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C17messageTargetUUID10Foundation0I0VvpWvd', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C19messageReceiveQueueSo17OS_dispatch_queueCvg', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C19messageReceiveQueueSo17OS_dispatch_queueCvpMV', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C19messageReceiveQueueSo17OS_dispatch_queueCvpWvd', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C9configureyyF', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0C9configureyyFTq', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0CACycfC', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0CACycfc', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0CMa', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0CMn', 
+                       '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0CN', '_$s13HomeKitDaemon0a27ManagerXPCClientConnectionsD0CfD', 
                        '_$s13HomeKitDaemon11TestCommandV4fromACs7Decoder_p_tKcfC', 
                        '_$s13HomeKitDaemon11TestCommandV6encode2toys7Encoder_p_tKF', 
                        '_$s13HomeKitDaemon11TestCommandV8testNameSSSgvpfi', '_$s13HomeKitDaemon11TestCommandVMa', 
@@ -319,8 +338,10 @@ exports:
                        '_$s13HomeKitDaemon7AccountCMa', '_$s13HomeKitDaemon7AccountCMn', 
                        '_$s13HomeKitDaemon7AccountCN', '_$s13HomeKitDaemon7AccountCfD', 
                        '_$sSd13HomeKitDaemonE3daySdvgZ', '_$sSd13HomeKitDaemonE4hourSdvgZ', 
-                       '_$sSd13HomeKitDaemonE6minuteSdvgZ', '_$sSo10HMCContextC13HomeKitDaemonE11saveOrThrowyyKF', 
-                       '_$sSo10HMCContextC13HomeKitDaemonE14performAndWait5blockxxyYbKc_tYaKs8SendableRzlF', 
+                       '_$sSd13HomeKitDaemonE6minuteSdvgZ', '_$sSo034HMDHomeManagerXPCClientConnectionsB7FactoryC13HomeKitDaemonEABycfC', 
+                       '_$sSo034HMDHomeManagerXPCClientConnectionsB7FactoryC13HomeKitDaemonEABycfc', 
+                       '_$sSo034HMDHomeManagerXPCClientConnectionsB7FactoryCMa', 
+                       '_$sSo10HMCContextC13HomeKitDaemonE11saveOrThrowyyKF', '_$sSo10HMCContextC13HomeKitDaemonE14performAndWait5blockxxyYbKc_tYaKs8SendableRzlF', 
                        '_$sSo10HMCContextC13HomeKitDaemonE14performAndWait5blockxxyYbKc_tYaKs8SendableRzlFTu', 
                        '_$sSo10HMCContextC13HomeKitDaemonE30unsafeSynchronousThrowingBlock5blockxxyKXE_tKs8SendableRzlF', 
                        '_$sSo13HMDTTRManagerC13HomeKitDaemonE13defaultFilterSo015HMMRadarRequestF0_pvgZ', 
@@ -346,7 +367,11 @@ exports:
                        '_$sSo22HMDAppleMediaAccessoryCSL13HomeKitDaemonMc', '_$sSo25HMAccessorySleepWakeStateV13HomeKitDaemonE11descriptionSSvg', 
                        '_$sSo25HMAccessorySleepWakeStateV13HomeKitDaemonE11descriptionSSvpMV', 
                        '_$sSo25HMAccessorySleepWakeStateVs23CustomStringConvertible13HomeKitDaemonMc', 
-                       '_$sSo33HMDAccessorySetupMetricDispatcherC13HomeKitDaemonE07networkC019discoveryController0h4InfoJ09sessionID19idsIdentifierString011currentWiFiK00qrS11NetworkRSSI12numResidents0V21AppleMediaAccessories019accessoryDiagnosticK0018primaryResidentIdsoP0025primaryResidentDiagnosticK08homeUUID025primaryResidentDiagnosticK7FetchedSo15HMMHomeLogEventCAC09DiscoveryJ0C_AC0tkJ0CS2SSo05HMFWistK0Cs5Int32VS2iSo021HMAccessoryDiagnostick15ProtoDiagnosticK0CSgSSSgA2_10Foundation4UUIDVSbtF', 
+                       '_$sSo28HMDMatterCapabilitiesFactoryC13HomeKitDaemonEABycfC', 
+                       '_$sSo28HMDMatterCapabilitiesFactoryC13HomeKitDaemonEABycfc', 
+                       '_$sSo28HMDMatterCapabilitiesFactoryCMa', '_$sSo28HMDMobileAssetManagerFactoryC13HomeKitDaemonEABycfC', 
+                       '_$sSo28HMDMobileAssetManagerFactoryC13HomeKitDaemonEABycfc', 
+                       '_$sSo28HMDMobileAssetManagerFactoryCMa', '_$sSo33HMDAccessorySetupMetricDispatcherC13HomeKitDaemonE07networkC019discoveryController0h4InfoJ09sessionID19idsIdentifierString011currentWiFiK00qrS11NetworkRSSI12numResidents0V21AppleMediaAccessories019accessoryDiagnosticK0018primaryResidentIdsoP0025primaryResidentDiagnosticK08homeUUID025primaryResidentDiagnosticK7FetchedSo15HMMHomeLogEventCAC09DiscoveryJ0C_AC0tkJ0CS2SSo05HMFWistK0Cs5Int32VS2iSo021HMAccessoryDiagnostick15ProtoDiagnosticK0CSgSSSgA2_10Foundation4UUIDVSbtF', 
                        '_$sSo33HMDAccessorySetupMetricDispatcherC13HomeKitDaemonE24obtainDiscoveryAssertionyXlyF', 
                        '_$sSo33HMDAccessorySetupMetricDispatcherC13HomeKitDaemonE25releaseDiscoveryAssertion15assertionHandleyyXl_tF', 
                        '_$sSo39HMDHomeMatterServicesCoordinatorFactoryC13HomeKitDaemonEABycfC', 
@@ -359,10 +384,12 @@ exports:
     objc-classes:    [ HMDACWGKeyManager, HMDAccessoryInfoFetchController, HMDAccountChangeObserver, 
                        HMDAccountMetadata, HMDActionSetResponse, HMDActionSetStateObserver, 
                        HMDActionSetStateSubscriptionManager, HMDDiscoveryController, 
-                       HMDFMFHandler, HMDHomeMatterServicesCoordinatorFactory, HMDMainDriver, 
-                       HMDNetworkInfoController, HMDUserActivityReportCoordinatorFactory, 
+                       HMDFMFHandler, HMDHomeManagerXPCClientConnectionsManagerFactory, 
+                       HMDHomeMatterServicesCoordinatorFactory, HMDMainDriver, HMDMatterCapabilitiesFactory, 
+                       HMDMobileAssetManagerFactory, HMDNetworkInfoController, HMDUserActivityReportCoordinatorFactory, 
                        HomeIntelligenceActivityLogger, _TtC13HomeKitDaemon14ActionSetState, 
                        _TtC13HomeKitDaemon16HomeIntelligence, _TtC13HomeKitDaemon31HMDHomeKeySetupWalletLogEventV2, 
                        _TtC13HomeKitDaemon32HMDWidgetMonitoredCharacteristic, _TtC13HomeKitDaemon35AddACWGKeysToExistingHomesOperation, 
+                       _TtC13HomeKitDaemon38HomeManagerXPCClientConnectionsManager, 
                        _TtC13HomeKitDaemon7Account ]
 ...

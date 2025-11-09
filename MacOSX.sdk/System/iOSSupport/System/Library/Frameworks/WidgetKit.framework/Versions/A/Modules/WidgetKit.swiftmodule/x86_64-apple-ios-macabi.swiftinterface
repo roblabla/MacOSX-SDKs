@@ -1,9 +1,8 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -library-level api -enable-experimental-feature FreestandingMacros -enable-experimental-feature AccessLevelOnImport -enable-bare-slash-regex -user-module-version 530 -module-name WidgetKit -package-name com.apple.chrono.internal
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target x86_64-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -library-level api -enable-bare-slash-regex -user-module-version 536.2.14 -module-name WidgetKit -package-name com.apple.chrono.internal
 import AppIntents
 @_exported import DeveloperToolsSupport
-import Foundation
 import Intents
 import Swift
 import SwiftUI
@@ -85,7 +84,7 @@ extension WidgetKit.WidgetInfo : Swift.Identifiable, Swift.Hashable, Swift.Equat
   public static func == (a: WidgetKit.WidgetInfo, b: WidgetKit.WidgetInfo) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 14.0, watchOS 9.0, macOS 11.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
+  @available(tvOS, unavailable)
   public typealias ID = WidgetKit.WidgetInfo
   public var hashValue: Swift.Int {
     get
@@ -179,8 +178,8 @@ extension WidgetKit.ControlInfo : Swift.Identifiable, Swift.Hashable, Swift.Equa
   public static func == (lhs: WidgetKit.ControlInfo, rhs: WidgetKit.ControlInfo) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 18.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @available(visionOS, unavailable)
   @available(macOS, unavailable)
   public typealias ID = Swift.String
@@ -343,6 +342,8 @@ public class WidgetCenter {
   @available(tvOS, unavailable)
   public func invalidateConfigurationRecommendations()
   @preconcurrency public func getCurrentConfigurations(_ completion: @escaping @Sendable (Swift.Result<[WidgetKit.WidgetInfo], any Swift.Error>) -> Swift.Void)
+  @available(iOS 18.0, macOS 15.0, watchOS 11.0, *)
+  @available(tvOS, unavailable)
   public func currentConfigurations() async throws -> [WidgetKit.WidgetInfo]
   public func reloadTimelines(ofKind kind: Swift.String)
   public func reloadAllTimelines()
@@ -367,7 +368,7 @@ extension SwiftUICore.View {
     get
   }
   @available(iOS 16.0, watchOS 9.0, macOS 13.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
+  @available(tvOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s9WidgetKit09AccessoryA10BackgroundV4bodyQrvp", 0) __
 }
 extension SwiftUICore.EnvironmentValues {
@@ -715,8 +716,8 @@ extension WidgetKit.ControlWidgetToggle {
     get
   }
   @available(iOS 18.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @available(visionOS, unavailable)
   @available(macOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s9WidgetKit07ControlA18ToggleDefaultLabelV4bodyQrvp", 0) __
@@ -821,8 +822,8 @@ extension WidgetKit.ControlWidgetButton where Label == SwiftUICore.Text {
     get
   }
   @available(iOS 18.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @available(visionOS, unavailable)
   @available(macOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s9WidgetKit07ControlA24ButtonDefaultActionLabelV4bodyQrvp", 0) __
@@ -849,9 +850,9 @@ public struct Timeline<EntryType> where EntryType : WidgetKit.TimelineEntry {
     get
   }
   @available(watchOS 11.0, *)
-  @available(iOS, unavailable, introduced: 13.0)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(macOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s9WidgetKit09AccessoryA5GroupV4bodyQrvp", 0) __<Label, Content>
 }
 @available(*, unavailable)

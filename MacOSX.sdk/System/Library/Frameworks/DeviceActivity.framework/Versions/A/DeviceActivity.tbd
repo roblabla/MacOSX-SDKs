@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/DeviceActivity.framework/Versions/A/DeviceActivity'
-current-version: 376.1
+current-version: 377.1.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -173,6 +173,7 @@ exports:
                        '_$s14DeviceActivity01_aB4DataV0B7SegmentV4hash4intoys6HasherVz_tF', 
                        '_$s14DeviceActivity01_aB4DataV0B7SegmentV6encode2toys7Encoder_p_tKF', 
                        '_$s14DeviceActivity01_aB4DataV0B7SegmentV6update5usingyAE_tF', 
+                       '_$s14DeviceActivity01_aB4DataV0B7SegmentV7isEmptySbvg', '_$s14DeviceActivity01_aB4DataV0B7SegmentV7isEmptySbvpMV', 
                        '_$s14DeviceActivity01_aB4DataV0B7SegmentV9hashValueSivg', 
                        '_$s14DeviceActivity01_aB4DataV0B7SegmentV9hashValueSivpMV', 
                        '_$s14DeviceActivity01_aB4DataV0B7SegmentVMa', '_$s14DeviceActivity01_aB4DataV0B7SegmentVMn', 
@@ -284,8 +285,8 @@ exports:
                        '_$s14DeviceActivity0aB10DataSourceVAA22CodableElementFetchingAAWP', 
                        '_$s14DeviceActivity0aB10DataSourceVACycfC', '_$s14DeviceActivity0aB10DataSourceVMa', 
                        '_$s14DeviceActivity0aB10DataSourceVMn', '_$s14DeviceActivity0aB10DataSourceVN', 
-                       '_$s14DeviceActivity0aB11DataStoringMp', '_$s14DeviceActivity0aB11DataStoringP011deleteLocalC00eA10IdentifierySb_tKFTj', 
-                       '_$s14DeviceActivity0aB11DataStoringP011deleteLocalC00eA10IdentifierySb_tKFTq', 
+                       '_$s14DeviceActivity0aB11DataStoringMp', '_$s14DeviceActivity0aB11DataStoringP011deleteLocalC00eA10Identifier16segmentIntervalsySb_SayAA16_SegmentIntervalOGtKFTj', 
+                       '_$s14DeviceActivity0aB11DataStoringP011deleteLocalC00eA10Identifier16segmentIntervalsySb_SayAA16_SegmentIntervalOGtKFTq', 
                        '_$s14DeviceActivity0aB11DataStoringP011deleteLocalC0yyKFTj', 
                        '_$s14DeviceActivity0aB11DataStoringP011deleteLocalC0yyKFTq', 
                        '_$s14DeviceActivity0aB11DataStoringP012deleteRemoteC016deviceIdentifier15segmentIntervalySS_AA08_SegmentJ0OtKFTj', 
@@ -757,7 +758,7 @@ exports:
                        '_$s14DeviceActivity0aB8ScheduleV2eeoiySbAC_ACtFZ', '_$s14DeviceActivity0aB8ScheduleV7repeatsSbvg', 
                        '_$s14DeviceActivity0aB8ScheduleV7repeatsSbvpMV', '_$s14DeviceActivity0aB8ScheduleVMa', 
                        '_$s14DeviceActivity0aB8ScheduleVMn', '_$s14DeviceActivity0aB8ScheduleVN', 
-                       '_$s14DeviceActivity0aB8ScheduleVSQAAMc', '_$s14DeviceActivity0aB9DataStoreV011deleteLocalC00eA10IdentifierySb_tKF', 
+                       '_$s14DeviceActivity0aB8ScheduleVSQAAMc', '_$s14DeviceActivity0aB9DataStoreV011deleteLocalC00eA10Identifier16segmentIntervalsySb_SayAA16_SegmentIntervalOGtKF', 
                        '_$s14DeviceActivity0aB9DataStoreV011deleteLocalC0yyKF', '_$s14DeviceActivity0aB9DataStoreV012deleteRemoteC016deviceIdentifier15segmentIntervalySS_AA08_SegmentJ0OtKF', 
                        '_$s14DeviceActivity0aB9DataStoreV026deviceIdentifierByCoreDuetF0SDyS2SGvg', 
                        '_$s14DeviceActivity0aB9DataStoreV026deviceIdentifierByCoreDuetF0SDyS2SGvpMV', 

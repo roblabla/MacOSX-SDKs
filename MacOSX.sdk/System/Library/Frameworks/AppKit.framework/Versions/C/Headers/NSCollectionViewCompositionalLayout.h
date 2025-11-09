@@ -82,7 +82,7 @@ NS_INLINE NSDirectionalEdgeInsets NSDirectionalEdgeInsetsMake(CGFloat top, CGFlo
 /* End temporary declarations */
 
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionViewCompositionalLayoutConfiguration : NSObject<NSCopying>
 @property NSCollectionViewScrollDirection scrollDirection;
 @property CGFloat interSectionSpacing;
@@ -131,7 +131,7 @@ typedef NS_ENUM(NSInteger,NSCollectionLayoutSectionOrthogonalScrollingBehavior) 
 
 typedef void (^NSCollectionLayoutSectionVisibleItemsInvalidationHandler)(NSArray<id<NSCollectionLayoutVisibleItem>> *visibleItems, NSPoint contentOffset, id<NSCollectionLayoutEnvironment> layoutEnvironment);
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutSection : NSObject<NSCopying>
 + (instancetype)sectionWithGroup:(NSCollectionLayoutGroup*)group;
 - (instancetype)init NS_UNAVAILABLE;
@@ -157,7 +157,7 @@ API_AVAILABLE(macos(10.15))
 @end
 
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutItem : NSObject<NSCopying>
 + (instancetype)itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize;
 + (instancetype)itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize supplementaryItems:(NSArray<NSCollectionLayoutSupplementaryItem*>*)supplementaryItems;
@@ -211,7 +211,7 @@ API_AVAILABLE(macos(10.15))
 @property(readonly) NSArray<NSCollectionLayoutSupplementaryItem*> *supplementaryItems;
 @end
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutGroupCustomItem : NSObject<NSCopying>
 + (instancetype)customItemWithFrame:(NSRect)frame;
 + (instancetype)customItemWithFrame:(NSRect)frame zIndex:(NSInteger)zIndex;
@@ -294,7 +294,7 @@ API_AVAILABLE(macos(10.15))
 
 @end
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutDimension : NSObject<NSCopying>
 // dimension is computed as a fraction of the width of the containing group
 + (instancetype)fractionalWidthDimension:(CGFloat)fractionalWidth;
@@ -318,7 +318,7 @@ API_AVAILABLE(macos(10.15))
 @property(readonly) CGFloat dimension;
 @end
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutSize : NSObject<NSCopying>
 + (instancetype)sizeWithWidthDimension:(NSCollectionLayoutDimension*)width heightDimension:(NSCollectionLayoutDimension*)height;
 - (instancetype)init NS_UNAVAILABLE;
@@ -328,7 +328,7 @@ API_AVAILABLE(macos(10.15))
 @property(readonly) NSCollectionLayoutDimension *heightDimension;
 @end
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutSpacing : NSObject<NSCopying>
 + (instancetype)flexibleSpacing:(CGFloat)flexibleSpacing;  // i.e. >=
 + (instancetype)fixedSpacing:(CGFloat)fixedSpacing;        // i.e. ==
@@ -341,7 +341,7 @@ API_AVAILABLE(macos(10.15))
 @property(readonly) BOOL isFixedSpacing;
 @end
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutEdgeSpacing : NSObject<NSCopying>
 
 // Edge spacing specifies additional outsets around items required when performing layout.
@@ -524,7 +524,7 @@ API_AVAILABLE(macos(10.15))
 @property(readonly) NSString *elementKind;
 @end
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutAnchor : NSObject<NSCopying>
 
 //                       +------------------+  +------+   +------------------+
@@ -581,7 +581,7 @@ API_AVAILABLE(macos(10.15))
 @property(readonly) BOOL isFractionalOffset;
 @end
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) NS_SWIFT_UI_ACTOR
 @protocol NSCollectionLayoutContainer<NSObject>
 @property(readonly) NSSize contentSize;                               // resolved size of container (before any insets are applied)
 @property(readonly) NSSize effectiveContentSize;                      // after insets are applied
@@ -589,12 +589,12 @@ API_AVAILABLE(macos(10.15))
 @property(readonly) NSDirectionalEdgeInsets effectiveContentInsets;   // resolved value after resolving any unit values
 @end
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) NS_SWIFT_UI_ACTOR
 @protocol NSCollectionLayoutEnvironment<NSObject>
 @property(readonly) id<NSCollectionLayoutContainer> container;
 @end
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) NS_SWIFT_UI_ACTOR
 @protocol NSCollectionLayoutVisibleItem<NSObject>
 @property CGFloat alpha;
 @property NSInteger zIndex;

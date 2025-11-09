@@ -156,6 +156,9 @@ UIKIT_EXTERN const UIMenuIdentifier UIMenuQuit API_AVAILABLE(ios(13.0)) API_UNAV
 /// New scene menu
 UIKIT_EXTERN const UIMenuIdentifier UIMenuNewScene API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
+/// Open menu
+UIKIT_EXTERN const UIMenuIdentifier UIMenuOpen API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
+
 /// Open Recent menu
 UIKIT_EXTERN const UIMenuIdentifier UIMenuOpenRecent API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 

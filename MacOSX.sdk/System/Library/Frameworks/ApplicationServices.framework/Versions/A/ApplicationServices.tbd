@@ -302,7 +302,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices'
-current-version: 805
+current-version: 806
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
@@ -473,12 +473,12 @@ exports:
                        __AXCopyRoleDescription, __AXCopyRoleDescriptionWithSubrole, 
                        __AXCopyTitle, __AXCreateElementOrdering, __AXCurrentRequestCanAccessRemoteDeviceContent, 
                        __AXCurrentRequestCanReturnInspectionContent, __AXCurrentRequestCanReturnProtectedContent, 
-                       __AXGetClientForCurrentRequestUntrusted, __AXInterfaceCopyCursorColorFill, 
-                       __AXInterfaceCopyCursorColorOutline, __AXInterfaceCursorIsOverridden, 
-                       __AXInterfaceCursorSetAndReturnSeed, __AXInterfaceGetBristolEnabled, 
-                       __AXInterfaceGetClassicInvertColorEnabled, __AXInterfaceGetDifferentiateWithoutColorEnabled, 
-                       __AXInterfaceGetIncreaseContrastEnabled, __AXInterfaceGetReduceMotionEnabled, 
-                       __AXInterfaceGetReduceTextInsertionPointModulationEnabled, 
+                       __AXGetClientForCurrentRequestUntrusted, __AXHasClientsWithAccessRemoteDeviceContent, 
+                       __AXInterfaceCopyCursorColorFill, __AXInterfaceCopyCursorColorOutline, 
+                       __AXInterfaceCursorIsOverridden, __AXInterfaceCursorSetAndReturnSeed, 
+                       __AXInterfaceGetBristolEnabled, __AXInterfaceGetClassicInvertColorEnabled, 
+                       __AXInterfaceGetDifferentiateWithoutColorEnabled, __AXInterfaceGetIncreaseContrastEnabled, 
+                       __AXInterfaceGetReduceMotionEnabled, __AXInterfaceGetReduceTextInsertionPointModulationEnabled, 
                        __AXInterfaceGetReduceTransparencyEnabled, __AXInterfaceGetRichmondEnabled, 
                        __AXInterfaceGetShowToolbarButtonShapesEnabled, __AXInterfaceGetShowWindowTitlebarIconsEnabled, 
                        __AXInterfaceSetClassicInvertColorEnabled, __AXInterfaceSetCursorColorFill, 
@@ -525,9 +525,9 @@ exports:
                        _gDockDragCallback, _gDockDragWindowCallback, _kAXAttachmentTextAttribute, 
                        _kAXAutocorrectedTextAttribute, _kAXBackgroundColorTextAttribute, 
                        _kAXElementOrderHorizontalKey, _kAXElementOrderVerticalKey, 
-                       _kAXElementToFocusForLayoutChangeKey, _kAXEnhancedUserInterfaceSetterInvokedNotification, 
-                       _kAXFontFamilyKey, _kAXFontNameKey, _kAXFontSizeKey, _kAXFontTextAttribute, 
-                       _kAXForegoundColorTextAttribute, _kAXForegroundColorTextAttribute, 
+                       _kAXElementToFocusForLayoutChangeKey, _kAXFontFamilyKey, _kAXFontNameKey, 
+                       _kAXFontSizeKey, _kAXFontTextAttribute, _kAXForegoundColorTextAttribute, 
+                       _kAXForegroundColorTextAttribute, _kAXHasClientsWithAccessRemoteDeviceContentDidChange, 
                        _kAXInterfaceBristolKey, _kAXInterfaceClassicInvertColorKey, 
                        _kAXInterfaceClassicInvertColorStatusDidChangeNotification, 
                        _kAXInterfaceCursorStatusDidChangeNotification, _kAXInterfaceDifferentiateWithoutColorKey, 
@@ -558,7 +558,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore'
-current-version: 591
+current-version: 592
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices

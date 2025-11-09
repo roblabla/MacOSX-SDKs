@@ -2323,12 +2323,13 @@ allows to specify the size of the newly created image, see SIZES.
 .Bl -hang -width "create"
 .It Sy from
 .Op Sy --format Ar format
-.Op Sy --source Ar source
+.Sy source-path
+.Sy destination-path
 .br
 Creates a disk image from source (e.g. disk3 or disk image URL). 
 
 The disk image will be created at
-.Sy image-path.
+.Sy destination-path.
 Should be a writable path.
 
 .Sy format
@@ -2347,7 +2348,7 @@ ULMO    - UDIF read-only lzma-compressed
 UDSB    - Sparse bundle
 .El
 
-.Sy source
+.Sy source-path
 should be the source for the disk image to be created from (e.g. disk3 / existing disk image).
 .El
 .\"
@@ -2767,27 +2768,27 @@ APFS Volumes can be tagged with certain role meta-data flags. Supported flags ar
 .\"
 .\"
 .Sh EXAMPLES
-Erase a whole disk (device)
+Erase a whole disk (device):
 .br
 diskutil eraseDisk JHFS+ Untitled disk3
 .Pp
-Erase a volume (or format a partition or virtual disk)
+Erase a volume (or format a partition or virtual disk):
 .br
 diskutil eraseVolume jhfs+ UntitledHFS /Volumes/SomeDisk
 .Pp
-Erase and (re)-partition a disk (device) with three partitions
+Erase and (re)-partition a disk (device) with three partitions:
 .br
 diskutil partitionDisk disk3 HFSX Foo1 10G JHFS+ Foo2 10G MS-DOS FOO3 0
 .Pp
-Erase and format with a different volume file system
+Erase and format with a different volume file system:
 .br
 diskutil eraseVolume ExFAT FOO disk3s2
 .Pp
-Remove a partition from a partition map (results in free space)
+Remove a partition from a partition map (results in free space):
 .br
 diskutil eraseVolume free free disk3s2
 .Pp
-Add a new partition to a partition map (into free space)
+Add a new partition to a partition map (into free space):
 .br
 diskutil addPartition disk3s2 ExFat FOO 0
 .br
@@ -2795,11 +2796,11 @@ diskutil addPartition disk3s2 %Apple_HFS% %noformat% 2.5g
 .br
 diskutil addPartition disk3 ExFat FOO 50%
 .Pp
-Convert a HFS disk to APFS
+Convert a HFS disk to APFS:
 .br
 diskutil apfs convert disk3s2
 .Pp
-Create a new APFS Container with three new APFS Volumes
+Create a new APFS Container with three new APFS Volumes:
 .br
 diskutil apfs createContainer disk0s2
 .br
@@ -2811,11 +2812,11 @@ diskutil apfs addVolume disk8 APFS MyVolume3 -quota 10g
 .br
 diskutil apfs list
 .Pp
-Encrypt an APFS Volume (enable FileVault)
+Encrypt an APFS Volume (enable FileVault):
 .br
 diskutil apfs encryptVolume disk8s1 -user disk
 .Pp
-Lock or unlock an APFS Volume
+Lock or unlock an APFS Volume:
 .br
 diskutil apfs list disk8
 .br
@@ -2828,82 +2829,82 @@ diskutil apfs unlockVolume disk8s2 -user
 .Ar USERUUID
 (tries specific user)
 .Pp
-Decrypt an APFS Volume (disable FileVault)
+Decrypt an APFS Volume (disable FileVault):
 .br
 diskutil apfs listUsers disk8s1
 .br
 diskutil apfs decryptVolume disk8s1 -user
 .Ar USERUUID
 .Pp
-Remove an APFS Volume from its APFS Container altogether
+Remove an APFS Volume from its APFS Container altogether:
 .br
 diskutil apfs deleteVolume disk8s3
 .Pp
-Resize an HFS volume and create a volume after it
+Resize an HFS volume and create a volume after it:
 .br
 diskutil resizeVolume /Volumes/SomeDisk 50g MS-DOS DOS 0
 .Pp
-Resize an HFS volume and leave all remaining space as unused
+Resize an HFS volume and leave all remaining space as unused:
 .br
 diskutil resizeVolume /Volumes/SomeDisk 12g
 .Pp
-Merge two partitions into a new partition
+Merge two partitions into a new partition:
 .br
 diskutil mergePartitions JHFS+ not disk1s3 disk1s5
 .Pp
-Split a partition into three new ones
+Split a partition into three new ones:
 .br
 diskutil splitPartition /Volumes/SomeDisk JHFS+ vol1 12g MS-DOS VOL2 8g JHFS+ vol3 0
 .Pp
-Create an AppleRAID
+Create an AppleRAID:
 .br
 diskutil createRAID mirror MirroredVolume JHFS+ disk1 disk2
 .Pp
-Destroy an AppleRAID
+Destroy an AppleRAID:
 .br
 diskutil destroyRAID /Volumes/MirroredVolume
 .Pp
-Repair a damaged AppleRAID
+Repair a damaged AppleRAID:
 .br
 diskutil repairMirror /Volumes/MirroredVolume disk3
 .Pp
-Convert volume into an AppleRAID volume
+Convert volume into an AppleRAID volume:
 .br
 diskutil enableRAID mirror /Volumes/ExistingVolume
 .Pp
-Erase a partition, shrink, associate a pre-macOS-13.0 Recovery Partition
+Erase a partition, shrink, associate a pre-macOS-13.0 Recovery Partition:
 .br
 diskutil splitPartition disk8s2 JHFS+ MacHD R %Apple_Boot% %noformat% %recovery%
 .Pp
-Partition a disk with the MBR partitioning scheme (e.g. for a camera)
+Partition a disk with the MBR partitioning scheme (e.g. for a camera):
 .br
 diskutil partitionDisk disk3 MBR MS-DOS CAM1 0
 .Pp
-Partition a disk with the (deprecated) APM partitioning scheme
+Partition a disk with the (deprecated) APM partitioning scheme:
 .br
 diskutil partitionDisk disk3 APM HFS+ vol1 15% Journaled\\ HFS+ vol2 R Journaled\\ HFS+ vol3 25% Free\\ Space volX 10g
 .Pp
-Attach a 100MiB RAM disk image
+Attach a 100MiB RAM disk image:
 .br
-diskutil image attach --mountPolicy=noMount ram://100MiB
+diskutil image attach ram://100MiB
 .Pp
-Attach a read-only disk image at some specified mount point
+Attach a read-only disk image at some specified mount point:
 .br
 diskutil image attach --readOnly --mountPoint /tmp/myMountPoint /tmp/myImage.dmg
 .Pp
-Creating a blank 100MiB disk image with UDSB format
+Create a blank 16GB sparse bundle disk image with an APFS volume named "Untitled":
 .br
-diskutil image create -s 100MiB -f UDSB /tmp/myImage.dmg
+diskutil image create blank -s 16g /tmp/myImage.sparsebundle
 .Pp
-Creating a blank 100MiB disk image with APFS volume named MyVolume
+Create a blank 100MiB raw disk image with an APFS volume named "MyVolume":
 .br
-diskutil image create -s 100MiB --volumeName MyVolume /tmp/myImage.dmg
+diskutil image create blank -s 100MiB --volumeName MyVolume /tmp/myImage.dmg
 .Pp
-Creating a disk image from an existing disk
+Create a disk image with a ULFO format from an existing disk:
 .br
-diskutil image create from --source disk3 /tmp/myImage.dmg
+diskutil image create from disk3 /tmp/myImage.dmg
 .Pp
-Resizing a disk image:
+Resize a disk image:
 .br
 diskutil image resize --size 100G /tmp/my.dmg
 .Pp
@@ -2911,7 +2912,7 @@ Resize to minimal size:
 .br
 diskutil image resize --size min /tmp/my.dmg
 .Pp
-Print resize limits in plist format
+Print resize limits in plist format:
 .br
 diskutil image resize --plist /tmp/my.dmg
 .\"

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GamePolicy.framework/Versions/A/GamePolicy'
-current-version: 2.0.24
+current-version: 2.1.2
 compatibility-version: 0
 swift-abi-version: 7
 exports:

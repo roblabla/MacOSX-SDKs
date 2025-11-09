@@ -259,7 +259,8 @@ exports:
                        _UAZoomLog, _UAZoomMaximum, _UAZoomMaximumSplitScreenRatio, 
                        _UAZoomMaximumZoomScale, _UAZoomMinimum, _UAZoomMinimumSplitScreenRatio, 
                        _UAZoomMinimumZoomScale, _UAZoomPanningMode, _UAZoomRegionFrame, 
-                       _UAZoomScale, _UAZoomSetDesiredScale, _UAZoomSetEnabled, _UAZoomSetFocusActivationZone, 
+                       _UAZoomScale, _UAZoomScreenShareEnabled, _UAZoomScreenShareSetEnabled, 
+                       _UAZoomSetDesiredScale, _UAZoomSetEnabled, _UAZoomSetFocusActivationZone, 
                        _UAZoomSetFocusFollowMode, _UAZoomSetFocusMovement, _UAZoomSetHotkey, 
                        _UAZoomSetMaximum, _UAZoomSetMinimum, _UAZoomSetMode, _UAZoomSetPanningMode, 
                        _UAZoomSetScale, _UAZoomSetSplitScreenMode, _UAZoomShowPreviewIsEnabled, 
@@ -419,7 +420,7 @@ exports:
                        _UAZoomFocusFollowModeKey, _UAZoomFocusFollowsKeyboardKey, 
                        _UAZoomFocusMovementDelayKey, _UAZoomFocusMovementKey, _UAZoomFullscreenTemporaryZoomEnabledKey, 
                        _UAZoomMaximumKey, _UAZoomMinimumKey, _UAZoomModeKey, _UAZoomPanningModeKey, 
-                       _UAZoomRegionFrameKey, _UAZoomScaleKey, _UAZoomShowPreviewKey, 
-                       _UAZoomSmoothImagesKey, _UAZoomSplitScreenModeKey, _UAZoomTemporaryDetachEnabledKey, 
-                       _kUALogLevel ]
+                       _UAZoomRegionFrameKey, _UAZoomScaleKey, _UAZoomScreenShareEnabledKey, 
+                       _UAZoomShowPreviewKey, _UAZoomSmoothImagesKey, _UAZoomSplitScreenModeKey, 
+                       _UAZoomTemporaryDetachEnabledKey, _kUALogLevel ]
 ...

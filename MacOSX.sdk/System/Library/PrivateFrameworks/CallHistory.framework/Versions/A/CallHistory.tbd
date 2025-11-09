@@ -32,6 +32,7 @@ exports:
                        _kCHCallTypeTelephony, _kCHCallTypeUnknown, _kCHCallTypeVOIP, 
                        _kCHCallTypeVoicemail, _kCHCoalescingStrategyCollapseIfEqual, 
                        _kCHCoalescingStrategyRecents, _kCHConfigurationCloudKitEnabled, 
+                       _kCHConfigurationKeepCallsTimeIntervalType, _kCHFaceTimeBundleID, 
                        _kCHLimitCallKindsKey, _kCHLimitCallTypeKey, _kCHLimitEndDateKey, 
                        _kCHLimitMediaTypeKey, _kCHLimitProtectedBundleIDsKey, _kCHLimitServiceProviderKey, 
                        _kCHLimitStartDateKey, _kCHLimitTTYTypeKey, _kCHMobilePhoneBundleID, 

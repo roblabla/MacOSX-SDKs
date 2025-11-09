@@ -99,7 +99,7 @@
 @class GKVoiceChatService;
 
 // GKVoiceChatService provides voice chat capabilities depending on your networking situation.
-NS_CLASS_DEPRECATED_IOS(3_0, 7_0, "Use GKVoiceChat instead") API_UNAVAILABLE(tvos)
+NS_CLASS_DEPRECATED_IOS(3_0, 7_0, "Use SharePlay instead") API_UNAVAILABLE(tvos)
 @interface GKVoiceChatService : NSObject
 
 + (GKVoiceChatService *)defaultVoiceChatService;

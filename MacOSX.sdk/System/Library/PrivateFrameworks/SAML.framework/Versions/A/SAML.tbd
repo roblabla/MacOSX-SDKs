@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SAML.framework/Versions/A/SAML'
-current-version: 561.0.7
+current-version: 561.10.5
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SAMLAttributePropertyNameAccountProviderID, _SAMLAttributePropertyNameAuthenticationTTL, 

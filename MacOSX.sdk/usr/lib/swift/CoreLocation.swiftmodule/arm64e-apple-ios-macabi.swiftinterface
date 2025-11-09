@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreLocation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 40 -module-name CoreLocation
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-ios18.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreLocation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 41 -module-name CoreLocation
 @_exported import CoreLocation
 import Foundation
 import Swift
@@ -231,7 +231,7 @@ extension CoreLocation.CLServiceSession {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
       public mutating func next() async throws -> CoreLocation.CLServiceSession.Diagnostics.Element?
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, *)
-      @available(macOS, unavailable, introduced: 10.15)
+      @available(macOS, unavailable)
       public typealias Element = CoreLocation.CLServiceSession.Diagnostics.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -245,7 +245,7 @@ extension CoreLocation.CLServiceSession {
     }
     final public func makeAsyncIterator() -> CoreLocation.CLServiceSession.Diagnostics.Iterator
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, *)
-    @available(macOS, unavailable, introduced: 10.15)
+    @available(macOS, unavailable)
     public typealias AsyncIterator = CoreLocation.CLServiceSession.Diagnostics.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -264,6 +264,7 @@ extension CoreLocation.CLServiceSession {
   public enum AuthorizationRequirement {
     case none
     case whenInUse
+    @available(tvOS, unavailable)
     case always
     public static func == (a: CoreLocation.CLServiceSession.AuthorizationRequirement, b: CoreLocation.CLServiceSession.AuthorizationRequirement) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
@@ -403,8 +404,8 @@ extension CoreLocation.CLBackgroundActivitySession {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
       public mutating func next() async throws -> CoreLocation.CLBackgroundActivitySession.Diagnostics.Element?
       @available(iOS 18.0, watchOS 11.0, *)
-      @available(tvOS, unavailable, introduced: 13.0)
-      @available(macOS, unavailable, introduced: 10.15)
+      @available(tvOS, unavailable)
+      @available(macOS, unavailable)
       public typealias Element = CoreLocation.CLBackgroundActivitySession.Diagnostics.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -420,8 +421,8 @@ extension CoreLocation.CLBackgroundActivitySession {
     }
     final public func makeAsyncIterator() -> CoreLocation.CLBackgroundActivitySession.Diagnostics.Iterator
     @available(iOS 18.0, watchOS 11.0, *)
-    @available(tvOS, unavailable, introduced: 13.0)
-    @available(macOS, unavailable, introduced: 10.15)
+    @available(tvOS, unavailable)
+    @available(macOS, unavailable)
     public typealias AsyncIterator = CoreLocation.CLBackgroundActivitySession.Diagnostics.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, watchOS 11.0, visionOS 2.0, *)

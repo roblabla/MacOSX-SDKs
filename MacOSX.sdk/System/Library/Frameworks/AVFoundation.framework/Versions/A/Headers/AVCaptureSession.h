@@ -312,7 +312,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
  @discussion
     An AVCaptureInput instance can only be added to a session using -addInputWithNoConnections: if -canAddInput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addInputWithNoConnections: may be called while the session is running. The -addInput: method is the preferred method for adding an input to an AVCaptureSession. -addInputWithNoConnections: may be called if you need fine-grained control over which inputs are connected to which outputs.
  */
-- (void)addInputWithNoConnections:(AVCaptureInput *)input API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
+- (void)addInputWithNoConnections:(AVCaptureInput *)input API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0), visionos(2.1));
 
 /*!
  @method addOutputWithNoConnections:
@@ -325,7 +325,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
  @discussion
     An AVCaptureOutput instance can only be added to a session using -addOutputWithNoConnections: if -canAddOutput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addOutputWithNoConnections: may be called while the session is running. The -addOutput: method is the preferred method for adding an output to an AVCaptureSession. -addOutputWithNoConnections: may be called if you need fine-grained control over which inputs are connected to which outputs.
  */
-- (void)addOutputWithNoConnections:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
+- (void)addOutputWithNoConnections:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0), visionos(2.1));
 
 /*!
  @property connections
@@ -348,7 +348,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
  @discussion
     An AVCaptureConnection instance can only be added to a session using -addConnection: if -canAddConnection: returns YES, otherwise an NSInvalidArgumentException is thrown. When using -addInput: or -addOutput:, connections are formed automatically between all compatible inputs and outputs. Manually adding connections is only necessary when adding an input or output with no connections.
  */
-- (BOOL)canAddConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
+- (BOOL)canAddConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0), visionos(2.1));
 
 /*!
  @method addConnection:
@@ -361,7 +361,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
  @discussion
     An AVCaptureConnection instance can only be added to a session using -addConnection: if canAddConnection: returns YES, otherwise an NSInvalidArgumentException is thrown. When using -addInput: or -addOutput:, connections are formed automatically between all compatible inputs and outputs. Manually adding connections is only necessary when adding an input or output with no connections. -addConnection: may be called while the session is running.
  */
-- (void)addConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
+- (void)addConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0), visionos(2.1));
 
 /*!
  @method removeConnection:
@@ -374,7 +374,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
  @discussion
     -removeConnection: may be called while the session is running.
  */
-- (void)removeConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
+- (void)removeConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0), visionos(2.1));
 
 /*!
  @property supportsControls
@@ -753,7 +753,7 @@ API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAIL
  
     AVCaptureMultiCamSession supports dynamic enabling and disabling of individual camera inputs without interrupting preview. In order to stop an individual camera input, set the enabled property on all of its connections or connected ports to NO. When the last active connection or port is disabled, the source camera stops streaming to save power and bandwidth. Other inputs streaming data through the session are unaffected.
  */
-API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0), visionos(2.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos)
 @interface AVCaptureMultiCamSession : AVCaptureSession
 
 /*!
@@ -781,7 +781,7 @@ API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, v
         - The number of sources configured to deliver streaming disparity / depth via AVCaptureDepthDataOutput. The higher the number of cameras configured to produce depth, the higher the cost.
     In order to reduce hardwareCost, consider picking a sensor-cropped activeFormat, or a binned format. You may also use AVCaptureDeviceInput's videoMinFrameDurationOverride property to artificially limit the max frame rate (which is the reciprocal of the min frame duration) of a source device to a lower value. By doing so, you only pay the hardware cost for the max frame rate you intend to use.
  */
-@property(nonatomic, readonly) float hardwareCost;
+@property(nonatomic, readonly) float hardwareCost API_UNAVAILABLE(visionos);
 
 /*!
  @property systemPressureCost
@@ -791,7 +791,7 @@ API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, v
  @discussion
     The value of this property is a float whose nominal range is 0.0 => 1.0 indicating the system pressure cost of your current configuration. When your systemPressureCost is greater than 1.0, the capture session cannot run sustainably. It may be able to run for a brief period before needing to stop due to high system pressure. While running in an unsustainable configuration, you may monitor the session's systemPressureState and reduce pressure by reducing the frame rate, throttling your use of the GPU, etc. When the session reaches critical system pressure state, it must temporarily shut down, and you receive an AVCaptureSessionWasInterruptedNotification indicating the reason your session needed to stop. When system pressure alleviates, the session interruption ends.
  */
-@property(nonatomic, readonly) float systemPressureCost;
+@property(nonatomic, readonly) float systemPressureCost API_UNAVAILABLE(visionos);
 
 @end
 
@@ -861,7 +861,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using -addInput: or -addOutput:, connections are formed between all compatible inputs and outputs automatically. You do not need to manually create and add connections to the session unless you use the primitive -addInputWithNoConnections: or -addOutputWithNoConnections: methods.
  */
-+ (instancetype)connectionWithInputPorts:(NSArray<AVCaptureInputPort *> *)ports output:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
++ (instancetype)connectionWithInputPorts:(NSArray<AVCaptureInputPort *> *)ports output:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0), visionos(2.1));
 
 /*!
  @method connectionWithInputPort:videoPreviewLayer:
@@ -895,7 +895,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using -addInput: or -addOutput:, connections are formed between all compatible inputs and outputs automatically. You do not need to manually create and add connections to the session unless you use the primitive -addInputWithNoConnections: or -addOutputWithNoConnections: methods.
  */
-- (instancetype)initWithInputPorts:(NSArray<AVCaptureInputPort *> *)ports output:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
+- (instancetype)initWithInputPorts:(NSArray<AVCaptureInputPort *> *)ports output:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0), visionos(2.1));
 
 /*!
  @method initWithInputPort:videoPreviewLayer:
@@ -923,7 +923,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     An AVCaptureConnection may involve one or more AVCaptureInputPorts producing data to the connection's AVCaptureOutput. This property is read-only. An AVCaptureConnection's inputPorts remain static for the life of the object.
  */
-@property(nonatomic, readonly) NSArray<AVCaptureInputPort *> *inputPorts API_UNAVAILABLE(visionos);
+@property(nonatomic, readonly) NSArray<AVCaptureInputPort *> *inputPorts API_AVAILABLE(visionos(2.1));
 
 /*!
  @property output
@@ -933,7 +933,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     An AVCaptureConnection may involve one or more AVCaptureInputPorts producing data to the connection's AVCaptureOutput. This property is read-only. An AVCaptureConnection's output remains static for the life of the object. Note that a connection can either be to an output or a video preview layer, but never to both.
  */
-@property(nonatomic, readonly, nullable) AVCaptureOutput *output API_UNAVAILABLE(visionos);
+@property(nonatomic, readonly, nullable) AVCaptureOutput *output API_AVAILABLE(visionos(2.1));
 
 /*!
  @property videoPreviewLayer

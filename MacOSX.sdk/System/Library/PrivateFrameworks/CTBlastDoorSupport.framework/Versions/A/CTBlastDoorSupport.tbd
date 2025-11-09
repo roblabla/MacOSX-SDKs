@@ -210,8 +210,8 @@ exports:
                        __ZN3ctb6Client10unpackDataINS_25IMDispositionNotificationEEENSt3__18optionalIT_EEPK8__CFDataPP9__CFError, 
                        __ZN3ctb6Client10unpackDataINS_25ProvisioningConfigurationEEENSt3__18optionalIT_EEPK8__CFDataPP9__CFError, 
                        __ZN3ctb6Client10unpackDataINS_7chatbot17RenderInformationEEENSt3__18optionalIT_EEPK8__CFDataPP9__CFError, 
-                       __ZN3ctb6Client10unpackDataINS_7chatbot7MessageEEENSt3__18optionalIT_EEPK8__CFDataPP9__CFError, 
                        __ZN3ctb6Client10unpackDataINS_8IMRevokeEEENSt3__18optionalIT_EEPK8__CFDataPP9__CFError, 
+                       __ZN3ctb6Client21unpackDataWithOptionsINS_7chatbot7MessageENS3_13UnpackOptionsEEENSt3__18optionalIT_EEPK8__CFDataT0_PP9__CFError, 
                        __ZN3ctb6ClientC1Ev, __ZN3ctb6ClientC2Ev, __ZN3ctb6ClientD1Ev, 
                        __ZN3ctb6ClientD2Ev ]
     objc-classes:    [ AutoBugCaptureHelper ]

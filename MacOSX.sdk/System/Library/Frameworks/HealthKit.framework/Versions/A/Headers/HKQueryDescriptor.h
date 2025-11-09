@@ -5,12 +5,15 @@
 //  Copyright © 2021-2022 Apple. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 #import <HealthKit/HKObjectType.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-HK_EXTERN API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0))
 @interface HKQueryDescriptor : NSObject<NSCopying, NSSecureCoding>
 
 /*!

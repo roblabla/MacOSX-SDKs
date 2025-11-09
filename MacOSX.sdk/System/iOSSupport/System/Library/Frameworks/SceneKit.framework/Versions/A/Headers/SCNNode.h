@@ -63,7 +63,7 @@ typedef NS_ENUM(NSInteger, SCNNodeFocusBehavior) {
 		     The coordinate systems of all the sub-nodes are relative to the one of their parent node.
  */
 SCN_EXPORT
-@interface SCNNode : NSObject <NSCopying, NSSecureCoding, SCNAnimatable, SCNActionable, SCNBoundingVolume, UIFocusItem>
+@interface SCNNode : NSObject <NSCopying, NSSecureCoding, SCNAnimatable, SCNActionable, SCNBoundingVolume>
 
 #pragma mark - Creating a Node
 
@@ -491,14 +491,6 @@ SCN_EXPORT
  */
 @property(nonatomic) NSUInteger categoryBitMask API_AVAILABLE(macos(10.10));
 
-#pragma mark - UIFocus support
-
-/*!
- @property focusBehavior
- @abstract Controls the behavior of the receiver regarding the UIFocus system. Defaults to SCNNodeFocusBehaviorNone.
- */
-@property(nonatomic) SCNNodeFocusBehavior focusBehavior API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
-
 @end
 
 @interface SCNNode (Transforms)
@@ -687,6 +679,16 @@ SCN_EXPORT
 
 - (void)simdLocalRotateBy:(simd_quatf)rotation API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 - (void)simdRotateBy:(simd_quatf)worldRotation aroundTarget:(simd_float3)worldTarget API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
+@end
+
+@interface SCNNode (Focus) <UIFocusItem>
+
+/*!
+ @property focusBehavior
+ @abstract Controls the behavior of the receiver regarding the UIFocus system. Defaults to SCNNodeFocusBehaviorNone.
+ */
+@property(nonatomic) SCNNodeFocusBehavior focusBehavior API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 @end
 

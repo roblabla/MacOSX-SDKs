@@ -177,7 +177,7 @@ exports:
                        WFVCardContentItem, WFWKWebViewCapturer, WFWalletMerchant, 
                        WFWalletTransaction, WFWalletTransactionContentItem, WFWebArchive, 
                        WFWebResource, WFWebResourceCapturer, WFWindow, WFWindowContentItem, 
-                       WFiCloudFileDownloadOperation ]
+                       WFiCloudContentLocation, WFiCloudFileDownloadOperation ]
     objc-ivars:      [ DCMutableMapsLink._centerLocation, DCMutableMapsLink._destinationAddress, 
                        DCMutableMapsLink._directionsMode, DCMutableMapsLink._mapType, 
                        DCMutableMapsLink._searchLocation, DCMutableMapsLink._searchNearQuery, 

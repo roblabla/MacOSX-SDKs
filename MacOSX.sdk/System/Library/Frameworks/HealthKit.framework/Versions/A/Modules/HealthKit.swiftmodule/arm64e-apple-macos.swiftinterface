@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-macos15.0 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature AccessLevelOnImport -enable-bare-slash-regex -user-module-version 5139 -module-name HealthKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-macos15.1 -target-variant arm64e-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature AccessLevelOnImport -enable-bare-slash-regex -user-module-version 5200.1.12 -module-name HealthKit
 import CoreLocation
 import Foundation
 @_exported import HealthKit
@@ -51,7 +51,7 @@ extension HKStatisticsCollectionQueryDescriptor : HKAsyncSequenceQuery {
     public typealias Element = HKStatisticsCollectionQueryDescriptor.Result
     public struct Iterator : AsyncIteratorProtocol {
       public mutating func next() async throws -> Element?
-      @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+      @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       public typealias Element = HealthKit.HKStatisticsCollectionQueryDescriptor.Results.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
@@ -62,7 +62,7 @@ extension HKStatisticsCollectionQueryDescriptor : HKAsyncSequenceQuery {
       #endif
     }
     public func makeAsyncIterator() -> Iterator
-    @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+    @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias AsyncIterator = HealthKit.HKStatisticsCollectionQueryDescriptor.Results.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
@@ -89,7 +89,7 @@ public struct HKVerifiableClinicalRecordQueryDescriptor {
 extension HKVerifiableClinicalRecordQueryDescriptor : HKAsyncQuery {
   public func result(for healthStore: HKHealthStore) async throws -> [HKVerifiableClinicalRecord]
   @available(iOS 15.4, macOS 13.0, macCatalyst 15.4, *)
-  @available(watchOS, unavailable, introduced: 8.5)
+  @available(watchOS, unavailable)
   public typealias Output = [HealthKit.HKVerifiableClinicalRecord]
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
@@ -121,7 +121,7 @@ extension HKWorkoutRouteQueryDescriptor : HKAsyncSequenceQuery {
                 }
                 return next
             }
-      @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+      @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       public typealias Element = HealthKit.HKWorkoutRouteQueryDescriptor.Results.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
@@ -132,7 +132,7 @@ extension HKWorkoutRouteQueryDescriptor : HKAsyncSequenceQuery {
       #endif
     }
     public func makeAsyncIterator() -> Iterator
-    @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+    @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias AsyncIterator = HealthKit.HKWorkoutRouteQueryDescriptor.Results.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
@@ -178,7 +178,7 @@ extension HKHeartbeatSeriesQueryDescriptor : HKAsyncSequenceQuery {
                 }
                 return next
             }
-      @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+      @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       public typealias Element = HealthKit.HKHeartbeatSeriesQueryDescriptor.Results.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
@@ -197,7 +197,7 @@ extension HKHeartbeatSeriesQueryDescriptor : HKAsyncSequenceQuery {
       @usableFromInline
       internal typealias Element = HealthKit.HKHeartbeatSeriesQueryDescriptor.Heartbeat
     }
-    @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+    @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias AsyncIterator = HealthKit.HKHeartbeatSeriesQueryDescriptor.Results.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
@@ -258,7 +258,7 @@ extension HKActivitySummaryQueryDescriptor : HKAsyncSequenceQuery {
     public typealias Element = [HKActivitySummary]
     public struct Iterator : AsyncIteratorProtocol {
       public mutating func next() async throws -> Element?
-      @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+      @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       public typealias Element = HealthKit.HKActivitySummaryQueryDescriptor.Results.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
@@ -269,7 +269,7 @@ extension HKActivitySummaryQueryDescriptor : HKAsyncSequenceQuery {
       #endif
     }
     public func makeAsyncIterator() -> Iterator
-    @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+    @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias AsyncIterator = HealthKit.HKActivitySummaryQueryDescriptor.Results.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
@@ -306,7 +306,7 @@ extension HKElectrocardiogramQueryDescriptor : HKAsyncSequenceQuery {
       internal func nextMeasurement() -> HKElectrocardiogram.VoltageMeasurement?
       @usableFromInline
       internal mutating func awaitMeasurementEnumerator() async throws
-      @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+      @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       public typealias Element = HealthKit.HKElectrocardiogramQueryDescriptor.Results.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
@@ -317,7 +317,7 @@ extension HKElectrocardiogramQueryDescriptor : HKAsyncSequenceQuery {
       #endif
     }
     public func makeAsyncIterator() -> Iterator
-    @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+    @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias AsyncIterator = HealthKit.HKElectrocardiogramQueryDescriptor.Results.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
@@ -371,7 +371,7 @@ extension HKAnchoredObjectQueryDescriptor : HKAsyncSequenceQuery {
     public typealias Element = HKAnchoredObjectQueryDescriptor.Result
     public struct Iterator : AsyncIteratorProtocol {
       public mutating func next() async throws -> Element?
-      @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+      @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       public typealias Element = HealthKit.HKAnchoredObjectQueryDescriptor<Sample>.Results.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
@@ -382,7 +382,7 @@ extension HKAnchoredObjectQueryDescriptor : HKAsyncSequenceQuery {
       #endif
     }
     public func makeAsyncIterator() -> Iterator
-    @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+    @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias AsyncIterator = HealthKit.HKAnchoredObjectQueryDescriptor<Sample>.Results.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
@@ -401,7 +401,7 @@ extension HKAttachment {
   public struct AsyncBytes : AsyncSequence {
     public typealias Element = UInt8
     public func makeAsyncIterator() -> BufferedAsyncByteIterator
-    @available(iOS 16.0, tvOS 13.0, watchOS 9.0, macOS 13.0, macCatalyst 16.0, *)
+    @available(iOS 16.0, watchOS 9.0, macOS 13.0, macCatalyst 16.0, *)
     public typealias AsyncIterator = HealthKit.BufferedAsyncByteIterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 16.0, *)
@@ -439,7 +439,7 @@ extension HKWorkoutEffortRelationshipQueryDescriptor : HKAsyncSequenceQuery {
     public typealias Element = HKWorkoutEffortRelationshipQueryDescriptor.Result
     public struct Iterator : AsyncIteratorProtocol {
       public mutating func next() async throws -> Element?
-      @available(iOS 18.0, tvOS 13.0, watchOS 11.0, macOS 15.0, macCatalyst 18.0, *)
+      @available(iOS 18.0, watchOS 11.0, macOS 15.0, macCatalyst 18.0, *)
       public typealias Element = HealthKit.HKWorkoutEffortRelationshipQueryDescriptor.Results.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 18.0, *)
@@ -450,7 +450,7 @@ extension HKWorkoutEffortRelationshipQueryDescriptor : HKAsyncSequenceQuery {
       #endif
     }
     public func makeAsyncIterator() -> Iterator
-    @available(iOS 18.0, tvOS 13.0, watchOS 11.0, macOS 15.0, macCatalyst 18.0, *)
+    @available(iOS 18.0, watchOS 11.0, macOS 15.0, macCatalyst 18.0, *)
     public typealias AsyncIterator = HealthKit.HKWorkoutEffortRelationshipQueryDescriptor.Results.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 18.0, *)
@@ -574,7 +574,7 @@ extension HKQuantitySeriesSampleQueryDescriptor : HKAsyncSequenceQuery {
             }
       @usableFromInline
       internal mutating func nextResultIterator() async throws -> Array<Result>.Iterator?
-      @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+      @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       public typealias Element = HealthKit.HKQuantitySeriesSampleQueryDescriptor.Results.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
@@ -585,7 +585,7 @@ extension HKQuantitySeriesSampleQueryDescriptor : HKAsyncSequenceQuery {
       #endif
     }
     public func makeAsyncIterator() -> Iterator
-    @available(iOS 15.4, tvOS 13.0, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
+    @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias AsyncIterator = HealthKit.HKQuantitySeriesSampleQueryDescriptor.Results.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)

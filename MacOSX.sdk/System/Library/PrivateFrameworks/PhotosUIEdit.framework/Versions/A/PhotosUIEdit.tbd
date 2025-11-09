@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIEdit.framework/Versions/A/PhotosUIEdit'
-current-version: 701.0.230
+current-version: 711.0.180
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -85,7 +85,7 @@ exports:
                        '_$s12PhotosUIEdit14PhotoStyleDPadV13ConfigurationVN', '_$s12PhotosUIEdit14PhotoStyleDPadV13dynamicMemberxs7KeyPathCyAC13ConfigurationVxG_tcluig', 
                        '_$s12PhotosUIEdit14PhotoStyleDPadV13dynamicMemberxs7KeyPathCyAC13ConfigurationVxG_tcluipMV', 
                        '_$s12PhotosUIEdit14PhotoStyleDPadV4bodyQrvg', '_$s12PhotosUIEdit14PhotoStyleDPadV4bodyQrvpMV', 
-                       '_$s12PhotosUIEdit14PhotoStyleDPadV4bodyQrvpQOMQ', '_$s12PhotosUIEdit14PhotoStyleDPadV5value8isActive21pulsingValueIndicator07defaultJ003minJ003maxJ015backgroundImage0O5Color08gradientP4Name13configurationAC7SwiftUI7BindingVySo7CGPointVG_APySbGSbA3RSo10CGImageRefaSgSo7NSColorCSgSSSgAC13ConfigurationVtcfC', 
+                       '_$s12PhotosUIEdit14PhotoStyleDPadV4bodyQrvpQOMQ', '_$s12PhotosUIEdit14PhotoStyleDPadV5value8isActive21pulsingValueIndicator07defaultJ003minJ003maxJ015backgroundImage0O5Color08gradientP4Name016staticDottedGridP013configurationAC7SwiftUI7BindingVySo7CGPointVG_AQySbGSbA3SSo10CGImageRefaSgSo7NSColorCSgSSSgAxC13ConfigurationVtcfC', 
                        '_$s12PhotosUIEdit14PhotoStyleDPadV7SwiftUI4ViewAAMc', '_$s12PhotosUIEdit14PhotoStyleDPadVMa', 
                        '_$s12PhotosUIEdit14PhotoStyleDPadVMn', '_$s12PhotosUIEdit14PhotoStyleDPadVN', 
                        '_$s12PhotosUIEdit18PEAlchemistSupportV12revertToMono5asset12photoLibraryySo7PHAssetC_So07PHPhotoJ0CtYaKFZ', 
@@ -96,7 +96,9 @@ exports:
                        '_$sSo19PISemanticStyleCasta12PhotosUIEditE14gradientColorsSay7SwiftUI5ColorVGvpMV', 
                        '_$sSo19PISemanticStyleCasta12PhotosUIEditE17gradientImageNameSSSgvg', 
                        '_$sSo19PISemanticStyleCasta12PhotosUIEditE17gradientImageNameSSSgvpMV', 
-                       _PEAdjustmentApertureErrorDomain, _PEAdjustmentAudioMixErrorDomain, 
+                       '_$sSo22PEModelDeliveryManagerC12PhotosUIEditEABycfC', '_$sSo22PEModelDeliveryManagerC12PhotosUIEditEABycfc', 
+                       '_$sSo22PEModelDeliveryManagerCMa', _CGVectorZero, _PEAdjustmentApertureErrorDomain, 
+                       _PEAdjustmentAudioMixErrorDomain, _PEAdjustmentCleanupErrorDomain, 
                        _PEAdjustmentDataCacheTimeout, _PEAdjustmentDepthErrorDomain, 
                        _PEAdjustmentFilterErrorDomain, _PEAdjustmentPlaybackRateErrorDomain, 
                        _PEAdjustmentStraightenErrorDomain, _PEAdjustmentStyleErrorDomain, 
@@ -106,30 +108,34 @@ exports:
                        _PEAutoWhiteBalanceFaceStrengthKey, _PEAutoWhiteBalanceFaceWarmthKey, 
                        _PEAutoWhiteBalanceWarmFace, _PEAutoWhiteBalanceWarmTemp, 
                        _PEAutoWhiteBalanceWarmTint, _PECanRenderPortrait, _PECopyEditsSettingIdentifierName, 
-                       _PEEditActionErrorDomain, _PEEditActionTypeString, _PELocalizedString, 
-                       _PELocalizedStringWithValidatedFormat, _PEPhotoEditSessionEndString, 
+                       _PEEditActionErrorDomain, _PEEditActionTypeString, _PEExteriorAngleSum, 
+                       _PELocalizedString, _PELocalizedStringWithValidatedFormat, 
+                       _PEModelDeliveryErrorDomain, _PEPhotoEditSessionEndString, 
                        _PEPhotoEditSessionEntryPointString, _PEPhotoEditSessionSaveActionTypeString, 
                        _PESCAPActionTypeString, _PESCAPReviewFallbackReasonString, 
-                       _PESerializationUtilityErrorDomain, _PESingleActionKey, _PEStringWithValidatedFormat, 
-                       _PEVideoTrimBurnInUtilityErrorDomain, _kDiffAddedKey, _kDiffModifiedKey, 
-                       _kDiffRemovedKey ]
+                       _PESerializationUtilityErrorDomain, _PESignedAngleBetweenPoints, 
+                       _PESingleActionKey, _PEStringWithValidatedFormat, _PEVectorAngle, 
+                       _PEVectorMagnitude, _PEVectorNormalize, _PEVectorScale, _PEVideoTrimBurnInUtilityErrorDomain, 
+                       _kDiffAddedKey, _kDiffModifiedKey, _kDiffRemovedKey ]
     objc-classes:    [ PEAdjustmentAperture, PEAdjustmentAudioMix, PEAdjustmentAutoEnhance, 
-                       PEAdjustmentCrop, PEAdjustmentDataCache, PEAdjustmentDataCacheEntry, 
-                       PEAdjustmentDataCacheKey, PEAdjustmentDepth, PEAdjustmentExposure, 
-                       PEAdjustmentFilter, PEAdjustmentMarkup, PEAdjustmentPlaybackRate, 
-                       PEAdjustmentPreset, PEAdjustmentPresetManager, PEAdjustmentRotate, 
-                       PEAdjustmentSaturation, PEAdjustmentStraighten, PEAdjustmentStyle, 
-                       PEAdjustmentUtilities, PEAdjustmentWarmth, PEAnalyticsUtility, 
-                       PEAudioMixModeAction, PEAutoAdjustmentController, PEAutoEnhanceAction, 
-                       PEAutoEnhanceActionHelper, PECopyActionEventBuilder, PECopyEditsConfiguration, 
+                       PEAdjustmentCleanup, PEAdjustmentCrop, PEAdjustmentDataCache, 
+                       PEAdjustmentDataCacheEntry, PEAdjustmentDataCacheKey, PEAdjustmentDepth, 
+                       PEAdjustmentExposure, PEAdjustmentFilter, PEAdjustmentMarkup, 
+                       PEAdjustmentPlaybackRate, PEAdjustmentPreset, PEAdjustmentPresetManager, 
+                       PEAdjustmentRotate, PEAdjustmentSaturation, PEAdjustmentStraighten, 
+                       PEAdjustmentStyle, PEAdjustmentUtilities, PEAdjustmentWarmth, 
+                       PEAnalyticsUtility, PEAudioMixModeAction, PEAutoAdjustmentController, 
+                       PEAutoEnhanceAction, PEAutoEnhanceActionHelper, PECleanupFeedbackLogGenerator, 
+                       PECleanupSegmentAnalyzer, PECopyActionEventBuilder, PECopyEditsConfiguration, 
                        PECopyEditsConfigurationResult, PECopyEditsSetting, PEEditAction, 
                        PEEditActionBatch, PEEditActionEventBuilder, PEEditActionResult, 
                        PEEditSessionEventBuilder, PEGlobalSettings, PELivePortraitBehaviorController, 
-                       PEPasteablePreset, PEPhotoKitMediaDestination, PEPlaybackRateAction, 
-                       PEPlaybackRateOption, PEResourceLoadRequest, PEResourceLoadResult, 
-                       PEResourceLoader, PEResourceManager, PERevertPreset, PERotateAction, 
-                       PESCAPReviewManager, PESCAPReviewPayload, PESaveRequest, PESerializationUtility, 
-                       PESerializationUtilityExportSettings, PESmartPasteablePreset, 
-                       PESpatialAudioMixMode, PESupport, PEValuesCalculator, PEVideoTrimBurnInResult, 
-                       PEVideoTrimBurnInUtility, PUPhotoEditImageValues, _PEResourceHandler ]
+                       PEModelDeliveryManager, PEPasteablePreset, PEPhotoKitMediaDestination, 
+                       PEPlaybackRateAction, PEPlaybackRateOption, PEResourceLoadRequest, 
+                       PEResourceLoadResult, PEResourceLoader, PEResourceManager, 
+                       PERevertPreset, PERotateAction, PESCAPReviewManager, PESCAPReviewPayload, 
+                       PESaveRequest, PESerializationUtility, PESerializationUtilityExportSettings, 
+                       PESmartPasteablePreset, PESpatialAudioMixMode, PESupport, 
+                       PEValuesCalculator, PEVideoTrimBurnInResult, PEVideoTrimBurnInUtility, 
+                       PUPhotoEditImageValues, _CleanupSegmentInfo, _PEResourceHandler ]
 ...

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AppleIDAuthSupport.framework/Versions/A/AppleIDAuthSupport'
-current-version: 107
+current-version: 109
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -18,17 +18,18 @@ exports:
                        _AppleIDAuthSupportGSGetID, _AppleIDAuthSupportGSOperation, 
                        _AppleIDAuthSupportGSRPC, _AppleIDAuthSupportGSRequestCopyResponse, 
                        _AppleIDAuthSupportGetOption, _AppleIDAuthSupportGetStatus, 
-                       _AppleIDAuthSupportGetTypeID, _AppleIDAuthSupportIsDone, _AppleIDAuthSupportServerSetCallback, 
-                       _AppleIDAuthSupportServerSetServerDataCallback, _AppleIDAuthSupportSetOption, 
-                       _AppleIDAuthSupportStep, _AppleIDAuthSupportSuccess, _AppleIDAuthSupportTokenCopyExternalizedVersion, 
-                       _AppleIDAuthSupportTokenCreateWithExternalizedVersion, _AppleIDAuthSupportTokenGetTypeID, 
-                       _AppleIDAuthSupportTokenUpdate, __AppleIDAuthSupportCreateDecryptedData, 
-                       __AppleIDAuthSupportCreateEncryptedData, __AppleIDAuthSupportCreateToken, 
-                       __AppleIDAuthSupportGSSetRPC, _kAppleIDAuthSupportA2k, _kAppleIDAuthSupportActionData, 
-                       _kAppleIDAuthSupportAdditionalHeaders, _kAppleIDAuthSupportAlternateDSID, 
-                       _kAppleIDAuthSupportAppleIClientID, _kAppleIDAuthSupportAppleITeamID, 
-                       _kAppleIDAuthSupportApplication, _kAppleIDAuthSupportAuthAttribute, 
-                       _kAppleIDAuthSupportB, _kAppleIDAuthSupportBuddyML, _kAppleIDAuthSupportChecksum, 
+                       _AppleIDAuthSupportGetTypeID, _AppleIDAuthSupportIsDone, _AppleIDAuthSupportPBKDF2SRP, 
+                       _AppleIDAuthSupportServerSetCallback, _AppleIDAuthSupportServerSetServerDataCallback, 
+                       _AppleIDAuthSupportSetOption, _AppleIDAuthSupportStep, _AppleIDAuthSupportSuccess, 
+                       _AppleIDAuthSupportTokenCopyExternalizedVersion, _AppleIDAuthSupportTokenCreateWithExternalizedVersion, 
+                       _AppleIDAuthSupportTokenGetTypeID, _AppleIDAuthSupportTokenUpdate, 
+                       __AppleIDAuthSupportCreateDecryptedData, __AppleIDAuthSupportCreateEncryptedData, 
+                       __AppleIDAuthSupportCreateToken, __AppleIDAuthSupportGSSetRPC, 
+                       _kAppleIDAuthSupportA2k, _kAppleIDAuthSupportActionData, _kAppleIDAuthSupportAdditionalHeaders, 
+                       _kAppleIDAuthSupportAlternateDSID, _kAppleIDAuthSupportAppleIClientID, 
+                       _kAppleIDAuthSupportAppleITeamID, _kAppleIDAuthSupportApplication, 
+                       _kAppleIDAuthSupportAuthAttribute, _kAppleIDAuthSupportB, 
+                       _kAppleIDAuthSupportBuddyML, _kAppleIDAuthSupportChecksum, 
                        _kAppleIDAuthSupportClearData, _kAppleIDAuthSupportClientInfo, 
                        _kAppleIDAuthSupportClientProvidedData, _kAppleIDAuthSupportCompanionClientInfo, 
                        _kAppleIDAuthSupportCookie, _kAppleIDAuthSupportData, _kAppleIDAuthSupportDisregardChannelBindings, 

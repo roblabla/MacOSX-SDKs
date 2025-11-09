@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BookFoundation.framework/Versions/A/BookFoundation'
-current-version: 2154
+current-version: 2204
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -142,8 +142,11 @@ exports:
                        '_$s14BookFoundation11ContentInfoPAA26ReflectedStringConvertibleTb', 
                        '_$s14BookFoundation11ContentInfoPAAE11libraryData11LibraryTypeQzSgvg', 
                        '_$s14BookFoundation11ContentInfoPAAE11libraryData11LibraryTypeQzSgvpMV', 
+                       '_$s14BookFoundation11ContentInfoPAAE12primaryGenreAA0fD0VSgvg', 
+                       '_$s14BookFoundation11ContentInfoPAAE12primaryGenreAA0fD0VSgvpMV', 
                        '_$s14BookFoundation11ContentInfoPAAE19enrichingDataSource4withx11LibraryTypeQz_tF', 
                        '_$s14BookFoundation11ContentInfoPAAE19enrichingDataSource4withx9StoreTypeQz_tF', 
+                       '_$s14BookFoundation11ContentInfoPAAE20topLevelPrimaryGenre19withExtraRootWithIDAA0hD0VSgSSSg_tF', 
                        '_$s14BookFoundation11ContentInfoPAAE2idSSvg', '_$s14BookFoundation11ContentInfoPAAE2idSSvpMV', 
                        '_$s14BookFoundation11ContentInfoPAAE5titleSSvg', '_$s14BookFoundation11ContentInfoPAAE5titleSSvpMV', 
                        '_$s14BookFoundation11ContentInfoPAAE6genresSayAA05GenreD0VGSgvg', 

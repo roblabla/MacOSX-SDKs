@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RealityIO.framework/Versions/A/RealityIO'
-current-version: 201.0.9
+current-version: 201.40.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -264,6 +264,7 @@ exports:
                        '_$s9RealityIO13EntityBuilderCN', '_$s9RealityIO13EntityBuilderCfD', 
                        '_$s9RealityIO13EntityBuilderCfd', '_$s9RealityIO13ImportSessionC014getLoadSubdsAsG03urlSb10Foundation3URLV_tF', 
                        '_$s9RealityIO13ImportSessionC014setLoadSubdsAsG004loadH4SubdySb_tF', 
+                       '_$s9RealityIO13ImportSessionC016gatherTexturesAsC10Operations08onlyUsedF0AC24TextureOperatorContainerCSb_tF', 
                        '_$s9RealityIO13ImportSessionC016gatherTexturesAsC10OperationsAC24TextureOperatorContainerCyF', 
                        '_$s9RealityIO13ImportSessionC020gatherUsedTexturesAsC10OperationsAC24TextureOperatorContainerCyF', 
                        '_$s9RealityIO13ImportSessionC03getA16KitComponentName14componentClassSSSgSo011REComponentJ3Ptra_tFZ', 

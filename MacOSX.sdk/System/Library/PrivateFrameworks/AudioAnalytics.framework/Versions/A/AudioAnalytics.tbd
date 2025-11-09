@@ -60,5 +60,6 @@ exports:
                        _AudioAnalyticsSetConfiguration, _AudioAnalyticsStartReporter, 
                        _AudioAnalyticsStopReporter, _kAAPCMetricDirtyMemPeakDeltaID, 
                        _kAAPCMetricDirtyMemRecentPeakID ]
-    objc-classes:    [ AudioAnalyticsReporter, Trace, TraceArgs, _TtC14AudioAnalytics26AudioAnalyticsTestReporter ]
+    objc-classes:    [ AudioAnalyticsReporter, AudioAnalyticsTrace, AudioAnalyticsTraceArgs, 
+                       _TtC14AudioAnalytics26AudioAnalyticsTestReporter ]
 ...

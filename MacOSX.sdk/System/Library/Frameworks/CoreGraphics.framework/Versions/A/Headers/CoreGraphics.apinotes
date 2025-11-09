@@ -137,8 +137,12 @@ Functions:
   SwiftName: CGColorConversionInfo.init(src:dst:)
 - Name: CGColorConversionInfoCreateWithOptions
   SwiftName: CGColorConversionInfo.init(optionsSrc:dst:options:)
+- Name: CGColorConversionInfoCreateForToneMapping
+  SwiftName: CGColorConversionInfo.init(src:srcHeadroom:dst:dstHeadroom:toneMapping:options:)
 - Name: CGColorConversionInfoGetTypeID
   SwiftName: getter:CGColorConversionInfo.typeID()
+- Name: CGColorConversionInfoConvertData
+  SwiftName: CGColorConversionInfo.convert(self:width:height:to:format:from:format:options:)
 
 # CGColorSpace
 #

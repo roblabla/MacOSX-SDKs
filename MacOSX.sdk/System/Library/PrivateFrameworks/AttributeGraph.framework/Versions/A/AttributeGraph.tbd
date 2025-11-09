@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AttributeGraph.framework/Versions/A/AttributeGraph'
-current-version: 6.0.87
+current-version: 6.1.11
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -131,7 +131,8 @@ exports:
                        '_$s14AttributeGraph0A0V12wrappedValuexvlu', '_$s14AttributeGraph0A0V12wrappedValuexvpMV', 
                        '_$s14AttributeGraph0A0V12wrappedValuexvs', '_$s14AttributeGraph0A0V13dynamicMemberACyqd__Gs7KeyPathCyxqd__G_tcluig', 
                        '_$s14AttributeGraph0A0V13dynamicMemberACyqd__Gs7KeyPathCyxqd__G_tcluipMV', 
-                       '_$s14AttributeGraph0A0V13prefetchValueyyF', '_$s14AttributeGraph0A0V13valueAndFlags7optionsx0C0_So014AGChangedValueE0V5flagstSo14AGValueOptionsV_tF', 
+                       '_$s14AttributeGraph0A0V13prefetchValueyyF', '_$s14AttributeGraph0A0V13subgraphOrNilSo13AGSubgraphRefaSgvpMV', 
+                       '_$s14AttributeGraph0A0V13valueAndFlags7optionsx0C0_So014AGChangedValueE0V5flagstSo14AGValueOptionsV_tF', 
                        '_$s14AttributeGraph0A0V14projectedValueACyxGvM', '_$s14AttributeGraph0A0V14projectedValueACyxGvg', 
                        '_$s14AttributeGraph0A0V14projectedValueACyxGvpMV', '_$s14AttributeGraph0A0V14projectedValueACyxGvs', 
                        '_$s14AttributeGraph0A0V15invalidateValueyyF', '_$s14AttributeGraph0A0V18breadthFirstSearch7options_SbSo15AGSearchOptionsV_SbSo11AGAttributeaXEtF', 
@@ -388,7 +389,8 @@ exports:
                        '_$sSp14AttributeGraphE6offsetqd__AA13PointerOffsetVyxqd__G_tcluipMV', 
                        '_$sSp14AttributeGraphE6offsetqd__AA13PointerOffsetVyxqd__G_tcluis', 
                        _AGAttributeNil, _AGAttributeNullType, _AGAttributeNullVTable, 
-                       _AGCompareValues, _AGComparisonStateGetFieldRange, _AGComparisonStateGetFieldType, 
+                       _AGCompareValues, _AGComparisonStateGetDestination, _AGComparisonStateGetFieldRange, 
+                       _AGComparisonStateGetFieldType, _AGComparisonStateGetSource, 
                        _AGCreateWeakAttribute, _AGDebugServerCopyURL, _AGDebugServerRun, 
                        _AGDebugServerStart, _AGDebugServerStop, _AGDescriptionFormat, 
                        _AGDescriptionIncludeValues, _AGDescriptionMaxFrames, _AGDescriptionTruncationLimit, 
@@ -402,9 +404,10 @@ exports:
                        _AGGraphCreateOffsetAttribute2, _AGGraphCreateShared, _AGGraphCurrentAttributeWasModified, 
                        _AGGraphDescription, _AGGraphEndDeferringSubgraphInvalidation, 
                        _AGGraphEndProfileEvent, _AGGraphGetAttributeGraph, _AGGraphGetAttributeInfo, 
-                       _AGGraphGetAttributeSubgraph, _AGGraphGetContext, _AGGraphGetCounter, 
-                       _AGGraphGetCurrentAttribute, _AGGraphGetDeadline, _AGGraphGetFlags, 
-                       _AGGraphGetGraphContext, _AGGraphGetIndirectAttribute, _AGGraphGetIndirectDependency, 
+                       _AGGraphGetAttributeSubgraph, _AGGraphGetAttributeSubgraph2, 
+                       _AGGraphGetContext, _AGGraphGetCounter, _AGGraphGetCurrentAttribute, 
+                       _AGGraphGetDeadline, _AGGraphGetFlags, _AGGraphGetGraphContext, 
+                       _AGGraphGetIndirectAttribute, _AGGraphGetIndirectDependency, 
                        _AGGraphGetInputValue, _AGGraphGetOutputValue, _AGGraphGetTraceEventName, 
                        _AGGraphGetTraceEventSubsystem, _AGGraphGetTypeID, _AGGraphGetValue, 
                        _AGGraphGetValueState, _AGGraphGetWeakValue, _AGGraphHasDeadlinePassed, 

@@ -490,14 +490,6 @@ SCN_EXPORT
  */
 @property(nonatomic) NSUInteger categoryBitMask API_AVAILABLE(macos(10.10));
 
-#pragma mark - UIFocus support
-
-/*!
- @property focusBehavior
- @abstract Controls the behavior of the receiver regarding the UIFocus system. Defaults to SCNNodeFocusBehaviorNone.
- */
-@property(nonatomic) SCNNodeFocusBehavior focusBehavior API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
-
 @end
 
 @interface SCNNode (Transforms)
@@ -686,6 +678,16 @@ SCN_EXPORT
 
 - (void)simdLocalRotateBy:(simd_quatf)rotation API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 - (void)simdRotateBy:(simd_quatf)worldRotation aroundTarget:(simd_float3)worldTarget API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
+@end
+
+@interface SCNNode (Focus)
+
+/*!
+ @property focusBehavior
+ @abstract Controls the behavior of the receiver regarding the UIFocus system. Defaults to SCNNodeFocusBehaviorNone.
+ */
+@property(nonatomic) SCNNodeFocusBehavior focusBehavior API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 @end
 

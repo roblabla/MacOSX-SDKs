@@ -14,6 +14,7 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12AppAnalytics07BridgedA14SessionManagerC03appD12DidTerminateyyF', 
                        '_$s12AppAnalytics07BridgedA14SessionManagerC03endaD0yyyycF', 
+                       '_$s12AppAnalytics07BridgedA14SessionManagerC05startaD028shouldCorrelateSceneSessionsySb_tF', 
                        '_$s12AppAnalytics07BridgedA14SessionManagerC05startaD0yyF', 
                        '_$s12AppAnalytics07BridgedA14SessionManagerC06createcdE0AA0cdE0CyF', 
                        '_$s12AppAnalytics07BridgedA14SessionManagerC15trackingConsentAcA08TrackingG0C_tcfC', 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CMPhoto.framework/Versions/A/CMPhoto'
-current-version: 344
+current-version: 350.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -188,15 +188,16 @@ exports:
                        _CMPhotoGetDestinationPixelFormatFromOptions, _CMPhotoGetHEIFQualityDefault, 
                        _CMPhotoGetHEVCProfileForPixelFormat, _CMPhotoGetImageType, 
                        _CMPhotoGetPreferredDNGTileSizeForImageSize, _CMPhotoGetPreferredHEIFTileSizeForImageSize, 
-                       _CMPhotoGetSCMVersionString, _CMPhotoInterchangeCompactDecode, 
-                       _CMPhotoInterchangeCompactEncode, _CMPhotoIs400EncodeAvailable, 
-                       _CMPhotoIs422EncodeAvailable, _CMPhotoIs444EncodeAvailable, 
-                       _CMPhotoIsMatchedJxlDecodeAPI, _CMPhotoIsPixelFormatSupportedByAVC, 
-                       _CMPhotoIsPixelFormatSupportedByHEVC, _CMPhotoIsPixelFormatSupportedBySLIM, 
-                       _CMPhotoIsRGBEncodeAvailable, _CMPhotoIsTileDecoderAvailable, 
-                       _CMPhotoIsTileEncoderAvailable, _CMPhotoJFIFScannerCreate, 
-                       _CMPhotoJFIFScannerDispose, _CMPhotoJFIFScannerRun, _CMPhotoJFIFTranscodeFromJFIF, 
-                       _CMPhotoJFIFTranscodeStrips, _CMPhotoMSRSupportsHDR, _CMPhotoMetadataCreateCFNumberFormatter, 
+                       _CMPhotoGetSCMVersionString, _CMPhotoImageHasOpaqueAlphaFromPixelData, 
+                       _CMPhotoInterchangeCompactDecode, _CMPhotoInterchangeCompactEncode, 
+                       _CMPhotoIs400EncodeAvailable, _CMPhotoIs422EncodeAvailable, 
+                       _CMPhotoIs444EncodeAvailable, _CMPhotoIsMatchedJxlDecodeAPI, 
+                       _CMPhotoIsPixelFormatSupportedByAVC, _CMPhotoIsPixelFormatSupportedByHEVC, 
+                       _CMPhotoIsPixelFormatSupportedBySLIM, _CMPhotoIsRGBEncodeAvailable, 
+                       _CMPhotoIsTileDecoderAvailable, _CMPhotoIsTileEncoderAvailable, 
+                       _CMPhotoJFIFScannerCreate, _CMPhotoJFIFScannerDispose, _CMPhotoJFIFScannerRun, 
+                       _CMPhotoJFIFTranscodeFromJFIF, _CMPhotoJFIFTranscodeStrips, 
+                       _CMPhotoMSRSupportsHDR, _CMPhotoMetadataCreateCFNumberFormatter, 
                        _CMPhotoModifyHEIFInPlaceData, _CMPhotoModifyHEIFInPlaceURL, 
                        _CMPhotoParavirtualizedHostJPEGHardwareCopyCapabilities, _CMPhotoParavirtualizedHostJPEGHardwareDecode, 
                        _CMPhotoParavirtualizedHostJPEGHardwareEncode, _CMPhotoParseFlexRangeMetadataDictionary, 
@@ -388,6 +389,7 @@ exports:
                        _kCMPhotoDecompressionContainerConstituent_FlexRange_NclxColorKey, 
                        _kCMPhotoDecompressionContainerConstituent_ImagePixelBuffer, 
                        _kCMPhotoDecompressionContainerConstituent_ImagePixelBufferOrientation, 
+                       _kCMPhotoDecompressionContainerConstituent_MeteorColorSpace, 
                        _kCMPhotoDecompressionContainerConstituent_MeteorGainMap, 
                        _kCMPhotoDecompressionContainerConstituent_MeteorGainMapOrientation, 
                        _kCMPhotoDecompressionContainerConstituent_MeteorMakerNote, 

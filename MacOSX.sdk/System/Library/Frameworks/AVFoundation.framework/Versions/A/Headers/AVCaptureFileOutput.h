@@ -560,6 +560,8 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  
  @discussion
     This property enables capturing spatial video to a file. By default, this property is set to NO. Check spatialVideoCaptureSupported before setting this property, as setting to YES will throw an exception if the feature is not supported.
+ 
+    On iOS, enabling spatial video will overwrite the connected AVCaptureDevice's `videoZoomFactor`, `minAvailableVideoZoomFactor`, and `maxAvailableVideoZoomFactor` to the field of view of the narrower camera in the pair.
  */
 @property(nonatomic, getter=isSpatialVideoCaptureEnabled) BOOL spatialVideoCaptureEnabled API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 

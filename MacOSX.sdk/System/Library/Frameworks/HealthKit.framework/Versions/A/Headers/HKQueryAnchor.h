@@ -14,7 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
  @class         HKQueryAnchor
  @discussion    This object encapsulates the state of an HKAnchoredObjectQuery
  */
-HK_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0)) NS_SWIFT_SENDABLE
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKQueryAnchor : NSObject <NSSecureCoding, NSCopying>
 
 /*!

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligenceFlowContext.framework/Versions/A/IntelligenceFlowContext'
-current-version: 110.3
+current-version: 110.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -242,6 +242,10 @@ exports:
                        '_$s23IntelligenceFlowContext16UIContextOptionsC15detectableTypesACShyAA20DetectableEntityTypeOG_tcfc', 
                        '_$s23IntelligenceFlowContext16UIContextOptionsC15detectableTypesShyAA20DetectableEntityTypeOGvg', 
                        '_$s23IntelligenceFlowContext16UIContextOptionsC15detectableTypesShyAA20DetectableEntityTypeOGvpMV', 
+                       '_$s23IntelligenceFlowContext16UIContextOptionsC24elementCollectionTimeoutSdvM', 
+                       '_$s23IntelligenceFlowContext16UIContextOptionsC24elementCollectionTimeoutSdvg', 
+                       '_$s23IntelligenceFlowContext16UIContextOptionsC24elementCollectionTimeoutSdvpMV', 
+                       '_$s23IntelligenceFlowContext16UIContextOptionsC24elementCollectionTimeoutSdvs', 
                        '_$s23IntelligenceFlowContext16UIContextOptionsC4fromACs7Decoder_p_tKcfC', 
                        '_$s23IntelligenceFlowContext16UIContextOptionsC4fromACs7Decoder_p_tKcfCTj', 
                        '_$s23IntelligenceFlowContext16UIContextOptionsC4fromACs7Decoder_p_tKcfCTq', 

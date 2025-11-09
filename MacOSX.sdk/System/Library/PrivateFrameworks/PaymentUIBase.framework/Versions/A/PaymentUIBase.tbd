@@ -931,6 +931,8 @@ exports:
                        '_$s7SwiftUI4ViewP13PaymentUIBaseE21paymentItemBackgroundQryFQOMQ', 
                        '_$s7SwiftUI4ViewP13PaymentUIBaseE21paymentItemBackgroundyQrqd__SgAaBRd__lF', 
                        '_$s7SwiftUI4ViewP13PaymentUIBaseE21paymentItemBackgroundyQrqd__SgAaBRd__lFQOMQ', 
+                       '_$s7SwiftUI5ColorV13PaymentUIBaseE016defaultCheckmarkC0ACvgZ', 
+                       '_$s7SwiftUI5ColorV13PaymentUIBaseE018defaultButtonTitleC0ACvgZ', 
                        '_$s7SwiftUI5ColorV13PaymentUIBaseE04logoC0ACvgZ', '_$s7SwiftUI5ColorV13PaymentUIBaseE09boxBorderC0ACvgZ', 
                        '_$s7SwiftUI5ColorV13PaymentUIBaseE10itemBorderACvgZ', '_$s7SwiftUI5ColorV13PaymentUIBaseE11primaryTextACvgZ', 
                        '_$s7SwiftUI5ColorV13PaymentUIBaseE13secondaryTextACvgZ', 

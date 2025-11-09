@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotoFoundationLegacy.framework/Versions/A/PhotoFoundationLegacy'
-current-version: 701.0.230
+current-version: 711.0.180
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _LastAddRemoveTaskState, _PFCMTimeDescription, _PFCMTimeFromQTTimeString, 
@@ -32,13 +32,13 @@ exports:
                        _PhotoFoundationLegacyVersionString, __PFThreadName, __qosNameTable, 
                        _kPFUuidLength, _levelIntegerToStringMap, _pf_dispatch_seconds, 
                        _pf_time_string, _sGlobalID ]
-    objc-classes:    [ PFAction, PFActionGroup, PFActionLog, PFAsyncDispatchMulticaster, 
-                       PFAsyncTaskBarrier, PFBSMResourceIdentifier, PFBackgroundServiceManager, 
-                       PFBackgroundServiceManagerCategory, PFBase64Codec, PFBase64MercuryCodec, 
-                       PFBlockControl, PFBookmarkCoordinator, PFCache, PFCacheApproximateLRUCacheEntry, 
-                       PFCacheApproximateLRUMaximumCountPolicy, PFCacheEntry, PFCacheLRUMaximumCountPolicy, 
-                       PFCachePolicy, PFCacheStatistics, PFCanceler, PFCancelerObserver, 
-                       PFChecksum, PFConcurrentQueue, PFConcurrentQueueClass, PFDateRangeStringRepresentationController, 
+    objc-classes:    [ PFAction, PFActionGroup, PFAsyncDispatchMulticaster, PFAsyncTaskBarrier, 
+                       PFBSMResourceIdentifier, PFBackgroundServiceManager, PFBackgroundServiceManagerCategory, 
+                       PFBase64Codec, PFBase64MercuryCodec, PFBlockControl, PFBookmarkCoordinator, 
+                       PFCache, PFCacheApproximateLRUCacheEntry, PFCacheApproximateLRUMaximumCountPolicy, 
+                       PFCacheEntry, PFCacheLRUMaximumCountPolicy, PFCachePolicy, 
+                       PFCacheStatistics, PFCanceler, PFCancelerObserver, PFChecksum, 
+                       PFConcurrentQueue, PFConcurrentQueueClass, PFDateRangeStringRepresentationController, 
                        PFDeferredInitialization, PFDeferredInitializationTrigger, 
                        PFDirectMessagingMulticaster, PFDirectoryEnumerator, PFDispatchQueue, 
                        PFDispatchQueueBaseClass, PFDispatchQueueBlockOnDemandExtension, 
@@ -65,9 +65,8 @@ exports:
                        PFStateMachineTransition, PFString, PFStringUtilities, PFTemporaryBuffer, 
                        PFTemporaryBufferStatistics, PFTimeIntervalCoalescer, PFURLEventHandler, 
                        PFUtilities, PFUtilityAction, PFUuidData, PFWeakContainer, 
-                       PFWeakHash, PFWorkBatch, PFWorkContext, _PFActionLogEvent, 
-                       _PFActionLogMessage, _PFActionLogProgress, _PFActionLogStateChange, 
-                       _PFDQDEBlockInfo, _PFDQDECallSite, _PFDQRBEThreadStack, _PFDeferredInitializationTriggerWorkItem, 
+                       PFWeakHash, PFWorkBatch, PFWorkContext, _PFDQDEBlockInfo, 
+                       _PFDQDECallSite, _PFDQRBEThreadStack, _PFDeferredInitializationTriggerWorkItem, 
                        _PFFinishedLaunchingTriggerWorkItem, _PFLocalizedDateRangeFormatter, 
                        _PFMulticasterMessageReceivers, _PFMulticasterReceiverList, 
                        _PFPlaceholderMulticaster, _PFPriorityQueueExtensionBlockInfo, 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VectorSearch.framework/Versions/A/VectorSearch'
-current-version: 27
+current-version: 28.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -24,6 +24,7 @@ exports:
                        '_$s12VectorSearch0A13DatabaseErrorO030readOnlyConnectionCannotCreateC0yA2CmFWC', 
                        '_$s12VectorSearch0A13DatabaseErrorO10Foundation09LocalizedD0AAMc', 
                        '_$s12VectorSearch0A13DatabaseErrorO11descriptionSSvg', '_$s12VectorSearch0A13DatabaseErrorO11descriptionSSvpMV', 
+                       '_$s12VectorSearch0A13DatabaseErrorO11ftsDisabledyACSS_tcACmFWC', 
                        '_$s12VectorSearch0A13DatabaseErrorO12nameNotFoundyACSS_tcACmFWC', 
                        '_$s12VectorSearch0A13DatabaseErrorO12searchFailedyACSS_tcACmFWC', 
                        '_$s12VectorSearch0A13DatabaseErrorO13clientFailureyACSS_tcACmFWC', 

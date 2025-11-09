@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatform.framework/Versions/A/IntelligencePlatform'
-current-version: 111.0.2
+current-version: 115.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -11887,7 +11887,6 @@ exports:
                        '_$s20IntelligencePlatform8FeaturesO11FeatureFlagO19ipcsMemoryReductionyA2EmFWC', 
                        '_$s20IntelligencePlatform8FeaturesO11FeatureFlagO20experimentalECRViewsyA2EmFWC', 
                        '_$s20IntelligencePlatform8FeaturesO11FeatureFlagO20experimentalK2TViewsyA2EmFWC', 
-                       '_$s20IntelligencePlatform8FeaturesO11FeatureFlagO21fiASpotlightWritebackyA2EmFWC', 
                        '_$s20IntelligencePlatform8FeaturesO11FeatureFlagO21ipcsMemoryTransactionyA2EmFWC', 
                        '_$s20IntelligencePlatform8FeaturesO11FeatureFlagO21personalKnowledgeToolyA2EmFWC', 
                        '_$s20IntelligencePlatform8FeaturesO11FeatureFlagO22globalKnowledgeServiceyA2EmFWC', 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SharingUI.framework/Versions/A/SharingUI'
-current-version: 1967.10.3
+current-version: 1968.20.61
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -59,8 +59,9 @@ exports:
                        '_$s9SharingUI20ShockwaveEffectStateO19isLogicallyCompleteSbvpMV', 
                        '_$s9SharingUI20ShockwaveEffectStateO21connectionInterruptedyA2CmFWC', 
                        '_$s9SharingUI20ShockwaveEffectStateO2eeoiySbAC_ACtFZ', '_$s9SharingUI20ShockwaveEffectStateO4hash4intoys6HasherVz_tF', 
-                       '_$s9SharingUI20ShockwaveEffectStateO9hashValueSivg', '_$s9SharingUI20ShockwaveEffectStateO9hashValueSivpMV', 
-                       '_$s9SharingUI20ShockwaveEffectStateO9shockwaveyA2CmFWC', 
+                       '_$s9SharingUI20ShockwaveEffectStateO7removedyA2CmFWC', '_$s9SharingUI20ShockwaveEffectStateO9hashValueSivg', 
+                       '_$s9SharingUI20ShockwaveEffectStateO9hashValueSivpMV', '_$s9SharingUI20ShockwaveEffectStateO9isRemovedSbvg', 
+                       '_$s9SharingUI20ShockwaveEffectStateO9isRemovedSbvpMV', '_$s9SharingUI20ShockwaveEffectStateO9shockwaveyA2CmFWC', 
                        '_$s9SharingUI20ShockwaveEffectStateOMa', '_$s9SharingUI20ShockwaveEffectStateOMn', 
                        '_$s9SharingUI20ShockwaveEffectStateON', '_$s9SharingUI20ShockwaveEffectStateOSHAAMc', 
                        '_$s9SharingUI20ShockwaveEffectStateOSQAAMc', '_$s9SharingUI23SFUIContactIconProviderC07contactD8FallBackSo7NSImageCyYaKFTj', 
@@ -77,6 +78,9 @@ exports:
                        '_$s9SharingUI23SFUIContactIconProviderCMa', '_$s9SharingUI23SFUIContactIconProviderCMn', 
                        '_$s9SharingUI23SFUIContactIconProviderCMo', '_$s9SharingUI23SFUIContactIconProviderCMu', 
                        '_$s9SharingUI23SFUIContactIconProviderCN', '_$s9SharingUI23SFUIContactIconProviderCfD', 
+                       '_$s9SharingUI29ShockwaveAnimationCoordinatorC09waitUntilD9Completes7timeoutys8DurationV_tYaFTj', 
+                       '_$s9SharingUI29ShockwaveAnimationCoordinatorC09waitUntilD9Completes7timeoutys8DurationV_tYaFTjTu', 
+                       '_$s9SharingUI29ShockwaveAnimationCoordinatorC09waitUntilD9Completes7timeoutys8DurationV_tYaFTq', 
                        '_$s9SharingUI29ShockwaveAnimationCoordinatorC2eeoiySbAC_ACtFZ', 
                        '_$s9SharingUI29ShockwaveAnimationCoordinatorC5stateAA0C11EffectStateOvgTj', 
                        '_$s9SharingUI29ShockwaveAnimationCoordinatorC5stateAA0C11EffectStateOvgTq', 

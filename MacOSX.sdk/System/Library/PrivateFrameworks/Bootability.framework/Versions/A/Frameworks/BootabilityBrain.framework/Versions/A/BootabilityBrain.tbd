@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Bootability.framework/Versions/A/Frameworks/BootabilityBrain.framework/Versions/A/BootabilityBrain'
-current-version: 74
+current-version: 77
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ _AccelerateCrypto_AES_decrypt_aesni, _AccelerateCrypto_AES_decrypt_nonaesni, 
@@ -2886,14 +2886,13 @@ exports:
                        _kUARPSupportedAccessoryKeySupportsHeySiriCompact, _kUARPSupportedAccessoryKeySupportsInternalSettings, 
                        _kUARPSupportedAccessoryKeySupportsLogs, _kUARPSupportedAccessoryKeySupportsMappedAnalytics, 
                        _kUARPSupportedAccessoryKeySupportsPowerlog, _kUARPSupportedAccessoryKeySupportsVersions, 
-                       _kUARPSupportedAccessoryKeySupportsVoiceAssist, _kUARPSupportedAccessoryKeySysdiagnoseApprovedMetrics, 
-                       _kUARPSupportedAccessoryKeyTransport, _kUARPSupportedAccessoryKeyTransportB2PHID, 
-                       _kUARPSupportedAccessoryKeyTransportBluetooth, _kUARPSupportedAccessoryKeyTransportHDS, 
-                       _kUARPSupportedAccessoryKeyTransportHID, _kUARPSupportedAccessoryKeyTransportIIC, 
-                       _kUARPSupportedAccessoryKeyTransportUSB, _kUARPSupportedAccessoryKeyTransportUSBPD, 
-                       _kUARPSupportedAccessoryKeyTtrSolicitLogs, _kUARPSupportedAccessoryKeyUSBPDDeviceClass, 
-                       _kUARPSupportedAccessoryKeyUSBPDDeviceClassMagSafeCable, _kUARPSupportedAccessoryKeyUSBPDDeviceClassPowerAdapter, 
-                       _kUARPSupportedAccessoryKeyUSBPDDeviceClassUSBCLightning, 
+                       _kUARPSupportedAccessoryKeySupportsVoiceAssist, _kUARPSupportedAccessoryKeyTransport, 
+                       _kUARPSupportedAccessoryKeyTransportB2PHID, _kUARPSupportedAccessoryKeyTransportBluetooth, 
+                       _kUARPSupportedAccessoryKeyTransportHDS, _kUARPSupportedAccessoryKeyTransportHID, 
+                       _kUARPSupportedAccessoryKeyTransportIIC, _kUARPSupportedAccessoryKeyTransportUSB, 
+                       _kUARPSupportedAccessoryKeyTransportUSBPD, _kUARPSupportedAccessoryKeyTtrSolicitLogs, 
+                       _kUARPSupportedAccessoryKeyUSBPDDeviceClass, _kUARPSupportedAccessoryKeyUSBPDDeviceClassMagSafeCable, 
+                       _kUARPSupportedAccessoryKeyUSBPDDeviceClassPowerAdapter, _kUARPSupportedAccessoryKeyUSBPDDeviceClassUSBCLightning, 
                        _kUARPSupportedAccessoryKeyUSBPDLocationType, _kUARPSupportedAccessoryKeyUSBPDLocationTypeSOP, 
                        _kUARPSupportedAccessoryKeyUSBPDLocationTypeSOPDoublePrime, 
                        _kUARPSupportedAccessoryKeyUSBPDLocationTypeSOPPrime, _kUARPSupportedAccessoryKeyUUID, 

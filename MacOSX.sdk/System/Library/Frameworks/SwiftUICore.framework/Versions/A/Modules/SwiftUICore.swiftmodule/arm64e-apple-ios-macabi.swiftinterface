@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -module-abi-name SwiftUI -enable-experimental-feature IsolatedAny2 -enable-bare-slash-regex -user-module-version 6.0.87.1.402 -module-name SwiftUICore -package-name SwiftUI
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -module-abi-name SwiftUI -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-bare-slash-regex -user-module-version 6.1.19.2 -module-name SwiftUICore -package-name SwiftUI
 import Accessibility
 import Combine
 import CoreFoundation
@@ -298,10 +298,10 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct ZStack<Content> : SwiftUICore.View where Content : SwiftUICore.View {
+@frozen public struct ZStack<Content> : SwiftUICore.View where Content : SwiftUICore.View {
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency package var _tree: SwiftUICore._VariadicView.Tree<SwiftUICore._ZStackLayout, Content>
-  @inlinable nonisolated public init(alignment: SwiftUICore.Alignment = .center, @SwiftUICore.ViewBuilder content: () -> Content) {
+  package var _tree: SwiftUICore._VariadicView.Tree<SwiftUICore._ZStackLayout, Content>
+  @inlinable public init(alignment: SwiftUICore.Alignment = .center, @SwiftUICore.ViewBuilder content: () -> Content) {
         _tree = .init(_ZStackLayout(alignment: alignment)) { content() }
     }
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.ZStack<Content>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
@@ -316,9 +316,9 @@ extension SwiftUICore.ZStack : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _ZStackLayout : SwiftUICore._VariadicView.UnaryViewRoot, SwiftUICore.Animatable {
-  @_Concurrency.MainActor @preconcurrency public var alignment: SwiftUICore.Alignment
-  @inlinable @_Concurrency.MainActor @preconcurrency public init(alignment: SwiftUICore.Alignment = .center) {
+@frozen public struct _ZStackLayout : SwiftUICore._VariadicView.UnaryViewRoot, SwiftUICore.Animatable {
+  public var alignment: SwiftUICore.Alignment
+  @inlinable public init(alignment: SwiftUICore.Alignment = .center) {
         self.alignment = alignment
     }
   nonisolated public static func _makeView(root: SwiftUICore._GraphValue<SwiftUICore._ZStackLayout>, inputs: SwiftUICore._ViewInputs, body: (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewOutputs
@@ -333,12 +333,12 @@ extension SwiftUICore.ZStack : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore._ZStackLayout : SwiftUICore.Layout {
-  @_Concurrency.MainActor @preconcurrency public static var layoutProperties: SwiftUICore.LayoutProperties {
+  public static var layoutProperties: SwiftUICore.LayoutProperties {
     get
   }
-  @_Concurrency.MainActor @preconcurrency public func placeSubviews(in bounds: CoreFoundation.CGRect, proposal: SwiftUICore.ProposedViewSize, subviews: SwiftUICore._ZStackLayout.Subviews, cache: inout Swift.Void)
-  @_Concurrency.MainActor @preconcurrency public func spacing(subviews: SwiftUICore._ZStackLayout.Subviews, cache: inout Swift.Void) -> SwiftUICore.ViewSpacing
-  @_Concurrency.MainActor @preconcurrency public func sizeThatFits(proposal: SwiftUICore.ProposedViewSize, subviews: SwiftUICore._ZStackLayout.Subviews, cache: inout Swift.Void) -> CoreFoundation.CGSize
+  public func placeSubviews(in bounds: CoreFoundation.CGRect, proposal: SwiftUICore.ProposedViewSize, subviews: SwiftUICore._ZStackLayout.Subviews, cache: inout Swift.Void)
+  public func spacing(subviews: SwiftUICore._ZStackLayout.Subviews, cache: inout Swift.Void) -> SwiftUICore.ViewSpacing
+  public func sizeThatFits(proposal: SwiftUICore.ProposedViewSize, subviews: SwiftUICore._ZStackLayout.Subviews, cache: inout Swift.Void) -> CoreFoundation.CGSize
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Cache = Swift.Void
 }
@@ -463,23 +463,23 @@ extension SwiftUICore.ShapeStyle where Self == SwiftUICore.AngularGradient {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct LinearGradient : SwiftUICore.ShapeStyle, SwiftUICore.View, Swift.Sendable {
-  @_Concurrency.MainActor @preconcurrency package var gradient: SwiftUICore.Gradient
-  @_Concurrency.MainActor @preconcurrency package var startPoint: SwiftUICore.UnitPoint
-  @_Concurrency.MainActor @preconcurrency package var endPoint: SwiftUICore.UnitPoint
-  nonisolated public init(gradient: SwiftUICore.Gradient, startPoint: SwiftUICore.UnitPoint, endPoint: SwiftUICore.UnitPoint)
-  @_alwaysEmitIntoClient nonisolated public init(colors: [SwiftUICore.Color], startPoint: SwiftUICore.UnitPoint, endPoint: SwiftUICore.UnitPoint) {
+@frozen public struct LinearGradient : SwiftUICore.ShapeStyle, SwiftUICore.View, Swift.Sendable {
+  package var gradient: SwiftUICore.Gradient
+  package var startPoint: SwiftUICore.UnitPoint
+  package var endPoint: SwiftUICore.UnitPoint
+  public init(gradient: SwiftUICore.Gradient, startPoint: SwiftUICore.UnitPoint, endPoint: SwiftUICore.UnitPoint)
+  @_alwaysEmitIntoClient public init(colors: [SwiftUICore.Color], startPoint: SwiftUICore.UnitPoint, endPoint: SwiftUICore.UnitPoint) {
         self.init(
             gradient: Gradient(colors: colors),
             startPoint: startPoint, endPoint: endPoint)
     }
-  @_alwaysEmitIntoClient nonisolated public init(stops: [SwiftUICore.Gradient.Stop], startPoint: SwiftUICore.UnitPoint, endPoint: SwiftUICore.UnitPoint) {
+  @_alwaysEmitIntoClient public init(stops: [SwiftUICore.Gradient.Stop], startPoint: SwiftUICore.UnitPoint, endPoint: SwiftUICore.UnitPoint) {
         self.init(
             gradient: Gradient(stops: stops),
             startPoint: startPoint, endPoint: endPoint)
     }
   @available(*, deprecated, message: "obsolete")
-  @_alwaysEmitIntoClient nonisolated public static func _makeView<S>(view: SwiftUICore._GraphValue<SwiftUICore._ShapeView<S, SwiftUICore.LinearGradient>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs where S : SwiftUICore.Shape {
+  @_alwaysEmitIntoClient public static func _makeView<S>(view: SwiftUICore._GraphValue<SwiftUICore._ShapeView<S, SwiftUICore.LinearGradient>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs where S : SwiftUICore.Shape {
         _ShapeView<S, Self>._makeView(view: view, inputs: inputs)
     }
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -492,24 +492,24 @@ extension SwiftUICore.ShapeStyle where Self == SwiftUICore.AngularGradient {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct RadialGradient : SwiftUICore.ShapeStyle, SwiftUICore.View, Swift.Sendable {
-  @_Concurrency.MainActor @preconcurrency package var gradient: SwiftUICore.Gradient
-  @_Concurrency.MainActor @preconcurrency package var center: SwiftUICore.UnitPoint
-  @_Concurrency.MainActor @preconcurrency package var startRadius: CoreFoundation.CGFloat
-  @_Concurrency.MainActor @preconcurrency package var endRadius: CoreFoundation.CGFloat
-  nonisolated public init(gradient: SwiftUICore.Gradient, center: SwiftUICore.UnitPoint, startRadius: CoreFoundation.CGFloat, endRadius: CoreFoundation.CGFloat)
-  @_alwaysEmitIntoClient nonisolated public init(colors: [SwiftUICore.Color], center: SwiftUICore.UnitPoint, startRadius: CoreFoundation.CGFloat, endRadius: CoreFoundation.CGFloat) {
+@frozen public struct RadialGradient : SwiftUICore.ShapeStyle, SwiftUICore.View, Swift.Sendable {
+  package var gradient: SwiftUICore.Gradient
+  package var center: SwiftUICore.UnitPoint
+  package var startRadius: CoreFoundation.CGFloat
+  package var endRadius: CoreFoundation.CGFloat
+  public init(gradient: SwiftUICore.Gradient, center: SwiftUICore.UnitPoint, startRadius: CoreFoundation.CGFloat, endRadius: CoreFoundation.CGFloat)
+  @_alwaysEmitIntoClient public init(colors: [SwiftUICore.Color], center: SwiftUICore.UnitPoint, startRadius: CoreFoundation.CGFloat, endRadius: CoreFoundation.CGFloat) {
         self.init(
             gradient: Gradient(colors: colors), center: center,
             startRadius: startRadius, endRadius: endRadius)
     }
-  @_alwaysEmitIntoClient nonisolated public init(stops: [SwiftUICore.Gradient.Stop], center: SwiftUICore.UnitPoint, startRadius: CoreFoundation.CGFloat, endRadius: CoreFoundation.CGFloat) {
+  @_alwaysEmitIntoClient public init(stops: [SwiftUICore.Gradient.Stop], center: SwiftUICore.UnitPoint, startRadius: CoreFoundation.CGFloat, endRadius: CoreFoundation.CGFloat) {
         self.init(
             gradient: Gradient(stops: stops), center: center,
             startRadius: startRadius, endRadius: endRadius)
     }
   @available(*, deprecated, message: "obsolete")
-  @_alwaysEmitIntoClient nonisolated public static func _makeView<S>(view: SwiftUICore._GraphValue<SwiftUICore._ShapeView<S, SwiftUICore.RadialGradient>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs where S : SwiftUICore.Shape {
+  @_alwaysEmitIntoClient public static func _makeView<S>(view: SwiftUICore._GraphValue<SwiftUICore._ShapeView<S, SwiftUICore.RadialGradient>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs where S : SwiftUICore.Shape {
         _ShapeView<S, Self>._makeView(view: view, inputs: inputs)
     }
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -522,14 +522,14 @@ extension SwiftUICore.ShapeStyle where Self == SwiftUICore.AngularGradient {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct EllipticalGradient : SwiftUICore.ShapeStyle, SwiftUICore.View, Swift.Sendable {
-  @_Concurrency.MainActor @preconcurrency package var gradient: SwiftUICore.Gradient
-  @_Concurrency.MainActor @preconcurrency package var center: SwiftUICore.UnitPoint
-  @_Concurrency.MainActor @preconcurrency package var startRadiusFraction: CoreFoundation.CGFloat
-  @_Concurrency.MainActor @preconcurrency package var endRadiusFraction: CoreFoundation.CGFloat
-  nonisolated public init(gradient: SwiftUICore.Gradient, center: SwiftUICore.UnitPoint = .center, startRadiusFraction: CoreFoundation.CGFloat = 0, endRadiusFraction: CoreFoundation.CGFloat = 0.5)
-  nonisolated public init(colors: [SwiftUICore.Color], center: SwiftUICore.UnitPoint = .center, startRadiusFraction: CoreFoundation.CGFloat = 0, endRadiusFraction: CoreFoundation.CGFloat = 0.5)
-  nonisolated public init(stops: [SwiftUICore.Gradient.Stop], center: SwiftUICore.UnitPoint = .center, startRadiusFraction: CoreFoundation.CGFloat = 0, endRadiusFraction: CoreFoundation.CGFloat = 0.5)
+@frozen public struct EllipticalGradient : SwiftUICore.ShapeStyle, SwiftUICore.View, Swift.Sendable {
+  package var gradient: SwiftUICore.Gradient
+  package var center: SwiftUICore.UnitPoint
+  package var startRadiusFraction: CoreFoundation.CGFloat
+  package var endRadiusFraction: CoreFoundation.CGFloat
+  public init(gradient: SwiftUICore.Gradient, center: SwiftUICore.UnitPoint = .center, startRadiusFraction: CoreFoundation.CGFloat = 0, endRadiusFraction: CoreFoundation.CGFloat = 0.5)
+  public init(colors: [SwiftUICore.Color], center: SwiftUICore.UnitPoint = .center, startRadiusFraction: CoreFoundation.CGFloat = 0, endRadiusFraction: CoreFoundation.CGFloat = 0.5)
+  public init(stops: [SwiftUICore.Gradient.Stop], center: SwiftUICore.UnitPoint = .center, startRadiusFraction: CoreFoundation.CGFloat = 0, endRadiusFraction: CoreFoundation.CGFloat = 0.5)
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias Body = SwiftUICore._ShapeView<SwiftUICore.Rectangle, SwiftUICore.EllipticalGradient>
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
@@ -540,31 +540,31 @@ extension SwiftUICore.ShapeStyle where Self == SwiftUICore.AngularGradient {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct AngularGradient : SwiftUICore.ShapeStyle, SwiftUICore.View, Swift.Sendable {
-  @_Concurrency.MainActor @preconcurrency package var gradient: SwiftUICore.Gradient
-  @_Concurrency.MainActor @preconcurrency package var center: SwiftUICore.UnitPoint
-  @_Concurrency.MainActor @preconcurrency package var startAngle: SwiftUICore.Angle
-  @_Concurrency.MainActor @preconcurrency package var endAngle: SwiftUICore.Angle
-  nonisolated public init(gradient: SwiftUICore.Gradient, center: SwiftUICore.UnitPoint, startAngle: SwiftUICore.Angle = .zero, endAngle: SwiftUICore.Angle = .zero)
-  @_alwaysEmitIntoClient nonisolated public init(colors: [SwiftUICore.Color], center: SwiftUICore.UnitPoint, startAngle: SwiftUICore.Angle, endAngle: SwiftUICore.Angle) {
+@frozen public struct AngularGradient : SwiftUICore.ShapeStyle, SwiftUICore.View, Swift.Sendable {
+  package var gradient: SwiftUICore.Gradient
+  package var center: SwiftUICore.UnitPoint
+  package var startAngle: SwiftUICore.Angle
+  package var endAngle: SwiftUICore.Angle
+  public init(gradient: SwiftUICore.Gradient, center: SwiftUICore.UnitPoint, startAngle: SwiftUICore.Angle = .zero, endAngle: SwiftUICore.Angle = .zero)
+  @_alwaysEmitIntoClient public init(colors: [SwiftUICore.Color], center: SwiftUICore.UnitPoint, startAngle: SwiftUICore.Angle, endAngle: SwiftUICore.Angle) {
         self.init(gradient: Gradient(colors: colors), center: center,
             startAngle: startAngle, endAngle: endAngle)
     }
-  @_alwaysEmitIntoClient nonisolated public init(stops: [SwiftUICore.Gradient.Stop], center: SwiftUICore.UnitPoint, startAngle: SwiftUICore.Angle, endAngle: SwiftUICore.Angle) {
+  @_alwaysEmitIntoClient public init(stops: [SwiftUICore.Gradient.Stop], center: SwiftUICore.UnitPoint, startAngle: SwiftUICore.Angle, endAngle: SwiftUICore.Angle) {
         self.init(gradient: Gradient(stops: stops), center: center,
             startAngle: startAngle, endAngle: endAngle)
     }
-  nonisolated public init(gradient: SwiftUICore.Gradient, center: SwiftUICore.UnitPoint, angle: SwiftUICore.Angle = .zero)
-  @_alwaysEmitIntoClient nonisolated public init(colors: [SwiftUICore.Color], center: SwiftUICore.UnitPoint, angle: SwiftUICore.Angle = .zero) {
+  public init(gradient: SwiftUICore.Gradient, center: SwiftUICore.UnitPoint, angle: SwiftUICore.Angle = .zero)
+  @_alwaysEmitIntoClient public init(colors: [SwiftUICore.Color], center: SwiftUICore.UnitPoint, angle: SwiftUICore.Angle = .zero) {
         self.init(gradient: Gradient(colors: colors), center: center,
             angle: angle)
     }
-  @_alwaysEmitIntoClient nonisolated public init(stops: [SwiftUICore.Gradient.Stop], center: SwiftUICore.UnitPoint, angle: SwiftUICore.Angle = .zero) {
+  @_alwaysEmitIntoClient public init(stops: [SwiftUICore.Gradient.Stop], center: SwiftUICore.UnitPoint, angle: SwiftUICore.Angle = .zero) {
         self.init(gradient: Gradient(stops: stops), center: center,
             angle: angle)
     }
   @available(*, deprecated, message: "obsolete")
-  @_alwaysEmitIntoClient nonisolated public static func _makeView<S>(view: SwiftUICore._GraphValue<SwiftUICore._ShapeView<S, SwiftUICore.AngularGradient>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs where S : SwiftUICore.Shape {
+  @_alwaysEmitIntoClient public static func _makeView<S>(view: SwiftUICore._GraphValue<SwiftUICore._ShapeView<S, SwiftUICore.AngularGradient>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs where S : SwiftUICore.Shape {
         _ShapeView<S, Self>._makeView(view: view, inputs: inputs)
     }
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -1010,14 +1010,14 @@ extension SwiftUICore.Gesture {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct SimultaneousGesture<First, Second> : SwiftUICore.Gesture where First : SwiftUICore.Gesture, Second : SwiftUICore.Gesture {
+@frozen public struct SimultaneousGesture<First, Second> : SwiftUICore.Gesture where First : SwiftUICore.Gesture, Second : SwiftUICore.Gesture {
   @frozen public struct Value {
     public var first: First.Value?
     public var second: Second.Value?
   }
-  @_Concurrency.MainActor @preconcurrency public var first: First
-  @_Concurrency.MainActor @preconcurrency public var second: Second
-  @inlinable @_Concurrency.MainActor @preconcurrency public init(_ first: First, _ second: Second) {
+  public var first: First
+  public var second: Second
+  @inlinable public init(_ first: First, _ second: Second) {
         (self.first, self.second) = (first, second)
     }
   nonisolated public static func _makeGesture(gesture: SwiftUICore._GraphValue<SwiftUICore.SimultaneousGesture<First, Second>>, inputs: SwiftUICore._GestureInputs) -> SwiftUICore._GestureOutputs<SwiftUICore.SimultaneousGesture<First, Second>.Value>
@@ -1058,10 +1058,10 @@ extension SwiftUICore.SimultaneousGesture.Value : Swift.Hashable where First.Val
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct VStack<Content> : SwiftUICore.View where Content : SwiftUICore.View {
+@frozen public struct VStack<Content> : SwiftUICore.View where Content : SwiftUICore.View {
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal var _tree: SwiftUICore._VariadicView.Tree<SwiftUICore._VStackLayout, Content>
-  @inlinable nonisolated public init(alignment: SwiftUICore.HorizontalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> Content) {
+  internal var _tree: SwiftUICore._VariadicView.Tree<SwiftUICore._VStackLayout, Content>
+  @inlinable public init(alignment: SwiftUICore.HorizontalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> Content) {
         _tree = .init(
             _VStackLayout(alignment: alignment, spacing: spacing)
         ) {
@@ -1409,14 +1409,14 @@ extension SwiftUICore.Gesture {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct ExclusiveGesture<First, Second> : SwiftUICore.Gesture where First : SwiftUICore.Gesture, Second : SwiftUICore.Gesture {
+@frozen public struct ExclusiveGesture<First, Second> : SwiftUICore.Gesture where First : SwiftUICore.Gesture, Second : SwiftUICore.Gesture {
   @frozen public enum Value {
     case first(First.Value)
     case second(Second.Value)
   }
-  @_Concurrency.MainActor @preconcurrency public var first: First
-  @_Concurrency.MainActor @preconcurrency public var second: Second
-  @inlinable @_Concurrency.MainActor @preconcurrency public init(_ first: First, _ second: Second) {
+  public var first: First
+  public var second: Second
+  @inlinable public init(_ first: First, _ second: Second) {
         (self.first, self.second) = (first, second)
     }
   nonisolated public static func _makeGesture(gesture: SwiftUICore._GraphValue<SwiftUICore.ExclusiveGesture<First, Second>>, inputs: SwiftUICore._GestureInputs) -> SwiftUICore._GestureOutputs<SwiftUICore.ExclusiveGesture<First, Second>.Value>
@@ -1645,11 +1645,11 @@ extension SwiftUICore.ShapeStyle where Self == SwiftUICore.AngularGradient {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@_Concurrency.MainActor @preconcurrency public struct _ViewModifier_Content<Modifier> : SwiftUICore.View where Modifier : SwiftUICore.ViewModifier {
+public struct _ViewModifier_Content<Modifier> : SwiftUICore.View where Modifier : SwiftUICore.ViewModifier {
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore._ViewModifier_Content<Modifier>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore._ViewModifier_Content<Modifier>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-  nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
+  public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   @_alwaysEmitIntoClient nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int? {
         _viewListCount(inputs: inputs) { _ in nil }
@@ -1662,7 +1662,7 @@ extension SwiftUICore.ShapeStyle where Self == SwiftUICore.AngularGradient {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@_Concurrency.MainActor @preconcurrency public struct PlaceholderContentView<Value> : SwiftUICore.View {
+public struct PlaceholderContentView<Value> : SwiftUICore.View {
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.PlaceholderContentView<Value>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.PlaceholderContentView<Value>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
@@ -1743,9 +1743,9 @@ extension SwiftUICore.EnvironmentValues {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @available(*, deprecated, message: "will be removed")
-@frozen @_Concurrency.MainActor @preconcurrency public struct _ForegroundColorModifier {
-  @_Concurrency.MainActor @preconcurrency public var color: SwiftUICore.Color?
-  @inlinable @_Concurrency.MainActor @preconcurrency public init(color: SwiftUICore.Color?) { self.color = color }
+@frozen public struct _ForegroundColorModifier {
+  public var color: SwiftUICore.Color?
+  @inlinable public init(color: SwiftUICore.Color?) { self.color = color }
   nonisolated public static func _makeViewInputs(modifier: SwiftUICore._GraphValue<SwiftUICore._ForegroundColorModifier>, inputs: inout SwiftUICore._ViewInputs)
   @available(*, deprecated, message: "will be removed")
   @available(iOS, introduced: 15.0, message: "will be removed")
@@ -2191,9 +2191,9 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@_Concurrency.MainActor @preconcurrency public struct KeyframeAnimator<Value, KeyframePath, Content> : SwiftUICore.View where Value == KeyframePath.Value, KeyframePath : SwiftUICore.Keyframes, Content : SwiftUICore.View {
-  nonisolated public init(initialValue: Value, trigger: some Equatable, @SwiftUICore.ViewBuilder content: @escaping (Value) -> Content, @SwiftUICore.KeyframesBuilder<Value> keyframes: @escaping (Value) -> KeyframePath)
-  nonisolated public init(initialValue: Value, repeating: Swift.Bool = true, @SwiftUICore.ViewBuilder content: @escaping (Value) -> Content, @SwiftUICore.KeyframesBuilder<Value> keyframes: @escaping (Value) -> KeyframePath)
+public struct KeyframeAnimator<Value, KeyframePath, Content> : SwiftUICore.View where Value == KeyframePath.Value, KeyframePath : SwiftUICore.Keyframes, Content : SwiftUICore.View {
+  public init(initialValue: Value, trigger: some Equatable, @SwiftUICore.ViewBuilder content: @escaping (Value) -> Content, @SwiftUICore.KeyframesBuilder<Value> keyframes: @escaping (Value) -> KeyframePath)
+  public init(initialValue: Value, repeating: Swift.Bool = true, @SwiftUICore.ViewBuilder content: @escaping (Value) -> Content, @SwiftUICore.KeyframesBuilder<Value> keyframes: @escaping (Value) -> KeyframePath)
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.KeyframeAnimator<Value, KeyframePath, Content>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = Swift.Never
@@ -2257,10 +2257,10 @@ extension SwiftUICore.Axis : Swift.CustomStringConvertible {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _PaddingLayout {
-  @_Concurrency.MainActor @preconcurrency public var edges: SwiftUICore.Edge.Set
-  @_Concurrency.MainActor @preconcurrency public var insets: SwiftUICore.EdgeInsets?
-  @inlinable nonisolated public init(edges: SwiftUICore.Edge.Set = .all, insets: SwiftUICore.EdgeInsets?) {
+@frozen public struct _PaddingLayout {
+  public var edges: SwiftUICore.Edge.Set
+  public var insets: SwiftUICore.EdgeInsets?
+  @inlinable public init(edges: SwiftUICore.Edge.Set = .all, insets: SwiftUICore.EdgeInsets?) {
         self.edges = edges
         self.insets = insets
     }
@@ -2306,9 +2306,9 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct TupleView<T> : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var value: T
-  @inlinable nonisolated public init(_ value: T) { self.value = value }
+@frozen public struct TupleView<T> : SwiftUICore.View {
+  public var value: T
+  @inlinable public init(_ value: T) { self.value = value }
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.TupleView<T>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.TupleView<T>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -2675,11 +2675,11 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _MatchedGeometryEffect<ID> where ID : Swift.Hashable {
-  @_Concurrency.MainActor @preconcurrency public var id: ID
-  @_Concurrency.MainActor @preconcurrency public var namespace: SwiftUICore.Namespace.ID
-  @_Concurrency.MainActor @preconcurrency public var args: (properties: SwiftUICore.MatchedGeometryProperties, anchor: SwiftUICore.UnitPoint, isSource: Swift.Bool)
-  @inlinable nonisolated public init(id: ID, namespace: SwiftUICore.Namespace.ID, properties: SwiftUICore.MatchedGeometryProperties, anchor: SwiftUICore.UnitPoint, isSource: Swift.Bool) {
+@frozen public struct _MatchedGeometryEffect<ID> where ID : Swift.Hashable {
+  public var id: ID
+  public var namespace: SwiftUICore.Namespace.ID
+  public var args: (properties: SwiftUICore.MatchedGeometryProperties, anchor: SwiftUICore.UnitPoint, isSource: Swift.Bool)
+  @inlinable public init(id: ID, namespace: SwiftUICore.Namespace.ID, properties: SwiftUICore.MatchedGeometryProperties, anchor: SwiftUICore.UnitPoint, isSource: Swift.Bool) {
         (self.id, self.namespace) = (id, namespace)
         args = (properties: properties, anchor: anchor, isSource: isSource)
     }
@@ -2695,14 +2695,14 @@ extension SwiftUICore._MatchedGeometryEffect : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _EnvironmentKeyWritingModifier<Value> : SwiftUICore.ViewModifier, SwiftUICore._GraphInputsModifier {
-  @_Concurrency.MainActor @preconcurrency public var keyPath: Swift.WritableKeyPath<SwiftUICore.EnvironmentValues, Value>
-  @_Concurrency.MainActor @preconcurrency public var value: Value
-  @inlinable nonisolated public init(keyPath: Swift.WritableKeyPath<SwiftUICore.EnvironmentValues, Value>, value: Value) {
+@frozen public struct _EnvironmentKeyWritingModifier<Value> : SwiftUICore.ViewModifier, SwiftUICore._GraphInputsModifier {
+  public var keyPath: Swift.WritableKeyPath<SwiftUICore.EnvironmentValues, Value>
+  public var value: Value
+  @inlinable public init(keyPath: Swift.WritableKeyPath<SwiftUICore.EnvironmentValues, Value>, value: Value) {
         self.keyPath = keyPath
         self.value = value
     }
-  @_Concurrency.MainActor @preconcurrency public static func _makeInputs(modifier: SwiftUICore._GraphValue<SwiftUICore._EnvironmentKeyWritingModifier<Value>>, inputs: inout SwiftUICore._GraphInputs)
+  public static func _makeInputs(modifier: SwiftUICore._GraphValue<SwiftUICore._EnvironmentKeyWritingModifier<Value>>, inputs: inout SwiftUICore._GraphInputs)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -2896,10 +2896,10 @@ extension SwiftUICore.Animation {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _OverlayModifier<Overlay> : SwiftUICore.ViewModifier where Overlay : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var overlay: Overlay
-  @_Concurrency.MainActor @preconcurrency public var alignment: SwiftUICore.Alignment
-  @inlinable nonisolated public init(overlay: Overlay, alignment: SwiftUICore.Alignment = .center) {
+@frozen public struct _OverlayModifier<Overlay> : SwiftUICore.ViewModifier where Overlay : SwiftUICore.View {
+  public var overlay: Overlay
+  public var alignment: SwiftUICore.Alignment
+  @inlinable public init(overlay: Overlay, alignment: SwiftUICore.Alignment = .center) {
         self.overlay = overlay
         self.alignment = alignment
     }
@@ -2916,17 +2916,17 @@ extension SwiftUICore._OverlayModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore._OverlayModifier : Swift.Equatable where Overlay : Swift.Equatable {
-  nonisolated public static func == (a: SwiftUICore._OverlayModifier<Overlay>, b: SwiftUICore._OverlayModifier<Overlay>) -> Swift.Bool
+  public static func == (a: SwiftUICore._OverlayModifier<Overlay>, b: SwiftUICore._OverlayModifier<Overlay>) -> Swift.Bool
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _OverlayStyleModifier<Style> : SwiftUICore.ViewModifier where Style : SwiftUICore.ShapeStyle {
-  @_Concurrency.MainActor @preconcurrency public var style: Style
-  @_Concurrency.MainActor @preconcurrency public var ignoresSafeAreaEdges: SwiftUICore.Edge.Set
-  @inlinable nonisolated public init(style: Style, ignoresSafeAreaEdges: SwiftUICore.Edge.Set) {
+@frozen public struct _OverlayStyleModifier<Style> : SwiftUICore.ViewModifier where Style : SwiftUICore.ShapeStyle {
+  public var style: Style
+  public var ignoresSafeAreaEdges: SwiftUICore.Edge.Set
+  @inlinable public init(style: Style, ignoresSafeAreaEdges: SwiftUICore.Edge.Set) {
         self.style = style
         self.ignoresSafeAreaEdges = ignoresSafeAreaEdges
     }
@@ -2942,11 +2942,11 @@ extension SwiftUICore._OverlayStyleModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _OverlayShapeModifier<Style, Bounds> : SwiftUICore.ViewModifier where Style : SwiftUICore.ShapeStyle, Bounds : SwiftUICore.Shape {
-  @_Concurrency.MainActor @preconcurrency public var style: Style
-  @_Concurrency.MainActor @preconcurrency public var shape: Bounds
-  @_Concurrency.MainActor @preconcurrency public var fillStyle: SwiftUICore.FillStyle
-  @inlinable nonisolated public init(style: Style, shape: Bounds, fillStyle: SwiftUICore.FillStyle) {
+@frozen public struct _OverlayShapeModifier<Style, Bounds> : SwiftUICore.ViewModifier where Style : SwiftUICore.ShapeStyle, Bounds : SwiftUICore.Shape {
+  public var style: Style
+  public var shape: Bounds
+  public var fillStyle: SwiftUICore.FillStyle
+  @inlinable public init(style: Style, shape: Bounds, fillStyle: SwiftUICore.FillStyle) {
         self.style = style
         self.shape = shape
         self.fillStyle = fillStyle
@@ -3104,6 +3104,11 @@ extension SwiftUICore._ProposedSize : Swift.Hashable {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @_functionBuilder public struct KeyframesBuilder<Value> {
   public static func buildExpression<K>(_ expression: K) -> K where Value == K.Value, K : SwiftUICore.KeyframeTrackContent
+  @available(*, unavailable, message: "this expression does not conform to 'KeyframeTrackContent'")
+  @_disfavoredOverload @_alwaysEmitIntoClient public static func buildExpression(_ invalid: Any) -> some SwiftUICore.KeyframeTrackContent<Value> where Value : SwiftUICore.Animatable {
+        buildBlock()
+    }
+  
   public static func buildArray(_ components: [some KeyframeTrackContent<Value>]) -> some SwiftUICore.KeyframeTrackContent<Value>
   
   public static func buildEither<First, Second>(first component: First) -> SwiftUICore.KeyframeTrackContentBuilder<Value>.Conditional<Value, First, Second> where Value == First.Value, First : SwiftUICore.KeyframeTrackContent, Second : SwiftUICore.KeyframeTrackContent, First.Value == Second.Value
@@ -3115,6 +3120,11 @@ extension SwiftUICore._ProposedSize : Swift.Hashable {
   
   public static func buildFinalResult<Content>(_ component: Content) -> SwiftUICore.KeyframeTrack<Value, Value, Content> where Value == Content.Value, Content : SwiftUICore.KeyframeTrackContent
   public static func buildExpression<Content>(_ expression: Content) -> Content where Value == Content.Value, Content : SwiftUICore.Keyframes
+  @available(*, unavailable, message: "this expression does not conform to 'Keyframes'")
+  @_disfavoredOverload @_alwaysEmitIntoClient public static func buildExpression(_ invalid: Any) -> some SwiftUICore.Keyframes<Value> {
+        buildBlock()
+    }
+  
   public static func buildPartialBlock<Content>(first: Content) -> Content where Value == Content.Value, Content : SwiftUICore.Keyframes
   public static func buildPartialBlock(accumulated: some Keyframes<Value>, next: some Keyframes<Value>) -> some SwiftUICore.Keyframes<Value>
   
@@ -3235,13 +3245,6 @@ extension CoreFoundation.CGSize {
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   @inlinable package func contains(point p: CoreFoundation.CGPoint) -> Swift.Bool {
         return !(p.x < 0) && !(p.y < 0) && p.x < width && p.y < height
-    }
-  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  @inlinable internal func containsAny(of points: [CoreFoundation.CGPoint]) -> Swift.Bool {
-        for p in points where self.contains(point: p) {
-            return true
-        }
-        return false
     }
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -3423,9 +3426,9 @@ public protocol _ViewTraitKey {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _TraitWritingModifier<Trait> where Trait : SwiftUICore._ViewTraitKey {
-  @_Concurrency.MainActor @preconcurrency public let value: Trait.Value
-  @inlinable nonisolated public init(value: Trait.Value) {
+@frozen public struct _TraitWritingModifier<Trait> where Trait : SwiftUICore._ViewTraitKey {
+  public let value: Trait.Value
+  @inlinable public init(value: Trait.Value) {
         self.value = value
     }
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._TraitWritingModifier<Trait>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
@@ -3443,10 +3446,10 @@ extension SwiftUICore._TraitWritingModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _ConditionalTraitWritingModifier<Trait> where Trait : SwiftUICore._ViewTraitKey {
-  @_Concurrency.MainActor @preconcurrency public var value: Trait.Value
-  @_Concurrency.MainActor @preconcurrency public var isEnabled: Swift.Bool
-  @_alwaysEmitIntoClient nonisolated public init(traitKey: Trait.Type = Trait.self, value: Trait.Value, isEnabled: Swift.Bool) {
+@frozen public struct _ConditionalTraitWritingModifier<Trait> where Trait : SwiftUICore._ViewTraitKey {
+  public var value: Trait.Value
+  public var isEnabled: Swift.Bool
+  @_alwaysEmitIntoClient public init(traitKey: Trait.Type = Trait.self, value: Trait.Value, isEnabled: Swift.Bool) {
         self.value = value
         self.isEnabled = isEnabled
     }
@@ -3488,10 +3491,10 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _ForegroundLayerColorMatrixEffect {
-  @_Concurrency.MainActor @preconcurrency public var foreground: SwiftUICore._ColorMatrix
-  @_Concurrency.MainActor @preconcurrency public var background: SwiftUICore._ColorMatrix
-  @inlinable @_Concurrency.MainActor @preconcurrency public init(foreground: SwiftUICore._ColorMatrix = .init(), background: SwiftUICore._ColorMatrix = .init()) {
+@frozen public struct _ForegroundLayerColorMatrixEffect {
+  public var foreground: SwiftUICore._ColorMatrix
+  public var background: SwiftUICore._ColorMatrix
+  @inlinable public init(foreground: SwiftUICore._ColorMatrix = .init(), background: SwiftUICore._ColorMatrix = .init()) {
         (self.foreground, self.background) = (foreground, background)
     }
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._ForegroundLayerColorMatrixEffect>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
@@ -3924,18 +3927,18 @@ public enum ColorRenderingMode : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@_Concurrency.MainActor @preconcurrency public struct _DrawingGroupEffect : SwiftUICore.ViewModifier, Swift.Equatable {
-  @_Concurrency.MainActor @preconcurrency public var isOpaque: Swift.Bool {
+public struct _DrawingGroupEffect : SwiftUICore.ViewModifier, Swift.Equatable {
+  public var isOpaque: Swift.Bool {
     get
     set
   }
-  @_Concurrency.MainActor @preconcurrency public var colorMode: SwiftUICore.ColorRenderingMode {
+  public var colorMode: SwiftUICore.ColorRenderingMode {
     get
     set
   }
-  nonisolated public init(opaque: Swift.Bool = false, colorMode: SwiftUICore.ColorRenderingMode = .nonLinear)
+  public init(opaque: Swift.Bool = false, colorMode: SwiftUICore.ColorRenderingMode = .nonLinear)
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._DrawingGroupEffect>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
-  nonisolated public static func == (a: SwiftUICore._DrawingGroupEffect, b: SwiftUICore._DrawingGroupEffect) -> Swift.Bool
+  public static func == (a: SwiftUICore._DrawingGroupEffect, b: SwiftUICore._DrawingGroupEffect) -> Swift.Bool
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -4091,6 +4094,11 @@ extension SwiftUICore.Anchor.Source where Value == CoreFoundation.CGPoint {
   @_alwaysEmitIntoClient public static func buildExpression<Content>(_ content: Content) -> Content where Content : SwiftUICore.View {
        content
     }
+  @available(*, unavailable, message: "this expression does not conform to 'View'")
+  @_disfavoredOverload @_alwaysEmitIntoClient public static func buildExpression(_ invalid: Any) -> some SwiftUICore.View {
+        fatalError()
+    }
+  
   @_alwaysEmitIntoClient public static func buildBlock() -> SwiftUICore.EmptyView {
         EmptyView()
     }
@@ -4216,10 +4224,10 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _MaskAlignmentEffect<Mask> : SwiftUICore.ViewModifier where Mask : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var alignment: SwiftUICore.Alignment
-  @_Concurrency.MainActor @preconcurrency public var mask: Mask
-  @inlinable nonisolated public init(alignment: SwiftUICore.Alignment, mask: Mask) {
+@frozen public struct _MaskAlignmentEffect<Mask> : SwiftUICore.ViewModifier where Mask : SwiftUICore.View {
+  public var alignment: SwiftUICore.Alignment
+  public var mask: Mask
+  @inlinable public init(alignment: SwiftUICore.Alignment, mask: Mask) {
         self.mask = mask
         self.alignment = alignment
     }
@@ -4236,7 +4244,7 @@ extension SwiftUICore._MaskAlignmentEffect : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore._MaskEffect : Swift.Equatable where Mask : Swift.Equatable {
-  nonisolated public static func == (a: SwiftUICore._MaskEffect<Mask>, b: SwiftUICore._MaskEffect<Mask>) -> Swift.Bool
+  public static func == (a: SwiftUICore._MaskEffect<Mask>, b: SwiftUICore._MaskEffect<Mask>) -> Swift.Bool
 }
 @available(*, unavailable)
 extension SwiftUICore._MaskEffect : Swift.Sendable {
@@ -4262,9 +4270,9 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _MaskEffect<Mask> : SwiftUICore.ViewModifier where Mask : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var mask: Mask
-  @inlinable nonisolated public init(mask: Mask) {
+@frozen public struct _MaskEffect<Mask> : SwiftUICore.ViewModifier where Mask : SwiftUICore.View {
+  public var mask: Mask
+  @inlinable public init(mask: Mask) {
         self.mask = mask
     }
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._MaskEffect<Mask>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
@@ -4752,10 +4760,10 @@ extension SwiftUICore.LocalizedStringKey.StringInterpolation {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct HStack<Content> : SwiftUICore.View where Content : SwiftUICore.View {
+@frozen public struct HStack<Content> : SwiftUICore.View where Content : SwiftUICore.View {
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal var _tree: SwiftUICore._VariadicView.Tree<SwiftUICore._HStackLayout, Content>
-  @inlinable nonisolated public init(alignment: SwiftUICore.VerticalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> Content) {
+  internal var _tree: SwiftUICore._VariadicView.Tree<SwiftUICore._HStackLayout, Content>
+  @inlinable public init(alignment: SwiftUICore.VerticalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> Content) {
         _tree = .init(
             _HStackLayout(alignment: alignment, spacing: spacing)
         ) {
@@ -4928,10 +4936,10 @@ extension SwiftUICore.AnyShapeStyleBox : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _PreferenceReadingView<Key, Content> : SwiftUICore.View where Key : SwiftUICore.PreferenceKey, Content : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var value: SwiftUICore._PreferenceValue<Key>
-  @_Concurrency.MainActor @preconcurrency public var transform: (Key.Value) -> Content
-  @inlinable nonisolated public init(value: SwiftUICore._PreferenceValue<Key>, transform: @escaping (Key.Value) -> Content) {
+@frozen public struct _PreferenceReadingView<Key, Content> : SwiftUICore.View where Key : SwiftUICore.PreferenceKey, Content : SwiftUICore.View {
+  public var value: SwiftUICore._PreferenceValue<Key>
+  public var transform: (Key.Value) -> Content
+  @inlinable public init(value: SwiftUICore._PreferenceValue<Key>, transform: @escaping (Key.Value) -> Content) {
         self.value = value
         self.transform = transform
     }
@@ -4998,7 +5006,7 @@ extension SwiftUICore.AccessibilityCustomContentKey : Swift.Equatable {
   public var shape: S
   public var startFraction: CoreFoundation.CGFloat
   public var endFraction: CoreFoundation.CGFloat
-  @inlinable nonisolated public init(shape: S, startFraction: CoreFoundation.CGFloat = 0, endFraction: CoreFoundation.CGFloat = 1) {
+  @inlinable public init(shape: S, startFraction: CoreFoundation.CGFloat = 0, endFraction: CoreFoundation.CGFloat = 1) {
         self.shape = shape
         self.startFraction = startFraction
         self.endFraction = endFraction
@@ -5048,7 +5056,7 @@ extension SwiftUICore.Gesture {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Gesture where Self.Value : Swift.Equatable {
-  nonisolated public func onChanged(@_inheritActorContext _ action: @escaping (Self.Value) -> Swift.Void) -> SwiftUICore._ChangedGesture<Self>
+  @_Concurrency.MainActor @preconcurrency public func onChanged(@_inheritActorContext _ action: @escaping (Self.Value) -> Swift.Void) -> SwiftUICore._ChangedGesture<Self>
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -6057,7 +6065,7 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @available(watchOS, unavailable)
-@_Concurrency.MainActor @preconcurrency public struct _ShaderFilterEffect : Swift.Sendable {
+public struct _ShaderFilterEffect : Swift.Sendable {
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._ShaderFilterEffect>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   @available(iOS 17.0, tvOS 17.0, macOS 14.0, *)
   @available(watchOS, unavailable)
@@ -6462,10 +6470,10 @@ extension SwiftUICore.GraphicsContext.Storage : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _AspectRatioLayout {
-  @_Concurrency.MainActor @preconcurrency public var aspectRatio: CoreFoundation.CGFloat?
-  @_Concurrency.MainActor @preconcurrency public var contentMode: SwiftUICore.ContentMode
-  @inlinable nonisolated public init(aspectRatio: CoreFoundation.CGFloat? = nil, contentMode: SwiftUICore.ContentMode) {
+@frozen public struct _AspectRatioLayout {
+  public var aspectRatio: CoreFoundation.CGFloat?
+  public var contentMode: SwiftUICore.ContentMode
+  @inlinable public init(aspectRatio: CoreFoundation.CGFloat? = nil, contentMode: SwiftUICore.ContentMode) {
         self.aspectRatio = aspectRatio
         self.contentMode = contentMode
     }
@@ -6804,9 +6812,9 @@ extension SwiftUICore.SeparatorShapeStyle {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct GeometryReader<Content> : SwiftUICore.View where Content : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var content: (SwiftUICore.GeometryProxy) -> Content
-  @inlinable nonisolated public init(@SwiftUICore.ViewBuilder content: @escaping (SwiftUICore.GeometryProxy) -> Content) {
+@frozen public struct GeometryReader<Content> : SwiftUICore.View where Content : SwiftUICore.View {
+  public var content: (SwiftUICore.GeometryProxy) -> Content
+  @inlinable public init(@SwiftUICore.ViewBuilder content: @escaping (SwiftUICore.GeometryProxy) -> Content) {
         self.content = content
     }
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.GeometryReader<Content>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
@@ -6875,10 +6883,10 @@ extension SwiftUICore.Transaction {
   }
   @usableFromInline
   @_Concurrency.MainActor @preconcurrency internal var _seed: Swift.Int = 0
-  @_alwaysEmitIntoClient nonisolated public init(initialValue: ObjectType) {
+  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public init(initialValue: ObjectType) {
       self.init(wrappedValue: initialValue)
     }
-  nonisolated public init(wrappedValue: ObjectType)
+  @_Concurrency.MainActor @preconcurrency public init(wrappedValue: ObjectType)
   @_Concurrency.MainActor @preconcurrency public var wrappedValue: ObjectType
   @_Concurrency.MainActor @preconcurrency public var projectedValue: SwiftUICore.ObservedObject<ObjectType>.Wrapper {
     get
@@ -6947,10 +6955,10 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _OverlayPreferenceModifier<Key, Overlay> where Key : SwiftUICore.PreferenceKey, Overlay : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var transform: (Key.Value) -> Overlay
-  @_Concurrency.MainActor @preconcurrency public var alignment: SwiftUICore.Alignment
-  @inlinable nonisolated public init(alignment: SwiftUICore.Alignment, @SwiftUICore.ViewBuilder transform: @escaping (Key.Value) -> Overlay) {
+@frozen public struct _OverlayPreferenceModifier<Key, Overlay> where Key : SwiftUICore.PreferenceKey, Overlay : SwiftUICore.View {
+  public var transform: (Key.Value) -> Overlay
+  public var alignment: SwiftUICore.Alignment
+  @inlinable public init(alignment: SwiftUICore.Alignment, @SwiftUICore.ViewBuilder transform: @escaping (Key.Value) -> Overlay) {
         self.transform = transform
         self.alignment = alignment
     }
@@ -6966,10 +6974,10 @@ extension SwiftUICore._OverlayPreferenceModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _BackgroundPreferenceModifier<Key, Overlay> where Key : SwiftUICore.PreferenceKey, Overlay : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var transform: (Key.Value) -> Overlay
-  @_Concurrency.MainActor @preconcurrency public var alignment: SwiftUICore.Alignment
-  @inlinable nonisolated public init(alignment: SwiftUICore.Alignment, @SwiftUICore.ViewBuilder transform: @escaping (Key.Value) -> Overlay) {
+@frozen public struct _BackgroundPreferenceModifier<Key, Overlay> where Key : SwiftUICore.PreferenceKey, Overlay : SwiftUICore.View {
+  public var transform: (Key.Value) -> Overlay
+  public var alignment: SwiftUICore.Alignment
+  @inlinable public init(alignment: SwiftUICore.Alignment, @SwiftUICore.ViewBuilder transform: @escaping (Key.Value) -> Overlay) {
         self.transform = transform
         self.alignment = alignment
     }
@@ -7246,10 +7254,10 @@ extension SwiftUICore.Layout {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _LayoutRoot<L> : SwiftUICore._VariadicView.UnaryViewRoot where L : SwiftUICore.Layout {
+@frozen public struct _LayoutRoot<L> : SwiftUICore._VariadicView.UnaryViewRoot where L : SwiftUICore.Layout {
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal var layout: L
-  @inlinable @_Concurrency.MainActor @preconcurrency package init(_ layout: L) { self.layout = layout }
+  internal var layout: L
+  @inlinable package init(_ layout: L) { self.layout = layout }
   nonisolated public static func _makeView(root: SwiftUICore._GraphValue<SwiftUICore._LayoutRoot<L>>, inputs: SwiftUICore._ViewInputs, body: (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewOutputs
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
@@ -7866,10 +7874,10 @@ extension SwiftUICore.EnvironmentValues {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _EnvironmentBackgroundStyleModifier<S> where S : SwiftUICore.ShapeStyle {
+@frozen public struct _EnvironmentBackgroundStyleModifier<S> where S : SwiftUICore.ShapeStyle {
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal var style: S
-  @inlinable nonisolated internal init(style: S) { self.style = style }
+  internal var style: S
+  @inlinable internal init(style: S) { self.style = style }
   nonisolated public static func _makeViewInputs(modifier: SwiftUICore._GraphValue<SwiftUICore._EnvironmentBackgroundStyleModifier<S>>, inputs: inout SwiftUICore._ViewInputs)
   nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<SwiftUICore._EnvironmentBackgroundStyleModifier<S>>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -7904,9 +7912,9 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _ForegroundStyleModifier<Style> where Style : SwiftUICore.ShapeStyle {
-  @_Concurrency.MainActor @preconcurrency public var style: Style
-  @inlinable nonisolated public init(style: Style) {
+@frozen public struct _ForegroundStyleModifier<Style> where Style : SwiftUICore.ShapeStyle {
+  public var style: Style
+  @inlinable public init(style: Style) {
         self.style = style
     }
   nonisolated public static func _makeViewInputs(modifier: SwiftUICore._GraphValue<SwiftUICore._ForegroundStyleModifier<Style>>, inputs: inout SwiftUICore._ViewInputs)
@@ -7921,10 +7929,10 @@ extension SwiftUICore._ForegroundStyleModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _ForegroundStyleModifier2<S1, S2> where S1 : SwiftUICore.ShapeStyle, S2 : SwiftUICore.ShapeStyle {
-  @_Concurrency.MainActor @preconcurrency public var primary: S1
-  @_Concurrency.MainActor @preconcurrency public var secondary: S2
-  @inlinable nonisolated public init(primary: S1, secondary: S2) {
+@frozen public struct _ForegroundStyleModifier2<S1, S2> where S1 : SwiftUICore.ShapeStyle, S2 : SwiftUICore.ShapeStyle {
+  public var primary: S1
+  public var secondary: S2
+  @inlinable public init(primary: S1, secondary: S2) {
         self.primary = primary
         self.secondary = secondary
     }
@@ -7940,11 +7948,11 @@ extension SwiftUICore._ForegroundStyleModifier2 : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _ForegroundStyleModifier3<S1, S2, S3> where S1 : SwiftUICore.ShapeStyle, S2 : SwiftUICore.ShapeStyle, S3 : SwiftUICore.ShapeStyle {
-  @_Concurrency.MainActor @preconcurrency public var primary: S1
-  @_Concurrency.MainActor @preconcurrency public var secondary: S2
-  @_Concurrency.MainActor @preconcurrency public var tertiary: S3
-  @inlinable nonisolated public init(primary: S1, secondary: S2, tertiary: S3) {
+@frozen public struct _ForegroundStyleModifier3<S1, S2, S3> where S1 : SwiftUICore.ShapeStyle, S2 : SwiftUICore.ShapeStyle, S3 : SwiftUICore.ShapeStyle {
+  public var primary: S1
+  public var secondary: S2
+  public var tertiary: S3
+  @inlinable public init(primary: S1, secondary: S2, tertiary: S3) {
         self.primary = primary
         self.secondary = secondary
         self.tertiary = tertiary
@@ -8132,7 +8140,7 @@ extension SwiftUICore.Shape {
 @frozen public struct _StrokedShape<S> : SwiftUICore.Shape where S : SwiftUICore.Shape {
   public var shape: S
   public var style: SwiftUICore.StrokeStyle
-  @inlinable nonisolated public init(shape: S, style: SwiftUICore.StrokeStyle) {
+  @inlinable public init(shape: S, style: SwiftUICore.StrokeStyle) {
         self.shape = shape
         self.style = style
     }
@@ -8248,10 +8256,10 @@ extension SwiftUICore.UnitPoint : SwiftUICore.Animatable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _PreferenceTransformModifier<Key> : SwiftUICore.ViewModifier where Key : SwiftUICore.PreferenceKey {
-  @_Concurrency.MainActor @preconcurrency public var transform: (inout Key.Value) -> Swift.Void
+@frozen public struct _PreferenceTransformModifier<Key> : SwiftUICore.ViewModifier where Key : SwiftUICore.PreferenceKey {
+  public var transform: (inout Key.Value) -> Swift.Void
   public typealias Body = Swift.Never
-  @inlinable nonisolated public init(key _: Key.Type = Key.self, transform: @escaping (inout Key.Value) -> Swift.Void) {
+  @inlinable public init(key _: Key.Type = Key.self, transform: @escaping (inout Key.Value) -> Swift.Void) {
         self.transform = transform
     }
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._PreferenceTransformModifier<Key>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
@@ -8285,10 +8293,10 @@ extension SwiftUICore._ViewOutputs : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _PreferenceWritingModifier<Key> : SwiftUICore.ViewModifier where Key : SwiftUICore.PreferenceKey {
-  @_Concurrency.MainActor @preconcurrency public var value: Key.Value
+@frozen public struct _PreferenceWritingModifier<Key> : SwiftUICore.ViewModifier where Key : SwiftUICore.PreferenceKey {
+  public var value: Key.Value
   public typealias Body = Swift.Never
-  @inlinable nonisolated public init(key: Key.Type = Key.self, value: Key.Value) {
+  @inlinable public init(key: Key.Type = Key.self, value: Key.Value) {
         self.value = value
     }
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._PreferenceWritingModifier<Key>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
@@ -8303,7 +8311,7 @@ extension SwiftUICore._PreferenceWritingModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore._PreferenceWritingModifier : Swift.Equatable where Key.Value : Swift.Equatable {
-  nonisolated public static func == (a: SwiftUICore._PreferenceWritingModifier<Key>, b: SwiftUICore._PreferenceWritingModifier<Key>) -> Swift.Bool
+  public static func == (a: SwiftUICore._PreferenceWritingModifier<Key>, b: SwiftUICore._PreferenceWritingModifier<Key>) -> Swift.Bool
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -8364,7 +8372,7 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @frozen public struct AnyShape : SwiftUICore.Shape, @unchecked Swift.Sendable {
   internal var storage: SwiftUICore.AnyShapeBox
-  nonisolated public init<S>(_ shape: S) where S : SwiftUICore.Shape
+  public init<S>(_ shape: S) where S : SwiftUICore.Shape
   nonisolated public func path(in rect: CoreFoundation.CGRect) -> SwiftUICore.Path
   nonisolated public func sizeThatFits(_ proposal: SwiftUICore.ProposedViewSize) -> CoreFoundation.CGSize
   public typealias AnimatableData = SwiftUICore._AnyAnimatableData
@@ -8414,9 +8422,9 @@ extension SwiftUICore._MapGesture : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct AnyGesture<Value> : SwiftUICore.Gesture {
-  @_Concurrency.MainActor @preconcurrency fileprivate var storage: SwiftUICore.AnyGestureStorageBase<Value>
-  @_Concurrency.MainActor @preconcurrency public init<T>(_ gesture: T) where Value == T.Value, T : SwiftUICore.Gesture
+@frozen public struct AnyGesture<Value> : SwiftUICore.Gesture {
+  fileprivate var storage: SwiftUICore.AnyGestureStorageBase<Value>
+  public init<T>(_ gesture: T) where Value == T.Value, T : SwiftUICore.Gesture
   nonisolated public static func _makeGesture(gesture: SwiftUICore._GraphValue<SwiftUICore.AnyGesture<Value>>, inputs: SwiftUICore._GestureInputs) -> SwiftUICore._GestureOutputs<Value>
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
@@ -8612,7 +8620,7 @@ extension SwiftUICore.Shape where Self == SwiftUICore.Rectangle {
   nonisolated public var layoutDirectionBehavior: SwiftUICore.LayoutDirectionBehavior {
     get
   }
-  @inlinable nonisolated public init() {}
+  @inlinable public init() {}
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -8635,11 +8643,11 @@ extension SwiftUICore.Shape where Self == SwiftUICore.RoundedRectangle {
 @frozen public struct RoundedRectangle : SwiftUICore.Shape {
   public var cornerSize: CoreFoundation.CGSize
   public var style: SwiftUICore.RoundedCornerStyle
-  @inlinable nonisolated public init(cornerSize: CoreFoundation.CGSize, style: SwiftUICore.RoundedCornerStyle = .continuous) {
+  @inlinable public init(cornerSize: CoreFoundation.CGSize, style: SwiftUICore.RoundedCornerStyle = .continuous) {
         self.cornerSize = cornerSize
         self.style = style
     }
-  @inlinable nonisolated public init(cornerRadius: CoreFoundation.CGFloat, style: SwiftUICore.RoundedCornerStyle = .continuous) {
+  @inlinable public init(cornerRadius: CoreFoundation.CGFloat, style: SwiftUICore.RoundedCornerStyle = .continuous) {
         let cornerSize = CGSize(width: cornerRadius, height: cornerRadius)
         self.init(cornerSize: cornerSize, style: style)
     }
@@ -8680,11 +8688,11 @@ extension SwiftUICore.Shape where Self == SwiftUICore.UnevenRoundedRectangle {
 @frozen public struct UnevenRoundedRectangle : SwiftUICore.Shape {
   public var cornerRadii: SwiftUICore.RectangleCornerRadii
   public var style: SwiftUICore.RoundedCornerStyle
-  @inlinable nonisolated public init(cornerRadii: SwiftUICore.RectangleCornerRadii, style: SwiftUICore.RoundedCornerStyle = .continuous) {
+  @inlinable public init(cornerRadii: SwiftUICore.RectangleCornerRadii, style: SwiftUICore.RoundedCornerStyle = .continuous) {
         self.cornerRadii = cornerRadii
         self.style = style
     }
-  @_alwaysEmitIntoClient nonisolated public init(topLeadingRadius: CoreFoundation.CGFloat = 0, bottomLeadingRadius: CoreFoundation.CGFloat = 0, bottomTrailingRadius: CoreFoundation.CGFloat = 0, topTrailingRadius: CoreFoundation.CGFloat = 0, style: SwiftUICore.RoundedCornerStyle = .continuous) {
+  @_alwaysEmitIntoClient public init(topLeadingRadius: CoreFoundation.CGFloat = 0, bottomLeadingRadius: CoreFoundation.CGFloat = 0, bottomTrailingRadius: CoreFoundation.CGFloat = 0, topTrailingRadius: CoreFoundation.CGFloat = 0, style: SwiftUICore.RoundedCornerStyle = .continuous) {
         self.init(
             cornerRadii: .init(
                 topLeading: topLeadingRadius,
@@ -8723,7 +8731,7 @@ extension SwiftUICore.Shape where Self == SwiftUICore.Capsule {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @frozen public struct Capsule : SwiftUICore.Shape {
   public var style: SwiftUICore.RoundedCornerStyle
-  @inlinable nonisolated public init(style: SwiftUICore.RoundedCornerStyle = .continuous) {
+  @inlinable public init(style: SwiftUICore.RoundedCornerStyle = .continuous) {
         self.style = style
     }
   nonisolated public func path(in r: CoreFoundation.CGRect) -> SwiftUICore.Path
@@ -8753,7 +8761,7 @@ extension SwiftUICore.Shape where Self == SwiftUICore.Ellipse {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @frozen public struct Ellipse : SwiftUICore.Shape {
   nonisolated public func path(in rect: CoreFoundation.CGRect) -> SwiftUICore.Path
-  @inlinable nonisolated public init() {}
+  @inlinable public init() {}
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   nonisolated public var layoutDirectionBehavior: SwiftUICore.LayoutDirectionBehavior {
     get
@@ -8780,7 +8788,7 @@ extension SwiftUICore.Shape where Self == SwiftUICore.Circle {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @frozen public struct Circle : SwiftUICore.Shape {
   nonisolated public func path(in rect: CoreFoundation.CGRect) -> SwiftUICore.Path
-  @inlinable nonisolated public init() {}
+  @inlinable public init() {}
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   nonisolated public var layoutDirectionBehavior: SwiftUICore.LayoutDirectionBehavior {
     get
@@ -9146,10 +9154,10 @@ extension SwiftUICore.Circle : SwiftUICore.InsettableShape {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _AlignmentLayout {
-  @_Concurrency.MainActor @preconcurrency public var horizontal: SwiftUICore.TextAlignment?
-  @_Concurrency.MainActor @preconcurrency public var vertical: SwiftUICore._VAlignment?
-  @inlinable nonisolated public init(horizontal: SwiftUICore.TextAlignment? = nil, vertical: SwiftUICore._VAlignment? = nil) {
+@frozen public struct _AlignmentLayout {
+  public var horizontal: SwiftUICore.TextAlignment?
+  public var vertical: SwiftUICore._VAlignment?
+  @inlinable public init(horizontal: SwiftUICore.TextAlignment? = nil, vertical: SwiftUICore._VAlignment? = nil) {
         self.horizontal = horizontal
         self.vertical = vertical
     }
@@ -9314,10 +9322,10 @@ extension SwiftUICore.EdgeInsets {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _AppearanceActionModifier : SwiftUICore.ViewModifier {
-  @_Concurrency.MainActor @preconcurrency public var appear: (() -> Swift.Void)?
-  @_Concurrency.MainActor @preconcurrency public var disappear: (() -> Swift.Void)?
-  @inlinable nonisolated public init(appear: (() -> Swift.Void)? = nil, disappear: (() -> Swift.Void)? = nil) {
+@frozen public struct _AppearanceActionModifier : SwiftUICore.ViewModifier {
+  public var appear: (() -> Swift.Void)?
+  public var disappear: (() -> Swift.Void)?
+  @inlinable public init(appear: (() -> Swift.Void)? = nil, disappear: (() -> Swift.Void)? = nil) {
         self.appear = appear
         self.disappear = disappear
     }
@@ -9361,9 +9369,9 @@ extension SwiftUICore._PreferenceValue : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _DelayedPreferenceView<Key, Content> : SwiftUICore.View where Key : SwiftUICore.PreferenceKey, Content : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var transform: (SwiftUICore._PreferenceValue<Key>) -> Content
-  @inlinable nonisolated public init(transform: @escaping (SwiftUICore._PreferenceValue<Key>) -> Content) {
+@frozen public struct _DelayedPreferenceView<Key, Content> : SwiftUICore.View where Key : SwiftUICore.PreferenceKey, Content : SwiftUICore.View {
+  public var transform: (SwiftUICore._PreferenceValue<Key>) -> Content
+  @inlinable public init(transform: @escaping (SwiftUICore._PreferenceValue<Key>) -> Content) {
         self.transform = transform
     }
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore._DelayedPreferenceView<Key, Content>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
@@ -9389,14 +9397,14 @@ extension SwiftUICore.PreferenceKey {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _EnvironmentKeyTransformModifier<Value> : SwiftUICore.ViewModifier, SwiftUICore._GraphInputsModifier {
-  @_Concurrency.MainActor @preconcurrency public var keyPath: Swift.WritableKeyPath<SwiftUICore.EnvironmentValues, Value>
-  @_Concurrency.MainActor @preconcurrency public var transform: (inout Value) -> Swift.Void
-  @inlinable nonisolated public init(keyPath: Swift.WritableKeyPath<SwiftUICore.EnvironmentValues, Value>, transform: @escaping (inout Value) -> Swift.Void) {
+@frozen public struct _EnvironmentKeyTransformModifier<Value> : SwiftUICore.ViewModifier, SwiftUICore._GraphInputsModifier {
+  public var keyPath: Swift.WritableKeyPath<SwiftUICore.EnvironmentValues, Value>
+  public var transform: (inout Value) -> Swift.Void
+  @inlinable public init(keyPath: Swift.WritableKeyPath<SwiftUICore.EnvironmentValues, Value>, transform: @escaping (inout Value) -> Swift.Void) {
         self.keyPath = keyPath
         self.transform = transform
     }
-  @_Concurrency.MainActor @preconcurrency public static func _makeInputs(modifier: SwiftUICore._GraphValue<SwiftUICore._EnvironmentKeyTransformModifier<Value>>, inputs: inout SwiftUICore._GraphInputs)
+  public static func _makeInputs(modifier: SwiftUICore._GraphValue<SwiftUICore._EnvironmentKeyTransformModifier<Value>>, inputs: inout SwiftUICore._GraphInputs)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -9463,10 +9471,10 @@ extension SwiftUICore._Detachable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _DetachedView<Detached, Content, Child> : SwiftUICore.View where Detached : SwiftUICore._Detachable, Content : SwiftUICore.View, Child : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var content: Content
-  @_Concurrency.MainActor @preconcurrency public var transform: (SwiftUICore._DetachedPlaceholder<Detached>) -> Child
-  @inlinable nonisolated public init(content: Content, transform: @escaping (SwiftUICore._DetachedPlaceholder<Detached>) -> Child) {
+@frozen public struct _DetachedView<Detached, Content, Child> : SwiftUICore.View where Detached : SwiftUICore._Detachable, Content : SwiftUICore.View, Child : SwiftUICore.View {
+  public var content: Content
+  public var transform: (SwiftUICore._DetachedPlaceholder<Detached>) -> Child
+  @inlinable public init(content: Content, transform: @escaping (SwiftUICore._DetachedPlaceholder<Detached>) -> Child) {
         self.content = content
         self.transform = transform
     }
@@ -9522,7 +9530,7 @@ extension SwiftUICore._EmptyDetached : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@_Concurrency.MainActor @preconcurrency public struct _DetachedPlaceholder<Detached> : SwiftUICore.View where Detached : SwiftUICore._Detachable {
+public struct _DetachedPlaceholder<Detached> : SwiftUICore.View where Detached : SwiftUICore._Detachable {
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore._DetachedPlaceholder<Detached>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
@@ -9628,6 +9636,15 @@ extension SwiftUICore.HorizontalAlignment {
   public static let leading: SwiftUICore.HorizontalAlignment
   public static let center: SwiftUICore.HorizontalAlignment
   public static let trailing: SwiftUICore.HorizontalAlignment
+}
+@available(iOS 16.0, macOS 13.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.1)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.1)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUICore.HorizontalAlignment {
+  public static let listRowSeparatorLeading: SwiftUICore.HorizontalAlignment
+  public static let listRowSeparatorTrailing: SwiftUICore.HorizontalAlignment
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -10146,12 +10163,12 @@ extension SwiftUICore.Animation {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _ScrollClipEffect<ClipShape> : SwiftUICore.ViewModifier, SwiftUICore.Animatable where ClipShape : SwiftUICore.Shape {
-  @_Concurrency.MainActor @preconcurrency public var shape: ClipShape
-  @inlinable nonisolated public init(shape: ClipShape) {
+@frozen public struct _ScrollClipEffect<ClipShape> : SwiftUICore.ViewModifier, SwiftUICore.Animatable where ClipShape : SwiftUICore.Shape {
+  public var shape: ClipShape
+  @inlinable public init(shape: ClipShape) {
         self.shape = shape
     }
-  @_Concurrency.MainActor @preconcurrency public var animatableData: ClipShape.AnimatableData {
+  public var animatableData: ClipShape.AnimatableData {
     get
     set
   }
@@ -10166,14 +10183,14 @@ extension SwiftUICore.Animation {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _EnabledScrollClipEffect<ClipShape> : SwiftUICore.ViewModifier, SwiftUICore.Animatable where ClipShape : SwiftUICore.Shape {
-  @_Concurrency.MainActor @preconcurrency public var shape: ClipShape
-  @_Concurrency.MainActor @preconcurrency public var isEnabled: Swift.Bool
-  @_alwaysEmitIntoClient nonisolated public init(shape: ClipShape, isEnabled: Swift.Bool) {
+@frozen public struct _EnabledScrollClipEffect<ClipShape> : SwiftUICore.ViewModifier, SwiftUICore.Animatable where ClipShape : SwiftUICore.Shape {
+  public var shape: ClipShape
+  public var isEnabled: Swift.Bool
+  @_alwaysEmitIntoClient public init(shape: ClipShape, isEnabled: Swift.Bool) {
         self.shape = shape
         self.isEnabled = isEnabled
     }
-  @_Concurrency.MainActor @preconcurrency public var animatableData: ClipShape.AnimatableData {
+  public var animatableData: ClipShape.AnimatableData {
     get
     set
   }
@@ -10182,22 +10199,6 @@ extension SwiftUICore.Animation {
   public typealias AnimatableData = ClipShape.AnimatableData
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias Body = Swift.Never
-}
-extension SwiftUICore.Color.Resolved {
-  @_alwaysEmitIntoClient fileprivate func darkened(to factor: Swift.Float) -> SwiftUICore.Color.Resolved {
-        var color = self
-        color.blue = self.blue * factor
-        color.red = self.red * factor
-        color.green = self.green * factor
-        return color
-    }
-  @_alwaysEmitIntoClient fileprivate func lightened(to factor: Swift.Float) -> SwiftUICore.Color.Resolved {
-        var color = self
-        color.blue = self.blue + (1 - self.blue) * factor
-        color.red = self.red + (1 - self.red) * factor
-        color.green = self.green + (1 - self.green) * factor
-        return color
-    }
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -10242,7 +10243,7 @@ extension SwiftUICore.Shape {
   internal var rhs: U
   @usableFromInline
   internal var eoFill: Swift.Bool
-  @_alwaysEmitIntoClient nonisolated internal init(_ lhs: T, _ rhs: U, eoFill: Swift.Bool) {
+  @_alwaysEmitIntoClient internal init(_ lhs: T, _ rhs: U, eoFill: Swift.Bool) {
         (self.lhs, self.rhs, self.eoFill) = (lhs, rhs, eoFill)
     }
   nonisolated public func path(in r: CoreFoundation.CGRect) -> SwiftUICore.Path
@@ -10267,7 +10268,7 @@ extension SwiftUICore.Shape {
   internal var rhs: U
   @usableFromInline
   internal var eoFill: Swift.Bool
-  @_alwaysEmitIntoClient nonisolated internal init(_ lhs: T, _ rhs: U, eoFill: Swift.Bool) {
+  @_alwaysEmitIntoClient internal init(_ lhs: T, _ rhs: U, eoFill: Swift.Bool) {
         (self.lhs, self.rhs, self.eoFill) = (lhs, rhs, eoFill)
     }
   nonisolated public func path(in r: CoreFoundation.CGRect) -> SwiftUICore.Path
@@ -10292,7 +10293,7 @@ extension SwiftUICore.Shape {
   internal var rhs: U
   @usableFromInline
   internal var eoFill: Swift.Bool
-  @_alwaysEmitIntoClient nonisolated internal init(_ lhs: T, _ rhs: U, eoFill: Swift.Bool) {
+  @_alwaysEmitIntoClient internal init(_ lhs: T, _ rhs: U, eoFill: Swift.Bool) {
         (self.lhs, self.rhs, self.eoFill) = (lhs, rhs, eoFill)
     }
   nonisolated public func path(in r: CoreFoundation.CGRect) -> SwiftUICore.Path
@@ -10317,7 +10318,7 @@ extension SwiftUICore.Shape {
   internal var rhs: U
   @usableFromInline
   internal var eoFill: Swift.Bool
-  @_alwaysEmitIntoClient nonisolated internal init(_ lhs: T, _ rhs: U, eoFill: Swift.Bool) {
+  @_alwaysEmitIntoClient internal init(_ lhs: T, _ rhs: U, eoFill: Swift.Bool) {
         (self.lhs, self.rhs, self.eoFill) = (lhs, rhs, eoFill)
     }
   nonisolated public func path(in r: CoreFoundation.CGRect) -> SwiftUICore.Path
@@ -10342,7 +10343,7 @@ extension SwiftUICore.Shape {
   internal var rhs: U
   @usableFromInline
   internal var eoFill: Swift.Bool
-  @_alwaysEmitIntoClient nonisolated internal init(_ lhs: T, _ rhs: U, eoFill: Swift.Bool) {
+  @_alwaysEmitIntoClient internal init(_ lhs: T, _ rhs: U, eoFill: Swift.Bool) {
         (self.lhs, self.rhs, self.eoFill) = (lhs, rhs, eoFill)
     }
   nonisolated public func path(in r: CoreFoundation.CGRect) -> SwiftUICore.Path
@@ -10367,7 +10368,7 @@ extension SwiftUICore.Shape {
   internal var rhs: U
   @usableFromInline
   internal var eoFill: Swift.Bool
-  @_alwaysEmitIntoClient nonisolated internal init(_ lhs: T, _ rhs: U, eoFill: Swift.Bool) {
+  @_alwaysEmitIntoClient internal init(_ lhs: T, _ rhs: U, eoFill: Swift.Bool) {
         (self.lhs, self.rhs, self.eoFill) = (lhs, rhs, eoFill)
     }
   nonisolated public func path(in r: CoreFoundation.CGRect) -> SwiftUICore.Path
@@ -10573,12 +10574,6 @@ extension SwiftUICore.Font {
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     case extraLargeTitle2
-    @available(tvOS 18.0, *)
-    @available(iOS, unavailable)
-    @available(macOS, unavailable)
-    @available(watchOS, unavailable)
-    @available(visionOS, unavailable)
-    case caption3
     public static let allCases: [SwiftUICore.Font.TextStyle]
     public static func == (a: SwiftUICore.Font.TextStyle, b: SwiftUICore.Font.TextStyle) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
@@ -10833,12 +10828,12 @@ extension Swift.Optional : SwiftUICore.Gesture where Wrapped : SwiftUICore.Gestu
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _FrameLayout {
-  @_Concurrency.MainActor @preconcurrency internal let width: CoreFoundation.CGFloat?
-  @_Concurrency.MainActor @preconcurrency internal let height: CoreFoundation.CGFloat?
-  @_Concurrency.MainActor @preconcurrency internal let alignment: SwiftUICore.Alignment
+@frozen public struct _FrameLayout {
+  internal let width: CoreFoundation.CGFloat?
+  internal let height: CoreFoundation.CGFloat?
+  internal let alignment: SwiftUICore.Alignment
   @usableFromInline
-  nonisolated package init(width: CoreFoundation.CGFloat?, height: CoreFoundation.CGFloat?, alignment: SwiftUICore.Alignment)
+  package init(width: CoreFoundation.CGFloat?, height: CoreFoundation.CGFloat?, alignment: SwiftUICore.Alignment)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -10866,16 +10861,16 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _FlexFrameLayout {
-  @_Concurrency.MainActor @preconcurrency internal let minWidth: CoreFoundation.CGFloat?
-  @_Concurrency.MainActor @preconcurrency internal let idealWidth: CoreFoundation.CGFloat?
-  @_Concurrency.MainActor @preconcurrency internal let maxWidth: CoreFoundation.CGFloat?
-  @_Concurrency.MainActor @preconcurrency internal let minHeight: CoreFoundation.CGFloat?
-  @_Concurrency.MainActor @preconcurrency internal let idealHeight: CoreFoundation.CGFloat?
-  @_Concurrency.MainActor @preconcurrency internal let maxHeight: CoreFoundation.CGFloat?
-  @_Concurrency.MainActor @preconcurrency internal let alignment: SwiftUICore.Alignment
+@frozen public struct _FlexFrameLayout {
+  internal let minWidth: CoreFoundation.CGFloat?
+  internal let idealWidth: CoreFoundation.CGFloat?
+  internal let maxWidth: CoreFoundation.CGFloat?
+  internal let minHeight: CoreFoundation.CGFloat?
+  internal let idealHeight: CoreFoundation.CGFloat?
+  internal let maxHeight: CoreFoundation.CGFloat?
+  internal let alignment: SwiftUICore.Alignment
   @usableFromInline
-  nonisolated package init(minWidth: CoreFoundation.CGFloat? = nil, idealWidth: CoreFoundation.CGFloat? = nil, maxWidth: CoreFoundation.CGFloat? = nil, minHeight: CoreFoundation.CGFloat? = nil, idealHeight: CoreFoundation.CGFloat? = nil, maxHeight: CoreFoundation.CGFloat? = nil, alignment: SwiftUICore.Alignment)
+  package init(minWidth: CoreFoundation.CGFloat? = nil, idealWidth: CoreFoundation.CGFloat? = nil, maxWidth: CoreFoundation.CGFloat? = nil, minHeight: CoreFoundation.CGFloat? = nil, idealHeight: CoreFoundation.CGFloat? = nil, maxHeight: CoreFoundation.CGFloat? = nil, alignment: SwiftUICore.Alignment)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -10983,10 +10978,10 @@ extension SwiftUICore.Text {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _TextRendererViewModifier<Renderer> where Renderer : SwiftUICore.TextRenderer {
+@frozen public struct _TextRendererViewModifier<Renderer> where Renderer : SwiftUICore.TextRenderer {
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal var renderer: Renderer
-  @_alwaysEmitIntoClient nonisolated internal init(renderer: Renderer) {
+  internal var renderer: Renderer
+  @_alwaysEmitIntoClient internal init(renderer: Renderer) {
         self.renderer = renderer
     }
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
@@ -11392,10 +11387,10 @@ extension SwiftUICore.Animation {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _AnimationModifier<Value> : SwiftUICore.ViewModifier where Value : Swift.Equatable {
-  @_Concurrency.MainActor @preconcurrency public var animation: SwiftUICore.Animation?
-  @_Concurrency.MainActor @preconcurrency public var value: Value
-  @inlinable nonisolated public init(animation: SwiftUICore.Animation?, value: Value) {
+@frozen public struct _AnimationModifier<Value> : SwiftUICore.ViewModifier where Value : Swift.Equatable {
+  public var animation: SwiftUICore.Animation?
+  public var value: Value
+  @inlinable public init(animation: SwiftUICore.Animation?, value: Value) {
         self.animation = animation
         self.value = value
     }
@@ -11412,10 +11407,10 @@ extension SwiftUICore._AnimationModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _AnimationView<Content> : SwiftUICore.View where Content : Swift.Equatable, Content : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var content: Content
-  @_Concurrency.MainActor @preconcurrency public var animation: SwiftUICore.Animation?
-  @inlinable nonisolated public init(content: Content, animation: SwiftUICore.Animation?) {
+@frozen public struct _AnimationView<Content> : SwiftUICore.View where Content : Swift.Equatable, Content : SwiftUICore.View {
+  public var content: Content
+  public var animation: SwiftUICore.Animation?
+  @inlinable public init(content: Content, animation: SwiftUICore.Animation?) {
         self.content = content
         self.animation = animation
     }
@@ -11434,7 +11429,7 @@ extension SwiftUICore._AnimationView : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore._AnimationModifier : Swift.Equatable {
-  nonisolated public static func == (a: SwiftUICore._AnimationModifier<Value>, b: SwiftUICore._AnimationModifier<Value>) -> Swift.Bool
+  public static func == (a: SwiftUICore._AnimationModifier<Value>, b: SwiftUICore._AnimationModifier<Value>) -> Swift.Bool
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -11587,10 +11582,10 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _BindingActionModifier<Value> : SwiftUICore.ViewModifier where Value : Swift.Equatable {
-  @_Concurrency.MainActor @preconcurrency public var binding: SwiftUICore.Binding<Value>
-  @_Concurrency.MainActor @preconcurrency public var action: (Value) -> Swift.Void
-  @inlinable nonisolated public init(binding: SwiftUICore.Binding<Value>, action: @escaping (Value) -> Swift.Void) {
+@frozen public struct _BindingActionModifier<Value> : SwiftUICore.ViewModifier where Value : Swift.Equatable {
+  public var binding: SwiftUICore.Binding<Value>
+  public var action: (Value) -> Swift.Void
+  @inlinable public init(binding: SwiftUICore.Binding<Value>, action: @escaping (Value) -> Swift.Void) {
         (self.binding, self.action) = (binding, action)
     }
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._BindingActionModifier<Value>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
@@ -11622,11 +11617,11 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _ValueActionModifier<Value> : SwiftUICore.ViewModifier where Value : Swift.Equatable {
+@frozen public struct _ValueActionModifier<Value> : SwiftUICore.ViewModifier where Value : Swift.Equatable {
   public typealias Body = Swift.Never
-  @_Concurrency.MainActor @preconcurrency public var value: Value
-  @_Concurrency.MainActor @preconcurrency public var action: (Value) -> Swift.Void
-  @inlinable nonisolated public init(value: Value, action: @escaping (Value) -> Swift.Void) {
+  public var value: Value
+  public var action: (Value) -> Swift.Void
+  @inlinable public init(value: Value, action: @escaping (Value) -> Swift.Void) {
         (self.value, self.action) = (value, action)
     }
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._ValueActionModifier<Value>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
@@ -11704,9 +11699,9 @@ extension SwiftUICore.Transaction {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _UnaryViewAdaptor<Content> : SwiftUICore.View where Content : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var content: Content
-  @inlinable nonisolated public init(_ content: Content) { self.content = content }
+@frozen public struct _UnaryViewAdaptor<Content> : SwiftUICore.View where Content : SwiftUICore.View {
+  public var content: Content
+  @inlinable public init(_ content: Content) { self.content = content }
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore._UnaryViewAdaptor<Content>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
@@ -11885,8 +11880,8 @@ extension SwiftUICore.ViewModifier where Self : SwiftUICore.Animatable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct EmptyView : SwiftUICore.View {
-  @inlinable nonisolated public init() {}
+@frozen public struct EmptyView : SwiftUICore.View {
+  @inlinable public init() {}
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.EmptyView>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.EmptyView>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -11912,12 +11907,12 @@ extension SwiftUICore._VariadicView_Children : SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore._VariadicView_Children : Swift.RandomAccessCollection {
-  @_Concurrency.MainActor @preconcurrency public struct Element : SwiftUICore.View, Swift.Identifiable {
-    @_Concurrency.MainActor @preconcurrency public var id: Swift.AnyHashable {
+  public struct Element : SwiftUICore.View, Swift.Identifiable {
+    public var id: Swift.AnyHashable {
       get
     }
-    @_Concurrency.MainActor @preconcurrency public func id<ID>(as _: ID.Type = ID.self) -> ID? where ID : Swift.Hashable
-    @_Concurrency.MainActor @preconcurrency public subscript<Trait>(key: Trait.Type) -> Trait.Value where Trait : SwiftUICore._ViewTraitKey {
+    public func id<ID>(as _: ID.Type = ID.self) -> ID? where ID : Swift.Hashable
+    public subscript<Trait>(key: Trait.Type) -> Trait.Value where Trait : SwiftUICore._ViewTraitKey {
       get
       set
     }
@@ -12020,7 +12015,7 @@ extension SwiftUICore.LocalizedStringKey.StringInterpolation {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @frozen public struct ContainerRelativeShape : SwiftUICore.Shape {
   nonisolated public func path(in rect: CoreFoundation.CGRect) -> SwiftUICore.Path
-  @inlinable nonisolated public init() {}
+  @inlinable public init() {}
   @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
   @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
@@ -12112,9 +12107,9 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _ContainerShapeModifier<Shape> where Shape : SwiftUICore.InsettableShape {
-  @_Concurrency.MainActor @preconcurrency public var shape: Shape
-  @inlinable nonisolated public init(shape: Shape) { self.shape = shape }
+@frozen public struct _ContainerShapeModifier<Shape> where Shape : SwiftUICore.InsettableShape {
+  public var shape: Shape
+  @inlinable public init(shape: Shape) { self.shape = shape }
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._ContainerShapeModifier<Shape>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias Body = Swift.Never
@@ -12239,9 +12234,9 @@ extension SwiftUICore.MoveKeyframe : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@_Concurrency.MainActor @preconcurrency public struct PhaseAnimator<Phase, Content> : SwiftUICore.View where Phase : Swift.Equatable, Content : SwiftUICore.View {
-  nonisolated public init(_ phases: some Sequence<Phase>, trigger: some Equatable, @SwiftUICore.ViewBuilder content: @escaping (Phase) -> Content, animation: @escaping (Phase) -> SwiftUICore.Animation? = { _ in .default })
-  nonisolated public init(_ phases: some Sequence<Phase>, @SwiftUICore.ViewBuilder content: @escaping (Phase) -> Content, animation: @escaping (Phase) -> SwiftUICore.Animation? = { _ in .default })
+public struct PhaseAnimator<Phase, Content> : SwiftUICore.View where Phase : Swift.Equatable, Content : SwiftUICore.View {
+  public init(_ phases: some Sequence<Phase>, trigger: some Equatable, @SwiftUICore.ViewBuilder content: @escaping (Phase) -> Content, animation: @escaping (Phase) -> SwiftUICore.Animation? = { _ in .default })
+  public init(_ phases: some Sequence<Phase>, @SwiftUICore.ViewBuilder content: @escaping (Phase) -> Content, animation: @escaping (Phase) -> SwiftUICore.Animation? = { _ in .default })
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
@@ -12317,9 +12312,9 @@ extension SwiftUICore.KeyframeTimeline : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@_Concurrency.MainActor @preconcurrency public struct TapGesture : SwiftUICore.Gesture {
-  @_Concurrency.MainActor @preconcurrency public var count: Swift.Int
-  nonisolated public init(count: Swift.Int = 1)
+public struct TapGesture : SwiftUICore.Gesture {
+  public var count: Swift.Int
+  public init(count: Swift.Int = 1)
   nonisolated public static func _makeGesture(gesture: SwiftUICore._GraphValue<SwiftUICore.TapGesture>, inputs: SwiftUICore._GestureInputs) -> SwiftUICore._GestureOutputs<Swift.Void>
   @available(iOS 13.0, tvOS 16.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
@@ -12345,6 +12340,11 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @_functionBuilder public struct KeyframeTrackContentBuilder<Value> where Value : SwiftUICore.Animatable {
   public static func buildExpression<K>(_ expression: K) -> K where Value == K.Value, K : SwiftUICore.KeyframeTrackContent
+  @available(*, unavailable, message: "this expression does not conform to 'KeyframeTrackContent'")
+  @_disfavoredOverload @_alwaysEmitIntoClient public static func buildExpression(_ invalid: Any) -> some SwiftUICore.KeyframeTrackContent<Value> {
+        buildBlock()
+    }
+  
   public static func buildArray(_ components: [some KeyframeTrackContent<Value>]) -> some SwiftUICore.KeyframeTrackContent<Value>
   
   public static func buildEither<First, Second>(first component: First) -> SwiftUICore.KeyframeTrackContentBuilder<Value>.Conditional<Value, First, Second> where Value == First.Value, First : SwiftUICore.KeyframeTrackContent, Second : SwiftUICore.KeyframeTrackContent, First.Value == Second.Value
@@ -12476,13 +12476,13 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct AnyView : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency internal var storage: SwiftUICore.AnyViewStorageBase
-  nonisolated public init<V>(_ view: V) where V : SwiftUICore.View
-  @_alwaysEmitIntoClient nonisolated public init<V>(erasing view: V) where V : SwiftUICore.View {
+@frozen public struct AnyView : SwiftUICore.View {
+  internal var storage: SwiftUICore.AnyViewStorageBase
+  public init<V>(_ view: V) where V : SwiftUICore.View
+  @_alwaysEmitIntoClient public init<V>(erasing view: V) where V : SwiftUICore.View {
         self.init(view)
     }
-  nonisolated public init?(_fromValue value: Any)
+  public init?(_fromValue value: Any)
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.AnyView>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.AnyView>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -12783,10 +12783,10 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _BackdropEffect<Backdrop> where Backdrop : SwiftUICore.View {
+@frozen public struct _BackdropEffect<Backdrop> where Backdrop : SwiftUICore.View {
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal var backdrop: Backdrop
-  @inlinable nonisolated internal init(backdrop: Backdrop) {
+  internal var backdrop: Backdrop
+  @inlinable internal init(backdrop: Backdrop) {
         self.backdrop = backdrop
     }
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._BackdropEffect<Backdrop>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
@@ -12801,8 +12801,8 @@ extension SwiftUICore._BackdropEffect : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _BackdropEffectPlaceholder {
-  @inlinable nonisolated internal init() {}
+@frozen public struct _BackdropEffectPlaceholder {
+  @inlinable internal init() {}
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore._BackdropEffectPlaceholder>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Body = Swift.Never
@@ -12895,7 +12895,7 @@ extension CoreFoundation.CGFloat : SwiftUICore.Animatable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@_Concurrency.MainActor @preconcurrency public struct MeshGradient : SwiftUICore.ShapeStyle, Swift.Equatable, Swift.Sendable {
+public struct MeshGradient : SwiftUICore.ShapeStyle, Swift.Equatable, Swift.Sendable {
   public enum Locations : Swift.Equatable, Swift.Sendable {
     case points([Swift.SIMD2<Swift.Float>])
     case bezierPoints([SwiftUICore.MeshGradient.BezierPoint])
@@ -12921,59 +12921,42 @@ extension CoreFoundation.CGFloat : SwiftUICore.Animatable {
         }
     public static func == (a: SwiftUICore.MeshGradient.BezierPoint, b: SwiftUICore.MeshGradient.BezierPoint) -> Swift.Bool
   }
-  @_Concurrency.MainActor @preconcurrency public var width: Swift.Int
-  @_Concurrency.MainActor @preconcurrency public var height: Swift.Int
-  @_Concurrency.MainActor @preconcurrency public var locations: SwiftUICore.MeshGradient.Locations
-  @_Concurrency.MainActor @preconcurrency public var colors: SwiftUICore.MeshGradient.Colors
-  @_Concurrency.MainActor @preconcurrency public var background: SwiftUICore.Color
-  @_Concurrency.MainActor @preconcurrency public var smoothsColors: Swift.Bool
-  @_Concurrency.MainActor @preconcurrency public var colorSpace: SwiftUICore.Gradient.ColorSpace
-  @_Concurrency.MainActor @preconcurrency public init(width: Swift.Int, height: Swift.Int, locations: SwiftUICore.MeshGradient.Locations, colors: SwiftUICore.MeshGradient.Colors, background: SwiftUICore.Color = .clear, smoothsColors: Swift.Bool = true, colorSpace: SwiftUICore.Gradient.ColorSpace = .device)
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public init(width: Swift.Int, height: Swift.Int, points: [Swift.SIMD2<Swift.Float>], colors: [SwiftUICore.Color], background: SwiftUICore.Color = .clear, smoothsColors: Swift.Bool = true, colorSpace: SwiftUICore.Gradient.ColorSpace = .device) {
+  public var width: Swift.Int
+  public var height: Swift.Int
+  public var locations: SwiftUICore.MeshGradient.Locations
+  public var colors: SwiftUICore.MeshGradient.Colors
+  public var background: SwiftUICore.Color
+  public var smoothsColors: Swift.Bool
+  public var colorSpace: SwiftUICore.Gradient.ColorSpace
+  public init(width: Swift.Int, height: Swift.Int, locations: SwiftUICore.MeshGradient.Locations, colors: SwiftUICore.MeshGradient.Colors, background: SwiftUICore.Color = .clear, smoothsColors: Swift.Bool = true, colorSpace: SwiftUICore.Gradient.ColorSpace = .device)
+  @_alwaysEmitIntoClient public init(width: Swift.Int, height: Swift.Int, points: [Swift.SIMD2<Swift.Float>], colors: [SwiftUICore.Color], background: SwiftUICore.Color = .clear, smoothsColors: Swift.Bool = true, colorSpace: SwiftUICore.Gradient.ColorSpace = .device) {
         self.init(width: width, height: height, locations: .points(points),
             colors: .colors(colors), background: background,
             smoothsColors: smoothsColors, colorSpace: colorSpace)
     }
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public init(width: Swift.Int, height: Swift.Int, points: [Swift.SIMD2<Swift.Float>], resolvedColors: [SwiftUICore.Color.Resolved], background: SwiftUICore.Color = .clear, smoothsColors: Swift.Bool = true, colorSpace: SwiftUICore.Gradient.ColorSpace = .device) {
+  @_alwaysEmitIntoClient public init(width: Swift.Int, height: Swift.Int, points: [Swift.SIMD2<Swift.Float>], resolvedColors: [SwiftUICore.Color.Resolved], background: SwiftUICore.Color = .clear, smoothsColors: Swift.Bool = true, colorSpace: SwiftUICore.Gradient.ColorSpace = .device) {
         self.init(width: width, height: height, locations: .points(points),
             colors: .resolvedColors(resolvedColors), background: background,
             smoothsColors: smoothsColors, colorSpace: colorSpace)
     }
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public init(width: Swift.Int, height: Swift.Int, bezierPoints: [SwiftUICore.MeshGradient.BezierPoint], colors: [SwiftUICore.Color], background: SwiftUICore.Color = .clear, smoothsColors: Swift.Bool = true, colorSpace: SwiftUICore.Gradient.ColorSpace = .device) {
+  @_alwaysEmitIntoClient public init(width: Swift.Int, height: Swift.Int, bezierPoints: [SwiftUICore.MeshGradient.BezierPoint], colors: [SwiftUICore.Color], background: SwiftUICore.Color = .clear, smoothsColors: Swift.Bool = true, colorSpace: SwiftUICore.Gradient.ColorSpace = .device) {
         self.init(width: width, height: height,
             locations: .bezierPoints(bezierPoints), colors: .colors(colors),
             background: background, smoothsColors: smoothsColors,
             colorSpace: colorSpace)
     }
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public init(width: Swift.Int, height: Swift.Int, bezierPoints: [SwiftUICore.MeshGradient.BezierPoint], resolvedColors: [SwiftUICore.Color.Resolved], background: SwiftUICore.Color = .clear, smoothsColors: Swift.Bool = true, colorSpace: SwiftUICore.Gradient.ColorSpace = .device) {
+  @_alwaysEmitIntoClient public init(width: Swift.Int, height: Swift.Int, bezierPoints: [SwiftUICore.MeshGradient.BezierPoint], resolvedColors: [SwiftUICore.Color.Resolved], background: SwiftUICore.Color = .clear, smoothsColors: Swift.Bool = true, colorSpace: SwiftUICore.Gradient.ColorSpace = .device) {
         self.init(width: width, height: height,
             locations: .bezierPoints(bezierPoints),
             colors: .resolvedColors(resolvedColors),
             background: background, smoothsColors: smoothsColors,
             colorSpace: colorSpace)
     }
-  nonisolated public static func == (a: SwiftUICore.MeshGradient, b: SwiftUICore.MeshGradient) -> Swift.Bool
+  public static func == (a: SwiftUICore.MeshGradient, b: SwiftUICore.MeshGradient) -> Swift.Bool
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias Body = SwiftUICore._ShapeView<SwiftUICore.Rectangle, SwiftUICore.MeshGradient>
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias Resolved = Swift.Never
-}
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-@_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
-@_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-public struct PinnedScrollableViews : Swift.OptionSet, Swift.Sendable {
-  public let rawValue: Swift.UInt32
-  public init(rawValue: Swift.UInt32)
-  public static let sectionHeaders: SwiftUICore.PinnedScrollableViews
-  public static let sectionFooters: SwiftUICore.PinnedScrollableViews
-  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-  public typealias ArrayLiteralElement = SwiftUICore.PinnedScrollableViews
-  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-  public typealias Element = SwiftUICore.PinnedScrollableViews
-  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-  public typealias RawValue = Swift.UInt32
 }
 #if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -13070,7 +13053,7 @@ extension SwiftUICore.PropertyList.Element : Swift.Sendable {
 @frozen public struct _SizedShape<S> : SwiftUICore.Shape where S : SwiftUICore.Shape {
   public var shape: S
   public var size: CoreFoundation.CGSize
-  @inlinable nonisolated public init(shape: S, size: CoreFoundation.CGSize) {
+  @inlinable public init(shape: S, size: CoreFoundation.CGSize) {
         self.shape = shape
         self.size = size
     }
@@ -13157,10 +13140,10 @@ extension SwiftUICore.ViewModifier where Self : SwiftUICore._GraphInputsModifier
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct EmptyModifier : SwiftUICore.ViewModifier {
-  @_Concurrency.MainActor @preconcurrency public static let identity: SwiftUICore.EmptyModifier
+@frozen public struct EmptyModifier : SwiftUICore.ViewModifier {
+  public static let identity: SwiftUICore.EmptyModifier
   public typealias Body = Swift.Never
-  @inlinable nonisolated public init() {}
+  @inlinable public init() {}
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore.EmptyModifier>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<SwiftUICore.EmptyModifier>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -13344,10 +13327,10 @@ extension SwiftUICore.Image {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _BackgroundModifier<Background> : SwiftUICore.ViewModifier where Background : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var background: Background
-  @_Concurrency.MainActor @preconcurrency public var alignment: SwiftUICore.Alignment
-  @inlinable nonisolated public init(background: Background, alignment: SwiftUICore.Alignment = .center) {
+@frozen public struct _BackgroundModifier<Background> : SwiftUICore.ViewModifier where Background : SwiftUICore.View {
+  public var background: Background
+  public var alignment: SwiftUICore.Alignment
+  @inlinable public init(background: Background, alignment: SwiftUICore.Alignment = .center) {
         self.background = background
         self.alignment = alignment
     }
@@ -13364,17 +13347,17 @@ extension SwiftUICore._BackgroundModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore._BackgroundModifier : Swift.Equatable where Background : Swift.Equatable {
-  nonisolated public static func == (a: SwiftUICore._BackgroundModifier<Background>, b: SwiftUICore._BackgroundModifier<Background>) -> Swift.Bool
+  public static func == (a: SwiftUICore._BackgroundModifier<Background>, b: SwiftUICore._BackgroundModifier<Background>) -> Swift.Bool
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _BackgroundStyleModifier<Style> : SwiftUICore.ViewModifier where Style : SwiftUICore.ShapeStyle {
-  @_Concurrency.MainActor @preconcurrency public var style: Style
-  @_Concurrency.MainActor @preconcurrency public var ignoresSafeAreaEdges: SwiftUICore.Edge.Set
-  @inlinable nonisolated public init(style: Style, ignoresSafeAreaEdges: SwiftUICore.Edge.Set) {
+@frozen public struct _BackgroundStyleModifier<Style> : SwiftUICore.ViewModifier where Style : SwiftUICore.ShapeStyle {
+  public var style: Style
+  public var ignoresSafeAreaEdges: SwiftUICore.Edge.Set
+  @inlinable public init(style: Style, ignoresSafeAreaEdges: SwiftUICore.Edge.Set) {
         self.style = style
         self.ignoresSafeAreaEdges = ignoresSafeAreaEdges
     }
@@ -13390,11 +13373,11 @@ extension SwiftUICore._BackgroundStyleModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _BackgroundShapeModifier<Style, Bounds> : SwiftUICore.ViewModifier where Style : SwiftUICore.ShapeStyle, Bounds : SwiftUICore.Shape {
-  @_Concurrency.MainActor @preconcurrency public var style: Style
-  @_Concurrency.MainActor @preconcurrency public var shape: Bounds
-  @_Concurrency.MainActor @preconcurrency public var fillStyle: SwiftUICore.FillStyle
-  @inlinable nonisolated public init(style: Style, shape: Bounds, fillStyle: SwiftUICore.FillStyle) {
+@frozen public struct _BackgroundShapeModifier<Style, Bounds> : SwiftUICore.ViewModifier where Style : SwiftUICore.ShapeStyle, Bounds : SwiftUICore.Shape {
+  public var style: Style
+  public var shape: Bounds
+  public var fillStyle: SwiftUICore.FillStyle
+  @inlinable public init(style: Style, shape: Bounds, fillStyle: SwiftUICore.FillStyle) {
         self.style = style
         self.shape = shape
         self.fillStyle = fillStyle
@@ -13411,11 +13394,11 @@ extension SwiftUICore._BackgroundShapeModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _InsettableBackgroundShapeModifier<Style, Bounds> : SwiftUICore.ViewModifier where Style : SwiftUICore.ShapeStyle, Bounds : SwiftUICore.InsettableShape {
-  @_Concurrency.MainActor @preconcurrency public var style: Style
-  @_Concurrency.MainActor @preconcurrency public var shape: Bounds
-  @_Concurrency.MainActor @preconcurrency public var fillStyle: SwiftUICore.FillStyle
-  @inlinable nonisolated public init(style: Style, shape: Bounds, fillStyle: SwiftUICore.FillStyle) {
+@frozen public struct _InsettableBackgroundShapeModifier<Style, Bounds> : SwiftUICore.ViewModifier where Style : SwiftUICore.ShapeStyle, Bounds : SwiftUICore.InsettableShape {
+  public var style: Style
+  public var shape: Bounds
+  public var fillStyle: SwiftUICore.FillStyle
+  @inlinable public init(style: Style, shape: Bounds, fillStyle: SwiftUICore.FillStyle) {
         self.style = style
         self.shape = shape
         self.fillStyle = fillStyle
@@ -13491,10 +13474,10 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-public protocol CustomAnimation : Swift.Hashable {
-  func animate<V>(value: V, time: Foundation.TimeInterval, context: inout SwiftUICore.AnimationContext<V>) -> V? where V : SwiftUICore.VectorArithmetic
-  func velocity<V>(value: V, time: Foundation.TimeInterval, context: SwiftUICore.AnimationContext<V>) -> V? where V : SwiftUICore.VectorArithmetic
-  func shouldMerge<V>(previous: SwiftUICore.Animation, value: V, time: Foundation.TimeInterval, context: inout SwiftUICore.AnimationContext<V>) -> Swift.Bool where V : SwiftUICore.VectorArithmetic
+@preconcurrency public protocol CustomAnimation : Swift.Hashable, Swift.Sendable {
+  nonisolated func animate<V>(value: V, time: Foundation.TimeInterval, context: inout SwiftUICore.AnimationContext<V>) -> V? where V : SwiftUICore.VectorArithmetic
+  nonisolated func velocity<V>(value: V, time: Foundation.TimeInterval, context: SwiftUICore.AnimationContext<V>) -> V? where V : SwiftUICore.VectorArithmetic
+  nonisolated func shouldMerge<V>(previous: SwiftUICore.Animation, value: V, time: Foundation.TimeInterval, context: inout SwiftUICore.AnimationContext<V>) -> Swift.Bool where V : SwiftUICore.VectorArithmetic
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -14174,9 +14157,9 @@ extension SwiftUICore.Angle : SwiftUICore.Animatable, SwiftUICore._VectorMath {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _SafeAreaIgnoringLayout {
-  @_Concurrency.MainActor @preconcurrency public var edges: SwiftUICore.Edge.Set
-  @inlinable nonisolated public init(edges: SwiftUICore.Edge.Set = .all) {
+@frozen public struct _SafeAreaIgnoringLayout {
+  public var edges: SwiftUICore.Edge.Set
+  @inlinable public init(edges: SwiftUICore.Edge.Set = .all) {
         self.edges = edges
     }
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -14189,10 +14172,10 @@ extension SwiftUICore.Angle : SwiftUICore.Animatable, SwiftUICore._VectorMath {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _SafeAreaRegionsIgnoringLayout {
-  @_Concurrency.MainActor @preconcurrency public var regions: SwiftUICore.SafeAreaRegions
-  @_Concurrency.MainActor @preconcurrency public var edges: SwiftUICore.Edge.Set
-  @inlinable nonisolated package init(regions: SwiftUICore.SafeAreaRegions, edges: SwiftUICore.Edge.Set) {
+@frozen public struct _SafeAreaRegionsIgnoringLayout {
+  public var regions: SwiftUICore.SafeAreaRegions
+  public var edges: SwiftUICore.Edge.Set
+  @inlinable package init(regions: SwiftUICore.SafeAreaRegions, edges: SwiftUICore.Edge.Set) {
         self.regions = regions
         self.edges = edges
     }
@@ -14274,6 +14257,23 @@ extension SwiftUICore._ConditionalContent : SwiftUICore.View where TrueContent :
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore._ConditionalContent<TrueContent, FalseContent>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
+}
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
+public struct PinnedScrollableViews : Swift.OptionSet, Swift.Sendable {
+  public let rawValue: Swift.UInt32
+  public init(rawValue: Swift.UInt32)
+  public static let sectionHeaders: SwiftUICore.PinnedScrollableViews
+  public static let sectionFooters: SwiftUICore.PinnedScrollableViews
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+  public typealias ArrayLiteralElement = SwiftUICore.PinnedScrollableViews
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+  public typealias Element = SwiftUICore.PinnedScrollableViews
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+  public typealias RawValue = Swift.UInt32
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -14607,7 +14607,7 @@ extension SwiftUICore.ForEach where Data == Swift.Range<Swift.Int>, ID == Swift.
 @frozen public struct OffsetShape<Content> : SwiftUICore.Shape where Content : SwiftUICore.Shape {
   public var shape: Content
   public var offset: CoreFoundation.CGSize
-  @inlinable nonisolated public init(shape: Content, offset: CoreFoundation.CGSize) {
+  @inlinable public init(shape: Content, offset: CoreFoundation.CGSize) {
         self.shape = shape
         self.offset = offset
     }
@@ -14649,7 +14649,7 @@ extension SwiftUICore.OffsetShape : SwiftUICore.InsettableShape where Content : 
   public var shape: Content
   public var scale: CoreFoundation.CGSize
   public var anchor: SwiftUICore.UnitPoint
-  @inlinable nonisolated public init(shape: Content, scale: CoreFoundation.CGSize, anchor: SwiftUICore.UnitPoint = .center) {
+  @inlinable public init(shape: Content, scale: CoreFoundation.CGSize, anchor: SwiftUICore.UnitPoint = .center) {
         self.shape = shape
         self.scale = scale
         self.anchor = anchor
@@ -14680,7 +14680,7 @@ extension SwiftUICore.OffsetShape : SwiftUICore.InsettableShape where Content : 
   public var shape: Content
   public var angle: SwiftUICore.Angle
   public var anchor: SwiftUICore.UnitPoint
-  @inlinable nonisolated public init(shape: Content, angle: SwiftUICore.Angle, anchor: SwiftUICore.UnitPoint = .center) {
+  @inlinable public init(shape: Content, angle: SwiftUICore.Angle, anchor: SwiftUICore.UnitPoint = .center) {
         self.shape = shape
         self.angle = angle
         self.anchor = anchor
@@ -14722,7 +14722,7 @@ extension SwiftUICore.RotatedShape : SwiftUICore.InsettableShape where Content :
 @frozen public struct TransformedShape<Content> : SwiftUICore.Shape where Content : SwiftUICore.Shape {
   public var shape: Content
   public var transform: CoreFoundation.CGAffineTransform
-  @inlinable nonisolated public init(shape: Content, transform: CoreFoundation.CGAffineTransform) {
+  @inlinable public init(shape: Content, transform: CoreFoundation.CGAffineTransform) {
         self.shape = shape
         self.transform = transform
     }
@@ -14829,22 +14829,22 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@_Concurrency.MainActor @preconcurrency public struct Canvas<Symbols> where Symbols : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public var symbols: Symbols
-  @_Concurrency.MainActor @preconcurrency public var renderer: (inout SwiftUICore.GraphicsContext, CoreFoundation.CGSize) -> Swift.Void
-  @_Concurrency.MainActor @preconcurrency public var isOpaque: Swift.Bool {
+public struct Canvas<Symbols> where Symbols : SwiftUICore.View {
+  public var symbols: Symbols
+  public var renderer: (inout SwiftUICore.GraphicsContext, CoreFoundation.CGSize) -> Swift.Void
+  public var isOpaque: Swift.Bool {
     get
     set
   }
-  @_Concurrency.MainActor @preconcurrency public var colorMode: SwiftUICore.ColorRenderingMode {
+  public var colorMode: SwiftUICore.ColorRenderingMode {
     get
     set
   }
-  @_Concurrency.MainActor @preconcurrency public var rendersAsynchronously: Swift.Bool {
+  public var rendersAsynchronously: Swift.Bool {
     get
     set
   }
-  @_Concurrency.MainActor @preconcurrency public init(opaque: Swift.Bool = false, colorMode: SwiftUICore.ColorRenderingMode = .nonLinear, rendersAsynchronously: Swift.Bool = false, renderer: @escaping (inout SwiftUICore.GraphicsContext, CoreFoundation.CGSize) -> Swift.Void, @SwiftUICore.ViewBuilder symbols: () -> Symbols)
+  public init(opaque: Swift.Bool = false, colorMode: SwiftUICore.ColorRenderingMode = .nonLinear, rendersAsynchronously: Swift.Bool = false, renderer: @escaping (inout SwiftUICore.GraphicsContext, CoreFoundation.CGSize) -> Swift.Void, @SwiftUICore.ViewBuilder symbols: () -> Symbols)
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.Canvas<Symbols>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias Body = Swift.Never
@@ -14858,7 +14858,7 @@ extension SwiftUICore.Canvas : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Canvas where Symbols == SwiftUICore.EmptyView {
-  @_Concurrency.MainActor @preconcurrency public init(opaque: Swift.Bool = false, colorMode: SwiftUICore.ColorRenderingMode = .nonLinear, rendersAsynchronously: Swift.Bool = false, renderer: @escaping (inout SwiftUICore.GraphicsContext, CoreFoundation.CGSize) -> Swift.Void)
+  public init(opaque: Swift.Bool = false, colorMode: SwiftUICore.ColorRenderingMode = .nonLinear, rendersAsynchronously: Swift.Bool = false, renderer: @escaping (inout SwiftUICore.GraphicsContext, CoreFoundation.CGSize) -> Swift.Void)
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -14986,12 +14986,12 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _TransactionModifier : SwiftUICore.ViewModifier, SwiftUICore._GraphInputsModifier {
-  @_Concurrency.MainActor @preconcurrency public var transform: (inout SwiftUICore.Transaction) -> Swift.Void
-  @inlinable nonisolated public init(transform: @escaping (inout SwiftUICore.Transaction) -> Swift.Void) {
+@frozen public struct _TransactionModifier : SwiftUICore.ViewModifier, SwiftUICore._GraphInputsModifier {
+  public var transform: (inout SwiftUICore.Transaction) -> Swift.Void
+  @inlinable public init(transform: @escaping (inout SwiftUICore.Transaction) -> Swift.Void) {
         self.transform = transform
     }
-  @_Concurrency.MainActor @preconcurrency public static func _makeInputs(modifier: SwiftUICore._GraphValue<SwiftUICore._TransactionModifier>, inputs: inout SwiftUICore._GraphInputs)
+  public static func _makeInputs(modifier: SwiftUICore._GraphValue<SwiftUICore._TransactionModifier>, inputs: inout SwiftUICore._GraphInputs)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -15003,14 +15003,14 @@ extension SwiftUICore._TransactionModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _ValueTransactionModifier<Value> : SwiftUICore.ViewModifier, SwiftUICore._GraphInputsModifier where Value : Swift.Equatable {
-  @_Concurrency.MainActor @preconcurrency public var value: Value
-  @_Concurrency.MainActor @preconcurrency public var transform: (inout SwiftUICore.Transaction) -> Swift.Void
-  @inlinable nonisolated public init(value: Value, transform: @escaping (inout SwiftUICore.Transaction) -> Swift.Void) {
+@frozen public struct _ValueTransactionModifier<Value> : SwiftUICore.ViewModifier, SwiftUICore._GraphInputsModifier where Value : Swift.Equatable {
+  public var value: Value
+  public var transform: (inout SwiftUICore.Transaction) -> Swift.Void
+  @inlinable public init(value: Value, transform: @escaping (inout SwiftUICore.Transaction) -> Swift.Void) {
         self.value = value
         self.transform = transform
     }
-  @_Concurrency.MainActor @preconcurrency public static func _makeInputs(modifier: SwiftUICore._GraphValue<SwiftUICore._ValueTransactionModifier<Value>>, inputs: inout SwiftUICore._GraphInputs)
+  public static func _makeInputs(modifier: SwiftUICore._GraphValue<SwiftUICore._ValueTransactionModifier<Value>>, inputs: inout SwiftUICore._GraphInputs)
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = Swift.Never
 }
@@ -15022,10 +15022,10 @@ extension SwiftUICore._ValueTransactionModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _PushPopTransactionModifier<Content> : SwiftUICore.ViewModifier where Content : SwiftUICore.ViewModifier {
-  @_Concurrency.MainActor @preconcurrency public var content: Content
-  @_Concurrency.MainActor @preconcurrency public var base: SwiftUICore._TransactionModifier
-  @inlinable nonisolated public init(content: Content, transform: @escaping (inout SwiftUICore.Transaction) -> Swift.Void) {
+@frozen public struct _PushPopTransactionModifier<Content> : SwiftUICore.ViewModifier where Content : SwiftUICore.ViewModifier {
+  public var content: Content
+  public var base: SwiftUICore._TransactionModifier
+  @inlinable public init(content: Content, transform: @escaping (inout SwiftUICore.Transaction) -> Swift.Void) {
         self.content = content
         base = .init(transform: transform)
     }
@@ -15177,11 +15177,11 @@ extension SwiftUICore.ShapeStyle where Self : SwiftUICore.View, Self.Body == Swi
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _ShapeView<Content, Style> : SwiftUICore.View where Content : SwiftUICore.Shape, Style : SwiftUICore.ShapeStyle {
-  @_Concurrency.MainActor @preconcurrency public var shape: Content
-  @_Concurrency.MainActor @preconcurrency public var style: Style
-  @_Concurrency.MainActor @preconcurrency public var fillStyle: SwiftUICore.FillStyle
-  @inlinable nonisolated public init(shape: Content, style: Style, fillStyle: SwiftUICore.FillStyle = FillStyle()) {
+@frozen public struct _ShapeView<Content, Style> : SwiftUICore.View where Content : SwiftUICore.Shape, Style : SwiftUICore.ShapeStyle {
+  public var shape: Content
+  public var style: Style
+  public var fillStyle: SwiftUICore.FillStyle
+  @inlinable public init(shape: Content, style: Style, fillStyle: SwiftUICore.FillStyle = FillStyle()) {
         self.shape = shape
         self.style = style
         self.fillStyle = fillStyle
@@ -15258,28 +15258,28 @@ extension SwiftUICore._ShapeView : SwiftUICore.ShapeView {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct FillShapeView<Content, Style, Background> : SwiftUICore.ShapeView where Content : SwiftUICore.Shape, Style : SwiftUICore.ShapeStyle, Background : SwiftUICore.View {
+@frozen public struct FillShapeView<Content, Style, Background> : SwiftUICore.ShapeView where Content : SwiftUICore.Shape, Style : SwiftUICore.ShapeStyle, Background : SwiftUICore.View {
   @usableFromInline
   internal typealias ViewType = SwiftUICore.ModifiedContent<SwiftUICore._ShapeView<Content, Style>, SwiftUICore._BackgroundModifier<Background>>
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal var view: SwiftUICore.FillShapeView<Content, Style, Background>.ViewType
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public var shape: Content {
+  internal var view: SwiftUICore.FillShapeView<Content, Style, Background>.ViewType
+  @_alwaysEmitIntoClient public var shape: Content {
     get { view.content.shape }
     set { view.content.shape = newValue }
   }
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public var style: Style {
+  @_alwaysEmitIntoClient public var style: Style {
     get { view.content.style }
     set { view.content.style = newValue }
   }
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public var fillStyle: SwiftUICore.FillStyle {
+  @_alwaysEmitIntoClient public var fillStyle: SwiftUICore.FillStyle {
     get { view.content.fillStyle }
     set { view.content.fillStyle = newValue }
   }
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public var background: Background {
+  @_alwaysEmitIntoClient public var background: Background {
     get { view.modifier.background }
     set { view.modifier.background = newValue }
   }
-  @_alwaysEmitIntoClient nonisolated public init(shape: Content, style: Style, fillStyle: SwiftUICore.FillStyle, background: Background) {
+  @_alwaysEmitIntoClient public init(shape: Content, style: Style, fillStyle: SwiftUICore.FillStyle, background: Background) {
         view = .init(content: _ShapeView(
             shape: shape, style: style, fillStyle: fillStyle),
             modifier: .init(background: background))
@@ -15296,32 +15296,32 @@ extension SwiftUICore.FillShapeView : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct StrokeShapeView<Content, Style, Background> : SwiftUICore.ShapeView where Content : SwiftUICore.Shape, Style : SwiftUICore.ShapeStyle, Background : SwiftUICore.View {
+@frozen public struct StrokeShapeView<Content, Style, Background> : SwiftUICore.ShapeView where Content : SwiftUICore.Shape, Style : SwiftUICore.ShapeStyle, Background : SwiftUICore.View {
   @usableFromInline
   internal typealias ViewType = SwiftUICore.ModifiedContent<SwiftUICore._ShapeView<SwiftUICore._StrokedShape<Content>, Style>, SwiftUICore._BackgroundModifier<Background>>
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal var view: SwiftUICore.StrokeShapeView<Content, Style, Background>.ViewType
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public var shape: Content {
+  internal var view: SwiftUICore.StrokeShapeView<Content, Style, Background>.ViewType
+  @_alwaysEmitIntoClient public var shape: Content {
     get { view.content.shape.shape }
     set { view.content.shape.shape = newValue }
   }
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public var style: Style {
+  @_alwaysEmitIntoClient public var style: Style {
     get { view.content.style }
     set { view.content.style = newValue }
   }
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public var strokeStyle: SwiftUICore.StrokeStyle {
+  @_alwaysEmitIntoClient public var strokeStyle: SwiftUICore.StrokeStyle {
     get { view.content.shape.style }
     set { view.content.shape.style = newValue }
   }
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public var isAntialiased: Swift.Bool {
+  @_alwaysEmitIntoClient public var isAntialiased: Swift.Bool {
     get { view.content.fillStyle.isAntialiased }
     set { view.content.fillStyle.isAntialiased = newValue }
   }
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public var background: Background {
+  @_alwaysEmitIntoClient public var background: Background {
     get { view.modifier.background }
     set { view.modifier.background = newValue }
   }
-  @_alwaysEmitIntoClient nonisolated public init(shape: Content, style: Style, strokeStyle: SwiftUICore.StrokeStyle, isAntialiased: Swift.Bool, background: Background) {
+  @_alwaysEmitIntoClient public init(shape: Content, style: Style, strokeStyle: SwiftUICore.StrokeStyle, isAntialiased: Swift.Bool, background: Background) {
         view = .init(content: _ShapeView(
             shape: _StrokedShape(shape: shape, style: strokeStyle),
             style: style, fillStyle: .init(antialiased: isAntialiased)),
@@ -15339,29 +15339,29 @@ extension SwiftUICore.StrokeShapeView : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct StrokeBorderShapeView<Content, Style, Background> : SwiftUICore.ShapeView where Content : SwiftUICore.InsettableShape, Style : SwiftUICore.ShapeStyle, Background : SwiftUICore.View {
+@frozen public struct StrokeBorderShapeView<Content, Style, Background> : SwiftUICore.ShapeView where Content : SwiftUICore.InsettableShape, Style : SwiftUICore.ShapeStyle, Background : SwiftUICore.View {
   @usableFromInline
   internal typealias ViewType = SwiftUICore.ModifiedContent<SwiftUICore._ShapeView<SwiftUICore._StrokedShape<Content.InsetShape>, Style>, SwiftUICore._BackgroundModifier<Background>>
-  @_Concurrency.MainActor @preconcurrency public var shape: Content
+  public var shape: Content
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal var view: SwiftUICore.StrokeBorderShapeView<Content, Style, Background>.ViewType
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public var style: Style {
+  internal var view: SwiftUICore.StrokeBorderShapeView<Content, Style, Background>.ViewType
+  @_alwaysEmitIntoClient public var style: Style {
     get { view.content.style }
     set { view.content.style = newValue }
   }
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public var strokeStyle: SwiftUICore.StrokeStyle {
+  @_alwaysEmitIntoClient public var strokeStyle: SwiftUICore.StrokeStyle {
     get { view.content.shape.style }
     set { view.content.shape.style = newValue }
   }
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public var isAntialiased: Swift.Bool {
+  @_alwaysEmitIntoClient public var isAntialiased: Swift.Bool {
     get { view.content.fillStyle.isAntialiased }
     set { view.content.fillStyle.isAntialiased = newValue }
   }
-  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public var background: Background {
+  @_alwaysEmitIntoClient public var background: Background {
     get { view.modifier.background }
     set { view.modifier.background = newValue }
   }
-  @_alwaysEmitIntoClient nonisolated public init(shape: Content, style: Style, strokeStyle: SwiftUICore.StrokeStyle, isAntialiased: Swift.Bool, background: Background) {
+  @_alwaysEmitIntoClient public init(shape: Content, style: Style, strokeStyle: SwiftUICore.StrokeStyle, isAntialiased: Swift.Bool, background: Background) {
         self.shape = shape
         view = .init(content: _ShapeView(
             shape: _StrokedShape(
@@ -15880,12 +15880,12 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @usableFromInline
-@frozen @_Concurrency.MainActor @preconcurrency package struct IDView<Content, ID> : SwiftUICore.View where Content : SwiftUICore.View, ID : Swift.Hashable {
+@frozen package struct IDView<Content, ID> : SwiftUICore.View where Content : SwiftUICore.View, ID : Swift.Hashable {
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal var content: Content
+  internal var content: Content
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal var id: ID
-  @inlinable nonisolated package init(_ content: Content, id: ID) {
+  internal var id: ID
+  @inlinable package init(_ content: Content, id: ID) {
         self.content = content
         self.id = id
     }
@@ -15918,7 +15918,7 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.IDView {
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency package static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.IDView<Content, ID>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
+  package static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.IDView<Content, ID>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -15927,10 +15927,10 @@ extension SwiftUICore.IDView {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.IDView {
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency package static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.IDView<Content, ID>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
+  package static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.IDView<Content, ID>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency package static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
+  package static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -16361,12 +16361,12 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@frozen @_Concurrency.MainActor @preconcurrency public struct _InsetViewModifier<Content> : SwiftUICore.ViewModifier where Content : SwiftUICore.View {
+@frozen public struct _InsetViewModifier<Content> : SwiftUICore.ViewModifier where Content : SwiftUICore.View {
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal var content: Content
+  internal var content: Content
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal var properties: (regions: SwiftUICore.SafeAreaRegions, spacing: CoreFoundation.CGFloat?, edge: SwiftUICore.Edge, alignmentKey: SwiftUICore.AlignmentKey)
-  @inlinable nonisolated package init(content: Content, edge: SwiftUICore.Edge, regions: SwiftUICore.SafeAreaRegions, spacing: CoreFoundation.CGFloat?, alignmentKey: SwiftUICore.AlignmentKey) {
+  internal var properties: (regions: SwiftUICore.SafeAreaRegions, spacing: CoreFoundation.CGFloat?, edge: SwiftUICore.Edge, alignmentKey: SwiftUICore.AlignmentKey)
+  @inlinable package init(content: Content, edge: SwiftUICore.Edge, regions: SwiftUICore.SafeAreaRegions, spacing: CoreFoundation.CGFloat?, alignmentKey: SwiftUICore.AlignmentKey) {
         self.content = content
         properties = (regions, spacing, edge, alignmentKey)
     }

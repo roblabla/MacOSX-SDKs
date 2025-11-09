@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia'
-current-version: 3145.74.5
+current-version: 3175.11.5
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -278,11 +278,14 @@ exports:
                        _FigAudioFormatDescriptionCopySceneInformation, _FigAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer, 
                        _FigAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBufferWithReporter, 
                        _FigAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData, 
-                       _FigAudioFormatDescriptionEmploysDependentPackets, _FigAudioFormatDescriptionGetCinematicAudioEffectEligibility, 
+                       _FigAudioFormatDescriptionEmploysDependentPackets, _FigAudioFormatDescriptionGetBestDecodableFormatAndChannelLayoutForRenderingPreferences, 
+                       _FigAudioFormatDescriptionGetCinematicAudioEffectEligibility, 
                        _FigAudioFormatDescriptionGetCodecOutputChannelCount, _FigAudioFormatDescriptionGetCreationChannelLayoutSignificance, 
                        _FigAudioFormatDescriptionGetMostCompatibleFormatAndChannelLayout, 
                        _FigAudioFormatDescriptionGetRichestDecodableFormatAndChannelLayout, 
-                       _FigAudioFormatDescriptionUsesAudibleDRM, _FigAudioStreamPacketDependencyInfoCopyAsSampleDependencyAttributeDictionary, 
+                       _FigAudioFormatDescriptionUsesAudibleDRM, _FigAudioRenderingPreferencesCreate, 
+                       _FigAudioRenderingPreferencesGetMaximumChannelCountAndPreferredChannelLayout, 
+                       _FigAudioRenderingPreferencesGetTypeID, _FigAudioStreamPacketDependencyInfoCopyAsSampleDependencyAttributeDictionary, 
                        _FigBBMessageCommit, _FigBBMessageCopyBlockBuffer, _FigBBMessageCopyCFArray, 
                        _FigBBMessageCopyCFData, _FigBBMessageCopyCFDictionary, _FigBBMessageCopyCFString, 
                        _FigBBMessageCreate, _FigBBMessageGetCString, _FigBBMessageGetDataPtr, 

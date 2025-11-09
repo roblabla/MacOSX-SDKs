@@ -7,7 +7,10 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _RTIAttributeNSTextAnimationKey, _RTIAttributeNSTextAttributeKey, 
-                       _RTIAttributedStringKey_TextAnimation, _RTIDocumentRequestAllSurroundingRects, 
+                       _RTIAttributedStringKey_TextAnimation, _RTICustomInfoTypeUserInteractionInputOperations, 
+                       _RTIDocumentRequestAllSurroundingRects, _RTIInputOperationScrollingBegin, 
+                       _RTIInputOperationScrollingChanged, _RTIInputOperationScrollingContentTransformKey, 
+                       _RTIInputOperationScrollingEnd, _RTIInputOperationScrollingEnvironmentTransformKey, 
                        _RTIInputSessionChangeLogFacility, _RTIInputSessionDidEndUnexpectedlyNotification, 
                        _RTIInputSessionWillChangeToNewProcessNotification, _RTIInputUIServiceMachNameiOS, 
                        _RTIInputUIServiceName, _RTILogFacility, _RTIServiceAnonymousName, 

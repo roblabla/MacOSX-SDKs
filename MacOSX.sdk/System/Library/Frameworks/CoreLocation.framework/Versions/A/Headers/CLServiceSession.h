@@ -18,9 +18,7 @@ API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
 typedef NS_ENUM(NSInteger, CLServiceSessionAuthorizationRequirement) {
 	CLServiceSessionAuthorizationRequirementNone = 0,
 	CLServiceSessionAuthorizationRequirementWhenInUse,
-#if TARGET_OS_IOS || TARGET_OS_WATCH
-	CLServiceSessionAuthorizationRequirementAlways,
-#endif
+	CLServiceSessionAuthorizationRequirementAlways API_UNAVAILABLE(tvos),
 } NS_REFINED_FOR_SWIFT;
 
 API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)

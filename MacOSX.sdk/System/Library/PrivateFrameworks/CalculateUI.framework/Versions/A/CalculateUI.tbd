@@ -241,6 +241,8 @@ exports:
                        '_$s11CalculateUI14GraphViewModelC18initialYAxisBoundsSNySdGvpMV', 
                        '_$s11CalculateUI14GraphViewModelC18initialYAxisBoundsSNySdGvsTj', 
                        '_$s11CalculateUI14GraphViewModelC18initialYAxisBoundsSNySdGvsTq', 
+                       '_$s11CalculateUI14GraphViewModelC19cachedSamplerBounds3forSNySdG1x_AF1ytSgAA8FunctionV_tFTj', 
+                       '_$s11CalculateUI14GraphViewModelC19cachedSamplerBounds3forSNySdG1x_AF1ytSgAA8FunctionV_tFTq', 
                        '_$s11CalculateUI14GraphViewModelC19isAnimatingFunctionSbvMTj', 
                        '_$s11CalculateUI14GraphViewModelC19isAnimatingFunctionSbvMTq', 
                        '_$s11CalculateUI14GraphViewModelC19isAnimatingFunctionSbvgTj', 

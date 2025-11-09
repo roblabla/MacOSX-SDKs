@@ -56,23 +56,6 @@ typedef NS_OPTIONS(NSUInteger, NSWritingToolsResultOptions) {
     NSWritingToolsResultTable = 1 << 3,
 } API_AVAILABLE(macos(15.0));
 
-typedef NS_OPTIONS(NSUInteger, NSWritingToolsAllowedInputOptions) {
-    // System—defined behavior
-    NSWritingToolsAllowedInputOptionsDefault = 0,
-
-    // Writing Tools will provide plain text in proofreading suggestions or rewrites
-    NSWritingToolsAllowedInputOptionsPlainText = 1 << 0,
-
-    // as well as plain text, Writing Tools will provide text attributes in proofreading suggestions or rewrites that are natively supported or known to be easily adopted (such as lists)
-    NSWritingToolsAllowedInputOptionsRichText = 1 << 1,
-
-    // implies `RichText`, and Writing Tools may provide attributes for list layout
-    NSWritingToolsAllowedInputOptionsList = 1 << 2,
-
-    // implies `RichText`, and Writing Tools may provide attributes for tabular layout
-    NSWritingToolsAllowedInputOptionsTable = 1 << 3,
-} API_DEPRECATED_WITH_REPLACEMENT("NSWritingToolsResultOptions", macos(15.0, API_TO_BE_DEPRECATED));
-
 @protocol NSTextInputTraits
 @optional
 @property NSTextInputTraitType autocorrectionType;
@@ -90,7 +73,6 @@ typedef NS_OPTIONS(NSUInteger, NSWritingToolsAllowedInputOptions) {
 
 @property NSWritingToolsBehavior writingToolsBehavior API_AVAILABLE(macos(15.0));
 @property NSWritingToolsResultOptions allowedWritingToolsResultOptions API_AVAILABLE(macos(15.0));
-@property NSWritingToolsAllowedInputOptions writingToolsAllowedInputOptions API_DEPRECATED_WITH_REPLACEMENT("allowedWritingToolsResultOptions", macos(15.0, API_TO_BE_DEPRECATED));
 @end
 
 @protocol NSTextCheckingClient <NSTextInputClient, NSTextInputTraits>

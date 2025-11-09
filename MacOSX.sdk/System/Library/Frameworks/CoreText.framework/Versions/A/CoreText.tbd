@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText'
-current-version: 841
+current-version: 844.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -359,7 +359,8 @@ exports:
                        _kCTTextEncapsulationTraitPlatterSize, _kCTTextEncapsulationTraitScale, 
                        _kCTTextEncapsulationTraitShape, _kCTTextEncapsulationTraitStyle, 
                        _kCTTextScaleAttributeName, _kCTTextScaleRatioAttributeName, 
-                       _kCTTextScaleSecondary, _kCTTrackingAttributeName, _kCTTrimWhitespaceBackgroundAttributeName, 
+                       _kCTTextScaleSecondary, _kCTTextScaleStaticWeightMatchingAttributeName, 
+                       _kCTTrackingAttributeName, _kCTTrimWhitespaceBackgroundAttributeName, 
                        _kCTTypesetterOptionAllowUnboundedLayout, _kCTTypesetterOptionBidiLevelsProvider, 
                        _kCTTypesetterOptionDisableBidiProcessing, _kCTTypesetterOptionForcedEmbeddingLevel, 
                        _kCTTypesetterOptionVerticalLayout, _kCTUIFontTextStyleBody, 

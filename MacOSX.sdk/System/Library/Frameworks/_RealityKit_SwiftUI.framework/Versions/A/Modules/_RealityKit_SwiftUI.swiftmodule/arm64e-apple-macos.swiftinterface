@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-macos15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 366.0.22.0.4 -module-name _RealityKit_SwiftUI
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-macos15.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 366.40.5.0.1 -module-name _RealityKit_SwiftUI
 import AppKit
 import Foundation
 import Observation
@@ -37,10 +37,10 @@ extension RealityFoundation.MeshResource {
     get
   }
   @available(iOS 17.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @available(visionOS, unavailable)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s19_RealityKit_SwiftUI17ObjectCaptureViewV4bodyQrvp", 0) __<Overlay>
 }
@@ -83,8 +83,8 @@ extension _RealityKit_SwiftUI.ObjectCaptureView {
     }
     public func makeAsyncIterator() -> _RealityKit_SwiftUI.ObjectCaptureSession.Updates<Element>.Iterator
     @available(iOS 17.0, *)
-    @available(tvOS, unavailable, introduced: 13.0)
-    @available(watchOS, unavailable, introduced: 6.0)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
     @available(visionOS, unavailable)
     @available(macOS, unavailable, introduced: 15.0)
     @available(macCatalyst, unavailable)
@@ -236,8 +236,8 @@ extension _RealityKit_SwiftUI.ObjectCaptureView {
   @_Concurrency.MainActor public func cancel()
   @_Concurrency.MainActor public func requestImageCapture()
   @available(iOS 17.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @available(visionOS, unavailable)
   @available(macOS, unavailable, introduced: 15.0)
   @available(macCatalyst, unavailable)
@@ -322,10 +322,10 @@ extension _RealityKit_SwiftUI.EntityTargetValue {
     get
   }
   @available(iOS 17.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @available(visionOS, unavailable)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s19_RealityKit_SwiftUI27ObjectCapturePointCloudViewV4bodyQrvp", 0) __
 }
@@ -350,10 +350,10 @@ extension _RealityKit_SwiftUI.ObjectCapturePointCloudView {
   }
   @_Concurrency.MainActor @preconcurrency public func resizable(_ isResizable: Swift.Bool = true) -> _RealityKit_SwiftUI.ResolvedModel3D
   @available(visionOS 1.0, *)
-  @available(iOS, unavailable, introduced: 13.0)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s19_RealityKit_SwiftUI15ResolvedModel3DV4bodyQrvp", 0) __
 }
@@ -366,8 +366,8 @@ extension _RealityKit_SwiftUI.ObjectCapturePointCloudView {
     get
   }
   @available(iOS 18.0, visionOS 1.0, macOS 15.0, macCatalyst 18.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s19_RealityKit_SwiftUI0A4ViewV4bodyQrvp", 0) __<Content>
 }
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, *)
@@ -378,8 +378,8 @@ extension _RealityKit_SwiftUI.ObjectCapturePointCloudView {
     get
   }
   @available(iOS 18.0, visionOS 1.0, macOS 15.0, macCatalyst 18.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s19_RealityKit_SwiftUI0A22ViewDefaultPlaceholderV4bodyQrvp", 0) __
 }
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, *)
@@ -474,8 +474,8 @@ extension _RealityKit_SwiftUI.RealityViewCameraContent {
       get
     }
     @available(iOS 18.0, macOS 15.0, macCatalyst 18.0, *)
-    @available(tvOS, unavailable, introduced: 13.0)
-    @available(watchOS, unavailable, introduced: 6.0)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
     @available(visionOS, unavailable)
     public typealias Body = @_opaqueReturnTypeOf("$s19_RealityKit_SwiftUI0A17ViewCameraContentV4BodyV4bodyQrvp", 0) __<Placeholder>
   }
@@ -518,7 +518,7 @@ public struct RealityViewCameraContent : _RealityKit_SwiftUI.RealityViewContentP
   @available(iOS 18.0, macOS 15.0, macCatalyst 18.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
-  @available(visionOS, unavailable, introduced: 1.0)
+  @available(visionOS, unavailable)
   public typealias Entities = _RealityKit_SwiftUI.RealityViewEntityCollection
 }
 @available(iOS 18.0, macOS 15.0, macCatalyst 18.0, *)
@@ -655,10 +655,10 @@ public enum Model3DPhase {
     get
   }
   @available(visionOS 1.0, *)
-  @available(iOS, unavailable, introduced: 13.0)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s19_RealityKit_SwiftUI7Model3DV4bodyQrvp", 0) __<Content>
 }
@@ -673,10 +673,10 @@ public enum Model3DPhase {
     get
   }
   @available(visionOS 1.0, *)
-  @available(iOS, unavailable, introduced: 13.0)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s19_RealityKit_SwiftUI25Model3DPlaceholderContentV4bodyQrvp", 0) __<Model, Placeholder>
 }

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarFoundation.framework/Versions/A/CalendarFoundation'
-current-version: 1573
+current-version: 1574.2.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -11,7 +11,7 @@ exports:
     symbols:         [ '_$s18CalendarFoundation0A12FeatureFlagsO05quickC6ToggleyA2CmFWC', 
                        '_$s18CalendarFoundation0A12FeatureFlagsO0cD00cD3KeyAAMc', 
                        '_$s18CalendarFoundation0A12FeatureFlagsO10appIntentsyA2CmFWC', 
-                       '_$s18CalendarFoundation0A12FeatureFlagsO21resizeableMonthToggleyA2CmFWC', 
+                       '_$s18CalendarFoundation0A12FeatureFlagsO20appEntityObservationyA2CmFWC', 
                        '_$s18CalendarFoundation0A12FeatureFlagsO2eeoiySbAC_ACtFZ', 
                        '_$s18CalendarFoundation0A12FeatureFlagsO3allyA2CmFWC', '_$s18CalendarFoundation0A12FeatureFlagsO4hash4intoys6HasherVz_tF', 
                        '_$s18CalendarFoundation0A12FeatureFlagsO6domains12StaticStringVvg', 
@@ -146,13 +146,12 @@ exports:
                        _iCalInvitationNotificationsDisabledKey, _iCalSharedCalendarNotificationsDisabledKey, 
                        _kAlarmStream, _kAlarmStreamDateKey, _kCalAttachmentContainerName, 
                        _kCalBirthdayDefaultAlarmChangedNote, _kCalCalendarBundleIdentifier, 
-                       _kCalCalendarDatabaseFileName, _kCalCalendarDirectoryRelativeToHome, 
-                       _kCalCalendarGroupContainerIdentifier, _kCalDAVCalendarConstraints, 
-                       _kCalDAVCalendarConstraintsNoComments, _kCalDAVCalendarConstraintsNoSchedule, 
-                       _kCalDAVCalendarConstraintsNoScheduleNoComments, _kCalDAVMainPrincipalUID, 
-                       _kCalDAVMobileAccountIsDelegate, _kCalDAVPrincipalsKey, _kCalDAVSubscribedCalendars, 
-                       _kCalDateDistantFuture, _kCalDateDistantPast, _kCalDateInvalid, 
-                       _kCalDayStrings, _kCalMockCalendarDataContainerDirectoryName, 
+                       _kCalCalendarDatabaseFileName, _kCalCalendarGroupContainerIdentifier, 
+                       _kCalDAVCalendarConstraints, _kCalDAVCalendarConstraintsNoComments, 
+                       _kCalDAVCalendarConstraintsNoSchedule, _kCalDAVCalendarConstraintsNoScheduleNoComments, 
+                       _kCalDAVMainPrincipalUID, _kCalDAVMobileAccountIsDelegate, 
+                       _kCalDAVPrincipalsKey, _kCalDAVSubscribedCalendars, _kCalDateDistantFuture, 
+                       _kCalDateDistantPast, _kCalDateInvalid, _kCalDayStrings, _kCalMockCalendarDataContainerDirectoryName, 
                        _kCalRecurrenceByDayItemArrayCallbacks, _kCalReminderMigrationAuthor, 
                        _kCalSignificantTimeChangeNotification, _kCalSystemTimeZoneKey, 
                        _kCalTimeSensitiveIntervalForFocus, _kCalTimeZoneChangedNotification, 
@@ -234,8 +233,8 @@ exports:
                        CalMockCalendarDataContainerInfo, CalMockCalendarDataContainerProvider, 
                        CalMockPreferenceStore, CalNSDateProvider, CalNWideQueue, 
                        CalPerformSelectorAsyncBlockPerformer, CalPersonNameComponentsFormatter, 
-                       CalPersonaUtils, CalPreferences, CalProxyUtils, CalRecurrenceDayOfWeek, 
-                       CalRecurrenceGenerator, CalRecurrenceRuleDescriptionGenerator, 
+                       CalPersonaUtils, CalPreferences, CalProxyUtils, CalRateLimitingQueue, 
+                       CalRecurrenceDayOfWeek, CalRecurrenceGenerator, CalRecurrenceRuleDescriptionGenerator, 
                        CalRoute, CalScriptSecurityPolicy, CalSigTermCancellableTask, 
                        CalSignalSensor, CalSpotlightPendingSearch, CalSpotlightQueryController, 
                        CalSpotlightQueryResult, CalStopwatch, CalStructuredDataArchiver, 

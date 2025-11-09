@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ModelCatalogRuntime.framework/Versions/A/ModelCatalogRuntime'
-current-version: 146
+current-version: 153.255.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -20,6 +20,7 @@ exports:
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C19resourceInformation10identifier4withySS_y0aB008ResourceG0CSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C23resourceBundleContainer10identifier4withySS_y0aB008ResourcegH0CSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C24resourceBundleContainers4withyySay0aB008ResourceG9ContainerCGSg_s5Error_pSgtc_tF', 
+                       '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C24siriResourceAvailability4withyy0aB004SirigH4InfoCSg_s5Error_pSgtc_tF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C44generativeExperiencesEssentialResourcesReady4withyySo8NSNumberCSg_s5Error_pSgtc_tF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C46isGenerativeExperiencesEssentialResourcesReady4withyySo8NSNumberCSg_s5Error_pSgtc_tF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C58hasEnoughStorageForGenerativeExperiencesEssentialResources4withyySo8NSNumberCSg_s5Error_pSgtc_tF', 
@@ -60,20 +61,6 @@ exports:
                        '_$s19ModelCatalogRuntime10ExitReasonON', '_$s19ModelCatalogRuntime10ExitReasonOSHAAMc', 
                        '_$s19ModelCatalogRuntime10ExitReasonOSQAAMc', '_$s19ModelCatalogRuntime10ExitReasonOSYAAMc', 
                        '_$s19ModelCatalogRuntime10ExitReasonOs23CustomStringConvertibleAAMc', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerC016postOutOfStoragedE022remainingSpaceRequiredys6UInt64V_tKFZTj', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerC016postOutOfStoragedE022remainingSpaceRequiredys6UInt64V_tKFZTq', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerC019pendingOutOfStoragedE5ItemsSaySo08FLFollowE4ItemCGyKFZTj', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerC019pendingOutOfStoragedE5ItemsSaySo08FLFollowE4ItemCGyKFZTq', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerC024clearPendingOutOfStoragedE5ItemsyyKFZTj', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerC024clearPendingOutOfStoragedE5ItemsyyKFZTq', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerC16clientIdentifierSSvgZ', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerC16uniqueIdentifierSSvgZ', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerC35checkAndNotifyForOutOfStorageStatusyyFZTj', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerC35checkAndNotifyForOutOfStorageStatusyyFZTq', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerCMa', '_$s19ModelCatalogRuntime15FollowUpManagerCMm', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerCMn', '_$s19ModelCatalogRuntime15FollowUpManagerCMo', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerCMu', '_$s19ModelCatalogRuntime15FollowUpManagerCN', 
-                       '_$s19ModelCatalogRuntime15FollowUpManagerCfD', '_$s19ModelCatalogRuntime15FollowUpManagerCfd', 
                        '_$s19ModelCatalogRuntime4ExitO4exitys5NeverOAA0D6ReasonOFZ', 
                        '_$s19ModelCatalogRuntime4ExitOMa', '_$s19ModelCatalogRuntime4ExitOMn', 
                        '_$s19ModelCatalogRuntime4ExitON', '_$s19ModelCatalogRuntime6DaemonMp', 

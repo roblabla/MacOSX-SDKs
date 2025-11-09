@@ -38,7 +38,9 @@ typedef NS_ENUM(NSInteger, HKVisionEye) {
  @abstract      An object subclass representing prism vision fields used in eye glasses to correct double vision.
                 The prism aligns the two images so only one is seen.
  */
-HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
 @interface HKVisionPrism : NSObject <NSSecureCoding, NSCopying>
 
 /*!

@@ -107,10 +107,10 @@ SCN_EXPORT
 /*!
  @property lightingEnvironment
  @abstract Specifies the receiver's environment for image-based lighting (IBL).
- @discussion The environment should be a cube map as described in SCNMaterialProperty.h.
-             MDLSkyCubeTexture is supported starting in macOS 10.13 and iOS 11.
-             `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithURL:error:]` or `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithData:error:]`
- @seealso `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithURL:error:]`
+ @discussion The environment can be
+              - a cube map (as described in SCNMaterialProperty.h)
+              - an instance of `MDLSkyCubeTexture` (supported since macOS 10.13 and iOS 11)
+              - an object returned by `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithURL:error:]` or `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithData:error:]`
  */
 @property(nonatomic, readonly) SCNMaterialProperty *lightingEnvironment API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 

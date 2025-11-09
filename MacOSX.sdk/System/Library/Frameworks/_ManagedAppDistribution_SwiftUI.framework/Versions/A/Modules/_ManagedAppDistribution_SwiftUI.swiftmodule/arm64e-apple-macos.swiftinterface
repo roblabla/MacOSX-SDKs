@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-macos15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -package-name _ManagedAppDistribution_SwiftUI -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 1.4.2 -module-name _ManagedAppDistribution_SwiftUI
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-macos15.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -package-name _ManagedAppDistribution_SwiftUI -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 1.4.2 -module-name _ManagedAppDistribution_SwiftUI
 import Combine
 import ExtensionKit
 import Foundation
@@ -72,10 +72,10 @@ public struct ManagedContentOfferState : Swift.Hashable {
     get
   }
   @available(iOS 17.2, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @available(visionOS, unavailable)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s31_ManagedAppDistribution_SwiftUI0aB4ViewV4bodyQrvp", 0) __
 }
@@ -92,10 +92,10 @@ public struct ManagedContentOfferState : Swift.Hashable {
     get
   }
   @available(iOS 17.2, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @available(visionOS, unavailable)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s31_ManagedAppDistribution_SwiftUI0A11ContentViewV4bodyQrvp", 0) __<Icon>
 }

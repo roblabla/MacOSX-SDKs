@@ -5,6 +5,7 @@
 //  Copyright (c) 2015 Apple. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -15,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
                 Concrete subclasses generate the actual HKSeriesSample objects.
  */
 HK_EXTERN
+NS_SWIFT_SENDABLE
 @interface HKSeriesBuilder : NSObject
 
 /*!

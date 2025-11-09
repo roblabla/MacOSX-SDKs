@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WindowManager.framework/Versions/A/WindowManager'
-current-version: 277
+current-version: 278.1.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -339,10 +339,6 @@ exports:
                        '_$s13WindowManager0aB11PreferencesV22enableTilingByEdgeDragSbvg', 
                        '_$s13WindowManager0aB11PreferencesV22enableTilingByEdgeDragSbvpMV', 
                        '_$s13WindowManager0aB11PreferencesV22enableTilingByEdgeDragSbvs', 
-                       '_$s13WindowManager0aB11PreferencesV22enableTilingTopHotzoneSbvM', 
-                       '_$s13WindowManager0aB11PreferencesV22enableTilingTopHotzoneSbvg', 
-                       '_$s13WindowManager0aB11PreferencesV22enableTilingTopHotzoneSbvpMV', 
-                       '_$s13WindowManager0aB11PreferencesV22enableTilingTopHotzoneSbvs', 
                        '_$s13WindowManager0aB11PreferencesV22tilingSoftHotzoneDelaySdvM', 
                        '_$s13WindowManager0aB11PreferencesV22tilingSoftHotzoneDelaySdvg', 
                        '_$s13WindowManager0aB11PreferencesV22tilingSoftHotzoneDelaySdvpMV', 
@@ -423,6 +419,10 @@ exports:
                        '_$s13WindowManager0aB11PreferencesV25appIconHoverScaleDistance12CoreGraphics7CGFloatVvg', 
                        '_$s13WindowManager0aB11PreferencesV25appIconHoverScaleDistance12CoreGraphics7CGFloatVvpMV', 
                        '_$s13WindowManager0aB11PreferencesV25appIconHoverScaleDistance12CoreGraphics7CGFloatVvs', 
+                       '_$s13WindowManager0aB11PreferencesV25enableTopTilingByEdgeDragSbvM', 
+                       '_$s13WindowManager0aB11PreferencesV25enableTopTilingByEdgeDragSbvg', 
+                       '_$s13WindowManager0aB11PreferencesV25enableTopTilingByEdgeDragSbvpMV', 
+                       '_$s13WindowManager0aB11PreferencesV25enableTopTilingByEdgeDragSbvs', 
                        '_$s13WindowManager0aB11PreferencesV25leftStripReplacementOrderAA0a5GroupfG0OvM', 
                        '_$s13WindowManager0aB11PreferencesV25leftStripReplacementOrderAA0a5GroupfG0Ovg', 
                        '_$s13WindowManager0aB11PreferencesV25leftStripReplacementOrderAA0a5GroupfG0OvpMV', 
@@ -968,10 +968,6 @@ exports:
                        '_$s13WindowManager0aB21PreferencesControllerC22enableTilingByEdgeDragSbvg', 
                        '_$s13WindowManager0aB21PreferencesControllerC22enableTilingByEdgeDragSbvpMV', 
                        '_$s13WindowManager0aB21PreferencesControllerC22enableTilingByEdgeDragSbvs', 
-                       '_$s13WindowManager0aB21PreferencesControllerC22enableTilingTopHotzoneSbvM', 
-                       '_$s13WindowManager0aB21PreferencesControllerC22enableTilingTopHotzoneSbvg', 
-                       '_$s13WindowManager0aB21PreferencesControllerC22enableTilingTopHotzoneSbvpMV', 
-                       '_$s13WindowManager0aB21PreferencesControllerC22enableTilingTopHotzoneSbvs', 
                        '_$s13WindowManager0aB21PreferencesControllerC22tilingSoftHotzoneDelaySdvM', 
                        '_$s13WindowManager0aB21PreferencesControllerC22tilingSoftHotzoneDelaySdvg', 
                        '_$s13WindowManager0aB21PreferencesControllerC22tilingSoftHotzoneDelaySdvpMV', 
@@ -1052,6 +1048,10 @@ exports:
                        '_$s13WindowManager0aB21PreferencesControllerC25appIconHoverScaleDistanceSdvg', 
                        '_$s13WindowManager0aB21PreferencesControllerC25appIconHoverScaleDistanceSdvpMV', 
                        '_$s13WindowManager0aB21PreferencesControllerC25appIconHoverScaleDistanceSdvs', 
+                       '_$s13WindowManager0aB21PreferencesControllerC25enableTopTilingByEdgeDragSbvM', 
+                       '_$s13WindowManager0aB21PreferencesControllerC25enableTopTilingByEdgeDragSbvg', 
+                       '_$s13WindowManager0aB21PreferencesControllerC25enableTopTilingByEdgeDragSbvpMV', 
+                       '_$s13WindowManager0aB21PreferencesControllerC25enableTopTilingByEdgeDragSbvs', 
                        '_$s13WindowManager0aB21PreferencesControllerC25isSqueegeeGloballyEnabledSbvM', 
                        '_$s13WindowManager0aB21PreferencesControllerC25isSqueegeeGloballyEnabledSbvg', 
                        '_$s13WindowManager0aB21PreferencesControllerC25isSqueegeeGloballyEnabledSbvpMV', 
@@ -1635,6 +1635,14 @@ exports:
                        '_$s13WindowManager0abA14PickingSessionC0A0V12wantsOverlaySbvg', 
                        '_$s13WindowManager0abA14PickingSessionC0A0V12wantsOverlaySbvpMV', 
                        '_$s13WindowManager0abA14PickingSessionC0A0V12wantsOverlaySbvs', 
+                       '_$s13WindowManager0abA14PickingSessionC0A0V17lowerChildWindowsSayAEGvM', 
+                       '_$s13WindowManager0abA14PickingSessionC0A0V17lowerChildWindowsSayAEGvg', 
+                       '_$s13WindowManager0abA14PickingSessionC0A0V17lowerChildWindowsSayAEGvpMV', 
+                       '_$s13WindowManager0abA14PickingSessionC0A0V17lowerChildWindowsSayAEGvs', 
+                       '_$s13WindowManager0abA14PickingSessionC0A0V17upperChildWindowsSayAEGvM', 
+                       '_$s13WindowManager0abA14PickingSessionC0A0V17upperChildWindowsSayAEGvg', 
+                       '_$s13WindowManager0abA14PickingSessionC0A0V17upperChildWindowsSayAEGvpMV', 
+                       '_$s13WindowManager0abA14PickingSessionC0A0V17upperChildWindowsSayAEGvs', 
                        '_$s13WindowManager0abA14PickingSessionC0A0V2eeoiySbAE_AEtFZ', 
                        '_$s13WindowManager0abA14PickingSessionC0A0V4fromAEs7Decoder_p_tKcfC', 
                        '_$s13WindowManager0abA14PickingSessionC0A0V4sizeSo6CGSizeVvM', 
@@ -1650,7 +1658,7 @@ exports:
                        '_$s13WindowManager0abA14PickingSessionC0A0V8bundleIDSSSgvg', 
                        '_$s13WindowManager0abA14PickingSessionC0A0V8bundleIDSSSgvpMV', 
                        '_$s13WindowManager0abA14PickingSessionC0A0V8bundleIDSSSgvs', 
-                       '_$s13WindowManager0abA14PickingSessionC0A0V8windowID4size06bundleF05title0E5Level12wantsOverlayAEs6UInt32V_So6CGSizeVSSSgAPs5Int32VSbtcfC', 
+                       '_$s13WindowManager0abA14PickingSessionC0A0V8windowID4size06bundleF05title0E5Level12wantsOverlay17lowerChildWindows05uppernO0AEs6UInt32V_So6CGSizeVSSSgARs5Int32VSbSayAEGAUtcfC', 
                        '_$s13WindowManager0abA14PickingSessionC0A0V8windowIDs6UInt32VvM', 
                        '_$s13WindowManager0abA14PickingSessionC0A0V8windowIDs6UInt32Vvg', 
                        '_$s13WindowManager0abA14PickingSessionC0A0V8windowIDs6UInt32VvpMV', 

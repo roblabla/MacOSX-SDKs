@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/LoginUIKit'
-current-version: 370
+current-version: 370.1.1
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -159,11 +159,11 @@ exports:
                        LUIAuthenticationServiceProvider, LUIBackgroundView, LUIBattery, 
                        LUIBatteryStatusController, LUIBatteryView, LUIButton, LUIButtonCell, 
                        LUIButtonViewController, LUIClockTimer, LUIClockTimerClient, 
-                       LUIController, LUIEffectsButton, LUIFMMViewController, LUIFVUnlockUser, 
-                       LUIFocusRingView, LUIGoodSamaritanMessageView, LUIHiddenScroller, 
-                       LUIIMStatusController, LUIInfoStatusController, LUILogoViewController, 
-                       LUIManagedPrefs, LUIMemoji, LUIMessageViewController, LUIMutableBoolean, 
-                       LUINetworkStatus, LUIODTrigger, LUIPasswordChangePopover, 
+                       LUIController, LUIDebugUser, LUIDebugUserController, LUIEffectsButton, 
+                       LUIFMMViewController, LUIFVUnlockUser, LUIFocusRingView, LUIGoodSamaritanMessageView, 
+                       LUIHiddenScroller, LUIIMStatusController, LUIInfoStatusController, 
+                       LUILogoViewController, LUIManagedPrefs, LUIMemoji, LUIMessageViewController, 
+                       LUIMutableBoolean, LUINetworkStatus, LUIODTrigger, LUIPasswordChangePopover, 
                        LUIPasswordChangeViewController, LUIPasswordExpirationPopover, 
                        LUIPasswordExpirationViewController, LUIPasswordPolicyDetailsPopover, 
                        LUIPasswordPolicyDetailsViewController, LUIPasswordPolicySummaryPopover, 
@@ -217,7 +217,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
-current-version: 370
+current-version: 370.1.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _LUI2CButtonBack, _LUI2CButtonLogin, _LUICAvatarMask, _LUICAvatarOverlay, 

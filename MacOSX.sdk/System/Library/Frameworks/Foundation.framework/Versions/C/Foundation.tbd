@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation'
-current-version: 3038.1.255
+current-version: 3107
 compatibility-version: 300
 swift-abi-version: 7
 reexported-libraries:
@@ -28125,8 +28125,6 @@ exports:
                        '_$s10Foundation15_LocaleProtocolP30identifierCapturingPreferencesSSvgTq', 
                        '_$s10Foundation15_LocaleProtocolP32alternateQuotationBeginDelimiterSSSgvgTj', 
                        '_$s10Foundation15_LocaleProtocolP32alternateQuotationBeginDelimiterSSSgvgTq', 
-                       '_$s10Foundation15_LocaleProtocolP33doesNotRequireSpecialCaseHandlingSbvgTj', 
-                       '_$s10Foundation15_LocaleProtocolP33doesNotRequireSpecialCaseHandlingSbvgTq', 
                        '_$s10Foundation15_LocaleProtocolP4copy21newCalendarIdentifierAaB_pAA0F0V0G0O_tFTj', 
                        '_$s10Foundation15_LocaleProtocolP4copy21newCalendarIdentifierAaB_pAA0F0V0G0O_tFTq', 
                        '_$s10Foundation15_LocaleProtocolP4name5prefs21disableBundleMatchingxSSSg_AA0B11PreferencesVSbtcfCTj', 
@@ -28157,8 +28155,6 @@ exports:
                        '_$s10Foundation15_LocaleProtocolPAAE14isAutoupdatingSbvpMV', 
                        '_$s10Foundation15_LocaleProtocolPAAE16debugDescriptionSSvg', 
                        '_$s10Foundation15_LocaleProtocolPAAE16debugDescriptionSSvpMV', 
-                       '_$s10Foundation15_LocaleProtocolPAAE33doesNotRequireSpecialCaseHandlingSbvg', 
-                       '_$s10Foundation15_LocaleProtocolPAAE33doesNotRequireSpecialCaseHandlingSbvpMV', 
                        '_$s10Foundation15_LocaleProtocolPAAE9isBridgedSbvg', '_$s10Foundation15_LocaleProtocolPAAE9isBridgedSbvpMV', 
                        '_$s10Foundation15_LocaleProtocolPs28CustomDebugStringConvertibleTb', 
                        '_$s10Foundation15_LocaleProtocolTL', '_$s10Foundation16AttributedStringV10charactersAC13CharacterViewVvM', 

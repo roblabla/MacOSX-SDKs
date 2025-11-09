@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Photos.framework/Versions/A/Photos'
-current-version: 701.0.230
+current-version: 711.0.180
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -229,9 +229,10 @@ exports:
                        _PHImageResultIsDerivedFromDeferredPreviewKey, _PHImageResultIsInCloudKey, 
                        _PHImageResultIsPlaceholderKey, _PHImageResultRequestIDKey, 
                        _PHImageResultTimeRangeMapperKey, _PHImportConcurrencyLimit, 
-                       _PHImportDumpCGImageToURL, _PHImportErrorDomain, _PHImportErrorUserInfoMoreSpaceRequiredKey, 
-                       _PHInsertedLocalIdentifiersKey, _PHIsImageAssetResourceType, 
-                       _PHIsVideoAssetResourceType, _PHLearnMoreLinkErrorKey, _PHLibraryScopeExitStateDebugDescription, 
+                       _PHImportDispatchApply, _PHImportDumpCGImageToURL, _PHImportErrorDomain, 
+                       _PHImportErrorUserInfoMoreSpaceRequiredKey, _PHInsertedLocalIdentifiersKey, 
+                       _PHIsImageAssetResourceType, _PHIsVideoAssetResourceType, 
+                       _PHLearnMoreLinkErrorKey, _PHLibraryScopeExitStateDebugDescription, 
                        _PHLibraryScopeScopeSyncingIsActiveDefaultsKey, _PHLibraryScopeStatusCountsDidChangeNotification, 
                        _PHLivePhotoExportSessionInfoBundleURLKey, _PHLivePhotoExportSessionInfoErrorKey, 
                        _PHLivePhotoExportSessionInfoPhotoURLKey, _PHLivePhotoExportSessionInfoVideoURLKey, 
@@ -298,7 +299,8 @@ exports:
                        _PHSearchQueryOptionsEmbeddingRelevanceThresholdSpotlightDefaultValue, 
                        _PHSearchQueryOptionsMinNumberOfResultsForNextTokenGeneration, 
                        _PHSearchQueryOptionsSpotlightTimeoutSecondsDefaultValue, 
-                       _PHSearchQueryTripAttributeKey, _PHSearchSuggestionCategoriesTypeForPLSearchSuggestionCategoriesType, 
+                       _PHSearchQuerySortOrderAttributeKey, _PHSearchQueryTripAttributeKey, 
+                       _PHSearchSuggestionCategoriesTypeForPLSearchSuggestionCategoriesType, 
                        _PHServerGeneratedLocalizedDescriptionErrorKey, _PHShareParticipantPermissionDebugDescription, 
                        _PHSharePublishStateDebugDescription, _PHShareStatusDebugDescription, 
                        _PHShareTrashedStateDebugDescription, _PHShortDescriptionForPhotosHighlightCategory, 
@@ -456,7 +458,8 @@ exports:
                        PHImageRequest._imageResult, PHImageRequest._lock, PHImportAsset._source, 
                        PHImportAsset._strongSource, PHImportDeviceAsset._cameraFile, 
                        PHMediaRequest._configurationError, PHResourceChooserList._asset, 
-                       PHResourceChooserList._endOfListHandler, PHResourceChooserList._itemHandler ]
+                       PHResourceChooserList._endOfListHandler, PHResourceChooserList._itemHandler, 
+                       PHResourceChooserList._nonHintResourceInfos ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _PHLivePhotoEditingErrorDomain ]
   - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]

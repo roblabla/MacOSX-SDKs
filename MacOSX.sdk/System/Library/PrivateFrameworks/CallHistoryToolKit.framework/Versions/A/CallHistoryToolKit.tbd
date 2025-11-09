@@ -5,7 +5,9 @@ install-name:    '/System/Library/PrivateFrameworks/CallHistoryToolKit.framework
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s18CallHistoryToolKit06InsertA0V22ArgumentParserInternal15ParsableCommandAAMc', 
+    symbols:         [ '_$s10Foundation4DateV18CallHistoryToolKitE8argumentACSgSS_tcfC', 
+                       '_$s10Foundation4DateV22ArgumentParserInternal013ExpressibleByC018CallHistoryToolKitMc', 
+                       '_$s18CallHistoryToolKit06InsertA0V22ArgumentParserInternal15ParsableCommandAAMc', 
                        '_$s18CallHistoryToolKit06InsertA0V22ArgumentParserInternal17ParsableArgumentsAAMc', 
                        '_$s18CallHistoryToolKit06InsertA0V22ArgumentParserInternal20AsyncParsableCommandAAMc', 
                        '_$s18CallHistoryToolKit06InsertA0V3runyyYaKF', '_$s18CallHistoryToolKit06InsertA0V3runyyYaKFTu', 

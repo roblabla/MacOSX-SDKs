@@ -50,6 +50,7 @@ exports:
                        MMWebKitController._appleIDSession, MMWebKitController._authContext, 
                        MMWebKitController._delegateFlags, MMWebKitController._gsType, 
                        MMWebKitController._loadDelegate, MMWebKitController._loadingRequest, 
+                       MMWebKitController._oldPassword, MMWebKitController._password, 
                        MMWebKitController._setupResourceDelegate, MMWebKitController._webPreferences, 
                        MMWebKitController._webView, MMWebKitController.cdpStateUIController ]
 ...

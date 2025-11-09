@@ -5,33 +5,37 @@ install-name:    '/System/Library/PrivateFrameworks/UserNotificationsSettings.fr
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AppPredictionClient, AppPredictionInternal, AppProtection, 
-                       AppProtectionUI, AssistantSettingsFoundation, AssistantSettingsSupport, 
-                       CarPlay, CarPlaySettings, ChatKit, ClipServices, ClipViewServices, 
-                       DashBoard, DoNotDisturbServer, FocusSettingsUI, HeadphoneProxService, 
-                       HealthFeatures, HealthKit, HomePodSettingsDaemon, InstalledApps, 
-                       MessagesFlowDelegatePlugin, MessagesNotificationFiltering, 
-                       MobileMail, NanoSettingsGlance, NotificationsSettings, NotificationsSettingsIntents, 
-                       NotificationsSettingsSimulator, Preferences, SUIAKit, SUIATPTests, 
-                       SUICITests, SUISimulatorTests, SUITVTests, SUIWatchTests, 
-                       ScreenSharingKit, SharingViewService, SiriMessagesFlow, SiriSettingsIntents, 
+                       AppProtectionUI, AssistantSettingsFoundation, AssistantSettingsFoundationTests, 
+                       AssistantSettingsSupport, CarPlay, CarPlaySettings, ChatKit, 
+                       ClipServices, ClipViewServices, DashBoard, DoNotDisturbServer, 
+                       FocusSettingsUI, HeadphoneProxService, HealthFeatures, HealthKit, 
+                       HomePodSettingsDaemon, InstalledApps, Mail, MessagesFlowDelegatePlugin, 
+                       MessagesNotificationFiltering, MobileMail, NanoSettingsGlance, 
+                       NotificationsSettings, NotificationsSettingsIntents, NotificationsSettingsSimulator, 
+                       NotificationsUITool, Preferences, SUIAKit, SUIATPTests, SUICITests, 
+                       SUISimulatorTests, SUITVTests, SUIWatchTests, ScreenSharingKit, 
+                       SharingViewService, SiriMessagesFlow, SiriSettingsIntents, 
                        SiriUI, SoundBoard, SoundBoardFramework, UserNotificationsCore, 
-                       UserNotificationsCoreTests, UserNotificationsServer, UserNotificationsServicesTests, 
-                       UserNotificationsUIKit, assistantd, examplenotificationd, 
-                       untool, usernoted ]
+                       UserNotificationsCoreTests, UserNotificationsKit, UserNotificationsServer, 
+                       UserNotificationsServicesTests, UserNotificationsUIKit, assistantd, 
+                       examplenotificationd, untool, usernoted ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _UNUserNotificationSettingsServiceName, _UserNotificationsSettingsVersionNumber, 
-                       _UserNotificationsSettingsVersionString ]
+    symbols:         [ _UNNotificationSourceFilterDefault, _UNUserNotificationSettingsServiceName, 
+                       _UserNotificationsSettingsVersionNumber, _UserNotificationsSettingsVersionString, 
+                       __UNNotificationSourceFilterAll ]
     objc-classes:    [ UNMutableNotificationSystemSettings, UNNotificationMuteAssertion, 
                        UNNotificationSettingsCenter, UNNotificationSource, UNNotificationSourceMuteAssertion, 
                        UNNotificationSourceSettings, UNNotificationSystemSettings, 
                        UNNotificationThreadsMuteAssertion, UNNotificationTopicSettings, 
-                       UNUserNotificationSettingsService, UNUserNotificationSettingsServiceConnection ]
+                       UNSystemPreferencesServiceConnection, UNUserNotificationSettingsService, 
+                       UNUserNotificationSettingsServiceConnection ]
     objc-ivars:      [ UNNotificationSystemSettings._announcementCarPlaySetting, 
                        UNNotificationSystemSettings._announcementHeadphonesSetting, 
                        UNNotificationSystemSettings._announcementSetting, UNNotificationSystemSettings._modifiedSettings, 
                        UNNotificationSystemSettings._notificationListDisplayStyleSetting, 
                        UNNotificationSystemSettings._remoteNotificationsSetting, 
                        UNNotificationSystemSettings._scheduledDeliverySetting, UNNotificationSystemSettings._scheduledDeliveryShowNextSummarySetting, 
-                       UNNotificationSystemSettings._scheduledDeliveryTimes, UNNotificationSystemSettings._showPreviewsSetting ]
+                       UNNotificationSystemSettings._scheduledDeliveryTimes, UNNotificationSystemSettings._showPreviewsSetting, 
+                       UNNotificationSystemSettings._summarizationSetting ]
 ...

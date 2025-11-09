@@ -19,7 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class HKSampleType;
 @class HKSource;
 
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKQuery : NSObject
 
 @property (readonly, strong, nullable) HKObjectType *objectType API_AVAILABLE(ios(9.3), watchos(2.2), macCatalyst(13.0), macos(13.0));
@@ -279,7 +281,7 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
  @param         totalEnergyBurned   The value that the workout's totalEnergyBurned is being compared to. It is the right hand side of the
                                     expression. The unit for this value should be of type Energy.
  */
-+ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalEnergyBurned:(HKQuantity *)totalEnergyBurned API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierActiveEnergyBurned", ios(8.0, 18.0), watchos(2.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
++ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalEnergyBurned:(HKQuantity *)totalEnergyBurned API_DEPRECATED("Use predicateForWorkoutsWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierActiveEnergyBurned", ios(8.0, 18.0), watchos(2.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
 
 /*!
  @method        predicateForWorkoutsWithOperatorType:totalDistance:
@@ -290,7 +292,7 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
  @param         totalDistance   The value that the workout's totalEnergyBurned is being compared to. It is the right hand side of the
                                 expression. The unit for this value should be of type Distance.
  */
-+ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalDistance:(HKQuantity *)totalDistance API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for the desired distance type", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), macCatalyst(13.0, API_TO_BE_DEPRECATED), macos(13.0, API_TO_BE_DEPRECATED));
++ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalDistance:(HKQuantity *)totalDistance API_DEPRECATED("Use predicateForWorkoutsWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for the desired distance type", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), macCatalyst(13.0, API_TO_BE_DEPRECATED), macos(13.0, API_TO_BE_DEPRECATED));
 /*!
  @method        predicateForWorkoutsWithOperatorType:totalSwimmingStrokeCount:
  @abstract      Creates a predicate for use with HKQuery subclasses.
@@ -301,7 +303,7 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
                                             It is the right hand side of the expression. The unit for this value should
                                             be of type Count.
  */
-+ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalSwimmingStrokeCount:(HKQuantity *)totalSwimmingStrokeCount API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierSwimmingStrokeCount", ios(10.0, 18.0), watchos(3.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
++ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalSwimmingStrokeCount:(HKQuantity *)totalSwimmingStrokeCount API_DEPRECATED("Use predicateForWorkoutsWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierSwimmingStrokeCount", ios(10.0, 18.0), watchos(3.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
 
 /*!
  @method        predicateForWorkoutsWithOperatorType:totalFlightsClimbed:
@@ -313,7 +315,7 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
                                             It is the right hand side of the expression. The unit for this value should
                                             be of type Count.
  */
-+ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalFlightsClimbed:(HKQuantity *)totalFlightsClimbed API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierFlightsClimbed", ios(11.0, 18.0), watchos(4.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
++ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalFlightsClimbed:(HKQuantity *)totalFlightsClimbed API_DEPRECATED("Use predicateForWorkoutsWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierFlightsClimbed", ios(11.0, 18.0), watchos(4.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
 
 /*!
  @method        predicateForWorkoutsWithOperatorType:quantityType:sumQuantity:

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsMessagingOS.framework/Versions/A/PreviewsMessagingOS'
-current-version: 22.0.73
+current-version: 22.10.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1494,7 +1494,17 @@ exports:
                        '_$s19PreviewsMessagingOS19AppManagerInterfaceOAA09TransportF0AAMc', 
                        '_$s19PreviewsMessagingOS19AppManagerInterfaceOAA09TransportF0AAWP', 
                        '_$s19PreviewsMessagingOS19AppManagerInterfaceOMa', '_$s19PreviewsMessagingOS19AppManagerInterfaceOMn', 
-                       '_$s19PreviewsMessagingOS19AppManagerInterfaceON', '_$s19PreviewsMessagingOS19MessageSendingErrorO0a10FoundationC0013HumanReadableF0AAMc', 
+                       '_$s19PreviewsMessagingOS19AppManagerInterfaceON', '_$s19PreviewsMessagingOS19CapabilitiesPayloadV0a10FoundationC025PropertyListRepresentableAAMc', 
+                       '_$s19PreviewsMessagingOS19CapabilitiesPayloadV14isRunningInXTPSbvM', 
+                       '_$s19PreviewsMessagingOS19CapabilitiesPayloadV14isRunningInXTPSbvg', 
+                       '_$s19PreviewsMessagingOS19CapabilitiesPayloadV14isRunningInXTPSbvpMV', 
+                       '_$s19PreviewsMessagingOS19CapabilitiesPayloadV14isRunningInXTPSbvs', 
+                       '_$s19PreviewsMessagingOS19CapabilitiesPayloadV17propertyListValue0a10FoundationC008PropertyG0Vvg', 
+                       '_$s19PreviewsMessagingOS19CapabilitiesPayloadV17propertyListValue0a10FoundationC008PropertyG0VvpMV', 
+                       '_$s19PreviewsMessagingOS19CapabilitiesPayloadV17propertyListValueAC0a10FoundationC008PropertyG0V_tKcfC', 
+                       '_$s19PreviewsMessagingOS19CapabilitiesPayloadVACycfC', '_$s19PreviewsMessagingOS19CapabilitiesPayloadVMa', 
+                       '_$s19PreviewsMessagingOS19CapabilitiesPayloadVMn', '_$s19PreviewsMessagingOS19CapabilitiesPayloadVN', 
+                       '_$s19PreviewsMessagingOS19MessageSendingErrorO0a10FoundationC0013HumanReadableF0AAMc', 
                        '_$s19PreviewsMessagingOS19MessageSendingErrorO10Foundation09LocalizedF0AAMc', 
                        '_$s19PreviewsMessagingOS19MessageSendingErrorO13lowValueTitleSSSgvg', 
                        '_$s19PreviewsMessagingOS19MessageSendingErrorO13lowValueTitleSSSgvpMV', 

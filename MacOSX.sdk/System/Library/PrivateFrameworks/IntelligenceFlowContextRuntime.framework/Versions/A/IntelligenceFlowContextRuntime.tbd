@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligenceFlowContextRuntime.framework/Versions/A/IntelligenceFlowContextRuntime'
-current-version: 110.3
+current-version: 110.6
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -16,7 +16,7 @@ exports:
                        '_$s20IntelligencePlatform17CustomGraphPersonV0A18FlowContextRuntimeE7getName5usingSSSgAD16GroundableEntityO_tF', 
                        '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorV11entityTypes03maxF5CountACSgShy0abC0010DetectableF4TypeOG_SitcfC', 
                        '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorV11entityTypes03maxF5CountACSgShy0abC0010DetectableF4TypeOG_SitcfcfA0_', 
-                       '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorV14detectEntities4textSay0abC008DetectedF0OGSS_tKF', 
+                       '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorV14detectEntities4text11appBundleIdSay0abC008DetectedF0OGSS_SSSgtKF', 
                        '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorV17supportedEntitiesShy0abC0010DetectableF4TypeOGvg', 
                        '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorV17supportedEntitiesShy0abC0010DetectableF4TypeOGvpMV', 
                        '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorVAA04TextfH8ProtocolAAMc', 
@@ -25,7 +25,7 @@ exports:
                        '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorVMn', 
                        '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorVN', 
                        '_$s30IntelligenceFlowContextRuntime025NSDataDetectorBasedEntityF0V11entityTypesACSgShy0abC0010DetectableH4TypeOG_tcfC', 
-                       '_$s30IntelligenceFlowContextRuntime025NSDataDetectorBasedEntityF0V14detectEntities4textSay0abC008DetectedH0OGSS_tF', 
+                       '_$s30IntelligenceFlowContextRuntime025NSDataDetectorBasedEntityF0V14detectEntities4text11appBundleIdSay0abC008DetectedH0OGSS_SSSgtF', 
                        '_$s30IntelligenceFlowContextRuntime025NSDataDetectorBasedEntityF0V17supportedEntitiesShy0abC0010DetectableH4TypeOGvg', 
                        '_$s30IntelligenceFlowContextRuntime025NSDataDetectorBasedEntityF0V17supportedEntitiesShy0abC0010DetectableH4TypeOGvpMV', 
                        '_$s30IntelligenceFlowContextRuntime025NSDataDetectorBasedEntityF0V24extractAddressComponents4from0abC00jK0VSo20NSTextCheckingResultC_tF', 
@@ -99,8 +99,8 @@ exports:
                        '_$s30IntelligenceFlowContextRuntime16UIEntityDetectorC11entityTypesACShy0abC020DetectableEntityTypeOG_tcfCTj', 
                        '_$s30IntelligenceFlowContextRuntime16UIEntityDetectorC11entityTypesACShy0abC020DetectableEntityTypeOG_tcfCTq', 
                        '_$s30IntelligenceFlowContextRuntime16UIEntityDetectorC11entityTypesACShy0abC020DetectableEntityTypeOG_tcfc', 
-                       '_$s30IntelligenceFlowContextRuntime16UIEntityDetectorC14detectEntities4textSay0abC014DetectedEntityOGSS_tKFTj', 
-                       '_$s30IntelligenceFlowContextRuntime16UIEntityDetectorC14detectEntities4textSay0abC014DetectedEntityOGSS_tKFTq', 
+                       '_$s30IntelligenceFlowContextRuntime16UIEntityDetectorC14detectEntities4text11appBundleIdSay0abC014DetectedEntityOGSS_SSSgtKFTj', 
+                       '_$s30IntelligenceFlowContextRuntime16UIEntityDetectorC14detectEntities4text11appBundleIdSay0abC014DetectedEntityOGSS_SSSgtKFTq', 
                        '_$s30IntelligenceFlowContextRuntime16UIEntityDetectorC17supportedEntitiesShy0abC020DetectableEntityTypeOGvgTj', 
                        '_$s30IntelligenceFlowContextRuntime16UIEntityDetectorC17supportedEntitiesShy0abC020DetectableEntityTypeOGvgTq', 
                        '_$s30IntelligenceFlowContextRuntime16UIEntityDetectorC17supportedEntitiesShy0abC020DetectableEntityTypeOGvpMV', 
@@ -136,7 +136,7 @@ exports:
                        '_$s30IntelligenceFlowContextRuntime17KGEntityGroundingCfD', 
                        '_$s30IntelligenceFlowContextRuntime17KGEntityGroundingCfd', 
                        '_$s30IntelligenceFlowContextRuntime23BERTBasedEntityDetectorV11entityTypesACSgShy0abC0010DetectableF4TypeOG_tcfC', 
-                       '_$s30IntelligenceFlowContextRuntime23BERTBasedEntityDetectorV14detectEntities4textSay0abC008DetectedF0OGSS_tF', 
+                       '_$s30IntelligenceFlowContextRuntime23BERTBasedEntityDetectorV14detectEntities4text11appBundleIdSay0abC008DetectedF0OGSS_SSSgtF', 
                        '_$s30IntelligenceFlowContextRuntime23BERTBasedEntityDetectorV17supportedEntitiesShy0abC0010DetectableF4TypeOGvg', 
                        '_$s30IntelligenceFlowContextRuntime23BERTBasedEntityDetectorV17supportedEntitiesShy0abC0010DetectableF4TypeOGvpMV', 
                        '_$s30IntelligenceFlowContextRuntime23BERTBasedEntityDetectorVAA04TextfG8ProtocolAAMc', 
@@ -150,16 +150,16 @@ exports:
                        '_$s30IntelligenceFlowContextRuntime24UIEntityDetectorProtocolPAA010TextEntityfG0Tb', 
                        '_$s30IntelligenceFlowContextRuntime24UIEntityDetectorProtocolTL', 
                        '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolMp', 
-                       '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolP14detectEntities4textSay0abC008DetectedF0OGSS_tKFTj', 
-                       '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolP14detectEntities4textSay0abC008DetectedF0OGSS_tKFTq', 
+                       '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolP14detectEntities4text11appBundleIdSay0abC008DetectedF0OGSS_SSSgtKFTj', 
+                       '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolP14detectEntities4text11appBundleIdSay0abC008DetectedF0OGSS_SSSgtKFTq', 
                        '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolP17supportedEntitiesShy0abC0010DetectableF4TypeOGvgTj', 
                        '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolP17supportedEntitiesShy0abC0010DetectableF4TypeOGvgTq', 
-                       '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolP25detectEntitiesWithLogging4textSay0abC008DetectedF0OGSS_tKFTj', 
-                       '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolP25detectEntitiesWithLogging4textSay0abC008DetectedF0OGSS_tKFTq', 
-                       '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolPAAE25detectEntitiesWithLogging4textSay0abC008DetectedF0OGSS_tKF', 
+                       '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolP25detectEntitiesWithLogging4text11appBundleIdSay0abC008DetectedF0OGSS_SSSgtKFTj', 
+                       '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolP25detectEntitiesWithLogging4text11appBundleIdSay0abC008DetectedF0OGSS_SSSgtKFTq', 
+                       '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolPAAE25detectEntitiesWithLogging4text11appBundleIdSay0abC008DetectedF0OGSS_SSSgtKF', 
                        '_$s30IntelligenceFlowContextRuntime26TextEntityDetectorProtocolTL', 
                        '_$s30IntelligenceFlowContextRuntime27NLTaggerBasedEntityDetectorV11entityTypesACSgShy0abC0010DetectableG4TypeOG_tcfC', 
-                       '_$s30IntelligenceFlowContextRuntime27NLTaggerBasedEntityDetectorV14detectEntities4textSay0abC008DetectedG0OGSS_tF', 
+                       '_$s30IntelligenceFlowContextRuntime27NLTaggerBasedEntityDetectorV14detectEntities4text11appBundleIdSay0abC008DetectedG0OGSS_SSSgtF', 
                        '_$s30IntelligenceFlowContextRuntime27NLTaggerBasedEntityDetectorV17supportedEntitiesShy0abC0010DetectableG4TypeOGvM', 
                        '_$s30IntelligenceFlowContextRuntime27NLTaggerBasedEntityDetectorV17supportedEntitiesShy0abC0010DetectableG4TypeOGvg', 
                        '_$s30IntelligenceFlowContextRuntime27NLTaggerBasedEntityDetectorV17supportedEntitiesShy0abC0010DetectableG4TypeOGvpMV', 

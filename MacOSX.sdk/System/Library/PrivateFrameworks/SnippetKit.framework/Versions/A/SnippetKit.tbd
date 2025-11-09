@@ -9,6 +9,8 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation3URLV10SnippetKit10RedactableADMc', '_$s10Foundation3URLV10SnippetKit10RedactableADWP', 
                        '_$s10Foundation3URLV10SnippetKitE8redactedACvg', '_$s10Foundation3URLV10SnippetKitE8redactedACvpMV', 
+                       '_$s10Foundation4DataV10SnippetKit10RedactableADMc', '_$s10Foundation4DataV10SnippetKit10RedactableADWP', 
+                       '_$s10Foundation4DataV10SnippetKitE8redactedACvg', '_$s10Foundation4DataV10SnippetKitE8redactedACvpMV', 
                        '_$s10Foundation4UUIDV10SnippetKit10RedactableADMc', '_$s10Foundation4UUIDV10SnippetKit10RedactableADWP', 
                        '_$s10Foundation4UUIDV10SnippetKitE8redactedACvg', '_$s10Foundation4UUIDV10SnippetKitE8redactedACvpMV', 
                        '_$s10SnippetKit0A11PluginModelMp', '_$s10SnippetKit0A11PluginModelP10bundleNameSSvgZTj', 

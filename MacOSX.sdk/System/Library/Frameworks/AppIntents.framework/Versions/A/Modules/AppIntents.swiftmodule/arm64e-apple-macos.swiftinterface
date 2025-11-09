@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-macos15.0 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 210.5.0.6.2 -module-name AppIntents
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-macos15.1 -target-variant arm64e-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 210.13.0.1 -module-name AppIntents
 @_exported import AppIntents
 import CoreGraphics
 import CoreLocation
@@ -741,7 +741,7 @@ extension AppIntents.AssistantSchemas.ReaderIntent {
   @_alwaysEmitIntoClient public var openDocument: some AppIntents.AssistantSchemas.Intent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.IntentSchema("ReaderOpenWordProcessorDocumentIntent")
+            return AssistantSchema.IntentSchema("ReaderOpenDocumentsIntent")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -1114,7 +1114,7 @@ extension AppIntents.AssistantSchemas.PresentationIntent {
   @_alwaysEmitIntoClient public var setSlideTitle: some AppIntents.AssistantSchemas.Intent {
     get {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            return AssistantSchema.IntentSchema("SetTitlePresentationSlideIntent")
+            return AssistantSchema.IntentSchema("UpdatePresentationSlideIntent")
         } else {
             fatalError("Do not reference schema types directly")
         }
@@ -2374,13 +2374,13 @@ public enum IntentWidgetFamily : AppIntents._IntentValue {
   public static func == (a: AppIntents.IntentWidgetFamily, b: AppIntents.IntentWidgetFamily) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 17.0, watchOS 10.0, macOS 14.0, *)
-  @available(tvOS, unavailable, introduced: 16.0)
+  @available(tvOS, unavailable)
   public typealias Specification = AppIntents.EmptyResolverSpecification<AppIntents.IntentWidgetFamily>
   @available(iOS 17.0, watchOS 10.0, macOS 14.0, *)
-  @available(tvOS, unavailable, introduced: 16.0)
+  @available(tvOS, unavailable)
   public typealias UnwrappedType = AppIntents.IntentWidgetFamily
   @available(iOS 17.0, watchOS 10.0, macOS 14.0, *)
-  @available(tvOS, unavailable, introduced: 16.0)
+  @available(tvOS, unavailable)
   public typealias ValueType = AppIntents.IntentWidgetFamily
   public var hashValue: Swift.Int {
     get
@@ -4941,10 +4941,8 @@ extension Foundation.NSNull : AppIntents._IntentValue {
     public func resolve(from input: Foundation.NSNull, context: AppIntents.IntentParameterContext<Foundation.NSNull>) async throws -> Foundation.NSNull?
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.NSNull.NullResolver, b: Foundation.NSNull.NullResolver) -> Swift.Bool
-    @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
     @available(*, unavailable)
     public typealias Input = Foundation.NSNull
-    @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
     @available(*, unavailable)
     public typealias Output = Foundation.NSNull
     public var hashValue: Swift.Int {
@@ -4954,13 +4952,10 @@ extension Foundation.NSNull : AppIntents._IntentValue {
   public static var defaultResolverSpecification: some AppIntents.ResolverSpecification {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   @available(*, unavailable)
   public typealias Specification = @_opaqueReturnTypeOf("$sSo6NSNullC10AppIntentsE28defaultResolverSpecificationQrvpZ", 0) __
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   @available(*, unavailable)
   public typealias UnwrappedType = Foundation.NSNull
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   @available(*, unavailable)
   public typealias ValueType = Foundation.NSNull
 }
@@ -5285,11 +5280,11 @@ final public class AppDependencyManager {
   }
   public init()
   @_silgen_name("$s10AppIntents0A17DependencyManagerC3add3key10dependencyys11AnyHashableVSg_xyXAts8SendableRzlF")
-  final public func add<Dependency>(key: Swift.AnyHashable? = nil, dependency dependencyProvider: @autoclosure @escaping () -> Dependency) where Dependency : Swift.Sendable
+  final public func add<Dependency>(key: Swift.AnyHashable? = nil, dependency dependencyProvider: @autoclosure @escaping @Sendable () -> Dependency) where Dependency : Swift.Sendable
   @_silgen_name("$s10AppIntents0A17DependencyManagerC3add3key10dependencyys11AnyHashableVSg_xyKcyXAts8SendableRzlF")
-  final public func add<Dependency>(key: Swift.AnyHashable? = nil, dependency dependencyProvider: @autoclosure @escaping () -> () throws -> Dependency) where Dependency : Swift.Sendable
+  final public func add<Dependency>(key: Swift.AnyHashable? = nil, dependency dependencyProvider: @autoclosure @escaping () -> @Sendable () throws -> Dependency) where Dependency : Swift.Sendable
   @_silgen_name("$s10AppIntents0A17DependencyManagerC3add3key10dependencyys11AnyHashableVSg_xyYaKcts8SendableRzlF")
-  final public func add<Dependency>(key: Swift.AnyHashable? = nil, dependency dependencyProvider: @escaping () async throws -> Dependency) where Dependency : Swift.Sendable
+  final public func add<Dependency>(key: Swift.AnyHashable? = nil, dependency dependencyProvider: @escaping @Sendable () async throws -> Dependency) where Dependency : Swift.Sendable
   @objc deinit
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)

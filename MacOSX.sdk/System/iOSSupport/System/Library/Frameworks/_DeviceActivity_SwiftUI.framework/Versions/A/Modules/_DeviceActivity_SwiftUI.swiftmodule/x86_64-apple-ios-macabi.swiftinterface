@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 376.1 -module-name _DeviceActivity_SwiftUI
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target x86_64-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 377.1.2 -module-name _DeviceActivity_SwiftUI
 @_exported import DeviceActivity
 import ExtensionFoundation
 import ExtensionKit
@@ -34,8 +34,8 @@ import os
     get
   }
   @available(iOS 16.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @available(macOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s23_DeviceActivity_SwiftUI0aB6ReportV4bodyQrvp", 0) __
 }
@@ -167,8 +167,8 @@ public struct DeviceActivityResults<Element> : _Concurrency.AsyncSequence {
   @_hasMissingDesignatedInitializers public class Iterator<IteratorElement> : _Concurrency.AsyncIteratorProtocol {
     public func next() async -> IteratorElement?
     @available(iOS 16.0, *)
-    @available(tvOS, unavailable, introduced: 13.0)
-    @available(watchOS, unavailable, introduced: 6.0)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
     @available(macOS, unavailable)
     public typealias Element = IteratorElement
     #if compiler(>=5.3) && $AssociatedTypeImplements
@@ -185,8 +185,8 @@ public struct DeviceActivityResults<Element> : _Concurrency.AsyncSequence {
     @objc deinit
   }
   @available(iOS 16.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @available(macOS, unavailable)
   public typealias AsyncIterator = _DeviceActivity_SwiftUI.DeviceActivityResults<Element>.Iterator<Element>
   #if compiler(>=5.3) && $AssociatedTypeImplements

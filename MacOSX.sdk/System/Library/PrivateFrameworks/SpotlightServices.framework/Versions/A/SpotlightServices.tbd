@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightServices.framework/Versions/A/SpotlightServices'
-current-version: 2313.7
+current-version: 2314.10.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -86,9 +86,9 @@ exports:
                        _PRSRankingMostlyExactMultiFieldsDomainTCMatch, _PRSRankingMostlyExactMultiFieldsTCMatch, 
                        _PRSRankingMostlyExactMultiFieldsTCNearMatch, _PRSRankingMusicBundleString, 
                        _PRSRankingNewsBundleString, _PRSRankingNotesBundleString, 
-                       _PRSRankingNumbersBundleString, _PRSRankingOneTermMultiPhraseTCExactNearMatch, 
-                       _PRSRankingOneTermMultiPhraseTCExactOrderedMatch, _PRSRankingOneTermMultiPhraseTCExactOrderedPhraseMatch, 
-                       _PRSRankingOneTermMultiPhraseTCMostlyExactOrderedPhraseMatch, 
+                       _PRSRankingNotificationsBundleString, _PRSRankingNumbersBundleString, 
+                       _PRSRankingOneTermMultiPhraseTCExactNearMatch, _PRSRankingOneTermMultiPhraseTCExactOrderedMatch, 
+                       _PRSRankingOneTermMultiPhraseTCExactOrderedPhraseMatch, _PRSRankingOneTermMultiPhraseTCMostlyExactOrderedPhraseMatch, 
                        _PRSRankingOneTwoTermsMultiPhraseTCNearMatch, _PRSRankingOneTwoTermsMultiPhraseTCOrderedMatch, 
                        _PRSRankingOneTwoTermsMultiPhraseTCOrderedPhraseMatch, _PRSRankingOtherBundleString, 
                        _PRSRankingPDFBundleString, _PRSRankingParsecAlbumBundleString, 
@@ -227,7 +227,7 @@ exports:
                        _SSExtraApplicationKeywords, _SSExtraApplicationVersion, _SSFaceTimeBundleIdentifier, 
                        _SSFetchAttributeValueIsValid, _SSFinanceTransactionContentType, 
                        _SSFreeFormBundleIdentifier, _SSGeneralLog, _SSGetCurrentLocale, 
-                       _SSGetDisabledBundleSet, _SSIgnoreMaxCountForSingleSuggestionsType, 
+                       _SSHiddenStatusForBundleIDWithCompletionHandler, _SSIgnoreMaxCountForSingleSuggestionsType, 
                        _SSInitLogging, _SSInitNSUserDefaultsForTesting, _SSIntentModelingEnabledDesktop, 
                        _SSIntentModelingEnabledMobile, _SSIntentModelingLocalSuggestionQuotaBaseline, 
                        _SSIntentModelingLocalSuggestionQuotaLocal, _SSIntentModelingLocalSuggestionQuotaLocalStrong, 
@@ -280,14 +280,14 @@ exports:
                        _SSSectionIdentifierApps, _SSSectionIdentifierBlendedWeb, 
                        _SSSectionIdentifierCalculation, _SSSectionIdentifierKG, _SSSectionIdentifierMaps, 
                        _SSSectionIdentifierMovies, _SSSectionIdentifierNotes, _SSSectionIdentifierParsecDictionary, 
-                       _SSSectionIdentifierParsecNews, _SSSectionIdentifierParsecWeather, 
-                       _SSSectionIdentifierParsecWebAnswersPassage, _SSSectionIdentifierParsecWebImages, 
-                       _SSSectionIdentifierPeopleResults, _SSSectionIdentifierPeopleSuggestions, 
-                       _SSSectionIdentifierRecentDictionaryResults, _SSSectionIdentifierRecentResults, 
-                       _SSSectionIdentifierRecentSuggestions, _SSSectionIdentifierRelatedSearch, 
-                       _SSSectionIdentifierReminders, _SSSectionIdentifierSearchThroughSuggestions, 
-                       _SSSectionIdentifierServerRelatedSuggestions, _SSSectionIdentifierSports, 
-                       _SSSectionIdentifierStocks, _SSSectionIdentifierSuggestions, 
+                       _SSSectionIdentifierParsecFlights, _SSSectionIdentifierParsecNews, 
+                       _SSSectionIdentifierParsecWeather, _SSSectionIdentifierParsecWebAnswersPassage, 
+                       _SSSectionIdentifierParsecWebImages, _SSSectionIdentifierPeopleResults, 
+                       _SSSectionIdentifierPeopleSuggestions, _SSSectionIdentifierRecentDictionaryResults, 
+                       _SSSectionIdentifierRecentResults, _SSSectionIdentifierRecentSuggestions, 
+                       _SSSectionIdentifierRelatedSearch, _SSSectionIdentifierReminders, 
+                       _SSSectionIdentifierSearchThroughSuggestions, _SSSectionIdentifierServerRelatedSuggestions, 
+                       _SSSectionIdentifierSports, _SSSectionIdentifierStocks, _SSSectionIdentifierSuggestions, 
                        _SSSectionIdentifierSyndicatedLinks, _SSSectionIdentifierSyndicatedPhotos, 
                        _SSSectionIdentifierSyndicatedPhotosFiles, _SSSectionIdentifierSyndicatedPhotosFromPhotos, 
                        _SSSectionIdentifierSyndicatedPhotosMessages, _SSSectionIdentifierSyndicatedPhotosNotes, 

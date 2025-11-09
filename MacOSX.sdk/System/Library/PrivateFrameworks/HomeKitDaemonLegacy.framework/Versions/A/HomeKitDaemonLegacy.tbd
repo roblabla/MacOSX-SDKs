@@ -2,11 +2,31 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitDaemonLegacy.framework/Versions/A/HomeKitDaemonLegacy'
-current-version: 1203.1.7
+current-version: 1215.2.15
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s19HomeKitDaemonLegacy13InterfaceInfoV4name4type6hwAddrACSS_S2StcfC', 
+    symbols:         [ '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C09hasActiveG0Sbvg', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C09hasActiveG0SbvgTq', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C09hasActiveG0SbvpMV', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C11lockedState33_1E68703D9DFE16E3D281A01CAA2460DDLL15Synchronization5MutexVyAC06LockedI0AELLVGvpfi', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C17messageDispatcher0H10TargetUUID0H12ReceiveQueue16accessoryBrowser17logEventSubmitterACSo010HMFMessageI0C_10Foundation0K0VSo17OS_dispatch_queueCSo012HMDAccessoryO8Protocol_pSo06HMMLogQ10Submitting_ptcfC', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C17messageDispatcher0H10TargetUUID0H12ReceiveQueue16accessoryBrowser17logEventSubmitterACSo010HMFMessageI0C_10Foundation0K0VSo17OS_dispatch_queueCSo012HMDAccessoryO8Protocol_pSo06HMMLogQ10Submitting_ptcfc', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C17messageTargetUUID10Foundation0J0Vvg', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C17messageTargetUUID10Foundation0J0VvpMV', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C17messageTargetUUID10Foundation0J0VvpWvd', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C19messageReceiveQueueSo17OS_dispatch_queueCvg', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C19messageReceiveQueueSo17OS_dispatch_queueCvpMV', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C19messageReceiveQueueSo17OS_dispatch_queueCvpWvd', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C9configureyyF', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0C9configureyyFTq', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0CACycfC', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0CACycfc', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0CMa', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0CMn', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0CN', 
+                       '_$s19HomeKitDaemonLegacy0a27ManagerXPCClientConnectionsE0CfD', 
+                       '_$s19HomeKitDaemonLegacy13InterfaceInfoV4name4type6hwAddrACSS_S2StcfC', 
                        '_$s19HomeKitDaemonLegacy13InterfaceInfoVMa', '_$s19HomeKitDaemonLegacy13InterfaceInfoVMn', 
                        '_$s19HomeKitDaemonLegacy13InterfaceInfoVN', '_$s19HomeKitDaemonLegacy19DiscoveryControllerC02isE8AssertedSbvpfi', 
                        '_$s19HomeKitDaemonLegacy19DiscoveryControllerC10assertions2os21OSAllocatedUnfairLockVyShyAA15AssertionHandleC0L0CGGvpfi', 
@@ -105,6 +125,9 @@ exports:
                        '_$s19HomeKitDaemonLegacy7AccountC14ChangeObserverCN', '_$s19HomeKitDaemonLegacy7AccountC14ChangeObserverCfD', 
                        '_$s19HomeKitDaemonLegacy7AccountCMa', '_$s19HomeKitDaemonLegacy7AccountCMn', 
                        '_$s19HomeKitDaemonLegacy7AccountCN', '_$s19HomeKitDaemonLegacy7AccountCfD', 
+                       '_$sSo034HMDHomeManagerXPCClientConnectionsB7FactoryC19HomeKitDaemonLegacyEABycfC', 
+                       '_$sSo034HMDHomeManagerXPCClientConnectionsB7FactoryC19HomeKitDaemonLegacyEABycfc', 
+                       '_$sSo034HMDHomeManagerXPCClientConnectionsB7FactoryCMa', 
                        '_$sSo13HMDTTRManagerC19HomeKitDaemonLegacyE13defaultFilterSo015HMMRadarRequestG0_pvgZ', 
                        '_$sSo14HMDHomeManagerC19HomeKitDaemonLegacyE18networkDetectQuerySay10Foundation4UUIDVGyYaF', 
                        '_$sSo14HMDHomeManagerC19HomeKitDaemonLegacyE18networkDetectQuerySay10Foundation4UUIDVGyYaFTu', 
@@ -118,7 +141,8 @@ exports:
                        '_$sSo33HMDAccessorySetupMetricDispatcherC19HomeKitDaemonLegacyE24obtainDiscoveryAssertionyXlyF', 
                        '_$sSo33HMDAccessorySetupMetricDispatcherC19HomeKitDaemonLegacyE25releaseDiscoveryAssertion15assertionHandleyyXl_tF' ]
     objc-classes:    [ HMDAccessoryInfoFetchController, HMDAccountChangeObserver, 
-                       HMDDiscoveryController, HMDMainDriver, HMDNetworkInfoController, 
-                       _TtC19HomeKitDaemonLegacy32HMDWidgetMonitoredCharacteristic, 
+                       HMDDiscoveryController, HMDHomeManagerXPCClientConnectionsManagerFactory, 
+                       HMDMainDriver, HMDNetworkInfoController, _TtC19HomeKitDaemonLegacy32HMDWidgetMonitoredCharacteristic, 
+                       _TtC19HomeKitDaemonLegacy38HomeManagerXPCClientConnectionsManager, 
                        _TtC19HomeKitDaemonLegacy7Account ]
 ...

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-macos15.0 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2566 -module-name AppKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-macos15.1 -target-variant arm64e-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2575.20.19 -module-name AppKit
 @_exported import Accessibility
 @_exported import AppKit
 import Cocoa
@@ -721,7 +721,7 @@ extension AppKit.NSImage : CoreTransferable.Transferable {
   public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, *)
+  @available(macOS 14.0, *)
   public typealias Representation = @_opaqueReturnTypeOf("$sSo7NSImageC6AppKitE22transferRepresentationQrvpZ", 0) __
 }
 @available(macOS 14.0, *)
@@ -729,7 +729,7 @@ extension AppKit.NSSound : CoreTransferable.Transferable {
   public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, *)
+  @available(macOS 14.0, *)
   public typealias Representation = @_opaqueReturnTypeOf("$sSo7NSSoundC6AppKitE22transferRepresentationQrvpZ", 0) __
 }
 extension AppKit.NSTextField {
@@ -1491,7 +1491,7 @@ extension AppKit.NSColor : CoreTransferable.Transferable {
   public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, *)
+  @available(macOS 14.0, *)
   public typealias Representation = @_opaqueReturnTypeOf("$sSo7NSColorC6AppKitE22transferRepresentationQrvpZ", 0) __
 }
 @available(macCatalyst 18.0, macOS 15.0, *)

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target x86_64-apple-macos15.0 -target-variant x86_64-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-upcoming-feature InferSendableFromCaptures -enable-bare-slash-regex -user-module-version 3038.1.403 -module-name Foundation -package-name "\"FoundationPreview\""
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target x86_64-apple-macos15.1 -target-variant x86_64-apple-ios18.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-upcoming-feature InferSendableFromCaptures -enable-bare-slash-regex -user-module-version 3107 -module-name Foundation -package-name "\"FoundationPreview\""
 import Combine
 import CoreFoundation
 import Darwin
@@ -8593,7 +8593,7 @@ extension Dispatch.DispatchData : Foundation.DataProtocol {
     public typealias Indices = Swift.Range<Dispatch.DispatchData.Index>
     @available(iOS 2.0, tvOS 9.0, watchOS 1.0, macOS 10.0, *)
     public typealias Iterator = Swift.IndexingIterator<Dispatch.DispatchData.Region>
-    @available(iOS 8.0, tvOS 9.0, watchOS 2.0, macOS 10.10, *)
+    @available(iOS 2.0, tvOS 9.0, watchOS 1.0, macOS 10.0, *)
     public typealias Regions = Swift.CollectionOfOne<Dispatch.DispatchData.Region>
     @available(iOS 2.0, tvOS 9.0, watchOS 1.0, macOS 10.0, *)
     public typealias SubSequence = Swift.Slice<Dispatch.DispatchData.Region>
@@ -8601,7 +8601,7 @@ extension Dispatch.DispatchData : Foundation.DataProtocol {
   public var regions: [Dispatch.DispatchData.Region] {
     get
   }
-  @available(iOS 8.0, tvOS 9.0, watchOS 2.0, macOS 10.10, *)
+  @available(iOS 2.0, tvOS 9.0, watchOS 1.0, macOS 10.0, *)
   public typealias Regions = [Dispatch.DispatchData.Region]
 }
 @available(macOS 10.10, iOS 8.0, tvOS 9.0, watchOS 2.0, *)

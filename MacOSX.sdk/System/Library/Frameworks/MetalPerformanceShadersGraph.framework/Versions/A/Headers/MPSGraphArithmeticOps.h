@@ -110,7 +110,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 -(MPSGraphTensor *) reciprocalSquareRootWithTensor:(MPSGraphTensor *) tensor
                                               name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( reciprocalSquareRoot(_:name:) )
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0));
 
 /// Applies the reverse square root operation to the input tensor elements.
 ///
@@ -123,7 +123,7 @@ MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xr
 -(MPSGraphTensor *) reverseSquareRootWithTensor:(MPSGraphTensor *) tensor
                                            name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING_BUT_DEPRECATED("reciprocalSquareRootWithTensor",
-                                      macos(11.0, 15.0), ios(14.0, 18.0), tvos(14.0, 18.0), xros(1.0, 2.0));
+                                      macos(11.0, 15.0), ios(14.0, 18.0), tvos(14.0, 18.0));
 
 /// Applies the reciprocal operation to the input tensor elements.
 ///

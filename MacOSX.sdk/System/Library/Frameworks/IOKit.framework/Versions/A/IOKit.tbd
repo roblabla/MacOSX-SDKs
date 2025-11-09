@@ -475,10 +475,10 @@ exports:
                        _IOPMSetAssertionActivityAggregate, _IOPMSetAssertionActivityLog, 
                        _IOPMSetAssertionExceptionLimits, _IOPMSetBTWakeInterval, 
                        _IOPMSetDWLingerInterval, _IOPMSetDebugFlags, _IOPMSetDesktopMode, 
-                       _IOPMSetDesktopModeWithOptions, _IOPMSetPMPreference, _IOPMSetPMPreferences, 
-                       _IOPMSetReservePowerMode, _IOPMSetSleepServicesWakeTimeCap, 
-                       _IOPMSetSystemAssertionTimeout, _IOPMSetSystemPowerSetting, 
-                       _IOPMSetUPSShutdownLevels, _IOPMSetUserActivityIdleTimeout, 
+                       _IOPMSetDesktopModeWithOptions, _IOPMSetEnergyModePreference, 
+                       _IOPMSetPMPreference, _IOPMSetPMPreferences, _IOPMSetReservePowerMode, 
+                       _IOPMSetSleepServicesWakeTimeCap, _IOPMSetSystemAssertionTimeout, 
+                       _IOPMSetSystemPowerSetting, _IOPMSetUPSShutdownLevels, _IOPMSetUserActivityIdleTimeout, 
                        _IOPMSetValueInt, _IOPMSkylightCheckIn, _IOPMSkylightCheckInWithCapability, 
                        _IOPMSleepEnabled, _IOPMSleepSystem, _IOPMSleepSystemWithOptions, 
                        _IOPMSleepWakeCopyUUID, _IOPMSleepWakeSetUUID, _IOPMUnregisterExceptionNotification, 
@@ -918,7 +918,7 @@ exports:
                        _roundPageCrossSafeFixedWidth, _sendAsyncAssertionMsg, _sendAsyncReleaseMsg, 
                        _sendUserActivityMsg, _setAsyncAssertionProperties, _setCrossLinkPageSize, 
                        _setDispatchQueue, _setPreferencesForSrc, _setupLogging, _shimmingEnabled, 
-                       _showPList_new, _smcSupportsSilentRunning ]
+                       _showPList_new, _smcSupportsHPM, _smcSupportsSilentRunning ]
     objc-classes:    [ HIDConnection, HIDDevice, HIDElement, HIDEvent, HIDEventService, 
                        HIDServiceClient, HIDSession ]
     objc-ivars:      [ HIDConnection._connection, HIDDevice._device, HIDElement._element, 

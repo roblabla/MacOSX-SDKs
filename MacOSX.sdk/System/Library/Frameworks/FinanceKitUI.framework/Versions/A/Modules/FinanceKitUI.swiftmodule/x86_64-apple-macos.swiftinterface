@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target x86_64-apple-macos15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 223 -module-name FinanceKitUI
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target x86_64-apple-macos15.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 224.1.6 -module-name FinanceKitUI
 import DeveloperToolsSupport
 import ExtensionKit
 import FinanceKit
@@ -47,7 +47,7 @@ public protocol FinancialConnectionUIExtensionScene : ExtensionKit.AppExtensionS
     get
   }
   @available(iOS 17, *)
-  @available(tvOS, unavailable, introduced: 16.0)
+  @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   @available(macOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s12FinanceKitUI48FinancialConnectionUIExtensionAuthorizationSceneV4bodyQrvp", 0) __<Content>
@@ -69,9 +69,9 @@ public protocol FinancialConnectionUIExtensionProviding {
     get
   }
   @available(iOS 17, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s12FinanceKitUI22AddOrderToWalletButtonV4bodyQrvp", 0) __
 }
 @available(iOS 17, *)

@@ -5,6 +5,8 @@
 //  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKQuery.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -17,7 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract      A concrete subclass of HKQuery that provides an interface to retrieve documents from the Health store.
  
  */
-HK_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(13.0))
 @interface HKDocumentQuery : HKQuery
 
 /*!
@@ -68,7 +72,7 @@ HK_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(13.0))
                                limit:(NSUInteger)limit
                      sortDescriptors:(nullable NSArray<NSSortDescriptor *> *)sortDescriptors
                  includeDocumentData:(BOOL)includeDocumentData
-                      resultsHandler:(void(^)(HKDocumentQuery *query,
+                      resultsHandler:(void(^NS_SWIFT_SENDABLE)(HKDocumentQuery *query,
                                               NSArray<__kindof HKDocumentSample *> * _Nullable results,
                                               BOOL done,
                                               NSError * _Nullable error))resultsHandler;

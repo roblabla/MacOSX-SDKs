@@ -5,6 +5,7 @@
 //  Copyright (c) 2014-2022 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -48,7 +49,9 @@ typedef NS_OPTIONS(NSUInteger, HKStatisticsOptions) {
  @class         HKStatistics
  @abstract      Represents statistics for quantity samples over a period of time.
  */
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKStatistics : NSObject <NSSecureCoding, NSCopying>
 
 @property (readonly, strong) HKQuantityType *quantityType;

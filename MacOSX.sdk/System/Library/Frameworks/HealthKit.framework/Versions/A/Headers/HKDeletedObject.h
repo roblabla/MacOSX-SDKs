@@ -5,6 +5,7 @@
 //  Copyright (c) 2015-2022 Apple. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -13,7 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
  @class         HKDeletedObject
  @abstract      A class representing an HKObject that was deleted from the HealtKit database.
  */
-HK_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKDeletedObject : NSObject <NSSecureCoding>
 
 /*!

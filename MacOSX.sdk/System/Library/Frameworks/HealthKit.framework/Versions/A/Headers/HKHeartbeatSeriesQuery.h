@@ -5,6 +5,8 @@
 //  Copyright © 2018-2022 Apple. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKQuery.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -17,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion    Once instantiated, call HKHealthStore executeQuery to begin enumerating the heartbeat series data.
  */
 HK_EXTERN
+NS_SWIFT_SENDABLE
 #if defined(__swift__) && __swift__
 API_DEPRECATED("Use HKHeartbeatSeriesQueryDescriptor", ios(13.0, API_TO_BE_DEPRECATED), watchos(6.0, API_TO_BE_DEPRECATED));
 #else
@@ -37,7 +40,7 @@ API_AVAILABLE(ios(13.0), watchos(6.0), macCatalyst(13.0), macos(13.0))
                                    or stopQuery called, the query is complete and no more calls to the handler will be made.
  */
 - (instancetype)initWithHeartbeatSeries:(HKHeartbeatSeriesSample *)heartbeatSeries
-                            dataHandler:(void(^)(HKHeartbeatSeriesQuery *query, NSTimeInterval timeSinceSeriesStart, BOOL precededByGap, BOOL done, NSError * _Nullable error))dataHandler NS_DESIGNATED_INITIALIZER;
+                            dataHandler:(void(^NS_SWIFT_SENDABLE)(HKHeartbeatSeriesQuery *query, NSTimeInterval timeSinceSeriesStart, BOOL precededByGap, BOOL done, NSError * _Nullable error))dataHandler NS_DESIGNATED_INITIALIZER;
 
 @end
 

@@ -411,6 +411,7 @@ exports:
                        '_$s16MetricsFramework15ExtensionsUtilsC025createClientEventMetadataG0So022ODDSiriSchemaODDClientgH0CSgyYaFZ', 
                        '_$s16MetricsFramework15ExtensionsUtilsC025createClientEventMetadataG0So022ODDSiriSchemaODDClientgH0CSgyYaFZTu', 
                        '_$s16MetricsFramework15ExtensionsUtilsC13decodeTurnIdsySay10Foundation4UUIDVGSgSSSgFZ', 
+                       '_$s16MetricsFramework15ExtensionsUtilsC15decodeIERoutingySaySo08SISchemaF0VGSgSSSgFZ', 
                        '_$s16MetricsFramework15ExtensionsUtilsC24fetchDeviceAggregationIdSo12SISchemaUUIDCSgyYaFZ', 
                        '_$s16MetricsFramework15ExtensionsUtilsC24fetchDeviceAggregationIdSo12SISchemaUUIDCSgyYaFZTu', 
                        '_$s16MetricsFramework15ExtensionsUtilsC29isAssistantOrDictationEnabledSbyFZ', 

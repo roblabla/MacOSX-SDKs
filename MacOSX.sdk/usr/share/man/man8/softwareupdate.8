@@ -1,16 +1,57 @@
 .Dd September 11, 2012 
 .Dt softwareupdate 8 
 .Os Mac OS X
-.\"																				NAME 
+
 .Sh NAME
 .Nm softwareupdate
 .Nd system software update tool
-.\"																				SYNOPSIS
+
 .Sh SYNOPSIS
-.Nm
-.Ar command
-.Op Ar args ...
-.\"																				DESCRIPTION
+.Nm softwareupdate
+.Fl -list
+.Pp
+.Nm softwareupdate
+.Fl -install
+.Op Fl -recommended
+.Op Fl -all
+.Op Fl -os-only
+.Op Fl -safari-only
+.Op Ar item ...
+.Oo
+.Fl -restart
+.Op Fl -force
+.Oc
+.Op Fl -stdinpass
+.Op Fl -user
+.Pp
+.Nm softwareupdate
+.Fl -download
+.Op Fl -recommended
+.Op Fl -all
+.Op Fl -os-only
+.Op Fl -safari-only
+.Op Ar item ...
+.Pp
+.Nm softwareupdate
+.Fl -list-full-installers
+.Pp
+.Nm softwareupdate
+.Fl -fetch-full-installer
+.Op Fl -full-installer-version Ar version
+.Op Fl -launch-installer
+.Pp
+.Nm softwareupdate
+.Fl -install-rosetta
+.Op Fl -agree-to-license
+.Pp
+.Nm softwareupdate
+.Fl -background
+.Pp
+.Nm softwareupdate
+.Fl -schedule
+.Pp
+.Nm softwareupdate
+.Fl -help
 .Sh DESCRIPTION
 Software Update checks for new and updated versions of your software based on information about your computer and current software.
 .Pp
@@ -26,9 +67,7 @@ requires admin authentication for all commands except
 .Cm --list .
 If you run
 .Nm
-as a normal admin user, you will be prompted for a password where required. Alternatively, you can run
-.Nm
-as root and avoid all further authentication prompts.
+as a normal admin user, you will be prompted for a password when required.
 .Pp
 The following
 .Ar commands
@@ -49,67 +88,70 @@ All updates that are recommended for your system. These are prefixed with a
 character in the
 .Cm --list
 output.
-.It Ar --os-only
-Only macOS updates
-.It Ar --safari-only
-Only safari updates
-.It Ar -R | --restart
-Automatically restart (or shut down) if required to complete installation. If the user invoking this tool is logged in then macOS will attempt to quit all applications, logout, and restart. If the user is not logged in, macOS will trigger a forced reboot if necessary. If you wish to always perform a forced reboot, pass -f (--force).
 .It Ar -a | --all
 All updates that are applicable to your system, including those non-recommended ones,
-which are prefixed with a 
+which are prefixed with a
 .Em -
 character in the
 .Cm --list
 output. (Non-recommended updates are uncommon in any case.)
+.It Ar --os-only
+Only macOS updates
+.It Ar --safari-only
+Only Safari updates
 .It Ar item ...
-One or more specified updates. The 
+One or more specified updates. The
 .Cm --list
 output shows the item names you can specify here, prefixed by the
 .Em *
 or
 .Em -
 characters. See
+
 .Sx EXAMPLES .
+.It Ar -R | --restart
+Automatically restart if required to complete installation. If the user invoking this tool is logged in then macOS will attempt to quit all applications, logout, and restart. If the user is not logged in, macOS will trigger a forced reboot if necessary. If you wish to always perform a forced reboot, use
+.Cm --force.
 .It Ar --stdinpass
-Password to authenticate as an owner. Apple Silicon only.
+Collect a password from stdin without interaction. Apple silicon only.
 .It Ar --user
-Local username to authenticate as an owner. Apple Silicon only.
+An owner user to authorize installation. Apple silicon only.
 .El                      \" Ends the list
-.It Fl -list-full-installers
-List the available macOS Installers.
-.It Fl -background
-Trigger a background check with a forced scan.
-.It Fl -fetch-full-installer
-Install the latest recommended macOS Installer.
-Use --full-installer-version to specify the version of macOS to install. ie. --full-installer-version 10.15.
-Use --launch-installer to launch the installer automatically after it has been downloaded
-.It Fl -install-rosetta
-Install Rosetta. Only applies to Apple silicon Macs. Pass --agree-to-license to agree to the software license agreement without any user interaction.
 .It Fl d | -download
 Each update specified by
 .Ar args
-is downloaded but not installed. The values of 
+is downloaded but not installed. The values of
 .Ar args
-are the same as for the 
+are the same as for the
 .Cm --install
-command. Updates downloaded with 
+command. Updates downloaded with
 .Cm --download
 can be subsequently installed with
 .Cm --install ,
 or through System Settings (as long as they remain applicable to your system).
-Updates are downloaded to 
-.Pa /Library/Updates ,
-but are not designed to be installed by double-clicking the packages in that
-directory: always use
-.Cm --install
-or System Settings to actually perform the install.
+.It Fl -list-full-installers
+List the available macOS Installers.
+.It Fl -fetch-full-installer
+Install the latest recommended macOS Installer. Use
+.Cm --full-installer-version
+to specify the version of macOS to install (e.g.
+.Cm --full-installer-version
+10.15).
+Use
+.Cm --launch-installer
+to launch the installer automatically after it has been downloaded.
+.It Fl -install-rosetta
+Install Rosetta. Only applies to Apple silicon Macs. Pass
+.Cm --agree-to-license
+to agree to the software license agreement without any user interaction.
+.It Fl -background
+Trigger a background check with a forced scan.
 .It Fl -schedule
 Returns the per-machine automatic (background) check preference.
 .It Fl h | -help
 Print command usage.
 .El                      \" Ends the list
-.\"																				EXAMPLES
+
 .Sh EXAMPLES          \" Section Header - required - don't modify
 The following examples are shown as given to the shell:
 .Bl -tag -width indent
@@ -140,8 +182,3 @@ Done with ProApps QuickTime codecs
 Done.
 .Ed                      \" End literal code section
 .Bl -tag -width -indent  \" Begins a tagged list 
-.It Li "sudo softwareupdate --schedule"
-.El                      \" Ends the list
-.Bd -literal -offset indent \" Begin a literal code section
-Automatic check is on
-.Ed                      \" End literal code section

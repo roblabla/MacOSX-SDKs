@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RemindersUICore.framework/Versions/A/RemindersUICore'
-current-version: 3589.22
+current-version: 3633
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -6173,6 +6173,8 @@ exports:
                        '_$s15RemindersUICore25TTRMRemindersListTextViewC20resignFirstResponderSbyF', 
                        '_$s15RemindersUICore25TTRMRemindersListTextViewC23preferredPasteboardType4from21restrictedToTypesFromSo012NSPasteboardI0aSgSayAHG_AJSgtF', 
                        '_$s15RemindersUICore25TTRMRemindersListTextViewC24justBecameFirstResponder33_444F6016933BFE69C0ED70C844491046LLSbvpfi', 
+                       '_$s15RemindersUICore25TTRMRemindersListTextViewC26supportsAdaptiveImageGlyphSbvg', 
+                       '_$s15RemindersUICore25TTRMRemindersListTextViewC26supportsAdaptiveImageGlyphSbvs', 
                        '_$s15RemindersUICore25TTRMRemindersListTextViewC4copyyyypSgF', 
                        '_$s15RemindersUICore25TTRMRemindersListTextViewC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s15RemindersUICore25TTRMRemindersListTextViewC5coderACSgSo7NSCoderC_tcfc', 
@@ -8417,23 +8419,6 @@ exports:
                        '_$s15RemindersUICore26TTRTemplatesListInteractorCMa', '_$s15RemindersUICore26TTRTemplatesListInteractorCMm', 
                        '_$s15RemindersUICore26TTRTemplatesListInteractorCMn', '_$s15RemindersUICore26TTRTemplatesListInteractorCN', 
                        '_$s15RemindersUICore26TTRTemplatesListInteractorCfD', '_$s15RemindersUICore26TTRTemplatesListInteractorCfd', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV014startedEditingF06TipKit4TipsO5EventVy_AG13EmptyDonationVGvau', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV014startedEditingF06TipKit4TipsO5EventVy_AG13EmptyDonationVGvgZ', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV014startedEditingF06TipKit4TipsO5EventVy_AG13EmptyDonationVGvpZ', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV5image7SwiftUI5ImageVSgvg', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV5image7SwiftUI5ImageVSgvpMV', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV5rulesSay6TipKit4TipsO4RuleVGvg', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV5rulesSay6TipKit4TipsO4RuleVGvpMV', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV5title7SwiftUI4TextVvg', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV5title7SwiftUI4TextVvpMV', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV6TipKit0G0AAMc', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV7message7SwiftUI4TextVSgvg', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV7message7SwiftUI4TextVSgvpMV', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV7optionsSay6TipKit0H6Option_pGvg', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionV7optionsSay6TipKit0H6Option_pGvpMV', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionVACycfC', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionVMa', '_$s15RemindersUICore26TTRTipGroceryRenameSectionVMn', 
-                       '_$s15RemindersUICore26TTRTipGroceryRenameSectionVN', '_$s15RemindersUICore26TTRTipGroceryRenameSectionVs12IdentifiableAAMc', 
                        '_$s15RemindersUICore26TTRTreeStorageTreeDerivingMp', '_$s15RemindersUICore26TTRTreeStorageTreeDerivingPAA0C17ContentsQueryableTb', 
                        '_$s15RemindersUICore26TTRTreeStorageTreeDerivingPAAE07derivedE8Location3forAA010TTRDerivedeH0Vy8ItemTypeQzGSgAI_tF', 
                        '_$s15RemindersUICore26TTRTreeStorageTreeDerivingPAAE18isExpandSuppressedySb8ItemTypeQzF', 

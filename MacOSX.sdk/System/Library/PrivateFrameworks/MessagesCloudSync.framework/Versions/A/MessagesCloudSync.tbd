@@ -122,6 +122,8 @@ exports:
                        '_$s17MessagesCloudSync18IMDaemonCoreBridgeP14reloadDatabaseyyFZTq', 
                        '_$s17MessagesCloudSync18IMDaemonCoreBridgeP14updateTransfer4guidySS_tFZTj', 
                        '_$s17MessagesCloudSync18IMDaemonCoreBridgeP14updateTransfer4guidySS_tFZTq', 
+                       '_$s17MessagesCloudSync18IMDaemonCoreBridgeP15generatePreview8transferySo14IMFileTransferC_tFZTj', 
+                       '_$s17MessagesCloudSync18IMDaemonCoreBridgeP15generatePreview8transferySo14IMFileTransferC_tFZTq', 
                        '_$s17MessagesCloudSync18IMDaemonCoreBridgeP15moveMessagePart7forGUID10deleteDate8partBodyySS_10Foundation0M0VSo18NSAttributedStringCtFZTj', 
                        '_$s17MessagesCloudSync18IMDaemonCoreBridgeP15moveMessagePart7forGUID10deleteDate8partBodyySS_10Foundation0M0VSo18NSAttributedStringCtFZTq', 
                        '_$s17MessagesCloudSync18IMDaemonCoreBridgeP15storeAttachment8transfer12withChatGUIDSbSo14IMFileTransferC_SSSgtFZTj', 

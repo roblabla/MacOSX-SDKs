@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftCoreAudio.dylib'
-current-version: 328.121.10
+current-version: 328.204.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -489,8 +489,8 @@ exports:
                        '_$s9CoreAudio0B15HardwareControlC14stereoPanValueSfvgTj', 
                        '_$s9CoreAudio0B15HardwareControlC14stereoPanValueSfvgTq', 
                        '_$s9CoreAudio0B15HardwareControlC14stereoPanValueSfvpMV', 
-                       '_$s9CoreAudio0B15HardwareControlC15convertToScalar12fromDecibalsS2f_tKFTj', 
-                       '_$s9CoreAudio0B15HardwareControlC15convertToScalar12fromDecibalsS2f_tKFTq', 
+                       '_$s9CoreAudio0B15HardwareControlC15convertToScalar12fromDecibelsS2f_tKFTj', 
+                       '_$s9CoreAudio0B15HardwareControlC15convertToScalar12fromDecibelsS2f_tKFTq', 
                        '_$s9CoreAudio0B15HardwareControlC15setBooleanValueyySbKFTj', 
                        '_$s9CoreAudio0B15HardwareControlC15setBooleanValueyySbKFTq', 
                        '_$s9CoreAudio0B15HardwareControlC16selectorItemKind6fromIDs6UInt32VAG_tKFTj', 
@@ -509,16 +509,16 @@ exports:
                        '_$s9CoreAudio0B15HardwareControlC17volumeScalarValueSfvgTj', 
                        '_$s9CoreAudio0B15HardwareControlC17volumeScalarValueSfvgTq', 
                        '_$s9CoreAudio0B15HardwareControlC17volumeScalarValueSfvpMV', 
-                       '_$s9CoreAudio0B15HardwareControlC18volumeDecibalValueSfvgTj', 
-                       '_$s9CoreAudio0B15HardwareControlC18volumeDecibalValueSfvgTq', 
-                       '_$s9CoreAudio0B15HardwareControlC18volumeDecibalValueSfvpMV', 
                        '_$s9CoreAudio0B15HardwareControlC18volumeDecibelRangeSo0b5ValueG0VvgTj', 
                        '_$s9CoreAudio0B15HardwareControlC18volumeDecibelRangeSo0b5ValueG0VvgTq', 
                        '_$s9CoreAudio0B15HardwareControlC18volumeDecibelRangeSo0b5ValueG0VvpMV', 
+                       '_$s9CoreAudio0B15HardwareControlC18volumeDecibelValueSfvgTj', 
+                       '_$s9CoreAudio0B15HardwareControlC18volumeDecibelValueSfvgTq', 
+                       '_$s9CoreAudio0B15HardwareControlC18volumeDecibelValueSfvpMV', 
                        '_$s9CoreAudio0B15HardwareControlC20setVolumeScalarValueyySfKFTj', 
                        '_$s9CoreAudio0B15HardwareControlC20setVolumeScalarValueyySfKFTq', 
-                       '_$s9CoreAudio0B15HardwareControlC21setVolumeDecibalValueyySfKFTj', 
-                       '_$s9CoreAudio0B15HardwareControlC21setVolumeDecibalValueyySfKFTq', 
+                       '_$s9CoreAudio0B15HardwareControlC21setVolumeDecibelValueyySfKFTj', 
+                       '_$s9CoreAudio0B15HardwareControlC21setVolumeDecibelValueyySfKFTq', 
                        '_$s9CoreAudio0B15HardwareControlC2idACs6UInt32V_tcfC', '_$s9CoreAudio0B15HardwareControlC2idACs6UInt32V_tcfc', 
                        '_$s9CoreAudio0B15HardwareControlCMa', '_$s9CoreAudio0B15HardwareControlCMm', 
                        '_$s9CoreAudio0B15HardwareControlCMn', '_$s9CoreAudio0B15HardwareControlCMo', 

@@ -14,5 +14,5 @@ exports:
                        BTAudioRoutingResponse, BTAudioSession, BTBannerUISession, 
                        BTBluetoothPairingSession, BTCloudAccountInfo, BTCloudDevice, 
                        BTCloudDeviceSupportInformation, BTCloudServicesClient, BTCloudSoundProfileRecord, 
-                       BTMagicPairingSettings, BTServicesClient ]
+                       BTMagicPairingSettings, BTServicesClient, HMDeviceCloudRecordInfo ]
 ...

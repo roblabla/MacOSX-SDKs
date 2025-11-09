@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LocalAuthenticationCore.framework/Versions/A/LocalAuthenticationCore'
-current-version: 1656.0.99
+current-version: 1656.40.25
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -818,7 +818,8 @@ exports:
                        _LACPolicyDoublePressBypass, _LACPolicyHumanPresence, _LACPolicyIDV, 
                        _LACPolicyIsLocationBasedPolicy, _LACPolicyLocationBasedDeviceOwnerAuthentication, 
                        _LACPolicyLocationBasedDeviceOwnerAuthenticationWithBiometricRatchet, 
-                       _LACPolicyMarzipan, _LACPolicyMarzipanWithPIN, _LACPolicyOptionAllowEmptyPasscode, 
+                       _LACPolicyLocationBasedTrustComputer, _LACPolicyMarzipan, 
+                       _LACPolicyMarzipanWithPIN, _LACPolicyOptionAllowEmptyPasscode, 
                        _LACPolicyOptionAllowEnablementGracePeriod, _LACPolicyOptionAllowUnapprovedSensor, 
                        _LACPolicyOptionAuthenticationCallbackReason, _LACPolicyOptionAuthenticationCallbackURL, 
                        _LACPolicyOptionAuthenticationIdentifier, _LACPolicyOptionAuthenticationReason, 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsUI.framework/Versions/A/CoreSuggestionsUI'
-current-version: 1259.1
+current-version: 1260.9
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -55,6 +55,13 @@ exports:
                        '_$s17CoreSuggestionsUI15SGBannerContentC13primaryActionSo012SGSuggestionG0CSgvpMV', 
                        '_$s17CoreSuggestionsUI15SGBannerContentC13primaryActionSo012SGSuggestionG0CSgvsTj', 
                        '_$s17CoreSuggestionsUI15SGBannerContentC13primaryActionSo012SGSuggestionG0CSgvsTq', 
+                       '_$s17CoreSuggestionsUI15SGBannerContentC15attributedTitleSo18NSAttributedStringCSgvMTj', 
+                       '_$s17CoreSuggestionsUI15SGBannerContentC15attributedTitleSo18NSAttributedStringCSgvMTq', 
+                       '_$s17CoreSuggestionsUI15SGBannerContentC15attributedTitleSo18NSAttributedStringCSgvgTj', 
+                       '_$s17CoreSuggestionsUI15SGBannerContentC15attributedTitleSo18NSAttributedStringCSgvgTq', 
+                       '_$s17CoreSuggestionsUI15SGBannerContentC15attributedTitleSo18NSAttributedStringCSgvpMV', 
+                       '_$s17CoreSuggestionsUI15SGBannerContentC15attributedTitleSo18NSAttributedStringCSgvsTj', 
+                       '_$s17CoreSuggestionsUI15SGBannerContentC15attributedTitleSo18NSAttributedStringCSgvsTq', 
                        '_$s17CoreSuggestionsUI15SGBannerContentC15backgroundColorSo7NSColorCSgvMTj', 
                        '_$s17CoreSuggestionsUI15SGBannerContentC15backgroundColorSo7NSColorCSgvMTq', 
                        '_$s17CoreSuggestionsUI15SGBannerContentC15backgroundColorSo7NSColorCSgvgTj', 

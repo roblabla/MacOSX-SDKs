@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TranslationUI.framework/Versions/A/TranslationUI'
-current-version: 291
+current-version: 294.4
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -854,6 +854,7 @@ exports:
                        '_$s7SwiftUI5ColorV011TranslationB0E024secondaryTranslateAccentC0ACvgZ', 
                        '_$s7SwiftUI5ColorV011TranslationB0E025quaternaryTranslateAccentC0ACvgZ', 
                        '_$s7SwiftUI5ColorV011TranslationB0E09secondaryC7OpacitySdvgZ', 
+                       '_$sSS13TranslationUIE16isWhitespaceOnlySbvg', '_$sSS13TranslationUIE16isWhitespaceOnlySbvpMV', 
                        '_$sSS13TranslationUIE17TRANSLATION_LIMITSivMZ', '_$sSS13TranslationUIE17TRANSLATION_LIMITSivgZ', 
                        '_$sSS13TranslationUIE17TRANSLATION_LIMITSivsZ', '_$sSS13TranslationUIE18applyingAttributes4fromSo18NSAttributedStringCAE_tF', 
                        '_$sSS13TranslationUIE24localizedSettingsAppNameSSvgZ', '_$sSS13TranslationUIE9truncated5limitSb_SStSi_tF', 

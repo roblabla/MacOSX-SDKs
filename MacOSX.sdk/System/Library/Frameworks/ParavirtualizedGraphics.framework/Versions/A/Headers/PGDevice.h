@@ -327,7 +327,7 @@ PG_EXTERN NSErrorDomain const _Nonnull PGResumeErrorDomain API_AVAILABLE(macos(1
  @constant PGResumeErrorCodeInvalidSuspendStateVersion The suspend state version is incompatible with this framework version.
  @constant PGResumeErrorCodeInvalidContent The content the suspend state or guest memory is invalid.
  @constant PGResumeErrorCodeInvalidGuestVersion The guest version is incompatible with this framework version.
- @constant PGResumeErrorCodeDeviceIncompatible The resume device is missing capabilities provided by the suspend device.
+ @constant PGResumeErrorCodeIncompatibleDevice The resume device is missing capabilities provided by the suspend device.
  @constant PGResumeErrorCodeInvalidDisplayPortCount The DisplayPortCount in suspend state doesn't match DisplayPortCount for this VM
  */
 typedef NS_ENUM(NSUInteger, PGResumeErrorCode) {

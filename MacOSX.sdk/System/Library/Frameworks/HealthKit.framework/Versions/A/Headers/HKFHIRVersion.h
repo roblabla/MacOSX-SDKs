@@ -18,7 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
                 given resource is represented in. A FHIR version is associated with one FHIR release.
  @see           http://hl7.org/fhir/versions.html#versions
  */
-HK_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(14.0), macCatalyst(14.0), macos(13.0)) API_UNAVAILABLE(watchos)
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(14.0), macCatalyst(14.0), macos(13.0)) API_UNAVAILABLE(watchos)
 @interface HKFHIRVersion : NSObject <NSCopying, NSSecureCoding>
 
 @property (nonatomic, assign, readonly) NSInteger majorVersion;

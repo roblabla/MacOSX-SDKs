@@ -416,6 +416,8 @@ exports:
                        '_$sSo19SHMediaItemPropertya9ShazamKitE10timeRangesABvgZ', 
                        '_$sSo19SHMediaItemPropertya9ShazamKitE19frequencySkewRangesABvgZ', 
                        '_$sSo9SHSessionC9ShazamKitE6ResultO12wasCancelledSbvg', '_$sSo9SHSessionC9ShazamKitE6ResultO12wasCancelledSbvpMV', 
+                       '_$sSo9SHSessionC9ShazamKitE6ResultO40requiresPrivacyDisclosureAcknowledgementSbvg', 
+                       '_$sSo9SHSessionC9ShazamKitE6ResultO40requiresPrivacyDisclosureAcknowledgementSbvpMV', 
                        '_$sSo9SHSessionC9ShazamKitE6ResultOMa', '_$sSo9SHSessionC9ShazamKitE6ResultOMn', 
                        '_$sSo9SHSessionC9ShazamKitE6ResultON', '_$sSo9SHSessionC9ShazamKitE6result4fromAbCE6ResultOSo11SHSignatureC_tYaF', 
                        '_$sSo9SHSessionC9ShazamKitE6result4fromAbCE6ResultOSo11SHSignatureC_tYaFTu', 

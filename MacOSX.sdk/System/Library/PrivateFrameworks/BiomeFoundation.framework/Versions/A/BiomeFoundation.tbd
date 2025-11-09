@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BiomeFoundation.framework/Versions/A/BiomeFoundation'
-current-version: 153.5
+current-version: 153.10
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -60,7 +60,8 @@ exports:
                        BMStreamMigrations, BMWeakProxy, BMXPCActivity, BMXPCConnectionWrapper, 
                        BMXPCListener, _BMAccessAssertion, _BMAccessAssertionNotApplicable, 
                        _BMAccessTrackerGuardedData, _BMDirectFileManager, _BMXPCConnection, 
-                       _BMXPCConnectionCacheKey, _BMXPCFileManager, _BMXPCTransport ]
+                       _BMXPCConnectionCacheKey, _BMXPCFileManager, _BMXPCTransport, 
+                       _BMXPCTransportContext ]
     objc-ivars:      [ BMFileManager._cachingOptions, BMFileManager._directory, BMFileManager._fileHandleCache, 
                        BMProcess._auditToken, BMProcess._entitlementCache, BMProcess._entitlementCacheLock, 
                        BMProcess._executablePath, BMProcess._machLookupCache, BMProcess._machLookupCacheLock, 

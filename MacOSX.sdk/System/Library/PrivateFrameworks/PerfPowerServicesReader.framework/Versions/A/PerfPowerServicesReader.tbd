@@ -451,11 +451,11 @@ exports:
                        PPSSQLiteHistogramIngester, PPSSQLiteNullPredicate, PPSSQLitePredicate, 
                        PPSSQLitePropertyPredicate, PPSSQLiteQuery, PPSSQLiteQueryDescriptor, 
                        PPSSQLiteTimeIntervalSetIngester, PPSSQLiteTimeSeriesIngester, 
-                       PPSSampleRecipeHandler, PPSTimeInterval, PPSTimeIntervalCoalescePolicy, 
-                       PPSTimeIntervalSet, PPSTimeIntervalSetGenerator, PPSTimeSeries, 
-                       PPSTimeSeriesRequest, PPSTimestampConverter, PPSTimestampConverterRegistry, 
-                       PPSValueConverter, PPSVersioningUtilities, PerfPowerServicesReaderHelper, 
-                       _PPSSQLiteComparisonPredicateIfNull, _PPSSQLiteComparisonPredicateLikeWithEscape ]
+                       PPSTimeInterval, PPSTimeIntervalCoalescePolicy, PPSTimeIntervalSet, 
+                       PPSTimeIntervalSetGenerator, PPSTimeSeries, PPSTimeSeriesRequest, 
+                       PPSTimestampConverter, PPSTimestampConverterRegistry, PPSValueConverter, 
+                       PPSVersioningUtilities, PerfPowerServicesReaderHelper, _PPSSQLiteComparisonPredicateIfNull, 
+                       _PPSSQLiteComparisonPredicateLikeWithEscape ]
     objc-ivars:      [ AWDMETRICSBwpStats._bandwidth, AWDMETRICSBwpStats._duration, 
                        AWDMETRICSBwpStats._has, AWDMETRICSBwpStats._scsSpacing, AWDMETRICSCellularDynamicRatSelection._bwObservedAfterSwitch, 
                        AWDMETRICSCellularDynamicRatSelection._bwObservedBeforeSwitch, 

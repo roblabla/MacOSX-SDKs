@@ -16,7 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
  @class         HKLensSpecification
  @abstract      An object subclass representing common lens specification
  */
-HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
 @interface HKLensSpecification : NSObject
 
 /*!

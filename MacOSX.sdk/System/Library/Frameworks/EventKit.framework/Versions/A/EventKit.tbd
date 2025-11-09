@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/EventKit.framework/Versions/A/EventKit'
-current-version: 1900
+current-version: 1901.2.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -79,10 +79,10 @@ exports:
                        _EKChangedResponseComment, _EKChangedSequence, _EKChangedShareesAdded, 
                        _EKChangedShareesModified, _EKChangedShareesRemoved, _EKChangedStartDate, 
                        _EKChangedTimeZone, _EKChangedTitle, _EKChangedTravelTime, 
-                       _EKChangedURL, _EKCompletionDatePropertyId, _EKConferenceValidationErrorDomain, 
-                       _EKDBStatsCalendarCount, _EKDBStatsCalendarItemCount, _EKDBStatsSourceUUID, 
-                       _EKDatabasePerformMigrationIfNeeded, _EKDatabaseSizeInBytes, 
-                       _EKDebugPreferences_Notification_AvailabilityFreshnessWindow, 
+                       _EKChangedURL, _EKCompletionDatePropertyId, _EKConferenceUtilsAppRecordChangedNotification, 
+                       _EKConferenceValidationErrorDomain, _EKDBStatsCalendarCount, 
+                       _EKDBStatsCalendarItemCount, _EKDBStatsSourceUUID, _EKDatabasePerformMigrationIfNeeded, 
+                       _EKDatabaseSizeInBytes, _EKDebugPreferences_Notification_AvailabilityFreshnessWindow, 
                        _EKDebugPreferences_Notification_ForceDisplayOfNewTravelAdvisoryHypotheses, 
                        _EKDebugPreferences_Notification_OverriddenTravelAdvisoryHypothesisAggressiveTravelTime, 
                        _EKDebugPreferences_Notification_OverriddenTravelAdvisoryHypothesisConservativeTravelTime, 

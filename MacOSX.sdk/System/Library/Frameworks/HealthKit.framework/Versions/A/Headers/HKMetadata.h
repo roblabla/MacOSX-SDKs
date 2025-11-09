@@ -5,6 +5,7 @@
 //  Copyright (c) 2013-2022 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN

@@ -1,10 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DeviceAccess.framework/Versions/A/DeviceAccess'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12DeviceAccess33DADiscoveryExtensionConfigurationC09discoveryD0ACyxGx_tcfC', 
                        '_$s12DeviceAccess33DADiscoveryExtensionConfigurationC09discoveryD0ACyxGx_tcfCTj', 
                        '_$s12DeviceAccess33DADiscoveryExtensionConfigurationC09discoveryD0ACyxGx_tcfCTq', 

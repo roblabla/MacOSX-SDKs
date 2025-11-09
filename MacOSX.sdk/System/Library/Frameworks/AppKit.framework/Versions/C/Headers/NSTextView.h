@@ -433,8 +433,6 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 @property NSWritingToolsBehavior writingToolsBehavior API_AVAILABLE(macos(15.0));
 @property NSWritingToolsResultOptions allowedWritingToolsResultOptions API_AVAILABLE(macos(15.0));
-@property NSWritingToolsAllowedInputOptions writingToolsAllowedInputOptions API_DEPRECATED_WITH_REPLACEMENT("allowedWritingToolsResultOptions", macos(15.0, API_TO_BE_DEPRECATED));
-
 @end
 
 @interface NSTextView (NSTextChecking)

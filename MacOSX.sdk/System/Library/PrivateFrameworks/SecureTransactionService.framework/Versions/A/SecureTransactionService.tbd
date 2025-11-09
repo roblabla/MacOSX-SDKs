@@ -33,9 +33,9 @@ exports:
                        STSListener, STSMerchantPaymentRequest, STSMerchantPaymentResponse, 
                        STSPaymentRequestBase, STSPaymentResponseBase, STSPeerPaymentRequest, 
                        STSPeerPaymentResponse, STSPeerPaymentTransferRequest, STSReader, 
-                       STSSession, STSSessionBase, STSSigningSession, STSTapToProvisionAppletData, 
-                       STSTapToProvisionParameters, STSTapToProvisionReader, STSTapToProvisionResult, 
-                       STSTestReader, STSTransaction18013Request, STSTransactionEndEvent, 
-                       STSTransactionStartEvent, STSVASCredential, STSVASTransaction, 
-                       STSVehicleReport ]
+                       STSReaderCryptarch, STSSession, STSSessionBase, STSSigningSession, 
+                       STSTapToProvisionAppletData, STSTapToProvisionParameters, 
+                       STSTapToProvisionReader, STSTapToProvisionResult, STSTestReader, 
+                       STSTransaction18013Request, STSTransactionEndEvent, STSTransactionStartEvent, 
+                       STSVASCredential, STSVASTransaction, STSVehicleReport ]
 ...

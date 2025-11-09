@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Settings.framework/Versions/A/Settings'
-current-version: 206
+current-version: 207.1
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -387,6 +387,10 @@ exports:
                        '_$s8Settings0A33AnalyticsNavigationEventResponderVN', '_$s8Settings0A34ZeroKeywordNavigationItemsProviderC11Observation10ObservableAAMc', 
                        '_$s8Settings0A34ZeroKeywordNavigationItemsProviderC11suggestionsSayAA0aD11EventRecordVGvg', 
                        '_$s8Settings0A34ZeroKeywordNavigationItemsProviderC11suggestionsSayAA0aD11EventRecordVGvpMV', 
+                       '_$s8Settings0A34ZeroKeywordNavigationItemsProviderC24requestAndProcessRecentsSayAA0aD11EventRecordVGyYaKF', 
+                       '_$s8Settings0A34ZeroKeywordNavigationItemsProviderC24requestAndProcessRecentsSayAA0aD11EventRecordVGyYaKFTu', 
+                       '_$s8Settings0A34ZeroKeywordNavigationItemsProviderC28requestAndProcessSuggestionsSayAA0aD11EventRecordVGyYaKF', 
+                       '_$s8Settings0A34ZeroKeywordNavigationItemsProviderC28requestAndProcessSuggestionsSayAA0aD11EventRecordVGyYaKFTu', 
                        '_$s8Settings0A34ZeroKeywordNavigationItemsProviderC39settingsHostApplicationBundleIdentifierACSS_tcfC', 
                        '_$s8Settings0A34ZeroKeywordNavigationItemsProviderC39settingsHostApplicationBundleIdentifierACSS_tcfCTj', 
                        '_$s8Settings0A34ZeroKeywordNavigationItemsProviderC39settingsHostApplicationBundleIdentifierACSS_tcfCTq', 

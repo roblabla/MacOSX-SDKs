@@ -267,10 +267,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @property(nonatomic,readonly,getter=isWritingToolsActive) BOOL writingToolsActive API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 // Also see UITextInputTraits.h
-@property UIWritingToolsBehavior writingToolsBehavior API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+@property UIWritingToolsBehavior writingToolsBehavior API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(visionos, tvos, watchos);
 
 // WARNING: UITextView does not support UIWritingToolsResultOptionsTable and will throw an exception for this value
-@property UIWritingToolsResultOptions allowedWritingToolsResultOptions API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos);
+@property UIWritingToolsResultOptions allowedWritingToolsResultOptions API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(visionos, tvos, watchos);
 
 /// For text views that have flag `allowsEditingTextAttributes` set,
 /// this configuration will be used for `UITextFormattingViewController`

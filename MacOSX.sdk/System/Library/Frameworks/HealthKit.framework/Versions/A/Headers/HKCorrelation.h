@@ -5,6 +5,8 @@
 //  Copyright (c) 2014-2022 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKSample.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,7 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
                 For example, systolic and diastolic blood pressure readings are typically presented together so these
                 readings should be saved with a correlation of type blood pressure.
  */
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKCorrelation : HKSample
 
 @property (readonly) HKCorrelationType *correlationType;

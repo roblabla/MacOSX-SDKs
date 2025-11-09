@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKScoredAssessment.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -41,8 +42,8 @@ HK_EXTERN NSInteger HKMaximumScoreForGAD7AssessmentRisk(HKGAD7AssessmentRisk ris
 
 /// Represents the result of a GAD-7 assessment. Learn more about Pfizer's GAD-7 at https://support.apple.com/en-us/105070
 HK_EXTERN
-API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0))
 NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0))
 @interface HKGAD7Assessment : HKScoredAssessment
 
 /// Answers on the GAD-7 assessment. There are exactly 7 answers, one for each multiple choice question. Each answer is of type `HKGAD7AssessmentAnswer`.

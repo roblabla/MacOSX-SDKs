@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BiomeLibrary.framework/Versions/A/BiomeLibrary'
-current-version: 91
+current-version: 92.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1880,10 +1880,12 @@ exports:
                        _BMPortraitTopicAlgorithmFromString, _BMPortraitTopicAssetVersionColumn, 
                        _BMPortraitTopicDecayRateColumn, _BMPortraitTopicIdentifier, 
                        _BMPortraitTopicIdentifierColumn, _BMPortraitTopicOsBuildColumn, 
-                       _BMPortraitTopicScoreColumn, _BMPrivateCloudComputeRequestLogAttestationAttestationStringColumn, 
+                       _BMPortraitTopicScoreColumn, _BMPrivateCloudComputeRequestLogAttestationAttestationBundleColumn, 
+                       _BMPrivateCloudComputeRequestLogAttestationAttestationStringColumn, 
                        _BMPrivateCloudComputeRequestLogAttestationNodeColumn, _BMPrivateCloudComputeRequestLogAttestationNodeStateColumn, 
                        _BMPrivateCloudComputeRequestLogAttestationsColumn, _BMPrivateCloudComputeRequestLogIdentifier, 
-                       _BMPrivateCloudComputeRequestLogPipelineKindColumn, _BMPrivateCloudComputeRequestLogPipelineParametersColumn, 
+                       _BMPrivateCloudComputeRequestLogNodesColumn, _BMPrivateCloudComputeRequestLogPipelineKindColumn, 
+                       _BMPrivateCloudComputeRequestLogPipelineParametersColumn, 
                        _BMPrivateCloudComputeRequestLogRequestIdColumn, _BMPrivateCloudComputeRequestLogTimestampColumn, 
                        _BMProactiveHarvestingContentAttachmentFilenameColumn, _BMProactiveHarvestingContentAttachmentPathColumn, 
                        _BMProactiveHarvestingContentAttachmentTypeColumn, _BMProactiveHarvestingMailAbsoluteTimestampColumn, 

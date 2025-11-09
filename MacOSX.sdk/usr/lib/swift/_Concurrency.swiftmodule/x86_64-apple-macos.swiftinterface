@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -disable-objc-attr-requires-foundation-module -target x86_64-apple-macosx15.0 -target-variant x86_64-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swift_Concurrency -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature IsolatedAny -user-module-version 6.0.0.7.24 -module-name _Concurrency
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -disable-objc-attr-requires-foundation-module -target x86_64-apple-macosx15.1 -target-variant x86_64-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swift_Concurrency -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature IsolatedAny -user-module-version 6.0.0.7.43 -module-name _Concurrency
 // swift-module-flags-ignorable: -enable-ossa-modules -enable-lexical-lifetimes=false
 import Swift
 import SwiftShims
@@ -62,7 +62,7 @@ public struct CheckedContinuation<T, E> : Swift.Sendable where E : Swift.Error {
   #if compiler(>=5.3) && $SendingArgsAndResults
   public func resume(returning value: sending T)
   #else
-  public func resume(returning value: T)
+  public func resume(returning value: __owned T)
   #endif
   public func resume(throwing error: __owned E)
 }
@@ -177,7 +177,7 @@ extension _Concurrency.CheckedContinuation {
 }
 #else
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@_alwaysEmitIntoClient internal func _resumeCheckedContinuation<T>(_ continuation: _Concurrency.CheckedContinuation<T, Swift.Never>, _ value: T) {
+@_alwaysEmitIntoClient internal func _resumeCheckedContinuation<T>(_ continuation: _Concurrency.CheckedContinuation<T, Swift.Never>, _ value: __owned T) {
   continuation.resume(returning: value)
 }
 #endif
@@ -188,7 +188,7 @@ extension _Concurrency.CheckedContinuation {
 }
 #else
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@_alwaysEmitIntoClient internal func _resumeCheckedThrowingContinuation<T>(_ continuation: _Concurrency.CheckedContinuation<T, any Swift.Error>, _ value: T) {
+@_alwaysEmitIntoClient internal func _resumeCheckedThrowingContinuation<T>(_ continuation: _Concurrency.CheckedContinuation<T, any Swift.Error>, _ value: __owned T) {
   continuation.resume(returning: value)
 }
 #endif
@@ -2157,7 +2157,7 @@ extension _Concurrency.JobPriority : Swift.Comparable {
     #endif
   }
   #else
-  @_alwaysEmitIntoClient public func resume(returning value: T) where E == Swift.Never {
+  @_alwaysEmitIntoClient public func resume(returning value: __owned T) where E == Swift.Never {
     #if compiler(>=5.5) && $BuiltinContinuation
     Builtin.resumeNonThrowingContinuationReturning(context, value)
     #else
@@ -2174,7 +2174,7 @@ extension _Concurrency.JobPriority : Swift.Comparable {
     #endif
   }
   #else
-  @_alwaysEmitIntoClient public func resume(returning value: T) {
+  @_alwaysEmitIntoClient public func resume(returning value: __owned T) {
     #if compiler(>=5.5) && $BuiltinContinuation
     Builtin.resumeThrowingContinuationReturning(context, value)
     #else
@@ -2241,7 +2241,7 @@ extension _Concurrency.UnsafeContinuation {
 }
 #else
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@_alwaysEmitIntoClient internal func _resumeUnsafeContinuation<T>(_ continuation: _Concurrency.UnsafeContinuation<T, Swift.Never>, _ value: T) {
+@_alwaysEmitIntoClient internal func _resumeUnsafeContinuation<T>(_ continuation: _Concurrency.UnsafeContinuation<T, Swift.Never>, _ value: __owned T) {
   continuation.resume(returning: value)
 }
 #endif
@@ -2252,7 +2252,7 @@ extension _Concurrency.UnsafeContinuation {
 }
 #else
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@_alwaysEmitIntoClient internal func _resumeUnsafeThrowingContinuation<T>(_ continuation: _Concurrency.UnsafeContinuation<T, any Swift.Error>, _ value: T) {
+@_alwaysEmitIntoClient internal func _resumeUnsafeThrowingContinuation<T>(_ continuation: _Concurrency.UnsafeContinuation<T, any Swift.Error>, _ value: __owned T) {
   continuation.resume(returning: value)
 }
 #endif
@@ -2647,7 +2647,7 @@ extension _Concurrency.Task where Failure == Swift.Never {
   }
   #else
   @discardableResult
-  @_alwaysEmitIntoClient public init(priority: _Concurrency.TaskPriority? = nil, @_inheritActorContext @_implicitSelfCapture operation: @escaping @isolated(any) () async -> Success) {
+  @_alwaysEmitIntoClient public init(priority: _Concurrency.TaskPriority? = nil, @_inheritActorContext @_implicitSelfCapture operation: __owned @escaping @isolated(any) () async -> Success) {
 #if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
      
     let flags = taskCreateFlags(
@@ -2711,7 +2711,7 @@ extension _Concurrency.Task where Failure == any Swift.Error {
   }
   #else
   @discardableResult
-  @_alwaysEmitIntoClient public init(priority: _Concurrency.TaskPriority? = nil, @_inheritActorContext @_implicitSelfCapture operation: @escaping @isolated(any) () async throws -> Success) {
+  @_alwaysEmitIntoClient public init(priority: _Concurrency.TaskPriority? = nil, @_inheritActorContext @_implicitSelfCapture operation: __owned @escaping @isolated(any) () async throws -> Success) {
 #if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
      
     let flags = taskCreateFlags(
@@ -2775,7 +2775,7 @@ extension _Concurrency.Task where Failure == Swift.Never {
   }
   #else
   @discardableResult
-  @_alwaysEmitIntoClient public static func detached(priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async -> Success) -> _Concurrency.Task<Success, Failure> {
+  @_alwaysEmitIntoClient public static func detached(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async -> Success) -> _Concurrency.Task<Success, Failure> {
 #if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
      
     let flags = taskCreateFlags(
@@ -2839,7 +2839,7 @@ extension _Concurrency.Task where Failure == any Swift.Error {
   }
   #else
   @discardableResult
-  @_alwaysEmitIntoClient public static func detached(priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async throws -> Success) -> _Concurrency.Task<Success, Failure> {
+  @_alwaysEmitIntoClient public static func detached(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async throws -> Success) -> _Concurrency.Task<Success, Failure> {
 #if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
      
     let flags = taskCreateFlags(
@@ -3006,7 +3006,7 @@ extension _Concurrency.Task where Failure == Swift.Never {
   }
   #else
   @discardableResult
-  @_alwaysEmitIntoClient public init(executorPreference taskExecutor: consuming (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: @escaping () async -> Success) {
+  @_alwaysEmitIntoClient public init(executorPreference taskExecutor: consuming (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping () async -> Success) {
     guard let taskExecutor else {
       self = Self.init(priority: priority, operation: operation)
       return
@@ -3064,7 +3064,7 @@ extension _Concurrency.Task where Failure == any Swift.Error {
   }
   #else
   @discardableResult
-  @_alwaysEmitIntoClient public init(executorPreference taskExecutor: consuming (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: @escaping () async throws -> Success) {
+  @_alwaysEmitIntoClient public init(executorPreference taskExecutor: consuming (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping () async throws -> Success) {
     guard let taskExecutor else {
       self = Self.init(priority: priority, operation: operation)
       return
@@ -3121,7 +3121,7 @@ extension _Concurrency.Task where Failure == Swift.Never {
   }
   #else
   @discardableResult
-  @_alwaysEmitIntoClient public static func detached(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: @escaping () async -> Success) -> _Concurrency.Task<Success, Failure> {
+  @_alwaysEmitIntoClient public static func detached(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping () async -> Success) -> _Concurrency.Task<Success, Failure> {
     guard let taskExecutor else {
       return Self.detached(priority: priority, operation: operation)
     }
@@ -3177,7 +3177,7 @@ extension _Concurrency.Task where Failure == any Swift.Error {
   }
   #else
   @discardableResult
-  @_alwaysEmitIntoClient public static func detached(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: @escaping () async throws -> Success) -> _Concurrency.Task<Success, Failure> {
+  @_alwaysEmitIntoClient public static func detached(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping () async throws -> Success) -> _Concurrency.Task<Success, Failure> {
     guard let taskExecutor else {
       return Self.detached(priority: priority, operation: operation)
     }
@@ -3376,7 +3376,7 @@ internal func _taskRemoveCancellationHandler(record: Swift.UnsafeRawPointer)
 #endif
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTask(priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async -> ChildTaskResult) {
+  @_alwaysEmitIntoClient public mutating func addTask(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async -> ChildTaskResult) {
 #if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
 #if SWIFT_STDLIB_TASK_TO_THREAD_MODEL_CONCURRENCY
     let flags = taskCreateFlags(
@@ -3452,7 +3452,7 @@ internal func _taskRemoveCancellationHandler(record: Swift.UnsafeRawPointer)
 #endif
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async -> ChildTaskResult) -> Swift.Bool {
+  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async -> ChildTaskResult) -> Swift.Bool {
 #if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
     let canAdd = _taskGroupAddPendingTask(group: _group, unconditionally: false)
 
@@ -3606,7 +3606,7 @@ extension _Concurrency.TaskGroup : Swift.Sendable {
 #endif
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTask(priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async throws -> ChildTaskResult) {
+  @_alwaysEmitIntoClient public mutating func addTask(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async throws -> ChildTaskResult) {
 #if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
     let flags = taskCreateFlags(
       priority: priority, isChildTask: true, copyTaskLocals: false,
@@ -3667,7 +3667,7 @@ extension _Concurrency.TaskGroup : Swift.Sendable {
 #endif
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async throws -> ChildTaskResult) -> Swift.Bool {
+  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async throws -> ChildTaskResult) -> Swift.Bool {
 #if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
     let canAdd = _taskGroupAddPendingTask(group: _group, unconditionally: false)
 
@@ -3848,7 +3848,7 @@ extension _Concurrency.TaskGroup {
 #endif
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTask(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async -> ChildTaskResult) {
+  @_alwaysEmitIntoClient public mutating func addTask(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async -> ChildTaskResult) {
     guard let taskExecutor else {
       return self.addTask(priority: priority, operation: operation)
     }
@@ -3922,7 +3922,7 @@ extension _Concurrency.TaskGroup {
     return true
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async -> ChildTaskResult) -> Swift.Bool {
+  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async -> ChildTaskResult) -> Swift.Bool {
     guard let taskExecutor else {
       return self.addTaskUnlessCancelled(priority: priority, operation: operation)
     }
@@ -4000,7 +4000,7 @@ extension _Concurrency.ThrowingTaskGroup {
 #endif
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTask(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async throws -> ChildTaskResult) {
+  @_alwaysEmitIntoClient public mutating func addTask(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async throws -> ChildTaskResult) {
     guard let taskExecutor else {
       return self.addTask(priority: priority, operation: operation)
     }
@@ -4075,7 +4075,7 @@ extension _Concurrency.ThrowingTaskGroup {
     return true
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async throws -> ChildTaskResult) -> Swift.Bool {
+  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async throws -> ChildTaskResult) -> Swift.Bool {
     guard let taskExecutor else {
       return self.addTaskUnlessCancelled(priority: priority, operation: operation)
     }
@@ -4153,7 +4153,7 @@ extension _Concurrency.DiscardingTaskGroup {
 #endif
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTask(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async -> Swift.Void) {
+  @_alwaysEmitIntoClient public mutating func addTask(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async -> Swift.Void) {
     guard let taskExecutor else {
       return self.addTask(priority: priority, operation: operation)
     }
@@ -4228,7 +4228,7 @@ extension _Concurrency.DiscardingTaskGroup {
     return true
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async -> Swift.Void) -> Swift.Bool {
+  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async -> Swift.Void) -> Swift.Bool {
     guard let taskExecutor else {
       return self.addTaskUnlessCancelled(priority: priority, operation: operation)
     }
@@ -4306,7 +4306,7 @@ extension _Concurrency.ThrowingDiscardingTaskGroup {
 #endif
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTask(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async throws -> Swift.Void) {
+  @_alwaysEmitIntoClient public mutating func addTask(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async throws -> Swift.Void) {
     guard let taskExecutor else {
       return self.addTask(priority: priority, operation: operation)
     }
@@ -4381,7 +4381,7 @@ extension _Concurrency.ThrowingDiscardingTaskGroup {
     return true
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async throws -> Swift.Void) -> Swift.Bool {
+  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(executorPreference taskExecutor: (any _Concurrency.TaskExecutor)?, priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async throws -> Swift.Void) -> Swift.Bool {
     guard let taskExecutor else {
       return self.addTaskUnlessCancelled(priority: priority, operation: operation)
     }
@@ -4492,7 +4492,7 @@ extension _Concurrency.ThrowingDiscardingTaskGroup {
     #endif
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTask(priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async -> Swift.Void) {
+  @_alwaysEmitIntoClient public mutating func addTask(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async -> Swift.Void) {
     let flags = taskCreateFlags(
       priority: priority, isChildTask: true, copyTaskLocals: false,
       inheritContext: false, enqueueJob: true,
@@ -4567,7 +4567,7 @@ extension _Concurrency.ThrowingDiscardingTaskGroup {
     return true
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async -> Swift.Void) -> Swift.Bool {
+  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async -> Swift.Void) -> Swift.Bool {
     let canAdd = _taskGroupAddPendingTask(group: _group, unconditionally: false)
 
     guard canAdd else {
@@ -4642,7 +4642,7 @@ extension _Concurrency.ThrowingDiscardingTaskGroup {
     #endif
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTask(operation: @escaping @isolated(any) () async -> Swift.Void) {
+  @_alwaysEmitIntoClient public mutating func addTask(operation: __owned @escaping @isolated(any) () async -> Swift.Void) {
     let flags = taskCreateFlags(
       priority: nil, isChildTask: true, copyTaskLocals: false,
       inheritContext: false, enqueueJob: true,
@@ -4722,7 +4722,7 @@ extension _Concurrency.ThrowingDiscardingTaskGroup {
 #endif
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(operation: @escaping @isolated(any) () async -> Swift.Void) -> Swift.Bool {
+  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(operation: __owned @escaping @isolated(any) () async -> Swift.Void) -> Swift.Bool {
 #if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
     let canAdd = _taskGroupAddPendingTask(group: _group, unconditionally: false)
 
@@ -4862,7 +4862,7 @@ extension _Concurrency.DiscardingTaskGroup : Swift.Sendable {
 #endif
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTask(priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async throws -> Swift.Void) {
+  @_alwaysEmitIntoClient public mutating func addTask(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async throws -> Swift.Void) {
 #if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
     let flags = taskCreateFlags(
       priority: priority, isChildTask: true, copyTaskLocals: false,
@@ -4946,7 +4946,7 @@ extension _Concurrency.DiscardingTaskGroup : Swift.Sendable {
 #endif
   }
   #else
-  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(priority: _Concurrency.TaskPriority? = nil, operation: @escaping @isolated(any) () async throws -> Swift.Void) -> Swift.Bool {
+  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @isolated(any) () async throws -> Swift.Void) -> Swift.Bool {
 #if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
     let canAdd = _taskGroupAddPendingTask(group: _group, unconditionally: false)
 
@@ -5132,7 +5132,7 @@ public struct AsyncStream<Element> {
     public func yield(_ value: sending Element) -> _Concurrency.AsyncStream<Element>.Continuation.YieldResult
     #else
     @discardableResult
-    public func yield(_ value: Element) -> _Concurrency.AsyncStream<Element>.Continuation.YieldResult
+    public func yield(_ value: __owned Element) -> _Concurrency.AsyncStream<Element>.Continuation.YieldResult
     #endif
     public func finish()
     public var onTermination: (@Sendable (_Concurrency.AsyncStream<Element>.Continuation.Termination) -> Swift.Void)? {
@@ -5218,7 +5218,7 @@ public struct AsyncThrowingStream<Element, Failure> where Failure : Swift.Error 
     public func yield(_ value: sending Element) -> _Concurrency.AsyncThrowingStream<Element, Failure>.Continuation.YieldResult
     #else
     @discardableResult
-    public func yield(_ value: Element) -> _Concurrency.AsyncThrowingStream<Element, Failure>.Continuation.YieldResult
+    public func yield(_ value: __owned Element) -> _Concurrency.AsyncThrowingStream<Element, Failure>.Continuation.YieldResult
     #endif
     public func finish(throwing error: __owned Failure? = nil)
     public var onTermination: (@Sendable (_Concurrency.AsyncThrowingStream<Element, Failure>.Continuation.Termination) -> Swift.Void)? {

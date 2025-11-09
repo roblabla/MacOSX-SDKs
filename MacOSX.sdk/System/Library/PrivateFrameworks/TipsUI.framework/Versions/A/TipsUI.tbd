@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TipsUI.framework/Versions/A/TipsUI'
-current-version: 765.2
+current-version: 769
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -225,14 +225,9 @@ exports:
                        '_$s6TipsUI0A15AnalyticsHelperCMm', '_$s6TipsUI0A15AnalyticsHelperCMn', 
                        '_$s6TipsUI0A15AnalyticsHelperCMo', '_$s6TipsUI0A15AnalyticsHelperCMu', 
                        '_$s6TipsUI0A15AnalyticsHelperCN', '_$s6TipsUI0A15AnalyticsHelperCfD', 
-                       '_$s6TipsUI0A15AnalyticsHelperCfd', '_$s6TipsUI0A15FeaturedTipViewV05SwiftB00E0AAMc', 
-                       '_$s6TipsUI0A15FeaturedTipViewV3tip13dynamicHeightACSo6TPSTipC_05SwiftB07BindingVy12CoreGraphics7CGFloatVGtcfC', 
-                       '_$s6TipsUI0A15FeaturedTipViewV4bodyQrvg', '_$s6TipsUI0A15FeaturedTipViewV4bodyQrvpMV', 
-                       '_$s6TipsUI0A15FeaturedTipViewV4bodyQrvpQOMQ', '_$s6TipsUI0A15FeaturedTipViewVMa', 
-                       '_$s6TipsUI0A15FeaturedTipViewVMn', '_$s6TipsUI0A15FeaturedTipViewVN', 
-                       '_$s6TipsUI0A17WidgetWrapperViewV05SwiftB00E0AAMc', '_$s6TipsUI0A17WidgetWrapperViewV4bodyQrvg', 
-                       '_$s6TipsUI0A17WidgetWrapperViewV4bodyQrvpMV', '_$s6TipsUI0A17WidgetWrapperViewV4bodyQrvpQOMQ', 
-                       '_$s6TipsUI0A17WidgetWrapperViewV5entryAcA13DocumentEntryVSg_tcfC', 
+                       '_$s6TipsUI0A15AnalyticsHelperCfd', '_$s6TipsUI0A17WidgetWrapperViewV05SwiftB00E0AAMc', 
+                       '_$s6TipsUI0A17WidgetWrapperViewV4bodyQrvg', '_$s6TipsUI0A17WidgetWrapperViewV4bodyQrvpMV', 
+                       '_$s6TipsUI0A17WidgetWrapperViewV4bodyQrvpQOMQ', '_$s6TipsUI0A17WidgetWrapperViewV5entryAcA13DocumentEntryVSg_tcfC', 
                        '_$s6TipsUI0A17WidgetWrapperViewV6family0C3Kit0C6FamilyOvg', 
                        '_$s6TipsUI0A17WidgetWrapperViewV6family0C3Kit0C6FamilyOvpMV', 
                        '_$s6TipsUI0A17WidgetWrapperViewVMa', '_$s6TipsUI0A17WidgetWrapperViewVMn', 
@@ -957,6 +952,8 @@ exports:
                        '_$s7SwiftUI4ViewP04TipsB0E16assetContentModeyQrAA0fG0OFQOMQ', 
                        '_$s7SwiftUI4ViewP04TipsB0E16readScrollOffset8onChangeQrySo7CGPointVc_tF', 
                        '_$s7SwiftUI4ViewP04TipsB0E16readScrollOffset8onChangeQrySo7CGPointVc_tFQOMQ', 
+                       '_$s7SwiftUI4ViewP04TipsB0E22replayButtonVisibilityyQrAA7BindingVySbGF', 
+                       '_$s7SwiftUI4ViewP04TipsB0E22replayButtonVisibilityyQrAA7BindingVySbGFQOMQ', 
                        '_$s7SwiftUI4ViewP04TipsB0E4whenyQrSb_qd__xXEtAaBRd__lF', 
                        '_$s7SwiftUI4ViewP04TipsB0E4whenyQrSb_qd__xXEtAaBRd__lFQOMQ', 
                        '_$s7SwiftUI4ViewP04TipsB0E6modifyyqd__qd__xXEAaBRd__lF', 
@@ -980,7 +977,7 @@ exports:
                        '_$sSa6TipsUIE18colorsFromGradientySay05SwiftB05ColorVGSo11TPSGradientCSgFZ', 
                        '_$sSo20TPSSearchQueryClientC6TipsUIE07performB0y0D4Core12SearchResultCAE0hB0CYaKF', 
                        '_$sSo20TPSSearchQueryClientC6TipsUIE07performB0y0D4Core12SearchResultCAE0hB0CYaKFTu', 
-                       '_$sSo6NSFontC6TipsUIE13fontWithStyle_4sizeABSo0a4TextF0a_12CoreGraphics7CGFloatVtFZ', 
+                       '_$sSo6NSFontC6TipsUIE13fontWithStyle_4size14symbolicTraitsABSo0a4TextF0a_12CoreGraphics7CGFloatVSo0a18DescriptorSymbolicI0VSgtFZ', 
                        '_$sSo6NSFontC6TipsUIE21widgetBodyScaleFactor12CoreGraphics7CGFloatVvgZ', 
                        '_$sSo6NSFontC6TipsUIE22widgetTitleScaleFactor12CoreGraphics7CGFloatVvgZ', 
                        '_$sSo6NSFontC6TipsUIE24defaultHyphenationFactor12CoreGraphics7CGFloatVvgZ', 

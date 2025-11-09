@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     The notification object is an AVCaptureDevice instance representing the device that became available.
  */
-AVF_EXPORT NSNotificationName const AVCaptureDeviceWasConnectedNotification NS_SWIFT_NAME(AVCaptureDevice.wasConnectedNotification) API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVCaptureDeviceWasConnectedNotification NS_SWIFT_NAME(AVCaptureDevice.wasConnectedNotification) API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(2.1)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureDeviceWasDisconnectedNotification
@@ -38,7 +38,7 @@ AVF_EXPORT NSNotificationName const AVCaptureDeviceWasConnectedNotification NS_S
  @discussion
     The notification object is an AVCaptureDevice instance representing the device that became unavailable.
  */
-AVF_EXPORT NSNotificationName const AVCaptureDeviceWasDisconnectedNotification NS_SWIFT_NAME(AVCaptureDevice.wasDisconnectedNotification) API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVCaptureDeviceWasDisconnectedNotification NS_SWIFT_NAME(AVCaptureDevice.wasDisconnectedNotification) API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(2.1)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureDeviceSubjectAreaDidChangeNotification
@@ -119,7 +119,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This method returns the default device of the given media type currently available on the system. For example, for AVMediaTypeVideo, this method will return the built in camera that is primarily used for capture and recording. Media type constants are defined in AVMediaFormat.h.
  */
-+ (nullable AVCaptureDevice *)defaultDeviceWithMediaType:(AVMediaType)mediaType API_UNAVAILABLE(visionos);
++ (nullable AVCaptureDevice *)defaultDeviceWithMediaType:(AVMediaType)mediaType API_AVAILABLE(visionos(2.1));
 
 /*!
  @method deviceWithUniqueID:
@@ -134,7 +134,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Every available capture device has a unique ID that persists on one system across device connections and disconnections, application restarts, and reboots of the system itself. This method can be used to recall or track the status of a specific device whose unique ID has previously been saved.
  */
-+ (nullable AVCaptureDevice *)deviceWithUniqueID:(NSString *)deviceUniqueID API_UNAVAILABLE(visionos);
++ (nullable AVCaptureDevice *)deviceWithUniqueID:(NSString *)deviceUniqueID API_AVAILABLE(visionos(2.1));
 
 /*!
  @property uniqueID
@@ -154,7 +154,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The value of this property is an identifier unique to all devices of the same model. The value is persistent across device connections and disconnections, and across different systems. For example, the model ID of the camera built in to two identical iPhone models will be the same even though they are different physical devices.
  */
-@property(nonatomic, readonly) NSString *modelID API_UNAVAILABLE(visionos);
+@property(nonatomic, readonly) NSString *modelID API_AVAILABLE(visionos(2.1));
 
 /*!
  @property localizedName
@@ -174,7 +174,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property can be used to identify capture devices from a particular manufacturer. All Apple devices return "Apple Inc.". Devices from third party manufacturers may return an empty string.
  */
-@property(nonatomic, readonly) NSString *manufacturer API_AVAILABLE(macos(10.9), ios(14.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly) NSString *manufacturer API_AVAILABLE(macos(10.9), ios(14.0), macCatalyst(14.0), tvos(17.0), visionos(2.1)) API_UNAVAILABLE(watchos);
 
 /*!
  @property transportType
@@ -249,7 +249,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The value of this property is a BOOL indicating whether the device represented by the receiver is connected and available for use as a capture device. Clients can key value observe the value of this property to be notified when a device is no longer available. When the value of this property becomes NO for a given instance, it will not become YES again. If the same physical device again becomes available to the system, it will be represented using a new instance of AVCaptureDevice.
  */
-@property(nonatomic, readonly, getter=isConnected) BOOL connected API_UNAVAILABLE(visionos);
+@property(nonatomic, readonly, getter=isConnected) BOOL connected API_AVAILABLE(visionos(2.1));
 
 /*!
  @property inUseByAnotherApplication
@@ -269,7 +269,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The value of this property is a BOOL indicating whether the device represented by the receiver is currently suspended. Some devices disallow data capture due to a feature on the device. For example, isSuspended returns YES for the external iSight when its privacy iris is closed, or for the internal iSight on a notebook when the notebook's display is closed. Clients can key value observe the value of this property to be notified when the device becomes suspended or unsuspended.
  */
-@property(nonatomic, readonly, getter=isSuspended) BOOL suspended API_AVAILABLE(ios(14.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly, getter=isSuspended) BOOL suspended API_AVAILABLE(ios(14.0), macCatalyst(14.0), tvos(17.0), visionos(2.1)) API_UNAVAILABLE(watchos);
 
 /*!
  @property linkedDevices
@@ -450,7 +450,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
  @discussion
     The AVCaptureDeviceType string constants are intended to be used in combination with the AVCaptureDeviceDiscoverySession class to obtain a list of devices matching certain search criteria.
  */
-typedef NSString *AVCaptureDeviceType NS_TYPED_ENUM API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+typedef NSString *AVCaptureDeviceType NS_TYPED_ENUM API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0), visionos(2.1)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureDeviceTypeExternal
@@ -460,10 +460,11 @@ typedef NSString *AVCaptureDeviceType NS_TYPED_ENUM API_AVAILABLE(macos(10.15), 
     Starting in Mac Catalyst 17.0, apps may opt in for using AVCaptureDeviceTypeExternal by adding the following key to their Info.plist:
         <key>NSCameraUseExternalDeviceType</key>
         <true/>
-
     Otherwise, external cameras on Mac Catalyst report that their device type is AVCaptureDeviceTypeBuiltInWideAngleCamera.
+ 
+     On visionOS, your app must have the `com.apple.developer.avfoundation.uvc-device-access` entitlement in order to discover and use devices of type `AVCaptureDeviceTypeExternal`.
  */
-AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeExternal API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
+AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeExternal API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0), visionos(2.1)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureDeviceTypeMicrophone
@@ -475,7 +476,7 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeMicrophone API_AVAILABLE
  @constant AVCaptureDeviceTypeBuiltInWideAngleCamera
     A built-in wide angle camera device. These devices are suitable for general purpose use.
  */
-AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInWideAngleCamera API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInWideAngleCamera API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0), visionos(2.1)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureDeviceTypeBuiltInTelephotoCamera
@@ -604,12 +605,12 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  @discussion
     A capture device's type never changes.
  */
-@property(nonatomic, readonly) AVCaptureDeviceType deviceType API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
+@property(nonatomic, readonly) AVCaptureDeviceType deviceType API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0), visionos(2.1));
 
 @end
 
 
-API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0), visionos(2.1)) API_UNAVAILABLE(watchos)
 @interface AVCaptureDevice (AVCaptureDefaultDevice)
 
 /*!
@@ -629,7 +630,7 @@ API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAI
  @discussion
     This method returns the default device of the given combination of device type, media type, and position currently available on the system.
  */
-+ (nullable AVCaptureDevice *)defaultDeviceWithDeviceType:(AVCaptureDeviceType)deviceType mediaType:(nullable AVMediaType)mediaType position:(AVCaptureDevicePosition)position API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
++ (nullable AVCaptureDevice *)defaultDeviceWithDeviceType:(AVCaptureDeviceType)deviceType mediaType:(nullable AVMediaType)mediaType position:(AVCaptureDevicePosition)position API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0), visionos(2.1));
 
 @end
 
@@ -2563,7 +2564,7 @@ AVF_EXPORT AVSpatialCaptureDiscomfortReason const AVSpatialCaptureDiscomfortReas
  @discussion
     This class allows clients to discover devices by providing certain search criteria. The objective of this class is to help find devices by device type and optionally by media type or position and allow you to key-value observe changes to the returned devices list.
  */
-API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0), visionos(2.1)) API_UNAVAILABLE(watchos)
 @interface AVCaptureDeviceDiscoverySession : NSObject
 
 AV_INIT_UNAVAILABLE
@@ -2605,7 +2606,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     When using an AVCaptureMultiCamSession, multiple cameras may be used as device inputs to the session, so long as they are included in one of the supportedMultiCamDeviceSets. Starting in Mac Catalyst 14.0, clients can key value observe the value of this property to be notified when the device sets change.
  */
-@property(nonatomic, readonly) NSArray<NSSet<AVCaptureDevice *> *> *supportedMultiCamDeviceSets API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly) NSArray<NSSet<AVCaptureDevice *> *> *supportedMultiCamDeviceSets API_AVAILABLE(ios(13.0), visionos(2.1)) API_UNAVAILABLE(macos);
 
 @end
 
@@ -2696,7 +2697,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This is used by AVCaptureSystemExposureBiasSlider for the range the slider uses.
  */
-API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT
+API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT
 @interface AVExposureBiasRange : NSObject
 
 AV_INIT_UNAVAILABLE
@@ -3278,7 +3279,7 @@ API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  @discussion
    When using an AVCaptureSession (single camera capture), any of the formats in the device's -formats array may be set as the -activeFormat. However, when used with an AVCaptureMultiCamSession, the device's -activeFormat may only be set to one of the formats for which multiCamSupported answers YES. This limited subset of capture formats are known to run sustainably in a multi camera capture scenario.
  */
-@property(nonatomic, readonly, getter=isMultiCamSupported) BOOL multiCamSupported API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly, getter=isMultiCamSupported) BOOL multiCamSupported API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0), visionos(2.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos);
 
 @end
 

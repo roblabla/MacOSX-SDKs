@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class HKLiveWorkoutBuilder;
 @class HKWorkoutSession;
 
-HK_EXTERN API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+HK_EXTERN
+API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 @protocol HKLiveWorkoutBuilderDelegate <NSObject>
 
 /*!
@@ -59,7 +60,9 @@ HK_EXTERN API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-HK_EXTERN API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 @interface HKLiveWorkoutBuilder : HKWorkoutBuilder
 
 - (instancetype)initWithHealthStore:(HKHealthStore *)healthStore

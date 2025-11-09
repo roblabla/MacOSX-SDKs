@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/OSPersonalization.framework/Versions/A/OSPersonalization'
-current-version: 139.0.1
+current-version: 139.40.2
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DERAccessDescriptionItemSpecs, _DERAlgorithmIdItemSpecs, 

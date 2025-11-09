@@ -5,10 +5,11 @@
 //  Copyright © 2022-2024 Apple. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKSample.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
 
 /*!
  @enum          HKStateOfMindValenceClassification
@@ -109,8 +110,8 @@ typedef NS_ENUM(NSInteger, HKStateOfMindKind) {
 
 /// Represents how one feels, including descriptors of a feeling and optionally, its source.
 HK_EXTERN
-API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0))
 NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0))
 @interface HKStateOfMind : HKSample <NSSecureCoding, NSCopying>
 
 /// A description of the kind of feeling type captured by this state of mind.

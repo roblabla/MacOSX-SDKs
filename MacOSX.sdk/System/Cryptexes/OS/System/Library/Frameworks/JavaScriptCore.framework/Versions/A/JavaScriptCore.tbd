@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/JavaScriptCore'
-current-version: 619.1.26
+current-version: 619.2.8
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __ZN3JSC11CompilationC1ENS_21MacroAssemblerCodeRefILN3WTF6PtrTagE2367EEENSt3__110unique_ptrINS_16OpaqueByproductsENS5_14default_deleteIS7_EEEE, 
@@ -1865,7 +1865,7 @@ exports:
                        __ZN3WTF22equalIgnoringASCIICaseEPKNS_10StringImplES2_, __ZN3WTF22equalRespectingNullityENS_10StringViewES0_, 
                        __ZN3WTF22isMainThreadOrGCThreadEv, __ZN3WTF22logFootprintComparisonERKNSt3__15arrayINS_7TagInfoELm256EEES5_, 
                        __ZN3WTF22numberOfProcessorCoresEv, __ZN3WTF22protocolIsInHTTPFamilyENS_10StringViewE, 
-                       __ZN3WTF22removeProcessPrivilegeENS_16ProcessPrivilegeE, __ZN3WTF22setSDKAlignedBehaviorsENS_6BitSetILm93EjEE, 
+                       __ZN3WTF22removeProcessPrivilegeENS_16ProcessPrivilegeE, __ZN3WTF22setSDKAlignedBehaviorsENS_6BitSetILm94EjEE, 
                        __ZN3WTF22userPreferredLanguagesENS_23ShouldMinimizeLanguagesE, 
                        __ZN3WTF23callOnMainThreadAndWaitEONS_8FunctionIFvvEEE, __ZN3WTF23dataForURLComponentTypeEP5NSURL18CFURLComponentType, 
                        __ZN3WTF23fastCommitAlignedMemoryEPvm, __ZN3WTF23fastCompactZeroedMallocEm, 

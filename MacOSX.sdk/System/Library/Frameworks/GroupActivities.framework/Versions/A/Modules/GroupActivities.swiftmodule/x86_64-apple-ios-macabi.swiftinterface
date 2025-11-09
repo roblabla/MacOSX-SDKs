@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 161.100.1 -module-name GroupActivities
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target x86_64-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 225.200.71 -module-name GroupActivities
 import AVFoundation
 import CloudKit
 import Combine
@@ -12,7 +12,6 @@ import Darwin
 import Foundation
 @_exported import GroupActivities
 import ImageIO
-import Network
 import Spatial
 import Swift
 import UniformTypeIdentifiers
@@ -70,7 +69,7 @@ final public class GroupSession<ActivityType> : Combine.ObservableObject where A
   final public func end()
   final public func requestForegroundPresentation()
   @available(iOS 15, tvOS 15, macOS 12, *)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(watchOS, unavailable)
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
 }
 extension GroupActivities.GroupSession.State : Swift.Equatable {
@@ -172,8 +171,8 @@ public struct GroupActivityTransferRepresentation<Item> : CoreTransferable.Trans
     get
   }
   @available(iOS 17, macOS 14, *)
-  @available(tvOS, unavailable, introduced: 16.0)
-  @available(watchOS, unavailable, introduced: 9.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s15GroupActivities0A30ActivityTransferRepresentationV4bodyQrvp", 0) __<Item>
 }
 @available(iOS 17, macOS 14, *)
@@ -228,7 +227,7 @@ final public class GroupStateObserver : Combine.ObservableObject {
   }
   convenience public init()
   @available(iOS 15, tvOS 15, macOS 12, *)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(watchOS, unavailable)
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
@@ -253,7 +252,7 @@ extension GroupActivities.GroupSessionJournal {
     public func load<AttachmentType>(_ attachmentType: AttachmentType.Type) async throws -> AttachmentType where AttachmentType : CoreTransferable.Transferable
     public func loadMetadata<MetadataType>(of: MetadataType.Type) async throws -> MetadataType where MetadataType : Swift.Decodable, MetadataType : Swift.Encodable
     @available(iOS 17, tvOS 17, macOS 14, *)
-    @available(watchOS, unavailable, introduced: 6.0)
+    @available(watchOS, unavailable)
     public typealias ID = Foundation.UUID
   }
 }
@@ -266,7 +265,7 @@ extension GroupActivities.GroupSessionJournal {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol, Swift.Sendable {
       public mutating func next() async -> GroupActivities.GroupSessionJournal.Attachments.Element?
       @available(iOS 17, tvOS 17, macOS 14, *)
-      @available(watchOS, unavailable, introduced: 6.0)
+      @available(watchOS, unavailable)
       public typealias Element = GroupActivities.GroupSessionJournal.Attachments.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
@@ -279,7 +278,7 @@ extension GroupActivities.GroupSessionJournal {
       #endif
     }
     @available(iOS 17, tvOS 17, macOS 14, *)
-    @available(watchOS, unavailable, introduced: 6.0)
+    @available(watchOS, unavailable)
     public typealias AsyncIterator = GroupActivities.GroupSessionJournal.Attachments.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
@@ -366,7 +365,7 @@ public struct Participant : Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: GroupActivities.Participant, b: GroupActivities.Participant) -> Swift.Bool
   @available(iOS 15, tvOS 15, macOS 12, *)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(watchOS, unavailable)
   public typealias ID = Foundation.UUID
   public var hashValue: Swift.Int {
     get
@@ -420,10 +419,10 @@ extension GroupActivities.SystemCoordinator {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol, @unchecked Swift.Sendable {
       public mutating func next() async -> GroupActivities.SystemCoordinator.ParticipantStates.Element?
       @available(visionOS 1.0, *)
-      @available(iOS, unavailable, introduced: 13.0)
-      @available(tvOS, unavailable, introduced: 13.0)
-      @available(watchOS, unavailable, introduced: 6.0)
-      @available(macOS, unavailable, introduced: 10.15)
+      @available(iOS, unavailable)
+      @available(tvOS, unavailable)
+      @available(watchOS, unavailable)
+      @available(macOS, unavailable)
       public typealias Element = GroupActivities.SystemCoordinator.ParticipantStates.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(visionOS 2.0, *)
@@ -442,10 +441,10 @@ extension GroupActivities.SystemCoordinator {
       #endif
     }
     @available(visionOS 1.0, *)
-    @available(iOS, unavailable, introduced: 13.0)
-    @available(tvOS, unavailable, introduced: 13.0)
-    @available(watchOS, unavailable, introduced: 6.0)
-    @available(macOS, unavailable, introduced: 10.15)
+    @available(iOS, unavailable)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(macOS, unavailable)
     public typealias AsyncIterator = GroupActivities.SystemCoordinator.ParticipantStates.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(visionOS 2.0, *)
@@ -638,7 +637,7 @@ extension GroupActivities.GroupSessionMessenger {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
       public mutating func next() async -> GroupActivities.GroupSessionMessenger.Messages<Message>.Element?
       @available(iOS 15, tvOS 15, macOS 12, *)
-      @available(watchOS, unavailable, introduced: 6.0)
+      @available(watchOS, unavailable)
       public typealias Element = GroupActivities.GroupSessionMessenger.Messages<Message>.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
@@ -651,7 +650,7 @@ extension GroupActivities.GroupSessionMessenger {
       #endif
     }
     @available(iOS 15, tvOS 15, macOS 12, *)
-    @available(watchOS, unavailable, introduced: 6.0)
+    @available(watchOS, unavailable)
     public typealias AsyncIterator = GroupActivities.GroupSessionMessenger.Messages<Message>.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
@@ -691,7 +690,7 @@ extension GroupActivities.GroupSession {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
       public mutating func next() async -> GroupActivities.GroupSession<ActivityType>?
       @available(iOS 15, tvOS 15, macOS 12, *)
-      @available(watchOS, unavailable, introduced: 6.0)
+      @available(watchOS, unavailable)
       public typealias Element = GroupActivities.GroupSession<ActivityType>
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
@@ -704,7 +703,7 @@ extension GroupActivities.GroupSession {
       #endif
     }
     @available(iOS 15, tvOS 15, macOS 12, *)
-    @available(watchOS, unavailable, introduced: 6.0)
+    @available(watchOS, unavailable)
     public typealias AsyncIterator = GroupActivities.GroupSession<ActivityType>.Sessions.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)

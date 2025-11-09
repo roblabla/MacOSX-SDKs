@@ -7,9 +7,10 @@
 .Nd Network quality testing tool
 .Sh SYNOPSIS
 .Nm
-.Op Fl bcdhksuv          \" [-bcdhksuv]
+.Op Fl bdhksuv          \" [-bdhksuv]
 .Op Fl B Ar Bonjour name \" [-C Bonjour name]
 .Op Fl C Ar configuration URL \" [-C configuration URL]
+.Op Fl c Ar filename \" [-c filename]
 .Op Fl f Ar protocol selection \" [-f h1,h2,h3]
 .Op Fl I Ar interface \" [-I interface]
 .Op Fl r Ar host \" [-r host]
@@ -63,8 +64,8 @@ Create a networkQuality server-instance running locally on the specified port.
 It will display the URL of the config-file that can be passed on to a client-instance
 with option -C. Note that the certificate is self-signed and thus option -k needs
 to be used on the client-instance.
-.It Fl c
-Produce computer-readable output (JSON).
+.It Fl c Ar [\fIfilename\fP ]
+Produce computer-readable output (JSON). \fIfilename\fP is optional, will default to STDOUT.
 .It Fl d
 Do not run a download test (implies -s)
 .It Fl h

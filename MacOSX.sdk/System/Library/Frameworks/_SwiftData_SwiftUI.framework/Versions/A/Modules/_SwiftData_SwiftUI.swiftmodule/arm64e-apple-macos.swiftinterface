@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-macos15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature VariadicGenerics -enable-experimental-feature ExtensionMacros -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 86 -module-name _SwiftData_SwiftUI
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-macos15.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature VariadicGenerics -enable-experimental-feature ExtensionMacros -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 90.2 -module-name _SwiftData_SwiftUI
 import Foundation
 @_exported import Observation
 import Swift
@@ -143,12 +143,12 @@ extension SwiftUI.Scene {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.DocumentGroup where Document == _SwiftData_SwiftUI.ModelDocument {
-  @_Concurrency.MainActor @preconcurrency public init(editing contentType: UniformTypeIdentifiers.UTType, migrationPlan: any SwiftData.SchemaMigrationPlan.Type, editor: @escaping () -> Content, prepareDocument: @escaping ((SwiftData.ModelContext) -> Swift.Void) = { _ in })
-  @_Concurrency.MainActor @preconcurrency public init(viewing contentType: UniformTypeIdentifiers.UTType, migrationPlan: any SwiftData.SchemaMigrationPlan.Type, viewer: @escaping () -> Content)
-  @_Concurrency.MainActor @preconcurrency public init(editing modelType: any SwiftData.PersistentModel.Type, contentType: UniformTypeIdentifiers.UTType, editor: @escaping () -> Content, prepareDocument: @escaping ((SwiftData.ModelContext) -> Swift.Void) = { _ in })
-  @_Concurrency.MainActor @preconcurrency public init(editing modelTypes: [any SwiftData.PersistentModel.Type], contentType: UniformTypeIdentifiers.UTType, editor: @escaping () -> Content, prepareDocument: @escaping ((SwiftData.ModelContext) -> Swift.Void) = { _ in })
-  @_Concurrency.MainActor @preconcurrency public init(viewing modelType: any SwiftData.PersistentModel.Type, contentType: UniformTypeIdentifiers.UTType, viewer: @escaping () -> Content)
-  @_Concurrency.MainActor @preconcurrency public init(viewing modelTypes: [any SwiftData.PersistentModel.Type], contentType: UniformTypeIdentifiers.UTType, viewer: @escaping () -> Content)
+  public init(editing contentType: UniformTypeIdentifiers.UTType, migrationPlan: any SwiftData.SchemaMigrationPlan.Type, editor: @escaping () -> Content, prepareDocument: @escaping ((SwiftData.ModelContext) -> Swift.Void) = { _ in })
+  public init(viewing contentType: UniformTypeIdentifiers.UTType, migrationPlan: any SwiftData.SchemaMigrationPlan.Type, viewer: @escaping () -> Content)
+  public init(editing modelType: any SwiftData.PersistentModel.Type, contentType: UniformTypeIdentifiers.UTType, editor: @escaping () -> Content, prepareDocument: @escaping ((SwiftData.ModelContext) -> Swift.Void) = { _ in })
+  public init(editing modelTypes: [any SwiftData.PersistentModel.Type], contentType: UniformTypeIdentifiers.UTType, editor: @escaping () -> Content, prepareDocument: @escaping ((SwiftData.ModelContext) -> Swift.Void) = { _ in })
+  public init(viewing modelType: any SwiftData.PersistentModel.Type, contentType: UniformTypeIdentifiers.UTType, viewer: @escaping () -> Content)
+  public init(viewing modelTypes: [any SwiftData.PersistentModel.Type], contentType: UniformTypeIdentifiers.UTType, viewer: @escaping () -> Content)
 }
 @available(iOS 17.0, macOS 14.0, *)
 @available(tvOS, unavailable)

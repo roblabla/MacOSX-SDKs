@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/TipKit.framework/Versions/A/TipKit'
-current-version: 87
+current-version: 92.1.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -96,13 +96,14 @@ exports:
                        '_$s6TipKit0A0PAAE2idSSvg', '_$s6TipKit0A0PAAE2idSSvpMV', 
                        '_$s6TipKit0A0PAAE4hideyyF', '_$s6TipKit0A0PAAE4showyyF', 
                        '_$s6TipKit0A0PAAE5image7SwiftUI5ImageVSgvg', '_$s6TipKit0A0PAAE5image7SwiftUI5ImageVSgvpMV', 
-                       '_$s6TipKit0A0PAAE5rulesSayAA4TipsO4RuleVGvg', '_$s6TipKit0A0PAAE5rulesSayAA4TipsO4RuleVGvpMV', 
-                       '_$s6TipKit0A0PAAE5title7SwiftUI4TextVvg', '_$s6TipKit0A0PAAE5title7SwiftUI4TextVvpMV', 
-                       '_$s6TipKit0A0PAAE6statusAA4TipsO6StatusOvg', '_$s6TipKit0A0PAAE6statusAA4TipsO6StatusOvpMV', 
-                       '_$s6TipKit0A0PAAE7actionsSayAA4TipsO6ActionVGvg', '_$s6TipKit0A0PAAE7actionsSayAA4TipsO6ActionVGvpMV', 
-                       '_$s6TipKit0A0PAAE7message7SwiftUI4TextVSgvg', '_$s6TipKit0A0PAAE7message7SwiftUI4TextVSgvpMV', 
-                       '_$s6TipKit0A0PAAE7optionsSayAA0A6Option_pGvg', '_$s6TipKit0A0PAAE7optionsSayAA0A6Option_pGvpMV', 
-                       '_$s6TipKit0A0Ps12IdentifiableTb', '_$s6TipKit0A0TL', '_$s6TipKit0A22ViewStyleConfigurationV05imageC07SwiftUI03AnyC0VSgvg', 
+                       '_$s6TipKit0A0PAAE5resetyyF', '_$s6TipKit0A0PAAE5rulesSayAA4TipsO4RuleVGvg', 
+                       '_$s6TipKit0A0PAAE5rulesSayAA4TipsO4RuleVGvpMV', '_$s6TipKit0A0PAAE5title7SwiftUI4TextVvg', 
+                       '_$s6TipKit0A0PAAE5title7SwiftUI4TextVvpMV', '_$s6TipKit0A0PAAE6statusAA4TipsO6StatusOvg', 
+                       '_$s6TipKit0A0PAAE6statusAA4TipsO6StatusOvpMV', '_$s6TipKit0A0PAAE7actionsSayAA4TipsO6ActionVGvg', 
+                       '_$s6TipKit0A0PAAE7actionsSayAA4TipsO6ActionVGvpMV', '_$s6TipKit0A0PAAE7message7SwiftUI4TextVSgvg', 
+                       '_$s6TipKit0A0PAAE7message7SwiftUI4TextVSgvpMV', '_$s6TipKit0A0PAAE7optionsSayAA0A6Option_pGvg', 
+                       '_$s6TipKit0A0PAAE7optionsSayAA0A6Option_pGvpMV', '_$s6TipKit0A0Ps12IdentifiableTb', 
+                       '_$s6TipKit0A0TL', '_$s6TipKit0A22ViewStyleConfigurationV05imageC07SwiftUI03AnyC0VSgvg', 
                        '_$s6TipKit0A22ViewStyleConfigurationV05imageC07SwiftUI03AnyC0VSgvpMV', 
                        '_$s6TipKit0A22ViewStyleConfigurationV14tipCloseActionyycvg', 
                        '_$s6TipKit0A22ViewStyleConfigurationV14tipCloseActionyycvpMV', 

@@ -5,6 +5,7 @@
 //  Copyright © 2015-2022 Apple. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 
 @class HKSource;
@@ -16,7 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract      Represents a specific revision of an HKSource.
  */
 
-HK_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKSourceRevision : NSObject <NSSecureCoding, NSCopying>
 
 /*!

@@ -5,6 +5,8 @@
 //  Copyright © 2021-2022 Apple. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKQuery.h>
 #import <HealthKit/HKVerifiableClinicalRecord.h>
 
@@ -15,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract      A one-time share query that returns user-selected verifiable clinical records.
  */
 HK_EXTERN
+NS_SWIFT_SENDABLE
 #if defined(__swift__) && __swift__
 API_DEPRECATED("Use HKVerifiableClinicalRecordQueryDescriptor", ios(15.0, API_TO_BE_DEPRECATED));
 #else
@@ -48,7 +51,7 @@ API_UNAVAILABLE(watchos)
 */
 - (instancetype)initWithRecordTypes:(NSArray<NSString *> *)recordTypes
                           predicate:(nullable NSPredicate *)predicate
-                     resultsHandler:(void(^)(HKVerifiableClinicalRecordQuery *query,
+                     resultsHandler:(void(^NS_SWIFT_SENDABLE)(HKVerifiableClinicalRecordQuery *query,
                                              NSArray<HKVerifiableClinicalRecord *> * _Nullable records,
                                              NSError * _Nullable error))resultsHandler;
 
@@ -64,7 +67,7 @@ API_UNAVAILABLE(watchos)
 - (instancetype)initWithRecordTypes:(NSArray<NSString *> *)recordTypes
                         sourceTypes:(NSArray<HKVerifiableClinicalRecordSourceType> *)sourceTypes
                           predicate:(nullable NSPredicate *)predicate
-                     resultsHandler:(void(^)(HKVerifiableClinicalRecordQuery *query,
+                     resultsHandler:(void(^NS_SWIFT_SENDABLE)(HKVerifiableClinicalRecordQuery *query,
                                              NSArray<HKVerifiableClinicalRecord *> * _Nullable records,
                                              NSError * _Nullable error))resultsHandler API_AVAILABLE(ios(15.4), macCatalyst(15.4), macos(13.0));
 

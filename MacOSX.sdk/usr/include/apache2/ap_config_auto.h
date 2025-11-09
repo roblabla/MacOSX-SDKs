@@ -53,6 +53,9 @@
 /* Using autoconf to configure Apache */
 #define AP_USING_AUTOCONF 1
 
+/* Define as default argument for thread id in error logging */
+/* #undef DEFAULT_LOG_TID */
+
 /* Define to 1 if you have the 'arc4random_buf' function. */
 #define HAVE_ARC4RANDOM_BUF 1
 
@@ -61,6 +64,9 @@
 
 /* Define to 1 if you have the <bstring.h> header file. */
 /* #undef HAVE_BSTRING_H */
+
+/* Enable FD passing support in mod_cgid */
+/* #undef HAVE_CGID_FDPASSING */
 
 /* Define if crypt() supports SHA-2 hashes */
 /* #undef HAVE_CRYPT_SHA2 */

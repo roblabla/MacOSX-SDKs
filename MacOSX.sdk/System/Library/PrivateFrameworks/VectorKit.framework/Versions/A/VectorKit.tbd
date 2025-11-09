@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VectorKit.framework/Versions/A/VectorKit'
-current-version: 1948.20.7
+current-version: 1948.21.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFvimEEE, __ZTINSt3__110__function6__baseIFvmPKyEEE, 
@@ -103,7 +103,8 @@ exports:
                        _VectorKitDebugConfig_NavCameraEnableProperties, _VectorKitDebugConfig_OverrideMSAASampleCount, 
                        _VectorKitDebugConfig_OverrideVariableLogicRate, _VectorKitDebugConfig_PolygonStrokeMaskingEnabled, 
                        _VectorKitDebugConfig_SSAODemoButtonEnabled, _VectorKitDebugConfig_ShowLabelCounts, 
-                       _VectorKitDebugConfig_TopographicDisplayEnabled, _VectorKitDebugConfig_VariableLogicUpdateFrequencyEnabled, 
+                       _VectorKitDebugConfig_TopographicDisplayEnabled, _VectorKitDebugConfig_VariableLogicRateForNav, 
+                       _VectorKitDebugConfig_VariableLogicUpdateFrequencyEnabled, 
                        _VectorKitDebugConfig_ZoomBounceSpringFriction, _VectorKitDebugConfig_ZoomBounceSpringTension, 
                        _VectorKitDebugConfig_ZoomRubberBandMaxAmount, _dynamicValueAnimation, 
                        _dynamicValueAnimationDuration, _dynamicValueAnimationTimingFunction, 

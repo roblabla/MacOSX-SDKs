@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PersonalizedSensing.framework/Versions/A/PersonalizedSensing'
-current-version: 197
+current-version: 202.0.8
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MOContextErrorDomain, _MOPerformanceMetricNameKey, _MOPerformanceMetricUnitKey, 
@@ -19,5 +19,4 @@ exports:
                        MOContextStringUpdateOptions, MOContextTimeMetaData, MODefaultsManager, 
                        MODictionaryEncoder, MOPerformanceMeasurement, MOPerformanceMetric, 
                        MOPersonalizedSensingServiceManager, MOPlatformInfo ]
-    objc-ivars:      [ MOPersonalizedSensingServiceManager._queue ]
 ...

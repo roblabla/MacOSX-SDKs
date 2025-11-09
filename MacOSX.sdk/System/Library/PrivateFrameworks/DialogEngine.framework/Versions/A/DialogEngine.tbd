@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DialogEngine.framework/Versions/A/DialogEngine'
-current-version: 3400.54.1
+current-version: 3401.5.1
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTI25VariableToNSObjectVisitor, __ZTIN4YAML12EventHandlerE, 
@@ -808,7 +808,7 @@ exports:
                        __ZN4siri12dialogengine11TraceWriter22WriteDialogStateToFileEPKNS0_7ContextENS0_5Trace17DialogStateTimingE, 
                        __ZN4siri12dialogengine11TraceWriterC1Ev, __ZN4siri12dialogengine11TraceWriterC2Ev, 
                        __ZN4siri12dialogengine12AddExtensionERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_, 
-                       __ZN4siri12dialogengine12DecodeBase64ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
+                       __ZN4siri12dialogengine12DBMonthToICUEi, __ZN4siri12dialogengine12DecodeBase64ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine12DialogLength11abbreviatedEPNS0_7ContextEPKNS0_14VariableObjectE, 
                        __ZN4siri12dialogengine12DialogLength11approximateEPNS0_7ContextEPKNS0_14VariableObjectE, 
                        __ZN4siri12dialogengine12DialogLength18compactDecimalLongEPNS0_7ContextEPKNS0_14VariableObjectE, 
@@ -994,7 +994,7 @@ exports:
                        __ZN4siri12dialogengine13ChunkVariableC1Ev, __ZN4siri12dialogengine13ChunkVariableC2ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine13ChunkVariableC2ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_, 
                        __ZN4siri12dialogengine13ChunkVariableC2Ev, __ZN4siri12dialogengine13CloseDatabaseEP7sqlite3, 
-                       __ZN4siri12dialogengine13DateIsHolidayERKNS0_9TimeStampERKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEE, 
+                       __ZN4siri12dialogengine13DateIsHolidayERKNS0_9TimeStampERKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEESC_, 
                        __ZN4siri12dialogengine13DeleteDirTreeERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine13DeviceIsWatchEPNS0_14VariableObjectES2_, 
                        __ZN4siri12dialogengine13DialogDensity11approximateEPNS0_7ContextEPKNS0_14VariableObjectE, 
@@ -1448,6 +1448,7 @@ exports:
                        __ZN4siri12dialogengine15GetCalendarTypeERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine15GetFeatureValueEPNS0_7ContextERKNS0_15SpeakableStringERKNSt3__112basic_stringIcNS6_11char_traitsIcEENS6_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine15GetFeatureValueEPNS0_7ContextERKNSt3__16vectorINS3_12basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEENS8_ISA_EEEERKSA_, 
+                       __ZN4siri12dialogengine15GetICUDayOfWeekERKNS0_9TimeStampE, 
                        __ZN4siri12dialogengine15GetICUMonthNameERKNS0_9TimeStampERKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEERKNS0_17DateFormatOptionsE, 
                        __ZN4siri12dialogengine15GetICUTimeStampElRKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine15GetICUTimeStampEliRKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
@@ -1536,8 +1537,8 @@ exports:
                        __ZN4siri12dialogengine16ConceptCallbacks24RegisterPrimitiveMethodsEv, 
                        __ZN4siri12dialogengine16ConstNodeVisitor5VisitERKNS0_5GroupE, 
                        __ZN4siri12dialogengine16ContainsTTSCodesERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
-                       __ZN4siri12dialogengine16CreateJSONIntValEi, __ZN4siri12dialogengine16ExecuteResultSet7ExecuteEv, 
-                       __ZN4siri12dialogengine16ExecuteSharedCatEPNS0_7ContextERKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEERKNS3_3mapIS9_NS3_10shared_ptrINS0_9JSONValueEEENS3_4lessIS9_EENS7_INS3_4pairISA_SF_EEEEEE, 
+                       __ZN4siri12dialogengine16CreateJSONIntValEi, __ZN4siri12dialogengine16DBDayOfWeekToICUEi, 
+                       __ZN4siri12dialogengine16ExecuteResultSet7ExecuteEv, __ZN4siri12dialogengine16ExecuteSharedCatEPNS0_7ContextERKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEERKNS3_3mapIS9_NS3_10shared_ptrINS0_9JSONValueEEENS3_4lessIS9_EENS7_INS3_4pairISA_SF_EEEEEE, 
                        __ZN4siri12dialogengine16FindVariableBoolERNS0_14VariableObjectERKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEERKNS3_8optionalIbEERKNSC_INS0_8LogLevelEEE, 
                        __ZN4siri12dialogengine16GenerateResponseEPNS0_7ContextE, 
                        __ZN4siri12dialogengine16GetICUDayOfMonthERKNS0_9TimeStampE, 
@@ -2200,6 +2201,7 @@ exports:
                        __ZN4siri12dialogengine26ExecuteMultiLevelResultSet7ExecuteEv, 
                        __ZN4siri12dialogengine26FindAndInsertJSONObjectValENSt3__110shared_ptrINS0_9JSONValueEEERKNS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEESC_S4_, 
                        __ZN4siri12dialogengine26GenerateValidationResponseEPNS0_7ContextE, 
+                       __ZN4siri12dialogengine26GetDateOfNthWeekdayOfMonthEi15UCalendarMonths19UCalendarDaysOfWeeki, 
                        __ZN4siri12dialogengine26GetMeasurementSystemByTypeERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN4siri12dialogengine26GetOptionalNumberParameterERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEPKNS0_14VariableObjectE, 
                        __ZN4siri12dialogengine26GetOptionalObjectParameterERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEPKNS0_14VariableObjectE, 
@@ -4544,7 +4546,7 @@ exports:
                        __ZNK4siri12dialogengine14PatternContext38GetPrintSupportingDialogInDisplayModesEv, 
                        __ZNK4siri12dialogengine14PatternSetting26GetDefaultValueFromSettingEv, 
                        __ZNK4siri12dialogengine14PatternSetting8ValidateEPNS0_7ContextE, 
-                       __ZNK4siri12dialogengine14ValidationBase12GetAttributeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
+                       __ZNK4siri12dialogengine14Sqlite3DeleterclEP7sqlite3, __ZNK4siri12dialogengine14ValidationBase12GetAttributeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZNK4siri12dialogengine14ValidationBase13GetAttributesEv, 
                        __ZNK4siri12dialogengine14VariableNumber7IsEmptyEv, __ZNK4siri12dialogengine14VariableNumber8GetValueEv, 
                        __ZNK4siri12dialogengine14VariableNumber8ToStringEPNS0_7ContextERKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEE, 

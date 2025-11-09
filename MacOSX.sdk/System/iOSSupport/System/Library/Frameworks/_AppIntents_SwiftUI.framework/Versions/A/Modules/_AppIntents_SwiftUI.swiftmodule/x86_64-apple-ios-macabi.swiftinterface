@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 210.5.0.6.2 -module-name _AppIntents_SwiftUI
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target x86_64-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 210.13.0.1 -module-name _AppIntents_SwiftUI
 @_exported import AppIntents
 import CoreSpotlight
 import DeveloperToolsSupport
@@ -136,7 +136,7 @@ public struct ShortcutsLinkStyle {
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
-  @available(iOS 16.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  @available(iOS 16.0, *)
   public typealias Body = @_opaqueReturnTypeOf("$s19_AppIntents_SwiftUI13ShortcutsLinkV4bodyQrvp", 0) __
 }
 @available(iOS 16.0, *)
@@ -161,7 +161,7 @@ public struct SiriTipViewStyle {
     get
   }
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, *)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s19_AppIntents_SwiftUI11SiriTipViewV4bodyQrvp", 0) __
 }

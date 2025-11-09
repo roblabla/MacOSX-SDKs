@@ -5,6 +5,8 @@
 //  Copyright (c) 2014-2024 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKSample.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -122,7 +124,9 @@ typedef NS_ENUM(NSInteger, HKWorkoutEventType) {
  @class         HKWorkoutEvent
  @abstract      Represents a particular event that occurred during a workout.
  */
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKWorkoutEvent : NSObject <NSSecureCoding, NSCopying>
 
 /*!
@@ -170,7 +174,9 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  @class         HKWorkout
  @abstract      An HKObject subclass representing a workout or activity
  */
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKWorkout : HKSample
 
 /*!

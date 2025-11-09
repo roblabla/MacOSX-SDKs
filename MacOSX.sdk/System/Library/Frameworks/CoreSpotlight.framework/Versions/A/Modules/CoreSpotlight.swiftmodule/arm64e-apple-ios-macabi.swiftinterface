@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2313.7 -module-name CoreSpotlight
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2314.10.1.6 -module-name CoreSpotlight
 @_exported import CoreSpotlight
 import Foundation
 import Swift
@@ -22,8 +22,8 @@ extension CoreSpotlight.CSSearchQuery {
       public static func == (lhs: CoreSpotlight.CSSearchQuery.Results.Item, rhs: CoreSpotlight.CSSearchQuery.Results.Item) -> Swift.Bool
       public func hash(into hasher: inout Swift.Hasher)
       @available(iOS 16.0, macOS 13.0, *)
-      @available(tvOS, unavailable, introduced: 13.0)
-      @available(watchOS, unavailable, introduced: 6.0)
+      @available(tvOS, unavailable)
+      @available(watchOS, unavailable)
       public typealias ID = Swift.String
       public var hashValue: Swift.Int {
         get
@@ -34,8 +34,8 @@ extension CoreSpotlight.CSSearchQuery {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
       public mutating func next() async throws -> CoreSpotlight.CSSearchQuery.Results.Item?
       @available(iOS 16.0, macOS 13.0, *)
-      @available(tvOS, unavailable, introduced: 13.0)
-      @available(watchOS, unavailable, introduced: 6.0)
+      @available(tvOS, unavailable)
+      @available(watchOS, unavailable)
       public typealias Element = CoreSpotlight.CSSearchQuery.Results.Item
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, visionOS 2.0, macOS 15.0, *)
@@ -88,8 +88,8 @@ extension CoreSpotlight.CSUserQuery {
     public static func == (lhs: CoreSpotlight.CSUserQuery.Item, rhs: CoreSpotlight.CSUserQuery.Item) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 16.0, macOS 13.0, *)
-    @available(tvOS, unavailable, introduced: 13.0)
-    @available(watchOS, unavailable, introduced: 6.0)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
     public typealias ID = Swift.String
     public var hashValue: Swift.Int {
       get
@@ -105,8 +105,8 @@ extension CoreSpotlight.CSUserQuery {
     public static func == (lhs: CoreSpotlight.CSUserQuery.Suggestion, rhs: CoreSpotlight.CSUserQuery.Suggestion) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 16.0, macOS 13.0, *)
-    @available(tvOS, unavailable, introduced: 13.0)
-    @available(watchOS, unavailable, introduced: 6.0)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
     public typealias ID = Swift.String
     public var hashValue: Swift.Int {
       get
@@ -122,8 +122,8 @@ extension CoreSpotlight.CSUserQuery {
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: CoreSpotlight.CSUserQuery.Responses.Response, b: CoreSpotlight.CSUserQuery.Responses.Response) -> Swift.Bool
       @available(iOS 16.0, macOS 13.0, *)
-      @available(tvOS, unavailable, introduced: 13.0)
-      @available(watchOS, unavailable, introduced: 6.0)
+      @available(tvOS, unavailable)
+      @available(watchOS, unavailable)
       public typealias ID = Swift.String
       public var hashValue: Swift.Int {
         get
@@ -134,8 +134,8 @@ extension CoreSpotlight.CSUserQuery {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
       public mutating func next() async throws -> CoreSpotlight.CSUserQuery.Responses.Element?
       @available(iOS 16.0, macOS 13.0, *)
-      @available(tvOS, unavailable, introduced: 13.0)
-      @available(watchOS, unavailable, introduced: 6.0)
+      @available(tvOS, unavailable)
+      @available(watchOS, unavailable)
       public typealias Element = CoreSpotlight.CSUserQuery.Responses.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, visionOS 2.0, macOS 15.0, *)
@@ -168,8 +168,8 @@ extension CoreSpotlight.CSUserQuery {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
       public mutating func next() async throws -> CoreSpotlight.CSUserQuery.Suggestions.Element?
       @available(iOS 16.0, macOS 13.0, *)
-      @available(tvOS, unavailable, introduced: 13.0)
-      @available(watchOS, unavailable, introduced: 6.0)
+      @available(tvOS, unavailable)
+      @available(watchOS, unavailable)
       public typealias Element = CoreSpotlight.CSUserQuery.Suggestions.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, visionOS 2.0, macOS 15.0, *)

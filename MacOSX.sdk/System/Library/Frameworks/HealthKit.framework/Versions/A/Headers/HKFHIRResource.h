@@ -34,7 +34,9 @@ HK_EXTERN HKFHIRResourceType const HKFHIRResourceTypeProcedure API_AVAILABLE(ios
  @class         HKFHIRResource
  @abstract      The HKFHIRResource class encapsulates a FHIR (Fast Healthcare Interoperability Resources) resource.
  */
-HK_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos)
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos)
 @interface HKFHIRResource : NSObject <NSSecureCoding, NSCopying>
 
 /*!

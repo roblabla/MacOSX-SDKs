@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/GameController.framework/Versions/A/GameController'
-current-version: 12.0.37
+current-version: 12.1.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -287,23 +287,22 @@ exports:
                        GCGameControllerActivationContext, GCGameIntentSettings, GCGamepad, 
                        GCGamepadSnapshot, GCGearShifterElement, GCHIDInformation, 
                        GCHapticActuator, GCHapticCapabilities, GCHapticCapabilityGraph, 
-                       GCHapticCapabilityGraphNode, GCKeyboard, GCKeyboardAndMouseEmulatedController, 
-                       GCKeyboardAndMouseManager, GCKeyboardInput, GCLocalPlayerIndicator, 
-                       GCLogicalDeviceAnalytics, GCMicroGamepad, GCMicroGamepadSnapshot, 
-                       GCMotion, GCMouse, GCMouseInput, GCMouseInputState, GCMouseLiveInput, 
-                       GCNotificationManager, GCNotificationOptions, GCPhysicalInputElementCollection, 
-                       GCPhysicalInputProfile, GCProductInformation, GCRacingWheel, 
-                       GCRacingWheelInput, GCRacingWheelInputState, GCRemoteUserDefaultsProxy, 
-                       GCReplayKitGestureSettings, GCReplayNotificationOptions, GCSceneComponent, 
-                       GCSteeringWheelElement, GCSyntheticDeviceManager, GCSystemGesturesState, 
-                       GCVirtualController, GCVirtualControllerConfiguration, GCVirtualControllerElementConfiguration, 
-                       GCXboxGamepad, _GCAgentClientConnection, _GCAgentClientProxy, 
-                       _GCAgentServerConnection, _GCAppAgentConnection, _GCAppClientConnection, 
-                       _GCAppClientProxy, _GCAppServerConnection, _GCButtonEventImpl, 
-                       _GCCControllerHIDServiceInfoDescription, _GCCControllerManagerDescription, 
-                       _GCController, _GCControllerComponentDescription, _GCControllerDescription, 
-                       _GCControllerGestureAwareButtonInput, _GCControllerManager, 
-                       _GCControllerManagerAppClient, _GCControllerManagerServer, 
+                       GCHapticCapabilityGraphNode, GCKeyboard, GCKeyboardAndMouseManager, 
+                       GCKeyboardInput, GCLocalPlayerIndicator, GCLogicalDeviceAnalytics, 
+                       GCMicroGamepad, GCMicroGamepadSnapshot, GCMotion, GCMouse, 
+                       GCMouseInput, GCMouseInputState, GCMouseLiveInput, GCNotificationManager, 
+                       GCNotificationOptions, GCPhysicalInputElementCollection, GCPhysicalInputProfile, 
+                       GCProductInformation, GCRacingWheel, GCRacingWheelInput, GCRacingWheelInputState, 
+                       GCRemoteUserDefaultsProxy, GCReplayKitGestureSettings, GCReplayNotificationOptions, 
+                       GCSceneComponent, GCSteeringWheelElement, GCSyntheticDeviceManager, 
+                       GCSystemGesturesState, GCVirtualController, GCVirtualControllerConfiguration, 
+                       GCVirtualControllerElementConfiguration, GCXboxGamepad, _GCAgentClientConnection, 
+                       _GCAgentClientProxy, _GCAgentServerConnection, _GCAppAgentConnection, 
+                       _GCAppClientConnection, _GCAppClientProxy, _GCAppServerConnection, 
+                       _GCButtonEventImpl, _GCCControllerHIDServiceInfoDescription, 
+                       _GCCControllerManagerDescription, _GCController, _GCControllerComponentDescription, 
+                       _GCControllerDescription, _GCControllerGestureAwareButtonInput, 
+                       _GCControllerManager, _GCControllerManagerAppClient, _GCControllerManagerServer, 
                        _GCDefaultLogicalDevice, _GCDeviceExtendedGamepadComponentDescription, 
                        _GCDeviceGamepadComponentDescription, _GCDevicePhysicalInputComponentDescription, 
                        _GCDigitizerEventImpl, _GCDriverClientConnection, _GCGamepadEventGamepadHIDAdapterDescription, 

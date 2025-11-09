@@ -70,7 +70,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
                                                        scale:(float)scale
                                                         name:(NSString *_Nullable)name
     MPS_SWIFT_NAME(scaledDotProductAttention(query:key:value:mask:scale:name:) )
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0));
 
 /// Creates a scaled dot product attention (SDPA) operation (without a mask) and returns the result tensor.
 ///
@@ -87,8 +87,7 @@ MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xr
                                                        scale:(float)scale
                                                         name:(NSString *_Nullable)name
     MPS_SWIFT_NAME(scaledDotProductAttention(query:key:value:scale:name:) )
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
-
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0));
 @end
 
 

@@ -243,7 +243,7 @@ MPS_AVAILABLE_STARTING(macos(14.4), ios(17.4), tvos(17.4));
                                endsTensor:(MPSGraphTensor *) endsTensor
                             stridesTensor:(MPSGraphTensor *) stridesTensor
                                      name:(NSString * _Nullable) name
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0));
 
 /// Creates a strided-slice update operation with zero masks and returns the result tensor.
 ///
@@ -261,8 +261,7 @@ MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xr
                                      ends:(NSArray<NSNumber *> *) ends
                                   strides:(NSArray<NSNumber *> *) strides
                                      name:(NSString * _Nullable) name
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
-
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0));
 
 
 /// Creates a concatenation operation and returns the result tensor.

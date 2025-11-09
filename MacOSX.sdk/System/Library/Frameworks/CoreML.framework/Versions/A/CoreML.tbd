@@ -1301,6 +1301,8 @@ exports:
                        '_$s6CoreML13MLComputePlanC11DeviceUsageV6ReasonV8CategoryO25unsupportedOutputDataTypeyA2ImFWC', 
                        '_$s6CoreML13MLComputePlanC11DeviceUsageV6ReasonV8CategoryO26unsupportedAttributeKernelyA2ImFWC', 
                        '_$s6CoreML13MLComputePlanC11DeviceUsageV6ReasonV8CategoryO27unsupportedAttributePaddingyA2ImFWC', 
+                       '_$s6CoreML13MLComputePlanC11DeviceUsageV6ReasonV8CategoryO27weightFileSizeExceededLimityA2ImFWC', 
+                       '_$s6CoreML13MLComputePlanC11DeviceUsageV6ReasonV8CategoryO38liveTensorMemoryFootprintExceededLimityA2ImFWC', 
                        '_$s6CoreML13MLComputePlanC11DeviceUsageV6ReasonV8CategoryO8rawValueAISgSi_tcfC', 
                        '_$s6CoreML13MLComputePlanC11DeviceUsageV6ReasonV8CategoryO8rawValueSivg', 
                        '_$s6CoreML13MLComputePlanC11DeviceUsageV6ReasonV8CategoryO8rawValueSivpMV', 

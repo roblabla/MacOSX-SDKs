@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKObjectType.h>
 #import <HealthKit/HKWorkout.h>
 
@@ -23,7 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
                 workout that occurred in the past. Calling finishWorkoutWithCompletion: will create a new workout
                 with samples, events, and metadata that have been provided.
  */
-HK_EXTERN API_AVAILABLE(ios(12.0), watchos(5.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(12.0), watchos(5.0))
 @interface HKWorkoutBuilder : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

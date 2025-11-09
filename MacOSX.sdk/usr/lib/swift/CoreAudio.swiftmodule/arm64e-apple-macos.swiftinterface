@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-macos15.0 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreAudio -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 328.121.10.3 -module-name CoreAudio
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-macos15.1 -target-variant arm64e-apple-ios18.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreAudio -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 328.204.10.3 -module-name CoreAudio
 @_exported import CoreAudio
 import Foundation
 import Swift
@@ -215,7 +215,7 @@ open class AudioHardwareControl : CoreAudio.AudioHardwareObject {
   open var volumeScalarValue: Swift.Float {
     get throws
   }
-  open var volumeDecibalValue: Swift.Float {
+  open var volumeDecibelValue: Swift.Float {
     get throws
   }
   open var volumeDecibelRange: CoreAudioTypes.AudioValueRange {
@@ -238,12 +238,12 @@ open class AudioHardwareControl : CoreAudio.AudioHardwareObject {
   }
   open func setSliderValue(_ value: Swift.UInt32) throws
   open func setVolumeScalarValue(_ value: Swift.Float) throws
-  open func setVolumeDecibalValue(_ value: Swift.Float) throws
+  open func setVolumeDecibelValue(_ value: Swift.Float) throws
   open func setBooleanValue(_ value: Swift.Bool) throws
   open func setSelectedItems(_ items: [Swift.UInt32]) throws
   open func setStereoPanValue(_ value: Swift.Float) throws
   open func convertToDecibels(fromScalar scalar: Swift.Float) throws -> Swift.Float
-  open func convertToScalar(fromDecibals decibals: Swift.Float) throws -> Swift.Float
+  open func convertToScalar(fromDecibels decibels: Swift.Float) throws -> Swift.Float
   open func selectorItemName(fromID ID: Swift.UInt32) throws -> Swift.String
   open func selectorItemKind(fromID ID: Swift.UInt32) throws -> Swift.UInt32
   override public init(id: CoreAudio.AudioObjectID)

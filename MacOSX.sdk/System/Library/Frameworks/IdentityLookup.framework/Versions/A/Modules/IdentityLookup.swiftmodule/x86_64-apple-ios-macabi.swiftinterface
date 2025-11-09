@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1270.100.1 -module-name IdentityLookup
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target x86_64-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1325.200.101 -module-name IdentityLookup
 import CoreData
 import ExtensionFoundation
 import Foundation
@@ -31,6 +31,8 @@ public class LiveCallerIDLookupManager {
   public func openSettings() async throws
   public func reset(forExtensionWithIdentifier identifier: Swift.String) async throws
   public func refreshPIRParameters(forExtensionWithIdentifier identifier: Swift.String) async throws
+  @available(iOS 18.1, watchOS 11.1, visionOS 2.1, macCatalyst 18.1, macOS 15.1, *)
+  public func refreshExtensionContext(forExtensionWithIdentifier identifier: Swift.String) async throws
   @objc deinit
 }
 @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macCatalyst 18.0, macOS 15.0, *)

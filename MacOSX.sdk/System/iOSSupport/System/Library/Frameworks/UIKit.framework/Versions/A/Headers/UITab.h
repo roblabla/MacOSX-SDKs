@@ -71,8 +71,8 @@ API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos)
 /// otherwise.
 @property (nonatomic, strong, nullable, readonly) UITabBarController *tabBarController;
 
-/// The view controller owned by the tab. The view controller provider is resolved the first time this is called.
-/// For root tabs, the view controller must be non-nil.
+/// The view controller owned by the tab. The view controller provider is used to resolve the view controller
+/// if it is currently nil. For root level tabs, the view controller for the tab must be non-nil.
 @property (nonatomic, strong, nullable, readonly) UIViewController *viewController;
 
 #pragma mark Managed Navigation
@@ -97,9 +97,8 @@ API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos)
 @property (nonatomic, assign) BOOL allowsHiding;
 
 /// Creates a tab with the specified identifier, title, image, and view controller provider.
-/// The view controller provider will be called once and only once, when the view controller
-/// is initially required. For root level tabs on `UITabBarController`, the resolved view
-/// controller must be non-nil.
+/// The view controller provider is called when a view controller is requested and is currently nil.
+/// For root level tabs on `UITabBarController`, the resolved view controller must be non-nil.
 - (instancetype)initWithTitle:(NSString *)title
                         image:(nullable UIImage *)image
                    identifier:(NSString *)identifier

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-upcoming-feature ConciseMagicFile -enable-upcoming-feature DeprecateApplicationMain -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature ExistentialAny -enable-upcoming-feature ForwardTrailingClosures -enable-upcoming-feature GlobalConcurrency -enable-upcoming-feature ImplicitOpenExistentials -enable-upcoming-feature ImportObjcForwardDeclarations -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature IsolatedDefaultValues -enable-upcoming-feature RegionBasedIsolation -enable-upcoming-feature StrictConcurrency -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 2200.155 -module-name CloudKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target x86_64-apple-ios18.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-upcoming-feature ConciseMagicFile -enable-upcoming-feature DeprecateApplicationMain -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature ExistentialAny -enable-upcoming-feature ForwardTrailingClosures -enable-upcoming-feature GlobalConcurrency -enable-upcoming-feature ImplicitOpenExistentials -enable-upcoming-feature ImportObjcForwardDeclarations -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature IsolatedDefaultValues -enable-upcoming-feature RegionBasedIsolation -enable-upcoming-feature StrictConcurrency -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 2220.14 -module-name CloudKit
 @_exported public import CloudKit
 public import CoreTransferable
 public import Swift
@@ -711,13 +711,13 @@ public struct CKShareTransferRepresentation<Item> : CoreTransferable.TransferRep
       get
     }
     @available(iOS 16.0, macOS 13.0, macCatalyst 16.0, *)
-    @available(tvOS, unavailable, introduced: 16.0)
-    @available(watchOS, unavailable, introduced: 9.0)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
     public typealias Representation = @_opaqueReturnTypeOf("$s8CloudKit29CKShareTransferRepresentationV13ExportedShareV08transferE0QrvpZ", 0) __<Item>
   }
   @available(iOS 16.0, macOS 13.0, macCatalyst 16.0, *)
-  @available(tvOS, unavailable, introduced: 16.0)
-  @available(watchOS, unavailable, introduced: 9.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s8CloudKit29CKShareTransferRepresentationV4bodyQrvp", 0) __<Item>
 }
 @available(macOS 14.0, macCatalyst 17.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)

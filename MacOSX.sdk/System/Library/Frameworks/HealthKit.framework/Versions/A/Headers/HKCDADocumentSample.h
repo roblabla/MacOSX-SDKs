@@ -8,6 +8,8 @@
 //  Consolidated Clinical Document records.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKDocumentSample.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,7 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
  @class         HKCDADocumentSample
  @abstract      A sample object representing a CDA document.
  */
-HK_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos)
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos)
 @interface HKCDADocumentSample : HKDocumentSample
 
 /*!
@@ -54,7 +58,9 @@ HK_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(13
 
 @end
 
-HK_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos)
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(11.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos)
 @interface HKCDADocument : NSObject
 
 /*!

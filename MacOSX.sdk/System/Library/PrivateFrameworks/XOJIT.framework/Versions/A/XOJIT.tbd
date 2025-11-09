@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/XOJIT.framework/Versions/A/XOJIT'
-current-version: 48
+current-version: 52
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -48,7 +48,13 @@ exports:
                        '_$s5XOJITAAC11SymbolStateOSQAAMc', '_$s5XOJITAAC11reportErrorAByAA10XOJITErrorCcSg_tKcfC', 
                        '_$s5XOJITAAC11reportErrorAByAA10XOJITErrorCcSg_tKcfCTj', 
                        '_$s5XOJITAAC11reportErrorAByAA10XOJITErrorCcSg_tKcfCTq', 
-                       '_$s5XOJITAAC11reportErrorAByAA10XOJITErrorCcSg_tKcfc', '_$s5XOJITAAC14UVSymbolStringV04withC16RepresentationDoyyySRys4Int8VGcF', 
+                       '_$s5XOJITAAC11reportErrorAByAA10XOJITErrorCcSg_tKcfc', '_$s5XOJITAAC12LoadArchivesO2eeoiySbAD_ADtFZ', 
+                       '_$s5XOJITAAC12LoadArchivesO4hash4intoys6HasherVz_tF', '_$s5XOJITAAC12LoadArchivesO5neveryA2DmFWC', 
+                       '_$s5XOJITAAC12LoadArchivesO7allowedyA2DmFWC', '_$s5XOJITAAC12LoadArchivesO8requiredyA2DmFWC', 
+                       '_$s5XOJITAAC12LoadArchivesO9hashValueSivg', '_$s5XOJITAAC12LoadArchivesO9hashValueSivpMV', 
+                       '_$s5XOJITAAC12LoadArchivesOMa', '_$s5XOJITAAC12LoadArchivesOMn', 
+                       '_$s5XOJITAAC12LoadArchivesON', '_$s5XOJITAAC12LoadArchivesOSHAAMc', 
+                       '_$s5XOJITAAC12LoadArchivesOSQAAMc', '_$s5XOJITAAC14UVSymbolStringV04withC16RepresentationDoyyySRys4Int8VGcF', 
                        '_$s5XOJITAAC14UVSymbolStringV11descriptionSSvg', '_$s5XOJITAAC14UVSymbolStringV11descriptionSSvpMV', 
                        '_$s5XOJITAAC14UVSymbolStringV2eeoiySbAD_ADtFZ', '_$s5XOJITAAC14UVSymbolStringV4hash4intoys6HasherVz_tF', 
                        '_$s5XOJITAAC14UVSymbolStringV6retainyyF', '_$s5XOJITAAC14UVSymbolStringV7releaseyyF', 
@@ -75,13 +81,20 @@ exports:
                        '_$s5XOJITAAC16JITTargetAddressV8rawValues6UInt64VvpMV', '_$s5XOJITAAC16JITTargetAddressV8rawValues6UInt64Vvs', 
                        '_$s5XOJITAAC16JITTargetAddressVMa', '_$s5XOJITAAC16JITTargetAddressVMn', 
                        '_$s5XOJITAAC16JITTargetAddressVN', '_$s5XOJITAAC16JITTargetAddressVSQAAMc', 
-                       '_$s5XOJITAAC16ORCRuntimeBridgeC10jit_dlopen4nameAB11DylibHandleVSS_tKF', 
+                       '_$s5XOJITAAC16LinkableFileKindO17relocatableObjectyA2DmFWC', 
+                       '_$s5XOJITAAC16LinkableFileKindO2eeoiySbAD_ADtFZ', '_$s5XOJITAAC16LinkableFileKindO4hash4intoys6HasherVz_tF', 
+                       '_$s5XOJITAAC16LinkableFileKindO7archiveyA2DmFWC', '_$s5XOJITAAC16LinkableFileKindO7invalidyA2DmFWC', 
+                       '_$s5XOJITAAC16LinkableFileKindO9hashValueSivg', '_$s5XOJITAAC16LinkableFileKindO9hashValueSivpMV', 
+                       '_$s5XOJITAAC16LinkableFileKindOMa', '_$s5XOJITAAC16LinkableFileKindOMn', 
+                       '_$s5XOJITAAC16LinkableFileKindON', '_$s5XOJITAAC16LinkableFileKindOSHAAMc', 
+                       '_$s5XOJITAAC16LinkableFileKindOSQAAMc', '_$s5XOJITAAC16ORCRuntimeBridgeC10jit_dlopen4nameAB11DylibHandleVSS_tKF', 
                        '_$s5XOJITAAC16ORCRuntimeBridgeCMa', '_$s5XOJITAAC16ORCRuntimeBridgeCMm', 
                        '_$s5XOJITAAC16ORCRuntimeBridgeCMn', '_$s5XOJITAAC16ORCRuntimeBridgeCMo', 
                        '_$s5XOJITAAC16ORCRuntimeBridgeCMu', '_$s5XOJITAAC16ORCRuntimeBridgeCN', 
                        '_$s5XOJITAAC16ORCRuntimeBridgeCfD', '_$s5XOJITAAC16ORCRuntimeBridgeCfd', 
                        '_$s5XOJITAAC16ORCRuntimeBridgeCyAdBcfC', '_$s5XOJITAAC16ORCRuntimeBridgeCyAdBcfCTj', 
                        '_$s5XOJITAAC16ORCRuntimeBridgeCyAdBcfCTq', '_$s5XOJITAAC16ORCRuntimeBridgeCyAdBcfc', 
+                       '_$s5XOJITAAC16loadLinkableFile4path8archives10identifierAA12MemoryBufferC_AB0cD4KindOtSS_AB12LoadArchivesOSSSgtKF', 
                        '_$s5XOJITAAC16platformJITDylibAB0C0Vvg', '_$s5XOJITAAC16platformJITDylibAB0C0VvpMV', 
                        '_$s5XOJITAAC17ExecutorSymbolDefV2eeoiySbAD_ADtFZ', '_$s5XOJITAAC17ExecutorSymbolDefV7addressAB0B7AddressVvM', 
                        '_$s5XOJITAAC17ExecutorSymbolDefV7addressAB0B7AddressVvg', 
@@ -206,6 +219,7 @@ exports:
                        _XOJIT_XOJIT_CreateJITDylib, _XOJIT_XOJIT_Destroy, _XOJIT_XOJIT_EndSession, 
                        _XOJIT_XOJIT_GetObjectLinkingLayer, _XOJIT_XOJIT_GetProgramJITDylibRetained, 
                        _XOJIT_XOJIT_GetTargetTriple, _XOJIT_XOJIT_Intern, _XOJIT_XOJIT_LinkStaticArchive, 
-                       _XOJIT_XOJIT_LinkStaticArchiveAsync, _XOJIT_XOJIT_NoopMutatingCallback, 
-                       _XOJIT_XOJIT_RemoveJITDylibAndRelease, _XOJIT_XOJIT_SetLoadableAtPathViaRegex ]
+                       _XOJIT_XOJIT_LinkStaticArchiveAsync, _XOJIT_XOJIT_LoadLinkableFile, 
+                       _XOJIT_XOJIT_NoopMutatingCallback, _XOJIT_XOJIT_RemoveJITDylibAndRelease, 
+                       _XOJIT_XOJIT_SetLoadableAtPathViaRegex ]
 ...

@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKScoredAssessment.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -43,8 +44,8 @@ HK_EXTERN NSInteger HKMaximumScoreForPHQ9AssessmentRisk(HKPHQ9AssessmentRisk ris
 
 /// Represents the result of a PHQ-9 assessment. Learn more about Pfizer's PHQ-9 at https://support.apple.com/en-us/105070
 HK_EXTERN
-API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0))
 NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0))
 @interface HKPHQ9Assessment: HKScoredAssessment
 
 /// Answers on the PHQ-9 assessment. There are exactly 9 answers, one for each multiple choice question. Each answer is of type `HKPHQ9AssessmentAnswer`. If the 9th question was unanswered,  the answer is `HKPHQ9AssessmentAnswerPreferNotToAnswer`.

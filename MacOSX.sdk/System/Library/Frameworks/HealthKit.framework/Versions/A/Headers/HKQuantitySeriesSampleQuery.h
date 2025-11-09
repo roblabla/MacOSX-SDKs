@@ -5,6 +5,8 @@
 //  Copyright © 2018-2022 Apple. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKQuery.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
                 Call -[HKHealthStore stopQuery:] to discontinue further quantity data reporting.
  */
 HK_EXTERN
+NS_SWIFT_SENDABLE
 #if defined(__swift__) && __swift__
 API_DEPRECATED("Use HKQuantitySeriesSampleQueryDescriptor", ios(12.0, API_TO_BE_DEPRECATED), watchos(5.0, API_TO_BE_DEPRECATED));
 #else
@@ -77,10 +80,10 @@ API_AVAILABLE(ios(12.0), watchos(5.0), macCatalyst(13.0), macos(13.0))
  */
 - (instancetype)initWithQuantityType:(HKQuantityType *)quantityType
                            predicate:(nullable NSPredicate *)predicate
-                     quantityHandler:(void(^)(HKQuantitySeriesSampleQuery *query, HKQuantity * _Nullable quantity, NSDateInterval * _Nullable dateInterval, __kindof HKQuantitySample * _Nullable quantitySample, BOOL done, NSError * _Nullable error))quantityHandler API_AVAILABLE(ios(13.0), watchos(6.0), macCatalyst(13.0), macos(13.0));
+                     quantityHandler:(void(^NS_SWIFT_SENDABLE)(HKQuantitySeriesSampleQuery *query, HKQuantity * _Nullable quantity, NSDateInterval * _Nullable dateInterval, __kindof HKQuantitySample * _Nullable quantitySample, BOOL done, NSError * _Nullable error))quantityHandler API_AVAILABLE(ios(13.0), watchos(6.0), macCatalyst(13.0), macos(13.0));
 
 - (instancetype)initWithSample:(HKQuantitySample *)quantitySample
-               quantityHandler:(void(^)(HKQuantitySeriesSampleQuery *query, HKQuantity * _Nullable quantity, NSDate * _Nullable date, BOOL done, NSError * _Nullable error))quantityHandler API_DEPRECATED_WITH_REPLACEMENT("initWithQuantityType:predicate:quantityHandler:", ios(12.0, 13.0), watchos(5.0, 6.0));
+               quantityHandler:(void(^NS_SWIFT_SENDABLE)(HKQuantitySeriesSampleQuery *query, HKQuantity * _Nullable quantity, NSDate * _Nullable date, BOOL done, NSError * _Nullable error))quantityHandler API_DEPRECATED_WITH_REPLACEMENT("initWithQuantityType:predicate:quantityHandler:", ios(12.0, 13.0), watchos(5.0, 6.0));
 
 @end
 

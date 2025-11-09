@@ -5,6 +5,7 @@
 //  Copyright (c) 2014-2022 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -13,7 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
  @class     HKSource
  @abstract  Represents the entity that created an object stored by HealthKit.
  */
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKSource : NSObject <NSSecureCoding, NSCopying>
 
 /*!

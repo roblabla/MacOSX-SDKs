@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Sharing.framework/Versions/A/Sharing'
-current-version: 1967.10.3
+current-version: 1968.20.61
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -2725,8 +2725,8 @@ exports:
                        '_$s7Sharing9SFAirDropO12TransferTypeO08exchangeE0SSSgvg', 
                        '_$s7Sharing9SFAirDropO12TransferTypeO08exchangeE0SSSgvpMV', 
                        '_$s7Sharing9SFAirDropO12TransferTypeO08transferE03for12onlyExchange06shouldI8ContactsAESayAA0bC4SendO11ItemPromiseVG_S2btFZ', 
-                       '_$s7Sharing9SFAirDropO12TransferTypeO08transferE03for12onlyExchange06shouldI8ContactsAESayAA19SFSecurityScopedURLVGSg_S2btFZ', 
-                       '_$s7Sharing9SFAirDropO12TransferTypeO08transferE03for22shouldExchangeContactsAeA0bC4SendO7RequestV_SbtFZ', 
+                       '_$s7Sharing9SFAirDropO12TransferTypeO08transferE03for12onlyExchangeAESayAA19SFSecurityScopedURLVGSg_SbtFZ', 
+                       '_$s7Sharing9SFAirDropO12TransferTypeO08transferE03forAeA0bC4SendO7RequestV_tFZ', 
                        '_$s7Sharing9SFAirDropO12TransferTypeO11descriptionSSvg', 
                        '_$s7Sharing9SFAirDropO12TransferTypeO11descriptionSSvpMV', 
                        '_$s7Sharing9SFAirDropO12TransferTypeO11peerPaymentyA2EmFWC', 

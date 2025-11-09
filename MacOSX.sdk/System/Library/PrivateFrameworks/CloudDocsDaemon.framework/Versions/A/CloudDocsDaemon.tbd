@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CloudDocsDaemon.framework/Versions/A/CloudDocsDaemon'
-current-version: 3097.1.1
+current-version: 3097.40.5
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -72,7 +72,7 @@ exports:
                        __Z26extractInputColorPrimariesP14HDRXParametersmi, __Z27adjustL2TrimToAvoidOverflowfffffPfS_S_, 
                        __Z27debug_logAmbAdaptationParamPK19_AmbAdaptationParamj, 
                        __Z27debug_logEdrAdaptationParamPK19_EdrAdaptationParamj, 
-                       __Z27dovi84_applyTonemapCurveS_CfPK11dm_config_tPK12_DoViTMParambP14DolbyVisionDM4P17ToneCurve_Control, 
+                       __Z27dovi84_applyTonemapCurveS_CfPK11dm_config_tPK12_DoViTMParambP14DolbyVisionDM4, 
                        __Z27dovi84_applyTonemapCurveS_LfPK11dm_config_tPK12_DoViTMParambbbP14DolbyVisionDM4, 
                        __Z27setDisplayManagementPayloadP11DM_MetaDataP11__IOSurface, 
                        __Z29UpdateConfigFromDefaultsWritej, __Z32getLMStoRGBMatrixForColorPrimaryP17hdrForwardControl, 
@@ -122,10 +122,9 @@ exports:
                        __ZTI16EDRMetaData_RBSP, __ZTI22HDR10PlusMetaData_RBSP, __ZTS10commonRBSP, 
                        __ZTS16EDRMetaData_RBSP, __ZTS22HDR10PlusMetaData_RBSP, __ZTV10commonRBSP, 
                        __ZTV16EDRMetaData_RBSP, __ZTV22HDR10PlusMetaData_RBSP, _adjustDovi84DM4Stats, 
-                       _adjustDovi84DM4Stats_withAMVEStrength, _adjustL1Meta, _adjustL1MetaData, 
-                       _adjustL2MetaData, _applyAmbAdaptationCurveS, _applyAmbAdaptationCurveS_C, 
-                       _applyDPCompensationS, _applyEdrAdaptationCurveS, _applyL2Trim, 
-                       _applyLinearStretchInPQ, _applyNonHeadroomDependentDPCompensation, 
+                       _adjustL1Meta, _adjustL1MetaData, _adjustL2MetaData, _applyAmbAdaptationCurveS, 
+                       _applyAmbAdaptationCurveS_C, _applyDPCompensationS, _applyEdrAdaptationCurveS, 
+                       _applyL2Trim, _applyLinearStretchInPQ, _applyNonHeadroomDependentDPCompensation, 
                        _applyNonlinearStretchInPQ, _attachBackwardDisplayManagementMetaDataToBuffer, 
                        _avdHistSupport, _calcCubicSpline, _calcCubicSplineParam, 
                        _calcLine, _calcLineParam, _calculateAdaptiveHeadroom, _calculateAmbAdaptationParamS, 
@@ -284,10 +283,10 @@ exports:
                        ProcessingEngine._prev ]
   - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ __Z18GetRelative_YUV_TMPfmffb, __Z20clampSDRMaxBrigtnessfffb, 
-                       _applySceneLuxAdaptationS_C, _applySceneLuxAdaptationS_C_withAMVEStrength, 
-                       _calcSceneLuxAdaptationMixFactor, _calculateSceneLuxAdaptationParamS, 
-                       _dovi84_generateSceneLuxAdaptationDataS, _hlg_generateSceneLuxAdaptationDataS, 
-                       _predictSceneLuxAdaptationAnchorLinReg, _sceneLuxB2DItpMLModel_MuTex ]
+                       _applySceneLuxAdaptationS_C, _calcSceneLuxAdaptationMixFactor, 
+                       _calculateSceneLuxAdaptationParamS, _dovi84_generateSceneLuxAdaptationDataS, 
+                       _hlg_generateSceneLuxAdaptationDataS, _predictSceneLuxAdaptationAnchorLinReg, 
+                       _sceneLuxB2DItpMLModel_MuTex ]
     objc-ivars:      [ MSRHDRProcessingT3._toneMapLUT0, MSRHDRProcessingT3._toneMapLUT1, 
                        MSRHDRProcessingT3._toneMapLUT2, MSRHDRProcessingT3._toneMapLUT3, 
                        MSRHDRProcessingT3._unequalSpacingTmLutMode, MSRHDRProcessingT4._systemGamma ]

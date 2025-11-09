@@ -35,6 +35,15 @@ typedef NS_ENUM(NSInteger, UIPressType) {
 
     UIPressTypePageUp API_AVAILABLE(tvos(14.3)) API_UNAVAILABLE(ios, watchos) = 30,
     UIPressTypePageDown API_AVAILABLE(tvos(14.3)) API_UNAVAILABLE(ios, watchos) = 31,
+
+    /// Represents a button on a TV remote labeled with 123. When this button is pressed, an app should provide UI to enter a specific channel number if channel
+    /// numbers are available. If no channel numbers exist the app should provide UI to toggle channel category filters, search for channels by name or search for
+    /// currently airing shows.
+    UIPressTypeTVRemoteOneTwoThree API_AVAILABLE(tvos(18.1)) API_UNAVAILABLE(ios, watchos, visionos) = 32,
+
+    /// Represents a button on a TV remote labeled with four colors, analogous to the four separate color buttons found on some TV remotes. When this button is
+    /// pressed, an app should perform the appropriate color action or if there are multiple color actions available provide UI to choose the specific color.
+    UIPressTypeTVRemoteFourColors API_AVAILABLE(tvos(18.1)) API_UNAVAILABLE(ios, watchos, visionos) = 33,
 } API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos);
 
 UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos) @interface UIPress : NSObject

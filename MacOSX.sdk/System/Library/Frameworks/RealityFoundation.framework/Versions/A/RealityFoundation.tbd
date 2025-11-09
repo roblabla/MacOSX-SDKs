@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/RealityFoundation.framework/Versions/A/RealityFoundation'
-current-version: 366.0.22
+current-version: 366.40.5
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -21565,7 +21565,38 @@ exports:
                        '_$s17RealityFoundation26BlendShapeWeightsComponentV9weightSetAA0cdeH0VvpMV', 
                        '_$s17RealityFoundation26BlendShapeWeightsComponentV9weightSetAA0cdeH0Vvs', 
                        '_$s17RealityFoundation26BlendShapeWeightsComponentVMa', '_$s17RealityFoundation26BlendShapeWeightsComponentVMn', 
-                       '_$s17RealityFoundation26BlendShapeWeightsComponentVN', '_$s17RealityFoundation26MaterialDefinitionResourceC11__coreAsset0A3Kit02__G3RefVvgTj', 
+                       '_$s17RealityFoundation26BlendShapeWeightsComponentVN', '_$s17RealityFoundation26ClippingPrimitiveComponentV06__coreE4Type0A3Kit02__eG3RefVvgZ', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV0A3Kit0E0AAMc', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV0A3Kit0E0AAWP', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV10__fromCoreyAC0A3Kit02__E3RefVFZ', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV14shouldClipSelfSbvM', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV14shouldClipSelfSbvg', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV14shouldClipSelfSbvpMV', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV14shouldClipSelfSbvs', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV18shouldClipChildrenSbvM', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV18shouldClipChildrenSbvg', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV18shouldClipChildrenSbvpMV', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV18shouldClipChildrenSbvs', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV2eeoiySbAC_ACtFZ', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV6bounds0A3Kit11BoundingBoxVvM', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV6bounds0A3Kit11BoundingBoxVvg', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV6bounds0A3Kit11BoundingBoxVvpMV', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV6bounds0A3Kit11BoundingBoxVvs', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV7FeatherV2eeoiySbAE_AEtFZ', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV7FeatherVAEycfC', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV7FeatherVMa', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV7FeatherVMn', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV7FeatherVN', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV7FeatherVSQAAMc', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV7featherAC7FeatherVvM', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV7featherAC7FeatherVvg', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV7featherAC7FeatherVvpMV', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV7featherAC7FeatherVvs', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentV8__toCoreyy0A3Kit02__E3RefVF', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentVACycfC', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentVMa', '_$s17RealityFoundation26ClippingPrimitiveComponentVMn', 
+                       '_$s17RealityFoundation26ClippingPrimitiveComponentVN', '_$s17RealityFoundation26ClippingPrimitiveComponentVSQAAMc', 
+                       '_$s17RealityFoundation26MaterialDefinitionResourceC11__coreAsset0A3Kit02__G3RefVvgTj', 
                        '_$s17RealityFoundation26MaterialDefinitionResourceC11__coreAsset0A3Kit02__G3RefVvgTq', 
                        '_$s17RealityFoundation26MaterialDefinitionResourceC11__coreAsset0A3Kit02__G3RefVvpMV', 
                        '_$s17RealityFoundation26MaterialDefinitionResourceC15BuildParametersV08overrideC0ACSgvM', 

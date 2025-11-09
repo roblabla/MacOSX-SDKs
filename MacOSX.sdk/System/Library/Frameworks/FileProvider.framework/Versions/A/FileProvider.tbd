@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/FileProvider.framework/Versions/A/FileProvider'
-current-version: 2732.0.85
+current-version: 2732.41.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -58,6 +58,7 @@ exports:
                        _FPDiagnosticAttributeKeyDBTransferErrorCode, _FPDiagnosticAttributeKeyDBTransferErrorDomain, 
                        _FPDiagnosticAttributeKeyDBTransferErrorString, _FPDiagnosticAttributeKeyDBTransferIsDownload, 
                        _FPDiagnosticAttributeKeyDBTransferOperationType, _FPDiagnosticAttributeKeyDBTransferState, 
+                       _FPDiagnosticAttributeKeyDBTransferUnderlyingErrorCode, _FPDiagnosticAttributeKeyDBTransferUnderlyingErrorDomain, 
                        _FPDiagnosticAttributeKeyDiagErrorCode, _FPDiagnosticAttributeKeyDiagErrorDomain, 
                        _FPDiagnosticAttributeKeyDiagFailuresBitmap, _FPDiagnosticAttributeKeyDiagUnderlyingErrorCode, 
                        _FPDiagnosticAttributeKeyDiagUnderlyingErrorDomain, _FPDiagnosticAttributeKeyNameExtension, 

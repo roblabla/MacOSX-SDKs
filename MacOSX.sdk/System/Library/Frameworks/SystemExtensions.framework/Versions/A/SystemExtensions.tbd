@@ -12,5 +12,5 @@ exports:
                        _applicationDisplayNameForExecutable ]
     objc-classes:    [ OSSystemExtensionClient, OSSystemExtensionInfo, OSSystemExtensionMDMClient, 
                        OSSystemExtensionManager, OSSystemExtensionPointListener, 
-                       OSSystemExtensionProperties, OSSystemExtensionRequest, SystemExtensionsWorkspace ]
+                       OSSystemExtensionProperties, OSSystemExtensionRequest, OSSystemExtensionsWorkspace ]
 ...

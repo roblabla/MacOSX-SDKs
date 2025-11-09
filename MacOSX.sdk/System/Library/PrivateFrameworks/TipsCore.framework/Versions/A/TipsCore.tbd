@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TipsCore.framework/Versions/A/TipsCore'
-current-version: 765.2
+current-version: 769
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -696,11 +696,11 @@ exports:
                        _TPSAnalyticsViewMethodViewAppear, _TPSAnalyticsViewMethodWidget, 
                        _TPSAnalyticsViewModeDark, _TPSAnalyticsViewModeLight, _TPSAnalyticsViewModeUnspecified, 
                        _TPSAnalyticsXPCServerInterface, _TPSAnimationSourceOrganic, 
-                       _TPSAnimationSourceOther, _TPSAnimationSourceReplay, _TPSAssetsRootKey, 
-                       _TPSCommonDefinesCloudDeviceIdentifier, _TPSCommonDefinesURLSchemeKey, 
-                       _TPSCommonDefinesURLSchemeParameterPathTypeOpen, _TPSCommonDefinesURLSchemeTypeUserGuide, 
-                       _TPSConstellationContentUtilitiesAttributeAlt, _TPSConstellationContentUtilitiesAttributeColor, 
-                       _TPSConstellationContentUtilitiesAttributeColorAutomatic, 
+                       _TPSAnimationSourceOther, _TPSAnimationSourceReplay, _TPSAppControllerCollectionSectionTips, 
+                       _TPSAssetsRootKey, _TPSCommonDefinesCloudDeviceIdentifier, 
+                       _TPSCommonDefinesURLSchemeKey, _TPSCommonDefinesURLSchemeParameterPathTypeOpen, 
+                       _TPSCommonDefinesURLSchemeTypeUserGuide, _TPSConstellationContentUtilitiesAttributeAlt, 
+                       _TPSConstellationContentUtilitiesAttributeColor, _TPSConstellationContentUtilitiesAttributeColorAutomatic, 
                        _TPSConstellationContentUtilitiesAttributeDark, _TPSConstellationContentUtilitiesAttributeDefaultText, 
                        _TPSConstellationContentUtilitiesAttributeHrefKey, _TPSConstellationContentUtilitiesAttributeImageId, 
                        _TPSConstellationContentUtilitiesAttributeInherentHeight, 

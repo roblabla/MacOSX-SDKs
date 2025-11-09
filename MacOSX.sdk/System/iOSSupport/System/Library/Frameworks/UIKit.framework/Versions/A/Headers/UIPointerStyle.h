@@ -11,6 +11,7 @@
 #import <UIKit/UIGeometry.h>
 #import <CoreGraphics/CGGeometry.h>
 #import <UIKit/UIHoverStyle.h>
+#import <UIKit/UIHoverEffect.h>
 
 @class UITargetedPreview, UIBezierPath, UIPointerEffect, UIPointerShape, UIPointerAccessory;
 

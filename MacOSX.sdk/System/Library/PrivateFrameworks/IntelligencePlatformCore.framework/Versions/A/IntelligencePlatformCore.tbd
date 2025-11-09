@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatformCore.framework/Versions/A/IntelligencePlatformCore'
-current-version: 111.0.2
+current-version: 115.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1086,8 +1086,6 @@ exports:
                        '_$s24IntelligencePlatformCore13ConfigurationV29isExperimentalK2TViewsEnabledSbvg', 
                        '_$s24IntelligencePlatformCore13ConfigurationV29isExperimentalK2TViewsEnabledSbvpMV', 
                        '_$s24IntelligencePlatformCore13ConfigurationV2eeoiySbAC_ACtFZ', 
-                       '_$s24IntelligencePlatformCore13ConfigurationV30isFiASpotlightWritebackEnabledSbvg', 
-                       '_$s24IntelligencePlatformCore13ConfigurationV30isFiASpotlightWritebackEnabledSbvpMV', 
                        '_$s24IntelligencePlatformCore13ConfigurationV30isIPCSMemoryTransactionEnabledSbvg', 
                        '_$s24IntelligencePlatformCore13ConfigurationV30isIPCSMemoryTransactionEnabledSbvpMV', 
                        '_$s24IntelligencePlatformCore13ConfigurationV30isPersonalKnowledgeToolEnabledSbvg', 
@@ -4498,7 +4496,6 @@ exports:
                        '_$s24IntelligencePlatformCore7OptionsV26enableExperimentalECRViewsACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV26enableExperimentalK2TViewsACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV27allowIncrementalViewManagerACvgZ', 
-                       '_$s24IntelligencePlatformCore7OptionsV27enableFiASpotlightWritebackACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV27enableIPCSMemoryTransactionACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV27enablePersonalKnowledgeToolACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV27eventLoggerBackendInProcessACvgZ', 
@@ -4776,6 +4773,10 @@ exports:
                        '_$sSo10RTLocationC24IntelligencePlatformCore0A9ComplyingACMc', 
                        '_$sSo10RTLocationC24IntelligencePlatformCore0A9ComplyingACWP', 
                        '_$sSo13GDContactTypeVSE24IntelligencePlatformCoreMc', '_$sSo13GDContactTypeVSe24IntelligencePlatformCoreMc', 
+                       '_$sSo14NSUserDefaultsC24IntelligencePlatformCoreE025autonamingMessagesContextG12TimeIntervalSdvMZ', 
+                       '_$sSo14NSUserDefaultsC24IntelligencePlatformCoreE025autonamingMessagesContextG12TimeIntervalSdvgZ', 
+                       '_$sSo14NSUserDefaultsC24IntelligencePlatformCoreE025autonamingMessagesContextG12TimeIntervalSdvsZ', 
+                       '_$sSo14NSUserDefaultsC24IntelligencePlatformCoreE026$autonamingMessagesContextG12TimeInterval0cD011UserDefaultVySdGvgZ', 
                        '_$sSo14NSUserDefaultsC24IntelligencePlatformCoreE13testTelemetrySbvMZ', 
                        '_$sSo14NSUserDefaultsC24IntelligencePlatformCoreE13testTelemetrySbvgZ', 
                        '_$sSo14NSUserDefaultsC24IntelligencePlatformCoreE13testTelemetrySbvsZ', 

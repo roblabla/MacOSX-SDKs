@@ -5,6 +5,8 @@
 //  Copyright (c) 2014-2022 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKQuery.h>
 #import <HealthKit/HKQueryDescriptor.h>
 
@@ -18,6 +20,7 @@ static const NSUInteger HKObjectQueryNoLimit = 0;
  @abstract      A concrete subclass of HKQuery that provides an interface to retrieve HKSample objects.
  */
 HK_EXTERN
+NS_SWIFT_SENDABLE
 #if defined(__swift__) && __swift__
 API_DEPRECATED("Use HKSampleQueryDescriptor", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED));
 #else
@@ -51,7 +54,7 @@ API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
                          predicate:(nullable NSPredicate *)predicate
                              limit:(NSUInteger)limit
                    sortDescriptors:(nullable NSArray<NSSortDescriptor *> *)sortDescriptors
-                    resultsHandler:(void(^)(HKSampleQuery *query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error))resultsHandler;
+                    resultsHandler:(void(^NS_SWIFT_SENDABLE)(HKSampleQuery *query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error))resultsHandler;
 
 /*!
  @method        initWithQueryDescriptors:limit:resultsHandler:
@@ -67,7 +70,7 @@ API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  */
 - (instancetype)initWithQueryDescriptors:(NSArray<HKQueryDescriptor *> *)queryDescriptors
                                    limit:(NSInteger)limit
-                          resultsHandler:(void(^)(HKSampleQuery *query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error))resultsHandler API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0));
+                          resultsHandler:(void(^NS_SWIFT_SENDABLE)(HKSampleQuery *query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error))resultsHandler API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0));
 
 /*!
  @method        initWithQueryDescriptors:limit:sortDescriptors:resultsHandler:
@@ -86,7 +89,7 @@ API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 - (instancetype)initWithQueryDescriptors:(NSArray<HKQueryDescriptor *> *)queryDescriptors
                                    limit:(NSInteger)limit
                          sortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
-                          resultsHandler:(void(^)(HKSampleQuery *query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error))resultsHandler API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0));
+                          resultsHandler:(void(^NS_SWIFT_SENDABLE)(HKSampleQuery *query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error))resultsHandler API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0));
 @end
 
 NS_ASSUME_NONNULL_END

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MailSupport.framework/Versions/A/MailSupport'
-current-version: 3818.100.11
+current-version: 3826.200.121
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -275,15 +275,16 @@ exports:
                        _MSSearchSuggestionCategoryTopHit, _MSSearchSuggestionCategoryUnread, 
                        _MSSearchSuggestionCategoryUserTyped, _MSSearchSuggestionCategoryVIPs, 
                        _MSSharedContactStore, _MSTriageChangeActionTypeAllowsGroupedSender, 
-                       _MSTriageChangeActionTypeAllowsGroupedSenderBulkAction, _MSUserNotificationCenterTopicAllMessages, 
-                       _MSUserNotificationCenterTopicFavoriteMailboxes, _MSUserNotificationCenterTopicHighlights, 
-                       _MSUserNotificationCenterTopicNotifiedThreads, _MSUserNotificationCenterTopicPrimary, 
-                       _MSUserNotificationCenterTopicPrimaryMessageBadges, _MSUserNotificationCenterTopicRemindMe, 
-                       _MSUserNotificationCenterTopicVIP, _MSUserNotificationContentKeyAccountReference, 
-                       _MSUserNotificationContentKeyMessageReference, _MSUserNotificationContentKeyMissingSummary, 
-                       _MSUserNotificationContentKeyNanoFlags, _MSUserNotificationContentKeyNanoMessageId, 
-                       _MSUserNotificationContentKeySenderAddress, _MSUserNotificationContentKeySuppressionContext, 
-                       _MSUserNotificationsLog, _NSStringFromMSDeleteOrArchive, __MSSourceTypeIsValid, 
+                       _MSTriageChangeActionTypeAllowsGroupedSenderBulkAction, _MSUserNotificationCenterPostingDelay, 
+                       _MSUserNotificationCenterTopicAllMessages, _MSUserNotificationCenterTopicFavoriteMailboxes, 
+                       _MSUserNotificationCenterTopicHighlights, _MSUserNotificationCenterTopicNotifiedThreads, 
+                       _MSUserNotificationCenterTopicPrimary, _MSUserNotificationCenterTopicPrimaryMessageBadges, 
+                       _MSUserNotificationCenterTopicRemindMe, _MSUserNotificationCenterTopicVIP, 
+                       _MSUserNotificationContentKeyAccountReference, _MSUserNotificationContentKeyMessageReference, 
+                       _MSUserNotificationContentKeyMissingSummary, _MSUserNotificationContentKeyNanoFlags, 
+                       _MSUserNotificationContentKeyNanoMessageId, _MSUserNotificationContentKeySenderAddress, 
+                       _MSUserNotificationContentKeySuppressionContext, _MSUserNotificationsLog, 
+                       _NSStringFromMSDeleteOrArchive, __MSSourceTypeIsValid, __ef_log_MSUserNotificationCenterAnalyticsLogger, 
                        _kInstantAnswerBundleID, _kMSParsecSearchSessionMaximumRankedSectionResultsCount, 
                        _kMessageListResultBundleID, _kMessageListSectionBundleID, 
                        _kStructuredQueryComponent, _kStructuredQueryMailboxFilter, 
@@ -307,6 +308,7 @@ exports:
                        MSSendLaterContext, MSSendMailIntent, MSSendMailIntentFormatter, 
                        MSSendMailIntentResponse, MSSenderBlockingTriageAction, MSSiriIntelligenceSettings, 
                        MSTriageAction, MSTriageChangeAction, MSTriageUndoAction, 
-                       MSUnsubscribeTriageAction, _MSCountableMatchesContext ]
+                       MSUnsubscribeTriageAction, MSUserNotificationCenterAnalyticsLogger, 
+                       _MSCountableMatchesContext ]
     objc-ivars:      [ _MSCountableMatchesContext._contactsCount ]
 ...

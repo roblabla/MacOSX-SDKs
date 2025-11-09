@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 291 -module-name Translation -module-alias Module___Translation=Translation -module-alias Module____StringProcessing=_StringProcessing -module-alias Module____SwiftConcurrencyShims=_SwiftConcurrencyShims -module-alias Module____Concurrency=_Concurrency -module-alias Module___Foundation=Foundation
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target x86_64-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 294.4 -module-name Translation -module-alias Module___Translation=Translation -module-alias Module____StringProcessing=_StringProcessing -module-alias Module____SwiftConcurrencyShims=_SwiftConcurrencyShims -module-alias Module____Concurrency=_Concurrency -module-alias Module___Foundation=Foundation
 import Module___Foundation
 import Swift
 @_exported import Module___Translation
@@ -78,8 +78,8 @@ public class TranslationSession {
     public struct AsyncIterator : Module____Concurrency.AsyncIteratorProtocol {
       public mutating func next() async throws -> Module___Translation.TranslationSession.BatchResponse.Element?
       @available(iOS 18.0, macOS 15.0, *)
-      @available(tvOS, unavailable, introduced: 13.0)
-      @available(watchOS, unavailable, introduced: 6.0)
+      @available(tvOS, unavailable)
+      @available(watchOS, unavailable)
       @available(visionOS, unavailable)
       @available(macCatalyst, unavailable)
       public typealias Element = Module___Translation.TranslationSession.BatchResponse.Element

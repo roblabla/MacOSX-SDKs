@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1204 -module-name FamilyControls
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1204 -module-name FamilyControls
 import Combine
 import CoreServices
 import DeveloperToolsSupport
@@ -73,9 +73,9 @@ public enum AuthorizationStatus : Swift.Int, Swift.Codable, Swift.CustomStringCo
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.Label where Title == FamilyControls.FamilyActivityTitleView, Icon == FamilyControls.FamilyActivityIconView {
-  @_Concurrency.MainActor @preconcurrency public init(_ applicationToken: ManagedSettings.ApplicationToken)
-  @_Concurrency.MainActor @preconcurrency public init(_ categoryToken: ManagedSettings.ActivityCategoryToken)
-  @_Concurrency.MainActor @preconcurrency public init(_ webDomainToken: ManagedSettings.WebDomainToken)
+  public init(_ applicationToken: ManagedSettings.ApplicationToken)
+  public init(_ categoryToken: ManagedSettings.ActivityCategoryToken)
+  public init(_ webDomainToken: ManagedSettings.WebDomainToken)
 }
 @available(iOS 15.0, *)
 @available(macOS, unavailable)
@@ -86,9 +86,9 @@ extension SwiftUI.Label where Title == FamilyControls.FamilyActivityTitleView, I
     get
   }
   @available(iOS 15.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s14FamilyControls0A17ActivityTitleViewV4bodyQrvp", 0) __
 }
 @available(iOS 15.0, *)
@@ -100,9 +100,9 @@ extension SwiftUI.Label where Title == FamilyControls.FamilyActivityTitleView, I
     get
   }
   @available(iOS 15.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s14FamilyControls0A16ActivityIconViewV4bodyQrvp", 0) __
 }
 @available(iOS 15.0, *)
@@ -142,9 +142,9 @@ public struct FamilyActivitySelection : Swift.Codable, Swift.Equatable {
     get
   }
   @available(iOS 15.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s14FamilyControls0A14ActivityPickerV4bodyQrvp", 0) __
 }
 @available(iOS 15.0, *)
@@ -199,7 +199,7 @@ public class AuthorizationCenter : Combine.ObservableObject {
   @available(watchOS, unavailable)
   public func revokeAuthorization(completionHandler: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
   @available(iOS 15.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
+  @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   @available(macOS, unavailable)
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher

@@ -5,13 +5,17 @@
 //  Copyright © 2024 Apple. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKQuery.h>
 #import <HealthKit/HKQueryAnchor.h>
 #import <HealthKit/HKQueryDescriptor.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-HK_EXTERN API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0))
 @interface HKWorkoutEffortRelationship : NSObject<NSSecureCoding, NSCopying>
 
 /*!
@@ -48,6 +52,8 @@ typedef NS_ENUM(NSInteger, HKWorkoutEffortRelationshipQueryOptions) {
  @class         HKWorkoutEffortRelationshipQuery
  @abstract      A concrete subclass of HKQuery that provides an interface to observe associations with a workout sample.
  */
+HK_EXTERN
+NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0))
 @interface HKWorkoutEffortRelationshipQuery : HKQuery
 
@@ -68,6 +74,7 @@ API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos
 - (instancetype)initWithPredicate:(nullable NSPredicate *)predicate
                            anchor:(nullable HKQueryAnchor *)anchor
                           options:(HKWorkoutEffortRelationshipQueryOptions)options 
-                   resultsHandler:(void(^)(HKWorkoutEffortRelationshipQuery *query, NSArray<HKWorkoutEffortRelationship *> * _Nullable relationships, HKQueryAnchor * _Nullable newAnchor, NSError * _Nullable error))resultsHandler;
+                   resultsHandler:(void(^NS_SWIFT_SENDABLE)(HKWorkoutEffortRelationshipQuery *query, NSArray<HKWorkoutEffortRelationship *> * _Nullable relationships, HKQueryAnchor * _Nullable newAnchor, NSError * _Nullable error))resultsHandler;
 @end
+
 NS_ASSUME_NONNULL_END

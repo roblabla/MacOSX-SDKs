@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 814.0.59.1.2 -module-name _StoreKit_SwiftUI
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 814.1.11 -module-name _StoreKit_SwiftUI
 import Combine
 import CoreGraphics
 import CryptoKit/*.Insecure*/
@@ -26,8 +26,8 @@ import os
   @_Concurrency.MainActor @preconcurrency public func makeBody(configuration: _StoreKit_SwiftUI.PagedProminentPickerSubscriptionStoreControlStyle.Configuration) -> some SwiftUICore.View
   
   @available(iOS 18.0, visionOS 2.0, macOS 15.0, *)
-  @available(tvOS, unavailable, introduced: 17.0)
-  @available(watchOS, unavailable, introduced: 10.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s17_StoreKit_SwiftUI032PagedProminentPickerSubscriptionA12ControlStyleV8makeBody13configurationQrAA0haiJ13ConfigurationV_tF", 0) __
 }
 @available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
@@ -45,7 +45,7 @@ extension _StoreKit_SwiftUI.SubscriptionStoreControlStyle where Self == _StoreKi
     get
   }
   @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
+  @available(tvOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s17_StoreKit_SwiftUI021AutomaticSubscriptionA17PickerOptionLabelV4bodyQrvp", 0) __
 }
 extension SwiftUICore.View {
@@ -99,7 +99,7 @@ extension _StoreKit_SwiftUI.ProductViewStyle where Self == _StoreKit_SwiftUI.Aut
   @_Concurrency.MainActor @preconcurrency public func makeBody(configuration: _StoreKit_SwiftUI.PagedPickerSubscriptionStoreControlStyle.Configuration) -> some SwiftUICore.View
   
   @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  @available(tvOS, unavailable, introduced: 17.0)
+  @available(tvOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s17_StoreKit_SwiftUI023PagedPickerSubscriptionA12ControlStyleV8makeBody13configurationQrAA0gahI13ConfigurationV_tF", 0) __
 }
 @available(iOS 18.0, macOS 15.0, watchOS 11.0, visionOS 2.0, *)
@@ -174,7 +174,7 @@ extension _StoreKit_SwiftUI.SubscriptionStorePickerOption {
     get
   }
   @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
+  @available(tvOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s17_StoreKit_SwiftUI012SubscriptionA12PickerOptionV4bodyQrvp", 0) __<Label>
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -368,8 +368,8 @@ extension SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public func makeBody(configuration: _StoreKit_SwiftUI.CompactPickerSubscriptionStoreControlStyle.Configuration) -> some SwiftUICore.View
   
   @available(iOS 18.0, visionOS 2.0, macOS 15.0, *)
-  @available(tvOS, unavailable, introduced: 17.0)
-  @available(watchOS, unavailable, introduced: 10.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s17_StoreKit_SwiftUI025CompactPickerSubscriptionA12ControlStyleV8makeBody13configurationQrAA0gahI13ConfigurationV_tF", 0) __
 }
 @available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
@@ -798,8 +798,8 @@ public struct AutomaticSubscriptionStoreControlPlacement : _StoreKit_SwiftUI.Sub
   @_Concurrency.MainActor @preconcurrency public func makeBody(configuration: _StoreKit_SwiftUI.LargeProductViewStyle.Configuration) -> some SwiftUICore.View
   
   @available(iOS 17.0, visionOS 1.0, macOS 14.0, *)
-  @available(tvOS, unavailable, introduced: 17.0)
-  @available(watchOS, unavailable, introduced: 10.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s17_StoreKit_SwiftUI21LargeProductViewStyleV8makeBody13configurationQrAA0fgH13ConfigurationV_tF", 0) __
 }
 @available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
@@ -826,9 +826,9 @@ extension _StoreKit_SwiftUI.ProductViewStyle where Self == _StoreKit_SwiftUI.Lar
   @_Concurrency.MainActor @preconcurrency public func makeBody(configuration: _StoreKit_SwiftUI.ProminentPickerSubscriptionStoreControlStyle.Configuration) -> some SwiftUICore.View
   
   @available(iOS 17.0, macOS 14.0, *)
-  @available(tvOS, unavailable, introduced: 17.0)
-  @available(watchOS, unavailable, introduced: 10.0)
-  @available(visionOS, unavailable, introduced: 1.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s17_StoreKit_SwiftUI027ProminentPickerSubscriptionA12ControlStyleV8makeBody13configurationQrAA0gahI13ConfigurationV_tF", 0) __
 }
 @available(iOS 17.0, macOS 14.0, *)
@@ -994,7 +994,7 @@ extension SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public func makeBody(configuration: _StoreKit_SwiftUI.PickerSubscriptionStoreControlStyle.Configuration) -> some SwiftUICore.View
   
   @available(iOS 17.0, watchOS 10.0, visionOS 1.0, macOS 14.0, *)
-  @available(tvOS, unavailable, introduced: 17.0)
+  @available(tvOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s17_StoreKit_SwiftUI018PickerSubscriptionA12ControlStyleV8makeBody13configurationQrAA0fagH13ConfigurationV_tF", 0) __
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, visionOS 1.0, *)
@@ -1158,7 +1158,7 @@ extension _StoreKit_SwiftUI.SubscriptionStorePicker {
     get
   }
   @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
+  @available(tvOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s17_StoreKit_SwiftUI012SubscriptionA6PickerV4bodyQrvp", 0) __<PickerContent, ConfirmationContent>
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
@@ -1205,8 +1205,9 @@ extension _StoreKit_SwiftUI.SubscriptionOptionSection where Header == SwiftUICor
   nonisolated public init()
   @_Concurrency.MainActor @preconcurrency public func makeBody(configuration: _StoreKit_SwiftUI.CompactProductViewStyle.Configuration) -> some SwiftUICore.View
   
-  @available(iOS 17.0, tvOS 17.0, visionOS 1.0, macOS 14.0, *)
-  @available(watchOS, unavailable, introduced: 10.0)
+  @available(iOS 17.0, tvOS 17.0, macOS 14.0, *)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s17_StoreKit_SwiftUI23CompactProductViewStyleV8makeBody13configurationQrAA0fgH13ConfigurationV_tF", 0) __
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)

@@ -5,6 +5,8 @@
 //  Copyright © 2017-2022 Apple. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKQuery.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -19,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
                 HKHealthStore stopQuery to discontinue further route data reporting.
  */
 HK_EXTERN
+NS_SWIFT_SENDABLE
 #if defined(__swift__) && __swift__
 API_DEPRECATED("Use HKWorkoutRouteQueryDescriptor", ios(11.0, API_TO_BE_DEPRECATED), watchos(4.0, API_TO_BE_DEPRECATED));
 #else
@@ -38,7 +41,7 @@ API_AVAILABLE(ios(11.0), watchos(4.0), macCatalyst(13.0), macos(13.0))
                         stopQuery called, the query is complete and no more calls to the handler will be made.
  */
 - (instancetype)initWithRoute:(HKWorkoutRoute *)workoutRoute
-                  dataHandler:(void(^)(HKWorkoutRouteQuery *query, NSArray<CLLocation *> * _Nullable routeData, BOOL done, NSError * _Nullable error))dataHandler;
+                  dataHandler:(void(^NS_SWIFT_SENDABLE)(HKWorkoutRouteQuery *query, NSArray<CLLocation *> * _Nullable routeData, BOOL done, NSError * _Nullable error))dataHandler;
 
 /*!
  @method        initWithRoute:dateInterval:dataHandler:
@@ -57,7 +60,7 @@ API_AVAILABLE(ios(11.0), watchos(4.0), macCatalyst(13.0), macos(13.0))
  */
 - (instancetype)initWithRoute:(HKWorkoutRoute *)workoutRoute
                  dateInterval:(NSDateInterval *)dateInterval
-                  dataHandler:(void(^)(HKWorkoutRouteQuery *query, NSArray<CLLocation *> * _Nullable routeData, BOOL done, NSError * _Nullable error))dataHandler API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0));
+                  dataHandler:(void(^NS_SWIFT_SENDABLE)(HKWorkoutRouteQuery *query, NSArray<CLLocation *> * _Nullable routeData, BOOL done, NSError * _Nullable error))dataHandler API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0));
 
 @end
 

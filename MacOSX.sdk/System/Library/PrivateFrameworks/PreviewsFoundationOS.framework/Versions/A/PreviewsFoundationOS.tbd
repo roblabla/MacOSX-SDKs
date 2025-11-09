@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsFoundationOS.framework/Versions/A/PreviewsFoundationOS'
-current-version: 22.0.73
+current-version: 22.10.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -194,7 +194,7 @@ exports:
                        '_$s20PreviewsFoundationOS10assertLess_4than8callsiteSbx_xAA8CallsiteVtSLRzlF', 
                        '_$s20PreviewsFoundationOS10assertTrue_4file4line6column8functionS2byXK_s12StaticStringVS2uAHtF', 
                        '_$s20PreviewsFoundationOS10assertTrue_8callsiteS2byXK_AA8CallsiteVtF', 
-                       '_$s20PreviewsFoundationOS11ActorTunnelV10invalidateyyF', 
+                       '_$s20PreviewsFoundationOS10isSkywagonSbvg', '_$s20PreviewsFoundationOS11ActorTunnelV10invalidateyyF', 
                        '_$s20PreviewsFoundationOS11ActorTunnelV4sendyScS12ContinuationV11YieldResultOyx__GxF', 
                        '_$s20PreviewsFoundationOS11ActorTunnelV6createACyxG_ScSyxGtyFZ', 
                        '_$s20PreviewsFoundationOS11ActorTunnelVMa', '_$s20PreviewsFoundationOS11ActorTunnelVMn', 
@@ -2150,6 +2150,7 @@ exports:
                        '_$s20PreviewsFoundationOS24UserDefaultRepresentablePSETb', 
                        '_$s20PreviewsFoundationOS24UserDefaultRepresentablePSeTb', 
                        '_$s20PreviewsFoundationOS24UserDefaultRepresentableTL', '_$s20PreviewsFoundationOS24_symbolicateAgentAddressySPys4Int8VGSgs5Int32V_s6UInt64VtF', 
+                       '_$s20PreviewsFoundationOS24xtpProcessEnvironmentKeySSvg', 
                        '_$s20PreviewsFoundationOS25CommandLineToolInvocationV07commandE11DescriptionSSvg', 
                        '_$s20PreviewsFoundationOS25CommandLineToolInvocationV07commandE11DescriptionSSvpMV', 
                        '_$s20PreviewsFoundationOS25CommandLineToolInvocationV10launchPath0H9Arguments11environment07workingI04name3log21printToStandardOutput24failedWhenRunningHandler0sP11LaunchErrorACSS_SaySSGSDyS2SGSSSgSSSo0c4_os_N0CSgSbs0X0_pAC_SStcsAS_pAC_sAS_ptctcfC', 
@@ -2419,6 +2420,7 @@ exports:
                        '_$s20PreviewsFoundationOS29BreadthFirstRecursiveIteratorVMa', 
                        '_$s20PreviewsFoundationOS29BreadthFirstRecursiveIteratorVMn', 
                        '_$s20PreviewsFoundationOS29BreadthFirstRecursiveIteratorVyxGStAAMc', 
+                       '_$s20PreviewsFoundationOS29skywagonProcessEnvironmentKeySSvg', 
                        '_$s20PreviewsFoundationOS29splitDYLDPathEnvironmentValueySaySSGSSF', 
                        '_$s20PreviewsFoundationOS30EnvironmentVariableMergeResultO6ignoreyA2CmFWC', 
                        '_$s20PreviewsFoundationOS30EnvironmentVariableMergeResultO7replaceyACSSSgcACmFWC', 
@@ -2590,7 +2592,8 @@ exports:
                        '_$s20PreviewsFoundationOS5QueryPAAE7resolve5usingAA0D11ResolutionsV9PrimitiveQzSgyc_tFZ', 
                        '_$s20PreviewsFoundationOS5QueryPAASHRzrlE5value_2inAA6FutureCyqd__Gqd__m_AA0D7ManagerCtAH13MergeStrategyAC_6OutputRTzlF', 
                        '_$s20PreviewsFoundationOS5QueryPs28CustomDebugStringConvertibleTb', 
-                       '_$s20PreviewsFoundationOS5QueryTL', '_$s20PreviewsFoundationOS6EitherO11flatMapLeftyACyqd__q_GAExXElF', 
+                       '_$s20PreviewsFoundationOS5QueryTL', '_$s20PreviewsFoundationOS5isXTPSbvg', 
+                       '_$s20PreviewsFoundationOS6EitherO11flatMapLeftyACyqd__q_GAExXElF', 
                        '_$s20PreviewsFoundationOS6EitherO12DiscriminantO11descriptionSSvg', 
                        '_$s20PreviewsFoundationOS6EitherO12DiscriminantO11descriptionSSvpMV', 
                        '_$s20PreviewsFoundationOS6EitherO12DiscriminantO2eeoiySbAEyxq__G_AGtFZ', 

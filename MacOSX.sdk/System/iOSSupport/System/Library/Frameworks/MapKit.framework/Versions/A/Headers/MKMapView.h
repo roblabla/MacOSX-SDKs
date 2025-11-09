@@ -65,8 +65,8 @@ typedef NS_OPTIONS(NSInteger, MKMapFeatureOptions) {
 } API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
 #endif
 
-MK_EXTERN NSString * const MKMapViewDefaultAnnotationViewReuseIdentifier NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
-MK_EXTERN NSString * const MKMapViewDefaultClusterAnnotationViewReuseIdentifier NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
+MK_EXTERN NSString * const MKMapViewDefaultAnnotationViewReuseIdentifier API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+MK_EXTERN NSString * const MKMapViewDefaultClusterAnnotationViewReuseIdentifier API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 #if TARGET_OS_IPHONE
 NS_CLASS_AVAILABLE(NA, 3_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
@@ -116,8 +116,8 @@ NS_CLASS_AVAILABLE(10_9, NA)
 - (MKMapRect)mapRectThatFits:(MKMapRect)mapRect edgePadding:(NSEdgeInsets)insets;
 #endif
 
-@property (nonatomic, copy) MKMapCamera *camera NS_AVAILABLE(10_9, 7_0);
-- (void)setCamera:(MKMapCamera *)camera animated:(BOOL)animated NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, copy) MKMapCamera *camera API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2)) API_UNAVAILABLE(watchos);
+- (void)setCamera:(MKMapCamera *)camera animated:(BOOL)animated API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic, copy, null_resettable) MKMapCameraZoomRange *cameraZoomRange API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos);
 - (void)setCameraZoomRange:(nullable MKMapCameraZoomRange *)cameraZoomRange animated:(BOOL)animated API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos);
@@ -142,25 +142,25 @@ NS_CLASS_AVAILABLE(10_9, NA)
 @property (nonatomic, getter=isZoomEnabled) BOOL zoomEnabled;
 @property (nonatomic, getter=isScrollEnabled) BOOL scrollEnabled;
 // Rotate and pitch are enabled by default on Mac OS X and on iOS 7.0 and later.
-@property (nonatomic, getter=isRotateEnabled) BOOL rotateEnabled NS_AVAILABLE(10_9, 7_0) API_UNAVAILABLE(tvos);
-@property (nonatomic, getter=isPitchEnabled) BOOL pitchEnabled NS_AVAILABLE(10_9, 7_0) API_UNAVAILABLE(tvos);
+@property (nonatomic, getter=isRotateEnabled) BOOL rotateEnabled API_AVAILABLE(macos(10.9), ios(7.0)) API_UNAVAILABLE(tvos, watchos);
+@property (nonatomic, getter=isPitchEnabled) BOOL pitchEnabled API_AVAILABLE(macos(10.9), ios(7.0)) API_UNAVAILABLE(tvos, watchos);
 
 @property (nonatomic, assign) BOOL showsUserTrackingButton API_AVAILABLE(ios(17.0), tvos(17.0), macos(14.0), macCatalyst(17.0)) API_UNAVAILABLE(watchos);
 @property (nonatomic, assign) MKFeatureVisibility pitchButtonVisibility API_AVAILABLE(ios(17.0), tvos(17.0), macos(14.0), macCatalyst(17.0)) API_UNAVAILABLE(watchos);
 @property (nonatomic) BOOL showsPitchControl API_AVAILABLE(macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 @property (nonatomic) BOOL showsZoomControls API_AVAILABLE(macos(10.9), macCatalyst(13.0)) API_UNAVAILABLE(ios, watchos, tvos);
-@property (nonatomic) BOOL showsCompass NS_AVAILABLE(10_9, 9_0) API_UNAVAILABLE(tvos);
-@property (nonatomic) BOOL showsScale NS_AVAILABLE(10_10, 9_0);
+@property (nonatomic) BOOL showsCompass API_AVAILABLE(macos(10.9), ios(9.0)) API_UNAVAILABLE(tvos, watchos);
+@property (nonatomic) BOOL showsScale API_AVAILABLE(macos(10.9), ios(9.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic, copy, nullable) MKPointOfInterestFilter *pointOfInterestFilter API_DEPRECATED_WITH_REPLACEMENT("Use pointOfInterestFilter on respective MKMapConfiguration", macos(10.15, API_TO_BE_DEPRECATED), ios(13.0, API_TO_BE_DEPRECATED), tvos(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 @property (nonatomic) BOOL showsPointsOfInterest
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED("Use pointOfInterestFilter", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard and MKMapTypeHybrid
+API_DEPRECATED("Use pointOfInterestFilter", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.2, 13.0)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard and MKMapTypeHybrid
 #endif
-@property (nonatomic) BOOL showsBuildings API_DEPRECATED("None", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)); // Affects MKMapTypeStandard
-@property (nonatomic) BOOL showsTraffic API_DEPRECATED_WITH_REPLACEMENT("Use showsTraffic on respective MKMapConfiguration", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)); // Affects MKMapTypeStandard and MKMapTypeHybrid
+@property (nonatomic) BOOL showsBuildings API_DEPRECATED("None", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), tvos(9.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard
+@property (nonatomic) BOOL showsTraffic API_DEPRECATED_WITH_REPLACEMENT("Use showsTraffic on respective MKMapConfiguration", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard and MKMapTypeHybrid
 
 // Set to YES to add the user location annotation to the map and start updating its location
 @property (nonatomic) BOOL showsUserLocation;
@@ -183,7 +183,7 @@ API_DEPRECATED("Use pointOfInterestFilter", macos(10.9, 10.15), ios(7.0, 13.0), 
 - (void)removeAnnotations:(NSArray<id<MKAnnotation>> *)annotations;
 
 @property (nonatomic, readonly) NSArray<id<MKAnnotation>> *annotations;
-- (NSSet<id<MKAnnotation>> *)annotationsInMapRect:(MKMapRect)mapRect NS_AVAILABLE(10_9, 4_2);
+- (NSSet<id<MKAnnotation>> *)annotationsInMapRect:(MKMapRect)mapRect API_AVAILABLE(macos(10.9), ios(4.2), tvos(9.2)) API_UNAVAILABLE(watchos);
 
 // Currently displayed view for an annotation; returns nil if the view for the annotation isn't being displayed.
 - (nullable MKAnnotationView *)viewForAnnotation:(id <MKAnnotation>)annotation;
@@ -192,10 +192,10 @@ API_DEPRECATED("Use pointOfInterestFilter", macos(10.9, 10.15), ios(7.0, 13.0), 
 - (nullable MKAnnotationView *)dequeueReusableAnnotationViewWithIdentifier:(NSString *)identifier;
 
 // Used by the delegate to acquire a reusable annotation view, or create a new view for registered class, in lieu of allocating a new one. Throws an exception if view could not be aquired.
-- (MKAnnotationView *)dequeueReusableAnnotationViewWithIdentifier:(NSString *)identifier forAnnotation:(id<MKAnnotation>)annotation NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
+- (MKAnnotationView *)dequeueReusableAnnotationViewWithIdentifier:(NSString *)identifier forAnnotation:(id<MKAnnotation>)annotation API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 // Register a MKAnnotationView subclass to be instantiated when dequeueReusableAnnotationViewWithIdentifier: does not have a view to reuse.
-- (void)registerClass:(nullable Class)viewClass forAnnotationViewWithReuseIdentifier:(NSString *)identifier NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
+- (void)registerClass:(nullable Class)viewClass forAnnotationViewWithReuseIdentifier:(NSString *)identifier API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 // Select or deselect a given annotation.  Asks the delegate for the corresponding annotation view if necessary.
 - (void)selectAnnotation:(id <MKAnnotation>)annotation animated:(BOOL)animated;
@@ -207,7 +207,7 @@ API_DEPRECATED("Use pointOfInterestFilter", macos(10.9, 10.15), ios(7.0, 13.0), 
 @property (nonatomic, readonly) CGRect annotationVisibleRect;
 
 // Position the map such that the provided array of annotations are all visible to the fullest extent possible.
-- (void)showAnnotations:(NSArray<id<MKAnnotation>> *)annotations animated:(BOOL)animated NS_AVAILABLE(10_9, 7_0);
+- (void)showAnnotations:(NSArray<id<MKAnnotation>> *)annotations animated:(BOOL)animated API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -216,24 +216,24 @@ API_DEPRECATED("Use pointOfInterestFilter", macos(10.9, 10.15), ios(7.0, 13.0), 
 // Overlays are models used to represent areas to be drawn on top of the map.
 // This is in contrast to annotations, which represent points on the map.
 // Implement -mapView:rendererForOverlay: on MKMapViewDelegate to return the renderer for each overlay.
-- (void)addOverlay:(id <MKOverlay>)overlay level:(MKOverlayLevel)level NS_AVAILABLE(10_9, 7_0);
-- (void)addOverlays:(NSArray<id<MKOverlay>> *)overlays level:(MKOverlayLevel)level NS_AVAILABLE(10_9, 7_0);
+- (void)addOverlay:(id <MKOverlay>)overlay level:(MKOverlayLevel)level API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2)) API_UNAVAILABLE(watchos);
+- (void)addOverlays:(NSArray<id<MKOverlay>> *)overlays level:(MKOverlayLevel)level API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
-- (void)removeOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 4_0);
-- (void)removeOverlays:(NSArray<id<MKOverlay>> *)overlays NS_AVAILABLE(10_9, 4_0);
+- (void)removeOverlay:(id <MKOverlay>)overlay API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
+- (void)removeOverlays:(NSArray<id<MKOverlay>> *)overlays API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
-- (void)insertOverlay:(id <MKOverlay>)overlay atIndex:(NSUInteger)index level:(MKOverlayLevel)level NS_AVAILABLE(10_9, 7_0);
+- (void)insertOverlay:(id <MKOverlay>)overlay atIndex:(NSUInteger)index level:(MKOverlayLevel)level  API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
-- (void)insertOverlay:(id <MKOverlay>)overlay aboveOverlay:(id <MKOverlay>)sibling NS_AVAILABLE(10_9, 4_0);
-- (void)insertOverlay:(id <MKOverlay>)overlay belowOverlay:(id <MKOverlay>)sibling NS_AVAILABLE(10_9, 4_0);
+- (void)insertOverlay:(id <MKOverlay>)overlay aboveOverlay:(id <MKOverlay>)sibling API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
+- (void)insertOverlay:(id <MKOverlay>)overlay belowOverlay:(id <MKOverlay>)sibling API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
-- (void)exchangeOverlay:(id <MKOverlay>)overlay1 withOverlay:(id <MKOverlay>)overlay2 NS_AVAILABLE(10_9, 7_0);
+- (void)exchangeOverlay:(id <MKOverlay>)overlay1 withOverlay:(id <MKOverlay>)overlay2  API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
-@property (nonatomic, readonly) NSArray<id<MKOverlay>> *overlays NS_AVAILABLE(10_9, 4_0);
-- (NSArray<id<MKOverlay>> *)overlaysInLevel:(MKOverlayLevel)level NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSArray<id<MKOverlay>> *overlays API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
+- (NSArray<id<MKOverlay>> *)overlaysInLevel:(MKOverlayLevel)level  API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
 // Current renderer for overlay; returns nil if the overlay is not shown.
-- (nullable MKOverlayRenderer *)rendererForOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 7_0);
+- (nullable MKOverlayRenderer *)rendererForOverlay:(id <MKOverlay>)overlay  API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
 #if TARGET_OS_IPHONE
 // Currently displayed view for overlay; returns nil if the view has not been created yet.
@@ -247,11 +247,11 @@ API_DEPRECATED_WITH_REPLACEMENT("-rendererForOverlay:", ios(4.0, 13.0)) API_UNAV
 #endif
 
 // These methods operate implicitly on overlays in MKOverlayLevelAboveRoads and may be deprecated in a future release in favor of the methods that specify the level.
-- (void)addOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 4_0);
-- (void)addOverlays:(NSArray<id<MKOverlay>> *)overlays NS_AVAILABLE(10_9, 4_0);
+- (void)addOverlay:(id <MKOverlay>)overlay API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
+- (void)addOverlays:(NSArray<id<MKOverlay>> *)overlays API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
-- (void)insertOverlay:(id <MKOverlay>)overlay atIndex:(NSUInteger)index NS_AVAILABLE(10_9, 4_0);
-- (void)exchangeOverlayAtIndex:(NSUInteger)index1 withOverlayAtIndex:(NSUInteger)index2 NS_AVAILABLE(10_9, 4_0);
+- (void)insertOverlay:(id <MKOverlay>)overlay atIndex:(NSUInteger)index API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
+- (void)exchangeOverlayAtIndex:(NSUInteger)index1 withOverlayAtIndex:(NSUInteger)index2 API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -263,14 +263,14 @@ NS_SWIFT_UI_ACTOR
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated;
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated;
 
-- (void)mapViewDidChangeVisibleRegion:(MKMapView *)mapView API_AVAILABLE(ios(11), tvos(11), macos(10.13));
+- (void)mapViewDidChangeVisibleRegion:(MKMapView *)mapView API_AVAILABLE(ios(11), tvos(11), macos(10.13)) API_UNAVAILABLE(watchos);
 
 - (void)mapViewWillStartLoadingMap:(MKMapView *)mapView;
 - (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView;
 - (void)mapViewDidFailLoadingMap:(MKMapView *)mapView withError:(NSError *)error;
 
-- (void)mapViewWillStartRenderingMap:(MKMapView *)mapView NS_AVAILABLE(10_9, 7_0);
-- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered NS_AVAILABLE(10_9, 7_0);
+- (void)mapViewWillStartRenderingMap:(MKMapView *)mapView API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2)) API_UNAVAILABLE(watchos);
+- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
 // mapView:viewForAnnotation: provides the view for each annotation.
 // This method may be called for all or some of the added annotations.
@@ -284,11 +284,11 @@ NS_SWIFT_UI_ACTOR
 
 #if TARGET_OS_IPHONE
 // mapView:annotationView:calloutAccessoryControlTapped: is called when the user taps on left & right callout accessory UIControls.
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control API_UNAVAILABLE(tvos);
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control API_UNAVAILABLE(tvos, watchos);
 #endif
 
-- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0);
-- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0);
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotation:(id<MKAnnotation>)annotation API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotation:(id<MKAnnotation>)annotation API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
@@ -310,18 +310,18 @@ API_AVAILABLE(ios(18.0), macos(15.0), visionos(2.0))
 API_UNAVAILABLE(watchos, tvos);
 #endif
 
-- (void)mapViewWillStartLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0);
-- (void)mapViewDidStopLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0);
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation NS_AVAILABLE(10_9, 4_0);
-- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error NS_AVAILABLE(10_9, 4_0);
+- (void)mapViewWillStartLocatingUser:(MKMapView *)mapView API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
+- (void)mapViewDidStopLocatingUser:(MKMapView *)mapView API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
+- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState 
-   fromOldState:(MKAnnotationViewDragState)oldState NS_AVAILABLE(10_9, 4_0) API_UNAVAILABLE(tvos);
+   fromOldState:(MKAnnotationViewDragState)oldState API_AVAILABLE(macos(10.9), ios(4.0)) API_UNAVAILABLE(tvos, watchos);
 
 - (void)mapView:(MKMapView *)mapView didChangeUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated API_AVAILABLE(ios(5.0), tvos(9.2), macos(11.0)) API_UNAVAILABLE(watchos);
 
-- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 7_0);
-- (void)mapView:(MKMapView *)mapView didAddOverlayRenderers:(NSArray<MKOverlayRenderer *> *)renderers NS_AVAILABLE(10_9, 7_0);
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2)) API_UNAVAILABLE(watchos);
+- (void)mapView:(MKMapView *)mapView didAddOverlayRenderers:(NSArray<MKOverlayRenderer *> *)renderers API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
 #if TARGET_OS_IPHONE
 // Prefer -mapView:rendererForOverlay:

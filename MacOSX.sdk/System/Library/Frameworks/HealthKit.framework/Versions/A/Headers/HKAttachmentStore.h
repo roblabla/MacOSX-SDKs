@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
  @class         HKAttachmentStore
  @discussion    The HKAttachmentStore class provides an interface for accessing and storing HKAttachment objects.
  */
-HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
+HK_EXTERN
+API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
 @interface HKAttachmentStore : NSObject
 
 /*!

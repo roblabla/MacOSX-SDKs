@@ -7,7 +7,9 @@ compatibility-version: 0
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s25TelephonyBlastDoorSupport0bC6ClientC6unpack_4fromxxm_10Foundation4DataVtK0bC013MessageSchemaRzlFTj', 
+    symbols:         [ '_$s25TelephonyBlastDoorSupport0bC6ClientC6unpack_4from7contextxxm_10Foundation4DataV7ContextQztK0bC016ContextualSchemaRzlFTj', 
+                       '_$s25TelephonyBlastDoorSupport0bC6ClientC6unpack_4from7contextxxm_10Foundation4DataV7ContextQztK0bC016ContextualSchemaRzlFTq', 
+                       '_$s25TelephonyBlastDoorSupport0bC6ClientC6unpack_4fromxxm_10Foundation4DataVtK0bC013MessageSchemaRzlFTj', 
                        '_$s25TelephonyBlastDoorSupport0bC6ClientC6unpack_4fromxxm_10Foundation4DataVtK0bC013MessageSchemaRzlFTq', 
                        '_$s25TelephonyBlastDoorSupport0bC6ClientCACycfC', '_$s25TelephonyBlastDoorSupport0bC6ClientCACycfCTj', 
                        '_$s25TelephonyBlastDoorSupport0bC6ClientCACycfCTq', '_$s25TelephonyBlastDoorSupport0bC6ClientCACycfc', 
@@ -58,8 +60,9 @@ exports:
                        '_$s25TelephonyBlastDoorSupport26CPMGroupManagementUnpackerVMa', 
                        '_$s25TelephonyBlastDoorSupport26CPMGroupManagementUnpackerVMn', 
                        '_$s25TelephonyBlastDoorSupport26CPMGroupManagementUnpackerVN', 
-                       '_$s25TelephonyBlastDoorSupport26ChatbotRootMessageUnpackerV0bC00gH0AAMc', 
+                       '_$s25TelephonyBlastDoorSupport26ChatbotRootMessageUnpackerV0bC0010ContextualH0AAMc', 
                        '_$s25TelephonyBlastDoorSupport26ChatbotRootMessageUnpackerV6unpack4from0bC00E0O0fG0O10Foundation4DataV_tKF', 
+                       '_$s25TelephonyBlastDoorSupport26ChatbotRootMessageUnpackerV6unpack4from4with0bC00E0O0fG0O10Foundation4DataV_AK7ContextVtKF', 
                        '_$s25TelephonyBlastDoorSupport26ChatbotRootMessageUnpackerVACycfC', 
                        '_$s25TelephonyBlastDoorSupport26ChatbotRootMessageUnpackerVMa', 
                        '_$s25TelephonyBlastDoorSupport26ChatbotRootMessageUnpackerVMn', 

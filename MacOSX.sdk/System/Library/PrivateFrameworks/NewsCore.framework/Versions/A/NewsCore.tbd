@@ -581,6 +581,7 @@ exports:
                        _FCCKWidgetSectionConfigRecordType, _FCCKWidgetSectionConfigSectionBackgroundColorDarkKey, 
                        _FCCKWidgetSectionConfigSectionBackgroundColorLightKey, _FCCKWidgetSectionConfigSectionCachedResultCutoffTimeKey, 
                        _FCCKWidgetSectionConfigSectionCompactNameKey, _FCCKWidgetSectionConfigSectionFallbackOrderKey, 
+                       _FCCKWidgetSectionConfigSectionFilterBlockedStorefrontsKey, 
                        _FCCKWidgetSectionConfigSectionFilterDuplicateClustersAcrossSectionsKey, 
                        _FCCKWidgetSectionConfigSectionFilterDuplicateClustersWithinSectionKey, 
                        _FCCKWidgetSectionConfigSectionFilterMutedChannelsWithinSectionKey, 

@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
                                   outputTypes:(NSArray<MPSGraphType *> *) outputTypes
                                          name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( call(symbolName:inputTensors:outputTypes:name:) )
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0));
 
 @end
 NS_ASSUME_NONNULL_END

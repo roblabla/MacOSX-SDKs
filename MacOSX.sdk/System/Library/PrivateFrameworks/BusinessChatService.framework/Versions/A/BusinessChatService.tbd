@@ -42,10 +42,10 @@ exports:
                        _kBCSDefaultsLinkCustomApiKey, _kBCSDefaultsLinkCustomContainerId, 
                        _kBCSDefaultsLinkCustomEnvironment, _kBCSDefaultsLinkICloudStagingMode, 
                        _kBCSDefaultsLinkSkipDiskCaching, _kBCSDefaultsLinkSkipEdgeCaching, 
-                       _kBCSHashServiceSHA256DigestLength, _kBCSOpenHoursDayOfWeekKey, 
-                       _kBCSOpenHoursFromKey, _kBCSOpenHoursHoursRangesKey, _kBCSOpenHoursSecondsInDay, 
-                       _kBCSOpenHoursTimeRangeKey, _kBCSOpenHoursToKey, _kBCSPIRSecondaryIdentifierForBusinessCaller, 
-                       _kBCSPIRSecondaryIdentifierForEmail ]
+                       _kBCSDefaultsMaxPIRConcurrency, _kBCSHashServiceSHA256DigestLength, 
+                       _kBCSOpenHoursDayOfWeekKey, _kBCSOpenHoursFromKey, _kBCSOpenHoursHoursRangesKey, 
+                       _kBCSOpenHoursSecondsInDay, _kBCSOpenHoursTimeRangeKey, _kBCSOpenHoursToKey, 
+                       _kBCSPIRSecondaryIdentifierForBusinessCaller, _kBCSPIRSecondaryIdentifierForEmail ]
     objc-classes:    [ BCSBlastDoorHelper, BCSBloomFilterExtractor, BCSBusinessCallerFetchMetric, 
                        BCSBusinessCallerItem, BCSBusinessEmailIdentifier, BCSBusinessEmailItem, 
                        BCSBusinessItem, BCSBusinessItemPersistentStore, BCSBusinessLinkContentItem, 

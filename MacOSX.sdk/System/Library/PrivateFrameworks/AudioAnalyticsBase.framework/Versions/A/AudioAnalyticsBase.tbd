@@ -74,6 +74,8 @@ exports:
                        '_$s18AudioAnalyticsBase12ServerConfigV12commonFieldsAA06CommoneG0VvpMV', 
                        '_$s18AudioAnalyticsBase12ServerConfigV18skipPreviousFieldsSaySSGvg', 
                        '_$s18AudioAnalyticsBase12ServerConfigV18skipPreviousFieldsSaySSGvpMV', 
+                       '_$s18AudioAnalyticsBase12ServerConfigV20osTransactionTimeoutSdSgvg', 
+                       '_$s18AudioAnalyticsBase12ServerConfigV20osTransactionTimeoutSdSgvpMV', 
                        '_$s18AudioAnalyticsBase12ServerConfigV24monitorClientConnectionsSbvg', 
                        '_$s18AudioAnalyticsBase12ServerConfigV24monitorClientConnectionsSbvpMV', 
                        '_$s18AudioAnalyticsBase12ServerConfigVMa', '_$s18AudioAnalyticsBase12ServerConfigVMn', 
@@ -370,7 +372,7 @@ exports:
                        '_$s18AudioAnalyticsBase19EncryptionUtilitiesO9getBase647fromKeySSSo03SecI3Refa_tKFZ', 
                        '_$s18AudioAnalyticsBase19EncryptionUtilitiesOMa', '_$s18AudioAnalyticsBase19EncryptionUtilitiesOMn', 
                        '_$s18AudioAnalyticsBase19EncryptionUtilitiesON', '_$s18AudioAnalyticsBase19NotificationManagerC012surfaceAlertD0yyAA0gD0VF', 
-                       '_$s18AudioAnalyticsBase19NotificationManagerC17surfaceTapToRadaryySo12AARadarDraftCF', 
+                       '_$s18AudioAnalyticsBase19NotificationManagerC17surfaceTapToRadaryySo0abI5DraftCF', 
                        '_$s18AudioAnalyticsBase19NotificationManagerC6sharedACvgZ', 
                        '_$s18AudioAnalyticsBase19NotificationManagerCMa', '_$s18AudioAnalyticsBase19NotificationManagerCMm', 
                        '_$s18AudioAnalyticsBase19NotificationManagerCMn', '_$s18AudioAnalyticsBase19NotificationManagerCMo', 
@@ -439,6 +441,7 @@ exports:
                        '_$s18AudioAnalyticsBase20MacOSDefaultsProfileCfD', '_$s18AudioAnalyticsBase20MacOSDefaultsProfileCfd', 
                        '_$s18AudioAnalyticsBase20OsTransactionHandlerC14sessionStarted3forys5Int64V_tF', 
                        '_$s18AudioAnalyticsBase20OsTransactionHandlerC14sessionStopped3forys5Int64V_tF', 
+                       '_$s18AudioAnalyticsBase20OsTransactionHandlerC6expireyyF', 
                        '_$s18AudioAnalyticsBase20OsTransactionHandlerC6sharedACvgZ', 
                        '_$s18AudioAnalyticsBase20OsTransactionHandlerC8inactiveSbyF', 
                        '_$s18AudioAnalyticsBase20OsTransactionHandlerCMa', '_$s18AudioAnalyticsBase20OsTransactionHandlerCMm', 
@@ -569,6 +572,7 @@ exports:
                        '_$s18AudioAnalyticsBase6ConfigC13WorkerConfigsO14sessionSummaryyA2EmFWC', 
                        '_$s18AudioAnalyticsBase6ConfigC13WorkerConfigsO15durationSummaryyA2EmFWC', 
                        '_$s18AudioAnalyticsBase6ConfigC13WorkerConfigsO16audioCaptureLogsyA2EmFWC', 
+                       '_$s18AudioAnalyticsBase6ConfigC13WorkerConfigsO16inferenceSummaryyA2EmFWC', 
                        '_$s18AudioAnalyticsBase6ConfigC13WorkerConfigsO16summaryDecoratoryA2EmFWC', 
                        '_$s18AudioAnalyticsBase6ConfigC13WorkerConfigsO19messageProcessOrders5UInt8Vvg', 
                        '_$s18AudioAnalyticsBase6ConfigC13WorkerConfigsO19messageProcessOrders5UInt8VvpMV', 
@@ -819,6 +823,7 @@ exports:
                        '_$sSo14AudioEventTypeVSE0A13AnalyticsBaseMc', '_$sSo14AudioEventTypeVSe0A13AnalyticsBaseMc', 
                        '_$sSo18AudioEventCategoryVSE0A13AnalyticsBaseMc', '_$sSo18AudioEventCategoryVSe0A13AnalyticsBaseMc', 
                        _isTapToRadarAvailable ]
-    objc-classes:    [ AARadarComponent, AARadarDraft, PredicateHelper, Sysdiagnose, 
-                       Trace, TraceArgs ]
+    objc-classes:    [ AudioAnalyticsPredicateHelper, AudioAnalyticsRadarComponent, 
+                       AudioAnalyticsRadarDraft, AudioAnalyticsSysdiagnose, AudioAnalyticsTrace, 
+                       AudioAnalyticsTraceArgs ]
 ...

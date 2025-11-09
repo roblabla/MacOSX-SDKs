@@ -5,6 +5,8 @@
 //  Copyright (c) 2013-2022 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKSample.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,7 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
  @class         HKQuantitySample
  @abstract      An abstract HKSample subclass representing a quantity measurement.
  */
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKQuantitySample : HKSample
 
 @property (readonly, copy) HKQuantityType *quantityType;

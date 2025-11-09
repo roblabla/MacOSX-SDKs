@@ -5,6 +5,8 @@
 //  Copyright (c) 2014-2022 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKQuery.h>
 #import <HealthKit/HKQueryDescriptor.h>
 
@@ -12,7 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^HKObserverQueryCompletionHandler)(void);
 
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKObserverQuery : HKQuery
 
 /*!
@@ -25,7 +29,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 
 - (instancetype)initWithSampleType:(HKSampleType *)sampleType
                          predicate:(nullable NSPredicate *)predicate
-                     updateHandler:(void(^)(HKObserverQuery *query, HKObserverQueryCompletionHandler completionHandler, NSError * _Nullable error))updateHandler;
+                     updateHandler:(void(^NS_SWIFT_SENDABLE)(HKObserverQuery *query, HKObserverQueryCompletionHandler completionHandler, NSError * _Nullable error))updateHandler;
 
 /*!
  @method        initWithQueryDescriptors:updateHandler:
@@ -38,7 +42,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
                                    which you are interested in getting notified.
  */
 - (instancetype)initWithQueryDescriptors:(NSArray<HKQueryDescriptor *> *)queryDescriptors
-                           updateHandler:(void(^)(HKObserverQuery *query, NSSet<HKSampleType *> * _Nullable sampleTypesAdded, HKObserverQueryCompletionHandler completionHandler, NSError * _Nullable error))updateHandler API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0));
+                           updateHandler:(void(^NS_SWIFT_SENDABLE)(HKObserverQuery *query, NSSet<HKSampleType *> * _Nullable sampleTypesAdded, HKObserverQueryCompletionHandler completionHandler, NSError * _Nullable error))updateHandler API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0));
 @end
 
 NS_ASSUME_NONNULL_END

@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKLensSpecification.h>
 
 @class HKQuantity;
@@ -16,7 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
  @class         HKContactsLensSpecification
  @abstract      An object subclass representing lens specification for contacts
  */
-HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
 @interface HKContactsLensSpecification : HKLensSpecification <NSSecureCoding, NSCopying>
 
 /*!

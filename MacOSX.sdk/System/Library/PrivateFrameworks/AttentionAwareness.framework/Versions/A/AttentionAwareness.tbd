@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AttentionAwareness.framework/Versions/A/AttentionAwareness'
-current-version: 193.0.6
+current-version: 193.40.4
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AWStartAttentionAwarenessServer, __AWAttentionServiceEventFilterFactory, 

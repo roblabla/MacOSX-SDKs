@@ -20,8 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 */
 typedef NS_OPTIONS( NSUInteger, ASPickerDisplayItemSetupOptions )
 {
+    /// An option to ask the person using the app to rename the accessory.
     ASPickerDisplayItemSetupRename                          = ( 1U << 0 ),   // Ask user to rename accessory.
+    /// An option to require the app to finish accessory authorization before showing the setup view.
+    ///
+    /// If the accessory supports ``ASAccessory/SupportOptions/bluetoothPairingLE``, then the app needs to start pairing by accessing a protected GATT characteristic.
     ASPickerDisplayItemSetupConfirmAuthorization            = ( 1U << 1 ),   // App session finishes accessory authorization.
+    /// An option to ask the person setting up the accessory to finish additional setup in the app after the accessory is authorized.
     ASPickerDisplayItemSetupFinishInApp                     = ( 1U << 2 ),   // Display instruction to finish setup in app after accessory is authorized to use.
 } NS_SWIFT_NAME(ASPickerDisplayItem.SetupOptions);
 
@@ -30,23 +35,30 @@ API_AVAILABLE( ios( 18.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, 
 NS_SWIFT_SENDABLE
 @interface ASPickerDisplayItem : NSObject
 
-/// NOTE:-  `name` and `productImage` is ignored if display item matched with an already authorized accessory for another app
+/// >Note: The picker ignores `name` and `productImage` if the displayed item matched with an already authorized accessory for another app.
 
-/// Accessory's display name on picker as title.
+/// The accessory name to display in the picker.
 @property (readonly, copy, nonatomic) NSString *name;
 
-/// Accessory's product image.
+/// An image of the accessory to display in the picker.
 @property (readonly, copy, nonatomic) UIImage *productImage;
 
-/// Accessory discovery parameters.
+/// A descriptor that the picker uses to determine which discovered accessories to display.
 @property (readonly, copy, nonatomic) ASDiscoveryDescriptor *descriptor;
 
-/// Accessory rename option. `allowsRename` needs to be allowed to update options.
+/// Options to allow renaming a matched accessory.
+///
+/// To permit renaming, include ``SetupOptions-swift.struct/rename`` in the ``setupOptions-c.property``
 @property (readwrite, assign, nonatomic) ASAccessoryRenameOptions renameOptions;
 
-/// Accessory custom setup options.
+/// Custom setup options for the accessory.
 @property (readwrite, assign, nonatomic) ASPickerDisplayItemSetupOptions setupOptions;
 
+/// Creates a picker display item with a name and image to display and a descriptor to match discovered accessories.
+/// - Parameters:
+///   - name: The accessory name to display in the picker.
+///   - productImage: An image of the accessory to display in the picker.
+///   - descriptor: A descriptor that the picker uses to determine which discovered accessories to display.
 - (instancetype)initWithName:(NSString *) name productImage:(UIImage *) productImage
         descriptor:(ASDiscoveryDescriptor *) descriptor NS_DESIGNATED_INITIALIZER;
 
@@ -63,8 +75,10 @@ API_AVAILABLE( ios( 18.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, 
 NS_SWIFT_SENDABLE
 @interface ASMigrationDisplayItem : ASPickerDisplayItem
 
+/// The Bluetooth identifier of the accessory to migrate.
 @property (readwrite, copy, nullable, nonatomic) NSUUID *peripheralIdentifier;
 
+/// The Wi-Fi hotspot SSID of the accessory to migrate.
 @property (readwrite, copy, nullable, nonatomic) NSString *hotspotSSID;
 
 @end

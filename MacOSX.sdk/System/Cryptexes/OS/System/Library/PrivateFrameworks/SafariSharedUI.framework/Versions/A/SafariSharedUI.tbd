@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SafariSharedUI.framework/Versions/A/SafariSharedUI'
-current-version: 619.1.26
+current-version: 619.2.8
 compatibility-version: 0
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -357,7 +357,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SafariCore.framework/Versions/A/SafariCore'
-current-version: 619.1.26
+current-version: 619.2.8
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -588,7 +588,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SafariShared.framework/Versions/A/SafariShared'
-current-version: 619.1.26
+current-version: 619.2.8
 compatibility-version: 0
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -622,12 +622,13 @@ exports:
                        _TRIAL_enableStreamlinedCompletionList, _TRIAL_matchingWordsInTitleThreshold, 
                        _TRIAL_maxBookmarksAndHistoryItems, _TRIAL_normalizedTopSitesScoreAndVisitCountMultiplier, 
                        _TRIAL_percentageThresholdForAnywhereInTitle, _TRIAL_percentageThresholdForAnywhereInURL, 
-                       _TRIAL_strengthenAutocompleteTriggerExtensionMatching, _TRIAL_thresholdForHidingIgnoredSiriSuggestedSites, 
-                       _WBHistoryVisitWeightForAttributesAndOrigin, _WBSAddressBookMatchIdentifierKey, 
-                       _WBSAddressBookMatchKeyKey, _WBSAddressBookMatchLabelKey, 
-                       _WBSAddressBookMatchPropertyKey, _WBSAddressBookMatchUniqueIDKey, 
-                       _WBSAddressBookMatchValueKey, _WBSAllowUnsignedExtensionsTimeoutNotification, 
-                       _WBSAutoFillGetSavedDataClasses, _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectDataExpectedFilledData, 
+                       _TRIAL_shouldHideIgnoredSiriSuggestedSites, _TRIAL_strengthenAutocompleteTriggerExtensionMatching, 
+                       _TRIAL_thresholdForHidingIgnoredSiriSuggestedSites, _WBHistoryVisitWeightForAttributesAndOrigin, 
+                       _WBSAddressBookMatchIdentifierKey, _WBSAddressBookMatchKeyKey, 
+                       _WBSAddressBookMatchLabelKey, _WBSAddressBookMatchPropertyKey, 
+                       _WBSAddressBookMatchUniqueIDKey, _WBSAddressBookMatchValueKey, 
+                       _WBSAllowUnsignedExtensionsTimeoutNotification, _WBSAutoFillGetSavedDataClasses, 
+                       _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectDataExpectedFilledData, 
                        _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectDataIncorrectFields, 
                        _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectFormatExpectedFormat, 
                        _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectFormatIncorrectFields, 

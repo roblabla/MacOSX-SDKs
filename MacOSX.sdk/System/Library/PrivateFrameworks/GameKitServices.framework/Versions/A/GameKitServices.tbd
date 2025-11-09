@@ -192,6 +192,7 @@ exports:
                        _VCNackGeneratorNackBitRateLimitingMaxRatio, _VCNackGeneratorNackGenerationMaxPLR, 
                        _VCNackGeneratorNackGenerationMaxRTT, _VCNackGeneratorNackThrottlingFactorBuckets, 
                        _VCNackGeneratorNackThrottlingPlrBuckets, _VCNackGeneratorPercentageOfPopulationWithRTXAdditionalDelayBudget, 
+                       _VCNackGeneratorRTTForRtxFulfillmentMultiplier, _VCNackGeneratorRTTForRtxFulfillmentWaitTime, 
                        _VCNackGeneratorSeqNumAgingTime, _VCNackGeneratorStorebagConfigVersion, 
                        _VCNetworkBackhaulDetectionTriggerThreshold, _VCNetworkConditionDetection, 
                        _VCNoRemoteDuplicationThresholdFast, _VCOutOfProcessAudioDecoding, 

@@ -225,13 +225,13 @@ on the system setting.
     @discussion The default value is `NO`. If `NO`, adaptive image glyphs are inserted as regular
     images. If `YES`, they are inserted with the full adaptive sizing behavior.
     */
-@property (nonatomic) BOOL supportsAdaptiveImageGlyph API_AVAILABLE(macos(15.0), ios(NA), visionos(NA));
+@property (nonatomic) BOOL supportsAdaptiveImageGlyph API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0));
 
 #if (TARGET_OS_IOS && !TARGET_OS_VISION) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 180000
 /*! @abstract The preferred behavior of Writing Tools.
     @discussion The default behavior is equivalent to `UIWritingToolsBehaviorLimited`.
     */
-@property (nonatomic) UIWritingToolsBehavior writingToolsBehavior API_AVAILABLE(ios(NA));
+@property (nonatomic) UIWritingToolsBehavior writingToolsBehavior API_AVAILABLE(ios(18.0));
 #elif TARGET_OS_OSX && __MAC_OS_X_VERSION_MIN_REQUIRED >= 150000
 /*! @abstract The preferred behavior of Writing Tools.
     @discussion The default behavior is equivalent to `NSWritingToolsBehaviorLimited`.

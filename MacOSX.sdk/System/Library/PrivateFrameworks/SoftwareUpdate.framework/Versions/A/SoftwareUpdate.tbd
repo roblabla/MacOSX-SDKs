@@ -60,6 +60,7 @@ exports:
                        _SUTelemetryEventTypeInstallRestarts, _SUTelemetryEventTypeInstalls, 
                        _SUTelemetryEventTypeNotifications, _SUTelemetryEventTypePreferences, 
                        _SUTelemetryEventTypeScans, _SUTelemetryEventTypeSplatRevoked, 
+                       _SUTelemetryEventTypeStartLogout, _SUTelemetryEventTypeStartPostLogout, 
                        _SUTelemetryForcedEnrollmentEventSubtypeAutoCheckForUpdates, 
                        _SUTelemetryPayloadKeyCurrentBuildVersion, _SUTelemetryPayloadKeyEvent, 
                        _SUTelemetryPayloadKeyEventObject, _SUTelemetryPayloadKeyEventSubtype, 

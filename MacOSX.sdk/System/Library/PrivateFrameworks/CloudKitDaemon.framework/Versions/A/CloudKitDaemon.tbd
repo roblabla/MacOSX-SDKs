@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CloudKitDaemon.framework/Versions/A/CloudKitDaemon'
-current-version: 2200.155
+current-version: 2220.14
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -389,10 +389,10 @@ exports:
                        CKDOperationCallbackProxy, CKDOperationInfoCache, CKDOperationInfoHolderOperation, 
                        CKDOperationInfoMetadata, CKDOperationMetrics, CKDPAsset, 
                        CKDPCSIdentityManager, CKDPCSKeySyncManager, CKDPCSManager, 
-                       CKDPCSMemoryCache, CKDPCSSendableConstants, CKDPContactInformation, 
-                       CKDPDSClient, CKDPDateStatistics, CKDPEncryptedMergeableValue, 
-                       CKDPMergeableDelta, CKDPMergeableDeltaSaveRequest, CKDPMergeableValue, 
-                       CKDPNotificationSyncResponse, CKDPNotificationSyncResponsePushMessage, 
+                       CKDPCSMemoryCache, CKDPCSNotifier, CKDPCSSendableConstants, 
+                       CKDPContactInformation, CKDPDSClient, CKDPDateStatistics, 
+                       CKDPEncryptedMergeableValue, CKDPMergeableDelta, CKDPMergeableDeltaSaveRequest, 
+                       CKDPMergeableValue, CKDPNotificationSyncResponse, CKDPNotificationSyncResponsePushMessage, 
                        CKDPOperation, CKDPParticipant, CKDPRecord, CKDPRecordChainParent, 
                        CKDPRecordField, CKDPRecordFieldIdentifier, CKDPRecordFieldValue, 
                        CKDPRecordOneTimeStableUrl, CKDPRecordOneTimeStableUrlInfo, 

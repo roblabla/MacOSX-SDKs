@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 3.0.59 -module-name Charts
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 3.1.12 -module-name Charts
 import Foundation
 import Swift
 import SwiftUI
@@ -1321,6 +1321,10 @@ extension Charts.BuilderConditional : Charts.ChartContent where TrueContent : Ch
   }
   @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.BuilderConditional<TrueContent, FalseContent>, _ inputs: Charts._ChartContentLayoutInputs)
   @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.BuilderConditional<TrueContent, FalseContent>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  @_Concurrency.MainActor @preconcurrency public static func _makeChartContent(content: SwiftUICore._GraphValue<Charts.BuilderConditional<TrueContent, FalseContent>>, inputs: Charts._ChartContentInputs) -> Charts._ChartContentOutputs
+  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  @_Concurrency.MainActor @preconcurrency public static func _chartContentCount(inputs: Charts._ChartContentInputs) -> Swift.Int?
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
@@ -2410,6 +2414,10 @@ extension Charts.InterpolationMethod.Storage : Swift.Sendable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.InterpolationMethod.Storage : Swift.BitwiseCopyable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.PointMark : Charts.ChartContent {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.PointMark : Swift.Sendable {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.AreaMark : Charts.ChartContent {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.AreaMark : Swift.Sendable {}
@@ -2457,10 +2465,6 @@ extension Charts.FunctionLinePlotContent : Charts.ChartContent {}
 extension Charts.FunctionLinePlotContent : Swift.Sendable {}
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension Charts.VectorizedLinePlotContent : Swift.Sendable {}
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension Charts.PointMark : Charts.ChartContent {}
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension Charts.PointMark : Swift.Sendable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.Plot : Charts.ChartContent {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)

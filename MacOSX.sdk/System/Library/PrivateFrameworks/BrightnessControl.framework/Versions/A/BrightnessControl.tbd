@@ -21,7 +21,7 @@ exports:
                        __freeBlockWrapper, __iokitCallback, __newBlockWrapper, _clamp, 
                        _copyNitsToUserMapping, _create_integer_array_from_cfdata, 
                        _displays, _float_equal, _getUserForNits, _get_float_from_cfdata, 
-                       _get_integer_from_cfdata, _init_default_corebrightness_log, 
+                       _get_int_from_bootarg, _get_integer_from_cfdata, _init_default_corebrightness_log, 
                        _linear_interpolation, _load_fixed_float_from_edt, _load_float_array_from_edt, 
                        _load_float_from_edt, _load_int_from_edt, _load_integer_array_from_edt, 
                        _load_uint_from_edt, _mach_time_now_in_milliseconds, _mach_time_now_in_nanoseconds, 

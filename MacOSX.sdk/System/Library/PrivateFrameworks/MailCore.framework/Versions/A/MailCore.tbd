@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MailCore.framework/Versions/A/MailCore'
-current-version: 3818.100.11
+current-version: 3826.200.121
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ CoreSuggestionsTests, DebugBundle, EmailAuthenticationPlugin, 
@@ -13,7 +13,7 @@ allowable-clients:
                        MailTests, MailUI, MailUIWebBundle, MailWebPlugIn, MessageIMAPTests, 
                        ProactiveSummarization, Rot13Encryption, TestSuggestions, 
                        WebDocumentViewTestApp, com.apple.MailServiceAgent, maild, 
-                       migrationhelper ]
+                       mailtool, migrationhelper ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DefaultsKeyUserOptedIntoAttachmentSending, _ECMessageHeaderKeyReceivedSpf, 

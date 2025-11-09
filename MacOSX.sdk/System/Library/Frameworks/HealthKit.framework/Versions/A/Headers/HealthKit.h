@@ -14,6 +14,8 @@
 #import <HealthKit/HKAttachmentStore.h>
 #import <HealthKit/HKAudiogramSample.h>
 #import <HealthKit/HKAudiogramSensitivityPoint.h>
+#import <HealthKit/HKAudiogramSensitivityPointClampingRange.h>
+#import <HealthKit/HKAudiogramSensitivityTest.h>
 #import <HealthKit/HKCategorySample.h>
 #import <HealthKit/HKCategoryValues.h>
 #import <HealthKit/HKCDADocumentSample.h>

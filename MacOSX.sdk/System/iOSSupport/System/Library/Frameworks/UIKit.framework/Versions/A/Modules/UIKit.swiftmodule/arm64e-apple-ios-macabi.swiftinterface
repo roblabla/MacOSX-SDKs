@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -enable-bare-slash-regex -user-module-version 8081.1.402 -module-name UIKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-ios18.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -enable-bare-slash-regex -user-module-version 8117.1.405 -module-name UIKit
 // swift-module-flags-ignorable: -no-verify-emitted-module-interface
 @_exported import Accessibility
 @_exported import CoreGraphics
@@ -501,7 +501,8 @@ public struct UITraitUserInterfaceLevel : UIKit.UITraitDefinition {
   public static let affectsColorAppearance: Swift.Bool
   public static let _defaultValueRepresentsUnspecified: Swift.Bool
   public static let _isPrivate: Swift.Bool
-  @available(iOS 17.0, tvOS 17.0, *)
+  @available(iOS 17.0, *)
+  @available(tvOS, unavailable)
   public typealias Value = UIUserInterfaceLevel
 }
 @available(iOS 17.0, *)
@@ -2195,6 +2196,10 @@ extension UIKit.UIWindowScenePlacement where Self == UIKit.UIWindowScenePushPlac
     get
   }
   public var visibleItems: [ItemIdentifierType] {
+    get
+  }
+  @available(iOS 18.1, tvOS 18.1, visionOS 2.1, *)
+  public var expandedItems: [ItemIdentifierType] {
     get
   }
   public func visualDescription() -> Swift.String

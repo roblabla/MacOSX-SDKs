@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKWorkoutBuilder.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -17,7 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
  @class         HKLiveWorkoutDataSource
  @discussion    An HKLiveWorkoutDataSource is to be used with an HKWorkoutBuilder to automatically collect samples
  */
-HK_EXTERN API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 @interface HKLiveWorkoutDataSource : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

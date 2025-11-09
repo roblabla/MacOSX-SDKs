@@ -5,6 +5,8 @@
 //  Copyright © 2020-2022 Apple. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKSample.h>
 
 @class HKQuantity;
@@ -66,7 +68,9 @@ typedef NS_ENUM(NSInteger, HKElectrocardiogramSymptomsStatus) {
  @abstract      An HKElectrocardiogram is a collection of voltage values as waveforms
                 from one or more leads
 */
-HK_EXTERN API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0))
 @interface HKElectrocardiogram : HKSample
 
 /*!

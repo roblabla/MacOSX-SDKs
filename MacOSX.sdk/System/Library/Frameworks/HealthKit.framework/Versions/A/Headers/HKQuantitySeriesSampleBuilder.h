@@ -5,6 +5,7 @@
 //  Copyright © 2018-2022 Apple. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -26,7 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
                 -finishSeriesWithMetadata:completion:. Calling -discard invalidates the series and
                 discards any data that was previously associated with it.
  */
-HK_EXTERN API_AVAILABLE(ios(12.0), watchos(5.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(12.0), watchos(5.0), macCatalyst(13.0), macos(13.0))
 @interface HKQuantitySeriesSampleBuilder : NSObject
 
 /*!

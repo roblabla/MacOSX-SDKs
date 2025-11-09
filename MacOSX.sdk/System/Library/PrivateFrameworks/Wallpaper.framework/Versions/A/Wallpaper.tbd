@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Wallpaper.framework/Versions/A/Wallpaper'
-current-version: 147.0.1
+current-version: 147.1.11
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1789,8 +1789,8 @@ exports:
                        '_$s9Wallpaper8SnapshotVSeAAMc', '_$s9Wallpaper9LabelableMp', 
                        '_$s9Wallpaper9LabelableP5labelSSvgTj', '_$s9Wallpaper9LabelableP5labelSSvgTq', 
                        '_$s9Wallpaper9LabelableTL', '_$s9Wallpaper9SpaceNameV022kCGSWorkspaceFirstUserB10IdentifierSSvgZ', 
-                       '_$s9Wallpaper9SpaceNameV6encode2toys7Encoder_p_tKF', '_$s9Wallpaper9SpaceNameV7StorageO2eeoiySbAE_AEtFZ', 
-                       '_$s9Wallpaper9SpaceNameV7StorageO4hash4intoys6HasherVz_tF', 
+                       '_$s9Wallpaper9SpaceNameV5firstACvgZ', '_$s9Wallpaper9SpaceNameV6encode2toys7Encoder_p_tKF', 
+                       '_$s9Wallpaper9SpaceNameV7StorageO2eeoiySbAE_AEtFZ', '_$s9Wallpaper9SpaceNameV7StorageO4hash4intoys6HasherVz_tF', 
                        '_$s9Wallpaper9SpaceNameV7StorageO9hashValueSivg', '_$s9Wallpaper9SpaceNameV7StorageO9hashValueSivpMV', 
                        '_$s9Wallpaper9SpaceNameV7StorageOMa', '_$s9Wallpaper9SpaceNameV7StorageOMn', 
                        '_$s9Wallpaper9SpaceNameV7StorageON', '_$s9Wallpaper9SpaceNameV7StorageOSHAAMc', 

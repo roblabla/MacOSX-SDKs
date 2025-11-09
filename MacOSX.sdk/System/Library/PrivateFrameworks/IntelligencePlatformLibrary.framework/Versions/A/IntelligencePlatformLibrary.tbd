@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatformLibrary.framework/Versions/A/IntelligencePlatformLibrary'
-current-version: 91
+current-version: 92.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -5041,6 +5041,10 @@ exports:
                        '_$s27IntelligencePlatformLibrary29CacheManagerRequestInvocationVN', 
                        '_$s27IntelligencePlatformLibrary29CacheManagerRequestInvocationVSHAAMc', 
                        '_$s27IntelligencePlatformLibrary29CacheManagerRequestInvocationVSQAAMc', 
+                       '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV11AttestationV17attestationBundleSSSgvM', 
+                       '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV11AttestationV17attestationBundleSSSgvg', 
+                       '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV11AttestationV17attestationBundleSSSgvpMV', 
+                       '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV11AttestationV17attestationBundleSSSgvs', 
                        '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV11AttestationV17attestationStringSSSgvM', 
                        '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV11AttestationV17attestationStringSSSgvg', 
                        '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV11AttestationV17attestationStringSSSgvpMV', 
@@ -5086,6 +5090,10 @@ exports:
                        '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV4jsonSSyKF', 
                        '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV5event4from11dataVersion14writeTimestamp8bookmarkAC10Foundation4DataV_s6UInt32VAI4DateVAA14StreamBookmark_ptKFZ', 
                        '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV5event4fromACSS_tKFZ', 
+                       '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV5nodesSayAC11AttestationVGvM', 
+                       '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV5nodesSayAC11AttestationVGvg', 
+                       '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV5nodesSayAC11AttestationVGvpMV', 
+                       '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV5nodesSayAC11AttestationVGvs', 
                        '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV7columnsSaySo11BMSQLColumnCGvgZ', 
                        '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV8bookmarkAA14StreamBookmark_pSgvM', 
                        '_$s27IntelligencePlatformLibrary29PrivateCloudComputeRequestLogV8bookmarkAA14StreamBookmark_pSgvg', 
@@ -6444,6 +6452,10 @@ exports:
                        '_$s27IntelligencePlatformLibrary42GenerativeFunctionsInstrumentationMetadataO16MMExecuteRequestV0I4TypeOs23CustomStringConvertibleAAMc', 
                        '_$s27IntelligencePlatformLibrary42GenerativeFunctionsInstrumentationMetadataO16MMExecuteRequestV0I4TypeOs25LosslessStringConvertibleAAMc', 
                        '_$s27IntelligencePlatformLibrary42GenerativeFunctionsInstrumentationMetadataO16MMExecuteRequestV0I4TypeOyAGSgSScfC', 
+                       '_$s27IntelligencePlatformLibrary42GenerativeFunctionsInstrumentationMetadataO16MMExecuteRequestV11isInferenceSbSgvM', 
+                       '_$s27IntelligencePlatformLibrary42GenerativeFunctionsInstrumentationMetadataO16MMExecuteRequestV11isInferenceSbSgvg', 
+                       '_$s27IntelligencePlatformLibrary42GenerativeFunctionsInstrumentationMetadataO16MMExecuteRequestV11isInferenceSbSgvpMV', 
+                       '_$s27IntelligencePlatformLibrary42GenerativeFunctionsInstrumentationMetadataO16MMExecuteRequestV11isInferenceSbSgvs', 
                        '_$s27IntelligencePlatformLibrary42GenerativeFunctionsInstrumentationMetadataO16MMExecuteRequestV11requestTypeAE0iK0OSgvM', 
                        '_$s27IntelligencePlatformLibrary42GenerativeFunctionsInstrumentationMetadataO16MMExecuteRequestV11requestTypeAE0iK0OSgvg', 
                        '_$s27IntelligencePlatformLibrary42GenerativeFunctionsInstrumentationMetadataO16MMExecuteRequestV11requestTypeAE0iK0OSgvpMV', 

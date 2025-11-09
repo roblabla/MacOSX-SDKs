@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
 // swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 241.0.11 -module-name CryptoKit
 import Foundation
 import LocalAuthentication
@@ -202,7 +202,7 @@ extension CryptoKit.HPKE {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 extension CryptoKit.SecureEnclave.P256.KeyAgreement.PrivateKey : CryptoKit.DiffieHellmanKeyAgreement {
   public func sharedSecretFromKeyAgreement(with publicKeyShare: CryptoKit.P256.KeyAgreement.PublicKey) throws -> CryptoKit.SharedSecret
-  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
   public typealias PublicKey = CryptoKit.P256.KeyAgreement.PublicKey
 }
 @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
@@ -527,7 +527,7 @@ extension CryptoKit.Curve25519 {
       public var rawRepresentation: Foundation.Data {
         get
       }
-      @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, macCatalyst 17.0, *)
+      @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
       public typealias PublicKey = CryptoKit.Curve25519.KeyAgreement.PublicKey
     }
   }
@@ -1169,19 +1169,19 @@ extension CryptoKit.P521 {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 extension CryptoKit.P256.KeyAgreement.PrivateKey : CryptoKit.DiffieHellmanKeyAgreement {
   public func sharedSecretFromKeyAgreement(with publicKeyShare: CryptoKit.P256.KeyAgreement.PublicKey) throws -> CryptoKit.SharedSecret
-  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
   public typealias PublicKey = CryptoKit.P256.KeyAgreement.PublicKey
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 extension CryptoKit.P384.KeyAgreement.PrivateKey : CryptoKit.DiffieHellmanKeyAgreement {
   public func sharedSecretFromKeyAgreement(with publicKeyShare: CryptoKit.P384.KeyAgreement.PublicKey) throws -> CryptoKit.SharedSecret
-  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
   public typealias PublicKey = CryptoKit.P384.KeyAgreement.PublicKey
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 extension CryptoKit.P521.KeyAgreement.PrivateKey : CryptoKit.DiffieHellmanKeyAgreement {
   public func sharedSecretFromKeyAgreement(with publicKeyShare: CryptoKit.P521.KeyAgreement.PublicKey) throws -> CryptoKit.SharedSecret
-  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
   public typealias PublicKey = CryptoKit.P521.KeyAgreement.PublicKey
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)

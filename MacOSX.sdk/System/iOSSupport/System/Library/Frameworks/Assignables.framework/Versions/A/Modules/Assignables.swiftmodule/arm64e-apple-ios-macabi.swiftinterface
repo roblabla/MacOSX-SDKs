@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature AccessLevelOnImport -enable-experimental-feature NestedProtocols -enable-bare-slash-regex -user-module-version 150.0.65 -module-name Assignables
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature AccessLevelOnImport -enable-experimental-feature NestedProtocols -enable-bare-slash-regex -user-module-version 150.1.7 -module-name Assignables
 import AppKit
 import AppleArchive
 @_exported import Assignables
@@ -341,9 +341,9 @@ public struct AssignableDocument : Swift.Identifiable {
     @available(macOS, unavailable)
     public typealias AllCases = [Assignables.AssignableDocument.CorrectMarkType]
     @available(iOS 17.4, *)
-    @available(tvOS, unavailable, introduced: 13.0)
-    @available(watchOS, unavailable, introduced: 6.0)
-    @available(macOS, unavailable, introduced: 10.15)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(macOS, unavailable)
     public typealias ID = Assignables.AssignableDocument.CorrectMarkType
     nonisolated public static var allCases: [Assignables.AssignableDocument.CorrectMarkType] {
       get
@@ -414,13 +414,19 @@ extension Assignables.AssignedWorkDocument {
 @_Concurrency.MainActor @preconcurrency public struct AssignableDocumentView : SwiftUICore.View {
   public typealias Document = Assignables.AssignableDocument
   @_Concurrency.MainActor @preconcurrency public init(document: SwiftUICore.Binding<Assignables.AssignableDocumentView.Document>, activePartID: Assignables.MergeablePartsContainerPartID? = nil, hiddenPartIDs: [Assignables.MergeablePartsContainerPartID] = [], selectedPageID: SwiftUICore.Binding<Assignables.AssignableDocumentView.Document.Page.ID?>? = nil, selectedQuestionID: SwiftUICore.Binding<Assignables.AssignableDocumentView.Document.Question.ID?>? = nil, showsPageThumbnails: Swift.Bool = true, isStructureEditingEnabled: Swift.Bool = true)
+  @available(iOS 18.1, *)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
+  @_Concurrency.MainActor @preconcurrency public init(document: SwiftUICore.Binding<Assignables.AssignableDocumentView.Document>, activePartID: Assignables.MergeablePartsContainerPartID? = nil, hiddenPartIDs: [Assignables.MergeablePartsContainerPartID] = [], selectedPageID: SwiftUICore.Binding<Assignables.AssignableDocumentView.Document.Page.ID?>? = nil, selectedQuestionID: SwiftUICore.Binding<Assignables.AssignableDocumentView.Document.Question.ID?>? = nil, showsPageThumbnails: Swift.Bool = true, isStructureEditingEnabled: Swift.Bool = true, allowsPencilDrawing: Swift.Bool = true, onMarkupActivation: @escaping (_ isMarkupActivated: Swift.Bool) -> Swift.Void)
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
   @available(iOS 17.4, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s11Assignables22AssignableDocumentViewV4bodyQrvp", 0) __
 }
 @available(iOS 17.4, *)
@@ -882,13 +888,19 @@ public class UserIdentityTypeRegistry {
 @_Concurrency.MainActor @preconcurrency public struct AssignedWorkDocumentView : SwiftUICore.View {
   public typealias Document = Assignables.AssignedWorkDocument
   @_Concurrency.MainActor @preconcurrency public init(document: SwiftUICore.Binding<Assignables.AssignedWorkDocumentView.Document>, activePartID: Assignables.MergeablePartsContainerPartID? = nil, hiddenPartIDs: [Assignables.MergeablePartsContainerPartID], selectedPageID: SwiftUICore.Binding<Assignables.AssignedWorkDocumentView.Document.Page.ID?>? = nil, selectedQuestionID: SwiftUICore.Binding<Assignables.AssignableDocument.Question.ID?>? = nil, showsPageThumbnails: Swift.Bool = true, isStructureEditingEnabled: Swift.Bool = false)
+  @available(iOS 18.1, *)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
+  @_Concurrency.MainActor @preconcurrency public init(document: SwiftUICore.Binding<Assignables.AssignedWorkDocumentView.Document>, activePartID: Assignables.MergeablePartsContainerPartID? = nil, hiddenPartIDs: [Assignables.MergeablePartsContainerPartID], selectedPageID: SwiftUICore.Binding<Assignables.AssignedWorkDocumentView.Document.Page.ID?>? = nil, selectedQuestionID: SwiftUICore.Binding<Assignables.AssignableDocument.Question.ID?>? = nil, showsPageThumbnails: Swift.Bool = true, isStructureEditingEnabled: Swift.Bool = false, onMarkupActivation: @escaping (_ isMarkupActivated: Swift.Bool) -> Swift.Void)
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
   @available(iOS 17.4, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s11Assignables24AssignedWorkDocumentViewV4bodyQrvp", 0) __
 }
 @available(iOS 17.4, *)

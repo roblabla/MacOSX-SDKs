@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 814.0.59.1.2 -module-name StoreKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 814.1.11 -module-name StoreKit
 import Combine
 import CoreFoundation
 import CryptoKit
@@ -390,9 +390,9 @@ extension StoreKit.Message {
     public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
       public mutating func next() async -> StoreKit.Message.Messages.Element?
       @available(iOS 16.0, visionOS 1.0, macCatalyst 16.0, *)
-      @available(tvOS, unavailable, introduced: 13.0)
-      @available(watchOS, unavailable, introduced: 6.0)
-      @available(macOS, unavailable, introduced: 10.15)
+      @available(tvOS, unavailable)
+      @available(watchOS, unavailable)
+      @available(macOS, unavailable)
       public typealias Element = StoreKit.Message.Messages.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, visionOS 2.0, macCatalyst 16.0, *)
@@ -1701,8 +1701,8 @@ public struct PurchaseIntent : Swift.Equatable, Swift.Identifiable, Swift.Sendab
   }
   public static func == (a: StoreKit.PurchaseIntent, b: StoreKit.PurchaseIntent) -> Swift.Bool
   @available(iOS 16.4, macOS 14.4, macCatalyst 16.4, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @available(visionOS, unavailable)
   public typealias ID = StoreKit.Product.ID
 }
@@ -1716,8 +1716,8 @@ extension StoreKit.PurchaseIntent {
     public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
       public mutating func next() async -> StoreKit.PurchaseIntent.PurchaseIntents.Element?
       @available(iOS 16.4, macOS 14.4, macCatalyst 16.4, *)
-      @available(tvOS, unavailable, introduced: 13.0)
-      @available(watchOS, unavailable, introduced: 6.0)
+      @available(tvOS, unavailable)
+      @available(watchOS, unavailable)
       @available(visionOS, unavailable)
       public typealias Element = StoreKit.PurchaseIntent.PurchaseIntents.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
@@ -1967,9 +1967,9 @@ public struct PaymentMethodBinding : Swift.Sendable, Swift.Hashable, Swift.Ident
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: StoreKit.PaymentMethodBinding, b: StoreKit.PaymentMethodBinding) -> Swift.Bool
   @available(iOS 16.4, visionOS 1.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
   public typealias ID = Swift.String
   public var hashValue: Swift.Int {
     get
@@ -1997,6 +1997,41 @@ public enum ExternalLinkAccount : Swift.Sendable {
     get async
   }
   public static func open() async throws
+}
+@available(iOS 18.1, macOS 15.1, tvOS 18.1, watchOS 11.1, visionOS 2.1, *)
+public enum ExternalPurchaseCustomLink : Swift.Sendable {
+  public enum NoticeResult : Swift.Hashable, Swift.Sendable {
+    case cancelled
+    case continued
+    public static func == (a: StoreKit.ExternalPurchaseCustomLink.NoticeResult, b: StoreKit.ExternalPurchaseCustomLink.NoticeResult) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum NoticeType : Swift.Int, Swift.Hashable, Swift.Sendable {
+    case withinApp
+    case browser
+    public init?(rawValue: Swift.Int)
+    @available(iOS 18.1, tvOS 18.1, watchOS 11.1, visionOS 2.1, macOS 15.1, *)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  public struct Token : Swift.Hashable, Swift.Sendable {
+    public let value: Swift.String
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: StoreKit.ExternalPurchaseCustomLink.Token, b: StoreKit.ExternalPurchaseCustomLink.Token) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public static var isEligible: Swift.Bool {
+    get async
+  }
+  public static func showNotice(type: StoreKit.ExternalPurchaseCustomLink.NoticeType) async throws -> StoreKit.ExternalPurchaseCustomLink.NoticeResult
+  public static func token(for tokenType: Swift.String) async throws -> StoreKit.ExternalPurchaseCustomLink.Token?
 }
 @available(iOS 15.4, macOS 14.4, macCatalyst 15.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
 public enum ExternalPurchase : Swift.Sendable {
@@ -2149,3 +2184,5 @@ extension StoreKit.PaymentMethodBinding.PaymentMethodBindingError : Swift.Equata
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension StoreKit.PaymentMethodBinding.PaymentMethodBindingError : Swift.Hashable {}
+@available(iOS 18.1, macOS 15.1, tvOS 18.1, watchOS 11.1, visionOS 2.1, *)
+extension StoreKit.ExternalPurchaseCustomLink.NoticeType : Swift.RawRepresentable {}

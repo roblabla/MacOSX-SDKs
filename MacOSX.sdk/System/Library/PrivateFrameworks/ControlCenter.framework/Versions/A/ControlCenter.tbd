@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ControlCenter.framework/Versions/A/ControlCenter'
-current-version: 571
+current-version: 571.1.22
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -326,10 +326,25 @@ exports:
                        '_$s13ControlCenter18AirPlayPreferencesCMn', '_$s13ControlCenter18AirPlayPreferencesCMo', 
                        '_$s13ControlCenter18AirPlayPreferencesCMu', '_$s13ControlCenter18AirPlayPreferencesCN', 
                        '_$s13ControlCenter18AirPlayPreferencesCfD', '_$s13ControlCenter18AirPlayPreferencesCfd', 
+                       '_$s13ControlCenter18BatteryPreferencesC14showEnergyModeAC04ShowfG6OptionOvM', 
+                       '_$s13ControlCenter18BatteryPreferencesC14showEnergyModeAC04ShowfG6OptionOvg', 
+                       '_$s13ControlCenter18BatteryPreferencesC14showEnergyModeAC04ShowfG6OptionOvpMV', 
+                       '_$s13ControlCenter18BatteryPreferencesC14showEnergyModeAC04ShowfG6OptionOvs', 
                        '_$s13ControlCenter18BatteryPreferencesC14showPercentageSbvM', 
                        '_$s13ControlCenter18BatteryPreferencesC14showPercentageSbvg', 
                        '_$s13ControlCenter18BatteryPreferencesC14showPercentageSbvpMV', 
                        '_$s13ControlCenter18BatteryPreferencesC14showPercentageSbvs', 
+                       '_$s13ControlCenter18BatteryPreferencesC20ShowEnergyModeOptionO10whenActiveyA2EmFWC', 
+                       '_$s13ControlCenter18BatteryPreferencesC20ShowEnergyModeOptionO6alwaysyA2EmFWC', 
+                       '_$s13ControlCenter18BatteryPreferencesC20ShowEnergyModeOptionO8rawValueAESgSi_tcfC', 
+                       '_$s13ControlCenter18BatteryPreferencesC20ShowEnergyModeOptionO8rawValueSivg', 
+                       '_$s13ControlCenter18BatteryPreferencesC20ShowEnergyModeOptionO8rawValueSivpMV', 
+                       '_$s13ControlCenter18BatteryPreferencesC20ShowEnergyModeOptionOMa', 
+                       '_$s13ControlCenter18BatteryPreferencesC20ShowEnergyModeOptionOMn', 
+                       '_$s13ControlCenter18BatteryPreferencesC20ShowEnergyModeOptionON', 
+                       '_$s13ControlCenter18BatteryPreferencesC20ShowEnergyModeOptionOSHAAMc', 
+                       '_$s13ControlCenter18BatteryPreferencesC20ShowEnergyModeOptionOSQAAMc', 
+                       '_$s13ControlCenter18BatteryPreferencesC20ShowEnergyModeOptionOSYAAMc', 
                        '_$s13ControlCenter18BatteryPreferencesC3app4keysACSS_xtcSTRzSS7ElementRtzlufC', 
                        '_$s13ControlCenter18BatteryPreferencesC3app4keysACSS_xtcSTRzSS7ElementRtzlufc', 
                        '_$s13ControlCenter18BatteryPreferencesC3app4keysACSS_xtcSTRzSY7ElementRpzSSAF_8RawValueRTzlufC', 

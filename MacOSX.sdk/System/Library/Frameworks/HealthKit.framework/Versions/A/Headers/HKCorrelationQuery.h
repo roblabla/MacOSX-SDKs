@@ -5,6 +5,8 @@
 //  Copyright (c) 2014-2022 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKQuery.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -19,7 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
                 accepts a predicate to filter HKCorrelations and a dictionary of predicates to filter the
                 correlated samples.
  */
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKCorrelationQuery : HKQuery
 
 @property (readonly, copy) HKCorrelationType *correlationType;
@@ -47,7 +51,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 - (instancetype)initWithType:(HKCorrelationType *)correlationType
                    predicate:(nullable NSPredicate *)predicate
             samplePredicates:(nullable NSDictionary<HKSampleType *, NSPredicate *> *)samplePredicates
-                  completion:(void(^)(HKCorrelationQuery *query, NSArray<HKCorrelation *> * _Nullable correlations, NSError * _Nullable error))completion;
+                  completion:(void(^NS_SWIFT_SENDABLE)(HKCorrelationQuery *query, NSArray<HKCorrelation *> * _Nullable correlations, NSError * _Nullable error))completion;
 @end
 
 NS_ASSUME_NONNULL_END

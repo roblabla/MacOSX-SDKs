@@ -41,10 +41,11 @@ exports:
                        __MTCoreMaterialRecipeNameForMaterialRecipeAndUserInterfaceStyle, 
                        __MTCoreMaterialRecipeNameForSystemColor, __MTCoreMaterialRecipeNameForSystemColorCompatibleWithTraitCollection, 
                        __MTInternalVibrancyEffectStyleForPublicStyle ]
-    objc-classes:    [ MTLumaDodgePillDomain, MTLumaDodgePillSettings, MTLumaDodgePillStyleSettings, 
-                       MTLumaDodgePillView, MTMappedImageCache, MTMaterialShadowView, 
-                       MTMaterialView, MTPillView, MTShadowView, MTStaticColorPillView, 
-                       MTStylingProvidingSolidColorView, MTVisualStyling, MTVisualStylingProvider, 
-                       _MTClientDemarcatedCurrentContainerPathProvider, _MTLumaDodgePillLowQualityEffectView, 
-                       _MTStaticVisualStylingMaterialView, _MTVisualStylingVibrancyEffect ]
+    objc-classes:    [ MTLayoutSubviewsAnimation, MTLumaDodgePillDomain, MTLumaDodgePillSettings, 
+                       MTLumaDodgePillStyleSettings, MTLumaDodgePillView, MTMappedImageCache, 
+                       MTMaterialShadowView, MTMaterialView, MTPillView, MTShadowView, 
+                       MTStaticColorPillView, MTStylingProvidingSolidColorView, MTVisualStyling, 
+                       MTVisualStylingProvider, _MTClientDemarcatedCurrentContainerPathProvider, 
+                       _MTLumaDodgePillLowQualityEffectView, _MTStaticVisualStylingMaterialView, 
+                       _MTVisualStylingVibrancyEffect ]
 ...

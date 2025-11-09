@@ -20,7 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 */
 typedef NS_ENUM( NSInteger, ASDiscoveryDescriptorRange )
 {
+    /// The default range in which to discover accessories.
     ASDiscoveryDescriptorRangeDefault            = 0,
+    /// A range in the immediate vicinity of the device performing accessory discovery.
+    ///
+    /// This range means that an accessory is right next to the device running your app.
     ASDiscoveryDescriptorRangeImmediate          = 10,
 } NS_SWIFT_NAME(ASDiscoveryDescriptor.Range);
 
@@ -29,69 +33,37 @@ API_AVAILABLE( ios( 18.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, 
 NS_SWIFT_SENDABLE
 @interface ASDiscoveryDescriptor : NSObject
 
-/*!
- * @property supportedOptions
- * @discussion Accessory capabilities.
- */
+/// Options supported by an accessory.
 @property (readwrite, assign, nonatomic) ASAccessorySupportOptions supportedOptions;
 
-/*!
- * @property companyIdentifier
- * @discussion Accessory's Bluetooth 16-bit Company Identifier.
- */
+/// The accessory's 16-bit Bluetooth Company Identifier.
 @property (readwrite, assign, nonatomic) ASBluetoothCompanyIdentifier bluetoothCompanyIdentifier;
 
-/*!
- * @property manufacturerDataBlob
- * @discussion Accessory's Bluetooth Manufacturer Data Blob.
- */
+/// A byte buffer that matches the accessory's Bluetooth manufacturer data.
 @property (readwrite, copy, nullable, nonatomic) NSData *bluetoothManufacturerDataBlob;
 
-/*!
- * @property manufacturerDataBlobMask
- * @discussion Accessory's Bluetooth Manufacturer Data Mask.
- */
+/// The accessory's Bluetooth manufacturer data mask.
 @property (readwrite, copy, nullable, nonatomic) NSData *bluetoothManufacturerDataMask;
 
-/*!
- * @property bluetoothNameSubstring
- * @discussion Accessory's over-the-air Bluetooth name sub-string.
- */
+/// The accessory's over-the-air Bluetooth name substring.
 @property (readwrite, copy, nullable, nonatomic) NSString *bluetoothNameSubstring;
 
-/*!
- * @property bluetoothRange
- * @discussion Discover accessory within specific bluetooth range.
- */
+/// A property that tells the session to discover accessories within a specific Bluetooth range.
 @property (readwrite, assign, nonatomic) ASDiscoveryDescriptorRange bluetoothRange;
 
-/*!
- * @property serviceDataBlob
- * @discussion Accessory's Bluetooth Service Data Blob.
- */
+/// A byte buffer that matches the accessory's Bluetooth service data.
 @property (readwrite, copy, nullable, nonatomic) NSData *bluetoothServiceDataBlob;
 
-/*!
- * @property serviceDataBlobMask
- * @discussion Accessory's Bluetooth Service Data Mask.
- */
+/// The accessory's Bluetooth service data mask.
 @property (readwrite, copy, nullable, nonatomic) NSData *bluetoothServiceDataMask;
 
-/*!
- * @property serviceUUID
- * @discussion Accessory's Bluetooth Service UUID.
- */
+/// The accessory's Bluetooth service UUID.
 @property (readwrite, copy, nullable, nonatomic) CBUUID *bluetoothServiceUUID;
-/*!
- * @property SSID
- * @discussion SSID of the Wi-Fi Network.
- */
+
+/// The SSID of the accessory's Wi-Fi network.
 @property (readwrite, copy, nullable, nonatomic) NSString *SSID;
 
-/*!
- * @property SSIDPrefix
- * @discussion Prefix string of SSID of the Wi-Fi Network.
- */
+/// The prefix string of SSID of the accessory's Wi-Fi network.
 @property (readwrite, copy, nullable, nonatomic) NSString *SSIDPrefix;
 
 @end

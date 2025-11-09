@@ -355,6 +355,7 @@ exports:
                        '_$s19SiriContactsIntents11FlowFactoryCMu', '_$s19SiriContactsIntents11FlowFactoryCN', 
                        '_$s19SiriContactsIntents11FlowFactoryCfD', '_$s19SiriContactsIntents11FlowFactoryCfd', 
                        '_$s19SiriContactsIntents12SignpostNameV02toA9KitIntentACvgZ', 
+                       '_$s19SiriContactsIntents12SignpostNameV13prewarmVisionACvgZ', 
                        '_$s19SiriContactsIntents12SignpostNameV16makeFlowForParseACvgZ', 
                        '_$s19SiriContactsIntents12SignpostNameV21contactsIntentHandlerACvgZ', 
                        '_$s19SiriContactsIntents12SignpostNameV28relationshipLabelKeyForValueACvgZ', 

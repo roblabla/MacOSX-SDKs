@@ -6,7 +6,7 @@ install-name:    '/System/Library/PrivateFrameworks/CalendarDaemon.framework/Ver
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _CADAccountActionDescription, _CADCatchUpIntegrationSyncRequestedNotification, 
+    symbols:         [ _CADAccountActionDescription, _CADAppEntityHandle, _CADCatchUpIntegrationSyncRequestedNotification, 
                        _CADCopyEntityInDatabase, _CADDatabaseStorageUsageAttachmentsKey, 
                        _CADDatabaseStorageUsageEventsKey, _CADEKPersistentEventDefaultPropertiesToLoad, 
                        _CADEKPersistentEventMinimumDefaultPropertiesToLoad, _CADEntityCopyObjectID, 
@@ -28,10 +28,10 @@ exports:
                        _clientIdentifier, _kCalDBCurrentSpotlightIndexVersion, _kCalDBLastABCReport, 
                        _kCalDBLastSpotlightError, _kCalDBLastSpotlightIndexVersion, 
                        _kCalDBLastSpotlightReindexDate, _kEventKitTCCUIFullAccessNotificationClientBundleIDKey ]
-    objc-classes:    [ CADAccountAccessHandler, CADCalendarDatabaseRedactor, CADCalendarItemsWithExternalIdentifierPredicate, 
-                       CADChangeTrackingClientId, CADCompoundFilter, CADContactEventsPredicate, 
-                       CADDatabaseInitializationOptions, CADDefaultPermissionValidator, 
-                       CADEntityWrapper, CADEventCreatedFromSuggestionPredicate, 
+    objc-classes:    [ CADAccountAccessHandler, CADAppEntityNotifierModule, CADCalendarDatabaseRedactor, 
+                       CADCalendarItemsWithExternalIdentifierPredicate, CADChangeTrackingClientId, 
+                       CADCompoundFilter, CADContactEventsPredicate, CADDatabaseInitializationOptions, 
+                       CADDefaultPermissionValidator, CADEntityWrapper, CADEventCreatedFromSuggestionPredicate, 
                        CADEventEntityWrapper, CADEventPredicate, CADEventTimeWindowPredicate, 
                        CADEventsForAssistantSearchPredicate, CADEventsForConferenceURLPredicate, 
                        CADExcludeDelegatesAccountAccessHandler, CADFilter, CADGenerationStampedObjectID, 

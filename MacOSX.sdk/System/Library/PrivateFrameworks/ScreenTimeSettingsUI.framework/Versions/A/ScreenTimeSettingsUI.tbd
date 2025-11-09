@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeSettingsUI.framework/Versions/A/ScreenTimeSettingsUI'
-current-version: 535
+current-version: 537.1.8
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -91,7 +91,7 @@ exports:
                        _STAgePresetKeyAllowMusicArtistActivity, _STAgePresetKeyAllowMusicVideos, 
                        _STAgePresetKeyForceAssistantProfanityFilter, _STAgePresetKeyRatingApps, 
                        _STAgePresetKeyRatingMovies, _STAgePresetKeyRatingTVShows, 
-                       _STAgePresetKeySTCustomRestrictionWebFilterState ]
+                       _STAgePresetKeySTCustomRestrictionImageGeneration, _STAgePresetKeySTCustomRestrictionWebFilterState ]
     objc-classes:    [ STActivityIndicatingWebView, STAlwaysAllowedController, STAlwaysAllowedItem, 
                        STChildSetupController, STContentAndPrivacyController, STControlProtection, 
                        STDeviceBedtime, STDowntimeCommunicationViewController, STKeyValuePair, 

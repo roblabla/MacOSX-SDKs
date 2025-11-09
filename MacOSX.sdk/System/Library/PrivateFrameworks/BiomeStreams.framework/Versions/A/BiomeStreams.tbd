@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BiomeStreams.framework/Versions/A/BiomeStreams'
-current-version: 153.5
+current-version: 153.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -12,8 +12,7 @@ exports:
                        '__swift_FORCE_LOAD_$_swiftFoundation.60', '__swift_FORCE_LOAD_$_swiftFoundation.93' ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s10Foundation4DataV12BiomeStreamsE1loiySbAC_ACtFZ', '_$s10Foundation4DataVSL12BiomeStreamsMc', 
-                       '_$s12BiomeStreams0B0O11StoreStreamV5innerSo07BMStoreD0CyxGvM', 
+    symbols:         [ '_$s12BiomeStreams0B0O11StoreStreamV5innerSo07BMStoreD0CyxGvM', 
                        '_$s12BiomeStreams0B0O11StoreStreamV5innerSo07BMStoreD0CyxGvg', 
                        '_$s12BiomeStreams0B0O11StoreStreamV5innerSo07BMStoreD0CyxGvpMV', 
                        '_$s12BiomeStreams0B0O11StoreStreamV5innerSo07BMStoreD0CyxGvs', 

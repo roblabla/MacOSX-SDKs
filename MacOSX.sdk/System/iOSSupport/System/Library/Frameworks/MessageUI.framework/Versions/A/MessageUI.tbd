@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MessageUI.framework/Versions/A/MessageUI'
-current-version: 3818.100.11
+current-version: 3826.200.121
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -100,20 +100,21 @@ exports:
                        _MFImageGlyphSearchMailbox, _MFImageGlyphSearchPeople, _MFImageGlyphSearchSubject, 
                        _MFImageGlyphSearchUnread, _MFImageGlyphSearchVIP, _MFImageGlyphSend, 
                        _MFImageGlyphSendAgain, _MFImageGlyphSendLater, _MFImageGlyphSettings, 
-                       _MFImageGlyphShare, _MFImageGlyphShelf, _MFImageGlyphSigned, 
-                       _MFImageGlyphStatusIndicatorAttachment, _MFImageGlyphStatusIndicatorBlockSender, 
-                       _MFImageGlyphStatusIndicatorFlagged, _MFImageGlyphStatusIndicatorForwarded, 
-                       _MFImageGlyphStatusIndicatorMute, _MFImageGlyphStatusIndicatorNotify, 
-                       _MFImageGlyphStatusIndicatorReadLater, _MFImageGlyphStatusIndicatorReplied, 
-                       _MFImageGlyphStatusIndicatorUnread, _MFImageGlyphStatusIndicatorVIP, 
-                       _MFImageGlyphStopNotify, _MFImageGlyphStriketrhough, _MFImageGlyphTapToRadar, 
-                       _MFImageGlyphToday, _MFImageGlyphToolbarFlag, _MFImageGlyphToolbarUnflag, 
-                       _MFImageGlyphTrash, _MFImageGlyphTrashFill, _MFImageGlyphUnMute, 
-                       _MFImageGlyphUnderline, _MFImageGlyphUndo, _MFImageGlyphUnflag, 
-                       _MFImageGlyphUpArrow, _MFImageGlyphUpdateReadLater, _MFImageGlyphUserOverride, 
-                       _MFImageGlyphVideoFill, _MFImageGlyphXMark, _MFIntegralRectToViewScale, 
-                       _MFLastIndexInRangePassingTest, _MFLastIndexPassingTest, _MFLocalizedAddressSeparator, 
-                       _MFMailComposeErrorDomain, _MFMessageComposeViewControllerAttachmentAlternateFilename, 
+                       _MFImageGlyphShare, _MFImageGlyphShelf, _MFImageGlyphShowWritingTools, 
+                       _MFImageGlyphSigned, _MFImageGlyphStatusIndicatorAttachment, 
+                       _MFImageGlyphStatusIndicatorBlockSender, _MFImageGlyphStatusIndicatorFlagged, 
+                       _MFImageGlyphStatusIndicatorForwarded, _MFImageGlyphStatusIndicatorMute, 
+                       _MFImageGlyphStatusIndicatorNotify, _MFImageGlyphStatusIndicatorReadLater, 
+                       _MFImageGlyphStatusIndicatorReplied, _MFImageGlyphStatusIndicatorUnread, 
+                       _MFImageGlyphStatusIndicatorVIP, _MFImageGlyphStopNotify, 
+                       _MFImageGlyphStriketrhough, _MFImageGlyphTapToRadar, _MFImageGlyphToday, 
+                       _MFImageGlyphToolbarFlag, _MFImageGlyphToolbarUnflag, _MFImageGlyphTrash, 
+                       _MFImageGlyphTrashFill, _MFImageGlyphUnMute, _MFImageGlyphUnderline, 
+                       _MFImageGlyphUndo, _MFImageGlyphUnflag, _MFImageGlyphUpArrow, 
+                       _MFImageGlyphUpdateReadLater, _MFImageGlyphUserOverride, _MFImageGlyphVideoFill, 
+                       _MFImageGlyphXMark, _MFIntegralRectToViewScale, _MFLastIndexInRangePassingTest, 
+                       _MFLastIndexPassingTest, _MFLocalizedAddressSeparator, _MFMailComposeErrorDomain, 
+                       _MFMessageComposeViewControllerAttachmentAlternateFilename, 
                        _MFMessageComposeViewControllerAttachmentURL, _MFMessageComposeViewControllerTextMessageAvailabilityDidChangeNotification, 
                        _MFMessageComposeViewControllerTextMessageAvailabilityKey, 
                        _MFModernUIApplicationPreferredContentSizeCode, _MFModernUIApplicationPreferredContentSizeIsAccessibility, 

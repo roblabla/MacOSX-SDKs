@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/WidgetKit.framework/Versions/A/WidgetKit'
-current-version: 530
+current-version: 536.2.14
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -378,10 +378,6 @@ exports:
                        '_$s9WidgetKit0A11EnvironmentV0C16ValuesEnumeratorVN', '_$s9WidgetKit0A11EnvironmentV0C16ValuesEnumeratorVSTAAMc', 
                        '_$s9WidgetKit0A11EnvironmentV11descriptionSSvg', '_$s9WidgetKit0A11EnvironmentV11descriptionSSvpMV', 
                        '_$s9WidgetKit0A11EnvironmentV11differences4from08ignoringC4Keys5usageSaySSG7SwiftUI0C6ValuesV_Says10AnyKeyPathCGAC15DifferenceUsageOtF', 
-                       '_$s9WidgetKit0A11EnvironmentV13_lock_storageAC7StorageCvM', 
-                       '_$s9WidgetKit0A11EnvironmentV13_lock_storageAC7StorageCvg', 
-                       '_$s9WidgetKit0A11EnvironmentV13_lock_storageAC7StorageCvpMV', 
-                       '_$s9WidgetKit0A11EnvironmentV13_lock_storageAC7StorageCvs', 
                        '_$s9WidgetKit0A11EnvironmentV13dynamicMemberSayxGSgs15WritableKeyPathCy7SwiftUI0C6ValuesVxG_tcluiM', 
                        '_$s9WidgetKit0A11EnvironmentV13dynamicMemberSayxGSgs15WritableKeyPathCy7SwiftUI0C6ValuesVxG_tcluig', 
                        '_$s9WidgetKit0A11EnvironmentV13dynamicMemberSayxGSgs15WritableKeyPathCy7SwiftUI0C6ValuesVxG_tcluipMV', 
@@ -430,6 +426,8 @@ exports:
                        '_$s9WidgetKit0A11EnvironmentV7StorageCN', '_$s9WidgetKit0A11EnvironmentV7StorageCSEAAMc', 
                        '_$s9WidgetKit0A11EnvironmentV7StorageCSeAAMc', '_$s9WidgetKit0A11EnvironmentV7StorageCfD', 
                        '_$s9WidgetKit0A11EnvironmentV7matches_8ignoringSb7SwiftUI0C6ValuesV_Says10AnyKeyPathCGtF', 
+                       '_$s9WidgetKit0A11EnvironmentV8_storageAC7StorageCvM', '_$s9WidgetKit0A11EnvironmentV8_storageAC7StorageCvg', 
+                       '_$s9WidgetKit0A11EnvironmentV8_storageAC7StorageCvpMV', '_$s9WidgetKit0A11EnvironmentV8_storageAC7StorageCvs', 
                        '_$s9WidgetKit0A11EnvironmentV9hashValueSivg', '_$s9WidgetKit0A11EnvironmentV9hashValueSivpMV', 
                        '_$s9WidgetKit0A11EnvironmentVACycfC', '_$s9WidgetKit0A11EnvironmentVMa', 
                        '_$s9WidgetKit0A11EnvironmentVMn', '_$s9WidgetKit0A11EnvironmentVN', 
@@ -437,8 +435,6 @@ exports:
                        '_$s9WidgetKit0A11EnvironmentVSQAAMc', '_$s9WidgetKit0A11EnvironmentVSeAAMc', 
                        '_$s9WidgetKit0A11EnvironmentVs23CustomStringConvertibleAAMc', 
                        '_$s9WidgetKit0A11EnvironmentVs28CustomDebugStringConvertibleAAMc', 
-                       '_$s9WidgetKit0A11EnvironmentVySayxGSgs15WritableKeyPathCy7SwiftUI0C6ValuesVxGcluig', 
-                       '_$s9WidgetKit0A11EnvironmentVySayxGSgs15WritableKeyPathCy7SwiftUI0C6ValuesVxGcluipMV', 
                        '_$s9WidgetKit0A11PersonalityC20supportsSecureCodingSbvgZTj', 
                        '_$s9WidgetKit0A11PersonalityC20supportsSecureCodingSbvgZTq', 
                        '_$s9WidgetKit0A11PersonalityC25extensionBundleIdentifier4kindACSS_SStcfC', 

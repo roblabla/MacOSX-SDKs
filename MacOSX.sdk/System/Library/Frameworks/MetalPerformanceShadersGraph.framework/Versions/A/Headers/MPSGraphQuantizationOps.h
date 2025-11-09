@@ -163,7 +163,7 @@ MPS_SWIFT_NAME( dequantize(_:scaleTensor:zeroPointTensor:dataType:axis:name:) );
                     zeroPointTensor:(MPSGraphTensor*)zeroPointTensor
                            dataType:(MPSDataType)dataType
                                name:(NSString * _Nullable) name
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0))
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0))
 MPS_SWIFT_NAME( dequantize(_:scaleTensor:zeroPointTensor:dataType:name:) );
 
 
@@ -184,7 +184,7 @@ MPS_SWIFT_NAME( dequantize(_:scaleTensor:zeroPointTensor:dataType:name:) );
                         scaleTensor:(MPSGraphTensor*)scaleTensor
                            dataType:(MPSDataType)dataType
                                name:(NSString * _Nullable) name
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0))
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0))
 MPS_SWIFT_NAME( dequantize(_:scaleTensor:dataType:name:) );
 
 /// Creates a lookup-table based quantization operation and returns the result tensor.
@@ -204,7 +204,7 @@ MPS_SWIFT_NAME( dequantize(_:scaleTensor:dataType:name:) );
                            LUTTensor:(MPSGraphTensor *) LUTTensor
                                 name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( dequantize(_:LUTTensor:name:) )
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0));
 
 /// Creates a vector lookup-table based quantization operation and returns the result tensor.
 ///
@@ -227,7 +227,7 @@ MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xr
                                 axis:(NSInteger) axis
                                 name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( dequantize(_:LUTTensor:axis:name:) )
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0));
 
 @end
 

@@ -22,6 +22,7 @@ typedef struct CF_BRIDGED_TYPE(id) CGContext *CGContextRef;
 #include <CoreGraphics/CGPattern.h>
 #include <CoreGraphics/CGPDFDocument.h>
 #include <CoreGraphics/CGShading.h>
+#include <CoreGraphics/CGToneMapping.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -693,31 +694,10 @@ CG_EXTERN void CGContextDrawTiledImage(CGContextRef cg_nullable c, CGRect rect,
     CGImageRef cg_nullable image)
     API_AVAILABLE(macos(10.5), ios(2.0));
 
-typedef CF_ENUM (uint32_t, CGToneMapping) {
-  kCGToneMappingDefault = 0,              /* A system default method will be used */
-  kCGToneMappingImageSpecificLumaScaling, /* Implements tone mapping of HDR content associated with the CGImage gain map */
-  kCGToneMappingReferenceWhiteBased,      /* Implements a tone curve that preserves SDR contrast and rolls off HDR highlights */
-  kCGToneMappingITURecommended,           /* Implements tone mapping based on ITU-R specifications for HDR-to-SDR and SDR-to-HDR conversions assuming mastering peak of 1000 nits */
-  kCGToneMappingEXRGamma,                 /* Implements Open EXR tone mapping gamma suitable for tone mapping images in extended linear sRGB color space to SDR */
-  kCGToneMappingNone                      /* Does not apply any tone mapping. Color converted values in extended color spaces will be clipped to SDR ([0.0-1.0]) range */
-} API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
+/* Draw `image' in the rectangular area specified by `rect' in the context
+   `c' applying the specified tone mapping method and options. See CGToneMapping.h for more info. Same as in CGContextDrawImage, the image is scaled, if necessary, to fit into `rect'. */
 
 CG_EXTERN bool CGContextDrawImageApplyingToneMapping(CGContextRef __nonnull c, CGRect r, CGImageRef image, CGToneMapping method, CFDictionaryRef __nullable options) API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
-
-/* kCGColorITURecommendedToneMapping allows for using HLG OOTF targeting 100 nits when converting HLG to SDR. */
-CG_EXTERN const CFStringRef kCGUse100nitsHLGOOTF API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));     /* The expected value is a CFBooleanRef (kCFBooleanTrue) */
-
-/* kCGColorITURecommendedToneMapping allows for choosing BT1886 recommended gamma in lieu of CoreVideo Gamma. */
-CG_EXTERN const CFStringRef kCGUseBT1886ForCoreVideoGamma API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));     /* The expected value is a CFBooleanRef (kCFBooleanTrue) */
-
-/* kCGColorITURecommendedToneMapping allows for skipping linear boost when converting non-HDR content (either SDR or extended range) to HDR. */
-CG_EXTERN const CFStringRef kCGSkipBoostToHDR API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));     /* The expected value is a CFBooleanRef (kCFBooleanTrue) */
-
-/* kCGToneMappingEXRGamma allows for specifying custom parameters to override system defaults. */
-CG_EXTERN const CFStringRef kCGEXRToneMappingGammaDefog    API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0)); /* default value: 0.0f range [0.0f, 0.01f]   */
-CG_EXTERN const CFStringRef kCGEXRToneMappingGammaExposure API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0)); /* default value: 0.0f range [-10.0f, 10.0f] */
-CG_EXTERN const CFStringRef kCGEXRToneMappingGammaKneeLow  API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0)); /* default value: 0.0f range [-2.85f, 3.0f]  */
-CG_EXTERN const CFStringRef kCGEXRToneMappingGammaKneeHigh API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0)); /* default value: 5.0f range [3.5f, 7.5f]    */
 
 /* Return the interpolation quality for image rendering of `context'. The
    interpolation quality is a gstate parameter which controls the level of

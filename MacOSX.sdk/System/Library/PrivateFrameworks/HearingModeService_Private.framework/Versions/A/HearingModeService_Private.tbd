@@ -5,5 +5,5 @@ install-name:    '/System/Library/PrivateFrameworks/HearingModeService_Private.f
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ HMDeviceAHPSConnectionManager, HMDeviceManager, HMHealthKitUtilities, 
-                       HMServiceDaemon ]
+                       HMOcclusionNotification, HMServiceDaemon ]
 ...

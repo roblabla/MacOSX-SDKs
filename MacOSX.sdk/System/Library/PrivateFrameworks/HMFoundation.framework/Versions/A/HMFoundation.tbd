@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/HMFoundation.framework/Versions/A/HMFoundation'
-current-version: 818.0.3
+current-version: 821.2.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -358,8 +358,10 @@ exports:
                        _HMFProductInfoBorealisEOSVersion, _HMFProductInfoBorealisFOSVersion, 
                        _HMFProductInfoBorealisOSVersion, _HMFProductInfoBugleOSVersion, 
                        _HMFProductInfoButlerOSVersion, _HMFProductInfoCatamaranOSVersion, 
-                       _HMFProductInfoCinarOSVersion, _HMFProductInfoConstellationOSVersion, 
+                       _HMFProductInfoCinarOSVersion, _HMFProductInfoConstellationBOSVersion, 
+                       _HMFProductInfoConstellationCOSVersion, _HMFProductInfoConstellationOSVersion, 
                        _HMFProductInfoCoralOSVersion, _HMFProductInfoCoyoteOSVersion, 
+                       _HMFProductInfoCrystalBOSVersion, _HMFProductInfoCrystalCOSVersion, 
                        _HMFProductInfoCrystalOSVersion, _HMFProductInfoDawnBOSVersion, 
                        _HMFProductInfoDawnCOSVersion, _HMFProductInfoDawnEOSVersion, 
                        _HMFProductInfoDawnFOSVersion, _HMFProductInfoDawnOSVersion, 
@@ -371,7 +373,8 @@ exports:
                        _HMFProductInfoFerryOSVersion, _HMFProductInfoFortuneOSVersion, 
                        _HMFProductInfoFrancisOSVersion, _HMFProductInfoGloryBOSVersion, 
                        _HMFProductInfoGloryCOSVersion, _HMFProductInfoGloryGOSVersion, 
-                       _HMFProductInfoGloryOSVersion, _HMFProductInfoGlowOSVersion, 
+                       _HMFProductInfoGloryOSVersion, _HMFProductInfoGlowBOSVersion, 
+                       _HMFProductInfoGlowCOSVersion, _HMFProductInfoGlowOSVersion, 
                        _HMFProductInfoGoldenGateEOSVersion, _HMFProductInfoGoldenGateGOSVersion, 
                        _HMFProductInfoGoldenGateOSVersion, _HMFProductInfoGoldenOSVersion, 
                        _HMFProductInfoGraceBOSVersion, _HMFProductInfoGraceFOSVersion, 
@@ -392,6 +395,7 @@ exports:
                        _HMFProductInfoLighthouseBOSVersion, _HMFProductInfoLighthouseCOSVersion, 
                        _HMFProductInfoLighthouseEOSVersion, _HMFProductInfoLighthouseFOSVersion, 
                        _HMFProductInfoLighthouseOSVersion, _HMFProductInfoMonarchOSVersion, 
+                       _HMFProductInfoMoonstoneBOSVersion, _HMFProductInfoMoonstoneCOSVersion, 
                        _HMFProductInfoMoonstoneOSVersion, _HMFProductInfoParisBOSVersion, 
                        _HMFProductInfoParisCOSVersion, _HMFProductInfoParisCRRUOSVersion, 
                        _HMFProductInfoParisDOSVersion, _HMFProductInfoParisEOSVersion, 
@@ -401,7 +405,8 @@ exports:
                        _HMFProductInfoPeaceOSVersion, _HMFProductInfoRomeCOSVersion, 
                        _HMFProductInfoRomeDOSVersion, _HMFProductInfoRomeEOSVersion, 
                        _HMFProductInfoRomeFOSVersion, _HMFProductInfoRomeGOSVersion, 
-                       _HMFProductInfoRomeOSVersion, _HMFProductInfoSapphireOSVersion, 
+                       _HMFProductInfoRomeOSVersion, _HMFProductInfoSapphireBOSVersion, 
+                       _HMFProductInfoSapphireCOSVersion, _HMFProductInfoSapphireOSVersion, 
                        _HMFProductInfoSatelliteBOSVersion, _HMFProductInfoSatelliteCOSVersion, 
                        _HMFProductInfoSatelliteEOSVersion, _HMFProductInfoSatelliteFOSVersion, 
                        _HMFProductInfoSatelliteOSVersion, _HMFProductInfoSkyBOSVersion, 

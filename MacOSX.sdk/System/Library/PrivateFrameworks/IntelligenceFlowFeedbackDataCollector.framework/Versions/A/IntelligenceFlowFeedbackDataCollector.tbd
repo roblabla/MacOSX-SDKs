@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligenceFlowFeedbackDataCollector.framework/Versions/A/IntelligenceFlowFeedbackDataCollector'
-current-version: 110.3
+current-version: 110.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -5,6 +5,7 @@
 //  Copyright (c) 2013-2024 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <HealthKit/HKCharacteristicObjects.h>
 #import <HealthKit/HKDefines.h>
 
@@ -31,8 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
  @class         HKHealthStore
  @abstract      The HKHealthStore class provides an interface for accessing and storing the user's health data.
  */
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
 NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKHealthStore : NSObject
 
 /*!
@@ -149,21 +151,21 @@ NS_SWIFT_SENDABLE
                 This operation is performed asynchronously and the completion will be executed on an arbitrary
                 background queue.
  */
-- (void)saveObject:(HKObject *)object withCompletion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+- (void)saveObject:(HKObject *)object withCompletion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        saveObjects:withCompletion:
  @abstract      Saves an array of HKObjects.
  @discussion    See discussion of saveObject:withCompletion:.
  */
-- (void)saveObjects:(NSArray<HKObject *> *)objects withCompletion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+- (void)saveObjects:(NSArray<HKObject *> *)objects withCompletion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        deleteObject:withCompletion:
  @abstract      Deletes a single HKObject from the HealthKit database.
  @discussion    See deleteObjects:withCompletion:.
  */
-- (void)deleteObject:(HKObject *)object withCompletion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+- (void)deleteObject:(HKObject *)object withCompletion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        deleteObjects:withCompletion:
@@ -171,7 +173,7 @@ NS_SWIFT_SENDABLE
  @discussion    An application may only delete objects that it previously saved.  This operation is performed
                 asynchronously and the completion will be executed on an arbitrary background queue.
  */
-- (void)deleteObjects:(NSArray<HKObject *> *)objects withCompletion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
+- (void)deleteObjects:(NSArray<HKObject *> *)objects withCompletion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
 
 /*!
  @method        deleteObjectsOfType:predicate:withCompletion:
@@ -179,7 +181,7 @@ NS_SWIFT_SENDABLE
  @discussion    An application may only delete objects that it previously saved.  This operation is performed
                 asynchronously and the completion will be executed on an arbitrary background queue.
  */
-- (void)deleteObjectsOfType:(HKObjectType *)objectType predicate:(NSPredicate *)predicate withCompletion:(void (^)(BOOL success, NSUInteger deletedObjectCount, NSError * _Nullable error))completion  NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
+- (void)deleteObjectsOfType:(HKObjectType *)objectType predicate:(NSPredicate *)predicate withCompletion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSUInteger deletedObjectCount, NSError * _Nullable error))completion  NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
 
 /*!
  @method        executeQuery:
@@ -216,7 +218,7 @@ NS_SWIFT_SENDABLE
 - (void)splitTotalEnergy:(HKQuantity *)totalEnergy
                startDate:(NSDate *)startDate
                  endDate:(NSDate *)endDate
-          resultsHandler:(void(^)(HKQuantity * _Nullable restingEnergy, HKQuantity * _Nullable activeEnergy, NSError * _Nullable error))resultsHandler API_DEPRECATED("No longer supported", ios(9.0, 11.0), watchos(2.0, 4.0));
+          resultsHandler:(void(^NS_SWIFT_SENDABLE)(HKQuantity * _Nullable restingEnergy, HKQuantity * _Nullable activeEnergy, NSError * _Nullable error))resultsHandler API_DEPRECATED("No longer supported", ios(9.0, 11.0), watchos(2.0, 4.0));
 
 - (nullable NSDate *)dateOfBirthWithError:(NSError **)error API_DEPRECATED_WITH_REPLACEMENT("dateOfBirthComponentsWithError:", ios(8.0, 10.0), watchos(2.0, 3.0));
 
@@ -281,7 +283,7 @@ NS_SWIFT_SENDABLE
                 permission to start a Live Activity from the background.
                 The assigned block will be executed on an arbitrary background queue.
  */
-@property (copy, nullable) void (^workoutSessionMirroringStartHandler)(HKWorkoutSession *mirroredSession) API_AVAILABLE(ios(17.0));
+@property (copy, nullable) void (^NS_SWIFT_SENDABLE workoutSessionMirroringStartHandler)(HKWorkoutSession *mirroredSession) API_AVAILABLE(ios(17.0));
 
 /*!
  @method        addSamples:toWorkout:completion:
@@ -292,7 +294,7 @@ NS_SWIFT_SENDABLE
  
                 The workout provided must be one that has already been saved to HealthKit.
  */
-- (void)addSamples:(NSArray<HKSample *> *)samples toWorkout:(HKWorkout *)workout completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addSamples(_:to:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_DEPRECATED("Use HKWorkoutBuilder", ios(8.0, 17.0), watchos(2.0, 10.0), macCatalyst(13.0, 16.0), macos(13.0, 14.0));
+- (void)addSamples:(NSArray<HKSample *> *)samples toWorkout:(HKWorkout *)workout completion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addSamples(_:to:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_DEPRECATED("Use HKWorkoutBuilder", ios(8.0, 17.0), watchos(2.0, 10.0), macCatalyst(13.0, 16.0), macos(13.0, 14.0));
 
 /*!
  @method        startWorkoutSession:
@@ -337,14 +339,14 @@ NS_SWIFT_SENDABLE
                 protocol will be called with the HKWorkoutConfiguration as a parameter. The receiving Watch app can use
                 this configuration object to create an HKWorkoutSession and start it with -startWorkoutSession:.
  */
-- (void)startWatchAppWithWorkoutConfiguration:(HKWorkoutConfiguration *)workoutConfiguration completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) NS_SWIFT_ASYNC_NAME(startWatchApp(toHandle:)) API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos);
+- (void)startWatchAppWithWorkoutConfiguration:(HKWorkoutConfiguration *)workoutConfiguration completion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) NS_SWIFT_ASYNC_NAME(startWatchApp(toHandle:)) API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method        recoverActiveWorkoutSessionWithCompletion:
  @abstract      Recovers an active workout session after a client crash. If no session is available to be re-attached,
                 nil will be returned. If an error occurs, session will be nil and error will be set appropriately.
  */
-- (void)recoverActiveWorkoutSessionWithCompletion:(void (^)(HKWorkoutSession * _Nullable_result session, NSError * _Nullable error))completion API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios, macCatalyst, macos);
+- (void)recoverActiveWorkoutSessionWithCompletion:(void (^NS_SWIFT_SENDABLE)(HKWorkoutSession * _Nullable_result session, NSError * _Nullable error))completion API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios, macCatalyst, macos);
 
 @end
 
@@ -360,11 +362,11 @@ NS_SWIFT_SENDABLE
                 HKQuantityTypeIdentifierStepCount) have a minimum frequency of HKUpdateFrequencyHourly. This is enforced
                 transparently to the caller.
  */
-- (void)enableBackgroundDeliveryForType:(HKObjectType *)type frequency:(HKUpdateFrequency)frequency withCompletion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(watchos(8.0), macCatalyst(13.0), macos(13.0));
+- (void)enableBackgroundDeliveryForType:(HKObjectType *)type frequency:(HKUpdateFrequency)frequency withCompletion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(watchos(8.0), macCatalyst(13.0), macos(13.0));
 
-- (void)disableBackgroundDeliveryForType:(HKObjectType *)type withCompletion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(watchos(8.0), macCatalyst(13.0), macos(13.0));
+- (void)disableBackgroundDeliveryForType:(HKObjectType *)type withCompletion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(watchos(8.0), macCatalyst(13.0), macos(13.0));
 
-- (void)disableAllBackgroundDeliveryWithCompletion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(watchos(8.0), macCatalyst(13.0), macos(13.0));
+- (void)disableAllBackgroundDeliveryWithCompletion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(watchos(8.0), macCatalyst(13.0), macos(13.0));
 
 @end
 
@@ -426,7 +428,7 @@ HK_EXTERN NSString * const HKUserPreferencesDidChangeNotification API_AVAILABLE(
 - (void)relateWorkoutEffortSample:(HKSample *)sample
                       withWorkout:(HKWorkout *)workout
                          activity:(nullable HKWorkoutActivity *)activity
-                       completion:(void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));
+                       completion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));
 /*!
  @method        unrelateWorkoutEffortSample:fromWorkout:activity:completion
  @abstract      Unrelates a workout effort sample from a workout
@@ -439,7 +441,7 @@ HK_EXTERN NSString * const HKUserPreferencesDidChangeNotification API_AVAILABLE(
 - (void)unrelateWorkoutEffortSample:(HKSample *)sample
                         fromWorkout:(HKWorkout *)workout
                            activity:(nullable HKWorkoutActivity *)activity
-                         completion:(void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));
+                         completion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));
 @end
 
 NS_ASSUME_NONNULL_END

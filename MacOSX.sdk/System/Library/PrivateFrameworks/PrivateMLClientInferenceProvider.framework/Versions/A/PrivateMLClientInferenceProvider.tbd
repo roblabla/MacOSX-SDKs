@@ -44,6 +44,13 @@ exports:
                        '_$s32PrivateMLClientInferenceProvider0cD11WithPrewarmP11prewarmHintyy20ModelManagerServices0cdF11InformationVYaFTjTu', 
                        '_$s32PrivateMLClientInferenceProvider0cD11WithPrewarmP11prewarmHintyy20ModelManagerServices0cdF11InformationVYaFTq', 
                        '_$s32PrivateMLClientInferenceProvider0cD11WithPrewarmTL', 
-                       '_$s32PrivateMLClientInferenceProvider9logMetric6logger4name12startInstanty2os6LoggerV_SSs15ContinuousClockV0J0VtF', 
+                       '_$s32PrivateMLClientInferenceProvider9OSVariantO15isCustomerBuildSbvMZ', 
+                       '_$s32PrivateMLClientInferenceProvider9OSVariantO15isCustomerBuildSbvgZ', 
+                       '_$s32PrivateMLClientInferenceProvider9OSVariantO15isCustomerBuildSbvsZ', 
+                       '_$s32PrivateMLClientInferenceProvider9OSVariantO15isInternalBuildSbvMZ', 
+                       '_$s32PrivateMLClientInferenceProvider9OSVariantO15isInternalBuildSbvgZ', 
+                       '_$s32PrivateMLClientInferenceProvider9OSVariantO15isInternalBuildSbvsZ', 
+                       '_$s32PrivateMLClientInferenceProvider9OSVariantOMa', '_$s32PrivateMLClientInferenceProvider9OSVariantOMn', 
+                       '_$s32PrivateMLClientInferenceProvider9OSVariantON', '_$s32PrivateMLClientInferenceProvider9logMetric6logger4name12startInstanty2os6LoggerV_SSs15ContinuousClockV0J0VtF', 
                        _PrivateMLClientInferenceProviderVersionNumber, _PrivateMLClientInferenceProviderVersionString ]
 ...

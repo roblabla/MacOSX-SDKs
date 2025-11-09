@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CPAnalytics.framework/Versions/A/CPAnalytics'
-current-version: 701.0.230
+current-version: 711.0.180
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -76,6 +76,8 @@ exports:
                        _CPAnalyticsPhotosActivityType, _CPAnalyticsPhotosDeleteKey, 
                        _CPAnalyticsPhotosEditKey, _CPAnalyticsPhotosEngagementKey, 
                        _CPAnalyticsPhotosFavoritesKey, _CPAnalyticsPhotosSearchPrefixKey, 
+                       _CPAnalyticsPhotosSearchSession, _CPAnalyticsPhotosSearchSessionPrefixKey, 
+                       _CPAnalyticsPhotosSearchSessionPresentedAssetsKey, _CPAnalyticsPhotosSearchSessionQueryKey, 
                        _CPAnalyticsPhotosShareActivityTypeAddToAlbumKey, _CPAnalyticsPhotosShareActivityTypeAddToSharedAlbumKey, 
                        _CPAnalyticsPhotosShareActivityTypeAirDropKey, _CPAnalyticsPhotosShareActivityTypeAirPlayKey, 
                        _CPAnalyticsPhotosShareActivityTypeAssignToContactKey, _CPAnalyticsPhotosShareActivityTypeCreateWatchFaceKey, 

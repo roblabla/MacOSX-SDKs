@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-macos15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2464.20.7.26.1 -module-name _MapKit_SwiftUI
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-macos15.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2464.21.7.31.8 -module-name _MapKit_SwiftUI
 import CoreLocation
 import Foundation
 @_exported import MapKit
@@ -124,7 +124,7 @@ extension SwiftUICore.ForEach : _MapKit_SwiftUI.DynamicMapContent where Content 
     get
   }
   @available(iOS 17.0, tvOS 17.0, macOS 14.0, *)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(watchOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s15_MapKit_SwiftUI0A11PitchToggleV4bodyQrvp", 0) __
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
@@ -430,7 +430,7 @@ extension _MapKit_SwiftUI.Map {
     get
   }
   @available(iOS 17.0, tvOS 17.0, macOS 14.0, *)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(watchOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s15_MapKit_SwiftUI0A9ScaleViewV4bodyQrvp", 0) __
 }
 @available(iOS 17.0, *)
@@ -442,9 +442,9 @@ extension _MapKit_SwiftUI.Map {
     get
   }
   @available(iOS 17.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s15_MapKit_SwiftUI0A21SelectableContentViewV4bodyQrvp", 0) __<SelectionValue, Content>
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
@@ -479,8 +479,8 @@ extension _MapKit_SwiftUI.MapPolygon : _MapKit_SwiftUI.MapContent {
     get
   }
   @available(iOS 17.0, macOS 14.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s15_MapKit_SwiftUI17LookAroundPreviewV4bodyQrvp", 0) __
 }
 @available(macOS 14.0, macCatalyst 14.0, *)
@@ -493,9 +493,9 @@ extension _MapKit_SwiftUI.MapPolygon : _MapKit_SwiftUI.MapContent {
     get
   }
   @available(macOS 14.0, macCatalyst 14.0, *)
-  @available(iOS, unavailable, introduced: 13.0)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s15_MapKit_SwiftUI0A11PitchSliderV4bodyQrvp", 0) __
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
@@ -654,9 +654,9 @@ extension SwiftUICore.ModifiedContent : _MapKit_SwiftUI.DynamicMapContent where 
     get
   }
   @available(macOS 14.0, macCatalyst 14.0, *)
-  @available(iOS, unavailable, introduced: 13.0)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s15_MapKit_SwiftUI0A11ZoomStepperV4bodyQrvp", 0) __
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
@@ -966,9 +966,9 @@ extension _MapKit_SwiftUI.MapContent {
     get
   }
   @available(watchOS 10.0, *)
-  @available(iOS, unavailable, introduced: 13.0)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(macOS, unavailable, introduced: 10.15)
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(macOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s15_MapKit_SwiftUI0A15LocationCompassV4bodyQrvp", 0) __
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)

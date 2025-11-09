@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
  @class         HKActivitySummary
  @abstract      An object that represents a summary of a user's activity for a given day.
  */
-HK_EXTERN API_AVAILABLE(ios(9.3), watchos(2.2), macCatalyst(13.0), macos(13.0))
+HK_EXTERN
+API_AVAILABLE(ios(9.3), watchos(2.2), macCatalyst(13.0), macos(13.0))
 @interface HKActivitySummary : NSObject <NSSecureCoding, NSCopying>
 
 /**

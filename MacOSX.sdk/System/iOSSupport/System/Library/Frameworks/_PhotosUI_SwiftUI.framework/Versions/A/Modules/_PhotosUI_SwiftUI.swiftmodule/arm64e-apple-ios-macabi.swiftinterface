@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 701.0.230 -module-name _PhotosUI_SwiftUI
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target arm64e-apple-ios18.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 711.0.180 -module-name _PhotosUI_SwiftUI
 import CoreTransferable
 @_exported import PhotosUI
 import Swift
@@ -18,8 +18,8 @@ extension Photos.PHLivePhoto : @retroactive CoreTransferable.Transferable {
     get
   }
   @available(iOS 16.0, macOS 13.0, *)
-  @available(tvOS, unavailable, introduced: 16.0)
-  @available(watchOS, unavailable, introduced: 9.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   public typealias Representation = @_opaqueReturnTypeOf("$sSo11PHLivePhotoC015_PhotosUI_SwiftD0E22transferRepresentationQrvpZ", 0) __
 }
 #else
@@ -31,8 +31,8 @@ extension Photos.PHLivePhoto : CoreTransferable.Transferable {
     get
   }
   @available(iOS 16.0, macOS 13.0, *)
-  @available(tvOS, unavailable, introduced: 16.0)
-  @available(watchOS, unavailable, introduced: 9.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   public typealias Representation = @_opaqueReturnTypeOf("$sSo11PHLivePhotoC015_PhotosUI_SwiftD0E22transferRepresentationQrvpZ", 0) __
 }
 #endif
@@ -87,8 +87,12 @@ public struct PhotosPickerItem : Swift.Equatable, Swift.Hashable, @unchecked Swi
     get
   }
   @discardableResult
-  public func loadTransferable<T>(type: T.Type, completionHandler: @escaping (Swift.Result<T?, any Swift.Error>) -> Swift.Void) -> Foundation.Progress where T : CoreTransferable.Transferable
+  @preconcurrency public func loadTransferable<T>(type: T.Type, completionHandler: @escaping @Sendable (Swift.Result<T?, any Swift.Error>) -> Swift.Void) -> Foundation.Progress where T : CoreTransferable.Transferable
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func loadTransferable<T>(type: T.Type) async throws -> sending T? where T : CoreTransferable.Transferable
+  #else
   public func loadTransferable<T>(type: T.Type) async throws -> T? where T : CoreTransferable.Transferable
+  #endif
   @available(watchOS, unavailable)
   public init(itemIdentifier: Swift.String)
   public static func == (a: _PhotosUI_SwiftUI.PhotosPickerItem, b: _PhotosUI_SwiftUI.PhotosPickerItem) -> Swift.Bool
@@ -110,7 +114,7 @@ public struct PhotosPickerItem : Swift.Equatable, Swift.Hashable, @unchecked Swi
     get
   }
   @available(iOS 16.0, watchOS 9.0, macOS 13.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
+  @available(tvOS, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s015_PhotosUI_SwiftB00A6PickerV4bodyQrvp", 0) __<Label>
 }
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)

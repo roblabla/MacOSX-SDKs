@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
-// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 366.0.22.0.4 -module-name RealityFoundation
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.43 clang-1600.0.25.3)
+// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 366.40.5.0.1 -module-name RealityFoundation
 import ARKit
 import AVFAudio
 import AVFoundation
@@ -2451,7 +2451,7 @@ extension RealityFoundation.AudioPlaybackController : Swift.Identifiable {
   @_Concurrency.MainActor @preconcurrency public var id: Swift.UInt64 {
     get
   }
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
+  @available(iOS 13.0, macOS 10.15, macCatalyst 13.0, *)
   public typealias ID = Swift.UInt64
 }
 @available(visionOS 1.0, macOS 15.0, macCatalyst 18.0, iOS 18.0, *)
@@ -2962,8 +2962,8 @@ public struct PhotogrammetrySample : Swift.Identifiable {
   }
   public init(id: Swift.Int, image: CoreVideo.CVPixelBuffer)
   @available(iOS 17.0, macOS 12.0, macCatalyst 15.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @available(visionOS, unavailable)
   public typealias ID = Swift.Int
 }
@@ -6305,7 +6305,7 @@ public protocol MeshBufferSemantic : Swift.Identifiable {
 extension RealityFoundation.MeshBuffers {
   public struct Semantic<Element> : RealityFoundation.MeshBufferSemantic {
     public let id: RealityFoundation.MeshBuffers.Identifier
-    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 12.0, macCatalyst 15.0, *)
+    @available(iOS 15.0, macOS 12.0, macCatalyst 15.0, *)
     public typealias ID = RealityFoundation.MeshBuffers.Identifier
   }
   public static let positions: RealityFoundation.MeshBuffers.Semantic<Swift.SIMD3<Swift.Float>>
@@ -7324,7 +7324,7 @@ extension RealityFoundation.MeshResource {
       get
       set
     }
-    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 12.0, macCatalyst 15.0, *)
+    @available(iOS 15.0, macOS 12.0, macCatalyst 15.0, *)
     public typealias ID = Swift.String
   }
   public struct Model : Swift.Identifiable {
@@ -7332,7 +7332,7 @@ extension RealityFoundation.MeshResource {
     public var parts: RealityFoundation.MeshPartCollection
     public init(id: Swift.String, parts: [RealityFoundation.MeshResource.Part])
     @preconcurrency @_Concurrency.MainActor public init(id modelID: Swift.String, descriptors: [RealityFoundation.MeshDescriptor]) throws
-    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 12.0, macCatalyst 15.0, *)
+    @available(iOS 15.0, macOS 12.0, macCatalyst 15.0, *)
     public typealias ID = Swift.String
   }
   public struct Instance : Swift.Identifiable {
@@ -7340,7 +7340,7 @@ extension RealityFoundation.MeshResource {
     public var model: Swift.String
     public var transform: simd.simd_float4x4
     public init(id: Swift.String, model: Swift.String, at transform: simd.simd_float4x4? = nil)
-    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 12.0, macCatalyst 15.0, *)
+    @available(iOS 15.0, macOS 12.0, macCatalyst 15.0, *)
     public typealias ID = Swift.String
   }
   public struct Contents {
@@ -7388,7 +7388,7 @@ extension RealityFoundation.MeshResource {
     public var joints: [RealityFoundation.MeshResource.Skeleton.Joint]
     public init(id: Swift.String, joints: [RealityFoundation.MeshResource.Skeleton.Joint])
     public init?(id: Swift.String, jointNames: [Swift.String], inverseBindPoseMatrices: [simd.simd_float4x4], restPoseTransforms: [RealityFoundation.Transform]? = nil, parentIndices: [Swift.Int?]? = nil)
-    @available(iOS 18.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, macOS 15.0, macCatalyst 18.0, *)
+    @available(iOS 18.0, visionOS 1.0, macOS 15.0, macCatalyst 18.0, *)
     public typealias ID = Swift.String
   }
 }
@@ -8092,7 +8092,7 @@ extension RealityFoundation.Scene : Swift.Identifiable {
   nonisolated public var id: Swift.UInt64 {
     get
   }
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
+  @available(iOS 13.0, macOS 10.15, macCatalyst 13.0, *)
   public typealias ID = Swift.UInt64
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
@@ -8857,7 +8857,7 @@ extension RealityFoundation.Entity {
         get
       }
       public init(id: Swift.String)
-      @available(iOS 18.0, tvOS 13.0, watchOS 6.0, visionOS 2.0, macOS 15.0, macCatalyst 18.0, *)
+      @available(iOS 18.0, visionOS 2.0, macOS 15.0, macCatalyst 18.0, *)
       public typealias ID = Swift.String
     }
     public struct ConfigurationSet : Swift.Identifiable, Swift.Sendable {
@@ -8872,7 +8872,7 @@ extension RealityFoundation.Entity {
       }
       public init(id: Swift.String, configurations: [Swift.String : RealityFoundation.Entity.ConfigurationCatalog.Configuration], defaultConfigurationId: Swift.String? = nil) throws
       public init(id: Swift.String, configurations: [RealityFoundation.Entity.ConfigurationCatalog.Configuration], defaultConfigurationId: Swift.String? = nil) throws
-      @available(iOS 18.0, tvOS 13.0, watchOS 6.0, visionOS 2.0, macOS 15.0, macCatalyst 18.0, *)
+      @available(iOS 18.0, visionOS 2.0, macOS 15.0, macCatalyst 18.0, *)
       public typealias ID = Swift.String
     }
     public struct ConfigurationCombination {
@@ -9698,7 +9698,7 @@ extension RealityFoundation.Entity : Swift.Identifiable {
   nonisolated public var id: Swift.UInt64 {
     get
   }
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
+  @available(iOS 13.0, macOS 10.15, macCatalyst 13.0, *)
   public typealias ID = Swift.UInt64
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
@@ -10832,7 +10832,6 @@ public struct EventSequence<Element> : _Concurrency.AsyncSequence where Element 
     #endif
   }
   public func makeAsyncIterator() -> RealityFoundation.EventSequence<Element>.Iterator
-  @available(tvOS 13.0, watchOS 6.0, *)
   @available(iOS, unavailable)
   @available(visionOS, unavailable)
   @available(macOS, unavailable)
@@ -12071,8 +12070,8 @@ public class PhotogrammetrySession {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
       public mutating func next() async throws -> RealityFoundation.PhotogrammetrySession.Outputs.Element?
       @available(iOS 17.0, macOS 12.0, macCatalyst 15.0, *)
-      @available(tvOS, unavailable, introduced: 13.0)
-      @available(watchOS, unavailable, introduced: 6.0)
+      @available(tvOS, unavailable)
+      @available(watchOS, unavailable)
       @available(visionOS, unavailable)
       public typealias Element = RealityFoundation.PhotogrammetrySession.Outputs.Element
       #if compiler(>=5.3) && $AssociatedTypeImplements
@@ -12091,8 +12090,8 @@ public class PhotogrammetrySession {
     }
     public func makeAsyncIterator() -> RealityFoundation.PhotogrammetrySession.Outputs.Iterator
     @available(iOS 17.0, macOS 12.0, macCatalyst 15.0, *)
-    @available(tvOS, unavailable, introduced: 13.0)
-    @available(watchOS, unavailable, introduced: 6.0)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
     @available(visionOS, unavailable)
     public typealias AsyncIterator = RealityFoundation.PhotogrammetrySession.Outputs.Iterator
     #if compiler(>=5.3) && $AssociatedTypeImplements
@@ -12155,8 +12154,8 @@ extension RealityFoundation.PhotogrammetrySession : Swift.Identifiable {
     get
   }
   @available(iOS 17.0, macOS 14.0, macCatalyst 17.0, *)
-  @available(tvOS, unavailable, introduced: 13.0)
-  @available(watchOS, unavailable, introduced: 6.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @available(visionOS, unavailable)
   public typealias ID = Foundation.UUID
 }

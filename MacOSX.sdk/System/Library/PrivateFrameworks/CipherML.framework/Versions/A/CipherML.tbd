@@ -1904,6 +1904,7 @@ exports:
                        '_$s8CipherML15RequestsManagerC11currentTime10Foundation4DateVyYbcvg', 
                        '_$s8CipherML15RequestsManagerC11currentTime10Foundation4DateVyYbcvpMV', 
                        '_$s8CipherML15RequestsManagerC11currentTime10Foundation4DateVyYbcvpWvd', 
+                       '_$s8CipherML15RequestsManagerC11keyRotation3forAA03KeyF0CAA23NetworkDelegationConfigO_tF', 
                        '_$s8CipherML15RequestsManagerC11queryStatus3for7optionsSo010CMLUseCaseF0CSgSo15CMLClientConfigC_So0iJ14ControlOptionsVtYaKF', 
                        '_$s8CipherML15RequestsManagerC11queryStatus3for7optionsSo010CMLUseCaseF0CSgSo15CMLClientConfigC_So0iJ14ControlOptionsVtYaKFTu', 
                        '_$s8CipherML15RequestsManagerC11queryStatus3for7optionsSo010CMLUseCaseF0CSgSo15CMLClientConfigC_So0iJ14ControlOptionsVtYaKFfA0_', 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Sage.framework/Versions/A/Sage'
-current-version: 138
+current-version: 145.255.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -769,6 +769,7 @@ exports:
                        '_$s4Sage19SummarizationClientC7UseCaseON', '_$s4Sage19SummarizationClientC7UseCaseOSEAAMc', 
                        '_$s4Sage19SummarizationClientC7UseCaseOSHAAMc', '_$s4Sage19SummarizationClientC7UseCaseOSQAAMc', 
                        '_$s4Sage19SummarizationClientC7UseCaseOSYAAMc', '_$s4Sage19SummarizationClientC7UseCaseOSeAAMc', 
+                       '_$s4Sage19SummarizationClientC7prewarm3for17onBehalfOfProcess17requestIdentifier10completionyAC7UseCaseO_AA0cI4InfoVSgSSySScSgtF', 
                        '_$s4Sage19SummarizationClientC7prewarm3for17onBehalfOfProcess17requestIdentifieryAC7UseCaseO_AA0cI4InfoVSgSStF', 
                        '_$s4Sage19SummarizationClientC7prewarm8categoryyAC15PrewarmCategoryO_tF', 
                        '_$s4Sage19SummarizationClientC9summarize17requestIdentifier4text7optionsAA7SummaryVSS_SSAC19VisualPromptOptionsVtYaKF', 
@@ -850,6 +851,7 @@ exports:
                        '_$s4Sage20ClassificationClientC7UseCaseON', '_$s4Sage20ClassificationClientC7UseCaseOSEAAMc', 
                        '_$s4Sage20ClassificationClientC7UseCaseOSHAAMc', '_$s4Sage20ClassificationClientC7UseCaseOSQAAMc', 
                        '_$s4Sage20ClassificationClientC7UseCaseOSYAAMc', '_$s4Sage20ClassificationClientC7UseCaseOSeAAMc', 
+                       '_$s4Sage20ClassificationClientC7prewarm3for17requestIdentifier10completionyAC7UseCaseO_SSySScSgtF', 
                        '_$s4Sage20ClassificationClientC7prewarm3for17requestIdentifieryAC7UseCaseO_SStF', 
                        '_$s4Sage20ClassificationClientC7prewarm8categoryyAC15PrewarmCategoryO_tF', 
                        '_$s4Sage20ClassificationClientCACycfC', '_$s4Sage20ClassificationClientCACycfCTj', 
@@ -881,6 +883,7 @@ exports:
                        '_$s4Sage20SessionConfigurationVSQAAMc', '_$s4Sage21TextCompositionClientC04textC26IsPrecomputationRequestKeySSvgZ', 
                        '_$s4Sage21TextCompositionClientC04textcD11FinishedKeySSvgZ', 
                        '_$s4Sage21TextCompositionClientC04textcD11LanguageKeySSvgZ', 
+                       '_$s4Sage21TextCompositionClientC04textcD13UserQuotesKeySSvgZ', 
                        '_$s4Sage21TextCompositionClientC04textcD14ResultCountKeySSvgZ', 
                        '_$s4Sage21TextCompositionClientC04textcD14ResultIndexKeySSvgZ', 
                        '_$s4Sage21TextCompositionClientC04textcD15InstructionsKeySSvgZ', 
@@ -892,6 +895,7 @@ exports:
                        '_$s4Sage21TextCompositionClientC04textcD20UseCaseIdentifierKeySo06TCTextc15AssistantOptionI0avgZ', 
                        '_$s4Sage21TextCompositionClientC04textcD23AppProcessIdentifierKeySSvgZ', 
                        '_$s4Sage21TextCompositionClientC04textcD24UserPreferredLanguageKeySSvgZ', 
+                       '_$s4Sage21TextCompositionClientC04textcD26UserFeedbackInputStringKeySSvgZ', 
                        '_$s4Sage21TextCompositionClientC04textcD7SeedKeySSvgZ', '_$s4Sage21TextCompositionClientC04textcD8TokenKeySSvgZ', 
                        '_$s4Sage21TextCompositionClientC13RewritingTypeO12professionalyA2EmFWC', 
                        '_$s4Sage21TextCompositionClientC13RewritingTypeO12proofreadingyA2EmFWC', 
@@ -1004,14 +1008,6 @@ exports:
                        '_$s4Sage22SummarizationXPCResultC22toTextAssistantSummaryAA0B6ClientC0efG0Vy_SSGyKFTq', 
                        '_$s4Sage22SummarizationXPCResultC29toTextAssistantPartialSummaryAA0B6ClientC0efgH0Vy_SSGyKFTj', 
                        '_$s4Sage22SummarizationXPCResultC29toTextAssistantPartialSummaryAA0B6ClientC0efgH0Vy_SSGyKFTq', 
-                       '_$s4Sage22SummarizationXPCResultC5ErrorO14wrongValueTypeyA2EmFWC', 
-                       '_$s4Sage22SummarizationXPCResultC5ErrorO2eeoiySbAE_AEtFZ', 
-                       '_$s4Sage22SummarizationXPCResultC5ErrorO4hash4intoys6HasherVz_tF', 
-                       '_$s4Sage22SummarizationXPCResultC5ErrorO9hashValueSivg', 
-                       '_$s4Sage22SummarizationXPCResultC5ErrorO9hashValueSivpMV', 
-                       '_$s4Sage22SummarizationXPCResultC5ErrorOMa', '_$s4Sage22SummarizationXPCResultC5ErrorOMn', 
-                       '_$s4Sage22SummarizationXPCResultC5ErrorON', '_$s4Sage22SummarizationXPCResultC5ErrorOSHAAMc', 
-                       '_$s4Sage22SummarizationXPCResultC5ErrorOSQAAMc', '_$s4Sage22SummarizationXPCResultC5ErrorOsAdAMc', 
                        '_$s4Sage22SummarizationXPCResultC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s4Sage22SummarizationXPCResultC5coderACSgSo7NSCoderC_tcfc', 
                        '_$s4Sage22SummarizationXPCResultC6ResultO20textAssistantSummaryyAeA0B6ClientC04TextfG0Vy_SSGcAEmFWC', 

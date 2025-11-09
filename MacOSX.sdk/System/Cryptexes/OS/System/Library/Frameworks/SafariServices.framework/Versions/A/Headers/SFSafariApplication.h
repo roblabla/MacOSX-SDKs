@@ -41,10 +41,10 @@ SF_CLASS_AVAILABLE_MAC_SAFARI(10_0)
 + (void)getHostApplicationWithCompletionHandler:(void (^)(NSRunningApplication *hostApplication))completionHandler SF_AVAILABLE_MAC_SAFARI(11_0);
 
 /// Opens Safari Extensions preferences and selects extension with the identifier.
-+ (void)showPreferencesForExtensionWithIdentifier:(NSString *)identifier completionHandler:(void (^ _Nullable)(NSError * _Nullable error))completionHandler NS_EXTENSION_UNAVAILABLE("Not available to extensions");
++ (void)showPreferencesForExtensionWithIdentifier:(NSString *)identifier completionHandler:(void (^ _Nullable)(NSError * _Nullable error))completionHandler;
 
 // Dispatches a message to the Safari Extension with the given identifier.
-+ (void)dispatchMessageWithName:(NSString *)messageName toExtensionWithIdentifier:(NSString *)identifier userInfo:(nullable NSDictionary<NSString *, id> *)userInfo completionHandler:(void (^ _Nullable)(NSError * _Nullable error))completionHandler NS_EXTENSION_UNAVAILABLE("Not available to extensions") SF_AVAILABLE_MAC_SAFARI(10_1);
++ (void)dispatchMessageWithName:(NSString *)messageName toExtensionWithIdentifier:(NSString *)identifier userInfo:(nullable NSDictionary<NSString *, id> *)userInfo completionHandler:(void (^ _Nullable)(NSError * _Nullable error))completionHandler SF_AVAILABLE_MAC_SAFARI(10_1);
 
 @end
 

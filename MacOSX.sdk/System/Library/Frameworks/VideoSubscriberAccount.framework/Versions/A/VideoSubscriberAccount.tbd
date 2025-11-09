@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/VideoSubscriberAccount.framework/Versions/A/VideoSubscriberAccount'
-current-version: 561.0.7
+current-version: 561.10.5
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -399,8 +399,9 @@ exports:
                        VSSubscriptionSource, VSTestSetupPreparationOperation, VSTimeoutOperation, 
                        VSTreeNode, VSTrie, VSUserAccountPersistentContainer, VSUserAccountServiceConnection, 
                        VSValueType, VSValueTypeProperty, VSVerificationDataOperation, 
-                       VSVerificationStateResetOperation, VSVersionMapping, VSViewServiceResponse, 
-                       VSViewServiceXPCInterface, VSWaitGroup, VSWeakForwardingTarget ]
+                       VSVerificationStateResetOperation, VSVersionMapping, VSViewServiceRequestOperation, 
+                       VSViewServiceResponse, VSViewServiceXPCInterface, VSWaitGroup, 
+                       VSWeakForwardingTarget ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _VSAccountProviderAuthenticationSchemeAPI, _VSAccountProviderAuthenticationSchemeSAML, 
                        _VSCheckAccessOptionPrompt, _VSErrorDomain, _VSErrorInfoKeyAccountProviderResponse, 

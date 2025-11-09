@@ -294,6 +294,69 @@ OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 
 @end
 
+OS_EXPORT API_AVAILABLE(macos(15.1)) API_UNAVAILABLE(ios, watchos, tvos)
+NS_SWIFT_SENDABLE
+@interface OSSystemExtensionInfo : NSObject
+
+/*!
+ @brief The bundle identifier of the extension (CFBundleIdentifier)
+ */
+@property (copy, readonly) NSString *bundleIdentifier;
+
+/*!
+ @brief The bundle version of the extension (CFBundleVersion)
+ */
+@property (copy, readonly) NSString *bundleVersion;
+
+/*!
+ @brief The bundle short version string of the extension (CFBundleShortVersionString)
+ */
+@property (copy, readonly) NSString *bundleShortVersion;
+
+@end
+
+OS_EXPORT API_AVAILABLE(macos(15.1)) API_UNAVAILABLE(ios, watchos, tvos)
+@protocol OSSystemExtensionsWorkspaceObserver <NSObject>
+
+@optional
+/*!
+ @brief This delegate method will be called when a system extension has been validated and allowed by the user to run.
+ */
+- (void)systemExtensionWillBecomeEnabled:(OSSystemExtensionInfo *)systemExtensionInfo;
+
+/*!
+ @brief This delegate method will be called when the user disables an already enabled system extension, or when the system extension is first installed and is in the disabled state.
+ */
+- (void)systemExtensionWillBecomeDisabled:(OSSystemExtensionInfo *)systemExtensionInfo;
+
+/*!
+ @brief This delegate method will be called when a system extension is deactivated and is about to get uninstalled. The extension may still be running until the system is rebooted.
+ */
+- (void)systemExtensionWillBecomeInactive:(OSSystemExtensionInfo *)systemExtensionInfo;
+
+@end
+
+
+/*!
+ @note Using the workspace API requires the system extension entitlement
+ */
+OS_EXPORT API_AVAILABLE(macos(15.1)) API_UNAVAILABLE(ios, watchos, tvos)
+NS_SWIFT_SENDABLE
+@interface OSSystemExtensionsWorkspace : NSObject
+
+@property (class, readonly) OSSystemExtensionsWorkspace *sharedWorkspace;
+/*!
+ @brief Start observing changes to System Extension(s) which are enabled or ready to be enabled.
+ */
+- (BOOL)addObserver:(id<OSSystemExtensionsWorkspaceObserver>)observer error:(NSError *__autoreleasing *)error NS_SWIFT_NAME(addObserver(_:));
+
+/*!
+ @brief Stop observing changes to System Extension(s).
+ */
+- (void)removeObserver:(id<OSSystemExtensionsWorkspaceObserver>)observer NS_SWIFT_NAME(removeObserver(_:));
+
+@end
+
 NS_ASSUME_NONNULL_END
 __END_DECLS
 

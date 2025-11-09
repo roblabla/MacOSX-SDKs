@@ -17,8 +17,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#if !TARGET_OS_WATCH
 // Post this notification to re-query callout information.
 MK_EXTERN NSString * const MKAnnotationCalloutInfoDidChangeNotification;
+#endif
 
 typedef NS_ENUM(NSUInteger, MKAnnotationViewDragState) {
     MKAnnotationViewDragStateNone = 0,      // View is at rest, sitting on the map.
@@ -26,7 +28,7 @@ typedef NS_ENUM(NSUInteger, MKAnnotationViewDragState) {
     MKAnnotationViewDragStateDragging,      // View is dragging ("lift" animations are complete)
     MKAnnotationViewDragStateCanceling,     // View was not dragged and should return to its starting position (e.g. pin drop)
     MKAnnotationViewDragStateEnding         // View was dragged, new coordinate is set and view should return to resting position (e.g. pin drop)
-} NS_ENUM_AVAILABLE(10_9, 4_0) API_UNAVAILABLE(tvos, watchos);
+} API_AVAILABLE(macos(10.9), ios(4.0)) API_UNAVAILABLE(tvos, watchos);
 
 typedef float MKFeatureDisplayPriority NS_TYPED_EXTENSIBLE_ENUM NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) API_UNAVAILABLE(watchos);
 static const MKFeatureDisplayPriority MKFeatureDisplayPriorityRequired NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) API_UNAVAILABLE(watchos) = 1000;
@@ -63,7 +65,7 @@ NS_CLASS_AVAILABLE(10_9, NA)
 // Classes that override must call super.
 - (void)prepareForReuse;
 
-- (void)prepareForDisplay NS_REQUIRES_SUPER NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
+- (void)prepareForDisplay NS_REQUIRES_SUPER API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic, strong, nullable) id <MKAnnotation> annotation;
 
@@ -128,36 +130,36 @@ API_UNAVAILABLE(watchos, tvos);
 
 // The detail accessory view to be used in the standard callout.
 #if TARGET_OS_IPHONE
-@property (nonatomic, strong, nullable) UIView *detailCalloutAccessoryView NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, strong, nullable) UIView *detailCalloutAccessoryView API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 #else
 @property (nonatomic, strong, nullable) NSView *detailCalloutAccessoryView NS_AVAILABLE(10_11, 9_0);
 #endif
 
 // If YES and the underlying id<MKAnnotation> responds to setCoordinate:, 
 // the user will be able to drag this annotation view around the map.
-@property (nonatomic, getter=isDraggable) BOOL draggable NS_AVAILABLE(10_9, 4_0) API_UNAVAILABLE(tvos);
+@property (nonatomic, getter=isDraggable) BOOL draggable API_AVAILABLE(macos(10.9), ios(4.0)) API_UNAVAILABLE(tvos, watchos);
 
 // Automatically set to MKAnnotationViewDragStateStarting, Canceling, and Ending when necessary.
 // Implementer is responsible for transitioning to Dragging and None states as appropriate.
-@property (nonatomic) MKAnnotationViewDragState dragState NS_AVAILABLE(10_9, 4_0) API_UNAVAILABLE(tvos);
+@property (nonatomic) MKAnnotationViewDragState dragState API_AVAILABLE(macos(10.9), ios(4.0)) API_UNAVAILABLE(tvos, watchos);
 
 // Developers targeting iOS 4.2 and after must use setDragState:animated: instead of setDragState:.
-- (void)setDragState:(MKAnnotationViewDragState)newDragState animated:(BOOL)animated NS_AVAILABLE(10_9, 4_2) API_UNAVAILABLE(tvos);
+- (void)setDragState:(MKAnnotationViewDragState)newDragState animated:(BOOL)animated API_AVAILABLE(macos(10.9), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 // Annotation views with equal non-nil identifiers can cluster together.
-@property (nonatomic, copy, nullable) NSString *clusteringIdentifier  NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
+@property (nonatomic, copy, nullable) NSString *clusteringIdentifier API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 // If non-nil this is the annotation view this view is clustered into.
-@property (nonatomic, weak, readonly, nullable) MKAnnotationView *clusterAnnotationView NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
+@property (nonatomic, weak, readonly, nullable) MKAnnotationView *clusterAnnotationView API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 // Default is MKFeatureDisplayPriorityRequired, other values opts into collision occlusion by priority.
-@property (nonatomic) MKFeatureDisplayPriority displayPriority NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
+@property (nonatomic) MKFeatureDisplayPriority displayPriority API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic) MKAnnotationViewZPriority zPriority API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 @property (nonatomic) MKAnnotationViewZPriority selectedZPriority API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 // Default collision mode is rectangle.
-@property (nonatomic) MKAnnotationViewCollisionMode collisionMode NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
+@property (nonatomic) MKAnnotationViewCollisionMode collisionMode API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 @end
 

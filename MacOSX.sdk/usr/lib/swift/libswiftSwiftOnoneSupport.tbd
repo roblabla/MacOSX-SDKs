@@ -8,12 +8,7 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftSwiftOnoneSupport.dylib', 
-                       '$ld$install_name$os10.11$@rpath/libswiftSwiftOnoneSupport.dylib', 
-                       '$ld$install_name$os10.12$@rpath/libswiftSwiftOnoneSupport.dylib', 
-                       '$ld$install_name$os10.13$@rpath/libswiftSwiftOnoneSupport.dylib', 
-                       '$ld$install_name$os10.14$@rpath/libswiftSwiftOnoneSupport.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftSwiftOnoneSupport.dylib', 
+    symbols:         [ '$ld$previous$@rpath/libswiftSwiftOnoneSupport.dylib$$1$10.9$10.14.4$$', 
                        '_$sS2ayxGycfCSJ_Tg5', '_$sS2ayxGycfCSS17UnicodeScalarViewV_Tg5', 
                        '_$sS2ayxGycfCSS8UTF8ViewV_Tg5', '_$sS2ayxGycfCSS9UTF16ViewV_Tg5', 
                        '_$sS2ayxGycfCSS_Tg5', '_$sS2ayxGycfCSd_Tg5', '_$sS2ayxGycfCSf_Tg5', 

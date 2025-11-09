@@ -255,6 +255,7 @@ typedef UIAccessibilityNavigationStyle (^AXNavigationStyleReturnBlock)(void) API
 typedef UIAccessibilityContainerType (^AXContainerTypeReturnBlock)(void) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 typedef __nullable UIAccessibilityTextualContext (^AXTextualContextReturnBlock)(void) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 typedef NSArray<UIAccessibilityCustomAction *> * __nullable (^AXCustomActionsReturnBlock)(void) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
+typedef __nullable id<UITextInput> (^AXUITextInputReturnBlock)(void) API_AVAILABLE(ios(18.1), visionos(2.1)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR;
 
 // Basic accessibility
 @property (nullable, nonatomic, copy) AXBoolReturnBlock isAccessibilityElementBlock API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
@@ -497,6 +498,15 @@ API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(watchos)
 @property (nullable, nonatomic, strong) id accessibilityNextTextNavigationElement API_AVAILABLE(ios(18.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR;
 @property (nullable, nonatomic, copy) AXObjectReturnBlock accessibilityPreviousTextNavigationElementBlock API_AVAILABLE(ios(18.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR;
 @property (nullable, nonatomic, copy) AXObjectReturnBlock accessibilityNextTextNavigationElementBlock API_AVAILABLE(ios(18.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR;
+
+@end
+
+@interface NSObject (UIAccessibilityTextOperations)
+
+// If your accessibility element represents a view that supports text operations via the UITextInput
+// protocol, you may use this property to forward UITextInput calls to your backing view
+@property (nullable, nonatomic, weak) id<UITextInput> accessibilityTextInputResponder API_AVAILABLE(ios(18.1), visionos(2.1)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR;
+@property (nullable, nonatomic, copy) AXUITextInputReturnBlock accessibilityTextInputResponderBlock API_AVAILABLE(ios(18.1), visionos(2.1)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR;
 
 @end
 

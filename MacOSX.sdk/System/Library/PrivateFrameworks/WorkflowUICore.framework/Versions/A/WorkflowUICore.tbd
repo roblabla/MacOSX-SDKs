@@ -5,16 +5,17 @@ install-name:    '/System/Library/PrivateFrameworks/WorkflowUICore.framework/Ver
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ ActionKitUI, AddShortcutExtension, AutomationNotificationContent, 
-                       CatalystContentExtension, ClientHarness-iOS, ClientHarness-macOS, 
-                       EditorSnapshotTests, FocusConfigurationExtension, FocusConfigurationXPCServiceMac, 
-                       HomeUI, QuickLookExtension, Shortcut Tester, ShortcutDroplet, 
-                       Shortcuts, Shortcuts Catalyst, Shortcuts Events, ShortcutsActionExtension, 
-                       ShortcutsAppTests, ShortcutsEditor, ShortcutsEditor Catalyst, 
-                       ShortcutsRunningUITester, ShortcutsUI, ShortcutsViewService, 
-                       ShortcutsWidgetExtension, SystemActionConfigurationExtension, 
-                       WidgetConfigurationExtension, WorkflowEditor, WorkflowEditorTests, 
-                       WorkflowUI, WorkflowUITests, arckive2 ]
+    clients:         [ ActionKitUI, AddShortcutExtension, AppIntentsTestHarness-iOS, 
+                       AppIntentsTestHarness-macOS, AutomationNotificationContent, 
+                       CatalystContentExtension, EditorSnapshotTests, FocusConfigurationExtension, 
+                       FocusConfigurationXPCServiceMac, HomeUI, QuickLookExtension, 
+                       Shortcut Tester, ShortcutDroplet, Shortcuts, Shortcuts Catalyst, 
+                       Shortcuts Events, ShortcutsActionExtension, ShortcutsAppTests, 
+                       ShortcutsEditor, ShortcutsEditor Catalyst, ShortcutsRunningUITester, 
+                       ShortcutsUI, ShortcutsViewService, ShortcutsWidgetExtension, 
+                       SystemActionConfigurationExtension, WidgetConfigurationExtension, 
+                       WorkflowEditor, WorkflowEditorTests, WorkflowUI, WorkflowUITests, 
+                       arckive2 ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s14AttachmentType14WorkflowUICore22AttributedTextEditablePTl', 
@@ -328,6 +329,8 @@ exports:
                        '_$s14WorkflowUICore17OrderedDictionaryV13orderedValuesSayq_GvpMV', 
                        '_$s14WorkflowUICore17OrderedDictionaryV17dictionaryLiteralACyxq_Gx_q_td_tcfC', 
                        '_$s14WorkflowUICore17OrderedDictionaryV4dictSDyxq_Gvg', '_$s14WorkflowUICore17OrderedDictionaryV4dictSDyxq_GvpMV', 
+                       '_$s14WorkflowUICore17OrderedDictionaryV4sort2byySbx_q_t_x_q_ttKXE_tKF', 
+                       '_$s14WorkflowUICore17OrderedDictionaryV6sorted2byACyxq_GSbx_q_t_x_q_ttKXE_tKF', 
                        '_$s14WorkflowUICore17OrderedDictionaryV6valuesSayq_Gvg', 
                        '_$s14WorkflowUICore17OrderedDictionaryV6valuesSayq_GvpMV', 
                        '_$s14WorkflowUICore17OrderedDictionaryV8endIndexSivg', '_$s14WorkflowUICore17OrderedDictionaryV8endIndexSivpMV', 

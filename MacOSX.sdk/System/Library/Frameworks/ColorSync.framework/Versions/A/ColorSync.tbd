@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync'
-current-version: 3764
+current-version: 3770.1.4
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -35,10 +35,11 @@ exports:
                        _ColorSyncProfileCopyLocalizedDescriptionString, _ColorSyncProfileCopyLocalizedStringDictionary, 
                        _ColorSyncProfileCopyTag, _ColorSyncProfileCopyTagSignatures, 
                        _ColorSyncProfileCreate, _ColorSyncProfileCreateCopyWithFlexGTC, 
-                       _ColorSyncProfileCreateLink, _ColorSyncProfileCreateMutable, 
-                       _ColorSyncProfileCreateMutableCopy, _ColorSyncProfileCreateSanitizedCopy, 
-                       _ColorSyncProfileCreateWithName, _ColorSyncProfileCreateWithURL, 
-                       _ColorSyncProfileGetCICPInfo, _ColorSyncProfileGetData, _ColorSyncProfileGetLuminanceCoefficients, 
+                       _ColorSyncProfileCreateCopyWithLUTBasedLumaScaling, _ColorSyncProfileCreateLink, 
+                       _ColorSyncProfileCreateMutable, _ColorSyncProfileCreateMutableCopy, 
+                       _ColorSyncProfileCreateSanitizedCopy, _ColorSyncProfileCreateWithName, 
+                       _ColorSyncProfileCreateWithURL, _ColorSyncProfileGetCICPInfo, 
+                       _ColorSyncProfileGetData, _ColorSyncProfileGetLuminanceCoefficients, 
                        _ColorSyncProfileGetMD5, _ColorSyncProfileGetRGBtoYCCMatrix, 
                        _ColorSyncProfileGetTypeID, _ColorSyncProfileGetURL, _ColorSyncProfileGetYCCtoRGBMatrix, 
                        _ColorSyncProfileIsHLGBased, _ColorSyncProfileIsMatrixBased, 
@@ -54,7 +55,8 @@ exports:
                        _ColorSyncTRCGetProperties, _ColorSyncTRCGetTypeID, _ColorSyncTransformConvert, 
                        _ColorSyncTransformCopyProperty, _ColorSyncTransformCreate, 
                        _ColorSyncTransformCreateWithName, _ColorSyncTransformDumpStepsToFile, 
-                       _ColorSyncTransformGetProfileSequence, _ColorSyncTransformGetTypeID, 
+                       _ColorSyncTransformGetDstComponentCount, _ColorSyncTransformGetProfileSequence, 
+                       _ColorSyncTransformGetSrcComponentCount, _ColorSyncTransformGetTypeID, 
                        _ColorSyncTransformIterate, _ColorSyncTransformSetProperty, 
                        _ColorSyncTransformShowSteps, _ColorSyncVerifyAdobeRGB, _ColorSyncVerifyAdobeRGBData, 
                        _ColorSyncVerifyCoreVideo709, _ColorSyncVerifyCoreVideo709Data, 

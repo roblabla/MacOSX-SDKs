@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Planks.framework/Versions/A/Planks'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s14NeuralNetworks10ScalarTypeO6PlanksE05fieldD0ACSgAD05FieldD0O_tcfC', 
                        '_$s14NeuralNetworks10ScalarTypeO6PlanksE11descriptionSSvg', 
                        '_$s14NeuralNetworks10ScalarTypeO6PlanksE11descriptionSSvpMV', 
@@ -301,7 +299,7 @@ exports:
                        '_$ss6UInt32V6PlanksE9fieldTypeAC05FieldD0OvgZ', '_$ss6UInt64V6Planks20FieldTypeConvertibleACMc', 
                        '_$ss6UInt64V6Planks20FieldTypeConvertibleACWP', '_$ss6UInt64V6PlanksE9fieldTypeAC05FieldD0OvgZ', 
                        _PlanksVersionNumber, _PlanksVersionString ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ '_$ss7Float16V6Planks20FieldTypeConvertibleACMc', '_$ss7Float16V6Planks20FieldTypeConvertibleACWP', 
                        '_$ss7Float16V6PlanksE9fieldTypeAC05FieldD0OvgZ' ]
 ...

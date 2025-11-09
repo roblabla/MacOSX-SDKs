@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
     The system's recommended continuous zoom control for `-[AVCaptureDevice videoZoomFactor]`.
  
  @discussion
-    `AVCaptureSystemZoomSlider` uses the range specified by the `systemRecommendedZoomRange` on the `activeFormat` from the `AVCaptureDevice` specified during initialization. As the device's `activeFormat` changes, the slider updates its range with the new format's `systemRecommendedZoomRange`.
+    `AVCaptureSystemZoomSlider` uses the range specified by the `systemRecommendedVideoZoomRange` on the `activeFormat` from the `AVCaptureDevice` specified during initialization. As the device's `activeFormat` changes, the slider updates its range with the new format's `systemRecommendedVideoZoomRange`.
  
     Controls may be added to an `AVCaptureSession` using `-[AVCaptureSession addControl:]`.
  */

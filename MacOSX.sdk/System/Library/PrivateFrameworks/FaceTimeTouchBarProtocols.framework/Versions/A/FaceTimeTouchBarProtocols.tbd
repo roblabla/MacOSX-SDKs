@@ -6,6 +6,8 @@ install-name:    '/System/Library/PrivateFrameworks/FaceTimeTouchBarProtocols.fr
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _FaceTimeTouchBarProtocolsVersionNumber, _FaceTimeTouchBarProtocolsVersionString ]
-    objc-classes:    [ DFRSelectedItem ]
+    symbols:         [ _DFRDataKeyEmail, _DFRDataKeyMessage, _DFRDataKeyReminderTime, 
+                       _DFRDataKeySelectedItem, _FaceTimeTouchBarProtocolsVersionNumber, 
+                       _FaceTimeTouchBarProtocolsVersionString ]
+    objc-classes:    [ DFRSelectedItem, DFRViewModel, FTMutableRecentsItem, FTRecentsItem ]
 ...

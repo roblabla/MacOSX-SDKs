@@ -8,6 +8,7 @@
 
 
 #import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKSample.h>
 
 @class HKDevice;
@@ -27,7 +28,9 @@ typedef NS_ENUM(NSUInteger, HKVisionPrescriptionType) {
  @class         HKVisionPrescription
  @abstract      HKSample subclass representing a vision prescription
  */
-HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
 @interface HKVisionPrescription : HKSample <NSSecureCoding, NSCopying>
 
 /*!
