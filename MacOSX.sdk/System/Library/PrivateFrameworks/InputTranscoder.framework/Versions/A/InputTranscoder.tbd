@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           54C13A1C-479D-3A38-99B5-307BBA0E2D77
+    value:           8B485B26-0EF1-39A5-9405-16FFB0CA8F0E
   - target:          x86_64-maccatalyst
-    value:           54C13A1C-479D-3A38-99B5-307BBA0E2D77
+    value:           8B485B26-0EF1-39A5-9405-16FFB0CA8F0E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           893ED608-572A-30BB-9A57-07DFB49EE368
+    value:           A617EDE0-7C4B-308C-82A3-9AF24E8AD8C9
   - target:          arm64e-maccatalyst
-    value:           893ED608-572A-30BB-9A57-07DFB49EE368
+    value:           A617EDE0-7C4B-308C-82A3-9AF24E8AD8C9
 install-name:    '/System/Library/PrivateFrameworks/InputTranscoder.framework/Versions/A/InputTranscoder'
-current-version: 83.2
+current-version: 92
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ITCandidateEnumerateTokenIDs, _ITCandidateFoundOnlyInDynamicLexicon, 
                        _ITCandidateGetScore, _ITCandidateGetSources, _ITCandidateGetString, 
                        _ITCandidateGetStrokedPath, _ITCandidateGetUnshiftMask, _ITCandidateIsCompletion, 
@@ -29,7 +29,8 @@ exports:
                        _ITKeyCandidateGetScore, _ITKeyInfoNull, _ITTouchTranscoderAddLanguageModelWithOptions, 
                        _ITTouchTranscoderAddLexicon, _ITTouchTranscoderAddLexiconWithOptions, 
                        _ITTouchTranscoderClearNeuralNetworkBuffer, _ITTouchTranscoderCreateSession, 
-                       _ITTouchTranscoderCreateWithKeyboardLayout, _ITTouchTranscoderSessionAddEvent, 
+                       _ITTouchTranscoderCreateWithKeyboardLayout, _ITTouchTranscoderProvidesCompletionCandidates, 
+                       _ITTouchTranscoderRemoveLexicon, _ITTouchTranscoderSessionAddEvent, 
                        _ITTouchTranscoderSessionAddEventWithTouchKeyInfo, _ITTouchTranscoderSessionEnumerateCandidates, 
                        _ITTouchTranscoderSessionEnumerateCandidatesWithOptions, _ITTouchTranscoderSessionEnumerateKeyCandidatesForLastTouch, 
                        _ITTouchTranscoderSessionSetLinguisticContext, _ITTouchTranscoderSessionSetPrefix, 

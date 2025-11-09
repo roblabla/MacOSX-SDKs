@@ -15,12 +15,12 @@
 #import <UIKit/UIKitDefines.h>
 
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIImage;
 @class UITraitCollection;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0))
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_SENDABLE
 @interface UIColor : NSObject <NSSecureCoding, NSCopying>
 
 // Convenience methods for creating colors
@@ -125,7 +125,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIColor.h>

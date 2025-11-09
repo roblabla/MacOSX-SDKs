@@ -207,7 +207,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 /*!
  @method waitForFence:
  @abstract Prevent further GPU work until the fence is reached.
- @discussion The fence is evaluated at kernel submision to maintain global order and prevent deadlock.
+ @discussion The fence is evaluated at kernel submission to maintain global order and prevent deadlock.
  Drivers may delay fence updates until the end of the encoder. Drivers may also wait on fences at the beginning of an encoder. It is therefore illegal to wait on a fence after it has been updated in the same encoder.
  */
 - (void)waitForFence:(id <MTLFence>)fence API_AVAILABLE(macos(10.13), ios(10.0));

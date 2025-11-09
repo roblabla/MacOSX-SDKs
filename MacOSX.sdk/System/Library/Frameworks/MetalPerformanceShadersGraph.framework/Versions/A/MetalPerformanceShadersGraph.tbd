@@ -4,33 +4,33 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D1014C5F-09CF-3481-9BB0-2DA363B8C87C
+    value:           123D0F1C-D24D-3032-AC88-4EC15DF9A4DA
   - target:          x86_64-maccatalyst
-    value:           D1014C5F-09CF-3481-9BB0-2DA363B8C87C
+    value:           123D0F1C-D24D-3032-AC88-4EC15DF9A4DA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BAD250CB-1520-30D9-AE10-1486A195E8A6
+    value:           C2C9A4DF-91CA-31E0-B20F-62FC91ACEFB7
   - target:          arm64e-maccatalyst
-    value:           BAD250CB-1520-30D9-AE10-1486A195E8A6
+    value:           C2C9A4DF-91CA-31E0-B20F-62FC91ACEFB7
 install-name:    '/System/Library/Frameworks/MetalPerformanceShadersGraph.framework/Versions/A/MetalPerformanceShadersGraph'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MPSGraphDeviceTypeANE, _MPSGraphDeviceTypeCPU ]
     objc-classes:    [ MPSGraph, MPSGraphAdamOptimizer, MPSGraphCompilationDescriptor, 
                        MPSGraphConvolution2DOpDescriptor, MPSGraphCreateSparseOpDescriptor, 
                        MPSGraphCropResizeOpDescriptor, MPSGraphDepthwiseConvolution2DOpDescriptor, 
                        MPSGraphDepthwiseConvolution3DOpDescriptor, MPSGraphDevice, 
                        MPSGraphExecutable, MPSGraphExecutableDescriptor, MPSGraphExecutableExecutionDescriptor, 
-                       MPSGraphExecutionDescriptor, MPSGraphLSTMDescriptor, MPSGraphList, 
-                       MPSGraphListData, MPSGraphListType, MPSGraphOperation, MPSGraphOptimizer, 
-                       MPSGraphPooling2DOpDescriptor, MPSGraphPooling4DOpDescriptor, 
-                       MPSGraphPruningDescriptor, MPSGraphRandomOpDescriptor, MPSGraphShapedType, 
-                       MPSGraphSingleGateRNNDescriptor, MPSGraphStencilOpDescriptor, 
-                       MPSGraphStochasticGradientDescentOptimizer, MPSGraphTensor, 
-                       MPSGraphTensorData, MPSGraphType, MPSGraphVariableInitializer, 
+                       MPSGraphExecutionDescriptor, MPSGraphGRUDescriptor, MPSGraphLSTMDescriptor, 
+                       MPSGraphList, MPSGraphListData, MPSGraphListType, MPSGraphMatrixDecompositionDescriptor, 
+                       MPSGraphOperation, MPSGraphOptimizer, MPSGraphPooling2DOpDescriptor, 
+                       MPSGraphPooling4DOpDescriptor, MPSGraphPruningDescriptor, 
+                       MPSGraphRandomOpDescriptor, MPSGraphShapedType, MPSGraphSingleGateRNNDescriptor, 
+                       MPSGraphStencilOpDescriptor, MPSGraphStochasticGradientDescentOptimizer, 
+                       MPSGraphTensor, MPSGraphTensorData, MPSGraphType, MPSGraphVariableInitializer, 
                        MPSGraphVariableOp ]
 ...

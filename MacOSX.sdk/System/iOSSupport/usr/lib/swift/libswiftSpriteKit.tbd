@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           13B3137D-29EF-3CA5-A400-1C17408DCEF5
+    value:           FEA22AEA-19B2-30C5-98C1-16015EF68C7F
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           46E2727E-B557-397C-9B81-01A65062EF7E
+    value:           68C2B690-D94F-39DA-9EFB-C4245D6BACD4
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftSpriteKit.dylib'
 current-version: 1.2
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$sSo11SKShapeNodeC9SpriteKitE25customPlaygroundQuickLooks01_fgH0Ovg', 
                        '_$sSo11SKShapeNodeC9SpriteKitE25customPlaygroundQuickLooks01_fgH0OvpMV', 
                        '_$sSo11SKShapeNodeCs30_CustomPlaygroundQuickLookable9SpriteKitMc', 

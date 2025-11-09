@@ -89,6 +89,12 @@ API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  */
 @property (copy, nullable) NSString *serverName API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
+/*!
+ * @property identityReference
+ * @discussion The optional certificate identity keychain reference to use as a TLS client certificate.
+ */
+@property (copy, nullable) NSData *identityReference API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+
 @end
 
 API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
@@ -99,6 +105,12 @@ API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @discussion The URL to which to make DNS-over-HTTPS requests. The format should be an HTTPS URL with the path indicating the location of the DNS-over-HTTPS server, such as: "https://dnsserver.example.net/dns-query".
  */
 @property (copy, nullable) NSURL *serverURL API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+
+/*!
+ * @property identityReference
+ * @discussion The optional certificate identity keychain reference to use as a TLS client certificate.
+ */
+@property (copy, nullable) NSData *identityReference API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 @end
 

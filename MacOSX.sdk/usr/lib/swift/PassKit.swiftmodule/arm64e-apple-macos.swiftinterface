@@ -1,11 +1,12 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPassKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PassKit
-// swift-module-flags-ignorable: -user-module-version 1504.5.22.3
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-macos13.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPassKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PassKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1505.2.11.4
 @_exported import PassKit
 import Swift
 import _Concurrency
-@available(iOS 15.0, watchOS 8.0, *)
+import _StringProcessing
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, *)
 extension PassKit.PKStoredValuePassProperties {
   @objc @_alwaysEmitIntoClient dynamic public var isBlocked: Swift.Bool {
     @objc get {
@@ -15,8 +16,9 @@ extension PassKit.PKStoredValuePassProperties {
     }
   }
 }
-@available(iOS 11.3, watchOS 4.3, *)
+@available(macOS 11.0, iOS 11.3, watchOS 4.3, *)
 extension PassKit.PKTransitPassProperties {
+  @available(macOS 11.3, iOS 14.5, watchOS 7.5, *)
   @_alwaysEmitIntoClient @objc override dynamic public var isBlocked: Swift.Bool {
     @objc get {
         // Because this computed property is @_alwaysEmitIntoClient, changes to it will
@@ -35,7 +37,7 @@ extension PassKit.PKSuicaPassProperties {
     }
   }
 }
-@available(iOS 15.0, watchOS 8.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, *)
 extension PassKit.PKStoredValuePassBalance {
   public static func == (lhs: PassKit.PKStoredValuePassBalance, rhs: PassKit.PKStoredValuePassBalance) -> Swift.Bool
   public var amount: Foundation.Decimal {

@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F6B54E5D-32C9-3EC0-8BC2-84961F981013
+    value:           604A0D09-5102-3D02-A699-C47F2C297C3D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9FC20234-4EE5-31F9-BA90-E1D2D77BA442
+    value:           695D1460-671F-3262-BDC0-A16E7E421174
 install-name:    '/usr/lib/libnetsnmptrapd.25.dylib'
 current-version: 26.2
 compatibility-version: 26
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SyslogTrap, _axforward_handler, _command_handler, _dropauth, 
                        _exec_format1, _exec_format2, _forward_handler, _free_trap1_fmt, 
                        _free_trap2_fmt, _init_netsnmp_trapd_auth, _netsnmp_add_default_traphandler, 

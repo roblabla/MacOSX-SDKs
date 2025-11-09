@@ -7,19 +7,23 @@
 
 #import <ShazamKit/SHMediaItem.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// How far in seconds is this match from the start of the reference audio
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 SH_EXPORT SHMediaItemProperty const SHMediaItemMatchOffset;
 
 /// How much the match differs in frequency from reference material
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 SH_EXPORT SHMediaItemProperty const SHMediaItemFrequencySkew;
 
 /// @brief @c SHMatchedMediaItem represents metadata that has been matched against a @c SHCatalog
 /// @discussion Extra information is presented that can only be generated from a match. The properties provided here
 /// that are not available on @c SHMediaItem are ephemeral and can differ each time there is a match of the @c SHSignature that this
 /// object represents
-SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
+///
+/// @note @c SHMatchedMediaItem is not intended to be subclassed
+SH_EXPORT NS_SWIFT_SENDABLE API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface SHMatchedMediaItem : SHMediaItem <NSSecureCoding>
 
 /// The frequency difference between the reference and sample audio
@@ -36,4 +40,4 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -11,7 +11,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIDocumentPickerViewController.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSUInteger, UIDocumentMenuOrder) {
     UIDocumentMenuOrderFirst,
@@ -42,7 +42,7 @@ API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIDocumentMenuViewController.h>

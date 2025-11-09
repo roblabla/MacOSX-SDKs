@@ -13,7 +13,7 @@
 #import <CoreGraphics/CGGeometry.h>
 #import <AppKit/NSTextSelection.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class NSTextSelection;
 @class NSTextRange;
@@ -141,7 +141,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 // Returns the text layout orientation at location. If not implemented, NSTextSelectionNavigation assumes it is NSTextSelectionNavigationLayoutOrientationHorizontal.
 - (NSTextSelectionNavigationLayoutOrientation)textLayoutOrientationAtLocation:(id <NSTextLocation>)location;
 @end
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 #endif // !TARGET_OS_IPHONE
 #else
 #import <UIFoundation/NSTextSelectionNavigation.h>

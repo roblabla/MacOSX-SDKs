@@ -10,7 +10,8 @@
 #import <UIKit/UIKitDefines.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UIScreenMode : NSObject 
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_SENDABLE
+@interface UIScreenMode : NSObject
 
 @property(readonly,nonatomic) CGSize  size;             // The width and height in pixels
 @property(readonly,nonatomic) CGFloat pixelAspectRatio; // The aspect ratio of a single pixel. The ratio is defined as X/Y.

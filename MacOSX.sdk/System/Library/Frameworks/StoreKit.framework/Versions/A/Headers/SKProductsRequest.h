@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 // request information about products for your application
-SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) @interface SKProductsRequest : SKRequest {
+SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) NS_SWIFT_NONSENDABLE @interface SKProductsRequest : SKRequest {
 @private
     id _productsRequestInternal;
 }
@@ -34,7 +34,7 @@ SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) @interface SK
 @end
 
 
-SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) @interface SKProductsResponse : NSObject {
+SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) NS_SWIFT_SENDABLE @interface SKProductsResponse : NSObject {
 @private
     id _internal;
 }

@@ -28,7 +28,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @end
 
 
-API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
+API_DEPRECATED_WITH_REPLACEMENT("VNDetectFaceRectanglesRequestRevision2", macos(10.14, 13.0), ios(12.0, 16.0), tvos(12.0, 16.0))
 static const NSUInteger VNDetectFaceRectanglesRequestRevision1 = 1;
 
 /*!

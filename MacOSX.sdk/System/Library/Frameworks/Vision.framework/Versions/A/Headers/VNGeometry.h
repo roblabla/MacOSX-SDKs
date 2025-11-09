@@ -250,7 +250,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 
 /*!
  @brief The total number of child contours in the target contour.
- @discussion The use of this property is prefered over childContours.count due to the cost of building the child objects.
+ @discussion The use of this property is preferred over childContours.count due to the cost of building the child objects.
  */
 @property (readonly) NSInteger childContourCount;
 
@@ -265,7 +265,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  @brief Returns a VNContour object that is a child of this VNContour at the specified index.
  @param childContourIndex The index into the childContours array.
  @param error The error returned if the child contour cannot be provided.
- @return The VNContour object at the spefiied index path, or nil of a failure occurs.
+ @return The VNContour object at the specified index path, or nil of a failure occurs.
  */
 - (nullable VNContour *) childContourAtIndex:(NSUInteger)childContourIndex error:(NSError **)error;
 
@@ -287,7 +287,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @property (readonly) CGPathRef normalizedPath NS_RETURNS_INNER_POINTER;
 
 /*!
- @brief The aspect ratio of the contour from the original image aspect ration expressed as width/height
+ @brief The aspect ratio of the contour from the original image aspect ratio expressed as width/height
  */
 @property (readonly) float aspectRatio;
 
@@ -295,7 +295,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 /*!
  @brief Simplifies the contour's collection of points into a polygon using the Ramer Douglas Peucker Algorithm.
  @discussion See <https://en.wikipedia.org/wiki/Ramer–Douglas–Peucker_algorithm>
- @param epsilon Points that have a perpendicular distance to the line segment they are on that greather than epsilon are kept, others are eliminated.
+ @param epsilon Points that have a perpendicular distance to the line segment they are on which are greater than epsilon are kept, others are eliminated.
  @param error The error returned if a simplified contour cannot be created.
  @return A new VNContour object with a simplified polygon consisting of a subset of the points that defined the original VNContour.
  */

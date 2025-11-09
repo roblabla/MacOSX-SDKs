@@ -6,7 +6,7 @@
 
 @class NSArray<ObjectType>;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*
  * The fast enumeration protocol NSFastEnumeration is adopted and
@@ -43,4 +43,4 @@ typedef struct {
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

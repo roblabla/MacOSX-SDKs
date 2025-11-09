@@ -12,7 +12,7 @@
 @class NSArray<ObjectType>;
 @class NSData;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*!
    @const NSURLProtectionSpaceHTTP
@@ -111,7 +111,7 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust API_AVAI
     @class NSURLProtectionSpace
     @discussion This class represents a protection space requiring authentication.
 */
-
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSURLProtectionSpace : NSObject <NSSecureCoding, NSCopying>
 {
@@ -124,7 +124,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
     @abstract Initialize a protection space representing an origin server, or a realm on one
     @param host The hostname of the server
     @param port The port for the server
-    @param protocol The sprotocol for this server - e.g. "http", "ftp", "https"
+    @param protocol The protocol for this server - e.g. "http", "ftp", "https"
     @param realm A string indicating a protocol-specific subdivision
     of a single host. For http and https, this maps to the realm
     string in http authentication challenges. For many other protocols
@@ -230,4 +230,4 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -41,6 +41,7 @@ This call is overriden by a filter to provide a view for the viewForUIConfigurat
 
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
+#import <CoreImage/CoreImage.h>
 #import <ImageKit/ImageKitBase.h>
 #import <ImageKit/IKFilterUIView.h>
 

@@ -10,7 +10,7 @@
 #import <UIKit/UIDragPreview.h>
 #import <UIKit/UITargetedDragPreview.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* Methods to create previews for dragging a URL.
  * The previews show a textual representation of the URL, and may not
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UITextDragURLPreviews.h>

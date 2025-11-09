@@ -1,4 +1,4 @@
-#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<UIKitCore/UIPrintServiceExtension.h>)
+#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<PrintKitUI/UIPrintServiceExtension.h>)
 //
 //  UIPrintServiceExtension.h
 //  UIKit
@@ -34,5 +34,5 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 NS_ASSUME_NONNULL_END
 
 #else
-#import <UIKitCore/UIPrintServiceExtension.h>
+#import <PrintKitUI/UIPrintServiceExtension.h>
 #endif

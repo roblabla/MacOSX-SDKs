@@ -1,10 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target x86_64-apple-ios15.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Photos
-// swift-module-flags-ignorable: -user-module-version 441.0.120
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target x86_64-apple-ios16.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Photos
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 511.0.170
 @_exported import Photos
 import Swift
 import _Concurrency
+import _StringProcessing
 @available(iOS 15, tvOS 15, macOS 12, *)
 extension Photos.PHPhotoLibrary {
   public func cloudIdentifierMappings(forLocalIdentifiers localIdentifiers: [Swift.String]) -> [Swift.String : Swift.Result<Photos.PHCloudIdentifier, Swift.Error>]
@@ -23,4 +24,15 @@ extension Photos.PHChange {
   @_alwaysEmitIntoClient public func changeDetails(for fetchResult: Photos.PHFetchResult<Swift.AnyObject>) -> Photos.PHFetchResultChangeDetails<Photos.PHObject>? {
     return self.__changeDetails(for: fetchResult)
   }
+}
+@available(iOS 16, macOS 13, tvOS 16, *)
+extension Photos.PHPersistentChangeFetchResult : Swift.Sequence {
+  final public class Iterator : Swift.IteratorProtocol {
+    public typealias Element = Photos.PHPersistentChange
+    public init(fetchResult: Photos.PHPersistentChangeFetchResult)
+    final public func next() -> Photos.PHPersistentChangeFetchResult.Iterator.Element?
+    @objc deinit
+  }
+  public func makeIterator() -> Photos.PHPersistentChangeFetchResult.Iterator
+  public typealias Element = Photos.PHPersistentChangeFetchResult.Iterator.Element
 }

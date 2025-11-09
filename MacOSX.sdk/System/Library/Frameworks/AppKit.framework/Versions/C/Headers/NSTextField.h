@@ -107,11 +107,11 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @protocol NSTextFieldDelegate <NSControlTextEditingDelegate>
 @optional
-- (nullable NSArray *)textField:(NSTextField *)textField textView:(NSTextView *)textView candidatesForSelectedRange:(NSRange)selectedRange API_AVAILABLE(macos(10.12.2));
+- (nullable NSArray *)textField:(NSTextField *)textField textView:(NSTextView *)textView candidatesForSelectedRange:(NSRange)selectedRange NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2));
 
-- (NSArray<NSTextCheckingResult *> *)textField:(NSTextField *)textField textView:(NSTextView *)textView candidates:(NSArray<NSTextCheckingResult *> *)candidates forSelectedRange:(NSRange)selectedRange API_AVAILABLE(macos(10.12.2));
+- (NSArray<NSTextCheckingResult *> *)textField:(NSTextField *)textField textView:(NSTextView *)textView candidates:(NSArray<NSTextCheckingResult *> *)candidates forSelectedRange:(NSRange)selectedRange NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2));
 
-- (BOOL)textField:(NSTextField *)textField textView:(NSTextView *)textView shouldSelectCandidateAtIndex:(NSUInteger)index API_AVAILABLE(macos(10.12.2));
+- (BOOL)textField:(NSTextField *)textField textView:(NSTextView *)textView shouldSelectCandidateAtIndex:(NSUInteger)index NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2));
 @end
 
 @interface NSTextField(NSDeprecated)

@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           559E9458-408B-34EA-91DF-8EDBBCB80C48
+    value:           D94BF42F-B95D-386A-812D-D21396EBA18A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C6D32CBF-1CB7-345B-9178-EC086A5C5FB4
+    value:           0BD6E8E6-CC43-30F3-9AA9-92EFB6F8EE54
 install-name:    '/System/Library/Perl/5.30/darwin-thread-multi-2level/CORE/libperl.dylib'
 current-version: 5.30.3
 compatibility-version: 5.30
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ASCII_TO_NEED, _NATIVE_TO_NEED, _PL_AboveLatin1, _PL_Assigned_invlist, 
                        _PL_CCC_non0_non230, _PL_C_locale_obj, _PL_GCB_invlist, _PL_HasMultiCharFold, 
                        _PL_InBitmap, _PL_InMultiCharFold, _PL_LB_invlist, _PL_Latin1, 

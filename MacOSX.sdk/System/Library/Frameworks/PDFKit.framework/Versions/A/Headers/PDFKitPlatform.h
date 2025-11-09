@@ -64,6 +64,7 @@
 #define PDFKitPlatformButtonCell                                NSButtonCell
 #define PDFKitPlatformAccessibilityElement                      NSAccessibilityElement
 #define PDFKitResponder                                         NSResponder
+#define PDFKitTextContentType                                   NSTextContentType
 
 // Geometry types
 #define PDFPoint                                                NSPoint
@@ -76,6 +77,7 @@
 #define PDFSizeZero                                             NSZeroSize
 #define PDFRectZero                                             NSZeroRect
 #define PDFEdgeInsetsZero                                       NSEdgeInsetsZero
+#define PDFTrackingRunLoopMode                                  NSEventTrackingRunLoopMode
 
 #elif (TARGET_OS_SIMULATOR || TARGET_OS_IPHONE || TARGET_OS_MACCATALYST)
 
@@ -111,6 +113,7 @@
 #define PDFKitPlatformButtonCell                                UICollectionViewCell
 #define PDFKitPlatformAccessibilityElement                      UIAccessibilityElement
 #define PDFKitResponder                                         UIResponder
+#define PDFKitTextContentType                                   UITextContentType
 
 // Geometry types
 #define PDFPoint                                                CGPoint
@@ -123,6 +126,7 @@
 #define PDFSizeZero                                             CGSizeZero
 #define PDFRectZero                                             CGRectZero
 #define PDFEdgeInsetsZero                                       UIEdgeInsetsZero
+#define PDFTrackingRunLoopMode                             UITrackingRunLoopMode
 
 #else
 

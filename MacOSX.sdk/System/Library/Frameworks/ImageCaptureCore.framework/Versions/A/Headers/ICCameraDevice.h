@@ -226,7 +226,7 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
     length:(off_t)length
     readDelegate:(id)readDelegate
     didReadDataSelector:(SEL)selector
-    contextInfo:(void* _Nullable) contextInfo IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+    contextInfo:(void* _Nullable) contextInfo IC_AVAILABLE(macos(10.4),ios(15.2));
 
 /*!
   @method requestDownloadFile:options:downloadDelegate:didDownloadSelector:contextInfo:
@@ -315,34 +315,34 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
     options:(NSDictionary<ICUploadOption, id>*)options
     uploadDelegate:(id)uploadDelegate
     didUploadSelector:(SEL)selector
-    contextInfo:(void* _Nullable) contextInfo IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+    contextInfo:(void* _Nullable) contextInfo IC_DEPRECATED("Sandbox restrictions prohibit writing directly to device hardware", macos(10.4,14.0)) IC_UNAVAILABLE(ios);
 
 #pragma mark - Camera tethering
 /*!
   @property tetheredCaptureEnabled
-  @abstract This property is set to YES when tethered capture is enabled on the device.
-  @discussion Use 'requestEnableTethering' and 'requestDisableTethering' to enable or disable tethered capture on the device.
+  @abstract This property is always set to YES when the device has the capability 'ICCameraDeviceCanTakePicture'
+  @discussion requestEnableTethering/requestDisableTethering is no longer required to setup and destroy the standard
+  take picture functionality of supported cameras.
  */
 @property (nonatomic, readonly) BOOL tetheredCaptureEnabled IC_AVAILABLE(macos(10.4));
+
+/*!
+  @method requestTakePicture
+  @abstract Capture a new image using the camera, the camera capabilities include 'ICCameraDeviceCanTakePicture'.
+ */
+- (void)requestTakePicture IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
 
 /*!
   @method requestEnableTethering
   @abstract Send this message to enable tethered capture on the camera device if the camera has the 'ICCameraDeviceCanTakePicture' capability.
  */
-- (void)requestEnableTethering IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+- (void)requestEnableTethering IC_DEPRECATED("Third party cameras that support the standard take picture command will have the capability enabled by default. This call will have no effect", macos(10.4,14.0)) IC_UNAVAILABLE(ios);
 
 /*!
   @method requestDisableTethering
   @abstract Send this message to disable tethered capture on the camera device if the camera has the 'ICCameraDeviceCanTakePicture' capability and if your process has already sent a 'requestEnableTethering' to it.
  */
-- (void)requestDisableTethering IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
-
-/*!
-  @method requestTakePicture
-  @abstract Capture a new image using the camera, the camera capabilities include 'ICCameraDeviceCanTakePicture'.
-  @discussion You MUST send 'requestEnableTethering' message to the camera before sending 'requestTakePicture' message.
- */
-- (void)requestTakePicture IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+- (void)requestDisableTethering IC_DEPRECATED("Third party cameras that support the standard take picture command will have the capability enabled by default. This call will have no effect", macos(10.4,14.0)) IC_UNAVAILABLE(ios);
 
 #pragma mark - PTP Interaction
 
@@ -350,7 +350,7 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
   @property ptpEventHandler
   @abstract As an alternative to setting up an object to handle PTP event packets, a handler can be set.  The handler will always be called in place of the delegate if non-nil.  If the handler is not present, the delegate will be called if present. It is guaranteed only one of the methods will be called if both are implemented.
  */
-@property (nonatomic, copy) void (^ptpEventHandler)(NSData* eventData) IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(13.0));
+@property (nonatomic, copy) void (^ptpEventHandler)(NSData* eventData) IC_AVAILABLE(macos(12.0), ios(13.0));
 
 /*!
   @method requestSendPTPCommand:outData:sendCommandDelegate:sendCommandDelegate:contextInfo:
@@ -361,7 +361,7 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
     outData:(NSData* _Nullable)data
     sendCommandDelegate:(id)sendCommandDelegate
     didSendCommandSelector:(SEL)selector
-    contextInfo:(void* _Nullable) contextInfo IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+    contextInfo:(void* _Nullable) contextInfo IC_AVAILABLE(macos(10.4),ios(15.2));
 
 /*!
   @method requestSendPTPCommand:outData:completion

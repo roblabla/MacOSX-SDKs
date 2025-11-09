@@ -69,9 +69,12 @@ enum {
   kLocalDomain                  = -32765, /* All users of a single machine have access to these resources.*/
   kNetworkDomain                = -32764, /* All users configured to use a common network server has access to these resources.*/
   kUserDomain                   = -32763, /* Read/write. Resources that are private to the user.*/
-  kClassicDomain                = -32762, /* Domain referring to the currently configured Classic System Folder.  Not supported in Mac OS X Leopard and later.*/
   kFolderManagerLastDomain      = -32760
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
+
+enum {
+  kClassicDomain                = -32762, /* Domain referring to the currently configured Classic System Folder.  Not supported in Mac OS X Leopard and later.*/
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /*
    The ID of the last domain in the above list, used by the Folder Manager to determine if a given 
@@ -79,12 +82,12 @@ enum {
 */
 enum {
   kLastDomainConstant           = -32760
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kCreateFolder                 = true,
   kDontCreateFolder             = false
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /*
  *  FindFolder()
@@ -329,7 +332,7 @@ enum {
   kUsersFolderType              = 'usrs', /* "Users" folder, usually contains one folder for each user. */
   kCurrentUserFolderType        = 'cusr', /* The folder for the currently logged on user; domain passed in is ignored. */
   kSharedUserDataFolderType     = 'sdat' /* A Shared folder, readable & writeable by all users */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /*
     The following selectors refer specifically to subfolders inside the user's home folder, and should
@@ -342,12 +345,12 @@ enum {
   kMusicDocumentsFolderType     = 0xB5646F63/*'µdoc'*/, /* Refers to the "Music" folder in a users home directory*/
   kInternetSitesFolderType      = 'site', /* Refers to the "Sites" folder in a users home directory*/
   kPublicFolderType             = 'pubb' /* Refers to the "Public" folder in a users home directory*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /*  The following selectors are available on Mac OS X 10.7 and later.*/
 enum {
   kDropBoxFolderType            = 'drop' /* Refers to the "Drop Box" folder inside the user's home directory*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.7,10.8));
 
 enum {
   kSharedLibrariesFolderType    = 0xC46C6962/*'Älib'*/, /* for general shared libs. */
@@ -361,7 +364,7 @@ enum {
   kFolderActionsFolderType      = 'fasf', /* Folder Actions Scripts folder */
   kSpeakableItemsFolderType     = 'spki', /* Speakable Items folder */
   kKeychainFolderType           = 'kchn' /* Keychain folder */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* New Folder Types to accommodate the Mac OS X Folder Manager */
 /* These folder types are not applicable on Mac OS 9.          */
@@ -421,7 +424,7 @@ enum {
   kiMoviePlugInsFolderType      = 'impi', /* Refers to the Plug-ins subfolder of the iMovie Folder*/
   kiMovieSoundEffectsFolderType = 'imse', /* Refers to the Sound Effects subfolder of the iMovie Folder*/
   kDownloadsFolderType          = 'down' /* Refers to the ~/Downloads folder*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kColorSyncProfilesFolderType  = 'prof', /* for ColorSyncª Profiles */
@@ -430,19 +433,19 @@ enum {
   kPrinterDescriptionFolderType = 'ppdf', /* new folder at root of System folder for printer descs. */
   kPrinterDriverFolderType      = 0xC4707264/*'Äprd'*/, /* new folder at root of System folder for printer drivers */
   kScriptingAdditionsFolderType = 0xC4736372/*'Äscr'*/ /* at root of system folder */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kClassicPreferencesFolderType = 'cprf' /* "Classic" folder in ~/Library/ for redirected preference files. */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   kQuickLookFolderType          = 'qlck' /* The QuickLook folder, supported in Mac OS X 10.6 and later. */
-};
+} API_DEPRECATED( "Deprecated", macos(10.6,10.8));
 
 enum {
   kServicesFolderType           = 'svcs' /* The services folder, supported in Mac OS X 10.7 and later. */
-};
+} API_DEPRECATED( "Deprecated", macos(10.7,10.8));
 
 enum {
                                         /*    The following selectors really only make sense when used within the Classic environment on Mac OS X.*/
@@ -506,7 +509,7 @@ enum {
   kLocalesFolderType            = 0xC46C6F63/*'Äloc'*/, /* PKE for Locales folder */
   kFindByContentPluginsFolderType = 'fbcp', /* Find By Content Plug-ins */
   kFindByContentFolderType      = 'fbcf' /* Find by content folder */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /*  These folder types are not supported on Mac OS X at all and should be removed from your source code.*/
 enum {
@@ -514,7 +517,7 @@ enum {
   kTemporaryItemsInUserDomainFolderType = 'temq',
   kCurrentUserRemoteFolderLocation = 'rusf', /* The remote folder for the currently logged on user */
   kCurrentUserRemoteFolderType  = 'rusr' /* The remote folder location for the currently logged on user */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.1));
 
 /*
    These folder types are deprecated in 10.5. The location of developer tools is no longer hard coded to "/Developer/" and 
@@ -525,7 +528,7 @@ enum {
   kDeveloperHelpFolderType      = 'devh', /* Deprecated in 10.5. Contains Developer Help related files*/
   kDeveloperFolderType          = 'devf', /* Deprecated in 10.5. Contains MacOS X Developer Resources*/
   kDeveloperApplicationsFolderType = 'dapp' /* Deprecated in 10.5. Contains Developer Applications*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /* FolderDescFlags values */
 enum {
@@ -537,7 +540,7 @@ enum {
   kFolderCreatedNameLockedBit   = 3,
   kFolderCreatedAdminPrivs      = 0x00000010,
   kFolderCreatedAdminPrivsBit   = 4
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kFolderInUserFolder           = 0x00000020,
@@ -557,7 +560,7 @@ enum {
   kFolderManagerNotCreatedOnRemoteVolumesMask = (1 << kFolderManagerNotCreatedOnRemoteVolumesBit),
   kFolderManagerNewlyCreatedFolderIsLocalizedBit = 12,
   kFolderManagerNewlyCreatedFolderShouldHaveDotLocalizedCreatedWithinMask = (1 << kFolderManagerNewlyCreatedFolderIsLocalizedBit)
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 typedef UInt32                          FolderDescFlags;
 /* FolderClass values */

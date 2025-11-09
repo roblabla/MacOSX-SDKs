@@ -182,6 +182,30 @@ API_AVAILABLE(ios(11.0))
 + (BOOL)supportsFrameSemantics:(ARFrameSemantics)frameSemantics API_AVAILABLE(ios(13.0));
 
 
+/**
+ Returns a pointer to the capture device of the camera that's used for rendering, so developers can adjust capture settings.
+ @discussion May return nil if it is not recommended to modify capture settings, for example if the primary camera is used for tracking.
+ */
+@property (class, nonatomic, nullable, readonly) AVCaptureDevice *configurableCaptureDeviceForPrimaryCamera API_AVAILABLE(ios(16.0));
+
+/**
+ Returns a video format using a 4K resolution from the list of supported video formats.
+ @discussion May return nil if 4K is not supported for this configuration or device.
+ */
+@property (class, nonatomic, nullable, readonly) ARVideoFormat *recommendedVideoFormatFor4KResolution API_AVAILABLE(ios(16.0));
+
+/**
+ Returns a recommended video format that supports capturing high resolution frames with a significantly higher resolution than the streaming camera resolution.
+ @discussion Using this format may consume more power. Other video formats may support capturing high resolution frames as well, albeit at a lower quality or resolution.
+ @see [ARSession captureHighResolutionFrameWithCompletion:]
+ */
+@property (class, nonatomic, nullable, readonly) ARVideoFormat *recommendedVideoFormatForHighResolutionFrameCapturing API_AVAILABLE(ios(16.0));
+
+/**
+ Whether HDR capturing is allowed if the current video format supports it. Defaults to @c NO.
+ */
+@property (nonatomic, assign, readwrite) BOOL videoHDRAllowed API_AVAILABLE(ios(16.0));
+
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -558,7 +582,6 @@ API_AVAILABLE(ios(13.0))
 @end
 
 
-
 /**
  A configuration for running geographical world tracking.
 
@@ -653,7 +676,6 @@ Determines the availability of geo tracking at the given location.
 + (instancetype)new NS_SWIFT_UNAVAILABLE("Use init() instead");
 
 @end
-
 
 
 NS_ASSUME_NONNULL_END

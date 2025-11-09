@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A80AF2B7-5DD0-3E09-83CC-631F22C06AA6
+    value:           ACD4A797-9BBF-3057-86D3-6F188892C74A
   - target:          x86_64-maccatalyst
-    value:           A80AF2B7-5DD0-3E09-83CC-631F22C06AA6
+    value:           ACD4A797-9BBF-3057-86D3-6F188892C74A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C14BC70B-4F34-3C6A-9521-205090815842
+    value:           721412DF-1F21-3B3E-884F-8F1A612EF5C3
   - target:          arm64e-maccatalyst
-    value:           C14BC70B-4F34-3C6A-9521-205090815842
+    value:           721412DF-1F21-3B3E-884F-8F1A612EF5C3
 install-name:    '/System/Library/PrivateFrameworks/CallHistory.framework/Versions/A/CallHistory'
 current-version: 2
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CHCallInteractionsDidChangeDarwinNotification, _CHCallerIdAvailabilityAsString, 
                        _CHHash, _DeserializeTransactions, _HandleInteractionsForDeserializedTransactions, 
                        _createBackgroundTaskAssertion, _createDirectoryAtPath, _createLogDirectoryAtPath, 
@@ -63,8 +63,8 @@ exports:
                        _notifyClientsOfEvent ]
     objc-classes:    [ CHCallInteractionManager, CHConfiguration, CHConfigurationAggregator, 
                        CHContactProvider, CHDelegateController, CHDelegateManager, 
-                       CHDeviceDataSource, CHDeviceObserver, CHHandle, CHLogServer, 
-                       CHLogger, CHManager, CHMigrator, CHPhoneNumber, CHPluginHelper, 
+                       CHDeviceDataSource, CHDeviceObserver, CHHandle, CHLocalization, 
+                       CHLogServer, CHLogger, CHManager, CHPhoneNumber, CHPluginHelper, 
                        CHRecentCall, CHSynchronizable, CHSynchronizedLoggable, CHTransaction, 
                        CHUserConfiguration, CallDBManager, CallDBManagerServer, CallHistoryDBClientHandle, 
                        CallHistoryDBHandle, DBManager, DBMigrationResult, DeserializedTransaction ]

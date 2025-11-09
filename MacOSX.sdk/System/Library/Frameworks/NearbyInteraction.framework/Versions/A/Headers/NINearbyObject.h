@@ -21,6 +21,27 @@ NI_EXPORT float NINearbyObjectDistanceNotAvailable NS_SWIFT_UNAVAILABLE("Use opt
 API_AVAILABLE(ios(14.0), watchos(7.3)) API_UNAVAILABLE(macos, tvos)
 NI_EXPORT simd_float3 NINearbyObjectDirectionNotAvailable NS_SWIFT_UNAVAILABLE("Use optional value semantics");
 
+/** A sentinel value indicating that an angle could not be produced */
+API_AVAILABLE(ios(16.0), watchos(9.0)) API_UNAVAILABLE(macos, tvos)
+NI_EXPORT float NINearbyObjectAngleNotAvailable NS_SWIFT_UNAVAILABLE("Use optional value semantics");
+
+API_AVAILABLE(ios(16.0), watchos(9.0)) API_UNAVAILABLE(macos, tvos)
+typedef NS_ENUM(NSInteger, NINearbyObjectVerticalDirectionEstimate) {
+    NINearbyObjectVerticalDirectionEstimateUnknown = 0,
+
+    /** Represents the nearby object is approximately equal */
+    NINearbyObjectVerticalDirectionEstimateSame = 1,
+
+    /** Represents the nearby object is above the current device */
+    NINearbyObjectVerticalDirectionEstimateAbove = 2,
+
+    /** Represents the nearby object  is below the current device */
+    NINearbyObjectVerticalDirectionEstimateBelow = 3,
+
+    /** Represents the nearby object  is above or below the current device - i.e. not the same level */
+    NINearbyObjectVerticalDirectionEstimateAboveOrBelow = 4,
+} NS_SWIFT_NAME(NINearbyObject.VerticalDirectionEstimate);
+
 /**
  A nearby object with distance and direction measurements.
 */
@@ -45,6 +66,18 @@ NI_EXPORT
  If not available in this update, the value of this property will be equal to NINearbyObjectDirectionNotAvailable in Objective C, or nil in Swift.
 */
 @property (nonatomic, readonly) simd_float3 direction NS_REFINED_FOR_SWIFT;
+
+/**
+An indication of the positional relationship to the nearby object in the vertical dimension.
+*/
+@property (nonatomic, readonly) NINearbyObjectVerticalDirectionEstimate verticalDirectionEstimate API_AVAILABLE(ios(16.0), watchos(9.0)) API_UNAVAILABLE(macos, tvos);
+
+/**
+An angle in radians indicating the azimuthal direction to the nearby object.
+@discussion when unavailable, the value will be set to `NINearbyObjectAngleNotAvailable`.
+*/
+@property (nonatomic, readonly) float horizontalAngle NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(16.0), watchos(9.0)) API_UNAVAILABLE(macos, tvos);
+
 
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;

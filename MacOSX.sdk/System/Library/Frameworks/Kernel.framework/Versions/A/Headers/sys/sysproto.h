@@ -631,7 +631,7 @@ struct sigreturn_args {
 struct thread_selfcounts_args {
 	char kind_l_[PADL_(uint32_t)]; uint32_t kind; char kind_r_[PADR_(uint32_t)];
 	char buf_l_[PADL_(user_addr_t)]; user_addr_t buf; char buf_r_[PADR_(user_addr_t)];
-	char nbytes_l_[PADL_(user_size_t)]; user_size_t nbytes; char nbytes_r_[PADR_(user_size_t)];
+	char size_l_[PADL_(user_size_t)]; user_size_t size; char size_r_[PADR_(user_size_t)];
 };
 struct fdatasync_args {
 	char fd_l_[PADL_(int)]; int fd; char fd_r_[PADR_(int)];
@@ -723,6 +723,15 @@ struct fsgetpath_ext_args {
 	char fsid_l_[PADL_(user_addr_t)]; user_addr_t fsid; char fsid_r_[PADR_(user_addr_t)];
 	char objid_l_[PADL_(uint64_t)]; uint64_t objid; char objid_r_[PADR_(uint64_t)];
 	char options_l_[PADL_(uint32_t)]; uint32_t options; char options_r_[PADR_(uint32_t)];
+};
+struct openat_dprotected_np_args {
+	char fd_l_[PADL_(int)]; int fd; char fd_r_[PADR_(int)];
+	char path_l_[PADL_(user_addr_t)]; user_addr_t path; char path_r_[PADR_(user_addr_t)];
+	char flags_l_[PADL_(int)]; int flags; char flags_r_[PADR_(int)];
+	char class_l_[PADL_(int)]; int class; char class_r_[PADR_(int)];
+	char dpflags_l_[PADL_(int)]; int dpflags; char dpflags_r_[PADR_(int)];
+	char mode_l_[PADL_(int)]; int mode; char mode_r_[PADR_(int)];
+	char authfd_l_[PADL_(int)]; int authfd; char authfd_r_[PADR_(int)];
 };
 struct getattrlist_args {
 	char path_l_[PADL_(user_addr_t)]; user_addr_t path; char path_r_[PADR_(user_addr_t)];
@@ -867,13 +876,6 @@ struct ffsctl_args {
 	char data_l_[PADL_(user_addr_t)]; user_addr_t data; char data_r_[PADR_(user_addr_t)];
 	char options_l_[PADL_(u_int)]; u_int options; char options_r_[PADR_(u_int)];
 };
-#if NFSCLIENT	/* XXX */
-struct nfsclnt_args {
-	char flag_l_[PADL_(int)]; int flag; char flag_r_[PADR_(int)];
-	char argp_l_[PADL_(user_addr_t)]; user_addr_t argp; char argp_r_[PADR_(user_addr_t)];
-};
-#else
-#endif
 #if NFSSERVER	/* XXX */
 struct fhopen_args {
 	char u_fhp_l_[PADL_(user_addr_t)]; user_addr_t u_fhp; char u_fhp_r_[PADR_(user_addr_t)];
@@ -1424,7 +1426,6 @@ struct setaudit_addr_args {
 struct auditctl_args {
 	char path_l_[PADL_(user_addr_t)]; user_addr_t path; char path_r_[PADR_(user_addr_t)];
 };
-#if CONFIG_WORKQUEUE
 struct bsdthread_create_args {
 	char func_l_[PADL_(user_addr_t)]; user_addr_t func; char func_r_[PADR_(user_addr_t)];
 	char func_arg_l_[PADL_(user_addr_t)]; user_addr_t func_arg; char func_arg_r_[PADR_(user_addr_t)];
@@ -1438,8 +1439,6 @@ struct bsdthread_terminate_args {
 	char port_l_[PADL_(uint32_t)]; uint32_t port; char port_r_[PADR_(uint32_t)];
 	char sema_or_ulock_l_[PADL_(user_addr_t)]; user_addr_t sema_or_ulock; char sema_or_ulock_r_[PADR_(user_addr_t)];
 };
-#else
-#endif /* CONFIG_WORKQUEUE */
 struct kqueue_args {
 	int32_t dummy;
 };
@@ -1456,7 +1455,6 @@ struct lchown_args {
 	char owner_l_[PADL_(uid_t)]; uid_t owner; char owner_r_[PADR_(uid_t)];
 	char group_l_[PADL_(gid_t)]; gid_t group; char group_r_[PADR_(gid_t)];
 };
-#if CONFIG_WORKQUEUE
 struct bsdthread_register_args {
 	char threadstart_l_[PADL_(user_addr_t)]; user_addr_t threadstart; char threadstart_r_[PADR_(user_addr_t)];
 	char wqthread_l_[PADL_(user_addr_t)]; user_addr_t wqthread; char wqthread_r_[PADR_(user_addr_t)];
@@ -1475,8 +1473,6 @@ struct workq_kernreturn_args {
 	char affinity_l_[PADL_(int)]; int affinity; char affinity_r_[PADR_(int)];
 	char prio_l_[PADL_(int)]; int prio; char prio_r_[PADR_(int)];
 };
-#else
-#endif /* CONFIG_WORKQUEUE */
 struct kevent64_args {
 	char fd_l_[PADL_(int)]; int fd; char fd_r_[PADR_(int)];
 	char changelist_l_[PADL_(user_addr_t)]; user_addr_t changelist; char changelist_r_[PADR_(user_addr_t)];
@@ -1486,23 +1482,6 @@ struct kevent64_args {
 	char flags_l_[PADL_(unsigned int)]; unsigned int flags; char flags_r_[PADR_(unsigned int)];
 	char timeout_l_[PADL_(user_addr_t)]; user_addr_t timeout; char timeout_r_[PADR_(user_addr_t)];
 };
-#if OLD_SEMWAIT_SIGNAL
-struct __old_semwait_signal_args {
-	char cond_sem_l_[PADL_(int)]; int cond_sem; char cond_sem_r_[PADR_(int)];
-	char mutex_sem_l_[PADL_(int)]; int mutex_sem; char mutex_sem_r_[PADR_(int)];
-	char timeout_l_[PADL_(int)]; int timeout; char timeout_r_[PADR_(int)];
-	char relative_l_[PADL_(int)]; int relative; char relative_r_[PADR_(int)];
-	char ts_l_[PADL_(user_addr_t)]; user_addr_t ts; char ts_r_[PADR_(user_addr_t)];
-};
-struct __old_semwait_signal_nocancel_args {
-	char cond_sem_l_[PADL_(int)]; int cond_sem; char cond_sem_r_[PADR_(int)];
-	char mutex_sem_l_[PADL_(int)]; int mutex_sem; char mutex_sem_r_[PADR_(int)];
-	char timeout_l_[PADL_(int)]; int timeout; char timeout_r_[PADR_(int)];
-	char relative_l_[PADL_(int)]; int relative; char relative_r_[PADR_(int)];
-	char ts_l_[PADL_(user_addr_t)]; user_addr_t ts; char ts_r_[PADR_(user_addr_t)];
-};
-#else
-#endif
 struct thread_selfid_args {
 	int32_t dummy;
 };
@@ -1820,14 +1799,6 @@ struct pid_shutdown_sockets_args {
 };
 #else
 #endif
-struct shared_region_map_and_slide_np_args {
-	char fd_l_[PADL_(int)]; int fd; char fd_r_[PADR_(int)];
-	char count_l_[PADL_(uint32_t)]; uint32_t count; char count_r_[PADR_(uint32_t)];
-	char mappings_l_[PADL_(user_addr_t)]; user_addr_t mappings; char mappings_r_[PADR_(user_addr_t)];
-	char slide_l_[PADL_(uint32_t)]; uint32_t slide; char slide_r_[PADR_(uint32_t)];
-	char slide_start_l_[PADL_(user_addr_t)]; user_addr_t slide_start; char slide_start_r_[PADR_(user_addr_t)];
-	char slide_size_l_[PADL_(uint32_t)]; uint32_t slide_size; char slide_size_r_[PADR_(uint32_t)];
-};
 struct kas_info_args {
 	char selector_l_[PADL_(int)]; int selector; char selector_r_[PADR_(int)];
 	char value_l_[PADL_(user_addr_t)]; user_addr_t value; char value_r_[PADR_(user_addr_t)];
@@ -2400,15 +2371,12 @@ struct os_fault_with_payload_args {
 	char reason_string_l_[PADL_(user_addr_t)]; user_addr_t reason_string; char reason_string_r_[PADR_(user_addr_t)];
 	char reason_flags_l_[PADL_(uint64_t)]; uint64_t reason_flags; char reason_flags_r_[PADR_(uint64_t)];
 };
-#if CONFIG_WORKQUEUE
 struct kqueue_workloop_ctl_args {
 	char cmd_l_[PADL_(user_addr_t)]; user_addr_t cmd; char cmd_r_[PADR_(user_addr_t)];
 	char options_l_[PADL_(uint64_t)]; uint64_t options; char options_r_[PADR_(uint64_t)];
 	char addr_l_[PADL_(user_addr_t)]; user_addr_t addr; char addr_r_[PADR_(user_addr_t)];
 	char sz_l_[PADL_(user_size_t)]; user_size_t sz; char sz_r_[PADR_(user_size_t)];
 };
-#else
-#endif // CONFIG_WORKQUEUE
 struct __mach_bridge_remote_time_args {
 	char local_timestamp_l_[PADL_(uint64_t)]; uint64_t local_timestamp; char local_timestamp_r_[PADR_(uint64_t)];
 };
@@ -2506,10 +2474,48 @@ struct tracker_action_args {
 struct debug_syscall_reject_args {
 	char packed_selectors_l_[PADL_(uint64_t)]; uint64_t packed_selectors; char packed_selectors_r_[PADR_(uint64_t)];
 };
+struct debug_syscall_reject_config_args {
+	char packed_selectors1_l_[PADL_(uint64_t)]; uint64_t packed_selectors1; char packed_selectors1_r_[PADR_(uint64_t)];
+	char packed_selectors2_l_[PADL_(uint64_t)]; uint64_t packed_selectors2; char packed_selectors2_r_[PADR_(uint64_t)];
+	char flags_l_[PADL_(uint64_t)]; uint64_t flags; char flags_r_[PADR_(uint64_t)];
+};
+struct graftdmg_args {
+	char dmg_fd_l_[PADL_(int)]; int dmg_fd; char dmg_fd_r_[PADR_(int)];
+	char mountdir_l_[PADL_(user_addr_t)]; user_addr_t mountdir; char mountdir_r_[PADR_(user_addr_t)];
+	char graft_type_l_[PADL_(uint32_t)]; uint32_t graft_type; char graft_type_r_[PADR_(uint32_t)];
+	char gda_l_[PADL_(user_addr_t)]; user_addr_t gda; char gda_r_[PADR_(user_addr_t)];
+};
+struct map_with_linking_np_args {
+	char regions_l_[PADL_(user_addr_t)]; user_addr_t regions; char regions_r_[PADR_(user_addr_t)];
+	char region_count_l_[PADL_(uint32_t)]; uint32_t region_count; char region_count_r_[PADR_(uint32_t)];
+	char link_info_l_[PADL_(user_addr_t)]; user_addr_t link_info; char link_info_r_[PADR_(user_addr_t)];
+	char link_info_size_l_[PADL_(uint32_t)]; uint32_t link_info_size; char link_info_size_r_[PADR_(uint32_t)];
+};
 struct freadlink_args {
 	char fd_l_[PADL_(int)]; int fd; char fd_r_[PADR_(int)];
 	char buf_l_[PADL_(user_addr_t)]; user_addr_t buf; char buf_r_[PADR_(user_addr_t)];
 	char bufsize_l_[PADL_(user_size_t)]; user_size_t bufsize; char bufsize_r_[PADR_(user_size_t)];
+};
+struct record_system_event_args {
+	char type_l_[PADL_(uint32_t)]; uint32_t type; char type_r_[PADR_(uint32_t)];
+	char subsystem_l_[PADL_(uint32_t)]; uint32_t subsystem; char subsystem_r_[PADR_(uint32_t)];
+	char event_l_[PADL_(user_addr_t)]; user_addr_t event; char event_r_[PADR_(user_addr_t)];
+	char payload_l_[PADL_(user_addr_t)]; user_addr_t payload; char payload_r_[PADR_(user_addr_t)];
+};
+struct mkfifoat_args {
+	char fd_l_[PADL_(int)]; int fd; char fd_r_[PADR_(int)];
+	char path_l_[PADL_(user_addr_t)]; user_addr_t path; char path_r_[PADR_(user_addr_t)];
+	char mode_l_[PADL_(int)]; int mode; char mode_r_[PADR_(int)];
+};
+struct mknodat_args {
+	char fd_l_[PADL_(int)]; int fd; char fd_r_[PADR_(int)];
+	char path_l_[PADL_(user_addr_t)]; user_addr_t path; char path_r_[PADR_(user_addr_t)];
+	char mode_l_[PADL_(int)]; int mode; char mode_r_[PADR_(int)];
+	char dev_l_[PADL_(int)]; int dev; char dev_r_[PADR_(int)];
+};
+struct ungraftdmg_args {
+	char mountdir_l_[PADL_(user_addr_t)]; user_addr_t mountdir; char mountdir_r_[PADR_(user_addr_t)];
+	char flags_l_[PADL_(uint64_t)]; uint64_t flags; char flags_r_[PADR_(uint64_t)];
 };
 int nosys(struct proc *, struct nosys_args *, int *);
 void exit(struct proc *, struct exit_args *, int32_t *);
@@ -2681,6 +2687,7 @@ int munlock(struct proc *, struct munlock_args *, int *);
 int undelete(struct proc *, struct undelete_args *, int *);
 int open_dprotected_np(struct proc *, struct open_dprotected_np_args *, int *);
 int fsgetpath_ext(struct proc *, struct fsgetpath_ext_args *, user_ssize_t *);
+int openat_dprotected_np(struct proc *, struct openat_dprotected_np_args *, int *);
 int getattrlist(struct proc *, struct getattrlist_args *, int *);
 int setattrlist(struct proc *, struct setattrlist_args *, int *);
 int getdirentriesattr(struct proc *, struct getdirentriesattr_args *, int *);
@@ -2703,10 +2710,6 @@ int fsctl(struct proc *, struct fsctl_args *, int *);
 int initgroups(struct proc *, struct initgroups_args *, int *);
 int posix_spawn(struct proc *, struct posix_spawn_args *, int *);
 int ffsctl(struct proc *, struct ffsctl_args *, int *);
-#if NFSCLIENT	/* XXX */
-int nfsclnt(struct proc *, struct nfsclnt_args *, int *);
-#else
-#endif
 #if NFSSERVER	/* XXX */
 int fhopen(struct proc *, struct fhopen_args *, int *);
 #else
@@ -2841,26 +2844,15 @@ int setauid(struct proc *, struct setauid_args *, int *);
 int getaudit_addr(struct proc *, struct getaudit_addr_args *, int *);
 int setaudit_addr(struct proc *, struct setaudit_addr_args *, int *);
 int auditctl(struct proc *, struct auditctl_args *, int *);
-#if CONFIG_WORKQUEUE
 int bsdthread_create(struct proc *, struct bsdthread_create_args *, user_addr_t *);
 int bsdthread_terminate(struct proc *, struct bsdthread_terminate_args *, int *);
-#else
-#endif /* CONFIG_WORKQUEUE */
 int kqueue(struct proc *, struct kqueue_args *, int *);
 int kevent(struct proc *, struct kevent_args *, int *);
 int lchown(struct proc *, struct lchown_args *, int *);
-#if CONFIG_WORKQUEUE
 int bsdthread_register(struct proc *, struct bsdthread_register_args *, int *);
 int workq_open(struct proc *, struct workq_open_args *, int *);
 int workq_kernreturn(struct proc *, struct workq_kernreturn_args *, int *);
-#else
-#endif /* CONFIG_WORKQUEUE */
 int kevent64(struct proc *, struct kevent64_args *, int *);
-#if OLD_SEMWAIT_SIGNAL
-int __old_semwait_signal(struct proc *, struct __old_semwait_signal_args *, int *);
-int __old_semwait_signal_nocancel(struct proc *, struct __old_semwait_signal_nocancel_args *, int *);
-#else
-#endif
 int thread_selfid(struct proc *, struct thread_selfid_args *, uint64_t *);
 int ledger(struct proc *, struct ledger_args *, int *);
 int kevent_qos(struct proc *, struct kevent_qos_args *, int *);
@@ -2943,7 +2935,6 @@ int pid_hibernate(struct proc *, struct pid_hibernate_args *, int *);
 int pid_shutdown_sockets(struct proc *, struct pid_shutdown_sockets_args *, int *);
 #else
 #endif
-int shared_region_map_and_slide_np(struct proc *, struct shared_region_map_and_slide_np_args *, int *);
 int kas_info(struct proc *, struct kas_info_args *, int *);
 #if CONFIG_MEMORYSTATUS
 int memorystatus_control(struct proc *, struct memorystatus_control_args *, int *);
@@ -3085,10 +3076,7 @@ int fmount(struct proc *, struct fmount_args *, int *);
 int ntp_adjtime(struct proc *, struct ntp_adjtime_args *, int *);
 int ntp_gettime(struct proc *, struct ntp_gettime_args *, int *);
 int os_fault_with_payload(struct proc *, struct os_fault_with_payload_args *, int *);
-#if CONFIG_WORKQUEUE
 int kqueue_workloop_ctl(struct proc *, struct kqueue_workloop_ctl_args *, int *);
-#else
-#endif // CONFIG_WORKQUEUE
 int __mach_bridge_remote_time(struct proc *, struct __mach_bridge_remote_time_args *, uint64_t *);
 #if CONFIG_COALITIONS
 int coalition_ledger(struct proc *, struct coalition_ledger_args *, int *);
@@ -3112,7 +3100,14 @@ int tracker_action(struct proc *, struct tracker_action_args *, int *);
 #else
 #endif /* SOCKETS */
 int debug_syscall_reject(struct proc *, struct debug_syscall_reject_args *, int *);
+int sys_debug_syscall_reject_config(struct proc *, struct debug_syscall_reject_config_args *, int *);
+int graftdmg(struct proc *, struct graftdmg_args *, int *);
+int map_with_linking_np(struct proc *, struct map_with_linking_np_args *, int *);
 int freadlink(struct proc *, struct freadlink_args *, int *);
+int sys_record_system_event(struct proc *, struct record_system_event_args *, int *);
+int mkfifoat(struct proc *, struct mkfifoat_args *, int *);
+int mknodat(struct proc *, struct mknodat_args *, int *);
+int ungraftdmg(struct proc *, struct ungraftdmg_args *, int *);
 
 __END_DECLS
 #undef PAD_

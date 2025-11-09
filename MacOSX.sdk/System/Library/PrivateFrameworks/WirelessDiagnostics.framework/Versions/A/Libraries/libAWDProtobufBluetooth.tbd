@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A7CF282E-7E58-3497-B988-28664AB493D1
+    value:           0A72B1E8-FE41-3CC3-B3EC-0CF44851EF4B
   - target:          x86_64-maccatalyst
-    value:           A7CF282E-7E58-3497-B988-28664AB493D1
+    value:           0A72B1E8-FE41-3CC3-B3EC-0CF44851EF4B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C8E6EB12-D3EC-3C38-9CD7-94410098A571
+    value:           1BEF867E-8C85-3E1F-9423-9690C887A11E
   - target:          arm64e-maccatalyst
-    value:           C8E6EB12-D3EC-3C38-9CD7-94410098A571
+    value:           1BEF867E-8C85-3E1F-9423-9690C887A11E
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufBluetooth.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN3awd7metrics15BluetoothLEScan10SharedCtorEv, __ZN3awd7metrics15BluetoothLEScan10SharedDtorEv, 
                        __ZN3awd7metrics15BluetoothLEScan16default_instanceEv, __ZN3awd7metrics15BluetoothLEScan17default_instance_E, 
                        __ZN3awd7metrics15BluetoothLEScan21CheckTypeAndMergeFromERKN20wireless_diagnostics6google8protobuf11MessageLiteE, 

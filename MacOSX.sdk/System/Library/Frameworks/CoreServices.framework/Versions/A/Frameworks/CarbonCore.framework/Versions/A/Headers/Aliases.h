@@ -21,6 +21,7 @@
 
 
 #include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -42,11 +43,11 @@ enum {
   kFSAliasInfoIDs               = 0x00000010, /* parentDirID and nodeID are valid*/
   kFSAliasInfoFSInfo            = 0x00000020, /* filesystemID and signature are valid*/
   kFSAliasInfoVolumeFlags       = 0x00000040 /* volumeIsBootVolume, volumeIsAutomounted, volumeIsEjectable and volumeHasPersistentFileIDs are valid*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   rAliasType                    = 'alis' /* Aliases are stored as resources of this type */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
                                         /* define alias resolution action rules mask */
@@ -57,7 +58,7 @@ enum {
   kARMSearchMore                = 0x00000200, /* search further */
   kARMSearchRelFirst            = 0x00000400, /* search target on a relative path first */
   kARMTryFileIDFirst            = 0x00000800 /* search by file id before path */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
                                         /* define alias record information types */
@@ -66,13 +67,13 @@ enum {
   asiVolumeName                 = -1,   /* get volume name */
   asiAliasName                  = 0,    /* get aliased file/folder/volume name */
   asiParentName                 = 1     /* get parent folder name */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* ResolveAliasFileWithMountFlags options */
 enum {
   kResolveAliasFileNoUI         = 0x00000001, /* no user interaction during resolution */
   kResolveAliasTryFileIDFirst   = 0x00000002 /* search by file id before path */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 #if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_4
 #define __AL_USE_OPAQUE_RECORD__ 1

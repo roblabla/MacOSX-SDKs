@@ -1,9 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-experimental-concurrency -module-name RealityFoundation
-// swift-module-flags-ignorable: -user-module-version 161.404
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-macos13.0 -enable-objc-interop -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-experimental-concurrency -module-name RealityFoundation
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 225.123
 import AVFAudio
 import AVFoundation
+import Accessibility
 import AppKit
 import AudioToolbox
 import Combine
@@ -23,6 +24,7 @@ import Metal
 import QuartzCore
 import Swift
 import _Concurrency
+import _StringProcessing
 import os.log
 import os
 import os/*.OSLog*/
@@ -194,6 +196,8 @@ public struct FromToByAnimation<Value> : RealityFoundation.AnimationDefinition w
     get
     set
   }
+  @available(*, deprecated, message: "Use init with 'bindTarget' parameter instead.")
+  public init(name: Swift.String = "", from: Value? = nil, to: Value? = nil, by: Value? = nil, duration: Foundation.TimeInterval = 1.0, additive: Swift.Bool = false, targetPath: RealityFoundation.BindTarget? = nil, blendLayer: Swift.Int32 = 0, repeatMode: RealityFoundation.AnimationRepeatMode = .none, fillMode: RealityFoundation.AnimationFillMode = [], trimStart: Foundation.TimeInterval? = nil, trimEnd: Foundation.TimeInterval? = nil, trimDuration: Foundation.TimeInterval? = nil, offset: Foundation.TimeInterval = 0, delay: Foundation.TimeInterval = 0, speed: Swift.Float = 1.0)
   public init(name: Swift.String = "", from: Value? = nil, to: Value? = nil, by: Value? = nil, duration: Foundation.TimeInterval = 1.0, timing: RealityFoundation.AnimationTimingFunction = .linear, isAdditive: Swift.Bool = false, bindTarget: RealityFoundation.BindTarget? = nil, blendLayer: Swift.Int32 = 0, repeatMode: RealityFoundation.AnimationRepeatMode = .none, fillMode: RealityFoundation.AnimationFillMode = [], trimStart: Foundation.TimeInterval? = nil, trimEnd: Foundation.TimeInterval? = nil, trimDuration: Foundation.TimeInterval? = nil, offset: Foundation.TimeInterval = 0, delay: Foundation.TimeInterval = 0, speed: Swift.Float = 1.0)
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
@@ -1398,7 +1402,9 @@ public struct PhysicsBodyComponent : RealityFoundation.Component, Swift.Equatabl
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 public protocol __RKRuntimeSceneCoordinatorObserver : AnyObject {
+  @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
   func runtimeSceneCoordinator(_ coordinator: RealityFoundation.__RKRuntimeSceneCoordinator, willSwapFromEntity fromEntity: RealityFoundation.Entity, toEntity: RealityFoundation.Entity?, anchoringTarget: RealityFoundation.AnchoringComponent.Target?)
+  @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
   func runtimeSceneCoordinator(_ coordinator: RealityFoundation.__RKRuntimeSceneCoordinator, didSwapFromEntity fromEntity: RealityFoundation.Entity, toEntity: RealityFoundation.Entity?, anchoringTarget: RealityFoundation.AnchoringComponent.Target?)
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
@@ -1407,7 +1413,9 @@ public protocol __RKRuntimeSceneCoordinatorObserver : AnyObject {
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 public class __RKRuntimeSceneCoordinator {
   public init()
+  @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
   public func willSwap(fromEntity: RealityFoundation.Entity, toEntity: RealityFoundation.Entity?, anchoringTarget: RealityFoundation.AnchoringComponent.Target?)
+  @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
   public func didSwap(fromEntity: RealityFoundation.Entity, toEntity: RealityFoundation.Entity?, anchoringTarget: RealityFoundation.AnchoringComponent.Target?)
   public func addObserver(observer: RealityFoundation.__RKRuntimeSceneCoordinatorObserver)
   public func removeObserver(observer: RealityFoundation.__RKRuntimeSceneCoordinatorObserver)
@@ -1609,9 +1617,6 @@ public class __REAsset : Swift.CustomDebugStringConvertible {
   public var sanitizedDescription: Swift.String {
     get
   }
-  public var __hasSubsceneComponents: Swift.Bool {
-    get
-  }
   public var __handle: RealityFoundation.__AssetRef {
     get
   }
@@ -1647,6 +1652,9 @@ public class __REAssetManager : RealityFoundation.__REAssetService {
   public var engineQueue: Dispatch.DispatchQueue {
     get
   }
+  public var isFullLoadTracingEnabled: Swift.Bool {
+    get
+  }
   public var mainBundle: RealityFoundation.__REAssetBundle {
     get
   }
@@ -1657,6 +1665,13 @@ public class __REAssetManager : RealityFoundation.__REAssetService {
     get
   }
   @objc deinit
+}
+@available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
+@_originallyDefinedIn(module: "RealityKit", macOS 12.0)
+@_originallyDefinedIn(module: "RealityKit", iOS 15.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
+extension RealityFoundation.__REAssetService {
+  public func assetRef(named name: Swift.String, in realityArchiveURL: Foundation.URL) throws -> RealityFoundation.__REAsset
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @available(*, deprecated)
@@ -1687,6 +1702,9 @@ final public class __AssetLoadRequest {
   final public func add(asset: RealityFoundation.__REAsset)
   final public func add(_ entity: RealityFoundation.Entity, includeDescendants: Swift.Bool = true)
   final public var progress: Swift.Float {
+    get
+  }
+  final public var error: Swift.Error? {
     get
   }
   public typealias CompletionHandler = @convention(block) (_ success: Swift.Bool) -> Swift.Void
@@ -1912,6 +1930,60 @@ extension Swift.SIMD4 where Scalar == Swift.Float {
     set
   }
 }
+@available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
+@_originallyDefinedIn(module: "RealityKit", macOS 12.0)
+@_originallyDefinedIn(module: "RealityKit", iOS 15.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
+public enum __REAnchoringType : Swift.Codable, Swift.Equatable {
+  case surface(alignment: RealityFoundation.__REAnchoringType.Alignment, classification: RealityFoundation.__REAnchoringType.Classification)
+  case image(url: Foundation.URL, physicalWidth: Foundation.Measurement<Foundation.UnitLength>)
+  case face(meshVertex: Swift.Int)
+  case object(url: Foundation.URL)
+  public enum Name : Swift.String, Swift.CaseIterable {
+    case surface
+    case image
+    case face
+    case object
+    public init?(rawValue: Swift.String)
+    public typealias AllCases = [RealityFoundation.__REAnchoringType.Name]
+    public typealias RawValue = Swift.String
+    public static var allCases: [RealityFoundation.__REAnchoringType.Name] {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public var name: RealityFoundation.__REAnchoringType.Name {
+    get
+  }
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+  public struct Alignment : Swift.OptionSet, Swift.Codable {
+    public init(rawValue: Swift.Int)
+    public let rawValue: Swift.Int
+    public static let horizontal: RealityFoundation.__REAnchoringType.Alignment
+    public static let vertical: RealityFoundation.__REAnchoringType.Alignment
+    public static let any: RealityFoundation.__REAnchoringType.Alignment
+    public typealias ArrayLiteralElement = RealityFoundation.__REAnchoringType.Alignment
+    public typealias Element = RealityFoundation.__REAnchoringType.Alignment
+    public typealias RawValue = Swift.Int
+  }
+  public struct Classification : Swift.OptionSet, Swift.Codable {
+    public init(rawValue: Swift.Int)
+    public let rawValue: Swift.Int
+    public static let wall: RealityFoundation.__REAnchoringType.Classification
+    public static let floor: RealityFoundation.__REAnchoringType.Classification
+    public static let ceiling: RealityFoundation.__REAnchoringType.Classification
+    public static let table: RealityFoundation.__REAnchoringType.Classification
+    public static let seat: RealityFoundation.__REAnchoringType.Classification
+    public static let any: RealityFoundation.__REAnchoringType.Classification
+    public typealias ArrayLiteralElement = RealityFoundation.__REAnchoringType.Classification
+    public typealias Element = RealityFoundation.__REAnchoringType.Classification
+    public typealias RawValue = Swift.Int
+  }
+  public static func == (a: RealityFoundation.__REAnchoringType, b: RealityFoundation.__REAnchoringType) -> Swift.Bool
+}
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
 extension RealityFoundation.CustomMaterial {
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
@@ -2035,60 +2107,6 @@ extension RealityFoundation.CustomMaterial {
     public init(texture: RealityFoundation.CustomMaterial.Texture? = nil)
     public init(_ value: RealityFoundation.PhysicallyBasedMaterial.AmbientOcclusion)
   }
-}
-@available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@_originallyDefinedIn(module: "RealityKit", macOS 12.0)
-@_originallyDefinedIn(module: "RealityKit", iOS 15.0)
-@_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
-public enum __REAnchoringType : Swift.Codable, Swift.Equatable {
-  case surface(alignment: RealityFoundation.__REAnchoringType.Alignment, classification: RealityFoundation.__REAnchoringType.Classification)
-  case image(url: Foundation.URL, physicalWidth: Foundation.Measurement<Foundation.UnitLength>)
-  case face(meshVertex: Swift.Int)
-  case object(url: Foundation.URL)
-  public enum Name : Swift.String, Swift.CaseIterable {
-    case surface
-    case image
-    case face
-    case object
-    public init?(rawValue: Swift.String)
-    public typealias AllCases = [RealityFoundation.__REAnchoringType.Name]
-    public typealias RawValue = Swift.String
-    public static var allCases: [RealityFoundation.__REAnchoringType.Name] {
-      get
-    }
-    public var rawValue: Swift.String {
-      get
-    }
-  }
-  public var name: RealityFoundation.__REAnchoringType.Name {
-    get
-  }
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
-  public struct Alignment : Swift.OptionSet, Swift.Codable {
-    public init(rawValue: Swift.Int)
-    public let rawValue: Swift.Int
-    public static let horizontal: RealityFoundation.__REAnchoringType.Alignment
-    public static let vertical: RealityFoundation.__REAnchoringType.Alignment
-    public static let any: RealityFoundation.__REAnchoringType.Alignment
-    public typealias ArrayLiteralElement = RealityFoundation.__REAnchoringType.Alignment
-    public typealias Element = RealityFoundation.__REAnchoringType.Alignment
-    public typealias RawValue = Swift.Int
-  }
-  public struct Classification : Swift.OptionSet, Swift.Codable {
-    public init(rawValue: Swift.Int)
-    public let rawValue: Swift.Int
-    public static let wall: RealityFoundation.__REAnchoringType.Classification
-    public static let floor: RealityFoundation.__REAnchoringType.Classification
-    public static let ceiling: RealityFoundation.__REAnchoringType.Classification
-    public static let table: RealityFoundation.__REAnchoringType.Classification
-    public static let seat: RealityFoundation.__REAnchoringType.Classification
-    public static let any: RealityFoundation.__REAnchoringType.Classification
-    public typealias ArrayLiteralElement = RealityFoundation.__REAnchoringType.Classification
-    public typealias Element = RealityFoundation.__REAnchoringType.Classification
-    public typealias RawValue = Swift.Int
-  }
-  public static func == (a: RealityFoundation.__REAnchoringType, b: RealityFoundation.__REAnchoringType) -> Swift.Bool
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
@@ -2242,6 +2260,7 @@ public struct AnimationGroup : RealityFoundation.AnimationDefinition {
     get
   }
   public init(group: [RealityFoundation.AnimationDefinition], name: Swift.String = "", repeatMode: RealityFoundation.AnimationRepeatMode = .none, fillMode: RealityFoundation.AnimationFillMode = [], trimStart: Foundation.TimeInterval? = nil, trimEnd: Foundation.TimeInterval? = nil, trimDuration: Foundation.TimeInterval? = nil, offset: Foundation.TimeInterval = 0, delay: Foundation.TimeInterval = 0, speed: Swift.Float = 1.0)
+  @available(*, deprecated, message: "Use .group variable in AnimationGroup instead")
   public var group_: [RealityFoundation.AnimationDefinition]?
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
@@ -2290,6 +2309,14 @@ public class __MaterialResource {
   public var __coreAsset: RealityFoundation.__AssetRef {
     get
   }
+  public var name: Swift.String {
+    get
+  }
+  public var cullMode: Metal.MTLCullMode? {
+    get
+  }
+  public static func __load(named name: Swift.String, in bundle: Foundation.Bundle? = nil) throws -> RealityFoundation.Material
+  public static func loadAsync(named name: Swift.String, in bundle: Foundation.Bundle? = nil) -> RealityFoundation.LoadRequest<RealityFoundation.Material>
   public struct BuildParameters {
     public enum Value : Swift.Hashable {
       case bool(Swift.Bool)
@@ -2310,15 +2337,13 @@ public class __MaterialResource {
     public var materialDefinition: RealityFoundation.__REAsset?
     public var functionConstants: [Swift.String : RealityFoundation.__MaterialResource.BuildParameters.Value]
     public var cullMode: Metal.MTLCullMode?
+    public var materialTextureParameterBindings: [Swift.String : Swift.String]
     public init(materialDefinition: RealityFoundation.__REAsset? = nil, functionConstants: [Swift.String : RealityFoundation.__MaterialResource.BuildParameters.Value] = [:])
   }
-  public var cullMode: Metal.MTLCullMode? {
-    get
-  }
-  public static func __load(named name: Swift.String, in bundle: Foundation.Bundle? = nil) throws -> RealityFoundation.Material
-  public static func loadAsync(named name: Swift.String, in bundle: Foundation.Bundle? = nil) -> RealityFoundation.LoadRequest<RealityFoundation.Material>
   public static func load(_ params: RealityFoundation.__MaterialResource.BuildParameters, services: RealityFoundation.__ServiceLocator = .shared) throws -> RealityFoundation.Material
   public static func loadAsync(_ params: RealityFoundation.__MaterialResource.BuildParameters, services: RealityFoundation.__ServiceLocator = .shared) -> RealityFoundation.LoadRequest<RealityFoundation.Material>
+  public static func load(named name: Swift.String, in file: Foundation.URL, services: RealityFoundation.__ServiceLocator = .shared) throws -> RealityFoundation.Material
+  public static func loadAsync(named name: Swift.String, in file: Foundation.URL, services: RealityFoundation.__ServiceLocator = .shared) -> RealityFoundation.LoadRequest<RealityFoundation.Material>
   @objc deinit
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
@@ -2718,14 +2743,50 @@ public class __RKVisibilityHideLaunchAnimation : RealityFoundation.__RKVisibilit
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 public class __Engine {
   public struct Configuration {
-    public var clockMode: RealityFoundation.__EngineClockModeRef
-    public var device: Metal.MTLDevice?
-    public var queue: Dispatch.DispatchQueue?
-    public var __createServices: RealityFoundation.__EngineServiceMaskRef
-    public var __updateServices: RealityFoundation.__EngineServiceMaskRef
-    public var __startupOptions: RealityFoundation.__StartupOptionsRef
-    public var __renderFlags: RealityFoundation.__RenderFlagsRef
-    public var __caLayerServer: Swift.Bool
+    public var clockMode: RealityFoundation.__EngineClockModeRef {
+      get
+      set
+    }
+    public var useMetal: Swift.Bool {
+      get
+      set
+    }
+    public var useRealityIO: Swift.Bool {
+      get
+      set
+    }
+    public var disableAssetIDs: Swift.Bool {
+      get
+      set
+    }
+    public var usePhysicsSceneSystem: Swift.Bool {
+      get
+      set
+    }
+    public var device: Metal.MTLDevice? {
+      get
+      set
+    }
+    public var queue: Dispatch.DispatchQueue? {
+      get
+      set
+    }
+    public var __createServices: RealityFoundation.__EngineServiceMaskRef {
+      get
+      set
+    }
+    public var __updateServices: RealityFoundation.__EngineServiceMaskRef {
+      get
+      set
+    }
+    public var __startupOptions: RealityFoundation.__StartupOptionsRef {
+      get
+      set
+    }
+    public var __renderFlags: RealityFoundation.__RenderFlagsRef {
+      get
+      set
+    }
     public init()
   }
   final public let configuration: RealityFoundation.__Engine.Configuration
@@ -2820,6 +2881,8 @@ public struct OrbitAnimation : RealityFoundation.AnimationDefinition {
     get
     set
   }
+  @available(*, deprecated, message: "Use init with 'bindTarget' parameter instead.")
+  public init(name: Swift.String = "", duration: Foundation.TimeInterval = 1.0, axis: Swift.SIMD3<Swift.Float> = .init(x: 0.0, y: 1.0, z: 0.0), startTransform: RealityFoundation.Transform = .identity, spinClockwise: Swift.Bool = true, orientToPath: Swift.Bool = false, rotationCount: Swift.Float = 1.0, additive: Swift.Bool = false, targetPath: RealityFoundation.BindTarget? = nil, blendLayer: Swift.Int32 = 0, repeatMode: RealityFoundation.AnimationRepeatMode = .none, fillMode: RealityFoundation.AnimationFillMode = [], trimStart: Foundation.TimeInterval? = nil, trimEnd: Foundation.TimeInterval? = nil, trimDuration: Foundation.TimeInterval? = nil, offset: Foundation.TimeInterval = 0, delay: Foundation.TimeInterval = 0, speed: Swift.Float = 1)
   public init(name: Swift.String = "", duration: Foundation.TimeInterval = 1.0, axis: Swift.SIMD3<Swift.Float> = .init(x: 0.0, y: 1.0, z: 0.0), startTransform: RealityFoundation.Transform = .identity, spinClockwise: Swift.Bool = true, orientToPath: Swift.Bool = false, rotationCount: Swift.Float = 1.0, bindTarget: RealityFoundation.BindTarget? = nil, blendLayer: Swift.Int32 = 0, repeatMode: RealityFoundation.AnimationRepeatMode = .none, fillMode: RealityFoundation.AnimationFillMode = [], isAdditive: Swift.Bool = false, trimStart: Foundation.TimeInterval? = nil, trimEnd: Foundation.TimeInterval? = nil, trimDuration: Foundation.TimeInterval? = nil, offset: Foundation.TimeInterval = 0, delay: Foundation.TimeInterval = 0, speed: Swift.Float = 1)
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
@@ -3090,12 +3153,176 @@ extension RealityFoundation.Entity {
     get
   }
 }
+@available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+extension RealityFoundation.PhysicallyBasedMaterial {
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public typealias Texture = RealityFoundation.MaterialParameters.Texture
+  public typealias FaceCulling = RealityFoundation.MaterialParameterTypes.FaceCulling
+  public typealias TextureCoordinateTransform = RealityFoundation.MaterialParameterTypes.TextureCoordinateTransform
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public struct BaseColor {
+    public static let __tintKey: Swift.String
+    public var __tint: CoreGraphics.CGColor
+    public static let __textureKey: Swift.String
+    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
+    public static let __defaultTexture: RealityFoundation.TextureResource
+    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
+    public init(_ value: RealityFoundation.CustomMaterial.BaseColor)
+  }
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public struct Metallic : Swift.ExpressibleByFloatLiteral {
+    public static let __scaleKey: Swift.String
+    public var scale: Swift.Float
+    public static let __textureKey: Swift.String
+    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
+    public static let __defaultTexture: RealityFoundation.TextureResource
+    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
+    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
+    public init(floatLiteral value: Swift.Float)
+    public init(_ value: RealityFoundation.CustomMaterial.Metallic)
+    public typealias FloatLiteralType = Swift.Float
+  }
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public struct Roughness : Swift.ExpressibleByFloatLiteral {
+    public static let __scaleKey: Swift.String
+    public var scale: Swift.Float
+    public static let __textureKey: Swift.String
+    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
+    public static let __defaultTexture: RealityFoundation.TextureResource
+    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
+    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
+    public init(floatLiteral value: Swift.Float)
+    public init(_ value: RealityFoundation.CustomMaterial.Roughness)
+    public typealias FloatLiteralType = Swift.Float
+  }
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public struct EmissiveColor {
+    public static let __colorKey: Swift.String
+    public var __color: CoreGraphics.CGColor
+    public static let __textureKey: Swift.String
+    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
+    public static let __defaultTexture: RealityFoundation.TextureResource
+    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
+    public init(_ value: RealityFoundation.CustomMaterial.EmissiveColor)
+  }
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public struct Specular : Swift.ExpressibleByFloatLiteral {
+    public static let __scaleKey: Swift.String
+    public var scale: Swift.Float
+    public static let __textureKey: Swift.String
+    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
+    public static let __defaultTexture: RealityFoundation.TextureResource
+    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
+    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
+    public init(floatLiteral value: Swift.Float)
+    public init(_ value: RealityFoundation.CustomMaterial.Specular)
+    public typealias FloatLiteralType = Swift.Float
+  }
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public enum Blending {
+    case opaque
+    case transparent(opacity: RealityFoundation.PhysicallyBasedMaterial.Opacity)
+    public init(blending value: RealityFoundation.CustomMaterial.Blending)
+  }
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public struct Opacity : Swift.ExpressibleByFloatLiteral {
+    public var scale: Swift.Float
+    public static let __textureKey: Swift.String
+    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
+    public static let __defaultTexture: RealityFoundation.TextureResource
+    public static var textureSemantic: RealityFoundation.TextureResource.Semantic {
+      get
+    }
+    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
+    public init(floatLiteral value: Swift.Float)
+    public init(_ value: RealityFoundation.CustomMaterial.Opacity)
+    public typealias FloatLiteralType = Swift.Float
+  }
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public struct Clearcoat : Swift.ExpressibleByFloatLiteral {
+    public static let __scaleKey: Swift.String
+    public var scale: Swift.Float
+    public static let __textureKey: Swift.String
+    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
+    public static let __defaultTexture: RealityFoundation.TextureResource
+    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
+    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
+    public init(floatLiteral value: Swift.Float)
+    public init(_ value: RealityFoundation.CustomMaterial.Clearcoat)
+    public typealias FloatLiteralType = Swift.Float
+  }
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public struct ClearcoatRoughness : Swift.ExpressibleByFloatLiteral {
+    public static let __scaleKey: Swift.String
+    public var scale: Swift.Float
+    public static let __textureKey: Swift.String
+    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
+    public static let __defaultTexture: RealityFoundation.TextureResource
+    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
+    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
+    public init(floatLiteral value: Swift.Float)
+    public init(_ value: RealityFoundation.CustomMaterial.ClearcoatRoughness)
+    public typealias FloatLiteralType = Swift.Float
+  }
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public struct Normal {
+    public static let __textureKey: Swift.String
+    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
+    public static let __defaultTexture: RealityFoundation.TextureResource
+    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
+    public init(texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
+    public init(_ value: RealityFoundation.CustomMaterial.Normal)
+  }
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public struct AmbientOcclusion {
+    public static let __textureKey: Swift.String
+    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
+    public static let __defaultTexture: RealityFoundation.TextureResource
+    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
+    public init(texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
+    public init(_ value: RealityFoundation.CustomMaterial.AmbientOcclusion)
+  }
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public struct AnisotropyLevel : Swift.ExpressibleByFloatLiteral {
+    public static let __scaleKey: Swift.String
+    public var scale: Swift.Float
+    public static let __textureKey: Swift.String
+    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
+    public static let __defaultTexture: RealityFoundation.TextureResource
+    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
+    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
+    public init(floatLiteral value: Swift.Float)
+    public typealias FloatLiteralType = Swift.Float
+  }
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public struct AnisotropyAngle : Swift.ExpressibleByFloatLiteral {
+    public static let __scaleKey: Swift.String
+    public var scale: Swift.Float
+    public static let __textureKey: Swift.String
+    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
+    public static let __defaultTexture: RealityFoundation.TextureResource
+    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
+    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
+    public init(floatLiteral value: Swift.Float)
+    public typealias FloatLiteralType = Swift.Float
+  }
+  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+  public struct SheenColor {
+    public static let __tintKey: Swift.String
+    public var __tint: CoreGraphics.CGColor
+    public static let __textureKey: Swift.String
+    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
+    public static let __defaultTexture: RealityFoundation.TextureResource
+    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
+  }
+}
 @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 public class AnchorEntity : RealityFoundation.Entity, RealityFoundation.HasAnchoring {
   required public init()
+  @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
   public init(_ target: RealityFoundation.AnchoringComponent.Target)
   convenience public init(world position: Swift.SIMD3<Swift.Float>)
   convenience public init(world transform: simd.float4x4)
@@ -3228,6 +3455,7 @@ public struct __SceneImportOperationRef : Swift.Equatable {
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 public struct __ComponentRef {
   public func __as<T>(_ type: T.Type) -> T
+  public static func __fromCore(_ core: Any) -> RealityFoundation.__ComponentRef
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
@@ -4084,7 +4312,7 @@ extension RealityFoundation.Scene {
   public struct Publisher<E> : Combine.Publisher where E : RealityFoundation.Event {
     public typealias Output = E
     public typealias Failure = Swift.Never
-    public func receive<S>(subscriber: S) where E == S.Input, S : Combine.Subscriber, S.Failure == RealityFoundation.Scene.Publisher<E>.Failure
+    public func receive<S>(subscriber: S) where E == S.Input, S : Combine.Subscriber, S.Failure == Swift.Never
   }
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
@@ -4140,6 +4368,9 @@ public struct __REAssetBundle {
     public var generateIdentifier: Swift.Bool
     public var deduplicateAssets: Swift.Bool
     public var __envelopeVersion: RealityFoundation.__AssetBundleEnvelopeVersion
+    @available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
+    public var deploymentTarget: RealityFoundation.__REAssetBundle.ExportOptions.DeploymentTarget?
+    public var versionOverride: Swift.Int?
     public var remapSingleFile: ((Foundation.URL) -> RealityFoundation.__REAssetBundle.ExportOptions.AssetRemapping?)?
     public var remapMultipleFiles: ((Foundation.URL) -> [RealityFoundation.__REAssetBundle.ExportOptions.AssetRemapping]?)?
     public init(queueOptions: RealityFoundation.__REAssetBundle.QueueOptions)
@@ -4150,6 +4381,7 @@ public struct __REAssetBundle {
     public var materialDefinition: RealityFoundation.__REAssetBundle.__MaterialDefinitionOverride?
     public var downsamplingStrategy: RealityFoundation.__DownsamplingStrategy?
     public var performanceReport: RealityFoundation.__REArchivalStats?
+    public var loadDedupeFile: Swift.Bool
     public init(queueOptions: RealityFoundation.__REAssetBundle.QueueOptions)
   }
   @available(*, deprecated, message: "will be removed")
@@ -4210,6 +4442,9 @@ public enum __RealityFileError : Swift.Error, Swift.CustomDebugStringConvertible
   case deduplicationInformationParseFailed
   case contentsLoadFailed
   case assetBundleCreationFailed
+  case invalidVersion(Swift.Int)
+  @available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
+  case invalidTargetPlatform(RealityFoundation.__REAssetBundle.ExportOptions.PlatformOS)
   case generic(Swift.String)
   public var debugDescription: Swift.String {
     get
@@ -4426,166 +4661,24 @@ extension RealityFoundation.MeshResource {
   public static func generateAsync(from descriptors: [RealityFoundation.MeshDescriptor]) -> RealityFoundation.LoadRequest<RealityFoundation.MeshResource>
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-extension RealityFoundation.PhysicallyBasedMaterial {
+public struct MaterialParameterTypes {
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public typealias Texture = RealityFoundation.MaterialParameters.Texture
-  public typealias FaceCulling = RealityFoundation.MaterialParameterTypes.FaceCulling
-  public typealias TextureCoordinateTransform = RealityFoundation.MaterialParameterTypes.TextureCoordinateTransform
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct BaseColor {
-    public static let __tintKey: Swift.String
-    public var __tint: CoreGraphics.CGColor
-    public static let __textureKey: Swift.String
-    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
-    public static let __defaultTexture: RealityFoundation.TextureResource
-    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
-    public init(_ value: RealityFoundation.CustomMaterial.BaseColor)
-  }
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct Metallic : Swift.ExpressibleByFloatLiteral {
-    public static let __scaleKey: Swift.String
-    public var scale: Swift.Float
-    public static let __textureKey: Swift.String
-    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
-    public static let __defaultTexture: RealityFoundation.TextureResource
-    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
-    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
-    public init(floatLiteral value: Swift.Float)
-    public init(_ value: RealityFoundation.CustomMaterial.Metallic)
-    public typealias FloatLiteralType = Swift.Float
-  }
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct Roughness : Swift.ExpressibleByFloatLiteral {
-    public static let __scaleKey: Swift.String
-    public var scale: Swift.Float
-    public static let __textureKey: Swift.String
-    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
-    public static let __defaultTexture: RealityFoundation.TextureResource
-    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
-    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
-    public init(floatLiteral value: Swift.Float)
-    public init(_ value: RealityFoundation.CustomMaterial.Roughness)
-    public typealias FloatLiteralType = Swift.Float
-  }
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct EmissiveColor {
-    public static let __colorKey: Swift.String
-    public var __color: CoreGraphics.CGColor
-    public static let __textureKey: Swift.String
-    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
-    public static let __defaultTexture: RealityFoundation.TextureResource
-    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
-    public init(_ value: RealityFoundation.CustomMaterial.EmissiveColor)
-  }
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct Specular : Swift.ExpressibleByFloatLiteral {
-    public static let __scaleKey: Swift.String
-    public var scale: Swift.Float
-    public static let __textureKey: Swift.String
-    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
-    public static let __defaultTexture: RealityFoundation.TextureResource
-    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
-    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
-    public init(floatLiteral value: Swift.Float)
-    public init(_ value: RealityFoundation.CustomMaterial.Specular)
-    public typealias FloatLiteralType = Swift.Float
-  }
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public enum Blending {
-    case opaque
-    case transparent(opacity: RealityFoundation.PhysicallyBasedMaterial.Opacity)
-    public init(blending value: RealityFoundation.CustomMaterial.Blending)
-  }
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct Opacity : Swift.ExpressibleByFloatLiteral {
-    public var scale: Swift.Float
-    public static let __textureKey: Swift.String
-    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
-    public static let __defaultTexture: RealityFoundation.TextureResource
-    public static var textureSemantic: RealityFoundation.TextureResource.Semantic {
+  public enum FaceCulling {
+    case none
+    case front
+    case back
+    public static func == (a: RealityFoundation.MaterialParameterTypes.FaceCulling, b: RealityFoundation.MaterialParameterTypes.FaceCulling) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
       get
     }
-    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
-    public init(floatLiteral value: Swift.Float)
-    public init(_ value: RealityFoundation.CustomMaterial.Opacity)
-    public typealias FloatLiteralType = Swift.Float
   }
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct Clearcoat : Swift.ExpressibleByFloatLiteral {
-    public static let __scaleKey: Swift.String
-    public var scale: Swift.Float
-    public static let __textureKey: Swift.String
-    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
-    public static let __defaultTexture: RealityFoundation.TextureResource
-    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
-    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
-    public init(floatLiteral value: Swift.Float)
-    public init(_ value: RealityFoundation.CustomMaterial.Clearcoat)
-    public typealias FloatLiteralType = Swift.Float
-  }
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct ClearcoatRoughness : Swift.ExpressibleByFloatLiteral {
-    public static let __scaleKey: Swift.String
-    public var scale: Swift.Float
-    public static let __textureKey: Swift.String
-    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
-    public static let __defaultTexture: RealityFoundation.TextureResource
-    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
-    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
-    public init(floatLiteral value: Swift.Float)
-    public init(_ value: RealityFoundation.CustomMaterial.ClearcoatRoughness)
-    public typealias FloatLiteralType = Swift.Float
-  }
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct Normal {
-    public static let __textureKey: Swift.String
-    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
-    public static let __defaultTexture: RealityFoundation.TextureResource
-    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
-    public init(texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
-    public init(_ value: RealityFoundation.CustomMaterial.Normal)
-  }
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct AmbientOcclusion {
-    public static let __textureKey: Swift.String
-    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
-    public static let __defaultTexture: RealityFoundation.TextureResource
-    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
-    public init(texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
-    public init(_ value: RealityFoundation.CustomMaterial.AmbientOcclusion)
-  }
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct AnisotropyLevel : Swift.ExpressibleByFloatLiteral {
-    public static let __scaleKey: Swift.String
-    public var scale: Swift.Float
-    public static let __textureKey: Swift.String
-    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
-    public static let __defaultTexture: RealityFoundation.TextureResource
-    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
-    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
-    public init(floatLiteral value: Swift.Float)
-    public typealias FloatLiteralType = Swift.Float
-  }
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct AnisotropyAngle : Swift.ExpressibleByFloatLiteral {
-    public static let __scaleKey: Swift.String
-    public var scale: Swift.Float
-    public static let __textureKey: Swift.String
-    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
-    public static let __defaultTexture: RealityFoundation.TextureResource
-    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
-    public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
-    public init(floatLiteral value: Swift.Float)
-    public typealias FloatLiteralType = Swift.Float
-  }
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct SheenColor {
-    public static let __tintKey: Swift.String
-    public var __tint: CoreGraphics.CGColor
-    public static let __textureKey: Swift.String
-    public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
-    public static let __defaultTexture: RealityFoundation.TextureResource
-    public static let textureSemantic: RealityFoundation.TextureResource.Semantic
+  public struct TextureCoordinateTransform {
+    public var offset: Swift.SIMD2<Swift.Float>
+    public var scale: Swift.SIMD2<Swift.Float>
+    public var rotation: Swift.Float
+    public init(offset: Swift.SIMD2<Swift.Float> = .init(), scale: Swift.SIMD2<Swift.Float> = .init(1, 1), rotation: Swift.Float = 0.0)
   }
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
@@ -5150,7 +5243,7 @@ extension RealityFoundation.HasCollision {
     set
   }
 }
-@available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
+@available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
@@ -5161,6 +5254,7 @@ public protocol HasAnchoring : RealityFoundation.Entity {
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension RealityFoundation.HasAnchoring {
+  @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
   public var anchoring: RealityFoundation.AnchoringComponent {
     get
     set
@@ -5168,6 +5262,7 @@ extension RealityFoundation.HasAnchoring {
   public var anchorIdentifier: Foundation.UUID? {
     get
   }
+  @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
   public func reanchor(_ target: RealityFoundation.AnchoringComponent.Target, preservingWorldTransform: Swift.Bool = true)
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
@@ -5177,27 +5272,6 @@ extension RealityFoundation.HasAnchoring {
 extension RealityFoundation.Entity {
   public var anchor: RealityFoundation.HasAnchoring? {
     get
-  }
-}
-@available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-public struct MaterialParameterTypes {
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public enum FaceCulling {
-    case none
-    case front
-    case back
-    public static func == (a: RealityFoundation.MaterialParameterTypes.FaceCulling, b: RealityFoundation.MaterialParameterTypes.FaceCulling) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
-      get
-    }
-  }
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-  public struct TextureCoordinateTransform {
-    public var offset: Swift.SIMD2<Swift.Float>
-    public var scale: Swift.SIMD2<Swift.Float>
-    public var rotation: Swift.Float
-    public init(offset: Swift.SIMD2<Swift.Float> = .init(), scale: Swift.SIMD2<Swift.Float> = .init(1, 1), rotation: Swift.Float = 0.0)
   }
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
@@ -5253,6 +5327,8 @@ public struct AnimationView : RealityFoundation.AnimationDefinition {
   public var duration: Foundation.TimeInterval {
     get
   }
+  @available(*, deprecated, message: "Use init with 'bindTarget' parameter instead.")
+  public init(name: Swift.String, source: RealityFoundation.AnimationDefinition, targetPath: RealityFoundation.BindTarget?, blendLayer: Swift.Int32, repeatMode: RealityFoundation.AnimationRepeatMode, fillMode: RealityFoundation.AnimationFillMode, trimStart: Foundation.TimeInterval?, trimEnd: Foundation.TimeInterval?, trimDuration: Foundation.TimeInterval?, offset: Foundation.TimeInterval, delay: Foundation.TimeInterval, speed: Swift.Float)
   public init(source: RealityFoundation.AnimationDefinition, name: Swift.String = "", bindTarget: RealityFoundation.BindTarget? = nil, blendLayer: Swift.Int32 = 0, repeatMode: RealityFoundation.AnimationRepeatMode = .none, fillMode: RealityFoundation.AnimationFillMode = [], trimStart: Foundation.TimeInterval? = nil, trimEnd: Foundation.TimeInterval? = nil, trimDuration: Foundation.TimeInterval? = nil, offset: Foundation.TimeInterval = 0, delay: Foundation.TimeInterval = 0, speed: Swift.Float = 1.0)
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
@@ -5315,6 +5391,12 @@ public class __RKEntityAudioAction : RealityFoundation.__RKEntityAction {
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 public class __RKVisibilityShowMoveInAnimation : RealityFoundation.__RKVisibilityBaseAnimation {
   @objc deinit
+}
+@available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+public enum SystemDependency : Swift.Equatable {
+  case before(RealityFoundation.System.Type)
+  case after(RealityFoundation.System.Type)
+  public static func == (lhs: RealityFoundation.SystemDependency, rhs: RealityFoundation.SystemDependency) -> Swift.Bool
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
 public struct AnimationFillMode : Swift.OptionSet {
@@ -5689,13 +5771,19 @@ public struct CustomMaterial : RealityFoundation.Material {
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
   public struct GeometryModifier : RealityFoundation.MaterialFunction {
     public var name: Swift.String
-    public var library: Metal.MTLLibrary
+    public var library: Metal.MTLLibrary {
+      get
+      set
+    }
     public init(named name: Swift.String, in library: Metal.MTLLibrary)
   }
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
   public struct SurfaceShader : RealityFoundation.MaterialFunction {
     public var name: Swift.String
-    public var library: Metal.MTLLibrary
+    public var library: Metal.MTLLibrary {
+      get
+      set
+    }
     public init(named name: Swift.String, in library: Metal.MTLLibrary)
   }
   public var __resource: RealityFoundation.__MaterialResource
@@ -6214,10 +6302,14 @@ public protocol __RKEntityInteractionService : AnyObject {
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 public class __RKEntityInteractionManager : RealityFoundation.__RKEntityInteractionService {
   public var areInteractionsEnabled: Swift.Bool
+  public var interactionsDisabledForTests: Swift.Bool
   public var customTriggerIdentifiers: [Swift.String] {
     get
   }
   public var customActionIdentifiers: [Swift.String] {
+    get
+  }
+  public var entitiesTargetedByATapTrigger: [RealityFoundation.Entity] {
     get
   }
   @discardableResult
@@ -6431,8 +6523,9 @@ public struct __EntityInfoComponent : RealityFoundation.Component, Swift.Codable
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
   public static func __addIntrospectionData(_ builder: Swift.OpaquePointer?)
-  @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
   public static func __free(to buffer: Swift.UnsafeMutableRawPointer, offset: Swift.Int)
+  @available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
+  public static func __load(from buffer: Swift.UnsafeRawPointer, offset: Swift.Int) -> RealityFoundation.Component
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
@@ -6459,6 +6552,39 @@ extension RealityFoundation.__REAssetBundle {
   public static func __init(realityScenes: [RealityFoundation.Scene], assetService: RealityFoundation.__REAssetService) -> RealityFoundation.__REAssetBundle
   public static func loadSceneDescriptors(url: Foundation.URL) throws -> [RealityFoundation.__REAssetBundle.AssetMap.SceneDescriptor]
 }
+@available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
+@_originallyDefinedIn(module: "RealityKit", macOS 13.0)
+@_originallyDefinedIn(module: "RealityKit", iOS 16.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 16.0)
+extension RealityFoundation.__REAssetBundle.ExportOptions {
+  public enum PlatformOS : Swift.RawRepresentable, Swift.Hashable {
+    case iOS
+    case macOS
+    case custom(_: Swift.String)
+    case special1
+    public init?(rawValue: Swift.String)
+    public var rawValue: Swift.String {
+      get
+    }
+    public typealias RawValue = Swift.String
+  }
+  public enum PlatformRequirement {
+    case none
+    case deploymentTargetOS
+    public static func == (a: RealityFoundation.__REAssetBundle.ExportOptions.PlatformRequirement, b: RealityFoundation.__REAssetBundle.ExportOptions.PlatformRequirement) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public struct DeploymentTarget {
+    public let platform: RealityFoundation.__REAssetBundle.ExportOptions.PlatformOS
+    public let version: (major: Swift.Int32, minor: Swift.Int32, patch: Swift.Int32)
+    public let platformRequirement: RealityFoundation.__REAssetBundle.ExportOptions.PlatformRequirement
+    public init(platform: RealityFoundation.__REAssetBundle.ExportOptions.PlatformOS, version: (major: Swift.Int32, minor: Swift.Int32, patch: Swift.Int32))
+    public init?(platform: RealityFoundation.__REAssetBundle.ExportOptions.PlatformOS, version: (major: Swift.Int32, minor: Swift.Int32, patch: Swift.Int32), platformRequirement: RealityFoundation.__REAssetBundle.ExportOptions.PlatformRequirement)
+  }
+}
 @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
@@ -6470,7 +6596,7 @@ public class LoadRequest<Output> : Combine.Publisher {
   }
   public func subscribe<S>(_ subscriber: S) where Output == S.Input, S : Combine.Subscriber, S.Failure == Swift.Error
   @objc deinit
-  public func receive<S>(subscriber: S) where Output == S.Input, S : Combine.Subscriber, S.Failure == RealityFoundation.LoadRequest<Output>.Failure
+  public func receive<S>(subscriber: S) where Output == S.Input, S : Combine.Subscriber, S.Failure == Swift.Error
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
 public func && <Value>(left: RealityFoundation.QueryPredicate<Value>, right: RealityFoundation.QueryPredicate<Value>) -> RealityFoundation.QueryPredicate<Value>
@@ -6484,13 +6610,15 @@ prefix public func ! <Value>(operand: RealityFoundation.QueryPredicate<Value>) -
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 public struct __RKMaterialParameterBlock {
   public enum Parameter : Swift.ExpressibleByNilLiteral, Swift.ExpressibleByFloatLiteral, Swift.ExpressibleByIntegerLiteral {
-    @available(*, deprecated, message: "Use textureAndSampler")
     case texture(RealityFoundation.TextureResource)
+    @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
     case textureAndSampler(RealityFoundation.MaterialParameters.Texture)
     case float(Swift.Float)
     case float2(Swift.SIMD2<Swift.Float>)
     case float3(Swift.SIMD3<Swift.Float>)
     case float4(Swift.SIMD4<Swift.Float>)
+    @available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
+    case color(CoreGraphics.CGColor)
     case float2x2(simd.float2x2)
     case float3x3(simd.float3x3)
     case float4x4(simd.float4x4)
@@ -6540,7 +6668,9 @@ public struct __RKMaterialParameterBlock {
   public init()
   public init(transparentPassTechniqueMappping mapping: [(RealityFoundation.__RKMaterialParameterBlock.TransparentPass, Swift.String)])
   public init(hashedTransparentPassTechniqueMapping mapping: [(RealityFoundation.__RKMaterialParameterBlock.TransparentPass, Darwin.size_t)])
+  @available(*, deprecated, renamed: "fromCore")
   public static func __fromCore(_ coreComponent: RealityFoundation.__ComponentRef, index: Darwin.size_t) -> RealityFoundation.__RKMaterialParameterBlock
+  @available(*, deprecated, renamed: "toCore")
   public func __toCore(_ coreComponent: RealityFoundation.__ComponentRef, index: Darwin.size_t)
 }
 extension RealityFoundation.QueryPredicate {
@@ -6558,6 +6688,7 @@ extension RealityFoundation.Entity {
     case failedToImportUSD(message: Swift.String, url: Foundation.URL)
     case invalidDictionary(message: Swift.String, invalidDictionary: [Swift.String : Any]?)
   }
+  @available(*, deprecated, message: "Will be removed; please generate USDs with equivalent schemas instead: https://developer.apple.com/documentation/arkit/usdz_schemas_for_ar")
   public static func __packageToRealityFile(packageURL: Foundation.URL, completion: @escaping (Swift.Result<Foundation.URL, Swift.Error>) -> Swift.Void)
 }
 @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
@@ -6619,11 +6750,15 @@ final public class __SceneImportOperation {
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 public func __SceneImportOperation_addCustomUSDDataToScene(uskNode: RealityFoundation.__USKNodeWrapper, uskScene: RealityFoundation.__USKSceneWrapper, scene: RealityFoundation.Scene, sceneIdentifier: Foundation.UUID, usdNodeToEntityMapping: [Swift.String : Swift.String], scenePathToUUIDMapping: [Swift.String : Foundation.UUID], fileName: Swift.String, error: Swift.UnsafeMutablePointer<Swift.Unmanaged<CoreFoundation.CFError>?>?) -> Swift.Bool
-@available(macOS 10.15.4, iOS 13.4, macCatalyst 13.4, *)
+@available(iOS, introduced: 13.4, deprecated: 16.0, message: "Use the alternative that includes `serviceLocator`")
+@available(macOS, introduced: 10.15.4, deprecated: 13.0, message: "Use the alternative that includes `serviceLocator`")
+@available(macCatalyst, introduced: 13.4, deprecated: 16.0, message: "Use the alternative that includes `serviceLocator`")
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 public func __SceneImportOperation_addCustomUSDDataToScene(uskNode: RealityFoundation.__USKNodeWrapper, uskScene: RealityFoundation.__USKSceneWrapper, scene: RealityFoundation.Scene, sceneIdentifier: Foundation.UUID, usdNodeToEntityMapping: [Swift.String : Swift.String], scenePathToUUIDMapping: [Swift.String : Foundation.UUID], actionAssets: [Swift.String : Swift.String], fileName: Swift.String) -> Swift.Error?
+@available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
+public func __SceneImportOperation_addCustomUSDDataToScene(uskNode: RealityFoundation.__USKNodeWrapper, uskScene: RealityFoundation.__USKSceneWrapper, scene: RealityFoundation.Scene, sceneIdentifier: Foundation.UUID, usdNodeToEntityMapping: [Swift.String : Swift.String], scenePathToUUIDMapping: [Swift.String : Foundation.UUID], actionAssets: [Swift.String : Swift.String], fileName: Swift.String, serviceLocator: RealityFoundation.__ServiceLocator) -> Swift.Error?
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
@@ -6879,6 +7014,7 @@ public class MeshResource : RealityFoundation.Resource {
     get
   }
   @objc deinit
+  @available(*, deprecated, message: "Use Entity.loadModel(named:in:) instead")
   public static func __load(named name: Swift.String, in bundle: Foundation.Bundle? = nil) throws -> RealityFoundation.MeshResource
   public static func generateBox(size: Swift.Float, cornerRadius: Swift.Float = 0) -> RealityFoundation.MeshResource
   public static func generateBox(size: Swift.SIMD3<Swift.Float>, cornerRadius: Swift.Float = 0) -> RealityFoundation.MeshResource
@@ -7070,12 +7206,6 @@ extension RealityFoundation.CharacterControllerComponent {
   }
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-public enum SystemDependency : Swift.Equatable {
-  case before(RealityFoundation.System.Type)
-  case after(RealityFoundation.System.Type)
-  public static func == (lhs: RealityFoundation.SystemDependency, rhs: RealityFoundation.SystemDependency) -> Swift.Bool
-}
-@available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
 public struct SceneUpdateContext {
   public var scene: RealityFoundation.Scene
   public var deltaTime: Foundation.TimeInterval
@@ -7097,6 +7227,7 @@ extension RealityFoundation.System {
   public mutating func update(context: RealityFoundation.SceneUpdateContext)
 }
 @available(macOS 12.0, macCatalyst 15.0, *)
+@available(iOS, unavailable)
 public struct PhotogrammetrySample : Swift.Identifiable {
   public let id: Swift.Int
   public let image: CoreVideo.CVPixelBuffer
@@ -7108,11 +7239,14 @@ public struct PhotogrammetrySample : Swift.Identifiable {
   public typealias ID = Swift.Int
 }
 @_hasMissingDesignatedInitializers @available(macOS 12.0, macCatalyst 15.0, *)
+@available(iOS, unavailable)
 public class PhotogrammetrySession {
   public enum Request : Swift.Hashable {
     case modelFile(url: Foundation.URL, detail: RealityFoundation.PhotogrammetrySession.Request.Detail = .medium, geometry: RealityFoundation.PhotogrammetrySession.Request.Geometry? = nil)
     case modelEntity(detail: RealityFoundation.PhotogrammetrySession.Request.Detail = .medium, geometry: RealityFoundation.PhotogrammetrySession.Request.Geometry? = nil)
     case bounds
+    @available(macOS 13.0, macCatalyst 16.0, *)
+    case pointCloud
     public enum Detail : Swift.Int, Swift.Hashable {
       case preview
       case reduced
@@ -7126,8 +7260,18 @@ public class PhotogrammetrySession {
       }
     }
     public struct Geometry : Swift.Hashable {
-      public var bounds: RealityFoundation.BoundingBox
+      @available(macOS 13.0, macCatalyst 16.0, *)
+      public var orientedBounds: RealityFoundation.OrientedBoundingBox {
+        get
+        set
+      }
+      public var bounds: RealityFoundation.BoundingBox {
+        get
+        set
+      }
       public var transform: RealityFoundation.Transform
+      @available(macOS 13.0, macCatalyst 16.0, *)
+      public init(orientedBounds: RealityFoundation.OrientedBoundingBox, transform: RealityFoundation.Transform = Transform.identity)
       public init(bounds: RealityFoundation.BoundingBox = BoundingBox.empty, transform: RealityFoundation.Transform = Transform.identity)
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: RealityFoundation.PhotogrammetrySession.Request.Geometry, b: RealityFoundation.PhotogrammetrySession.Request.Geometry) -> Swift.Bool
@@ -7146,6 +7290,8 @@ public class PhotogrammetrySession {
     case modelFile(Foundation.URL)
     case modelEntity(RealityFoundation.ModelEntity)
     case bounds(RealityFoundation.BoundingBox)
+    @available(macOS 13.0, macCatalyst 16.0, *)
+    case pointCloud(RealityFoundation.PhotogrammetrySession.PointCloud)
   }
   public enum Output {
     case inputComplete
@@ -7161,26 +7307,23 @@ public class PhotogrammetrySession {
       get
     }
   }
-  
   #if compiler(>=5.3) && $RethrowsProtocol
   public struct Outputs : _Concurrency.AsyncSequence {
     public typealias Element = RealityFoundation.PhotogrammetrySession.Output
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      
       #if compiler(>=5.3) && $AsyncAwait
       public mutating func next() async throws -> RealityFoundation.PhotogrammetrySession.Output?
       #endif
-
       public typealias Element = RealityFoundation.PhotogrammetrySession.Output
     }
     public func makeAsyncIterator() -> RealityFoundation.PhotogrammetrySession.Outputs.Iterator
     public typealias AsyncIterator = RealityFoundation.PhotogrammetrySession.Outputs.Iterator
   }
   #endif
-
   public struct Configuration : Swift.Equatable {
     public enum SampleOrdering {
-      case unordered, sequential
+      case unordered
+      case sequential
       public static func == (a: RealityFoundation.PhotogrammetrySession.Configuration.SampleOrdering, b: RealityFoundation.PhotogrammetrySession.Configuration.SampleOrdering) -> Swift.Bool
       public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
@@ -7188,7 +7331,8 @@ public class PhotogrammetrySession {
       }
     }
     public enum FeatureSensitivity {
-      case normal, high
+      case normal
+      case high
       public static func == (a: RealityFoundation.PhotogrammetrySession.Configuration.FeatureSensitivity, b: RealityFoundation.PhotogrammetrySession.Configuration.FeatureSensitivity) -> Swift.Bool
       public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
@@ -7201,6 +7345,14 @@ public class PhotogrammetrySession {
     public init()
     public static func == (a: RealityFoundation.PhotogrammetrySession.Configuration, b: RealityFoundation.PhotogrammetrySession.Configuration) -> Swift.Bool
   }
+  @available(macOS 13.0, macCatalyst 16.0, *)
+  public struct PointCloud {
+    public struct Point {
+      public let position: Swift.SIMD3<Swift.Float>
+      public let color: Swift.SIMD4<Swift.UInt8>
+    }
+    public let points: [RealityFoundation.PhotogrammetrySession.PointCloud.Point]
+  }
   public var activeRequests: [RealityFoundation.PhotogrammetrySession.Request] {
     get
   }
@@ -7210,18 +7362,34 @@ public class PhotogrammetrySession {
   public var configuration: RealityFoundation.PhotogrammetrySession.Configuration {
     get
   }
-  
   #if compiler(>=5.3) && $RethrowsProtocol
   public var outputs: RealityFoundation.PhotogrammetrySession.Outputs {
     get
   }
   #endif
-
+  @available(macOS 13.0, macCatalyst 16.0, *)
+  public static var isSupported: Swift.Bool {
+    get
+  }
   convenience public init(input: Foundation.URL, configuration: RealityFoundation.PhotogrammetrySession.Configuration = Configuration()) throws
   convenience public init<S>(input: S, configuration: RealityFoundation.PhotogrammetrySession.Configuration = Configuration()) throws where S : Swift.Sequence, S.Element == RealityFoundation.PhotogrammetrySample
   public func process(requests: [RealityFoundation.PhotogrammetrySession.Request]) throws
   public func cancel()
   @objc deinit
+}
+@available(macOS 13.0, macCatalyst 16.0, *)
+public struct OrientedBoundingBox : Swift.Hashable {
+  public var orientation: simd.simd_quatf
+  public var boundingBox: RealityFoundation.BoundingBox
+  public init(orientation: simd.simd_quatf = simd_quatf(ix: 0, iy: 0, iz: 0, r: 1), boundingBox: RealityFoundation.BoundingBox = BoundingBox.empty)
+  @inlinable public func hash(into hasher: inout Swift.Hasher) {
+        hasher.combine(Transform(rotation: self.orientation))
+        hasher.combine(self.boundingBox)
+    }
+  public static func == (a: RealityFoundation.OrientedBoundingBox, b: RealityFoundation.OrientedBoundingBox) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
@@ -7254,7 +7422,13 @@ public class __ServiceLocator {
     get
   }
   unowned public var engine: RealityFoundation.__Engine
-  public var renderService: RealityFoundation.__RenderService
+  public var usesMetal: Swift.Bool {
+    get
+  }
+  public var renderService: RealityFoundation.__RenderService {
+    get
+    set
+  }
   @available(*, deprecated, message: "Use renderService directly")
   public var __renderService: RealityFoundation.__RenderService {
     get
@@ -7364,7 +7538,7 @@ public class AudioResource : RealityFoundation.Resource {
     set
   }
 }
-@_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
@@ -7413,7 +7587,7 @@ extension RealityFoundation.AudioFileResource.LoadingStrategy : Swift.Hashable {
     get
   }
 }
-@_hasMissingDesignatedInitializers @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
 public class AudioBufferResource : RealityFoundation.AudioResource {
   public var shouldLoop: Swift.Bool {
     get
@@ -7453,6 +7627,8 @@ public struct ModelDebugOptionsComponent : RealityFoundation.Component {
     case clearcoatRoughness
     case lightingDiffuse
     case lightingSpecular
+    @available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
+    case textureCoordinates1
     public init?(rawValue: Swift.String)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
@@ -7948,6 +8124,8 @@ extension RealityFoundation.__REAnchoringType.Name : Swift.Hashable {}
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension RealityFoundation.__REAnchoringType.Name : Swift.RawRepresentable {}
+@available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
+extension RealityFoundation.__MaterialResource : RealityFoundation.Resource {}
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
 extension RealityFoundation.TweenMode : Swift.Equatable {}
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
@@ -7979,6 +8157,9 @@ extension RealityFoundation.__RKEntityProximityTrigger.ExitType : Swift.Hashable
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension RealityFoundation.__RKEntityProximityTrigger.ExitType : Swift.RawRepresentable {}
+@available(macOS 12.0, macCatalyst 15.0, *)
+@available(iOS, unavailable)
+extension RealityFoundation.PhotogrammetrySession.Request.Detail : Swift.RawRepresentable {}
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
 extension RealityFoundation.MeshBuffers.Rate : Swift.Equatable {}
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
@@ -8029,6 +8210,16 @@ extension RealityFoundation.CustomMaterial.LightingModel : Swift.Hashable {}
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension RealityFoundation.BoundingBox : Swift.Sendable {}
+@available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
+@_originallyDefinedIn(module: "RealityKit", macOS 13.0)
+@_originallyDefinedIn(module: "RealityKit", iOS 16.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 16.0)
+extension RealityFoundation.__REAssetBundle.ExportOptions.PlatformRequirement : Swift.Equatable {}
+@available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
+@_originallyDefinedIn(module: "RealityKit", macOS 13.0)
+@_originallyDefinedIn(module: "RealityKit", iOS 16.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 16.0)
+extension RealityFoundation.__REAssetBundle.ExportOptions.PlatformRequirement : Swift.Hashable {}
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
@@ -8089,14 +8280,16 @@ extension RealityFoundation.CollisionComponent.Mode : Swift.Equatable {}
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension RealityFoundation.CollisionComponent.Mode : Swift.Hashable {}
 @available(macOS 12.0, macCatalyst 15.0, *)
-extension RealityFoundation.PhotogrammetrySession.Request.Detail : Swift.RawRepresentable {}
-@available(macOS 12.0, macCatalyst 15.0, *)
+@available(iOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Configuration.SampleOrdering : Swift.Equatable {}
 @available(macOS 12.0, macCatalyst 15.0, *)
+@available(iOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Configuration.SampleOrdering : Swift.Hashable {}
 @available(macOS 12.0, macCatalyst 15.0, *)
+@available(iOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Configuration.FeatureSensitivity : Swift.Equatable {}
 @available(macOS 12.0, macCatalyst 15.0, *)
+@available(iOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Configuration.FeatureSensitivity : Swift.Hashable {}
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)

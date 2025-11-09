@@ -13,6 +13,7 @@
 #import <FileProvider/NSFileProviderService.h>
 #import <FileProvider/NSFileProviderActions.h>
 #import <FileProvider/NSFileProviderRequest.h>
+#import <FileProvider/NSFileProviderModifyItemOptions.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 typedef NS_OPTIONS(NSUInteger, NSFileProviderCreateItemOptions) {
     /**
-     The imported item may already exists.
+     The imported item may already exist.
 
      This can happen because:
 
@@ -33,16 +34,23 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderCreateItemOptions) {
      lost, for example following the restoration of a backup, or the migration
      to a new device.
 
-     2. Two directories are merged together. Each child resulting of the merge
-     may be recreated with the mayAlreadyExist option. This allows the
-     extension to recursively merge directories.
+     2. Two directories are merged together, due to the extension returning
+     the same itemIdentifier for both directories on the createItem completion handler.
+     Each child resulting of the merge may be recreated with the
+     mayAlreadyExist option. This allows the extension to recursively merge
+     directories.
 
      The Extension should assess whether the item could actually be a disk
      representation of an already existing item.
 
-     Since this can happens when the system has to reimport all the existing
-     item from disk, it is advised that the assessment method avoids
-     computational intensive tasks, such as checksumming the item.
+     The best user experience is to match the requested item to one on the server,
+     if the extension is able to confirm that the disk item is representing an item already on
+     the server.
+
+     Given that this flag may be set when the system is reimporting all items from disk,
+     it is advised that the Extension attempts assessment methods for each item
+     in order from cheapest to most expensive (in terms of CPU and network), in order
+     to avoid unnecessary work.
 
      When all the items pending reimport have been processed, the system
      will call -[NSFileProviderExtension importDidFinishWithCompletionHandler:].
@@ -55,9 +63,9 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderCreateItemOptions) {
      This happens only if the edit wasn't yet known by the system at the time the
      deletion was requested.
      */
-    NSFileProviderCreateItemDeletionConflicted FILEPROVIDER_API_AVAILABILITY_V3_1 = 1 << 1,
+    NSFileProviderCreateItemDeletionConflicted FILEPROVIDER_API_AVAILABILITY_V3_1_IOS = 1 << 1,
 
-} FILEPROVIDER_API_AVAILABILITY_V3;
+} FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 /**
  Options passed on item deletion.
@@ -67,38 +75,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderDeleteItemOptions) {
      The deletion of the item is recursive.
      */
     NSFileProviderDeleteItemRecursive = 1 << 0,
-} FILEPROVIDER_API_AVAILABILITY_V3;
-
-typedef NS_OPTIONS(NSUInteger, NSFileProviderModifyItemOptions) {
-    /**
-     We're moving the item to a location where it may refer to an item that already exists. This may happen
-     when two directories are being merged together. When this happens some items may be merged to the
-     same directory and we end up in a situation where the merged contains may also exist.
-
-     This is similar to NSFileProviderCreateItemMayAlreadyExist
-     */
-    NSFileProviderModifyItemMayAlreadyExist = 1 << 0,
-} FILEPROVIDER_API_AVAILABILITY_V3;
-
-/**
- NSFileProviderItemContents corresponds to the item's contents.
-
- Each subsequent field corresponds to a property on NSFileProviderItem that can
- change.
- */
-typedef NS_OPTIONS(NSUInteger, NSFileProviderItemFields) {
-    NSFileProviderItemContents = 1 << 0,
-    NSFileProviderItemFilename = 1 << 1,
-    NSFileProviderItemParentItemIdentifier = 1 << 2,
-    NSFileProviderItemLastUsedDate = 1 << 3,
-    NSFileProviderItemTagData = 1 << 4,
-    NSFileProviderItemFavoriteRank = 1 << 5,
-    NSFileProviderItemCreationDate = 1 << 6,
-    NSFileProviderItemContentModificationDate = 1 << 7,
-    NSFileProviderItemFileSystemFlags = 1 << 8,
-    NSFileProviderItemExtendedAttributes = 1 << 9,
-    NSFileProviderItemTypeAndCreator FILEPROVIDER_API_AVAILABILITY_V4_0 = 1 << 10,
-} FILEPROVIDER_API_AVAILABILITY_V3;
+} FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 /**
  NSFileProviderMaterializationFlags are used to inform the system about specific conditions
@@ -107,8 +84,12 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemFields) {
  */
 typedef NS_OPTIONS(NSUInteger, NSFileProviderMaterializationFlags) {
     /**
-     Mark the file as fully materialized even though it's sparse.
-     This flag is ignored if the provided range doesn't cover the entire file (ie. [0, EOF])
+     By default, the system will track which parts of the returned file are sparse; those parts will remain non-materialized
+     and trigger subsequent calls to the materialization methods on access. Returning this flag will instead cause the entire
+     file to be marked as materialized. This is useful if the resulting file is known to contain sparse parts,
+     and all the remaining parts have been filled in.
+     This flag is ignored if the provided range doesn't cover the entire file (ie. [0, EOF]).
+     This flag is currently ignored.
      */
     NSFileProviderMaterializationFlagsKnownSparseRanges = (1 << 0)
 } FILEPROVIDER_API_AVAILABILITY_V4_1;
@@ -127,7 +108,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFetchContentsOptions) {
 
 #pragma mark - Extension with FPFS support
 
-FILEPROVIDER_API_AVAILABILITY_V3
+FILEPROVIDER_API_AVAILABILITY_V3_IOS
 @protocol NSFileProviderEnumerating <NSObject>
 
 /**
@@ -178,6 +159,13 @@ FILEPROVIDER_API_AVAILABILITY_V3
  If the provider exposes the key NSExtensionFileProviderAppliesChangesAtomically with value
  YES in its Info.plist, it is considered to apply the changes atomically, in which case the
  system does not need to check for potential races.
+
+ Execution time:
+ ---------------
+ The system expects this call to complete quickly, it should build the object that will be
+ used for enumeration and return it. The enumeration logic should happen when the system
+ calls `-[NSFileProviderEnumerator enumerateItemsForObserver:startingAtPage:]` or
+ `-[NSFileProviderEnumerator enumerateChangesForObserver:fromSyncAnchor:]`.
 
  Error cases:
  ------------
@@ -243,15 +231,15 @@ FILEPROVIDER_API_AVAILABILITY_V3
 
  The system currently separates the operations into the following categories:
  - enumeration of the working set. At most 1 enumeration of the working set can happen at a given time
- - downloads. The system has a limit on the number of concurrent calls to fetchContents and similar calls
+ - downloads. The system has a per-domain limit on the number of concurrent calls to fetchContents and similar calls.
    That limit is configurable by setting the NSExtensionFileProviderDownloadPipelineDepth key to an integer
    value (between 1 and 128) in the Info.plist of the extension.
- - uploads. The system has a limit on the number of concurrent calls to createItemBasedOnTemplate and
+ - uploads. The system has a per-domain limit on the number of concurrent calls to createItemBasedOnTemplate and
    modifyItem when the call includes new content to be uploaded. That limit is configurable by setting the
    NSExtensionFileProviderUploadPipelineDepth key to an integer value (between 1 and 128) in the Info.plist
    of the extension.
  */
-FILEPROVIDER_API_AVAILABILITY_V3
+FILEPROVIDER_API_AVAILABILITY_V3_IOS
 @protocol NSFileProviderReplicatedExtension <NSObject, NSFileProviderEnumerating>
 
 /**
@@ -302,6 +290,15 @@ FILEPROVIDER_API_AVAILABILITY_V3
  If the NSProgress returned by this method is cancelled, the extension should
  call the completion handler with (nil, NSUserCancelledError) in the NSProgress
  cancellation handler.
+
+ Execution time:
+ ---------------
+ This method is not expected to take more than a few seconds to complete the retrieval of the
+ metadata of the item. If the operation may not complete in a reasonable amount of time because,
+ for instance, of bad network conditions, it is recommended to report an error (for instance
+ NSFileProviderErrorServerUnreachable). The system will call `cancel` on the progress if the
+ operation takes too much time. The extension is then expected to quickly call the completion
+ handler.
  */
 - (NSProgress *)itemForIdentifier:(NSFileProviderItemIdentifier)identifier
                           request:(NSFileProviderRequest *)request
@@ -339,6 +336,8 @@ FILEPROVIDER_API_AVAILABILITY_V3
 
  File ownership:
  ---------------
+ The retrieved content at `fileContents` URL must be a regular file on the same volume as the user-visible URL.
+ A suitable location can be retrieved using -[NSFileProviderManager temporaryDirectoryURLWithError:].
  The system clones and unlinks the received fileContents. The extension should not mutate the corresponding
  file after calling the completion handler. If the extension wishes to keep a copy of the content, it must
  provide a clone of the that content as the URL passed to the completion handler.
@@ -354,8 +353,9 @@ FILEPROVIDER_API_AVAILABILITY_V3
  downloads for specific applications.
 
  The extension can set an array of strings into the UserDefault key
- "NSFileProviderExtensionNonMaterializingProcessNames". A process whose name is an exact match for an
- entry in this array will not be allowed to fetch items in the extension's domains.
+ "NSFileProviderExtensionNonMaterializingProcessNames". A process whose executable's filename on disk is an
+ exact match for an entry in this array will not be allowed to fetch items in the extension's domains. The comparison
+ is case sensitive.
 
  In macOS 11.0 and later, this list will be checked when a download is initiated through a POSIX filesystem call.
  In macOS 11.4 and later, this list will also be checked for downloads initiated through file coordination.
@@ -396,7 +396,13 @@ FILEPROVIDER_API_AVAILABILITY_V3
  The returned NSProgress is used to show progress to the user. If the user cancels the
  fetch, the extension should stop fetching the item, as it is no longer required.
 
- */
+ Execution time:
+ ---------------
+ The system will grant enough time to the extension to download the file. The system will interrupt the
+ call if it stops making progress or if download takes an unexpectedly long time. In that case, the system
+ will call `cancel` on the progress. The extension is then expected to quickly call the completion
+ handler.
+  */
 - (NSProgress *)fetchContentsForItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
                                            version:(nullable NSFileProviderItemVersion *)requestedVersion
                                            request:(NSFileProviderRequest *)request
@@ -435,6 +441,10 @@ FILEPROVIDER_API_AVAILABILITY_V3
  If the provider is not able to apply all the fields at once, it should return a
  set of stillPendingFields in its completion handler. In that case, the system will
  attempt to modify the item later by calling modifyItem with those fields.
+
+ The filename and contents fields should be synced together.
+ If synced independently, files may appear corrupted on other devices, due to
+ a mismatch between the file extension and the actual file data.
 
  If a field in the returned createdItem does not match the itemTemplate, and is
  not in the list of stillPendingFields, the value from the createdItem will be
@@ -542,6 +552,14 @@ FILEPROVIDER_API_AVAILABILITY_V3
  If the NSProgress returned by this method is cancelled, the extension should
  call the completion handler with (nil, [], NO, NSUserCancelledError) in the NSProgress
  cancellation handler.
+
+ Execution time:
+ ---------------
+ The system will grant enough time to the extension to upload the file if content is passed to the call,
+ otherwise the call is expected to completed within a few seconds. The system will interrupt the
+ call if it stops making progress or if upload takes an unexpectedly long time. In that case, the system
+ will call `cancel` on the progress. The extension is then expected to quickly call the completion
+ handler.
  */
 - (NSProgress *)createItemBasedOnTemplate:(NSFileProviderItem)itemTemplate
                                    fields:(NSFileProviderItemFields)fields
@@ -563,6 +581,10 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  If the provider is not able to apply all the fields at once, it should return a
  set of stillPendingFields in its completion handler. In that case, the system will
  attempt to modify the item later by calling modifyItem with those fields.
+
+ The filename and contents fields should be synced together.
+ If synced independently, files may appear corrupted on other devices, due to
+ a mismatch between the file extension and the actual file data.
 
  Starting in macOS 12.0, if the set of stillPendingFields returned by the provider is
  identical to the set of fields passed to modifyItem, then the system will consider that these fields
@@ -706,6 +728,14 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  If the NSProgress returned by this method is cancelled, the extension should
  call the completion handler with (nil, [], NO, NSUserCancelledError) in the NSProgress
  cancellation handler.
+
+ Execution time:
+ ---------------
+ The system will grant enough time to the extension to upload the file if content is passed to the call,
+ otherwise the call is expected to completed within a few seconds. The system will interrupt the
+ call if it stops making progress or if upload takes an unexpectedly long time. In that case, the system
+ will call `cancel` on the progress. The extension is then expected to quickly call the completion
+ handler.
  */
 - (NSProgress *)modifyItem:(NSFileProviderItem)item
                baseVersion:(NSFileProviderItemVersion *)version
@@ -792,6 +822,13 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  If the NSProgress returned by this method is cancelled, the extension should
  call the completion handler with (NSUserCancelledError) in the NSProgress
  cancellation handler.
+
+ Execution time:
+ ---------------
+ This call is not expected to take more than a few seconds to complete. The system will interrupt the
+ call if it stops making progress or if the deletion takes an unexpectedly long time. In that case,the system
+ will call `cancel` on the progress. The extension is then expected to quickly call the completion
+ handler.
  */
 - (NSProgress *)deleteItemWithIdentifier:(NSFileProviderItemIdentifier)identifier
                              baseVersion:(NSFileProviderItemVersion *)version
@@ -828,6 +865,10 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  for instance in low-power situations, or when the system is under heavy load. The provider can
  force the system to process a folder and its direct children by issuing a coordination request
  on that folder.
+
+ Execution time:
+ ---------------
+ This call is not expected to take more than a few seconds to complete.
  */
 - (void)importDidFinishWithCompletionHandler:(void (^)(void))completionHandler;
 
@@ -882,6 +923,10 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  Since this method is called on every change of the set of materialized items,
  it is advisable to use it to set a flag and perform any resulting work as a
  timed task rather than performing any work directly.
+
+ Execution time:
+ ---------------
+ This call is not expected to take more than a few seconds to complete.
  */
 - (void)materializedItemsDidChangeWithCompletionHandler:(void (^)(void))completionHandler;
 
@@ -904,6 +949,12 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  These constraints imply that initial transfer of a file from the disk to the provider will not
  be listed in the pending set, even though the transfer could take several minutes to complete
 
+ Furthermore, the pending set can only contain a limited number of items.
+ The pending set provides an easy way to design an "in progress" UI containing a few items
+ and to detect whether there's any activity pending on the system.
+ In case the pending set reached its maximum size items, newly pending items won't be included
+ in it. Already present items in the pending set will remain until they no longer are pending.
+
  The pending set is refreshed regurlary but only if there are meaningful changes:
  new pending items, items that were pending but are not anymore (deletions from the set),
  or domain version changed and set is not empty
@@ -921,8 +972,12 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  Thus, implementeers should not use the pending set to detect when a change happens.
  The pending set will only contain items that were pending for a least one second before the
  last refresh date.
+
+ Execution time:
+ ---------------
+ This call is not expected to take more than a few seconds to complete.
  */
-- (void)pendingItemsDidChangeWithCompletionHandler:(void (^)(void))completionHandler FILEPROVIDER_API_AVAILABILITY_V3_1;
+- (void)pendingItemsDidChangeWithCompletionHandler:(void (^)(void))completionHandler FILEPROVIDER_API_AVAILABILITY_V3_1_IOS;
 
 @end
 
@@ -931,7 +986,7 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
 /**
  Protocol to implement if the provider instance supports fetching incremental content changes.
  */
-FILEPROVIDER_API_AVAILABILITY_V3
+FILEPROVIDER_API_AVAILABILITY_V3_IOS
 @protocol NSFileProviderIncrementalContentFetching <NSObject>
 
 /**
@@ -953,7 +1008,7 @@ FILEPROVIDER_API_AVAILABILITY_V3
 
 @end
 
-FILEPROVIDER_API_AVAILABILITY_V3
+FILEPROVIDER_API_AVAILABILITY_V3_IOS
 @protocol NSFileProviderServicing <NSObject>
 
 /**
@@ -969,6 +1024,13 @@ FILEPROVIDER_API_AVAILABILITY_V3
  If the NSProgress returned by this method is cancelled, the extension should
  call the completion handler with (nil, NSUserCancelledError) in the NSProgress
  cancellation handler.
+
+ Execution time:
+ ---------------
+ This method is not expected to take more than a few seconds to complete the retrieval of the
+ thumbnails. The system will call `cancel` on the progress if the
+ operation takes too much time. The extension is then expected to quickly call the completion
+ handler.
 */
 - (NSProgress *)supportedServiceSourcesForItemIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
                                        completionHandler:(void (^)(NSArray <id <NSFileProviderServiceSource>> * _Nullable, NSError * _Nullable))completionHandler
@@ -979,7 +1041,7 @@ FILEPROVIDER_API_AVAILABILITY_V3
 /**
  Protocol to implement if the provider supports fetching thumbnails for its items.
  */
-FILEPROVIDER_API_AVAILABILITY_V3
+FILEPROVIDER_API_AVAILABILITY_V3_IOS
 @protocol NSFileProviderThumbnailing <NSObject>
 
 /**
@@ -1015,6 +1077,13 @@ FILEPROVIDER_API_AVAILABILITY_V3
  If the NSProgress returned by this method is cancelled, the extension should
  call the completion handler with (NSUserCancelledError) in the NSProgress
  cancellation handler.
+
+ Execution time:
+ ---------------
+ This method is not expected to take more than a few tens seconds to complete the retrieval of the
+ services exposed on the item. The system will call `cancel` on the progress if the
+ operation takes too much time. The extension is then expected to quickly call the completion
+ handler.
  */
 - (NSProgress *)fetchThumbnailsForItemIdentifiers:(NSArray<NSFileProviderItemIdentifier> *)itemIdentifiers
                                     requestedSize:(CGSize)size
@@ -1024,7 +1093,7 @@ FILEPROVIDER_API_AVAILABILITY_V3
 
 @end
 
-FILEPROVIDER_API_AVAILABILITY_V3
+FILEPROVIDER_API_AVAILABILITY_V3_IOS
 @protocol NSFileProviderCustomAction  <NSObject>
 
 /**
@@ -1073,6 +1142,10 @@ FILEPROVIDER_API_AVAILABILITY_V4_0
  in a specific domain's context. Or, the extension could choose to only suppress that alert for the
  specific domain it was displayed within, and in the future, the user would see the same alert in the same
  context, if they take the same action in another domain.
+
+ Execution time:
+ ---------------
+ This method is expected to complete immediately.
  */
 
 - (void)setInteractionSuppressed:(BOOL)suppression forIdentifier:(NSString *)suppressionIdentifier;
@@ -1080,7 +1153,7 @@ FILEPROVIDER_API_AVAILABILITY_V4_0
 
 @end
 
-FILEPROVIDER_API_AVAILABILITY_V3_1
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS
 @protocol NSFileProviderDomainState <NSObject>
 
 /**
@@ -1141,8 +1214,20 @@ FILEPROVIDER_API_AVAILABILITY_V4_1
  In addition to the content the extension needs to fill in fetchedRange with either the requestest range,
  <location, length>, or indicate full materialization with, <0, file size>.
 
+ On-disk layout:
+ ---------------
+ The retrieved content at `fileContents` URL must be a regular file on the same volume as the user-visible URL.
+ A suitable location can be retrieved using -[NSFileProviderManager temporaryDirectoryURLWithError:].
+ The file contents outside of the fetched range are ignored by the system. The system only requires the file
+ to be at least as large as the end of the fetched range. For instance, if the fetchedRange is {offset:0x100000, length:0x1000},
+ the file size must be at least 0x101000 bytes. Any data (or lack thereof) beyond the fetched range is ignored.
+
+ The fetched range must be stored in this file at the same offset as the range indicates.
+ For instance if the retrievedRange  is {offset:0x100000, length:0x1000} then it should actually be at offset 0x100000 in the
+ `fileContents` file. The ranges {0, 0x100000}, and {0x101000, EOF} can be anything including sparse ranges.
+
  Concurrent Downloads:
- ----------
+ ---------------
  The system will call fetchContents concurrently if there are multiple outstanding file download requests.
  The provider can control the concurrency by setting the key NSExtensionFileProviderDownloadPipelineDepth
  in the Info.plist of the extension to the number of concurrent downloads that the system should create
@@ -1162,14 +1247,15 @@ FILEPROVIDER_API_AVAILABILITY_V4_1
  ---------------
 
  The system automatically downloads files on POSIX accesses. The extension may wish to disallow this class of
- downloads for specific applications.  Currently only POSIX accesses trigger this message so that would render this
- message superfluous in such cases.
+ downloads for specific applications.
 
  The extension can set an array of strings into the UserDefault key
- "NSFileProviderExtensionNonMaterializingProcessNames". A process whose name is an exact match for an
- entry in this array will not be allowed to fetch items in the extension's domains.
+ "NSFileProviderExtensionNonMaterializingProcessNames". A process whose executable's filename on disk is an
+ exact match for an entry in this array will not be allowed to fetch items in the extension's domains. The comparison
+ is case sensitive.
 
- This list will not be checked for downloads requested through file coordination.
+ In macOS 11.0 and later, this list will be checked when a download is initiated through a POSIX filesystem call.
+ In macOS 11.4 and later, this list will also be checked for downloads initiated through file coordination.
 
  Error cases:
  ------------
@@ -1208,6 +1294,12 @@ FILEPROVIDER_API_AVAILABILITY_V4_1
  The returned NSProgress is used to show progress to the user. If the user cancels the
  fetch, the extension should stop fetching the item, as it is no longer required.
 
+ Execution time:
+ ---------------
+ The system will grant enough time to the extension to download the file. The system will interrupt the
+ call if it stops making progress or if download takes an unexpectedly long time. In that case, the system
+ will call `cancel` on the progress. The extension is then expected to quickly call the completion
+ handler.
  */
 - (NSProgress *)fetchPartialContentsForItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
                                                   version:(NSFileProviderItemVersion *)requestedVersion

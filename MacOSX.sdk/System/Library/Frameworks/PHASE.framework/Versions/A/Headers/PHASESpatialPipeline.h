@@ -19,7 +19,7 @@ typedef NSString* PHASESpatialCategory NS_TYPED_ENUM;
 /*!
     @constant PHASESpatialCategoryDirectPathTransmission
  */
-OS_EXPORT PHASESpatialCategory const  PHASESpatialCategoryDirectPathTransmission;
+OS_EXPORT PHASESpatialCategory const PHASESpatialCategoryDirectPathTransmission;
 
 /*!
     @constant PHASEEarlyReflections

@@ -87,6 +87,9 @@ NS_ASSUME_NONNULL_BEGIN
 		attack and release times.
 		Value type: boolean.  Default is true.
 
+	@constant   CHHapticPatternKeyEventWaveformLoopEnabled
+		For events of type CHHapticEventTypeAudioCustom, indicates whether the audio file playback will be looped.
+		Value type: boolean.  Default is false.
 */
 
 typedef NSString *CHHapticPatternKey NS_TYPED_ENUM;
@@ -109,6 +112,8 @@ CH_EXPORT
 CHHapticPatternKey CHHapticPatternKeyEventParameters API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
 CHHapticPatternKey CHHapticPatternKeyEventWaveformUseVolumeEnvelope API_AVAILABLE(ios(15.0), macos(12.0), tvos(15.0), macCatalyst(15.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT
+CHHapticPatternKey CHHapticPatternKeyEventWaveformLoopEnabled API_AVAILABLE(ios(16.0), macos(13.0), tvos(16.0), macCatalyst(16.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
 CHHapticPatternKey CHHapticPatternKeyParameter API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
@@ -169,6 +174,17 @@ CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) 
  */
 - (nullable instancetype)initWithDictionary:(NSDictionary<CHHapticPatternKey, id> *)patternDict
 									  error:(NSError **)outError;
+
+/*! @method initWithContentsOfURL:error
+    @abstract
+        Initialize a new CHHapticPattern using the contents of the passed-in NSURL.
+    @param ahapURL
+        NSURL of an ahap file.
+    @discussion
+        This URL must reference a valid AHAP file.
+ */
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)ahapURL
+                                      error:(NSError **)outError API_AVAILABLE(ios(16.0), macos(13.0), tvos(16.0), macCatalyst(16.0)) API_UNAVAILABLE(watchos);
 
 /*! @method exportDictionaryAndReturnError:error
     @abstract

@@ -41,7 +41,7 @@ enum {
   kCollectionDontWantAttributes = 0,
   kCollectionDontWantIndex      = 0,
   kCollectionDontWantData       = 0
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 
 /* attributes bits */
@@ -50,7 +50,7 @@ enum {
   kCollectionAllAttributes      = (int)0xFFFFFFFF, /* all attributes bits set */
   kCollectionUserAttributes     = 0x0000FFFF, /* user attributes bits */
   kCollectionDefaultAttributes  = 0x40000000 /* default attributes - unlocked, persistent */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 
 /* 
@@ -91,7 +91,7 @@ enum {
   kCollectionReserved13Bit      = 29,
   kCollectionPersistenceBit     = 30,
   kCollectionLockBit            = 31
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 
 /* attribute masks */
@@ -128,7 +128,7 @@ enum {
   kCollectionReserved13Mask     = 1UL << kCollectionReserved13Bit,
   kCollectionPersistenceMask    = 1UL << kCollectionPersistenceBit,
   kCollectionLockMask           = 1UL << kCollectionLockBit
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 
 /***********/

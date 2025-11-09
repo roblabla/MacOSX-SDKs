@@ -15,8 +15,19 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
 
 // The number of pages in the scanned document.
 @property (nonatomic, readonly) NSUInteger pageCount;
+
+#if TARGET_OS_OSX
+
+// The image of the page at a specified index.
+- (NSImage *)imageOfPageAtIndex:(NSUInteger)index;
+
+#elif TARGET_OS_IPHONE
+
 // The image of the page at a specified index.
 - (UIImage *)imageOfPageAtIndex:(NSUInteger)index;
+
+#endif
+
 // The title of the scanned document.
 @property (nonatomic, strong, readonly) NSString *title;
 

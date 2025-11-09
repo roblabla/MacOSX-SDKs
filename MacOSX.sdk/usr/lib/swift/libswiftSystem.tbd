@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D940EEE2-1CED-35A4-9470-CB7EE938E4BA
+    value:           F74D768F-996F-3062-8F2B-9A70F0AB7065
   - target:          x86_64-maccatalyst
-    value:           D940EEE2-1CED-35A4-9470-CB7EE938E4BA
+    value:           F74D768F-996F-3062-8F2B-9A70F0AB7065
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C3C3FEE2-D88C-3C8E-A1D8-0F91B003E0AD
+    value:           39E32D53-F99E-3E9C-95FD-C22B5957762A
   - target:          arm64e-maccatalyst
-    value:           C3C3FEE2-D88C-3C8E-A1D8-0F91B003E0AD
+    value:           39E32D53-F99E-3E9C-95FD-C22B5957762A
 install-name:    '/usr/lib/swift/libswiftSystem.dylib'
-current-version: 21
+current-version: 23
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s6System14FileDescriptorV10AccessModeV11descriptionSSvg', 
                        '_$s6System14FileDescriptorV10AccessModeV11descriptionSSvpMV', 
                        '_$s6System14FileDescriptorV10AccessModeV16debugDescriptionSSvg', 
@@ -159,12 +159,13 @@ exports:
                        '_$s6System8FilePathV6encode2toys7Encoder_p_tKF', '_$s6System8FilePathV6lengthSivg', 
                        '_$s6System8FilePathV6lengthSivpMV', '_$s6System8FilePathV6starts4withSbAC_tF', 
                        '_$s6System8FilePathV6stringSSvg', '_$s6System8FilePathV6stringSSvpMV', 
-                       '_$s6System8FilePathV7cStringACSPys4Int8VG_tcfC', '_$s6System8FilePathV7dirnameACvg', 
-                       '_$s6System8FilePathV7dirnameACvpMV', '_$s6System8FilePathV7isEmptySbvg', 
-                       '_$s6System8FilePathV7isEmptySbvpMV', '_$s6System8FilePathV7pushingyA2CnF', 
-                       '_$s6System8FilePathV8basenameAC9ComponentVSgvg', '_$s6System8FilePathV8basenameAC9ComponentVSgvpMV', 
-                       '_$s6System8FilePathV9ComponentV11descriptionSSvg', '_$s6System8FilePathV9ComponentV11descriptionSSvpMV', 
-                       '_$s6System8FilePathV9ComponentV13stringLiteralAESS_tcfC', 
+                       '_$s6System8FilePathV7cStringACSPys4Int8VG_tcfC', '_$s6System8FilePathV7cStringACSS_tcfC', 
+                       '_$s6System8FilePathV7cStringACSays4Int8VG_tcfC', '_$s6System8FilePathV7cStringACs4Int8Vz_tcfC', 
+                       '_$s6System8FilePathV7dirnameACvg', '_$s6System8FilePathV7dirnameACvpMV', 
+                       '_$s6System8FilePathV7isEmptySbvg', '_$s6System8FilePathV7isEmptySbvpMV', 
+                       '_$s6System8FilePathV7pushingyA2CnF', '_$s6System8FilePathV8basenameAC9ComponentVSgvg', 
+                       '_$s6System8FilePathV8basenameAC9ComponentVSgvpMV', '_$s6System8FilePathV9ComponentV11descriptionSSvg', 
+                       '_$s6System8FilePathV9ComponentV11descriptionSSvpMV', '_$s6System8FilePathV9ComponentV13stringLiteralAESS_tcfC', 
                        '_$s6System8FilePathV9ComponentV14platformStringAESgSPys4Int8VG_tcfC', 
                        '_$s6System8FilePathV9ComponentV16debugDescriptionSSvg', '_$s6System8FilePathV9ComponentV16debugDescriptionSSvpMV', 
                        '_$s6System8FilePathV9ComponentV18withPlatformStringyxxSPys4Int8VGKXEKlF', 

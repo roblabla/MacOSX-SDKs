@@ -19,7 +19,7 @@
 @class NSURLResponse;
 @class NSURLSessionTask;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*!
     @header NSURLProtocol.h
@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
     data.
     
     <p>The NSURLProtocolClient describes the integration points a
-    protocol implemention can use to hook into the URL loading system.
+    protocol implementation can use to hook into the URL loading system.
     NSURLProtocolClient describes the methods a protocol implementation
     needs to drive the URL loading system from a NSURLProtocol subclass.
     
@@ -150,7 +150,6 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 
 @end
 
-
 /*!
     @class NSURLProtocol
     
@@ -212,7 +211,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
     the given request.
     @discussion A concrete subclass should inspect the given request and
     determine whether or not the implementation can perform a load with
-    that request. This is an abstract method. Sublasses must provide an
+    that request. This is an abstract method. Subclasses must provide an
     implementation.
     @param request A request to inspect.
     @result YES if the protocol can handle the given request, NO if not.
@@ -231,7 +230,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
     used to look up objects in the URL cache, a process which performs
     equality checks between NSURLRequest objects.
     <p>
-    This is an abstract method; sublasses must provide an
+    This is an abstract method; subclasses must provide an
     implementation.
     @param request A request to make canonical.
     @result The canonical form of the given request. 
@@ -241,7 +240,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 /*!
     @method requestIsCacheEquivalent:toRequest:
     @abstract Compares two requests for equivalence with regard to caching.
-    @discussion Requests are considered euqivalent for cache purposes
+    @discussion Requests are considered equivalent for cache purposes
     if and only if they would be handled by the same protocol AND that
     protocol declares them equivalent after performing 
     implementation-specific checks.
@@ -353,4 +352,4 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @property (nullable, readonly, copy) NSURLSessionTask *task API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

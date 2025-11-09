@@ -10,7 +10,7 @@
 
 @class NSDateComponents, NSLocale, NSTimeZone, NSString, NSArray<ObjectType>;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if !defined(NS_CALENDAR_ENUM_DEPRECATED)
 #if 1 || NS_ENABLE_CALENDAR_DEPRECATIONS
@@ -99,7 +99,6 @@ typedef NS_OPTIONS(NSUInteger, NSCalendarOptions) {
 enum {
 	NSWrapCalendarComponents API_DEPRECATED_WITH_REPLACEMENT("NSCalendarWrapComponents", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarWrapComponents,
 };
-
 
 @interface NSCalendar : NSObject <NSCopying, NSSecureCoding>
 
@@ -473,4 +472,4 @@ NS_ENUM(NSInteger) {
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

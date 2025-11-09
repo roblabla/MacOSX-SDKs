@@ -21,7 +21,7 @@ typedef NSString * NSFileProtectionType NS_TYPED_ENUM;
 
 typedef NSString * NSFileProviderServiceName NS_TYPED_EXTENSIBLE_ENUM;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* Version number where NSFileManager can copy/move/enumerate resources forks correctly. 
 */
@@ -105,7 +105,7 @@ extern NSNotificationName const NSUbiquityIdentityDidChangeNotification API_AVAI
 
 /* This method starts the process of unmounting the volume specified by url. If the volume is encrypted, it is re-locked after being unmounted. The completionHandler will be executed when the operation is complete. If the operation was successful, the block’s errorOrNil argument will be nil; otherwise, errorOrNil will be an error object indicating why the unmount operation failed.
  */
-- (void)unmountVolumeAtURL:(NSURL *)url options:(NSFileManagerUnmountOptions)mask completionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
+- (void)unmountVolumeAtURL:(NSURL *)url options:(NSFileManagerUnmountOptions)mask completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSError * _Nullable errorOrNil))completionHandler API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /* -contentsOfDirectoryAtURL:includingPropertiesForKeys:options:error: returns an NSArray of NSURLs identifying the the directory entries. If this method returns nil, an NSError will be returned by reference in the 'error' parameter. If the directory contains no entries, this method will return the empty array. When an array is specified for the 'keys' parameter, the specified property values will be pre-fetched and cached with each enumerated URL.
  
@@ -326,7 +326,7 @@ extern NSNotificationName const NSUbiquityIdentityDidChangeNotification API_AVAI
 
 /* Asynchronously returns a dictionary of zero or more NSFileProviderService instances, which enable your application to instruct the file's provider to take various actions on or with regards to the given URL. To do this, first identify an NSFileProviderService object whose name matches the service you wish to use. Then get an NSXPCConnection from it and set up its NSXPCInterface with the protocol that matches the service's name. You'll need to refer to external documentation or an SDK supplied by the provider to get this information. Once an NSXPCConnection is obtained, you must finish configuring it and send it -resume. Failure to do so will result in leaking system resources.
  */
-- (void)getFileProviderServicesForItemAtURL:(NSURL *)url completionHandler:(void (^)(NSDictionary <NSFileProviderServiceName, NSFileProviderService *> * _Nullable services, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)getFileProviderServicesForItemAtURL:(NSURL *)url completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSDictionary <NSFileProviderServiceName, NSFileProviderService *> * _Nullable services, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /* Returns the container directory associated with the specified security application group ID.
  */
@@ -447,7 +447,7 @@ API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(watchos, tvos)
     id _endpointCreatingProxy;
     dispatch_group_t _requestFinishedGroup;
 }
-- (void)getFileProviderConnectionWithCompletionHandler:(void (^)(NSXPCConnection * _Nullable connection, NSError * _Nullable error))completionHandler;
+- (void)getFileProviderConnectionWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSXPCConnection * _Nullable connection, NSError * _Nullable error))completionHandler;
 @property (readonly, copy) NSFileProviderServiceName name;
 @end
 
@@ -508,4 +508,4 @@ FOUNDATION_EXPORT NSFileAttributeKey const NSFileSystemFreeNodes;
 - (nullable NSNumber *)fileGroupOwnerAccountID;
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

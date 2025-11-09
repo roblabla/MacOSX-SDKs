@@ -3,21 +3,21 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           187ADB52-DE85-39B3-AEB2-2CDD968321DF
+    value:           4598F857-DC92-3F0C-AE68-B46AE49CEDF0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9D9376FB-306C-351E-86C2-3C0F2BA6C3E7
+    value:           32638661-D199-328A-AACB-AF4CDCBE87B2
 install-name:    '/System/Library/PrivateFrameworks/ConsoleKit.framework/Versions/A/ConsoleKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _ConsoleKitVersionNumber, _ConsoleKitVersionString, _HashBytes, 
-                       _benchmarkBlock, _kCSKDBItemActivityID, _kCSKDBItemCreatorAID, 
-                       _kCSKDBItemCreatorPUID, _kCSKDBItemEventKind, _kCSKDBItemIdentifier, 
-                       _kCSKDBItemIsVolatile, _kCSKDBItemLibrary, _kCSKDBItemLibraryImagePath, 
-                       _kCSKDBItemMessageCategory, _kCSKDBItemMessageSubsystem, _kCSKDBItemMessageType, 
-                       _kCSKDBItemPID, _kCSKDBItemParentActivityID, _kCSKDBItemProcess, 
-                       _kCSKDBItemProcessImagePath, _kCSKDBItemThreadIdentifier, 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _CSKStreamArchiveSourceErrorDomain, _ConsoleKitVersionNumber, 
+                       _ConsoleKitVersionString, _HashBytes, _benchmarkBlock, _kCSKDBItemActivityID, 
+                       _kCSKDBItemCreatorAID, _kCSKDBItemCreatorPUID, _kCSKDBItemEventKind, 
+                       _kCSKDBItemIdentifier, _kCSKDBItemIsVolatile, _kCSKDBItemLibrary, 
+                       _kCSKDBItemLibraryImagePath, _kCSKDBItemMessageCategory, _kCSKDBItemMessageSubsystem, 
+                       _kCSKDBItemMessageType, _kCSKDBItemPID, _kCSKDBItemParentActivityID, 
+                       _kCSKDBItemProcess, _kCSKDBItemProcessImagePath, _kCSKDBItemThreadIdentifier, 
                        _kCSKDBItemTimestamp, _kCSKDBItemTimezone, _kCSKDBItemTitle, 
                        _kCSKDatabaseHandleBlobType, _kCSKDatabaseHandleCommitNotification, 
                        _kCSKDatabaseHandleDateType, _kCSKDatabaseHandleFloatType, 
@@ -41,16 +41,16 @@ exports:
                        CSKEvent, CSKExtendedTextField, CSKFileNode, CSKFileObserver, 
                        CSKFileSystem, CSKFileTailObserver, CSKFilter, CSKHeaderView, 
                        CSKHeaderViewController, CSKHelpers, CSKIconTableCellView, 
-                       CSKLoadRange, CSKLoadRangeViewController, CSKLogging, CSKMenu, 
-                       CSKMenuItemRepresentation, CSKMenuItemStateRepresentation, 
-                       CSKMessage, CSKMessageDetailsViewController, CSKMessageExtendedHeaderView, 
-                       CSKMessageHeaderView, CSKMessageHeaderViewController, CSKMessagesTableColumnLayout, 
-                       CSKMessagesTableView, CSKMessagesViewController, CSKSQLMessageDetailsViewController, 
-                       CSKScrollView, CSKStatusViewController, CSKStream, CSKStreamASLSource, 
-                       CSKStreamActivitiesDataTask, CSKStreamActivitiesObserver, 
-                       CSKStreamArchiveSource, CSKStreamArchiveStatistics, CSKStreamArchiveStatisticsEntry, 
-                       CSKStreamData, CSKStreamDataAdditionTask, CSKStreamDataBatch, 
-                       CSKStreamDataDirectionModifierTask, CSKStreamDataRemovalTask, 
+                       CSKKtraceLogEventStream, CSKLoadRange, CSKLoadRangeViewController, 
+                       CSKLogarchiveLogEventStream, CSKLogging, CSKMenu, CSKMenuItemRepresentation, 
+                       CSKMenuItemStateRepresentation, CSKMessage, CSKMessageDetailsViewController, 
+                       CSKMessageExtendedHeaderView, CSKMessageHeaderView, CSKMessageHeaderViewController, 
+                       CSKMessagesTableColumnLayout, CSKMessagesTableView, CSKMessagesViewController, 
+                       CSKSQLMessageDetailsViewController, CSKScrollView, CSKStatusViewController, 
+                       CSKStream, CSKStreamASLSource, CSKStreamActivitiesDataTask, 
+                       CSKStreamActivitiesObserver, CSKStreamArchiveSource, CSKStreamArchiveStatistics, 
+                       CSKStreamArchiveStatisticsEntry, CSKStreamData, CSKStreamDataAdditionTask, 
+                       CSKStreamDataBatch, CSKStreamDataDirectionModifierTask, CSKStreamDataRemovalTask, 
                        CSKStreamDataTask, CSKStreamDeviceSource, CSKStreamManager, 
                        CSKStreamMessagesDataTask, CSKStreamMessagesObserver, CSKStreamNativeUtilities, 
                        CSKStreamObserver, CSKStreamObserverAdditionTask, CSKStreamObserverDataBatch, 

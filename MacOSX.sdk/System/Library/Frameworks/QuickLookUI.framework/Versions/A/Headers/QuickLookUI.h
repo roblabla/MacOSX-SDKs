@@ -10,7 +10,7 @@
 #if !defined(__QUICKLOOKUI_QUICKLOOKUI__)
 #define __QUICKLOOKUI_QUICKLOOKUI__
 
-#include <QuickLook/QuickLook.h>
+#import <QuickLook/QuickLook.h>
 
 #import <QuickLookUI/QLPreviewItem.h>
 #import <QuickLookUI/QLPreviewPanel.h>

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AA77298C-8FFC-3C8A-84CD-A5481B3DF3D7
+    value:           BF931529-8D1F-36D8-BAA9-D66238440A05
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           40C716A2-13AF-3672-B418-CA6B76015D03
+    value:           9F42E84F-8D07-3F59-AB7E-9BDAD3D5BEDD
 install-name:    '/System/Library/Frameworks/Collaboration.framework/Versions/A/Collaboration'
 current-version: 84
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SidebarContacts, _SidebarNetworkGroups, _SidebarNetworkUsers, 
                        _SidebarUsersGroups, _SortABGroupsByName, _SortABPeopleByFirstName, 
                        _SortIdentitiesByFirstName ]

@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7BF911B0-2600-3C80-AD16-C0F99071CBCB
+    value:           972DF94F-C52E-3C0C-8DD9-3F626EE97F32
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E2516F80-9109-35AC-A9A2-139041272A7A
+    value:           CA53EBB5-6914-399D-B75A-9A5993AEBC1F
 install-name:    '/usr/lib/libsasl2.2.dylib'
 current-version: 3.15
 compatibility-version: 3
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __plug_buf_alloc, __plug_challenge_prompt, __plug_decode, 
                        __plug_find_prompt, __plug_free_secret, __plug_free_string, 
                        __plug_get_password, __plug_get_realm, __plug_get_simple, 

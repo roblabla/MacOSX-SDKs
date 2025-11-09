@@ -6,6 +6,8 @@
  *
  */
 
+#ifdef __OBJC__
+
 #import <Foundation/Foundation.h>
 #import <CoreTelephony/CoreTelephonyDefines.h>
 
@@ -39,3 +41,5 @@ CORETELEPHONY_CLASS_DEPRECATED(4_0, 10_0, "Replaced by CXCallObserver from CallK
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // __OBJC__

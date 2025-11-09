@@ -86,6 +86,7 @@ typedef NS_ENUM(NSUInteger, MTLVertexFormat)
     MTLVertexFormatShortNormalized API_AVAILABLE(macos(10.13), ios(11.0)) = 52,
     
     MTLVertexFormatHalf API_AVAILABLE(macos(10.13), ios(11.0)) = 53,
+
     
 } API_AVAILABLE(macos(10.11), ios(8.0));
 

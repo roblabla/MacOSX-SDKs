@@ -5,10 +5,10 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0D586286-21CD-3AF8-9601-1BB70328D4A5
+    value:           051142E6-1FF9-35BB-948A-656713495089
 install-name:    '/System/Library/PrivateFrameworks/H13ISPServices.framework/Versions/A/H13ISPServices'
 exports:
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ __Z13GetNamedValueP9__CFArrayi, __Z16AppendNamedValueP9__CFArrayPK14__CFDictionary, 
                        __Z16ClearNamedValuesP9__CFArray, __Z16CountNamedValuesP9__CFArray, 
                        __Z16CreateNamedValuePKcS0_P9__CFArray, __Z17CreateNamedValuesv, 

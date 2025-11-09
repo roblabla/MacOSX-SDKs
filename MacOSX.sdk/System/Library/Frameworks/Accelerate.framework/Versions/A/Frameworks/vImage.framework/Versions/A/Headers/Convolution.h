@@ -385,6 +385,150 @@ VIMAGE_PF vImage_Error vImageConvolve_Planar8( const vImage_Buffer *src, const v
  */
 VIMAGE_PF vImage_Error vImageConvolve_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const float *kernel, uint32_t kernel_height, uint32_t kernel_width, Pixel_F backgroundColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
+/*!
+ *  @function vImageConvolve_Planar16F
+ *  @abstract General convolution on a Planar16F image.
+ *  @discussion This filter applies a convolution filter of your choosing to a Planar16F image.
+ *              The kernel values are specified as 32-bit single-precision floats and the
+ *              weighted average is also computed in single precision by default. However, if
+ *              the flag kvImageUseFP16Accumulator is set all internal filtering operations will
+ *              use 16-bit half-precision floating-point arithmetic when the CPU architecture
+ *              supports it. This results in up to 2x performance improvements but at the
+ *              expense of a less precise result; typically 2-3 bits of precision is lost.
+ *
+ *              For each pixel:
+ *      <pre>@textblock
+ *          for each pixel[y][x] in image{
+ *              // sum is declared as type _Float16 when the flag kvImageUseFP16Accumulator is set
+ *              float sum = 0;
+ *
+ *              // Calculate weighted average over kernel area
+ *              for each kernel_element[i][j] in kernel{
+ *                  sum += kernel_element[i][j] *
+ *                          pixel[y+i+srcOffsetToROI_Y-kernel_height/2]
+ *                               [x+j+srcOffsetToROI_X- kernel_width/2];
+ *              }
+ *
+ *              // write out result
+ *              result[y][x] = (_Float16)sum;
+ *          }
+ *      @/textblock </pre>
+ *              (Above, we imagine the kernel to be a 2D array of size kernel_height by kernel_width.
+ *              However, in practice it is passed in as a contiguous 1D array of size kernel_height *
+ *              kernel_width.)
+ *
+ *              This filter does not work in place.
+ *
+ *  @param src              The input image
+ *
+ *  @param dest             A pointer to a preallocated vImage_Buffer to receive the result image.
+ *                          This may not alias the src image.
+ *
+ *  @param tempBuffer       An optional pointer to a region of memory to use as a working area during
+ *                          computation.  The size of the tempBuffer is given by calling the function
+ *                          with the same parameters and the kvImageGetTempBufferSize flag, in which case
+ *                          the size is returned instead of an error code from the left hand side.
+ *                          You may pass NULL here, in which case a region of memory of similar size
+ *                          will be allocated by the function and freed before it returns.  Temp Buffers
+ *                          are a way of avoiding lost time due to VM faults to initialize newly allocated
+ *                          buffers. If you will be calling this function repeatedly with similar parameters
+ *                          you should use a temp buffer. If the function is called from different threads
+ *                          concurrently, a different temp buffer should be used for each.
+ *
+ *  @param srcOffsetToROI_X An offset used in tiling to shift the position of the destination image
+ *                          relative to the src image. Typically this is 0. Non-Zero values are needed
+ *                          when the destination tile is not aligned with the left edge of the image.
+ *
+ *  @param srcOffsetToROI_Y An offset used in tiling to shift the position of the destination image
+ *                          relative to the src image. Typically this is 0. Non-Zero values are needed
+ *                          when the destination tile is not aligned with the top edge of the image.
+ *
+ *  @param kernel           A pointer to a 1D array of weights of dimension kernel_height x kernel_width.
+ *                          For example, for a simple 3x3 blur, it might be:
+ *                          <pre>@textblock
+ *                          const float kernel[9] =   { 1./16, 2./16, 1./16,
+ *                                                      2./16, 4./16, 2./16,
+ *                                                      1./16, 2./16, 1./16 };
+ *                          @/textblock </pre>
+ *
+ *  @param kernel_height    The height of the 2D table of weights passed in as kernel. It must be an odd number.
+ *
+ *  @param kernel_width     The width of the 2D table of weights passed in as kernel. It must be an odd number.
+ *
+ *  @param backgroundColor  When the kvImageBackgroundColorFill edging mode is active, the backgroundColor
+ *                          parameter provides the background color to be used for missing pixels when the
+ *                          kernel extends off the edge of the image.
+ *
+ *  @param flags            The following flags are allowed:
+ *      <pre>@textblock
+ *              kvImageCopyInPlace          If any pixels covered by the kernel do no not exist, simply
+ *                                          copy the corresponding source pixel to the destination. This
+ *                                          will result in a ring off unconvolved content at the edges
+ *                                          and convolved content in the middle.
+ *
+ *              kvImageBackgroundColorFill  Substitute in the provided background color for missing pixels.
+ *                                          For a blur filter this will look like the edges of the image
+ *                                          have been blurred into a particular color. This is usually
+ *                                          appropriate when the color of the surface onto which the image
+ *                                          will be drawn is known.  You can also use {Alpha = 0, color = 0}
+ *                                          as a background color, and let the downstream image compositor
+ *                                          blend in the background color. In this case, the result image
+ *                                          should be treated as a premultiplied image.
+ *
+ *              kvImageEdgeExtend           Substitute in the nearest defined pixel for missing pixels.
+ *                                          This is better when the image is drawn into a frame or other
+ *                                          context where the background is not expected to contribute to
+ *                                          the final content.
+ *
+ *              kvImageTruncateKernel       This is similar to kvImageEdgeExtend, except that edge pixels are
+ *                                          simply ignored, and the bias and divisor are adjusted accordingly.
+ *                                          Because of the complication at the edges, this edging mode can
+ *                                          be significantly slower than the others. It can be numerically
+ *                                          unstable if the sum over any rectangular subsection of the kernel
+ *                                          is zero, which can result in division by zero during the computation.
+ *                                          The results for this edging mode are usually quite visually similar
+ *                                          to kvImageEdgeExtend.
+ *
+ *              kvImageGetTempBufferSize    Instead of calculating the convolution of the image, return the
+ *                                          size of the temp buffer needed for this set of parameters. Does
+ *                                          not touch the src or dest image.
+ *
+ *              kvImageDoNotTile                     Disable internal multithreading.
+ *
+ *              kvImageUseFP16Accumulator  Enable 16-bit half-precision floating-point arithmetic when computing the
+ *                                          kernel averages when the CPU architecture supports it.
+ *
+ *      @/textblock </pre>
+ *                          The first four flags listed are edging modes. One and only one edging mode must be
+ *                          provided. If no edging mode is provided (e.g. kvImageNoFlags), then an error will
+ *                          be returned.
+ *
+ *  @return One of the following error codes may be returned:
+ *      <pre>@textblock
+ *          kvImageNoError              Success.
+ *              >= 0                    If kvImageGetTempBufferSize is passed, this is the size of
+ *                                      the temp buffer to use with this function and this set of
+ *                                      parameters.
+ *
+ *          kvImageInvalidEdgeStyle     One and only one of the following flags must be provided:
+ *                                         { kvImageCopyInPlace, kvImageBackgroundColorFill,
+ *                                           kvImageEdgeExtend,  kvImageTruncateKernel }
+ *
+ *          kvImageRoiLargerThanInputBuffer The dest->width and height must be less than or equal
+ *                                          to corresponding dimensions of the source buffer.
+ *
+ *          kvImageInvalidOffset_X      The destination width + srcOffsetToROI_X > src->width
+ *
+ *          kvImageInvalidOffset_Y      The destination height + srcOffsetToROI_Y > src->height
+ *
+ *          kvImageNullPointerArgument  kernel may not be NULL
+ *
+ *          kvImageMemoryAllocationError Could not allocate memory to serve as a temp buffer.
+ *
+ *          kvImageInvalidKernelSize    The kernel height and width must be odd numbers.
+ *      @/textblock </pre>
+ */
+VIMAGE_PF vImage_Error vImageConvolve_Planar16F( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const float *kernel, uint32_t kernel_height, uint32_t kernel_width, Pixel_16F backgroundColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /*!
  *  @function vImageConvolve_ARGB8888
@@ -693,6 +837,162 @@ VIMAGE_PF vImage_Error vImageConvolve_ARGB8888( const vImage_Buffer *src, const 
  */
 VIMAGE_PF vImage_Error vImageConvolve_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const float *kernel, uint32_t kernel_height, uint32_t kernel_width, const Pixel_FFFF backgroundColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
+/*!
+ *  @function vImageConvolve_ARGB16F
+ *  @abstract General convolution on a ARGB16F image of any channel order.
+ *  @discussion This filter applies a convolution filter of your choosing to a ARGB16F image.
+ *              This filter will work on any four-channel, half-float per component image format, not just ARGB.
+ *              The kernel values are specified as 32-bit single-precision floats and the
+ *              weighted average is also computed in single precision by default. However, if
+ *              the flag kvImageUseFP16Accumulator is set all internal filtering operations will
+ *              use 16-bit half-precision floating-point arithmetic when the CPU architecture
+ *              supports it. This results in up to 2x performance improvements but at the
+ *              expense of a less precise result; typically 2-3 bits of precision is lost.
+ *
+ *              For each pixel:
+ *      <pre>@textblock
+ *          for each pixel[y][x] in image{
+ *              // Sums are declared as type _Float16 when the flag kvImageUseFP16Accumulator is set
+ *              float sumA = 0;
+ *              float sumR = 0;
+ *              float sumG = 0;
+ *              float sumB = 0;
+ *
+ *              // Calculate weighted average over kernel area
+ *              for each kernel_element[i][j] in kernel{
+ *                  sumA += kernel_element[i][j] *
+ *                          pixel[y+i+srcOffsetToROI_Y-kernel_height/2] [x+j+srcOffsetToROI_X- kernel_width/2][0];
+ *                  sumR += kernel_element[i][j] *
+ *                          pixel[y+i+srcOffsetToROI_Y-kernel_height/2] [x+j+srcOffsetToROI_X- kernel_width/2][1];
+ *                  sumG += kernel_element[i][j] *
+ *                          pixel[y+i+srcOffsetToROI_Y-kernel_height/2] [x+j+srcOffsetToROI_X- kernel_width/2][2];
+ *                  sumB += kernel_element[i][j] *
+ *                          pixel[y+i+srcOffsetToROI_Y-kernel_height/2] [x+j+srcOffsetToROI_X- kernel_width/2][3];
+ *              }
+ *
+ *              // write out result
+ *              result[y][x][0] = (_Float16)sumA;
+ *              result[y][x][1] = (_Float16)sumR;
+ *              result[y][x][2] = (_Float16)sumG;
+ *              result[y][x][3] = (_Float16)sumB;
+ *          }
+ *      @/textblock </pre>
+ *              (Above, we imagine the kernel to be a 2D array of size kernel_height by kernel_width.
+ *              However, in practice it is passed in as a contiguous 1D array of size kernel_height *
+ *              kernel_width.)
+ *
+ *              This filter does not work in place.
+ *
+ *  @param src              The input image
+ *
+ *  @param dest             A pointer to a preallocated vImage_Buffer to receive the result image.
+ *                          This may not alias the src image.
+ *
+ *  @param tempBuffer       An optional pointer to a region of memory to use as a working area during
+ *                          computation.  The size of the tempBuffer is given by calling the function
+ *                          with the same parameters and the kvImageGetTempBufferSize flag, in which case
+ *                          the size is returned instead of an error code from the left hand side.
+ *                          You may pass NULL here, in which case a region of memory of similar size
+ *                          will be allocated by the function and freed before it returns.  Temp Buffers
+ *                          are a way of avoiding lost time due to VM faults to initialize newly allocated
+ *                          buffers. If you will be calling this function repeatedly with similar parameters
+ *                          you should use a temp buffer. If the function is called from different threads
+ *                          concurrently, a different temp buffer should be used for each.
+ *
+ *  @param srcOffsetToROI_X An offset used in tiling to shift the position of the destination image
+ *                          relative to the src image. Typically this is 0. Non-Zero values are needed
+ *                          when the destination tile is not aligned with the left edge of the image.
+ *
+ *  @param srcOffsetToROI_Y An offset used in tiling to shift the position of the destination image
+ *                          relative to the src image. Typically this is 0. Non-Zero values are needed
+ *                          when the destination tile is not aligned with the top edge of the image.
+ *
+ *  @param kernel           A pointer to a 1D array of weights of dimension kernel_height x kernel_width.
+ *                          For example, for a simple 3x3 blur, it might be:
+ *                          <pre>@textblock
+ *                          const float kernel[9] =   { 1./16, 2./16, 1./16,
+ *                                                      2./16, 4./16, 2./16,
+ *                                                      1./16, 2./16, 1./16 };
+ *                          @/textblock </pre>
+ *
+ *  @param kernel_height    The height of the 2D table of weights passed in as kernel. It must be an odd number.
+ *
+ *  @param kernel_width     The width of the 2D table of weights passed in as kernel. It must be an odd number.
+ *
+ *  @param backgroundColor  When the kvImageBackgroundColorFill edging mode is active, the backgroundColor
+ *                          parameter provides the background color to be used for missing pixels when the
+ *                          kernel extends off the edge of the image.
+ *
+ *  @param flags            The following flags are allowed:
+ *      <pre>@textblock
+ *              kvImageCopyInPlace          If any pixels covered by the kernel do no not exist, simply
+ *                                          copy the corresponding source pixel to the destination. This
+ *                                          will result in a ring off unconvolved content at the edges
+ *                                          and convolved content in the middle.
+ *
+ *              kvImageBackgroundColorFill  Substitute in the provided background color for missing pixels.
+ *                                          For a blur filter this will look like the edges of the image
+ *                                          have been blurred into a particular color. This is usually
+ *                                          appropriate when the color of the surface onto which the image
+ *                                          will be drawn is known.  You can also use {Alpha = 0, color = 0}
+ *                                          as a background color, and let the downstream image compositor
+ *                                          blend in the background color. In this case, the result image
+ *                                          should be treated as a premultiplied image.
+ *
+ *              kvImageEdgeExtend           Substitute in the nearest defined pixel for missing pixels.
+ *                                          This is better when the image is drawn into a frame or other
+ *                                          context where the background is not expected to contribute to
+ *                                          the final content.
+ *
+ *              kvImageTruncateKernel       This is similar to kvImageEdgeExtend, except that edge pixels are
+ *                                          simply ignored, and the bias and divisor are adjusted accordingly.
+ *                                          Because of the complication at the edges, this edging mode can
+ *                                          be significantly slower than the others. It can be numerically
+ *                                          unstable if the sum over any rectangular subsection of the kernel
+ *                                          is zero, which can result in division by zero during the computation.
+ *                                          The results for this edging mode are usually quite visually similar
+ *                                          to kvImageEdgeExtend.
+ *
+ *              kvImageGetTempBufferSize    Instead of calculating the convolution of the image, return the
+ *                                          size of the temp buffer needed for this set of parameters. Does
+ *                                          not touch the src or dest image.
+ *
+ *              kvImageDoNotTile                     Disable internal multithreading.
+ *
+ *              kvImageUseFP16Accumulator  Enable 16-bit half-precision floating-point arithmetic when computing the
+ *                                          kernel averages when the CPU architecture supports it.
+ *
+ *      @/textblock </pre>
+ *                          The first four flags listed are edging modes. One and only one edging mode must be
+ *                          provided. If no edging mode is provided (e.g. kvImageNoFlags), then an error will
+ *                          be returned.
+ *
+ *  @return One of the following error codes may be returned:
+ *      <pre>@textblock
+ *          kvImageNoError              Success.
+ *              >= 0                    If kvImageGetTempBufferSize is passed, this is the size of
+ *                                      the temp buffer to use with this function and this set of
+ *                                      parameters.
+ *
+ *          kvImageInvalidEdgeStyle     One and only one of the following flags must be provided:
+ *                                         { kvImageCopyInPlace, kvImageBackgroundColorFill,
+ *                                           kvImageEdgeExtend,  kvImageTruncateKernel }
+ *
+ *          kvImageRoiLargerThanInputBuffer The dest->width and height must be less than or equal
+ *                                          to corresponding dimensions of the source buffer.
+ *
+ *          kvImageInvalidOffset_X      The destination width + srcOffsetToROI_X > src->width
+ *
+ *          kvImageInvalidOffset_Y      The destination height + srcOffsetToROI_Y > src->height
+ *
+ *          kvImageNullPointerArgument  kernel may not be NULL
+ *
+ *          kvImageMemoryAllocationError Could not allocate memory to serve as a temp buffer.
+ *
+ *          kvImageInvalidKernelSize    The kernel height and width must be odd numbers.
+ *      @/textblock </pre>
+ */
+VIMAGE_PF vImage_Error vImageConvolve_ARGB16F( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const float *kernel, uint32_t kernel_height, uint32_t kernel_width, const Pixel_ARGB_16F backgroundColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /*!
  *  @function vImageConvolveWithBias_Planar8
@@ -980,6 +1280,152 @@ VIMAGE_PF vImage_Error vImageConvolveWithBias_Planar8( const vImage_Buffer *src,
  */
 VIMAGE_PF vImage_Error vImageConvolveWithBias_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const float *kernel, uint32_t kernel_height, uint32_t kernel_width, float bias, Pixel_F backgroundColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
+/*!
+ *  @function vImageConvolveWithBias_Planar16F
+ *  @abstract General convolution on a Planar16F image.
+ *  @discussion This filter applies a convolution filter of your choosing to a Planar16F image.
+ *              The kernel values are specified as 32-bit single-precision floats and the
+ *              weighted average is also computed in single precision by default. However, if
+ *              the flag kvImageUseFP16Accumulator is set all internal filtering operations will
+ *              use 16-bit half-precision floating-point arithmetic when the CPU architecture
+ *              supports it. This results in up to 2x performance improvements but at the
+ *              expense of a less precise result; typically 2-3 bits of precision is lost.
+ *
+ *              For each pixel:
+ *      <pre>@textblock
+ *          for each pixel[y][x] in image{
+ *              // sum is declared as type _Float16 when the flag kvImageUseFP16Accumulator is set
+ *              float sum = bias;
+ *
+ *              // Calculate weighted average over kernel area
+ *              for each kernel_element[i][j] in kernel{
+ *                  sum += kernel_element[i][j] *
+ *                          pixel[y+i+srcOffsetToROI_Y-kernel_height/2]
+ *                               [x+j+srcOffsetToROI_X- kernel_width/2];
+ *              }
+ *
+ *              // write out result
+ *              result[y][x] = (_Float16)sum;
+ *          }
+ *      @/textblock </pre>
+ *              (Above, we imagine the kernel to be a 2D array of size kernel_height by kernel_width.
+ *              However, in practice it is passed in as a contiguous 1D array of size kernel_height *
+ *              kernel_width.)
+ *
+ *              This filter does not work in place.
+ *
+ *  @param src              The input image
+ *
+ *  @param dest             A pointer to a preallocated vImage_Buffer to receive the result image.
+ *                          This may not alias the src image.
+ *
+ *  @param tempBuffer       An optional pointer to a region of memory to use as a working area during
+ *                          computation.  The size of the tempBuffer is given by calling the function
+ *                          with the same parameters and the kvImageGetTempBufferSize flag, in which case
+ *                          the size is returned instead of an error code from the left hand side.
+ *                          You may pass NULL here, in which case a region of memory of similar size
+ *                          will be allocated by the function and freed before it returns.  Temp Buffers
+ *                          are a way of avoiding lost time due to VM faults to initialize newly allocated
+ *                          buffers. If you will be calling this function repeatedly with similar parameters
+ *                          you should use a temp buffer. If the function is called from different threads
+ *                          concurrently, a different temp buffer should be used for each.
+ *
+ *  @param srcOffsetToROI_X An offset used in tiling to shift the position of the destination image
+ *                          relative to the src image. Typically this is 0. Non-Zero values are needed
+ *                          when the destination tile is not aligned with the left edge of the image.
+ *
+ *  @param srcOffsetToROI_Y An offset used in tiling to shift the position of the destination image
+ *                          relative to the src image. Typically this is 0. Non-Zero values are needed
+ *                          when the destination tile is not aligned with the top edge of the image.
+ *
+ *  @param kernel           A pointer to a 1D array of weights of dimension kernel_height x kernel_width.
+ *                          For example, for a simple 3x3 blur, it might be:
+ *                          <pre>@textblock
+ *                          const float kernel[9] =   { 1./16, 2./16, 1./16,
+ *                                                      2./16, 4./16, 2./16,
+ *                                                      1./16, 2./16, 1./16 };
+ *                          @/textblock </pre>
+ *
+ *  @param kernel_height    The height of the 2D table of weights passed in as kernel. It must be an odd number.
+ *
+ *  @param kernel_width     The width of the 2D table of weights passed in as kernel. It must be an odd number.
+ *
+ *  @param bias             This value is added to the sum of weighted pixels.
+ *
+ *  @param backgroundColor  When the kvImageBackgroundColorFill edging mode is active, the backgroundColor
+ *                          parameter provides the background color to be used for missing pixels when the
+ *                          kernel extends off the edge of the image.
+ *
+ *  @param flags            The following flags are allowed:
+ *      <pre>@textblock
+ *              kvImageCopyInPlace          If any pixels covered by the kernel do no not exist, simply
+ *                                          copy the corresponding source pixel to the destination. This
+ *                                          will result in a ring off unconvolved content at the edges
+ *                                          and convolved content in the middle.
+ *
+ *              kvImageBackgroundColorFill  Substitute in the provided background color for missing pixels.
+ *                                          For a blur filter this will look like the edges of the image
+ *                                          have been blurred into a particular color. This is usually
+ *                                          appropriate when the color of the surface onto which the image
+ *                                          will be drawn is known.  You can also use {Alpha = 0, color = 0}
+ *                                          as a background color, and let the downstream image compositor
+ *                                          blend in the background color. In this case, the result image
+ *                                          should be treated as a premultiplied image.
+ *
+ *              kvImageEdgeExtend           Substitute in the nearest defined pixel for missing pixels.
+ *                                          This is better when the image is drawn into a frame or other
+ *                                          context where the background is not expected to contribute to
+ *                                          the final content.
+ *
+ *              kvImageTruncateKernel       This is similar to kvImageEdgeExtend, except that edge pixels are
+ *                                          simply ignored, and the bias and divisor are adjusted accordingly.
+ *                                          Because of the complication at the edges, this edging mode can
+ *                                          be significantly slower than the others. It can be numerically
+ *                                          unstable if the sum over any rectangular subsection of the kernel
+ *                                          is zero, which can result in division by zero during the computation.
+ *                                          The results for this edging mode are usually quite visually similar
+ *                                          to kvImageEdgeExtend.
+ *
+ *              kvImageGetTempBufferSize    Instead of calculating the convolution of the image, return the
+ *                                          size of the temp buffer needed for this set of parameters. Does
+ *                                          not touch the src or dest image.
+ *
+ *              kvImageDoNotTile                     Disable internal multithreading.
+ *
+ *              kvImageUseFP16Accumulator  Enable 16-bit half-precision floating-point arithmetic when computing the
+ *                                          kernel averages when the CPU architecture supports it.
+ *
+ *      @/textblock </pre>
+ *                          The first four flags listed are edging modes. One and only one edging mode must be
+ *                          provided. If no edging mode is provided (e.g. kvImageNoFlags), then an error will
+ *                          be returned.
+ *
+ *  @return One of the following error codes may be returned:
+ *      <pre>@textblock
+ *          kvImageNoError              Success.
+ *              >= 0                    If kvImageGetTempBufferSize is passed, this is the size of
+ *                                      the temp buffer to use with this function and this set of
+ *                                      parameters.
+ *
+ *          kvImageInvalidEdgeStyle     One and only one of the following flags must be provided:
+ *                                         { kvImageCopyInPlace, kvImageBackgroundColorFill,
+ *                                           kvImageEdgeExtend,  kvImageTruncateKernel }
+ *
+ *          kvImageRoiLargerThanInputBuffer The dest->width and height must be less than or equal
+ *                                          to corresponding dimensions of the source buffer.
+ *
+ *          kvImageInvalidOffset_X      The destination width + srcOffsetToROI_X > src->width
+ *
+ *          kvImageInvalidOffset_Y      The destination height + srcOffsetToROI_Y > src->height
+ *
+ *          kvImageNullPointerArgument  kernel may not be NULL
+ *
+ *          kvImageMemoryAllocationError Could not allocate memory to serve as a temp buffer.
+ *
+ *          kvImageInvalidKernelSize    The kernel height and width must be odd numbers.
+ *      @/textblock </pre>
+ */
+VIMAGE_PF vImage_Error vImageConvolveWithBias_Planar16F( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const float *kernel, uint32_t kernel_height, uint32_t kernel_width, float bias, Pixel_16F backgroundColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /*!
  *  @function vImageConvolveWithBias_ARGB8888
@@ -1295,6 +1741,164 @@ VIMAGE_PF vImage_Error vImageConvolveWithBias_ARGB8888( const vImage_Buffer *src
  */
 VIMAGE_PF vImage_Error vImageConvolveWithBias_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const float *kernel, uint32_t kernel_height, uint32_t kernel_width, float bias,  const Pixel_FFFF backgroundColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
+/*!
+ *  @function vImageConvolveWithBias_ARGB16F
+ *  @abstract General convolution on a ARGB16F image of any channel order.
+ *  @discussion This filter applies a convolution filter of your choosing to a ARGB16F image.
+ *              This filter will work on any four-channel, half-float per component image format, not just ARGB.
+ *              The kernel values are specified as 32-bit single-precision floats and the
+ *              weighted average is also computed in single precision by default. However, if
+ *              the flag kvImageUseFP16Accumulator is set all internal filtering operations will
+ *              use 16-bit half-precision floating-point arithmetic when the CPU architecture
+ *              supports it. This results in up to 2x performance improvements but at the
+ *              expense of a less precise result; typically 2-3 bits of precision is lost.
+ *
+ *              For each pixel:
+ *      <pre>@textblock
+ *          for each pixel[y][x] in image{
+ *              // Sums are declared as type _Float16 when the flag kvImageUseFP16Accumulator is set
+ *              float sumA = bias;
+ *              float sumR = bias;
+ *              float sumG = bias;
+ *              float sumB = bias;
+ *
+ *              // Calculate weighted average over kernel area
+ *              for each kernel_element[i][j] in kernel{
+ *                  sumA += kernel_element[i][j] *
+ *                          pixel[y+i+srcOffsetToROI_Y-kernel_height/2] [x+j+srcOffsetToROI_X- kernel_width/2][0];
+ *                  sumR += kernel_element[i][j] *
+ *                          pixel[y+i+srcOffsetToROI_Y-kernel_height/2] [x+j+srcOffsetToROI_X- kernel_width/2][1];
+ *                  sumG += kernel_element[i][j] *
+ *                          pixel[y+i+srcOffsetToROI_Y-kernel_height/2] [x+j+srcOffsetToROI_X- kernel_width/2][2];
+ *                  sumB += kernel_element[i][j] *
+ *                          pixel[y+i+srcOffsetToROI_Y-kernel_height/2] [x+j+srcOffsetToROI_X- kernel_width/2][3];
+ *              }
+ *
+ *              // write out result
+ *              result[y][x][0] = (_Float16)sumA;
+ *              result[y][x][1] = (_Float16)sumR;
+ *              result[y][x][2] = (_Float16)sumG;
+ *              result[y][x][3] = (_Float16)sumB;
+ *          }
+ *      @/textblock </pre>
+ *              (Above, we imagine the kernel to be a 2D array of size kernel_height by kernel_width.
+ *              However, in practice it is passed in as a contiguous 1D array of size kernel_height *
+ *              kernel_width.)
+ *
+ *              This filter does not work in place.
+ *
+ *  @param src              The input image
+ *
+ *  @param dest             A pointer to a preallocated vImage_Buffer to receive the result image.
+ *                          This may not alias the src image.
+ *
+ *  @param tempBuffer       An optional pointer to a region of memory to use as a working area during
+ *                          computation.  The size of the tempBuffer is given by calling the function
+ *                          with the same parameters and the kvImageGetTempBufferSize flag, in which case
+ *                          the size is returned instead of an error code from the left hand side.
+ *                          You may pass NULL here, in which case a region of memory of similar size
+ *                          will be allocated by the function and freed before it returns.  Temp Buffers
+ *                          are a way of avoiding lost time due to VM faults to initialize newly allocated
+ *                          buffers. If you will be calling this function repeatedly with similar parameters
+ *                          you should use a temp buffer. If the function is called from different threads
+ *                          concurrently, a different temp buffer should be used for each.
+ *
+ *  @param srcOffsetToROI_X An offset used in tiling to shift the position of the destination image
+ *                          relative to the src image. Typically this is 0. Non-Zero values are needed
+ *                          when the destination tile is not aligned with the left edge of the image.
+ *
+ *  @param srcOffsetToROI_Y An offset used in tiling to shift the position of the destination image
+ *                          relative to the src image. Typically this is 0. Non-Zero values are needed
+ *                          when the destination tile is not aligned with the top edge of the image.
+ *
+ *  @param kernel           A pointer to a 1D array of weights of dimension kernel_height x kernel_width.
+ *                          For example, for a simple 3x3 blur, it might be:
+ *                          <pre>@textblock
+ *                          const float kernel[9] =   { 1./16, 2./16, 1./16,
+ *                                                      2./16, 4./16, 2./16,
+ *                                                      1./16, 2./16, 1./16 };
+ *                          @/textblock </pre>
+ *
+ *  @param kernel_height    The height of the 2D table of weights passed in as kernel. It must be an odd number.
+ *
+ *  @param kernel_width     The width of the 2D table of weights passed in as kernel. It must be an odd number.
+ *
+ *  @param bias             This value is added to the sum of weighted pixels.
+ *
+ *  @param backgroundColor  When the kvImageBackgroundColorFill edging mode is active, the backgroundColor
+ *                          parameter provides the background color to be used for missing pixels when the
+ *                          kernel extends off the edge of the image.
+ *
+ *  @param flags            The following flags are allowed:
+ *      <pre>@textblock
+ *              kvImageCopyInPlace          If any pixels covered by the kernel do no not exist, simply
+ *                                          copy the corresponding source pixel to the destination. This
+ *                                          will result in a ring off unconvolved content at the edges
+ *                                          and convolved content in the middle.
+ *
+ *              kvImageBackgroundColorFill  Substitute in the provided background color for missing pixels.
+ *                                          For a blur filter this will look like the edges of the image
+ *                                          have been blurred into a particular color. This is usually
+ *                                          appropriate when the color of the surface onto which the image
+ *                                          will be drawn is known.  You can also use {Alpha = 0, color = 0}
+ *                                          as a background color, and let the downstream image compositor
+ *                                          blend in the background color. In this case, the result image
+ *                                          should be treated as a premultiplied image.
+ *
+ *              kvImageEdgeExtend           Substitute in the nearest defined pixel for missing pixels.
+ *                                          This is better when the image is drawn into a frame or other
+ *                                          context where the background is not expected to contribute to
+ *                                          the final content.
+ *
+ *              kvImageTruncateKernel       This is similar to kvImageEdgeExtend, except that edge pixels are
+ *                                          simply ignored, and the bias and divisor are adjusted accordingly.
+ *                                          Because of the complication at the edges, this edging mode can
+ *                                          be significantly slower than the others. It can be numerically
+ *                                          unstable if the sum over any rectangular subsection of the kernel
+ *                                          is zero, which can result in division by zero during the computation.
+ *                                          The results for this edging mode are usually quite visually similar
+ *                                          to kvImageEdgeExtend.
+ *
+ *              kvImageGetTempBufferSize    Instead of calculating the convolution of the image, return the
+ *                                          size of the temp buffer needed for this set of parameters. Does
+ *                                          not touch the src or dest image.
+ *
+ *              kvImageDoNotTile                     Disable internal multithreading.
+ *
+ *              kvImageUseFP16Accumulator  Enable 16-bit half-precision floating-point arithmetic when computing the
+ *                                          kernel averages when the CPU architecture supports it.
+ *
+ *      @/textblock </pre>
+ *                          The first four flags listed are edging modes. One and only one edging mode must be
+ *                          provided. If no edging mode is provided (e.g. kvImageNoFlags), then an error will
+ *                          be returned.
+ *
+ *  @return One of the following error codes may be returned:
+ *      <pre>@textblock
+ *          kvImageNoError              Success.
+ *              >= 0                    If kvImageGetTempBufferSize is passed, this is the size of
+ *                                      the temp buffer to use with this function and this set of
+ *                                      parameters.
+ *
+ *          kvImageInvalidEdgeStyle     One and only one of the following flags must be provided:
+ *                                         { kvImageCopyInPlace, kvImageBackgroundColorFill,
+ *                                           kvImageEdgeExtend,  kvImageTruncateKernel }
+ *
+ *          kvImageRoiLargerThanInputBuffer The dest->width and height must be less than or equal
+ *                                          to corresponding dimensions of the source buffer.
+ *
+ *          kvImageInvalidOffset_X      The destination width + srcOffsetToROI_X > src->width
+ *
+ *          kvImageInvalidOffset_Y      The destination height + srcOffsetToROI_Y > src->height
+ *
+ *          kvImageNullPointerArgument  kernel may not be NULL
+ *
+ *          kvImageMemoryAllocationError Could not allocate memory to serve as a temp buffer.
+ *
+ *          kvImageInvalidKernelSize    The kernel height and width must be odd numbers.
+ *      @/textblock </pre>
+ */
+VIMAGE_PF vImage_Error vImageConvolveWithBias_ARGB16F( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const float *kernel, uint32_t kernel_height, uint32_t kernel_width, float bias, const Pixel_ARGB_16F backgroundColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /*!
  *  @function vImageConvolveMultiKernel_ARGB8888
@@ -3181,6 +3785,150 @@ vImageSepConvolve_PlanarF(const vImage_Buffer *src, const vImage_Buffer *dest, v
                           float bias, Pixel_F backgroundColor, vImage_Flags flags)
     VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 
+/*!
+ *  @function vImageSepConvolve_Planar16F
+ *  @abstract Separable convolution on a Planar16F image.
+ *  @discussion This filter applies two separate 1D filters along the rows and columns of a Planar16F image.
+ *              The weighted average is computed with single-precision floating-point kernel values.  However, if
+ *              the flag kvImageUseFP16Accumulator is set all internal filtering operations will
+ *              use 16-bit half-precision floating-point arithmetic when the CPU architecture
+ *              supports it. This results in up to 2x performance improvements but at the
+ *              expense of a less precise result; typically 2-3 bits of precision is lost.
+ *
+ *              For each pixel:
+ *      <pre>@textblock
+ *          for each pixel[y][x] in image {
+ *              float sum = bias;
+ *
+ *              // Calculate weighted average over kernel area
+ *              for each kernelY_element[i] in kernelY {
+ *                  for each kernelX_element[j] in kernelX {
+ *                  sum += kernelY_element[i] * kernelX_element[j] *
+ *                          (float)pixel[y+i+srcOffsetToROI_Y-kernel_height/2]
+ *                               [x+j+srcOffsetToROI_X- kernel_width/2];
+ *                  }
+ *              }
+ *
+ *              // Convert to half precisio and write out result
+ *              result[y][x] = (_Float16)sum;
+ *          }
+ *      @/textblock </pre>
+ *
+ *              This filter does not work in place.
+ *
+ *  @param src              The input image
+ *
+ *  @param dest             A pointer to a preallocated vImage_Buffer to receive the result image.
+ *                          This may not alias the src image.
+ *
+ *  @param tempBuffer       An optional pointer to a region of memory to use as a working area during
+ *                          computation.  The size of the tempBuffer is given by calling the function
+ *                          with the same parameters and the kvImageGetTempBufferSize flag, in which case
+ *                          the size is returned instead of an error code from the left hand side.
+ *                          You may pass NULL here, in which case a region of memory of similar size
+ *                          will be allocated by the function and freed before it returns.  Temp Buffers
+ *                          are a way of avoiding lost time due to VM faults to initialize newly allocated
+ *                          buffers. If you will be calling this function repeatedly with similar parameters
+ *                          you should use a temp buffer. If the function is called from different threads
+ *                          concurrently, a different temp buffer should be used for each.
+ *
+ *  @param srcOffsetToROI_X An offset used in tiling to shift the position of the destination image
+ *                          relative to the src image. Typically this is 0. Non-Zero values are needed
+ *                          when the destination tile is not aligned with the left edge of the image.
+ *
+ *  @param srcOffsetToROI_Y An offset used in tiling to shift the position of the destination image
+ *                          relative to the src image. Typically this is 0. Non-Zero values are needed
+ *                          when the destination tile is not aligned with the top edge of the image.
+ *
+ *  @param kernelX          A pointer to a 1D array of weights of dimension kernelX_width.
+ *
+ *  @param kernelX_width    The width of the 1D array of weights passed in as kernelX. It must be an odd number.
+ *
+ *  @param kernelY          A pointer to a 1D array of weights of dimension kernelY_width.
+ *
+ *  @param kernelY_width    The width of the 1D array of weights passed in as kernelY. It must be an odd number.
+ *
+ *  @param bias             This value is added to the sum of weighted pixels.
+ *
+ *  @param backgroundColor  When the kvImageBackgroundColorFill edging mode is active, the backgroundColor
+ *                          parameter provides the background color to be used for missing pixels when the
+ *                          kernel extends off the edge of the image.
+ *
+ *  @param flags            The following flags are allowed:
+ *      <pre>@textblock
+ *              kvImageCopyInPlace          If any pixels covered by the kernel do no not exist, simply
+ *                                          copy the corresponding source pixel to the destination. This
+ *                                          will result in a ring off unconvolved content at the edges
+ *                                          and convolved content in the middle.
+ *
+ *              kvImageBackgroundColorFill  Substitute in the provided background color for missing pixels.
+ *                                          For a blur filter this will look like the edges of the image
+ *                                          have been blurred into a particular color. This is usually
+ *                                          appropriate when the color of the surface onto which the image
+ *                                          will be drawn is known.  You can also use {Alpha = 0, color = 0}
+ *                                          as a background color, and let the downstream image compositor
+ *                                          blend in the background color. In this case, the result image
+ *                                          should be treated as a premultiplied image.
+ *
+ *              kvImageEdgeExtend           Substitute in the nearest defined pixel for missing pixels.
+ *                                          This is better when the image is drawn into a frame or other
+ *                                          context where the background is not expected to contribute to
+ *                                          the final content.
+ *
+ *              kvImageTruncateKernel       This is similar to kvImageEdgeExtend, except that edge pixels are
+ *                                          simply ignored, and the bias and divisor are adjusted accordingly.
+ *                                          Because of the complication at the edges, this edging mode can
+ *                                          be significantly slower than the others. It can be numerically
+ *                                          unstable if the sum over any rectangular subsection of the kernel
+ *                                          is zero, which can result in division by zero during the computation.
+ *                                          The results for this edging mode are usually quite visually similar
+ *                                          to kvImageEdgeExtend.
+ *
+ *              kvImageGetTempBufferSize    Instead of calculating the convolution of the image, return the
+ *                                          size of the temp buffer needed for this set of parameters. Does
+ *                                          not touch the src or dest image.
+ *
+ *              kvImageDoNotTile            Disable internal multithreading.
+ *
+ *              kvImageUseFP16Accumulator  Enable 16-bit half-precision floating-point arithmetic when computing the
+ *                                          kernel averages when the CPU architecture supports it.
+ *
+ *      @/textblock </pre>
+ *                          The first four flags listed are edging modes. One and only one edging mode must be
+ *                          provided. If no edging mode is provided (e.g. kvImageNoFlags), then an error will
+ *                          be returned.
+ *
+ *  @return One of the following error codes may be returned:
+ *      <pre>@textblock
+ *          kvImageNoError              Success.
+ *              >= 0                    If kvImageGetTempBufferSize is passed, this is the size of
+ *                                      the temp buffer to use with this function and this set of
+ *                                      parameters.
+ *
+ *          kvImageInvalidEdgeStyle     One and only one of the following flags must be provided:
+ *                                         { kvImageCopyInPlace, kvImageBackgroundColorFill,
+ *                                           kvImageEdgeExtend,  kvImageTruncateKernel }
+ *
+ *          kvImageRoiLargerThanInputBuffer The dest->width and height must be less than or equal
+ *                                          to corresponding dimensions of the source buffer.
+ *
+ *          kvImageInvalidOffset_X      The destination width + srcOffsetToROI_X > src->width
+ *
+ *          kvImageInvalidOffset_Y      The destination height + srcOffsetToROI_Y > src->height
+ *
+ *          kvImageNullPointerArgument  kernel may not be NULL
+ *
+ *          kvImageMemoryAllocationError Could not allocate memory to serve as a temp buffer.
+ *
+ *          kvImageInvalidKernelSize    The kernel sizes must be odd numbers.
+ *      @/textblock </pre>
+*/
+VIMAGE_PF vImage_Error
+vImageSepConvolve_Planar16F(const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer,
+                            vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,
+                            const float *kernelX, uint32_t kernelX_width, const float *kernelY, uint32_t kernelY_width,
+                            float bias, Pixel_16F backgroundColor, vImage_Flags flags)
+    VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /*!
 *  @function vImageSepConvolve_Planar16U

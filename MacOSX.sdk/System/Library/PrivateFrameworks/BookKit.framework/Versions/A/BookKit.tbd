@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A17F1A61-39C4-3315-A503-95F8534D4FD6
+    value:           5B90132C-12DC-3434-8DA3-93F8E2BBC51E
   - target:          x86_64-maccatalyst
-    value:           A17F1A61-39C4-3315-A503-95F8534D4FD6
+    value:           5B90132C-12DC-3434-8DA3-93F8E2BBC51E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6F0D0D2A-666B-3095-888C-780C445A605C
+    value:           6A6387F7-CCB4-3172-BC3F-DE53507F80F1
   - target:          arm64e-maccatalyst
-    value:           6F0D0D2A-666B-3095-888C-780C445A605C
+    value:           6A6387F7-CCB4-3172-BC3F-DE53507F80F1
 install-name:    '/System/Library/PrivateFrameworks/BookKit.framework/Versions/A/BookKit'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BKAgentDynamicCast, _BKAgentLog, _BKApplicationAccessBundleID, 
                        _BKDisableBookStorePreferenceKey, _BKPreferenceApplicationID, 
                        _BKRestrictExplicitContentPreferenceKey, _BKSyncCloudSettingsAgentLog, 

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B5B2080F-0EDB-3256-BB28-70F2F99B47C1
+    value:           255100B6-94CA-346D-B3FF-102EE36879E5
   - target:          x86_64-maccatalyst
-    value:           B5B2080F-0EDB-3256-BB28-70F2F99B47C1
+    value:           255100B6-94CA-346D-B3FF-102EE36879E5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           83903A6F-D77D-3FED-86E2-65761B3636CF
+    value:           6F6FC26A-6BD4-3E41-99F3-CF6D03E001BA
   - target:          arm64e-maccatalyst
-    value:           83903A6F-D77D-3FED-86E2-65761B3636CF
+    value:           6F6FC26A-6BD4-3E41-99F3-CF6D03E001BA
 install-name:    '/System/Library/PrivateFrameworks/FTClientServices.framework/Versions/A/FTClientServices'
 current-version: 800
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FTCServiceAvailabilityAvailabilityKey, _FTCServiceAvailabilityDidChangeNotification, 
                        _FTCServiceAvailabilityServiceTypeKey, _FTCServiceNameCalling, 
                        _FTCServiceNameFaceTime, _FTCServiceNameForServiceType, _FTCServiceNameMadrid, 

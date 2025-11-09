@@ -1,10 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target x86_64-apple-ios15.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreNFC -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreNFC
-// swift-module-flags-ignorable: -user-module-version 2.6
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target x86_64-apple-ios16.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreNFC -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreNFC
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 3.0.1
 @_exported import CoreNFC
 import Swift
 import _Concurrency
+import _StringProcessing
 @available(iOS 14.0, *)
 public struct NFCISO15693SystemInfo {
   public var uniqueIdentifier: Foundation.Data
@@ -28,7 +29,6 @@ extension CoreNFC.NFCISO15693Tag {
   public func readMultipleBlocks(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, blockRange: Foundation.NSRange, resultHandler: @escaping (Swift.Result<[Foundation.Data], Swift.Error>) -> Swift.Void)
   @available(iOS 14.0, *)
   public func getSystemInfo(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, resultHandler: @escaping (Swift.Result<CoreNFC.NFCISO15693SystemInfo, Swift.Error>) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 14.0, *)
   @_alwaysEmitIntoClient public func systemInfo(requestFlags flags: CoreNFC.NFCISO15693RequestFlag) async throws -> CoreNFC.NFCISO15693SystemInfo {
@@ -41,74 +41,60 @@ extension CoreNFC.NFCISO15693Tag {
                                      icReference: icReference)
     }
   #endif
-
   @available(iOS 14.0, *)
   public func fastReadMultipleBlocks(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, blockRange: Foundation.NSRange, resultHandler: @escaping (Swift.Result<[Foundation.Data], Swift.Error>) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 14.0, *)
   @_alwaysEmitIntoClient public func fastReadMultipleBlocks(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, blockRange: Foundation.NSRange) async throws -> [Foundation.Data] {
         return try await self.__fastReadMultipleBlocks(with: flags, blockRange: blockRange)
     }
   #endif
-
   @available(iOS 14.0, *)
   public func customCommand(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, customCommandCode: Swift.Int, customRequestParameters: Foundation.Data, resultHandler: @escaping (Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void)
   @available(iOS 14.0, *)
   public func extendedReadSingleBlock(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, blockNumber: Swift.Int, resultHandler: @escaping (Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void)
   @available(iOS 14.0, *)
   public func extendedWriteMultipleBlocks(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, blockRange: Foundation.NSRange, dataBlocks: [Foundation.Data], completionHandler: @escaping (Swift.Error?) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 14.0, *)
   @_alwaysEmitIntoClient public func extendedWriteMultipleBlocks(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, blockRange: Foundation.NSRange, dataBlocks: [Foundation.Data]) async throws {
         return try await self.__extendedWriteMultipleBlocks(withRequestFlags: flags, blockRange: blockRange, dataBlocks: dataBlocks)
     }
   #endif
-
   @available(iOS 14.0, *)
   public func authenticate(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, cryptoSuiteIdentifier: Swift.Int, message: Foundation.Data, resultHandler: @escaping (Swift.Result<(CoreNFC.NFCISO15693ResponseFlag, Foundation.Data), Swift.Error>) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 14.0, *)
   @_alwaysEmitIntoClient public func authenticate(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, cryptoSuiteIdentifier: Swift.Int, message: Foundation.Data) async throws -> (CoreNFC.NFCISO15693ResponseFlag, Foundation.Data) {
         return try await self.__authenticate(withRequestFlags: flags, cryptoSuiteIdentifier: cryptoSuiteIdentifier, message: message)
     }
   #endif
-
   @available(iOS 14.0, *)
   public func keyUpdate(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, keyIdentifier: Swift.Int, message: Foundation.Data, resultHandler: @escaping (Swift.Result<(CoreNFC.NFCISO15693ResponseFlag, Foundation.Data), Swift.Error>) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 14.0, *)
   @_alwaysEmitIntoClient public func keyUpdate(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, keyIdentifier: Swift.Int, message: Foundation.Data) async throws -> (CoreNFC.NFCISO15693ResponseFlag, Foundation.Data) {
         return try await self.__keyUpdate(withRequestFlags: flags, keyIdentifier: keyIdentifier, message: message)
     }
   #endif
-
   @available(iOS 14.0, *)
   public func challenge(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, cryptoSuiteIdentifier: Swift.Int, message: Foundation.Data, completionHandler: @escaping (Swift.Error?) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 14.0, *)
   @_alwaysEmitIntoClient public func challenge(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, cryptoSuiteIdentifier: Swift.Int, message: Foundation.Data) async throws {
         return try await self.__challenge(withRequestFlags: flags, cryptoSuiteIdentifier: cryptoSuiteIdentifier, message: message)
     }
   #endif
-
   @available(iOS 14.0, *)
   public func readBuffer(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, resultHandler: @escaping (Swift.Result<(CoreNFC.NFCISO15693ResponseFlag, Foundation.Data), Swift.Error>) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 14.0, *)
   @_alwaysEmitIntoClient public func readBuffer(requestFlags flags: CoreNFC.NFCISO15693RequestFlag) async throws -> (CoreNFC.NFCISO15693ResponseFlag, Foundation.Data) {
         return try await self.__readBuffer(withRequestFlags: flags)
     }
   #endif
-
   @available(iOS 14.0, *)
   public func extendedGetMultipleBlockSecurityStatus(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, blockRange: Foundation.NSRange, resultHandler: @escaping (Swift.Result<CoreNFC.NFCISO15693MultipleBlockSecurityStatus, Swift.Error>) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 14.0, *)
   @_alwaysEmitIntoClient public func extendedGetMultipleBlockSecurityStatus(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, blockRange: Foundation.NSRange) async throws -> CoreNFC.NFCISO15693MultipleBlockSecurityStatus {
@@ -116,27 +102,22 @@ extension CoreNFC.NFCISO15693Tag {
         return NFCISO15693MultipleBlockSecurityStatus(blockSecurityStatus: listOfStatus.map { $0.intValue } )
     }
   #endif
-
   @available(iOS 14.0, *)
   public func extendedFastReadMultipleBlocks(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, blockRange: Foundation.NSRange, resultHandler: @escaping (Swift.Result<[Foundation.Data], Swift.Error>) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 14.0, *)
   @_alwaysEmitIntoClient public func extendedFastReadMultipleBlocks(requestFlags flags: CoreNFC.NFCISO15693RequestFlag, blockRange: Foundation.NSRange) async throws -> [Foundation.Data] {
         return try await self.__extendedFastReadMultipleBlocks(with: flags, blockRange: blockRange)
     }
   #endif
-
   @available(iOS 14.0, *)
   public func sendRequest(requestFlags flags: Swift.Int, commandCode: Swift.Int, data: Foundation.Data?, resultHandler: @escaping (Swift.Result<(CoreNFC.NFCISO15693ResponseFlag, Foundation.Data?), Swift.Error>) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 14.0, *)
   @_alwaysEmitIntoClient public func sendRequest(requestFlags flags: Swift.Int, commandCode: Swift.Int, data: Foundation.Data?) async throws -> (CoreNFC.NFCISO15693ResponseFlag, Foundation.Data?) {
         return try await self.__sendRequest(withFlag: flags, commandCode: commandCode, data: data)
     }
   #endif
-
 }
 @available(iOS 13.0, *)
 extension CoreNFC.NFCTagReaderSession {
@@ -151,7 +132,6 @@ extension CoreNFC.NFCTagReaderSession {
   convenience public init?(pollingOption: CoreNFC.NFCTagReaderSession.PollingOption, delegate: CoreNFC.NFCTagReaderSessionDelegate, queue: Dispatch.DispatchQueue? = nil)
   @available(iOS 13.0, *)
   open func connect(to tag: CoreNFC.NFCTag, completionHandler: @escaping (Swift.Error?) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 13.0, *)
   @_alwaysEmitIntoClient open func connect(to tag: CoreNFC.NFCTag) async throws {
@@ -179,7 +159,6 @@ extension CoreNFC.NFCTagReaderSession {
         return try await self.__connect(to:upcastedTag)
     }
   #endif
-
 }
 @available(iOS 14.0, *)
 public struct NFCISO7816ResponseAPDU {
@@ -192,7 +171,6 @@ public struct NFCISO7816ResponseAPDU {
 extension CoreNFC.NFCISO7816Tag {
   @available(iOS 14.0, *)
   public func sendCommand(apdu: CoreNFC.NFCISO7816APDU, resultHandler: @escaping (Swift.Result<CoreNFC.NFCISO7816ResponseAPDU, Swift.Error>) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 14.0, *)
   @_alwaysEmitIntoClient public func sendCommand(apdu: CoreNFC.NFCISO7816APDU) async throws -> CoreNFC.NFCISO7816ResponseAPDU {
@@ -200,7 +178,6 @@ extension CoreNFC.NFCISO7816Tag {
         return NFCISO7816ResponseAPDU(statusWord1: sw1, statusWord2: sw2, paylaod: (data.count > 0) ? data : nil)
     }
   #endif
-
 }
 @available(iOS 11.0, *)
 extension CoreNFC.NFCNDEFPayload {
@@ -213,7 +190,6 @@ extension CoreNFC.NFCMiFareTag {
   public func sendMiFareCommand(commandPacket command: Foundation.Data, resultHandler: @escaping (Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void)
   @available(iOS 14.0, *)
   public func sendMiFareISO7816Command(_ apdu: CoreNFC.NFCISO7816APDU, resultHandler: @escaping (Swift.Result<CoreNFC.NFCISO7816ResponseAPDU, Swift.Error>) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 14.0, *)
   @_alwaysEmitIntoClient public func sendMiFareISO7816Command(_ apdu: CoreNFC.NFCISO7816APDU) async throws -> CoreNFC.NFCISO7816ResponseAPDU {
@@ -223,7 +199,6 @@ extension CoreNFC.NFCMiFareTag {
                                       paylaod: (responseData.count > 0) ? responseData : nil)
     }
   #endif
-
 }
 @available(iOS 13.0, *)
 public protocol NFCTagReaderSessionDelegate : ObjectiveC.NSObjectProtocol {

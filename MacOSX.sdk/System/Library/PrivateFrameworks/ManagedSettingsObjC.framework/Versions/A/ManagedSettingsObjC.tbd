@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           583FAF38-4EFF-3A2F-8987-9115131C5A36
+    value:           1342641F-A21A-3C27-AB16-D820AAAA2E8E
   - target:          x86_64-maccatalyst
-    value:           583FAF38-4EFF-3A2F-8987-9115131C5A36
+    value:           1342641F-A21A-3C27-AB16-D820AAAA2E8E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9B1501A1-5967-3E61-A00C-D9990615F0A3
+    value:           9C140DAF-2F5E-3540-88C3-E3BBF1A14CA0
   - target:          arm64e-maccatalyst
-    value:           9B1501A1-5967-3E61-A00C-D9990615F0A3
+    value:           9C140DAF-2F5E-3540-88C3-E3BBF1A14CA0
 install-name:    '/System/Library/PrivateFrameworks/ManagedSettingsObjC.framework/Versions/A/ManagedSettingsObjC'
-current-version: 27
+current-version: 66
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MOCodingKeyBackgroundColorData, _MOCodingKeyBackgroundEffectData, 
                        _MOCodingKeyColorData, _MOCodingKeyIconData, _MOCodingKeyPrimaryButtonColorData, 
                        _MOCodingKeyPrimaryButtonLabel, _MOCodingKeySecondaryButtonLabel, 
@@ -27,24 +27,44 @@ exports:
                        _MOEffectiveSettingsGroupAccount, _MOEffectiveSettingsGroupAllowedClient, 
                        _MOEffectiveSettingsGroupAppStore, _MOEffectiveSettingsGroupApplication, 
                        _MOEffectiveSettingsGroupCellular, _MOEffectiveSettingsGroupDateAndTime, 
-                       _MOEffectiveSettingsGroupGameCenter, _MOEffectiveSettingsGroupMedia, 
+                       _MOEffectiveSettingsGroupDeviceActivity, _MOEffectiveSettingsGroupGameCenter, 
+                       _MOEffectiveSettingsGroupManagedSettings, _MOEffectiveSettingsGroupMedia, 
                        _MOEffectiveSettingsGroupPasscode, _MOEffectiveSettingsGroupSafari, 
                        _MOEffectiveSettingsGroupShield, _MOEffectiveSettingsGroupSiri, 
-                       _MOEffectiveSettingsGroupWebContent, _MOManagedSettingsObjCVersionNumber, 
-                       _MOManagedSettingsObjCVersionString, _MOSafariCookiePolicyAlways, 
-                       _MOSafariCookiePolicyCurrentWebsite, _MOSafariCookiePolicyNever, 
-                       _MOSafariCookiePolicyVisitedWebsites ]
-    objc-classes:    [ MOApplication, MOCategory, MOCategoryShieldPolicy, MOEffectiveAccountSettings, 
-                       MOEffectiveAllowedClientSettings, MOEffectiveAppStoreSettings, 
-                       MOEffectiveApplicationSettings, MOEffectiveArray, MOEffectiveBool, 
-                       MOEffectiveCategoryShieldPolicy, MOEffectiveCellularSettings, 
-                       MOEffectiveDateAndTimeSettings, MOEffectiveGameCenterSettings, 
-                       MOEffectiveInteger, MOEffectiveMediaSettings, MOEffectiveOptionalApplication, 
-                       MOEffectivePasscodeSettings, MOEffectiveSafariSettings, MOEffectiveSettings, 
+                       _MOEffectiveSettingsGroupUser, _MOEffectiveSettingsGroupWebContent, 
+                       _MOManagedSettingsObjCVersionNumber, _MOManagedSettingsObjCVersionString, 
+                       _MOPersistenceKeyActivities, _MOPersistenceKeyApplication, 
+                       _MOPersistenceKeyAutoAllow, _MOPersistenceKeyBundleIdentifier, 
+                       _MOPersistenceKeyCategories, _MOPersistenceKeyData, _MOPersistenceKeyDomain, 
+                       _MOPersistenceKeyIdentifier, _MOPersistenceKeyNeverAllow, 
+                       _MOPersistenceKeyOnlyAllow, _MOSafariCookiePolicyAlways, _MOSafariCookiePolicyCurrentWebsite, 
+                       _MOSafariCookiePolicyNever, _MOSafariCookiePolicyVisitedWebsites, 
+                       _MOUserSharingPolicyNone, _MOUserSharingPolicyRestricted, 
+                       _MOUserSharingPolicyUnrestricted ]
+    objc-classes:    [ MOAccountSettingsGroup, MOAllowedClientSettingsGroup, MOAppStoreSettingsGroup, 
+                       MOApplication, MOApplicationCategoryShieldPolicy, MOApplicationCategoryShieldPolicySettingMetadata, 
+                       MOApplicationSetSettingMetadata, MOApplicationSettingMetadata, 
+                       MOApplicationSettingsGroup, MOBoolSettingMetadata, MOCategory, 
+                       MOCategoryShieldPolicy, MOCellularSettingsGroup, MODataSetSettingMetadata, 
+                       MODataSettingMetadata, MODateAndTimeSettingsGroup, MODeviceActivitySettingsGroup, 
+                       MOEffectiveAccountSettings, MOEffectiveAllowedClientSettings, 
+                       MOEffectiveAppStoreSettings, MOEffectiveApplicationSettings, 
+                       MOEffectiveArray, MOEffectiveBool, MOEffectiveCategoryShieldPolicy, 
+                       MOEffectiveCellularSettings, MOEffectiveData, MOEffectiveDateAndTimeSettings, 
+                       MOEffectiveDeviceActivitySettings, MOEffectiveGameCenterSettings, 
+                       MOEffectiveInteger, MOEffectiveManagedSettingsSettings, MOEffectiveMediaSettings, 
+                       MOEffectiveOptionalApplication, MOEffectivePasscodeSettings, 
+                       MOEffectiveSafariSettings, MOEffectiveSettings, MOEffectiveSettingsStore, 
                        MOEffectiveShieldSettings, MOEffectiveSiriSettings, MOEffectiveString, 
-                       MOEffectiveWebContentFilterPolicy, MOEffectiveWebContentSettings, 
-                       MOLocalSettingsStore, MOLocations, MOLogger, MOManagedSettingsAgentConnection, 
-                       MOSettingMetadata, MOSettingsGroup, MOSettingsStore, MOShieldConfiguration, 
-                       MOShieldLabel, MOStringSettingMetadata, MOWebContentFilterPolicy, 
-                       MOWebDomain ]
+                       MOEffectiveUserSettings, MOEffectiveWebContentFilterPolicy, 
+                       MOEffectiveWebContentSettings, MOGameCenterSettingsGroup, 
+                       MOIntegerSettingMetadata, MOLocalSettingsStore, MOLocations, 
+                       MOLogger, MOManagedSettingsAgentConnection, MOManagedSettingsSettingsGroup, 
+                       MOMediaSettingsGroup, MOPasscodeSettingsGroup, MOSafariSettingsGroup, 
+                       MOSetSettingMetadata, MOSettingMetadata, MOSettingsGroup, 
+                       MOSettingsStore, MOShieldConfiguration, MOShieldLabel, MOShieldSettingsGroup, 
+                       MOSiriSettingsGroup, MOStringSetSettingMetadata, MOStringSettingMetadata, 
+                       MOUserSettingsGroup, MOWebContentFilterPolicy, MOWebContentFilterPolicySettingMetadata, 
+                       MOWebContentSettingsGroup, MOWebDomain, MOWebDomainCategoryShieldPolicy, 
+                       MOWebDomainCategoryShieldPolicySettingMetadata, MOWebDomainSetSettingMetadata ]
 ...

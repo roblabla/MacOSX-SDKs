@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           400403D9-842A-3D61-BDDF-B48D62905FA6
+    value:           CA62A21B-81F2-37E2-BDDD-3AD8826FC416
   - target:          x86_64-maccatalyst
-    value:           400403D9-842A-3D61-BDDF-B48D62905FA6
+    value:           CA62A21B-81F2-37E2-BDDD-3AD8826FC416
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           90EC7E3F-D7D1-3458-BBAA-8A5C8AEBBE0D
+    value:           72C13C22-5D6B-3ED2-B35E-64EF9D1836F5
   - target:          arm64e-maccatalyst
-    value:           90EC7E3F-D7D1-3458-BBAA-8A5C8AEBBE0D
+    value:           72C13C22-5D6B-3ED2-B35E-64EF9D1836F5
 install-name:    '/System/Library/PrivateFrameworks/SecCodeWrapper.framework/Versions/A/SecCodeWrapper'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ CodeIdentity, CodeRequirement, DynamicCodeIdentity, StaticCodeIdentity ]
     objc-ivars:      [ CodeIdentity._cached_entitlements, CodeIdentity._haveCheckedValidity, 
                        CodeIdentity._secCodeRef, CodeRequirement._data, CodeRequirement._secRequirementRef, 

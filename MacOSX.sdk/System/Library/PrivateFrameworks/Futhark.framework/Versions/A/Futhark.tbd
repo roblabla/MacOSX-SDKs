@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           334BE387-2A64-3902-8266-BD267CAE3117
+    value:           B64B3D0F-5A5C-3864-8DF7-6668813562D4
   - target:          x86_64-maccatalyst
-    value:           334BE387-2A64-3902-8266-BD267CAE3117
+    value:           B64B3D0F-5A5C-3864-8DF7-6668813562D4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           78998A30-2B7D-3EE6-A48D-24D7F2827147
+    value:           5881FEB4-8529-3C55-9FB9-1927CD2A11A4
   - target:          arm64e-maccatalyst
-    value:           78998A30-2B7D-3EE6-A48D-24D7F2827147
+    value:           5881FEB4-8529-3C55-9FB9-1927CD2A11A4
 install-name:    '/System/Library/PrivateFrameworks/Futhark.framework/Versions/A/Futhark'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FKCCMatchGetConfidence, _FKComponentPrint, _FKGetBuildAPIVersion, 
                        _FKGetBuildGitHash, _FKGetBuildTimestamp, _FKGetFrameworkVersion, 
                        _FKPrintLinesegList, _FKPrintRender, _FKRecognizeConcomp, 

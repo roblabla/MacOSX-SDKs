@@ -344,18 +344,28 @@ CF_ENUM(AudioUnitParameterID) {
 		// Global, Cents, -2400 -> 2400, 1.0
 	kNewTimePitchParam_Pitch						= 1,
 	
-		// Overlap is the number of overlapped spectral windows that are used to produce the output.
-		// The value of overlap is directly proportional to CPU cost. More overlaps can make smooth
-		// passages sound smoother. For percussive sound, a lower overlap may be better.
+		// The generated output can be made to sound smoother by increasing
+		// the density of the processing time frames. The value is directly proportional
+	    // to the CPU cost. When slowing down percussive audio, lower values may be better.
 		// Global, generic, 3.0 -> 32.0, 8.0
-	kNewTimePitchParam_Overlap						= 4,
+	kNewTimePitchParam_Smoothness						= 4,
 	
-		// Peak locking enforces phase coherence of spectral peaks.
-		// Peak locking adds some expense but results in a less "phasey"
-		// or reverberant sound, sometimes also called loss of presence.
-		// However the flip side is that it can sound more stuttery for some content.
+	kNewTimePitchParam_Overlap API_DEPRECATED_WITH_REPLACEMENT("kNewTimePitchParam_Smoothness", ios(2.0, 16.0), watchos(2.0, 9.0), tvos(9.0, 16.0), macos(10.0, 13.0)) = kNewTimePitchParam_Smoothness,
+	
+		// Spectral phase coherence is enabled through peak locking.
+		// This adds some computation cost but results in a less "phasey"
+		// or reverberant sound.
 		// Global, Boolean, 0->1, 1
-	kNewTimePitchParam_EnablePeakLocking			= 6
+	kNewTimePitchParam_EnableSpectralCoherence			= 6,
+	
+	kNewTimePitchParam_EnablePeakLocking API_DEPRECATED_WITH_REPLACEMENT("kNewTimePitchParam_EnableSpectralCoherence", ios(2.0, 16.0), watchos(2.0, 9.0), tvos(9.0, 16.0), macos(10.0, 13.0)) = kNewTimePitchParam_EnableSpectralCoherence,
+    
+		// Transient preservation uses group delay to identify transients.
+		// It resets the phase at points of transients to preserve the original
+		// spectral phase relationships. It also sets the stretch factor to 1 at
+		// those points.
+		// Global, Boolean, 0->1, 1
+    kNewTimePitchParam_EnableTransientPreservation  = 7
 };
 
 // Parameters for the AUSampler unit
@@ -691,6 +701,25 @@ CF_ENUM(AudioUnitParameterID) {
 	kRoundTripAACParam_Quality 				= 2,
 	kRoundTripAACParam_CompressedFormatSampleRate = 3
 #endif
+};
+
+// Parameters for the AUSoundIsolation unit
+CF_ENUM(AudioUnitParameterID) {
+    // Global, Percent, 0->100, 100
+    kAUSoundIsolationParam_WetDryMixPercent API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) = 0,
+    // Global, Indexed, 1->1, 1
+    kAUSoundIsolationParam_SoundToIsolate API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) = 1,
+};
+
+/*!
+ @enum          AUSoundIsolation sound types
+ @brief         Constants available as values for parameter kAUSoundIsolation_SoundToIsolate.
+ 
+ @constant      kAUSoundIsolationSoundType_Voice
+ Isolate voice signal from the input signal.
+ */
+CF_ENUM(long) {
+    kAUSoundIsolationSoundType_Voice API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) = 1
 };
 
 #pragma mark Apple Specific - Desktop

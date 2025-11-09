@@ -12,6 +12,8 @@
 
 #import "IOKit/pwr_mgt/RootDomain.h"
 
+#include <pexpert/pexpert.h>
+
 //===========================================================================================================================
 // Macros
 //===========================================================================================================================
@@ -149,6 +151,9 @@ class IOBluetoothHIDDriver : public IOHIDDevice
 		UInt8					mHandshakeTimeoutCounter;
 		
 		bool					mUseSleepTimeout;
+		
+		char					mDeviceAddressStringForPrint[20];
+
 };
     ExpansionData	*_expansionData;
 	

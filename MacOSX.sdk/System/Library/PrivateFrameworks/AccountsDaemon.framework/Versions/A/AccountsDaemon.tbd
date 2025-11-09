@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           49F6CC27-9025-3108-B229-6F67E009A7C9
+    value:           487B4804-1206-3589-94BC-E4B535946DAC
   - target:          x86_64-maccatalyst
-    value:           49F6CC27-9025-3108-B229-6F67E009A7C9
+    value:           487B4804-1206-3589-94BC-E4B535946DAC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F23A095A-54EB-3893-871C-ABBF96F2B7A4
+    value:           D83E1A58-225E-35F8-987F-E4C8EE710D8B
   - target:          arm64e-maccatalyst
-    value:           F23A095A-54EB-3893-871C-ABBF96F2B7A4
+    value:           D83E1A58-225E-35F8-987F-E4C8EE710D8B
 install-name:    '/System/Library/PrivateFrameworks/AccountsDaemon.framework/Versions/A/AccountsDaemon'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ACAccountSyncClientID, _ACAccountSyncDataclassKeychainExtension, 
                        _ACAccountSyncDevices, _ACAccountSyncHostnameKeychainExtension, 
                        _ACAccountSyncKeychainExtension, _ACAccountSyncMailClassKey, 

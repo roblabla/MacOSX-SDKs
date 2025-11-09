@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A39C023F-C67D-323A-A689-3E2F10C75E79
+    value:           A2CE20AC-FBE9-3FCA-B0BD-E3567B8EC4F1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A29ADEE1-3AA4-34D5-97E7-3FAB9772F10C
+    value:           4EF539EE-9597-323F-9DE4-228EC7B0FE4E
 install-name:    '/System/Library/PrivateFrameworks/StrokeAnimation.framework/Versions/A/StrokeAnimation'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s15StrokeAnimation06_ProtoaB14RepresentationV06strokebD04fromACSgSS_tF', 
                        '_$s15StrokeAnimation06_ProtoaB14RepresentationV0A8KeyTimesV13decodeMessage7decoderyxz_tK21InternalSwiftProtobuf7DecoderRzlF', 
                        '_$s15StrokeAnimation06_ProtoaB14RepresentationV0A8KeyTimesV13unknownFields21InternalSwiftProtobuf14UnknownStorageVvM', 

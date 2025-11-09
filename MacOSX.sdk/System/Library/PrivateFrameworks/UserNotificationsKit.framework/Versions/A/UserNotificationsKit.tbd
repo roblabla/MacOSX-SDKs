@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A20DDA99-E406-3BBE-AD94-F1EF9202EE68
+    value:           87A2F73E-3262-3E21-B489-150A9830C5D9
   - target:          x86_64-maccatalyst
-    value:           A20DDA99-E406-3BBE-AD94-F1EF9202EE68
+    value:           87A2F73E-3262-3E21-B489-150A9830C5D9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE663D99-AB26-3F96-87D2-C93E937053A5
+    value:           0BCC9D17-A2C8-3125-8DEA-DA750C78CA1A
   - target:          arm64e-maccatalyst
-    value:           CE663D99-AB26-3F96-87D2-C93E937053A5
+    value:           0BCC9D17-A2C8-3125-8DEA-DA750C78CA1A
 install-name:    '/System/Library/PrivateFrameworks/UserNotificationsKit.framework/Versions/A/UserNotificationsKit'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -27,8 +27,8 @@ allowable-clients:
                        UserNotificationsUI, UserNotificationsUIKit, UserNotificationsUIKitTests, 
                        usernoted, usernoted_unit_tests ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _NCIsEqual, _NCIsEqualToArray, _NCIsEqualToDictionary, _NCIsEqualToSet, 
                        _NCNotificationActionEnvironmentDefault, _NCNotificationActionEnvironmentMinimal, 
                        _NCNotificationDeliveryReasonToString, _NCNotificationRequestTestingDestination, 
@@ -90,19 +90,19 @@ exports:
                        NCNotificationRequest._closeAction, NCNotificationRequest._collapsedNotificationsCount, 
                        NCNotificationRequest._content, NCNotificationRequest._context, 
                        NCNotificationRequest._criticalAlert, NCNotificationRequest._defaultAction, 
-                       NCNotificationRequest._highestPrioritySubSectionIdentifier, 
-                       NCNotificationRequest._intentIdentifiers, NCNotificationRequest._interruptionLevel, 
-                       NCNotificationRequest._isCollapsedNotification, NCNotificationRequest._notificationIdentifier, 
-                       NCNotificationRequest._options, NCNotificationRequest._parentSectionIdentifier, 
-                       NCNotificationRequest._peopleIdentifiers, NCNotificationRequest._relevanceScore, 
-                       NCNotificationRequest._requestDestinations, NCNotificationRequest._sectionIdentifier, 
-                       NCNotificationRequest._settingsSections, NCNotificationRequest._silenceAction, 
-                       NCNotificationRequest._sound, NCNotificationRequest._sourceInfo, 
-                       NCNotificationRequest._subSectionIdentifiers, NCNotificationRequest._supplementaryActions, 
-                       NCNotificationRequest._threadIdentifier, NCNotificationRequest._threadIdentifierUnique, 
-                       NCNotificationRequest._timestamp, NCNotificationRequest._userNotification, 
-                       NCNotificationRequest._uuid, NCNotificationSectionSettings._displayName, 
-                       NCNotificationSectionSettings._hasProvisialAuthorization, 
+                       NCNotificationRequest._filterCriteria, NCNotificationRequest._highestPrioritySubSectionIdentifier, 
+                       NCNotificationRequest._inlineAction, NCNotificationRequest._intentIdentifiers, 
+                       NCNotificationRequest._interruptionLevel, NCNotificationRequest._isCollapsedNotification, 
+                       NCNotificationRequest._notificationIdentifier, NCNotificationRequest._options, 
+                       NCNotificationRequest._parentSectionIdentifier, NCNotificationRequest._peopleIdentifiers, 
+                       NCNotificationRequest._relevanceScore, NCNotificationRequest._requestDestinations, 
+                       NCNotificationRequest._sectionIdentifier, NCNotificationRequest._settingsSections, 
+                       NCNotificationRequest._silenceAction, NCNotificationRequest._sound, 
+                       NCNotificationRequest._sourceInfo, NCNotificationRequest._subSectionIdentifiers, 
+                       NCNotificationRequest._supplementaryActions, NCNotificationRequest._threadIdentifier, 
+                       NCNotificationRequest._threadIdentifierUnique, NCNotificationRequest._timestamp, 
+                       NCNotificationRequest._userNotification, NCNotificationRequest._uuid, 
+                       NCNotificationSectionSettings._displayName, NCNotificationSectionSettings._hasProvisialAuthorization, 
                        NCNotificationSectionSettings._isAppClip, NCNotificationSectionSettings._isDeliveredQuietly, 
                        NCNotificationSectionSettings._muteAssertion, NCNotificationSectionSettings._sectionIdentifier, 
                        NCNotificationSectionSettings._settings, NCNotificationSectionSettings._settingsIcon, 
@@ -113,6 +113,7 @@ exports:
                        NCNotificationSound._ringtoneName, NCNotificationSound._songPath, 
                        NCNotificationSound._soundBehavior, NCNotificationSound._soundType, 
                        NCNotificationSound._systemSoundID, NCNotificationSound._vibrationPattern, 
-                       NCNotificationSystemSettings._scheduledDeliveryEnabled, NCNotificationSystemSettings._scheduledDeliveryShowNextSummary, 
+                       NCNotificationSystemSettings._listDisplayStyleSetting, NCNotificationSystemSettings._scheduledDeliveryEnabled, 
+                       NCNotificationSystemSettings._scheduledDeliveryShowNextSummary, 
                        NCNotificationSystemSettings._scheduledDeliveryTimes, NCNotificationSystemSettings._scheduledDeliveryUninitialized ]
 ...

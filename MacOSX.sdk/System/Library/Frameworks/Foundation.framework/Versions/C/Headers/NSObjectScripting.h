@@ -7,7 +7,7 @@
 
 @class NSDictionary<KeyType, ObjectType>, NSScriptObjectSpecifier, NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @interface NSObject(NSScripting)
 
@@ -35,4 +35,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

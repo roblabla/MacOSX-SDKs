@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C1180AA5-9566-34C0-9F25-4A1DB16653DF
+    value:           45B0B49C-8130-3DBD-A90D-9DF07B3E88AB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           17DA54BB-C0EA-3F89-B402-60B069D788A0
+    value:           1B2459C1-E671-314E-8857-71919A4F464B
 install-name:    '/usr/lib/libATCommandStudioDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -46,7 +46,7 @@ exports:
                        __ZTSNSt3__123enable_shared_from_thisIN3qmi6Client5StateEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN3qmi6Server5StateEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN4QMux5StateEEE, __ZTSPFvPN3xpc4dictEE ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ATCSThreadJoin, _ATCSThreadKill, _ATCSThreadSpawn, _DEFAULT_XPC_CLIENT_SERVICE, 
                        __ZN10ATCSLogger10fsInstanceE, __ZN10ATCSLogger10logCommandE12ATCSLogGroupPKcS2_jPKNS_16CommandFormatterE, 
                        __ZN10ATCSLogger11getInstanceEv, __ZN10ATCSLogger11instantiateEPS_, 
@@ -415,6 +415,6 @@ exports:
                        __ZThn104_N3qmi18QMuxServerAccepter5State6acceptERKN3xpc4dictERKN8dispatch5queueE, 
                        __ZThn104_N3qmi18QMuxServerAccepter5StateD0Ev, __ZThn104_N3qmi18QMuxServerAccepter5StateD1Ev, 
                        _asString, _getMessageIdFromBuffer ]
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ __ZN14_ATCSException15constructCommonEPKcjS1_Pc, __ZN14_ATCSException6appendEPKcPc ]
 ...

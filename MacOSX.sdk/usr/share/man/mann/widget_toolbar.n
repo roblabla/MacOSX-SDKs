@@ -1,5 +1,5 @@
 '\"
-'\" Generated from file '/AppleInternal/Library/BuildRoots/66382bca-8bca-11ec-aade-6613bcf0e2ee/Library/Caches/com.apple.xbs/Sources/tcl/tcl_ext/tklib/tklib/modules/widget/widget_toolbar.man' by tcllib/doctools with format 'nroff'
+'\" Generated from file '/AppleInternal/Library/BuildRoots/810eba08-405a-11ed-86e9-6af958a02716/Library/Caches/com.apple.xbs/Sources/tcl/tcl_ext/tklib/tklib/modules/widget/widget_toolbar.man' by tcllib/doctools with format 'nroff'
 '\"
 '\" The definitions below are for supplemental macros used in Tcl/Tk
 '\" manual entries.

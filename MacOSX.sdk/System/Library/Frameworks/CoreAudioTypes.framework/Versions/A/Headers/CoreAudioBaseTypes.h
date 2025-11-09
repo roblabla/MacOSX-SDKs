@@ -12,7 +12,7 @@
 #pragma mark -
 #pragma mark Includes
 
-#define COREAUDIOTYPES_VERSION 20210401
+#define COREAUDIOTYPES_VERSION 20211130
 
 #include <TargetConditionals.h>
 #include <CoreFoundation/CFBase.h>
@@ -954,6 +954,19 @@ CF_ENUM(AudioChannelLabel)
 	kAudioChannelLabel_LeftTopRear              = 52,
 	kAudioChannelLabel_CenterTopRear            = 53,
 	kAudioChannelLabel_RightTopRear             = 54,
+
+	kAudioChannelLabel_LeftSideSurround			= 55,
+	kAudioChannelLabel_RightSideSurround		= 56,
+	kAudioChannelLabel_LeftBottom				= 57,
+	kAudioChannelLabel_RightBottom				= 58,
+	kAudioChannelLabel_CenterBottom				= 59,
+	kAudioChannelLabel_LeftTopSurround			= 60,
+	kAudioChannelLabel_RightTopSurround			= 61,
+	kAudioChannelLabel_LFE3						= 62,
+	kAudioChannelLabel_LeftBackSurround			= 63,
+	kAudioChannelLabel_RightBackSurround		= 64,
+	kAudioChannelLabel_LeftEdgeOfScreen			= 65,
+	kAudioChannelLabel_RightEdgeOfScreen		= 66,
 	
     // first order ambisonic channels
     kAudioChannelLabel_Ambisonic_W              = 200,
@@ -1028,6 +1041,9 @@ CF_ENUM(AudioChannelLabel)
 
     // HOA N3D
     kAudioChannelLabel_HOA_N3D                  = (3U << 16), // Needs to be ORed with the channel index, not HOA order
+
+    // channel represents an object, ORed with channel index
+    kAudioChannelLabel_Object                   = (4U << 16),
 
     kAudioChannelLabel_BeginReserved            = 0xF0000000,           // Channel label values in this range are reserved for internal use
     kAudioChannelLabel_EndReserved              = 0xFFFFFFFE
@@ -1155,6 +1171,17 @@ CF_ENUM(AudioChannelLayoutTag)
 	// Ltr - left top rear
 	// Ctr - center top rear
 	// Rtr - right top rear
+	// Lss - left side surround
+	// Rss - right side surround
+	// Lb - left bottom
+	// Rb - Right bottom
+	// Cb - Center bottom
+	// Lts - Left top surround
+	// Rts - Right top surround
+	// Leos - Left edge of screen
+	// Reos - Right edge of screen
+	// Lbs - Left back surround
+	// Rbs - Right back surround
     // Lt - left matrix total. for matrix encoded stereo.
     // Rt - right matrix total. for matrix encoded stereo.
 
@@ -1367,6 +1394,31 @@ CF_ENUM(AudioChannelLayoutTag)
 
     kAudioChannelLayoutTag_DiscreteInOrder          = (147U<<16) | 0,                       ///< needs to be ORed with the actual number of channels
 	
+    // ISO/IEC 23091-3, channels w/orderings
+    kAudioChannelLayoutTag_CICP_1					= kAudioChannelLayoutTag_MPEG_1_0,		///< C
+    kAudioChannelLayoutTag_CICP_2 					= kAudioChannelLayoutTag_MPEG_2_0,		///< L R
+    kAudioChannelLayoutTag_CICP_3 					= kAudioChannelLayoutTag_MPEG_3_0_A,	///< L R C
+    kAudioChannelLayoutTag_CICP_4 					= kAudioChannelLayoutTag_MPEG_4_0_A,	///< L R C Cs
+    kAudioChannelLayoutTag_CICP_5					= kAudioChannelLayoutTag_MPEG_5_0_A,	///< L R C Ls Rs
+    kAudioChannelLayoutTag_CICP_6					= kAudioChannelLayoutTag_MPEG_5_1_A,	///< L R C LFE Ls Rs
+    kAudioChannelLayoutTag_CICP_7					= kAudioChannelLayoutTag_MPEG_7_1_B,	///< L R C LFE Ls Rs Lc Rc
+
+    kAudioChannelLayoutTag_CICP_9					= kAudioChannelLayoutTag_ITU_2_1,		///< L R Cs
+    kAudioChannelLayoutTag_CICP_10 					= kAudioChannelLayoutTag_ITU_2_2,		///< L R Ls Rs
+    kAudioChannelLayoutTag_CICP_11					= kAudioChannelLayoutTag_MPEG_6_1_A,	///< L R C LFE Ls Rs Cs
+    kAudioChannelLayoutTag_CICP_12 					= kAudioChannelLayoutTag_MPEG_7_1_C,	///< L R C LFE Ls Rs Rls Rrs
+    kAudioChannelLayoutTag_CICP_13 					= (204U<<16) | 24,						///< Lc Rc C LFE2 Rls Rrs L R Cs LFE3 Lss Rss Vhl Vhr Vhc Ts Ltr Rtr Ltm Rtm Ctr Cb Lb Rb
+
+    kAudioChannelLayoutTag_CICP_14 					= (205U<<16) | 8,						///< L R C LFE Ls Rs Vhl Vhr
+    kAudioChannelLayoutTag_CICP_15 					= (206U<<16) | 12,						///< L R C LFE2 Rls Rrs LFE3 Lss Rss Vhl Vhr Ctr
+
+    kAudioChannelLayoutTag_CICP_16 					= (207U<<16) | 10,						///< L R C LFE Ls Rs Vhl Vhr Lts Rts
+    kAudioChannelLayoutTag_CICP_17 					= (208U<<16) | 12,						///< L R C LFE Ls Rs Vhl Vhr Vhc Lts Rts Ts
+    kAudioChannelLayoutTag_CICP_18 					= (209U<<16) | 14,						///< L R C LFE Ls Rs Lbs Rbs Vhl Vhr Vhc Lts Rts Ts
+
+    kAudioChannelLayoutTag_CICP_19 					= (210U<<16) | 12,						///< L R C LFE Rls Rrs Lss Rss Vhl Vhr Ltr Rtr
+    kAudioChannelLayoutTag_CICP_20 					= (211U<<16) | 14,						///< L R C LFE Rls Rrs Lss Rss Vhl Vhr Ltr Rtr Leos Reos
+
     kAudioChannelLayoutTag_BeginReserved            = 0xF0000000,                           ///< Channel layout tag values in this range are reserved for internal use
     kAudioChannelLayoutTag_EndReserved              = 0xFFFEFFFF,
 	

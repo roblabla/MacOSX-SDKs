@@ -12,7 +12,7 @@
 #import <UIKit/UIInteraction.h>
 #import <UIKit/UIContextMenuConfiguration.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UITargetedPreview;
 @protocol UIContextMenuInteractionDelegate;
@@ -114,24 +114,22 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 @optional
 
 /*!
- * @abstract Called when the interaction begins. Return a UITargetedPreview describing the desired highlight preview.
+ * @abstract Called when a context menu interaction begins. Return a UITargetedPreview corresponding to the item with the given identifier.
  *
- * @param interaction    The UIContextMenuInteraction requesting a highlighting preview.
- * @param configuration  The configuration of the menu about to be displayed by this interaction.
+ * @param interaction    The UIContextMenuInteraction.
+ * @param configuration  Configuration of the menu that will be presented if the interaction proceeds.
+ * @param identifier     Identifier for the item whose preview is being requested.
  */
-- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForHighlightingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration;
+- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction configuration:(UIContextMenuConfiguration *)configuration highlightPreviewForItemWithIdentifier:(id<NSCopying>)identifier API_AVAILABLE(ios(16.0));
 
 /*!
- * @abstract Called when the interaction is about to dismiss. Return a UITargetedPreview describing the desired dismissal target.
- * The interaction will animate the presented menu to the target. Use this to customize the dismissal animation.
+ * @abstract Called when a context menu is dismissed. Return a UITargetedPreview corresponding to the item with the given identifier.
  *
- * @param interaction    The UIContextMenuInteraction requesting a dismissal preview.
- * @param configuration  The configuration of the menu displayed by this interaction.
- *
- * @return Return a UITargetedPreview describing the desired dismissal target. Return nil to cause the menu to
- *         animate away without morphing into a specific view.
+ * @param interaction    The UIContextMenuInteraction.
+ * @param configuration  Configuration of the menu being dismissed.
+ * @param identifier     Identifier for the item whose preview is being requested.
  */
-- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForDismissingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration;
+- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction configuration:(UIContextMenuConfiguration *)configuration dismissalPreviewForItemWithIdentifier:(id<NSCopying>)identifier API_AVAILABLE(ios(16.0));
 
 /*!
  * @abstract Called when the interaction is about to "commit" in response to the user tapping the preview.
@@ -160,9 +158,29 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
  */
 - (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willEndForConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator;
 
+/*!
+ * @abstract Called when the interaction begins. Return a UITargetedPreview describing the desired highlight preview.
+ *
+ * @param interaction    The UIContextMenuInteraction requesting a highlighting preview.
+ * @param configuration  The configuration of the menu about to be displayed by this interaction.
+ */
+- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForHighlightingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_DEPRECATED_WITH_REPLACEMENT("contextMenuInteraction:configuration:previewForHighlightingItemWithIdentifier:", ios(13.0, 16.0));
+
+/*!
+ * @abstract Called when the interaction is about to dismiss. Return a UITargetedPreview describing the desired dismissal target.
+ * The interaction will animate the presented menu to the target. Use this to customize the dismissal animation.
+ *
+ * @param interaction    The UIContextMenuInteraction requesting a dismissal preview.
+ * @param configuration  The configuration of the menu displayed by this interaction.
+ *
+ * @return Return a UITargetedPreview describing the desired dismissal target. Return nil to cause the menu to
+ *         animate away without morphing into a specific view.
+ */
+- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForDismissingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_DEPRECATED_WITH_REPLACEMENT("contextMenuInteraction:configuration:previewForDismissingToItemWithIdentifier:", ios(13.0, 16.0));
+
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIContextMenuInteraction.h>

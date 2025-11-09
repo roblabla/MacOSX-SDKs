@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BC3BE5DA-C3BF-3467-B39F-60099DEA7D84
+    value:           E22FDD18-F0B6-3E3C-90CE-A44F1E0D896E
   - target:          x86_64-maccatalyst
-    value:           BC3BE5DA-C3BF-3467-B39F-60099DEA7D84
+    value:           E22FDD18-F0B6-3E3C-90CE-A44F1E0D896E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A18F8818-0352-319B-8150-C7DD98CE969B
+    value:           0C2B52DA-3771-35DB-8861-3ED1B11C649C
   - target:          arm64e-maccatalyst
-    value:           A18F8818-0352-319B-8150-C7DD98CE969B
+    value:           0C2B52DA-3771-35DB-8861-3ED1B11C649C
 install-name:    '/System/Library/PrivateFrameworks/AppleIDSSOAuthentication.framework/Versions/A/AppleIDSSOAuthentication'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AIDAAccountPropertyAltDSID, _AIDAAccountPropertyDSID, _AIDACoderErrorKey, 
                        _AIDACoderSuccessKey, _AIDACoderTypeKey, _AIDAErrorDomain, 
                        _AIDAServiceTypeCloud, _AIDAServiceTypeFaceTime, _AIDAServiceTypeGameCenter, 

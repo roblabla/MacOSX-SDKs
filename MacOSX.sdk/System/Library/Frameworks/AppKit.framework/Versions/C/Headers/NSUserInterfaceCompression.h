@@ -88,7 +88,8 @@ API_AVAILABLE(macos(10.13))
 @end
 
 /*
- NSButton, NSSegmentedControl, and NSSliderTouchBarItem's view currently conform to this protocol
+ NSButton, NSSegmentedControl, and NSSliderTouchBarItem's view currently conform to this protocol.
+ This protocol is currently only applicable to views in the Touch Bar.
  */
 @protocol NSUserInterfaceCompression
 @required

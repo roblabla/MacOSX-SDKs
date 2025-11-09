@@ -194,7 +194,7 @@ APPKIT_EXTERN NSNotificationName const NSPopoverDidCloseNotification API_AVAILAB
  * If the delegate does not implement this method, \c -popoverShouldClose: will also be invoked on the popover to allow the popover to veto the close.
  * \return Return YES if the popover should close, NO otherwise.
  */
-- (BOOL)popoverShouldClose:(NSPopover *)popover;
+- (BOOL)popoverShouldClose:(NSPopover *)popover NS_SWIFT_UI_ACTOR;
 
 /*!
  * Return \c YES to allow the popover to detach from its positioning view. Return \c NO if it should not. If this method is not implemented, the default behavior is \c NO.
@@ -203,13 +203,13 @@ APPKIT_EXTERN NSNotificationName const NSPopoverDidCloseNotification API_AVAILAB
  * \param popover The popover that may be detached
  * \return YES if the popover should detach, whether to a custom window or the implicitly detached window. NO if not.
  */
-- (BOOL)popoverShouldDetach:(NSPopover *)popover API_AVAILABLE(macos(10.10));
+- (BOOL)popoverShouldDetach:(NSPopover *)popover NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.10));
 
 /*!
  * This is called when the popover has been released in an implicitly detached state, i.e. not when detached to a custom window returned from \c -detachableWindowForPopover:.
  * \param popover The popover that detached from its anchor view and is not closing.
  */
-- (void)popoverDidDetach:(NSPopover *)popover API_AVAILABLE(macos(10.10));
+- (void)popoverDidDetach:(NSPopover *)popover NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.10));
 
 /*!
  * Return a custom window to which the popover should be detached. This should be used when the content of the detached window is wanted to be different from the content of the popover. If the same content should be used in the detached window, only \c -popoverShouldDetach: needs to be implemented.
@@ -219,27 +219,27 @@ APPKIT_EXTERN NSNotificationName const NSPopoverDidCloseNotification API_AVAILAB
  * \param popover The popover that is being detached
  * \return The custom window to detach to.
  */
-- (nullable NSWindow *)detachableWindowForPopover:(NSPopover *)popover;
+- (nullable NSWindow *)detachableWindowForPopover:(NSPopover *)popover NS_SWIFT_UI_ACTOR;
 
 /*!
  * Invoked on the delegate when the NSPopoverWillShowNotification notification is sent.  This method will also be invoked on the popover.
  */
-- (void)popoverWillShow:(NSNotification *)notification;
+- (void)popoverWillShow:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
 
 /*!
  * Invoked on the delegate when the NSPopoverDidShowNotification notification is sent.  This method will also be invoked on the popover.
  */
-- (void)popoverDidShow:(NSNotification *)notification;
+- (void)popoverDidShow:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
 
 /*!
  * Invoked on the delegate when the NSPopoverWillCloseNotification notification is sent.  This method will also be invoked on the popover.
  */
-- (void)popoverWillClose:(NSNotification *)notification;
+- (void)popoverWillClose:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
 
 /*!
  * Invoked on the delegate when the NSPopoverDidCloseNotification notification is sent.  This method will also be invoked on the popover.
  */
-- (void)popoverDidClose:(NSNotification *)notification;
+- (void)popoverDidClose:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
 
 @end
 

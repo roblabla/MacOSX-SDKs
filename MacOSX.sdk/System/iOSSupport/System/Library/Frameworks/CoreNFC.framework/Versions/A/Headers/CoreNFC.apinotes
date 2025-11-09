@@ -223,6 +223,8 @@ Enumerators:
     SwiftName: "iso15693"
   - Name: NFCPollingISO18092
     SwiftName: "iso18092"
+  - Name: NFCPollingPACE
+    SwiftName: "pace"
   - Name: EncryptionIdAES
     SwiftName: "aes"
   - Name: EncryptionIdAES_DES

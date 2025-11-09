@@ -37,7 +37,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @protocol NSSpeechRecognizerDelegate <NSObject>
 @optional
-- (void)speechRecognizer:(NSSpeechRecognizer *)sender didRecognizeCommand:(NSString *)command;
+- (void)speechRecognizer:(NSSpeechRecognizer *)sender didRecognizeCommand:(NSString *)command NS_SWIFT_UI_ACTOR;
 
 @end
 

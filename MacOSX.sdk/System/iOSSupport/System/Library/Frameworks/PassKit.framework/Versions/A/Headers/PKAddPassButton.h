@@ -5,6 +5,9 @@
 //  Copyright © 2015 Apple, Inc. All rights reserved.
 //
 
+#ifndef __PKADDPASSBUTTON_H
+#define __PKADDPASSBUTTON_H
+
 #import <TargetConditionals.h>
 
 #if TARGET_OS_IOS
@@ -33,4 +36,5 @@ API_AVAILABLE(ios(9.0))
 
 NS_ASSUME_NONNULL_END
 
+#endif
 #endif

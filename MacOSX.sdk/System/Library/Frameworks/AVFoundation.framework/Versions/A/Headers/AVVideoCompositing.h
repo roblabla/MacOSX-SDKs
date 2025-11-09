@@ -317,7 +317,12 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 */
 - (nullable AVTimedMetadataGroup *)sourceTimedMetadataByTrackID:(CMPersistentTrackID)trackID API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
-/* callback the custom compositor should call when composition succeeded */
+/*!
+	@method			finishWithComposedVideoFrame:
+	@abstract		The method that the custom compositor calls when composition succeeds.
+	@param			composedVideoFrame
+					The video frame to finish with.
+*/
 - (void)finishWithComposedVideoFrame:(CVPixelBufferRef)composedVideoFrame;
 
 /* callback the custom compositor should call when composition failed. The error parameter should describe the actual error. */
@@ -385,7 +390,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 /* If YES, rendering a frame from the same source buffers and the same composition instruction at 2 different
    compositionTime may yield different output frames. If NO, 2 such compositions would yield the
-   same frame. The media pipeline may me able to avoid some duplicate processing when containsTweening is NO */
+   same frame. The media pipeline may be able to avoid some duplicate processing when containsTweening is NO */
 @property (nonatomic, readonly) BOOL containsTweening;
 
 /* List of video track IDs required to compose frames for this instruction. If the value of this property is nil, all source tracks will be considered required for composition */

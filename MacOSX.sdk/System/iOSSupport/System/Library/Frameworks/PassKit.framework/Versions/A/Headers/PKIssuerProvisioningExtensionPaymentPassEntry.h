@@ -1,9 +1,14 @@
+#if !__has_include(<PassKitCore/PKIssuerProvisioningExtensionPaymentPassEntry.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKIssuerProvisioningExtensionPaymentPassEntry.h
 //  PassKit
 //
 //  Copyright © 2020 Apple, Inc. All rights reserved.
 //
+
+#ifndef __PKISSUERPROVISIONINGEXTENSIONPAYMENTPASSENTRY_H
+#define __PKISSUERPROVISIONINGEXTENSIONPAYMENTPASSENTRY_H
+
 #import <PassKit/PKIssuerProvisioningExtensionPassEntry.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -24,3 +29,8 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos)
 @end
 
 NS_ASSUME_NONNULL_END
+#endif
+
+#else
+#import <PassKitCore/PKIssuerProvisioningExtensionPaymentPassEntry.h>
+#endif

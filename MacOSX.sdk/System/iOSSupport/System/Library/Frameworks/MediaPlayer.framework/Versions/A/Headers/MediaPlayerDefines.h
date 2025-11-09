@@ -41,11 +41,11 @@
 #define MP_DEPRECATED_WITH_REPLACEMENT_BEGIN(...)   __API_DEPRECATED_WITH_REPLACEMENT_BEGIN(__VA_ARGS__)
 #define MP_DEPRECATED_WITH_REPLACEMENT_END          __API_DEPRECATED_WITH_REPLACEMENT_END
 
-#define MP_FALLTHROUGH __attribute__((fallthrough))
-#define MP_TYPE_PROTOCOL __attribute((objc_non_runtime_protocol))
-#define MP_COMPLETION __attribute__((called_once))
-#define MP_OVERLOAD __attribute__((overloadable))
-#define MP_FINAL_CLASS __attribute__((objc_subclassing_restricted))
+#define MP_FALLTHROUGH                              __attribute__((fallthrough))
+#define MP_TYPE_PROTOCOL                            __attribute__((objc_non_runtime_protocol))
+#define MP_COMPLETION                               __attribute__((called_once))
+#define MP_OVERLOAD                                 __attribute__((overloadable))
+#define MP_FINAL_CLASS                              __attribute__((objc_subclassing_restricted))
 
 #pragma mark - Utility
 

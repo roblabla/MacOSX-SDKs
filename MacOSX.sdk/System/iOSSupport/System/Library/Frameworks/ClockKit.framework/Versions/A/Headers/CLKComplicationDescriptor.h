@@ -35,17 +35,18 @@ API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                        displayName:(NSString *)displayName
-                 supportedFamilies:(NSArray<NSNumber *> *)supportedFamilies NS_REFINED_FOR_SWIFT;
+                 supportedFamilies:(NSArray<NSNumber *> *)supportedFamilies NS_REFINED_FOR_SWIFT API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED));
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                        displayName:(NSString *)displayName
                  supportedFamilies:(NSArray<NSNumber *> *)supportedFamilies
-                          userInfo:(NSDictionary *)userInfo NS_REFINED_FOR_SWIFT;
+                          userInfo:(NSDictionary *)userInfo NS_REFINED_FOR_SWIFT API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED));
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                        displayName:(NSString *)displayName
                  supportedFamilies:(NSArray<NSNumber *> *)supportedFamilies
-                      userActivity:(NSUserActivity *)userActivity NS_REFINED_FOR_SWIFT;
+                      userActivity:(NSUserActivity *)userActivity NS_REFINED_FOR_SWIFT API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED));
+
 
 @end
 

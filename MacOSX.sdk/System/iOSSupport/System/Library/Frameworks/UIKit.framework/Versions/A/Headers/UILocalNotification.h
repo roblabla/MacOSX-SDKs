@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class CLRegion;
 
@@ -61,7 +61,7 @@ UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationReq
 
 UIKIT_EXTERN NSString *const UILocalNotificationDefaultSoundName API_DEPRECATED("Use UserNotifications Framework's +[UNNotificationSound defaultSound]", ios(4.0, 10.0)) API_UNAVAILABLE(tvos);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UILocalNotification.h>

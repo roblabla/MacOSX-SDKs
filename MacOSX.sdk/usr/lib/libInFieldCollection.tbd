@@ -5,12 +5,12 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A0D8F6A3-FDA7-338F-B888-9AB556624E7E
+    value:           609382AF-EB94-3C5F-AA9A-404F6FB6F514
 flags:           [ not_app_extension_safe ]
 install-name:    '/usr/lib/libInFieldCollection.dylib'
-current-version: 12.2
+current-version: 13
 compatibility-version: 0
 exports:
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ _NAAP, _ZshgJnRaSlwn, _vsPHbdGf ]
 ...

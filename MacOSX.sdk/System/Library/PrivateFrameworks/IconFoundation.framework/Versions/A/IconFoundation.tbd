@@ -4,31 +4,31 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           154A21D6-EC13-30C8-8358-99A32D454604
+    value:           35D1EB81-5097-370B-B0A6-EE16936F977F
   - target:          x86_64-maccatalyst
-    value:           154A21D6-EC13-30C8-8358-99A32D454604
+    value:           35D1EB81-5097-370B-B0A6-EE16936F977F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FF109065-92A2-3080-ABE5-2C5EE2A364B4
+    value:           573BCCE8-66E9-33C9-B153-35F92CD1AE9B
   - target:          arm64e-maccatalyst
-    value:           FF109065-92A2-3080-ABE5-2C5EE2A364B4
+    value:           573BCCE8-66E9-33C9-B153-35F92CD1AE9B
 install-name:    '/System/Library/PrivateFrameworks/IconFoundation.framework/Versions/A/IconFoundation'
-current-version: 493
+current-version: 552
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _IFDefaultLog, _IFImageSpecificationTagAll, _IFImageSpecificationTagAppStore, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _IFImageSpecificationTagAll, _IFImageSpecificationTagAppStore, 
                        _IFImageSpecificationTagHomeScreen, _IFImageSpecificationTagInternal, 
                        _IFImageSpecificationTagOptional, _IFImageSpecificationTagPrivate, 
                        _IFImageSpecificationTagRecomended, _IFImageSpecificationTagRequired, 
-                       _IFImageSpecificationTagiPad, _IFImageSpecificationTagiPhone, 
-                       _IconFoundationVersionNumber, _IconFoundationVersionString ]
-    objc-classes:    [ IFBundle, IFCacheImage, IFColor, IFConcreteImage, IFGraphicsContext, 
-                       IFIconSpecification, IFImage, IFImageBag, IFImageSpecification, 
-                       IFPDFDocument, IFPDFPage, IFPlaceholderImage, IFResourceMetadata, 
-                       IFSymbol, IFSymbolImage, IFSymbolImageDescriptor, ISCGImageBlockSet, 
+                       _IFImageSpecificationTagiPad, _IFImageSpecificationTagiPhone ]
+    objc-classes:    [ IFBundle, IFCacheImage, IFColor, IFConcreteImage, IFGraphicSymbolDefaults, 
+                       IFGraphicSymbolDescriptor, IFGraphicsContext, IFIconSpecification, 
+                       IFImage, IFImageBag, IFImageSpecification, IFPDFDocument, 
+                       IFPDFPage, IFPlaceholderImage, IFResourceMetadata, IFSymbol, 
+                       IFSymbolImage, IFSymbolImageDescriptor, ISCGImageBlockSet, 
                        ISImage, ISPlaceholderImage, ISSymbolImage, ISVariantIconSpecification ]
 ...

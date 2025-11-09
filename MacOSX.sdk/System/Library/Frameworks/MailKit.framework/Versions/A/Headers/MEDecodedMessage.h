@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// @brief Contains information about a decoded message
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 @interface MEDecodedMessage : NSObject <NSSecureCoding>
 
 /// @brief The decoded MIME data for the message

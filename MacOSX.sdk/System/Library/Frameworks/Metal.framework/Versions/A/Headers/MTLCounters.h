@@ -16,7 +16,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#define MTLCounterErrorValue ((uint64_t)-1)
+#define MTLCounterErrorValue ((uint64_t)~0ULL)
 #define MTLCounterDontSample ((NSUInteger)-1)
 
 /*!

@@ -2,26 +2,24 @@
  *  hv_vm_allocate.h
  *  Hypervisor Framework
  *
- *  Copyright (c) 2021 Apple Inc. All rights reserved.
+ *  Copyright (c) 2021-2022 Apple Inc. All rights reserved.
  */
 
 #pragma once
 
-#if __arm64__
-#include <arm64/hv/hv_kern_types.h>
-#include <Hypervisor/hv_vm_types.h>
-#define __HV_API_AVAILABLE API_AVAILABLE(macos(12.1)) API_UNAVAILABLE(ios)
-#elif __x86_64__
-#include <Hypervisor/hv_error.h>
-#include <Hypervisor/hv_types.h>
-#define __HV_API_AVAILABLE API_AVAILABLE(macos(12.0))
-#else
-#error "unknown architecture"
-#endif
+#include <Hypervisor/hv_base.h>
 
 #include <os/availability.h>
 #include <os/base.h>
 #include <sys/types.h>
+
+#if __arm64__
+#include <arm64/hv/hv_kern_types.h>
+#include <Hypervisor/hv_vm_types.h>
+#elif __x86_64__
+#include <Hypervisor/hv_error.h>
+#include <Hypervisor/hv_types.h>
+#endif
 
 OS_ASSUME_NONNULL_BEGIN
 
@@ -52,7 +50,7 @@ typedef uint64_t hv_allocate_flags_t;
  *             Memory returned by this API should be deallocated with
  *             hv_vm_deallocate
  */
-__HV_API_AVAILABLE
+HV_API_AVAILABLE_ARM64(macos(12.1)) HV_API_AVAILABLE_X86_64(macos(12.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t hv_vm_allocate(void * _Nullable * _Nonnull uvap,
     size_t size, hv_allocate_flags_t flags);
@@ -64,12 +62,10 @@ hv_return_t hv_vm_allocate(void * _Nullable * _Nonnull uvap,
  * @param      size   Size in bytes of the region to be deallocated
  * @result     0 on success or error code
  */
-__HV_API_AVAILABLE
+HV_API_AVAILABLE_ARM64(macos(12.1)) HV_API_AVAILABLE_X86_64(macos(12.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t hv_vm_deallocate(void *uva, size_t size);
 
 __END_DECLS
 
 OS_ASSUME_NONNULL_END
-
-#undef __HV_API_AVAILABLE

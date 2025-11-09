@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NSString * UIPasteboardName NS_TYPED_EXTENSIBLE_ENUM;
 
@@ -46,7 +46,8 @@ UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternMone
 
 @class UIColor, UIImage;
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) @interface UIPasteboard : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_SENDABLE
+@interface UIPasteboard : NSObject
 
 @property(class, nonatomic, readonly) UIPasteboard *generalPasteboard;
 
@@ -184,7 +185,7 @@ UIKIT_EXTERN NSArray<NSString *> *UIPasteboardTypeListColor API_UNAVAILABLE(tvos
 // Supported types are: NSString, NSURL, UIImage, UIColor, NSAttributedString.
 UIKIT_EXTERN NSString * const UIPasteboardTypeAutomatic API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_AVAILABLE(ios(10.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
     
 
 #else

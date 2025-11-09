@@ -4,25 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5C9DCC30-D3BE-30AC-8587-D1EB554EA7C8
+    value:           630271F7-D44E-37A4-9A96-5CB4CFCD7CB6
   - target:          x86_64-maccatalyst
-    value:           5C9DCC30-D3BE-30AC-8587-D1EB554EA7C8
+    value:           630271F7-D44E-37A4-9A96-5CB4CFCD7CB6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DC3E9352-46BA-35A1-9F98-07B4B34D3504
+    value:           FC4742CB-CA23-3A14-B5D2-86C1DCA1E967
   - target:          arm64e-maccatalyst
-    value:           DC3E9352-46BA-35A1-9F98-07B4B34D3504
+    value:           FC4742CB-CA23-3A14-B5D2-86C1DCA1E967
 install-name:    '/System/Library/PrivateFrameworks/iCalendar.framework/Versions/A/iCalendar'
-current-version: 837
+current-version: 1136
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _ICSAppendEmoji, _ICSDecodeBase64, _ICSEncodeBase64, _ICSRedactString, 
-                       _ICSTravelAdvisoryBehavior_Automatic, _ICSTravelAdvisoryBehavior_Disabled, 
-                       _ICSTravelAdvisoryBehavior_Enabled, _ICSiCalendarErrorDomain, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _ICSAppendEmoji, _ICSDecodeBase64, _ICSEncodeBase64, _ICSRedactBytes, 
+                       _ICSRedactString, _ICSRedactionSetTestModeEnabled, _ICSTravelAdvisoryBehavior_Automatic, 
+                       _ICSTravelAdvisoryBehavior_Disabled, _ICSTravelAdvisoryBehavior_Enabled, 
+                       _ICSiCalendarErrorDomain, _VCSByteBufferAppendByte, _VCSByteBufferAppendCString, 
+                       _VCSByteBufferData, _VCSByteBufferWithCapacity, _VCSLogHandle, 
                        __pictureForByte, _iCalendarAppendStringToStringWithOptions, 
                        _iCalendarRepresentationForCALDay, _kCALSTR_XAPPLE_inviter_name_param, 
                        _kCALSTR_XAPPLE_self_invited_param, _kCALSTR_XAPPLE_telephone_param, 
@@ -36,12 +38,15 @@ exports:
                        _kICSSTR_XAPPLE_ews_busystatus_prop, _kICSSTR_XAPPLE_ews_changekey_prop, 
                        _kICSSTR_XAPPLE_ews_itemid_prop, _kICSSTR_XAPPLE_ews_needsserverconfirmation_prop, 
                        _kICSSTR_XAPPLE_ews_permission_prop, _kICSSTR_XAPPLE_filename_param, 
-                       _kICSSTR_XAPPLE_likeness_data_param, _kICSSTR_XAPPLE_local_default_alarm, 
-                       _kICSSTR_XAPPLE_proximity_prop, _kICSSTR_XAPPLE_related_travel_param, 
+                       _kICSSTR_XAPPLE_language_prop, _kICSSTR_XAPPLE_likeness_data_param, 
+                       _kICSSTR_XAPPLE_local_default_alarm, _kICSSTR_XAPPLE_proximity_prop, 
+                       _kICSSTR_XAPPLE_region_prop, _kICSSTR_XAPPLE_related_travel_param, 
                        _kICSSTR_XAPPLE_routing_param, _kICSSTR_XAPPLE_scheduletag, 
                        _kICSSTR_XAPPLE_serverFilename, _kICSSTR_XAPPLE_sort_order_prop, 
-                       _kICSSTR_XAPPLE_structured_data_prop, _kICSSTR_XAPPLE_structured_location_prop, 
-                       _kICSSTR_XAPPLE_suggestion_info_changed_fields_prop, _kICSSTR_XAPPLE_suggestion_info_changes_acknowledged_prop, 
+                       _kICSSTR_XAPPLE_special_day_prop, _kICSSTR_XAPPLE_special_day_value_alternate_workday, 
+                       _kICSSTR_XAPPLE_special_day_value_work_holiday, _kICSSTR_XAPPLE_structured_data_prop, 
+                       _kICSSTR_XAPPLE_structured_location_prop, _kICSSTR_XAPPLE_suggestion_info_changed_fields_prop, 
+                       _kICSSTR_XAPPLE_suggestion_info_changes_acknowledged_prop, 
                        _kICSSTR_XAPPLE_suggestion_info_opaque_key_prop, _kICSSTR_XAPPLE_suggestion_info_timestamp_prop, 
                        _kICSSTR_XAPPLE_suggestion_info_unique_key_prop, _kICSSTR_XAPPLE_travel_advisory_behavior, 
                        _kICSSTR_XAPPLE_travel_default_alarm, _kICSSTR_XAPPLE_travel_duration, 
@@ -106,21 +111,29 @@ exports:
                        _kICSSymbolicColorGreen, _kICSSymbolicColorOrange, _kICSSymbolicColorPurple, 
                        _kICSSymbolicColorRed, _kICSSymbolicColorYellow, _kXAppleAlarmProxArrive, 
                        _kXAppleAlarmProxConnect, _kXAppleAlarmProxDepart, _kXAppleAlarmProxDisconnect, 
-                       _strncmp_s, _symbolicColorForLegacyRGB ]
+                       _stringForEntityClassification, _stringForEntityStatus, _stringForEntityTransparency, 
+                       _strncmp_s, _symbolicColorForLegacyRGB, _vcsPropertyCompare, 
+                       _vcsPropertyList, _vcsPropertyListCount, _vcsTokenCompare, 
+                       _vcsTokensList, _vcsTokensListCount ]
     objc-classes:    [ ICSActionValue, ICSAlarm, ICSAlternateTimeProposal, ICSAlternateTimeProposalStatusParameter, 
                        ICSAttachment, ICSAttendeeComment, ICSAvailability, ICSAvailable, 
                        ICSBusyStatusValue, ICSByDayValue, ICSCalendar, ICSCalendarItem, 
                        ICSCalendarServerAccessValue, ICSCalendarUserParameter, ICSClassificationValue, 
-                       ICSColor, ICSComponent, ICSConference, ICSDate, ICSDateTimeUTCValue, 
-                       ICSDateTimeValue, ICSDateValue, ICSDocument, ICSDuration, 
-                       ICSEvent, ICSFreeBusy, ICSFreeBusyTime, ICSFreeBusyTypeParameter, 
-                       ICSJournal, ICSLogger, ICSMethodValue, ICSMultiValueProperty, 
-                       ICSParser, ICSParticipationStatusParameter, ICSPeriod, ICSPredefinedValue, 
-                       ICSProperty, ICSRecurrenceRule, ICSRelationshipTypeParameter, 
+                       ICSColor, ICSComponent, ICSCompressedInputStream, ICSConference, 
+                       ICSDate, ICSDateTimeUTCValue, ICSDateTimeValue, ICSDateValue, 
+                       ICSDocument, ICSDuration, ICSEvent, ICSFreeBusy, ICSFreeBusyTime, 
+                       ICSFreeBusyTypeParameter, ICSInputData, ICSJournal, ICSLazyDigestUIDGenerator, 
+                       ICSLogger, ICSMethodValue, ICSMultiValueProperty, ICSParser, 
+                       ICSParticipationStatusParameter, ICSPeriod, ICSPredefinedValue, 
+                       ICSProperty, ICSPushbackStream, ICSRecurrenceRule, ICSRelationshipTypeParameter, 
                        ICSRoleParameter, ICSScheduleAgentParameter, ICSScheduleForceSendParameter, 
                        ICSScheduleStatusParameter, ICSStatusValue, ICSStringWriter, 
                        ICSStructuredLocation, ICSTimeZone, ICSTimeZoneBlock, ICSTimeZoneChange, 
                        ICSTimeZoneDaylightBlock, ICSTimeZoneStandardBlock, ICSTimeZoneTranslator, 
                        ICSTodo, ICSTokenizer, ICSTransparencyValue, ICSTravelAdvisoryBehavior, 
-                       ICSTravelDuration, ICSTrigger, ICSUserAddress, ICSZStringWriter ]
+                       ICSTravelDuration, ICSTrigger, ICSUnfoldingStream, ICSUserAddress, 
+                       ICSZStringWriter, VCSAlarm, VCSAttachment, VCSCalendar, VCSDate, 
+                       VCSEntity, VCSEvent, VCSParseState, VCSParsedLine, VCSParser, 
+                       VCSParserInputStream, VCSProperty, VCSPropertyValue, VCSRecurrenceRule, 
+                       VCSTodo ]
 ...

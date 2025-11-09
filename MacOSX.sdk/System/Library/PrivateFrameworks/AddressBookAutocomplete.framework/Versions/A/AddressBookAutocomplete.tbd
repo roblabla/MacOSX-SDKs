@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           ABE654AA-AD28-30A1-94B5-42BF4C2B25F9
+    value:           19CDA078-2CE6-3F83-9B9B-3B22E3258EFA
   - target:          x86_64-maccatalyst
-    value:           ABE654AA-AD28-30A1-94B5-42BF4C2B25F9
+    value:           19CDA078-2CE6-3F83-9B9B-3B22E3258EFA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F738CFAD-AA15-30E4-A939-6C677B23B2B2
+    value:           F5294A9B-12BE-3F96-BE9F-1B460DFA52CE
   - target:          arm64e-maccatalyst
-    value:           F738CFAD-AA15-30E4-A939-6C677B23B2B2
+    value:           F5294A9B-12BE-3F96-BE9F-1B460DFA52CE
 install-name:    '/System/Library/PrivateFrameworks/AddressBookAutocomplete.framework/Versions/A/AddressBookAutocomplete'
-current-version: 2498.4
+current-version: 2535
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ ABAutocompleteContactPredicate, ABAutocompleteLocalContactResultTransformBuilder, 
                        ABAutocompleteServerSearch, ABAutocompleteServerSearchObservable, 
                        CNAutocompleteContactFetchPredicateFactory, CNAutocompleteContactFilterPredicateFactory, 

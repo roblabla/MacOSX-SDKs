@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BAF3E286-2662-3232-A431-146D554B3407
+    value:           8CA657B6-53BF-3067-8E1C-5F607FC1B5CE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A58B17F8-5A08-3E8E-A28D-D7FE48F36631
+    value:           343ABDCC-F056-3396-B45C-946612B5B137
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomPresentationLite.framework/Versions/A/SymptomPresentationLite'
-current-version: 1617.101.2
+current-version: 1732
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _kPerformanceFlowAvgUsecsEstabTime, _kPerformanceFlowConnAttempts, 
                        _kPerformanceFlowConnSuccesses, _kPerformanceFlowOverallTime, 
                        _kPerformanceFlowRemoteID, _kPerformanceFlowTimesThresholded, 
@@ -108,6 +108,7 @@ exports:
                        _kSymptomAnalyticsServiceTypicalUsageToggle, _kSymptomAnalyticsServiceUsage, 
                        _kSymptomAnalyticsServiceWatchpointKey, _kSymptomAnalyticsServiceWatchpointTarget, 
                        _kSymptomAnalyticsServiceWatchpointValue, _kSymptomAnalyticsTypeBundleIdentifier, 
-                       _kSymptomAnalyticsTypeProcessName ]
+                       _kSymptomAnalyticsTypeProcessName, _kSymptomForcePreferCellOverWiFiAutoDisableTimestampKey, 
+                       _kSymptomForcePreferCellOverWiFiEnableKey ]
     objc-classes:    [ NetworkPerformanceQuery ]
 ...

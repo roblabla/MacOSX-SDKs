@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F9748CD4-86ED-3B2E-88E9-F3CB124C4ECC
+    value:           32B2FCBE-A209-35E1-829E-CB94F0524123
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9EA1124A-E91D-3344-A615-870F1A44B523
+    value:           3F8BB286-FA27-3CE0-878D-EBB1E3E54822
 install-name:    '/System/Library/PrivateFrameworks/SiriKitInvocation.framework/Versions/A/SiriKitInvocation'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _RunVoiceShortcutDirectInvocationIdentifier, _SKIHomeAutomationInvocationIdentifierAsyncResponse, 
                        _SKIMessagesDirectInvocationIdentifierAnnounceMessage, _SKIMessagesDirectInvocationIdentifierNewMessage, 
                        _SKIMessagesDirectInvocationIdentifierNewMessageToContact, 

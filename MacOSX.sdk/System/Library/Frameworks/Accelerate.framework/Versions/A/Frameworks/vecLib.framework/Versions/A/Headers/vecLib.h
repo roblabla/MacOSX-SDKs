@@ -3,7 +3,7 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-794.100
+     Version:    vecLib-818.40
  
      Copyright:  Copyright (c) 2000-2022 by Apple Inc. All rights reserved.
  
@@ -49,7 +49,7 @@
 
 #include <vecLib/fortran_blas.h>
 
-#ifndef CBLAS_H	
+#ifndef CBLAS_H
 #include <vecLib/cblas.h>
 #endif
 

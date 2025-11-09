@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLTexture.h>
+#import <Metal/MTLCommandEncoder.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -128,6 +129,57 @@ typedef NS_ENUM(NSUInteger, MTLDataType) {
 @class MTLArgument;
 
 /*!
+ @enum MTLBindingsType
+ @abstract The type of a resource binding.
+ 
+ @constant MTLBindingTypeBuffer
+ This binding represents a buffer.
+ 
+ @constant MTLBindingTypeThreadgroupMemory
+ This binding represents threadgroup memory.
+ 
+ @constant MTLBindingTypeTexture
+ This binding represents a texture.
+ 
+ @constant MTLBindingTypeSampler
+ This binding represents a sampler.
+ 
+ @constant MTLBindingTypeImageblockData
+ This binding represents an image block data.
+ 
+ @constant MTLBindingTypeImageblock
+ This binding represents an image block.
+  
+ @constant MTLBindingTypeVisibleFunctionTable
+ This binding represents a visible function table object.
+ 
+ @constant MTLBindingTypePrimitiveAccelerationStructure
+ This binding represents a primitive acceleration structure object.
+ 
+ @constant MTLBindingTypeInstanceAccelerationStructure
+ This binding represents an instance acceleration structure object.
+ 
+ @constant MTLBinidngTypeIntersectionFunctionTable
+ This binding represents an intersection function table object.
+ 
+ @constant MTLBindingTypeObjectPayload
+ This binding represents an object payload.
+*/
+typedef NS_ENUM(NSInteger, MTLBindingType) {
+    MTLBindingTypeBuffer = 0,
+    MTLBindingTypeThreadgroupMemory = 1,
+    MTLBindingTypeTexture = 2,
+    MTLBindingTypeSampler = 3,
+    MTLBindingTypeImageblockData = 16,
+    MTLBindingTypeImageblock = 17,
+    MTLBindingTypeVisibleFunctionTable = 24,
+    MTLBindingTypePrimitiveAccelerationStructure = 25,
+    MTLBindingTypeInstanceAccelerationStructure = 26,
+    MTLBindingTypeIntersectionFunctionTable = 27,
+    MTLBindingTypeObjectPayload = 34,
+} API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
  @enum MTLArgumentType
  @abstract The type for an input to a MTLRenderPipelineState or a MTLComputePipelineState
  
@@ -156,7 +208,7 @@ typedef NS_ENUM(NSUInteger, MTLArgumentType) {
     MTLArgumentTypePrimitiveAccelerationStructure API_AVAILABLE(macos(11.0), ios(14.0)) = 25,
     MTLArgumentTypeInstanceAccelerationStructure API_AVAILABLE(macos(11.0), ios(14.0)) = 26,
     MTLArgumentTypeIntersectionFunctionTable API_AVAILABLE(macos(11.0), ios(14.0)) = 27,
-} API_AVAILABLE(macos(10.11), ios(8.0));
+} API_DEPRECATED_WITH_REPLACEMENT("MTLBindingType", macos(10.11, 13.0), ios(8.0, 16.0));
 
 /*!
  @enum MTLArgumentAccess
@@ -249,7 +301,8 @@ MTL_EXPORT API_AVAILABLE(macos(10.13), ios(11.0))
 /*!
  MTLArgument
 */
-MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
+MTL_EXPORT
+API_DEPRECATED_WITH_REPLACEMENT("MTLBinding", macos(10.11, 13.0), ios(8.0, 16.0))
 @interface MTLArgument : NSObject
 
 @property (readonly) NSString *name;
@@ -278,4 +331,45 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 
 @end
 
+MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0))
+@protocol MTLBinding<NSObject>
+@property (readonly) NSString *name;
+@property (readonly) MTLBindingType type;
+@property (readonly) MTLArgumentAccess access;
+@property (readonly) NSUInteger index;
+
+@property (readonly, getter=isUsed) BOOL used;
+@property (readonly, getter=isArgument) BOOL argument;
+@end
+
+MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0))
+@protocol MTLBufferBinding<MTLBinding>
+@property (readonly) NSUInteger      bufferAlignment;        // min alignment of starting offset in the buffer
+@property (readonly) NSUInteger      bufferDataSize;         // sizeof(T) for T *argName
+@property (readonly) MTLDataType     bufferDataType;         // MTLDataTypeFloat, MTLDataTypeFloat4, MTLDataTypeStruct, ...
+@property (readonly, nullable) MTLStructType  *bufferStructType;
+@property (readonly, nullable) MTLPointerType *bufferPointerType;
+@end
+
+MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0))
+@protocol MTLThreadgroupBinding<MTLBinding>
+@property (readonly) NSUInteger     threadgroupMemoryAlignment;
+@property (readonly) NSUInteger     threadgroupMemoryDataSize; // sizeof(T) for T *argName
+@end
+
+MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0))
+@protocol MTLTextureBinding<MTLBinding>
+@property (readonly) MTLTextureType textureType; // texture1D, texture2D...
+@property (readonly) MTLDataType    textureDataType; // half, float, int, or uint.
+@property (readonly, getter=isDepthTexture) BOOL           depthTexture; // true for depth textures
+@property (readonly) NSUInteger     arrayLength;
+@end
+
+MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0))
+@protocol MTLObjectPayloadBinding<MTLBinding>
+@property (readonly) NSUInteger      objectPayloadAlignment;        // min alignment of starting offset in the buffer
+@property (readonly) NSUInteger      objectPayloadDataSize;         // sizeof(T) for T *argName
+@end
+
 NS_ASSUME_NONNULL_END
+

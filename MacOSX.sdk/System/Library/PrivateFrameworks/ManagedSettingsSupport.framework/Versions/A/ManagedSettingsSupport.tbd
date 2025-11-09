@@ -4,27 +4,28 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9380ED58-7317-3322-9716-3E1CBD516553
+    value:           9809C9D6-B027-3AC5-B757-DCD6BF281F71
   - target:          x86_64-maccatalyst
-    value:           9380ED58-7317-3322-9716-3E1CBD516553
+    value:           9809C9D6-B027-3AC5-B757-DCD6BF281F71
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B455BF58-DEE1-3589-BE12-B206E4C36C0E
+    value:           D8B56FE5-5D7B-39D3-B4BB-DA12062C2AC0
   - target:          arm64e-maccatalyst
-    value:           B455BF58-DEE1-3589-BE12-B206E4C36C0E
+    value:           D8B56FE5-5D7B-39D3-B4BB-DA12062C2AC0
 install-name:    '/System/Library/PrivateFrameworks/ManagedSettingsSupport.framework/Versions/A/ManagedSettingsSupport'
-current-version: 27
+current-version: 66
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s22ManagedSettingsSupport12KeyGeneratorV08generateD4Data10Foundation0G0VyKF', 
                        '_$s22ManagedSettingsSupport12KeyGeneratorVACycfC', '_$s22ManagedSettingsSupport12KeyGeneratorVMa', 
                        '_$s22ManagedSettingsSupport12KeyGeneratorVMn', '_$s22ManagedSettingsSupport12KeyGeneratorVN', 
-                       '_$s22ManagedSettingsSupport12KeyRetrieverV08retrieveD4Data10Foundation0G0VyKF', 
+                       '_$s22ManagedSettingsSupport12KeyRetrieverV016retrieveDecodingD5DatasShy10Foundation4DataVGyKF', 
+                       '_$s22ManagedSettingsSupport12KeyRetrieverV016retrieveEncodingD4Data10Foundation0H0VyKF', 
                        '_$s22ManagedSettingsSupport12KeyRetrieverVAA0D10RetrievingAAMc', 
                        '_$s22ManagedSettingsSupport12KeyRetrieverVAA0D10RetrievingAAWP', 
                        '_$s22ManagedSettingsSupport12KeyRetrieverVACycfC', '_$s22ManagedSettingsSupport12KeyRetrieverVMa', 
@@ -57,8 +58,10 @@ exports:
                        '_$s22ManagedSettingsSupport12TokenEncoderCMn', '_$s22ManagedSettingsSupport12TokenEncoderCMo', 
                        '_$s22ManagedSettingsSupport12TokenEncoderCMu', '_$s22ManagedSettingsSupport12TokenEncoderCN', 
                        '_$s22ManagedSettingsSupport12TokenEncoderCfD', '_$s22ManagedSettingsSupport12TokenEncoderCfd', 
-                       '_$s22ManagedSettingsSupport13KeyRetrievingMp', '_$s22ManagedSettingsSupport13KeyRetrievingP08retrieveD4Data10Foundation0G0VyKFTj', 
-                       '_$s22ManagedSettingsSupport13KeyRetrievingP08retrieveD4Data10Foundation0G0VyKFTq', 
+                       '_$s22ManagedSettingsSupport13KeyRetrievingMp', '_$s22ManagedSettingsSupport13KeyRetrievingP016retrieveDecodingD5DatasShy10Foundation4DataVGyKFTj', 
+                       '_$s22ManagedSettingsSupport13KeyRetrievingP016retrieveDecodingD5DatasShy10Foundation4DataVGyKFTq', 
+                       '_$s22ManagedSettingsSupport13KeyRetrievingP016retrieveEncodingD4Data10Foundation0H0VyKFTj', 
+                       '_$s22ManagedSettingsSupport13KeyRetrievingP016retrieveEncodingD4Data10Foundation0H0VyKFTq', 
                        '_$s22ManagedSettingsSupport13KeyRetrievingTL', _ManagedSettingsSupportVersionNumber, 
                        _ManagedSettingsSupportVersionString ]
 ...

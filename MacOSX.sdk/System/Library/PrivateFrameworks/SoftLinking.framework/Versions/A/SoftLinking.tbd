@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           38F59490-9674-3D6F-9B49-B9E19A5A431B
+    value:           3DB02F8B-0F1B-3449-B3CF-365CBD12360B
   - target:          x86_64-maccatalyst
-    value:           38F59490-9674-3D6F-9B49-B9E19A5A431B
+    value:           3DB02F8B-0F1B-3449-B3CF-365CBD12360B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FABD5E53-69FB-350D-8FC3-59B0DAA7F355
+    value:           A0769C10-575E-30A8-867D-A6FD22C5FE1E
   - target:          arm64e-maccatalyst
-    value:           FABD5E53-69FB-350D-8FC3-59B0DAA7F355
+    value:           A0769C10-575E-30A8-867D-A6FD22C5FE1E
 install-name:    '/System/Library/PrivateFrameworks/SoftLinking.framework/Versions/A/SoftLinking'
-current-version: 42
+current-version: 44
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __sl_dlopen, __sl_dlopen_audited ]
 ...

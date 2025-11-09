@@ -23,6 +23,20 @@ Classes:
   - Selector: 'setCategory:mode:routeSharingPolicy:options:error:'
     SwiftName: setCategory(_:mode:policy:options:)
     MethodKind: Instance
+- Name: AVMusicTrack
+  Methods:
+  - Selector: 'addEvent:atBeat:'
+    SwiftName: addEvent(_:at:)
+    MethodKind: Instance
+  - Selector: 'copyEventsInRange:fromTrack:insertAtBeat:'
+    SwiftName: copyEvents(in:from:insertAt:)
+    MethodKind: Instance
+  - Selector: 'copyAndMergeEventsInRange:fromTrack:mergeAtBeat:'
+    SwiftName: copyAndMergeEvents(in:from:mergeAt:)
+    MethodKind: Instance
+  - Selector: 'moveEventsInRange:byAmount:'
+    SwiftName: moveEvents(in:by:)
+    MethodKind: Instance
 
 Tags:
 - Name: AVAudioSessionCategoryOptions
@@ -47,8 +61,14 @@ Tags:
   SwiftName: AVAudioSession.SetActiveOptions
 - Name: AVAudioSessionSilenceSecondaryAudioHintType
   SwiftName: AVAudioSession.SilenceSecondaryAudioHintType
+- Name: AVMIDIControlChangeMessageType
+  SwiftName: AVMIDIControlChangeEvent.MessageType
+- Name: AVMIDIMetaEventType
+  SwiftName: AVMIDIMetaEvent.EventType
 
 Typedefs:
+- Name: AVAudioSequencerInfoDictionaryKey
+  SwiftName: AVAudioSequencer.InfoDictionaryKey
 - Name: AVAudioSessionCategory
   SwiftName: AVAudioSession.Category
 - Name: AVAudioSessionLocation
@@ -73,6 +93,8 @@ Globals:
   SwiftName: AVAudioSession.silenceSecondaryAudioHintNotification
 - Name: AVAudioSessionMediaServicesWereResetNotification
   SwiftName: AVAudioSession.mediaServicesWereResetNotification
+- Name: AVExtendedNoteOnEventDefaultInstrument
+  SwiftName: AVExtendedNoteOnEvent.defaultInstrument
 
 SwiftVersions:
 - Version: 3

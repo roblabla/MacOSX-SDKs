@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class MTLComputePassDescriptor;
 @class MTLBlitPassDescriptor;
 @class MTLResourceStatePassDescriptor;
+@class MTLAccelerationStructurePassDescriptor;
+
 /*!
  @enum MTLCommandBufferStatus
  
@@ -106,7 +108,7 @@ typedef NS_ENUM(NSUInteger, MTLCommandBufferError)
     MTLCommandBufferErrorInternal = 1,
     MTLCommandBufferErrorTimeout = 2,
     MTLCommandBufferErrorPageFault = 3,
-    MTLCommandBufferErrorBlacklisted = 4, // Deprecated. Please use MTLCommandBufferErrorAccessRevoked.
+    MTLCommandBufferErrorBlacklisted API_DEPRECATED_WITH_REPLACEMENT("MTLCommandBufferErrorAccessRevoked", macos(10.11, 13.0), ios(8.0, 16.0)) = 4, 
     MTLCommandBufferErrorAccessRevoked = 4,
     MTLCommandBufferErrorNotPermitted = 7,
     MTLCommandBufferErrorOutOfMemory = 8,
@@ -414,6 +416,8 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 - (nullable id<MTLResourceStateCommandEncoder>) resourceStateCommandEncoderWithDescriptor:(MTLResourceStatePassDescriptor *) resourceStatePassDescriptor API_AVAILABLE(macos(11.0), ios(14.0));
 
 - (nullable id <MTLAccelerationStructureCommandEncoder>)accelerationStructureCommandEncoder API_AVAILABLE(macos(11.0), ios(14.0));
+
+- (id <MTLAccelerationStructureCommandEncoder>)accelerationStructureCommandEncoderWithDescriptor:(MTLAccelerationStructurePassDescriptor *)descriptor API_AVAILABLE(macos(13.0), ios(16.0));
 
 /*!
  @method pushDebugGroup:

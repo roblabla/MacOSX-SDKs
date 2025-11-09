@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3CF02AD2-4990-3152-A254-C7C0DDFEBA5E
+    value:           B8826E31-15E7-3D70-9C5F-00FE23A2CCE7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B1CF03AF-A8B6-3D8E-810E-A24B4FBD26FF
+    value:           550EAA03-0BA4-382A-912C-73200FE47B08
 install-name:    '/System/Library/PrivateFrameworks/AudioResourceArbitration.framework/Versions/A/AudioResourceArbitration'
 exports:
   - targets:         [ x86_64-macos ]
@@ -53,7 +53,7 @@ exports:
                        __ZTSNSt3__16vectorImNS_9allocatorImEEEE, __ZTSNSt3__16vectorIsNS_9allocatorIsEEEE, 
                        __ZTSNSt3__16vectorItNS_9allocatorItEEEE, __ZTSNSt3__16vectorIxNS_9allocatorIxEEEE, 
                        __ZTSNSt3__16vectorIyNS_9allocatorIyEEEE ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __ZN4aura15make_error_codeENS_5ErrorE, __ZN4aura18ErrorType_categoryEv, 
                        __ZN4aura20FakeDeviceManagementD0Ev, __ZN4aura20FakeDeviceManagementD1Ev, 
                        __ZN4aura20FakeDeviceManagementD2Ev, __ZN4aura20make_error_conditionENS_5ErrorE, 

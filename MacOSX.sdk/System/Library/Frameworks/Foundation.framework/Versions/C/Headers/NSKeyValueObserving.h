@@ -11,7 +11,7 @@
 
 @class NSIndexSet, NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* Options for use with -addObserver:forKeyPath:options:context: and -addObserver:toObjectsAtIndexes:forKeyPath:options:context:.
 */
@@ -136,8 +136,9 @@ The change dictionaries in notifications resulting from use of these methods con
     - The NSKeyValueChangeOldKey entry, if present, contains the value returned by -valueForKey: at the instant that -willChangeValueForKey: is invoked (or an NSNull if -valueForKey: returns nil).
     - The NSKeyValueChangeNewKey entry, if present, contains the value returned by -valueForKey: at the instant that -didChangeValueForKey: is invoked (or an NSNull if -valueForKey: returns nil).
 */
-- (void)willChangeValueForKey:(NSString *)key;
-- (void)didChangeValueForKey:(NSString *)key;
+- (void)willChangeValueForKey:(NSString *)key NS_SWIFT_UNAVAILABLE_FROM_ASYNC("Only notify of changes to a key in a synchronous context. Notifying changes across suspension points has undefined behavior.");
+
+- (void)didChangeValueForKey:(NSString *)key NS_SWIFT_UNAVAILABLE_FROM_ASYNC("Only notify of changes to a key in a synchronous context. Notifying changes across suspension points has undefined behavior.");
 
 /* Given a key that identifies an _ordered_ to-many relationship, send -observeValueForKeyPath:ofObject:change:context: notification messages of the passed-in change kind to each observer registered for the key, including those that are registered with other objects using key paths that locate the keyed value in this object. The passed-in kind must be NSKeyValueChangeInsertion, NSKeyValueChangeRemoval, or NSKeyValueChangeReplacement. The passed-in index set must be the indexes of the objects being inserted, removed, or replaced. Invocations of these methods must always be paired, with identical arguments.
 
@@ -145,8 +146,9 @@ The change dictionaries in notifications resulting from use of these methods con
     - The NSKeyValueChangeOldKey entry, if present (only for NSKeyValueChangeRemoval and NSKeyValueChangeReplacement), contains an array of the indexed objects from the array returned by -valueForKey: at the instant that -willChangeValueForKey:valuesAtIndexes:forKey: is invoked.
     - The NSKeyValueChangeNewKey entry, if present (only for NSKeyValueChangeInsertion and NSKeyValueChangeReplacement), contains an array of the indexed objects from the array returned by -valueForKey: at the instant that -didChangeValueForKey:valuesAtIndexes:forKey: is invoked.
 */
-- (void)willChange:(NSKeyValueChange)changeKind valuesAtIndexes:(NSIndexSet *)indexes forKey:(NSString *)key;
-- (void)didChange:(NSKeyValueChange)changeKind valuesAtIndexes:(NSIndexSet *)indexes forKey:(NSString *)key;
+- (void)willChange:(NSKeyValueChange)changeKind valuesAtIndexes:(NSIndexSet *)indexes forKey:(NSString *)key NS_SWIFT_UNAVAILABLE_FROM_ASYNC("Only notify of changes to a key in a synchronous context. Notifying changes across suspension points has undefined behavior.");
+
+- (void)didChange:(NSKeyValueChange)changeKind valuesAtIndexes:(NSIndexSet *)indexes forKey:(NSString *)key NS_SWIFT_UNAVAILABLE_FROM_ASYNC("Only notify of changes to a key in a synchronous context. Notifying changes across suspension points has undefined behavior.");
 
 /* Given a key that identifies an _unordered_ to-many relationship, send -observeValueForKeyPath:ofObject:change:context: notification messages to each observer registered for the key, including those that are registered with other objects using key paths that locate the keyed value in this object. The passed-in mutation kind corresponds to an NSMutableSet method. The passed-in set must contain the set that would be passed to the corresponding NSMutableSet method. Invocations of these methods must always be paired, with identical arguments.
 
@@ -160,8 +162,9 @@ The change dictionaries may also contain optional entries:
     - The NSKeyValueChangeOldKey entry, if present (only for for NSKeyValueChangeRemoval and NSKeyValueChangeReplacement), contains the set of objects that were removed.
     - The NSKeyValueChangeNewKey entry, if present (only for NSKeyValueChangeInsertion and NSKeyValueChangeReplacement), contains the set of objects that were added.
 */
-- (void)willChangeValueForKey:(NSString *)key withSetMutation:(NSKeyValueSetMutationKind)mutationKind usingObjects:(NSSet *)objects;
-- (void)didChangeValueForKey:(NSString *)key withSetMutation:(NSKeyValueSetMutationKind)mutationKind usingObjects:(NSSet *)objects;
+- (void)willChangeValueForKey:(NSString *)key withSetMutation:(NSKeyValueSetMutationKind)mutationKind usingObjects:(NSSet *)objects NS_SWIFT_UNAVAILABLE_FROM_ASYNC("Only notify of changes to a key in a synchronous context. Notifying changes across suspension points has undefined behavior.");
+
+- (void)didChangeValueForKey:(NSString *)key withSetMutation:(NSKeyValueSetMutationKind)mutationKind usingObjects:(NSSet *)objects NS_SWIFT_UNAVAILABLE_FROM_ASYNC("Only notify of changes to a key in a synchronous context. Notifying changes across suspension points has undefined behavior.");
 
 @end
 
@@ -199,4 +202,4 @@ You can't really override this method when you add a computed property to an exi
 
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7AB6BCBE-B957-3764-976C-0DCE878DF587
+    value:           D3622493-5C77-3936-AD69-0D1A4809460D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           396D64C9-CB7B-34B4-BE48-1DD8F43C1E76
+    value:           CB5BCD21-C0AD-3FF3-BB92-382BC3D02EB1
 install-name:    '/System/Library/Frameworks/Tcl.framework/Versions/8.5/Tcl'
 current-version: 8.5.9
 compatibility-version: 8.5
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _TclAddLiteralObj, _TclAllocateFreeObjects, _TclBN_epoch, 
                        _TclBN_fast_s_mp_mul_digs, _TclBN_fast_s_mp_sqr, _TclBN_mp_add, 
                        _TclBN_mp_add_d, _TclBN_mp_and, _TclBN_mp_clamp, _TclBN_mp_clear, 

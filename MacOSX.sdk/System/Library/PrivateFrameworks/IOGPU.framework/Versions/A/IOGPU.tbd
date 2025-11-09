@@ -4,41 +4,52 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           28B43739-C56C-35AF-9004-7886168734F0
+    value:           6D5B5A80-9C69-36E7-B5A7-2587299AD498
   - target:          x86_64-maccatalyst
-    value:           28B43739-C56C-35AF-9004-7886168734F0
+    value:           6D5B5A80-9C69-36E7-B5A7-2587299AD498
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           51396341-67FD-333D-A043-99BAADA3F29D
+    value:           0D46C99A-45FB-3932-80FC-5B072B30D43C
   - target:          arm64e-maccatalyst
-    value:           51396341-67FD-333D-A043-99BAADA3F29D
+    value:           0D46C99A-45FB-3932-80FC-5B072B30D43C
 install-name:    '/System/Library/PrivateFrameworks/IOGPU.framework/Versions/A/IOGPU'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _IOGPUCommandQueueCreate, _IOGPUCommandQueueCreateWithQoS, 
+                       _IOGPUCommandQueueDispatchAvailableCompletionNotifications, 
                        _IOGPUCommandQueueGetConnect, _IOGPUCommandQueueGetGlobalTraceObjectID, 
                        _IOGPUCommandQueueGetID, _IOGPUCommandQueueGetTypeID, _IOGPUCommandQueueRelease, 
                        _IOGPUCommandQueueSetDispatchQueue, _IOGPUCommandQueueSetPriorityAndBackground, 
                        _IOGPUCommandQueueSetQualityOfService, _IOGPUCommandQueueSubmitCommandBuffers, 
                        _IOGPUDeviceCheckAndLogSoftFaultCount, _IOGPUDeviceCreate, 
-                       _IOGPUDeviceCreateDeviceShmem, _IOGPUDeviceCreateWithAPIProperty, 
-                       _IOGPUDeviceDestroyDeviceShmem, _IOGPUDeviceGetAllocatedSize, 
-                       _IOGPUDeviceGetConfig, _IOGPUDeviceGetConfig64, _IOGPUDeviceGetConnect, 
-                       _IOGPUDeviceGetCurrentTraceFilter, _IOGPUDeviceGetGlobalTraceObjectID, 
-                       _IOGPUDeviceGetMaxResourceSize, _IOGPUDeviceGetMemoryData, 
-                       _IOGPUDeviceGetName, _IOGPUDeviceGetNextGlobalTraceID, _IOGPUDeviceGetSharedMemorySize, 
-                       _IOGPUDeviceGetSurfaceInfo, _IOGPUDeviceGetTypeID, _IOGPUDeviceRelease, 
-                       _IOGPUDeviceSetAppGPURole, _IOGPUDeviceSetDisplayParams, _IOGPUDeviceSetResourcesPurgeable, 
+                       _IOGPUDeviceCreateDeviceShmem, _IOGPUDeviceCreateVNIODesc, 
+                       _IOGPUDeviceCreateWithAPIProperty, _IOGPUDeviceDestroyDeviceShmem, 
+                       _IOGPUDeviceDestroyVNIODesc, _IOGPUDeviceGetAllocatedSize, 
+                       _IOGPUDeviceGetAppGPURole, _IOGPUDeviceGetConfig, _IOGPUDeviceGetConfig64, 
+                       _IOGPUDeviceGetConnect, _IOGPUDeviceGetCurrentTraceFilter, 
+                       _IOGPUDeviceGetGlobalTraceObjectID, _IOGPUDeviceGetMaxResourceSize, 
+                       _IOGPUDeviceGetMemoryData, _IOGPUDeviceGetName, _IOGPUDeviceGetNextGlobalTraceID, 
+                       _IOGPUDeviceGetSharedMemorySize, _IOGPUDeviceGetSurfaceInfo, 
+                       _IOGPUDeviceGetTypeID, _IOGPUDeviceRelease, _IOGPUDeviceSetAppGPURole, 
+                       _IOGPUDeviceSetDisplayParams, _IOGPUDeviceSetResourcesPurgeable, 
                        _IOGPUDeviceSetWaitForGPUCallback, _IOGPUDeviceTestEvent, 
-                       _IOGPUDeviceTestEventFast, _IOGPUDeviceTraceEvent, _IOGPUDeviceTraceObjectLabel, 
+                       _IOGPUDeviceTestEventFast, _IOGPUDeviceTraceEvent, _IOGPUDeviceTraceEventEnd, 
+                       _IOGPUDeviceTraceEventStart, _IOGPUDeviceTraceObjectLabel, 
                        _IOGPUGLDrawableClearDrawable, _IOGPUGLDrawableCreate, _IOGPUGLDrawableGetConnect, 
                        _IOGPUGLDrawableGetTypeID, _IOGPUGLDrawableLookupIOSurfaceFromIndex, 
                        _IOGPUGLDrawableRelease, _IOGPUGLDrawableSetDrawable, _IOGPUGLDrawableSetSwapInterval, 
                        _IOGPUGLDrawableSetSwapRect, _IOGPUGLDrawableSignalSurfaceEvent, 
+                       _IOGPUIOCommandQueueCreate, _IOGPUIOCommandQueueCreateIOCommandBuffer, 
+                       _IOGPUIOCommandQueueDestroyIOCommandBuffer, _IOGPUIOCommandQueueGetConnect, 
+                       _IOGPUIOCommandQueueGetGlobalTraceObjectID, _IOGPUIOCommandQueueGetID, 
+                       _IOGPUIOCommandQueueGetTypeID, _IOGPUIOCommandQueueIOCommandBufferBarrierComplete, 
+                       _IOGPUIOCommandQueueIOCommandBufferComplete, _IOGPUIOCommandQueuePerformIO, 
+                       _IOGPUIOCommandQueueRelease, _IOGPUIOCommandQueueSetDispatchQueue, 
+                       _IOGPUIOCommandQueueSubmitIOCommands, _IOGPUIOCommandQueueTryCancelIOCommandBuffer, 
                        _IOGPUKillClient_LeakingCommandQueue, _IOGPULogLeak, _IOGPUMetalCommandBufferStorageAllocDebugBuffer, 
                        _IOGPUMetalCommandBufferStorageAllocResourceAtIndex, _IOGPUMetalCommandBufferStorageAllocSidebandBuffer, 
                        _IOGPUMetalCommandBufferStorageBeginKernelCommands, _IOGPUMetalCommandBufferStorageBeginSegment, 
@@ -55,8 +66,9 @@ exports:
                        _IOGPUMetalCommandBufferStorageReset, _IOGPUMetalCommandBufferStorageResumeSegment, 
                        _IOGPUMetalCommandBufferStorageSetSegmentListLockedPeerIndex, 
                        _IOGPUMetalDeviceShmemPoolCreateShmem, _IOGPUMetalDeviceShmemRelease, 
-                       _IOGPUMetalPooledResourceRelease, _IOGPUMetalResourcePoolCreatePooledResource, 
-                       _IOGPUNotificationQueueCreate, _IOGPUNotificationQueueDidSubmit, 
+                       _IOGPUMetalDeviceShmemUpdateTrimLevel, _IOGPUMetalPooledResourceRelease, 
+                       _IOGPUMetalResourcePoolCreatePooledResource, _IOGPUNotificationQueueCreate, 
+                       _IOGPUNotificationQueueDidSubmit, _IOGPUNotificationQueueDispatchAvailableCompletionNotifications, 
                        _IOGPUNotificationQueueGetID, _IOGPUNotificationQueueGetTypeID, 
                        _IOGPUNotificationQueueRelease, _IOGPUNotificationQueueSetDispatchQueue, 
                        _IOGPUNotificationQueueWillSubmit, _IOGPUResourceCheckSysMem, 
@@ -79,29 +91,32 @@ exports:
                        IOGPUMetalBuffer, IOGPUMetalCommandBuffer, IOGPUMetalCommandEncoder, 
                        IOGPUMetalCommandQueue, IOGPUMetalComputeCommandEncoder, IOGPUMetalDebugCommandEncoder, 
                        IOGPUMetalDevice, IOGPUMetalDeviceShmem, IOGPUMetalDeviceShmemPool, 
-                       IOGPUMetalFence, IOGPUMetalGLDrawable, IOGPUMetalHeap, IOGPUMetalIndirectArgumentEncoder, 
-                       IOGPUMetalIndirectCommandBuffer, IOGPUMetalIndirectComputeCommand, 
-                       IOGPUMetalIndirectRenderCommand, IOGPUMetalIntersectionFunctionTable, 
-                       IOGPUMetalParallelRenderCommandEncoder, IOGPUMetalPooledResource, 
-                       IOGPUMetalRenderCommandEncoder, IOGPUMetalResource, IOGPUMetalResourcePool, 
-                       IOGPUMetalResourceStateCommandEncoder, IOGPUMetalTexture, 
-                       IOGPUMetalTextureLayout, IOGPUMetalVisibleFunctionTable, _IOGPUMetalMTLEvent, 
-                       _IOGPUMetalMTLLateEvalEvent ]
-    objc-ivars:      [ IOGPUMTLEvent._deviceRef, IOGPUMTLEvent._eventName, IOGPUMTLEvent._globalTraceObjectID, 
-                       IOGPUMTLFence._deviceRef, IOGPUMTLFence._fenceName, IOGPUMTLLateEvalEvent._deviceRef, 
+                       IOGPUMetalFence, IOGPUMetalGLDrawable, IOGPUMetalHeap, IOGPUMetalIOCommandBuffer, 
+                       IOGPUMetalIOCommandQueue, IOGPUMetalIOHandleCompressed, IOGPUMetalIOHandleRaw, 
+                       IOGPUMetalIndirectArgumentEncoder, IOGPUMetalIndirectCommandBuffer, 
+                       IOGPUMetalIndirectComputeCommand, IOGPUMetalIndirectRenderCommand, 
+                       IOGPUMetalIntersectionFunctionTable, IOGPUMetalParallelRenderCommandEncoder, 
+                       IOGPUMetalPooledResource, IOGPUMetalRenderCommandEncoder, 
+                       IOGPUMetalResource, IOGPUMetalResourcePool, IOGPUMetalResourceStateCommandEncoder, 
+                       IOGPUMetalTexture, IOGPUMetalTextureLayout, IOGPUMetalVisibleFunctionTable, 
+                       _IOGPUMetalMTLEvent, _IOGPUMetalMTLLateEvalEvent ]
+    objc-ivars:      [ IOGPUMTLEvent._deviceRef, IOGPUMTLEvent._enableBarrier, IOGPUMTLEvent._eventName, 
+                       IOGPUMTLEvent._globalTraceObjectID, IOGPUMTLFence._deviceRef, 
+                       IOGPUMTLFence._fenceName, IOGPUMTLLateEvalEvent._deviceRef, 
                        IOGPUMTLLateEvalEvent._eventName, IOGPUMTLLateEvalEvent._globalTraceObjectID, 
                        IOGPUMetalBuffer._aneIOSurface, IOGPUMetalBuffer._deallocator, 
                        IOGPUMetalBuffer._iosurface, IOGPUMetalBuffer._length, IOGPUMetalBuffer._pointer, 
                        IOGPUMetalBuffer._primaryBuffer, IOGPUMetalBuffer._primaryBufferIndex, 
                        IOGPUMetalBuffer._primaryBufferOffset, IOGPUMetalBuffer._primaryHeapIndex, 
                        IOGPUMetalCommandBuffer._device, IOGPUMetalCommandQueue._commandQueue, 
-                       IOGPUMetalCommandQueue._device, IOGPUMetalDebugCommandEncoder._api_resourceList, 
-                       IOGPUMetalDebugCommandEncoder._kernelCommandBufferCurrent, 
+                       IOGPUMetalCommandQueue._device, IOGPUMetalCommandQueue._disableAsyncCompletionDispatch, 
+                       IOGPUMetalDebugCommandEncoder._api_resourceList, IOGPUMetalDebugCommandEncoder._kernelCommandBufferCurrent, 
                        IOGPUMetalDebugCommandEncoder._kernelCommandBufferEnd, IOGPUMetalDebugCommandEncoder._resourceList, 
                        IOGPUMetalDevice._accelID, IOGPUMetalDevice._acceleratorPort, 
                        IOGPUMetalDevice._acceleratorService, IOGPUMetalDevice._commandBufferStoragePool, 
                        IOGPUMetalDevice._configBits, IOGPUMetalDevice._deviceBits, 
-                       IOGPUMetalDevice._deviceRef, IOGPUMetalDevice._numCommandBuffers, 
+                       IOGPUMetalDevice._deviceRef, IOGPUMetalDevice._disableGPUIO, 
+                       IOGPUMetalDevice._ioKernelCommandListShmemPool, IOGPUMetalDevice._numCommandBuffers, 
                        IOGPUMetalDevice._peerConnections, IOGPUMetalDevice._peerConnectionsLock, 
                        IOGPUMetalDevice._peerCount, IOGPUMetalDevice._peerGroupID, 
                        IOGPUMetalDevice._peerIndex, IOGPUMetalDevice._peerMask, IOGPUMetalDevice._segmentByteThreshold, 

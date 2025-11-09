@@ -609,6 +609,8 @@ enum
  * @enum
  * @brief       Fields used in IOUSBHostCIMessage structures with an IOUSBHostCIMessageControlType of IOUSBHostCIMessageTypeDeviceUpdate
  * @discussion  IOUSBHostCIDeviceUpdateCommandData1DescriptorAddress is populated in the data1 field of the command with the virtual address of a USB descriptor (see USB 3.2 § 9.5) applicable to the device.
+ *              If a device has multple descriptors, the IOUSBHostCIDeviceUpdateCommandData1DescriptorAddress address points to a synthetic configuration descriptor that serves as a container.
+ *              IOUSBGetNextDescriptorWithType can be used to locate specific descriptors within the synthetic configuration descriptor.
  */
 enum
 {
@@ -647,6 +649,8 @@ typedef enum
  * @enum
  * @brief       Fields used in IOUSBHostCIMessage structures with an IOUSBHostCIMessageControlType of IOUSBHostCIMessageTypeEndpointCreate
  * @discussion  IOUSBHostCIEndpointCreateCommandData1Descriptor is populated in the data1 field of the command with the virtual address of the USB endpoint descriptor(s) (see USB 3.2 § 9.5) describing the endpoint.
+ *              If an endpoint has multple descriptors, the IOUSBHostCIEndpointCreateCommandData1Descriptor address points to a synthetic configuration descriptor that serves as a container for the endpoint descriptors.
+ *              IOUSBGetNextDescriptorWithType can be used to locate specific descriptors within the synthetic configuration descriptor.
  */
 enum
 {
@@ -688,6 +692,8 @@ enum
  * @enum
  * @brief       Fields used in IOUSBHostCIMessage structures with an IOUSBHostCIMessageControlType of IOUSBHostCIMessageTypeEndpointUpdate
  * @discussion  IOUSBHostCIEndpointUpdateCommandData1Descriptor is populated in the data1 field of the command with the virtual address of the USB endpoint descriptors (see USB 3.2 § 9.5) describing updated endpoint capabilities.
+ *              If an endpoint has multple descriptors, the IOUSBHostCIEndpointUpdateCommandData1Descriptor address points to a synthetic configuration descriptor that serves as a container for the endpoint descriptors.
+ *              IOUSBGetNextDescriptorWithType can be used to locate specific descriptors within the synthetic configuration descriptor.
  */
 enum
 {

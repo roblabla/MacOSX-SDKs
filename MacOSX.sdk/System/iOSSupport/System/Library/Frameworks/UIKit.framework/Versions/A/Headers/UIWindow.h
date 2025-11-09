@@ -12,7 +12,7 @@
 #import <UIKit/UIApplication.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef CGFloat UIWindowLevel NS_TYPED_EXTENSIBLE_ENUM;
 
@@ -74,6 +74,32 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
+@protocol UILayoutGuideAspectFitting <NSObject>
+
+/// Update the aspect ratio (width / height) for the given content
+/// Defaults to 1.0. Must be > 0.0 and values may be clamped within a reasonable range of approximately 1:100 to 100:1.
+@property (nonatomic, readwrite) CGFloat aspectRatio;
+
+@end
+
+@interface UIWindow(UIWindowLayout)
+
+/// This layout guide is designed specifically for full-screen media content, and attaching constraints from deep in the window's view heirarchy will raise an exception.
+///
+/// This guide provides a layout area for placing media content of a given aspect ratio (width over height) such that the content will be completely visible within the window.
+/// Compared to the standard `safeAreaLayoutGuide` on a view, this guide takes into account the aspect ratio of the content, allowing it the maximum size within the window's
+/// true safe area, including the actual shape of the screen when that is the only factor contributing to the safe area. The rect defined by this guide will be centered within the
+/// window.
+///
+/// This layout guide should only be used for fixed aspect ratio content that is indended to fill the window (such as image or video content) and is not a replacement for the
+/// standard `safeAreaLayoutGuide` on each UIView which should be used for most content layout. The `safeAreaAspectFitLayoutGuide` should only be used with views
+/// that are direct subviews of, or very close descendants of, the guide's window. Creating constraints from this layout guide to views deeper in the view heirarchy or across
+/// views owned by child view controllers can significantly degrade performance and possibly raise an exception. Additionally, the safe area insets added by child view
+/// controllers will not be reflected in these cases. For anything other than full-screen/window media content, the standard `safeAreaLayoutGuide` on UIView should be used.
+@property(nonatomic,readonly,strong) UILayoutGuide<UILayoutGuideAspectFitting> *safeAreaAspectFitLayoutGuide API_AVAILABLE(ios(16.0), tvos(16.0));
+
+@end
+
 UIKIT_EXTERN const UIWindowLevel UIWindowLevelNormal;
 UIKIT_EXTERN const UIWindowLevel UIWindowLevelAlert;
 UIKIT_EXTERN const UIWindowLevel UIWindowLevelStatusBar API_UNAVAILABLE(tvos);
@@ -96,9 +122,9 @@ UIKIT_EXTERN NSNotificationName const UIWindowDidBecomeKeyNotification;
 // resigns key in the application.
 UIKIT_EXTERN NSNotificationName const UIWindowDidResignKeyNotification;
 
-// Each notification includes a nil object and a userInfo dictionary containing the
-// beginning and ending keyboard frame in screen coordinates. Use the various UIView and
-// UIWindow convertRect facilities to get the frame in the desired coordinate system.
+// The notification object is the UIScreen that contains the keyboard. Each notification includes 
+// a userInfo dictionary containing the beginning and ending keyboard frame in screen coordinates.
+// Use the various UICoordinateSpace convertRect facilities to get the frame in the desired coordinate system.
 // Animation key/value pairs are only available for the "will" family of notification.
 UIKIT_EXTERN NSNotificationName const UIKeyboardWillShowNotification API_UNAVAILABLE(tvos);
 UIKIT_EXTERN NSNotificationName const UIKeyboardDidShowNotification API_UNAVAILABLE(tvos);
@@ -121,7 +147,7 @@ UIKIT_EXTERN NSString *const UIKeyboardCenterBeginUserInfoKey   API_DEPRECATED("
 UIKIT_EXTERN NSString *const UIKeyboardCenterEndUserInfoKey     API_DEPRECATED("", ios(2.0, 3.2)) API_UNAVAILABLE(tvos);
 UIKIT_EXTERN NSString *const UIKeyboardBoundsUserInfoKey        API_DEPRECATED("", ios(2.0, 3.2)) API_UNAVAILABLE(tvos);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIWindow.h>

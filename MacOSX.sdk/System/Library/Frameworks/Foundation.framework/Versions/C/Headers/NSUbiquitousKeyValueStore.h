@@ -7,21 +7,10 @@
 
 @class NSArray, NSDictionary<KeyType, ObjectType>, NSData, NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos)
-@interface NSUbiquitousKeyValueStore : NSObject {
-@private
-    id _private1;
-    id _private2;
-    id _private3;
-    void *_private4;
-    void *_reserved[3];
-    int _daemonWakeToken;
-#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
-    BOOL _disabledSuddenTermination;
-#endif
-}
+API_AVAILABLE(macos(10.7), ios(5.0), watchos(9.0), tvos(9.0))
+@interface NSUbiquitousKeyValueStore : NSObject
 
 @property (class, readonly, strong) NSUbiquitousKeyValueStore *defaultStore;
 
@@ -62,4 +51,4 @@ NS_ENUM(NSInteger) {
     NSUbiquitousKeyValueStoreAccountChange API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 };
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

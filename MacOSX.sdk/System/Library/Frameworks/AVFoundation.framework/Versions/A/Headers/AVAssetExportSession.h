@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2021 Apple Inc. All rights reserved.
+	Copyright 2010-2022 Apple Inc. All rights reserved.
 
 */
 
@@ -103,6 +103,22 @@ typedef NS_ENUM(NSInteger, AVAssetExportSessionStatus) {
 };
 
 /*!
+ @typedef	AVAssetTrackGroupOutputHandling
+ @abstract	A bitfield type that specifies output handling policies for alternate tracks in a track group.
+
+ @constant	AVAssetTrackGroupOutputHandlingNone
+ @abstract	No specific processing directives are applied to alternate tracks.  The output is produced without regard to alternate track group assignments in the original asset.
+ @constant	AVAssetTrackGroupOutputHandlingPreserveAlternateTracks
+ @abstract	Preserve alternate tracks via pass-through.
+ */
+typedef NS_OPTIONS(NSUInteger, AVAssetTrackGroupOutputHandling) {
+	AVAssetTrackGroupOutputHandlingNone						= 0UL,
+	AVAssetTrackGroupOutputHandlingPreserveAlternateTracks	= (1UL << 0),
+
+	AVAssetTrackGroupOutputHandlingDefaultPolicy			= AVAssetTrackGroupOutputHandlingNone
+} API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+/*!
 	@class		AVAssetExportSession
 
 	@abstract	An AVAssetExportSession creates a new timed media resource from the contents of an
@@ -173,7 +189,7 @@ AV_INIT_UNAVAILABLE
    Setting the value of this property to a file type that's not among the session's supported file types will result in an NSInvalidArgumentException. See supportedFileTypes. */
 @property (nonatomic, copy, nullable) AVFileType outputFileType;
 
-/* Indicates the URL of the export session's output. You may use UTTypeCopyPreferredTagWithClass(outputFileType, kUTTagClassFilenameExtension) to obtain an appropriate path extension for the outputFileType you have specified. For more information about UTTypeCopyPreferredTagWithClass and kUTTagClassFilenameExtension, on iOS see <CoreServices/UTType.h> and on Mac OS X see <LaunchServices/UTType.h>.  */
+/* Indicates the URL of the export session's output. You may use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to obtain an appropriate path extension for the outputFileType you have specified. For more information, see <UniformTypeIdentifiers/UTType.h>.  */
 @property (nonatomic, copy, nullable) NSURL *outputURL;
 
 /* indicates that the output file should be optimized for network use, e.g. that a QuickTime movie file should support "fast start" */
@@ -213,6 +229,7 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetExportSession (AVAssetExportSessionPresets)
 
 /*!
@@ -239,7 +256,7 @@ AV_INIT_UNAVAILABLE
 								The array is a complete list of the valid identifiers that can be used as arguments to 
 								initWithAsset:presetName: with the specified asset.
 */
-+ (NSArray<NSString *> *)exportPresetsCompatibleWithAsset:(AVAsset *)asset;
++ (NSArray<NSString *> *)exportPresetsCompatibleWithAsset:(AVAsset *)asset API_DEPRECATED_WITH_REPLACEMENT("determineCompatibilityOfExportPreset:withAsset:outputFileType:completionHandler:", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method						determineCompatibilityOfExportPreset:withAsset:outputFileType:completionHandler:
@@ -257,6 +274,7 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetExportSession (AVAssetExportSessionFileTypes)
 
 /* Indicates the types of files the target can write, according to the preset the target was initialized with.
@@ -274,6 +292,7 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetExportSession (AVAssetExportSessionDurationAndLength)
 
 /* Specifies a time range to be exported from the source.  The default timeRange of an export session is kCMTimeZero..kCMTimePositiveInfinity, meaning that the full duration of the asset will be exported. */
@@ -302,12 +321,13 @@ AV_INIT_UNAVAILABLE
 	@abstract 					Starts the asynchronous execution of estimating the output file length of the export based on the asset, preset, and timeRange associated with the export session.
 	@discussion 				If timeRange is not set on the export session, timeRange will be assumed to be the full time range of the asset.
 	@param						handler
-								A block called with the estimated output file length in bytes, if it can be accurately determined; 0 otherwise.  The error parameter will be non-nil if an error occurs.
+								A block called with the estimated output file length in bytes, if it can be determined; 0 otherwise.  The error parameter will be non-nil if an error occurs.
  */
 - (void)estimateOutputFileLengthWithCompletionHandler:(void (^)(int64_t estimatedOutputFileLength, NSError * _Nullable error ))handler API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_ASYNC_NAME(getter:estimatedOutputFileLengthInBytes());
 
 @end
 
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetExportSession (AVAssetExportSessionMetadata)
 
 /* Specifies an NSArray of AVMetadataItems that are to be written to the output file by the export session.
@@ -322,6 +342,7 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetExportSession (AVAssetExportSessionMediaProcessing)
 
 /* Indicates the processing algorithm used to manage audio pitch for scaled audio edits.
@@ -338,8 +359,21 @@ AV_INIT_UNAVAILABLE
 /* Indicates the custom video compositor instance used, if any */
 @property (nonatomic, readonly, nullable) id <AVVideoCompositing> customVideoCompositor API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
+/*!
+ @property		audioTrackGroupHandling
+ @abstract		Defines export policy for handling alternate audio tracks
+
+ @discussion
+				Specifies the handling of audio tracks that are members of the same alternate track group corresponding to an exported audio track in the source asset.
+				If no audio track group is present, the value of this property has no effect.
+				If necessary, use the trackGroups property of AVAsset to determine whether any audio track groups are present.
+				The AVAudioMix property is not allowed to be used when also specifying alternate track output handling.  An exception will be thrown if both are specified.
+*/
+@property (nonatomic) AVAssetTrackGroupOutputHandling audioTrackGroupHandling API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
 @end
 
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetExportSession (AVAssetExportSessionMultipass)
 
 /*!

@@ -608,9 +608,9 @@ CF_ENUM(DescType) {
 };
 
 CF_ENUM(OSType) {
-  kAEQuitPreserveState          = 'stat', /* in a kAEQuitApplication event, this optional parameter hints the application as to whether it should write out */
+  kAEQuitPreserveState          = 'stat', //!< in a kAEQuitApplication event, this optional parameter hints the application as to whether it should write out */
                                         /* persistent state which may be restored on the next launch. The possible values are kAENo ( the default ), or kAEYes */
-  kAEQuitReason                 = 'why?' /* in a kAEQuitApplication event, this parameter if present is the reason the quit is being sent.  The possible values are kAEQuitAll, kAEShutDown, kAERestart, kAEReallyLogOut */
+  kAEQuitReason                 = 'why?' //!< in a kAEQuitApplication event, this parameter if present is the reason the quit is being sent.  The possible values are kAEQuitAll, kAEShutDown, kAERestart, kAEReallyLogOut */
 };
 
 enum {

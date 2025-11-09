@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FD24C495-6CC6-38E3-963A-5D774E18C8AE
+    value:           2E28B553-2815-35B6-8B1A-E6D7B4BB5ED5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C3D52C74-56E3-3E15-B40C-439E9EEA8DF8
+    value:           4F2E3348-29FD-3980-99A5-3DBED58C5708
 install-name:    '/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller'
 current-version: 660
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _OSIProductTypeMainInstaller, _OSIProductTypeSoftwareUpdate, 
                        _OSIProductTypeUnwrapped, _OSIProductTypeWrapped, _OSISProductManagerIAMethod, 
                        _OSISProductManagerInternalUserEmail, _OSITemplateMigrationErrorDomain, 

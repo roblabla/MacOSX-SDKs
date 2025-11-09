@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1FA3DEC1-72BC-3A24-A760-0E07C2481F06
+    value:           B296D0EE-63CC-3C3E-8374-B9B3F3CB5C78
   - target:          x86_64-maccatalyst
-    value:           1FA3DEC1-72BC-3A24-A760-0E07C2481F06
+    value:           B296D0EE-63CC-3C3E-8374-B9B3F3CB5C78
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E67E9A02-FFEF-3CBC-815B-A5BE6E190595
+    value:           64E1774C-520B-38E0-AB2C-87F1285DA67D
   - target:          arm64e-maccatalyst
-    value:           E67E9A02-FFEF-3CBC-815B-A5BE6E190595
+    value:           64E1774C-520B-38E0-AB2C-87F1285DA67D
 install-name:    '/System/Library/PrivateFrameworks/DebugSymbols.framework/Versions/A/DebugSymbols'
 current-version: 195.1
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DBGAddDSYMURL, _DBGAppID, _DBGBlockPath, _DBGCopyDSYMPropertyLists, 
                        _DBGCopyDSYMURLForUUID, _DBGCopyDSYMURLForUUIDWithOptions, 
                        _DBGCopyFullDSYMURLForUUID, _DBGCopyFullDSYMURLForUUIDWithOptions, 

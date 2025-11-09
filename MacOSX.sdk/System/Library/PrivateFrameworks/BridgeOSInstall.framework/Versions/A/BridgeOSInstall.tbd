@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EE8B5222-F3A4-38FC-B9E3-B592BDA726CA
+    value:           933C57A2-2741-3B5E-8419-90BE6CD781D8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8BC53204-6F8A-3F4F-8838-4A235F1ED9DC
+    value:           056450A5-773C-347E-93FC-25CD4096569F
 install-name:    '/System/Library/PrivateFrameworks/BridgeOSInstall.framework/Versions/A/BridgeOSInstall'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BOSErrorDomain, _BOSErrorIsNetworkingRelated, _BOSErrorIsTATSUDeclinedAuthorization, 
                        _BOSErrorRecoverySuggestionURL, _BOSErrorUserInfoRecoverySuggestionURLKey, 
                        _BOSErrorUserInfoUpdateBundleIdentifierKey, _BOSLogObject, 

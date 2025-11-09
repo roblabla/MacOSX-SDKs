@@ -3,6 +3,11 @@
    Copyright (c) 2017 Apple, Inc.
    All rights reserved. */
 
+#ifndef CIBARCODEDESCRIPTOR_H
+#define CIBARCODEDESCRIPTOR_H
+
+#ifdef __OBJC__
+
 #import <CoreImage/CoreImageDefines.h>
 #import <Foundation/Foundation.h>
 
@@ -396,3 +401,7 @@ NS_CLASS_AVAILABLE(10_13, 11_0)
 #endif // __OBJC2__
 
 NS_ASSUME_NONNULL_END
+
+#endif /* __OBJC__ */
+
+#endif /* CIBARCODEDESCRIPTOR_H */

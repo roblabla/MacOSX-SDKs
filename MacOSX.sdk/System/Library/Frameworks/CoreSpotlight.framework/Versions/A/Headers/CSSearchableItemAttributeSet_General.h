@@ -7,6 +7,7 @@
 
 #import <CoreSpotlight/CSSearchableItemAttributeSet.h>
 
+CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet (CSGeneral)
 
 //A localized string to be displayed in the UI for this item.
@@ -87,6 +88,7 @@
 
 @end
 
+CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet (CSActionExtras)
 // If supportsPhoneCall is 1 and the item has the phoneNumbers property, then the phone number may be used to initiate phone calls. This should be used to indicate that using the phone number is appropriate, and a primary action for the user. For example, supportsPhoneCall would be set on a business, but not an academic paper that happens to have phone numbers for the authors or the institution.
 @property(nullable, strong) NSNumber *supportsPhoneCall;
@@ -102,6 +104,7 @@
 
 @end
 
+CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet(CSContainment)
 @property(nullable, copy) NSString *containerTitle;
 @property(nullable, copy) NSString *containerDisplayName;
@@ -109,6 +112,7 @@
 @property(nullable, strong) NSNumber *containerOrder;
 @end
 
+CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet (CSItemProvider)
 // The string value of type identifier can only be used by one providerTypeIdentifier array.
 

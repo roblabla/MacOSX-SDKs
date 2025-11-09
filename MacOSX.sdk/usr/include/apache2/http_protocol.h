@@ -96,6 +96,13 @@ AP_DECLARE(void) ap_get_mime_headers(request_rec *r);
 AP_DECLARE(void) ap_get_mime_headers_core(request_rec *r,
                                           apr_bucket_brigade *bb);
 
+/**
+ * Run post_read_request hook and validate.
+ * @param r The current request
+ * @return OK or HTTP_...
+ */
+AP_DECLARE(int) ap_post_read_request(request_rec *r);
+
 /* Finish up stuff after a request */
 
 /**
@@ -468,7 +475,27 @@ AP_DECLARE(int) ap_rwrite(const void *buf, int nbyte, request_rec *r);
  */
 static APR_INLINE int ap_rputs(const char *str, request_rec *r)
 {
-    return ap_rwrite(str, (int)strlen(str), r);
+    apr_size_t len;
+
+    len = strlen(str);
+
+    for (;;) {
+        if (len <= INT_MAX) {
+            return ap_rwrite(str, (int)len, r);
+        }
+        else {
+            int rc;
+
+            rc = ap_rwrite(str, INT_MAX, r);
+            if (rc < 0) {
+                return rc;
+            }
+            else {
+                str += INT_MAX;
+                len -= INT_MAX;
+            }
+        }
+    }
 }
 
 /**

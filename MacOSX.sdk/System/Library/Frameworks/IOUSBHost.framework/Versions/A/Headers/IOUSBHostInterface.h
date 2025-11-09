@@ -47,6 +47,18 @@ NS_ASSUME_NONNULL_BEGIN
                                              interfaceProtocol:(nullable NSNumber*)interfaceProtocol
                                                          speed:(nullable NSNumber*)speed
                                                 productIDArray:(nullable NSArray*)productIDArray NS_REFINED_FOR_SWIFT;
+
+#pragma mark Initialization
+/*!
+ * @brief      Initializes IOUSBHostInterface object along with user client
+ * @discussion See IOUSBHostObject for documentation.
+ */
+- (nullable instancetype)initWithIOService:(io_service_t)ioService
+                                   options:(IOUSBHostObjectInitOptions)options
+                                     queue:(nullable dispatch_queue_t)queue
+                                     error:(NSError* _Nullable*)error
+                           interestHandler:(nullable IOUSBHostInterestHandler)interestHandler NS_DESIGNATED_INITIALIZER NS_REFINED_FOR_SWIFT;
+
 #pragma mark Power management
 
 /*!

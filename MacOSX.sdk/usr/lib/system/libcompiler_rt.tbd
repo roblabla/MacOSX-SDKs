@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AD346AFB-8737-3E88-B4C5-25D77181AE44
+    value:           9053D30C-239D-30B4-B36D-4E3490F72FE4
   - target:          arm64-macos
-    value:           0B616B91-A847-3817-B571-4498A1D36CC0
+    value:           A7F13C10-9CEA-3A4E-86AB-F65E292E7804
   - target:          arm64e-macos
-    value:           7E374D5C-9785-3D65-88D2-98B92AD24C78
+    value:           824DFF0F-A337-32EB-B5DF-3FDD0BBFF9ED
 install-name:    '/usr/lib/system/libcompiler_rt.dylib'
 current-version: 103.1
 parent-umbrella:
@@ -50,7 +50,7 @@ exports:
                        ___paritysi2, ___parityti2, ___popcountdi2, ___popcountsi2, 
                        ___popcountti2, ___powixf2, ___subvdi3, ___subvsi3, ___subvti3, 
                        ___ucmpdi2, ___ucmpti2, ___udivdi3, ___udivmoddi4, ___umoddi3 ]
-  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$hide$os10.10$___chkstk_darwin', '$ld$hide$os10.10$___extendhfsf2', 
                        '$ld$hide$os10.10$___truncdfhf2', '$ld$hide$os10.10$___truncsfhf2', 
                        '$ld$hide$os10.10$_atomic_flag_clear', '$ld$hide$os10.10$_atomic_flag_clear_explicit', 

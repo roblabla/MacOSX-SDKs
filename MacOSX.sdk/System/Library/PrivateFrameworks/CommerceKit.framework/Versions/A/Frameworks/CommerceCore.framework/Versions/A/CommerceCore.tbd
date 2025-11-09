@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           42D2322E-7F95-3ECC-AF5E-CF8CCD6D34F6
+    value:           866B9EF2-A7E9-3E2C-819D-A8D469706136
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DE898959-0656-3F1A-A4B1-28D28EFD290D
+    value:           49B86D88-DCAA-3DAD-9838-3C973D894B6E
 install-name:    '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore'
 current-version: 379
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CKAdoptionInfoPlistPath, _CKCheckBookDownloadQueue, _CKCreateCriticalUpdateTimeStamp, 
                        _CKCriticalUpdateTimeStamp, _CKDownloadDirectory, _CKInstallPathForIAP, 
                        _CKInstallPathForSharedIAP, _CKInstallPathForiOSApp, _CKMDMDownloadOptionAllowRedownload, 

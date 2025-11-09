@@ -13,7 +13,7 @@ typedef NSString * NSProgressKind NS_TYPED_EXTENSIBLE_ENUM;
 typedef NSString * NSProgressUserInfoKey NS_TYPED_EXTENSIBLE_ENUM;
 typedef NSString * NSProgressFileOperationKind NS_TYPED_EXTENSIBLE_ENUM;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*
  NSProgress is used to report the amount of work done, and provides a way to allow the user to cancel that work.
@@ -32,13 +32,13 @@ NS_ASSUME_NONNULL_BEGIN
 
  The localizedDescription and localizedAdditionalDescription properties are meant to be observed as well as set. So are the cancellable and pausable properties. totalUnitCount and completedUnitCount on the other hand are often not the best properties to observe when presenting progress to the user. For example, you should observe fractionCompleted instead of observing totalUnitCount and completedUnitCount and doing your own calculation. NSProgress' default implementation of fractionCompleted does fairly sophisticated things like taking child NSProgresses into account.
  */
-
+NS_SWIFT_SENDABLE // Thread safe via locking and storing the only reference to properties
 API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSProgress : NSObject
 
 /* The instance of NSProgress associated with the current thread by a previous invocation of -becomeCurrentWithPendingUnitCount:, if any. The purpose of this per-thread value is to allow code that does work to usefully report progress even when it is widely separated from the code that actually presents progress to the user, without requiring layers of intervening code to pass the instance of NSProgress through. Using the result of invoking this directly will often not be the right thing to do, because the invoking code will often not even know what units of work the current progress object deals in. Invoking +progressWithTotalUnitCount: to create a child NSProgress object and then using that to report progress makes more sense in that situation.
 */
-+ (nullable NSProgress *)currentProgress;
++ (nullable NSProgress *)currentProgress NS_SWIFT_UNAVAILABLE_FROM_ASYNC("Progress for the current thread cannot be used in async contexts.");
 
 /* Return an instance of NSProgress that has been initialized with -initWithParent:userInfo:. The initializer is passed the current progress object, if there is one, and the value of the totalUnitCount property is set. In many cases you can simply precede code that does a substantial amount of work with an invocation of this method, with repeated invocations of -setCompletedUnitCount: and -isCancelled in the loop that does the work.
 
@@ -62,7 +62,7 @@ You can invoke this method on one thread and then message the returned NSProgres
  
    With this mechanism, code that doesn't know anything about its callers can report progress accurately by using +progressWithTotalUnitCount: and -setCompletedUnitCount:. The calling code will account for the fact that the work done is only a portion of the work to be done as part of a larger operation. The unit of work in a call to -becomeCurrentWithPendingUnitCount: has to be the same unit of work as that used for the value of the totalUnitCount property, but the unit of work used by the child can be a completely different one, and often will be. You must always balance invocations of this method with invocations of -resignCurrent.
 */
-- (void)becomeCurrentWithPendingUnitCount:(int64_t)unitCount;
+- (void)becomeCurrentWithPendingUnitCount:(int64_t)unitCount NS_SWIFT_UNAVAILABLE_FROM_ASYNC("Progress for the current thread cannot be used in async contexts.");
 
 /* Become current, do some work, then resign current.
  */
@@ -70,7 +70,7 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* Balance the most recent previous invocation of -becomeCurrentWithPendingUnitCount: on the same thread by restoring the current progress object to what it was before -becomeCurrentWithPendingUnitCount: was invoked.
 */
-- (void)resignCurrent;
+- (void)resignCurrent NS_SWIFT_UNAVAILABLE_FROM_ASYNC("Progress for the current thread cannot be used in async contexts.");
 
 /* Directly add a child progress to the receiver, assigning it a portion of the receiver's total unit count.
  */
@@ -118,15 +118,15 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* A block to be invoked when cancel is invoked. The block will be invoked even when the method is invoked on an ancestor of the receiver, or an instance of NSProgress in another process that resulted from publishing the receiver or an ancestor of the receiver. Your block won't be invoked on any particular queue. If it must do work on a specific queue then it should schedule that work on that queue.
 */
-@property (nullable, copy) void (^cancellationHandler)(void);
+@property (nullable, copy) void (NS_SWIFT_SENDABLE ^cancellationHandler)(void);
 
 /* A block to be invoked when pause is invoked. The block will be invoked even when the method is invoked on an ancestor of the receiver, or an instance of NSProgress in another process that resulted from publishing the receiver or an ancestor of the receiver. Your block won't be invoked on any particular queue. If it must do work on a specific queue then it should schedule that work on that queue.
  */
-@property (nullable, copy) void (^pausingHandler)(void);
+@property (nullable, copy) void (NS_SWIFT_SENDABLE ^pausingHandler)(void);
 
 /* A block to be invoked when resume is invoked. The block will be invoked even when the method is invoked on an ancestor of the receiver, or an instance of NSProgress in another process that resulted from publishing the receiver or an ancestor of the receiver. Your block won't be invoked on any particular queue. If it must do work on a specific queue then it should schedule that work on that queue.
  */
-@property (nullable, copy) void (^resumingHandler)(void) API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+@property (nullable, copy) void (NS_SWIFT_SENDABLE ^resumingHandler)(void) API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /* Set a value in the dictionary returned by invocations of -userInfo, with appropriate KVO notification for properties whose values can depend on values in the user info dictionary, like localizedDescription. If a nil value is passed then the dictionary entry is removed.
 */
@@ -223,8 +223,8 @@ You can publish an instance of NSProgress at most once.
 
 #pragma mark *** Observing and Controlling File Progress by Other Processes (OS X Only) ***
 
-typedef void (^NSProgressUnpublishingHandler)(void);
-typedef _Nullable NSProgressUnpublishingHandler (^NSProgressPublishingHandler)(NSProgress *progress);
+typedef void (NS_SWIFT_SENDABLE ^NSProgressUnpublishingHandler)(void);
+typedef _Nullable NSProgressUnpublishingHandler (NS_SWIFT_SENDABLE ^NSProgressPublishingHandler)(NSProgress *progress);
 
 /* Register to hear about file progress. The passed-in block will be invoked when -publish has been sent to an NSProgress whose NSProgressFileURLKey user info dictionary entry is an NSURL locating the same item located by the passed-in NSURL, or an item directly contained by it. The NSProgress passed to your block will be a proxy of the one that was published. The passed-in block may return another block. If it does, then that returned block will be invoked when the corresponding invocation of -unpublish is made, or the publishing process terminates, or +removeSubscriber: is invoked. Your blocks will be invoked on the main thread.
 */
@@ -296,4 +296,4 @@ FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileAnimationImageOrigin
 */
 FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileIconKey API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

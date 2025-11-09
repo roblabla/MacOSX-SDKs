@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9A895F2D-CF62-34C7-A8AB-55DCB41FD8CF
+    value:           8846D40E-F37B-3F24-825D-91F3F07D4128
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7812D31A-042B-3075-A7F7-96CB7A949556
+    value:           EE37C674-D40D-300D-9F7B-173754C09249
 install-name:    '/System/Library/PrivateFrameworks/PhotoPrintProduct.framework/Versions/A/PhotoPrintProduct'
-current-version: 690
+current-version: 694
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CGAffineTransformConcatPhotoOrientation, _CGContextDrawSelectionInRect, 
                        _CGContextDrawStringInRoundedRect, _CGContextMakeRoundedRect, 
                        _CGFloatEquivalentToFloat, _CGPointApplyTranslation, _CGPointDifference, 
@@ -665,8 +665,7 @@ exports:
                        KHPhotoLibraryExtensionCollection, KHPhotoLibraryExtensionSource, 
                        KHPhotoLibraryFileSystemSource, KHPhotoLibraryGenericBaseObject, 
                        KHPhotoLibraryGenericCollection, KHPhotoLibraryGenericSection, 
-                       KHPhotoLibraryGenericSource, KHPhotoLibraryMLCollection, KHPhotoLibraryMLHydrationQueue, 
-                       KHPhotoLibraryMLSource, KHPhotoLocationMetadata, KHPhotoPrintOptionsController, 
+                       KHPhotoLibraryGenericSource, KHPhotoLocationMetadata, KHPhotoPrintOptionsController, 
                        KHPickerCell, KHPinchGestureRecognizer, KHPinchTransitionController, 
                        KHPlaceholderCart, KHPlusMinusFooterView, KHPremiumCardProductSpecification, 
                        KHPrintsProductFamilyItem, KHPrintsProductSpecification, KHPrintsProjectBundleController, 
@@ -751,8 +750,8 @@ exports:
                        SequenceAlignment, SinglePixelLine, _KHBarPopUpButtonCell, 
                        _KHBarPopupButton, _KHCanvasViewController, _KHEditorBarButton, 
                        _KHGridView, _KHPagingLayer, _KHPhotoFile, _KHPhotoFromItemProvider, 
-                       _KHPhotoFromMediaObject, _KHPrintsCollectionDocumentView, 
-                       _KHPrintsCollectionView, _KHProductSubgroupMenuView, _KHTransitionHelper ]
+                       _KHPrintsCollectionDocumentView, _KHPrintsCollectionView, 
+                       _KHProductSubgroupMenuView, _KHTransitionHelper ]
     objc-ivars:      [ IPUpscaleOperation.descript, IPUpscaleOperation.extraEndRows, 
                        IPUpscaleOperation.extraStartRows, IPUpscaleOperation.height1, 
                        IPUpscaleOperation.height2, IPUpscaleOperation.rowBytes1, 

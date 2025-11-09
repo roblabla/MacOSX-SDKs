@@ -13,7 +13,7 @@
 */
 
 #include <TargetConditionals.h>
-#if TARGET_OS_OSX
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 
 #ifndef __LSSHAREDFILELIST__
 #define __LSSHAREDFILELIST__
@@ -676,7 +676,7 @@ LSSharedFileListCopySnapshot(
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern LSSharedFileListItemRef _Nullable
+extern CF_RETURNS_RETAINED LSSharedFileListItemRef _Nullable
 LSSharedFileListInsertItemURL(
   LSSharedFileListRef       inList,
   LSSharedFileListItemRef   insertAfterThisItem,
@@ -741,7 +741,7 @@ LSSharedFileListInsertItemURL(
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern LSSharedFileListItemRef 
+extern CF_RETURNS_RETAINED LSSharedFileListItemRef _Nullable
 LSSharedFileListInsertItemFSRef(
   LSSharedFileListRef       inList,
   LSSharedFileListItemRef   insertAfterThisItem,
@@ -1050,4 +1050,4 @@ CF_ASSUME_NONNULL_END
 
 #endif /* __LSSHAREDFILELIST__ */
 
-#endif // TARGET_OS_OSX
+#endif // TARGET_OS_OSX || TARGET_OS_MACCATALYST

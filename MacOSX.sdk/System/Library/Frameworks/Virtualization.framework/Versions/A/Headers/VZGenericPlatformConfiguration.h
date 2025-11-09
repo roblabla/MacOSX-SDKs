@@ -9,6 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class VZGenericMachineIdentifier;
+
 /*!
  @abstract The platform configuration for a generic Intel or ARM virtual machine.
 */
@@ -16,6 +18,11 @@ VZ_EXPORT API_AVAILABLE(macos(12.0))
 @interface VZGenericPlatformConfiguration : VZPlatformConfiguration
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
+
+/*!
+ @abstract The machine identifier.
+ */
+@property (copy) VZGenericMachineIdentifier *machineIdentifier API_AVAILABLE(macos(13.0));
 
 @end
 

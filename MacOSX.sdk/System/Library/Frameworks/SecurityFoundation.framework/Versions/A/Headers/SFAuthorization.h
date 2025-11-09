@@ -97,7 +97,9 @@
     @param environment (input/optional) An AuthorizationItemSet containing enviroment state used when making the autorization decision.  See the AuthorizationEnvironment type for details.
     @param authorizedRights (output/optional) A pointer to a newly allocated AuthorizationInfoSet in which the authorized subset of rights are returned (authorizedRights should be deallocated by calling AuthorizationFreeInfoSet() when it is no longer needed).  If NULL the only information returned is the status.  Note that if the kAuthorizationFlagPreAuthorize flag was specified rights that could not be preauthorized are returned in authorizedRights, but their flags contains the kAuthorizationFlagCanNotPreAuthorize bit.
 */
-- (OSStatus)permitWithRights:(const AuthorizationRights *)rights flags:(AuthorizationFlags)flags environment:(const AuthorizationEnvironment *)environment authorizedRights:(AuthorizationRights *)authorizedRights DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+- (OSStatus)permitWithRights:(const AuthorizationRights *)rights flags:(AuthorizationFlags)flags environment:(const AuthorizationEnvironment *)environment authorizedRights:(AuthorizationRights *)authorizedRights
+    API_DEPRECATED_WITH_REPLACEMENT("obtainWithRights:flags:environment:authorizedRights:error:", macos(10.0, 10.5))
+    API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     DEPRECATED: Use obtainWithRight:flags:error:
@@ -106,7 +108,9 @@
 	@param rightName The name of an authorization right.
 	@param flags Authorization flags.
 */
-- (OSStatus)permitWithRight:(AuthorizationString)rightName flags:(AuthorizationFlags)flags DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+- (OSStatus)permitWithRight:(AuthorizationString)rightName flags:(AuthorizationFlags)flags
+    API_DEPRECATED_WITH_REPLACEMENT("obtainWithRight:flags:error:", macos(10.0, 10.5))
+    API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 @end
 

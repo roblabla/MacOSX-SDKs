@@ -1,6 +1,6 @@
 /* CoreAnimation - CAMetalLayer.h
 
-   Copyright (c) 2013-2021, Apple Inc.
+   Copyright (c) 2013-2022, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -12,7 +12,7 @@
 @protocol MTLTexture;
 @protocol MTLDrawable;
 
-@class CAMetalLayer;
+@class CAMetalLayer, NSDictionary;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -116,7 +116,8 @@ API_AVAILABLE(macos(10.11), ios(8.0), watchos(2.0), tvos(9.0))
  * clamped to its NSScreen’s maximumExtendedDynamicRangeColorComponentValue
  * rather than 1.0. The default is NO.  */
 
-@property BOOL wantsExtendedDynamicRangeContent;
+@property BOOL wantsExtendedDynamicRangeContent
+API_AVAILABLE(macos(10.11), ios(16.0), macCatalyst(16.0)) API_UNAVAILABLE(tvos, watchos);
 
 /* Metadata describing extended dynamic range content in the layer's drawable.
  * Must be set before calling nextDrawable. If non-nil, content may be
@@ -124,7 +125,7 @@ API_AVAILABLE(macos(10.11), ios(8.0), watchos(2.0), tvos(9.0))
  * will be rendered without tone mapping and values above the maximum EDR value
  * -[NSScreen maximumExtendedDynamicRangeColorComponentValue] may be clamped.
  * Defaults to nil. */
-@property (strong, nullable) CAEDRMetadata *EDRMetadata API_AVAILABLE(macos(10.15));
+@property (strong, nullable) CAEDRMetadata *EDRMetadata API_AVAILABLE(macos(10.15), ios(16.0));
 
 /* This property controls if this layer and its drawables will be synchronized
  * to the display's Vsync. The default value is YES. */
@@ -138,6 +139,11 @@ API_AVAILABLE(macos(10.11), ios(8.0), watchos(2.0), tvos(9.0))
 
 @property BOOL allowsNextDrawableTimeout
   API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+/* When non-nil, controls the options of developer HUD. Defaults to nil. */
+
+@property(nullable, copy) NSDictionary *developerHUDProperties
+  API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 @end
 

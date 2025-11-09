@@ -4,32 +4,40 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7B83C6CC-AF0A-3A8F-89A8-50566D060E04
+    value:           BEC61BB6-A339-3CEF-A30F-81495979F9C6
   - target:          x86_64-maccatalyst
-    value:           7B83C6CC-AF0A-3A8F-89A8-50566D060E04
+    value:           BEC61BB6-A339-3CEF-A30F-81495979F9C6
   - target:          arm64-macos
-    value:           8367078D-E591-38A5-BED7-EA7CD4110F71
+    value:           D114DCDF-05E9-34C8-B0D6-68BCAAA85065
   - target:          arm64-maccatalyst
-    value:           8367078D-E591-38A5-BED7-EA7CD4110F71
+    value:           D114DCDF-05E9-34C8-B0D6-68BCAAA85065
   - target:          arm64e-macos
-    value:           BCD607BE-95C6-3804-BCF8-BB3081754D1A
+    value:           6F340472-9C1C-3CDD-9E48-1A6DBD6D4AE0
   - target:          arm64e-maccatalyst
-    value:           BCD607BE-95C6-3804-BCF8-BB3081754D1A
+    value:           6F340472-9C1C-3CDD-9E48-1A6DBD6D4AE0
 install-name:    '/usr/lib/libAppleArchive.dylib'
 exports:
-  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos, x86_64-maccatalyst, 
-                       arm64-maccatalyst, arm64e-maccatalyst ]
-    symbols:         [ _AAArchiveStreamCancel, _AAArchiveStreamClose, _AAArchiveStreamProcess, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _AAAFSCGetMetadata, _AAAFSCSetMetadata, _AAAFSCStreamOpen, 
+                       _AAAFSCStreamOpenWithMetadata, _AAAFSCStreamOpenWithState, 
+                       _AAArchiveStreamCancel, _AAArchiveStreamClose, _AAArchiveStreamProcess, 
                        _AAArchiveStreamReadBlob, _AAArchiveStreamReadHeader, _AAArchiveStreamWriteBlob, 
                        _AAArchiveStreamWriteHeader, _AAArchiveStreamWritePathList, 
+                       _AAAssetBuilderAddFilter, _AAAssetBuilderAddVariantArchive, 
+                       _AAAssetBuilderCreate, _AAAssetBuilderDestroy, _AAAssetBuilderGenerate, 
+                       _AAAssetBuilderGetParameter, _AAAssetBuilderSetParameter, 
+                       _AAAssetExtractorCreate, _AAAssetExtractorDestroy, _AAAssetExtractorSetParameterCallback, 
+                       _AAAssetExtractorSetParameterPtr, _AAAssetExtractorWrite, 
                        _AAAsyncByteStreamCancel, _AAAsyncByteStreamClose, _AAAsyncByteStreamGetRange, 
                        _AAAsyncByteStreamProcess, _AAAsyncByteStreamProcessAllRanges, 
                        _AAByteRangeAdd, _AAByteRangeClone, _AAByteRangeCreate, _AAByteRangeDestroy, 
                        _AAByteRangeFirst, _AAByteRangeNext, _AAByteRangeOffsetAtSize, 
                        _AAByteRangeSizeAtOffset, _AAByteRangeSub, _AAByteStreamCancel, 
-                       _AAByteStreamClose, _AAByteStreamPRead, _AAByteStreamPReadAsync, 
-                       _AAByteStreamPWrite, _AAByteStreamProcess, _AAByteStreamRead, 
-                       _AAByteStreamSeek, _AAByteStreamTruncate, _AAByteStreamWrite, 
+                       _AAByteStreamClose, _AAByteStreamCloseWithState, _AAByteStreamFlush, 
+                       _AAByteStreamPRead, _AAByteStreamPReadAsync, _AAByteStreamPWrite, 
+                       _AAByteStreamProcess, _AAByteStreamRead, _AAByteStreamSeek, 
+                       _AAByteStreamTruncate, _AAByteStreamWrite, _AAChunkAsyncStreamOpen, 
                        _AAChunkInputStreamOpen, _AAChunkOutputStreamOpen, _AACompressionOutputStreamOpen, 
                        _AACompressionOutputStreamOpenExisting, _AAConvertArchiveOutputStreamOpen, 
                        _AACustomArchiveStreamOpen, _AACustomArchiveStreamSetCancelProc, 
@@ -69,25 +77,32 @@ exports:
                        _AAHeaderGetKeyIndex, _AAHeaderGetPayloadSize, _AAHeaderRemoveField, 
                        _AAHeaderSetFieldBlob, _AAHeaderSetFieldFlag, _AAHeaderSetFieldHash, 
                        _AAHeaderSetFieldString, _AAHeaderSetFieldTimespec, _AAHeaderSetFieldUInt, 
-                       _AAMagicInputStreamOpen, _AAMemoryInputStreamOpen, _AAPathFilterAddRule, 
-                       _AAPathFilterApply, _AAPathFilterCreate, _AAPathFilterDestroy, 
-                       _AAPathListCreate, _AAPathListCreateWithDirectoryContents, 
-                       _AAPathListCreateWithPath, _AAPathListDestroy, _AAPathListGetNode, 
-                       _AAPathListMerge, _AAPathListNodeFirst, _AAPathListNodeGetPath, 
-                       _AAPathListNodeNext, _AARandomAccessByteStreamProcess, _AARandomAccessDecodeAndExtract, 
+                       _AAMagicInputStreamOpen, _AAMemoryInputStreamOpen, _AAMemoryOutputStreamCloseWithSize, 
+                       _AAMemoryOutputStreamOpen, _AAPathFilterAddRule, _AAPathFilterApply, 
+                       _AAPathFilterCreate, _AAPathFilterDestroy, _AAPathListCreate, 
+                       _AAPathListCreateWithDirectoryContents, _AAPathListCreateWithPath, 
+                       _AAPathListDestroy, _AAPathListGetNode, _AAPathListMerge, 
+                       _AAPathListNodeFirst, _AAPathListNodeGetPath, _AAPathListNodeNext, 
+                       _AARandomAccessByteStreamProcess, _AARandomAccessDecodeAndExtract, 
                        _AARangeInputStreamOpen, _AARemoveArchiveOutputStreamOpen, 
                        _AASharedBufferPipeOpen, _AATeeOutputStreamOpen, _AATempFileStreamOpen, 
+                       _AATempFileStreamOpenWithDirectory, _AATempStreamOpen, _AATempStreamOpenWithDirectory, 
                        _AAThreadErrorContextEnter, _AAThreadErrorContextLeave, _AAVerifyDirectoryArchiveOutputStreamOpen, 
                        _AEAAuthDataAppendEntry, _AEAAuthDataClear, _AEAAuthDataCreate, 
                        _AEAAuthDataCreateWithContext, _AEAAuthDataDestroy, _AEAAuthDataGetEncodedData, 
                        _AEAAuthDataGetEncodedSize, _AEAAuthDataGetEntry, _AEAAuthDataGetEntryCount, 
                        _AEAAuthDataRemoveEntry, _AEAAuthDataSetEntry, _AEAContextCreateWithEncryptedStream, 
-                       _AEAContextCreateWithProfile, _AEAContextDestroy, _AEAContextGenerateFieldBlob, 
+                       _AEAContextCreateWithProfile, _AEAContextDecryptAttributes, 
+                       _AEAContextDestroy, _AEAContextGenerateFieldBlob, _AEAContextGetContainerSizeUpperBound, 
                        _AEAContextGetFieldBlob, _AEAContextGetFieldUInt, _AEAContextSetFieldBlob, 
                        _AEAContextSetFieldCallback, _AEAContextSetFieldUInt, _AEADecryptAndExtract, 
-                       _AEADecryptAndExtractAsyncStreamOpen, _AEADecryptAsyncStreamOpen, 
-                       _AEADecryptToFile, _AEADecryptToFileAsyncStreamOpen, _AEADecryptionInputStreamOpen, 
-                       _AEADecryptionRandomAccessInputStreamOpen, _AEAEncryptionOutputStreamCloseAndUpdateContext, 
+                       _AEADecryptAndExtractAsyncStreamOpen, _AEADecryptAndExtractChunk, 
+                       _AEADecryptAndExtractChunkAsyncStreamOpen, _AEADecryptAsyncStreamOpen, 
+                       _AEADecryptInPlace, _AEADecryptToFile, _AEADecryptToFileAsyncStreamOpen, 
+                       _AEADecryptToFileChunk, _AEADecryptToFileChunkAsyncStreamOpen, 
+                       _AEADecryptToStream, _AEADecryptToStreamChunk, _AEADecryptionDirectRandomAccessInputStreamOpen, 
+                       _AEADecryptionInputStreamOpen, _AEADecryptionRandomAccessInputStreamOpen, 
+                       _AEAEncryptInPlace, _AEAEncryptionOutputStreamCloseAndUpdateContext, 
                        _AEAEncryptionOutputStreamOpen, _AEAEncryptionOutputStreamOpenExisting, 
                        _AEAKeychainGenerateItem, _AEAKeychainHasItem, _AEAKeychainLoadItem, 
                        _AEAKeychainRemoveItem, _AEAKeychainStoreItem, _AEAStreamSign ]

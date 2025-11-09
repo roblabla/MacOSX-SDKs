@@ -84,7 +84,7 @@ enum {
 */
 @property BOOL canSelectHiddenExtension;
 
-/*  NSSavePanel: Set to YES if the extension-hiding checkbox should checked. The value persists in the user defaults specific for the application.
+/*  NSSavePanel: Set to YES if the extension-hiding checkbox should be checked.
     NSOpenPanel: Should not be used.
 */
 @property (getter=isExtensionHidden) BOOL extensionHidden;
@@ -162,29 +162,29 @@ enum {
     NSOpenPanel: Return YES to allow the 'url' to be enabled in the panel. Delegate implementations should be fast to avoid stalling the UI. Applications linked on Mac OS 10.7 and later should be prepared to handle non-file URL schemes.
     NSSavePanel: This method is not called; all urls are always disabled.
 */
-- (BOOL)panel:(id)sender shouldEnableURL:(NSURL *)url API_AVAILABLE(macos(10.6));
+- (BOOL)panel:(id)sender shouldEnableURL:(NSURL *)url NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 /* Optional - URL validation for saving and opening files. 
     NSSavePanel: The method is called once by the save panel when the user chooses the Save button. The user is intending to save a file at 'url'. Return YES if the 'url' is a valid location to save to. Note that an item at 'url' may not physically exist yet, unless the user decided to overwrite an existing item. Return NO and fill in the 'outError' with a user displayable error message for why the 'url' is not valid. If a recovery option is provided by the error, and recovery succeeded, the panel will attempt to close again.
     NSOpenPanel: The method is called once for each selected filename (or directory) when the user chooses the Open button. Return YES if the 'url' is acceptable to open. Return NO and fill in the 'outError' with a user displayable message for why the 'url' is not valid for opening. You would use this method over panel:shouldEnableURL: if the processing of the selected item takes a long time. If a recovery option is provided by the error, and recovery succeeded, the panel will attempt to close again.
 */
-- (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError API_AVAILABLE(macos(10.6));
+- (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 /* Optional - Sent when the user has changed the selected directory to the directory located at 'url'. 'url' may be nil, if the current directory can't be represented by an NSURL object (ie: the media sidebar directory, or the "Computer").
 */
-- (void)panel:(id)sender didChangeToDirectoryURL:(nullable NSURL *)url API_AVAILABLE(macos(10.6));
+- (void)panel:(id)sender didChangeToDirectoryURL:(nullable NSURL *)url NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 /* Optional - Filename customization for the NSSavePanel. Allows the delegate to customize the filename entered by the user, before the extension is appended, and before the user is potentially asked to replace a file.
 */
-- (nullable NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag;
+- (nullable NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag NS_SWIFT_UI_ACTOR;
 
 /* Optional - Sent when the user clicks the disclosure triangle to expand or collapse the file browser while in NSOpenPanel.
 */
-- (void)panel:(id)sender willExpand:(BOOL)expanding;
+- (void)panel:(id)sender willExpand:(BOOL)expanding NS_SWIFT_UI_ACTOR;
 
 /* Optional - Sent when the user has changed the selection.
 */
-- (void)panelSelectionDidChange:(nullable id)sender;
+- (void)panelSelectionDidChange:(nullable id)sender NS_SWIFT_UI_ACTOR;
 
 @end
 

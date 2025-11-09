@@ -21,6 +21,10 @@
 #import <Photos/PHFetchResult.h>
 
 #import <Photos/PHChange.h>
+#import <Photos/PHPersistentChange.h>
+#import <Photos/PHPersistentChangeToken.h>
+#import <Photos/PHPersistentChangeFetchResult.h>
+#import <Photos/PHPersistentObjectChangeDetails.h>
 
 #import <Photos/PHAssetChangeRequest.h>
 #import <Photos/PHAssetCreationRequest.h>

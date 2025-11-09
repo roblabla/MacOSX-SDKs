@@ -49,6 +49,8 @@ NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 
 @property (atomic, readonly) CGFloat contentScaleFactor;
 
+@property (nonatomic, assign) CGBlendMode blendMode API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(macos, watchos) API_UNAVAILABLE(macCatalyst);
+
 @end
 
 // Road widths are typically not drawn to scale on the map.  This function

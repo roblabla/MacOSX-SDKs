@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7A38EE68-A35D-3700-9F16-6A4FCE592736
+    value:           FB0611B2-5957-3A69-A8FC-A8E900C14455
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3AFC08A9-79EA-3832-8123-B60FFD7911A0
+    value:           1AF0D251-7208-3C39-81AB-20B9F8885A72
 install-name:    '/System/Library/Frameworks/IOBluetoothUI.framework/Versions/A/IOBluetoothUI'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IOBluetoothDecodeCommand, _IOBluetoothDecodeEvent, _IOBluetoothDecodeGroup, 
                        _IOBluetoothDecodeManufacturerName, _IOBluetoothDecodeStatus, 
                        _IOBluetoothGetDefaultNameOfL2CAPPSMString, _IOBluetoothGetDefaultNameOfServiceString, 
@@ -18,9 +18,10 @@ exports:
                        _IOBluetoothGetGenericTypeStringForDeviceClasses, _IOBluetoothGetLocalizedUIStringForKey, 
                        _IOBluetoothGetMajorClassOfDeviceString, _IOBluetoothGetMajorClassOfDeviceStringClass, 
                        _IOBluetoothGetMinorClassOfDeviceString, _IOBluetoothGetMinorClassOfDeviceStringClass, 
-                       _IOBluetoothGetPairingController, _IOBluetoothIsServiceUsableByUser, 
-                       _IOBluetoothOpenBluetoothHelpAtPath, _IOBluetoothPreferenceGetMenuExtraShowState, 
-                       _IOBluetoothPreferenceSetMenuExtraShowState, _IOBluetoothValidateHardwareWithDescription ]
+                       _IOBluetoothGetPairingController, _IOBluetoothIsOptionKeyDown, 
+                       _IOBluetoothIsServiceUsableByUser, _IOBluetoothOpenBluetoothHelpAtPath, 
+                       _IOBluetoothPreferenceGetMenuExtraShowState, _IOBluetoothPreferenceSetMenuExtraShowState, 
+                       _IOBluetoothValidateHardwareWithDescription ]
     objc-classes:    [ IOBluetoothAccessibilityIgnoredImageCell, IOBluetoothAccessibilityIgnoredTextFieldCell, 
                        IOBluetoothConcreteObjectPush, IOBluetoothDeviceInquiryTableView, 
                        IOBluetoothDevicePairViewController, IOBluetoothDeviceSelectorController, 

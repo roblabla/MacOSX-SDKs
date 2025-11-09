@@ -1,3 +1,4 @@
+#if !__has_include(<PassKitCore/PKError.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKError.h
 //  PassKit
@@ -58,7 +59,22 @@ typedef NS_ERROR_ENUM(PKAddSecureElementPassErrorDomain, PKAddSecureElementPassE
     PKAddSecureElementPassInvalidConfigurationError,
     PKAddSecureElementPassDeviceNotSupportedError,
     PKAddSecureElementPassDeviceNotReadyError,
+    PKAddSecureElementPassOSVersionNotSupportedError,
 } API_AVAILABLE(ios(13.4));
+
+extern NSString * const PKShareSecureElementPassErrorDomain API_AVAILABLE(ios(16.0));
+
+typedef NS_ERROR_ENUM(PKShareSecureElementPassErrorDomain, PKShareSecureElementPassErrorCode) {
+    PKShareSecureElementPassUnknownError,
+    // Unable to present share pass UI. This generally occurs when your app isn't entitled to the pass
+    // or the pass isn't shareable.
+    PKShareSecureElementPassSetupError,
+
+} API_AVAILABLE(ios(16.0));
 
 NS_ASSUME_NONNULL_END
 #endif // __PKERROR_H
+
+#else
+#import <PassKitCore/PKError.h>
+#endif

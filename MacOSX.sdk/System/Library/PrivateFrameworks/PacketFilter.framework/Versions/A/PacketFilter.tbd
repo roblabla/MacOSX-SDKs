@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           74989674-DAEA-31D9-8E0E-4586F9BD3BB4
+    value:           883F454F-4C03-3BFA-B906-5AE4336C2E92
   - target:          x86_64-maccatalyst
-    value:           74989674-DAEA-31D9-8E0E-4586F9BD3BB4
+    value:           883F454F-4C03-3BFA-B906-5AE4336C2E92
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2F1170E7-468F-339F-A644-CA57C4B0463E
+    value:           01B8D867-1454-32AF-9FD2-2A42F1408000
   - target:          arm64e-maccatalyst
-    value:           2F1170E7-468F-339F-A644-CA57C4B0463E
+    value:           01B8D867-1454-32AF-9FD2-2A42F1408000
 install-name:    '/System/Library/PrivateFrameworks/PacketFilter.framework/Versions/A/PacketFilter'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _PFCheckNATRule, _PFCheckRule, _PFManagerAddUser, _PFManagerCheckUserExists, 
                        _PFManagerCreate, _PFManagerDebugLog, _PFManagerErrorLog, 
                        _PFManagerGetExternalAuthorizationObject, _PFManagerGetQueue, 

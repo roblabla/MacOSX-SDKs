@@ -6,7 +6,7 @@
 #import <Foundation/NSCalendar.h>
 #import <Foundation/NSNumberFormatter.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 typedef NS_ENUM(NSInteger, NSDateComponentsFormatterUnitsStyle) {
@@ -33,27 +33,9 @@ typedef NS_OPTIONS(NSUInteger, NSDateComponentsFormatterZeroFormattingBehavior) 
 
 /* NSDateComponentsFormatter provides locale-correct and flexible string formatting of quantities of time, such as "1 day" or "1h 10m", as specified by NSDateComponents. For formatting intervals of time (such as "2PM to 5PM"), see NSDateIntervalFormatter. NSDateComponentsFormatter is thread-safe, in that calling methods on it from multiple threads will not cause crashes or incorrect results, but it makes no attempt to prevent confusion when one thread sets something and another thread isn't expecting it to change.
  */
+NS_SWIFT_SENDABLE // All mutable state protected by locks, all subclasses must be thread-safe
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
-@interface NSDateComponentsFormatter : NSFormatter {
-    @private
-    pthread_mutex_t _lock;
-    void *_fmt;
-    void *_unused;
-    NSString *_fmtLocaleIdent;
-    NSCalendar *_calendar;
-    NSDate *_referenceDate;
-    NSNumberFormatter *_unitFormatter;
-    NSCalendarUnit _allowedUnits;
-    NSFormattingContext _formattingContext;
-    NSDateComponentsFormatterUnitsStyle _unitsStyle;
-    NSDateComponentsFormatterZeroFormattingBehavior _zeroFormattingBehavior;
-    NSInteger _maximumUnitCount;
-    BOOL _allowsFractionalUnits;
-    BOOL _collapsesLargestUnit;
-    BOOL _includesApproximationPhrase;
-    BOOL _includesTimeRemainingPhrase;
-    void *_reserved;
-}
+@interface NSDateComponentsFormatter : NSFormatter
 
 /* 'obj' must be an instance of NSDateComponents.
  */
@@ -150,4 +132,4 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

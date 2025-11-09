@@ -25,7 +25,7 @@
 @protocol NSTextLayoutManagerDelegate;
 @protocol NSTextSelectionDataSource;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, NSTextLayoutManagerSegmentType) {
     NSTextLayoutManagerSegmentTypeStandard = 0, // The standard segment matching the typographic bounds of range.
@@ -162,7 +162,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 #endif // !TARGET_OS_IPHONE
 #else
 #import <UIFoundation/NSTextLayoutManager.h>

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           725388AC-8BD2-3B0E-B59E-A414E660ED74
+    value:           F2A05122-E092-34A1-B8BF-D07E62C08A56
   - target:          x86_64-maccatalyst
-    value:           725388AC-8BD2-3B0E-B59E-A414E660ED74
+    value:           F2A05122-E092-34A1-B8BF-D07E62C08A56
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           96AF9302-C6B3-3926-B4AF-6CF6363A44C6
+    value:           98B61804-7FB6-31B7-AB24-F65027F5B3B8
   - target:          arm64e-maccatalyst
-    value:           96AF9302-C6B3-3926-B4AF-6CF6363A44C6
+    value:           98B61804-7FB6-31B7-AB24-F65027F5B3B8
 install-name:    '/System/Library/PrivateFrameworks/MediaStream.framework/Versions/A/MediaStream'
-current-version: 441.0.120
+current-version: 511.0.170
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MSAlbumSharingInitialize, _MSMSLocalizedString, _MSMediaStreamInitialize, 
                        _MediaStreamVersionNumber, _MediaStreamVersionString, _XPCSetLogBlocks, 
                        __MSASSetDaemon, __MSSetDaemon, __XPCLog, __XPCShouldLog, 

@@ -196,6 +196,13 @@ PG_EXTERN API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
  @discussion This property must be populated if addTraceRange is populated.
  */
 @property (readwrite, nonatomic, copy, nullable) PGRemoveTraceRange removeTraceRange API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
+
+/*!
+ @property displayPortCount
+ @abstract The number of PGDisplay ports configured into the VM.
+ @discussion By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
+ */
+@property (readwrite, nonatomic) uint32_t displayPortCount API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios);
 @end
 
 /*!
@@ -224,7 +231,7 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
  @method newDisplayWithDescriptor:port:serialNum
  @abstract Create a display based on the given descriptor and uniquifying parameters.
  @param descriptor Description of desired display object.
- @param port Port number on accelerator that display will plug into (one display per port).
+ @param port Port number that display will plug into (one display per port - and it must be less than the displayPortCount that PGDevice was created with).
  @param serialNum Serial Number of display (should be unique so Guest compositor can maintain persistent layout of displays on desktop across boots).
  @discussion New display won't hot-plug until first modeList is established.  Releasing this object emulates a hot-unplug.
  */
@@ -302,6 +309,13 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
 PG_EXTERN id<PGDevice> _Nullable PGNewDeviceWithDescriptor(PGDeviceDescriptor * _Nonnull descriptor) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
 
 /*!
+ @function PGMaxDisplayPortCount
+ @abstract Returns the maximum number of PGDisplay ports that a PGDevice can be configured with.
+ @note See PGDeviceDescriptor's displayPortCount property.
+ */
+PG_EXTERN uint32_t PGMaxDisplayPortCount(void) API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios);
+
+/*!
  @const PGResumeErrorDomain The error domain for reporting errors in resume.
  */
 PG_EXTERN NSErrorDomain const _Nonnull PGResumeErrorDomain API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
@@ -314,6 +328,7 @@ PG_EXTERN NSErrorDomain const _Nonnull PGResumeErrorDomain API_AVAILABLE(macos(1
  @constant PGResumeErrorCodeInvalidContent The content the suspend state or guest memory is invalid.
  @constant PGResumeErrorCodeInvalidGuestVersion The guest version is incompatible with this framework version.
  @constant PGResumeErrorCodeDeviceIncompatible The resume device is missing capabilities provided by the suspend device.
+ @constant PGResumeErrorCodeInvalidDisplayPortCount The DisplayPortCount in suspend state doesn't match DisplayPortCount for this VM
  */
 typedef NS_ENUM(NSUInteger, PGResumeErrorCode) {
     PGResumeErrorCodeInternalFault = 0,
@@ -321,6 +336,7 @@ typedef NS_ENUM(NSUInteger, PGResumeErrorCode) {
     PGResumeErrorCodeInvalidContent,
     PGResumeErrorCodeInvalidGuestVersion,
     PGResumeErrorCodeIncompatibleDevice,
+    PGResumeErrorCodeInvalidDisplayPortCount,
 } API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
 
 /*!

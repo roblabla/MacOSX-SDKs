@@ -4,29 +4,29 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FDE47317-3471-3971-A68A-8796C2ABDCFF
+    value:           7C77E084-F885-312B-84B6-C82F4A5CFE5C
   - target:          x86_64-maccatalyst
-    value:           FDE47317-3471-3971-A68A-8796C2ABDCFF
+    value:           7C77E084-F885-312B-84B6-C82F4A5CFE5C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E8057AE1-00AF-32F0-AE07-1B997D7D77E4
+    value:           73652F68-F261-3040-A392-9A1A7F6585B0
   - target:          arm64e-maccatalyst
-    value:           E8057AE1-00AF-32F0-AE07-1B997D7D77E4
+    value:           73652F68-F261-3040-A392-9A1A7F6585B0
 install-name:    '/System/Library/PrivateFrameworks/NeutrinoCore.framework/Versions/A/NeutrinoCore'
-current-version: 441.0.120
+current-version: 511.0.170
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN2NU10RectFinderE, __ZTIN2NU14PathRectFinderE, __ZTIN2NU16AnchorRectFinderE, 
                        __ZTIN2NU16centerRectFinderE, __ZTIN2NU24AnchorRectFinderVerticalE, 
                        __ZTIN2NU26AnchorRectFinderHorizontalE, __ZTSN2NU10RectFinderE, 
                        __ZTSN2NU14PathRectFinderE, __ZTSN2NU16AnchorRectFinderE, 
                        __ZTSN2NU16centerRectFinderE, __ZTSN2NU24AnchorRectFinderVerticalE, 
                        __ZTSN2NU26AnchorRectFinderHorizontalE ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CGAffineTransformDeterminant, _CGAffineTransformDot, _CGAffineTransformFixedPoint, 
                        _CGAffineTransformForMappingFromRectToRect, _CGAffineTransformHasRotation, 
                        _CGAffineTransformIsValid, _CGAffineTransformMove, _CGAffineTransformRelative, 
@@ -55,10 +55,11 @@ exports:
                        _NUDegreeToRadian, _NUDispatchAsyncEnforceCurrentQoS, _NUDispatchAsyncEnforceQoS, 
                        _NUDispatchSeconds, _NUEqualWeightLuminanceColorMatrix, _NUErrorDomain, 
                        _NUEvaluationModeName, _NUEvenPixelSize, _NUExtractRotationFromStraightenAffineTransform, 
-                       _NUFileTypeFromExtension, _NUHeight, _NUIORegistryEntryCopyProperties, 
-                       _NUIORegistryEntryGetDataProperty, _NUIORegistryEntryGetName, 
-                       _NUIORegistryEntryGetProperty, _NUIORegistryEntryGetStringProperty, 
-                       _NUIdentifierGlobalNameSpace, _NUIdentityColorMatrix, _NUImagePropertyAlphaFromCGBitmapInfo, 
+                       _NUFileTypeFromExtension, _NUHeight, _NUHistogramRangeMake, 
+                       _NUIORegistryEntryCopyProperties, _NUIORegistryEntryGetDataProperty, 
+                       _NUIORegistryEntryGetName, _NUIORegistryEntryGetProperty, 
+                       _NUIORegistryEntryGetStringProperty, _NUIdentifierGlobalNameSpace, 
+                       _NUIdentityColorMatrix, _NUImagePropertyAlphaFromCGBitmapInfo, 
                        _NUImagePropertyComponentFromCGBitmapInfo, _NUIsAppleInternal, 
                        _NUIsPixelBufferProbablyAllZeros, _NUIsRoughlyEqual, _NUIsRoughlyGreaterThan, 
                        _NUIsRoughlyLessThan, _NULogAdoptVoucher, _NULogCopyVoucher, 
@@ -103,11 +104,13 @@ exports:
                        _NUScaleMake, _NUScaleMultiply, _NUScaleMultiplyInteger, _NUScaleOne, 
                        _NUScaleRect, _NUScaleToDouble, _NUScaleToFillSizeInSize, 
                        _NUScaleToFitSizeInSize, _NUScaleToString, _NUScaleToValue, 
-                       _NUScaleUnknown, _NUScaleZero, _NUStandardLuminanceColorMatrix, 
+                       _NUScaleUnknown, _NUScaleZero, _NUSegmentationTypeDescription, 
+                       _NUStandardLuminanceColorMatrix, _NUStandardLuminanceWeights, 
                        _NUStraightenAffineTransformWithDegrees, _NUStraightenAffineTransformWithRadians, 
                        _NUStringForTypeCode, _NUStringFromTime, _NUStringFromTimeRange, 
-                       _NUTypeCodeFromString, _NUValueFromArrayAtTime, _NUWidth, 
-                       _NeutrinoCoreVersionNumber, _NeutrinoCoreVersionString, _TIFFOrientationFromNUOrientation, 
+                       _NUTypeCodeFromString, _NUValueFromArrayAtTime, _NUVisionSegmentationPolicyDescription, 
+                       _NUWidth, _NUZeroLuminanceWeights, _NeutrinoCoreVersionNumber, 
+                       _NeutrinoCoreVersionString, _TIFFOrientationFromNUOrientation, 
                        __NUAssertContinueHandler, __NUAssertFailHandler, __NUAssertLogger, 
                        __NUJSLogger, __NULogInit, __NULogOnceToken, __NULogger, __NUMakeDictionary, 
                        __NUPipelineLogger, __NURenderLogger, __NUScheduleLogger, 
@@ -169,8 +172,8 @@ exports:
                        _mediaTypeFromString, _nuJSContextStr, _nu_rgb_to_tempTint, 
                        _nu_tempTint_to_xy, _nu_xy_to_tempTint ]
     objc-classes:    [ NSPredicateRule, NUAbstractScaleNode, NUAdjustment, NUAdjustmentSchema, 
-                       NUAdjustmentSerialization, NUAffineTransformNode, NUArraySchema, 
-                       NUArraySetting, NUAspectFitScalePolicy, NUAssertionHandler, 
+                       NUAdjustmentSerialization, NUAffineTransformNode, NUAlphaHistogramCalculator, 
+                       NUArraySchema, NUArraySetting, NUAspectFitScalePolicy, NUAssertionHandler, 
                        NUAssertionInfo, NUAssertionPolicyAbort, NUAssertionPolicyComposite, 
                        NUAssertionPolicyCrashReport, NUAssertionPolicyDebuggerFatal, 
                        NUAssertionPolicyDebuggerWarning, NUAssertionPolicyThrow, 
@@ -243,16 +246,17 @@ exports:
                        NURenderNode, NURenderNodeCache, NURenderPipeline, NURenderPipelineFilter, 
                        NURenderPipelineFunction, NURenderPipelineHelper, NURenderPipelineRegistry, 
                        NURenderPipelineState, NURenderPipelineVideoFrame, NURenderPipelineVideoMetadataSample, 
-                       NURenderRequest, NURenderTagGroup, NURenderTagNode, NURenderTransaction, 
-                       NURenderer, NURepeatPattern, NUResampleNode, NUResetScaleNode, 
-                       NUResolvedSource, NUResponse, NURule, NURuleSystem, NUScaleNode, 
-                       NUScaledSourceContainerNode, NUScaledSourceDefinition, NUScheduledItem, 
-                       NUScheduledQueue, NUScheduler, NUSchema, NUSchemaRegistry, 
-                       NUScript, NUSetting, NUSingleSourceContainerNode, NUSingleSourceDefinition, 
-                       NUSlowMotionNode, NUSlowMotionUtilities, NUSoftwareRenderer, 
-                       NUSoftwareVersion, NUSource, NUSourceContainerNode, NUSourceDefinition, 
-                       NUSourceNode, NUSourceOrientationNode, NUSourceSchema, NUSpace, 
-                       NUSquareExtentPolicy, NUStoragePoolStats, NUSubsampleNode, 
+                       NURenderRequest, NURenderResultCache, NURenderTagGroup, NURenderTagNode, 
+                       NURenderTransaction, NURenderer, NURepeatPattern, NUResampleNode, 
+                       NUResetOrientationNode, NUResetScaleNode, NUResolvedSource, 
+                       NUResponse, NURule, NURuleSystem, NUScaleNode, NUScaledSourceContainerNode, 
+                       NUScaledSourceDefinition, NUScheduledItem, NUScheduledQueue, 
+                       NUScheduler, NUSchema, NUSchemaRegistry, NUScript, NUSetting, 
+                       NUSingleSourceContainerNode, NUSingleSourceDefinition, NUSlowMotionNode, 
+                       NUSlowMotionUtilities, NUSoftwareRenderer, NUSoftwareVersion, 
+                       NUSource, NUSourceContainerNode, NUSourceDefinition, NUSourceNode, 
+                       NUSourceOrientationNode, NUSourceSchema, NUSpace, NUSquareExtentPolicy, 
+                       NUStorageImageBuffer, NUStoragePoolStats, NUSubsampleNode, 
                        NUSurfaceImageAccumulationNode, NUSurfaceRenderClient, NUSurfaceRenderJob, 
                        NUSurfaceRenderRequest, NUSurfaceTileAdapter, NUTagColorSampler, 
                        NUTestPatternImage, NUTestPatternSourceDefinition, NUTestPatternSourceNode, 
@@ -263,16 +267,16 @@ exports:
                        NUVideoCompositionInstruction, NUVideoCompositor, NUVideoExportClient, 
                        NUVideoExportJob, NUVideoExportRequest, NUVideoFrameJobCallbackCompositor, 
                        NUVideoFrameJobCallbackCompositorHDR, NUVideoFrameSourceNode, 
-                       NUVideoPlaybackCompositor, NUVideoPlaybackCompositorHDR, NUVideoPlaybackFrameJob, 
-                       NUVideoPlaybackFrameRequest, NUVideoPropertiesClient, NUVideoPropertiesJob, 
-                       NUVideoPropertiesRequest, NUVideoRenderClient, NUVideoRenderJob, 
-                       NUVideoRenderRequest, NUVideoRotationExportJob, NUVideoRotationExportRequest, 
-                       NUVideoSourceNode, NUVideoUtilities, NUVisionDetectionJob, 
-                       NUVisionDetectionRequest, NUWrappedBufferStorage, NUZoomFactorScalePolicy, 
-                       _NSPredicateBlockRule, _NSPredicateRule, _NUAbstractBufferStorage, 
-                       _NUAbstractStorage, _NUAuxiliaryImageRenderResult, _NUAuxiliaryPropertiesResult, 
-                       _NUBlockRule, _NUBrushStrokeCIImageProvider, _NUBufferImage, 
-                       _NUBufferRenderResult, _NUClassifyPipelineImageCorrectionResult, 
+                       NUVideoHDRMetadataGenerator, NUVideoPlaybackCompositor, NUVideoPlaybackCompositorHDR, 
+                       NUVideoPlaybackFrameJob, NUVideoPlaybackFrameRequest, NUVideoPropertiesClient, 
+                       NUVideoPropertiesJob, NUVideoPropertiesRequest, NUVideoRenderClient, 
+                       NUVideoRenderJob, NUVideoRenderRequest, NUVideoSourceNode, 
+                       NUVideoUtilities, NUVisionDetectionJob, NUVisionDetectionRequest, 
+                       NUVisionSegmentationJob, NUVisionSegmentationRequest, NUWrappedBufferStorage, 
+                       NUZoomFactorScalePolicy, _NSPredicateBlockRule, _NSPredicateRule, 
+                       _NUAbstractBufferStorage, _NUAbstractStorage, _NUAuxiliaryImageRenderResult, 
+                       _NUAuxiliaryPropertiesResult, _NUBlockRule, _NUBrushStrokeCIImageProvider, 
+                       _NUBufferImage, _NUBufferRenderResult, _NUClassifyPipelineImageCorrectionResult, 
                        _NUColorSamplerResult, _NUContiguousImageLayout, _NUExportResult, 
                        _NUFaceDetectionResult, _NUFixedTileSizeImageLayout, _NUGeometryResult, 
                        _NUHistogramRenderResult, _NUImage, _NUImageCIProvider, _NUImageDataResult, 
@@ -282,8 +286,9 @@ exports:
                        _NURAWImageProperties, _NURAWNoiseReductionProperties, _NURAWToneCurveProperties, 
                        _NURenderPipelineBlockVariable, _NURenderResult, _NUStripImageLayout, 
                        _NUSurfaceImage, _NUSurfaceRenderResult, _NUTaggedSpace, _NUVideoAttributesResult, 
-                       _NUVideoPlaybackFrameRequestResponse, _NUVideoProperties, 
-                       _NUVideoPropertiesResult, _NUVideoRenderResult, _NUVisionDetectionResult ]
+                       _NUVideoExportResult, _NUVideoPlaybackFrameRequestResponse, 
+                       _NUVideoProperties, _NUVideoPropertiesResult, _NUVideoRenderResult, 
+                       _NUVisionDetectionResult, _NUVisionSegmentationResult ]
     objc-ivars:      [ NUBrushStroke._clipRect, NUBrushStroke._data, NUBrushStroke._extent, 
                        NUBrushStroke._opacity, NUBrushStroke._pressureMode, NUBrushStroke._radius, 
                        NUBrushStroke._softness, NUBufferAdapter._bytes, NUBufferAdapter._format, 

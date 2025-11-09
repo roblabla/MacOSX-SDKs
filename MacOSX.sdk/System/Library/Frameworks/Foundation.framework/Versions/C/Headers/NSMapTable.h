@@ -11,7 +11,7 @@
 
 @class NSArray, NSDictionary<KeyType, ObjectType>, NSMapTable;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /****************	Class	****************/
 
@@ -72,10 +72,10 @@ typedef struct {NSUInteger _pi; NSUInteger _si; void * _Nullable _bs;} NSMapEnum
 
 
 
-FOUNDATION_EXPORT void NSFreeMapTable(NSMapTable *table);
+FOUNDATION_EXPORT void NSFreeMapTable(NSMapTable *NS_RELEASES_ARGUMENT table);
 FOUNDATION_EXPORT void NSResetMapTable(NSMapTable *table);
 FOUNDATION_EXPORT BOOL NSCompareMapTables(NSMapTable *table1, NSMapTable *table2);
-FOUNDATION_EXPORT NSMapTable *NSCopyMapTableWithZone(NSMapTable *table, NSZone * _Nullable zone);
+FOUNDATION_EXPORT NSMapTable *NSCopyMapTableWithZone(NSMapTable *table, NSZone * _Nullable zone) NS_RETURNS_RETAINED;
 FOUNDATION_EXPORT BOOL NSMapMember(NSMapTable *table, const void *key, void * _Nullable * _Nullable originalKey, void * _Nullable * _Nullable value);
 FOUNDATION_EXPORT void * _Nullable NSMapGet(NSMapTable *table, const void * _Nullable key);
 FOUNDATION_EXPORT void NSMapInsert(NSMapTable *table, const void * _Nullable key, const void * _Nullable value);
@@ -112,8 +112,8 @@ typedef struct {
     NSString 	* _Nullable(* _Nullable describe)(NSMapTable *table, const void *);
 } NSMapTableValueCallBacks;
 
-FOUNDATION_EXPORT NSMapTable *NSCreateMapTableWithZone(NSMapTableKeyCallBacks keyCallBacks, NSMapTableValueCallBacks valueCallBacks, NSUInteger capacity, NSZone * _Nullable zone);
-FOUNDATION_EXPORT NSMapTable *NSCreateMapTable(NSMapTableKeyCallBacks keyCallBacks, NSMapTableValueCallBacks valueCallBacks, NSUInteger capacity);
+FOUNDATION_EXPORT NSMapTable *NSCreateMapTableWithZone(NSMapTableKeyCallBacks keyCallBacks, NSMapTableValueCallBacks valueCallBacks, NSUInteger capacity, NSZone * _Nullable zone) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT NSMapTable *NSCreateMapTable(NSMapTableKeyCallBacks keyCallBacks, NSMapTableValueCallBacks valueCallBacks, NSUInteger capacity) NS_RETURNS_RETAINED;
 
 
 /****************	Common map table key callbacks	****************/
@@ -135,5 +135,5 @@ FOUNDATION_EXPORT const NSMapTableValueCallBacks NSNonRetainedObjectMapValueCall
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSOwnedPointerMapValueCallBacks;
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSIntMapValueCallBacks API_DEPRECATED("Not supported", macos(10.0,10.5), ios(2.0, 2.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 #endif // defined __FOUNDATION_NSMAPTABLE__

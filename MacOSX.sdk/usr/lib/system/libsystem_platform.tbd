@@ -4,32 +4,32 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A9552F53-A0CD-3E43-9930-80E582ED51FF
+    value:           F07558DB-8B15-3D96-93F9-3A61BBD52F25
   - target:          x86_64-maccatalyst
-    value:           A9552F53-A0CD-3E43-9930-80E582ED51FF
+    value:           F07558DB-8B15-3D96-93F9-3A61BBD52F25
   - target:          arm64-macos
-    value:           A8C155A3-9295-340C-94A2-80B29BBA7A10
+    value:           372B6A5F-EE6F-3F9C-84D1-E8027DB6FA17
   - target:          arm64-maccatalyst
-    value:           A8C155A3-9295-340C-94A2-80B29BBA7A10
+    value:           372B6A5F-EE6F-3F9C-84D1-E8027DB6FA17
   - target:          arm64e-macos
-    value:           84FA5DD0-806C-310E-B047-479924CD688C
+    value:           78189670-2F47-332C-9A59-A210157AA97B
   - target:          arm64e-maccatalyst
-    value:           84FA5DD0-806C-310E-B047-479924CD688C
+    value:           78189670-2F47-332C-9A59-A210157AA97B
 install-name:    '/usr/lib/system/libsystem_platform.dylib'
-current-version: 273.100.5
+current-version: 288
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ '_OSAtomicFifoDequeue$VARIANT$PFZ', '_OSAtomicFifoDequeue$VARIANT$UnfairLock', 
                        '_OSAtomicFifoEnqueue$VARIANT$PFZ', '_OSAtomicFifoEnqueue$VARIANT$UnfairLock', 
                        ___no_overread_variant_setup, __sigtramp, _bzero_sse_np, _longjmperror, 
                        _memmove_sse_np, _memset_pattern16_sse_np, _memset_pattern4_sse_np, 
                        _memset_pattern8_sse_np, _memset_sse_np ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64-maccatalyst, arm64-macos, 
-                       arm64e-maccatalyst, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _OSAtomicAdd32, _OSAtomicAdd32Barrier, _OSAtomicAdd64, _OSAtomicAdd64Barrier, 
                        _OSAtomicAnd32, _OSAtomicAnd32Barrier, _OSAtomicAnd32Orig, 
                        _OSAtomicAnd32OrigBarrier, _OSAtomicCompareAndSwap32, _OSAtomicCompareAndSwap32Barrier, 
@@ -53,19 +53,19 @@ exports:
                        __os_log_simple_parse, __os_log_simple_parse_identifiers, 
                        __os_log_simple_parse_message, __os_log_simple_parse_subsystem, 
                        __os_log_simple_parse_timestamp, __os_log_simple_parse_type, 
-                       __os_log_simple_send, __os_log_simple_shim, __os_nospin_lock_lock, 
-                       __os_nospin_lock_trylock, __os_nospin_lock_unlock, __os_once, 
-                       __os_semaphore_create, __os_semaphore_dispose, __os_semaphore_signal, 
-                       __os_semaphore_wait, __platform_bzero, __platform_memccpy, 
-                       __platform_memchr, __platform_memcmp, __platform_memmove, 
-                       __platform_memset, __platform_memset_pattern16, __platform_memset_pattern4, 
-                       __platform_memset_pattern8, __platform_strchr, __platform_strcmp, 
-                       __platform_strcpy, __platform_strlcat, __platform_strlcpy, 
-                       __platform_strlen, __platform_strncmp, __platform_strncpy, 
-                       __platform_strnlen, __platform_strstr, __setjmp, __simple_asl_get_fd, 
-                       __simple_asl_log, __simple_asl_log_prog, __simple_asl_msg_new, 
-                       __simple_asl_msg_set, __simple_asl_send, __simple_dprintf, 
-                       __simple_esappend, __simple_esprintf, __simple_getenv, __simple_memcmp, 
+                       __os_log_simple_reinit_4launchd, __os_log_simple_send, __os_log_simple_shim, 
+                       __os_nospin_lock_lock, __os_nospin_lock_trylock, __os_nospin_lock_unlock, 
+                       __os_once, __os_semaphore_create, __os_semaphore_dispose, 
+                       __os_semaphore_signal, __os_semaphore_wait, __platform_bzero, 
+                       __platform_memccpy, __platform_memchr, __platform_memcmp, 
+                       __platform_memcmp_zero_aligned8, __platform_memmove, __platform_memset, 
+                       __platform_memset_pattern16, __platform_memset_pattern4, __platform_memset_pattern8, 
+                       __platform_strchr, __platform_strcmp, __platform_strcpy, __platform_strlcat, 
+                       __platform_strlcpy, __platform_strlen, __platform_strncmp, 
+                       __platform_strncpy, __platform_strnlen, __platform_strstr, 
+                       __setjmp, __simple_asl_get_fd, __simple_asl_log, __simple_asl_log_prog, 
+                       __simple_asl_msg_new, __simple_asl_msg_set, __simple_asl_send, 
+                       __simple_dprintf, __simple_esappend, __simple_esprintf, __simple_getenv, 
                        __simple_put, __simple_putline, __simple_salloc, __simple_sappend, 
                        __simple_sfree, __simple_sprintf, __simple_sresize, __simple_string, 
                        __simple_vdprintf, __simple_vesprintf, __simple_vsprintf, 
@@ -88,6 +88,6 @@ exports:
                        _platform_thread_suspend, _setcontext, _setjmp, _siglongjmp, 
                        _sigsetjmp, _spin_lock, _spin_lock_try, _spin_unlock, _swapcontext, 
                        _sys_cache_control, _sys_dcache_flush, _sys_icache_invalidate ]
-  - targets:         [ arm64-maccatalyst, arm64-macos, arm64e-maccatalyst, arm64e-macos ]
+  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ctx_done ]
 ...

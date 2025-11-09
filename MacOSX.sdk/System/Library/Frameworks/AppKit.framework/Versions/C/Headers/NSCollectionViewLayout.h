@@ -36,7 +36,7 @@ APPKIT_EXTERN NSCollectionViewSupplementaryElementKind const NSCollectionElement
 @class NSCollectionView;
 @class NSNib;
 
-API_AVAILABLE(macos(10.11))
+APPKIT_EXTERN API_AVAILABLE(macos(10.11))
 @interface NSCollectionViewLayoutAttributes : NSObject <NSCopying>
 
 @property NSRect frame;
@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, NSCollectionUpdateAction) {
     NSCollectionUpdateActionNone
 } API_AVAILABLE(macos(10.11));
 
-API_AVAILABLE(macos(10.11))
+APPKIT_EXTERN API_AVAILABLE(macos(10.11))
 @interface NSCollectionViewUpdateItem : NSObject
 
 @property (nullable, readonly) NSIndexPath *indexPathBeforeUpdate; // nil for NSCollectionUpdateActionInsert
@@ -73,7 +73,7 @@ API_AVAILABLE(macos(10.11))
 
 @end
 
-API_AVAILABLE(macos(10.11))
+APPKIT_EXTERN API_AVAILABLE(macos(10.11))
 @interface NSCollectionViewLayoutInvalidationContext : NSObject
 
 @property (readonly) BOOL invalidateEverything; // set to YES when invalidation occurs because the collection view is sent -reloadData
@@ -93,7 +93,7 @@ API_AVAILABLE(macos(10.11))
 
 /* The NSCollectionViewLayout class is provided as an abstract class for subclassing to define custom collection layouts.  Defining a custom layout is an advanced operation intended for applications with complex needs.
 */
-API_AVAILABLE(macos(10.11))
+APPKIT_EXTERN API_AVAILABLE(macos(10.11))
 @interface NSCollectionViewLayout : NSObject <NSCoding>
 
 /* Methods in this class are meant to be overridden and will be called by its collection view to gather layout information.  To get the truth on the current state of the collection view, call methods on NSCollectionView rather than these.

@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D01FA587-12EE-38CA-A668-59489324C386
+    value:           DFE1EA6B-9F1F-34E7-89F8-A583FBFE1B85
   - target:          x86_64-maccatalyst
-    value:           D01FA587-12EE-38CA-A668-59489324C386
+    value:           DFE1EA6B-9F1F-34E7-89F8-A583FBFE1B85
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E99C091B-9FF7-364B-BDB9-379FC75DB8FC
+    value:           B3B912E3-363B-344C-AF58-992BB7D6BBF5
   - target:          arm64e-maccatalyst
-    value:           E99C091B-9FF7-364B-BDB9-379FC75DB8FC
+    value:           B3B912E3-363B-344C-AF58-992BB7D6BBF5
 install-name:    '/usr/lib/libCRFSuite.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _crf_content_copy, _crf_content_init, _crf_content_set, _crf_create_instance, 
                        _crf_data_append, _crf_data_finish, _crf_data_init, _crf_data_maxlength, 
                        _crf_data_totalitems, _crf_evaluation_init, _crf_item_append_content, 

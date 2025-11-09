@@ -11,7 +11,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UITableView.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIViewConfigurationState;
 @class UIBackgroundConfiguration;
@@ -61,6 +61,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly, strong, nullable) UILabel *textLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(6.0, API_TO_BE_DEPRECATED));
 @property (nonatomic, readonly, strong, nullable) UILabel *detailTextLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(6.0, API_TO_BE_DEPRECATED)); // only supported for headers in grouped style
 
+/// Returns a default background configuration for the header/footer's style.
+/// This background configuration represents the default appearance that the header/footer will use.
+- (UIBackgroundConfiguration *)defaultBackgroundConfiguration API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+
 /// Setting a background configuration supersedes the header/footer's backgroundView. The default value is nil.
 @property (nonatomic, copy, nullable) UIBackgroundConfiguration *backgroundConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 /// When YES, the header/footer will automatically call -updatedConfigurationForState: on its `backgroundConfiguration` when the header/footer's
@@ -76,7 +80,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UITableViewHeaderFooterView.h>

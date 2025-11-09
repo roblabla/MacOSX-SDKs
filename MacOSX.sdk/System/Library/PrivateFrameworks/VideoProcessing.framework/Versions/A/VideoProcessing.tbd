@@ -4,57 +4,58 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           29EA7CC7-C9B5-3D32-813B-37BD2C6210C3
+    value:           A91C91AA-4F3A-3074-AF02-40EDEEB4BE69
   - target:          x86_64-maccatalyst
-    value:           29EA7CC7-C9B5-3D32-813B-37BD2C6210C3
+    value:           A91C91AA-4F3A-3074-AF02-40EDEEB4BE69
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F5F6ABE2-494C-3999-BF29-354B204F6CAC
+    value:           03A4309A-432D-3CF0-87B3-C70B1156393D
   - target:          arm64e-maccatalyst
-    value:           F5F6ABE2-494C-3999-BF29-354B204F6CAC
+    value:           03A4309A-432D-3CF0-87B3-C70B1156393D
 install-name:    '/System/Library/PrivateFrameworks/VideoProcessing.framework/Versions/A/VideoProcessing'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__112future_errorE, __ZTINSt3__117bad_function_callE, 
                        __ZTISt11logic_error, __ZTISt12length_error, __ZTISt12out_of_range, 
                        __ZTISt9exception, __ZTSNSt3__112future_errorE, __ZTSNSt3__117bad_function_callE, 
                        __ZTSSt11logic_error, __ZTSSt12length_error, __ZTSSt12out_of_range, 
                        __ZTSSt9exception ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _JVTLibDecoDispose, _VCPCodecGetProperties, _VCPCodecGetProperty, 
                        _VCPCompressionSessionCompleteFrames, _VCPCompressionSessionCopyProperty, 
                        _VCPCompressionSessionCopySupportedPropertyDictionary, _VCPCompressionSessionCreate, 
                        _VCPCompressionSessionEncodeFrame, _VCPCompressionSessionGetPixelBufferPool, 
                        _VCPCompressionSessionGetTypeID, _VCPCompressionSessionInvalidate, 
-                       _VCPCompressionSessionSetProperty, _VCPDecompressionSessionCheckIfLastSubFrame, 
-                       _VCPDecompressionSessionCopyBlackPixelBuffer, _VCPDecompressionSessionCopyProperty, 
-                       _VCPDecompressionSessionCopySerializableProperties, _VCPDecompressionSessionCopySupportedPropertyDictionary, 
-                       _VCPDecompressionSessionCreate, _VCPDecompressionSessionDecodeFrame, 
-                       _VCPDecompressionSessionFinishDelayedFrames, _VCPDecompressionSessionGetTypeID, 
-                       _VCPDecompressionSessionInvalidate, _VCPDecompressionSessionSetProperties, 
-                       _VCPDecompressionSessionSetProperty, _VCPDecompressionSessionWaitForAsynchronousFrames, 
-                       _VCPGetVersion, _VCPParseConfigurationRecordAndCreateParameterSets, 
-                       _VCPParseParameterSetsAndCreateConfigurationRecord, _VCPRateControlSessionBeforeEmitEncodedFrame, 
-                       _VCPRateControlSessionBeforeEncodeFrame, _VCPRateControlSessionBeforePrepareToEncodeFrame, 
-                       _VCPRateControlSessionCompleteFrames, _VCPRateControlSessionCopyProperty, 
-                       _VCPRateControlSessionCopySupportedPropertyDictionary, _VCPRateControlSessionCreate, 
-                       _VCPRateControlSessionInvalidate, _VCPRateControlSessionSetProperty, 
-                       _VCPReadCodecConfigParams, _VCPReadFrameSliceHeader, _VCPReadHEVCSliceHeader, 
-                       _VCPRegisterDecoders, _VCPSessionCopyProperty, _VCPSessionCreate, 
-                       _VCPSessionCreateDefaultBufferProperties, _VCPSessionExecute, 
-                       _VCPSessionGetTypeID, _VCPSessionSetProperty, _VPModuleInitialize ]
-  - targets:         [ arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
+                       _VCPCompressionSessionSetProperty, _VCPCreateUserDataPrefixSEINALU, 
+                       _VCPDecompressionSessionCheckIfLastSubFrame, _VCPDecompressionSessionCopyBlackPixelBuffer, 
+                       _VCPDecompressionSessionCopyProperty, _VCPDecompressionSessionCopySerializableProperties, 
+                       _VCPDecompressionSessionCopySupportedPropertyDictionary, _VCPDecompressionSessionCreate, 
+                       _VCPDecompressionSessionDecodeFrame, _VCPDecompressionSessionFinishDelayedFrames, 
+                       _VCPDecompressionSessionGetTypeID, _VCPDecompressionSessionInvalidate, 
+                       _VCPDecompressionSessionSetProperties, _VCPDecompressionSessionSetProperty, 
+                       _VCPDecompressionSessionWaitForAsynchronousFrames, _VCPGetVersion, 
+                       _VCPParseConfigurationRecordAndCreateParameterSets, _VCPParseParameterSetsAndCreateConfigurationRecord, 
+                       _VCPRateControlSessionBeforeEmitEncodedFrame, _VCPRateControlSessionBeforeEncodeFrame, 
+                       _VCPRateControlSessionBeforePrepareToEncodeFrames, _VCPRateControlSessionCompleteFrames, 
+                       _VCPRateControlSessionCopyProperty, _VCPRateControlSessionCopySupportedPropertyDictionary, 
+                       _VCPRateControlSessionCreate, _VCPRateControlSessionInvalidate, 
+                       _VCPRateControlSessionSetProperty, _VCPReadCodecConfigParams, 
+                       _VCPReadFrameSliceHeader, _VCPReadHEVCSliceHeader, _VCPRegisterDecoders, 
+                       _VCPSessionCopyProperty, _VCPSessionCreate, _VCPSessionCreateDefaultBufferProperties, 
+                       _VCPSessionExecute, _VCPSessionGetTypeID, _VCPSessionPrewarm, 
+                       _VCPSessionSetProperty, _VPModuleInitialize ]
+  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BilinearFilterH_chroma_vperm2_neon64, _BilinearFilterH_swift_chroma_neon, 
                        _BilinearFilterH_swift_neon, _BilinearFilterH_vperm2_neon64, 
                        _BilinearFilterV_swift_neon, _Detile2Rows_neon, _DetileRow_neon, 
                        _Filter8tapH_chroma_neon64, _Filter8tapH_neon64, _Filter8tapV_neon64 ]
 reexports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MAComputeRequest_Create, _MAComputeRequest_Start, _MediaAnalysisActivityLevelResultsKey, 
                        _MediaAnalysisAnalysisTypesKey, _MediaAnalysisApplauseResultsKey, 
                        _MediaAnalysisBabbleResultsKey, _MediaAnalysisBlurResultsKey, 

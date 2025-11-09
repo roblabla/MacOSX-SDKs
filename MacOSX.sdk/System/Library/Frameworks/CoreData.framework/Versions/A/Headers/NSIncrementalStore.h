@@ -1,7 +1,7 @@
 /*
     NSIncrementalStore.h
     Core Data
-    Copyright (c) 2009-2021, Apple Inc.
+    Copyright (c) 2009-2022, Apple Inc.
     All rights reserved.
 */
 

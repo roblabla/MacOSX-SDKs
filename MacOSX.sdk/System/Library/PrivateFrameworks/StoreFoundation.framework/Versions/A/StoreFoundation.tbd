@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           767980C5-BBE6-39AC-B989-C2BEAF2F4628
+    value:           6B7CD9F9-70FC-37E3-A1AA-E8957769AB5C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           23E4A20B-CE92-32DD-B9CF-0A74D108B5F4
+    value:           6729B3D1-63D5-3D86-BE01-C38BD455A326
 install-name:    '/System/Library/PrivateFrameworks/StoreFoundation.framework/Versions/A/StoreFoundation'
 current-version: 379
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CKAppStoreVersion, _CKBooksStoreVersion, _CKConfiguratorAppVersion, 
                        _CKCurrentUserIsGuestUser, _CKDefaultDownloadLocation, _CKDownloadLocationForAdamID, 
                        _CKDownloadLocationForIdentifier, _CKHumanReadableSerialNumber, 

@@ -24,7 +24,7 @@
  Alternatively, in a document editor, the next misspelled word can be found by returning the next range that contains a misspelled word.
  */
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIAccessibilityCustomRotor, UIAccessibilityCustomRotorItemResult, UIAccessibilityCustomRotorSearchPredicate;
 
@@ -113,7 +113,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIAccessibilityCustomRotor.h>

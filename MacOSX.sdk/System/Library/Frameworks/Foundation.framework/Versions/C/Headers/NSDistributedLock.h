@@ -6,12 +6,10 @@
 
 @class NSDate;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-@interface NSDistributedLock : NSObject {
-@private
-    void *_priv;
-}
+NS_SWIFT_SENDABLE // Locks are inherently Sendable by definition
+@interface NSDistributedLock : NSObject
 
 + (nullable NSDistributedLock *)lockWithPath:(NSString *)path;  
 
@@ -25,4 +23,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -4,38 +4,41 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8E106362-2E0E-3D9E-B294-BB45F6E53538
+    value:           CED34DD9-B4EA-3298-9C1D-11E880577127
   - target:          x86_64-maccatalyst
-    value:           8E106362-2E0E-3D9E-B294-BB45F6E53538
+    value:           CED34DD9-B4EA-3298-9C1D-11E880577127
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D7953912-45A9-3FC1-90FA-DECEA927904D
+    value:           F9C637DE-7040-3E48-88EA-A4CDFA56FDA7
   - target:          arm64e-maccatalyst
-    value:           D7953912-45A9-3FC1-90FA-DECEA927904D
+    value:           F9C637DE-7040-3E48-88EA-A4CDFA56FDA7
 install-name:    '/System/Library/PrivateFrameworks/CalDAV.framework/Versions/A/CalDAV'
-current-version: 797
+current-version: 1123
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CalDAVComplianceClass_AutoSchedule, _CalDAVComplianceClass_CalendarAudit, 
                        _CalDAVComplianceClass_CalendarAvailability, _CalDAVComplianceClass_CalendarHomeSync, 
                        _CalDAVComplianceClass_CalendarManagedAttachments, _CalDAVComplianceClass_CalendarNoTimezone, 
                        _CalDAVComplianceClass_CalendarQueryExtended, _CalDAVComplianceClass_CalendarRecurrenceSplit, 
+                       _CalDAVComplianceClass_CalendarRole, _CalDAVComplianceClass_DefaultAlarms, 
                        _CalDAVComplianceClass_InboxAvailability, _CalDAVComplianceClass_LikenessPropagation, 
-                       _CalDAVComplianceClass_PrincipalPropertySearch, _CalDAVComplianceClass_PrivateComments, 
-                       _CalDAVComplianceClass_PrivateEvents, _CalDAVComplianceClass_Proxy, 
-                       _CalDAVComplianceClass_Sharing, _CalDAVComplianceClass_SharingNoScheduling, 
-                       _CalDAVComplianceClass_SubscriptionCalendars, _CalDAVComplianceClass_Telephone, 
+                       _CalDAVComplianceClass_ManagedSubscriptionCalendars, _CalDAVComplianceClass_PrincipalPropertySearch, 
+                       _CalDAVComplianceClass_PrivateComments, _CalDAVComplianceClass_PrivateEvents, 
+                       _CalDAVComplianceClass_Proxy, _CalDAVComplianceClass_Sharing, 
+                       _CalDAVComplianceClass_SharingNoScheduling, _CalDAVComplianceClass_SubscriptionCalendars, 
+                       _CalDAVComplianceClass_SubscriptionMirroring, _CalDAVComplianceClass_Telephone, 
                        _CalDAVErrorDomain, _CalDAVHTTPHeader_IfScheduleTagMatch, 
                        _CalDAVHTTPHeader_ScheduleReply, _CalDAVHTTPHeader_ScheduleTag, 
                        _CalDAVPrincipalRecordType_Groups, _CalDAVPrincipalRecordType_Locations, 
                        _CalDAVPrincipalRecordType_Resources, _CalDAVPrincipalRecordType_Users, 
                        _CalDAVPrincipalResultType_Group, _CalDAVPrincipalResultType_Person, 
                        _CalDAVPrincipalResultType_Resource, _CalDAVPrincipalResultType_Room, 
-                       _CalDAVPrincipalResultType_Unknown, _DAVHTTPSScheme, _DAVHTTPScheme, 
+                       _CalDAVPrincipalResultType_Unknown, _CalDAVRemoveShareeItemKey, 
+                       _CalDAVRemoveShareeMuteKey, _DAVHTTPSScheme, _DAVHTTPScheme, 
                        _cdAttributeSymbolicColor, _cdCalendarComponentType, _cdCalendarContentType, 
                        _cdChecksumVersion1, _cdChecksumVersions, _cdEventAndTodoComponentType, 
                        _cdEventComponentType, _cdFreeBusyComponentType, _cdJournalComponentType, 
@@ -120,21 +123,22 @@ exports:
                        CalDAVModifyCalendarSharingLevelTaskGroup, CalDAVModifySharedCalendarShareeListPostTask, 
                        CalDAVModifySharedCalendarShareeListTaskGroup, CalDAVMultiMoveWithFallbackTaskGroup, 
                        CalDAVMultiPutTask, CalDAVNotificationContainerSyncTaskGroup, 
-                       CalDAVNotificationItemData, CalDAVOperation, CalDAVPostAuditFailureTask, 
-                       CalDAVPostCalendarItemRecurrenceSplitTask, CalDAVPostCalendarItemTask, 
-                       CalDAVPostStreamTask, CalDAVPostWithSharedAsResponse, CalDAVPrincipalEmailDetailsResult, 
-                       CalDAVPrincipalPropertySearchTask, CalDAVPrincipalSearchPropertySet, 
-                       CalDAVPrincipalSearchSupport, CalDAVPropPatchWithFallbackTaskGroup, 
-                       CalDAVPutCalendarItemTask, CalDAVRecurrenceSplitAction, CalDAVRecurrenceSplitTaskGroup, 
+                       CalDAVNotificationItemData, CalDAVOccurrenceChange, CalDAVOperation, 
+                       CalDAVPostAuditFailureTask, CalDAVPostCalendarItemRecurrenceSplitTask, 
+                       CalDAVPostCalendarItemTask, CalDAVPostStreamTask, CalDAVPostWithSharedAsResponse, 
+                       CalDAVPrincipalEmailDetailsResult, CalDAVPrincipalPropertySearchTask, 
+                       CalDAVPrincipalSearchPropertySet, CalDAVPrincipalSearchSupport, 
+                       CalDAVPropPatchWithFallbackTaskGroup, CalDAVPutCalendarItemTask, 
+                       CalDAVRecurrenceSplitAction, CalDAVRecurrenceSplitTaskGroup, 
                        CalDAVReplyToSharedCalendarInvitationTaskGroup, CalDAVReportJunkTaskGroup, 
                        CalDAVResourceTypeItem, CalDAVRetrieveSharedCalendarShareesTaskGroup, 
-                       CalDAVScheduleCalendarTranspItem, CalDAVScheduleResponseDetailsItem, 
-                       CalDAVScheduleResponseItem, CalDAVScheduleTask, CalDAVServerVersion, 
-                       CalDAVSetOfficeHoursTaskGroup, CalDAVSupportedCalendarComponentSet, 
-                       CalDAVSupportedCalendarComponentSets, CalDAVUpdateFreeBusySetTaskGroup, 
-                       CalDAVUpdateGrantedDelegatesTaskGroup, CalDAVUpdateOwnerItem, 
-                       CalDAVUtils, CalendarServerVersion, GoogleCalDAVServerVersion, 
-                       MobileMeCalDAVServerVersion, OracleBeehiveCalDAVServerVersion, 
+                       CalDAVScheduleCalendarTranspItem, CalDAVScheduleChangesProperty, 
+                       CalDAVScheduleResponseDetailsItem, CalDAVScheduleResponseItem, 
+                       CalDAVScheduleTask, CalDAVServerVersion, CalDAVSetOfficeHoursTaskGroup, 
+                       CalDAVSupportedCalendarComponentSet, CalDAVSupportedCalendarComponentSets, 
+                       CalDAVUpdateFreeBusySetTaskGroup, CalDAVUpdateGrantedDelegatesTaskGroup, 
+                       CalDAVUpdateOwnerItem, CalDAVUtils, CalendarServerVersion, 
+                       GoogleCalDAVServerVersion, MobileMeCalDAVServerVersion, OracleBeehiveCalDAVServerVersion, 
                        YahooCalDAVServerVersion, iCloudCalDAVServerVersion ]
     objc-ivars:      [ CalDAVCalendarServerChangedPropertyItem._changedParameters, 
                        CalDAVCalendarServerChangedPropertyItem._nameAttribute, CalDAVCalendarServerChangedPropertyItem._typeAttribute, 

@@ -3,20 +3,21 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BE529A5F-6B14-3427-BFF0-43E76DB3FC4F
+    value:           8A1D37A7-38C0-3C7D-8A22-7A15D097E1F1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BBCD21AE-1DE5-3AAF-9596-D112434C17D1
+    value:           859A60C7-3AC4-39E0-B5AC-3B94CBCAF3C3
 install-name:    '/System/Library/PrivateFrameworks/WPDaemon.framework/Versions/A/WPDaemon'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _WPErrorDomain, _WPLogInitOnce, _WPLoggingInit, _WiProxLog, 
                        _advertisingHeader, _kAppleManufacturerTypeBottom, _kAppleManufacturerTypeTop, 
                        _kCBAdditionalAppleMfgAdvertisements, _kCBAdvAppleMfgTypeKey, 
-                       _kCBAdvOptionUseFGInterval, _kGapManufacturerDataType, _kSPAdvertisementData, 
-                       _kSPChannel, _kSPDeviceAddress, _kSPOptional, _kSPSaturated, 
-                       _kSPScanDate, _kSPStatus, _kSPrssi, _kWPDFrameworkMessageQueue ]
+                       _kCBAdvOptionUseFGInterval, _kCBMsgArgTimeXpcFlag, _kCBMsgArgTimeXpcTimestampsTracking, 
+                       _kCBMsgArgTimeXpcWiProxUpdateAdv, _kGapManufacturerDataType, 
+                       _kSPAdvertisementData, _kSPChannel, _kSPDeviceAddress, _kSPOptional, 
+                       _kSPSaturated, _kSPScanDate, _kSPStatus, _kSPrssi, _kWPDFrameworkMessageQueue ]
     objc-classes:    [ Endpoint, PipeDataTransfer, PipeInfo, WPAdvertisingRequest, 
                        WPAdvertisingRequestsQueue, WPCharacteristic, WPDAdvertisingData, 
                        WPDAdvertisingManager, WPDClient, WPDConnection, WPDManager, 

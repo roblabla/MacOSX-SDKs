@@ -3,22 +3,28 @@
 	
 	Framework:  AVKit
 	
-	Copyright © 2014-2017 Apple Inc. All rights reserved.
+	Copyright © 2014-2022 Apple Inc. All rights reserved.
 	
  */
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
+@class AVInterstitialTimeRange;
+@class AVPlaybackSpeed;
+
 @protocol AVPlayerViewControllerDelegate;
+
+
+// MARK: -
 
 /*!
 	@class		AVPlayerViewController
 	@abstract	AVPlayerViewController is a subclass of UIViewController that can be used to display the visual content of an AVPlayer object and the standard playback controls.
  */
-
 API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface AVPlayerViewController : UIViewController
 
@@ -73,6 +79,12 @@ API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @property (nonatomic) BOOL allowsPictureInPicturePlayback API_AVAILABLE(ios(9.0));
 
 /*!
+	@property	allowsVideoFrameAnalysis
+	@abstract	When set to YES, the AVPlayerViewController will try to find objects, text and people while the media is paused. When an object is found, the user will be able to interact with it using long press to present a context menu. Default is YES.
+*/
+@property (nonatomic) BOOL allowsVideoFrameAnalysis API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos, macCatalyst);
+
+/*!
      @property    canStartPictureInPictureAutomaticallyFromInline
      @abstract    Indicates whether Picture in Picture should be allowed to start automatically when transitioning to background when the receiver’s content is embedded inline. Default is NO.
      @discussion  This property must only be set to YES for content intended to be the user's primary focus.
@@ -118,6 +130,32 @@ API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos)
 	@abstract	The receiver's delegate.
  */
 @property (nonatomic, weak, nullable) id <AVPlayerViewControllerDelegate> delegate API_AVAILABLE(ios(9.0));
+
+/**
+ 	@property	speeds
+ 	@abstract	A list of user selectable playback speeds to be shown in the playback speed control.
+ 	@discussion	By default this property will be set to the systemDefaultSpeeds class property. Setting this property to an empty list will hide the playback speed selection UI.
+	 
+				To set the currently selected playback speed programmatically, either set the defaultRate on the AVPlayer associated with this view controller or use the selectSpeed method on AVPlayerViewController.
+ */
+@property (nonatomic, copy) NSArray<AVPlaybackSpeed *> *speeds API_AVAILABLE(ios(16.0));
+
+/*!
+ @property		selectedSpeed
+ @abstract		The currently selected playback speed.
+ @discussion	Changes to the associated AVPlayer's defaultRate will be reflected in this property and vice versa. If the associated AVPlayer's defaultRate is set to a value that does not match a speed in the speeds list property, the selected speed will be nil.
+ */
+@property (nonatomic, readonly, nullable) AVPlaybackSpeed *selectedSpeed API_AVAILABLE(ios(16.0));
+
+/*!
+ @property		selectSpeed
+ @param			speed
+				The playback speed to select.
+ @abstract		Sets the input AVPlaybackSpeed as the selected speed.
+ @discussion	Calls to selectSpeed with AVPlaybackSpeeds not contained within the speeds property array will be ignored.
+ */
+- (void)selectSpeed:(AVPlaybackSpeed *)speed API_AVAILABLE(ios(16.0));
+
 
 @end
 
@@ -221,6 +259,26 @@ API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos)
 	@abstract	Delegate can implement this method to restore the user interface before Picture in Picture stops.
  */
 - (void)playerViewController:(AVPlayerViewController *)playerViewController restoreUserInterfaceForPictureInPictureStopWithCompletionHandler:(void (^)(BOOL restored))completionHandler;
+
+/*!
+	@method		playerViewController:willPresentInterstitialTimeRange:
+	@param		playerViewController
+				The player view controller.
+	@param		interstitial
+				The interstitial time range.
+	@abstract	The delegate can implement this method to be notified when the player view controller is about to present interstitial content to the user.
+ */
+- (void)playerViewController:(AVPlayerViewController *)playerViewController willPresentInterstitialTimeRange:(AVInterstitialTimeRange *)interstitial API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macCatalyst);
+
+/*!
+	@method		playerViewController:didPresentInterstitialTimeRange:
+	@param		playerViewController
+				The player view controller.
+	@param		interstitial
+				The interstitial time range.
+	@abstract	The delegate can implement this method to be notified when the player view controller has finished presenting interstitial content.
+ */
+- (void)playerViewController:(AVPlayerViewController *)playerViewController didPresentInterstitialTimeRange:(AVInterstitialTimeRange *)interstitial API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macCatalyst);
 
 @end
 

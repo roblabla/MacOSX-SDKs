@@ -483,6 +483,15 @@ enum
 				If there is any sort of error that prevents the comparison from occurring, false will be returned, and
 				all bits in equalityMaskOut will be cleared. If you pass kCMAudioFormatDescriptionMask_All in equalityMask,
 				and NULL for equalityMaskOut, this API is equivalent to CFEqual(desc1, desc2).
+				
+				On releases up to macOS 12, iOS 15, tvOS 15 and watchOS 8, the kCMAudioFormatDescriptionMask_Extensions
+				flag was ignored in equalityMask. So this API always treated two audio format descriptions as equal even
+				when they had different extensions.
+ 
+				Starting with macOS 13, iOS 16, tvOS 16 and watchOS 9, kCMAudioFormatDescriptionMask_Extensions is correctly
+				accounted for when determining equality of two audio format descriptions. This also affects CFEqual(desc1, desc2)
+				as it will return false when two audio format descriptions have different extensions.
+ 
 	@result		The result of the comparison.  True if all parts in which the caller is interested are equal.
 				False if any of the parts in which the caller is interested are not equal.
 */
@@ -594,6 +603,9 @@ enum
 	@constant	kCMVideoCodecType_AppleProRes422Proxy	Apple ProRes 422 Proxy format
 	@constant	kCMVideoCodecType_AppleProResRAW	Apple ProRes RAW format
 	@constant	kCMVideoCodecType_AppleProResRAWHQ	Apple ProRes RAW HQ format
+	@constant	kCMVideoCodecType_DisparityHEVC		Encodes kCVPixelFormatType_DisparityFloat16 using 10-bit monochrome HEVC
+	@constant	kCMVideoCodecType_DepthHEVC 		Encodes kCVPixelFormatType_DepthFloat16 using 10-bit monochrome HEVC
+	@constant	kCMVideoCodecType_AV1 		 AV1 video format
 */
 typedef FourCharCode CMVideoCodecType API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
@@ -643,6 +655,8 @@ enum
 
 	kCMVideoCodecType_DisparityHEVC    = 'dish', // encodes kCVPixelFormatType_DisparityFloat16 in 10-bit monochrome HEVC
 	kCMVideoCodecType_DepthHEVC        = 'deph', // encodes kCVPixelFormatType_DepthFloat16 in 10-bit monochrome HEVC
+
+	kCMVideoCodecType_AV1              = 'av01',
 } API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, 2016, 2018, 2020, 2021 Apple Inc.
+ * Copyright (c) 2015, 2016, 2018, 2020-2022 Apple Inc.
  * All rights reserved.
  */
 
@@ -68,6 +68,14 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *	@discussion Audit token of the source application of the flow.
  */
 @property (readonly, nullable) NSData *sourceAppAuditToken API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+
+/*!
+ * @property sourceProcessAuditToken
+ * @discussion The audit token of the process that created the flow. In cases where the connection was created by a system process on behalf of the source application,
+ * sourceProcessAuditToken will be different from sourceAppAuditToken and will contain the audit token of the system process. In cases where the source application directly
+ * created the connection sourceAppAuditToken and sourceProcessAuditToken will be identical.
+ */
+@property (readonly, nullable) NSData *sourceProcessAuditToken API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property identifier

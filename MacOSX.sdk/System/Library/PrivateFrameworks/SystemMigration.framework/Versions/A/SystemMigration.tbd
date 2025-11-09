@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           12BC8A72-0F0E-38CC-AC49-3CFA99ABCF5F
+    value:           02A758AD-C82A-34AE-B049-E28A6D295458
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2DA301F8-1C13-311C-9FE9-D0EE50C07A16
+    value:           4021A922-89A7-36A6-BE29-C04813F1AAF7
 install-name:    '/System/Library/PrivateFrameworks/SystemMigration.framework/Versions/A/SystemMigration'
 current-version: 866
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CopyPrimaryNetworkInterfaceHardwareAddressString, _LaunchTaskSync, 
                        _LaunchTaskSyncWithDelay, _PerformFinalServerCleanup, _ReasonFlagsXATTR, 
                        _SMBackgroundClientAPIVersion, _SMCONF_MIG_SECTION_APPLICATIONS, 
@@ -21,12 +21,17 @@ exports:
                        _SMCleanupPreviousSystemAuthorizationRight, _SMCopyEngineFileCopierErrorDomain, 
                        _SMCopyEngineNodeCopierErrorDomain, _SMCopyEngineWindowsPathCopierErrorDomain, 
                        _SMEngineProgressPhaseNameFiles, _SMEngineProgressPhaseNameHomeDirectory, 
-                       _SMEngineProgressPhaseNameSystemConfig, _SMEngineProgressUpdateCompletedItemsKey, 
+                       _SMEngineProgressPhaseNamePathing, _SMEngineProgressPhaseNameSystemConfig, 
+                       _SMEngineProgressPhaseNameWindowsFiles, _SMEngineProgressPhaseNameWindowsImport, 
+                       _SMEngineProgressPhaseNameWindowsOtherComponents, _SMEngineProgressPhaseNameWindowsSystemComponents, 
+                       _SMEngineProgressPhaseNameWindowsUserComponents, _SMEngineProgressSubTextDescriptionKey, 
+                       _SMEngineProgressTextDescriptionKey, _SMEngineProgressUpdateCompletedItemsKey, 
                        _SMEngineProgressUpdateCompletedSizeKey, _SMEngineProgressUpdateCurrentPhaseKey, 
                        _SMEngineProgressUpdateItemRateKey, _SMEngineProgressUpdateLastUpdateTimeKey, 
                        _SMEngineProgressUpdateOverallCompletedItemsKey, _SMEngineProgressUpdateOverallCompletedSizeKey, 
                        _SMEngineProgressUpdateOverallProgressKey, _SMEngineProgressUpdateOverallTimeRemainingKey, 
                        _SMEngineProgressUpdateOverallTotalItemsKey, _SMEngineProgressUpdateOverallTotalSizeKey, 
+                       _SMEngineProgressUpdatePhaseDescriptionKey, _SMEngineProgressUpdatePhaseSubDescriptionKey, 
                        _SMEngineProgressUpdateSizeRateKey, _SMEngineProgressUpdateSmoothedItemRateKey, 
                        _SMEngineProgressUpdateSmoothedSizeRateKey, _SMEngineProgressUpdateStartTimeKey, 
                        _SMEngineProgressUpdateTotalItemsKey, _SMEngineProgressUpdateTotalSizeKey, 
@@ -51,18 +56,21 @@ exports:
                        _SMQuarantineBasePath, _SMREQUEST_DURATION_KEY, _SMREQUEST_PHASE_KEY, 
                        _SMREQUEST_RATE_KEY, _SMREQUEST_REPLACE_KEY, _SMREQUEST_REPLACE_NONCONFLICTINGNAME_KEY, 
                        _SMREQUEST_SIZE_KEY, _SMSandboxToolsErrorDomain, _SMSandboxToolsGenericErrorDescription, 
-                       _SMSandboxToolsShoveFailuresFileName, _SMSourceCutoffVersion, 
-                       _SMSourceServerCutoffVersion, _SMSystemArchiverErrorDomain, 
-                       _SMSystemArchiverPreviousContentPath, _SMSystemArchiverPreviousSystemPath, 
-                       _SMSystemArchiverRecoveredItemsPath, _SMUserConflictResolverErrorDomain, 
-                       _SMWindowsClientCutoffVersion, _SMWindowsPathContentAccessDateKey, 
-                       _SMWindowsPathContentModificationDateKey, _SMWindowsPathCreationDateKey, 
-                       _SMWindowsPathFullPathKey, _SMWindowsPathIsDirectoryKey, _SMWindowsPathSizeKey, 
+                       _SMSandboxToolsShoveFailuresFileName, _SMScanningAutoloader, 
+                       _SMScanningTimeCapsule, _SMSourceCutoffVersion, _SMSourceServerCutoffVersion, 
+                       _SMSystemArchiverErrorDomain, _SMSystemArchiverPreviousContentPath, 
+                       _SMSystemArchiverPreviousSystemPath, _SMSystemArchiverRecoveredItemsPath, 
+                       _SMUniqueSparseBundleMountPath, _SMUserConflictResolverErrorDomain, 
+                       _SMWindowsClientCutoffVersion, _SMWindowsMacPathMapperDomain, 
+                       _SMWindowsPathContentAccessDateKey, _SMWindowsPathContentModificationDateKey, 
+                       _SMWindowsPathCreationDateKey, _SMWindowsPathFullPathKey, 
+                       _SMWindowsPathIsDirectoryKey, _SMWindowsPathSizeKey, _SMWindowsWiFiProfileImportDomain, 
                        _SMWirelessSoftAPAttemptTimeout, _SM_REST_OF_DATA, _SystemMigrationVersionNumber, 
                        _SystemMigrationVersionString, _XMMigratedBookmarksDir, _XMSharedDiskDirectoryName, 
                        _XMURLPrefix, _XMUserAppSupportDir, _XMUserOldWindowsAppSupportDir ]
-    objc-classes:    [ DSMigrator, MigrationHelper_Client, MigrationToAnotherMacController, 
-                       SMArchiver, SMAttemptPeerToPeerStep, SMAuthenticatedMountWindowController, 
+    objc-classes:    [ DSMigrator, MMNDaemonAdditions, MacMigrationDaemonCoreAdditions, 
+                       MigrationHelper_Client, MigrationToAnotherMacController, SMArchiver, 
+                       SMAttemptPeerToPeerStep, SMAuthenticatedMountWindowController, 
                        SMBetaEnrollmentController, SMCapturingSysdiagnose, SMClientErrorTransformer, 
                        SMCollectIncompatibleApps, SMCommitDeferredSandboxElement, 
                        SMConfMigrator, SMConfMigratorPlugin, SMConfMigratorRule, 
@@ -94,24 +102,26 @@ exports:
                        SMMigrationIncompatibleApplicationsList, SMMigrationKernelManagementUtilityElement, 
                        SMMigrationProgressViewController, SMMigrationReport, SMMigrationRequest, 
                        SMMigrationShoveElement, SMMigrationStepElement, SMMigrationUpdateKextCacheElement, 
+                       SMNNetworkMac_DiscoveryPlugin, SMNTimeCapsule_DiscoveryPlugin, 
                        SMNameInConflictImageTransformer, SMNetworkDirectoryEnumerator, 
                        SMNetworkSourceProxy, SMODDBAccess, SMODDBEntry, SMPasscodeTransformer, 
                        SMPathGroups, SMPathWithAttributes, SMPaths, SMPathsAppDownloadScanner, 
                        SMPathsBundleScanner, SMPathsCache, SMPathsDirectoryClassifier, 
                        SMPathsUserHomeScanner, SMPathsUserHomeSizer, SMProgressConnectionsSheetCell, 
                        SMProgressConnectionsSheetViewController, SMProgressController, 
-                       SMProgressEntry, SMProgress_Client, SMQuarantineManager, SMReportNote, 
-                       SMRequestOriginatingApplicationTransformer, SMRequestStateTransformer, 
-                       SMRequestTypeTransformer, SMRestartController, SMSandboxTools, 
-                       SMSelectSnapshotItem, SMSelectSourceDetailDisplayNameTransformer, 
+                       SMProgressEntry, SMProgress_Client, SMQuarantineManager, SMRemoteSystemStateTransformer, 
+                       SMReportNote, SMRequestOriginatingApplicationTransformer, 
+                       SMRequestStateTransformer, SMRequestTypeTransformer, SMRestartController, 
+                       SMSandboxTools, SMSelectSnapshotItem, SMSelectSourceDetailDisplayNameTransformer, 
                        SMSelectSourceDetailDisplayStateTransformer, SMSelectSourceDetailImageTransformer, 
                        SMSelectSourceDetailTableCellView, SMSelectSourceDetailTableDelegate, 
                        SMSelectSourceViewController, SMSelectSourceViewItem, SMSelectSourceViewItemContainingView, 
                        SMShortNameFormatter, SMSizeFormatter, SMSizeTransformer, 
-                       SMSourceSelectionController, SMSummaryViewController, SMSystem, 
-                       SMSystemArchiver, SMSystemScanner, SMSystemScanner_Client, 
-                       SMSystemStateTransformer, SMSystemTypeTransformer, SMSystem_Client, 
-                       SMSystem_Client_ArchiveAndInstallBased, SMSystem_Client_Ineligible, 
+                       SMSourceSelectionController, SMSummaryNode, SMSummaryViewController, 
+                       SMSystem, SMSystemArchiver, SMSystemScanner, SMSystemScanner_Client, 
+                       SMSystemScanner_DiscoveryPlugin, SMSystemStateTransformer, 
+                       SMSystemTypeConstantsTransformer, SMSystemTypeTransformer, 
+                       SMSystem_Client, SMSystem_Client_ArchiveAndInstallBased, SMSystem_Client_Ineligible, 
                        SMSystem_Client_Network, SMSystem_Client_RemoteDiskShare, 
                        SMSystem_Client_RemoteTMDiskShare, SMSystem_Client_SKDiskBased, 
                        SMSystem_Client_TMSparseBundle, SMSystem_Client_TimeCapsule, 
@@ -131,8 +141,9 @@ exports:
                        SMWindowsMigrateOtherComponentsStep, SMWindowsMigrateSystemComponentsStep, 
                        SMWindowsMigrateUserAccountsStep, SMWindowsMigrateUserComponentsStep, 
                        SMWindowsMigrationRequest, SMWindowsNetworkSourceProxy, SMWindowsUser_Client, 
-                       SMWindowsUser_Daemon, SMWindowsUtilities, SMWirelessController, 
-                       SMXPCUtilities, SystemMigrationDaemon, TaskOutputLineEnumerator ]
+                       SMWindowsUser_Daemon, SMWindowsUtilities, SMWindowsWiFiProfile, 
+                       SMWirelessController, SMXPCUtilities, SystemMigrationDaemon, 
+                       TaskOutputLineEnumerator ]
     objc-ivars:      [ SMCopyEngineNetworkCopier.absoluteBaseSourcePath, SMCopyEngineNetworkCopier.absoluteDestinationBasePath, 
                        SMCopyEngineNetworkCopier.currentFileCompletedSize, SMCopyEngineNetworkCopier.lastSkippedFile, 
                        SMCopyEngineNetworkCopier.operationCompletedSize, SMDBEntry.dictionaryRepresentation, 

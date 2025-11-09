@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C3755EF1-FD7B-3F98-B6CD-6A083B77B49F
+    value:           18EA3B27-FF1D-3780-A83E-D78BAE43D32D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4A74627B-2EB1-3B68-A817-4DB3E0337CBD
+    value:           E8CB1F62-51F5-3610-BA91-8B360BEED388
 install-name:    '/System/Library/PrivateFrameworks/SocialServices.framework/Versions/A/SocialServices'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ SLGoogleAuthController ]
 ...

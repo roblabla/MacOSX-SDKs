@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F71DCF9F-3431-3141-A0E8-76D9871FC7FB
+    value:           B528049B-0467-3F4B-814B-BDF8120B7CCB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FDEA50B-1A23-30AD-B5C5-1FB27CA903A7
+    value:           255104D8-EDCA-3391-911C-FA92C72F750D
 install-name:    '/System/Library/PrivateFrameworks/MachineSettings.framework/Versions/A/MachineSettings'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DelayUntilRepeatKey, _DoubleClickThresholdTimeKey, _FNStateKey, 
                        _IgnoreTrackpadIfMousePresentKey, _KeyRepeatIntervalKey, _ModifierMappingKey, 
                        _MouseButtonClickBehaviorKey, _MouseScalingKey, _NSMouseButtonClickBehavior, 

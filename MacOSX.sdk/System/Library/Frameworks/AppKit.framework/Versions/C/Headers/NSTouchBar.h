@@ -129,7 +129,7 @@ API_AVAILABLE(ios(13.0))
 /*
     When constructing the items array, this delegate method will be invoked to construct an NSTouchBarItem if that item cannot be found in the `templateItems` set.
 */
-- (nullable NSTouchBarItem *)touchBar:(NSTouchBar *)touchBar makeItemForIdentifier:(NSTouchBarItemIdentifier)identifier;
+- (nullable NSTouchBarItem *)touchBar:(NSTouchBar *)touchBar makeItemForIdentifier:(NSTouchBarItemIdentifier)identifier NS_SWIFT_UI_ACTOR;
 @end
 
 /*
@@ -171,7 +171,7 @@ API_AVAILABLE(ios(13.0))
     The basic method for providing an NSTouchBar. AppKit will key value observe this property, if for some reason you wish to replace a live NSTouchBar wholesale.
     Note that many subclasses of NSResponder already implement this method and conform to this protocol.
 */
-@property (strong, readonly, nullable) NSTouchBar *touchBar API_AVAILABLE(macos(10.12.2));
+@property (strong, readonly, nullable) NSTouchBar *touchBar NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2));
 @end
 
 #if !TARGET_OS_IPHONE

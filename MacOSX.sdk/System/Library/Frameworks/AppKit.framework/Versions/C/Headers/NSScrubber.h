@@ -17,19 +17,19 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @protocol NSScrubberDataSource <NSObject>
 @required
-- (NSInteger)numberOfItemsForScrubber:(NSScrubber *)scrubber API_AVAILABLE(macos(10.12.2));
-- (__kindof NSScrubberItemView *)scrubber:(NSScrubber *)scrubber viewForItemAtIndex:(NSInteger)index API_AVAILABLE(macos(10.12.2));
+- (NSInteger)numberOfItemsForScrubber:(NSScrubber *)scrubber NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2));
+- (__kindof NSScrubberItemView *)scrubber:(NSScrubber *)scrubber viewForItemAtIndex:(NSInteger)index NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2));
 @end
 
 @protocol NSScrubberDelegate <NSObject>
 @optional
-- (void)scrubber:(NSScrubber *)scrubber didSelectItemAtIndex:(NSInteger)selectedIndex API_AVAILABLE(macos(10.12.2));
-- (void)scrubber:(NSScrubber *)scrubber didHighlightItemAtIndex:(NSInteger)highlightedIndex API_AVAILABLE(macos(10.12.2));
-- (void)scrubber:(NSScrubber *)scrubber didChangeVisibleRange:(NSRange)visibleRange API_AVAILABLE(macos(10.12.2));
+- (void)scrubber:(NSScrubber *)scrubber didSelectItemAtIndex:(NSInteger)selectedIndex NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2));
+- (void)scrubber:(NSScrubber *)scrubber didHighlightItemAtIndex:(NSInteger)highlightedIndex NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2));
+- (void)scrubber:(NSScrubber *)scrubber didChangeVisibleRange:(NSRange)visibleRange NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2));
 
-- (void)didBeginInteractingWithScrubber:(NSScrubber *)scrubber API_AVAILABLE(macos(10.12.2));
-- (void)didFinishInteractingWithScrubber:(NSScrubber *)scrubber API_AVAILABLE(macos(10.12.2));
-- (void)didCancelInteractingWithScrubber:(NSScrubber *)scrubber API_AVAILABLE(macos(10.12.2));
+- (void)didBeginInteractingWithScrubber:(NSScrubber *)scrubber NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2));
+- (void)didFinishInteractingWithScrubber:(NSScrubber *)scrubber NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2));
+- (void)didCancelInteractingWithScrubber:(NSScrubber *)scrubber NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2));
 @end
 
 #pragma mark - Associated Types

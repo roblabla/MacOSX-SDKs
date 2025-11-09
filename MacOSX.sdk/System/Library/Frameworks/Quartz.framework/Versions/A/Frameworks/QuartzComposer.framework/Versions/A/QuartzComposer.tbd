@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FE5E0A2A-0FAF-3449-A7C3-FED0EED3F656
+    value:           A3F5EE69-0568-3379-9A33-3AF4993EEA25
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E90D2CE8-3624-3ED5-BDC9-75308A6E9CF1
+    value:           75A6E2B7-9EBD-3E64-A6B8-C5A81ABC6CA3
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzComposer.framework/Versions/A/QuartzComposer'
 current-version: 168
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _GFArrayFromArgumentList, _GFBacktrace, _GFDebug, _GFDebuggingLevel, 
                        _GFException, _GFFilterStringsWithKeywords, _GFGetDebugMessageCallback, 
                        _GFGetLogMessageCallback, _GFKeywordsFromSearchString, _GFLog, 
@@ -138,7 +138,7 @@ exports:
                        QCArray._array, QCArray._count, QCArray._elementSize, QCContext._iterationManager, 
                        QCParameterInfo.size, QCParameterInfo.type, QCPatch._renderingInfo, 
                        QCPatchRenderingInfo._context, QCPatchRenderingInfo.flags ]
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ _C3DAddBaseType, _C3DAnimationChannelCreate, _C3DAnimationChannelCreateCopy, 
                        _C3DAnimationChannelGetAnimation, _C3DAnimationChannelGetSID, 
                        _C3DAnimationChannelGetTarget, _C3DAnimationChannelGetTargetPath, 

@@ -1,17 +1,18 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftSceneKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name SceneKit
-// swift-module-flags-ignorable: -user-module-version 1.2
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-macos13.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftSceneKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name SceneKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1.2
 import CoreGraphics
 import Foundation
 @_exported import SceneKit
 import Swift
 import _Concurrency
+import _StringProcessing
 import simd
-public typealias SCNFloat = CoreGraphics.CGFloat
+public typealias SCNFloat = CoreFoundation.CGFloat
 extension SceneKit.SCNVector3 {
   public init(_ x: Swift.Float, _ y: Swift.Float, _ z: Swift.Float)
-  public init(_ x: CoreGraphics.CGFloat, _ y: CoreGraphics.CGFloat, _ z: CoreGraphics.CGFloat)
+  public init(_ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat, _ z: CoreFoundation.CGFloat)
   public init(_ x: Swift.Double, _ y: Swift.Double, _ z: Swift.Double)
   public init(_ x: Swift.Int, _ y: Swift.Int, _ z: Swift.Int)
   public init(_ v: Swift.SIMD3<Swift.Float>)
@@ -25,7 +26,7 @@ extension Swift.SIMD3 where Scalar == Swift.Double {
 }
 extension SceneKit.SCNVector4 {
   public init(_ x: Swift.Float, _ y: Swift.Float, _ z: Swift.Float, _ w: Swift.Float)
-  public init(_ x: CoreGraphics.CGFloat, _ y: CoreGraphics.CGFloat, _ z: CoreGraphics.CGFloat, _ w: CoreGraphics.CGFloat)
+  public init(_ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat, _ z: CoreFoundation.CGFloat, _ w: CoreFoundation.CGFloat)
   public init(_ x: Swift.Double, _ y: Swift.Double, _ z: Swift.Double, _ w: Swift.Double)
   public init(_ x: Swift.Int, _ y: Swift.Int, _ z: Swift.Int, _ w: Swift.Int)
   public init(_ v: Swift.SIMD4<Swift.Float>)
@@ -55,7 +56,7 @@ extension SceneKit.SCNGeometryElement {
 extension SceneKit.SCNGeometrySource {
   @nonobjc convenience public init(vertices: [SceneKit.SCNVector3])
   @nonobjc convenience public init(normals: [SceneKit.SCNVector3])
-  @nonobjc convenience public init(textureCoordinates: [CoreGraphics.CGPoint])
+  @nonobjc convenience public init(textureCoordinates: [CoreFoundation.CGPoint])
 }
 @available(iOS 8.0, macOS 10.10, *)
 extension SceneKit.SCNBoundingVolume {

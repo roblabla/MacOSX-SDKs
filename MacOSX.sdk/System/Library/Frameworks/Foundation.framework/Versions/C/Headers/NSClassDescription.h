@@ -8,7 +8,7 @@
 
 @class NSString, NSArray<ObjectType>, NSDictionary;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @interface NSClassDescription : NSObject
 
@@ -33,6 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-FOUNDATION_EXPORT NSNotificationName NSClassDescriptionNeededForClassNotification;
+FOUNDATION_EXPORT NSNotificationName const NSClassDescriptionNeededForClassNotification;
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

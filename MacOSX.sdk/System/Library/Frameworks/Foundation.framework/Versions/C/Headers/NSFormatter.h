@@ -10,7 +10,7 @@
 @class NSAttributedString;
 @class NSDictionary<KeyType, ObjectType>;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, NSFormattingContext) {
     
@@ -62,4 +62,4 @@ typedef NS_ENUM(NSInteger, NSFormattingUnitStyle) {
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

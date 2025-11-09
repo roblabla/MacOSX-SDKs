@@ -118,6 +118,8 @@ typedef NS_OPTIONS(NSUInteger, MTLRenderStages)
     MTLRenderStageVertex   = (1UL << 0),
     MTLRenderStageFragment = (1UL << 1),
     MTLRenderStageTile API_AVAILABLE(macos(12.0), ios(15.0)) = (1UL << 2),
+    MTLRenderStageObject API_AVAILABLE(macos(13.0), ios(16.0))  = (1UL << 3),
+    MTLRenderStageMesh API_AVAILABLE(macos(13.0), ios(16.0))  = (1UL << 4),
 } API_AVAILABLE(macos(10.13), ios(10.0));
 
 /*!
@@ -218,7 +220,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @method setVertexIntersectionFunctionTables:withBufferRange:
  @brief Set an array of global intersection function tables for all vertex shaders with the given buffer bind point range.
  */
-- (void)setVertexIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTable withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setVertexIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
 
 /*!
  @method setVertexAccelerationStructure:atBufferIndex:
@@ -375,7 +377,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @method setFragmentIntersectionFunctionTables:withBufferRange:
  @brief Set an array of global intersection function tables for all fragment shaders with the given buffer bind point range.
  */
-- (void)setFragmentIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTable withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setFragmentIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
 
 /*!
  @method setFragmentAccelerationStructure:atBufferIndex:
@@ -461,6 +463,183 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  setStencilStoreActionOptions: may be used to finalize the store action options before endEncoding is called.
  */
 - (void)setStencilStoreActionOptions:(MTLStoreActionOptions)storeActionOptions API_AVAILABLE(macos(10.13), ios(11.0));
+
+/* Object Resources */
+
+/*!
+ @method setObjectBytes:length:atIndex:
+ @brief Set the data (by copy) for a given object shader buffer binding point.  This will remove any existing MTLBuffer from the binding point.
+ */
+- (void)setObjectBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setObjectBuffer:offset:atIndex:
+ @brief Set a global buffer for all object shaders at the given bind point index.
+ */
+- (void)setObjectBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setObjectBufferOffset:atIndex:
+ @brief Set the offset within the current global buffer for all object shaders at the given bind point index.
+ */
+- (void)setObjectBufferOffset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setObjectBuffers:offsets:withRange:
+ @brief Set an array of global buffers for all object shaders with the given bind point range.
+ */
+- (void)setObjectBuffers:(const id <MTLBuffer> __nullable [__nonnull])buffers offsets:(const NSUInteger [__nonnull])offsets withRange:(NSRange)range API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setObjectTexture:atIndex:
+ @brief Set a global texture for all object shaders at the given bind point index.
+ */
+- (void)setObjectTexture:(nullable id <MTLTexture>)texture atIndex:(NSUInteger)index API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setObjectTextures:withRange:
+ @brief Set an array of global textures for all object shaders with the given bind point range.
+ */
+- (void)setObjectTextures:(const id <MTLTexture> __nullable [__nonnull])textures withRange:(NSRange)range API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setObjectSamplerState:atIndex:
+ @brief Set a global sampler for all object shaders at the given bind point index.
+ */
+- (void)setObjectSamplerState:(nullable id <MTLSamplerState>)sampler atIndex:(NSUInteger)index
+API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setObjectSamplerStates:withRange:
+ @brief Set an array of global samplers for all object shaders with the given bind point range.
+ */
+- (void)setObjectSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers withRange:(NSRange)range API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setObjectSamplerState:lodMinClamp:lodMaxClamp:atIndex:
+ @brief Set a global sampler for all object shaders at the given bind point index.
+ */
+- (void)setObjectSamplerState:(nullable id <MTLSamplerState>)sampler lodMinClamp:(float)lodMinClamp lodMaxClamp:(float)lodMaxClamp atIndex:(NSUInteger)index API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setObjectSamplerStates:lodMinClamps:lodMaxClamps:withRange:
+ @brief Set an array of global samplers for all object shaders with the given bind point range.
+ */
+- (void)setObjectSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers lodMinClamps:(const float [__nonnull])lodMinClamps lodMaxClamps:(const float [__nonnull])lodMaxClamps withRange:(NSRange)range API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setObjectThreadgroupMemoryLength:atIndex:
+ @brief Set the threadgroup memory byte length at the binding point specified by the index for all object shaders.
+ */
+- (void)setObjectThreadgroupMemoryLength:(NSUInteger)length atIndex:(NSUInteger)index API_AVAILABLE(macos(13.0), ios(16.0));
+
+/* Mesh Resources */
+
+/*!
+ @method setMeshBytes:length:atIndex:
+ @brief Set the data (by copy) for a given mesh shader buffer binding point.  This will remove any existing MTLBuffer from the binding point.
+ */
+- (void)setMeshBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setMeshBuffer:offset:atIndex:
+ @brief Set a global buffer for all mesh shaders at the given bind point index.
+ */
+- (void)setMeshBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setMeshBufferOffset:atIndex:
+ @brief Set the offset within the current global buffer for all mesh shaders at the given bind point index.
+ */
+- (void)setMeshBufferOffset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setMeshBuffers:offsets:withRange:
+ @brief Set an array of global buffers for all mesh shaders with the given bind point range.
+ */
+- (void)setMeshBuffers:(const id <MTLBuffer> __nullable [__nonnull])buffers offsets:(const NSUInteger [__nonnull])offsets withRange:(NSRange)range API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setMeshTexture:atIndex:
+ @brief Set a global texture for all mesh shaders at the given bind point index.
+ */
+- (void)setMeshTexture:(nullable id <MTLTexture>)texture atIndex:(NSUInteger)index API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setMeshTextures:withRange:
+ @brief Set an array of global textures for all mesh shaders with the given bind point range.
+ */
+- (void)setMeshTextures:(const id <MTLTexture> __nullable [__nonnull])textures withRange:(NSRange)range API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setMeshSamplerState:atIndex:
+ @brief Set a global sampler for all mesh shaders at the given bind point index.
+ */
+- (void)setMeshSamplerState:(nullable id <MTLSamplerState>)sampler atIndex:(NSUInteger)index
+API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setMeshSamplerStates:withRange:
+ @brief Set an array of global samplers for all mesh shaders with the given bind point range.
+ */
+- (void)setMeshSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers withRange:(NSRange)range API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setMeshSamplerState:lodMinClamp:lodMaxClamp:atIndex:
+ @brief Set a global sampler for all mesh shaders at the given bind point index.
+ */
+- (void)setMeshSamplerState:(nullable id <MTLSamplerState>)sampler lodMinClamp:(float)lodMinClamp lodMaxClamp:(float)lodMaxClamp atIndex:(NSUInteger)index API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method setMeshSamplerStates:lodMinClamps:lodMaxClamps:withRange:
+ @brief Set an array of global samplers for all mesh shaders with the given bind point range.
+ */
+- (void)setMeshSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers lodMinClamps:(const float [__nonnull])lodMinClamps lodMaxClamps:(const float [__nonnull])lodMaxClamps withRange:(NSRange)range API_AVAILABLE(macos(13.0), ios(16.0));
+
+/* Drawing computed geometry using object / mesh shaders */
+
+/*!
+ @method drawMeshThreadgroups:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:
+ @abstract Enqueue a grid of object (if present) or mesh shader threadgroups.
+ @discussion The dimensions of the threadgroups and the grid are specified directly.
+ @param threadgroupsPerGrid The number of threadgroups in the object (if present) or mesh shader grid.
+ @param threadsPerObjectThreadgroup The number of threads in one object shader threadgroup. Ignored if object shader is not present.
+ @param threadsPerMeshThreadgroup The number of threads in one mesh shader threadgroup.
+*/
+- (void)drawMeshThreadgroups:(MTLSize)threadgroupsPerGrid
+ threadsPerObjectThreadgroup:(MTLSize)threadsPerObjectThreadgroup
+   threadsPerMeshThreadgroup:(MTLSize)threadsPerMeshThreadgroup
+API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method drawMeshThreads:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:
+ @abstract Enqueue a grid of object (if present) of mesh shader threadgroups.
+ @discussion The dimensions of the threadgroups and the grid are specified directly.
+ The dimensions of threadsPerGrid does not have to be a multiple of threadsPerThreadgroup for object shaders.
+ For mesh shaders, threadsPerGrid is rounded down to the neareset multiple of threadsPerMeshThreadgroup (in each dimension).
+ @param threadsPerGrid The number of threads in the object (if present) or mesh shader grid
+ @param threadsPerObjectThreadgroup The number of threads in one object shader threadgroup. Ignored if object shader is not present.
+ @param threadsPerMeshThreadgroup The number of threads in one mesh shader threadgroup.
+*/
+- (void)     drawMeshThreads:(MTLSize)threadsPerGrid
+ threadsPerObjectThreadgroup:(MTLSize)threadsPerObjectThreadgroup
+   threadsPerMeshThreadgroup:(MTLSize)threadsPerMeshThreadgroup
+API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method drawMeshThreadgroupsWithIndirectBuffer:indirectBufferOffset:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:
+ @abstract Enqueue a grid of object (if present) or mesh shader threadgroups.
+ @discussion The dimensions of the threadgroups are specified directly, the dimensions of the grid, in threadgroups, are read from a buffer by the GPU.
+ @param indirectBuffer A buffer object that the device will read the grid size from, see MTLDispatchThreadgroupsIndirectArguments.
+ @param indirectBufferOffset Byte offset within @a indirectBuffer to read arguments from.  @a indirectBufferOffset must be a multiple of 4.
+ @param threadsPerObjectThreadgroup The number of threads in one object shader threadgroup. Ignored if object shader is not present.
+ @param threadsPerMeshThreadgroup The number of threads in one mesh shader threadgroup.
+*/
+- (void)drawMeshThreadgroupsWithIndirectBuffer:(id<MTLBuffer>)indirectBuffer
+                          indirectBufferOffset:(NSUInteger)indirectBufferOffset
+                   threadsPerObjectThreadgroup:(MTLSize)threadsPerObjectThreadgroup
+                     threadsPerMeshThreadgroup:(MTLSize)threadsPerMeshThreadgroup
+API_AVAILABLE(macos(13.0), ios(16.0));
 
 /* Drawing */
 
@@ -685,7 +864,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @method setTileIntersectionFunctionTables:withBufferRange:
  @brief Set an array of global intersection function tables for all tile shaders with the given buffer bind point range.
  */
-- (void)setTileIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTable withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setTileIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
 
 /*!
  @method setTileAccelerationStructure:atBufferIndex:
@@ -714,7 +893,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
      Note that calling useResource does not retain the resource. It is the responsiblity of the user to retain the resource until
      the command buffer has been executed.
  */
-- (void)useResource:(id <MTLResource>)resource usage:(MTLResourceUsage)usage API_AVAILABLE(macos(10.13), ios(11.0));
+- (void)useResource:(id <MTLResource>)resource usage:(MTLResourceUsage)usage API_DEPRECATED_WITH_REPLACEMENT("Use useResource:usage:stages: instead", macos(10.13, 13.0), ios(11.0, 16.0));
 
 /*!
  * @method useResources:count:usage:
@@ -724,12 +903,12 @@ API_AVAILABLE(macos(10.11), ios(8.0))
    Note that calling useResources does not retain the resources. It is the responsiblity of the user to retain the resources until
    the command buffer has been executed.
 */
-- (void)useResources:(const id <MTLResource> __nonnull[__nonnull])resources count:(NSUInteger)count usage:(MTLResourceUsage)usage API_AVAILABLE(macos(10.13), ios(11.0));
+- (void)useResources:(const id <MTLResource> __nonnull[__nonnull])resources count:(NSUInteger)count usage:(MTLResourceUsage)usage API_DEPRECATED_WITH_REPLACEMENT("Use useResources:count:usage:stages: instead", macos(10.13, 13.0), ios(11.0, 16.0));
 
 /*!
  * @method useResources:usage:stage
  * @abstract Declare that a resource may be accessed by the render pass through an argument buffer
- * @For hazard tracked resources, this method protects against data hazards. This method must be called before encoding any draw commands which may access the resource through an argument buffer. However, this method may cause color attachments to become decompressed. Therefore, this method should be called until as late as possible within a render command encoder. Declaring a minimal usage (i.e. read-only) may prevent color attachments from becoming decompressed on some devices.
+ * @discussion For hazard tracked resources, this method protects against data hazards. This method must be called before encoding any draw commands which may access the resource through an argument buffer. However, this method may cause color attachments to become decompressed. Therefore, this method should be called until as late as possible within a render command encoder. Declaring a minimal usage (i.e. read-only) may prevent color attachments from becoming decompressed on some devices.
  
     Note that calling useResource does not retain the resource. It is the responsiblity of the user to retain the resource until
     the command buffer has been executed.
@@ -751,24 +930,24 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  * @abstract Declare that the resources allocated from a heap may be accessed by the render pass through an argument buffer
  * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any draw commands which may access the resources allocated from the heap through an argument buffer. This method may cause all of the color attachments allocated from the heap to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
  */
-- (void)useHeap:(id <MTLHeap>)heap API_AVAILABLE(macos(10.13), ios(11.0));
+- (void)useHeap:(id <MTLHeap>)heap API_DEPRECATED_WITH_REPLACEMENT("Use useHeap:stages: instead", macos(10.13, 13.0), ios(11.0, 16.0));
 
 /*!
  * @method useHeaps:count:
  * @abstract Declare that the resources allocated from an array of heaps may be accessed by the render pass through an argument buffer
  * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any draw commands which may access the resources allocated from the heaps through an argument buffer. This method may cause all of the color attachments allocated from the heaps to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
  */
-- (void)useHeaps:(const id <MTLHeap> __nonnull[__nonnull])heaps count:(NSUInteger)count API_AVAILABLE(macos(10.13), ios(11.0));
+- (void)useHeaps:(const id <MTLHeap> __nonnull[__nonnull])heaps count:(NSUInteger)count API_DEPRECATED_WITH_REPLACEMENT("Use useHeaps:count:stages: instead", macos(10.13, 13.0), ios(11.0, 16.0));
 
 /*!
- * @method useHeap:stages
+ * @method useHeap:stages:
  * @abstract Declare that the resources allocated from a heap may be accessed by the render pass through an argument buffer
  * @discussion If the heap is tracked, this method protects against hazard tracking; these hazards must be addressed using an MTLFence. This method must be called before encoding any draw commands which may access the resources allocated from the heap through an argument buffer. This method may cause all of the color attachments allocated from the heap to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
  */
 - (void)useHeap:(id <MTLHeap>)heap stages:(MTLRenderStages)stages API_AVAILABLE(macos(10.15), ios(13.0));
 
 /*!
- * @method useHeaps:count:stages
+ * @method useHeaps:count:stages:
  * @abstract Declare that the resources allocated from an array of heaps may be accessed by the render pass through an argument buffer
  * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any draw commands which may access the resources allocated from the heaps through an argument buffer. This method may cause all of the color attachments allocated from the heaps to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
  */
@@ -797,14 +976,14 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  * @abstract Make stores to memory encoded before the barrier coherent with loads from memory encoded after the barrier.
  * @discussion The barrier makes stores coherent that 1) are to a resource with a type in the given scope, and 2) happen at (or before) the stage given by afterStages. Only affects loads that happen at (or after) the stage given by beforeStages.
  */
--(void)memoryBarrierWithScope:(MTLBarrierScope)scope afterStages:(MTLRenderStages)after beforeStages:(MTLRenderStages)before API_AVAILABLE(macos(10.14), macCatalyst(13.0)) API_UNAVAILABLE(ios);
+-(void)memoryBarrierWithScope:(MTLBarrierScope)scope afterStages:(MTLRenderStages)after beforeStages:(MTLRenderStages)before API_AVAILABLE(macos(10.14), macCatalyst(13.0), ios(16.0));
 
 /*!
  * @method memoryBarrierWithResources:count:afterStages:beforeStages:
  * @abstract Make stores to memory encoded before the barrier coherent with loads from memory encoded after the barrier.
  * @discussion The barrier makes stores coherent that 1) are to resources in given array, and 2) happen at (or before) the stage given by afterStages. Only affects loads that happen at (or after) the stage give by beforeStages.
  */
--(void)memoryBarrierWithResources:(const id<MTLResource> __nonnull[__nonnull])resources count:(NSUInteger)count afterStages:(MTLRenderStages)after beforeStages:(MTLRenderStages)before API_AVAILABLE(macos(10.14), macCatalyst(13.0)) API_UNAVAILABLE(ios);
+-(void)memoryBarrierWithResources:(const id<MTLResource> __nonnull[__nonnull])resources count:(NSUInteger)count afterStages:(MTLRenderStages)after beforeStages:(MTLRenderStages)before API_AVAILABLE(macos(10.14), macCatalyst(13.0), ios(16.0));
 
 
 

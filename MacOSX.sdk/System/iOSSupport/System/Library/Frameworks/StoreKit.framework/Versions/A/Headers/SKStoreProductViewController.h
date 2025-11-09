@@ -17,6 +17,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol SKStoreProductViewControllerDelegate;
+@class SKAdImpression;
 
 /* View controller to display iTunes Store product information */
 #if TARGET_OS_OSX
@@ -28,9 +29,14 @@ SK_EXTERN_CLASS API_AVAILABLE(ios(6.0), macCatalyst(13.0), macos(11.0)) __TVOS_P
 // Delegate for product page events
 @property(nonatomic, weak, nullable) id <SKStoreProductViewControllerDelegate> delegate API_AVAILABLE(ios(6.0), macCatalyst(13.0), macos(11.0)) __TVOS_PROHIBITED;
 
-// Load product view for the product with the given parameters.  See below for parameters (SKStoreProductParameter*).
+// Load product view for the product with the given parameters. See below for parameters (SKStoreProductParameter*).
 // Block is invoked when the load finishes.
 - (void)loadProductWithParameters:(NSDictionary<NSString *, id> *)parameters completionBlock:(nullable void(^)(BOOL result, NSError * __nullable error))block API_AVAILABLE(ios(6.0), macCatalyst(13.0), macos(11.0)) __TVOS_PROHIBITED;
+
+// Load product view for the product with the given parameters and impression.
+// See below for parameters (SKStoreProductParameter*) and SKAdImpression for impression properties.
+// Block is invoked when the load finishes.
+- (void)loadProductWithParameters:(NSDictionary<NSString *, id> *)parameters impression:(SKAdImpression *)impression completionBlock:(nullable void(^)(BOOL result, NSError * __nullable error))block API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos,watchos) __TVOS_PROHIBITED;
 
 @end
 

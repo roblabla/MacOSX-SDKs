@@ -9,8 +9,23 @@
 #import <AppKit/AppKit.h>
 #import <ScreenCaptureKit/SCShareableContent.h>
 #import <CoreMedia/CMSampleBuffer.h>
+#import <CoreMedia/CMSync.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+/*!
+ @typedef SCStreamOutputType
+ @constant SCStreamOutputTypeScreen screen sample output type.
+ @discussion
+    SCStreamOutputTypeScreen is a screen capture sample buffer. This sample buffer that is wrapping a CMSampleBuffer that is backed by an IOSurface. The width and height of the sample buffer is what is defined in the SCStreamConfiguration for width and height. The sample buffer will be called back on the provided queue when adding a SCStreamOutput. The pixel format of the sample buffer will be what is defined in the SCStreamConfiguration. In the case of multiple window capture, the width and height will be that of the display passed in for the filter. The background color of multiwindow sample buffers will be default black and can be set through the SCStreamConfiguration.
+ @constant SCStreamOutputTypeAudio audio sample output type.
+ @discussion
+ SCStreamOutputTypeAudio is a audio capture sample buffer. This sample buffer that is wrapping a audio buffer list. The format of the audio buffer is based on sampleRate and channelCount set in SCStreamConfiguration.
+*/
+typedef NS_ENUM(NSInteger, SCStreamOutputType) {
+    SCStreamOutputTypeScreen,
+    SCStreamOutputTypeAudio API_AVAILABLE(macos(13.0))
+};
 
 /*!
  @typedef SCFrameStatus
@@ -31,15 +46,6 @@ typedef NS_ENUM(NSInteger, SCFrameStatus) {
     SCFrameStatusStopped
 };
 
-/*!
- @typedef SCStreamOutputType
- @constant SCStreamOutputTypeScreen screen sample output type.
- @discussion
-    SCStreamOutputTypeScreen is a screen capture sample buffer. This sample buffer that is wrapping a CVPixelBuffer that is backed by an IOSurface. The width and height of the sample buffer is what is definied in the SCStreamConfiguration for width and height. The sample buffer will be called back on the provided queue when adding a SCStreamOutput. The pixel format of the sample buffer will be what is defined in the SCStreamConfiguration. In the case of mulitiple window capture, the width and height will be that of the display passed in for the filter. The background color of multiwindow sample buffers will be default black and can be set through the SCStreamConfiguration.
-*/
-typedef NS_ENUM(NSInteger, SCStreamOutputType) {
-    SCStreamOutputTypeScreen
-};
 
 /*!
  @abstract SCContentFilter
@@ -97,17 +103,17 @@ API_AVAILABLE(macos(12.3))
 API_AVAILABLE(macos(12.3))
 @interface SCStreamConfiguration : NSObject
 /*!
- @abstract SCStreamProperty for output width as measured as points
+ @abstract SCStreamProperty for output width as measured in pixels. Default is set to 1920.
  */
 @property(nonatomic, assign) size_t width;
 
 /*!
- @abstract SCStreamProperty for output height as measured as points
+ @abstract SCStreamProperty for output height as measured in pixels. Default is set to 1080.
  */
 @property(nonatomic, assign) size_t height;
 
 /*!
- @abstract SCStreamProperty that specifies the desired minimum time in seconds between frame updates, allowing you to throttle the rate at which updates are received. 
+ @abstract SCStreamProperty that specifies the desired minimum time in seconds between frame updates, allowing you to throttle the rate at which updates are received. The default value is 0, meaning that updates are not throttled.
  */
 @property(nonatomic, assign) CMTime minimumFrameInterval;
 
@@ -142,7 +148,7 @@ API_AVAILABLE(macos(12.3))
 @property(nonatomic, assign) CGRect sourceRect;
 
 /*!
- @abstract SCStreamProperty that specifies that the display stream outputs the frame data into a subset of the output IOSurface object.  If not set then the entire output surface is used. The rectangle is specified in points in the surface’s coordinate system. Not used for independent window capture
+ @abstract SCStreamProperty that specifies that the display stream outputs the frame data into a subset of the output IOSurface object.  If not set then the entire output surface is used. The rectangle is specified in pixels in the surface’s coordinate system. Not used for independent window capture
  */
 @property(nonatomic, assign) CGRect destinationRect;
 
@@ -161,10 +167,27 @@ API_AVAILABLE(macos(12.3))
  https://developer.apple.com/documentation/coregraphics/cgcolorspace/color_space_names.
  */
 @property(nonatomic, assign) CFStringRef colorSpaceName;
+
 /*!
- @abstract Creates an SCStreamConfiguration with default values for all properties.
+ @abstract SCStreamProperty that specifies whether the audio will be captured.  By default audio is not captured.
  */
-- (instancetype)init;
+@property(nonatomic, assign) BOOL capturesAudio API_AVAILABLE(macos(13.0));
+
+/*!
+ @abstract SCStreamProperty to specify the sample rate for audio. Default is set to 48000.
+ */
+@property(nonatomic, assign) NSInteger sampleRate API_AVAILABLE(macos(13.0));
+
+/*!
+ @abstract SCStreamProperty to specify channel count. Default is set to two.
+ */
+@property(nonatomic, assign) NSInteger channelCount API_AVAILABLE(macos(13.0));
+
+/*!
+ @abstract SCAudioProperty whether to exclude audio from current process. Default is set to NO.
+ */
+@property(nonatomic, assign) BOOL excludesCurrentProcessAudio API_AVAILABLE(macos(13.0));
+
 @end
 
 /*!
@@ -208,13 +231,19 @@ extern SCStreamFrameInfo const SCStreamFrameInfoContentRect API_AVAILABLE(macos(
 
 /*!
  @key SCStreamFrameInfoDirtyRects
- @abstract The key for the CFDictionary attached to the CMSampleBuffer for an array of rectangles that is the union of both rectangles that were redrawn and rectangles that were moved. This is an array of CGRect in NSValue.
+ @abstract The key for the CFDictionary attached to the CMSampleBuffer for an array of rectangles that is the union of both rectangles that were redrawn and rectangles that were moved. This is an array of CGRect in NSValue. The CGRects elements are specified in pixels.
  */
 extern SCStreamFrameInfo const SCStreamFrameInfoDirtyRects API_AVAILABLE(macos(12.3));
 
 @protocol SCStreamOutput;
 API_AVAILABLE(macos(12.3))
 @interface SCStream : NSObject
+
+/*!
+ @abstract Synchronization clock used for media capture.
+ */
+@property(nonatomic, readonly, nullable) CMClockRef synchronizationClock API_AVAILABLE(macos(13.0));
+
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 /*!
@@ -228,17 +257,17 @@ API_AVAILABLE(macos(12.3))
 
 /*!
  @abstract addStreamOutput:type:sampleHandlerQueue:error:
- @param output an object that adheres to the SCStreamOutput protocol that will recieved the frames and call its delegte frame call back on its sample handler queue
+ @param output an object that adheres to the SCStreamOutput protocol that will receive the frames and call its delegate frame call back on its sample handler queue
  @param type the SCStreamOutput type
  @param sampleHandlerQueue the return queue for the sample handler
  @param error the error pertaining to the add stream output
- @discussion An SCStreamOutput protocol object instance can only be added to a session using -addStreamOutput: Returns a BOOL denoting if the remove was successful
+ @discussion An SCStreamOutput protocol object instance can only be added to a session using -addStreamOutput: Returns a BOOL denoting if the add was successful
 */
 - (BOOL)addStreamOutput:(id<SCStreamOutput>)output type:(SCStreamOutputType)type sampleHandlerQueue:(dispatch_queue_t _Nullable)sampleHandlerQueue error:(NSError **)error NS_SWIFT_ASYNC_NAME (addStreamOutput(_:type:sampleHandlerQueue:)) NS_SWIFT_NAME (addStreamOutput(_:type:sampleHandlerQueue:));
 
 /*!
  @abstract removeStreamOutput:type:error:
- @param output an object that adheres to the SCStreamOutput protocol that will recieved the frames and call its delegte frame call back on its sample handler queue
+ @param output an object that adheres to the SCStreamOutput protocol that will received the frames and call its delegate frame call back on its sample handler queue
  @param type the SCStreamOutput type
  @param error the error pertaining to the removing stream output
  @discussion An SCStreamOutput protocol object instance can only be removed to a session using -addStreamOutput: Returns a BOOL denoting if the remove was successful
@@ -263,14 +292,14 @@ API_AVAILABLE(macos(12.3))
 - (void)updateConfiguration:(SCStreamConfiguration *)streamConfig completionHandler:(nullable void (^)(NSError *_Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(updateConfiguration(_:)) NS_SWIFT_NAME(updateConfiguration(_:completionHandler:));
 
 /*!
- @abstract startCaptureWithFrameHandler:completionHandler:
+ @abstract startCaptureWithCompletionHandler:
  @param completionHandler the handler to be called when the function completes
  @discussion this method starts the content stream. The handler will be called when the content stream start has completed with an error denoting if the start has failed.
 */
 - (void)startCaptureWithCompletionHandler:(nullable void (^)(NSError *_Nullable error))completionHandler;
 
 /*!
- @abstract stopWithCompletionHandler:
+ @abstract stopCaptureWithCompletionHandler:
  @param completionHandler the handler to be called when the function completes
  @discussion this method stops the content stream. The handler will be called when the content stream stop has completed with an error denoting if the stop has failed.
 */

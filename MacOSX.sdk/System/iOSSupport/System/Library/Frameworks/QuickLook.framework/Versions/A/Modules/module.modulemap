@@ -3,4 +3,6 @@ framework module QuickLook {
 
      export *
      module * { export * }
+     
+     config_macros USE_PUBLIC_QUICKLOOK_HEADERS
 }

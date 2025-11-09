@@ -9,7 +9,7 @@
 #import <UIKit/UIPresentationController.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UISheetPresentationController;
 
@@ -23,6 +23,24 @@ UIKIT_EXTERN const UISheetPresentationControllerDetentIdentifier UISheetPresenta
 UIKIT_EXTERN const UISheetPresentationControllerDetentIdentifier UISheetPresentationControllerDetentIdentifierLarge API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
 
 
+// A sentinel value indicating a detent that is inactive.
+UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos)
+const CGFloat UISheetPresentationControllerDetentInactive;
+
+
+// A context used for resolving custom UISheetPresentationControllerDetent values.
+UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
+@protocol UISheetPresentationControllerDetentResolutionContext <NSObject>
+
+// The trait collection of the sheet's containerView. Effectively the same as the window's traitCollection, and does not include overrides from the sheet's overrideTraitCollection.
+@property (nonatomic, readonly) UITraitCollection *containerTraitCollection;
+
+// The maximum value a detent can have.
+@property (nonatomic, readonly) CGFloat maximumDetentValue;
+
+@end
+
+
 UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UISheetPresentationControllerDetent : NSObject
 
@@ -34,6 +52,23 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI
 
 // A system detent for a sheet at full height.
 + (instancetype)largeDetent;
+
+// A custom detent that may compute a value based on the properties of the passed in context.
+// If the detent needs to be referred to from other API on the sheet, such as `selectedDetentIdentifier`, specify an identifier for the detent.
+// The identifier of each custom detent used by a sheet should be unique.
+// If no identifier is specified, a random one will be generated.
+// The value returned from the resolutionContextBlock is a height within the safe area of the sheet. For example, returning 200 will result in a detent where the height of the sheet is 200 + safeAreaInsets.bottom when edge-attached, and just 200 when floating. Return nil if the detent should be inactive based on the passed in context.
+// If the block depends on any external inputs, call `invalidateDetents` on the sheet when the external inputs change.
+// Do not set any properties on UISheetPresentationController during the execution of this block.
++ (instancetype)customDetentWithIdentifier:(nullable UISheetPresentationControllerDetentIdentifier)identifier resolver:(CGFloat (^)(id<UISheetPresentationControllerDetentResolutionContext> context))resolver API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
+// The identifier of this detent.
+@property (nonatomic, strong, readonly) UISheetPresentationControllerDetentIdentifier identifier API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
+// Resolves a detent to its value. Returns UISheetPresentationControllerDetentInactive if the detent is inactive in the provided context.
+// This may be used to get the values of the system medium and large detents, or the value of a custom detent.
+// This is intended to be used inside `customDetentWithIdentifier:resolver:` as a way to construct a custom detent based on the values of known detents.
+- (CGFloat)resolvedValueInContext:(id<UISheetPresentationControllerDetentResolutionContext>)context API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 
@@ -89,6 +124,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(t
 // Default: an array of only [UISheetPresentationControllerDetent largeDetent]
 @property (nonatomic, copy) NSArray<UISheetPresentationControllerDetent *> *detents;
 
+// If an external input (e.g. a captured property) to a custom detent changes, call this to notify the sheet to re-evaluate the detent in the next layout pass.
+// There is no need to call this if `detents` only contains system detents, or if custom detents only use information from the passed in context.
+// Call within an `animateChanges:` block to animate custom detents to their new heights.
+- (void)invalidateDetents API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
 // The identifier of the selected detent. When nil or the identifier is not found in detents, the sheet is displayed at the smallest detent.
 // Default: nil
 @property (nonatomic, copy, nullable) UISheetPresentationControllerDetentIdentifier selectedDetentIdentifier;
@@ -108,7 +148,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(t
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UISheetPresentationController.h>

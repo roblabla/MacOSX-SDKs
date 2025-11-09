@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5852279C-D041-34E5-8A67-C4E07A549FB6
+    value:           605F80DD-C9D4-30EC-9A41-E7BF02F8D256
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           03216678-F17D-342A-9A40-FD335ED8255D
+    value:           D5987C1F-DD53-3C2B-A7AA-FCDD55090D0E
 install-name:    '/System/Library/Frameworks/iTunesLibrary.framework/Versions/A/iTunesLibrary'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.10$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 
                        '$ld$install_name$os10.11$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 
                        '$ld$install_name$os10.12$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 
@@ -76,18 +76,19 @@ exports:
                        _ITLibPlaylistPropertyMPVendorTag, _ITLibPlaylistPropertyMaster, 
                        _ITLibPlaylistPropertyName, _ITLibPlaylistPropertyOwner, _ITLibPlaylistPropertyParentPersistentID, 
                        _ITLibPlaylistPropertyPrimary, _ITLibPlaylistPropertyVisible, 
-                       _ITLibraryModifyLibraryAddItemCommmand, _ITLibraryModifyLibraryAddPlaylistCommmand, 
-                       _ITLibraryModifyLibraryAddedItemsCommandID, _ITLibraryModifyLibraryAddedItemsNotification, 
-                       _ITLibraryModifyLibraryAddedItemsPersistentIDList, _ITLibraryModifyLibraryCommmand, 
-                       _ITLibraryModifyLibraryOpaqueProductID, _ITLibraryModifyLibraryPlaylistPersistentID, 
-                       _ITLibraryModifyLibraryTrackPersistentIDList, _kITLibraryDidChangeNotification, 
-                       _kITLibraryRestrictionAppsLimit, _kITLibraryRestrictionDisableAppleMusic, 
-                       _kITLibraryRestrictionDisableArtistConnect, _kITLibraryRestrictionDisableITunesStore, 
-                       _kITLibraryRestrictionDisablePodcasts, _kITLibraryRestrictionExplicitBooks, 
-                       _kITLibraryRestrictionExplicitMusic, _kITLibraryRestrictionMoviesLimit, 
-                       _kITLibraryRestrictionRatingSystem, _kITLibraryRestrictionRestrictApps, 
-                       _kITLibraryRestrictionRestrictMovies, _kITLibraryRestrictionRestrictMusicVideos, 
-                       _kITLibraryRestrictionRestrictTVShows, _kITLibraryRestrictionTVShowsLimit ]
+                       _ITLibraryDidChangeNotification, _ITLibraryModifyLibraryAddItemCommmand, 
+                       _ITLibraryModifyLibraryAddPlaylistCommmand, _ITLibraryModifyLibraryAddedItemsCommandID, 
+                       _ITLibraryModifyLibraryAddedItemsNotification, _ITLibraryModifyLibraryAddedItemsPersistentIDList, 
+                       _ITLibraryModifyLibraryCommmand, _ITLibraryModifyLibraryOpaqueProductID, 
+                       _ITLibraryModifyLibraryPlaylistPersistentID, _ITLibraryModifyLibraryTrackPersistentIDList, 
+                       _kITLibraryDidChangeNotification, _kITLibraryRestrictionAppsLimit, 
+                       _kITLibraryRestrictionDisableAppleMusic, _kITLibraryRestrictionDisableArtistConnect, 
+                       _kITLibraryRestrictionDisableITunesStore, _kITLibraryRestrictionDisablePodcasts, 
+                       _kITLibraryRestrictionExplicitBooks, _kITLibraryRestrictionExplicitMusic, 
+                       _kITLibraryRestrictionMoviesLimit, _kITLibraryRestrictionRatingSystem, 
+                       _kITLibraryRestrictionRestrictApps, _kITLibraryRestrictionRestrictMovies, 
+                       _kITLibraryRestrictionRestrictMusicVideos, _kITLibraryRestrictionRestrictTVShows, 
+                       _kITLibraryRestrictionTVShowsLimit ]
     objc-classes:    [ AMPMPPlayerClient, AMPMPPlayerControllerNowPlaying, AMPMPPlayerControllerNowPlayingTimeSnapshot, 
                        ITLibAlbum, ITLibArtist, ITLibArtwork, ITLibMediaEntity, ITLibMediaItem, 
                        ITLibMediaItemVideoInfo, ITLibPlaylist, ITLibPodcastFeed, 

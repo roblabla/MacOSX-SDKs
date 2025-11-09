@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6BE800C5-2389-311E-98DB-DCA1B09C3F69
+    value:           79E32EBA-C1EB-320C-8614-5A3589D8A391
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           81BBF3DE-0A69-37C5-B90F-D2F5ADC3D69B
+    value:           33AE01C6-4DE3-3E0D-90C5-1D53CA94D3D3
 install-name:    '/System/Library/PrivateFrameworks/MessagesHelperKit.framework/Versions/A/MessagesHelperKit'
 current-version: 800
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SOAControllerLastConnectionDiedNotification ]
     objc-classes:    [ SOAAccountWatcher, SOAActiveChatManager, SOAController, SOAPlugInController, 
                        SOAReceiver ]

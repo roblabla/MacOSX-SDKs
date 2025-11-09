@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           12990A82-8D44-3173-AACC-277D74B89F5E
+    value:           290F41AC-BCB7-3B7A-959A-BE9E3F032CE1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           80394903-7402-3455-9367-8277CE00AA87
+    value:           235C1CB2-BD57-3E14-906D-8C116A6A3E03
 install-name:    '/System/Library/PrivateFrameworks/ParsecUI.framework/Versions/A/ParsecUI'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CeilToPixel, _ClientInfo, _CreateCredential, _DefaultStocksCountryCode, 
                        _DefaultStocksOverride, _DeviceInfo, _ExchangeLastUpdateTimeKey, 
                        _ExchangeNameKey, _ExchangeStatusKey, _ExchangeStreamIntervalKey, 

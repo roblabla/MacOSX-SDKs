@@ -8,7 +8,7 @@
 @class NSData, NSDictionary<KeyType, ObjectType>, NSError, NSString, NSURL, NSInputStream, NSSet<ObjectType>;
 @protocol NSXMLParserDelegate;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(macos(10.9), ios(8.0), watchos(2.0), tvos(9.0))
 typedef NS_ENUM(NSUInteger, NSXMLParserExternalEntityResolvingPolicy) {
@@ -18,14 +18,7 @@ typedef NS_ENUM(NSUInteger, NSXMLParserExternalEntityResolvingPolicy) {
     NSXMLParserResolveExternalEntitiesAlways
 };
 
-@interface NSXMLParser : NSObject {
-@private
-    id _reserved0;
-    id _delegate;
-    id _reserved1;
-    id _reserved2;
-    id _reserved3;
-}
+@interface NSXMLParser : NSObject
 - (nullable instancetype)initWithContentsOfURL:(NSURL *)url;  // initializes the parser with the specified URL.
 - (instancetype)initWithData:(NSData *)data NS_DESIGNATED_INITIALIZER; // create the parser from data
 - (instancetype)initWithStream:(NSInputStream *)stream API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0)); //create a parser that incrementally pulls data from the specified stream and parses it.
@@ -243,4 +236,4 @@ typedef NS_ENUM(NSInteger, NSXMLParserError) {
     NSXMLParserDelegateAbortedParseError = 512
 };
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -97,6 +97,7 @@
 #include <kern/kern_types.h>
 #include <vm/vm_kern.h>
 #include <sys/cdefs.h>
+#include <sys/_types/_size_t.h>
 
 
 __BEGIN_DECLS

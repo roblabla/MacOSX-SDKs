@@ -36,7 +36,6 @@
 
 __BEGIN_DECLS
 
-
 typedef struct __lck_rw_t__     lck_rw_t;
 
 #if DEVELOPMENT || DEBUG
@@ -204,6 +203,8 @@ extern void             lck_rw_unlock(
  */
 extern void             lck_rw_lock_shared(
 	lck_rw_t                *lck);
+
+
 
 /*!
  * @function lck_rw_lock_shared_to_exclusive

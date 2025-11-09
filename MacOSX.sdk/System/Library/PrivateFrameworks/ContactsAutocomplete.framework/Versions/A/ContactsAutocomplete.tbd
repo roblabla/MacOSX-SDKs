@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C2E4166C-EA25-328A-8CCE-E05940BE9D94
+    value:           976B6477-E4D1-36FC-B72E-FAB34DEBD3CD
   - target:          x86_64-maccatalyst
-    value:           C2E4166C-EA25-328A-8CCE-E05940BE9D94
+    value:           976B6477-E4D1-36FC-B72E-FAB34DEBD3CD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C464E3BB-088C-35B6-AF1A-62BC9E1A314B
+    value:           AEB1FD9D-9061-3E82-B093-063F78DC9C70
   - target:          arm64e-maccatalyst
-    value:           C464E3BB-088C-35B6-AF1A-62BC9E1A314B
+    value:           AEB1FD9D-9061-3E82-B093-063F78DC9C70
 install-name:    '/System/Library/PrivateFrameworks/ContactsAutocomplete.framework/Versions/A/ContactsAutocomplete'
-current-version: 1181.4
+current-version: 1194
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CNALoggingContextDebug, _CNALoggingContextPerformance, _CNALoggingContextProbes, 
                        _CNALoggingContextSorting, _CNALoggingContextTriage, _CNAutocompleteAdditionalResultsKey, 
                        _CNAutocompleteDefaultsAlwaysUsePeopleSuggesterForPredictions, 

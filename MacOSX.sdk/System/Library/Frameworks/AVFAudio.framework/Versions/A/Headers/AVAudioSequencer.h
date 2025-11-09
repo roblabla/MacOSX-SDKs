@@ -1,15 +1,18 @@
 /*
 	File:		AVAudioSequencer.h
-	Framework:	AVFoundation
+	Framework:	AVFAudio
 
 	Copyright (c) 2015 Apple Inc. All Rights Reserved.
 */
 
 #import <Foundation/Foundation.h>
+#import <AVFAudio/AVAudioTypes.h>
 
 #if __has_include(<CoreMIDI/MIDIServices.h>)
 	#import <CoreMIDI/MIDIServices.h>
 #endif
+
+#define AVAS_EXPORT __attribute__((visibility("default"))) extern
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,17 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVAudioTime;
 @class AVAudioEngine;
 @class AVMusicTrack;
-@class AVMusicTrackEventIterator;
 @class AVAudioSequencer;
-
-/*!	@typedef AVMusicTimeStamp
-	@abstract A fractional number of beats
-	
-	@discussion
-		This is used for all sequencer timeline-related methods.  The relationship between this
-		value and time in seconds is determined by the sequence's tempo.
-*/
-typedef Float64 AVMusicTimeStamp;
 
 /*! @typedef AVMusicSequenceLoadOptions
 	@abstract Determines whether data on different MIDI channels is mapped to multiple tracks, or
@@ -44,8 +37,8 @@ typedef Float64 AVMusicTimeStamp;
 		API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 */
 typedef NS_OPTIONS(NSUInteger, AVMusicSequenceLoadOptions) {
-	AVMusicSequenceLoadSMF_PreserveTracks		= 0,				// 0x00
-	AVMusicSequenceLoadSMF_ChannelsToTracks		= (1UL << 0)		// 0x01
+	AVMusicSequenceLoadSMF_PreserveTracks		= 0,
+	AVMusicSequenceLoadSMF_ChannelsToTracks		= (1UL << 0)
 };
 
 /*! @typedef AVBeatRange
@@ -62,6 +55,96 @@ NS_INLINE AVBeatRange AVMakeBeatRange(AVMusicTimeStamp startBeat, AVMusicTimeSta
 	r.length = lengthInBeats;
 	return r;
 }
+
+typedef NSString *AVAudioSequencerInfoDictionaryKey NS_TYPED_ENUM;
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyAlbum
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyApproximateDurationInSeconds
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyArtist
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyChannelLayout
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyComments
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyComposer
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyCopyright
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyEncodingApplication
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyGenre
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyISRC
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyKeySignature
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyLyricist
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyNominalBitRate
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyRecordedDate
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeySourceBitDepth
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeySourceEncoder
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeySubTitle
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyTempo
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyTimeSignature
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyTitle
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyTrackNumber
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+AVAS_EXPORT
+AVAudioSequencerInfoDictionaryKey AVAudioSequencerInfoDictionaryKeyYear
+				API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 /*! @class AVAudioSequencer
 	@abstract A collection of MIDI events organized into AVMusicTracks, plus a player to play back the events.
@@ -109,7 +192,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 - (BOOL)loadFromData:(NSData *)data options:(AVMusicSequenceLoadOptions)options error:(NSError **)outError;
 
 /*! @method writeToURL:SMPTEResolution:replaceExisting:error:
-	@abstract Create and write a MIDI file from the events in the sequence
+	@abstract Create and write a MIDI file containing the events and complete state of the sequence
 	@param fileURL
 		the path for the file to be created
 	@param resolution
@@ -121,8 +204,11 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@param outError
         on exit, if an error occurs, a description of the error
 	@discussion
-		Only MIDI events are written when writing to the MIDI file. MIDI files are normally beat
-		based, but can also have a SMPTE (or real-time rather than beat time) representation.
+		A MIDI file saved via this method will contain not only the complete MIDI content of the sequence,
+		but also the state of all tracks, including muting, loop points and enablement, etc.  It will also
+		contain all non-MIDI AVMusicEvent types which had been added to the sequence's track.
+ 
+		MIDI files are normally beat based, but can also have a SMPTE (or real-time rather than beat time) representation.
 		The relationship between "tick" and quarter note for saving to Standard MIDI File
 		- pass in zero to use default - this will be the value that is currently set on the tempo track
 */
@@ -137,44 +223,93 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 - (NSData *)dataWithSMPTEResolution:(NSInteger)SMPTEResolution error:(NSError **)outError;
 
 /*!	@method secondsForBeats:
-	@abstract Get the time in seconds for the given beat position (timestamp) in the track
+	@abstract Get the time in seconds for the given beat position (timestamp) in the AVMusicTrack
 */
 - (NSTimeInterval)secondsForBeats:(AVMusicTimeStamp)beats;
 
 /*!	@method beatsForSeconds:
-	@abstract Get the beat position (timestamp) for the given time in the track
+	@abstract Get the beat position (timestamp) for the given time in the AVMusicTrack
 */
 - (AVMusicTimeStamp)beatsForSeconds:(NSTimeInterval)seconds;
+
+/*!	@method reverseEvents:
+	@abstract Reverse the order of all events in all AVMusicTracks, including the tempo track
+*/
+- (void)reverseEvents API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+/*!	@method createAndAppendTrack:
+	@abstract Create a new AVMusicTrack and append it to the AVMusicSequencer's list
+*/
+- (AVMusicTrack *)createAndAppendTrack API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+/*!	@method removeTrack:
+	@abstract Remove the given AVMusicTrack from the AVMusicSequencer.
+	@discussion This does not destroy the AVMusicTrack because it may be re-used.
+*/
+- (BOOL)removeTrack:(AVMusicTrack *)track API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+/*!	@typedef AVAudioSequencerUserCallback
+	@abstract
+		A block which is called asynchronously during playback whenever an AVMusicUserEvent is
+		encountered (see AVMusicUserEvent).
+	@param track
+		The track which contains the AVMusicUserEvent.
+	@param userData
+		The raw data that was used to initialize the AVMusicUserEvent.
+	@param timeStamp
+		The beat location at which the event was found.  This will necessarily be in the past due
+		to the asynchronous nature of the callback.
+	@discussion
+		This callback is delivered on an internal queue and is asynchronous to the rendering thread.
+ 
+		The returned 'userData' will be unique to each AVMusicUserEvent instance.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos)
+typedef void (^AVAudioSequencerUserCallback)(AVMusicTrack *track, NSData *userData, AVMusicTimeStamp timeStamp);
+
+/*!	@method setUserCallback:
+	@abstract
+		Add a block which will be called each time the AVAudioSequencer encounters an AVMusicUserEvent during playback.
+	@discussion
+		The same callback is called for events which occur on any track in the sequencer.
+ 
+		Set the block to nil to disable it.
+*/
+- (void)setUserCallback:(AVAudioSequencerUserCallback _Nullable)userCallback API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 /* properties */
 
 /*!	@property tracks
-	@abstract An NSArray containing all the tracks in the sequence
+	@abstract An NSArray containing all the AVMusicTracks in the sequence
 	@discussion
-		Track indices count from 0, and do not include the tempo track.
+		This list will not include the tempo track.
 */
 @property (nonatomic, readonly) NSArray<AVMusicTrack *> *tracks;
 
 /*!	@property tempoTrack
 	@abstract The tempo track
 	 @discussion
-		 Each sequence has a single tempo track. All tempo events are placed into this track (as well
-		 as other appropriate events (for instance, the time signature from a MIDI file). The tempo
-		 track can be edited and iterated upon as any other track. Non-tempo events in a tempo track
-		 are ignored.
+		Each AVMusicSequence has a single tempo track.
+ 
+		All tempo events read from external MIDI files are placed into this track (as well as other
+		appropriate events (e.g., the time signature meta event from the file).
+ 
+		The tempo track can be edited and iterated upon as any other track.
+ 
+		Non-tempo-related events will generate exceptions if added.
 */
 @property (nonatomic, readonly) AVMusicTrack *tempoTrack;
 
 /*!	@property userInfo
 	@abstract A dictionary containing meta-data derived from a sequence
 	@discussion
-		The dictionary can contain one or more of the kAFInfoDictionary_* keys
-		specified in <AudioToolbox/AudioFile.h>
+		The dictionary can contain one or more of the values accessible via the AVAudioSequencerInfoDictionaryKeys.
 */
 @property (nonatomic, readonly) NSDictionary<NSString *, id> *userInfo;
 
 @end
 
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioSequencer(AVAudioSequencer_Player)
 
 /*! @property currentPositionInSeconds
@@ -258,10 +393,22 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 @end
 
+/*!
+	@define AVMusicTimeStampEndOfTrack
+	@abstract	A timestamp used to access all events in a AVMusicTrack via an AVBeatRange.
+	@discussion Pass this value as the length of an AVBeatRange to indicate a end time beyond the last
+				event in the track.  In this way, it's possible to specify a AVBeatRange which
+				include all events starting at some particular time up to and including the last event.
+*/
+#define AVMusicTimeStampEndOfTrack			DBL_MAX
 
 /*! @class AVMusicTrack
-	@abstract A collection of music events which will be sent to a given destination, and which can be 
+	@abstract	A collection of music events which will be sent to a given destination, and which can be
 				offset, muted, etc. independently of events in other tracks.
+	@discussion
+				AVMusicTrack is not a container of AVMusicEvents - it will not hold references to
+				AVMusicEvents that are added, so an application should maintain its own if it is
+				desired.
 */
 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVMusicTrack : NSObject {
@@ -375,6 +522,116 @@ typedef NS_ENUM(NSInteger, AVMusicTrackLoopCount) {
 		This can only be retrieved from the tempo track.
 */
 @property (nonatomic, readonly) NSUInteger timeResolution;
+
+@end
+
+@class AVMusicEvent;
+
+API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos)
+@interface AVMusicTrack(AVMusicTrackEditor)
+
+/*!	@property usesAutomatedParameters
+	@abstract	Indicates whether the track is an automation track.
+	@discussion
+				If set to YES, this can be used to contain, parameter automation events, exclusively.
+				Adding any other event types will generate exceptions.
+ 
+				If a track already contains non-parameter events, setting this to YES will
+				generate an exception.
+ */
+@property (readwrite) BOOL usesAutomatedParameters;
+
+/*!	@method	addAvent:atBeat
+	@abstract	Adds an AVMusicEvent's contents to a track at the specified AVMusicTimeStamp.
+	@param		event			the event to be added
+	@param		beat			the AVMusicTimeStamp
+	@discussion
+				Because event contents are copied into the track, the same event may be added multiple
+				times at different timestamps.
+ 
+				There are restrictions on which AVMusicEvent subclasses may be added to different tracks:
+ 
+				- Only AVExtendedTempoEvents and AVMIDIMetaEvents with certain AVMIDIMetaEventTypes
+				  can be added to an AVMusicSequence's tempo track (see AVMIDIMetaEvent).
+ 
+				- AVParameterEvents can only be added to automation tracks (see AVParameterEvent).
+ 
+				- All other event subclasses cannot be added to tempo or automation tracks.
+*/
+
+- (void)addEvent:(AVMusicEvent *)event atBeat:(AVMusicTimeStamp)beat;
+
+/*!	@method moveEventsInRange:byAmount
+	@abstract	Shift the beat location of all events in the given beat range by the amount specified.
+	@param		range			the range of beats.  Must be a valid AVBeatRange.
+	@param		beatAmount		the amount in beats to shift each event.  The amount may be positive or negative.
+ */
+- (void)moveEventsInRange:(AVBeatRange)range byAmount:(AVMusicTimeStamp)beatAmount;
+
+/*!	@method clearEventsInRange:
+	@abstract	Removes all events in the given beat range, erasing that portion of the AVMusicTrack.
+	@param		range			the range of beats.  Must be a valid AVBeatRange.
+	@discussion	All events outside of the specified range left unmodified.
+ */
+- (void)clearEventsInRange:(AVBeatRange)range;
+
+/*!	@method cutEventsInRange:
+	@abstract	Removes all events in the given beat range, splicing out that portion of the AVMusicTrack.
+	@param		range			the range of beats.  Must be a valid AVBeatRange.
+	@discussion	All events past the end of the specified range will be shifted backward by the duration of the range.
+ */
+- (void)cutEventsInRange:(AVBeatRange)range;
+
+/*!	@method copyEventsInRange:fromTrack:insertAtBeat
+	@abstract	Copies all events in the given beat range from the specified AVMusicTrack,
+				splicing them into the current AVMusicTrack.
+	@param		range			the range of beats.  Must be a valid AVBeatRange.
+	@param		sourceTrack		the AVMusicTrack to copy the events from.
+	@param		insertStartBeat	the start beat at which the copied events should be spliced in.
+	@discussion	All events originally at or past insertStartBeat will be shifted forward by the duration
+				of the copied-in range.
+ */
+- (void)copyEventsInRange:(AVBeatRange)range fromTrack:(AVMusicTrack *)sourceTrack insertAtBeat:(AVMusicTimeStamp)insertStartBeat;
+
+/*!	@method copyAndMergeEventsInRange:fromTrack:mergeAtBeat
+	@abstract	Copies all events in the given beat range from the specified AVMusicTrack,
+				merging them into the current AVMusicTrack.
+	@param		range			the range of beats.  Must be a valid AVBeatRange.
+	@param		sourceTrack		the AVMusicTrack to copy the events from.
+	@param		insertStartBeat	the start beat at which the copied events should be merged.
+	@discussion	All events originally at or past mergeStartBeat will be left unmodified.
+ 
+				Copying events from track to track follows the same type-exclusion rules as adding
+				events:  The operation will generate an exception.
+ */
+- (void)copyAndMergeEventsInRange:(AVBeatRange)range fromTrack:(AVMusicTrack *)sourceTrack mergeAtBeat:(AVMusicTimeStamp)mergeStartBeat;
+
+/*!	@typedef AVMusicEventEnumerationBlock
+	@abstract	The block type used to enumerate and optionally remove AVMusicEvents when using
+				`AVMusicTrack(enumerateEventsInRange:usingBlock:)`
+	@param		event			the AVMusicEvent returned by this enumeration block call.  If this
+								event is modified by the block, the corresponding track event will be changed.
+	@param		timeStamp		the beat position of this event in the AVMusicTrack.  If the block
+								sets *timeStamp to a new value, the corresponding event's beat position
+								in the track will be updated.
+	@param		removeEvent		If the block sets *removeEvent to YES, the current event will be
+								removed from the track.
+*/
+typedef void (^AVMusicEventEnumerationBlock)(AVMusicEvent *event, AVMusicTimeStamp *timeStamp, BOOL *removeEvent);
+
+/*!	@method enumerateEventsInRange:usingBlock:
+	@abstract	Iterates through the AVMusicEvents within the AVMusicTrack whose timestamps fit within the range,
+				calling the block for each.
+	@param		block			the AVMusicEventEnumerationBlock to call for each event.
+	@discussion	Each event returned via the block should be examined using `NSObject(isKindOfClass:)`
+				to determine its subclass and then cast and accessed/edited accordingly.
+ 
+				The iteration may continue after removing an event.
+ 
+				The event objects returned via the block will not be the same instances
+				which were added to the AVMusicTrack, though their contents will be identical.
+ */
+- (void)enumerateEventsInRange:(AVBeatRange)range usingBlock:(NS_NOESCAPE AVMusicEventEnumerationBlock)block;
 
 @end
 

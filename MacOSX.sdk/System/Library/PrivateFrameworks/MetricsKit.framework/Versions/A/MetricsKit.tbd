@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BC006AEB-14D1-3E13-8AC0-25EECD91D30B
+    value:           47C9213C-76AB-322C-81B8-D6CC2554C5C5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5F9C9BE6-C3F5-30CC-A3D8-5D72E86034A0
+    value:           0E60E59C-8A7F-3B70-94C6-FC8E0D432433
 install-name:    '/System/Library/PrivateFrameworks/MetricsKit.framework/Versions/A/MetricsKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AMPIDServiceMachServiceName, _MTAMSBagKeyMescalSignedRequests, 
                        _MTAMSBagKeyMescalSignedResponses, _MTAMSBagKeyMetrics, _MTAMSBagKeyPrimingURL, 
                        _MTAMSBagKeySignSapSetupCertURL, _MTAMSBagKeySignSapSetupURL, 
@@ -144,7 +144,7 @@ exports:
                        MTPageRenderMeasurement, MTPerfBaseEventDataProvider, MTPerfBaseMeasurement, 
                        MTPerfEventHandlers, MTPerfKit, MTPerfUtils, MTPeriodicQueue, 
                        MTPromise, MTPromiseCompletionBlocks, MTPromiseResult, MTPromiseWithTimeout, 
-                       MTReflectUtil, MTSearchEventHandler, MTStandardEventHandler, 
+                       MTReflectUtil, MTSampling, MTSearchEventHandler, MTStandardEventHandler, 
                        MTStoreAMSBagDelegatePackage, MTSystem, MTTreatment, MTTreatmentAction, 
                        MTTreatmentContext, MTTreatmentProfile, MTUIKitStoreAMSBagDelegatePackage, 
                        MTURLDeresAction, MTUtils, MTVPAFKit, MTVersionDeresAction ]

@@ -16,7 +16,7 @@
 #import <UIKit/UIGeometry.h>
 #import <UIKit/UIPopoverSupport.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIBarButtonItem, UIView;
 @protocol UIPopoverControllerDelegate;
@@ -97,7 +97,7 @@ NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIPopoverController.h>

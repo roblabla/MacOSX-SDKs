@@ -19,6 +19,8 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#if TARGET_OS_OSX
+
 #ifndef __MIXEDMODE__
 #include <CarbonCore/MixedMode.h>
 #endif
@@ -570,6 +572,8 @@ WSProtocolHandlerSetDeserializationOverride(
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* TARGET_OS_OSX */
 
 #endif /* __WSPROTOCOLHANDLER__ */
 

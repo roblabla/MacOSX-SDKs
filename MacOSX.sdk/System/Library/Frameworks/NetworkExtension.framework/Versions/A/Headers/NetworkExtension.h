@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2015, 2017-2020 Apple Inc.
+ * Copyright (c) 2014-2015, 2017-2022 Apple Inc.
  * All rights reserved.
  */
 
@@ -35,6 +35,8 @@
 #import <NetworkExtension/NEHotspotConfigurationManager.h>
 #import <NetworkExtension/NEIPv4Settings.h>
 #import <NetworkExtension/NEIPv6Settings.h>
+#import <NetworkExtension/NEEthernetTunnelNetworkSettings.h>
+#import <NetworkExtension/NEEthernetTunnelProvider.h>
 #import <NetworkExtension/NENetworkRule.h>
 #import <NetworkExtension/NEOnDemandRule.h>
 #import <NetworkExtension/NEPacket.h>

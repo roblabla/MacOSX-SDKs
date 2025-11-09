@@ -16,6 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MXMetricManagerSubscriber;
 
 /*!
+ @typedef       MXLaunchTaskID
+ @abstract      Describes the general purpose of a specific launch task.
+ */
+API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos)
+typedef const NSString *const MXLaunchTaskID NS_TYPED_EXTENSIBLE_ENUM;
+
+/*!
  @class         MXMetricManager
  @abstract      An instance of this class can be used to retrieve periodic, aggregated power and performance metrics.
  @discussion    To receive metrics, clients must acquire a reference to the shared instance of the metric manager and add an eligible MXMetricManagerSubscriber.
@@ -67,6 +74,31 @@ API_AVAILABLE(ios(13.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
  @discussion    The subscriber indicated, if previously registered, will no longer receive metric payloads.
  */
 - (void)removeSubscriber:(id<MXMetricManagerSubscriber>)subscriber;
+
+/*!
+ @method        extendLaunchMeasurementForTaskID:error:
+ @abstract      Start measuring an extended launch task with the given task id.
+ @discussion    This method tracks extra setup tasks required to make the application perceived as fully launched, such as loading up content from the disk or refreshing data from the network, rendering images, etc.
+ @discussion    The first task needs to start before or during @c UISceneDelegate.scene(_:restoreInteractionStateWith:) or before @c UISceneDelegate.sceneDidBecomeActive(_:) is called on the first scene to connect. For example, at the time @c UIApplicationDelegate.application(_:didFinishLaunchingWithOptions:) is called. Other tasks need to start before the last current task is finished, otherwise the extended launch measurement will end.  
+ @discussion    The maximum number of tasks is 16.
+ @discussion    This method needs to be called on the main thread.
+ @param         taskID              The task identifier. Must be an unique nonnull custom string.
+ @param         error               If an error occurs, this will contain a valid @c NSError object on exit.
+ @result        Returns @c YES if the measurement started successfully and @c NO otherwise.
+ */
+
++ (BOOL)extendLaunchMeasurementForTaskID:(MXLaunchTaskID)taskID error:(NSError **)error API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
+/*!
+ @method        finishExtendedLaunchMeasurementForTaskID:error:
+ @abstract      Signal the end of an extended launch task previously started with @c extendLaunchMeasurementForTaskID:error: .
+ @discussion    This method needs to be called on the main thread.
+ @param         taskID              The task identifier. Must match the task identifier passed to @c extendLaunchMeasurementForTaskID:error: .
+ @param         error               If an error occurs, this will contain a valid @c NSError object on exit.
+ @result        Returns @c YES if the measurement for the task finished successfully and @c NO otherwise.
+ */
+
++ (BOOL)finishExtendedLaunchMeasurementForTaskID:(MXLaunchTaskID)taskID error:(NSError **)error API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 @end
 

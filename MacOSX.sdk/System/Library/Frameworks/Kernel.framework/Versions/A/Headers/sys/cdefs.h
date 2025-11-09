@@ -182,6 +182,13 @@
 #define __cold
 #endif
 
+/* __returns_nonnull marks functions that return a non-null pointer. */
+#if __has_attribute(returns_nonnull)
+#define __returns_nonnull __attribute((returns_nonnull))
+#else
+#define __returns_nonnull
+#endif
+
 /* __exported denotes symbols that should be exported even when symbols
  * are hidden by default.
  * __exported_push/_exported_pop are pragmas used to delimit a range of
@@ -761,7 +768,19 @@
  * catastrophic run-time failures.
  */
 #ifndef __CAST_AWAY_QUALIFIER
-#define __CAST_AWAY_QUALIFIER(variable, qualifier, type)  (type) (long)(variable)
+/*
+ * XXX: this shouldn't ignore anything more than -Wcast-qual,
+ * but the old implementation made it an almighty cast that
+ * ignored everything, so things break left and right if you
+ * make it only ignore -Wcast-qual.
+ */
+#define __CAST_AWAY_QUALIFIER(variable, qualifier, type) \
+	_Pragma("GCC diagnostic push") \
+	_Pragma("GCC diagnostic ignored \"-Wcast-qual\"") \
+	_Pragma("GCC diagnostic ignored \"-Wcast-align\"") \
+	_Pragma("GCC diagnostic ignored \"-Waddress-of-packed-member\"") \
+	((type)(variable)) \
+	_Pragma("GCC diagnostic pop")
 #endif
 
 /*
@@ -786,6 +805,8 @@
 #define __counted_by(N)
 #define __sized_by(N)
 #define __ended_by(E)
+#define __terminated_by(T)
+#define __null_terminated
 
 /*
  * Similarly, we intentionally define to nothing the
@@ -800,10 +821,30 @@
 /* __unsafe_forge intrinsics are defined as regular C casts. */
 #define __unsafe_forge_bidi_indexable(T, P, S) ((T)(P))
 #define __unsafe_forge_single(T, P) ((T)(P))
+#define __terminated_by_to_indexable(P) (P)
+#define __unsafe_terminated_by_to_indexable(P) (P)
+#define __null_terminated_to_indexable(P) (P)
+#define __unsafe_null_terminated_to_indexable(P) (P)
+#define __unsafe_terminated_by_from_indexable(T, P, ...) (P)
+#define __unsafe_null_terminated_from_indexable(P, ...) (P)
 
 /* decay operates normally; attribute is meaningless without pointer checks. */
 #define __array_decay_dicards_count_in_parameters
+
+/* this is a write-once variable; not useful without pointer checks. */
+#define __unsafe_late_const
 #endif /* !__has_include(<ptrcheck.h>) */
+
+#if KERNEL && !BOUND_CHECKS && !__has_ptrcheck
+/*
+ * With pointer checks disabled, we define __indexable to allow source to still
+ * contain these annotations. This is safe in builds which _uniformly_ disable
+ * pointer checks (but not in builds which inconsistently have them enabled).
+ */
+
+#define __indexable
+#define __bidi_indexable
+#endif
 
 #define __ASSUME_PTR_ABI_SINGLE_BEGIN       __ptrcheck_abi_assume_single()
 #define __ASSUME_PTR_ABI_SINGLE_END         __ptrcheck_abi_assume_unsafe_indexable()
@@ -908,5 +949,6 @@
 #define __kernel_dual_semantics
 
 #endif /* defined(KERNEL) && __has_attribute(xnu_usage_semantics) */
+
 
 #endif /* !_CDEFS_H_ */

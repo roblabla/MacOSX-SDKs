@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           08F6A93C-40EA-3982-9D00-35F0DBFF4B34
+    value:           8A04328E-ED97-32E1-98C2-80BC0507C913
   - target:          x86_64-maccatalyst
-    value:           08F6A93C-40EA-3982-9D00-35F0DBFF4B34
+    value:           8A04328E-ED97-32E1-98C2-80BC0507C913
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A4F24683-CE24-3F30-BBE9-41CCD33B30CB
+    value:           ED53858B-A19A-3EE7-8A61-B2626780BF47
   - target:          arm64e-maccatalyst
-    value:           A4F24683-CE24-3F30-BBE9-41CCD33B30CB
+    value:           ED53858B-A19A-3EE7-8A61-B2626780BF47
 install-name:    '/System/Library/PrivateFrameworks/NLP.framework/Versions/A/NLP'
-current-version: 215
+current-version: 231
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _NLEmojiPredictorCreate, _NLEmojiPredictorCreateCandidatesForString, 
                        _NLMessageConversationAddConversationTurn, _NLMessageConversationCopyConversationTurns, 
                        _NLMessageConversationCopyMetadata, _NLMessageConversationCreate, 
@@ -59,9 +59,10 @@ exports:
                        _NLTextStructuredEventGetEventDescriptorRange, _NLTextStructuredEventGetEventFixedDateSlot, 
                        _NLTextStructuredEventGetLocationRanges, _NLTextStructuredEventGetPeopleRanges, 
                        _NLTextStructuredEventGetRecurrentEvent, _NLTransliterationCandidateCopyInputString, 
-                       _NLTransliterationCandidateCopyOutputString, _NLTransliterationCandidateCreate, 
-                       _NLTransliterationCandidateIsExtensionCandidate, _NLTransliterationCandidateIsInVocabulary, 
-                       _NLTransliterationCandidateScore, _NLTransliteratorAcceptCandidate, 
+                       _NLTransliterationCandidateCopyMetadata, _NLTransliterationCandidateCopyOutputString, 
+                       _NLTransliterationCandidateCreate, _NLTransliterationCandidateIsExtensionCandidate, 
+                       _NLTransliterationCandidateIsInVocabulary, _NLTransliterationCandidateScore, 
+                       _NLTransliteratorAcceptCandidate, _NLTransliteratorAssetsAvailable, 
                        _NLTransliteratorCopyCandidates, _NLTransliteratorCreate, 
                        _NLTransliteratorFlushDynamicLanguageModel, _NLTransliteratorResetDynamicLanguageModel, 
                        _kNLEmojiPredictionLocaleKey, _kNLEmojiPredictionResourceDirectoryKey, 
@@ -80,6 +81,8 @@ exports:
                        _kNLTextSlotParserRecurrentFrequencyWeekdayKey, _kNLTextSlotParserRecurrentFrequencyWeekdayOrdinalKey, 
                        _kNLTextSlotParserRecurrentFrequencyWeekdayStartKey, _kNLTextSlotParserRecurrentFrequencyYearKey, 
                        _kNLTextSlotParserReferenceDateKey, _kNLTextSlotParserResourceDirectoryLocationKey, 
+                       _kNLTransliteratorBundleURLKey, _kNLTransliteratorCandidateMetadataLMScoreKey, 
+                       _kNLTransliteratorCandidateMetadataSeq2SeqScoreKey, _kNLTransliteratorCandidateMetadataTotalScoreKey, 
                        _kNLTransliteratorTargetLocaleKey ]
     objc-classes:    [ NLParsecDataManager, NLSearchParserManager ]
 ...

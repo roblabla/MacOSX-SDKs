@@ -111,11 +111,11 @@ typedef NS_ENUM(NSUInteger, NSSpeechBoundary) {
 
 @protocol NSSpeechSynthesizerDelegate <NSObject>
 @optional
-- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didFinishSpeaking:(BOOL)finishedSpeaking;
-- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender willSpeakWord:(NSRange)characterRange ofString:(NSString *)string;
-- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender willSpeakPhoneme:(short)phonemeOpcode;
-- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didEncounterErrorAtIndex:(NSUInteger)characterIndex ofString:(NSString *)string message:(NSString *)message API_AVAILABLE(macos(10.5));
-- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didEncounterSyncMessage:(NSString *)message API_AVAILABLE(macos(10.5));
+- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didFinishSpeaking:(BOOL)finishedSpeaking NS_SWIFT_UI_ACTOR;
+- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender willSpeakWord:(NSRange)characterRange ofString:(NSString *)string NS_SWIFT_UI_ACTOR;
+- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender willSpeakPhoneme:(short)phonemeOpcode NS_SWIFT_UI_ACTOR;
+- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didEncounterErrorAtIndex:(NSUInteger)characterIndex ofString:(NSString *)string message:(NSString *)message NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.5));
+- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didEncounterSyncMessage:(NSString *)message NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.5));
 @end
 
 typedef NSString * NSSpeechMode NS_TYPED_ENUM;

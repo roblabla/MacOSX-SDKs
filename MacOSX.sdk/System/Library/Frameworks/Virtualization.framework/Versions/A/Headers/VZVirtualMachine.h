@@ -2,18 +2,20 @@
 //  VZVirtualMachine.h
 //  Virtualization
 //
-//  Copyright © 2019-2021 Apple Inc. All rights reserved.
+//  Copyright © 2019-2022 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class VZConsoleDevice;
 @class VZDirectorySharingDevice;
 @class VZMemoryBalloonDevice;
 @class VZNetworkDevice;
 @class VZSocketDevice;
 @class VZVirtualMachineConfiguration;
+@class VZVirtualMachineStartOptions;
 @protocol VZVirtualMachineDelegate;
 
 /*!
@@ -141,6 +143,13 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 @property (readonly) BOOL canRequestStop;
 
 /*!
+ @abstract Return the list of console devices configured on this virtual machine. Return an empty array if no console device is configured.
+ @see VZVirtioConsoleDeviceConfiguration
+ @see VZVirtualMachineConfiguration
+ */
+@property (readonly, copy) NSArray<VZConsoleDevice *> *consoleDevices API_AVAILABLE(macos(13.0));
+
+/*!
  @abstract Return the list of directory sharing devices configured on this virtual machine. Return an empty array if no directory sharing device is configured.
  @see VZVirtioFileSystemDeviceConfiguration
  @see VZVirtualMachineConfiguration
@@ -176,6 +185,17 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
     The error parameter passed to the block is nil if the start was successful.
  */
 - (void)startWithCompletionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(start());
+
+/*!
+ @abstract Start a virtual machine with options.
+ @discussion
+    Start a virtual machine that is in either Stopped or Error state.
+ @param options Options used to control how the virtual machine is started.
+ @param completionHandler Block called after the virtual machine has been successfully started or on error.
+    The error parameter passed to the block is nil if the start was successful.
+ @seealso VZMacOSVirtualMachineStartOptions
+ */
+- (void)startWithOptions:(VZVirtualMachineStartOptions *)options completionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler API_AVAILABLE(macos(13.0)) NS_SWIFT_NAME(start(options:completionHandler:));
 
 /*!
  @abstract Stop a virtual machine.

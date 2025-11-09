@@ -69,6 +69,8 @@
 #include <sys/appleapiopts.h>
 #include <sys/cdefs.h>
 
+__ASSUME_PTR_ABI_SINGLE_BEGIN
+
 /* XXX: this will go away */
 #define PR_SLOWHZ       2               /* 2 slow timeouts per second */
 
@@ -107,5 +109,8 @@
 #define PRC_IS_REDIRECT(cmd)    \
 	((cmd) >= PRC_REDIRECT_NET && (cmd) <= PRC_REDIRECT_TOSHOST)
 
+
+
+__ASSUME_PTR_ABI_SINGLE_END
 
 #endif  /* !_SYS_PROTOSW_H_ */

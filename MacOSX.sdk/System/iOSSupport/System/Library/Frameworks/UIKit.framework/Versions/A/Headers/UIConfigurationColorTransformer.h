@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIColor;
 
 /// A color transformer returns a modified output color based on an input color.
-typedef UIColor *_Nonnull (^UIConfigurationColorTransformer)(UIColor *color) API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+typedef UIColor *_Nonnull (^/*NS_SWIFT_SENDABLE*/ UIConfigurationColorTransformer)(UIColor *color) API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
 
 /// A color transformer that returns a grayscale version of the color.
@@ -30,7 +30,7 @@ UIKIT_EXTERN const UIConfigurationColorTransformer UIConfigurationColorTransform
 /// It remains monochrome regardless of the system accent color (if the platform has one).
 UIKIT_EXTERN const UIConfigurationColorTransformer UIConfigurationColorTransformerMonochromeTint API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIConfigurationColorTransformer.h>

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIViewController.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UISearchController;
 
@@ -20,7 +20,7 @@ UIKIT_CLASS_AVAILABLE_IOS_TVOS(9_1, 9_0) NS_SWIFT_UI_ACTOR
 - (instancetype)initWithSearchController:(UISearchController *)searchController;
 
 @end
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UISearchContainerViewController.h>

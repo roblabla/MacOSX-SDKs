@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C5F78CC0-1983-3912-8239-AB323D32A366
+    value:           FC6D84C1-C158-34B1-A366-6DACEDA386B6
   - target:          x86_64-maccatalyst
-    value:           C5F78CC0-1983-3912-8239-AB323D32A366
+    value:           FC6D84C1-C158-34B1-A366-6DACEDA386B6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           11AA35BB-943F-35F3-84A5-D651F18C1C22
+    value:           3C35F654-2E36-3EFB-BD88-6EF9472B80FB
   - target:          arm64e-maccatalyst
-    value:           11AA35BB-943F-35F3-84A5-D651F18C1C22
+    value:           3C35F654-2E36-3EFB-BD88-6EF9472B80FB
 install-name:    '/System/Library/PrivateFrameworks/CorePrediction.framework/Versions/A/CorePrediction'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CPMLAnalysisClassify, _CPMLAnalysisRegressionPrediction, 
                        _CPMLBetweenssKMeansAnalysis, _CPMLCentersKMeansAnalysis, 
                        _CPMLClusterKMeansAnalysis, _CPMLCreateGMMAnalysis, _CPMLCreateKMEANSAnalysis, 

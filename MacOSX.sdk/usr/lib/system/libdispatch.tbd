@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           31D69D55-9895-326C-AD61-621C5CA87314
+    value:           817339A1-D03E-3E54-9C47-ACACF69F6193
   - target:          x86_64-maccatalyst
-    value:           31D69D55-9895-326C-AD61-621C5CA87314
+    value:           817339A1-D03E-3E54-9C47-ACACF69F6193
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DC048E3B-E023-3D17-AFE5-4FF3DC625608
+    value:           40C9C98C-00D6-3E8E-9AD3-2ED6CF0D0CFE
   - target:          arm64e-maccatalyst
-    value:           DC048E3B-E023-3D17-AFE5-4FF3DC625608
+    value:           40C9C98C-00D6-3E8E-9AD3-2ED6CF0D0CFE
 install-name:    '/usr/lib/system/libdispatch.dylib'
-current-version: 1325.100.36
+current-version: 1412
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$hide$os10.12$_dispatch_assert_queue', '$ld$hide$os10.12$_dispatch_assert_queue_not', 
                        '$ld$hide$os10.12$_dispatch_queue_create_with_target', __dispatch_begin_NSAutoReleasePool, 
                        __dispatch_bug, __dispatch_data_destructor_free, __dispatch_data_destructor_munmap, 
@@ -92,9 +92,10 @@ exports:
                        _dispatch_io_create_with_path_f, _dispatch_io_get_descriptor, 
                        _dispatch_io_read, _dispatch_io_read_f, _dispatch_io_set_high_water, 
                        _dispatch_io_set_interval, _dispatch_io_set_low_water, _dispatch_io_write, 
-                       _dispatch_io_write_f, _dispatch_mach_can_handoff_4libxpc, 
-                       _dispatch_mach_cancel, _dispatch_mach_connect, _dispatch_mach_create, 
-                       _dispatch_mach_create_4libxpc, _dispatch_mach_create_f, _dispatch_mach_get_checkin_port, 
+                       _dispatch_io_write_f, _dispatch_lock_override_end, _dispatch_lock_override_start_with_debounce, 
+                       _dispatch_mach_can_handoff_4libxpc, _dispatch_mach_cancel, 
+                       _dispatch_mach_connect, _dispatch_mach_create, _dispatch_mach_create_4libxpc, 
+                       _dispatch_mach_create_f, _dispatch_mach_get_checkin_port, 
                        _dispatch_mach_handoff_reply, _dispatch_mach_handoff_reply_f, 
                        _dispatch_mach_hooks_install_4libxpc, _dispatch_mach_mig_demux, 
                        _dispatch_mach_mig_demux_get_context, _dispatch_mach_msg_create, 
@@ -128,6 +129,7 @@ exports:
                        _dispatch_source_set_registration_handler, _dispatch_source_set_registration_handler_f, 
                        _dispatch_source_set_timer, _dispatch_source_testcancel, _dispatch_suspend, 
                        _dispatch_swift_job_should_yield, _dispatch_sync, _dispatch_sync_f, 
+                       _dispatch_thread_get_current_override_qos_floor, _dispatch_thread_override_self, 
                        _dispatch_time, _dispatch_time_from_nsec, _dispatch_time_to_nsec, 
                        _dispatch_time_to_nsecs, _dispatch_tsd_indexes, _dispatch_walltime, 
                        _dispatch_workloop_copy_current, _dispatch_workloop_create, 
@@ -147,10 +149,10 @@ exports:
                        _os_workgroup_create_with_workload_id, _os_workgroup_create_with_workload_id_and_port, 
                        _os_workgroup_create_with_workload_id_and_workgroup, _os_workgroup_get_working_arena, 
                        _os_workgroup_interval_copy_current_4AudioToolbox, _os_workgroup_interval_create, 
-                       _os_workgroup_interval_create_with_workload_id, _os_workgroup_interval_finish, 
-                       _os_workgroup_interval_start, _os_workgroup_interval_update, 
-                       _os_workgroup_join, _os_workgroup_join_self, _os_workgroup_leave, 
-                       _os_workgroup_leave_self, _os_workgroup_max_parallel_threads, 
+                       _os_workgroup_interval_create_with_workload_id, _os_workgroup_interval_data_set_flags, 
+                       _os_workgroup_interval_finish, _os_workgroup_interval_start, 
+                       _os_workgroup_interval_update, _os_workgroup_join, _os_workgroup_join_self, 
+                       _os_workgroup_leave, _os_workgroup_leave_self, _os_workgroup_max_parallel_threads, 
                        _os_workgroup_parallel_create, _os_workgroup_set_working_arena, 
                        _os_workgroup_testcancel, _voucher_activity_create_with_data, 
                        _voucher_activity_create_with_location, _voucher_activity_flush, 

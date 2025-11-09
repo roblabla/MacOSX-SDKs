@@ -1,5 +1,5 @@
 //
-//  HMCharacteristicNumberRangeEvent.h
+//  HMCharacteristicThresholdRangeEvent.h
 //  HomeKit
 //
 //  Copyright (c) 2017 Apple Inc. All rights reserved.
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  * number range.
  */
 HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMCharacteristicThresholdRangeEvent : HMEvent <NSCopying, NSMutableCopying>
+    @interface HMCharacteristicThresholdRangeEvent : HMEvent<NSCopying, NSMutableCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -39,12 +39,12 @@ HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) 
 /*!
  * @brief The characteristic associated with the event.
  */
-@property(readonly, strong, nonatomic) HMCharacteristic *characteristic;
+@property (readonly, strong, nonatomic) HMCharacteristic *characteristic;
 
 /*!
  * @brief The range of the characteristic value that triggers the event.
  */
-@property(readonly, copy, nonatomic) HMNumberRange *thresholdRange;
+@property (readonly, copy, nonatomic) HMNumberRange *thresholdRange;
 
 @end
 
@@ -54,19 +54,19 @@ HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) 
  * number range.
  */
 HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMMutableCharacteristicThresholdRangeEvent : HMCharacteristicThresholdRangeEvent
+    @interface HMMutableCharacteristicThresholdRangeEvent : HMCharacteristicThresholdRangeEvent
 
 - (instancetype)init NS_UNAVAILABLE;
 
 /*!
  * @brief The characteristic associated with the event.
  */
-@property(readwrite, strong, nonatomic) HMCharacteristic *characteristic;
+@property (readwrite, strong, nonatomic) HMCharacteristic *characteristic;
 
 /*!
  * @brief The range of the characteristic value that triggers the event.
  */
-@property(readwrite, copy, nonatomic) HMNumberRange *thresholdRange;
+@property (readwrite, copy, nonatomic) HMNumberRange *thresholdRange;
 
 @end
 

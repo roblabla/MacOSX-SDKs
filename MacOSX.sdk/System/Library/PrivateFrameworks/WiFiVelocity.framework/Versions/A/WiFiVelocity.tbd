@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E5D86F90-7124-3DAE-9BA3-DCC247753832
+    value:           41B74E6E-9F85-3835-A392-0290472D56FF
   - target:          x86_64-maccatalyst
-    value:           E5D86F90-7124-3DAE-9BA3-DCC247753832
+    value:           41B74E6E-9F85-3835-A392-0290472D56FF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9B5402AD-A076-369C-BE41-9FED399802B9
+    value:           95C79687-6793-3A45-83AD-01FA11EA3160
   - target:          arm64e-maccatalyst
-    value:           9B5402AD-A076-369C-BE41-9FED399802B9
+    value:           95C79687-6793-3A45-83AD-01FA11EA3160
 install-name:    '/System/Library/PrivateFrameworks/WiFiVelocity.framework/Versions/A/WiFiVelocity'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _W5DebugDescriptionForAWDLSyncChannelSequence, _W5DebugDescriptionForAWDLSyncState, 
                        _W5DescriptionForAWDLElectionParameters, _W5DescriptionForAWDLOpMode, 
                        _W5DescriptionForAWDLScheduleState, _W5DescriptionForAWDLSyncChannelSequence, 

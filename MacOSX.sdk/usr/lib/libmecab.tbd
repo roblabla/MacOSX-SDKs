@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9B9E12C9-019F-3816-9EC3-F3086C1EF7B0
+    value:           EEA367E8-D309-3260-9C10-43D10082180D
   - target:          x86_64-maccatalyst
-    value:           9B9E12C9-019F-3816-9EC3-F3086C1EF7B0
+    value:           EEA367E8-D309-3260-9C10-43D10082180D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F5437F4A-11AB-3552-B4AC-892EA12C0CD1
+    value:           D8392134-B00A-398C-88E1-447FF9E1BC98
   - target:          arm64e-maccatalyst
-    value:           F5437F4A-11AB-3552-B4AC-892EA12C0CD1
+    value:           D8392134-B00A-398C-88E1-447FF9E1BC98
 install-name:    '/usr/lib/libmecab.dylib'
-current-version: 972.10
+current-version: 1019
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _mecab_cost_train, _mecab_destroy, _mecab_dict_gen, _mecab_dict_index, 
                        _mecab_dictionary_info, _mecab_do, _mecab_format_node, _mecab_get_feature, 
                        _mecab_get_input_code, _mecab_get_lastname_length, _mecab_get_lattice_level, 

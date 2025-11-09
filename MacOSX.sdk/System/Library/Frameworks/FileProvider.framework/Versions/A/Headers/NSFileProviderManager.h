@@ -9,6 +9,7 @@
 #import <FileProvider/NSFileProviderItem.h>
 #import <FileProvider/NSFileProviderDomain.h>
 #import <FileProvider/NSFileProviderEnumerating.h>
+#import <FileProvider/NSFileProviderModifyItemOptions.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,16 +20,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, NSFileProviderDomainRemovalMode) {
     /// Don't keep any files that are current in the domain
-    NSFileProviderDomainRemovalModeRemoveAll = 0,
+    NSFileProviderDomainRemovalModeRemoveAll FILEPROVIDER_API_AVAILABILITY_V4_0_IOS = 0,
 
     /// Delete the domain from the system but keeps the at least all the
     /// dirty corresponding user data around.
-    NSFileProviderDomainRemovalModePreserveDirtyUserData = 1,
+    NSFileProviderDomainRemovalModePreserveDirtyUserData FILEPROVIDER_API_AVAILABILITY_V4_0 = 1,
 
     /// Delete the domain from the system but keeps all the downloaded
     /// corresponding user data around.
-    NSFileProviderDomainRemovalModePreserveDownloadedUserData = 2,
-} NS_SWIFT_NAME(NSFileProviderManager.DomainRemovalMode) FILEPROVIDER_API_AVAILABILITY_V4_0;
+    NSFileProviderDomainRemovalModePreserveDownloadedUserData FILEPROVIDER_API_AVAILABILITY_V4_0 = 2,
+} NS_SWIFT_NAME(NSFileProviderManager.DomainRemovalMode) FILEPROVIDER_API_AVAILABILITY_V4_0_IOS;
 
 /**
  The file provider manager allows you to communicate with the file provider
@@ -70,19 +71,23 @@ Return the manager responsible for the default domain.
  Call this method either in the app or in the extension to trigger an
  enumeration, typically in response to a push.
 
- Set the containerItemIdentifier to the identifier of the enumerated container
- that was specified in
- -[NSFileProviderExtension enumeratorForContainerItemIdentifier:error:]
+ When using NSFileProviderExtension, the system will enumerate containers
+ while the user is viewing them in the UI. If there are changes to the container
+ while an enumerator is open, call this method with the identifier of that
+ container. This will trigger another call to
+ -[NSFileProviderEnumerator enumerateChangesForObserver:fromSyncAnchor:] on
+ that enumerator, and the UI will be refreshed, giving the user live updates on
+ the presented enumeration.
 
- This will trigger another call to
- -[NSFileProviderEnumerator enumerateChangesForObserver:fromSyncAnchor:]
- and the UI will be refreshed, giving the user live updates on the presented
- enumeration.
-
- If you have a change in the working set, call this method with
+ If there are changes in the working set, call this method with
  containerItemIdentifier set to NSFileProviderWorkingSetContainerItemIdentifier,
- even if there is no live enumeration for this item.  The working set is cached
- on the device and it's important to keep the cache in sync.
+ even if there is no live enumeration for the working set container.
+
+ When using NSFileProviderReplicatedExtension, only call this
+ method with NSFileProviderWorkingSetContainerItemIdentifier. Other container
+ identifiers are ignored. The system will automatically propagate
+ working set changes to the UI, without explicitly signaling the
+ containers currently being viewed in the UI.
 
  In addition to using this method, your application/extension can register for
  pushes using the PKPushTypeFileProvider push type. Pushes of the form
@@ -96,7 +101,7 @@ Return the manager responsible for the default domain.
 - (void)signalEnumeratorForContainerItemIdentifier:(NSFileProviderItemIdentifier)containerItemIdentifier completionHandler:(void (^)(NSError * __nullable error))completion NS_SWIFT_NAME(signalEnumerator(for:completionHandler:));
 
 /**
- Return the user visible URL for an item identifier.
+ Return the security scoped URL to the user visible location for an item identifier.
 
  The caller must use file coordination (see NSFileCoordinator) if it wishes to read the
  content or list the children of the URL. The caller should not try to manipulate files
@@ -112,8 +117,16 @@ Return the manager responsible for the default domain.
  This attribute is only set if the item has been assigned a different local name following
  a collision. Such local names are not synced up to the provider; the purpose of the attribute is
  to enable consistency checkers to detect this case.
+
+ Before accessing the content of the returned URL, the caller must call `-[NSURL startAccessingSecurityScopedResource]
+ on the returned URL and call `-[NSURL stopAccessingSecurityScopedResource]` when done accessing the content.
+
+ The returned URL grants read-write access to the user visible location for the corresponding item.
+
+ On iOS, for replicated domains, the extension process will never be granted access to the user
+ visible location, this function will always fail with `NSFileReadNoPermissionError`.
  */
-- (void)getUserVisibleURLForItemIdentifier:(NSFileProviderItemIdentifier)itemIdentifier completionHandler:(void (^)(NSURL * __nullable userVisibleFile, NSError * __nullable error))completionHandler FILEPROVIDER_API_AVAILABILITY_V3 NS_SWIFT_NAME(getUserVisibleURL(for:completionHandler:));
+- (void)getUserVisibleURLForItemIdentifier:(NSFileProviderItemIdentifier)itemIdentifier completionHandler:(void (^)(NSURL * __nullable userVisibleFile, NSError * __nullable error))completionHandler FILEPROVIDER_API_AVAILABILITY_V3_IOS NS_SWIFT_NAME(getUserVisibleURL(for:completionHandler:));
 
 /**
  Return the identifier and domain for a user visible URL.
@@ -123,7 +136,7 @@ Return the manager responsible for the default domain.
  provider/domain, or which hasn't yet been assigned an identifier by
  the provider will return the Cocoa error NSFileNoSuchFileError.
  */
-+ (void)getIdentifierForUserVisibleFileAtURL:(NSURL *)url completionHandler:(void (^)(NSFileProviderItemIdentifier __nullable itemIdentifier, NSFileProviderDomainIdentifier __nullable domainIdentifier, NSError * __nullable error))completionHandler FILEPROVIDER_API_AVAILABILITY_V3;
++ (void)getIdentifierForUserVisibleFileAtURL:(NSURL *)url completionHandler:(void (^)(NSFileProviderItemIdentifier __nullable itemIdentifier, NSFileProviderDomainIdentifier __nullable domainIdentifier, NSError * __nullable error))completionHandler FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 /**
  Registers the given NSURLSessionTask to be responsible for the specified item.
@@ -169,7 +182,7 @@ Return the manager responsible for the default domain.
  This call will not fail when called from the extension process with an active instance of the extension
  for that domain.
  */
-- (nullable NSURL *)temporaryDirectoryURLWithError:(NSError **)error FILEPROVIDER_API_AVAILABILITY_V3;
+- (nullable NSURL *)temporaryDirectoryURLWithError:(NSError **)error FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 /**
  Writes out a placeholder at the specified URL. The placeholder is used in place
@@ -221,7 +234,7 @@ Return the manager responsible for the default domain.
 /**
  Remove a domain with options
  */
-+ (void)removeDomain:(NSFileProviderDomain *)domain mode:(NSFileProviderDomainRemovalMode)mode completionHandler:(void(^)(NSURL *_Nullable_result preservedLocation, NSError *_Nullable error))completionHandler FILEPROVIDER_API_AVAILABILITY_V4_0;
++ (void)removeDomain:(NSFileProviderDomain *)domain mode:(NSFileProviderDomainRemovalMode)mode completionHandler:(void(^)(NSURL *_Nullable_result preservedLocation, NSError *_Nullable error))completionHandler FILEPROVIDER_API_AVAILABILITY_V4_0_IOS;
 
 /**
  Get all registered domains.
@@ -243,7 +256,7 @@ Return the manager responsible for the default domain.
  - NSFileProviderErrorCannotSynchronize
  */
 - (void)signalErrorResolved:(NSError *)error completionHandler:(void(^)(NSError *_Nullable error))completionHandler
-    FILEPROVIDER_API_AVAILABILITY_V3;
+FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 /**
  Returns the global progress for the specified kind of operations
@@ -269,7 +282,7 @@ Return the manager responsible for the default domain.
 
  The returned progress will have its fileOperationKind property set.
  */
-- (NSProgress *)globalProgressForKind:(NSProgressFileOperationKind)kind NS_SWIFT_NAME(globalProgress(for:)) FILEPROVIDER_API_AVAILABILITY_V3_1;
+- (NSProgress *)globalProgressForKind:(NSProgressFileOperationKind)kind NS_SWIFT_NAME(globalProgress(for:)) FILEPROVIDER_API_AVAILABILITY_V3_1_IOS;
 
 @end
 
@@ -281,7 +294,7 @@ Return the manager responsible for the default domain.
  */
 
 FOUNDATION_EXPORT NSNotificationName const NSFileProviderMaterializedSetDidChange
-FILEPROVIDER_API_AVAILABILITY_V3_1;
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS;
 
 @interface NSFileProviderManager (MaterializedSet)
 
@@ -300,7 +313,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1;
  - The app/extension enumerates the materialized set after the system calls
    'materializedItemsDidChangeWithCompletionHandler'.
  */
-- (id<NSFileProviderEnumerator>)enumeratorForMaterializedItems FILEPROVIDER_API_AVAILABILITY_V3;
+- (id<NSFileProviderEnumerator>)enumeratorForMaterializedItems FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 @end
 
@@ -311,9 +324,9 @@ FILEPROVIDER_API_AVAILABILITY_V3_1;
  Note, this notification starts to be posted only after `+[NSFileProviderManager getDomainsWithCompletionHandler:]` is called.
  */
 FOUNDATION_EXPORT NSNotificationName const NSFileProviderPendingSetDidChange
-FILEPROVIDER_API_AVAILABILITY_V3_1;
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS;
 
-FILEPROVIDER_API_AVAILABILITY_V3_1
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS
 @protocol NSFileProviderPendingSetEnumerator <NSFileProviderEnumerator>
 
 /**
@@ -329,6 +342,13 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
  */
 @property (nonatomic, readonly) NSTimeInterval refreshInterval;
 
+/**
+ This property is set to YES when the enumeration of the pending set was capped at or below its maximum size.
+ Under normal conditions, the count of items pending sync will get lower as sync progresses, and this variable
+ will eventually be set to NO when the pending set again includes all items pending sync.
+ */
+@property (nonatomic, readonly, getter=isMaximumSizeReached) BOOL maximumSizeReached FILEPROVIDER_API_AVAILABILITY_V5_0_IOS;
+
 @end
 
 @interface NSFileProviderManager (PendingSet)
@@ -340,7 +360,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
  On later modifications in the set, the system will call
  'pendingItemsDidChangeWithCompletionHandler'.
  */
-- (id<NSFileProviderPendingSetEnumerator>)enumeratorForPendingItems FILEPROVIDER_API_AVAILABILITY_V3_1;
+- (id<NSFileProviderPendingSetEnumerator>)enumeratorForPendingItems FILEPROVIDER_API_AVAILABILITY_V3_1_IOS;
 
 @end
 
@@ -374,7 +394,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
  will be received for both the import and the scan.
  */
 + (void)importDomain:(NSFileProviderDomain *)domain fromDirectoryAtURL:(NSURL *)url completionHandler:(void(^)(NSError * _Nullable error))completionHandler
-    FILEPROVIDER_API_AVAILABILITY_V3;
+FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 /** Notify the system that the itemIdentifiers known by the system are not valid anymore.
 
@@ -415,7 +435,22 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 - (void)reimportItemsBelowItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
                            completionHandler:(void (^)(NSError * _Nullable error))completionHandler
     NS_SWIFT_NAME(reimportItems(below:completionHandler:))
-    FILEPROVIDER_API_AVAILABILITY_V3;
+FILEPROVIDER_API_AVAILABILITY_V3_IOS;
+
+/**
+  Request that the system schedules a call to -[NSFileProviderReplicatedExtension modifyItem:] for the given item identifier.
+  The fields passed to modifyItem will contain at least the set requested via the `fields` parameter.
+  The completion handler is called when the system has persisted the request. There is no guarantee as to when the
+  modifyItem call will be scheduled.
+  The completion handler may be called with an error. If the provider passes the `.content` field when the item
+  is not downloaded, or when the item is a folder, then the system will return CocoaError(.ubiquitousFileUnavailable).
+ */
+- (void)requestModificationOfFields:(NSFileProviderItemFields)fields
+              forItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
+                            options:(NSFileProviderModifyItemOptions)options
+                  completionHandler:(void(^)(NSError *_Nullable error))completionHandler
+FILEPROVIDER_API_AVAILABILITY_V2_V5;
+
 
 @end
 
@@ -446,7 +481,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 - (void)evictItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
               completionHandler:(void (^)(NSError * _Nullable error))completionHandler
     NS_SWIFT_NAME(evictItem(identifier:completionHandler:))
-    FILEPROVIDER_API_AVAILABILITY_V3;
+FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 @end
 
@@ -473,7 +508,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 - (void)waitForChangesOnItemsBelowItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
                                    completionHandler:(void (^)(NSError * _Nullable error))completionHandler
     NS_SWIFT_NAME(waitForChanges(below:completionHandler:))
-    FILEPROVIDER_API_AVAILABILITY_V3;
+FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 @end
 
 @interface NSFileProviderManager (Stabilization)
@@ -488,7 +523,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
  The completion handler is called when both sets of changes are caught up to at least the time
  of the call. This is useful to enforce a consistent state for testing.
  */
-- (void)waitForStabilizationWithCompletionHandler:(void(^)(NSError * _Nullable error))completionHandler FILEPROVIDER_API_AVAILABILITY_V3;
+- (void)waitForStabilizationWithCompletionHandler:(void(^)(NSError * _Nullable error))completionHandler FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 @end
 
 typedef NS_OPTIONS(NSUInteger, NSFileProviderManagerDisconnectionOptions) {
@@ -505,6 +540,33 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderManagerDisconnectionOptions) {
     NS_SWIFT_NAME(disconnect(reason:options:completionHandler:));
 
 - (void)reconnectWithCompletionHandler:(void(^)(NSError * _Nullable error))completionHandler FILEPROVIDER_API_AVAILABILITY_V3;
+@end
+
+@interface NSFileProviderManager (Materialize)
+
+/**
+ Request that the system schedule a download for an item.
+
+ The completion handler is called when the system acknowledges the download request,
+ or with an error indicating why it didn't (e.g NSFileProviderErrorNoSuchItem.)
+ The system will then call -fetchContentsForItemWithIdentifier at the earliest
+ convenient time.
+
+ Set rangeToMaterialize to NSMakeRange(offset, nbytes) to request a partial download.
+ The system will then invoke -fetchPartialContentsForItemWithIdentifier instead of
+ fetchContentsForItemWithIdentifier. For a full download, set rangeToMaterialize to
+ NSMakeRange(NSNotFound, 0). -[NSFileProviderManager evictItemWithIdentifier:completionHandler:]
+ must be called on a partially materialized file before requesting an extent to be downloaded from a
+ later version of the file. 
+
+ This method cannot be used to download directories recursively. When invoked on a
+ dataless directory, it will trigger an enumeration of the directory, causing a
+ materialization of the directory one level down only. All the children of the
+ directory will remain dataless after the enumeration.
+ */
+- (void)requestDownloadForItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
+                              requestedRange:(NSRange)rangeToMaterialize
+                           completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_REFINED_FOR_SWIFT FILEPROVIDER_API_AVAILABILITY_V5_0;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-
+NS_CLASS_AVAILABLE(10_8, 13_0)
 @interface EKObject : NSObject
 
 // Returns YES if this object or any sub-object (alarm, etc.) has uncommitted changes.

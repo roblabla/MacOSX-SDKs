@@ -7,7 +7,7 @@
 
 @class NSAppleEventDescriptor, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSError, NSFileHandle, NSString, NSURL, NSXPCConnection;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*
     These classes are intended to execute user-supplied scripts, and will execute them outside of the application's sandbox, if any.  (They are *not* intended to execute scripts built into an application; for that, use NSTask, NSAppleScript, or AMWorkflow.)  If the application is sandboxed, then the script must be in the "application scripts" folder, which you can get using +[NSFileManager URLForDirectory:NSApplicationScriptsDirectory ...].  A sandboxed application may read from, but not write to, this folder.
@@ -35,7 +35,7 @@ API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos)
 @property (readonly, copy) NSURL *scriptURL;
 
 // Execute the script with no input and ignoring any result.  This and the other "execute" methods below may be called at most once on any given instance.  If the script completed normally, the completion handler's "error" parameter will be nil.
-typedef void (^NSUserScriptTaskCompletionHandler)(NSError * _Nullable error);
+typedef void (NS_SWIFT_SENDABLE ^NSUserScriptTaskCompletionHandler)(NSError * _Nullable error);
 - (void)executeWithCompletionHandler:(nullable NSUserScriptTaskCompletionHandler)handler;
 
 @end
@@ -52,7 +52,7 @@ API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos)
 @property (nullable, retain) NSFileHandle *standardError;
 
 // Execute the file with the given arguments.  "arguments" is an array of NSStrings.  The arguments do not undergo shell expansion, so you do not need to do special quoting, and shell variables are not resolved.
-typedef void (^NSUserUnixTaskCompletionHandler)(NSError *_Nullable error);
+typedef void (NS_SWIFT_SENDABLE ^NSUserUnixTaskCompletionHandler)(NSError *_Nullable error);
 - (void)executeWithArguments:(nullable NSArray<NSString *> *)arguments completionHandler:(nullable NSUserUnixTaskCompletionHandler)handler;
 
 @end
@@ -67,7 +67,7 @@ API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos)
 }
 
 // Execute the AppleScript script by sending it the given Apple event.  Pass nil to execute the script's default "run" handler.
-typedef void (^NSUserAppleScriptTaskCompletionHandler)(NSAppleEventDescriptor * _Nullable result, NSError * _Nullable error);
+typedef void (NS_SWIFT_SENDABLE ^NSUserAppleScriptTaskCompletionHandler)(NSAppleEventDescriptor * _Nullable result, NSError * _Nullable error);
 - (void)executeWithAppleEvent:(nullable NSAppleEventDescriptor *)event completionHandler:(nullable NSUserAppleScriptTaskCompletionHandler)handler;
 
 @end
@@ -85,9 +85,9 @@ API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos)
 @property (nullable, copy) NSDictionary<NSString *, id> *variables;
 
 // Execute the Automator workflow, passing it the given input.
-typedef void (^NSUserAutomatorTaskCompletionHandler)(id _Nullable result, NSError * _Nullable error);
+typedef void (NS_SWIFT_SENDABLE ^NSUserAutomatorTaskCompletionHandler)(id _Nullable result, NSError * _Nullable error);
 - (void)executeWithInput:(nullable id <NSSecureCoding>)input completionHandler:(nullable NSUserAutomatorTaskCompletionHandler)handler;
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

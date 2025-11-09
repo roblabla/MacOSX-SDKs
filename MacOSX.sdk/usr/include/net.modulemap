@@ -61,6 +61,11 @@ module Darwin.net [system] {
     export *
   }
 
+  explicit module if_var_status {
+    header "net/if_var_status.h"
+    export *
+  }
+
   module kext_net {
     header "net/kext_net.h"
     export *

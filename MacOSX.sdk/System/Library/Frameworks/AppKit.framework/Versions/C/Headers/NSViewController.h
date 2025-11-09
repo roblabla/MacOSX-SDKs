@@ -222,11 +222,11 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 /* Called when the view controller is going to be presented. Implement presentation in this method when it is called.
 */
-- (void)animatePresentationOfViewController:(NSViewController *)viewController fromViewController:(NSViewController *)fromViewController API_AVAILABLE(macos(10.10));
+- (void)animatePresentationOfViewController:(NSViewController *)viewController fromViewController:(NSViewController *)fromViewController NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.10));
 
 /* Called to dismiss a previously shown view controller.
 */
-- (void)animateDismissalOfViewController:(NSViewController *)viewController fromViewController:(NSViewController *)fromViewController API_AVAILABLE(macos(10.10));
+- (void)animateDismissalOfViewController:(NSViewController *)viewController fromViewController:(NSViewController *)fromViewController NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.10));
 
 @end
 

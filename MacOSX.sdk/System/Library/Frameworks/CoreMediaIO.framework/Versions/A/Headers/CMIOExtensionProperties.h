@@ -565,6 +565,13 @@ API_AVAILABLE(macos(12.3))
 @property(atomic, readonly, copy) NSUUID *clientID;
 
 /*!
+@property signingID
+@abstract
+ The client's signing identifier.
+*/
+@property(atomic, readonly, nullable, copy) NSString *signingID API_AVAILABLE(macos(13.0));
+
+/*!
 @property pid
 @abstract
  The pid of the client application.

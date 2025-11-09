@@ -100,6 +100,8 @@ typedef NS_ENUM(NSInteger, PHAssetCollectionSubtype) {
     PHAssetCollectionSubtypeSmartAlbumLongExposures API_AVAILABLE(macos(10.15), ios(11), tvos(11)) = 215,
     PHAssetCollectionSubtypeSmartAlbumUnableToUpload API_AVAILABLE(macos(10.15), ios(13), tvos(13)) = 216,
     PHAssetCollectionSubtypeSmartAlbumRAW API_AVAILABLE(macos(12), ios(15), tvos(15)) = 217,
+    PHAssetCollectionSubtypeSmartAlbumCinematic API_AVAILABLE(macos(12), ios(15), tvos(15)) = 218,
+
 
     // Used for fetching, if you don't care about the exact subtype
     PHAssetCollectionSubtypeAny = NSIntegerMax
@@ -144,6 +146,7 @@ typedef NS_OPTIONS(NSUInteger, PHAssetMediaSubtype) {
     PHAssetMediaSubtypeVideoStreamed      = (1UL << 16),
     PHAssetMediaSubtypeVideoHighFrameRate = (1UL << 17),
     PHAssetMediaSubtypeVideoTimelapse     = (1UL << 18),
+    PHAssetMediaSubtypeVideoCinematic API_AVAILABLE(macos(12), ios(15), tvos(15)) = (1UL << 21),
 };
 
 typedef NS_OPTIONS(NSUInteger, PHAssetBurstSelectionType) {
@@ -176,4 +179,11 @@ typedef NS_ENUM(NSInteger, PHAssetResourceType) {
 } API_AVAILABLE(ios(9));
 
 API_AVAILABLE_END
+
+typedef NS_ENUM(NSInteger, PHObjectType) {
+    PHObjectTypeAsset                = 1,
+    PHObjectTypeAssetCollection      = 2,
+    PHObjectTypeCollectionList       = 3,
+} API_AVAILABLE(macos(13), ios(16), tvos(16));
+
 #endif

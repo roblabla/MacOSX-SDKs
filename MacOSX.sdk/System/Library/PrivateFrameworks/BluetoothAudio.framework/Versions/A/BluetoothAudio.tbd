@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           59B5F9B2-FF5A-3547-8219-E1102586E8D2
+    value:           8A42B8B7-A32B-34A6-8A8A-DB1ED462DD4C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           14A0D6F2-DA78-3EB1-A11C-1679140A0A4A
+    value:           7546E57A-F218-31F8-9F1F-7E44BF0DFC8B
 install-name:    '/System/Library/PrivateFrameworks/BluetoothAudio.framework/Versions/A/BluetoothAudio'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BluetoothAudioVersionNumber, _BluetoothAudioVersionString, 
                        _BluetoothEndpointCollectionCopyAsCFArray, _BluetoothEndpointCollectionCreate, 
                        _BluetoothEndpointCollectionDelete, _BluetoothEndpointCollectionGetCount, 
@@ -23,13 +23,15 @@ exports:
                        _BluetoothEndpointStreamAudioCreate, _BluetoothEndpointUpdateWithDescription, 
                        _BluetoothEndpoint_Disassociate, _kBluetoothEndpointDescriptionProperty_BatteryLevels, 
                        _kBluetoothEndpointDescriptionProperty_Connected, _kBluetoothEndpointDescriptionProperty_DeviceID, 
-                       _kBluetoothEndpointDescriptionProperty_Features, _kBluetoothEndpointDescriptionProperty_ListeningMode, 
-                       _kBluetoothEndpointDescriptionProperty_ModelID, _kBluetoothEndpointDescriptionProperty_Name, 
-                       _kBluetoothEndpointDescriptionProperty_Nearby, _kBluetoothEndpointDescriptionProperty_Shareable, 
+                       _kBluetoothEndpointDescriptionProperty_Features, _kBluetoothEndpointDescriptionProperty_IsGenuineAirPods, 
+                       _kBluetoothEndpointDescriptionProperty_ListeningMode, _kBluetoothEndpointDescriptionProperty_ModelID, 
+                       _kBluetoothEndpointDescriptionProperty_Name, _kBluetoothEndpointDescriptionProperty_Nearby, 
+                       _kBluetoothEndpointDescriptionProperty_Shareable, _kBluetoothEndpointDescriptionProperty_SmartRoutingEnabled, 
                        _kBluetoothEndpointDescriptionProperty_SpatialAudioActive, 
                        _kBluetoothEndpointDescriptionProperty_SpatialAudioEnabled, 
                        _kBluetoothEndpointDescriptionProperty_SpatialAudioMode, _kBluetoothEndpointDescriptionProperty_Started, 
                        _kBluetoothEndpointDescriptionProperty_SupportedFormats, _kBluetoothEndpointDescriptionProperty_SupportedListeningModes, 
+                       _kBluetoothEndpointDescriptionProperty_SupportsSmartRouting, 
                        _kBluetoothEndpointDescriptionProperty_SupportsSpatialAudio, 
                        _staticManager ]
     objc-classes:    [ BluetoothBridge ]

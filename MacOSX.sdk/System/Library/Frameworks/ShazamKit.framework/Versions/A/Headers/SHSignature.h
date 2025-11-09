@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <ShazamKit/SHDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// @brief The @c SHSignature class is an opaque data container that can be used to store recognition data.
 /// @discussion Signatures are a compact lossy representation of the original audio. The original audio cannot
@@ -21,7 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// There are exceptions to the requirement for exactly matching audio, a signature is robust against slight changes in frequency and speed.
 ///
-SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
+/// @note @c SHSignature is not intended to be subclassed
+SH_EXPORT NS_SWIFT_SENDABLE API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface SHSignature : NSObject <NSSecureCoding, NSCopying>
 
 /// @brief The duration of the input audio that this signature is derived from
@@ -47,4 +48,4 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

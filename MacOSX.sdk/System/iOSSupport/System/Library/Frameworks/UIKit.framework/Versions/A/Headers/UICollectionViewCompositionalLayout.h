@@ -9,7 +9,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UICollectionViewLayout.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class NSCollectionLayoutSection;
 @class NSCollectionLayoutGroup;
@@ -101,14 +101,16 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTO
 // default is UIContentInsetsReferenceAutomatic i.e. following the layout configuration's contentInsetsReference
 @property(nonatomic) UIContentInsetsReference contentInsetsReference API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
+/// Specifies the content insets reference for boundary supplementaries in this section.
+/// The default value of this property is UIContentInsetsReference.automatic, which means that any insets specified on a @c NSCollectionLayoutBoundarySupplementaryItem
+/// will follow the layout configuration's @c contentInsetsReference.
+@property (nonatomic) UIContentInsetsReference supplementaryContentInsetsReference API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+
 // default is .none
 @property(nonatomic) UICollectionLayoutSectionOrthogonalScrollingBehavior orthogonalScrollingBehavior;
 
 // Supplementaries associated with the boundary edges of the section
 @property(nonatomic,copy) NSArray<NSCollectionLayoutBoundarySupplementaryItem*> *boundarySupplementaryItems;
-
-// by default, section supplementaries will follow any section-specific contentInsets
-@property(nonatomic) BOOL supplementariesFollowContentInsets;
 
 // Called for each layout pass to allow modification of item properties right before they are displayed.
 @property(nonatomic,copy,nullable) NSCollectionLayoutSectionVisibleItemsInvalidationHandler visibleItemsInvalidationHandler;
@@ -189,45 +191,21 @@ typedef NSArray<NSCollectionLayoutGroupCustomItem*> * _Nonnull(^NSCollectionLayo
 UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutGroup : NSCollectionLayoutItem<NSCopying>
 
-// Specifies a group that will have N items equally sized along the horizontal axis. use interItemSpacing to insert space between items
-//
-//   +------+--+------+--+------+
-//   |~~~~~~|  |~~~~~~|  |~~~~~~|
-//   |~~~~~~|  |~~~~~~|  |~~~~~~|
-//   |~~~~~~|  |~~~~~~|  |~~~~~~|
-//   +------+--+------+--+------+
-//            ^        ^
-//            |        |
-//    +-----------------------+
-//    |  Inter Item Spacing   |
-//    +-----------------------+
-//
-+ (instancetype)horizontalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitem:(NSCollectionLayoutItem*)subitem count:(NSInteger)count;
+/// Specifies a group that will horizontally repeat its subitem a fixed number of times.
+/// @param layoutSize The group's size.
+/// @param subitem The subitem to repeat. It is the caller's responsibility to ensure that the group's @c layoutSize can fit @c count repetitions of this item.
+/// @param count The number of times to repeat the passed in subitem.
++ (instancetype)horizontalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize repeatingSubitem:(NSCollectionLayoutItem*)subitem count:(NSInteger)count API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
 
 // Specifies a group that will repeat items until available horizontal space is exhausted.
 //   note: any remaining space after laying out items can be apportioned among flexible interItemSpacing definitions
 + (instancetype)horizontalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitems:(NSArray<NSCollectionLayoutItem*>*)subitems;
 
-// Specifies a group that will have N items equally sized along the vertical axis. use interItemSpacing to insert space between items
-//   +------+
-//   |~~~~~~|
-//   |~~~~~~|
-//   |~~~~~~|
-//   +------+
-//   |      |<--+
-//   +------+   |
-//   |~~~~~~|   |    +-----------------------+
-//   |~~~~~~|   +----|  Inter Item Spacing   |
-//   |~~~~~~|   |    +-----------------------+
-//   +------+   |
-//   |      |<--+
-//   +------+
-//   |~~~~~~|
-//   |~~~~~~|
-//   |~~~~~~|
-//   +------+
-//
-+ (instancetype)verticalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitem:(NSCollectionLayoutItem*)subitem count:(NSInteger)count;
+/// Specifies a group that will vertically repeat its subitem a fixed number of times.
+/// @param layoutSize The group's size.
+/// @param subitem The subitem to repeat. It is the caller's responsibility to ensure that the group's @c layoutSize can fit @c count repetitions of this item.
+/// @param count The number of times to repeat the passed in subitem.
++ (instancetype)verticalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize repeatingSubitem:(NSCollectionLayoutItem*)subitem count:(NSInteger)count API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
 
 // Specifies a group that will repeat items until available vertical space is exhausted.
 //   note: any remaining space after laying out items can be apportioned among flexible interItemSpacing definitions
@@ -573,9 +551,27 @@ API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @property(nonatomic,readonly,nullable) NSString *representedElementKind;
 @end
 
+
+@interface NSCollectionLayoutSection (Deprecated)
+// by default, section supplementaries will follow any section-specific contentInsets
+@property(nonatomic) BOOL supplementariesFollowContentInsets API_DEPRECATED_WITH_REPLACEMENT("supplementaryContentInsetsReference", ios(13.0, 16.0), tvos(13.0, 16.0), watchos(6.0, 9.0));
+@end
+
+@interface NSCollectionLayoutGroup (Deprecated)
+
+// Specifies a group that will have N items equally sized along the horizontal axis. use interItemSpacing to insert space between items
+// Forces the width dimension of the subitem to .fractionalWidth(1.0/count).
++ (instancetype)horizontalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitem:(NSCollectionLayoutItem*)subitem count:(NSInteger)count API_DEPRECATED_WITH_REPLACEMENT("+horizontalGroupWithLayoutSize:repeatingSubitem:count:", ios(13.0, 16.0), tvos(13.0, 16.0), watchos(6.0, 9.0));
+
+// Specifies a group that will have N items equally sized along the vertical axis. use interItemSpacing to insert space between items
+// Forces the height dimension of the subitem to .fractionalHeight(1.0/count).
++ (instancetype)verticalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitem:(NSCollectionLayoutItem*)subitem count:(NSInteger)count API_DEPRECATED_WITH_REPLACEMENT("+verticalGroupWithLayoutSize:repeatingSubitem:count:", ios(13.0, 16.0), tvos(13.0, 16.0), watchos(6.0, 9.0));
+
+@end
+
 #endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 
 

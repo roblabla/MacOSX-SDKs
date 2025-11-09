@@ -10,7 +10,7 @@
 @class NSArray<ObjectType>, NSData, NSDictionary<KeyType, ObjectType>, NSInputStream, NSNumber, NSOutputStream, NSRunLoop, NSString;
 @protocol NSNetServiceDelegate, NSNetServiceBrowserDelegate;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #pragma mark Error constants
 
@@ -19,7 +19,7 @@ FOUNDATION_EXPORT NSErrorDomain const NSNetServicesErrorDomain API_AVAILABLE(mac
 
 typedef NS_ENUM(NSInteger, NSNetServicesError) {
     
-/* An unknown error occured during resolution or publication.
+/* An unknown error occurred during resolution or publication.
 */
     NSNetServicesUnknownError = -72000L,
     
@@ -327,4 +327,4 @@ API_AVAILABLE(macos(10.2), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

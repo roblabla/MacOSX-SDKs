@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7B37A281-AC2B-34D4-A899-8C1FAF3EDB5D
+    value:           29781EAA-67D9-3875-9BFB-BC361F5774BB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BA7D9587-C4D1-3C11-AC5B-BED99AF2AC95
+    value:           32217D1C-F4A9-3266-A262-29C0CA798C02
 install-name:    '/System/Library/PrivateFrameworks/SystemAdministration.framework/Versions/A/SystemAdministration'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NetworkTimeStartedNotification, _NetworkTimeStoppedNotification, 
                        _SafeCFBundleGetFunctionPointerForName, _SecRequiresGracePeriod, 
                        _XMLStringFromObject, _canOpenAccountsPreferencePane, _collectionFromXMLString, 
@@ -23,15 +23,16 @@ exports:
                        _kADMSecureTokenUserPasswordKey, _kickMCXDForUID, _loadAppKit, 
                        _setSafariLockedSync, _writeKeyboardType ]
     objc-classes:    [ ADMARDConfig, ADMAccountPasswordPolicy, ADMCredential, ADMDSNode, 
-                       ADMDSRecord, ADMDynamicDNSConfig, ADMGroup, ADMGuestUserConfig, 
-                       ADMHostConfig, ADMInternetServices, ADMLocalUser, ADMLoginPrefs, 
-                       ADMNetworkTimeClient, ADMNetworkTimeServer, ADMOwnerCredential, 
-                       ADMParentalControlsConfig, ADMPowerActivityManager, ADMPrinterSharingConfig, 
-                       ADMRemoteAEConfig, ADMRemoteUser, ADMSysKeyChainConfig, ADMSystem, 
-                       ADMSystemClock, ADMSystemProvisioningDecision, ADMUser, ADMUserAccountUtilities, 
-                       ADMWebServerConfig, ADM_NVRAMConfig, AdminAuthenticator, AdminDSAuthenticator, 
-                       AdminDirectoryService, DOAsyncResult, MCXPrefObject, UserUtilities, 
-                       WriteConfigClient, WriteConfigOnewayMessageDispatcher ]
+                       ADMDSRecord, ADMDynamicDNSConfig, ADMFirewallConfig, ADMGroup, 
+                       ADMGuestUserConfig, ADMHostConfig, ADMInternetServices, ADMLocalUser, 
+                       ADMLoginPrefs, ADMNetworkTimeClient, ADMNetworkTimeServer, 
+                       ADMOwnerCredential, ADMParentalControlsConfig, ADMPowerActivityManager, 
+                       ADMPrinterSharingConfig, ADMRemoteAEConfig, ADMRemoteUser, 
+                       ADMSysKeyChainConfig, ADMSystem, ADMSystemClock, ADMSystemProvisioningDecision, 
+                       ADMUser, ADMUserAccountUtilities, ADMWebServerConfig, ADM_NVRAMConfig, 
+                       AdminAuthenticator, AdminDSAuthenticator, AdminDirectoryService, 
+                       AuthenticatedOperation, AuthenticationConfiguration, DOAsyncResult, 
+                       MCXPrefObject, UserUtilities, WriteConfigClient, WriteConfigOnewayMessageDispatcher ]
     objc-ivars:      [ ADMDSNode.mDirectoryService, ADMDSNode.mNodeName, ADMDSNode.mNodeReference, 
                        ADMDSNode.mOpenCloseSemaphore, ADMDSRecord.mNode, ADMDSRecord.mRecordName, 
                        ADMDSRecord.mRecordReference, ADMDSRecord.mRecordType, ADMGroup.mGUIDChecked, 

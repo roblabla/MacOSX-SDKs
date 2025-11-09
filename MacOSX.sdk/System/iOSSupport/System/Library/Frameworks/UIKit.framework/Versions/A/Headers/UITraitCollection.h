@@ -15,9 +15,9 @@
 #import <UIKit/UIContentSizeCategory.h>
 
 /*! A trait collection encapsulates the system traits of an interface's environment. */
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0))
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_SENDABLE
 @interface UITraitCollection : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -72,6 +72,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0))
  */
 + (UITraitCollection *)traitCollectionWithActiveAppearance:(UIUserInterfaceActiveAppearance)userInterfaceActiveAppearance API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 @property (nonatomic, readonly) UIUserInterfaceActiveAppearance activeAppearance API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));  // unspecified: UIUserInterfaceActiveAppearanceUnspecified
+
++ (UITraitCollection *)traitCollectionWithToolbarItemPresentationSize:(UINSToolbarItemPresentationSize)toolbarItemPresentationSize API_AVAILABLE(macCatalyst(16.0));
+@property (nonatomic, readonly) UINSToolbarItemPresentationSize toolbarItemPresentationSize API_AVAILABLE(macCatalyst(16.0));
 
 @end
 
@@ -130,7 +133,7 @@ NS_SWIFT_UI_ACTOR
 @end
 
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UITraitCollection.h>

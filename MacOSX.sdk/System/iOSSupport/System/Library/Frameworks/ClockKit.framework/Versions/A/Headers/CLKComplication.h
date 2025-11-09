@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplication : NSObject <NSCopying>
 
 /// The family of this complication.

@@ -2,7 +2,7 @@
 //  VZFileHandleNetworkDeviceAttachment.h
 //  Virtualization
 //
-//  Copyright © 2020 Apple Inc. All rights reserved.
+//  Copyright © 2020-2022 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZNetworkDeviceAttachment.h>
@@ -33,6 +33,20 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @abstract The file handle associated with this attachment.
  */
 @property (readonly, strong) NSFileHandle *fileHandle;
+
+/*!
+ @abstract The maximum transmission unit (MTU) associated with this attachment.
+ @discussion
+    The client side of the associated datagram socket must be properly configured with the appropriate values for
+    `SO_SNDBUF`, and `SO_RCVBUF`, which can be set using the `setsockopt` system call. The value of `SO_RCVBUF` is
+    expected to be at least double the value of `SO_SNDBUF`, and for optimal performance, the value of `SO_RCVBUF`
+    is recommended to be four times the value of `SO_SNDBUF`.
+
+    The default MTU is 1500.
+    The maximum MTU allowed is 65535, and the minimum MTU allowed is 1500. An invalid MTU value will result in an invalid
+    virtual machine configuration.
+ */
+@property (readwrite) NSInteger maximumTransmissionUnit API_AVAILABLE(macos(13.0));
 
 @end
 

@@ -37,3 +37,4 @@
 #import <MediaPlayer/MPVolumeSettings.h>
 #import <MediaPlayer/MPVolumeView.h>
 #import <MediaPlayer/NSUserActivity+MediaPlayerAdditions.h>
+#import <MediaPlayer/AVPlayerItem+MediaPlayerAdditions.h>

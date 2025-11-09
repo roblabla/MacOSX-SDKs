@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           543DEF98-5831-3ACB-A122-CCA81279B0C2
+    value:           B636C76E-CAA9-3E93-8B72-B56B5E670845
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           19E46D58-F8B8-3102-AE7F-FDF7822BD155
+    value:           B5309884-5FF3-31B5-BE15-2CB721E92092
 install-name:    '/System/Library/Frameworks/SyncServices.framework/Versions/A/SyncServices'
 current-version: 729
 compatibility-version: 48
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ISDArrayAsGlobalIds, _ISDAsGlobalId, _ISDAvailabilityChangedNotification, 
                        _ISDBadNewsException, _ISDCleanupExtraLogFiles, _ISDCleanupLogFiles, 
                        _ISDDefaultDoublePrecision, _ISDEnableAllFacilities, _ISDEnableFacility, 

@@ -6,7 +6,7 @@
 
 @class NSString, NSDictionary;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NSString * NSDistributedNotificationCenterType NS_TYPED_EXTENSIBLE_ENUM;
 
@@ -65,5 +65,5 @@ static const NSDistributedNotificationOptions NSNotificationPostToAllSessions = 
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 

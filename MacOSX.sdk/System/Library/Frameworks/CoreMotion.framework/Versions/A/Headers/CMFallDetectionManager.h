@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreMotion/CMAvailability.h>
 #import <CoreMotion/CMAuthorization.h>
-#import "CMFallDetectionEvent.h"
+#import <CoreMotion/CMFallDetectionEvent.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -10,7 +10,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIView.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*
  * UIAccessibilityLocationDescriptor objects are used to describe to assistive
@@ -62,7 +62,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIAccessibilityLocationDescriptor.h>

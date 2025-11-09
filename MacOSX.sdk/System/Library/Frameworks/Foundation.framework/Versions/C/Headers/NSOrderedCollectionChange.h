@@ -4,7 +4,7 @@
 
 #import <Foundation/NSObject.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, NSCollectionChangeType) {
     NSCollectionChangeInsert,
@@ -60,4 +60,4 @@ API_AVAILABLE(macosx(10.15), ios(13.0), watchos(6.0), tvos(13.0))
                associatedIndex:(NSUInteger)associatedIndex NS_DESIGNATED_INITIALIZER;
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

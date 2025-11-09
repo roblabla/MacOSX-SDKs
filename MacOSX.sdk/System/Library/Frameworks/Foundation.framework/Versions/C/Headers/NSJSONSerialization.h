@@ -7,7 +7,7 @@
 
 @class NSError, NSOutputStream, NSInputStream, NSData;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_OPTIONS(NSUInteger, NSJSONReadingOptions) {
     NSJSONReadingMutableContainers = (1UL << 0),
@@ -39,10 +39,7 @@ typedef NS_OPTIONS(NSUInteger, NSJSONWritingOptions) {
     - NSNumbers are not NaN or infinity
 */
 API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0))
-@interface NSJSONSerialization : NSObject {
-@private
-    void *reserved[6];
-}
+@interface NSJSONSerialization : NSObject
 
 /* Returns YES if the given object can be converted to JSON data, NO otherwise. The object must have the following properties:
     - Top level object is an NSArray or NSDictionary
@@ -72,4 +69,4 @@ API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

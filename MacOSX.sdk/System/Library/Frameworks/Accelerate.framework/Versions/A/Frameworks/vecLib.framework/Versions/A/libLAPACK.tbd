@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F78D3D7E-4619-314D-8CE7-E57405207C62
+    value:           7E26C716-A298-37A3-A963-D716F630FB95
   - target:          x86_64-maccatalyst
-    value:           F78D3D7E-4619-314D-8CE7-E57405207C62
+    value:           7E26C716-A298-37A3-A963-D716F630FB95
   - target:          x86_64h-macos
-    value:           A5CA211B-F32D-3B47-850D-267D0374502A
+    value:           EDF50A0B-B064-3344-B803-9F84F4B00FCD
   - target:          x86_64h-maccatalyst
-    value:           A5CA211B-F32D-3B47-850D-267D0374502A
+    value:           EDF50A0B-B064-3344-B803-9F84F4B00FCD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FFFD12C9-FAE5-337B-8569-E3CFCFC4F8BB
+    value:           C14FAD71-8B51-3B8C-A737-728D4F33F317
   - target:          arm64e-maccatalyst
-    value:           FFFD12C9-FAE5-337B-8569-E3CFCFC4F8BB
+    value:           C14FAD71-8B51-3B8C-A737-728D4F33F317
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
-                       x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CBDSQR, _CBDSQR_, _CGBBRD, _CGBBRD_, _CGBCON, _CGBCON_, _CGBEQU, 
                        _CGBEQUB, _CGBEQUB_, _CGBEQU_, _CGBRFS, _CGBRFS_, _CGBSV, 
                        _CGBSVX, _CGBSVX_, _CGBSV_, _CGBTF2, _CGBTF2_, _CGBTRF, _CGBTRF_, 

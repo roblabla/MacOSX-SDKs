@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2089F372-9D3C-3F25-8884-0AC7AC79AEC0
+    value:           5E5DC6C8-0F32-38AD-818F-91E36469772E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8B1F8389-08D6-3818-8F36-86E97A67BC68
+    value:           84B29F0A-9187-35AA-AF9C-30CE1606BB19
 install-name:    '/System/Library/PrivateFrameworks/MobileAssetUpdater.framework/Versions/A/MobileAssetUpdater'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ MobileAssetUpdater ]
     objc-ivars:      [ MobileAssetUpdater._alternateAssetTypes, MobileAssetUpdater._asset, 
                        MobileAssetUpdater._assetDownloaded, MobileAssetUpdater._assetType, 

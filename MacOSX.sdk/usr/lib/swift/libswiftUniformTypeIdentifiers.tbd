@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C18EA6BB-E223-3FFC-88B6-4868D5811FA3
+    value:           FB39B54D-30CA-377E-8F57-51CDB2062468
   - target:          x86_64-maccatalyst
-    value:           C18EA6BB-E223-3FFC-88B6-4868D5811FA3
+    value:           FB39B54D-30CA-377E-8F57-51CDB2062468
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5A7DC1BF-EB33-39BB-A2AF-826028588F3A
+    value:           E8C0711A-DF68-36FB-8E1B-D690EB0E0E21
   - target:          arm64e-maccatalyst
-    value:           5A7DC1BF-EB33-39BB-A2AF-826028588F3A
+    value:           E8C0711A-DF68-36FB-8E1B-D690EB0E0E21
 install-name:    '/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib'
-current-version: 722.6
+current-version: 761
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation17URLResourceValuesV22UniformTypeIdentifiersE07contentE0AD6UTTypeVSgvg', 
                        '_$s10Foundation17URLResourceValuesV22UniformTypeIdentifiersE07contentE0AD6UTTypeVSgvpMV', 
                        '_$s10Foundation3URLV22UniformTypeIdentifiersE19appendPathComponent_12conformingToySS_AD6UTTypeVtF', 
@@ -193,6 +193,7 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV22_appCategoryMusicGamesACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV22_appCategoryNavigationACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV22_appleEncryptedArchiveACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV22_rawBluetoothProductID0e6VendorH0ACSgs6UInt32V_s6UInt16VtcfC', 
                        '_$s22UniformTypeIdentifiers6UTTypeV22assemblyLanguageSourceACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV22utf16ExternalPlainTextACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV23_appCategoryActionGamesACvgZ', 
@@ -299,5 +300,11 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeVs28CustomDebugStringConvertibleAAMc', 
                        '_$s22UniformTypeIdentifiers6UTTypeVyACSgSScfC', '_$sSS22UniformTypeIdentifiersE22appendingPathComponent_12conformingTos5NeverOSS_AA6UTTypeVtF', 
                        '_$sSS22UniformTypeIdentifiersE22appendingPathExtension3fors5NeverOAA6UTTypeV_tF', 
+                       '_$sSo14NSItemProviderC22UniformTypeIdentifiersE10contentsOf07contentD011openInPlace11coordinated10visibilityAB10Foundation3URLV_AC6UTTypeVSgS2bSo0aB24RepresentationVisibilityVtcfC', 
+                       '_$sSo14NSItemProviderC22UniformTypeIdentifiersE10contentsOf07contentD011openInPlace11coordinated10visibilityAB10Foundation3URLV_AC6UTTypeVSgS2bSo0aB24RepresentationVisibilityVtcfc', 
+                       '_$sSo14NSItemProviderC22UniformTypeIdentifiersE22loadDataRepresentation3for17completionHandlerSo10NSProgressCAC6UTTypeV_y10Foundation0G0VSg_s5Error_pSgtYbctF', 
+                       '_$sSo14NSItemProviderC22UniformTypeIdentifiersE22loadFileRepresentation3for11openInPlace17completionHandlerSo10NSProgressCAC6UTTypeV_Sby10Foundation3URLVSg_Sbs5Error_pSgtYbctF', 
+                       '_$sSo14NSItemProviderC22UniformTypeIdentifiersE26registerDataRepresentation3for10visibility11loadHandleryAC6UTTypeV_So0abH10VisibilityVSo10NSProgressCSgy10Foundation0G0VSg_s5Error_pSgtcYbctF', 
+                       '_$sSo14NSItemProviderC22UniformTypeIdentifiersE26registerFileRepresentation3for10visibility11openInPlace11loadHandleryAC6UTTypeV_So0abH10VisibilityVSbSo10NSProgressCSgy10Foundation3URLVSg_Sbs5Error_pSgtcYbctF', 
                        '__swift_FORCE_LOAD_$_swiftUniformTypeIdentifiers' ]
 ...

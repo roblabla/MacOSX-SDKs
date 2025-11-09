@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8D06AF90-58F4-326B-B36E-5199405926FE
+    value:           CB03BB47-B039-3A08-88E1-B1CEB44AF9E2
   - target:          x86_64-maccatalyst
-    value:           8D06AF90-58F4-326B-B36E-5199405926FE
+    value:           CB03BB47-B039-3A08-88E1-B1CEB44AF9E2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           00F16ECC-7FAD-3F93-BF9D-775C35A542AA
+    value:           EF06D8DC-39FA-3D09-ADCB-AAE3CEA6B56E
   - target:          arm64e-maccatalyst
-    value:           00F16ECC-7FAD-3F93-BF9D-775C35A542AA
+    value:           EF06D8DC-39FA-3D09-ADCB-AAE3CEA6B56E
 install-name:    '/System/Library/PrivateFrameworks/AddressBookCore.framework/Versions/A/AddressBookCore'
-current-version: 2498.4
+current-version: 2535
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/ContactsPersistence.framework/Versions/A/ContactsPersistence' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ABACAccountPropertyAllowsInsecureAuthentication, _ABACAccountPropertyAltDSID, 
                        _ABACAccountPropertyAutodiscoverURL, _ABACAccountPropertyEWSExternalURL, 
                        _ABACAccountPropertyEWSInternalURL, _ABACAccountPropertyEWSRootFolderID, 
@@ -257,7 +257,8 @@ exports:
                        _AutodiscoveryServerPortKey, _AutodiscoverySkipConnectionTest, 
                        _AutodiscoverySkipDiscovery, _AutodiscoveryStatusKey, _AutodiscoveryURLKey, 
                        _AutodiscoveryUseSSLKey, _AutodiscoveryUserNameAddressKey, 
-                       _AutodiscoveryUserNameKey, _PHXDistributedSourceAddedNotification, 
+                       _AutodiscoveryUserNameKey, _CNPendingAccountMigrationsDomain, 
+                       _CNPendingAccountMigrationsKey, _PHXDistributedSourceAddedNotification, 
                        _PHXDistributedSourceChangedNotification, _PHXDistributedSourceRemovedNotification, 
                        _PHXDistributedSourcesInvalidatedNotification, _PHXSourceAddedExternallyNotification, 
                        _PHXSourceChangedExternallyNotification, _PHXSourceDisplayNameKey, 
@@ -513,17 +514,17 @@ exports:
                        ABSocialProfileURLParser, ABSpecialGroup, ABStaticAccountCollection, 
                        ABStreetAddressSummaryBuilder, ABStringRangeFinder, ABStringTokenizer, 
                        ABStrongAddressBookReference, ABSuggestionLogPair, ABSummaryOperation, 
-                       ABSyncManager, ABSyncScheduleOptions, ABSyncStandbyOperation, 
-                       ABTargetedAccountComponentValidationHelper, ABTargetedAccountFactory, 
-                       ABTask, ABTaskOperation, ABTimeMachineTempFileHelper, ABTracedLog, 
+                       ABSyncManager, ABSyncStandbyOperation, ABTargetedAccountComponentValidationHelper, 
+                       ABTargetedAccountFactory, ABTask, ABTaskOperation, ABTracedLog, 
                        ABTracedLogger, ABURL, ABUndoManager, ABUndoer, ABUnlinksLoneRemainingPeopleCommand, 
                        ABUpdatesLinkingInformation, ABUserDefaults, ABVCardFileSerializer, 
                        ABVCardMultipleFileSerializer, ABVCardParser, ABVCardSingleFileSerializer, 
                        ABWeakAddressBookReference, ABWorkQueue, ABXPCACAccountStore, 
-                       ABvCardDraggingImage, CNCDFetchedContainerAttributes, CNPostalAddressMapping, 
-                       PHXSource, _ABAccountImageStatus, _ABAccountNetworkActivityStatus, 
-                       _ABAggregateTask, _ABBlockTask, _ABFindDuplicateUserGroupsStrategy, 
-                       _ABFindVisibleSystemGroupsStrategy, _ABMapTask ]
+                       ABvCardDraggingImage, CNCDFetchedContainerAttributes, CNPendingMigrationManager, 
+                       CNPostalAddressMapping, PHXSource, _ABAccountImageStatus, 
+                       _ABAccountNetworkActivityStatus, _ABAggregateTask, _ABBlockTask, 
+                       _ABFindDuplicateUserGroupsStrategy, _ABFindVisibleSystemGroupsStrategy, 
+                       _ABMapTask ]
     objc-ivars:      [ ABACAccountPersistenceBackend._components, ABACAccountType._identifier, 
                        ABAccount._allContactsLabel, ABAccount._altDSID, ABAccount._baseURL, 
                        ABAccount._canBecomeDefaultAccount, ABAccount._canReimportFromMetadata, 
@@ -709,22 +710,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           39582191-C26D-34D0-9208-5C8801853CDE
+    value:           A78538C6-03CC-3C58-808E-A7E4AE66EA35
   - target:          x86_64-maccatalyst
-    value:           39582191-C26D-34D0-9208-5C8801853CDE
+    value:           A78538C6-03CC-3C58-808E-A7E4AE66EA35
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FBB99A75-798E-3759-BAC6-5E950EE97BD0
+    value:           A9BD6426-9973-3137-AF92-10FC57B5ADCE
   - target:          arm64e-maccatalyst
-    value:           FBB99A75-798E-3759-BAC6-5E950EE97BD0
+    value:           A9BD6426-9973-3137-AF92-10FC57B5ADCE
 install-name:    '/System/Library/PrivateFrameworks/ContactsPersistence.framework/Versions/A/ContactsPersistence'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ABCDAccountContainerSuffix, _ABCDActivityAlertRingtoneKey, 
                        _ABCDActivityAlertTextToneKey, _ABCDCompareByOrderingIndex, 
                        _ABCDCompareByOrderingIndexWithPrimaryFirst, _ABCDContainerGuardianRestrictedKey, 
@@ -839,9 +840,13 @@ exports:
                        _CNCDSocialProfileKeyUsername, _CNCDSyncStatusCardDAVLegacyCustomProperty, 
                        _CNCDSyncStatusKey, _CNCDURLAddressKeyURL, _CNCDUniqueIdentifierKey, 
                        _CNCoreDataImportCompletedKey, _CNCoreDataMetaDataIOSLegacyIdentifierNamespaceKey, 
-                       _CNCoreDataMetaDataVersionKey, _CNFilenameContactsDatabase, 
-                       _CNFilenameExchangeSyncDatabase, _CNLocalAccountIdentifier, 
-                       _CNPathComponentSources, _CNPersistentStoreURLForBaseURLAndIdentifier, 
+                       _CNCoreDataMetaDataVersionKey, _CNEWSContactFolderKeyFolderName, 
+                       _CNEWSContactFolderKeySyncFolderItemsSyncState, _CNEWSContactMappingKeyContactPictureAttachmentId, 
+                       _CNEWSEntityNameContactFolder, _CNEWSEntityNameContactMapping, 
+                       _CNEWSEntityNameItemMapping, _CNEWSEntityNameMapping, _CNEWSMappingKeyChangeKey, 
+                       _CNEWSMappingKeyContactsIdentifier, _CNEWSMappingKeyFlags, 
+                       _CNEWSMappingKeyItemId, _CNFilenameContactsDatabase, _CNFilenameExchangeSyncDatabase, 
+                       _CNLocalAccountIdentifier, _CNPathComponentSources, _CNPersistentStoreURLForBaseURLAndIdentifier, 
                        _kABAlertToneRelationshipName, _kABAlternateBirthdayRelationshipName, 
                        _kABCDContactAddressingGrammarKey, _kABCDContactBirthdayComponentsKey, 
                        _kABCDContactBirthdayKey, _kABCDContactBirthdayYearKey, _kABCDContactBirthdayYearlessKey, 
@@ -914,19 +919,21 @@ exports:
                        CNCDIOSLegacyIdentifierRegistrations, CNCDIOSLegacyIdentifierSaveDistributor, 
                        CNCDIOSLegacyIdentifierXPCRegistrar, CNCDManagedObjectContext, 
                        CNCDManagedObjectContextSaveListener, CNCDMessagingAddress, 
-                       CNCDMigrator, CNCDOwnedObject, CNCDPersistenceContext, CNCDPersistenceMetrics, 
-                       CNCDPersistenceStack, CNCDPersistentStoreCoordinator, CNCDPhoneNumber, 
-                       CNCDPostalAddress, CNCDRecord, CNCDRemoteExchangeSyncPersistentStoreEndpointFactory, 
+                       CNCDMigrator, CNCDNote, CNCDOwnedObject, CNCDPersistenceContext, 
+                       CNCDPersistenceMetrics, CNCDPersistenceStack, CNCDPersistentStoreCoordinator, 
+                       CNCDPhoneNumber, CNCDPostalAddress, CNCDRecord, CNCDRemoteExchangeSyncPersistentStoreEndpointFactory, 
                        CNCDRemotePersistence, CNCDRemotePersistentStoreDescriptor, 
                        CNCDRemotePersistentStoreEndpointFactory, CNCDRemotePersistentStoreEndpointFetchRequest, 
                        CNCDRemotePersistentStoreEndpointFetchResponse, CNCDService, 
                        CNCDTestManagedObjectContextSession, CNCDTestPersistenceStack, 
                        CNCDURLAddress, CNCDUnifiedContactInfo, CNCDVCardSerialization, 
                        CNCustomPropertyMigrationTask, CNDelegateAccessAccountCollection, 
-                       CNEmptyAccountCollection, CNOnDiskAccountCollection, CNPersistentStoreBuilder, 
-                       CNPersistentStoreCoordinatorCache, CNPersistentStoreCoordinatorCacheEntry, 
-                       CNPersistentStoreCoordinatorFactory, CNPersistentStoreCoordinatorResult, 
-                       CNPersistentStoreCoordinatorUpdater, CNPersistentStoreDescription ]
+                       CNEWSContactFolder, CNEWSContactMapping, CNEWSItemMapping, 
+                       CNEWSMapping, CNEmptyAccountCollection, CNOnDiskAccountCollection, 
+                       CNPersistentStoreBuilder, CNPersistentStoreCoordinatorCache, 
+                       CNPersistentStoreCoordinatorCacheEntry, CNPersistentStoreCoordinatorFactory, 
+                       CNPersistentStoreCoordinatorResult, CNPersistentStoreCoordinatorUpdater, 
+                       CNPersistentStoreDescription, CNTempFileHelper ]
     objc-ivars:      [ ABCDContainerPermissions._canCreateContacts, ABCDContainerPermissions._canCreateGroups, 
                        ABCDContainerPermissions._canDeleteContacts, ABCDLegacyFilesystemImageHelper._contactIdentifier, 
                        ABCDLegacyFilesystemImageHelper._emailAddresses, ABCDLegacyFilesystemImageHelper._imagesDirectory, 
@@ -957,7 +964,7 @@ exports:
                        CNPersistentStoreDescription._XPCServerModelFuture, CNPersistentStoreDescription._dataType, 
                        CNPersistentStoreDescription._modelFuture, CNPersistentStoreDescription._modelName, 
                        CNPersistentStoreDescription._version ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvMZ', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvgZ', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvsZ', 

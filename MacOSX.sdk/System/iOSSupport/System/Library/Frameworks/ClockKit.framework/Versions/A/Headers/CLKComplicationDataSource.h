@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class CLKComplicationTimelineEntry;
 @class CLKComplicationDescriptor;
 
+@protocol CLKComplicationWidgetMigrator;
+
 API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 NS_SWIFT_UI_ACTOR
 @protocol CLKComplicationDataSource <NSObject>
@@ -27,23 +29,23 @@ NS_SWIFT_UI_ACTOR
 /// Timeline entries after the timeline end date will not be displayed.
 @optional
 - (void)getTimelineEndDateForComplication:(CLKComplication *)complication
-                              withHandler:(void(^)(NSDate * __nullable date))handler NS_SWIFT_ASYNC(2);
+                              withHandler:(void(^)(NSDate * __nullable date))handler NS_SWIFT_ASYNC(2) API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED));
 
 /// Indicate whether your complication's data should be hidden when the watch is locked.
 @optional
 - (void)getPrivacyBehaviorForComplication:(CLKComplication *)complication
-                              withHandler:(void(^)(CLKComplicationPrivacyBehavior behavior))handler NS_SWIFT_ASYNC(2);
+                              withHandler:(void(^)(CLKComplicationPrivacyBehavior behavior))handler NS_SWIFT_ASYNC(2) API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED));
 
 /// Indicate your complication's animation behavior when transitioning between timeline entries.
 @optional
 - (void)getTimelineAnimationBehaviorForComplication:(CLKComplication *)complication
-                                        withHandler:(void(^)(CLKComplicationTimelineAnimationBehavior behavior))handler NS_SWIFT_ASYNC(2);
+                                        withHandler:(void(^)(CLKComplicationTimelineAnimationBehavior behavior))handler NS_SWIFT_ASYNC(2) API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED));
 
 /// Provide the entry that should currently be displayed during always on time.
 /// If you pass back nil, we will continue to show the current timeline entry if it exists.
 @optional
 - (void)getAlwaysOnTemplateForComplication:(CLKComplication *)complication
-                               withHandler:(void(^)(CLKComplicationTemplate * __nullable))handler NS_SWIFT_ASYNC(2) API_AVAILABLE(watchos(6.0)) API_UNAVAILABLE(ios);
+                               withHandler:(void(^)(CLKComplicationTemplate * __nullable))handler NS_SWIFT_ASYNC(2) API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(6.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
 
 #pragma mark Timeline Population
@@ -52,7 +54,7 @@ NS_SWIFT_UI_ACTOR
 /// If you pass back nil, we will conclude you have no content loaded and will stop talking to your until you next call -reloadTimelineForComplication:.
 @required
 - (void)getCurrentTimelineEntryForComplication:(CLKComplication *)complication
-                                   withHandler:(void(^)(CLKComplicationTimelineEntry * __nullable))handler NS_SWIFT_ASYNC(2);
+                                   withHandler:(void(^)(CLKComplicationTimelineEntry * __nullable))handler NS_SWIFT_ASYNC(2) API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED));
 
 /// The owning complication will use these methods to extend its timeline forward.
 /// @param date The date of the last entry we already have. Return the batch of entries after this date.
@@ -61,7 +63,7 @@ NS_SWIFT_UI_ACTOR
 - (void)getTimelineEntriesForComplication:(CLKComplication *)complication
                                 afterDate:(NSDate *)date
                                     limit:(NSUInteger)limit
-                              withHandler:(void(^)(NSArray<CLKComplicationTimelineEntry *> * __nullable entries))handler NS_SWIFT_ASYNC(4);
+                              withHandler:(void(^)(NSArray<CLKComplicationTimelineEntry *> * __nullable entries))handler NS_SWIFT_ASYNC(4) API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED));
 
 
 #pragma mark - Sample Templates
@@ -74,7 +76,7 @@ NS_SWIFT_UI_ACTOR
 /// If you pass back nil, we will use the default placeholder template (which is a combination of your icon and app name).
 @optional
 - (void)getLocalizableSampleTemplateForComplication:(CLKComplication *)complication
-                                        withHandler:(void(^)(CLKComplicationTemplate * __nullable complicationTemplate))handler NS_SWIFT_ASYNC(2) API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios);
+                                        withHandler:(void(^)(CLKComplicationTemplate * __nullable complicationTemplate))handler NS_SWIFT_ASYNC(2)  API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(3.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
 #pragma mark - Multiple Complications
 
@@ -83,13 +85,18 @@ NS_SWIFT_UI_ACTOR
 /// Provide a complete list of the current complication descriptors that your extension supports. These will be available
 /// during complication editing.
 @optional
-- (void)getComplicationDescriptorsWithHandler:(void(^)(NSArray<CLKComplicationDescriptor *> *))handler NS_SWIFT_ASYNC(1) NS_SWIFT_ASYNC_NAME(complicationDescriptors()) API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios);
+- (void)getComplicationDescriptorsWithHandler:(void(^)(NSArray<CLKComplicationDescriptor *> *))handler NS_SWIFT_ASYNC(1) NS_SWIFT_ASYNC_NAME(complicationDescriptors()) API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
 /// This method will be called each time a watch face is shared with this device that contains complications
 /// from your extension. Ensure you do any necessary work to support these complications as much as possible.
 @optional
-- (void)handleSharedComplicationDescriptors:(NSArray<CLKComplicationDescriptor *> *)complicationDescriptors API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios);
+- (void)handleSharedComplicationDescriptors:(NSArray<CLKComplicationDescriptor *> *)complicationDescriptors API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
+#pragma mark - Widget Migration
+
+/// Provide a migrator to provide the appropriate widget migration
+@optional
+@property (nonatomic, readonly) id<CLKComplicationWidgetMigrator> widgetMigrator API_AVAILABLE(watchos(9.0)) API_UNAVAILABLE(ios);
 
 #pragma mark - Deprecated
 

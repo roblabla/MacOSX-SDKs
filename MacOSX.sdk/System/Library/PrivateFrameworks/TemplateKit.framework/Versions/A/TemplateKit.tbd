@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A37BFC68-AF2E-34AA-9D70-127515BD3D41
+    value:           FDBB37FA-1B95-349D-9956-61CF1EC520A4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D2C4CADE-71CB-3366-A4A4-F53F6AFA89F8
+    value:           83315C05-231E-33CB-9317-7A5A2782519C
 install-name:    '/System/Library/PrivateFrameworks/TemplateKit.framework/Versions/A/TemplateKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _TLKContentSizeCategoryDidChangeNotification, _TLKMinimumHorizontalSpacingBetweenImageAndText, 
                        _TLKMinimumHorizontalSpacingBetweenSmallImageAndText, _TLKMinimumHorizontalSpacingBetweenText, 
                        _TLKMinimumVerticalSpacingBetweenTextBaselineAndImage, _TLKStandardBaselineSpacingBetweenText, 

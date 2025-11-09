@@ -17,7 +17,7 @@
 @class NSURLProtectionSpace;
 @protocol NSURLDownloadDelegate;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*** DEPRECATED: The NSURLDownload class should no longer be used.  NSURLSession is the replacement for NSURLDownload ***/
 
@@ -181,9 +181,9 @@ API_AVAILABLE(macos(10.2)) API_UNAVAILABLE(watchos, ios, tvos)
 				should not consult the credential storage for the download.
     @discussion This method will be called before any attempt to authenticate is
 		attempted on a download.  By returning NO the delegate is telling the
-		download to not consult the credential storage and taking responsiblity
+		download to not consult the credential storage and taking responsibility
 		for providing any credentials for authentication challenges.  Not implementing
-		this method is the same as returing YES.  The delegate is free to consult the
+		this method is the same as returning YES.  The delegate is free to consult the
 		credential storage itself when it receives a didReceiveAuthenticationChallenge
 		message.
     @param download  the NSURLDownload object asking if it should consult the credential storage.
@@ -280,4 +280,4 @@ API_AVAILABLE(macos(10.2)) API_UNAVAILABLE(watchos, ios, tvos)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

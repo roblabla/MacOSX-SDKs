@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FFA14929-F80E-333D-8369-839FF2AAFDB9
+    value:           1704111C-74D4-3095-99EB-6DFF42D6F33C
   - target:          x86_64-maccatalyst
-    value:           FFA14929-F80E-333D-8369-839FF2AAFDB9
+    value:           1704111C-74D4-3095-99EB-6DFF42D6F33C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CF570E0C-D195-3178-B427-B3736956D9DF
+    value:           59C0FF90-AB67-32E8-B5F5-92B7B524C6E9
   - target:          arm64e-maccatalyst
-    value:           CF570E0C-D195-3178-B427-B3736956D9DF
+    value:           59C0FF90-AB67-32E8-B5F5-92B7B524C6E9
 install-name:    '/System/Library/PrivateFrameworks/InternationalSupport.framework/Versions/A/InternationalSupport'
-current-version: 69.1
+current-version: 74
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ISBackstopLanguage, _ISBackstopLocale, _InternationalSupportVersionNumber, 
                        _InternationalSupportVersionString ]
     objc-classes:    [ ISUtilities ]

@@ -211,9 +211,27 @@ The values can be a single string referencing a symbol or a semantic or a target
  
  type: a string specifying the type of the render target. It can be one of the following: color, depth, stencil
  format: a string specifying the format of the render target. It can be:
- - for color targets: rgba32f, r8, r16f, rg16 or rgba. If not specified defaults to the framebuffer's pixel format.
- - for depth targets: depth24, depth24stencil8
- - for stencil targets: depth24stencil8
+ - for color targets (if not specified defaults to the framebuffer's pixel format)
+   - r8
+   - r16                   // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9
+   - r16f
+   - r32f                  // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9
+   - rg8                   // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9
+   - rg16
+   - rg16f                 // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9
+   - rg32f                 // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9
+   - rgba8                 // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9
+   - rgba16                // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9
+   - rgba16f               // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9
+   - rgba32f
+   - rgba (deprecated)
+ - for depth targets
+   - depth16               // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9
+   - depth24
+   - depth32f              // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9
+ - for combined depth and stencil targets:
+   - depth24Unorm_stencil8 // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9
+   - depth32Float_stencil8 // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9
  scaleFactor: a float value (encapsulated in a NSNumber) that controls the size of the render target. Defaults to 1, which means 1x the size of the main viewport.
  size: a string with the format %dx%d that controls the size of the render target.
  persistent: a boolean that tells if this target should persist from one frame to the next. It permits to create temporal effects suchs as motion blur. Defaults to NO.

@@ -12,7 +12,7 @@ NSErrorDomain const APActivationPayloadErrorDomain;
 
 /*! @enum APActivationPayloadErrorCode
  @abstract Error code of the NSError object passed in completionHandler for location confirmation.
- @constant APActivationPayloadErrorCodeDisallowed The location confirmation request is disalllowed by user or system; or the code is not acquired by QR/NFC scanning.
+ @constant APActivationPayloadErrorCodeDisallowed The location confirmation request is disallowed by user or system; or the code is not acquired by QR/NFC scanning.
  @constant APActivationPayloadErrorCodeDoesNotMatch The payload passed in by the application doesn't match the payload it was launched with.
  */
 typedef NS_ERROR_ENUM(APActivationPayloadErrorDomain, APActivationPayloadErrorCode) {
@@ -22,7 +22,7 @@ typedef NS_ERROR_ENUM(APActivationPayloadErrorDomain, APActivationPayloadErrorCo
 
 /*!
 @class APActivationPayload
- An APActivationPayload object is an object passed to application within NSUserActity when it is launched by a physical code scan. Upon receiving
+ An APActivationPayload object is an object passed to application within NSUserActivity when it is launched by a physical code scan. Upon receiving
  the payload, application can inspect its content. Application can also check whether the payload was acquired at an expected location.
 */
 AP_EXTERN API_AVAILABLE(ios(14.0))
@@ -35,7 +35,7 @@ AP_EXTERN API_AVAILABLE(ios(14.0))
 
 /*! @abstract checks if the payload was acquired at an expected region.
  @param region the region this paylaod is expected to be acquired.
- @param completionHandler the completion handler which is called when the system confirms weather the payload was acquired in expected region.
+ @param completionHandler the completion handler which is called when the system confirms whether the payload was acquired in expected region.
  @discussion For the system to accept this request, application needs to specify sub-key NSAppClipRequestLocationConfirmation to true in NSAppClip section in Info.plist.
 */
 - (void)confirmAcquiredInRegion:(CLRegion *)region completionHandler:(void (^)(BOOL inRegion, NSError *_Nullable error))completionHandler;

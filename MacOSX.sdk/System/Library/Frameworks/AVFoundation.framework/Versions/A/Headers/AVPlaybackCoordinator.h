@@ -196,6 +196,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 	@category	AVPlaybackCoordinator (AVCoordinatedPlaybackPolicies)
 	@abstract	Policies used by AVPlaybackCoordinator to determine how to interact with the group.
 */
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 @interface AVPlaybackCoordinator (AVCoordinatedPlaybackPolicies)
 
 /**

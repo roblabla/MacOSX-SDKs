@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           18377D7D-D953-3099-9604-21E2C5720ED4
+    value:           1AB3CEA5-C907-3FBF-908E-F1E18FE3150A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D119F796-3CA0-3165-8104-7024CF4CB1E3
+    value:           895B07EB-C5FB-3904-8D81-234F0088E17D
 install-name:    '/usr/lib/libhunspell-1.2.0.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _Hunspell_add, _Hunspell_add_with_affix, _Hunspell_analyze, 
                        _Hunspell_create, _Hunspell_create_key, _Hunspell_destroy, 
                        _Hunspell_free_list, _Hunspell_generate, _Hunspell_get_dic_encoding, 

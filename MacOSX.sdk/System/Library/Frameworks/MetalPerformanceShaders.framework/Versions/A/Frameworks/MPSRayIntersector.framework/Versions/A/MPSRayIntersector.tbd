@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E32AE223-5D09-310F-AA13-8E419F142DE4
+    value:           0EDD2A60-E626-34C1-A7DF-4633DDF24159
   - target:          x86_64-maccatalyst
-    value:           E32AE223-5D09-310F-AA13-8E419F142DE4
+    value:           0EDD2A60-E626-34C1-A7DF-4633DDF24159
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4201EA2A-A50D-3B8B-820C-73246D57EBBB
+    value:           234C8589-B9C1-34B9-A9F0-8850DF751300
   - target:          arm64e-maccatalyst
-    value:           4201EA2A-A50D-3B8B-820C-73246D57EBBB
+    value:           234C8589-B9C1-34B9-A9F0-8850DF751300
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSRayIntersector.framework/Versions/A/MPSRayIntersector'
-current-version: 125.4.6
+current-version: 126.0.22
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ MPSImage, MetalPerformanceShaders ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MPSAccelerationStructureBuilderCPU, _MPSAccelerationStructureBuilderGPU, 
                        _MPSAccelerationStructureGPUBuilderTypeDefault, _MPSAccelerationStructureGPUBuilderTypeFast, 
                        _MPSAccelerationStructureNodeLayoutAOS, _MPSAccelerationStructureNodeLayoutSOA, 

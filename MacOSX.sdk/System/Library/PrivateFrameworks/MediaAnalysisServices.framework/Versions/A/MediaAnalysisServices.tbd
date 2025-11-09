@@ -3,22 +3,30 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CE364D66-50E3-31E5-9426-9E42E13D1F37
+    value:           657FAC19-5B14-3B3C-9FF4-55696FEFDFC9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           90038AA4-A19E-37CF-9A19-9B16317DC06E
+    value:           B3E29344-E4D6-37EC-BC74-2D3A98AF1D2E
 install-name:    '/System/Library/PrivateFrameworks/MediaAnalysisServices.framework/Versions/A/MediaAnalysisServices'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _MADSignpostLog, _MediaAnalysisServicesVersionNumber, _MediaAnalysisServicesVersionString ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _MADSignpostLog, _MADVIDomainArt, _MADVIDomainMedia, _MADVIDomainPackagedProducts, 
+                       _MADVIFeatureARKitThirdParty, _MediaAnalysisServicesVersionNumber, 
+                       _MediaAnalysisServicesVersionString ]
     objc-classes:    [ MADEmbeddingGenerationRequest, MADEmbeddingGenerationResult, 
                        MADImageSafetyClassificationRequest, MADImageSafetyClassificationResult, 
-                       MADRequest, MADResult, MADService, MADServicePrivate, MADServiceProxy, 
-                       MADServicePublic, MADVIDocumentRecognitionRequest, MADVIDocumentRecognitionResult, 
+                       MADPersonIdentificationRequest, MADPersonIdentificationResult, 
+                       MADPersonIdentificationResultItem, MADRequest, MADResult, 
+                       MADService, MADServicePrivate, MADServiceProxy, MADServicePublic, 
+                       MADVIDocumentRecognitionRequest, MADVIDocumentRecognitionResult, 
                        MADVIMachineReadableCodeDetectionRequest, MADVIMachineReadableCodeDetectionResult, 
-                       MADVIMachineReadableCodeDetectionResultItem, MADVIVisualSearchGatingDomainInfo, 
+                       MADVIMachineReadableCodeDetectionResultItem, MADVIRectangleDetectionRequest, 
+                       MADVIRectangleDetectionResult, MADVIRemoveBackgroundRequest, 
+                       MADVIRemoveBackgroundResult, MADVITextLookupRequest, MADVITextLookupResult, 
+                       MADVIUserFeedbackRequest, MADVIUserFeedbackResult, MADVIVisualSearchGatingDomainInfo, 
                        MADVIVisualSearchGatingRequest, MADVIVisualSearchGatingResult, 
                        MADVIVisualSearchGatingResultItem, MADVIVisualSearchRegionAttributes, 
-                       MADVIVisualSearchRequest, MADVIVisualSearchResult, MADVIVisualSearchResultItem ]
+                       MADVIVisualSearchRequest, MADVIVisualSearchResult, MADVIVisualSearchResultItem, 
+                       MADVIVisualSearchThirdPartyObject ]
 ...

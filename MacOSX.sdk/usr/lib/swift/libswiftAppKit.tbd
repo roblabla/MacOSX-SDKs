@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0BB6C67A-7333-35DA-A5B4-EE26402B61E1
+    value:           5D38470A-620E-3E33-AE61-E05BB269F271
   - target:          x86_64-maccatalyst
-    value:           0BB6C67A-7333-35DA-A5B4-EE26402B61E1
+    value:           5D38470A-620E-3E33-AE61-E05BB269F271
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6C93F6A3-69E1-37F3-994A-E72F0C8DA840
+    value:           5E985B2E-110F-3EE4-BDC1-08B7F9C0D229
   - target:          arm64e-maccatalyst
-    value:           6C93F6A3-69E1-37F3-994A-E72F0C8DA840
+    value:           5E985B2E-110F-3EE4-BDC1-08B7F9C0D229
 install-name:    '/usr/lib/swift/libswiftAppKit.dylib'
-current-version: 109
+current-version: 111
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftAppKit.dylib', '$ld$install_name$os10.11$@rpath/libswiftAppKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftAppKit.dylib', '$ld$install_name$os10.13$@rpath/libswiftAppKit.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftAppKit.dylib', '$ld$install_name$os10.9$@rpath/libswiftAppKit.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation10CocoaErrorV4CodeV6AppKitE016ServiceMalformedg10DictionaryC0AEvgZ', 
                        '_$s10Foundation10CocoaErrorV4CodeV6AppKitE017fontAssetDownloadC0AEvgZ', 
                        '_$s10Foundation10CocoaErrorV4CodeV6AppKitE020ServiceMiscellaneousC0AEvgZ', 
@@ -478,7 +478,9 @@ exports:
                        '_$sSo10NSTouchBarC6AppKitE33_defaultCustomPlaygroundQuickLooks01_ghI0Ovg', 
                        '_$sSo10NSTouchBarC6AppKitE33_defaultCustomPlaygroundQuickLooks01_ghI0OvpMV', 
                        '_$sSo10NSTouchBarCs38__DefaultCustomPlaygroundQuickLookable6AppKitMc', 
-                       '_$sSo12NSFontWeighta6AppKit01_cdD23NumericRawRepresentableACMc', 
+                       '_$sSo11NSFontWidtha6AppKit01_cdD23NumericRawRepresentableACMc', 
+                       '_$sSo11NSFontWidtha6AppKit01_cdD23NumericRawRepresentableACWP', 
+                       '_$sSo11NSFontWidthaSL6AppKitMc', '_$sSo12NSFontWeighta6AppKit01_cdD23NumericRawRepresentableACMc', 
                        '_$sSo12NSFontWeighta6AppKit01_cdD23NumericRawRepresentableACWP', 
                        '_$sSo12NSFontWeightaSL6AppKitMc', '_$sSo12NSStoryboardC6AppKitE21instantiateController10identifier7creatorxSS_xSgSo7NSCoderCcSgtSo06NSViewE0CRbzlF', 
                        '_$sSo12NSStoryboardC6AppKitE21instantiateController10identifier7creatorxSS_xSgSo7NSCoderCcSgtSo08NSWindowE0CRbzlF', 

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B73F7E7C-92F6-3D00-BDCB-6707DB1D8F64
+    value:           3D403A5D-A6F8-301A-BF15-27270E0B495A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6F564444-8C9A-3309-8D57-77542D7272C3
+    value:           00DB1FA3-DCA4-325E-BA57-F519E1D0E014
 install-name:    '/System/Library/PrivateFrameworks/_MusicKitInternal_SwiftUI.framework/Versions/A/_MusicKitInternal_SwiftUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s17_MusicKit_SwiftUI12ArtworkImageV01_ab9Internal_cD0EyAC0aB00E0VcfC', 
                        '_$s7SwiftUI4ViewP018_MusicKitInternal_aB0E16artworkCropStyleyQr0dE07ArtworkV0deF0E0hI0OF', 
                        '_$s7SwiftUI4ViewP018_MusicKitInternal_aB0E16artworkCropStyleyQr0dE07ArtworkV0deF0E0hI0OFQOMQ', 

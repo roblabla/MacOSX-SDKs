@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1C79A8C6-2C9A-3887-BD02-2092BD802A76
+    value:           CFFF09B6-F3A7-3A78-A70D-1CE023348E6E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4BF92A53-83DE-39AB-BEBF-71BA8FA15DF7
+    value:           BDB6C2A6-4949-309B-B8CE-38581AAC482A
 install-name:    '/System/Library/PrivateFrameworks/SystemAdministrationInterface.framework/Versions/A/SystemAdministrationInterface'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _LAContextClass ]
     objc-classes:    [ ADMAddRecordController, ADMAutoLoginController, ADMChangePasswordController, 
                        ADMIndefiniteGracePeriodHandler, SysAdminUIUtilities ]

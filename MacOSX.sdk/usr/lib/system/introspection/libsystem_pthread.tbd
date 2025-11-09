@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D25704EF-B949-307A-86F6-B48810FD4469
+    value:           265440CE-2BCA-376B-AF00-A4A0510FADA5
   - target:          x86_64-maccatalyst
-    value:           D25704EF-B949-307A-86F6-B48810FD4469
+    value:           265440CE-2BCA-376B-AF00-A4A0510FADA5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C506BB9D-98CE-322F-BED9-363F4E125534
+    value:           C1F34D73-29C9-33B5-9072-54A436E74511
   - target:          arm64e-maccatalyst
-    value:           C506BB9D-98CE-322F-BED9-363F4E125534
+    value:           C1F34D73-29C9-33B5-9072-54A436E74511
 install-name:    '/usr/lib/system/introspection/libsystem_pthread.dylib'
-current-version: 486.100.11
+current-version: 514
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ ____chkstk_darwin, ___is_threaded, ___pthread_init, ___pthread_late_init, 
                        ___pthread_workqueue_setkill, ___unix_conforming, __pthread_atfork_child, 
                        __pthread_atfork_child_handlers, __pthread_atfork_parent, 
@@ -32,12 +32,14 @@ exports:
                        __pthread_exit_if_canceled, __pthread_fork_child, __pthread_fork_child_postinit, 
                        __pthread_fork_parent, __pthread_fork_prepare, __pthread_is_threaded, 
                        __pthread_mutex_enable_legacy_mode, __pthread_override_qos_class_end_direct, 
-                       __pthread_override_qos_class_start_direct, __pthread_qos_class_decode, 
+                       __pthread_override_qos_class_start_direct, __pthread_qos_class_and_override_decode, 
+                       __pthread_qos_class_and_override_encode, __pthread_qos_class_decode, 
                        __pthread_qos_class_encode, __pthread_qos_class_encode_workqueue, 
                        __pthread_qos_override_end_direct, __pthread_qos_override_start_direct, 
-                       __pthread_self, __pthread_set_properties_self, __pthread_set_self, 
-                       __pthread_setspecific_static, __pthread_start, __pthread_workloop_create, 
-                       __pthread_workloop_destroy, __pthread_workqueue_add_cooperativethreads, 
+                       __pthread_sched_pri_decode, __pthread_sched_pri_encode, __pthread_self, 
+                       __pthread_set_properties_self, __pthread_set_self, __pthread_setspecific_static, 
+                       __pthread_start, __pthread_tsd_shared_cache_first, __pthread_tsd_shared_cache_last, 
+                       __pthread_workloop_create, __pthread_workloop_destroy, __pthread_workqueue_add_cooperativethreads, 
                        __pthread_workqueue_addthreads, __pthread_workqueue_asynchronous_override_add, 
                        __pthread_workqueue_asynchronous_override_reset_all_self, 
                        __pthread_workqueue_asynchronous_override_reset_self, __pthread_workqueue_init, 

@@ -1,4 +1,2 @@
-framework module GroupActivities {
-  export *
-  module GroupActivities { export * }
+framework module GroupActivities [system] {
 }

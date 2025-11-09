@@ -4,26 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           49FE0FD5-DA25-3077-8923-118C609B7693
+    value:           96302107-EF32-3CF8-8E5C-D7A44827E6D7
   - target:          x86_64-maccatalyst
-    value:           49FE0FD5-DA25-3077-8923-118C609B7693
+    value:           96302107-EF32-3CF8-8E5C-D7A44827E6D7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           33E9F2FD-20AA-3552-A0C5-463152D11FC6
+    value:           75732614-DA3E-3C8E-840D-FD300887AEBB
   - target:          arm64e-maccatalyst
-    value:           33E9F2FD-20AA-3552-A0C5-463152D11FC6
+    value:           75732614-DA3E-3C8E-840D-FD300887AEBB
 install-name:    '/System/Library/PrivateFrameworks/CoreEmoji.framework/Versions/A/CoreEmoji'
-current-version: 143
+current-version: 168
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CEMCopyEmojiTokens, _CEMCreateEmojiCharacterSet, _CEMCreateEmojiLocaleData, 
                        _CEMCreateStringByStrippingEmojiCharacters, _CEMEMFSearchEngineCreateBundleForLocaleIdentifier, 
                        _CEMEMFSearchEngineIsLocaleSupported, _CEMEmojiLocaleDataCopyCommonEmojiTokens, 
                        _CEMEmojiLocaleDataCreateEmojiTokensForString, _CEMEmojiLocaleDataEnumerateSearchResultsInStringWithBlock, 
+                       _CEMEmojiLocaleDataEnumerateSearchResultsIncludingSubstringsInStringWithBlock, 
                        _CEMEmojiLocaleDataGetLocaleIdentifier, _CEMEmojiTokenCopyName, 
                        _CEMEmojiTokenCopyNameWithCount, _CEMEmojiTokenCopyRelatedEmoji, 
                        _CEMEmojiTokenCreateCopyRemovingModifiers, _CEMEmojiTokenCreateHairStyleVariant, 

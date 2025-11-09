@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F8ADBAB1-95DD-36D2-BD5D-202C6638F0F7
+    value:           62C79871-1117-3BE4-A71D-E94C006BEBFA
   - target:          x86_64-maccatalyst
-    value:           F8ADBAB1-95DD-36D2-BD5D-202C6638F0F7
+    value:           62C79871-1117-3BE4-A71D-E94C006BEBFA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F13920B0-6CE7-3B89-AB0F-759AEE4B3277
+    value:           7C428BC9-0A83-34F5-8F7C-33D572A8B068
   - target:          arm64e-maccatalyst
-    value:           F13920B0-6CE7-3B89-AB0F-759AEE4B3277
+    value:           7C428BC9-0A83-34F5-8F7C-33D572A8B068
 install-name:    '/System/Library/PrivateFrameworks/CoreServicesStore.framework/Versions/A/CoreServicesStore'
 current-version: 1141.1
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZN8CSStore222AttributedStringWriter19formatWithArgumentsEP8NSStringP13__va_list_tag, 
                        __ZN8CSStore222AttributedStringWriter19formatWithArgumentsEP8NSStringS2_P13__va_list_tag ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CSMapAddMapTable, _CSMapGetHeader, _CSMapGetKeyAndValueForKeyData, 
                        _CSMapGetValue, _CSMapInit, _CSMapRemoveValue, _CSMapSetValue, 
                        _CSMapSync, _CSMapWriteToHeader, _CSStoreAllocUnit, _CSStoreAllocUnitWithData, 
@@ -115,7 +115,7 @@ exports:
                        __ZTVN8CSStore222AttributedStringWriterE, __kCSStoreTableNameMaxLength ]
     objc-classes:    [ _CSVisualizationArchiver, _CSVisualizationUnarchiver, _CSVisualizer, 
                        _CSVisualizerPredicate, _CSVisualizerTableFunctions ]
-  - targets:         [ arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
+  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN8CSStore222AttributedStringWriter19formatWithArgumentsEP8NSStringPc, 
                        __ZN8CSStore222AttributedStringWriter19formatWithArgumentsEP8NSStringS2_Pc ]
 ...

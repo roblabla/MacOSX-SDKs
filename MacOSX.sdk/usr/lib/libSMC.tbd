@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           525D3ABD-8AF9-30E3-8B41-2A80771BEACD
+    value:           2F21B996-A1E8-350E-A500-8A7B52DD9B28
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0899CD7F-B327-3929-9096-CBDDF9358E3D
+    value:           9DA626C9-979C-39C6-8815-C61E2B05A5E9
 install-name:    '/usr/lib/libSMC.dylib'
-current-version: 21
+current-version: 25.0.1
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AccumSetupSettingsCPU, _AccumSetupSettingsGPU, _AccumSetupSettingsHP, 
                        _AccumulatorPlatformStructLookupArray, _SMCAEPopulatePlatform, 
                        _SMCAccumCheckMinMaxSupport, _SMCAccumGetChannelInfoForKey, 

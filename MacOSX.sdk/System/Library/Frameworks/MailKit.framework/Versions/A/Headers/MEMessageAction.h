@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger,  MEMessageActionMessageColor) {
     MEMessageActionMessageColorPurple,
     MEMessageActionMessageColorBlue,
     MEMessageActionMessageColorGray,
-} NS_SWIFT_NAME(MEMessageAction.MessageColor) API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
+} NS_SWIFT_NAME(MEMessageAction.MessageColor) API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSInteger, MEMessageActionFlag) {
     MEMessageActionFlagNone,
@@ -30,10 +30,10 @@ typedef NS_ENUM(NSInteger, MEMessageActionFlag) {
     MEMessageActionFlagBlue,
     MEMessageActionFlagPurple,
     MEMessageActionFlagGray,
-} NS_SWIFT_NAME(MEMessageAction.Flag) API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
+} NS_SWIFT_NAME(MEMessageAction.Flag) API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos);
 
 /// @brief An action that can be performed on a mail message.
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 @interface MEMessageAction : NSObject <NSSecureCoding>
 
 /// @brief Moves the mail message to the user's trash mailbox for the account.

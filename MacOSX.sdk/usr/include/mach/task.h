@@ -25,7 +25,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	extern int mig_strncpy_zerofill(char *dest, const char *src, int len) __attribute__((weak_import));
+#ifndef __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS_CSTRING_ATTR
+#define __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS_CSTRING_COUNTEDBY_ATTR(C) __unsafe_indexable
+#endif
+	extern int mig_strncpy_zerofill(char * dest, const char * src, int len) __attribute__((weak_import));
 #ifdef __cplusplus
 }
 #endif
@@ -41,7 +44,7 @@ extern "C" {
 #define FUNCTION_PTR_T
 typedef void (*function_ptr_t)(mach_port_t, char *, mach_msg_type_number_t);
 typedef struct {
-        char            *name;
+        char            * name;
         function_ptr_t  function;
 } function_table_entry;
 typedef function_table_entry   *function_table_t;
@@ -49,7 +52,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	task_MSG_COUNT
-#define	task_MSG_COUNT	64
+#define	task_MSG_COUNT	65
 #endif	/* task_MSG_COUNT */
 
 #include <Availability.h>
@@ -916,6 +919,20 @@ kern_return_t task_test_async_upcall_propagation
 	int iotier
 );
 
+/* Routine task_map_kcdata_object_64 */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t task_map_kcdata_object_64
+(
+	task_t task,
+	kcdata_object_t kcdata_object,
+	mach_vm_address_t *kcd_addr_begin,
+	mach_vm_size_t *kcd_size
+);
+
 __END_DECLS
 
 /********************** Caution **************************/
@@ -1018,7 +1035,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		task_flavor_t flavor;
 		mach_msg_type_number_t task_info_inCnt;
-		integer_t task_info_in[89];
+		integer_t task_info_in[90];
 	} __Request__task_set_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -1742,6 +1759,20 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t kcdata_object;
+		/* end of the kernel processed data */
+	} __Request__task_map_kcdata_object_64_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Request__task_subsystem__defined */
 
 /* union of all requests */
@@ -1811,6 +1842,7 @@ union __RequestUnion__task_subsystem {
 	__Request__task_test_sync_upcall_t Request_task_test_sync_upcall;
 	__Request__task_set_corpse_forking_behavior_t Request_task_set_corpse_forking_behavior;
 	__Request__task_test_async_upcall_propagation_t Request_task_test_async_upcall_propagation;
+	__Request__task_map_kcdata_object_64_t Request_task_map_kcdata_object_64;
 };
 #endif /* !__RequestUnion__task_subsystem__defined */
 /* typedefs for all replies */
@@ -1896,7 +1928,7 @@ union __RequestUnion__task_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_msg_type_number_t task_info_outCnt;
-		integer_t task_info_out[89];
+		integer_t task_info_out[90];
 	} __Reply__task_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -2646,6 +2678,20 @@ union __RequestUnion__task_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_vm_address_t kcd_addr_begin;
+		mach_vm_size_t kcd_size;
+	} __Reply__task_map_kcdata_object_64_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Reply__task_subsystem__defined */
 
 /* union of all replies */
@@ -2715,6 +2761,7 @@ union __ReplyUnion__task_subsystem {
 	__Reply__task_test_sync_upcall_t Reply_task_test_sync_upcall;
 	__Reply__task_set_corpse_forking_behavior_t Reply_task_set_corpse_forking_behavior;
 	__Reply__task_test_async_upcall_propagation_t Reply_task_test_async_upcall_propagation;
+	__Reply__task_map_kcdata_object_64_t Reply_task_map_kcdata_object_64;
 };
 #endif /* !__RequestUnion__task_subsystem__defined */
 
@@ -2781,7 +2828,8 @@ union __ReplyUnion__task_subsystem {
     { "task_get_exception_ports_info", 3460 },\
     { "task_test_sync_upcall", 3461 },\
     { "task_set_corpse_forking_behavior", 3462 },\
-    { "task_test_async_upcall_propagation", 3463 }
+    { "task_test_async_upcall_propagation", 3463 },\
+    { "task_map_kcdata_object_64", 3464 }
 #endif
 
 #ifdef __AfterMigUserHeader

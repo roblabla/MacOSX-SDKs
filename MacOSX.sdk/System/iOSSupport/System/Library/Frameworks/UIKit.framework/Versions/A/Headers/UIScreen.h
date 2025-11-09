@@ -12,19 +12,22 @@
 #import <UIKit/UITraitCollection.h>
 #import <UIKit/UIView.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIScreenMode, CADisplayLink, UIView;
 
 // Object is the UIScreen that represents the new screen. Connection notifications are not sent for screens present when the application is first launched
-UIKIT_EXTERN NSNotificationName const UIScreenDidConnectNotification API_AVAILABLE(ios(3.2));
+UIKIT_EXTERN NSNotificationName const UIScreenDidConnectNotification API_DEPRECATED("Use UISceneDelegate or related notifications to be informed of connecting scenes from other screens", ios(3.2, 16.0));
 // Object is the UIScreen that represented the disconnected screen.
-UIKIT_EXTERN NSNotificationName const UIScreenDidDisconnectNotification API_AVAILABLE(ios(3.2));
+UIKIT_EXTERN NSNotificationName const UIScreenDidDisconnectNotification API_DEPRECATED("Use UISceneDelegate or related notifications to be informed of disconnecting scenes from other screens", ios(3.2, 16.0));
 // Object is the UIScreen which changed. [object currentMode] is the new UIScreenMode.
 UIKIT_EXTERN NSNotificationName const UIScreenModeDidChangeNotification API_AVAILABLE(ios(3.2));
 UIKIT_EXTERN NSNotificationName const UIScreenBrightnessDidChangeNotification API_AVAILABLE(ios(5.0));
 // Object is the UIScreen which changed. [object isCaptured] is the new value of captured property.
 UIKIT_EXTERN NSNotificationName const UIScreenCapturedDidChangeNotification API_AVAILABLE(ios(11.0));
+// Object is the UIScreen which changed. [object referenceDisplayModeStatus] is the screen's new reference display mode status.
+UIKIT_EXTERN NSNotificationName const UIScreenReferenceDisplayModeStatusDidChangeNotification API_AVAILABLE(ios(16.0));
+
 
 // when the connected screen is overscanning, UIScreen can attempt to compensate for the overscan to avoid clipping
 typedef NS_ENUM(NSInteger, UIScreenOverscanCompensation) {
@@ -35,11 +38,23 @@ typedef NS_ENUM(NSInteger, UIScreenOverscanCompensation) {
     UIScreenOverscanCompensationInsetApplicationFrame API_DEPRECATED_WITH_REPLACEMENT("UIScreenOverscanCompensationNone", ios(5.0, 9.0)) = 2,
 };
 
+// Describes the screen's reference display mode ability
+typedef NS_ENUM(NSInteger, UIScreenReferenceDisplayModeStatus) {
+    // Reference display modes are not supported on this display
+    UIScreenReferenceDisplayModeStatusNotSupported,
+    // Reference display modes are supported on this display but have not been enabled by the user
+    UIScreenReferenceDisplayModeStatusNotEnabled,
+    // A reference display mode is enabled, but temporarily can not be achieved. This may be due to thermal or power constraints.
+    UIScreenReferenceDisplayModeStatusLimited,
+    // A reference display mode is enabled and being displayed accurately
+    UIScreenReferenceDisplayModeStatusEnabled
+} API_AVAILABLE(ios(16.0));
+
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @interface UIScreen : NSObject <UITraitEnvironment>
 
-@property(class, nonatomic, readonly) NSArray<UIScreen *> *screens API_AVAILABLE(ios(3.2));          // all screens currently attached to the device
-@property(class, nonatomic, readonly) UIScreen *mainScreen;      // the device's internal screen
+@property(class, nonatomic, readonly) NSArray<UIScreen *> *screens API_DEPRECATED("Use UIApplication.shared.openSessions to find open sessions with scenes from other screens", ios(3.2, 16.0)); // all screens currently attached to the device
+@property(class, nonatomic, readonly) UIScreen *mainScreen API_DEPRECATED("Use a UIScreen instance found through context instead: i.e, view.window.windowScene.screen", ios(2.0, API_TO_BE_DEPRECATED)); // the device's internal screen
 
 @property(nonatomic,readonly) CGRect  bounds;                // Bounds of entire screen in points
 @property(nonatomic,readonly) CGFloat scale API_AVAILABLE(ios(4.0));
@@ -77,6 +92,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // Will be `0` if display latency has not been calibrated by the user.
 @property(nonatomic, readonly) CFTimeInterval calibratedLatency API_AVAILABLE(ios(13.0));
 
+@property (nonatomic, readonly) UIScreenReferenceDisplayModeStatus referenceDisplayModeStatus API_AVAILABLE(ios(16.0));
+
+// Headroom is the ratio of the luminance of the brightest white the display can currently produce to the luminance of SDR white, in the display's native color space.
+// The screen’s current headroom can change depending on the display configuration and whether it is currently displaying any EDR content.
+// If any onscreen layer has `wantsExtendedDynamicRangeContent == YES` set, all rendered content is limited to the screen's currentEDRHeadroom value.
+@property (nonatomic, readonly) CGFloat currentEDRHeadroom API_AVAILABLE(ios(16.0));
+// Returns the maximum potential EDR headroom the screen is capable of displaying when EDR is enabled, regardless of whether EDR is currently enabled.
+// The potential EDR headroom may change depending on the display configuration. For example, this may change when referenceDisplayModeStatus changes.
+@property (nonatomic, readonly) CGFloat potentialEDRHeadroom API_AVAILABLE(ios(16.0));
+
+
 @property (nullable, nonatomic, weak, readonly) id<UIFocusItem> focusedItem API_DEPRECATED("Use -[UIWindowScene focusSystem].focusedItem instead", ios(10.0, 15.0));
 @property (nullable, nonatomic, weak, readonly) UIView *focusedView API_DEPRECATED("Use -[UIWindowScene focusSystem].focusedItem instead", ios(9.0, 15.0));
 @property (readonly, nonatomic) BOOL supportsFocus API_DEPRECATED("Use -[UIWindowScene focusSystem] != nil instead", ios(9.0, 15.0));
@@ -90,7 +116,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (UIView *)snapshotViewAfterScreenUpdates:(BOOL)afterUpdates API_AVAILABLE(ios(7.0));
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIScreen.h>

@@ -3,12 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2F0C2637-8CBB-3EBA-9810-8BA074E87F4A
+    value:           F9E9D75A-E376-38CE-A009-954469655035
   - target:          x86_64-maccatalyst
-    value:           2F0C2637-8CBB-3EBA-9810-8BA074E87F4A
+    value:           F9E9D75A-E376-38CE-A009-954469655035
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/unorm8_bgra.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ ___FunctionTableTransposed_AVX10, ___FunctionTableTransposed_SSE3, 
                        ___FunctionTableTransposed_SSE41, ___FunctionTable_AVX10, 
                        ___FunctionTable_SSE3, ___FunctionTable_SSE41 ]

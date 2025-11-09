@@ -15,16 +15,16 @@ typedef NS_ENUM(NSInteger, MEMessageState) {
     MEMessageStateReceived = 0,
     MEMessageStateDraft = 1,
     MEMessageStateSending = 2,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
+} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos, macCatalyst) API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSInteger, MEMessageEncryptionState) {
     MEMessageEncryptionStateUnknown = 0,
     MEMessageEncryptionStateNotEncrypted = 1,
     MEMessageEncryptionStateEncrypted = 2,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
+} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos);
 
 /// @brief Contains information about a mail message on which actions can be performed.
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 @interface MEMessage : NSObject <NSSecureCoding>
 
 /// @brief The state of the mail message.

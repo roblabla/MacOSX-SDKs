@@ -12,6 +12,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NSString * SKAdNetworkCoarseConversionValue NS_TYPED_ENUM NS_SWIFT_NAME(SKAdNetwork.CoarseConversionValue) API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos,watchos) __TVOS_PROHIBITED;
+
+SK_EXTERN SKAdNetworkCoarseConversionValue const SKAdNetworkCoarseConversionValueHigh  API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos,watchos) __TVOS_PROHIBITED;
+SK_EXTERN SKAdNetworkCoarseConversionValue const SKAdNetworkCoarseConversionValueMedium  API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos,watchos) __TVOS_PROHIBITED;
+SK_EXTERN SKAdNetworkCoarseConversionValue const SKAdNetworkCoarseConversionValueLow  API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos,watchos) __TVOS_PROHIBITED;
+
 SK_EXTERN_CLASS API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED @interface SKAdNetwork : NSObject
 
 // Source apps should call these methods for performing a non-mediated attribution
@@ -26,6 +32,10 @@ SK_EXTERN_CLASS API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos) __TVOS_
 
 + (void)updatePostbackConversionValue:(NSInteger)conversionValue completionHandler:(nullable void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
 
++ (void)updatePostbackConversionValue:(NSInteger)fineValue coarseValue:(SKAdNetworkCoarseConversionValue)coarseValue completionHandler:(nullable void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(16.1)) API_UNAVAILABLE(macos,watchos) __TVOS_PROHIBITED;
+
++ (void)updatePostbackConversionValue:(NSInteger)fineValue coarseValue:(SKAdNetworkCoarseConversionValue)coarseValue lockWindow:(BOOL)lockWindow completionHandler:(nullable void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(16.1)) API_UNAVAILABLE(macos,watchos) __TVOS_PROHIBITED;
+
 @end
 
 // Constants for use with SKStoreProductViewController to associate a product view with an install+open
@@ -35,6 +45,8 @@ SK_EXTERN NSString * const SKStoreProductParameterAdNetworkAttributionSignature 
 
 // Advertising network campaign identifier (NSNumber)
 SK_EXTERN NSString * const SKStoreProductParameterAdNetworkCampaignIdentifier API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos);
+
+SK_EXTERN NSString * const SKStoreProductParameterAdNetworkSourceIdentifier API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos);
 
 // Advertising network identifier (NSString)
 SK_EXTERN NSString * const SKStoreProductParameterAdNetworkIdentifier API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos);

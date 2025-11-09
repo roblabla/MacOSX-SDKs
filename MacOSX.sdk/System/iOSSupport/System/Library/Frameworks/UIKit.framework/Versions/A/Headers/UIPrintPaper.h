@@ -1,4 +1,4 @@
-#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<UIKitCore/UIPrintPaper.h>)
+#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<PrintKitUI/UIPrintPaper.h>)
 //
 //  UIPrintPaper.h
 //  UIKit
@@ -31,5 +31,5 @@ UIKIT_EXTERN API_AVAILABLE(ios(4.2))API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 NS_ASSUME_NONNULL_END
 
 #else
-#import <UIKitCore/UIPrintPaper.h>
+#import <PrintKitUI/UIPrintPaper.h>
 #endif

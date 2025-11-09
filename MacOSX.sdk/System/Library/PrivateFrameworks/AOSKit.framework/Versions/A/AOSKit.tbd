@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           858A80BD-AEA4-3703-A415-0F9E226D7B5F
+    value:           BE3E0F69-A9DA-307F-9058-5C396BF94FF5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2E86E1CB-39DF-3C04-8CA8-C76C6B130F70
+    value:           63534B1B-3F90-3B54-A6F4-75D8983082C8
 install-name:    '/System/Library/PrivateFrameworks/AOSKit.framework/Versions/A/AOSKit'
 current-version: 282
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AOSAccountCacheNewAuthToken, _AOSAccountCopyAuthInfo, _AOSAccountCopyInfo, 
                        _AOSAccountCreate, _AOSAccountGetAppleID, _AOSAccountGetPassword, 
                        _AOSAccountGetProperties, _AOSAccountGetUser, _AOSAccountRefreshInfo, 

@@ -84,6 +84,8 @@ API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 // Relevance score determines the sorting for the notification across app notifications. The expected range is between 0.0f and 1.0f.
 @property (NS_NONATOMIC_IOSONLY, readonly, assign) double relevanceScore API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 
+@property (NS_NONATOMIC_IOSONLY, readonly, copy, nullable) NSString *filterCriteria API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0)) API_UNAVAILABLE(tvos);
+
 /**
  Contextualizes your UNNotificationContent object with other Apple SDK objects conforming to UNNotificationContentProviding. This will specialize the notification and decorate its look and behavior accordingly. For example, the notification will be treated as a message with an avatar and be promoted to the top of notification center if the object passed in is a valid INSendMessageIntent<UNNotificationContentProviding>. This throws an error with a UNErrorCode found in UNError.h if the UNNotificationContentProviding object is invalid. A valid UNNotificationContent result should not be mutated and be passed directly to UNUserNotificationCenter.
 
@@ -143,6 +145,8 @@ API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 
 // Relevance score determines the sorting for the notification across app notifications. The expected range is between 0.0f and 1.0f.
 @property (NS_NONATOMIC_IOSONLY, readwrite, assign) double relevanceScore API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+@property (NS_NONATOMIC_IOSONLY, readwrite, copy, nullable) NSString *filterCriteria API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0)); // default nil
 
 @end
 

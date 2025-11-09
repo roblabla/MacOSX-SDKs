@@ -8,7 +8,7 @@
 
 #import <UIKit/UIScene.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIPointerLockState : NSObject
@@ -38,7 +38,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI
 UIKIT_EXTERN NSNotificationName const UIPointerLockStateDidChangeNotification NS_SWIFT_NAME(UIPointerLockState.didChangeNotification) API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos);
 UIKIT_EXTERN NSString *const UIPointerLockStateSceneUserInfoKey NS_SWIFT_NAME(UIPointerLockState.sceneUserInfoKey)API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIPointerLockState.h>

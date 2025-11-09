@@ -9,25 +9,25 @@
 @class NSURLHandle, NSMutableArray, NSMutableData, NSData, NSURL;
 
 	// HTTP Specific Property Keys
-FOUNDATION_EXPORT NSString *NSHTTPPropertyStatusCodeKey API_DEPRECATED("", macos(10.0, 10.4)) API_UNAVAILABLE(ios, watchos, tvos);
-FOUNDATION_EXPORT NSString *NSHTTPPropertyStatusReasonKey API_DEPRECATED("", macos(10.0, 10.4)) API_UNAVAILABLE(ios, watchos, tvos);
-FOUNDATION_EXPORT NSString *NSHTTPPropertyServerHTTPVersionKey API_DEPRECATED("", macos(10.0, 10.4)) API_UNAVAILABLE(ios, watchos, tvos);
-FOUNDATION_EXPORT NSString *NSHTTPPropertyRedirectionHeadersKey API_DEPRECATED("", macos(10.0, 10.4)) API_UNAVAILABLE(ios, watchos, tvos);
-FOUNDATION_EXPORT NSString *NSHTTPPropertyErrorPageDataKey API_DEPRECATED("", macos(10.0, 10.4)) API_UNAVAILABLE(ios, watchos, tvos);
-FOUNDATION_EXPORT NSString *NSHTTPPropertyHTTPProxy API_DEPRECATED("", macos(10.2, 10.4)) API_UNAVAILABLE(ios, watchos, tvos); // NSDictionary containing proxy information to use in place of proxy identified in SystemConfiguration.framework
+FOUNDATION_EXPORT NSString * const NSHTTPPropertyStatusCodeKey API_DEPRECATED("", macos(10.0, 10.4)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSHTTPPropertyStatusReasonKey API_DEPRECATED("", macos(10.0, 10.4)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSHTTPPropertyServerHTTPVersionKey API_DEPRECATED("", macos(10.0, 10.4)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSHTTPPropertyRedirectionHeadersKey API_DEPRECATED("", macos(10.0, 10.4)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSHTTPPropertyErrorPageDataKey API_DEPRECATED("", macos(10.0, 10.4)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSHTTPPropertyHTTPProxy API_DEPRECATED("", macos(10.2, 10.4)) API_UNAVAILABLE(ios, watchos, tvos); // NSDictionary containing proxy information to use in place of proxy identified in SystemConfiguration.framework
 													// To avoid any proxy use, pass an empty dictionary
 
 // FTP Specific Property Keys
 	// All keys are optional.  The default configuration allows an
 	// anonymous, passive-mode, one-off transfer of the specified URL.
-FOUNDATION_EXPORT NSString *NSFTPPropertyUserLoginKey API_DEPRECATED("", macos(10.2, 10.4)) API_UNAVAILABLE(ios, watchos, tvos); // NSString - default "anonymous"
-FOUNDATION_EXPORT NSString *NSFTPPropertyUserPasswordKey API_DEPRECATED("", macos(10.2, 10.4)) API_UNAVAILABLE(ios, watchos, tvos); // NSString - default "NSURLHandle@apple.com"
-FOUNDATION_EXPORT NSString *NSFTPPropertyActiveTransferModeKey API_DEPRECATED("", macos(10.2, 10.4)) API_UNAVAILABLE(ios, watchos, tvos); // NSNumber BOOL - default NO (i.e. passive mode)
-FOUNDATION_EXPORT NSString *NSFTPPropertyFileOffsetKey API_DEPRECATED("", macos(10.2, 10.4)) API_UNAVAILABLE(ios, watchos, tvos); // NSNumber - default 0
+FOUNDATION_EXPORT NSString * const NSFTPPropertyUserLoginKey API_DEPRECATED("", macos(10.2, 10.4)) API_UNAVAILABLE(ios, watchos, tvos); // NSString - default "anonymous"
+FOUNDATION_EXPORT NSString * const NSFTPPropertyUserPasswordKey API_DEPRECATED("", macos(10.2, 10.4)) API_UNAVAILABLE(ios, watchos, tvos); // NSString - default "NSURLHandle@apple.com"
+FOUNDATION_EXPORT NSString * const NSFTPPropertyActiveTransferModeKey API_DEPRECATED("", macos(10.2, 10.4)) API_UNAVAILABLE(ios, watchos, tvos); // NSNumber BOOL - default NO (i.e. passive mode)
+FOUNDATION_EXPORT NSString * const NSFTPPropertyFileOffsetKey API_DEPRECATED("", macos(10.2, 10.4)) API_UNAVAILABLE(ios, watchos, tvos); // NSNumber - default 0
 
 // NSDictionary containing proxy information to use in place of proxy identified in SystemConfiguration.framework
 // To avoid any proxy use, pass an empty dictionary
-FOUNDATION_EXPORT NSString *NSFTPPropertyFTPProxy API_DEPRECATED("", macos(10.3, 10.4)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSFTPPropertyFTPProxy API_DEPRECATED("", macos(10.3, 10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 

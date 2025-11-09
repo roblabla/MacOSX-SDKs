@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKitDefines.h>
+#import <StoreKit/SKAdImpression.h>
 #import <StoreKit/SKOverlay.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,7 +19,7 @@ typedef NS_ENUM(NSInteger, SKOverlayPosition) {
 
 SK_EXTERN_CLASS
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED
-NS_SWIFT_NAME(SKOverlay.Configuration)
+NS_SWIFT_NAME(SKOverlay.Configuration) NS_SWIFT_NONSENDABLE
 @interface SKOverlayConfiguration : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -29,7 +30,7 @@ NS_SWIFT_NAME(SKOverlay.Configuration)
 SK_EXTERN_CLASS
 SK_CLASS_FINAL
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED
-NS_SWIFT_NAME(SKOverlay.AppConfiguration)
+NS_SWIFT_NAME(SKOverlay.AppConfiguration) NS_SWIFT_NONSENDABLE
 /// An overlay configuration that can be used to show any app from the App Store.
 @interface SKOverlayAppConfiguration : SKOverlayConfiguration
 
@@ -66,12 +67,14 @@ NS_SWIFT_NAME(SKOverlay.AppConfiguration)
 
 - (nullable id)additionalValueForKey:(NSString *)key NS_WARN_UNUSED_RESULT;
 
+- (void)setAdImpression:(SKAdImpression *)impression API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
+
 @end
 
 SK_EXTERN_CLASS
 SK_CLASS_FINAL
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED
-NS_SWIFT_NAME(SKOverlay.AppClipConfiguration)
+NS_SWIFT_NAME(SKOverlay.AppClipConfiguration) NS_SWIFT_NONSENDABLE
 /// An overlay configuration that can be used to show an app clip's full app.
 @interface SKOverlayAppClipConfiguration : SKOverlayConfiguration
 

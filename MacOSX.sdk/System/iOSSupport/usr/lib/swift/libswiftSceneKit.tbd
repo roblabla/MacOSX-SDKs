@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           75C5D3DD-D8F8-322F-9AFE-C979E5E0F81C
+    value:           7B8F32F6-B280-3596-A7ED-557EF9275000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           8EDE38EC-2786-3D17-B7C4-FDF3BDE647DC
+    value:           F2F30CA7-222B-313B-B1AB-DF9899BF6342
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftSceneKit.dylib'
 current-version: 1.2
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$sSo10SCNMatrix4V8SceneKitE19_bridgeToObjectiveCSo7NSValueCyF', 
                        '_$sSo10SCNMatrix4V8SceneKitE26_forceBridgeFromObjectiveC_6resultySo7NSValueC_ABSgztFZ', 
                        '_$sSo10SCNMatrix4V8SceneKitE34_conditionallyBridgeFromObjectiveC_6resultSbSo7NSValueC_ABSgztFZ', 

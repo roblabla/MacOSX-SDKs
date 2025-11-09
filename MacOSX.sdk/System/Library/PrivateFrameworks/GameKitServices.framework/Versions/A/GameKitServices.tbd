@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D16D88C8-0AE2-342F-9A8E-529392480A6E
+    value:           A01F7F54-4723-3400-A041-6E981EE63DCE
   - target:          x86_64-maccatalyst
-    value:           D16D88C8-0AE2-342F-9A8E-529392480A6E
+    value:           A01F7F54-4723-3400-A041-6E981EE63DCE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0CA3B70C-2FCA-3105-A54F-463067EC8ECC
+    value:           FE9DD0FE-C4FE-3D8A-9E27-A3F3780BD243
   - target:          arm64e-maccatalyst
-    value:           0CA3B70C-2FCA-3105-A54F-463067EC8ECC
+    value:           FE9DD0FE-C4FE-3D8A-9E27-A3F3780BD243
 install-name:    '/System/Library/PrivateFrameworks/GameKitServices.framework/Versions/A/GameKitServices'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -23,12 +23,12 @@ reexported-libraries:
                        '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/snatmap.framework/Versions/A/snatmap', 
                        '/System/Library/PrivateFrameworks/AVConference.framework/Versions/A/AVConference' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTI13AGPSetElement, __ZTI20AGPReceiveSetElement, __ZTI20AGPSendingSetElement, 
                        __ZTI24AGPAssociationSetElement, __ZTS13AGPSetElement, __ZTS20AGPReceiveSetElement, 
                        __ZTS20AGPSendingSetElement, __ZTS24AGPAssociationSetElement ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AGPSessionBroadcast, _AGPSessionCreate, _AGPSessionEvent, 
                        _AGPSessionRelease, _AGPSessionSendAudioTo, _AGPSessionSendTo, 
                        _BWEUpdateFilterType, _BWEstCheckIfLargeFrameNeeded, _CDXClientDidUpdatePreblobNotification, 
@@ -105,21 +105,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3BA802AB-6888-3CF3-95C4-543845544DF0
+    value:           D6FC47CA-573F-3541-AE5C-38BB8913C9F6
   - target:          x86_64-maccatalyst
-    value:           3BA802AB-6888-3CF3-95C4-543845544DF0
+    value:           D6FC47CA-573F-3541-AE5C-38BB8913C9F6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A5A4E654-9891-3F56-BBBA-AA1F912AE837
+    value:           B86A5E69-A4D0-3E3A-8675-5A4905B11484
   - target:          arm64e-maccatalyst
-    value:           A5A4E654-9891-3F56-BBBA-AA1F912AE837
+    value:           B86A5E69-A4D0-3E3A-8675-5A4905B11484
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/LegacyHandle.framework/Versions/A/LegacyHandle'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CheckInHandleDebug, _CheckOutHandleDebug, _CloseAllHandles, 
                        _CreateHandle, _FindHandle, _GetNumHandles ]
 --- !tapi-tbd
@@ -128,21 +128,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8CBBB89E-7AB4-3E3B-8A52-0886E076FA67
+    value:           53AA1307-A41F-3020-A829-2D2D8A0123DD
   - target:          x86_64-maccatalyst
-    value:           8CBBB89E-7AB4-3E3B-8A52-0886E076FA67
+    value:           53AA1307-A41F-3020-A829-2D2D8A0123DD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           86AF124C-3D4A-3611-8F68-72AF8F5C7A41
+    value:           BE01DB14-944F-38A6-9F2F-CA3BD15C3928
   - target:          arm64e-maccatalyst
-    value:           86AF124C-3D4A-3611-8F68-72AF8F5C7A41
+    value:           BE01DB14-944F-38A6-9F2F-CA3BD15C3928
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/snatmap.framework/Versions/A/snatmap'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _GetSNATMAPServer, _ProcessSNATMAPResponse, _SNATMAP_GetNonceValue, 
                        _SNATMAP_IsEqualNonce, _SNATMAP_MakeRequest ]
 --- !tapi-tbd
@@ -151,20 +151,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           045E4AF8-EFB9-34CA-9276-60BE037479ED
+    value:           F60B5D06-46B4-3B27-B318-05936A2179E7
   - target:          x86_64-maccatalyst
-    value:           045E4AF8-EFB9-34CA-9276-60BE037479ED
+    value:           F60B5D06-46B4-3B27-B318-05936A2179E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FF196417-92B5-3F78-AA86-199160E6629D
+    value:           EEE27D0F-29E5-3FDB-A8BF-F33114846CCC
   - target:          arm64e-maccatalyst
-    value:           FF196417-92B5-3F78-AA86-199160E6629D
+    value:           EEE27D0F-29E5-3FDB-A8BF-F33114846CCC
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Versions/A/AVConference'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __Z24CMgr_GetSelectorForCanDoP19ComponentParameters, __Z28CMgr_GetComponentDescriptionP23ComponentInstanceRecordP25AudioComponentDescription, 
                        __Z32CMgr_GetComponentInstanceStorageP23ComponentInstanceRecord, 
                        __Z32CMgr_SetComponentInstanceStorageP23ComponentInstanceRecordPPc, 
@@ -178,34 +178,39 @@ exports:
                        __ZTSSt11logic_error, __ZTSSt12length_error, __ZTSSt12out_of_range, 
                        __ZTSSt13runtime_error, __ZTSSt14overflow_error, __ZTSSt9bad_alloc, 
                        __ZTSSt9exception ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ACGKDecoderFactory, _ACGKEncoderFactory, _AVCKeyDaemonProcessInfoError, 
                        _AVCKeyDaemonProcessInfoUniquePID, _AVCMediaStreamNegotiatorHDRMode, 
-                       _AVCMediaStreamNegotiatorVideoHeight, _AVCMediaStreamNegotiatorVideoResolution, 
-                       _AVCMediaStreamNegotiatorVideoWidth, _AVCQoSReportChannelSequence, 
-                       _AVCQoSReportDisplayedFrameCount, _AVCQoSReportExpectedFrameCount, 
-                       _AVCQoSReportHIDEventLatencyAverage, _AVCQoSReportHIDEventLatencyMax, 
-                       _AVCQoSReportHIDEventLatencyMin, _AVCQoSReportVideoJitterTarget, 
-                       _AVCQoSReportVideoStallDuration, _AVCQoSReportVideoStallDurationMax, 
-                       _AVCRateAdaptationInfoKeyBandwidthEstimation, _AVCRateAdaptationInfoKeyTargetBitrate, 
-                       _AVCSessionParticipantMediaTypeKeyAudio, _AVCSessionParticipantMediaTypeKeyVideo, 
-                       _AVC_VOLUME_MAX, _AVC_VOLUME_MIN, _AVConferenceAudioTierAudioBitrate, 
-                       _AVConferenceAudioTierNetworkBitrate, _AVConferenceAudioTierPacketsPerBundle, 
-                       _AVConferenceAudioTierPayload, _AVConferenceAudioTierRedNumPayloads, 
-                       _AVConferenceBackCaptureTime, _AVConferenceBlockServiceCallID, 
-                       _AVConferenceBlockServiceConference, _AVConferenceBlockServiceConnectionBlob, 
-                       _AVConferenceConnectionType, _AVConferenceConnectionTypeP2P, 
-                       _AVConferenceConnectionTypeRelay, _AVConferenceConnectionTypeRelayP2PUpgrade, 
-                       _AVConferenceFrontCaptureTime, _AVConferenceInviteDataCallInfoBlob, 
-                       _AVConferenceInviteDataConnectionBlob, _AVConferenceInviteDataMediaBlob, 
-                       _AVConferenceInviteDataSKEBlob, _AVConferenceLocalBitRate, 
-                       _AVConferenceLocalFrameHeight, _AVConferenceLocalFrameRate, 
-                       _AVConferenceLocalFrameWidth, _AVConferenceLocalPacketLossRate, 
-                       _AVConferenceRemoteBitRate, _AVConferenceRemoteFrameHeight, 
-                       _AVConferenceRemoteFrameRate, _AVConferenceRemoteFrameWidth, 
-                       _AVConferenceRemotePacketLossRate, _AVConferenceRoundTripTime, 
-                       _AVConferenceServerStart, _AVConferenceServerStartInternal, 
+                       _AVCMediaStreamNegotiatorTransportType, _AVCMediaStreamNegotiatorVideoHeight, 
+                       _AVCMediaStreamNegotiatorVideoResolution, _AVCMediaStreamNegotiatorVideoWidth, 
+                       _AVCQoSReportChannelSequence, _AVCQoSReportDisplayedFrameCount, 
+                       _AVCQoSReportExpectedFrameCount, _AVCQoSReportHIDEventLatencyAverage, 
+                       _AVCQoSReportHIDEventLatencyMax, _AVCQoSReportHIDEventLatencyMin, 
+                       _AVCQoSReportVideoJitterTarget, _AVCQoSReportVideoStallDuration, 
+                       _AVCQoSReportVideoStallDurationMax, _AVCRateAdaptationInfoKeyBandwidthEstimation, 
+                       _AVCRateAdaptationInfoKeyTargetBitrate, _AVCSampleBufferAttachmentAspectRatio, 
+                       _AVCSampleBufferAttachmentCameraStatusBits, _AVCSampleBufferAttachmentContentsRect, 
+                       _AVCSampleBufferAttachmentNetworkTimestamp, _AVCSampleBufferAttachmentPropagatableAttachments, 
+                       _AVCSampleBufferAttachmentTileIndex, _AVCSessionParticipantMediaTypeKeyAudio, 
+                       _AVCSessionParticipantMediaTypeKeyVideo, _AVC_VOLUME_MAX, 
+                       _AVC_VOLUME_MIN, _AVConferenceAudioTierAudioBitrate, _AVConferenceAudioTierNetworkBitrate, 
+                       _AVConferenceAudioTierPacketsPerBundle, _AVConferenceAudioTierPayload, 
+                       _AVConferenceAudioTierRedNumPayloads, _AVConferenceBackCaptureTime, 
+                       _AVConferenceBlockServiceCallID, _AVConferenceBlockServiceConference, 
+                       _AVConferenceBlockServiceConnectionBlob, _AVConferenceConnectionType, 
+                       _AVConferenceConnectionTypeP2P, _AVConferenceConnectionTypeRelay, 
+                       _AVConferenceConnectionTypeRelayP2PUpgrade, _AVConferenceFrontCaptureTime, 
+                       _AVConferenceInviteDataCallInfoBlob, _AVConferenceInviteDataConnectionBlob, 
+                       _AVConferenceInviteDataMediaBlob, _AVConferenceInviteDataSKEBlob, 
+                       _AVConferenceLocalBitRate, _AVConferenceLocalFrameHeight, 
+                       _AVConferenceLocalFrameRate, _AVConferenceLocalFrameWidth, 
+                       _AVConferenceLocalPacketLossRate, _AVConferenceRemoteBitRate, 
+                       _AVConferenceRemoteFrameHeight, _AVConferenceRemoteFrameRate, 
+                       _AVConferenceRemoteFrameWidth, _AVConferenceRemotePacketLossRate, 
+                       _AVConferenceRoundTripTime, _AVConferenceServerStart, _AVConferenceServerStartInternal, 
+                       _AVConferenceServer_ProcessIsAVConferenceServer, _AVConferenceServer_ProcessIsAvconferenced, 
+                       _AVConferenceServer_UseAvconferenced, _AVConferenceServer_UseAvconferencedOniOSSpecficFeatures, 
                        _AVConferenceServiceErrorDomain, _AVConferenceSessionBitRate, 
                        _AVConferenceSessionConnectionType, _AVConferenceSessionDataNonce, 
                        _AVConferenceSessionLocalUsesCell, _AVConferenceSessionReceivedBytes, 
@@ -281,7 +286,8 @@ exports:
                        _VCAdaptiveLearningShortTermHistoryLength, _VCAdaptiveLearningShortTermValueWeightA, 
                        _VCAdaptiveLearningShortTermValueWeightB, _VCAdaptiveLearningShortTermValueWeightC, 
                        _VCAllowBurstyLossRampDownEnableThreshold, _VCAlwaysOnAudioRedundancyEnableThreshold, 
-                       _VCAudioStreamLowQualityOnDemand, _VCCellularLowTierRedundancyEnableThreshold, 
+                       _VCAudioIssueDetectorEnabled, _VCAudioStreamLowQualityOnDemand, 
+                       _VCCaptionsEnabled, _VCCellularLowTierRedundancyEnableThreshold, 
                        _VCConnectionManagerNWConnectionMonitor, _VCCoreMotionDetectionEnabled, 
                        _VCDisableSIPEnableThreshold, _VCDuplicateImportantPktsEnableThreshold, 
                        _VCDuplicationEnhancementEnableThreshold, _VCFECFeedbackAnalyzerBufferMaxLength, 
@@ -303,10 +309,15 @@ exports:
                        _VCMaxBitrate3GUplink, _VCMaxBitrateLTEDownlink, _VCMaxBitrateLTEUplink, 
                        _VCMaxBitrateNonExpensiveDownlink, _VCMaxBitrateNonExpensiveUplink, 
                        _VCMaxBitrateWiFiDownlink, _VCMaxBitrateWiFiUplink, _VCMediaDrivenDuplication, 
-                       _VCMediaDrivenDuplicationEnableThreshold, _VCNoRemoteDuplicationThresholdFast, 
-                       _VCPreWarmCellEnableThreshold, _VCPreferRelayOverP2PThreshold, 
-                       _VCPrimaryConnHealthAllowedDelay, _VCRedStateValueA, _VCRemoteMediaStallTimeout, 
-                       _VCSecureMessagingEnableThreshold, _VCSendFeedbackControllerReport, 
+                       _VCMediaDrivenDuplicationEnableThreshold, _VCNackGeneratorNackBitRateLimitingMaxRatio, 
+                       _VCNackGeneratorNackThrottlingFactorBuckets, _VCNackGeneratorNackThrottlingPlrBuckets, 
+                       _VCNackGeneratorPercentageOfPopulationWithRTXAdditionalDelayBudget, 
+                       _VCNackGeneratorSeqNumAgingTime, _VCNackGeneratorStorebagConfigVersion, 
+                       _VCNoRemoteDuplicationThresholdFast, _VCPreWarmCellEnableThreshold, 
+                       _VCPreferRelayOverP2PThreshold, _VCPrimaryConnHealthAllowedDelay, 
+                       _VCRedStateValueA, _VCRemoteMediaStallTimeout, _VCSecureMessagingEnableThreshold, 
+                       _VCSendFeedbackControllerReport, _VCServerPacketRetransmissionEnabledForVideo, 
+                       _VCStreamOutputInProcessDelegate, _VCStreamOutputInProcessDelegateQueue, 
                        _VCUpdatedAFRCHeaderEnableThreshold, _VCVideoEnableLateFrameRecovery, 
                        _VCVideoJBEnableThreshold, _VCVideoJitterBufferForVideoPlayoutForFaceTime, 
                        _VCVideoPlayerEnableLooseSyncForFaceTime, _VCVideoPlayerEnableReferenceFrameForFaceTime, 
@@ -450,12 +461,20 @@ exports:
                        __ZN21VoiceActivityDetector19preprocess_analysisEPf, __ZN21VoiceActivityDetectorC1Ejd, 
                        __ZN21VoiceActivityDetectorC2Ejd, __ZN21VoiceActivityDetectorD0Ev, 
                        __ZN21VoiceActivityDetectorD1Ev, __ZN21VoiceActivityDetectorD2Ev, 
+                       __ZN22MultiDelayMatrixFilter10InitializeEjjjj26MultiDelayMatrixFilterMode, 
+                       __ZN22MultiDelayMatrixFilter15ProcessOneBlockEPPf, __ZN22MultiDelayMatrixFilter18SetImpulseResponseEjjPKfjf, 
+                       __ZN22MultiDelayMatrixFilter20ReuseImpulseResponseEjjjj, __ZN22MultiDelayMatrixFilter5ResetEv, 
+                       __ZN22MultiDelayMatrixFilter7ProcessEPK15AudioBufferListPS0_Rj, 
+                       __ZN22MultiDelayMatrixFilterC1Ev, __ZN22MultiDelayMatrixFilterC2Ev, 
+                       __ZN22MultiDelayMatrixFilterD1Ev, __ZN22MultiDelayMatrixFilterD2Ev, 
                        __ZN23MP4ObjectTypeIndication22Is13KVoiceObjectTypeIDEj, __ZN23MP4ObjectTypeIndication24IsMPEG4AudioObjectTypeIDEj, 
                        __ZN23MP4ObjectTypeIndication27IsMPEG1Or2AudioObjectTypeIDEj, 
                        __ZN23MP4ObjectTypeIndicationC1Ej, __ZN23MP4ObjectTypeIndicationC2Ej, 
                        __ZN24CAStreamBasicDescription11ResetFormatER27AudioStreamBasicDescription, 
                        __ZN24CAStreamBasicDescription13FillOutFormatER27AudioStreamBasicDescriptionRKS0_, 
                        __ZN24CAStreamBasicDescription23sTextParsingUsageStringE, 
+                       __ZN24CAStreamBasicDescription25VirtualizeLinearPCMFormatER27AudioStreamBasicDescription, 
+                       __ZN24CAStreamBasicDescription25VirtualizeLinearPCMFormatEbR27AudioStreamBasicDescription, 
                        __ZN24CAStreamBasicDescription8FromTextEPKcR27AudioStreamBasicDescription, 
                        __ZN24MP4LDSpatialConfigWriter13SetSampleRateEj, __ZN24MP4LDSpatialConfigWriter18SetTreeConfigIndexEj, 
                        __ZN24MP4LDSpatialConfigWriter4sizeEv, __ZN24MP4LDSpatialConfigWriterC1EPK29MP4SpatialAudioSpecificConfig, 
@@ -509,7 +528,7 @@ exports:
                        __ZN5ausdk6AUBase14CreateElementsEv, __ZN5ausdk6AUBase15GetPropertyInfoEjjjRjRb, 
                        __ZN5ausdk6AUBase15GetStreamFormatEjj, __ZN5ausdk6AUBase15PropertyChangedEjjj, 
                        __ZN5ausdk6AUBase15ResetRenderTimeEv, __ZN5ausdk6AUBase16CopyIconLocationEv, 
-                       __ZN5ausdk6AUBase16GetLoggingStringEv, __ZN5ausdk6AUBase16GetParameterInfoEjjR22AudioUnitParameterInfo, 
+                       __ZN5ausdk6AUBase16GetParameterInfoEjjR22AudioUnitParameterInfo, 
                        __ZN5ausdk6AUBase16GetParameterListEjPjRj, __ZN5ausdk6AUBase16SetInputCallbackEjjPFiPvPjPK14AudioTimeStampjjP15AudioBufferListES1_, 
                        __ZN5ausdk6AUBase17DoProcessMultipleERjRK14AudioTimeStampjjPPK15AudioBufferListjPPS5_, 
                        __ZN5ausdk6AUBase17ReallocateBuffersEv, __ZN5ausdk6AUBase17ScheduleParameterEPK23AudioUnitParameterEventj, 
@@ -540,12 +559,8 @@ exports:
                        __ZN5ausdk9AUElement12SetParameterEjfb, __ZN5ausdk9AUElement16GetParameterListEPj, 
                        __ZN5ausdk9AUElement17SetScheduledEventEjRK23AudioUnitParameterEventjjb, 
                        __ZN5ausdk9AUElement20UseIndexedParametersEj, __ZN5ausdk9AUElement9SaveStateEjP8__CFData, 
-                       __ZN7kFilter10InitializeEfjf, __ZN7kFilter18ProcessAllChannelsEjjPKjPKfPd, 
-                       __ZN7kFilter5ResetEv, __ZN7kFilter7ProcessEPK15AudioBufferListPS0_j, 
-                       __ZN7kFilter7ProcessEjPKfPfj, __ZN7kFilterC1Ev, __ZN7kFilterC2Ev, 
-                       __ZN7kFilterD1Ev, __ZN7kFilterD2Ev, __ZN8RandLFSR10initializeEjf, 
-                       __ZN8RandLFSR12bitGeneratorEv, __ZN8RandLFSR9randomBitEv, 
-                       __ZN9CACFArray10AppendBoolEb, __ZN9CACFArray10AppendDataEPK8__CFData, 
+                       __ZN8RandLFSR10initializeEjf, __ZN8RandLFSR12bitGeneratorEv, 
+                       __ZN8RandLFSR9randomBitEv, __ZN9CACFArray10AppendBoolEb, __ZN9CACFArray10AppendDataEPK8__CFData, 
                        __ZN9CACFArray10InsertBoolEjb, __ZN9CACFArray10InsertDataEjPK8__CFData, 
                        __ZN9CACFArray10PrintToLogEPK9__CFArrayj, __ZN9CACFArray10SetFloat32Ejf, 
                        __ZN9CACFArray10SetFloat64Ejd, __ZN9CACFArray11AppendArrayEPK9__CFArray, 
@@ -563,7 +578,9 @@ exports:
                        __ZN9CACFArray8SetArrayEjPK9__CFArray, __ZN9CACFArray9SetCFTypeEjPKv, 
                        __ZN9CACFArray9SetSInt32Eji, __ZN9CACFArray9SetSInt64Ejx, 
                        __ZN9CACFArray9SetStringEjPK10__CFString, __ZN9CACFArray9SetUInt32Ejj, 
-                       __ZN9CACFArray9SetUInt64Ejy, __ZN9ParamHRTF11DeserializeER16TBitstreamReaderIjE, 
+                       __ZN9CACFArray9SetUInt64Ejy, __ZN9MDFFilter9SetFilterEPKfjfP17MultiRadixRealFFT, 
+                       __ZN9MDFFilterC1Ejj, __ZN9MDFFilterC2Ejj, __ZN9MDFFilterD1Ev, 
+                       __ZN9MDFFilterD2Ev, __ZN9ParamHRTF11DeserializeER16TBitstreamReaderIjE, 
                        __ZN9ParamHRTF22kParamHRTFFreqResTableE, __ZN9SRCFilter10AddChannelERK28KaiserBesselFilterParameters, 
                        __ZN9SRCFilter13RemoveChannelEj, __ZN9SRCFilter14GetFilterDelayEPjS0_, 
                        __ZN9SRCFilter17AddDelayedChannelEj, __ZN9SRCFilter19InternalConstructorEjj, 
@@ -628,6 +645,7 @@ exports:
                        __ZNK29MP4SpatialAudioSpecificConfig19GetChannelLayoutTagEv, 
                        __ZNK29MP4SpatialAudioSpecificConfig8NumBandsEv, __ZNK5ausdk13ComponentBase23GetComponentDescriptionEv, 
                        __ZNK5ausdk6AUBase10GetPresetsEPPK9__CFArray, __ZNK5ausdk6AUBase15CanSetMaxFramesEv, 
+                       __ZNK5ausdk6AUBase16GetLoggingStringEv, __ZNK5ausdk6AUBase19CreateLoggingStringEv, 
                        __ZNK5ausdk7AUScope12RestoreStateEPKh, __ZNK5ausdk7AUScope18HasElementWithNameEv, 
                        __ZNK5ausdk7AUScope19RestoreElementNamesEPK14__CFDictionary, 
                        __ZNK5ausdk7AUScope21AddElementNamesToDictEP14__CFDictionary, 
@@ -651,7 +669,7 @@ exports:
                        __ZTVN5ausdk15AUOutputElementE, __ZTVN5ausdk15BufferAllocatorE, 
                        __ZTVN5ausdk6AUBaseE, __ZTVN5ausdk9AUElementE, __ZTv0_n24_N11CAExceptionD0Ev, 
                        __ZTv0_n24_N11CAExceptionD1Ev, _gCAVectorUnitType, _generateVector, 
-                       _hwrandom, _hwrandom16, _initKfilter, _initRng, _kAVCKeyAudioPowerSpectrumTokenInput, 
+                       _hwrandom, _hwrandom16, _initRng, _kAVCKeyAudioPowerSpectrumTokenInput, 
                        _kAVCKeyAudioPowerSpectrumTokenOutput, _kAVCKeyRTCPSocket, 
                        _kAVCKeyRTPLocalSSRC, _kAVCKeyRTPSocket, _kAVCKeySessionReceivedBytes, 
                        _kAVCKeySessionSentBytes, _kAVCKeySharedSocket, _kAVCKeySourcePort, 
@@ -661,13 +679,12 @@ exports:
                        _kAVCKeyVideoStreamDownlinkIsOperatingAtMaxBitrate, _kAVCKeyVideoStreamDownlinkIsOperatingAtMinBitrate, 
                        _kAVCKeyVideoStreamDownlinkOperatingBitrate, _kAVCKeyVideoStreamDownlinkOptimalBitrate, 
                        _kAVCKeyVideoStreamUplinkOperatingBitrate, _kAVCMediaStreamOptionCallID, 
-                       _kAVCMediaStreamOptionClientPID, _kAVCMediaStreamOptionRemoteEndpointInfo, 
-                       _kAVCMediaStreamOptionRunInProcess, _kFilterProcessAllChannels, 
-                       _kFilterProcessSingleChannel, _libLPC_analysisFilter, _libLPC_applyGamma, 
-                       _libLPC_burg, _libLPC_dBInterp, _libLPC_linInterp, _libLPC_lsf2poly, 
-                       _libLPC_lsfGridInit, _libLPC_olPitchSearch, _libLPC_poly2lsf, 
-                       _libLPC_synthesisFilter, _norm, _realFFTMultiply, _realFFTZeroPad, 
-                       _realIFFTUnload, _removeKfilter, _resetKfilter ]
+                       _kAVCMediaStreamOptionClientPID, _kAVCMediaStreamOptionIsOriginator, 
+                       _kAVCMediaStreamOptionRemoteEndpointInfo, _kAVCMediaStreamOptionRunInProcess, 
+                       _libLPC_analysisFilter, _libLPC_applyGamma, _libLPC_burg, 
+                       _libLPC_dBInterp, _libLPC_linInterp, _libLPC_lsf2poly, _libLPC_lsfGridInit, 
+                       _libLPC_olPitchSearch, _libLPC_poly2lsf, _libLPC_synthesisFilter, 
+                       _norm, _realFFTMultiply, _realFFTZeroPad, _realIFFTUnload ]
     objc-classes:    [ AVAudioClient, AVAudioDevice, AVAudioDeviceList, AVCAudioPowerSpectrum, 
                        AVCAudioPowerSpectrumBin, AVCAudioPowerSpectrumChannel, AVCAudioPowerSpectrumMeter, 
                        AVCAudioStream, AVCAudioStreamConfig, AVCCaptionsClient, AVCCaptionsConfig, 
@@ -690,15 +707,17 @@ exports:
                        AVCAudioPowerSpectrumMeter._audioSpectrumBinCount, AVCAudioPowerSpectrumMeter._audioSpectrumRefreshRate, 
                        AVCAudioPowerSpectrumMeter._connection, AVCAudioPowerSpectrumMeter._delegate, 
                        AVCAudioPowerSpectrumMeter._delegateQueue, AVCAudioPowerSpectrumMeter._sessionToken, 
-                       AVCAudioStreamConfig._audioStreamMode, AVCAudioStreamConfig._channelAwareOffset, 
-                       AVCAudioStreamConfig._cnEnabled, AVCAudioStreamConfig._cnPayloadType, 
+                       AVCAudioStreamConfig._anbrEnabled, AVCAudioStreamConfig._audioStreamMode, 
+                       AVCAudioStreamConfig._channelAwareOffset, AVCAudioStreamConfig._cnEnabled, 
+                       AVCAudioStreamConfig._cnPayloadType, AVCAudioStreamConfig._codecBandwidthMask, 
                        AVCAudioStreamConfig._codecRateModeMask, AVCAudioStreamConfig._codecType, 
                        AVCAudioStreamConfig._dtmfPayloadType, AVCAudioStreamConfig._dtmfTimestampRate, 
-                       AVCAudioStreamConfig._dtxEnabled, AVCAudioStreamConfig._enableMaxBitrateOnNoChangeCMR, 
-                       AVCAudioStreamConfig._headerFullOnly, AVCAudioStreamConfig._latencySensitiveMode, 
-                       AVCAudioStreamConfig._maxPtime, AVCAudioStreamConfig._numRedundantPayloads, 
-                       AVCAudioStreamConfig._octetAligned, AVCAudioStreamConfig._preferredCodecRateMode, 
-                       AVCAudioStreamConfig._ptime, AVCAudioStreamConfig._rxRedPayloadType, 
+                       AVCAudioStreamConfig._dtmfTonePlaybackEnabled, AVCAudioStreamConfig._dtxEnabled, 
+                       AVCAudioStreamConfig._enableMaxBitrateOnNoChangeCMR, AVCAudioStreamConfig._headerFullOnly, 
+                       AVCAudioStreamConfig._latencySensitiveMode, AVCAudioStreamConfig._maxPtime, 
+                       AVCAudioStreamConfig._numRedundantPayloads, AVCAudioStreamConfig._octetAligned, 
+                       AVCAudioStreamConfig._preferredCodecRateMode, AVCAudioStreamConfig._ptime, 
+                       AVCAudioStreamConfig._rxRedPayloadType, AVCAudioStreamConfig._subscriptionSlot, 
                        AVCAudioStreamConfig._txRedPayloadType, AVCAudioStreamConfig._volume, 
                        AVCCaptionsConfig._locale, AVCCaptionsToken._confidence, AVCCaptionsToken._range, 
                        AVCCaptionsToken._text, AVCEffects._avConferenceEffectsQueue, 
@@ -712,18 +731,7 @@ exports:
                        AVCPacketFilter._isRTPFilter, AVCPacketFilterRTP._SSRC, AVCPacketFilterRTP._type, 
                        AVCPacketRelay._connections, AVCPacketRelay._delegate, AVCPacketRelay._multiplexedConnection, 
                        AVCPacketRelay._packetDriver, AVCPacketRelay._queue, AVCRTCPSourceDescription._text, 
-                       AVCRTCPSourceDescription._type, AVCRemoteVideoClient._activeVideoMode, 
-                       AVCRemoteVideoClient._avcRemoteVideoQueue, AVCRemoteVideoClient._connection, 
-                       AVCRemoteVideoClient._connectionTypeString, AVCRemoteVideoClient._delegate, 
-                       AVCRemoteVideoClient._hasReceivedFirstFrame, AVCRemoteVideoClient._hasReceivedLastFrame, 
-                       AVCRemoteVideoClient._isMediaStalled, AVCRemoteVideoClient._isVideoDegraded, 
-                       AVCRemoteVideoClient._isVideoPaused, AVCRemoteVideoClient._isVideoSuspended, 
-                       AVCRemoteVideoClient._primaryCameraLayer, AVCRemoteVideoClient._primaryCameraSubLayer, 
-                       AVCRemoteVideoClient._remoteScreenAttributes, AVCRemoteVideoClient._remoteVideoAttributes, 
-                       AVCRemoteVideoClient._screenLayer, AVCRemoteVideoClient._screenSubLayer, 
-                       AVCRemoteVideoClient._secondaryCameraLayer, AVCRemoteVideoClient._secondaryCameraSubLayer, 
-                       AVCRemoteVideoClient._shouldDisplayVideoInfoLayer, AVCRemoteVideoClient._slotsForModes, 
-                       AVCRemoteVideoClient._streamToken, AVCTextStreamConfig._codecType, 
+                       AVCRTCPSourceDescription._type, AVCTextStreamConfig._codecType, 
                        AVCTextStreamConfig._numRedundantPayloads, AVCTextStreamConfig._rxRedPayloadType, 
                        AVCTextStreamConfig._txIntervalMin, AVCTextStreamConfig._txRedPayloadType, 
                        AVCVideoStreamConfig._captureSource, AVCVideoStreamConfig._customHeight, 
@@ -736,15 +744,16 @@ exports:
                        AVCVideoStreamConfig._remoteVideoInitialOrientation, AVCVideoStreamConfig._rxCodecFeatureListString, 
                        AVCVideoStreamConfig._rxCodecType, AVCVideoStreamConfig._rxMaxBitrate, 
                        AVCVideoStreamConfig._rxMinBitrate, AVCVideoStreamConfig._screenDisplayID, 
-                       AVCVideoStreamConfig._tilesPerFrame, AVCVideoStreamConfig._txCodecFeatureListString, 
-                       AVCVideoStreamConfig._txCodecType, AVCVideoStreamConfig._txMaxBitrate, 
-                       AVCVideoStreamConfig._txMinBitrate, AVCVideoStreamConfig._videoResolution, 
-                       AVCVideoStreamConfig._videoStreamMode, AVConference._delegate, 
-                       AVConference.connection, AVConference.opaqueConf, AVConference.serverBag, 
-                       AVConference.useServer, AVConferencePreview.connection, AVConferenceXPCClient.connection, 
-                       AVConferenceXPCClient.connectionPersists, AVConferenceXPCClient.connectionQueue, 
-                       AVConferenceXPCClient.registeredBlocks, AVConferenceXPCClient.replyQueue, 
-                       VCAudioRelay._isRelayRunning, VCAudioRelay._relayThread, VCAudioRelay._wakeUpCondition, 
+                       AVCVideoStreamConfig._synchronizationSourceStreamToken, AVCVideoStreamConfig._tilesPerFrame, 
+                       AVCVideoStreamConfig._txCodecFeatureListString, AVCVideoStreamConfig._txCodecType, 
+                       AVCVideoStreamConfig._txMaxBitrate, AVCVideoStreamConfig._txMinBitrate, 
+                       AVCVideoStreamConfig._videoResolution, AVCVideoStreamConfig._videoStreamMode, 
+                       AVConference._delegate, AVConference.connection, AVConference.opaqueConf, 
+                       AVConference.serverBag, AVConference.useServer, AVConferencePreview.connection, 
+                       AVConferenceXPCClient.connection, AVConferenceXPCClient.connectionPersists, 
+                       AVConferenceXPCClient.connectionQueue, AVConferenceXPCClient.registeredBlocks, 
+                       AVConferenceXPCClient.replyQueue, VCAudioRelay._isRelayRunning, 
+                       VCAudioRelay._relayThread, VCAudioRelay._wakeUpCondition, 
                        VCAudioRelay._wakeUpMutex, VCCapabilities.actualAudioCodec, 
                        VCCapabilities.actualVideoCodec, VCCapabilities.deviceRole, 
                        VCCapabilities.isAudioEnabled, VCCapabilities.isAudioPausedToStart, 
@@ -760,7 +769,7 @@ exports:
                        VideoAttributes.contentsRect, VideoAttributes.framePresentationTime, 
                        VideoAttributes.orientation, VideoAttributes.ratio, VideoAttributes.scaleFactor, 
                        VideoAttributes.videoMirrored, VideoAttributes.videoSourceScreen ]
-    weak-symbols:    [ __ZGVZN5ausdk8HostTime13timebase_info8instanceEvE4info, __ZGVZN5caulk9host_time7details13timebase_info8instanceEvE4info, 
+    weak-symbols:    [ __ZGVZN5caulk9host_time7details13timebase_info8instanceEvE4info, 
                        __ZN12CADeprecated10TSingletonI12DFTSetupListILb0EEE5sOnceE, 
                        __ZN12CADeprecated10TSingletonI12DFTSetupListILb0EEE9sInstanceE, 
                        __ZN12CADeprecated10TSingletonI12DFTSetupListILb1EEE5sOnceE, 
@@ -802,5 +811,5 @@ exports:
                        __ZNK16TBitstreamWriterIjE13BitsRemainingEv, __ZNK16TBitstreamWriterItE11BitsWrittenEv, 
                        __ZNK16TBitstreamWriterItE13BitsRemainingEv, __ZNK9DFTHandleILb0EE4SizeEv, 
                        __ZNK9DFTHandleILb1EE4SizeEv, __ZTV9DFTHandleILb0EE, __ZTV9DFTHandleILb1EE, 
-                       __ZZN5ausdk8HostTime13timebase_info8instanceEvE4info, __ZZN5caulk9host_time7details13timebase_info8instanceEvE4info ]
+                       __ZZN5caulk9host_time7details13timebase_info8instanceEvE4info ]
 ...

@@ -7,7 +7,9 @@
 
 #import <NearbyInteraction/NIError.h>
 
+#import <NearbyInteraction/NIAlgorithmConvergenceStatusReason.h>
 #import <NearbyInteraction/NIConfiguration.h>
+#import <NearbyInteraction/NIDeviceCapability.h>
 #import <NearbyInteraction/NINearbyObject.h>
 #import <NearbyInteraction/NISession.h>
 

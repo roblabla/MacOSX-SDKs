@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8276C8CD-CA18-3EF1-A67B-048C9507AD87
+    value:           9705A928-C71D-37EE-9DD4-A5283FA092EB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9A9A463A-75F0-3E22-9812-7D5E541FA524
+    value:           1083A3B7-1601-3446-9ABB-6832309EAA9D
 install-name:    '/System/Library/PrivateFrameworks/JetPack.framework/Versions/A/JetPack'
 exports:
   - targets:         [ x86_64-macos ]
@@ -127,7 +127,7 @@ exports:
                        __ZTSSt8__nestedIN7JetPack34UnableToParseMultiSegmentExceptionEE, 
                        __ZTSSt8__nestedIN7JetPack38UnableToParseEncryptedSegmentExceptionEE, 
                        __ZTSSt8__nestedIN7JetPack42UnableToParseSerializationSegmentExceptionEE ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BrotliDecoderCreateInstance, _BrotliDecoderDecompress, _BrotliDecoderDecompressStream, 
                        _BrotliDecoderDestroyInstance, _BrotliDecoderErrorString, 
                        _BrotliDecoderGetErrorCode, _BrotliDecoderHasMoreOutput, _BrotliDecoderIsFinished, 

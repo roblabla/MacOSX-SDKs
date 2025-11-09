@@ -18,12 +18,17 @@
 #import <MapKit/MKOverlayView.h>
 #endif
 
+#if TARGET_OS_IOS
+#import <MapKit/MKMapFeatureAnnotation.h>
+#endif
+
 @class MKUserLocation;
 @class MKMapCamera;
 @class MKMapCameraZoomRange;
 @class MKMapCameraBoundary;
 @class MKClusterAnnotation;
 @class MKPointOfInterestFilter;
+@class MKMapConfiguration;
 
 @protocol MKMapViewDelegate;
 
@@ -34,6 +39,14 @@ typedef NS_ENUM(NSInteger, MKUserTrackingMode) {
 	MKUserTrackingModeFollow, // the map follows the user's location
     MKUserTrackingModeFollowWithHeading API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos), // the map follows the user's location and heading
 } API_AVAILABLE(ios(5.0), tvos(9.2), macos(11.0)) API_UNAVAILABLE(watchos);
+
+#if TARGET_OS_IOS
+typedef NS_OPTIONS(NSInteger, MKMapFeatureOptions) {
+    MKMapFeatureOptionPointsOfInterest = 1 << MKMapFeatureTypePointOfInterest,
+    MKMapFeatureOptionTerritories = 1 << MKMapFeatureTypeTerritory,
+    MKMapFeatureOptionPhysicalFeatures = 1 << MKMapFeatureTypePhysicalFeature,
+} API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
+#endif
 
 MK_EXTERN NSString * const MKMapViewDefaultAnnotationViewReuseIdentifier NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
 MK_EXTERN NSString * const MKMapViewDefaultClusterAnnotationViewReuseIdentifier NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
@@ -50,7 +63,13 @@ NS_CLASS_AVAILABLE(10_9, NA)
 
 // Changing the map type or region can cause the map to start loading map content.
 // The loading delegate methods will be called as map content is loaded.
-@property (nonatomic) MKMapType mapType;
+@property (nonatomic) MKMapType mapType API_DEPRECATED_WITH_REPLACEMENT("Use respective MKMapConfiguration", macos(10.9, API_TO_BE_DEPRECATED), ios(3.0, API_TO_BE_DEPRECATED), tvos(9.2, API_TO_BE_DEPRECATED));
+
+@property (nonatomic, copy) MKMapConfiguration *preferredConfiguration API_AVAILABLE(ios(16.0), macos(13.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+#if TARGET_OS_IOS
+@property (nonatomic) MKMapFeatureOptions selectableMapFeatures API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
+#endif
 
 // Region is the coordinate and span of the map.
 // Region may be modified to fit the aspect ratio of the view using regionThatFits:.
@@ -114,10 +133,10 @@ NS_CLASS_AVAILABLE(10_9, NA)
 @property (nonatomic) BOOL showsCompass NS_AVAILABLE(10_9, 9_0) API_UNAVAILABLE(tvos);
 @property (nonatomic) BOOL showsScale NS_AVAILABLE(10_10, 9_0);
 
-@property (nonatomic, copy, nullable) MKPointOfInterestFilter *pointOfInterestFilter API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy, nullable) MKPointOfInterestFilter *pointOfInterestFilter API_DEPRECATED_WITH_REPLACEMENT("Use pointOfInterestFilter on respective MKMapConfiguration", macos(10.15, API_TO_BE_DEPRECATED), ios(13.0, API_TO_BE_DEPRECATED), tvos(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 @property (nonatomic) BOOL showsPointsOfInterest API_DEPRECATED("Use pointOfInterestFilter", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard and MKMapTypeHybrid
-@property (nonatomic) BOOL showsBuildings NS_AVAILABLE(10_9, 7_0); // Affects MKMapTypeStandard
-@property (nonatomic) BOOL showsTraffic NS_AVAILABLE(10_11, 9_0); // Affects MKMapTypeStandard and MKMapTypeHybrid
+@property (nonatomic) BOOL showsBuildings API_DEPRECATED("None", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)); // Affects MKMapTypeStandard
+@property (nonatomic) BOOL showsTraffic API_DEPRECATED_WITH_REPLACEMENT("Use showsTraffic on respective MKMapConfiguration", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)); // Affects MKMapTypeStandard and MKMapTypeHybrid
 
 // Set to YES to add the user location annotation to the map and start updating its location
 @property (nonatomic) BOOL showsUserLocation;
@@ -203,7 +222,7 @@ typedef NS_ENUM(NSInteger, MKOverlayLevel) {
 - (MKOverlayView *)viewForOverlay:(id <MKOverlay>)overlay API_DEPRECATED_WITH_REPLACEMENT("-rendererForOverlay:", ios(4.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos);
 #endif
 
-// These methods operate implicitly on overlays in MKOverlayLevelAboveLabels and may be deprecated in a future release in favor of the methods that specify the level.
+// These methods operate implicitly on overlays in MKOverlayLevelAboveRoads and may be deprecated in a future release in favor of the methods that specify the level.
 - (void)addOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 4_0);
 - (void)addOverlays:(NSArray<id<MKOverlay>> *)overlays NS_AVAILABLE(10_9, 4_0);
 
@@ -245,6 +264,9 @@ API_UNAVAILABLE(watchos)
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0);
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0);
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotation:(id<MKAnnotation>)annotation API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotation:(id<MKAnnotation>)annotation API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 - (void)mapViewWillStartLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0);
 - (void)mapViewDidStopLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0);

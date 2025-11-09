@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B19A72C8-ECF5-3462-A2FE-B580498C094B
+    value:           E4FDC88E-F778-3D8F-8AA9-DF1A76F9889E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           298F105F-FDAB-3406-B914-2EA9A09494C6
+    value:           B32F046B-76D9-3889-9327-FB91FC147FB0
 install-name:    '/System/Library/PrivateFrameworks/UVCFamily.framework/Versions/A/UVCFamily'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _UVCFamilyLog, _UVCFamilyVersionNumber, _UVCFamilyVersionString, 
                        _convertTimeToNanoSec, _createControls, _createDispatchWorkloop, 
                        _createStreamFormats, _enableUVCSignpost, _findControlWithName, 

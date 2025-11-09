@@ -10,7 +10,7 @@
 @class NSSpecifierTest;
 @class NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSUInteger, NSTestComparisonOperation) {
     NSEqualToComparison = 0,
@@ -104,6 +104,6 @@ typedef NS_ENUM(NSUInteger, NSTestComparisonOperation) {
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 

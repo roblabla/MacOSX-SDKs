@@ -195,6 +195,24 @@ typedef union {
 
 
 
+/* H14G e-Core */
+#define CPU_PART_BLIZZARD_STATEN    0x32
+
+/* H14G p-Core */
+#define CPU_PART_AVALANCHE_STATEN   0x33
+
+
+
+
+/* H15 e-Core */
+#define CPU_PART_SAWTOOTH           0x40
+
+/* H15 p-Core */
+#define CPU_PART_EVEREST            0x41
+
+
+/* M11 e-Core */
+#define CPU_PART_SAWTOOTH_M11       0x46
 
 
 /* Cache type identification */

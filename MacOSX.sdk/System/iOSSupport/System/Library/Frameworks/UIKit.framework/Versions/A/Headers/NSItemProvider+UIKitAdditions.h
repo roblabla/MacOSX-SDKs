@@ -11,7 +11,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_SWIFT_FORWARD_DECLARE(@class NSItemProvider)
 
@@ -43,7 +43,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/NSItemProvider+UIKitAdditions.h>

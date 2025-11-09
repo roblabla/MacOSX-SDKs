@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 DC_EXPORT
-API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0), watchos(9.0))
 @interface DCAppAttestService : NSObject
 
 /**

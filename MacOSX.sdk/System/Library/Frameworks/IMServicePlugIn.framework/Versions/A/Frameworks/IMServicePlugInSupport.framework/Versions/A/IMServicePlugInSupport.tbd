@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AC6FCE81-F081-33FD-AFA9-D19AE720D0D7
+    value:           C2FFE842-BB23-3CEA-8AA6-C3082AB4D80C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E8B7F72F-D188-3A1B-91F3-0572545BBA51
+    value:           6C4B4A78-6B3B-3E75-AF67-0C10E2CDF9E6
 install-name:    '/System/Library/Frameworks/IMServicePlugIn.framework/Versions/A/Frameworks/IMServicePlugInSupport.framework/Versions/A/IMServicePlugInSupport'
 current-version: 1000
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IMAccountSettingLoginHandle, _IMAccountSettingPassword, _IMAccountSettingServerHost, 
                        _IMAccountSettingServerPort, _IMAccountSettingUsesSSL, _IMAttributeBackgroundColor, 
                        _IMAttributeBaseWritingDirection, _IMAttributeBold, _IMAttributeFontFamily, 

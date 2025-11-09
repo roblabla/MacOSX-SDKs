@@ -121,9 +121,9 @@ Works on images with 8-bit SPP; thus either 8-bit gray or 24-bit color (with opt
 - (void)colorizeByMappingGray:(CGFloat)midPoint toColor:(nullable NSColor *)midPointColor blackMapping:(nullable NSColor *)shadowColor whiteMapping:(nullable NSColor *)lightColor;
 
 - (instancetype)initForIncrementalLoad;
-- (NSInteger)incrementalLoadFromData:(NSData*)data complete:(BOOL)complete;
+- (NSInteger)incrementalLoadFromData:(NSData *)data complete:(BOOL)complete;
 
-- (void)setColor:(NSColor*)color atX:(NSInteger)x y:(NSInteger)y;
+- (void)setColor:(NSColor *)color atX:(NSInteger)x y:(NSInteger)y;
 - (nullable NSColor *)colorAtX:(NSInteger)x y:(NSInteger)y;
 
 - (void)getPixel:(NSUInteger[_Nonnull])p atX:(NSInteger)x y:(NSInteger)y;

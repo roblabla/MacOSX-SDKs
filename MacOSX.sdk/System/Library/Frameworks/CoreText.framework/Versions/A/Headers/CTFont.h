@@ -2,7 +2,7 @@
  *  CTFont.h
  *  CoreText
  *
- *  Copyright (c) 2006-2020 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2022 Apple Inc. All rights reserved.
  *
  */
 
@@ -191,7 +191,7 @@ static inline CF_SWIFT_NAME(CTFont.init(_:transform:)) CTFontRef _CTFontCreateWi
                 A font descriptor containing attributes that specify the requested font.
 
     @param      size
-                The point size for the font reference. If 0.0 is specified, the default font size of 12.0 will be used.
+                The point size for the font reference. If 0.0 is specified and the font descriptor does not specify the size, the default font size of 12.0 will be used.
 
     @param      matrix
                 The transformation matrix for the font. If unspecified, the identity matrix will be used. Optional.
@@ -222,12 +222,16 @@ static inline CF_SWIFT_NAME(CTFont.init(_:transform:)) CTFontRef _CTFontCreateWi
     @abstract   Options for descriptor match and font creation.
     @constant   kCTFontOptionsPreventAutoActivation
                 Prevents automatic font activation from taking place.
+                This option is available only on macOS and will be deprecated on other platforms in the future.
+    @constant   kCTFontOptionsPreventAutoDownload
+                Prevents automatic font download from taking place.
     @constant   kCTFontOptionsPreferSystemFont
                 Font matching will prefer to match Apple system fonts.
 */
 typedef CF_OPTIONS(CFOptionFlags, CTFontOptions) {
     kCTFontOptionsDefault               = 0,
     kCTFontOptionsPreventAutoActivation = 1 << 0,
+    kCTFontOptionsPreventAutoDownload   CT_ENUM_AVAILABLE(macos(13.0)) =  1 << 1,
     kCTFontOptionsPreferSystemFont      = 1 << 2
 };
 

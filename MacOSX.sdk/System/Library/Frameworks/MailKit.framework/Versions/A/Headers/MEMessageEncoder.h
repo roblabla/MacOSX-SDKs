@@ -15,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// @brief Methods in this protocol can be used by a mail app extension to encode messages.
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 @protocol MEMessageEncoder <NSObject>
 
 /// @brief This is invoked while a message is being composed. This will be be invoked each time the sending address or the list of recipients changes. The supplied @c message will contain the email address of the sender, the recipient email addresses, and

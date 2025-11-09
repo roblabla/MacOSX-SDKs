@@ -11,6 +11,21 @@
 #import <GameController/GCExtern.h>
 #import <GameController/GCColor.h>
 
+#import <GameController/GCDevice.h>
+#import <GameController/GCDevicePhysicalInput.h>
+
+#import <GameController/GCPhysicalInputElement.h>
+#import <GameController/GCLinearInput.h>
+#import <GameController/GCAxisInput.h>
+#import <GameController/GCRelativeInput.h>
+#import <GameController/GCPressedStateInput.h>
+#import <GameController/GCTouchedStateInput.h>
+#import <GameController/GCSwitchPositionInput.h>
+#import <GameController/GCButtonElement.h>
+#import <GameController/GCAxisElement.h>
+#import <GameController/GCSwitchElement.h>
+#import <GameController/GCDirectionPadElement.h>
+
 #import <GameController/GCDeviceLight.h>
 #import <GameController/GCDeviceBattery.h>
 
@@ -47,12 +62,18 @@
 #import <GameController/GCDirectionalGamepad.h>
 
 #import <GameController/GCProductCategories.h>
-#import <GameController/GCDevice.h>
 #import <GameController/GCController.h>
 #import <GameController/GCKeyboard.h>
 #import <GameController/GCMouse.h>
 #import <GameController/GCEventViewController.h>
 
+#import <GameController/GCRacingWheel.h>
+#import <GameController/GCRacingWheelInput.h>
+#import <GameController/GCSteeringWheelElement.h>
+#import <GameController/GCGearShifterElement.h>
+
 #import <GameController/GCDeviceHaptics.h>
 
 #import <GameController/GCVirtualController.h>
+
+#import <GameController/GCSyntheticDeviceKeys.h>

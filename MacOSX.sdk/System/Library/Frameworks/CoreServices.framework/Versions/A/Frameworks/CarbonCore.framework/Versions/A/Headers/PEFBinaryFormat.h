@@ -18,6 +18,7 @@
 
 
 #include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -110,12 +111,12 @@ enum {
   kPEFTag1                      = 'Joy!', /* For non-Apple compilers: 0x4A6F7921.*/
   kPEFTag2                      = 'peff', /* For non-Apple compilers: 0x70656666.*/
   kPEFVersion                   = 0x00000001
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 enum {
   kPEFFirstSectionHeaderOffset  = sizeof(PEFContainerHeader)
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFFirstSectionNameOffset(container)    \
             ( kPEFFirstSectionHeaderOffset + ((container)->sectionCount * sizeof ( PEFSectionHeader )) )
@@ -154,7 +155,7 @@ enum {
   kPEFDebugSection              = 5,    /* Reserved for future use.*/
   kPEFExceptionSection          = 7,    /* Reserved for future use.*/
   kPEFTracebackSection          = 8     /* Reserved for future use.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 enum {
@@ -162,7 +163,7 @@ enum {
   kPEFProcessShare              = 1,    /* Shared within a single process.*/
   kPEFGlobalShare               = 4,    /* Shared across the entire system.*/
   kPEFProtectedShare            = 5     /* Readable across the entire system, writeable only to privileged code.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 
@@ -194,7 +195,7 @@ enum {
   kPEFPkDataRepeat              = 2,    /* Repeat "count" bytes "count2"+1 times.*/
   kPEFPkDataRepeatBlock         = 3,    /* Interleaved repeated and unique data.*/
   kPEFPkDataRepeatZero          = 4     /* Interleaved zero and unique data.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 enum {
@@ -204,7 +205,7 @@ enum {
   kPEFPkDataVCountShift         = 7,
   kPEFPkDataVCountMask          = 0x7F,
   kPEFPkDataVCountEndMask       = 0x80
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 #define PEFPkDataOpcode(byte) ( ((UInt8)(byte)) >> kPEFPkDataOpcodeShift )
@@ -342,7 +343,7 @@ enum {
                                         /* Bits for the PEFImportedLibrary options field.*/
   kPEFWeakImportLibMask         = 0x40, /* The imported library is allowed to be missing.*/
   kPEFInitLibBeforeMask         = 0x80  /* The imported library must be initialized first.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 
@@ -373,7 +374,7 @@ enum {
   kPEFImpSymClassShift          = 24,
   kPEFImpSymNameOffsetMask      = 0x00FFFFFF,
   kPEFImpSymMaxNameOffset       = 0x00FFFFFF /* 16,777,215*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFImportedSymbolClass(classAndName)        ((UInt8) ((classAndName) >> kPEFImpSymClassShift))
 #define PEFImportedSymbolNameOffset(classAndName)   ((classAndName) & kPEFImpSymNameOffsetMask)
@@ -390,7 +391,7 @@ enum {
   kPEFGlueSymbol                = 0x04,
   kPEFUndefinedSymbol           = 0x0F,
   kPEFWeakImportSymMask         = 0x80
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 
@@ -468,7 +469,7 @@ enum {
   kPEFHashSlotFirstKeyMask      = 0x0003FFFF,
   kPEFHashSlotMaxSymbolCount    = 0x00003FFF, /*  16,383*/
   kPEFHashSlotMaxKeyIndex       = 0x0003FFFF /* 262,143*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFHashTableIndex(fullHashWord,hashTablePower)  \
             ( ( (fullHashWord) ^ ((fullHashWord) >> (hashTablePower)) ) & ((1 << (hashTablePower)) - 1) )
@@ -503,7 +504,7 @@ enum {
   kPEFHashLengthShift           = 16,
   kPEFHashValueMask             = 0x0000FFFF,
   kPEFHashMaxLength             = 0x0000FFFF /* 65,535*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFHashNameLength(fullHashWord) ((UInt32) ((fullHashWord) >> kPEFHashLengthShift))
 #define PEFHashValue(fullHashWord)  ((fullHashWord) & kPEFHashValueMask)
@@ -572,7 +573,7 @@ enum {
   kPEFExpSymClassShift          = 24,
   kPEFExpSymNameOffsetMask      = 0x00FFFFFF,
   kPEFExpSymMaxNameOffset       = 0x00FFFFFF /* 16,777,215*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFExportedSymbolClass(classAndName)        ((UInt8) ((classAndName) >> kPEFExpSymClassShift))
 #define PEFExportedSymbolNameOffset(classAndName)   ((classAndName) & kPEFExpSymNameOffsetMask)
@@ -584,7 +585,7 @@ enum {
                                         /* Negative section indices indicate pseudo-sections.*/
   kPEFAbsoluteExport            = -2,   /* The symbol value is an absolute address.*/
   kPEFReexportedImport          = -3    /* The symbol value is the index of a reexported import.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 
@@ -654,7 +655,7 @@ typedef struct PEFLoaderRelocationHeader PEFLoaderRelocationHeader;
 
 enum {
   kPEFRelocBasicOpcodeRange     = 128
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFRelocBasicOpcode(firstChunk) (kPEFRelocBasicOpcodes[(firstChunk)>>9])
 
@@ -684,7 +685,7 @@ enum {
   kPEFRelocLgRepeat             = 0x58, /* Binary: 101_100x*/
   kPEFRelocLgSetOrBySection     = 0x5A, /* Binary: 101_101x*/
   kPEFRelocUndefinedOpcode      = 0xFF  /* Used in masking table for all undefined values.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 
@@ -698,7 +699,7 @@ enum {
   kPEFRelocLgBySectionSubopcode = 0x00, /* Binary: 0000*/
   kPEFRelocLgSetSectCSubopcode  = 0x01, /* Binary: 0001*/
   kPEFRelocLgSetSectDSubopcode  = 0x02  /* Binary: 0010*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFRelocLgSetOrBySubopcode(chunk) (((chunk) >> 6) & 0x0F)
 
@@ -781,7 +782,7 @@ enum {
 enum {
   kPEFRelocWithSkipMaxSkipCount = 255,
   kPEFRelocWithSkipMaxRelocCount = 63
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFRelocWithSkipSkipCount(chunk)    PEFRelocField ( (chunk), 2, 8 )
 #define PEFRelocWithSkipRelocCount(chunk)   PEFRelocField ( (chunk), 10, 6 )
@@ -814,7 +815,7 @@ enum {
 
 enum {
   kPEFRelocRunMaxRunLength      = 512
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFRelocRunSubopcode(chunk) PEFRelocField ( (chunk), 3, 4 )
 #define PEFRelocRunRunLength(chunk) (PEFRelocField ( (chunk), 7, 9 ) + 1)
@@ -853,7 +854,7 @@ enum {
 
 enum {
   kPEFRelocSmIndexMaxIndex      = 511
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFRelocSmIndexSubopcode(chunk) PEFRelocField ( (chunk), 3, 4 )
 #define PEFRelocSmIndexIndex(chunk)     PEFRelocField ( (chunk), 7, 9 )
@@ -889,7 +890,7 @@ enum {
 
 enum {
   kPEFRelocIncrPositionMaxOffset = 4096
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFRelocIncrPositionOffset(chunk)   (PEFRelocField ( (chunk), 4, 12 ) + 1)
 
@@ -920,7 +921,7 @@ enum {
 enum {
   kPEFRelocSmRepeatMaxChunkCount = 16,
   kPEFRelocSmRepeatMaxRepeatCount = 256
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFRelocSmRepeatChunkCount(chunk)   (PEFRelocField ( (chunk), 4, 4 ) + 1)
 #define PEFRelocSmRepeatRepeatCount(chunk)  (PEFRelocField ( (chunk), 8, 8 ) + 1)
@@ -950,7 +951,7 @@ enum {
 
 enum {
   kPEFRelocSetPosMaxOffset      = 0x03FFFFFF /* 67,108,863*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFRelocSetPosOffsetHigh(chunk) PEFRelocField ( (chunk), 6, 10 )
 
@@ -984,7 +985,7 @@ enum {
 
 enum {
   kPEFRelocLgByImportMaxIndex   = 0x03FFFFFF /* 67,108,863*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFRelocLgByImportIndexHigh(chunk)  PEFRelocField ( (chunk), 6, 10 )
 
@@ -1020,7 +1021,7 @@ enum {
 enum {
   kPEFRelocLgRepeatMaxChunkCount = 16,
   kPEFRelocLgRepeatMaxRepeatCount = 0x003FFFFF /* 4,194,303*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFRelocLgRepeatChunkCount(chunk)       (PEFRelocField ( (chunk), 6, 4 ) + 1)
 #define PEFRelocLgRepeatRepeatCountHigh(chunk)  PEFRelocField ( (chunk), 10, 6 )
@@ -1057,7 +1058,7 @@ enum {
 
 enum {
   kPEFRelocLgSetOrBySectionMaxIndex = 0x003FFFFF /* 4,194,303*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #define PEFRelocLgSetOrBySectionSubopcode(chunk)    PEFRelocField ( (chunk), 6, 4 )
 #define PEFRelocLgSetOrBySectionIndexHigh(chunk)    PEFRelocField ( (chunk), 10, 6 )
@@ -1172,7 +1173,7 @@ enum {
   kVLibTag2                     = 'VLib', /* For non-Apple compilers: 0x564C6962.*/
   kBLibTag2                     = 'BLib', /* For non-Apple compilers: 0x424C6962.*/
   kXLibVersion                  = 0x00000001
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 
@@ -1304,19 +1305,19 @@ enum {
   kPEF2Tag2                     = 'PEF ', /* For non-Apple compilers: 0x50656620.*/
   kPEF2CurrentFormat            = 0x00000002, /* ! There is no version 0 or 1.*/
   kPEF2OldestHandler            = 0x00000002
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* Values for the options field.*/
   kPEF2IsReexportLibraryMask    = 0x00000001, /* This fragment does nothing but reexport imports.*/
   kPEF2IsGlueLibraryMask        = 0x00000002 /* A special form of import library that provides a glue layer.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* Values for the stringEncoding field.*/
   kPEF2StringsAreASCII          = 0,
   kPEF2StringsAreUnicode        = 1
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 
@@ -1358,7 +1359,7 @@ enum {
   kPEF2SectionHasDebugTablesMask = 0x02000000,
   kPEF2SectionHasExceptionTablesMask = 0x04000000,
   kPEF2SectionHasTracebackTablesMask = 0x08000000
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* Values for the shareKind field.*/
@@ -1366,7 +1367,7 @@ enum {
   kPEF2ProcessShare             = 1,    /* Shared within a single process.*/
   kPEF2GlobalShare              = 4,    /* Shared across the entire system.*/
   kPEF2ProtectedShare           = 5     /* Readable across the entire system, writeable only to privileged code.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 
@@ -1468,7 +1469,7 @@ enum {
   kPEF2LdrInfoLargeImpSymMask   = 0x00000001, /* Selects large imported symbol entries.*/
   kPEF2LdrInfoLargeExpSymMask   = 0x00000002, /* Selects large exported symbol entries.*/
   kPEF2LdrInfoLargeExpHashMask  = 0x00000004 /* Selects large export hash table entries.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 
@@ -1502,7 +1503,7 @@ enum {
                                         /* Bits for the PEF2ImportedLibrary options field.*/
   kPEF2WeakImportLibMask        = kPEFWeakImportLibMask, /* The imported library is allowed to be missing.*/
   kPEF2InitLibBeforeMask        = kPEFInitLibBeforeMask /* The imported library must be initialized first.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 

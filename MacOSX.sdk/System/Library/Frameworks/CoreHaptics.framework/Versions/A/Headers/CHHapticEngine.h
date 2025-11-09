@@ -178,6 +178,14 @@ CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) 
  */
 @property (readwrite,nonatomic) BOOL playsHapticsOnly;
 
+/*!	@property playsAudioOnly
+		If set to YES, the CHHapticEngine will ignore all events of type CHHapticEventTypeHaptic and play only audio events.
+	@discussion
+		This behavior change will only take effect after the engine is stopped and restarted.
+		The default is NO.
+ */
+@property (readwrite,nonatomic) BOOL playsAudioOnly API_AVAILABLE(ios(16.0), macos(13.0), tvos(16.0), macCatalyst(16.0)) API_UNAVAILABLE(watchos);
+
 /*!	@property isMutedForAudio
  		When set to YES, the CHHapticEngine mutes audio playback from its players.
  	@discussion
@@ -299,10 +307,17 @@ typedef NSString *CHHapticAudioResourceKey;
 		Indicates whether the audio file playback should be ramped in and out with an envelope.  This can be useful for preventing clicks during playback,
 		or for cases where the application wants to modulate this envelope to use different attack and release times.
 		Value type: boolean.  Default is @true.
+	@constant   CHHapticAudioResourceKeyLoopEnabled
+		Indicates whether the audio file will be looped when played back.  The default loop range is the entire file.
+		Value type: boolean.  Default is @false.
  */
 
 CH_EXPORT
 CHHapticAudioResourceKey CHHapticAudioResourceKeyUseVolumeEnvelope API_AVAILABLE(ios(15.0), macos(12.0), tvos(15.0), macCatalyst(15.0)) API_UNAVAILABLE(watchos);
+
+CH_EXPORT
+CHHapticAudioResourceKey CHHapticAudioResourceKeyLoopEnabled API_AVAILABLE(ios(16.0), macos(13.0), tvos(16.0), macCatalyst(16.0)) API_UNAVAILABLE(watchos);
+;
 
 /*! @method registerAudioResource:options:error
 	@abstract

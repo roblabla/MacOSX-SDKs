@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIColor;
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKTextProvider : NSObject <NSCopying>
 
 - (instancetype)init API_DEPRECATED("Use initializers that take parameters.", watchos(2.0, 7.0), ios(9.0, 14.0));
@@ -34,7 +34,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 // Simple text providers display arbitrary text. If shortText is provided, we will fall back on it before truncating.
 // If accessibilityLabel is provided, it will be used in place of the text property for VoiceOver.
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKSimpleTextProvider : CLKTextProvider
 
 - (instancetype)initWithText:(NSString *)text API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios) NS_SWIFT_UNAVAILABLE("Use class factory");
@@ -69,7 +69,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 //    Dec 23
 //    23
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKDateTextProvider : CLKTextProvider
 
 - (instancetype)initWithDate:(NSDate *)date units:(NSCalendarUnit)calendarUnits API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios) NS_SWIFT_UNAVAILABLE("Use class factory");
@@ -92,7 +92,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 //   11:23PM
 //   11:23
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKTimeTextProvider : CLKTextProvider
 
 - (instancetype)initWithDate:(NSDate *)date API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios) NS_SWIFT_UNAVAILABLE("Use class factory");
@@ -123,7 +123,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 //
 // If space is constrained, this text provider will fall back on showing only the startDate before truncating.
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKTimeIntervalTextProvider : CLKTextProvider
 
 - (instancetype)initWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios) NS_SWIFT_UNAVAILABLE("Use class factory");
@@ -178,9 +178,9 @@ typedef NS_ENUM(NSInteger, CLKRelativeDateStyle) {
     CLKRelativeDateStyleNaturalAbbreviated API_AVAILABLE(watchos(5.0)),
     CLKRelativeDateStyleOffsetShort API_AVAILABLE(watchos(6.0)),
     CLKRelativeDateStyleNaturalFull API_AVAILABLE(watchos(6.0)),
-} API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios);
+}  API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKRelativeDateTextProvider : CLKTextProvider
 
 - (instancetype)initWithDate:(NSDate *)date style:(CLKRelativeDateStyle)style units:(NSCalendarUnit)calendarUnits API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios) NS_SWIFT_UNAVAILABLE("Use class factory");
@@ -199,7 +199,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 #pragma mark - Localizable
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKTextProvider (Localizable)
 
 // Creates a localizable simple text provider with a strings file key for the text and (optionally) a strings file key for shorter fallback text.

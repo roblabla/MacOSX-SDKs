@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D61EFB58-70E2-3D9B-9E5D-8DEC7363605A
+    value:           A678A35B-A95C-352F-A2CD-E5472E3696AD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EE758459-ADE8-342B-9BC9-E3DA86F9CD41
+    value:           7C56DE06-FE7B-3E86-954C-8E6844B1B3CD
 install-name:    '/usr/lib/libmdns.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DNSComputeDNSKeyTag, _DNSMessageCollapse, _DNSMessageExtractDomainName, 
                        _DNSMessageExtractDomainNameString, _DNSMessageExtractQuestion, 
                        _DNSMessageExtractRecord, _DNSMessageGetAnswerSection, _DNSMessageGetOptRecord, 
@@ -29,23 +29,24 @@ exports:
                        _mdns_dns_configurator_create, _mdns_dns_configurator_create_with_cfstring_id, 
                        _mdns_dns_configurator_deregister, _mdns_dns_configurator_deregister_configuration, 
                        _mdns_dns_configurator_register, _mdns_dns_configurator_set_interface, 
-                       _mdns_dns_configurator_set_port, _mdns_dns_service_a_queries_advised, 
+                       _mdns_dns_configurator_set_port, _mdns_dns_relay_activate, 
+                       _mdns_dns_relay_set_client_connection, _mdns_dns_relay_set_server_address, 
+                       _mdns_dns_relay_upcast, _mdns_dns_service_a_queries_advised, 
                        _mdns_dns_service_aaaa_queries_advised, _mdns_dns_service_allows_failover, 
                        _mdns_dns_service_create_querier, _mdns_dns_service_definition_add_domain, 
                        _mdns_dns_service_definition_append_server_address, _mdns_dns_service_definition_create, 
                        _mdns_dns_service_definition_set_interface_index, _mdns_dns_service_get_context, 
                        _mdns_dns_service_get_id, _mdns_dns_service_get_interface_index, 
-                       _mdns_dns_service_get_provider_name, _mdns_dns_service_get_resolver_type, 
-                       _mdns_dns_service_get_scope, _mdns_dns_service_has_connection_problems, 
-                       _mdns_dns_service_interface_has_ipv4_connectivity, _mdns_dns_service_interface_has_ipv6_connectivity, 
-                       _mdns_dns_service_interface_is_cellular, _mdns_dns_service_interface_is_clat46, 
-                       _mdns_dns_service_interface_is_constrained, _mdns_dns_service_interface_is_expensive, 
-                       _mdns_dns_service_interface_is_vpn, _mdns_dns_service_is_defunct, 
-                       _mdns_dns_service_is_encrypted, _mdns_dns_service_is_native, 
-                       _mdns_dns_service_manager_activate, _mdns_dns_service_manager_apply_dns_config, 
-                       _mdns_dns_service_manager_apply_pending_updates, _mdns_dns_service_manager_create, 
-                       _mdns_dns_service_manager_deregister_custom_service, _mdns_dns_service_manager_deregister_native_service, 
-                       _mdns_dns_service_manager_enable_problematic_qtype_workaround, 
+                       _mdns_dns_service_get_resolver_type, _mdns_dns_service_get_scope, 
+                       _mdns_dns_service_has_connection_problems, _mdns_dns_service_interface_has_ipv4_connectivity, 
+                       _mdns_dns_service_interface_has_ipv6_connectivity, _mdns_dns_service_interface_is_cellular, 
+                       _mdns_dns_service_interface_is_clat46, _mdns_dns_service_interface_is_constrained, 
+                       _mdns_dns_service_interface_is_expensive, _mdns_dns_service_interface_is_vpn, 
+                       _mdns_dns_service_is_defunct, _mdns_dns_service_is_encrypted, 
+                       _mdns_dns_service_is_native, _mdns_dns_service_manager_activate, 
+                       _mdns_dns_service_manager_apply_dns_config, _mdns_dns_service_manager_apply_pending_updates, 
+                       _mdns_dns_service_manager_create, _mdns_dns_service_manager_deregister_custom_service, 
+                       _mdns_dns_service_manager_deregister_native_service, _mdns_dns_service_manager_enable_problematic_qtype_workaround, 
                        _mdns_dns_service_manager_enumerate, _mdns_dns_service_manager_get_count, 
                        _mdns_dns_service_manager_get_custom_service, _mdns_dns_service_manager_get_discovered_service, 
                        _mdns_dns_service_manager_get_interface_scoped_native_service, 
@@ -58,7 +59,9 @@ exports:
                        _mdns_dns_service_manager_register_native_service, _mdns_dns_service_manager_register_path_resolver, 
                        _mdns_dns_service_manager_set_event_handler, _mdns_dns_service_manager_set_report_symptoms, 
                        _mdns_dns_service_set_context, _mdns_dns_service_set_context_finalizer, 
-                       _mdns_domain_name_create, _mdns_equal, _mdns_free_context_finalizer, 
+                       _mdns_doh_relay_create, _mdns_doh_relay_set_host_and_port, 
+                       _mdns_doh_relay_set_request_uri_path, _mdns_domain_name_create, 
+                       _mdns_dot_relay_create, _mdns_equal, _mdns_free_context_finalizer, 
                        _mdns_interface_monitor_activate, _mdns_interface_monitor_create, 
                        _mdns_interface_monitor_get_interface_index, _mdns_interface_monitor_has_ipv4_connectivity, 
                        _mdns_interface_monitor_has_ipv6_connectivity, _mdns_interface_monitor_invalidate, 
@@ -81,21 +84,26 @@ exports:
                        _mdns_querier_set_context_finalizer, _mdns_querier_set_delegator_pid, 
                        _mdns_querier_set_delegator_uuid, _mdns_querier_set_dnssec_ok, 
                        _mdns_querier_set_log_label, _mdns_querier_set_query, _mdns_querier_set_queue, 
-                       _mdns_querier_set_result_handler, _mdns_querier_set_time_limit_ms, 
+                       _mdns_querier_set_result_handler, _mdns_querier_set_start_time_leeway, 
                        _mdns_querier_set_user_id, _mdns_release, _mdns_resolver_activate, 
                        _mdns_resolver_add_server_address, _mdns_resolver_create, 
                        _mdns_resolver_create_querier, _mdns_resolver_disable_connection_reuse, 
                        _mdns_resolver_enable_problematic_qtype_workaround, _mdns_resolver_enable_symptom_reporting, 
                        _mdns_resolver_invalidate, _mdns_resolver_set_connection_hostname, 
-                       _mdns_resolver_set_event_handler, _mdns_resolver_set_initial_datagram_retransmission_interval, 
+                       _mdns_resolver_set_event_handler, _mdns_resolver_set_identity_reference, 
+                       _mdns_resolver_set_initial_datagram_retransmission_interval, 
                        _mdns_resolver_set_port, _mdns_resolver_set_provider_name, 
                        _mdns_resolver_set_queue, _mdns_resolver_set_squash_cnames, 
                        _mdns_resolver_set_url_path, _mdns_resolver_type_uses_encryption, 
-                       _mdns_resolver_update_odoh_config, _mdns_retain, _mdns_set_add, 
-                       _mdns_set_create, _mdns_set_get_count, _mdns_set_iterate, 
-                       _mdns_set_remove, _mdns_system_pid_to_uuid, _mdns_system_set_computer_name_with_utf8_cstring, 
-                       _mdns_system_set_ipv4_forwarding, _mdns_system_set_ipv6_forwarding, 
-                       _mdns_system_set_local_host_name_with_utf8_cstring, _mdns_tcpinfo_get_ipv4, 
-                       _mdns_tcpinfo_get_ipv6, _mdns_tlv16_get_required_length, _mdns_tlv16_get_value, 
-                       _mdns_tlv16_set, _mdns_xpc_create_dictionary_from_plist_data ]
+                       _mdns_resolver_update_odoh_config, _mdns_retain, _mdns_security_create_self_signed_certificate, 
+                       _mdns_security_remove_per_user_certificate_trust_settings, 
+                       _mdns_security_set_per_user_certificate_trust_settings, _mdns_signed_browse_result_contains, 
+                       _mdns_signed_browse_result_covers_txt_rdata, _mdns_signed_browse_result_create_from_data, 
+                       _mdns_signed_hostname_result_create_from_data, _mdns_signed_resolve_result_covers_txt_rdata, 
+                       _mdns_signed_resolve_result_create_from_data, _mdns_system_add_net_agent_match_domains, 
+                       _mdns_system_pid_to_uuid, _mdns_system_remove_network_policy, 
+                       _mdns_system_set_computer_name_with_utf8_cstring, _mdns_system_set_ipv4_forwarding, 
+                       _mdns_system_set_ipv6_forwarding, _mdns_system_set_local_host_name_with_utf8_cstring, 
+                       _mdns_tcpinfo_get_ipv4, _mdns_tcpinfo_get_ipv6, _mdns_tlv16_get_required_length, 
+                       _mdns_tlv16_get_value, _mdns_tlv16_set, _mdns_xpc_create_dictionary_from_plist_data ]
 ...

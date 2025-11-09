@@ -10,7 +10,7 @@
 #import <UIKit/UIControl.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UIPageControlInteractionState) {
     /// The default interaction state, where no interaction has occurred.
@@ -29,6 +29,21 @@ typedef NS_ENUM(NSInteger, UIPageControlBackgroundStyle) {
     /// The background style that shows a minimal background regardless of the interaction
     UIPageControlBackgroundStyleMinimal    = 2,
 } API_AVAILABLE(ios(14.0));
+
+typedef NS_ENUM(NSInteger, UIPageControlDirection) {
+    /// Page indicators are laid out in the natural direction of the system locale.
+    /// By default, this is equivalent to @c UIPageControlDirectionLeftToRight on LTR locales, and
+    /// @c UIPageControlDirectionRightToLeft on RTL locales.
+    UIPageControlDirectionNatural          = 0,
+    /// Page indicators are laid out from left to right.
+    UIPageControlDirectionLeftToRight      = 1,
+    /// Page indicators are laid out from right to left.
+    UIPageControlDirectionRightToLeft      = 2,
+    /// Page indicators are laid out from top to bottom.
+    UIPageControlDirectionTopToBottom      = 3,
+    /// Page indicators are laid out from bottom to top.
+    UIPageControlDirectionBottomToTop      = 4,
+} API_AVAILABLE(ios(16.0));
 
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @interface UIPageControl : UIControl 
@@ -51,6 +66,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// The preferred background style. Default is UIPageControlBackgroundStyleAutomatic on iOS, and UIPageControlBackgroundStyleProminent on tvOS.
 @property (nonatomic, assign) UIPageControlBackgroundStyle backgroundStyle API_AVAILABLE(ios(14.0));
 
+/// The layout direction of the page indicators. The default value is \c UIPageControlDirectionNatural.
+@property (nonatomic, assign) UIPageControlDirection direction API_AVAILABLE(ios(16.0));
+
 /// The current interaction state for when the current page changes. Default is UIPageControlInteractionStateNone
 @property (nonatomic, assign, readonly) UIPageControlInteractionState interactionState API_AVAILABLE(ios(14.0));
 
@@ -68,10 +86,28 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 /*!
  * @abstract Override the indicator image for a specific page. Symbol images are recommended.
- * @param image    The image for the indicator. Resets to the default if image is nil.
+ * @param image     The image for the indicator. Resets to the default if image is nil.
  * @param page      Must be in the range of 0..numberOfPages
  */
 - (void)setIndicatorImage:(nullable UIImage *)image forPage:(NSInteger)page API_AVAILABLE(ios(14.0));
+
+/// The preferred image for the current page indicator. Symbol images are recommended. Default is nil.
+/// If this value is nil, then UIPageControl will use \c preferredPageIndicatorImage (or its per-page variant) as
+/// the indicator image.
+@property (nonatomic, strong, nullable) UIImage *preferredCurrentPageIndicatorImage API_AVAILABLE(ios(16.0));
+
+/*!
+ * @abstract Returns the override current page indicator image for the specific page, nil if no override image was set.
+ * @param page Must be in the range of 0..numberOfPages
+ */
+- (nullable UIImage *)currentPageIndicatorImageForPage:(NSInteger)page API_AVAILABLE(ios(16.0));
+
+/*!
+ * @abstract Override the current page indicator image for a specific page. Symbol images are recommended.
+ * @param image     The image for the indicator. Resets to the default if image is nil.
+ * @param page      Must be in the range of 0..numberOfPages
+ */
+- (void)setCurrentPageIndicatorImage:(nullable UIImage *)image forPage:(NSInteger)page API_AVAILABLE(ios(16.0));
 
 /// Returns the minimum size required to display indicators for the given page count. Can be used to size the control if the page count could change.
 - (CGSize)sizeForNumberOfPages:(NSInteger)pageCount;
@@ -84,7 +120,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIPageControl.h>

@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2021 Apple Inc. All rights reserved.
+	Copyright 2010-2022 Apple Inc. All rights reserved.
 
 */
 
@@ -69,9 +69,13 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 /*!
 	@property		playerItem
 	@abstract		Indicates the instance of AVPlayerItem to which the timing of the AVSynchronizedLayer is synchronized.
-	@discussion		This property must be accessed on the main thread/queue.
+	@discussion		Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 */
-@property (nonatomic, retain, nullable) AVPlayerItem *playerItem NS_SWIFT_UI_ACTOR;
+@property (nonatomic, retain, nullable) AVPlayerItem *playerItem
+#if ! AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER
+NS_SWIFT_UI_ACTOR;
+#endif
+;
 
 @end
 

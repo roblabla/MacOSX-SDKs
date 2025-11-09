@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKGaugeProvider : NSObject <NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -26,7 +26,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKSimpleGaugeProvider : CLKGaugeProvider
 
 + (instancetype)gaugeProviderWithStyle:(CLKGaugeProviderStyle)style
@@ -42,7 +42,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKTimeIntervalGaugeProvider : CLKGaugeProvider
 
 + (instancetype)gaugeProviderWithStyle:(CLKGaugeProviderStyle)style

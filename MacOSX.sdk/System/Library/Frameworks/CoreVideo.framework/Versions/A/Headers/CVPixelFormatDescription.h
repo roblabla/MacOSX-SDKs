@@ -48,6 +48,9 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatContainsRGB __OSX_AVAILABLE
 /* kCFBooleanTrue indicates that the format contains Grayscale data; */
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatContainsGrayscale __OSX_AVAILABLE_STARTING(__MAC_10_14,__IPHONE_12_0);
 
+/* kCFBooleanTrue indicates that the format contains sensel data, as in Bayer RAW buffers; */
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatContainsSenselArray API_AVAILABLE(macosx(13.0), ios(16.0));
+
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatComponentRange __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_9_0);
 
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatComponentRange_VideoRange __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_9_0);

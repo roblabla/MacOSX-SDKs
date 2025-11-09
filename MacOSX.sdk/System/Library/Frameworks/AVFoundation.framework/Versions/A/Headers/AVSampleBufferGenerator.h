@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2014-2018 Apple Inc. All rights reserved.
+	Copyright 2014-2022 Apple Inc. All rights reserved.
 
 */
 
@@ -32,26 +32,91 @@ NS_ASSUME_NONNULL_BEGIN
 */
 @class AVSampleBufferRequest;
 
+@class AVSampleBufferGeneratorBatch;
+
 @class AVSampleBufferGeneratorInternal;
 
-API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0))
 @interface AVSampleBufferGenerator : NSObject {
 @private
 	AVSampleBufferGeneratorInternal	*_generator;
 }
 AV_INIT_UNAVAILABLE
 
-/* If timebase is NULL, requests will be handled synchronously. */
+/*!
+  @method		initWithAsset: timebase:
+  @abstract		Creates an instance of AVSampleBufferGenerator to generate sample buffers from the specified asset.
+  @param 		asset
+				The asset from which sample buffers will be created.
+  @param 		timebase
+				The generator timebase, which governs when sample data for sample buffers is loaded. If NULL, sample data is loaded synchronously.
+  @result		An instance of AVSampleBufferGenerator.
+  @discussion	If the specified asset is an HTTP Live Streaming asset, the generator cannot create sample buffers.
+*/
 - (instancetype)initWithAsset:(AVAsset *)asset timebase:(nullable CMTimebaseRef)timebase NS_DESIGNATED_INITIALIZER;
 
-/* It is an error to use an AVSampleBufferRequest with mode set to AVSampleBufferRequestModeScheduled when the AVSampleBufferGenerator was created with a NULL timebase. */
-- (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request CF_RETURNS_RETAINED;
+/*!
+ @method		createSampleBufferForRequest: error:
+ @abstract		Creates a sample buffer and if requested, attempts to load its data asynchronously. Attempt may fail based on generator configuration or file format.
+				See [AVSampleBufferGenerator notifyOfDataReadyForSampleBuffer: completionHandler:] to get notified when the sample buffer data is available.
+  @param		request
+				An instance of AVSampleBufferRequest representing the CMSampleBuffer creation request.
+  @param		outError
+				A pointer to an NSError object that will be populated with failure information, if sample buffer creation fails.
+  @result		A CMSampleBuffer object referencing the output sample buffer.
+  @discussion	If the AVSampleBufferGenerator was created with a NULL timebase, any associated AVSampleBufferRequest will default to using AVSampleBufferRequestModeImmediate.
+*/
+- (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) NS_SWIFT_NAME(makeSampleBuffer(for:));
 
-/* completionHandler is called when data is ready or as soon as an error has occurred. */
+/* It is an error to use an AVSampleBufferRequest with mode set to AVSampleBufferRequestModeScheduled when the AVSampleBufferGenerator was created with a NULL timebase. */
+- (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request CF_RETURNS_RETAINED API_DEPRECATED("Use -createSampleBufferForRequest: error:, passing NULL for the error if not required", macos(10.10, 13.0)) API_UNAVAILABLE(ios, tvos, watchos);
+
+/*!
+  @method		makeBatch
+  @abstract		Creates a batch to handle multiple sample buffers, allowing to asynchronously load sample data and optimize I/O when possible.
+  @result		An instance of an AVSampleBufferGeneratorBatch that can be used in calls to createSampleBufferForRequest:addingToBatch:error: of the same AVSampleBufferGenerator instance.
+*/
+- (AVSampleBufferGeneratorBatch *) makeBatch API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+
+/*!
+  @method		createSampleBufferForRequest: addingToBatch: error:
+  @abstract		Creates a sample buffer and attempts to defer I/O for its data. Attempt may fail based on generator configuration or file format.
+				The [AVSampleBufferGeneratorBatch makeDataReadyWithCompletionHandler:] should be called once to commence I/O and load sample data for all CMSampleBuffers within a batch.
+				Any subsequent calls to createSampleBufferForRequest:addingToBatch:error: will throw an exception.
+  @param		request
+				An instance of AVSampleBufferRequest representing the CMSampleBuffer creation request
+  @param		batch
+				An instance of AVSampleBufferGeneratorBatch to contain the output sample buffer. If nil, an exception is thrown.
+				Must be created by calling makeBatch on the same instance of AVSampleBufferGenerator. An exception will be thrown otherwise.
+  @param		outError
+				A pointer to an NSError object that will be populated with failure information, if sample buffer creation fails.
+  @result		A CMSampleBuffer object referencing the output sample buffer. The generator may defer I/O to fetch sample data depending on the source of the sample data and
+				the generator's timebase.
+*/
+- (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request addingToBatch: (AVSampleBufferGeneratorBatch *)batch error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) NS_SWIFT_NAME(makeSampleBuffer(for:addTo:));
+
+/*!
+  @method		notifyOfDataReadyForSampleBuffer: completionHandler:
+  @abstract		Allows the client to get notified when the sample buffer data is ready, or as soon as an error has occured.
+  @param		completionHandler
+				The completionHandler will be called, when the sample buffer data is ready, or as soon as an error has occurred.
+*/
 + (void)notifyOfDataReadyForSampleBuffer:(CMSampleBufferRef)sbuf completionHandler:(void (^)(BOOL dataReady, NSError *error))completionHandler;
 
 @end
 
+
+/*!
+ @enum AVSampleBufferRequestDirection
+ @abstract
+	Indicates the direction in which the samples should be generated for the AVSampleBufferRequest.
+ 
+ @constant	AVSampleBufferRequestDirectionNone
+	Indicates only one sample will be loaded at [AVSampleBufferRequest startCursor], and the [AVSampleBufferRequest limitCursor], [AVSampleBufferRequest preferredMinSampleCount], and [AVSampleBufferRequest maxSampleCount] will be ignored.
+ @constant	AVSampleBufferRequestDirectionForward
+	Indicates zero or more following samples may be loaded from [AVSampleBufferRequest startCursor], subject to [AVSampleBufferRequest limitCursor], [AVSampleBufferRequest preferredMinSampleCount], and [AVSampleBufferRequest maxSampleCount]
+ @constant	AVSampleBufferRequestDirectionReverse
+	Indicates zero or more preceeding samples may be loaded from [AVSampleBufferRequest startCursor], subject to [AVSampleBufferRequest limitCursor], [AVSampleBufferRequest preferredMinSampleCount], and [AVSampleBufferRequest maxSampleCount]*/
 typedef NS_ENUM(NSInteger, AVSampleBufferRequestDirection) {
 	AVSampleBufferRequestDirectionForward = +1,
 	AVSampleBufferRequestDirectionNone = 0,
@@ -85,7 +150,7 @@ typedef NS_ENUM(NSInteger, AVSampleBufferRequestMode) {
  
 	@abstract	An AVSampleBufferRequest describes a CMSampleBuffer creation request.
  */
-API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0))
 @interface AVSampleBufferRequest : NSObject {
 @private
 	AVSampleBufferRequestInternal	*_request;
@@ -97,10 +162,7 @@ AV_INIT_UNAVAILABLE
 /* mandatory: the created CMSampleBuffer must include the sample at this position */
 @property (nonatomic, retain, readonly) AVSampleCursor *startCursor;
 
-/* If AVSampleBufferRequestDirectionNone, only one sample will be loaded and limitCursor, preferredMinSampleCount, and maxSampleCount will be ignored.
-   If AVSampleBufferRequestDirectionForward, zero or more following samples may be included, subject to limitCursor, preferredMinSampleCount, and maxSampleCount.
-   If AVSampleBufferRequestDirectionReverse, zero or more preceeding samples may be included, subject to limitCursor, preferredMinSampleCount, and maxSampleCount.
-   Default is AVSampleBufferRequestDirectionNone. */
+/* Default is AVSampleBufferRequestDirectionNone. */
 @property (nonatomic, assign) AVSampleBufferRequestDirection direction;
 
 /* optional: if not nil, the sequence of samples to be loaded may include the sample at this position, but no further. */
@@ -117,6 +179,38 @@ AV_INIT_UNAVAILABLE
 
 /* optional: indicates deadline for sample data and output PTS for CMSampleBuffer. */
 @property (nonatomic, assign) CMTime overrideTime;
+
+@end
+
+/*!
+	@class		AVSampleBufferGeneratorBatch
+ 
+	@abstract	An AVSampleBufferGeneratorBatch provides an optimized way to load sample data asynchronously for multiple CMSampleBuffers in an asset.
+	@discussion
+		The AVSampleBufferGeneratorBatch loads sample data asynchronously, by aggregating adjacent I/O requests and overlapping them when possible for all CMSampleBuffers within a batch.
+		An AVSampleBufferGeneratorBatch is associated with an AVSampleBufferGenerator. See -[AVSampleBufferGenerator makeBatch] to create an AVSampleBufferGeneratorBatch.
+		See -[AVSampleBufferGeneratorBatch createSampleBufferForRequest: addingToBatch: error:] to create a CMSampleBuffer, defer I/O for its data, and build up a batch.
+*/
+
+API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0))
+@interface AVSampleBufferGeneratorBatch : NSObject
+
+AV_INIT_UNAVAILABLE
+
+/*!
+  @method		makeDataReadyWithCompletionHandler:
+  @abstract		Loads sample data asynchronously for all CMSampleBuffers within a batch.
+				This can only be called once on a batch, an exception will be thrown otherwise.
+  @param		completionHandler
+				The completionHandler is called once, when all CMSampleBuffers in the batch are data-ready, or as soon as an error has occurred.
+*/
+- (void) makeDataReadyWithCompletionHandler: (void (^)(NSError * _Nullable error))completionHandler;
+
+/*!
+  @method		cancel
+  @abstract		Attempt to cancel any I/O for this batch. The associated sample buffers will have their data ready handler invoked with an error.
+*/
+- (void) cancel;
 
 @end
 

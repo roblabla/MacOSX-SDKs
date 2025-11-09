@@ -71,6 +71,28 @@ GAMECONTROLLER_EXTERN NSString *const GCControllerDidBecomeCurrentNotification A
 GAMECONTROLLER_EXTERN NSString *const GCControllerDidStopBeingCurrentNotification API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
+ Use this constant with NSNotificationCenter to listen to controller user customization events.
+
+ When a user customizes the button mappings or other settings of a controller this notification will be
+ posted. This is a good time to swap out UI to match the new user settings. Users can modify game
+ controller settings through the Settings app on iOS, tvOS, and macOS.
+
+ The 'object' property of the notification will contain the GCController that was customized.
+ For example:
+ 
+ - (void)controllerDidConnect:(NSNotification *)note {
+ 
+ GCController *controller = note.object;
+ 
+ ....
+ }
+ 
+ @see NSNotificationCenter
+ @see GCController.controllers
+ */
+GAMECONTROLLER_EXTERN NSString *const GCControllerUserCustomizationsDidChangeNotification API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));
+
+/**
  This is the player index that a connected controller will have if it has never been assigned a player index on the current system.
  Controllers retain the player index they have been assigned between game sessions, so if you wish to unset the player index of a
  controller set it back to this value.
@@ -172,6 +194,15 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
  or simply display the current battery level and status.
  */
 @property (nonatomic, copy, readonly, nullable) GCDeviceBattery *battery API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+/**
+ Gets the physical input profile for the controller.
+
+ @note This is equivalent to the controller's microGamepad, or extendedGamepad instance.
+ @see microGamepad
+ @see extendedGamepad
+*/
+@property (nonatomic, strong, readonly) GCPhysicalInputProfile *physicalInputProfile API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
  Gets the profile for the controller that suits current application.

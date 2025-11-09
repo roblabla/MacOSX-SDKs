@@ -5,6 +5,9 @@
 //  Copyright © 2015 Apple, Inc. All rights reserved.
 //
 
+#ifndef __PKPAYMENTAUTHORIZATIONCONTROLLER_H
+#define __PKPAYMENTAUTHORIZATIONCONTROLLER_H
+
 #import <TargetConditionals.h>
 
 #if TARGET_OS_OSX || TARGET_OS_IPHONE
@@ -173,3 +176,4 @@ API_AVAILABLE(macos(11.0), ios(10.0), watchos(3.0))
 NS_ASSUME_NONNULL_END
 
 #endif // TARGET_OS_IPHONE
+#endif

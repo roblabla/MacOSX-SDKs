@@ -4,21 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           09FCA70F-3374-36E2-9C57-0EC39F5BE593
+    value:           DAD95447-AFB3-3FD0-A776-1114AE7C03EB
   - target:          x86_64-maccatalyst
-    value:           09FCA70F-3374-36E2-9C57-0EC39F5BE593
+    value:           DAD95447-AFB3-3FD0-A776-1114AE7C03EB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BD0AF2D6-1143-3EA9-ACB2-B67447C11E3C
+    value:           33057A2A-6B72-3D06-AA97-1EAADC49F221
   - target:          arm64e-maccatalyst
-    value:           BD0AF2D6-1143-3EA9-ACB2-B67447C11E3C
+    value:           33057A2A-6B72-3D06-AA97-1EAADC49F221
 install-name:    '/System/Library/PrivateFrameworks/AACCore.framework/Versions/A/AACCore'
+current-version: 0
+compatibility-version: 0
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AACLoggingSubsystem, _AEAssessmentStateDidChangeNotificationName, 
                        _AEAssessmentStatePublisherRegisteringMachServiceName, _AECoreError, 
                        _AECoreErrorDomain, _AECoreErrorUserInfo, _AELocalizedStringFromTableInBundle, 
@@ -27,7 +29,8 @@ exports:
                        AEAssessmentIndividualConfiguration, AEAssessmentModeGestalt, 
                        AEAssessmentState, AEAssessmentStatePublishingProxy, AEAssessmentStatePublishingXPCInterfaceFactory, 
                        AEAssessmentStateSourceRegisteringProxy, AEAssessmentStateSourceRegisteringXPCInterfaceFactory, 
-                       AEFileSystem, AELifecycleEventHandlingProxy, AELifecycleEventHandlingXPCInterfaceFactory, 
-                       AELocalizedErrorDescriptions, AEOSGestalt, AEOptionMirror, 
-                       AEPerformancePrimitivesProvider, AEPolicyBundle, AEPreferencesProvider ]
+                       AEFeatureFlagsProvider, AEFileSystem, AELifecycleEventHandlingProxy, 
+                       AELifecycleEventHandlingXPCInterfaceFactory, AELocalizedErrorDescriptions, 
+                       AEOSGestalt, AEOptionMirror, AEPerformancePrimitivesProvider, 
+                       AEPolicyBundle, AEPreferencesProvider ]
 ...

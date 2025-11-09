@@ -10,9 +10,9 @@
 #import <UIKit/UIApplication.h>
 #import <UIKit/UISceneOptions.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-@class UIScreen, UIWindow, UIWindowSceneDelegate, UISceneDestructionRequestOptions, CKShareMetadata, UISceneSizeRestrictions;
+@class UIScreen, UIWindow, UIWindowSceneDelegate, UISceneDestructionRequestOptions, CKShareMetadata, UISceneSizeRestrictions, UISceneWindowingBehaviors, UIWindowSceneGeometry, UIWindowSceneGeometryPreferences;
 @protocol UIActivityItemsConfigurationProviding;
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
@@ -23,6 +23,12 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly) UIInterfaceOrientation interfaceOrientation API_UNAVAILABLE(tvos);
 @property (nonatomic, readonly) id<UICoordinateSpace> coordinateSpace;
 @property (nonatomic, readonly) UITraitCollection *traitCollection;
+
+// Request an update to the window scene's geometry in system space.
+- (void)requestGeometryUpdateWithPreferences:(UIWindowSceneGeometryPreferences *)geometryPreferences errorHandler:(nullable void (^)(NSError *error))errorHandler API_AVAILABLE(ios(16.0));
+
+// Provides the current resolved values for the window scene's geometry in system space.
+@property (nonatomic, readonly) UIWindowSceneGeometry *effectiveGeometry API_AVAILABLE(ios(16.0));
 
 // Restrictions which the system should use when resizing the scene. This property will be NULL on platforms which don't support scene resize, else a mutable object is returned which the client may customize.
 @property (nonatomic, readonly, nullable) UISceneSizeRestrictions *sizeRestrictions API_AVAILABLE(ios(13.0));
@@ -40,6 +46,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 /// of the scene's key window will be used for scene-level sharing and activities.
 @property (nonatomic, nullable, weak) id<UIActivityItemsConfigurationProviding> activityItemsConfigurationSource API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
+/// Additional window behaviors which may be platform specific. This property will be nil on unsupported platforms, otherwise will provide a mutable object for window behavior customization.
+@property (nonatomic, readonly, nullable) UISceneWindowingBehaviors *windowingBehaviors API_AVAILABLE(ios(16.0));
+
+@property (nonatomic, readonly, getter=isFullScreen) BOOL fullScreen API_AVAILABLE(macCatalyst(16.0));
 @end
 
 #pragma mark - UIWindowSceneDelegate
@@ -48,6 +58,8 @@ API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @optional
 @property (nullable, nonatomic, strong) UIWindow *window;
 
+// Called when the coordinate space, interface orientation, or trait collection of a UIWindowScene changes
+// Always called when a UIWindowScene moves between screens
 - (void)windowScene:(UIWindowScene *)windowScene didUpdateCoordinateSpace:(id<UICoordinateSpace>)previousCoordinateSpace interfaceOrientation:(UIInterfaceOrientation)previousInterfaceOrientation traitCollection:(UITraitCollection *)previousTraitCollection API_UNAVAILABLE(tvos);
 
 #pragma mark - System Integration
@@ -63,11 +75,12 @@ API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @end
 
 #pragma mark - Session Roles
-// A session role which defines a typical interactive application on a device's main display
+// A session role which defines a typical interactive application
 UIKIT_EXTERN UISceneSessionRole const UIWindowSceneSessionRoleApplication API_AVAILABLE(ios(13.0));
 
-// A session role which defines an interface for a non-main external display
-UIKIT_EXTERN UISceneSessionRole const UIWindowSceneSessionRoleExternalDisplay API_AVAILABLE(ios(13.0));
+// A session role which defines an interface for a non-interactive external display
+UIKIT_EXTERN UISceneSessionRole const UIWindowSceneSessionRoleExternalDisplayNonInteractive API_AVAILABLE(ios(16.0));
+UIKIT_EXTERN UISceneSessionRole const UIWindowSceneSessionRoleExternalDisplay API_DEPRECATED_WITH_REPLACEMENT("UIWindowSceneSessionRoleExternalDisplayNonInteractive", ios(13.0, 16.0));
 
 #pragma mark - UIWindowSceneDismissalAnimation
 typedef NS_ENUM(NSInteger, UIWindowSceneDismissalAnimation) {
@@ -91,9 +104,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, assign) CGSize minimumSize;
 @property (nonatomic, assign) CGSize maximumSize;
 
+@property (nonatomic) BOOL allowsFullScreen API_AVAILABLE(macCatalyst(16.0));
+
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIWindowScene.h>

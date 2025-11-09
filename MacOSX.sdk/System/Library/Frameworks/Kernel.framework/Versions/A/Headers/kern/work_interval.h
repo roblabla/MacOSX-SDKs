@@ -57,6 +57,13 @@ struct kern_work_interval_create_args {
 	uint32_t        wica_create_flags;
 };
 
+struct kern_work_interval_workload_id_args {
+	uint32_t        wlida_flags;            /* in/out param */
+	uint32_t        wlida_wicreate_flags;   /* in/out param */
+	char *          wlida_name;             /* in param */
+	uint64_t        wlida_syscall_mask[2];  /* out param */
+};
+
 /*
  * Allocate/assign a single work interval ID for a thread,
  * and support deallocating it.
@@ -74,6 +81,12 @@ kern_work_interval_join(thread_t thread, mach_port_name_t port_name);
 
 extern kern_return_t
 kern_work_interval_notify(thread_t thread, struct kern_work_interval_args* kwi_args);
+extern kern_return_t
+kern_work_interval_set_name(mach_port_name_t port_name, char *name, size_t len);
+extern kern_return_t
+kern_work_interval_set_workload_id(mach_port_name_t port_name,
+    struct kern_work_interval_workload_id_args *workload_id_args);
+
 
 
 __END_DECLS

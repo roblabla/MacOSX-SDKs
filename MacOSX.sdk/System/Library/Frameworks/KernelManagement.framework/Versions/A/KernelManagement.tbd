@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2FC99150-D596-3DBD-9DEA-90B24DD89776
+    value:           5B0E65A5-58CB-3A65-8A12-99A8203084AD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25154694-4887-32F2-9CB7-DDA28A048332
+    value:           A8B9988A-6C0D-3C60-AE22-1E99CA351E03
 install-name:    '/System/Library/Frameworks/KernelManagement.framework/Versions/A/KernelManagement'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _KMExtensionPathForBundleIdentifier, _KMLoadExtensionsWithIdentifiers, 
                        _KMLoadExtensionsWithPaths, _KMUnloadExtensionsWithIdentifiers, 
                        _KernelManagementVersionNumber, _KernelManagementVersionString, 

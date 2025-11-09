@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F17B6871-0E5F-373E-AF01-1A2069C8983C
+    value:           59D78E53-F65A-37A8-A6F7-9792A175E0F3
   - target:          x86_64-maccatalyst
-    value:           F17B6871-0E5F-373E-AF01-1A2069C8983C
+    value:           59D78E53-F65A-37A8-A6F7-9792A175E0F3
   - target:          x86_64h-macos
-    value:           E2F7D6FC-4614-3117-9BC3-68A20ADFC68F
+    value:           B8C1DCBC-1DB8-34BC-8027-6A59F238BC58
   - target:          x86_64h-maccatalyst
-    value:           E2F7D6FC-4614-3117-9BC3-68A20ADFC68F
+    value:           B8C1DCBC-1DB8-34BC-8027-6A59F238BC58
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DB3A2A8A-8593-3C9C-9E7C-8E76A5EBE556
+    value:           6DEC041D-10C9-34F1-8417-9A341B963563
   - target:          arm64e-maccatalyst
-    value:           DB3A2A8A-8593-3C9C-9E7C-8E76A5EBE556
+    value:           6DEC041D-10C9-34F1-8417-9A341B963563
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
-                       x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _APL_dgemm, _APL_dgemm_LU, _APL_dgemm_QR, _APL_dsyrk, _APL_dtrsm, 
                        _APL_sgemm, _APL_sgemm_LU, _APL_sgemm_QR, _APL_ssyrk, _APL_strsm, 
                        _APPLE_NTHREADS, _ATLU_DestroyThreadMemory, _BLASStateRelease, 

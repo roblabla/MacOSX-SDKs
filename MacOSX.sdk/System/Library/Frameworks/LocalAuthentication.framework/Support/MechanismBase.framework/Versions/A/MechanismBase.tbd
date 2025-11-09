@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           683C084E-8AC6-3D85-941C-DE72472DB9A4
+    value:           0851C6D8-5AD6-318E-A6DD-08D52AA76457
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D49F807C-069E-34BA-8375-02D84DF125F7
+    value:           ED7B164C-4829-3BC6-8BBB-D45F55E8F963
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Support/MechanismBase.framework/Versions/A/MechanismBase'
-current-version: 985.100.54
+current-version: 1131.40.25
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _kRemoteUIManagerDefaultActivateTimeout, _kRemoteUIManagerDefaultDeactivateTimeout ]
     objc-classes:    [ ACMContextRecord, MechanismACM, MechanismBase, MechanismContext, 
                        MechanismKofN, MechanismKofNReorganizer, RemoteUIActivator, 

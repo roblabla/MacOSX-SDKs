@@ -421,7 +421,7 @@ struct CACHE_PUBLIC_API cache_attributes_s {
     cache_key_hash_cb_t key_hash_cb;                               
     cache_key_is_equal_cb_t key_is_equal_cb;                        
     
-    cache_key_retain_cb_t  key_retain_cb;
+    cache_key_retain_cb_t key_retain_cb;
     cache_release_cb_t key_release_cb;
     cache_release_cb_t value_release_cb;                           
     

@@ -127,8 +127,7 @@ enum vtagtype   {
 #define ALLOCATECONTIG  0x00000002      /* allocate contigious space */
 #define ALLOCATEALL             0x00000004      /* allocate all requested space */
 /* or no space at all */
-#define FREEREMAINDER   0x00000008      /* deallocate allocated but */
-/* unfilled blocks */
+#define ALLOCATEPERSIST         0x00000008      /* do not deallocate allocated but unfilled blocks at close(2) */
 #define ALLOCATEFROMPEOF        0x00000010      /* allocate from the physical eof */
 #define ALLOCATEFROMVOL         0x00000020      /* allocate from the volume offset */
 
@@ -168,5 +167,6 @@ struct iocs_store_buffer_entry {
 	char     path_name[IOCS_SBE_PATH_LEN];
 	struct io_compression_stats iocs;
 };
+
 
 #endif /* !_VNODE_H_ */

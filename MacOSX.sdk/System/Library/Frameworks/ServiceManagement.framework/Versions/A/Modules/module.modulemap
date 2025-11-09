@@ -2,4 +2,5 @@
 
 framework module ServiceManagement [extern_c] {
 	umbrella header "ServiceManagement.h"
+	module * {}
 }

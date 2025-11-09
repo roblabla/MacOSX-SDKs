@@ -14,14 +14,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /*! @abstract   A notification when graph executable execution: has finished
- *  @param      results  If no error, the results produced by the graph operation.
+ *  @param      results  If no error, the results produced by the graph operation. If Graph has not yet allocated the results this will be NSNull
  *  @param      error   If an error occurs, more information might be found here.
  */
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 typedef void (^MPSGraphExecutableCompletionHandler)(NSArray<MPSGraphTensorData *> * results,
                                                     NSError * _Nullable error);
 
-/*! @abstract   A notification when graph executable execution: has finished
+/*! @abstract   A notification when graph executable execution: has been scheduled
  *  @param      results  If no error, the results produced by the graph operation.
  *  @param      error   If an error occurs, more information might be found here.
  */
@@ -30,7 +30,7 @@ typedef void (^MPSGraphExecutableScheduledHandler)(NSArray<MPSGraphTensorData *>
                                                    NSError * _Nullable error);
 
 MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
-@interface MPSGraphExecutableExecutionDescriptor : NSObject
+@interface MPSGraphExecutableExecutionDescriptor : NSObject<NSCopying>
 
 /*! @property   scheduledHandler
  *  @discussion scheduledHandler for the graph executable, default value is nil
@@ -46,6 +46,28 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
  *  @discussion waitUntilCompleted for the graph executable, default value is false
  */
 @property (readwrite, atomic) BOOL waitUntilCompleted;
+
+/*!
+ *  @abstract   Executable waits on these shared events before scheduling execution on the HW, this does not include encoding which can still continue.
+ *
+ *  @param      event                                   shared event to wait on
+ *  @param      value                                   value for shared event to wait on
+ */
+-(void) waitForEvent:(id<MTLSharedEvent>) event
+               value:(uint64_t) value
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
+
+/*!
+ *  @abstract   Executable signals these shared events at execution stage and immediately proceeds
+ *
+ *  @param      event                                   shared event to signal
+ *  @param      executionStage               execution stage to signal event at
+ *  @param      value                                   value for shared event to wait on
+ */
+-(void) signalEvent:(id<MTLSharedEvent>) event
+   atExecutionEvent:(MPSGraphExecutionStage) executionStage
+              value:(uint64_t) value
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
 @end
 
@@ -73,10 +95,11 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 @property (readonly, atomic, nullable) NSArray<MPSGraphTensor *> *targetTensors;
 
 /*!
- *  @abstract   Specialize MLIR module and optimize it
+ *  @abstract   Specialize the MPSGraphExecutable and optimize it, use this method to choose when specialization happens, else it occurs at encode time automatically
  *
- *  @param      device                                   optional MPSGraph device to compile with
- *  @param      inputTypes                          input types
+ *  @param      device                                    optional MPSGraph device to compile with
+ *  @param      inputTypes                           input types
+ *  @param      compilationDescriptor  compilationDescriptor to be used to specialize, since the executable was created with a compilationDescriptor already this one overrides those settings to the extent it can
  *
  */
 -(void) specializeWithDevice:(MPSGraphDevice * _Nullable) device
@@ -101,7 +124,7 @@ MPS_SWIFT_NAME( run(with:inputs:results:executionDescriptor:) );
 
 /*!
  *  @abstract   Runs the graph for given feeds to return targetTensor values, ensuring all target operations also executed.
- *              This call  is asynchronous and will return immediately if a completionHandler is set.
+ *              This call  is asynchronous and will return immediately.
  *
  *  @param      commandQueue                                      CommandQueue passed to exectute the graph on
  *  @param      inputsArray                                         Feeds tensorData for the placeholder tensors, same order as arguments of main function
@@ -118,7 +141,7 @@ MPS_SWIFT_NAME( runAsync(with:inputs:results:executionDescriptor:) );
 
 /*!
  *  @abstract   Runs the graph for given feeds to return targetTensor values, ensuring all target operations also executed.
- *              This call  is asynchronous and will return immediately if a completionHandler is set.
+ *              This call  is asynchronous and will return immediately after finishing encoding.
  *
  *  @param      commandBuffer                                     commandBuffer passed to exectute the graph on, commitAndContinue might be called, please don't rely on underlying MTLCommandBuffer to remain uncommitted
  *  @param      inputsArray                                         Feeds tensorData for the placeholder tensors, same order as arguments of main function

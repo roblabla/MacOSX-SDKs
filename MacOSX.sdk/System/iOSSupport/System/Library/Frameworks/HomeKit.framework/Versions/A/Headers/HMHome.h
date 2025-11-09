@@ -31,8 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
  @constant  HMHomeHubStateConnected         Home hub is connected.
  @constant  HMHomeHubStateDisconnected      No home hub is connected.
  */
-typedef NS_ENUM(NSUInteger, HMHomeHubState)
-{
+typedef NS_ENUM(NSUInteger, HMHomeHubState) {
     HMHomeHubStateNotAvailable = 0,
     HMHomeHubStateConnected,
     HMHomeHubStateDisconnected
@@ -47,34 +46,34 @@ typedef NS_ENUM(NSUInteger, HMHomeHubState)
  *             the home.
  */
 HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMHome : NSObject
+    @interface HMHome : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 
 /*!
  * @brief Delegate that receives updates on the state of the home.
  */
-@property(weak, nonatomic, nullable) id<HMHomeDelegate> delegate;
+@property (weak, nonatomic, nullable) id<HMHomeDelegate> delegate;
 
 /*!
  * @brief The name of the home.
  */
-@property(readonly, copy, nonatomic) NSString *name;
+@property (readonly, copy, nonatomic) NSString *name;
 
 /*!
  * @brief Specifies whether this home is the primary home.
  */
-@property(readonly, getter=isPrimary, nonatomic) BOOL primary;
+@property (readonly, getter=isPrimary, nonatomic) BOOL primary;
 
 /*!
  * @brief Specifies the state of the home hub.
  */
-@property(readonly, nonatomic) HMHomeHubState homeHubState API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (readonly, nonatomic) HMHomeHubState homeHubState API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
  * @brief A unique identifier for the home.
  */
-@property(readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
+@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief This method is used to change the name of the home.
@@ -85,17 +84,17 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)updateName:(NSString *)name completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)updateName:(NSString *)name completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 @end
 
 
-@interface HMHome(HMAccessory)
+@interface HMHome (HMAccessory)
 
 /*!
  * @brief Array of HMAccessory objects that represents all accessories added to the home. 
  */
-@property(readonly, copy, nonatomic) NSArray<HMAccessory *> *accessories;
+@property (readonly, copy, nonatomic) NSArray<HMAccessory *> *accessories;
 
 /*!
  * @brief Adds a new accessory to the home.
@@ -106,7 +105,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addAccessory:(HMAccessory *)accessory completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)addAccessory:(HMAccessory *)accessory completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Removes an accessory from the home.
@@ -117,7 +116,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)removeAccessory:(HMAccessory *)accessory completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)removeAccessory:(HMAccessory *)accessory completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Assigns a new room for the accessory.
@@ -133,7 +132,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)assignAccessory:(HMAccessory *)accessory toRoom:(HMRoom *)room completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)assignAccessory:(HMAccessory *)accessory toRoom:(HMRoom *)room completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Queries all services that match the specified types.
@@ -158,7 +157,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)unblockAccessory:(HMAccessory *)accessory completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)unblockAccessory:(HMAccessory *)accessory completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Find nearby accessories and add them to the home. During this process, each of the accessories added
@@ -168,7 +167,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addAndSetupAccessoriesWithCompletionHandler:(void (^)(NSError * __nullable error))completion NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories()) API_DEPRECATED("Use -[HMAccessorySetupManager performAccessorySetupUsingRequest:completionHandler:] instead", ios(10.0, 15.4)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
+- (void)addAndSetupAccessoriesWithCompletionHandler:(void (^)(NSError *__nullable error))completion NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories())API_DEPRECATED("Use -[HMAccessorySetupManager performAccessorySetupUsingRequest:completionHandler:] instead", ios(10.0, 15.4))API_UNAVAILABLE(macos, macCatalyst)API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Add accessory with the given setup payload to the home.
@@ -179,7 +178,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addAndSetupAccessoriesWithPayload:(HMAccessorySetupPayload *)payload completionHandler:(void (^)(NSArray<HMAccessory *>* __nullable accessories, NSError * __nullable error))completion NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories(payload:)) API_DEPRECATED("Use -[HMAccessorySetupManager performAccessorySetupUsingRequest:completionHandler:] instead", ios(11.3, 15.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
+- (void)addAndSetupAccessoriesWithPayload:(HMAccessorySetupPayload *)payload completionHandler:(void (^)(NSArray<HMAccessory *> *__nullable accessories, NSError *__nullable error))completion NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories(payload:))API_DEPRECATED("Use -[HMAccessorySetupManager performAccessorySetupUsingRequest:completionHandler:] instead", ios(11.3, 15.0))API_UNAVAILABLE(macos, macCatalyst)API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief True if this home supports all of the requirements for adding a network router.
@@ -189,17 +188,17 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
 @end
 
 
-@interface HMHome(HMUser)
+@interface HMHome (HMUser)
 
 /*!
  * @brief HMUser object representing the current user of the home.
  */
-@property(readonly, strong, nonatomic) HMUser *currentUser API_AVAILABLE(ios(9.0), macCatalyst(14.0));
+@property (readonly, strong, nonatomic) HMUser *currentUser API_AVAILABLE(ios(9.0), macCatalyst(14.0));
 
 /*!
  * @brief Array of HMUser objects that represent all users associated with the home.
  */
-@property(readonly, copy, nonatomic) NSArray<HMUser *> *users API_DEPRECATED("No longer supported.", ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos, macCatalyst);
+@property (readonly, copy, nonatomic) NSArray<HMUser *> *users API_DEPRECATED("No longer supported.", ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos, macCatalyst);
 
 /*!
  * @brief Presents a view controller to manage users of the home.
@@ -212,7 +211,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   will be nil on success. If the user does not have administrator privileges the error code will be set to
  *                   HMErrorCodeInsufficientPrivileges.
  */
-- (void)manageUsersWithCompletionHandler:(void (^)(NSError * __nullable error))completion API_AVAILABLE(ios(9.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)manageUsersWithCompletionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(9.0), macCatalyst(14.0))API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Adds a user to the home.
@@ -223,7 +222,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   will be nil on success. The userInfo dictionary will contain the HMUserFailedAccessoriesKey which provides
  *                   more details on the accessories that failed to add the user.
  */
-- (void)addUserWithCompletionHandler:(void (^)(HMUser * __nullable user, NSError * __nullable error))completion API_DEPRECATED_WITH_REPLACEMENT("-manageUsersWithCompletionHandler:", ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos, macos, macCatalyst);
+- (void)addUserWithCompletionHandler:(void (^)(HMUser *__nullable user, NSError *__nullable error))completion API_DEPRECATED_WITH_REPLACEMENT("-manageUsersWithCompletionHandler:", ios(8.0, 9.0))API_UNAVAILABLE(watchos, tvos, macos, macCatalyst);
 
 /*!
  * @brief Removes a user from the home.
@@ -235,7 +234,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   will be nil on success. The userInfo dictionary will contain the HMUserFailedAccessoriesKey which provides
  *                   more details on the accessories that failed to remove the user.
  */
-- (void)removeUser:(HMUser *)user completionHandler:(void (^)(NSError * __nullable error))completion API_DEPRECATED_WITH_REPLACEMENT("-manageUsersWithCompletionHandler:", ios(8.0, 9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+- (void)removeUser:(HMUser *)user completionHandler:(void (^)(NSError *__nullable error))completion API_DEPRECATED_WITH_REPLACEMENT("-manageUsersWithCompletionHandler:", ios(8.0, 9.0))API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @brief Retrieve the access level of the user associated with the home.
@@ -245,12 +244,12 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
 @end
 
 
-@interface HMHome(HMRoom)
+@interface HMHome (HMRoom)
 
 /*!
  * @brief Array of HMRoom objects that represents all rooms in the home.
  */
-@property(readonly, copy, nonatomic) NSArray<HMRoom *> *rooms;
+@property (readonly, copy, nonatomic) NSArray<HMRoom *> *rooms;
 
 /*!
  * @brief Adds a room to the home.
@@ -262,7 +261,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addRoomWithName:(NSString *)roomName completionHandler:(void (^)(HMRoom * __nullable room, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addRoom(named:));
+- (void)addRoomWithName:(NSString *)roomName completionHandler:(void (^)(HMRoom *__nullable room, NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos)NS_SWIFT_ASYNC_NAME(addRoom(named:));
 
 /*!
  * @brief Removes a room from the home. 
@@ -277,7 +276,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)removeRoom:(HMRoom *)room completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)removeRoom:(HMRoom *)room completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief This method returns a room that represents the entire home. This can be used to assign a room
@@ -290,12 +289,12 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
 @end
 
 
-@interface HMHome(HMZone)
+@interface HMHome (HMZone)
 
 /*!
  * @brief Array of HMZone objects that represents all the zones in the home.
  */
-@property(readonly, copy, nonatomic) NSArray<HMZone *> *zones;
+@property (readonly, copy, nonatomic) NSArray<HMZone *> *zones;
 
 /*!
  * @brief Adds a zone to the home.
@@ -307,7 +306,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addZoneWithName:(NSString *)zoneName completionHandler:(void (^)(HMZone * __nullable zone, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addZone(named:));
+- (void)addZoneWithName:(NSString *)zoneName completionHandler:(void (^)(HMZone *__nullable zone, NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos)NS_SWIFT_ASYNC_NAME(addZone(named:));
 
 /*!
  * @brief Removes a zone from the home.
@@ -318,17 +317,17 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)removeZone:(HMZone *)zone completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)removeZone:(HMZone *)zone completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 @end
 
 
-@interface HMHome(HMServiceGroup)
+@interface HMHome (HMServiceGroup)
 
 /*!
  * @brief Array of HMServiceGroup objects that represents all service groups in the home.
  */
-@property(readonly, copy, nonatomic) NSArray<HMServiceGroup *> *serviceGroups;
+@property (readonly, copy, nonatomic) NSArray<HMServiceGroup *> *serviceGroups;
 
 /*!
  * @brief Adds a service group to the home.
@@ -340,7 +339,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addServiceGroupWithName:(NSString *)serviceGroupName completionHandler:(void (^)(HMServiceGroup * __nullable group, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addServiceGroup(named:));
+- (void)addServiceGroupWithName:(NSString *)serviceGroupName completionHandler:(void (^)(HMServiceGroup *__nullable group, NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos)NS_SWIFT_ASYNC_NAME(addServiceGroup(named:));
 
 /*!
  * @brief Removes a service group from the home.
@@ -351,17 +350,17 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)removeServiceGroup:(HMServiceGroup *)group completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)removeServiceGroup:(HMServiceGroup *)group completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 @end
 
 
-@interface HMHome(HMActionSet)
+@interface HMHome (HMActionSet)
 
 /*!
  * @brief Array of HMActionSet objects that represents all the action sets in the home.
  */
-@property(readonly, copy, nonatomic) NSArray<HMActionSet *> *actionSets;
+@property (readonly, copy, nonatomic) NSArray<HMActionSet *> *actionSets;
 
 /*!
  * @brief Adds a new action set to the home.
@@ -373,7 +372,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addActionSetWithName:(NSString *)actionSetName completionHandler:(void (^)(HMActionSet * __nullable actionSet, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addActionSet(named:));
+- (void)addActionSetWithName:(NSString *)actionSetName completionHandler:(void (^)(HMActionSet *__nullable actionSet, NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos)NS_SWIFT_ASYNC_NAME(addActionSet(named:));
 
 /*!
  * @brief Removes an existing action set from the home.
@@ -384,7 +383,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)removeActionSet:(HMActionSet *)actionSet completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)removeActionSet:(HMActionSet *)actionSet completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Executes all the actions within an action set.
@@ -395,7 +394,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)executeActionSet:(HMActionSet *)actionSet completionHandler:(void (^)(NSError * __nullable error))completion;
+- (void)executeActionSet:(HMActionSet *)actionSet completionHandler:(void (^)(NSError *__nullable error))completion;
 
 /*!
  * @brief Retrieve a built-in action set for the home.
@@ -411,16 +410,16 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
 @end
 
 
-@interface HMHome(HMTrigger)
+@interface HMHome (HMTrigger)
 
 /*!
  * @brief Array of HMTrigger objects that represents all the triggers in the home.
  */
-@property(readonly, copy, nonatomic) NSArray<HMTrigger *> *triggers;
+@property (readonly, copy, nonatomic) NSArray<HMTrigger *> *triggers;
 
 /*!
  * @brief Adds a trigger to the home. Unless the trigger object is added to the home, it cannot be 
- *        activated.
+ *        activated. Throws error and will not be added to home if there is no Home Hub associated with the home
  *
  * @discussion  Triggers are specific to an iOS device and are not synced across multiple devices to
  *              ensure that the action sets are executed only once.
@@ -431,8 +430,9 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  * 	                 The HMTrigger parameter is the new trigger added to the home.
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
+ *                   Errors when no Home Hub is associated with the home
  */
-- (void)addTrigger:(HMTrigger *)trigger completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)addTrigger:(HMTrigger *)trigger completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Removes a trigger from the home. If the trigger is active, they are automatically deactivated.
@@ -443,7 +443,25 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)removeTrigger:(HMTrigger *)trigger completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)removeTrigger:(HMTrigger *)trigger completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
+
+@end
+
+@interface HMHome (Matter)
+
+/*!
+ * @brief Identifier of the Matter controller associated with this home.
+ *        This property can be passed as the first argument to +[MTRDeviceController sharedControllerWithId:xpcConnectBlock:] method
+ *        to get a MTRDeviceController object.
+ */
+@property (readonly, copy, nonatomic) NSString *matterControllerID API_AVAILABLE(ios(16.1));
+
+/*!
+ * @brief Block generating XPC connection on demand through which to access the Matter controller associated with this home.
+ *        This property can be passed as the second argument to +[MTRDeviceController sharedControllerWithId:xpcConnectBlock:] method
+ *        to get a MTRDeviceController object.
+ */
+@property (readonly, strong, nonatomic) NSXPCConnection * (^matterControllerXPCConnectBlock)(void)API_AVAILABLE(ios(16.1));
 
 @end
 
@@ -452,7 +470,8 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  * @brief This delegate receives update on the various accessories, action sets, groups and triggers 
  *        managed in the home.
  */
-API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
+API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0))
+API_UNAVAILABLE(macos)
 @protocol HMHomeDelegate <NSObject>
 
 @optional
@@ -739,7 +758,7 @@ API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAIL
  * @param accessory Accessory that encountered the error
  */
 
-- (void)home:(HMHome *)home didEncounterError:(NSError*)error forAccessory:(HMAccessory *)accessory;
+- (void)home:(HMHome *)home didEncounterError:(NSError *)error forAccessory:(HMAccessory *)accessory;
 
 /*!
  * @brief Informs the delegate when state of the home hub changes.
@@ -758,7 +777,7 @@ API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAIL
  *
  * @param home Sender of the message.
  */
-- (void)homeDidUpdateSupportedFeatures:(HMHome *)home API_AVAILABLE(ios(13.2), watchos(6.1), tvos(13.2)) API_UNAVAILABLE(macos);
+- (void)homeDidUpdateSupportedFeatures:(HMHome *)home API_AVAILABLE(ios(13.2), watchos(6.1), tvos(13.2))API_UNAVAILABLE(macos);
 
 @end
 
@@ -771,6 +790,6 @@ API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAIL
  *             corresponding to the dictionary key is an NSError that provides more details on the
  *             underlying error for that accessory.
  */
-HM_EXTERN NSString * const HMUserFailedAccessoriesKey API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
+HM_EXTERN NSString *const HMUserFailedAccessoriesKey API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 NS_ASSUME_NONNULL_END

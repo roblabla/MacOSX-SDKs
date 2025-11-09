@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C0052689-9EAB-3084-9992-3F497A482D81
+    value:           74D46F39-D057-3A7D-AF74-CC03CD480251
   - target:          x86_64-maccatalyst
-    value:           C0052689-9EAB-3084-9992-3F497A482D81
+    value:           74D46F39-D057-3A7D-AF74-CC03CD480251
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           724ED186-4A9C-33F5-99AE-D2148BD1FE4D
+    value:           B415AEFE-0BF6-3DAE-9873-2B4EA8E38083
   - target:          arm64e-maccatalyst
-    value:           724ED186-4A9C-33F5-99AE-D2148BD1FE4D
+    value:           B415AEFE-0BF6-3DAE-9873-2B4EA8E38083
 install-name:    '/System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport'
-current-version: 5440.11
+current-version: 6400.44
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MTAbsoluteTimeGetCurrent, _MTActuationActuate, _MTActuationCreateFromDictionary, 
                        _MTActuatorActuate, _MTActuatorClose, _MTActuatorCreateFromDeviceID, 
                        _MTActuatorCreateFromService, _MTActuatorGetDeviceID, _MTActuatorGetMTDevice, 
@@ -46,7 +46,8 @@ exports:
                        _MTDeviceGetDriverType, _MTDeviceGetExtendedMaxDigitizerPressureValue, 
                        _MTDeviceGetFamilyID, _MTDeviceGetForceThresholdForMotion, 
                        _MTDeviceGetGUID, _MTDeviceGetGenerateRingCentroid, _MTDeviceGetMTActuator, 
-                       _MTDeviceGetMinDigitizerPressureValue, _MTDeviceGetOpenRows, 
+                       _MTDeviceGetMaxHoverHeightValue, _MTDeviceGetMinDigitizerPressureValue, 
+                       _MTDeviceGetMultipleFirmwaresConfig, _MTDeviceGetOpenRows, 
                        _MTDeviceGetParserEnabled, _MTDeviceGetParserOptions, _MTDeviceGetParserType, 
                        _MTDeviceGetReport, _MTDeviceGetResetCount, _MTDeviceGetResetOnLockMs, 
                        _MTDeviceGetResetOnUnlockMs, _MTDeviceGetSATelemetryReportID, 
@@ -63,23 +64,24 @@ exports:
                        _MTDeviceNotifyWorkInterval, _MTDevicePowerControlSupported, 
                        _MTDevicePowerGetEnabled, _MTDevicePowerGetState, _MTDevicePowerSetEnabled, 
                        _MTDevicePowerSetState, _MTDeviceRelease, _MTDeviceScheduleOnRunLoop, 
-                       _MTDeviceSendExternalMessage, _MTDeviceSetDisableTipCentroid, 
-                       _MTDeviceSetFaceDetectionModeEnabled, _MTDeviceSetGenerateRingCentroid, 
-                       _MTDeviceSetInjectionMaxPacketSize, _MTDeviceSetInputDetectionCallbackTriggerMask, 
-                       _MTDeviceSetInputDetectionMode, _MTDeviceSetInputDetectionModeForOrientation, 
-                       _MTDeviceSetMaxRecordingLength, _MTDeviceSetParserEnabled, 
-                       _MTDeviceSetPickButtonShouldSendSecondaryClick, _MTDeviceSetRecordingDesiredFrameCount, 
-                       _MTDeviceSetReport, _MTDeviceSetSurfaceOrientation, _MTDeviceSetSurfaceOrientationMode, 
+                       _MTDeviceSendExternalMessage, _MTDeviceSetBinaryFiltersProperty, 
+                       _MTDeviceSetDisableTipCentroid, _MTDeviceSetFaceDetectionModeEnabled, 
+                       _MTDeviceSetGenerateRingCentroid, _MTDeviceSetInjectionMaxPacketSize, 
+                       _MTDeviceSetInputDetectionCallbackTriggerMask, _MTDeviceSetInputDetectionMode, 
+                       _MTDeviceSetInputDetectionModeForOrientation, _MTDeviceSetMaxRecordingLength, 
+                       _MTDeviceSetParserEnabled, _MTDeviceSetPickButtonShouldSendSecondaryClick, 
+                       _MTDeviceSetRecordingDesiredFrameCount, _MTDeviceSetReport, 
+                       _MTDeviceSetSurfaceOrientation, _MTDeviceSetSurfaceOrientationMode, 
                        _MTDeviceSetSystemForceResponseEnabled, _MTDeviceSetTouchMode, 
                        _MTDeviceSetZephyrParameter, _MTDeviceShouldDispatchNormalizedVelocity, 
                        _MTDeviceShouldDispatchRelativeCoordinates, _MTDeviceShouldResetOnButton, 
-                       _MTDeviceStart, _MTDeviceStop, _MTDeviceSupportsActuation, 
-                       _MTDeviceSupportsForce, _MTDeviceSupportsSilentClick, _MTDeviceSupportsTapToWake, 
-                       _MTDeviceSupportsTouchReadyNotification, _MTDeviceSupportsUSBChargingNotification, 
-                       _MTDeviceSupportsWirelessChargingNotification, _MTDeviceUpdateDynamicCalibration, 
-                       _MTDeviceUpdatePowerStatistics, _MTDeviceUseContextualPower, 
-                       _MTDriverCreateResetInfo, _MTEasyInstallPrintCallbacks, _MTGetDetectableInputs, 
-                       _MTGetGenericParameterValue, _MTGetImageProcessingStepName, 
+                       _MTDeviceShouldSkipFaceDetectionMode, _MTDeviceStart, _MTDeviceStop, 
+                       _MTDeviceSupportsActuation, _MTDeviceSupportsForce, _MTDeviceSupportsSilentClick, 
+                       _MTDeviceSupportsTapToWake, _MTDeviceSupportsTouchReadyNotification, 
+                       _MTDeviceSupportsUSBChargingNotification, _MTDeviceSupportsWirelessChargingNotification, 
+                       _MTDeviceUpdateDynamicCalibration, _MTDeviceUpdatePowerStatistics, 
+                       _MTDeviceUseContextualPower, _MTDriverCreateResetInfo, _MTEasyInstallPrintCallbacks, 
+                       _MTGetDetectableInputs, _MTGetGenericParameterValue, _MTGetImageProcessingStepName, 
                        _MTGetImageRegionName, _MTGetInputsThatSuppressFingers, _MTGetPathFrame, 
                        _MTGetPathStageName, _MTImagePrintCallback, _MTInputDetectionSetEnabled, 
                        _MTParseSensorRegionParam, _MTPathPrintCallback, _MTPath_getBreakContact, 

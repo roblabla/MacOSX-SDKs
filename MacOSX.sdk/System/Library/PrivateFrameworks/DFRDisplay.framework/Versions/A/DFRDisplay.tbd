@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A46F7222-24DF-3007-BB01-47BECFD5F1A9
+    value:           95D1DCC2-FB75-3373-971E-3116074D5943
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D26DB8E1-28D0-30E2-87B1-ACD6B0BBE5AB
+    value:           2625FE1C-E26F-3826-99FE-2CDC479B183B
 install-name:    '/System/Library/PrivateFrameworks/DFRDisplay.framework/Versions/A/DFRDisplay'
-current-version: 180
+current-version: 183
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DFRDisplayClearDisplay, _DFRDisplayClearWhite, _DFRDisplayCloseInterface, 
                        _DFRDisplayCreate, _DFRDisplayDraw, _DFRDisplayDrawAsync, 
                        _DFRDisplayDrawFromIOSurfaceAsync, _DFRDisplayDrawFromIOSurfaceWithTouchTimeAsync, 

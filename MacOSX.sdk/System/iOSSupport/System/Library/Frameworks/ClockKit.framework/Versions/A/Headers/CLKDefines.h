@@ -27,47 +27,47 @@ typedef NS_OPTIONS(NSUInteger, CLKComplicationTimeTravelDirections) {
     CLKComplicationTimeTravelDirectionNone      = 0,
     CLKComplicationTimeTravelDirectionForward   = 1 << 0,
     CLKComplicationTimeTravelDirectionBackward  = 1 << 1,
-} API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios);
+} API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
 typedef NS_ENUM(NSUInteger, CLKComplicationPrivacyBehavior) {
     CLKComplicationPrivacyBehaviorShowOnLockScreen,
     CLKComplicationPrivacyBehaviorHideOnLockScreen,
-} API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios);
+} API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
 typedef NS_ENUM(NSUInteger, CLKComplicationTimelineAnimationBehavior) {
     CLKComplicationTimelineAnimationBehaviorNever,
     CLKComplicationTimelineAnimationBehaviorGrouped,
     CLKComplicationTimelineAnimationBehaviorAlways
-} API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios);
+} API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
 typedef NS_ENUM(NSInteger, CLKComplicationColumnAlignment)  {
     CLKComplicationColumnAlignmentLeading = 0,
     CLKComplicationColumnAlignmentTrailing = 1,
     CLKComplicationColumnAlignmentLeft API_DEPRECATED_WITH_REPLACEMENT("CLKComplicationColumnAlignmentLeading", watchos(2.0, 2.1)) = CLKComplicationColumnAlignmentLeading,
     CLKComplicationColumnAlignmentRight API_DEPRECATED_WITH_REPLACEMENT("CLKComplicationColumnAlignmentTrailing", watchos(2.0, 2.1)) = CLKComplicationColumnAlignmentTrailing,
-} API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios);
+} API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
 typedef NS_ENUM(NSInteger, CLKComplicationRingStyle)  {
     CLKComplicationRingStyleClosed,
     CLKComplicationRingStyleOpen,
-} API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios);
+} API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
 
 typedef NS_ENUM(NSInteger, CLKGaugeProviderStyle) {
     CLKGaugeProviderStyleRing,
     CLKGaugeProviderStyleFill,
-} API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios);
+} API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
-extern float const CLKSimpleGaugeProviderFillFractionEmpty API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios);
+extern float const CLKSimpleGaugeProviderFillFractionEmpty API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
 
 #pragma mark - Launch Keys
 
-extern NSString * const CLKLaunchedTimelineEntryDateKey API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios);
+extern NSString * const CLKLaunchedTimelineEntryDateKey API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
-extern NSString * const CLKLaunchedComplicationIdentifierKey API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios);
+extern NSString * const CLKLaunchedComplicationIdentifierKey API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
 #pragma mark - Multiple Complication Support
 extern NSString * const CLKDefaultComplicationIdentifier API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios);
 
-extern NSArray<NSNumber *> *CLKAllComplicationFamilies(void) API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios) NS_REFINED_FOR_SWIFT;
+extern NSArray<NSNumber *> *CLKAllComplicationFamilies(void) API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios) NS_REFINED_FOR_SWIFT;

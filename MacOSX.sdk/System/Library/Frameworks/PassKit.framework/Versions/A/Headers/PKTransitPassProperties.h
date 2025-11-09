@@ -1,3 +1,4 @@
+#if !__has_include(<PassKitCore/PKTransitPassProperties.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKTransitPassProperties.h
 //  PassKit
@@ -19,10 +20,14 @@ API_AVAILABLE(ios(11.3), watchos(4.3))
 
 @property (nonatomic, nullable, copy, readonly) NSDate *expirationDate API_AVAILABLE(ios(11.3), watchos(4.3), macos(11.0)); // nil if pass does not expire
 
-@property (nonatomic, assign, readonly, getter=isBlocked) BOOL blocked API_AVAILABLE(ios(14.5), watchos(7.5), macos(11.3));
+@property (nonatomic, assign, readonly, getter=isBlocked) BOOL blocked API_AVAILABLE(ios(14.5), watchos(7.5), macos(11.3)) NS_REFINED_FOR_SWIFT;
 
 @property (nonatomic, assign, readonly, getter=isInStation) BOOL inStation;
 
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <PassKitCore/PKTransitPassProperties.h>
+#endif

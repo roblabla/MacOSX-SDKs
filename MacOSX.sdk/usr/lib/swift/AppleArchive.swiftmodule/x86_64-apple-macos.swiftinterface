@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target x86_64-apple-macos12.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppleArchive -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AppleArchive
-// swift-module-flags-ignorable: -user-module-version 280.100.14
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target x86_64-apple-macos13.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppleArchive -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AppleArchive
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 364.40.1
 @_exported import AppleArchive
 import Compression
 import CryptoKit
@@ -9,6 +9,7 @@ import Foundation
 import Swift
 import System
 import _Concurrency
+import _StringProcessing
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public struct _AAHeaderTraits : AppleArchive._AAObjectTraits {
   public typealias AAType = AppleArchive.__AAHeader
@@ -24,6 +25,7 @@ public class ArchiveHeader : AppleArchive._AAObjectWrapper<AppleArchive._AAHeade
   public func withAAEncodedData<R>(_ body: (Swift.UnsafeBufferPointer<Swift.UInt8>) throws -> R) rethrows -> R
   @objc deinit
 }
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveHeader : Swift.RandomAccessCollection, Swift.MutableCollection {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public var startIndex: Swift.Int {
@@ -50,6 +52,7 @@ extension AppleArchive.ArchiveHeader : Swift.RandomAccessCollection, Swift.Mutab
   public typealias Iterator = Swift.IndexingIterator<AppleArchive.ArchiveHeader>
   public typealias SubSequence = Swift.Slice<AppleArchive.ArchiveHeader>
 }
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveHeader {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public struct _FieldTypes : Swift.RandomAccessCollection {
@@ -97,6 +100,7 @@ extension AppleArchive.ArchiveHeader {
     get
   }
 }
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveHeader {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public var entryType: AppleArchive.ArchiveHeader.EntryType? {
@@ -261,6 +265,7 @@ extension AppleArchive.ArchiveHeader {
     public typealias RawValue = Swift.Int32
   }
 }
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveStream {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public static func withEncodeStream<E>(writingTo stream: AppleArchive.ArchiveByteStream, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0, _ body: (AppleArchive.ArchiveStream) throws -> E) throws -> E
@@ -375,6 +380,7 @@ public class ArchiveByteStream : AppleArchive._AAOptionalObjectWrapper<AppleArch
   override public init(object aaObject: AppleArchive._AAOptionalObjectWrapper<AppleArchive._AAByteStreamTraits>.AAType?, owned aaObjectOwned: Swift.Bool)
   @objc deinit
 }
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveByteStream {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public static func fileStream(path: System.FilePath, mode: System.FileDescriptor.AccessMode, options: System.FileDescriptor.OpenOptions, permissions: System.FilePermissions) -> AppleArchive.ArchiveByteStream?
@@ -393,6 +399,7 @@ extension AppleArchive.ArchiveByteStream {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public static func sharedBufferPipe(capacity: Swift.Int) -> (output: AppleArchive.ArchiveByteStream, input: AppleArchive.ArchiveByteStream)?
 }
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveByteStream {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public static func process(readingFrom input: AppleArchive.ArchiveByteStream, writingTo output: AppleArchive.ArchiveByteStream) throws -> Swift.Int64
@@ -473,14 +480,17 @@ public class ArchiveStream : AppleArchive._AAOptionalObjectWrapperWithFilter<App
   override public init(object aaObject: AppleArchive._AAOptionalObjectWrapperWithFilter<AppleArchive._AAArchiveStreamTraits>.AAType?, owned aaObjectOwned: Swift.Bool, messageProc filter: AppleArchive.ArchiveHeader._EntryFilterWrapper? = nil)
   @objc deinit
 }
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveStream {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public func writeDirectoryContents(archiveFrom directory: System.FilePath, path: System.FilePath? = nil, keySet: AppleArchive.ArchiveHeader.FieldKeySet, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0) throws
 }
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveStream {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public static func process(readingFrom input: AppleArchive.ArchiveStream, writingTo output: AppleArchive.ArchiveStream, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0) throws -> Swift.Int
 }
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveStream {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public static func encodeStream(writingTo stream: AppleArchive.ArchiveByteStream, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0) -> AppleArchive.ArchiveStream?
@@ -491,14 +501,17 @@ extension AppleArchive.ArchiveStream {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public static func convertStream(writingTo stream: AppleArchive.ArchiveStream, insertKeySet: AppleArchive.ArchiveHeader.FieldKeySet, removeKeySet: AppleArchive.ArchiveHeader.FieldKeySet, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0) -> AppleArchive.ArchiveStream?
 }
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveStream {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public static func customStream<C>(instance: C) -> AppleArchive.ArchiveStream? where C : AnyObject, C : AppleArchive.ArchiveStreamProtocol
 }
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveByteStream {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public static func customStream<C>(instance: C) -> AppleArchive.ArchiveByteStream? where C : AnyObject, C : AppleArchive.ArchiveByteStreamProtocol
 }
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveByteStream {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public static func withFileStream<E>(path: System.FilePath, mode: System.FileDescriptor.AccessMode, options: System.FileDescriptor.OpenOptions, permissions: System.FilePermissions, _ body: (AppleArchive.ArchiveByteStream) throws -> E) throws -> E
@@ -703,6 +716,11 @@ public class ArchiveEncryptionContext : AppleArchive._AAObjectWrapper<AppleArchi
 extension AppleArchive.ArchiveEncryptionContext {
   public static func sign(encryptedStream: AppleArchive.ArchiveByteStream, encryptionContext context: AppleArchive.ArchiveEncryptionContext) throws
 }
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+extension AppleArchive.ArchiveEncryptionContext {
+  public func decryptAttributes() -> Swift.Bool
+}
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveByteStream {
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public static func encryptionStream(writingTo encryptedStream: AppleArchive.ArchiveByteStream, encryptionContext context: AppleArchive.ArchiveEncryptionContext, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0) -> AppleArchive.ArchiveByteStream?
@@ -713,6 +731,7 @@ extension AppleArchive.ArchiveByteStream {
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public static func randomAccessDecryptionStream(readingFrom encryptedStream: AppleArchive.ArchiveByteStream, encryptionContext context: AppleArchive.ArchiveEncryptionContext, allocationLimit: Swift.Int = Int.max, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0) -> AppleArchive.ArchiveByteStream?
 }
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension AppleArchive.ArchiveByteStream {
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func close(updatingContext context: AppleArchive.ArchiveEncryptionContext) throws

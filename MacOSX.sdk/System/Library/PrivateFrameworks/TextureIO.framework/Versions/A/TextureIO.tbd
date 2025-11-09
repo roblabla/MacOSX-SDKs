@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5E4128A8-D271-3041-B498-500DE027FF56
+    value:           017A0C47-A9F8-3767-B277-14AB8AFDEB23
   - target:          x86_64-maccatalyst
-    value:           5E4128A8-D271-3041-B498-500DE027FF56
+    value:           017A0C47-A9F8-3767-B277-14AB8AFDEB23
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           62EDEDF2-7D84-3D05-8E19-607AAFF35CCE
+    value:           A9393017-D335-353D-9EEF-3AFE376DFB27
   - target:          arm64e-maccatalyst
-    value:           62EDEDF2-7D84-3D05-8E19-607AAFF35CCE
+    value:           A9393017-D335-353D-9EEF-3AFE376DFB27
 install-name:    '/System/Library/PrivateFrameworks/TextureIO.framework/Versions/A/TextureIO'
-current-version: 3.10.9
+current-version: 3.10.10
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ TXRArrayElement, TXRAssetCatalogConfig, TXRAssetCatalogFileAttributes, 
                        TXRAssetCatalogMipFileAttributes, TXRAssetCatalogSet, TXRDataConverter, 
                        TXRDataScaler, TXRDefaultBufferAllocator, TXRImage, TXRImageIndependent, 

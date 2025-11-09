@@ -215,8 +215,8 @@ API_AVAILABLE(macos(10.9))
  These are called when the StackView detaches or readds a view (or multiple views) after it was detached.
  This is not called when a view is explicitly added or removed from the StackView
  */
-- (void)stackView:(NSStackView *)stackView willDetachViews:(NSArray<NSView *> *)views;
-- (void)stackView:(NSStackView *)stackView didReattachViews:(NSArray<NSView *> *)views;
+- (void)stackView:(NSStackView *)stackView willDetachViews:(NSArray<NSView *> *)views NS_SWIFT_UI_ACTOR;
+- (void)stackView:(NSStackView *)stackView didReattachViews:(NSArray<NSView *> *)views NS_SWIFT_UI_ACTOR;
 
 @end
 

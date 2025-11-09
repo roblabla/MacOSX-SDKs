@@ -4,30 +4,30 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           51552E01-E54E-30A1-B858-E27BC59CE796
+    value:           0646D585-0227-34E0-85AE-E5CAA3BD628D
   - target:          x86_64-maccatalyst
-    value:           51552E01-E54E-30A1-B858-E27BC59CE796
+    value:           0646D585-0227-34E0-85AE-E5CAA3BD628D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           81EAF29D-94A4-34D5-BC10-70338DC8998C
+    value:           74C1B8AD-6ACE-3F4E-96CC-9F0500AE7881
   - target:          arm64e-maccatalyst
-    value:           81EAF29D-94A4-34D5-BC10-70338DC8998C
+    value:           74C1B8AD-6ACE-3F4E-96CC-9F0500AE7881
 install-name:    '/usr/lib/swift/libswiftCoreMedia.dylib'
-current-version: 2940.20.4
+current-version: 3000.13.1
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCoreMedia.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCoreMedia.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftCoreMedia.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftCoreMedia.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCoreMedia.dylib', 
                        '$ld$install_name$os10.9$@rpath/libswiftCoreMedia.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s9CoreMedia14CMSyncProtocolMp', '_$s9CoreMedia14CMSyncProtocolP10mightDrift10relativeToSbqd___tAaBRd__lFTj', 
                        '_$s9CoreMedia14CMSyncProtocolP10mightDrift10relativeToSbqd___tAaBRd__lFTq', 
                        '_$s9CoreMedia14CMSyncProtocolP11convertTime_2toSo6CMTimeaAG_qd__tAaBRd__lFTj', 
@@ -219,11 +219,13 @@ exports:
                        '_$sSo11CMTimeRangea9CoreMediaE12intersectionyA2BF', '_$sSo11CMTimeRangea9CoreMediaE12isIndefiniteSbvg', 
                        '_$sSo11CMTimeRangea9CoreMediaE12isIndefiniteSbvpMV', '_$sSo11CMTimeRangea9CoreMediaE2eeoiySbAB_ABtFZ', 
                        '_$sSo11CMTimeRangea9CoreMediaE2neoiySbAB_ABtFZ', '_$sSo11CMTimeRangea9CoreMediaE3endSo0A0avg', 
-                       '_$sSo11CMTimeRangea9CoreMediaE3endSo0A0avpMV', '_$sSo11CMTimeRangea9CoreMediaE5start3endABSo0A0a_AGtcfC', 
+                       '_$sSo11CMTimeRangea9CoreMediaE3endSo0A0avpMV', '_$sSo11CMTimeRangea9CoreMediaE4hash4intoys6HasherVz_tF', 
+                       '_$sSo11CMTimeRangea9CoreMediaE5start3endABSo0A0a_AGtcfC', 
                        '_$sSo11CMTimeRangea9CoreMediaE5unionyA2BF', '_$sSo11CMTimeRangea9CoreMediaE7isEmptySbvg', 
                        '_$sSo11CMTimeRangea9CoreMediaE7isEmptySbvpMV', '_$sSo11CMTimeRangea9CoreMediaE7isValidSbvg', 
-                       '_$sSo11CMTimeRangea9CoreMediaE7isValidSbvpMV', '_$sSo11CMTimeRangeaSQ9CoreMediaMc', 
-                       '_$sSo11CVBufferRefa9CoreMedia26CMAttachmentBearerProtocolACMc', 
+                       '_$sSo11CMTimeRangea9CoreMediaE7isValidSbvpMV', '_$sSo11CMTimeRangea9CoreMediaE9hashValueSivg', 
+                       '_$sSo11CMTimeRangea9CoreMediaE9hashValueSivpMV', '_$sSo11CMTimeRangeaSH9CoreMediaMc', 
+                       '_$sSo11CMTimeRangeaSQ9CoreMediaMc', '_$sSo11CVBufferRefa9CoreMedia26CMAttachmentBearerProtocolACMc', 
                        '_$sSo11CVBufferRefa9CoreMedia26CMAttachmentBearerProtocolACWP', 
                        '_$sSo11CVBufferRefa9CoreMediaE11attachmentsAC29CMAttachmentBearerAttachmentsVvM', 
                        '_$sSo11CVBufferRefa9CoreMediaE11attachmentsAC29CMAttachmentBearerAttachmentsVvg', 
@@ -1324,11 +1326,12 @@ exports:
                        '_$sSo6CMTimea9CoreMediaE1poiyA2B_ABtFZ', '_$sSo6CMTimea9CoreMediaE1soiyA2B_ABtFZ', 
                        '_$sSo6CMTimea9CoreMediaE2eeoiySbAB_ABtFZ', '_$sSo6CMTimea9CoreMediaE2geoiySbAB_ABtFZ', 
                        '_$sSo6CMTimea9CoreMediaE2leoiySbAB_ABtFZ', '_$sSo6CMTimea9CoreMediaE2neoiySbAB_ABtFZ', 
-                       '_$sSo6CMTimea9CoreMediaE5value9timescaleABs5Int64V_s5Int32VtcfC', 
+                       '_$sSo6CMTimea9CoreMediaE4hash4intoys6HasherVz_tF', '_$sSo6CMTimea9CoreMediaE5value9timescaleABs5Int64V_s5Int32VtcfC', 
                        '_$sSo6CMTimea9CoreMediaE7isValidSbvg', '_$sSo6CMTimea9CoreMediaE7isValidSbvpMV', 
                        '_$sSo6CMTimea9CoreMediaE7seconds18preferredTimescaleABSd_s5Int32VtcfC', 
                        '_$sSo6CMTimea9CoreMediaE7secondsSdvg', '_$sSo6CMTimea9CoreMediaE7secondsSdvpMV', 
+                       '_$sSo6CMTimea9CoreMediaE9hashValueSivg', '_$sSo6CMTimea9CoreMediaE9hashValueSivpMV', 
                        '_$sSo6CMTimea9CoreMediaE9isNumericSbvg', '_$sSo6CMTimea9CoreMediaE9isNumericSbvpMV', 
-                       '_$sSo6CMTimeaSL9CoreMediaMc', '_$sSo6CMTimeaSQ9CoreMediaMc', 
-                       '__swift_FORCE_LOAD_$_swiftCoreMedia' ]
+                       '_$sSo6CMTimeaSH9CoreMediaMc', '_$sSo6CMTimeaSL9CoreMediaMc', 
+                       '_$sSo6CMTimeaSQ9CoreMediaMc', '__swift_FORCE_LOAD_$_swiftCoreMedia' ]
 ...

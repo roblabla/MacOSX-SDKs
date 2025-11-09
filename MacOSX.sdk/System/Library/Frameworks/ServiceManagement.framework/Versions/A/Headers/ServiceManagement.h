@@ -8,6 +8,8 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <ServiceManagement/SMErrors.h>
 
+#include <ServiceManagement/SMAppService.h>
+
 #if !TARGET_OS_IPHONE
 #include <Security/Authorization.h>
 #include <ServiceManagement/SMLoginItem.h>
@@ -248,11 +250,14 @@ SMJobRemove(CFStringRef domain, CFStringRef jobLabel,
  * True if the helper tool was successfully bootstrapped, otherwise false.
  *
  * @discussion
+ * SMJobBless has been deprecated in favor of using SMAppService APIs
+ * to install a LaunchDaemon. See SMAppService:daemonServiceWithPlistName
+ *
  * SMJobBless submits the executable for the given label as a launchd job.  This
  * routine obviates the need for a setuid helper invoked via
  * AuthorizationExecuteWithPrivileges() in order to install a launchd plist.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_0)
+__OSX_DEPRECATED(10.6, 13.0, "Please use SMAppService instead")
 XPC_EXPORT XPC_NONNULL2
 Boolean
 SMJobBless(CFStringRef domain, CFStringRef executableLabel,

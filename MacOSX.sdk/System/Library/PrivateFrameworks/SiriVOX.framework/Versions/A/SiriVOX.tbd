@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1B3510C8-9711-33CB-B047-E783C29792F2
+    value:           CB92E301-B102-3FBF-945B-D666CA760C37
   - target:          x86_64-maccatalyst
-    value:           1B3510C8-9711-33CB-B047-E783C29792F2
+    value:           CB92E301-B102-3FBF-945B-D666CA760C37
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B75BA991-4F59-39BD-885B-A9A5CF1BCB2F
+    value:           B5A41D53-A6D9-345E-B3DD-43B4915BBD3C
   - target:          arm64e-maccatalyst
-    value:           B75BA991-4F59-39BD-885B-A9A5CF1BCB2F
+    value:           B5A41D53-A6D9-345E-B3DD-43B4915BBD3C
 install-name:    '/System/Library/PrivateFrameworks/SiriVOX.framework/Versions/A/SiriVOX'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SVXActivationContextKey, _SVXActivationSourceGetFromName, 
                        _SVXActivationSourceGetIsValid, _SVXActivationSourceGetIsValidAndSpecified, 
                        _SVXActivationSourceGetName, _SVXAlarmAndTimerFiringContextCreateSpeechSynthesisRequest, 
@@ -67,16 +67,16 @@ exports:
                        _SVXLocalizationKeyStoreDemoStyle1Stage3Version3, _SVXLocalizationKeyStoreDemoStyle2IntroVersion1, 
                        _SVXLocalizationKeyStoreDemoStyle2OutroVersion1, _SVXLocalizationKeyStoreDemoStyle2Stage1Version1, 
                        _SVXLocalizationKeyStoreDemoStyle2Stage2Version1, _SVXLocalizationKeyStoreDemoStyle2Stage3Version1, 
-                       _SVXLocalizationKeyStoreDemoStyle2Stage3Version2, _SVXLocalizationKeyStoreDemoStyle2Stage3Version3, 
-                       _SVXLocalizationKeyWiFiError0, _SVXLocalizationKeyWiFiError1, 
-                       _SVXLocalizationTableClock, _SVXLocalizationTableDefault, 
-                       _SVXLocalizationTableDeviceSetup, _SVXLocalizationTableErrors, 
-                       _SVXLocalizationTableInterstitials, _SVXLocalizationTableStoreDemo, 
-                       _SVXPerformingOptionsGetFromNames, _SVXPerformingOptionsGetNames, 
-                       _SVXPerformingOptionsValidate, _SVXPlatformDependencyTypeGetFromName, 
-                       _SVXPlatformDependencyTypeGetIsValid, _SVXPlatformDependencyTypeGetIsValidAndSpecified, 
-                       _SVXPlatformDependencyTypeGetName, _SVXSessionResignActiveOptionsGetNames, 
-                       _SVXSessionStateGetFromName, _SVXSessionStateGetIsValid, _SVXSessionStateGetIsValidAndSpecified, 
+                       _SVXLocalizationKeyStoreDemoStyle2Stage4Version1, _SVXLocalizationKeyWiFiError0, 
+                       _SVXLocalizationKeyWiFiError1, _SVXLocalizationTableClock, 
+                       _SVXLocalizationTableDefault, _SVXLocalizationTableDeviceSetup, 
+                       _SVXLocalizationTableErrors, _SVXLocalizationTableInterstitials, 
+                       _SVXLocalizationTableStoreDemo, _SVXPerformingOptionsGetFromNames, 
+                       _SVXPerformingOptionsGetNames, _SVXPerformingOptionsValidate, 
+                       _SVXPlatformDependencyTypeGetFromName, _SVXPlatformDependencyTypeGetIsValid, 
+                       _SVXPlatformDependencyTypeGetIsValidAndSpecified, _SVXPlatformDependencyTypeGetName, 
+                       _SVXSessionResignActiveOptionsGetNames, _SVXSessionStateGetFromName, 
+                       _SVXSessionStateGetIsValid, _SVXSessionStateGetIsValidAndSpecified, 
                        _SVXSessionStateGetName, _SVXSoundIDGetFromName, _SVXSoundIDGetIsValid, 
                        _SVXSoundIDGetIsValidAndSpecified, _SVXSoundIDGetName, _SVXSpeechSynthesisCreateAudioFromUIAudioData, 
                        _SVXSpeechSynthesisCreateLocaleFromLanguageCode, _SVXSpeechSynthesisGenderGetFromName, 
@@ -109,8 +109,9 @@ exports:
                        SVXDeviceSetupFlowSceneBuilder, SVXDeviceSetupFlowSiriCapabilitiesHint, 
                        SVXDeviceSetupOptions, SVXMyriadDeviceManager, SVXMyriadHostDevice, 
                        SVXMyriadWiFiAssertion, SVXPlatformDependency, SVXQueuePerformer, 
-                       SVXServiceCommandResult, SVXSpeechSynthesisRequest, SVXSpeechSynthesisResult, 
-                       SVXSpeechSynthesisUtteranceInfo, SVXSpeechSynthesisWordTiming, 
-                       SVXStoreDemo, SVXSystemEvent, SVXTStubExpressionParsingService, 
-                       SVXTaskContext, _SVXAddViewsExpressionParser, _SVXRemoteExpressionParsingService ]
+                       SVXServiceCommandResult, SVXSpeechSynthesisConfiguration, 
+                       SVXSpeechSynthesisRequest, SVXSpeechSynthesisResult, SVXSpeechSynthesisUtteranceInfo, 
+                       SVXSpeechSynthesisWordTiming, SVXStoreDemo, SVXSystemEvent, 
+                       SVXTaskContext, SVXUnderstandingOnDeviceAssetsStateObserver, 
+                       _SVXAddViewsExpressionParser, _SVXRemoteExpressionParsingService ]
 ...

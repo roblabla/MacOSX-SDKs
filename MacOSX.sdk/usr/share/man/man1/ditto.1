@@ -1,4 +1,4 @@
-.\"Copyright (c) 1999-2008 Apple Inc.  All Rights Reserved.
+.\"Copyright (c) 1999-2022 Apple Inc.  All Rights Reserved.
 .\"
 .\"This file contains Original Code and/or Modifications of Original Code
 .\"as defined in and that are subject to the Apple Public Source License
@@ -16,16 +16,16 @@
 .\"limitations under the License.
 
 .\"To preview: /usr/bin/nroff -msafer -mandoc ditto.1 | less
-.\"To check for errors: /usr/bin/groff -I/usr/share/man -S -Wall -mtty-char -mandoc -Tascii ditto.1 > /dev/null 
+.\"To check for errors: /usr/bin/groff -I/usr/share/man -S -Wall -mtty-char -mandoc -Tascii ditto.1 > /dev/null
 
-.Dd December 19, 2008
+.Dd June 1, 2022
 .Dt DITTO 1
-.Os "Mac OS X"
+.Os "macOS 13.0"
 .Sh NAME
 .Nm ditto
 .Nd copy directory hierarchies, create and extract archives
 .Sh SYNOPSIS
-.Nm 
+.Nm
 .Op Fl v
 .Op Fl V
 .Op Fl X
@@ -55,7 +55,7 @@
 .Fl h |
 .Fl Fl help
 .Sh DESCRIPTION
-In its first form, 
+In its first form,
 .Nm
 copies one or more source files or directories to a destination
 directory.  If the destination directory does not exist it will be
@@ -63,16 +63,16 @@ created before the first source is copied.  If the destination
 directory already exists then the source directories are merged
 with the previous contents of the destination.
 .Pp
-In its second form, 
+In its second form,
 .Nm
-copies a file to the supplied 
+copies a file to the supplied
 .Ar dst_file
 pathname.
 .Pp
 The next two forms reflect
 .Nm Ns 's
 ability to create and extract
-archives.  These archives can be either CPIO format (preferred for unix 
+archives.  These archives can be either CPIO format (preferred for unix
 content) or PKZip (for Windows compatibility).
 .Ar src_archive
 (and
@@ -95,32 +95,32 @@ directories in the
 destination.  Files and symbolic links cannot overwrite directories or
 vice-versa.
 .Pp
-.Nm 
-can be used to "thin" Universal Mach-O binaries during a copy. 
+.Nm
+can be used to "thin" Universal Mach-O binaries during a copy.
 .Nm
 can also copy files selectively based on the contents of a BOM
 ("Bill of Materials") file.
 .Nm
 preserves file hard links (but not directory hard links) present in the source directories and preserves
-setuid and setgid modes when run as the superuser. 
+setuid and setgid modes when run as the superuser.
 .Pp
 .Nm
 will preserve resource forks and HFS meta-data information
 when copying unless instructed otherwise using
 .Fl Fl norsrc
 \&.
-.Fl Fl norsrc 
+.Fl Fl norsrc
 will disable copy of resource forks, extended attributes, Access Control Lists (ACLs), as well as quarantine bits.
-.Ev DITTONORSRC 
+.Ev DITTONORSRC
 can be set in the environment as an alias to
-.Fl Fl norsrc 
-.Fl Fl noextattr 
+.Fl Fl norsrc
+.Fl Fl noextattr
 .Fl Fl noacl
-.Fl Fl noqtn 
+.Fl Fl noqtn
 on the command line. However, each option can be individually turned on or off, see the OPTIONS section for more details.
 .Sh OPTIONS
 .Bl -tag -width "XXkeepParent"
-.It Fl h
+.It Fl h , Fl Fl help
 Print full usage.
 .It Fl v
 Print a line of output to stderr for each source directory copied.
@@ -165,7 +165,7 @@ options are specified then the resulting destination file will contain
 each of the specified architectures (if they are present in the source
 file).
 .Ar arch
-should be specified as "i386", "x86_64", etc.
+should be specified as "arm64", "x86_64", etc.
 .It Fl Fl bom Ar bom
 Copy only files, links, devices, and directories that are present in the
 specified BOM.
@@ -197,7 +197,7 @@ As of Mac OS X 10.5,
 .Fl Fl extattr
 is the default.
 .It Fl Fl noextattr
-Do not preserve extended attributes (requires 
+Do not preserve extended attributes (requires
 .Fl Fl norsrc  Ns ).
 .It Fl Fl qtn
 Preserve quarantine information.
@@ -218,42 +218,89 @@ Do not perform copies using the Mac OS X Unified Buffer Cache. Files read
 and written will not be cached, although if the file is already present
 in the cache, the cached information will be used.
 .It Fl Fl hfsCompression
-When copying files or extracting content from an archive, if the destination 
-is an HFS+ volume that supports compression, all the content will be compressed
+When copying files or extracting content from an archive, if the destination
+is an HFS+ or APFS volume that supports filesystem compression, all the content will be compressed
 if appropriate. This is only supported on Mac OS X 10.6 or later, and is only
-intended to be used in installation and backup scenarios that involve system 
-files. Since files using HFS+ compression are not readable on versions of 
+intended to be used in installation and backup scenarios that involve system
+files. Since files using filesystem compression are not readable on versions of
 Mac OS X earlier than 10.6, this flag should not be used when dealing with
-non-system files or other user-generated content that will be used on a 
-version of Mac OS X earlier than 10.6. 
+non-system files or other user-generated content that will be used on a
+version of Mac OS X earlier than 10.6.
 .It Fl Fl nohfsCompression
-Do not compress files with HFS+ compression when copying or extracting content
-from an archive unless the content is already compressed with HFS+ compression. 
-This flag is only supported on Mac OS X 10.6 or later. 
+Do not compress files with filesystem compression when copying or extracting content
+from an archive unless the content is already compressed with filesystem compression.
+This flag is only supported on Mac OS X 10.6 or later.
 .Fl Fl nohfsCompression
 is the default.
 .It Fl Fl preserveHFSCompression
-When copying files to an HFS+ volume that supports compression, ditto will 
-preserve the compression of any source files that were using HFS+ compression. 
-This flag is only supported on Mac OS X 10.6 or later. 
+When copying files to an HFS+ or APFS volume that supports filesystem compression, ditto will
+preserve the compression of any source files that were using filesystem compression.
+This flag is only supported on Mac OS X 10.6 or later.
 .Fl Fl preserveHFSCompression
 is the default.
 .It Fl Fl nopreserveHFSCompression
-Do not preserve HFS+ compression when copying files that are already compressed with
-HFS+ compression. This is only supported on Mac OS X 10.6 or later.
+Do not preserve filesystem compression when copying files that are already compressed with
+filesystem compression. This is only supported on Mac OS X 10.6 or later.
 .It Fl Fl sequesterRsrc
 When creating a PKZip archive, preserve resource forks and HFS meta-data
 in the subdirectory __MACOSX.  PKZip extraction will automatically find
 these resources.
 .It Fl Fl zlibCompressionLevel Ar num
 Sets the compression level to use when creating a PKZip archive. The compression
-level can be set from 0 to 9, where 0 represents no compression, and 9 
+level can be set from 0 to 9, where 0 represents no compression, and 9
 represents optimal (slowest) compression. By default, ditto will use the default compression
 level as defined by zlib.
 .It Fl Fl password
-When extracting a password-encrypted ZIP archive, you must specify --password to allow ditto 
-to prompt for a password to use to extract the contents of the file. If this option is not 
+When extracting a password-encrypted ZIP archive, you must specify --password to allow ditto
+to prompt for a password to use to extract the contents of the file. If this option is not
 provided, and a password-encrypted file is encountered, ditto will emit an error message.
+.It Fl Fl persistRootless
+If a file being replaced has the SF_RESTRICTED flag or the com.apple.rootless extended
+attribute set, retain it even if the source file may not have had the same flag or attribute.
+.It Fl Fl nopersistRootless
+Do not persist the SF_RESTRICTED flag or the com.apple.rootless extended
+attribute for files being replaced.
+.It Fl Fl nonAtomicCopies
+Do not perform atomic copies when replacing existing files. By default
+.Nm
+will atomically swap new files into place when completing a copy.
+.It Fl Fl segmentLargeFiles
+When copying files to a CPIO archive, segment files larger than 8 gigabytes
+into multiple entries.
+.It Fl Fl keepBinaries
+When copying files
+.Nm
+will set aside the original Mach-O binary when it is being replaced.
+The file name will be changed to a random number preceeded by the prefix .BC.T_
+.It Fl Fl keepBinariesList Ar path
+When
+.Nm
+keeps binary files it will record the location of the kept file in the file
+at the specified path.
+.It Fl Fl keepBinariesPattern Ar regex
+Keep any regular file that matches the specified regular expression. Note that this
+file must not be a Mach-O binary.
+.It Fl Fl lang Ar lang
+When copying files with an index bom specified via
+.Fl b
+option the user can specify language variants to filter from the index bom.
+By default
+.Nm
+will create a new index bom at /tmp/ditto.XXXXX representing the filtered contents.
+The user can direct the output bom via the
+.Fl o
+flag.
+.It Fl Fl outBom Ar bom
+Specify an explicit path for the output bom.
+This bom will only be created if the user specified the
+.Fl o
+flag or the
+.Fl l
+flags.
+.It Fl Fl option Ar key=value
+Specify an arbitrary key value pair to be passed to the copier.
+The value can be a string, boolean, or integer.
+Booleans can be specified as 'true', 'false', 'yes', or 'no'.
 .El
 .Sh EXAMPLES
 The command:
@@ -296,13 +343,13 @@ The command:
 .Dl unzip -l archive.zip
 will list the files in the PKZip archive archive.zip.
 .Sh "ERRORS"
-.Nm 
+.Nm
 returns 0 if everything is copied, otherwise non-zero.
 .Nm
 almost never gives up, preferring to report errors along the way.
 Diagnostic messages will be printed to standard error.
 .Sh ENVIRONMENT
-.Bl -tag -width DITTOABORT
+.Bl -tag -width DITTOKEEPBINARIESPATTERN
 .It Ev DITTOABORT
 If the environment variable
 .Ev DITTOABORT
@@ -318,18 +365,45 @@ is set but
 .Fl Fl rsrc Ns ,
 .Fl Fl extattr Ns ,
 and
-.Fl Fl acl 
+.Fl Fl acl
 are not specified,
 .Nm
 will not preserve those additional types of metadata.
+.It Ev DITTOKEEPBINARIESPATTERN
+If the environment variable
+.Ev DITTOKEEPBINARIESPATTERN
+is set,
+.Nm
+will keep files that match the regular expression.
+This matches the behavior of
+.Fl Fl keepBinariesPattern
+.It Ev DITTOKEEPBINARIESDIR
+By default,
+.Nm
+will keep the original file adjacent to its replacement.
+If the environment variable
+.Ev DITTOKEEPBINARIESDIR
+is set,
+.Nm
+will move kept files into the specified directory path.
+The files will be renamed to a random UUID and the directory
+will be kept balanced.
+.It Ev DITTO_TEST_OPTIONS
+If
+.Ev DITTO_TEST_OPTIONS
+is set to 1
+.Nm
+will print the parameters to be passed to BOMCopierCopyWithOptions
+for each source and destination pair, including the contents of the options
+dictionary. It will then exit without performing any copy operation.
 .El
 .Sh "BUGS"
-.Nm 
+.Nm
 doesn't copy directories into directories in the same way as
 .Xr cp 1 Ns .
 In particular,
 .Dl ditto foo bar
-will copy the contents of foo into bar, whereas 
+will copy the contents of foo into bar, whereas
 .Dl cp -r foo bar
 copies foo itself into bar. Though this is not a bug, some may
 consider this bug-like behavior.
@@ -344,3 +418,6 @@ for non-archive copies will eventually alleviate this problem.
 .Ns Xr gzip 1 ,
 .Ns Xr bzip2 1 ,
 .Ns Xr tar 1 .
+.Sh HISTORY
+.Nm
+first appeared in Mac OS X (10.0)

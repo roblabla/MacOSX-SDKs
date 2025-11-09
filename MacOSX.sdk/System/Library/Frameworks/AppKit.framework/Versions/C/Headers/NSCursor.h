@@ -20,15 +20,19 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE(macos(10.0), ios(13.0))
 @interface NSCursor : NSObject <NSCoding>
 
-/* Returns the application's current cursor. This is not necessarily the cursor that is currently being displayed on the system. If you need the currently displayed cursor, use currentSystemCursor.
+/** Returns the application’s current cursor. This is not necessarily the cursor that is currently being displayed on the system. If you need the currently displayed cursor, use `NSCursor.currentSystemCursor`.
 */
 @property (class, readonly, strong) NSCursor *currentCursor;
 
-/* Returns an NSCursor whose image and hot spot match those of the cursor that is currently being displayed on the system, regardless of which application set that cursor. For example, this allows an inactive application to examine the image and hot spot of a cursor set by the active application. This API doesn't care whether the cursor is hidden; it will return an NSCursor whose image matches the cursor you would see if it were visible.
+/** Returns an `NSCursor` whose image and hot spot match those of the cursor that is currently being displayed on the system, regardless of which application set that cursor.
  
- Only the cursor image and hot spot are replicated in the returned NSCursor. Other properties (such as isSetOnMouseExited and isSetOnMouseEntered) will not necessarily be accurate.
+ For example, this allows an inactive application to examine the image and hot spot of a cursor set by the active application.
  
- This method returns nil if the currently displayed cursor could not be fetched.
+ In the case that the current system cursor is hidden, this property is an `NSCursor` whose image matches the cursor you would see if it were visible.
+ 
+ Only the cursor image and hot spot are replicated in the returned `NSCursor`. Other properties (such as `isSetOnMouseExited` and `isSetOnMouseEntered`) will not necessarily be accurate. The returned instance **cannot** be used for pointer (`==`) or object (`-isEqual:`) equality operations, since a new instance is created lazily on each access of this property.
+ 
+ This property is `nil` if the currently displayed cursor couldn’t be fetched.
  */
 @property (class, readonly, nullable, strong) NSCursor *currentSystemCursor API_AVAILABLE(macos(10.6));
 

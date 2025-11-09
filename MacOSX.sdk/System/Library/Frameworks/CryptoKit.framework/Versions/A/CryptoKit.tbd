@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4566C9C4-D161-3E73-B12D-18B40AC4B160
+    value:           DCEB4313-6A89-3D4D-8469-137DB8F4074D
   - target:          x86_64-maccatalyst
-    value:           4566C9C4-D161-3E73-B12D-18B40AC4B160
+    value:           DCEB4313-6A89-3D4D-8469-137DB8F4074D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BF592604-484E-3FA7-B166-B13CFC29D5D6
+    value:           2FDAEB38-29C5-3894-9B19-6F4C60AC9CE4
   - target:          arm64e-maccatalyst
-    value:           BF592604-484E-3FA7-B166-B13CFC29D5D6
+    value:           2FDAEB38-29C5-3894-9B19-6F4C60AC9CE4
 install-name:    '/System/Library/Frameworks/CryptoKit.framework/Versions/A/CryptoKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s1H9CryptoKit28CorecryptoSupportedNISTCurvePTl', '_$s6Digest9CryptoKit12HashFunctionPTl', 
                        '_$s9CryptoKit03ChaC4PolyO4open_5using10Foundation4DataVAC9SealedBoxV_AA12SymmetricKeyVtKFZ', 
                        '_$s9CryptoKit03ChaC4PolyO4open_5using14authenticating10Foundation4DataVAC9SealedBoxV_AA12SymmetricKeyVxtKAG0I8ProtocolRzlFZ', 
@@ -44,7 +44,8 @@ exports:
                        '_$s9CryptoKit03ChaC4PolyOMn', '_$s9CryptoKit03ChaC4PolyON', 
                        '_$s9CryptoKit0aB5ErrorO014underlyingCoreaC0yACs5Int32V_tcACmFWC', 
                        '_$s9CryptoKit0aB5ErrorO11wrapFailureyA2CmFWC', '_$s9CryptoKit0aB5ErrorO13unwrapFailureyA2CmFWC', 
-                       '_$s9CryptoKit0aB5ErrorO16incorrectKeySizeyA2CmFWC', '_$s9CryptoKit0aB5ErrorO21authenticationFailureyA2CmFWC', 
+                       '_$s9CryptoKit0aB5ErrorO16incorrectKeySizeyA2CmFWC', '_$s9CryptoKit0aB5ErrorO16invalidParameteryA2CmFWC', 
+                       '_$s9CryptoKit0aB5ErrorO21authenticationFailureyA2CmFWC', 
                        '_$s9CryptoKit0aB5ErrorO22incorrectParameterSizeyA2CmFWC', 
                        '_$s9CryptoKit0aB5ErrorOMa', '_$s9CryptoKit0aB5ErrorOMn', 
                        '_$s9CryptoKit0aB5ErrorON', '_$s9CryptoKit0aB5ErrorOs0C0AAMc', 
@@ -217,7 +218,8 @@ exports:
                        '_$s9CryptoKit28CorecryptoSupportedNISTCurveP1HAC_AA12HashFunctionTn', 
                        '_$s9CryptoKit28CorecryptoSupportedNISTCurveP9curveTypeypvgZTj', 
                        '_$s9CryptoKit28CorecryptoSupportedNISTCurveP9curveTypeypvgZTq', 
-                       '_$s9CryptoKit28CorecryptoSupportedNISTCurveTL', '_$s9CryptoKit3AESO3GCMO4open_5using10Foundation4DataVAE9SealedBoxV_AA12SymmetricKeyVtKFZ', 
+                       '_$s9CryptoKit28CorecryptoSupportedNISTCurveTL', '_$s9CryptoKit3AESO14inversePermute_3keyyxz_AA12SymmetricKeyVtKSMRzs5UInt8V7ElementRtzlFZ', 
+                       '_$s9CryptoKit3AESO3GCMO4open_5using10Foundation4DataVAE9SealedBoxV_AA12SymmetricKeyVtKFZ', 
                        '_$s9CryptoKit3AESO3GCMO4open_5using14authenticating10Foundation4DataVAE9SealedBoxV_AA12SymmetricKeyVxtKAI0I8ProtocolRzlFZ', 
                        '_$s9CryptoKit3AESO3GCMO4seal_5using5nonce14authenticatingAE9SealedBoxVx_AA12SymmetricKeyVAE5NonceVSgq_tK10Foundation12DataProtocolRzAqRR_r0_lFZ', 
                        '_$s9CryptoKit3AESO3GCMO4seal_5using5nonceAE9SealedBoxVx_AA12SymmetricKeyVAE5NonceVSgtK10Foundation12DataProtocolRzlFZ', 
@@ -242,8 +244,9 @@ exports:
                        '_$s9CryptoKit3AESO3GCMOMn', '_$s9CryptoKit3AESO3GCMON', '_$s9CryptoKit3AESO7KeyWrapO4wrap_5using10Foundation4DataVAA09SymmetricD0V_ALtKFZ', 
                        '_$s9CryptoKit3AESO7KeyWrapO6unwrap_5usingAA09SymmetricD0Vx_AItK10Foundation12DataProtocolRzlFZ', 
                        '_$s9CryptoKit3AESO7KeyWrapOMa', '_$s9CryptoKit3AESO7KeyWrapOMn', 
-                       '_$s9CryptoKit3AESO7KeyWrapON', '_$s9CryptoKit3AESOMa', '_$s9CryptoKit3AESOMn', 
-                       '_$s9CryptoKit3AESON', '_$s9CryptoKit4HKDFV6expand15pseudoRandomKey4info15outputByteCountAA09SymmetricG0Vqd___qd_0_SgSit10Foundation15ContiguousBytesRd__AK12DataProtocolRd_0_r0_lFZ', 
+                       '_$s9CryptoKit3AESO7KeyWrapON', '_$s9CryptoKit3AESO7permute_3keyyxz_AA12SymmetricKeyVtKSMRzs5UInt8V7ElementRtzlFZ', 
+                       '_$s9CryptoKit3AESOMa', '_$s9CryptoKit3AESOMn', '_$s9CryptoKit3AESON', 
+                       '_$s9CryptoKit4HKDFV6expand15pseudoRandomKey4info15outputByteCountAA09SymmetricG0Vqd___qd_0_SgSit10Foundation15ContiguousBytesRd__AK12DataProtocolRd_0_r0_lFZ', 
                        '_$s9CryptoKit4HKDFV7extract16inputKeyMaterial4saltAA24HashedAuthenticationCodeVyxGAA09SymmetricF0V_qd__Sgt10Foundation12DataProtocolRd__lFZ', 
                        '_$s9CryptoKit4HKDFV9deriveKey05inputE8Material15outputByteCountAA09SymmetricE0VAH_SitFZ', 
                        '_$s9CryptoKit4HKDFV9deriveKey05inputE8Material4info15outputByteCountAA09SymmetricE0VAI_qd__Sit10Foundation12DataProtocolRd__lFZ', 
@@ -273,6 +276,7 @@ exports:
                        '_$s9CryptoKit4P256O12KeyAgreementO06PublicD0V21compactRepresentation10Foundation4DataVSgvg', 
                        '_$s9CryptoKit4P256O12KeyAgreementO06PublicD0V21compactRepresentation10Foundation4DataVSgvpMV', 
                        '_$s9CryptoKit4P256O12KeyAgreementO06PublicD0V21compactRepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
+                       '_$s9CryptoKit4P256O12KeyAgreementO06PublicD0V22keyFromDiversification4with19seedExtractionLabelAG10Foundation4DataV_AMtF', 
                        '_$s9CryptoKit4P256O12KeyAgreementO06PublicD0V24compressedRepresentation10Foundation4DataVvg', 
                        '_$s9CryptoKit4P256O12KeyAgreementO06PublicD0V24compressedRepresentation10Foundation4DataVvpMV', 
                        '_$s9CryptoKit4P256O12KeyAgreementO06PublicD0V24compressedRepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
@@ -293,6 +297,8 @@ exports:
                        '_$s9CryptoKit4P256O12KeyAgreementO07PrivateD0V18x963Representation10Foundation4DataVvpMV', 
                        '_$s9CryptoKit4P256O12KeyAgreementO07PrivateD0V18x963RepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
                        '_$s9CryptoKit4P256O12KeyAgreementO07PrivateD0V20compactRepresentableAGSb_tcfC', 
+                       '_$s9CryptoKit4P256O12KeyAgreementO07PrivateD0V22keyFromDiversification4with19seedExtractionLabelAG10Foundation4DataV_AMtF', 
+                       '_$s9CryptoKit4P256O12KeyAgreementO07PrivateD0V4seed20compactRepresentableAG10Foundation4DataV_SbtKcfC', 
                        '_$s9CryptoKit4P256O12KeyAgreementO07PrivateD0VMa', '_$s9CryptoKit4P256O12KeyAgreementO07PrivateD0VMn', 
                        '_$s9CryptoKit4P256O12KeyAgreementO07PrivateD0VN', '_$s9CryptoKit4P256O12KeyAgreementOMa', 
                        '_$s9CryptoKit4P256O12KeyAgreementOMn', '_$s9CryptoKit4P256O12KeyAgreementON', 
@@ -311,6 +317,8 @@ exports:
                        '_$s9CryptoKit4P256O7SigningO10PrivateKeyV18x963Representation10Foundation4DataVvpMV', 
                        '_$s9CryptoKit4P256O7SigningO10PrivateKeyV18x963RepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
                        '_$s9CryptoKit4P256O7SigningO10PrivateKeyV20compactRepresentableAGSb_tcfC', 
+                       '_$s9CryptoKit4P256O7SigningO10PrivateKeyV22keyFromDiversification4with19seedExtractionLabelAG10Foundation4DataV_AMtF', 
+                       '_$s9CryptoKit4P256O7SigningO10PrivateKeyV4seed20compactRepresentableAG10Foundation4DataV_SbtKcfC', 
                        '_$s9CryptoKit4P256O7SigningO10PrivateKeyV9signature3forAE14ECDSASignatureVx_tK10Foundation12DataProtocolRzlF', 
                        '_$s9CryptoKit4P256O7SigningO10PrivateKeyV9signature3forAE14ECDSASignatureVx_tKAA6DigestRzlF', 
                        '_$s9CryptoKit4P256O7SigningO10PrivateKeyVMa', '_$s9CryptoKit4P256O7SigningO10PrivateKeyVMn', 
@@ -342,6 +350,7 @@ exports:
                        '_$s9CryptoKit4P256O7SigningO9PublicKeyV21compactRepresentation10Foundation4DataVSgvg', 
                        '_$s9CryptoKit4P256O7SigningO9PublicKeyV21compactRepresentation10Foundation4DataVSgvpMV', 
                        '_$s9CryptoKit4P256O7SigningO9PublicKeyV21compactRepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
+                       '_$s9CryptoKit4P256O7SigningO9PublicKeyV22keyFromDiversification4with19seedExtractionLabelAG10Foundation4DataV_AMtF', 
                        '_$s9CryptoKit4P256O7SigningO9PublicKeyV24compressedRepresentation10Foundation4DataVvg', 
                        '_$s9CryptoKit4P256O7SigningO9PublicKeyV24compressedRepresentation10Foundation4DataVvpMV', 
                        '_$s9CryptoKit4P256O7SigningO9PublicKeyV24compressedRepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
@@ -367,6 +376,7 @@ exports:
                        '_$s9CryptoKit4P384O12KeyAgreementO06PublicD0V21compactRepresentation10Foundation4DataVSgvg', 
                        '_$s9CryptoKit4P384O12KeyAgreementO06PublicD0V21compactRepresentation10Foundation4DataVSgvpMV', 
                        '_$s9CryptoKit4P384O12KeyAgreementO06PublicD0V21compactRepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
+                       '_$s9CryptoKit4P384O12KeyAgreementO06PublicD0V22keyFromDiversification4with19seedExtractionLabelAG10Foundation4DataV_AMtF', 
                        '_$s9CryptoKit4P384O12KeyAgreementO06PublicD0V24compressedRepresentation10Foundation4DataVvg', 
                        '_$s9CryptoKit4P384O12KeyAgreementO06PublicD0V24compressedRepresentation10Foundation4DataVvpMV', 
                        '_$s9CryptoKit4P384O12KeyAgreementO06PublicD0V24compressedRepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
@@ -387,6 +397,8 @@ exports:
                        '_$s9CryptoKit4P384O12KeyAgreementO07PrivateD0V18x963Representation10Foundation4DataVvpMV', 
                        '_$s9CryptoKit4P384O12KeyAgreementO07PrivateD0V18x963RepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
                        '_$s9CryptoKit4P384O12KeyAgreementO07PrivateD0V20compactRepresentableAGSb_tcfC', 
+                       '_$s9CryptoKit4P384O12KeyAgreementO07PrivateD0V22keyFromDiversification4with19seedExtractionLabelAG10Foundation4DataV_AMtF', 
+                       '_$s9CryptoKit4P384O12KeyAgreementO07PrivateD0V4seed20compactRepresentableAG10Foundation4DataV_SbtKcfC', 
                        '_$s9CryptoKit4P384O12KeyAgreementO07PrivateD0VMa', '_$s9CryptoKit4P384O12KeyAgreementO07PrivateD0VMn', 
                        '_$s9CryptoKit4P384O12KeyAgreementO07PrivateD0VN', '_$s9CryptoKit4P384O12KeyAgreementOMa', 
                        '_$s9CryptoKit4P384O12KeyAgreementOMn', '_$s9CryptoKit4P384O12KeyAgreementON', 
@@ -405,6 +417,8 @@ exports:
                        '_$s9CryptoKit4P384O7SigningO10PrivateKeyV18x963Representation10Foundation4DataVvpMV', 
                        '_$s9CryptoKit4P384O7SigningO10PrivateKeyV18x963RepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
                        '_$s9CryptoKit4P384O7SigningO10PrivateKeyV20compactRepresentableAGSb_tcfC', 
+                       '_$s9CryptoKit4P384O7SigningO10PrivateKeyV22keyFromDiversification4with19seedExtractionLabelAG10Foundation4DataV_AMtF', 
+                       '_$s9CryptoKit4P384O7SigningO10PrivateKeyV4seed20compactRepresentableAG10Foundation4DataV_SbtKcfC', 
                        '_$s9CryptoKit4P384O7SigningO10PrivateKeyV9signature3forAE14ECDSASignatureVx_tK10Foundation12DataProtocolRzlF', 
                        '_$s9CryptoKit4P384O7SigningO10PrivateKeyV9signature3forAE14ECDSASignatureVx_tKAA6DigestRzlF', 
                        '_$s9CryptoKit4P384O7SigningO10PrivateKeyVMa', '_$s9CryptoKit4P384O7SigningO10PrivateKeyVMn', 
@@ -436,6 +450,7 @@ exports:
                        '_$s9CryptoKit4P384O7SigningO9PublicKeyV21compactRepresentation10Foundation4DataVSgvg', 
                        '_$s9CryptoKit4P384O7SigningO9PublicKeyV21compactRepresentation10Foundation4DataVSgvpMV', 
                        '_$s9CryptoKit4P384O7SigningO9PublicKeyV21compactRepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
+                       '_$s9CryptoKit4P384O7SigningO9PublicKeyV22keyFromDiversification4with19seedExtractionLabelAG10Foundation4DataV_AMtF', 
                        '_$s9CryptoKit4P384O7SigningO9PublicKeyV24compressedRepresentation10Foundation4DataVvg', 
                        '_$s9CryptoKit4P384O7SigningO9PublicKeyV24compressedRepresentation10Foundation4DataVvpMV', 
                        '_$s9CryptoKit4P384O7SigningO9PublicKeyV24compressedRepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
@@ -461,6 +476,7 @@ exports:
                        '_$s9CryptoKit4P521O12KeyAgreementO06PublicD0V21compactRepresentation10Foundation4DataVSgvg', 
                        '_$s9CryptoKit4P521O12KeyAgreementO06PublicD0V21compactRepresentation10Foundation4DataVSgvpMV', 
                        '_$s9CryptoKit4P521O12KeyAgreementO06PublicD0V21compactRepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
+                       '_$s9CryptoKit4P521O12KeyAgreementO06PublicD0V22keyFromDiversification4with19seedExtractionLabelAG10Foundation4DataV_AMtF', 
                        '_$s9CryptoKit4P521O12KeyAgreementO06PublicD0V24compressedRepresentation10Foundation4DataVvg', 
                        '_$s9CryptoKit4P521O12KeyAgreementO06PublicD0V24compressedRepresentation10Foundation4DataVvpMV', 
                        '_$s9CryptoKit4P521O12KeyAgreementO06PublicD0V24compressedRepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
@@ -481,6 +497,8 @@ exports:
                        '_$s9CryptoKit4P521O12KeyAgreementO07PrivateD0V18x963Representation10Foundation4DataVvpMV', 
                        '_$s9CryptoKit4P521O12KeyAgreementO07PrivateD0V18x963RepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
                        '_$s9CryptoKit4P521O12KeyAgreementO07PrivateD0V20compactRepresentableAGSb_tcfC', 
+                       '_$s9CryptoKit4P521O12KeyAgreementO07PrivateD0V22keyFromDiversification4with19seedExtractionLabelAG10Foundation4DataV_AMtF', 
+                       '_$s9CryptoKit4P521O12KeyAgreementO07PrivateD0V4seed20compactRepresentableAG10Foundation4DataV_SbtKcfC', 
                        '_$s9CryptoKit4P521O12KeyAgreementO07PrivateD0VMa', '_$s9CryptoKit4P521O12KeyAgreementO07PrivateD0VMn', 
                        '_$s9CryptoKit4P521O12KeyAgreementO07PrivateD0VN', '_$s9CryptoKit4P521O12KeyAgreementOMa', 
                        '_$s9CryptoKit4P521O12KeyAgreementOMn', '_$s9CryptoKit4P521O12KeyAgreementON', 
@@ -499,6 +517,8 @@ exports:
                        '_$s9CryptoKit4P521O7SigningO10PrivateKeyV18x963Representation10Foundation4DataVvpMV', 
                        '_$s9CryptoKit4P521O7SigningO10PrivateKeyV18x963RepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
                        '_$s9CryptoKit4P521O7SigningO10PrivateKeyV20compactRepresentableAGSb_tcfC', 
+                       '_$s9CryptoKit4P521O7SigningO10PrivateKeyV22keyFromDiversification4with19seedExtractionLabelAG10Foundation4DataV_AMtF', 
+                       '_$s9CryptoKit4P521O7SigningO10PrivateKeyV4seed20compactRepresentableAG10Foundation4DataV_SbtKcfC', 
                        '_$s9CryptoKit4P521O7SigningO10PrivateKeyV9signature3forAE14ECDSASignatureVx_tK10Foundation12DataProtocolRzlF', 
                        '_$s9CryptoKit4P521O7SigningO10PrivateKeyV9signature3forAE14ECDSASignatureVx_tKAA6DigestRzlF', 
                        '_$s9CryptoKit4P521O7SigningO10PrivateKeyVMa', '_$s9CryptoKit4P521O7SigningO10PrivateKeyVMn', 
@@ -530,6 +550,7 @@ exports:
                        '_$s9CryptoKit4P521O7SigningO9PublicKeyV21compactRepresentation10Foundation4DataVSgvg', 
                        '_$s9CryptoKit4P521O7SigningO9PublicKeyV21compactRepresentation10Foundation4DataVSgvpMV', 
                        '_$s9CryptoKit4P521O7SigningO9PublicKeyV21compactRepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 
+                       '_$s9CryptoKit4P521O7SigningO9PublicKeyV22keyFromDiversification4with19seedExtractionLabelAG10Foundation4DataV_AMtF', 
                        '_$s9CryptoKit4P521O7SigningO9PublicKeyV24compressedRepresentation10Foundation4DataVvg', 
                        '_$s9CryptoKit4P521O7SigningO9PublicKeyV24compressedRepresentation10Foundation4DataVvpMV', 
                        '_$s9CryptoKit4P521O7SigningO9PublicKeyV24compressedRepresentationAGx_tKc10Foundation15ContiguousBytesRzlufC', 

@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           57F9DA78-22BA-32EA-92FC-1788EC98B6D6
+    value:           3936EF17-D4D4-3701-B2D5-B8A93EF476FC
   - target:          x86_64-maccatalyst
-    value:           57F9DA78-22BA-32EA-92FC-1788EC98B6D6
+    value:           3936EF17-D4D4-3701-B2D5-B8A93EF476FC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B5DCBCD4-FAB5-3AF5-9E72-695E0B741320
+    value:           87D4CDFB-0777-3F89-8169-23B825CE3493
   - target:          arm64e-maccatalyst
-    value:           B5DCBCD4-FAB5-3AF5-9E72-695E0B741320
+    value:           87D4CDFB-0777-3F89-8169-23B825CE3493
 install-name:    '/System/Library/PrivateFrameworks/SDAPI.framework/Versions/A/SDAPI'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SDApi_HasErrored, _SDApi_Initialize, _SDParamSetHolder_Delete, 
                        _SDParamSetHolder_NewFromFile, _SDParamSetParam_GetHandle, 
                        _SDParamSetParam_GetType, _SDParamSetParam_SetBoolValue, _SDParamSetParam_SetDoubleValue, 

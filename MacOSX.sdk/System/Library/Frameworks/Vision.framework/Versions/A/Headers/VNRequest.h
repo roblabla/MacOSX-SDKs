@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @abstract A block that is executed at the completion of a request.
+ @discussion The completion handler is called for each request when it is finished processing, before the performRequests call returns. When an array of multiple requests is executed with one performRequests call, each request's completion handler is invoked when that request has finished its processing. This invocation may therefore occur while other requests in the array are either still executing or waiting for execution. This allows, for example, UI to be updated while the first tasks are complete instead of having to wait that all requests have to finish. Note, however, that performRequests is not an asynchronous method, for which completion handlers are most typically used
  @param request The VNRequest that has been completed. The results of the request if no error was encountered are populated in the results array of the request.
  @param	error The error that caused the request to fail, or nil if completed successfully.
  */
@@ -93,7 +94,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 /*! @abstract Provides the revision of the request that was latest for the particular SDK that was linked with the client application. */
 @property (class, readonly, nonatomic, assign) NSUInteger defaultRevision API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0));
 
-/*! @abstract Provides the current revison supported by the request. */
+/*! @abstract Provides the current revision supported by the request. */
 @property (class, readonly, nonatomic, assign) NSUInteger currentRevision API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0));
 
 /*!

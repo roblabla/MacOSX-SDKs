@@ -8,7 +8,7 @@
 #import <Foundation/NSIndexSet.h>
 #import <Foundation/NSEnumerator.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// Options supported by methods that produce difference objects.
 typedef NS_OPTIONS(NSUInteger, NSOrderedCollectionDifferenceCalculationOptions) {
@@ -77,4 +77,4 @@ API_AVAILABLE(macosx(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

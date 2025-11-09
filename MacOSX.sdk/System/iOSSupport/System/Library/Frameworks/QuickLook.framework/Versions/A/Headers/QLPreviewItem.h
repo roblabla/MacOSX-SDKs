@@ -1,3 +1,4 @@
+#if (defined(USE_PUBLIC_QUICKLOOKUICORE_HEADERS) && USE_PUBLIC_QUICKLOOKUICORE_HEADERS) || !__has_include(<QuickLookUICore/QLPreviewItem.h>)
 //
 //  QLPreviewItem.h
 //  Quick Look
@@ -38,3 +39,7 @@ QL_EXPORT @protocol QLPreviewItem <NSObject>
  */
 @interface NSURL (QLPreviewConvenienceAdditions) <QLPreviewItem>
 @end
+
+#else
+#import <QuickLookUICore/QLPreviewItem.h>
+#endif

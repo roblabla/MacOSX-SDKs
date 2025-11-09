@@ -10,12 +10,13 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIView;
 @class UIImage;
 @class UIColor;
 @class UIFont;
+@class UIMenu;
 
 typedef NS_ENUM(NSInteger, UICellAccessoryDisplayedState) {
     /// The accessory is always displayed.
@@ -152,6 +153,25 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI
 @end
 
 
+/// Up/down chevrons that indicate a tap anywhere in the cell presents a pop-up menu.
+UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
+@interface UICellAccessoryPopUpMenu : UICellAccessory
+
+/// Creates a new pop-up menu accessory using the provided menu.
+- (instancetype)initWithMenu:(UIMenu *)menu NS_DESIGNATED_INITIALIZER;
+
+@property (nonatomic, copy, readonly) UIMenu *menu;
+
+/// An optional handler to call when the selected element in the menu changes.
+@property (nonatomic, copy, nullable) void (^selectedElementDidChangeHandler)(UIMenu *menu);
+
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+
 /// A label displaying a short string of text, typically a small number such as a count for the associated item.
 UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @interface UICellAccessoryLabel : UICellAccessory
@@ -182,7 +202,7 @@ typedef NS_ENUM(NSInteger, UICellAccessoryPlacement) {
 } API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
 /// Return an index to insert the accessory at, given an array of the existing accessories on the edge (in leading to trailing order).
-typedef NSUInteger (^UICellAccessoryPosition)(NSArray<__kindof UICellAccessory *> *accessories) API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+typedef NSUInteger (^/*NS_SWIFT_SENDABLE*/ UICellAccessoryPosition)(NSArray<__kindof UICellAccessory *> *accessories) API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
 /// Positions the accessory before the accessory matching the class specified, or at the beginning if not found.
 UIKIT_EXTERN UICellAccessoryPosition UICellAccessoryPositionBeforeAccessoryOfClass(Class accessoryClass) API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
@@ -214,7 +234,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UICellAccessory.h>

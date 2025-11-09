@@ -24,7 +24,7 @@
 
 @protocol NSURLConnectionDelegate;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*** DEPRECATED: The NSURLConnection class should no longer be used.  NSURLSession is the replacement for NSURLConnection ***/
 
@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 
         A terminal condition produced by the loader will result in a
         connection:didFailWithError: in the case of an error, or
-        connectiondidFinishLoading: or connectionDidFinishDownloading:
+        connectionDidFinishLoading: or connectionDidFinishDownloading:
         delegate message.<p>
 
         The -cancel message hints to the loader that a resource load
@@ -192,12 +192,12 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
                     of authentication challenges.
 
                     connection:canAuthenticateAgainstProtectionSpace:
-                    connection:didReciveAuthenticationChallenge:
+                    connection:didReceiveAuthenticationChallenge:
                     connection:didCancelAuthenticationChallenge: are
-                    deprected and new code should adopt
+                    deprecated and new code should adopt
                     connection:willSendRequestForAuthenticationChallenge.
                     The older delegates will still be called for
-                    compatability, but incur more latency in dealing
+                    compatibility, but incur more latency in dealing
                     with the authentication challenge.
 */
 API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
@@ -457,4 +457,4 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
            
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

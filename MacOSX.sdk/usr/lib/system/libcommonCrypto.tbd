@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C36DA5CF-B8E6-36C1-98EF-FF138B438EE0
+    value:           DD06A475-50C9-3264-BAD5-479DA5E8B327
   - target:          x86_64-maccatalyst
-    value:           C36DA5CF-B8E6-36C1-98EF-FF138B438EE0
+    value:           DD06A475-50C9-3264-BAD5-479DA5E8B327
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5AAADB40-420D-326A-AC38-CFE1D81DA1E5
+    value:           7510671C-686A-339D-8F50-B95BFA5D8F10
   - target:          arm64e-maccatalyst
-    value:           5AAADB40-420D-326A-AC38-CFE1D81DA1E5
+    value:           7510671C-686A-339D-8F50-B95BFA5D8F10
 install-name:    '/usr/lib/system/libcommonCrypto.dylib'
-current-version: 60191.100.1
+current-version: 60198.40.3
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CCAESCmac, _CCAESCmacCreate, _CCAESCmacDestroy, _CCAESCmacFinal, 
                        _CCAESCmacOutputSizeFromContext, _CCAESCmacUpdate, _CCBigNumAdd, 
                        _CCBigNumAddI, _CCBigNumBitCount, _CCBigNumByteCount, _CCBigNumClear, 

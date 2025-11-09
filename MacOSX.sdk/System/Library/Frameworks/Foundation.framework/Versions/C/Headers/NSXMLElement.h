@@ -6,7 +6,7 @@
 
 @class NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSMutableArray, NSEnumerator, NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*!
     @class NSXMLElement
@@ -204,4 +204,4 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setAttributesAsDictionary:(NSDictionary *)attributes API_DEPRECATED_WITH_REPLACEMENT("setAttributesWithDictionary:", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

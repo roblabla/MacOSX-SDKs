@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1FC8A643-D967-3B18-BB1B-711178FA9EF4
+    value:           361735E7-311D-3D8D-BFF7-643C5A48CD23
   - target:          x86_64-maccatalyst
-    value:           1FC8A643-D967-3B18-BB1B-711178FA9EF4
+    value:           361735E7-311D-3D8D-BFF7-643C5A48CD23
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FADF961A-6A0A-3FF6-912C-1035ACA2D410
+    value:           D9D05E11-F197-3B32-A917-3D5E686A74C1
   - target:          arm64e-maccatalyst
-    value:           FADF961A-6A0A-3FF6-912C-1035ACA2D410
+    value:           D9D05E11-F197-3B32-A917-3D5E686A74C1
 install-name:    '/System/Library/PrivateFrameworks/CPMLBestShim.framework/Versions/A/CPMLBestShim'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _kCPMLAppTitle, _kCPMLAppType, _kCPMLAppUsageTime, _kCPMLBTCondition, 
                        _kCPMLBundleID, _kCPMLChangeCount, _kCPMLConfidence, _kCPMLConnectStatus, 
                        _kCPMLDeviceType, _kCPMLEmergenceHalfLife, _kCPMLEmergenceTime, 

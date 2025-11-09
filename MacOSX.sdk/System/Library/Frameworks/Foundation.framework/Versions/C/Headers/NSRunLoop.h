@@ -8,14 +8,14 @@
 
 @class NSTimer, NSPort, NSArray<ObjectType>, NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 FOUNDATION_EXPORT NSRunLoopMode const NSDefaultRunLoopMode;
 FOUNDATION_EXPORT NSRunLoopMode const NSRunLoopCommonModes API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 @interface NSRunLoop : NSObject
 
-@property (class, readonly, strong) NSRunLoop *currentRunLoop;
+@property (class, readonly, strong) NSRunLoop *currentRunLoop NS_SWIFT_UNAVAILABLE_FROM_ASYNC("currentRunLoop cannot be used from async contexts.");
 @property (class, readonly, strong) NSRunLoop *mainRunLoop API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 @property (nullable, readonly, copy) NSRunLoopMode currentMode;
@@ -28,15 +28,18 @@ FOUNDATION_EXPORT NSRunLoopMode const NSRunLoopCommonModes API_AVAILABLE(macos(1
 - (void)removePort:(NSPort *)aPort forMode:(NSRunLoopMode)mode;
 
 - (nullable NSDate *)limitDateForMode:(NSRunLoopMode)mode;
-- (void)acceptInputForMode:(NSRunLoopMode)mode beforeDate:(NSDate *)limitDate;
+
+- (void)acceptInputForMode:(NSRunLoopMode)mode beforeDate:(NSDate *)limitDate NS_SWIFT_UNAVAILABLE_FROM_ASYNC("acceptInput(for:before:) cannot be used from async contexts.");
 
 @end
 
 @interface NSRunLoop (NSRunLoopConveniences)
 
-- (void)run; 
-- (void)runUntilDate:(NSDate *)limitDate;
-- (BOOL)runMode:(NSRunLoopMode)mode beforeDate:(NSDate *)limitDate;
+- (void)run NS_SWIFT_UNAVAILABLE_FROM_ASYNC("run cannot be used from async contexts.");
+
+- (void)runUntilDate:(NSDate *)limitDate NS_SWIFT_UNAVAILABLE_FROM_ASYNC("run(until:) cannot be used from async contexts.");
+
+- (BOOL)runMode:(NSRunLoopMode)mode beforeDate:(NSDate *)limitDate NS_SWIFT_UNAVAILABLE_FROM_ASYNC("run(_:before:) cannot be used from async contexts.");
 
 #if TARGET_OS_OSX
 - (void)configureAsServer API_DEPRECATED("Not supported", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
@@ -45,11 +48,11 @@ FOUNDATION_EXPORT NSRunLoopMode const NSRunLoopCommonModes API_AVAILABLE(macos(1
 /// Schedules the execution of a block on the target run loop in given modes.
 /// - parameter: modes   An array of input modes for which the block may be executed.
 /// - parameter: block   The block to execute
-- (void)performInModes:(NSArray<NSRunLoopMode> *)modes block:(void (^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+- (void)performInModes:(NSArray<NSRunLoopMode> *)modes block:(void (NS_SWIFT_SENDABLE ^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /// Schedules the execution of a block on the target run loop.
 /// - parameter: block   The block to execute
-- (void)performBlock:(void (^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+- (void)performBlock:(void (NS_SWIFT_SENDABLE ^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 @end
 
@@ -72,4 +75,4 @@ FOUNDATION_EXPORT NSRunLoopMode const NSRunLoopCommonModes API_AVAILABLE(macos(1
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

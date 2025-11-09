@@ -2,7 +2,7 @@
  *  CTFontDescriptor.h
  *  CoreText
  *
- *  Copyright (c) 2006-2020 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2022 Apple Inc. All rights reserved.
  *
  */
 
@@ -97,6 +97,8 @@ CT_EXPORT const CFStringRef kCTFontVariationAttribute CT_AVAILABLE(macos(10.5), 
 /*!
     @defined    kCTFontVariationAxesAttribute
     @discussion An array of variation axis dictionaries or null if the font does not support variations. Each variation axis dictionary contains the five kCTFontVariationAxis* keys.
+                Before macOS 13.0 and iOS 16.0 this attribute is not accurate and CTFontCopyVariationAxes() should be used instead.
+    @seealso    CTFontCopyVariationAxes
 */
 CT_EXPORT const CFStringRef kCTFontVariationAxesAttribute CT_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 /*!

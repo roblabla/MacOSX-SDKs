@@ -42,15 +42,15 @@ API_AVAILABLE(macos(10.10))
 
 /* Subclasses should override this to do any necessary work preparing for the destination ViewController or WindowController.
  */
-- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(nullable id)sender API_AVAILABLE(macos(10.10));
+- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(nullable id)sender NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.10));
 
 /* Performs the identified Segue created from this WindowController. Throws exception if identifier is nil or not associated with the receiver.
  */
-- (void)performSegueWithIdentifier:(NSStoryboardSegueIdentifier)identifier sender:(nullable id)sender API_AVAILABLE(macos(10.10));
+- (void)performSegueWithIdentifier:(NSStoryboardSegueIdentifier)identifier sender:(nullable id)sender NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.10));
 
 /* Invoked immediately prior to initiating a segue. Return NO to prevent the segue from firing. The default implementations in NSViewController and NSWindowController return YES. This method is invoked when -performSegueWithIdentifier:sender: is used.
  */
-- (BOOL)shouldPerformSegueWithIdentifier:(NSStoryboardSegueIdentifier)identifier sender:(nullable id)sender API_AVAILABLE(macos(10.10));
+- (BOOL)shouldPerformSegueWithIdentifier:(NSStoryboardSegueIdentifier)identifier sender:(nullable id)sender NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.10));
 
 @end
 

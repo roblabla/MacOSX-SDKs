@@ -8,6 +8,7 @@
 #import <CarPlay/CPTemplate.h>
 #import <CarPlay/CPPointOfInterest.h>
 #import <MapKit/MKGeometry.h>
+#import <CarPlay/CPBarButtonProviding.h>
 
 @class CPPointOfInterestTemplate;
 
@@ -32,7 +33,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @end
 
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
-@interface CPPointOfInterestTemplate : CPTemplate
+@interface CPPointOfInterestTemplate : CPTemplate <CPBarButtonProviding>
 
 /**
  CPPointOfInterestTemplate displays a map view with selectable points of interest.

@@ -11,7 +11,7 @@
 #import <UIKit/UIColor.h>
 #import <UIKit/UICollectionLayoutList.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIVisualEffect;
 
@@ -61,7 +61,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.5), watchos(7.4)) API_UNAVAILABLE(tvos) NS_SWI
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIListSeparatorConfiguration.h>

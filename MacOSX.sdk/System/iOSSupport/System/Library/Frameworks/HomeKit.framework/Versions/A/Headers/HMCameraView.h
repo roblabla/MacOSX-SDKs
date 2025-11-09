@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 HM_EXTERN API_AVAILABLE(ios(10.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos)
-@interface HMCameraView : UIView
+    @interface HMCameraView : UIView
 
 /*!
  * @brief Represents the camera source.

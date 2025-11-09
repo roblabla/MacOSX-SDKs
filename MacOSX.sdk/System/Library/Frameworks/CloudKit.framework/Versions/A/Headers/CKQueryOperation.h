@@ -63,11 +63,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  *  If the replacement callback @c recordMatchedBlock is set, this callback block is ignored.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
  */
-@property (nonatomic, copy, nullable) void (^recordFetchedBlock)(CKRecord *record)
-
-    API_DEPRECATED("Use recordMatchedBlock instead, which surfaces per-record errors", macos(10.10, 12.0), ios(8.0, 15.0), tvos(9.0, 15.0), watchos(3.0, 8.0));
-
-
+@property (nonatomic, copy, nullable) void (^recordFetchedBlock)(CKRecord *record) API_DEPRECATED("Use recordMatchedBlock instead, which surfaces per-record errors", macos(10.10, 12.0), ios(8.0, 15.0), tvos(9.0, 15.0), watchos(3.0, 8.0));
 
 /*! @abstract This block will be called once for every record that is returned as a result of the query.
  *

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           13976DCD-431D-3097-A59C-DA64CE9FF884
+    value:           0EB1E60A-9739-363E-9446-C3CBAAC70B66
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A8641DD1-9E6D-3AE2-8571-ABC80699B38D
+    value:           0246F233-E082-39FF-9D58-17528CDAA0C1
 install-name:    '/System/Library/PrivateFrameworks/Hydra.framework/Versions/C/Libraries/libAlembic.1.7.10.dylib'
 current-version: 1.7.10
 compatibility-version: 1.7
@@ -276,7 +276,7 @@ exports:
                        __ZTSNSt3__123enable_shared_from_thisIN7Alembic12AbcCoreOgawa3v117SprImplEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN7Alembic12AbcCoreOgawa3v117SpwImplEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN7Alembic15AbcCoreAbstract3v1120ReadArraySampleCacheEEE ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __Z13iex_debugTrapv, __Z9printBitsPc4half, __Z9printBitsPcf, 
                        __Z9printBitsRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEE4half, 
                        __Z9printBitsRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEEf, 

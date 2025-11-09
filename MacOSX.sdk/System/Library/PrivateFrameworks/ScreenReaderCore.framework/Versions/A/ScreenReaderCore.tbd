@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B5BCD3EB-C3D2-328A-9B77-DBA4E464A54F
+    value:           FF770252-A8E2-3343-AB24-8B3D593DB259
   - target:          x86_64-maccatalyst
-    value:           B5BCD3EB-C3D2-328A-9B77-DBA4E464A54F
+    value:           FF770252-A8E2-3343-AB24-8B3D593DB259
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C5C04C20-3DBE-37C0-B6D3-CE4B758CCFC8
+    value:           1B1DAAD6-8652-3E6C-913F-1C46726D86D8
   - target:          arm64e-maccatalyst
-    value:           C5C04C20-3DBE-37C0-B6D3-CE4B758CCFC8
+    value:           1B1DAAD6-8652-3E6C-913F-1C46726D86D8
 install-name:    '/System/Library/PrivateFrameworks/ScreenReaderCore.framework/Versions/A/ScreenReaderCore'
 current-version: 390
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SCRCAddInformationToCrashTracerLog, _SCRCArgumentParserRunWithClassName, 
                        _SCRCCGFloatAlmostEqual, _SCRCCopyStringToUChar32Array, _SCRCCopyStringToUniCharArray, 
                        _SCRCDebugPrint, _SCRCDebugPrintToFile, _SCRCDoubleAlmostEqual, 
@@ -112,23 +112,26 @@ exports:
                        _kSCRCUserDefaultsAudioDuckingDuckLevel, _kSCRCUserDefaultsAudioDuckingEnabled, 
                        _kSCRCUserDefaultsAudioDuckingRampIn, _kSCRCUserDefaultsAudioDuckingRampOut, 
                        _kSCRCUserDefaultsAudioDuckingRampOutDelay, _kSCRCUserDefaultsAutoDrillContainersEnabled, 
-                       _kSCRCUserDefaultsAutomaticallySpeakWebPage, _kSCRCUserDefaultsAutomaticallySpeakWebPageSummary, 
-                       _kSCRCUserDefaultsBrailleAlertTimeoutInSeconds, _kSCRCUserDefaultsBrailleAutoAdvanceDuration, 
-                       _kSCRCUserDefaultsBrailleAutomaticTranslationEnabled, _kSCRCUserDefaultsBrailleBluetoothDisplay, 
-                       _kSCRCUserDefaultsBrailleContractionMode, _kSCRCUserDefaultsBrailleDisplayExtendedMainStatus, 
-                       _kSCRCUserDefaultsBrailleDisplayExtendedTextStatus, _kSCRCUserDefaultsBrailleDisplayInputAccessMode, 
-                       _kSCRCUserDefaultsBrailleDisplayInputIdentifiers, _kSCRCUserDefaultsBrailleDisplayMainStatus, 
-                       _kSCRCUserDefaultsBrailleDisplayTextStatus, _kSCRCUserDefaultsBrailleEightDotMode, 
-                       _kSCRCUserDefaultsBrailleInputMode, _kSCRCUserDefaultsBrailleKeyDebounceTimeout, 
-                       _kSCRCUserDefaultsBrailleMasterStatusCellIndex, _kSCRCUserDefaultsBrailleOutputMode, 
+                       _kSCRCUserDefaultsAutoKeyboardSyncInTables, _kSCRCUserDefaultsAutoKeyboardSyncInText, 
+                       _kSCRCUserDefaultsAutoKeyboardSyncInUI, _kSCRCUserDefaultsAutomaticallySpeakWebPage, 
+                       _kSCRCUserDefaultsAutomaticallySpeakWebPageSummary, _kSCRCUserDefaultsBrailleAlertTimeoutInSeconds, 
+                       _kSCRCUserDefaultsBrailleAutoAdvanceDuration, _kSCRCUserDefaultsBrailleAutomaticTranslationEnabled, 
+                       _kSCRCUserDefaultsBrailleBluetoothDisplay, _kSCRCUserDefaultsBrailleContractionMode, 
+                       _kSCRCUserDefaultsBrailleDisplayExtendedMainStatus, _kSCRCUserDefaultsBrailleDisplayExtendedTextStatus, 
+                       _kSCRCUserDefaultsBrailleDisplayInputAccessMode, _kSCRCUserDefaultsBrailleDisplayInputIdentifiers, 
+                       _kSCRCUserDefaultsBrailleDisplayMainStatus, _kSCRCUserDefaultsBrailleDisplayTextStatus, 
+                       _kSCRCUserDefaultsBrailleEightDotMode, _kSCRCUserDefaultsBrailleFollowSpeedVerbosity, 
+                       _kSCRCUserDefaultsBrailleHasDisplayHistory, _kSCRCUserDefaultsBrailleInputMode, 
+                       _kSCRCUserDefaultsBrailleKeyDebounceTimeout, _kSCRCUserDefaultsBrailleMasterStatusCellIndex, 
+                       _kSCRCUserDefaultsBrailleOutputMode, _kSCRCUserDefaultsBraillePanWithTextCursorEnabled, 
                        _kSCRCUserDefaultsBrailleShowDotsSevenAndEight, _kSCRCUserDefaultsBrailleTableGuideItems, 
-                       _kSCRCUserDefaultsBrailleTableIdentifier, _kSCRCUserDefaultsBrailleVirtualStatusAlignment, 
-                       _kSCRCUserDefaultsBrailleWordWrapEnabled, _kSCRCUserDefaultsCacheAudiographDisplayTemporary, 
-                       _kSCRCUserDefaultsCacheAudiographIsDisplayingTemporary, _kSCRCUserDefaultsCacheElementDictionaryTemporary, 
-                       _kSCRCUserDefaultsCachePortablePreferencesDictionary, _kSCRCUserDefaultsCacheScreenCurtainState, 
-                       _kSCRCUserDefaultsCategoryContent_CategoryIsEnabled, _kSCRCUserDefaultsCategoryContent_IntonationAsPercent, 
-                       _kSCRCUserDefaultsCategoryContent_PitchAsPercent, _kSCRCUserDefaultsCategoryContent_RateAsPercent, 
-                       _kSCRCUserDefaultsCategoryContent_SupportTemporarySpeechParameterChange, 
+                       _kSCRCUserDefaultsBrailleTableIdentifier, _kSCRCUserDefaultsBrailleTurnPageWhenPanning, 
+                       _kSCRCUserDefaultsBrailleVirtualStatusAlignment, _kSCRCUserDefaultsBrailleWordWrapEnabled, 
+                       _kSCRCUserDefaultsCacheAudiographDisplayTemporary, _kSCRCUserDefaultsCacheAudiographIsDisplayingTemporary, 
+                       _kSCRCUserDefaultsCacheElementDictionaryTemporary, _kSCRCUserDefaultsCachePortablePreferencesDictionary, 
+                       _kSCRCUserDefaultsCacheScreenCurtainState, _kSCRCUserDefaultsCategoryContent_CategoryIsEnabled, 
+                       _kSCRCUserDefaultsCategoryContent_IntonationAsPercent, _kSCRCUserDefaultsCategoryContent_PitchAsPercent, 
+                       _kSCRCUserDefaultsCategoryContent_RateAsPercent, _kSCRCUserDefaultsCategoryContent_SupportTemporarySpeechParameterChange, 
                        _kSCRCUserDefaultsCategoryContent_VoiceIdentifier, _kSCRCUserDefaultsCategoryContent_VoiceUseCustomizedVoiceSettings, 
                        _kSCRCUserDefaultsCategoryContent_VolumeAsPercent, _kSCRCUserDefaultsCategoryElementType_CategoryIsEnabled, 
                        _kSCRCUserDefaultsCategoryElementType_IntonationAsPercent, 
@@ -149,6 +152,7 @@ exports:
                        _kSCRCUserDefaultsCategorySystemWide_BrailleComponentSettings, 
                        _kSCRCUserDefaultsCategorySystemWide_CategoryIsEnabled, _kSCRCUserDefaultsCategorySystemWide_DeleteCharacterMode, 
                        _kSCRCUserDefaultsCategorySystemWide_DisableSound, _kSCRCUserDefaultsCategorySystemWide_DisableSpeech, 
+                       _kSCRCUserDefaultsCategorySystemWide_IndentationLevel, _kSCRCUserDefaultsCategorySystemWide_IndentationWidth, 
                        _kSCRCUserDefaultsCategorySystemWide_IntonationAsPercent, 
                        _kSCRCUserDefaultsCategorySystemWide_LinkAttributeDescriptionLevel, 
                        _kSCRCUserDefaultsCategorySystemWide_MisspelledWordsDescriptionLevel, 
@@ -157,8 +161,8 @@ exports:
                        _kSCRCUserDefaultsCategorySystemWide_PunctuationRepeatLimit, 
                        _kSCRCUserDefaultsCategorySystemWide_PunctuationRepeatMode, 
                        _kSCRCUserDefaultsCategorySystemWide_PunctuationVerbosenessLevel, 
-                       _kSCRCUserDefaultsCategorySystemWide_RateAsPercent, _kSCRCUserDefaultsCategorySystemWide_SoundVolume, 
-                       _kSCRCUserDefaultsCategorySystemWide_SupportTemporarySpeechParameterChange, 
+                       _kSCRCUserDefaultsCategorySystemWide_RateAsPercent, _kSCRCUserDefaultsCategorySystemWide_RepeatedSpaces, 
+                       _kSCRCUserDefaultsCategorySystemWide_SoundVolume, _kSCRCUserDefaultsCategorySystemWide_SupportTemporarySpeechParameterChange, 
                        _kSCRCUserDefaultsCategorySystemWide_TableHeadersLevel, _kSCRCUserDefaultsCategorySystemWide_TextAttributesDescriptionLevel, 
                        _kSCRCUserDefaultsCategorySystemWide_UpperCaseCharacterInWordMode, 
                        _kSCRCUserDefaultsCategorySystemWide_UpperCaseCharacterMode, 
@@ -181,6 +185,7 @@ exports:
                        _kSCRCUserDefaultsCategoryTitle_VoiceIdentifier, _kSCRCUserDefaultsCategoryTitle_VoiceUseCustomizedVoiceSettings, 
                        _kSCRCUserDefaultsCategoryTitle_VolumeAsPercent, _kSCRCUserDefaultsContextualHelpDelayInSeconds, 
                        _kSCRCUserDefaultsCurrentProfile, _kSCRCUserDefaultsCurrentlySelectedSpeechAttributeType, 
+                       _kSCRCUserDefaultsCurrentlySelectedTextCheckerRotorIndex, 
                        _kSCRCUserDefaultsCurrentlySelectedVerbosityRotorIndex, _kSCRCUserDefaultsCursorTrackingEnabled, 
                        _kSCRCUserDefaultsCursorTrackingKBToVO, _kSCRCUserDefaultsCursorTrackingMToVO, 
                        _kSCRCUserDefaultsCursorTrackingTXTToVO, _kSCRCUserDefaultsCursorTrackingVOToKB, 
@@ -197,9 +202,10 @@ exports:
                        _kSCRCUserDefaultsDontSpeakWebTableRowColumnIndices, _kSCRCUserDefaultsEchoLockKeysEnabled, 
                        _kSCRCUserDefaultsEchoModifierKeysEnabled, _kSCRCUserDefaultsElementDictionaryEnabled, 
                        _kSCRCUserDefaultsEnableAppleScript, _kSCRCUserDefaultsEndToEndWrappingAllowed, 
-                       _kSCRCUserDefaultsFKNHotKeySettings, _kSCRCUserDefaultsFKNKeyboardMode, 
-                       _kSCRCUserDefaultsFastSearchCommandKey, _kSCRCUserDefaultsFastSearchEnabled, 
-                       _kSCRCUserDefaultsGestureCommanderCursorTrackingMToVO, _kSCRCUserDefaultsGestureCommanderCursorTrackingSelectionToVO, 
+                       _kSCRCUserDefaultsExperimentalKeyboardSync, _kSCRCUserDefaultsFKNHotKeySettings, 
+                       _kSCRCUserDefaultsFKNKeyboardMode, _kSCRCUserDefaultsFastSearchCommandKey, 
+                       _kSCRCUserDefaultsFastSearchEnabled, _kSCRCUserDefaultsGestureCommanderCursorTrackingMToVO, 
+                       _kSCRCUserDefaultsGestureCommanderCursorTrackingSelectionToVO, 
                        _kSCRCUserDefaultsGestureCommanderDelayForNothingSound, _kSCRCUserDefaultsGestureCommanderEnabled, 
                        _kSCRCUserDefaultsGestureCommanderFlickSpeed, _kSCRCUserDefaultsGestureCommanderOnlySpeakWhenTouching, 
                        _kSCRCUserDefaultsGestureCommanderReverseScroll, _kSCRCUserDefaultsGestureCommanderTapDragEnabled, 

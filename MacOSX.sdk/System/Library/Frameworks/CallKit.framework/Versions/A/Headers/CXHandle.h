@@ -14,9 +14,9 @@ typedef NS_ENUM(NSInteger, CXHandleType) {
     CXHandleTypeGeneric = 1,
     CXHandleTypePhoneNumber = 2,
     CXHandleTypeEmailAddress = 3,
-} API_AVAILABLE(ios(10.0), macCatalyst(13.0))  API_UNAVAILABLE(macos, tvos, watchos);
+} API_AVAILABLE(ios(10.0), macCatalyst(13.0), watchos(9.0))  API_UNAVAILABLE(macos, tvos);
 
-CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0))  API_UNAVAILABLE(macos, tvos, watchos)
+CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), watchos(9.0))  API_UNAVAILABLE(macos, tvos)
 @interface CXHandle : NSObject <NSCopying, NSSecureCoding>
 
 @property (nonatomic, readonly) CXHandleType type;

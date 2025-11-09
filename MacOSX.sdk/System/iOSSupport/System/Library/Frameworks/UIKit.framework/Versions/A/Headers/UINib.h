@@ -10,7 +10,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UINibLoading.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
     
 UIKIT_EXTERN API_AVAILABLE(ios(4.0)) NS_SWIFT_UI_ACTOR
 @interface UINib : NSObject 
@@ -29,7 +29,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(4.0)) NS_SWIFT_UI_ACTOR
 - (NSArray *)instantiateWithOwner:(nullable id)ownerOrNil options:(nullable NSDictionary<UINibOptionsKey, id> *)optionsOrNil;
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UINib.h>

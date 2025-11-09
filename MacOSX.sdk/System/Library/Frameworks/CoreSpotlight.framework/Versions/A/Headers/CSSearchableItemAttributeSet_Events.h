@@ -7,6 +7,7 @@
 
 #import <CoreSpotlight/CSSearchableItemAttributeSet.h>
 
+CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet (CSEvents)
 
 //Date this item is due.

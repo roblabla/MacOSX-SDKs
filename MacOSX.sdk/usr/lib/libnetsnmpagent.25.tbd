@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           44B6CC90-97F4-3AC8-AD66-ECFA2CC24B07
+    value:           53CFBEE6-FA5F-3E84-A77C-CE71424BD1BB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5E1A83F6-0259-3063-9E5A-C8F549B759E2
+    value:           B764432D-F337-3509-8F1C-6CEF30B40508
 install-name:    '/usr/lib/libnetsnmpagent.25.dylib'
 current-version: 26.2
 compatibility-version: 26
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __init_default_iquery_session, __netsnmp_stash_cache_free, 
                        __netsnmp_stash_cache_load, __netsnmp_tdata_generate_index_oid, 
                        __netsnmp_tdata_helper_handler, __tweak_default_iquery_session, 

@@ -27,10 +27,6 @@ typedef enum {
 } CalSpan NS_ENUM_DEPRECATED_MAC(10_5, 10_8);
 
 @interface CalCalendarStore : NSObject
-{
-    @private
-    void *_reserved;
-}
 
 //  Returns an instance of the calendar store.
 

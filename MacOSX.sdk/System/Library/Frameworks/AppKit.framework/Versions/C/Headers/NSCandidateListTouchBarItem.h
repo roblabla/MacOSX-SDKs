@@ -66,16 +66,16 @@ API_UNAVAILABLE(macCatalyst)
 @optional
 
 // Invoked when user touches down on a candidate in the bar.
-- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem beginSelectingCandidateAtIndex:(NSInteger)index API_AVAILABLE(macos(10.12.2)) API_UNAVAILABLE(macCatalyst);
+- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem beginSelectingCandidateAtIndex:(NSInteger)index NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2)) API_UNAVAILABLE(macCatalyst);
 
 // Invoked when user moves from touching one candidate in the bar to another.
-- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem changeSelectionFromCandidateAtIndex:(NSInteger)previousIndex toIndex:(NSInteger)index API_AVAILABLE(macos(10.12.2)) API_UNAVAILABLE(macCatalyst);
+- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem changeSelectionFromCandidateAtIndex:(NSInteger)previousIndex toIndex:(NSInteger)index NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2)) API_UNAVAILABLE(macCatalyst);
 
 // Invoked when user stops touching candidates in the bar. If index==NSNotFound, user didn't select any candidate.
-- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem endSelectingCandidateAtIndex:(NSInteger)index API_AVAILABLE(macos(10.12.2)) API_UNAVAILABLE(macCatalyst);
+- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem endSelectingCandidateAtIndex:(NSInteger)index NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2)) API_UNAVAILABLE(macCatalyst);
 
 // Invoked when -candidateListVisible changed the visibility state.
-- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem changedCandidateListVisibility:(BOOL)isVisible API_AVAILABLE(macos(10.12.2)) API_UNAVAILABLE(macCatalyst);
+- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem changedCandidateListVisibility:(BOOL)isVisible NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2)) API_UNAVAILABLE(macCatalyst);
 @end
 
 @interface NSView (NSCandidateListTouchBarItem)

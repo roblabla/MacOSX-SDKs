@@ -9,6 +9,7 @@
 
 @class INPerson;
 @class INSpeakableString;
+@class INFile;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -46,6 +47,17 @@ API_UNAVAILABLE(macosx, tvos)
 @interface INMessage : NSObject <NSCopying, NSSecureCoding>
 
 - (id)init NS_UNAVAILABLE;
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+            conversationIdentifier:(nullable NSString *)conversationIdentifier
+                           content:(nullable NSString *)content
+                          dateSent:(nullable NSDate *)dateSent
+                            sender:(nullable INPerson *)sender
+                        recipients:(nullable NSArray<INPerson *> *)recipients
+                         groupName:(nullable INSpeakableString *)groupName
+                       messageType:(INMessageType)messageType
+                       serviceName:(nullable NSString *)serviceName
+                  audioMessageFile:(nullable INFile *)audioMessageFile NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(16.0), watchos(9.0)) API_UNAVAILABLE(macos);
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
             conversationIdentifier:(nullable NSString *)conversationIdentifier
@@ -97,6 +109,8 @@ API_UNAVAILABLE(macosx, tvos)
 @property (readonly, NS_NONATOMIC_IOSONLY) INMessageType messageType API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *serviceName API_AVAILABLE(ios(13.2), watchos(6.1)) API_UNAVAILABLE(macosx);
+
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INFile *audioMessageFile;
 
 @end
 

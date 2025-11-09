@@ -2,7 +2,7 @@
 //  VZVirtualMachineConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2019-2021 Apple Inc. All rights reserved.
+//  Copyright © 2019-2022 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -11,8 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class VZAudioDeviceConfiguration;
 @class VZBootLoader;
-@class VZEntropyDeviceConfiguration;
+@class VZConsoleDeviceConfiguration;
 @class VZDirectorySharingDeviceConfiguration;
+@class VZEntropyDeviceConfiguration;
 @class VZGraphicsDeviceConfiguration;
 @class VZKeyboardConfiguration;
 @class VZMemoryBalloonDeviceConfiguration;
@@ -110,6 +111,12 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 @property (readwrite, copy) NSArray<VZAudioDeviceConfiguration *> *audioDevices API_AVAILABLE(macos(12.0));
 
 /*!
+ @abstract List of console devices. Empty by default.
+ @see VZVirtioConsoleDeviceConfiguration
+ */
+@property (readwrite, copy) NSArray<VZConsoleDeviceConfiguration *> *consoleDevices API_AVAILABLE(macos(13.0));
+
+/*!
  @abstract List of directory sharing devices. Empty by default.
  @see VZVirtioFileSystemDeviceConfiguration
  */
@@ -160,6 +167,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 /*!
  @abstract List of pointing devices. Empty by default.
  @see VZUSBScreenCoordinatePointingDeviceConfiguration
+ @see VZMacTrackpadConfiguration
  */
 @property (copy) NSArray<VZPointingDeviceConfiguration *> *pointingDevices API_AVAILABLE(macos(12.0));
 

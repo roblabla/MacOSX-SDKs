@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9B556D79-AE37-3501-8719-2BDA6D4A66D7
+    value:           C36D9D3B-A108-33D4-9374-F28071D66D3D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2963DFEA-62AF-3136-9D6C-9146367E4BE1
+    value:           12BD66E0-A5C0-309B-B85C-7183506250A5
 install-name:    '/usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle/Contents/MacOS/libccid.dylib'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IFDHCloseChannel, _IFDHControl, _IFDHCreateChannel, _IFDHCreateChannelByName, 
                        _IFDHGetCapabilities, _IFDHICCPresence, _IFDHPowerICC, _IFDHSetCapabilities, 
                        _IFDHSetProtocolParameters, _IFDHTransmitToICC, _g_rgSCardRawPci, 

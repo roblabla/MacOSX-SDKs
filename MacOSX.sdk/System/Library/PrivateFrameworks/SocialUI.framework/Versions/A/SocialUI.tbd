@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           56B0139C-56FF-3775-BA85-6A6565A9847B
+    value:           8C7BE55C-358F-33E4-BB7D-9FE59692E64A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7661500C-5D68-33BB-9433-3A02B1467D48
+    value:           674F2A02-8E20-3189-A233-6FB019F8B0B8
 install-name:    '/System/Library/PrivateFrameworks/SocialUI.framework/Versions/A/SocialUI'
 current-version: 5500
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AcknowledgmentPickerDOMProviderMaximumBubbleXPosition, _AcknowledgmentPickerDOMProviderPickerButtonAnimationClass, 
                        _AcknowledgmentPickerDOMProviderPickerButtonContainerElementType, 
                        _AcknowledgmentPickerDOMProviderPickerButtonElementType, _AcknowledgmentPickerDOMProviderPickerButtonGlyphElementType, 

@@ -30,6 +30,7 @@
 
 
 #include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -57,7 +58,7 @@ extern "C" {
 */
 
 
-#define MPCopyrightNotice   "Copyright © 1995-2020 Apple Computer, Inc.\n"
+#define MPCopyrightNotice   "Copyright © 1995-2022 Apple Computer, Inc.\n"
 #define MPLibraryName "MPLibrary"
 #define MPLibraryCName MPLibraryName
 #define MPLibraryPName "\p" MPLibraryName
@@ -68,7 +69,7 @@ enum {
   MPLibrary_MinorVersion        = 3,    /* !  used in the startup check in MPInitializeAPI!*/
   MPLibrary_Release             = 1,
   MPLibrary_DevelopmentRevision = 1
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 
 
@@ -102,13 +103,13 @@ enum {
   kOpaqueAreaID                 = 11,
   kOpaqueNotificationID         = 12,
   kOpaqueConsoleID              = 13
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 typedef UInt32                          MPOpaqueIDClass;
 
 enum {
   kMPNoID                       = kInvalidID /* New code should use kInvalidID everywhere.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 
 typedef OptionBits                      MPTaskOptions;
@@ -126,7 +127,7 @@ enum {
   kDurationForever              = 0x7FFFFFFF,
   kDurationMillisecond          = 1,
   kDurationMicrosecond          = -1
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 
 /*
@@ -184,7 +185,7 @@ enum {
   kMPCreateTaskTakesAllExceptionsMask = 1L << 1,
   kMPCreateTaskNotDebuggableMask = 1L << 2,
   kMPCreateTaskValidOptionsMask = kMPCreateTaskSuspendedMask | kMPCreateTaskTakesAllExceptionsMask | kMPCreateTaskNotDebuggableMask
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 
 /* -------------------------------------------------------------------------------------------*/
@@ -873,7 +874,7 @@ enum {
   kMPPreserveTimerIDMask        = 1L << 0,
   kMPTimeIsDeltaMask            = 1L << 1,
   kMPTimeIsDurationMask         = 1L << 2
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 
 
@@ -1011,7 +1012,7 @@ MPCancelTimer(
 enum {
                                         /* Maximum allocation request size is 1GB.*/
   kMPMaxAllocSize               = 1024L * 1024 * 1024
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 enum {
                                         /* Values for the alignment parameter to MPAllocateAligned.*/
@@ -1026,7 +1027,7 @@ enum {
   kMPAllocateVMXAligned         = kMPAllocateAltiVecAligned, /* The older, common name.*/
   kMPAllocateVMPageAligned      = 254,  /* Pseudo value, converted at runtime.*/
   kMPAllocateInterlockAligned   = 255   /* Pseudo value, converted at runtime.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 
 
@@ -1037,7 +1038,7 @@ enum {
   kMPAllocateResidentMask       = 0x0004, /* Allocate from the RAM-resident pool.*/
   kMPAllocateNoGrowthMask       = 0x0010, /* Do not attempt to grow the pool.*/
   kMPAllocateNoCreateMask       = 0x0020 /* Do not attempt to create the pool if it doesn't exist yet.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 
 /* -------------------------------------------------------------------------------------------*/
@@ -1226,7 +1227,7 @@ enum {
   kMPTaskStateMachine           = 3,    /* The task machine registers*/
   kMPTaskState32BitMemoryException = 4, /* The task memory exception information for 32-bit CPUs.*/
   kMPTaskStateTaskInfo          = 5     /* Static and dynamic information about the task.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 
 
@@ -1239,7 +1240,7 @@ enum {
   kMPTaskPropagateMask          = 1 << kMPTaskPropagate, /* The exception is propagated.*/
   kMPTaskResumeStepMask         = 1 << kMPTaskResumeStep, /* The task is resumed and single step is enabled.*/
   kMPTaskResumeBranchMask       = 1 << kMPTaskResumeBranch /* The task is resumed and branch stepping is enabled.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 
 
@@ -1248,12 +1249,12 @@ enum {
   kMPTaskBlocked                = 0,    /* Task is blocked (queued on resource)*/
   kMPTaskReady                  = 1,    /* Task is runnable*/
   kMPTaskRunning                = 2     /* Task is running*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 enum {
                                         /* For kMPTaskStateTaskInfo, the version of the MPTaskInfo structure requested.*/
   kMPTaskInfoVersion            = 3
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 
 struct MPTaskInfoVersion2 {
@@ -1427,7 +1428,7 @@ enum {
   kMPLowLevelDebugger           = 0x00000000, /* MacsBug-like*/
   kMPMidLevelDebugger           = 0x10000000, /* Jasik-like*/
   kMPHighLevelDebugger          = 0x20000000 /* Metrowerks-like*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 
 
@@ -1483,7 +1484,7 @@ enum {
   kMPOwningProcessRemoteContext = 1,
   kMPInterruptRemoteContext     = 2,
   kMPAsyncInterruptRemoteContext = 3
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 
 
 /*

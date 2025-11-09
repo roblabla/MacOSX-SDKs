@@ -1,18 +1,21 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCompression -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Compression
-// swift-module-flags-ignorable: -user-module-version 2
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-macos13.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCompression -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Compression
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 6
 @_exported import Compression
 import Darwin
 import Foundation
 import Swift
 import _Concurrency
+import _StringProcessing
 @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 public enum Algorithm : Swift.CaseIterable, Swift.RawRepresentable {
   case lzfse
   case zlib
   case lz4
   case lzma
+  case lzbitmap
+  case brotli
   public init?(rawValue: Compression.compression_algorithm)
   public var rawValue: Compression.compression_algorithm {
     get

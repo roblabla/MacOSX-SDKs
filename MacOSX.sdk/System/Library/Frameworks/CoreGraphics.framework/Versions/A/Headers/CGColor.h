@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CF_BRIDGED_TYPE(id) CGColor *CGColorRef;
+typedef struct CF_BRIDGED_TYPE(id) CGColor *CGColorRef; /* Swift Sendable */
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGColorSpace.h>

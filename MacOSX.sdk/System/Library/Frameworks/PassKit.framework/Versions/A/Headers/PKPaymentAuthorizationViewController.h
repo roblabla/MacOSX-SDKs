@@ -23,7 +23,11 @@
 
 #import <PassKit/PKConstants.h>
 #import <PassKit/PKPaymentRequest.h>
+#if TARGET_OS_OSX
 #import <PassKit/PKPaymentAuthorizationViewControllerDelegate.h>
+#else
+#import <PassKit/PKPaymentAuthorizationViewControllerDelegate.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 

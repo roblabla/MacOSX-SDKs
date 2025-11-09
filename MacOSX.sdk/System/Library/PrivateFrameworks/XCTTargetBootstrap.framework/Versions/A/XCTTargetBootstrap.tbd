@@ -4,21 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F474B9FF-DB41-3A81-909A-652BC764E77C
+    value:           F2BB1058-63B2-3DB6-8AC0-911B6AF2D9E0
   - target:          x86_64-maccatalyst
-    value:           F474B9FF-DB41-3A81-909A-652BC764E77C
+    value:           F2BB1058-63B2-3DB6-8AC0-911B6AF2D9E0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E0CE17D2-6499-3C2F-BAE2-51D5A8D8513A
+    value:           BF9EBC25-2584-3E50-8225-7FA2CF5C853A
   - target:          arm64e-maccatalyst
-    value:           E0CE17D2-6499-3C2F-BAE2-51D5A8D8513A
+    value:           BF9EBC25-2584-3E50-8225-7FA2CF5C853A
 install-name:    '/System/Library/PrivateFrameworks/XCTTargetBootstrap.framework/Versions/A/XCTTargetBootstrap'
+current-version: 21240.1.2
+compatibility-version: 0
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _XCTSetSharedDaemonConnectionProvider, _XCTSharedDaemonConnectionProvider, 
                        _XCTTBDefaultLog, _XCTTargetBootstrap ]
     objc-classes:    [ XCTDaemonConnectionProvider, XCTTargetSession ]

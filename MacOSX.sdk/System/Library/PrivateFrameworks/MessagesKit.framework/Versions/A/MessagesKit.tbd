@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           84084E6F-96C2-3FE7-A6A9-32970FE377A2
+    value:           0625CC32-B79F-3A87-84C1-1670A42CFCAD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3CA9BAB1-D8BA-37A4-A85B-E0A84F9B8D5E
+    value:           EB1CFD73-6EDC-3AD6-84C7-9C2351A69DF2
 install-name:    '/System/Library/PrivateFrameworks/MessagesKit.framework/Versions/A/MessagesKit'
 current-version: 800
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SOAccountPropertyIMAccountUniqueIDKey, _SOAlertsAddressMeKey, 
                        _SOAlertsChatGuidKey, _SOAlertsMessageDeliveryErrorKey, _SOAlertsMessageDeliveryErrorNotification, 
                        _SOAlertsMessageGuidKey, _SOAlertsPlaySoundsKey, _SODefaultsChangedKey, 

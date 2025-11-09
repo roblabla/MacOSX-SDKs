@@ -12,10 +12,10 @@
 
 #if TARGET_OS_IOS
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UISearchToken;
-@protocol UISearchTextFieldDelegate;
+@protocol UISearchTextFieldDelegate, UISearchSuggestion;
 
 /// UISearchTextField is the subclass of UITextField used in UISearchBar, and can also be used elsewhere (e.g. as the titleView of a UINavigationItem).
 ///
@@ -69,6 +69,13 @@ UIKIT_CLASS_AVAILABLE_IOS_ONLY(13.0) NS_SWIFT_UI_ACTOR
 /// To support copying tokens, this property must be true and the delegate must provide an item provider for the tokens to be copied. UISearchTextField always enables the Copy command if any plain text is selected, even if the selection also includes tokens and this property is false. Defaults to true.
 @property (nonatomic) BOOL allowsCopyingTokens;
 
+#pragma mark - Suggestions
+
+/// An array of suggestions that will be presented as a menu beneath the search field when nonempty.
+/// Set to nil or @[] to dismiss the menu.
+/// The menu will also dismiss and the property will be set to nil when a suggestion is selected.
+/// The delegate is expected to execute any necessary updating when a suggestion is selected.
+@property (nonatomic, copy, nullable) NSArray <id<UISearchSuggestion>> *searchSuggestions API_AVAILABLE(ios(16.0));
 @end
 
 /// An individual token in a UISearchTextField.
@@ -100,6 +107,8 @@ NS_SWIFT_UI_ACTOR
 /// This method will only be called if either of the field’s allowsCopyingTokens or allowsDeletingTokens properties is true.
 - (NSItemProvider *)searchTextField:(UISearchTextField *)searchTextField itemProviderForCopyingToken:(UISearchToken *)token;
 
+/// searchSuggestions property will be set to nil after sending this message
+- (void)searchTextField:(UISearchTextField *)searchTextField didSelectSuggestion:(id <UISearchSuggestion>)suggestion API_AVAILABLE(ios(16.0));
 @end
 
 /// A protocol that refines UITextPasteItem to support pasting of tokens.
@@ -113,7 +122,7 @@ NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif // TARGET_OS_IOS
 

@@ -20,6 +20,7 @@
 #include <CoreMIDI/MIDIThruConnection.h>
 #include <CoreMIDI/MIDIDriver.h>
 #include <CoreMIDI/MIDIMessages.h>
+#include <CoreMIDI/MIDIBluetoothConnection.h>
 
 #if __OBJC__
 #import <CoreMIDI/MIDINetworkSession.h>

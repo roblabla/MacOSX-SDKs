@@ -1,8 +1,11 @@
 //
 //  PKPaymentButton.h
-//
+//  PassKit
 //  Copyright © 2014 Apple, Inc. All rights reserved.
 //
+
+#ifndef __PKPAYMENTBUTTON_H
+#define __PKPAYMENTBUTTON_H
 
 #import <TargetConditionals.h>
 
@@ -35,3 +38,4 @@ API_AVAILABLE(macos(11.0), ios(8.3))
 @end
 
 NS_ASSUME_NONNULL_END
+#endif

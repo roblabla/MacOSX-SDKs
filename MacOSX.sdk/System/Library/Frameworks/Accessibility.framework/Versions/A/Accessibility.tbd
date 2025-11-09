@@ -4,30 +4,32 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F15F033A-C268-3B12-9F39-27B85B49A1B2
+    value:           FD1445E5-A979-3B95-9619-C0E0F4AD427E
   - target:          x86_64-maccatalyst
-    value:           F15F033A-C268-3B12-9F39-27B85B49A1B2
+    value:           FD1445E5-A979-3B95-9619-C0E0F4AD427E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4F6F9EF3-65C2-345C-8725-E64FABB84A3B
+    value:           A462B2E3-01F3-3489-ADFE-00FFD97BBE1D
   - target:          arm64e-maccatalyst
-    value:           4F6F9EF3-65C2-345C-8725-E64FABB84A3B
+    value:           A462B2E3-01F3-3489-ADFE-00FFD97BBE1D
 install-name:    '/System/Library/Frameworks/Accessibility.framework/Versions/A/Accessibility'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _AXMFiHearingDevicePairedUUIDs, _AXMFiHearingDevicePairedUUIDsDidChangeNotification, 
-                       _AXMFiHearingDeviceStreamingEar, _AXMFiHearingDeviceStreamingEarDidChangeNotification, 
-                       _AXNameFromColor, _AXSupportsBidirectionalAXMFiHearingDeviceStreaming ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _AXApplicationFocusDidChange, _AXApplicationFocusItemFrame, 
+                       _AXApplicationFocusItemLabel, _AXMFiHearingDevicePairedUUIDs, 
+                       _AXMFiHearingDevicePairedUUIDsDidChangeNotification, _AXMFiHearingDeviceStreamingEar, 
+                       _AXMFiHearingDeviceStreamingEarDidChangeNotification, _AXNameFromColor, 
+                       _AXSupportsBidirectionalAXMFiHearingDeviceStreaming ]
     objc-classes:    [ AXBrailleMap, AXCategoricalDataAxisDescriptor, AXCategoricalScale, 
                        AXChartDescriptor, AXCustomContent, AXDataAnnotation, AXDataPoint, 
                        AXDataPointValue, AXDataSeriesDescriptor, AXLiveAudioGraph, 
                        AXNumericDataAxisDescriptor, AXNumericScale, AXScale ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation15AttributeScopesO13AccessibilityE0D10AttributesV010TextCustomB0O12markdownNameSSvgZ', 
                        '_$s10Foundation15AttributeScopesO13AccessibilityE0D10AttributesV010TextCustomB0O4nameSSvgZ', 
                        '_$s10Foundation15AttributeScopesO13AccessibilityE0D10AttributesV010TextCustomB0OAA19AttributedStringKeyADMc', 

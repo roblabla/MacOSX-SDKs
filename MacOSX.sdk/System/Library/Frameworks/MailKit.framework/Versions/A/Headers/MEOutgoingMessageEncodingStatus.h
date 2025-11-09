@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// @brief Contains information about any security measures that will be applied to a mail message when it is sent or any errrors that occurred while verifying security status.
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 @interface MEOutgoingMessageEncodingStatus : NSObject <NSSecureCoding>
 
 /// @brief Whether or not the message can be signed.

@@ -19,7 +19,7 @@
 #import <UIKit/UIDropInteraction.h>
 #import <UIKit/UIContextMenuInteraction.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UITableViewStyle) {
     UITableViewStylePlain,          // regular table view
@@ -138,6 +138,36 @@ NS_SWIFT_UI_ACTOR
 // Called after the user changes the selection.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(3.0));
+
+// Primary Action
+
+/*!
+ * @abstract Called to determine if a primary action can be performed for the row at the given indexPath.
+ * See @c tableView:performPrimaryActionForRowAtIndexPath: for more details about primary actions.
+ *
+ * @param tableView This UITableView
+ * @param indexPath NSIndexPath of the row
+ *
+ * @return `YES` if the primary action can be performed; otherwise `NO`. If not implemented defaults to `YES` when not editing
+ * and `NO` when editing.
+ */
+- (BOOL)tableView:(UITableView *)tableView canPerformPrimaryActionForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+
+/*!
+ * @abstract Called when the primary action should be performed for the row at the given indexPath.
+ *
+ * @discussion Primary actions allow you to distinguish between a change of selection (which can be based on focus changes or
+ * other indirect selection changes) and distinct user actions. Primary actions are performed when the user selects a cell without extending
+ * an existing selection. This is called after @c willSelectRow and @c didSelectRow , regardless of whether the cell's selection
+ * state was allowed to change.
+ *
+ * As an example, use @c didSelectRowAtIndexPath for updating state in the current view controller (i.e. buttons, title, etc) and
+ * use the primary action for navigation or showing another split view column.
+ *
+ * @param tableView This UITableView
+ * @param indexPath NSIndexPath of the row to perform the action on
+ */
+- (void)tableView:(UITableView *)tableView performPrimaryActionForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
 
 // Editing
 
@@ -292,6 +322,16 @@ typedef NS_ENUM(NSInteger, UITableViewSeparatorInsetReference) {
     UITableViewSeparatorInsetFromAutomaticInsets
 } API_AVAILABLE(ios(11.0), tvos(11.0));
 
+typedef NS_ENUM(NSInteger, UITableViewSelfSizingInvalidation) {
+    /// No updates will take place when -invalidateIntrinsicContentSize is called on a self-sizing cell or its contentView.
+    UITableViewSelfSizingInvalidationDisabled,
+    /// Calling -invalidateIntrinsicContentSize on a self-sizing cell or its contentView will cause it to be resized if necessary.
+    UITableViewSelfSizingInvalidationEnabled,
+    /// Calling -invalidateIntrinsicContentSize on a self-sizing cell or its contentView will cause it to be resized if necessary, and
+    /// any Auto Layout changes within the contentView of a self-sizing cell will automatically trigger -invalidateIntrinsicContentSize.
+    UITableViewSelfSizingInvalidationEnabledIncludingConstraints,
+} API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+
 
 //_______________________________________________________________________________________________________________
 
@@ -328,6 +368,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 @property (nonatomic) UIEdgeInsets separatorInset API_AVAILABLE(ios(7.0)) UI_APPEARANCE_SELECTOR; // allows customization of the frame of cell separators; see also the separatorInsetReference property. Use UITableViewAutomaticDimension for the automatic inset for that edge.
 @property (nonatomic) UITableViewSeparatorInsetReference separatorInsetReference API_AVAILABLE(ios(11.0), tvos(11.0)); // Changes how custom separatorInset values are interpreted. The default value is UITableViewSeparatorInsetFromCellEdges
+
+@property (nonatomic) UITableViewSelfSizingInvalidation selfSizingInvalidation API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
 
 @property (nonatomic, strong, nullable) UIView *backgroundView API_AVAILABLE(ios(3.2)); // the background view will be automatically resized to track the size of the table view.  this will be placed as a subview of the table view behind all cells and headers/footers.  default may be non-nil for some devices.
 
@@ -766,7 +808,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UITableView.h>

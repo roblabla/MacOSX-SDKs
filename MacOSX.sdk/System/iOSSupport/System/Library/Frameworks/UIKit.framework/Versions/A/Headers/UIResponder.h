@@ -13,7 +13,7 @@
 #import <UIKit/UIPasteConfigurationSupporting.h>
 #import <UIKit/UIUserActivity.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @protocol UIMenuBuilder;
 
@@ -48,8 +48,19 @@ NS_SWIFT_UI_ACTOR
 - (void)increaseSize:(nullable id)sender API_AVAILABLE(ios(7.0));
 - (void)decreaseSize:(nullable id)sender API_AVAILABLE(ios(7.0));
 
+- (void)find:(nullable id)sender API_AVAILABLE(ios(16.0));
+- (void)findAndReplace:(nullable id)sender API_AVAILABLE(ios(16.0));
+- (void)findNext:(nullable id)sender API_AVAILABLE(ios(16.0));
+- (void)findPrevious:(nullable id)sender API_AVAILABLE(ios(16.0));
+- (void)useSelectionForFind:(nullable id)sender API_AVAILABLE(ios(16.0));
+
 - (void)updateTextAttributesWithConversionHandler:(NS_NOESCAPE UITextAttributesConversionHandler _Nonnull)conversionHandler API_AVAILABLE(ios(13.0));
 - (void)print:(nullable id)sender NS_SWIFT_NAME(printContent(_:)) API_AVAILABLE(ios(15.0));
+
+- (void)rename:(nullable id)sender API_AVAILABLE(ios(16.0));
+- (void)duplicate:(nullable id)sender API_AVAILABLE(ios(16.0));
+- (void)move:(nullable id)sender API_AVAILABLE(ios(16.0));
+- (void)export:(nullable id)sender API_AVAILABLE(ios(16.0));
 
 @end
 
@@ -191,7 +202,7 @@ UIKIT_EXTERN NSString *const UIKeyInputDelete          API_AVAILABLE(ios(15.0), 
 - (void)captureTextFromCamera:(nullable id)sender API_AVAILABLE(ios(15.0));
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 
 #else

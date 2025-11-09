@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DA644953-C19C-349B-BC81-7D6B636ADED9
+    value:           7FCE19BC-71E8-3B45-BF6A-DEBB4A94D96F
   - target:          x86_64-maccatalyst
-    value:           DA644953-C19C-349B-BC81-7D6B636ADED9
+    value:           7FCE19BC-71E8-3B45-BF6A-DEBB4A94D96F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E3DA7206-B253-3FF3-AF98-25F10D86D94C
+    value:           853C0412-6700-3B72-9CA5-D13056F3E259
   - target:          arm64e-maccatalyst
-    value:           E3DA7206-B253-3FF3-AF98-25F10D86D94C
+    value:           853C0412-6700-3B72-9CA5-D13056F3E259
 install-name:    '/System/Library/PrivateFrameworks/AutoLoop.framework/Versions/A/AutoLoop'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AUTOLOOP_LAR_KEY_ERROR, _AUTOLOOP_LAR_KEY_FRAMETRANSFORM_GAPBRIDGE, 
                        _AUTOLOOP_LAR_KEY_FRAMETRANSFORM_HOMOGRAPHY, _AUTOLOOP_LAR_KEY_FRAMETRANSFORM_RAWTIME, 
                        _AUTOLOOP_LAR_KEY_MIN_VERSION, _AUTOLOOP_LAR_KEY_NORMSTABILIZE, 

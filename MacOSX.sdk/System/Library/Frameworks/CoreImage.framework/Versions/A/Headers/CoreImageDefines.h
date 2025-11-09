@@ -6,6 +6,7 @@
 #ifndef COREIMAGEDEFINES_H
 #define COREIMAGEDEFINES_H
 
+#ifndef __METAL_VERSION__
 
 #include <TargetConditionals.h>
 
@@ -13,10 +14,9 @@
 #include <stdint.h>
 #include <stddef.h>
 
-#if TARGET_OS_IPHONE
 #include <CoreGraphics/CoreGraphics.h>
-#else
-#include <ApplicationServices/ApplicationServices.h>
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
 #endif
 
 #ifdef __cplusplus
@@ -36,6 +36,7 @@
 #define CORE_IMAGE_CLASS_EXPORT __attribute__((visibility("default")))
 
 
+#ifdef __OBJC__
 #ifdef CI_SILENCE_GL_DEPRECATION
   #define CI_GL_DEPRECATED_IOS(from, to)  NS_AVAILABLE_IOS(from)
   #define CI_GL_DEPRECATED_MAC(from, to)  NS_AVAILABLE_MAC(from)
@@ -47,11 +48,16 @@
   #define CI_GL_DEPRECATED(fromM,toM, fromI,toI)  NS_DEPRECATED(fromM,toM, fromI,toI, "Core Image OpenGL API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings)")
   #define CIKL_DEPRECATED(fromM,toM, fromI,toI)  NS_DEPRECATED(fromM,toM, fromI,toI, "Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings)")
 #endif
+#endif
 
 #if TARGET_OS_MAC || !TARGET_OS_SIMULATOR || defined(__IPHONE_13_0)
   #define COREIMAGE_SUPPORTS_IOSURFACE 1
 #else
   #define COREIMAGE_SUPPORTS_IOSURFACE 0
 #endif
+
+#define UNIFIED_CORE_IMAGE 1
+
+#endif /* !__METAL_VERSION__ */
 
 #endif /* COREIMAGEDEFINES_H */

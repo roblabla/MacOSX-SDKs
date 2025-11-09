@@ -4,28 +4,29 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0F6BBD9F-8681-3C9A-B1BB-2349890B7E39
+    value:           29A85CB4-F8CD-38DB-B574-30DCB41A7BE5
   - target:          x86_64-maccatalyst
-    value:           0F6BBD9F-8681-3C9A-B1BB-2349890B7E39
+    value:           29A85CB4-F8CD-38DB-B574-30DCB41A7BE5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           28995FF5-77C8-3664-9381-77A3C0E9087F
+    value:           EAEB643F-52CF-3064-B448-4E50A39FA280
   - target:          arm64e-maccatalyst
-    value:           28995FF5-77C8-3664-9381-77A3C0E9087F
+    value:           EAEB643F-52CF-3064-B448-4E50A39FA280
 install-name:    '/System/Library/PrivateFrameworks/SPOwner.framework/Versions/A/SPOwner'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SPAccessoryDidPairNotification, _SPAccessoryDiscoveryAndPairingSessionErrorDomain, 
                        _SPBeaconLocationSourceConnection, _SPBeaconLocationSourceConnectionMaintenance, 
                        _SPBeaconLocationSourceDisconnection, _SPBeaconLocationSourceHarvesterNetwork, 
                        _SPBeaconLocationSourceHarvesterOnDiskNearOwner, _SPBeaconLocationSourceHarvesterOnDiskWild, 
                        _SPBeaconLocationSourceIntentLocationUpdate, _SPBeaconLocationSourceIntentResponse, 
-                       _SPBeaconLocationSourceLocalReductiveFilter, _SPBeaconLocationSourcePairingLocationManager, 
-                       _SPBeaconLocationSourceSelfPublish, _SPBeaconLocationSourceUnknown, 
+                       _SPBeaconLocationSourceLocalReductiveFilter, _SPBeaconLocationSourceOwnedDeviceLocation, 
+                       _SPBeaconLocationSourcePairingLocationManager, _SPBeaconLocationSourceSelfPublish, 
+                       _SPBeaconLocationSourceUnknown, _SPBeaconManagerErrorDomain, 
                        _SPBeaconRoleIdOther, _SPBeaconRoleIdUndefined, _SPBeaconTaskNameAcceptShare, 
                        _SPBeaconTaskNameAccessoryFirmwareUpdate, _SPBeaconTaskNameBeginBTFinding, 
                        _SPBeaconTaskNameBeginLeashing, _SPBeaconTaskNameBeginRanging, 
@@ -42,13 +43,14 @@ exports:
                        _SPBeaconTypeNone, _SPBeaconTypeSelfBeaconing, _SPBeaconTypeVirtualMeDevice, 
                        _SPBeaconZoneCreationDateKey, _SPBeaconZoneCreationErrorCodeKey, 
                        _SPBeaconingStateChangedNotification, _SPBeaconsChangedNotification, 
-                       _SPCommandErrorDomain, _SPDisabledReasonLowAccountSecurity, 
+                       _SPCBPeripheralErrorDomain, _SPCommandErrorDomain, _SPDisabledReasonLowAccountSecurity, 
                        _SPDisabledReasonNone, _SPDisabledReasonUserOptOut, _SPDisabledReasoniCloudSignedOut, 
                        _SPEvaluateLocalBeaconingNotification, _SPFirmwareUpdateErrorDomain, 
                        _SPKeyReconcilerFilesUpdatedNotification, _SPLastKeyRollDateKey, 
-                       _SPMaintenancePolicyChangedNotification, _SPOwnerBeaconsChangedLocalNotification, 
-                       _SPOwnerDataStateInitializing, _SPOwnerDataStateNotAvailable, 
-                       _SPOwnerDataStateUpToDate, _SPOwnerDataStateUpdating, _SPOwnerInitiateFindMyAccessoryFirmwareUpdateNotification, 
+                       _SPMaintenancePolicyChangedNotification, _SPManagedCBPeripheralChangedNotification, 
+                       _SPOwnerBeaconsChangedLocalNotification, _SPOwnerDataStateInitializing, 
+                       _SPOwnerDataStateNotAvailable, _SPOwnerDataStateUpToDate, 
+                       _SPOwnerDataStateUpdating, _SPOwnerInitiateFindMyAccessoryFirmwareUpdateNotification, 
                        _SPOwnerLocationCachePolicyBackgroundRefresh, _SPOwnerLocationCachePolicyDefaultPolicy, 
                        _SPOwnerLocationCachePolicyForegroundRefresh, _SPOwnerLocationCachePolicyLastKnownLocation, 
                        _SPOwnerLocationCachePolicyNoCache, _SPOwnerSessionErrorDomain, 
@@ -63,43 +65,49 @@ exports:
                        _SPSeparationMonitoringErrorDomain, _SPSeparationMonitoringSafeLocationsChangedNotification, 
                        _SPSeparationMonitoringStateChangedNotification, _SPServiceSettingsChangedNotification, 
                        _SPServiceStateDisabled, _SPServiceStateEnabled, _SPSettingsServiceDisabledReasonsKey, 
-                       _SPSettingsServiceStateKey, _SPSettingsSharedSuiteName, _SPTagSeparationErrorDomain, 
-                       _SPTagSeparationStateConnected, _SPTagSeparationStateLeashConnected, 
-                       _SPTagSeparationStateLeashDropped, _SPTagSeparationStateLeashFailed, 
-                       _SPTagSeparationStateLeashInterrupted, _SPTagSeparationStateNone, 
-                       _SPTrackingAvoidanceErrorDomain, _SPUnknownBeaconsChangedNotification, 
+                       _SPSettingsServiceStateKey, _SPSettingsSharedSuiteName, _SPSimpleBeaconUpdateInterfaceReconnectNotification, 
+                       _SPTagSeparationErrorDomain, _SPTagSeparationStateConnected, 
+                       _SPTagSeparationStateLeashConnected, _SPTagSeparationStateLeashDropped, 
+                       _SPTagSeparationStateLeashFailed, _SPTagSeparationStateLeashInterrupted, 
+                       _SPTagSeparationStateNone, _SPTrackingAvoidanceErrorDomain, 
+                       _SPUnknownBeaconsChangedNotification, _SPUnknownBeaconsSetChangedNotification, 
                        _SPUnknownDiscoverySessionErrorDomain, _SPUnpairErrorDomain, 
                        _allBeaconTypes, _inPostEraseSetupAssistant, _sp_IDS_supportsIDSRegistrationPropertySupportsFMDV2, 
                        _sp_key_index_map_contains_key, _sp_key_index_map_contains_key_prefix, 
                        _sp_key_index_map_create_handle_from_file, _sp_key_index_map_create_handle_from_file_descriptor, 
                        _sp_key_index_map_destroy, _sp_key_index_map_get_first_index, 
                        _sp_key_index_map_get_last_index, _sp_key_index_map_get_version, 
-                       _sp_key_index_map_print_description, _sp_key_index_map_print_records_description, 
-                       _sp_key_index_map_print_toc, _sp_key_record_copy_intermediate_key, 
-                       _sp_key_record_copy_private_encrypted_key, _sp_key_record_copy_private_key, 
-                       _sp_key_record_copy_public_key, _sp_key_subsequence_create_from_file, 
-                       _sp_key_subsequence_create_from_file_descriptor, _sp_key_subsequence_destroy, 
-                       _sp_key_subsequence_get_record_for_index, _sp_key_subsequence_map_get_first_index, 
-                       _sp_key_subsequence_map_get_last_index, _sp_key_subsequence_print_description, 
-                       _sp_key_subsequence_print_records_description ]
+                       _sp_key_index_map_print_description, _sp_key_index_map_print_toc, 
+                       _sp_key_record_copy_intermediate_key, _sp_key_record_copy_private_encrypted_key, 
+                       _sp_key_record_copy_private_key, _sp_key_record_copy_public_key, 
+                       _sp_key_subsequence_create_from_file, _sp_key_subsequence_create_from_file_descriptor, 
+                       _sp_key_subsequence_destroy, _sp_key_subsequence_get_record_for_index, 
+                       _sp_key_subsequence_map_get_first_index, _sp_key_subsequence_map_get_last_index, 
+                       _sp_key_subsequence_print_description, _sp_key_subsequence_print_records_description ]
     objc-classes:    [ SPAccessoryDiscoveryAndPairingSession, SPAccessoryDiscoverySessionState, 
                        SPAccessoryInformation, SPAccessoryLayoutTemplate, SPAccessoryPairingConfiguration, 
-                       SPBeacon, SPBeaconDescription, SPBeaconGroup, SPBeaconLocation, 
-                       SPBeaconManager, SPBeaconObservation, SPBeaconRole, SPBeaconRoleCategory, 
-                       SPBeaconScanningSession, SPBeaconShare, SPBeaconTaskInformation, 
-                       SPBeaconUpdates, SPBeaconingKey, SPCommand, SPCommandKey, 
-                       SPCommandKeys, SPCommandKeysCriteria, SPCrypto, SPDiscoveredAccessory, 
-                       SPDiscoveredAccessoryMetadata, SPDiscoveredAccessoryProductInformation, 
-                       SPFirmwareUpdateSession, SPFirmwareUpdateStateResult, SPHandle, 
-                       SPIndexInformation, SPKeyReconciler, SPLocationFetchContext, 
-                       SPLocationFetchResult, SPLocationProvider, SPLostModeInfo, 
-                       SPMacBeaconConfig, SPMutableSafeLocation, SPObservationLocation, 
-                       SPOfflineAdvertisingConfiguration, SPOfflineAdvertisingKeys, 
-                       SPOwnerInterface, SPOwnerSession, SPOwnerSessionState, SPPairingConfiguration, 
-                       SPPairingManager, SPPairingSession, SPPairingState, SPRawSearchResult, 
-                       SPSafeLocation, SPScannedObject, SPSecureLocation, SPSecureLocationsManager, 
-                       SPSecureLocationsSubscriptionContext, SPSecureLocationsSubscriptionResult, 
-                       SPSettingsConfiguration, SPTagUserStats, SPUnauthorizedTrackingAdvertisement, 
-                       SPUnauthorizedTrackingObservation, SPUnknownBeacon, SPUnknownDiscoverySession, 
-                       SPUnknownDiscoverySessionState, SPUnknownProductInfo, SPUnknownProductMetadata ]
+                       SPApplicationBeacon, SPBeacon, SPBeaconDescription, SPBeaconGroup, 
+                       SPBeaconLocation, SPBeaconManager, SPBeaconManagerSimpleBeaconUpdateInterface, 
+                       SPBeaconObservation, SPBeaconRole, SPBeaconRoleCategory, SPBeaconScanningSession, 
+                       SPBeaconShare, SPBeaconTaskInformation, SPBeaconUpdates, SPBeaconingKey, 
+                       SPCBPeripheralKeyAddressPair, SPCBPeripheralKeyRequest, SPCBPeripheralKeyRequestParameters, 
+                       SPCBPeripheralKeyResponse, SPCBPeripheralManagerSessionKey, 
+                       SPCommand, SPCommandKey, SPCommandKeys, SPCommandKeysCriteria, 
+                       SPCrypto, SPDiscoveredAccessory, SPDiscoveredAccessoryMetadata, 
+                       SPDiscoveredAccessoryProductInformation, SPFirmwareUpdateSession, 
+                       SPFirmwareUpdateStateResult, SPHandle, SPIndexInformation, 
+                       SPInternalSimpleBeacon, SPKeyReconciler, SPKeySyncRecord, 
+                       SPLastOnlineLocationInfo, SPLocationFetchContext, SPLocationFetchResult, 
+                       SPLocationProvider, SPLostModeInfo, SPMacBeaconConfig, SPMutableSafeLocation, 
+                       SPObservationLocation, SPOfflineAdvertisingConfiguration, 
+                       SPOfflineAdvertisingKeys, SPOwnedDeviceKeyRecord, SPOwnerInterface, 
+                       SPOwnerSession, SPOwnerSessionState, SPPairingConfiguration, 
+                       SPPairingManager, SPPairingSession, SPPairingState, SPPeripheral, 
+                       SPRawSearchResult, SPSafeLocation, SPScannedObject, SPSecureLocation, 
+                       SPSecureLocationsManager, SPSecureLocationsSubscriptionContext, 
+                       SPSecureLocationsSubscriptionResult, SPSettingsConfiguration, 
+                       SPSimpleBeacon, SPSimpleBeaconContext, SPStandaloneBeacon, 
+                       SPTagUserStats, SPUnauthorizedTrackingAdvertisement, SPUnauthorizedTrackingObservation, 
+                       SPUnknownBeacon, SPUnknownDiscoverySession, SPUnknownDiscoverySessionState, 
+                       SPUnknownProductInfo, SPUnknownProductMetadata ]
 ...

@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH SQLITE3 1 "Fri May 10 23:44:29 PDT 2019"
+.TH SQLITE3 1 "Wed September 7 20:51:46 PDT 2022"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -49,7 +49,7 @@ a table named "memos" and insert a couple of records into that table:
 $ 
 .B sqlite3 mydata.db
 .br
-SQLite version 3.37.0 2021-12-09 01:34:53
+SQLite version 3.39.4 2022-09-07 20:51:41
 .br
 Enter ".help" for usage hints.
 .br
@@ -108,72 +108,75 @@ sqlite>
 .B .help
 .nf
 .tr %.
-%.auth ON|OFF             Show authorizer callbacks
-%.backup ?DB? FILE        Backup DB (default "main") to FILE
-%.bail on|off             Stop after hitting an error.  Default OFF
-%.binary on|off           Turn binary output on or off.  Default OFF
-%.cd DIRECTORY            Change the working directory to DIRECTORY
-%.changes on|off          Show number of rows changed by SQL
-%.check GLOB              Fail if output since .testcase does not match
-%.clone NEWDB             Clone data into NEWDB from the existing database
-%.connection [close] [#]  Open or close an auxiliary database connection
-%.databases               List names and files of attached databases
-%.dbconfig ?op? ?val?     List or change sqlite3_db_config() options
-%.dbinfo ?DB?             Show status information about the database
-%.dump ?OBJECTS?          Render database content as SQL
-%.echo on|off             Turn command echo on or off
-%.eqp on|off|full|...     Enable or disable automatic EXPLAIN QUERY PLAN
-%.excel                   Display the output of next command in spreadsheet
-%.exit ?CODE?             Exit this program with return-code CODE
-%.expert                  EXPERIMENTAL. Suggest indexes for queries
-%.explain ?on|off|auto?   Change the EXPLAIN formatting mode.  Default: auto
-%.filectrl CMD ...        Run various sqlite3_file_control() operations
-%.fullschema ?--indent?   Show schema and the content of sqlite_stat tables
-%.headers on|off          Turn display of headers on or off
-%.help ?-all? ?PATTERN?   Show help text for PATTERN
-%.import FILE TABLE       Import data from FILE into TABLE
-%.imposter INDEX TABLE    Create imposter table TABLE on index INDEX
-%.indexes ?TABLE?         Show names of indexes
-%.limit ?LIMIT? ?VAL?     Display or change the value of an SQLITE_LIMIT
-%.lint OPTIONS            Report potential schema issues.
-%.log FILE|off            Turn logging on or off.  FILE can be stderr/stdout
-%.mode MODE ?TABLE?       Set output mode
-%.nonce STRING            Disable safe mode for one command if the nonce matches
-%.nullvalue STRING        Use STRING in place of NULL values
-%.once ?OPTIONS? ?FILE?   Output for the next SQL command only to FILE
-%.oom ?--repeat M? ?N?    Simulate an OOM error on the N-th allocation
-%.open ?OPTIONS? ?FILE?   Close existing database and reopen FILE
-%.output ?FILE?           Send output to FILE or stdout if FILE is omitted
-%.parameter CMD ...       Manage SQL parameter bindings
-%.print STRING...         Print literal STRING
-%.progress N              Invoke progress handler after every N opcodes
-%.prompt MAIN CONTINUE    Replace the standard prompts
-%.quit                    Exit this program
-%.read FILE               Read input from FILE
-%.recover                 Recover as much data as possible from corrupt db.
-%.restore ?DB? FILE       Restore content of DB (default "main") from FILE
-%.save FILE               Write in-memory database into FILE
-%.scanstats on|off        Turn sqlite3_stmt_scanstatus() metrics on or off
-%.schema ?PATTERN?        Show the CREATE statements matching PATTERN
-%.selftest ?OPTIONS?      Run tests defined in the SELFTEST table
-%.separator COL ?ROW?     Change the column and row separators
-%.session ?NAME? CMD ...  Create or control sessions
-%.sha3sum ...             Compute a SHA3 hash of database content
-%.shell CMD ARGS...       Run CMD ARGS... in a system shell
-%.show                    Show the current values for various settings
-%.stats ?ARG?             Show stats or turn stats on or off
-%.system CMD ARGS...      Run CMD ARGS... in a system shell
-%.tables ?TABLE?          List names of tables matching LIKE pattern TABLE
-%.testcase NAME           Begin redirecting output to 'testcase-out.txt'
-%.testctrl CMD ...        Run various sqlite3_test_control() operations
-%.timeout MS              Try opening locked tables for MS milliseconds
-%.timer on|off            Turn SQL timer on or off
-%.trace ?OPTIONS?         Output each SQL statement as it is run
-%.unmodule NAME ...       Unregister virtual table modules
-%.vfsinfo ?AUX?           Information about the top-level VFS
-%.vfslist                 List all available VFSes
-%.vfsname ?AUX?           Print the name of the VFS stack
-%.width NUM1 NUM2 ...     Set minimum column widths for columnar output
+%auth ON|OFF             Show authorizer callbacks
+%backup ?DB? FILE        Backup DB (default "main") to FILE
+%bail on|off             Stop after hitting an error.  Default OFF
+%binary on|off           Turn binary output on or off.  Default OFF
+%cd DIRECTORY            Change the working directory to DIRECTORY
+%changes on|off          Show number of rows changed by SQL
+%check GLOB              Fail if output since .testcase does not match
+%clone NEWDB             Clone data into NEWDB from the existing database
+%connection [close] [#]  Open or close an auxiliary database connection
+%databases               List names and files of attached databases
+%dbconfig ?op? ?val?     List or change sqlite3_db_config() options
+%dbinfo ?DB?             Show status information about the database
+%dump ?OBJECTS?          Render database content as SQL
+%echo on|off             Turn command echo on or off
+%eqp on|off|full|...     Enable or disable automatic EXPLAIN QUERY PLAN
+%excel                   Display the output of next command in spreadsheet
+%exit ?CODE?             Exit this program with return-code CODE
+%expert                  EXPERIMENTAL. Suggest indexes for queries
+%explain ?on|off|auto?   Change the EXPLAIN formatting mode.  Default: auto
+%filectrl CMD ...        Run various sqlite3_file_control() operations
+%fullschema ?--indent?   Show schema and the content of sqlite_stat tables
+%headers on|off          Turn display of headers on or off
+%help ?-all? ?PATTERN?   Show help text for PATTERN
+%hex-rekey OLD NEW NEW   Change the encryption key using hexadecimal
+%import FILE TABLE       Import data from FILE into TABLE
+%import FILE TABLE       Import data from FILE into TABLE
+%imposter INDEX TABLE    Create imposter table TABLE on index INDEX
+%indexes ?TABLE?         Show names of indexes
+%limit ?LIMIT? ?VAL?     Display or change the value of an SQLITE_LIMIT
+%lint OPTIONS            Report potential schema issues.
+%log FILE|off            Turn logging on or off.  FILE can be stderr/stdout
+%mode MODE ?OPTIONS?     Set output mode
+%nonce STRING            Suspend safe mode for one command if nonce matches
+%nullvalue STRING        Use STRING in place of NULL values
+%once ?OPTIONS? ?FILE?   Output for the next SQL command only to FILE
+%open ?OPTIONS? ?FILE?   Close existing database and reopen FILE
+%output ?FILE?           Send output to FILE or stdout if FILE is omitted
+%parameter CMD ...       Manage SQL parameter bindings
+%print STRING...         Print literal STRING
+%progress N              Invoke progress handler after every N opcodes
+%prompt MAIN CONTINUE    Replace the standard prompts
+%quit                    Exit this program
+%read FILE               Read input from FILE or command output
+%rekey OLD NEW NEW     Change the encryption key
+%recover                 Recover as much data as possible from corrupt db.
+%restore ?DB? FILE       Restore content of DB (default "main") from FILE
+%save ?OPTIONS? FILE     Write database to FILE (an alias for .backup ...)
+%scanstats on|off        Turn sqlite3_stmt_scanstatus() metrics on or off
+%schema ?PATTERN?        Show the CREATE statements matching PATTERN
+%selftest ?OPTIONS?      Run tests defined in the SELFTEST table
+%separator COL ?ROW?     Change the column and row separators
+%session ?NAME? CMD ...  Create or control sessions
+%sha3sum ...             Compute a SHA3 hash of database content
+%shell CMD ARGS...       Run CMD ARGS... in a system shell
+%show                    Show the current values for various settings
+%stats ?ARG?             Show stats or turn stats on or off
+%system CMD ARGS...      Run CMD ARGS... in a system shell
+%tables ?TABLE?          List names of tables matching LIKE pattern TABLE
+%testcase NAME           Begin redirecting output to 'testcase-out.txt'
+%testctrl CMD ...        Run various sqlite3_test_control() operations
+%text-rekey OLD NEW NEW  Change the encryption key using hexadecimal
+%timeout MS              Try opening locked tables for MS milliseconds
+%timer on|off            Turn SQL timer on or off
+%trace ?OPTIONS?         Output each SQL statement as it is run
+%unmodule NAME ...       Unregister virtual table modules
+%vfsinfo ?AUX?           Information about the top-level VFS
+%vfslist                 List all available VFSes
+%vfsname ?AUX?           Print the name of the VFS stack
+%width NUM1 NUM2 ...     Set minimum column widths for columnar output
 sqlite>
 .sp
 .fi
@@ -192,6 +195,9 @@ Stop after hitting an error.
 .TP
 .B \-batch
 Force batch I/O.
+.TP
+.B \-box
+Set output mode to 'box'.
 .TP
 .B \-column
 Query results will be displayed in a table like form, using
@@ -223,11 +229,20 @@ Turn headers on or off.
 .B \-help
 Show help on options and exit.
 .TP
+.BI \-hexkey\ key
+Open database with hexadecimal encryption key.
+.TP
 .B \-html
 Query results will be output as simple HTML tables.
 .TP
 .B \-interactive
 Force interactive I/O.
+.TP
+.BI \-key\ key
+Open database with raw encryption key.
+.TP
+.B \-json
+Set output mode to 'json'.
 .TP
 .B \-line
 Query results will be displayed with one value per line, rows
@@ -245,24 +260,26 @@ entries of
 .I size
 bytes for lookaside memory
 .TP
+.B \-markdown
+Set output mode to 'markdown'.
+.TP
 .BI \-maxsize\ N
 Limits size of a -deserialize database to
 .I N
 bytes
 .TP
-.BI \-mmap\  N
-Set default mmap size to
-.I N
-\.
-.TP
 .B -memtrace
 Trace all memory allocations.
 .TP
 .BI \-newline\  sep
-Set output row separator. Default is '\n'.
+Set output row separator. Default is '\\n'.
 .TP
 .B -nofollow
-Refuse to open symbolic links to database files.
+Refuse to open paths containing symbolic links.
+.TP
+.BI \-nonce\ string
+Set the safe-mode escape nonce to
+.I string
 .TP
 .BI \-nullvalue\  string
 Set string used to represent NULL values.  Default is ''
@@ -274,11 +291,23 @@ Set output mode to quote.
 .B -readonly
 Open the database read-only.
 .TP
+.BI \-safe
+Enable safe-mode.
+.TP
 .BI \-separator\  separator
 Set output field separator.  Default is '|'.
 .TP
 .B \-stats
 Print memory stats before each finalize.
+.TP
+.BI \-textkey\ PASSPHRASE
+Text to be hashed into the encryption key.
+.TP
+.B \-table
+Set output mode to 'table'.
+.TP
+.B \-tabs
+Set output mode to 'tabs'.
 .TP
 .B \-version
 Show SQLite version.

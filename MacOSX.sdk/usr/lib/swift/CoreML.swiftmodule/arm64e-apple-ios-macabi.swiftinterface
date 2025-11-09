@@ -1,19 +1,26 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-ios15.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreML -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name CoreML
-// swift-module-flags-ignorable: -user-module-version 1127.100.41
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-ios16.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreML -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name CoreML
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1436.40.4
 @_exported import CoreML
 import Swift
 import _Concurrency
+import _StringProcessing
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension CoreML.MLModel {
   public class func load(contentsOf url: Foundation.URL, configuration: CoreML.MLModelConfiguration = MLModelConfiguration(), completionHandler handler: @escaping (Swift.Result<CoreML.MLModel, Swift.Error>) -> Swift.Void)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   public class func load(contentsOf url: Foundation.URL, configuration: CoreML.MLModelConfiguration = MLModelConfiguration()) async throws -> CoreML.MLModel
   #endif
-
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+  @available(watchOS, unavailable)
+  public class func compileModel(at url: Foundation.URL, completionHandler handler: @escaping (Swift.Result<Foundation.URL, Swift.Error>) -> Swift.Void)
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+  @available(watchOS, unavailable)
+  public class func compileModel(at url: Foundation.URL) async throws -> Foundation.URL
+  #endif
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension CoreML.MLFeatureValue {
@@ -63,6 +70,14 @@ extension CoreML.MLMultiArray {
     }
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   convenience public init<ShapedArray>(_ shapedArray: ShapedArray) where ShapedArray : CoreML.MLShapedArrayProtocol
+  @available(macOS 12.3, iOS 15.4, watchOS 8.5, tvOS 15.4, *)
+  public func withUnsafeBytes<R>(_ body: (_ ptr: Swift.UnsafeRawBufferPointer) throws -> R) rethrows -> R
+  @available(macOS 12.3, iOS 15.4, watchOS 8.5, tvOS 15.4, *)
+  public func withUnsafeMutableBytes<R>(_ body: (_ ptr: Swift.UnsafeMutableRawBufferPointer, _ strides: [Swift.Int]) throws -> R) rethrows -> R
+  @available(macOS 12.3, iOS 15.4, watchOS 8.5, tvOS 15.4, *)
+  public func withUnsafeBufferPointer<S, R>(ofType type: S.Type, _ body: (_ ptr: Swift.UnsafeBufferPointer<S>) throws -> R) rethrows -> R where S : CoreML.MLShapedArrayScalar
+  @available(macOS 12.3, iOS 15.4, watchOS 8.5, tvOS 15.4, *)
+  public func withUnsafeMutableBufferPointer<S, R>(ofType type: S.Type, _ body: (_ ptr: Swift.UnsafeMutableBufferPointer<S>, _ strides: [Swift.Int]) throws -> R) rethrows -> R where S : CoreML.MLShapedArrayScalar
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @available(macOS, deprecated: 100000.0, message: "Use .dataPointer and withExtendedLifetime instead")
@@ -254,6 +269,14 @@ extension CoreML.MLShapedArray {
 extension CoreML.MLShapedArray {
   public init(data: Foundation.Data, shape: [Swift.Int])
 }
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension CoreML.MLShapedArray : Swift.Encodable where Scalar : Swift.Encodable {
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension CoreML.MLShapedArray : Swift.Decodable where Scalar : Swift.Decodable {
+  public init(from decoder: Swift.Decoder) throws
+}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 public struct MLShapedArraySlice<Scalar> : CoreML.MLShapedArrayProtocol where Scalar : CoreML.MLShapedArrayScalar {
   public typealias ArrayLiteralElement = Scalar
@@ -299,6 +322,14 @@ extension CoreML.MLShapedArraySlice {
 extension CoreML.MLShapedArraySlice {
   public init(data: Foundation.Data, shape: [Swift.Int])
 }
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension CoreML.MLShapedArraySlice : Swift.Encodable where Scalar : Swift.Encodable {
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension CoreML.MLShapedArraySlice : Swift.Decodable where Scalar : Swift.Decodable {
+  public init(from decoder: Swift.Decoder) throws
+}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 public protocol MLShapedArrayScalar {
   static var multiArrayDataType: CoreML.MLMultiArrayDataType { get }
@@ -317,6 +348,14 @@ extension Swift.Double : CoreML.MLShapedArrayScalar {
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension Swift.Float : CoreML.MLShapedArrayScalar {
+  public static var multiArrayDataType: CoreML.MLMultiArrayDataType {
+    get
+  }
+}
+@available(iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+extension Swift.Float16 : CoreML.MLShapedArrayScalar {
   public static var multiArrayDataType: CoreML.MLMultiArrayDataType {
     get
   }

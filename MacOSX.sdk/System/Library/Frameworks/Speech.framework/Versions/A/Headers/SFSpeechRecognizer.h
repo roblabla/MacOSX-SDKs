@@ -36,7 +36,11 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 + (SFSpeechRecognizerAuthorizationStatus)authorizationStatus;
 + (void)requestAuthorization:(void(^)(SFSpeechRecognizerAuthorizationStatus status))handler;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnullability"
 - (nullable instancetype)init; // Returns speech recognizer with user's current locale, or nil if is not supported
+#pragma clang diagnostic pop
+
 - (nullable instancetype)initWithLocale:(NSLocale *)locale NS_DESIGNATED_INITIALIZER; // returns nil if the locale is not supported
 
 @property (nonatomic, readonly, getter=isAvailable) BOOL available;

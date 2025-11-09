@@ -2384,6 +2384,66 @@ void SparseRefactor(SparseMatrix_Float Matrix,
   SparseOpaqueFactorization_Float *Factorization,
   SparseNumericFactorOptions nfoptions, void *workspace);
 
+/**** Factor Query Functions *********************************************/
+
+/*! @abstract Returns the inertia of an LDLT factorization
+ *
+ *  @discussion
+ *  For a given LDLT factorization, this function returns the number of
+ *  negative, zero and positive pivots taken during the factorization.
+ *  Note that in some cases, particularly when eigenvalues are close to
+ *  zero, the computed numerical inertia may not be an accurate reflection
+ *  of the true inertia of the system, and in particular can be highly dependent
+ *  on the zeroTolerance (and to a less degree the pivotTolerance) specified
+ *  in the factorization options.
+ *
+ *  This call is only supported for factorizations of type SparseFactorizationLDLTTPP.
+ *
+ *  @param Factored The factorization to be queried.
+ *
+ *  @param num_positive Upon return *num_positive has been set to the number
+ *         of positive pivots.
+ *
+ *  @param num_zero Upon return *num_zero has been set to the number
+ *         of zero pivots.
+ *
+ *  @param num_negative Upon return *num_negative has been set to the number
+ *         of negative pivots.
+ *
+ *  @returns 0 on success, non-zero on error
+ */
+SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(13.0), ios(16.0), watchos(9.0), tvos(16.0) )
+int SparseGetInertia(SparseOpaqueFactorization_Float Factored, int *num_positive, int *num_zero, int *num_negative);
+
+/*! @abstract Returns the inertia of an LDLT factorization
+ *
+ *  @discussion
+ *  For a given LDLT factorization, this function returns the number of
+ *  negative, zero and positive pivots taken during the factorization.
+ *  Note that in some cases, particularly when eigenvalues are close to
+ *  zero, the computed numerical inertia may not be an accurate reflection
+ *  of the true inertia of the system, and in particular can be highly dependent
+ *  on the zeroTolerance (and to a less degree the pivotTolerance) specified
+ *  in the factorization options.
+ *
+ *  This call is only supported for factorizations of type SparseFactorizationLDLTTPP.
+ *
+ *  @param Factored The factorization to be queried.
+ *
+ *  @param num_positive Upon return *num_positive has been set to the number
+ *         of positive pivots.
+ *
+ *  @param num_zero Upon return *num_zero has been set to the number
+ *         of zero pivots.
+ *
+ *  @param num_negative Upon return *num_negative has been set to the number
+ *         of negative pivots.
+ *
+ *  @returns 0 on success, non-zero on error
+ */
+SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(13.0), ios(16.0), watchos(9.0), tvos(16.0) )
+int SparseGetInertia(SparseOpaqueFactorization_Double Factored, int *num_positive, int *num_zero, int *num_negative);
+
 /******************************************************************************
  *  @group Extracting Sub-factors of Factors
  ******************************************************************************/

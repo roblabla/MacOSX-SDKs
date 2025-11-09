@@ -8,7 +8,7 @@
 
 @class NSArray<ObjectType>, NSDate, NSDictionary, NSError, NSString, NSURL, NSPersonNameComponents;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_OPTIONS(NSUInteger, NSFileVersionAddingOptions) {
 
@@ -29,22 +29,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileVersionReplacingOptions) {
 /* Instances of NSFileVersion for the same version of the same file are equal, and instances of NSFileVersion for different versions of the same file are not equal, but the equality of NSFileVersions for different files is undefined. Repeated invocations of the methods that return NSFileVersions do not necessarily return the exact same instance of NSFileVersion.
 */
 API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0))
-@interface NSFileVersion : NSObject {
-@private
-    NSURL *_fileURL;
-    id _addition;
-    id _deadVersionIdentifier;
-    id _nonLocalVersion;
-    NSURL *_contentsURL;
-    BOOL _isBackup;
-    NSString *_localizedName;
-    NSString *_localizedComputerName;
-    NSDate *_modificationDate;
-    BOOL _isResolved;
-    BOOL _contentsURLIsAccessed;
-    id _reserved;
-    NSString *_name;
-}
+@interface NSFileVersion : NSObject
 
 /* Return an NSFileVersion that represents the contents of the file located by a URL, or nil if there is no such file.
 */
@@ -64,7 +49,7 @@ When a version is successfully downloaded, its contents are cached locally, and 
  
 If you need to get all versions for a document, both local and non-local, you should use an NSFilePresenter that implements -presentedItemDidGainVersion: and -presentedItemDidLoseVersion: and invoke +[NSFileCoordinator addFilePresenter:], +[NSFileVersion otherVersionsOfItemAtURL:], and this method within a single coordinated read.
 */
-+ (void)getNonlocalVersionsOfItemAtURL:(NSURL *)url completionHandler:(void (^)(NSArray<NSFileVersion *> * _Nullable nonlocalFileVersions, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
++ (void)getNonlocalVersionsOfItemAtURL:(NSURL *)url completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSArray<NSFileVersion *> * _Nullable nonlocalFileVersions, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 /* For a file located by a URL, return the NSFileVersion identified by a persistent identifier of the sort returned by -persistentIdentifier, or nil if the version no longer exists.
 */
@@ -160,4 +145,4 @@ When removing versions of a file you should do it as part of a coordinated write
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

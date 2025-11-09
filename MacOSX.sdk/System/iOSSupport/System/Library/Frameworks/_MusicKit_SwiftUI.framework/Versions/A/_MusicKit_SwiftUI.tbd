@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           47049212-B4E5-36F4-8EED-3ECC7970CF3F
+    value:           6594EAEE-3DD2-3229-A798-65EEB2784CDA
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           E80FAA86-ABB4-3DBA-8D82-9744C5E56752
+    value:           3D8B2091-0A88-3756-A145-4064CCFAE7DC
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_MusicKit_SwiftUI.framework/Versions/A/_MusicKit_SwiftUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV03addA0AEvgZ', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV04playA0AEvgZ', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV11descriptionSSvg', 
@@ -67,10 +67,6 @@ exports:
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV6itemID0aB00a4ItemI0VSgvpMV', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV6itemID0aB00a4ItemI0VSgvs', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV7defaultAEvgZ', 
-                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV8userInfoSDySSypGvM', 
-                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV8userInfoSDySSypGvg', 
-                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV8userInfoSDySSypGvpMV', 
-                       '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV8userInfoSDySSypGvs', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV9hashValueSivg', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV9hashValueSivpMV', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsVMa', 

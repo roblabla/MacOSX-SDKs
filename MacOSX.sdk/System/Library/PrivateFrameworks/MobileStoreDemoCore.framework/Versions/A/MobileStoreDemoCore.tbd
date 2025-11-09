@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DF22BD8A-036E-39E1-921B-FC4D0EA12883
+    value:           DA230F42-9CFA-3115-8EEE-9556A863578A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           23EBD19A-56D3-3FE1-86FB-A205C89B4D8C
+    value:           0CB5660F-4EC4-3FA0-BA49-65FA08DEB876
 install-name:    '/System/Library/PrivateFrameworks/MobileStoreDemoCore.framework/Versions/A/MobileStoreDemoCore'
-current-version: 895.100.38
+current-version: 1054
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MobileStoreDemoCoreVersionNumber, _MobileStoreDemoCoreVersionString, 
                        _kMSDDemoUserPasswordKey, _kMSDDemoUserUIDKey, _safeAssignError, 
                        _safeAssignErrorNoOverwrite, _safeAssignErrorWithReason ]

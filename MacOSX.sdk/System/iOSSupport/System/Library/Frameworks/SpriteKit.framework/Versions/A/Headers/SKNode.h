@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, SKNodeFocusBehavior) {
     SKNodeFocusBehaviorNone = 0,    // Not focusable and node has no impact on other nodes that have focus interaction enabled.  This is the default.
     SKNodeFocusBehaviorOccluding,   // Not focusable, but will prevent other focusable nodes that this node visually obscures from being focusable.
     SKNodeFocusBehaviorFocusable    // Focusable and will also prevent other focusable nodes that this node visually obscures from being focusable.
-} API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(macos, watchos);
+} API_AVAILABLE(ios(11.0), tvos(11.0), watchos(9.0)) API_UNAVAILABLE(macos);
 
 /**
  A SpriteKit scene graph node. These are the branch nodes that together with geometric leaf nodes make up the directed acyclic graph that is the SpriteKit scene graph tree.
@@ -124,7 +124,7 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSSecureCoding>
 /**
  Determines how this node participates in the focus system.  The default is SKNodeFocusBehaviorNone.
  */
-@property (nonatomic) SKNodeFocusBehavior focusBehavior API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(macos, watchos);
+@property (nonatomic) SKNodeFocusBehavior focusBehavior API_AVAILABLE(ios(11.0), tvos(11.0), watchos(9.0)) API_UNAVAILABLE(macos);
 
 /**
  The parent of the node.

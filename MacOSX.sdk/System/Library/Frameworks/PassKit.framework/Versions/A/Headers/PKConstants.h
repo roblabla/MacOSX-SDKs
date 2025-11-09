@@ -1,3 +1,4 @@
+#if !__has_include(<PassKitCore/PKConstants.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKConstants.h
 //  PassKit
@@ -16,6 +17,8 @@ extern PKEncryptionScheme const PKEncryptionSchemeRSA_V2 API_AVAILABLE(ios(10.0)
 
 typedef NSString * PKPaymentNetwork NS_EXTENSIBLE_STRING_ENUM;
 extern PKPaymentNetwork const PKPaymentNetworkAmex API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0));
+extern PKPaymentNetwork const PKPaymentNetworkBancomat API_AVAILABLE(macos(12.0), ios(16.0), watchos(9.0));
+extern PKPaymentNetwork const PKPaymentNetworkBancontact API_AVAILABLE(macos(12.0), ios(16.0), watchos(9.0));
 extern PKPaymentNetwork const PKPaymentNetworkCarteBancaire API_DEPRECATED("Use PKPaymentNetworkCartesBancaires instead.", macos(10.13, 11.0), ios(10.3, 11.0), watchos(3.2, 4.0));
 extern PKPaymentNetwork const PKPaymentNetworkCarteBancaires API_DEPRECATED("Use PKPaymentNetworkCartesBancaires instead.", macos(10.13, 11.0), ios(11.0, 11.2), watchos(4.0, 4.2));
 extern PKPaymentNetwork const PKPaymentNetworkCartesBancaires API_AVAILABLE(macos(11.0), ios(11.2), watchos(4.2));
@@ -41,9 +44,6 @@ extern PKPaymentNetwork const PKPaymentNetworkBarcode API_AVAILABLE(macos(11.0),
 extern PKPaymentNetwork const PKPaymentNetworkGirocard API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0));
 extern PKPaymentNetwork const PKPaymentNetworkWaon API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0));
 extern PKPaymentNetwork const PKPaymentNetworkNanaco API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0));
-#if APPLE_FEATURE_LYNX
-extern PKPaymentNetwork const PKPaymentNetworkAppleStoredValue API_AVAILABLE(macos(12.4), ios(15.4), watchos(8.4));
-#endif // APPLE_FEATURE_LYNX
 typedef NSString * PKContactField NS_STRING_ENUM;
 extern PKContactField const PKContactFieldPostalAddress API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0));
 extern PKContactField const PKContactFieldEmailAddress  API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0));
@@ -99,3 +99,7 @@ typedef NS_OPTIONS(NSUInteger, PKRadioTechnology) {
 } API_AVAILABLE(ios(14.5), watchos(7.3));
 
 #endif // PKCONSTANTS_H
+
+#else
+#import <PassKitCore/PKConstants.h>
+#endif

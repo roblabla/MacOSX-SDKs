@@ -12,6 +12,7 @@
 #import <MetricKit/MXCPUExceptionDiagnostic.h>
 #import <MetricKit/MXDiskWriteExceptionDiagnostic.h>
 #import <MetricKit/MXHangDiagnostic.h>
+#import <MetricKit/MXAppLaunchDiagnostic.h>
 #import <MetricKit/MXCrashDiagnostic.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -45,6 +46,12 @@ API_AVAILABLE(ios(14.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
 @abstract      An array containing hang diagnostics for this application.
 */
 @property (readonly, strong, nullable) NSArray<MXHangDiagnostic *> *hangDiagnostics;
+
+/*!
+@property      appLaunchDiagnostics
+@abstract      An array containing app launch diagnostics for this application.
+*/
+@property (readonly, strong, nullable) NSArray<MXAppLaunchDiagnostic *> *appLaunchDiagnostics API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 /*!
 @property      crashDiagnostics

@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2B13DAB2-8316-3047-82FB-B89FDDE7C095
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
+    value:           570B825A-1399-341E-B8A5-20CC5AA5671F
   - target:          arm64e-macos
-    value:           D6E3E224-A6F3-3CBC-93E7-2D6C4A22F5C2
+    value:           2125E5A4-3D7F-3F5B-9D94-56BB6DC183E5
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libLLVMContainer.dylib'
 exports:
   - targets:         [ x86_64-macos ]

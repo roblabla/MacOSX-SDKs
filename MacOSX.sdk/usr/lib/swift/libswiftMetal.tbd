@@ -4,33 +4,34 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           896861B8-FCF9-391A-A7E1-D638537B58A5
+    value:           4FC3C66A-ABFA-35B9-AE43-9444A0B0DACE
   - target:          x86_64-maccatalyst
-    value:           896861B8-FCF9-391A-A7E1-D638537B58A5
+    value:           4FC3C66A-ABFA-35B9-AE43-9444A0B0DACE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           998EE455-1B70-348F-8E3A-44A9CCDE84BE
+    value:           3DAFB6C4-414B-3ED9-B5A8-01FDD8FA2550
   - target:          arm64e-maccatalyst
-    value:           998EE455-1B70-348F-8E3A-44A9CCDE84BE
+    value:           3DAFB6C4-414B-3ED9-B5A8-01FDD8FA2550
 install-name:    '/usr/lib/swift/libswiftMetal.dylib'
-current-version: 261.13
+current-version: 306.2.4
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftMetal.dylib', '$ld$install_name$os10.11$@rpath/libswiftMetal.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftMetal.dylib', '$ld$install_name$os10.13$@rpath/libswiftMetal.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftMetal.dylib', '$ld$install_name$os10.9$@rpath/libswiftMetal.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s5Metal15MTLLogContainerV12makeIteratorAC0E0VyF', '_$s5Metal15MTLLogContainerV8IteratorV4nextSo14MTLFunctionLog_pSgyF', 
                        '_$s5Metal15MTLLogContainerV8IteratorVMa', '_$s5Metal15MTLLogContainerV8IteratorVMn', 
                        '_$s5Metal15MTLLogContainerV8IteratorVN', '_$s5Metal15MTLLogContainerV8IteratorVStAAMc', 
                        '_$s5Metal15MTLLogContainerVMa', '_$s5Metal15MTLLogContainerVMn', 
                        '_$s5Metal15MTLLogContainerVN', '_$s5Metal15MTLLogContainerVSTAAMc', 
                        '_$s5Metal29MTLCopyAllDevicesWithObserver7handlerSaySo9MTLDevice_pG7devices_So8NSObjectC8observertySoAD_p_So0H16NotificationNameatc_tF', 
+                       '_$s5Metal29MTLIOCreateCompressionContextySvSgSS_So22MTLIOCompressionMethodVSitF', 
                        '_$sSo10MTLTextureP5MetalE15makeTextureView11pixelFormat11textureType6levels6slices7swizzleSoAA_pSgSo08MTLPixelG0V_So0aI0VSnySiGAOSo0A15SwizzleChannelsatF', 
                        '_$sSo10MTLTextureP5MetalE15makeTextureView11pixelFormat11textureType6levels6slicesSoAA_pSgSo08MTLPixelG0V_So0aI0VSnySiGANtF', 
                        '_$sSo16MTLCommandBufferP5MetalE4logsAC15MTLLogContainerVvg', 
@@ -51,11 +52,19 @@ exports:
                        '_$sSo23MTLRenderCommandEncoderP5MetalE12setViewportsyySaySo11MTLViewportaGF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE12useResources_5usageySaySo11MTLResource_pG_So0H5UsageVtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE13memoryBarrier9resources5after6beforeySaySo11MTLResource_pG_So0A6StagesVAKtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE14setMeshBuffers_7offsets5rangeySaySo9MTLBuffer_pSgG_SaySiGSnySiGtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE15setMeshTextures_5rangeySaySo10MTLTexture_pSgG_SnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE15setScissorRectsyySaySo14MTLScissorRectaGF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE16setObjectBuffers_7offsets5rangeySaySo9MTLBuffer_pSgG_SaySiGSnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE16setVertexBuffers_7offsets5rangeySaySo9MTLBuffer_pSgG_SaySiGSnySiGtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE17setObjectTextures_5rangeySaySo10MTLTexture_pSgG_SnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE17setVertexTextures_5rangeySaySo10MTLTexture_pSgG_SnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE18setFragmentBuffers_7offsets5rangeySaySo9MTLBuffer_pSgG_SaySiGSnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE19setFragmentTextures_5rangeySaySo10MTLTexture_pSgG_SnySiGtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE20setMeshSamplerStates_12lodMinClamps0i3MaxK05rangeySaySo15MTLSamplerState_pSgG_SaySfGAKSnySiGtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE20setMeshSamplerStates_5rangeySaySo15MTLSamplerState_pSgG_SnySiGtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE22setObjectSamplerStates_12lodMinClamps0i3MaxK05rangeySaySo15MTLSamplerState_pSgG_SaySfGAKSnySiGtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE22setObjectSamplerStates_5rangeySaySo15MTLSamplerState_pSgG_SnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE22setVertexSamplerStates_12lodMinClamps0i3MaxK05rangeySaySo15MTLSamplerState_pSgG_SaySfGAKSnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE22setVertexSamplerStates_5rangeySaySo15MTLSamplerState_pSgG_SnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE23executeCommandsInBuffer_08indirectH06offsetySo011MTLIndirectbH0_p_So9MTLBuffer_pSitF', 
@@ -102,6 +111,7 @@ exports:
                        '_$sSo38MTLAccelerationStructureCommandEncoderP5MetalE8useHeapsyySaySo7MTLHeap_pGF', 
                        '_$sSo9MTLBufferP5MetalE14addDebugMarker_5rangeySS_SnySiGtF', 
                        '_$sSo9MTLBufferP5MetalE14didModifyRangeyySnySiGF', '_$sSo9MTLDeviceP5MetalE16sampleTimestampss6UInt64V3cpu_AF3gputyF', 
+                       '_$sSo9MTLDeviceP5MetalE23makeRenderPipelineState10descriptor7optionsSo09MTLRendereF0_p_So0iE10ReflectionCSgtSo07MTLMeshdE10DescriptorC_So17MTLPipelineOptionVtKF', 
                        '_$sSo9MTLDeviceP5MetalE25getDefaultSamplePositions11sampleCountSaySo17MTLSamplePositionaGSi_tF', 
                        '__swift_FORCE_LOAD_$_swiftMetal' ]
 ...

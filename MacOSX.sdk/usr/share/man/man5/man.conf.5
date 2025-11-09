@@ -1,50 +1,142 @@
+.\"-
+.\"  Copyright (c) 2010 Gordon Tetlow
+.\"  All rights reserved.
 .\"
-.\" Generated automatically from man.conf.5.in by the
-.\" configure script.
+.\"  Redistribution and use in source and binary forms, with or without
+.\"  modification, are permitted provided that the following conditions
+.\"  are met:
+.\"  1. Redistributions of source code must retain the above copyright
+.\"     notice, this list of conditions and the following disclaimer.
+.\"  2. Redistributions in binary form must reproduce the above copyright
+.\"     notice, this list of conditions and the following disclaimer in the
+.\"     documentation and/or other materials provided with the distribution.
 .\"
-.\" @(#)man.conf
-.TH MAN.CONF 5 "September 19, 2005"
-.SH NAME
-man.conf \- configuration data for man
-.SH DESCRIPTION
-.LP
-This file is read by
-.BR man (1)
-and contains (a) information on how to construct the search path for man,
-(b) full path names for various programs like nroff, eqn, tbl etc. used by man,
-and (c) a list with uncompressors for files with a given extension.
-An alternative version of this file can be specified with
-.LP
-.RS
-man -C private_man.conf ...
-.RE
-.LP
-The command names may be provided with options. 
-Useful options to nroff can be found in grotty(1).
-For example, instead of the default line
-.LP
-.RS
-.nf
-NROFF /usr/bin/groff -mandoc -Tlatin1
-.fi
-.RE
-.LP
-one may write
-.LP
-.RS
-.nf
-NROFF /usr/bin/groff -mandoc -Tlatin1 -P-u -P-b
-.fi
-.RE
-.LP
-in order to suppress underlining and overstriking.
-.SH FILES
-.I "/private/etc/man.conf"
-.SH AUTHOR
-John W. Eaton was the original author of
-.BR "man" .
-Zeyd M. Ben-Halim released man 1.2, and Andries Brouwer followed up with versions 1.3 thru 1.5p.
-Federico Lucifredi <flucifredi@acm.org> is the current maintainer.
-.SH "SEE ALSO"
-col(1), (g)eqn(1), (g)pic(1), groff(1), grotty(1), (g)refer(1), (g)tbl(1),
-less(1), man (1) and compress(1), gzip(1).
+.\"  THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+.\"  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\"  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\"  ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+.\"  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\"  DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\"  OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\"  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\"  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\"  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\"  SUCH DAMAGE.
+.\"
+.\" $FreeBSD$
+.\"
+.Dd June 3, 2011
+.Dt MAN.CONF 5
+.Os
+.Sh NAME
+.Nm man.conf
+.Nd
+.Xr man 1
+and
+.Xr manpath 1
+configuration files
+.Sh DESCRIPTION
+The
+.Nm
+file is used to configure the manual search path, locales, and utility set for
+.Xr man 1
+and its related utilities.
+During initialization,
+.Xr man 1
+reads the configuration files located at
+.Pa /usr/local/etc/man.d/*.conf
+and
+.Pa /etc/man.conf .
+.Pp
+The files contained in
+.Pa /usr/local/etc/man.d/*.conf
+are intended to be used by the
+.Xr ports 7
+system for extending the manual set to support additional paths and locales.
+.Pa /etc/man.conf
+is intended to be used by the local administrator to set additional policy.
+.Pp
+Currently supported configuration variables include:
+.Bl -tag -width 12n -offset indent
+.It MANCONFIG
+Overrides the default location to import additional manual configuration files.
+Defaults to
+.Pa /usr/local/etc/man.d/*.conf .
+.It MANPATH
+Adds the specified directory to the manual search path.
+.It MANLOCALE
+Indicates support is available for the given locale.
+.El
+.Pp
+For pages in a given language, overriding the default toolset for
+display is supported via the following definitions:
+.Pp
+.Bl -tag -width 12n -offset indent -compact
+.It EQN Ns _ Ns Va LANG
+.It NROFF Ns _ Ns Va LANG
+.It PIC Ns _ Ns Va LANG
+.It TBL Ns _ Ns Va LANG
+.It TROFF Ns _ Ns Va LANG
+.It REFER Ns _ Ns Va LANG
+.It VGRIND Ns _ Ns Va LANG
+.El
+.Pp
+See the
+.Sx EXAMPLES
+section for how to use these variables.
+.Sh IMPLEMENTATION NOTES
+The parser used for this utility is very basic and only supports comment
+characters (#) at the beginning of a line.
+.Sh FILES
+.Bl -tag -width "Pa /usr/local/etc/man.d/*.conf" -compact
+.It Pa /etc/man.conf
+System configuration file.
+.It Pa /usr/local/etc/man.d/*.conf
+Local configuration files.
+.El
+.Sh EXAMPLES
+A perl port that needs to install additional manual pages outside of the
+default location could install a file in
+.Pa /usr/local/etc/man.d/perl.conf
+with the following contents:
+.Bd -literal -offset indent
+# Add perl man pages to search path
+MANPATH /usr/local/lib/perl5/5.8.9/man
+MANPATH /usr/local/lib/perl5/5.8.9/perl/man
+.Ed
+.Pp
+A Japanese localization port could install a custom toolset and include a
+file in
+.Pa /usr/local/etc/man.d/ja-man-doc.conf
+with the following contents:
+.Bd -literal -offset indent
+# Setup Japanese toolset
+MANLOCALE	ja_JP.eucJP
+EQN_JA		/usr/local/bin/geqn
+PIC_JA		/usr/local/bin/gpic
+TBL_JA		/usr/local/bin/gtbl
+NROFF_JA	/usr/local/bin/groff -man -dlang=ja_JP.eucJP
+TROFF_JA	/usr/local/bin/groff -man -dlang=ja_JP.euc.jp
+.Ed
+.Pp
+If the system administrator decides to override the
+.Va LOCALBASE
+.Xr make 1
+variable causing all
+.Xr ports 7
+to be installed into
+.Pa /opt
+instead of
+.Pa /usr/local ,
+specifying the following in
+.Pa /etc/man.conf
+will accommodate this change:
+.Bd -literal -offset indent
+# Look for additional configuration files
+MANCONFIG /opt/etc/man.d/*.conf
+.Ed
+.Sh SEE ALSO
+.Xr apropos 1 ,
+.Xr man 1 ,
+.Xr manpath 1 ,
+.Xr whatis 1

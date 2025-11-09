@@ -1,6 +1,6 @@
 /* CoreAnimation - CAEDRMetadata.h
 
- Copyright (c) 2018-2021, Apple Inc.
+ Copyright (c) 2018-2022, Apple Inc.
  All rights reserved. */
 
 #ifndef CAEDRMetadata_h
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15), ios(16.0))
 @interface CAEDRMetadata : NSObject
 {
 @private
@@ -87,6 +87,8 @@ API_AVAILABLE(macos(10.15))
  * provider must have already applied the HLG inverse OETF. */
 
 @property (class, readonly, retain) CAEDRMetadata *HLGMetadata;
+
+@property (class, readonly, getter=isAvailable) BOOL available API_AVAILABLE(macos(13.0), ios(16.0));
 
 @end
 

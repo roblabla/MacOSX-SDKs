@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EEA4DE72-EAD7-38F5-8511-3866F6391A54
+    value:           6EC31464-5F2A-335C-BAD3-86341A5AC6DE
   - target:          x86_64-maccatalyst
-    value:           EEA4DE72-EAD7-38F5-8511-3866F6391A54
+    value:           6EC31464-5F2A-335C-BAD3-86341A5AC6DE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EAB1B35B-0101-38AE-B23A-E5E24B48B85F
+    value:           1705DA38-1927-3493-A66B-638E99FD3A9E
   - target:          arm64e-maccatalyst
-    value:           EAB1B35B-0101-38AE-B23A-E5E24B48B85F
+    value:           1705DA38-1927-3493-A66B-638E99FD3A9E
 install-name:    '/System/Library/PrivateFrameworks/CoreNameParser.framework/Versions/A/CoreNameParser'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __NPCollapseWhitespaceAndStrip, __NPRemoveAppSignature, __NPRemoveEmojis, 
                        __NPRemoveParenthesisBracketsAndInside, __NPStripDiatritics, 
                        __NPStripQuotationMarks, __NPTokenizeName, __NPTrimNonLetters, 

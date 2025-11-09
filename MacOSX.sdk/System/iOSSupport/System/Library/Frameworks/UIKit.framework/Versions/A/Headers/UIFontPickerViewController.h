@@ -10,7 +10,7 @@
 #import <UIKit/UIViewController.h>
 #import <UIKit/UIFontPickerViewControllerConfiguration.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIFontPickerViewController;
 
@@ -43,7 +43,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIFontPickerViewController.h>

@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           73A64356-D800-3660-8B1C-D4C29092F094
+    value:           224C57FE-16C2-355B-A554-933F259D11CE
   - target:          x86_64-maccatalyst
-    value:           73A64356-D800-3660-8B1C-D4C29092F094
+    value:           224C57FE-16C2-355B-A554-933F259D11CE
   - target:          x86_64h-macos
-    value:           28CC5448-97E3-3689-B1A6-94C0FB26C688
+    value:           A9A15286-0B52-36BA-A867-5BE088B67CFD
   - target:          x86_64h-maccatalyst
-    value:           28CC5448-97E3-3689-B1A6-94C0FB26C688
+    value:           A9A15286-0B52-36BA-A867-5BE088B67CFD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F136E5CF-9F34-3913-880F-93CE349C7E2F
+    value:           EFFBCF6C-79D9-39CE-8B5E-DE062BE3BB7A
   - target:          arm64e-maccatalyst
-    value:           F136E5CF-9F34-3913-880F-93CE349C7E2F
+    value:           EFFBCF6C-79D9-39CE-8B5E-DE062BE3BB7A
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, x86_64h-maccatalyst, x86_64h-macos, 
-                       arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __cg_TIFFClientOpen, __cg_TIFFClientdata, __cg_TIFFClose, 
                        __cg_TIFFComputeTile, __cg_TIFFCurrentDirOffset, __cg_TIFFDefaultStripSize, 
                        __cg_TIFFFindCODEC, __cg_TIFFFreeDirectory, __cg_TIFFGetField, 

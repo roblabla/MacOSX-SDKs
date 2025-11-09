@@ -4,30 +4,32 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D4B94053-24EF-36D6-BA78-31D9D1F59F76
+    value:           1C9FCF38-4333-30D0-9D9B-16BB55B0A0C6
   - target:          x86_64-maccatalyst
-    value:           D4B94053-24EF-36D6-BA78-31D9D1F59F76
+    value:           1C9FCF38-4333-30D0-9D9B-16BB55B0A0C6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F819B73A-A04B-3909-89FB-4F5249653913
+    value:           E7B2C4D4-30BA-3A1A-A30B-5923B046A43E
   - target:          arm64e-maccatalyst
-    value:           F819B73A-A04B-3909-89FB-4F5249653913
+    value:           E7B2C4D4-30BA-3A1A-A30B-5923B046A43E
 install-name:    '/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _IOSurfaceAlignProperty, _IOSurfaceAllowsPixelSizeCasting, 
-                       _IOSurfaceBindAccel, _IOSurfaceBindAccelOnPlane, _IOSurfaceCopyAllValues, 
-                       _IOSurfaceCopyDataValueBytes, _IOSurfaceCopyValue, _IOSurfaceCreate, 
-                       _IOSurfaceCreateMachPort, _IOSurfaceCreateMachPortWithOptions, 
+                       _IOSurfaceBindAccel, _IOSurfaceBindAccelOnPlane, _IOSurfaceClearDataProperties, 
+                       _IOSurfaceCopyAllValues, _IOSurfaceCopyDataValueBytes, _IOSurfaceCopyValue, 
+                       _IOSurfaceCreate, _IOSurfaceCreateMachPort, _IOSurfaceCreateMachPortWithOptions, 
                        _IOSurfaceCreateWiringAssertion, _IOSurfaceCreateXPCObject, 
-                       _IOSurfaceDecrementUseCount, _IOSurfaceFlushProcessorCaches, 
-                       _IOSurfaceGetAddressFormatOfPlane, _IOSurfaceGetAllocSize, 
-                       _IOSurfaceGetBaseAddress, _IOSurfaceGetBaseAddressOfCompressedTileDataRegionOfPlane, 
+                       _IOSurfaceDecrementUseCount, _IOSurfaceDecrementUseCountForCategory, 
+                       _IOSurfaceFlushProcessorCaches, _IOSurfaceGetAddressFormatOfPlane, 
+                       _IOSurfaceGetAllocSize, _IOSurfaceGetBaseAddress, _IOSurfaceGetBaseAddressOfCompressedTileDataRegionOfPlane, 
+                       _IOSurfaceGetBaseAddressOfCompressedTileDataRegionOfSliceAndPlane, 
                        _IOSurfaceGetBaseAddressOfCompressedTileHeaderRegionOfPlane, 
+                       _IOSurfaceGetBaseAddressOfCompressedTileHeaderRegionOfSliceAndPlane, 
                        _IOSurfaceGetBaseAddressOfPlane, _IOSurfaceGetBitDepthOfComponentOfPlane, 
                        _IOSurfaceGetBitOffsetOfComponentOfPlane, _IOSurfaceGetBulkAttachments, 
                        _IOSurfaceGetBytesPerCompressedTileHeaderOfPlane, _IOSurfaceGetBytesPerElement, 
@@ -37,28 +39,31 @@ exports:
                        _IOSurfaceGetBytesPerTileDataOfPlane, _IOSurfaceGetCacheMode, 
                        _IOSurfaceGetCompressedTileDataRegionMemoryUsedOfPlane, _IOSurfaceGetCompressedTileHeightOfPlane, 
                        _IOSurfaceGetCompressedTileWidthOfPlane, _IOSurfaceGetCompressionFootprintOfPlane, 
-                       _IOSurfaceGetCompressionTypeOfPlane, _IOSurfaceGetDetachModeCode, 
-                       _IOSurfaceGetElementHeight, _IOSurfaceGetElementHeightOfPlane, 
+                       _IOSurfaceGetCompressionTypeOfPlane, _IOSurfaceGetDataProperty, 
+                       _IOSurfaceGetDetachModeCode, _IOSurfaceGetElementHeight, _IOSurfaceGetElementHeightOfPlane, 
                        _IOSurfaceGetElementWidth, _IOSurfaceGetElementWidthOfPlane, 
                        _IOSurfaceGetExtendedPixelsOfPlane, _IOSurfaceGetGraphicsCommPageAddress, 
                        _IOSurfaceGetHTPCPredictionSelectorOfPlane, _IOSurfaceGetHTPCVerticalHeaderGroupingModeOfPlane, 
                        _IOSurfaceGetHeight, _IOSurfaceGetHeightInCompressedTilesOfPlane, 
                        _IOSurfaceGetHeightOfPlane, _IOSurfaceGetHorizontalPixelOffsetWithinCompressedTileArrayOfPlane, 
                        _IOSurfaceGetID, _IOSurfaceGetIndexedTimestamp, _IOSurfaceGetNameOfComponentOfPlane, 
-                       _IOSurfaceGetNumberOfComponentsOfPlane, _IOSurfaceGetOffsetOfPlane, 
-                       _IOSurfaceGetPixelFormat, _IOSurfaceGetPlaneCount, _IOSurfaceGetPropertyAlignment, 
-                       _IOSurfaceGetPropertyMaximum, _IOSurfaceGetProtectionOptions, 
-                       _IOSurfaceGetRangeOfComponentOfPlane, _IOSurfaceGetRegistryID, 
-                       _IOSurfaceGetSeed, _IOSurfaceGetSeedOfPlane, _IOSurfaceGetSizeOfPlane, 
-                       _IOSurfaceGetSubsampling, _IOSurfaceGetTileFormat, _IOSurfaceGetTraceID, 
-                       _IOSurfaceGetTypeID, _IOSurfaceGetTypeOfComponentOfPlane, 
-                       _IOSurfaceGetUseCount, _IOSurfaceGetVerticalPixelOffsetWithinCompressedTileArrayOfPlane, 
+                       _IOSurfaceGetNumberOfComponentsOfPlane, _IOSurfaceGetNumberOfUseCountCategories, 
+                       _IOSurfaceGetOffsetOfPlane, _IOSurfaceGetPixelFormat, _IOSurfaceGetPlaneCount, 
+                       _IOSurfaceGetPropertyAlignment, _IOSurfaceGetPropertyMaximum, 
+                       _IOSurfaceGetProtectionOptions, _IOSurfaceGetRangeOfComponentOfPlane, 
+                       _IOSurfaceGetRegistryID, _IOSurfaceGetSeed, _IOSurfaceGetSeedOfPlane, 
+                       _IOSurfaceGetSizeOfPlane, _IOSurfaceGetSliceCount, _IOSurfaceGetSubsampling, 
+                       _IOSurfaceGetTileFormat, _IOSurfaceGetTraceID, _IOSurfaceGetTypeID, 
+                       _IOSurfaceGetTypeOfComponentOfPlane, _IOSurfaceGetUseCount, 
+                       _IOSurfaceGetVerticalPixelOffsetWithinCompressedTileArrayOfPlane, 
                        _IOSurfaceGetWidth, _IOSurfaceGetWidthInCompressedTilesOfPlane, 
                        _IOSurfaceGetWidthOfPlane, _IOSurfaceGetYCbCrMatrix, _IOSurfaceIncrementUseCount, 
-                       _IOSurfaceInitDetachModeCode, _IOSurfaceIsDisplayable, _IOSurfaceIsInUse, 
-                       _IOSurfaceIsSysMemOnly, _IOSurfaceIsTiled, _IOSurfaceLock, 
-                       _IOSurfaceLockPlane, _IOSurfaceLog, _IOSurfaceLookup, _IOSurfaceLookupFromMachPort, 
-                       _IOSurfaceLookupFromXPCObject, _IOSurfaceNeedsBindAccel, _IOSurfaceNeedsBindAccelOnPlane, 
+                       _IOSurfaceIncrementUseCountForCategory, _IOSurfaceInitDetachModeCode, 
+                       _IOSurfaceIsDisplayable, _IOSurfaceIsInUse, _IOSurfaceIsInUseForAnyOtherCategory, 
+                       _IOSurfaceIsInUseForCategory, _IOSurfaceIsSysMemOnly, _IOSurfaceIsTiled, 
+                       _IOSurfaceLock, _IOSurfaceLockPlane, _IOSurfaceLog, _IOSurfaceLookup, 
+                       _IOSurfaceLookupFromMachPort, _IOSurfaceLookupFromXPCObject, 
+                       _IOSurfaceNeedsBindAccel, _IOSurfaceNeedsBindAccelOnPlane, 
                        _IOSurfaceNotifierCreate, _IOSurfaceNotifierGetMachPort, _IOSurfaceNotifierGetRunLoopSource, 
                        _IOSurfaceNotifierGetTypeID, _IOSurfaceNotifierInvalidate, 
                        _IOSurfaceNotifierSetDispatchQueue, _IOSurfacePrefetchPages, 
@@ -66,7 +71,7 @@ exports:
                        _IOSurfacePropertyKeyBytesPerElement, _IOSurfacePropertyKeyBytesPerRow, 
                        _IOSurfacePropertyKeyCacheMode, _IOSurfacePropertyKeyElementHeight, 
                        _IOSurfacePropertyKeyElementWidth, _IOSurfacePropertyKeyHeight, 
-                       _IOSurfacePropertyKeyOffset, _IOSurfacePropertyKeyPixelFormat, 
+                       _IOSurfacePropertyKeyName, _IOSurfacePropertyKeyOffset, _IOSurfacePropertyKeyPixelFormat, 
                        _IOSurfacePropertyKeyPixelSizeCastingAllowed, _IOSurfacePropertyKeyPlaneBase, 
                        _IOSurfacePropertyKeyPlaneBytesPerElement, _IOSurfacePropertyKeyPlaneBytesPerRow, 
                        _IOSurfacePropertyKeyPlaneElementHeight, _IOSurfacePropertyKeyPlaneElementWidth, 
@@ -76,16 +81,17 @@ exports:
                        _IOSurfacePropertyKeyWidth, _IOSurfaceRemoteServerOptionDebugLogBlock, 
                        _IOSurfaceRemoteServerOptionDebugLogQueue, _IOSurfaceRemoveAllValues, 
                        _IOSurfaceRemoveValue, _IOSurfaceSetBulkAttachments, _IOSurfaceSetBulkAttachments2, 
-                       _IOSurfaceSetCompressedTileDataRegionMemoryUsedOfPlane, _IOSurfaceSetDetachModeCode, 
-                       _IOSurfaceSetIndexedTimestamp, _IOSurfaceSetOwnership, _IOSurfaceSetOwnershipIdentity, 
-                       _IOSurfaceSetPurgeable, _IOSurfaceSetTiled, _IOSurfaceSetTimestamp, 
-                       _IOSurfaceSetValue, _IOSurfaceSetValues, _IOSurfaceSetYCbCrMatrix, 
-                       _IOSurfaceSharedEventAddEventListener, _IOSurfaceSharedEventAddListener, 
-                       _IOSurfaceSharedEventNotifyEventListener, _IOSurfaceSharedEventNotifyListener, 
-                       _IOSurfaceSharedEventRemoveEventListener, _IOSurfaceSharedEventRemoveListener, 
-                       _IOSurfaceSignalEvent, _IOSurfaceSupportsProtectionOptions, 
-                       _IOSurfaceUnlock, _IOSurfaceUnlockPlane, _IOSurfaceWiringAssertionGetTypeID, 
-                       _IOSurfaceWrapClientImage, _IOSurfaceWrapClientMemory, _kIOFenceAllowTearing, 
+                       _IOSurfaceSetCompressedTileDataRegionMemoryUsedOfPlane, _IOSurfaceSetDataProperty, 
+                       _IOSurfaceSetDetachModeCode, _IOSurfaceSetIndexedTimestamp, 
+                       _IOSurfaceSetOwnership, _IOSurfaceSetOwnershipIdentity, _IOSurfaceSetPurgeable, 
+                       _IOSurfaceSetTiled, _IOSurfaceSetTimestamp, _IOSurfaceSetValue, 
+                       _IOSurfaceSetValues, _IOSurfaceSetYCbCrMatrix, _IOSurfaceSharedEventAddEventListener, 
+                       _IOSurfaceSharedEventAddListener, _IOSurfaceSharedEventNotifyEventListener, 
+                       _IOSurfaceSharedEventNotifyListener, _IOSurfaceSharedEventRemoveEventListener, 
+                       _IOSurfaceSharedEventRemoveListener, _IOSurfaceSignalEvent, 
+                       _IOSurfaceSupportsProtectionOptions, _IOSurfaceUnlock, _IOSurfaceUnlockPlane, 
+                       _IOSurfaceWiringAssertionGetTypeID, _IOSurfaceWrapClientImage, 
+                       _IOSurfaceWrapClientMemory, __iosCreateNamedProperties, _kIOFenceAllowTearing, 
                        _kIOSurfaceAddressFormat, _kIOSurfaceAllocSize, _kIOSurfaceAllocateFromSuperbuffer, 
                        _kIOSurfaceBufferTileFormat, _kIOSurfaceBufferTileMode, _kIOSurfaceBytesPerElement, 
                        _kIOSurfaceBytesPerRow, _kIOSurfaceCacheMode, _kIOSurfaceChromaLocationBottomField, 
@@ -116,7 +122,9 @@ exports:
                        _kIOSurfaceHDRImageStatisticsInfo_Average, _kIOSurfaceHDRImageStatisticsInfo_Maximum, 
                        _kIOSurfaceHDRImageStatisticsInfo_Minimum, _kIOSurfaceHeight, 
                        _kIOSurfaceICCProfile, _kIOSurfaceIsDisplayable, _kIOSurfaceIsGlobal, 
-                       _kIOSurfaceIsPrivate, _kIOSurfaceMapCacheAttribute, _kIOSurfaceMemoryRegion, 
+                       _kIOSurfaceIsPrivate, _kIOSurfaceMapCacheAttribute, _kIOSurfaceMemoryPoolCacheModeSwitchEnabled, 
+                       _kIOSurfaceMemoryPoolEntitlement, _kIOSurfaceMemoryPoolSize, 
+                       _kIOSurfaceMemoryPoolZeroFillEnabled, _kIOSurfaceMemoryRegion, 
                        _kIOSurfaceName, _kIOSurfaceNonPurgeable, _kIOSurfaceOffset, 
                        _kIOSurfacePixelAspectRatio, _kIOSurfacePixelAspectRatioHorizontalSpacing, 
                        _kIOSurfacePixelAspectRatioVerticalSpacing, _kIOSurfacePixelCastingAllowed, 
@@ -130,10 +138,11 @@ exports:
                        _kIOSurfacePlaneCompressedTileDataRegionOffset, _kIOSurfacePlaneCompressedTileHeaderRegionOffset, 
                        _kIOSurfacePlaneCompressedTileHeight, _kIOSurfacePlaneCompressedTileWidth, 
                        _kIOSurfacePlaneCompressionFootprint, _kIOSurfacePlaneCompressionType, 
-                       _kIOSurfacePlaneElementHeight, _kIOSurfacePlaneElementWidth, 
-                       _kIOSurfacePlaneExtendedPixelsOnBottom, _kIOSurfacePlaneExtendedPixelsOnLeft, 
-                       _kIOSurfacePlaneExtendedPixelsOnRight, _kIOSurfacePlaneExtendedPixelsOnTop, 
-                       _kIOSurfacePlaneHTPCPredictionSelector, _kIOSurfacePlaneHTPCVerticalHeaderGroupingMode, 
+                       _kIOSurfacePlaneDataRegionBytesPerSlice, _kIOSurfacePlaneElementHeight, 
+                       _kIOSurfacePlaneElementWidth, _kIOSurfacePlaneExtendedPixelsOnBottom, 
+                       _kIOSurfacePlaneExtendedPixelsOnLeft, _kIOSurfacePlaneExtendedPixelsOnRight, 
+                       _kIOSurfacePlaneExtendedPixelsOnTop, _kIOSurfacePlaneHTPCPredictionSelector, 
+                       _kIOSurfacePlaneHTPCVerticalHeaderGroupingMode, _kIOSurfacePlaneHeaderRegionBytesPerSlice, 
                        _kIOSurfacePlaneHeight, _kIOSurfacePlaneHeightInCompressedTiles, 
                        _kIOSurfacePlaneHorizontalPixelOffsetWithinCompressedTileArray, 
                        _kIOSurfacePlaneInfo, _kIOSurfacePlaneOffset, _kIOSurfacePlaneSize, 
@@ -141,9 +150,9 @@ exports:
                        _kIOSurfacePlaneWidth, _kIOSurfacePlaneWidthInCompressedTiles, 
                        _kIOSurfacePreallocPages, _kIOSurfacePrefetchPages, _kIOSurfaceProtectionOptions, 
                        _kIOSurfacePurgeWhenNotInUse, _kIOSurfaceRemoteServiceName, 
-                       _kIOSurfaceScalerTimes, _kIOSurfaceSubsampling, _kIOSurfaceSuperbuffer, 
-                       _kIOSurfaceSysMemOnly, _kIOSurfaceTimingInfo, _kIOSurfaceTouchEventTimes, 
-                       _kIOSurfaceTransferFunction, _kIOSurfaceTransferFunction_ARIB_STD_B67_HLG, 
+                       _kIOSurfaceScalerTimes, _kIOSurfaceSliceCount, _kIOSurfaceSubsampling, 
+                       _kIOSurfaceSuperbuffer, _kIOSurfaceSysMemOnly, _kIOSurfaceTimingInfo, 
+                       _kIOSurfaceTouchEventTimes, _kIOSurfaceTransferFunction, _kIOSurfaceTransferFunction_ARIB_STD_B67_HLG, 
                        _kIOSurfaceTransferFunction_ITU_R_2100_HLG, _kIOSurfaceTransferFunction_ITU_R_709_2, 
                        _kIOSurfaceTransferFunction_Linear, _kIOSurfaceTransferFunction_SMPTE_240M_1995, 
                        _kIOSurfaceTransferFunction_SMPTE_ST_2084_PQ, _kIOSurfaceTransferFunction_SMPTE_ST_428_1, 
@@ -151,11 +160,14 @@ exports:
                        _kIOSurfaceTransferFunction_sRGB, _kIOSurfaceType, _kIOSurfaceUseReserve, 
                        _kIOSurfaceWidth, _kIOSurfaceYCbCrMatrix, _kIOSurfaceYCbCrMatrix_ITU_R_601_4_String, 
                        _kIOSurfaceYCbCrMatrix_ITU_R_709_2_String, _kIOSurfaceYCbCrMatrix_SMPTE_240M_1995_String ]
-    objc-classes:    [ IOSurface, IOSurfaceDebugDescription, IOSurfaceRemoteServer, 
-                       IOSurfaceSharedEvent, IOSurfaceSharedEventListener, IOSurfaceWiringAssertion ]
-    objc-ivars:      [ IOSurfaceSharedEvent._eventPort, IOSurfaceSharedEvent._globalTraceObjectID, 
-                       IOSurfaceSharedEventListener._dispatchQueue, IOSurfaceSharedEventListener._notificationPort ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    objc-classes:    [ IOSurface, IOSurfaceDebugDescription, IOSurfaceMemoryPool, 
+                       IOSurfaceRemoteServer, IOSurfaceSharedEvent, IOSurfaceSharedEventListener, 
+                       IOSurfaceWiringAssertion ]
+    objc-ivars:      [ IOSurfaceMemoryPool._poolId, IOSurfaceMemoryPool._poolPort, 
+                       IOSurfaceSharedEvent._eventPort, IOSurfaceSharedEvent._globalTraceObjectID, 
+                       IOSurfaceSharedEvent._signaledValue, IOSurfaceSharedEventListener._dispatchQueue, 
+                       IOSurfaceSharedEventListener._notificationPort ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IOSurfaceCopyGPUPolicies, _IOSurfaceCreateChildSurface, _IOSurfaceGetParentID, 
                        _IOSurfaceSetImageOriginAndExtents ]
 ...

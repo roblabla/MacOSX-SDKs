@@ -10,7 +10,7 @@
 #import <UIKit/UIDragInteraction.h>
 #import <UIKit/UITextInput.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_OPTIONS(NSInteger, UITextDragOptions) {
     UITextDragOptionsNone = 0,
@@ -132,7 +132,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @end
 
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UITextDragging.h>

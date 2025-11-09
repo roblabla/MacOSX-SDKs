@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4429DD95-E289-3A3B-8C15-7BEF7375D7DF
+    value:           C4EF44B7-839F-37C1-86E6-4F070BA412C2
   - target:          x86_64-maccatalyst
-    value:           4429DD95-E289-3A3B-8C15-7BEF7375D7DF
+    value:           C4EF44B7-839F-37C1-86E6-4F070BA412C2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4947EE62-1FC5-3FA6-8072-66001D0341D3
+    value:           936A0C1B-9884-3BAD-8F3A-1F1BCC17011F
   - target:          arm64e-maccatalyst
-    value:           4947EE62-1FC5-3FA6-8072-66001D0341D3
+    value:           936A0C1B-9884-3BAD-8F3A-1F1BCC17011F
 install-name:    '/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation'
-current-version: 55255.100.1
+current-version: 55259.40.2
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/Security.framework/Versions/A/Security' ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SFAccessibilityMakeWithMode, _SFCertificateAuthorityInputParmKeyDestinationKeychain, 
                        _SFCertificateAuthorityInputParmKeySignerKeychain, _SFCoreCryptoErrorDomain, 
                        _SFCryptoServicesErrorDecryptionFailed, _SFCryptoServicesErrorDeserializationFailed, 
@@ -79,7 +79,7 @@ exports:
                        _SFSHA224DigestOperation, _SFSHA256DigestOperation, _SFSHA384DigestOperation, 
                        _SFSHA512DigestOperation, _SFServiceIdentifier, _SFSignedData, 
                        _SFSymmetricKey, _SFSymmetricKeySpecifier, _SFTripleDESKeySpecifier ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __ZN10CertParser10initFieldsEv, __ZN10CertParser11fieldForOidERK9cssm_dataj, 
                        __ZN10CertParser12initWithDataERK9cssm_data, __ZN10CertParser14initWithCFDataEPK8__CFData, 
                        __ZN10CertParser15extensionForOidERK9cssm_data, __ZN10CertParser15initWithSecCertEP16__SecCertificate, 

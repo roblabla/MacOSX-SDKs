@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           76E7AB3F-6C5B-3122-868F-570BDAAB8605
+    value:           4CDD02DD-64ED-3621-BF46-35CCA38D33DB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7B60FDB4-22DD-3141-96D9-6E3C9106AA35
+    value:           F8A0BBC9-F8A9-3019-AB55-A1E55AC2DDCF
 install-name:    '/System/Library/PrivateFrameworks/CDDataAccess.framework/Versions/A/CDDataAccess'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DAAccountFolderContentsChangedNotification, _DAAccountFolderHierarchyChangedNotification, 
                        _DAAccountFolderHierarchyNeedsUpdateNotification, _DAAccountFolderHierarchyNeedsUpdateRequireChangedFoldersNotification, 
                        _DAAccountFolderUpdatedWithNoChangesNotification, _DAAccountPushedFolderPreferencesChangedNotification, 

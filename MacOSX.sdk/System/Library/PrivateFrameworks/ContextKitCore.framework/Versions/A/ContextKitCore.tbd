@@ -4,25 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           08E370EE-C9CB-30FD-813A-46C3FBCC1035
+    value:           41927170-25A5-3BCA-B8D7-85AC39B0208E
   - target:          x86_64-maccatalyst
-    value:           08E370EE-C9CB-30FD-813A-46C3FBCC1035
+    value:           41927170-25A5-3BCA-B8D7-85AC39B0208E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F5223634-C8AF-349B-96A3-CDC58C0EA1A7
+    value:           1F34E63B-5C6E-34FF-A42F-6232EED4FF1F
   - target:          arm64e-maccatalyst
-    value:           F5223634-C8AF-349B-96A3-CDC58C0EA1A7
+    value:           1F34E63B-5C6E-34FF-A42F-6232EED4FF1F
 install-name:    '/System/Library/PrivateFrameworks/ContextKitCore.framework/Versions/A/ContextKitCore'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _CKContextTagTypeAddress, _CKContextTagTypeButton, _CKContextTagTypeDateTime, 
-                       _CKContextTagTypeHMAccessory, _CKContextTagTypeHMRoom, _CKContextTagTypePersonReal, 
-                       _CKContextTagTypePhoneNumber, _CKContextTagTypePlainTextLabel, 
-                       _CKContextTagTypeTitle, _CKContextTagTypeURL, _ContextKitCoreVersionNumber, 
-                       _ContextKitCoreVersionString ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _ContextKitCoreVersionNumber, _ContextKitCoreVersionString ]
     objc-classes:    [ CKContextDonation, CKContextDonationItem, CKContextUserActivity ]
 ...

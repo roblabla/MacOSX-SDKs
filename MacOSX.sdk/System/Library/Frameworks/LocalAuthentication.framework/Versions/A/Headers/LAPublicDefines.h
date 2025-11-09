@@ -13,6 +13,7 @@
 #define kLAPolicyDeviceOwnerAuthentication                      2
 #define kLAPolicyDeviceOwnerAuthenticationWithWatch             3
 #define kLAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch 4
+#define kLAPolicyDeviceOwnerAuthenticationWithWristDetection    5
 
 // Credential types
 #define kLACredentialTypeApplicationPassword                0

@@ -72,35 +72,35 @@ API_AVAILABLE(macos(10.8))
 
 /* Return the identifier of the view controller that owns a view to display the object. If NSPageController does not have an unused viewController for this identifier, then you will be asked to create one via pageController:viewControllerForIdentifier.
  */
-- (NSPageControllerObjectIdentifier)pageController:(NSPageController *)pageController identifierForObject:(id)object;
+- (NSPageControllerObjectIdentifier)pageController:(NSPageController *)pageController identifierForObject:(id)object NS_SWIFT_UI_ACTOR;
 
 /* NSPageController will cache as many viewControllers and views as necessary to maintain performance. This method is called whenever another instance is required. Note: The viewController may become the selectedViewController after a transition if necessary.
  */
-- (NSViewController *)pageController:(NSPageController *)pageController viewControllerForIdentifier:(NSPageControllerObjectIdentifier)identifier;
+- (NSViewController *)pageController:(NSPageController *)pageController viewControllerForIdentifier:(NSPageControllerObjectIdentifier)identifier NS_SWIFT_UI_ACTOR;
 
 /* NOTE: The following 2 methods are only useful if you also implement the above two methods.
  */
 
 /* You only need to implement this if the view frame can differ between arrangedObjects. This method must return immediately. Avoid file, network or any potentially blocking or lengthy work to provide an answer. This method is called with a nil object to get the default frame size. If this method is not implemented, all arrangedObjects are assumed to have the same frame as the current selectedViewController.view or the bounds of view when selectedViewController is nil.
  */
-- (NSRect)pageController:(NSPageController *)pageController frameForObject:(nullable id)object;
+- (NSRect)pageController:(NSPageController *)pageController frameForObject:(nullable id)object NS_SWIFT_UI_ACTOR;
 
 /* Prepare the viewController and view for drawing. Setup data sources and perform layout. Note: a nil object is passed for the purposes of caching a rendering of a default viewController. Note: this method is called on the main thread and should return immediately. The view will be asked to draw on a background thread and must support background drawing. If this method is not implemented, then viewController's representedObject is set to the representedObject.
  */
-- (void)pageController:(NSPageController *)pageController prepareViewController:(NSViewController *)viewController withObject:(nullable id)object;
+- (void)pageController:(NSPageController *)pageController prepareViewController:(NSViewController *)viewController withObject:(nullable id)object NS_SWIFT_UI_ACTOR;
 
 /* Note: You may find these useful regardless of which way you use NSPageController (History vs Custom).
  */
 
 /* This message is sent when any page transition is completed. */
-- (void)pageController:(NSPageController *)pageController didTransitionToObject:(id)object;
+- (void)pageController:(NSPageController *)pageController didTransitionToObject:(id)object NS_SWIFT_UI_ACTOR;
 
 /* This message is sent when the user begins a transition wither via swipe gesture of one of the navigation IBAction methods. */
-- (void)pageControllerWillStartLiveTransition:(NSPageController *)pageController;
+- (void)pageControllerWillStartLiveTransition:(NSPageController *)pageController NS_SWIFT_UI_ACTOR;
 
 /* This message is sent when a transition animation completes either via swipe gesture or one of the navigation IBAction methods. Your content view is still hidden and you must call -completeTransition; on pageController when your content is ready to show. If completed successfully, a pageController:didTransitionToRepresentedObject: will already have been sent.
  */
-- (void)pageControllerDidEndLiveTransition:(NSPageController *)pageController;
+- (void)pageControllerDidEndLiveTransition:(NSPageController *)pageController NS_SWIFT_UI_ACTOR;
 
 
 @end

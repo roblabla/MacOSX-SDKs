@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           456ABBA8-735B-30D9-8E3A-CF3105C392E4
+    value:           A78CAB84-75B7-3A61-A895-6A5F20F22C0C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9CCE4FB4-8923-3612-A5E7-D830A6A817B5
+    value:           CF7CB87B-B325-38F5-848C-1050F9333C5F
 install-name:    '/System/Library/PrivateFrameworks/AudioServerDriver.framework/Versions/A/AudioServerDriver'
 exports:
   - targets:         [ x86_64-macos ]
@@ -19,7 +19,7 @@ exports:
                        __ZTSN8DSPGraph9ExceptionE, __ZTSNSt3__117bad_function_callE, 
                        __ZTSSt11logic_error, __ZTSSt12length_error, __ZTSSt13runtime_error, 
                        __ZTSSt9bad_alloc, __ZTSSt9exception ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ASDStereoPanControlCenter, _ASDStereoPanControlFullLeft, 
                        _ASDStereoPanControlFullRight, _ASD_AddAudioDeviceRealTimeOperations, 
                        _ASD_AddClockDeviceRealTimeOperations, _ASD_AddPlugin, _ASD_AddStreamRealTimeOperations, 
@@ -186,7 +186,7 @@ exports:
                        ASDRingBufferStreamPair, ASDSRCAudioDevice, ASDSRCStream, 
                        ASDSelectorControl, ASDSelectorValue, ASDSliderControl, ASDStereoPanControl, 
                        ASDStream, ASDStreamDSPConfiguration, ASDStreamFormat ]
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ __ZN5CALog6log_vaEiPKNS_5ScopeEPKciS4_S4_PK10__CFStringPc, 
                        __ZN5CALog7vprintfEiPKcPc ]
 ...

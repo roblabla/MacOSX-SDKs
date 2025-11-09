@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020 Apple Inc.
+ * Copyright (c) 2016, 2020, 2022 Apple Inc.
  * All rights reserved.
  */
 
@@ -9,7 +9,6 @@
 
 #import <netinet/in.h>
 #import <NetworkExtension/NENetworkRule.h>
-#import "NEFilterFlow.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

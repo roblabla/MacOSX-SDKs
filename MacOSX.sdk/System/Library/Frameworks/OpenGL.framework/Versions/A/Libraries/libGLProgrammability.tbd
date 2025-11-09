@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           44EAA5BB-8FC9-31E9-A7F6-F8C9D443A83B
+    value:           7CC4221F-5FD0-39EF-AA33-D65FF3390F7C
   - target:          x86_64-maccatalyst
-    value:           44EAA5BB-8FC9-31E9-A7F6-F8C9D443A83B
+    value:           7CC4221F-5FD0-39EF-AA33-D65FF3390F7C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F3130BCA-90B1-3F85-9401-94AC95AA8A1E
+    value:           C014E74D-ADB8-3365-B2D9-3C3AAE7E4FF1
   - target:          arm64e-maccatalyst
-    value:           F3130BCA-90B1-3F85-9401-94AC95AA8A1E
+    value:           C014E74D-ADB8-3365-B2D9-3C3AAE7E4FF1
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLProgrammability.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
     symbols:         [ _PPParserAttachLLVMIR, _PPParserAttachStream, _PPParserAttachString, 
                        _PPParserBuildErrorString, _PPParserCreate, _PPParserFree, 
                        _PPParserGetErrorString, _PPParserGetImageUnitsUsed, _PPParserGetLimits, 

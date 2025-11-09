@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           317E169C-AE11-3F65-A619-4D4B98B2D20F
+    value:           0C98F0BD-FF68-316A-AD1B-37C8EE660845
   - target:          x86_64-maccatalyst
-    value:           317E169C-AE11-3F65-A619-4D4B98B2D20F
+    value:           0C98F0BD-FF68-316A-AD1B-37C8EE660845
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           87EF2F80-9498-354E-9A9F-9E27720043A5
+    value:           ED786EE3-EBC5-30C4-817B-08D80016EA79
   - target:          arm64e-maccatalyst
-    value:           87EF2F80-9498-354E-9A9F-9E27720043A5
+    value:           ED786EE3-EBC5-30C4-817B-08D80016EA79
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticExtensions.framework/Versions/A/DiagnosticExtensions'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DEExtensionTrackerEarliestExpirationDateKey, _DEExtensionTrackerExpirationDateKey, 
                        _DEExtensionTrackerSessionsKey, _DEExtensionTrackerUserDefaultsKey, 
                        _DEExtensionTrackerXPCActivityDateKey, _DEExtensionTrackerXPCActivityKey, 
@@ -26,7 +26,7 @@ exports:
                        _DiagnosticExtensionsVersionString, _pgrep, _signal_USR2 ]
     objc-classes:    [ DEArchive, DEArchiveReader, DEArchiver, DEAttachmentGroup, 
                        DEAttachmentItem, DEAttachmentItemSandboxExtensionHandle, 
-                       DEExtension, DEExtensionContext, DEExtensionHostContext, DEExtensionManager, 
-                       DEExtensionProvider, DEExtensionTracker, DELogMover, DELogging, 
-                       DEUtils, DiagnosticExtensions_Subsystem ]
+                       DECollectionProgress, DEExtension, DEExtensionContext, DEExtensionHostContext, 
+                       DEExtensionManager, DEExtensionProvider, DEExtensionTracker, 
+                       DELogMover, DELogging, DELoggingPreferences, DEUtils, DiagnosticExtensions_Subsystem ]
 ...

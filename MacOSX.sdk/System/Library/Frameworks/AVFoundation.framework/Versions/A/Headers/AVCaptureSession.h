@@ -4,7 +4,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2010-2021 Apple Inc. All rights reserved.
+    Copyright 2010-2022 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     The notification object is the AVCaptureSession instance that encountered a runtime error. The userInfo dictionary contains an NSError for the key AVCaptureSessionErrorKey.
  */
-AVF_EXPORT NSString *const AVCaptureSessionRuntimeErrorNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionRuntimeErrorNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSessionErrorKey
@@ -33,7 +33,7 @@ AVF_EXPORT NSString *const AVCaptureSessionRuntimeErrorNotification API_AVAILABL
  @discussion
     AVCaptureSessionErrorKey may be found in the userInfo dictionary provided with an AVCaptureSessionRuntimeErrorNotification. The NSError associated with the notification gives greater detail on the nature of the error, and in some cases recovery suggestions.
  */
-AVF_EXPORT NSString *const AVCaptureSessionErrorKey API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionErrorKey API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSessionDidStartRunningNotification
@@ -43,7 +43,7 @@ AVF_EXPORT NSString *const AVCaptureSessionErrorKey API_AVAILABLE(macos(10.7), i
  @discussion
     Clients may observe the AVCaptureSessionDidStartRunningNotification to know when an instance of AVCaptureSession starts running.
  */
-AVF_EXPORT NSString *const AVCaptureSessionDidStartRunningNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionDidStartRunningNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSessionDidStopRunningNotification
@@ -53,7 +53,7 @@ AVF_EXPORT NSString *const AVCaptureSessionDidStartRunningNotification API_AVAIL
  @discussion
     Clients may observe the AVCaptureSessionDidStopRunningNotification to know when an instance of AVCaptureSession stops running. An AVCaptureSession instance may stop running automatically due to external system conditions, such as the device going to sleep, or being locked by a user.
  */
-AVF_EXPORT NSString *const AVCaptureSessionDidStopRunningNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionDidStopRunningNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSessionWasInterruptedNotification
@@ -65,7 +65,7 @@ AVF_EXPORT NSString *const AVCaptureSessionDidStopRunningNotification API_AVAILA
  
     Beginning in iOS 9.0, the AVCaptureSessionWasInterruptedNotification userInfo dictionary contains an AVCaptureSessionInterruptionReasonKey indicating the reason for the interruption.
  */
-AVF_EXPORT NSString *const AVCaptureSessionWasInterruptedNotification API_AVAILABLE(macos(10.14), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionWasInterruptedNotification API_AVAILABLE(macos(10.14), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 
 /*!
@@ -90,7 +90,7 @@ typedef NS_ENUM(NSInteger, AVCaptureSessionInterruptionReason) {
     AVCaptureSessionInterruptionReasonVideoDeviceInUseByAnotherClient                   = 3,
     AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableWithMultipleForegroundApps = 4,
     AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableDueToSystemPressure API_AVAILABLE(ios(11.1), macCatalyst(14.0)) = 5,
-} API_AVAILABLE(ios(9.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(ios(9.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 
 /*!
@@ -101,7 +101,7 @@ typedef NS_ENUM(NSInteger, AVCaptureSessionInterruptionReason) {
  @discussion
     AVCaptureSessionInterruptionReasonKey may be found in the userInfo dictionary provided with an AVCaptureSessionWasInterruptedNotification. The NSNumber associated with the notification tells you why the interruption occurred.
  */
-AVF_EXPORT NSString *const AVCaptureSessionInterruptionReasonKey API_AVAILABLE(ios(9.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionInterruptionReasonKey API_AVAILABLE(ios(9.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSessionInterruptionSystemPressureStateKey
@@ -111,7 +111,7 @@ AVF_EXPORT NSString *const AVCaptureSessionInterruptionReasonKey API_AVAILABLE(i
  @discussion
     This key is only present when the AVCaptureSessionInterruptionReasonKey equals AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableDueToSystemPressure.
  */
-AVF_EXPORT NSString *const AVCaptureSessionInterruptionSystemPressureStateKey API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionInterruptionSystemPressureStateKey API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSessionInterruptionEndedNotification
@@ -121,7 +121,7 @@ AVF_EXPORT NSString *const AVCaptureSessionInterruptionSystemPressureStateKey AP
  @discussion
     Clients may observe the AVCaptureSessionInterruptionEndedNotification to know when an instance of AVCaptureSession ceases to be interrupted, for example, when a phone call ends, and hardware resources needed to run the session are again available. When appropriate, the AVCaptureSession instance that was previously stopped in response to an interruption will automatically restart once the interruption ends.
  */
-AVF_EXPORT NSString *const AVCaptureSessionInterruptionEndedNotification API_AVAILABLE(macos(10.14), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionInterruptionEndedNotification API_AVAILABLE(macos(10.14), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @enum AVCaptureVideoOrientation
@@ -142,7 +142,7 @@ typedef NS_ENUM(NSInteger, AVCaptureVideoOrientation) {
     AVCaptureVideoOrientationPortraitUpsideDown = 2,
     AVCaptureVideoOrientationLandscapeRight     = 3,
     AVCaptureVideoOrientationLandscapeLeft      = 4,
-} API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 #pragma mark - AVCaptureSession
 
@@ -159,7 +159,7 @@ typedef NS_ENUM(NSInteger, AVCaptureVideoOrientation) {
  @discussion
     To perform a real-time capture, a client may instantiate AVCaptureSession and add appropriate AVCaptureInputs, such as AVCaptureDeviceInput, and outputs, such as AVCaptureMovieFileOutput. [AVCaptureSession startRunning] starts the flow of data from the inputs to the outputs, and [AVCaptureSession stopRunning] stops the flow. A client may set the sessionPreset property to customize the quality level or bitrate of the output.
  */
-API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
 @interface AVCaptureSession : NSObject
 {
 @private
@@ -264,6 +264,12 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  
  @discussion
     An AVCaptureOutput instance can only be added to a session using -addOutput: if -canAddOutput: returns YES.
+
+    On iOS and Mac Catalyst, some limitations to adding combinations of different types of outputs apply:
+     - A maximum of one output of each type may be added. For applications linked on or after iOS 16.0, this restriction no longer applies to AVCaptureVideoDataOutputs. When adding more than one AVCaptureVideoDataOutput, AVCaptureSession.hardwareCost must be taken into account.
+     - A session cannot contain both an AVCaptureStillImageOutput and an AVCapturePhotoOutput at the same time.
+     - Prior to iOS 16.0, an AVCaptureVideoDataOutput and an AVCaptureMovieFileOutput may be added to the same session, but only one may have its connection active. When both have their connections enabled, the AVCaptureMovieFileOutput "wins" and the AVCaptureVideoDataOutput's connection becomes inactive. For applications linked on or after iOS 16.0, this restriction has been lifted. When adding multiple AVCaptureVideoDataOutputs or a combination of AVCaptureVideoDataOutputs and an AVCaptureMovieFileOutput, AVCaptureSession.hardwareCost must be taken into account.
+     - Similarly, prior to iOS 16.0, an AVCaptureAudioDataOutput and an AVCaptureMovieFileOutput may be added to the same session, but only one may have its connection active. When both have their connections enabled, the AVCaptureMovieFileOutput "wins" and the AVCaptureAudioDataOutput's connection becomes inactive. For applications linked on or after iOS 16.0, this restriction has been lifted.
  */
 - (BOOL)canAddOutput:(AVCaptureOutput *)output;
 
@@ -409,6 +415,38 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
 @property(nonatomic, readonly, getter=isInterrupted) BOOL interrupted API_AVAILABLE(ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
+ @property multitaskingCameraAccessSupported
+ @abstract
+    Returns whether the session can be configured to use the camera while multitasking.
+ 
+ @discussion
+    This property can be used to determine whether multitaskingCameraAccessEnabled may be set to YES. When this property changes from YES to NO, multitaskingCameraAccessEnabled also reverts to NO.
+ 
+    This property returns true on iPads that support Stage Manager.
+ 
+    This property is key-value observable.
+ */
+@property(nonatomic, readonly, getter=isMultitaskingCameraAccessSupported) BOOL multitaskingCameraAccessSupported API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, watchos);
+
+/*!
+ @property multitaskingCameraAccessEnabled
+ @abstract
+    Indicates whether the session is configured to use the camera while multitasking.
+ 
+ @discussion
+	The default value is NO. This property may only be set if -isMultitaskingCameraAccessSupported returns YES. This property must be set before the session starts running.
+ 
+    AVCaptureSessions that are configured to use the camera while multitasking will not be interrupted with AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableWithMultipleForegroundApps.
+ 
+    For applications that have the com.apple.developer.avfoundation.multitasking-camera-access entitlement, this property defaults to YES if -isMultitaskingCameraAccessSupported returns YES.
+ 
+    To learn about best practices for using the camera while multitasking, refer to the Accessing the Camera While Multitasking article on developer.apple.com. See https://developer.apple.com/documentation/avkit/accessing_the_camera_while_multitasking\.
+ 
+    This property is key-value observable.
+ */
+@property(nonatomic, getter=isMultitaskingCameraAccessEnabled) BOOL multitaskingCameraAccessEnabled API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, watchos);
+
+/*!
  @property usesApplicationAudioSession
  @abstract
     Indicates whether the receiver will use the application's AVAudioSession for recording.
@@ -486,6 +524,25 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  */
 @property(nonatomic, readonly, nullable) __attribute__((NSObject)) CMClockRef masterClock API_DEPRECATED_WITH_REPLACEMENT("synchronizationClock", macos(10.9, 12.3), ios(7.0, 15.4), macCatalyst(14.0, 15.4)) API_UNAVAILABLE(tvos);
 
+/*!
+ @property hardwareCost
+ @abstract
+    Indicates the percentage of the session's available hardware budget currently in use.
+ 
+ @discussion
+    The value of this property is a float from 0.0 => 1.0 indicating how much of the session's available hardware is in use as a percentage, given the currently connected inputs and outputs and the features for which you've opted in. When your hardwareCost is greater than 1.0, the capture session cannot run your desired configuration due to hardware constraints, so you receive an AVCaptureSessionRuntimeErrorNotification when attempting to start it running. Default value is 0.
+ 
+    Contributors to hardwareCost include:
+        - Whether the source devices' active formats use the full sensor (4:3) or a crop (16:9). Cropped formats require lower hardware bandwidth, and therefore lower the cost.
+        - The max frame rate supported by the source devices' active formats. The higher the max frame rate, the higher the cost.
+        - Whether the source devices' active formats are binned or not. Binned formats require substantially less hardware bandwidth, and therefore result in a lower cost.
+        - The number of sources configured to deliver streaming disparity / depth via AVCaptureDepthDataOutput. The higher the number of cameras configured to produce depth, the higher the cost.
+    In order to reduce hardwareCost, consider picking a sensor-cropped activeFormat, or a binned format. You may also use AVCaptureDeviceInput's videoMinFrameDurationOverride property to artificially limit the max frame rate (which is the reciprocal of the min frame duration) of a source device to a lower value. By doing so, you only pay the hardware cost for the max frame rate you intend to use.
+ 
+    AVCaptureMultiCamSessions always computes this hardwareCost. AVCaptureSessions only computes a non-zero hardwareCost when multiple AVCaptureVideoDataOutputs or an AVCaptureMovieFileOutput and one or more AVCaptureVideoDataOutputs are added to the session.
+ */
+@property(nonatomic, readonly) float hardwareCost API_AVAILABLE(ios(16.0), macCatalyst(16.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
 @end
 
 
@@ -507,6 +564,7 @@ API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNA
 
 /*!
  @property multiCamSupported
+ @abstract
     Indicates whether multicam session is supported on this platform.
  
  @discussion
@@ -585,7 +643,7 @@ typedef NS_ENUM(NSInteger, AVVideoFieldMode) {
  
     Connections involving video expose video specific properties, such as videoMirrored and videoOrientation.
  */
-API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
 @interface AVCaptureConnection : NSObject
 {
 @private
@@ -804,7 +862,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. In such connections, the videoMinFrameDuration property may only be set if -isVideoMinFrameDurationSupported returns YES.
  
-    This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On Mac OS X, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
+    This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
  */
 @property(nonatomic, readonly, getter=isVideoMinFrameDurationSupported) BOOL supportsVideoMinFrameDuration API_DEPRECATED("Use AVCaptureDevice's activeFormat.videoSupportedFrameRateRanges instead.", ios(5.0, 7.0), macCatalyst(14.0, 14.0)) API_UNAVAILABLE(tvos);
 
@@ -816,7 +874,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The value of this property is a CMTime specifying the minimum duration of each video frame output by the receiver, placing a lower bound on the amount of time that should separate consecutive frames. This is equivalent to the reciprocal of the maximum frame rate. A value of kCMTimeZero or kCMTimeInvalid indicates an unlimited maximum frame rate. The default value is kCMTimeInvalid.
  
-    This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On Mac OS X, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
+    This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
  */
 @property(nonatomic) CMTime videoMinFrameDuration API_DEPRECATED("Use AVCaptureDevice's activeVideoMinFrameDuration instead.", ios(5.0, 7.0), macCatalyst(14.0, 14.0)) API_UNAVAILABLE(tvos);
 
@@ -828,7 +886,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. In such connections, the videoMaxFrameDuration property may only be set if -isVideoMaxFrameDurationSupported returns YES.
  
-    This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On Mac OS X, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
+    This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
  */
 @property(nonatomic, readonly, getter=isVideoMaxFrameDurationSupported) BOOL supportsVideoMaxFrameDuration API_AVAILABLE(macos(10.9)) API_DEPRECATED("Use AVCaptureDevice's activeFormat.videoSupportedFrameRateRanges instead.", ios(5.0, 7.0), macCatalyst(14.0, 14.0)) API_UNAVAILABLE(tvos);
 
@@ -840,7 +898,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The value of this property is a CMTime specifying the maximum duration of each video frame output by the receiver, placing an upper bound on the amount of time that should separate consecutive frames. This is equivalent to the reciprocal of the minimum frame rate. A value of kCMTimeZero or kCMTimeInvalid indicates an unlimited minimum frame rate. The default value is kCMTimeInvalid.
  
-    This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On Mac OS X, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
+    This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
  */
 @property(nonatomic) CMTime videoMaxFrameDuration API_AVAILABLE(macos(10.9)) API_DEPRECATED("Use AVCaptureDevice's activeVideoMaxFrameDuration instead.", ios(5.0, 7.0), macCatalyst(14.0, 14.0)) API_UNAVAILABLE(tvos);
 
@@ -951,7 +1009,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     An AVCaptureConnection from an input producing audio to an output receiving audio exposes an array of AVCaptureAudioChannel objects, one for each channel of audio available. Iterating through these audio channel objects, a client may poll for audio levels. Instances of AVCaptureAudioChannel cannot be created directly.
  */
-API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
 @interface AVCaptureAudioChannel : NSObject
 {
 @private

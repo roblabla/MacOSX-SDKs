@@ -1,24 +1,16 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2F6CE0A8-F953-3C43-B3AA-5E525CB6C933
-  - target:          x86_64-maccatalyst
-    value:           2F6CE0A8-F953-3C43-B3AA-5E525CB6C933
+    value:           C6F58010-681A-3294-8972-B54B134ED14F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A128E4CF-97A1-312A-8ED6-751FCC87587F
-  - target:          arm64e-maccatalyst
-    value:           A128E4CF-97A1-312A-8ED6-751FCC87587F
+    value:           9D961069-CE2A-3EE0-96A3-9D196ED6741B
 install-name:    '/usr/lib/libCTGreenTeaLogger.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ct_green_tea_logger_create, _ct_green_tea_logger_create_static, 
                        _ct_green_tea_logger_destroy, _ct_green_tea_logging_enabled, 
                        _getCTGreenTeaOsLogHandle, _kCTGreenTeaMessageDeleteLoggingFormat, 

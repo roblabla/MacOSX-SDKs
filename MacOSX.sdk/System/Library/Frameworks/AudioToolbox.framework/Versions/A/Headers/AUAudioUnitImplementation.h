@@ -430,6 +430,20 @@ typedef NSString *__nonnull (^AUImplementorDisplayNameWithLengthCallback)(AUPara
 */
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUAudioUnitV2Bridge : AUAudioUnit
+
+/*! @property audioUnit
+    @brief	  The underlying v2 AudioUnit
+	@discussion
+		We generally discourage interacting with the underlying v2 AudioUnit directly and
+		recommend using the v3 equivalent methods and properties from AUAudioUnitV2Bridge.
+		
+		In some rare cases it may be desirable to interact with the v2 AudioUnit.
+		For example, a v2 plugin may define custom properties that are not bridged to v3.
+		Implementors can sublcass AUAudioUnitV2Bridge and call the v2 API methods
+		AudioUnitGetProperty / AudioUnitSetProperty with the v2 AudioUnit.
+*/
+@property (nonatomic, readonly) AudioUnit audioUnit API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+
 @end
 
 // =================================================================================================

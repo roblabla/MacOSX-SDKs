@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B02565DB-4D4C-3696-BCFC-A72734005AE6
+    value:           EC5D40F3-98BC-3EBF-8151-BD8547BA3622
   - target:          x86_64-maccatalyst
-    value:           B02565DB-4D4C-3696-BCFC-A72734005AE6
+    value:           EC5D40F3-98BC-3EBF-8151-BD8547BA3622
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B7CBACD6-EC30-39C5-BAE9-4E5D3E842FCD
+    value:           AAC0D64F-2804-32C6-85A3-9BF0BF4023E3
   - target:          arm64e-maccatalyst
-    value:           B7CBACD6-EC30-39C5-BAE9-4E5D3E842FCD
+    value:           AAC0D64F-2804-32C6-85A3-9BF0BF4023E3
 install-name:    '/System/Library/Frameworks/NaturalLanguage.framework/Versions/A/NaturalLanguage'
-current-version: 100.1
+current-version: 108
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _NLAssetsHaveChangedNotification, _NLLanguageAmharic, _NLLanguageArabic, 
                        _NLLanguageArmenian, _NLLanguageBengali, _NLLanguageBulgarian, 
                        _NLLanguageBurmese, _NLLanguageCatalan, _NLLanguageCherokee, 
@@ -29,8 +29,8 @@ exports:
                        _NLLanguageGreek, _NLLanguageGujarati, _NLLanguageHebrew, 
                        _NLLanguageHindi, _NLLanguageHungarian, _NLLanguageIcelandic, 
                        _NLLanguageIndonesian, _NLLanguageItalian, _NLLanguageJapanese, 
-                       _NLLanguageKannada, _NLLanguageKhmer, _NLLanguageKorean, _NLLanguageLao, 
-                       _NLLanguageMalay, _NLLanguageMalayalam, _NLLanguageMarathi, 
+                       _NLLanguageKannada, _NLLanguageKazakh, _NLLanguageKhmer, _NLLanguageKorean, 
+                       _NLLanguageLao, _NLLanguageMalay, _NLLanguageMalayalam, _NLLanguageMarathi, 
                        _NLLanguageModelArchitectureLSTM, _NLLanguageModelArchitectureTransformer, 
                        _NLLanguageMongolian, _NLLanguageNorwegian, _NLLanguageOriya, 
                        _NLLanguagePersian, _NLLanguagePolish, _NLLanguagePortuguese, 

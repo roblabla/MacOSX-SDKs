@@ -7,7 +7,7 @@
 
 @class NSNotification, NSNotificationCenter, NSArray<ObjectType>, NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSUInteger, NSPostingStyle) {
     NSPostWhenIdle = 1,
@@ -21,14 +21,8 @@ typedef NS_OPTIONS(NSUInteger, NSNotificationCoalescing) {
     NSNotificationCoalescingOnSender = 2
 };
 
-@interface NSNotificationQueue : NSObject {
-@private
-    id		_notificationCenter;
-    id		_asapQueue;
-    id		_asapObs;
-    id		_idleQueue;
-    id		_idleObs;
-}
+@interface NSNotificationQueue : NSObject
+
 @property (class, readonly, strong) NSNotificationQueue *defaultQueue;
 
 - (instancetype)initWithNotificationCenter:(NSNotificationCenter *)notificationCenter NS_DESIGNATED_INITIALIZER;
@@ -40,4 +34,4 @@ typedef NS_OPTIONS(NSUInteger, NSNotificationCoalescing) {
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

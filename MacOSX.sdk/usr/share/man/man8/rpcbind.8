@@ -60,7 +60,7 @@ library will contact launchd and arrange for rpcbind to be started.
 Note it is no longer possible to run rpcbind from the command line.
 .Nm
 logs errors and information using
-.Xr asl 3 .
+.Xr os_log 3 .
 .Nm
 uses
 .Xr hosts_access 5
@@ -76,7 +76,7 @@ causes
 .Nm
 errors and debugging information
 to be printed to the standard error output
-via asl_log. This option is no longer
+via os_log. This option is no longer
 very useful.
 .It Fl v
 Enable verbose logging of access control checks.

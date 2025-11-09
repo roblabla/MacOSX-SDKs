@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4367ADAF-A124-3454-AD48-406F22EB0042
+    value:           68946432-F05B-3118-AB1B-76D69B38B7DF
   - target:          x86_64-maccatalyst
-    value:           4367ADAF-A124-3454-AD48-406F22EB0042
+    value:           68946432-F05B-3118-AB1B-76D69B38B7DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ECEB7DA3-0501-386E-8DE7-96D025210755
+    value:           C3F54D94-2BB5-30EB-AC56-64F4EA72421C
   - target:          arm64e-maccatalyst
-    value:           ECEB7DA3-0501-386E-8DE7-96D025210755
+    value:           C3F54D94-2BB5-30EB-AC56-64F4EA72421C
 install-name:    '/System/Library/PrivateFrameworks/PhotoVision.framework/Versions/A/PhotoVision'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -23,8 +23,8 @@ allowable-clients:
                        Memories, NotesUI, PhotoAnalysis, PhotoVisionTool, PhotosGraph, 
                        PhotosTests, VideoProcessing, coreduetd, duetknowledged, photolibraryd ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AlgorithmRevisionForRequestClass, _CentroidForLandmarkRegion, 
                        _GetFaceAlgorithmRevisionDictionaryByAlgorithmUmbrellaVersion, 
                        _GetSceneAlgorithmRevisionDictionaryByAlgorithmUmbrellaVersion, 
@@ -86,15 +86,14 @@ exports:
                        _makeRectWithAllIntegers, _makeScaledRect ]
     objc-classes:    [ PVCanceler, PVClusterer, PVContext, PVEvent, PVEventManager, 
                        PVFace, PVFaceCrop, PVFaceCropAnalyzer, PVFaceCropGenerator, 
-                       PVFaceCropSourceDescriptor, PVFaceCropUtils, PVFaceIDModel, 
-                       PVFaceMerger, PVFacePair, PVFaceprint, PVGeometryUtils, PVImage, 
-                       PVImageLoader, PVNotification, PVObject, PVPersonCluster, 
-                       PVPersonClusterManager, PVPersonDeduper, PVPersonDeduperLocationStep, 
-                       PVPersonDeduperMarkovClusteringStep, PVPersonDeduperProfile, 
-                       PVPersonDeduperSocialGroupComplementStep, PVPersonDeduperSocialGroupOverlaps, 
-                       PVPersonDeduperSocialGroupTimeWarpingStep, PVPersonDeduperStep, 
-                       PVPersonDeduperTimeStep, PVPersonPromoter, PVPersonPromoterProfile, 
-                       PVQueue, PVSceneTaxonomy, PVSceneTaxonomyNode, PVSuggestionRequest, 
-                       PVUserDefaults, PVUtils, PVVisionAnalyzer, PVVisionHelper, 
-                       PhotoVision ]
+                       PVFaceCropSourceDescriptor, PVFaceCropUtils, PVFaceMerger, 
+                       PVFacePair, PVFaceprint, PVGeometryUtils, PVImage, PVImageLoader, 
+                       PVNotification, PVObject, PVPersonCluster, PVPersonClusterManager, 
+                       PVPersonDeduper, PVPersonDeduperLocationStep, PVPersonDeduperMarkovClusteringStep, 
+                       PVPersonDeduperProfile, PVPersonDeduperSocialGroupComplementStep, 
+                       PVPersonDeduperSocialGroupOverlaps, PVPersonDeduperSocialGroupTimeWarpingStep, 
+                       PVPersonDeduperStep, PVPersonDeduperTimeStep, PVPersonPromoter, 
+                       PVPersonPromoterProfile, PVQueue, PVSceneTaxonomy, PVSceneTaxonomyNode, 
+                       PVSuggestionRequest, PVUserDefaults, PVUtils, PVVisionAnalyzer, 
+                       PVVisionHelper, PhotoVision ]
 ...

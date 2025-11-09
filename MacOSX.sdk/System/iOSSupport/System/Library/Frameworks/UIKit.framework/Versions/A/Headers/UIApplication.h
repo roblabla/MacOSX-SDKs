@@ -16,7 +16,7 @@
 #import <UIKit/UIContentSizeCategory.h>
 #import <UIKit/UISceneDefinitions.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UIStatusBarStyle) {
     UIStatusBarStyleDefault                                  = 0, // Automatically chooses light or dark content based on the user interface style
@@ -511,7 +511,7 @@ UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsURLKe
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsSourceApplicationKey     NS_SWIFT_NAME(sourceApplication) API_AVAILABLE(ios(3.0)); // userInfo contains NSString with bundle ID of the originating application; non-nil if the originating application and this application share the same team identifier
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsRemoteNotificationKey    NS_SWIFT_NAME(remoteNotification) API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos); // userInfo contains NSDictionary with payload
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsLocalNotificationKey     NS_SWIFT_NAME(localNotification) API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]", ios(4.0, 10.0)) API_UNAVAILABLE(tvos); // userInfo contains a UILocalNotification
-UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsAnnotationKey            NS_SWIFT_NAME(annotation) API_AVAILABLE(ios(3.2)); // userInfo contains object with annotation property list
+UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsAnnotationKey            NS_SWIFT_NAME(annotation) API_DEPRECATED("This dictionary key is no longer used.", ios(3.2, 16.0)); // userInfo contains object with annotation property list
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsLocationKey              NS_SWIFT_NAME(location) API_AVAILABLE(ios(4.0)); // app was launched in response to a CoreLocation event.
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsNewsstandDownloadsKey    NS_SWIFT_NAME(newsstandDownloads) API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos); // userInfo contains an NSArray of NKAssetDownload identifiers
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsBluetoothCentralsKey     NS_SWIFT_NAME(bluetoothCentrals) API_AVAILABLE(ios(7.0)); // userInfo contains an NSArray of CBCentralManager restore identifiers
@@ -525,7 +525,13 @@ UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsUserA
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsCloudKitShareMetadataKey NS_SWIFT_NAME(cloudKitShareMetadata) API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos); // The presence of this key indicates that the app was launched in order to handle a CloudKit sharing invitation. The value of this key is a CKShareMetadata object.
 
 UIKIT_EXTERN NSString *const UIApplicationOpenSettingsURLString API_AVAILABLE(ios(8.0));
+
+#if __swift__
+UIKIT_EXTERN NSString *const UIApplicationOpenNotificationSettingsURLString API_DEPRECATED_WITH_REPLACEMENT("UIApplication.openNotificationSettingsURLString", ios(15.4, 16.0));
+#else
 UIKIT_EXTERN NSString *const UIApplicationOpenNotificationSettingsURLString API_AVAILABLE(ios(15.4));
+#endif
+
 
 // Keys for application:openURL:options:
 UIKIT_EXTERN UIApplicationOpenURLOptionsKey const UIApplicationOpenURLOptionsSourceApplicationKey NS_SWIFT_NAME(sourceApplication) API_AVAILABLE(ios(9.0));   // value is an NSString containing the bundle ID of the originating application; non-nil if the originating application and this application share the same team identifier
@@ -548,7 +554,7 @@ UIKIT_EXTERN UIApplicationOpenExternalURLOptionsKey const UIApplicationOpenURLOp
 // Option for openURL:options:CompletionHandler: to provide an event attribution to go along with the openURL call.
 UIKIT_EXTERN UIApplicationOpenExternalURLOptionsKey const UIApplicationOpenExternalURLOptionsEventAttributionKey NS_SWIFT_NAME(eventAttribution) API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos, tvos); // value is a UIEventAttribution
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIApplication.h>

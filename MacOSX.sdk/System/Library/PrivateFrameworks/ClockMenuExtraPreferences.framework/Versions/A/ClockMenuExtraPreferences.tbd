@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2CCDA720-9DB6-35F0-BB18-DB649CFC8EB4
+    value:           B0B2D9F4-E858-3DCD-8630-63ED314C3B6B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           51F5A310-CB24-33C9-A500-F082572C58E2
+    value:           773F2B77-22B0-35A2-A131-308B6DD9369D
 install-name:    '/System/Library/PrivateFrameworks/ClockMenuExtraPreferences.framework/Versions/A/ClockMenuExtraPreferences'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CLKAppendAMPMLegacyKey, _CLKAppleDatePreferencesChangedNotification, 
                        _CLKDisplaySecondsLegacyKey, _CLKErrorLog, _CLKFlashSeparatorsLegacyKey, 
                        _CLKIsDigitalClockLegacyKey, _CLKLegacyPreferencesDomainName, 

@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// @brief Contains information about an outging mail message after any security measures have been applied.
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 @interface MEMessageEncodingResult : NSObject <NSSecureCoding>
 
 /// @brief The encoded message. Nil if no need to encode or an error occured while encoding

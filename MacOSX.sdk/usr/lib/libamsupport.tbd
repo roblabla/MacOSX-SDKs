@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6FCC5039-DD16-3775-8919-2DA52EA7D40C
+    value:           BA1F3EFB-7A2F-39BD-87C7-6AC8CB751D4E
   - target:          x86_64-maccatalyst
-    value:           6FCC5039-DD16-3775-8919-2DA52EA7D40C
+    value:           BA1F3EFB-7A2F-39BD-87C7-6AC8CB751D4E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           19A4B102-CDDD-3029-B84D-C729DA8EF2D9
+    value:           72F4B020-18A6-3AC5-8BD7-AEA1B91D3E12
   - target:          arm64e-maccatalyst
-    value:           19A4B102-CDDD-3029-B84D-C729DA8EF2D9
+    value:           72F4B020-18A6-3AC5-8BD7-AEA1B91D3E12
 install-name:    '/usr/lib/libamsupport.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AMSupportApplyBlockToDictionary, _AMSupportApplyDictionaryOverrides, 
                        _AMSupportBase64Decode, _AMSupportBase64Encode, _AMSupportCFArrayCreateWithObjects, 
                        _AMSupportCFDictionaryGetBoolean, _AMSupportCFDictionarySetBoolean, 
@@ -138,12 +138,14 @@ exports:
                        _kAMSupportHttpOptionTimeout, _kAMSupportHttpOptionTrustServerCAsNonexclusively, 
                        _kAMSupportHttpOptionTrustedServerCAs, _kAMSupportHttpOptionUsePurpleReverseProxy, 
                        _kAMSupportHttpOptionValidResponses, _kImg4DecodeLocalPolicyEc384Sha384, 
-                       _kImg4DecodeLocalPolicyEc384Sha384Hacktivate, _kImg4DecodeLocalPolicyRsa4kSha384, 
-                       _kImg4DecodeLocalPolicyRsa4kSha384Hacktivate, _kImg4DecodeSecureBootEc192Sha256, 
-                       _kImg4DecodeSecureBootEc256Sha256, _kImg4DecodeSecureBootEc384Sha384, 
-                       _kImg4DecodeSecureBootEc521Sha512, _kImg4DecodeSecureBootRsa1kSha1, 
-                       _kImg4DecodeSecureBootRsa3kSha384, _kImg4DecodeSecureBootRsa4kSha384, 
-                       _kImg4DecodeSecureBootRsa4kSha384AWG1, _kImg4DecodeSecureBootRsa4kSha384DDI, 
+                       _kImg4DecodeLocalPolicyEc384Sha384Hacktivate, _kImg4DecodeLocalPolicyEc384Sha384QA, 
+                       _kImg4DecodeLocalPolicyRsa4kSha384, _kImg4DecodeLocalPolicyRsa4kSha384Hacktivate, 
+                       _kImg4DecodeSecureBootEc192Sha256, _kImg4DecodeSecureBootEc256Sha256, 
+                       _kImg4DecodeSecureBootEc384Sha384, _kImg4DecodeSecureBootEc521Sha512, 
+                       _kImg4DecodeSecureBootRsa1kSha1, _kImg4DecodeSecureBootRsa3kSha384, 
+                       _kImg4DecodeSecureBootRsa4kSha384, _kImg4DecodeSecureBootRsa4kSha384AWG1, 
+                       _kImg4DecodeSecureBootRsa4kSha384DDI, _kImg4DecodeSecureBootRsa4kSha384DDIFake, 
+                       _kImg4DecodeSecureBootRsa4kSha384DDIFakeGlobal, _kImg4DecodeSecureBootRsa4kSha384DDIGlobal, 
                        _kImg4DecodeSecureBootRsa4kSha384X86, _kImg4TagStr_AMNM, _kImg4TagStr_BLDS, 
                        _kImg4TagStr_BNCH, _kImg4TagStr_BNCN, _kImg4TagStr_BORD, _kImg4TagStr_CEPO, 
                        _kImg4TagStr_CHIP, _kImg4TagStr_CHMH, _kImg4TagStr_CPRO, _kImg4TagStr_CSEC, 
@@ -152,35 +154,36 @@ exports:
                        _kImg4TagStr_IM4P, _kImg4TagStr_IM4R, _kImg4TagStr_IMG4, _kImg4TagStr_LNCH, 
                        _kImg4TagStr_MANB, _kImg4TagStr_MANP, _kImg4TagStr_OBJP, _kImg4TagStr_PAYP, 
                        _kImg4TagStr_RNCH, _kImg4TagStr_RSCH, _kImg4TagStr_SDOM, _kImg4TagStr_SECM, 
-                       _kImg4TagStr_SNON, _kImg4TagStr_agfi, _kImg4TagStr_anrd, _kImg4TagStr_aofi, 
-                       _kImg4TagStr_apmv, _kImg4TagStr_atkh, _kImg4TagStr_augs, _kImg4TagStr_auxi, 
-                       _kImg4TagStr_auxk, _kImg4TagStr_auxp, _kImg4TagStr_auxr, _kImg4TagStr_bat0, 
-                       _kImg4TagStr_bat1, _kImg4TagStr_batf, _kImg4TagStr_bsys, _kImg4TagStr_chg0, 
-                       _kImg4TagStr_chg1, _kImg4TagStr_ckih, _kImg4TagStr_cmsv, _kImg4TagStr_coih, 
+                       _kImg4TagStr_SNON, _kImg4TagStr_UDID, _kImg4TagStr_adba, _kImg4TagStr_agfi, 
+                       _kImg4TagStr_anrd, _kImg4TagStr_aofi, _kImg4TagStr_apmv, _kImg4TagStr_atkh, 
+                       _kImg4TagStr_augs, _kImg4TagStr_auxi, _kImg4TagStr_auxk, _kImg4TagStr_auxp, 
+                       _kImg4TagStr_auxr, _kImg4TagStr_bat0, _kImg4TagStr_bat1, _kImg4TagStr_batf, 
+                       _kImg4TagStr_bsys, _kImg4TagStr_caos, _kImg4TagStr_casy, _kImg4TagStr_chg0, 
+                       _kImg4TagStr_chg1, _kImg4TagStr_ckih, _kImg4TagStr_clas, _kImg4TagStr_cmsv, 
+                       _kImg4TagStr_cnch, _kImg4TagStr_coih, _kImg4TagStr_csos, _kImg4TagStr_cssy, 
                        _kImg4TagStr_csys, _kImg4TagStr_diag, _kImg4TagStr_dtre, _kImg4TagStr_dtrs, 
                        _kImg4TagStr_efib, _kImg4TagStr_eg0n, _kImg4TagStr_eg0t, _kImg4TagStr_eg1n, 
                        _kImg4TagStr_eg1t, _kImg4TagStr_eg3n, _kImg4TagStr_eg3t, _kImg4TagStr_esca, 
-                       _kImg4TagStr_esdm, _kImg4TagStr_euou, _kImg4TagStr_fpgt, _kImg4TagStr_ftap, 
-                       _kImg4TagStr_ftot, _kImg4TagStr_ftsp, _kImg4TagStr_fuos, _kImg4TagStr_glyc, 
-                       _kImg4TagStr_glyp, _kImg4TagStr_hclo, _kImg4TagStr_hrlp, _kImg4TagStr_ibec, 
-                       _kImg4TagStr_ibot, _kImg4TagStr_ibss, _kImg4TagStr_illb, _kImg4TagStr_isys, 
-                       _kImg4TagStr_iuob, _kImg4TagStr_iuos, _kImg4TagStr_iuou, _kImg4TagStr_kdlv, 
-                       _kImg4TagStr_krnl, _kImg4TagStr_kuid, _kImg4TagStr_lobo, _kImg4TagStr_logo, 
-                       _kImg4TagStr_love, _kImg4TagStr_lpnh, _kImg4TagStr_lpol, _kImg4TagStr_ltrs, 
-                       _kImg4TagStr_manx, _kImg4TagStr_mmap, _kImg4TagStr_mmsv, _kImg4TagStr_mpro, 
-                       _kImg4TagStr_msec, _kImg4TagStr_msys, _kImg4TagStr_nrde, _kImg4TagStr_nsih, 
-                       _kImg4TagStr_nsrv, _kImg4TagStr_osev, _kImg4TagStr_pfle, _kImg4TagStr_pflp, 
-                       _kImg4TagStr_pndp, _kImg4TagStr_prot, _kImg4TagStr_rddg, _kImg4TagStr_recm, 
-                       _kImg4TagStr_rfta, _kImg4TagStr_rfts, _kImg4TagStr_rolp, _kImg4TagStr_ronh, 
-                       _kImg4TagStr_rpnh, _kImg4TagStr_rso0, _kImg4TagStr_rso1, _kImg4TagStr_rso2, 
-                       _kImg4TagStr_rso3, _kImg4TagStr_sika, _kImg4TagStr_sip0, _kImg4TagStr_sip1, 
-                       _kImg4TagStr_sip2, _kImg4TagStr_sip3, _kImg4TagStr_slvn, _kImg4TagStr_smb0, 
-                       _kImg4TagStr_smb1, _kImg4TagStr_smb2, _kImg4TagStr_smb3, _kImg4TagStr_smb4, 
-                       _kImg4TagStr_snon, _kImg4TagStr_snuf, _kImg4TagStr_srvn, _kImg4TagStr_tbmr, 
-                       _kImg4TagStr_tbms, _kImg4TagStr_trst, _kImg4TagStr_ucer, _kImg4TagStr_ucon, 
-                       _kImg4TagStr_uidm, _kImg4TagStr_vkdl, _kImg4TagStr_vuid, _kImg4TagStr_xugs ]
-    objc-classes:    [ AMSupportURLSession ]
-    objc-ivars:      [ AMSupportURLSession._options, AMSupportURLSession._priority, 
-                       AMSupportURLSession._queue, AMSupportURLSession._session, 
-                       AMSupportURLSession._sslEvalFailed, AMSupportURLSession._timeout ]
+                       _kImg4TagStr_esdm, _kImg4TagStr_euou, _kImg4TagStr_fchp, _kImg4TagStr_fpgt, 
+                       _kImg4TagStr_ftap, _kImg4TagStr_ftot, _kImg4TagStr_ftsp, _kImg4TagStr_fuos, 
+                       _kImg4TagStr_glyc, _kImg4TagStr_glyp, _kImg4TagStr_hclo, _kImg4TagStr_hrlp, 
+                       _kImg4TagStr_ibec, _kImg4TagStr_ibot, _kImg4TagStr_ibss, _kImg4TagStr_illb, 
+                       _kImg4TagStr_isys, _kImg4TagStr_iuob, _kImg4TagStr_iuos, _kImg4TagStr_iuou, 
+                       _kImg4TagStr_kdlv, _kImg4TagStr_krnl, _kImg4TagStr_kuid, _kImg4TagStr_lobo, 
+                       _kImg4TagStr_logo, _kImg4TagStr_love, _kImg4TagStr_lpnh, _kImg4TagStr_lpol, 
+                       _kImg4TagStr_ltrs, _kImg4TagStr_manx, _kImg4TagStr_mmap, _kImg4TagStr_mmsv, 
+                       _kImg4TagStr_mpro, _kImg4TagStr_msec, _kImg4TagStr_msys, _kImg4TagStr_ndom, 
+                       _kImg4TagStr_nrde, _kImg4TagStr_nsih, _kImg4TagStr_nsrv, _kImg4TagStr_osev, 
+                       _kImg4TagStr_pave, _kImg4TagStr_pfle, _kImg4TagStr_pflp, _kImg4TagStr_pndp, 
+                       _kImg4TagStr_prot, _kImg4TagStr_rddg, _kImg4TagStr_recm, _kImg4TagStr_rfta, 
+                       _kImg4TagStr_rfts, _kImg4TagStr_rolp, _kImg4TagStr_ronh, _kImg4TagStr_rpnh, 
+                       _kImg4TagStr_rso0, _kImg4TagStr_rso1, _kImg4TagStr_rso2, _kImg4TagStr_rso3, 
+                       _kImg4TagStr_sika, _kImg4TagStr_sip0, _kImg4TagStr_sip1, _kImg4TagStr_sip2, 
+                       _kImg4TagStr_sip3, _kImg4TagStr_slvn, _kImg4TagStr_smb0, _kImg4TagStr_smb1, 
+                       _kImg4TagStr_smb2, _kImg4TagStr_smb3, _kImg4TagStr_smb4, _kImg4TagStr_smb5, 
+                       _kImg4TagStr_snon, _kImg4TagStr_snuf, _kImg4TagStr_spih, _kImg4TagStr_srvn, 
+                       _kImg4TagStr_stng, _kImg4TagStr_styp, _kImg4TagStr_tbmr, _kImg4TagStr_tbms, 
+                       _kImg4TagStr_trca, _kImg4TagStr_trcs, _kImg4TagStr_trst, _kImg4TagStr_type, 
+                       _kImg4TagStr_ucer, _kImg4TagStr_ucon, _kImg4TagStr_uidm, _kImg4TagStr_vkdl, 
+                       _kImg4TagStr_vnum, _kImg4TagStr_vuid, _kImg4TagStr_xsys, _kImg4TagStr_xugs ]
 ...

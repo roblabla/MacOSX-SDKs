@@ -4,30 +4,33 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F08A4267-48AD-3996-AEAF-A6F9666FF488
+    value:           735CA65F-95BA-30BD-9751-D98FE6F84E6D
   - target:          x86_64-maccatalyst
-    value:           F08A4267-48AD-3996-AEAF-A6F9666FF488
+    value:           735CA65F-95BA-30BD-9751-D98FE6F84E6D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6A644F94-88ED-31E3-B9E7-3B2A98A8192B
+    value:           459483C9-702C-3C6B-9D4F-BA4B73DAFD92
   - target:          arm64e-maccatalyst
-    value:           6A644F94-88ED-31E3-B9E7-3B2A98A8192B
+    value:           459483C9-702C-3C6B-9D4F-BA4B73DAFD92
 install-name:    '/System/Library/PrivateFrameworks/HearingCore.framework/Versions/A/HearingCore'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AXHAMessageKeyIdentifier, _AXHAMessageKeyPayload, _AXHANULL, 
-                       _AXHearingAidServerName, _CSEngineeringLog, _CSInitializeLogging, 
-                       _CSLoggingQueue, _HAEngineeringLog, _HAInitializeLogging, 
-                       _HALoggingQueue, _HCAXUIServerProcessName, _HCApplicationGetMainBundleIdentifier, 
-                       _HCHeardBundleName, _HCHeardProcessName, _HCLogSoundMeter, 
-                       _HCMessageDeviceNameKey, _HCPerformSafeBlock, _HCPreferencesBundleName, 
-                       _HCProcessGetName, _HearingCoreVersionNumber, _HearingCoreVersionString, 
-                       _PAEngineeringLog, _PAInitializeLogging, _PALoggingQueue, 
-                       _kAdjust0DB ]
+                       _AXHearingAidServerName, _AXInCallServiceName, _CSEngineeringLog, 
+                       _CSInitializeLogging, _CSLoggingQueue, _HAEngineeringLog, 
+                       _HAInitializeLogging, _HALoggingQueue, _HCAXUILaunchAngelProcessName, 
+                       _HCAXUIServerProcessName, _HCApplicationGetMainBundleIdentifier, 
+                       _HCCarouselProcessName, _HCHPEngineeringLog, _HCHPInitializeLogging, 
+                       _HCHPLoggingQueue, _HCHealthBundleName, _HCHeardBundleName, 
+                       _HCHeardProcessName, _HCLogSoundMeter, _HCMessageDeviceNameKey, 
+                       _HCPerformSafeBlock, _HCPreferencesBundleName, _HCProcessGetName, 
+                       _HCRTTNotificationContentExtensionName, _HCSpringBoardProcessName, 
+                       _HearingCoreVersionNumber, _HearingCoreVersionString, _PAEngineeringLog, 
+                       _PAInitializeLogging, _PALoggingQueue, _kAdjust0DB ]
     objc-classes:    [ HCDatabaseManager, HCServer, HCSettings, HCSettingsListenerHelper, 
                        HCUtilities, HCXPCClient, HCXPCMessage ]
 ...

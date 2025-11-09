@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C91F51A3-855E-3C28-8F69-13CC98ABC721
+    value:           99F94CB1-5BE3-346D-8A2A-186A92B387C5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           96BE89B5-0248-309A-B4EE-1091550887FB
+    value:           F41A1BF6-2FC3-3847-B699-F692FF8E1B24
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IKAnimationDelayKey, _IKAnimationDurationKey, _IKAnimationFrameRateKey, 
                        _IKAnimationVelocityCurveKey, _IKBestRepresentationFromNSImageForPhysicalSize, 
                        _IKCGBitmapContextRefFromCGImageRef, _IKCGBitmapContextRefFromData, 
@@ -169,12 +169,12 @@ exports:
                        IKImageCropView._progressIndicator, IKImageCropView._qcBuffer, 
                        IKImageCropView._qcEffect, IKImageCropView._showValidateButton, 
                        IKImageCropView._showZoomMinMax, IKImageCropView._showZoomSlider, 
-                       IKImageCropView._sourceSize, IKImageCropView._trackingRect, 
-                       IKImageCropView._undoManager, IKImageCropView._useOverlayMask, 
-                       IKImageCropView._usesCircularCrop, IKImageCropView._viewAffineTransform, 
-                       IKImageCropView._zoomFactorMaxResolution, IKImageCropView._zoomFactorMinResolution, 
-                       IKImageCropView._zoomMaxButton, IKImageCropView._zoomMinButton, 
-                       IKImageCropView._zoomSlider, IKImageCropView._zoomValue, IKImageFlowCell._aspectRatio, 
+                       IKImageCropView._sourceSize, IKImageCropView._undoManager, 
+                       IKImageCropView._useOverlayMask, IKImageCropView._usesCircularCrop, 
+                       IKImageCropView._viewAffineTransform, IKImageCropView._zoomFactorMaxResolution, 
+                       IKImageCropView._zoomFactorMinResolution, IKImageCropView._zoomMaxButton, 
+                       IKImageCropView._zoomMinButton, IKImageCropView._zoomSlider, 
+                       IKImageCropView._zoomValue, IKImageFlowCell._aspectRatio, 
                        IKImageFlowCell._fog, IKImageFlowCell._hasHighlight, IKImageFlowCell._highlightTested, 
                        IKImageFlowCell._imageCell, IKImageFlowCell._importFactor, 
                        IKImageFlowCell._inlinePreview, IKImageFlowCell._position, 

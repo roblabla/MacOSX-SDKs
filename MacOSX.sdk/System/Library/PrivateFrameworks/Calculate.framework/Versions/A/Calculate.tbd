@@ -3,17 +3,24 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BB068751-024C-3A92-B8D8-D51C8AB0687B
+    value:           34E8CDEE-13F2-3065-91EA-41EE878A4C67
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FA24AF89-EB83-303E-81A7-8243AFEB86F3
+    value:           7ACFBC8D-FE99-3237-A488-9EA2DA68655F
 install-name:    '/System/Library/PrivateFrameworks/Calculate.framework/Versions/A/Calculate'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CalculateExpression, _CalculateExpressionError, _CalculateInternationalExpression, 
+                       _CalculateKeyAllowConversions, _CalculateKeyAllowPartialExpressions, 
+                       _CalculateKeyAllowUnits, _CalculateKeyAutoScientificNotation, 
+                       _CalculateKeyConvertTrivial, _CalculateKeyEngine, _CalculateKeyExpectedUnitTypes, 
+                       _CalculateKeyFlexibleFractionDigits, _CalculateKeyIgnoreProbableSearches, 
+                       _CalculateKeyLocales, _CalculateKeyLocalizeUnit, _CalculateKeyMaximumConversions, 
+                       _CalculateKeyNumberFormatter, _CalculateKeyPreferMixedUnits, 
                        _CalculatePerformExpression ]
-    objc-classes:    [ Converter, CurrencyCache ]
+    objc-classes:    [ Calculate, CalculateRequest, CalculateResult, CalculateTerm, 
+                       CalculateUnit, Converter, CurrencyCache ]
     objc-ivars:      [ Converter._additionalResults, Converter._conversionType, Converter._currencyUpdateTimeOut, 
                        Converter._inputString, Converter._inputUnit, Converter._inputValue, 
                        Converter._isCurrency, Converter._localizedInputValueAndUnit, 
@@ -22,5 +29,6 @@ exports:
                        Converter._outputValue, CurrencyCache._currencyData, CurrencyCache._currentCurrency, 
                        CurrencyCache._currentRate, CurrencyCache._currentString, 
                        CurrencyCache._lastRefreshDate, CurrencyCache._mutableCurrencyCache, 
-                       CurrencyCache._serializer, CurrencyCache._uuid ]
+                       CurrencyCache._refreshInterval, CurrencyCache._serializer, 
+                       CurrencyCache._timeout, CurrencyCache._uuid ]
 ...

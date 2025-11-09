@@ -13,7 +13,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIRefreshControl.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UIScrollViewIndicatorStyle) {
     UIScrollViewIndicatorStyleDefault,     // Automatically switches appearance based on the user interface style
@@ -25,6 +25,8 @@ typedef NS_ENUM(NSInteger, UIScrollViewKeyboardDismissMode) {
     UIScrollViewKeyboardDismissModeNone,
     UIScrollViewKeyboardDismissModeOnDrag,      // dismisses the keyboard when a drag begins
     UIScrollViewKeyboardDismissModeInteractive, // the keyboard follows the dragging touch off screen, and may be pulled upward again to cancel the dismiss
+    UIScrollViewKeyboardDismissModeOnDragWithAccessory,       // dismisses both keyboard and accessory in the style of UIScrollViewKeyboardDismissModeOnDrag
+    UIScrollViewKeyboardDismissModeInteractiveWithAccessory   // dismisses both keyboard and accessory in the style of UIScrollViewKeyboardDismissModeInteractive
 } API_AVAILABLE(ios(7.0));
 
 typedef NS_ENUM(NSInteger, UIScrollViewIndexDisplayMode) {
@@ -204,7 +206,7 @@ NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIScrollView.h>

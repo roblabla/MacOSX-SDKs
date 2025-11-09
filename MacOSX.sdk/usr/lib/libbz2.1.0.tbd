@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           42317F12-7A66-3774-ABAE-A5C31F4A8B5A
+    value:           93407E94-4533-322B-AAD9-DCAA42ADAD93
   - target:          x86_64-maccatalyst
-    value:           42317F12-7A66-3774-ABAE-A5C31F4A8B5A
+    value:           93407E94-4533-322B-AAD9-DCAA42ADAD93
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE75B0C5-644E-3A3C-8254-705D9EBD5055
+    value:           D9FFDCBD-B199-3F87-910D-989F8A9F2FF7
   - target:          arm64e-maccatalyst
-    value:           CE75B0C5-644E-3A3C-8254-705D9EBD5055
+    value:           D9FFDCBD-B199-3F87-910D-989F8A9F2FF7
 install-name:    '/usr/lib/libbz2.1.0.dylib'
 current-version: 1.0.8
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BZ2_bzBuffToBuffCompress, _BZ2_bzBuffToBuffDecompress, _BZ2_bzCompress, 
                        _BZ2_bzCompressEnd, _BZ2_bzCompressInit, _BZ2_bzDecompress, 
                        _BZ2_bzDecompressEnd, _BZ2_bzDecompressInit, _BZ2_bzRead, 

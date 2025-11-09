@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B6BB1713-ACEA-364D-AB30-F6B4C1A63D99
+    value:           51AAC9DB-875E-3483-8EF9-15DC623D23F7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3E90F7F0-420D-3C18-968B-93E0ECFA760C
+    value:           9D4EA380-12A6-3339-929A-C77CB0CBAD1D
 install-name:    '/System/Library/PrivateFrameworks/Helium.framework/Versions/A/Helium'
 current-version: 0
 compatibility-version: 0
@@ -52,7 +52,7 @@ exports:
                        __ZTSN6HGPool9AllocatorIPU21objcproto10MTLTexture11objc_objectN18HGMetalTexturePool10DescriptorEEE, 
                        __ZTSN6HGPool9AllocatorIPU21objcproto10MTLTexture11objc_objectN31HGMetalTextureWrapperInfinipool10DescriptorEEE, 
                        __ZTSNSt3__117bad_function_callE ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _HFAcquireExclusive, _HFAcquireShared, _HFAddInstanceForFactory, 
                        _HFCreateInstance, _HFDecrementThenTestI32, _HFDecrementThenTestU32, 
                        _HFIncrementThenTestI32, _HFIncrementThenTestU32, _HFReleaseExclusive, 
@@ -2383,7 +2383,7 @@ exports:
                        __ZlsRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEERKN10HGDotGraph4EdgeE, 
                        __ZlsRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEERKN10HGDotGraph4NodeE, 
                        _g_PerfGlobal, _kBlueNoise3RPDF, _kHNullMD5 ]
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ __ZN10HGRenderer10RenderTileEP15HGExecutionUnitP19__simd128_float32_t6HGRectP6HGNodei, 
                        __ZN10HGRenderer15RenderInputTileEP15HGExecutionUnitP19__simd128_float32_t6HGRectP6HGNodeiP6HGTilei, 
                        __ZN12HGColorGamma11LoadMatrix1EPK19__simd128_float32_t, __ZN12HGColorGamma11LoadMatrix2EPK19__simd128_float32_t, 

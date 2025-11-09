@@ -3,13 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0C8B9869-1689-304F-BB8C-2AFFD1D83287
+    value:           E498A528-7EC8-3448-9E9B-C741A66DEA95
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A4FC167E-4A23-36EE-A96F-AE20EC94E00B
+    value:           F24CFD1C-E81B-35D4-98D1-B85C5607D7AC
 install-name:    '/System/Library/PrivateFrameworks/HomePlatformSettingsUI.framework/Versions/A/HomePlatformSettingsUI'
+swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _HomePlatformSettingsUIVersionNumber, _HomePlatformSettingsUIVersionString ]
 ...

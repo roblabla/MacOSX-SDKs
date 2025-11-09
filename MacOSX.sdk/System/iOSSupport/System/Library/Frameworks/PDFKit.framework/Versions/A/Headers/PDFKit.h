@@ -24,4 +24,5 @@
 #import <PDFKit/PDFSelection.h>
 #import <PDFKit/PDFThumbnailView.h>
 #import <PDFKit/PDFView.h>
+#import <PDFKit/PDFPageOverlayViewProvider.h>
 

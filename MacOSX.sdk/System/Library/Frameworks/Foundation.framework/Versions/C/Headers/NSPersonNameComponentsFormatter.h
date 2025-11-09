@@ -5,7 +5,7 @@
 #import <Foundation/NSPersonNameComponents.h>
 #import <Foundation/NSFormatter.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, NSPersonNameComponentsFormatterStyle) {
     NSPersonNameComponentsFormatterStyleDefault = 0,
@@ -93,4 +93,4 @@ FOUNDATION_EXPORT NSString * const NSPersonNameComponentNickname API_AVAILABLE(m
  */
 FOUNDATION_EXPORT NSString * const NSPersonNameComponentDelimiter API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

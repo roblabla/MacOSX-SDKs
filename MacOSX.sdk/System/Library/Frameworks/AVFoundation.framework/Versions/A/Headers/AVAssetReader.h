@@ -135,7 +135,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	The intersection of the value of timeRange and CMTimeRangeMake(kCMTimeZero, asset.duration) will determine the time range of the asset from which media data will be read. The default value of timeRange is CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity).
 	
-	This property cannot be set after reading has started.
+	This property throws an exception if a value is set after reading has started.
  */
 @property (nonatomic) CMTimeRange timeRange;
 
@@ -175,7 +175,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	Outputs are created with a reference to one or more AVAssetTrack objects. These tracks must be owned by the asset returned by the receiver's asset property.
 	
-	Outputs cannot be added after reading has started.
+	This method throws an exception if the output has already been added to an AVAssetReader or if reading has started (`status` has progressed beyond AVAssetReaderStatusUnknown).
  */
 - (void)addOutput:(AVAssetReaderOutput *)output;
 
@@ -191,6 +191,8 @@ AV_INIT_UNAVAILABLE
 	This method validates the entire collection of settings for outputs for tracks, for audio mixing, and for video composition and initiates reading from the receiver's asset.
 	
 	If this method returns NO, clients can determine the nature of the failure by checking the value of the status and error properties.
+ 
+	This method throws an exception if reading has already started (`status` has progressed beyond AVAssetReaderStatusUnknown).
  */
 - (BOOL)startReading;
 

@@ -15,6 +15,7 @@
 #include <Network/nw_object.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 NW_ASSUME_NONNULL_BEGIN
 

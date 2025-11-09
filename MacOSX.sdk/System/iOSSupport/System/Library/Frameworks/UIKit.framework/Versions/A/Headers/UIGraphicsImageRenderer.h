@@ -10,7 +10,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIImage.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIGraphicsImageRendererContext;
 
@@ -57,7 +57,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0))
 - (NSData *)JPEGDataWithCompressionQuality:(CGFloat)compressionQuality actions:(NS_NOESCAPE UIGraphicsImageDrawingActions)actions;
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIGraphicsImageRenderer.h>

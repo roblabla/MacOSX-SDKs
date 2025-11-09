@@ -26,8 +26,8 @@ typedef jlong JNFThreadContext;
 
 /*
  * Attaches the current thread to the Java VM if needed, and obtains a JNI environment
- * to interact with the VM. Use a provided JNIEnv pointer for your current thread 
- * whenever possible, since this method is particularly expensive to the Java VM if 
+ * to interact with the VM. Use a provided JNIEnv pointer for your current thread
+ * whenever possible, since this method is particularly expensive to the Java VM if
  * used repeatedly.
  *
  * Provide a pointer to a JNFThreadContext to pass to JNFReleaseEnv().

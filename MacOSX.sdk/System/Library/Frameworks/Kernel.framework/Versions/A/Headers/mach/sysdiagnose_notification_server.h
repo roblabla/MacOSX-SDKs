@@ -25,7 +25,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	extern int mig_strncpy_zerofill(char *dest, const char *src, int len) __attribute__((weak_import));
+#ifndef __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS_CSTRING_ATTR
+#define __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS_CSTRING_COUNTEDBY_ATTR(C) __unsafe_indexable
+#endif
+	extern int mig_strncpy_zerofill(char * dest, const char * src, int len) __attribute__((weak_import));
 #ifdef __cplusplus
 }
 #endif
@@ -41,7 +44,7 @@ extern "C" {
 #define FUNCTION_PTR_T
 typedef void (*function_ptr_t)(mach_port_t, char *, mach_msg_type_number_t);
 typedef struct {
-        char            *name;
+        char            * name;
         function_ptr_t  function;
 } function_table_entry;
 typedef function_table_entry   *function_table_t;
@@ -57,7 +60,6 @@ typedef function_table_entry   *function_table_t;
 #include <mach/mig.h>
 #include <mach/mig.h>
 #include <mach/mach_types.h>
-#include <atm/atm_types.h>
 
 #ifdef __BeforeMigServerHeader
 __BeforeMigServerHeader
@@ -120,7 +122,7 @@ extern const struct receive_sysdiagnose_notification_subsystem {
 	mach_msg_id_t	end;	/* Max routine number + 1 */
 	unsigned int	maxsize;	/* Max msg size */
 	vm_address_t	reserved;	/* Reserved */
-	struct routine_descriptor	/*Array of routine descriptors */
+	struct routine_descriptor	/* Array of routine descriptors */
 		routine[2];
 } receive_sysdiagnose_notification_subsystem;
 

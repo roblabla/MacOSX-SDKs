@@ -1,7 +1,7 @@
 /*
     NSPersistentStore.h
     Core Data
-    Copyright (c) 2004-2021, Apple Inc.
+    Copyright (c) 2004-2022, Apple Inc.
     All rights reserved.
 */
 
@@ -11,6 +11,7 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSError.h>
 #import <Foundation/NSURL.h>
+#import <CoreData/CoreDataDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,7 +34,7 @@ API_AVAILABLE(macosx(10.5),ios(3.0))
    attempting to read from it. This method should never raise an exception.
  */
 + (nullable NSDictionary<NSString *, id> *)metadataForPersistentStoreWithURL:(NSURL *)url error:(NSError **)error;
-/* Set the medatada of the store at url to metadata. Must be overriden by subclasses. */
+/* Set the metadata of the store at url to metadata. Must be overriden by subclasses. */
 + (BOOL)setMetadata:(nullable NSDictionary<NSString *, id> *)metadata forPersistentStoreWithURL:(NSURL*)url error:(NSError **)error;
 
 /* Returns the NSMigrationManager class optimized for this store class.  Subclasses of NSPersistentStore can override this to provide a custom migration manager subclass (eg to take advantage of store-specific functionality to improve migration performance).

@@ -74,6 +74,7 @@
 
 #include <sys/appleapiopts.h>
 #include <sys/cdefs.h>
+#include <sys/constrained_ctypes.h>
 #include <sys/types.h> /* u_quad_t */
 
 typedef u_quad_t so_gen_t;
@@ -103,7 +104,7 @@ struct xsockbuf {
 /*
  * Externalized form of struct socket used by the sysctl(3) interface.
  */
-struct  xsocket {
+struct xsocket {
 	u_int32_t               xso_len;        /* length of this structure */
 	_XSOCKET_PTR(struct socket *) xso_so;   /* makes a convenient handle */
 	short                   so_type;

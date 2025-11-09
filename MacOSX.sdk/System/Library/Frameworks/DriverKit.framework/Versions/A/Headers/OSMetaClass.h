@@ -33,7 +33,10 @@
 #include <DriverKit/IOReturn.h>
 #include <DriverKit/IORPC.h>
 
+#if DRIVERKIT_PRIVATE
 struct OSMetaClassBasePrivate;
+struct OSMetaClassBaseRemotePrivate;
+#endif /* DRIVERKIT_PRIVATE */
 class IODispatchQueue;
 class OSMetaClass;
 class OSObject;
@@ -148,6 +151,8 @@ public:
 #if DRIVERKIT_PRIVATE
     OSMetaClassBasePrivate *
     Private() const;
+    OSMetaClassBaseRemotePrivate *
+    RemotePrivate() const;
     IODispatchQueue *
     QueueForObject(uint64_t msgid);
 #endif

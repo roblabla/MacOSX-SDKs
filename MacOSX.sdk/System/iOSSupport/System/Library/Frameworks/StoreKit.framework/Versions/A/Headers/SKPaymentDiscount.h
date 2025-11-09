@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-SK_EXTERN_CLASS API_AVAILABLE(ios(12.2), macos(10.14.4), watchos(6.2)) @interface SKPaymentDiscount : NSObject {
+SK_EXTERN_CLASS API_AVAILABLE(ios(12.2), macos(10.14.4), watchos(6.2)) NS_SWIFT_SENDABLE @interface SKPaymentDiscount : NSObject {
 @private
     id _internal;
 }

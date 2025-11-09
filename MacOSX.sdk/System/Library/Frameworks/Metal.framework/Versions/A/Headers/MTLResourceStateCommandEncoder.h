@@ -2,7 +2,6 @@
 //  MTLResourceStateCommandEncoder.h
 //  Metal
 //
-//  Created by kpiddington on 9/7/18.
 //  Copyright © 2018 Apple, Inc. All rights reserved.
 
 
@@ -15,11 +14,6 @@
 #import <Metal/MTLResourceStatePass.h>
 
 NS_ASSUME_NONNULL_BEGIN
-/*!
- @header MTLResourceStateCommandEncoder
- @discussion Header file for MTLResourceStateCommandEncoder
- */
-
 
 /*!
  @enum MTLSparseTextureMappingMode
@@ -103,10 +97,27 @@ API_AVAILABLE(macos(10.15), ios(13.0))
 /*!
  @method waitForFence:
  @abstract Prevent further GPU work until the fence is reached.
- @discussion The fence is evaluated at kernel submision to maintain global order and prevent deadlock.
+ @discussion The fence is evaluated at kernel submission to maintain global order and prevent deadlock.
  Drivers may delay fence updates until the end of the encoder. Drivers may also wait on fences at the beginning of an encoder. It is therefore illegal to wait on a fence after it has been updated in the same encoder.
  */
 - (void)waitForFence:(id <MTLFence>)fence API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+
+
+/*!
+ @method moveTextureMappingsFromTexture:sourceSlice:sourceLevel:sourceOrigin:sourceSize:toTexture:destinationSlice:destinationLevel:destinationOrigin:
+ @abstract Move sparse page mappings from one sparse texture to another from the same heap.
+ @discussion The tile mapping is moved from the source texture only if the destination texture tile is unmapped. The textures must also have matching a texture format,
+ texture type, sample count, usage and resource options.
+ */
+-(void) moveTextureMappingsFromTexture:(id<MTLTexture>) sourceTexture
+                          sourceSlice:(NSUInteger)sourceSlice
+                          sourceLevel:(NSUInteger)sourceLevel
+                         sourceOrigin:(MTLOrigin)sourceOrigin
+                           sourceSize:(MTLSize)sourceSize
+                            toTexture:(id<MTLTexture>) destinationTexture
+                     destinationSlice:(NSUInteger)destinationSlice
+                     destinationLevel:(NSUInteger)destinationLevel
+                     destinationOrigin:(MTLOrigin)destinationOrigin API_AVAILABLE(macos(13.0), ios(16.0));
 
 
 @required

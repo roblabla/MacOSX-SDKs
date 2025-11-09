@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           63421A7E-08E3-3613-952D-FAD7674A793B
+    value:           C997F529-DA93-3073-BCB9-56BE4260B7F9
   - target:          x86_64-maccatalyst
-    value:           63421A7E-08E3-3613-952D-FAD7674A793B
+    value:           C997F529-DA93-3073-BCB9-56BE4260B7F9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C3DE3ACE-249F-3FED-ABDA-2C3DCBCC29F6
+    value:           F03EC0DC-FA16-3B38-BCA5-0223326C1BEC
   - target:          arm64e-maccatalyst
-    value:           C3DE3ACE-249F-3FED-ABDA-2C3DCBCC29F6
+    value:           F03EC0DC-FA16-3B38-BCA5-0223326C1BEC
 install-name:    '/System/Library/PrivateFrameworks/OSASyncProxyClient.framework/Versions/A/OSASyncProxyClient'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _OSASyncProxyClientVersionNumber, _OSASyncProxyClientVersionString ]
     objc-classes:    [ OSASyncProxyClient ]
 ...

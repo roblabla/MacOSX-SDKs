@@ -4,33 +4,35 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F7AD4051-854C-3DFF-9A60-29A1FC378A5D
+    value:           368B23A6-E069-3261-ABFC-1A323B595C30
   - target:          x86_64-maccatalyst
-    value:           F7AD4051-854C-3DFF-9A60-29A1FC378A5D
+    value:           368B23A6-E069-3261-ABFC-1A323B595C30
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0ED4971A-2464-380B-8011-68264A32BC96
+    value:           CE5BD4D7-7C79-34E7-B714-B436A70FAA11
   - target:          arm64e-maccatalyst
-    value:           0ED4971A-2464-380B-8011-68264A32BC96
+    value:           CE5BD4D7-7C79-34E7-B714-B436A70FAA11
 install-name:    '/System/Library/PrivateFrameworks/ProactiveInputPredictionsInternals.framework/Versions/A/ProactiveInputPredictionsInternals'
-current-version: 1153.16.1
+current-version: 1193.8
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _PSGPBEngagementReadFrom, _PSGPBErrorReadFrom, _PSGPBImpressionReadFrom, 
                        _PSGPBPredictionReadFrom, _PSGPBQueryReadFrom, _PSGPBTriggerReadFrom, 
                        _PSGPBTypingSpeedReadFrom, _ProactiveInputPredictionsInternalsVersionNumber, 
-                       _ProactiveInputPredictionsInternalsVersionString ]
-    objc-classes:    [ PSGDiagnostics, PSGExperimentResolver, PSGInputSuggesterMetricsLogger, 
-                       PSGInputSuggesterServerDelegate, PSGInputSuggesterServerRequestHandler, 
-                       PSGInternalRequestHandler, PSGInternalServerDelegate, PSGPBEngagement, 
-                       PSGPBError, PSGPBImpression, PSGPBPrediction, PSGPBQuery, 
-                       PSGPBTrigger, PSGPBTypingSpeed, PSGResponseSuggestionsExpConfig, 
-                       PSGResponseSuggestionsExpConfigDefaults, PSGWordBoundarySuggestionsExpConfig, 
-                       PSGWordBoundarySuggestionsExpConfigDefaults, PSGXPCServer ]
+                       _ProactiveInputPredictionsInternalsVersionString, _kPSGCustomResponseCKPT ]
+    objc-classes:    [ PSGCustomResponseHarvester, PSGDPDeviceMetricsCollector, PSGDiagnostics, 
+                       PSGExperimentResolver, PSGInputSuggesterMetricsLogger, PSGInputSuggesterServerDelegate, 
+                       PSGInputSuggesterServerRequestHandler, PSGInternalRequestHandler, 
+                       PSGInternalServerDelegate, PSGPBEngagement, PSGPBError, PSGPBImpression, 
+                       PSGPBPrediction, PSGPBQuery, PSGPBTrigger, PSGPBTypingSpeed, 
+                       PSGProactiveInputPredictionsSystem, PSGQuickResponsesEngagementMetrics, 
+                       PSGResponseSuggestionsExpConfig, PSGResponseSuggestionsExpConfigDefaults, 
+                       PSGWordBoundarySuggestionsExpConfig, PSGWordBoundarySuggestionsExpConfigDefaults, 
+                       PSGXPCServer ]
     objc-ivars:      [ PSGPBEngagement._bundleIdentifier, PSGPBEngagement._dataSourceType, 
                        PSGPBEngagement._experimentId, PSGPBEngagement._has, PSGPBEngagement._hasContextBeforeInput, 
                        PSGPBEngagement._hasRecipientNames, PSGPBEngagement._hasResponseContext, 

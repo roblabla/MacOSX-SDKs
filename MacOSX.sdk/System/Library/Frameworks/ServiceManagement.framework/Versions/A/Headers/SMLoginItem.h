@@ -16,6 +16,8 @@ __BEGIN_DECLS
  * Enable a helper application located in the main application bundle's 
  * Contents/Library/LoginItems directory.
  *
+ * This API has been deprecated. Please use SMAppService to enable SMLoginItems
+ *
  * @param identifier
  * The bundle identifier of the helper application bundle.
  *
@@ -28,7 +30,7 @@ __BEGIN_DECLS
  * @result 
  * Returns true if the requested change has taken effect.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA)
+__OSX_DEPRECATED(10.6, 13.0, "Please use SMAppService instead")
 XPC_EXPORT XPC_NONNULL1
 Boolean
 SMLoginItemSetEnabled(CFStringRef identifier, Boolean enabled);

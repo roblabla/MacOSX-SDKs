@@ -122,6 +122,11 @@ extern void                             nanoseconds_to_absolutetime(
 	uint64_t                nanoseconds,
 	uint64_t                *result);
 
+extern void                             absolutetime_to_microtime(
+	uint64_t                abstime,
+	clock_sec_t             *secs,
+	clock_usec_t            *microsecs);
+
 /*
  * Absolute <-> Continuous Time conversion routines
  *

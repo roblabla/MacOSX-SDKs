@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DE181BF9-CD35-3142-922C-144D18A7B0A5
+    value:           D4997273-800C-3104-A39D-1F8B8BFE23C3
   - target:          arm64-macos
-    value:           8C68D833-7106-3289-A25E-DF7C3C1ABA3B
+    value:           72878688-3BF8-3CF4-928B-C043FD8DF9C7
   - target:          arm64e-macos
-    value:           79ECA279-6718-3281-B6C2-6C05CA4506DB
+    value:           2B36B248-2FEA-38DA-8442-064C02CFAE08
 install-name:    '/System/Library/PrivateFrameworks/acfsSupport.framework/Versions/A/acfsSupport'
 current-version: 0
 compatibility-version: 0
@@ -37,32 +37,24 @@ exports:
     objc-classes:    [ XsanControllerBrowser, XsanOSTransaction ]
 reexports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _CFXsanErrorDomain, _buildSanConfig, _buildSanConfigC, _changeXsanIPAddr, 
-                       _checkSanConfigChange, _checkSanConfigChangeWithServer, _clearXsanVolumeLockout, 
-                       _cullSanConfig, _destroySanConfig, _destroySanConfigC, _kMDConfigErase, 
-                       _kMDConfigSearchLevel, _kMDConfigSearchLevelFSSearchOnly, 
+    symbols:         [ _kMDConfigErase, _kMDConfigSearchLevel, _kMDConfigSearchLevelFSSearchOnly, 
                        _kMDConfigSearchLevelOff, _kMDConfigSearchLevelReadOnly, _kMDConfigSearchLevelReadWrite, 
-                       _ldapSanUserNameForName, _loadConfigPlist, _loadLocalXsanConfig, 
-                       _redactXsanSecrets, _redactXsanSecretsWithHash, _resetSanController, 
-                       _saveConfigPlist, _saveLocalXsanConfig, _saveRemoteXsanConfig, 
-                       _send_xsand_requestCF, _xkMDConfigErase, _xkMDConfigSearchLevel, 
-                       _xkMDConfigSearchLevelFSSearchOnly, _xkMDConfigSearchLevelOff, 
-                       _xkMDConfigSearchLevelReadOnly, _xkMDConfigSearchLevelReadWrite, 
-                       _xsanConfigProfileForPayload, _xsanProfileIsInstalled, _xsan_controller_from_ip, 
-                       _xsand_make_mount_for_dict, _xsand_wipe_configuration ]
+                       _xkMDConfigErase, _xkMDConfigSearchLevel, _xkMDConfigSearchLevelFSSearchOnly, 
+                       _xkMDConfigSearchLevelOff, _xkMDConfigSearchLevelReadOnly, 
+                       _xkMDConfigSearchLevelReadWrite ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3F6B2D2C-C9DD-3D4F-85D9-96A910E616E4
+    value:           EAC31EC2-2F59-3E58-AA9E-3DEAB3D83F06
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ABD2ADF8-2778-3764-A040-4BF9DE975177
+    value:           4D75AE0C-FF4B-348D-961B-CEADF4913197
 install-name:    '/System/Library/PrivateFrameworks/acfs.framework/Versions/A/acfs'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CFXsanErrorDomain, _GetXsanConfigEssentials, _buildSanConfig, 
                        _buildSanConfigC, _buildSanConfigCF, _buildXsanDirs, _changeXsanIPAddr, 
                        _checkSanConfigChange, _checkSanConfigChangeWithServer, _clearXsanVolumeLockout, 

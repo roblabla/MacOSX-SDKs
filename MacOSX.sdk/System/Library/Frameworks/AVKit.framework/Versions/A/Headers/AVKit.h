@@ -26,21 +26,26 @@
 #endif // TARGET_OS_OSX || TARGET_OS_MACCATALYST
 
 
+
 #if TARGET_OS_IPHONE
 #import <AVKit/AVError.h>
+#if !TARGET_OS_MACCATALYST
+#import <AVKit/AVInterstitialTimeRange.h>
+#endif // TARGET_OS_MACCATALYST
 #import <AVKit/AVPictureInPictureController.h>
 #import <AVKit/AVPictureInPictureController_AVSampleBufferDisplayLayerSupport.h>
 #import <AVKit/AVPictureInPictureController_VideoCallSupport.h>
+#import <AVKit/AVPlaybackSpeed.h>
 #import <AVKit/AVPlayerItem+AVKitAdditions.h>
 #import <AVKit/AVPlayerViewController.h>
 #import <AVKit/AVPlaybackRouteSelecting.h>
 #import <AVKit/AVRoutePickerView.h>
 
 #else
-
 #import <AVKit/AVCaptureView.h>
 #import <AVKit/AVPictureInPictureController.h>
 #import <AVKit/AVPictureInPictureController_AVSampleBufferDisplayLayerSupport.h>
+#import <AVKit/AVPlaybackSpeed.h>
 #import <AVKit/AVPlayerView.h>
 #import <AVKit/AVRoutePickerView.h>
 

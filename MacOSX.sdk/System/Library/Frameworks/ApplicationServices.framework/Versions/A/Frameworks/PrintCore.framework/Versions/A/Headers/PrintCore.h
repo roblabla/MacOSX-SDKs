@@ -22,6 +22,10 @@
 #include <ColorSync/ColorSync.h>
 #endif
 
+#ifndef __PDEPLUGININTERFACE__
+#include <PrintCore/PDEPluginInterface.h>
+#endif
+
 #ifndef __PMDEFINITIONS__
 #include <PrintCore/PMDefinitions.h>
 #endif
@@ -32,6 +36,10 @@
 
 #ifndef __PMPrintAETypes__
 #include <PrintCore/PMPrintAETypes.h>
+#endif
+
+#ifndef __PMPRINTINGDIALOGEXTENSIONS__
+#include <PrintCore/PMPrintingDialogExtensions.h>
 #endif
 
 #ifndef __PMPRINTSETTINGSKEYS__

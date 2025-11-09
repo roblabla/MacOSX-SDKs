@@ -161,6 +161,9 @@
 /* Define to 1 if you have the `OPENSSL_init_ssl' function. */
 #define HAVE_OPENSSL_INIT_SSL 1
 
+/* Detected PCRE2 */
+/* #undef HAVE_PCRE2 */
+
 /* Define to 1 if you have the `port_create' function. */
 /* #undef HAVE_PORT_CREATE */
 
@@ -178,6 +181,9 @@
 
 /* Define to 1 if you have the `RAND_egd' function. */
 /* #undef HAVE_RAND_EGD */
+
+/* Define if rustls is available */
+/* #undef HAVE_RUSTLS */
 
 /* Define to 1 if you have the `setsid' function. */
 #define HAVE_SETSID 1

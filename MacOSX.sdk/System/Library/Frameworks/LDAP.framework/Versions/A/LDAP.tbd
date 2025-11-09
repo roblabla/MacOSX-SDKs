@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           84F64AD1-0CDA-3DAF-9531-7422817400E7
+    value:           9B086B1D-112A-31AF-81D9-87F41A236996
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7B457F84-9A3B-35F8-BC18-6E62A2079B86
+    value:           D8E2ABB9-836F-32C8-88F3-D8E1640E98CE
 install-name:    '/System/Library/Frameworks/LDAP.framework/Versions/A/LDAP'
 current-version: 2.4
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ber_alloc, _ber_alloc_t, _ber_bprint, _ber_bvarray_add, _ber_bvarray_free, 
                        _ber_bvdup, _ber_bvecadd, _ber_bvecfree, _ber_bvfree, _ber_dump, 
                        _ber_dup, _ber_dupbv, _ber_errno_addr, _ber_error_print, _ber_first_element, 

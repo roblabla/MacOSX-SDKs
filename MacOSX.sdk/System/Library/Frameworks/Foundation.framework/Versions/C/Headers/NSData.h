@@ -7,7 +7,7 @@
 
 @class NSString, NSURL, NSError;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /****************	Read/Write Options	****************/
 
@@ -228,14 +228,7 @@ typedef NS_ENUM(NSInteger, NSDataCompressionAlgorithm) {
 /****************	    Purgeable Data	****************/
 
 API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0))
-@interface NSPurgeableData : NSMutableData <NSDiscardableContent> {
-@private
-    NSUInteger _length;
-    int32_t _accessCount;
-    uint8_t _private[32];
-    void *_reserved;
-}
-
+@interface NSPurgeableData : NSMutableData <NSDiscardableContent>
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

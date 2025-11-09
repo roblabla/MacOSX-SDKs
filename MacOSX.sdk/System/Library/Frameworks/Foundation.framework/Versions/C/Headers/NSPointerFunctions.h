@@ -11,7 +11,7 @@
 #if !defined(__FOUNDATION_NSPOINTERFUNCTIONS__)
 #define __FOUNDATION_NSPOINTERFUNCTIONS__ 1
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*
 
@@ -75,7 +75,7 @@ API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0))
     API_DEPRECATED("Garbage collection no longer supported", macosx(10.5, 10.12), ios(2.0,10.0), watchos(2.0,3.0), tvos(9.0,10.0));
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 /*
    Cheat Sheet

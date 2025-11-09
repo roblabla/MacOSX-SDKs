@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E25EC991-406D-3E32-9762-3EFEE181EA20
+    value:           44597195-DAE9-331B-937D-92A2B5B5D4E2
   - target:          x86_64-maccatalyst
-    value:           E25EC991-406D-3E32-9762-3EFEE181EA20
+    value:           44597195-DAE9-331B-937D-92A2B5B5D4E2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0BE5EF3A-5FEB-342C-A897-6142A7847DDA
+    value:           A2581A50-8398-313A-A9D3-474A1ABAF019
   - target:          arm64e-maccatalyst
-    value:           0BE5EF3A-5FEB-342C-A897-6142A7847DDA
+    value:           A2581A50-8398-313A-A9D3-474A1ABAF019
 install-name:    '/usr/lib/swift/libswiftSoundAnalysis.dylib'
-current-version: 97.4
+current-version: 144.2.102
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s13SoundAnalysis24SNTimeDurationConstraintO13durationRangeyACSo06CMTimeG0acACmFWC', 
                        '_$s13SoundAnalysis24SNTimeDurationConstraintO19enumeratedDurationsyACSaySo6CMTimeaGcACmFWC', 
                        '_$s13SoundAnalysis24SNTimeDurationConstraintOMa', '_$s13SoundAnalysis24SNTimeDurationConstraintOMn', 

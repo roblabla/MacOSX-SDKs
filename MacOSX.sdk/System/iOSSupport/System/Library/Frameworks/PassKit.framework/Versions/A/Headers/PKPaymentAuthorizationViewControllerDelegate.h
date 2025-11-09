@@ -5,6 +5,9 @@
 //  Copyright (c) 2020 Apple, Inc. All rights reserved.
 //
 
+#ifndef __PKPAYMENTAUTHORIZATIONVIEWCONTROLLERDELEGATE_H__
+#define __PKPAYMENTAUTHORIZATIONVIEWCONTROLLERDELEGATE_H__
+
 #import <TargetConditionals.h>
 
 #if !TARGET_OS_WATCH && !TARGET_OS_TV
@@ -134,4 +137,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
+#endif
 #endif

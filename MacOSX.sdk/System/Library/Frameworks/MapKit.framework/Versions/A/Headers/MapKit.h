@@ -63,6 +63,10 @@
 #import <MapKit/MKPointOfInterestFilter.h>
 #import <MapKit/MKPitchControl.h>
 #import <MapKit/MKZoomControl.h>
+#import <MapKit/MKHybridMapConfiguration.h>
+#import <MapKit/MKImageryMapConfiguration.h>
+#import <MapKit/MKMapConfiguration.h>
+#import <MapKit/MKStandardMapConfiguration.h>
 
 #if TARGET_OS_IPHONE
 #import <MapKit/MKReverseGeocoder.h>
@@ -77,6 +81,21 @@
 
 #if TARGET_OS_IOS || TARGET_OS_MACCATALYST || TARGET_OS_TV
 #import <MapKit/MKUserTrackingButton.h>
+#import <MapKit/MKIconStyle.h>
+#import <MapKit/MKMapFeatureAnnotation.h>
+#import <MapKit/MKMapItemRequest.h>
+
 #endif // TARGET_OS_IOS || TARGET_OS_MACCATALYST || TARGET_OS_TV
+
+#if (TARGET_OS_IOS || TARGET_OS_MACCATALYST || TARGET_OS_OSX || TARGET_OS_TV)
+
+#import <MapKit/MKLookAroundScene.h>
+#import <MapKit/MKLookAroundSceneRequest.h>
+#import <MapKit/MKLookAroundSnapshot.h>
+#import <MapKit/MKLookAroundSnapshotOptions.h>
+#import <MapKit/MKLookAroundSnapshotter.h>
+#import <MapKit/MKLookAroundViewController.h>
+
+#endif // (TARGET_OS_IOS || TARGET_OS_MACCATALYST || TARGET_OS_OSX || TARGET_OS_TV)
 
 #endif // __has_include(<MapKit/MKMapView.h>)

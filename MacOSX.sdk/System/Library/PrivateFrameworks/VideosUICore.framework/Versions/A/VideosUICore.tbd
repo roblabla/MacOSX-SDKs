@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           28E69CAF-DF75-3AAC-B0EE-05BCD942EB50
+    value:           C8E2C99F-F95E-3F13-8808-A0074DD6190D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           172D9BD6-852D-39C4-B7E1-0BED8084E0D4
+    value:           367DDE0B-51B8-39A1-A7E4-83945AE14EF4
 install-name:    '/System/Library/PrivateFrameworks/VideosUICore.framework/Versions/A/VideosUICore'
-current-version: 644.43.1
+current-version: 762.13.1
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _CALayerKeyBoundsSize, _CALayerKeyShadowPath, _VUIAccessibilityReduceMotionStatusDidChangeNotification, 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _VUIAccessibilityReduceMotionStatusDidChangeNotification, 
                        _VUIAccessibilityVoiceOverStatusDidChangeNotification, _VUIApplicationDidBecomeActiveNotification, 
                        _VUIApplicationDidEnterBackgroundNotification, _VUIApplicationWillEnterForegroundNotification, 
                        _VUIApplicationWillResignActiveNotification, _VUIApplicationWillTerminateNotification, 
@@ -28,7 +28,8 @@ exports:
                        _VUIDefaultsEnableMetricsPageRenderLogging, _VUIDefaultsEnableRefreshEventDebug, 
                        _VUIDefaultsForceGDPRFirstTimeFlow, _VUIDefaultsForceGDPRWhatsNewFlow, 
                        _VUIDefaultsPageMaxCacheValueKey, _VUIDefaultsPageRefreshTypeValueKey, 
-                       _VUIDefaultsUTSBaseURL, _VUIDefaultsWLKDefaultsDomain, _VUIDurationValueTransformerName, 
+                       _VUIDefaultsPlaybackURLOverrides, _VUIDefaultsUTSBaseURL, 
+                       _VUIDefaultsWLKDefaultsDomain, _VUIDurationValueTransformerName, 
                        _VUIError, _VUIErrorCancelled, _VUIErrorCancelledWithUnderlyingError, 
                        _VUIErrorIsCancelled, _VUIErrorIsErrorCode, _VUIErrorIsErrorDomainAndCode, 
                        _VUIErrorWithDomain, _VUIFeatureFlagKeyDefaultsKey, _VUIFeatureFlagKeyDomain, 
@@ -77,8 +78,8 @@ exports:
                        VUIModalPresentationConfiguration, VUIModalPresentationNavigationController, 
                        VUIModalPresenter, VUINSBarButtonItem, VUINSNavigationBar, 
                        VUINSNavigationBarButton, VUINSNavigationController, VUINSNavigationItem, 
-                       VUINSTraitCollection, VUINetworkReachabilityMonitor, VUIPathAnimationAction, 
-                       VUIRemoteImageDescriptor, VUIResourceImageDescriptor, VUIRestrictions, 
-                       VUISortUtilities, VUIStateMachine, VUITitleSortDescriptor, 
-                       VUIURLImageLoader, VUIURLRequestOperation ]
+                       VUINSTraitCollection, VUINetworkReachabilityMonitor, VUIRemoteImageDescriptor, 
+                       VUIResourceImageDescriptor, VUIRestrictions, VUISortUtilities, 
+                       VUIStateMachine, VUITitleSortDescriptor, VUIURLImageLoader, 
+                       VUIURLRequestOperation ]
 ...

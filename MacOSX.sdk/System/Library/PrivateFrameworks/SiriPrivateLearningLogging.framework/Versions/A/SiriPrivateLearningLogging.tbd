@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6AF57236-6231-3110-A657-3C3DE75D5CF5
+    value:           875FA538-5261-3A37-90F3-6CF2F27CEE32
   - target:          x86_64-maccatalyst
-    value:           6AF57236-6231-3110-A657-3C3DE75D5CF5
+    value:           875FA538-5261-3A37-90F3-6CF2F27CEE32
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A5A9EB51-54E1-3A96-815A-F0EBECA36A28
+    value:           9A873527-2097-3397-AB1E-BD2121A70052
   - target:          arm64e-maccatalyst
-    value:           A5A9EB51-54E1-3A96-815A-F0EBECA36A28
+    value:           9A873527-2097-3397-AB1E-BD2121A70052
 install-name:    '/System/Library/PrivateFrameworks/SiriPrivateLearningLogging.framework/Versions/A/SiriPrivateLearningLogging'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s26SiriPrivateLearningLogging0A15PLUSFeatureFlagO11picsRuntimeyA2CmFWC', 
                        '_$s26SiriPrivateLearningLogging0A15PLUSFeatureFlagO12FeatureFlags0gH3KeyAAMc', 
                        '_$s26SiriPrivateLearningLogging0A15PLUSFeatureFlagO15analyticsEventsyA2CmFWC', 

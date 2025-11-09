@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           621203F0-2B5B-33A9-8310-8974FC0EA2E5
+    value:           40E74080-58EA-3A45-8E38-9ED5F51A0710
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0EE777A3-E2BC-3329-9253-A8BD5AABB7DE
+    value:           80692A42-8559-3579-832E-AE74F076BD4E
 install-name:    '/System/Library/Frameworks/DVDPlayback.framework/Versions/A/DVDPlayback'
 current-version: 5960
 compatibility-version: 5000
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DVDClearLastPlayBookmark, _DVDCloseMediaFile, _DVDCloseMediaVolume, 
                        _DVDCopyBuildVersion, _DVDDisableAllAudioFeatures, _DVDDisplaySubPicture, 
                        _DVDDispose, _DVDDoButtonActivate, _DVDDoMenuCGClick, _DVDDoMenuCGMouseOver, 

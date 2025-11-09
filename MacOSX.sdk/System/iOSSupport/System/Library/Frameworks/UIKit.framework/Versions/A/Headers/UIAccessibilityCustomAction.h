@@ -10,7 +10,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIImage.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_EXTERN API_AVAILABLE(ios(8.0))
 @interface UIAccessibilityCustomAction : NSObject
@@ -64,7 +64,7 @@ typedef BOOL(^UIAccessibilityCustomActionHandler)(UIAccessibilityCustomAction *c
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIAccessibilityCustomAction.h>

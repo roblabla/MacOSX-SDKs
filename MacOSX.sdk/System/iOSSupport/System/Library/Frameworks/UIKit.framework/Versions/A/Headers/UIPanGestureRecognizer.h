@@ -14,7 +14,7 @@
 // Changes: when a finger moves while at least minimumNumberOfTouches are down
 // Ends:    when all fingers have lifted
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSUInteger, UIScrollType) {
     UIScrollTypeDiscrete,   // Discrete scrolls originate from devices like a scroll wheel mouse
@@ -42,7 +42,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIPanGestureRecognizer.h>

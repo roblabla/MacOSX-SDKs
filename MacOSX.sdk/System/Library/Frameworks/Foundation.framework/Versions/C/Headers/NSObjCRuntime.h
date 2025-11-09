@@ -260,6 +260,82 @@
 #  define NS_SWIFT_ASYNC_THROWS_ON_FALSE(FALSE_PARAMETER_INDEX)
 #endif
 
+#if __has_attribute(__swift_attr__)
+#  define NS_SWIFT_UNAVAILABLE_FROM_ASYNC(msg) __attribute__((__swift_attr__("@_unavailableFromAsync(message: \"" msg "\")")))
+#else
+#  define NS_SWIFT_UNAVAILABLE_FROM_ASYNC(msg)
+#endif
+
+#define __NS_HEADER_AUDIT_BEGIN_nullability _Pragma("clang assume_nonnull begin")
+#define __NS_HEADER_AUDIT_END_nullability   _Pragma("clang assume_nonnull end")
+
+#if __SWIFT_ATTR_SUPPORTS_SENDABLE_DECLS
+   // Indicates that the thing it is applied to should be imported as 'Sendable' in Swift:
+   // * Type declarations are imported into Swift with a 'Sendable' conformance.
+   // * Block parameters are imported into Swift with an '@Sendable' function type. (Write it in the same place you would put 'NS_NOESCAPE'.)
+   // * 'id' parameters are imported into Swift as 'Sendable', not 'Any'.
+   // * Other object-type parameters are imported into Swift with an '& Sendable' requirement.
+#  define NS_SWIFT_SENDABLE __attribute__((swift_attr("@Sendable")))
+
+   // Indicates that the thing it is applied to should *not* be imported as 'Sendable' in Swift even if it normally would be.
+#  define NS_SWIFT_NONSENDABLE __attribute__((swift_attr("@_nonSendable")))
+
+   // Indicates that a specific member of an 'NS_SWIFT_UI_ACTOR'-isolated type is "threadsafe" and should be callable from outside the main actor.
+#  define NS_SWIFT_NONISOLATED __attribute__((swift_attr("nonisolated")))
+
+#  define __NS_HEADER_AUDIT_BEGIN_sendability _Pragma("clang attribute NS_HEADER_AUDIT_sendability.push (__attribute__((swift_attr(\"@_nonSendable(_assumed)\"))), apply_to = any(objc_interface, record, enum))")
+#  define __NS_HEADER_AUDIT_END_sendability   _Pragma("clang attribute NS_HEADER_AUDIT_sendability.pop")
+#else
+#  define NS_SWIFT_SENDABLE
+#  define NS_SWIFT_NONSENDABLE
+#  define NS_SWIFT_NONISOLATED
+
+#  define __NS_HEADER_AUDIT_BEGIN_sendability
+#  define __NS_HEADER_AUDIT_END_sendability
+#endif
+
+#define __NS_HEADER_AUDIT_BEGIN1(_1) __NS_HEADER_AUDIT_BEGIN_##_1
+#define __NS_HEADER_AUDIT_BEGIN2(_1, _2) __NS_HEADER_AUDIT_BEGIN1(_1) __NS_HEADER_AUDIT_BEGIN1(_2)
+
+#define __NS_HEADER_AUDIT_END1(_1) __NS_HEADER_AUDIT_END_##_1
+#define __NS_HEADER_AUDIT_END2(_1, _2) __NS_HEADER_AUDIT_END1(_1) __NS_HEADER_AUDIT_END1(_2)
+
+#define __NS_HEADER_AUDIT_GET_MACRO(_2, _1, NAME, ...) NAME
+
+/*
+The 'NS_HEADER_AUDIT_BEGIN/_END(...keywords...)' macros are used in pairs; they mark all of the declarations between them as having been updated to explicitly describe whatever behavior is indicated by the 'keywords'. This typically changes the default for that behavior from a heuristic that maximizes backwards compatibility to a fixed value that minimizes the number of annotations needed.
+
+The currently supported keywords are:
+* 'nullability': All pointers in the region are assumed to be '_Nonnull' unless otherwise specified (using, for instance, '_Nullable' or '_Null_unspecified', or by following the Foundation error handling convention). This subsumes 'NS_ASSUME_NONNULL_BEGIN/_END'.
+* 'sendability': All types and parameters in the region are assumed to be 'NS_SWIFT_NONSENDABLE' unless otherwise specified (using, for instance, 'NS_SWIFT_SENDABLE' or 'NS_SWIFT_UI_ACTOR', or a macro like 'NS_ENUM' that creates a new Swift type, or by following the Foundation completion-handler method convention).
+
+Each 'NS_HEADER_AUDIT_BEGIN/_END' pair can specify one or more keywords, but the '_END' macro should specify the exact same keywords as the '_BEGIN' macro did.
+
+Usage:
+
+#import <Foundation/Foundation.h>
+
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+@interface NonSendableClass : NSObject
+
+- (void)methodWithNonnullParam:(id)object;
+- (void)methodWithNonsendableBlock:(void (^)())block;
+
+@end
+
+NS_SWIFT_SENDABLE @interface SendableClass : NSObject
+
+- (void)methodWithNullableParam:(_Nullable id)object;
+- (void)methodWithSendableBlock:(void (^ NS_SWIFT_SENDABLE)())block;
+
+@end
+
+NS_HEADER_AUDIT_END(nullability, sendability)
+*/
+#define NS_HEADER_AUDIT_BEGIN(...) __NS_HEADER_AUDIT_GET_MACRO(__VA_ARGS__, __NS_HEADER_AUDIT_BEGIN2, __NS_HEADER_AUDIT_BEGIN1, 0)(__VA_ARGS__)
+#define NS_HEADER_AUDIT_END(...) __NS_HEADER_AUDIT_GET_MACRO(__VA_ARGS__, __NS_HEADER_AUDIT_END2, __NS_HEADER_AUDIT_END1, 0)(__VA_ARGS__)
+
 #if !defined(NS_UNAVAILABLE)
 #define NS_UNAVAILABLE UNAVAILABLE_ATTRIBUTE
 #endif
@@ -396,11 +472,13 @@ Usually, this is because the enum represents a mathematically complete set. For 
 
 #define NS_WARN_UNUSED_RESULT CF_WARN_UNUSED_RESULT
 
+#define NS_FALLTHROUGH CF_FALLTHROUGH
+
 // There is no need to use this macro any longer, the last Foundation epoch 
 // was 8 and that is now assumed to be the final version. 
 #define FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(__epoch__) (!defined(SWIFT_CLASS_EXTRA))
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 FOUNDATION_EXPORT double NSFoundationVersionNumber;
 
@@ -578,7 +656,7 @@ typedef NS_ENUM(NSInteger, NSQualityOfService) {
 
 static const NSInteger NSNotFound = NSIntegerMax;
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #if !defined(YES)
     #define YES	(BOOL)1

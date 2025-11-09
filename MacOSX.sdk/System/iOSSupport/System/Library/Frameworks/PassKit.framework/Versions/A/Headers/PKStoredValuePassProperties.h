@@ -1,3 +1,4 @@
+#if !__has_include(<PassKitCore/PKStoredValuePassProperties.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKStoredValuePassProperties.h
 //  PassKit
@@ -28,3 +29,7 @@ API_AVAILABLE(ios(15.0), watchos(8.0))
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <PassKitCore/PKStoredValuePassProperties.h>
+#endif

@@ -45,7 +45,7 @@ NI_EXPORT
 @interface NINearbyPeerConfiguration : NIConfiguration
 
 /**
- The discovery token identifiying the peer device for this session configuration.
+ The discovery token identifying the peer device for this session configuration.
 */
 @property (nonatomic, copy, readonly) NIDiscoveryToken *peerDiscoveryToken;
 
@@ -54,6 +54,16 @@ NI_EXPORT
  @param peerToken A discovery token received from the peer for this session.
  */
 - (instancetype)initWithPeerToken:(NIDiscoveryToken *)peerToken;
+
+/**
+ Enables camera assistance during the NISession run with this configuration
+ @discussion:
+ If true, optionally call setARSession: on the NISession before calling runWithConfiguration:
+ If true and setARSession: is not called, an ARSession will automatically be created
+ If true and the platform does not support camera assistance, the NISession will generate an error when runWithConfiguration: is called
+ @note: Check supportsCameraAssistance property in NIDeviceCapability returned from deviceCapabilities properties on NISession
+ */
+@property (nonatomic, assign, getter=isCameraAssistanceEnabled) BOOL cameraAssistanceEnabled API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;
@@ -75,12 +85,35 @@ NI_EXPORT
 @property (nonatomic, copy, readonly) NIDiscoveryToken *accessoryDiscoveryToken;
 
 /**
+ Enables camera assistance during the NISession run with this configuration
+ @discussion:
+ If YES, optionally call -setARSession: on the NISession before calling -runWithConfiguration:
+ If YES and setARSession: is not called, an ARSession will automatically be created
+ If YES  and the platform does not support camera assistance, the NISession will generate an error when runWithConfiguration: is called
+ @note: Check supportsCameraAssistance property in NIDeviceCapability returned from deviceCapabilities properties on NISession
+ */
+@property (nonatomic, assign, getter=isCameraAssistanceEnabled) BOOL cameraAssistanceEnabled API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
+
+/**
 Create a new nearby accessory configuration using data received from the accessory.
 
 @param data Configuration data received from the accessory.
 @param error An optional out error parameter that will be populated with an error if the provided data is invalid or unsupported.
 */
 - (nullable instancetype)initWithData:(NSData *)data error:(NSError **)error;
+
+/**
+ Create a new nearby accessory configuration for an accessory that is also a paired Bluetooth device
+
+ @param accessoryData Configuration data received from the accessory
+ @param bluetoothPeerIdentifier The accessory's Bluetooth identifier
+ @param error An optional out error parameter that will be populated with an error if the provided inputs are invalid or unsupported.
+
+ @discussion The accessory must be a Bluetooth LE peripheral that is paired, actively connected, and implements the Nearby Interaction Service and Accessory Configuration Characteristic.
+ */
+- (nullable instancetype)initWithAccessoryData:(NSData *)accessoryData
+                       bluetoothPeerIdentifier:(NSUUID *)identifier
+                                         error:(NSError **)error API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;

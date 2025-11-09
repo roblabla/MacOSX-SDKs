@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           34E8B967-AB50-3D63-AFEA-D52D3E6B195B
+    value:           F1810AAF-CF6B-3BC6-9870-4D81827AEFBE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1E8A9A71-244B-3288-87FB-6F267921D7FF
+    value:           CADEF3AB-9569-3A7B-B295-FE2437D1D19B
 install-name:    '/System/Library/PrivateFrameworks/MLAssetIO.framework/Versions/A/MLAssetIO'
-current-version: 1127.100.41
+current-version: 1436.40.4
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIFN3MIL16ValidationResultERKNS_11IROperationEE, __ZTINSt3__110__function6__baseIFN3MIL16ValidationResultERKNS2_11IROperationEEEE, 
@@ -27,7 +27,7 @@ exports:
                        __ZTSNSt3__114unary_functionIxmEE, __ZTSNSt3__117bad_function_callE, 
                        __ZTSNSt3__121__basic_string_commonILb1EEE, __ZTSNSt3__14hashIxEE, 
                        __ZTSPFN3MIL16ValidationResultERKNS_11IROperationEE ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MIOBeta1ParameterKey, _MIOBeta2ParameterKey, _MIOEpochsParameterKey, 
                        _MIOEpsilonParameterKey, _MIOEqualRanges, _MIOFeatureShortDescription, 
                        _MIOFeatureTypeToString, _MIOFindProtobufFields, _MIOInputFeaturesKey, 

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           00320765-B7F0-38FB-BD37-2C8532B3A055
+    value:           9681A2EA-3ABE-3B8C-8D91-45BAAA891941
   - target:          x86_64-maccatalyst
-    value:           00320765-B7F0-38FB-BD37-2C8532B3A055
+    value:           9681A2EA-3ABE-3B8C-8D91-45BAAA891941
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D17FEE8E-F3B1-34CE-BE14-180D42C7D6AE
+    value:           F894673B-1DEA-3FBB-AAEF-44A502481EB6
   - target:          arm64e-maccatalyst
-    value:           D17FEE8E-F3B1-34CE-BE14-180D42C7D6AE
+    value:           F894673B-1DEA-3FBB-AAEF-44A502481EB6
 install-name:    '/System/Library/PrivateFrameworks/CBORLibrary.framework/Versions/A/CBORLibrary'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation4DataV11CBORLibraryE7coseKeyAcD7COSEKeyV_tcfC', 
                        '_$s10Foundation4DataV11CBORLibraryE9coseSign1AcD05COSE_E0V_tcfC', 
                        '_$s10Foundation4DataV11CBORLibraryEyACSgSo4CBORCcfC', '_$s11CBORLibrary10COSE_Sign1V11contentTypeSSSgvg', 
@@ -122,6 +122,13 @@ exports:
                        '_$s11CBORLibrary11CBOREncoderC6encodey10Foundation4DataVxKSERzlFTj', 
                        '_$s11CBORLibrary11CBOREncoderC6encodey10Foundation4DataVxKSERzlFTq', 
                        '_$s11CBORLibrary11CBOREncoderC7Combine15TopLevelEncoderAAMc', 
+                       '_$s11CBORLibrary11CBOREncoderC8userInfoSDys010CodingUserD3KeyVypGvMTj', 
+                       '_$s11CBORLibrary11CBOREncoderC8userInfoSDys010CodingUserD3KeyVypGvMTq', 
+                       '_$s11CBORLibrary11CBOREncoderC8userInfoSDys010CodingUserD3KeyVypGvgTj', 
+                       '_$s11CBORLibrary11CBOREncoderC8userInfoSDys010CodingUserD3KeyVypGvgTq', 
+                       '_$s11CBORLibrary11CBOREncoderC8userInfoSDys010CodingUserD3KeyVypGvpMV', 
+                       '_$s11CBORLibrary11CBOREncoderC8userInfoSDys010CodingUserD3KeyVypGvsTj', 
+                       '_$s11CBORLibrary11CBOREncoderC8userInfoSDys010CodingUserD3KeyVypGvsTq', 
                        '_$s11CBORLibrary11CBOREncoderCACycfC', '_$s11CBORLibrary11CBOREncoderCACycfCTj', 
                        '_$s11CBORLibrary11CBOREncoderCACycfCTq', '_$s11CBORLibrary11CBOREncoderCACycfc', 
                        '_$s11CBORLibrary11CBOREncoderCMa', '_$s11CBORLibrary11CBOREncoderCMm', 

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8839D712-81EB-3515-8E0E-941EE3B1D29C
+    value:           80C72C04-D8C3-3448-ACAE-0842691D155D
   - target:          x86_64-maccatalyst
-    value:           8839D712-81EB-3515-8E0E-941EE3B1D29C
+    value:           80C72C04-D8C3-3448-ACAE-0842691D155D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C61125AF-8A59-3BAA-B803-8AB4626FAB44
+    value:           45703645-F270-39EC-9293-14CD06F93DB1
   - target:          arm64e-maccatalyst
-    value:           C61125AF-8A59-3BAA-B803-8AB4626FAB44
+    value:           45703645-F270-39EC-9293-14CD06F93DB1
 install-name:    '/usr/lib/swift/libswiftDarwin.dylib'
 current-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ '_$s6Darwin12LDBL_EPSILONs7Float80Vvg', '_$s6Darwin12LDBL_MAX_EXPSivg', 
                        '_$s6Darwin12LDBL_MIN_EXPSivg', '_$s6Darwin13LDBL_MANT_DIGSivg', 
                        '_$s6Darwin13LDBL_TRUE_MINs7Float80Vvg', '_$s6Darwin3cosys7Float80VADF', 
@@ -42,8 +42,8 @@ exports:
                        '_$s6Darwin6tgammays7Float80VADF', '_$s6Darwin8LDBL_MAXs7Float80Vvg', 
                        '_$s6Darwin8LDBL_MINs7Float80Vvg', '_$s6Darwin8copysignys7Float80VAD_ADtF', 
                        '_$s6Darwin9nearbyintys7Float80VADF', '_$s6Darwin9nextafterys7Float80VAD_ADtF' ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftDarwin.dylib', '$ld$install_name$os10.11$@rpath/libswiftDarwin.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftDarwin.dylib', '$ld$install_name$os10.13$@rpath/libswiftDarwin.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftDarwin.dylib', '$ld$install_name$os10.9$@rpath/libswiftDarwin.dylib', 
@@ -160,5 +160,7 @@ exports:
                        '_$s6Darwin9nearbyintyS2fF', '_$s6Darwin9nextafteryS2f_SftF', 
                        '_$s6Darwin9remainderyxx_xtSFRzlF', '_$sSo11extern_procV6DarwinE11p_starttimeSo7timevalVvM', 
                        '_$sSo11extern_procV6DarwinE11p_starttimeSo7timevalVvg', '_$sSo11extern_procV6DarwinE11p_starttimeSo7timevalVvpMV', 
-                       '_$sSo11extern_procV6DarwinE11p_starttimeSo7timevalVvs', '__swift_FORCE_LOAD_$_swiftDarwin' ]
+                       '_$sSo11extern_procV6DarwinE11p_starttimeSo7timevalVvs', '_$sSo7timevalV6DarwinEyABs8DurationVcfC', 
+                       '_$sSo8timespecV6DarwinEyABs8DurationVcfC', '_$ss8DurationV6DarwinEyABSo7timevalVcfC', 
+                       '_$ss8DurationV6DarwinEyABSo8timespecVcfC', '__swift_FORCE_LOAD_$_swiftDarwin' ]
 ...

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7B2E3C73-74C6-3B1E-A7A7-D4AF52B8D18E
+    value:           4FAD7E6E-4307-3FF4-8D2C-4C79CAE9DA7F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           937E7902-13F8-31B3-9C62-4CCA3564B525
+    value:           39DE0691-CAC8-3E9F-9717-614211CE927A
 install-name:    '/System/Library/Frameworks/InstallerPlugins.framework/Versions/A/InstallerPlugins'
 current-version: 815
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IS_InstallerSectionClosing_Notification, _InstallerSection_IsRunningFromInstallMedia, 
                        _InstallerState_ChoiceDictionaries, _InstallerState_Choice_CustomLocation, 
                        _InstallerState_Choice_Identifier, _InstallerState_Choice_Installed, 

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D0E7024B-0D90-3697-B450-039F3AFB964E
+    value:           98250DB3-77ED-3642-812A-67A424148649
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A595C6EE-685D-3DD2-9FD1-8AD474B2DBE0
+    value:           B01FE56F-8AB9-3BA1-A77F-45DDCE39803C
 install-name:    '/System/Library/PrivateFrameworks/VisualPairing.framework/Versions/A/VisualPairing'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ VPPresenterView, VPScannerView ]
 ...

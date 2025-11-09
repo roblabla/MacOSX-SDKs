@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AEE8778A-2A35-335F-BB6F-00540374409C
+    value:           E336C9DC-BDD3-32A1-BD60-48BDC37E5BBF
   - target:          x86_64-maccatalyst
-    value:           AEE8778A-2A35-335F-BB6F-00540374409C
+    value:           E336C9DC-BDD3-32A1-BD60-48BDC37E5BBF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           877C970E-B8E0-3759-80D4-E42A2129B898
+    value:           19C23E49-A7FD-39B6-8201-587A760A2A3F
   - target:          arm64e-maccatalyst
-    value:           877C970E-B8E0-3759-80D4-E42A2129B898
+    value:           19C23E49-A7FD-39B6-8201-587A760A2A3F
 install-name:    '/System/Library/Frameworks/TabularData.framework/Versions/A/TabularData'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10ColumnType11TabularData0D13FrameProtocolPTl', '_$s11TabularData06ShapedB0V5shape7strides8contentsACyxGSaySiG_AHSayxGtcfC', 
                        '_$s11TabularData06ShapedB0V5shapeSaySiGvg', '_$s11TabularData06ShapedB0V5shapeSaySiGvpMV', 
                        '_$s11TabularData06ShapedB0V7stridesSaySiGvg', '_$s11TabularData06ShapedB0V7stridesSaySiGvpMV', 
@@ -50,6 +50,7 @@ exports:
                        '_$s11TabularData0B13FrameProtocolPAAE15stratifiedSplit2on_2by10randomSeedAA0bC0V_AItAA8ColumnIDVyqd__G_AKyqd_0_GSdSiSgtSHRd__SHRd_0_r0_lF', 
                        '_$s11TabularData0B13FrameProtocolPAAE15stratifiedSplit2on__2by10randomSeedAA0bC0V_AItAA8ColumnIDVyqd__G_AKyqd_0_GAKyqd_1_GSdSiSgtSHRd__SHRd_0_SHRd_1_r1_lF', 
                        '_$s11TabularData0B13FrameProtocolPAAE17csvRepresentation7options10Foundation0B0VAA17CSVWritingOptionsV_tKF', 
+                       '_$s11TabularData0B13FrameProtocolPAAE18jsonRepresentation7options10Foundation0B0VAA18JSONWritingOptionsV_tKF', 
                        '_$s11TabularData0B13FrameProtocolPAAE6joined_2on4kindAA0bC0Vqd___AA8ColumnIDVyqd_0_G4left_AK5righttAA8JoinKindOtAaBRd__SHRd_0_r0_lF', 
                        '_$s11TabularData0B13FrameProtocolPAAE6joined_2on4kindAA0bC0Vqd___AA8ColumnIDVyqd_0_GAA8JoinKindOtAaBRd__SHRd_0_r0_lF', 
                        '_$s11TabularData0B13FrameProtocolPAAE6joined_2on4kindAA0bC0Vqd___SS4left_SS5righttAA8JoinKindOtAaBRd__lF', 
@@ -76,6 +77,7 @@ exports:
                        '_$s11TabularData0B13FrameProtocolPAAE7grouped2by__QrAA8ColumnIDVyqd__G_AGyqd_0_GAGyqd_1_GtSHRd__SHRd_0_SHRd_1_r1_lFQOMQ', 
                        '_$s11TabularData0B13FrameProtocolPAAE7isEmptySbvg', '_$s11TabularData0B13FrameProtocolPAAE7isEmptySbvpMV', 
                        '_$s11TabularData0B13FrameProtocolPAAE8writeCSV2to7optionsy10Foundation3URLV_AA17CSVWritingOptionsVtKF', 
+                       '_$s11TabularData0B13FrameProtocolPAAE9writeJSON2to7optionsy10Foundation3URLV_AA18JSONWritingOptionsVtKF', 
                        '_$s11TabularData0B13FrameProtocolPAAEyAA0bC0V5SliceVSnySiGciM', 
                        '_$s11TabularData0B13FrameProtocolPAAEyAA0bC0V5SliceVSnySiGcig', 
                        '_$s11TabularData0B13FrameProtocolPAAEyAA0bC0V5SliceVSnySiGcipMV', 
@@ -113,7 +115,8 @@ exports:
                        '_$s11TabularData0B5FrameV14combineColumns___4into9transformyAA8ColumnIDVyxG_AHyq_GAHyq0_GSSq1_SgxSg_q_Sgq0_SgtKXEtKr2_lF', 
                        '_$s11TabularData0B5FrameV14combineColumns___4into9transformySS_S3Sq1_SgxSg_q_Sgq0_SgtKXEtKr2_lF', 
                        '_$s11TabularData0B5FrameV14containsColumnySbAA0E2IDVyxGlF', 
-                       '_$s11TabularData0B5FrameV14containsColumnySbSS_xmtlF', '_$s11TabularData0B5FrameV15explodingColumnyACSS_xmtSlRzlF', 
+                       '_$s11TabularData0B5FrameV14containsColumnySbSSF', '_$s11TabularData0B5FrameV14containsColumnySbSS_xmtlF', 
+                       '_$s11TabularData0B5FrameV15explodingColumnyACSS_xmtSlRzlF', 
                        '_$s11TabularData0B5FrameV15explodingColumnyAcA0E2IDVyxGSlRzlF', 
                        '_$s11TabularData0B5FrameV15transformColumnyyAA0E2IDVyxG_q_SgxKXEtKr0_lF', 
                        '_$s11TabularData0B5FrameV15transformColumnyyAA0E2IDVyxG_q_SgxSgKXEtKr0_lF', 
@@ -478,6 +481,7 @@ exports:
                        '_$s11TabularData14NumericSummaryVyxGSQAAMc', '_$s11TabularData14NumericSummaryVyxGs28CustomDebugStringConvertibleAAMc', 
                        '_$s11TabularData15CSVReadingErrorO11badEncodingyACSi_Si10Foundation0B0VtcACmFWC', 
                        '_$s11TabularData15CSVReadingErrorO11descriptionSSvg', '_$s11TabularData15CSVReadingErrorO11descriptionSSvpMV', 
+                       '_$s11TabularData15CSVReadingErrorO11outOfBoundsyACSi_SitcACmFWC', 
                        '_$s11TabularData15CSVReadingErrorO13failedToParseyACSi_SiAA7CSVTypeO10Foundation0B0VtcACmFWC', 
                        '_$s11TabularData15CSVReadingErrorO13missingColumnyACSS_tcACmFWC', 
                        '_$s11TabularData15CSVReadingErrorO14misplacedQuoteyACSi_SitcACmFWC', 
@@ -499,7 +503,7 @@ exports:
                        '_$s11TabularData16JSONReadingErrorO13failedToParseyACSi_SSAA8JSONTypeOSStcACmFWC', 
                        '_$s11TabularData16JSONReadingErrorO18incompatibleValuesyACSS_tcACmFWC', 
                        '_$s11TabularData16JSONReadingErrorO20unsupportedStructureyA2CmFWC', 
-                       '_$s11TabularData16JSONReadingErrorO9wrongTypeyACSi_SSAA8JSONTypeOyptcACmFWC', 
+                       '_$s11TabularData16JSONReadingErrorO9wrongTypeyACSi_SSAA8JSONTypeOs8Sendable_ptcACmFWC', 
                        '_$s11TabularData16JSONReadingErrorOMa', '_$s11TabularData16JSONReadingErrorOMn', 
                        '_$s11TabularData16JSONReadingErrorON', '_$s11TabularData16JSONReadingErrorOs0D0AAMc', 
                        '_$s11TabularData16JSONReadingErrorOs23CustomStringConvertibleAAMc', 
@@ -663,6 +667,18 @@ exports:
                        '_$s11TabularData18JSONReadingOptionsV20addDateParseStrategyyyx10Foundation0gH0RzSS0G5InputRtzAE0F0V0G6OutputRtzlF', 
                        '_$s11TabularData18JSONReadingOptionsVACycfC', '_$s11TabularData18JSONReadingOptionsVMa', 
                        '_$s11TabularData18JSONReadingOptionsVMn', '_$s11TabularData18JSONReadingOptionsVN', 
+                       '_$s11TabularData18JSONWritingOptionsV11prettyPrintSbvM', 
+                       '_$s11TabularData18JSONWritingOptionsV11prettyPrintSbvg', 
+                       '_$s11TabularData18JSONWritingOptionsV11prettyPrintSbvpMV', 
+                       '_$s11TabularData18JSONWritingOptionsV11prettyPrintSbvs', 
+                       '_$s11TabularData18JSONWritingOptionsV13dateFormatterySS10Foundation4DateVcvM', 
+                       '_$s11TabularData18JSONWritingOptionsV13dateFormatterySS10Foundation4DateVcvg', 
+                       '_$s11TabularData18JSONWritingOptionsV13dateFormatterySS10Foundation4DateVcvpMV', 
+                       '_$s11TabularData18JSONWritingOptionsV13dateFormatterySS10Foundation4DateVcvs', 
+                       '_$s11TabularData18JSONWritingOptionsV8sortKeysSbvM', '_$s11TabularData18JSONWritingOptionsV8sortKeysSbvg', 
+                       '_$s11TabularData18JSONWritingOptionsV8sortKeysSbvpMV', '_$s11TabularData18JSONWritingOptionsV8sortKeysSbvs', 
+                       '_$s11TabularData18JSONWritingOptionsVACycfC', '_$s11TabularData18JSONWritingOptionsVMa', 
+                       '_$s11TabularData18JSONWritingOptionsVMn', '_$s11TabularData18JSONWritingOptionsVN', 
                        '_$s11TabularData18SFrameReadingErrorO10badArchiveyACSScACmFWC', 
                        '_$s11TabularData18SFrameReadingErrorO11badEncodingyACSScACmFWC', 
                        '_$s11TabularData18SFrameReadingErrorO11descriptionSSvg', 
@@ -739,6 +755,8 @@ exports:
                        '_$s11TabularData19RowGroupingProtocolPAAE8maximums__5orderAA0B5FrameVSS_qd__mAA5OrderOSgtSLRd__lF', 
                        '_$s11TabularData19RowGroupingProtocolPAAE8minimums_5orderAA0B5FrameVAA8ColumnIDVyqd__G_AA5OrderOSgtSLRd__lF', 
                        '_$s11TabularData19RowGroupingProtocolPAAE8minimums__5orderAA0B5FrameVSS_qd__mAA5OrderOSgtSLRd__lF', 
+                       '_$s11TabularData19RowGroupingProtocolPAAE9quantiles_8quantile5orderAA0B5FrameVAA8ColumnIDVyqd__G_qd__AA5OrderOSgtSBRd__lF', 
+                       '_$s11TabularData19RowGroupingProtocolPAAE9quantiles__8quantile5orderAA0B5FrameVSS_qd__mqd__AA5OrderOSgtSBRd__lF', 
                        '_$s11TabularData19RowGroupingProtocolPs23CustomStringConvertibleTb', 
                        '_$s11TabularData19RowGroupingProtocolPyAA0B5FrameV5SliceVSgypSgd_tcigTj', 
                        '_$s11TabularData19RowGroupingProtocolPyAA0B5FrameV5SliceVSgypSgd_tcigTq', 
@@ -795,6 +813,7 @@ exports:
                        '_$s11TabularData21PackedOptionalsBufferV13nilBitmapSizeSivg', 
                        '_$s11TabularData21PackedOptionalsBufferV13nilBitmapSizeSivpMV', 
                        '_$s11TabularData21PackedOptionalsBufferV15replaceSubrange_4with10elementsOfySnySiG_Siqd__tSlRd__xSg7ElementRtd__lF', 
+                       '_$s11TabularData21PackedOptionalsBufferV15replaceSubrange_4withySnySiG_qd__tSlRd__xSg7ElementRtd__lF', 
                        '_$s11TabularData21PackedOptionalsBufferV19firstElementAddressSpyxGvg', 
                        '_$s11TabularData21PackedOptionalsBufferV19firstElementAddressSpyxGvpMV', 
                        '_$s11TabularData21PackedOptionalsBufferV19underestimatedCountSivg', 
@@ -994,6 +1013,10 @@ exports:
                        '_$s11TabularData6ColumnV2seoiyyACyxGz_qd__ts18AdditiveArithmeticRz7ElementQyd__RszSlRd__lFZ', 
                        '_$s11TabularData6ColumnV2seoiyyACyxGz_qd__ts18AdditiveArithmeticRzSlRd__xSg7ElementRtd__lFZ', 
                        '_$s11TabularData6ColumnV2seoiyyACyxGz_xts18AdditiveArithmeticRzlFZ', 
+                       '_$s11TabularData6ColumnV32withContiguousStorageIfAvailableyqd__Sgqd__SRyxGKXEKlF', 
+                       '_$s11TabularData6ColumnV32withContiguousStorageIfAvailableyqd__Sgqd__SRyxSgGKXEKlF', 
+                       '_$s11TabularData6ColumnV39withContiguousMutableStorageIfAvailableyqd__Sgqd__SryxGzKXEKlF', 
+                       '_$s11TabularData6ColumnV39withContiguousMutableStorageIfAvailableyqd__Sgqd__SryxSgGzKXEKlF', 
                        '_$s11TabularData6ColumnV3mapyACyqd__Gqd__SgxSgKXEKlF', '_$s11TabularData6ColumnV4name8capacityACyxGSS_SitcfC', 
                        '_$s11TabularData6ColumnV4name8contentsACyxGSS_qd__tc7ElementQyd__RszSTRd__lufC', 
                        '_$s11TabularData6ColumnV4name8contentsACyxGSS_qd__tcSTRd__xSg7ElementRtd__lufC', 

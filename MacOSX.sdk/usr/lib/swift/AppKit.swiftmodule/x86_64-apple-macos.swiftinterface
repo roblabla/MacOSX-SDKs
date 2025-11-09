@@ -1,13 +1,15 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target x86_64-apple-macos12.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AppKit
-// swift-module-flags-ignorable: -user-module-version 109
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target x86_64-apple-macos13.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AppKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 111
 @_exported import Accessibility
 @_exported import AppKit
+@_exported import CoreGraphics
 import Foundation
 import OpenGL
 import Swift
 @_exported import _Concurrency
+import _StringProcessing
 extension AppKit.NSCursor : Swift.__DefaultCustomPlaygroundQuickLookable {
   @available(*, deprecated, message: "NSCursor._defaultCustomPlaygroundQuickLook will be removed in a future Swift version")
   public var _defaultCustomPlaygroundQuickLook: Swift.PlaygroundQuickLook {
@@ -33,7 +35,7 @@ extension AppKit.NSTouchBarItem : Swift.__DefaultCustomPlaygroundQuickLookable {
   }
 }
 extension AppKit.NSGradient {
-  convenience public init?(colorsAndLocations objects: (AppKit.NSColor, CoreGraphics.CGFloat)...)
+  convenience public init?(colorsAndLocations objects: (AppKit.NSColor, CoreFoundation.CGFloat)...)
 }
 public func NSApplicationMain(_ argc: Swift.Int32, _ argv: Swift.UnsafeMutablePointer<Swift.UnsafeMutablePointer<Swift.CChar>?>) -> Swift.Int32
 extension AppKit.NSApplicationDelegate {
@@ -86,6 +88,9 @@ extension AppKit.NSWindow.Level : AppKit._AppKitKitNumericRawRepresentable {
 }
 @available(swift 4)
 extension AppKit.NSFont.Weight : AppKit._AppKitKitNumericRawRepresentable {
+}
+@available(macOS 13, *)
+extension AppKit.NSFont.Width : AppKit._AppKitKitNumericRawRepresentable {
 }
 @available(macOS 10.15.1, *)
 public struct NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
@@ -144,10 +149,10 @@ open class NSCollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentif
   open func snapshot() -> AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>
   open func itemIdentifier(for indexPath: Foundation.IndexPath) -> ItemIdentifierType?
   open func indexPath(for itemIdentifier: ItemIdentifierType) -> Foundation.IndexPath?
-  @objc open func numberOfSections(in collectionView: AppKit.NSCollectionView) -> Swift.Int
-  @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
-  @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, itemForRepresentedObjectAt indexPath: Foundation.IndexPath) -> AppKit.NSCollectionViewItem
-  @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, viewForSupplementaryElementOfKind kind: AppKit.NSCollectionView.SupplementaryElementKind, at indexPath: Foundation.IndexPath) -> AppKit.NSView
+  @_Concurrency.MainActor(unsafe) @objc open func numberOfSections(in collectionView: AppKit.NSCollectionView) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, itemForRepresentedObjectAt indexPath: Foundation.IndexPath) -> AppKit.NSCollectionViewItem
+  @_Concurrency.MainActor(unsafe) @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, viewForSupplementaryElementOfKind kind: AppKit.NSCollectionView.SupplementaryElementKind, at indexPath: Foundation.IndexPath) -> AppKit.NSView
   public func description() -> Swift.String
   @objc deinit
 }
@@ -166,7 +171,7 @@ open class NSTableViewDiffableDataSource<SectionIdentifierType, ItemIdentifierTy
   public func row(forItemIdentifier identifier: ItemIdentifierType) -> Swift.Int?
   public func sectionIdentifier(forRow row: Swift.Int) -> SectionIdentifierType?
   public func row(forSectionIdentifier identifier: SectionIdentifierType) -> Swift.Int?
-  @objc public func numberOfRows(in tableView: AppKit.NSTableView) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc public func numberOfRows(in tableView: AppKit.NSTableView) -> Swift.Int
   @objc deinit
 }
 @available(macOS 10.10, *)
@@ -508,25 +513,49 @@ extension AppKit.NSView {
     }
   }
 }
-extension CoreGraphics.CGRect {
+@available(*, unavailable)
+extension AppKit.NSView.Invalidating : Swift.Sendable {
+}
+@available(*, unavailable)
+extension AppKit.NSView.Invalidations : Swift.Sendable {
+}
+@available(*, unavailable)
+extension AppKit.NSView.Invalidations.Display : Swift.Sendable {
+}
+@available(*, unavailable)
+extension AppKit.NSView.Invalidations.Layout : Swift.Sendable {
+}
+@available(*, unavailable)
+extension AppKit.NSView.Invalidations.Constraints : Swift.Sendable {
+}
+@available(*, unavailable)
+extension AppKit.NSView.Invalidations.IntrinsicContentSize : Swift.Sendable {
+}
+@available(*, unavailable)
+extension AppKit.NSView.Invalidations.RestorableState : Swift.Sendable {
+}
+@available(*, unavailable)
+extension AppKit.NSView.Invalidations.Tuple : Swift.Sendable {
+}
+extension CoreFoundation.CGRect {
   @available(swift 4)
   public func fill(using operation: AppKit.NSCompositingOperation = NSGraphicsContext.current?.compositingOperation ?? .sourceOver)
   @available(swift 4)
-  public func frame(withWidth width: CoreGraphics.CGFloat = 1.0, using operation: AppKit.NSCompositingOperation = NSGraphicsContext.current?.compositingOperation ?? .sourceOver)
+  public func frame(withWidth width: CoreFoundation.CGFloat = 1.0, using operation: AppKit.NSCompositingOperation = NSGraphicsContext.current?.compositingOperation ?? .sourceOver)
   @available(swift 4)
   public func clip()
 }
-extension Swift.Sequence where Self.Element == Foundation.NSRect {
+extension Swift.Sequence where Self.Element == CoreFoundation.CGRect {
   @available(swift 4)
   public func fill(using operation: AppKit.NSCompositingOperation = NSGraphicsContext.current?.compositingOperation ?? .sourceOver)
   @available(swift 4)
   public func clip()
 }
-extension Swift.Sequence where Self.Element == (CoreGraphics.CGRect, AppKit.NSColor) {
+extension Swift.Sequence where Self.Element == (CoreFoundation.CGRect, AppKit.NSColor) {
   @available(swift 4)
   public func fill(using operation: AppKit.NSCompositingOperation = NSGraphicsContext.current?.compositingOperation ?? .sourceOver)
 }
-extension Swift.Sequence where Self.Element == (CoreGraphics.CGRect, gray: CoreGraphics.CGFloat) {
+extension Swift.Sequence where Self.Element == (CoreFoundation.CGRect, gray: CoreFoundation.CGFloat) {
   @available(swift 4)
   public func fill(using operation: AppKit.NSCompositingOperation = NSGraphicsContext.current?.compositingOperation ?? .sourceOver)
 }
@@ -782,11 +811,11 @@ extension Foundation.AttributeScopes.AppKitAttributes {
     public static let name: Swift.String
   }
   @frozen public enum KernAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreGraphics.CGFloat
+    public typealias Value = CoreFoundation.CGFloat
     public static let name: Swift.String
   }
   @frozen public enum TrackingAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreGraphics.CGFloat
+    public typealias Value = CoreFoundation.CGFloat
     public static let name: Swift.String
   }
   @frozen public enum StrikethroughStyleAttribute : Foundation.CodableAttributedStringKey, Foundation.ObjectiveCConvertibleAttributedStringKey {
@@ -808,7 +837,7 @@ extension Foundation.AttributeScopes.AppKitAttributes {
     public static let name: Swift.String
   }
   @frozen public enum StrokeWidthAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreGraphics.CGFloat
+    public typealias Value = CoreFoundation.CGFloat
     public static let name: Swift.String
   }
   @frozen public enum ShadowAttribute : Foundation.CodableAttributedStringKey {
@@ -827,7 +856,7 @@ extension Foundation.AttributeScopes.AppKitAttributes {
   }
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
   @frozen public enum BaselineOffsetAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreGraphics.CGFloat
+    public typealias Value = CoreFoundation.CGFloat
     public static let name: Swift.String
   }
   @frozen public enum UnderlineColorAttribute : Foundation.CodableAttributedStringKey {
@@ -839,11 +868,11 @@ extension Foundation.AttributeScopes.AppKitAttributes {
     public static let name: Swift.String
   }
   @frozen public enum ObliquenessAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreGraphics.CGFloat
+    public typealias Value = CoreFoundation.CGFloat
     public static let name: Swift.String
   }
   @frozen public enum ExpansionAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreGraphics.CGFloat
+    public typealias Value = CoreFoundation.CGFloat
     public static let name: Swift.String
   }
   @frozen public enum ToolTipAttribute : Foundation.CodableAttributedStringKey {

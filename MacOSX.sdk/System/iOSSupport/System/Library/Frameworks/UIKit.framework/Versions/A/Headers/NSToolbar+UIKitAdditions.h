@@ -18,7 +18,7 @@
 
 @class UITitlebar, NSToolbar, UIBarButtonItem, UISearchTextField;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_EXTERN NSToolbarItemIdentifier NSToolbarPrimarySidebarTrackingSeparatorItemIdentifier API_AVAILABLE(ios(14.0));
 UIKIT_EXTERN NSToolbarItemIdentifier NSToolbarSupplementarySidebarTrackingSeparatorItemIdentifier API_AVAILABLE(ios(14.0));
@@ -108,6 +108,15 @@ API_AVAILABLE(macCatalyst(13.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, nullable, copy) UIMenuElement *itemMenuFormRepresentation API_AVAILABLE(macCatalyst(13.0));
 @end
 
+UIKIT_EXTERN API_AVAILABLE(macCatalyst(16.0))
+@interface NSUIViewToolbarItem : NSToolbarItem
+
+- (instancetype)initWithItemIdentifier:(NSToolbarItemIdentifier)identifier uiView:(UIView *)uiView NS_DESIGNATED_INITIALIZER;
+
+@property (nonatomic, strong, setter=setUIView:) UIView *uiView;
+
+@end
+
 @interface NSMenuToolbarItem (NSToolbarAdditions)
 /*
  The menu presented to the user from the item.
@@ -123,7 +132,7 @@ API_AVAILABLE(macCatalyst(13.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif // TARGET_OS_MACCATALYST || TARGET_OS_OSX
 

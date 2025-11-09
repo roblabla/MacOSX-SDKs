@@ -14,11 +14,19 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIBarCommon.h>
 #import <UIKit/UINavigationItem.h>
+#import <UIKit/UIBehavioralStyle.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UINavigationItem, UIBarButtonItem, UIImage, UIColor, UINavigationBarAppearance;
 @protocol UINavigationBarDelegate;
+
+typedef NS_ENUM(NSInteger, UINavigationBarNSToolbarSection) {
+    UINavigationBarNSToolbarSectionNone,
+    UINavigationBarNSToolbarSectionSidebar,
+    UINavigationBarNSToolbarSectionSupplementary,
+    UINavigationBarNSToolbarSectionContent,
+} NS_SWIFT_NAME(UINavigationBar.NSToolbarSection) API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @interface UINavigationBar : UIView <NSCoding, UIBarPositioning> 
@@ -53,6 +61,15 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 /// When set to YES, the navigation bar will use a larger out-of-line title view when requested by the current navigation item. To specify when the large out-of-line title view appears, see UINavigationItem.largeTitleDisplayMode. Defaults to NO.
 @property (nonatomic, readwrite, assign) BOOL prefersLargeTitles UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
+
+/// The toolbar section that this navigation bar is currently using.
+@property (nonatomic, readonly, assign) UINavigationBarNSToolbarSection currentNSToolbarSection API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
+/// The concrete behavioral style chosen for the navigation bar. When this resolves to .mac, the navigation bar's contents are placed in the NSToolbar.
+@property (nonatomic, readonly, assign) UIBehavioralStyle behavioralStyle API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
+/// The requested behavioral style for the navigation bar.
+@property (nonatomic, readwrite, assign) UIBehavioralStyle preferredBehavioralStyle API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*
  The behavior of tintColor for bars has changed on iOS 7.0. It no longer affects the bar's background
@@ -139,9 +156,14 @@ NS_SWIFT_UI_ACTOR
 - (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item;  // same as push methods
 - (void)navigationBar:(UINavigationBar *)navigationBar didPopItem:(UINavigationItem *)item;
 
+#if !TARGET_OS_TV && !TARGET_OS_WATCH
+/// Which section of the NSToolbar this navigation bar should use when attempting to host in an NSToolbar. Returning 'None' will disable NSToolbar hosting as if preferredBehavioralStyle were set to 'Pad' The specific section returned will also affect how the navigation bar presents in that section.
+- (UINavigationBarNSToolbarSection)navigationBarNSToolbarSection:(UINavigationBar *)navigationBar;
+#endif
+
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UINavigationBar.h>

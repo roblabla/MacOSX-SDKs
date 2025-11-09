@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           24F29835-03D4-3ACB-B272-2CD448A0BA10
+    value:           27100993-4F08-36C9-99D9-58B400525566
   - target:          x86_64-maccatalyst
-    value:           24F29835-03D4-3ACB-B272-2CD448A0BA10
+    value:           27100993-4F08-36C9-99D9-58B400525566
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3BF12EB5-69B7-3243-8997-CB4C353DEDB0
+    value:           0C29073D-B743-3BCA-8182-29B99DB49552
   - target:          arm64e-maccatalyst
-    value:           3BF12EB5-69B7-3243-8997-CB4C353DEDB0
+    value:           0C29073D-B743-3BCA-8182-29B99DB49552
 install-name:    '/System/Library/Frameworks/IdentityLookup.framework/Versions/A/IdentityLookup'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ILClassificationUIExtensionPointIdentifier, _ILDefaultLog, 
                        _ILMessageFilterErrorDomain, _ILMessageFilterExtensionPointIdentifier, 
                        _ILMessageFilterPrivateErrorDomain ]
@@ -26,6 +26,7 @@ exports:
                        ILClassificationController, ILClassificationReportRequest, 
                        ILClassificationRequest, ILClassificationResponse, ILCommunication, 
                        ILMessageClassificationRequest, ILMessageCommunication, ILMessageFilter, 
+                       ILMessageFilterCapabilitiesQueryRequest, ILMessageFilterCapabilitiesQueryResponse, 
                        ILMessageFilterExtension, ILMessageFilterExtensionContext, 
                        ILMessageFilterExtensionHostContext, ILMessageFilterQueryRequest, 
                        ILMessageFilterQueryResponse, ILMessageFilterReportRequest, 

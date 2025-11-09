@@ -99,6 +99,12 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @property (nonatomic) MTLPixelFormat depthStencilPixelFormat;
 
 /*!
+ @property depthStencilStorageMode
+ @abstract The storage mode for the depthStencilTexture. Defaults to MTLStorageModePrivate.
+ */
+@property (nonatomic) MTLStorageMode depthStencilStorageMode API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
  @property sampleCount
  @abstract The sample count used to to create multisampleColorTexture
  @discussion This defaults to 1.  If sampleCount is greater than 1 a multisampled color texture will be created and the currentDrawable's texture will be set as the resolve texture in the currentRenderPassDescriptor and the store action will be set to MTLStoreActionMultisampleResolve

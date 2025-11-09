@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4183C9A4-6C3B-310C-B471-2EA48BBABADE
+    value:           A22A1DBC-90A1-3C75-8FFD-A04F268531C0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D7248BB4-5DE3-3573-9563-65779B77CCDE
+    value:           103DC45A-A7E6-391C-A94C-3E5B49928983
 install-name:    '/System/Library/PrivateFrameworks/OpticalFlowFramework.framework/Versions/A/OpticalFlowFramework'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AVE_CFArray_AddSInt16, _AVE_CFArray_AddSInt32, _AVE_CFArray_GetSInt16, 
                        _AVE_CFArray_GetSInt32, _AVE_CFDict_AddBool, _AVE_CFDict_AddChar, 
                        _AVE_CFDict_AddDouble, _AVE_CFDict_AddInt, _AVE_CFDict_AddSInt16, 
@@ -27,11 +27,11 @@ exports:
                        _AVE_Log_Preset, _AVE_Log_PresetCfg, _AVE_Log_ReadCfg, _AVE_Log_Set, 
                        _AVE_Log_SetCfg, _AVE_Log_SetLevel, _AVE_Log_Uninit, _AVE_Log_UpdateCfg, 
                        _AVE_OF_CreateInstance, _AVE_OF_Finalize, _AVE_OF_Process, 
-                       _AVE_OF_StartSession, _AVE_PixelBufAttr_CreateDict, _AVE_RetCode2IOReturn, 
-                       _AppleAVEVA_CheckPlatform, _AppleAVEVA_GetClientID, _AppleAVEVA_GetDeviceType, 
-                       _AppleAVEVA_PrintWhereIAm, _AppleAVEVA_ResetBetweenPasses, 
-                       _AppleAVEVA_SetInternalThreadPriority, _OFConfigurationGetTypeID, 
-                       _OFF_CreateSession, _OFF_DeleteSession, _OFF_Process, _OFF_Process_Dual, 
+                       _AVE_OF_StartSession, _AVE_PixelBufAttr_CreateDict, _AppleAVEVA_CheckPlatform, 
+                       _AppleAVEVA_GetClientID, _AppleAVEVA_GetDeviceType, _AppleAVEVA_PrintWhereIAm, 
+                       _AppleAVEVA_ResetBetweenPasses, _AppleAVEVA_SetInternalThreadPriority, 
+                       _OFConfigurationGetTypeID, _OFF_Configure, _OFF_CreateSession, 
+                       _OFF_DeleteSession, _OFF_Process, _OFF_Process_Dual, _OFF_RecieveMV, 
                        _OFRefGetDerivedStorage, _OF_Create, _OpticalFlowFrameworkVersionNumber, 
                        _OpticalFlowFrameworkVersionString, __Z5setupv ]
 ...

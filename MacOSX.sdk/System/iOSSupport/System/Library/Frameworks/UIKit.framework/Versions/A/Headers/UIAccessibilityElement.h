@@ -11,7 +11,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIAccessibilityIdentification.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*
  UIAccessibilityElement
@@ -42,7 +42,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIAccessibilityElement.h>

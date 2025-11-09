@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           46EB89E2-DF67-300B-93DC-54E5D121D9A7
+    value:           FEA1E8F7-270E-35F7-96F6-C4A9C50B0AB3
   - target:          x86_64-maccatalyst
-    value:           46EB89E2-DF67-300B-93DC-54E5D121D9A7
+    value:           FEA1E8F7-270E-35F7-96F6-C4A9C50B0AB3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4DBBE929-B39A-32A9-AD62-8B0062F4DDDE
+    value:           1DAD279A-817E-3904-9BA4-AFE9BA8B3056
   - target:          arm64e-maccatalyst
-    value:           4DBBE929-B39A-32A9-AD62-8B0062F4DDDE
+    value:           1DAD279A-817E-3904-9BA4-AFE9BA8B3056
 install-name:    '/libatos.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AddDsymSearchPath, _CreateSessionWithPathAndArchitecture, 
                        _CreateSessionWithPathArchitectureAndUUID, _CreateSessionWithSignatureBytes, 
                        _CreateSessionWithSignaturePath, _DestroySymbolicationResult, 

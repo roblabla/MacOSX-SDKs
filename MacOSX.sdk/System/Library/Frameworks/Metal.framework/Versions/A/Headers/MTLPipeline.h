@@ -36,7 +36,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.13), ios(11.0))
 /* Individual buffer descriptor access */
 - (MTLPipelineBufferDescriptor *)objectAtIndexedSubscript:(NSUInteger)bufferIndex;
 
-/* This always uses 'copy' semantics. It is safe to set the buffer descriptor at any legal index to nil, which resets that buffer descriptor to default vaules. */
+/* This always uses 'copy' semantics. It is safe to set the buffer descriptor at any legal index to nil, which resets that buffer descriptor to default values. */
 - (void)setObject:(nullable MTLPipelineBufferDescriptor *)buffer atIndexedSubscript:(NSUInteger)bufferIndex;
 
 @end

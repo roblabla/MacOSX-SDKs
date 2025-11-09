@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B8D2BD58-41AF-31D3-99C6-883C8BB39CCA
+    value:           D94D9C0A-0FD7-3B38-BA92-34F60D4427F9
   - target:          x86_64-maccatalyst
-    value:           B8D2BD58-41AF-31D3-99C6-883C8BB39CCA
+    value:           D94D9C0A-0FD7-3B38-BA92-34F60D4427F9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DDA97508-738A-3240-B9AC-A4A4EC358499
+    value:           4DFCA283-BC6B-3CD5-BCF2-738D6DCB91D9
   - target:          arm64e-maccatalyst
-    value:           DDA97508-738A-3240-B9AC-A4A4EC358499
+    value:           4DFCA283-BC6B-3CD5-BCF2-738D6DCB91D9
 install-name:    '/System/Library/PrivateFrameworks/MobileContainerManager.framework/Versions/A/MobileContainerManager'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MCMErrorDomain, _MCMFunctionNameErrorKey, _MCMPathArgumentErrorKey, 
                        _MCMSourceFileLineErrorKey, _kMCMACLFailureError, _kMCMBadInitializerValuesError, 
                        _kMCMBadReplyContentsError, _kMCMBundleOwnerMigrationFailError, 
@@ -52,7 +52,7 @@ exports:
                        _kMCMXPCInvalidReplyError, _kMCMXPCSetupError, _kMCMXPCUnknownReplyError ]
     objc-classes:    [ MCMAppContainer, MCMAppDataContainer, MCMContainer, MCMContainerManager, 
                        MCMDataContainer, MCMFrameworkContainer, MCMInternalDaemonDataContainer, 
-                       MCMPluginKitPluginContainer, MCMPluginKitPluginDataContainer, 
+                       MCMPerUserAppContainer, MCMPluginKitPluginContainer, MCMPluginKitPluginDataContainer, 
                        MCMSharedDataContainer, MCMSharedSystemDataContainer, MCMSystemDataContainer, 
                        MCMTempDirDataContainer, MCMVPNPluginContainer, MCMVPNPluginDataContainer, 
                        MCMXPCServiceDataContainer ]

@@ -88,7 +88,7 @@ typedef NS_OPTIONS(NSUInteger, NSDatePickerElementFlags) {
 
 @protocol NSDatePickerCellDelegate <NSObject>
 @optional
-- (void)datePickerCell:(NSDatePickerCell *)datePickerCell validateProposedDateValue:(NSDate * _Nonnull *_Nonnull)proposedDateValue timeInterval:(nullable NSTimeInterval *)proposedTimeInterval;
+- (void)datePickerCell:(NSDatePickerCell *)datePickerCell validateProposedDateValue:(NSDate * _Nonnull *_Nonnull)proposedDateValue timeInterval:(nullable NSTimeInterval *)proposedTimeInterval NS_SWIFT_UI_ACTOR;
 @end
 
 /* Deprecated legacy date picker style constants. Prefer to use NSDatePickerStyle values instead.

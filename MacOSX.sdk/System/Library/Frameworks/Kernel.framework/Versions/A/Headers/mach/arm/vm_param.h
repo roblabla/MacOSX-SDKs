@@ -97,7 +97,7 @@ extern int PAGE_SHIFT_CONST;
 #elif defined (__arm64__)
 
 #define VM_MIN_ADDRESS          ((vm_address_t) 0x0000000000000000ULL)
-#define VM_MAX_ADDRESS          ((vm_address_t) 0x0000000080000000ULL)
+#define VM_MAX_ADDRESS          ((vm_address_t) 0x00000000F0000000ULL)
 
 /* system-wide values */
 #define MACH_VM_MIN_ADDRESS_RAW 0x0ULL
@@ -119,6 +119,13 @@ extern int PAGE_SHIFT_CONST;
 #define VM_MAP_MAX_ADDRESS      VM_MAX_ADDRESS
 
 
+#if defined (__arm__)
+#define VM_KERNEL_POINTER_SIGNIFICANT_BITS  31
+#define VM_MIN_KERNEL_ADDRESS   ((vm_address_t) 0x80000000)
+#define VM_MAX_KERNEL_ADDRESS   ((vm_address_t) 0xFFFEFFFF)
+#define VM_HIGH_KERNEL_WINDOW   ((vm_address_t) 0xFFFE0000)
+
+#elif defined (__arm64__)
 /*
  * kalloc() parameters:
  *
@@ -132,23 +139,15 @@ extern int PAGE_SHIFT_CONST;
  * Note that most dynamically allocated data structures contain more than
  * one int/long/pointer member, so KALLOC_MINSIZE should probably start at 8.
  */
+#define TiB(x)                  ((0ULL + (x)) << 40)
+#define GiB(x)                  ((0ULL + (x)) << 30)
+#define KALLOC_MINSIZE          16      /* minimum allocation size */
+#define KALLOC_LOG2_MINALIGN    4       /* log2 minimum alignment */
 
-#if defined (__arm__)
-#define VM_KERNEL_POINTER_SIGNIFICANT_BITS  31
-#define VM_MIN_KERNEL_ADDRESS   ((vm_address_t) 0x80000000)
-#define VM_MAX_KERNEL_ADDRESS   ((vm_address_t) 0xFFFEFFFF)
-#define VM_HIGH_KERNEL_WINDOW   ((vm_address_t) 0xFFFE0000)
-
-#elif defined (__arm64__)
 /*
  * The minimum and maximum kernel address; some configurations may
  * constrain the address space further.
  */
-#define TiB(x)                  ((0ULL + (x)) << 40)
-#define GiB(x)                  ((0ULL + (x)) << 30)
-
-#define KALLOC_MINSIZE          16      /* minimum allocation size */
-#define KALLOC_LOG2_MINALIGN    4       /* log2 minimum alignment */
 
 // Inform kexts about largest possible kernel address space
 #define VM_KERNEL_POINTER_SIGNIFICANT_BITS  41

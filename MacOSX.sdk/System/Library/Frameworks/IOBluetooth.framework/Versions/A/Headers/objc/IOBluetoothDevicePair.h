@@ -31,6 +31,14 @@ API_UNAVAILABLE(ios, watchos, tvos)
 - (void) devicePairingConnecting:(id)sender;
 
 /*!
+ @method        devicePairingConnected:
+ @abstract    Indicates to the delegate that the pairing object is connected the device (baseband).
+ @param        sender        The IOBluetoothDevicePair object.
+ */
+
+- (void) devicePairingConnected:(id)sender;
+
+/*!
  @method        devicePairingPINCodeRequest:
  @abstract    Indicates to the delegate that the pairing object has made the device (baseband) connection and is
  awaiting the PIN code (if specified) to be entered on the device. Thus, when you recieve this message,
@@ -98,6 +106,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 
 @class IOBluetoothDevice;
 @class NSString;
+@protocol CBCentralManagerDelegate;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -122,7 +131,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 //===========================================================================================================================
 
 API_UNAVAILABLE(ios, watchos, tvos)
-@interface	IOBluetoothDevicePair : NSObject
+@interface	IOBluetoothDevicePair : NSObject <CBCentralManagerDelegate>
 {
 	IOBluetoothDevice *			_device;
 	BOOL						_busy;

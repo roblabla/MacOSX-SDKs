@@ -12,8 +12,10 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/NSText.h>
 
+@class NSTextList;
+
 #if TARGET_OS_IPHONE
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if !__NSPARAGRAPH_STYLE_SHARED_SECTION__
 #define __NSPARAGRAPH_STYLE_SHARED_SECTION__ 1
@@ -96,6 +98,8 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(6.0))
 @property (readonly,copy, NS_NONATOMIC_IOSONLY) NSArray<NSTextTab *> *tabStops API_AVAILABLE(macos(10.0), ios(7.0)); // An array of NSTextTabs. Contents should be ordered by location. The default value is an array of 12 left-aligned tabs at 28pt interval
 @property (readonly, NS_NONATOMIC_IOSONLY) CGFloat defaultTabInterval API_AVAILABLE(macos(10.0), ios(7.0)); // The default tab interval used for locations beyond the last element in tabStops
 
+@property (readonly, copy, NS_NONATOMIC_IOSONLY) NSArray<NSTextList *> *textLists API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);     // Array to specify the text lists containing the paragraph, nested from outermost to innermost.
+
 @property (readonly, NS_NONATOMIC_IOSONLY) BOOL allowsDefaultTighteningForTruncation API_AVAILABLE(macos(10.11), ios(9.0)); // Tightens inter-character spacing in attempt to fit lines wider than the available space if the line break mode is one of the truncation modes before starting to truncate. NO by default. The maximum amount of tightening performed is determined by the system based on contexts such as font, line width, etc.
 
 @property (readonly, NS_NONATOMIC_IOSONLY) NSLineBreakStrategy lineBreakStrategy API_AVAILABLE(macos(10.11), ios(9.0)); // Specifies the line break strategies that may be used for laying out the paragraph.  The default value is NSLineBreakStrategyNone.
@@ -124,6 +128,7 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(6.0))
 @property (NS_NONATOMIC_IOSONLY) CGFloat defaultTabInterval API_AVAILABLE(macos(10.0), ios(7.0));
 @property (NS_NONATOMIC_IOSONLY) BOOL allowsDefaultTighteningForTruncation API_AVAILABLE(macos(10.11), ios(9.0));
 @property (NS_NONATOMIC_IOSONLY) NSLineBreakStrategy lineBreakStrategy API_AVAILABLE(macos(10.11), ios(9.0));
+@property (NS_NONATOMIC_IOSONLY, copy) NSArray<NSTextList *> *textLists API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 - (void)addTabStop:(NSTextTab *)anObject API_AVAILABLE(macos(10.0), ios(9.0));
 - (void)removeTabStop:(NSTextTab *)anObject API_AVAILABLE(macos(10.0), ios(9.0));
@@ -132,7 +137,7 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(6.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 #elif TARGET_OS_OSX
 #import <AppKit/NSParagraphStyle.h>
 #endif

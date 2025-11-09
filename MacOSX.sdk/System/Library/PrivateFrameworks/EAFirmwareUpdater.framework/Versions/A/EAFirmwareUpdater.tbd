@@ -3,19 +3,20 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           851AD74F-67DA-3167-B56C-D5A16000DB7D
+    value:           3A5A6463-3875-31C4-B025-6C18B8B924B9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6586F459-8991-31C1-8811-C8F5FCED7830
+    value:           D6043150-8A09-3961-BD7B-DAD1B1DB0F71
 install-name:    '/System/Library/PrivateFrameworks/EAFirmwareUpdater.framework/Versions/A/EAFirmwareUpdater'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _AUSandboxPlatformInit, _appendFirstUarpFilenameToFilepath, 
-                       _currentTrainName, _generateSHA256HashForDataAtLocation, _generateSHA256HashForDataAtLocationAsData, 
-                       _isDynamicAssetAnalytics, _isDynamicAssetHeySiri, _isDynamicAssetLogs, 
-                       _isDynamicAssetPersonalization, _isDynamicAssetVoiceAssist, 
-                       _kCustomerURLString, _nullableObjectsEqual, _uarpDynamicAssetComponentURL, 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _AUSandboxPlatformInit, _UARPUtilsBuildURLForTemporaryFile, 
+                       _appendFirstUarpFilenameToFilepath, _currentTrainName, _generateHashForDataAtLocation, 
+                       _generateHashForDataAtLocationAsData, _generateSHA256HashForDataAtLocation, 
+                       _generateSHA256HashForDataAtLocationAsData, _isDynamicAssetAnalytics, 
+                       _isDynamicAssetHeySiri, _isDynamicAssetLogs, _isDynamicAssetPersonalization, 
+                       _isDynamicAssetVoiceAssist, _nullableObjectsEqual, _uarpDynamicAssetComponentURL, 
                        _uarpDynamicAssetURL, _uarpUtilsConcatenateURLs, _uarpVersionCompareStrings ]
     objc-classes:    [ EAFirmwareUpdater, FirmwareBundle, HSModel, iAUPServer ]
     objc-ivars:      [ EAFirmwareUpdater._accessory, EAFirmwareUpdater._appProtocol, 

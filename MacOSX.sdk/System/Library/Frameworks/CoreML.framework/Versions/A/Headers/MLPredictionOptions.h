@@ -86,7 +86,7 @@ ML_EXPORT
  * underlying inference engine.
  *
  */
-@property (readwrite, copy, nonatomic) NSDictionary<NSString *, id> *outputBackings API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (readwrite, copy, nonatomic) NSDictionary<NSString *, id> *outputBackings API_AVAILABLE(macos(11.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 @end
 

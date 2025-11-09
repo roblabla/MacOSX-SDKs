@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           672D4928-EB99-3586-8F2A-141A1773EBF5
+    value:           2C08EE7F-1B83-369A-8D28-10E7C3D4CA76
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8CA2219D-DE28-31F0-814C-0924D91355AB
+    value:           351E6CEA-4FF8-3C61-8658-0E68C877DA92
 install-name:    '/System/Library/PrivateFrameworks/AOSAccountsLite.framework/Versions/A/AOSAccountsLite'
 current-version: 1.9.95
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AOSAccountsLiteVersionNumber, _AOSAccountsLiteVersionString, 
                        _MMLAccountCopyProperty, _MMLAccountIsVetted, _MMLAccountLogin, 
                        _MMLCopyLoggedInAccount, _MMLCopyMailActivationInfo, _MMLServiceCopyProperty, 

@@ -9,7 +9,7 @@
 #import <UIKit/UISlider.h>
 #import <UIKit/UIButton.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(watchos, tvos)
 /// Behavioral Styles are values that determine how a class — such as a view or control — behaves. This includes how the control is drawn, and what behaviors it supports. For example, handling certain customizations in one style, but not another.
@@ -46,7 +46,7 @@ API_AVAILABLE(ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(watchos, tvos)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIBehavioralStyle.h>

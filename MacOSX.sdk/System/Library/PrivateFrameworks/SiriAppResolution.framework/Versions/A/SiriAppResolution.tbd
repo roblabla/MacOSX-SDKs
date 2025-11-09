@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D5398828-C083-3A8B-A466-A6AE97DC80D4
+    value:           7D717F39-4027-3F4A-A7FA-D4DD15E2B86D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           95D2ED7B-113B-3F46-8EE4-9B044380895E
+    value:           1224A2C3-EB1C-38F6-BD9E-C15E83843A5A
 install-name:    '/System/Library/PrivateFrameworks/SiriAppResolution.framework/Versions/A/SiriAppResolution'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10IntentType17SiriAppResolution0D9ResolvingPTl', '_$s17SiriAppResolution012InstrumentedB9SelectingMp', 
                        '_$s17SiriAppResolution012InstrumentedB9SelectingP06selectB12WithMetadata6intent16fromEligibleApps_ySo8INIntentC_SayAA0B0CGys6ResultOyAA0bcN0OAA0B16SelectionFailureOG_SDySSypGtctFTj', 
                        '_$s17SiriAppResolution012InstrumentedB9SelectingP06selectB12WithMetadata6intent16fromEligibleApps_ySo8INIntentC_SayAA0B0CGys6ResultOyAA0bcN0OAA0B16SelectionFailureOG_SDySSypGtctFTq', 
@@ -151,6 +151,8 @@ exports:
                        '_$s17SiriAppResolution0bC13StateProviderV012appSelectionD0ACSo013SAIntentGroupa3KitbgD0CSg_tcfC', 
                        '_$s17SiriAppResolution0bC13StateProviderV012getRequestedB0AA0B0CSgyF', 
                        '_$s17SiriAppResolution0bC13StateProviderV012getSuggestedB0AA0B0CSgyF', 
+                       '_$s17SiriAppResolution0bC13StateProviderV03aceb9SelectionD0So013SAIntentGroupa3KitbgD0CSgvg', 
+                       '_$s17SiriAppResolution0bC13StateProviderV03aceb9SelectionD0So013SAIntentGroupa3KitbgD0CSgvpMV', 
                        '_$s17SiriAppResolution0bC13StateProviderV16debugDescriptionSSvg', 
                        '_$s17SiriAppResolution0bC13StateProviderV16debugDescriptionSSvpMV', 
                        '_$s17SiriAppResolution0bC13StateProviderV21getCorrectionResponseAA0bC12ConfirmationOSgyF', 
@@ -163,10 +165,14 @@ exports:
                        '_$s17SiriAppResolution0bC14StateProvidingP012getRequestedB0AA0B0CSgyFTq', 
                        '_$s17SiriAppResolution0bC14StateProvidingP012getSuggestedB0AA0B0CSgyFTj', 
                        '_$s17SiriAppResolution0bC14StateProvidingP012getSuggestedB0AA0B0CSgyFTq', 
+                       '_$s17SiriAppResolution0bC14StateProvidingP03aceb9SelectionD0So013SAIntentGroupa3KitbgD0CSgvgTj', 
+                       '_$s17SiriAppResolution0bC14StateProvidingP03aceb9SelectionD0So013SAIntentGroupa3KitbgD0CSgvgTq', 
                        '_$s17SiriAppResolution0bC14StateProvidingP21getCorrectionResponseAA0bC12ConfirmationOSgyFTj', 
                        '_$s17SiriAppResolution0bC14StateProvidingP21getCorrectionResponseAA0bC12ConfirmationOSgyFTq', 
                        '_$s17SiriAppResolution0bC14StateProvidingP23getConfirmationResponseAA0bcG0OSgyFTj', 
                        '_$s17SiriAppResolution0bC14StateProvidingP23getConfirmationResponseAA0bcG0OSgyFTq', 
+                       '_$s17SiriAppResolution0bC14StateProvidingPAAE03aceb9SelectionD0So013SAIntentGroupa3KitbgD0CSgvg', 
+                       '_$s17SiriAppResolution0bC14StateProvidingPAAE03aceb9SelectionD0So013SAIntentGroupa3KitbgD0CSgvpMV', 
                        '_$s17SiriAppResolution0bC14StateProvidingPAAE08needsRunbC0011preResolvedB0SbAA0B0CSg_tF', 
                        '_$s17SiriAppResolution0bC14StateProvidingPAAE21getCorrectionResponseAA0bC12ConfirmationOSgyF', 
                        '_$s17SiriAppResolution0bC14StateProvidingPAAE25previousSelectionResponseAA0bgH0Ovg', 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           12663A90-EEB5-3C17-A3DB-97B8F43F97C7
+    value:           DBFA303E-BB1A-35F8-965E-F1FF5DB1A083
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4FFEEE33-883A-3F8E-B4B7-53D736738FA5
+    value:           E2CE8975-8150-37C0-A5A0-37DF75A050B1
 install-name:    '/System/Library/Frameworks/JavaRuntimeSupport.framework/Versions/A/JavaRuntimeSupport'
 current-version: 79
 exports:
@@ -16,7 +16,7 @@ exports:
                        _JRSCopyOSName, _JRSCopyOSVersion, _JRSCopyPrimaryLanguage, 
                        _JRSSetDefaultLocalization ]
     objc-classes:    [ JRSSecurity ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$previous$/System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks/JavaRuntimeSupport.framework/Versions/A/JavaRuntimeSupport$$1$10.0$10.16$$', 
                        _JRSAccessibilityUnregisterUniqueIdForUIElement, _JRSFontAlignStyleForFractionalMeasurement, 
                        _JRSFontAlignStyleForIntegerMeasurement, _JRSFontCreateFallbackFontForCharacters, 

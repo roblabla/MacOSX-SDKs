@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C751AD77-A2C8-35D5-A80B-C108DB12D80F
+    value:           32305EAC-CFD3-38EC-A08E-82DE72C578EB
   - target:          x86_64-maccatalyst
-    value:           C751AD77-A2C8-35D5-A80B-C108DB12D80F
+    value:           32305EAC-CFD3-38EC-A08E-82DE72C578EB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4258522F-3453-375F-ADB5-452E5D7FBC49
+    value:           1B3E7E76-18AE-36A4-9233-226A0E53845E
   - target:          arm64e-maccatalyst
-    value:           4258522F-3453-375F-ADB5-452E5D7FBC49
+    value:           1B3E7E76-18AE-36A4-9233-226A0E53845E
 install-name:    '/System/Library/PrivateFrameworks/EAP8021X.framework/Versions/A/EAP8021X'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AKAAuthResultsInit, _AKAAuthResultsRelease, _AKAAuthResultsSetAUTS, 
                        _AKAAuthResultsSetCK, _AKAAuthResultsSetIK, _AKAAuthResultsSetRES, 
                        _EAPCFDataArrayCreateSecCertificateArray, _EAPClientConfigurationCopyAndImport, 

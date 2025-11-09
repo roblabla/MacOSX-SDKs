@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DF04D7A9-F55A-32EB-A109-33D7970C153A
+    value:           5C7189B2-749B-3956-AFF4-EE4035838DBA
   - target:          x86_64-maccatalyst
-    value:           DF04D7A9-F55A-32EB-A109-33D7970C153A
+    value:           5C7189B2-749B-3956-AFF4-EE4035838DBA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8DA8B598-A413-3E5C-B8E0-45512F182D0C
+    value:           26498C78-CA03-309A-911B-B771DDF09014
   - target:          arm64e-maccatalyst
-    value:           8DA8B598-A413-3E5C-B8E0-45512F182D0C
+    value:           26498C78-CA03-309A-911B-B771DDF09014
 install-name:    '/System/Library/PrivateFrameworks/AudioSession.framework/libSessionUtility.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTISt11logic_error, __ZTISt12length_error, 
                        __ZTISt9exception, __ZTSNSt3__117bad_function_callE, __ZTSSt11logic_error, 
                        __ZTSSt12length_error, __ZTSSt9exception ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN2as12StreamFormat11clearLayoutEv, __ZN2as12StreamFormat13mutableLayoutEv, 
                        __ZN2as12StreamFormat16default_instanceEv, __ZN2as12StreamFormat5clearEv, 
                        __ZN2as12StreamFormat8readFromERN2PB6ReaderE, __ZN2as12StreamFormat9copy_fromERKS0_, 
@@ -86,7 +86,8 @@ exports:
                        __ZN2as21AvailableStreamFormatC2EOS0_, __ZN2as21AvailableStreamFormatC2ERKS0_, 
                        __ZN2as21AvailableStreamFormatC2Ev, __ZN2as21AvailableStreamFormataSEOS0_, 
                        __ZN2as21AvailableStreamFormataSERKS0_, __ZN2as21public_error_category8instanceEv, 
-                       __ZN2as24mxsession_error_category8instanceEv, __ZN2as25smipc_Types_serialization17readAVAudioFormatERKNS_12StreamFormatE, 
+                       __ZN2as22GetMXNotificationNamesEv, __ZN2as24mxsession_error_category8instanceEv, 
+                       __ZN2as25smipc_Types_serialization17readAVAudioFormatERKNS_12StreamFormatE, 
                        __ZN2as25smipc_Types_serialization17readChannelLayoutERKNS_13ChannelLayoutERNSt3__110unique_ptrI18AudioChannelLayoutNS4_8functionIFvPS6_EEEEE, 
                        __ZN2as25smipc_Types_serialization18writeAVAudioFormatEP13AVAudioFormatdRNS_12StreamFormatE, 
                        __ZN2as25smipc_Types_serialization18writeChannelLayoutERK18AudioChannelLayoutRNS_13ChannelLayoutE, 
@@ -98,7 +99,8 @@ exports:
                        __ZN2as25smipc_Types_serialization8readASBDERKNS_12StreamFormatER27AudioStreamBasicDescriptionRNSt3__110unique_ptrI18AudioChannelLayoutNS6_8functionIFvPS8_EEEEE, 
                        __ZN2as25smipc_Types_serialization9writeASBDERK27AudioStreamBasicDescriptiondPK18AudioChannelLayoutRNS_12StreamFormatE, 
                        __ZN2as26smipc_Server_types_utility18updateDefaultRouteERKNS_15RouteIdentifierERNS_6server19HardwareSystemStateE, 
-                       __ZN2as28GetServerXPCListenerEndpointEv, __ZN2as28SetServerXPCListenerEndpointEP21NSXPCListenerEndpoint, 
+                       __ZN2as28GetServerXPCListenerEndpointEv, __ZN2as28IsStandardMXNotificationNameEP8NSString, 
+                       __ZN2as28SetServerXPCListenerEndpointEP21NSXPCListenerEndpoint, 
                        __ZN2as6client11StreamPrefs16default_instanceEv, __ZN2as6client11StreamPrefs17clearStreamFormatEv, 
                        __ZN2as6client11StreamPrefs19mutableStreamFormatEv, __ZN2as6client11StreamPrefs5clearEv, 
                        __ZN2as6client11StreamPrefs8readFromERN2PB6ReaderE, __ZN2as6client11StreamPrefs9copy_fromERKS1_, 
@@ -518,5 +520,12 @@ exports:
                        __ZTVN2as6server23MicrophoneConfigurationE, __ZTVN2as6server3BoxE, 
                        __ZTVN2as6server4PortE, __ZTVN2as6server5ClockE, __ZTVN2as6server6DeviceE, 
                        __ZTVN2as6server6DriverE, __ZTVN2as6server7ControlE, __ZTVN2as6server8HWStreamE, 
-                       _sessionManagerXPCCallbackInterface, _sessionManagerXPCInterface ]
+                       _kAudioSessionNotification_ConnectedPorts, _kAudioSessionNotification_ConnectedPortsKey_InputAvailable, 
+                       _kAudioSessionNotification_InterruptionInfoKey_InterruptionReason, 
+                       _kAudioSessionNotification_InterruptionInfoKey_InterruptorName, 
+                       _kAudioSessionNotification_InterruptionInfoKey_State, _kAudioSessionNotification_InterruptionInfoKey_Type, 
+                       _kAudioSessionNotification_InterruptionInfoKey_WasSuspended, 
+                       _kAudioSessionNotification_RouteChangeKey_SpatialEnabled, 
+                       _kAudioSessionNotification_SpatialPreferencesChanged, _sessionManagerXPCCallbackInterface, 
+                       _sessionManagerXPCInterface ]
 ...

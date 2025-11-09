@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A3E51583-EF78-3410-901B-73C77037CC22
+    value:           C1050BCE-38B5-3DD1-8B59-1A2F80F9AA07
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           09190B7E-CFB0-3954-9ADA-3D07B37ADEC5
+    value:           670D1137-D8A1-38D3-B9AD-D62FF7C97AA8
 install-name:    '/System/Library/PrivateFrameworks/IMSharedUI.framework/Versions/A/IMSharedUI'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IMAnonymizeContentAndContacts, _IMAnonymizeContentAndContactsDidChangeNotification, 
                        _IMAttachmentLogSubtype, _IMAudioSessionControllerSessionNotificationOptionsKey, 
                        _IMAudioSessionControllerSessionOptionsWillChangeNotification, 

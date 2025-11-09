@@ -102,6 +102,9 @@ extern IOSurfacePropertyKey IOSurfacePropertyKeyPixelFormat                 API_
 /* IOSurfacePropertyKeyPixelSizeCastingAllowed - If false the creator promises that there will be no pixel size casting when used on the GPU.  Default is true.  */
 extern IOSurfacePropertyKey IOSurfacePropertyKeyPixelSizeCastingAllowed     API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
+/* IOSurfacePropertyKeyName - Provide a name for the surface at creation time. */
+extern IOSurfacePropertyKey IOSurfacePropertyKeyName                        API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
 // Note: IOSurface objects are "toll free bridged" to IOSurfaceRef objects
 API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0))
 @interface IOSurface : NSObject <NSSecureCoding>

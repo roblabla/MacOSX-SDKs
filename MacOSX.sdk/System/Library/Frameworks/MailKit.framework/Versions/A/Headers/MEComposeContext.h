@@ -21,10 +21,10 @@ typedef NS_ENUM(NSInteger, MEComposeUserAction) {
   MEComposeUserActionReplyAll = 3,
   /// Forward an original message.
   MEComposeUserActionForward = 4,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
+} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos);
 
 /// @brief An object encapsulating additional information about the message being composed.
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 @interface MEComposeContext : NSObject
 
 //+ (instancetype)new NS_UNAVAILABLE;

@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C4687EB5-77FD-3C03-B757-FE71963DF515
+    value:           048FEBDC-D89C-3514-8860-A981458A573D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           08CBA6E8-4AF4-3C30-9972-C1AE3874FB7E
+    value:           EB5DF7C8-94B7-3AE6-90DC-8AB48AA36F8A
 install-name:    '/System/Library/PrivateFrameworks/SystemDesktopAppearance.framework/Versions/A/SystemDesktopAppearance'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ObliterateDevice, __OSVersion, _kSDADefaultDesktopInOrderedPictures, 
                        _kSDADefaultDesktopPictureFilename, _kSDAFakeDesktopPicturesDarkArray, 
                        _kSDAFakeDesktopPicturesLightArray ]

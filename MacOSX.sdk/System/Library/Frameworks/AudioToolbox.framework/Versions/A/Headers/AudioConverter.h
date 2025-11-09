@@ -662,6 +662,8 @@ AudioConverterConvertBuffer(    AudioConverterRef               inAudioConverter
                     number of packets of audio data actually being provided for input, or 0 if
                     there is no more input.
     @param      ioData
+                    This points to an audio buffer list to be filled in by the callback to refer to the
+                    buffer(s) provided by the callback.
                     On exit, the members of ioData should be set to point to the audio data
                     being provided for input.
     @param      outDataPacketDescription
@@ -675,12 +677,29 @@ AudioConverterConvertBuffer(    AudioConverterRef               inAudioConverter
 	
 	The AudioConverter requests a minimum number of packets (*ioNumberDataPackets).
 	The callback may return one or more packets. If this is less than the minimum,
-	the callback will simply be called again in the near future.
+	the callback will simply be called again in the near future. Note that ioNumberDataPackets counts
+	packets in terms of the converter's input format (not its output format).
 
-	The callback manipulates the members of ioData to point to one or more buffers
+	The callback may be asked to provide multiple input packets in a single call, even for compressed
+	formats.  The callback must update the number of packets pointed to by ioNumberDataPackets
+	to indicate the number of packets actually being provided, and if the packets require packet
+	descriptions, these must be filled into the array pointed to by outDataPacketDescription, one
+	packet description per packet.
+
+	The callback is given an audio buffer list pointed to by ioData.  This buffer list may refer to
+	existing buffers owned and allocated by the audio converter, in which case the callback may
+	use them and copy input audio data into them.  However, the buffer list may also be empty
+	(mDataByteSize == 0 and/or mData == NULL), in which case the callback must provide its own
+	buffers.  The callback manipulates the members of ioData to point to one or more buffers
 	of audio data (multiple buffers are used with non-interleaved PCM data). The
-	callback is responsible for not freeing or altering this buffer until it is
-	called again.
+	callback is responsible for not freeing or altering this buffer until it is called again.
+
+	For input data that varies from one packet to another in either size (bytes per packet)
+	or duration (frames per packet), such as when decoding compressed audio, the callback
+	should expect outDataPacketDescription to be non-null and point to array of packet descriptions,
+	which the callback must fill in, one for every packet provided by the callback.  Each packet must
+	have a valid packet description, regardless of whether or not these descriptions are different
+	from each other.  Packet descriptions are required even if there is only one packet.
 
 	If the callback returns an error, it must return zero packets of data.
 	AudioConverterFillComplexBuffer will stop producing output and return whatever
@@ -725,6 +744,12 @@ typedef OSStatus
 
 	Produces a buffer list of output data from an AudioConverter. The supplied input
 	callback function is called whenever necessary.
+	
+	If the output format uses packet descriptions, such as most compressed formats where packets
+	vary in size or duration, the caller is expected to provide a buffer for holding packet descriptions,
+	pointed to by outPacketDescription.  The array must have the capacity to hold a packet description
+	for each output packet that may be written.  A packet description array is expected even if only
+	a single output packet is to be written.
 */
 extern OSStatus
 AudioConverterFillComplexBuffer(    AudioConverterRef                   inAudioConverter,

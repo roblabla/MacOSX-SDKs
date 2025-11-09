@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           68EADDE4-D1A6-3C42-B8AB-AD02E27E1400
+    value:           1D2F2412-E1C9-39E9-849A-CB627A3FB593
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5A2902F0-C1F6-39EF-9365-E74BD10F966F
+    value:           B7915287-0959-32CC-A1C0-6E14B642BF3B
 install-name:    '/usr/lib/log/liblog_mdnsresponder.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DNSComputeDNSKeyTag, _DNSMessageCollapse, _DNSMessageExtractDomainName, 
                        _DNSMessageExtractDomainNameString, _DNSMessageExtractQuestion, 
                        _DNSMessageExtractRecord, _DNSMessageGetAnswerSection, _DNSMessageGetOptRecord, 

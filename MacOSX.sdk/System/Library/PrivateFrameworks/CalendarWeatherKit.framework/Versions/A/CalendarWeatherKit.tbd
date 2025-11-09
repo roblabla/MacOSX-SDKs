@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8DD3C6A4-497B-30A8-BC45-EAE71B6F2A55
+    value:           3ED9D4A7-F0D1-362C-90A1-AF72ED67745E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           798E04BC-50A1-34BB-9417-9BE84CF9193A
+    value:           A7DE1FBC-E238-3954-AC8F-F1ADC7C5ADFC
 install-name:    '/System/Library/PrivateFrameworks/CalendarWeatherKit.framework/Versions/A/CalendarWeatherKit'
-current-version: 689
+current-version: 703
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _WMLocationCodingCity, _WMLocationCodingCountry, _WMLocationCodingCountryAbbreviation, 
                        _WMLocationCodingCounty, _WMLocationCodingCreationDate, _WMLocationCodingGeoLocation, 
                        _WMLocationCodingGeoLocationLat, _WMLocationCodingGeoLocationLong, 

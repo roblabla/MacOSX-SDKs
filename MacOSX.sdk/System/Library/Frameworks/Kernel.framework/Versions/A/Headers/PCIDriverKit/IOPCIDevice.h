@@ -1,6 +1,6 @@
-/* iig(DriverKit-192.100.7) generated from IOPCIDevice.iig */
+/* iig(DriverKit-256.40.4) generated from IOPCIDevice.iig */
 
-/* IOPCIDevice.iig:1-71 */
+/* IOPCIDevice.iig:1-83 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -72,7 +72,19 @@ enum IOPCIBARType
     kPCIBARTypeM64PF = 0x0c, /* 64-bit Prefetchable Memory */
 };
 
-/* source class IOPCIDevice IOPCIDevice.iig:72-386 */
+/*!
+ * @brief Link speeds for <code>SetLinkSpeed</code> and <code>GetLinkSpeed</code>
+ */
+enum IOPCILinkSpeed
+{
+    kPCILinkSpeed_2_5_GTs = 1, // Gen 1
+    kPCILinkSpeed_5_GTs,       // Gen 2
+    kPCILinkSpeed_8_GTs,       // Gen 3
+    kPCILinkSpeed_16_GTs,      // Gen 4
+    kPCILinkSpeed_32_GTs,      // Gen 5
+};
+
+/* source class IOPCIDevice IOPCIDevice.iig:84-452 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -376,6 +388,31 @@ public:
                uint64_t* barSize = 0,
                uint8_t*  barType = 0);
 
+#pragma mark Link Management
+
+    /*! @function SetLinkSpeed
+     *   @abstract    Set the link speed upper bound and optionally retrain
+     *   @discussion  This function writes the device's upstream bridge's target-link-speed. This setting will be enforced during subsequent
+     *                reset-initiated link trainings, and the function will immediately retrain the link if the retrain parameter is true.
+     *                If retrain is true, this function will not return until training completes. The user must call IOPCIDevice::GetLinkSpeed() to
+     *                see the result of link training; a return value of kIOReturnSuccess does not indicate the requested link speed was reached.
+     *   @param       linkSpeed A IOPCILinkSpeed.
+     *   @param       retrain If true, the function will retrain the link.
+     *   @result      kIOReturnSuccess if there were no errors, such as linkSpeed unsupported by the upstream bridge. kIOReturnSuccess does not
+     *                indicate the requested link speed was reached.
+     */
+    virtual kern_return_t
+    SetLinkSpeed(IOPCILinkSpeed linkSpeed,
+                 bool           retrain = false);
+
+    /*! @function GetLinkSpeed
+     *   @abstract  Get the endpoint's link speed
+     *   @param     linkSpeed A pointer to a IOPCILinkSpeed.
+     *   @result    Returns an IOReturn code indicating success or failure.
+     */
+    virtual kern_return_t
+    GetLinkSpeed(IOPCILinkSpeed *linkSpeed);
+
 #pragma mark Interrupts Allocation
 
     /*!
@@ -392,12 +429,41 @@ public:
                         uint32_t numRequired  = 1,
                         uint32_t numRequested = 1,
                         IOOptionBits options  = 0);
+
+#pragma mark Reset
+
+    /*! @function reset
+     *   @abstract     Reset the PCIe device.
+     *   @discussion   If this is a multi-function device, all functions associated with the device will be reset.
+     *                 Device configuration state is saved prior to resetting the device and restored after reset completes.
+     *                 During reset, the caller must not attempt to access the device.
+     *                 This call will block until the link comes up and the device is usable (except for type kIOPCIDeviceResetTypeWarmResetDisable).
+     *   @param type     tIOPCIDeviceResetTypes.
+     *   @param options  tIOPCIDeviceResetOptions.
+     *   @return       kIOReturnSuccess if the reset specified is supported
+     */
+    virtual kern_return_t
+    Reset(IOOptionBits type,
+          IOOptionBits options = 0);
+
+#pragma mark Active State Power Management
+
+    /*!
+     * @brief       Configure ASPM settings.
+     * @discussion  This method will enable/disable ASPM L0s and L1, on the device and its upstream bridge, if both
+     *              are capable of the requested ASPM level(s). When ASPM is enabled, this method will also enable any L1 substates that
+     *              both link partners are capable of, and disable L1 substates when ASPM is disabled.
+     * @param       aspmLinkControl The level of ASPM to be enabled on the link. (See tIOPCILinkControlASPMBits.)
+     * @result      kIOReturnSuccess if there were no errors.
+     */
+    virtual kern_return_t
+    SetASPMState(IOOptionBits aspmLinkControl);
 };
 
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOPCIDevice IOPCIDevice.iig:72-386 */
+/* generated class IOPCIDevice IOPCIDevice.iig:84-452 */
 
 #define IOPCIDevice__ManageSession_ID            0xd395e45429887c65ULL
 #define IOPCIDevice__CopyDeviceMemoryWithIndex_ID            0x8fbfd4a80b3ed3f1ULL
@@ -409,7 +475,11 @@ public:
 #define IOPCIDevice_SaveDeviceState_ID            0xf6f91d3296a44c78ULL
 #define IOPCIDevice_RestoreDeviceState_ID            0xa3652c7a818b5b57ULL
 #define IOPCIDevice_GetBARInfo_ID            0x921a80175d4aa69dULL
+#define IOPCIDevice_SetLinkSpeed_ID            0xab8311d34ee951d0ULL
+#define IOPCIDevice_GetLinkSpeed_ID            0xd9a41416715abf6aULL
 #define IOPCIDevice_ConfigureInterrupts_ID            0xfce109388a474487ULL
+#define IOPCIDevice_Reset_ID            0x9b68edbd55cbfb01ULL
+#define IOPCIDevice_SetASPMState_ID            0xf75adb97aeb12883ULL
 
 #define IOPCIDevice__ManageSession_Args \
         IOService * forClient, \
@@ -464,11 +534,25 @@ public:
         uint64_t * barSize, \
         uint8_t * barType
 
+#define IOPCIDevice_SetLinkSpeed_Args \
+        IOPCILinkSpeed linkSpeed, \
+        bool retrain
+
+#define IOPCIDevice_GetLinkSpeed_Args \
+        IOPCILinkSpeed * linkSpeed
+
 #define IOPCIDevice_ConfigureInterrupts_Args \
         uint32_t interruptType, \
         uint32_t numRequired, \
         uint32_t numRequested, \
         IOOptionBits options
+
+#define IOPCIDevice_Reset_Args \
+        IOOptionBits type, \
+        IOOptionBits options
+
+#define IOPCIDevice_SetASPMState_Args \
+        IOOptionBits aspmLinkControl
 
 #define IOPCIDevice_Methods \
 \
@@ -635,11 +719,33 @@ public:\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
+    SetLinkSpeed(\
+        IOPCILinkSpeed linkSpeed,\
+        bool retrain = false,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    GetLinkSpeed(\
+        IOPCILinkSpeed * linkSpeed,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
     ConfigureInterrupts(\
         uint32_t interruptType,\
         uint32_t numRequired = 1,\
         uint32_t numRequested = 1,\
         IOOptionBits options = 0,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    Reset(\
+        IOOptionBits type,\
+        IOOptionBits options = 0,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    SetASPMState(\
+        IOOptionBits aspmLinkControl,\
         OSDispatchMethod supermethod = NULL);\
 \
 \
@@ -710,11 +816,35 @@ public:\
         OSMetaClassBase * target,\
         GetBARInfo_Handler func);\
 \
+    typedef kern_return_t (*SetLinkSpeed_Handler)(OSMetaClassBase * target, IOPCIDevice_SetLinkSpeed_Args);\
+    static kern_return_t\
+    SetLinkSpeed_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        SetLinkSpeed_Handler func);\
+\
+    typedef kern_return_t (*GetLinkSpeed_Handler)(OSMetaClassBase * target, IOPCIDevice_GetLinkSpeed_Args);\
+    static kern_return_t\
+    GetLinkSpeed_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        GetLinkSpeed_Handler func);\
+\
     typedef kern_return_t (*ConfigureInterrupts_Handler)(OSMetaClassBase * target, IOPCIDevice_ConfigureInterrupts_Args);\
     static kern_return_t\
     ConfigureInterrupts_Invoke(const IORPC rpc,\
         OSMetaClassBase * target,\
         ConfigureInterrupts_Handler func);\
+\
+    typedef kern_return_t (*Reset_Handler)(OSMetaClassBase * target, IOPCIDevice_Reset_Args);\
+    static kern_return_t\
+    Reset_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        Reset_Handler func);\
+\
+    typedef kern_return_t (*SetASPMState_Handler)(OSMetaClassBase * target, IOPCIDevice_SetASPMState_Args);\
+    static kern_return_t\
+    SetASPMState_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        SetASPMState_Handler func);\
 \
 
 
@@ -760,7 +890,19 @@ protected:\
     GetBARInfo_Impl(IOPCIDevice_GetBARInfo_Args);\
 \
     kern_return_t\
+    SetLinkSpeed_Impl(IOPCIDevice_SetLinkSpeed_Args);\
+\
+    kern_return_t\
+    GetLinkSpeed_Impl(IOPCIDevice_GetLinkSpeed_Args);\
+\
+    kern_return_t\
     ConfigureInterrupts_Impl(IOPCIDevice_ConfigureInterrupts_Args);\
+\
+    kern_return_t\
+    Reset_Impl(IOPCIDevice_Reset_Args);\
+\
+    kern_return_t\
+    SetASPMState_Impl(IOPCIDevice_SetASPMState_Args);\
 \
 
 
@@ -841,9 +983,9 @@ IOPCIDevice_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOPCIDevice.iig:388-389 */
+/* IOPCIDevice.iig:454-455 */
 
 #pragma mark Private Class Extension
-/* IOPCIDevice.iig:412- */
+/* IOPCIDevice.iig:478- */
 
 #endif /* ! _IOKIT_UIOPCIDEVICE_H */

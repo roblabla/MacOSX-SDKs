@@ -52,6 +52,15 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @property (nonatomic, readonly) BOOL hasRemappedElements API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 /**
+ Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called
+ for each element that changed.
+ 
+ @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons.
+ @param element the element that has been modified.
+ */
+@property (nonatomic, copy, nullable) void (^valueDidChangeHandler)(__kindof GCPhysicalInputProfile *profile, GCControllerElement *element) API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));
+
+/**
  The following properties allow for runtime lookup of any input element on a profile, when provided with a valid alias.
 
  @example extendedGamepad.elements["Button A"] == extendedGamepad.buttonA // YES

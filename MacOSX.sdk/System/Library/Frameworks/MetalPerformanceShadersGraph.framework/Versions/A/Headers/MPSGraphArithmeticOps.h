@@ -150,6 +150,42 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 -(MPSGraphTensor *) erfWithTensor:(MPSGraphTensor *) tensor
                              name:(NSString * _Nullable) name;
 
+/*!
+ *  @abstract   Truncate op - floor for positive inputs, ceil for negative.
+ *  @param      tensor         The input
+ *  @param      name             Name for the operation
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) truncateWithTensor:(MPSGraphTensor *) tensor
+                                  name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( truncate(_:name:) )
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
+
+/*!
+ *  @abstract   Return bitwise not of tensor, takes in only integer dataTypes
+ *
+ *  @param      tensor                          input tensor, must be integer dataType
+ *  @param      name                              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) bitwiseNOTWithTensor:(MPSGraphTensor *) tensor
+                                    name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( bitwiseNOT(_:name:) )
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
+
+/*!
+ *  @abstract   Return population count of a tensor, takes in only integer dataTypes
+ *
+ *  @param      tensor                          input tensor, must be integer dataType
+ *  @param      name                              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) bitwisePopulationCountWithTensor:(MPSGraphTensor *) tensor
+                                                name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( bitwisePopulationCount(_:name:) )
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
 
 #pragma mark - BinaryArithmeticOps
 
@@ -384,7 +420,80 @@ MPS_SWIFT_NAME( logicalXNOR(_:_:name:) );
                            secondaryTensor:(MPSGraphTensor *) secondaryTensor
                                       name:(NSString * _Nullable) name;
 
+/*!
+ *  @abstract   Return bitwise AND of binary representations of 2 integer tensors
+ *
+ *  @param      primaryTensor          primary input tensor, must be integer dataType
+ *  @param      secondaryTensor     secondary input tensor, must be integer dataType
+ *  @param      name                              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) bitwiseANDWithPrimaryTensor:(MPSGraphTensor *) primaryTensor
+                                secondaryTensor:(MPSGraphTensor *) secondaryTensor
+                                           name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( bitwiseAND(_:_:name:) )
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
 
+/*!
+ *  @abstract   Return bitwise OR of binary representations of 2 integer tensors
+ *
+ *  @param      primaryTensor          primary input tensor, must be integer dataType
+ *  @param      secondaryTensor     secondary input tensor, must be integer dataType
+ *  @param      name                              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) bitwiseORWithPrimaryTensor:(MPSGraphTensor *) primaryTensor
+                               secondaryTensor:(MPSGraphTensor *) secondaryTensor
+                                          name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( bitwiseOR(_:_:name:) )
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
+
+/*!
+ *  @abstract   Return bitwise XOR of binary representations of 2 integer tensors
+ *
+ *  @param      primaryTensor          primary input tensor, must be integer dataType
+ *  @param      secondaryTensor     secondary input tensor, must be integer dataType
+ *  @param      name                              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) bitwiseXORWithPrimaryTensor:(MPSGraphTensor *) primaryTensor
+                                secondaryTensor:(MPSGraphTensor *) secondaryTensor
+                                           name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( bitwiseXOR(_:_:name:) )
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
+
+/*!
+ *  @abstract   Return bitwise left shifted binary representations of primary integer tensor by secondary tensor amount
+ *
+ *  @param      primaryTensor          primary input tensor, must be integer dataType
+ *  @param      secondaryTensor     secondary input tensor, must be integer dataType
+ *  @param      name                              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) bitwiseLeftShiftWithPrimaryTensor:(MPSGraphTensor *) primaryTensor
+                                      secondaryTensor:(MPSGraphTensor *) secondaryTensor
+                                                 name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( bitwiseLeftShift(_:_:name:) )
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
+
+/*!
+ *  @abstract   Return bitwise right shifted binary representations of primary integer tensor by secondary tensor amount
+ *
+ *  @param      primaryTensor          primary input tensor, must be integer dataType
+ *  @param      secondaryTensor     secondary input tensor, must be integer dataType
+ *  @param      name                              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) bitwiseRightShiftWithPrimaryTensor:(MPSGraphTensor *) primaryTensor
+                                       secondaryTensor:(MPSGraphTensor *) secondaryTensor
+                                                  name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( bitwiseRightShift(_:_:name:) )
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
 
 
 #pragma mark - TernaryArithmeticOps

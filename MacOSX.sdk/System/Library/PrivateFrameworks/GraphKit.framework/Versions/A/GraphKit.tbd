@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DD11185D-DD07-392D-BEF3-31549DA904F6
+    value:           8C8E3375-70AB-32B5-877F-774668D4D167
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           56441E29-A1AF-356C-A801-543C3A7104BC
+    value:           6D8BEDA0-CD99-3926-AC53-35AFEFA9AD2F
 install-name:    '/System/Library/PrivateFrameworks/GraphKit.framework/Versions/A/GraphKit'
 current-version: 25
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _GRAxesBackgroundColor, _GRAxesBezelBorder, _GRAxesBorderType, 
                        _GRAxesBottomMargin, _GRAxesCategoryAxis, _GRAxesDrawBackground, 
                        _GRAxesDrawLegend, _GRAxesDrawLegendBackground, _GRAxesDrawPlotFrame, 

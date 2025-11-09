@@ -1,6 +1,6 @@
-framework module GameController{
-umbrella header "GameController.h"
+framework module GameController [system] {
+    umbrella header "GameController.h"
 
-export *
-module * { export * }
+    export *
+    module * { export * }
 }

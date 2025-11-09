@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7D84917F-3347-3694-A49E-C2968576CCEC
+    value:           7647CC0C-1B71-30A6-AB7D-39F0B2BBB3BF
   - target:          x86_64-maccatalyst
-    value:           7D84917F-3347-3694-A49E-C2968576CCEC
+    value:           7647CC0C-1B71-30A6-AB7D-39F0B2BBB3BF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DD1A13B1-48E7-37C9-ABB6-F1B2FF8BE923
+    value:           DE89D083-235E-3A21-97EE-69E248E6BF15
   - target:          arm64e-maccatalyst
-    value:           DD1A13B1-48E7-37C9-ABB6-F1B2FF8BE923
+    value:           DE89D083-235E-3A21-97EE-69E248E6BF15
 install-name:    '/System/Library/Frameworks/Combine.framework/Versions/A/Combine'
-current-version: 280.101
+current-version: 310
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s16SchedulerOptions7Combine0A0PTl', '_$s17SchedulerTimeType7Combine0A0PTl', 
                        '_$s25ObjectWillChangePublisher7Combine010ObservableA0PTl', 
                        '_$s5Input7Combine10SubscriberPTl', '_$s5Input7Combine15TopLevelDecoderPTl', 

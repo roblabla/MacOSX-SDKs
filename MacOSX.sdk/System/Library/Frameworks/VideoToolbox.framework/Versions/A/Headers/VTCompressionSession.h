@@ -114,7 +114,7 @@ CF_IMPLICIT_BRIDGING_DISABLED
 		If the video encoder cannot support the provided width and height it may change them.
 	@param	height
 		The height of frames in pixels.
-	@param	cType
+	@param	codecType
 		The codec type.
 	@param	encoderSpecification
 		Specifies a particular video encoder that must be used.  

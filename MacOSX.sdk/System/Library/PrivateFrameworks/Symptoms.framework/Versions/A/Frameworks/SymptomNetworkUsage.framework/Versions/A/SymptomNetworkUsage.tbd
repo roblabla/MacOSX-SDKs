@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3972D486-D3D7-36C7-BF5A-542A73E390C9
+    value:           E96A587F-C2C6-3602-B040-848E5202F6D0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           52001CEB-3208-3188-BC01-E8AEE5FDFCAD
+    value:           5A872032-8AB6-3749-9DCF-3A28BFEFF9EE
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomNetworkUsage.framework/Versions/A/SymptomNetworkUsage'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _attributionReasonImpliesBundleName, _attributionReasonImpliesProcessName, 
                        _kNWSelectAllFlows, _kNWSelectAllFlowsAndSubFlows, _kNWSelectClosed, 
                        _kNWSelectConnEvents, _kNWSelectConnHasNetAccess, _kNWSelectDescription, 

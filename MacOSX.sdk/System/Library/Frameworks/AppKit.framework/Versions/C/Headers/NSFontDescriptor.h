@@ -53,6 +53,7 @@ typedef NSString * NSFontDescriptorTraitKey NS_TYPED_ENUM;
 typedef NSString * NSFontDescriptorVariationKey NS_TYPED_ENUM;
 typedef NSString * NSFontDescriptorFeatureKey NS_TYPED_EXTENSIBLE_ENUM;
 typedef CGFloat NSFontWeight NS_TYPED_EXTENSIBLE_ENUM;
+typedef CGFloat NSFontWidth NS_TYPED_EXTENSIBLE_ENUM;
 typedef NSString * NSFontDescriptorSystemDesign NS_TYPED_ENUM;
 typedef NSString * NSFontTextStyle NS_TYPED_ENUM API_AVAILABLE(macos(11.0));
 typedef NSString * NSFontTextStyleOptionKey NS_TYPED_ENUM API_AVAILABLE(macos(11.0));
@@ -172,6 +173,14 @@ APPKIT_EXTERN const NSFontWeight NSFontWeightSemibold API_AVAILABLE(macos(10.11)
 APPKIT_EXTERN const NSFontWeight NSFontWeightBold API_AVAILABLE(macos(10.11));
 APPKIT_EXTERN const NSFontWeight NSFontWeightHeavy API_AVAILABLE(macos(10.11));
 APPKIT_EXTERN const NSFontWeight NSFontWeightBlack API_AVAILABLE(macos(10.11));
+
+/* Font width trait */
+/* Predefined symbolic width values used for NSFontWidthTrait and +[NSFont systemFontOfSize:weight:width:].
+ */
+APPKIT_EXTERN const NSFontWidth NSFontWidthCompressed API_AVAILABLE(macos(13.0));
+APPKIT_EXTERN const NSFontWidth NSFontWidthCondensed API_AVAILABLE(macos(10.10));
+APPKIT_EXTERN const NSFontWidth NSFontWidthStandard API_AVAILABLE(macos(10.10));
+APPKIT_EXTERN const NSFontWidth NSFontWidthExpanded API_AVAILABLE(macos(10.10));
 
 APPKIT_EXTERN NSFontDescriptorSystemDesign const NSFontDescriptorSystemDesignDefault API_AVAILABLE(macos(10.15));
 APPKIT_EXTERN NSFontDescriptorSystemDesign const NSFontDescriptorSystemDesignSerif API_AVAILABLE(macos(10.15));

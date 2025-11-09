@@ -95,10 +95,19 @@ public:
      * @brief       Obtain the result of the serialization performed by createFromObject().
      * @discussion  Obtain the result of the serialization performed by createFromObject().
      * @param       length The length of the serialization data.
-     * @return      NULL on failure, otherwise a pointer to the serialization data. It is valid only while the OSSerialization object is retained.
+     * @return      NULL on failure, otherwise a pointer to the serialization data.
      */
 	const void *
 	finalizeBuffer(size_t * length);
+
+    /*!
+     * @brief       Free a buffer returned by finalizeBuffer().
+     * @discussion  Free a buffer returned by finalizeBuffer().
+     * @param       buffer Pointer to the serialization data.
+     * @param       length The length of the serialization data.
+     */
+	void
+	static freeBuffer(const void * buffer, size_t length);
 };
 
 #endif /* ! _IOKIT_OSSERIALIZATION_H */

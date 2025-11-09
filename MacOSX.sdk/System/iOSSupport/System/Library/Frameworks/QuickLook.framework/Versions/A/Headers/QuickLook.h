@@ -23,6 +23,7 @@
 #import <QuickLook/QLPreviewReply.h>
 #import <QuickLook/QLFilePreviewRequest.h>
 #import <QuickLook/QLPreviewSceneActivationConfiguration.h>
+#import <QuickLook/QuickLookUICore.h>
 #endif
 
 #endif

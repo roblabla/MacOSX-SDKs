@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8E54ECA2-9BD8-3482-9589-B9574434D1AA
+    value:           5EFAF10B-2EC1-32ED-B077-80125E552C8D
   - target:          x86_64-maccatalyst
-    value:           8E54ECA2-9BD8-3482-9589-B9574434D1AA
+    value:           5EFAF10B-2EC1-32ED-B077-80125E552C8D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD566A15-42D8-314A-A99A-B59237DDF5BC
+    value:           A3869999-0792-3E09-B3FB-5E87AE4639BE
   - target:          arm64e-maccatalyst
-    value:           FD566A15-42D8-314A-A99A-B59237DDF5BC
+    value:           A3869999-0792-3E09-B3FB-5E87AE4639BE
 install-name:    '/usr/lib/system/libsystem_c.dylib'
-current-version: 1507.100.9
+current-version: 1534.40.2
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ '___opendir2$INODE64', ___strtopx, '__readdir_unlocked$INODE64', 
                        '__seekdir$INODE64', '_alphasort$INODE64', '_daemon$1050', 
                        '_fdopendir$INODE64', _fstatx64_np, '_fstatx_np$INODE64', 
@@ -34,8 +34,8 @@ exports:
                        '_rewinddir$INODE64', '_scandir$INODE64', '_scandir_b$INODE64', 
                        '_seekdir$INODE64', _statx64_np, '_statx_np$INODE64', '_telldir$INODE64', 
                        mcount ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$weak$os10.11$_basename_r', '$ld$weak$os10.11$_clock_getres', 
                        '$ld$weak$os10.11$_clock_gettime', '$ld$weak$os10.11$_clock_settime', 
                        '$ld$weak$os10.11$_dirname_r', '$ld$weak$os10.11$_getentropy', 
@@ -94,7 +94,7 @@ exports:
                        __libc_initializer, __long_to_time, __mkpath_np, __mktemp, 
                        __openutx, __os_assert_log, __os_assert_log_ctx, __os_assumes_log, 
                        __os_assumes_log_ctx, __os_avoid_tail_call, __os_crash, __os_crash_callback, 
-                       __os_crash_fmt, __os_debug_log, __os_debug_log_error_offset, 
+                       __os_crash_fmt, __os_crash_msg, __os_debug_log, __os_debug_log_error_offset, 
                        __os_debug_log_error_str, __putenvp, __pututxline, __rand48_add, 
                        __rand48_mult, __rand48_seed, __readdir_unlocked, __reclaim_telldir, 
                        __seekdir, __setenvp, __setutxent, __sigaction_nobind, __sigintr, 
@@ -237,7 +237,7 @@ exports:
                        _snprintf, _snprintf_l, _snvis, _sockatmark, _sprintf, _sprintf_l, 
                        _sradixsort, _srand, _srand48, _sranddev, _srandom, _srandomdev, 
                        _sscanf, _sscanf_l, _stat_with_subsystem, _statvfs, _statx_np, 
-                       _stpcpy, _stpncpy, _strcasecmp, _strcasecmp_l, _strcasestr, 
+                       _stpcpy, _stpncpy, _stravis, _strcasecmp, _strcasecmp_l, _strcasestr, 
                        _strcasestr_l, _strcat, _strcoll, _strcoll_l, _strcspn, _strdup, 
                        _strenvisx, _strerror, _strerror_r, _strfmon, _strfmon_l, 
                        _strftime, _strftime_l, _strmode, _strncasecmp, _strncasecmp_l, 
@@ -299,8 +299,8 @@ exports:
                        _wprintf, _wprintf_l, _wscanf, _wscanf_l, _wtmpxname, _xprintf, 
                        _xprintf_exec ]
 reexports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _bcmp, _bzero, _index, _memccpy, _memchr, _memcmp, _memcpy, 
                        _memmove, _memset, _memset_pattern16, _memset_pattern4, _memset_pattern8, 
                        _strchr, _strcmp, _strcpy, _strlcat, _strlcpy, _strlen, _strncmp, 

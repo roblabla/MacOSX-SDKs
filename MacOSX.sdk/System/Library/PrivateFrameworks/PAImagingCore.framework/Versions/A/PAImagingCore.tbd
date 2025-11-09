@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4FAF8D1F-C119-3A4A-8EEF-45E24618ADF0
+    value:           15A16A83-CAEF-3E93-B0E9-57537DAFEC01
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FB45E065-E879-3F22-BD6A-9CE4E34C5460
+    value:           1A6190E0-3D61-366F-AF00-C0FBBD4880DB
 install-name:    '/System/Library/PrivateFrameworks/PAImagingCore.framework/Versions/A/PAImagingCore'
-current-version: 441.0.120
+current-version: 511.0.170
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIN2PA10RectFinderE, __ZTIN2PA14PathRectFinderE, __ZTIN2PA16AnchorRectFinderE, 
@@ -18,7 +18,7 @@ exports:
                        __ZTSN2PA14PathRectFinderE, __ZTSN2PA16AnchorRectFinderE, 
                        __ZTSN2PA16centerRectFinderE, __ZTSN2PA24AnchorRectFinderVerticalE, 
                        __ZTSN2PA26AnchorRectFinderHorizontalE ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CompareLab, _PAImageFormatInvalid, _PAImagingCoreVersionNumber, 
                        _PAImagingCoreVersionString, _PMRDurationUnits, _PMRFPSUnits, 
                        _PMRTimestampUnits, __Z12clippedPointRKN2PA8Vector2dERKNS_13LineSegment2dE, 

@@ -11,7 +11,7 @@
 #import <UIKit/UIGestureRecognizer.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // Recognizes: when numberOfTouchesRequired have tapped numberOfTapsRequired times
 
@@ -29,7 +29,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UITapGestureRecognizer.h>

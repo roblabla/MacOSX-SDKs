@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8A18891D-1D48-328E-B8FE-063C2A687AF6
+    value:           F6E8A364-EBD5-31BC-9495-C7486FBB7A67
   - target:          x86_64-maccatalyst
-    value:           8A18891D-1D48-328E-B8FE-063C2A687AF6
+    value:           F6E8A364-EBD5-31BC-9495-C7486FBB7A67
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           13E02E6B-7D4C-3029-B96C-6613720E08F5
+    value:           0C2D6ACF-9369-3CC8-B173-A2E58F675595
   - target:          arm64e-maccatalyst
-    value:           13E02E6B-7D4C-3029-B96C-6613720E08F5
+    value:           0C2D6ACF-9369-3CC8-B173-A2E58F675595
 install-name:    '/usr/lib/libIOReport.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _IOReportAddChannelDescription, _IOReportArrayGetValueAtIndex, 
                        _IOReportChannelCopyDescription, _IOReportChannelGetCategories, 
                        _IOReportChannelGetChannelID, _IOReportChannelGetChannelName, 
@@ -30,7 +30,8 @@ exports:
                        _IOReportCopyChannelsOfFormat, _IOReportCopyChannelsWithID, 
                        _IOReportCopyChannelsWithUnit, _IOReportCopyCurrentProcessName, 
                        _IOReportCopyDriverName, _IOReportCopyFilteredChannels, _IOReportCreateAggregate, 
-                       _IOReportCreateSamples, _IOReportCreateSamplesDelta, _IOReportCreateSamplesProcessed, 
+                       _IOReportCreateNewRawSamplesBuffer, _IOReportCreateSamples, 
+                       _IOReportCreateSamplesDelta, _IOReportCreateSamplesProcessed, 
                        _IOReportCreateSamplesRaw, _IOReportCreateSubscription, _IOReportCreateUnitInfo, 
                        _IOReportGetChannelCount, _IOReportHistogramGetBucketBounds, 
                        _IOReportHistogramGetBucketCount, _IOReportHistogramGetBucketHits, 

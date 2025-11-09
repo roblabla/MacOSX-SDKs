@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           21B8497F-F378-39D9-8E71-F835ED489774
+    value:           1835D071-18D6-3BB6-9FA8-9FE06C8493D5
   - target:          x86_64-maccatalyst
-    value:           21B8497F-F378-39D9-8E71-F835ED489774
+    value:           1835D071-18D6-3BB6-9FA8-9FE06C8493D5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B2DF1EC8-AC1C-3749-AD78-BBBDB2C97E78
+    value:           562EBCD6-7D89-3D2C-863A-862DFB6ACD89
   - target:          arm64e-maccatalyst
-    value:           B2DF1EC8-AC1C-3749-AD78-BBBDB2C97E78
+    value:           562EBCD6-7D89-3D2C-863A-862DFB6ACD89
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticLogCollection.framework/Versions/A/DiagnosticLogCollection'
 current-version: 800
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DLCAlertTitleKey, _DLCCollectLogs, _DLCCollectLogsWithCompletionHandler, 
                        _DLCDefaultRadarComponentKey, _DLCDefaultRadarComponentVersionKey, 
                        _DLCGatheringDisplayFlagsKey, _DLCLogBacktraceWithLevel, _DLCLogBacktraceWithLevelV, 

@@ -50,18 +50,17 @@ GUI cannot be used to manipulate or list these certificates.
 .sp
 .Bl -tag -width -indent  \" Begins a tagged list 
 .It Em Card Provisioning
-In order to use smartcards with macOS, identities must be populated into Slot 9a, PIV Authentication, and 9d, Key Managment(KMK, Encryption), and optionally 9c, if signing functions such as mail are to be used.
+In order to use smartcards with macOS, identities must be populated into Slot 9a (PIV Authentication) and 9d (Key Managment), and optionally 9c, if signing functions such as e-mail signing are to be used.
 .It Em Supported Services
 .Em Authentication
-(Loginwindow, ScreenSaver, ssh, sudo, Safari, PAM Authorization, login, su, Finder)
+Login, Screen Saver, ssh, sudo, Safari, PAM Authorization, su, Finder
 .sp
-Authentication is performed using the PIV Authentication Identity.  For login, the Key management Key (9d, encryption) is used to unlock the keychain
+Authentication is performed using the PIV Authentication Identity (9a).  For login, the Key Management key (9d) is used to unlock the encrypted harddrive (Apple Silicon devices) and to unlock Keychain.
 .sp
-.Em Encryption
-(Mail, Keychain)
+.Em Encryption and Signing
+Mail and code signing
 .sp
-.Em Signing
-(Requires signing certificate- Mail, code signing)
+Requires signing certificate. 
 .sp
 Mail in macOS will use Digital Signing and Encryption Identities on an attached smartcard.  Signing and Encryption buttons will appear in the toolbar when a case-sensitive email address matches the subject or subject alternative name on a smartcard's signing or encryption certificate.
 .El

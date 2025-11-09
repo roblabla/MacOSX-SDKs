@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, VNGeneratePersonSegmentationRequestQualityLevel)
 }  NS_SWIFT_NAME(VNGeneratePersonSegmentationRequest.QualityLevel);
 
 /*!
- @brief Performs person segmentationin an image.
+ @brief Performs person segmentation on an image generating a mask.
  */
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0))
 @interface VNGeneratePersonSegmentationRequest : VNStatefulRequest

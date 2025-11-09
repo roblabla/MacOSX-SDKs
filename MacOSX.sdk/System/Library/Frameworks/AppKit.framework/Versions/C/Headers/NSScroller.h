@@ -1,7 +1,7 @@
 /*
 	NSScroller.h
 	Application Kit
-	Copyright (c) 1994-2021, Apple Inc.
+	Copyright (c) 1994-2022, Apple Inc.
 	All rights reserved.
 */
 
@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, NSScrollerKnobStyle) {
 
 @interface NSScroller : NSControl
 
-/* A subclass of NSScroller can override this method to certify that its customizations are compatible with 10.7's new iOS-like "Overlay" scroller style and behaviors.  By default, AppKit assumes that instances of NSScroller subclasses may not be compatible with the way that Overlay scrollers are presented, and falls back to the more compatible 10.6-like scroller metrics and behavior for subclassed scrollers.  The recommended override technique for a subclass "MyCustomScroller" that wants to delcare itself compatible with Overlay scroller presentation is:
+/* A subclass of NSScroller can override this method to certify that its customizations are compatible with 10.7's new iOS-like "Overlay" scroller style and behaviors.  By default, AppKit assumes that instances of NSScroller subclasses may not be compatible with the way that Overlay scrollers are presented, and falls back to the more compatible 10.6-like scroller metrics and behavior for subclassed scrollers.  The recommended override technique for a subclass "MyCustomScroller" that wants to declare itself compatible with Overlay scroller presentation is:
 
     @implementation MyCustomScroller
     ...
@@ -59,11 +59,11 @@ When it opts in in this manner, an NSScroller subclass certifies that:
 */
 @property (class, readonly, getter=isCompatibleWithOverlayScrollers) BOOL compatibleWithOverlayScrollers API_AVAILABLE(macos(10.7));
 
-/* Returns the with for scrollers of the receiving class, given the specified controlSize and scrollerStyle.  This method should be used in preference to +scrollerWidthForControlSize:, which assumes a scrollerStyle of NSScrollerStyleLegacy, and +scrollerWidth:, which assumes that and a controlSize of NSRegularControlSize.
+/* Returns the width for scrollers of the receiving class, given the specified controlSize and scrollerStyle.  This method should be used in preference to +scrollerWidthForControlSize:, which assumes a scrollerStyle of NSScrollerStyleLegacy, and +scrollerWidth:, which assumes that and a controlSize of NSRegularControlSize.
 */
 + (CGFloat)scrollerWidthForControlSize:(NSControlSize)controlSize scrollerStyle:(NSScrollerStyle)scrollerStyle API_AVAILABLE(macos(10.7));
 
-/* Returns the style of scrollers that applications should use wherever possible.  This value is determined by the Appearance preference panel's "Show scroll bars" setting for the current user, and -- when the user's prefernce is set to "Automatically based on input device" -- by the set of built-in and connected pointing devices and the user's scroll capability preference settings for them.  The preferredScrollerStyle will therefore change over time, and applications should be prepared to adapt their user interfaces to the new scroller style if needed.  In most cases, the updating is automatic: When the preferredScrollerStyle changes, AppKit notifies all NSScrollView instances, sending -setScrollerStyle: to each with the new style, which causees each NSScrollView to automatically re-tile (update its layout) to adapt to the new scroller style.  Some NSScrollView instances may refuse the new scroller style setting if they cannot accommodate it for compatibility reasons (presence of accessory views or legacy scroller subclasses prevent use of Overlay scrollers), but most instances will switch to the specified new preferredScrollerStyle.  Clients that wish to be notified of changes to +preferredScrollerStyle's return value can subscribe to NSPreferredScrollerStyleDidChangeNotification (declared below).
+/* Returns the style of scrollers that applications should use wherever possible.  This value is determined by the Appearance preference panel's "Show scroll bars" setting for the current user, and -- when the user's preference is set to "Automatically based on input device" -- by the set of built-in and connected pointing devices and the user's scroll capability preference settings for them.  The preferredScrollerStyle will therefore change over time, and applications should be prepared to adapt their user interfaces to the new scroller style if needed.  In most cases, the updating is automatic: When the preferredScrollerStyle changes, AppKit notifies all NSScrollView instances, sending -setScrollerStyle: to each with the new style, which causes each NSScrollView to automatically re-tile (update its layout) to adapt to the new scroller style.  Some NSScrollView instances may refuse the new scroller style setting if they cannot accommodate it for compatibility reasons (presence of accessory views or legacy scroller subclasses prevent use of Overlay scrollers), but most instances will switch to the specified new preferredScrollerStyle.  Clients that wish to be notified of changes to +preferredScrollerStyle's return value can subscribe to NSPreferredScrollerStyleDidChangeNotification (declared below).
 */
 @property (class, readonly) NSScrollerStyle preferredScrollerStyle API_AVAILABLE(macos(10.7));
 
@@ -110,7 +110,7 @@ typedef NS_ENUM(NSUInteger, NSScrollerArrow) {
 
 @interface NSScroller(NSDeprecated)
 
-/* Returns the with for scrollers of the receiving class, given the specified controlSize and assuming a scrollerStyle of NSScrollerStyleLegacy.
+/* Returns the width for scrollers of the receiving class, given the specified controlSize and assuming a scrollerStyle of NSScrollerStyleLegacy.
  */
 + (CGFloat)scrollerWidthForControlSize:(NSControlSize)controlSize API_DEPRECATED("Use +scrollerWidthForControlSize:scrollerStyle: instead", macos(10.0,10.7));
 

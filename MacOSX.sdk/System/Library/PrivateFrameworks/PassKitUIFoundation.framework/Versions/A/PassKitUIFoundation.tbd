@@ -3,23 +3,28 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C84DEE90-C6AE-3A40-8753-349904C1BFE3
+    value:           8CD323CB-57DB-3666-9C2B-B479CE51121F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6DDEC687-A100-3E1C-B526-9EEE3D5F9971
+    value:           3BEA3651-D8A9-3E96-9778-8E5B786CBE71
 install-name:    '/System/Library/PrivateFrameworks/PassKitUIFoundation.framework/Versions/A/PassKitUIFoundation'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _PKGlyphViewSize ]
-    objc-classes:    [ PKAppleCashCardView, PKAppleHomeKeyCardView, PKAuthenticator, 
-                       PKAuthenticatorEvaluationContext, PKAuthenticatorEvaluationRequest, 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _PKAuthenticatorMaximumBiometryFailures, _PKAuthenticatorMaximumBiometryFailuresForAMP, 
+                       _PKGlyphViewSize, _PKTextureLoaderResultCreateDefaultPrivate2DTexture, 
+                       _PKTextureLoaderResultGetSRGBMatchedFormat, _PKUserInterface ]
+    objc-classes:    [ PKAppleBalanceCardView, PKAppleCashCardView, PKAppleHomeKeyCardView, 
+                       PKAuthenticator, PKAuthenticatorEvaluationContext, PKAuthenticatorEvaluationRequest, 
                        PKAuthenticatorEvaluationResponse, PKAuthenticatorSharedRootContext, 
                        PKCategoryVisualizationCardView, PKFingerprintGlyphView, PKGlyphView, 
                        PKMetalRenderLoop, PKPassFaceViewCategoryVisualizationRendererState, 
-                       PKPassFaceViewRendererState, PKPaymentRemoteInstrumentThumbnailView, 
+                       PKPassFaceViewRendererState, PKPayLaterCardRenderer, PKPayLaterCardRendererInstance, 
+                       PKPayLaterCardView, PKPaymentRemoteInstrumentThumbnailView, 
+                       PKPaymentSetupAssistantCredential, PKPaymentSetupAssistantProvisioningContext, 
                        PKPeerPayment3DCharacter, PKPeerPayment3DScene, PKPeerPayment3DStore, 
                        PKPeerPayment3DTextView, PKPhoneGlyphLayer, PKRenderLoop, 
-                       PKTexturedCardRenderer, PKTexturedCardView, PKUISpringAnimationFactory ]
+                       PKTextureLoadDescriptor, PKTextureLoader, PKTexturedCardRenderer, 
+                       PKTexturedCardView, PKUISpringAnimationFactory ]
     objc-ivars:      [ PKRenderLoop._delegate, PKRenderLoop._drawing, PKRenderLoop._invalidated ]
 ...

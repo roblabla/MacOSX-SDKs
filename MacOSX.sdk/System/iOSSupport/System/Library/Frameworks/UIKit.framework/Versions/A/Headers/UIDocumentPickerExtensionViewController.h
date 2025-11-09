@@ -11,7 +11,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIDocumentPickerViewController.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_EXTERN API_DEPRECATED("Use enumeration based NSFileProviderExtension instead", ios(8.0, 14.0))  API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIDocumentPickerExtensionViewController : UIViewController
@@ -40,7 +40,7 @@ UIKIT_EXTERN API_DEPRECATED("Use enumeration based NSFileProviderExtension inste
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIDocumentPickerExtensionViewController.h>

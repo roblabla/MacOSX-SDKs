@@ -24,6 +24,7 @@
 
 
 #include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -126,7 +127,7 @@ enum {
   writeReference                = kWriteReference, /* Obsolete name*/
   readReference                 = kReadReference, /* Obsolete name*/
   fetchReference                = kFetchReference /* Obsolete name*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 
 typedef unsigned long                   MemoryReferenceKind;
@@ -156,7 +157,7 @@ enum {
   kTaskTerminationException     = 15,   /* Obsolete*/
   kTaskCreationException        = 16,   /* Obsolete*/
   kDataAlignmentException       = 17    /* May occur when a task is in little endian mode or created with kMPTaskTakesAllExceptions.*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 #if OLDROUTINENAMES
 enum {
@@ -177,7 +178,7 @@ enum {
   stackOverflowException        = kStackOverflowException, /* Obsolete name*/
   terminationException          = kTaskTerminationException, /* Obsolete name*/
   kTerminationException         = kTaskTerminationException /* Obsolete name*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 #endif  /* OLDROUTINENAMES */
 

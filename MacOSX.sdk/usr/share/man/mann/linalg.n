@@ -1,5 +1,5 @@
 '\"
-'\" Generated from file '/AppleInternal/Library/BuildRoots/66382bca-8bca-11ec-aade-6613bcf0e2ee/Library/Caches/com.apple.xbs/Sources/tcl/tcl_ext/tcllib/tcllib/modules/math/linalg.man' by tcllib/doctools with format 'nroff'
+'\" Generated from file '/AppleInternal/Library/BuildRoots/810eba08-405a-11ed-86e9-6af958a02716/Library/Caches/com.apple.xbs/Sources/tcl/tcl_ext/tcllib/tcllib/modules/math/linalg.man' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) 2004-2008 Arjen Markus <arjenmarkus@users.sourceforge.net>
 '\" Copyright (c) 2004 Ed Hume <http://www.hume.com/contact.us.htm>
 '\" Copyright (c) 2008 Michael Buadin <relaxkmike@users.sourceforge.net>

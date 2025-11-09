@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           28254F44-5370-33ED-A9CC-CEA7A2E890EC
+    value:           33DD3545-3310-32C3-97BC-367B802EC229
   - target:          x86_64-maccatalyst
-    value:           28254F44-5370-33ED-A9CC-CEA7A2E890EC
+    value:           33DD3545-3310-32C3-97BC-367B802EC229
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A425ADAC-C7A1-34B1-8076-99A1A8234D34
+    value:           3961672A-B2E9-3E81-8991-96CD7D5CC857
   - target:          arm64e-maccatalyst
-    value:           A425ADAC-C7A1-34B1-8076-99A1A8234D34
+    value:           3961672A-B2E9-3E81-8991-96CD7D5CC857
 install-name:    '/usr/lib/liblangid.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _langid_consume_string, _langid_create, _langid_create_with_datapath, 
                        _langid_dispose, _langid_global_dispose, _langid_highest_score, 
                        _langid_identify, _langid_identify_bufsize, _langid_identify_withbuf, 

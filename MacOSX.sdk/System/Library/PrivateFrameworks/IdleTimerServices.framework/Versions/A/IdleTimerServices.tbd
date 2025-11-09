@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E186BCB5-CBDD-3212-BA31-3AEA916FC658
+    value:           7626E6E5-971F-3D2C-9E92-BB1148444863
   - target:          x86_64-maccatalyst
-    value:           E186BCB5-CBDD-3212-BA31-3AEA916FC658
+    value:           7626E6E5-971F-3D2C-9E92-BB1148444863
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3138B6C3-E80E-3EBB-9BC8-C2DAA84C55DF
+    value:           6200E090-EE6A-3343-8018-1C77AF2417C2
   - target:          arm64e-maccatalyst
-    value:           3138B6C3-E80E-3EBB-9BC8-C2DAA84C55DF
+    value:           6200E090-EE6A-3343-8018-1C77AF2417C2
 install-name:    '/System/Library/PrivateFrameworks/IdleTimerServices.framework/Versions/A/IdleTimerServices'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ITIdleTimerServicesConfigurationErrorDomain, _ITLogIdleTimer, 
                        _ITLoggingSubsystem, _IdleTimerServicesVersionNumber, _IdleTimerServicesVersionString ]
     objc-classes:    [ ITIdleTimerAssertion, ITIdleTimerConfiguration, ITIdleTimerIOKitHandler, 

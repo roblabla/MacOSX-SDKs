@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3BF83ED6-C35A-391F-90DF-10E1FC4083D6
+    value:           1F5F0606-2AED-3D40-BCAD-4E68DBB1B777
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CFCD5CFB-2D78-3F36-8A8B-1EE6043B753D
+    value:           90F060CE-9FCC-3AF4-AC6E-421D4C563ACC
 install-name:    '/System/Library/PrivateFrameworks/AccountPolicy.framework/Versions/A/AccountPolicy'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/AccountPolicy.framework/Frameworks/CFAccountPolicy.framework/Versions/A/CFAccountPolicy' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _APCreateError, _APCreateErrorWithEvalDetails, _kAPErrorDomain, 
                        _kAPHelperName, _kAPMessageDataKeyCacheContents, _kAPMessageDataKeyEvaluationDetails, 
                        _kAPMessageDataKeyExpiresIn, _kAPMessageDataKeyFailureReason, 
@@ -51,14 +51,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4610CA94-6B34-3800-B80C-9EC012B135AB
+    value:           84745B2F-465F-38C7-84B1-8773B42D96FC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           75D9A002-691D-3446-869F-9A6BC68D0CC9
+    value:           19F851C5-8D11-3129-B790-154538697C73
 install-name:    '/System/Library/PrivateFrameworks/AccountPolicy.framework/Frameworks/CFAccountPolicy.framework/Versions/A/CFAccountPolicy'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _APAttributesUsedByPolicies, _APAuthenticationAllowed, _APCategoryAndIdentifierForLegacyPolicyName, 
                        _APCopyLocalizedEvaluationDetails, _APCopyLocalizedPasswordContentSummary, 
                        _APInvalidateCacheForPolicySet, _APLegacyPoliciesWithPolicySet, 

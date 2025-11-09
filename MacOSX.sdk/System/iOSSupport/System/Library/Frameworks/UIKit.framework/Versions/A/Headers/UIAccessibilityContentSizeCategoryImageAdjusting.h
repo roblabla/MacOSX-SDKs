@@ -10,11 +10,15 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIImageView.h>
 #import <UIKit/UIButton.h>
+#if __has_include(<UIFoundation/NSTextAttachment.h>)
+#import <UIFoundation/NSTextAttachment.h>
+#else
 #import <UIKit/NSTextAttachment.h>
+#endif
 
 // These should be used in conjunction with the "Preserve vector data" checkbox for an asset catalog asset, to allow smooth scaling of symbolic glyphs.
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_EXTERN API_AVAILABLE(ios(11.0),tvos(11.0))
 @protocol UIAccessibilityContentSizeCategoryImageAdjusting <NSObject>
@@ -40,7 +44,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0),tvos(11.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIAccessibilityContentSizeCategoryImageAdjusting.h>

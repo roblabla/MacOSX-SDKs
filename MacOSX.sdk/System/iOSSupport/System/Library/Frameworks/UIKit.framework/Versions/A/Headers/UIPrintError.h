@@ -1,4 +1,4 @@
-#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<UIKitCore/UIPrintError.h>)
+#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<PrintKitUI/UIPrintError.h>)
 //
 //  UIPrintError.h
 //  UIKit
@@ -23,5 +23,5 @@ typedef NS_ERROR_ENUM(UIPrintErrorDomain, UIPrintErrorCode) {
 NS_ASSUME_NONNULL_END
 
 #else
-#import <UIKitCore/UIPrintError.h>
+#import <PrintKitUI/UIPrintError.h>
 #endif

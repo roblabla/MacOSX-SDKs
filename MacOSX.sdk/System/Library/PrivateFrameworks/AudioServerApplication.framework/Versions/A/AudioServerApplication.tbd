@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1AF4B0A5-3143-350A-91E3-5E1EBEFDF6FF
+    value:           0FD5C6D0-607B-3ADB-8BA0-56AED2C85E3D
   - target:          x86_64-maccatalyst
-    value:           1AF4B0A5-3143-350A-91E3-5E1EBEFDF6FF
+    value:           0FD5C6D0-607B-3ADB-8BA0-56AED2C85E3D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E0B9A195-375C-3E6D-A87F-8E15FB68E8D8
+    value:           6F38ABCF-3A36-38C1-8388-D83ED699EF5E
   - target:          arm64e-maccatalyst
-    value:           E0B9A195-375C-3E6D-A87F-8E15FB68E8D8
+    value:           6F38ABCF-3A36-38C1-8388-D83ED699EF5E
 install-name:    '/System/Library/PrivateFrameworks/AudioServerApplication.framework/Versions/A/AudioServerApplication'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ ASAAudioDevice, ASAAudioFormat, ASABooleanControl, ASABox, 
                        ASAClockDevice, ASAControl, ASACoreAudio, ASALevelControl, 
                        ASAObject, ASAPlaythrough, ASAPlugin, ASASelectorControl, 
-                       ASASliderControl, ASAStream ]
+                       ASASliderControl, ASAStereoPanControl, ASAStream ]
 ...

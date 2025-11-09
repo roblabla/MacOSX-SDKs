@@ -119,7 +119,7 @@ All environment variables prefixed with MTL_SHADER_VALIDATION only apply when MT
 Any value other than 0 will enable GPU validation.
 .br
 Sets the behavior of API usage errors. Using a value of "4" for this setting may result
-in undefined behavior as otherwise fatal errors wil be ignored.
+in undefined behavior as otherwise fatal errors will be ignored.
 .It Sy MTL_SHADER_VALIDATION_ENABLE_ERROR_REPORTING
 .br
 Defaults to 1
@@ -151,11 +151,23 @@ a nil texture object is determined by
 .br
 Defaults to 1
 .br
-Setting this value to "0" will disable instrumentation of threadgroup memory access
+Setting this value to "0" will disable instrumentation of threadgroup memory access.
 The result of accessing invalid threadgroup memory on the GPU will be undefined.
 .sp
 If this value is set to any non-zero value, shader validation will instrument
-all threaadgroup memory accesses and result of accessing invalid memory is determined by
+all threadgroup memory accesses and result of accessing invalid memory is determined by
+.Ev MTL_SHADER_VALIDATION_FAIL_MODE
+.It Sy MTL_SHADER_VALIDATION_STACK_OVERFLOW
+.br
+Defaults to 1
+.br
+Setting this value to "0" will disable instrumentation of indirect and recursive function calls.
+The result of exceeding "maxCallStackDepth" will be undefined.
+.sp
+If this value is set to any non-zero value, shader validation will instrument
+all indirect calls (calls by function pointer, visible functions, intersection functions, dylib calls)
+and recursive calls. If the call stack depth for such functions exeecds the value set for 
+"maxCallStackDepth" for that stage, an error will be raised and the function call will be skipped.
 .It Sy MTL_SHADER_VALIDATION_COMPILER_INLINING
 .br
 Defaults to "default"

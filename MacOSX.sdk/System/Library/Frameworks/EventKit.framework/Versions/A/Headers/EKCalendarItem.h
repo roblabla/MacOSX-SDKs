@@ -68,7 +68,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 /*!
     @property title
     @abstract The title of this calendar item.
-    @discussion This will be nill for new calendar items until you set it.
+    @discussion This will be an empty string for new calendar items until you set it.
  */
 @property(nonatomic, copy, null_unspecified) NSString *title;
 @property(nonatomic, copy, nullable) NSString *location;

@@ -2,7 +2,7 @@
  *  hv_vcpu.h
  *  Hypervisor Framework
  *
- *  Copyright (c) 2018-2020 Apple Inc. All rights reserved.
+ *  Copyright (c) 2018-2022 Apple Inc. All rights reserved.
  */
 
 #pragma once
@@ -26,7 +26,7 @@ __BEGIN_DECLS
  * @result     0 on success or error code
  * @discussion Each thread can only have one vCPU associated at a time.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_create(hv_vcpu_t *vcpu, hv_vcpu_exit_t * _Nullable * _Nonnull exit,
@@ -40,7 +40,7 @@ hv_vcpu_create(hv_vcpu_t *vcpu, hv_vcpu_exit_t * _Nullable * _Nonnull exit,
  * @discussion
  *             Must be called by the owning thread
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_destroy(hv_vcpu_t vcpu);
@@ -55,7 +55,7 @@ hv_vcpu_destroy(hv_vcpu_t vcpu);
  * @discussion
  *             Must be called by the owning thread
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_get_reg(hv_vcpu_t vcpu, hv_reg_t reg, uint64_t *value);
@@ -70,7 +70,7 @@ hv_vcpu_get_reg(hv_vcpu_t vcpu, hv_reg_t reg, uint64_t *value);
  * @discussion
  *             Must be called by the owning thread
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_set_reg(hv_vcpu_t vcpu, hv_reg_t reg, uint64_t value);
@@ -85,7 +85,7 @@ hv_vcpu_set_reg(hv_vcpu_t vcpu, hv_reg_t reg, uint64_t value);
  * @discussion
  *             Must be called by the owning thread
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_get_simd_fp_reg(hv_vcpu_t vcpu, hv_simd_fp_reg_t reg, hv_simd_fp_uchar16_t *value);
@@ -100,7 +100,7 @@ hv_vcpu_get_simd_fp_reg(hv_vcpu_t vcpu, hv_simd_fp_reg_t reg, hv_simd_fp_uchar16
  * @discussion
  *             Must be called by the owning thread
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_set_simd_fp_reg(hv_vcpu_t vcpu, hv_simd_fp_reg_t reg, hv_simd_fp_uchar16_t value);
@@ -115,7 +115,7 @@ hv_vcpu_set_simd_fp_reg(hv_vcpu_t vcpu, hv_simd_fp_reg_t reg, hv_simd_fp_uchar16
  * @discussion
  *             Must be called by the owning thread
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_get_sys_reg(hv_vcpu_t vcpu, hv_sys_reg_t reg, uint64_t *value);
@@ -130,7 +130,7 @@ hv_vcpu_get_sys_reg(hv_vcpu_t vcpu, hv_sys_reg_t reg, uint64_t *value);
  * @discussion
  *             Must be called by the owning thread
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_set_sys_reg(hv_vcpu_t vcpu, hv_sys_reg_t reg, uint64_t value);
@@ -144,7 +144,7 @@ hv_vcpu_set_sys_reg(hv_vcpu_t vcpu, hv_sys_reg_t reg, uint64_t value);
  * @discussion
  *             Must be called by the owning thread.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_get_pending_interrupt(hv_vcpu_t vcpu, hv_interrupt_type_t type, bool *pending);
@@ -160,7 +160,7 @@ hv_vcpu_get_pending_interrupt(hv_vcpu_t vcpu, hv_interrupt_type_t type, bool *pe
  *             The pending interrupts automatically cleared after hv_vcpu_run returns. It is expected that
  *             hv_vcpu_set_pending_interrupt be called before every hv_vcpu_run to set pending interrupts.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_set_pending_interrupt(hv_vcpu_t vcpu, hv_interrupt_type_t type, bool pending);
@@ -173,7 +173,7 @@ hv_vcpu_set_pending_interrupt(hv_vcpu_t vcpu, hv_interrupt_type_t type, bool pen
  * @discussion
  *             Must be called by the owning thread.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_get_trap_debug_exceptions(hv_vcpu_t vcpu, bool *value);
@@ -186,7 +186,7 @@ hv_vcpu_get_trap_debug_exceptions(hv_vcpu_t vcpu, bool *value);
  * @discussion
  *             Must be called by the owning thread.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_set_trap_debug_exceptions(hv_vcpu_t vcpu, bool value);
@@ -201,7 +201,7 @@ hv_vcpu_set_trap_debug_exceptions(hv_vcpu_t vcpu, bool value);
  *             This includes the DBGBCR<n>_EL1, DBGBVR<n>_EL1, DBGWCR<n>_EL1,
  *             DBGWVR<n>_EL1 and MDSCR_EL1 registers.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_get_trap_debug_reg_accesses(hv_vcpu_t vcpu, bool *value);
@@ -216,7 +216,7 @@ hv_vcpu_get_trap_debug_reg_accesses(hv_vcpu_t vcpu, bool *value);
  *             This includes the DBGBCR<n>_EL1, DBGBVR<n>_EL1, DBGWCR<n>_EL1,
  *             DBGWVR<n>_EL1 and MDSCR_EL1 registers.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_set_trap_debug_reg_accesses(hv_vcpu_t vcpu, bool value);
@@ -232,7 +232,7 @@ hv_vcpu_set_trap_debug_reg_accesses(hv_vcpu_t vcpu, bool value);
  *
  *             Must be called by the owning thread
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_run(hv_vcpu_t vcpu);
@@ -247,7 +247,7 @@ hv_vcpu_run(hv_vcpu_t vcpu);
  *             If a vcpu is not running, the next time hv_vcpu_run is called for the corresponding
  *             vcpu, it will return immediately without entering the guest.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpus_exit(hv_vcpu_t *vcpus, uint32_t vcpu_count);
@@ -262,7 +262,7 @@ hv_vcpus_exit(hv_vcpu_t *vcpus, uint32_t vcpu_count);
  * @discussion
  *             Must be called by the owning thread
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_get_exec_time(hv_vcpu_t vcpu, uint64_t *time);
@@ -274,7 +274,7 @@ hv_vcpu_get_exec_time(hv_vcpu_t vcpu, uint64_t *time);
  * @param      vtimer_is_masked Value of the mask.
  * @result     0 on success or error code.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_get_vtimer_mask(hv_vcpu_t vcpu, bool *vtimer_is_masked);
@@ -302,7 +302,7 @@ hv_vcpu_get_vtimer_mask(hv_vcpu_t vcpu, bool *vtimer_is_masked);
  *             when emulating a GIC, this function should be called when
  *             deactivating an interrupt whose ID matches that of the VTimer.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_set_vtimer_mask(hv_vcpu_t vcpu, bool vtimer_is_masked);
@@ -315,7 +315,7 @@ hv_vcpu_set_vtimer_mask(hv_vcpu_t vcpu, bool vtimer_is_masked);
  * @result     0 on success or error code.
  * @seealso    hv_vcpu_set_vtimer_offset
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_get_vtimer_offset(hv_vcpu_t vcpu, uint64_t *vtimer_offset);
@@ -331,7 +331,7 @@ hv_vcpu_get_vtimer_offset(hv_vcpu_t vcpu, uint64_t *vtimer_offset);
  *
  *             CNTVCT_EL0 = mach_absolute_time() - vtimer_offset.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vcpu_set_vtimer_offset(hv_vcpu_t vcpu, uint64_t vtimer_offset);

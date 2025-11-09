@@ -3,7 +3,7 @@
 //  UIFontDescriptor.h
 //  UIKit
 //
-//  Copyright (c) 2013-2018 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,7 +11,7 @@
 #import <UIKit/UIKitDefines.h>
 
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_OPTIONS(uint32_t, UIFontDescriptorSymbolicTraits) {
     /* Symbolic Font Traits (Typeface info - lower 16 bits of UIFontDescriptorSymbolicTraits) */
@@ -52,6 +52,7 @@ typedef NSString * UIFontDescriptorAttributeName NS_TYPED_ENUM;
 typedef NSString * UIFontDescriptorTraitKey NS_TYPED_ENUM;
 typedef NSString * UIFontDescriptorFeatureKey NS_TYPED_EXTENSIBLE_ENUM;
 typedef CGFloat UIFontWeight NS_TYPED_EXTENSIBLE_ENUM;
+typedef CGFloat UIFontWidth NS_TYPED_EXTENSIBLE_ENUM;
 
 typedef NSString * UIFontDescriptorSystemDesign NS_TYPED_ENUM;
 UIKIT_EXTERN UIFontDescriptorSystemDesign const UIFontDescriptorSystemDesignDefault API_AVAILABLE(ios(13.0), watchos(5.2), tvos(13.0));
@@ -61,7 +62,7 @@ UIKIT_EXTERN UIFontDescriptorSystemDesign const UIFontDescriptorSystemDesignMono
 
 @class NSMutableDictionary, NSDictionary, NSArray, NSSet, UITraitCollection;
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0))
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_SENDABLE
 @interface UIFontDescriptor : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init;
@@ -148,6 +149,13 @@ UIKIT_EXTERN const UIFontWeight UIFontWeightBold API_AVAILABLE(ios(8.2));
 UIKIT_EXTERN const UIFontWeight UIFontWeightHeavy API_AVAILABLE(ios(8.2));
 UIKIT_EXTERN const UIFontWeight UIFontWeightBlack API_AVAILABLE(ios(8.2));
 
+// Suggested values for use with UIFontWidthTrait.
+// Beware that most fonts will _not_ have variants available in all these widths!
+UIKIT_EXTERN const UIFontWidth UIFontWidthCondensed API_AVAILABLE(ios(16.0));
+UIKIT_EXTERN const UIFontWidth UIFontWidthStandard API_AVAILABLE(ios(16.0));
+UIKIT_EXTERN const UIFontWidth UIFontWidthExpanded API_AVAILABLE(ios(16.0));
+UIKIT_EXTERN const UIFontWidth UIFontWidthCompressed API_AVAILABLE(ios(16.0));
+
 // Font feature keys
 #if __swift__
 // Allows for better FeatureKey names for Swift clients
@@ -176,7 +184,7 @@ UIKIT_EXTERN UIFontTextStyle const UIFontTextStyleFootnote API_AVAILABLE(ios(7.0
 UIKIT_EXTERN UIFontTextStyle const UIFontTextStyleCaption1 API_AVAILABLE(ios(7.0));
 UIKIT_EXTERN UIFontTextStyle const UIFontTextStyleCaption2 API_AVAILABLE(ios(7.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 
 #else

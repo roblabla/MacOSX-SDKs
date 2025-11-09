@@ -259,7 +259,7 @@ IOParseBootArgString(
  *   @param str printf-like arguments to be logged, along with the backtrace of the caller.
  */
 void __attribute__((noinline, not_tail_called))
-OSReportWithBacktrace(const char *str, ...);
+OSReportWithBacktrace(const char *str, ...) __printflike(1, 2);
 
 /*! @function OSSafeReleaseNULL
  *  @abstract Release an object if not <code>NULL</code>, then set it to <code>NULL</code>.
@@ -554,10 +554,41 @@ IORecursiveConditionLockHaveLock(struct IORecursiveConditionLock * lock);
 bool
 IORecursiveConditionLockTryLock(struct IORecursiveConditionLock * lock);
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 /*
  * Read random bytes.
  */
 void read_random(void* buffer, size_t numBytes);
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/*! @function IOThreadLocalStorageKeyCreate
+ *   @abstract Create a key used to access thread local storage for all threads in the current process
+ *   @param key Pointer to the allocated key result
+ *   @result kIOReturnSuccess or kIOReturnNoMemory if the process has created more than PTHREAD_KEYS_MAX keys. */
+kern_return_t
+IOThreadLocalStorageKeyCreate(uint64_t * key);
+
+/*! @function IOThreadLocalStorageKeyDelete
+ *   @abstract Free a key created with IOThreadLocalStorageKeyCreate.
+ *   @result kIOReturnSuccess if the key is valid, otherwise kIOReturnBadArgument. */
+kern_return_t
+IOThreadLocalStorageKeyDelete(uint64_t key);
+
+/*! @function IOThreadLocalStorageSet
+ *  @abstract Set a thread local storage value for the current thread
+ *  @param key Valid key created by IOThreadLocalStorageKeyCreate
+ *  @param value Opaque value not interpreted. */
+kern_return_t
+IOThreadLocalStorageSet(uint64_t key, const void * value);
+
+/*! @function IOThreadLocalStorageGet
+ *  @abstract Retrieve thread local storage value set by IOThreadLocalStorageSet
+ *  @return value Opaque value if one has been set for the current thread and key
+ *                with IOThreadLocalStorageSet, otherwise NULL. */
+void *
+IOThreadLocalStorageGet(uint64_t key);
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

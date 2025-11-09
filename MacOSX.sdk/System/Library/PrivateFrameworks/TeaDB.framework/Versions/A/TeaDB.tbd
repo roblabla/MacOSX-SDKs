@@ -4,48 +4,52 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F715709C-CC08-3215-B04B-7BDDF6CF3092
+    value:           C31AB291-1EF9-3874-85A2-13A638E2D759
   - target:          x86_64-maccatalyst
-    value:           F715709C-CC08-3215-B04B-7BDDF6CF3092
+    value:           C31AB291-1EF9-3874-85A2-13A638E2D759
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A1B9325-F23F-3E82-A71B-9557F52DE006
+    value:           7D54479C-3C20-3CF5-BF43-F4C6614255F1
   - target:          arm64e-maccatalyst
-    value:           7A1B9325-F23F-3E82-A71B-9557F52DE006
+    value:           7D54479C-3C20-3CF5-BF43-F4C6614255F1
 install-name:    '/System/Library/PrivateFrameworks/TeaDB.framework/Versions/A/TeaDB'
-current-version: 588
+current-version: 701
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ ArticleNotificationExtension, ArticleNotificationServiceExtension, 
                        Feldspar, Feldspar Tests, Kinsale, KinsaleAnalytics, KinsaleUI, 
-                       MarketingNotificationExtension, NVCDemo, News, NewsAds, NewsAdsTests, 
-                       NewsAnalytics, NewsAnalyticsTests, NewsAnalyticsUpload, NewsArticleQuickLook, 
-                       NewsArticleViewer, NewsArticles, NewsArticlesTests, NewsDES, 
-                       NewsDESTests, NewsEngagement, NewsEngagementCollector, NewsEngagementTests, 
+                       MarketingNotificationExtension, NVCDemo, NanoNewsWidgetExtension, 
+                       News, NewsAds, NewsAdsTests, NewsAnalytics, NewsAnalyticsTests, 
+                       NewsAnalyticsUpload, NewsArticleQuickLook, NewsArticleViewer, 
+                       NewsArticles, NewsArticlesTests, NewsDES, NewsDESTests, NewsDiagnosticExtension, 
+                       NewsEngagement, NewsEngagementCollector, NewsEngagementTests, 
                        NewsFeed, NewsFeedTests, NewsFormat, NewsFormatTests, NewsInternalExtras, 
-                       NewsInternalSettings, NewsPersonalization, NewsServices, NewsServicesInternal, 
-                       NewsSettings, NewsSubscription, NewsSubscriptionTests, NewsTag, 
-                       NewsToday, NewsToday2, NewsTodayIntents, NewsUI, NewsUI2, 
-                       NewsUI2Tests, NewsWidgetIntents, OpenInNews, Silex, SilexDebugger, 
+                       NewsInternalSettings, NewsKit, NewsKitDemo, NewsKitTests, 
+                       NewsPersonalization, NewsServices, NewsServicesInternal, NewsSettings, 
+                       NewsSubscription, NewsSubscriptionTests, NewsTag, NewsToday, 
+                       NewsToday2, NewsTodayIntents, NewsUI, NewsUI2, NewsUI2Tests, 
+                       NewsUITests, NewsWidgetIntents, OpenInNews, Silex, SilexDebugger, 
                        SilexWeb, Stocks, StocksAnalytics, StocksAnalyticsTests, StocksCore, 
-                       StocksCoreTests, StocksDetailIntents, StocksKit, StocksKitTests, 
-                       StocksTests, StocksToday, StocksUI, StocksUITests, StocksWidget, 
-                       TeaCharts, TeaChartsTests, TeaDB, TeaDBTests, TeaDemo, TeaFoundationTests, 
-                       TeaSettings, TeaSettingsTests, TeaSnappy, TeaSnappyTests, 
-                       TeaTemplate, TeaTemplateTests, TeaUI, TeaUITests, Weather, 
-                       WeatherAnalytics, WeatherCharts, WeatherCore, WeatherCoreTests, 
-                       WeatherDaemon, WeatherDaemonTests, WeatherDemo, WeatherDiagnosticExtension, 
-                       WeatherIntents, WeatherKit, WeatherKitTests, WeatherUI, WeatherUITests, 
-                       WeatherUnitTests, WeatherWidget, WeatherWidgetExtension, com.apple.news, 
-                       newsd, weatherd ]
+                       StocksCoreTests, StocksDetailIntents, StocksDiagnosticExtension, 
+                       StocksKit, StocksKitTests, StocksTests, StocksToday, StocksUI, 
+                       StocksUITests, StocksWidget, TeaCharts, TeaChartsTests, TeaDB, 
+                       TeaDBTests, TeaDemo, TeaFoundationTests, TeaSettings, TeaSettingsTests, 
+                       TeaSnappy, TeaSnappyTests, TeaTemplate, TeaTemplateTests, 
+                       TeaUI, TeaUITests, Weather, WeatherAnalytics, WeatherCharts, 
+                       WeatherCore, WeatherCore2, WeatherCore2Tests, WeatherCoreTests, 
+                       WeatherDaemon, WeatherDaemonMemoryTests, WeatherDaemonTests, 
+                       WeatherDemo, WeatherDiagnosticExtension, WeatherIntents, WeatherKit, 
+                       WeatherKitTests, WeatherMaps, WeatherMapsTests, WeatherNotifications, 
+                       WeatherUI, WeatherUITests, WeatherUnitTests, WeatherWidget, 
+                       WeatherWidgetExtension, com.apple.news, newsd, weatherd ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation4DataV5TeaDB10ColumnTypeADMc', '_$s10Foundation4DataV5TeaDB10ColumnTypeADWP', 
                        '_$s10Foundation4DataV5TeaDB14QueryValueTypeADMc', '_$s10Foundation4DataV5TeaDB14QueryValueTypeADWP', 
                        '_$s10Foundation4DataV5TeaDB18StatementChainTypeADMc', '_$s10Foundation4DataV5TeaDB18StatementChainTypeADWP', 
@@ -238,6 +242,7 @@ exports:
                        '_$s5TeaDB4SaveC6entityyyxKFTq', '_$s5TeaDB4SaveCMa', '_$s5TeaDB4SaveCMn', 
                        '_$s5TeaDB4SaveCMo', '_$s5TeaDB4SaveCMu', '_$s5TeaDB4SaveCfD', 
                        '_$s5TeaDB4SaveCfd', '_$s5TeaDB5QueryC3allSayxGyKFTj', '_$s5TeaDB5QueryC3allSayxGyKFTq', 
+                       '_$s5TeaDB5QueryC3allySayxGAA7OrderByOKFTj', '_$s5TeaDB5QueryC3allySayxGAA7OrderByOKFTq', 
                        '_$s5TeaDB5QueryC5first7orderByxSgAA05OrderF0O_tKFTj', '_$s5TeaDB5QueryC5first7orderByxSgAA05OrderF0O_tKFTq', 
                        '_$s5TeaDB5QueryC5first_7orderByxSgAA10ExpressionO_AA05OrderF0OSgtKFTj', 
                        '_$s5TeaDB5QueryC5first_7orderByxSgAA10ExpressionO_AA05OrderF0OSgtKFTq', 
@@ -298,21 +303,21 @@ exports:
                        '_$s5TeaDB6ColumnCMu', '_$s5TeaDB6ColumnCfD', '_$s5TeaDB6ColumnCfd', 
                        '_$s5TeaDB6ColumnCyxGSEAAMc', '_$s5TeaDB6ColumnCyxGSeAAMc', 
                        '_$s5TeaDB6ColumnCyxGs23CustomStringConvertibleAAMc', '_$s5TeaDB6CreateC5table11ifNotExistsySb_tKFTj', 
-                       '_$s5TeaDB6CreateC5table11ifNotExistsySb_tKFTq', '_$s5TeaDB6CreateCMa', 
-                       '_$s5TeaDB6CreateCMn', '_$s5TeaDB6CreateCMo', '_$s5TeaDB6CreateCMu', 
-                       '_$s5TeaDB6CreateCfD', '_$s5TeaDB6CreateCfd', '_$s5TeaDB6DeleteC2by2idySS_tKFTj', 
-                       '_$s5TeaDB6DeleteC2by2idySS_tKFTq', '_$s5TeaDB6DeleteC3allyyKFTj', 
-                       '_$s5TeaDB6DeleteC3allyyKFTq', '_$s5TeaDB6DeleteC5whereyyAA10ExpressionOKFTj', 
-                       '_$s5TeaDB6DeleteC5whereyyAA10ExpressionOKFTq', '_$s5TeaDB6DeleteC6entityyyxKFTj', 
-                       '_$s5TeaDB6DeleteC6entityyyxKFTq', '_$s5TeaDB6DeleteCMa', 
-                       '_$s5TeaDB6DeleteCMn', '_$s5TeaDB6DeleteCMo', '_$s5TeaDB6DeleteCMu', 
-                       '_$s5TeaDB6DeleteCfD', '_$s5TeaDB6DeleteCfd', '_$s5TeaDB7OrderByO10descendingyACSS_tcACmFWC', 
-                       '_$s5TeaDB7OrderByO9ascendingyACSS_tcACmFWC', '_$s5TeaDB7OrderByOMa', 
-                       '_$s5TeaDB7OrderByOMn', '_$s5TeaDB7OrderByON', '_$s5TeaDB7ValueOfV05queryC0SSvg', 
-                       '_$s5TeaDB7ValueOfV05queryC0SSvpMV', '_$s5TeaDB7ValueOfVAA05QueryC4TypeAAMc', 
-                       '_$s5TeaDB7ValueOfVAA05QueryC4TypeAAWP', '_$s5TeaDB7ValueOfVMa', 
-                       '_$s5TeaDB7ValueOfVMn', '_$s5TeaDB7ValueOfVN', '_$s5TeaDB7ValueOfVyACSScfC', 
-                       '_$s5TeaDB8BaseTypeMp', '_$s5TeaDB8BaseTypeP7versionSSvgZTj', 
+                       '_$s5TeaDB6CreateC5table11ifNotExistsySb_tKFTq', '_$s5TeaDB6CreateCA2A10EntityTypeRzrlE7migrate4from11ifNotExistsAEyqd__m_SbxSgqd__KXEtKAaDRd__lF', 
+                       '_$s5TeaDB6CreateCMa', '_$s5TeaDB6CreateCMn', '_$s5TeaDB6CreateCMo', 
+                       '_$s5TeaDB6CreateCMu', '_$s5TeaDB6CreateCfD', '_$s5TeaDB6CreateCfd', 
+                       '_$s5TeaDB6DeleteC2by2idySS_tKFTj', '_$s5TeaDB6DeleteC2by2idySS_tKFTq', 
+                       '_$s5TeaDB6DeleteC3allyyKFTj', '_$s5TeaDB6DeleteC3allyyKFTq', 
+                       '_$s5TeaDB6DeleteC5whereyyAA10ExpressionOKFTj', '_$s5TeaDB6DeleteC5whereyyAA10ExpressionOKFTq', 
+                       '_$s5TeaDB6DeleteC6entityyyxKFTj', '_$s5TeaDB6DeleteC6entityyyxKFTq', 
+                       '_$s5TeaDB6DeleteCMa', '_$s5TeaDB6DeleteCMn', '_$s5TeaDB6DeleteCMo', 
+                       '_$s5TeaDB6DeleteCMu', '_$s5TeaDB6DeleteCfD', '_$s5TeaDB6DeleteCfd', 
+                       '_$s5TeaDB7OrderByO10descendingyACSS_tcACmFWC', '_$s5TeaDB7OrderByO9ascendingyACSS_tcACmFWC', 
+                       '_$s5TeaDB7OrderByOMa', '_$s5TeaDB7OrderByOMn', '_$s5TeaDB7OrderByON', 
+                       '_$s5TeaDB7ValueOfV05queryC0SSvg', '_$s5TeaDB7ValueOfV05queryC0SSvpMV', 
+                       '_$s5TeaDB7ValueOfVAA05QueryC4TypeAAMc', '_$s5TeaDB7ValueOfVAA05QueryC4TypeAAWP', 
+                       '_$s5TeaDB7ValueOfVMa', '_$s5TeaDB7ValueOfVMn', '_$s5TeaDB7ValueOfVN', 
+                       '_$s5TeaDB7ValueOfVyACSScfC', '_$s5TeaDB8BaseTypeMp', '_$s5TeaDB8BaseTypeP7versionSSvgZTj', 
                        '_$s5TeaDB8BaseTypeP7versionSSvgZTq', '_$s5TeaDB8BaseTypeP9tableNameSSvgZTj', 
                        '_$s5TeaDB8BaseTypeP9tableNameSSvgZTq', '_$s5TeaDB8BaseTypePAAE9tableNameSSvgZ', 
                        '_$s5TeaDB8BaseTypePSETb', '_$s5TeaDB8BaseTypePSeTb', '_$s5TeaDB8BaseTypePxycfCTj', 
@@ -364,9 +369,13 @@ exports:
                        '_$s5TeaDB8DatabaseC9CacheSizeON', '_$s5TeaDB8DatabaseC9asyncRead5block0A10Foundation7PromiseCyxGxyKc_tlF', 
                        '_$s5TeaDB8DatabaseCMa', '_$s5TeaDB8DatabaseCMm', '_$s5TeaDB8DatabaseCMn', 
                        '_$s5TeaDB8DatabaseCMo', '_$s5TeaDB8DatabaseCMu', '_$s5TeaDB8DatabaseCN', 
-                       '_$s5TeaDB8DatabaseCfD', '_$s5TeaDB8DatabaseCfd', '_$s5TeaDB9StatementC11descriptionSSvg', 
-                       '_$s5TeaDB9StatementC11descriptionSSvpMV', '_$s5TeaDB9StatementC9OperationO2eeoiySbAEyx_G_AGtFZ', 
-                       '_$s5TeaDB9StatementC9OperationO3runyAEyx_GAGmAA8BaseTypeRzlFWC', 
+                       '_$s5TeaDB8DatabaseCfD', '_$s5TeaDB8DatabaseCfd', '_$s5TeaDB9AssertionCACyKcfC', 
+                       '_$s5TeaDB9AssertionCACyKcfCTj', '_$s5TeaDB9AssertionCACyKcfCTq', 
+                       '_$s5TeaDB9AssertionCACyKcfc', '_$s5TeaDB9AssertionCMa', '_$s5TeaDB9AssertionCMm', 
+                       '_$s5TeaDB9AssertionCMn', '_$s5TeaDB9AssertionCMo', '_$s5TeaDB9AssertionCMu', 
+                       '_$s5TeaDB9AssertionCN', '_$s5TeaDB9AssertionCfD', '_$s5TeaDB9AssertionCfd', 
+                       '_$s5TeaDB9StatementC11descriptionSSvg', '_$s5TeaDB9StatementC11descriptionSSvpMV', 
+                       '_$s5TeaDB9StatementC9OperationO2eeoiySbAEyx_G_AGtFZ', '_$s5TeaDB9StatementC9OperationO3runyAEyx_GAGmAA8BaseTypeRzlFWC', 
                        '_$s5TeaDB9StatementC9OperationO4hash4intoys6HasherVz_tF', 
                        '_$s5TeaDB9StatementC9OperationO5queryyAEyx_GAGmAA8BaseTypeRzlFWC', 
                        '_$s5TeaDB9StatementC9OperationO6createyAEyx_GAGmAA8BaseTypeRzlFWC', 
@@ -397,12 +406,12 @@ exports:
                        '_$s5TeaDB9_OptionalVMa', '_$s5TeaDB9_OptionalVMn', '_$s5TeaDB9_OptionalVyACyxGxSgcfC', 
                        '_$s5TeaDB9_OptionalVyxGAA10ColumnTypeAAMc', '_$s5TeaDB9_OptionalVyxGAA18StatementChainTypeAAMc', 
                        '_$s5TeaDB9_OptionalVyxGAA18StatementChainTypeAAWP', '_$s5TeaDB9_OptionalVyxGSEAAMc', 
-                       '_$s5TeaDB9_OptionalVyxGSeAAMc', '_$sSS5TeaDB10ColumnTypeAAMc', 
-                       '_$sSS5TeaDB10ColumnTypeAAWP', '_$sSS5TeaDB14QueryValueTypeAAMc', 
-                       '_$sSS5TeaDB14QueryValueTypeAAWP', '_$sSS5TeaDB18StatementChainTypeAAMc', 
-                       '_$sSS5TeaDB18StatementChainTypeAAWP', '_$sSS5TeaDBE10queryValueSSvg', 
-                       '_$sSS5TeaDBE10queryValueSSvpMV', '_$sSS5TeaDBE8dataTypeAA04DataD0OvgZ', 
-                       '_$sSS5TeaDBE9valueType10connectionSSAA05ValueD0O_AA010ConnectionD0_ptcfC', 
+                       '_$s5TeaDB9_OptionalVyxGSeAAMc', '_$s5TeaDB9assertion8invokingxxyKXE_tKlF', 
+                       '_$sSS5TeaDB10ColumnTypeAAMc', '_$sSS5TeaDB10ColumnTypeAAWP', 
+                       '_$sSS5TeaDB14QueryValueTypeAAMc', '_$sSS5TeaDB14QueryValueTypeAAWP', 
+                       '_$sSS5TeaDB18StatementChainTypeAAMc', '_$sSS5TeaDB18StatementChainTypeAAWP', 
+                       '_$sSS5TeaDBE10queryValueSSvg', '_$sSS5TeaDBE10queryValueSSvpMV', 
+                       '_$sSS5TeaDBE8dataTypeAA04DataD0OvgZ', '_$sSS5TeaDBE9valueType10connectionSSAA05ValueD0O_AA010ConnectionD0_ptcfC', 
                        '_$sSS5TeaDBE9valueTypeAA05ValueD0Ovg', '_$sSS5TeaDBE9valueTypeAA05ValueD0OvpMV', 
                        '_$sSb5TeaDB10ColumnTypeAAMc', '_$sSb5TeaDB10ColumnTypeAAWP', 
                        '_$sSb5TeaDB14QueryValueTypeAAMc', '_$sSb5TeaDB14QueryValueTypeAAWP', 

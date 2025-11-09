@@ -12,7 +12,7 @@
 @class NSTextRange;
 @protocol NSTextLocation;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // NSTextSelection represents a single logical selection context corresponding to an insertion point.
 #pragma mark NSTextSelection
@@ -77,7 +77,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIFoundation/NSTextSelection.h>

@@ -1,11 +1,10 @@
 /* CoreAnimation - CAFrameRateRange.h
 
-   Copyright (c) 2020-2021, Apple Inc.
+   Copyright (c) 2020-2022, Apple Inc.
    All rights reserved. */
 
 #ifndef CAFRAMERATERANGE_H
 #define CAFRAMERATERANGE_H
-
 
 #include <QuartzCore/CABase.h>
 #include <stdbool.h>
@@ -37,6 +36,5 @@ CA_EXTERN bool CAFrameRateRangeIsEqualToRange(CAFrameRateRange range,
   CF_REFINED_FOR_SWIFT;
 
 CA_EXTERN_C_END
-
 
 #endif /* CAFRAMERATERANGE_H */

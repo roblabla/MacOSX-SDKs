@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B6357367-19C4-39F6-88C8-AD03F12258AD
+    value:           EDD5DDCF-86E5-384B-815C-A17504DBB1F4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           792ADE2E-C792-3A00-8B8B-C39FA7C21D60
+    value:           3851FAEE-D6AF-3189-A26C-134CEEE5394D
 install-name:    '/System/Library/PrivateFrameworks/Mondrian.framework/Versions/A/Mondrian'
-current-version: 441.0.120
+current-version: 511.0.170
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _GridRectEdgeOppositeEdge, _MOAVAssetCreateThumbnailWithURL, 
                        _MOAssetsViewCustomStyleCellRegistration, _MOAssetsViewCustomStyleDefaultCellRegistration, 
                        _MOAssetsViewCustomStyleDefaultFooterViewRegistration, _MOAssetsViewCustomStyleDefaultHeaderViewRegistration, 
@@ -40,9 +40,8 @@ exports:
                        _MOMediaViewLayoutOptionsDescriptionLabel, _MOMediaViewLayoutOptionsDescriptionMax, 
                        _MOMediaViewLayoutOptionsDescriptionMin, _MOMediaViewSupplementaryViewSectionFooterDefaultReuseIdentifier, 
                        _MOMediaViewSupplementaryViewSectionHeaderDefaultReuseIdentifier, 
-                       _MOPhotosAtlasViewCommonInit, _MOPhotosAtlasViewElementKindThumbnailsRow, 
-                       _MOPhotosAtlasViewSupplementaryViewRowReuseIdentifier, _MOPhotosMomentsViewElementKindMainFooter, 
-                       _MOPhotosMomentsViewElementKindMainHeader, _MOPhotosMomentsViewSupplementaryViewMainFooterReuseIdentifier, 
+                       _MOPhotosMomentsViewElementKindMainFooter, _MOPhotosMomentsViewElementKindMainHeader, 
+                       _MOPhotosMomentsViewSupplementaryViewMainFooterReuseIdentifier, 
                        _MOPhotosMomentsViewSupplementaryViewMainHeaderReuseIdentifier, 
                        _MORectWithAspectRatioCenteredInsideRect, _MOUIProgressBarCommonInit, 
                        _NSStringFromMOGridLocation, _NSStringFromMOGridRect, _NSStringFromMOGridSize, 
@@ -118,17 +117,13 @@ exports:
                        MOMediaViewDefaultCell, MOMediaViewDefaultSupplementaryHeader, 
                        MOMediaViewEventLayout, MOMediaViewLayout, MOMediaViewSupplementary, 
                        MOMonitoringController, MOMonitoringPanel, MOMonitoringPanelController, 
-                       MONSOperation, MONSOperationQueue, MOPhotosAtlasLayout, MOPhotosAtlasLayoutAccessibility, 
-                       MOPhotosAtlasLayoutCellAccessibility, MOPhotosAtlasSectionAccessibility, 
-                       MOPhotosAtlasSegment, MOPhotosAtlasSegmentRow, MOPhotosAtlasSupplementaryRow, 
-                       MOPhotosAtlasView, MOPhotosCollectionsView, MOPhotosLayout, 
-                       MOPhotosLayoutInvalidationContext, MOPhotosMomentCaptionCell, 
-                       MOPhotosMomentCaptionTextField, MOPhotosMomentCaptionTextFieldCell, 
-                       MOPhotosMomentCell, MOPhotosMomentsLayout, MOPhotosMomentsLayoutAccessibility, 
-                       MOPhotosMomentsLayoutInvalidationContext, MOPhotosMomentsLayoutSectionAccessibility, 
-                       MOPhotosMomentsView, MOPhotosScroller, MOPhotosSupplementaryFooter, 
-                       MOPhotosSupplementaryFooterInfo, MOPhotosSupplementaryHeader, 
-                       MOPhotosView, MOPhotosYearsView, MOSettingsPanel, MOSettingsPanelController, 
-                       MOTextLayer, MOTracing, MOUIProgressBar, _MOMediaViewLayoutPresetNamingWindowController ]
+                       MONSOperation, MONSOperationQueue, MOPhotosLayout, MOPhotosLayoutInvalidationContext, 
+                       MOPhotosMomentCaptionCell, MOPhotosMomentCaptionTextField, 
+                       MOPhotosMomentCaptionTextFieldCell, MOPhotosMomentCell, MOPhotosMomentsLayout, 
+                       MOPhotosMomentsLayoutAccessibility, MOPhotosMomentsLayoutInvalidationContext, 
+                       MOPhotosMomentsLayoutSectionAccessibility, MOPhotosMomentsView, 
+                       MOPhotosScroller, MOPhotosSupplementaryFooter, MOPhotosSupplementaryFooterInfo, 
+                       MOPhotosSupplementaryHeader, MOSettingsPanel, MOSettingsPanelController, 
+                       MOTracing, MOUIProgressBar, _MOMediaViewLayoutPresetNamingWindowController ]
     objc-ivars:      [ MOMediaItem._url, MOMediaItem._urlHash ]
 ...

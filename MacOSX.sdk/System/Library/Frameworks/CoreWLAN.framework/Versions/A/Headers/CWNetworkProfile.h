@@ -49,6 +49,9 @@ NS_CLASS_AVAILABLE_MAC(10_7)
 
     BOOL            _isPasspoint;
     
+    
+    NSUInteger      _transitionDisabledFlags;
+    
     NSString        *_domainName;
     
     NSString        *_displayName;
@@ -102,6 +105,8 @@ NS_CLASS_AVAILABLE_MAC(10_7)
     NSInteger       _movingAttribute;
     
     NSInteger       _publicAttribute;
+    
+    NSUInteger      _lowDataMode;
 }
 
 /*!

@@ -10,7 +10,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIViewController.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UICloudSharingController, CKShare, CKContainer;
 
@@ -77,7 +77,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watc
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UICloudSharingController.h>

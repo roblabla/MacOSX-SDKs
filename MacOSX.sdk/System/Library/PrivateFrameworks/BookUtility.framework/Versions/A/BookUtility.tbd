@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D9CCF8F3-4F21-3F20-8664-F037273924B6
+    value:           95D0FEEB-DD42-3FB6-859C-30AFCF806954
   - target:          x86_64-maccatalyst
-    value:           D9CCF8F3-4F21-3F20-8664-F037273924B6
+    value:           95D0FEEB-DD42-3FB6-859C-30AFCF806954
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           444B6184-B862-3820-A148-B88590FB2F45
+    value:           E2B0B8B3-9867-3A8F-A681-445A7237EF49
   - target:          arm64e-maccatalyst
-    value:           444B6184-B862-3820-A148-B88590FB2F45
+    value:           E2B0B8B3-9867-3A8F-A681-445A7237EF49
 install-name:    '/System/Library/PrivateFrameworks/BookUtility.framework/Versions/A/BookUtility'
-current-version: 1672
+current-version: 1801
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BKApplicationAccessBundleID, _BKDisableBookStorePreferenceKey, 
                        _BKPreferenceApplicationID, _BKRestrictExplicitContentPreferenceKey, 
                        _BUArrayDescription, _BUAssertionFailed, _BUAssertionLog, 
@@ -43,17 +43,18 @@ exports:
                        _BUZipEndOfCentralDirectoryMaxSize, _BUZipEndOfCentralDirectorySignature, 
                        _BUZipInflateDefaultMaxBufferSize, _BUZipLocalFileHeaderSignature, 
                        _BUZipLog, _BUZipVersionMadeBy, _BUZipVersionNeededToExtract, 
-                       _BUZipWriterMaxEntryDataSize, _BookUtilityLog, _NSStringFromBUUserAccountType ]
-    objc-classes:    [ BUAppGroup, BUBag, BUBlockCallThrottler, BUBufferedReadChannel, 
-                       BUBufferedReadChannelHelper, BUBundleLookupClass, BUCellularIdentity, 
-                       BUCellularSettings, BUCoalescingCallBlock, BUContainedZipArchive, 
-                       BUCountingAssertionProvider, BUDescription, BUEncodedBlockInfoInternal, 
-                       BUEncodedBlockInfoWithDecodedLengthInternal, BUFileIOChannel, 
-                       BUIOUtils, BUNetworkMonitor, BUOSStateDataSerialization, BUOSStateHandler, 
-                       BUPreferencesRestrictionsProvider, BUReadChannelInputStreamAdapter, 
+                       _BUZipWriterMaxEntryDataSize, _BookUtilityLog, _NSStringFromBUAccountsType, 
+                       _kTCCDatabaseChangedDarwinNotification ]
+    objc-classes:    [ BUAccountsProvider, BUAppGroup, BUBag, BUBlockCallThrottler, 
+                       BUBufferedReadChannel, BUBufferedReadChannelHelper, BUBundleLookupClass, 
+                       BUCellularIdentity, BUCellularSettings, BUCoalescingCallBlock, 
+                       BUContainedZipArchive, BUCountingAssertionProvider, BUDescription, 
+                       BUEncodedBlockInfoInternal, BUEncodedBlockInfoWithDecodedLengthInternal, 
+                       BUFileIOChannel, BUIOUtils, BUNetworkMonitor, BUOSStateDataSerialization, 
+                       BUOSStateHandler, BUPreferencesRestrictionsProvider, BUReadChannelInputStreamAdapter, 
                        BURestrictionsProvider, BUSimpleFileCopier, BUTemporaryDirectory, 
-                       BUUnarchivingFileCopier, BUUserAccount, BUUserAccountMonitor, 
-                       BUZipArchive, BUZipEntry, BUZipFileArchive, BUZipFileDescriptorWrapper, 
-                       BUZipFileWriter, BUZipInflateReadChannel, BUZipReadChannel, 
-                       BUZipWriter, BUZipWriterEntry, _BUCountingAssertion, _BUNullCellularIdentity ]
+                       BUUnarchivingFileCopier, BUZipArchive, BUZipEntry, BUZipFileArchive, 
+                       BUZipFileDescriptorWrapper, BUZipFileWriter, BUZipInflateReadChannel, 
+                       BUZipReadChannel, BUZipWriter, BUZipWriterEntry, _BUCountingAssertion, 
+                       _BUNullCellularIdentity ]
 ...

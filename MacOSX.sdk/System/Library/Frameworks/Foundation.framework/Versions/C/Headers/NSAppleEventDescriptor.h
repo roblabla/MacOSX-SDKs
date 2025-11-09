@@ -9,7 +9,7 @@
 
 @class NSData;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_OPTIONS(NSUInteger, NSAppleEventSendOptions) {
     NSAppleEventSendNoReply        = kAENoReply, /* sender doesn't want a reply to event */
@@ -134,4 +134,4 @@ typedef NS_OPTIONS(NSUInteger, NSAppleEventSendOptions) {
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

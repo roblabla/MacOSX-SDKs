@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1E70D917-089C-3F6D-97D5-3A3202BF8256
+    value:           56E23127-7F29-3ABD-8A74-1B3992A5D738
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8A43858D-BDE8-3C66-8A8C-3B16F89EE220
+    value:           4B790CBD-4DC6-3724-99F8-27C05E908114
 install-name:    '/System/Library/Frameworks/ScriptingBridge.framework/Versions/A/ScriptingBridge'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ SBAppContext, SBAppLocator, SBApplication, SBElementArray, 
                        SBObject ]
     objc-ivars:      [ SBAppContext._application, SBAppContext._classNamesForCodes, 

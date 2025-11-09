@@ -1,6 +1,7 @@
+#if !__has_include(<PassKitCore/PKShippingMethod.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKShippingMethod.h
-//
+//  PassKit
 //  Copyright © 2021 Apple, Inc. All rights reserved.
 //
 
@@ -34,3 +35,7 @@ API_AVAILABLE(ios(8.0), watchos(3.0))
 NS_ASSUME_NONNULL_END
 
 #endif // __PKSHIPPINGMETHOD_H__
+
+#else
+#import <PassKitCore/PKShippingMethod.h>
+#endif

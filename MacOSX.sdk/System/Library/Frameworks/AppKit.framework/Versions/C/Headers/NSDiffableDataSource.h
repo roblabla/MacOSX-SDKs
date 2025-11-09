@@ -64,7 +64,7 @@ API_AVAILABLE(macos(10.15),ios(13.0),tvos(13.0),watchos(6.0))
 
 // section operations
 
-- (void)appendSectionsWithIdentifiers:(NSArray*)sectionIdentifiers;
+- (void)appendSectionsWithIdentifiers:(NSArray<SectionIdentifierType> *)sectionIdentifiers;
 
 - (void)insertSectionsWithIdentifiers:(NSArray<SectionIdentifierType> *)sectionIdentifiers beforeSectionWithIdentifier:(SectionIdentifierType)toSectionIdentifier;
 - (void)insertSectionsWithIdentifiers:(NSArray<SectionIdentifierType> *)sectionIdentifiers afterSectionWithIdentifier:(SectionIdentifierType)toSectionIdentifier;

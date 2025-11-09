@@ -11,6 +11,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0)) API_UNAVAILABLE(watchos)
+typedef NS_ENUM(NSInteger, MKDirectionsRoutePreference) {
+    MKDirectionsRoutePreferenceAny = 0,
+    MKDirectionsRoutePreferenceAvoid
+};
+
 NS_CLASS_AVAILABLE(10_9, 6_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 @interface MKDirectionsRequest : NSObject
 
@@ -31,6 +37,9 @@ NS_CLASS_AVAILABLE(10_9, 6_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 // Set either departure or arrival date to hint to the route server when the trip will take place.
 @property (nonatomic, copy, nullable) NSDate *departureDate NS_AVAILABLE(10_9, 7_0);
 @property (nonatomic, copy, nullable) NSDate *arrivalDate NS_AVAILABLE(10_9, 7_0);
+
+@property (nonatomic) MKDirectionsRoutePreference tollPreference API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0)) API_UNAVAILABLE(watchos); // Default is MKDirectionsRoutePreferenceAny
+@property (nonatomic) MKDirectionsRoutePreference highwayPreference API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0)) API_UNAVAILABLE(watchos); // Default is MKDirectionsRoutePreferenceAny
 
 @end
 

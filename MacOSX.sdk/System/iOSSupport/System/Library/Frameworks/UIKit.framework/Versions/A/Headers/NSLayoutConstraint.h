@@ -10,7 +10,7 @@
 #import <UIKit/UIGeometry.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class NSArray, NSDictionary, NSLayoutAnchor;
 
@@ -220,7 +220,7 @@ NS_SWIFT_UI_ACTOR
 @property(readonly, strong) NSLayoutDimension *heightAnchor API_AVAILABLE(ios(9.0));
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/NSLayoutConstraint.h>

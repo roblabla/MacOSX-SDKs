@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if !__NSDATAASSET_SHARED_SECTION__
 #define __NSDATAASSET_SHARED_SECTION__ 1
@@ -20,7 +20,8 @@ typedef NSString * NSDataAssetName NS_SWIFT_BRIDGED_TYPEDEF API_AVAILABLE(ios(9.
 
 /// NSDataAsset represents the contents of data entries in your asset catalog.
 /// Data assets are not in the same class of stored content as images, so you cannot use a data asset to get image data for an image.
-UIKIT_EXTERN API_AVAILABLE(ios(9.0), macos(10.11), tvos(9.0), watchos(2.0)) @interface NSDataAsset : NSObject<NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(9.0), macos(10.11), tvos(9.0), watchos(2.0)) NS_SWIFT_SENDABLE
+@interface NSDataAsset : NSObject<NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -41,7 +42,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0), macos(10.11), tvos(9.0), watchos(2.0)) @int
 #endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 #endif // __NSDATAASSET_SHARED_SECTION__
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/NSDataAsset.h>

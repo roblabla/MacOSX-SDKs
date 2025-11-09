@@ -4,27 +4,28 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C9EA9F43-CAF4-37C4-B863-A2641BA68AC2
+    value:           8A26625F-D39E-3CBD-8BAF-5AED55E8D636
   - target:          x86_64-maccatalyst
-    value:           C9EA9F43-CAF4-37C4-B863-A2641BA68AC2
+    value:           8A26625F-D39E-3CBD-8BAF-5AED55E8D636
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C7C6BCF9-891C-399A-AF95-F49DF5C2003D
+    value:           1A3034B9-D476-349B-9F5C-202ED940DA33
   - target:          arm64e-maccatalyst
-    value:           C7C6BCF9-891C-399A-AF95-F49DF5C2003D
+    value:           1A3034B9-D476-349B-9F5C-202ED940DA33
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/ICE.framework/Versions/A/ICE'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ASL_LOG, _Apple80211Associate, _Apple80211Associate2, _Apple80211BindToInterface, 
-                       _Apple80211Close, _Apple80211CopyAwdlPreferredChannels, _Apple80211CopyLeakyAPStatus, 
-                       _Apple80211CopyRangingCapabilities, _Apple80211CopyValue, 
-                       _Apple80211Disassociate, _Apple80211ErrToStr, _Apple80211EventMonitoringHalt, 
-                       _Apple80211EventMonitoringInit, _Apple80211EventMonitoringInit2, 
-                       _Apple80211EventSocketRef, _Apple80211GasRequest, _Apple80211Get, 
+                       _Apple80211BindToInterfaceWithService, _Apple80211Close, _Apple80211CopyAwdlPreferredChannels, 
+                       _Apple80211CopyLeakyAPStatus, _Apple80211CopyRangingCapabilities, 
+                       _Apple80211CopyValue, _Apple80211Disassociate, _Apple80211ErrToStr, 
+                       _Apple80211EventMonitoringHalt, _Apple80211EventMonitoringInit, 
+                       _Apple80211EventMonitoringInit2, _Apple80211EventSocketRef, 
+                       _Apple80211GasRequest, _Apple80211Get, _Apple80211GetIOReportingService, 
                        _Apple80211GetIfListCopy, _Apple80211GetInfoCopy, _Apple80211GetInterfaceNameCopy, 
                        _Apple80211GetPower, _Apple80211GetRangingPhyErrorString, 
                        _Apple80211GetVirtualIfListCopy, _Apple80211MaxLinkSpeed, 
@@ -38,7 +39,9 @@ exports:
                        _Apple80211ParseSES_IE, _Apple80211ParseSSIDIE, _Apple80211ParseVHT_Caps, 
                        _Apple80211ParseVhtCapsIE, _Apple80211ParseVhtOpIE, _Apple80211ParseWPAIE, 
                        _Apple80211ParseWPAPassword, _Apple80211ParseWPS_IE, _Apple80211RangeAsync, 
-                       _Apple80211RangingStopAsync, _Apple80211RawGet, _Apple80211RawSet, 
+                       _Apple80211RangingStopAsync, _Apple80211RawEventMonitoringInit, 
+                       _Apple80211RawEventMonitoringInitWithCFRunLoop, _Apple80211RawGet, 
+                       _Apple80211RawP2PEventMonitoringInit, _Apple80211RawSet, _Apple80211RawStartMonitoringEventAll, 
                        _Apple80211Scan, _Apple80211ScanAsync, _Apple80211ScanDynamic, 
                        _Apple80211Set, _Apple80211SetPower, _Apple80211SetProperty, 
                        _Apple80211StartMonitoringEvent, _Apple80211StopMonitoringEvent, 
@@ -87,19 +90,12 @@ exports:
                        _MakeIPPORT, _MakeIPPORTWithHostnameIPv4Only, _MakeRefreshRequest, 
                        _OSX_Apple80211ANQPAppendAppleActionFrameHeader, _OSX_Apple80211ANQPAppendGASComebackRequest, 
                        _OSX_Apple80211ANQPAppendGASInitialRequestHeader, _OSX_Apple80211ANQPAppendHS20QueryList, 
-                       _OSX_Apple80211ANQPAppendIEEEQueryList, _OSX_Apple80211ANQPParse3GPPCellularNetwork, 
-                       _OSX_Apple80211ANQPParseANQPData, _OSX_Apple80211ANQPParseActionFrame, 
-                       _OSX_Apple80211ANQPParseCapabilityList, _OSX_Apple80211ANQPParseDomainName, 
-                       _OSX_Apple80211ANQPParseGASComebackResponse, _OSX_Apple80211ANQPParseGASInitialResponse, 
-                       _OSX_Apple80211ANQPParseHS20CapabilityList, _OSX_Apple80211ANQPParseHS20ConnectionCapability, 
-                       _OSX_Apple80211ANQPParseHS20Element, _OSX_Apple80211ANQPParseHS20OperationClassIndication, 
-                       _OSX_Apple80211ANQPParseHS20OperatorFriendlyName, _OSX_Apple80211ANQPParseHS20WANMetrics, 
-                       _OSX_Apple80211ANQPParseIPAddressTypeAvailability, _OSX_Apple80211ANQPParseNAIRealm, 
-                       _OSX_Apple80211ANQPParseNetworkAuthenticationType, _OSX_Apple80211ANQPParseRoamingConsortium, 
-                       _OSX_Apple80211ANQPParseVenueName, _OSX_Apple80211ANQPParseWFAElement, 
-                       _P2PAllocAppleIE, _P2PAllocComebackResp, _P2PAllocComebackRespList, 
-                       _P2PAllocGONegReqFrm, _P2PAllocInitialReqFrm, _P2PAllocInitialRespFrm, 
-                       _P2PAllocInvitationRequest, _P2PAllocInvitationResponse, _P2PAllocServiceDiscoveryResp, 
+                       _OSX_Apple80211ANQPAppendIEEEQueryList, _OSX_Apple80211ANQPParseANQPData, 
+                       _OSX_Apple80211ANQPParseActionFrame, _OSX_Apple80211ANQPParseGASComebackResponse, 
+                       _OSX_Apple80211ANQPParseGASInitialResponse, _P2PAllocAppleIE, 
+                       _P2PAllocComebackResp, _P2PAllocComebackRespList, _P2PAllocGONegReqFrm, 
+                       _P2PAllocInitialReqFrm, _P2PAllocInitialRespFrm, _P2PAllocInvitationRequest, 
+                       _P2PAllocInvitationResponse, _P2PAllocServiceDiscoveryResp, 
                        _P2PAllocWPSAssocReqIE, _P2PAllocWPSAssocRespIE, _P2PAllocWPSBeaconIE, 
                        _P2PAllocWPSProbeReqIE, _P2PAllocWPSProbeResponseIE, _P2PIEAllocAssocReqIE, 
                        _P2PIEAllocBeaconIE, _P2PIEAllocProbeRequestIE, _P2PIEAllocProbeRespIE, 
@@ -110,19 +106,14 @@ exports:
                        _P2PStatusCodeToString, _ParseSTUNMessage, _ProcessAllocateErrorResponse, 
                        _ProcessAllocateResponse, _ProcessChannelBindErrorResponse, 
                        _SAToIPPORT, _SAToIPPORTWithInterfaceIndexToNameCallback, 
-                       _STUNEncodeMessage, ___CreateAirplayStatisticsDictionary, 
-                       __allocGroupInfoDict, __allocP2PInterfaceDict, __asl, __dispatchAwdlServiceRegSoftError, 
-                       __dispatchBGScanCachedNetworks, __dispatchBssSteeringRequest, 
-                       __dispatchGasResults, __dispatchLeakyStatsEvent, __dispatchP2PNearbyLogTrigger, 
-                       __dispatchP2pThreadCoexEvent, __dispatchRangingResults, __eventRead, 
-                       __getPeerTrafficStatsDictionary, __getRangingPeerRequest, 
-                       __getRangingPhyErrorString, __handleNANGetRequest, __handleNANSetRequest, 
-                       __log_msg, __parseHs20OperatorName, __pid, __tag, _apIsApple, 
-                       _asl_init, _asl_stop, _copyFamilyDebugFlagsForInterface, _copyVendorDebugFlagsForInterface, 
-                       _gGlobalDebugFlags, _gUserLandDebugFlags, _htonIPPORT, _kCYCLOPS_OUI, 
-                       _loadAirplayStatsHistogramBin, _loadSidecarHistogramBin, _ntohIPPORT, 
-                       _setFamilyDebugFlagsForInterface, _setVendorDebugFlagsForInterface, 
-                       _unified_logger_deinit, _unified_logger_init, _unified_temp_logger_deinit, 
-                       _unified_temp_logger_init, _updateDebugFlagPreferences, _wifi_prefs_deinit, 
-                       _wifi_prefs_init ]
+                       _STUNEncodeMessage, __pid, __tag, _asl_init, _asl_stop, _convertApple80211EventToString, 
+                       _convertApple80211IOCTLToString, _convertApple80211ReturnToErrno, 
+                       _convertApple80211ReturnToString, _convertIEEEReasonToString, 
+                       _convertIEEEStatusToString, _convertLinkStateReasonToString, 
+                       _copyFamilyDebugFlagsForInterface, _copyVendorDebugFlagsForInterface, 
+                       _gGlobalDebugFlags, _gUserLandDebugFlags, _get_apple80211_log, 
+                       _htonIPPORT, _ntohIPPORT, _setFamilyDebugFlagsForInterface, 
+                       _setVendorDebugFlagsForInterface, _unified_logger_deinit, 
+                       _unified_logger_init, _unified_temp_logger_deinit, _unified_temp_logger_init, 
+                       _updateDebugFlagPreferences ]
 ...

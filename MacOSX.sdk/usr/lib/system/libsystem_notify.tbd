@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           90E8AC4C-D13B-3E0C-82CA-4179D34F4EC6
+    value:           1F9FBDD3-694A-3FF7-A232-F07DF4845ABE
   - target:          x86_64-maccatalyst
-    value:           90E8AC4C-D13B-3E0C-82CA-4179D34F4EC6
+    value:           1F9FBDD3-694A-3FF7-A232-F07DF4845ABE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FF2DA89-8A88-34BB-AA68-BA9C5D24E639
+    value:           B2C5AAD6-13E5-3E2E-8DFC-601BAED4AA96
   - target:          arm64e-maccatalyst
-    value:           5FF2DA89-8A88-34BB-AA68-BA9C5D24E639
+    value:           B2C5AAD6-13E5-3E2E-8DFC-601BAED4AA96
 install-name:    '/usr/lib/system/libsystem_notify.dylib'
-current-version: 301
+current-version: 306
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __notify_fork_child, _notify_cancel, _notify_check, _notify_dump_status, 
                        _notify_get_event, _notify_get_state, _notify_is_valid_token, 
                        _notify_monitor_file, _notify_peek, _notify_post, _notify_register_check, 

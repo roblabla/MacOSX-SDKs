@@ -12,6 +12,9 @@
 #define _CORE_BLUETOOTH_H_
 #endif
 
+#import <CoreBluetooth/CBDefines.h>
+
+#if __OBJC__
 #import <CoreBluetooth/CBCentralManager.h>
 #import <CoreBluetooth/CBPeripheralManager.h>
 
@@ -26,3 +29,4 @@
 #import <CoreBluetooth/CBUUID.h>
 #import <CoreBluetooth/CBAdvertisementData.h>
 #import <CoreBluetooth/CBATTRequest.h>
+#endif

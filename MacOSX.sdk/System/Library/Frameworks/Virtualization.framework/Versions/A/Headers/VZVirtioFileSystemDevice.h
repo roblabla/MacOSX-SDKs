@@ -2,7 +2,7 @@
 //  VZVirtioFileSystemDevice.h
 //  Virtualization
 //
-//  Copyright © 2021 Apple Inc. All rights reserved.
+//  Copyright © 2021-2022 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDirectorySharingDevice.h>
@@ -34,6 +34,8 @@ VZ_EXPORT API_AVAILABLE(macos(12.0))
 
 /*!
  @abstract Directory share. Defines how host resources are exposed to the guest virtual machine.
+ @discussion
+    Setting this property to VZLinuxRosettaDirectoryShare is not supported and will cause an exception to be raised.
  @see VZSingleDirectoryShare
  @see VZMultipleDirectoryShare
  */

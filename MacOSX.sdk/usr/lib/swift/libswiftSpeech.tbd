@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           567833BE-F319-3872-89CD-9742FFA704DE
+    value:           8C437C09-2AAE-3C1C-A3F5-264DE233DEC8
   - target:          x86_64-maccatalyst
-    value:           567833BE-F319-3872-89CD-9742FFA704DE
+    value:           8C437C09-2AAE-3C1C-A3F5-264DE233DEC8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3B329BD9-02AC-32B3-8460-33A00379AE3E
+    value:           6066BCA4-9F86-30D0-932E-FEC97C150294
   - target:          arm64e-maccatalyst
-    value:           3B329BD9-02AC-32B3-8460-33A00379AE3E
+    value:           6066BCA4-9F86-30D0-932E-FEC97C150294
 install-name:    '/usr/lib/swift/libswiftSpeech.dylib'
 current-version: 2
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$sSo17SFAcousticFeatureC6SpeechE08acousticB13ValuePerFrameSaySdGvg', 
                        '_$sSo17SFAcousticFeatureC6SpeechE08acousticB13ValuePerFrameSaySdGvpMV', 
                        '__swift_FORCE_LOAD_$_swiftSpeech' ]

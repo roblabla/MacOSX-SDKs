@@ -2,7 +2,7 @@
  *  CTFontManager.h
  *  CoreText
  *
- *  Copyright (c) 2008-2021 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2022 Apple Inc. All rights reserved.
  *
  */
 
@@ -348,7 +348,6 @@ void CTFontManagerUnregisterFontDescriptors(
 	CFArrayRef              fontDescriptors,
 	CTFontManagerScope      scope,
 	bool                    (^ _Nullable registrationHandler)(CFArrayRef errors, bool done) ) CT_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
-#endif // defined(__BLOCKS__)
 
 /*!
 	@function   CTFontManagerRegisterFontsWithAssetNames
@@ -378,6 +377,7 @@ void CTFontManagerRegisterFontsWithAssetNames(
 	CTFontManagerScope      scope,
 	bool                    enabled,
 	bool                    (^ _Nullable registrationHandler)(CFArrayRef errors, bool done) ) CT_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos);
+#endif // defined(__BLOCKS__)
 
 /*!
     @function   CTFontManagerEnableFontDescriptors

@@ -11,9 +11,9 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIFont.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0))
+UIKIT_EXTERN API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0)) NS_SWIFT_SENDABLE
 @interface UIFontMetrics : NSObject
 
 @property (class, readonly, strong) UIFontMetrics *defaultMetrics;
@@ -33,7 +33,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIFontMetrics.h>

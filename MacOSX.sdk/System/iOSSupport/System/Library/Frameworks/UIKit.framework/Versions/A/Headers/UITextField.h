@@ -18,7 +18,7 @@
 #import <UIKit/UIContentSizeCategoryAdjusting.h>
 #import <UIKit/UITextPasteConfigurationSupporting.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIImage, UIImageView, UILabel, UIColor, UIButton;
 @class UITextInputTraits;
@@ -153,6 +153,33 @@ NS_SWIFT_UI_ACTOR
 - (BOOL)textFieldShouldClear:(UITextField *)textField;               // called when clear button pressed. return NO to ignore (no notifications)
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;              // called when 'return' key pressed. return NO to ignore.
 
+/**
+ * @abstract Asks the delegate for the menu to be shown for the specified text range.
+ *
+ * @param textField                   The text field requesting the menu.
+ * @param range                            The characters range for which the menu is presented for.
+ * @param suggestedActions   The actions and commands that the system suggests.
+ *
+ * @return Return a UIMenu describing the desired menu hierarchy. Return @c nil to present the default system menu.
+ */
+- (nullable UIMenu *)textField:(UITextField *)textField editMenuForCharactersInRange:(NSRange)range suggestedActions:(NSArray<UIMenuElement *> *)suggestedActions API_AVAILABLE(ios(16.0));
+
+/**
+ * @abstract Called when the text field is about to present the edit menu.
+ *
+ * @param textField    The text field displaying the menu.
+ * @param animator      Appearance animator. Add animations to this object to run them alongside the appearance transition.
+ */
+- (void)textField:(UITextField *)textField willPresentEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
+/**
+ * @abstract Called when the text field is about to dismiss the edit menu.
+ *
+ * @param textField    The text field displaying the menu.
+ * @param animator      Dismissal animator. Add animations to this object to run them alongside the dismissal transition.
+ */
+- (void)textField:(UITextField *)textField willDismissEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
 @end
 
 UIKIT_EXTERN NSNotificationName const UITextFieldTextDidBeginEditingNotification;
@@ -161,7 +188,7 @@ UIKIT_EXTERN NSNotificationName const UITextFieldTextDidChangeNotification;
 
 UIKIT_EXTERN NSString *const UITextFieldDidEndEditingReasonKey API_AVAILABLE(ios(10.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 
 #else

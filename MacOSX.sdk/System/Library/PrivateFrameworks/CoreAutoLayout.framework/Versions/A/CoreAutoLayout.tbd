@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           145D77A1-EB32-3242-8BEF-A985A897698D
+    value:           77097C0F-5DFB-35EA-8460-F8A5B40BC576
   - target:          x86_64-maccatalyst
-    value:           145D77A1-EB32-3242-8BEF-A985A897698D
+    value:           77097C0F-5DFB-35EA-8460-F8A5B40BC576
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           31223A23-39A5-3437-B65C-CE741A5E10E9
+    value:           AB956963-1F30-3081-9795-CFB23A68BEBE
   - target:          arm64e-maccatalyst
-    value:           31223A23-39A5-3437-B65C-CE741A5E10E9
+    value:           AB956963-1F30-3081-9795-CFB23A68BEBE
 install-name:    '/System/Library/PrivateFrameworks/CoreAutoLayout.framework/Versions/A/CoreAutoLayout'
-current-version: 28
+current-version: 29
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$hide$os10.4$_OBJC_CLASS_$_NSLayoutConstraint', '$ld$hide$os10.4$_OBJC_METACLASS_$_NSLayoutConstraint', 
                        '$ld$hide$os10.5$_OBJC_CLASS_$_NSLayoutConstraint', '$ld$hide$os10.5$_OBJC_METACLASS_$_NSLayoutConstraint', 
                        '$ld$hide$os10.5$__NSDictionaryOfVariableBindings', '$ld$hide$os10.6$_OBJC_CLASS_$_NSLayoutConstraint', 

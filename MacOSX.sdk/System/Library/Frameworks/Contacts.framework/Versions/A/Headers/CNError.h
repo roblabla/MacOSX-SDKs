@@ -50,13 +50,14 @@ typedef NS_ENUM(NSInteger, CNErrorCode)
 }  NS_ENUM_AVAILABLE(10_11, 9_0);
 
 /*! When available an array of one or more CNContact, CNGroup, CNContainer, CNSaveRequest, or CNFetchRequest objects for which the error code applies. */
-CONTACTS_EXTERN NSString * const CNErrorUserInfoAffectedRecordsKey NS_AVAILABLE(10_11, 9_0);
+CONTACTS_EXTERN NSString * const CNErrorUserInfoAffectedRecordsKey API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0));
 
 /*! When available an array of one or more NSString objects for which the error code applies. */
-CONTACTS_EXTERN NSString * const CNErrorUserInfoAffectedRecordIdentifiersKey NS_AVAILABLE(10_11, 9_0);
+CONTACTS_EXTERN NSString * const CNErrorUserInfoAffectedRecordIdentifiersKey API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0));
 
 /*! An array of NSErrors for CNErrorCodeValidationMultipleErrors. */
 CONTACTS_EXTERN NSString * const CNErrorUserInfoValidationErrorsKey NS_AVAILABLE(10_11, 9_0);
 
 /*! An array of key paths associated with a given error. For validation errors this will contain key paths to specific object properties. */
-CONTACTS_EXTERN NSString * const CNErrorUserInfoKeyPathsKey NS_AVAILABLE(10_11, 9_0);
+CONTACTS_EXTERN NSString * const CNErrorUserInfoKeyPathsKey API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0));
+

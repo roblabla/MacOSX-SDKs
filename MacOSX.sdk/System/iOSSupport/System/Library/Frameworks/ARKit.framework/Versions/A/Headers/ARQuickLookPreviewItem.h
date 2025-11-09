@@ -6,12 +6,14 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import <QuickLook/QLPreviewItem.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(13.0))
-@interface ARQuickLookPreviewItem : NSObject <QLPreviewItem>
+@interface ARQuickLookPreviewItem : NSObject
+<QLPreviewItem>
 
 /**
  Creates an object representing the 3D content that will be previewed in AR Quick Look.

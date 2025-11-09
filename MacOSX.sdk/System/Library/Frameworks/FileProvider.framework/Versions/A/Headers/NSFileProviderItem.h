@@ -58,9 +58,9 @@ FOUNDATION_EXPORT NSFileProviderItemIdentifier const NSFileProviderWorkingSetCon
  Extension should be able to return all trashed items by supporting the creation of a NSFileProviderEnumerator
  for the trashed items.
  */
-FOUNDATION_EXPORT NSFileProviderItemIdentifier const NSFileProviderTrashContainerItemIdentifier NS_SWIFT_NAME(NSFileProviderItemIdentifier.trashContainer) FILEPROVIDER_API_AVAILABILITY_V3;
+FOUNDATION_EXPORT NSFileProviderItemIdentifier const NSFileProviderTrashContainerItemIdentifier NS_SWIFT_NAME(NSFileProviderItemIdentifier.trashContainer) FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
-FILEPROVIDER_API_AVAILABILITY_V3
+FILEPROVIDER_API_AVAILABILITY_V3_IOS
 @interface NSFileProviderItemVersion : NSObject
 
 /**
@@ -76,7 +76,7 @@ FILEPROVIDER_API_AVAILABILITY_V3
  This constant is used by the system to represent that specific version that was communicated by the system to
  the extension but does not have a corresponding version assigned by the extension.
  */
-@property (class, readonly, nonnull) NSData *beforeFirstSyncComponent FILEPROVIDER_API_AVAILABILITY_V4_0;
+@property (class, readonly, nonnull) NSData *beforeFirstSyncComponent FILEPROVIDER_API_AVAILABILITY_V4_0_IOS;
 
 /**
  Items versions have two distinct components, one for the file contents and one
@@ -163,7 +163,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
      of the OS or the provider's program to evict items), the provider can set the following key to false in
      their Info.plist, in the NSExtension section: NSExtensionFileProviderAllowsUserControlledEviction
      */
-    NSFileProviderItemCapabilitiesAllowsEvicting FILEPROVIDER_API_AVAILABILITY_V3 = 1 << 6,
+    NSFileProviderItemCapabilitiesAllowsEvicting API_DEPRECATED("use NSFileProviderContentPolicy instead", macos(11.0, 13.0)) = 1 << 6,
 
     /**
      Indicates that the item can be excluded from sync.
@@ -196,7 +196,27 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
         | NSFileProviderItemCapabilitiesAllowsDeleting
 };
 
-FILEPROVIDER_API_AVAILABILITY_V3
+/**
+ NSFileProviderItemContents corresponds to the item's contents.
+
+ Each subsequent field corresponds to a property on NSFileProviderItem that can
+ change.
+ */
+typedef NS_OPTIONS(NSUInteger, NSFileProviderItemFields) {
+    NSFileProviderItemContents = 1 << 0,
+    NSFileProviderItemFilename = 1 << 1,
+    NSFileProviderItemParentItemIdentifier = 1 << 2,
+    NSFileProviderItemLastUsedDate = 1 << 3,
+    NSFileProviderItemTagData = 1 << 4,
+    NSFileProviderItemFavoriteRank = 1 << 5,
+    NSFileProviderItemCreationDate = 1 << 6,
+    NSFileProviderItemContentModificationDate = 1 << 7,
+    NSFileProviderItemFileSystemFlags = 1 << 8,
+    NSFileProviderItemExtendedAttributes = 1 << 9,
+    NSFileProviderItemTypeAndCreator FILEPROVIDER_API_AVAILABILITY_V4_0_IOS = 1 << 10,
+} FILEPROVIDER_API_AVAILABILITY_V3_IOS;
+
+FILEPROVIDER_API_AVAILABILITY_V3_IOS
 typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
     /// Item has the POSIX user-executable (u+x) permission.
     NSFileProviderFileSystemUserExecutable      = 1 << 0,
@@ -218,7 +238,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
     NSFileProviderFileSystemPathExtensionHidden = 1 << 4,
 };
 
-FILEPROVIDER_API_AVAILABILITY_V4_0
+FILEPROVIDER_API_AVAILABILITY_V4_0_IOS
 typedef struct NSFileProviderTypeAndCreator {
     /**
      The first word of the FinderInfo structure. It matches the file type code
@@ -229,6 +249,44 @@ typedef struct NSFileProviderTypeAndCreator {
      */
     OSType creator;
 } NSFileProviderTypeAndCreator;
+
+FILEPROVIDER_API_AVAILABILITY_V5_0_IOS
+typedef NS_ENUM(NSInteger, NSFileProviderContentPolicy) {
+    /**
+     Inherit the content policy of the parent folder.
+
+     This is the default policy on every item other than the root.
+     */
+    NSFileProviderContentPolicyInherited FILEPROVIDER_API_AVAILABILITY_V5_0_IOS,
+
+    /**
+     Download this item lazily (i.e when it is read) if it is dataless.
+     Download remote content updates eagerly if this file is not dataless.
+     Allow eviction on low disk pressure and other triggers.
+
+     This is the default policy on the root on macOS.
+     */
+    NSFileProviderContentPolicyDownloadLazily FILEPROVIDER_API_AVAILABILITY_V5_0,
+
+    /**
+     Download this item lazily (i.e when it is read.)
+     Evict the file upon remote content update.
+     Also allow eviction on low disk pressure and other triggers.
+
+     This is the default policy on the root on iOS.
+     */
+    NSFileProviderContentPolicyDownloadLazilyAndEvictOnRemoteUpdate FILEPROVIDER_API_AVAILABILITY_V5_0_IOS,
+
+    /**
+     Download this item eagerly (i.e before it is read.)
+     Keep downloading remote updates eagerly.
+     Prevent eviction on low disk pressure and other triggers.
+
+     When an item with the inherited policy is moved into a folder with
+     this policy, the system will automatically schedule a download.
+     */
+    NSFileProviderContentPolicyDownloadEagerlyAndKeepDownloaded FILEPROVIDER_API_AVAILABILITY_V5_0
+};
 
 FILEPROVIDER_API_AVAILABILITY_V2_V3
 @protocol NSFileProviderItem <NSObject>
@@ -317,7 +375,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
 
  These will be written down in the FinderInfo structure if relevant.
  */
-@property (nonatomic, readonly) NSFileProviderTypeAndCreator typeAndCreator FILEPROVIDER_API_AVAILABILITY_V4_0;
+@property (nonatomic, readonly) NSFileProviderTypeAndCreator typeAndCreator FILEPROVIDER_API_AVAILABILITY_V4_0_IOS;
 
 /**
  The capabilities of the item.  This controls the list of actions that the UI
@@ -334,7 +392,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
 
  Prior to macOS 11.3, fileSystemFlags are not honored for directories.
  */
-@property (nonatomic, readonly) NSFileProviderFileSystemFlags fileSystemFlags FILEPROVIDER_API_AVAILABILITY_V3;
+@property (nonatomic, readonly) NSFileProviderFileSystemFlags fileSystemFlags FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 @property (nonatomic, readonly, copy, nullable) NSNumber *documentSize;
 @property (nonatomic, readonly, copy, nullable) NSNumber *childItemCount;
@@ -377,7 +435,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  will be communicated under NSFileProviderItemContents.  Remote changes to
  the resource fork should bump itemVersion.contentVersion.
  */
-@property (nonatomic, readonly, strong) NSDictionary <NSString *, NSData *> *extendedAttributes FILEPROVIDER_API_AVAILABILITY_V3;
+@property (nonatomic, readonly, strong) NSDictionary <NSString *, NSData *> *extendedAttributes FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 
 /*
@@ -435,10 +493,6 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
 
  Trashed items should remain in the working set; however, children of trashed
  directories should be removed from the working set.
-
- Additionally, when an item is trashed, the `parentItemIdentifier` refers to the location the item was before being
- trashed. As such, when the user decides to restore the item from trash, `parentItemIdentifier` will be used for
- the default restore location.
  */
 @property (nonatomic, readonly, getter=isTrashed) BOOL trashed FILEPROVIDER_API_AVAILABILITY_V2;
 
@@ -505,7 +559,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
 /**
  The version is used to track which version of an item has been modified when informing a provider about changes. It is also used to invalidate the thumbnail cache.
  */
-@property (nonatomic, strong, readonly) NSFileProviderItemVersion *itemVersion FILEPROVIDER_API_AVAILABILITY_V3;
+@property (nonatomic, strong, readonly) NSFileProviderItemVersion *itemVersion FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 /**
  The target of a symlink.
@@ -514,7 +568,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  this field should contain the target of the symlink.
  */
 @property (nonatomic, readonly, copy, nullable) NSString *symlinkTargetPath
-    FILEPROVIDER_API_AVAILABILITY_V3;
+FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 /**
  Use this dictionary to add state information to the item. Entries are accessible to
@@ -590,7 +644,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
     - `Alert` *dictionary*
         - `LocalizedTitle` *string*, title of the alert
         - `LocalizedSubTitle` *string*, sub title of the alert
-            - @parameters for LocalizedTitle/LocalizedSubTitle
+            - @parameters (maximum 10) for LocalizedTitle/LocalizedSubTitle
                 - `matchingItemsCount`: count of source items that matched the predicate (only present if matchingItemsCount > 0)
                 - `matchingItemsCountMinusOne`: matchingItemsCount minus one (only present if matchingItemsCount > 1)
                 - `matchingItemsCountMinusTwo`: matchingItemsCount minus two (only present if matchingItemsCount > 2)
@@ -626,6 +680,39 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  If the provider wishes to take full responsibility for showing a custom contextual menu item for Download,
  the provider can set NSExtensionFileProviderAllowsContextualMenuDownloadEntry=0 in the provider's Info.plist.
  This will ensure that the system does not display the "Download Now" button in the contextual menu.
+
+ When `sourceItem` or `destinationItem` are present in a UserInteraction, a subset of the fields present on the item will be available for use.
+ The subset includes:
+ - `userInfo`
+ - `itemIdentifier`
+ - `parentItemIdentifier`
+ - `contentType`
+ - `typeIdentifier`
+ - `isTrashed`
+ - `filename`
+ - `capabilities`
+ - `documentSize`
+ - `childItemCount`
+ - `creationDate`
+ - `contentModificationDate`
+ - `lastUsedDate`
+ - `tagData`
+ - `favoriteRank`
+ - `isUploaded`
+ - `isUploading`
+ - `uploadingError`
+ - `isDownloaded`
+ - `isDownloading`
+ - `downloadingError`
+ - `isMostRecentVersionDownloaded`
+ - `isShared`
+ - `isSharedByCurrentUser`
+ - `ownerNameComponents`
+ - `mostRecentEditorNameComponents`
+ - `versionIdentifier`
+ - `inheritedUserInfo`
+ - `resolvedUserInfo`
+ - `isRecursivelyDownloaded`
 
  Here is a sample extension Info.plist:
 
@@ -715,6 +802,10 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  */
 @property (nonatomic, strong, readonly, nullable) NSDictionary *userInfo;
 
+/**
+ Declarative API to define the item content policy according to the available NSFileProviderContentPolicy
+ */
+@property (nonatomic, readonly) NSFileProviderContentPolicy contentPolicy FILEPROVIDER_API_AVAILABILITY_V5_0_IOS;
 
 @end
 

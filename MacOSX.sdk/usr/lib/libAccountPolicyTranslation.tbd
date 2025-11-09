@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D06C1ECD-AA93-3658-A867-F7C6CC95E1E7
+    value:           82A6F02F-E623-39F2-B7ED-F604A97C6D6E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B1FE38D2-A996-3164-8554-9AC112CA9DFF
+    value:           C489E0B9-1280-35DD-A290-7CB8AB16F4CF
 install-name:    '/usr/lib/libAccountPolicyTranslation.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _APCategoryAndIdentifierForLegacyPolicyName, _APLegacyPoliciesWithPolicySet, 
                        _APPolicySetWithLegacyPolicies, _kAPAttributeConsecutiveCharacters, 
                        _kAPAttributeCreationTime, _kAPAttributeCurrentDate, _kAPAttributeCurrentDayOfWeek, 

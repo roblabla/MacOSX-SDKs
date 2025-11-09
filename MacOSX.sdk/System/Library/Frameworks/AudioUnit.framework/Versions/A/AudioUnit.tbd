@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BC26162E-A646-3B4C-8537-470ED0DB6073
+    value:           3B1E9E50-C1E0-3B66-81C0-4880EFD7F90C
   - target:          x86_64-maccatalyst
-    value:           BC26162E-A646-3B4C-8537-470ED0DB6073
+    value:           3B1E9E50-C1E0-3B66-81C0-4880EFD7F90C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B877F077-62F3-31DD-A260-CF1A36F72A79
+    value:           A99741A4-6427-3D7C-93F6-521869678C06
   - target:          arm64e-maccatalyst
-    value:           B877F077-62F3-31DD-A260-CF1A36F72A79
+    value:           A99741A4-6427-3D7C-93F6-521869678C06
 install-name:    '/System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$add$os10.10$_AudioCodecAppendInputBufferList', '$ld$add$os10.10$_AudioCodecAppendInputData', 
                        '$ld$add$os10.10$_AudioCodecGetProperty', '$ld$add$os10.10$_AudioCodecGetPropertyInfo', 
                        '$ld$add$os10.10$_AudioCodecInitialize', '$ld$add$os10.10$_AudioCodecProduceOutputBufferList', 
@@ -163,8 +163,8 @@ exports:
                        '$ld$add$os10.9$_MusicDeviceStartNote', '$ld$add$os10.9$_MusicDeviceStopNote', 
                        '$ld$add$os10.9$_MusicDeviceSysEx' ]
 reexports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AudioCodecAppendInputBufferList, _AudioCodecAppendInputData, 
                        _AudioCodecGetProperty, _AudioCodecGetPropertyInfo, _AudioCodecInitialize, 
                        _AudioCodecProduceOutputBufferList, _AudioCodecProduceOutputPackets, 

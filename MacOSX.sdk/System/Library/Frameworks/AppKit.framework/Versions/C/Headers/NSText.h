@@ -176,11 +176,11 @@ enum {
 
 @protocol NSTextDelegate <NSObject>
 @optional
-- (BOOL)textShouldBeginEditing:(NSText *)textObject;        // YES means do it
-- (BOOL)textShouldEndEditing:(NSText *)textObject;          // YES means do it
-- (void)textDidBeginEditing:(NSNotification *)notification;
-- (void)textDidEndEditing:(NSNotification *)notification;
-- (void)textDidChange:(NSNotification *)notification;       // Any keyDown or paste which changes the contents causes this
+- (BOOL)textShouldBeginEditing:(NSText *)textObject NS_SWIFT_UI_ACTOR;        // YES means do it
+- (BOOL)textShouldEndEditing:(NSText *)textObject NS_SWIFT_UI_ACTOR;          // YES means do it
+- (void)textDidBeginEditing:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)textDidEndEditing:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)textDidChange:(NSNotification *)notification NS_SWIFT_UI_ACTOR;       // Any keyDown or paste which changes the contents causes this
 @end
 
 /* Additional values to be added to NSWritingDirectionLeftToRight or NSWritingDirectionRightToLeft, when used with NSWritingDirectionAttributeName */

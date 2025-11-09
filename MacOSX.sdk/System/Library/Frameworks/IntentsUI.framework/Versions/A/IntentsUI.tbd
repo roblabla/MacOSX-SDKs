@@ -3,20 +3,20 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D92CA4E4-552F-332C-9A7A-DC631FD5F6CC
+    value:           DD282E29-2A96-3120-936D-1ABDE6568C43
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           48569B35-B7B6-33F3-B8B1-E52275A5FE78
+    value:           EB97CC34-CC88-3714-A919-DEC3E5CB0757
 install-name:    '/System/Library/Frameworks/IntentsUI.framework/Versions/A/IntentsUI'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _INUIRemoteViewControllerErrorDomain, _INUIVoiceShortcutExtensionItemBundleURLKey, 
                        _INUIVoiceShortcutExtensionItemSandboxExtensionDataKey, _IntentsUIVersionNumber, 
                        _IntentsUIVersionString, __INUIRemoteViewControllerErrorDomain ]
     objc-classes:    [ INUIAddVoiceShortcutButton, INUIAddVoiceShortcutViewController, 
                        INUIEditVoiceShortcutViewController, INUIExtensionRequestInfo, 
                        INUIExtensionViewControllerConfiguration, INUIImageSizeProvider, 
-                       INUIInterfaceSection, INUIRemoteViewController, INUIVoiceShortcutXPCInterface, 
-                       _INUIExtensionContextState ]
+                       INUIInterfaceSection, INUIPortableImageLoaderHelper, INUIRemoteViewController, 
+                       INUIVoiceShortcutXPCInterface, _INUIExtensionContextState ]
 ...

@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <ShazamKit/SHDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// @brief An abstract base class for storing signatures
 ///
@@ -34,4 +34,4 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

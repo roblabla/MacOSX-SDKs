@@ -2,7 +2,7 @@
  *  hv_vm.h
  *  Hypervisor Framework
  *
- *  Copyright (c) 2018-2020 Apple Inc. All rights reserved.
+ *  Copyright (c) 2018-2022 Apple Inc. All rights reserved.
  */
 
 #pragma once
@@ -18,11 +18,11 @@ __BEGIN_DECLS
 
 /*!
  * @function   hv_vm_get_max_vcpu_count
- * @abstract   Return the max number of vcpus supported.
- * @param      max_vcpu_count  pointer to the max vcpu count.
- * @result     0 on success or error code
+ * @abstract   Return the maximum number of vcpus supported.
+ * @param      max_vcpu_count Pointer to the max vcpu count (written on success).
+ * @result     HV_SUCCESS on success, an error code otherwise.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vm_get_max_vcpu_count(uint32_t *max_vcpu_count);
@@ -31,9 +31,9 @@ hv_vm_get_max_vcpu_count(uint32_t *max_vcpu_count);
  * @function   hv_vm_create
  * @abstract   Creates a VM instance for the current process.
  * @param      config Configuration. Pass NULL for the default configuration.
- * @result     0 on success or error code
+ * @result     HV_SUCCESS on success, an error code otherwise.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vm_create(hv_vm_config_t _Nullable config);
@@ -41,9 +41,9 @@ hv_vm_create(hv_vm_config_t _Nullable config);
 /*!
  * @function   hv_vm_destroy
  * @abstract   Destroys the VM instance associated with the current process.
- * @result     0 on success or error code
+ * @result     HV_SUCCESS on success, an error code otherwise.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vm_destroy(void);
@@ -56,9 +56,9 @@ hv_vm_destroy(void);
  * @param      ipa    Page aligned address in the guest physical address space
  * @param      size   Size in bytes of the region to be mapped (must be a multiple of the page size)
  * @param      flags  READ, WRITE and EXECUTE permissions of the region
- * @result     0 on success or error code
+ * @result     HV_SUCCESS on success, an error code otherwise.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vm_map(void *addr, hv_ipa_t ipa, size_t size, hv_memory_flags_t flags);
@@ -68,9 +68,9 @@ hv_vm_map(void *addr, hv_ipa_t ipa, size_t size, hv_memory_flags_t flags);
  * @abstract   Unmaps a region in the guest physical address space of the VM.
  * @param      ipa   Page aligned address in the guest physical address space
  * @param      size  Size in bytes of the region to be unmapped (must be a multiple of the page size)
- * @result     0 on success or error code
+ * @result     HV_SUCCESS on success, an error code otherwise.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vm_unmap(hv_ipa_t ipa, size_t size);
@@ -82,9 +82,9 @@ hv_vm_unmap(hv_ipa_t ipa, size_t size);
  * @param      ipa    Page aligned address in the guest physical address space
  * @param      size   Size in bytes of the region to be modified (must be a multiple of the page size)
  * @param      flags  New READ, WRITE and EXECUTE permissions of the region
- * @result     0 on success or error code
+ * @result     HV_SUCCESS on success, an error code otherwise.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t
 hv_vm_protect(hv_ipa_t ipa, size_t size, hv_memory_flags_t flags);

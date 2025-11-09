@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4352DFA4-3AAC-3F21-89AA-ABD7F707A28F
+    value:           99E1931B-1FAE-3593-8CD0-93CAC7E14F4E
   - target:          x86_64-maccatalyst
-    value:           4352DFA4-3AAC-3F21-89AA-ABD7F707A28F
+    value:           99E1931B-1FAE-3593-8CD0-93CAC7E14F4E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84DD9802-BEAA-356C-B149-D69F669B88CA
+    value:           7E4D8318-4294-3280-BAFA-49B5D3082D87
   - target:          arm64e-maccatalyst
-    value:           84DD9802-BEAA-356C-B149-D69F669B88CA
+    value:           7E4D8318-4294-3280-BAFA-49B5D3082D87
 install-name:    '/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage'
 current-version: 5
 compatibility-version: 1.0.1
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CIDetectorAccuracy, _CIDetectorAccuracyHigh, _CIDetectorAccuracyLow, 
                        _CIDetectorAspectRatio, _CIDetectorBetterEyeLocs, _CIDetectorDetectDiacritics, 
                        _CIDetectorExtraCharacters, _CIDetectorEyeBlink, _CIDetectorFocalLength, 
@@ -73,9 +73,9 @@ exports:
                        _kCIContextColorCubeSize, _kCIContextDefaultCGImageFormat, 
                        _kCIContextDisableSoftwareFallback, _kCIContextEnableBlending, 
                        _kCIContextHLGOpticalScale, _kCIContextHighQualityDownsample, 
-                       _kCIContextInlineAffineTransforms, _kCIContextIntermediateMemoryTarget, 
-                       _kCIContextLossyCompressedIntermediates, _kCIContextName, 
-                       _kCIContextOpenGLShareContext, _kCIContextOutputColorSpace, 
+                       _kCIContextIOSurfaceMemoryPoolID, _kCIContextInlineAffineTransforms, 
+                       _kCIContextIntermediateMemoryTarget, _kCIContextLossyCompressedIntermediates, 
+                       _kCIContextName, _kCIContextOpenGLShareContext, _kCIContextOutputColorSpace, 
                        _kCIContextOutputPremultiplied, _kCIContextParametricColorMatching, 
                        _kCIContextPriorityRequestHigh, _kCIContextPriorityRequestLow, 
                        _kCIContextQuality, _kCIContextUseMetalRenderer, _kCIContextUseSoftwareRenderer, 
@@ -117,7 +117,8 @@ exports:
                        _kCIImageCacheHint, _kCIImageCacheImmediately, _kCIImageClampToEdge, 
                        _kCIImageColorSpace, _kCIImageEdgeRepeat, _kCIImageEdgesAreClear, 
                        _kCIImageFlipped, _kCIImageIgnorePixelFormatFor601Fixup, _kCIImageNearestSampling, 
-                       _kCIImageOpaque, _kCIImagePremultiplied, _kCIImageProcessorAllowPartialOutputRegion, 
+                       _kCIImageOpaque, _kCIImagePremultiplied, _kCIImageProcessorAllowCompressedInputsAndOutputs, 
+                       _kCIImageProcessorAllowPartialOutputRegion, _kCIImageProcessorCanOutputLossyCompressed, 
                        _kCIImageProcessorSynchronizeInputs, _kCIImageProperties, 
                        _kCIImageProviderContentDigest, _kCIImageProviderMaximumTileSize, 
                        _kCIImageProviderName, _kCIImageProviderTileSize, _kCIImageProviderUserInfo, 
@@ -129,10 +130,10 @@ exports:
                        _kCIImageRepresentationSemanticSegmentationSkinMatteImage, 
                        _kCIImageRepresentationSemanticSegmentationSkyMatteImage, 
                        _kCIImageRepresentationSemanticSegmentationTeethMatteImage, 
-                       _kCIImageTextScaleFactor, _kCIImageTextureFormat, _kCIImageTextureTarget, 
-                       _kCIImageToneMapHDRtoSDR, _kCIImageYCCMatrix, _kCIInputAllowDraftModeKey, 
-                       _kCIInputAmountKey, _kCIInputAngleKey, _kCIInputAspectRatioKey, 
-                       _kCIInputBackgroundImageKey, _kCIInputBaselineExposureKey, 
+                       _kCIImageTextPadding, _kCIImageTextScaleFactor, _kCIImageTextureFormat, 
+                       _kCIImageTextureTarget, _kCIImageToneMapHDRtoSDR, _kCIImageYCCMatrix, 
+                       _kCIInputAllowDraftModeKey, _kCIInputAmountKey, _kCIInputAngleKey, 
+                       _kCIInputAspectRatioKey, _kCIInputBackgroundImageKey, _kCIInputBaselineExposureKey, 
                        _kCIInputBiasKey, _kCIInputBoostKey, _kCIInputBoostShadowAmountKey, 
                        _kCIInputBrightnessKey, _kCIInputCenterKey, _kCIInputColorKey, 
                        _kCIInputColorNoiseReductionAmountKey, _kCIInputContrastKey, 
@@ -161,27 +162,24 @@ exports:
                        _kCIKernelThreadsPerThreadgroup, _kCIOutputImageKey, _kCIOutputNativeSizeKey, 
                        _kCIPhotoFilterBinaryArchive, _kCIPortraitFilterV2FullSizeBinaryArchive, 
                        _kCIPortraitFilterV2ProxySizeBinaryArchive, _kCIPropertiesKey, 
-                       _kCISamplerAffineMatrix, _kCISamplerBlur, _kCISamplerBlurFormat, 
-                       _kCISamplerColorSpace, _kCISamplerFilterLinear, _kCISamplerFilterMode, 
-                       _kCISamplerFilterNearest, _kCISamplerFilterPoint, _kCISamplerWrapBlack, 
-                       _kCISamplerWrapClamp, _kCISamplerWrapMode, _kCISamplerWrapPeriodic, 
-                       _kCISupportedDecoderVersionsKey, _kCIUIParameterSet, _kCIUISetAdvanced, 
-                       _kCIUISetBasic, _kCIUISetDevelopment, _kCIUISetIntermediate, 
-                       _metaFilterForFilter ]
+                       _kCIRedEyeRepairBinaryArchive, _kCISamplerAffineMatrix, _kCISamplerBlur, 
+                       _kCISamplerBlurFormat, _kCISamplerColorSpace, _kCISamplerFilterLinear, 
+                       _kCISamplerFilterMode, _kCISamplerFilterNearest, _kCISamplerFilterPoint, 
+                       _kCISamplerWrapBlack, _kCISamplerWrapClamp, _kCISamplerWrapMode, 
+                       _kCISamplerWrapPeriodic, _kCISupportedDecoderVersionsKey, 
+                       _kCIUIParameterSet, _kCIUISetAdvanced, _kCIUISetBasic, _kCIUISetDevelopment, 
+                       _kCIUISetIntermediate ]
     objc-classes:    [ CIAztecCodeDescriptor, CIBarcodeDescriptor, CIBitmapContext, 
-                       CIBlendKernel, CICGContext, CICGSFilter, CIColor, CIColorKernel, 
-                       CIContext, CIContextCache, CIDataMatrixCodeDescriptor, CIDetector, 
-                       CIDualRedEyeRepairSession, CIFaceFeature, CIFeature, CIFilter, 
-                       CIFilterGenerator, CIFilterGeneratorConnection, CIFilterShape, 
+                       CIBlendKernel, CIColor, CIColorKernel, CIContext, CIContextCache, 
+                       CIDataMatrixCodeDescriptor, CIDetector, CIDualRedEyeRepairSession, 
+                       CIFaceFeature, CIFeature, CIFilter, CIFilterGenerator, CIFilterShape, 
                        CIImage, CIImageAccumulator, CIImageProcessorKernel, CIKernel, 
-                       CIOpenGLContext, CIPDF417CodeDescriptor, CIQRCodeDescriptor, 
-                       CIQRCodeFeature, CIRAWFilter, CIRectangleFeature, CIRenderDestination, 
-                       CIRenderInfo, CIRenderTask, CISampler, CITextFeature, CIVector, 
-                       CIWarpKernel ]
+                       CIPDF417CodeDescriptor, CIQRCodeDescriptor, CIQRCodeFeature, 
+                       CIRAWFilter, CIRectangleFeature, CIRenderDestination, CIRenderInfo, 
+                       CIRenderTask, CISampler, CITextFeature, CIVector, CIWarpKernel ]
     objc-ivars:      [ CIAztecCodeDescriptor.dataCodewordCount, CIAztecCodeDescriptor.errorCorrectedPayload, 
                        CIAztecCodeDescriptor.isCompact, CIAztecCodeDescriptor.layerCount, 
-                       CIBitmapContext._bcpriv, CICGContext._cgPriv, CICGSFilter._cid, 
-                       CICGSFilter._filter_id, CIColor._pad, CIColor._priv, CIContext._priv, 
+                       CIBitmapContext._bcpriv, CIColor._pad, CIColor._priv, CIContext._priv, 
                        CIDataMatrixCodeDescriptor.columnCount, CIDataMatrixCodeDescriptor.eccVersion, 
                        CIDataMatrixCodeDescriptor.errorCorrectedPayload, CIDataMatrixCodeDescriptor.rowCount, 
                        CIFaceFeature.bounds, CIFaceFeature.faceAngle, CIFaceFeature.hasFaceAngle, 
@@ -193,18 +191,17 @@ exports:
                        CIFaceFeature.rightEyePosition, CIFaceFeature.trackingFrameCount, 
                        CIFaceFeature.trackingID, CIFilter._priv, CIFilterShape._pad, 
                        CIFilterShape._priv, CIImage._priv, CIImage._state, CIImageAccumulator._state, 
-                       CIKernel._priv, CIOpenGLContext._glPriv, CIPDF417CodeDescriptor.columnCount, 
-                       CIPDF417CodeDescriptor.errorCorrectedPayload, CIPDF417CodeDescriptor.isCompact, 
-                       CIPDF417CodeDescriptor.rowCount, CIQRCodeDescriptor.errorCorrectedPayload, 
-                       CIQRCodeDescriptor.errorCorrectionLevel, CIQRCodeDescriptor.maskPattern, 
-                       CIQRCodeDescriptor.symbolVersion, CIQRCodeFeature.bottomLeft, 
-                       CIQRCodeFeature.bottomRight, CIQRCodeFeature.bounds, CIQRCodeFeature.symbolDescriptor, 
-                       CIQRCodeFeature.topLeft, CIQRCodeFeature.topRight, CIRectangleFeature.bottomLeft, 
-                       CIRectangleFeature.bottomRight, CIRectangleFeature.bounds, 
-                       CIRectangleFeature.topLeft, CIRectangleFeature.topRight, CIRenderDestination._priv, 
-                       CIRenderInfo._priv, CIRenderTask._priv, CISampler._priv, CIVector._count, 
-                       CIVector._u ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+                       CIKernel._priv, CIPDF417CodeDescriptor.columnCount, CIPDF417CodeDescriptor.errorCorrectedPayload, 
+                       CIPDF417CodeDescriptor.isCompact, CIPDF417CodeDescriptor.rowCount, 
+                       CIQRCodeDescriptor.errorCorrectedPayload, CIQRCodeDescriptor.errorCorrectionLevel, 
+                       CIQRCodeDescriptor.maskPattern, CIQRCodeDescriptor.symbolVersion, 
+                       CIQRCodeFeature.bottomLeft, CIQRCodeFeature.bottomRight, CIQRCodeFeature.bounds, 
+                       CIQRCodeFeature.symbolDescriptor, CIQRCodeFeature.topLeft, 
+                       CIQRCodeFeature.topRight, CIRectangleFeature.bottomLeft, CIRectangleFeature.bottomRight, 
+                       CIRectangleFeature.bounds, CIRectangleFeature.topLeft, CIRectangleFeature.topRight, 
+                       CIRenderDestination._priv, CIRenderInfo._priv, CIRenderTask._priv, 
+                       CISampler._priv, CIVector._count, CIVector._u ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 
                        '$ld$install_name$os10.11$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 
                        '$ld$install_name$os10.4$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 
@@ -213,6 +210,8 @@ exports:
                        '$ld$install_name$os10.7$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 
                        '$ld$install_name$os10.8$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 
                        '$ld$install_name$os10.9$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore' ]
-    objc-classes:    [ CIPlugIn ]
-    objc-ivars:      [ CIPlugIn._priv ]
+    objc-classes:    [ CICGContext, CICGSFilter, CIFilterGeneratorConnection, CIOpenGLContext, 
+                       CIPlugIn ]
+    objc-ivars:      [ CICGContext._cgPriv, CICGSFilter._cid, CICGSFilter._filter_id, 
+                       CIOpenGLContext._glPriv, CIPlugIn._priv ]
 ...

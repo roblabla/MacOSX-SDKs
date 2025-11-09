@@ -164,4 +164,11 @@ MP_EXTERN NSString * const MPNowPlayingInfoPropertyAssetURL MP_API(ios(10.3), ma
 // For example, a sports broadcast can map an elapsed playback time (i.e 12 minutes and 30 seconds) to a real-time date (i.e "10:30:00 9/14/2017")
 MP_EXTERN NSString * const MPNowPlayingInfoPropertyCurrentPlaybackDate MP_API(ios(11.1), macos(10.13.1), watchos(5.0)); // NSDate
 
+// A list of ad breaks in the now playing item.
+MP_EXTERN NSString * const MPNowPlayingInfoPropertyAdTimeRanges MP_API(ios(16.0), tvos(16.0), macos(13.0)); // NSArray of MPAdTimeRange
+
+// Represents the credits start time (without ads) in seconds for the now playing item.
+// A replacement for MPNowPlayingInfoPropertyPlaybackProgress.
+MP_EXTERN NSString * const MPNowPlayingInfoPropertyCreditsStartTime MP_API(ios(16.0), tvos(16.0), macos(13.0)); // NSNumber (double)
+
 NS_ASSUME_NONNULL_END

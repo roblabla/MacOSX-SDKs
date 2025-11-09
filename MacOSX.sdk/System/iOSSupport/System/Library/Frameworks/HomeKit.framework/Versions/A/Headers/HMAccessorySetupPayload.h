@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 HM_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
-@interface HMAccessoryOwnershipToken : NSObject
+    @interface HMAccessoryOwnershipToken : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -31,7 +31,7 @@ HM_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos, macCata
 @end
 
 HM_EXTERN API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
-@interface HMAccessorySetupPayload : NSObject
+    @interface HMAccessorySetupPayload : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -54,7 +54,7 @@ HM_EXTERN API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos, tvos, macCata
  *
  * @return Returns an accessory setup payload object if successful or nil on error.
  */
-- (nullable instancetype)initWithURL:(NSURL *)setupPayloadURL ownershipToken:(nullable HMAccessoryOwnershipToken *)ownershipToken API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos) NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithURL:(NSURL *)setupPayloadURL ownershipToken:(nullable HMAccessoryOwnershipToken *)ownershipToken API_AVAILABLE(ios(13.0))API_UNAVAILABLE(macos, watchos, tvos)NS_DESIGNATED_INITIALIZER;
 
 @end
 

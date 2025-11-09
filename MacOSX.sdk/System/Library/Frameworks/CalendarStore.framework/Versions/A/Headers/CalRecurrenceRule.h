@@ -30,11 +30,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CalRecurrenceEnd : NSObject <NSCopying> {
-    @private
-    NSDate *_endDate;
-    NSUInteger _occurrenceCount;
-}
+@interface CalRecurrenceEnd : NSObject <NSCopying>
 
 + (id)recurrenceEndWithEndDate:(NSDate *)endDate NS_DEPRECATED_MAC(10_5, 10_8);
 + (id)recurrenceEndWithOccurrenceCount:(NSUInteger)occurrenceCount NS_DEPRECATED_MAC(10_5, 10_8);
@@ -50,11 +46,7 @@
 //  Valid values for dayOfTheWeek are integers 1-7, which correspond to days of the week with Sunday = 1.
 //  Valid values for weekNumber portion are 1, 2, 3, 4, or -1, where a value of -1 indicates the last week.
 
-@interface CalNthWeekDay : NSObject <NSCopying> {
-    @private
-    NSUInteger _dayOfTheWeek;
-    NSInteger _weekNumber;
-}
+@interface CalNthWeekDay : NSObject <NSCopying>
 
 @property(readonly) NSUInteger dayOfTheWeek NS_DEPRECATED_MAC(10_5, 10_8);
 @property(readonly) NSInteger weekNumber NS_DEPRECATED_MAC(10_5, 10_8);
@@ -86,19 +78,6 @@ typedef enum {
 extern NSUInteger const CalDefaultRecurrenceInterval NS_DEPRECATED_MAC(10_5, 10_8);
 
 @interface CalRecurrenceRule : NSObject <NSCopying>
-{
-    @private
-    id _objectID;
-    void *_reserved;
-    NSArray *_monthsOfTheYear;
-    NSArray *_nthWeekDaysOfTheMonth;
-    NSArray *_daysOfTheMonth;
-    NSArray *_daysOfTheWeek;
-    NSUInteger _firstDayOfTheWeek;
-    NSUInteger _recurrenceInterval;
-    CalRecurrenceType _recurrenceType;
-    CalRecurrenceEnd *_recurrenceEnd;
-}
 
 //  Recurrence initializers
 //  Two parameters are included in every CalRecurrenceRule initializer. The first is the interval, which is described 

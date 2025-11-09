@@ -409,8 +409,21 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNHorizonObservation : VNObservation
 
+/*!
+ @brief Transform applied to the detected horizon in image coordinates.
+ @discussion This is the transform in image coordinates and not a normalized transform.
+ */
 @property (readonly, nonatomic, assign) CGAffineTransform transform;
+
+/*!
+ @brief Angle of the observed horizon.
+ */
 @property (readonly, nonatomic, assign) CGFloat angle;
+
+/*!
+ @brief Creates a transform for the specified width and height.
+ */
+- (CGAffineTransform) transformForImageWidth:(size_t)width height:(size_t)height API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));
 
 @end
 

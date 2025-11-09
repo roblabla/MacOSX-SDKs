@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// @brief Methods in this protocol can be used by a mail app extension to perform actions on messages as they are downloaded.
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 @protocol MEMessageActionHandler <NSObject>
 
 /// @brief This is invoked when a message is downloaded. The action set in the completion handler will be performed on the message. Depending on if the full body of the

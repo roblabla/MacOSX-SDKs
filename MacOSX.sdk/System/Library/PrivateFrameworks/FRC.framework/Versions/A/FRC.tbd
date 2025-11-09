@@ -5,11 +5,11 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7074EEB9-BCEF-3E21-8E81-4DFE431ADF8A
+    value:           AA95D819-55D1-3529-B62E-314C9CA36210
 install-name:    '/System/Library/PrivateFrameworks/FRC.framework/Versions/A/FRC'
-current-version: 126
+current-version: 146.1
 exports:
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ _FRCFlowConsistencyFrameScoreKey, _FRCFlowConsistencyRegionScoreKey, 
                        _FRCGatingCauseKey, _FRCGatingStatusKey, _FRCGetAlignedInputFrameSizeForUsage, 
                        _FRCGetInputFrameSizeForUsage, _FRCGetNumberOfPixelsForUsage, 
@@ -22,20 +22,21 @@ exports:
                        _compareCVPixelBuffers, _compareYUV420PixelBuffers, _copyTextureToBuffer, 
                        _copyTextureToBufferWithBlit, _create420vBufferFromFile, _createOpticalFlowFromFile, 
                        _createPixelBuffer, _createPixelBufferPool, _createPixelBufferPoolWithExtendedPixels, 
-                       _createRGBATextureFromCVPixelBuffer, _createTextures, _createTexturesFromCVPixelBuffer, 
-                       _createTexturesFromCVPixelBufferWithCommandBuffer, _deinterleave2, 
-                       _deinterleave3, _deinterleave4, _deserializeLivePhotoMetadata, 
+                       _createRGBATextureFromCVPixelBuffer, _createTensorBufferFlowFromFile, 
+                       _createTextures, _createTexturesFromCVPixelBuffer, _createTexturesFromCVPixelBufferWithCommandBuffer, 
+                       _deinterleave2, _deinterleave3, _deinterleave4, _deserializeLivePhotoMetadata, 
                        _findIRAPs, _get4xDownSizeUsage, _getFigLivePhotoMetadataV3, 
-                       _getOpticalFlowTensorSize, _getQuarterSizeUsage, _getSynthesisTensorSize, 
-                       _interleave2, _interleave4, _isBufferCopyNecessaryForCVtoTextureConversion, 
+                       _getQuarterSizeUsage, _getSynthesisTensorSize, _interleave2, 
+                       _interleave4, _isBufferCopyNecessaryForCVtoTextureConversion, 
                        _isBufferYUV, _isPackedRGBA, _loadTexture, _loadTextureArray, 
                        _loadTextureInterleaved, _readBGRA, _readBuffer, _readBufferInterlaeved, 
-                       _readData, _readData32, _readPNG, _readYUVPlanar, _saveTensorBuffer, 
-                       _saveTensorBufferWithChannelOffset, _saveTextureArray, _saveTextureBufferFlt32, 
-                       _saveTextureInterleaved, _swapWidthAndHeight, _uniformTimeScales, 
-                       _write64RGBAHalf, _writeBGRA, _writeBuffer, _writeBufferFlt32, 
-                       _writeBufferInterlaeved, _writeBufferWithVerticalOffset, _writeData, 
-                       _writeData32, _writePNG, _writeYUVPlanar ]
+                       _readData, _readData32, _readFlo, _readPNG, _readYUVPlanar, 
+                       _saveTensorBuffer, _saveTensorBufferWithChannelOffset, _saveTextureArray, 
+                       _saveTextureBufferFlt32, _saveTextureInterleaved, _swapWidthAndHeight, 
+                       _uniformTimeScales, _write64RGBAHalf, _writeBGRA, _writeBuffer, 
+                       _writeBufferFlt32, _writeBufferInterlaeved, _writeBufferWithVerticalOffset, 
+                       _writeData, _writeData32, _writeFlo, _writeGrayscaldTiff, 
+                       _writePNG, _writeYUVPlanar ]
     objc-classes:    [ Backwarp, BodyPoint, Correlation, EspressoModel, FRCBodyBoundingBoxDetector, 
                        FRCFaceHandLegBlock, FRCFaceHandLegRectangle, FRCFrame, FRCFrameBurstyDropInfo, 
                        FRCFrameDropDetector, FRCFrameInsertionPoint, FRCFrameInternalTimingInfo, 

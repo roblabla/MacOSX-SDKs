@@ -4,33 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A59FE969-F101-33D0-81C8-E94D7DCE2B48
+    value:           17A5904E-45EC-3821-B6ED-0E614CD92680
   - target:          x86_64-maccatalyst
-    value:           A59FE969-F101-33D0-81C8-E94D7DCE2B48
+    value:           17A5904E-45EC-3821-B6ED-0E614CD92680
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E858665A-1DF6-3881-8C46-C75E32A5FFEC
+    value:           371AA124-83F4-3AB6-AB8A-F8F731084376
   - target:          arm64e-maccatalyst
-    value:           E858665A-1DF6-3881-8C46-C75E32A5FFEC
+    value:           371AA124-83F4-3AB6-AB8A-F8F731084376
 install-name:    '/System/Library/PrivateFrameworks/RemoteManagement.framework/Versions/A/RemoteManagement'
 current-version: 2
-allowable-clients:
+exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ AccountExtension, AppManagementExtension, DMCEnrollmentProvider, 
-                       InteractiveLegacyProfilesExtension, LegacyProfilesExtension, 
-                       MDM, ManagementTestExtension, MiniLauncher, PasscodeSettingsExtension, 
-                       RMTestConfigAgent, RemoteManagementAgent, RemoteManagementInternalSettings, 
-                       RemoteManagementMCXService, RemoteManagementStoreTests, RemoteManagementTests, 
-                       SettingsSharedSupport, Setup, Setup Assistant, SetupTests, 
-                       remotemanagementd, rm_test_configd, rmdctl, rmdinspect, rmdtool ]
-exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _InteractiveLegacyProfileIdentifierPrefix, _LegacyProfileIdentifierPrefix, 
+    symbols:         [ _DatabaseDirectoryName, _HTTPLogsDirectoryName, _IdentitiesDirectoryName, 
+                       _InteractiveLegacyProfileIdentifierPrefix, _LegacyProfileIdentifierPrefix, 
                        _MDMv1DaemonUnenrollNotification, _RMAccountAdditionalInfoKeyManagedByOlympus, 
                        _RMAccountPropertyKeyAccountScheme, _RMAccountPropertyKeyAdditionalInfo, 
                        _RMAccountPropertyKeyAltDSID, _RMAccountPropertyKeyBearerToken, 
@@ -51,13 +42,14 @@ exports:
                        _RMConfigurationTypeLegacyInteractiveProfiles, _RMConfigurationTypeLegacyProfiles, 
                        _RMConfigurationTypeManagementStatusSubscription, _RMConfigurationTypeManagementTest, 
                        _RMConfigurationTypePasscodeSettings, _RMErrorDomain, _RMErrorUserInfoKeyDescriptionKey, 
-                       _RMHTTPStatusCodeKey, _RMMobileKeyBagErrorCodeKey, _RMPersonaRestorationFailedException, 
-                       _RMXPCAgentMachServiceName, _RMXPCDaemonMachServiceName ]
+                       _RMHTTPStatusCodeKey, _RMMobileKeyBagErrorCodeKey, _RMXPCAgentMachServiceName, 
+                       _RMXPCDaemonMachServiceName, _StatusDirectoryName ]
     objc-classes:    [ RMAccountHelper, RMAsset, RMAuthenticationCredential, RMBundle, 
-                       RMConfiguration, RMDebounceTimer, RMDeclarationKey, RMDevice, 
-                       RMDeviceAuthenticationCredential, RMEnrollmentController, 
+                       RMConfiguration, RMDateFormat, RMDebounceTimer, RMDeclarationKey, 
+                       RMDevice, RMDeviceAuthenticationCredential, RMEnrollmentController, 
                        RMErrorUtilities, RMFeatureFlags, RMFeatureOverrides, RMGenericAuthenticationCredential, 
-                       RMLocations, RMLog, RMMDMHelper, RMManagementChannel, RMPersonaHelper, 
-                       RMProfilesAdapter, RMProfilesController, RMSynchronous, RMTimedDispatch, 
-                       RMXPCNotifications, RMXPCProxy, RemoteManagement_Subsystem ]
+                       RMJSONUtilities, RMLocations, RMLog, RMMCAdapter, RMMDMHelper, 
+                       RMManagementChannel, RMProfilesAdapter, RMProfilesController, 
+                       RMSandbox, RMSharedLock, RMSynchronous, RMTimedDispatch, RMXPCNotifications, 
+                       RMXPCProxy ]
 ...

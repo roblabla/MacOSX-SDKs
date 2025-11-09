@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           445EA0F7-77CF-31C9-9EFC-5F16831A6DF8
+    value:           E659110A-9868-399C-A6D5-43FCBFCF729B
   - target:          x86_64-maccatalyst
-    value:           445EA0F7-77CF-31C9-9EFC-5F16831A6DF8
+    value:           E659110A-9868-399C-A6D5-43FCBFCF729B
   - target:          x86_64h-macos
-    value:           67BB2659-DFEB-3746-98C9-95466E292B8E
+    value:           319AE505-F0B7-382F-AD76-7DC160AAA49B
   - target:          x86_64h-maccatalyst
-    value:           67BB2659-DFEB-3746-98C9-95466E292B8E
+    value:           319AE505-F0B7-382F-AD76-7DC160AAA49B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           11761567-2956-3EF5-968D-5892F62906EF
+    value:           D99D4003-DAD2-37B2-B8F9-88ECF8F83127
   - target:          arm64e-maccatalyst
-    value:           11761567-2956-3EF5-968D-5892F62906EF
+    value:           D99D4003-DAD2-37B2-B8F9-88ECF8F83127
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib'
-current-version: 794.100.2
+current-version: 818.40.3
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
-                       x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _VVACOS, _VVACOSF, _VVACOSF_, _VVACOSH, _VVACOSHF, _VVACOSHF_, 
                        _VVACOSH_, _VVACOS_, _VVASIN, _VVASINF, _VVASINF_, _VVASINH, 
                        _VVASINHF, _VVASINHF_, _VVASINH_, _VVASIN_, _VVATAN, _VVATAN2, 

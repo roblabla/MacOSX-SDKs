@@ -1,10 +1,3 @@
-#if !defined(_KERN_ECC_H)
-#define _KERN_ECC_H
-
-#include <sys/cdefs.h>
-
-__BEGIN_DECLS
-
 /*
  * Copyright (c) 2013 Apple Inc. All rights reserved.
  *
@@ -33,6 +26,16 @@ __BEGIN_DECLS
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 
+#pragma once
+
+#include <mach/kern_return.h>
+#include <stdint.h>
+#include <sys/cdefs.h>
+
+__BEGIN_DECLS
+
+/* Old ECC logging mechanism */
+
 #define ECC_EVENT_INFO_DATA_ENTRIES     8
 struct ecc_event {
 	uint8_t         id;     // ID of memory (e.g. L2C), platform-specific
@@ -42,7 +45,65 @@ struct ecc_event {
 
 
 
+/* New CoreAnalytics ECC logging mechanism */
+
+/* Flags to describe ECC memory errors */
+__options_decl(ecc_flags_t, uint32_t, {
+	ECC_NONE                        = 0x00000000,
+	ECC_IS_CORRECTABLE              = 0x00000001,
+	ECC_IS_RETIRED                  = 0x00000002,
+	ECC_IS_PANIC_PATH               = 0x00000004,
+	ECC_IS_CPU_REPORTED             = 0x00000008,
+	ECC_DB_CORRUPTED                = 0x00000010,
+	ECC_IS_TEST_ERROR               = 0x00000020,
+});
+
+/* Flags to describe MCC memory errors */
+__options_decl(mcc_flags_t, uint32_t, {
+	MCC_NONE                        = 0x00000000,
+	MCC_IS_SINGLE_BIT               = 0x00000001,
+	MCC_IS_MULTI_BIT                = 0x00000002,
+});
+
+/**
+ * MCC ECC versions.
+ */
+typedef enum {
+	MCC_ECC_V1,
+
+	// Metadata
+	MCC_ECC_NUM_VERSIONS
+} mcc_ecc_version_t;
+
+/**
+ * MCC ECC event descriptor.
+ *
+ * @note If a new MCC ECC version has been added, because i.e. future hardware must log new or different data,
+ * new fields should be appended to this struct to represent the new data.  No fields should be
+ * deleted from this struct unless the field corresponds only to hardware that has been deprecated.
+ */
+typedef struct {
+	/* Version of this struct. */
+	mcc_ecc_version_t version;
+	/* Flags used to describe the error. */
+	mcc_flags_t flags;
+	/* Interrupt status at the time of the MCC error. */
+	uint32_t status;
+	/* AMCC on which the error occurred. */
+	uint32_t amcc;
+	/* Plane of the AMCC on which the error occurred. */
+	uint32_t plane;
+	/* MemCache error Bank of first one bit error. */
+	uint32_t bank;
+	/* MemCache error Way of first one bit error. */
+	uint32_t way;
+	/* MemCache error Index of first one bit error. */
+	uint32_t index;
+	/* Indicates whether the error is in upper half cache line or lower half cache line. */
+	uint32_t bit_off_cl;
+	/* MemCache one bit error bit offset of first one bit error with in half cache line. */
+	uint32_t bit_off_within_hcl;
+} mcc_ecc_event_t;
+
 
 __END_DECLS
-
-#endif /* !defined(_KERN_ECC_H) */

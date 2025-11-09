@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet (CSMedia)
 
 //The list of editor/editors that have worked on this item.

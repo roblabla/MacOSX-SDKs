@@ -2,7 +2,7 @@
  *  hv_vcpu_config.h
  *  Hypervisor Framework
  *
- *  Copyright (c) 2018-2020 Apple Inc. All rights reserved.
+ *  Copyright (c) 2018-2022 Apple Inc. All rights reserved.
  */
 
 #pragma once
@@ -22,7 +22,7 @@ __BEGIN_DECLS
  * @result     A new vcpu configuration object. This should be released with os_release
  *             when no longer used.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT OS_OBJECT_RETURNS_RETAINED OS_WARN_RESULT
 hv_vcpu_config_t
 hv_vcpu_config_create(void);
@@ -54,7 +54,7 @@ OS_ENUM(hv_feature_reg, uint32_t,
  * @param     value Pointer to the feature register value.
  * @result    0 on success or error code.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t hv_vcpu_config_get_feature_reg(hv_vcpu_config_t config,
     hv_feature_reg_t feature_reg, uint64_t *value);
@@ -67,7 +67,7 @@ hv_return_t hv_vcpu_config_get_feature_reg(hv_vcpu_config_t config,
  * @param     values Pointer to the CCSIDR_EL1 register values.
  * @result    0 on success or error code.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 OS_EXPORT
 hv_return_t hv_vcpu_config_get_ccsidr_el1_sys_reg_values(hv_vcpu_config_t config,
     hv_cache_type_t cache_type, uint64_t values[_Nonnull 8]);

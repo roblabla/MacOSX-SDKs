@@ -12,7 +12,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UITabBar.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIView, UIImage, UINavigationController, UITabBarItem;
 @protocol UITabBarControllerDelegate;
@@ -83,7 +83,7 @@ NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UITabBarController.h>

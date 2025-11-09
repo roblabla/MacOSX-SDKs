@@ -26,17 +26,17 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @brief Specifies the key path for a characteristic in a NSPredicate
  */
-HM_EXTERN NSString * const HMCharacteristicKeyPath API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
+HM_EXTERN NSString *const HMCharacteristicKeyPath API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
  * @brief Specifies the key path for a characteristic value in a NSPredicate
  */
-HM_EXTERN NSString * const HMCharacteristicValueKeyPath API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
+HM_EXTERN NSString *const HMCharacteristicValueKeyPath API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
  * @brief Specifies the key path for a presence event in a NSPredicate
  */
-HM_EXTERN NSString * const HMPresenceKeyPath API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
+HM_EXTERN NSString *const HMPresenceKeyPath API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 
 /*!
@@ -45,7 +45,7 @@ HM_EXTERN NSString * const HMPresenceKeyPath API_AVAILABLE(ios(11.0), watchos(4.
  * @discussion This class represents a trigger that is based on events.
  */
 HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMEventTrigger : HMTrigger
+    @interface HMEventTrigger : HMTrigger
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -88,39 +88,39 @@ HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
                       events:(NSArray<HMEvent *> *)events
                    endEvents:(nullable NSArray<HMEvent *> *)endEvents
                  recurrences:(nullable NSArray<NSDateComponents *> *)recurrences
-                   predicate:(nullable NSPredicate *)predicate API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+                   predicate:(nullable NSPredicate *)predicate API_AVAILABLE(ios(11.0))API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief The events associated with the trigger.
  */
-@property(readonly, copy, nonatomic) NSArray<HMEvent *> *events;
+@property (readonly, copy, nonatomic) NSArray<HMEvent *> *events;
 
 /*!
  * @brief The events that correspond to executing the restore of the scene before the trigger was executed.
  *        E.g. Execute the scene for 10 mins and restore original state is achieved by specifying a corresponding
  *        HMDurationEvent in the list of endEvents.
  */
-@property(readonly, copy, nonatomic) NSArray<HMEvent *> *endEvents API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (readonly, copy, nonatomic) NSArray<HMEvent *> *endEvents API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
  * @brief The predicate to evaluate before executing the action sets associated with the trigger.
  */
-@property(readonly, copy, nonatomic, nullable) NSPredicate *predicate;
+@property (readonly, copy, nonatomic, nullable) NSPredicate *predicate;
 
 /*!
  * @brief recurrences Specifies the recurrences for when the trigger is evaluated. This only supports days of the week.
  */
-@property(readonly, copy, nonatomic, nullable) NSArray<NSDateComponents *> *recurrences API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (readonly, copy, nonatomic, nullable) NSArray<NSDateComponents *> *recurrences API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
  * @brief Specifies whether this trigger is executed only once after which the trigger is disabled.
  */
-@property(readonly, nonatomic) BOOL executeOnce API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (readonly, nonatomic) BOOL executeOnce API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
  * @brief Specifies the current activation state of the trigger.
  */
-@property(readonly, assign, nonatomic) HMEventTriggerActivationState triggerActivationState API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (readonly, assign, nonatomic) HMEventTriggerActivationState triggerActivationState API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 
 /*!
@@ -132,7 +132,7 @@ HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addEvent:(HMEvent *)event completionHandler:(void (^)(NSError * __nullable error))completion API_DEPRECATED("Use updateEvents:completionHandler: instead", ios(9.0, 11.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)addEvent:(HMEvent *)event completionHandler:(void (^)(NSError *__nullable error))completion API_DEPRECATED("Use updateEvents:completionHandler: instead", ios(9.0, 11.0))API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Removes the specified event from the event trigger.
@@ -143,7 +143,7 @@ HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)removeEvent:(HMEvent *)event completionHandler:(void (^)(NSError * __nullable error))completion API_DEPRECATED("Use updateEvents:completionHandler: instead", ios(9.0, 11.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)removeEvent:(HMEvent *)event completionHandler:(void (^)(NSError *__nullable error))completion API_DEPRECATED("Use updateEvents:completionHandler: instead", ios(9.0, 11.0))API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Updates the set of events in the event trigger.
@@ -154,7 +154,7 @@ HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)updateEvents:(NSArray<HMEvent *> *)events completionHandler:(void (^)(NSError * __nullable error))completion API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)updateEvents:(NSArray<HMEvent *> *)events completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(11.0))API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Updates the set of events in the event trigger.
@@ -165,7 +165,7 @@ HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)updateEndEvents:(NSArray<HMEvent *> *)endEvents completionHandler:(void (^)(NSError * __nullable error))completion API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)updateEndEvents:(NSArray<HMEvent *> *)endEvents completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(11.0))API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief This method replaces the predicate used to evaluate execution of the action sets associated with the trigger.
@@ -176,7 +176,7 @@ HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request,
  *                   error will be nil on success. 
  */
-- (void)updatePredicate:(nullable NSPredicate *)predicate completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)updatePredicate:(nullable NSPredicate *)predicate completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief This method replaces the recurrences which secifies the days of the week when the trigger is to be evaluated.
@@ -187,7 +187,7 @@ HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request,
  *                   error will be nil on success.
  */
-- (void)updateRecurrences:(nullable NSArray<NSDateComponents *> *)recurrences completionHandler:(void (^)(NSError * __nullable error))completion API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)updateRecurrences:(nullable NSArray<NSDateComponents *> *)recurrences completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(11.0))API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief This method is used to update whether the event trigger repeats or not.
@@ -198,11 +198,11 @@ HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)updateExecuteOnce:(BOOL)executeOnce completionHandler:(void (^)(NSError * __nullable error))completion API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)updateExecuteOnce:(BOOL)executeOnce completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(11.0))API_UNAVAILABLE(watchos, tvos);
 
 @end
 
-@interface HMEventTrigger(NSPredicate)
+@interface HMEventTrigger (NSPredicate)
 
 /*!
  * @brief Creates a predicate that will evaluate whether the event occurred before a significant event.

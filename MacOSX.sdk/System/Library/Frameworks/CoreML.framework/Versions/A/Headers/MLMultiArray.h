@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, MLMultiArrayDataType) {
     MLMultiArrayDataTypeDouble  = 0x10000 | 64,
     MLMultiArrayDataTypeFloat64 API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x10000 | 64,
     MLMultiArrayDataTypeFloat32 = 0x10000 | 32,
-    MLMultiArrayDataTypeFloat16 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos) = 0x10000 | 16,
+    MLMultiArrayDataTypeFloat16 API_AVAILABLE(macos(12.0), ios(16.0), watchos(9.0), tvos(16.0)) = 0x10000 | 16,
     MLMultiArrayDataTypeFloat   API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x10000 | 32,
     MLMultiArrayDataTypeInt32   = 0x20000 | 32,
 } API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
@@ -32,7 +32,7 @@ ML_EXPORT
 @interface MLMultiArray : NSObject <NSSecureCoding>
 
 /// Unsafe pointer to underlying buffer holding the data
-@property (readonly, nonatomic) void *dataPointer NS_RETURNS_INNER_POINTER;
+@property (readonly, nonatomic) void *dataPointer NS_RETURNS_INNER_POINTER API_DEPRECATED("Use getBytesWithHandler or getMutableBytesWithHandler instead. For Swift, use withUnsafeBytes or withUnsafeMutableBytes.", macos(10.13, API_TO_BE_DEPRECATED), ios(11.0, API_TO_BE_DEPRECATED), tvos(11.0, API_TO_BE_DEPRECATED), watchos(4.0, API_TO_BE_DEPRECATED));
 
 /// Type of element held
 @property (readonly, nonatomic) MLMultiArrayDataType dataType;
@@ -53,7 +53,7 @@ ML_EXPORT
 /**
    Returns the backing pixel buffer if exists, otherwise nil.
  */
-@property (readonly, nullable, nonatomic) CVPixelBufferRef pixelBuffer API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (readonly, nullable, nonatomic) CVPixelBufferRef pixelBuffer API_AVAILABLE(macos(12.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 @end
 
@@ -98,7 +98,52 @@ ML_EXPORT
  * @param shape The shape of the MLMultiArray. The last dimension of `shape` must match the pixel buffer's width. The product of the rest of the dimensions must match the height.
  */
 - (instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer
-                              shape:(NSArray<NSNumber *> *)shape API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+                              shape:(NSArray<NSNumber *> *)shape API_AVAILABLE(macos(12.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+@end
+
+@interface MLMultiArray (ScopedBufferAccess)
+
+/*!
+ * Get the underlying buffer pointer to read.
+ *
+ * The buffer pointer is valid only within the block.
+ *
+ * \code
+ * MLMultiArray * A = [[MLMultiArray alloc] initWithShape:@[@3, @2] dataType:MLMultiArrayDataTypeInt32 error:NULL];
+ * A[@[@1, @2]] = @42;
+ * [A getBytesWithHandler:^(const void *bytes, NSInteger size) {
+ *     const int32_t *scalarBuffer = (const int32_t *)bytes;
+ *     const int strideY = A.strides[0].intValue;
+ *     // Print 42
+ *     NSLog(@"Scalar at (1, 2): %d", scalarBuffer[1 * strideY + 2]);
+ * }];
+ * \endcode
+ *
+ * @param handler The block to receive the buffer pointer and its size in bytes.
+ */
+- (void)getBytesWithHandler:(void (NS_NOESCAPE ^)(const void *bytes, NSInteger size))handler API_AVAILABLE(macos(12.3), ios(15.4), watchos(8.5), tvos(15.4)) NS_REFINED_FOR_SWIFT;
+
+/*!
+ * Get the underlying buffer pointer to mutate.
+ *
+ * The buffer pointer is valid only within the block.
+ *
+ * Use `strides` parameter passed in the block because the method may switch to a new backing buffer with different strides.
+ *
+ * \code
+ * MLMultiArray * A = [[MLMultiArray alloc] initWithShape:@[@3, @2] dataType:MLMultiArrayDataTypeInt32 error:NULL];
+ * [A getMutableBytesWithHandler:^(void *bytes, NSInteger __unused size, NSArray<NSNumber *> *strides) {
+ *     int32_t *scalarBuffer = (int32_t *)bytes;
+ *     const int strideY = strides[0].intValue;
+ *     scalarBuffer[1 * strideY + 2] = 42;  // Set 42 at A[1, 2]
+ * }];
+ * \endcode
+ *
+ * @param handler The block to receive the buffer pointer, size in bytes, and strides.
+ *
+ */
+- (void)getMutableBytesWithHandler:(void (NS_NOESCAPE ^)(void *mutableBytes, NSInteger size, NSArray<NSNumber *> *strides))handler API_AVAILABLE(macos(12.3), ios(15.4), watchos(8.5), tvos(15.4)) NS_REFINED_FOR_SWIFT;
 
 @end
 

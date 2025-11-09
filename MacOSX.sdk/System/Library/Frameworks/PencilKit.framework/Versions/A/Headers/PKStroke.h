@@ -23,12 +23,25 @@ API_AVAILABLE(ios(14.0), macos(11.0))
 ///
 /// @param ink The ink for the stroke.
 /// @param strokePath The B-spine stroke path for the stroke.
-/// @param transform The affine transform of the stroke. Defaults to `.identity`.
+/// @param transform The affine transform of the stroke.
 /// @param mask The mask for the stroke.
 #if TARGET_OS_IPHONE
 - (instancetype)initWithInk:(PKInk *)ink strokePath:(PKStrokePath *)strokePath transform:(CGAffineTransform)transform mask:(nullable UIBezierPath *)mask;
 #else
 - (instancetype)initWithInk:(PKInk *)ink strokePath:(PKStrokePath *)strokePath transform:(CGAffineTransform)transform mask:(nullable NSBezierPath *)mask;
+#endif
+
+/// Create a new stroke.
+///
+/// @param ink The ink for the stroke.
+/// @param strokePath The B-spine stroke path for the stroke.
+/// @param transform The affine transform of the stroke.
+/// @param mask The mask for the stroke.
+/// @param randomSeed The random seed for the stroke.
+#if TARGET_OS_IPHONE
+- (instancetype)initWithInk:(PKInk *)ink strokePath:(PKStrokePath *)strokePath transform:(CGAffineTransform)transform mask:(nullable UIBezierPath *)mask randomSeed:(uint32_t)randomSeed API_AVAILABLE(ios(16.0), macos(13.0));
+#else
+- (instancetype)initWithInk:(PKInk *)ink strokePath:(PKStrokePath *)strokePath transform:(CGAffineTransform)transform mask:(nullable NSBezierPath *)mask randomSeed:(uint32_t)randomSeed API_AVAILABLE(ios(16.0), macos(13.0));
 #endif
 
 /// The ink used to render this stroke.
@@ -56,6 +69,9 @@ API_AVAILABLE(ios(14.0), macos(11.0))
 /// These are the parametric parameter ranges of points in `strokePath`
 /// that intersect the stroke's mask.
 @property (nonatomic, readonly) NSArray<PKFloatRange *> *maskedPathRanges;
+
+/// The random seed for drawing strokes that use randomized effects.
+@property (nonatomic, readonly) uint32_t randomSeed API_AVAILABLE(ios(16.0), macos(13.0));
 
 @end
 

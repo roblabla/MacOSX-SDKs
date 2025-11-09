@@ -11,7 +11,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIContextMenuInteraction.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_OPTIONS(NSUInteger, UIControlEvents) {
     UIControlEventTouchDown                                         = 1 <<  0,      // on all touch downs
@@ -173,7 +173,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIControl.h>

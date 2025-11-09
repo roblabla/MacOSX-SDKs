@@ -3,27 +3,28 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0C14A992-398E-378C-9D25-FF34D2BC7E6B
+    value:           FE628D6A-A001-3D26-89D5-5EC32803A090
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E1C2FA6B-0B48-3206-AD33-730FF2CD4962
+    value:           7CB00A84-92B6-36A5-B099-FE7E6BD62BC6
 install-name:    '/System/Library/PrivateFrameworks/TVRemoteCore.framework/Versions/A/TVRemoteCore'
-current-version: 190.40.36
+current-version: 252.10.14
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSStringFromRMSMessageType, _NSStringFromRMSResponseCode, 
                        _TVRCAirplayIDKey, _TVRCButtonApplicationBundleIDKey, _TVRCButtonSkipIntervalKey, 
                        _TVRCButtonTypeDescription, _TVRCConnectionInvalidatedNotification, 
                        _TVRCDeviceConnectionTypeDescription, _TVRCDeviceModelTypeAirplaySetTopBox, 
                        _TVRCDeviceModelTypeAirplayStick, _TVRCDeviceModelTypeAirplayTelevision, 
                        _TVRCDeviceNameKey, _TVRCErrorDomain, _TVRCErrorMediaRemotePairingLockoutDelayKey, 
-                       _TVRCFetchLaunchableApplicationsEvent, _TVRCFetchUserAccountsEvent, 
-                       _TVRCMakeError, _TVRCMatchPointServiceAddedNotification, _TVRCMatchPointServiceNameChangedNotification, 
-                       _TVRCMatchPointServiceRemovedNotification, _TVRCMediaRemoteEndpointManagerLog, 
-                       _TVRCMediaRemoteIDKey, _TVRCReduceLoundSoundsEnabled, _TVRCSwitchAccountID, 
-                       _TVRCSwitchUserAccountEvent, _TVRCSystemAppearanceLight, _TVRCToggleReduceLoudSounds, 
-                       _TVRCToggleSystemAppearance, _TVRCTouchPhaseDescription, _TVRMSAddToWishlistMessageReadFrom, 
+                       _TVRCFetchAttentionState, _TVRCFetchLaunchableApplicationsEvent, 
+                       _TVRCFetchUserAccountsEvent, _TVRCMakeError, _TVRCMatchPointServiceAddedNotification, 
+                       _TVRCMatchPointServiceNameChangedNotification, _TVRCMatchPointServiceRemovedNotification, 
+                       _TVRCMediaRemoteIDKey, _TVRCRSSIThreshold, _TVRCReduceLoundSoundsEnabled, 
+                       _TVRCSwitchAccountID, _TVRCSwitchUserAccountEvent, _TVRCSystemAppearanceLight, 
+                       _TVRCSystemStatus, _TVRCToggleReduceLoudSounds, _TVRCToggleSystemAppearance, 
+                       _TVRCTouchPhaseDescription, _TVRMSAddToWishlistMessageReadFrom, 
                        _TVRMSAudioRouteMessageReadFrom, _TVRMSAudioRoutesDidUpdateMessageReadFrom, 
                        _TVRMSAvailableServicesDidUpdateMessageReadFrom, _TVRMSBeginDiscoveryMessageReadFrom, 
                        _TVRMSBeginPairingMessageReadFrom, _TVRMSBeginPairingResponseMessageReadFrom, 
@@ -38,23 +39,25 @@ exports:
                        _TVRMSSetVolumeMessageReadFrom, _TVRMSTouchMessageReadFrom, 
                        _TVRMSUpdatePairedNetworNamesMessageReadFrom, _TVRMSVolumeDidUpdateMessageReadFrom, 
                        _TVRMSWifiAvailabilityDidChangeMessageReadFrom, _TVRemoteCoreVersionNumber, 
-                       _TVRemoteCoreVersionString, __TVRCButtonLongPressBeginActionKey, 
-                       __TVRCButtonLongPressEndActionKey, __TVRCGeneralLog, __TVRCHomeKitLog, 
-                       __TVRCMDMLog, __TVRCMediaEventsManagerLog, __TVRCRMSLog, __TVRCRapportLog, 
+                       _TVRemoteCoreVersionString, __TVRCAddStateHandlerWithName, 
+                       __TVRCButtonLongPressBeginActionKey, __TVRCButtonLongPressEndActionKey, 
+                       __TVRCGeneralLog, __TVRCHomeKitLog, __TVRCMDMLog, __TVRCMediaEventsManagerLog, 
+                       __TVRCMediaRemoteEndpointManagerLog, __TVRCRMSLog, __TVRCRapportLog, 
                        __TVRCRemoteTextInputLog ]
     objc-classes:    [ TVRCAnalytics, TVRCButton, TVRCButtonEvent, TVRCConstants, 
                        TVRCDevice, TVRCDeviceAuthenticationChallenge, TVRCDeviceEventManager, 
                        TVRCDeviceInfo, TVRCDeviceQuery, TVRCDeviceState, TVRCFeatures, 
                        TVRCGameControllerEvent, TVRCHMHomeObserver, TVRCHMServiceWrapper, 
                        TVRCKeyboardAttributes, TVRCKeyboardController, TVRCKeyboardState, 
-                       TVRCMatchPointDeviceImpl, TVRCMatchPointDeviceQuery, TVRCMediaRemoteEndpointManager, 
-                       TVRCPINEntryAttributes, TVRCPreferredDeviceManager, TVRCRPCompanionLinkClientWrapper, 
-                       TVRCRapportDeviceImpl, TVRCRapportDeviceQuery, TVRCRapportMediaEventsManager, 
-                       TVRCRapportRemoteTextInputKeyboardImpl, TVRCSessionData, TVRCTouchEvent, 
-                       TVRCVoiceRecorder, TVRCXPCClient, TVRCXPCProtocolManager, 
-                       TVRMSAddToWishlistMessage, TVRMSAudioRoute, TVRMSAudioRouteMessage, 
-                       TVRMSAudioRoutesDidUpdateMessage, TVRMSAvailableServicesDidUpdateMessage, 
-                       TVRMSBeginDiscoveryMessage, TVRMSBeginPairingMessage, TVRMSBeginPairingResponseMessage, 
+                       TVRCLogBuilder, TVRCMatchPointDeviceImpl, TVRCMatchPointDeviceQuery, 
+                       TVRCMediaRemoteEndpointManager, TVRCPINEntryAttributes, TVRCPreferredDeviceManager, 
+                       TVRCRPCompanionLinkClientWrapper, TVRCRapportDeviceImpl, TVRCRapportDeviceQuery, 
+                       TVRCRapportMediaEventsManager, TVRCRapportRemoteTextInputKeyboardImpl, 
+                       TVRCSessionData, TVRCTouchEvent, TVRCVoiceRecorder, TVRCXPCClient, 
+                       TVRCXPCProtocolManager, TVRMSAddToWishlistMessage, TVRMSAudioRoute, 
+                       TVRMSAudioRouteMessage, TVRMSAudioRoutesDidUpdateMessage, 
+                       TVRMSAvailableServicesDidUpdateMessage, TVRMSBeginDiscoveryMessage, 
+                       TVRMSBeginPairingMessage, TVRMSBeginPairingResponseMessage, 
                        TVRMSBonjourServiceProvider, TVRMSConnectToServiceMessage, 
                        TVRMSConnectToServiceResponseMessage, TVRMSControlInterface, 
                        TVRMSControlInterfaceMessage, TVRMSDAAPEncoder, TVRMSDAAPParser, 

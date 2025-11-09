@@ -1,7 +1,7 @@
 /*
     NSPersistentCloudKitContainer_Sharing.h
     Core Data
-    Copyright (c) 2021-2021, Apple Inc.
+    Copyright (c) 2021-2022, Apple Inc.
     All rights reserved.
 */
 
@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class CKShareMetadata;
 @class CKShareParticipant;
 @class CKUserIdentityLookupInfo;
+
 @interface NSPersistentCloudKitContainer (Sharing)
 
 #pragma mark - Sharing
@@ -95,6 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)shareManagedObjects:(NSArray<NSManagedObject *> *)managedObjects
                     toShare:(nullable CKShare *)share
                  completion:(void(^)(NSSet<NSManagedObjectID *> * _Nullable sharedObjectIDs, CKShare * _Nullable share, CKContainer * _Nullable cloudKitContainer, NSError * _Nullable sharingError))completion API_AVAILABLE(macosx(12.0),ios(15.0),tvos(15.0),watchos(8.0));
+
 @end
 
 NS_ASSUME_NONNULL_END

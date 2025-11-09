@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           595302BC-E4D1-38AD-BACB-A695AFA6AA82
+    value:           A9F4E40A-5EC8-3108-BC6C-29C7780C654E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F4426893-66FC-3167-8386-C6A5592EA992
+    value:           B1911D66-187B-3013-BF05-BF38864D8C2F
 flags:           [ not_app_extension_safe ]
 install-name:    '/System/Library/PrivateFrameworks/CoreLSKD.framework/CoreLSKD'
-current-version: 16.14
+current-version: 17.7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BBdyFX9JObVXUh8aGhB0aD3, _Mym0f1araacCU5xeSFjr ]
 ...

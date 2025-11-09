@@ -1,4 +1,4 @@
-.\" Copyright (c) 2020-2021 Apple Computer, Inc.  All rights reserved.
+.\" Copyright (c) 2020-2022 Apple Computer, Inc.  All rights reserved.
 .Dd 9/22/20
 .Dt networkQuality 8
 .Os Darwin
@@ -7,9 +7,10 @@
 .Nd Network quality testing tool
 .Sh SYNOPSIS
 .Nm
-.Op Fl chsv           \" [-chsv]
-.Op Fl I Ar interface \" [-I interface]
+.Op Fl chksv          \" [-chksv]
 .Op Fl C Ar configuration URL \" [-C configuration URL]
+.Op Fl I Ar interface \" [-I interface]
+.Op Fl r Ar host \" [-r host]
 .Sh DESCRIPTION
 .Nm
 allows for measuring the different aspects of Network Quality, including:
@@ -28,22 +29,26 @@ For more details about the RPM score and the methodology around the testing, see
 .Pp
 The following options are available:
 .Bl -tag -width -indent
-.It Fl C Ar configuration URL
-Use custom configuration URL. See
+.It Fl C Ar configuration URL/path
+Use custom configuration URL or path (with scheme file://). See
 .Ar https://github.com/network-quality/server
 for server implementation details.
 .It Fl I Ar interface
 Bind test to interface (e.g., en0, pdp_ip0,...)
 .Pp
 If not specified, the default interface will be used.
+.It Fl r Ar host
+Connect to host or IP, overriding DNS for initial config request
 .It Fl c
-Produce computer-readable output
+Produce computer-readable output.
 .It Fl h
 Show help
+.It Fl k
+Disable verification of the server identity via TLS.
 .It Fl s
-Run tests sequentially instead of parallel upload/download
+Run tests sequentially instead of parallel upload/download.
 .It Fl v
-Verbose output
+Verbose output.
 .El                      \" Ends the list
 .Pp
 .\" .El

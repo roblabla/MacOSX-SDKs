@@ -8,7 +8,7 @@
 
 typedef NSString *NSErrorDomain;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // Predefined domain for errors from most AppKit and Foundation APIs.
 FOUNDATION_EXPORT NSErrorDomain const NSCocoaErrorDomain;
@@ -41,6 +41,7 @@ FOUNDATION_EXPORT NSErrorUserInfoKey const NSStringEncodingErrorKey ;  // NSNumb
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSURLErrorKey;              // NSURL
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSFilePathErrorKey;         // NSString
 
+NS_SWIFT_SENDABLE // Immutable, and NSError must be Sendable because it conforms to Error in Swift
 @interface NSError : NSObject <NSCopying, NSSecureCoding> {
     @private
     void *_reserved;
@@ -107,8 +108,8 @@ It is expected that only the “owner” of an NSError domain specifies the prov
  
 If an appropriate result for the requested key cannot be provided, return nil rather than choosing to manufacture a generic fallback response such as "Operation could not be completed, error 42." NSError will take care of the fallback cases.
 */
-+ (void)setUserInfoValueProviderForDomain:(NSErrorDomain)errorDomain provider:(id _Nullable (^ _Nullable)(NSError *err, NSErrorUserInfoKey userInfoKey))provider API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
-+ (id _Nullable (^ _Nullable)(NSError *err, NSErrorUserInfoKey userInfoKey))userInfoValueProviderForDomain:(NSErrorDomain)errorDomain API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
++ (void)setUserInfoValueProviderForDomain:(NSErrorDomain)errorDomain provider:(id _Nullable (NS_SWIFT_SENDABLE ^ _Nullable)(NSError *err, NSErrorUserInfoKey userInfoKey))provider API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
++ (id _Nullable (NS_SWIFT_SENDABLE ^ _Nullable)(NSError *err, NSErrorUserInfoKey userInfoKey))userInfoValueProviderForDomain:(NSErrorDomain)errorDomain API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -129,5 +130,5 @@ The value passed for didRecover must be YES if error recovery was completely suc
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 

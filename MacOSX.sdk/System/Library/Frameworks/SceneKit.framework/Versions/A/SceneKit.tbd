@@ -3,23 +3,23 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F100D9F4-17D7-360C-8D38-0F269F39249E
+    value:           F063CCA6-689C-379B-8810-30983C303D21
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           26AF5D4C-A500-32D1-8DCF-64B89A735639
+    value:           CAF78FB2-4A0A-37BE-9909-C5255C9AC81F
 install-name:    '/System/Library/Frameworks/SceneKit.framework/Versions/A/SceneKit'
-current-version: 568.255
+current-version: 581.100
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _C3DGetFileDecryptionCallbacks, _C3DIOCreateCStringFromCFString, 
                        _C3DIOCreateOptionsForRealtimeViewer, _C3DImageGetAttribute, 
                        _C3DImageGetURL, _C3DImageSetAttribute, _C3DSetFileDecryptionCallbacks, 
                        _SCNAnimationCommitOnCompletion, _SCNBindingValueTransformerKey, 
-                       _SCNCaptureDeviceOutputConsumerOptionContainsAlpha, _SCNConsistencyElementIDErrorKey, 
-                       _SCNConsistencyElementTypeErrorKey, _SCNConsistencyLineNumberErrorKey, 
-                       _SCNDataProviderAnimationTime, _SCNDataProviderCAWaitTime, 
-                       _SCNDataProviderCPUIdleTime, _SCNDataProviderClientUpdateTime, 
+                       _SCNCaptureDeviceOutputConsumerOptionContainsAlpha, _SCNCompositorRendererLayoutKey, 
+                       _SCNConsistencyElementIDErrorKey, _SCNConsistencyElementTypeErrorKey, 
+                       _SCNConsistencyLineNumberErrorKey, _SCNDataProviderAnimationTime, 
+                       _SCNDataProviderCAWaitTime, _SCNDataProviderCPUIdleTime, _SCNDataProviderClientUpdateTime, 
                        _SCNDataProviderConstraintsTime, _SCNDataProviderFPS, _SCNDataProviderFrameTime, 
                        _SCNDataProviderGPUDeviceUtil, _SCNDataProviderGPURendererUtil, 
                        _SCNDataProviderGPUTilerUtil, _SCNDataProviderParticleTime, 
@@ -115,9 +115,9 @@ exports:
                        _SCNShaderModifierEntryPointSurface, _SCNTextureContentWithGLInfo, 
                        _SCNTextureOffsetXKey, _SCNTextureOffsetYKey, _SCNVector3EqualToVector3, 
                        _SCNVector3Zero, _SCNVector4EqualToVector4, _SCNVector4Zero, 
-                       _SCNViewTransform, _SCNWriteMTLTextureToData, _SCNWriteMTLTextureToFile, 
-                       __SCNGetCollectedShadersForPid, __SCNGetPerformanceStatisticsForPid, 
-                       __SCNSetLinearRenderingEnabled, __SCNSetShaderCacheURL, __SCNSetShouldPostShadableCompilationNotifications, 
+                       _SCNViewTransform, _SCNWriteMTLTextureToFile, __SCNGetCollectedShadersForPid, 
+                       __SCNGetPerformanceStatisticsForPid, __SCNSetLinearRenderingEnabled, 
+                       __SCNSetShaderCacheURL, __SCNSetShouldPostShadableCompilationNotifications, 
                        __SCNShadableConvertShaderToMetalIfNeeded, __SCNShadableDidCompileNotificationName, 
                        __SCNShadableIssuesKey, __SCNStartCollectingPerformanceStatisticsForPid, 
                        __SCNStopCollectingPerformanceStatisticsForPid, __scnDebuggingInfo, 
@@ -140,9 +140,10 @@ exports:
                        SCNAssetCatalog, SCNAudioPlayer, SCNAudioSource, SCNAuthoringEnvironment, 
                        SCNAuthoringEnvironment2, SCNAvoidOccluderConstraint, SCNBillboardConstraint, 
                        SCNBox, SCNCamera, SCNCameraControlEventHandler, SCNCameraController, 
-                       SCNCameraNavigationController, SCNCapsule, SCNCone, SCNConstantScaleConstraint, 
-                       SCNConstraint, SCNCylinder, SCNDistanceConstraint, SCNEventHandler, 
-                       SCNExportOperation, SCNFloor, SCNGeometry, SCNGeometryElement, 
+                       SCNCameraNavigationController, SCNCapsule, SCNCompositorRenderer, 
+                       SCNCone, SCNConstantScaleConstraint, SCNConstraint, SCNCylinder, 
+                       SCNDistanceConstraint, SCNEffect, SCNEventHandler, SCNExportOperation, 
+                       SCNFloor, SCNGeometry, SCNGeometryDeformer, SCNGeometryElement, 
                        SCNGeometrySource, SCNGeometryTessellator, SCNHitTestResult, 
                        SCNIKConstraint, SCNImageSource, SCNKeyedArchiver, SCNKeyedUnarchiver, 
                        SCNLayer, SCNLevelOfDetail, SCNLight, SCNLookAtConstraint, 

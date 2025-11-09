@@ -1138,7 +1138,7 @@ extern void
 FSEventStreamScheduleWithRunLoop(
   FSEventStreamRef   streamRef,
   CFRunLoopRef       runLoop,
-  CFStringRef        runLoopMode)                             __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_6_0);
+  CFStringRef        runLoopMode) API_DEPRECATED("Use FSEventStreamSetDispatchQueue instead.", macos(10.5, 13.0), ios(6.0,16.0));
 
 
 /*
@@ -1168,7 +1168,7 @@ extern void
 FSEventStreamUnscheduleFromRunLoop(
   FSEventStreamRef   streamRef,
   CFRunLoopRef       runLoop,
-  CFStringRef        runLoopMode)                             __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_6_0);
+  CFStringRef        runLoopMode) API_DEPRECATED("Use FSEventStreamSetDispatchQueue instead.", macos(10.5, 13.0), ios(6.0,16.0));
 
 
 

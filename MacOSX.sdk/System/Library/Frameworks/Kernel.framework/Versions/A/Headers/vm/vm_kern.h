@@ -66,42 +66,37 @@
 #ifndef _VM_VM_KERN_H_
 #define _VM_VM_KERN_H_
 
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <mach/mach_types.h>
 #include <mach/boolean.h>
 #include <mach/kern_return.h>
 #include <mach/vm_types.h>
 
-
-
 __BEGIN_DECLS
-extern vm_offset_t vm_kernel_addrhash(vm_offset_t addr);
-__END_DECLS
 
-extern void vm_kernel_addrhide(
-	vm_offset_t addr,
-	vm_offset_t *hide_addr);
+
+#pragma mark - the kmem subsystem
+
+#pragma mark - kernel address obfuscation / hashhing for logging
 
 extern vm_offset_t vm_kernel_addrperm_ext;
 
-extern void     vm_kernel_addrperm_external(
-	vm_offset_t addr,
-	vm_offset_t *perm_addr);
+extern void vm_kernel_addrhide(
+	vm_offset_t             addr,
+	vm_offset_t            *hide_addr);
 
-extern void     vm_kernel_unslide_or_perm_external(
-	vm_offset_t addr,
-	vm_offset_t *up_addr);
+extern void vm_kernel_addrperm_external(
+	vm_offset_t             addr,
+	vm_offset_t            *perm_addr);
+
+extern void vm_kernel_unslide_or_perm_external(
+	vm_offset_t             addr,
+	vm_offset_t            *up_addr);
 
 
-extern void vm_init_before_launchd(void);
+extern vm_offset_t vm_kernel_addrhash(
+	vm_offset_t             addr);
 
 
-#ifdef __cplusplus
-}
-#endif
+__END_DECLS
 
 #endif  /* _VM_VM_KERN_H_ */

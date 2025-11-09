@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1EACC7E8-3424-30ED-AAFE-1C7545DC7C90
+    value:           FA07911E-A1AD-31ED-BC9E-8C81C1BECB6A
   - target:          x86_64-maccatalyst
-    value:           1EACC7E8-3424-30ED-AAFE-1C7545DC7C90
+    value:           FA07911E-A1AD-31ED-BC9E-8C81C1BECB6A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DE3076FA-D2C7-31A2-A077-5A13C0C4512F
+    value:           F5679C7A-0E70-3B3B-B511-ED7DA6F8B3DE
   - target:          arm64e-maccatalyst
-    value:           DE3076FA-D2C7-31A2-A077-5A13C0C4512F
+    value:           F5679C7A-0E70-3B3B-B511-ED7DA6F8B3DE
 install-name:    '/System/Library/PrivateFrameworks/IDSKVStore.framework/Versions/A/IDSKVStore'
 current-version: 800
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ IDSKVDeleteContext, IDSKVStore ]
 ...

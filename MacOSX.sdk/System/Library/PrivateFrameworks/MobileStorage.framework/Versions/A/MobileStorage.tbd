@@ -3,20 +3,21 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           04DCCD53-7172-34F0-AF26-6CF8D1515983
+    value:           5DE1BE23-C7EE-3BC7-8F8B-D88C673C9F8B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7D63DE13-280E-3CCA-BA9A-DCB59507989D
+    value:           D388F1A2-F174-3D82-8201-5190EC9A113A
 install-name:    '/System/Library/PrivateFrameworks/MobileStorage.framework/Versions/A/MobileStorage'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MobileStorageCopyAndFixPlist, _MobileStorageCopyCryptexNonceWithError, 
-                       _MobileStorageCopyDevices, _MobileStorageCopyDevicesWithError, 
-                       _MobileStorageCopyPersonalizationIdentifiersWithError, _MobileStorageCopyPersonalizationManifestWithError, 
-                       _MobileStorageCopyPersonalizationNonceWithError, _MobileStorageMount, 
-                       _MobileStorageMountPersonalizedBundleWithError, _MobileStorageMountWithError, 
-                       _MobileStorageRemoteCopyCryptexNonceWithError, _MobileStorageRemoteCopyDevicesWithError, 
+                       _MobileStorageCopyDeveloperModeStatusWithError, _MobileStorageCopyDevices, 
+                       _MobileStorageCopyDevicesWithError, _MobileStorageCopyPersonalizationIdentifiersWithError, 
+                       _MobileStorageCopyPersonalizationManifestWithError, _MobileStorageCopyPersonalizationNonceWithError, 
+                       _MobileStorageMount, _MobileStorageMountPersonalizedBundleWithError, 
+                       _MobileStorageMountWithError, _MobileStorageRemoteCopyCryptexNonceWithError, 
+                       _MobileStorageRemoteCopyDeveloperModeStatusWithError, _MobileStorageRemoteCopyDevicesWithError, 
                        _MobileStorageRemoteCopyMountedImageSignaturesWithError, _MobileStorageRemoteCopyPersonalizationIdentifiersWithError, 
                        _MobileStorageRemoteCopyPersonalizationManifestWithError, 
                        _MobileStorageRemoteCopyPersonalizationNonceWithError, _MobileStorageRemoteMountPersonalizedBundleWithError, 

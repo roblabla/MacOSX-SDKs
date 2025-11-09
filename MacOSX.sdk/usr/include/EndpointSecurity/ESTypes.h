@@ -21,6 +21,42 @@ typedef enum {
 } es_set_or_clear_t;
 
 /**
+ * @brief This enum describes the type of the es_event_proc_check_t event that are currently used
+ *
+ * @note ES_PROC_CHECK_TYPE_KERNMSGBUF, ES_PROC_CHECK_TYPE_TERMINATE and
+ * ES_PROC_CHECK_TYPE_UDATA_INFO are deprecated and no proc_check messages will be generated
+ * for the corresponding proc_info call numbers.
+ * The terminate callnum is covered by the signal event.
+ */
+typedef enum {
+	ES_PROC_CHECK_TYPE_LISTPIDS = 0x1,
+	ES_PROC_CHECK_TYPE_PIDINFO = 0x2,
+	ES_PROC_CHECK_TYPE_PIDFDINFO = 0x3,
+	ES_PROC_CHECK_TYPE_KERNMSGBUF = 0x4,        // deprecated, not generated
+	ES_PROC_CHECK_TYPE_SETCONTROL = 0x5,
+	ES_PROC_CHECK_TYPE_PIDFILEPORTINFO = 0x6,
+	ES_PROC_CHECK_TYPE_TERMINATE = 0x7,         // deprecated, not generated
+	ES_PROC_CHECK_TYPE_DIRTYCONTROL = 0x8,
+	ES_PROC_CHECK_TYPE_PIDRUSAGE = 0x9,
+	ES_PROC_CHECK_TYPE_UDATA_INFO = 0xe,        // deprecated, not generated
+} es_proc_check_type_t;
+
+/**
+ * @brief This enum describes the types of authentications that
+ * ES_EVENT_TYPE_NOTIFY_AUTHENTICATION can describe.
+ */
+typedef enum {
+    ES_AUTHENTICATION_TYPE_OD,
+	ES_AUTHENTICATION_TYPE_TOUCHID,
+	ES_AUTHENTICATION_TYPE_TOKEN,
+	ES_AUTHENTICATION_TYPE_AUTO_UNLOCK,
+	// ES_AUTHENTICATION_TYPE_LAST is not a valid type of authentication
+	// but is a convenience value to operate on the range of defined
+	// authentication types.
+	ES_AUTHENTICATION_TYPE_LAST
+} es_authentication_type_t;
+
+/**
  * The valid event types recognized by EndpointSecurity
  *
  * @discussion When a program subscribes to and receives an AUTH-related event, it must respond
@@ -150,6 +186,22 @@ typedef enum {
   , ES_EVENT_TYPE_NOTIFY_SETREGID
   , ES_EVENT_TYPE_AUTH_COPYFILE
   , ES_EVENT_TYPE_NOTIFY_COPYFILE
+	// The following events are available beginning in macOS 13.0
+  , ES_EVENT_TYPE_NOTIFY_AUTHENTICATION
+  , ES_EVENT_TYPE_NOTIFY_XP_MALWARE_DETECTED
+  , ES_EVENT_TYPE_NOTIFY_XP_MALWARE_REMEDIATED
+  , ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOGIN
+  , ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOGOUT
+  , ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOCK
+  , ES_EVENT_TYPE_NOTIFY_LW_SESSION_UNLOCK
+  , ES_EVENT_TYPE_NOTIFY_SCREENSHARING_ATTACH
+  , ES_EVENT_TYPE_NOTIFY_SCREENSHARING_DETACH
+  , ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGIN
+  , ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGOUT
+  , ES_EVENT_TYPE_NOTIFY_LOGIN_LOGIN
+  , ES_EVENT_TYPE_NOTIFY_LOGIN_LOGOUT
+  , ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_ADD
+  , ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_REMOVE
     // ES_EVENT_TYPE_LAST is not a valid event type but a convenience
     // value for operating on the range of defined event types.
     // This value may change between releases and was available
@@ -258,13 +310,17 @@ typedef enum {
 	/// Value to describe a path prefix
 	ES_MUTE_PATH_TYPE_PREFIX
 	/// Value to describe a path literal
-  , ES_MUTE_PATH_TYPE_LITERAL
+	, ES_MUTE_PATH_TYPE_LITERAL
+	/// Value to describe a target path prefix
+	, ES_MUTE_PATH_TYPE_TARGET_PREFIX
+	/// Value to describe a target path literal
+	, ES_MUTE_PATH_TYPE_TARGET_LITERAL
 } es_mute_path_type_t;
 
 /*
  * Structure to describe attributes of a muted path.
  *
- * @field type Indicates if the path is a prefix or literal.
+ * @field type Indicates if the path is a prefix or literal, and what type of muting applies.
  * @field event_count The number of events contained in the `events` array.
  * @field events Array of event types for which the path is muted.
  * @field path The muted path. (Note: es_string_token_t is a char array and length)
@@ -310,5 +366,35 @@ typedef struct {
 	size_t count;
 	const es_muted_process_t *processes;
 } es_muted_processes_t;
+
+/*
+ * Type of a network address.
+ */
+typedef enum {
+	/// No source address available.
+	ES_ADDRESS_TYPE_NONE,
+	/// Source address is IPv4.
+	ES_ADDRESS_TYPE_IPV4,
+	/// Source address is IPv6.
+	ES_ADDRESS_TYPE_IPV6,
+	/// Source address is named UNIX socket.
+	ES_ADDRESS_TYPE_NAMED_SOCKET,
+} es_address_type_t;
+
+typedef enum {
+	ES_MUTE_INVERSION_TYPE_PROCESS
+	, ES_MUTE_INVERSION_TYPE_PATH
+	, ES_MUTE_INVERSION_TYPE_TARGET_PATH
+	, ES_MUTE_INVERSION_TYPE_LAST
+} es_mute_inversion_type_t;
+
+typedef enum {
+	/// The type of muted queried was inverted
+	ES_MUTE_INVERTED
+	/// The type of muted queried was not inverted
+	, ES_MUTE_NOT_INVERTED
+	/// There was an error querying mute inversion state
+	, ES_MUTE_INVERTED_ERROR
+} es_mute_inverted_return_t;
 
 #endif /* __ENDPOINT_SECURITY_TYPES_H */

@@ -15,7 +15,7 @@
 @class NSTextViewportLayoutController;
 @protocol NSTextLocation;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // A viewport is a rectangular area within a flipped coordinate system expanding along the y-axis. With text contents, lines advance along the expanding direction typically. It defines the active area where text layout fragments laid out. The area corresponds to the user visible area with additional over-scroll region in most cases. NSTextViewportLayoutController manages the layout process inside the viewport interacting with its delegate.
 
@@ -82,7 +82,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 // This is used to artificially move the viewport without affecting viewport content, can be both positive/negative offset.
 - (void)adjustViewportByVerticalOffset:(CGFloat)verticalOffset;
 @end
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 #else
 #import <UIFoundation/NSTextViewportLayoutController.h>
 #endif

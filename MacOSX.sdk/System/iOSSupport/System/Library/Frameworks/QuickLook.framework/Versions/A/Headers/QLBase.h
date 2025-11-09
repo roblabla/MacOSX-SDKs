@@ -1,3 +1,4 @@
+#if (defined(USE_PUBLIC_QUICKLOOKUICORE_HEADERS) && USE_PUBLIC_QUICKLOOKUICORE_HEADERS) || !__has_include(<QuickLookUICore/QLBase.h>)
 /*
  *  QLBase.h
  *  Quick Look
@@ -26,4 +27,8 @@
 #define QL_DEPRECATED __attribute__((deprecated))
 #define QL_FORMAT_ARG(F, A) __attribute__((format(CFString, F, A)))
 
+#endif
+
+#else
+#import <QuickLookUICore/QLBase.h>
 #endif

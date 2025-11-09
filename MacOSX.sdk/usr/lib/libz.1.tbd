@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           02C3B145-D211-31D3-96FF-391CBCDB2051
+    value:           4F4CA72E-E5E7-3811-A092-BE8347DCCA20
   - target:          x86_64-maccatalyst
-    value:           02C3B145-D211-31D3-96FF-391CBCDB2051
+    value:           4F4CA72E-E5E7-3811-A092-BE8347DCCA20
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5AF373AA-2CC4-3C8D-B03A-CA309C8AA1E1
+    value:           680A2C48-83E0-3070-AD7C-EAB04ED5D36C
   - target:          arm64e-maccatalyst
-    value:           5AF373AA-2CC4-3C8D-B03A-CA309C8AA1E1
+    value:           680A2C48-83E0-3070-AD7C-EAB04ED5D36C
 install-name:    '/usr/lib/libz.1.dylib'
 current-version: 1.2.11
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _adler32, _adler32_combine, _adler32_z, _compress, _compress2, 
                        _compressBound, _crc32, _crc32_combine, _crc32_z, _deflate, 
                        _deflateBound, _deflateCopy, _deflateEnd, _deflateGetDictionary, 

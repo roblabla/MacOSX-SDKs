@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F4ED62EA-4C91-353F-95E2-023E94D6FE1C
+    value:           07B3EE70-0D59-3388-9ECD-0B1FBC05A4B9
   - target:          x86_64-maccatalyst
-    value:           F4ED62EA-4C91-353F-95E2-023E94D6FE1C
+    value:           07B3EE70-0D59-3388-9ECD-0B1FBC05A4B9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           346FF8CD-F687-34EB-B840-FC553E99E210
+    value:           B4552493-0077-3DD1-8022-4FF93F98379B
   - target:          arm64e-maccatalyst
-    value:           346FF8CD-F687-34EB-B840-FC553E99E210
+    value:           B4552493-0077-3DD1-8022-4FF93F98379B
 install-name:    '/System/Library/PrivateFrameworks/TrustEvaluationAgent.framework/Versions/A/TrustEvaluationAgent'
-current-version: 36
+current-version: 38
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _TEACertificateChainAddCert, _TEACertificateChainCreate, _TEACertificateChainCreateWithData, 
                        _TEACertificateChainEnumerateWithBlock, _TEACertificateChainGetCertAtIndex, 
                        _TEACertificateChainGetCerts, _TEACertificateChainGetCount, 

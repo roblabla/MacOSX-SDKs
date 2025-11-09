@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           57CB11AA-73E0-3300-8495-B3AE82495910
+    value:           007CF9DD-B2AF-3A3D-8BED-DB920FD24404
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           180D4E5D-7346-3FCD-8755-209C5C5FE73F
+    value:           EB602094-9380-3866-B33C-4534EA6396C8
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_SpriteKit_SwiftUI.framework/Versions/A/_SpriteKit_SwiftUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s18_SpriteKit_SwiftUI0A4ViewV0cD00E0AAMc', '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV11showsFieldsAEvgZ', 
                        '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV12showsPhysicsAEvgZ', 
                        '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV14showsDrawCountAEvgZ', 

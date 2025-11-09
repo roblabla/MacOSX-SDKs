@@ -13,6 +13,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+@class MKMapItem;
+
 NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
@@ -35,6 +37,9 @@ NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
                                           pitch:(CGFloat)pitch
                                         heading:(CLLocationDirection)heading NS_AVAILABLE(10_11, 9_0);
 
++ (instancetype)cameraLookingAtMapItem:(MKMapItem *)mapItem
+                           forViewSize:(CGSize)viewSize
+                            allowPitch:(BOOL)allowPitch API_AVAILABLE(ios(16.0), macos(13.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 @end
 

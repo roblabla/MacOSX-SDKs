@@ -4,28 +4,34 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0B9D0253-BFD2-3923-A146-63BF0BC7634C
+    value:           73EBEC14-7C7A-30E6-A3B1-6F8D73CE6B19
   - target:          x86_64-maccatalyst
-    value:           0B9D0253-BFD2-3923-A146-63BF0BC7634C
+    value:           73EBEC14-7C7A-30E6-A3B1-6F8D73CE6B19
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           88BB1717-3B1B-3466-8AE8-E9D51844BC0A
+    value:           E3B5B918-E5EA-37DE-8A50-6C9848D87AC0
   - target:          arm64e-maccatalyst
-    value:           88BB1717-3B1B-3466-8AE8-E9D51844BC0A
+    value:           E3B5B918-E5EA-37DE-8A50-6C9848D87AC0
 install-name:    '/System/Library/PrivateFrameworks/RemoteTextInput.framework/Versions/A/RemoteTextInput'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _RTILogFacility, _RTIServiceAnonymousName, _RTIServiceIOSMacName, 
-                       _RTIServiceMediaRemoteName, _RTIServiceRapportName, _RTIServiceSharingName, 
-                       _RTIServiceSharingSafariName, _RTIServiceTVControlServicesName, 
-                       _RemoteTextInputVersionNumber, _RemoteTextInputVersionString, 
-                       __RTI_NSStringFromCGRect ]
-    objc-classes:    [ RTIDataPayload, RTIDocumentState, RTIDocumentTraits, RTIInputSystemClient, 
-                       RTIInputSystemClientSession, RTIInputSystemDataPayload, RTIInputSystemService, 
-                       RTIInputSystemServiceSession, RTIInputSystemSession, RTIInputSystemSourceSession, 
-                       RTIStyledIntermediateText, RTITextOperations, RTIUtilities ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _RTIInputUIServiceMachNameiOS, _RTIInputUIServiceName, _RTILogFacility, 
+                       _RTIServiceAnonymousName, _RTIServiceIOSMacName, _RTIServiceMediaRemoteName, 
+                       _RTIServiceRapportName, _RTIServiceSharingName, _RTIServiceSharingSafariName, 
+                       _RTIServiceTVControlServicesName, _RemoteTextInputVersionNumber, 
+                       _RemoteTextInputVersionString, __RTI_NSStringFromCGRect, _kRTISupplementalItemIconDataType_CodedNSImage, 
+                       _kRTISupplementalItemIconDataType_CodedUIImage ]
+    objc-classes:    [ RTIAssistantItem, RTIBarButtonGroup, RTIColor, RTIDataPayload, 
+                       RTIDocumentRequest, RTIDocumentState, RTIDocumentTraits, RTIInputOperation, 
+                       RTIInputSourceState, RTIInputSystemClient, RTIInputSystemClientSession, 
+                       RTIInputSystemDataPayload, RTIInputSystemService, RTIInputSystemServiceSession, 
+                       RTIInputSystemSession, RTIInputSystemSourceSession, RTIInputSystemUIClient, 
+                       RTIInputSystemUIService, RTIInputViewInfo, RTIKeyedArchiver, 
+                       RTIKeyedUnarchiver, RTISessionOptions, RTIStyledIntermediateText, 
+                       RTISupplementalItemIcon, RTISupplementalLexicon, RTITextOperations, 
+                       RTITextStyling, RTIUtilities, _RTIWeakProxy ]
 ...

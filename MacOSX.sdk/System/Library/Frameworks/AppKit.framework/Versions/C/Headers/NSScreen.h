@@ -41,7 +41,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
  */
 - (BOOL)canRepresentDisplayGamut:(NSDisplayGamut)displayGamut API_AVAILABLE(macos(10.12));
 
-/* Convert to/from the device pixel aligned coordinates sytem of a display 
+/* Convert to/from the device pixel aligned coordinates system of a display
  */
 - (NSRect)convertRectToBacking:(NSRect)rect API_AVAILABLE(macos(10.7));
 - (NSRect)convertRectFromBacking:(NSRect)rect API_AVAILABLE(macos(10.7));

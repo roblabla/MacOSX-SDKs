@@ -36,7 +36,7 @@ static const UIFocusGroupPriority UIFocusGroupPriorityPreviouslyFocused API_AVAI
 static const UIFocusGroupPriority UIFocusGroupPriorityPrioritized API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos) = 2000;
 static const UIFocusGroupPriority UIFocusGroupPriorityCurrentlyFocused API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos) = NSIntegerMax;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// Objects conforming to UIFocusEnvironment influence and respond to focus behavior within a specific area of the screen that they control.
 UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
@@ -128,6 +128,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(12.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly, strong) id<UICoordinateSpace> coordinateSpace;
 
 /// Returns an array of all focus items within this container that intersect with the provided rect. `rect` is expressed in `coordinateSpace`.
+/// Note: starting in iOS & tvOS 16.0, UIView will return its subviews from this method. If you override this method in a UIView subclass, it will be your responsibility to call super and merge your array of custom focus items with UIView's default focus items.
 - (NSArray<id<UIFocusItem>> *)focusItemsInRect:(CGRect)rect;
 
 @end
@@ -189,7 +190,7 @@ UIKIT_EXTERN UIFocusSoundIdentifier const UIFocusSoundIdentifierNone API_AVAILAB
 /// Sound identifier for playing the default sound during a focus update.
 UIKIT_EXTERN UIFocusSoundIdentifier const UIFocusSoundIdentifierDefault API_AVAILABLE(tvos(11.0)) API_UNAVAILABLE(ios, watchos);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIFocus.h>

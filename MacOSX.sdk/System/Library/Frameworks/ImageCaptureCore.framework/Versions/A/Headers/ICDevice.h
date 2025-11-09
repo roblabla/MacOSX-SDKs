@@ -44,7 +44,7 @@ typedef NS_ENUM(NSUInteger, ICDeviceLocationType)
     ICDeviceLocationTypeShared    = 0x00000200,
     ICDeviceLocationTypeBonjour   = 0x00000400,
     ICDeviceLocationTypeBluetooth = 0x00000800
-}  IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+}  IC_AVAILABLE(macos(10.4), ios(16.0));
 
 /*!
  @const ICDeviceTypeMask
@@ -56,7 +56,7 @@ typedef NS_ENUM(NSUInteger, ICDeviceTypeMask)
 {
     ICDeviceTypeMaskCamera  = 0x00000001,
     ICDeviceTypeMaskScanner = 0x00000002
-} IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+} IC_AVAILABLE(macos(10.4),ios(15.2));
 
 /*!
  @const ICDeviceLocationTypeMask
@@ -74,7 +74,7 @@ typedef NS_ENUM( NSUInteger, ICDeviceLocationTypeMask )
     ICDeviceLocationTypeMaskBonjour   = 0x00000400,
     ICDeviceLocationTypeMaskBluetooth = 0x00000800,
     ICDeviceLocationTypeMaskRemote    = 0x0000FE00
-} IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+} IC_AVAILABLE(macos(10.4),ios(15.2));
 
 @class ICDevice,ICCameraDevice,NSError, NSDictionary, NSData, NSMutableDictionary;
 
@@ -165,22 +165,22 @@ typedef NSString* ICDeviceLocationOptions NS_TYPED_ENUM;
  @const      ICDeviceLocationDescriptionUSB
  @abstract   This description is returned for locationDescription property of a device connected to a USB port.
  */
-IMAGECAPTURE_EXTERN ICDeviceLocationOptions const ICDeviceLocationDescriptionUSB IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+IMAGECAPTURE_EXTERN ICDeviceLocationOptions const ICDeviceLocationDescriptionUSB IC_AVAILABLE(macos(10.4), ios(16.0));
 /*!
  @const      ICDeviceLocationDescriptionFireWire
  @abstract   This description is returned for locationDescription property of a device connected to a FireWire port.
  */
-IMAGECAPTURE_EXTERN ICDeviceLocationOptions const ICDeviceLocationDescriptionFireWire IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+IMAGECAPTURE_EXTERN ICDeviceLocationOptions const ICDeviceLocationDescriptionFireWire IC_AVAILABLE(macos(10.4), ios(16.0));
 /*!
  @const      ICDeviceLocationDescriptionBluetooth
  @abstract   This description is returned for locationDescription property of a device connected via Bluetooth.
  */
-IMAGECAPTURE_EXTERN ICDeviceLocationOptions const ICDeviceLocationDescriptionBluetooth IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+IMAGECAPTURE_EXTERN ICDeviceLocationOptions const ICDeviceLocationDescriptionBluetooth IC_AVAILABLE(macos(10.4), ios(16.0));
 /*!
  @const      ICDeviceLocationDescriptionMassStorage
  @abstract   This description is returned for locationDescription property of a device that is mounted as a mass-storage volume.
  */
-IMAGECAPTURE_EXTERN ICDeviceLocationOptions const ICDeviceLocationDescriptionMassStorage IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+IMAGECAPTURE_EXTERN ICDeviceLocationOptions const ICDeviceLocationDescriptionMassStorage IC_AVAILABLE(macos(10.4), ios(16.0));
 
 //--------------------------------------------------------------------------------------------------------------------- ICDevice
 /*!
@@ -234,7 +234,7 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
 @property systemSymbolName
 @abstract ￼Standard system symbol used to represent the device class.  Using the symbol to render an appropriate device icon will ensure proper scaling for high resolution devices.
 */
-@property (nonatomic, readonly, copy, nullable) NSString* systemSymbolName IC_AVAILABLE(macos(11.0)) IC_UNAVAILABLE(ios);
+@property (nonatomic, readonly, copy, nullable) NSString* systemSymbolName IC_AVAILABLE(macos(12.0),ios(15.2));
 
 /*!
  @property transportType

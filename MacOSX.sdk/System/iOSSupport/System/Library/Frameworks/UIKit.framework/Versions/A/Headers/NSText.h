@@ -13,7 +13,7 @@
 #endif
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if !__NSTEXT_SHARED_SECTION__
 #define __NSTEXT_SHARED_SECTION__ 1
@@ -45,7 +45,7 @@ UIKIT_EXTERN CTTextAlignment NSTextAlignmentToCTTextAlignment(NSTextAlignment ns
 UIKIT_EXTERN NSTextAlignment NSTextAlignmentFromCTTextAlignment(CTTextAlignment ctTextAlignment) API_AVAILABLE(ios(6.0));
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 #elif TARGET_OS_OSX
 #import <AppKit/NSText.h>
 #endif

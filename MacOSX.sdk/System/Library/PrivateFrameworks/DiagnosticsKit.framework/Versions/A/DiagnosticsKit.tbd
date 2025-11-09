@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           605BE462-D462-3D46-B12E-58A418864F8F
+    value:           CBB73CB7-BBD0-3F5A-A85F-30D89859D4D8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           29EA39DA-02F3-3617-98D4-FD44B8C0ED6C
+    value:           C0DF0C42-084E-35E4-B44E-3A2D2B860B9C
 install-name:    '@rpath/DiagnosticsKit.framework/Versions/A/DiagnosticsKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CACHE_DIRECTORY, _DKErrorDomain, _DKErrorLocalizedDescriptionForCode, 
                        _DKTemporaryDirectoryURL, _DiagnosticsKitLogHandleForCategory, 
                        _DiagnosticsKitVersionNumber, _DiagnosticsKitVersionString, 
@@ -28,15 +28,15 @@ exports:
                        _kDKReporterAttributeManifestResourcesKey, _kDKReporterAttributeManifestVersionKey, 
                        _kDKReporterAttributeNameKey, _kDKReportersService ]
     objc-classes:    [ DKAnalytics, DKAssetUploadItem, DKAssetUploadItems, DKCanonicalVersion, 
-                       DKComponent, DKComponentIdentity, DKComponentPredicate, DKDiagnosticAttributes, 
-                       DKDiagnosticContext, DKDiagnosticContextMock, DKDiagnosticController, 
-                       DKDiagnosticControllerMock, DKDiagnosticHostContext, DKDiagnosticManager, 
-                       DKDiagnosticParameters, DKDiagnosticRegistry, DKDiagnosticResult, 
-                       DKDiagnosticService, DKDiagnosticServiceRequest, DKDiagnosticXPCManager, 
-                       DKEnterSandbox, DKExtensionAdapter, DKExtensionDiscovery, 
-                       DKExtensionRequest, DKMutableDiagnosticResult, DKReport, DKReportHostContext, 
-                       DKReportManager, DKReportPlanner, DKReporterAttributes, DKReporterContext, 
-                       DKReporterController, DKReporterRegistry, DKReportingConcurrentRequest, 
-                       DKReportingConcurrentRequestGroup, DKRequestContext, DKUtilities, 
-                       DiagnosticsKit_Subsystem ]
+                       DKComponent, DKComponentIdentity, DKComponentPredicate, DKDiagnosticAllowList, 
+                       DKDiagnosticAttributes, DKDiagnosticContext, DKDiagnosticContextMock, 
+                       DKDiagnosticController, DKDiagnosticControllerMock, DKDiagnosticHostContext, 
+                       DKDiagnosticManager, DKDiagnosticParameters, DKDiagnosticRegistry, 
+                       DKDiagnosticResult, DKDiagnosticService, DKDiagnosticServiceRequest, 
+                       DKDiagnosticXPCManager, DKEnterSandbox, DKExtensionAdapter, 
+                       DKExtensionDiscovery, DKExtensionRequest, DKMutableDiagnosticResult, 
+                       DKReport, DKReportHostContext, DKReportManager, DKReportPlanner, 
+                       DKReporterAttributes, DKReporterContext, DKReporterController, 
+                       DKReporterRegistry, DKReportingConcurrentRequest, DKReportingConcurrentRequestGroup, 
+                       DKRequestContext, DKUtilities, DiagnosticsKit_Subsystem ]
 ...

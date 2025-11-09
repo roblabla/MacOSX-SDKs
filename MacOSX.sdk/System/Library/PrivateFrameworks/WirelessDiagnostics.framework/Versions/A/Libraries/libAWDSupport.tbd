@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3B4F238D-7FDE-3EF3-91C7-28B1A76ADDE8
+    value:           A5772359-B618-3C49-9459-217F6849DAFA
   - target:          x86_64-maccatalyst
-    value:           3B4F238D-7FDE-3EF3-91C7-28B1A76ADDE8
+    value:           A5772359-B618-3C49-9459-217F6849DAFA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AA02FA40-63AA-3240-8CB5-D1C133EFF210
+    value:           7D8541BE-82B1-358D-B1EC-2576703B889E
   - target:          arm64e-maccatalyst
-    value:           AA02FA40-63AA-3240-8CB5-D1C133EFF210
+    value:           7D8541BE-82B1-358D-B1EC-2576703B889E
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDSupport.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTI17AwdMetadataLoader, __ZTS17AwdMetadataLoader ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __Z14sDumpMetricLogNSt3__110shared_ptrI17AwdMetadataLoaderEEPKvm10DumpFormat, 
                        __Z14sGetMetricNameRKNSt3__110shared_ptrI17AwdMetadataLoaderEEj, 
                        __Z15sDumpMetricFileNSt3__110shared_ptrI17AwdMetadataLoaderEEPKvm10DumpFormat, 

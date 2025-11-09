@@ -43,6 +43,9 @@
 #if __has_include(<PassKit/PKRecurringPaymentSummaryItem.h>)
 #import <PassKit/PKRecurringPaymentSummaryItem.h>
 #endif
+#if __has_include(<PassKit/PKDeferredPaymentSummaryItem.h>)
+#import <PassKit/PKDeferredPaymentSummaryItem.h>
+#endif
 #if __has_include(<PassKit/PKPaymentTokenContext.h>)
 #import <PassKit/PKPaymentTokenContext.h>
 #endif
@@ -57,6 +60,12 @@
 #endif
 #if __has_include(<PassKit/PKPaymentMethod.h>)
 #import <PassKit/PKPaymentMethod.h>
+#endif
+#if __has_include(<PassKit/PKPaymentSummaryItem.h>)
+#import <PassKit/PKPaymentSummaryItem.h>
+#endif
+#if __has_include(<PassKit/PKShippingMethod.h>)
+#import <PassKit/PKShippingMethod.h>
 #endif
 #if TARGET_OS_IPHONE || TARGET_OS_OSX
 #if __has_include(<PassKit/PKPaymentAuthorizationViewController.h>)
@@ -127,5 +136,35 @@
 #endif
 #if __has_include(<PassKit/PKDateComponentsRange.h>)
 #import <PassKit/PKDateComponentsRange.h>
+#endif
+#if __has_include(<PassKit/PKShareSecureElementPassViewController.h>)
+#import <PassKit/PKShareSecureElementPassViewController.h>
+#endif
+#if __has_include(<PassKit/PKVehicleConnectionSession.h>)
+#import <PassKit/PKVehicleConnectionSession.h>
+#endif
+#if __has_include(<PassKit/PKIdentityAuthorizationController.h>)
+#import <PassKit/PKIdentityAuthorizationController.h>
+#endif
+#if __has_include(<PassKit/PKIdentityDocument.h>)
+#import <PassKit/PKIdentityDocument.h>
+#endif
+#if __has_include(<PassKit/PKIdentityDocumentDescriptor.h>)
+#import <PassKit/PKIdentityDocumentDescriptor.h>
+#endif
+#if __has_include(<PassKit/PKIdentityElement.h>)
+#import <PassKit/PKIdentityElement.h>
+#endif
+#if __has_include(<PassKit/PKIdentityError.h>)
+#import <PassKit/PKIdentityError.h>
+#endif
+#if __has_include(<PassKit/PKIdentityIntentToStore.h>)
+#import <PassKit/PKIdentityIntentToStore.h>
+#endif
+#if __has_include(<PassKit/PKIdentityRequest.h>)
+#import <PassKit/PKIdentityRequest.h>
+#endif
+#if __has_include(<PassKit/PKIdentityButton.h>)
+#import <PassKit/PKIdentityButton.h>
 #endif
 #endif // TARGET_OS_IPHONE || TARGET_OS_OSX

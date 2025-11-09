@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  *        set to a particular value.
  */
 HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMCharacteristicEvent<TriggerValueType : id<NSCopying>> : HMEvent <NSCopying, NSMutableCopying>
+    @interface HMCharacteristicEvent<TriggerValueType : id<NSCopying>> : HMEvent<NSCopying, NSMutableCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -40,13 +40,13 @@ HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
 /*!
  * @brief The characteristic associated with the event.
  */
-@property(readonly, strong, nonatomic) HMCharacteristic *characteristic;
+@property (readonly, strong, nonatomic) HMCharacteristic *characteristic;
 
 /*!
  * @brief The value of the characteristic that triggers the event.
  *        A value of nil corresponds to any change in the value of the characteristic.
  */
-@property(readonly, copy, nonatomic, nullable) TriggerValueType triggerValue;
+@property (readonly, copy, nonatomic, nullable) TriggerValueType triggerValue;
 
 /*!
  * @brief This method is used to change trigger value for the characteristic.
@@ -59,7 +59,7 @@ HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)updateTriggerValue:(nullable TriggerValueType)triggerValue completionHandler:(void (^)(NSError * __nullable error))completion API_DEPRECATED("No longer supported.", ios(9.0, 11.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)updateTriggerValue:(nullable TriggerValueType)triggerValue completionHandler:(void (^)(NSError *__nullable error))completion API_DEPRECATED("No longer supported.", ios(9.0, 11.0))API_UNAVAILABLE(watchos, tvos);
 
 @end
 
@@ -68,20 +68,20 @@ HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *        set to a particular value.
  */
 HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMMutableCharacteristicEvent<TriggerValueType : id<NSCopying>> : HMCharacteristicEvent
+    @interface HMMutableCharacteristicEvent<TriggerValueType : id<NSCopying>> : HMCharacteristicEvent
 
 - (instancetype)init NS_UNAVAILABLE;
 
 /*!
  * @brief The characteristic associated with the event.
  */
-@property(readwrite, strong, nonatomic) HMCharacteristic *characteristic;
+@property (readwrite, strong, nonatomic) HMCharacteristic *characteristic;
 
 /*!
  * @brief The value of the characteristic that triggers the event.
  *        A value of nil corresponds to any change in the value of the characteristic.
  */
-@property(readwrite, copy, nonatomic, nullable) TriggerValueType triggerValue;
+@property (readwrite, copy, nonatomic, nullable) TriggerValueType triggerValue;
 
 @end
 

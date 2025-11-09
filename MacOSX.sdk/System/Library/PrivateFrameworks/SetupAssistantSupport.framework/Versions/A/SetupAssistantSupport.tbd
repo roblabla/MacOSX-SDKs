@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5EAF499B-8B95-3E12-946B-7BB5B17E564E
+    value:           C301AA35-F4B7-35D9-A93C-D39BE10364BC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DFD77A20-49E3-32A6-82F3-342398C96D77
+    value:           ED79F2FB-A4C0-3A8E-9010-EDF40FD2118F
 install-name:    '/System/Library/PrivateFrameworks/SetupAssistantSupport.framework/Versions/A/SetupAssistantSupport'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SASExpressSettingsPrivacyBundleReadFrom, _SASExpressSettingsReadFrom, 
                        _SASProximityActionTypeKey, _SASProximityDeviceToDeviceCurrentVersion, 
                        _SASProximityErrorDomain, _SASProximityPayloadTypeKey, _SASProximityVersionKey, 
@@ -30,12 +30,12 @@ exports:
                        _kSASProximityInformationDeviceAnalyticsKey, _kSASProximityInformationDeviceNameKey, 
                        _kSASProximityInformationDeviceTermsIdentifierKey, _kSASProximityInformationDeviceToDeviceMigrationVersionKey, 
                        _kSASProximityInformationFindMyDeviceKey, _kSASProximityInformationHasHomeButtonKey, 
-                       _kSASProximityInformationHasInexpensiveCellularNetwork, _kSASProximityInformationKey, 
-                       _kSASProximityInformationKeyboardsKey, _kSASProximityInformationLocalePreferencesKey, 
-                       _kSASProximityInformationLocationServicesDataKey, _kSASProximityInformationLocationServicesKey, 
-                       _kSASProximityInformationModelKey, _kSASProximityInformationNameKey, 
-                       _kSASProximityInformationNetworkPasswordsKey, _kSASProximityInformationNetworksKey, 
-                       _kSASProximityInformationPreventSoftwareUpdateDeviceMigration, 
+                       _kSASProximityInformationHasInexpensiveCellularNetwork, _kSASProximityInformationHasMegaBackup, 
+                       _kSASProximityInformationKey, _kSASProximityInformationKeyboardsKey, 
+                       _kSASProximityInformationLocalePreferencesKey, _kSASProximityInformationLocationServicesDataKey, 
+                       _kSASProximityInformationLocationServicesKey, _kSASProximityInformationModelKey, 
+                       _kSASProximityInformationNameKey, _kSASProximityInformationNetworkPasswordsKey, 
+                       _kSASProximityInformationNetworksKey, _kSASProximityInformationPreventSoftwareUpdateDeviceMigration, 
                        _kSASProximityInformationProductVersionKey, _kSASProximityInformationRestoringKey, 
                        _kSASProximityInformationSameAccountKey, _kSASProximityInformationSiriKey, 
                        _kSASProximityInformationSiriVoiceProfileAvailabilityMetdataKey, 
@@ -50,7 +50,7 @@ exports:
                        SASProximityHandshake, SASProximityHandshakeAction, SASProximityInformation, 
                        SASProximityInformationAction, SASProximityReadyAction, SASProximitySession, 
                        SASProximitySessionSharingTransport, SASProximitySessionTransport, 
-                       SASSystemInformation ]
+                       SASServerSupport, SASSystemInformation ]
     objc-ivars:      [ SASExpressSettings._appAnalyticsOptIn, SASExpressSettings._appAnalyticsPrivacyBundle, 
                        SASExpressSettings._appearanceMode, SASExpressSettings._deviceAnalyticsOptIn, 
                        SASExpressSettings._deviceAnalyticsPrivacyBundle, SASExpressSettings._deviceClass, 

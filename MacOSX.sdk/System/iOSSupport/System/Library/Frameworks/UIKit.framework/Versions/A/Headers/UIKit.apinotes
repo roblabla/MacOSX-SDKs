@@ -28,6 +28,20 @@ Classes:
   - Selector: "textLayoutFragmentForPosition:"
     MethodKind: Instance
     SwiftName: textLayoutFragment(for:)
+- Name: NSTextListElement
+  Methods:
+  - Selector: "initWithParentElement:textList:contents:markerAttributes:childElements:"
+    MethodKind: Instance
+    SwiftName: init(parent:textList:contents:markerAttributes:children:)
+  - Selector: "textListElementWithContents:markerAttributes:textList:childElements:"
+    MethodKind: Class
+    SwiftName: init(contents:markerAttributes:textList:children:)
+  - Selector: "textListElementWithChildElements:textList:nestingLevel:"
+    MethodKind: Class
+    SwiftName: init(children:textList:nestingLevel:)
+  - Selector: "childElements"
+    MethodKind: Instance
+    SwiftName: children
 - Name: NSTextRange
   Methods:
   - Selector: "containsLocation:"
@@ -101,6 +115,8 @@ Classes:
   SwiftPrivate: true
 - Name: UICellAccessoryDetail
   SwiftPrivate: true
+- Name: UICellAccessoryPopUpMenu
+  SwiftPrivate: true
 - Name: UICellAccessoryCheckmark
   SwiftPrivate: true
 - Name: UICellAccessoryDelete
@@ -154,21 +170,27 @@ Classes:
     SwiftName: estimated(_:)
 - Name: NSCollectionLayoutGroup
   Methods:
-  - Selector: "horizontalGroupWithLayoutSize:subitem:count:"
+  - Selector: "horizontalGroupWithLayoutSize:repeatingSubitem:count:"
     MethodKind: Class
-    SwiftName: horizontal(layoutSize:subitem:count:)
+    SwiftName: horizontal(layoutSize:repeatingSubitem:count:)
   - Selector: "horizontalGroupWithLayoutSize:subitems:"
     MethodKind: Class
     SwiftName: horizontal(layoutSize:subitems:)
-  - Selector: "verticalGroupWithLayoutSize:subitem:count:"
+  - Selector: "verticalGroupWithLayoutSize:repeatingSubitem:count:"
     MethodKind: Class
-    SwiftName: vertical(layoutSize:subitem:count:)
+    SwiftName: vertical(layoutSize:repeatingSubitem:count:)
   - Selector: "verticalGroupWithLayoutSize:subitems:"
     MethodKind: Class
     SwiftName: vertical(layoutSize:subitems:)
   - Selector: "customGroupWithLayoutSize:itemProvider:"
     MethodKind: Class
     SwiftName: custom(layoutSize:itemProvider:)
+  - Selector: "horizontalGroupWithLayoutSize:subitem:count:" #deprecated
+    MethodKind: Class
+    SwiftName: horizontal(layoutSize:subitem:count:)
+  - Selector: "verticalGroupWithLayoutSize:subitem:count:" #deprecated
+    MethodKind: Class
+    SwiftName: vertical(layoutSize:subitem:count:)
 - Name: NSCollectionLayoutSection
   Methods:
   - Selector: "sectionWithGroup:"
@@ -242,6 +264,9 @@ Classes:
   - Selector: 'defaultContentConfiguration'
     MethodKind: Instance
     SwiftPrivate: true
+  - Selector: 'defaultBackgroundConfiguration'
+    MethodKind: Instance
+    SwiftPrivate: true
   Properties:
   - Name: 'configurationState'
     PropertyKind: Instance
@@ -263,6 +288,9 @@ Classes:
   - Selector: 'defaultContentConfiguration'
     MethodKind: Instance
     SwiftPrivate: true
+  - Selector: 'defaultBackgroundConfiguration'
+    MethodKind: Instance
+    SwiftPrivate: true
   Properties:
   - Name: 'configurationState'
     PropertyKind: Instance
@@ -279,6 +307,9 @@ Classes:
 - Name: UICollectionViewCell
   Methods:
   - Selector: 'updateConfigurationUsingState:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'defaultBackgroundConfiguration'
     MethodKind: Instance
     SwiftPrivate: true
   Properties:
@@ -388,10 +419,6 @@ Classes:
   - Selector: 'constraintLessThanOrEqualToAnchor:multiplier:constant:'
     SwiftName: constraint(lessThanOrEqualTo:multiplier:constant:)
     MethodKind: Instance
-- Name: NSLayoutConstraint
-  Properties:
-  - Name: firstItem
-    Nullability: O
 - Name: NSLayoutManager
   Methods:
   - Selector: 'getGlyphsInRange:glyphs:properties:characterIndexes:bidiLevels:'
@@ -538,6 +565,32 @@ Classes:
   - Selector: 'flexibleSpaceItem'
     SwiftName: 'flexibleSpace()'
     MethodKind: Class
+  - Selector: 'creatingMovableGroupWithCustomizationIdentifier:'
+    SwiftName: 'creatingMovableGroup(customizationIdentifier:)'
+    MethodKind: Instance
+  - Selector: 'creatingOptionalGroupWithCustomizationIdentifier:inDefaultCustomization:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'initWithPrimaryAction:menu:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'initWithBarButtonSystemItem:primaryAction:menu:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'initWithTitle:image:target:action:menu:'
+    MethodKind: Instance
+    SwiftPrivate: true
+- Name: UIBarButtonItemGroup
+  Methods:
+  - Selector: 'fixedGroupWithRepresentativeItem:items:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'movableGroupWithCustomizationIdentifier:representativeItem:items:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'optionalGroupWithCustomizationIdentifier:inDefaultCustomization:representativeItem:items:'
+    MethodKind: Class
+    SwiftPrivate: true
 - Name: UISegmentedControl
   Methods:
   - Selector: 'insertSegmentWithAction:atIndex:animated:'
@@ -808,6 +861,10 @@ Classes:
   - Selector: 'environment:containsEnvironment:'
     MethodKind: Class
     Availability: nonswift
+- Name: UINavigationItem
+  Properties:
+  - Name: renameDelegate
+    Availability: nonswift
 - Name: UISceneConnectionOptions
   SwiftName: UIScene.ConnectionOptions
 - Name: UISceneOpenURLOptions
@@ -842,6 +899,13 @@ Classes:
   - Selector: 'systemImageNamed:compatibleWithTraitCollection:'
     MethodKind: Class
     SwiftName: 'init(systemName:compatibleWith:)'
+  - Selector: 'systemImageNamed:variableValue:withConfiguration:'
+    MethodKind: Class
+    SwiftName: 'init(__systemName:variableValue:with:)'
+    SwiftPrivate: true
+  - Selector: 'imageNamed:inBundle:variableValue:withConfiguration:'
+    MethodKind: Class
+    SwiftPrivate: true
   - Selector: 'systemImageNamed:variant:'
     MethodKind: Class
     SwiftName: 'init(__systemName:variant:)'
@@ -871,6 +935,9 @@ Classes:
   - Selector: 'configurationPreferringMulticolor'
     SwiftName: 'preferringMulticolor()'
     MethodKind: Class
+  - Selector: 'configurationPreferringMonochrome'
+    SwiftName: 'preferringMonochrome()'
+    MethodKind: Class
 - Name: UIDeferredMenuElement
   Methods:
   - Selector: 'elementWithProvider:'
@@ -879,6 +946,11 @@ Classes:
   - Selector: 'elementWithUncachedProvider:'
     SwiftName: 'uncached(_:)'
     MethodKind: Class
+- Name: UIContextMenuConfiguration
+  Methods:
+  - Selector: 'configurationWithIdentifier:previewProvider:actionProvider:'
+    MethodKind: Class
+    SwiftPrivate: true
 - Name: UIBandSelectionInteraction
   Methods:
   - Selector: 'initWithSelectionHandler:'
@@ -900,6 +972,41 @@ Classes:
   - Selector: 'arrowAccessoryWithPosition:'
     MethodKind: Class
     SwiftPrivate: true
+- Name: UICalendarViewDecoration
+  SwiftName: UICalendarView.Decoration
+  Methods:
+  - Selector: 'initWithImage:color:size:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'initWithCustomViewProvider:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'decorationWithColor:size:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'decorationWithImage:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'decorationWithImage:color:size:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'decorationWithCustomViewProvider:'
+    MethodKind: Class
+    SwiftName: 'customView(_:)'
+- Name: UIEditMenuConfiguration
+  Properties:
+  - Name: identifier
+    PropertyKind: Instance
+    SwiftPrivate: true
+  Methods:
+  - Selector: 'configurationWithIdentifier:sourcePoint:'
+    MethodKind: Class
+    SwiftPrivate: true
+- Name: UIWindowScene
+  Methods:
+    - Selector: 'requestGeometryUpdateWithPreferences:errorHandler:'
+      SwiftName: requestGeometryUpdate(_:errorHandler:)
+      MethodKind: Instance
 - Name: UIWindowSceneActivationConfiguration
   SwiftName: UIWindowScene.ActivationConfiguration
 - Name: UIWindowSceneActivationRequestOptions
@@ -908,8 +1015,31 @@ Classes:
   SwiftName: UIWindowScene.ActivationAction
 - Name: UIWindowSceneActivationInteraction
   SwiftName: UIWindowScene.ActivationInteraction
+- Name: UIWindowSceneGeometry
+  SwiftName: UIWindowScene.Geometry
+- Name: UIWindowSceneGeometryPreferencesIOS
+  SwiftName: UIWindowSceneGeometryPreferences.iOS
+  Methods:
+    - Selector: 'preferencesWithInterfaceOrientations:'
+      MethodKind: Class
+      SwiftPrivate: true
+- Name: UIWindowSceneGeometryPreferencesMac
+  SwiftName: UIWindowSceneGeometryPreferences.Mac
+  Methods:
+    - Selector: 'preferencesSystemFrame:'
+      MethodKind: Class
+      SwiftPrivate: true
+- Name: UIWindowSceneGeometryPreferences
+  SwiftName: UIWindowScene.GeometryPreferences
 - Name: UISheetPresentationControllerDetent
   SwiftName: UISheetPresentationController.Detent
+  Methods:
+  - Selector: 'customDetentWithIdentifier:resolver:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'resolvedValueInContext:'
+    MethodKind: Instance
+    SwiftPrivate: true
 - Name: UISheetPresentationController
   Properties:
   - Name: preferredCornerRadius
@@ -949,6 +1079,10 @@ Protocols:
   Properties:
   - Name: 'configuration'
     PropertyKind: Instance
+    SwiftPrivate: true
+  Methods:
+  - Selector: "supportsConfiguration:"
+    MethodKind: Instance
     SwiftPrivate: true
 - Name: UIAppearance
   Methods:
@@ -1064,6 +1198,17 @@ Protocols:
   - Selector: 'presentSearchController:'
     SwiftName: presentSearchController(_:)
     MethodKind: Instance
+  - Selector: 'searchController:willChangeToSearchBarPlacement:'
+    SwiftName: searchController(_:willChangeTo:)
+    MethodKind: Instance
+  - Selector: 'searchController:didChangeFromSearchBarPlacement:'
+    SwiftName: searchController(_:didChangeFrom:)
+    MethodKind: Instance
+- Name: UISearchResultsUpdating
+  Methods:
+  - Selector: 'updateSearchResultsForSearchController:selectingSearchSuggestion:'
+    SwiftName: updateSearchResults(for:selecting:)
+    MethodKind: Instance
 - Name: UISplitViewControllerDelegate
   Methods:
   - Selector: 'splitViewController:showDetailViewController:sender:'
@@ -1088,6 +1233,30 @@ Protocols:
     MethodKind: Instance
   - Selector: 'tabBarController:interactionControllerForAnimationController:'
     SwiftName: tabBarController(_:interactionControllerFor:)
+    MethodKind: Instance
+- Name: UITextInput
+  Methods:
+  - Selector: 'willPresentEditMenuWithAnimator:'
+    SwiftName: willPresentEditMenu(animator:)
+    MethodKind: Instance
+  - Selector: 'willDismissEditMenuWithAnimator:'
+    SwiftName: willDismissEditMenu(animator:)
+    MethodKind: Instance
+- Name: UITextViewDelegate
+  Methods:
+  - Selector: 'textView:willPresentEditMenuWithAnimator:'
+    SwiftName: textView(_:willPresentEditMenuWith:)
+    MethodKind: Instance
+  - Selector: 'textView:willDismissEditMenuWithAnimator:'
+    SwiftName: textView(_:willDismissEditMenuWith:)
+    MethodKind: Instance
+- Name: UITextFieldDelegate
+  Methods:
+  - Selector: 'textField:willPresentEditMenuWithAnimator:'
+    SwiftName: textField(_:willPresentEditMenuWith:)
+    MethodKind: Instance
+  - Selector: 'textField:willDismissEditMenuWithAnimator:'
+    SwiftName: textField(_:willDismissEditMenuWith:)
     MethodKind: Instance
 - Name: UITextPasteItem
   Methods:
@@ -1175,6 +1344,12 @@ Protocols:
   - Selector: 'contextMenuInteraction:previewForDismissingMenuWithConfiguration:'
     SwiftName: 'contextMenuInteraction(_:previewForDismissingMenuWithConfiguration:)'
     MethodKind: Instance
+- Name: UINavigationItemRenameDelegate
+  Availability: nonswift
+- Name: UITextSearching
+  SwiftPrivate: true
+- Name: UITextSearchAggregator
+  SwiftPrivate: true
 Tags:
 - Name: NSTextContentManagerEnumerationOptions
   SwiftName: NSTextContentManager.EnumerationOptions
@@ -1186,6 +1361,8 @@ Tags:
   SwiftName: NSTextLayoutManager.SegmentOptions
 - Name: NSTextLayoutManagerSegmentType
   SwiftName: NSTextLayoutManager.SegmentType
+- Name: NSTextListOptions
+  SwiftName: NSTextList.Options
 - Name: NSTextSelectionAffinity
   SwiftName: NSTextSelection.Affinity
 - Name: NSTextSelectionGranularity
@@ -1242,6 +1419,8 @@ Tags:
   SwiftPrivate: true
 - Name: UIFocusHaloEffectPosition
   SwiftName: UIFocusHaloEffect.Position
+- Name: UINavigationItemSearchBarPlacement
+  SwiftName: UINavigationItem.SearchBarPlacement
 # Swift 4.2 Renames
 - Name: UIApplicationState
   SwiftName: UIApplication.State
@@ -1271,6 +1450,8 @@ Tags:
   SwiftName: UIView.TintAdjustmentMode
 - Name: UIViewAutoresizing
   SwiftName: UIView.AutoresizingMask
+- Name: UICollectionViewSelfSizingInvalidation
+  SwiftName: UICollectionView.SelfSizingInvalidation
 - Name: UICollectionViewReorderingCadence
   SwiftName: UICollectionView.ReorderingCadence
 - Name: UICollectionViewScrollPosition
@@ -1287,6 +1468,8 @@ Tags:
   SwiftName: UICollectionViewUpdateItem.Action
 - Name: UICollectionViewDropIntent
   SwiftName: UICollectionViewDropProposal.Intent
+- Name: UITableViewSelfSizingInvalidation
+  SwiftName: UITableView.SelfSizingInvalidation
 - Name: UITableViewSeparatorInsetReference
   SwiftName: UITableView.SeparatorInsetReference
 - Name: UITableViewStyle
@@ -1349,6 +1532,10 @@ Tags:
   SwiftName: UIPageControl.InteractionState
 - Name: UIPageControlBackgroundStyle
   SwiftName: UIPageControl.BackgroundStyle
+- Name: UIPageControlDirection
+  SwiftName: UIPageControl.Direction
+- Name: UICalendarViewDecorationSize
+  SwiftName: UICalendarView.DecorationSize
 - Name: UIButtonType
   SwiftName: UIButton.ButtonType
 - Name: UIButtonRole
@@ -1360,6 +1547,8 @@ Tags:
 - Name: UIButtonConfigurationCornerStyle
   SwiftPrivate: true
 - Name: UIButtonConfigurationMacIdiomStyle
+  SwiftPrivate: true
+- Name: UIButtonConfigurationIndicator
   SwiftPrivate: true
 - Name: UIDatePickerMode
   SwiftName: UIDatePicker.Mode
@@ -1461,6 +1650,8 @@ Tags:
   SwiftName: UIAlertAction.Style
 - Name: UIScreenOverscanCompensation
   SwiftName: UIScreen.OverscanCompensation
+- Name: UIScreenReferenceDisplayModeStatus
+  SwiftName: UIScreen.ReferenceDisplayModeStatus
 - Name: UIEventType
   SwiftName: UIEvent.EventType
 - Name: UIEventSubtype
@@ -1487,6 +1678,12 @@ Tags:
   SwiftName: UIApplicationShortcutIcon.IconType
 - Name: UIMenuControllerArrowDirection
   SwiftName: UIMenuController.ArrowDirection
+- Name: UIMenuElementSize
+  SwiftName: UIMenu.ElementSize
+- Name: UIMenuElementAttributes
+  SwiftName: UIMenuElement.Attributes
+- Name: UIMenuElementState
+  SwiftName: UIMenuElement.State
 - Name: UIInputViewStyle
   SwiftName: UIInputView.Style
 - Name: UIAccessibilityCustomSystemRotorType
@@ -1530,6 +1727,8 @@ Tags:
 - Name: UIWindowSceneDismissalAnimation
   SwiftName: UIWindowScene.DismissalAnimation
 Typedefs:
+- Name: NSTextListMarkerFormat
+  SwiftName: NSTextList.MarkerFormat
 - Name: UIButtonConfigurationUpdateHandler
   SwiftName: UIButton.ConfigurationUpdateHandler
 - Name: UIConfigurationColorTransformer
@@ -1580,6 +1779,8 @@ Typedefs:
   SwiftName: UIFontDescriptor.SystemDesign
 - Name: UIFontWeight
   SwiftName: UIFont.Weight
+- Name: UIFontWidth
+  SwiftName: UIFont.Width
 - Name: UIStoryboardViewControllerCreator
   SwiftPrivate: true
 - Name: UISceneSessionRole
@@ -1642,6 +1843,8 @@ Typedefs:
   SwiftName: UIAccessibility.AssistiveTechnologyIdentifier
 - Name: UIAccessibilityCustomActionHandler
   SwiftName: UIAccessibilityCustomAction.Handler
+- Name: UITextSearchDocumentIdentifier
+  SwiftPrivate: true
 Enumerators:
 - Name: NSLayoutFormatDirectionLeadingToTrailing
   SwiftName: directionLeadingToTrailing
@@ -1904,6 +2107,14 @@ Globals:
   SwiftName: heavy
 - Name: UIFontWeightBlack
   SwiftName: black
+- Name: UIFontWidthCondensed
+  SwiftName: condensed
+- Name: UIFontWidthStandard
+  SwiftName: standard
+- Name: UIFontWidthExpanded
+  SwiftName: expanded
+- Name: UIFontWidthCompressed
+  SwiftName: compressed
 - Name: UILargeContentViewerInteractionEnabledStatusDidChangeNotification
   SwiftName: UILargeContentViewerInteraction.enabledStatusDidChangeNotification
 - Name: UITextWritingDirectionNatural
@@ -1926,10 +2137,16 @@ Globals:
   SwiftName: UIScene.willEnterForegroundNotification
 - Name: UISceneDidEnterBackgroundNotification
   SwiftName: UIScene.didEnterBackgroundNotification
+- Name: UIScreenReferenceDisplayModeStatusDidChangeNotification
+  SwiftName: UIScreen.referenceDisplayModeStatusDidChangeNotification
 - Name: UIWindowSceneSessionRoleApplication
   SwiftName: windowApplication
 - Name: UIWindowSceneSessionRoleExternalDisplay
   SwiftName: windowExternalDisplay
+- Name: UIWindowSceneSessionRoleExternalDisplayNonInteractive
+  SwiftName: windowExternalDisplayNonInteractive
+- Name: UISheetPresentationControllerDetentInactive
+  SwiftPrivate: true
 - Name: UISheetPresentationControllerAutomaticDimension
   SwiftPrivate: true
 # Swift 4.2 Renames
@@ -2498,6 +2715,11 @@ SwiftVersions:
       ResultType: "NSDictionary<NSString *, id> * _Nullable"
     - Selector: "setShowsScopeBar:animated:"
       SwiftName: setShowsScopeBar(_:animated:)
+      MethodKind: Instance
+  - Name: UISearchTextField
+    Methods:
+    - Selector: "searchTextField:didSelectSuggestion:"
+      SwiftName: searchTextField(_:didSelect:)
       MethodKind: Instance
   - Name: UITextView
     Properties:

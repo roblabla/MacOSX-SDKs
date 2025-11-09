@@ -43,6 +43,10 @@ NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 
 @property (nonatomic, readonly) NSArray<MKRouteStep *> *steps;
 
+@property (nonatomic, readonly) BOOL hasTolls API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0)) API_UNAVAILABLE(watchos); // indicates if the route contains tolls
+
+@property (nonatomic, readonly) BOOL hasHighways API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0)) API_UNAVAILABLE(watchos); // indicates if the route contains highways
+
 @end
 
 NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)

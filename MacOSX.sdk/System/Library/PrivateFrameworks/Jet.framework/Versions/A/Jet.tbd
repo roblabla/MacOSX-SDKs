@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E8D0A6DE-7576-3A51-91E1-E34617C298A7
+    value:           C1058BC2-5D1E-3A0A-BE1E-7B452807A025
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F86C7638-33A7-3E36-AF0A-2A4195D10A7A
+    value:           089B2040-ADC2-3B6C-9DCC-906AAD32C4E4
 install-name:    '/System/Library/PrivateFrameworks/Jet.framework/Versions/A/Jet'
 current-version: 9.12
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__117bad_function_callE ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __Z10jet_assertbP8NSString, __Z13xglCheckErrorv, __Z13xglPrintErrorv, 
                        __Z13xglPrintFloatPKcj, __Z13xglPrintStatev, __Z14jet_util_isPOTjj, 
                        __Z14xglLinkProgramj, __Z15xglPrintBooleanPKcj, __Z15xglPrintIntegerPKcj, 

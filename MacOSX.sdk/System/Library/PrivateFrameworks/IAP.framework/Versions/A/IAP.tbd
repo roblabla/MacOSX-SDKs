@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DCEB8C80-3C3A-3102-A732-6FC505B871C9
+    value:           FAFA19CE-C851-3A8B-9619-82EFDEB42A8C
   - target:          x86_64-maccatalyst
-    value:           DCEB8C80-3C3A-3102-A732-6FC505B871C9
+    value:           FAFA19CE-C851-3A8B-9619-82EFDEB42A8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F988087B-2ADB-3F90-A0CA-F6BB391124E1
+    value:           FF2226FB-4D49-3552-A9B6-D4AD0EB6F24F
   - target:          arm64e-maccatalyst
-    value:           F988087B-2ADB-3F90-A0CA-F6BB391124E1
+    value:           FF2226FB-4D49-3552-A9B6-D4AD0EB6F24F
 install-name:    '/System/Library/PrivateFrameworks/IAP.framework/Versions/A/IAP'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _Generate32BitConnectionID, _GetConnectionToIAP2Daemon, _GetConnectionToIAPDaemon, 
                        _GetConnectionToIAPDaemonByCheckingConnectionID, _GetConnectionToIAPDaemonOwningPhysicalConnector, 
                        _GetConnectionToIAPDaemonWithConnectionID, _GetConnectionToIAPTransportDaemon, 

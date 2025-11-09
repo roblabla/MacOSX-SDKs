@@ -706,7 +706,39 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 	Any client installed block on the source node's audio unit `AUMIDIOutputEventBlock`
 	will be overwritten when making the MIDI connection.
  */
-- (void)connectMIDI:(AVAudioNode *)sourceNode to:(AVAudioNode *)destinationNode format:(AVAudioFormat * __nullable)format block:(AUMIDIOutputEventBlock __nullable)tapBlock API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+- (void)connectMIDI:(AVAudioNode *)sourceNode to:(AVAudioNode *)destinationNode format:(AVAudioFormat * __nullable)format block:(AUMIDIOutputEventBlock __nullable)tapBlock __attribute__((swift_attr("@_disfavoredOverload"))) API_DEPRECATED_WITH_REPLACEMENT("connectMIDI:to:format:eventListBlock:", macos(10.14, 13.0), ios(13.0, 16.0), watchos(5.0, 9.0), tvos(12.0, 16.0));
+
+/*! @method connectMIDI:to:format:eventListblock:
+    @abstract
+        Establish a MIDI only connection between two nodes.
+    @param sourceNode
+        The source node.
+    @param destinationNode
+        The destination node.
+    @param format
+        If non-nil, the format of the source node's output bus is set to this format.
+        In all cases, the format of the source nodes' output bus has to match with the
+        destination nodes' output bus format.
+        Although the output bus of the source is not in use, the format needs to be set
+        in order to be able to use the sample rate for MIDI event timing calculations.
+    @param tapBlock
+        This block is called from the source node's `AUMIDIOutputEventListBlock`
+        on the realtime thread. The host can tap the MIDI data of the source node through
+        this block.
+
+    Use this method to establish a MIDI only connection between a source node and a
+    destination node that has MIDI input capability.
+
+    The source node can only be a AVAudioUnit node of type `kAudioUnitType_MIDIProcessor`.
+    The destination node types can be `kAudioUnitType_MusicDevice`,
+    `kAudioUnitType_MusicEffect` or `kAudioUnitType_MIDIProcessor`.
+
+    Note that any pre-existing MIDI connection involving the destination will be broken.
+
+    Any client installed block on the source node's audio unit `AUMIDIOutputEventListBlock`
+    will be overwritten when making the MIDI connection.
+ */
+- (void)connectMIDI:(AVAudioNode *)sourceNode to:(AVAudioNode *)destinationNode format:(AVAudioFormat * __nullable)format eventListBlock:(AUMIDIEventListBlock __nullable)tapBlock API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
 
 /*! @method connectMIDI:toNodes:format:block:
     @abstract
@@ -742,7 +774,43 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 	Any client installed block on the source node's audio unit `AUMIDIOutputEventBlock`
 	will be overwritten when making the MIDI connection.
  */
-- (void)connectMIDI:(AVAudioNode *)sourceNode toNodes:(NSArray<AVAudioNode *> *)destinationNodes format:(AVAudioFormat * __nullable)format block:(AUMIDIOutputEventBlock __nullable)tapBlock API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+- (void)connectMIDI:(AVAudioNode *)sourceNode toNodes:(NSArray<AVAudioNode *> *)destinationNodes format:(AVAudioFormat * __nullable)format block:(AUMIDIOutputEventBlock __nullable)tapBlock API_DEPRECATED_WITH_REPLACEMENT("connectMIDI:toNodes:format:eventListBlock:", macos(10.14, 13.0), ios(13.0, 16.0), watchos(5.0, 9.0), tvos(12.0, 16.0));
+
+/*! @method connectMIDI:toNodes:format:eventListBlock:
+    @abstract
+        Establish a MIDI only connection between a source node and multiple destination nodes.
+    @param sourceNode
+        The source node.
+    @param destinationNodes
+        An array of AVAudioNodes specifying destination nodes.
+    @param format
+        If non-nil, the format of the source node's output bus is set to this format.
+        In all cases, the format of the source nodes' output bus has to match with the
+        destination nodes' output bus format.
+        Although the output bus of the source is not in use, the format needs to be set
+        in order to be able to use the sample rate for MIDI event timing calculations.
+    @param tapBlock
+        This block is called from the source node's `AUMIDIOutputEventListBlock`
+        on the realtime thread. The host can tap the MIDI data of the source node through
+        this block.
+
+    Use this method to establish a MIDI only connection between a source node and
+    multiple destination nodes.
+
+    The source node can only be a AVAudioUnit node of type `kAudioUnitType_MIDIProcessor`.
+    The destination node types can be `kAudioUnitType_MusicDevice`,
+    `kAudioUnitType_MusicEffect` or `kAudioUnitType_MIDIProcessor`.
+
+    MIDI connections made using this method are either one-to-one (when a single
+    destination connection is specified) or one-to-many (when multiple connections are
+    specified), but never many-to-one.
+
+    Note that any pre-existing connection involving the destination will be broken.
+
+    Any client installed block on the source node's audio unit `AUMIDIOutputEventListBlock`
+    will be overwritten when making the MIDI connection.
+ */
+- (void)connectMIDI:(AVAudioNode *)sourceNode toNodes:(NSArray<AVAudioNode *> *)destinationNodes format:(AVAudioFormat * __nullable)format eventListBlock:(AUMIDIEventListBlock __nullable)tapBlock API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
 
 /*! @method disconnectMIDI:from:
     @abstract

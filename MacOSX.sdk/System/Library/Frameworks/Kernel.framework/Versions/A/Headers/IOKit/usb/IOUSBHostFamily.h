@@ -212,6 +212,9 @@ enum tInternalUSBHostConnectionSpeed
 #define kUSBHostMessageInterfaceAlternateSetting      iokit_usbhost_msg(0x109)      // 0xe0005109  Apple Internal use only.  IOUSBHostInterface -> IOUSBInterface to update interface properties after an alternate setting is selected
 #define kUSBHostMessageDeviceLegacyCapture            iokit_usbhost_msg(0x10A)      // 0xe000510A  Apple Internal use only.  IOUSBHostDevice -> IOUSBDevice to relay user space re-enumeration for capturing/releasing devices
 #define kUSBHostMessageControllerInterrupt            iokit_usbhost_msg(0x10B)      // 0xe000510B  Apple Internal use only.  Source -> AppleUSBHostController to indicate an interrupt is ready for consumption
+#define kUSBHostMessageDeviceIdentify                 iokit_usbhost_msg(0x10C)      // 0xe000510C  Apple Internal use only.  AppleUSBHostPort -> IOUSBHostDevice to trigger the descriptor fetch phase of enumeration
+#define kUSBHostMessageDeviceRegister                 iokit_usbhost_msg(0x10D)      // 0xe000510D  Apple Internal use only.  AppleUSBHostPort -> IOUSBHostDevice to trigger a deferred registerService
+#define kUSBHostMessageDevicePreferredConfigurationChanged iokit_usbhost_msg(0x10E) // 0xe000510E  Apple Internal use only.  IOUSBHostDevice -> clients upon a change in the device's preferred configuration.  Argument is the new preferred configuration value.
 
 // User Message Support
 

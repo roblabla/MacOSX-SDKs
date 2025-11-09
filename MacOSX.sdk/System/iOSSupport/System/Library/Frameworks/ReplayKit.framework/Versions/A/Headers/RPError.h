@@ -9,7 +9,6 @@
 extern NSString *const __nonnull RPRecordingErrorDomain;
 extern NSString *const __nonnull SCStreamErrorDomain;
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 NS_ENUM_AVAILABLE(11_0, 9_0)

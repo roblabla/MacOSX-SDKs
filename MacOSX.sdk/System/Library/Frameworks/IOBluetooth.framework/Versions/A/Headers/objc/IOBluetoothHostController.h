@@ -40,7 +40,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
     id                          _mUnused002;
 }
 
-@property(assign) id delegate;
+@property(weak) id delegate;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		defaultController

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3BEAC930-1990-3B11-8103-18E502A3FD2A
+    value:           84DC45FD-133A-3FE9-8A83-159431CE2BF2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CBDC74CC-A9CF-36F0-8F42-4E3BF8AB47F0
+    value:           DD4EDAF0-8186-39E6-ACE2-8867ED51EA70
 install-name:    '/System/Library/PrivateFrameworks/HelpData.framework/Versions/A/HelpData'
-current-version: 214
+current-version: 218
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DDMAppleDomain, _DDMAssetURLProtocolRequest, _DDMBookConfigKeyAppBundleID, 
                        _DDMBookConfigKeyAppBundlePath, _DDMBookConfigKeyAppName, 
                        _DDMBookConfigKeyAppVersion, _DDMBookConfigKeyUseOSVersion, 
@@ -71,14 +71,15 @@ exports:
                        _HVDDMURLParamPlatformVersion, _HVDDMURLParamProduct, _HVDDMURLParamProductVersion, 
                        _HVDDMURLParamTopic, _HVDDMURLParamTrue, _HVDDMURLParamType, 
                        _HVDDMURLParamType3, _HVDDMURLParamTypeDDM, _HVDDMURLParamVanityName, 
-                       _HVHTMLDocumentExtension, _HVMacHelpbookID, _HVOSName, _HVOSVersionKeyProductBuild, 
-                       _HVOSVersionKeyProductName, _HVOSVersionKeyProductVersion, 
-                       _HVOfflineHelpTopicNotConnected, _HVOfflineHelpTopicNotFound, 
-                       _HVOfflineHelpbookID, _HVPlatformName, _HVSystemVersionPlistPath, 
-                       _HVTaskType, _HVTopicTemplateFileName, _HVURLAnchorCommand, 
-                       _HVURLBookIDKey, _HVURLBookmarkCommand, _HVURLOpenbookCommand, 
-                       _HVURLSchemeHTTP, _HVURLSchemeHTTPS, _HVURLSchemeHelp, _HVURLSchemeHelpWithColon, 
-                       _HVUnknownString, _WK_DDMAssetURLProtocolRequest, _bookIDVersionNeedsUpdate, 
+                       _HVHTMLDocumentExtension, _HVMUGBookTitle, _HVMacHelpbookID, 
+                       _HVOSName, _HVOSVersionKeyProductBuild, _HVOSVersionKeyProductName, 
+                       _HVOSVersionKeyProductVersion, _HVOfflineHelpTopicNotConnected, 
+                       _HVOfflineHelpTopicNotFound, _HVOfflineHelpbookID, _HVPlatformName, 
+                       _HVSystemVersionPlistPath, _HVTaskType, _HVTopicTemplateFileName, 
+                       _HVURLAnchorCommand, _HVURLBookIDKey, _HVURLBookmarkCommand, 
+                       _HVURLOpenbookCommand, _HVURLSchemeHTTP, _HVURLSchemeHTTPS, 
+                       _HVURLSchemeHelp, _HVURLSchemeHelpWithColon, _HVUnknownString, 
+                       _WK_DDMAssetURLProtocolRequest, _bookIDVersionNeedsUpdate, 
                        _clientPortNameForThisTask, _getVersionFromAppBundle, _getVersionFromAppBundleURL, 
                        _getVersionedBookIDFromAppBundle, _helpDirSort, _isVersionedBookID, 
                        _kHPDAuthenticationNetworkStateDidChangeNotification, _kHPDAuthenticationUserSignInNotification, 

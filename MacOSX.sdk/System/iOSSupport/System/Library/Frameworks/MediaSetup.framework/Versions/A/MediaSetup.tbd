@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           138C371D-78E7-3FCA-AF0B-C271E5234490
+    value:           DE4FE321-E9E2-3EE5-97E9-87B1D389B4FA
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           85620960-E5FC-3874-AEC0-AC135E0C9FA6
+    value:           BA435A55-47B4-3B45-9F73-D6B4814849DD
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MediaSetup.framework/Versions/A/MediaSetup'
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _MSCloudKitErrorDomain, _MSErrorDomain, _MSServiceSetupErrorDomain, 
                        _MSUserInfoErrorStringKey, _MediaSetupVersionNumber, _MediaSetupVersionString, 
                        _kAPSDelegatePort, _kAPSTopic, _kAddServiceTransactionIdentifier, 

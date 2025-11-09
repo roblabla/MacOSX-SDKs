@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9527E4B5-8641-3EEE-8018-6ABD5BC11B36
+    value:           A06D8959-6495-3FC4-A347-B97B65FA9EF2
   - target:          x86_64-maccatalyst
-    value:           9527E4B5-8641-3EEE-8018-6ABD5BC11B36
+    value:           A06D8959-6495-3FC4-A347-B97B65FA9EF2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           93894244-5784-3076-9847-C4E1EEE557CA
+    value:           D621C133-2CD3-3654-8D52-BA0DA70E733C
   - target:          arm64e-maccatalyst
-    value:           93894244-5784-3076-9847-C4E1EEE557CA
+    value:           D621C133-2CD3-3654-8D52-BA0DA70E733C
 install-name:    '/usr/lib/libThaiTokenizer.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ThaiTokenizerAdvanceToNextToken, _ThaiTokenizerCreate, _ThaiTokenizerDestroy, 
                        _ThaiTokenizerGetCurrentTokenRange, _ThaiTokenizerGoToTokenAtIndex, 
                        _ThaiTokenizerSetString, _ThaiTokenizerSetStringWithRange ]

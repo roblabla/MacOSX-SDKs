@@ -12,9 +12,9 @@
 
 @class UIPointerShape;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef struct {
+typedef struct NS_SWIFT_SENDABLE {
     /// Offset from the primary pointer shape. Only allows positive values.
     CGFloat offset;
     
@@ -66,7 +66,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIPointerAccessory.h>

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4D1B342C-0C07-3936-AB62-23CE2640F220
+    value:           35DA0D5B-241C-3BA8-8AD6-7AA33DF7D7C9
   - target:          x86_64-maccatalyst
-    value:           4D1B342C-0C07-3936-AB62-23CE2640F220
+    value:           35DA0D5B-241C-3BA8-8AD6-7AA33DF7D7C9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7B0E29CA-6CC6-33D9-962A-A38C1130CD06
+    value:           2E1F3FD4-AAFD-3222-B6D9-C0BC1A39A8E7
   - target:          arm64e-maccatalyst
-    value:           7B0E29CA-6CC6-33D9-962A-A38C1130CD06
+    value:           2E1F3FD4-AAFD-3222-B6D9-C0BC1A39A8E7
 install-name:    '/System/Library/PrivateFrameworks/DTXConnectionServices.framework/Versions/A/DTXConnectionServices'
-current-version: 64552.45.1
+current-version: 64555.167.1
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CFArrayCreateWithDTXPrimitiveArray, _CFDictionaryCreateWithDTXPrimitiveDictionary, 
                        _DTXConnectionServicesVersionNumber, _DTXConnectionServicesVersionString, 
                        _DTXPrimitiveArrayAppendBuffer, _DTXPrimitiveArrayAppendValues, 

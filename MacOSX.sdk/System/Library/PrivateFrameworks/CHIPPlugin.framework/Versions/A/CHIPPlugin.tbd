@@ -3,24 +3,41 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           357D317B-8F23-3148-86D9-3AF6E318751B
+    value:           409269BE-A454-3388-82F4-16D00BB01FC4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CABD1101-C954-3F54-951E-BC749D1F2A44
+    value:           CED11B91-07B4-37D2-9A36-E57C676EB624
 install-name:    '/System/Library/PrivateFrameworks/CHIPPlugin.framework/Versions/A/CHIPPlugin'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _CHIPPluginProtocolOperationErrorDomain, _CHIPPluginVendorMetadataFileName ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _CHIPPluginAttestationDataFileName, _CHIPPluginProtocolOperationErrorDomain, 
+                       _CHIPPluginVendorMetadataFileName, _kCHIPPluginRemoteMessageAttributeIdKey, 
+                       _kCHIPPluginRemoteMessageClusterIdKey, _kCHIPPluginRemoteMessageCommandCommand, 
+                       _kCHIPPluginRemoteMessageCommandFieldsKey, _kCHIPPluginRemoteMessageCommandIdKey, 
+                       _kCHIPPluginRemoteMessageCommandKey, _kCHIPPluginRemoteMessageCommandRead, 
+                       _kCHIPPluginRemoteMessageCommandSubscribe, _kCHIPPluginRemoteMessageCommandWrite, 
+                       _kCHIPPluginRemoteMessageDataKey, _kCHIPPluginRemoteMessageEndpointIdKey, 
+                       _kCHIPPluginRemoteMessageMaxIntervalKey, _kCHIPPluginRemoteMessageMinIntervalKey, 
+                       _kCHIPPluginRemoteMessageParamsKey, _kCHIPPluginRemoteMessageResultsKey, 
+                       _kCHIPPluginRemoteMessageTimedInvokeTimeoutKey, _kCHIPPluginRemoteMessageTimedWriteTimeoutKey, 
+                       _kTopologyDictKeyClusters, _kTopologyDictKeyHAPCategories, 
+                       _kTopologyDictKeyHAPDisabledCharacteristics, _kTopologyDictKeyHAPServiceTypes ]
     objc-classes:    [ CHIPAccessoryServer, CHIPAccessoryServerBrowser, CHIPAccessoryServerBuilder, 
                        CHIPAccessoryServerFactory, CHIPPluginAccessoryReachabilityManager, 
-                       CHIPPluginAccessorySetupPayload, CHIPPluginClusterDescription, 
-                       CHIPPluginDescriptorClusterManager, CHIPPluginFileManager, 
+                       CHIPPluginAccessorySetupPayload, CHIPPluginAttestationDataStore, 
+                       CHIPPluginClusterDescription, CHIPPluginColorControl, CHIPPluginDescriptorClusterManager, 
+                       CHIPPluginDeviceCredential, CHIPPluginDeviceTopology, CHIPPluginFileManager, 
+                       CHIPPluginHAPAccessoryInfo, CHIPPluginHAPDescriptionAtEndpoint, 
                        CHIPPluginHAPServiceDescription, CHIPPluginMutableAccessorySetupPayload, 
-                       CHIPPluginMutableVendorMetadata, CHIPPluginMutableVendorMetadataProduct, 
-                       CHIPPluginMutableVendorMetadataVendor, CHIPPluginPairing, 
-                       CHIPPluginProtocolMap, CHIPPluginProtocolOperation, CHIPPluginProtocolOperationManager, 
-                       CHIPPluginResidentStateManager, CHIPPluginStorage, CHIPPluginUtilities, 
+                       CHIPPluginMutableDeviceTopology, CHIPPluginMutableVendorMetadata, 
+                       CHIPPluginMutableVendorMetadataProduct, CHIPPluginMutableVendorMetadataVendor, 
+                       CHIPPluginPairing, CHIPPluginProtocolMap, CHIPPluginProtocolOperation, 
+                       CHIPPluginProtocolOperationManager, CHIPPluginResidentStateManager, 
+                       CHIPPluginStorage, CHIPPluginSystemCommissionerPairingManager, 
+                       CHIPPluginThermostat, CHIPPluginUIDialogPresenter, CHIPPluginUtilities, 
                        CHIPPluginVendorMetadata, CHIPPluginVendorMetadataProduct, 
-                       CHIPPluginVendorMetadataStore, CHIPPluginVendorMetadataVendor ]
+                       CHIPPluginVendorMetadataStore, CHIPPluginVendorMetadataVendor, 
+                       CHIPPluginWiFiNetworkAssociation, CHIPPluginWiFiScanResult, 
+                       CHIPPluginWindowCovering ]
 ...

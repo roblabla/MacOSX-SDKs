@@ -117,7 +117,7 @@ MDL_EXPORT
 /*!
  @property children
  @abstract Short hand property for the MDLObjectContainerComponent.
- @discussion The default value is nil
+ @discussion The default value is an empty MDLObjectContainer 
  
  @see MDLObjectContainerComponent
  */

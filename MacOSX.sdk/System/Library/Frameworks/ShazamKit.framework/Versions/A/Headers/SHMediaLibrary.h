@@ -9,7 +9,7 @@
 #import <ShazamKit/SHDefines.h>
 #import <ShazamKit/SHMediaItem.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// @brief @c SHMediaLibrary represents the user's synced Shazam library.
 /// @discussion You can add new @c SHMediaItem instances to the user's library.
@@ -38,4 +38,4 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -12,6 +12,7 @@
 #import <AppKit/AppKitErrors.h>
 #import <AppKit/NSGraphicsContext.h>
 #import <AppKit/NSAccessibility.h>
+#import <AppKit/NSAccessibilityColor.h>
 #import <AppKit/NSActionCell.h>
 #import <AppKit/NSAlert.h>
 #import <AppKit/NSAnimationContext.h>
@@ -154,6 +155,7 @@
 #import <AppKit/NSRunningApplication.h>
 #import <AppKit/NSComboBox.h>
 #import <AppKit/NSComboBoxCell.h>
+#import <AppKit/NSComboButton.h>
 #import <AppKit/NSTableCellView.h>
 #import <AppKit/NSTableColumn.h>
 #import <AppKit/NSTableHeaderCell.h>
@@ -260,12 +262,14 @@
 #import <AppKit/NSStepperTouchBarItem.h>
 #import <AppKit/NSTintConfiguration.h>
 #import <AppKit/NSSearchToolbarItem.h>
+#import <AppKit/NSPreviewRepresentingActivityItem.h>
 
 #import <AppKit/NSTextRange.h>
 #import <AppKit/NSTextSelection.h>
 #import <AppKit/NSTextSelectionNavigation.h>
 #import <AppKit/NSTextContentManager.h>
 #import <AppKit/NSTextElement.h>
+#import <AppKit/NSTextListElement.h>
 #import <AppKit/NSTextLayoutFragment.h>
 #import <AppKit/NSTextLayoutManager.h>
 #import <AppKit/NSTextLineFragment.h>

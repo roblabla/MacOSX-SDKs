@@ -127,8 +127,11 @@ APPLE_ARCHIVE_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
   @abstract Write the fields defined in \p key_set for all filesystem objects dir.'/'.path where \p path in \p path_list
 
   @discussion
-  In addition to the fields accepted by AAHeaderInitWithPath, the following fields are accepted:
+  The following fields are accepted:
 
+    TYP,PAT,LNK,DEV (always included)
+    UID,GID,MOD,FLG,MTM,BTM,CTM, (attributes)
+    CKS,SH1,SH2,SH3,SH5, (digests)
     XAT,ACL,DAT,HLC,CLC,SLC
 
   Hard link (HLC) and clone (CLC) information relating files in \p path_list is obtained from the filesystem, and stored in the archive.

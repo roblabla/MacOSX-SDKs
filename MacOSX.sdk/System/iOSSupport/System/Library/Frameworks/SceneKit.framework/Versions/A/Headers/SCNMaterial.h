@@ -298,7 +298,7 @@ SCN_EXPORT
 
 /*! 
  @property cullMode
- @abstract Determines the culling mode of the receiver. Defaults to SCNCullBack. Animatable.
+ @abstract Determines the culling mode of the receiver. Defaults to SCNCullModeBack. Animatable.
  */
 @property(nonatomic) SCNCullMode cullMode;
 

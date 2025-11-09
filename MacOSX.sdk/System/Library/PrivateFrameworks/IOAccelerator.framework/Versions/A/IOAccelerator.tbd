@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D554BC18-CB9C-3E64-BC55-67722B5C0900
+    value:           62608B5E-3A12-3E5A-8CF8-1707FEBAC39E
   - target:          x86_64-maccatalyst
-    value:           D554BC18-CB9C-3E64-BC55-67722B5C0900
+    value:           62608B5E-3A12-3E5A-8CF8-1707FEBAC39E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           43F39E52-3AF8-3060-8779-36D302D8D10D
+    value:           7AECE46D-0068-32AF-924A-B0DB6E6290D7
   - target:          arm64e-maccatalyst
-    value:           43F39E52-3AF8-3060-8779-36D302D8D10D
+    value:           7AECE46D-0068-32AF-924A-B0DB6E6290D7
 install-name:    '/System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _IOAccelCLContextCreate, _IOAccelCLContextFinish, _IOAccelCLContextFinishFenceEvent, 
                        _IOAccelCLContextFinishResourceSysMem, _IOAccelCLContextFlushResourceSysMem, 
                        _IOAccelCLContextGetConnect, _IOAccelCLContextGetDataBufferClassCount, 

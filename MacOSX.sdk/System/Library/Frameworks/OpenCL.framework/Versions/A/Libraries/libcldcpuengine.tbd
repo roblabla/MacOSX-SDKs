@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           92A4E310-D849-32FD-8D2D-F49453B36320
+    value:           A089C145-8DA2-3639-8E4E-E5FB3E611BB3
   - target:          x86_64-maccatalyst
-    value:           92A4E310-D849-32FD-8D2D-F49453B36320
+    value:           A089C145-8DA2-3639-8E4E-E5FB3E611BB3
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/libcldcpuengine.dylib'
-current-version: 2.19
+current-version: 3.1
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ ___printf_cl, _barrier, _glrCompBuildProgram, _glrCompCloseDevice, 
                        _glrCompCompileProgram, _glrCompCopyStream, _glrCompCreateContext, 
                        _glrCompCreateKernel, _glrCompCreateProgram, _glrCompCreateStream, 

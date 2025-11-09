@@ -1,11 +1,12 @@
-.\" Copyright (c) 2016-2020, Apple Inc.  All rights reserved.
+.\" Copyright (c) 2016-2022, Apple Inc.  All rights reserved.
 .\"
-.Dd February 10, 2020
+.Dd June 1, 2022
 .Dt KTRACE 1
 .Os "Darwin"
 .Sh NAME
 .Nm ktrace
-.Nd configure, record, and print events from kernel trace
+.Nd record kernel trace files
+.
 .Sh SYNOPSIS
 .Bl -hang -compact -width "ktrace -"
 .\"
@@ -559,7 +560,7 @@ This prevents background diagnostic tools from making use of trace.
 .
 .Sh SEE ALSO
 .Xr fs_usage 1 ,
-.Xr ktrace 5 ,
 .Xr notify 3 ,
+.Xr ktrace 5 ,
 and
 .Xr trace 1

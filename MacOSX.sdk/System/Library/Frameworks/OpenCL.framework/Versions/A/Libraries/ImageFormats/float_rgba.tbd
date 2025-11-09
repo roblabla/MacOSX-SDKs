@@ -3,12 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1E21145B-FAD4-3944-8C48-13624660ADBF
+    value:           7254C17A-47FB-356B-9B50-4E7F67EA4F18
   - target:          x86_64-maccatalyst
-    value:           1E21145B-FAD4-3944-8C48-13624660ADBF
+    value:           7254C17A-47FB-356B-9B50-4E7F67EA4F18
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/float_rgba.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ ___FunctionTableTransposed_AVX10, ___FunctionTableTransposed_SSE3, 
                        ___FunctionTableTransposed_SSE41, ___FunctionTable_AVX10, 
                        ___FunctionTable_SSE3, ___FunctionTable_SSE41 ]

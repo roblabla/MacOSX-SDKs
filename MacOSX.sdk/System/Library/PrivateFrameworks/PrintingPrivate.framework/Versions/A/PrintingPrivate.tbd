@@ -3,22 +3,24 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           58C41F71-F4E0-3097-B3B8-16EE22BA6B63
+    value:           73171489-DAFF-356E-A4A0-C935C3C603AA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           15BCA666-48C0-3835-A1AB-C20E67D24E0E
+    value:           DC50A6AA-605C-3982-9C44-146B133125EB
 install-name:    '/System/Library/PrivateFrameworks/PrintingPrivate.framework/Versions/A/PrintingPrivate'
-current-version: 209.1
+current-version: 223
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CreateTemporaryFile, _HttpConnectionFromURI, _LoadAndGetPMPrinterInfoBundle, 
-                       _LoadAndGetPrintCocoaUIBundle, _PKPrinterBonjourDomain, _PKPrinterInterfaceIndex, 
-                       _PKPrinterIsLocal, _PKPrinterRegistrationType, _PMCopyUsersDesktopPathPrivate, 
+                       _LoadAndGetPrintCocoaUIBundle, _LoadAndGetPrintingUIBundle, 
+                       _PKPrinterBonjourDomain, _PKPrinterInterfaceIndex, _PKPrinterIsLocal, 
+                       _PKPrinterRegistrationType, _PMCopyUsersDesktopPathPrivate, 
                        _PMCopyUsersDocumentFolderURLPrivate, _PMCreatePrinterInfoControllerPrivate, 
                        _PMCreatePrinterSupplyControllerPrivate, _PMGetOrientationImage, 
                        _PMPaperCreatePaperSizeStringPrivate, _PMPrepareAppKitPageSetupDialogWithPrintInfoPrivate, 
-                       _PMPrepareAppKitPrintDialogWithThumbnailPrivate, _RequestPrinterAttributes, 
+                       _PMPrepareAppKitPrintDialogWithThumbnailPrivate, _PMPrepareAppKitPrintPanelPrivate, 
+                       _PMPrintPanelSetAppThumbnailViewPrivate, _RequestPrinterAttributes, 
                        _ValidatePrinterIconData, _WriteICNSFile, _createPaperSizeCFString ]
     objc-classes:    [ PK2Printer, PKBrowser, PKNode, PKQueueCreationController, 
                        PKServer, PMInkView, PMXPCSupport ]

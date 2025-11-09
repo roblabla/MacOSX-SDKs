@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           961190CA-A5F9-3867-8701-996E08195F62
+    value:           B5C0CA8A-2A09-37AC-91CE-2EA0F41C28F7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           015918B6-221C-396A-A827-81D7D8693360
+    value:           1110C785-1178-3277-A95E-26D9684C00FE
 install-name:    '/System/Library/PrivateFrameworks/DirectoryServer.framework/Frameworks/CFDirectoryServer.framework/Versions/A/CFDirectoryServer'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DSCStringCreate, _DSChangePasswordWithPolicy, _DSConfigCopyEnabledAuthMechs, 
                        _DSConfigCopyEnabledAuthMechsFromServer, _DSConfigCopyIdentityName, 
                        _DSConfigCopyServerComputerRecord, _DSConfigDisableAuthMech, 

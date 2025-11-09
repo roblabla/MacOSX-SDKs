@@ -1,17 +1,20 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-ios15.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name GroupActivities
-// swift-module-flags-ignorable: -user-module-version 34.80.81
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-ios16.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name GroupActivities
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 70.200.92.1.1
 import AVFoundation
+import CloudKit
 import Combine
 import CoreGraphics
 import CryptoKit
 import Darwin
 import Foundation
+@_exported import GroupActivities
 import Network
 import Swift
 import UniformTypeIdentifiers
 @_exported import _Concurrency
+import _StringProcessing
 import os.log
 import os
 @_hasMissingDesignatedInitializers @available(iOS 15, macOS 12, tvOS 15, *)
@@ -81,11 +84,9 @@ public enum GroupActivityActivationResult {
 @available(watchOS, unavailable)
 public protocol GroupActivity : Swift.Decodable, Swift.Encodable {
   static var activityIdentifier: Swift.String { get }
-  
   #if compiler(>=5.3) && $EffectfulProp
   var metadata: GroupActivities.GroupActivityMetadata { get async }
   #endif
-
   static func _identifiable(by activityIdentifier: Swift.String) -> Swift.Bool
 }
 extension GroupActivities.GroupActivity {
@@ -97,16 +98,12 @@ extension GroupActivities.GroupActivity {
 @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
 extension GroupActivities.GroupActivity {
-  
   #if compiler(>=5.3) && $AsyncAwait
   public func prepareForActivation() async -> GroupActivities.GroupActivityActivationResult
   #endif
-
-  
   #if compiler(>=5.3) && $AsyncAwait
   public func activate() async throws -> Swift.Bool
   #endif
-
 }
 @_hasMissingDesignatedInitializers @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
@@ -122,16 +119,14 @@ final public class GroupStateObserver : Combine.ObservableObject {
   @objc deinit
 }
 extension Foundation.NSItemProvider {
-  
   #if compiler(>=5.3) && $AsyncAwait
-  @available(iOS 15.4, macCatalyst 12.3, *)
+  @available(iOS 15.4, macCatalyst 15.4, *)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   @available(macOS, unavailable)
   public func registerGroupActivity<ActivityType>(preparationHandler: @escaping () async throws -> ActivityType) where ActivityType : GroupActivities.GroupActivity
   #endif
-
-  @available(iOS 15.4, macCatalyst 12.3, *)
+  @available(iOS 15.4, macCatalyst 15.4, *)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   @available(macOS, unavailable)
@@ -150,8 +145,27 @@ public struct BroadcastOptions : Swift.OptionSet {
 @_hasMissingDesignatedInitializers @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
 final public class GroupSessionMessenger {
+  @available(iOS 16, macOS 13, tvOS 16, *)
+  @available(watchOS, unavailable)
+  final public let deliveryMode: GroupActivities.GroupSessionMessenger.DeliveryMode
   public init<Activity>(session: GroupActivities.GroupSession<Activity>) where Activity : GroupActivities.GroupActivity
+  @available(iOS 16, macOS 13, tvOS 16, *)
+  @available(watchOS, unavailable)
+  public init<Activity>(session: GroupActivities.GroupSession<Activity>, deliveryMode: GroupActivities.GroupSessionMessenger.DeliveryMode) where Activity : GroupActivities.GroupActivity
   @objc deinit
+}
+extension GroupActivities.GroupSessionMessenger {
+  @available(iOS 16, macOS 13, tvOS 16, *)
+  @available(watchOS, unavailable)
+  public enum DeliveryMode {
+    case reliable
+    case unreliable
+    public static func == (a: GroupActivities.GroupSessionMessenger.DeliveryMode, b: GroupActivities.GroupSessionMessenger.DeliveryMode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
 }
 extension GroupActivities.GroupSessionMessenger {
   @available(iOS 15, macOS 12, tvOS 15, *)
@@ -177,6 +191,11 @@ public struct Participant : Swift.Hashable, Swift.Identifiable {
   public static func == (a: GroupActivities.Participant, b: GroupActivities.Participant) -> Swift.Bool
   public typealias ID = Foundation.UUID
   public var hashValue: Swift.Int {
+    get
+  }
+}
+extension GroupActivities.Participant : Swift.CustomStringConvertible {
+  public var description: Swift.String {
     get
   }
 }
@@ -227,6 +246,7 @@ extension GroupActivities.GroupSession {
   @available(*, deprecated, message: "Use GroupSessionEvent")
   final public func postEvent(_ event: GroupActivities.GroupSession<ActivityType>.Event)
 }
+@available(*, deprecated, message: "`GroupSession.Event` is renamed to `GroupSessionEvent`")
 extension GroupActivities.GroupSession.Event {
   @available(*, deprecated, message: "This has been deprecated in favor of the action property")
   public var localizedDescription: Swift.String {
@@ -245,7 +265,6 @@ extension GroupActivities.Participants {
   public static func only(_ participant: GroupActivities.Participant) -> GroupActivities.Participants
 }
 extension GroupActivities.GroupSessionMessenger {
-  
   #if compiler(>=5.3) && $RethrowsProtocol
   @available(iOS 15, macOS 12, tvOS 15, *)
   @available(watchOS, unavailable)
@@ -255,56 +274,40 @@ extension GroupActivities.GroupSessionMessenger {
     @available(iOS 15, macOS 12, tvOS 15, *)
     @available(watchOS, unavailable)
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      
       #if compiler(>=5.3) && $AsyncAwait
       public mutating func next() async -> GroupActivities.GroupSessionMessenger.Messages<Message>.Element?
       #endif
-
-      public typealias Element = (Message, GroupActivities.GroupSessionMessenger.MessageContext)
+      public typealias Element = GroupActivities.GroupSessionMessenger.Messages<Message>.Element
     }
     public typealias AsyncIterator = GroupActivities.GroupSessionMessenger.Messages<Message>.Iterator
   }
   #endif
-
 }
 extension GroupActivities.GroupSessionMessenger {
-  
   #if compiler(>=5.3) && $AsyncAwait
   final public func send<Message>(_ value: Message, to participants: GroupActivities.Participants = .all) async throws where Message : Swift.Decodable, Message : Swift.Encodable
   #endif
-
-  
   #if compiler(>=5.3) && $AsyncAwait
   final public func send(_ value: Foundation.Data, to participants: GroupActivities.Participants = .all) async throws
   #endif
-
-  
   #if compiler(>=5.3) && $RethrowsProtocol
   final public func messages<Message>(of type: Message.Type) -> GroupActivities.GroupSessionMessenger.Messages<Message> where Message : Swift.Decodable, Message : Swift.Encodable
   #endif
-
-  
   #if compiler(>=5.3) && $RethrowsProtocol
   final public func messages(of type: Foundation.Data.Type) -> GroupActivities.GroupSessionMessenger.Messages<Foundation.Data>
   #endif
-
 }
 @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
 extension GroupActivities.GroupActivity {
-  
   #if compiler(>=5.3) && $RethrowsProtocol
   public typealias Sessions = GroupActivities.GroupSession<Self>.Sessions
   #endif
-
-  
   #if compiler(>=5.3) && $RethrowsProtocol
   public static func sessions() -> Self.Sessions
   #endif
-
 }
 extension GroupActivities.GroupSession {
-  
   #if compiler(>=5.3) && $RethrowsProtocol
   @available(iOS 15, macOS 12, tvOS 15, *)
   @available(watchOS, unavailable)
@@ -314,17 +317,14 @@ extension GroupActivities.GroupSession {
     @available(iOS 15, macOS 12, tvOS 15, *)
     @available(watchOS, unavailable)
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      
       #if compiler(>=5.3) && $AsyncAwait
       public mutating func next() async -> GroupActivities.GroupSession<ActivityType>?
       #endif
-
       public typealias Element = GroupActivities.GroupSession<ActivityType>
     }
     public typealias AsyncIterator = GroupActivities.GroupSession<ActivityType>.Sessions.Iterator
   }
   #endif
-
 }
 extension AVFoundation.AVPlaybackCoordinator {
   @available(iOS 15, macOS 12, tvOS 15, *)
@@ -391,6 +391,12 @@ extension GroupActivities.GroupActivityActivationResult : Swift.Equatable {}
 @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
 extension GroupActivities.GroupActivityActivationResult : Swift.Hashable {}
+@available(iOS 16, macOS 13, tvOS 16, *)
+@available(watchOS, unavailable)
+extension GroupActivities.GroupSessionMessenger.DeliveryMode : Swift.Equatable {}
+@available(iOS 16, macOS 13, tvOS 16, *)
+@available(watchOS, unavailable)
+extension GroupActivities.GroupSessionMessenger.DeliveryMode : Swift.Hashable {}
 @available(*, deprecated, renamed: "ActivityType")
 extension GroupActivities.GroupActivityMetadata.Experience : Swift.Equatable {}
 @available(*, deprecated, renamed: "ActivityType")

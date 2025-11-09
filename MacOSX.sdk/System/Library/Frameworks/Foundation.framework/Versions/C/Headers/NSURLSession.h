@@ -45,7 +45,7 @@
  server authentication or determining whether a resource to be loaded
  should be converted into a download.
  
- NSURLSession instances are threadsafe.
+ NSURLSession instances are thread-safe.
 
  The default NSURLSession uses a system provided delegate and is
  appropriate to use in place of existing code that uses
@@ -110,12 +110,13 @@
 @class NSURLSessionTaskMetrics;
 @class NSDateInterval;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #define NSURLSESSION_AVAILABLE	10_9
 
 FOUNDATION_EXPORT const int64_t NSURLSessionTransferSizeUnknown API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));    /* -1LL */
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSURLSession : NSObject
 
@@ -166,12 +167,12 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  */
 - (void)invalidateAndCancel;
 
-- (void)resetWithCompletionHandler:(void (^)(void))completionHandler;    /* empty all cookies, cache and credential stores, removes disk files, issues -flushWithCompletionHandler:. Invokes completionHandler() on the delegate queue if not nil. */
-- (void)flushWithCompletionHandler:(void (^)(void))completionHandler;    /* flush storage to disk and clear transient network caches.  Invokes completionHandler() on the delegate queue if not nil. */
+- (void)resetWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(void))completionHandler;    /* empty all cookies, cache and credential stores, removes disk files, issues -flushWithCompletionHandler:. Invokes completionHandler() on the delegate queue. */
+- (void)flushWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(void))completionHandler;    /* flush storage to disk and clear transient network caches.  Invokes completionHandler() on the delegate queue. */
 
-- (void)getTasksWithCompletionHandler:(void (^)(NSArray<NSURLSessionDataTask *> *dataTasks, NSArray<NSURLSessionUploadTask *> *uploadTasks, NSArray<NSURLSessionDownloadTask *> *downloadTasks))completionHandler NS_SWIFT_ASYNC_NAME(getter:tasks()); /* invokes completionHandler with outstanding data, upload and download tasks. */
+- (void)getTasksWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSArray<NSURLSessionDataTask *> *dataTasks, NSArray<NSURLSessionUploadTask *> *uploadTasks, NSArray<NSURLSessionDownloadTask *> *downloadTasks))completionHandler NS_SWIFT_ASYNC_NAME(getter:tasks()); /* invokes completionHandler with outstanding data, upload and download tasks. */
 
-- (void)getAllTasksWithCompletionHandler:(void (^)(NSArray<__kindof NSURLSessionTask *> *tasks))completionHandler NS_SWIFT_ASYNC_NAME(getter:allTasks()) API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)); /* invokes completionHandler with all outstanding tasks. */
+- (void)getAllTasksWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSArray<__kindof NSURLSessionTask *> *tasks))completionHandler NS_SWIFT_ASYNC_NAME(getter:allTasks()) API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)); /* invokes completionHandler with all outstanding tasks. */
 
 /* 
  * NSURLSessionTask objects are always created in a suspended state and
@@ -216,7 +217,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 - (NSURLSessionWebSocketTask *)webSocketTaskWithURL:(NSURL *)url API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /* Creates a WebSocket task given the url and an array of protocols. The protocols will be used in the WebSocket handshake to
- * negotiate a prefered protocol with the server
+ * negotiate a preferred protocol with the server
  * Note - The protocol will not affect the WebSocket framing. More details on the protocol can be found by reading the WebSocket RFC
  */
 - (NSURLSessionWebSocketTask *)webSocketTaskWithURL:(NSURL *)url protocols:(NSArray<NSString *>*)protocols API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
@@ -251,14 +252,14 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  * see <Foundation/NSURLError.h>.  The delegate, if any, will still be
  * called for authentication challenges.
  */
-- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
-- (NSURLSessionDataTask *)dataTaskWithURL:(NSURL *)url completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+- (NSURLSessionDataTask *)dataTaskWithURL:(NSURL *)url completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
 
 /*
  * upload convenience method.
  */
-- (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
-- (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request fromData:(nullable NSData *)bodyData completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+- (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request fromFile:(NSURL *)fileURL completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+- (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request fromData:(nullable NSData *)bodyData completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
 
 /*
  * download task convenience methods.  When a download successfully
@@ -266,9 +267,9 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  * copied during the invocation of the completion routine.  The file
  * will be removed automatically.
  */
-- (NSURLSessionDownloadTask *)downloadTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
-- (NSURLSessionDownloadTask *)downloadTaskWithURL:(NSURL *)url completionHandler:(void (^)(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
-- (NSURLSessionDownloadTask *)downloadTaskWithResumeData:(NSData *)resumeData completionHandler:(void (^)(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+- (NSURLSessionDownloadTask *)downloadTaskWithRequest:(NSURLRequest *)request completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+- (NSURLSessionDownloadTask *)downloadTaskWithURL:(NSURL *)url completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+- (NSURLSessionDownloadTask *)downloadTaskWithResumeData:(NSData *)resumeData completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
 
 @end
 
@@ -283,6 +284,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionTaskState) {
  * NSURLSessionTask - a cancelable object that refers to the lifetime
  * of processing a given request.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSURLSessionTask : NSObject <NSCopying, NSProgressReporting>
 
@@ -363,7 +365,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 
 /*
  * The error, if any, delivered via -URLSession:task:didCompleteWithError:
- * This property will be nil in the event that no error occured.
+ * This property will be nil in the event that no error occurred.
  */
 @property (nullable, readonly, copy) NSError *error;
 
@@ -422,6 +424,7 @@ FOUNDATION_EXPORT const float NSURLSessionTaskPriorityHigh API_AVAILABLE(macos(1
  * functionality over an NSURLSessionTask and its presence is merely
  * to provide lexical differentiation from download and upload tasks.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSURLSessionDataTask : NSURLSessionTask
 
@@ -436,6 +439,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  * that may be sent referencing an NSURLSessionDataTask equally apply
  * to NSURLSessionUploadTasks.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSURLSessionUploadTask : NSURLSessionDataTask
 
@@ -448,6 +452,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  * NSURLSessionDownloadTask is a task that represents a download to
  * local storage.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSURLSessionDownloadTask : NSURLSessionTask
 
@@ -458,7 +463,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  * If resume data cannot be created, the completion handler will be
  * called with nil resumeData.
  */
-- (void)cancelByProducingResumeData:(void (^)(NSData * _Nullable resumeData))completionHandler;
+- (void)cancelByProducingResumeData:(void (NS_SWIFT_SENDABLE ^)(NSData * _Nullable resumeData))completionHandler;
 
 
 - (instancetype)init API_DEPRECATED("Please use -[NSURLSession downloadTaskWithRequest:] or other NSURLSession methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
@@ -474,21 +479,21 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  * -URLSession:dataTask:didReceiveResponse: delegate message.
  * 
  * NSURLSessionStreamTask can be used to perform asynchronous reads
- * and writes.  Reads and writes are enquened and executed serially,
+ * and writes.  Reads and writes are enqueued and executed serially,
  * with the completion handler being invoked on the sessions delegate
- * queuee.  If an error occurs, or the task is canceled, all
+ * queue.  If an error occurs, or the task is canceled, all
  * outstanding read and write calls will have their completion
  * handlers invoked with an appropriate error.
  *
  * It is also possible to create NSInputStream and NSOutputStream
  * instances from an NSURLSessionTask by sending
- * -captureStreams to the task.  All outstanding read and writess are
+ * -captureStreams to the task.  All outstanding reads and writes are
  * completed before the streams are created.  Once the streams are
  * delivered to the session delegate, the task is considered complete
- * and will receive no more messsages.  These streams are
+ * and will receive no more messages.  These streams are
  * disassociated from the underlying session.
  */
-
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface NSURLSessionStreamTask : NSURLSessionTask
 
@@ -497,14 +502,14 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
  * If an error occurs, any outstanding reads will also fail, and new
  * read requests will error out immediately.
  */
-- (void)readDataOfMinLength:(NSUInteger)minBytes maxLength:(NSUInteger)maxBytes timeout:(NSTimeInterval)timeout completionHandler:(void (^) (NSData * _Nullable_result data, BOOL atEOF, NSError * _Nullable error))completionHandler;
+- (void)readDataOfMinLength:(NSUInteger)minBytes maxLength:(NSUInteger)maxBytes timeout:(NSTimeInterval)timeout completionHandler:(void (NS_SWIFT_SENDABLE ^) (NSData * _Nullable_result data, BOOL atEOF, NSError * _Nullable error))completionHandler;
 
 /* Write the data completely to the underlying socket.  If all the
  * bytes have not been written by the timeout, a timeout error will
  * occur.  Note that invocation of the completion handler does not
  * guarantee that the remote side has received all the bytes, only
  * that they have been written to the kernel. */
-- (void)writeData:(NSData *)data timeout:(NSTimeInterval)timeout completionHandler:(void (^) (NSError * _Nullable error))completionHandler;
+- (void)writeData:(NSData *)data timeout:(NSTimeInterval)timeout completionHandler:(void (NS_SWIFT_SENDABLE ^) (NSError * _Nullable error))completionHandler;
 
 /* -captureStreams completes any already enqueued reads
  * and writes, and then invokes the
@@ -529,7 +534,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 - (void)closeRead;
 
 /*
- * Begin encrypted handshake.  The hanshake begins after all pending 
+ * Begin encrypted handshake.  The handshake begins after all pending
  * IO has completed.  TLS authentication callbacks are sent to the 
  * session's -URLSession:task:didReceiveChallenge:completionHandler:
  */
@@ -558,6 +563,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionWebSocketMessageType) {
  * and will be delivered from the receive calls. The message can be initialized with data or string.
  * If initialized with data, the string property will be nil and vice versa.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 @interface NSURLSessionWebSocketMessage : NSObject
 
@@ -603,11 +609,12 @@ typedef NS_ENUM(NSInteger, NSURLSessionWebSocketCloseCode)
  * a list of protocols it wishes to advertise during the WebSocket handshake phase.
  * Once the handshake is successfully completed the client will be notified through an optional delegate.
  * All reads and writes enqueued before the completion of the handshake will be queued up and
- * executed once the hanshake succeeds. Before the handshake completes, the client can be called to handle
+ * executed once the handshake succeeds. Before the handshake completes, the client can be called to handle
  * redirection or authentication using the same delegates as NSURLSessionTask. WebSocket task will also provide
  * support for cookies and will store cookies to the cookie storage on the session and will attach cookies to
  * outgoing HTTP handshake requests.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 @interface NSURLSessionWebSocketTask : NSURLSessionTask
 
@@ -616,27 +623,27 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
  * guarantee that the remote side has received all the bytes, only
  * that they have been written to the kernel.
  */
-- (void)sendMessage:(NSURLSessionWebSocketMessage *)message completionHandler:(void (^)(NSError * _Nullable error))completionHandler;
+- (void)sendMessage:(NSURLSessionWebSocketMessage *)message completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSError * _Nullable error))completionHandler;
 
 /* Reads a WebSocket message once all the frames of the message are available.
  * If the maximumMessage size is hit while buffering the frames, the receiveMessage call will error out
  * and all outstanding work will also fail resulting in the end of the task.
  */
-- (void)receiveMessageWithCompletionHandler:(void (^)(NSURLSessionWebSocketMessage * _Nullable message, NSError * _Nullable error))completionHandler;
+- (void)receiveMessageWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSURLSessionWebSocketMessage * _Nullable message, NSError * _Nullable error))completionHandler;
 
 /* Sends a ping frame from the client side. The pongReceiveHandler is invoked when the client
  * receives a pong from the server endpoint. If a connection is lost or an error occurs before receiving
  * the pong from the endpoint, the pongReceiveHandler block will be invoked with an error.
  * Note - the pongReceiveHandler will always be called in the order in which the pings were sent.
  */
-- (void)sendPingWithPongReceiveHandler:(void (^)(NSError * _Nullable error))pongReceiveHandler;
+- (void)sendPingWithPongReceiveHandler:(void (NS_SWIFT_SENDABLE ^)(NSError * _Nullable error))pongReceiveHandler;
 
 /* Sends a close frame with the given closeCode. An optional reason can be provided while sending the close frame.
  * Simply calling cancel on the task will result in a cancellation frame being sent without any reason.
  */
 - (void)cancelWithCloseCode:(NSURLSessionWebSocketCloseCode)closeCode reason:(nullable NSData *)reason;
 
-@property NSInteger maximumMessageSize; /* The maximum number of bytes to be buffered before erroring out. This includes the sum of all bytes from continuation frames. Recieve calls will error out if this value is reached */
+@property NSInteger maximumMessageSize; /* The maximum number of bytes to be buffered before erroring out. This includes the sum of all bytes from continuation frames. Receive calls will error out if this value is reached */
 @property (readonly) NSURLSessionWebSocketCloseCode closeCode; /* A task can be queried for it's close code at any point. When the task is not closed, it will be set to NSURLSessionWebSocketCloseCodeInvalid */
 @property (nullable, readonly, copy) NSData *closeReason; /* A task can be queried for it's close reason at any point. A nil value indicates no closeReason or that the task is still running */
 
@@ -659,9 +666,9 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
  This is the default value.  No entitlement is required to set this value.
  
  @constant NSURLSessionMultipathServiceTypeHandover Specifies that a secondary subflow should only be used
- when the primary subflow is not performing adequately.   Requires the com.apple.developer.networking.multipath entilement.
+ when the primary subflow is not performing adequately.   Requires the com.apple.developer.networking.multipath entitlement.
  
- @constant NSURLSessionMultipathServiceTypeInteractive Specifies that a secodary subflow should be used if the
+ @constant NSURLSessionMultipathServiceTypeInteractive Specifies that a secondary subflow should be used if the
  primary subflow is not performing adequately (packet loss, high round trip times, bandwidth issues).  The secondary
  subflow will be created more aggressively than with NSURLSessionMultipathServiceTypeHandover.  Requires the com.apple.developer.networking.multipath entitlement.
  
@@ -675,7 +682,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionMultipathServiceType)
     NSURLSessionMultipathServiceTypeNone = 0,      	/* None - no multipath (default) */
     NSURLSessionMultipathServiceTypeHandover = 1,   	/* Handover - secondary flows brought up when primary flow is not performing adequately. */
     NSURLSessionMultipathServiceTypeInteractive = 2, /* Interactive - secondary flows created more aggressively. */
-    NSURLSessionMultipathServiceTypeAggregate = 3    /* Aggregate - multiple subflows used for greater bandwitdh. */
+    NSURLSessionMultipathServiceTypeAggregate = 3    /* Aggregate - multiple subflows used for greater bandwidth. */
 } API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos) NS_SWIFT_NAME(URLSessionConfiguration.MultipathServiceType);
 
 /*
@@ -692,6 +699,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionMultipathServiceType)
  * A background session can be used to perform networking operations
  * on behalf of a suspended application, within certain constraints.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSURLSessionConfiguration : NSObject <NSCopying>
 
@@ -723,6 +731,9 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 
 /* allow request to route over networks in constrained mode. Defaults to YES. */
 @property BOOL allowsConstrainedNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/* requires requests from the session to be made with DNSSEC validation enabled. Defaults to NO. */
+@property BOOL requiresDNSSECValidation API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /*
  * Causes tasks to wait for network connectivity to become available, rather
@@ -786,7 +797,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
    Note that these headers are added to the request only if not already present. */
 @property (nullable, copy) NSDictionary *HTTPAdditionalHeaders;
 
-/* The maximum number of simultanous persistent connections per host */
+/* The maximum number of simultaneous persistent connections per host */
 @property NSInteger HTTPMaximumConnectionsPerHost;
 
 /* The cookie storage object to use, or nil to indicate that no cookies should be handled */
@@ -856,6 +867,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
 /*
  * Messages related to the URL session as a whole
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @protocol NSURLSessionDelegate <NSObject>
 @optional
@@ -876,7 +888,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  * interaction. 
  */
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
-                                             completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler;
+                                             completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler;
 
 /* If an application has received an
  * -application:handleEventsForBackgroundURLSession:completionHandler:
@@ -897,6 +909,15 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @protocol NSURLSessionTaskDelegate <NSURLSessionDelegate>
 @optional
 
+/* Notification that a task has been created.  This method is the first message
+ * a task sends, providing a place to configure the task before it is resumed.
+ *
+ * This delegate callback is *NOT* dispatched to the delegate queue.  It is
+ * invoked synchronously before the task creation method returns.
+ */
+- (void)URLSession:(NSURLSession *)session didCreateTask:(NSURLSessionTask *)task
+    API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
 /*
  * Sent when the system is ready to begin work for a task with a delayed start
  * time set (using the earliestBeginDate property). The completionHandler must
@@ -911,7 +932,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  * to starting the network load.
  *
  * If a new request is specified, the allowsExpensiveNetworkAccess,
- * allowsContrainedNetworkAccess, and allowsCellularAccess properties
+ * allowsConstrainedNetworkAccess, and allowsCellularAccess properties
  * from the new request will not be used; the properties from the
  * original request will continue to be used.
  *
@@ -921,7 +942,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  */
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
                         willBeginDelayedRequest:(NSURLRequest *)request
-                              completionHandler:(void (^)(NSURLSessionDelayedRequestDisposition disposition, NSURLRequest * _Nullable newRequest))completionHandler
+                              completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSURLSessionDelayedRequestDisposition disposition, NSURLRequest * _Nullable newRequest))completionHandler
     API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 /*
@@ -950,7 +971,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
                      willPerformHTTPRedirection:(NSHTTPURLResponse *)response
                                      newRequest:(NSURLRequest *)request
-                              completionHandler:(void (^)(NSURLRequest * _Nullable))completionHandler;
+                              completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSURLRequest * _Nullable))completionHandler;
 
 /* The task has received a request specific authentication challenge.
  * If this delegate is not implemented, the session specific authentication challenge
@@ -959,14 +980,14 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  */
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
                             didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge 
-                              completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler;
+                              completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler;
 
 /* Sent if a task requires a new, unopened body stream.  This may be
  * necessary when authentication has failed for any request that
  * involves a body stream. 
  */
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
-                              needNewBodyStream:(void (^)(NSInputStream * _Nullable bodyStream))completionHandler NS_SWIFT_ASYNC_NAME(urlSession(_:needNewBodyStreamForTask:));
+                              needNewBodyStream:(void (NS_SWIFT_SENDABLE ^)(NSInputStream * _Nullable bodyStream))completionHandler NS_SWIFT_ASYNC_NAME(urlSession(_:needNewBodyStreamForTask:));
 
 /* Sent periodically to notify the delegate of upload progress.  This
  * information is also available as properties of the task.
@@ -1006,7 +1027,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  */
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
                                  didReceiveResponse:(NSURLResponse *)response
-                                  completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler;
+                                  completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSURLSessionResponseDisposition disposition))completionHandler;
 
 /* Notification that a data task has become a download task.  No
  * future messages will be sent to the data task.
@@ -1050,7 +1071,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  */
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
                                   willCacheResponse:(NSCachedURLResponse *)proposedResponse 
-                                  completionHandler:(void (^)(NSCachedURLResponse * _Nullable cachedResponse))completionHandler;
+                                  completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSCachedURLResponse * _Nullable cachedResponse))completionHandler;
 
 @end
 
@@ -1091,7 +1112,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @protocol NSURLSessionStreamDelegate <NSURLSessionTaskDelegate>
 @optional
 
-/* Indiciates that the read side of a connection has been closed.  Any
+/* Indicates that the read side of a connection has been closed.  Any
  * outstanding reads complete, but future reads will immediately fail.
  * This may be sent even when no reads are in progress. However, when
  * this delegate message is received, there may still be bytes
@@ -1099,7 +1120,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
  * are able to read until EOF. */
 - (void)URLSession:(NSURLSession *)session readClosedForStreamTask:(NSURLSessionStreamTask *)streamTask;
 
-/* Indiciates that the write side of a connection has been closed.
+/* Indicates that the write side of a connection has been closed.
  * Any outstanding writes complete, but future writes will immediately
  * fail.
  */
@@ -1174,6 +1195,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionTaskMetricsDomainResolutionProtocol) {
 /*
  * This class defines the performance metrics collected for a request/response transaction during the task execution.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 @interface NSURLSessionTaskTransactionMetrics : NSObject
 
@@ -1272,7 +1294,7 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 
 /*
  * The network protocol used to fetch the resource, as identified by the ALPN Protocol ID Identification Sequence [RFC7301].
- * E.g., h2, http/1.1, spdy/3.1.
+ * E.g., h3, h2, http/1.1.
  *
  * When a proxy is configured AND a tunnel connection is established, then this attribute returns the value for the tunneled protocol.
  *
@@ -1418,7 +1440,7 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 
 @end
 
-
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 @interface NSURLSessionTaskMetrics : NSObject
 
@@ -1445,4 +1467,4 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

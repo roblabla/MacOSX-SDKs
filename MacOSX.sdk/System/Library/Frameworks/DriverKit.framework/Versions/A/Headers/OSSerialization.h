@@ -1,4 +1,4 @@
-/* iig(DriverKit-192.100.7) generated from OSSerialization.iig */
+/* iig(DriverKit-256.40.4) generated from OSSerialization.iig */
 
 /* OSSerialization.iig:1-38 */
 /*
@@ -39,7 +39,7 @@ typedef OSSerialization * OSSerializationPtr;
 
 typedef void (^OSSerializationFreeBufferHandler)(const void * buffer, size_t length);
 
-/* source class OSSerialization OSSerialization.iig:39-101 */
+/* source class OSSerialization OSSerialization.iig:39-110 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -103,16 +103,25 @@ public:
      * @brief       Obtain the result of the serialization performed by createFromObject().
      * @discussion  Obtain the result of the serialization performed by createFromObject().
      * @param       length The length of the serialization data.
-     * @return      NULL on failure, otherwise a pointer to the serialization data. It is valid only while the OSSerialization object is retained.
+     * @return      NULL on failure, otherwise a pointer to the serialization data.
      */
 	const void *
 	finalizeBuffer(size_t * length);
+
+    /*!
+     * @brief       Free a buffer returned by finalizeBuffer().
+     * @discussion  Free a buffer returned by finalizeBuffer().
+     * @param       buffer Pointer to the serialization data.
+     * @param       length The length of the serialization data.
+     */
+	void
+	static freeBuffer(const void * buffer, size_t length);
 };
 
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class OSSerialization OSSerialization.iig:39-101 */
+/* generated class OSSerialization OSSerialization.iig:39-110 */
 
 
 #define OSSerialization_Methods \
@@ -136,6 +145,11 @@ public:\
     const void *\
     finalizeBuffer(\
         size_t * length);\
+\
+    static void\
+    freeBuffer(\
+        const void * buffer,\
+        size_t length);\
 \
 \
 protected:\
@@ -225,6 +239,6 @@ OSSerialization_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* OSSerialization.iig:103- */
+/* OSSerialization.iig:112- */
 
 #endif /* ! _IOKIT_OSSERIALIZATION_H */

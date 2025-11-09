@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, UITimingCurveType) {
 
 @class UICubicTimingParameters, UISpringTimingParameters;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 NS_SWIFT_UI_ACTOR
 @protocol UITimingCurveProvider <NSCoding, NSCopying>
@@ -28,7 +28,7 @@ NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UITimingCurveProvider.h>

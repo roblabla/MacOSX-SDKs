@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /*!
- @brief A request that will detect the countours for the edges in an image.
+ @brief A request that will detect the contours for the edges in an image.
 
  @discussion This request will produce a VNContoursObservation which describes the contours.
  */
@@ -23,7 +23,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 /*!
  @brief The amount to adjust the image's contrast by.
         A value of +1.0 means that the contrast is not adjusted. The default value is +2.0.
- @discussion Countour detection works best with high contrast images. The default value of 2 doubles the image's contrast to aid in detection. If the image already has a high contrast then this value should be set to 1.
+ @discussion Contour detection works best with high contrast images. The default value of 2 doubles the image's contrast to aid in detection. If the image already has a high contrast then this value should be set to 1.
 */
 @property (readwrite, nonatomic) float contrastAdjustment;
 
@@ -31,7 +31,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  @brief The pixel value to use as a pivot for the contrast. Valid values are from [0.0 ... +1.0], or nil to auto-detect based on image intensity.
         The default value is +0.5 (i.e. pixel center).
 */
-@property (readwrite, nonatomic, nullable) NSNumber * contrastPivot API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)); 
+@property (readwrite, nonatomic, strong, nullable) NSNumber * contrastPivot API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 /*!
  @brief Identifies to the request if detecting a dark object on a light background, or vice versa, to aid in detection. The default value is YES.

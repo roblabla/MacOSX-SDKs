@@ -4,7 +4,7 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2010-2021 Apple Inc. All rights reserved.
+	Copyright 2010-2022 Apple Inc. All rights reserved.
 
  */
 
@@ -114,7 +114,9 @@ typedef NS_ERROR_ENUM(AVFoundationErrorDomain, AVError) {
 	AVErrorRosettaNotInstalled API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0)) = -11877,
 	AVErrorOperationCancelled API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0)) = -11878,
 	AVErrorContentKeyRequestCancelled API_AVAILABLE(macos(11.4), ios(14.6), tvos(14.6), watchos(7.5)) = -11879,
-
+	AVErrorInvalidSampleCursor API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) = -11880,
+	AVErrorFailedToLoadSampleData API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) = -11881,
+	AVErrorAirPlayReceiverTemporarilyUnavailable API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) = -11882,
 };
 
 #else

@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FAD4F254-B123-3185-BBDA-6F665180D161
+    value:           293586E9-5802-3F3B-8527-50394C46826B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8F39D776-7328-3E7A-800A-10B12738ADFD
+    value:           D0544ADB-2510-36C8-BF7E-0E0D2C763F02
 install-name:    '/System/Library/PrivateFrameworks/MobileObliteration.framework/Versions/A/MobileObliteration'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _Mobile_Obliterate, _Mobile_Obliterate_IsSupported, _kCommandResultsKey, 
                        _kDisplayProgressBarKey, _kIPCStatusComplete, _kIPCStatusError, 
                        _kIPCStatusKey, _kIgnoreInternalKey, _kMobileObliterationDeviceLockedError, 

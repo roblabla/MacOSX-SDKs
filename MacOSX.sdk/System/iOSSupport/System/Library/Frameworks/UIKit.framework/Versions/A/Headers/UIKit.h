@@ -19,3 +19,7 @@
 #if __has_include(<UIKit/ShareSheet.h>)
 #import <UIKit/ShareSheet.h>
 #endif
+
+#if __has_include(<UIKit/PrintKitUI.h>)
+#import <UIKit/PrintKitUI.h>
+#endif

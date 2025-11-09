@@ -1,4 +1,4 @@
-framework module CoreImage [extern_c] [system] {
+framework module CoreImage [system] {
   umbrella header "CoreImage.h"
   export *
   module * { export * }

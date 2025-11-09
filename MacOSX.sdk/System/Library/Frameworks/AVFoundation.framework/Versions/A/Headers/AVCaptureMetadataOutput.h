@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     Instances of AVCaptureMetadataOutput emit arrays of AVMetadataObject instances (see AVMetadataObject.h), such as detected faces. Applications can access the metadata objects with the captureOutput:didOutputMetadataObjects:fromConnection: delegate method.
  */
-API_AVAILABLE(ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(13.0), ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
 @interface AVCaptureMetadataOutput : AVCaptureOutput
 {
 @private
@@ -115,7 +115,7 @@ API_AVAILABLE(ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHO
  @abstract
     Defines an interface for delegates of AVCaptureMetadataOutput to receive emitted objects.
  */
-API_AVAILABLE(ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(13.0), ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
 @protocol AVCaptureMetadataOutputObjectsDelegate <NSObject>
 
 @optional

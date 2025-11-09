@@ -81,7 +81,7 @@ API_AVAILABLE(macos(10.11), ios(9)) __WATCHOS_PROHIBITED
  * @param subgroup The new group to add.
  * @param group The group to add the subgroup to.
  */
-- (void)addSubgroup:(CNGroup *)subgroup toGroup:(CNGroup *)group NS_AVAILABLE(10_11, NA);
+- (void)addSubgroup:(CNGroup *)subgroup toGroup:(CNGroup *)group API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios);
 
 /*!
  * @abstract Remove a subgroup from a group.
@@ -91,7 +91,7 @@ API_AVAILABLE(macos(10.11), ios(9)) __WATCHOS_PROHIBITED
  * @param subgroup The new group to add.
  * @param group The group to add the subgroup to.
  */
-- (void)removeSubgroup:(CNGroup *)subgroup fromGroup:(CNGroup *)group NS_AVAILABLE(10_11, NA);
+- (void)removeSubgroup:(CNGroup *)subgroup fromGroup:(CNGroup *)group API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios);
 
 /*!
  * @abstract Add a new member to a group.

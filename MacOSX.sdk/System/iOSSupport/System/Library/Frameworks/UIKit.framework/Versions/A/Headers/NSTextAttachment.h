@@ -1,4 +1,6 @@
-#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<UIKitCore/NSTextAttachment.h>)
+#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<UIFoundation/NSTextAttachment.h>)
+#import <UIKit/UIKitDefines.h>
+
 //
 //  NSTextAttachment.h
 //  UIKit
@@ -7,12 +9,9 @@
 //
 
 #import <Foundation/NSAttributedString.h>
-#import <UIKit/UIKitDefines.h>
 #import <CoreGraphics/CGGeometry.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
-#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 enum {
     NSAttachmentCharacter API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos) = 0xFFFC // Replacement character is used for attachments
@@ -131,10 +130,9 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 - (CGRect)attachmentBoundsForAttributes:(NSDictionary<NSAttributedStringKey, id> *)attributes location:(id <NSTextLocation>)location textContainer:(nullable NSTextContainer *)textContainer proposedLineFragment:(CGRect)proposedLineFragment position:(CGPoint)position;
 @end
 
-#endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
-NS_ASSUME_NONNULL_END
 
+NS_HEADER_AUDIT_END(nullability, sendability)
 #else
-#import <UIKitCore/NSTextAttachment.h>
+#import <UIFoundation/NSTextAttachment.h>
 #endif

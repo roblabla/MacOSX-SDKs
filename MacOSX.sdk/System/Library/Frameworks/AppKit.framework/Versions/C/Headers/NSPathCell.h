@@ -112,11 +112,11 @@ API_AVAILABLE(macos(10.5))
 
 /* Called before the 'openPanel' is shown, but after the 'openPanel' has allowedFileTypes set to the cell's allowedTypes. At this time, you can further customize the 'openPanel' as required. This is only ever called when the style is set to NSPathStylePopUp.
 */
-- (void)pathCell:(NSPathCell *)pathCell willDisplayOpenPanel:(NSOpenPanel *)openPanel;
+- (void)pathCell:(NSPathCell *)pathCell willDisplayOpenPanel:(NSOpenPanel *)openPanel NS_SWIFT_UI_ACTOR;
 
 /* Called before the 'menu' is shown. At this time, you can further customize the 'menu' as required, adding and removing items. This is only ever called when the style is set to NSPathStylePopUp.
 */
-- (void)pathCell:(NSPathCell *)pathCell willPopUpMenu:(NSMenu *)menu;
+- (void)pathCell:(NSPathCell *)pathCell willPopUpMenu:(NSMenu *)menu NS_SWIFT_UI_ACTOR;
 
 @end
 

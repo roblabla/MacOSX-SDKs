@@ -112,6 +112,7 @@ NS_SWIFT_UI_ACTOR
 
 /* This protocol contains a large number of methods intended for use as key binding commands.  NSResponder does not implement any of them.  NSTextView implements a certain subset of them (see the NSTextView.h header).  Your responder subclasses can implement any that make sense.  You can make up your own as well, but you should use these if the concepts map.  If your view is key and uses key binding and the user types a key sequence which is bound to a command which is not implemented in your class, it is OK, nothing will happen by default.
 */
+NS_SWIFT_UI_ACTOR
 @protocol NSStandardKeyBindingResponding <NSObject>
 @optional
 

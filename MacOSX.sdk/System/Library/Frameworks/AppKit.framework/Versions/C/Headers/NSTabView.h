@@ -109,10 +109,10 @@ typedef NS_ENUM(NSUInteger, NSTabViewBorderType) {
 
 @protocol NSTabViewDelegate <NSObject>
 @optional
-- (BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(nullable NSTabViewItem *)tabViewItem;
-- (void)tabView:(NSTabView *)tabView willSelectTabViewItem:(nullable NSTabViewItem *)tabViewItem;
-- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(nullable NSTabViewItem *)tabViewItem;
-- (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView;
+- (BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(nullable NSTabViewItem *)tabViewItem NS_SWIFT_UI_ACTOR;
+- (void)tabView:(NSTabView *)tabView willSelectTabViewItem:(nullable NSTabViewItem *)tabViewItem NS_SWIFT_UI_ACTOR;
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(nullable NSTabViewItem *)tabViewItem NS_SWIFT_UI_ACTOR;
+- (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView NS_SWIFT_UI_ACTOR;
 @end
 
 API_UNAVAILABLE_END

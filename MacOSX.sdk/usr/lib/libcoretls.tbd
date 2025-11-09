@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D5449E53-26F3-39AD-9B3D-1A5CBAD3CA6E
+    value:           D2EAADB5-557C-30E6-BDFA-00C4278B064D
   - target:          x86_64-maccatalyst
-    value:           D5449E53-26F3-39AD-9B3D-1A5CBAD3CA6E
+    value:           D2EAADB5-557C-30E6-BDFA-00C4278B064D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           83917B94-DF42-36A6-90F2-03BE08890659
+    value:           675CAEB9-4722-30E0-8BC9-B010B0BC8054
   - target:          arm64e-maccatalyst
-    value:           83917B94-DF42-36A6-90F2-03BE08890659
+    value:           675CAEB9-4722-30E0-8BC9-B010B0BC8054
 install-name:    '/usr/lib/libcoretls.dylib'
-current-version: 178
+current-version: 183
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CipherSuiteCount, _CurvesCount, _KnownCipherSuites, _KnownCurves, 
                        _KnownSigAlgs, _SigAlgsCount, _Ssl3Callouts, _Tls12Callouts, 
                        _Tls1Callouts, _sslCipherSuiteGetKeyExchangeMethod, _sslCipherSuiteGetKeydataSize, 

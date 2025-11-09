@@ -119,7 +119,7 @@ static const CGFloat UIStackViewSpacingUseSystem API_AVAILABLE(ios(11.0),tvos(11
  last view for -viewForLastBaselineLayout, or if that is another stack view, then the relevant  
  viewForFirst/LastBaselineLayout from that stack view.
  */
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 @interface UIStackView : UIView
 
@@ -229,7 +229,7 @@ and a stack with a vertical axis is a column of arrangedSubviews.
 @property(nonatomic,getter=isLayoutMarginsRelativeArrangement) BOOL layoutMarginsRelativeArrangement;    
 
 @end
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIStackView.h>

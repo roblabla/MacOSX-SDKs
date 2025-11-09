@@ -3,17 +3,65 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D5F718A3-6C51-3B53-B7D5-B4BF113A17A1
+    value:           26551314-A73F-3C2A-BC1A-6ED83F6C38AC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E9E03B84-62DC-3C92-8098-E0A950F15336
+    value:           D5931B1F-A9E9-3010-801E-3084AB1B0AE7
 install-name:    '/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 2498.4
+current-version: 2535
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
-    symbols:         [ '_$s10ContactsUI27CNAvatarPickerViewInterfaceC09configureD04with8cropRect18memojiMetadataData19initialMonogramText14showsAsCompany19canSaveInitialImage12likenessTypey10Foundation0M0VSg_So6CGRectVAOSSSgS2bAA06Avatarde8LikenessY0OtFTj', 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ '_$s10ContactsUI030ContactHeaderViewWrapperActionE5StyleO8rawValueACSgSi_tcfC', 
+                       '_$s10ContactsUI030ContactHeaderViewWrapperActionE5StyleO8rawValueSivg', 
+                       '_$s10ContactsUI030ContactHeaderViewWrapperActionE5StyleO8rawValueSivpMV', 
+                       '_$s10ContactsUI030ContactHeaderViewWrapperActionE5StyleOMa', 
+                       '_$s10ContactsUI030ContactHeaderViewWrapperActionE5StyleOMn', 
+                       '_$s10ContactsUI030ContactHeaderViewWrapperActionE5StyleON', 
+                       '_$s10ContactsUI030ContactHeaderViewWrapperActionE5StyleOSHAAMc', 
+                       '_$s10ContactsUI030ContactHeaderViewWrapperActionE5StyleOSQAAMc', 
+                       '_$s10ContactsUI030ContactHeaderViewWrapperActionE5StyleOSYAAMc', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC011quickActionE5StyleAA0cdefheI0OvMTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC011quickActionE5StyleAA0cdefheI0OvMTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC011quickActionE5StyleAA0cdefheI0OvgTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC011quickActionE5StyleAA0cdefheI0OvgTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC011quickActionE5StyleAA0cdefheI0OvpMV', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC011quickActionE5StyleAA0cdefheI0OvsTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC011quickActionE5StyleAA0cdefheI0OvsTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC13desiredHeight12CoreGraphics7CGFloatVvgTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC13desiredHeight12CoreGraphics7CGFloatVvgTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC13desiredHeight12CoreGraphics7CGFloatVvpMV', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC17hostingControllerSo06NSViewH0CvMTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC17hostingControllerSo06NSViewH0CvMTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC17hostingControllerSo06NSViewH0CvgTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC17hostingControllerSo06NSViewH0CvgTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC17hostingControllerSo06NSViewH0CvpMV', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC17hostingControllerSo06NSViewH0CvsTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC17hostingControllerSo06NSViewH0CvsTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC7contact011quickActionE5Style8delegateACSo9CNContactC_AA0cdefieJ0OAA0cdeF8Delegate_pSgtcfC', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC7contact011quickActionE5Style8delegateACSo9CNContactC_AA0cdefieJ0OAA0cdeF8Delegate_pSgtcfCTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC7contact011quickActionE5Style8delegateACSo9CNContactC_AA0cdefieJ0OAA0cdeF8Delegate_pSgtcfCTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC7contact011quickActionE5Style8delegateACSo9CNContactC_AA0cdefieJ0OAA0cdeF8Delegate_pSgtcfc', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC7contactSo9CNContactCvMTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC7contactSo9CNContactCvMTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC7contactSo9CNContactCvgTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC7contactSo9CNContactCvgTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC7contactSo9CNContactCvpMV', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC7contactSo9CNContactCvsTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC7contactSo9CNContactCvsTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC8delegateAA0cdeF8Delegate_pSgvMTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC8delegateAA0cdeF8Delegate_pSgvMTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC8delegateAA0cdeF8Delegate_pSgvgTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC8delegateAA0cdeF8Delegate_pSgvgTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC8delegateAA0cdeF8Delegate_pSgvpMV', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC8delegateAA0cdeF8Delegate_pSgvsTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC8delegateAA0cdeF8Delegate_pSgvsTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperCACycfC', '_$s10ContactsUI24ContactHeaderViewWrapperCACycfc', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperCMa', '_$s10ContactsUI24ContactHeaderViewWrapperCMn', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperCMo', '_$s10ContactsUI24ContactHeaderViewWrapperCMu', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperCN', '_$s10ContactsUI24ContactHeaderViewWrapperCfD', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC09configureD04with8cropRect18memojiMetadataData19initialMonogramText14showsAsCompany19canSaveInitialImage12likenessTypey10Foundation0M0VSg_So6CGRectVAOSSSgS2bAA06Avatarde8LikenessY0OtFTj', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC09configureD04with8cropRect18memojiMetadataData19initialMonogramText14showsAsCompany19canSaveInitialImage12likenessTypey10Foundation0M0VSg_So6CGRectVAOSSSgS2bAA06Avatarde8LikenessY0OtFTq', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC12likenessTypeAA06Avatarde8LikenessH0OvgTj', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC12likenessTypeAA06Avatarde8LikenessH0OvgTq', 
@@ -62,7 +110,9 @@ exports:
                        _CNCompositeAvatarSize, _CNLikenessEditorFamilyNameKey, _CNLikenessEditorFullNameKey, 
                        _CNLikenessEditorGivenNameKey, _CNLikenessEditorImageCropRectKey, 
                        _CNLikenessEditorImageDataKey, _CNTouchBarItemIdentifierUserAction, 
-                       _CNUIApplicationDidCompletelyFinishLaunching, '_OBJC_CLASS_$__TtC10ContactsUI27CNAvatarPickerViewInterface', 
+                       _CNUIApplicationDidCompletelyFinishLaunching, '_OBJC_CLASS_$__TtC10ContactsUI24ContactHeaderViewWrapper', 
+                       '_OBJC_CLASS_$__TtC10ContactsUI27CNAvatarPickerViewInterface', 
+                       '_OBJC_METACLASS_$__TtC10ContactsUI24ContactHeaderViewWrapper', 
                        '_OBJC_METACLASS_$__TtC10ContactsUI27CNAvatarPickerViewInterface', 
                        _sCNUIConvertABPersonToCNContact ]
     objc-classes:    [ ABCNContactNameFormatter, CNAvatarCache, CNAvatarEditorViewController, 
@@ -72,22 +122,24 @@ exports:
                        CNBadgingAvatarViewController, CNCollectionViewTouchBar, CNContactActionsDisambiguationMenuGenerator, 
                        CNContactAvatarNameCompositeViewController, CNContactCardViewControlContext, 
                        CNContactCardViewController, CNContactCardViewControllerABPersonViewMediator, 
-                       CNContactCardViewControllerDataSourceDelegate, CNContactPicker, 
-                       CNContactPickerSection, CNContactPickerService, CNContactPickerViewController, 
-                       CNContactPickerViewControllerConfiguration, CNContactUpdatesReflector, 
+                       CNContactCardViewControllerDataSourceDelegate, CNContactHeaderViewController, 
+                       CNContactPicker, CNContactPickerSection, CNContactPickerService, 
+                       CNContactPickerViewController, CNContactPickerViewControllerConfiguration, 
+                       CNContactQuickActionsController, CNContactUpdatesReflector, 
                        CNContactViewController, CNDelegateRetainingEditAuthorizationViewController, 
                        CNEditAuthorizationViewController, CNFamilyMemberContactsViewController, 
                        CNFamilyMemberWhitelistedContactsViewController, CNFromABCNConversions, 
                        CNFunctionBarController, CNIntegerFormatter, CNLikenessEditorBuddyController, 
-                       CNScrollableContainerView, CNUIContactFetchDescription, CNUIContactFetchResult, 
-                       CNUIContainerFetchDescription, CNUIContainerFetchResult, CNUIDatabaseFetcher, 
-                       CNUIEnvironment, CNUIFaultingParentContainerCache, CNUIMemoizingParentContainerCache, 
-                       CNUIMutableEnvironment, CNUISeededParentContainerCache, CNUISymbolRepository, 
-                       CNUIVCardSharingItem, CNUIVCardSharingTask, CNUserActionTouchBar, 
+                       CNScrollableContainerView, CNSwiftUICardTestViewWrapper, CNUIContactFetchDescription, 
+                       CNUIContactFetchResult, CNUIContainerFetchDescription, CNUIContainerFetchResult, 
+                       CNUIDatabaseFetcher, CNUIEnvironment, CNUIFaultingParentContainerCache, 
+                       CNUIMemoizingParentContainerCache, CNUIMutableEnvironment, 
+                       CNUISeededParentContainerCache, CNUISymbolRepository, CNUIVCardSharingItem, 
+                       CNUIVCardSharingTask, CNUserActionTouchBar, _TtC10ContactsUI24ContactHeaderViewWrapper, 
                        _TtC10ContactsUI27CNAvatarPickerViewInterface ]
     objc-ivars:      [ ABCNContactNameFormatter._sortOrder, CNUIEnvironment._avatarPickerExtensionManager, 
                        CNUIEnvironment._contactStoreWithAllContacts, CNUIEnvironment._contactStoreWithLocalAndDonatedContacts, 
                        CNUIEnvironment._defaultContactStore, CNUIEnvironment._editingPolicy, 
                        CNUIEnvironment._meContactMonitor, CNUIEnvironment._parentContainerCache, 
-                       CNUIEnvironment._personaStore, CNUIEnvironment._schedulerProvider ]
+                       CNUIEnvironment._schedulerProvider ]
 ...

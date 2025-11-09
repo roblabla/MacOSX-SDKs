@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0B6A0AD5-94EE-351C-82EC-45D5FBED7851
+    value:           50C2C280-5A9C-3C2A-B63E-F17E137CEA3D
   - target:          x86_64-maccatalyst
-    value:           0B6A0AD5-94EE-351C-82EC-45D5FBED7851
+    value:           50C2C280-5A9C-3C2A-B63E-F17E137CEA3D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1E7BC19E-ACFF-35BC-AE5C-A8D0C928A8F6
+    value:           5FFB1FCE-30AD-3D52-AD72-9D6DE402B2DC
   - target:          arm64e-maccatalyst
-    value:           1E7BC19E-ACFF-35BC-AE5C-A8D0C928A8F6
+    value:           5FFB1FCE-30AD-3D52-AD72-9D6DE402B2DC
 install-name:    '/System/Library/Frameworks/LatentSemanticMapping.framework/Versions/A/LatentSemanticMapping'
 current-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _LSMMapAddCategory, _LSMMapAddText, _LSMMapAddTextWithWeight, 
                        _LSMMapApplyClusters, _LSMMapCompile, _LSMMapCompileWithBlock, 
                        _LSMMapCopyToken, _LSMMapCopyWord, _LSMMapCreate, _LSMMapCreateClusters, 
@@ -33,6 +33,6 @@ exports:
                        _LSMResultGetCategory, _LSMResultGetCount, _LSMResultGetScore, 
                        _LSMResultGetTypeID, _LSMTextAddToken, _LSMTextAddWord, _LSMTextAddWords, 
                        _LSMTextCreate, _LSMTextGetTypeID ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _LSMTextCreateFromSRLanguageObject, _LSMTextCreateFromSRRecognitionResult ]
 ...

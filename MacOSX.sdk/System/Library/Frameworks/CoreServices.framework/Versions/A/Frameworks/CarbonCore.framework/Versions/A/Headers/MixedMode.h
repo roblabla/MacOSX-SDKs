@@ -16,6 +16,7 @@
 
 
 #include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,17 +40,17 @@
 /* Current Routine Descriptor Version */
 enum {
   kRoutineDescriptorVersion     = 7
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* MixedModeMagic Magic Cookie/Trap number */
 enum {
   _MixedModeMagic               = 0xAAFE
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* MixedModeState Version for CFM68K Mixed Mode */
 enum {
   kCurrentMixedModeStateRecord  = 1
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* Calling Conventions */
 typedef unsigned short                  CallingConventionType;
@@ -62,18 +63,18 @@ enum {
   kD0DispatchedCStackBased      = 9,
   kStackDispatchedPascalStackBased = 14,
   kThinkCStackBased             = 5
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* ISA Types */
 typedef SInt8                           ISAType;
 enum {
   kM68kISA                      = 0,
   kPowerPCISA                   = 1
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kX86ISA                       = 2
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* RTA Types */
 typedef SInt8                           RTAType;
@@ -81,11 +82,11 @@ enum {
   kOld68kRTA                    = 0 << 4,
   kPowerPCRTA                   = 0 << 4,
   kCFM68kRTA                    = 1 << 4
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kX86RTA                       = 2 << 4
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 
 #if TARGET_OS_MAC
@@ -125,7 +126,7 @@ enum {
   kCCRegisterZBit               = 18,
   kCCRegisterNBit               = 19,
   kCCRegisterXBit               = 20
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 typedef unsigned short                  registerSelectorType;
 /* SizeCodes we use everywhere */
@@ -134,7 +135,7 @@ enum {
   kOneByteCode                  = 1,
   kTwoByteCode                  = 2,
   kFourByteCode                 = 3
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* Mixed Mode Routine Records */
 typedef unsigned long                   ProcInfoType;
@@ -143,32 +144,32 @@ typedef unsigned short                  RoutineFlagsType;
 enum {
   kProcDescriptorIsAbsolute     = 0x00,
   kProcDescriptorIsRelative     = 0x01
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kFragmentIsPrepared           = 0x00,
   kFragmentNeedsPreparing       = 0x02
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kUseCurrentISA                = 0x00,
   kUseNativeISA                 = 0x04
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kPassSelector                 = 0x00,
   kDontPassSelector             = 0x08
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kRoutineIsNotDispatchedDefaultRoutine = 0x00,
   kRoutineIsDispatchedDefaultRoutine = 0x10
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kProcDescriptorIsProcPtr      = 0x00,
   kProcDescriptorIsIndex        = 0x20
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 struct RoutineRecord {
   ProcInfoType        procInfo;               /* calling conventions */
@@ -188,7 +189,7 @@ typedef UInt8                           RDFlagsType;
 enum {
   kSelectorsAreNotIndexable     = 0x00,
   kSelectorsAreIndexable        = 0x01
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* Routine Descriptor Structure */
 struct RoutineDescriptor {
@@ -280,11 +281,11 @@ enum {
   kSpecialCaseSelectorWidth     = 6,
   kSpecialCaseSelectorPhase     = kCallingConventionWidth,
   kSpecialCaseSelectorMask      = 0x03F0
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kSpecialCase                  = 0x000F /* (CallingConventionType) */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
                                         /* all of the special cases enumerated.  The selector field is 6 bits wide */
@@ -303,7 +304,7 @@ enum {
   kSpecialCaseTEDoText          = 10,
   kSpecialCaseGNEFilterProc     = 11,
   kSpecialCaseMBarHook          = 12
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 

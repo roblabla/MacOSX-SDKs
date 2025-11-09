@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2021 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2022 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -369,13 +369,18 @@ struct  tcpstat {
 	u_int32_t       tcps_probe_if;          /* probe packets after interface availability */
 	u_int32_t       tcps_probe_if_conflict; /* Can't send probe packets for interface */
 
-	u_int32_t       tcps_ecn_client_setup;  /* Attempted ECN setup from client side */
-	u_int32_t       tcps_ecn_server_setup;  /* Attempted ECN setup from server side */
-	u_int32_t       tcps_ecn_server_success; /* server-side connection negotiated ECN */
+	u_int32_t       tcps_ecn_client_setup;    /* Attempted ECN setup from client side */
+	u_int32_t       tcps_ecn_server_setup;    /* Attempted ECN setup from server side */
+	u_int32_t       tcps_ecn_server_success;  /* server-side connection negotiated ECN */
+	u_int32_t       tcps_ecn_ace_syn_not_ect; /* received AccECN SYN packet with Not-ECT */
+	u_int32_t       tcps_ecn_ace_syn_ect1;    /* received AccECN SYN packet with ECT1 */
+	u_int32_t       tcps_ecn_ace_syn_ect0;    /* received AccECN SYN packet with ECT0 */
+	u_int32_t       tcps_ecn_ace_syn_ce;      /* received AccECN SYN packet with CE */
 	u_int32_t       tcps_ecn_lost_synack;   /* Lost SYN-ACK with ECN setup */
 	u_int32_t       tcps_ecn_lost_syn;      /* Lost SYN with ECN setup */
 	u_int32_t       tcps_ecn_not_supported; /* Server did not support ECN setup */
 	u_int32_t       tcps_ecn_recv_ce;       /* Received CE from the network */
+	u_int32_t       tcps_ecn_ace_recv_ce;   /* CE count received in ACE field */
 	u_int32_t       tcps_ecn_conn_recv_ce;  /* Number of connections received CE atleast once */
 	u_int32_t       tcps_ecn_conn_recv_ece; /* Number of connections received ECE atleast once */
 	u_int32_t       tcps_ecn_conn_plnoce;   /* Number of connections that received no CE and sufferred packet loss */

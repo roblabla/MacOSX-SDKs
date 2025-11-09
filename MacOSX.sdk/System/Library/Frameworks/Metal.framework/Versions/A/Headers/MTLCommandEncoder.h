@@ -18,7 +18,7 @@ typedef NS_OPTIONS(NSUInteger, MTLResourceUsage)
 {
 	MTLResourceUsageRead   = 1 << 0,
 	MTLResourceUsageWrite  = 1 << 1,
-	MTLResourceUsageSample = 1 << 2
+	MTLResourceUsageSample API_DEPRECATED_WITH_REPLACEMENT("MTLResourceUsageRead", macos(10.13, 13.0), ios(11.0, 16.0)) = 1 << 2
 } API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!

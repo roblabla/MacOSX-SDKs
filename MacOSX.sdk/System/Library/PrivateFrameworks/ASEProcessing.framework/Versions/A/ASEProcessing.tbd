@@ -5,10 +5,10 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD78FDBA-9B86-3262-BBE6-CBEBE0BB8A9A
+    value:           D5891BCA-348B-3160-A012-6A48F9397EE7
 install-name:    '/System/Library/PrivateFrameworks/ASEProcessing.framework/Versions/A/ASEProcessing'
 exports:
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ _ASEProcessingVersionNumber, _ASEProcessingVersionString, 
                        _FixedSettingDigitalZoom, _FixedSettingDigitalZoom_005_V2, 
                        _FixedSettingDigitalZoom_010_V2, _FixedSettingDigitalZoom_015_V2, 

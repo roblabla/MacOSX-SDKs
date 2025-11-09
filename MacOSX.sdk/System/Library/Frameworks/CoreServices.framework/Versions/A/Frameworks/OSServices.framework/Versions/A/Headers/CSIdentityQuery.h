@@ -16,7 +16,12 @@
 #define __CSIDENTITYQUERY__
 
 #ifndef __CSIDENTITY__
+#include <TargetConditionals.h>
+#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !TARGET_OS_MACCATALYST)
+#include <CoreServices/CSIdentity.h>
+#else
 #include <OSServices/CSIdentity.h>
+#endif
 #endif
 
 

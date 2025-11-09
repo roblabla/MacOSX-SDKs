@@ -21,8 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLComputePipelineReflection : NSObject
 
-@property (readonly) NSArray <MTLArgument *> *arguments;
-
+@property (nonnull, readonly) NSArray<id<MTLBinding>> *bindings API_AVAILABLE(macos(13.0), ios(16.0));
+@property (readonly) NSArray <MTLArgument *> *arguments API_DEPRECATED_WITH_REPLACEMENT("bindings", macos(10.11, 13.0), ios(8.0, 16.0));
 
 @end
 
@@ -99,6 +99,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
  @see MTLBinaryArchive
  */
 @property (readwrite, nullable, nonatomic, copy) NSArray<id<MTLBinaryArchive>> *binaryArchives API_AVAILABLE(macos(11.0), ios(14.0));
+
 
 
 /*!
@@ -185,6 +186,12 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract Tells whether this pipeline state is usable through an Indirect Command Buffer.
  */
 @property (readonly) BOOL supportIndirectCommandBuffers API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+
+/*!
+ @property gpuResourceID
+ @abstract Handle of the GPU resource suitable for storing in an Argument Buffer
+ */
+@property (readonly) MTLResourceID gpuResourceID API_AVAILABLE(macos(13.0), ios(16.0));
 
 
 /*!

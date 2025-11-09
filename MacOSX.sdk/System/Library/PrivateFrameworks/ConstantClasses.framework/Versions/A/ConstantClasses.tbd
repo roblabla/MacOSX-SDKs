@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           517642B5-038B-3E27-99B5-E85D084BA3C0
+    value:           BF860233-5164-3BD3-87D8-04DD324BB1D0
   - target:          x86_64-maccatalyst
-    value:           517642B5-038B-3E27-99B5-E85D084BA3C0
+    value:           BF860233-5164-3BD3-87D8-04DD324BB1D0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F553E900-92F4-3FCD-9A75-63BBCADB6617
+    value:           7592EBFF-5925-3182-9CC5-A4C1842D0A3A
   - target:          arm64e-maccatalyst
-    value:           F553E900-92F4-3FCD-9A75-63BBCADB6617
+    value:           7592EBFF-5925-3182-9CC5-A4C1842D0A3A
 install-name:    '/System/Library/PrivateFrameworks/ConstantClasses.framework/Versions/A/ConstantClasses'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CFStringHashNSString, __NSConstantDictionaryKeyHash ]
     objc-classes:    [ _NSConstantArray, _NSConstantArrayEnumerator, _NSConstantData, 
                        _NSConstantDate, _NSConstantDictionary, _NSConstantDictionaryEnumerator, 

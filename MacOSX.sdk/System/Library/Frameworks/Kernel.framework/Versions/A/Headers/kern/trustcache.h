@@ -81,5 +81,4 @@ struct trust_cache_module1 {
 
 #define TC_LOOKUP_FOUND         1
 
-
 #endif /* _KERN_TRUSTCACHE_H */

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5A1B7E5E-1276-3498-9092-BABCDF817F6A
+    value:           18A5D1C6-2F3D-3099-95B6-FC6D0977031E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BECFF6FC-5838-35CD-8261-DAF851EB529D
+    value:           5AC44130-2A40-3967-A0DA-092D9B75F86E
 install-name:    '/System/Library/PrivateFrameworks/oncrpc.framework/Versions/A/oncrpc'
-current-version: 62.100.3
+current-version: 73
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __newrpclib___rpc_createerr, __newrpclib__authenticate, __newrpclib__null_auth, 
                        __newrpclib__seterr_reply, __newrpclib_authnone_create, __newrpclib_authunix_create, 
                        __newrpclib_authunix_create_default, __newrpclib_callrpc, 

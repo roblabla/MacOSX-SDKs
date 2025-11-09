@@ -3,22 +3,23 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           28FA4161-8AB6-3052-8DB8-0A754898ED70
+    value:           D78FB37E-93AC-3541-9A2A-3F3EEF9C7413
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4E182010-A9E4-3855-8B68-E35F6F341577
+    value:           1C2EAD81-3EE2-30A4-B74B-5B880FFA6F04
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/UniversalAccess'
 current-version: 236
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/UniversalAccessCore.framework/Versions/A/UniversalAccessCore' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _UADateFromPrefString, _UADaysBetweenDates, _UAGetKeyboardImageForMacBuddyForWidth, 
                        _UAInternalToolAllowedToRun, _UAInvertColorsUserInitiatedSetEnabled, 
                        _UAOnboardingAssetBundle, _UAOnboardingImageAssetForName, 
-                       _UAPrefStringFromDate, _UASecurityGetAccessInfos, _UASecuritySetAccessForAppAtURL, 
+                       _UAPrefPaneHighlighSearchResult, _UAPrefStringFromDate, _UASecurityGetAccessInfos, 
+                       _UASecuritySetAccessForAppAtURL, _UAShowAllPrefPaneUIForDebugging, 
                        _UAShowStatusOverlayForFeature, _UAShowStatusOverlayString, 
                        _UAShowStatusOverlayStrings, _UAValidateDateStringFromPrefsFormat, 
                        _kUAOnboardingCategoryCognitive, _kUAOnboardingCategoryHearing, 
@@ -54,18 +55,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7A2280E4-12A2-3484-964E-6C5444B16EE9
+    value:           7C48F066-69A2-330F-8794-E8AB1C1C0F08
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CFA6DFB8-B535-37B5-95CA-A35434AA6EE2
+    value:           ADB90A43-503A-3C7A-9CF2-855A6895DD80
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/UniversalAccessCore.framework/Versions/A/UniversalAccessCore'
 current-version: 236
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Libraries/libUAPreferences.dylib' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _UAAIncreaseContrastMacBuddySettingsToTransfer, _UAAlternateMouseButtonsDefaultActions, 
                        _UAAlternateMouseButtonsEnabled, _UAAlternateMouseButtonsGetPlaySound, 
                        _UAAlternateMouseButtonsGetShowVisualFeedback, _UAAlternateMouseButtonsOrderedActions, 
@@ -192,7 +193,15 @@ exports:
                        _UASwitchControlSetTheme, _UASwitchControlSpeakSelectedElement, 
                        _UASwitchControlStartStopProcessesAsNeeded, _UASwitchControlSweepingCursorSpeed, 
                        _UASwitchControlSwitchDictionaries, _UASwitchControlValidateLoginWindowPrefs, 
-                       _UASymbolNameForFeature, _UATrackpadGestureZoomIsEnabled, 
+                       _UASymbolNameForFeature, _UASystemTranscriptionEnableWithAlertIfNeeded, 
+                       _UASystemTranscriptionEnabled, _UASystemTranscriptionSetEnabled, 
+                       _UASystemTranscriptionTranscriptionViewCopyCustomBackgroundColor, 
+                       _UASystemTranscriptionTranscriptionViewCopyCustomFontColor, 
+                       _UASystemTranscriptionTranscriptionViewCopyFont, _UASystemTranscriptionTranscriptionViewFontSize, 
+                       _UASystemTranscriptionTranscriptionViewSetCustomBackgroundColor, 
+                       _UASystemTranscriptionTranscriptionViewSetCustomFontColor, 
+                       _UASystemTranscriptionTranscriptionViewSetFont, _UASystemTranscriptionTranscriptionViewSetFontSize, 
+                       _UASystemTranscriptionsAreSupported, _UATrackpadGestureZoomIsEnabled, 
                        _UATrackpadGestureZoomSetEnabled, _UATrackpadGestureZoomSetWasPreviouslyEnabled, 
                        _UATrackpadGestureZoomWasPreviouslyEnabled, _UATypingEchoGetOptions, 
                        _UATypingEchoIsEnabled, _UATypingEchoMacBuddySettingsToTransfer, 
@@ -246,35 +255,36 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           702357A9-D16B-3907-B8B4-6A129720BE4E
+    value:           0001075E-6893-3B54-854C-AA9A5A6AB21F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           64756817-2C02-3AA9-AA43-84EDAE7BD382
+    value:           E8FA88C5-7397-367F-85EF-F03B1A2710F9
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Libraries/libUAPreferences.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _UAAXFeatureIDAlternateMouseButtons, _UAAXFeatureIDAudioDescriptions, 
                        _UAAXFeatureIDCaptions, _UAAXFeatureIDDisplayContrast, _UAAXFeatureIDDisplayFiltersColor, 
                        _UAAXFeatureIDFullKeyboardAccess, _UAAXFeatureIDHeadMouse, 
                        _UAAXFeatureIDIncreaseContrast, _UAAXFeatureIDInvertDisplayColor, 
                        _UAAXFeatureIDMonoAudio, _UAAXFeatureIDMouseKeys, _UAAXFeatureIDReduceMotion, 
                        _UAAXFeatureIDReduceTransparency, _UAAXFeatureIDSlowKeys, 
-                       _UAAXFeatureIDStickyKeys, _UAAXFeatureIDSwitchControl, _UAAXFeatureIDVirtualKeyboard, 
-                       _UAAXFeatureIDVoiceControl, _UAAXFeatureIDVoiceOver, _UAAXFeatureIDZoom, 
-                       _UAAXShortcutExposedFeatures, _UAAlternateMouseButtonsEnabledKey, 
-                       _UAAlternateMouseButtonsPlaySoundKey, _UAAlternateMouseButtonsShowVisualFeedbackKey, 
-                       _UAAssistiveControlAutomaticShiftEnabledKey, _UAAssistiveControlAutomaticSpaceEnabledKey, 
-                       _UAAssistiveControlTypeKey, _UAContrastKey, _UACursorScaleKey, 
-                       _UADFRZoomEnabledKey, _UADFRZoomLevelKey, _UADomainAssistiveControlSettingsDidChangeNotification, 
-                       _UADomainCloseViewParametersDidChangeNotification, _UADomainCloseViewSettingsDidChangeNotification, 
-                       _UADomainContrastDidChangeNotification, _UADomainExposedFeaturesDidChangeNotification, 
-                       _UADomainHoverTextSettingsDidChangeNotification, _UADomainHoverTextVisibilityChangeNotification, 
-                       _UADomainKeyboardAccessSettingsDidChangeNotification, _UADomainKeyboardSettingsDidChangeNotification, 
-                       _UADomainMouseSettingsDidChangeNotification, _UADomainPointerControlSettingsDidChangeNotification, 
-                       _UADomainScreenGrayscaleChangeNotification, _UADomainScreenPolarityDidChangeNotification, 
-                       _UADomainSoundSettingsDidChangeNotification, _UADomainSpeechSettingsDidChangeNotification, 
-                       _UADomainSwitchSettingsDidChangeNotification, _UADomainSystemSettingsDidChangeNotification, 
+                       _UAAXFeatureIDStickyKeys, _UAAXFeatureIDSwitchControl, _UAAXFeatureIDSystemTranscriptions, 
+                       _UAAXFeatureIDVirtualKeyboard, _UAAXFeatureIDVoiceControl, 
+                       _UAAXFeatureIDVoiceOver, _UAAXFeatureIDZoom, _UAAXShortcutExposedFeatures, 
+                       _UAAlternateMouseButtonsEnabledKey, _UAAlternateMouseButtonsPlaySoundKey, 
+                       _UAAlternateMouseButtonsShowVisualFeedbackKey, _UAAssistiveControlAutomaticShiftEnabledKey, 
+                       _UAAssistiveControlAutomaticSpaceEnabledKey, _UAAssistiveControlTypeKey, 
+                       _UAContrastKey, _UACursorScaleKey, _UADFRZoomEnabledKey, _UADFRZoomLevelKey, 
+                       _UADomainAssistiveControlSettingsDidChangeNotification, _UADomainCloseViewParametersDidChangeNotification, 
+                       _UADomainCloseViewSettingsDidChangeNotification, _UADomainContrastDidChangeNotification, 
+                       _UADomainExposedFeaturesDidChangeNotification, _UADomainHoverTextSettingsDidChangeNotification, 
+                       _UADomainHoverTextVisibilityChangeNotification, _UADomainKeyboardAccessSettingsDidChangeNotification, 
+                       _UADomainKeyboardSettingsDidChangeNotification, _UADomainMouseSettingsDidChangeNotification, 
+                       _UADomainPointerControlSettingsDidChangeNotification, _UADomainScreenGrayscaleChangeNotification, 
+                       _UADomainScreenPolarityDidChangeNotification, _UADomainSoundSettingsDidChangeNotification, 
+                       _UADomainSpeechSettingsDidChangeNotification, _UADomainSwitchSettingsDidChangeNotification, 
+                       _UADomainSystemSettingsDidChangeNotification, _UADomainSystemTranscriptionSettingsDidChangeNotification, 
                        _UADomainVirtualKeyboardSettingsDidChangeNotification, _UADomainVoiceOverSettingsDidChangeNotification, 
                        _UADwellActionTypeKey, _UADwellAlwaysAllowInPanelsKey, _UADwellAutoRevertToLeftClickEnabledKey, 
                        _UADwellBottomLeftCornerActionTypeKey, _UADwellBottomRightCornerActionTypeKey, 
@@ -289,7 +299,7 @@ exports:
                        _UAHeadMouseExpressionConfigurationKey, _UAHeadMouseInputConfigurationKey, 
                        _UAHeadMouseModeKey, _UAHeadMousePauseResumeSwitchEnabledKey, 
                        _UAHeadMouseRecalibrateSwitchEnabledKey, _UAHeadMouseSensitivityKey, 
-                       _UAHeadMouseToleranceKey, _UAHoverTextActivationLockModeKey, 
+                       _UAHeadMouseToleranceKey, _UAHighlightSearchResult, _UAHoverTextActivationLockModeKey, 
                        _UAHoverTextBorderColorKey, _UAHoverTextCursorWidthKey, _UAHoverTextCustomBackgroundColorKey, 
                        _UAHoverTextCustomCursorColorKey, _UAHoverTextCustomFontColorKey, 
                        _UAHoverTextElementHighlightColorKey, _UAHoverTextEnabledKey, 
@@ -322,8 +332,8 @@ exports:
                        _UAPreferencesSetString, _UAPreferencesSetValue, _UAPreferencesSynchronize, 
                        _UAPreferencesValidateKeyType, _UAScrollZoomEnabledKey, _UAScrollZoomModifiersKey, 
                        _UAScrollZoomPreviouslyEnabledKey, _UASelectedTabKey, _UASessionChangeKey, 
-                       _UAShowInternalSettings, _UASlowKeysDelayIntervalKey, _UASlowKeysEnabledKey, 
-                       _UASlowKeysPlaySoundForKeyKey, _UAStickyKeysDisplayModifiersKey, 
+                       _UAShowAllPossibleSettings, _UAShowInternalSettings, _UASlowKeysDelayIntervalKey, 
+                       _UASlowKeysEnabledKey, _UASlowKeysPlaySoundForKeyKey, _UAStickyKeysDisplayModifiersKey, 
                        _UAStickyKeysEnableWithShiftKeyKey, _UAStickyKeysEnabledKey, 
                        _UAStickyKeysLocationKey, _UAStickyKeysPlaySoundForModifierKey, 
                        _UASwitchControlActionOpenApplicationKey, _UASwitchControlActionRunKey, 
@@ -354,15 +364,17 @@ exports:
                        _UASwitchTriggerTypeKey, _UASwitchValueHIDButtonNumberKey, 
                        _UASwitchValueKey, _UASwitchValueKeyCodeKey, _UASwitchValueModifiersKey, 
                        _UASystemSettingsScrollBarsIdentifiersKey, _UASystemSettingsScrollBarsOriginalValueKey, 
-                       _UATrackpadGestureZoomEnabledKey, _UATrackpadGestureZoomPreviouslyEnabledKey, 
-                       _UATypingEchoEnabledKey, _UATypingEchoOptionsKey, _UAUseShortcutKeysKey, 
-                       _UAUserAssignableHotKeys, _UAUserSwitchActionKey, _UAUserSwitchActionTypeKey, 
-                       _UAUserSwitchCustomNameIsLocalizedKey, _UAUserSwitchCustomNameKey, 
-                       _UAUserSwitchExpressionKey, _UAUserSwitchHIDKey, _UAUserSwitchTriggerTypeKey, 
-                       _UAUserSwitchUUIDStringKey, _UAUserSwitchesKey, _UAVirtualKeyboardCornerActionTypeKey, 
-                       _UAVirtualKeyboardEnabledKey, _UAVirtualKeyboardHideUIEnabledKey, 
-                       _UAVirtualKeyboardHideUITimeoutKey, _UAVirtualKeyboardHideUITransparencyLevelKey, 
-                       _UAVirtualKeyboardHomePanelFollowTriggeredHotCornerEnabledKey, 
+                       _UASystemTranscriptionEnabledKey, _UASystemTranscriptionTranscriptionViewBackgroundColorKey, 
+                       _UASystemTranscriptionTranscriptionViewFontColorKey, _UASystemTranscriptionTranscriptionViewFontKey, 
+                       _UASystemTranscriptionTranscriptionViewFontSizeKey, _UATrackpadGestureZoomEnabledKey, 
+                       _UATrackpadGestureZoomPreviouslyEnabledKey, _UATypingEchoEnabledKey, 
+                       _UATypingEchoOptionsKey, _UAUseShortcutKeysKey, _UAUserAssignableHotKeys, 
+                       _UAUserSwitchActionKey, _UAUserSwitchActionTypeKey, _UAUserSwitchCustomNameIsLocalizedKey, 
+                       _UAUserSwitchCustomNameKey, _UAUserSwitchExpressionKey, _UAUserSwitchHIDKey, 
+                       _UAUserSwitchTriggerTypeKey, _UAUserSwitchUUIDStringKey, _UAUserSwitchesKey, 
+                       _UAVirtualKeyboardCornerActionTypeKey, _UAVirtualKeyboardEnabledKey, 
+                       _UAVirtualKeyboardHideUIEnabledKey, _UAVirtualKeyboardHideUITimeoutKey, 
+                       _UAVirtualKeyboardHideUITransparencyLevelKey, _UAVirtualKeyboardHomePanelFollowTriggeredHotCornerEnabledKey, 
                        _UAVirtualKeyboardMouseOptionKey, _UAVirtualKeyboardPlaySoundsKey, 
                        _UAVirtualKeyboardThemeKey, _UAVoiceOverEnabled, _UAWhiteOnBlackKey, 
                        _UAZoomDesiredScaleKey, _UAZoomDisplayEnabledKey, _UAZoomDisplayIDKey, 

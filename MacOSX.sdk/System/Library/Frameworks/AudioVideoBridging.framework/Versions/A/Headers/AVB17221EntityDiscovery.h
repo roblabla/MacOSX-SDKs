@@ -2,7 +2,7 @@
 //  AVB17221EntityDiscovery.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2010-2020 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 				the discoveryDelegate should be set and the primeIterators method should be called. Until 
 				primeIterators is called, no entities will be discovered.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVB17221EntityDiscovery : NSObject
 
 /*!
@@ -103,7 +103,7 @@ API_AVAILABLE(macos(10.8))
 	@param		error			If the request couldn't be completed, on return it contains an instance of NSError that describes the reason why.
 	@result		A boolean indicating if the entity was updated.
  */
-- (BOOL)changeEntityWithEntityID:(uint64_t)entityID toNewGPTPGrandmasterID:(uint64_t)gPTPGrandmasterID error:(NSError **)error API_AVAILABLE(macos(10.9));
+- (BOOL)changeEntityWithEntityID:(uint64_t)entityID toNewGPTPGrandmasterID:(uint64_t)gPTPGrandmasterID error:(NSError **)error API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 
 @end
 

@@ -5,6 +5,9 @@
 //  Copyright (c) 2011 Apple, Inc. All rights reserved.
 //
 
+#ifndef __PKADDPASSESVIEWCONTROLLER_H
+#define __PKADDPASSESVIEWCONTROLLER_H
+
 #import <TargetConditionals.h>
 
 #if TARGET_OS_IPHONE
@@ -37,4 +40,5 @@ API_AVAILABLE(ios(6.0))
 
 NS_ASSUME_NONNULL_END
 
+#endif
 #endif

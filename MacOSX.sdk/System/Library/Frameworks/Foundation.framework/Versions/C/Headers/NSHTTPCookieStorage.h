@@ -15,7 +15,7 @@
 @class NSURLSessionTask;
 @class NSSortDescriptor;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*!
     @enum NSHTTPCookieAcceptPolicy
@@ -42,7 +42,7 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
     set of cookies.  It also has convenience methods to parse and
     generate cookie-related HTTP header fields.
 */
-
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSHTTPCookieStorage : NSObject
 {
@@ -147,7 +147,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 
 @interface NSHTTPCookieStorage (NSURLSessionTaskAdditions)
 - (void)storeCookies:(NSArray<NSHTTPCookie *> *)cookies forTask:(NSURLSessionTask *)task API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
-- (void)getCookiesForTask:(NSURLSessionTask *)task completionHandler:(void (^) (NSArray<NSHTTPCookie *> * _Nullable cookies))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+- (void)getCookiesForTask:(NSURLSessionTask *)task completionHandler:(void (NS_SWIFT_SENDABLE ^) (NSArray<NSHTTPCookie *> * _Nullable cookies))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 @end
 
 /*!
@@ -164,4 +164,4 @@ FOUNDATION_EXPORT NSNotificationName const NSHTTPCookieManagerAcceptPolicyChange
 */
 FOUNDATION_EXPORT NSNotificationName const NSHTTPCookieManagerCookiesChangedNotification API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

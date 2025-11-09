@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DF3CA0E4-38AD-3440-8BE3-9D67BF46543B
+    value:           B457F249-D74E-3161-9209-CE9A6A773829
   - target:          x86_64-maccatalyst
-    value:           DF3CA0E4-38AD-3440-8BE3-9D67BF46543B
+    value:           B457F249-D74E-3161-9209-CE9A6A773829
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4FADC3F4-915F-36FB-A06E-5A2DB4348BEF
+    value:           A21937B6-3BEF-3E7E-8EBC-F1365A13A429
   - target:          arm64e-maccatalyst
-    value:           4FADC3F4-915F-36FB-A06E-5A2DB4348BEF
+    value:           A21937B6-3BEF-3E7E-8EBC-F1365A13A429
 install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Frameworks/ScreenReaderBrailleDriver.framework/Versions/A/ScreenReaderBrailleDriver'
 current-version: 390
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SCRDAdvanceBufferToPacketStart, _SCRDAlva6SeriesAppendKeyEvent, 
                        _SCRDAppendFullKeystrokeFromEvent, _SCRDBaum2SendDetectDevicesRequest, 
                        _SCRDBaum2SendDeviceArrivalAck, _SCRDBaum2SendDeviceResetRequest, 

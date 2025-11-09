@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E084EFC0-CE85-3C42-B8CE-5E741794B22A
+    value:           656AFCED-D798-3D0C-966E-1D6B44256509
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           36001D34-B421-38A6-BBEF-8F1AF78B91E6
+    value:           81657A4B-6335-3255-A127-4DCB1D55E35A
 install-name:    '/usr/lib/updaters/libSEUpdater.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SEUpdaterCreate, _SEUpdaterExecCommand, _SEUpdaterIsDone, 
                        _kSECmdCopyIdentifier, _kSECmdPerformNextStage, _kSECmdQueryInfo, 
-                       _kSECmdSendApduFile ]
+                       _kSECmdSendApduFile, _kSECmdVerifyPairing ]
 ...

@@ -12,7 +12,7 @@
 #import <ShazamKit/SHSignature.h>
 #import <ShazamKit/SHMatch.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class SHSession;
 
@@ -63,7 +63,7 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 - (instancetype)initWithCatalog:(SHCatalog *)catalog;
 
 /// @brief Flow audio buffers for matching into the session
-/// @discussion Audio will be converted into signatures and matched against the store. Results are communicated through the delegate.
+/// @discussion Audio will be converted into signatures and matched against the @c SHCatalog. Results are communicated through the delegate.
 /// The initial buffer specifies the @c AVAudioFormat and all subsequent buffers must contain the same format otherwise an error will be communicated through
 /// the delegate.
 ///
@@ -80,4 +80,4 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

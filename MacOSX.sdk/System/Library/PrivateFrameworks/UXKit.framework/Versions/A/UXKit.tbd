@@ -3,19 +3,19 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           438FE64C-4DCB-367F-8B5C-2DE2FAF718B4
+    value:           9AF0D87F-026B-3DDB-97C3-199397F2E0E3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2DBFD5F7-9B71-3B04-A523-3555E323130C
+    value:           A542C4D9-F0E5-3CF8-AE1C-F3E4D2ED8777
 install-name:    '/System/Library/PrivateFrameworks/UXKit.framework/Versions/A/UXKit'
-current-version: 441.0.120
+current-version: 511.0.170
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ Mondrian, PhotoPrintProduct, Photos, PhotosUI, PhotosUIApps, 
                        PhotosUICore, PhotosUICoreProtoApp, PlacesKit ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSStringFromUXCollectionViewLayoutDropPosition, _UXCollectionElementKindCell, 
                        _UXCollectionElementKindSectionFooter, _UXCollectionElementKindSectionHeader, 
                        _UXCollectionViewDraggingPasteboardItemType, _UXCollectionViewDraggingPasteboardOptionWasPressed, 
@@ -25,14 +25,14 @@ exports:
                        _UXFlowLayoutLastRowHorizontalAlignmentKey, _UXFlowLayoutRowVerticalAlignmentKey, 
                        _UXKitVersionNumber, _UXKitVersionString, _UXLocalizedString, 
                        _UXNavigationControllerOperationToString, _UXNavigationDestinationIsEqualToDestination, 
-                       _UXSourceControllerForceSelectionKey, _UXSourceControllerSenderIdentifierKey, 
-                       _UXSourceControllerShouldForceSelectionForNavigationDestination, 
+                       _UXNavigationItemTitleKey, _UXSourceControllerForceSelectionKey, 
+                       _UXSourceControllerSenderIdentifierKey, _UXSourceControllerShouldForceSelectionForNavigationDestination, 
                        _UXSourceControllerSkipDestinationRemovalKey, _UXTransitionContextFromViewControllerKey, 
-                       _UXTransitionContextToViewControllerKey, __UXApplyTintColorWithViewController, 
-                       __UXCollectionElementIsClone, __UXCollectionElementIsOriginal, 
-                       __UXDebugFramesOfView, __UXDefaultTintColor, __UXImageBackChevron, 
-                       __UXImageCheckmark, __UXImageForwardChevron, __UXImageLeftChevron, 
-                       __UXImageRightChevron, __animationForViewFromValueToValueKeyPath, 
+                       _UXTransitionContextToViewControllerKey, _UXWindowToolbarCenteredItemIdentifier, 
+                       __UXApplyTintColorWithViewController, __UXCollectionElementIsClone, 
+                       __UXCollectionElementIsOriginal, __UXDebugFramesOfView, __UXDefaultTintColor, 
+                       __UXImageBackChevron, __UXImageCheckmark, __UXImageForwardChevron, 
+                       __UXImageLeftChevron, __UXImageRightChevron, __animationForViewFromValueToValueKeyPath, 
                        __transitionControllerClassForTransition, __uxImageFromRect, 
                        _kDefaultHeaderHeight, _kDefaultRowHeight, _kDefaultTransitionDuration, 
                        _parametersOfSpringAnimation ]
@@ -55,7 +55,7 @@ exports:
                        UXTabBarItemSegment, UXTableLayout, UXTableView, UXTableViewCell, 
                        UXTableViewController, UXTableViewHeaderFooterView, UXToolbar, 
                        UXTransitionController, UXView, UXViewAnimationContext, UXViewController, 
-                       UXWindowController, UXZoomingCrossfadeTransitionController, 
+                       UXWindowController, UXWindowToolbarController, UXZoomingCrossfadeTransitionController, 
                        _UXButton, _UXButtonCell, _UXCollectionDocumentView, _UXCollectionSnapshotView, 
                        _UXCollectionView, _UXCollectionViewItemKey, _UXCollectionViewLayoutProxy, 
                        _UXCollectionViewRearrangingCoordinator, _UXCollectionViewSectionItemIndexes, 

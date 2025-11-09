@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A1C57F3C-0B85-367D-AFD8-CE4B01B638C6
+    value:           4B2F10CE-2D99-3B79-A05A-87DD03065ACB
   - target:          x86_64-maccatalyst
-    value:           A1C57F3C-0B85-367D-AFD8-CE4B01B638C6
+    value:           4B2F10CE-2D99-3B79-A05A-87DD03065ACB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D07777F4-2044-30E7-82FB-8F239F71A802
+    value:           859E9F1E-85E4-3469-9733-5846C98B155D
   - target:          arm64e-maccatalyst
-    value:           D07777F4-2044-30E7-82FB-8F239F71A802
+    value:           859E9F1E-85E4-3469-9733-5846C98B155D
 install-name:    '/usr/lib/system/libsystem_darwin.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ ___libdarwin_init, ___os_temporary_resource_shortage, _claimfd_np, 
                        _close_drop_np, _close_drop_optional_np, _crfprintf_np, _dirstat_np, 
                        _dirstatat_np, _dup_np, _err_np, _errc_np, _fcheck_np, _memdup2_np, 

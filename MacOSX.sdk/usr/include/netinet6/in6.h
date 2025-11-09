@@ -179,7 +179,6 @@ struct sockaddr_in6 {
 
 
 
-
 /*
  * Definition of some useful macros to handle IP6 addresses
  */
@@ -337,8 +336,6 @@ extern const struct in6_addr in6addr_linklocal_allv2routers;
 #define IN6_IS_ADDR_MC_GLOBAL(a)        \
 	(IN6_IS_ADDR_MULTICAST(a) &&    \
 	(__IPV6_ADDR_MC_SCOPE(a) == __IPV6_ADDR_SCOPE_GLOBAL))
-
-
 
 
 /*
@@ -507,7 +504,6 @@ extern const struct in6_addr in6addr_linklocal_allv2routers;
 
 #define IPV6_BOUND_IF           125 /* int; set/get bound interface */
 
-
 /* to define items, should talk with KAME guys first, for *BSD compatibility */
 
 #define IPV6_RTHDR_LOOSE        0 /* this hop need not be a neighbor. */
@@ -634,10 +630,6 @@ struct ip6_mtuinfo {
 /* to define items, should talk with KAME guys first, for *BSD compatibility */
 #define IPV6CTL_MAXID           51
 
-
-
-
-
 __BEGIN_DECLS
 struct cmsghdr;
 
@@ -679,5 +671,5 @@ extern int inet6_rth_segments(const void *);
 extern struct in6_addr *inet6_rth_getaddr(const void *, int);
 
 __END_DECLS
-#endif /* PLATFORM_DriverKit */
+#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 #endif /* !_NETINET6_IN6_H_ */

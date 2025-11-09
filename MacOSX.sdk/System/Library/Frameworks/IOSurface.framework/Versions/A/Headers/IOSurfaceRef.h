@@ -112,6 +112,11 @@ extern const CFStringRef kIOSurfacePlaneComponentBitDepths                  API_
 /* kIOSurfacePlaneComponentBitOffsets   - CFArray[CFNumber] for bit offset of each component in this plane, (low bit zero, high bit 7). For example 'BGRA' would be {0, 8, 16, 24} */
 extern const CFStringRef kIOSurfacePlaneComponentBitOffsets                 API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
+// This key may be used to specify a name for the IOSurface either at creation time, or may be used with IOSurfaceSetValue() to
+// set it dynamically.  If not provided, the name will be set based on the binary containing the address calling into IOSurface.framework
+// to create it.
+extern const CFStringRef kIOSurfaceName                                     API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+
 typedef CF_ENUM(int32_t, IOSurfaceComponentName) {
     kIOSurfaceComponentNameUnknown      = 0,
     kIOSurfaceComponentNameAlpha        = 1,
@@ -414,11 +419,11 @@ void IOSurfaceDecrementUseCount(IOSurfaceRef buffer)
 int32_t IOSurfaceGetUseCount(IOSurfaceRef buffer)
     API_AVAILABLE(macos(10.6), ios(11.0), watchos(4.0), tvos(11.0));
 
-/* Returns true of an IOSurface is in use by any process in the system, otherwise false. */
+/* Returns true if an IOSurface is in use by any process in the system, otherwise false. */
 Boolean IOSurfaceIsInUse(IOSurfaceRef buffer)
     API_AVAILABLE(macos(10.6), ios(11.0), watchos(4.0), tvos(11.0));
 
-/* Rerturns true if this IOSurface allows pixel size casting */
+/* Returns true if this IOSurface allows pixel size casting */
 Boolean IOSurfaceAllowsPixelSizeCasting(IOSurfaceRef buffer)
     API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 

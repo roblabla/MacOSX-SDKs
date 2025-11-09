@@ -1,25 +1,27 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target x86_64-apple-ios15.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -library-level api -module-name CreateML
-// swift-module-flags-ignorable: -user-module-version 563.100.6
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target x86_64-apple-ios16.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CreateML
+// swift-module-flags-ignorable: -target-min-inlining-version target -enable-bare-slash-regex -user-module-version 831.40.3
 import AVFoundation
 import Combine
 import CoreGraphics
 import CoreImage
 import CoreML
 import CoreMedia
-import CoreServices
 import CoreVideo
 import Foundation
 import ImageIO
 import NaturalLanguage
 import Swift
 import TabularData
+import UniformTypeIdentifiers
 import VideoToolbox
 import Vision
 import _Concurrency
+import _StringProcessing
 import os
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 public struct MLHandPoseClassifier {
   public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   public var model: CoreML.MLModel
@@ -38,7 +40,11 @@ public struct MLHandPoseClassifier {
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
 }
+@available(*, unavailable)
+extension CreateML.MLHandPoseClassifier : Swift.Sendable {
+}
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandPoseClassifier : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -50,20 +56,21 @@ extension CreateML.MLHandPoseClassifier : Swift.CustomStringConvertible, Swift.C
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 public let MLCreateErrorDomain: Swift.String
-@available(macOS 10.14, iOS 15.0, *)
-public enum MLCreateError : Swift.Error {
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+public enum MLCreateError : Swift.Error, Swift.Sendable {
   case generic(reason: Swift.String)
   case type(reason: Swift.String)
   case io(reason: Swift.String)
-  @available(macOS 11.0, iOS 15.0, *)
+  @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
   case cancelled
-  @available(macOS 11.0, iOS 15.0, *)
+  @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
   case incompatibleParameters(parameter: Swift.String, originalValue: Swift.String, newValue: Swift.String)
-  @available(macOS 11.0, iOS 15.0, *)
+  @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
   case modifiedTrainingData
 }
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLCreateError : Foundation.CustomNSError, Foundation.LocalizedError {
   public static var errorDomain: Swift.String {
     get
@@ -74,15 +81,16 @@ extension CreateML.MLCreateError : Foundation.CustomNSError, Foundation.Localize
   public var errorDescription: Swift.String? {
     get
   }
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public var errorCode: Swift.Int {
     get
   }
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public var errorUserInfo: [Swift.String : Any] {
     get
   }
 }
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLCreateError : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -91,8 +99,8 @@ extension CreateML.MLCreateError : Swift.CustomStringConvertible, Swift.CustomDe
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
-public struct MLRandomForestRegressor {
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+public struct MLRandomForestRegressor : Swift.Sendable {
   public var model: CoreML.MLModel {
     get
   }
@@ -105,40 +113,57 @@ public struct MLRandomForestRegressor {
   public var validationMetrics: CreateML.MLRegressorMetrics {
     get
   }
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(tvOS, unavailable)
+  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestRegressor.ModelParameters = {
+                    if #available(macOS 11.0, *) {
+                        return ModelParameters(validation: .split(strategy: .automatic))
+                    } else {
+                        return ModelParameters(validationData: nil)
+                    }
+                }()) throws
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(checkpoint: CreateML.MLCheckpoint) throws
-  @available(macOS 12.0, iOS 15.0, *)
-  public static func train(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestRegressor.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLRandomForestRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
+  public static func train(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLRandomForestRegressor>
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func train(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestRegressor.ModelParameters = .init(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLRandomForestRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
-  public static func makeTrainingSession(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestRegressor.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLRandomForestRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
+  public static func makeTrainingSession(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLRandomForestRegressor>
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func makeTrainingSession(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestRegressor.ModelParameters = .init(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLRandomForestRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func restoreTrainingSession(sessionParameters: CreateML.MLTrainingSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLRandomForestRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func resume(_ session: CreateML.MLTrainingSession<CreateML.MLRandomForestRegressor>) throws -> CreateML.MLJob<CreateML.MLRandomForestRegressor>
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func predictions(from data: TabularData.DataFrame) throws -> TabularData.AnyColumn
+  @available(macOS, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
   public func predictions(from data: CreateML.MLDataTable) throws -> CreateML.MLUntypedColumn
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func evaluation(on labeledData: TabularData.DataFrame) -> CreateML.MLRegressorMetrics
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func evaluation(on labeledData: CreateML.MLDataTable) -> CreateML.MLRegressorMetrics
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
   public struct ModelParameters {
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public var validationData: CreateML.MLDataTable? {
       get
       set
     }
-    @available(macOS 11.0, iOS 15.0, *)
+    @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
     public var validation: CreateML.MLRandomForestRegressor.ModelParameters.ValidationData {
       get
       set
@@ -150,19 +175,26 @@ public struct MLRandomForestRegressor {
     public var randomSeed: Swift.Int
     public var rowSubsample: Swift.Double
     public var columnSubsample: Swift.Double
-    @available(macOS 11.0, iOS 15.0, *)
+    @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
     public init(validation: CreateML.MLRandomForestRegressor.ModelParameters.ValidationData, maxDepth: Swift.Int = 6, maxIterations: Swift.Int = 10, minLossReduction: Swift.Double = 0, minChildWeight: Swift.Double = 0.1, randomSeed: Swift.Int = 42, rowSubsample: Swift.Double = 0.8, columnSubsample: Swift.Double = 0.8)
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public init(validationData: CreateML.MLDataTable? = nil, maxDepth: Swift.Int = 6, maxIterations: Swift.Int = 10, minLossReduction: Swift.Double = 0, minChildWeight: Swift.Double = 0.1, randomSeed: Swift.Int = 42, rowSubsample: Swift.Double = 0.8, columnSubsample: Swift.Double = 0.8)
-    @available(macOS 11.0, iOS 15.0, *)
+    @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
     public enum ValidationData {
       case split(strategy: CreateML.MLSplitStrategy)
       case table(CreateML.MLDataTable)
+      @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+      case dataFrame(TabularData.DataFrame)
       case none
     }
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLRandomForestRegressor.ModelParameters : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLRandomForestRegressor.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -174,7 +206,7 @@ extension CreateML.MLRandomForestRegressor.ModelParameters : Swift.CustomStringC
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLRandomForestRegressor : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -187,7 +219,8 @@ extension CreateML.MLRandomForestRegressor : Swift.CustomStringConvertible, Swif
   }
 }
 @available(macOS 11.0, iOS 15.0, *)
-public struct MLStyleTransfer {
+@available(tvOS, unavailable)
+public struct MLStyleTransfer : Swift.Sendable {
   public init(trainingData: CreateML.MLStyleTransfer.DataSource, parameters: CreateML.MLStyleTransfer.ModelParameters = .init()) throws
   public init(checkpoint: CreateML.MLCheckpoint) throws
   public static func train(trainingData: CreateML.MLStyleTransfer.DataSource, parameters: CreateML.MLStyleTransfer.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = .init()) throws -> CreateML.MLJob<CreateML.MLStyleTransfer>
@@ -197,24 +230,25 @@ public struct MLStyleTransfer {
   public func stylize(image: CoreGraphics.CGImage) throws -> CoreGraphics.CGImage?
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = .init()) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = .init()) throws
-  @available(iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public static func downloadAssets() throws
-  public enum DataSource {
+  public enum DataSource : Swift.Sendable {
     case images(styleImage: Foundation.URL, contentDirectory: Foundation.URL, processingOption: Vision.VNImageCropAndScaleOption? = .centerCrop)
     public func processImages(textelDensity: Swift.Int, styleImageDestination: Foundation.URL? = nil, contentImagesDestination: Foundation.URL? = nil) throws -> (processedStyleImage: Foundation.URL, processedContentImages: Foundation.URL)
   }
-  public struct ModelParameters {
+  public struct ModelParameters : Swift.Sendable {
     public var algorithm: CreateML.MLStyleTransfer.ModelParameters.ModelAlgorithmType
     public var validation: CreateML.MLStyleTransfer.ModelParameters.ValidationData
     public var maxIterations: Swift.Int
     public var textelDensity: Swift.Int
     public var styleStrength: Swift.Int
     public init(algorithm: CreateML.MLStyleTransfer.ModelParameters.ModelAlgorithmType = .cnn, validation: CreateML.MLStyleTransfer.ModelParameters.ValidationData = .none, maxIterations: Swift.Int = MLStyleTransfer.__Defaults.maxIterations, textelDensity: Swift.Int = MLStyleTransfer.__Defaults.textelDensity, styleStrength: Swift.Int = MLStyleTransfer.__Defaults.styleStrength)
-    public enum ValidationData {
+    public enum ValidationData : Swift.Sendable {
       case content(Foundation.URL)
       case none
     }
-    public enum ModelAlgorithmType : Swift.String {
+    public enum ModelAlgorithmType : Swift.String, Swift.Sendable {
       case cnn
       case cnnLite
       public init?(rawValue: Swift.String)
@@ -226,6 +260,7 @@ public struct MLStyleTransfer {
   }
 }
 @available(macOS 11.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLStyleTransfer.ModelParameters.ModelAlgorithmType : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -238,6 +273,7 @@ extension CreateML.MLStyleTransfer.ModelParameters.ModelAlgorithmType : Swift.Cu
   }
 }
 @available(macOS 11.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLStyleTransfer.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -250,6 +286,7 @@ extension CreateML.MLStyleTransfer.ModelParameters : Swift.CustomStringConvertib
   }
 }
 @available(macOS 11.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLStyleTransfer : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -262,10 +299,11 @@ extension CreateML.MLStyleTransfer : Swift.CustomStringConvertible, Swift.Custom
   }
 }
 @available(macOS 11.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLStyleTransfer.ModelParameters.ValidationData : Swift.Equatable {
   public static func == (a: CreateML.MLStyleTransfer.ModelParameters.ValidationData, b: CreateML.MLStyleTransfer.ModelParameters.ValidationData) -> Swift.Bool
 }
-@available(macOS 11.0, iOS 15.0, *)
+@available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
 public struct MLCheckpoint : Swift.Codable {
   public var url: Foundation.URL
   public var phase: CreateML.MLPhase
@@ -275,7 +313,11 @@ public struct MLCheckpoint : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-public struct MLModelMetadata {
+@available(*, unavailable)
+extension CreateML.MLCheckpoint : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+public struct MLModelMetadata : Swift.Sendable {
   public var author: Swift.String
   public var shortDescription: Swift.String
   public var license: Swift.String?
@@ -284,82 +326,108 @@ public struct MLModelMetadata {
   public init(author: Swift.String = NSFullUserName(), shortDescription: Swift.String = "A model trained using CreateML for use with CoreML.", license: Swift.String? = nil, version: Swift.String = "1", additional: [Swift.String : Swift.String]? = nil)
 }
 @available(macOS 10.14, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLImageClassifier {
   public struct ModelParameters {
     public var maxIterations: Swift.Int
     public var augmentationOptions: CreateML.MLImageClassifier.ImageAugmentationOptions
     @available(macOS 11.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public var algorithm: CreateML.MLImageClassifier.ModelParameters.ModelAlgorithmType {
       get
       set
     }
     @available(macOS 11.0, iOS 15.0, *)
-    public enum ModelAlgorithmType : Swift.CustomStringConvertible {
+    @available(tvOS, unavailable)
+    public enum ModelAlgorithmType : Swift.CustomStringConvertible, Swift.Sendable {
       case transferLearning(featureExtractor: CreateML.MLImageClassifier.FeatureExtractorType, classifier: CreateML.MLImageClassifier.ModelParameters.ClassifierType)
       public var description: Swift.String {
         get
       }
     }
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public var validationData: [Swift.String : [Foundation.URL]]? {
       get
       set
     }
     @available(macOS 10.15, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public var validation: CreateML.MLImageClassifier.ModelParameters.ValidationData {
       get
       set
     }
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use featureExtractor in ModelAlgorithmType instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use featureExtractor in ModelAlgorithmType instead.")
+    @available(tvOS, unavailable)
     public var featureExtractor: CreateML.MLImageClassifier.FeatureExtractorType {
       get
       set
     }
     @available(macOS 11.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public init(validation: CreateML.MLImageClassifier.ModelParameters.ValidationData = __Defaults.validation, maxIterations: Swift.Int = __Defaults.maximumIterations, augmentation: CreateML.MLImageClassifier.ImageAugmentationOptions, algorithm: CreateML.MLImageClassifier.ModelParameters.ModelAlgorithmType = __Defaults.algorithm)
-    @available(macOS, introduced: 10.15, deprecated: 11.0, message: "Use featureExtractor in ModelAlgorithm Type")
+    @available(macOS, introduced: 10.15, deprecated: 11.0, message: "Use featureExtractor in ModelAlgorithm Type instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use featureExtractor in ModelAlgorithm Type instead.")
+    @available(tvOS, unavailable)
     public init(featureExtractor: CreateML.MLImageClassifier.FeatureExtractorType = .scenePrint(revision: 1), validation: CreateML.MLImageClassifier.ModelParameters.ValidationData = .split(strategy: .automatic), maxIterations: Swift.Int = 25, augmentationOptions: CreateML.MLImageClassifier.ImageAugmentationOptions = [])
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public init(featureExtractor: CreateML.MLImageClassifier.FeatureExtractorType = .scenePrint(revision: 1), validationData: [Swift.String : [Foundation.URL]]?, maxIterations: Swift.Int = 25, augmentationOptions: CreateML.MLImageClassifier.ImageAugmentationOptions = [])
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public init(featureExtractor: CreateML.MLImageClassifier.FeatureExtractorType = .scenePrint(revision: 1), validationData: CreateML.MLImageClassifier.DataSource, maxIterations: Swift.Int = 25, augmentationOptions: CreateML.MLImageClassifier.ImageAugmentationOptions = [])
     @available(macOS 10.15, iOS 15.0, *)
-    public enum ValidationData {
+    @available(tvOS, unavailable)
+    public enum ValidationData : Swift.Sendable {
       case split(strategy: CreateML.MLSplitStrategy)
       case dataSource(CreateML.MLImageClassifier.DataSource)
-      @available(macOS, introduced: 10.15, deprecated: 11.0, message: "Use DataSource.filesByLabel to provide dictionary validation data instead")
+      @available(macOS, introduced: 10.15, deprecated: 11.0, message: "Use DataSource.filesByLabel to provide dictionary validation data instead.")
+      @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataSource.filesByLabel to provide dictionary validation data instead.")
+      @available(tvOS, unavailable)
       case dictionary([Swift.String : [Foundation.URL]])
       case none
     }
     @available(macOS 11.0, iOS 15.0, *)
-    public enum ClassifierType : Swift.Equatable, Swift.CustomStringConvertible {
+    @available(tvOS, unavailable)
+    public enum ClassifierType : Swift.Equatable, Swift.Hashable, Swift.CustomStringConvertible, Swift.Sendable {
       case logisticRegressor
       public var description: Swift.String {
         get
       }
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: CreateML.MLImageClassifier.ModelParameters.ClassifierType, b: CreateML.MLImageClassifier.ModelParameters.ClassifierType) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
     }
   }
 }
+@available(*, unavailable)
+extension CreateML.MLImageClassifier.ModelParameters : Swift.Sendable {
+}
 @available(macOS 10.14, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLImageClassifier {
-  public enum FeatureExtractorType {
+  public enum FeatureExtractorType : Swift.Sendable {
     case scenePrint(revision: Swift.Int?)
     @available(macOS 10.15, iOS 15.0, *)
+    @available(tvOS, unavailable)
     case custom(CreateML.MLImageClassifier.CustomFeatureExtractor)
   }
   @available(macOS 10.15, iOS 15.0, *)
-  public struct CustomFeatureExtractor {
+  @available(tvOS, unavailable)
+  public struct CustomFeatureExtractor : Swift.Sendable {
     public var modelPath: Foundation.URL
     public var outputName: Swift.String?
     public init(modelPath: Foundation.URL, outputName: Swift.String? = nil)
   }
 }
 @available(macOS 10.14, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLImageClassifier.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -372,6 +440,7 @@ extension CreateML.MLImageClassifier.ModelParameters : Swift.CustomStringConvert
   }
 }
 @available(macOS 10.14, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLImageClassifier.FeatureExtractorType : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -384,6 +453,7 @@ extension CreateML.MLImageClassifier.FeatureExtractorType : Swift.CustomStringCo
   }
 }
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandActionClassifier {
   public struct ModelParameters {
     public var validation: CreateML.MLHandActionClassifier.ModelParameters.ValidationData
@@ -394,7 +464,7 @@ extension CreateML.MLHandActionClassifier {
     public var algorithm: CreateML.MLHandActionClassifier.ModelParameters.ModelAlgorithmType
     public var targetFrameRate: Swift.Double
     public init(validation: CreateML.MLHandActionClassifier.ModelParameters.ValidationData = .split(strategy: .automatic), batchSize: Swift.Int = MLHandActionClassifier.__Defaults.batchSize, maximumIterations: Swift.Int = MLHandActionClassifier.__Defaults.maximumIterations, predictionWindowSize: Swift.Int = MLHandActionClassifier.__Defaults.predictionWindowSize, augmentationOptions: CreateML.MLHandActionClassifier.VideoAugmentationOptions = [], algorithm: CreateML.MLHandActionClassifier.ModelParameters.ModelAlgorithmType = .gcn, targetFrameRate: Swift.Double = MLHandActionClassifier.__Defaults.targetFrameRate)
-    public enum ModelAlgorithmType : Swift.Equatable {
+    public enum ModelAlgorithmType : Swift.Equatable, Swift.Sendable {
       case gcn
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: CreateML.MLHandActionClassifier.ModelParameters.ModelAlgorithmType, b: CreateML.MLHandActionClassifier.ModelParameters.ModelAlgorithmType) -> Swift.Bool
@@ -409,7 +479,14 @@ extension CreateML.MLHandActionClassifier {
     }
   }
 }
+@available(*, unavailable)
+extension CreateML.MLHandActionClassifier.ModelParameters : Swift.Sendable {
+}
+@available(*, unavailable)
+extension CreateML.MLHandActionClassifier.ModelParameters.ValidationData : Swift.Sendable {
+}
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandActionClassifier.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -421,44 +498,53 @@ extension CreateML.MLHandActionClassifier.ModelParameters : Swift.CustomStringCo
     get
   }
 }
-@available(macOS 10.15, iOS 15.0, *)
-public enum MLSplitStrategy {
+@available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
+public enum MLSplitStrategy : Swift.Sendable {
   case automatic
   case fixed(ratio: Swift.Double, seed: Swift.Int?)
-  @available(macOS 11.0, *)
+  @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
   public func resolve(count: Swift.Int) -> (ratio: Swift.Double, seed: Swift.Int)
 }
 @available(macOS 10.15, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLSoundClassifier {
   public struct ModelParameters {
     public var validation: CreateML.MLSoundClassifier.ModelParameters.ValidationData
     public var maxIterations: Swift.Int
     public var overlapFactor: Swift.Double
     @available(macOS 11.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public var algorithm: CreateML.MLSoundClassifier.ModelParameters.ModelAlgorithmType {
       get
       set
     }
     @available(macOS 12.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public var featureExtractionTimeWindowSize: Foundation.TimeInterval {
       get
       set
     }
     @available(macOS 11.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public init(validation: CreateML.MLSoundClassifier.ModelParameters.ValidationData = __Defaults.validation, maxIterations: Swift.Int = __Defaults.maximumIterations, overlapFactor: Swift.Double = __Defaults.overlapFactor, algorithm: CreateML.MLSoundClassifier.ModelParameters.ModelAlgorithmType = __Defaults.algorithm)
     public init(validation: CreateML.MLSoundClassifier.ModelParameters.ValidationData = .split(strategy: .automatic), maxIterations: Swift.Int = 25, overlapFactor: Swift.Double = 0.5)
     @available(macOS 12.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public init(validation: CreateML.MLSoundClassifier.ModelParameters.ValidationData = __Defaults.validation, maxIterations: Swift.Int = __Defaults.maximumIterations, overlapFactor: Swift.Double = __Defaults.overlapFactor, algorithm: CreateML.MLSoundClassifier.ModelParameters.ModelAlgorithmType = __Defaults.algorithm, featureExtractionTimeWindowSize: Foundation.TimeInterval = __Defaults.defaultVGGishTimeWindow)
     public enum ValidationData {
       case split(strategy: CreateML.MLSplitStrategy)
       @available(macOS 11.0, iOS 15.0, *)
+      @available(tvOS, unavailable)
       case dataSource(CreateML.MLSoundClassifier.DataSource)
-      @available(macOS, introduced: 10.15, deprecated: 11.0, message: "Use DataSource.filesByLabel to provide dictionary validation data instead")
+      @available(macOS, introduced: 10.15, deprecated: 11.0, message: "Use DataSource.filesByLabel to provide dictionary validation data instead.")
+      @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataSource.filesByLabel to provide dictionary validation data instead.")
+      @available(tvOS, unavailable)
       case dictionary([Swift.String : [Foundation.URL]])
       case none
     }
     @available(macOS 11.0, iOS 15.0, *)
-    public enum ModelAlgorithmType : Swift.Equatable, Swift.CustomStringConvertible {
+    @available(tvOS, unavailable)
+    public enum ModelAlgorithmType : Swift.Equatable, Swift.CustomStringConvertible, Swift.Sendable {
       case transferLearning(featureExtractor: CreateML.MLSoundClassifier.ModelParameters.FeatureExtractorType, classifier: CreateML.MLSoundClassifier.ModelParameters.ClassifierType)
       public var description: Swift.String {
         get
@@ -466,7 +552,8 @@ extension CreateML.MLSoundClassifier {
       public static func == (a: CreateML.MLSoundClassifier.ModelParameters.ModelAlgorithmType, b: CreateML.MLSoundClassifier.ModelParameters.ModelAlgorithmType) -> Swift.Bool
     }
     @available(macOS 12.0, iOS 15.0, *)
-    public enum FeaturePrintType : Swift.Equatable, Swift.CustomStringConvertible {
+    @available(tvOS, unavailable)
+    public enum FeaturePrintType : Swift.Equatable, Swift.CustomStringConvertible, Swift.Sendable {
       case sound
       public var description: Swift.String {
         get
@@ -478,9 +565,11 @@ extension CreateML.MLSoundClassifier {
       }
     }
     @available(macOS 11.0, iOS 15.0, *)
-    public enum FeatureExtractorType : Swift.Equatable, Swift.CustomStringConvertible {
+    @available(tvOS, unavailable)
+    public enum FeatureExtractorType : Swift.Equatable, Swift.CustomStringConvertible, Swift.Sendable {
       case vggish(revision: Swift.Int = 1)
       @available(macOS 12.0, iOS 15.0, *)
+      @available(tvOS, unavailable)
       case audioFeaturePrint(type: CreateML.MLSoundClassifier.ModelParameters.FeaturePrintType = .sound, revision: Swift.Int = 1)
       public var description: Swift.String {
         get
@@ -488,20 +577,27 @@ extension CreateML.MLSoundClassifier {
       public static func == (a: CreateML.MLSoundClassifier.ModelParameters.FeatureExtractorType, b: CreateML.MLSoundClassifier.ModelParameters.FeatureExtractorType) -> Swift.Bool
     }
     @available(macOS 11.0, iOS 15.0, *)
-    public enum ClassifierType : Swift.Equatable, Swift.CustomStringConvertible {
+    public enum ClassifierType : Swift.Equatable, Swift.Hashable, Swift.CustomStringConvertible, Swift.Sendable {
       case logisticRegressor
       public var description: Swift.String {
         get
       }
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: CreateML.MLSoundClassifier.ModelParameters.ClassifierType, b: CreateML.MLSoundClassifier.ModelParameters.ClassifierType) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
     }
   }
 }
+@available(*, unavailable)
+extension CreateML.MLSoundClassifier.ModelParameters : Swift.Sendable {
+}
+@available(*, unavailable)
+extension CreateML.MLSoundClassifier.ModelParameters.ValidationData : Swift.Sendable {
+}
 @available(macOS 10.15, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLSoundClassifier.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -513,8 +609,8 @@ extension CreateML.MLSoundClassifier.ModelParameters : Swift.CustomStringConvert
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
-public struct MLLogisticRegressionClassifier {
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+public struct MLLogisticRegressionClassifier : Swift.Sendable {
   public var model: CoreML.MLModel {
     get
   }
@@ -527,41 +623,58 @@ public struct MLLogisticRegressionClassifier {
   public var validationMetrics: CreateML.MLClassifierMetrics {
     get
   }
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLogisticRegressionClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLogisticRegressionClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(tvOS, unavailable)
+  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLogisticRegressionClassifier.ModelParameters = {
+                    if #available(macOS 10.15, *) {
+                        return ModelParameters(validation: .split(strategy: .automatic))
+                    } else {
+                        return ModelParameters(validationData: nil)
+                    }
+                }()) throws
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(checkpoint: CreateML.MLCheckpoint) throws
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func train(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLogisticRegressionClassifier.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLLogisticRegressionClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func train(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLogisticRegressionClassifier.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLLogisticRegressionClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func makeTrainingSession(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLogisticRegressionClassifier.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLLogisticRegressionClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func makeTrainingSession(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLogisticRegressionClassifier.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLLogisticRegressionClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func restoreTrainingSession(sessionParameters: CreateML.MLTrainingSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLLogisticRegressionClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func resume(_ session: CreateML.MLTrainingSession<CreateML.MLLogisticRegressionClassifier>) throws -> CreateML.MLJob<CreateML.MLLogisticRegressionClassifier>
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func predictions(from data: TabularData.DataFrame) throws -> TabularData.AnyColumn
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func predictions(from data: CreateML.MLDataTable) throws -> CreateML.MLUntypedColumn
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func evaluation(on labeledData: TabularData.DataFrame) -> CreateML.MLClassifierMetrics
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func evaluation(on labeledData: CreateML.MLDataTable) -> CreateML.MLClassifierMetrics
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
   public struct ModelParameters {
     public var maxIterations: Swift.Int
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public var validationData: CreateML.MLDataTable? {
       get
       set
     }
-    @available(macOS 10.15, iOS 15.0, *)
+    @available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
     public var validation: CreateML.MLLogisticRegressionClassifier.ModelParameters.ValidationData {
       get
       set
@@ -571,21 +684,26 @@ public struct MLLogisticRegressionClassifier {
     public var stepSize: Swift.Double
     public var convergenceThreshold: Swift.Double
     public var featureRescaling: Swift.Bool
-    @available(macOS 10.15, iOS 15.0, *)
+    @available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
     public init(validation: CreateML.MLLogisticRegressionClassifier.ModelParameters.ValidationData = .split(strategy: .automatic), maxIterations: Swift.Int = 10, l1Penalty: Swift.Double = 0, l2Penalty: Swift.Double = 0.01, stepSize: Swift.Double = 1.0, convergenceThreshold: Swift.Double = 0.01, featureRescaling: Swift.Bool = true)
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public init(validationData: CreateML.MLDataTable?, maxIterations: Swift.Int = 10, l1Penalty: Swift.Double = 0, l2Penalty: Swift.Double = 0.01, stepSize: Swift.Double = 1.0, convergenceThreshold: Swift.Double = 0.01, featureRescaling: Swift.Bool = true)
-    @available(macOS 10.15, iOS 15.0, *)
+    @available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
     public enum ValidationData {
       case split(strategy: CreateML.MLSplitStrategy)
       case table(CreateML.MLDataTable)
-      @available(macOS 12.0, iOS 15.0, *)
+      @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
       case dataFrame(TabularData.DataFrame)
       case none
     }
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLLogisticRegressionClassifier.ModelParameters : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLLogisticRegressionClassifier.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -597,7 +715,7 @@ extension CreateML.MLLogisticRegressionClassifier.ModelParameters : Swift.Custom
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLLogisticRegressionClassifier : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -609,8 +727,8 @@ extension CreateML.MLLogisticRegressionClassifier : Swift.CustomStringConvertibl
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
-public struct MLDecisionTreeRegressor {
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+public struct MLDecisionTreeRegressor : Swift.Sendable {
   public var model: CoreML.MLModel {
     get
   }
@@ -623,40 +741,57 @@ public struct MLDecisionTreeRegressor {
   public var validationMetrics: CreateML.MLRegressorMetrics {
     get
   }
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(tvOS, unavailable)
+  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeRegressor.ModelParameters = {
+                    if #available(macOS 11.0, *) {
+                        return ModelParameters(validation: .split(strategy: .automatic))
+                    } else {
+                        return ModelParameters(validationData: nil)
+                    }
+                }()) throws
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(checkpoint: CreateML.MLCheckpoint) throws
-  @available(macOS 12.0, iOS 15.0, *)
-  public static func train(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeRegressor.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLDecisionTreeRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
+  public static func train(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLDecisionTreeRegressor>
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func train(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeRegressor.ModelParameters = .init(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLDecisionTreeRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
-  public static func makeTrainingSession(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeRegressor.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLDecisionTreeRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
+  public static func makeTrainingSession(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLDecisionTreeRegressor>
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func makeTrainingSession(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeRegressor.ModelParameters = .init(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLDecisionTreeRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func restoreTrainingSession(sessionParameters: CreateML.MLTrainingSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLDecisionTreeRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func resume(_ session: CreateML.MLTrainingSession<CreateML.MLDecisionTreeRegressor>) throws -> CreateML.MLJob<CreateML.MLDecisionTreeRegressor>
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func predictions(from data: TabularData.DataFrame) throws -> TabularData.AnyColumn
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func predictions(from data: CreateML.MLDataTable) throws -> CreateML.MLUntypedColumn
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func evaluation(on labeledData: TabularData.DataFrame) -> CreateML.MLRegressorMetrics
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func evaluation(on labeledData: CreateML.MLDataTable) -> CreateML.MLRegressorMetrics
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
   public struct ModelParameters {
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public var validationData: CreateML.MLDataTable? {
       get
       set
     }
-    @available(macOS 11.0, iOS 15.0, *)
+    @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
     public var validation: CreateML.MLDecisionTreeRegressor.ModelParameters.ValidationData {
       get
       set
@@ -665,19 +800,26 @@ public struct MLDecisionTreeRegressor {
     public var minLossReduction: Swift.Double
     public var minChildWeight: Swift.Double
     public var randomSeed: Swift.Int
-    @available(macOS 11.0, iOS 15.0, *)
+    @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
     public init(validation: CreateML.MLDecisionTreeRegressor.ModelParameters.ValidationData, maxDepth: Swift.Int = 6, minLossReduction: Swift.Double = 0, minChildWeight: Swift.Double = 0.1, randomSeed: Swift.Int = 42)
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public init(validationData: CreateML.MLDataTable? = nil, maxDepth: Swift.Int = 6, minLossReduction: Swift.Double = 0, minChildWeight: Swift.Double = 0.1, randomSeed: Swift.Int = 42)
-    @available(macOS 11.0, iOS 15.0, *)
+    @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
     public enum ValidationData {
       case split(strategy: CreateML.MLSplitStrategy)
       case table(CreateML.MLDataTable)
+      @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+      case dataFrame(TabularData.DataFrame)
       case none
     }
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLDecisionTreeRegressor.ModelParameters : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDecisionTreeRegressor.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -689,7 +831,7 @@ extension CreateML.MLDecisionTreeRegressor.ModelParameters : Swift.CustomStringC
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDecisionTreeRegressor : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -701,8 +843,10 @@ extension CreateML.MLDecisionTreeRegressor : Swift.CustomStringConvertible, Swif
     get
   }
 }
+@available(macOS 10.14, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLImageClassifier {
-  public struct ImageAugmentationOptions : Swift.OptionSet {
+  public struct ImageAugmentationOptions : Swift.OptionSet, Swift.Sendable {
     public let rawValue: Swift.Int
     public static let blur: CreateML.MLImageClassifier.ImageAugmentationOptions
     public static let flip: CreateML.MLImageClassifier.ImageAugmentationOptions
@@ -716,8 +860,8 @@ extension CreateML.MLImageClassifier {
     public typealias RawValue = Swift.Int
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
-public struct MLRegressorMetrics {
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+public struct MLRegressorMetrics : Swift.Sendable {
   public var error: Swift.Error? {
     get
   }
@@ -732,7 +876,7 @@ public struct MLRegressorMetrics {
   }
   public init(maximumError: Swift.Double, rootMeanSquaredError: Swift.Double)
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLRegressorMetrics : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -745,29 +889,29 @@ extension CreateML.MLRegressorMetrics : Swift.CustomStringConvertible, Swift.Cus
   }
 }
 extension Swift.Int32 {
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static var mlMultiArrayDataType: CoreML.MLMultiArrayDataType {
     get
   }
 }
 extension Swift.Float {
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static var mlMultiArrayDataType: CoreML.MLMultiArrayDataType {
     get
   }
 }
 extension Swift.Double {
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static var mlMultiArrayDataType: CoreML.MLMultiArrayDataType {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 public struct MLDataColumn<Element> where Element : CreateML.MLDataValueConvertible {
   public var count: Swift.Int {
     get
   }
-  @available(macOS 11.0, *)
+  @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
   public var isEmpty: Swift.Bool {
     get
   }
@@ -783,7 +927,10 @@ public struct MLDataColumn<Element> where Element : CreateML.MLDataValueConverti
   public init()
   public mutating func append(contentsOf newColumn: CreateML.MLDataColumn<Element>)
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLDataColumn : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn {
   public static func == (a: CreateML.MLDataColumn<Element>, b: CreateML.MLDataColumn<Element>) -> CreateML.MLDataColumn<Swift.Bool>
   public static func != (a: CreateML.MLDataColumn<Element>, b: CreateML.MLDataColumn<Element>) -> CreateML.MLDataColumn<Swift.Bool>
@@ -804,7 +951,7 @@ extension CreateML.MLDataColumn {
   public static func >= (a: Element, b: CreateML.MLDataColumn<Element>) -> CreateML.MLDataColumn<Swift.Bool>
   public static func <= (a: Element, b: CreateML.MLDataColumn<Element>) -> CreateML.MLDataColumn<Swift.Bool>
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn {
   public subscript(mask: CreateML.MLUntypedColumn) -> CreateML.MLDataColumn<Element> {
     get
@@ -825,14 +972,14 @@ extension CreateML.MLDataColumn {
   public func copy() -> CreateML.MLDataColumn<Element>
   public func materialize() throws -> CreateML.MLDataColumn<Element>
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn {
   public func element(at index: Swift.Int) -> Element?
   public subscript(index: Swift.Int) -> Element {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn {
   public subscript(slice: Swift.Range<Swift.Int>) -> CreateML.MLDataColumn<Element> {
     get
@@ -841,11 +988,11 @@ extension CreateML.MLDataColumn {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension Swift.Array where Element : CreateML.MLDataValueConvertible {
   public init(_ column: CreateML.MLDataColumn<Element>)
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn where Element == Swift.Int {
   public init<T>(column: CreateML.MLDataColumn<T>) where T : CreateML.MLDataValueConvertible
   public static func + (a: CreateML.MLDataColumn<Swift.Int>, b: CreateML.MLDataColumn<Swift.Int>) -> CreateML.MLDataColumn<Swift.Int>
@@ -864,10 +1011,12 @@ extension CreateML.MLDataColumn where Element == Swift.Int {
   public func min() -> Swift.Int?
   public func max() -> Swift.Int?
   @available(macOS, introduced: 10.14, deprecated: 10.15, renamed: "stdev")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, renamed: "stdev")
+  @available(tvOS, unavailable)
   public func std() -> Swift.Double?
   public func mean() -> Swift.Double?
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn where Element == Swift.Double {
   public init<T>(column: CreateML.MLDataColumn<T>) where T : CreateML.MLDataValueConvertible
   public static func + (a: CreateML.MLDataColumn<Swift.Double>, b: CreateML.MLDataColumn<Swift.Double>) -> CreateML.MLDataColumn<Swift.Double>
@@ -886,52 +1035,55 @@ extension CreateML.MLDataColumn where Element == Swift.Double {
   public func min() -> Swift.Double?
   public func max() -> Swift.Double?
   @available(macOS, introduced: 10.14, deprecated: 10.15, renamed: "stdev")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, renamed: "stdev")
+  @available(tvOS, unavailable)
   public func std() -> Swift.Double?
   public func mean() -> Swift.Double?
 }
-@available(macOS 10.15, iOS 15.0, *)
+@available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn where Element == Swift.Int {
   public func stdev() -> Swift.Double?
 }
-@available(macOS 10.15, iOS 15.0, *)
+@available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn where Element == Swift.Double {
   public func stdev() -> Swift.Double?
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn where Element == Swift.Bool {
   public static func || (a: CreateML.MLDataColumn<Swift.Bool>, b: CreateML.MLDataColumn<Swift.Bool>) -> CreateML.MLDataColumn<Swift.Bool>
   public static func && (a: CreateML.MLDataColumn<Swift.Bool>, b: CreateML.MLDataColumn<Swift.Bool>) -> CreateML.MLDataColumn<Swift.Bool>
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn where Element == Swift.String {
   public init<T>(column: CreateML.MLDataColumn<T>) where T : CreateML.MLDataValueConvertible
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn where Element == CreateML.MLDataValue.SequenceType {
   public init<T>(column: CreateML.MLDataColumn<T>) where T : CreateML.MLDataValueConvertible
 }
-@available(macOS 10.14, iOS 15.0, *)
-extension CreateML.MLDataColumn where Element == Swift.Array<Swift.Int> {
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+extension CreateML.MLDataColumn where Element == [Swift.Int] {
   public init<T>(column: CreateML.MLDataColumn<T>) where T : CreateML.MLDataValueConvertible
 }
-@available(macOS 10.14, iOS 15.0, *)
-extension CreateML.MLDataColumn where Element == Swift.Array<Swift.Double> {
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+extension CreateML.MLDataColumn where Element == [Swift.Double] {
   public init<T>(column: CreateML.MLDataColumn<T>) where T : CreateML.MLDataValueConvertible
 }
-@available(macOS 10.14, iOS 15.0, *)
-extension CreateML.MLDataColumn where Element == Swift.Array<Swift.String> {
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+extension CreateML.MLDataColumn where Element == [Swift.String] {
   public init<T>(column: CreateML.MLDataColumn<T>) where T : CreateML.MLDataValueConvertible
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn where Element == CreateML.MLDataValue.DictionaryType {
   public init<T>(column: CreateML.MLDataColumn<T>) where T : CreateML.MLDataValueConvertible
 }
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn : Swift.CustomReflectable {
   public var customMirror: Swift.Mirror {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataColumn : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -943,13 +1095,16 @@ extension CreateML.MLDataColumn : Swift.CustomStringConvertible, Swift.CustomDeb
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.SequenceType {
   public init()
-  public init<S>(_ elements: S) where S : Swift.Sequence, S.Element == CreateML.MLDataValue.SequenceType.Element
+  public init<S>(_ elements: S) where S : Swift.Sequence, S.Element == CreateML.MLDataValue
   public init<S>(_ elements: S) where S : Swift.Sequence, S.Element : CreateML.MLDataValueConvertible
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLDataValue.SequenceType : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.SequenceType : Swift.RandomAccessCollection {
   public typealias Element = CreateML.MLDataValue
   public typealias Index = Swift.Int
@@ -966,16 +1121,16 @@ extension CreateML.MLDataValue.SequenceType : Swift.RandomAccessCollection {
   public typealias Iterator = Swift.IndexingIterator<CreateML.MLDataValue.SequenceType>
   public typealias SubSequence = Swift.Slice<CreateML.MLDataValue.SequenceType>
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.SequenceType : Swift.ExpressibleByArrayLiteral {
   public init(arrayLiteral: CreateML.MLDataValue.SequenceType.Element...)
   public typealias ArrayLiteralElement = CreateML.MLDataValue.SequenceType.Element
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.SequenceType : Swift.Equatable {
   public static func == (lhs: CreateML.MLDataValue.SequenceType, rhs: CreateML.MLDataValue.SequenceType) -> Swift.Bool
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.SequenceType : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -984,7 +1139,7 @@ extension CreateML.MLDataValue.SequenceType : Swift.CustomStringConvertible, Swi
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.SequenceType : CreateML.MLDataValueConvertible {
   public static var dataValueType: CreateML.MLDataValue.ValueType {
     get
@@ -994,7 +1149,7 @@ extension CreateML.MLDataValue.SequenceType : CreateML.MLDataValueConvertible {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension Swift.Array : CreateML.MLDataValueConvertible where Element : CreateML.MLDataValueConvertible {
   public static var dataValueType: CreateML.MLDataValue.ValueType {
     get
@@ -1005,6 +1160,7 @@ extension Swift.Array : CreateML.MLDataValueConvertible where Element : CreateML
   }
 }
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandPoseClassifier {
   public struct ModelParameters {
     public var validation: CreateML.MLHandPoseClassifier.ModelParameters.ValidationData
@@ -1013,7 +1169,7 @@ extension CreateML.MLHandPoseClassifier {
     public var augmentationOptions: CreateML.MLHandPoseClassifier.ImageAugmentationOptions
     public var algorithm: CreateML.MLHandPoseClassifier.ModelParameters.ModelAlgorithmType
     public init(validation: CreateML.MLHandPoseClassifier.ModelParameters.ValidationData = .split(strategy: .automatic), batchSize: Swift.Int = MLHandPoseClassifier.__Defaults.batchSize, maximumIterations: Swift.Int = MLHandPoseClassifier.__Defaults.maximumIterations, augmentationOptions: CreateML.MLHandPoseClassifier.ImageAugmentationOptions = [], algorithm: CreateML.MLHandPoseClassifier.ModelParameters.ModelAlgorithmType = .gcn)
-    public enum ModelAlgorithmType : Swift.Equatable {
+    public enum ModelAlgorithmType : Swift.Equatable, Swift.Sendable {
       case gcn
       public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: CreateML.MLHandPoseClassifier.ModelParameters.ModelAlgorithmType, b: CreateML.MLHandPoseClassifier.ModelParameters.ModelAlgorithmType) -> Swift.Bool
@@ -1028,7 +1184,14 @@ extension CreateML.MLHandPoseClassifier {
     }
   }
 }
+@available(*, unavailable)
+extension CreateML.MLHandPoseClassifier.ModelParameters : Swift.Sendable {
+}
+@available(*, unavailable)
+extension CreateML.MLHandPoseClassifier.ModelParameters.ValidationData : Swift.Sendable {
+}
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandPoseClassifier.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1040,15 +1203,15 @@ extension CreateML.MLHandPoseClassifier.ModelParameters : Swift.CustomStringConv
     get
   }
 }
-@available(macOS 11.0, iOS 15.0, *)
-public struct MLTrainingSessionParameters {
+@available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
+public struct MLTrainingSessionParameters : Swift.Sendable {
   public let sessionDirectory: Foundation.URL?
   public var reportInterval: Swift.Int
   public var checkpointInterval: Swift.Int
   public var iterations: Swift.Int
   public init(sessionDirectory: Foundation.URL? = nil, reportInterval: Swift.Int = 5, checkpointInterval: Swift.Int = 10, iterations: Swift.Int = 1000)
 }
-@_hasMissingDesignatedInitializers @available(macOS 11.0, iOS 15.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
 final public class MLTrainingSession<Task> {
   final public let parameters: CreateML.MLTrainingSessionParameters
   final public var date: Foundation.Date {
@@ -1067,9 +1230,14 @@ final public class MLTrainingSession<Task> {
   final public func reuseExtractedFeatures(from session: CreateML.MLTrainingSession<Task>) throws
   @objc deinit
 }
+@available(*, unavailable)
+extension CreateML.MLTrainingSession : Swift.Sendable {
+}
 @available(macOS 10.14, iOS 15.0, *)
-public struct MLImageClassifier {
+@available(tvOS, unavailable)
+public struct MLImageClassifier : Swift.Sendable {
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   public var model: CoreML.MLModel {
     get
@@ -1081,29 +1249,47 @@ public struct MLImageClassifier {
   public var validationMetrics: CreateML.MLClassifierMetrics {
     get
   }
-  public init(trainingData: CreateML.MLImageClassifier.DataSource, parameters: CreateML.MLImageClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use DataSource.filesByLabel to provide dictionary training data instead")
-  public init(trainingData: [Swift.String : [Foundation.URL]], parameters: CreateML.MLImageClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
+  public init(trainingData: CreateML.MLImageClassifier.DataSource, parameters: CreateML.MLImageClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic), augmentation: [], algorithm: .transferLearning(featureExtractor: .scenePrint(revision: 1), classifier: .logisticRegressor))) throws
+  @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use DataSource.filesByLabel to provide dictionary training data instead.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataSource.filesByLabel to provide dictionary training data instead.")
+  @available(tvOS, unavailable)
+  public init(trainingData: [Swift.String : [Foundation.URL]], parameters: CreateML.MLImageClassifier.ModelParameters = {
+                    if #available(macOS 10.15, *) {
+                        return ModelParameters(validation: .split(strategy: .automatic))
+                    } else {
+                        return ModelParameters(validationData: nil)
+                    }
+                }()) throws
+  @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public init(checkpoint: CreateML.MLCheckpoint) throws
   @available(macOS 11.0, iOS 15.0, *)
-  public static func train(trainingData: CreateML.MLImageClassifier.DataSource, parameters: CreateML.MLImageClassifier.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLImageClassifier>
+  @available(tvOS, unavailable)
+  public static func train(trainingData: CreateML.MLImageClassifier.DataSource, parameters: CreateML.MLImageClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic), augmentation: [], algorithm: .transferLearning(featureExtractor: .scenePrint(revision: 1), classifier: .logisticRegressor)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLImageClassifier>
   @available(macOS 11.0, iOS 15.0, *)
-  public static func makeTrainingSession(trainingData: CreateML.MLImageClassifier.DataSource, parameters: CreateML.MLImageClassifier.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLImageClassifier>
+  @available(tvOS, unavailable)
+  public static func makeTrainingSession(trainingData: CreateML.MLImageClassifier.DataSource, parameters: CreateML.MLImageClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic), augmentation: [], algorithm: .transferLearning(featureExtractor: .scenePrint(revision: 1), classifier: .logisticRegressor)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLImageClassifier>
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public static func restoreTrainingSession(sessionParameters: CreateML.MLTrainingSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLImageClassifier>
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public static func resume(_ session: CreateML.MLTrainingSession<CreateML.MLImageClassifier>) throws -> CreateML.MLJob<CreateML.MLImageClassifier>
   public func prediction(from image: CoreGraphics.CGImage) throws -> Swift.String
   public func prediction(from image: Foundation.URL) throws -> Swift.String
   public func predictions(from images: [Foundation.URL]) throws -> [Swift.String]
   public func evaluation(on labeledImages: CreateML.MLImageClassifier.DataSource) -> CreateML.MLClassifierMetrics
-  @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use DataSource.filesByLabel to provide dictionary training data instead")
+  @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use DataSource.filesByLabel to provide dictionary training data instead.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataSource.filesByLabel to provide dictionary training data instead.")
+  @available(tvOS, unavailable)
   public func evaluation(on labeledImages: [Swift.String : [Foundation.URL]]) -> CreateML.MLClassifierMetrics
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
 }
 @available(macOS 10.14, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLImageClassifier : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1115,7 +1301,7 @@ extension CreateML.MLImageClassifier : Swift.CustomStringConvertible, Swift.Cust
     get
   }
 }
-@available(macOS 11.0, iOS 15.0, *)
+@available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
 public struct MLProgress : Swift.Codable {
   public var elapsedTime: Foundation.TimeInterval
   public var phase: CreateML.MLPhase
@@ -1124,7 +1310,7 @@ public struct MLProgress : Swift.Codable {
   public var metrics: [CreateML.MLProgress.Metric : Any]
   public init(phase: CreateML.MLPhase)
   public init?(progress: Foundation.Progress)
-  public enum Metric : Swift.String, Swift.Codable, Swift.Hashable, Swift.CaseIterable {
+  public enum Metric : Swift.String, Swift.Codable, Swift.Hashable, Swift.CaseIterable, Swift.Sendable {
     case loss
     case contentLoss
     case styleLoss
@@ -1145,7 +1331,10 @@ public struct MLProgress : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-@available(macOS 11.0, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLProgress : Swift.Sendable {
+}
+@available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLProgress {
   public static let elapsedTimeKey: Foundation.ProgressUserInfoKey
   public static let phaseKey: Foundation.ProgressUserInfoKey
@@ -1160,8 +1349,9 @@ extension CreateML.MLProgress {
   public static let stylizedImageKey: Foundation.ProgressUserInfoKey
 }
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandPoseClassifier {
-  public struct __Defaults {
+  public struct __Defaults : Swift.Sendable {
     public static let batchSize: Swift.Int
     public static let maximumIterations: Swift.Int
     public static let sessionIdColumnName: Swift.String
@@ -1171,8 +1361,9 @@ extension CreateML.MLHandPoseClassifier {
   }
 }
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandActionClassifier {
-  public struct __Defaults {
+  public struct __Defaults : Swift.Sendable {
     public static let batchSize: Swift.Int
     public static let maximumIterations: Swift.Int
     public static let predictionWindowSize: Swift.Int
@@ -1185,15 +1376,18 @@ extension CreateML.MLHandActionClassifier {
     public static let targetFrameRate: Swift.Double
   }
 }
-@available(macOS 10.15, iOS 15.0, *)
+@available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLClassifierMetrics {
   public static func __evaluation(on table: CreateML.MLDataTable, labelColumn: Swift.String, predictionColumn: Swift.String, classes: [Swift.String]) throws -> CreateML.MLClassifierMetrics
 }
-@available(macOS 10.15, *)
+@available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLRegressorMetrics {
   public static func __evaluation(on table: CreateML.MLDataTable, targetColumn: Swift.String, predictionColumn: Swift.String) throws -> CreateML.MLRegressorMetrics
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLDataValue.MultiArrayType : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.MultiArrayType : Swift.Equatable {
   public init(shape: [Swift.Int])
   public init(_ contents: CoreML.MLMultiArray)
@@ -1208,7 +1402,7 @@ extension CreateML.MLDataValue.MultiArrayType : Swift.Equatable {
   }
   public static func == (lhs: CreateML.MLDataValue.MultiArrayType, rhs: CreateML.MLDataValue.MultiArrayType) -> Swift.Bool
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.MultiArrayType : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1217,7 +1411,7 @@ extension CreateML.MLDataValue.MultiArrayType : Swift.CustomStringConvertible, S
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.MultiArrayType : CreateML.MLDataValueConvertible {
   public static var dataValueType: CreateML.MLDataValue.ValueType {
     get
@@ -1229,13 +1423,14 @@ extension CreateML.MLDataValue.MultiArrayType : CreateML.MLDataValueConvertible 
   }
 }
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 public struct MLHandActionClassifier {
   public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   public var model: CoreML.MLModel
   public let modelParameters: CreateML.MLHandActionClassifier.ModelParameters
   public var trainingMetrics: CreateML.MLClassifierMetrics
   public var validationMetrics: CreateML.MLClassifierMetrics
-  public struct Prediction {
+  public struct Prediction : Swift.Sendable {
     public var frameRange: Swift.Range<Swift.Int>
     public var results: [(label: Swift.String, confidence: Swift.Double)]
   }
@@ -1251,7 +1446,11 @@ public struct MLHandActionClassifier {
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
 }
+@available(*, unavailable)
+extension CreateML.MLHandActionClassifier : Swift.Sendable {
+}
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandActionClassifier : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1264,28 +1463,34 @@ extension CreateML.MLHandActionClassifier : Swift.CustomStringConvertible, Swift
   }
 }
 @available(macOS 11.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLSoundClassifier {
   @available(macOS 11.0, iOS 15.0, *)
-  public struct __Defaults {
+  @available(tvOS, unavailable)
+  public struct __Defaults : Swift.Sendable {
     public static let overlapFactor: Swift.Double
     public static let batchSize: Swift.Int
     public static let maximumIterations: Swift.Int
     public static let validation: CreateML.MLSoundClassifier.ModelParameters.ValidationData
     @available(macOS 11.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public static var featureExtractor: CreateML.MLSoundClassifier.ModelParameters.FeatureExtractorType {
       get
     }
     @available(macOS 11.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public static let classifier: CreateML.MLSoundClassifier.ModelParameters.ClassifierType
     @available(macOS 11.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public static let algorithm: CreateML.MLSoundClassifier.ModelParameters.ModelAlgorithmType
     public static let featureColumnName: Swift.String
     public static let labelColumnName: Swift.String
     @available(macOS 12.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public static let defaultVGGishTimeWindow: Swift.Double
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 public struct MLClassifierMetrics {
   public var error: Swift.Error? {
     get
@@ -1304,7 +1509,10 @@ public struct MLClassifierMetrics {
   }
   public init(classificationError: Swift.Double, confusion: CreateML.MLDataTable, precisionRecall: CreateML.MLDataTable)
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLClassifierMetrics : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLClassifierMetrics : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1316,8 +1524,8 @@ extension CreateML.MLClassifierMetrics : Swift.CustomStringConvertible, Swift.Cu
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
-public struct MLRandomForestClassifier {
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+public struct MLRandomForestClassifier : Swift.Sendable {
   public var model: CoreML.MLModel {
     get
   }
@@ -1330,40 +1538,57 @@ public struct MLRandomForestClassifier {
   public var validationMetrics: CreateML.MLClassifierMetrics {
     get
   }
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(tvOS, unavailable)
+  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestClassifier.ModelParameters = {
+                    if #available(macOS 10.15, *) {
+                        return ModelParameters(validation: .split(strategy: .automatic))
+                    } else {
+                        return ModelParameters(validationData: nil)
+                    }
+                }()) throws
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(checkpoint: CreateML.MLCheckpoint) throws
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func train(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestClassifier.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLRandomForestClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func train(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestClassifier.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLRandomForestClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func makeTrainingSession(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestClassifier.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLRandomForestClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func makeTrainingSession(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestClassifier.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLRandomForestClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func restoreTrainingSession(sessionParameters: CreateML.MLTrainingSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLRandomForestClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func resume(_ session: CreateML.MLTrainingSession<CreateML.MLRandomForestClassifier>) throws -> CreateML.MLJob<CreateML.MLRandomForestClassifier>
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func predictions(from data: TabularData.DataFrame) throws -> TabularData.AnyColumn
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func predictions(from data: CreateML.MLDataTable) throws -> CreateML.MLUntypedColumn
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func evaluation(on labeledData: TabularData.DataFrame) -> CreateML.MLClassifierMetrics
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func evaluation(on labeledData: CreateML.MLDataTable) -> CreateML.MLClassifierMetrics
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
   public struct ModelParameters {
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public var validationData: CreateML.MLDataTable? {
       get
       set
     }
-    @available(macOS 10.15, iOS 15.0, *)
+    @available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
     public var validation: CreateML.MLRandomForestClassifier.ModelParameters.ValidationData {
       get
       set
@@ -1375,21 +1600,26 @@ public struct MLRandomForestClassifier {
     public var randomSeed: Swift.Int
     public var rowSubsample: Swift.Double
     public var columnSubsample: Swift.Double
-    @available(macOS 10.15, iOS 15.0, *)
+    @available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
     public init(validation: CreateML.MLRandomForestClassifier.ModelParameters.ValidationData = .split(strategy: .automatic), maxDepth: Swift.Int = 6, maxIterations: Swift.Int = 10, minLossReduction: Swift.Double = 0, minChildWeight: Swift.Double = 0.1, randomSeed: Swift.Int = 42, rowSubsample: Swift.Double = 0.8, columnSubsample: Swift.Double = 0.8)
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public init(validationData: CreateML.MLDataTable?, maxDepth: Swift.Int = 6, maxIterations: Swift.Int = 10, minLossReduction: Swift.Double = 0, minChildWeight: Swift.Double = 0.1, randomSeed: Swift.Int = 42, rowSubsample: Swift.Double = 0.8, columnSubsample: Swift.Double = 0.8)
-    @available(macOS 10.15, iOS 15.0, *)
+    @available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
     public enum ValidationData {
       case split(strategy: CreateML.MLSplitStrategy)
       case table(CreateML.MLDataTable)
-      @available(macOS 12.0, iOS 15.0, *)
+      @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
       case dataFrame(TabularData.DataFrame)
       case none
     }
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLRandomForestClassifier.ModelParameters : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLRandomForestClassifier.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1401,7 +1631,7 @@ extension CreateML.MLRandomForestClassifier.ModelParameters : Swift.CustomString
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLRandomForestClassifier : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1413,8 +1643,8 @@ extension CreateML.MLRandomForestClassifier : Swift.CustomStringConvertible, Swi
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
-public struct MLBoostedTreeRegressor {
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+public struct MLBoostedTreeRegressor : Swift.Sendable {
   public var model: CoreML.MLModel {
     get
   }
@@ -1427,40 +1657,57 @@ public struct MLBoostedTreeRegressor {
   public var validationMetrics: CreateML.MLRegressorMetrics {
     get
   }
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(tvOS, unavailable)
+  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeRegressor.ModelParameters = {
+                    if #available(macOS 11.0, *) {
+                        return ModelParameters(validation: .split(strategy: .automatic))
+                    } else {
+                        return ModelParameters(validationData: nil)
+                    }
+                }()) throws
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(checkpoint: CreateML.MLCheckpoint) throws
-  @available(macOS 12.0, iOS 15.0, *)
-  public static func train(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeRegressor.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLBoostedTreeRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
+  public static func train(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLBoostedTreeRegressor>
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func train(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLBoostedTreeRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
-  public static func makeTrainingSession(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeRegressor.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLBoostedTreeRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
+  public static func makeTrainingSession(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLBoostedTreeRegressor>
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func makeTrainingSession(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeRegressor.ModelParameters = .init(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLBoostedTreeRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func restoreTrainingSession(sessionParameters: CreateML.MLTrainingSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLBoostedTreeRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func resume(_ session: CreateML.MLTrainingSession<CreateML.MLBoostedTreeRegressor>) throws -> CreateML.MLJob<CreateML.MLBoostedTreeRegressor>
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func predictions(from data: TabularData.DataFrame) throws -> TabularData.AnyColumn
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func predictions(from data: CreateML.MLDataTable) throws -> CreateML.MLUntypedColumn
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func evaluation(on labeledData: TabularData.DataFrame) -> CreateML.MLRegressorMetrics
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func evaluation(on labeledData: CreateML.MLDataTable) -> CreateML.MLRegressorMetrics
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
   public struct ModelParameters {
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public var validationData: CreateML.MLDataTable? {
       get
       set
     }
-    @available(macOS 11.0, iOS 15.0, *)
+    @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
     public var validation: CreateML.MLBoostedTreeRegressor.ModelParameters.ValidationData {
       get
       set
@@ -1474,19 +1721,26 @@ public struct MLBoostedTreeRegressor {
     public var earlyStoppingRounds: Swift.Int?
     public var rowSubsample: Swift.Double
     public var columnSubsample: Swift.Double
-    @available(macOS 11.0, iOS 15.0, *)
+    @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
     public init(validation: CreateML.MLBoostedTreeRegressor.ModelParameters.ValidationData, maxDepth: Swift.Int = 6, maxIterations: Swift.Int = 10, minLossReduction: Swift.Double = 0, minChildWeight: Swift.Double = 0.1, randomSeed: Swift.Int = 42, stepSize: Swift.Double = 0.3, earlyStoppingRounds: Swift.Int? = nil, rowSubsample: Swift.Double = 1.0, columnSubsample: Swift.Double = 1.0)
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public init(validationData: CreateML.MLDataTable? = nil, maxDepth: Swift.Int = 6, maxIterations: Swift.Int = 10, minLossReduction: Swift.Double = 0, minChildWeight: Swift.Double = 0.1, randomSeed: Swift.Int = 42, stepSize: Swift.Double = 0.3, earlyStoppingRounds: Swift.Int? = nil, rowSubsample: Swift.Double = 1.0, columnSubsample: Swift.Double = 1.0)
-    @available(macOS 11.0, iOS 15.0, *)
+    @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
     public enum ValidationData {
       case split(strategy: CreateML.MLSplitStrategy)
       case table(CreateML.MLDataTable)
+      @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+      case dataFrame(TabularData.DataFrame)
       case none
     }
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLBoostedTreeRegressor.ModelParameters : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLBoostedTreeRegressor.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1498,7 +1752,7 @@ extension CreateML.MLBoostedTreeRegressor.ModelParameters : Swift.CustomStringCo
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLBoostedTreeRegressor : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1510,7 +1764,7 @@ extension CreateML.MLBoostedTreeRegressor : Swift.CustomStringConvertible, Swift
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 public enum MLDataValue {
   case int(Swift.Int)
   case double(Swift.Double)
@@ -1550,7 +1804,10 @@ public enum MLDataValue {
   public struct MultiArrayType {
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLDataValue : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue {
   public enum ValueType {
     case int
@@ -1567,7 +1824,7 @@ extension CreateML.MLDataValue {
     }
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.ValueType : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1576,7 +1833,7 @@ extension CreateML.MLDataValue.ValueType : Swift.CustomStringConvertible, Swift.
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1585,7 +1842,7 @@ extension CreateML.MLDataValue : Swift.CustomStringConvertible, Swift.CustomDebu
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue : Swift.Hashable {
   public static func == (left: CreateML.MLDataValue, right: CreateML.MLDataValue) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
@@ -1593,14 +1850,14 @@ extension CreateML.MLDataValue : Swift.Hashable {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 public protocol MLDataValueConvertible {
   static var dataValueType: CreateML.MLDataValue.ValueType { get }
   init?(from dataValue: CreateML.MLDataValue)
   init()
   var dataValue: CreateML.MLDataValue { get }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension Swift.Int : CreateML.MLDataValueConvertible {
   public static var dataValueType: CreateML.MLDataValue.ValueType {
     get
@@ -1610,7 +1867,7 @@ extension Swift.Int : CreateML.MLDataValueConvertible {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension Swift.Bool : CreateML.MLDataValueConvertible {
   public static var dataValueType: CreateML.MLDataValue.ValueType {
     get
@@ -1620,7 +1877,7 @@ extension Swift.Bool : CreateML.MLDataValueConvertible {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension Swift.Int64 : CreateML.MLDataValueConvertible {
   public static var dataValueType: CreateML.MLDataValue.ValueType {
     get
@@ -1630,7 +1887,7 @@ extension Swift.Int64 : CreateML.MLDataValueConvertible {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension Swift.Double : CreateML.MLDataValueConvertible {
   public static var dataValueType: CreateML.MLDataValue.ValueType {
     get
@@ -1640,7 +1897,7 @@ extension Swift.Double : CreateML.MLDataValueConvertible {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension Swift.String : CreateML.MLDataValueConvertible {
   public static var dataValueType: CreateML.MLDataValue.ValueType {
     get
@@ -1650,13 +1907,13 @@ extension Swift.String : CreateML.MLDataValueConvertible {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.DictionaryType {
   public typealias Key = CreateML.MLDataValue
   public typealias Value = CreateML.MLDataValue
   public init()
   public init(_ contents: [CreateML.MLDataValue : CreateML.MLDataValue])
-  public init<S>(uniqueKeysWithValues keysAndValues: S) where S : Swift.Sequence, S.Element == (CreateML.MLDataValue.DictionaryType.Key, CreateML.MLDataValue.DictionaryType.Value)
+  public init<S>(uniqueKeysWithValues keysAndValues: S) where S : Swift.Sequence, S.Element == (CreateML.MLDataValue, CreateML.MLDataValue)
   public var count: Swift.Int {
     get
   }
@@ -1667,7 +1924,10 @@ extension CreateML.MLDataValue.DictionaryType {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLDataValue.DictionaryType : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.DictionaryType : Swift.Collection {
   public struct Index : Swift.Comparable {
     public static func == (lhs: CreateML.MLDataValue.DictionaryType.Index, rhs: CreateML.MLDataValue.DictionaryType.Index) -> Swift.Bool
@@ -1688,7 +1948,7 @@ extension CreateML.MLDataValue.DictionaryType : Swift.Collection {
   public typealias Iterator = Swift.IndexingIterator<CreateML.MLDataValue.DictionaryType>
   public typealias SubSequence = Swift.Slice<CreateML.MLDataValue.DictionaryType>
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.DictionaryType : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1697,11 +1957,11 @@ extension CreateML.MLDataValue.DictionaryType : Swift.CustomStringConvertible, S
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.DictionaryType : Swift.Equatable {
   public static func == (lhs: CreateML.MLDataValue.DictionaryType, rhs: CreateML.MLDataValue.DictionaryType) -> Swift.Bool
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.DictionaryType : CreateML.MLDataValueConvertible {
   public static var dataValueType: CreateML.MLDataValue.ValueType {
     get
@@ -1711,7 +1971,7 @@ extension CreateML.MLDataValue.DictionaryType : CreateML.MLDataValueConvertible 
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension Swift.Dictionary : CreateML.MLDataValueConvertible where Key : CreateML.MLDataValueConvertible, Value : CreateML.MLDataValueConvertible {
   public static var dataValueType: CreateML.MLDataValue.ValueType {
     get
@@ -1722,10 +1982,13 @@ extension Swift.Dictionary : CreateML.MLDataValueConvertible where Key : CreateM
     get
   }
 }
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 public func timestampSeed() -> Swift.Int
 @available(macOS 11.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLImageClassifier {
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public struct __Defaults {
     public static let batchSize: Swift.Int
     public static let maximumIterations: Swift.Int
@@ -1738,15 +2001,16 @@ extension CreateML.MLImageClassifier {
   }
 }
 @available(macOS 11.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLStyleTransfer {
-  public struct __Defaults {
+  public struct __Defaults : Swift.Sendable {
     public static let maxIterations: Swift.Int
     public static let textelDensity: Swift.Int
     public static let styleStrength: Swift.Int
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
-public struct MLDecisionTreeClassifier {
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+public struct MLDecisionTreeClassifier : Swift.Sendable {
   public var model: CoreML.MLModel {
     get
   }
@@ -1759,41 +2023,58 @@ public struct MLDecisionTreeClassifier {
   public var validationMetrics: CreateML.MLClassifierMetrics {
     get
   }
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(tvOS, unavailable)
+  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeClassifier.ModelParameters = {
+                    if #available(macOS 10.15, *) {
+                        return ModelParameters(validation: .split(strategy: .automatic))
+                    } else {
+                        return ModelParameters(validationData: nil)
+                    }
+                }()) throws
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(checkpoint: CreateML.MLCheckpoint) throws
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func train(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeClassifier.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLDecisionTreeClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func train(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeClassifier.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLDecisionTreeClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func makeTrainingSession(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeClassifier.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLDecisionTreeClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func makeTrainingSession(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeClassifier.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLDecisionTreeClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func restoreTrainingSession(sessionParameters: CreateML.MLTrainingSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLDecisionTreeClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func resume(_ session: CreateML.MLTrainingSession<CreateML.MLDecisionTreeClassifier>) throws -> CreateML.MLJob<CreateML.MLDecisionTreeClassifier>
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func predictions(from data: TabularData.DataFrame) throws -> TabularData.AnyColumn
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func predictions(from data: CreateML.MLDataTable) throws -> CreateML.MLUntypedColumn
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func evaluation(on labeledData: TabularData.DataFrame) -> CreateML.MLClassifierMetrics
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func evaluation(on labeledData: CreateML.MLDataTable) -> CreateML.MLClassifierMetrics
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
   public struct ModelParameters {
     public var maxDepth: Swift.Int
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public var validationData: CreateML.MLDataTable? {
       get
       set
     }
-    @available(macOS 10.15, iOS 15.0, *)
+    @available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
     public var validation: CreateML.MLDecisionTreeClassifier.ModelParameters.ValidationData {
       get
       set
@@ -1801,21 +2082,26 @@ public struct MLDecisionTreeClassifier {
     public var minLossReduction: Swift.Double
     public var minChildWeight: Swift.Double
     public var randomSeed: Swift.Int
-    @available(macOS 10.15, iOS 15.0, *)
+    @available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
     public init(validation: CreateML.MLDecisionTreeClassifier.ModelParameters.ValidationData = .split(strategy: .automatic), maxDepth: Swift.Int = 6, minLossReduction: Swift.Double = 0, minChildWeight: Swift.Double = 0.1, randomSeed: Swift.Int = 42)
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public init(validationData: CreateML.MLDataTable?, maxDepth: Swift.Int = 6, minLossReduction: Swift.Double = 0, minChildWeight: Swift.Double = 0.1, randomSeed: Swift.Int = 42)
-    @available(macOS 10.15, iOS 15.0, *)
+    @available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
     public enum ValidationData {
       case split(strategy: CreateML.MLSplitStrategy)
       case table(CreateML.MLDataTable)
-      @available(macOS 12.0, iOS 15.0, *)
+      @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
       case dataFrame(TabularData.DataFrame)
       case none
     }
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLDecisionTreeClassifier.ModelParameters : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDecisionTreeClassifier.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1827,7 +2113,7 @@ extension CreateML.MLDecisionTreeClassifier.ModelParameters : Swift.CustomString
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDecisionTreeClassifier : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1840,23 +2126,31 @@ extension CreateML.MLDecisionTreeClassifier : Swift.CustomStringConvertible, Swi
   }
 }
 @available(macOS 10.15, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLSoundClassifier {
   public enum DataSource {
     case labeledDirectories(at: Foundation.URL)
     case labeledFiles(at: Foundation.URL)
     @available(macOS 11.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     case filesByLabel([Swift.String : [Foundation.URL]])
     @available(macOS 11.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     case features(table: CreateML.MLDataTable, featureColumn: Swift.String = __Defaults.featureColumnName, labelColumn: Swift.String = __Defaults.labelColumnName, parameters: CreateML.MLSoundClassifier.FeatureExtractionParameters = FeatureExtractionParameters())
     @available(macOS 12.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     case featuresDataFrame(TabularData.DataFrame, featureColumn: Swift.String = __Defaults.featureColumnName, labelColumn: Swift.String = __Defaults.labelColumnName, parameters: CreateML.MLSoundClassifier.FeatureExtractionParameters = FeatureExtractionParameters())
     public func labeledSounds() throws -> [Swift.String : [Foundation.URL]]
     public func stratifiedSplit(proportions: [Swift.Double], seed: Swift.Int = timestampSeed()) throws -> [[Swift.String : [Foundation.URL]]]
     public func stratifiedSplit<RNG>(proportions: [Swift.Double], generator: inout RNG) throws -> [[Swift.String : [Foundation.URL]]] where RNG : Swift.RandomNumberGenerator
   }
 }
+@available(*, unavailable)
+extension CreateML.MLSoundClassifier.DataSource : Swift.Sendable {
+}
 @available(macOS 10.14, iOS 15.0, *)
-public struct MLTextClassifier {
+@available(tvOS, unavailable)
+public struct MLTextClassifier : Swift.Sendable {
   public var model: CoreML.MLModel {
     get
   }
@@ -1867,20 +2161,49 @@ public struct MLTextClassifier {
   public var validationMetrics: CreateML.MLClassifierMetrics {
     get
   }
+  @available(macOS 10.15, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public init(trainingData: CreateML.MLTextClassifier.DataSource, parameters: CreateML.MLTextClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
+  @available(macOS 10.15, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public init(trainingData: [Swift.String : [Swift.String]], parameters: CreateML.MLTextClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  public init(trainingData: CreateML.MLDataTable, textColumn: Swift.String, labelColumn: Swift.String, parameters: CreateML.MLTextClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
+  @available(macOS 13.0, iOS 16.0, *)
+  @available(tvOS, unavailable)
+  public init(trainingData: TabularData.DataFrame, textColumn: Swift.String, labelColumn: Swift.String, parameters: CreateML.MLTextClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataSource instead of MLDataTable when initializing.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(tvOS, unavailable)
+  public init(trainingData: CreateML.MLDataTable, textColumn: Swift.String, labelColumn: Swift.String, parameters: CreateML.MLTextClassifier.ModelParameters = {
+                    if #available(macOS 10.15, *) {
+                        return ModelParameters(validation: .split(strategy: .automatic))
+                    } else {
+                        return ModelParameters(validationData: nil)
+                    }
+                }()) throws
   public func prediction(from text: Swift.String) throws -> Swift.String
   public func predictions(from texts: [Swift.String]) throws -> [Swift.String]
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataSource instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func predictions(from texts: CreateML.MLDataColumn<Swift.String>) throws -> CreateML.MLDataColumn<Swift.String>
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public func predictionWithConfidence(from text: Swift.String) throws -> [Swift.String : Swift.Double]
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public func predictionsWithConfidence(from texts: [Swift.String]) throws -> [[Swift.String : Swift.Double]]
-  @available(macOS 11.0, iOS 15.0, *)
+  @available(macOS, introduced: 11.0, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func predictionsWithConfidence(from texts: CreateML.MLDataColumn<Swift.String>) throws -> CreateML.MLDataColumn<[Swift.String : Swift.Double]>
   public func evaluation(on labeledTexts: CreateML.MLTextClassifier.DataSource) -> CreateML.MLClassifierMetrics
   public func evaluation(on labeledTexts: [Swift.String : [Swift.String]]) -> CreateML.MLClassifierMetrics
+  @available(macOS 13.0, iOS 16.0, *)
+  @available(tvOS, unavailable)
+  public func evaluation(on dataFrame: TabularData.DataFrame, textColumn: Swift.String, labelColumn: Swift.String) -> CreateML.MLClassifierMetrics
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func evaluation(on labeledTexts: CreateML.MLDataTable, textColumn: Swift.String, labelColumn: Swift.String) -> CreateML.MLClassifierMetrics
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
@@ -1893,61 +2216,92 @@ public struct MLTextClassifier {
     public var algorithm: CreateML.MLTextClassifier.ModelAlgorithmType
     public var language: NaturalLanguage.NLLanguage?
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public var validationData: CreateML.MLDataTable? {
       get
       set
     }
     @available(macOS 10.15, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public var validation: CreateML.MLTextClassifier.ModelParameters.ValidationData {
       get
       set
     }
-    @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property.")
+    @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public var textColumnValidationData: Swift.String? {
       get
       set
     }
-    @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property.")
+    @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public var labelColumnValidationData: Swift.String? {
       get
       set
     }
     @available(macOS 11.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public var maxIterations: Swift.Int? {
       get
       set
     }
     @available(macOS 10.15, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public init(validation: CreateML.MLTextClassifier.ModelParameters.ValidationData = .split(strategy: .automatic), algorithm: CreateML.MLTextClassifier.ModelAlgorithmType = .maxEnt(revision: 1), language: NaturalLanguage.NLLanguage? = nil)
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public init(validationData: CreateML.MLDataTable? = nil, algorithm: CreateML.MLTextClassifier.ModelAlgorithmType = .maxEnt(revision: 1), language: NaturalLanguage.NLLanguage? = nil, textColumnValidationData: Swift.String? = nil, labelColumnValidationData: Swift.String? = nil)
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public init(validationData: [Swift.String : [Swift.String]], algorithm: CreateML.MLTextClassifier.ModelAlgorithmType = .maxEnt(revision: 1), language: NaturalLanguage.NLLanguage? = nil)
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public init(validationData: CreateML.MLTextClassifier.DataSource, algorithm: CreateML.MLTextClassifier.ModelAlgorithmType = .maxEnt(revision: 1), language: NaturalLanguage.NLLanguage? = nil)
     @available(macOS 10.15, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public enum ValidationData {
       case split(strategy: CreateML.MLSplitStrategy)
       case table(CreateML.MLDataTable, textColumn: Swift.String, labelColumn: Swift.String)
+      @available(macOS 13.0, iOS 16.0, *)
+      @available(tvOS, unavailable)
+      case dataFrame(TabularData.DataFrame, textColumn: Swift.String, labelColumn: Swift.String)
       case dataSource(CreateML.MLTextClassifier.DataSource)
       case dictionary([Swift.String : [Swift.String]])
       case none
     }
   }
-  public enum ModelAlgorithmType {
+  public enum ModelAlgorithmType : Swift.Sendable {
     case maxEnt(revision: Swift.Int?)
     case crf(revision: Swift.Int?)
     @available(macOS 10.15, iOS 15.0, *)
+    @available(tvOS, unavailable)
     case transferLearning(CreateML.MLTextClassifier.FeatureExtractorType, revision: Swift.Int?)
   }
   @available(macOS 10.15, iOS 15.0, *)
-  public enum FeatureExtractorType {
+  @available(tvOS, unavailable)
+  public enum FeatureExtractorType : Swift.Sendable {
     case staticEmbedding
     case dynamicEmbedding
     case customEmbedding(Foundation.URL)
   }
 }
+@available(*, unavailable)
+extension CreateML.MLTextClassifier.DataSource : Swift.Sendable {
+}
+@available(*, unavailable)
+extension CreateML.MLTextClassifier.ModelParameters : Swift.Sendable {
+}
+@available(*, unavailable)
+extension CreateML.MLTextClassifier.ModelParameters.ValidationData : Swift.Sendable {
+}
 @available(macOS 10.14, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLTextClassifier.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1960,6 +2314,7 @@ extension CreateML.MLTextClassifier.ModelParameters : Swift.CustomStringConverti
   }
 }
 @available(macOS 10.14, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLTextClassifier : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1972,6 +2327,7 @@ extension CreateML.MLTextClassifier : Swift.CustomStringConvertible, Swift.Custo
   }
 }
 @available(macOS 10.14, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLTextClassifier.ModelAlgorithmType : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1984,6 +2340,7 @@ extension CreateML.MLTextClassifier.ModelAlgorithmType : Swift.CustomStringConve
   }
 }
 @available(macOS 10.15, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLTextClassifier.FeatureExtractorType : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -1996,8 +2353,10 @@ extension CreateML.MLTextClassifier.FeatureExtractorType : Swift.CustomStringCon
   }
 }
 @available(macOS 10.15, iOS 15.0, *)
-public struct MLSoundClassifier {
-  @available(macOS 11.0, *)
+@available(tvOS, unavailable)
+public struct MLSoundClassifier : Swift.Sendable {
+  @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   public var model: CoreML.MLModel {
     get
@@ -2010,31 +2369,44 @@ public struct MLSoundClassifier {
     get
   }
   public init(trainingData: CreateML.MLSoundClassifier.DataSource, parameters: CreateML.MLSoundClassifier.ModelParameters = ModelParameters()) throws
-  @available(macOS, introduced: 10.15, deprecated: 11.0, message: "Use DataSource.filesByLabel to provide dictionary training data instead")
+  @available(macOS, introduced: 10.15, deprecated: 11.0, message: "Use DataSource.filesByLabel to provide dictionary training data instead.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataSource.filesByLabel to provide dictionary training data instead.")
+  @available(tvOS, unavailable)
   public init(trainingData: [Swift.String : [Foundation.URL]], parameters: CreateML.MLSoundClassifier.ModelParameters = ModelParameters()) throws
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public init(checkpoint: CreateML.MLCheckpoint) throws
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public static func train(trainingData: CreateML.MLSoundClassifier.DataSource, parameters: CreateML.MLSoundClassifier.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLSoundClassifier>
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public static func train(trainingData: [Swift.String : [Foundation.URL]], parameters: CreateML.MLSoundClassifier.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLSoundClassifier>
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public static func extractFeatures(trainingData: CreateML.MLSoundClassifier.DataSource, parameters: CreateML.MLSoundClassifier.FeatureExtractionParameters = FeatureExtractionParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLSoundClassifier.DataSource>
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public static func makeTrainingSession(trainingData: CreateML.MLSoundClassifier.DataSource, parameters: CreateML.MLSoundClassifier.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLSoundClassifier>
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public static func restoreTrainingSession(sessionParameters: CreateML.MLTrainingSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLSoundClassifier>
   @available(macOS 11.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public static func resume(_ session: CreateML.MLTrainingSession<CreateML.MLSoundClassifier>) throws -> CreateML.MLJob<CreateML.MLSoundClassifier>
   public func evaluation(on testingData: CreateML.MLSoundClassifier.DataSource) -> CreateML.MLClassifierMetrics
-  @available(macOS, introduced: 10.15, deprecated: 11.0, message: "Use DataSource.filesByLabel to provide dictionary testing data instead")
+  @available(macOS, introduced: 10.15, deprecated: 11.0, message: "Use DataSource.filesByLabel to provide dictionary testing data instead.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataSource.filesByLabel to provide dictionary testing data instead.")
+  @available(tvOS, unavailable)
   public func evaluation(on testingData: [Swift.String : [Foundation.URL]]) -> CreateML.MLClassifierMetrics
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
   @available(macOS 11.0, iOS 15.0, *)
-  public struct FeatureExtractionParameters {
+  @available(tvOS, unavailable)
+  public struct FeatureExtractionParameters : Swift.Sendable {
     public var overlapFactor: Swift.Double
     @available(macOS 12.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public var featureExtractionTimeWindowSize: Foundation.TimeInterval {
       get
       set
@@ -2042,13 +2414,16 @@ public struct MLSoundClassifier {
     public var featureExtractor: CreateML.MLSoundClassifier.ModelParameters.FeatureExtractorType
     public init(overlapFactor: Swift.Double = __Defaults.overlapFactor, featureExtractor: CreateML.MLSoundClassifier.ModelParameters.FeatureExtractorType = __Defaults.featureExtractor)
     @available(macOS 12.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     public init(overlapFactor: Swift.Double = __Defaults.overlapFactor, featureExtractor: CreateML.MLSoundClassifier.ModelParameters.FeatureExtractorType = __Defaults.featureExtractor, featureExtractionTimeWindowSize: Foundation.TimeInterval?)
   }
   public func predictions(from audioFiles: [Foundation.URL]) throws -> [Swift.String]
   @available(macOS 12.0, iOS 15.0, *)
+  @available(tvOS, unavailable)
   public func predictions(from audioFiles: [Foundation.URL], overlapFactor: Swift.Double, predictionTimeWindowSize: Foundation.TimeInterval) throws -> [Swift.String]
 }
 @available(macOS 10.15, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLSoundClassifier : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -2061,8 +2436,9 @@ extension CreateML.MLSoundClassifier : Swift.CustomStringConvertible, Swift.Cust
   }
 }
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandActionClassifier {
-  public struct VideoAugmentationOptions : Swift.OptionSet, Swift.Codable {
+  public struct VideoAugmentationOptions : Swift.OptionSet, Swift.Codable, Swift.Sendable {
     public let rawValue: Swift.Int
     public static let horizontallyFlip: CreateML.MLHandActionClassifier.VideoAugmentationOptions
     public static let rotate: CreateML.MLHandActionClassifier.VideoAugmentationOptions
@@ -2077,6 +2453,7 @@ extension CreateML.MLHandActionClassifier {
   }
 }
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandActionClassifier {
   public enum DataSource {
     case directoryWithVideosAndAnnotation(at: Foundation.URL, annotationFile: Foundation.URL, videoColumn: Swift.String, labelColumn: Swift.String, startTimeColumn: Swift.String? = nil, endTimeColumn: Swift.String? = nil)
@@ -2091,12 +2468,16 @@ extension CreateML.MLHandActionClassifier {
     public func stratifiedSplit(proportions: [Swift.Double], seed: Swift.Int = timestampSeed(), labelColumn: Swift.String) throws -> CreateML.MLDataTable
   }
 }
+@available(*, unavailable)
+extension CreateML.MLHandActionClassifier.DataSource : Swift.Sendable {
+}
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandActionClassifier.DataSource {
   public func labeledMedia() throws -> [Swift.String : [Foundation.URL]]
 }
-@available(macOS 11.0, iOS 15.0, *)
-public enum MLPhase : Swift.String, Swift.Codable {
+@available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
+public enum MLPhase : Swift.String, Swift.Codable, Swift.Sendable {
   case initialized
   case extractingFeatures
   case training
@@ -2108,7 +2489,7 @@ public enum MLPhase : Swift.String, Swift.Codable {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 public struct MLDataTable {
   public var error: Swift.Error? {
     get
@@ -2126,7 +2507,7 @@ public struct MLDataTable {
   public init(contentsOf url: Foundation.URL, options: CreateML.MLDataTable.ParsingOptions = ParsingOptions()) throws
   public init(namedColumns: [Swift.String : CreateML.MLUntypedColumn]) throws
   public init(dictionary: [Swift.String : CreateML.MLDataValueConvertible]) throws
-  public struct ParsingOptions {
+  public struct ParsingOptions : Swift.Sendable {
     public var containsHeader: Swift.Bool
     public var delimiter: Swift.String
     public var comment: Swift.String
@@ -2166,20 +2547,20 @@ public struct MLDataTable {
   public mutating func removeColumn(named: Swift.String)
   public mutating func renameColumn(named: Swift.String, to: Swift.String)
   public mutating func append(contentsOf newTable: CreateML.MLDataTable)
-  @available(macOS 11.0, *)
+  @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
   public func randomSplitBySequence(proportion: Swift.Double, by sequenceIdentifierColumn: Swift.String, on column: Swift.String, seed: Swift.Int = 1) -> (CreateML.MLDataTable, remaining: CreateML.MLDataTable)
   public func randomSplit(by proportion: Swift.Double, seed: Swift.Int = 1) -> (CreateML.MLDataTable, CreateML.MLDataTable)
   public func stratifiedSplit(proportions: [Swift.Double], on column: Swift.String, seed: Swift.Int = timestampSeed()) throws -> CreateML.MLDataTable
   public func stratifiedSplit<RNG>(proportions: [Swift.Double], on column: Swift.String, generator: inout RNG) throws -> CreateML.MLDataTable where RNG : Swift.RandomNumberGenerator
-  @available(macOS 11.0, *)
+  @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
   public func stratifiedSplitBySequence<RNG>(proportions: [Swift.Double], by sequenceIdentifierColumn: Swift.String, on column: Swift.String, generator: inout RNG) throws -> CreateML.MLDataTable where RNG : Swift.RandomNumberGenerator
-  @available(macOS 11.0, *)
+  @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
   public func stratifiedSplitBySequence(proportions: [Swift.Double], by sequenceIdentifierColumn: Swift.String, on column: Swift.String, seed: Swift.Int = timestampSeed()) throws -> CreateML.MLDataTable
   public func randomSample(by proportion: Swift.Double, seed: Swift.Int = 42) -> CreateML.MLDataTable
   public func intersect<T>(_ values: T..., of columnNamed: Swift.String) -> CreateML.MLDataTable where T : CreateML.MLDataValueConvertible
   public func exclude<T>(_ values: T..., of columnNamed: Swift.String) -> CreateML.MLDataTable where T : CreateML.MLDataValueConvertible
   public func join(with: CreateML.MLDataTable, on columnsNamed: Swift.String..., type: CreateML.MLDataTable.JoinType = .inner) -> CreateML.MLDataTable
-  public enum JoinType {
+  public enum JoinType : Swift.Sendable {
     case inner
     case outer
     case left
@@ -2191,11 +2572,11 @@ public struct MLDataTable {
     }
   }
   public func group<S>(columnsNamed: Swift.String..., aggregators: S) -> CreateML.MLDataTable where S : Swift.Sequence, S.Element == CreateML.MLDataTable.Aggregator
-  public struct Aggregator {
+  public struct Aggregator : Swift.Sendable {
     public var operations: [CreateML.MLDataTable.Aggregator.Operations]
     public var columnName: Swift.String
     public init(operations: CreateML.MLDataTable.Aggregator.Operations..., of columnNamed: Swift.String)
-    public enum Operations {
+    public enum Operations : Swift.Sendable {
       case min
       case max
       case sum
@@ -2228,7 +2609,7 @@ public struct MLDataTable {
   public func expand(columnNamed: Swift.String, to: Swift.String) -> CreateML.MLDataTable
   public func condense(columnNamed: Swift.String, to: Swift.String) -> CreateML.MLDataTable
   public func pack(columnsNamed: Swift.String..., to: Swift.String, type: CreateML.MLDataTable.PackType = .sequence, filling: CreateML.MLDataValue = MLDataValue.invalid) -> CreateML.MLDataTable
-  public enum PackType {
+  public enum PackType : Swift.Sendable {
     case sequence
     case dictionary
     public static func == (a: CreateML.MLDataTable.PackType, b: CreateML.MLDataTable.PackType) -> Swift.Bool
@@ -2239,14 +2620,17 @@ public struct MLDataTable {
   }
   public func unpack(columnNamed: Swift.String, valueTypes: [CreateML.MLDataValue.ValueType]? = nil, indexSubset: [Swift.Int]? = nil, keySubset: [Swift.String]? = nil) -> CreateML.MLDataTable
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLDataTable : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable {
   public func write(to directoryURL: Foundation.URL) throws
   public func write(toDirectory path: Swift.String) throws
   public func writeCSV(to fileURL: Foundation.URL) throws
   public func writeCSV(toFile path: Swift.String) throws
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable {
   public struct Row {
     public typealias Keys = CreateML.MLDataTable.ColumnNames
@@ -2268,7 +2652,13 @@ extension CreateML.MLDataTable {
   public struct Rows {
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLDataTable.Row : Swift.Sendable {
+}
+@available(*, unavailable)
+extension CreateML.MLDataTable.Rows : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.Row {
   public struct Values : Swift.RandomAccessCollection {
     public var startIndex: Swift.Int {
@@ -2287,7 +2677,10 @@ extension CreateML.MLDataTable.Row {
     public typealias SubSequence = Swift.Slice<CreateML.MLDataTable.Row.Values>
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLDataTable.Row.Values : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.Row : Swift.Collection {
   public typealias Element = (CreateML.MLDataTable.Row.Key, CreateML.MLDataTable.Row.Value)
   public typealias Index = Swift.Int
@@ -2312,11 +2705,11 @@ extension CreateML.MLDataTable.Row : Swift.Collection {
   public typealias Iterator = Swift.IndexingIterator<CreateML.MLDataTable.Row>
   public typealias SubSequence = Swift.Slice<CreateML.MLDataTable.Row>
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.Row : Swift.Equatable {
   public static func == (lhs: CreateML.MLDataTable.Row, rhs: CreateML.MLDataTable.Row) -> Swift.Bool
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.Rows : Swift.RandomAccessCollection {
   public typealias Element = CreateML.MLDataTable.Row
   public subscript(index: Swift.Int) -> CreateML.MLDataTable.Rows.Element {
@@ -2333,13 +2726,13 @@ extension CreateML.MLDataTable.Rows : Swift.RandomAccessCollection {
   public typealias Iterator = Swift.IndexingIterator<CreateML.MLDataTable.Rows>
   public typealias SubSequence = Swift.Slice<CreateML.MLDataTable.Rows>
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable {
   public var rows: CreateML.MLDataTable.Rows {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable : Swift.CustomStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var playgroundDescription: Any {
     get
@@ -2348,7 +2741,7 @@ extension CreateML.MLDataTable : Swift.CustomStringConvertible, Swift.CustomPlay
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable {
   public struct ColumnNames : Swift.RandomAccessCollection {
     public var startIndex: Swift.Int {
@@ -2370,11 +2763,14 @@ extension CreateML.MLDataTable {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLDataTable.ColumnNames : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.ColumnNames : Swift.Equatable {
   public static func == (lhs: CreateML.MLDataTable.ColumnNames, rhs: CreateML.MLDataTable.ColumnNames) -> Swift.Bool
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.ColumnNames : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -2386,7 +2782,7 @@ extension CreateML.MLDataTable.ColumnNames : Swift.CustomStringConvertible, Swif
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.Rows : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -2398,11 +2794,11 @@ extension CreateML.MLDataTable.Rows : Swift.CustomStringConvertible, Swift.Custo
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.Row.Values : Swift.Equatable {
   public static func == (lhs: CreateML.MLDataTable.Row.Values, rhs: CreateML.MLDataTable.Row.Values) -> Swift.Bool
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.Row : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -2414,7 +2810,7 @@ extension CreateML.MLDataTable.Row : Swift.CustomStringConvertible, Swift.Custom
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.Row.Values : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -2426,8 +2822,8 @@ extension CreateML.MLDataTable.Row.Values : Swift.CustomStringConvertible, Swift
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
-public struct MLBoostedTreeClassifier {
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+public struct MLBoostedTreeClassifier : Swift.Sendable {
   public var model: CoreML.MLModel {
     get
   }
@@ -2440,40 +2836,57 @@ public struct MLBoostedTreeClassifier {
   public var validationMetrics: CreateML.MLClassifierMetrics {
     get
   }
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(tvOS, unavailable)
+  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeClassifier.ModelParameters = {
+                    if #available(macOS 10.15, *) {
+                        return ModelParameters(validation: .split(strategy: .automatic))
+                    } else {
+                        return ModelParameters(validationData: nil)
+                    }
+                }()) throws
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(checkpoint: CreateML.MLCheckpoint) throws
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func train(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeClassifier.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLBoostedTreeClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func train(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeClassifier.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLBoostedTreeClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func makeTrainingSession(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeClassifier.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLBoostedTreeClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func makeTrainingSession(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeClassifier.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLBoostedTreeClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func restoreTrainingSession(sessionParameters: CreateML.MLTrainingSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLBoostedTreeClassifier>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func resume(_ session: CreateML.MLTrainingSession<CreateML.MLBoostedTreeClassifier>) throws -> CreateML.MLJob<CreateML.MLBoostedTreeClassifier>
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func predictions(from data: TabularData.DataFrame) throws -> TabularData.AnyColumn
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func predictions(from data: CreateML.MLDataTable) throws -> CreateML.MLUntypedColumn
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func evaluation(on labeledData: TabularData.DataFrame) -> CreateML.MLClassifierMetrics
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func evaluation(on labeledData: CreateML.MLDataTable) -> CreateML.MLClassifierMetrics
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
   public struct ModelParameters {
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public var validationData: CreateML.MLDataTable? {
       get
       set
     }
-    @available(macOS 10.15, iOS 15.0, *)
+    @available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
     public var validation: CreateML.MLBoostedTreeClassifier.ModelParameters.ValidationData {
       get
       set
@@ -2487,21 +2900,26 @@ public struct MLBoostedTreeClassifier {
     public var earlyStoppingRounds: Swift.Int?
     public var rowSubsample: Swift.Double
     public var columnSubsample: Swift.Double
-    @available(macOS 10.15, iOS 15.0, *)
+    @available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
     public init(validation: CreateML.MLBoostedTreeClassifier.ModelParameters.ValidationData = .split(strategy: .automatic), maxDepth: Swift.Int = 6, maxIterations: Swift.Int = 10, minLossReduction: Swift.Double = 0, minChildWeight: Swift.Double = 0.1, randomSeed: Swift.Int = 42, stepSize: Swift.Double = 0.3, earlyStoppingRounds: Swift.Int? = nil, rowSubsample: Swift.Double = 1.0, columnSubsample: Swift.Double = 1.0)
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public init(validationData: CreateML.MLDataTable?, maxDepth: Swift.Int = 6, maxIterations: Swift.Int = 10, minLossReduction: Swift.Double = 0, minChildWeight: Swift.Double = 0.1, randomSeed: Swift.Int = 42, stepSize: Swift.Double = 0.3, earlyStoppingRounds: Swift.Int? = nil, rowSubsample: Swift.Double = 1.0, columnSubsample: Swift.Double = 1.0)
-    @available(macOS 10.15, iOS 15.0, *)
+    @available(macOS 10.15, iOS 15.0, tvOS 16.0, *)
     public enum ValidationData {
       case split(strategy: CreateML.MLSplitStrategy)
       case table(CreateML.MLDataTable)
-      @available(macOS 12.0, iOS 15.0, *)
+      @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
       case dataFrame(TabularData.DataFrame)
       case none
     }
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLBoostedTreeClassifier.ModelParameters : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLBoostedTreeClassifier.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -2513,7 +2931,7 @@ extension CreateML.MLBoostedTreeClassifier.ModelParameters : Swift.CustomStringC
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLBoostedTreeClassifier : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -2526,11 +2944,13 @@ extension CreateML.MLBoostedTreeClassifier : Swift.CustomStringConvertible, Swif
   }
 }
 @available(macOS 10.14, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLImageClassifier {
-  public enum DataSource {
+  public enum DataSource : Swift.Sendable {
     case labeledDirectories(at: Foundation.URL)
     case labeledFiles(at: Foundation.URL)
     @available(macOS 11.0, iOS 15.0, *)
+    @available(tvOS, unavailable)
     case filesByLabel([Swift.String : [Foundation.URL]])
     public func labeledImages() throws -> [Swift.String : [Foundation.URL]]
     public func stratifiedSplit(proportions: [Swift.Double], seed: Swift.Int = timestampSeed()) throws -> [[Swift.String : [Foundation.URL]]]
@@ -2538,6 +2958,7 @@ extension CreateML.MLImageClassifier {
   }
 }
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandPoseClassifier {
   public enum DataSource {
     case directoryWithImagesAndAnnotation(at: Foundation.URL, annotationFile: Foundation.URL, imageColumn: Swift.String, labelColumn: Swift.String)
@@ -2552,12 +2973,16 @@ extension CreateML.MLHandPoseClassifier {
     public func stratifiedSplit(proportions: [Swift.Double], seed: Swift.Int = timestampSeed(), labelColumn: Swift.String) throws -> CreateML.MLDataTable
   }
 }
+@available(*, unavailable)
+extension CreateML.MLHandPoseClassifier.DataSource : Swift.Sendable {
+}
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandPoseClassifier.DataSource {
   public func labeledMedia() throws -> [Swift.String : [Foundation.URL]]
 }
-@available(macOS 10.14, iOS 15.0, *)
-public struct MLLinearRegressor {
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
+public struct MLLinearRegressor : Swift.Sendable {
   public var model: CoreML.MLModel {
     get
   }
@@ -2570,40 +2995,57 @@ public struct MLLinearRegressor {
   public var validationMetrics: CreateML.MLRegressorMetrics {
     get
   }
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLinearRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLinearRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable when initializing.")
+  @available(tvOS, unavailable)
+  public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLinearRegressor.ModelParameters = {
+                    if #available(macOS 11.0, *) {
+                        return ModelParameters(validation: .split(strategy: .automatic))
+                    } else {
+                        return ModelParameters(validationData: nil)
+                    }
+                }()) throws
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public init(checkpoint: CreateML.MLCheckpoint) throws
-  @available(macOS 12.0, iOS 15.0, *)
-  public static func train(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLinearRegressor.ModelParameters = ModelParameters(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLLinearRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
+  public static func train(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLinearRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLLinearRegressor>
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func train(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLinearRegressor.ModelParameters = .init(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLJob<CreateML.MLLinearRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
-  public static func makeTrainingSession(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLinearRegressor.ModelParameters = .init(), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLLinearRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
+  public static func makeTrainingSession(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLinearRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLLinearRegressor>
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func makeTrainingSession(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLinearRegressor.ModelParameters = .init(validation: .split(strategy: .automatic)), sessionParameters: CreateML.MLTrainingSessionParameters = _defaultSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLLinearRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func restoreTrainingSession(sessionParameters: CreateML.MLTrainingSessionParameters) throws -> CreateML.MLTrainingSession<CreateML.MLLinearRegressor>
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public static func resume(_ session: CreateML.MLTrainingSession<CreateML.MLLinearRegressor>) throws -> CreateML.MLJob<CreateML.MLLinearRegressor>
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func predictions(from data: TabularData.DataFrame) throws -> TabularData.AnyColumn
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func predictions(from data: CreateML.MLDataTable) throws -> CreateML.MLUntypedColumn
-  @available(macOS 12.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   public func evaluation(on labeledData: TabularData.DataFrame) -> CreateML.MLRegressorMetrics
+  @available(macOS, introduced: 10.14, deprecated: 13.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use DataFrame instead of MLDataTable.")
+  @available(tvOS, unavailable)
   public func evaluation(on labeledData: CreateML.MLDataTable) -> CreateML.MLRegressorMetrics
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
   public struct ModelParameters {
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public var validationData: CreateML.MLDataTable? {
       get
       set
     }
-    @available(macOS 11.0, iOS 15.0, *)
+    @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
     public var validation: CreateML.MLLinearRegressor.ModelParameters.ValidationData {
       get
       set
@@ -2614,19 +3056,26 @@ public struct MLLinearRegressor {
     public var stepSize: Swift.Double
     public var convergenceThreshold: Swift.Double
     public var featureRescaling: Swift.Bool
-    @available(macOS 11.0, iOS 15.0, *)
+    @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
     public init(validation: CreateML.MLLinearRegressor.ModelParameters.ValidationData, maxIterations: Swift.Int = 10, l1Penalty: Swift.Double = 0, l2Penalty: Swift.Double = 0.01, stepSize: Swift.Double = 1.0, convergenceThreshold: Swift.Double = 0.01, featureRescaling: Swift.Bool = true)
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use the validation property instead.")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the validation property instead.")
+    @available(tvOS, unavailable)
     public init(validationData: CreateML.MLDataTable? = nil, maxIterations: Swift.Int = 10, l1Penalty: Swift.Double = 0, l2Penalty: Swift.Double = 0.01, stepSize: Swift.Double = 1.0, convergenceThreshold: Swift.Double = 0.01, featureRescaling: Swift.Bool = true)
-    @available(macOS 11.0, iOS 15.0, *)
+    @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
     public enum ValidationData {
       case split(strategy: CreateML.MLSplitStrategy)
       case table(CreateML.MLDataTable)
+      @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+      case dataFrame(TabularData.DataFrame)
       case none
     }
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLLinearRegressor.ModelParameters : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLLinearRegressor.ModelParameters : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -2638,7 +3087,7 @@ extension CreateML.MLLinearRegressor.ModelParameters : Swift.CustomStringConvert
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLLinearRegressor : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -2651,8 +3100,9 @@ extension CreateML.MLLinearRegressor : Swift.CustomStringConvertible, Swift.Cust
   }
 }
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandPoseClassifier {
-  public struct ImageAugmentationOptions : Swift.OptionSet, Swift.Codable {
+  public struct ImageAugmentationOptions : Swift.OptionSet, Swift.Codable, Swift.Sendable {
     public let rawValue: Swift.Int
     public static let horizontallyFlip: CreateML.MLHandPoseClassifier.ImageAugmentationOptions
     public static let rotate: CreateML.MLHandPoseClassifier.ImageAugmentationOptions
@@ -2664,12 +3114,12 @@ extension CreateML.MLHandPoseClassifier {
     public typealias RawValue = Swift.Int
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 public struct MLUntypedColumn {
   public var count: Swift.Int {
     get
   }
-  @available(macOS 11.0, *)
+  @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
   public var isEmpty: Swift.Bool {
     get
   }
@@ -2710,7 +3160,10 @@ public struct MLUntypedColumn {
   public init()
   public mutating func append(contentsOf newColumn: CreateML.MLUntypedColumn)
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(*, unavailable)
+extension CreateML.MLUntypedColumn : Swift.Sendable {
+}
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLUntypedColumn {
   public static func == (a: CreateML.MLUntypedColumn, b: CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
   public static func != (a: CreateML.MLUntypedColumn, b: CreateML.MLDataValueConvertible) -> CreateML.MLUntypedColumn
@@ -2745,7 +3198,7 @@ extension CreateML.MLUntypedColumn {
   public static func * (a: CreateML.MLUntypedColumn, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
   public static func / (a: CreateML.MLUntypedColumn, b: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLUntypedColumn {
   public subscript(mask: CreateML.MLUntypedColumn) -> CreateML.MLUntypedColumn {
     get
@@ -2766,7 +3219,7 @@ extension CreateML.MLUntypedColumn {
   public func copy() -> CreateML.MLUntypedColumn
   public func materialize() throws -> CreateML.MLUntypedColumn
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLUntypedColumn {
   public init(ints: CreateML.MLUntypedColumn)
   public init(doubles: CreateML.MLUntypedColumn)
@@ -2775,13 +3228,13 @@ extension CreateML.MLUntypedColumn {
   public init(dictionaries: CreateML.MLUntypedColumn)
   public init(multiArrays: CreateML.MLUntypedColumn)
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLUntypedColumn {
   public subscript(index: Swift.Int) -> CreateML.MLDataValue {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLUntypedColumn {
   public subscript(slice: Swift.Range<Swift.Int>) -> CreateML.MLUntypedColumn {
     get
@@ -2790,17 +3243,17 @@ extension CreateML.MLUntypedColumn {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension Swift.Array where Element == CreateML.MLDataValue {
   public init(_ untypedColumn: CreateML.MLUntypedColumn)
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLUntypedColumn : Swift.CustomReflectable {
   public var customMirror: Swift.Mirror {
     get
   }
 }
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLUntypedColumn : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomPlaygroundDisplayConvertible {
   public var description: Swift.String {
     get
@@ -2812,7 +3265,7 @@ extension CreateML.MLUntypedColumn : Swift.CustomStringConvertible, Swift.Custom
     get
   }
 }
-@_hasMissingDesignatedInitializers @available(macOS 11.0, iOS 15.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
 final public class MLJob<Result> : Combine.Cancellable {
   final public let startDate: Foundation.Date
   final public let progress: Foundation.Progress
@@ -2825,202 +3278,48 @@ final public class MLJob<Result> : Combine.Cancellable {
   final public var result: Combine.AnyPublisher<Result, Swift.Error> {
     get
   }
-  @available(macOS 12.0, iOS 15.0, *)
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
   final public var phase: Combine.AnyPublisher<CreateML.MLPhase, Swift.Never> {
     get
   }
   final public func cancel()
   @objc deinit
 }
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV13CausalPaddingC7padding7SwiftNN9ZeroPad1DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV13CausalPaddingC7padding7SwiftNN9ZeroPad1DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC7paddingAC0G7PaddingCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC7paddingAC0G7PaddingCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC11convolution7SwiftNN0H1DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC11convolution7SwiftNN0H1DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC9leakyRelu7SwiftNN9LeakyReLUCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC9leakyRelu7SwiftNN9LeakyReLUCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC6dense17SwiftNN5DenseCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC6dense17SwiftNN5DenseCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC6dense27SwiftNN5DenseCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC6dense27SwiftNN5DenseCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC6conv2d7SwiftNN0H1DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC6conv2d7SwiftNN0H1DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC9leakyRelu7SwiftNN0G4ReLUCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC9leakyRelu7SwiftNN0G4ReLUCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC16featureReductionAC11LeakyConv2DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC16featureReductionAC11LeakyConv2DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC6causalSayAC12CausalConv1DCGvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC6causalSayAC12CausalConv1DCGvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C13convolutionalAC20ConvolutionalNetworkCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C13convolutionalAC20ConvolutionalNetworkCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C16featureExtractorAC3MLPCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C16featureExtractorAC3MLPCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC13dataBatchNorm7SwiftNN0iJ0Cvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC13dataBatchNorm7SwiftNN0iJ0Cvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC26traverseMatrixInnerProduct7SwiftNN5DenseCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC26traverseMatrixInnerProduct7SwiftNN5DenseCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC14inputBatchNorm7SwiftNN0iJ0Cvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC14inputBatchNorm7SwiftNN0iJ0Cvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7dropout7SwiftNN7DropoutCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7dropout7SwiftNN7DropoutCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC5torsoAC5TorsoVvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC5torsoAC5TorsoVvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV5TorsoV12singleStream7SwiftNN10SequentialVyAG6TensorVAKGvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV5TorsoV12singleStream7SwiftNN10SequentialVyAG6TensorVAKGvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV5TorsoV13avgPoolGlobal7SwiftNN0I13AveragePool2DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV5TorsoV13avgPoolGlobal7SwiftNN0I13AveragePool2DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV5TorsoV11linearLayer7SwiftNN5DenseCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV5TorsoV11linearLayer7SwiftNN5DenseCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV5conv17SwiftNN6Conv2DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV5conv17SwiftNN6Conv2DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV8avgPool37SwiftNN13AveragePool2DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV8avgPool37SwiftNN13AveragePool2DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV5conv27SwiftNN6Conv2DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV5conv27SwiftNN6Conv2DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV10batchNorm27SwiftNN9BatchNormCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV10batchNorm27SwiftNN9BatchNormCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7dropout7SwiftNN7DropoutCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7dropout7SwiftNN7DropoutCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV10downSample7SwiftNN10SequentialVyAG6TensorVAKGSgvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV10downSample7SwiftNN10SequentialVyAG6TensorVAKGSgvg_bb0__Pred__src_0_wrt_0 {
-}
 @available(macOS 11.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLStyleTransfer.ModelParameters.ModelAlgorithmType : Swift.Equatable {}
 @available(macOS 11.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLStyleTransfer.ModelParameters.ModelAlgorithmType : Swift.Hashable {}
 @available(macOS 11.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLStyleTransfer.ModelParameters.ModelAlgorithmType : Swift.RawRepresentable {}
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandActionClassifier.ModelParameters.ModelAlgorithmType : Swift.Hashable {}
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLHandPoseClassifier.ModelParameters.ModelAlgorithmType : Swift.Hashable {}
-@available(macOS 11.0, iOS 15.0, *)
-extension CreateML.MLImageClassifier.ModelParameters.ClassifierType : Swift.Hashable {}
 @available(macOS 12.0, iOS 15.0, *)
+@available(tvOS, unavailable)
 extension CreateML.MLSoundClassifier.ModelParameters.FeaturePrintType : Swift.Hashable {}
-@available(macOS 11.0, iOS 15.0, *)
-extension CreateML.MLSoundClassifier.ModelParameters.ClassifierType : Swift.Hashable {}
-@available(macOS 11.0, iOS 15.0, *)
+@available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLProgress.Metric : Swift.RawRepresentable {}
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.ValueType : Swift.Equatable {}
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.ValueType : Swift.Hashable {}
-@available(macOS 11.0, iOS 15.0, *)
+@available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLPhase : Swift.Equatable {}
-@available(macOS 11.0, iOS 15.0, *)
+@available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLPhase : Swift.Hashable {}
-@available(macOS 11.0, iOS 15.0, *)
+@available(macOS 11.0, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLPhase : Swift.RawRepresentable {}
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.JoinType : Swift.Equatable {}
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.JoinType : Swift.Hashable {}
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.PackType : Swift.Equatable {}
-@available(macOS 10.14, iOS 15.0, *)
+@available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataTable.PackType : Swift.Hashable {}

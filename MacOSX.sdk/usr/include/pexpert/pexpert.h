@@ -93,6 +93,9 @@ extern int32_t gPESerialBaud;
 extern uint8_t gPlatformECID[8];
 
 extern uint32_t gPlatformMemoryID;
+#if defined(XNU_TARGET_OS_XR)
+extern uint32_t gPlatformChipRole;
+#endif /* not XNU_TARGET_OS_XR */
 
 unsigned int PE_init_taproot(vm_offset_t *taddr);
 
@@ -341,6 +344,10 @@ extern void PE_init_cpu(void);
 
 extern void PE_handle_ext_interrupt(void);
 
+extern void PE_cpu_power_enable(int cpu_id);
+
+extern void PE_cpu_power_disable(int cpu_id);
+
 #if defined(__arm__) || defined(__arm64__)
 typedef void (*perfmon_interrupt_handler_func)(cpu_id_t source);
 extern kern_return_t PE_cpu_perfmon_interrupt_install_handler(perfmon_interrupt_handler_func handler);
@@ -348,18 +355,15 @@ extern void PE_cpu_perfmon_interrupt_enable(cpu_id_t target, boolean_t enable);
 
 #if DEVELOPMENT || DEBUG
 /* panic_trace boot-arg modes */
-typedef enum {
-	panic_trace_disabled = 0,       /* Tracing disabled (default) */
-	panic_trace_unused,             /* Unused for backward compatibility */
-	panic_trace_enabled,            /* Tracing enabled to SRAM */
-	panic_trace_alt_enabled,        /* Tracing enabled to L2 */
-#ifdef CPU_HAS_TRACE_TO_DRAM
-	panic_trace_dram_enabled,       /* Tracing enabled to DRAM */
-#endif /* CPU_HAS_TRACE_TO_DRAM */
-} panic_trace_t;
+__options_decl(panic_trace_t, uint32_t, {
+	panic_trace_disabled                 = 0x00000000,
+	panic_trace_unused                   = 0x00000001,
+	panic_trace_enabled                  = 0x00000002,
+	panic_trace_alt_enabled              = 0x00000010,
+});
 extern panic_trace_t panic_trace;
 
-extern void PE_arm_debug_enable_trace(void);
+extern void PE_arm_debug_enable_trace(bool should_kprintf);
 extern void (*PE_arm_debug_panic_hook)(const char *str);
 #else
 extern void(*const PE_arm_debug_panic_hook)(const char *str);
@@ -394,6 +398,8 @@ extern const void * const*PE_get_kc_base_pointers(void);
 extern uintptr_t PE_get_kc_slide(kc_kind_t type);
 /* quickly accesss the format of the primary kc */
 extern bool PE_get_primary_kc_format(kc_format_t *type);
+/* gets format of KC of the given type */
+extern bool PE_get_kc_format(kc_kind_t type, kc_format_t *format);
 /* set vnode ptr for kc fileset */
 extern void PE_set_kc_vp(kc_kind_t type, void *vp);
 /* quickly set vnode ptr for kc fileset */

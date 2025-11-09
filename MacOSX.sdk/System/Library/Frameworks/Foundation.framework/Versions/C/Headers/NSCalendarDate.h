@@ -6,7 +6,7 @@
 
 @class NSString, NSArray, NSTimeZone;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if !defined(NS_CALENDAR_ENUM_DEPRECATED)
 #if 1 || NS_ENABLE_CALENDAR_DEPRECATIONS
@@ -80,4 +80,4 @@ NS_SWIFT_UNAVAILABLE("Use NSCalendar and NSDateComponents and NSDateFormatter in
 - (nullable id)initWithString:(NSString *)description API_DEPRECATED("Use NSDateFormatter instead", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

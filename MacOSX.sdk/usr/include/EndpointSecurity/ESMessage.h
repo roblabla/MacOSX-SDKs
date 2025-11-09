@@ -5,6 +5,7 @@
 #error "Please #include <EndpointSecurity/EndpointSecurity.h> instead of this file directly."
 #endif /* __ENDPOINT_SECURITY_INDIRECT__ */
 
+#include <mach/machine.h>
 #include <mach/message.h>
 #include <stdbool.h>
 #include <sys/acl.h>
@@ -28,10 +29,16 @@
  * @brief es_file_t provides the stat information and path to a file that relates to a security
  * event. The path may be truncated, which is indicated by the path_truncated flag.
  *
- * @discussion Currently, path lengths are supported up to 16K in length (though this
- * number is subject to change at any time and users must not rely on this value being
- * constant). If a path is longer than the supported maximum length, it will be marked
- * as truncated via the `path_truncated` member.
+ * @field path Absolute path of the file
+ * @field path_truncated Indicates if the path field was truncated
+ * @field stat stat of file. See `man 2 stat` for details
+ *
+ * @note For the FAT family of filesystems the `stat.st_ino` field is set to 999999999 for empty files
+ *
+ * @discussion For files with a link count greater than 1, the absolute path given may not be the only absolute path that exists, and which hard link the emitted path points to is undefined.
+ *
+ * Overlong paths are truncated at a maximum length that currently is 16K, though that number is not considered API and may change at any time.
+ *
  */
 typedef struct {
 	es_string_token_t path;
@@ -50,8 +57,8 @@ typedef struct {
 
 /**
  * @brief Information related to a process. This is used both for describing processes that
- * instigated an event (e.g. in the case of the `es_message_t` `process` field, or are targets
- * of an event (e.g. for exec events this describes the new process being executed, for signal
+ * performed an action (e.g. in the case of the `es_message_t` `process` field, or are targets
+ * of an action (e.g. for exec events this describes the new process being executed, for signal
  * events this describes the process that will receive the signal).
  *
  * @field audit_token Audit token of the process.
@@ -142,7 +149,6 @@ typedef struct {
 	es_token_t state;
 } es_thread_state_t;
 
-
 /**
  * @brief Structure for describing an open file descriptor
  *
@@ -163,6 +169,35 @@ typedef struct {
 	};
 } es_fd_t;
 
+typedef enum {
+	ES_BTM_ITEM_TYPE_USER_ITEM,
+	ES_BTM_ITEM_TYPE_APP,
+	ES_BTM_ITEM_TYPE_LOGIN_ITEM,
+	ES_BTM_ITEM_TYPE_AGENT,
+	ES_BTM_ITEM_TYPE_DAEMON
+} es_btm_item_type_t;
+
+/**
+ * @brief Structure describing a BTM launch item
+ *
+ * @field item_type             Type of launch item.
+ * @field legacy                True iff item is a legacy plist.
+ * @field managed               True iff item is managed by MDM.
+ * @field uid                   User ID for the item (may be user nobody (-2)).
+ * @field item_url              URL for item.
+ *                              If file URL describing a relative path, it is relative
+ *                              to app_url.
+ * @field app_url               Optional.  URL for app the item is attributed to.
+ */
+typedef struct {
+	es_btm_item_type_t item_type;
+	bool legacy;
+	bool managed;
+	uid_t uid;
+	es_string_token_t item_url;
+	es_string_token_t app_url;
+} es_btm_launch_item_t;
+
 /**
  * @brief Execute a new process
  *
@@ -179,6 +214,11 @@ typedef struct {
  *        number of file descriptors available in the message.  File descriptors for open files are
  *        not necessarily contiguous.  The exact number of open file descriptors is not available.
  *        Field available only if message version >= 4.
+ * @field image_cputype The CPU type of the executable image which is being executed.
+ *        In case of translation, this may be a different architecture than the one of the system.
+ *        Field available only if message version >= 6.
+ * @field image_cpusubtype The CPU subtype of the executable image.
+ *        Field available only if message version >= 6.
  *
  * @note Process arguments, environment variables and file descriptors are packed, use API functions
  * to access them: `es_exec_arg`, `es_exec_arg_count`, `es_exec_env`, `es_exec_env_count`,
@@ -187,6 +227,9 @@ typedef struct {
  * @note The API may only return descriptions for a subset of open file descriptors; how many and
  * which file descriptors are available as part of exec events is not considered API and can change
  * in future releases.
+ *
+ * @note The CPU type and subtype correspond to CPU_TYPE_* and CPU_SUBTYPE_* macros defined in
+ * `<mach/machine.h>`.
  *
  * @note Fields related to code signing in `target` represent kernel state for the process at the
  * point in time the exec has completed, but the binary has not started running yet.  Because code
@@ -204,6 +247,8 @@ typedef struct {
  * `audit_token_t` structs contained in the two different `es_process_t` structs will not be
  * identical: the pidversion field will be updated, and the UID/GID values may be different if the
  * new program had setuid/setgid permission bits set.
+ *
+ * @note Cache key for this event type:  (process executable file, target executable file)
  */
 typedef struct {
 	es_process_t * _Nonnull target;
@@ -214,6 +259,8 @@ typedef struct {
 			es_file_t * _Nullable script; /* field available only if message version >= 2 */
 			es_file_t * _Nonnull cwd; /* field available only if message version >= 3 */
 			int last_fd; /* field available only if message version >= 4 */
+			cpu_type_t image_cputype; /* field available only if message version >= 6 */
+			cpu_subtype_t image_cpusubtype; /* field available only if message version >= 6 */
 		};
 	};
 } es_event_exec_t;
@@ -229,6 +276,8 @@ typedef struct {
  * es_respond_flags_result(), ensure that the same FFLAG values are used (e.g. FREAD, FWRITE instead
  * of O_RDONLY, O_RDWR, etc...).
  *
+ * @note Cache key for this event type:  (process executable file, file that will be opened)
+ *
  * @see fcntl.h
  */
 typedef struct {
@@ -241,6 +290,8 @@ typedef struct {
  * @brief Load a kernel extension
  *
  * @field identifier The signing identifier of the kext being loaded
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_string_token_t identifier;
@@ -251,6 +302,8 @@ typedef struct {
  * @brief Unload a kernel extension
  *
  * @field identifier The signing identifier of the kext being unloaded
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	es_string_token_t identifier;
@@ -265,6 +318,8 @@ typedef struct {
  *
  * @note This event can fire multiple times for a single syscall, for example when the syscall
  *       has to be retried due to racing VFS operations.
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -280,6 +335,8 @@ typedef struct {
  * @field flags The type and attributes of the mapped file
  * @field file_pos The offset into `source` that will be mapped
  * @field source The file system object being mapped
+ *
+ * @note Cache key for this event type:  (process executable file, source file)
  */
 typedef struct {
 	int32_t protection;
@@ -296,6 +353,8 @@ typedef struct {
  * @field source The existing object to which a hard link will be created
  * @field target_dir The directory in which the link will be created
  * @field target_filename The name of the new object linked to `source`
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_file_t * _Nonnull source;
@@ -308,6 +367,8 @@ typedef struct {
  * @brief Mount a file system
  *
  * @field statfs The file system stats for the file system being mounted
+ *
+ * @note Cache key for this event type:  (process executable file, mount point)
  */
 typedef struct {
 	struct statfs * _Nonnull statfs;
@@ -318,6 +379,8 @@ typedef struct {
  * @brief Unmount a file system
  *
  * @field statfs The file system stats for the file system being unmounted
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	struct statfs * _Nonnull statfs;
@@ -328,6 +391,8 @@ typedef struct {
  * @brief Remount a file system
  *
  * @field statfs The file system stats for the file system being remounted
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	struct statfs * _Nonnull statfs;
@@ -338,6 +403,8 @@ typedef struct {
  * @brief Fork a new process
  *
  * @field child The child process that was created
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	es_process_t * _Nonnull child;
@@ -350,6 +417,8 @@ typedef struct {
  * @field protection The desired new protection value
  * @field address The base address to which the protection value will apply
  * @field size The size of the memory region the protection value will apply
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	int32_t protection;
@@ -365,6 +434,8 @@ typedef struct {
  * @field target The process that will receive the signal
  *
  * @note This event will not fire if a process sends a signal to itself.
+ *
+ * @note Cache key for this event type:  (process executable file, target process executable file)
  */
 typedef struct {
 	int sig;
@@ -394,6 +465,8 @@ typedef enum {
  *
  * @note This event can fire multiple times for a single syscall, for example when the syscall
  *       has to be retried due to racing VFS operations.
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_file_t * _Nonnull source;
@@ -413,6 +486,8 @@ typedef struct {
  *
  * @field target The file for which the extended attribute will be set
  * @field extattr The extended attribute which will be set
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -425,6 +500,8 @@ typedef struct {
  *
  * @field target The file for which the extended attribute will be retrieved
  * @field extattr The extended attribute which will be retrieved
+ *
+ * @note Cache key for this event type:  (process executable file, target file)
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -437,6 +514,8 @@ typedef struct {
  *
  * @field target The file for which the extended attribute will be deleted
  * @field extattr The extended attribute which will be deleted
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -452,6 +531,8 @@ typedef struct {
  *
  * @note The `mode` member is the desired new mode. The `target`
  * member's `stat` information contains the current mode.
+ *
+ * @note Cache key for this event type:  (process executable file, target file)
  */
 typedef struct {
 	mode_t mode;
@@ -467,6 +548,8 @@ typedef struct {
  *
  * @note The `flags` member is the desired set of new flags. The `target`
  * member's `stat` information contains the current set of flags.
+ *
+ * @note Cache key for this event type:  (process executable file, target file)
  */
 typedef struct {
 	uint32_t flags;
@@ -483,6 +566,8 @@ typedef struct {
  *
  * @note The `uid` and `gid` members are the desired new values. The `target`
  * member's `stat` information contains the current uid and gid values.
+ *
+ * @note Cache key for this event type:  (process executable file, target file)
  */
 typedef struct {
 	uid_t uid;
@@ -496,11 +581,28 @@ typedef struct {
  *
  * @field modified Set to TRUE if the target file being closed has been modified
  * @field target The file that is being closed
+ * @field was_mapped_writable Indicates that at some point in the lifetime of the
+ *        target file vnode it was mapped into a process as writable.
+ *        Field available only if message version >= 6.
+ *
+ * @note This event type does not support caching (notify-only).
+ *
+ * `was_mapped_writable` only indicates whether the target file was mapped into writable memory or not for the lifetime of the vnode.
+ * It does not indicate whether the file has actually been written to by way of writing to mapped memory, and it does not indicate whether the file is currently still mapped writable.
+ * Correct interpretation requires consideration of vnode lifetimes in the kernel.
+ *
+ * The `modified` flag only reflects that a file was or was not modified by filesystem syscall.
+ * If a file was only modifed though a memory mapping this flag will be false, but was_mapped_writable will be true.
  */
 typedef struct {
 	bool modified;
 	es_file_t * _Nonnull target;
-	uint8_t reserved[64];
+	union {
+		uint8_t reserved[64];
+		struct {
+			bool was_mapped_writable;  /* Field available only if message version >= 6. */
+		};
+	};
 } es_event_close_t;
 
 /**
@@ -534,6 +636,8 @@ typedef struct {
  *
  * @note This event can fire multiple times for a single syscall, for example when the syscall
  *       has to be retried due to racing VFS operations.
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_destination_type_t destination_type;
@@ -558,6 +662,8 @@ typedef struct {
  * @brief Terminate a process
  *
  * @field stat The exit status of a process (same format as wait(2))
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	int stat;
@@ -569,6 +675,8 @@ typedef struct {
  *
  * @field file1 The first file to be exchanged
  * @field file2 The second file to be exchanged
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_file_t * _Nonnull file1;
@@ -580,6 +688,8 @@ typedef struct {
  * @brief Write to a file
  *
  * @field target The file being written to
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -590,6 +700,8 @@ typedef struct {
  * @brief Truncate a file
  *
  * @field target The file that is being truncated
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -600,6 +712,8 @@ typedef struct {
  * @brief Change directories
  *
  * @field target The desired new current working directory
+ *
+ * @note Cache key for this event type:  (process executable file, target directory)
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -610,6 +724,8 @@ typedef struct {
  * @brief View stat information of a file
  *
  * @field target The file for which stat information will be retrieved
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -620,6 +736,8 @@ typedef struct {
  * @brief Change the root directory for a process
  *
  * @field target The directory which will be the new root
+ *
+ * @note Cache key for this event type:  (process executable file, target directory)
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -630,6 +748,8 @@ typedef struct {
  * @brief List extended attributes of a file
  *
  * @field target The file for which extended attributes are being retrieved
+ *
+ * @note Cache key for this event type:  (process executable file, target file)
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -648,6 +768,8 @@ typedef struct {
  * a communications channel with an I/O Kit driver.  The event does not
  * correspond to driver <-> device communication and is neither providing
  * visibility nor access control into devices being attached.
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	uint32_t user_client_type;
@@ -691,6 +813,9 @@ typedef enum {
  * target process.  Obtaining a task control port is in itself not indicative of
  * malicious activity.  Denying system processes acquiring task control ports may
  * result in breaking system functionality in potentially fatal ways.
+ *
+ * @note Cache key for this event type:
+ * (process executable file, target executable file)
  */
 typedef struct {
 	es_process_t * _Nonnull target;
@@ -708,6 +833,9 @@ typedef struct {
  *
  * This event is fired when a process obtains a send right to a task read
  * port (e.g. task_read_for_pid(), task_identity_token_get_task_port()).
+ *
+ * @note Cache key for this event type:
+ * (process executable file, target executable file)
  */
 typedef struct {
 	es_process_t * _Nonnull target;
@@ -725,6 +853,8 @@ typedef struct {
  *
  * This event is fired when a process obtains a send right to a task inspect
  * port (e.g. task_inspect_for_pid(), task_identity_token_get_task_port()).
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_process_t * _Nonnull target;
@@ -742,6 +872,8 @@ typedef struct {
  *
  * This event is fired when a process obtains a send right to a task name
  * port (e.g. task_name_for_pid(), task_identity_token_get_task_port()).
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_process_t * _Nonnull target;
@@ -754,6 +886,8 @@ typedef struct {
  *
  * @field attrlist The attributes that will be retrieved
  * @field target The file for which attributes will be retrieved
+ *
+ * @note Cache key for this event type:  (process executable file, target file)
  */
 typedef struct {
 	struct attrlist attrlist;
@@ -766,6 +900,8 @@ typedef struct {
  *
  * @field attrlist The attributes that will be modified
  * @field target The file for which attributes will be modified
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	struct attrlist attrlist;
@@ -778,6 +914,8 @@ typedef struct {
  *
  * @field source The staged file that has had its contents updated
  * @field target_path The destination that the staged `source` file will be moved to
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_file_t * _Nonnull source;
@@ -790,6 +928,8 @@ typedef struct {
  *
  * @field source The staged file that has been materialized
  * @field target The destination of the staged `source` file
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_process_t * _Nonnull instigator;
@@ -818,6 +958,8 @@ typedef struct {
  * @field relative_target The path to lookup relative to the `source_dir`
  *
  * @note The `relative_target` data may contain untrusted user input.
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	es_file_t * _Nonnull source_dir;
@@ -830,6 +972,8 @@ typedef struct {
  *
  * @field mode Access permission to check
  * @field target The file to check for access
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	int32_t mode;
@@ -843,6 +987,8 @@ typedef struct {
  * @field target The path which will have its times modified
  * @field atime The desired new access time
  * @field mtime The desired new modification time
+ *
+ * @note Cache key for this event type:  (process executable file, target file)
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -857,6 +1003,8 @@ typedef struct {
  * @field source The file that will be cloned
  * @field target_dir The directory into which the `source` file will be cloned
  * @field target_name The name of the new file to which `source` will be cloned
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_file_t * _Nonnull source;
@@ -879,6 +1027,8 @@ typedef struct {
  * @note Not to be confused with copyfile(3).
  * @note Prior to macOS 12.0, the copyfile syscall fired open, unlink and auth
  *       create events, but no notify create, nor write or close events.
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_file_t * _Nonnull source;
@@ -895,6 +1045,8 @@ typedef struct {
  *
  * @field target The target file on which the file control command will be performed
  * @field cmd The `cmd` argument given to fcntl(2)
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -906,6 +1058,8 @@ typedef struct {
  * @brief Read directory entries
  *
  * @field target The directory whose contents will be read
+ *
+ * @note Cache key for this event type:  (process executable file, target directory)
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -919,6 +1073,8 @@ typedef struct {
  *
  * @note This event can fire multiple times for a single syscall, for example when the syscall
  *       has to be retried due to racing VFS operations.
+ *
+ * @note Cache key for this event type:  (process executable file, target file)
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -932,6 +1088,8 @@ typedef struct {
  * com.apple.private.settime. Additionally, even if an ES client responds to
  * ES_EVENT_TYPE_AUTH_SETTIME events with ES_AUTH_RESULT_ALLOW, the operation
  * may still fail for other reasons (e.g. unprivileged user).
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	uint8_t reserved[64];
@@ -941,6 +1099,8 @@ typedef struct {
  * @brief Duplicate a file descriptor
  *
  * @field target Describes the file the duplicated file descriptor points to
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -953,6 +1113,8 @@ typedef struct {
  * @field dir Describes the directory the socket file is created in.
  * @field filename The filename of the socket file.
  * @field mode The mode of the socket file.
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_file_t * _Nonnull dir;
@@ -968,6 +1130,8 @@ typedef struct {
  * @field domain The cmmunications domain of the socket (see socket(2)).
  * @field type The type of the socket (see socket(2)).
  * @field protocol The protocol of the socket (see socket(2)).
+ *
+ * @note Cache key for this event type:  (process executable file, socket file)
  */
 typedef struct {
 	es_file_t * _Nonnull file;
@@ -992,6 +1156,8 @@ typedef struct {
  *        used with all functions within <sys/acl.h>, please use a combination of
  *        `acl_copy_ext(3)` followed by `acl_copy_int(3)`.
  * @field target Describes the file whose ACL is being set.
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_file_t * _Nonnull target;
@@ -1006,6 +1172,8 @@ typedef struct {
  * @brief Fired when a pseudoterminal control device is granted
  *
  * @field dev Major and minor numbers of device
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	dev_t dev;
@@ -1016,6 +1184,8 @@ typedef struct {
  * @brief Fired when a pseudoterminal control device is closed
  *
  * @field dev Major and minor numbers of device
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	dev_t dev;
@@ -1023,32 +1193,13 @@ typedef struct {
 } es_event_pty_close_t;
 
 /**
- * @brief This enum describes the type of the es_event_proc_check_t event that are currently used
- *
- * @note ES_PROC_CHECK_TYPE_KERNMSGBUF, ES_PROC_CHECK_TYPE_TERMINATE and
- * ES_PROC_CHECK_TYPE_UDATA_INFO are deprecated and no proc_check messages will be generated
- * for the corresponding proc_info call numbers.
- * The terminate callnum is covered by the signal event.
- */
-typedef enum {
-	ES_PROC_CHECK_TYPE_LISTPIDS = 0x1,
-	ES_PROC_CHECK_TYPE_PIDINFO = 0x2,
-	ES_PROC_CHECK_TYPE_PIDFDINFO = 0x3,
-	ES_PROC_CHECK_TYPE_KERNMSGBUF = 0x4,        // deprecated, not generated
-	ES_PROC_CHECK_TYPE_SETCONTROL = 0x5,
-	ES_PROC_CHECK_TYPE_PIDFILEPORTINFO = 0x6,
-	ES_PROC_CHECK_TYPE_TERMINATE = 0x7,         // deprecated, not generated
-	ES_PROC_CHECK_TYPE_DIRTYCONTROL = 0x8,
-	ES_PROC_CHECK_TYPE_PIDRUSAGE = 0x9,
-	ES_PROC_CHECK_TYPE_UDATA_INFO = 0xe,        // deprecated, not generated
-} es_proc_check_type_t;
-
-/**
  * @brief Access control check for retrieving process information.
  *
  * @field target The process for which the access will be checked
  * @field type The type of call number used to check the access on the target process
  * @field flavor The flavor used to check the access on the target process
+ *
+ * @note Cache key for this event type:  (process executable file, target process executable file, type)
  */
 typedef struct {
 	es_process_t * _Nullable target;
@@ -1062,6 +1213,8 @@ typedef struct {
  *
  * @field attrlist The attributes that will be used to do the search
  * @field target The volume whose contents will be searched
+ *
+ * @note Cache key for this event type:  (process executable file, target file)
  */
 typedef struct {
 	struct attrlist attrlist;
@@ -1085,6 +1238,8 @@ typedef enum {
  * @field target The process that is being suspended, resumed, or is the object
  * of a pid_shutdown_sockets call.
  * @field type The type of operation that was called on the target process.
+ *
+ * @note This event type does not support caching.
  */
 typedef struct {
 	es_process_t * _Nullable target;
@@ -1101,6 +1256,8 @@ typedef struct {
  * process is explicitly invalidated by a csops(CS_OPS_MARKINVALID)
  * syscall.  This event does not fire if CS_HARD was set, since CS_HARD
  * by design prevents the process from going invalid.
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	uint8_t reserved[64];
@@ -1114,6 +1271,8 @@ typedef struct {
  *
  * @note This event can fire multiple times for a single trace attempt, for example
  * when the processes to which is being attached is reparented during the operation
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	es_process_t * _Nonnull target;
@@ -1128,6 +1287,8 @@ typedef struct {
  * @field target The process in which a new thread was created
  * @field thread_state The new thread state in case of thread_create_running,
  * NULL in case of thread_create.
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	es_process_t * _Nonnull target;
@@ -1139,6 +1300,8 @@ typedef struct {
  * @brief Notification that a process has called setuid().
  *
  * @field uid The uid argument to the setuid() syscall.
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	uid_t uid;
@@ -1149,6 +1312,8 @@ typedef struct {
  * @brief Notification that a process has called setgid().
  *
  * @field gid The gid argument to the setgid() syscall.
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	uid_t gid;
@@ -1159,6 +1324,8 @@ typedef struct {
  * @brief Notification that a process has called seteuid().
  *
  * @field euid The euid argument to the seteuid() syscall.
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	uid_t euid;
@@ -1169,6 +1336,8 @@ typedef struct {
  * @brief Notification that a process has called setegid().
  *
  * @field egid The egid argument to the setegid() syscall.
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	uid_t egid;
@@ -1180,6 +1349,8 @@ typedef struct {
  *
  * @field ruid The ruid argument to the setreuid() syscall.
  * @field euid The euid argument to the setreuid() syscall.
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	uid_t ruid;
@@ -1192,6 +1363,8 @@ typedef struct {
  *
  * @field rgid The rgid argument to the setregid() syscall.
  * @field egid The egid argument to the setregid() syscall.
+ *
+ * @note This event type does not support caching (notify-only).
  */
 typedef struct {
 	uid_t rgid;
@@ -1200,9 +1373,444 @@ typedef struct {
 } es_event_setregid_t;
 
 /**
+ * @brief OpenDirectory authentication data for type ES_AUTHENTICATION_TYPE_OD.
+ *
+ * @field instigator        Process that instigated the authentication
+ *                          (XPC caller that asked for authentication).
+ * @field record_type       OD record type against which OD is authenticating.
+ *                          Typically "Users", but other record types can auth too.
+ * @field record_name       OD record name against which OD is authenticating.
+ *                          For record type "Users", this is the username.
+ * @field node_name         OD node against which OD is authenticating.
+ *                          Typically one of "/Local/Default", "/LDAPv3/<server>" or
+ *                          "/Active Directory/<domain>".
+ * @field db_path           Optional.  If node_name is "/Local/Default", this is
+ *                          the path of the database against which OD is
+ *                          authenticating.
+ */
+typedef struct {
+	es_process_t * _Nonnull instigator;
+	es_string_token_t record_type;
+	es_string_token_t record_name;
+	es_string_token_t node_name;
+	es_string_token_t db_path;
+} es_event_authentication_od_t;
+
+typedef enum {
+	ES_TOUCHID_MODE_VERIFICATION,
+	ES_TOUCHID_MODE_IDENTIFICATION
+} es_touchid_mode_t;
+
+/**
+ * @brief TouchID authentication data for type ES_AUTHENTICATION_TYPE_TOUCHID.
+ *
+ * @field instigator        Process that instigated the authentication
+ *                          (XPC caller that asked for authentication).
+ * @field touchid_mode      TouchID authentication type
+ * @field has_uid           Describes whether or not the uid of the user authenticated is available
+ * @field uid               Union that is valid when `has_uid` is set to `true`
+ * @field uid.uid           uid of user that was authenticated.
+ *                          This will be set when `success` is true and `touchid_mode` is of
+ *                          verification type i.e. ES_TOUCHID_MODE_VERIFICATION
+ */
+typedef struct {
+	es_process_t * _Nonnull instigator;
+	es_touchid_mode_t touchid_mode;
+	bool has_uid;
+	union {
+		uid_t uid;
+	} uid;
+} es_event_authentication_touchid_t;
+
+/**
+ * @brief Token authentication data for type ES_AUTHENTICATION_TYPE_TOKEN.
+ *
+ * @field instigator        Process that instigated the authentication
+ *                          (XPC caller that asked for authentication).
+ * @field pubkey_hash       Hash of the public key which CryptoTokenKit is authenticating.
+ * @field token_id          Token identifier of the event which CryptoTokenKit is authenticating.
+ * @field kerberos_principal Optional.  This will be available if token is used for GSS PKINIT
+ *                          authentication for obtaining a kerberos TGT.  NULL in all other cases.
+ */
+typedef struct {
+	es_process_t * _Nonnull instigator;
+	es_string_token_t pubkey_hash;
+	es_string_token_t token_id;
+	es_string_token_t kerberos_principal;
+} es_event_authentication_token_t;
+
+typedef enum {
+	/// Unlock the machine using Apple Watch.
+	ES_AUTO_UNLOCK_MACHINE_UNLOCK = 1,
+	/// Approve an authorization prompt using Apple Watch.
+	ES_AUTO_UNLOCK_AUTH_PROMPT = 2
+} es_auto_unlock_type_t;
+
+/**
+ * @brief Auto Unlock authentication data for type ES_AUTHENTICATION_TYPE_TOKEN.
+ *
+ * @field username          Username for which the authentication was attempted.
+ * @field type              Purpose of the authentication.
+ *
+ * @note This kind of authentication is performed when authenticating to the local
+ * Mac using an Apple Watch for the purpose of unlocking the machine or confirming
+ * an authorization prompt.  Auto Unlock is part of Continuity.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	es_string_token_t username;
+	es_auto_unlock_type_t type;
+} es_event_authentication_auto_unlock_t;
+
+/**
+ * @brief Notification that an authentication was performed.
+ *
+ * @field success           True iff authentication was successful.
+ * @field type              The type of authentication.
+ * @field data              Type-specific data describing the authentication.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	bool success;
+	es_authentication_type_t type;
+	union {
+		es_event_authentication_od_t * _Nonnull od;
+		es_event_authentication_touchid_t * _Nonnull touchid;
+		es_event_authentication_token_t * _Nonnull token;
+		es_event_authentication_auto_unlock_t * _Nonnull auto_unlock;
+	} data;
+} es_event_authentication_t;
+
+/**
+ * @brief Notification that XProtect detected malware.
+ *
+ * @field signature_version     Version of the signatures used for detection.
+ *                              Currently corresponds to XProtect version.
+ * @field malware_identifier    String identifying the malware that was detected.
+ * @field incident_identifier   String identifying the incident, intended for linking
+ *                              multiple malware detected and remediated events.
+ * @field detected_path         Path where malware was detected.  This path is not
+ *                              necessarily a malicious binary, it can also be a
+ *                              legitimate file containing a malicious portion.
+ *
+ * @note For any given malware incident, XProtect may emit zero or more
+ *       xp_malware_detected events, and zero or more xp_malware_remediated events.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	es_string_token_t signature_version;
+	es_string_token_t malware_identifier;
+	es_string_token_t incident_identifier;
+	es_string_token_t detected_path;
+} es_event_xp_malware_detected_t;
+
+/**
+ * @brief Notification that XProtect remediated malware.
+ *
+ * @field signature_version     Version of the signatures used for remediation.
+ *                              Currently corresponds to XProtect version.
+ * @field malware_identifier    String identifying the malware that was detected.
+ * @field incident_identifier   String identifying the incident, intended for linking
+ *                              multiple malware detected and remediated events.
+ * @field action_type           String indicating the type of action that was taken,
+ *                              e.g. "path_delete".
+ * @field success               True iff remediation was successful.
+ * @field result_description    String describing specific reasons for failure or success.
+ * @field remediated_path       Optional.  Path that was subject to remediation, if any.
+ *                              This path is not necessarily a malicious binary, it can
+ *                              also be a legitimate file containing a malicious portion.
+ *                              Specifically, the file at this path may still exist after
+ *                              successful remediation.
+ * @field remediated_process_audit_token  Audit token of process that was subject to
+ *                              remediation, if any.
+ *
+ * @note For any given malware incident, XProtect may emit zero or more
+ *       xp_malware_detected events, and zero or more xp_malware_remediated events.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	es_string_token_t signature_version;
+	es_string_token_t malware_identifier;
+	es_string_token_t incident_identifier;
+	es_string_token_t action_type;
+	bool success;
+	es_string_token_t result_description;
+	es_string_token_t remediated_path;
+	audit_token_t * _Nullable remediated_process_audit_token;
+} es_event_xp_malware_remediated_t;
+
+/**
+ * @brief es_graphical_session_id_t is a session identifier identifying a on-console or off-console graphical session.
+ * A graphical session exists and can potentially be attached to via Screen Sharing before a user is logged in.
+ * EndpointSecurity clients should treat the `graphical_session_id` as an opaque identifier and not assign
+ * special meaning to it beyond correlating events pertaining to the same graphical session.  Not to be confused with the audit session ID.
+ */
+typedef uint32_t es_graphical_session_id_t;
+
+/**
+ * @brief Notification that LoginWindow has logged in a user.
+ *
+ * @field username              Short username of the user.
+ * @field graphical_session_id  Graphical session id of the session.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	es_string_token_t username;
+	es_graphical_session_id_t graphical_session_id;
+} es_event_lw_session_login_t;
+
+/**
+ * @brief Notification that LoginWindow has logged out a user.
+ *
+ * @field username              Short username of the user.
+ * @field graphical_session_id  Graphical session id of the session.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	es_string_token_t username;
+	es_graphical_session_id_t graphical_session_id;
+} es_event_lw_session_logout_t;
+
+/**
+ * @brief Notification that LoginWindow locked the screen of a session.
+ *
+ * @field username              Short username of the user.
+ * @field graphical_session_id  Graphical session id of the session.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	es_string_token_t username;
+	es_graphical_session_id_t graphical_session_id;
+} es_event_lw_session_lock_t;
+
+/**
+ * @brief Notification that LoginWindow unlocked the screen of a session.
+ *
+ * @field username              Short username of the user.
+ * @field graphical_session_id  Graphical session id of the session.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	es_string_token_t username;
+	es_graphical_session_id_t graphical_session_id;
+} es_event_lw_session_unlock_t;
+
+/**
+ * @brief Notification that Screen Sharing has attached to a graphical session.
+ *
+ * @field success               True iff remediation was successful.
+ * @field source_address_type   Type of source address.
+ * @field source_address        Optional.  Source address of connection, or NULL.
+ *                              Depending on the transport used, the source
+ *                              address may or may not be available.
+ * @field viewer_appleid        Optional.  For screen sharing initiated using an
+ *                              Apple ID (e.g., from Messages or FaceTime), this
+ *                              is the viewer's (client's) Apple ID.  It is not
+ *                              necessarily the Apple ID that invited the screen
+ *                              sharing.  NULL if unavailable.
+ * @field authentication_type   Type of authentication.
+ * @field authentication_username  Optional.  Username used for authentication to
+ *                              Screen Sharing.  NULL if authentication type doesn't
+ *                              use an username (e.g. simple VNC password).
+ * @field session_username      Optional.  Username of the loginwindow session if
+ *                              available,  NULL otherwise.
+ * @field existing_session      True iff there was an existing user session.
+ * @field graphical_session_id  Graphical session id of the screen shared.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	bool success;
+	es_address_type_t source_address_type;
+	es_string_token_t source_address;
+	es_string_token_t viewer_appleid;
+	es_string_token_t authentication_type;
+	es_string_token_t authentication_username;
+	es_string_token_t session_username;
+	bool existing_session;
+	es_graphical_session_id_t graphical_session_id;
+} es_event_screensharing_attach_t;
+
+/**
+ * @brief Notification that Screen Sharing has detached from a graphical session.
+ *
+ * @field source_address_type   Type of source address.
+ * @field source_address        Optional.  Source address of connection, or NULL.
+ *                              Depending on the transport used, the source
+ *                              address may or may not be available.
+ * @field viewer_appleid        Optional.  For screen sharing initiated using an
+ *                              Apple ID (e.g., from Messages or FaceTime), this
+ *                              is the viewer's (client's) Apple ID.  It is not
+ *                              necessarily the Apple ID that invited the screen
+ *                              sharing.  NULL if unavailable.
+ * @field graphical_session_id  Graphical session id of the screen shared.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	es_address_type_t source_address_type;
+	es_string_token_t source_address;
+	es_string_token_t viewer_appleid;
+	es_graphical_session_id_t graphical_session_id;
+} es_event_screensharing_detach_t;
+
+typedef enum {
+	ES_OPENSSH_LOGIN_EXCEED_MAXTRIES = 0,
+	ES_OPENSSH_LOGIN_ROOT_DENIED = 1,
+	ES_OPENSSH_AUTH_SUCCESS = 2,
+	ES_OPENSSH_AUTH_FAIL_NONE = 3,
+	ES_OPENSSH_AUTH_FAIL_PASSWD = 4,
+	ES_OPENSSH_AUTH_FAIL_KBDINT = 5,
+	ES_OPENSSH_AUTH_FAIL_PUBKEY = 6,
+	ES_OPENSSH_AUTH_FAIL_HOSTBASED = 7,
+	ES_OPENSSH_AUTH_FAIL_GSSAPI = 8,
+	ES_OPENSSH_INVALID_USER = 9,
+} es_openssh_login_result_type_t;
+
+/**
+ * @brief Notification for OpenSSH login event.
+ *
+ * @field success               True iff login was successful.
+ * @field result_type           Result type for the login attempt.
+ * @field source_address_type   Type of source address.
+ * @field source_address        Source address of connection.
+ * @field username              Username used for login.
+ * @field has_uid               Describes whether or not the uid of the user logged in is available
+ * @field uid                   Union that is valid when `has_uid` is set to `true`
+ * @field uid.uid               uid of user that was logged in.
+ *
+ * @note This is a connection-level event.  An SSH connection that is used
+ * for multiple interactive sessions and/or non-interactive commands will
+ * emit only a single successful login event.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	bool success;
+	es_openssh_login_result_type_t result_type;
+	es_address_type_t source_address_type;
+	es_string_token_t source_address;
+	es_string_token_t username;
+	bool has_uid;
+	union {
+		uid_t uid;
+	} uid;
+} es_event_openssh_login_t;
+
+/**
+ * @brief Notification for OpenSSH logout event.
+ *
+ * @field source_address_type   Type of address used in the connection.
+ * @field source_address        Source address of the connection.
+ * @field username              Username which got logged out.
+ * @field uid                   uid of user that was logged out.
+ *
+ * @note This is a connection-level event.  An SSH connection that is used
+ * for multiple interactive sessions and/or non-interactive commands will
+ * emit only a single logout event.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	es_address_type_t source_address_type;
+	es_string_token_t source_address;
+	es_string_token_t username;
+	uid_t uid;
+} es_event_openssh_logout_t;
+
+/**
+ * @brief Notification for authenticated login event from /usr/bin/login.
+ *
+ * @field success               True iff login was successful.
+ * @field failure_message       Optional. Failure message generated.
+ * @field username              Username used for login.
+ * @field has_uid               Describes whether or not the uid of the user logged in is available or not.
+ * @field uid                   Union that is valid when `has_uid` is set to `true`
+ * @field uid.uid               uid of user that was logged in.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	bool success;
+	es_string_token_t failure_message;
+	es_string_token_t username;
+	bool has_uid;
+	union {
+		uid_t uid;
+	} uid;
+} es_event_login_login_t;
+
+/**
+ * @brief Notification for authenticated logout event from /usr/bin/login.
+ *
+ * @field username              Username used for login.
+ * @field uid                   uid of user that was logged in.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	es_string_token_t username;
+	uid_t uid;
+} es_event_login_logout_t;
+
+/**
+ * @brief Notification for launch item being made known to background
+ *        task management.  This includes launch agents and daemons as
+ *        well as login items added by the user, via MDM or by an app.
+ *
+ * @field instigator            Optional.  Process that instigated the BTM operation
+ *                              (XPC caller that asked for the item to be added).
+ * @field app                   Optional.  App process that registered the item.
+ * @field item                  BTM launch item.
+ * @field executable_path       Optional.  If available and applicable, the POSIX executable
+ *                              path from the launchd plist.
+ *                              If the path is relative, it is relative to item->app_url.
+ *
+ * @note May be emitted for items where an add was already seen previously,
+ *       with or without the item having changed.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	es_process_t * _Nullable instigator;
+	es_process_t * _Nullable app;
+	es_btm_launch_item_t * _Nonnull item;
+	es_string_token_t executable_path;
+} es_event_btm_launch_item_add_t;
+
+/**
+ * @brief Notification for launch item being removed from background
+ *        task management.  This includes launch agents and daemons as
+ *        well as login items added by the user, via MDM or by an app.
+ *
+ * @field instigator            Optional.  Process that instigated the BTM operation
+ *                              (XPC caller that asked for the item to be removed).
+ * @field app                   Optional.  App process that registered the item.
+ * @field item                  BTM launch item.
+ *
+ * @note This event type does not support caching (notify-only).
+ */
+typedef struct {
+	es_process_t * _Nullable instigator;
+	es_process_t * _Nullable app;
+	es_btm_launch_item_t * _Nonnull item;
+} es_event_btm_launch_item_remove_t;
+
+/**
  * Union of all possible events that can appear in an es_message_t
  */
 typedef union {
+	/**
+	 * Events added before macOS 13.0 use structs directly.
+	 */
 	es_event_access_t access;
 	es_event_chdir_t chdir;
 	es_event_chroot_t chroot;
@@ -1270,6 +1878,25 @@ typedef union {
 	es_event_unmount_t unmount;
 	es_event_utimes_t utimes;
 	es_event_write_t write;
+
+	/**
+	 * Events added in macOS 13.0 or later use nonnull pointers.
+	 */
+	es_event_authentication_t * _Nonnull authentication;
+	es_event_xp_malware_detected_t * _Nonnull xp_malware_detected;
+	es_event_xp_malware_remediated_t * _Nonnull xp_malware_remediated;
+	es_event_lw_session_login_t * _Nonnull lw_session_login;
+	es_event_lw_session_logout_t * _Nonnull lw_session_logout;
+	es_event_lw_session_lock_t * _Nonnull lw_session_lock;
+	es_event_lw_session_unlock_t * _Nonnull lw_session_unlock;
+	es_event_screensharing_attach_t * _Nonnull screensharing_attach;
+	es_event_screensharing_detach_t * _Nonnull screensharing_detach;
+	es_event_openssh_login_t * _Nonnull openssh_login;
+	es_event_openssh_logout_t * _Nonnull openssh_logout;
+	es_event_login_login_t * _Nonnull login_login;
+	es_event_login_logout_t * _Nonnull login_logout;
+	es_event_btm_launch_item_add_t * _Nonnull btm_launch_item_add;
+	es_event_btm_launch_item_remove_t * _Nonnull btm_launch_item_remove;
 } es_events_t;
 
 /**

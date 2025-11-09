@@ -8,7 +8,7 @@
 
 #import <UIKit/UIGraphicsRenderer.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef void (^UIGraphicsDrawingActions)(__kindof UIGraphicsRendererContext *rendererContext) API_AVAILABLE(ios(10.0));
 
@@ -32,7 +32,7 @@ typedef void (^UIGraphicsDrawingActions)(__kindof UIGraphicsRendererContext *ren
 - (BOOL)runDrawingActions:(NS_NOESCAPE UIGraphicsDrawingActions)drawingActions completionActions:(nullable NS_NOESCAPE UIGraphicsDrawingActions)completionActions error:(NSError **)error API_AVAILABLE(ios(10.0));
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIGraphicsRendererSubclass.h>

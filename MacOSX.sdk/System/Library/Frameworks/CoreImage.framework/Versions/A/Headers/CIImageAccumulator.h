@@ -3,6 +3,11 @@
    Copyright (c) 2004 Apple, Inc.
    All rights reserved. */
 
+#ifndef CIIMAGEACCUMULATOR_H
+#define CIIMAGEACCUMULATOR_H
+
+#ifdef __OBJC__
+
 #import <CoreImage/CoreImageDefines.h>
 #import <CoreImage/CIImage.h>
 
@@ -61,3 +66,7 @@ NS_AVAILABLE(10_7, 9_0);
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif /* __OBJC__ */
+
+#endif /* CIIMAGEACCUMULATOR_H */

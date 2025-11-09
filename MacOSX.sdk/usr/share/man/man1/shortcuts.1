@@ -6,13 +6,14 @@
 .Nd Command-line utility for running shortcuts.
 .Sh SYNOPSIS
 .Nm shortcuts run
-.Ar shortcut-name
+.Ar shortcut-name-or-identifier
 .Op Fl \-input\-path Ar input-path No ...
 .Op Fl \-output\-path Ar output-path No ...
 .Op Fl \-output\-type Ar output-type
 .Nm shortcuts list
-.Op Fl \-folder\-name Ar folder-name
+.Op Fl \-folder\-name Ar folder-name-or-identifier
 .Op Fl \-folders
+.Op Fl \-show-identifiers
 .Nm shortcuts view
 .Ar shortcut-name
 .Nm shortcuts sign
@@ -24,8 +25,8 @@ The
 .Nm
 command is used to run, list, view or sign shortcuts. To create or edit a shortcut, use the Shortcuts application.
 .Sh OPTIONS
-.Ss shortcuts run 
-.Ar shortcut-name
+.Ss shortcuts run
+.Ar shortcut-name-or-identifier
 .Bl -tag -width -indent
 .It Op Fl \-input\-path Ar input-path No ...
 The input to provide to the shortcut. Can be dropped, or set to
@@ -42,11 +43,14 @@ will attempt to infer the output type from the output filename, or use the defau
 .El
 .Ss shortcuts list
 .Bl -tag -width -indent
-.It Op Fl \-folder\-name Ar folder-name
-List all shortcuts in the folder
-.Dq Li folder-name Ns No .
+.It Op Fl \-folder\-name Ar folder-name-or-identifier
+The folder name or identifier to list shortcuts in, or
+.Dq Li none
+to list shortcuts not in a folder.
 .It Op Fl \-folders
-List all user-created folders.
+List folders instead of shortcuts.
+.It Op Fl \-show-identifiers
+Show identifiers with each result.
 .El
 .Ss shortcuts sign
 .Bl -tag -width -indent
@@ -54,10 +58,13 @@ List all user-created folders.
 The signing mode. Either
 .Dq Li people-who-know-me
 or
-.Dq Li anyone Ns No .
+.Dq Li anyone .
+.Pp
 Specifying
 .Dq Li people-who-know-me
-will sign locally, but only your devices, or people who have your contact info in their contacts, will be able to import the shortcut. Specifying
+will sign locally, but only your devices, or people who have your contact info in their contacts, will be able to import the shortcut.
+.Pp
+Specifying
 .Dq Li anyone
 will notarize via iCloud, and allow anyone to import the shortcut.
 .It Fl \-input Ar input

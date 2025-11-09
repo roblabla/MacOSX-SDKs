@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           38DF2C39-9F0B-389F-8F23-23C1596B4C29
+    value:           4B756090-0DD8-3FF0-BAA1-DCE4041C6D39
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7B2A2F8F-7967-339B-9163-73BD48BA0137
+    value:           65DAB171-092D-36CD-AFB1-78C8C5A4791B
 install-name:    '/System/Library/PrivateFrameworks/TuriCore.framework/Versions/A/TuriCore'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _tc_v1_binary_op_ff, _tc_v1_binary_op_fs, _tc_v1_binary_op_sf, 
                        _tc_v1_binary_op_ss, _tc_v1_datetime_create_empty, _tc_v1_datetime_create_from_posix_highres_timestamp, 
                        _tc_v1_datetime_create_from_posix_timestamp, _tc_v1_datetime_create_from_string, 

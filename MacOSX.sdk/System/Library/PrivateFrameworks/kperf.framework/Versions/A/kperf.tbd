@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BD35FCA5-FEF9-3316-8B2B-EEF913277792
+    value:           1B260EE2-45A4-3B60-B518-ED9F8F6596A3
   - target:          x86_64-maccatalyst
-    value:           BD35FCA5-FEF9-3316-8B2B-EEF913277792
+    value:           1B260EE2-45A4-3B60-B518-ED9F8F6596A3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           301F1B20-2FE0-3C37-A9B7-F993E6F3F272
+    value:           91615980-5D6B-3DB1-A0F4-E24DD5FED5E7
   - target:          arm64e-maccatalyst
-    value:           301F1B20-2FE0-3C37-A9B7-F993E6F3F272
+    value:           91615980-5D6B-3DB1-A0F4-E24DD5FED5E7
 install-name:    '/System/Library/PrivateFrameworks/kperf.framework/Versions/A/kperf'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _kpc_counterbuf_alloc, _kpc_counterbuf_free, _kpc_cpu_string, 
                        _kpc_force_all_ctrs_get, _kpc_force_all_ctrs_set, _kpc_get_actionid, 
                        _kpc_get_config, _kpc_get_config_count, _kpc_get_counter_count, 

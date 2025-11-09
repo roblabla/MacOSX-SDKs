@@ -5,6 +5,11 @@
    All rights reserved.
 */
 
+#ifndef CISAMPLER_H
+#define CISAMPLER_H
+
+#ifdef __OBJC__
+
 #import <CoreImage/CoreImageDefines.h>
 #import <Foundation/Foundation.h>
 
@@ -77,3 +82,7 @@ CORE_IMAGE_EXPORT NSString *const kCISamplerFilterLinear NS_AVAILABLE(10_4, 9_0)
 CORE_IMAGE_EXPORT NSString *const kCISamplerColorSpace NS_AVAILABLE(10_4, 9_0);
 
 NS_ASSUME_NONNULL_END
+
+#endif /* __OBJC__ */
+
+#endif /* CISAMPLER_H */

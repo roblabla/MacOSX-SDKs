@@ -4,30 +4,30 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2E20E7EF-3CFE-32FD-AAB0-96B06AF401F5
+    value:           F95AB420-480E-3452-90EF-9F09A643E3E4
   - target:          x86_64-maccatalyst
-    value:           2E20E7EF-3CFE-32FD-AAB0-96B06AF401F5
+    value:           F95AB420-480E-3452-90EF-9F09A643E3E4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F2BBEB51-5011-3FE2-AA4C-7875D157E5A1
+    value:           E6E79B4C-CF07-35D9-ABB7-A93DB6CDA7B2
   - target:          arm64e-maccatalyst
-    value:           F2BBEB51-5011-3FE2-AA4C-7875D157E5A1
+    value:           E6E79B4C-CF07-35D9-ABB7-A93DB6CDA7B2
 install-name:    '/usr/lib/swift/libswiftAVFoundation.dylib'
-current-version: 2080.20.4
+current-version: 2135.13.1
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftAVFoundation.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftAVFoundation.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftAVFoundation.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftAVFoundation.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftAVFoundation.dylib', 
                        '$ld$install_name$os10.9$@rpath/libswiftAVFoundation.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s12AVFoundation15AVAsyncPropertyC6StatusO11descriptionSSvg', 
                        '_$s12AVFoundation15AVAsyncPropertyC6StatusO11descriptionSSvpMV', 
                        '_$s12AVFoundation15AVAsyncPropertyC6StatusOAASQR_rlE2eeoiySbAEyxq__G_AGtFZ', 
@@ -138,6 +138,8 @@ exports:
                        '_$sSo11CMTimeRangea12AVFoundationE34_conditionallyBridgeFromObjectiveC_6resultSbSo7NSValueC_ABSgztFZ', 
                        '_$sSo11CMTimeRangea12AVFoundationE36_unconditionallyBridgeFromObjectiveCyABSo7NSValueCSgFZ', 
                        '_$sSo11CMTimeRangeas21_ObjectiveCBridgeable12AVFoundationMc', 
+                       '_$sSo12AVPlayerItemC12AVFoundationE4seek2toSb10Foundation4DateV_tYaF', 
+                       '_$sSo12AVPlayerItemC12AVFoundationE4seek2toSb10Foundation4DateV_tYaFTu', 
                        '_$sSo12AVPlayerItemC12AVFoundationE5asset28automaticallyLoadedAssetKeysABSo7AVAssetC_SayAC22AVPartialAsyncPropertyCyAGGGtcfC', 
                        '_$sSo12AVPlayerItemC12AVFoundationE5asset28automaticallyLoadedAssetKeysABSo7AVAssetC_SayAC22AVPartialAsyncPropertyCyAGGGtcfc', 
                        '_$sSo13CMTimeMappinga12AVFoundationE19_bridgeToObjectiveCSo7NSValueCyF', 
@@ -175,8 +177,33 @@ exports:
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE09supportedB16PixelFormatTypes3forSaySo8NSNumberCGSo10AVFileTypea_tF', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE19supportedFlashModesSaySo0aF4ModeVGvg', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE19supportedFlashModesSaySo0aF4ModeVGvpMV', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE5image2atSo10CGImageRefaAD_So6CMTimea10actualTimetAI_tYaKF', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE5image2atSo10CGImageRefaAD_So6CMTimea10actualTimetAI_tYaKFTu', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesV17makeAsyncIteratorAEyF', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesV4nextAE7ElementOSgyYaF', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesV4nextAE7ElementOSgyYaFTu', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesV7ElementO10actualTimeSo6CMTimeavg', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesV7ElementO10actualTimeSo6CMTimeavpMV', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesV7ElementO13requestedTimeSo6CMTimeavg', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesV7ElementO13requestedTimeSo6CMTimeavpMV', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesV7ElementO5imageSo10CGImageRefavg', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesV7ElementO5imageSo10CGImageRefavpMV', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesV7ElementOMa', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesV7ElementOMn', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesV7ElementON', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesVMa', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesVMn', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesVN', '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesVScIACMc', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6ImagesVSciACMc', 
+                       '_$sSo21AVAssetImageGeneratorC12AVFoundationE6images3forAbCE6ImagesVSaySo6CMTimeaG_tF', 
                        '_$sSo21AVCaptureDeviceFormatC12AVFoundationE20supportedColorSpacesSaySo0aF5SpaceVGvg', 
                        '_$sSo21AVCaptureDeviceFormatC12AVFoundationE20supportedColorSpacesSaySo0aF5SpaceVGvpMV', 
+                       '_$sSo21AVCaptureDeviceFormatC12AVFoundationE27supportedMaxPhotoDimensionsSaySo07CMVideoH0aGvg', 
+                       '_$sSo21AVCaptureDeviceFormatC12AVFoundationE27supportedMaxPhotoDimensionsSaySo07CMVideoH0aGvpMV', 
+                       '_$sSo21AVCaptureDeviceFormatC12AVFoundationE36secondaryNativeResolutionZoomFactorsSay12CoreGraphics7CGFloatVGvg', 
+                       '_$sSo21AVCaptureDeviceFormatC12AVFoundationE36secondaryNativeResolutionZoomFactorsSay12CoreGraphics7CGFloatVGvpMV', 
+                       '_$sSo21AVCaptureDeviceFormatC12AVFoundationE45supportedVideoZoomFactorsForDepthDataDeliverySay12CoreGraphics7CGFloatVGvg', 
+                       '_$sSo21AVCaptureDeviceFormatC12AVFoundationE45supportedVideoZoomFactorsForDepthDataDeliverySay12CoreGraphics7CGFloatVGvpMV', 
                        '_$sSo22AVCapturePhotoSettingsC12AVFoundationE016availablePreviewB16PixelFormatTypesSays6UInt32VGvg', 
                        '_$sSo22AVCapturePhotoSettingsC12AVFoundationE016availablePreviewB16PixelFormatTypesSays6UInt32VGvpMV', 
                        '_$sSo24AVCaptureVideoDataOutputC12AVFoundationE09availableB16PixelFormatTypesSays6UInt32VGvg', 

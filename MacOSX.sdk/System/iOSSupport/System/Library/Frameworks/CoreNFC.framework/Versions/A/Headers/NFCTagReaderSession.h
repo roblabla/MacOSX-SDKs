@@ -75,6 +75,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * - If the session is configured with @link NFCPollingISO14443 @link/ and an ISO7816 compliant MiFare tag that contains one of the applications listed in the
  *   "com.apple.developer.nfc.readersession.iso7816.select-identifiers" array in Info.plist is found, then @link [NFCTagReaderSessionDelegate readerSession:didDetectTags:] @link/
  *   will return a tag instance conform to the @link NFCISO7816Tag @link/ protocol.
+ * - Use of @link NFCPollingPACE @link/ requires "PACE" to be added into the "com.apple.developer.nfc.readersession.formats" entitlement.
  */
 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
 @interface NFCTagReaderSession : NFCReaderSession
@@ -90,11 +91,14 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @constant NFCPollingISO14443     Support both Type A & B modulation.  NFCTagTypeISO7816Compatible and NFCTagTypeMiFare tags will be discovered.
  * @constant NFCPollingISO15693     NFCTagTypeISO15693 tag will be discovered.
  * @constant NFCPollingISO18092     NFCTagTypeFeliCa tag will be discovered.
+ * @constant NFCPollingPACE         NFCTagTypeISO7816Compatible will be discovered; only tags with Password Authenticated Connection Establishment (PACE) supported is returned.
+ *                                  This is an exclusive value that cannot be combine with other NFCPollingOption values; this will override all other combinations.
  */
 typedef NS_OPTIONS(NSInteger, NFCPollingOption) {
     NFCPollingISO14443 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 0x1,
     NFCPollingISO15693 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 0x2,
     NFCPollingISO18092 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 0x4,
+    NFCPollingPACE API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, macos, tvos)         = 0x8,
 };
 
 - (instancetype)init NS_UNAVAILABLE;

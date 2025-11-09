@@ -4,24 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7FD64EA7-5947-3D88-806F-A6444F2FB4C8
+    value:           1DFC88D8-0DAF-349C-8849-4F9EC063717F
   - target:          x86_64-maccatalyst
-    value:           7FD64EA7-5947-3D88-806F-A6444F2FB4C8
+    value:           1DFC88D8-0DAF-349C-8849-4F9EC063717F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7DC3DA97-B199-31DA-8DB8-1D088F9EE0B0
+    value:           86DD8DD1-B3CB-33CD-BD81-BCA7D667DA95
   - target:          arm64e-maccatalyst
-    value:           7DC3DA97-B199-31DA-8DB8-1D088F9EE0B0
+    value:           86DD8DD1-B3CB-33CD-BD81-BCA7D667DA95
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomAnalytics.framework/Versions/A/SymptomAnalytics'
-current-version: 1617.101.2
+current-version: 1732
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _SymptomAnalyticsFrameworkDidSaveNotification, _kProcessKeyTypeBundleName, 
-                       _kProcessKeyTypeProcName, _kStateMachineStatusKeyAdminState, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _SymptomAnalyticsFrameworkDidSaveNotification, _countOfDistinctKeyDescriptor, 
+                       _countOfKeyDescriptor, _entityConstValueForNameDescriptor, 
+                       _entityKeyPathForNameDescriptor, _functionOnKeyDescriptor, 
+                       _kProcessKeyTypeBundleName, _kProcessKeyTypeProcName, _kStateMachineStatusKeyAdminState, 
                        _kStateMachineStatusKeyInternalVariables, _kStateMachineStatusKeyState, 
                        _kSymptomActivityBitmapCellularInterface, _kSymptomActivityBitmapCurrentMachAbsTime, 
                        _kSymptomActivityBitmapEndTime, _kSymptomActivityBitmapEthernetInterface, 
@@ -98,13 +100,15 @@ exports:
                        _kSymptomAnalyticsServiceTypicalUsageToggle, _kSymptomAnalyticsServiceUsage, 
                        _kSymptomAnalyticsServiceWatchpointKey, _kSymptomAnalyticsServiceWatchpointTarget, 
                        _kSymptomAnalyticsServiceWatchpointValue, _kSymptomAnalyticsTypeBundleIdentifier, 
-                       _kSymptomAnalyticsTypeProcessName, _kSymptomAnalyticsWorkspacePersistenceOptionPersistentKey ]
+                       _kSymptomAnalyticsTypeProcessName, _kSymptomAnalyticsWorkspacePersistenceOptionPersistentKey, 
+                       _kSymptomForcePreferCellOverWiFiAutoDisableTimestampKey, _kSymptomForcePreferCellOverWiFiEnableKey ]
     objc-classes:    [ AggregatePropertyDescriptor, AnalyticsWorkspace, AnalyticsWorkspaceRetrievalCallback, 
                        AppAnalytics, DiagnosticCaseUsage, DiagnosticCaseUsageAnalytics, 
                        FetchRequestPropertiesDescriptor, LiveUsage, NWActivityFragment, 
-                       NWActivityMetricData, NetworkAttachmentAnalytics, ObjectAnalytics, 
-                       Process, ProcessAnalytics, SFApp, SFAppCalendarUsage, SFAppDomainUsage, 
-                       SFAppEndpoint, SFAppExperience, SFAppRun, SFAppTypicalUsage, 
-                       SFFlow, SFLiveFlowPerf, SFLiveRoutePerf, SFNetworkAttachment, 
-                       SFProvisioningData, SFTrackerDomain, UsageAnalytics ]
+                       NWActivityMetricData, NWActivityXPC, NetworkAttachmentAnalytics, 
+                       ObjectAnalytics, Process, ProcessAnalytics, SFApp, SFAppCalendarUsage, 
+                       SFAppDomainUsage, SFAppEndpoint, SFAppExperience, SFAppRun, 
+                       SFAppTypicalUsage, SFFlow, SFLiveFlowPerf, SFLiveRoutePerf, 
+                       SFNetworkAttachment, SFProvisioningData, SFTrackerDomain, 
+                       UsageAnalytics ]
 ...

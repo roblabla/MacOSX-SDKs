@@ -6,13 +6,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, CPAlertActionStyle) {
     CPAlertActionStyleDefault = 0, // A style that indicates a default action.
-    CPAlertActionStyleCancel,     // A style that indicates the action will cancel and leave data unchanged.
-    CPAlertActionStyleDestructive // A style that indicates the button might change or delete data.
+    CPAlertActionStyleCancel,      // A style that indicates the action will cancel and leave data unchanged.
+    CPAlertActionStyleDestructive, // A style that indicates the button might change or delete data.
 } API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /**
@@ -40,9 +41,23 @@ typedef void (^CPAlertActionHandler) (CPAlertAction *);
                         style:(CPAlertActionStyle)style
                       handler:(CPAlertActionHandler)handler;
 
+/**
+ Create an alert action with a title, a custom action color, and a callback handler that is invoked
+ when the user taps this action.
+ 
+ The system will automatically determine if the provided color meets contrast requirements.
+ If the provided color does not meet contrast requirements, the system default will be used.
+ Font color will automatically be adjusted by the system to correspond with this color.
+ Alpha values will be ignored.
+ */
+- (instancetype)initWithTitle:(NSString *)title
+                        color:(UIColor *)color
+                      handler:(CPAlertActionHandler)handler API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
 @property (nonatomic, copy, readonly) NSString *title;
 @property (nonatomic, assign, readonly) CPAlertActionStyle style;
 @property (nonatomic, copy, readonly) CPAlertActionHandler handler;
+@property (nonatomic, copy, readonly, nullable) UIColor *color API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 

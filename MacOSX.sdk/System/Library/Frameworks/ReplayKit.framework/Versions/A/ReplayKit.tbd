@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AFF79629-F1FF-37DB-94AA-DA0618045510
+    value:           D56D2565-05E4-3C86-AE94-AC68E14B1E3A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           840572EE-43D2-3814-8038-58B43C54A645
+    value:           15574499-2340-3BFF-A295-B05D348D69B1
 install-name:    '/System/Library/Frameworks/ReplayKit.framework/Versions/A/ReplayKit'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _RPApplicationInfoBundleIdentifierKey, _RPAudioPacketPool_Alloc, 
                        _RPAudioPacketPool_Create, _RPAudioPacketPool_Destroy, _RPAudioPacketPool_Free, 
                        _RPLogSetLogLevel, _RPRecordingErrorDomain, _RPSampleBufferUtilities_CopySampleBufferFromSourceBuffer, 
@@ -23,9 +23,10 @@ exports:
                        _RPVideoEditorExtensionAppNameKey, _RPVideoEditorExtensionBundleIdentifierKey, 
                        _RPVideoEditorExtensionFileAttachmentKey, _RPVideoEditorExtensionMoviePathKey, 
                        _RPVideoEditorExtensionOverrideShareMessageKey, _RPVideoEditorExtensionOverrideTintColorKey, 
-                       _RPVideoSampleOrientationKey, _RP_Micro, _ReplayKitVersionNumber, 
-                       _ReplayKitVersionString, _SCStreamErrorDomain, ___RPLogLevel, 
-                       _kRPBroadcastActivityViewServiceProtocol, _kRPVideoEditorViewServiceProtocol ]
+                       _RPVideoSampleOrientationKey, _RP_Micro, _RP_RoundNumberToNearestMultiple, 
+                       _RP_RoundNumberWithSigFigs, _ReplayKitVersionNumber, _ReplayKitVersionString, 
+                       _SCStreamErrorDomain, ___RPLogLevel, _kRPBroadcastActivityViewServiceProtocol, 
+                       _kRPVideoEditorViewServiceProtocol ]
     objc-classes:    [ RPAppAudioCaptureManager, RPAppAudioHAL, RPAudioHardwareUtility, 
                        RPAudioMixUtility, RPBlurWindow, RPBorderlessEffectWindow, 
                        RPBroadcastActivityController, RPBroadcastActivityExtensionHostContext, 
@@ -36,11 +37,11 @@ exports:
                        RPBroadcastExtensionProxy, RPBroadcastHandler, RPBroadcastHostViewController, 
                        RPBroadcastSampleHandler, RPDaemonProxy, RPDimAndShadowWindow, 
                        RPDimAndShadowWindowContentView, RPExtensionContext, RPExtensionHostContext, 
-                       RPIOSurfaceObject, RPMacUtility, RPPipView, RPPipViewController, 
-                       RPPreviewViewController, RPRemoteViewContainerWindow, RPRemoteWindowController, 
-                       RPScreenRecorder, RPStoreInfo, RPStoreManager, RPStreamingActivity, 
-                       RPStreamingActivityKey, RPThread, RPTransparentWindow, RPVideoEditorHostRemoteNSViewController, 
-                       RPVideoEditorViewServiceExtensionHostContext ]
+                       RPFeatureFlagUtility, RPIOSurfaceObject, RPMacUtility, RPPipView, 
+                       RPPipViewController, RPPreviewViewController, RPRemoteViewContainerWindow, 
+                       RPRemoteWindowController, RPScreenRecorder, RPStoreInfo, RPStoreManager, 
+                       RPStreamingActivity, RPStreamingActivityKey, RPThread, RPTransparentWindow, 
+                       RPVideoEditorHostRemoteNSViewController, RPVideoEditorViewServiceExtensionHostContext ]
     objc-ivars:      [ RPBorderlessEffectWindow.noSourceWindow, RPDimAndShadowWindow.animatesTransitions, 
                        RPDimAndShadowWindow.dimLayer, RPDimAndShadowWindow.groupLayer, 
                        RPDimAndShadowWindow.shadowCenterKnockoutLayer, RPDimAndShadowWindow.shadowLayer ]

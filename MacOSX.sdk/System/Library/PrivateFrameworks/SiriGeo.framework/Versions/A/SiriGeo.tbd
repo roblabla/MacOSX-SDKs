@@ -3,20 +3,32 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AFCC3BFF-16CB-3455-92ED-BD4E7E2D5EF6
+    value:           616E78AD-E34F-3470-A789-64714BA9013E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D3FB5CE4-EBF7-30D6-A4CC-D06500191235
+    value:           448CAF26-535A-3CA8-86E9-731C1DE4938B
 install-name:    '/System/Library/PrivateFrameworks/SiriGeo.framework/Versions/A/SiriGeo'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ '_$s7SiriGeo14ContactServiceCACycfC', '_$s7SiriGeo14ContactServiceCACycfCTq', 
-                       '_$s7SiriGeo14ContactServiceCACycfc', '_$s7SiriGeo14ContactServiceCMa', 
-                       '_$s7SiriGeo14ContactServiceCMm', '_$s7SiriGeo14ContactServiceCMn', 
-                       '_$s7SiriGeo14ContactServiceCN', '_$s7SiriGeo14ContactServiceCfD', 
-                       '_$s7SiriGeo14ContactServiceCfd', '_$s7SiriGeo18LocationControllerC10completion33_2BF6851856BECF61FC749914C8A15817LLyySo10CLLocationCSgcvM', 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ '_$s10PegasusAPI026Apple_Parsec_Siri_V2alpha_E14CommandBuilderV06OneOf_egH6ParamsO0E3GeoE11descriptionSSvg', 
+                       '_$s10PegasusAPI026Apple_Parsec_Siri_V2alpha_E14CommandBuilderV06OneOf_egH6ParamsO0E3GeoE11descriptionSSvpMV', 
+                       '_$s10PegasusAPI026Apple_Parsec_Siri_V2alpha_E14CommandBuilderV06OneOf_egH6ParamsOs23CustomStringConvertible0E3GeoMc', 
+                       '_$s10PegasusAPI48Apple_Parsec_Siri_V2alpha_PerResultLayoutDetailsV13OneOf_SnippetO0E3GeoE11descriptionSSvg', 
+                       '_$s10PegasusAPI48Apple_Parsec_Siri_V2alpha_PerResultLayoutDetailsV13OneOf_SnippetO0E3GeoE11descriptionSSvpMV', 
+                       '_$s10PegasusAPI48Apple_Parsec_Siri_V2alpha_PerResultLayoutDetailsV13OneOf_SnippetOs23CustomStringConvertible0E3GeoMc', 
+                       '_$s7SiriGeo0aB16CommandConverterO02isC13TypeSupported07commandF0Sb10PegasusAPI013Apple_Parsec_a9_V2alpha_aC7BuilderV06OneOf_acN6ParamsO_tFZ', 
+                       '_$s7SiriGeo0aB16CommandConverterO09convertToA7Snippet7snippetSo020SALocalSearchMapItemG0CSg10PegasusAPI013Apple_Parsec_A31_V2alpha_PerResultLayoutDetailsV06OneOf_G0O_tFZ', 
+                       '_$s7SiriGeo0aB16CommandConverterO09convertToaC07commandSaySo017SABaseClientBoundC0CG10PegasusAPI013Apple_Parsec_a9_V2alpha_aC7BuilderV_tFZ', 
+                       '_$s7SiriGeo0aB16CommandConverterO22isSnippetTypeSupported07snippetG0Sb10PegasusAPI013Apple_Parsec_A31_V2alpha_PerResultLayoutDetailsV06OneOf_F0O_tFZ', 
+                       '_$s7SiriGeo0aB16CommandConverterOMa', '_$s7SiriGeo0aB16CommandConverterOMn', 
+                       '_$s7SiriGeo0aB16CommandConverterON', '_$s7SiriGeo14ContactServiceCACycfC', 
+                       '_$s7SiriGeo14ContactServiceCACycfCTq', '_$s7SiriGeo14ContactServiceCACycfc', 
+                       '_$s7SiriGeo14ContactServiceCMa', '_$s7SiriGeo14ContactServiceCMm', 
+                       '_$s7SiriGeo14ContactServiceCMn', '_$s7SiriGeo14ContactServiceCN', 
+                       '_$s7SiriGeo14ContactServiceCfD', '_$s7SiriGeo14ContactServiceCfd', 
+                       '_$s7SiriGeo18LocationControllerC10completion33_2BF6851856BECF61FC749914C8A15817LLyySo10CLLocationCSgcvM', 
                        '_$s7SiriGeo18LocationControllerC10completion33_2BF6851856BECF61FC749914C8A15817LLyySo10CLLocationCSgcvg', 
                        '_$s7SiriGeo18LocationControllerC10completion33_2BF6851856BECF61FC749914C8A15817LLyySo10CLLocationCSgcvs', 
                        '_$s7SiriGeo18LocationControllerC10completionACySo10CLLocationCSgc_tcfC', 
@@ -127,6 +139,7 @@ exports:
                        '_$s7SiriGeo38INRetrieveParkingLocationIntentHandlerCMa', 
                        '_$s7SiriGeo38INRetrieveParkingLocationIntentHandlerCMn', 
                        '_$s7SiriGeo38INRetrieveParkingLocationIntentHandlerCN', '_$s7SiriGeo38INRetrieveParkingLocationIntentHandlerCfD', 
+                       '_$s7SiriGeo6logger2os6LoggerVvau', '_$s7SiriGeo6logger2os6LoggerVvp', 
                        '_$sSo14INPersonHandleC7SiriGeoE09toContactB00C9Inference0fB0VyF', 
                        '_$sSo18INPersonHandleTypeV7SiriGeoE09toContactbC00D9Inference0gB0V0bC0OyF', 
                        '_$sSo8INPersonC7SiriGeoE014toContactQueryC00B9Inference0eF0VyF', 

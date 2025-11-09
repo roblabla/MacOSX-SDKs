@@ -9,6 +9,16 @@
 #import <Metal/MTLDefines.h>
 
 
+typedef struct
+{
+    double red;
+    double green;
+    double blue;
+    double alpha;
+} MTLClearColor;
+
+MTL_INLINE MTLClearColor MTLClearColorMake(double red, double green, double blue, double alpha);
+
 
 @protocol MTLRasterizationRateMap;
 
@@ -38,16 +48,6 @@ typedef NS_OPTIONS(NSUInteger, MTLStoreActionOptions) {
     MTLStoreActionOptionNone                  = 0,
     MTLStoreActionOptionCustomSamplePositions = 1 << 0,
 } API_AVAILABLE(macos(10.13), ios(11.0));
-
-typedef struct
-{
-    double red;
-    double green;
-    double blue;
-    double alpha;
-} MTLClearColor;
-
-MTL_INLINE MTLClearColor MTLClearColorMake(double red, double green, double blue, double alpha);
 
 @protocol MTLTexture;
 @protocol MTLBuffer;
@@ -213,7 +213,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 /* Individual attachment state access */
 - (MTLRenderPassColorAttachmentDescriptor *)objectAtIndexedSubscript:(NSUInteger)attachmentIndex;
 
-/* This always uses 'copy' semantics.  It is safe to set the attachment state at any legal index to nil, which resets that attachment descriptor state to default vaules. */
+/* This always uses 'copy' semantics.  It is safe to set the attachment state at any legal index to nil, which resets that attachment descriptor state to default values. */
 - (void)setObject:(nullable MTLRenderPassColorAttachmentDescriptor *)attachment atIndexedSubscript:(NSUInteger)attachmentIndex;
 
 @end
@@ -273,7 +273,7 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
 /* Individual attachment state access */
 - (MTLRenderPassSampleBufferAttachmentDescriptor *)objectAtIndexedSubscript:(NSUInteger)attachmentIndex;
 
-/* This always uses 'copy' semantics.  It is safe to set the attachment state at any legal index to nil, which resets that attachment descriptor state to default vaules. */
+/* This always uses 'copy' semantics.  It is safe to set the attachment state at any legal index to nil, which resets that attachment descriptor state to default values. */
 - (void)setObject:(nullable MTLRenderPassSampleBufferAttachmentDescriptor *)attachment atIndexedSubscript:(NSUInteger)attachmentIndex;
 
 @end
@@ -325,14 +325,14 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 /*!
  @property tileWidth:
  @abstract The width in pixels of the tile.
- @discssion Defaults to 0. Zero means Metal chooses a width that fits within the local memory.
+ @discussion Defaults to 0. Zero means Metal chooses a width that fits within the local memory.
  */
 @property (nonatomic) NSUInteger tileWidth API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /*!
  @property tileHeight:
  @abstract The height in pixels of the tile.
- @discssion Defaults to 0. Zero means Metal chooses a height that fits within the local memory.
+ @discussion Defaults to 0. Zero means Metal chooses a height that fits within the local memory.
  */
 @property (nonatomic) NSUInteger tileHeight API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 

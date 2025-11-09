@@ -1,6 +1,7 @@
+#if !__has_include(<PassKitCore/PKDisbursementAuthorizationController.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKDisbursementAuthorizationController.h
-//
+//  PassKit
 //  Copyright © 2019 Apple, Inc. All rights reserved.
 //
 
@@ -45,3 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <PassKitCore/PKDisbursementAuthorizationController.h>
+#endif

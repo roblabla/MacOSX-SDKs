@@ -1,6 +1,6 @@
 .\" see 'man mdoc' for syntax examples
 .\" this should go in /usr/share/man/man1/
-.Dd November 30, 2021
+.Dd March 24, 2022
 .Dt profiles 1
 .Os macOS
 .Sh NAME
@@ -13,7 +13,7 @@
 .Sh DESCRIPTION
 .Nm
 is used to handle various profile types on macOS.   Starting with macOS 11.0 (profiles tool 8.0 or later), this tool cannot be
-    used to install configuration profiles.  You should add your profiles using the System Preferences Profiles
+    used to install configuration profiles.  You should add your profiles using the System Settings Profiles
     preference pane.    Additionally, startup profiles are no longer supported.
 .Sh VERBS
 Each command verb is listed with its description and optional individual arguments.   Most commands use the -type option to determine which kind of profile should be used in the command.  For those commands, if no type is specified, the default will be to use the configuration profile type.
@@ -39,8 +39,9 @@ List profiles for a user or when running as root, the device.
 .Sy -type Ar profile_type
 .Sy -user Ar user_name
 .Sy -output Ar output_path
+.Sy -cached
 .br
-Show expanded information for profiles.   For an enrollment, this will show the current DEP configuration, and the call may be rate limited to once every 23 hours.
+Show expanded information for profiles.   If the type is set to enrollment, this will instead show the current server DEP configuration.  Obtaining the enrollment information may be rate limited to 10 times every 23 hours, at which point it will try to display the information from the local cache.  Should this occur, a note will be displayed with the enrollment information.  If the -cached option is set, the enrollment information will only be obtained from the local cache.
 .Pp
 .\"             -- remove --
 .It Sy remove
@@ -72,7 +73,7 @@ For configuration profiles, synchronize current installed set of profiles with t
 .Sy -identifier Ar identifier
 .Sy -output Ar output_path
 .br
-For configuration profiles, renews any certificates for the specified profile.  For Device Enrollment Program (DEP) enrollments, retry to obtain the device enrollment configuration, and re-enable the user notification if enrollment wasn't completed.
+For configuration profiles, renews any certificates for the specified profile.  For Device Enrollment Program (DEP) enrollments, retry to obtain the device enrollment configuration, and re-enable the user notification if enrollment wasn't completed.   With enrollments, this call may be rate limited to 10 times every 23 hours, though it should try to enroll with cached information if it is available.
 .Pp
 .\"             -- validate --
 .It Sy validate
@@ -80,7 +81,7 @@ For configuration profiles, renews any certificates for the specified profile.  
 .Sy -path Ar file_path
 .br
 For provisioning profiles, validate the provisioning profile located at the file_path.
-For enrollments, re-validate the installed DEP server information and update any local information, displaying any major changes.  If this information is different from the current enrolled server, this will not unenroll the client from the current server.  This call may be rate limited to once every 23 hours.
+For enrollments, re-validate the installed DEP server information and update any local information, displaying any major changes.  If this information is different from the current enrolled server, this will not unenroll the client from the current server.  This call may be rate limited to 10 times every 23 hours.
 .Pp
 .\"             -- version --
 .It Sy version
@@ -110,6 +111,8 @@ An optional password used when removing a configuration profile which requires t
 This will prevent confirmation requests, and when trying to remove all configuration profles for a user, it will ignore any errors during removal.
 .It Fl all
 For configuration profiles, when running as root, the use of this option with the list or show commands will display all profiles installed on the system.   When removing profiles, using this option will remove all profiles for that user (or device).
+.It Fl cached
+A flag to indicate that information should only be obtained from the local cache.  This is currently used for the show command's enrollment option.
 .It Fl verbose
 Display additional information.
 .El
@@ -148,6 +151,8 @@ Displays the current DEP configuration information.
 Re-enables the DEP user notification enrollment messages.
 .It profiles install -type bootstraptoken
 Creates or updates the Bootstrap Token APFS record and escrows the information to the server.
+.It profiles show -type enrollment -cached
+Displays the cached information of an existing DEP enrollment configuration.
 .El                      \" Ends the list
 .Sh SEE ALSO
 .Xr profiles.old 1

@@ -6,7 +6,7 @@
 
 @class NSArray<ObjectType>, NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NSString *NSValueTransformerName NS_TYPED_EXTENSIBLE_ENUM;
 
@@ -50,4 +50,4 @@ API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

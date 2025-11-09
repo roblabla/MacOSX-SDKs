@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_EXTERN NSErrorDomain const UIGuidedAccessErrorDomain API_AVAILABLE(ios(12.2));
 
@@ -89,7 +89,7 @@ typedef NS_OPTIONS(NSUInteger, UIGuidedAccessAccessibilityFeature) {
 
 UIKIT_EXTERN void UIGuidedAccessConfigureAccessibilityFeatures(UIGuidedAccessAccessibilityFeature features, BOOL enabled, void (^completion)(BOOL success, NSError * _Nullable error)) API_AVAILABLE(ios(12.2)) API_UNAVAILABLE(watchos, tvos);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIGuidedAccess.h>

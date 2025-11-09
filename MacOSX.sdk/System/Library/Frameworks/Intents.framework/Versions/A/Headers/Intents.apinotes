@@ -244,6 +244,26 @@ SwiftVersions:
     - Selector: 'resolveTimeForCreateAlarm:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveTime(forCreateAlarm:with:)'
+  - Name: INCreateEventIntentHandling
+    Methods:
+    - Selector: 'confirmCreateEvent:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(createEvent:completion:)'
+    - Selector: 'handleCreateEvent:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(createEvent:completion:)'
+    - Selector: 'resolveDateTimeRangeForCreateEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveDateTimeRange(forCreateEvent:with:)'
+    - Selector: 'resolveLocationForCreateEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveLocation(forCreateEvent:with:)'
+    - Selector: 'resolveParticipantsForCreateEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveParticipants(forCreateEvent:with:)'
+    - Selector: 'resolveTitleForCreateEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveTitle(forCreateEvent:with:)'
   - Name: INCreateFileIntentHandling
     Methods:
     - Selector: 'confirmCreateFile:completion:'
@@ -326,6 +346,20 @@ SwiftVersions:
     - Selector: 'resolveAlarmsForDeleteAlarm:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveAlarms(forDeleteAlarm:with:)'
+  - Name: INDeleteEventIntentHandling
+    Methods:
+    - Selector: 'confirmDeleteEvent:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(deleteEvent:completion:)'
+    - Selector: 'handleDeleteEvent:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(deleteEvent:completion:)'
+    - Selector: 'resolveDeleteAllOccurrencesForDeleteEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveDeleteAllOccurrences(forDeleteEvent:with:)'
+    - Selector: 'resolveTargetEventIdentifierForDeleteEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveTargetEventIdentifier(forDeleteEvent:with:)'
   - Name: INDeleteFilePermanentlyIntentHandling
     Methods:
     - Selector: 'confirmDeleteFilePermanently:completion:'
@@ -403,6 +437,29 @@ SwiftVersions:
     - Selector: 'resolveDevicesForFindDeviceAndPlaySound:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveDevices(forFindDeviceAndPlaySound:with:)'
+  - Name: INFindEventsIntentHandling
+    Methods:
+    - Selector: 'confirmFindEvents:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(findEvents:completion:)'
+    - Selector: 'handleFindEvents:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(findEvents:completion:)'
+    - Selector: 'resolveDateTimeRangeForFindEvents:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveDateTimeRange(forFindEvents:with:)'
+    - Selector: 'resolveLocationForFindEvents:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveLocation(forFindEvents:with:)'
+    - Selector: 'resolveParticipantsForFindEvents:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveParticipants(forFindEvents:with:)'
+    - Selector: 'resolveRequestedEventAttributeForFindEvents:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveRequestedEventAttribute(forFindEvents:with:)'
+    - Selector: 'resolveSearchQueryForFindEvents:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveSearchQuery(forFindEvents:with:)'
   - Name: INGetCarLockStatusIntentHandling
     Methods:
     - Selector: 'confirmGetCarLockStatus:completion:'
@@ -1775,6 +1832,14 @@ SwiftVersions:
     - Selector: 'resolveEntityTypeForUncompressFile:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveEntityType(forUncompressFile:with:)'
+  - Name: INUnsendMessagesIntentHandling
+    Methods:
+    - Selector: 'confirmUnsendMessages:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(unsendMessages:completion:)'
+    - Selector: 'handleUnsendMessages:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(unsendMessages:completion:)'
   - Name: INUpdateAlarmIntentHandling
     Methods:
     - Selector: 'confirmUpdateAlarm:completion:'
@@ -1795,6 +1860,38 @@ SwiftVersions:
     - Selector: 'resolveProposedTimeForUpdateAlarm:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveProposedTime(forUpdateAlarm:with:)'
+  - Name: INUpdateEventIntentHandling
+    Methods:
+    - Selector: 'confirmUpdateEvent:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(updateEvent:completion:)'
+    - Selector: 'handleUpdateEvent:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(updateEvent:completion:)'
+    - Selector: 'resolveAddParticipantsForUpdateEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveAddParticipants(forUpdateEvent:with:)'
+    - Selector: 'resolveRemoveLocationForUpdateEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveRemoveLocation(forUpdateEvent:with:)'
+    - Selector: 'resolveRemoveParticipantsForUpdateEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveRemoveParticipants(forUpdateEvent:with:)'
+    - Selector: 'resolveSetDateTimeRangeForUpdateEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveSetDateTimeRange(forUpdateEvent:with:)'
+    - Selector: 'resolveSetLocationForUpdateEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveSetLocation(forUpdateEvent:with:)'
+    - Selector: 'resolveSetTitleForUpdateEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveSetTitle(forUpdateEvent:with:)'
+    - Selector: 'resolveTargetEventIdentifierForUpdateEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveTargetEventIdentifier(forUpdateEvent:with:)'
+    - Selector: 'resolveUpdateAllOccurrencesForUpdateEvent:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveUpdateAllOccurrences(forUpdateEvent:with:)'
   - Name: INUpdateMediaAffinityIntentHandling
     Methods:
     - Selector: 'confirmUpdateMediaAffinity:completion:'

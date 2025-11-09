@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           67CECCE5-FA87-3845-9A6D-A9E44553470B
+    value:           3A0C5AB0-FBF4-33B6-9794-011DA8FC4E0F
   - target:          x86_64-maccatalyst
-    value:           67CECCE5-FA87-3845-9A6D-A9E44553470B
+    value:           3A0C5AB0-FBF4-33B6-9794-011DA8FC4E0F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ED19FE19-8E0F-313D-8CEB-4F30ECFF6FB1
+    value:           B4779771-5FAE-3D89-850F-8E246C124909
   - target:          arm64e-maccatalyst
-    value:           ED19FE19-8E0F-313D-8CEB-4F30ECFF6FB1
+    value:           B4779771-5FAE-3D89-850F-8E246C124909
 install-name:    '/System/Library/PrivateFrameworks/Chirp.framework/Versions/A/Chirp'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10PrivateKey5Chirp7NoiseDHPTl', '_$s3Key5Chirp11NoiseCipherPTl', 
                        '_$s5Chirp0A6ErrorsO10missingPSKyA2CmFWC', '_$s5Chirp0A6ErrorsO13malformedDatayA2CmFWC', 
                        '_$s5Chirp0A6ErrorsO17payloadIsTooLargeyA2CmFWC', '_$s5Chirp0A6ErrorsO17payloadIsTooShortyA2CmFWC', 
@@ -56,9 +56,7 @@ exports:
                        '_$s5Chirp14NoiseDHPrivateP9PublicKeyAA0b13DiffieHellmanE9AgreementP_AA0B8DHPublicTn', 
                        '_$s5Chirp14NoiseDHPrivatePAA0B25DiffieHellmanKeyAgreementTb', 
                        '_$s5Chirp14NoiseDHPrivatePxycfCTj', '_$s5Chirp14NoiseDHPrivatePxycfCTq', 
-                       '_$s5Chirp14NoiseDHPrivateTL', '_$s5Chirp14TransportStateV22decryptIncomingPayload_14additionalData10Foundation0H0Vqd___AHtKAF0H8ProtocolRd__lF', 
-                       '_$s5Chirp14TransportStateV22decryptIncomingPayload_14authenticating10Foundation4DataVqd___AHtKAF0I8ProtocolRd__lF', 
-                       '_$s5Chirp14TransportStateV22encryptOutgoingPayload_14additionalData10Foundation0H0Vqd___AHtKAF0H8ProtocolRd__lF', 
+                       '_$s5Chirp14NoiseDHPrivateTL', '_$s5Chirp14TransportStateV22decryptIncomingPayload_14authenticating10Foundation4DataVqd___AHtKAF0I8ProtocolRd__lF', 
                        '_$s5Chirp14TransportStateV22encryptOutgoingPayload_14authenticating10Foundation4DataVqd___AHtKAF0I8ProtocolRd__lF', 
                        '_$s5Chirp14TransportStateV7readKey9CryptoKit09SymmetricE0Vvg', 
                        '_$s5Chirp14TransportStateV7readKey9CryptoKit09SymmetricE0VvpMV', 

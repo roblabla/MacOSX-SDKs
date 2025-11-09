@@ -66,7 +66,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  By taking into account the suggested size, the enumeration will guarantee the best user experience possible. The
  system enforces a maximum of 100 times the suggested size.
  */
-@property (nonatomic, readonly) NSInteger suggestedPageSize FILEPROVIDER_API_AVAILABILITY_V3;
+@property (nonatomic, readonly) NSInteger suggestedPageSize FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 @end
 
@@ -129,7 +129,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
 
  The system enforces a maximum of 100 times the suggested size.
  */
-@property (nonatomic, readonly) NSInteger suggestedBatchSize FILEPROVIDER_API_AVAILABILITY_V3;
+@property (nonatomic, readonly) NSInteger suggestedBatchSize FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 @end
 
@@ -154,6 +154,15 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  enumeration after the previous page.  If a file provider sends batches of 200
  items to -[NSFileProviderEnumerationObserver didEnumerateItems:] for example,
  then successive pages might contain offsets in increments of 200.
+
+ Execution time:
+ ---------------
+ This method is not expected to take more than a few seconds to complete the
+ enumeration of a page of items. If the enumeration may not complete in a reasonable
+ amount of time because, for instance, of bad network conditions, it is recommended
+ to either report an error (for instance NSFileProviderErrorServerUnreachable) or
+ return everything that is readily available and wait for the enumeration of the
+ next page.
  */
 - (void)enumerateItemsForObserver:(id<NSFileProviderEnumerationObserver>)observer
                    startingAtPage:(NSFileProviderPage)page NS_SWIFT_NAME(enumerateItems(for:startingAt:));
@@ -179,6 +188,15 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  NOTE that the change-based observation methods are marked optional for historical
  reasons, but are really required. System performance will be severely degraded if
  they are not implemented.
+
+ Execution time:
+ ---------------
+ This method is not expected to take more than a few seconds to complete the
+ enumeration of a batch of items. If the enumeration may not complete in a reasonable
+ amount of time because, for instance, of bad network conditions, it is recommended
+ to either report an error (for instance NSFileProviderErrorServerUnreachable) or
+ return everything that is readily available and wait for the enumeration of the
+ next batch.
  */
 - (void)enumerateChangesForObserver:(id<NSFileProviderChangeObserver>)observer
                      fromSyncAnchor:(NSFileProviderSyncAnchor)syncAnchor NS_SWIFT_NAME(enumerateChanges(for:from:));

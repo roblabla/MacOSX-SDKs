@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @brief This class is used to represent a duration of time.
  */
 HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMDurationEvent : HMTimeEvent <NSCopying, NSMutableCopying>
+    @interface HMDurationEvent : HMTimeEvent<NSCopying, NSMutableCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -29,7 +29,7 @@ HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) 
 /*!
  * @brief duration The duration of time in seconds.
  */
-@property(readonly, nonatomic, assign) NSTimeInterval duration;
+@property (readonly, nonatomic, assign) NSTimeInterval duration;
 
 @end
 
@@ -38,14 +38,14 @@ HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) 
  * @brief This class is used to represent a duration of time.
  */
 HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMMutableDurationEvent : HMDurationEvent
+    @interface HMMutableDurationEvent : HMDurationEvent
 
 - (instancetype)init NS_UNAVAILABLE;
 
 /*!
  * @brief duration The duration of time in seconds.
  */
-@property(readwrite, nonatomic, assign) NSTimeInterval duration;
+@property (readwrite, nonatomic, assign) NSTimeInterval duration;
 
 @end
 

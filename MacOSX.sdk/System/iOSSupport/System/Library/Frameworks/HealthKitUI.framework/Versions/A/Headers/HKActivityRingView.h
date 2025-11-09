@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-HK_EXTERN API_AVAILABLE(ios(9.3), watchos(2.2))
+HK_EXTERN API_AVAILABLE(ios(9.3), watchos(2.2), macCatalyst(13.0), macos(13.0))
 @interface HKActivityRingView : UIView
 
 /**

@@ -1,10 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-ios15.4-macabi -enable-objc-interop -assert-config DisableReplacement -autolink-force-load -enable-library-evolution -module-link-name swiftos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name os
-// swift-module-flags-ignorable: -user-module-version 1023
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-ios16.1-macabi -enable-objc-interop -assert-config DisableReplacement -autolink-force-load -enable-library-evolution -module-link-name swiftos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name os
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1034
 import ObjectiveC
 import Swift
 import _Concurrency
+import _StringProcessing
 @_exported import os.log
 @_exported import os
 @_exported import os.signpost
@@ -181,9 +182,12 @@ extension os.OSLogFloatFormatting {
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogInterpolation {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ argumentObject: @autoclosure @escaping () -> ObjectiveC.NSObject, privacy: os.OSLogPrivacy = .auto) {
-    appendInterpolation(argumentObject(), privacy: privacy, attributes: "")
+    appendInterpolation(argumentObject() as Optional, privacy: privacy, attributes: "")
   }
   @_semantics("constant_evaluable") @_alwaysEmitIntoClient @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ argumentObject: @autoclosure @escaping () -> ObjectiveC.NSObject, privacy: os.OSLogPrivacy = .auto, attributes: Swift.String) {
+    appendInterpolation(argumentObject() as Optional, privacy: privacy, attributes: attributes)
+  }
+  @_alwaysEmitIntoClient @_optimize(none) @_semantics("constant_evaluable") @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ object: @autoclosure @escaping () -> ObjectiveC.NSObject?, privacy: os.OSLogPrivacy = .auto, attributes: Swift.String = "") {
     guard argumentCount < maxOSLogArgumentCount else { return }
 
     formatString += getNSObjectFormatSpecifier(privacy, attributes)
@@ -192,7 +196,7 @@ extension os.OSLogInterpolation {
       appendMaskArgument(privacy)
     }
     addNSObjectHeaders(privacy)
-    arguments.append(argumentObject)
+    arguments.append(object)
     argumentCount += 1
     objectArgumentCount += 1
   }
@@ -228,22 +232,29 @@ extension os.OSLogInterpolation {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogArguments {
-  @_semantics("constant_evaluable") @inlinable @_optimize(none) internal mutating func append(_ value: @escaping () -> ObjectiveC.NSObject) {
+  @_semantics("constant_evaluable") @inlinable @_optimize(none) internal mutating func append(_ value: @escaping () -> ObjectiveC.NSObject?) {
     argumentClosures.append({ (position, objectArguments, _) in
       serialize(value(), at: &position, storingObjectsIn: &objectArguments)
     })
   }
 }
-@_alwaysEmitIntoClient @inline(__always) internal func serialize(_ object: ObjectiveC.NSObject, at bufferPosition: inout os.ByteBufferPointer, storingObjectsIn objectArguments: inout os.ObjectStorage<ObjectiveC.NSObject>) {
+@_alwaysEmitIntoClient @inline(__always) internal func serialize(_ object: ObjectiveC.NSObject?, at bufferPosition: inout os.ByteBufferPointer, storingObjectsIn objectArguments: inout os.ObjectStorage<ObjectiveC.NSObject?>) {
   let byteCount = pointerSizeInBytes();
   let dest =
     UnsafeMutableRawBufferPointer(start: bufferPosition, count: byteCount)
-  // Get the address of this NSObject as an UnsafeRawPointer.
-  let objectAddress = Unmanaged.passUnretained(object).toOpaque()
-  // Copy the address into the destination buffer. Note that the input NSObject
-  // is kept alive until the os_log ABI call completes by storing in the
-  // objectArguments.
-  withUnsafeBytes(of: objectAddress) { dest.copyMemory(from: $0) }
+
+  if let object = object {
+    // Get the address of this NSObject as an UnsafeRawPointer.
+    let objectAddress = Unmanaged.passUnretained(object).toOpaque()
+    // Copy the address into the destination buffer. Note that the input
+    // NSObject is kept alive until the os_log ABI call completes by storing in
+    // the objectArguments.
+    withUnsafeBytes(of: objectAddress) { dest.copyMemory(from: $0) }
+  } else {
+    // Copy a null address into the destination buffer.
+    withUnsafeBytes(of: 0) { dest.copyMemory(from: $0) }
+  }
+
   bufferPosition += byteCount
   // This object could be newly created by the auto-closure. Therefore, make
   // sure it is alive until the log call completes.
@@ -1313,6 +1324,19 @@ internal func serialize(_ stringValue: Swift.String, at bufferPosition: inout Sw
 @available(watchOS, unavailable, introduced: 7)
 @available(tvOS, unavailable, introduced: 14)
 internal func getNullTerminatedUTF8Pointer(_ stringValue: Swift.String, using stringStorage: inout os.ObjectStorage<Any>) -> Swift.UnsafeRawPointer
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+extension os.OSLogInterpolation {
+  @_disfavoredOverload @_alwaysEmitIntoClient @_optimize(none) @_semantics("constant_evaluable") @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ error: @autoclosure @escaping () -> Swift.Error, privacy: os.OSLogPrivacy = .auto, attributes: Swift.String = "") {
+    // Error bridges to NSError which is NSObject, but importing Foundation
+    // creates a dependency cycle
+    self.appendInterpolation(unsafeBitCast(_bridgeErrorToNSError(error()), to: NSObject.self), privacy: privacy, attributes: attributes)
+  }
+  @_disfavoredOverload @_alwaysEmitIntoClient @_optimize(none) @_semantics("constant_evaluable") @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ error: @autoclosure @escaping () -> Swift.Error?, privacy: os.OSLogPrivacy = .auto, attributes: Swift.String = "") {
+    // Error bridges to NSError which is NSObject, but importing Foundation
+    // creates a dependency cycle
+    self.appendInterpolation(error().map({ unsafeBitCast(_bridgeErrorToNSError($0), to: NSObject.self) }), privacy: privacy, attributes: attributes)
+  }
+}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 public typealias SignpostMetadata = os.OSLogMessage
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
@@ -1535,7 +1559,7 @@ public class OSSignpostIntervalState : Swift.Codable {
   let bufferMemory = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
   // Buffer for storing NSObjects and strings to keep them alive until the
   // _os_signpost_emit_with_name_impl call completes.
-  let objectArguments = createStorage(capacity: objectCount, type: NSObject.self)
+  let objectArguments = createStorage(capacity: objectCount, type: NSObject?.self)
   let stringArgumentOwners = createStorage(capacity: stringCount, type: Any.self)
 
   var currentBufferPosition = bufferMemory
@@ -1839,7 +1863,7 @@ internal typealias ByteBufferPointer = Swift.UnsafeMutablePointer<Swift.UInt8>
 @usableFromInline
 internal typealias ObjectStorage<T> = Swift.UnsafeMutablePointer<T>?
 @usableFromInline
-internal typealias ArgumentClosures = [(inout os.ByteBufferPointer, inout os.ObjectStorage<ObjectiveC.NSObject>, inout os.ObjectStorage<Any>) -> ()]
+internal typealias ArgumentClosures = [(inout os.ByteBufferPointer, inout os.ObjectStorage<ObjectiveC.NSObject?>, inout os.ObjectStorage<Any>) -> ()]
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @usableFromInline
 @frozen internal struct OSLogArguments {
@@ -1891,6 +1915,142 @@ internal typealias ArgumentClosures = [(inout os.ByteBufferPointer, inout os.Obj
     storage.deinitialize(count: count)
     storage.deallocate()
   }
+}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+@frozen public struct OSAllocatedUnfairLock<State> : @unchecked Swift.Sendable {
+  @_alwaysEmitIntoClient internal let __lock: Swift.ManagedBuffer<State, Darwin.os_unfair_lock>
+  @_alwaysEmitIntoClient public init(uncheckedState initialState: State) {
+		__lock = .create(minimumCapacity: 1) { buffer in
+			/*
+			 * 'header' doesn't have a fixed address, as it can be inlined into the
+			 * struct.
+			 * 'elements' is shared between all references.
+			 */
+			buffer.withUnsafeMutablePointerToElements { lock in
+				lock.initialize(to: .init())
+			}
+			return initialState
+		}
+	}
+  @_alwaysEmitIntoClient public func withLockUnchecked<R>(_ body: (inout State) throws -> R) rethrows -> R {
+        return try self.__lock.withUnsafeMutablePointers { header, lock in
+            os_unfair_lock_lock(lock)
+            defer {
+                os_unfair_lock_unlock(lock)
+            }
+            return try body(&header.pointee)
+        }
+    }
+  #if compiler(>=5.3) && $Sendable
+  @_alwaysEmitIntoClient public func withLock<R>(_ body: @Sendable (inout State) throws -> R) rethrows -> R where R : Swift.Sendable {
+        return try self.withLockUnchecked(body)
+	}
+  #endif
+  @_alwaysEmitIntoClient public func withLockIfAvailableUnchecked<R>(_ body: (inout State) throws -> R) rethrows -> R? {
+		return try self.__lock.withUnsafeMutablePointers { header, lock in
+			guard os_unfair_lock_trylock(lock) else {
+				return nil
+			}
+			defer {
+				os_unfair_lock_unlock(lock)
+			}
+			return try body(&header.pointee)
+		}
+	}
+  #if compiler(>=5.3) && $Sendable
+  @_alwaysEmitIntoClient public func withLockIfAvailable<R>(_ body: @Sendable (inout State) throws -> R) rethrows -> R? where R : Swift.Sendable {
+        return try self.withLockIfAvailableUnchecked(body)
+    }
+  #endif
+  @frozen public enum Ownership {
+    case owner
+    case notOwner
+    public static func == (a: os.OSAllocatedUnfairLock<State>.Ownership, b: os.OSAllocatedUnfairLock<State>.Ownership) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @_alwaysEmitIntoClient internal func _preconditionTest(_ condition: os.OSAllocatedUnfairLock<State>.Ownership) -> Swift.Bool {
+		self.__lock.withUnsafeMutablePointerToElements { lock in
+			switch condition {
+			case .owner:
+				os_unfair_lock_assert_owner(lock)
+			case .notOwner:
+				os_unfair_lock_assert_not_owner(lock)
+			}
+		}
+		return true
+	}
+  @_transparent @_alwaysEmitIntoClient public func precondition(_ condition: os.OSAllocatedUnfairLock<State>.Ownership) {
+		// Using Swift.precondition allows us to elide the assert in
+		// -Ounchecked builds.  A check fail will crash inside
+		// os_unfair_lock_assert instead of returning false to the test.
+		Swift.precondition(_preconditionTest(condition), "lockPrecondition failure")
+	}
+}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+extension os.OSAllocatedUnfairLock where State == () {
+  @_alwaysEmitIntoClient public init() { self.init(uncheckedState: ()) }
+  @_alwaysEmitIntoClient public func withLockUnchecked<R>(_ body: () throws -> R) rethrows -> R {
+		return try withLockUnchecked { _ in try body() }
+	}
+  #if compiler(>=5.3) && $Sendable
+  @_alwaysEmitIntoClient public func withLock<R>(_ body: @Sendable () throws -> R) rethrows -> R where R : Swift.Sendable {
+        return try withLock { _ in try body() }
+    }
+  #endif
+  @_alwaysEmitIntoClient public func withLockIfAvailableUnchecked<R>(_ body: () throws -> R) rethrows -> R? {
+		return try withLockIfAvailableUnchecked { _ in try body() }
+	}
+  #if compiler(>=5.3) && $Sendable
+  @_alwaysEmitIntoClient public func withLockIfAvailable<R>(_ body: @Sendable () throws -> R) rethrows -> R? where R : Swift.Sendable {
+        return try withLockIfAvailable { _ in try body() }
+    }
+  #endif
+  #if compiler(>=5.3) && $UnavailableFromAsync
+  @_alwaysEmitIntoClient @_unavailableFromAsync(message: "Use withLock for scoped locking") public func lock() {
+		self.__lock.withUnsafeMutablePointerToElements { lock in
+			os_unfair_lock_lock(lock)
+		}
+	}
+  #else
+  @_alwaysEmitIntoClient public func lock() {
+		self.__lock.withUnsafeMutablePointerToElements { lock in
+			os_unfair_lock_lock(lock)
+		}
+	}
+  #endif
+  #if compiler(>=5.3) && $UnavailableFromAsync
+  @_alwaysEmitIntoClient @_unavailableFromAsync(message: "Use withLock for scoped locking") public func unlock() {
+		self.__lock.withUnsafeMutablePointerToElements { lock in
+			os_unfair_lock_unlock(lock)
+		}
+	}
+  #else
+  @_alwaysEmitIntoClient public func unlock() {
+		self.__lock.withUnsafeMutablePointerToElements { lock in
+			os_unfair_lock_unlock(lock)
+		}
+	}
+  #endif
+  #if compiler(>=5.3) && $UnavailableFromAsync
+  @_alwaysEmitIntoClient @_unavailableFromAsync(message: "Use withLockIfAvailable for scoped locking") public func lockIfAvailable() -> Swift.Bool {
+		return self.__lock.withUnsafeMutablePointerToElements { lock in
+			return os_unfair_lock_trylock(lock)
+		}
+	}
+  #else
+  @_alwaysEmitIntoClient public func lockIfAvailable() -> Swift.Bool {
+		return self.__lock.withUnsafeMutablePointerToElements { lock in
+			return os_unfair_lock_trylock(lock)
+		}
+	}
+  #endif
+}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+extension os.OSAllocatedUnfairLock where State : Swift.Sendable {
+  @_alwaysEmitIntoClient public init(initialState: State) { self.init(uncheckedState: initialState) }
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public struct Logger {
@@ -1969,7 +2129,7 @@ public struct Logger {
   let bufferMemory = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
   // Buffer for storing NSObjects and strings to keep them alive until the
   // _os_log_impl call completes.
-  let objectArguments = createStorage(capacity: objectCount, type: NSObject.self)
+  let objectArguments = createStorage(capacity: objectCount, type: NSObject?.self)
   let stringArgumentOwners = createStorage(capacity: stringCount, type: Any.self)
 
   var currentBufferPosition = bufferMemory
@@ -2011,7 +2171,7 @@ public struct Logger {
 
   // Code that will execute at runtime.
   let bufferMemory = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
-  let objectArguments = createStorage(capacity: objectCount, type: NSObject.self)
+  let objectArguments = createStorage(capacity: objectCount, type: NSObject?.self)
   let stringArgumentOwners = createStorage(capacity: stringCount, type: Any.self)
 
   var currentBufferPosition = bufferMemory
@@ -2187,6 +2347,7 @@ public enum OSLogInt32ExtendedFormat {
   case darwinErrno
   case darwinMode
   case darwinSignal
+  case machErrno
   case bitrate
   case bitrateIEC
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
@@ -2279,6 +2440,8 @@ extension os.OSLogInterpolation {
       specifier += "darwin.errno"
     case .darwinMode:
       specifier += "darwin.mode"
+    case .machErrno:
+      specifier += "mach.errno"
     case .darwinSignal:
       specifier += "darwin.signal"
     case .bitrate:
@@ -2368,6 +2531,12 @@ extension os.OSSignpostError : Swift.Hashable {}
 extension os.OSLogInterpolation.ArgumentType : Swift.Equatable {}
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogInterpolation.ArgumentType : Swift.Hashable {}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+extension os.OSAllocatedUnfairLock.Ownership : Swift.Equatable {}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+extension os.OSAllocatedUnfairLock.Ownership : Swift.Hashable {}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+extension os.OSAllocatedUnfairLock.Ownership : Swift.Sendable {}
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogCollectionBound : Swift.Equatable {}
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)

@@ -18,7 +18,7 @@
  */
 typedef NS_OPTIONS(NSUInteger, MTLIntersectionFunctionSignature) {
 	/**
-	 * @Brief No signature
+	 * @brief No signature
 	 */
 	MTLIntersectionFunctionSignatureNone = 0,
 
@@ -86,6 +86,12 @@ API_AVAILABLE(macos(11.0), ios(14.0))
 - (void)setBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index;
 - (void)setBuffers:(const id <MTLBuffer> __nullable [__nonnull])buffers offsets:(const NSUInteger [__nonnull])offsets withRange:(NSRange)range;
 
+
+/*!
+ @property gpuResourceID
+ @abstract Handle of the GPU resource suitable for storing in an Argument Buffer
+ */
+@property (readonly) MTLResourceID gpuResourceID API_AVAILABLE(macos(13.0), ios(16.0));
 
 - (void)setFunction:(nullable id <MTLFunctionHandle>)function atIndex:(NSUInteger)index;
 - (void)setFunctions:(const id <MTLFunctionHandle> __nullable [__nonnull])functions withRange:(NSRange)range;

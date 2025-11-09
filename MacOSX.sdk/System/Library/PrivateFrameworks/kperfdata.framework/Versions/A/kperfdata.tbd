@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2C558983-9D48-3DFA-A5AC-5C65535E13E3
+    value:           56E170BD-5646-354F-9BB7-81BDD2888141
   - target:          x86_64-maccatalyst
-    value:           2C558983-9D48-3DFA-A5AC-5C65535E13E3
+    value:           56E170BD-5646-354F-9BB7-81BDD2888141
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           289B7836-649E-3D3C-98BA-6BCBF537251B
+    value:           4414A98C-0791-3047-A7A9-A7BC0932907C
   - target:          arm64e-maccatalyst
-    value:           289B7836-649E-3D3C-98BA-6BCBF537251B
+    value:           4414A98C-0791-3047-A7A9-A7BC0932907C
 install-name:    '/System/Library/PrivateFrameworks/kperfdata.framework/Versions/A/kperfdata'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _kpdecode_cursor_clearchunk, _kpdecode_cursor_create, _kpdecode_cursor_flush, 
                        _kpdecode_cursor_free, _kpdecode_cursor_get_stats, _kpdecode_cursor_next_record, 
                        _kpdecode_cursor_set_option, _kpdecode_cursor_setchunk, _kpdecode_record_free, 

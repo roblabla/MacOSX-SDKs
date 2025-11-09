@@ -11,6 +11,7 @@
 #import <CoreML/MLBatchProvider.h>
 #import <CoreML/MLPredictionOptions.h>
 #import <CoreML/MLModelConfiguration.h>
+#import <CoreML/MLModelAsset.h>
 #import <CoreML/MLExport.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -75,6 +76,17 @@ ML_EXPORT
 /// Provides value for the given parameter. Returns nil on error.
 - (nullable id)parameterValueForKey:(MLParameterKey *)key
                               error:(NSError * _Nullable __autoreleasing * _Nullable)error API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*!
+  Construct a model asynchronously from a compiled model asset.
+
+  @param asset Compiled model asset derived from in-memory or on-disk Core ML model
+  @param configuration Model configuration that hold options for loading a model
+  @param handler When the model load completes successfully or unsuccessfully, the completion handler is invoked with a valid MLModel instance or NSError object.
+*/
++ (void)loadModelAsset:(MLModelAsset *)asset
+         configuration:(MLModelConfiguration *)configuration
+     completionHandler:(void (^)(MLModel * _Nullable model, NSError * _Nullable error))handler API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) NS_SWIFT_ASYNC_NAME(load(asset:configuration:));
 
 @end
 

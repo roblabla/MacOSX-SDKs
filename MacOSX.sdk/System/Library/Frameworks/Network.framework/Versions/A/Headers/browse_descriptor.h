@@ -2,7 +2,7 @@
 //  browse_descriptor.h
 //  Network
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019,2022 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_BROWSE_DESCRIPTOR_H__
@@ -123,6 +123,38 @@ nw_browse_descriptor_set_include_txt_record(nw_browse_descriptor_t descriptor, b
 API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 bool
 nw_browse_descriptor_get_include_txt_record(nw_browse_descriptor_t descriptor);
+
+/*!
+ * @function nw_browse_descriptor_create_application_service
+ *
+ * @abstract
+ *		Creates a browse descriptor for application service discovery.
+ *
+ * @param application_service_name
+ *		The service name to browse for.
+ *
+ * @result
+ *		An instantiated browse descriptor object.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+NW_RETURNS_RETAINED nw_browse_descriptor_t
+nw_browse_descriptor_create_application_service(const char *application_service_name);
+
+/*!
+ * @function nw_browse_descriptor_get_application_service_name
+ *
+ * @abstract
+ *		Returns the service name of an application service browse descriptor.
+ *
+ * @param descriptor
+ *		A browse descriptor object.
+ *
+ * @result
+ *		The service name.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+const char * _Nullable
+nw_browse_descriptor_get_application_service_name(nw_browse_descriptor_t descriptor);
 
 __END_DECLS
 

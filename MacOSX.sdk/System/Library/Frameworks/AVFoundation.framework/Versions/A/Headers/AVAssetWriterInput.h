@@ -85,7 +85,13 @@ AV_INIT_UNAVAILABLE
  @discussion
 	A version of +assetWriterInputWithMediaType:outputSettings: that includes the ability to hint at the format of media data that will be appended to the new instance of AVAssetWriterInput.  When a source format hint is provided, the outputSettings dictionary is not required to be fully specified.  For AVMediaTypeAudio, this means that AVFormatIDKey is the only required key.  For AVMediaTypeVideo, this means that AVVideoCodecKey is the only required key.  Values for the remaining keys will be chosen by the asset writer input, with consideration given to the attributes of the source format.  To guarantee successful file writing, clients who specify a format hint should ensure that subsequently-appended buffers are of the specified format.
  
-	An NSInvalidArgumentException will be thrown if the media type of the format description does not match the media type string passed into this method.
+	This method throws an exception for any of the following reasons:
+		- the media type of the format description does not match the media type passed into this method
+		- the width and height of video format hint are not positive
+		- the output settings do not match the supplied media type
+		- for video inputs, the output settings do not contain a required key (AVVideoCodecKey, AVVideoWidthKey, AVVideoHeightKey)
+		- the output scaling mode is AVVideoScalingModeFit
+		- the output settings contain AVSampleRateConverterAudioQualityKey or AVVideoDecompressionPropertiesKey
  */
 + (instancetype)assetWriterInputWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -109,6 +115,13 @@ AV_INIT_UNAVAILABLE
 	For AVMediaTypeAudio the following keys are not currently supported in the outputSettings dictionary: AVSampleRateConverterAudioQualityKey.  When using this initializer, an audio settings dictionary must be fully specified, meaning that it must contain AVFormatIDKey, AVSampleRateKey, and AVNumberOfChannelsKey.  If no other channel layout information is available, a value of 1 for AVNumberOfChannelsKey will result in mono output and a value of 2 will result in stereo output.  If AVNumberOfChannelsKey specifies a channel count greater than 2, the dictionary must also specify a value for AVChannelLayoutKey.  For kAudioFormatLinearPCM, all relevant AVLinearPCM*Key keys must be included, and for kAudioFormatAppleLossless, AVEncoderBitDepthHintKey keys must be included.  See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.
  
 	For AVMediaTypeVideo, any output settings dictionary must request a compressed video format.  This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h.  When using this initializer, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey.  See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.  On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecTypeH264 and AVVideoCodecTypeJPEG.  AVVideoCodecTypeH264 is not supported on iPhone 3G.  For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported.
+ 
+	This method throws an exception for any of the following reasons:
+		- the media type of the format description does not match the media type passed into this method
+		- the output settings do not match the supplied media type
+		- for video inputs, the output settings do not contain a required key (AVVideoCodecKey, AVVideoWidthKey, AVVideoHeightKey)
+		- the output scaling mode is AVVideoScalingModeFit
+		- the output settings contain AVSampleRateConverterAudioQualityKey or AVVideoDecompressionPropertiesKey
  */
 - (instancetype)initWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings;
 
@@ -129,7 +142,13 @@ AV_INIT_UNAVAILABLE
  @discussion
 	A version of -initWithMediaType:outputSettings: that includes the ability to hint at the format of media data that will be appended to the new instance of AVAssetWriterInput.  When a source format hint is provided, the outputSettings dictionary is not required to be fully specified.  For AVMediaTypeAudio, this means that AVFormatIDKey is the only required key.  For AVMediaTypeVideo, this means that AVVideoCodecKey is the only required key.  Values for the remaining keys will be chosen by the asset writer input, with consideration given to the attributes of the source format.  To guarantee successful file writing, clients who specify a format hint should ensure that subsequently-appended buffers are of the specified format.
  
-	An NSInvalidArgumentException will be thrown if the media type of the format description does not match the media type string passed into this method.
+	This method throws an exception for any of the following reasons:
+		- the media type of the format description does not match the media type passed into this method
+		- the width and height of video format hint are not positive
+		- the output settings do not match the supplied media type
+		- for video inputs, the output settings do not contain a required key (AVVideoCodecKey, AVVideoWidthKey, AVVideoHeightKey)
+		- the output scaling mode is AVVideoScalingModeFit
+		- the output settings contain AVSampleRateConverterAudioQualityKey or AVVideoDecompressionPropertiesKey
  */
 - (instancetype)initWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos) NS_DESIGNATED_INITIALIZER;
 
@@ -139,7 +158,7 @@ AV_INIT_UNAVAILABLE
 	The media type of the samples that can be appended to the receiver.
  
  @discussion
-	The value of this property is one of the media type strings defined in AVMediaFormat.h.
+	The value of this property is one of the media types defined in AVMediaFormat.h.
  */
 @property (nonatomic, readonly) AVMediaType mediaType;
 
@@ -246,6 +265,8 @@ AV_INIT_UNAVAILABLE
 	When using a push-style buffer source, it is generally better to immediately append each buffer to the AVAssetWriterInput, directly via -[AVAssetWriter appendSampleBuffer:], as it is received.  Using this strategy, it is often possible to avoid  having to queue up buffers in between the buffer source and the AVAssetWriterInput.  Note that many of these push-style buffer sources also produce buffers in real-time, in which case the client should set expectsMediaDataInRealTime to YES.
  
 	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
+ 
+	This method throws an exception if this method is called more than once.
  */
 - (void)requestMediaDataWhenReadyOnQueue:(dispatch_queue_t)queue usingBlock:(void (^)(void))block;
 
@@ -286,6 +307,8 @@ AV_INIT_UNAVAILABLE
 	As of OS X 10.10 and iOS 8.0, this method can be used to add sample buffers that reference existing data in a file instead of containing media data to be appended to the file. This can be used to generate tracks that are not self-contained. In order to append such a sample reference to the track create a CMSampleBufferRef with a NULL dataBuffer and dataReady set to true and set the kCMSampleBufferAttachmentKey_SampleReferenceURL and kCMSampleBufferAttachmentKey_SampleReferenceByteOffset attachments on the sample buffer. Further documentation on how to create such a "sample reference" sample buffer can be found in the description of the kCMSampleBufferAttachmentKey_SampleReferenceURL and kCMSampleBufferAttachmentKey_SampleReferenceByteOffset attachment keys in the CMSampleBuffer documentation.
 
 	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.  It is an error to invoke this method before starting a session (via -[AVAssetWriter startSessionAtSourceTime:]) or after ending a session (via -[AVAssetWriter endSessionAtSourceTime:]).
+ 
+	This method throws an exception if the sample buffer's media type does not match the asset writer input's media type.
  */
 - (BOOL)appendSampleBuffer:(CMSampleBufferRef)sampleBuffer;
 
@@ -305,7 +328,7 @@ AV_INIT_UNAVAILABLE
 
 @end
 
-
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput (AVAssetWriterInputLanguageProperties)
 
 /*!
@@ -317,6 +340,8 @@ AV_INIT_UNAVAILABLE
 	Also see extendedLanguageTag below.
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
+ 
+	This property throws an exception if a language code is set which does not conform to the ISO 639-2/T language codes.
  */
 @property (nonatomic, copy, nullable) NSString *languageCode API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -328,13 +353,15 @@ AV_INIT_UNAVAILABLE
  @discussion
 	Extended language tags are normally set only when an ISO 639-2/T language code by itself is ambiguous, as in cases in which media data should be distinguished not only by language but also by the regional dialect in use or the writing system employed.
 
-	This property cannot be set after writing on the receiver's AVAssetWriter has started.	
+	This property cannot be set after writing on the receiver's AVAssetWriter has started.
+ 
+	This property throws an exception if an extended language tag is set which does not conform to the IETF BCP 47 (RFC 4646) language identifiers.
  */
 @property (nonatomic, copy, nullable) NSString *extendedLanguageTag API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
-
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput (AVAssetWriterInputPropertiesForVisualCharacteristic)
 
 /*!
@@ -363,7 +390,7 @@ AV_INIT_UNAVAILABLE
 
 @end
 
-
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput (AVAssetWriterInputPropertiesForAudibleCharacteristic)
 
 /*!
@@ -380,7 +407,7 @@ AV_INIT_UNAVAILABLE
 
 @end
 
-
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput (AVAssetWriterInputFileTypeSpecificProperties)
 
 /*!
@@ -392,6 +419,8 @@ AV_INIT_UNAVAILABLE
 	When an input group is added to an AVAssetWriter (see -[AVAssetWriter addInputGroup:]), the value of marksOutputTrackAsEnabled will automatically be set to YES for the default input and set to NO for all of the other inputs in the group.  In this case, if a new value is set on this property then an exception will be raised.
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
+ 
+	This property throws an exception if a value is set on an asset writer input that is contained in an input group.
  */
 @property (nonatomic) BOOL marksOutputTrackAsEnabled API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -404,6 +433,8 @@ AV_INIT_UNAVAILABLE
 	The default value is 0, which indicates that the receiver should choose a convenient value, if applicable.  It is an error to set a value other than 0 if the receiver has media type AVMediaTypeAudio.
 
 	This property cannot be set after writing has started.
+ 
+	This property throws an exception if a value is set on an asset writer input with media type AVMediaTypeAudio.
  */
 @property (nonatomic) CMTimeScale mediaTimeScale API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -417,9 +448,11 @@ AV_INIT_UNAVAILABLE
  
 	A "chunk" contains one or more samples.  The total duration of the samples in a chunk is no greater than this preferred chunk duration, or the duration of a single sample if the sample's duration is greater than this preferred chunk duration.
  
-	The default value is kCMTimeInvalid, which means that the receiver will choose an appropriate default value.  It is an error to set a chunk duration that is negative or non-numeric.
+	The default value is kCMTimeInvalid, which means that the receiver will choose an appropriate default value.
 
 	This property cannot be set after -startWriting has been called on the receiver.
+ 
+	This property throws an exception if a duration is set which is non-numeric or non-positive (see CMTIME_IS_NUMERIC).
  */
 @property (nonatomic) CMTime preferredMediaChunkDuration API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -490,7 +523,7 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
 
 @end
 
-
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput (AVAssetWriterInputTrackAssociations)
 
 /*!
@@ -522,6 +555,8 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
 	If the type of association requires tracks of specific media types that don't match the media types of the inputs, or if the output file type does not support track associations, an NSInvalidArgumentException is raised.
 
 	Track associations cannot be added after writing on the receiver's AVAssetWriter has started.
+ 
+	This method throws an exception if the input and track association type cannot be added (see -canAddTrackAssociationWithTrackOfInput:type:).
  */
 - (void)addTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -530,6 +565,7 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
 
 @class AVAssetWriterInputPassDescription;
 
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput (AVAssetWriterInputMultiPass)
 
 /*!
@@ -604,6 +640,8 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
 	When all media data has been appended for the current request, call -markCurrentPassAsFinished to begin the process of determining whether an additional pass is warranted.  If an additional pass is warranted, the block passed to this method will be invoked to begin the next pass.  If no additional passes are needed, the block passed to this method will be invoked one final time so the client can invoke -markAsFinished in response to the value of currentPassDescription becoming nil.
  
 	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
+ 
+	This method throws an exception if called more than once.
  */
 - (void)respondToEachPassDescriptionOnQueue:(dispatch_queue_t)queue usingBlock:(dispatch_block_t)block API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -694,8 +732,8 @@ AV_INIT_UNAVAILABLE
 	Pixel buffer attributes keys for the pixel buffer pool are defined in <CoreVideo/CVPixelBuffer.h>. To specify the pixel format type, the pixelBufferAttributes dictionary should contain a value for kCVPixelBufferPixelFormatTypeKey.  For example, use [NSNumber numberWithInt:kCVPixelFormatType_32BGRA] for 8-bit-per-channel BGRA. See the discussion under appendPixelBuffer:withPresentationTime: for advice on choosing a pixel format.
 
 	Clients that do not need a pixel buffer pool for allocating buffers should set sourcePixelBufferAttributes to nil.
-	
-	It is an error to initialize an instance of AVAssetWriterInputPixelBufferAdaptor with a sample buffer input that is already attached to another instance of AVAssetWriterInputPixelBufferAdaptor.
+ 
+	This method throws an exception if the input is already attached to another asset writer input pixel buffer adaptor or if the input has already started writing (the asset writer has progressed beyond AVAssetWriterStatusUnknown).
  */
 + (instancetype)assetWriterInputPixelBufferAdaptorWithAssetWriterInput:(AVAssetWriterInput *)input sourcePixelBufferAttributes:(nullable NSDictionary<NSString *, id> *)sourcePixelBufferAttributes;
 
@@ -717,8 +755,8 @@ AV_INIT_UNAVAILABLE
 	Pixel buffer attributes keys for the pixel buffer pool are defined in <CoreVideo/CVPixelBuffer.h>. To specify the pixel format type, the pixelBufferAttributes dictionary should contain a value for kCVPixelBufferPixelFormatTypeKey.  For example, use [NSNumber numberWithInt:kCVPixelFormatType_32BGRA] for 8-bit-per-channel BGRA. See the discussion under appendPixelBuffer:withPresentationTime: for advice on choosing a pixel format.
 
 	Clients that do not need a pixel buffer pool for allocating buffers should set sourcePixelBufferAttributes to nil.
-	
-	It is an error to initialize an instance of AVAssetWriterInputPixelBufferAdaptor with an asset writer input that is already attached to another instance of AVAssetWriterInputPixelBufferAdaptor.  It is also an error to initialize an instance of AVAssetWriterInputPixelBufferAdaptor with an asset writer input whose asset writer has progressed beyond AVAssetWriterStatusUnknown.
+
+	This method throws an exception if the input is already attached to another asset writer input pixel buffer adaptor or if the input has already started writing (the asset writer has progressed beyond AVAssetWriterStatusUnknown).
  */
 - (instancetype)initWithAssetWriterInput:(AVAssetWriterInput *)input sourcePixelBufferAttributes:(nullable NSDictionary<NSString *, id> *)sourcePixelBufferAttributes NS_DESIGNATED_INITIALIZER;
 
@@ -750,6 +788,8 @@ AV_INIT_UNAVAILABLE
 	The value of this property will be NULL before -[AVAssetWriter startWriting] is called on the associated AVAssetWriter object.
 	
 	This property is key value observable.
+ 
+	This property throws an exception if a pixel buffer pool cannot be created with this asset writer input pixel buffer adaptor's source pixel buffer attributes (must specify width, height, and either pixel format or pixel format description).
  */
 @property (nonatomic, readonly, nullable) CVPixelBufferPoolRef pixelBufferPool;
 
@@ -779,6 +819,8 @@ AV_INIT_UNAVAILABLE
  	If you are working with high bit depth sources the following yuv pixel formats are recommended when encoding to ProRes: kCVPixelFormatType_4444AYpCbCr16, kCVPixelFormatType_422YpCbCr16, and kCVPixelFormatType_422YpCbCr10. When working in the RGB domain kCVPixelFormatType_64ARGB is recommended. Scaling and color matching are not currently supported when using AVAssetWriter with any of these high bit depth pixel formats. Please make sure that your track's output settings dictionary specifies the same width and height as the buffers you will be appending. Do not include AVVideoScalingModeKey or AVVideoColorPropertiesKey.
  
 	Before calling this method, you must ensure that the input that underlies the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.  It is an error to invoke this method before starting a session (via -[AVAssetWriter startSessionAtSourceTime:]) or after ending a session (via -[AVAssetWriter endSessionAtSourceTime:]).
+ 
+	This method throws an exception if the presentation time is is non-numeric (see CMTIME_IS_NUMERIC) or if "readyForMoreMediaData" is NO.
  */
 - (BOOL)appendPixelBuffer:(CVPixelBufferRef)pixelBuffer withPresentationTime:(CMTime)presentationTime;
 
@@ -813,7 +855,11 @@ AV_INIT_UNAVAILABLE
  @discussion
 	The instance of AVAssetWriterInput passed in to this method must have been created with a format hint indicating all possible combinations of identifier (or, alternatively, key and keySpace), dataType, and extendedLanguageTag that will be appended to the metadata adaptor.  It is an error to append metadata items not represented in the input's format hint.
  
-	It is an error to initialize an instance of AVAssetWriterInputMetadataAdaptor with an asset writer input that is already attached to another instance of AVAssetWriterInputMetadataAdaptor.  It is also an error to initialize an instance of AVAssetWriterInputMetadataAdaptor with an asset writer input whose asset writer has progressed beyond AVAssetWriterStatusUnknown.
+	This method throws an exception for any of the following reasons:
+	 - input is already attached to another instance of AVAssetWriterInputMetadataAdaptor
+	 - input's asset writer has already started writing (progressed beyond AVAssetWriterStatusUnknown)
+	 - input's asset writer does not carry a source format hint
+	 - input's source format hint media subtype is not kCMMetadataFormatType_Boxed
  */
 + (instancetype)assetWriterInputMetadataAdaptorWithAssetWriterInput:(AVAssetWriterInput *)input;
 
@@ -830,7 +876,11 @@ AV_INIT_UNAVAILABLE
  @discussion
 	The instance of AVAssetWriterInput passed in to this method must have been created with a format hint indicating all possible combinations of identifier (or, alternatively, key and keySpace), dataType, and extendedLanguageTag that will be appended to the metadata adaptor.  It is an error to append metadata items not represented in the input's format hint.  For help creating a suitable format hint, see -[AVTimedMetadataGroup copyFormatDescription].
 
-	It is an error to initialize an instance of AVAssetWriterInputMetadataAdaptor with an asset writer input that is already attached to another instance of AVAssetWriterInputMetadataAdaptor.  It is also an error to initialize an instance of AVAssetWriterInputMetadataAdaptor with an asset writer input whose asset writer has progressed beyond AVAssetWriterStatusUnknown.
+	This method throws an exception for any of the following reasons:
+		- input is already attached to another instance of AVAssetWriterInputMetadataAdaptor
+		- input's asset writer has already started writing (progressed beyond AVAssetWriterStatusUnknown)
+		- input's asset writer does not carry a source format hint
+		- input's source format hint media subtype is not kCMMetadataFormatType_Boxed
  */
 - (instancetype)initWithAssetWriterInput:(AVAssetWriterInput *)input NS_DESIGNATED_INITIALIZER;
 
@@ -857,6 +907,8 @@ AV_INIT_UNAVAILABLE
 	The timing of the metadata items in the output asset will correspond to the timeRange of the AVTimedMetadataGroup, regardless of the values of the time and duration properties of the individual items.
  
 	Before calling this method, you must ensure that the input that underlies the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.  It is an error to invoke this method before starting a session (via -[AVAssetWriter startSessionAtSourceTime:]) or after ending a session (via -[AVAssetWriter endSessionAtSourceTime:]).
+ 
+	This method throws an exception if the attached asset writer input has not been added to an asset writer or -startWriting has not been called on that asset writer.
  */
 - (BOOL)appendTimedMetadataGroup:(AVTimedMetadataGroup *)timedMetadataGroup;
 
@@ -886,6 +938,13 @@ AV_INIT_UNAVAILABLE
 	@method initWithAssetWriterInput:
 	@abstract
 		Creates a new caption adaptor for writing to the specified asset writer input.
+ 
+	@discussion
+		This method thows an exception for any of the following reasons:
+			- input is nil
+			- the input's media type is not supported (should use text or closed caption)
+			- the input is already attached to an asset writer caption adaptor
+			- the input has already started writing
  */
 - (instancetype)initWithAssetWriterInput:(AVAssetWriterInput *)input;
 
@@ -909,7 +968,7 @@ AV_INIT_UNAVAILABLE
  
 		The start time of each caption's timeRange property must be numeric (see CMTIME_IS_NUMERIC) and must be at least as large as the start time of any previous caption (including any captions present in a group appended via -appendCaptionGroup:).  In other words, the sequence of captions appended using this method must have monotonically increasing start times.
  
-		 The duration of each caption's timeRange property must either be numeric.
+		The duration of each caption's timeRange property must be numeric.
  */
 - (BOOL)appendCaption:(AVCaption *)caption;
 

@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8800EB91-E523-3DF1-A9B2-89C9C1AB71C2
+    value:           3C13F736-6485-36B3-A478-64D9888B7AF4
   - target:          x86_64-maccatalyst
-    value:           8800EB91-E523-3DF1-A9B2-89C9C1AB71C2
+    value:           3C13F736-6485-36B3-A478-64D9888B7AF4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BA4133C1-BC80-3FF5-BCFE-BE72388C29C4
+    value:           635C8001-3B28-3B80-A7EF-39CDBCF23567
   - target:          arm64e-maccatalyst
-    value:           BA4133C1-BC80-3FF5-BCFE-BE72388C29C4
+    value:           635C8001-3B28-3B80-A7EF-39CDBCF23567
 install-name:    '/System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport'
-current-version: 15094
+current-version: 15107
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/OSAnalytics.framework/Versions/A/OSAnalytics', 
                        '/usr/lib/libDiagnosticMessagesClient.dylib' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$add$os10.6$_msgtracer_domain_free', '$ld$add$os10.6$_msgtracer_domain_new', 
                        '$ld$add$os10.6$_msgtracer_log', '$ld$add$os10.6$_msgtracer_log_with_keys', 
                        '$ld$add$os10.6$_msgtracer_msg_free', '$ld$add$os10.6$_msgtracer_msg_new', 
@@ -37,11 +37,10 @@ exports:
                        _CRGetUserUUID, _CRHasBeenAppleInternal, _CRHasBeenAppleInternalRecently, 
                        _CRIsAppleInternal, _CRIsAutoSubmitEnabled, _CRIsSeedBuild, 
                        _CRIsThirdPartyApplicationDataSubmissionEnabled, _CRLogStructuredData, 
-                       _CROpenProblemReport, _CRParseStackShotDictionary, _CRPrimeIsAppleInternal, 
-                       _CRSaveProblemReport, _CRSubmitProblemReport, _ConfigureCarrierDebugging, 
-                       _ConfigureCarrierDebuggingWithPower, _ConfigureInternalDebugging, 
-                       _ConfigureInternalDebuggingWithPower, _CopyExtensionForProblemType, 
-                       _CopyUpdatedWhitelistRanges, _DiagnosticLogSubmissionEnabled, 
+                       _CROpenProblemReport, _CRPrimeIsAppleInternal, _CRSaveProblemReport, 
+                       _CRSubmitProblemReport, _ConfigureCarrierDebugging, _ConfigureCarrierDebuggingWithPower, 
+                       _ConfigureInternalDebugging, _ConfigureInternalDebuggingWithPower, 
+                       _CopyExtensionForProblemType, _DiagnosticLogSubmissionEnabled, 
                        _DiagnosticLogSubmissionPreferenceExists, _GetDeviceConfig, 
                        _GetHardwareModel, _GetIncidentID, _GetNameForLogType, _GetSysIDWithDescription, 
                        _GetThermalState, _IsCarryDeviceWithHangtracerEnabled, _OSAContainerOTALoggingLibraryLocation, 
@@ -61,7 +60,7 @@ exports:
                        __CRCopyStringXAttr, __CRCopyUTF8String, __CRCreateAssociatedReportPlistURL, 
                        __CRCreateCrashHistoryDirectory, __CRCreateDictionaryWithPath, 
                        __CRCreateInternalUUID, __CRCreateProblemReportFromContentsOfURL, 
-                       __CRCreateTimeStamp, __CRCreateUnfilteredASLQuery, __CRDecodePanicTableOfContentsFromCFData, 
+                       __CRCreateTimeStamp, __CRDecodePanicTableOfContentsFromCFData, 
                        __CRGetAnonHostUUID, __CRGetDiagnosticMessagesHistoryBooleanValue, 
                        __CRGetDiagnosticMessagesHistoryUInt64Value, __CRGetHostName, 
                        __CRGetOSVersionDictionary, __CRGetOSVersionString, __CRGetPrimaryMACAddress, 
@@ -71,27 +70,26 @@ exports:
                        __CRSetIsAutoSubmitEnabled, __CRSetIsThirdPartyApplicationDataSubmissionEnabled, 
                        __CRSetXAttr, __CRStashCrashExceptionPortInfo, __CRThirdPartyApplicationDataSubmissionEnabledIsSet, 
                        __CRWriteCrashHistoryForProcess, __CRWritePropertyListWithPathAndMode, 
-                       __CreateASLQueryWithDomainList, ___crashreporter_binary_image_hints__, 
-                       __canModifyPreferences, __createAutoSubmitSettingObject, __migrateLegacyAutoSubmitEnabledSetting, 
-                       __setPreference, _cr_stashUpdate, _dlaggd_addScalarForKey, 
-                       _dlaggd_pushDistrubtionForKey, _dlca_sendEvent, _kCRBinaryInfoDisplayNameKey, 
-                       _kCRBinaryInfoDwarfUUIDKey, _kCRBinaryInfoDylibCompatibilityVersionKey, 
-                       _kCRBinaryInfoDylibCurrentVersionKey, _kCRBinaryInfoExecutablePathKey, 
-                       _kCRBinaryInfoIdentifierKey, _kCRBinaryInfoIndexKey, _kCRBinaryInfoIsAppleCodeKey, 
-                       _kCRBinaryInfoShortVersionStringKey, _kCRBinaryInfoSourceVersionKey, 
-                       _kCRBinaryInfoVersionKey, _kCRCrashHistoryDateKey, _kCRCrashHistoryForceQuitDateKey, 
+                       ___crashreporter_binary_image_hints__, __canModifyPreferences, 
+                       __createAutoSubmitSettingObject, __migrateLegacyAutoSubmitEnabledSetting, 
+                       __setPreference, _dlaggd_addScalarForKey, _dlaggd_pushDistrubtionForKey, 
+                       _dlca_sendEvent, _kCRBinaryInfoDisplayNameKey, _kCRBinaryInfoDwarfUUIDKey, 
+                       _kCRBinaryInfoDylibCompatibilityVersionKey, _kCRBinaryInfoDylibCurrentVersionKey, 
+                       _kCRBinaryInfoExecutablePathKey, _kCRBinaryInfoIdentifierKey, 
+                       _kCRBinaryInfoIndexKey, _kCRBinaryInfoIsAppleCodeKey, _kCRBinaryInfoShortVersionStringKey, 
+                       _kCRBinaryInfoSourceVersionKey, _kCRBinaryInfoVersionKey, 
+                       _kCRCrashHistoryDateKey, _kCRCrashHistoryForceQuitDateKey, 
                        _kCRCrashHistoryLastAutoSubmissionDate, _kCRCrashHistoryPathKey, 
-                       _kCRCrashHistorySuspectThirdPartyBinaryInfoKey, _kCRDiagnosticMessagesDirectory, 
-                       _kCRProblemReportAppAdamIDKey, _kCRProblemReportAppBuildVersionKey, 
-                       _kCRProblemReportAppDescriptionKey, _kCRProblemReportAppNameKey, 
-                       _kCRProblemReportAppStoreInvalid, _kCRProblemReportAppVersionKey, 
-                       _kCRProblemReportAppleInternalKey, _kCRProblemReportAutoSubmittedKey, 
-                       _kCRProblemReportBinaryUUIDKey, _kCRProblemReportBundleIdKey, 
-                       _kCRProblemReportCommentsKey, _kCRProblemReportCorrelationIDKey, 
-                       _kCRProblemReportDescriptionKey, _kCRProblemReportDialogDisplayedKey, 
-                       _kCRProblemReportDisplayNameKey, _kCRProblemReportEtlKeyKey, 
-                       _kCRProblemReportExceptionType, _kCRProblemReportIncidentIDKey, 
-                       _kCRProblemReportInterfaceLanguageKey, _kCRProblemReportInternalUUIDKey, 
+                       _kCRCrashHistorySuspectThirdPartyBinaryInfoKey, _kCRProblemReportAppAdamIDKey, 
+                       _kCRProblemReportAppBuildVersionKey, _kCRProblemReportAppDescriptionKey, 
+                       _kCRProblemReportAppNameKey, _kCRProblemReportAppStoreInvalid, 
+                       _kCRProblemReportAppVersionKey, _kCRProblemReportAppleInternalKey, 
+                       _kCRProblemReportAutoSubmittedKey, _kCRProblemReportBinaryUUIDKey, 
+                       _kCRProblemReportBundleIdKey, _kCRProblemReportCommentsKey, 
+                       _kCRProblemReportCorrelationIDKey, _kCRProblemReportDescriptionKey, 
+                       _kCRProblemReportDialogDisplayedKey, _kCRProblemReportDisplayNameKey, 
+                       _kCRProblemReportEtlKeyKey, _kCRProblemReportExceptionType, 
+                       _kCRProblemReportIncidentIDKey, _kCRProblemReportInterfaceLanguageKey, 
                        _kCRProblemReportIsSimulatedKey, _kCRProblemReportMoveSourceFileKey, 
                        _kCRProblemReportNoUserUUIDKey, _kCRProblemReportOSVersionKey, 
                        _kCRProblemReportPathKey, _kCRProblemReportPlatformKey, _kCRProblemReportPlistDescriptionKey, 
@@ -132,75 +130,72 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DBD68739-D373-3501-A7B3-B66A50B73B81
+    value:           0C442442-98AA-3983-8271-91DE84E7A453
   - target:          x86_64-maccatalyst
-    value:           DBD68739-D373-3501-A7B3-B66A50B73B81
+    value:           0C442442-98AA-3983-8271-91DE84E7A453
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F87F7C23-9C38-3FAE-BEC7-D14733532B5C
+    value:           C9F34B18-461F-3825-9DF8-3A44783958EC
   - target:          arm64e-maccatalyst
-    value:           F87F7C23-9C38-3FAE-BEC7-D14733532B5C
+    value:           C9F34B18-461F-3825-9DF8-3A44783958EC
 install-name:    '/System/Library/PrivateFrameworks/OSAnalytics.framework/Versions/A/OSAnalytics'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _OSADateFormat, _OSAIsDebugEnabledForRSD, _OSAIsRSDDevice, 
                        _OSAIsRSDDisplay, _OSAIsRSDHost, _OSANSDateFormat, _OSARTCIsProcessOfInterest, 
                        _OSASafeCreateDirectory, _OSASafeMoveItemAtURL, _OSASafeOpen, 
                        _OSASafeOpenReadOnly, _OSASafeOpenWriteOnly, _OSASafeRemoveFileAtURL, 
+                       _OSASandboxConsumeExtension, _OSASandboxExtensionForUserSubmissionDirectory, 
                        _OSASanitizeOptionHomeDirectory, _OSASanitizeOptionKeepFilename, 
                        _OSASanitizeOptionMountedVolume, _OSASanitizeOptionNetworkVolume, 
-                       _OSASanitizePath, _OSASyncCrashReporter, _OSATransformOptionFullReport, 
-                       _OSATransformOptionMetadata, _OSATransformOptionPersist, _OSATransformOptionSymbolicate, 
+                       _OSASanitizePath, _OSASetOwnership, _OSAStateMonitorEventCALogWritten, 
+                       _OSAStateMonitorEventSubmission, _OSASyncCrashReporter, _OSATimeIntervalApproximate, 
+                       _OSATransformOptionFullReport, _OSATransformOptionMetadata, 
+                       _OSATransformOptionPersist, _OSATransformOptionSymbolicate, 
                        _OSATransformOptionTracerGroup, _OSATransformOptionTracerURL, 
                        _OSATransformResultError, _OSATransformResultFileURL, _OSATransformResultMetadata, 
                        _OSATransformResultRadars, _OSATransformResultReport, _OSATransformResultTracerURL, 
+                       _OSA_OSX_Legacy_GetUserUUID, _OSAnalyticsHelperServiceConnection, 
                        _OSAnalyticsVersionNumber, _OSAnalyticsVersionString, _SimulateCrash, 
+                       _WriteCrashReportWithStackshot, _WriteCrashReportWithStackshotWithPayload, 
+                       _WriteCrashReportWithStackshotWithPayload_async, _WriteCrashReportWithStackshot_async, 
                        _WriteJetsamMemoryReportWithIDAndPids, _WriteStackshotReport, 
                        _WriteStackshotReportWithOptions, _WriteStackshotReportWithOptionsAndPayload, 
                        _WriteStackshotReportWithOptions_async, _WriteStackshotReportWithPID, 
                        _WriteStackshotReportWithPID_async, _WriteStackshotReportWithPayload, 
                        _WriteStackshotReport_async, _WriteStackshotReport_stdc, _WriteSystemMemoryResetReport, 
-                       _WriteSystemMemoryResetReportWithPids, _adsc_addScalarForKey, 
-                       _adsc_pushDistrubtionForKey, _adsc_setScalarForKey, _casc_sendEvent, 
-                       _kOSAIPSHeaderAppNameKey, _kOSALogMetadataAppBuild, _kOSALogMetadataAppName, 
-                       _kOSALogMetadataAppVersion, _kOSALogMetadataBugType, _kOSALogMetadataBundleID, 
-                       _kOSALogMetadataIncidentID, _kOSALogOptionAlternateMetadata, 
-                       _kOSALogOptionAppDescription, _kOSALogOptionCaptureTime, _kOSALogOptionCountKey, 
-                       _kOSALogOptionCreateTmpFile, _kOSALogOptionDialogDisplayed, 
-                       _kOSALogOptionFileOwner, _kOSALogOptionFileOwnerUID, _kOSALogOptionMoveSourceFile, 
-                       _kOSALogOptionObserverInfo, _kOSALogOptionOverrideCountLimit, 
-                       _kOSALogOptionOverrideFileExtension, _kOSALogOptionOverrideFileName, 
-                       _kOSALogOptionOverrideFilePrefix, _kOSALogOptionOverridePath, 
-                       _kOSALogOptionReopenPath, _kOSALogOptionRouting, _kOSALogOptionSignature, 
-                       _kOSALogOptionSignatureHash, _kOSALogOptionSubmissionPolicy, 
+                       _WriteSystemMemoryResetReportWithPids, _kOSAIPSHeaderAppNameKey, 
+                       _kOSALogMetadataAppBuild, _kOSALogMetadataAppName, _kOSALogMetadataAppVersion, 
+                       _kOSALogMetadataBugType, _kOSALogMetadataBundleID, _kOSALogMetadataIncidentID, 
+                       _kOSALogOptionAlternateMetadata, _kOSALogOptionAppDescription, 
+                       _kOSALogOptionCaptureTime, _kOSALogOptionCountKey, _kOSALogOptionCreateTmpFile, 
+                       _kOSALogOptionDialogDisplayed, _kOSALogOptionFileOwner, _kOSALogOptionFileOwnerUID, 
+                       _kOSALogOptionMoveSourceFile, _kOSALogOptionObserverInfo, 
+                       _kOSALogOptionOverrideCountLimit, _kOSALogOptionOverrideFileExtension, 
+                       _kOSALogOptionOverrideFileName, _kOSALogOptionOverrideFilePrefix, 
+                       _kOSALogOptionOverridePath, _kOSALogOptionReopenPath, _kOSALogOptionRouting, 
+                       _kOSALogOptionSignature, _kOSALogOptionSignatureHash, _kOSALogOptionSubmissionPolicy, 
                        _kOSALogOptionUrgent, _kOSALogScanOptionExcludeRetired, _kOSALogScanOptionIncludeOnlyRetired, 
                        _kOSALogScanOptionIncludeOnlyUrgent, _kOSALogScanOptionIncludeProxiesKey, 
-                       _kOSASubmissionDomain, _kOSASubmissionPolicyAlternate, _kPathOptionUntrusted, 
-                       _logEventForAppleCare, _logForAppleCare, _logLineForAppleCare, 
-                       _ns2xpc, _rollAppleCareLogs, _rtcsc_send, _runCrashMoverService, 
-                       _symbolicateSpeedTracer, _xpc2ns ]
-    objc-classes:    [ AWDClientHelpers, OSABinaryImageCatalog, OSABinaryImageSegment, 
-                       OSABridgeLinkProxy, OSACrackShotReport, OSAGPUEventReport, 
-                       OSAJetsamReport, OSALegacyXform, OSALog, OSALogCounterObject, 
-                       OSAProxyConfiguration, OSAReport, OSASafeCreateDirectoryOptions, 
-                       OSAStackShotReport, OSASymbolInfo, OSASystemConfiguration, 
+                       _kOSASandboxExtensionKey, _kOSASubmissionDomain, _kOSASubmissionPolicyAlternate, 
+                       _kPathOptionUntrusted, _logEventForAppleCare, _logForAppleCare, 
+                       _logLineForAppleCare, _ns2xpc, _rollAppleCareLogs, _rtcsc_send, 
+                       _runCrashMoverService, _symbolicateSpeedTracer, _xpc2ns ]
+    objc-classes:    [ OSABinaryImageCatalog, OSABinaryImageSegment, OSABridgeLinkProxy, 
+                       OSACrackShotReport, OSADefaults, OSADiagnosticsReporterSupport, 
+                       OSALegacyXform, OSALog, OSALogCounterObject, OSAProxyConfiguration, 
+                       OSAReport, OSASafeCreateDirectoryOptions, OSAStackShotReport, 
+                       OSAStateMonitor, OSASymbolInfo, OSASystemConfiguration, OSASystemWatchdogCrashReport, 
                        OSATasking ]
     objc-ivars:      [ OSABinaryImageCatalog._absolute_segment, OSABinaryImageCatalog._kernel_cache_segment, 
                        OSABinaryImageCatalog._kernel_segments, OSABinaryImageCatalog._kernel_text_exec_segments, 
                        OSABinaryImageCatalog._notes, OSABinaryImageCatalog._rootedCacheLibs, 
                        OSABinaryImageCatalog._shared_segments, OSABinaryImageCatalog._targeted_cache, 
                        OSABinaryImageCatalog._targeted_slide, OSABinaryImageCatalog._used_segments, 
-                       OSAGPUEventReport._event, OSAGPUEventReport._tailspinPath, 
-                       OSAJetsamReport._aleFlag, OSAJetsamReport._audioAssertionState, 
-                       OSAJetsamReport._event_code, OSAJetsamReport._event_reason, 
-                       OSAJetsamReport._isSuspendedOnlyJetsam, OSAJetsamReport._killedActiveApps, 
-                       OSAJetsamReport._killed_or_suspended_count, OSAJetsamReport._largestActiveApp, 
-                       OSAJetsamReport._largestProcess, OSAJetsamReport._snapshot, 
-                       OSAJetsamReport._visibilityEndowmentState, OSAJetsamReport._wiredBytes, 
                        OSALog._filepath, OSALog._metaData, OSALog._stream, OSAReport._capture_time, 
                        OSAReport._incidentID, OSAReport._logType, OSAReport._logWritingOptions, 
                        OSAReport._notes, OSAStackShotReport._additionalPayload, OSAStackShotReport._appName, 

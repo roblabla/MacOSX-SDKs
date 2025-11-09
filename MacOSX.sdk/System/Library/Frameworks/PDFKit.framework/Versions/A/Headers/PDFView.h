@@ -18,7 +18,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class PDFAction, PDFActionRemoteGoTo, PDFDestination, PDFSelection, PDFViewPrivate;
-@protocol PDFViewDelegate;
+@protocol PDFViewDelegate, PDFPageOverlayViewProvider;
 
 // Display modes.
 PDFKIT_ENUM_AVAILABLE(10_4, 11_0)
@@ -84,7 +84,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 #if defined(PDFKIT_PLATFORM_OSX)
     < NSAnimationDelegate, NSMenuDelegate >
 #elif defined(PDFKIT_PLATFORM_IOS)
-    < UIGestureRecognizerDelegate >
+    < UIGestureRecognizerDelegate, UIFindInteractionDelegate >
 #endif
 {
 @private
@@ -194,6 +194,9 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // -------- delegate
 
 @property (nonatomic, weak, nullable) id< PDFViewDelegate > delegate;
+
+@property (nonatomic, weak, nullable) id<PDFPageOverlayViewProvider> pageOverlayViewProvider PDFKIT_AVAILABLE(13_0, 16_0);
+
 
 // -------- scaling
 
@@ -356,6 +359,23 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // times/dates, etc., as the page becomes visible. Where URL's are found, Link annotations are created in place. These are
 // temporary annotations and are not saved.
 @property (nonatomic) BOOL enableDataDetectors PDFKIT_AVAILABLE(10_6, 11_0);
+
+// If YES, page overlay views will be hit tested and therefore receive gestures. If NO, PDFView will receive gestures,
+// namely those for text selection.
+@property (nonatomic, getter=isInMarkupMode) BOOL inMarkupMode PDFKIT_AVAILABLE(13_0, 16_0);
+
+
+// -------- find interaction
+
+#if defined(PDFKIT_PLATFORM_IOS)
+
+/// If `findInteractionEnabled` is set to true, returns the receiver's built-in find interaction. Otherwise, nil.
+@property (nonatomic, readonly) UIFindInteraction *findInteraction PDFKIT_AVAILABLE(NA, 16_0);
+
+/// Enables the built-in find interaction.
+@property (nonatomic, readwrite, getter=isFindInteractionEnabled) BOOL findInteractionEnabled PDFKIT_AVAILABLE(NA, 16_0);
+
+#endif
 
 @end
 

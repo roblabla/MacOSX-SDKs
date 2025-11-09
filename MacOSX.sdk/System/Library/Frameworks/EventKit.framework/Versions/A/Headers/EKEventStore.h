@@ -75,7 +75,7 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
     @abstract   Creates a new event store that only includes items and calendars for a subset of sources.
     @param      sources The sources you want this event store to recognize. This may include delegate sources.
  */
-- (instancetype)initWithSources:(NSArray<EKSource *> *)sources NS_AVAILABLE(10_11, NA);
+- (instancetype)initWithSources:(NSArray<EKSource *> *)sources NS_AVAILABLE(10_11, 16_0);
 
 typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError * __nullable error);
 
@@ -105,10 +105,6 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
 /*!
     @property   delegateSources
     @abstract   Returns an unordered array of sources for all available delegates.
-    @discussion By default, delegates are not included in an event store's sources. To work with delegates,
-                you can create a new event store and pass in the sources, including sources returned from this
-                method, that you're interested in.
-    @see        initWithSources:
  */
 @property (nonatomic, readonly) NSArray<EKSource *> *delegateSources NS_AVAILABLE(10_11, 12_0);
 
@@ -290,8 +286,6 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @method     eventsMatchingPredicate:
     @abstract   Searches for events that match the given predicate.
     @discussion This call executes a search for the events indicated by the predicate passed to it.
-                It only includes events which have been committed (e.g. those saved using 
-                saveEvent:commit:NO are not included until commit: is called.)
  
                 It is synchronous. If you want async behavior, you should either use dispatch_async or
                 NSOperation to run the query someplace other than the main thread, and then funnel the
@@ -307,8 +301,7 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @method     enumerateEventsMatchingPredicate:usingBlock:
     @abstract   Searches for events that match the given predicate.
     @discussion This call executes a search for the events indicated by the predicate passed to it, calling
-                the block specified in the callback parameter for each event. It only includes events which 
-                have been committed (e.g. those saved using saveEvent:commit:NO are not included until commit: is called.)
+                the block specified in the callback parameter for each event.
  
                 This method is synchronous. If you want async behavior, you should either use dispatch_async or
                 NSOperation to run the query someplace other than the main thread.
@@ -381,8 +374,6 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @discussion This method fetches reminders asynchronously and returns a value which can be
                 used in cancelFetchRequest: to cancel the request later if desired. The completion
                 block is called with an array of reminders that match the given predicate (or potentially nil).
-                This only includes reminders which have been committed (e.g. those saved using 
-                saveReminder:commit:NO are not included until commit: is called.)
 */
 - (id)fetchRemindersMatchingPredicate:(NSPredicate *)predicate completion:(void (^)(NSArray<EKReminder *> * __nullable reminders))completion NS_AVAILABLE(10_8, 6_0);
 
@@ -459,8 +450,7 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @discussion You can call this method to pull new data from remote sources.  
                 This only updates the event store's data.  If you want to update your objects after 
                 refreshing the sources, you should call refresh on each of them afterwards.
-                On iOS, this sync only occurs if deemed necessary.  
-                On OS X, this will occur regardless of necessity, but may change in a future release to match the iOS behavior.
+                On iOS and macOS, this sync only occurs if deemed necessary.
                 On WatchOS, initiating sync is not available. Sync will occur automatically with the paired iOS device.
  */
 - (void)refreshSourcesIfNecessary NS_AVAILABLE(10_8, 5_0) __WATCHOS_PROHIBITED;

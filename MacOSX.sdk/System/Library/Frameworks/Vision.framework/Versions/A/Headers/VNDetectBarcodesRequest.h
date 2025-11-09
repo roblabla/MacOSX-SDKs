@@ -58,10 +58,16 @@ API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
 static const NSUInteger VNDetectBarcodesRequestRevision1 = 1;
 
 /*
-    @brief expands the set of detected symbologies and uses updated detection methods in comparisong revision 1
+    @brief expands the set of detected symbologies and uses updated detection methods in comparison to revision 1
  */
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0))
 static const NSUInteger VNDetectBarcodesRequestRevision2 = 2;
+
+/*
+    @brief uses updated detection methods in comparison to revision 1 and 2
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
+static const NSUInteger VNDetectBarcodesRequestRevision3 = 3;
 
 
 NS_ASSUME_NONNULL_END

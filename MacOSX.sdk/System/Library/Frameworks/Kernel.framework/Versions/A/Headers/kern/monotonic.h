@@ -41,13 +41,9 @@ extern _Atomic uint64_t mt_pmis;
 extern _Atomic uint64_t mt_retrograde;
 
 void mt_fixed_counts(uint64_t *counts);
-void mt_cur_thread_fixed_counts(uint64_t *counts);
-void mt_cur_task_fixed_counts(uint64_t *counts);
 uint64_t mt_cur_cpu_instrs(void);
 uint64_t mt_cur_cpu_cycles(void);
 void mt_cur_cpu_cycles_instrs_speculative(uint64_t *cycles, uint64_t *instrs);
-uint64_t mt_cur_thread_instrs(void);
-uint64_t mt_cur_thread_cycles(void);
 
 bool mt_acquire_counters(void);
 bool mt_owns_counters(void);

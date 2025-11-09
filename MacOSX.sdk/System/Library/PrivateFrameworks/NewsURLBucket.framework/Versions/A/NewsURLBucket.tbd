@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6F0B1F08-B9B6-39A2-9862-A5457891F4BD
+    value:           80098230-3C98-337A-918C-19D7633BF73F
   - target:          x86_64-maccatalyst
-    value:           6F0B1F08-B9B6-39A2-9862-A5457891F4BD
+    value:           80098230-3C98-337A-918C-19D7633BF73F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           79DA25B3-59D7-35C9-9DA9-447B89A8D3F3
+    value:           4BE356F2-D72E-3202-9B4E-EF9C84710C69
   - target:          arm64e-maccatalyst
-    value:           79DA25B3-59D7-35C9-9DA9-447B89A8D3F3
+    value:           4BE356F2-D72E-3202-9B4E-EF9C84710C69
 install-name:    '/System/Library/PrivateFrameworks/NewsURLBucket.framework/Versions/A/NewsURLBucket'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11ElementType13NewsURLBucket06HasherB0PTl', '_$s13NewsURLBucket10HasherTypeMp', 
                        '_$s13NewsURLBucket10HasherTypeTL', '_$s13NewsURLBucket12HashBucketerC6bucket3for0E5CountSi10Foundation4DataV_SitF', 
                        '_$s13NewsURLBucket12HashBucketerCAA0cD4TypeAAMc', '_$s13NewsURLBucket12HashBucketerCAA0cD4TypeAAWP', 

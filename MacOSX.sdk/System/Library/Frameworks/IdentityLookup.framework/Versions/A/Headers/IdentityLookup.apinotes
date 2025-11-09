@@ -1,6 +1,12 @@
 ---
 Name: IdentityLookup
 Classes:
+- Name: ILMessageFilterCapabilitiesQueryResponse
+  Properties:
+  - Name: 'transactionalSubActions'
+    SwiftPrivate: true
+  - Name: 'promotionalSubActions'
+    SwiftPrivate: true
 - Name: ILMessageFilterExtensionContext
   Methods:
   - Selector: 'deferQueryRequestToNetworkWithCompletion:'

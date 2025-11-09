@@ -7,6 +7,7 @@
 
 #import <CoreSpotlight/CSSearchableItemAttributeSet.h>
 
+CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet (CSDocuments)
 
 ///Subject of the this item.

@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E432684F-546F-3931-AF3E-A0281C23A244
+    value:           E9F27094-01CB-337A-8530-0CAB0E2CC96D
   - target:          x86_64-maccatalyst
-    value:           E432684F-546F-3931-AF3E-A0281C23A244
+    value:           E9F27094-01CB-337A-8530-0CAB0E2CC96D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           51DD4B50-D2B2-31E7-ACAE-F662748A2D2B
+    value:           AD0EB60A-BA0D-3E1D-9A5B-DDC59E71D77D
   - target:          arm64e-maccatalyst
-    value:           51DD4B50-D2B2-31E7-ACAE-F662748A2D2B
+    value:           AD0EB60A-BA0D-3E1D-9A5B-DDC59E71D77D
 install-name:    '/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AudioConvertHostTimeToNanos, _AudioConvertNanosToHostTime, 
                        _AudioDeviceAddIOProc, _AudioDeviceAddPropertyListener, _AudioDeviceCreateIOProcID, 
                        _AudioDeviceCreateIOProcIDWithBlock, _AudioDeviceCreateIOProcIDWithClockedBlock, 
@@ -53,11 +53,13 @@ exports:
                        __ZN4AMCP11Null_DriverC2ERNS_14System_ContextE, __ZN4AMCP11Null_DriverD0Ev, 
                        __ZN4AMCP11Null_DriverD1Ev, __ZN4AMCP11Null_DriverD2Ev, __ZN4AMCP13Feature_Flags11run_new_halEv, 
                        __ZN4AMCP13Feature_Flags12host_asp_oopEv, __ZN4AMCP13Feature_Flags14run_hybrid_halEv, 
-                       __ZN4AMCP13Feature_Flags15set_run_new_halEb, __ZN4AMCP13Feature_Flags16set_host_asp_oopEb, 
-                       __ZN4AMCP13Feature_Flags17event_link_oop_ioEv, __ZN4AMCP13Feature_Flags18set_run_hybrid_halEb, 
-                       __ZN4AMCP13Feature_Flags19collect_io_perfdataEv, __ZN4AMCP13Feature_Flags20internal_drivers_oopEv, 
-                       __ZN4AMCP13Feature_Flags21set_event_link_oop_ioEb, __ZN4AMCP13Feature_Flags22allow_mcp_and_hal_coexEv, 
-                       __ZN4AMCP13Feature_Flags23set_collect_io_perfdataEb, __ZN4AMCP13Feature_Flags24set_internal_drivers_oopEb, 
+                       __ZN4AMCP13Feature_Flags15set_run_new_halEb, __ZN4AMCP13Feature_Flags16load_adm_dsp_libEv, 
+                       __ZN4AMCP13Feature_Flags16set_host_asp_oopEb, __ZN4AMCP13Feature_Flags17event_link_oop_ioEv, 
+                       __ZN4AMCP13Feature_Flags18set_run_hybrid_halEb, __ZN4AMCP13Feature_Flags19collect_io_perfdataEv, 
+                       __ZN4AMCP13Feature_Flags19force_mock_dsp_typeEv, __ZN4AMCP13Feature_Flags20internal_drivers_oopEv, 
+                       __ZN4AMCP13Feature_Flags20set_load_adm_dsp_libEb, __ZN4AMCP13Feature_Flags21set_event_link_oop_ioEb, 
+                       __ZN4AMCP13Feature_Flags22allow_mcp_and_hal_coexEv, __ZN4AMCP13Feature_Flags23set_collect_io_perfdataEb, 
+                       __ZN4AMCP13Feature_Flags23set_force_mock_dsp_typeEb, __ZN4AMCP13Feature_Flags24set_internal_drivers_oopEb, 
                        __ZN4AMCP13Feature_Flags26set_allow_mcp_and_hal_coexEb, __ZN4AMCP13Level_Control16set_scalar_valueEf, 
                        __ZN4AMCP13Level_Control17set_decibel_valueEf, __ZN4AMCP13Level_Control25set_scalar_value_and_waitEf, 
                        __ZN4AMCP13Level_Control26set_decibel_value_and_waitEf, __ZN4AMCP13Level_ControlC1ERKNS_6DeviceEjjj, 
@@ -229,13 +231,14 @@ exports:
                        __ZN4AMCP9IOContext13start_at_timeEy, __ZN4AMCP9IOContext13start_runningEb, 
                        __ZN4AMCP9IOContext13start_runningEv, __ZN4AMCP9IOContext15stop_prewarmingEv, 
                        __ZN4AMCP9IOContext16start_prewarmingEb, __ZN4AMCP9IOContext16start_prewarmingEv, 
-                       __ZN4AMCP9IOContext18set_io_cycle_usageEf, __ZN4AMCP9IOContext21get_client_io_handlerEv, 
-                       __ZN4AMCP9IOContext21set_buffer_frame_sizeEj, __ZN4AMCP9IOContext21set_client_io_handlerERKNSt3__18functionIFvjRKNS_15Proc_Cycle_InfoEmPNS_11Proc_StreamEmS7_EEE, 
+                       __ZN4AMCP9IOContext18set_io_cycle_usageEf, __ZN4AMCP9IOContext19sleeping_is_allowedEv, 
+                       __ZN4AMCP9IOContext21get_client_io_handlerEv, __ZN4AMCP9IOContext21set_buffer_frame_sizeEj, 
+                       __ZN4AMCP9IOContext21set_client_io_handlerERKNSt3__18functionIFvjRKNS_15Proc_Cycle_InfoEmPNS_11Proc_StreamEmS7_EEE, 
                        __ZN4AMCP9IOContext23get_io_overload_handlerEv, __ZN4AMCP9IOContext23get_os_workgroup_handleEv, 
                        __ZN4AMCP9IOContext23set_io_overload_handlerERKNSt3__18functionIFvjEEE, 
-                       __ZN4AMCP9IOContext23set_os_workgroup_handleERKN5caulk4mach21os_workgroup_intervalE, 
-                       __ZN4AMCP9IOContext25can_play_during_dark_wakeEv, __ZN4AMCP9IOContext26get_end_processing_handlerEv, 
-                       __ZN4AMCP9IOContext26set_end_processing_handlerERKNSt3__18functionIFvjEEE, 
+                       __ZN4AMCP9IOContext23set_os_workgroup_handleERKN5caulk4mach29os_workgroup_interval_managedE, 
+                       __ZN4AMCP9IOContext23set_sleeping_is_allowedEb, __ZN4AMCP9IOContext25can_play_during_dark_wakeEv, 
+                       __ZN4AMCP9IOContext26get_end_processing_handlerEv, __ZN4AMCP9IOContext26set_end_processing_handlerERKNSt3__18functionIFvjEEE, 
                        __ZN4AMCP9IOContext27get_io_thread_error_handlerEv, __ZN4AMCP9IOContext27set_io_thread_error_handlerERKNSt3__18functionIFvvEEE, 
                        __ZN4AMCP9IOContext29set_can_play_during_dark_wakeEb, __ZN4AMCP9IOContext33can_play_during_notification_wakeEv, 
                        __ZN4AMCP9IOContext33handle_overload_with_catchup_modeEb, 

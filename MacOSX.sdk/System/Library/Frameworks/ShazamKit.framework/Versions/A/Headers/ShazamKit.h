@@ -19,6 +19,8 @@
 #import <ShazamKit/SHMatchedMediaItem.h>
 #import <ShazamKit/SHMediaItem.h>
 #import <ShazamKit/SHMediaLibrary.h>
+#import <ShazamKit/SHRange.h>
 #import <ShazamKit/SHSession.h>
 #import <ShazamKit/SHSignature.h>
 #import <ShazamKit/SHSignatureGenerator.h>
+#import <ShazamKit/UTType+SHShazamAdditions.h>

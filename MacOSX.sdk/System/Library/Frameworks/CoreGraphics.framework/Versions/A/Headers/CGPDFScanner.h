@@ -112,6 +112,10 @@ CG_EXTERN bool CGPDFScannerPopStream(CGPDFScannerRef  scanner,
     CGPDFStreamRef __nullable * __nullable value)
     CG_AVAILABLE_STARTING(10.4, 2.0);
 
+/* Cleanly stop the scanner on the current operator, releasing any
+   temporary resources. */
+CG_EXTERN void CGPDFScannerStop(CGPDFScannerRef s);
+
 CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED

@@ -68,12 +68,12 @@ API_AVAILABLE(macos(10.6))
 /* Implemented by the data provider of a pasteboard item, to provide the data for a particular UTI type.
 */
 @required
-- (void)pasteboard:(nullable NSPasteboard *)pasteboard item:(NSPasteboardItem *)item provideDataForType:(NSPasteboardType)type;
+- (void)pasteboard:(nullable NSPasteboard *)pasteboard item:(NSPasteboardItem *)item provideDataForType:(NSPasteboardType)type NS_SWIFT_NONISOLATED;
 
 /* One data provider can provide data for more than one pasteboard item.  This method is called when the pasteboard no longer needs the data provider for any of its pasteboard items.  This can be either because the data provider has fulfilled all promises, or because ownership of the pasteboard has changed.
 */
 @optional
-- (void)pasteboardFinishedWithDataProvider:(NSPasteboard *)pasteboard;
+- (void)pasteboardFinishedWithDataProvider:(NSPasteboard *)pasteboard NS_SWIFT_NONISOLATED;
 
 @end
 

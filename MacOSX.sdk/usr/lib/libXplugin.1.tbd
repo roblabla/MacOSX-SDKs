@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           50357564-306F-39E1-BC89-7672B7024F0D
+    value:           520137B6-0D32-3517-A43C-9846B40580F4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5DCB5DAC-BFDB-3DE5-A2F8-9D21AB23DE10
+    value:           7C77ADEA-1366-3CE4-878A-EF303ED2329E
 install-name:    '/usr/lib/libXplugin.1.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _xp_api_version, _xp_attach_gl_context, _xp_composite_area_threshold, 
                        _xp_composite_pixels, _xp_configure_surface, _xp_configure_window, 
                        _xp_copy_bytes, _xp_copy_bytes_threshold, _xp_copy_window, 

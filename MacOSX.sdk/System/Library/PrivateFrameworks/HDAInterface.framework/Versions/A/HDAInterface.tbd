@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1556FC77-3CB5-3599-AB5A-1866AB73003B
+    value:           F14EA57D-DDCB-3249-AF5B-A6B9F1E620D1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3C569990-2135-3339-B458-319B3B5F2E70
+    value:           9645C7AD-A21D-38D5-8BFB-2B464ED707E1
 install-name:    '/System/Library/PrivateFrameworks/HDAInterface.framework/Versions/A/HDAInterface'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _HDAAudioEngineInputClass, _HDAAudioEngineOutputClass, _HDAErrorDomain ]
     objc-classes:    [ HDAAudioEngineUserClient, HDABuiltinCodecInterface, HDAControllerInterface, 
                        HDADSPInterface, HDADSPUserClient, HDAInterface, HDAMikeyInterface, 

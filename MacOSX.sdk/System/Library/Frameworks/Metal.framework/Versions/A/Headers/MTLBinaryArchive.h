@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, MTLBinaryArchiveError)
     MTLBinaryArchiveErrorInvalidFile = 1,
     MTLBinaryArchiveErrorUnexpectedElement = 2,
     MTLBinaryArchiveErrorCompilationFailure = 3,
+    MTLBinaryArchiveErrorInternalError API_AVAILABLE(macos(13.0), ios(16.0)) = 4,
 } API_AVAILABLE(macos(11.0), ios(14.0));
 
 /*!

@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, GKMatchmakingMode) {
     GKMatchmakingModeInviteOnly API_AVAILABLE(ios(15), macos(12), tvos(15)) = 3 ,
 };
 
-/// View controller to invite friends, respond to invites, and perform auto-matching. Present modally from the top view controller.
+/// View controller to invite friends, respond to invites, and perform automatching. Present modally from the top view controller.
 #if TARGET_OS_IPHONE
 
 #import <Foundation/Foundation.h>

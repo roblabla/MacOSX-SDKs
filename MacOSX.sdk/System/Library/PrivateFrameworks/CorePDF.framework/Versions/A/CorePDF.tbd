@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DD18E188-D8AC-3054-B172-7705B599234C
+    value:           9F615358-30B3-3B84-A03C-9FD1371E803B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E9A5F60E-1AE4-3B79-9591-52E64177D8F4
+    value:           51AE1579-5A5C-36C7-9E9E-2DD5BAFB3261
 install-name:    '/System/Library/PrivateFrameworks/CorePDF.framework/Versions/A/CorePDF'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CGPDFArchiveAddSelection, _CGPDFArchiveCreate, _CGPDFArchiveGetHTML, 
                        _CGPDFArchiveGetPlainText, _CGPDFArchiveGetRTFDData, _CGPDFArchiveGetStructuredString, 
                        _CGPDFArchiveGetWebArchiveData, _CGPDFArchiveRelease, _CGPDFArchiveRetain, 

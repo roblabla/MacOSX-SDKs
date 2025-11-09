@@ -1,11 +1,12 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name ManagedSettings
-// swift-module-flags-ignorable: -user-module-version 27
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-macos13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name ManagedSettings
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 66
 import Combine
 import Foundation
 import Swift
 import _Concurrency
+import _StringProcessing
 import os.log
 import os
 @available(iOS 15.0, *)
@@ -306,7 +307,23 @@ public struct BoundedSettingMetadata<Value> where Value : Swift.Comparable {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public class ManagedSettingsStore : Combine.ObservableObject {
+  @available(iOS 16.0, *)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  public struct Name : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
+    public static let `default`: ManagedSettings.ManagedSettingsStore.Name
+    public let rawValue: Swift.String
+    public init(_ rawValue: Swift.String)
+    public init(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+  }
   public init()
+  @available(iOS 16.0, *)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  convenience public init(named name: ManagedSettings.ManagedSettingsStore.Name)
   @objc deinit
   public var account: ManagedSettings.AccountSettings
   public var application: ManagedSettings.ApplicationSettings
@@ -320,6 +337,11 @@ public class ManagedSettingsStore : Combine.ObservableObject {
   public var shield: ManagedSettings.ShieldSettings
   public var siri: ManagedSettings.SiriSettings
   public var webContent: ManagedSettings.WebContentSettings
+  @available(iOS 16.0, *)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  public func clearAllSettings()
   @Combine.Published @_projectedValueProperty($effectiveMaximumMovieRating) public var effectiveMaximumMovieRating: Swift.Int {
     get
   }

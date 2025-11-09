@@ -276,6 +276,7 @@ extern errno_t sock_sendmbuf(socket_t so, const struct msghdr *msg, mbuf_t data,
     int flags, size_t *sentlen)
 __NKE_API_DEPRECATED;
 
+
 /*!
  *       @function sock_shutdown
  *       @discussion Shutdown one or both directions of a connection. See

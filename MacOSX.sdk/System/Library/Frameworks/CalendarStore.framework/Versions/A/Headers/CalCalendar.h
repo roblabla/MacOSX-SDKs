@@ -20,18 +20,6 @@ extern NSString * const CalCalendarTypeIMAP NS_DEPRECATED_MAC(10_5, 10_8);
 extern NSString * const CalCalendarTypeExchange  NS_DEPRECATED_MAC(10_6, 10_8);
 
 @interface CalCalendar : NSObject <NSCopying>
-{
-    @private
-    id _objectID;
-	id _group;
-    void *_reserved;
-	NSColor *_color;
-	NSString *_notes;
-	NSString *_title;
-	NSString *_type;
-	NSString *_uid;
-	BOOL _isEditable;
-}
 
 //  All calendars created with this API will be of type CalCalendarTypeLocal
 + (id)calendar NS_DEPRECATED_MAC(10_5, 10_8);

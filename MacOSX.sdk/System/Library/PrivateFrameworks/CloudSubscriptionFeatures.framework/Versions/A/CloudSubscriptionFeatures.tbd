@@ -3,22 +3,23 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5EC90A83-8DDB-37EF-A8B4-C35C227A8539
+    value:           86745C2B-F4A6-3973-9134-709B39B74160
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           30CE9899-0B3F-3F75-B795-3F36B13D7B49
+    value:           BD938495-CB38-3856-9360-BD6628C8BE43
 install-name:    '/System/Library/PrivateFrameworks/CloudSubscriptionFeatures.framework/Versions/A/CloudSubscriptionFeatures'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ '_$s25CloudSubscriptionFeatures0A7FeatureC05cloudD6ObjectSo0adF0CvgTj', 
-                       '_$s25CloudSubscriptionFeatures0A7FeatureC05cloudD6ObjectSo0adF0CvgTq', 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ '_$s25CloudSubscriptionFeatures0A7FeatureC05cloudD6ObjectSo0adF0Cvg', 
                        '_$s25CloudSubscriptionFeatures0A7FeatureC05cloudD6ObjectSo0adF0CvpMV', 
-                       '_$s25CloudSubscriptionFeatures0A7FeatureC11accessTokenSSSgvgTj', 
-                       '_$s25CloudSubscriptionFeatures0A7FeatureC11accessTokenSSSgvgTq', 
+                       '_$s25CloudSubscriptionFeatures0A7FeatureC11accessTokenSSSgvg', 
                        '_$s25CloudSubscriptionFeatures0A7FeatureC11accessTokenSSSgvpMV', 
+                       '_$s25CloudSubscriptionFeatures0A7FeatureC11descriptionSSvg', 
                        '_$s25CloudSubscriptionFeatures0A7FeatureC20supportsSecureCodingSbvgZ', 
+                       '_$s25CloudSubscriptionFeatures0A7FeatureC3ttl10Foundation4DateVSgvg', 
+                       '_$s25CloudSubscriptionFeatures0A7FeatureC3ttl10Foundation4DateVSgvpMV', 
                        '_$s25CloudSubscriptionFeatures0A7FeatureC4fromACs7Decoder_p_tKcfC', 
                        '_$s25CloudSubscriptionFeatures0A7FeatureC4fromACs7Decoder_p_tKcfCTj', 
                        '_$s25CloudSubscriptionFeatures0A7FeatureC4fromACs7Decoder_p_tKcfCTq', 
@@ -27,16 +28,12 @@ exports:
                        '_$s25CloudSubscriptionFeatures0A7FeatureC5coderACSgSo7NSCoderC_tcfCTj', 
                        '_$s25CloudSubscriptionFeatures0A7FeatureC5coderACSgSo7NSCoderC_tcfCTq', 
                        '_$s25CloudSubscriptionFeatures0A7FeatureC5coderACSgSo7NSCoderC_tcfc', 
-                       '_$s25CloudSubscriptionFeatures0A7FeatureC5valueSiSgvgTj', 
-                       '_$s25CloudSubscriptionFeatures0A7FeatureC5valueSiSgvgTq', 
-                       '_$s25CloudSubscriptionFeatures0A7FeatureC5valueSiSgvpMV', 
-                       '_$s25CloudSubscriptionFeatures0A7FeatureC6encode2toys7Encoder_p_tKFTj', 
-                       '_$s25CloudSubscriptionFeatures0A7FeatureC6encode2toys7Encoder_p_tKFTq', 
-                       '_$s25CloudSubscriptionFeatures0A7FeatureC6encode4withySo7NSCoderC_tFTj', 
-                       '_$s25CloudSubscriptionFeatures0A7FeatureC6encode4withySo7NSCoderC_tFTq', 
-                       '_$s25CloudSubscriptionFeatures0A7FeatureC6statusSo0D6StatusVvgTj', 
-                       '_$s25CloudSubscriptionFeatures0A7FeatureC6statusSo0D6StatusVvgTq', 
+                       '_$s25CloudSubscriptionFeatures0A7FeatureC5valueSiSgvg', '_$s25CloudSubscriptionFeatures0A7FeatureC5valueSiSgvpMV', 
+                       '_$s25CloudSubscriptionFeatures0A7FeatureC6encode2toys7Encoder_p_tKF', 
+                       '_$s25CloudSubscriptionFeatures0A7FeatureC6encode4withySo7NSCoderC_tF', 
+                       '_$s25CloudSubscriptionFeatures0A7FeatureC6statusSo0D6StatusVvg', 
                        '_$s25CloudSubscriptionFeatures0A7FeatureC6statusSo0D6StatusVvpMV', 
+                       '_$s25CloudSubscriptionFeatures0A7FeatureC7isEqualySbypSgF', 
                        '_$s25CloudSubscriptionFeatures0A7FeatureC9featureIDSSvg', 
                        '_$s25CloudSubscriptionFeatures0A7FeatureC9featureIDSSvpMV', 
                        '_$s25CloudSubscriptionFeatures0A7FeatureCMa', '_$s25CloudSubscriptionFeatures0A7FeatureCMn', 
@@ -56,11 +53,17 @@ exports:
                        '_$s25CloudSubscriptionFeatures0C6LoggerON', '_$s25CloudSubscriptionFeatures10LocalErrorO10Foundation13CustomNSErrorAAMc', 
                        '_$s25CloudSubscriptionFeatures10LocalErrorO11errorDomainSSvgZ', 
                        '_$s25CloudSubscriptionFeatures10LocalErrorO12missingValueyA2CmFWC', 
+                       '_$s25CloudSubscriptionFeatures10LocalErrorO13bagURLinvalidyA2CmFWC', 
                        '_$s25CloudSubscriptionFeatures10LocalErrorO13userLoggedOutyA2CmFWC', 
                        '_$s25CloudSubscriptionFeatures10LocalErrorO14invalidPayloadyA2CmFWC', 
                        '_$s25CloudSubscriptionFeatures10LocalErrorO18incompleteResponseyA2CmFWC', 
                        '_$s25CloudSubscriptionFeatures10LocalErrorO18invalidProxyObjectyA2CmFWC', 
+                       '_$s25CloudSubscriptionFeatures10LocalErrorO19deviceIDUnavailableyA2CmFWC', 
+                       '_$s25CloudSubscriptionFeatures10LocalErrorO19invalidAccountStoreyA2CmFWC', 
+                       '_$s25CloudSubscriptionFeatures10LocalErrorO22hardwareSupportMissingyA2CmFWC', 
+                       '_$s25CloudSubscriptionFeatures10LocalErrorO23pathMissingInAccountBagyA2CmFWC', 
                        '_$s25CloudSubscriptionFeatures10LocalErrorO23unableToBuildURLRequestyA2CmFWC', 
+                       '_$s25CloudSubscriptionFeatures10LocalErrorO24unsuccessfulResponseCodeyA2CmFWC', 
                        '_$s25CloudSubscriptionFeatures10LocalErrorO27daemonConnectionInterruptedyA2CmFWC', 
                        '_$s25CloudSubscriptionFeatures10LocalErrorO8allCasesSayACGvgZ', 
                        '_$s25CloudSubscriptionFeatures10LocalErrorO8rawValueACSgSi_tcfC', 
@@ -123,22 +126,23 @@ exports:
                        '_$sSo13FeatureStatusV25CloudSubscriptionFeaturesE11descriptionSSvpMV', 
                        '_$sSo13FeatureStatusVSE25CloudSubscriptionFeaturesMc', '_$sSo13FeatureStatusVSe25CloudSubscriptionFeaturesMc', 
                        '_$sSo13FeatureStatusVs23CustomStringConvertible25CloudSubscriptionFeaturesMc', 
-                       '_$sSo25CloudSubscriptionFeaturesCAAE14requestFeature2id10completionySS_ySo0aE6ObjectCSg_s5Error_pSgtctFZ', 
-                       '_$sSo25CloudSubscriptionFeaturesCAAE14requestFeature2id10completionySS_ys6ResultOyAA0aE0Cs5Error_pGctFZ', 
-                       '_$sSo25CloudSubscriptionFeaturesCAAE21getFeatureEligibility03forE6WithId06bundleI010completionySS_SSySb_s5Error_pSgtctFZ', 
-                       '_$sSo25CloudSubscriptionFeaturesCAAE21getFeatureEligibility3for8bundleID10completionySS_SSys6ResultOySbs5Error_pGctFZ', 
-                       '_$sSo25CloudSubscriptionFeaturesCAAE23processPushNotification10dictionaryySDys11AnyHashableVypGSg_tFZ', 
-                       '_$sSo25CloudSubscriptionFeaturesCAAE24addFeatureChangeObserver6changeSo8NSObject_pyyc_tFZ', 
-                       '_$sSo25CloudSubscriptionFeaturesCAAE24requestGeoClassification12forFeatureID06bundleI011ignoreCache10completionySS_SSSbySo06CSFGeoF6StatusV_Sbs5Error_pSgtctFZ', 
-                       '_$sSo25CloudSubscriptionFeaturesCAAE24requestGeoClassification12forFeatureID06bundleI07altDSID11ignoreCache10completionySS_S2SSbySo06CSFGeoF6StatusV_Sbs5Error_pSgtctFZ', 
-                       '_$sSo25CloudSubscriptionFeaturesCAAE26clearFeatureCacheAndNotifyyyFZ', 
-                       '_$sSo25CloudSubscriptionFeaturesCAAE27removeFeatureChangeObserver5tokenySo8NSObject_p_tFZ', 
-                       '_$sSo25CloudSubscriptionFeaturesCAAE32refreshAllGeoclassificationCacheyyFZ', 
+                       '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE02isC10SubscriberSbyFZ', 
+                       '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE14requestFeature2id10completionySS_ySo0cG6ObjectCSg_s5Error_pSgtctFZ', 
+                       '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE14requestFeature2id10completionySS_ys6ResultOyAC0cG0Cs5Error_pGctFZ', 
+                       '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE21getFeatureEligibility03forG6WithId06bundleK010completionySS_SSySb_s5Error_pSgtctFZ', 
+                       '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE21getFeatureEligibility3for8bundleID10completionySS_SSys6ResultOySbs5Error_pGctFZ', 
+                       '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE23processPushNotification10dictionaryySDys11AnyHashableVypGSg_tFZ', 
+                       '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE24addFeatureChangeObserver6changeSo8NSObject_pyyc_tFZ', 
+                       '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE24requestGeoClassification12forFeatureID06bundleK011ignoreCache10completionySS_SSSbySo06CSFGeoH6StatusV_Sbs5Error_pSgtctFZ', 
+                       '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE24requestGeoClassification12forFeatureID06bundleK07altDSID11ignoreCache10completionySS_S2SSbySo06CSFGeoH6StatusV_Sbs5Error_pSgtctFZ', 
+                       '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE26clearFeatureCacheAndNotifyyyFZ', 
+                       '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE27removeFeatureChangeObserver5tokenySo8NSObject_p_tFZ', 
+                       '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE32refreshAllGeoclassificationCacheyyFZ', 
                        '_$sSo26CSFGeoClassificationStatusV25CloudSubscriptionFeaturesE11descriptionSSvg', 
                        '_$sSo26CSFGeoClassificationStatusV25CloudSubscriptionFeaturesE11descriptionSSvpMV', 
                        '_$sSo26CSFGeoClassificationStatusVs23CustomStringConvertible25CloudSubscriptionFeaturesMc', 
                        _CSFGeoClassificationStatusDescription, _CloudSubscriptionFeaturesVersionNumber, 
                        _CloudSubscriptionFeaturesVersionString, _kCloudSubscriptionFeatureChangedNotificationName ]
-    objc-classes:    [ CloudFeature, CloudFeatureObject, CloudSubscriptionFeatures, 
+    objc-classes:    [ CSFFeatureManager, CloudFeature, CloudFeatureObject, CloudSubscriptionFeatures, 
                        DaemonController, FeatureChangeObserver, FeaturesDaemon, _TtC25CloudSubscriptionFeatures21GeoClassificationInfo ]
 ...

@@ -4,28 +4,28 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0E30EEAF-7BC0-320C-B7F6-4E836414B694
+    value:           A0D9B3C4-319A-33DC-84AD-5F8A791D1F3A
   - target:          x86_64-maccatalyst
-    value:           0E30EEAF-7BC0-320C-B7F6-4E836414B694
+    value:           A0D9B3C4-319A-33DC-84AD-5F8A791D1F3A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           404EC026-3683-347F-B240-F1669550A81C
+    value:           4035CA1B-96CF-3050-BB61-F6C8ADECC579
   - target:          arm64e-maccatalyst
-    value:           404EC026-3683-347F-B240-F1669550A81C
+    value:           4035CA1B-96CF-3050-BB61-F6C8ADECC579
 install-name:    '/System/Library/PrivateFrameworks/AppleSauce.framework/Versions/A/AppleSauce'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN6docopt14DocoptExitHelpE, __ZTIN6docopt17DocoptExitVersionE, 
                        __ZTIN6docopt19DocoptArgumentErrorE, __ZTIN6docopt19DocoptLanguageErrorE, 
                        __ZTSN6docopt14DocoptExitHelpE, __ZTSN6docopt17DocoptExitVersionE, 
                        __ZTSN6docopt19DocoptArgumentErrorE, __ZTSN6docopt19DocoptLanguageErrorE ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN10applesauce3xpc10auto_reply16create_from_dictERKNS0_4dictERKNS0_10connectionE, 
                        __ZN10applesauce3xpc10auto_reply17create_from_replyERKNS0_4dictE, 
                        __ZN10applesauce3xpc10auto_reply19create_from_requestERKNS0_4dictE, 

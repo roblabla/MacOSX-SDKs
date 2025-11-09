@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D7F73851-EE8F-36A9-B71F-2F9C529CC338
+    value:           96491EE3-E6E9-3E5F-9625-8BC87F2E28EB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A4056325-874E-32B2-A528-8E3188AA5B3A
+    value:           2BDABE59-F778-3DDD-9B6D-7C7DD03FD4F7
 install-name:    '/System/Library/PrivateFrameworks/FusionPluginServices.framework/Versions/A/FusionPluginServices'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _FusionPluginServicesVersionNumber, _FusionPluginServicesVersionString, 
                        _getLogHandle ]
     objc-classes:    [ FusionPluginServer, HSMessage, HSMessageRequest, HSMessageResponse ]

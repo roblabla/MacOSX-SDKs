@@ -219,6 +219,13 @@ struct IOTrackingCallSiteInfo {
 
 
 enum{
+	kIOTrackingLeakScanStart       = 0x00000001,
+	kIOTrackingLeakScanEnd         = 0x00000002,
+};
+
+extern void    (*gIOTrackingLeakScanCallback)(uint32_t notification);
+
+enum{
 	kIOTrackingExcludeNames      = 0x00000001,
 };
 

@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E4F075B7-9802-3FC4-A7D7-A5F7F8F96B64
+    value:           0C561439-6D66-31EA-8F98-932D4DDDB0FB
   - target:          x86_64-maccatalyst
-    value:           E4F075B7-9802-3FC4-A7D7-A5F7F8F96B64
+    value:           0C561439-6D66-31EA-8F98-932D4DDDB0FB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F42A9C79-4057-3105-A088-A31CDF0416B7
+    value:           A2BFBD4E-21E5-3BF3-B13A-B938400778F9
   - target:          arm64e-maccatalyst
-    value:           F42A9C79-4057-3105-A088-A31CDF0416B7
+    value:           A2BFBD4E-21E5-3BF3-B13A-B938400778F9
 install-name:    '/System/Library/PrivateFrameworks/BookLibraryCore.framework/Versions/A/BookLibraryCore'
-current-version: 1672
+current-version: 1801
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BLAudiobookBookletAutoMigrationEnabled, _BLAudiobookDownloadInBookassetdEnabled, 
                        _BLAudiobookMLImporterLog, _BLAudiobookStreamingEnabled, _BLAudiobookSyncLog, 
                        _BLBookCacheDeleteLog, _BLBookInstallLog, _BLBookManifestPropertyAlbum, 

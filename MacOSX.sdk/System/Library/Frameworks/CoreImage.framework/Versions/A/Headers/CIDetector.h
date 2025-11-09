@@ -3,6 +3,10 @@
    Copyright (c) 2011 Apple, Inc.
    All rights reserved. */
 
+#ifndef CIDETECTOR_H
+#define CIDETECTOR_H
+
+#ifdef __OBJC__
 
 #import <CoreImage/CoreImageDefines.h>
 #import <Foundation/Foundation.h>
@@ -136,3 +140,7 @@ CORE_IMAGE_EXPORT NSString* const CIDetectorReturnSubFeatures __OSX_AVAILABLE_ST
 #endif
 
 NS_ASSUME_NONNULL_END
+
+#endif /* __OBJC__ */
+
+#endif /* CIDETECTOR_H */

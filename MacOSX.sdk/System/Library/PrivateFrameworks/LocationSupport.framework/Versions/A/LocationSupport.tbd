@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           58488334-E7C4-369B-844C-40B8F26A9441
+    value:           F3235D3D-39DC-312B-AB9C-A15C16965DB2
   - target:          x86_64-maccatalyst
-    value:           58488334-E7C4-369B-844C-40B8F26A9441
+    value:           F3235D3D-39DC-312B-AB9C-A15C16965DB2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0567DE8B-4DCB-350B-A251-2CDFE7900240
+    value:           CEE170D8-2541-39B7-AA45-D9288AA1A9BF
   - target:          arm64e-maccatalyst
-    value:           0567DE8B-4DCB-350B-A251-2CDFE7900240
+    value:           CEE170D8-2541-39B7-AA45-D9288AA1A9BF
 install-name:    '/System/Library/PrivateFrameworks/LocationSupport.framework/Versions/A/LocationSupport'
-current-version: 2667.0.23
+current-version: 2780.0.16
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CLISP_ME_TOKEN, _CLProfilingIdentify, _CLProfilingIdentifySiloInvocation, 
                        _CLWriteStackshot, __ZN12CLConnection10isEntitledERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
-                       __ZN12CLConnection11sendMessageENSt3__110shared_ptrI19CLConnectionMessageEE, 
+                       __ZN12CLConnection11getUserNameEv, __ZN12CLConnection11sendMessageENSt3__110shared_ptrI19CLConnectionMessageEE, 
                        __ZN12CLConnection11sendMessageENSt3__110shared_ptrI19CLConnectionMessageEEU13block_pointerFvS3_E, 
                        __ZN12CLConnection12getRemotePidEv, __ZN12CLConnection13getAuditTokenEv, 
                        __ZN12CLConnection13handleMessageENSt3__110shared_ptrI19CLConnectionMessageEE, 
@@ -34,6 +34,7 @@ exports:
                        __ZN12CLConnection22setInterruptionHandlerEU13block_pointerFvvE, 
                        __ZN12CLConnection23initializeConnection_nlEv, __ZN12CLConnection23setDisconnectionHandlerEU13block_pointerFvvE, 
                        __ZN12CLConnection24setDefaultMessageHandlerEU13block_pointerFvNSt3__110shared_ptrI19CLConnectionMessageEEE, 
+                       __ZN12CLConnection25getUserNameFromAuditTokenE13audit_token_t, 
                        __ZN12CLConnection5pauseEv, __ZN12CLConnection5startEv, __ZN12CLConnection7getNameEv, 
                        __ZN12CLConnectionC1ENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPU28objcproto17OS_dispatch_queue8NSObject, 
                        __ZN12CLConnectionC1EPU24objcproto13OS_xpc_object8NSObjectPU28objcproto17OS_dispatch_queueS0_, 
@@ -46,6 +47,7 @@ exports:
                        __ZN18CLConnectionClient20setHandlerForMessageERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEU13block_pointerFvNS0_10shared_ptrI19CLConnectionMessageEEE, 
                        __ZN18CLConnectionClient22setInterruptionHandlerEU13block_pointerFvvE, 
                        __ZN18CLConnectionClient24setDefaultMessageHandlerEU13block_pointerFvNSt3__110shared_ptrI19CLConnectionMessageEEE, 
+                       __ZN18CLConnectionClient25sendMessageWithCompletionENSt3__110shared_ptrI19CLConnectionMessageEEU13block_pointerFvS3_E, 
                        __ZN18CLConnectionClient33setRequireManualCachedMessageSendEb, 
                        __ZN18CLConnectionClient5pauseEv, __ZN18CLConnectionClient5startEv, 
                        __ZN18CLConnectionClientC1ENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPU28objcproto17OS_dispatch_queue8NSObject, 
@@ -81,7 +83,8 @@ exports:
                        __ZNK19CLConnectionMessage18copyFileDescriptorEm, __ZNK19CLConnectionMessage18getFileDescriptorsEv, 
                        __ZNK19CLConnectionMessage18getObjectOfClassesEP5NSSet, __ZNK19CLConnectionMessage22getDictionaryOfClassesEP5NSSet, 
                        __ZNK19CLConnectionMessage22replyHandlerIdentifierEv, __ZNK19CLConnectionMessage26getNumberOfFileDescriptorsEv, 
-                       __ZNK19CLConnectionMessage4nameEv, __ZNK28CLConnectionEntitlementCache7getNameEv ]
+                       __ZNK19CLConnectionMessage4nameEv, __ZNK28CLConnectionEntitlementCache7getNameEv, 
+                       _getActivityModelingZone, _placeActivityModelingToken ]
     objc-classes:    [ CLCppContainer, CLCppEncodableDataContainer, CLDispatchSilo, 
                        CLIntersiloInterface, CLIntersiloInterfaceSelectorInfo, CLIntersiloProxy, 
                        CLIntersiloService, CLIntersiloServiceMock, CLIntersiloServiceMockPayload, 

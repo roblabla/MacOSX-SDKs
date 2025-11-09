@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5BA244C3-8720-3867-AA58-479A6DD7AD06
+    value:           9DA92D83-5D1D-3DE9-9E5D-34E33F25347E
   - target:          x86_64-maccatalyst
-    value:           5BA244C3-8720-3867-AA58-479A6DD7AD06
+    value:           9DA92D83-5D1D-3DE9-9E5D-34E33F25347E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BBC84F88-1377-35AA-B5C6-10D177A0506A
+    value:           E990E063-743A-3C67-A0FD-0B56CF94F12A
   - target:          arm64e-maccatalyst
-    value:           BBC84F88-1377-35AA-B5C6-10D177A0506A
+    value:           E990E063-743A-3C67-A0FD-0B56CF94F12A
 install-name:    '/System/Library/PrivateFrameworks/InternalSwiftProtobuf.framework/Versions/A/InternalSwiftProtobuf'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s21InternalSwiftProtobuf01_C10MessageMapVMa', '_$s21InternalSwiftProtobuf01_C10MessageMapVMn', 
                        '_$s21InternalSwiftProtobuf01_C3MapVMa', '_$s21InternalSwiftProtobuf01_C3MapVMn', 
                        '_$s21InternalSwiftProtobuf01_C7EnumMapVMa', '_$s21InternalSwiftProtobuf01_C7EnumMapVMn', 

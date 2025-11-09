@@ -17,6 +17,7 @@
 #import <AudioVideoBridging/AVBEthernetInterface.h>
 
 #import <AudioVideoBridging/AVBMACAddress.h>
+#import <AudioVideoBridging/AVBIPAddress.h>
 
 //Generic Control Protocols
 #import <AudioVideoBridging/AVB1722ControlInterface.h>

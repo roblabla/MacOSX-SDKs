@@ -30,7 +30,5 @@
 #ifndef _MACH_MACHINE_SYS_SDT_H
 #define _MACH_MACHINE_SYS_SDT_H
 
-#include <mach/machine/sdt_isa.h>
-
 
 #endif  /* _MACH_MACHINE_SYS_SDT_H */

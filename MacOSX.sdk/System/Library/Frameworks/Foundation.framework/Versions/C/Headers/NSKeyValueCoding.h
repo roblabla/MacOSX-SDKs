@@ -11,7 +11,7 @@
 
 @class NSError, NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* The exception that is thrown when a key value coding operation fails. The exception's user info dictionary will contain at least two entries:
     - @"NSTargetObjectUserInfoKey": the receiver of the failed KVC message.
@@ -224,4 +224,4 @@ Performance note: the repetitive -set<Key>: messages implied by step 2's descrip
 
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

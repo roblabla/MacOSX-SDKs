@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           12835F73-F1EA-35BB-885B-DC8B4762A40D
+    value:           E5C86F1A-62A1-3A30-8E0D-C844FF254065
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A0987E94-80F9-3961-A251-DF3A9B8776EA
+    value:           A88A1744-EF9E-3261-A002-4200B5C6BD9D
 install-name:    '/System/Library/Frameworks/CoreDisplay.framework/Versions/A/CoreDisplay'
-current-version: 265.2
+current-version: 274
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CDNotificationRegisterCallbackBlock, _CDNotificationRegisterCallbackBlockOnQueue, 
                        _CDNotificationRegisterCallbackFunction, _CDNotificationRegisterCallbackFunctionOnQueue, 
                        _CDNotificationRegisterLocalCallbackBlock, _CDNotificationRegisterLocalCallbackBlockOnQueue, 
@@ -265,6 +265,6 @@ exports:
                        _kCDDisplayUserAdjustmentRearAmblientWhitePointYKey, _kCDDisplayUserAdjustmentTemperatureKey, 
                        _kCDDisplayUserAdjustmentTimeStampKey, _sCDReportsConnectionChangeNotifications, 
                        _sCDReportsContentProtectionStatusChangeNotifications ]
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ _CoreDisplay_NotificationServiceInitialize ]
 ...

@@ -31,11 +31,12 @@ APPLE_ARCHIVE_ENUM(AAHashFunctions,uint32_t) {
 typedef uint32_t AACompressionAlgorithm APPLE_ARCHIVE_SWIFT_PRIVATE;
 APPLE_ARCHIVE_ENUM(AACompressionAlgorithms,uint32_t) {
 
-  AA_COMPRESSION_ALGORITHM_NONE     = 0x000, // copy data, no compression
+  AA_COMPRESSION_ALGORITHM_NONE     = 0x000, // no compression
   AA_COMPRESSION_ALGORITHM_LZ4      = 0x100, // LZ4 with the frame format used in the Compression library
   AA_COMPRESSION_ALGORITHM_ZLIB     = 0x505, // ZLIB level 5 (RFC1950 zlib format, includes 2 bytes header before raw deflate)
   AA_COMPRESSION_ALGORITHM_LZMA     = 0x306, // LZMA preset 6
   AA_COMPRESSION_ALGORITHM_LZFSE    = 0x801, // LZFSE
+  AA_COMPRESSION_ALGORITHM_LZBITMAP = 0x702, // LZBITMAP
 
 } APPLE_ARCHIVE_SWIFT_PRIVATE;
 

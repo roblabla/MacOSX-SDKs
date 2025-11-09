@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           04AF9A0F-2926-3577-8B7C-1C901381E8EC
+    value:           74CFEE3D-C9A6-3B9B-B874-D63D1F8D5461
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E0F8A834-5A0C-3F18-B483-4FD7B77A9150
+    value:           83311718-D08D-3C28-86CA-ED05FA500749
 install-name:    '/System/Library/PrivateFrameworks/QLCharts.framework/Versions/A/QLCharts'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _OIAxisGetUnit, _OIChartGetAxis, _OIChartGetSeries, _OIChartingCreateImageRef, 
                        _OIChartingCreateImageRefWithFormatterCallback, _OIChartingCreatePDFData, 
                        _OIChartingCreatePDFDataWithFormatterCallback, __OIChartingCreateChartFromData, 

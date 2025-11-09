@@ -3,19 +3,25 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8175FAE4-018B-36D1-9151-8BC128B0F696
+    value:           3738E201-CB2D-38A0-901F-2071554451FE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FDA7DCA0-9A56-318C-98DE-471CBDBCC467
+    value:           E1E57049-7D47-3CE0-B906-B687FB3EB64A
 install-name:    '/System/Library/PrivateFrameworks/Hydra.framework/Versions/C/Hydra'
 current-version: 0
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__110__function6__baseIFbPKcEEE, __ZTINSt3__120__l_anchor_multilineIcEE, 
+    weak-symbols:    [ __ZTIN32pxrInternal_v0_20__pxrReserved__14WorkDispatcher12_InvokerTaskINSt3__16__bindIRZNS_13Usd_CrateFile9CrateFile11_ReadTokensINS5_7_ReaderINS4_11_MmapStreamIPNS5_12_FileMappingEEEEEEEvT_E9MakeTokenJEEEEE, 
+                       __ZTIN32pxrInternal_v0_20__pxrReserved__14WorkDispatcher12_InvokerTaskINSt3__16__bindIRZNS_13Usd_CrateFile9CrateFile11_ReadTokensINS5_7_ReaderINS4_12_AssetStreamEEEEEvT_E9MakeTokenJEEEEE, 
+                       __ZTIN32pxrInternal_v0_20__pxrReserved__14WorkDispatcher12_InvokerTaskINSt3__16__bindIRZNS_13Usd_CrateFile9CrateFile11_ReadTokensINS5_7_ReaderINS4_12_PreadStreamEEEEEvT_E9MakeTokenJEEEEE, 
+                       __ZTINSt3__110__function6__baseIFbPKcEEE, __ZTINSt3__120__l_anchor_multilineIcEE, 
                        __ZTINSt3__120__r_anchor_multilineIcEE, __ZTIU13block_pointerFbPKcE, 
-                       __ZTIU13block_pointerFvvE, __ZTSN32pxrInternal_v0_20__pxrReserved__16Sdf_SpecTypeInfoE, 
+                       __ZTIU13block_pointerFvvE, __ZTSN32pxrInternal_v0_20__pxrReserved__14WorkDispatcher12_InvokerTaskINSt3__16__bindIRZNS_13Usd_CrateFile9CrateFile11_ReadTokensINS5_7_ReaderINS4_11_MmapStreamIPNS5_12_FileMappingEEEEEEEvT_E9MakeTokenJEEEEE, 
+                       __ZTSN32pxrInternal_v0_20__pxrReserved__14WorkDispatcher12_InvokerTaskINSt3__16__bindIRZNS_13Usd_CrateFile9CrateFile11_ReadTokensINS5_7_ReaderINS4_12_AssetStreamEEEEEvT_E9MakeTokenJEEEEE, 
+                       __ZTSN32pxrInternal_v0_20__pxrReserved__14WorkDispatcher12_InvokerTaskINSt3__16__bindIRZNS_13Usd_CrateFile9CrateFile11_ReadTokensINS5_7_ReaderINS4_12_PreadStreamEEEEEvT_E9MakeTokenJEEEEE, 
+                       __ZTSN32pxrInternal_v0_20__pxrReserved__16Sdf_SpecTypeInfoE, 
                        __ZTSNSt3__110__function6__baseIFbPKcEEE, __ZTSNSt3__110shared_ptrIN10OpenSubdiv6v3_4_33Far15TopologyRefinerEE27__shared_ptr_default_deleteIS4_S4_EE, 
                        __ZTSNSt3__110shared_ptrIN16OpenImageIO_v2_110ImageInputEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__110shared_ptrIN16OpenImageIO_v2_18Filter2DEE27__shared_ptr_default_deleteIS2_S2_EE, 
@@ -126,8 +132,19 @@ exports:
                        __ZTSNSt3__110shared_ptrINS_13__empty_stateIcEEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__120__l_anchor_multilineIcEE, __ZTSNSt3__120__r_anchor_multilineIcEE, 
                        __ZTSU13block_pointerFbPKcE, __ZTSU13block_pointerFvvE ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _TIFFInitLZMA, __Z14GetMetalDevicev, __Z14computeFrustumRKN32pxrInternal_v0_20__pxrReserved__10GfMatrix4dE6CGSizeRK12CameraParams, 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _TIFFCIELab16ToXYZ, _TIFFCreateGPSDirectory, _TIFFDeferStrileArrayWriting, 
+                       _TIFFFieldIsAnonymous, _TIFFFieldSetGetCountSize, _TIFFFieldSetGetSize, 
+                       _TIFFForceStrileArrayWriting, _TIFFGetStrileByteCount, _TIFFGetStrileByteCountWithErr, 
+                       _TIFFGetStrileOffset, _TIFFGetStrileOffsetWithErr, _TIFFIsBigTIFF, 
+                       _TIFFJPEGIsFullStripRequired, _TIFFReadFromUserBuffer, _TIFFReadGPSDirectory, 
+                       _TIFFReadRGBAStripExt, _TIFFReadRGBATileExt, __TIFFCastUInt64ToSSize, 
+                       __TIFFCheckFieldIsValidForCodec, __TIFFClampDoubleToFloat, 
+                       __TIFFClampDoubleToUInt32, __TIFFGetGpsFields, __TIFFMultiplySSize, 
+                       __TIFFReadEncodedStripAndAllocBuffer, __TIFFReadEncodedTileAndAllocBuffer, 
+                       __TIFFReadTileAndAllocBuffer, __TIFFSeekOK, __TIFFcalloc, 
+                       __Z12IsGoldenTestR16HYDRenderOptions, __Z14GetMetalDevicev, 
+                       __Z14computeFrustumRKN32pxrInternal_v0_20__pxrReserved__10GfMatrix4dE6CGSizeRK12CameraParams, 
                        __Z14usd_initializev, __Z17pruneInvisibleRecP12HYDSceneNodeP5NSSetS2_l, 
                        __Z23buildHierarchialPathRecP15NSMutableStringP12HYDSceneNode, 
                        __Z5TFAddPKcPFvPvS1_ES0_, __Z9isVisibleP12HYDSceneNodeP5NSSetS2_, 
@@ -191,9 +208,6 @@ exports:
                        __ZGVN32pxrInternal_v0_20__pxrReserved__11TfSingletonINS_9HdPerfLogEE6_mutexE, 
                        __ZGVN32pxrInternal_v0_20__pxrReserved__11TfSingletonINS_9SdfSchemaEE6_mutexE, 
                        __ZGVN32pxrInternal_v0_20__pxrReserved__11TfSingletonINS_9TfRegTestEE6_mutexE, 
-                       __ZGVZN32pxrInternal_v0_20__pxrReserved__13Usd_CrateFile9CrateFile7_ReaderINS0_11_MmapStreamIPNS1_12_FileMappingEEEE7ReadMapINS_12VtDictionaryEEET_vE10defaultMap, 
-                       __ZGVZN32pxrInternal_v0_20__pxrReserved__13Usd_CrateFile9CrateFile7_ReaderINS0_12_AssetStreamEE7ReadMapINS_12VtDictionaryEEET_vE10defaultMap, 
-                       __ZGVZN32pxrInternal_v0_20__pxrReserved__13Usd_CrateFile9CrateFile7_ReaderINS0_12_PreadStreamEE7ReadMapINS_12VtDictionaryEEET_vE10defaultMap, 
                        __ZN32pxrInternal_v0_20__pxrReserved__11TfSingletonINS_16Sdf_SpecTypeInfoEE11GetInstanceEv, 
                        __ZN32pxrInternal_v0_20__pxrReserved__11TfSingletonINS_16Sdf_SpecTypeInfoEE14DeleteInstanceEv, 
                        __ZN32pxrInternal_v0_20__pxrReserved__11TfSingletonINS_16Sdf_SpecTypeInfoEE15CurrentlyExistsEv, 
@@ -886,9 +900,6 @@ exports:
                        __ZN32pxrInternal_v0_20__pxrReserved__7VtValue13_TypeInfoImplIyyNS0_14_LocalTypeInfoIyEEE8_DestroyERNSt3__115aligned_storageILm8ELm8EE4typeE, 
                        __ZN32pxrInternal_v0_20__pxrReserved__7VtValue13_TypeInfoImplIyyNS0_14_LocalTypeInfoIyEEE9_CopyInitERKNSt3__115aligned_storageILm8ELm8EE4typeERS8_, 
                        __ZN32pxrInternal_v0_20__pxrReserved__7VtValue13_TypeInfoImplIyyNS0_14_LocalTypeInfoIyEEE9_EqualPtrERKNSt3__115aligned_storageILm8ELm8EE4typeEPKv, 
-                       __ZZN32pxrInternal_v0_20__pxrReserved__13Usd_CrateFile9CrateFile7_ReaderINS0_11_MmapStreamIPNS1_12_FileMappingEEEE7ReadMapINS_12VtDictionaryEEET_vE10defaultMap, 
-                       __ZZN32pxrInternal_v0_20__pxrReserved__13Usd_CrateFile9CrateFile7_ReaderINS0_12_AssetStreamEE7ReadMapINS_12VtDictionaryEEET_vE10defaultMap, 
-                       __ZZN32pxrInternal_v0_20__pxrReserved__13Usd_CrateFile9CrateFile7_ReaderINS0_12_PreadStreamEE7ReadMapINS_12VtDictionaryEEET_vE10defaultMap, 
                        __ZZN32pxrInternal_v0_20__pxrReserved__7VtValue11GetTypeInfoINS_10GfMatrix2dEEENS_16TfPointerAndBitsIKNS0_9_TypeInfoEEEvE2ti, 
                        __ZZN32pxrInternal_v0_20__pxrReserved__7VtValue11GetTypeInfoINS_10GfMatrix3dEEENS_16TfPointerAndBitsIKNS0_9_TypeInfoEEEvE2ti, 
                        __ZZN32pxrInternal_v0_20__pxrReserved__7VtValue11GetTypeInfoINS_10GfMatrix4dEEENS_16TfPointerAndBitsIKNS0_9_TypeInfoEEEvE2ti, 
@@ -1025,7 +1036,7 @@ exports:
                        __ZZN32pxrInternal_v0_20__pxrReserved__7VtValue11GetTypeInfoItEENS_16TfPointerAndBitsIKNS0_9_TypeInfoEEEvE2ti, 
                        __ZZN32pxrInternal_v0_20__pxrReserved__7VtValue11GetTypeInfoIxEENS_16TfPointerAndBitsIKNS0_9_TypeInfoEEEvE2ti, 
                        __ZZN32pxrInternal_v0_20__pxrReserved__7VtValue11GetTypeInfoIyEENS_16TfPointerAndBitsIKNS0_9_TypeInfoEEEvE2ti ]
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ __ZN16OpenImageIO_v2_17Strutil7vformatEPKcPc, __ZN16OpenImageIO_v2_17Strutil8vsprintfEPKcPc, 
                        __ZN32pxrInternal_v0_20__pxrReserved__13ArchVsnprintfEPcmPKcS0_, 
                        __ZN32pxrInternal_v0_20__pxrReserved__15TfVStringPrintfEPKcPc, 

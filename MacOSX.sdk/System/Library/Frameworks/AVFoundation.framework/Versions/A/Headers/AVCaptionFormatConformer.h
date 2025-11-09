@@ -39,6 +39,7 @@ AV_INIT_UNAVAILABLE
  @param		conversionSettings
  			Describes the conversion operation for which the caption is to be conformed.
  @result	A new instance of AVCaptionFormatConformer configured to perform the specified conversion.
+ @discussion This method throws an exception if the conversion setting's AVCaptionMediaTypeKey is not equal to AVMediaTypeClosedCaption, or if its AVCaptionMediaSubTypeKey is not equal to kCMClosedCaptionFormatType_CEA608.
 */
 - (instancetype)initWithConversionSettings:(NSDictionary<AVCaptionSettingsKey, id> *)conversionSettings NS_DESIGNATED_INITIALIZER;
 

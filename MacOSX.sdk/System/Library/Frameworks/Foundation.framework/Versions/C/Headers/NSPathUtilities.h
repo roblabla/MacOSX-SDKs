@@ -5,7 +5,7 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSArray.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @interface NSString (NSStringPathExtensions)
 
@@ -95,4 +95,4 @@ typedef NS_OPTIONS(NSUInteger, NSSearchPathDomainMask) {
 
 FOUNDATION_EXPORT NSArray<NSString *> *NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory directory, NSSearchPathDomainMask domainMask, BOOL expandTilde);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

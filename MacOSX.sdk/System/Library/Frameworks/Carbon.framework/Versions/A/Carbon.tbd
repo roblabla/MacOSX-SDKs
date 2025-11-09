@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A20A5C11-1ACB-380D-BEFB-40AAE7B0A964
+    value:           3E41AB1D-752C-3978-AD18-30E687F2C948
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           81D48BD5-39EA-3D11-8ECC-9749891632B4
+    value:           7F510E82-87FF-3826-9946-D9DB57F66118
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon'
-current-version: 165
+current-version: 169
 compatibility-version: 2
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -24,20 +24,20 @@ reexported-libraries:
                        '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SecurityHI.framework/Versions/A/SecurityHI', 
                        '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CarbonVersionNumber, _CarbonVersionString ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3B7F7849-3DCD-34AF-92EE-C4562426BDE9
+    value:           B5074C09-0D40-3918-9F66-6A180CC2E598
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           019E3A1E-A2EA-3E39-BC41-BE70B5B2FB1D
+    value:           E7A72D61-24F2-35F3-88D7-BC73387A959F
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CommonPanels.framework/Versions/A/CommonPanels'
-current-version: 101
+current-version: 105
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
@@ -45,7 +45,7 @@ allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AppKit ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CCP_FontPanelClose, _CCP_FontPanelGetSelection, _CCP_FontPanelIsVisible, 
                        _CCP_FontPanelOpen, _CCP_FontPanelSelectFonts, _CCP_NPickColor, 
                        _CMCalibrateDisplay, _Call_CommonCocoaPanels_NPickColor, _CommonPanelsVersionNumber, 
@@ -75,13 +75,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7761967D-A138-33B6-9E3F-5C5420A2EEFF
+    value:           FF73B93B-3C5B-3F73-948F-0A35A80F7FAD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4A1D1F30-C79D-3502-B51F-9792ADBD8E06
+    value:           02B9797F-C47D-30B7-B7B0-802D0D26F31C
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox'
-current-version: 1113.9
+current-version: 1160
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
@@ -91,7 +91,7 @@ allowable-clients:
                        ImageKit, Printing_UI, QTKit, QTKitServer, RemoteViewServices, 
                        Shortcut, Suggestions, UIKitMacHelper, ViewBridge, loginwindow ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AEGetInteractionAllowed, _AEGetTheCurrentEvent, _AEInteractWithUser, 
                        _AEProcessAppleEvent, _AEProcessEvent, _AEResetTimer, _AEResumeTheCurrentEvent, 
                        _AESend, _AESetInteractionAllowed, _AESetTheCurrentEvent, 
@@ -261,6 +261,7 @@ exports:
                        _HMSetHelpTagsDisplayed, _HMSetMenuItemHelpContent, _HMSetTagDelay, 
                        _HandleControlSetCursor, _HideControl, _HideMenuBar, _HideSheetWindow, 
                        _HideWindow, _HiliteControl, _HiliteMenu, _HiliteWindow, _IMKBaselineKey, 
+                       _IMKCFRunLoopWakeUpReliable, _IMKCFRunLoopWakeUpReliableSetup, 
                        _IMKChromaticMarkedTextAttributeName, _IMKDictationHilightAttributeName, 
                        _IMKDictationHilightHypothesisDeltaAttributeName, _IMKDictationInsertionUndoableAttributeName, 
                        _IMKIronwoodTextAlternativeCorrectedKey, _IMKIronwoodTextAlternativeCorrectionIDKey, 
@@ -341,12 +342,12 @@ exports:
                        _TISCreateDefaultASCIIInputSourceForLocale, _TISCreateInputSourceList, 
                        _TISCreatePrunedPreferredInputSourcesWithABC, _TISCreateSecureKeyboardInputSourceList, 
                        _TISDeselectInputSource, _TISDisableInputSource, _TISEnableInputSource, 
-                       _TISEnableInputSourceWithOptions, _TISGetAppleKeyLayoutCount, 
-                       _TISGetAppleKeyLayoutIndexForKeyLayoutName, _TISGetAppleKeyLayoutIndexForNumericID, 
-                       _TISGetAppleKeyLayoutKLPropertyAtIndex, _TISGetDictationShouldAutoEnable, 
-                       _TISGetFnUsageType, _TISGetGestureHandwritingState, _TISGetInputSourceProperty, 
-                       _TISHardwareSupportsGestureHandwriting, _TISInputMethodDataFileReaderCreateBasicProperties, 
-                       _TISInputMethodDataFileReaderCreatePropertyListAndWordList, 
+                       _TISEnableInputSourceWithOptions, _TISFetchEmojiTouchBarItemWithCompletionBlock, 
+                       _TISGetAppleKeyLayoutCount, _TISGetAppleKeyLayoutIndexForKeyLayoutName, 
+                       _TISGetAppleKeyLayoutIndexForNumericID, _TISGetAppleKeyLayoutKLPropertyAtIndex, 
+                       _TISGetDictationShouldAutoEnable, _TISGetFnUsageType, _TISGetGestureHandwritingState, 
+                       _TISGetInputSourceProperty, _TISHardwareSupportsGestureHandwriting, 
+                       _TISInputMethodDataFileReaderCreateBasicProperties, _TISInputMethodDataFileReaderCreatePropertyListAndWordList, 
                        _TISInputSourceGetTypeID, _TISIsKeyboardLayoutCapsLockSwitchAllowed, 
                        _TISIsKeyboardLayoutCapsLockSwitched, _TISIsRomanSwitchAllowed, 
                        _TISIsRomanSwitchEnabled, _TISKeyboardLayoutInputSourceIsQWERTY, 
@@ -436,11 +437,11 @@ exports:
                        __HIStdEventLoopRegisterClass, __HITextFieldRegisterClass, 
                        __HITextViewRegisterClass, __HIThemeCreateImage, __HIThemeDrawAppleMenuTitle, 
                        __HIThemeDrawSegment, __HIThemeDrawSelectionMarquee, __HIThemeDrawWell, 
-                       __HIThemeGetChasingArrowDimensions, __HIThemeGetLegacyModeEnabled, 
-                       __HIThemeGetMenuBarLogoRect, __HIThemeGetMenuCalloutDimensions, 
-                       __HIThemeGetWindowGrowSides, __HIThemeGetWindowTitleBaselineOffset, 
-                       __HIThemeRefreshPreferences, __HIThemeSetColor, __HIThemeSetDrawingCallback, 
-                       __HIThemeSetTextColor, __HIToolbarItemRegisterClass, __HIToolbarViewRegisterClass, 
+                       __HIThemeGetChasingArrowDimensions, __HIThemeGetMenuBarLogoRect, 
+                       __HIThemeGetMenuCalloutDimensions, __HIThemeGetWindowGrowSides, 
+                       __HIThemeGetWindowTitleBaselineOffset, __HIThemeRefreshPreferences, 
+                       __HIThemeSetColor, __HIThemeSetDrawingCallback, __HIThemeSetTextColor, 
+                       __HIToolbarItemRegisterClass, __HIToolbarViewRegisterClass, 
                        __HIViewAdvanceFocusFollowingView, __HIViewCopyVisibleShape, 
                        __HIViewNotifySetFocusPart, __HIViewRegisterClass, __HIViewScrollRectWithOptions, 
                        __HIWindowFrameViewRegisterClass, __HIWindowSetAutoReleaseFocus, 
@@ -544,20 +545,20 @@ exports:
                        _kTISTypeKeyboardLayout, _kTISTypeKeyboardSyntheticRomanMode, 
                        _kTISTypeKeyboardViewer ]
 reexports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ShowHideProcess ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           21343DEC-9418-33B9-98D1-159C0896DEF8
+    value:           5DC85F93-7F29-3DD3-949B-8893A14E1536
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1F2195C6-A6A5-38B1-AA6C-81682FD01BA7
+    value:           3466A799-C80F-3315-920E-229477640EE5
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Help.framework/Versions/A/Help'
-current-version: 73
+current-version: 74
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
@@ -565,7 +566,7 @@ allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ PrintingUI ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AHGotoApplicationHelp, _AHGotoMainTOC, _AHGotoPage, _AHLookupAnchor, 
                        _AHRegisterHelpBook, _AHRegisterHelpBookWithURL, _AHSearch, 
                        _AppendEncodingHint, _CFStringToCString, _CopyBookDetails, 
@@ -578,138 +579,58 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8C6FA3F9-ADF1-3FCA-A2F5-6D37FFA64E0A
+    value:           1BD61F13-1E3A-3AAD-86A3-09959A516556
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CD0A2047-0848-33C7-83A5-EB8B479EEB85
+    value:           20D06C68-91C7-3149-A830-2CE977B1BE7E
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/ImageCapture'
 current-version: 5
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _ICACloseSession, _ICAConvertJPEGDataToICADataInPlace, _ICAConvertTIFFDataToICADataInPlace, 
-                       _ICACopyMatchingDeviceDictionaries, _ICACopyObjectData, _ICACopyObjectPropertyDictionary, 
-                       _ICACopyObjectThumbnail, _ICACopyParameterBlockPtrForAsyncCall, 
-                       _ICACreateCutsomIconForImageAtPath, _ICACreateJPEGThumbnailDataFromURL, 
-                       _ICADictionaryApplierFunction, _ICADoMacho2CFMConversion, 
-                       _ICADownloadFile, _ICADownloadFileWithOptions, _ICAElapsedTime, 
-                       _ICAGetBehaviorFlags, _ICAGetChildCount, _ICAGetDateFromSeconds, 
-                       _ICAGetDateFromSecondsSince1904, _ICAGetDateFromSecondsSince1970, 
-                       _ICAGetDeviceList, _ICAGetEXIFDateCStringFromSecondsSince1904, 
-                       _ICAGetEXIFDateCStringFromSecondsSince1970, _ICAGetEXIFUTCDateCStringFromSecondsSince1904, 
-                       _ICAGetEXIFUTCDateCStringFromSecondsSince1970, _ICAGetICAObjectForFile, 
-                       _ICAGetICAObjectFromDict, _ICAGetLongValueFromDict, _ICAGetNthChild, 
-                       _ICAGetNthProperty, _ICAGetObjectInfo, _ICAGetObjectRefCon, 
-                       _ICAGetParentOfObject, _ICAGetParentOfProperty, _ICAGetPropertyByType, 
-                       _ICAGetPropertyCount, _ICAGetPropertyData, _ICAGetPropertyInfo, 
-                       _ICAGetPropertyRefCon, _ICAGetRootOfObject, _ICAGetRootOfProperty, 
-                       _ICAGetSInt16ValueFromDict, _ICAGetSInt32ValueFromDict, _ICAGetSInt64ValueFromDict, 
-                       _ICAGetUTCDateFromDateCString, _ICAGetUTCDateFromSeconds, 
-                       _ICAGetUTCDateFromSecondsSince1904, _ICAImportImage, _ICALoadDeviceModule, 
-                       _ICAObjectSendMessage, _ICAOpenSession, _ICARegisterEventNotification, 
-                       _ICARegisterForEventNotification, _ICAScannerCloseSession, 
-                       _ICAScannerGetParameters, _ICAScannerInitialize, _ICAScannerOpenSession, 
-                       _ICAScannerSetParameters, _ICAScannerStart, _ICAScannerStatus, 
-                       _ICASetBehaviorFlags, _ICASetICAObjectInDict, _ICASetLongValueInDict, 
-                       _ICASetObjectRefCon, _ICASetPropertyData, _ICASetPropertyRefCon, 
-                       _ICASetSInt16ValueInDict, _ICASetSInt32ValueInDict, _ICASetSInt64ValueInDict, 
-                       _ICASetUTF8StringInDict, _ICASharedMemoryCreate, _ICASharedMemoryDestroy, 
-                       _ICASharedMemoryMap, _ICASharedMemoryUnmap, _ICAShowDeviceBrowser, 
-                       _ICAUnloadDeviceModule, _ICAUpdateDeviceDictionary, _ICAUploadFile, 
-                       _ICDBulkNewObject, _ICDBulkNewProperty, _ICDDeviceNotification, 
-                       _ICDDeviceRegister, _ICDDeviceUnRegister, _ICDDisposeObject, 
-                       _ICDDisposeProperty, _ICDNewObject, _ICDNewProperty, _kICAAddMetaDataToFinderCommentKey, 
-                       _kICAAdjustCreationDateKey, _kICAAudioCodecsKey, _kICABIPVersionKey, 
-                       _kICABluetoothAddressKey, _kICABluetoothTransportType, _kICABonjourServiceNameKey, 
-                       _kICABonjourServiceTypeKey, _kICABonjourTXTRecordKey, _kICACreateCustomIconKey, 
-                       _kICACreationDateStringKey, _kICADataPropertyKey, _kICADataSizeKey, 
-                       _kICADataTypeKey, _kICADeleteAfterDownloadKey, _kICADeviceBrowserDeviceRefKey, 
-                       _kICADeviceCapabilitiesKey, _kICADeviceDatabaseKey, _kICADeviceIconPathKey, 
-                       _kICADeviceModulePathKey, _kICADeviceNameKey, _kICADevicePropArtist, 
-                       _kICADevicePropBatteryLevel, _kICADevicePropBurstInterval, 
-                       _kICADevicePropBurstNumber, _kICADevicePropCaptureDelay, _kICADevicePropCompressionSetting, 
-                       _kICADevicePropContrast, _kICADevicePropCopyrightInfo, _kICADevicePropDateTime, 
-                       _kICADevicePropDigitalZoom, _kICADevicePropEffectMode, _kICADevicePropExposureBiasCompensation, 
-                       _kICADevicePropExposureIndex, _kICADevicePropExposureMeteringMode, 
-                       _kICADevicePropExposureProgramMode, _kICADevicePropExposureTime, 
-                       _kICADevicePropFNumber, _kICADevicePropFlashMode, _kICADevicePropFocalLength, 
-                       _kICADevicePropFocusDistance, _kICADevicePropFocusMeteringMode, 
-                       _kICADevicePropFocusMode, _kICADevicePropFunctionalMode, _kICADevicePropImageSize, 
-                       _kICADevicePropRGBGain, _kICADevicePropSharpness, _kICADevicePropStillCaptureMode, 
-                       _kICADevicePropTimelapseInterval, _kICADevicePropTimelapseNumber, 
-                       _kICADevicePropUndefined, _kICADevicePropUploadURL, _kICADevicePropWhiteBalance, 
-                       _kICADeviceSharedKey, _kICADeviceTypeCamera, _kICADeviceTypeKey, 
-                       _kICADeviceTypeScanner, _kICADeviceUsedKey, _kICADeviceWebSharedKey, 
-                       _kICADevicesArrayKey, _kICADirPathKey, _kICADisplayNameKey, 
-                       _kICADontEmbedColorSyncProfileKey, _kICAErrorKey, _kICAExecutableArchitectureKey, 
-                       _kICAFileCreatorKey, _kICAFileTypeKey, _kICAFileUTTypeKey, 
-                       _kICAFireWireGUIDKey, _kICAFireWireTransportType, _kICAIOServicePathKey, 
-                       _kICAIPAddressKey, _kICAIPGUIDKey, _kICAIPNameKey, _kICAIPPortKey, 
-                       _kICAIconFilePathKey, _kICAInstancesKey, _kICAKeywordsKey, 
-                       _kICALockStatusKey, _kICAManualConnectDeviceRefKey, _kICAMediaDurationInSecondsKey, 
-                       _kICAMediaFormatsKey, _kICAMediaHeightKey, _kICAMediaMaxDurationKey, 
-                       _kICAMediaSizesKey, _kICAMediaWidthKey, _kICAModelNameKey, 
-                       _kICAModificationDateStringKey, _kICANotificationClassKey, 
-                       _kICANotificationClassPTPStandard, _kICANotificationClassPTPVendor, 
-                       _kICANotificationClassProprietary, _kICANotificationDataCookieKey, 
-                       _kICANotificationDataKey, _kICANotificationDataSizeKey, _kICANotificationDeviceICAObjectKey, 
-                       _kICANotificationDeviceListICAObjectKey, _kICANotificationICAObjectKey, 
-                       _kICANotificationImageBytesPerRowKey, _kICANotificationImageDataKey, 
-                       _kICANotificationImageDataSizeKey, _kICANotificationImageHeightKey, 
-                       _kICANotificationImageKey, _kICANotificationImageNumberOfRowsKey, 
-                       _kICANotificationImageStartRowKey, _kICANotificationImageWidthKey, 
-                       _kICANotificationNumerOfImagesRemainingKey, _kICANotificationPercentDownloadedKey, 
-                       _kICANotificationRawEventKey, _kICANotificationScannerButtonTypeKey, 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _ICACopyObjectPropertyDictionary, _ICACopyObjectThumbnail, 
+                       _ICADictionaryApplierFunction, _ICADownloadFile, _ICAGetDeviceList, 
+                       _ICAGetICAObjectFromDict, _ICAGetLongValueFromDict, _ICAGetSInt16ValueFromDict, 
+                       _ICAGetSInt32ValueFromDict, _ICAGetSInt64ValueFromDict, _ICASetICAObjectInDict, 
+                       _ICASetLongValueInDict, _ICASetSInt16ValueInDict, _ICASetSInt32ValueInDict, 
+                       _ICASetSInt64ValueInDict, _ICASetUTF8StringInDict, _kICABonjourServiceNameKey, 
+                       _kICABonjourServiceTypeKey, _kICABonjourTXTRecordKey, _kICADeviceIconPathKey, 
+                       _kICADevicesArrayKey, _kICAErrorKey, _kICAFireWireGUIDKey, 
+                       _kICAIOServicePathKey, _kICAIPAddressKey, _kICAIPPortKey, 
+                       _kICAMediaHeightKey, _kICAMediaWidthKey, _kICAModelNameKey, 
+                       _kICANotificationDataKey, _kICANotificationICAObjectKey, _kICANotificationScannerButtonTypeKey, 
                        _kICANotificationScannerDocumentNameKey, _kICANotificationSubTypeDocumentLoaded, 
                        _kICANotificationSubTypeDocumentNotLoaded, _kICANotificationSubTypeKey, 
                        _kICANotificationSubTypePerformOverviewScan, _kICANotificationSubTypeWarmUpDone, 
-                       _kICANotificationSubTypeWarmUpStarted, _kICANotificationTypeCaptureComplete, 
-                       _kICANotificationTypeDeviceAdded, _kICANotificationTypeDeviceConnectionProgress, 
-                       _kICANotificationTypeDeviceInfoChanged, _kICANotificationTypeDevicePropertyChanged, 
-                       _kICANotificationTypeDeviceRemoved, _kICANotificationTypeDeviceStatusError, 
-                       _kICANotificationTypeDeviceStatusInfo, _kICANotificationTypeDeviceWasReset, 
-                       _kICANotificationTypeDownloadProgressStatus, _kICANotificationTypeKey, 
-                       _kICANotificationTypeObjectAdded, _kICANotificationTypeObjectInfoChanged, 
-                       _kICANotificationTypeObjectRemoved, _kICANotificationTypeProprietary, 
-                       _kICANotificationTypeRequestObjectTransfer, _kICANotificationTypeScanProgressStatus, 
+                       _kICANotificationSubTypeWarmUpStarted, _kICANotificationTypeDeviceRemoved, 
+                       _kICANotificationTypeDeviceStatusError, _kICANotificationTypeDeviceStatusInfo, 
+                       _kICANotificationTypeKey, _kICANotificationTypeObjectAdded, 
+                       _kICANotificationTypeObjectRemoved, _kICANotificationTypeScanProgressStatus, 
                        _kICANotificationTypeScannerButtonPressed, _kICANotificationTypeScannerOverviewOverlayAvailable, 
                        _kICANotificationTypeScannerPageDone, _kICANotificationTypeScannerScanDone, 
-                       _kICANotificationTypeScannerSessionClosed, _kICANotificationTypeStoreAdded, 
-                       _kICANotificationTypeStoreFull, _kICANotificationTypeStoreInfoChanged, 
-                       _kICANotificationTypeStoreRemoved, _kICANotificationTypeTransactionCanceled, 
-                       _kICANotificationTypeUnreportedStatus, _kICANotificationVendorErrorCodeKey, 
-                       _kICAOBEXVersionKey, _kICAObjectKey, _kICAObjectNameKey, _kICAOrientationKey, 
-                       _kICAOverwriteKey, _kICAPhysicalTransportsKey, _kICAPictureFolderKey, 
-                       _kICAProtocolKey, _kICARawKey, _kICARefconKey, _kICARemoteDeviceKey, 
-                       _kICASCSITransportType, _kICASaveAsFilenameKey, _kICASavedFilenameKey, 
-                       _kICAScreenHeightKey, _kICAScreenWidthKey, _kICASoundFolderKey, 
-                       _kICAStarRatingKey, _kICASupportedFeaturesKey, _kICASupportingSoftwaresKey, 
-                       _kICATCPIPTransportType, _kICATWAINDSPathKey, _kICATWAINTransportType, 
-                       _kICATelephoneNetworksKey, _kICAThumbnailPropertyKey, _kICAThumbnailSizeKey, 
-                       _kICATransportTypeKey, _kICAUSBLocationIDKey, _kICAUSBProductIDKey, 
-                       _kICAUSBTransportType, _kICAUSBVendorIDKey, _kICAUserAssignedDeviceNameKey, 
-                       _kICAVendorNameKey, _kICAVideoCodecsKey, _kICAVideoFolderKey, 
-                       _kICAWMCVersionKey, _kMetaDataDictionaryKey ]
+                       _kICANotificationTypeScannerSessionClosed, _kICANotificationTypeTransactionCanceled, 
+                       _kICAObjectKey, _kICAObjectNameKey, _kICARemoteObjectKey, 
+                       _kICAUSBLocationIDKey, _kICAUserAssignedDeviceNameKey, _kMetaDataDictionaryKey ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CF1004BE-1A32-3902-AFA4-17423C03B822
+    value:           CB60529E-B8D3-3C4C-8416-4FB7439708CD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0EDF8F30-A0EA-31AD-87B6-6AD68C7C2ED8
+    value:           EBFA1EB9-8F83-3B29-8FF3-230084A1FF4A
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Ink.framework/Versions/A/Ink'
 current-version: 227
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _InkAddStrokeToCurrentPhrase, _InkIsPhraseInProgress, _InkSetApplicationRecognitionMode, 
                        _InkSetApplicationWritingMode, _InkSetDrawingMode, _InkSetPhraseTerminationMode, 
                        _InkStrokeGetPointCount, _InkStrokeGetPoints, _InkStrokeGetTypeID, 
@@ -722,17 +643,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           65654F7B-B3CF-3779-94A9-8D15229C5D73
+    value:           185A9E2A-D7EE-38A8-9997-710E8C24C390
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F2EB59D8-2CFD-3F92-A972-6DA9C5EC7C0C
+    value:           518C7236-D0CD-382C-B3F1-A98080B43BF4
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ASCopySourceAttributes, _ASGetSourceStyleNames, _ASGetSourceStyles, 
                        _ASInit, _ASSetSourceAttributes, _ASSetSourceStyles, _OSAAddStorageType, 
                        _OSAAppletShowStartupScreenKey, _OSAAppletStayOpenKey, _OSAAuthorizeEvent, 
@@ -780,11 +701,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DFF5E25C-2AC6-347C-A58B-5CDFB90B24B3
+    value:           50C188AC-696A-3754-B06C-A09F219B05DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1C1C4EE5-2A4E-3908-9EBF-D75A04BA8839
+    value:           25A18E7E-60EC-3F1D-ADB8-298BC8AD740B
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Print'
 current-version: 272
 parent-umbrella:
@@ -795,11 +716,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EC0BD587-EC6D-36D0-BA4B-5FA8C658A77F
+    value:           AB638F2A-6B54-3168-BA62-C59581F9567B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           82D546BF-58CD-3CE7-9B67-2FD41D2EF00A
+    value:           7030379B-BEA1-350A-90F5-70E052A7D481
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SecurityHI.framework/Versions/A/SecurityHI'
 current-version: 55008
 parent-umbrella:
@@ -809,7 +730,7 @@ allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AppleShareClient ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DisposeURLNotifyUPP, _DisposeURLSystemEventUPP, _InvokeURLNotifyUPP, 
                        _InvokeURLSystemEventUPP, _KCAddAppleSharePassword, _KCAddGenericPassword, 
                        _KCAddInternetPassword, _KCAddInternetPasswordWithPath, _KCAddItem, 
@@ -824,11 +745,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           30F69857-8BE8-3C09-95E7-AA5F7A5FD44B
+    value:           78B19D00-DFEE-3A62-9313-B23A1EB41E57
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6F6D37AD-4A7E-3476-927C-939B3A98EA99
+    value:           AF69575B-2661-368A-9E71-7506A6D54BA7
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -837,7 +758,7 @@ allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AppKit, LatentSemanticMapping ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DisposeSRCallBackUPP, _InvokeSRCallBackUPP, _NewSRCallBackUPP, 
                        _SFSAvatarCaptionVisible, _SFSCopyActiveRecognizer, _SFSCopyCurrentAvatarIdentifier, 
                        _SFSCopyIndAvatarInfo, _SFSCopyIndRecognizerPluginBundleRef, 

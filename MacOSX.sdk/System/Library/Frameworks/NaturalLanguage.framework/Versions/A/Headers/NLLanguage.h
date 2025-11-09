@@ -67,3 +67,4 @@ FOUNDATION_EXPORT NLLanguage const NLLanguageTurkish API_AVAILABLE(macos(10.14),
 FOUNDATION_EXPORT NLLanguage const NLLanguageUkrainian API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 FOUNDATION_EXPORT NLLanguage const NLLanguageUrdu API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 FOUNDATION_EXPORT NLLanguage const NLLanguageVietnamese API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+FOUNDATION_EXPORT NLLanguage const NLLanguageKazakh API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));

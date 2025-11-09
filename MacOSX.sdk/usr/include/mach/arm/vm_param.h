@@ -81,7 +81,7 @@
 #elif defined (__arm64__)
 
 #define VM_MIN_ADDRESS          ((vm_address_t) 0x0000000000000000ULL)
-#define VM_MAX_ADDRESS          ((vm_address_t) 0x0000000080000000ULL)
+#define VM_MAX_ADDRESS          ((vm_address_t) 0x00000000F0000000ULL)
 
 /* system-wide values */
 #define MACH_VM_MIN_ADDRESS_RAW 0x0ULL

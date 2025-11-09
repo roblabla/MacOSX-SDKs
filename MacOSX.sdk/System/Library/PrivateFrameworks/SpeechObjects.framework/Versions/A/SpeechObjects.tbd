@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           00015B04-5B1B-3AA5-A2B3-4A023F16457D
+    value:           856A6F6A-6FCF-3601-B9E2-65332A2AE686
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D5760CF7-9085-3DBE-8A06-D512B6871833
+    value:           F809BA43-043E-31CF-9D40-EB3F5B659447
 install-name:    '/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/SpeechObjects'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSSpeechSynthesizerImmedidateBoundary, _NSSpeechSynthesizerSentenceBoundary, 
                        _NSSpeechSynthesizerWordBoundary, _SDIMLocalCallBack, _SODecodeSecureArray, 
                        _SODecodeSecureDictionary, _SOEncodeSecureObject, _SOOSLog, 
@@ -26,10 +26,10 @@ exports:
                        _kSOFileUtteranceKeyText, _kSOFileUtteranceKeyTextVariants, 
                        _kSOFileUtteranceKeyType, _kSOFileUtteranceTypeBuiltInCommand, 
                        _kSOFileUtteranceTypeDictation, _kSOFileUtteranceTypeSilence, 
-                       _kSOFileUtteranceTypeUserDefinedCommand, _kVoiceSettingsCustomRelativeRateKey, 
-                       _kVoiceSettingsCustomVolumeKey, _kVoiceSettingsVoiceIdentifierKey, 
-                       _sSOSpeechInstallationManager, _sSOSpeechInstallationManagerDebugFlags, 
-                       _sSOSystemBehaviorManager ]
+                       _kSOFileUtteranceTypeUserDefinedCommand, _kVoicePickerSystemSelection, 
+                       _kVoiceSettingsCustomRelativeRateKey, _kVoiceSettingsCustomVolumeKey, 
+                       _kVoiceSettingsVoiceIdentifierKey, _sSOSpeechInstallationManager, 
+                       _sSOSpeechInstallationManagerDebugFlags, _sSOSystemBehaviorManager ]
     objc-classes:    [ CustomizeVoicesWindowController, DownloadableVoice, SOAudioFileUtilities, 
                        SOCustomizeSRLanguagesWindowController, SODownloadDisplayManager, 
                        SOPowerSavvyTimer, SOSRLanguageItem, SOSRLanguagePopUpButton, 
@@ -112,10 +112,11 @@ exports:
                        VoiceSettingsWindowController._modalDelegate, VoiceSettingsWindowController._playDisplayString, 
                        VoiceSettingsWindowController._rateSlider, VoiceSettingsWindowController._speechSynthesizer, 
                        VoiceSettingsWindowController._startStopSpeakingButton, VoiceSettingsWindowController._useCustomRateCheckbox, 
-                       VoiceSettingsWindowController._useCustomVolumeCheckbox, VoiceSettingsWindowController._voicePopupMenu, 
-                       VoiceSettingsWindowController._volumeLoudIcon, VoiceSettingsWindowController._volumeQuietIcon, 
-                       VoiceSettingsWindowController._volumeSlider, VoiceTableCellView._activeCheckbox, 
-                       VoiceTableCellView._downloadCheckbox, VoiceTableCellView._downloadMessageTextField, 
-                       VoiceTableRow._groupRow, VoiceTableRow._selected, VoiceTableRow._tableIndex, 
-                       VoiceTableRow._title, VoiceTableRow._voiceObject ]
+                       VoiceSettingsWindowController._useCustomVolumeCheckbox, VoiceSettingsWindowController._voicePicker, 
+                       VoiceSettingsWindowController._voicePopupMenu, VoiceSettingsWindowController._volumeLoudIcon, 
+                       VoiceSettingsWindowController._volumeQuietIcon, VoiceSettingsWindowController._volumeSlider, 
+                       VoiceTableCellView._activeCheckbox, VoiceTableCellView._downloadCheckbox, 
+                       VoiceTableCellView._downloadMessageTextField, VoiceTableRow._groupRow, 
+                       VoiceTableRow._selected, VoiceTableRow._tableIndex, VoiceTableRow._title, 
+                       VoiceTableRow._voiceObject ]
 ...

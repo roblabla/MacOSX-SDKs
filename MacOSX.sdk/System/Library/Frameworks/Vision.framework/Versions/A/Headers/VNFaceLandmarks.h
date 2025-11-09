@@ -78,6 +78,12 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @property (readonly, nullable) NSArray<NSNumber*>* precisionEstimatesPerPoint API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 
+/*!
+	@brief Describes how to interpret the points provided by the region.
+*/
+@property (readonly, nonatomic) VNPointsClassification pointsClassification API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));
+
+
 @end
 
 

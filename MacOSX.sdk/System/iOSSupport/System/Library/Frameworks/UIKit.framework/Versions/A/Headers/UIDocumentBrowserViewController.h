@@ -99,6 +99,14 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos,tvos)
 - (void)importDocumentAtURL:(NSURL *)documentURL nextToDocumentAtURL:(NSURL *)neighbourURL mode:(UIDocumentBrowserImportMode)importMode completionHandler:(void (^)(NSURL * _Nullable, NSError * _Nullable))completion;
 
 
+#pragma mark Document Renaming
+
+/// Rename a document.
+/// If the proposed name is already taken, a different name may be used after confirming with the user.
+/// The finalURL and error are available in the completion handler.
+- (void)renameDocumentAtURL:(NSURL *)documentURL proposedName:(NSString *)proposedName completionHandler:(void(^)(NSURL *_Nullable finalURL, NSError *_Nullable error))completionHandler API_AVAILABLE(ios(16.0));
+
+
 #pragma mark Item Presentation
 
 /// A UIDocumentBrowserTransitionController object is used to display a loading indicator, while the application is spending time on time-consuming operations (e.g., loading, parsing, …) after having finished the file download, and before presenting it. To be used together with the UIViewControllerTransitioningDelegate protocol for custom view controller transitions.

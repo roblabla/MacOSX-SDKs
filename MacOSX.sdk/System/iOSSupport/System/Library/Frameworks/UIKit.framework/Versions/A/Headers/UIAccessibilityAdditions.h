@@ -11,7 +11,7 @@
 #import <UIKit/UIPickerView.h>
 #import <UIKit/UIScrollView.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* 
   Optionally implement the following methods in a UIPickerView delegate
@@ -69,7 +69,7 @@ NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly) NSString *accessibilityName API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0), macos(11.0));
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIAccessibilityAdditions.h>

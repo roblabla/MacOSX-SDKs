@@ -33,8 +33,13 @@
 #if defined(__STDC_VERSION__) && (199901L <= __STDC_VERSION__)
 
 #include <inttypes.h>
-#include <stdbool.h>
 #include <stdint.h>
+
+#endif
+
+#if defined(__STDC_VERSION__) && (199901L <= __STDC_VERSION__) && (__STDC_VERSION__ <= 201710L)
+
+#include <stdbool.h>
 
 #endif
 
@@ -47,6 +52,7 @@
 #include <CoreFoundation/CFBitVector.h>
 #include <CoreFoundation/CFByteOrder.h>
 #include <CoreFoundation/CFCalendar.h>
+#include <CoreFoundation/CFCGTypes.h>
 #include <CoreFoundation/CFCharacterSet.h>
 #include <CoreFoundation/CFData.h>
 #include <CoreFoundation/CFDate.h>

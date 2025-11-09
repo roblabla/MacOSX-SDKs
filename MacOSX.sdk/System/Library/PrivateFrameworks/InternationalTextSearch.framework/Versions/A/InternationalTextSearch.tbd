@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2FA97045-ADC3-3A33-9255-08992A594F2F
+    value:           CA667EB7-2A5C-308D-AB18-7772EB764701
   - target:          x86_64-maccatalyst
-    value:           2FA97045-ADC3-3A33-9255-08992A594F2F
+    value:           CA667EB7-2A5C-308D-AB18-7772EB764701
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1B6F7782-0E28-31C6-8FDD-4CCA696BC58A
+    value:           A6796BDA-D9C4-3A37-9D64-5FF35A547833
   - target:          arm64e-maccatalyst
-    value:           1B6F7782-0E28-31C6-8FDD-4CCA696BC58A
+    value:           A6796BDA-D9C4-3A37-9D64-5FF35A547833
 install-name:    '/System/Library/PrivateFrameworks/InternationalTextSearch.framework/Versions/A/InternationalTextSearch'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ITSCollationContextFreeContextForDatabaseHandle, _ITSCopyFTSTableCreateStatementUsingCurrentLanguage, 
                        _ITSCopyFTSTableCreateStatementWithLanguageAndCollator, _ITSCopySearchCollatorForLanguage, 
                        _ITSCopyUserLanguage, _ITSCreateCollator, _ITSCreateCollatorWithPreferredLocale, 

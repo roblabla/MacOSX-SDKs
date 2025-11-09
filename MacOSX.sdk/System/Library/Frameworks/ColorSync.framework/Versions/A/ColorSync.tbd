@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9181FE30-A74D-3504-BA69-912B612DEBEC
+    value:           565623A4-C436-3DAF-AB19-76B233F831F8
   - target:          x86_64-maccatalyst
-    value:           9181FE30-A74D-3504-BA69-912B612DEBEC
+    value:           565623A4-C436-3DAF-AB19-76B233F831F8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E35444E0-B8DA-35DA-BA12-F73CC6D34637
+    value:           734445D0-1DFC-3500-9B2D-FE30ACFC21FD
   - target:          arm64e-maccatalyst
-    value:           E35444E0-B8DA-35DA-BA12-F73CC6D34637
+    value:           734445D0-1DFC-3500-9B2D-FE30ACFC21FD
 install-name:    '/System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync'
-current-version: 4.7
+current-version: 4.13
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.11$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.12$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
@@ -85,8 +85,9 @@ exports:
                        _kColorSyncBestQuality, _kColorSyncBlackPointCompensation, 
                        _kColorSyncCameraDeviceClass, _kColorSyncConversion1DLut, 
                        _kColorSyncConversion3DLut, _kColorSyncConversionBPC, _kColorSyncConversionChannelID, 
-                       _kColorSyncConversionGridPoints, _kColorSyncConversionInpChan, 
-                       _kColorSyncConversionMatrix, _kColorSyncConversionNDLut, _kColorSyncConversionOutChan, 
+                       _kColorSyncConversionEXRToneMappingGamma, _kColorSyncConversionGridPoints, 
+                       _kColorSyncConversionInpChan, _kColorSyncConversionMatrix, 
+                       _kColorSyncConversionNDLut, _kColorSyncConversionOutChan, 
                        _kColorSyncConversionParamCurve0, _kColorSyncConversionParamCurve1, 
                        _kColorSyncConversionParamCurve2, _kColorSyncConversionParamCurve3, 
                        _kColorSyncConversionParamCurve4, _kColorSyncConversionParamHLGInvOETF, 
@@ -102,7 +103,7 @@ exports:
                        _kColorSyncDeviceProfileIsDefault, _kColorSyncDeviceProfileIsFactory, 
                        _kColorSyncDeviceProfileURL, _kColorSyncDeviceProfilesNotification, 
                        _kColorSyncDeviceRegisteredNotification, _kColorSyncDeviceUnregisteredNotification, 
-                       _kColorSyncDeviceUserScope, _kColorSyncDisplayDeviceClass, 
+                       _kColorSyncDeviceUserScope, _kColorSyncDevices, _kColorSyncDisplayDeviceClass, 
                        _kColorSyncDisplayDeviceProfilesNotification, _kColorSyncDisplayP3Profile, 
                        _kColorSyncDisplayP3_709OETFProfile, _kColorSyncDisplayP3_HLGProfile, 
                        _kColorSyncDisplayP3_PQProfile, _kColorSyncDoNotValidateProfiles, 
@@ -114,15 +115,16 @@ exports:
                        _kColorSyncITUR2020_HLGProfile, _kColorSyncITUR2020_PQProfile, 
                        _kColorSyncITUR2020_sRGBGammaProfile, _kColorSyncITUR2100_HLGProfile, 
                        _kColorSyncITUR2100_PQProfile, _kColorSyncITUR709Profile, 
-                       _kColorSyncITUR709_PQProfile, _kColorSyncMainDisplayProfile, 
-                       _kColorSyncMaxProfileDataSize, _kColorSyncMissingDescription, 
-                       _kColorSyncNormalQuality, _kColorSyncPerceptualStandardRGBProfile, 
+                       _kColorSyncITUR709_HLGProfile, _kColorSyncITUR709_PQProfile, 
+                       _kColorSyncMainDisplayProfile, _kColorSyncMaxProfileDataSize, 
+                       _kColorSyncMissingDescription, _kColorSyncNormalQuality, _kColorSyncPerceptualStandardRGBProfile, 
                        _kColorSyncPreferredCMM, _kColorSyncPrinterDeviceClass, _kColorSyncProfile, 
                        _kColorSyncProfileASCIIDescription, _kColorSyncProfileCacheSeed, 
                        _kColorSyncProfileClass, _kColorSyncProfileColorSpace, _kColorSyncProfileComputerDomain, 
                        _kColorSyncProfileDescription, _kColorSyncProfileHeader, _kColorSyncProfileHostScope, 
-                       _kColorSyncProfileMD5Digest, _kColorSyncProfilePCS, _kColorSyncProfileRepositoryChangeNotification, 
-                       _kColorSyncProfileURL, _kColorSyncProfileUserDomain, _kColorSyncProfileUserScope, 
+                       _kColorSyncProfileIsValid, _kColorSyncProfileMD5Digest, _kColorSyncProfilePCS, 
+                       _kColorSyncProfileRepositoryChangeNotification, _kColorSyncProfileURL, 
+                       _kColorSyncProfileUserDomain, _kColorSyncProfileUserScope, 
                        _kColorSyncROMMRGBProfile, _kColorSyncRegistrationUpdateWindowServer, 
                        _kColorSyncRenderingIntent, _kColorSyncRenderingIntentAbsolute, 
                        _kColorSyncRenderingIntentPerceptual, _kColorSyncRenderingIntentRelative, 
@@ -156,8 +158,9 @@ exports:
                        _kColorSyncTransformProfileSequnce, _kColorSyncTransformPureGammaOriginalTRC, 
                        _kColorSyncTransformSceneLinearPCSToDevice, _kColorSyncTransformSceneLinearToPCS, 
                        _kColorSyncTransformSimplifiedConversionData, _kColorSyncTransformSrcSpace, 
-                       _kColorSyncTransformTRCSize, _kColorSyncTransformTag, _kColorSyncWaitForCacheReply ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+                       _kColorSyncTransformTRCSize, _kColorSyncTransformTag, _kColorSyncWaitForCacheReply, 
+                       _kColorSyncWebSafeColorsProfile ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ColorSyncCMMCopyCMMIdentifier, _ColorSyncCMMCopyLocalizedName, 
                        _ColorSyncCMMCreate, _ColorSyncCMMGetBundle, _ColorSyncCMMGetTypeID, 
                        _ColorSyncIterateInstalledCMMs, _kCMMApplyTransformProcName, 

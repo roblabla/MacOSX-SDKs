@@ -155,6 +155,38 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 NW_RETURNS_RETAINED _Nullable nw_txt_record_t
 nw_advertise_descriptor_copy_txt_record_object(nw_advertise_descriptor_t advertise_descriptor);
 
+/*!
+ * @function nw_advertise_descriptor_create_application_service
+ *
+ * @abstract
+ *		Creates an advertise descriptor for application service discovery.
+ *
+ * @param application_service_name
+ *		The service name to advertise.
+ *
+ * @result
+ *		An instantiated advertise descriptor object.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+NW_RETURNS_RETAINED nw_advertise_descriptor_t
+nw_advertise_descriptor_create_application_service(const char *application_service_name);
+
+/*!
+ * @function nw_advertise_descriptor_get_application_service_name
+ *
+ * @abstract
+ *		Returns the service name of an application service advertise descriptor.
+ *
+ * @param advertise_descriptor
+ *		An advertise descriptor object.
+ *
+ * @result
+ *		The service name or NULL if the advertise descriptor is not of the correct type.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+const char * _Nullable
+nw_advertise_descriptor_get_application_service_name(nw_advertise_descriptor_t advertise_descriptor);
+
 __END_DECLS
 NW_ASSUME_NONNULL_END
 

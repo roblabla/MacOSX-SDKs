@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7955AD16-2043-396B-98FB-B577B120A6D0
+    value:           DB900133-64E7-348A-8CD8-24E3014DDA19
   - target:          x86_64-maccatalyst
-    value:           7955AD16-2043-396B-98FB-B577B120A6D0
+    value:           DB900133-64E7-348A-8CD8-24E3014DDA19
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9C887BDB-0DF5-358C-895D-0961E2B9F935
+    value:           9EB258DB-DCE6-3EC3-96BE-8701B5982175
   - target:          arm64e-maccatalyst
-    value:           9C887BDB-0DF5-358C-895D-0961E2B9F935
+    value:           9EB258DB-DCE6-3EC3-96BE-8701B5982175
 install-name:    '/usr/lib/system/liblaunch.dylib'
-current-version: 2236.100.61
+current-version: 2462.41.2
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 reexports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __spawn_via_launchd, __vproc_get_last_exit_status, __vproc_grab_subset, 
                        __vproc_kickstart_by_label, __vproc_log, __vproc_log_error, 
                        __vproc_logv, __vproc_pid_is_managed, __vproc_post_fork_ping, 

@@ -142,11 +142,13 @@ extern const OSSymbol *     gIODEXTMatchCountKey;
 extern const OSSymbol *     gIOUserClientClassKey;
 
 extern const OSSymbol *     gIOUserClassKey;
+extern const OSSymbol *     gIOUserClassesKey;
 extern const OSSymbol *     gIOUserServerClassKey;
 extern const OSSymbol *     gIOUserServerNameKey;
 extern const OSSymbol *     gIOUserServerTagKey;
 extern const OSSymbol *     gIOUserUserClientKey;
 extern const OSSymbol *     gIOAssociatedServicesKey;
+extern const OSSymbol *     gIOUserServerPreserveUserspaceRebootKey;
 
 extern const OSSymbol *     gIOKitDebugKey;
 extern const OSSymbol *     gIOServiceKey;
@@ -183,11 +185,15 @@ extern const OSSymbol *     gIOBSDMajorKey;
 extern const OSSymbol *     gIOBSDMinorKey;
 extern const OSSymbol *     gIOBSDUnitKey;
 
+extern const OSSymbol *     gIOUserClientEntitlementsKey;
 extern const OSSymbol *     gIODriverKitEntitlementKey;
 extern const OSSymbol *     gIOServiceDEXTEntitlementsKey;
 extern const OSSymbol *     gIODriverKitUserClientEntitlementsKey;
 extern const OSSymbol *     gIODriverKitUserClientEntitlementAllowAnyKey;
 extern const OSSymbol *     gIODriverKitRequiredEntitlementsKey;
+extern const OSSymbol *     gIODriverKitTestDriverEntitlementKey;
+extern const OSSymbol *     gIODriverKitUserClientEntitlementCommunicatesWithDriversKey;
+extern const OSSymbol *     gIODriverKitUserClientEntitlementAllowThirdPartyUserClientsKey;
 extern const OSSymbol *     gIOMatchDeferKey;
 
 extern const OSSymbol *     gIOAllCPUInitializedKey;
@@ -756,6 +762,7 @@ public:
  *   @param delta The delta to be applied to the IOService object's <code>busyState</code>. */
 
 	virtual void adjustBusy( SInt32 delta );
+
 
 	APPLE_KEXT_COMPATIBILITY_VIRTUAL
 	IOReturn waitQuiet(mach_timespec_t * timeout)

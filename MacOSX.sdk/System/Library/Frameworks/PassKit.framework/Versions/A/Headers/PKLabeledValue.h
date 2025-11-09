@@ -1,3 +1,4 @@
+#if !__has_include(<PassKitCore/PKLabeledValue.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKLabeledValue.h
 //  PassKit
@@ -20,3 +21,7 @@ API_AVAILABLE(ios(10.1))
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <PassKitCore/PKLabeledValue.h>
+#endif

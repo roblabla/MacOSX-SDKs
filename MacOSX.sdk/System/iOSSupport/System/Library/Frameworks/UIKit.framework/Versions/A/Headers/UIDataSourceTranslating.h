@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* For advanced clients with data model centric layouts (i.e. the layout refers to the data source
  * to gather information in order to create UICollectionViewLayoutAttributes) this protocol allows
@@ -48,7 +48,7 @@ API_AVAILABLE(ios(11.0), tvos(11.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIDataSourceTranslating.h>

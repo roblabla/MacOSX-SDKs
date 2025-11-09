@@ -24,4 +24,6 @@ typedef NS_ENUM(NSInteger, UNErrorCode) {
     
     UNErrorCodeContentProvidingObjectNotAllowed = 1500,
     UNErrorCodeContentProvidingInvalid,
+    
+    UNErrorCodeBadgeInputInvalid = 1600,
 } API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0));

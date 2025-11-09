@@ -43,6 +43,8 @@ typedef NS_ENUM(NSInteger, CBError) {
 	CBErrorPeerRemovedPairingInformation NS_ENUM_AVAILABLE(10_15, 13_4)	= 14,
 	CBErrorEncryptionTimedOut NS_ENUM_AVAILABLE(10_15, 13_4)	= 15,
 	CBErrorTooManyLEPairedDevices NS_ENUM_AVAILABLE(11_0, 14_0) = 16,
+    CBErrorLeGattExceededBackgroundNotificationLimit API_AVAILABLE(watchos(9.0)) API_UNAVAILABLE(macos,ios, tvos) = 17,
+    CBErrorLeGattNearBackgroundNotificationLimit API_AVAILABLE(watchos(9.0)) API_UNAVAILABLE(macos,ios, tvos) = 18,
 };
 
 CB_EXTERN NSString * const CBATTErrorDomain;

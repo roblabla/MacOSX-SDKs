@@ -1,6 +1,7 @@
+#if !__has_include(<PassKitCore/PKRecurringPaymentSummaryItem.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKRecurringPaymentSummaryItem.h
-//
+//  PassKit
 //  Copyright © 2021 Apple, Inc. All rights reserved.
 //
 
@@ -31,3 +32,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0))
 NS_ASSUME_NONNULL_END
 
 #endif // __PKRECURRINGPAYMENTSUMMARYITEM_H__
+
+#else
+#import <PassKitCore/PKRecurringPaymentSummaryItem.h>
+#endif

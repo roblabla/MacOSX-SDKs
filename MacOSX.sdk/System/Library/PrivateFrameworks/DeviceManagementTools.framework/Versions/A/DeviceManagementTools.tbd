@@ -3,19 +3,23 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7FCCD0C9-AEBB-394C-9189-24AC98F1840A
+    value:           C1C2E18C-646E-384A-81F4-11837D401E95
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C7B6D2FE-C248-3A42-85EB-707D4C6A0312
+    value:           09895230-0A16-3A36-85C4-A8D0EB429FC8
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagementTools.framework/Versions/A/DeviceManagementTools'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BooleanValueForObject, _DMTBundle, _DMTDescriptionKeyFormattedString, 
-                       _DMTErrorDomain, _DMTErrorWithCodeAndUserInfo, _DMTValidateProfileArray, 
-                       _DMTValidateProfileBoolean, _DMTValidateProfileData, _DMTValidateProfileDate, 
-                       _DMTValidateProfileDictionary, _DMTValidateProfileNumber, 
-                       _DMTValidateProfileString, _DMTisDarkBuddy, _DeviceManagementToolsVersionNumber, 
+                       _DMTDetailTextAddingDeviceBodyFor, _DMTDetailTextFailureEnrollmentFor, 
+                       _DMTDetailTextSuccessfulEnrollmentFor, _DMTEnrollmentTimeoutErrorForNetworkConfiguration, 
+                       _DMTErrorDomain, _DMTErrorWithCodeAndUserInfo, _DMTFormattedEnrollmentOrganizationNameFrom, 
+                       _DMTLocalizedOrganizationMarketingNameForOrganizationType, 
+                       _DMTTitleTextAddingDeviceFor, _DMTTitleTextFailureEnrollmentFor, 
+                       _DMTValidateProfileArray, _DMTValidateProfileBoolean, _DMTValidateProfileData, 
+                       _DMTValidateProfileDate, _DMTValidateProfileDictionary, _DMTValidateProfileNumber, 
+                       _DMTValidateProfileString, _DMTisDarkBuddy, _DMTisWAPI, _DeviceManagementToolsVersionNumber, 
                        _DeviceManagementToolsVersionString, _ExtractSignedData, _kDMTWaitForKVOChangeOperationExpectedValueKey, 
                        _kDMTWaitForKVOChangeOperationUnexpectedValueKey, _kPayloadCertificateUUIDKey, 
                        _kPayloadConsentTextKey, _kPayloadContentKey, _kPayloadDescriptionKey, 
@@ -70,10 +74,9 @@ exports:
                        DMTConfigurationProfileValidatorBundles, DMTDisallowedPayloadTypesValidator, 
                        DMTFetchAutomatedDeviceEnrollmentPrerequisitesRequest, DMTFetchAutomatedDeviceEnrollmentPrerequisitesResultObject, 
                        DMTFetchAutomatedDeviceEnrollmentStateRequest, DMTFetchAutomatedDeviceEnrollmentStateResultObject, 
-                       DMTMDMClientLibraryBackedAutomatedDeviceEnrollmentPrimitives, 
-                       DMTMobileGestaltBackedDeviceInformationPrimitives, DMTNetworkCredential, 
-                       DMTPerformAutomatedDeviceEnrollmentRequest, DMTProximityDEPEnrollmentManager, 
-                       DMTSharingBackedRemoteSetupBroadcastingProvider, DMTSharingBroadcastPrimitives, 
-                       DMTSharingDevice, DMTSharingDiscoveryPrimitives, DMTTimeoutOperation, 
-                       DMTWaitForKVOChangeOperation, _DMTErrorHelper ]
+                       DMTMobileGestaltBackedDeviceInformationPrimitives, DMTNetworkBackedInternetReachabilityPrimitives, 
+                       DMTNetworkCredential, DMTPerformAutomatedDeviceEnrollmentRequest, 
+                       DMTProximityDEPEnrollmentManager, DMTSharingBackedRemoteSetupBroadcastingProvider, 
+                       DMTSharingBroadcastPrimitives, DMTSharingDevice, DMTSharingDiscoveryPrimitives, 
+                       DMTTimeoutOperation, DMTWaitForKVOChangeOperation, _DMTErrorHelper ]
 ...

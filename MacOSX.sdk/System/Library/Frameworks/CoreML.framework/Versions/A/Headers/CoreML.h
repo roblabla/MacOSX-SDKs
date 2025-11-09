@@ -59,3 +59,4 @@
 
 #import <CoreML/MLModelCollection.h>
 #import <CoreML/MLModelCollectionEntry.h>
+#import <CoreML/MLModelAsset.h>

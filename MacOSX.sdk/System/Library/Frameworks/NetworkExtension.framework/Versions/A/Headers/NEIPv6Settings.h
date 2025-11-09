@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2015, 2018 Apple Inc.
+ * Copyright (c) 2013-2015, 2018, 2022 Apple Inc.
  * All rights reserved.
  */
 
@@ -35,6 +35,18 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @return The initialized object.
  */
 - (instancetype)initWithAddresses:(NSArray<NSString *> *)addresses networkPrefixLengths:(NSArray<NSNumber *> *)networkPrefixLengths API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+
+/*!
+ * @method settingsWithAutomaticAddressing
+ * @discussion Create a NEIPv6Settings object that will obtain IP addresses and netmasks automatically.
+ */
++ (instancetype)settingsWithAutomaticAddressing API_UNAVAILABLE(macos, ios, tvos) __WATCHOS_PROHIBITED;
+
+/*!
+ * @method settingsWithLinkLocalAddressing
+ * @discussion Create a NEIPv6Settings object that will only use link-local IPv6 addresses.
+ */
++ (instancetype)settingsWithLinkLocalAddressing API_UNAVAILABLE(macos, ios, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property addresses

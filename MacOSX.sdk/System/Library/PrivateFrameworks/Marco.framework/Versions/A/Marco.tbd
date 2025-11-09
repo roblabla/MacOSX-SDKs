@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6DC29C4B-06F3-3A8B-A190-4EA7A344AC9C
+    value:           083D8C8A-C99B-3810-A771-B61D4660CBA5
   - target:          x86_64-maccatalyst
-    value:           6DC29C4B-06F3-3A8B-A190-4EA7A344AC9C
+    value:           083D8C8A-C99B-3810-A771-B61D4660CBA5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4A746BDD-C4FF-3D36-87B1-BF6F65DEB26C
+    value:           864E0379-3DCB-3FA7-90C5-7648CC0B09A5
   - target:          arm64e-maccatalyst
-    value:           4A746BDD-C4FF-3D36-87B1-BF6F65DEB26C
+    value:           864E0379-3DCB-3FA7-90C5-7648CC0B09A5
 install-name:    '/System/Library/PrivateFrameworks/Marco.framework/Versions/A/Marco'
 current-version: 800
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MarcoAction, _MarcoActionWithUserInfo, _MarcoAddCallMetric, 
                        _MarcoAddCallMetric_Double, _MarcoAddCallMetric_Float, _MarcoAddCallMetric_Int, 
                        _MarcoAddCallMetric_Short, _MarcoAddLogFile, _MarcoBeginSession, 

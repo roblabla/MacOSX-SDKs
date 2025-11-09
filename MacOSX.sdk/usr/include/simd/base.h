@@ -41,7 +41,14 @@
  *  way in which simd functions are overloaded, the usual weak-linking tricks
  *  do not work; these functions are simply unavailable when targeting older
  *  versions of the library.                                                  */
-#   if   __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_12_0   || \
+#   if   __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_13_0   || \
+        __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_16_0 || \
+        __WATCH_OS_VERSION_MIN_REQUIRED  >= __WATCHOS_9_0 || \
+        __TV_OS_VERSION_MIN_REQUIRED     >= __TVOS_16_0   || \
+        __BRIDGE_OS_VERSION_MIN_REQUIRED >= 70000   || \
+        __DRIVERKIT_VERSION_MIN_REQUIRED >= __DRIVERKIT_22_0
+#    define SIMD_LIBRARY_VERSION 5
+#   elif   __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_12_0   || \
         __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_15_0 || \
          __WATCH_OS_VERSION_MIN_REQUIRED >= __WATCHOS_8_0 || \
             __TV_OS_VERSION_MIN_REQUIRED >= __TVOS_15_0   || \

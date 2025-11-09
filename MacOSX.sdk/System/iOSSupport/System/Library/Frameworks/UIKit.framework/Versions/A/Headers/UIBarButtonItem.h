@@ -15,7 +15,7 @@
 #import <UIKit/UIBarCommon.h>
 #import <UIKit/UISpringLoadedInteractionSupporting.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UIBarButtonItemStyle) {
     UIBarButtonItemStylePlain,
@@ -76,8 +76,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// Creates a plain-style bar button item with the given title. The constructed item will present the menu immediately when touched.
 - (instancetype)initWithTitle:(nullable NSString *)title menu:(nullable UIMenu *)menu API_AVAILABLE(ios(14.0));
 
-/// Creates a plain-style bar button item with the given item. The constructed item will present the menu immediately when touched.
+/// Creates a plain-style bar button item with the given image. The constructed item will present the menu immediately when touched.
 - (instancetype)initWithImage:(nullable UIImage *)image menu:(nullable UIMenu *)menu API_AVAILABLE(ios(14.0));
+
+/// Creates a plain-style bar button item from the properties of primaryAction. primaryAction is copied.
+- (instancetype)initWithPrimaryAction:(nullable UIAction *)primaryAction menu:(nullable UIMenu *)menu API_AVAILABLE(ios(16.0));
+
+/// Creates a bar button item for the given systemItem. The primaryAction is copied, and its title & image are ignored.
+- (instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem primaryAction:(nullable UIAction *)primaryAction menu:(nullable UIMenu *)menu API_AVAILABLE(ios(16.0));
+
+/// Creates a plain-style bar button item with the given title and image.
+- (instancetype)initWithTitle:(nullable NSString *)title image:(nullable UIImage *)image target:(nullable id)target action:(nullable SEL)action menu:(nullable UIMenu *)menu API_AVAILABLE(ios(16.0));
 
 /// Construct a new fixed space item with the given width.
 + (instancetype)fixedSpaceItemOfWidth:(CGFloat)width API_AVAILABLE(ios(14.0));
@@ -98,12 +107,30 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// When non-nil the menu is presented, the gesture used to trigger the menu is based on if the bar button item would normally trigger an action when tapped.
 @property (nonatomic, readwrite, copy, nullable) UIMenu *menu API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
+/// Preferred menu element ordering strategy for menus displayed by this button.
+@property (nonatomic) UIContextMenuConfigurationElementOrder preferredMenuElementOrder API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+
 /// Indicates if the button changes selection as its primary action.
 /// This shows the menu as options for selection if a menu is populated and no action when tapped is enabled.
 /// If no menu is provided and no action is enabled when tapped, the item is toggled on and off for the primary action.
 @property (nonatomic, readwrite, assign) BOOL changesSelectionAsPrimaryAction API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 
 @property (nonatomic, readwrite, assign, getter=isSelected) BOOL selected API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
+
+/// If the item should be hidden from display.
+@property (nonatomic, readwrite, assign, getter = isHidden) BOOL hidden API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
+/// A UIMenuElement that should substitute for the UIBarButtonItem when displayed in a menu.
+@property (nonatomic, readwrite, copy, nullable) UIMenuElement *menuRepresentation API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
+/// Create a fixed group containing this bar button item. UIBarButtonItems may only be in a single UIBarButtonItemGroup at a time, adding a bar button item to a group removes it from any previous group.
+- (UIBarButtonItemGroup *)creatingFixedGroup API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
+/// Create a movable group containing this bar button item. UIBarButtonItems may only be in a single UIBarButtonItemGroup at a time, adding a bar button item to a group removes it from any previous group.
+- (UIBarButtonItemGroup *)creatingMovableGroupWithCustomizationIdentifier:(NSString *)customizationIdentifier API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
+/// Create an optional group containing this bar button item. UIBarButtonItems may only be in a single UIBarButtonItemGroup at a time, adding a bar button item to a group removes it from any previous group.
+- (UIBarButtonItemGroup *)creatingOptionalGroupWithCustomizationIdentifier:(NSString *)customizationIdentifier inDefaultCustomization:(BOOL)inDefaultCustomization API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
 //
 // Appearance modifiers
@@ -161,7 +188,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @end
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 
 #else

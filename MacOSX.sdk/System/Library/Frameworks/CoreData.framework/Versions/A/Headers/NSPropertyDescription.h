@@ -1,12 +1,14 @@
 /*
     NSPropertyDescription.h
     Core Data
-    Copyright (c) 2004-2021, Apple Inc.
+    Copyright (c) 2004-2022, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
+
+#import <CoreData/CoreDataDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

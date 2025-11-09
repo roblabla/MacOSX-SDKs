@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CF_BRIDGED_TYPE(id) CGImage *CGImageRef;
+typedef struct CF_BRIDGED_TYPE(id) CGImage *CGImageRef;  /* Swift Sendable */
 
 #include <CoreGraphics/CGColorSpace.h>
 #include <CoreGraphics/CGDataProvider.h>
@@ -25,7 +25,7 @@ typedef CF_ENUM(uint32_t, CGImageAlphaInfo) {
     kCGImageAlphaPremultipliedFirst, /* For example, premultiplied ARGB */
     kCGImageAlphaLast,               /* For example, non-premultiplied RGBA */
     kCGImageAlphaFirst,              /* For example, non-premultiplied ARGB */
-    kCGImageAlphaNoneSkipLast,       /* For example, RBGX. */
+    kCGImageAlphaNoneSkipLast,       /* For example, RGBX. */
     kCGImageAlphaNoneSkipFirst,      /* For example, XRGB. */
     kCGImageAlphaOnly                /* No color data, alpha data only */
 };
@@ -42,10 +42,12 @@ typedef CF_ENUM(uint32_t, CGImageByteOrderInfo) {
 typedef CF_ENUM(uint32_t, CGImagePixelFormatInfo) {
     kCGImagePixelFormatMask      = 0xF0000,
     kCGImagePixelFormatPacked    = (0 << 16),
-    kCGImagePixelFormatRGB555    = (1 << 16), /* Only for RGB 16 bits per pixel */
-    kCGImagePixelFormatRGB565    = (2 << 16), /* Only for RGB 16 bits per pixel */
-    kCGImagePixelFormatRGB101010 = (3 << 16), /* Only for RGB 32 bits per pixel */
-    kCGImagePixelFormatRGBCIF10  = (4 << 16), /* Only for RGB 32 bits per pixel */
+    kCGImagePixelFormatRGB555    = (1 << 16), /* Only for RGB 16 bits per pixel, alpha != alpha none */
+    kCGImagePixelFormatRGB565    = (2 << 16), /* Only for RGB 16 bits per pixel, alpha none */
+    kCGImagePixelFormatRGB101010 = (3 << 16), /* Only for RGB 32 bits per pixel, alpha != none */
+    kCGImagePixelFormatRGBCIF10  = (4 << 16)  /* Only for RGB 32 bits per pixel,
+                                               * 10 bits per component, kCGImageByteOrder32Little
+                                               * The 2 MSB of the pixel need to be set to 1 */
 } CG_AVAILABLE_STARTING(10.14, 12.0);
 
 typedef CF_OPTIONS(uint32_t, CGBitmapInfo) {
@@ -63,11 +65,11 @@ typedef CF_OPTIONS(uint32_t, CGBitmapInfo) {
 } CG_AVAILABLE_STARTING(10.0, 2.0);
 
 #ifdef __BIG_ENDIAN__
-# define kCGBitmapByteOrder16Host kCGBitmapByteOrder16Big
-# define kCGBitmapByteOrder32Host kCGBitmapByteOrder32Big
+static const CGBitmapInfo kCGBitmapByteOrder16Host = kCGBitmapByteOrder16Big;
+static const CGBitmapInfo kCGBitmapByteOrder32Host = kCGBitmapByteOrder32Big;
 #else    /* Little endian. */
-# define kCGBitmapByteOrder16Host kCGBitmapByteOrder16Little
-# define kCGBitmapByteOrder32Host kCGBitmapByteOrder32Little
+static const CGBitmapInfo kCGBitmapByteOrder16Host = kCGBitmapByteOrder16Little;
+static const CGBitmapInfo kCGBitmapByteOrder32Host = kCGBitmapByteOrder32Little;
 #endif
 
 /* Return the CFTypeID for CGImageRefs. */

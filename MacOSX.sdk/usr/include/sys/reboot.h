@@ -88,6 +88,7 @@
 #define RB_QUICK        0x400   /* quick and ungraceful reboot with file system caches flushed*/
 #define RB_PANIC        0x800   /* panic the kernel */
 #define RB_PANIC_ZPRINT 0x1000   /* add zprint info to panic string */
+#define RB_PANIC_FORCERESET 0x2000   /* do force-reset panic */
 
 __BEGIN_DECLS
 /* userspace reboot control */

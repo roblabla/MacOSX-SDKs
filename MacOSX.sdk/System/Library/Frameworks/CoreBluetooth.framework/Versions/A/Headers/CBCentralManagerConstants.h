@@ -37,6 +37,17 @@ CB_EXTERN NSString * const CBCentralManagerOptionShowPowerAlertKey NS_AVAILABLE(
 CB_EXTERN NSString * const CBCentralManagerOptionRestoreIdentifierKey NS_AVAILABLE(10_13, 7_0);
 
 /*!
+ *  @const  CBCentralManagerOptionDeviceAccessForMedia
+ *
+ *  @discussion A Boolean representing the CBCentralManager init purpose is for DeviceAccess for media only. This will limit the functionality of this
+ *  				manager and only allow media device access without prompting the user for Bluetooth generic TCC.
+ *
+ *  @see		initWithDelegate:queue:options:
+ *
+ */
+CB_EXTERN NSString * const CBCentralManagerOptionDeviceAccessForMedia NS_AVAILABLE_IOS(16_0);
+
+/*!
  *  @const CBCentralManagerScanOptionAllowDuplicatesKey
  *
  *  @discussion An NSNumber (Boolean) indicating that the scan should run without duplicate filtering. By default, multiple discoveries of the

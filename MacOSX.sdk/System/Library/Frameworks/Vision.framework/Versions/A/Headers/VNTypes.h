@@ -19,8 +19,10 @@ typedef float VNDegrees;
 typedef NS_ENUM(NSUInteger, VNImageCropAndScaleOption)
 {
     VNImageCropAndScaleOptionCenterCrop = 0,  // scale image maintaining aspect ratio to fit on the short side and crop centered on the long side
-    VNImageCropAndScaleOptionScaleFit = 1,    // scale to size required by algorithm
-    VNImageCropAndScaleOptionScaleFill = 2
+    VNImageCropAndScaleOptionScaleFit = 1,    // scale to size required by algorithm while maintaining the original aspect ratio
+    VNImageCropAndScaleOptionScaleFill = 2,
+    VNImageCropAndScaleOptionScaleFitRotate90CCW = 0x100 + VNImageCropAndScaleOptionScaleFit, // scale image maintaining aspect ratio to fit on the long side but also rotate by 90 degrees counter clockwise to optimize portrait images to fit into landscape buffers for algorithms that are rotation agnostic
+    VNImageCropAndScaleOptionScaleFillRotate90CCW = 0x100 + VNImageCropAndScaleOptionScaleFill, // scale image and rotate by 90 degrees counter clockwise to optimize portrait images to fill into landscape buffers for algorithms that are rotation agnostic
 };
 
 /*!
@@ -78,4 +80,14 @@ typedef NS_CLOSED_ENUM(NSInteger, VNChirality)
     VNChiralityUnknown = 0,
     VNChiralityLeft = -1,
     VNChiralityRight = 1
+};
+
+
+
+API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
+typedef NS_CLOSED_ENUM(NSInteger, VNPointsClassification)
+{
+	VNPointsClassificationDisconnected = 0,
+	VNPointsClassificationOpenPath,
+	VNPointsClassificationClosedPath
 };

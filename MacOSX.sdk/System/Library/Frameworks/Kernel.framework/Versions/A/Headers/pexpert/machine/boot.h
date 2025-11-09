@@ -32,6 +32,9 @@
 #include "pexpert/i386/boot.h"
 #elif defined (__arm64__)
 #elif defined (__arm__)
+/*
+ * This file is DEPRECATED for arm architectures preceeding version 8.
+ */
 #else
 #error architecture not supported
 #endif

@@ -4,24 +4,35 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           02D7F97E-069B-383D-84F8-005CA9FE8271
+    value:           4AE366D9-66B8-3910-AEF9-C60BC312B5D8
   - target:          x86_64-maccatalyst
-    value:           02D7F97E-069B-383D-84F8-005CA9FE8271
+    value:           4AE366D9-66B8-3910-AEF9-C60BC312B5D8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FB99EF20-30F2-339B-A608-D1D32F2C7DF9
+    value:           28731259-5350-3E54-8BDF-C5CA0B09FD81
   - target:          arm64e-maccatalyst
-    value:           FB99EF20-30F2-339B-A608-D1D32F2C7DF9
+    value:           28731259-5350-3E54-8BDF-C5CA0B09FD81
 install-name:    '/System/Library/PrivateFrameworks/PreviewsOSSupport.framework/Versions/A/PreviewsOSSupport'
-current-version: 19.30.14
+current-version: 20.10.11
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation3URLV17PreviewsOSSupportE016rootRelativeFileB012relativePath11isDirectoryACSS_SbtFZ', 
+                       '_$s17PreviewsOSSupport18TransactionManagerC04takeC03for0A10Foundation17CancellationTokenCSS_tF', 
+                       '_$s17PreviewsOSSupport18TransactionManagerC12currentState0A10Foundation12PropertyListVvg', 
+                       '_$s17PreviewsOSSupport18TransactionManagerC12currentState0A10Foundation12PropertyListVvpMV', 
+                       '_$s17PreviewsOSSupport18TransactionManagerC16debugDescriptionSSvg', 
+                       '_$s17PreviewsOSSupport18TransactionManagerC16debugDescriptionSSvpMV', 
+                       '_$s17PreviewsOSSupport18TransactionManagerC6sharedACvgZ', 
+                       '_$s17PreviewsOSSupport18TransactionManagerCMa', '_$s17PreviewsOSSupport18TransactionManagerCMm', 
+                       '_$s17PreviewsOSSupport18TransactionManagerCMn', '_$s17PreviewsOSSupport18TransactionManagerCMo', 
+                       '_$s17PreviewsOSSupport18TransactionManagerCMu', '_$s17PreviewsOSSupport18TransactionManagerCN', 
+                       '_$s17PreviewsOSSupport18TransactionManagerCfD', '_$s17PreviewsOSSupport18TransactionManagerCfd', 
+                       '_$s17PreviewsOSSupport18TransactionManagerCs28CustomDebugStringConvertibleAAMc', 
                        '_$s17PreviewsOSSupport18decodeReplyHandleryys6ResultOy0A10Foundation12PropertyListVs5Error_pGcySo010UVPropertyI0CSg_sAH_pSgtcF', 
                        '_$s17PreviewsOSSupport18decodeReplyHandleryys6ResultOy10Foundation4DataVs5Error_pGcyAGSg_sAH_pSgtcF', 
                        '_$s17PreviewsOSSupport18decodeReplyHandleryys6ResultOySSs5Error_pGcySSSg_sAE_pSgtcF', 

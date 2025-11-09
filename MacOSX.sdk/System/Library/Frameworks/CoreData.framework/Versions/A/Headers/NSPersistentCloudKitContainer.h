@@ -1,7 +1,7 @@
 /*
     NSPersistentCloudKitContainer.h
     Core Data
-    Copyright (c) 2018-2021, Apple Inc.
+    Copyright (c) 2018-2022, Apple Inc.
     All rights reserved.
 */
 
@@ -38,8 +38,10 @@ typedef NS_OPTIONS(NSUInteger, NSPersistentCloudKitContainerSchemaInitialization
  
  As NSPersistentCloudKitContainer is a subclass of NSPersistentContainer, it can manage both CloudKit backed and non-cloud stores.
  */
+#ifndef __swift__
 @class CKRecord;
 @class CKRecordID;
+#endif
 
 API_AVAILABLE(macosx(10.15),ios(13.0),tvos(13.0),watchos(6.0))
 @interface NSPersistentCloudKitContainer : NSPersistentContainer
@@ -64,10 +66,12 @@ API_AVAILABLE(macosx(10.15),ios(13.0),tvos(13.0),watchos(6.0))
 /**
  These methods provide access to the underlying CKRecord, or CKRecordID, backing a given NSManagedObjectID.
  */
+#ifndef __swift__
 - (nullable CKRecord *)recordForManagedObjectID:(NSManagedObjectID *)managedObjectID;
 - (NSDictionary<NSManagedObjectID *, CKRecord *> *)recordsForManagedObjectIDs:(NSArray<NSManagedObjectID *> *)managedObjectIDs;
 - (nullable CKRecordID *)recordIDForManagedObjectID:(NSManagedObjectID *)managedObjectID;
 - (NSDictionary<NSManagedObjectID *, CKRecordID *> *)recordIDsForManagedObjectIDs:(NSArray<NSManagedObjectID *> *)managedObjectIDs;
+#endif
 
 /*
  canUpdateRecordForManagedObjectWithID / canDeleteRecordForManagedObjectWithID indicate whether or not a given object assigned the provided NSManagedObjectID is mutable with respect to the instance of CKRecord that backs it with CloudKit.

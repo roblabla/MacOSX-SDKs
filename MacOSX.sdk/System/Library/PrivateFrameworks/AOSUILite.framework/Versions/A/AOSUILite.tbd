@@ -3,31 +3,33 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D7EF45D8-CAE4-3749-94D6-5D88BDEBED8C
+    value:           43AE1FBB-5452-3BC0-9E19-239014F53F83
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3DE9B307-5155-3F04-A044-FE19E8032B02
+    value:           6FA7576E-ED8E-33C5-AF7E-37F231B9084C
 install-name:    '/System/Library/PrivateFrameworks/AOSUILite.framework/Versions/A/AOSUILite'
 current-version: 415
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AOSUILiteVersionNumber, _AOSUILiteVersionString, _AddGlobalObject, 
                        _CallJSFunctionWithParameters, _EvaluateJavaScript, _JSCopyStringValue, 
                        _JSValueFromNSArray, _JSValueFromNSDictionary, _JSValueFromNSObject, 
                        _JSValueFromNSString, _JSValueRefsAreEqual, _MMAlertInvalidParameterException, 
                        _MMBeginAlertSheet, _MMBeginCriticalAlertSheet, _MMBeginModalDialog, 
                        _MMJSDialogClass, _MMScriptFactoryNamespaceCurrent, _MMScriptFactoryNamespaceLegacy, 
-                       _MMUtilitiesAppleIDPrefPath, _MMUtilitiesBatteryPrefPath, 
-                       _MMUtilitiesEnergySaverPrefPath, _MMUtilitiesFamilySharingPrefPath, 
-                       _MMUtilitiesInternetAccountsPrefPath, _MMUtilitiesMailAppBundleIdentifier, 
-                       _MMUtilitiesNetworkPrefPath, _MMUtilitiesParentalControlsPrefPath, 
-                       _MMUtilitiesPhotosAppBundleIdentifier, _MMUtilitiesPrefsPath, 
-                       _MMUtilitiesScreenTimePrefPath, _MMUtilitiesSecurityPrefPath, 
-                       _MMUtilitiesSharingPrefPath, _MMUtilitiesSoftwareUpdateBundleIdentifier, 
-                       _MMUtilitiesStoreAppBundleIdentifier, _MMUtilitiesUsersAndGroupsPrefPath, 
-                       _MMUtilitiesiCloudPrefPath, _NSObjectFromJSValue, _NSStringFromJSString, 
-                       _NSStringFromJSValue, _PropertyListClassDefinition, _Shared_JS_AuthenticateUser, 
+                       _MMUtilitiesAppleIDPrefPath, _MMUtilitiesFamilySharingPrefPath, 
+                       _MMUtilitiesLegacyAppleIDPrefPath, _MMUtilitiesLegacyBatteryPrefPath, 
+                       _MMUtilitiesLegacyEnergySaverPrefPath, _MMUtilitiesLegacyFamilySharingPrefPath, 
+                       _MMUtilitiesLegacyInternetAccountsPrefPath, _MMUtilitiesLegacyNetworkPrefPath, 
+                       _MMUtilitiesLegacyParentalControlsPrefPath, _MMUtilitiesLegacyPrefsPath, 
+                       _MMUtilitiesLegacyScreenTimePrefPath, _MMUtilitiesLegacySecurityPrefPath, 
+                       _MMUtilitiesLegacySharingPrefPath, _MMUtilitiesLegacyUsersAndGroupsPrefPath, 
+                       _MMUtilitiesLegacyiCloudPrefPath, _MMUtilitiesMailAppBundleIdentifier, 
+                       _MMUtilitiesPhotosAppBundleIdentifier, _MMUtilitiesScreenTimePrefPath, 
+                       _MMUtilitiesSoftwareUpdateBundleIdentifier, _MMUtilitiesStoreAppBundleIdentifier, 
+                       _NSObjectFromJSValue, _NSStringFromJSString, _NSStringFromJSValue, 
+                       _PropertyListClassDefinition, _Shared_JS_AuthenticateUser, 
                        _Shared_JS_GetAuthToken, _Shared_JS_GetClientIdentifer, _Shared_JS_GetDateFieldsOrder, 
                        _Shared_JS_GetDeviceUDID, _Shared_JS_GetFormattedDate, _Shared_JS_GetPrsId, 
                        _Shared_JS_Logger, _Shared_JS_ShowConfirmDialogWithMessage, 
@@ -46,6 +48,7 @@ exports:
                        _kAOSUIPrefPaneImagePhotos, _kAOSUIPrefPaneImagePrivateConnect, 
                        _kAOSUIPrefPaneImagePrivateEmail, _kAOSUIPrefPaneImageReminders, 
                        _kAOSUIPrefPaneImageSafari, _kAOSUIPrefPaneImageSiri, _kAOSUIPrefPaneImageStocks, 
+                       _kAOSUIPrefPaneImageWallet, _kAOSUISettingsBundleIdentifier, 
                        _kAOSUISpyglassAppleID, _kAOSUISpyglassFamily, _kMMCDigitField, 
                        _kMMCDigitFieldFocus, _kMMCurrentApplicationHeaderKey, _kMMCurrentApplicationVersionHeaderKey, 
                        _kMMDataclassQuota, _kMMModialDialogEscapeKey, _kMMPremiumFeatureDetailsURLKey, 

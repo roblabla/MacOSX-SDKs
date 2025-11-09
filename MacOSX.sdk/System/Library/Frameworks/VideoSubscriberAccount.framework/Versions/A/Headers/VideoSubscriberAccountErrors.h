@@ -32,7 +32,7 @@ API_AVAILABLE(ios(10.2), tvos(10.1)) API_UNAVAILABLE(macCatalyst);
 
 /// A key that can be used to obtain the identifier string of the user's unsupported subscription provider from an error user info dictionary.
 VS_EXTERN NSErrorUserInfoKey const VSErrorInfoKeyUnsupportedProviderIdentifier
-API_AVAILABLE(ios(10.3), tvos(10.3)) API_UNAVAILABLE(macCatalyst);
+API_AVAILABLE(ios(10.2), tvos(10.2)) API_UNAVAILABLE(macCatalyst);
 
 typedef NS_ENUM(NSInteger, VSErrorCode)
 {

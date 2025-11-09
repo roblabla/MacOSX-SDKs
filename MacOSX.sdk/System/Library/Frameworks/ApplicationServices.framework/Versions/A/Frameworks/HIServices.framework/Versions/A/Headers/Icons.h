@@ -3,7 +3,7 @@
  
      Contains:   Icon Utilities and Icon Services Interfaces.
  
-     Copyright:  © 1990-2012 by Apple Computer, Inc. All rights reserved
+     Copyright:  Â© 1990-2012 by Apple Computer, Inc. All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1267,7 +1267,7 @@ IconRefToRgn(
  *  IconRefContainsCGPoint()
  *  
  *  Discussion:
- *    Tests whether a specified point falls within an iconÕs mask.
+ *    Tests whether a specified point falls within an iconâ€™s mask.
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.5
@@ -1314,7 +1314,7 @@ IconRefContainsCGPoint(
  *  IconRefIntersectsCGRect()
  *  
  *  Discussion:
- *    Tests whether a specified rectangle falls within an iconÕs mask.
+ *    Tests whether a specified rectangle falls within an iconâ€™s mask.
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.5

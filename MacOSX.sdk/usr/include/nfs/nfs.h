@@ -72,6 +72,7 @@
 #include <sys/cdefs.h>
 #include <sys/socket.h>
 #include <sys/mount.h>
+#include <sys/ioccom.h>
 
 
 #include <nfs/rpcv2.h>
@@ -563,14 +564,32 @@ struct nfsrvstats {
 #define NFSSVC_EXPORT           0x200
 
 /*
- * Flags for nfsclnt() system call.
+ * The structure that lockd hands the kernel for each lock answer.
  */
-#define NFSCLNT_LOCKDANS        0x200
-#define NFSCLNT_LOCKDNOTIFY     0x400
-#define NFSCLNT_TESTIDMAP       0x001
+#define LOCKD_ANS_VERSION       2
+struct lockd_ans {
+	int             la_version;             /* lockd_ans version */
+	int             la_errno;               /* return status */
+	u_int64_t       la_xid;                 /* unique message transaction ID */
+	int             la_flags;               /* answer flags */
+	pid_t           la_pid;                 /* pid of lock requester/owner */
+	off_t           la_start;               /* lock starting offset */
+	off_t           la_len;                 /* lock length */
+	int             la_fh_len;              /* The file handle length. */
+	u_int8_t        la_fh[NFSV3_MAX_FH_SIZE];/* The file handle. */
+};
 
-/* nfsclnt() system call character device */
-#define NFSCLNT_DEVICE         "nfsclnt"
+/*
+ * The structure that lockd hands the kernel for each notify.
+ */
+#define LOCKD_NOTIFY_VERSION    1
+struct lockd_notify {
+	int                     ln_version;             /* lockd_notify version */
+	int                     ln_flags;               /* notify flags */
+	int                     ln_pad;                 /* (for alignment) */
+	int                     ln_addrcount;           /* # of addresss */
+	struct sockaddr_storage *ln_addr;               /* List of addresses. */
+};
 
 #include <sys/_types/_guid_t.h> /* for guid_t below */
 #define MAXIDNAMELEN            1024
@@ -589,6 +608,19 @@ struct nfs_testmapid {
 #define NTM_GUID2NAME   3
 
 /*
+ * Flags for nfsclnt() system call.
+ */
+#define NFSCLNT_LOCKDANS        _IOW('n', 101, struct lockd_ans)
+#define NFSCLNT_LOCKDNOTIFY     _IOW('n', 102, struct lockd_notify)
+#define NFSCLNT_TESTIDMAP       _IOWR('n', 103, struct nfs_testmapid)
+
+/* nfsclnt() system call character device */
+#define NFSCLNT_DEVICE         "nfsclnt"
+
+/* nfsclnt() system call */
+int nfsclnt(unsigned long request, void *argstructp);
+
+/*
  * fs.nfs sysctl(3) identifiers
  */
 #define NFS_NFSSTATS        1       /* struct: struct nfsclntstats */
@@ -598,6 +630,8 @@ struct nfs_testmapid {
 #ifndef NFS_WDELAYHASHSIZ
 #define NFS_WDELAYHASHSIZ 16    /* and with this */
 #endif
+
+
 
 #endif /* __APPLE_API_PRIVATE */
 

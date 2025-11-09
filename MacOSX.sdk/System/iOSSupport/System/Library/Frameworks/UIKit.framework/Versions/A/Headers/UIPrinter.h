@@ -1,4 +1,4 @@
-#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<UIKitCore/UIPrinter.h>)
+#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<PrintKitUI/UIPrinter.h>)
 //
 //  UIPrinter.h
 //  UIKit
@@ -127,5 +127,5 @@ typedef NS_OPTIONS(NSInteger, UIPrinterJobTypes) {
 NS_ASSUME_NONNULL_END
 
 #else
-#import <UIKitCore/UIPrinter.h>
+#import <PrintKitUI/UIPrinter.h>
 #endif

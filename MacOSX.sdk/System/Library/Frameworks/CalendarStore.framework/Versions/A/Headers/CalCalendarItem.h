@@ -14,18 +14,7 @@
 @class CalAlarm;
 @class CalCalendar;
 
-@interface CalCalendarItem : NSObject <NSCopying> {
-    @protected
-	id _objectID;
-    void *_reserved;
-    CalCalendar *_calendar;
-    NSString *_notes;
-    NSURL *_url;
-    NSString *_title;
-    NSString *_uid;
-    NSDate *_dateStamp;
-    NSArray *_alarms;
-}
+@interface CalCalendarItem : NSObject <NSCopying>
 
 - (BOOL)hasAlarm NS_DEPRECATED_MAC(10_5, 10_8);
 - (NSDate *)nextAlarmDate NS_DEPRECATED_MAC(10_5, 10_8);

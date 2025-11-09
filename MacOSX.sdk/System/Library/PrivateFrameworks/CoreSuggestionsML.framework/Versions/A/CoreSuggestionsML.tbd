@@ -4,40 +4,44 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1645CB2E-DC44-36F6-B12B-82772326D95D
+    value:           8B88BA66-5637-3FD0-8884-CEEF99F72D1E
   - target:          x86_64-maccatalyst
-    value:           1645CB2E-DC44-36F6-B12B-82772326D95D
+    value:           8B88BA66-5637-3FD0-8884-CEEF99F72D1E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C2FE7AE9-0AFB-3AC3-82FF-79548A3FEC64
+    value:           7A904C18-60FC-3969-BA03-84B5B5465258
   - target:          arm64e-maccatalyst
-    value:           C2FE7AE9-0AFB-3AC3-82FF-79548A3FEC64
+    value:           7A904C18-60FC-3969-BA03-84B5B5465258
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsML.framework/Versions/A/CoreSuggestionsML'
-current-version: 1153.16.1
+current-version: 1193.8
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CoreSuggestionsMLVersionNumber, _CoreSuggestionsMLVersionString, 
                        _SGNormalizeEmojisInString, _SGPersonalizeEmojisInString, 
-                       _markFilteredQuery, _perRecipientCountUpsertQuery ]
-    objc-classes:    [ SGConversationTracker, SGConversationTurn, SGCustomResponsesParameters, 
-                       SGDeduperML, SGDefaultAssets, SGLanguageDetection, SGLazyInit, 
-                       SGLexiconML, SGMessagePair, SGMessagePairIterator, SGModelAsset, 
-                       SGModelFeatures, SGModelHyperparameters, SGModelSampler, SGModelSource, 
+                       _SGPersonalizeEmojisWarmup, _markFilteredQuery, _perRecipientCountUpsertQuery ]
+    objc-classes:    [ SGConversationTracker, SGCustomResponsesParameters, SGDeduperML, 
+                       SGDefaultAssets, SGLanguageDetection, SGLazyInit, SGLexiconML, 
+                       SGMessagePair, SGMessagePairIterator, SGModelAsset, SGModelFeatures, 
+                       SGModelHyperparameters, SGModelSampler, SGModelSource, SGMultiLabelEspressoClassifierCache, 
+                       SGMultiLabelEspressoClassifierCached, SGMultiLabelEspressoClassifierWrapper, 
                        SGNestedArray, SGPipelineTransformer, SGQuickResponse, SGQuickResponsesCategoryScore, 
                        SGQuickResponsesClassScore, SGQuickResponsesClassificationModel, 
                        SGQuickResponsesClassificationParameters, SGQuickResponsesConfig, 
                        SGQuickResponsesDatabase, SGQuickResponsesDistributingCount, 
-                       SGQuickResponsesEngagementDeltas, SGQuickResponsesInference, 
-                       SGQuickResponsesModel, SGQuickResponsesModelRules, SGQuickResponsesPersonalization, 
-                       SGQuickResponsesPredictionParameters, SGQuickResponsesRanking, 
-                       SGQuickResponsesRecords, SGQuickResponsesReplies, SGQuickResponsesReplyModel, 
-                       SGQuickResponsesReplyOption, SGQuickResponsesReplyRecord, 
-                       SGQuickResponsesScoring, SGQuickResponsesStore, SGQuickResponsesTransformerInstance, 
-                       SGRandomization, SGSelectiveTransformer, SGStringLabelingTransformer, 
-                       SGStringPreprocessingTransformer, SGStringPreprocessor, SGTextLabelTransformer, 
+                       SGQuickResponsesDynamicLabelSet, SGQuickResponsesEngagementDeltas, 
+                       SGQuickResponsesInference, SGQuickResponsesModel, SGQuickResponsesModelRules, 
+                       SGQuickResponsesPersonalization, SGQuickResponsesPredictionParameters, 
+                       SGQuickResponsesRanking, SGQuickResponsesRecords, SGQuickResponsesReplies, 
+                       SGQuickResponsesRepliesFlattened, SGQuickResponsesRepliesNested, 
+                       SGQuickResponsesReplyModel, SGQuickResponsesReplyOption, SGQuickResponsesReplyRecord, 
+                       SGQuickResponsesScores, SGQuickResponsesScoring, SGQuickResponsesStore, 
+                       SGQuickResponsesToRobots, SGQuickResponsesToRobotsConfig, 
+                       SGQuickResponsesTransformerInstance, SGRandomization, SGSelectiveTransformer, 
+                       SGStringLabelingTransformer, SGStringPreprocessingTransformer, 
+                       SGStringPreprocessor, SGStringSplitter, SGTextLabelTransformer, 
                        SGTokenJoiningTransformer, SGTokenizerML ]
 ...

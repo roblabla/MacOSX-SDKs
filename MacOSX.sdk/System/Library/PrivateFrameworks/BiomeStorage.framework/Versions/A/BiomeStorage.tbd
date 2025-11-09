@@ -4,36 +4,46 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           87A10A3E-EC94-314B-A695-E4990ABBDE37
+    value:           51F247B3-2385-3F42-9AF8-D71411D2B315
   - target:          x86_64-maccatalyst
-    value:           87A10A3E-EC94-314B-A695-E4990ABBDE37
+    value:           51F247B3-2385-3F42-9AF8-D71411D2B315
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4A06D778-C56C-36F8-BF45-75674B660C38
+    value:           59DDA16F-E82C-337B-98C4-8ACCEF16EC1B
   - target:          arm64e-maccatalyst
-    value:           4A06D778-C56C-36F8-BF45-75674B660C38
+    value:           59DDA16F-E82C-337B-98C4-8ACCEF16EC1B
 install-name:    '/System/Library/PrivateFrameworks/BiomeStorage.framework/Versions/A/BiomeStorage'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _BMPBStoreBookmarkReadFrom, _BMPBTombstoneEventReadFrom, _BMPruningPolicyMaxAgeNoLimit, 
-                       _BiomeStorageVersionNumber, _BiomeStorageVersionString, _bm_defaultStoreSegmentSize, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _BMDataProtectionClassFromNSFileProtectionType, _BMDataProtectionClassFromOSProtectionClass, 
+                       _BMFileAccessModeFromBMFrameStorePermission, _BMFileAccessModeFromOFlags, 
+                       _BMPBStoreBookmarkReadFrom, _BMPBTombstoneEventReadFrom, _BMPruningPolicyMaxAgeNoLimit, 
+                       _BMPruningPolicyMaxEventCountNoLimit, _BMPruningPolicyMaxStreamSizeNoLimit, 
+                       _BMStorageErrorDomain, _BMStorageErrorGetErrno, _BMStreamHealthErrorDomain, 
+                       _BiomeStorageVersionNumber, _BiomeStorageVersionString, _NSStringFromBMFrameStorePermission, 
+                       _NSStringFromBMFrameWriteStatus, _bm_defaultStoreSegmentSize, 
                        _bm_defaultStoreVersion, _bm_frame_bytes, _bm_frame_header_info, 
-                       _bm_frame_header_status, _bm_generateChecksum, _bm_kLocalDeviceIdentifier, 
-                       _bm_kRemoteDeviceIdentifier, _bm_useAdler32, _bm_useCrc32, 
-                       _kTombstoneSubdirectory ]
-    objc-classes:    [ BMDataProtection, BMFileAttributes, BMFileHandleIntern, BMFileLock, 
-                       BMFrame, BMFrameStore, BMMemoryMapping, BMPBStoreBookmark, 
-                       BMPBTombstoneEvent, BMPruningPolicy, BMStoreBookmark, BMStoreConfig, 
-                       BMStoreEnumerator, BMStoreEnumeratorBase, BMStoreEvent, BMStreamDatastore, 
-                       BMStreamDatastoreBase, BMStreamDatastoreDeviceLockState, BMStreamDatastorePruner, 
+                       _bm_frame_header_status, _bm_generateChecksum, _bm_new_temporary_file, 
+                       _bm_openat_dprotected, _bm_opendirat, _bm_replace_file, _bm_subpath, 
+                       _bm_useAdler32, _bm_useCrc32, _bm_validate_pathat ]
+    objc-classes:    [ BMCache, BMDataProtection, BMFileAttributes, BMFileHandle, 
+                       BMFileManager, BMFileServer, BMFrame, BMFrameStore, BMMemoryMapping, 
+                       BMPBStoreBookmark, BMPBTombstoneEvent, BMPathEnumerator, BMPruningPolicy, 
+                       BMSegmentManager, BMSegmentManagerProtectedState, BMSharedMemory, 
+                       BMStoreBookmark, BMStoreConfig, BMStoreEnumerator, BMStoreEnumeratorBase, 
+                       BMStoreEvent, BMStreamDatastore, BMStreamDatastoreBase, BMStreamDatastorePruner, 
                        BMStreamDatastoreReader, BMStreamDatastoreWriter, BMStreamMetadata, 
-                       BMStreamTombstoneEventDatastore, BMTombstoneEvent, BMTombstoneEventEnumerator ]
-    objc-ivars:      [ BMPBStoreBookmark._has, BMPBStoreBookmark._iterationStartTime, 
-                       BMPBStoreBookmark._offset, BMPBStoreBookmark._segmentName, 
-                       BMPBStoreBookmark._streamId, BMPBTombstoneEvent._has, BMPBTombstoneEvent._length, 
-                       BMPBTombstoneEvent._offset, BMPBTombstoneEvent._reason, BMPBTombstoneEvent._segmentName ]
+                       BMStreamTombstoneEventDatastore, BMTombstoneEvent, BMTombstoneEventEnumerator, 
+                       BMXPCConnectionWrapper, _BMDirectFileManager, _BMXPCFileManager ]
+    objc-ivars:      [ BMFileManager._cachingOptions, BMFileManager._directory, BMFileManager._fileHandleCache, 
+                       BMFileManager._memoryMappingCache, BMPBStoreBookmark._has, 
+                       BMPBStoreBookmark._iterationStartTime, BMPBStoreBookmark._offset, 
+                       BMPBStoreBookmark._segmentName, BMPBStoreBookmark._streamId, 
+                       BMPBTombstoneEvent._has, BMPBTombstoneEvent._length, BMPBTombstoneEvent._offset, 
+                       BMPBTombstoneEvent._processName, BMPBTombstoneEvent._reason, 
+                       BMPBTombstoneEvent._segmentName ]
 ...

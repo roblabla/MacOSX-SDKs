@@ -15,7 +15,7 @@
 #import <UIKit/UISpringLoadedInteractionSupporting.h>
 #import <UIKit/UIContextMenuInteraction.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_OPTIONS(NSUInteger, UICollectionViewScrollPosition) {
     UICollectionViewScrollPositionNone                 = 0,
@@ -38,6 +38,16 @@ typedef NS_ENUM(NSInteger, UICollectionViewReorderingCadence) {
     UICollectionViewReorderingCadenceFast,
     UICollectionViewReorderingCadenceSlow
 } API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
+
+typedef NS_ENUM(NSInteger, UICollectionViewSelfSizingInvalidation) {
+    /// No updates will take place when -invalidateIntrinsicContentSize is called on a self-sizing cell or its contentView.
+    UICollectionViewSelfSizingInvalidationDisabled,
+    /// Calling -invalidateIntrinsicContentSize on a self-sizing cell or its contentView will cause it to be resized if necessary.
+    UICollectionViewSelfSizingInvalidationEnabled,
+    /// Calling -invalidateIntrinsicContentSize on a self-sizing cell or its contentView will cause it to be resized if necessary, and
+    /// any Auto Layout changes within the contentView of a self-sizing cell will automatically trigger -invalidateIntrinsicContentSize.
+    UICollectionViewSelfSizingInvalidationEnabledIncludingConstraints,
+} API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
 
 @class UICollectionView, UICollectionReusableView, UICollectionViewCell, UICollectionViewLayout, UICollectionViewTransitionLayout, UICollectionViewLayoutAttributes, UITouch, UINib;
 @class UIDragItem, UIDragPreviewParameters, UIDragPreviewTarget;
@@ -123,6 +133,34 @@ NS_SWIFT_UI_ACTOR
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath;
 
+/*!
+ * @abstract Called to determine if a primary action can be performed for the item at the given indexPath.
+ * See @c collectionView:performPrimaryActionForItemAtIndexPath: for more details about primary actions.
+ *
+ * @param collectionView This UICollectionView
+ * @param indexPath NSIndexPath of the item
+ *
+ * @return `YES` if the primary action can be performed; otherwise `NO`. If not implemented, defaults to `YES` when not editing
+ * and `NO` when editing.
+ */
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformPrimaryActionForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+
+/*!
+ * @abstract Called when the primary action should be performed for the item at the given indexPath.
+ *
+ * @discussion Primary actions allow you to distinguish between a change of selection (which can be based on focus changes or
+ * other indirect selection changes) and distinct user actions. Primary actions are performed when the user selects a cell without extending
+ * an existing selection. This is called after @c shouldSelectItem and @c didSelectItem , regardless of whether the cell's selection
+ * state was allowed to change.
+ *
+ * As an example, use @c didSelectItemAtIndexPath for updating state in the current view controller (i.e. buttons, title, etc) and
+ * use the primary action for navigation or showing another split view column.
+ *
+ * @param collectionView This UICollectionView
+ * @param indexPath NSIndexPath of the item to perform the action on
+ */
+- (void)collectionView:(UICollectionView *)collectionView performPrimaryActionForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(8.0));
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(8.0));
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath;
@@ -130,9 +168,9 @@ NS_SWIFT_UI_ACTOR
 
 // These methods provide support for copy/paste actions on cells.
 // All three should be implemented if any are.
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemAtIndexPath:", ios(6.0, 13.0));
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemAtIndexPath:", ios(6.0, 13.0));
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemAtIndexPath:", ios(6.0, 13.0));
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0));
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0));
+- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0));
 
 // support for custom transition layout
 - (nonnull UICollectionViewTransitionLayout *)collectionView:(UICollectionView *)collectionView transitionLayoutForOldLayout:(UICollectionViewLayout *)fromLayout newLayout:(UICollectionViewLayout *)toLayout;
@@ -205,40 +243,52 @@ NS_SWIFT_UI_ACTOR
 
 
 /*!
- * @abstract Called when the interaction begins.
+ * @abstract Called when a context menu is invoked from this collection view.
  *
- * @param collectionView  This UICollectionView.
- * @param indexPath       IndexPath of the item for which a configuration is being requested.
- * @param point           Location in the collection view's coordinate space
+ * @param collectionView  The @c UICollectionView.
+ * @param indexPaths      An array of index paths on which the menu acts.
+ * @param point           Touch location in the collection view's coordinate space.
  *
- * @return A UIContextMenuConfiguration describing the menu to be presented. Return nil to prevent the interaction from beginning.
+ * @return A @c UIContextMenuConfiguration describing the menu to be presented. Return nil to prevent the interaction from beginning.
  *         Returning an empty configuration causes the interaction to begin then fail with a cancellation effect. You might use this
  *         to indicate to users that it's possible for a menu to be presented from this element, but that there are no actions to
  *         present at this particular time.
+ *
+ * @discussion  The @c indexPaths array may contain 0-many items:
+ *              - An empty array indicates that the menu was invoked in the space between cells (or any location that does not map to an item index path).
+ *              - An array with multiple index paths indicates that the menu was invoked on an item within a multiple selection.
  */
-- (nullable UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView contextMenuConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos);
+- (nullable UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView
+           contextMenuConfigurationForItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
+                                                  point:(CGPoint)point API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
- * @abstract Called when the interaction begins. Return a UITargetedPreview describing the desired highlight preview.
+ * @abstract Called when a context menu interaction begins in this collection view to request a preview for the interaction's initial highlight effect.
+ *           Return a @c UITargetedPreview corresponding to the item at the given indexPath.
  *
- * @param collectionView  This UICollectionView.
- * @param configuration   The configuration of the menu about to be displayed by this interaction.
+ * @param collectionView  The @c UICollectionView.
+ * @param configuration   Configuration of the menu that will be presented if the interaction proceeds.
+ * @param indexPath       Index path of the item at which the interaction is occurring.
  */
-- (nullable UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForHighlightingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos);
+- (nullable UITargetedPreview *)collectionView:(UICollectionView *)collectionView
+                      contextMenuConfiguration:(UIContextMenuConfiguration *)configuration
+            highlightPreviewForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
- * @abstract Called when the interaction is about to dismiss. Return a UITargetedPreview describing the desired dismissal target.
- * The interaction will animate the presented menu to the target. Use this to customize the dismissal animation.
+ * @abstract Called when a context menu presented from this collection view is dismissed. Return a @c UITargetedPreview corresponding to the item at the given indexPath.
  *
- * @param collectionView  This UICollectionView.
- * @param configuration   The configuration of the menu displayed by this interaction.
+ * @param collectionView  The @c UICollectionView.
+ * @param configuration   Configuration of the menu being dismissed.
+ * @param indexPath       Index path of the item to which the menu is being dismissed.
  */
-- (nullable UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForDismissingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos);
+- (nullable UITargetedPreview *)collectionView:(UICollectionView *)collectionView
+                      contextMenuConfiguration:(UIContextMenuConfiguration *)configuration
+            dismissalPreviewForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @abstract Called when the interaction is about to "commit" in response to the user tapping the preview.
  *
- * @param collectionView  This UICollectionView.
+ * @param collectionView  The @c UICollectionView.
  * @param configuration   Configuration of the currently displayed menu.
  * @param animator        Commit animator. Add animations to this object to run them alongside the commit transition.
  */
@@ -247,7 +297,7 @@ NS_SWIFT_UI_ACTOR
 /*!
  * @abstract Called when the collection view is about to display a menu.
  *
- * @param collectionView  This UICollectionView.
+ * @param collectionView  The @c UICollectionView.
  * @param configuration   The configuration of the menu about to be displayed.
  * @param animator        Appearance animator. Add animations to run them alongside the appearance transition.
  */
@@ -256,7 +306,7 @@ NS_SWIFT_UI_ACTOR
 /*!
  * @abstract Called when the collection view's context menu interaction is about to end.
  *
- * @param collectionView  This UICollectionView.
+ * @param collectionView  The @c UICollectionView.
  * @param configuration   Ending configuration.
  * @param animator        Disappearance animator. Add animations to run them alongside the disappearance transition.
  */
@@ -270,6 +320,41 @@ NS_SWIFT_UI_ACTOR
  * @param point The centroid of the interaction in the collection view's coordinate space.
  */
 - (nullable UIWindowSceneActivationConfiguration *)collectionView:(UICollectionView *)collectionView sceneActivationConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @abstract Called when the interaction begins.
+ *
+ * @param collectionView  The @c UICollectionView.
+ * @param indexPath       IndexPath of the item for which a configuration is being requested.
+ * @param point           Touch location in the collection view's coordinate space
+ *
+ * @return A UIContextMenuConfiguration describing the menu to be presented. Return nil to prevent the interaction from beginning.
+ *         Returning an empty configuration causes the interaction to begin then fail with a cancellation effect. You might use this
+ *         to indicate to users that it's possible for a menu to be presented from this element, but that there are no actions to
+ *         present at this particular time. If the non-deprecated replacement for the configuration, highlight preview, or dismissal preview methods is implemented this method is not called.
+ */
+- (nullable UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView
+             contextMenuConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath
+                                                  point:(CGPoint)point API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(13.0, 16.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @abstract Called when the interaction begins. Return a UITargetedPreview describing the desired highlight preview.
+ *           If the non-deprecated replacement for the configuration, highlight preview, or dismissal preview methods is implemented this method is not called.
+ *
+ * @param collectionView  The @c UICollectionView.
+ * @param configuration   The configuration of the menu about to be displayed by this interaction.
+ */
+- (nullable UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForHighlightingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfiguration:highlightPreviewForItemAtIndexPath:", ios(13.0, 16.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @abstract Called when the interaction is about to dismiss. Return a UITargetedPreview describing the desired dismissal target.
+ *           The interaction will animate the presented menu to the target. Use this to customize the dismissal animation.
+ *           If the non-deprecated replacement for the configuration, highlight preview, or dismissal preview methods is implemented this method is not called.
+ *
+ * @param collectionView  The @c UICollectionView.
+ * @param configuration   The configuration of the menu displayed by this interaction.
+ */
+- (nullable UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForDismissingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfiguration:dismissalPreviewForItemAtIndexPath:", ios(13.0, 16.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 
@@ -302,6 +387,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
  * Default is UICollectionViewReorderingCadenceImmediate.
  */
 @property (nonatomic) UICollectionViewReorderingCadence reorderingCadence API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
+
+@property (nonatomic) UICollectionViewSelfSizingInvalidation selfSizingInvalidation API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
 
 @property (nonatomic, strong, nullable) UIView *backgroundView; // will be automatically resized to track the size of the collection view and placed behind all cells and supplementary views.
 
@@ -698,7 +785,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 
 
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UICollectionView.h>

@@ -25,7 +25,10 @@ typedef NS_ERROR_ENUM (SCStreamErrorDomain, SCStreamErrorCode) {
     SCStreamErrorNoWindowList = -3813,                           // Failed due to no window list
     SCStreamErrorNoDisplayList = -3814,                          // Failed due to no display list
     SCStreamErrorNoCaptureSource = -3815,                        // Failed due to no display or window list to capture
-    SCStreamErrorRemovingStream = -3816                          // Failed to remove stream
+    SCStreamErrorRemovingStream = -3816,                         // Failed to remove stream
+    SCStreamErrorUserStopped = -3817,                            // The stream was stopped by the user
+    SCStreamErrorFailedToStartAudioCapture API_AVAILABLE(macos(13.0)) = -3818, // The stream failed to start audio
+    SCStreamErrorFailedToStopAudioCapture API_AVAILABLE(macos(13.0)) = -3819   // The stream failed to stop audio
 };
 
 NS_ASSUME_NONNULL_END

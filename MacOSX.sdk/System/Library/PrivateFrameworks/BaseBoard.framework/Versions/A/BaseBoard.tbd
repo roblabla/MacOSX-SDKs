@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           90DA7E21-38A7-3610-B225-78EB3287CC52
+    value:           A65C9658-404B-3680-AC51-27270FFB98F5
   - target:          x86_64-maccatalyst
-    value:           90DA7E21-38A7-3610-B225-78EB3287CC52
+    value:           A65C9658-404B-3680-AC51-27270FFB98F5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           426AFF92-1D58-39DC-B853-6CB62EFD4459
+    value:           DC185860-A15B-3BAB-B7E1-9160C3AA6FFF
   - target:          arm64e-maccatalyst
-    value:           426AFF92-1D58-39DC-B853-6CB62EFD4459
+    value:           DC185860-A15B-3BAB-B7E1-9160C3AA6FFF
 install-name:    '/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard'
 current-version: 0
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BSAbsoluteMachTimeNow, _BSAbsoluteTimeFromMachTime, _BSActionErrorDomain, 
                        _BSAffineTransformFromValue, _BSAppendVersionedPIDToStringAppendTarget, 
                        _BSAtomicGetFlag, _BSAtomicSetFlag, _BSAuditTokenForCurrentProcess, 
@@ -76,7 +76,7 @@ exports:
                        _BSFloatLessThanFloat, _BSFloatLessThanOrEqualToFloat, _BSFloatPowerOf2Ceil, 
                        _BSFloatRoundForScale, _BSFormattedTimeFromSeconds, _BSGetContextForCalloutCurrentMIGServerSource, 
                        _BSGetDeviceType, _BSGetMachPortForMIGServerSource, _BSGetVersionedPID, 
-                       _BSHasInternalSettings, _BSIntegerMapAllKeys, _BSIntegerMapContainsObjectForKey, 
+                       _BSIntegerMapAllKeys, _BSIntegerMapAllValues, _BSIntegerMapContainsObjectForKey, 
                        _BSIntegerMapCount, _BSIntegerMapDescription, _BSIntegerMapEnumerateKeysWithBlock, 
                        _BSIntegerMapEnumerateWithBlock, _BSIntegerMapObjectForKey, 
                        _BSIntegerMapRemoveAllObjects, _BSIntegerMapRemoveObjectForKey, 
@@ -88,8 +88,8 @@ exports:
                        _BSIntervalRadialUnit, _BSIntervalSubIntervalFractionForValue, 
                        _BSIntervalSubIntervalValueForValue, _BSIntervalUnit, _BSIntervalValueForFraction, 
                        _BSIntervalZero, _BSInvalidAuditToken, _BSInvalidAuditTokenFieldValue, 
-                       _BSIsBeingDebugged, _BSIsInternalInstall, _BSIsSymbolicLinkAtPath, 
-                       _BSLaterDate, _BSLogAction, _BSLogAddStateCaptureBlockForUserRequestsOnlyWithTitle, 
+                       _BSIsBeingDebugged, _BSIsSymbolicLinkAtPath, _BSLaterDate, 
+                       _BSLogAction, _BSLogAddStateCaptureBlockForUserRequestsOnlyWithTitle, 
                        _BSLogAddStateCaptureBlockWithTitle, _BSLogCommon, _BSLogGetAllRegisteredStateCaptureBlocks, 
                        _BSLogMachPort, _BSLogPowerMonitor, _BSLogSharedMemory, _BSLogStateCaptureCheckPlistSizeIsPermitted, 
                        _BSLogStateCaptureEncodePlist, _BSLogStateCaptureMaximumDataSize, 
@@ -132,7 +132,7 @@ exports:
                        _BSSettingFlagIsYes, _BSShmDelete, _BSShmLoad, _BSShmStore, 
                        _BSSizeCeilForScale, _BSSizeEqualToSize, _BSSizeFromValue, 
                        _BSSizeGreaterThanOrEqualToSize, _BSSizeLessThanSize, _BSSizeRoundForScale, 
-                       _BSSqliteDatabaseConnectionClosing, _BSStackFrameInfoForAddresss, 
+                       _BSSizeSwap, _BSSqliteDatabaseConnectionClosing, _BSStackFrameInfoForAddresss, 
                        _BSStringFromBOOL, _BSStringFromCGPoint, _BSStringFromCGRect, 
                        _BSStringFromCGSize, _BSSystemHasCapability, _BSSystemRootDirectory, 
                        _BSSystemSharedDirectoryForCurrentProcess, _BSSystemSharedDirectoryForIdentifier, 
@@ -152,38 +152,40 @@ exports:
                        _BSXPCBundleGetIdentifier, _BSXPCBundleGetInfoDictionary, 
                        _BSXPCConnectionHasEntitlement, _BSXPCEncodingClassKey, _BSXPCMessageEncodedObjectClassNameKey, 
                        _BSXPCMessageEncodedObjectFallbackClassNameKey, _BSXPCObjectBaseClass, 
-                       _NSStringFromBSDiagnosticReportType, _NSStringFromBSProcessExceptionCode, 
-                       _NSStringFromBSVersionedPID, _NSStringFromInterval, __BSBundleIDForXPCConnectionAndIKnowWhatImDoingISwear, 
+                       _NSStringFromBSActionErrorCode, _NSStringFromBSDiagnosticReportType, 
+                       _NSStringFromBSProcessExceptionCode, _NSStringFromBSVersionedPID, 
+                       _NSStringFromInterval, __BSBundleIDForXPCConnectionAndIKnowWhatImDoingISwear, 
                        __BSHasInternalSettings, __BSIsInternalInstall, __BSLogAddStateCaptureBlockWithTitle, 
-                       __BSRectTransformByTransformingCorners, __BSSafeCast, ___allShms, 
-                       ___allShmsLock, __bs_set_crash_log_message ]
+                       __BSProcessInfoForPID, __BSRectTransformByTransformingCorners, 
+                       __BSSafeCast, __BSShortBSDProcessInfoForPID, ___allShms, ___allShmsLock, 
+                       __bs_set_crash_log_message ]
     objc-classes:    [ BSAbsoluteMachTimer, BSAbstractDefaultDomain, BSAbstractDefaultDomainClassMetadata, 
                        BSAction, BSActionResponder, BSActionResponse, BSAnimationSettings, 
                        BSAtomicFlag, BSAtomicSignal, BSAuditHistory, BSAuditHistoryItem, 
                        BSAuditToken, BSBaseXPCClient, BSBaseXPCServer, BSBasicServerClient, 
                        BSBlockSentinel, BSBlockSentinelSignalContext, BSBlockTransaction, 
                        BSBuildVersion, BSCFBundle, BSCGImageFromIOSurfaceBuilder, 
-                       BSColor, BSCompoundAssertion, BSContinuousMachTimer, BSCopyingCacheSet, 
-                       BSCornerRadiusConfiguration, BSCurrentContainerPathProvider, 
-                       BSDateFormatterCache, BSDateTimeCache, BSDescriptionBuilder, 
-                       BSDescriptionStream, BSDispatchQueueAttributes, BSDispatchSource, 
-                       BSDispatchTimer, BSEqualsBuilder, BSError, BSEventQueue, BSEventQueueEvent, 
-                       BSEventQueueLock, BSHashBuilder, BSIntegerMap, BSIntegerSet, 
-                       BSKeyedSettings, BSLogStateCaptureEntry, BSMIGServer, BSMachPortReceiveRight, 
-                       BSMachPortRight, BSMachPortSendOnceRight, BSMachPortSendRight, 
-                       BSMachPortTaskNameRight, BSMachServiceAliases, BSMonotonicReferenceTime, 
-                       BSMutableAnimationSettings, BSMutableIntegerMap, BSMutableIntegerSet, 
-                       BSMutableKeyedSettings, BSMutableMachServiceAliases, BSMutableSettings, 
-                       BSMutableSpringAnimationSettings, BSObjCArgument, BSObjCBlockArgument, 
-                       BSObjCMethod, BSObjCProtocol, BSPathProviderFactory, BSPlatform, 
-                       BSPluginBundle, BSPluginManager, BSPluginManagerCoordinator, 
+                       BSCanonicalOrientationMapResolver, BSColor, BSCompoundAssertion, 
+                       BSContinuousMachTimer, BSCopyingCacheSet, BSCornerRadiusConfiguration, 
+                       BSCurrentContainerPathProvider, BSDateFormatterCache, BSDateTimeCache, 
+                       BSDescriptionBuilder, BSDescriptionStream, BSDispatchQueueAttributes, 
+                       BSDispatchSource, BSDispatchTimer, BSEqualsBuilder, BSError, 
+                       BSEventQueue, BSEventQueueEvent, BSEventQueueLock, BSHashBuilder, 
+                       BSIntegerMap, BSIntegerSet, BSKeyedSettings, BSLogStateCaptureEntry, 
+                       BSMIGServer, BSMachPortReceiveRight, BSMachPortRight, BSMachPortSendOnceRight, 
+                       BSMachPortSendRight, BSMachPortTaskNameRight, BSMachServiceAliases, 
+                       BSMonotonicReferenceTime, BSMutableAnimationSettings, BSMutableIntegerMap, 
+                       BSMutableIntegerSet, BSMutableKeyedSettings, BSMutableMachServiceAliases, 
+                       BSMutableSettings, BSMutableSpringAnimationSettings, BSObjCArgument, 
+                       BSObjCBlockArgument, BSObjCMethod, BSObjCProtocol, BSPathProviderFactory, 
+                       BSPlatform, BSPluginBundle, BSPluginManager, BSPluginManagerCoordinator, 
                        BSPluginSpecification, BSPortDeathSentinel, BSPortDeathWatcher, 
                        BSPowerMonitor, BSProcessDeathWatcher, BSProcessHandle, BSPropertyMetadata, 
                        BSProtobufSchema, BSProtobufSerialization, BSRelativeDateTimer, 
-                       BSSecTask, BSSettings, BSSettingsDiff, BSSharedMemoryStore, 
-                       BSSignal, BSSimpleAssertion, BSSpringAnimationSettings, BSSqliteDatabaseConnection, 
-                       BSSqlitePreparedStatement, BSSqliteResultRow, BSStackFrameInfo, 
-                       BSStateCaptureInvalidator, BSSystemContainerForCurrentProcessPathProvider, 
+                       BSRelativeDateTimerFireInfo, BSSecTask, BSSettings, BSSettingsDiff, 
+                       BSSharedMemoryStore, BSSimpleAssertion, BSSpringAnimationSettings, 
+                       BSSqliteDatabaseConnection, BSSqlitePreparedStatement, BSSqliteResultRow, 
+                       BSStackFrameInfo, BSStateCaptureInvalidator, BSSystemContainerForCurrentProcessPathProvider, 
                        BSTimer, BSTransaction, BSTransactionBlockObserver, BSUIApplicationSupport, 
                        BSUserDefaultsTestDoubleDictionaryImpl, BSWallclockTimer, 
                        BSWatchdog, BSXPCBundle, BSXPCCoder, BSXPCCodingArray, BSXPCConnectionListener, 
@@ -199,7 +201,6 @@ exports:
                        BSIntegerSet._hashTable, BSKeyedSettings._keyMap, BSObjCArgument._encoding, 
                        BSObjCArgument._size, BSObjCArgument._type, BSPowerMonitor._lock_observers, 
                        BSPowerMonitor._observersLock, BSPowerMonitor._queue, BSPowerMonitor._rootDomainConnect, 
-                       BSSettings._settingToFlagMap, BSSettings._settingToObjectMap, 
                        BSSqlitePreparedStatement._dbConnection, BSXPCCoder._message, 
                        BSXPCCoder._xpcConnection, _BSSqlitePreparedSimpleStatement._statement ]
 ...

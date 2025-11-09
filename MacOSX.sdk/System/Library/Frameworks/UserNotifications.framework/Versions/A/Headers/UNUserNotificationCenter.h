@@ -74,6 +74,8 @@ API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 - (void)removeDeliveredNotificationsWithIdentifiers:(NSArray<NSString *> *)identifiers API_UNAVAILABLE(tvos);
 - (void)removeAllDeliveredNotifications API_UNAVAILABLE(tvos);
 
+- (void)setBadgeCount:(NSInteger)newBadgeCount withCompletionHandler:(nullable void(^)(NSError *__nullable error))completionHandler API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
 @end
 
 typedef NS_OPTIONS(NSUInteger, UNNotificationPresentationOptions) {

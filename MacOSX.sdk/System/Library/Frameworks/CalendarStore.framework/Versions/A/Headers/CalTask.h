@@ -27,12 +27,7 @@ enum {
 
 typedef NSUInteger CalPriority;
 
-@interface CalTask : CalCalendarItem {
-    @private
-    NSDate *_dueDate;
-    CalPriority _priority;
-    NSDate *_completedDate;
-}
+@interface CalTask : CalCalendarItem
 
 //  The calendar property must be set before calling saveTask on a new task
 + (id)task;

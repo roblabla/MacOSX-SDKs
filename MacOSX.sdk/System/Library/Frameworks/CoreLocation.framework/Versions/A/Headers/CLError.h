@@ -37,6 +37,7 @@ typedef NS_ENUM(NSInteger, CLError) {
 	kCLErrorRangingUnavailable,           // Ranging cannot be performed
 	kCLErrorRangingFailure,               // General ranging failure
 	kCLErrorPromptDeclined,               // Authorization request not presented to user
+	kCLErrorHistoricalLocationError,      // Historical Locations set up error
 };
 
 /*

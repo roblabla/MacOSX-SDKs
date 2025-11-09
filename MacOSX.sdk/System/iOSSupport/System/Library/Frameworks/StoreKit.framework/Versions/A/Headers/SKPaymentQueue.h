@@ -19,7 +19,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // SKPaymentQueue interacts with the server-side payment queue
-SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) @interface SKPaymentQueue : NSObject {
+SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) NS_SWIFT_SENDABLE @interface SKPaymentQueue : NSObject {
 @private
     id _internal;
 }
@@ -44,14 +44,14 @@ SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) @interface SK
 - (void)finishTransaction:(SKPaymentTransaction *)transaction API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2));
 
 // Asynchronous.  Start the given downloads (SKDownload).
-- (void)startDownloads:(NSArray<SKDownload *> *)downloads API_AVAILABLE(ios(6.0), macos(10.8), watchos(6.2));
+- (void)startDownloads:(NSArray<SKDownload *> *)downloads API_DEPRECATED("Hosted content is no longer supported", ios(6.0, 16.0), macos(10.8, 13.0), tvos(9.0, 16.0), watchos(6.2, 9.0));
 
 // Asynchronous.  Pause/resume downloads (SKDownload).
-- (void)pauseDownloads:(NSArray<SKDownload *> *)downloads API_AVAILABLE(ios(6.0), macos(10.8), watchos(6.2));
-- (void)resumeDownloads:(NSArray<SKDownload *> *)downloads API_AVAILABLE(ios(6.0), macos(10.8), watchos(6.2));
+- (void)pauseDownloads:(NSArray<SKDownload *> *)downloads API_DEPRECATED("Hosted content is no longer supported", ios(6.0, 16.0), macos(10.8, 13.0), tvos(9.0, 16.0), watchos(6.2, 9.0));
+- (void)resumeDownloads:(NSArray<SKDownload *> *)downloads API_DEPRECATED("Hosted content is no longer supported", ios(6.0, 16.0), macos(10.8, 13.0), tvos(9.0, 16.0), watchos(6.2, 9.0));
 
 // Asynchronous.  Cancel downloads (SKDownload)
-- (void)cancelDownloads:(NSArray<SKDownload *> *)downloads API_AVAILABLE(ios(6.0), macos(10.8), watchos(6.2));
+- (void)cancelDownloads:(NSArray<SKDownload *> *)downloads API_DEPRECATED("Hosted content is no longer supported", ios(6.0, 16.0), macos(10.8, 13.0), tvos(9.0, 16.0), watchos(6.2, 9.0));
 
 // Observers are not retained.  The transactions array will only be synchronized with the server while the queue has observers.  This may require that the user authenticate.
 - (void)addTransactionObserver:(id <SKPaymentTransactionObserver>)observer API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) NS_SWIFT_NAME(add(_:));
@@ -99,7 +99,7 @@ SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) @interface SK
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2));
 
 // Sent when the download state has changed.
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedDownloads:(NSArray<SKDownload *> *)downloads API_AVAILABLE(ios(6.0), macos(10.8), watchos(6.2));
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedDownloads:(NSArray<SKDownload *> *)downloads API_DEPRECATED("Hosted content is no longer supported", ios(6.0, 16.0), macos(10.8, 13.0), tvos(9.0, 16.0), watchos(6.2, 9.0));
 
 // Sent when a user initiates an IAP buy from the App Store
 - (BOOL)paymentQueue:(SKPaymentQueue *)queue shouldAddStorePayment:(SKPayment *)payment forProduct:(SKProduct *)product NS_SWIFT_NAME(paymentQueue(_:shouldAddStorePayment:for:)) API_AVAILABLE(ios(11.0), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos);

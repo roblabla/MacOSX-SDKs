@@ -11,7 +11,7 @@
 
 // An object that conforms to this protocol provides descriptive information about an active
 // view controller transition.
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NSString * UITransitionContextViewControllerKey NS_TYPED_ENUM;
 typedef NSString * UITransitionContextViewKey NS_TYPED_ENUM;
@@ -131,7 +131,7 @@ NS_SWIFT_UI_ACTOR
 @property(nonatomic, readonly, nullable) id <UIViewControllerTransitionCoordinator> transitionCoordinator API_AVAILABLE(ios(7.0));
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIViewControllerTransitionCoordinator.h>

@@ -73,11 +73,11 @@ APPKIT_EXTERN NSString * NSAnimationProgressMark; // NSNumber(float) with NSAnim
 
 @protocol NSAnimationDelegate <NSObject>
 @optional
-- (BOOL)animationShouldStart:(NSAnimation *)animation;
-- (void)animationDidStop:(NSAnimation *)animation;
-- (void)animationDidEnd:(NSAnimation *)animation;
-- (float)animation:(NSAnimation *)animation valueForProgress:(NSAnimationProgress)progress;
-- (void)animation:(NSAnimation *)animation didReachProgressMark:(NSAnimationProgress)progress;
+- (BOOL)animationShouldStart:(NSAnimation *)animation NS_SWIFT_NONISOLATED;
+- (void)animationDidStop:(NSAnimation *)animation NS_SWIFT_NONISOLATED;
+- (void)animationDidEnd:(NSAnimation *)animation NS_SWIFT_NONISOLATED;
+- (float)animation:(NSAnimation *)animation valueForProgress:(NSAnimationProgress)progress NS_SWIFT_NONISOLATED;
+- (void)animation:(NSAnimation *)animation didReachProgressMark:(NSAnimationProgress)progress NS_SWIFT_NONISOLATED;
 @end
 
 /*-----------------------------------------------------------------------------------------*/

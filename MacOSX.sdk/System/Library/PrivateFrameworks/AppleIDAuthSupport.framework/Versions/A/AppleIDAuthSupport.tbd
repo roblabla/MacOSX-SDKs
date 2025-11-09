@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7883F930-CBA6-3027-8ACF-35CE0673D605
+    value:           45290B9C-9DEB-3F4E-BE30-BFACC97CF403
   - target:          x86_64-maccatalyst
-    value:           7883F930-CBA6-3027-8ACF-35CE0673D605
+    value:           45290B9C-9DEB-3F4E-BE30-BFACC97CF403
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           14A9FE8E-99E1-3193-89F9-97A24D306489
+    value:           77609E13-D27E-353E-94D9-B544CC76278A
   - target:          arm64e-maccatalyst
-    value:           14A9FE8E-99E1-3193-89F9-97A24D306489
+    value:           77609E13-D27E-353E-94D9-B544CC76278A
 install-name:    '/System/Library/PrivateFrameworks/AppleIDAuthSupport.framework/Versions/A/AppleIDAuthSupport'
-current-version: 100
+current-version: 103
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AppleIDAuthSupportAuthenticate, _AppleIDAuthSupportCopyAppNewAppTokensWithAuthAttribute, 
                        _AppleIDAuthSupportCopyAppToken, _AppleIDAuthSupportCopyAppTokens, 
                        _AppleIDAuthSupportCopyAppTokensOptions, _AppleIDAuthSupportCopyContextAppTokens, 

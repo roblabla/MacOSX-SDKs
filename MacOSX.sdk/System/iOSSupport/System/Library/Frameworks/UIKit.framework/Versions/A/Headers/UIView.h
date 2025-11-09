@@ -17,7 +17,7 @@
 #import <UIKit/UITraitCollection.h>
 #import <UIKit/UIFocus.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UIViewAnimationCurve) {
     UIViewAnimationCurveEaseInOut,         // slow at beginning and end
@@ -184,12 +184,18 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // animatable. do not use frame if view is transformed since it will not correctly reflect the actual location of the view. use bounds + center instead.
 @property(nonatomic) CGRect            frame;
 
-// use bounds/center and not frame if non-identity transform. if bounds dimension is odd, center may be have fractional part
+// use bounds/center and not frame if non-identity transform.
 @property(nonatomic) CGRect            bounds;      // default bounds is zero origin, frame size. animatable
-@property(nonatomic) CGPoint           center;      // center is center of frame. animatable
+@property(nonatomic) CGPoint           center;      // center is center of frame, relative to anchorPoint. animatable
 @property(nonatomic) CGAffineTransform transform;   // default is CGAffineTransformIdentity. animatable. Please use this property instead of the affineTransform property on the layer
 @property(nonatomic) CATransform3D     transform3D API_AVAILABLE(ios(13.0),tvos(13.0)); // default is CATransform3DIdentity. animatable. Please use this property instead of the transform property on the layer
 @property(nonatomic) CGFloat           contentScaleFactor API_AVAILABLE(ios(4.0));
+
+/* Defines the anchor point of the layer's bounds rect, as a point in
+ * normalized layer coordinates - '(0, 0)' is the bottom left corner of
+ * the bounds rect, '(1, 1)' is the top right corner. Defaults to
+ * '(0.5, 0.5)', i.e. the center of the bounds rect. */
+@property(nonatomic) CGPoint anchorPoint API_AVAILABLE(ios(16.0));
 
 @property(nonatomic,getter=isMultipleTouchEnabled) BOOL multipleTouchEnabled API_UNAVAILABLE(tvos);   // default is NO
 @property(nonatomic,getter=isExclusiveTouch) BOOL       exclusiveTouch API_UNAVAILABLE(tvos);         // default is NO
@@ -283,6 +289,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 /// Follows the keyboard when on screen and docked. When the keyboard is offscreen or undocked, keyboardLayoutGuide.topAnchor matches the view's safeAreaLayoutGuide.bottomAnchor.
 @property(nonatomic,readonly,strong) UIKeyboardLayoutGuide *keyboardLayoutGuide API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
+
 @end
 
 @interface UIView(UIViewRendering)
@@ -703,17 +710,17 @@ UIKIT_EXTERN const CGSize UILayoutFittingExpandedSize API_AVAILABLE(ios(6.0));
 ///     view.minimumContentSizeCategory = UIContentSizeCategoryMedium;
 ///     view.maximumContentSizeCategory = UIContentSizeCategoryAccessibilityExtraLarge;
 
-@property (nonatomic, copy, nullable) UIContentSizeCategory minimumContentSizeCategory;
-@property (nonatomic, copy, nullable) UIContentSizeCategory maximumContentSizeCategory;
+@property (nonatomic, copy, nullable) UIContentSizeCategory minimumContentSizeCategory API_AVAILABLE(ios(15.0));
+@property (nonatomic, copy, nullable) UIContentSizeCategory maximumContentSizeCategory API_AVAILABLE(ios(15.0));
 
 /// Will return a string with a log of all the superviews of this view, alongside with what
 /// content size category each view has and if that view has limits applied.
 /// This is for debugging purposes only.
-@property (nonatomic, copy, readonly) NSString *appliedContentSizeCategoryLimitsDescription;
+@property (nonatomic, copy, readonly) NSString *appliedContentSizeCategoryLimitsDescription API_AVAILABLE(ios(15.0));
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIView.h>

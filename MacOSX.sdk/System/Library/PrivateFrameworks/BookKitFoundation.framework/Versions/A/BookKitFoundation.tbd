@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EB12F9AF-6148-34DB-ABF4-158028F57CB9
+    value:           FC407193-B83F-3BAA-8570-5DDC21D988C4
   - target:          x86_64-maccatalyst
-    value:           EB12F9AF-6148-34DB-ABF4-158028F57CB9
+    value:           FC407193-B83F-3BAA-8570-5DDC21D988C4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           44E1B4D9-7CA8-3DF6-8E72-16AF9074C7CB
+    value:           4120D6EE-8922-3393-90C7-A5E5E13CDE28
   - target:          arm64e-maccatalyst
-    value:           44E1B4D9-7CA8-3DF6-8E72-16AF9074C7CB
+    value:           4120D6EE-8922-3393-90C7-A5E5E13CDE28
 install-name:    '/System/Library/PrivateFrameworks/BookKitFoundation.framework/Versions/A/BookKitFoundation'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BCMetadataXattrAssetID, _BCMetadataXattrAuthor, _BCMetadataXattrBookDescription, 
                        _BCMetadataXattrComments, _BCMetadataXattrExplicit, _BCMetadataXattrFirstOpened, 
                        _BCMetadataXattrGeneration, _BCMetadataXattrGenre, _BCMetadataXattrHighWaterMark, 

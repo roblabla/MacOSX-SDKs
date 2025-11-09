@@ -9,14 +9,14 @@
 
 @class NSAppleEventDescriptor;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef const struct __NSAppleEventManagerSuspension* NSAppleEventManagerSuspensionID;
 
 extern const double NSAppleEventTimeOutDefault;
 extern const double NSAppleEventTimeOutNone;
 
-extern NSNotificationName NSAppleEventManagerWillProcessFirstEventNotification;
+extern NSNotificationName const NSAppleEventManagerWillProcessFirstEventNotification;
 
 @interface NSAppleEventManager : NSObject {
     @private
@@ -60,4 +60,4 @@ extern NSNotificationName NSAppleEventManagerWillProcessFirstEventNotification;
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

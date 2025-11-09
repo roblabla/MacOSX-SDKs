@@ -25,7 +25,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	extern int mig_strncpy_zerofill(char *dest, const char *src, int len) __attribute__((weak_import));
+#ifndef __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS_CSTRING_ATTR
+#define __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS_CSTRING_COUNTEDBY_ATTR(C) __unsafe_indexable
+#endif
+	extern int mig_strncpy_zerofill(char * dest, const char * src, int len) __attribute__((weak_import));
 #ifdef __cplusplus
 }
 #endif
@@ -41,7 +44,7 @@ extern "C" {
 #define FUNCTION_PTR_T
 typedef void (*function_ptr_t)(mach_port_t, char *, mach_msg_type_number_t);
 typedef struct {
-        char            *name;
+        char            * name;
         function_ptr_t  function;
 } function_table_entry;
 typedef function_table_entry   *function_table_t;
@@ -139,16 +142,16 @@ kern_return_t host_processor_info
 	mach_msg_type_number_t *out_processor_infoCnt
 );
 
-/* Routine host_get_io_master */
+/* Routine host_get_io_main */
 #ifdef	mig_external
 mig_external
 #else
 extern
 #endif	/* mig_external */
-kern_return_t host_get_io_master
+kern_return_t host_get_io_main
 (
 	host_t host,
-	io_master_t *io_master
+	io_main_t *io_main
 );
 
 /* Routine host_get_clock_service */
@@ -526,7 +529,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__host_get_io_master_t __attribute__((unused));
+	} __Request__host_get_io_main_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
@@ -796,7 +799,7 @@ union __RequestUnion__mach_host_subsystem {
 	__Request___host_page_size_t Request__host_page_size;
 	__Request__mach_memory_object_memory_entry_t Request_mach_memory_object_memory_entry;
 	__Request__host_processor_info_t Request_host_processor_info;
-	__Request__host_get_io_master_t Request_host_get_io_master;
+	__Request__host_get_io_main_t Request_host_get_io_main;
 	__Request__host_get_clock_service_t Request_host_get_clock_service;
 	__Request__kmod_get_info_t Request_kmod_get_info;
 	__Request__host_virtual_physical_table_info_t Request_host_virtual_physical_table_info;
@@ -905,9 +908,9 @@ union __RequestUnion__mach_host_subsystem {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
 		mach_msg_body_t msgh_body;
-		mach_msg_port_descriptor_t io_master;
+		mach_msg_port_descriptor_t io_main;
 		/* end of the kernel processed data */
-	} __Reply__host_get_io_master_t __attribute__((unused));
+	} __Reply__host_get_io_main_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
@@ -1226,7 +1229,7 @@ union __ReplyUnion__mach_host_subsystem {
 	__Reply___host_page_size_t Reply__host_page_size;
 	__Reply__mach_memory_object_memory_entry_t Reply_mach_memory_object_memory_entry;
 	__Reply__host_processor_info_t Reply_host_processor_info;
-	__Reply__host_get_io_master_t Reply_host_get_io_master;
+	__Reply__host_get_io_main_t Reply_host_get_io_main;
 	__Reply__host_get_clock_service_t Reply_host_get_clock_service;
 	__Reply__kmod_get_info_t Reply_kmod_get_info;
 	__Reply__host_virtual_physical_table_info_t Reply_host_virtual_physical_table_info;
@@ -1258,7 +1261,7 @@ union __ReplyUnion__mach_host_subsystem {
     { "_host_page_size", 202 },\
     { "mach_memory_object_memory_entry", 203 },\
     { "host_processor_info", 204 },\
-    { "host_get_io_master", 205 },\
+    { "host_get_io_main", 205 },\
     { "host_get_clock_service", 206 },\
     { "kmod_get_info", 207 },\
     { "host_virtual_physical_table_info", 209 },\

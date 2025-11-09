@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CF_BRIDGED_TYPE(id) CGColorSpace *CGColorSpaceRef;
+typedef struct CF_BRIDGED_TYPE(id) CGColorSpace *CGColorSpaceRef; /* Swift Sendable */
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGDataProvider.h>
@@ -116,6 +116,9 @@ CG_EXTERN const CFStringRef kCGColorSpaceITUR_709
 CG_AVAILABLE_STARTING(10.11, 9.0);
 
 CG_EXTERN const CFStringRef kCGColorSpaceITUR_709_PQ
+CG_AVAILABLE_STARTING(12.0, 15.1);
+
+CG_EXTERN const CFStringRef kCGColorSpaceITUR_709_HLG
 CG_AVAILABLE_STARTING(12.0, 15.1);
 
 CG_EXTERN const CFStringRef kCGColorSpaceITUR_2020
@@ -465,6 +468,9 @@ CG_AVAILABLE_STARTING(11.0, 14.0);
 CG_EXTERN CGColorSpaceRef  __nullable CGColorSpaceCreateExtendedLinearized(CGColorSpaceRef space)
 CG_AVAILABLE_STARTING(11.0, 14.0);
 
+/* Create a copy of the color space which uses standard range [0.0, 1.0]. */
+CG_EXTERN CGColorSpaceRef CGColorSpaceCreateCopyWithStandardRange(CGColorSpaceRef s)
+CG_AVAILABLE_STARTING(13.0, 16.0);
 
 /* Deprecated functions */
 

@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <FileProvider/NSFileProviderManager.h>
+#import <FileProvider/NSFileProviderReplicatedExtension.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,7 +39,7 @@ typedef NS_ENUM(NSInteger, NSFileProviderTestingOperationType) {
 
     // A testing operation of type CollisionResolution
     NSFileProviderTestingOperationTypeCollisionResolution = 7
-} FILEPROVIDER_API_AVAILABILITY_V3_1;
+} FILEPROVIDER_API_AVAILABILITY_V3_1_IOS;
 
 @protocol NSFileProviderTestingIngestion;
 @protocol NSFileProviderTestingLookup;
@@ -51,7 +52,7 @@ typedef NS_ENUM(NSInteger, NSFileProviderTestingOperationType) {
 
 /** An operation that can scheduled.
  */
-FILEPROVIDER_API_AVAILABILITY_V3_1
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS
 @protocol NSFileProviderTestingOperation <NSObject>
 
 /** The operation type
@@ -135,7 +136,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
  set events, or if some operation are scheduled using -runTestingOperations:error:.
  */
 - (nullable NSArray <id<NSFileProviderTestingOperation>> *)listAvailableTestingOperationsWithError:(NSError **)error
-    FILEPROVIDER_API_AVAILABILITY_V3_1;
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS;
 
 /** Run a set of operations.
 
@@ -144,7 +145,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
  */
 - (nullable NSDictionary<id<NSFileProviderTestingOperation>, NSError *> *)runTestingOperations:(NSArray<id<NSFileProviderTestingOperation>> *)operations
                                                                                          error:(NSError **)error
-    FILEPROVIDER_API_AVAILABILITY_V3_1;
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS;
 
 @end
 
@@ -160,14 +161,14 @@ typedef NS_ENUM(NSUInteger, NSFileProviderTestingOperationSide) {
     /** The operation reads or writes the file provider extension.
      */
     NSFileProviderTestingOperationSideFileProvider = 1,
-} FILEPROVIDER_API_AVAILABILITY_V3_1;
+} FILEPROVIDER_API_AVAILABILITY_V3_1_IOS;
 
 
 /** This operation causes the system to ingest a change.
 
  When running this operation, the system will discover a change from the disk or the provider.
  */
-FILEPROVIDER_API_AVAILABILITY_V3_1
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS
 @protocol NSFileProviderTestingIngestion <NSFileProviderTestingOperation>
 
 /** Side of the event.
@@ -189,7 +190,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 
 /** This operation causes the system to lookup an item.
  */
-FILEPROVIDER_API_AVAILABILITY_V3_1
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS
 @protocol NSFileProviderTestingLookup <NSFileProviderTestingOperation>
 
 /** Side of the event.
@@ -205,7 +206,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 
 /** This operation causes the system to propagate a creation of an item from a source side to a target side.
  */
-FILEPROVIDER_API_AVAILABILITY_V3_1
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS
 @protocol NSFileProviderTestingCreation <NSFileProviderTestingOperation>
 
 /** The target side of the operation.
@@ -227,7 +228,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 
  The modification happens if a change is identified on an item that is already known by both sides.
  */
-FILEPROVIDER_API_AVAILABILITY_V3_1
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS
 @protocol NSFileProviderTestingModification <NSFileProviderTestingOperation>
 
 /** The target side of the operation.
@@ -261,7 +262,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 
  The deletion happens if an item that is known by the target side is deleted on the source side.
  */
-FILEPROVIDER_API_AVAILABILITY_V3_1
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS
 @protocol NSFileProviderTestingDeletion <NSFileProviderTestingOperation>
 
 /** The target side of the operation.
@@ -289,7 +290,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 
 /** This operation causes the system to fetch the content of an item.
  */
-FILEPROVIDER_API_AVAILABILITY_V3_1
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS
 @protocol NSFileProviderTestingContentFetch <NSFileProviderTestingOperation>
 
 /** The side of the operation.
@@ -305,7 +306,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 
 /** This operation causes the system to list the children of an item
  */
-FILEPROVIDER_API_AVAILABILITY_V3_1
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS
 @protocol NSFileProviderTestingChildrenEnumeration <NSFileProviderTestingOperation>
 
 /** The side of the operation.
@@ -327,7 +328,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 
  This can for instance happen if the case sensitivity of the local filesystem and of the provider differs.
  */
-FILEPROVIDER_API_AVAILABILITY_V3_1
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS
 @protocol NSFileProviderTestingCollisionResolution <NSFileProviderTestingOperation>
 
 /** The side of the operation.

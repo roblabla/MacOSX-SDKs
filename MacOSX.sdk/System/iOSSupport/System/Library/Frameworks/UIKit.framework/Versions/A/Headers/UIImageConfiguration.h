@@ -13,9 +13,9 @@
 @class UITraitCollection;
 #endif
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_SENDABLE
 @interface UIImageConfiguration : NSObject <NSCopying, NSSecureCoding>
 
 + (instancetype)new NS_UNAVAILABLE;
@@ -38,7 +38,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 
 
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIImageConfiguration.h>

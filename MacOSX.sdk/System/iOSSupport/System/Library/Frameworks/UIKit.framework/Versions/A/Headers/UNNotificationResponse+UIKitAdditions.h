@@ -11,14 +11,14 @@
 
 @class UIScene;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_EXTERN @interface UNNotificationResponse (UIKitAdditions)
 // used to identify which UIScene UI to reflect the user's response to a notification on
 @property (nullable, nonatomic, readonly) UIScene *targetScene NS_AVAILABLE_IOS(13_0); //  default nil
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UNNotificationResponse+UIKitAdditions.h>

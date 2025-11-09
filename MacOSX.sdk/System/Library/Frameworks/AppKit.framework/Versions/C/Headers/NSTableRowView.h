@@ -40,7 +40,7 @@ API_AVAILABLE(macos(10.7))
 /* Next and previous row selection state. Allows subclassers to draw selection differently based on the previous next row being selected. State is automatically updated by NSTableView, however, the changing of the state does not invalidate the row view. If a row view depends on this state, it should override the particular setter and call [self setNeedsDisplay:YES] before or after calling super.
  */
 @property(getter=isPreviousRowSelected) BOOL previousRowSelected API_AVAILABLE(macos(10.10));
-@property(getter=isNextRowSelected) BOOL nextRowSelected;
+@property(getter=isNextRowSelected) BOOL nextRowSelected API_AVAILABLE(macos(10.10));
 
 /* Floating is a temporary attribute that is set when a particular group row is actually floating above other rows. The state may change dynamically based on the position of the group row. Drawing may be different for rows that are currently 'floating'. The TableView's delegate must implement tableView:isGroupRow: (or outlineView:isGroupItem:) to enable floating group rows.
  */

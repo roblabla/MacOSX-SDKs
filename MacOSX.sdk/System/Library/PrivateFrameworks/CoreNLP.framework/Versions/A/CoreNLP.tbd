@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DB650DB7-D4A4-3848-97C2-ECE238D5FC11
+    value:           234F423B-FBC4-3220-B92E-0E23A15D01E1
   - target:          x86_64-maccatalyst
-    value:           DB650DB7-D4A4-3848-97C2-ECE238D5FC11
+    value:           234F423B-FBC4-3220-B92E-0E23A15D01E1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84CF3405-1894-329B-B1F1-D5A8ECABE405
+    value:           51FBC61C-626A-3505-9A92-EDB694E192BF
   - target:          arm64e-maccatalyst
-    value:           84CF3405-1894-329B-B1F1-D5A8ECABE405
+    value:           51FBC61C-626A-3505-9A92-EDB694E192BF
 install-name:    '/System/Library/PrivateFrameworks/CoreNLP.framework/Versions/A/CoreNLP'
-current-version: 273.2
+current-version: 303
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CoreLMClear, _CoreLMCopyBatchingConfig, _CoreLMCopyConditionalProbabilities, 
                        _CoreLMCopyConditionalProbabilitiesOverVocabulary, _CoreLMCopyPredictions, 
-                       _CoreLMCopyTextForTokenIds, _CoreLMCopyTokenIdsForText, _CoreLMCopyVocabulary, 
-                       _CoreLMCreate, _CoreLMCreateCopy, _CoreLMCreateCopyState, 
+                       _CoreLMCopyPreprocessedText, _CoreLMCopyTextForTokenIds, _CoreLMCopyTokenIdsForText, 
+                       _CoreLMCopyVocabulary, _CoreLMCreate, _CoreLMCreateCopy, _CoreLMCreateCopyState, 
                        _CoreLMGetConditionalProbabilitiesOverVocabulary, _CoreLMGetProbabilitiesForSequences, 
                        _CoreLMGetSpecialTokenId, _CoreLMReset, _CoreLMSetTemperature, 
                        _CoreLMUpdateWithContext, _NLCNNModelCopyFeatureRepresentation, 
@@ -38,20 +38,21 @@ exports:
                        _NLGazetteerSaveCompressedModel, _NLJapaneseTokenStorageClose, 
                        _NLJapaneseTokenStorageCopyPlistAtIndex, _NLJapaneseTokenStorageGetFileID, 
                        _NLJapaneseTokenStorageGetRecordCount, _NLJapaneseTokenStorageOpen, 
-                       _NLLanguageIdentifierConsumeCharacters, _NLLanguageIdentifierConsumeString, 
-                       _NLLanguageIdentifierCreate, _NLLanguageIdentifierGetTopHypotheses, 
-                       _NLLanguageIdentifierGetTopHypothesis, _NLLanguageIdentifierGetTopLanguage, 
-                       _NLLanguageIdentifierGetTopLanguages, _NLLanguageIdentifierRelease, 
-                       _NLLanguageIdentifierReleaseInternalBuffers, _NLLanguageIdentifierReset, 
-                       _NLLanguageIdentifierSetLanguageConstraints, _NLLanguageIdentifierSetLanguageHints, 
-                       _NLLexicalClassAdjective, _NLLexicalClassAdverb, _NLLexicalClassClassifier, 
-                       _NLLexicalClassCloseParenthesis, _NLLexicalClassCloseQuote, 
-                       _NLLexicalClassConjunction, _NLLexicalClassDash, _NLLexicalClassDeterminer, 
-                       _NLLexicalClassIdiom, _NLLexicalClassInterjection, _NLLexicalClassNoun, 
-                       _NLLexicalClassNumber, _NLLexicalClassOpenParenthesis, _NLLexicalClassOpenQuote, 
-                       _NLLexicalClassOtherPunctuation, _NLLexicalClassOtherWhitespace, 
-                       _NLLexicalClassOtherWord, _NLLexicalClassParagraphBreak, _NLLexicalClassParticle, 
-                       _NLLexicalClassPreposition, _NLLexicalClassPronoun, _NLLexicalClassSentenceTerminator, 
+                       _NLLanguageIdentifierClear, _NLLanguageIdentifierConsumeCharacters, 
+                       _NLLanguageIdentifierConsumeString, _NLLanguageIdentifierCreate, 
+                       _NLLanguageIdentifierGetTopHypotheses, _NLLanguageIdentifierGetTopHypothesis, 
+                       _NLLanguageIdentifierGetTopLanguage, _NLLanguageIdentifierGetTopLanguages, 
+                       _NLLanguageIdentifierRelease, _NLLanguageIdentifierReleaseInternalBuffers, 
+                       _NLLanguageIdentifierReset, _NLLanguageIdentifierSetLanguageConstraints, 
+                       _NLLanguageIdentifierSetLanguageHints, _NLLexicalClassAdjective, 
+                       _NLLexicalClassAdverb, _NLLexicalClassClassifier, _NLLexicalClassCloseParenthesis, 
+                       _NLLexicalClassCloseQuote, _NLLexicalClassConjunction, _NLLexicalClassDash, 
+                       _NLLexicalClassDeterminer, _NLLexicalClassIdiom, _NLLexicalClassInterjection, 
+                       _NLLexicalClassNoun, _NLLexicalClassNumber, _NLLexicalClassOpenParenthesis, 
+                       _NLLexicalClassOpenQuote, _NLLexicalClassOtherPunctuation, 
+                       _NLLexicalClassOtherWhitespace, _NLLexicalClassOtherWord, 
+                       _NLLexicalClassParagraphBreak, _NLLexicalClassParticle, _NLLexicalClassPreposition, 
+                       _NLLexicalClassPronoun, _NLLexicalClassSentenceTerminator, 
                        _NLLexicalClassVerb, _NLLexicalClassWordJoiner, _NLModelContainerCopyContainerData, 
                        _NLModelContainerCopyInfoDictionary, _NLModelContainerCopyModelDataAtIndex, 
                        _NLModelContainerCopySplitContainerData, _NLModelContainerCreate, 
@@ -108,33 +109,34 @@ exports:
                        __NLStringTokenizerSetTokenizerAttribute, __NLStringTokenizerTokenize, 
                        __NLStringTokenizerTokenizeCompoundWord, __NLStringTokenizerTokenizeWithTranscriptions, 
                        _kCoreLMArchitectureKey, _kCoreLMArchitectureLSTM, _kCoreLMArchitectureTransformer, 
-                       _kCoreLMEngineANE, _kCoreLMEngineCPU, _kCoreLMEngineKey, _kCoreLMLocaleKey, 
-                       _kCoreLMSamplingMaxLengthKey, _kCoreLMSamplingMethodGREEDY, 
-                       _kCoreLMSamplingMethodKey, _kCoreLMSamplingMethodTOPK, _kCoreLMSamplingMethodTOPP, 
-                       _kCoreLMSamplingNumberKey, _kCoreLMSamplingTopKKey, _kCoreLMSamplingTopPKey, 
-                       _kCoreLMVocabularyTypeCharacter, _kCoreLMVocabularyTypeFragment, 
-                       _kCoreLMVocabularyTypeKey, _kNLGazetteerCompressedModelData, 
-                       _kNLGazetteerCompressedModelURL, _kNLGazetteerEntities, _kNLGazetteerFalsePositiveRate, 
-                       _kNLGazetteerLocale, _kNLModelAuthorKey, _kNLModelContainerErrorDomain, 
-                       _kNLModelCreationDateKey, _kNLModelDescriptionKey, _kNLModelGoldTrainingLabelsKey, 
-                       _kNLModelGoldValidationLabelsKey, _kNLModelInputLabelArrayKey, 
-                       _kNLModelLanguageKey, _kNLModelLicenseKey, _kNLModelOutputLabelArrayKey, 
-                       _kNLModelPredictedTrainingLabelsKey, _kNLModelPredictedValidationLabelsKey, 
-                       _kNLModelSampleDataFeatureArrayKey, _kNLModelSampleDataLabelArrayKey, 
-                       _kNLModelSampleDataLabelTypesArrayKey, _kNLModelSampleDataLabelsArrayKey, 
-                       _kNLModelSampleDataProbabilitiesArrayKey, _kNLModelSampleDataRangeLengthArrayKey, 
-                       _kNLModelSampleDataRangeLocationArrayKey, _kNLModelSampleDataTextKey, 
-                       _kNLModelTrainerFeatureCategoryKey, _kNLModelTrainerLanguageKey, 
-                       _kNLModelTrainerMaxIterationNumberKey, _kNLModelTrainerModelDataArrayKey, 
-                       _kNLModelTrainerModelDataKey, _kNLModelTrainerModelDeviceTypeKey, 
-                       _kNLModelTrainerModelMetadataKey, _kNLModelTrainerModelMethodTypeKey, 
-                       _kNLModelTrainerModelParamsKey, _kNLModelTrainerRegularizationCoefficientKey, 
-                       _kNLModelTrainingSentenceIdsKey, _kNLModelTrainingSentencesKey, 
-                       _kNLModelTrainingTokenLengthsKey, _kNLModelTrainingTokenLocationsKey, 
-                       _kNLModelUnknownRevision, _kNLModelValidationSentenceIdsKey, 
-                       _kNLModelValidationSentencesKey, _kNLModelValidationTokenLengthsKey, 
-                       _kNLModelValidationTokenLocationsKey, _kNLModelVersionStringKey, 
-                       _kNLStringEmbeddingModelData, _kNLStringEmbeddingModelLocale, 
+                       _kCoreLMAttentionTypeAutoencoding, _kCoreLMAttentionTypeAutoregressive, 
+                       _kCoreLMAttentionTypeKey, _kCoreLMEngineANE, _kCoreLMEngineCPU, 
+                       _kCoreLMEngineKey, _kCoreLMLocaleKey, _kCoreLMSamplingMaxLengthKey, 
+                       _kCoreLMSamplingMethodGREEDY, _kCoreLMSamplingMethodKey, _kCoreLMSamplingMethodTOPK, 
+                       _kCoreLMSamplingMethodTOPP, _kCoreLMSamplingNumberKey, _kCoreLMSamplingTopKKey, 
+                       _kCoreLMSamplingTopPKey, _kCoreLMVocabularyTypeCharacter, 
+                       _kCoreLMVocabularyTypeFragment, _kCoreLMVocabularyTypeKey, 
+                       _kNLGazetteerCompressedModelData, _kNLGazetteerCompressedModelURL, 
+                       _kNLGazetteerEntities, _kNLGazetteerFalsePositiveRate, _kNLGazetteerLocale, 
+                       _kNLModelAuthorKey, _kNLModelContainerErrorDomain, _kNLModelCreationDateKey, 
+                       _kNLModelDescriptionKey, _kNLModelGoldTrainingLabelsKey, _kNLModelGoldValidationLabelsKey, 
+                       _kNLModelInputLabelArrayKey, _kNLModelLanguageKey, _kNLModelLicenseKey, 
+                       _kNLModelOutputLabelArrayKey, _kNLModelPredictedTrainingLabelsKey, 
+                       _kNLModelPredictedValidationLabelsKey, _kNLModelSampleDataFeatureArrayKey, 
+                       _kNLModelSampleDataLabelArrayKey, _kNLModelSampleDataLabelTypesArrayKey, 
+                       _kNLModelSampleDataLabelsArrayKey, _kNLModelSampleDataProbabilitiesArrayKey, 
+                       _kNLModelSampleDataRangeLengthArrayKey, _kNLModelSampleDataRangeLocationArrayKey, 
+                       _kNLModelSampleDataTextKey, _kNLModelTrainerFeatureCategoryKey, 
+                       _kNLModelTrainerLanguageKey, _kNLModelTrainerMaxIterationNumberKey, 
+                       _kNLModelTrainerModelDataArrayKey, _kNLModelTrainerModelDataKey, 
+                       _kNLModelTrainerModelDeviceTypeKey, _kNLModelTrainerModelMetadataKey, 
+                       _kNLModelTrainerModelMethodTypeKey, _kNLModelTrainerModelParamsKey, 
+                       _kNLModelTrainerRegularizationCoefficientKey, _kNLModelTrainingSentenceIdsKey, 
+                       _kNLModelTrainingSentencesKey, _kNLModelTrainingTokenLengthsKey, 
+                       _kNLModelTrainingTokenLocationsKey, _kNLModelUnknownRevision, 
+                       _kNLModelValidationSentenceIdsKey, _kNLModelValidationSentencesKey, 
+                       _kNLModelValidationTokenLengthsKey, _kNLModelValidationTokenLocationsKey, 
+                       _kNLModelVersionStringKey, _kNLStringEmbeddingModelData, _kNLStringEmbeddingModelLocale, 
                        _kNLStringEmbeddingModelPath, _kNLStringEmbeddingModelType, 
                        _kNLStringEmbeddingModelTypeCompressedWordEmbedding, _kNLStringEmbeddingModelTypeContextualWordEmbedding, 
                        _kNLStringEmbeddingModelTypeSentenceEmbedding, _kNLStringEmbeddingModelVersion, 

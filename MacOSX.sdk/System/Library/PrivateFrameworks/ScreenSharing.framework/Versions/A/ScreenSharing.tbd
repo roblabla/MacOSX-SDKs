@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E14E4A8A-2A8F-3A28-AEA4-5BC6599AF184
+    value:           63C390FB-8319-3B51-82DB-E550E040628B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           06ABC951-4537-3E86-B9CA-6E746E43D36B
+    value:           7654CCAC-E0A6-3414-BA4A-AF07FD8A0579
 install-name:    '/System/Library/PrivateFrameworks/ScreenSharing.framework/Versions/A/ScreenSharing'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AskToCancelFileActiveFileTransfers, _AuthGetRandomBytes, 
                        _GetFlatInterfaceList, _InterfaceItemToSocketAddress, _RDCreateSemaphore, 
                        _RDCreateTask, _RDDeleteSemaphore, _RDMutexDestroy, _RDMutexInit, 
@@ -43,7 +43,8 @@ exports:
                        _RFBSetDisplay, _RFBSetEncryptionLevel, _RFBSetLocalBitmap, 
                        _RFBSetMode, _RFBSetReceiveTimeout, _RFBSetServerScaling, 
                        _RFBSetServerScreenDepth, _RFBSetSharedPasteboard, _RFBSetViewerEncodings, 
-                       _RFBSetlocalWindowUIResolution, _RFBShowSession, _RFBStartAppleIDScreenSharingConnection, 
+                       _RFBSetlocalWindowUIResolution, _RFBShareKeyboardSourceID, 
+                       _RFBShowSession, _RFBStartAppleIDScreenSharingConnection, 
                        _RFBStartObserve, _RFBStopPreauthorizedSession, _RFBUnlockFrameBuffer, 
                        _RFBUseHardwareCursor, _RFBViewerInformation, _RFBWantUserInfo, 
                        _SSFullQualityEncodings, _SSGetScreenSharingApplicationSupportFolder, 
@@ -60,14 +61,15 @@ exports:
                        __ardlogv, _ardlog_close_logfile, _ardlog_enable_extra_info, 
                        _ardlog_open_dlc_logfile, _ardlog_open_logfile, _ardlog_rollover_logfile, 
                        _ardlog_set_cutoff_level, _ardlog_should_oslog, _ardlog_will_log, 
-                       _kSSAllButtons, _kSSAskToControl, _kSSAskToObserve, _kSSCapsLockKeyCode, 
-                       _kSSCommandKeyCode, _kSSControlKeyCode, _kSSDiffieHellmanNamePassword, 
-                       _kSSFrameUpdateInterval_Default, _kSSFrameUpdateInterval_Disabled, 
-                       _kSSFunctionKeyCode, _kSSInvalidAuthenticationType, _kSSKerberos, 
-                       _kSSKerberosNoUI, _kSSKerberosTGT, _kSSLeftButton, _kSSNoAuthenticationNeeded, 
-                       _kSSOptionKeyCode, _kSSOtherButton, _kSSPreauthorized, _kSSRSATunnel, 
-                       _kSSRightButton, _kSSSecureRemotePassword, _kSSSessionSelect_ConnectToConsole, 
-                       _kSSSessionSelect_ConnectToVirtualDisplay, _kSSSessionSelect_RequestConsole, 
+                       _gSSZoomTable, _kSSAllButtons, _kSSAskToControl, _kSSAskToObserve, 
+                       _kSSCapsLockKeyCode, _kSSCommandKeyCode, _kSSControlKeyCode, 
+                       _kSSDiffieHellmanNamePassword, _kSSFrameUpdateInterval_Default, 
+                       _kSSFrameUpdateInterval_Disabled, _kSSFunctionKeyCode, _kSSInvalidAuthenticationType, 
+                       _kSSKerberos, _kSSKerberosNoUI, _kSSKerberosTGT, _kSSLeftButton, 
+                       _kSSNoAuthenticationNeeded, _kSSOptionKeyCode, _kSSOtherButton, 
+                       _kSSPreauthorized, _kSSRSATunnel, _kSSRightButton, _kSSSecureRemotePassword, 
+                       _kSSSessionSelect_ConnectToConsole, _kSSSessionSelect_ConnectToVirtualDisplay, 
+                       _kSSSessionSelect_DontConnectToVirtualDisplay, _kSSSessionSelect_RequestConsole, 
                        _kSSShiftKeyCode, _kSSSystemInfoCommandAppleCareInfo_ComputerModel, 
                        _kSSSystemInfoCommandAppleCareInfo_ComputerName, _kSSSystemInfoCommandAppleCareInfo_OSVersion, 
                        _kSSSystemInfoCommandAppleCareInfo_SerialNumber, _kSSSystemInfoCommandAppleCareInfo_ShortUserName, 

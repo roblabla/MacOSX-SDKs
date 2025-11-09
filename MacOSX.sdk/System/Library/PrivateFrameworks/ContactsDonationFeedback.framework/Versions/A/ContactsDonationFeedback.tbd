@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EA391D69-6658-3BA6-BBDD-9CDFDCF6D623
+    value:           E4CB7D4C-21AB-3F6D-9235-923EBFD7E4EC
   - target:          x86_64-maccatalyst
-    value:           EA391D69-6658-3BA6-BBDD-9CDFDCF6D623
+    value:           E4CB7D4C-21AB-3F6D-9235-923EBFD7E4EC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           52E5D63A-94AD-3E93-9082-F3DFB749103B
+    value:           6208DD4B-A5E0-3771-8FF2-F9A0F7389702
   - target:          arm64e-maccatalyst
-    value:           52E5D63A-94AD-3E93-9082-F3DFB749103B
+    value:           6208DD4B-A5E0-3771-8FF2-F9A0F7389702
 install-name:    '/System/Library/PrivateFrameworks/ContactsDonationFeedback.framework/Versions/A/ContactsDonationFeedback'
 current-version: 0
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ContactsDonationFeedbackVersionNumber, _ContactsDonationFeedbackVersionString, 
                        _kCDFErrorDomain, _kCDFInsufficientValuesToHashError, _kCDFMissingIdentifierError, 
                        _kCDFUnhandledValueTypeError ]

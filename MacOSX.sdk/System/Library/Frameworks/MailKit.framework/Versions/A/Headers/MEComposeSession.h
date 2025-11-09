@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class MEMessage;
 
 /// @brief An instance of this class is associated with the lifecycle of a single mail compose window. This object associates the actions performed by the user in a mail compose window to a unique session. An instance of this class is passed to the methods in @c MEComposeSessionHandler.
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 @interface MEComposeSession : NSObject <NSSecureCoding>
 
 + (instancetype)new NS_UNAVAILABLE; 
@@ -39,16 +39,16 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
 @end
 
 /// @brief Error domain and codes for extensions to report errors before message is delivered.
-extern NSErrorDomain const MEComposeSessionErrorDomain API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
+extern NSErrorDomain const MEComposeSessionErrorDomain API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos);
 
 typedef NS_ERROR_ENUM(MEComposeSessionErrorDomain, MEComposeSessionErrorCode) {
     MEComposeSessionErrorCodeInvalidRecipients = 0,
     MEComposeSessionErrorCodeInvalidHeaders = 1,
     MEComposeSessionErrorCodeInvalidBody = 2,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
+} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos);
 
 /// @brief Methods in this protocol can be used by a mail app extension to keep track of new messages composed by the user and to make changes to the recipeint email address tokens.
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 @protocol MEComposeSessionHandler <NSObject>
 
 /// @brief This is invoked when a new message compose window is created.

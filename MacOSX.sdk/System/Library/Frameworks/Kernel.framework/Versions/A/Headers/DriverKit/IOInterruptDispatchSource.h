@@ -1,4 +1,4 @@
-/* iig(DriverKit-192.100.7) generated from IOInterruptDispatchSource.iig */
+/* iig(DriverKit-256.40.4) generated from IOInterruptDispatchSource.iig */
 
 /* IOInterruptDispatchSource.iig:1-50 */
 /*
@@ -51,7 +51,7 @@ enum {
 	kIOInterruptSourceContinuousTime = 0x00010000
 };
 
-/* source class IOInterruptDispatchSource IOInterruptDispatchSource.iig:51-143 */
+/* source class IOInterruptDispatchSource IOInterruptDispatchSource.iig:51-155 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -140,6 +140,18 @@ public:
 	virtual kern_return_t
 	Cancel(IODispatchSourceCancelHandler handler) override LOCAL;
 
+    /*!
+     * @brief       Get the count and time of the last interrupt received by the kernel
+                    primary interrupt handler.
+     * @param       count Interrupt count.
+     * @param       time Interrupt time.
+     * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+     */
+	virtual kern_return_t
+	GetLastInterrupt(
+		uint64_t   * count,
+		uint64_t   * time);
+
 private:
 	virtual kern_return_t
 	CheckForWork(bool synchronous) override LOCAL;
@@ -154,11 +166,12 @@ private:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOInterruptDispatchSource IOInterruptDispatchSource.iig:51-143 */
+/* generated class IOInterruptDispatchSource IOInterruptDispatchSource.iig:51-155 */
 
 #define IOInterruptDispatchSource_Create_ID            0xb6a948b1585fc259ULL
 #define IOInterruptDispatchSource_GetInterruptType_ID            0x846d2df6b6bef33bULL
 #define IOInterruptDispatchSource_SetHandler_ID            0xfcc79b0928501bb1ULL
+#define IOInterruptDispatchSource_GetLastInterrupt_ID            0x9b89e0dea24a143bULL
 #define IOInterruptDispatchSource_InterruptOccurred_ID            0xce0513291cfa1ee1ULL
 
 #define IOInterruptDispatchSource_Create_Args \
@@ -181,6 +194,10 @@ private:
 
 #define IOInterruptDispatchSource_Cancel_Args \
         IODispatchSourceCancelHandler handler
+
+#define IOInterruptDispatchSource_GetLastInterrupt_Args \
+        uint64_t * count, \
+        uint64_t * time
 
 #define IOInterruptDispatchSource_CheckForWork_Args \
         const IORPC rpc, \
@@ -217,6 +234,12 @@ public:\
     kern_return_t\
     SetHandler(\
         OSAction * action,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    GetLastInterrupt(\
+        uint64_t * count,\
+        uint64_t * time,\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
@@ -269,6 +292,12 @@ public:\
         OSMetaClassBase * target,\
         SetHandler_Handler func);\
 \
+    typedef kern_return_t (*GetLastInterrupt_Handler)(OSMetaClassBase * target, IOInterruptDispatchSource_GetLastInterrupt_Args);\
+    static kern_return_t\
+    GetLastInterrupt_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        GetLastInterrupt_Handler func);\
+\
     typedef void (*InterruptOccurred_Handler)(OSMetaClassBase * target, IOInterruptDispatchSource_InterruptOccurred_Args);\
     static kern_return_t\
     InterruptOccurred_Invoke(const IORPC rpc,\
@@ -293,6 +322,9 @@ protected:\
 \
     static kern_return_t\
     GetInterruptType_Impl(IOInterruptDispatchSource_GetInterruptType_Args);\
+\
+    kern_return_t\
+    GetLastInterrupt_Impl(IOInterruptDispatchSource_GetLastInterrupt_Args);\
 \
 
 
@@ -343,6 +375,6 @@ IOInterruptDispatchSource_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOInterruptDispatchSource.iig:145- */
+/* IOInterruptDispatchSource.iig:157- */
 
 #endif /* ! _IOKIT_UIOINTERRUPTDISPATCHSOURCE_H */

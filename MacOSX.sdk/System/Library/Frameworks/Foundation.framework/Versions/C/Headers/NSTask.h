@@ -7,7 +7,7 @@
 
 @class NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, NSTaskTerminationReason) {
     NSTaskTerminationReasonExit = 1,
@@ -55,7 +55,7 @@ typedef NS_ENUM(NSInteger, NSTaskTerminationReason) {
 /*
 A block to be invoked when the process underlying the NSTask terminates.  Setting the block to nil is valid, and stops the previous block from being invoked, as long as it hasn't started in any way.  The NSTask is passed as the argument to the block so the block does not have to capture, and thus retain, it.  The block is copied when set.  Only one termination handler block can be set at any time.  The execution context in which the block is invoked is undefined.  If the NSTask has already finished, the block is executed immediately/soon (not necessarily on the current thread).  If a terminationHandler is set on an NSTask, the NSTaskDidTerminateNotification notification is not posted for that task.  Also note that -waitUntilExit won't wait until the terminationHandler has been fully executed.  You cannot use this property in a concrete subclass of NSTask which hasn't been updated to include an implementation of the storage and use of it.  
 */
-@property (nullable, copy) void (^terminationHandler)(NSTask *) API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (nullable, copy) void (NS_SWIFT_SENDABLE ^terminationHandler)(NSTask *) API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @property NSQualityOfService qualityOfService API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // read-only after the task is launched
 
@@ -63,7 +63,7 @@ A block to be invoked when the process underlying the NSTask terminates.  Settin
 
 @interface NSTask (NSTaskConveniences)
 
-+ (nullable NSTask *)launchedTaskWithExecutableURL:(NSURL *)url arguments:(NSArray<NSString *> *)arguments error:(out NSError ** _Nullable)error terminationHandler:(void (^_Nullable)(NSTask *))terminationHandler API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios, watchos, tvos);
++ (nullable NSTask *)launchedTaskWithExecutableURL:(NSURL *)url arguments:(NSArray<NSString *> *)arguments error:(out NSError ** _Nullable)error terminationHandler:(void (NS_SWIFT_SENDABLE ^_Nullable)(NSTask *))terminationHandler API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios, watchos, tvos);
 
 - (void)waitUntilExit;
 	// poll the runLoop in defaultMode until task completes
@@ -84,4 +84,4 @@ A block to be invoked when the process underlying the NSTask terminates.  Settin
 
 FOUNDATION_EXPORT NSNotificationName const NSTaskDidTerminateNotification;
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

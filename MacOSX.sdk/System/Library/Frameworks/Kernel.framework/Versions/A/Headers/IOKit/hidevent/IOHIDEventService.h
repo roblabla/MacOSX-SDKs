@@ -256,8 +256,6 @@ protected:
     @abstract Handle a client open on the interface.
     @discussion This method is called by IOService::open() with the
     arbitration lock held, and must return true to accept the client open.
-    This method will in turn call handleClientOpen() to qualify the client
-    requesting the open.
     @param client The client object that requested the open.
     @param options Options passed to IOService::open().
     @param argument Argument passed to IOService::open().
@@ -494,7 +492,7 @@ protected:
     @param timeStamp    AbsoluteTime representing origination of event
     @param ID           ID of the transducer generating the event
     @param type         Type of the transducer generating the event
-    @param inRange      Details whether the transducer is in promitity to digitizer surface
+    @param inRange      Details whether the transducer is in proximity to digitizer surface
     @param buttonState  Button mask where bit0 is the primary button, bit1 secondary and so forth
     @param x            Absolute location of transducer along the x-axis from 0.0 to 1.0 in
                         16:16 fixed point.
@@ -530,7 +528,7 @@ protected:
     @param timeStamp    AbsoluteTime representing origination of event
     @param ID           ID of the transducer generating the event 
     @param type         Type of the transducer generating the event
-    @param inRange      Details whether the transducer is in promitity to digitizer surface
+    @param inRange      Details whether the transducer is in proximity to digitizer surface
     @param buttonState  Button mask where bit0 is the primary button, bit1 secondary and so forth
     @param x            Absolute location of transducer along the x-axis from 0.0 to 1.0 in 
                         16:16 fixed point.
@@ -576,7 +574,7 @@ protected:
     @param timeStamp    AbsoluteTime representing origination of event
     @param ID           ID of the transducer generating the event
     @param type         Type of the transducer generating the event
-    @param inRange      Details whether the transducer is in promitity to digitizer surface
+    @param inRange      Details whether the transducer is in proximity to digitizer surface
     @param buttonState  Button mask where bit0 is the primary button, bit1 secondary and so forth
     @param x            Absolute location of transducer along the x-axis from 0.0 to 1.0 in
                         16:16 fixed point.
@@ -590,7 +588,7 @@ protected:
     @param auxPressure  Absolute pressure exerted on transducer from 0.0 to 1.0 in 16:16 fixed point.
     @param twist        Absolute clockwise rotation along the transducer's major axis from 0.0 to
                         360.0 degrees in 16:16 fixed point.
-    @param altitude     Specifies angle with the X-Y plane thorugh a signed, semicircular range.
+    @param altitude     Specifies angle with the X-Y plane through a signed, semicircular range.
                         Positive values specify an angle downward and toward the positive Z axis.
                         Value is represented in degrees from -180.0 to 180.0 in 16:16 fixed point.
     @param azimuth      Counter clockwise rotation of the cursor around the Z-axis through a full
@@ -800,7 +798,7 @@ protected:
     /*!
      @function copyEventForClient
      @abstract Copy event/events for client
-     @dicussion function called NOT on service workloop. It is guaranteed that function call will not occur once service closed by this client
+     @discussion function called NOT on service workloop. It is guaranteed that function call will not occur once service closed by this client
      @param copySpec        Event copy spec (If copySpec is an OSData object, physical copy needs to be made if callee intends to retain data)
      @param options         options
      @param clientContext   client identifier
@@ -811,7 +809,7 @@ protected:
     /*!
      @function copyPropertyForClient
      @abstract Copy property for client
-     @dicussion function called on service workloop
+     @discussion function called on service workloop
      @param aKey            property key
      @param clientContext   client identifier
      */
@@ -821,7 +819,7 @@ protected:
     /*!
      @function setPropertiesForClient
      @abstract Set properties for client
-     @dicussion function called on service workloop
+     @discussion function called on service workloop
      @param properties      properties object
      @param clientContext   client identifier
      */
@@ -831,7 +829,7 @@ protected:
     /*!
      @function openForClient
      @abstract open service for client
-     @dicussion function called on service workloop
+     @discussion function called on service workloop
      @param client          client service
      @param options         options
      @param property        client property
@@ -850,31 +848,31 @@ protected:
     virtual void           closeForClient(IOService *client, void *context, IOOptionBits options = 0);
     
     /*!
-     @function dispatchExtendedGameControllerEvent
-     @abstract Dispatch extended game controller event
-     @discussion This is meant to dispatch a conforming extended game controller event that includes the
-     following: Direction Pad, Face Buttons, Left and Right Joysticks and 2 Left and 2 Right Shoulder Buttons.
-     @param timeStamp   AbsoluteTime representing origination of event
-     @param dpadUp      Direction pad up with a fixed value between 0.0 and 1.0
-     @param dpadDown    Direction pad down with a fixed value between 0.0 and 1.0
-     @param dpadLeft    Direction pad left with a fixed value between 0.0 and 1.0
-     @param dpadRight   Direction pad right with a fixed value between 0.0 and 1.0
-     @param faceX       Face button X with a fixed value between 0.0 and 1.0
-     @param faceY       Face button Y with a fixed value between 0.0 and 1.0
-     @param faceA       Face button A with a fixed value between 0.0 and 1.0
-     @param faceB       Face button B with a fixed value between 0.0 and 1.0
-     @param shoulderL1  Top left shoulder button with a fixed value between 0.0 and 1.0
-     @param shoulderR1  Top right shoulder button with a fixed value between 0.0 and 1.0
-     @param shoulderL2  Bottom left shoulder button with a fixed value between 0.0 and 1.0
-     @param shoulderR2  Bottom right shoulder button with a fixed value between 0.0 and 1.0
-     @param joystickX   Joystick X axis with a fixed value between -1.0 and 1.0
-     @param joystickY   Joystick Y axis with a fixed value between -1.0 and 1.0
-     @param joystickZ   Joystick Z axis with a fixed value between -1.0 and 1.0
-     @param joystickRz  Joystick Rz axis with a fixed value between -1.0 and 1.0
-     @param thumbstickButtonLeft   Joystick left  thumbstick button with boolean value true/false for button down/up
-     @param thumbstickButtonRight  Joystick right thumbstick button with boolean value true/false for button down/up
-     @param options     Additional options to be defined.
-     */
+    @function dispatchExtendedGameControllerEvent
+    @abstract Dispatch extended game controller event
+    @discussion This is meant to dispatch a conforming extended game controller event that includes the
+    following: Direction Pad, Face Buttons, Left and Right Joysticks and 2 Left and 2 Right Shoulder Buttons.
+    @param timeStamp   AbsoluteTime representing origination of event
+    @param dpadUp      Direction pad up with a fixed value between 0.0 and 1.0
+    @param dpadDown    Direction pad down with a fixed value between 0.0 and 1.0
+    @param dpadLeft    Direction pad left with a fixed value between 0.0 and 1.0
+    @param dpadRight   Direction pad right with a fixed value between 0.0 and 1.0
+    @param faceX       Face button X with a fixed value between 0.0 and 1.0
+    @param faceY       Face button Y with a fixed value between 0.0 and 1.0
+    @param faceA       Face button A with a fixed value between 0.0 and 1.0
+    @param faceB       Face button B with a fixed value between 0.0 and 1.0
+    @param shoulderL1  Top left shoulder button with a fixed value between 0.0 and 1.0
+    @param shoulderR1  Top right shoulder button with a fixed value between 0.0 and 1.0
+    @param shoulderL2  Bottom left shoulder button with a fixed value between 0.0 and 1.0
+    @param shoulderR2  Bottom right shoulder button with a fixed value between 0.0 and 1.0
+    @param joystickX   Joystick X axis with a fixed value between -1.0 and 1.0
+    @param joystickY   Joystick Y axis with a fixed value between -1.0 and 1.0
+    @param joystickZ   Joystick Z axis with a fixed value between -1.0 and 1.0
+    @param joystickRz  Joystick Rz axis with a fixed value between -1.0 and 1.0
+    @param thumbstickButtonLeft   Joystick left  thumbstick button with boolean value true/false for button down/up
+    @param thumbstickButtonRight  Joystick right thumbstick button with boolean value true/false for button down/up
+    @param options     Additional options to be defined.
+    */
     OSMetaClassDeclareReservedUsed(IOHIDEventService, 20);
     virtual void            dispatchExtendedGameControllerEventWithThumbstickButtons(
                                                                 AbsoluteTime                    timeStamp,
@@ -922,7 +920,7 @@ protected:
     /*!
      @function completeCopyEvent
      @abstract Completion of call to DriverKit to copy matching event
-     @discussion Called by DriverKit to complete copy matching event requets
+     @discussion Called by DriverKit to complete copy matching event request
      @param action Action
      @param event  Copied event or NULL
      @param context Context associated with request
@@ -952,7 +950,63 @@ protected:
     OSMetaClassDeclareReservedUsed(IOHIDEventService, 26);
     virtual void completeSetLED(OSAction * action, IOReturn status, uint64_t context);
 
-    OSMetaClassDeclareReservedUnused(IOHIDEventService, 27);
+    /*!
+     @function dispatchExtendedGameControllerEventWithOptionalButtons
+     @abstract Dispatch extended game controller event
+     @discussion This is meant to dispatch a conforming extended game controller event that includes the
+     following: Direction Pad, Face Buttons, Left and Right Joysticks and 2 Left and 2 Right Shoulder Buttons.
+     @param timeStamp   AbsoluteTime representing origination of event
+     @param dpadUp      Direction pad up with a fixed value between 0.0 and 1.0
+     @param dpadDown    Direction pad down with a fixed value between 0.0 and 1.0
+     @param dpadLeft    Direction pad left with a fixed value between 0.0 and 1.0
+     @param dpadRight   Direction pad right with a fixed value between 0.0 and 1.0
+     @param faceX       Face button X with a fixed value between 0.0 and 1.0
+     @param faceY       Face button Y with a fixed value between 0.0 and 1.0
+     @param faceA       Face button A with a fixed value between 0.0 and 1.0
+     @param faceB       Face button B with a fixed value between 0.0 and 1.0
+     @param shoulderL1  Top left shoulder button with a fixed value between 0.0 and 1.0
+     @param shoulderR1  Top right shoulder button with a fixed value between 0.0 and 1.0
+     @param shoulderL2  Bottom left shoulder button with a fixed value between 0.0 and 1.0
+     @param shoulderR2  Bottom right shoulder button with a fixed value between 0.0 and 1.0
+     @param joystickX   Joystick X axis with a fixed value between -1.0 and 1.0
+     @param joystickY   Joystick Y axis with a fixed value between -1.0 and 1.0
+     @param joystickZ   Joystick Z axis with a fixed value between -1.0 and 1.0
+     @param joystickRz  Joystick Rz axis with a fixed value between -1.0 and 1.0
+     @param thumbstickButtonLeft   Joystick left  thumbstick button with boolean value true/false for button down/up
+     @param thumbstickButtonRight  Joystick right thumbstick button with boolean value true/false for button down/up
+     @param buttonL4  Extra button L4 with a fixed value between -1.0 and 1.0
+     @param buttonR4  Extra button R4 with a fixed value between -1.0 and 1.0
+     @param buttonL5  Extra button L5 with a fixed value between -1.0 and 1.0
+     @param buttonR5  Extra button R5 with a fixed value between -1.0 and 1.0
+     @param options     Additional options to be defined.
+     */
+    OSMetaClassDeclareReservedUsed(IOHIDEventService, 27);
+    virtual void            dispatchExtendedGameControllerEventWithOptionalButtons(
+                                                                AbsoluteTime                    timeStamp,
+                                                                IOFixed                         dpadUp,
+                                                                IOFixed                         dpadDown,
+                                                                IOFixed                         dpadLeft,
+                                                                IOFixed                         dpadRight,
+                                                                IOFixed                         faceX,
+                                                                IOFixed                         faceY,
+                                                                IOFixed                         faceA,
+                                                                IOFixed                         faceB,
+                                                                IOFixed                         shoulderL1,
+                                                                IOFixed                         shoulderR1,
+                                                                IOFixed                         shoulderL2,
+                                                                IOFixed                         shoulderR2,
+                                                                IOFixed                         joystickX,
+                                                                IOFixed                         joystickY,
+                                                                IOFixed                         joystickZ,
+                                                                IOFixed                         joystickRz,
+                                                                boolean_t                       thumbstickButtonLeft,
+                                                                boolean_t                       thumbstickButtonRight,
+                                                                IOFixed                         buttonL4,
+                                                                IOFixed                         buttonR4,
+                                                                IOFixed                         buttonL5,
+                                                                IOFixed                         buttonR5,
+                                                                IOOptionBits                    options         = 0 );
+    
     OSMetaClassDeclareReservedUnused(IOHIDEventService, 28);
     OSMetaClassDeclareReservedUnused(IOHIDEventService, 29);
     OSMetaClassDeclareReservedUnused(IOHIDEventService, 30);

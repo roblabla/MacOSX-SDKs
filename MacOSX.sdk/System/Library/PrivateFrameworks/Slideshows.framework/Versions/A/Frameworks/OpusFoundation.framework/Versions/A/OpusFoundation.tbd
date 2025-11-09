@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8BE39605-64BC-399F-A440-A335DA8C782F
+    value:           83CC5D2A-3DEF-36DC-AEB8-3A2B7E29D6A0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5A68820F-232F-340B-814F-82ECCE6E5E73
+    value:           F8DA9D4A-1D9A-3940-80F7-1E03995469A3
 install-name:    '/System/Library/PrivateFrameworks/Slideshows.framework/Versions/A/Frameworks/OpusFoundation.framework/Versions/A/OpusFoundation'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CLLocationCoordinate2DFromString, _MKCoordinateRegionFromString, 
                        _NSColorFromString, _NSEdgeInsetsFromString, _NSIndexPath2DFromString, 
                        _NSStringFromCLLocationCoordinate2D, _NSStringFromMKCoordinateRegion, 

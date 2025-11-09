@@ -13,7 +13,7 @@
 
 @class NSStringDrawingContext;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
@@ -74,7 +74,7 @@ typedef NS_OPTIONS(NSInteger, NSStringDrawingOptions) {
 
 #endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/NSStringDrawing.h>

@@ -4,28 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8365660E-3212-3AA2-85B4-19351CE94EE6
+    value:           219FB292-5A31-3A00-A97B-41735EB75336
   - target:          x86_64-maccatalyst
-    value:           8365660E-3212-3AA2-85B4-19351CE94EE6
+    value:           219FB292-5A31-3A00-A97B-41735EB75336
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7C3610A2-98C3-3275-917A-8826E3F3EDA5
+    value:           B9C6D434-32D6-3E7B-84C5-C5E37E86EC1B
   - target:          arm64e-maccatalyst
-    value:           7C3610A2-98C3-3275-917A-8826E3F3EDA5
+    value:           B9C6D434-32D6-3E7B-84C5-C5E37E86EC1B
 install-name:    '/System/Library/PrivateFrameworks/SyncedDefaults.framework/Versions/A/SyncedDefaults'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _SYDGetAccountsLog, _SYDGetAnalyticsLog, _SYDGetCloudKitLog, 
-                       _SYDGetConnectionLog, _SYDGetCoreDataLog, _SYDGetDefaultLog, 
-                       _SYDGetMigrationLog, _SYDGetMiscLog, _SYDGetReachabilityLog, 
-                       _SYDGetSchedulerLog, _SYDGetTCCLog, _SYDGetTraceLog, _SYDRemotePreferencesSourceConfigurationDidChangeNotification, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _SYDGetAccessorSignpostsLog, _SYDGetAccountsLog, _SYDGetAnalyticsLog, 
+                       _SYDGetCloudKitLog, _SYDGetConnectionLog, _SYDGetCoreDataLog, 
+                       _SYDGetMigrationLog, _SYDGetMiscLog, _SYDGetSyncSignpostsLog, 
+                       _SYDGetTCCLog, _SYDRemotePreferencesSourceConfigurationDidChangeNotification, 
                        _SYDRemotePreferencesSourceDidChangeNotification, _SYDUbiquitousKeyValueStoreDidChangeExternallyNotification, 
-                       _SYDXPCCreateCFObjectFromXPCObject, _SYDXPCCreateXPCObjectFromCFObject, 
                        _SyncedDefaultsVersionNumber, _SyncedDefaultsVersionString ]
-    objc-classes:    [ SYDClient, SYDClientToDaemonConnection, SYDJournal, SYDRemotePreferencesSource, 
-                       SYDStoreConfiguration, SYDStoreID ]
+    objc-classes:    [ SYDClientToDaemonConnection, SYDRemotePreferencesSource, SYDStoreConfiguration, 
+                       SYDStoreID ]
 ...

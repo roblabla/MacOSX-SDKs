@@ -57,6 +57,29 @@ typedef NS_ENUM(NSInteger, ARPlaneClassification) {
 } NS_REFINED_FOR_SWIFT;
 
 /**
+ Represents the extents of a plane.
+ */
+API_AVAILABLE(ios(16.0))
+@interface ARPlaneExtent : NSObject <NSSecureCoding>
+
+/**
+ The rotation angle in radians of the extents around the y-axis in the anchor’s coordinate space.
+ */
+@property (nonatomic, readonly) float rotationOnYAxis;
+
+/**
+ The width of the plane. Corresponds to the length of the plane along the x-axis prior to applying .rotationOnYAxis.
+ */
+@property (nonatomic, readonly) float width;
+
+/**
+ The height the plane. Corresponds to the length of the plane along the z-axis prior to applying .rotationOnYAxis.
+ */
+@property (nonatomic, readonly) float height;
+
+@end
+
+/**
  An anchor representing a planar surface in the world.
  @discussion Planes are defined in the X and Z direction, where Y is the surface’s normal.
  */
@@ -81,7 +104,12 @@ API_AVAILABLE(ios(11.0))
 /**
  The extent of the plane in the anchor’s coordinate space.
  */
-@property (nonatomic, readonly) simd_float3 extent;
+@property (nonatomic, readonly) simd_float3 extent API_DEPRECATED_WITH_REPLACEMENT("planeExtent", ios(11.0, 16.0));
+
+/**
+ The extent of the plane in the anchor’s coordinate space.
+ */
+@property (nonatomic, readonly) ARPlaneExtent *planeExtent API_AVAILABLE(ios(16.0));
 
 /**
  Geometry of the plane in the anchor's coordinate space.

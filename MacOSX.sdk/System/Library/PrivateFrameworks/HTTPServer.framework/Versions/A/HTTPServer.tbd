@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8F182E67-1209-3871-8405-61AAAFF357BF
+    value:           34EC07BE-F32E-3179-9FC6-6DD13FD55F7F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0AADFEE8-F0DF-30A5-90B4-AFDF1CCB16A7
+    value:           605B8CFD-A845-384F-954B-D4A3580AB95E
 install-name:    '/System/Library/PrivateFrameworks/HTTPServer.framework/Versions/A/HTTPServer'
 current-version: 39
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DDExtractFileNameWithoutExtension, _DDIntersectionRange, 
                        _DDRangeCompare, _DDRangeFromString, _DDStringFromRange, _DDUnionRange, 
                        _GCDAsyncSocketErrorDomain, _GCDAsyncSocketException, _GCDAsyncSocketQueueName, 

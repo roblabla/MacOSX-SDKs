@@ -64,7 +64,7 @@ OS_EXPORT API_AVAILABLE(macos(10.13))
 + (PHFetchResult<PHAssetCollection *> *)fetchAssetCollectionsContainingAsset:(PHAsset *)asset withType:(PHAssetCollectionType)type options:(nullable PHFetchOptions *)options;
 
 // assetGroupURLs are URLs retrieved from ALAssetGroup's ALAssetsGroupPropertyURL
-+ (PHFetchResult<PHAssetCollection *> *)fetchAssetCollectionsWithALAssetGroupURLs:(NSArray<NSURL *> *)assetGroupURLs options:(nullable PHFetchOptions *)options;
++ (PHFetchResult<PHAssetCollection *> *)fetchAssetCollectionsWithALAssetGroupURLs:(NSArray<NSURL *> *)assetGroupURLs options:(nullable PHFetchOptions *)options API_DEPRECATED("Will be removed in a future release", ios(8,16), tvos(10,16), macos(10.15,13));
 
 
 #pragma mark - Fetching moment asset collections (Deprecated)

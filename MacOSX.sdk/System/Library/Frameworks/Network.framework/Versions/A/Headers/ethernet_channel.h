@@ -90,6 +90,38 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 NW_RETURNS_RETAINED nw_ethernet_channel_t
 nw_ethernet_channel_create(uint16_t ether_type, nw_interface_t interface);
 
+/*!
+ * @function nw_ethernet_channel_create_with_parameters
+ *
+ * @abstract
+ *		Creates an Ethernet channel with a custom EtherType and networking parameters
+ *
+ * @param ether_type
+ *		The custom EtherType to be used for all Ethernet frames in this channel. The
+ *		EtherType is the two-octet field in an Ethernet frame, indicating the protocol
+ *		encapsulated in the payload of the frame.  This parameter is in little-endian
+ *		byte order.  Only custom EtherType values are supported. This parameter cannot
+ *		be an EtherType already handled by the system, such as IPv4, IPv6, ARP, VLAN Tag,
+ *		or 802.1x.
+ *
+ *		Calling processes must hold the "com.apple.developer.networking.custom-protocol"
+ *		entitlement.
+ *
+ * @param interface
+ *		The interface on which this custom Ethernet channel will be allowed.
+ *
+ * @param parameters
+ *		nw_parameters_t that allows caller to specify networking parameters such as custom context and queue.
+ *
+ * @result
+ *		Returns an allocated nw_ethernet_channel_t object on success.
+ *		Callers are responsible for deallocating using nw_release(obj) or [obj release].
+ *		These objects support ARC.
+ *		Returns NULL on failure. Fails due to invalid parameters.
+ */
+API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
+NW_RETURNS_RETAINED nw_ethernet_channel_t
+nw_ethernet_channel_create_with_parameters(uint16_t ether_type, nw_interface_t interface, nw_parameters_t parameters);
 #ifdef __BLOCKS__
 
 /*!
@@ -144,6 +176,25 @@ nw_ethernet_channel_set_state_changed_handler(nw_ethernet_channel_t ethernet_cha
 API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 void
 nw_ethernet_channel_set_queue(nw_ethernet_channel_t ethernet_channel, dispatch_queue_t queue);
+
+/*!
+ * @function nw_ethernet_channel_get_maximum_payload_size
+ *
+ * @abstract
+ *		Returns the maximum payload size that can be written
+ *		on the channel. Any payloads written must be less than
+ *		or equal to this size.  Payloads exceeding this size will be
+ *		dropped by 'nw_ethernet_channel_send()'.
+ *
+ * @param ethernet_channel
+ *		The ethernet_channel object.
+ *
+ * @result
+ *		Returns a payload size based on the current MTU of the channel.
+ */
+API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
+uint32_t
+nw_ethernet_channel_get_maximum_payload_size(nw_ethernet_channel_t ethernet_channel);
 
 /*!
  * @function nw_ethernet_channel_start
@@ -265,7 +316,10 @@ typedef void (^nw_ethernet_channel_send_completion_t)(_Nullable nw_error_t error
  *		An Ethernet payload to send.
  *
  * @param vlan_tag
- *      The vlan tag of the frame, 0 if there is no vlan tag.
+ *      The vlan tag of the frame.  If vlan_tag is specified, the 802.1Q tag will be included.
+ *      TPID will be set to 0x8100 followed by the specified 16-bit vlan_tag (only the highest
+ *      3-bit class of service field is supported.  The remaining 13 bits must be set to zero).
+ *      Pass 0 to omit the vlan tag for this frame.
  *
  * @param remote_address
  *		Remote Ethernet address for this Ethernet frame.  This is a required parameter.

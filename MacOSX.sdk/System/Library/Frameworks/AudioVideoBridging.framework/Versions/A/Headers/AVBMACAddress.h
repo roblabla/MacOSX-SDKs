@@ -2,7 +2,7 @@
 //  AVBMACAddress.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2011-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@class		AVBMACAddress
 	@abstract	AVBMACAddress is a class for holding and representing an Ethernet MAC Address.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVBMACAddress : NSObject <NSCopying>
 {
 	@private

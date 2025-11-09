@@ -12,7 +12,7 @@
 #import <UIKit/UIKitDefines.h>
 
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*
  UIGraphicsRendererFormat is an object that describes the particular properties of the
@@ -65,7 +65,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0))
 @property (nonatomic, readonly) BOOL allowsImageOutput; // If YES, this renderer may be used to generate CGImageRefs.
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIGraphicsRenderer.h>

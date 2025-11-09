@@ -2,7 +2,7 @@
 //  Virtualization.h
 //  Virtualization
 //
-//  Copyright © 2019-2021 Apple Inc. All rights reserved.
+//  Copyright © 2019-2022 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZAudioDeviceConfiguration.h>
@@ -10,22 +10,28 @@
 #import <Virtualization/VZAudioOutputStreamSink.h>
 #import <Virtualization/VZBridgedNetworkDeviceAttachment.h>
 #import <Virtualization/VZBridgedNetworkInterface.h>
+#import <Virtualization/VZConsoleDevice.h>
+#import <Virtualization/VZConsoleDeviceConfiguration.h>
 #import <Virtualization/VZDefines.h>
 #import <Virtualization/VZDirectoryShare.h>
 #import <Virtualization/VZDirectorySharingDevice.h>
 #import <Virtualization/VZDirectorySharingDeviceConfiguration.h>
 #import <Virtualization/VZDiskImageStorageDeviceAttachment.h>
+#import <Virtualization/VZEFIBootLoader.h>
+#import <Virtualization/VZEFIVariableStore.h>
 #import <Virtualization/VZEntropyDeviceConfiguration.h>
 #import <Virtualization/VZError.h>
 #import <Virtualization/VZFileHandleNetworkDeviceAttachment.h>
 #import <Virtualization/VZFileHandleSerialPortAttachment.h>
 #import <Virtualization/VZFileSerialPortAttachment.h>
+#import <Virtualization/VZGenericMachineIdentifier.h>
 #import <Virtualization/VZGenericPlatformConfiguration.h>
 #import <Virtualization/VZGraphicsDeviceConfiguration.h>
 #import <Virtualization/VZHostAudioInputStreamSource.h>
 #import <Virtualization/VZHostAudioOutputStreamSink.h>
 #import <Virtualization/VZKeyboardConfiguration.h>
 #import <Virtualization/VZLinuxBootLoader.h>
+#import <Virtualization/VZLinuxRosettaDirectoryShare.h>
 #import <Virtualization/VZMACAddress.h>
 #import <Virtualization/VZMacAuxiliaryStorage.h>
 #import <Virtualization/VZMacGraphicsDeviceConfiguration.h>
@@ -36,7 +42,9 @@
 #import <Virtualization/VZMacOSConfigurationRequirements.h>
 #import <Virtualization/VZMacOSInstaller.h>
 #import <Virtualization/VZMacOSRestoreImage.h>
+#import <Virtualization/VZMacOSVirtualMachineStartOptions.h>
 #import <Virtualization/VZMacPlatformConfiguration.h>
+#import <Virtualization/VZMacTrackpadConfiguration.h>
 #import <Virtualization/VZMemoryBalloonDevice.h>
 #import <Virtualization/VZMemoryBalloonDeviceConfiguration.h>
 #import <Virtualization/VZMultipleDirectoryShare.h>
@@ -51,15 +59,25 @@
 #import <Virtualization/VZSingleDirectoryShare.h>
 #import <Virtualization/VZSocketDevice.h>
 #import <Virtualization/VZSocketDeviceConfiguration.h>
+#import <Virtualization/VZSpiceAgentPortAttachment.h>
 #import <Virtualization/VZStorageDeviceAttachment.h>
 #import <Virtualization/VZStorageDeviceConfiguration.h>
 #import <Virtualization/VZUSBKeyboardConfiguration.h>
+#import <Virtualization/VZUSBMassStorageDeviceConfiguration.h>
 #import <Virtualization/VZUSBScreenCoordinatePointingDeviceConfiguration.h>
 #import <Virtualization/VZVirtioBlockDeviceConfiguration.h>
+#import <Virtualization/VZVirtioConsoleDevice.h>
+#import <Virtualization/VZVirtioConsoleDeviceConfiguration.h>
 #import <Virtualization/VZVirtioConsoleDeviceSerialPortConfiguration.h>
+#import <Virtualization/VZVirtioConsolePort.h>
+#import <Virtualization/VZVirtioConsolePortArray.h>
+#import <Virtualization/VZVirtioConsolePortConfiguration.h>
+#import <Virtualization/VZVirtioConsolePortConfigurationArray.h>
 #import <Virtualization/VZVirtioEntropyDeviceConfiguration.h>
 #import <Virtualization/VZVirtioFileSystemDevice.h>
 #import <Virtualization/VZVirtioFileSystemDeviceConfiguration.h>
+#import <Virtualization/VZVirtioGraphicsDeviceConfiguration.h>
+#import <Virtualization/VZVirtioGraphicsScanoutConfiguration.h>
 #import <Virtualization/VZVirtioNetworkDeviceConfiguration.h>
 #import <Virtualization/VZVirtioSocketConnection.h>
 #import <Virtualization/VZVirtioSocketDevice.h>
@@ -74,4 +92,5 @@
 #import <Virtualization/VZVirtualMachine.h>
 #import <Virtualization/VZVirtualMachineConfiguration.h>
 #import <Virtualization/VZVirtualMachineDelegate.h>
+#import <Virtualization/VZVirtualMachineStartOptions.h>
 #import <Virtualization/VZVirtualMachineView.h>

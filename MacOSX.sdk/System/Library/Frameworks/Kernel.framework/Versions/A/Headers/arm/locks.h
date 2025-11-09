@@ -29,12 +29,13 @@
 #ifndef _ARM_LOCKS_H_
 #define _ARM_LOCKS_H_
 
-#include <kern/kern_types.h>
+
+#include <kern/lock_types.h>
 
 
-typedef struct __lck_spin_t__   lck_spin_t;
 
-typedef struct __lck_mtx_t__    lck_mtx_t;
+typedef struct __lck_spin_t__           lck_spin_t;
+typedef struct __lck_mtx_t__            lck_mtx_t;
+typedef struct __lck_mtx_ext_t__        lck_mtx_ext_t;
 
-
-#endif  /* _ARM_LOCKS_H_ */
+#endif /* _ARM_LOCKS_H_ */

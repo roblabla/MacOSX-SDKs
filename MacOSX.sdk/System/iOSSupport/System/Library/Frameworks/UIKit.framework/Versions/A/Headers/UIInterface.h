@@ -13,7 +13,7 @@
 
 // for UINavigationBar and UIToolBar
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UIBarStyle) {
     UIBarStyleDefault          = 0,
@@ -80,6 +80,13 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceActiveAppearance) {
     UIUserInterfaceActiveAppearanceInactive,
     UIUserInterfaceActiveAppearanceActive,
 } API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+
+typedef NS_ENUM(NSInteger, UINSToolbarItemPresentationSize) {
+    UINSToolbarItemPresentationSizeUnspecified = -1,
+    UINSToolbarItemPresentationSizeRegular = 0,
+    UINSToolbarItemPresentationSizeSmall = 1,
+    UINSToolbarItemPresentationSizeLarge = 3
+} API_AVAILABLE(macCatalyst(16.0));
 
 // System colors
 
@@ -246,7 +253,7 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceActiveAppearance) {
 @property(class, nonatomic, readonly) CGFloat systemMinimumFontSize API_UNAVAILABLE(macos, ios, tvos, watchos);
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIInterface.h>

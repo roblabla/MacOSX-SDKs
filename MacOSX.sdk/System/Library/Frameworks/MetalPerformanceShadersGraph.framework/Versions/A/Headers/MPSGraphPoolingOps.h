@@ -262,6 +262,42 @@ MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), tvos(15.3));
                                                 descriptor:(MPSGraphPooling2DOpDescriptor *) descriptor
                                                       name:(NSString * _Nullable) name;
 
+/*!
+ *  @abstract   MaxPool2D Gradient API
+ *  @param      gradient          Input gradient tensor
+ *  @param      indices            Indices tensor returned from maxPooling2DReturnIndicesWithSourceTensor API
+ *  @param      outputShape   shape of the destination gradient
+ *  @param      descriptor      See corresponding property above.
+ *  @return     Destination gradient tensor
+ *  @discussion MaxPool2D gradient is computed efficiently by reusing the indices from the forward API instead of recomputing them.
+ *              The descriptor must set returnIndicesMode and returnIndicesDataType to the same value as that set by the forward pass
+ */
+-(MPSGraphTensor *) maxPooling2DGradientWithGradientTensor:(MPSGraphTensor *) gradient
+                                             indicesTensor:(MPSGraphTensor *) indices
+                                               outputShape:(MPSShape*) outputShape
+                                               descriptor:(MPSGraphPooling2DOpDescriptor *) descriptor
+                                                     name:(NSString * _Nullable) name;
+MPS_SWIFT_NAME( maxPooling2DGradient(gradient:indices:outputShape:descriptor:name:))
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
+
+/*!
+ *  @abstract   MaxPool2D Gradient API
+ *  @param      gradient          Input gradient tensor
+ *  @param      indices            Indices tensor returned from maxPooling2DReturnIndicesWithSourceTensor API
+ *  @param      outputShape   shape of the destination gradient
+ *  @param      descriptor      See corresponding property above.
+ *  @return     Destination gradient tensor
+ *  @discussion MaxPool2D gradient is computed efficiently by reusing the indices from the forward API instead of recomputing them.
+ *              The descriptor must set returnIndicesMode and returnIndicesDataType to the same value as that set by the forward pass
+ */
+-(MPSGraphTensor *) maxPooling2DGradientWithGradientTensor:(MPSGraphTensor *) gradient
+                                             indicesTensor:(MPSGraphTensor *) indices
+                                         outputShapeTensor:(MPSGraphTensor*) outputShape
+                                               descriptor:(MPSGraphPooling2DOpDescriptor *) descriptor
+                                                     name:(NSString * _Nullable) name;
+MPS_SWIFT_NAME( maxPooling2DGradient(gradient:indices:outputShape:descriptor:name:))
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
+
 -(MPSGraphTensor *) avgPooling2DWithSourceTensor:(MPSGraphTensor *) source
                                       descriptor:(MPSGraphPooling2DOpDescriptor *) descriptor
                                             name:(NSString * _Nullable) name;
@@ -299,6 +335,44 @@ MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), tvos(15.3));
                                                       name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( maxPooling4DGradient(_:source:descriptor:name:))
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+/*!
+ *  @abstract   MaxPool4D Gradient API
+ *  @param      gradient          Input gradient tensor
+ *  @param      indices            Indices tensor returned from maxPooling4DReturnIndicesWithSourceTensor API
+ *  @param      outputShape   Shape of source tensor
+ *  @param      descriptor      See corresponding property above.
+ *  @return     Destination gradient tensor
+ *  @discussion MaxPool4D gradient is computed efficiently by reusing the indices from the forward API instead of recomputing them.
+ *              The descriptor must set returnIndicesMode and returnIndicesDataType to the same value as that set by the forward pass
+ *              This API should be used for NCHW and NHWC layouts
+ */
+-(MPSGraphTensor *) maxPooling4DGradientWithGradientTensor:(MPSGraphTensor *) gradient
+                                             indicesTensor:(MPSGraphTensor *) indices
+                                               outputShape:(MPSShape*) outputShape
+                                               descriptor:(MPSGraphPooling4DOpDescriptor *) descriptor
+                                                     name:(NSString * _Nullable) name;
+MPS_SWIFT_NAME( maxPooling4DGradient(gradient:indices:outputShape:descriptor:name:))
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
+
+/*!
+ *  @abstract   MaxPool4D Gradient API
+ *  @param      gradient          Input gradient tensor
+ *  @param      indices            Indices tensor returned from maxPooling4DReturnIndicesWithSourceTensor API
+ *  @param      outputShape   Shape of source tensor
+ *  @param      descriptor      See corresponding property above.
+ *  @return     Destination gradient tensor
+ *  @discussion MaxPool4D gradient is computed efficiently by reusing the indices from the forward API instead of recomputing them.
+ *              The descriptor must set returnIndicesMode and returnIndicesDataType to the same value as that set by the forward pass
+ *              This API should be used for NCHW and NHWC layouts
+ */
+-(MPSGraphTensor *) maxPooling4DGradientWithGradientTensor:(MPSGraphTensor *) gradient
+                                             indicesTensor:(MPSGraphTensor *) indices
+                                         outputShapeTensor:(MPSGraphTensor*) outputShape
+                                               descriptor:(MPSGraphPooling4DOpDescriptor *) descriptor
+                                                     name:(NSString * _Nullable) name;
+MPS_SWIFT_NAME( maxPooling4DGradient(gradient:indices:outputShape:descriptor:name:))
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
 -(MPSGraphTensor *) avgPooling4DWithSourceTensor:(MPSGraphTensor *) source
                                       descriptor:(MPSGraphPooling4DOpDescriptor *) descriptor

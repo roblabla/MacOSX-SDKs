@@ -4,28 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4543E78F-5D99-397F-9F02-497AF17F7B1C
+    value:           78938B8E-B656-362B-8470-A813665B646B
   - target:          x86_64-maccatalyst
-    value:           4543E78F-5D99-397F-9F02-497AF17F7B1C
+    value:           78938B8E-B656-362B-8470-A813665B646B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CDA2E8F0-016E-3313-96A7-59F36DE9DA6E
+    value:           D2980468-D33B-30BC-A4DA-EA18F6CE16F7
   - target:          arm64e-maccatalyst
-    value:           CDA2E8F0-016E-3313-96A7-59F36DE9DA6E
+    value:           D2980468-D33B-30BC-A4DA-EA18F6CE16F7
 install-name:    '/System/Library/PrivateFrameworks/AggregateDictionary.framework/Versions/A/AggregateDictionary'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ADClientAddValueForScalarKey, _ADClientBatchKeys, _ADClientCheckpoint, 
                        _ADClientClearDistributionKey, _ADClientClearScalarKey, _ADClientCommit, 
-                       _ADClientDayChanged, _ADClientDebug, _ADClientGetLogsMessages, 
                        _ADClientIsEnabled, _ADClientPushValueForDistributionKey, 
-                       _ADClientSendBarrier, _ADClientSetLogsMessages, _ADClientSetValueForDistributionKey, 
-                       _ADClientSetValueForScalarKey, _ADClientSignificantTimeChanged, 
-                       _ADDatabaseUtilitiesCleanUpCorruption, _ADDaysSince1970, _ADIsInternalDevice, 
-                       _ADMonotonicTimeGetCurrent, _ADPushTimeIntervalForDistributionKeySinceStartTime, 
-                       _ADPushTimeIntervalForDistributionKeyTimingBlock ]
+                       _ADClientSetValueForDistributionKey, _ADClientSetValueForScalarKey, 
+                       _ADClientSignificantTimeChanged, _ADDaysSince1970, _ADMonotonicTimeGetCurrent, 
+                       _ADPushTimeIntervalForDistributionKeySinceStartTime, _ADPushTimeIntervalForDistributionKeyTimingBlock ]
 ...

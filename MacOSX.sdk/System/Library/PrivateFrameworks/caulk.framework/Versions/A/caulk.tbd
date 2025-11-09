@@ -4,21 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0B849791-3A62-33D1-8CF1-9C612A9D8E18
+    value:           43ED8C13-59DF-3C8D-B4D2-AEE44E4939B9
   - target:          x86_64-maccatalyst
-    value:           0B849791-3A62-33D1-8CF1-9C612A9D8E18
+    value:           43ED8C13-59DF-3C8D-B4D2-AEE44E4939B9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           23D0D7CE-CB87-35F3-9C15-943BD8F6645A
+    value:           445D1341-52C5-3468-BA85-F01410317744
   - target:          arm64e-maccatalyst
-    value:           23D0D7CE-CB87-35F3-9C15-943BD8F6645A
+    value:           445D1341-52C5-3468-BA85-F01410317744
 install-name:    '/System/Library/PrivateFrameworks/caulk.framework/Versions/A/caulk'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
+    weak-symbols:    [ __ZTIFPvmmE, __ZTIN5caulk10concurrent7message5queueE, __ZTIPFPvmmE, 
+                       __ZTSFPvmmE, __ZTSN5caulk10concurrent7message5queueE, __ZTSPFPvmmE ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN5caulk10concurrent7messageD0Ev, __ZN5caulk10concurrent7messageD1Ev, 
                        __ZN5caulk10concurrent7messageD2Ev, __ZN5caulk10concurrent9messenger20shared_high_priorityEv, 
                        __ZN5caulk10concurrent9messenger23shared_logging_priorityEv, 
@@ -43,7 +46,10 @@ exports:
                        __ZN5caulk22shared_semaphore_mutex13unlock_sharedEv, __ZN5caulk22shared_semaphore_mutex15try_lock_sharedEv, 
                        __ZN5caulk22shared_semaphore_mutex4lockEv, __ZN5caulk22shared_semaphore_mutex6unlockEv, 
                        __ZN5caulk22shared_semaphore_mutex8try_lockEv, __ZN5caulk22shared_semaphore_mutexD1Ev, 
-                       __ZN5caulk22shared_semaphore_mutexD2Ev, __ZN5caulk3ipc21synchronous_messenger13mapped_memory5resetEv, 
+                       __ZN5caulk22shared_semaphore_mutexD2Ev, __ZN5caulk3ipc13mapped_memory5resetEv, 
+                       __ZN5caulk3ipc13mapped_memoryC1ERKNS_4mach10xpc_objectE, __ZN5caulk3ipc13mapped_memoryC1Emi, 
+                       __ZN5caulk3ipc13mapped_memoryC2ERKNS_4mach10xpc_objectE, __ZN5caulk3ipc13mapped_memoryC2Emi, 
+                       __ZN5caulk3ipc21synchronous_messenger13mapped_memory5resetEv, 
                        __ZN5caulk3ipc21synchronous_messenger13mapped_memoryC1ERKNS_4mach10xpc_objectE, 
                        __ZN5caulk3ipc21synchronous_messenger13mapped_memoryC1Emi, 
                        __ZN5caulk3ipc21synchronous_messenger13mapped_memoryC2ERKNS_4mach10xpc_objectE, 
@@ -65,11 +71,13 @@ exports:
                        __ZN5caulk3ipc21synchronous_messenger18eventlink_receiver4stopEd, 
                        __ZN5caulk3ipc21synchronous_messenger18eventlink_receiver5startEdRKNS_6thread10attributesE, 
                        __ZN5caulk3ipc21synchronous_messenger18eventlink_receiver5startEdRKNS_6thread10attributesENS_4mach12os_workgroupE, 
+                       __ZN5caulk3ipc21synchronous_messenger18eventlink_receiver5startEdRKNS_6thread10attributesENS_4mach20os_workgroup_managedE, 
                        __ZN5caulk3ipc21synchronous_messenger18semaphore_receiver22ingest_connection_infoERKNS_4mach10xpc_objectE, 
                        __ZN5caulk3ipc21synchronous_messenger18semaphore_receiver26simulate_crash_for_testingEd, 
                        __ZN5caulk3ipc21synchronous_messenger18semaphore_receiver4stopEd, 
                        __ZN5caulk3ipc21synchronous_messenger18semaphore_receiver5startEdRKNS_6thread10attributesE, 
                        __ZN5caulk3ipc21synchronous_messenger18semaphore_receiver5startEdRKNS_6thread10attributesENS_4mach12os_workgroupE, 
+                       __ZN5caulk3ipc21synchronous_messenger18semaphore_receiver5startEdRKNS_6thread10attributesENS_4mach20os_workgroup_managedE, 
                        __ZN5caulk3xpc22reply_watchdog_factory10make_timerEi, __ZN5caulk3xpc22reply_watchdog_factory5init2EiNSt3__18functionIFvvEEE, 
                        __ZN5caulk3xpc22reply_watchdog_factoryC1EiNSt3__18functionIFvvEEE, 
                        __ZN5caulk3xpc22reply_watchdog_factoryC1Ev, __ZN5caulk3xpc22reply_watchdog_factoryC2EiNSt3__18functionIFvvEEE, 
@@ -87,11 +95,20 @@ exports:
                        __ZN5caulk4mach12os_workgroup4makeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN5caulk4mach12os_workgroup4makeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEj, 
                        __ZN5caulk4mach12os_workgroupD0Ev, __ZN5caulk4mach12os_workgroupD1Ev, 
-                       __ZN5caulk4mach12os_workgroupD2Ev, __ZN5caulk4mach21os_workgroup_interval21make_with_workload_idERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_28os_workgroup_interval_type_t, 
+                       __ZN5caulk4mach12os_workgroupD2Ev, __ZN5caulk4mach20os_workgroup_managed21make_with_workload_idERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_j, 
+                       __ZN5caulk4mach20os_workgroup_managed4joinEv, __ZN5caulk4mach20os_workgroup_managed4makeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEj, 
+                       __ZN5caulk4mach20os_workgroup_managed5leaveEv, __ZN5caulk4mach20os_workgroup_managedD0Ev, 
+                       __ZN5caulk4mach20os_workgroup_managedD1Ev, __ZN5caulk4mach20os_workgroup_managedD2Ev, 
+                       __ZN5caulk4mach21os_workgroup_interval21make_with_workload_idERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_28os_workgroup_interval_type_t, 
                        __ZN5caulk4mach21os_workgroup_interval4makeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE28os_workgroup_interval_type_t, 
                        __ZN5caulk4mach21os_workgroup_intervalD0Ev, __ZN5caulk4mach21os_workgroup_intervalD1Ev, 
                        __ZN5caulk4mach21os_workgroup_intervalD2Ev, __ZN5caulk4mach28find_unused_vm_address_rangeEmm, 
-                       __ZN5caulk4mach6thread13get_qos_classEP17_opaque_pthread_t, 
+                       __ZN5caulk4mach29os_workgroup_interval_managed15update_deadlineEy, 
+                       __ZN5caulk4mach29os_workgroup_interval_managed21make_with_workload_idERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_28os_workgroup_interval_type_t, 
+                       __ZN5caulk4mach29os_workgroup_interval_managed4makeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE28os_workgroup_interval_type_t, 
+                       __ZN5caulk4mach29os_workgroup_interval_managed5startEyy, __ZN5caulk4mach29os_workgroup_interval_managed6finishEv, 
+                       __ZN5caulk4mach29os_workgroup_interval_managedD0Ev, __ZN5caulk4mach29os_workgroup_interval_managedD1Ev, 
+                       __ZN5caulk4mach29os_workgroup_interval_managedD2Ev, __ZN5caulk4mach6thread13get_qos_classEP17_opaque_pthread_t, 
                        __ZN5caulk4mach6thread17get_base_priorityEP17_opaque_pthread_t, 
                        __ZN5caulk4mach6thread22get_scheduled_priorityEP17_opaque_pthread_t, 
                        __ZN5caulk4mach6thread8get_nameEP17_opaque_pthread_t, __ZN5caulk4mach7details16retain_os_objectEPv, 
@@ -115,17 +132,17 @@ exports:
                        __ZN5caulk4mach9semaphoreD1Ev, __ZN5caulk4mach9semaphoreD2Ev, 
                        __ZN5caulk4mach9semaphoreaSEOS1_, __ZN5caulk5alloc14base_allocator3logEv, 
                        __ZN5caulk5alloc14page_allocator10deallocateENS0_5blockEm, 
+                       __ZN5caulk5alloc14page_allocator11advise_freeENS0_5blockE, 
                        __ZN5caulk5alloc14page_allocator8allocateEmm, __ZN5caulk5alloc15memory_resourceD0Ev, 
                        __ZN5caulk5alloc15memory_resourceD1Ev, __ZN5caulk5alloc15memory_resourceD2Ev, 
                        __ZN5caulk5alloc16malloc_allocator10deallocateENS0_5blockEm, 
                        __ZN5caulk5alloc16malloc_allocator8allocateEmm, __ZN5caulk5alloc16malloc_allocatorC1EP14_malloc_zone_t, 
-                       __ZN5caulk5alloc16malloc_allocatorC2EP14_malloc_zone_t, __ZN5caulk5alloc20get_default_resourceEv, 
-                       __ZN5caulk5alloc22guarded_page_allocator10deallocateENS0_5blockEm, 
+                       __ZN5caulk5alloc16malloc_allocatorC2EP14_malloc_zone_t, __ZN5caulk5alloc17global_page_cache8instanceEv, 
+                       __ZN5caulk5alloc20get_default_resourceEv, __ZN5caulk5alloc22guarded_page_allocator10deallocateENS0_5blockEm, 
                        __ZN5caulk5alloc22guarded_page_allocator8allocateEmm, __ZN5caulk5alloc25get_audio_buffer_resourceEv, 
                        __ZN5caulk5alloc26get_realtime_safe_resourceEv, __ZN5caulk5alloc26set_realtime_safe_resourceEPNS0_15memory_resourceE, 
                        __ZN5caulk5alloc27create_malloc_zone_resourceEPKc, __ZN5caulk5alloc7details27caching_page_allocator_base10deallocateENS0_5blockEm, 
                        __ZN5caulk5alloc7details27caching_page_allocator_base11preallocateEmm, 
-                       __ZN5caulk5alloc7details27caching_page_allocator_base14deallocate_allEv, 
                        __ZN5caulk5alloc7details27caching_page_allocator_base20enable_preallocationEi, 
                        __ZN5caulk5alloc7details27caching_page_allocator_base20enable_preallocationEm, 
                        __ZN5caulk5alloc7details27caching_page_allocator_base7compactEm, 
@@ -146,10 +163,12 @@ exports:
                        __ZN5caulk7xstring6assignERKS0_, __ZN5caulk8platform12process_nameEi, 
                        __ZN5caulk9semaphore10timed_waitEd, __ZN5caulk9semaphore6signalEv, 
                        __ZN5caulk9semaphoreC1Ej, __ZN5caulk9semaphoreC2Ej, __ZN5caulk9semaphoreD1Ev, 
-                       __ZN5caulk9semaphoreD2Ev, __ZNK5caulk3ipc21synchronous_messenger13mapped_memory17create_xpc_objectEv, 
+                       __ZN5caulk9semaphoreD2Ev, __ZNK5caulk3ipc13mapped_memory17create_xpc_objectEv, 
+                       __ZNK5caulk3ipc21synchronous_messenger13mapped_memory17create_xpc_objectEv, 
                        __ZNK5caulk3ipc21synchronous_messenger16eventlink_sender22create_connection_infoEv, 
                        __ZNK5caulk3ipc21synchronous_messenger16semaphore_sender22create_connection_infoEv, 
                        __ZNK5caulk4mach12os_eventlink14copy_mach_portEv, __ZNK5caulk4mach12os_workgroup14copy_mach_portEv, 
+                       __ZNK5caulk4mach20os_workgroup_managed14copy_mach_portEv, 
                        __ZNK5caulk4mach6thread12priority_qos20apply_to_this_threadEv, 
                        __ZNK5caulk4mach6thread17priority_absolute20apply_to_this_threadEv, 
                        __ZNK5caulk4mach6thread17priority_realtime15apply_to_threadEP17_opaque_pthread_t, 
@@ -158,14 +177,18 @@ exports:
                        __ZNK5caulk5alloc16malloc_allocator8describeERNS0_14base_allocator9formatterE, 
                        __ZNK5caulk5alloc21malloc_zone_allocator8describeERNS0_14base_allocator9formatterE, 
                        __ZNK5caulk5alloc22guarded_page_allocator8describeERNS0_14base_allocator9formatterE, 
+                       __ZNK5caulk5alloc7details27caching_page_allocator_base10introspectEmRKNS0_12introspectorE, 
                        __ZNK5caulk5alloc7details27caching_page_allocator_base8describeERNS0_14base_allocator9formatterE, 
                        __ZNK5caulk7xstring20materialize_cfstringEv, __ZNK5caulk7xstring4sizeEv, 
                        __ZNK5caulk7xstring5c_strEv, __ZNK5caulk7xstring5emptyEv, 
                        __ZNK5caulk7xstring7compareERKS0_, __ZTIN5caulk10concurrent7messageE, 
-                       __ZTIN5caulk4mach12os_workgroupE, __ZTIN5caulk4mach21os_workgroup_intervalE, 
+                       __ZTIN5caulk4mach12os_workgroupE, __ZTIN5caulk4mach20os_workgroup_managedE, 
+                       __ZTIN5caulk4mach21os_workgroup_intervalE, __ZTIN5caulk4mach29os_workgroup_interval_managedE, 
                        __ZTIN5caulk5alloc15memory_resourceE, __ZTSN5caulk10concurrent7messageE, 
-                       __ZTSN5caulk4mach12os_workgroupE, __ZTSN5caulk4mach21os_workgroup_intervalE, 
+                       __ZTSN5caulk4mach12os_workgroupE, __ZTSN5caulk4mach20os_workgroup_managedE, 
+                       __ZTSN5caulk4mach21os_workgroup_intervalE, __ZTSN5caulk4mach29os_workgroup_interval_managedE, 
                        __ZTSN5caulk5alloc15memory_resourceE, __ZTVN5caulk10concurrent7messageE, 
-                       __ZTVN5caulk4mach12os_workgroupE, __ZTVN5caulk4mach21os_workgroup_intervalE, 
+                       __ZTVN5caulk4mach12os_workgroupE, __ZTVN5caulk4mach20os_workgroup_managedE, 
+                       __ZTVN5caulk4mach21os_workgroup_intervalE, __ZTVN5caulk4mach29os_workgroup_interval_managedE, 
                        __ZTVN5caulk5alloc15memory_resourceE ]
 ...

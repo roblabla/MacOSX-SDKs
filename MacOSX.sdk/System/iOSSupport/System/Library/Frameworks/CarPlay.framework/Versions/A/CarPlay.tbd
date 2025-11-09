@@ -3,17 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           B08526CB-9E2C-3606-9FCD-A23C7CAD0484
+    value:           25B88EA3-4445-3EF9-A61E-245BD35BAEDC
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           2C4F77E5-9062-33D1-A835-E5759E54D3E7
+    value:           9E0F06A0-31B8-3A2F-8F91-0650D9402E2E
 install-name:    '/System/iOSSupport/System/Library/Frameworks/CarPlay.framework/Versions/A/CarPlay'
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _CPButtonMaximumImageSize, _CPColorMeetsContrastRequirement, 
                        _CPContrastRatioForColors, _CPContrastingColorForColor, _CPCurrentProcessHasAudioEntitlement, 
                        _CPCurrentProcessHasChargingEntitlement, _CPCurrentProcessHasCommunicationEntitlement, 
+                       _CPCurrentProcessHasDrivingTaskEntitlement, _CPCurrentProcessHasFuelingEntitlement, 
                        _CPCurrentProcessHasMapsEntitlement, _CPCurrentProcessHasParkingEntitlement, 
                        _CPCurrentProcessHasPublicSafetyEntitlement, _CPCurrentProcessHasQuickOrderingEntitlement, 
                        _CPCurrentProcessHasTemplateEntitlement, _CPDistanceUnitsFromNSUnitLength, 
@@ -31,6 +32,7 @@ exports:
                        _NSUnitLengthFromCPDistanceUnits, _kCPControlEnabledKey, _kCPControlIdentifierKey, 
                        _kCPControlImageSetKey, _kCPControlTitleKey, _kCPSAudioEntitlementKey, 
                        _kCPSChargingEntitlementKey, _kCPSCommunicationEntitlementKey, 
+                       _kCPSDrivingTaskEntitlementKey, _kCPSFuelingEntitlementKey, 
                        _kCPSMapsEntitlementKey, _kCPSParkingEntitlementKey, _kCPSPublicSafetyEntitlementKey, 
                        _kCPSQuickOrderingEntitlementKey ]
     objc-classes:    [ CPAccNavInfoType, CPAccNavParam, CPAccNavParamKey, CPAccNavUpdate, 

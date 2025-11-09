@@ -11,7 +11,7 @@
 #import <UIKit/UISceneDefinitions.h>
 #import <UIKit/UIResponder.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UISceneSession, UISceneConnectionOptions, UIOpenURLContext, UISceneOpenExternalURLOptions, UISceneActivationConditions;
 @protocol UISceneDelegate;
@@ -107,7 +107,7 @@ UIKIT_EXTERN NSNotificationName const UISceneWillDeactivateNotification API_AVAI
 UIKIT_EXTERN NSNotificationName const UISceneWillEnterForegroundNotification API_AVAILABLE(ios(13.0));
 UIKIT_EXTERN NSNotificationName const UISceneDidEnterBackgroundNotification API_AVAILABLE(ios(13.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIScene.h>

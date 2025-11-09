@@ -28,7 +28,7 @@ OS_EXPORT
 OS_EXPORT
 @interface PHObjectChangeDetails<ObjectType: PHObject *> : NSObject
 
-// the object in the state before this change (returns the object that was passed in to changeDetailsForObject:)
+// returns the object that was passed in to changeDetailsForObject: (used to determine the changes to the object vs. the objectAfterChanges)
 @property (atomic, strong, readonly) ObjectType objectBeforeChanges;
 
 // the object in the state after this change

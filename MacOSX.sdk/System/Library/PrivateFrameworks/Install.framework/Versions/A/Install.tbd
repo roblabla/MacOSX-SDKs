@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           74A8C9F4-180C-3D04-8402-60D773AB43A6
+    value:           39CA9BB1-C9C3-3F30-91B3-D8B8DDD2E4BF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F7D48986-DACA-3887-9584-9BA216C8ABBF
+    value:           39BAB236-1036-3E37-A3F4-27F232650EDB
 install-name:    '/System/Library/PrivateFrameworks/Install.framework/Versions/A/Install'
 current-version: 1000
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AddMacroToPlistMacroList, _BundleIdentifierSearch, _BundleIdentifierSearchArgs, 
                        _BundleIdentifierValidationProc, _BundleVersionFilter, _BundleVersionFilterArgs, 
                        _CStringCopy, _CStringEqual, _CStringFree, _CStringHash, _CheckPathArgs, 
@@ -96,7 +96,7 @@ exports:
                        _IPAttr_WorkingDirectory, _InitCStringKeyDictionary, _InitialPaths, 
                        _InitialPathsArgs, _InstallVersionNumber, _InstallVersionString, 
                        _LaunchServicesLookup, _LaunchServicesLookupArgs, _MDQuery, 
-                       _MDQueryArgs, _NO_DATA, _NSErrorWithComponents, _NSHomeDirectoryWithSymlinksResolved, 
+                       _MDQueryArgs, _NSErrorWithComponents, _NSHomeDirectoryWithSymlinksResolved, 
                        _NSStringVersionSeparator, _NameSearch, _NameSearchArgs, _NewObjectFromTemplate, 
                        _NewObjectFromTemplateDict, _NewStringFromTemplateString, 
                        _ObjectMatchesMatchObject, _PFAction_postflight, _PFAction_postinstall, 
@@ -166,7 +166,7 @@ exports:
                        _instlogd_client_attach_to_file, _instlogd_client_detach_from_file, 
                        _instlogd_detach_from_file, _kInstallActionQuitProcess_ProcessName, 
                        _kInstallationCheckString, _kInstallerSizeTransformerKey, 
-                       _kPackagePathString, _kPostFlightString, _kPostInstallOldString, 
+                       _kNO_DATA, _kPackagePathString, _kPostFlightString, _kPostInstallOldString, 
                        _kPostInstallString, _kPostUpgradeOldString, _kPostUpgradeString, 
                        _kPreFlightString, _kPreInstallOldString, _kPreInstallString, 
                        _kPreUpgradeOldString, _kPreUpgradeString, _kReceiptPathString, 

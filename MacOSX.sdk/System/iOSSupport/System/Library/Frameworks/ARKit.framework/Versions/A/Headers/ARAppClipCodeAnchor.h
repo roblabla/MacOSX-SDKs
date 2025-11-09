@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, ARAppClipCodeURLDecodingState) {
 API_AVAILABLE(ios(14.3))
 @interface ARAppClipCodeAnchor : ARAnchor <ARTrackable>
 
+
 /**
 The URL encoded in this app clip code. Not nil only if urlDecodingState is .decoded.
  */

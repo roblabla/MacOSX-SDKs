@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B289964D-8218-36D9-8484-08DE907CAA42
+    value:           1C9E2FFE-57CD-3569-B8A2-FCA4B46497ED
   - target:          x86_64-maccatalyst
-    value:           B289964D-8218-36D9-8484-08DE907CAA42
+    value:           1C9E2FFE-57CD-3569-B8A2-FCA4B46497ED
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3D532991-A533-3FF7-AA02-B17B277AA523
+    value:           2C4D8E90-6997-3DBC-838A-0F7FAB1E7D15
   - target:          arm64e-maccatalyst
-    value:           3D532991-A533-3FF7-AA02-B17B277AA523
+    value:           2C4D8E90-6997-3DBC-838A-0F7FAB1E7D15
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/ATSHI.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ATSCopyAutoActivationConfirmDialogResult, _ATSIsApplicationReadyForAutoFontActivation ]
 ...

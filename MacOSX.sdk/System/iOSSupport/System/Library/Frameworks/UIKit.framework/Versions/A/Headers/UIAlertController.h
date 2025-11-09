@@ -10,7 +10,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UISpringLoadedInteractionSupporting.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UIAlertActionStyle) {
     UIAlertActionStyleDefault = 0,
@@ -22,6 +22,11 @@ typedef NS_ENUM(NSInteger, UIAlertControllerStyle) {
     UIAlertControllerStyleActionSheet = 0,
     UIAlertControllerStyleAlert
 } API_AVAILABLE(ios(8.0));
+
+typedef NS_ENUM(NSInteger, UIAlertControllerSeverity) {
+    UIAlertControllerSeverityDefault = 0,
+    UIAlertControllerSeverityCritical
+} API_AVAILABLE(ios(16.0));
 
 UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
 @interface UIAlertAction : NSObject <NSCopying>
@@ -52,6 +57,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
 
 @property (nonatomic, readonly) UIAlertControllerStyle preferredStyle;
 
+@property (nonatomic) UIAlertControllerSeverity severity API_AVAILABLE(ios(16.0));
+
 @end
 
 #if TARGET_OS_IOS
@@ -59,7 +66,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
 @end
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIAlertController.h>

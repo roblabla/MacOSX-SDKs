@@ -122,6 +122,14 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios, macos, tvos)
 + (BOOL)isAvailable;
 
 /*!
+ * @method version
+ * @discussion What version of movement disorder software is available on this platform.
+ * @return Returns the version number of the movement disorder software available on this platform, nil if not.
+ *         Format follows Major.Minor.Fix format (e.g. 1.0.0)
+ */
++ (NSString * _Nullable)version;
+
+/*!
  * @method authorizationStatus
  * @discussion Authorization status of movement disorder results for this user.
  * @return Returns the authorization status of movement disorder results for this user.

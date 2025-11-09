@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CE35A6CE-D856-3975-8D4F-D4C574369B4F
+    value:           177D38F8-21D8-3387-94CE-EE5FCF53888E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4D1E4AA9-464E-342F-9996-90ADAC565CA2
+    value:           76A4A410-D7CB-3992-8EBD-64BD3DFCA0F3
 install-name:    '/System/Library/Frameworks/Automator.framework/Versions/A/Automator'
 current-version: 0
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AMAcceptsKey, _AMActionLoaderServiceXPCInterface, _AMActionViewArrowHeight, 
                        _AMActionViewFullWidthPriority, _AMActionViewHorizontalBorderInset, 
                        _AMActionViewPortRadius, _AMActionViewResizableHeightConstraintPriority, 

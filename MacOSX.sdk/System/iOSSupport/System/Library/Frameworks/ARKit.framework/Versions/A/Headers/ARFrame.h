@@ -84,6 +84,11 @@ API_AVAILABLE(ios(11.0))
 @property (nonatomic, readonly) CVPixelBufferRef capturedImage;
 
 /**
+ A dictionary of EXIF metadata for the captured image.
+ */
+@property (nonatomic, strong, readonly) NSDictionary<NSString *, id> *exifData API_AVAILABLE(ios(16.0));
+
+/**
  A tileable texture that contains image noise matching the current camera streams
  noise properties.
  
@@ -168,12 +173,10 @@ API_AVAILABLE(ios(11.0))
  */
 @property (nonatomic, nullable, readonly) ARBody2D *detectedBody API_AVAILABLE(ios(13.0));
 
-
 /**
  The status of geo tracking.
  */
 @property (nonatomic, strong, nullable, readonly) ARGeoTrackingStatus *geoTrackingStatus API_AVAILABLE(ios(14.0));
-
 
 /**
  Scene depth data.

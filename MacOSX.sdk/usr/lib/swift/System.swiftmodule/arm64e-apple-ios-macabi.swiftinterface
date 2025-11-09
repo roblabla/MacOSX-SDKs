@@ -1,10 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
 // swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name System
-// swift-module-flags-ignorable: -user-module-version 21
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 23
 import Darwin
 import Swift
 import _Concurrency
+import _StringProcessing
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct FileDescriptor : Swift.RawRepresentable, Swift.Hashable, Swift.Codable {
   @_alwaysEmitIntoClient public let rawValue: Swift.CInt
@@ -298,7 +299,64 @@ extension System.FilePath {
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension Swift.String {
   public init(platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
+  @inlinable @_alwaysEmitIntoClient public init(platformString: [System.CInterop.PlatformChar]) {
+    guard let _ = platformString.firstIndex(of: 0) else {
+      fatalError(
+        "input of String.init(platformString:) must be null-terminated"
+      )
+    }
+    self = platformString.withUnsafeBufferPointer {
+      String(platformString: $0.baseAddress!)
+    }
+  }
+  @available(*, deprecated, message: "Use String.init(_ scalar: Unicode.Scalar)")
+  @inlinable @_alwaysEmitIntoClient public init(platformString: inout System.CInterop.PlatformChar) {
+    guard platformString == 0 else {
+      fatalError(
+        "input of String.init(platformString:) must be null-terminated"
+      )
+    }
+    self = ""
+  }
+  @available(*, deprecated, message: "Use a copy of the String argument")
+  @inlinable @_alwaysEmitIntoClient public init(platformString: Swift.String) {
+    if let nullLoc = platformString.firstIndex(of: "\0") {
+      self = String(platformString[..<nullLoc])
+    } else {
+      self = platformString
+    }
+  }
   public init?(validatingPlatformString platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
+  @inlinable @_alwaysEmitIntoClient public init?(validatingPlatformString platformString: [System.CInterop.PlatformChar]) {
+    guard let _ = platformString.firstIndex(of: 0) else {
+      fatalError(
+        "input of String.init(validatingPlatformString:) must be null-terminated"
+      )
+    }
+    guard let string = platformString.withUnsafeBufferPointer({
+      String(validatingPlatformString: $0.baseAddress!)
+    }) else {
+      return nil
+    }
+    self = string
+  }
+  @available(*, deprecated, message: "Use String(_ scalar: Unicode.Scalar)")
+  @inlinable @_alwaysEmitIntoClient public init?(validatingPlatformString platformString: inout System.CInterop.PlatformChar) {
+    guard platformString == 0 else {
+      fatalError(
+        "input of String.init(validatingPlatformString:) must be null-terminated"
+      )
+    }
+    self = ""
+  }
+  @available(*, deprecated, message: "Use a copy of the String argument")
+  @inlinable @_alwaysEmitIntoClient public init?(validatingPlatformString platformString: Swift.String) {
+    if let nullLoc = platformString.firstIndex(of: "\0") {
+      self = String(platformString[..<nullLoc])
+    } else {
+      self = platformString
+    }
+  }
   public func withPlatformString<Result>(_ body: (Swift.UnsafePointer<System.CInterop.PlatformChar>) throws -> Result) rethrows -> Result
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
@@ -378,7 +436,7 @@ extension System.FilePath.ComponentView : Swift.BidirectionalCollection {
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.RangeReplaceableCollection {
   public init()
-  public mutating func replaceSubrange<C>(_ subrange: Swift.Range<System.FilePath.ComponentView.Index>, with newElements: C) where C : Swift.Collection, C.Element == System.FilePath.ComponentView.Element
+  public mutating func replaceSubrange<C>(_ subrange: Swift.Range<System.FilePath.ComponentView.Index>, with newElements: C) where C : Swift.Collection, C.Element == System.FilePath.Component
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
@@ -928,6 +986,33 @@ extension System.FileDescriptor {
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public init(platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
+  @inlinable @_alwaysEmitIntoClient public init(platformString: [System.CInterop.PlatformChar]) {
+    guard let _ = platformString.firstIndex(of: 0) else {
+      fatalError(
+        "input of FilePath.init(platformString:) must be null-terminated"
+      )
+    }
+    self = platformString.withUnsafeBufferPointer {
+      FilePath(platformString: $0.baseAddress!)
+    }
+  }
+  @available(*, deprecated, message: "Use FilePath.init(_ scalar: Unicode.Scalar)")
+  @inlinable @_alwaysEmitIntoClient public init(platformString: inout System.CInterop.PlatformChar) {
+    guard platformString == 0 else {
+      fatalError(
+        "input of FilePath.init(platformString:) must be null-terminated"
+      )
+    }
+    self = FilePath()
+  }
+  @available(*, deprecated, message: "Use FilePath(_: String) to create a path from a String")
+  @inlinable @_alwaysEmitIntoClient public init(platformString: Swift.String) {
+    if let nullLoc = platformString.firstIndex(of: "\0") {
+      self = FilePath(String(platformString[..<nullLoc]))
+    } else {
+      self = FilePath(platformString)
+    }
+  }
   @_alwaysEmitIntoClient public func withPlatformString<Result>(_ body: (Swift.UnsafePointer<System.CInterop.PlatformChar>) throws -> Result) rethrows -> Result {
     // For backwards deployment, call withCString if available.
     return try withCString(body)
@@ -936,11 +1021,77 @@ extension System.FilePath {
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component {
   public init?(platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
+  @inlinable @_alwaysEmitIntoClient public init?(platformString: [System.CInterop.PlatformChar]) {
+    guard let _ = platformString.firstIndex(of: 0) else {
+      fatalError(
+        "input of FilePath.Component.init?(platformString:) must be null-terminated"
+      )
+    }
+    guard let component = platformString.withUnsafeBufferPointer({
+      FilePath.Component(platformString: $0.baseAddress!)
+    }) else {
+      return nil
+    }
+    self = component
+  }
+  @available(*, deprecated, message: "Use FilePath.Component.init(_ scalar: Unicode.Scalar)")
+  @inlinable @_alwaysEmitIntoClient public init?(platformString: inout System.CInterop.PlatformChar) {
+    guard platformString == 0 else {
+      fatalError(
+        "input of FilePath.Component.init?(platformString:) must be null-terminated"
+      )
+    }
+    return nil
+  }
+  @available(*, deprecated, message: "Use FilePath.Component.init(_: String)")
+  @inlinable @_alwaysEmitIntoClient public init?(platformString: Swift.String) {
+    let string: String
+    if let nullLoc = platformString.firstIndex(of: "\0") {
+      string = String(platformString[..<nullLoc])
+    } else {
+      string = platformString
+    }
+    guard let component = FilePath.Component(string) else { return nil }
+    self = component
+  }
   public func withPlatformString<Result>(_ body: (Swift.UnsafePointer<System.CInterop.PlatformChar>) throws -> Result) rethrows -> Result
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Root {
   public init?(platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
+  @inlinable @_alwaysEmitIntoClient public init?(platformString: [System.CInterop.PlatformChar]) {
+    guard let _ = platformString.firstIndex(of: 0) else {
+      fatalError(
+        "input of FilePath.Root.init?(platformString:) must be null-terminated"
+      )
+    }
+    guard let component = platformString.withUnsafeBufferPointer({
+      FilePath.Root(platformString: $0.baseAddress!)
+    }) else {
+      return nil
+    }
+    self = component
+  }
+  @available(*, deprecated, message: "Use FilePath.Root.init(_ scalar: Unicode.Scalar)")
+  @inlinable @_alwaysEmitIntoClient public init?(platformString: inout System.CInterop.PlatformChar) {
+    guard platformString == 0 else {
+      fatalError(
+        "input of FilePath.Root.init?(platformString:) must be null-terminated"
+      )
+    }
+    return nil
+  }
+  @available(*, deprecated, message: "Use FilePath.Root.init(_: String)")
+  @inlinable @_alwaysEmitIntoClient public init?(platformString: Swift.String) {
+    let string: String
+    if let nullLoc = platformString.firstIndex(of: "\0") {
+      string = String(platformString[..<nullLoc])
+    } else {
+      string = platformString
+    }
+    guard let root = FilePath.Root(string) else { return nil }
+    self = root
+  }
   public func withPlatformString<Result>(_ body: (Swift.UnsafePointer<System.CInterop.PlatformChar>) throws -> Result) rethrows -> Result
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
@@ -1046,7 +1197,14 @@ extension Swift.String {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FilePath {
+  @available(*, deprecated, renamed: "init(platformString:)")
   public init(cString: Swift.UnsafePointer<Swift.CChar>)
+  @available(*, deprecated, renamed: "init(platformString:)")
+  public init(cString: [Swift.CChar])
+  @available(*, deprecated, renamed: "init(platformString:)")
+  public init(cString: inout Swift.CChar)
+  @available(*, deprecated, renamed: "init(platformString:)")
+  public init(cString: Swift.String)
   public func withCString<Result>(_ body: (Swift.UnsafePointer<Swift.CChar>) throws -> Result) rethrows -> Result
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)

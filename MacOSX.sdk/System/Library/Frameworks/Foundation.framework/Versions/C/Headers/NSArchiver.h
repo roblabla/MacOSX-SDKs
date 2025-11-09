@@ -7,7 +7,7 @@
 
 @class NSString, NSData, NSMutableData, NSMutableDictionary, NSMutableArray;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /************		Archiving: Writing	****************/
 
@@ -96,4 +96,4 @@ API_DEPRECATED("Use NSKeyedUnarchiver instead", macos(10.0,10.13), ios(2.0,11.0)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

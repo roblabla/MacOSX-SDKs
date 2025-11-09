@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           996E2D86-1EF2-33F5-85B9-E9E2E1853920
+    value:           2126898B-DCB1-3222-A86B-964520AEE45D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B282C8D1-DE74-32AF-9EDC-761D8F115690
+    value:           8CE4ECF1-C762-3444-8FFD-296EBB29A57B
 install-name:    '/usr/lib/swift/libswiftSceneKit.dylib'
 current-version: 1.2
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftSceneKit.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftSceneKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftSceneKit.dylib', 

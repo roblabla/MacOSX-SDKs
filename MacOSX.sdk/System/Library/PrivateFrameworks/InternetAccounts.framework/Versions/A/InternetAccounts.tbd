@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6EBE649F-E6E4-3E64-9928-D9BEE06B7FE4
+    value:           B9A46BE0-657E-3F10-8D69-F2245C9A2812
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           87649732-5707-3C70-AD7C-3C550C5695F6
+    value:           88FB7B6D-B03C-3B5C-B6DD-C76485FF3656
 install-name:    '/System/Library/PrivateFrameworks/InternetAccounts.framework/Versions/A/InternetAccounts'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AOSAccountsFramework, _AOSShimAccountCopyProperty, _AOSShimAccountRefreshLoggedIn, 
                        _AOSShimCopyAccountIDFromMailAlias, _AOSShimCopyAccountType, 
                        _AOSShimCopyLoggedInAccount, _AOSShimGetStringConst, _AOSShimServiceCopyProperty, 

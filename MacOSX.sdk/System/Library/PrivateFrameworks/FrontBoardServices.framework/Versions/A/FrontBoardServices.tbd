@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B86DB4A6-BE6D-322A-9271-C4084E5DA905
+    value:           E8019FE7-1B77-3E38-A93E-42D010FF9D43
   - target:          x86_64-maccatalyst
-    value:           B86DB4A6-BE6D-322A-9271-C4084E5DA905
+    value:           E8019FE7-1B77-3E38-A93E-42D010FF9D43
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           11ABE2E0-B78A-3D10-B41A-9A50CA8CCF3A
+    value:           06CF4089-4176-334D-AC56-C21ADFB7D33C
   - target:          arm64e-maccatalyst
-    value:           11ABE2E0-B78A-3D10-B41A-9A50CA8CCF3A
+    value:           06CF4089-4176-334D-AC56-C21ADFB7D33C
 install-name:    '/System/Library/PrivateFrameworks/FrontBoardServices.framework/Versions/A/FrontBoardServices'
 current-version: 0
 reexported-libraries:
@@ -23,8 +23,8 @@ reexported-libraries:
     libraries:       [ '/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard', 
                        '/System/Library/PrivateFrameworks/BoardServices.framework/Versions/A/BoardServices' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FBApplicationDataStoreServiceIdentifier, _FBInstallTypeIsCloudDemoted, 
                        _FBLogAppDataStore, _FBLogAppLaunch, _FBLogCommon, _FBLogInterfaceOrientationObserver, 
                        _FBLogWatchdog, _FBLoggingSubsystem, _FBSActivateForEventOptionTypeBackgroundContentFetching, 
@@ -44,6 +44,7 @@ exports:
                        _FBSDebugOptionKeyExtensionBundleID, _FBSDebugOptionKeyExtensionPointID, 
                        _FBSDebugOptionKeyStandardErrorPath, _FBSDebugOptionKeyStandardOutPath, 
                        _FBSDebugOptionKeyWaitForDebugger, _FBSDisplayAttachmentDescription, 
+                       _FBSDisplayConnectionTypeDescription, _FBSDisplayConnectionTypeIsValid, 
                        _FBSDisplayGamutDescription, _FBSDisplayGamutFromCADisplayGamut, 
                        _FBSDisplayGamutIsValid, _FBSDisplayGamutToCADisplayGamut, 
                        _FBSDisplayHDRModeDescription, _FBSDisplayHDRModeFromCADisplayHDRMode, 
@@ -74,8 +75,9 @@ exports:
                        _FBSOpenApplicationOptionKeyLaunchOrigin, _FBSOpenApplicationOptionKeyPayloadAnnotation, 
                        _FBSOpenApplicationOptionKeyPayloadIsValid, _FBSOpenApplicationOptionKeyPayloadIsValid4LS, 
                        _FBSOpenApplicationOptionKeyPayloadOptions, _FBSOpenApplicationOptionKeyPayloadURL, 
-                       _FBSOpenApplicationOptionKeyPromptUnlockDevice, _FBSOpenApplicationOptionKeyServiceAvailabilityTimeout, 
-                       _FBSOpenApplicationOptionKeyUnlockDevice, _FBSOpenApplicationOptionKeyUserActivity4LS, 
+                       _FBSOpenApplicationOptionKeyPersona, _FBSOpenApplicationOptionKeyPromptUnlockDevice, 
+                       _FBSOpenApplicationOptionKeyServiceAvailabilityTimeout, _FBSOpenApplicationOptionKeyUnlockDevice, 
+                       _FBSOpenApplicationOptionKeyUserActivity4LS, _FBSOpenApplicationOptionPasteSharingToken, 
                        _FBSOpenApplicationServiceErrorCodeToString, _FBSOpenApplicationServiceErrorDomain, 
                        _FBSOpenApplicationWithNewScene, _FBSOrientationObserverInterestAll, 
                        _FBSOrientationObserverMessageKeyDuration, _FBSOrientationObserverMessageKeyOrientationInterest, 
@@ -138,34 +140,33 @@ exports:
                        FBSApplicationTrustFacade, FBSApplicationUninstallOptions, 
                        FBSBasicSceneAgent, FBSBasicSceneClientAgent, FBSBasicSceneHostAgent, 
                        FBSBundleInfo, FBSCAContextSceneLayer, FBSDataResetRequest, 
-                       FBSDisplayConfiguration, FBSDisplayConfigurationRequest, FBSDisplayIdentity, 
-                       FBSDisplayLayout, FBSDisplayLayoutElement, FBSDisplayLayoutMonitor, 
-                       FBSDisplayLayoutMonitorConfiguration, FBSDisplayLayoutPublisher, 
-                       FBSDisplayLayoutPublisherConfiguration, FBSDisplayLayoutTransitionContext, 
-                       FBSDisplayMode, FBSDisplayMonitor, FBSDisplaySource, FBSExtensionInfo, 
-                       FBSExternalSceneLayer, FBSKeyboardLayer, FBSKeyboardProxyLayer, 
-                       FBSLazyApplicationInfoProvider, FBSLegacySignatureValidationService, 
-                       FBSMutableDisplayConfigurationRequest, FBSMutableProcessExecutionStrategy, 
-                       FBSMutableSceneClientSettings, FBSMutableSceneDefinition, 
-                       FBSMutableSceneIdentity, FBSMutableSceneParameters, FBSMutableSceneSettings, 
-                       FBSOpenApplicationOptions, FBSOpenApplicationService, FBSOpenApplicationServiceSpecification, 
-                       FBSOrientationObserver, FBSOrientationObserverClient, FBSOrientationUpdate, 
-                       FBSProcess, FBSProcessAssertion, FBSProcessExecutionPolicy, 
-                       FBSProcessExecutionProvision, FBSProcessExecutionStrategy, 
-                       FBSProcessHandle, FBSProcessResourceProvision, FBSProcessTerminationRequest, 
-                       FBSProcessWatchdog, FBSProcessWatchdogPolicy, FBSProfileManager, 
-                       FBSScene, FBSSceneAction, FBSSceneActivitySession, FBSSceneClientIdentity, 
-                       FBSSceneClientSettings, FBSSceneClientSettingsDiff, FBSSceneClientSettingsDiffInspector, 
-                       FBSSceneDefinition, FBSSceneEvent, FBSSceneIdentity, FBSSceneIdentityToken, 
-                       FBSSceneLayer, FBSSceneMessage, FBSSceneParameters, FBSSceneSettings, 
-                       FBSSceneSettingsDiff, FBSSceneSettingsDiffInspector, FBSSceneSnapshotAction, 
-                       FBSSceneSnapshotContext, FBSSceneSnapshotRequest, FBSSceneSnapshotRequestAction, 
-                       FBSSceneSnapshotRequestHandle, FBSSceneSpecification, FBSSceneTransitionContext, 
-                       FBSSerialQueue, FBSServiceFacility, FBSServiceFacilityClient, 
-                       FBSSettingsDiff, FBSSettingsDiffInspector, FBSShutdownOptions, 
-                       FBSSignatureValidationService, FBSSystemAppProxy, FBSSystemService, 
-                       FBSSystemServiceSpecification, FBSUIApplicationLaunchResponse, 
-                       FBSUIApplicationWorkspace, FBSUIApplicationWorkspaceShim, 
+                       FBSDisplayConfiguration, FBSDisplayConfigurationBuilder, FBSDisplayConfigurationRequest, 
+                       FBSDisplayIdentity, FBSDisplayLayout, FBSDisplayLayoutElement, 
+                       FBSDisplayLayoutMonitor, FBSDisplayLayoutMonitorConfiguration, 
+                       FBSDisplayLayoutPublisher, FBSDisplayLayoutPublisherConfiguration, 
+                       FBSDisplayLayoutTransitionContext, FBSDisplayMode, FBSDisplayMonitor, 
+                       FBSDisplaySource, FBSExtensionInfo, FBSExternalSceneLayer, 
+                       FBSKeyboardLayer, FBSKeyboardProxyLayer, FBSLazyApplicationInfoProvider, 
+                       FBSLegacySignatureValidationService, FBSMutableDisplayConfigurationRequest, 
+                       FBSMutableProcessExecutionStrategy, FBSMutableSceneClientSettings, 
+                       FBSMutableSceneDefinition, FBSMutableSceneIdentity, FBSMutableSceneParameters, 
+                       FBSMutableSceneSettings, FBSOpenApplicationOptions, FBSOpenApplicationService, 
+                       FBSOpenApplicationServiceSpecification, FBSOrientationObserver, 
+                       FBSOrientationObserverClient, FBSOrientationUpdate, FBSProcess, 
+                       FBSProcessAssertion, FBSProcessExecutionPolicy, FBSProcessExecutionProvision, 
+                       FBSProcessExecutionStrategy, FBSProcessHandle, FBSProcessResourceProvision, 
+                       FBSProcessTerminationRequest, FBSProcessWatchdog, FBSProcessWatchdogPolicy, 
+                       FBSProfileManager, FBSScene, FBSSceneAction, FBSSceneActivitySession, 
+                       FBSSceneClientIdentity, FBSSceneClientSettings, FBSSceneClientSettingsDiff, 
+                       FBSSceneClientSettingsDiffInspector, FBSSceneDefinition, FBSSceneEvent, 
+                       FBSSceneIdentity, FBSSceneIdentityToken, FBSSceneLayer, FBSSceneMessage, 
+                       FBSSceneParameters, FBSSceneSettings, FBSSceneSettingsDiff, 
+                       FBSSceneSettingsDiffInspector, FBSSceneSnapshotAction, FBSSceneSnapshotContext, 
+                       FBSSceneSnapshotRequest, FBSSceneSnapshotRequestAction, FBSSceneSnapshotRequestHandle, 
+                       FBSSceneSpecification, FBSSceneTransitionContext, FBSSerialQueue, 
+                       FBSServiceFacility, FBSServiceFacilityClient, FBSSettingsDiff, 
+                       FBSSettingsDiffInspector, FBSShutdownOptions, FBSSignatureValidationService, 
+                       FBSSystemAppProxy, FBSSystemService, FBSSystemServiceSpecification, 
                        FBSWorkspace, FBSWorkspaceCreateSceneResponse, FBSWorkspaceDestroySceneResponse, 
                        FBSWorkspaceInitializationOptions, FBSWorkspaceResponse, FBSWorkspaceSceneRemnant, 
                        FBSWorkspaceSceneRequestOptions, FBSWorkspaceSceneUpdateResponse, 
@@ -187,22 +188,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           90DA7E21-38A7-3610-B225-78EB3287CC52
+    value:           A65C9658-404B-3680-AC51-27270FFB98F5
   - target:          x86_64-maccatalyst
-    value:           90DA7E21-38A7-3610-B225-78EB3287CC52
+    value:           A65C9658-404B-3680-AC51-27270FFB98F5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           426AFF92-1D58-39DC-B853-6CB62EFD4459
+    value:           DC185860-A15B-3BAB-B7E1-9160C3AA6FFF
   - target:          arm64e-maccatalyst
-    value:           426AFF92-1D58-39DC-B853-6CB62EFD4459
+    value:           DC185860-A15B-3BAB-B7E1-9160C3AA6FFF
 install-name:    '/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard'
 current-version: 0
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BSAbsoluteMachTimeNow, _BSAbsoluteTimeFromMachTime, _BSActionErrorDomain, 
                        _BSAffineTransformFromValue, _BSAppendVersionedPIDToStringAppendTarget, 
                        _BSAtomicGetFlag, _BSAtomicSetFlag, _BSAuditTokenForCurrentProcess, 
@@ -253,11 +254,12 @@ exports:
                        _BSFloatGreaterThanOrEqualToFloat, _BSFloatIsOne, _BSFloatIsZero, 
                        _BSFloatLessThanFloat, _BSFloatLessThanOrEqualToFloat, _BSFloatPowerOf2Ceil, 
                        _BSFloatRoundForScale, _BSFormattedTimeFromSeconds, _BSGetDeviceType, 
-                       _BSGetVersionedPID, _BSIntegerMapAllKeys, _BSIntegerMapContainsObjectForKey, 
-                       _BSIntegerMapCount, _BSIntegerMapDescription, _BSIntegerMapEnumerateKeysWithBlock, 
-                       _BSIntegerMapEnumerateWithBlock, _BSIntegerMapObjectForKey, 
-                       _BSIntegerMapRemoveAllObjects, _BSIntegerMapRemoveObjectForKey, 
-                       _BSIntegerMapSetObjectForKey, _BSIntegralTransform, _BSInterfaceOrientationDescription, 
+                       _BSGetVersionedPID, _BSIntegerMapAllKeys, _BSIntegerMapAllValues, 
+                       _BSIntegerMapContainsObjectForKey, _BSIntegerMapCount, _BSIntegerMapDescription, 
+                       _BSIntegerMapEnumerateKeysWithBlock, _BSIntegerMapEnumerateWithBlock, 
+                       _BSIntegerMapObjectForKey, _BSIntegerMapRemoveAllObjects, 
+                       _BSIntegerMapRemoveObjectForKey, _BSIntegerMapSetObjectForKey, 
+                       _BSIntegralTransform, _BSInterfaceOrientationDescription, 
                        _BSInterfaceOrientationIsLandscape, _BSInterfaceOrientationIsPortrait, 
                        _BSInterfaceOrientationIsValid, _BSInterfaceOrientationMaskDescription, 
                        _BSIntervalClip, _BSIntervalFractionForValue, _BSIntervalInterpolate, 
@@ -291,9 +293,8 @@ exports:
                        _BSRadiansToDegrees, _BSRectByLinearlyInterpolatingRects, 
                        _BSRectEqualToRect, _BSRectFromValue, _BSRectGetCenter, _BSRectRoundForScale, 
                        _BSRectUnit, _BSRectWithSize, _BSRunLoopPerformAfterCACommit, 
-                       _BSRunLoopPerformRelativeToCACommit, _BSSecTaskCopyEntitlementValue, 
-                       _BSSecTaskHasEntitlement, _BSSecureDecodeOfTypes, _BSSelfTaskHasEntitlement, 
-                       _BSSerializeArrayOfBSXPCEncodableObjectsToXPCDictionaryWithKey, 
+                       _BSRunLoopPerformRelativeToCACommit, _BSSecureDecodeOfTypes, 
+                       _BSSelfTaskHasEntitlement, _BSSerializeArrayOfBSXPCEncodableObjectsToXPCDictionaryWithKey, 
                        _BSSerializeArrayToXPCDictionaryWithKey, _BSSerializeBSXPCEncodableObjectToXPCDictionary, 
                        _BSSerializeBSXPCEncodableObjectToXPCDictionaryWithKey, _BSSerializeCFValueToXPCDictionaryWithKey, 
                        _BSSerializeCGFloatToXPCDictionaryWithKey, _BSSerializeCGPointToXPCDictionaryWithKey, 
@@ -306,22 +307,22 @@ exports:
                        _BSSettingFlagForBool, _BSSettingFlagIfYes, _BSSettingFlagIsExplicitNo, 
                        _BSSettingFlagIsYes, _BSSizeCeilForScale, _BSSizeEqualToSize, 
                        _BSSizeFromValue, _BSSizeGreaterThanOrEqualToSize, _BSSizeLessThanSize, 
-                       _BSSizeRoundForScale, _BSStackFrameInfoForAddresss, _BSStringFromBOOL, 
-                       _BSStringFromCGPoint, _BSStringFromCGRect, _BSStringFromCGSize, 
-                       _BSSystemHasCapability, _BSSystemRootDirectory, _BSSystemSharedDirectoryForCurrentProcess, 
-                       _BSSystemSharedDirectoryForIdentifier, _BSSystemSharedResourcesDirectoryForCurrentProcess, 
-                       _BSSystemSharedResourcesDirectoryForIdentifier, _BSTemporaryFileAtPath, 
-                       _BSTimeDifferenceFromMachTimeToMachTime, _BSTimeIntervalForCPUTicks, 
-                       _BSTimeIntervalFromMachTimeValue, _BSTimeUntilNextClockMinute, 
-                       _BSTimerIntervalMax, _BSTimerIntervalMin, _BSTimerRepeatIntervalNone, 
-                       _BSTransactionCompletedNotification, _BSTransactionErrorDescriptionKey, 
-                       _BSTransactionErrorDomain, _BSTransactionErrorPrecipitatingErrorKey, 
-                       _BSTransactionErrorReasonChildTransaction, _BSTransactionErrorReasonKey, 
-                       _BSTransactionErrorReasonParentTransaction, _BSTransactionErrorReasonTimeout, 
-                       _BSTransactionErrorTransactionKey, _BSValueWithAffineTransform, 
-                       _BSValueWithPoint, _BSValueWithRect, _BSValueWithSize, _BSVersionedPIDForAuditToken, 
-                       _BSXPCConnectionHasEntitlement, _BSXPCMessageEncodedObjectClassNameKey, 
-                       _BSXPCMessageEncodedObjectFallbackClassNameKey, _NSStringFromBSDiagnosticReportType, 
+                       _BSSizeRoundForScale, _BSSizeSwap, _BSStackFrameInfoForAddresss, 
+                       _BSStringFromBOOL, _BSStringFromCGPoint, _BSStringFromCGRect, 
+                       _BSStringFromCGSize, _BSSystemHasCapability, _BSSystemRootDirectory, 
+                       _BSSystemSharedDirectoryForCurrentProcess, _BSSystemSharedDirectoryForIdentifier, 
+                       _BSSystemSharedResourcesDirectoryForCurrentProcess, _BSSystemSharedResourcesDirectoryForIdentifier, 
+                       _BSTemporaryFileAtPath, _BSTimeDifferenceFromMachTimeToMachTime, 
+                       _BSTimeIntervalForCPUTicks, _BSTimeIntervalFromMachTimeValue, 
+                       _BSTimeUntilNextClockMinute, _BSTimerIntervalMax, _BSTimerIntervalMin, 
+                       _BSTimerRepeatIntervalNone, _BSTransactionCompletedNotification, 
+                       _BSTransactionErrorDescriptionKey, _BSTransactionErrorDomain, 
+                       _BSTransactionErrorPrecipitatingErrorKey, _BSTransactionErrorReasonChildTransaction, 
+                       _BSTransactionErrorReasonKey, _BSTransactionErrorReasonParentTransaction, 
+                       _BSTransactionErrorReasonTimeout, _BSTransactionErrorTransactionKey, 
+                       _BSValueWithAffineTransform, _BSValueWithPoint, _BSValueWithRect, 
+                       _BSValueWithSize, _BSVersionedPIDForAuditToken, _BSXPCConnectionHasEntitlement, 
+                       _NSStringFromBSActionErrorCode, _NSStringFromBSDiagnosticReportType, 
                        _NSStringFromBSProcessExceptionCode, _NSStringFromBSVersionedPID, 
                        _NSStringFromInterval, __BSHasInternalSettings, __BSIsInternalInstall, 
                        __BSSafeCast, __bs_set_crash_log_message ]
@@ -330,12 +331,13 @@ exports:
                        BSAuditHistory, BSAuditHistoryItem, BSAuditToken, BSBaseXPCClient, 
                        BSBaseXPCServer, BSBasicServerClient, BSBlockSentinel, BSBlockTransaction, 
                        BSBuildVersion, BSCFBundle, BSCGImageFromIOSurfaceBuilder, 
-                       BSColor, BSCompoundAssertion, BSContinuousMachTimer, BSCopyingCacheSet, 
-                       BSCornerRadiusConfiguration, BSDateFormatterCache, BSDateTimeCache, 
-                       BSDescriptionBuilder, BSDescriptionStream, BSDispatchQueueAttributes, 
-                       BSEqualsBuilder, BSError, BSEventQueue, BSEventQueueEvent, 
-                       BSEventQueueLock, BSHashBuilder, BSIntegerMap, BSIntegerSet, 
-                       BSKeyedSettings, BSLogStateCaptureEntry, BSMIGServer, BSMachPortReceiveRight, 
+                       BSCanonicalOrientationMapResolver, BSColor, BSCompoundAssertion, 
+                       BSContinuousMachTimer, BSCopyingCacheSet, BSCornerRadiusConfiguration, 
+                       BSDateFormatterCache, BSDateTimeCache, BSDescriptionBuilder, 
+                       BSDescriptionStream, BSDispatchQueueAttributes, BSEqualsBuilder, 
+                       BSError, BSEventQueue, BSEventQueueEvent, BSEventQueueLock, 
+                       BSHashBuilder, BSIntegerMap, BSIntegerSet, BSKeyedSettings, 
+                       BSLogStateCaptureEntry, BSMIGServer, BSMachPortReceiveRight, 
                        BSMachPortRight, BSMachPortSendOnceRight, BSMachPortSendRight, 
                        BSMachPortTaskNameRight, BSMachServiceAliases, BSMonotonicReferenceTime, 
                        BSMutableAnimationSettings, BSMutableIntegerMap, BSMutableIntegerSet, 
@@ -345,13 +347,14 @@ exports:
                        BSPluginBundle, BSPluginManager, BSPluginManagerCoordinator, 
                        BSPortDeathSentinel, BSPortDeathWatcher, BSPowerMonitor, BSProcessDeathWatcher, 
                        BSProcessHandle, BSProtobufSchema, BSProtobufSerialization, 
-                       BSRelativeDateTimer, BSSettings, BSSettingsDiff, BSSharedMemoryStore, 
-                       BSSignal, BSSimpleAssertion, BSSpringAnimationSettings, BSSqliteDatabaseConnection, 
-                       BSSqlitePreparedStatement, BSSqliteResultRow, BSStackFrameInfo, 
-                       BSTimer, BSTransaction, BSTransactionBlockObserver, BSUIApplicationSupport, 
-                       BSUserDefaultsTestDoubleDictionaryImpl, BSWallclockTimer, 
-                       BSWatchdog, BSXPCCoder, BSXPCCodingArray, BSXPCConnectionListenerManager, 
-                       BSXPCMessage, BSXPCReply, BSZeroingWeakReference ]
+                       BSRelativeDateTimer, BSRelativeDateTimerFireInfo, BSSettings, 
+                       BSSettingsDiff, BSSharedMemoryStore, BSSimpleAssertion, BSSpringAnimationSettings, 
+                       BSSqliteDatabaseConnection, BSSqlitePreparedStatement, BSSqliteResultRow, 
+                       BSStackFrameInfo, BSTimer, BSTransaction, BSTransactionBlockObserver, 
+                       BSUIApplicationSupport, BSUserDefaultsTestDoubleDictionaryImpl, 
+                       BSWallclockTimer, BSWatchdog, BSXPCCoder, BSXPCCodingArray, 
+                       BSXPCConnectionListenerManager, BSXPCMessage, BSXPCReply, 
+                       BSZeroingWeakReference ]
     objc-ivars:      [ BSBaseXPCClient._queue, BSBaseXPCServer._queue, BSBasicServerClient._connection, 
                        BSXPCCoder._message, BSXPCCoder._xpcConnection ]
 --- !tapi-tbd
@@ -360,22 +363,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BFEFCF2E-D45B-3D2B-BAFA-A66BF2A7D8FC
+    value:           30F1C2C3-C6CC-3129-9A00-859A0810CFFB
   - target:          x86_64-maccatalyst
-    value:           BFEFCF2E-D45B-3D2B-BAFA-A66BF2A7D8FC
+    value:           30F1C2C3-C6CC-3129-9A00-859A0810CFFB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           21A8104C-7AA6-391B-9A1A-9160D35EB09C
+    value:           168C2CDB-C5CB-303B-BEE3-0803B1F772A4
   - target:          arm64e-maccatalyst
-    value:           21A8104C-7AA6-391B-9A1A-9160D35EB09C
+    value:           168C2CDB-C5CB-303B-BEE3-0803B1F772A4
 install-name:    '/System/Library/PrivateFrameworks/BoardServices.framework/Versions/A/BoardServices'
 current-version: 0
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ BSMutableServiceInterface, BSServiceConnection, BSServiceConnectionEndpoint, 
                        BSServiceConnectionEndpointInjector, BSServiceConnectionEndpointMonitor, 
                        BSServiceConnectionListener, BSServiceDomainSpecification, 

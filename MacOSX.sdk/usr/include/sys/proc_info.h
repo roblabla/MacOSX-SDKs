@@ -100,8 +100,6 @@ struct proc_bsdshortinfo {
 };
 
 
-
-
 /* pbi_flags values */
 #define PROC_FLAG_SYSTEM        1       /*  System process */
 #define PROC_FLAG_TRACED        2       /* process currently being traced, possibly by gdb */

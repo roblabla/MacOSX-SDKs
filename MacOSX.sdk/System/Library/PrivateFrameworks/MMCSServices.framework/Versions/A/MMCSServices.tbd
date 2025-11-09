@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1C0E1785-A088-38C7-B5FB-6DFC37882C25
+    value:           896BA565-7826-328D-9416-D0B3464D8FA2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2A773A71-9A8D-3194-A3C7-D1303347EB82
+    value:           30CACFD2-4EDE-3CD8-A824-C4836477B37D
 install-name:    '/System/Library/PrivateFrameworks/MMCSServices.framework/Versions/A/MMCSServices'
 current-version: 800
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _failReasonStringForMMCSError, _parseMMCSError ]
     objc-classes:    [ MMCSController, MMCSGetFile, MMCSPutFile, MMCSRequestorContext, 
                        MMCSSimpleFile ]

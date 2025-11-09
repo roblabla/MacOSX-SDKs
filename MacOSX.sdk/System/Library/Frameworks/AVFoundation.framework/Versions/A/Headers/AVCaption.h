@@ -202,7 +202,8 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
     Identifier for the region
   @discussion
     When regionIdentifier is nil, two regions with the same position and endPosition are considered to be same, that is
-    captions referring these regions belong to the same region when serialized to a format like TTML.
+    captions referring these regions belong to the same region when serialized to a format like TTML.  In addition, the
+	AVCaptionRegion cannot be mutably copied.
 
     When regionIdentifier is not nil, two regions are same if and only if the region identifier is equal. It is a
     client's responsibility to ensure these AVCaptionRegion objects have the same properties.
@@ -252,6 +253,35 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
     The block and inline progression direction of the region.
  */
 @property (nonatomic, readonly) AVCaptionRegionWritingMode writingMode;
+
+/*!
+  @method encodeWithCoder:
+  @abstract
+	NSCoding protocol method override
+  @discussion
+	This method throws an exception if the caption region's size has different units for width and height, or if the units are unrecognizeable.
+ */
+- (void)encodeWithCoder:(NSCoder *)encoder;
+
+/*!
+  @method isEqual:
+  @abstract
+	NSObject protocol method override
+  @discussion
+	This method throws an exception if the caption region's size has different units for width and height, or if the units are unrecognizeable.
+ */
+
+- (BOOL)isEqual:(id)object;
+
+/*!
+  @method mutableCopyWithZone:
+  @abstract
+	NSMutableCopying protocol method override
+  @discussion
+	This method throws an exception if the caption region contains an identifier.
+ */
+- (id)mutableCopyWithZone:(nullable NSZone *)zone;
+
 @end
 
 /*!
@@ -641,7 +671,9 @@ typedef NS_ENUM(NSInteger, AVCaptionTextAlignment) {
 /*!
   @property textAlignment
   @abstract
-	The text alignemnt within the containing region.
+	The text alignment within the containing region.
+  @discussion
+	This property throws an exception if a value is set which is not a valid AVCaptionTextAlignment.
  */
 @property (nonatomic, readonly) AVCaptionTextAlignment textAlignment;
 @end
@@ -773,6 +805,7 @@ typedef NS_ENUM(NSInteger, AVCaptionTextAlignment) {
 	The region where the caption is placed.
  @discussion
 	It can be nil when the underlying caption format doesn't support or use regions.
+	This property throws an exception if region has unrecognizeable units.
  */
 @property (nonatomic, copy) AVCaptionRegion *region;
 

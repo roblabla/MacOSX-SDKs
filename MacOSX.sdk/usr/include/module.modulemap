@@ -12,6 +12,7 @@ module Compression [system] [extern_c] {
  export *
  link "compression"
 }
+extern module EditLine "editline.modulemap"
 module Darwin [system] [extern_c] [no_undeclared_includes] {
  // Headers that are repeatedly included, and therefore should not be
  // assigned to any given module.
@@ -109,6 +110,7 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   }
   module stdio {
    header "stdio.h"
+   exclude header "secure/_stdio.h"
    export *
   }
   module _stdio {
@@ -123,6 +125,7 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   }
   module string {
    header "string.h"
+   exclude header "secure/_string.h"
    export *
    export Darwin.POSIX.strings
   }
@@ -149,16 +152,7 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    header "wctype.h"
    export *
   }
-  module xlocale {
-   header "xlocale.h"
-   export *
-   module _xlocale {
-    header "_xlocale.h"
-    export *
-   }
-   umbrella "xlocale"
-   module * { export * }
-  }
+  extern module xlocale "darwin_c_xlocale.modulemap"
   module xattr_flags {
    header "xattr_flags.h"
    export *
@@ -268,28 +262,7 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    header "sys/poll.h"
    export *
   }
-  module pthread {
-   module pthread {
-    header "pthread.h"
-    export *
-   }
-   module impl {
-    header "pthread_impl.h"
-    export *
-   }
-   module qos {
-    header "pthread/qos.h"
-    export *
-   }
-   module spis {
-    header "pthread_spis.h"
-    export *
-   }
-   module spawn {
-    header "pthread/spawn.h"
-    export *
-   }
-  }
+  extern module pthread "darwin_posix_pthread.modulemap"
   module pwd {
    header "pwd.h"
    export *
@@ -322,15 +295,10 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   }
   module strings {
    header "strings.h"
+   exclude header "secure/_strings.h"
    export *
   }
-  module _types {
-   umbrella "_types"
-   module * {
-    export *
-   }
-   export *
-  }
+  extern module _types "_types.modulemap"
   module sys {
    export *
    module ipc {
@@ -522,6 +490,10 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   header "ConditionalMacros.h"
   export *
  }
+ explicit module crt_externs {
+  header "crt_externs.h"
+  export *
+ }
  module gethostuuid {
   header "gethostuuid.h"
   export *
@@ -576,6 +548,10 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    header "os/lock.h"
    export *
   }
+  module proc {
+   header "os/proc.h"
+   export *
+  }
  }
  module malloc {
   header "malloc/malloc.h"
@@ -591,25 +567,7 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   }
  }
  extern module machine "machine.modulemap"
- module secure {
-  module _common {
-   header "secure/_common.h"
-   export *
-  }
-  module _string {
-   export Darwin.C.string
-  }
-  module _strings {
-   export Darwin.C.strings
-  }
-  module _stdio {
-   export Darwin.C.stdio
-  }
-  exclude header "secure/_string.h"
-  exclude header "secure/_stdio.h"
-  exclude header "secure/_strings.h"
-  export *
- }
+ extern module secure "secure.modulemap"
  module _locale {
   header "_locale.h"
   export *
@@ -709,13 +667,7 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   export *
  }
  module sys {
-  module _pthread {
-   umbrella "sys/_pthread"
-   module * {
-    export *
-   }
-   export *
-  }
+  extern module _pthread "sys__pthread.modulemap"
   module qos {
    header "sys/qos.h"
    export *
@@ -1163,3 +1115,4 @@ module SQLite3 [system] [extern_c] {
  export *
 }
 extern module xcselect "xcselect.modulemap"
+extern module XPC "xpc.modulemap"

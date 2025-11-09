@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9F075C19-2E99-3FD2-B083-B38168164040
+    value:           05C1190B-1C2E-3731-9892-7BC2648F69A9
   - target:          x86_64-maccatalyst
-    value:           9F075C19-2E99-3FD2-B083-B38168164040
+    value:           05C1190B-1C2E-3731-9892-7BC2648F69A9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9F9A0BDB-D97D-3934-BE55-1624BD3847E1
+    value:           C3CD329B-8070-30E3-ACF8-D048A3B91E70
   - target:          arm64e-maccatalyst
-    value:           9F9A0BDB-D97D-3934-BE55-1624BD3847E1
+    value:           C3CD329B-8070-30E3-ACF8-D048A3B91E70
 install-name:    '/usr/lib/libedit.3.dylib'
 current-version: 3
 compatibility-version: 2
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __el_fn_complete, __el_fn_sh_complete, __rl_abort_internal, 
                        __rl_print_completions_horizontally, __rl_qsort_string_compare, 
                        _add_history, _clear_history, _completion_matches, _current_history, 

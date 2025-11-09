@@ -4,7 +4,7 @@
 *
 *  See vImage/vImage.h for more on how to better view the headerdoc documentation for functions declared herein.
 *
-*  @copyright Copyright (c) 2003-2016 by Apple Inc. All rights reserved.
+*  @copyright Copyright (c) 2003-2022 by Apple Inc. All rights reserved.
 *
 *  @discussion   Transform.h defines a number of interfaces that do linear and nonlinear operations
 *                to images.  Matrix multiply operations treat each pixel as a short vector and
@@ -14,8 +14,9 @@
 *                are not NaN (unlike pow(-x, y)), but instead -pow(|x|, y) for negative x).
 *                In addition a series of polynomial and rational evaluators are available. Many complex
 *                functions can be approximated as a polynomial or rational and evaluated more
-*                cheaply that way. Finally there are single and multi-dimensional interpolated lookup
+*                cheaply that way. Also, there are single and multi-dimensional interpolated lookup
 *                tables, also commonly used in colorspace conversion.
+*                Finally, there are flood, or seed, fill functions for filling a connect component of an image.
 *
 *  @ignorefuncmacro VIMAGE_NON_NULL
 */
@@ -1664,7 +1665,73 @@ VIMAGE_PF vImage_Error vImageMultiDimensionalInterpolatedLookupTable_Planar16Q12
 VIMAGE_NON_NULL(1,2,4)
 API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
+/*
+ *  vImageFloodFill_Planar8, vImageFloodFill_ARGB8888,
+ *  vImageFloodFill_Planar16U, vImageFloodFill_ARGB16U
+ *
+ *  These functions fill a connect component of an image with a new pixel value.
+ *  Flood, or seed, fill means that all pixels that are neighboring and identical to the seed pixel are
+ *  set to (painted) with a new value. The filling proceeds until the image boundary is reached or all
+ *  pixels within the connected component are set.
+ *
+ *  Note that the 16U versions work also for image buffers with 16S and 16F pixels given that the 16-bit
+ *  storage format of the newValue pixel value parameter is interpreted as a 16S/16F value.
+ *
+ *  Parameters:
+ *  ----------
+ *      srcDest       A pointer to a vImage_Buffer that references the image to be filled.
+ *                    This is an input/output image.
+ *
+ *      tempBuffer    Currently unsupported and must therefore be NULL.
+ *
+ *      seedX         The x-coordinate defining the position of the seed pixel inside the connected component.
+ *      seedY         The y-coordinate defining the position of the seed pixel inside the connected component.
+ *
+ *      newValue      The new pixel value that overwrites the pixels in the connected component.
+ *
+ *      connectivity  Must be 4 or 8 and defines which pixels are neighboring, that is, are connected to each other.
+ *                    The 4-connected neighborhood of a pixel are the pixels to the left/right and those above/below.
+ *                    The 8-connected neighborhood also includes the pixels on the 4 diagonals.
+ *
+ *      flags         The following flags are allowed:
+ *
+ *          kvImageDoNotTile    Turns off internal multithreading. Multithreading of flood fill is actually not
+ *                              supported so setting this flag has not effect.
+ *
+ *  Return Value:
+ *  -------------
+ *      kvImageNoError                  Success!
+ *      kvImageNullPointerArgument      srcDest or newValue (for ARGB formats) are NULL.
+ *      kvImageInvalidParameter         connectivity is not equal to 4 or 8.
+ *      kvImageUnknownFlagsBit          Unsupported flag bits set.
+ *
+ *  This routine always work in place.
+ *
+ */
 
+VIMAGE_PF vImage_Error vImageFloodFill_Planar8(const vImage_Buffer *srcDest, void *tempBuffer,
+                                               vImagePixelCount seedX, vImagePixelCount seedY, Pixel_8 newValue, int connectivity,
+                                               vImage_Flags flags)
+VIMAGE_NON_NULL(1)
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+VIMAGE_PF vImage_Error vImageFloodFill_Planar16U(const vImage_Buffer *srcDest, void *tempBuffer,
+                                                 vImagePixelCount seedX, vImagePixelCount seedY, Pixel_16U newValue, int connectivity,
+                                                 vImage_Flags flags)
+VIMAGE_NON_NULL(1)
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+VIMAGE_PF vImage_Error vImageFloodFill_ARGB8888(const vImage_Buffer *srcDest, void *tempBuffer,
+                                               vImagePixelCount seedX, vImagePixelCount seedY, Pixel_8888 newValue, int connectivity,
+                                               vImage_Flags flags)
+VIMAGE_NON_NULL(1)
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+VIMAGE_PF vImage_Error vImageFloodFill_ARGB16U(const vImage_Buffer *srcDest, void *tempBuffer,
+                                               vImagePixelCount seedX, vImagePixelCount seedY, Pixel_ARGB_16U newValue, int connectivity,
+                                               vImage_Flags flags)
+VIMAGE_NON_NULL(1)
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 
 #ifdef __cplusplus

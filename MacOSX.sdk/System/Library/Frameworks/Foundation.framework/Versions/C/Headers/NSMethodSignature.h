@@ -4,7 +4,7 @@
 
 #import <Foundation/NSObject.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 NS_SWIFT_UNAVAILABLE("NSInvocation and related APIs not available")
 @interface NSMethodSignature : NSObject
@@ -23,4 +23,4 @@ NS_SWIFT_UNAVAILABLE("NSInvocation and related APIs not available")
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

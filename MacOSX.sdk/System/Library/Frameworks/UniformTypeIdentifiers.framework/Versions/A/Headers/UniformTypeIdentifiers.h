@@ -15,4 +15,6 @@
 
 #import <UniformTypeIdentifiers/UTAdditions.h>
 
+#import <UniformTypeIdentifiers/NSItemProvider+UTType.h>
+
 #endif // __UNIFORMTYPEIDENTIFIERS__

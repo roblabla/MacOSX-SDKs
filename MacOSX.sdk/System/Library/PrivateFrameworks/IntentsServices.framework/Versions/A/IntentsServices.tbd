@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5BE04B85-E5CB-39E3-8192-B2A554402DBD
+    value:           AB1C65B3-E299-3E66-AFBC-4512CF464F4F
   - target:          x86_64-maccatalyst
-    value:           5BE04B85-E5CB-39E3-8192-B2A554402DBD
+    value:           AB1C65B3-E299-3E66-AFBC-4512CF464F4F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9AA81285-183B-3ED0-8CB5-48098D34C4C2
+    value:           F82BB115-AD25-3E1E-B787-5F67F879CAED
   - target:          arm64e-maccatalyst
-    value:           9AA81285-183B-3ED0-8CB5-48098D34C4C2
+    value:           F82BB115-AD25-3E1E-B787-5F67F879CAED
 install-name:    '/System/Library/PrivateFrameworks/IntentsServices.framework/Versions/A/IntentsServices'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _INSAssistantErrorDomain, _INSExtensionServiceTraceCompletionHandlerWithCode, 
                        _INSGetAceVersionNumberFromString, _INSJSONEncodedIntent, 
                        _INSJSONEncodedIntentResponse, _INSJSONEncodedSlotResolutionResult, 

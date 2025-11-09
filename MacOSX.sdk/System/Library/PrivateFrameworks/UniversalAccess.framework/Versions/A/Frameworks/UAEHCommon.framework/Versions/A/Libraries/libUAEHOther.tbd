@@ -3,13 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           34ACE3F8-B03E-361F-9CD3-73CCA00F7E64
+    value:           57675149-4292-3A58-8A03-92E8977FC5BE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F066F021-D775-3D9A-A96C-97F9C9AB7108
+    value:           7EF9110C-33F1-303D-8B67-CA559D6B951F
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/UAEHCommon.framework/Versions/A/Libraries/libUAEHOther.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _UADEventHandlerGetVtable ]
+    objc-classes:    [ UAEHLiveCaptionsEnablementAlertController ]
 ...

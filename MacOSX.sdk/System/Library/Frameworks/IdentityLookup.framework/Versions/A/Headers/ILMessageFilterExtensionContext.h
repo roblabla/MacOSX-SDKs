@@ -26,7 +26,6 @@ IL_EXTERN API_AVAILABLE(ios(11.0), macCatalyst(13.0)) API_UNAVAILABLE( tvos) API
  @param completion Completion block containing either the network response to the HTTPS request or an error.
  */
 - (void)deferQueryRequestToNetworkWithCompletion:(void (^)(ILNetworkResponse *_Nullable response, NSError *_Nullable error))completion;
-
 @end
 
 NS_ASSUME_NONNULL_END

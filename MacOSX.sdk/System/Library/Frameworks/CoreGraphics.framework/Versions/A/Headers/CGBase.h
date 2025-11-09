@@ -10,6 +10,7 @@
 #include <float.h>
 #include <TargetConditionals.h>
 #include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFCGTypes.h>
 #include <os/availability.h>
 
 /* Definition of `__CG_HAS_COMPILER_ATTRIBUTE'. */
@@ -305,6 +306,15 @@
 # endif
 #endif
 
+/* Definition of CG_PURE. */
+#if !defined(CG_PURE)
+# if __CG_HAS_COMPILER_ATTRIBUTE(pure)
+#  define CG_PURE  __attribute__((pure))
+# else
+#  define CG_PURE 
+# endif
+#endif
+
 /* Definition of `__CG_FORMAT_PRINTF'. */
 
 #if !defined(__CG_FORMAT_PRINTF)
@@ -328,6 +338,7 @@
 # endif
 #endif
 
+#ifndef CF_DEFINES_CG_TYPES
 /* Definition of `CGFLOAT_TYPE', `CGFLOAT_IS_DOUBLE', `CGFLOAT_MIN', and
    `CGFLOAT_MAX'. */
 
@@ -349,6 +360,8 @@
 
 typedef CGFLOAT_TYPE CGFloat;
 #define CGFLOAT_DEFINED 1
+
+#endif /* CF_DEFINES_CG_TYPES */
 
 /* Definition of `CG_OBSOLETE'. Deprecated; to be removed. */
 

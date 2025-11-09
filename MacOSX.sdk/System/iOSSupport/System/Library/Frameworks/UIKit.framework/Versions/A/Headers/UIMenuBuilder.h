@@ -14,7 +14,7 @@
 @class UICommand;
 @class UIMenuSystem;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// Encapsulates access and mutation for a menu hierarchy.
 API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
@@ -86,7 +86,7 @@ API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIMenuBuilder.h>

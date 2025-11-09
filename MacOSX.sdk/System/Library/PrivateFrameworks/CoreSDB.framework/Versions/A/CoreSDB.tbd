@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C1F51888-2C75-3628-8B4E-59CDCD955E99
+    value:           2AA3F836-8915-3139-93D5-45BCB21E3C9A
   - target:          x86_64-maccatalyst
-    value:           C1F51888-2C75-3628-8B4E-59CDCD955E99
+    value:           2AA3F836-8915-3139-93D5-45BCB21E3C9A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CF94C6CA-5106-30F3-A1DE-37C10C2FE192
+    value:           23EEFA74-0309-394D-90CC-4E47A07C67D6
   - target:          arm64e-maccatalyst
-    value:           CF94C6CA-5106-30F3-A1DE-37C10C2FE192
+    value:           23EEFA74-0309-394D-90CC-4E47A07C67D6
 install-name:    '/System/Library/PrivateFrameworks/CoreSDB.framework/Versions/A/CoreSDB'
 current-version: 800
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CSDBCheckResultWithStatement, _CSDBCreateDirectoriesToPath, 
                        _CSDBCreateDirectoriesToPathWithOwnership, _CSDBCreateThreadedRecordStore, 
                        _CSDBCreateThreadedRecordStoreWithQOSClass, _CSDBCreateThreadedRecordStoreWithQOSClassAndLookAsideBufferConfig, 

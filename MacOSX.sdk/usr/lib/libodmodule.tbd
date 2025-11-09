@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           278EDD33-EAAA-30ED-8373-E9C57A77B661
+    value:           B62C9523-098C-3588-9B32-6C168DB5AB78
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B2294BA2-C11D-36E0-9A5B-30D032FEDF23
+    value:           CB90A21E-E47E-34DF-9E3A-EAE366B06755
 install-name:    '/usr/lib/libodmodule.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CFArrayAppendServer, _ODModuleMsgKeyAccountName, _ODModuleMsgKeyAdditionalInfo, 
                        _ODModuleMsgKeyAuthInformationType, _ODModuleMsgKeyConnectionFlags, 
                        _ODModuleMsgKeyConnectionOptions, _ODModuleMsgKeyConnectionTimeout, 

@@ -33,8 +33,8 @@ typedef NS_OPTIONS(NSUInteger, NSFontPanelModeMask) {
 
 /* This is the message that's propagated up the responder chain.
  */
-- (void)changeFont:(nullable NSFontManager *)sender;
-- (NSFontPanelModeMask)validModesForFontPanel:(NSFontPanel *)fontPanel;
+- (void)changeFont:(nullable NSFontManager *)sender NS_SWIFT_UI_ACTOR;
+- (NSFontPanelModeMask)validModesForFontPanel:(NSFontPanel *)fontPanel NS_SWIFT_UI_ACTOR;
 @end
 
 #if __swift__ < 40200

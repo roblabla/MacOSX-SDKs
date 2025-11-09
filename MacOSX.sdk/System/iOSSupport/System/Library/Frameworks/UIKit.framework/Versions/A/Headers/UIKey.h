@@ -11,7 +11,7 @@
 #import <UIKit/UIKeyConstants.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIKey : NSObject <NSCopying, NSCoding>
@@ -36,7 +36,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos) NS_SW
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIKey.h>

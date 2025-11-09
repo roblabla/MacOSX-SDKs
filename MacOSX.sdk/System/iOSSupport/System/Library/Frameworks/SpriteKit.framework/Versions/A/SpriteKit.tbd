@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           0F52D47A-B4C6-3DE9-85E9-DEF4C27AD1F9
+    value:           1C07C7BE-AB3D-35B7-BE99-C3A9F9E665FF
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           6C17439C-5C4A-37A6-AD5E-CE0B22525D0D
+    value:           5E002BDD-C5D0-328C-BB73-8176261AE3CB
 install-name:    '/System/iOSSupport/System/Library/Frameworks/SpriteKit.framework/Versions/A/SpriteKit'
-current-version: 47.2
+current-version: 49.3
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _SKComponentRGBABlack, _SKComponentRGBABlue, _SKComponentRGBAClear, 
                        _SKComponentRGBAGreen, _SKComponentRGBARed, _SKComponentRGBAWhite, 
                        _SKGenerateNormalMap, _SKGenerateNormalMapWithMultiSampling, 

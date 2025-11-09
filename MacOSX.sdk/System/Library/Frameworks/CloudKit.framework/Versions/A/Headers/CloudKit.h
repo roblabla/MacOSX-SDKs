@@ -52,3 +52,8 @@
 #import <CloudKit/CKOperation.h>
 #import <CloudKit/CKOperationGroup.h>
 #import <CloudKit/CKQueryOperation.h>
+
+#pragma mark - Sharing Support
+#import <CloudKit/NSItemProvider+CKSharingSupport.h>
+#import <CloudKit/CKAllowedSharingOptions.h>
+#import <CloudKit/CKSystemSharingUIObserver.h>

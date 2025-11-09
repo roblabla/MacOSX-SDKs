@@ -233,8 +233,8 @@ extern voucher_mach_msg_state_t voucher_mach_msg_adopt(mach_msg_header_t *msg);
  * @param state
  * The thread voucher state to restore.
  */
-
 extern void voucher_mach_msg_revert(voucher_mach_msg_state_t state);
+
 
 __END_DECLS
 

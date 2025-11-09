@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           45D70BF9-0186-3BF5-A5C5-807B13BBCE39
+    value:           6A19F897-9AF3-36D4-A9FA-0A0C8B4ED274
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1649DB3A-6686-37D4-B939-A3663101FF4E
+    value:           B7FB546C-F878-3788-9499-8106D47BA05A
 install-name:    '/System/Library/PrivateFrameworks/PersonalIntelligenceCore.framework/Versions/A/PersonalIntelligenceCore'
-current-version: 1153.16.1
+current-version: 1193.8
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -28,7 +28,7 @@ allowable-clients:
                        hvtool, portrait, ppppttool, pptool, pretool, psgtool, reversetemplated, 
                        suggest_tool, suggestbench, suggestd ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s24PersonalIntelligenceCore11MetricStoreC10identifier11storeConfig19enrichmentProviders16messageListeners15windowStartDate13configuration12sendIntervalACSS_So07BMStoreH0CSgSaySo26IIMetricEnrichmentProvider_pGSaySbSS_SDySSypGtcG10Foundation0O0VAA0D13ConfigurationVSgSdtcfC', 
                        '_$s24PersonalIntelligenceCore11MetricStoreC10identifier11storeConfig19enrichmentProviders16messageListeners15windowStartDate13configuration12sendIntervalACSS_So07BMStoreH0CSgSaySo26IIMetricEnrichmentProvider_pGSaySbSS_SDySSypGtcG10Foundation0O0VAA0D13ConfigurationVSgSdtcfCTq', 
                        '_$s24PersonalIntelligenceCore11MetricStoreC10identifier11storeConfig19enrichmentProviders16messageListeners15windowStartDate13configuration12sendIntervalACSS_So07BMStoreH0CSgSaySo26IIMetricEnrichmentProvider_pGSaySbSS_SDySSypGtcG10Foundation0O0VAA0D13ConfigurationVSgSdtcfc', 
@@ -59,11 +59,11 @@ exports:
                        '_$s24PersonalIntelligenceCore19MetricConfigurationVN', '_$s24PersonalIntelligenceCore19MetricConfigurationVSEAAMc', 
                        '_$s24PersonalIntelligenceCore19MetricConfigurationVSeAAMc', 
                        '_$s24PersonalIntelligenceCore19MetricConfigurationVyACSaySSGcfC', 
-                       _IIErrorDomain, _IIErrorInfoKey, _IIExit, _IISendCoreAnalyticsEvent, 
-                       _PersonalIntelligenceCoreVersionNumber, _PersonalIntelligenceCoreVersionString, 
-                       _ii_default_log_handle, _ii_private_log_handle, _kIIAssetVersionFieldName, 
-                       _kIIEngagedCountFieldName, _kIIFeatureEngagementMetricName, 
-                       _kIIFeatureNameFieldName, _kIIFrustrationCountFieldName, _kIILogSubsystem, 
-                       _kIIOfferedCountFieldName, _kIISignpostSubsystem, _kIITrialTreatmentsFieldName ]
+                       _IIErrorDomain, _IIErrorInfoKey, _IIExit, _PersonalIntelligenceCoreVersionNumber, 
+                       _PersonalIntelligenceCoreVersionString, _ii_default_log_handle, 
+                       _ii_private_log_handle, _kIIAssetVersionFieldName, _kIIEngagedCountFieldName, 
+                       _kIIFeatureEngagementMetricName, _kIIFeatureNameFieldName, 
+                       _kIIFrustrationCountFieldName, _kIILogSubsystem, _kIIOfferedCountFieldName, 
+                       _kIISignpostSubsystem, _kIITrialTreatmentsFieldName ]
     objc-classes:    [ IIMetricsDispatcher, IIPaths, IISMetricStore, IIStartupManager ]
 ...

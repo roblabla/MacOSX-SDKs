@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class HMHome;
 
 HM_EXTERN API_DEPRECATED("No longer supported", ios(13.0, 15.0)) API_UNAVAILABLE(ios, macos, watchos, tvos, macCatalyst)
-@interface HMAddAccessoryRequest : NSObject
+    @interface HMAddAccessoryRequest : NSObject
 
 /*!
  * @brief Home that the accessory is to be added to.

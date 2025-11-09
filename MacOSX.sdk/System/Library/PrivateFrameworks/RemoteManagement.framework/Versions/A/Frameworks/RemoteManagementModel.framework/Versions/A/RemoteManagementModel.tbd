@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           169F9C8F-7241-34C6-B083-178E1323C01A
+    value:           E1D78FB9-396E-3EE7-84E5-C01C92E86832
   - target:          x86_64-maccatalyst
-    value:           169F9C8F-7241-34C6-B083-178E1323C01A
+    value:           E1D78FB9-396E-3EE7-84E5-C01C92E86832
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A165AB58-1261-352F-A5D3-451CDD2A3AF1
+    value:           23F95599-BD22-3538-A6F4-1CD93818A536
   - target:          arm64e-maccatalyst
-    value:           A165AB58-1261-352F-A5D3-451CDD2A3AF1
+    value:           23F95599-BD22-3538-A6F4-1CD93818A536
 install-name:    '/System/Library/PrivateFrameworks/RemoteManagement.framework/Versions/A/Frameworks/RemoteManagementModel.framework/Versions/A/RemoteManagementModel'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _RMModelAccountLDAPDeclaration_SearchSettingsItem_Scope_base, 
                        _RMModelAccountLDAPDeclaration_SearchSettingsItem_Scope_oneLevel, 
                        _RMModelAccountLDAPDeclaration_SearchSettingsItem_Scope_subtree, 
@@ -40,14 +40,34 @@ exports:
                        _RMModelManagementTestCommandCommand_ReturnStatus_failed, 
                        _RMModelManagementTestCommandCommand_ReturnStatus_pendingClient, 
                        _RMModelManagementTestDeclaration_ReturnStatus_failed, _RMModelManagementTestDeclaration_ReturnStatus_installed, 
-                       _RMModelManagementTestDeclaration_ReturnStatus_unlocked, _RMModelStatusItemAll, 
+                       _RMModelManagementTestDeclaration_ReturnStatus_unlocked, _RMModelStatusItemAccountListCalDAV, 
+                       _RMModelStatusItemAccountListCardDAV, _RMModelStatusItemAccountListExchange, 
+                       _RMModelStatusItemAccountListGoogle, _RMModelStatusItemAccountListLDAP, 
+                       _RMModelStatusItemAccountListMailIncoming, _RMModelStatusItemAccountListMailOutgoing, 
+                       _RMModelStatusItemAccountListSubscribedCalendar, _RMModelStatusItemAll, 
                        _RMModelStatusItemDeviceModelFamily, _RMModelStatusItemDeviceModelIdentifier, 
                        _RMModelStatusItemDeviceModelMarketingName, _RMModelStatusItemDeviceOperatingSystemBuildVersion, 
                        _RMModelStatusItemDeviceOperatingSystemFamily, _RMModelStatusItemDeviceOperatingSystemMarketingName, 
+                       _RMModelStatusItemDeviceOperatingSystemSupplementalBuildVersion, 
+                       _RMModelStatusItemDeviceOperatingSystemSupplementalExtraVersion, 
                        _RMModelStatusItemDeviceOperatingSystemVersion, _RMModelStatusItemDeviceSerialNumber, 
-                       _RMModelStatusItemDeviceUDID, _RMModelStatusItemManagementClientCapabilities, 
+                       _RMModelStatusItemDeviceUDID, _RMModelStatusItemMDMApp, _RMModelStatusItemManagementClientCapabilities, 
                        _RMModelStatusItemManagementDeclarations, _RMModelStatusItemManagementPushToken, 
-                       _RMModelStatusManagementDeclarations_Declaration_Valid_invalid, 
+                       _RMModelStatusItemPasscodeCompliance, _RMModelStatusItemPasscodeIsPresent, 
+                       _RMModelStatusItemTestArrayValue, _RMModelStatusItemTestBooleanValue, 
+                       _RMModelStatusItemTestDictionaryValue, _RMModelStatusItemTestErrorValue, 
+                       _RMModelStatusItemTestIntegerValue, _RMModelStatusItemTestRealValue, 
+                       _RMModelStatusItemTestStringValue, _RMModelStatusMDMApp_State_failed, 
+                       _RMModelStatusMDMApp_State_installing, _RMModelStatusMDMApp_State_managed, 
+                       _RMModelStatusMDMApp_State_managedButUninstalled, _RMModelStatusMDMApp_State_managementRejected, 
+                       _RMModelStatusMDMApp_State_needsRedemption, _RMModelStatusMDMApp_State_prompting, 
+                       _RMModelStatusMDMApp_State_promptingForLogin, _RMModelStatusMDMApp_State_promptingForManagement, 
+                       _RMModelStatusMDMApp_State_promptingForUpdate, _RMModelStatusMDMApp_State_promptingForUpdateLogin, 
+                       _RMModelStatusMDMApp_State_queued, _RMModelStatusMDMApp_State_redeeming, 
+                       _RMModelStatusMDMApp_State_unknown, _RMModelStatusMDMApp_State_updateRejected, 
+                       _RMModelStatusMDMApp_State_updating, _RMModelStatusMDMApp_State_userInstalledApp, 
+                       _RMModelStatusMDMApp_State_userRejected, _RMModelStatusMDMApp_State_validatingPurchase, 
+                       _RMModelStatusMDMApp_State_validatingUpdate, _RMModelStatusManagementDeclarations_Declaration_Valid_invalid, 
                        _RMModelStatusManagementDeclarations_Declaration_Valid_unknown, 
                        _RMModelStatusManagementDeclarations_Declaration_Valid_valid ]
     objc-classes:    [ RMModelAccountCalDAVDeclaration, RMModelAccountCardDAVDeclaration, 
@@ -62,13 +82,19 @@ exports:
                        RMModelDeclarationBase, RMModelLegacyInteractiveProfileDeclaration, 
                        RMModelLegacyProfileDeclaration, RMModelManagementBase, RMModelManagementOrganizationInformationDeclaration, 
                        RMModelManagementOrganizationInformationDeclaration_Proof, 
-                       RMModelManagementServerCapabilitiesDeclaration, RMModelManagementStatusSubscriptionsDeclaration, 
-                       RMModelManagementStatusSubscriptionsDeclaration_StatusItem, 
+                       RMModelManagementPropertiesDeclaration, RMModelManagementServerCapabilitiesDeclaration, 
+                       RMModelManagementStatusSubscriptionsDeclaration, RMModelManagementStatusSubscriptionsDeclaration_StatusItem, 
                        RMModelManagementTestCommandCommand, RMModelManagementTestCommandCommand_Status, 
                        RMModelManagementTestDeclaration, RMModelPasscodeSettingsDeclaration, 
-                       RMModelPayloadBase, RMModelRegisteredTypeResolver, RMModelStatusBase, 
-                       RMModelStatusManagementClientCapabilities, RMModelStatusManagementClientCapabilities_SupportedPayloads, 
+                       RMModelPayloadBase, RMModelRegisteredTypeResolver, RMModelStatusAccountListCalDAV, 
+                       RMModelStatusAccountListCardDAV, RMModelStatusAccountListExchange, 
+                       RMModelStatusAccountListGoogle, RMModelStatusAccountListLDAP, 
+                       RMModelStatusAccountListMailIncoming, RMModelStatusAccountListMailOutgoing, 
+                       RMModelStatusAccountListSubscribedCalendar, RMModelStatusBase, 
+                       RMModelStatusMDMApp, RMModelStatusManagementClientCapabilities, 
+                       RMModelStatusManagementClientCapabilities_SupportedPayloads, 
                        RMModelStatusManagementClientCapabilities_SupportedPayloadsDeclarations, 
                        RMModelStatusManagementDeclarations, RMModelStatusManagementDeclarations_Declaration, 
-                       RMModelStatusReason, RMModelUserIdentityDeclaration, RMModelUserNameAndPasswordCredentialsDeclaration ]
+                       RMModelStatusReason, RMModelStatusTestArrayValue, RMModelStatusTestDictionaryValue, 
+                       RMModelUserIdentityDeclaration, RMModelUserNameAndPasswordCredentialsDeclaration ]
 ...

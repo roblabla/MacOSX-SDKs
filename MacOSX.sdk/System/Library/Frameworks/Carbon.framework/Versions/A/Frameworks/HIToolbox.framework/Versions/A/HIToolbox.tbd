@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7761967D-A138-33B6-9E3F-5C5420A2EEFF
+    value:           FF73B93B-3C5B-3F73-948F-0A35A80F7FAD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4A1D1F30-C79D-3502-B51F-9792ADBD8E06
+    value:           02B9797F-C47D-30B7-B7B0-802D0D26F31C
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox'
-current-version: 1113.9
+current-version: 1160
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
@@ -19,7 +19,7 @@ allowable-clients:
                        ImageKit, Printing_UI, QTKit, QTKitServer, RemoteViewServices, 
                        Shortcut, Suggestions, UIKitMacHelper, ViewBridge, loginwindow ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AEGetInteractionAllowed, _AEGetTheCurrentEvent, _AEInteractWithUser, 
                        _AEProcessAppleEvent, _AEProcessEvent, _AEResetTimer, _AEResumeTheCurrentEvent, 
                        _AESend, _AESetInteractionAllowed, _AESetTheCurrentEvent, 
@@ -189,6 +189,7 @@ exports:
                        _HMSetHelpTagsDisplayed, _HMSetMenuItemHelpContent, _HMSetTagDelay, 
                        _HandleControlSetCursor, _HideControl, _HideMenuBar, _HideSheetWindow, 
                        _HideWindow, _HiliteControl, _HiliteMenu, _HiliteWindow, _IMKBaselineKey, 
+                       _IMKCFRunLoopWakeUpReliable, _IMKCFRunLoopWakeUpReliableSetup, 
                        _IMKChromaticMarkedTextAttributeName, _IMKDictationHilightAttributeName, 
                        _IMKDictationHilightHypothesisDeltaAttributeName, _IMKDictationInsertionUndoableAttributeName, 
                        _IMKIronwoodTextAlternativeCorrectedKey, _IMKIronwoodTextAlternativeCorrectionIDKey, 
@@ -269,12 +270,12 @@ exports:
                        _TISCreateDefaultASCIIInputSourceForLocale, _TISCreateInputSourceList, 
                        _TISCreatePrunedPreferredInputSourcesWithABC, _TISCreateSecureKeyboardInputSourceList, 
                        _TISDeselectInputSource, _TISDisableInputSource, _TISEnableInputSource, 
-                       _TISEnableInputSourceWithOptions, _TISGetAppleKeyLayoutCount, 
-                       _TISGetAppleKeyLayoutIndexForKeyLayoutName, _TISGetAppleKeyLayoutIndexForNumericID, 
-                       _TISGetAppleKeyLayoutKLPropertyAtIndex, _TISGetDictationShouldAutoEnable, 
-                       _TISGetFnUsageType, _TISGetGestureHandwritingState, _TISGetInputSourceProperty, 
-                       _TISHardwareSupportsGestureHandwriting, _TISInputMethodDataFileReaderCreateBasicProperties, 
-                       _TISInputMethodDataFileReaderCreatePropertyListAndWordList, 
+                       _TISEnableInputSourceWithOptions, _TISFetchEmojiTouchBarItemWithCompletionBlock, 
+                       _TISGetAppleKeyLayoutCount, _TISGetAppleKeyLayoutIndexForKeyLayoutName, 
+                       _TISGetAppleKeyLayoutIndexForNumericID, _TISGetAppleKeyLayoutKLPropertyAtIndex, 
+                       _TISGetDictationShouldAutoEnable, _TISGetFnUsageType, _TISGetGestureHandwritingState, 
+                       _TISGetInputSourceProperty, _TISHardwareSupportsGestureHandwriting, 
+                       _TISInputMethodDataFileReaderCreateBasicProperties, _TISInputMethodDataFileReaderCreatePropertyListAndWordList, 
                        _TISInputSourceGetTypeID, _TISIsKeyboardLayoutCapsLockSwitchAllowed, 
                        _TISIsKeyboardLayoutCapsLockSwitched, _TISIsRomanSwitchAllowed, 
                        _TISIsRomanSwitchEnabled, _TISKeyboardLayoutInputSourceIsQWERTY, 
@@ -364,11 +365,11 @@ exports:
                        __HIStdEventLoopRegisterClass, __HITextFieldRegisterClass, 
                        __HITextViewRegisterClass, __HIThemeCreateImage, __HIThemeDrawAppleMenuTitle, 
                        __HIThemeDrawSegment, __HIThemeDrawSelectionMarquee, __HIThemeDrawWell, 
-                       __HIThemeGetChasingArrowDimensions, __HIThemeGetLegacyModeEnabled, 
-                       __HIThemeGetMenuBarLogoRect, __HIThemeGetMenuCalloutDimensions, 
-                       __HIThemeGetWindowGrowSides, __HIThemeGetWindowTitleBaselineOffset, 
-                       __HIThemeRefreshPreferences, __HIThemeSetColor, __HIThemeSetDrawingCallback, 
-                       __HIThemeSetTextColor, __HIToolbarItemRegisterClass, __HIToolbarViewRegisterClass, 
+                       __HIThemeGetChasingArrowDimensions, __HIThemeGetMenuBarLogoRect, 
+                       __HIThemeGetMenuCalloutDimensions, __HIThemeGetWindowGrowSides, 
+                       __HIThemeGetWindowTitleBaselineOffset, __HIThemeRefreshPreferences, 
+                       __HIThemeSetColor, __HIThemeSetDrawingCallback, __HIThemeSetTextColor, 
+                       __HIToolbarItemRegisterClass, __HIToolbarViewRegisterClass, 
                        __HIViewAdvanceFocusFollowingView, __HIViewCopyVisibleShape, 
                        __HIViewNotifySetFocusPart, __HIViewRegisterClass, __HIViewScrollRectWithOptions, 
                        __HIWindowFrameViewRegisterClass, __HIWindowSetAutoReleaseFocus, 
@@ -472,6 +473,6 @@ exports:
                        _kTISTypeKeyboardLayout, _kTISTypeKeyboardSyntheticRomanMode, 
                        _kTISTypeKeyboardViewer ]
 reexports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ShowHideProcess ]
 ...

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F55FC45F-9089-332B-A6BB-958A809C6C59
+    value:           088A4A48-97D0-3E44-B951-E8659FDA9A30
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CC39CF0C-A415-3759-9977-CF8699FF5A08
+    value:           342ECCF9-B492-3865-A6B5-6A469EB22FAA
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore'
-current-version: 1319
+current-version: 1333
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        CoreServices
@@ -17,7 +17,7 @@ allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AudioToolbox, Foundation, Metadata ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AbsoluteDeltaToDuration, _AbsoluteDeltaToNanoseconds, _AbsoluteToDuration, 
                        _AbsoluteToNanoseconds, _AddAbsoluteToAbsolute, _AddAtomic, 
                        _AddAtomic16, _AddAtomic8, _AddCollectionItem, _AddCollectionItemHdl, 

@@ -738,7 +738,10 @@ typedef CF_OPTIONS(UInt32, AudioSettingsFlags) {
 						than the requested number of output packets may have been
 						produced. Check the value returned in ioNumberPackets for the
 						actual number produced. Note that not all formats have EOF
-						markers in them. 
+						markers in them.
+     @constant        kAudioCodecProduceOutputPacketSuccessConcealed
+                        No input packets were provided, but the decoder supports packet
+                        loss concealment, so output packets were still created.
 */
 CF_ENUM(UInt32)
 {
@@ -746,7 +749,8 @@ CF_ENUM(UInt32)
 	kAudioCodecProduceOutputPacketSuccess					= 2,	
 	kAudioCodecProduceOutputPacketSuccessHasMore			= 3,		
 	kAudioCodecProduceOutputPacketNeedsMoreInputData		= 4,		
-	kAudioCodecProduceOutputPacketAtEOF						= 5		
+	kAudioCodecProduceOutputPacketAtEOF						= 5,
+    kAudioCodecProduceOutputPacketSuccessConcealed          = 6
 };
 
 

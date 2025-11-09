@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CE348676-5D1F-38D5-9B45-FF03CA0C6EF2
+    value:           596E6A1D-3FBF-3625-A2BE-64A0D09C64ED
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           890ABD44-3AB2-336A-BC16-8C6CBD8ACA6F
+    value:           4B3DFCBD-B293-3B51-8BCC-7BFE7BC502A1
 install-name:    '/System/Library/PrivateFrameworks/QuickLookGeneration.framework/Versions/A/QuickLookGeneration'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _QuickLookGenerationVersionNumber, _QuickLookGenerationVersionString ]
     objc-classes:    [ QLPreviewGenerationProvider, QLTextGenerationPreviewProvider ]
 ...

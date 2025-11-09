@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AAAF32A1-3C6E-3394-97A7-5FCCD0D1F51B
+    value:           0C6FCC59-0A40-38B2-BDC1-E4DFDB2585D1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5E14FAFC-01AD-3B96-AC17-E1214F1D5B3D
+    value:           C92A3A37-9A37-309D-8839-D2F8CDCEF5E0
 install-name:    '/System/Library/PrivateFrameworks/STSXPCHelperClient.framework/Versions/A/STSXPCHelperClient'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _STSUAStepupEventKeyEndpointData, _STSUAStepupEventKeySharedSecretData, 
                        _STSXPCHelperClientVersionNumber, _STSXPCHelperClientVersionString, 
                        _STSXPCHelperErrorDescriptions, _STS_XCPHELPER_ERROR_BT_SUBDOMAIN, 

@@ -6,7 +6,7 @@
 #include <CoreFoundation/CFDateFormatter.h>
 #import <Foundation/NSFormatter.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class NSString, NSDate, NSTimeZone;
 
@@ -67,4 +67,4 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

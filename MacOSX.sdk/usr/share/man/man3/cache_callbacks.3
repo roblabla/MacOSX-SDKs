@@ -78,19 +78,21 @@ and family.
 .Pp
 .Fn cache_value_make_purgeable_cb
 Can be used for
-.Fn value_make_purgeable 
+.Fn value_make_purgeable_cb 
 with values allocated from the purgeable malloc zone (see malloc/malloc.h).  Calls
 .Fn malloc_make_purgeable 
 on 
 .Fa value
 when it is unreferenced in order to reduce paging under memory pressure.
 .Pp
-.Fn value_make_purgeable 
+.Fn cache_value_make_nonpurgeable_cb
+Can be used for
+.Fn value_make_nonpurgeable_cb 
 with values allocated from the purgeable malloc zone (see malloc/malloc.h).  Calls
-.Fn malloc_make_purgeable 
+.Fn malloc_make_nonpurgeable 
 on 
 .Fa value
-when it is unreferenced in order to reduce paging under memory pressure.
+when it is referenced in order to make a value nonpurgeable.
 .Pp
 .Fn cache_hash_byte_string
 Calculates a hash from a bytes string

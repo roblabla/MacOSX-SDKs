@@ -4,21 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DEE66E10-1AF4-3AEB-B90D-7CC2001E7D6B
+    value:           48479908-0484-3D58-80EB-A18231342DE4
   - target:          x86_64-maccatalyst
-    value:           DEE66E10-1AF4-3AEB-B90D-7CC2001E7D6B
+    value:           48479908-0484-3D58-80EB-A18231342DE4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD602279-48F4-3A26-BDF6-1A412D77BE21
+    value:           202BB9BB-BA39-322F-90CD-58233A37D96D
   - target:          arm64e-maccatalyst
-    value:           FD602279-48F4-3A26-BDF6-1A412D77BE21
+    value:           202BB9BB-BA39-322F-90CD-58233A37D96D
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySharedSupport.framework/Versions/A/AccessibilitySharedSupport'
+swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AXCloudKitErrorDomain, _AXCloudKitFinishedSchemaCheckKey, 
                        _AXCloudKitMaxRecordDataBytes, _AXMTBlendShapeBrowOuterUpLeft, 
                        _AXMTBlendShapeBrowOuterUpRight, _AXMTBlendShapeEyeBlinkLeft, 
@@ -27,28 +28,37 @@ exports:
                        _AXMTBlendShapeMouthSmileLeft, _AXMTBlendShapeMouthSmileRight, 
                        _AXMTBlendShapeNoseSneerLeft, _AXMTBlendShapeNoseSneerRight, 
                        _AXMTBlendShapeTongueOut, _AXSSAccessibilityDescriptionForSymbolName, 
-                       _AXSSDeviceGetType, _AXSSDeviceTypeAppleTV, _AXSSDeviceTypeMac, 
-                       _AXSSDeviceTypePad, _AXSSDeviceTypePhone, _AXSSHumanReadableDescriptionForMotionTrackingErrorCode, 
+                       _AXSSColorGetRGBAComponents, _AXSSContrastRatioForColor, _AXSSDeviceGetType, 
+                       _AXSSDeviceTypeAppleTV, _AXSSDeviceTypeMac, _AXSSDeviceTypePad, 
+                       _AXSSDeviceTypePhone, _AXSSHsv2rgb, _AXSSHumanReadableDescriptionForMotionTrackingErrorCode, 
                        _AXSSHumanReadableDescriptionForMotionTrackingFacialExpression, 
                        _AXSSHumanReadableDescriptionForMotionTrackingFacialExpressionSensitivity, 
                        _AXSSHumanReadableDescriptionForMotionTrackingMode, _AXSSHumanReadableExplanationForMotionTrackingFacialExpression, 
-                       _AXSSHumanReadableExplanationForMotionTrackingMode, _AXSSKeyboardCommandIdentifier3DTouch, 
-                       _AXSSKeyboardCommandIdentifierActivateAccessibilityShortcut, 
+                       _AXSSHumanReadableExplanationForMotionTrackingMode, _AXSSIsAppleInternalBuild, 
+                       _AXSSKeyboardCommandIdentifier3DTouch, _AXSSKeyboardCommandIdentifierActivateAccessibilityShortcut, 
                        _AXSSKeyboardCommandIdentifierActivateSOS, _AXSSKeyboardCommandIdentifierActivateSiri, 
-                       _AXSSKeyboardCommandIdentifierActivateTypeahead, _AXSSKeyboardCommandIdentifierArmApplePay, 
-                       _AXSSKeyboardCommandIdentifierEnterContainer, _AXSSKeyboardCommandIdentifierExitContainer, 
-                       _AXSSKeyboardCommandIdentifierGestures, _AXSSKeyboardCommandIdentifierGoHome, 
-                       _AXSSKeyboardCommandIdentifierGoToFirstElement, _AXSSKeyboardCommandIdentifierGoToLastElement, 
-                       _AXSSKeyboardCommandIdentifierGoToNextElement, _AXSSKeyboardCommandIdentifierGoToNextSection, 
-                       _AXSSKeyboardCommandIdentifierGoToPreviousElement, _AXSSKeyboardCommandIdentifierGoToPreviousSection, 
-                       _AXSSKeyboardCommandIdentifierHelp, _AXSSKeyboardCommandIdentifierLockScreen, 
-                       _AXSSKeyboardCommandIdentifierMoveDown, _AXSSKeyboardCommandIdentifierMoveInsideNext, 
-                       _AXSSKeyboardCommandIdentifierMoveInsidePrevious, _AXSSKeyboardCommandIdentifierMoveLeft, 
+                       _AXSSKeyboardCommandIdentifierActivateTypeahead, _AXSSKeyboardCommandIdentifierApplicationList, 
+                       _AXSSKeyboardCommandIdentifierArmApplePay, _AXSSKeyboardCommandIdentifierEnterContainer, 
+                       _AXSSKeyboardCommandIdentifierExitContainer, _AXSSKeyboardCommandIdentifierGestures, 
+                       _AXSSKeyboardCommandIdentifierGoHome, _AXSSKeyboardCommandIdentifierGoToFirstElement, 
+                       _AXSSKeyboardCommandIdentifierGoToLastElement, _AXSSKeyboardCommandIdentifierGoToNextElement, 
+                       _AXSSKeyboardCommandIdentifierGoToNextSection, _AXSSKeyboardCommandIdentifierGoToPreviousElement, 
+                       _AXSSKeyboardCommandIdentifierGoToPreviousSection, _AXSSKeyboardCommandIdentifierHelp, 
+                       _AXSSKeyboardCommandIdentifierLockScreen, _AXSSKeyboardCommandIdentifierMoveDown, 
+                       _AXSSKeyboardCommandIdentifierMoveInsideNext, _AXSSKeyboardCommandIdentifierMoveInsidePrevious, 
+                       _AXSSKeyboardCommandIdentifierMoveLeft, _AXSSKeyboardCommandIdentifierMovePointerToFocus, 
                        _AXSSKeyboardCommandIdentifierMoveRight, _AXSSKeyboardCommandIdentifierMoveUp, 
-                       _AXSSKeyboardCommandIdentifierOpenContextualMenu, _AXSSKeyboardCommandIdentifierPerformDefaultAction, 
-                       _AXSSKeyboardCommandIdentifierPerformEscape, _AXSSKeyboardCommandIdentifierPerformSysdiagnose, 
-                       _AXSSKeyboardCommandIdentifierPinchIn, _AXSSKeyboardCommandIdentifierPinchOut, 
-                       _AXSSKeyboardCommandIdentifierPressAndLift, _AXSSKeyboardCommandIdentifierRebootDevice, 
+                       _AXSSKeyboardCommandIdentifierNextButton, _AXSSKeyboardCommandIdentifierNextCheckbox, 
+                       _AXSSKeyboardCommandIdentifierNextHeading, _AXSSKeyboardCommandIdentifierNextImage, 
+                       _AXSSKeyboardCommandIdentifierNextLink, _AXSSKeyboardCommandIdentifierNextTable, 
+                       _AXSSKeyboardCommandIdentifierNextTextField, _AXSSKeyboardCommandIdentifierOpenContextualMenu, 
+                       _AXSSKeyboardCommandIdentifierPerformDefaultAction, _AXSSKeyboardCommandIdentifierPerformEscape, 
+                       _AXSSKeyboardCommandIdentifierPerformSysdiagnose, _AXSSKeyboardCommandIdentifierPinchIn, 
+                       _AXSSKeyboardCommandIdentifierPinchOut, _AXSSKeyboardCommandIdentifierPressAndLift, 
+                       _AXSSKeyboardCommandIdentifierPreviousButton, _AXSSKeyboardCommandIdentifierPreviousCheckbox, 
+                       _AXSSKeyboardCommandIdentifierPreviousHeading, _AXSSKeyboardCommandIdentifierPreviousImage, 
+                       _AXSSKeyboardCommandIdentifierPreviousLink, _AXSSKeyboardCommandIdentifierPreviousTable, 
+                       _AXSSKeyboardCommandIdentifierPreviousTextField, _AXSSKeyboardCommandIdentifierRebootDevice, 
                        _AXSSKeyboardCommandIdentifierRotateDevice, _AXSSKeyboardCommandIdentifierRotateLeft, 
                        _AXSSKeyboardCommandIdentifierRotateRight, _AXSSKeyboardCommandIdentifierShowAccessibilityActions, 
                        _AXSSKeyboardCommandIdentifierSwipeDown, _AXSSKeyboardCommandIdentifierSwipeLeft, 
@@ -59,25 +69,27 @@ exports:
                        _AXSSKeyboardCommandIdentifierTogglePassthroughMode, _AXSSKeyboardCommandIdentifierToggleQuickNote, 
                        _AXSSKeyboardCommandIdentifierTwoFingerPressAndLift, _AXSSKeyboardCommandIdentifierTwoFingerSwipeDown, 
                        _AXSSKeyboardCommandIdentifierTwoFingerSwipeLeft, _AXSSKeyboardCommandIdentifierTwoFingerSwipeRight, 
-                       _AXSSKeyboardCommandIdentifierTwoFingerSwipeUp, _AXSSKeyboardCommandTypeStandard, 
-                       _AXSSLanguageConvertToCanonicalForm, _AXSSLogForCategory, 
-                       _AXSSMotionTrackingDaemonIdentifier, _AXSSMotionTrackingDefaultJoystickModeMovementThreshold, 
-                       _AXSSMotionTrackingDefaultMode, _AXSSMotionTrackingDefaultSensitivity, 
-                       _AXSSMotionTrackingErrorDomain, _AXSSMotionTrackingInvalidPoint, 
-                       _AXSSMotionTrackingPreferenceDomain, _AXSSMotionTrackingVideoFileInputDistributedNotificationName, 
+                       _AXSSKeyboardCommandIdentifierTwoFingerSwipeUp, _AXSSKeyboardCommandIdentifierWindowList, 
+                       _AXSSKeyboardCommandTypeStandard, _AXSSLanguageConvertToCanonicalForm, 
+                       _AXSSLogForCategory, _AXSSLuminanceForColor, _AXSSMotionTrackingDaemonIdentifier, 
+                       _AXSSMotionTrackingDefaultJoystickModeMovementThreshold, _AXSSMotionTrackingDefaultMode, 
+                       _AXSSMotionTrackingDefaultSensitivity, _AXSSMotionTrackingErrorDomain, 
+                       _AXSSMotionTrackingInvalidPoint, _AXSSMotionTrackingPreferenceDomain, 
+                       _AXSSMotionTrackingVideoFileInputDistributedNotificationName, 
                        _AXSSMotionTrackingVideoFileInputPreferenceKey, _AXSSPunctuationCloudKitContainer, 
                        _AXSSPunctuationCloudKitTopic, _AXSSPunctuationCloudKitZone, 
-                       _AXSSPunctutionGroupFileExtension, _AXSSSwitchActionATVArrowDown, 
-                       _AXSSSwitchActionATVArrowLeft, _AXSSSwitchActionATVArrowRight, 
-                       _AXSSSwitchActionATVArrowUp, _AXSSSwitchActionATVHome, _AXSSSwitchActionATVMenu, 
-                       _AXSSSwitchActionATVPlayPause, _AXSSSwitchActionATVSelect, 
-                       _AXSSSwitchActionActivate, _AXSSSwitchActionAppSwitcher, _AXSSSwitchActionControlCenter, 
-                       _AXSSSwitchActionCustom, _AXSSSwitchActionDictation, _AXSSSwitchActionForceTouch, 
-                       _AXSSSwitchActionHome, _AXSSSwitchActionMenu, _AXSSSwitchActionMoveToNextItem, 
-                       _AXSSSwitchActionMoveToPreviousItem, _AXSSSwitchActionNotificationCenter, 
-                       _AXSSSwitchActionRun, _AXSSSwitchActionSelect, _AXSSSwitchActionSiri, 
-                       _AXSSSwitchActionSiriShortcutsMenu, _AXSSSwitchActionStop, 
-                       _AXSSSwitchActionTripleClick, _AXSSSwitchActionVolumeDown, 
+                       _AXSSPunctutionGroupFileExtension, _AXSSRecommendedColorForColors, 
+                       _AXSSRgb2hsv, _AXSSSwitchActionATVArrowDown, _AXSSSwitchActionATVArrowLeft, 
+                       _AXSSSwitchActionATVArrowRight, _AXSSSwitchActionATVArrowUp, 
+                       _AXSSSwitchActionATVHome, _AXSSSwitchActionATVMenu, _AXSSSwitchActionATVPlayPause, 
+                       _AXSSSwitchActionATVSelect, _AXSSSwitchActionActivate, _AXSSSwitchActionAppSwitcher, 
+                       _AXSSSwitchActionControlCenter, _AXSSSwitchActionCustom, _AXSSSwitchActionDictation, 
+                       _AXSSSwitchActionForceTouch, _AXSSSwitchActionHome, _AXSSSwitchActionMenu, 
+                       _AXSSSwitchActionMoveToNextItem, _AXSSSwitchActionMoveToPreviousItem, 
+                       _AXSSSwitchActionNotificationCenter, _AXSSSwitchActionRun, 
+                       _AXSSSwitchActionSelect, _AXSSSwitchActionSelectAndResumeAutoscanning, 
+                       _AXSSSwitchActionSiri, _AXSSSwitchActionSiriShortcutsMenu, 
+                       _AXSSSwitchActionStop, _AXSSSwitchActionTripleClick, _AXSSSwitchActionVolumeDown, 
                        _AXSSSwitchActionVolumeUp, _AXSSSwitchControlCursorSizeLarge, 
                        _AXSSSwitchControlCursorSizeMedium, _AXSSSwitchControlCursorSizeSmall, 
                        _AXSSSwitchControlPostActivationScanLocationCurrentItem, _AXSSSwitchControlPostActivationScanLocationDefault, 
@@ -92,7 +104,9 @@ exports:
                        _AXSSVoiceOverTextualContextMessaging, _AXSSVoiceOverTextualContextNarrative, 
                        _AXSSVoiceOverTextualContextSocialMedia, _AXSSVoiceOverTextualContextSourceCode, 
                        _AXSSVoiceOverTextualContextSpreadsheet, _AXSSVoiceOverTextualContextWordProcessing, 
-                       ___AXSSCastAsClass ]
+                       ___AXSSCastAsClass, _kAXSSColorRecommendedContrastRatioEnhanced, 
+                       _kAXSSColorRecommendedContrastRatioLight, _kAXSSColorRecommendedContrastRatioMedium, 
+                       _kAXSSColorRecommendedContrastRatioMinimum ]
     objc-classes:    [ AXSSActionManager, AXSSCloudKitHelper, AXSSCloudKitHelperManagedObjectContext, 
                        AXSSDatabaseManager, AXSSDialectMap, AXSSEventManager, AXSSInterDeviceCommunicator, 
                        AXSSInterDeviceSearchResult, AXSSInterDeviceSecurityHelper, 
@@ -103,10 +117,10 @@ exports:
                        AXSSMotionTrackingCameraInput, AXSSMotionTrackingExpressionConfiguration, 
                        AXSSMotionTrackingHIDInput, AXSSMotionTrackingInput, AXSSMotionTrackingInputConfiguration, 
                        AXSSMotionTrackingInputManager, AXSSMotionTrackingState, AXSSMotionTrackingUtilities, 
-                       AXSSMotionTrackingVideoFileInput, AXSSPronunciationSubstitution, 
-                       AXSSPunctuationEntry, AXSSPunctuationGroup, AXSSPunctuationManager, 
-                       AXSSRateLimitingLogger, AXSSSwitchControlSettings, AXSSVoiceTagger, 
-                       AXSSWordDescriptionManager, AXSS_PunctuationCloudDeletionCache, 
+                       AXSSMotionTrackingVideoFileInput, AXSSMotionTrackingVirtualEyeTracker, 
+                       AXSSPronunciationSubstitution, AXSSPunctuationEntry, AXSSPunctuationGroup, 
+                       AXSSPunctuationManager, AXSSRateLimitingLogger, AXSSSwitchControlSettings, 
+                       AXSSVoiceTagger, AXSSWordDescriptionManager, AXSS_PunctuationCloudDeletionCache, 
                        AXSS_PunctuationContext, AXSS_PunctuationEntry, AXSS_PunctuationGroup, 
                        VOBundle, VOLanguage, VOSubstitution, VOVoice ]
 ...

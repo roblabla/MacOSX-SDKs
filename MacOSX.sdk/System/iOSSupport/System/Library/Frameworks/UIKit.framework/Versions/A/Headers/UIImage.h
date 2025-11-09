@@ -15,11 +15,13 @@
 #import <UIKit/UIColor.h>
 #import <UIKit/UIGeometry.h>
 #import <UIKit/NSItemProvider+UIKitAdditions.h>
-#if __has_include(<UIKit/NSTextAttachment.h>)
+#if __has_include(<UIFoundation/NSTextAttachment.h>)
+#import <UIFoundation/NSTextAttachment.h>
+#else
 #import <UIKit/NSTextAttachment.h>
 #endif
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if __has_include(<UIKit/UITraitCollection.h>)
 @class UITraitCollection, UIImageAsset;
@@ -71,7 +73,8 @@ typedef NS_ENUM(NSInteger, UIImageRenderingMode) {
 @class UIImageConfiguration;
 @class UIImageSymbolConfiguration;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIImage : NSObject <NSSecureCoding> 
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_SENDABLE
+@interface UIImage : NSObject <NSSecureCoding>
 
 /*
  * Retrieve a system-provided image with the specified name.
@@ -85,17 +88,33 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIImage : NSObject <NSSecureCodi
  */
 + (nullable UIImage *)systemImageNamed:(NSString *)name API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0));
 + (nullable UIImage *)systemImageNamed:(NSString *)name withConfiguration:(nullable UIImageConfiguration *)configuration API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0));
-
 #if __has_include(<UIKit/UITraitCollection.h>)
 + (nullable UIImage *)systemImageNamed:(NSString *)name compatibleWithTraitCollection:(nullable UITraitCollection *)traitCollection API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0));
 #endif
-
+/**
+ * Retrieve a system-provided image with the specified name and variable value (between 0 and 1).
+ *
+ * This will only return system-provided images. If you want a custom image as defined in your own catalogs,
+ * you should use @c +imageNamed:inBundle:variableValue:withConfiguration:.
+ *
+ * Returns @c nil if an image with specified name doesn't exist.
+ */
++ (nullable UIImage *)systemImageNamed:(NSString *)name variableValue:(double)value withConfiguration:(nullable UIImageConfiguration *)configuration API_AVAILABLE(ios(16.0), macCatalyst(16.0), tvos(16.0), watchos(9.0));
 
 + (nullable UIImage *)imageNamed:(NSString *)name;      // load from main bundle
 + (nullable UIImage *)imageNamed:(NSString *)name inBundle:(nullable NSBundle *)bundle withConfiguration:(nullable UIImageConfiguration *)configuration API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0));
 #if __has_include(<UIKit/UITraitCollection.h>)
 + (nullable UIImage *)imageNamed:(NSString *)name inBundle:(nullable NSBundle *)bundle compatibleWithTraitCollection:(nullable UITraitCollection *)traitCollection API_AVAILABLE(ios(8.0));
 #endif
+/**
+ * Retrieve a image with the specified name and variable value (between 0 and 1).
+ *
+ * This will only return custom images defined in your own catalogs. If you want a system-provided image,
+ * you should use @c +systemImageNamed:variableValue:withConfiguration:.
+ *
+ * Returns @c nil if an image with specified name doesn't exist.
+ */
++ (nullable UIImage *)imageNamed:(NSString *)name inBundle:(nullable NSBundle *)bundle variableValue:(double)value withConfiguration:(nullable UIImageConfiguration *)configuration API_AVAILABLE(ios(16.0), macCatalyst(16.0), tvos(16.0), watchos(9.0));
 
 + (nullable UIImage *)imageWithContentsOfFile:(NSString *)path;
 + (nullable UIImage *)imageWithData:(NSData *)data;
@@ -312,7 +331,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIImage : NSObject <NSSecureCodi
 
 @end
 
-#if __has_include(<UIKit/NSTextAttachment.h>) && UIKIT_HAS_UIFOUNDATION_SYMBOLS
+#if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 @interface NSTextAttachment (UIImage)
 
 + (NSTextAttachment *)textAttachmentWithImage:(UIImage *)image API_AVAILABLE(ios(13.0),tvos(13.0));
@@ -344,7 +363,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIImage : NSObject <NSSecureCodi
 UIKIT_EXTERN  NSData * __nullable UIImagePNGRepresentation(UIImage * __nonnull image);                               // return image as PNG. May return nil if image has no CGImageRef or invalid bitmap format
 UIKIT_EXTERN  NSData * __nullable UIImageJPEGRepresentation(UIImage * __nonnull image, CGFloat compressionQuality);  // return image as JPEG. May return nil if image has no CGImageRef or invalid bitmap format. compression is 0(most)..1(least)
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 
 #else

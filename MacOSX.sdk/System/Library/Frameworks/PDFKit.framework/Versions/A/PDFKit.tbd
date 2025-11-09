@@ -3,14 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E41E2796-5E51-3D02-B422-B9AF35B016BA
+    value:           B7C6F04E-24D2-379D-82F8-B12D2928E4AE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DA66156C-23C1-3D6D-A259-9A2700306AC8
+    value:           7F70421D-AC1B-3C1C-81F9-39CD0CFBA276
 install-name:    '/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit'
+current-version: 1158
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz', 
                        '$ld$install_name$os10.11$/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz', 
                        '$ld$install_name$os10.12$/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz', 
@@ -62,21 +63,28 @@ exports:
                        _PDFAppearanceCharacteristicsKeyRolloverCaption, _PDFAppearanceCharacteristicsKeyRotation, 
                        _PDFBorderKeyDashPattern, _PDFBorderKeyLineWidth, _PDFBorderKeyStyle, 
                        _PDFDocumentAccessPermissionsOption, _PDFDocumentAuthorAttribute, 
-                       _PDFDocumentCreationDateAttribute, _PDFDocumentCreatorAttribute, 
-                       _PDFDocumentDidBeginFindNotification, _PDFDocumentDidBeginPageFindNotification, 
-                       _PDFDocumentDidBeginPageWriteNotification, _PDFDocumentDidBeginWriteNotification, 
-                       _PDFDocumentDidEndFindNotification, _PDFDocumentDidEndPageFindNotification, 
-                       _PDFDocumentDidEndPageWriteNotification, _PDFDocumentDidEndWriteNotification, 
-                       _PDFDocumentDidFindMatchNotification, _PDFDocumentDidUnlockNotification, 
-                       _PDFDocumentFoundSelectionKey, _PDFDocumentKeywordsAttribute, 
-                       _PDFDocumentModificationDateAttribute, _PDFDocumentOwnerPasswordOption, 
-                       _PDFDocumentPageIndexKey, _PDFDocumentProducerAttribute, _PDFDocumentSubjectAttribute, 
-                       _PDFDocumentTitleAttribute, _PDFDocumentUserPasswordOption, 
-                       _PDFHUDLaunchPreviewControl, _PDFHUDSavePDFControl, _PDFHUDSeperatorControl, 
-                       _PDFHUDZoomInControl, _PDFHUDZoomOutControl, _PDFPageAnnotationAddedNotification, 
+                       _PDFDocumentBurnInAnnotationsOption, _PDFDocumentCreationDateAttribute, 
+                       _PDFDocumentCreatorAttribute, _PDFDocumentDidBeginFindNotification, 
+                       _PDFDocumentDidBeginPageFindNotification, _PDFDocumentDidBeginPageWriteNotification, 
+                       _PDFDocumentDidBeginWriteNotification, _PDFDocumentDidEndFindNotification, 
+                       _PDFDocumentDidEndPageFindNotification, _PDFDocumentDidEndPageWriteNotification, 
+                       _PDFDocumentDidEndWriteNotification, _PDFDocumentDidFindMatchNotification, 
+                       _PDFDocumentDidUnlockNotification, _PDFDocumentFoundSelectionKey, 
+                       _PDFDocumentKeywordsAttribute, _PDFDocumentModificationDateAttribute, 
+                       _PDFDocumentOwnerPasswordOption, _PDFDocumentPageIndexKey, 
+                       _PDFDocumentProducerAttribute, _PDFDocumentSaveTextFromOCROption, 
+                       _PDFDocumentSubjectAttribute, _PDFDocumentTitleAttribute, 
+                       _PDFDocumentUserPasswordOption, _PDFHUDLaunchPreviewControl, 
+                       _PDFHUDSavePDFControl, _PDFHUDSeperatorControl, _PDFHUDZoomInControl, 
+                       _PDFHUDZoomOutControl, _PDFPageAnnotationAddedNotification, 
                        _PDFPageAnnotationRemovedNotification, _PDFPageBackgroundCompleteNotification, 
-                       _PDFPageChangedBoundsForBoxNotification, _PDFPageDrawingCompleteNotification, 
-                       _PDFPageImageProperty_BackgroundColor, _PDFPageImageProperty_DrawAnnotations, 
+                       _PDFPageChangedBoundsForBoxNotification, _PDFPageDrawWithBoxOption_DrawAnnotations, 
+                       _PDFPageDrawWithBoxOption_DrawBookmark, _PDFPageDrawWithBoxOption_DrawProgressCallback, 
+                       _PDFPageDrawWithBoxOption_WithRotation, _PDFPageDrawingCompleteNotification, 
+                       _PDFPageImageInitializationOptionCompressionQuality, _PDFPageImageInitializationOptionMediaBox, 
+                       _PDFPageImageInitializationOptionPerformOCR, _PDFPageImageInitializationOptionRotation, 
+                       _PDFPageImageInitializationOptionUpscaleIfSmaller, _PDFPageImageProperty_BackgroundColor, 
+                       _PDFPageImageProperty_ColorSpace, _PDFPageImageProperty_DrawAnnotations, 
                        _PDFPageImageProperty_DrawBookmark, _PDFPageImageProperty_DrawProgressCallback, 
                        _PDFPageImageProperty_WithRotation, _PDFPointEqualToPoint, 
                        _PDFPointFromCGPoint, _PDFPointMake, _PDFPointToCGPoint, _PDFPrintAutoRotateKey, 
@@ -115,8 +123,9 @@ exports:
                        _kPDFAnnotationKey_WidgetFieldType, _kPDFAnnotationKey_WidgetMaxLen, 
                        _kPDFAnnotationKey_WidgetOptions, _kPDFAnnotationKey_WidgetTextLabelUI, 
                        _kPDFAnnotationKey_WidgetValue, _kPDFDestinationUnspecifiedValue, 
-                       _kPDFDocumentWriteOption_BurnInAnnotations, _kPDFDocumentWriteOption_SaveWithCorePDFLayout, 
-                       _kPDFDocumentWriteOption_SaveWithTaggedLayout, _kPDFDocumentWriteOption_UseAppendMode ]
+                       _kPDFDocumentWriteOption_BurnInAnnotations, _kPDFDocumentWriteOption_SaveTextFromOCR, 
+                       _kPDFDocumentWriteOption_SaveWithCorePDFLayout, _kPDFDocumentWriteOption_SaveWithTaggedLayout, 
+                       _kPDFDocumentWriteOption_UseAppendMode ]
     objc-classes:    [ PDFAction, PDFActionGoTo, PDFActionNamed, PDFActionRemoteGoTo, 
                        PDFActionResetForm, PDFActionURL, PDFAnnotation, PDFAnnotationButtonWidget, 
                        PDFAnnotationChoiceWidget, PDFAnnotationCircle, PDFAnnotationFreeText, 
@@ -125,6 +134,6 @@ exports:
                        PDFAnnotationText, PDFAnnotationTextWidget, PDFAppearanceCharacteristics, 
                        PDFBorder, PDFDestination, PDFDocument, PDFEncryptionOptionsEditor, 
                        PDFEncryptionOptionsViewer, PDFHUDLayerController, PDFLayerController, 
-                       PDFOutline, PDFPage, PDFSelection, PDFThumbnailView, PDFView, 
-                       PDFViewLayout ]
+                       PDFOutline, PDFPage, PDFPageEvaluator, PDFSelection, PDFThumbnailView, 
+                       PDFView, PDFViewLayout ]
 ...

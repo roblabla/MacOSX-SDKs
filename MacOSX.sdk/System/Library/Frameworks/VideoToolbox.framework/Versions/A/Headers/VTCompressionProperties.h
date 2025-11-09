@@ -293,6 +293,39 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesAfterEnd API_AVA
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0)); // CFBoolean, Optional
 
+/*!
+	@constant	kVTCompressionPropertyKey_ConstantBitRate
+	@abstract
+		Requires that the encoder use a Constant Bit Rate algorithm.
+	@discussion
+		The property kVTCompressionPropertyKey_ExpectedFrameRate should be set along with kVTCompressionPropertyKey_ConstantBitRate
+		to ensure effective CBR rate control.
+
+		This property is not compatible with kVTCompressionPropertyKey_DataRateLimits and
+		kVTCompressionPropertyKey_AverageBitRate.
+
+		The encoder will pad the frame if they are smaller than they need to be based on the Constant BitRate. This
+		property is not recommended for general streaming or export scenarios. It is intended for interoperability with
+		certain streaming CDNs which specifically require that data rates not drop even during low motion and activity scenes.
+
+		This is not supported in all encoders or in all encoder operating modes. kVTPropertyNotSupportedErr will be
+		returned when this option is not supported.
+
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ConstantBitRate API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0)); // CFNumber bits per second, Optional
+
+/*!
+	@constant	kVTCompressionPropertyKey_EstimatedAverageBytesPerFrame
+	@abstract
+		Returns the encoder's estimate of the expected size of a single encoded frame in bytes, based on current configuration.
+	@discussion
+		When supported, this option is intended to allow clients to estimate the output file size for an encoded video stream.
+		This property is not implemented by all video encoders.
+		
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EstimatedAverageBytesPerFrame API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0)); // Read Only, CFNumber (bytes per frame)
+
+
 #pragma mark Bitstream configuration
 
 /*!
@@ -413,6 +446,17 @@ VT_EXPORT const CFStringRef kVTH264EntropyMode_CABAC API_AVAILABLE(macosx(10.9),
 		tied to particular pixel formats (eg, 16-bit RGB, 24-bit RGB).
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_Depth API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber (CMPixelFormatType), Optional
+
+/*!
+	@constant	kVTCompressionPropertyKey_PreserveAlphaChannel
+	@abstract
+		Instructs the encoder to encode or discard the alpha channel of input video frames
+	@discussion
+		This property allows a client to  specify whether or not the alpha channel in the source pixelBuffers should be encoded.
+		The client may set this to kCFBooleanFalse in cases where they are not interested in preserving alpha, or if the alpha channel is known to be fully opaque.
+		This property is not supported by all encoders.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PreserveAlphaChannel API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0)); // Read/write, CFBoolean, Optional, (effectively) kCFBooleanTrue by default
 
 #pragma mark Runtime restrictions
 
@@ -553,6 +597,16 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedDuration API_AVAIL
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerFrameRate API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0)); // Read/write, CFNumber, Optional
 
+/*!
+	 @constant	kVTCompressionPropertyKey_ReferenceBufferCount
+	 @abstract
+		The client will be able to control the the maximum allowed ReferenceBufferCount using this optional key.
+	 @discussion
+		This is typically used to force the encoder to use lower count than allowed by the stantard for a level/profile.
+		The encoder will fail and  report an error if the requested value exceeds the limit set by the standard for such a level/profile.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ReferenceBufferCount API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)); // CFNumber, Optional
+
 
 #pragma mark Hardware acceleration
 #if !TARGET_OS_IPHONE
@@ -674,7 +728,8 @@ VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_ForceKeyFrame API_AVAILABLE(
 			kVTCompressionPropertyKey_BaseLayerBitRateFraction
 			kVTCompressionPropertyKey_Quality
 			kVTCompressionPropertyKey_MaxAllowedFrameQP
-
+			kVTCompressionPropertyKey_MinAllowedFrameQP
+ 
 		If kVTEncodeFrameOptionKey_BaseFrameQP is used, it must be set for all frames in a session. The QP value specified is
 		frame-level but macro-block level QP may be modulated inside a frame. There will be no rate-control related frame dropping
 		if kVTEncodeFrameOptionKey_BaseFrameQP is used.
@@ -946,6 +1001,18 @@ VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EnableLowLatencyRateCon
 		returned when this option is not supported.
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxAllowedFrameQP API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // Read/write, CFNumberRef, Optional
+
+/*!
+	@constant	kVTCompressionPropertyKey_MinAllowedFrameQP
+	@abstract
+		Specifies the minimum allowed encoded frame QP (Quantization Parameter).
+	@discussion
+		This is an optional parameter. Use it only when you have a specific requirement for the video quality and you are
+		familiar with frame QP. 
+		This is not supported in all encoders or in all encoder operating modes. kVTPropertyNotSupportedErr will be
+		returned when this option is not supported.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MinAllowedFrameQP API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0)); // Read/write, CFNumberRef, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_EnableLTR

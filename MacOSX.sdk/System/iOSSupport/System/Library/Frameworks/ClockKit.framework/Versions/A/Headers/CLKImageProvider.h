@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKImageProvider : NSObject <NSCopying>
 
 - (instancetype)init API_DEPRECATED("Use initializers that take parameters.", watchos(2.0, 7.0), ios(9.0, 14.0));

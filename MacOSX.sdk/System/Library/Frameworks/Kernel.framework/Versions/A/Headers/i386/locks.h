@@ -30,13 +30,13 @@
 #define _I386_LOCKS_H_
 
 #include <sys/appleapiopts.h>
-#include <kern/kern_types.h>
+#include <kern/lock_types.h>
 #include <kern/assert.h>
 
 
-typedef struct __lck_spin_t__   lck_spin_t;
 
+typedef struct __lck_spin_t__           lck_spin_t;
 typedef struct __lck_mtx_t__            lck_mtx_t;
 typedef struct __lck_mtx_ext_t__        lck_mtx_ext_t;
 
-#endif  /* _I386_LOCKS_H_ */
+#endif /* _I386_LOCKS_H_ */

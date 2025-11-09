@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E6C3BB30-6B1B-3656-A412-8A53F4875985
+    value:           5C1F3160-2C17-34C8-8FE7-7B72AF2FFB25
   - target:          x86_64-maccatalyst
-    value:           E6C3BB30-6B1B-3656-A412-8A53F4875985
+    value:           5C1F3160-2C17-34C8-8FE7-7B72AF2FFB25
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE51E999-0499-3A62-801E-F5EA6A38EB0B
+    value:           48D1F661-A868-336A-8326-1CD447B53FA2
   - target:          arm64e-maccatalyst
-    value:           CE51E999-0499-3A62-801E-F5EA6A38EB0B
+    value:           48D1F661-A868-336A-8326-1CD447B53FA2
 install-name:    '/System/Library/PrivateFrameworks/ToneLibrary.framework/Versions/A/ToneLibrary'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _NSStringFromTLAlertPlaybackCompletionType, _NSStringFromTLAlertType, 
                        _TLAlertErrorDomain, _TLAlertPlaybackCompletionTypeFromString, 
                        _TLAlertTopicActivityFriendsGoalAttained, _TLAlertTopicActivityGoalAttained, 

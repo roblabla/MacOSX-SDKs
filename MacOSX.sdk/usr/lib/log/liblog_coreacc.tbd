@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           42479CBA-8059-32B6-BF1D-4F7F2A14AAD8
+    value:           101D113B-869A-357E-A3C7-86F3A03213AB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           056592EE-27FB-3DEC-8FAF-E9F80D097EF1
+    value:           C01526ED-746A-3001-AE93-6B24BB8631D5
 install-name:    '/usr/lib/log/liblog_coreacc.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSObjectIfNotNull, _OSLogCopyFormattedString, _base64DecodeArray, 
                        _base64EncodeArray, _classImplementsMethodsInProtocol, _convertNSDataToNSString, 
                        _convertNSStringToNSData, _isNSObjectEqual, _isNSObjectNull, 

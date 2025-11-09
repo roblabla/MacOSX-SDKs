@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EF2F5DDC-8714-313A-88EB-A997D7D81030
+    value:           7EE660BE-F176-35E1-9F81-D96BAD1F8261
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AE764267-8060-3AB5-8844-4DAFC6A6142C
+    value:           CC9216FD-2267-325D-9AB9-1DE756BAABDF
 install-name:    '/System/Library/PrivateFrameworks/UIRecording.framework/Versions/A/UIRecording'
 current-version: 28
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AMUIRecordingVersionNumber, _AMUIRecordingVersionString, 
                        _AXUIElementHasAttribute, _CGPointChanged, _CGStringForEventType, 
                        _UIRAccessibilityDisabledError, _UIRApplyEventTypeToState, 

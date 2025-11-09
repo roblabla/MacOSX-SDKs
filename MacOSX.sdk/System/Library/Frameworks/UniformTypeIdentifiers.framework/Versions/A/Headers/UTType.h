@@ -30,7 +30,7 @@ UT_AVAILABLE_BEGIN
 
 	\sa https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/understanding_utis/
 */
-UT_EXPORT_CLASS UT_SUBCLASSING_RESTRICTED @interface UTType : NSObject <NSCopying, NSSecureCoding>
+UT_EXPORT_CLASS UT_SUBCLASSING_RESTRICTED NS_SWIFT_SENDABLE @interface UTType : NSObject <NSCopying, NSSecureCoding>
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 

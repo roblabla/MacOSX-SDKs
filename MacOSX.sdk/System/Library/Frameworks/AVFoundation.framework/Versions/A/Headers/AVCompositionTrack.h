@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2019 Apple Inc. All rights reserved.
+	Copyright 2010-2022 Apple Inc. All rights reserved.
 
 */
 
@@ -169,6 +169,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
     @result         A BOOL value indicating the success of the insertion.
     @discussion
       This method is equivalent to (but more efficient than) calling -insertTimeRange:ofTrack:atTime:error: for each timeRange/track pair. If this method returns an error, none of the time ranges will be inserted into the composition track. To specify an empty time range, pass NSNull for the track and a time range of starting at kCMTimeInvalid with a duration of the desired empty edit.
+	  This method throws an exception if time ranges and tracks to not have the same array count.
 */
 - (BOOL)insertTimeRanges:(NSArray<NSValue *> *)timeRanges ofTracks:(NSArray<AVAssetTrack *> *)tracks atTime:(CMTime)startTime error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
@@ -267,8 +268,50 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
 	@param			replacementFormatDescription
 					A CMFormatDescription to replace the specified format description or NULL to indicate that a previous replacement of originalFormatDescription should be cancelled.
 	@discussion     You can use this method to make surgical changes to a track's format descriptions, such as adding format description extensions to a format description or changing the audio channel layout of an audio track. You should note that a format description can have extensions of type kCMFormatDescriptionExtension_VerbatimSampleDescription and kCMFormatDescriptionExtension_VerbatimISOSampleEntry; if you modify a copy of a format description, you should delete those extensions from the copy or your changes might be ignored. Also note that format description replacements are not transferred when performing editing operations on AVMutableCompositionTrack objects; for instance, inserting a range of a composition track into another composition track does not transfer any replacement format descriptions.
+					This method throws an exception if the media type of the replacement does not match the original format description.
 */
 - (void)replaceFormatDescription:(CMFormatDescriptionRef)originalFormatDescription withFormatDescription:(nullable CMFormatDescriptionRef)replacementFormatDescription API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+@end
+
+/*!
+ @category AVCompositionTrack (SynchronousTrackInterface)
+ @abstract Redeclarations of async-only AVAssetTrack interfaces to allow synchronous usage in the synchronous subclass.
+ @discussion
+	See AVAssetTrack's interface for more information about these interfaces.
+ */
+@interface AVCompositionTrack (SynchronousTrackInterface)
+
+- (BOOL)hasMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
+- (CMTime)samplePresentationTimeForTrackTime:(CMTime)trackTime;
+- (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format;
+- (NSArray<AVAssetTrack *> *)associatedTracksOfType:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+
+#if __swift__
+@property (nonatomic, readonly) NSArray *formatDescriptions;
+@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly, getter=isDecodable) BOOL decodable API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property (nonatomic, readonly, getter=isEnabled) BOOL enabled;
+@property (nonatomic, readonly, getter=isSelfContained) BOOL selfContained;
+@property (nonatomic, readonly) long long totalSampleDataLength;
+@property (nonatomic, readonly) CMTimeRange timeRange;
+@property (nonatomic, readonly) CMTimeScale naturalTimeScale;
+@property (nonatomic, readonly) float estimatedDataRate;
+@property (nonatomic, readonly, nullable) NSString *languageCode;
+@property (nonatomic, readonly, nullable) NSString *extendedLanguageTag;
+@property (nonatomic, readonly) CGSize naturalSize;
+@property (nonatomic, readonly) CGAffineTransform preferredTransform;
+@property (nonatomic, readonly) float preferredVolume;
+@property (nonatomic, readonly) BOOL hasAudioSampleDependencies API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+@property (nonatomic, readonly) float nominalFrameRate;
+@property (nonatomic, readonly) CMTime minFrameDuration API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) BOOL requiresFrameReordering API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *commonMetadata;
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) NSArray<AVMetadataFormat> *availableMetadataFormats;
+@property (nonatomic, readonly) NSArray<AVTrackAssociationType> *availableTrackAssociationTypes API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) BOOL canProvideSampleCursors API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0));
+#endif // __swift__
 
 @end
 

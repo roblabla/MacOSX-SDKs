@@ -3,7 +3,7 @@
 
     Contains:   AltiVec DSP Interfaces
 
-    Version:    vecLib-794.100
+    Version:    vecLib-818.40
 
     Copyright:  Copyright (c) 2000-2022 by Apple Inc. All rights reserved.
 
@@ -238,8 +238,8 @@ extern "C" {
     vDSP_Version0 is a major version number.
     vDSP_Version1 is a minor version number.
 */
-#define vDSP_Version0   794
-#define vDSP_Version1   100
+#define vDSP_Version0   818
+#define vDSP_Version1   40
 
 
 /*  Define types:
@@ -475,6 +475,19 @@ extern void vDSP_biquadm_SetCoefficientsDouble(
     vDSP_Length                         __nsec,
     vDSP_Length                         __nchn)
         API_AVAILABLE(macos(10.11), ios(9.0));
+
+/*
+    vDSP_biquadm_SetCoefficientsDoubleD will
+    update the filter coefficients within a valid vDSP_biquadm_SetupD object.
+ */
+extern void vDSP_biquadm_SetCoefficientsDoubleD(
+    vDSP_biquadm_SetupD                 __setup,
+    const double                       *__coeffs,
+    vDSP_Length                         __start_sec,
+    vDSP_Length                         __start_chn,
+    vDSP_Length                         __nsec,
+    vDSP_Length                         __nchn)
+        API_AVAILABLE(macos(13.0), ios(16.0));
     
 /*
     vDSP_biquadm_SetTargetsDouble will
@@ -491,6 +504,21 @@ extern void vDSP_biquadm_SetTargetsDouble(
     vDSP_Length                         __nsec,
     vDSP_Length                         __nchn)
         API_AVAILABLE(macos(10.11), ios(9.0));
+
+/*
+    vDSP_biquadm_SetTargetsDoubleD will
+    set the target coefficients within a valid vDSP_biquadm_SetupD object.
+ */
+extern void vDSP_biquadm_SetTargetsDoubleD(
+    vDSP_biquadm_SetupD                 __setup,
+    const double                       *__targets,
+    double                              __interp_rate,
+    double                              __interp_threshold,
+    vDSP_Length                         __start_sec,
+    vDSP_Length                         __start_chn,
+    vDSP_Length                         __nsec,
+    vDSP_Length                         __nchn)
+        API_AVAILABLE(macos(13.0), ios(16.0));
     
 /*
     vDSP_biquadm_SetCoefficientsSingle will
@@ -507,6 +535,21 @@ extern void vDSP_biquadm_SetCoefficientsSingle(
     vDSP_Length                         __nsec,
     vDSP_Length                         __nchn)
         API_AVAILABLE(macos(10.11), ios(9.0));
+
+/*
+    vDSP_biquadm_SetCoefficientsSingleD will
+    update the filter coefficients within a valid vDSP_biquadm_SetupD object.
+ 
+    Coefficients are specified in single precision.
+ */
+extern void vDSP_biquadm_SetCoefficientsSingleD(
+    vDSP_biquadm_SetupD                 __setup,
+    const float                         *__coeffs,
+    vDSP_Length                         __start_sec,
+    vDSP_Length                         __start_chn,
+    vDSP_Length                         __nsec,
+    vDSP_Length                         __nchn)
+        API_AVAILABLE(macos(13.0), ios(16.0));
     
 /*
     vDSP_biquadm_SetTargetsSingle will
@@ -524,6 +567,23 @@ extern void vDSP_biquadm_SetTargetsSingle(
     vDSP_Length                         __nsec,
     vDSP_Length                         __nchn)
         API_AVAILABLE(macos(10.11), ios(9.0));
+
+/*
+    vDSP_biquadm_SetTargetsSingleD will
+    set the target coefficients within a valid vDSP_biquadm_SetupD object.
+    The target values are specified in single precision.
+ */
+extern void vDSP_biquadm_SetTargetsSingleD(
+    vDSP_biquadm_SetupD                 __setup,
+    const float                        *__targets,
+    double                              __interp_rate,
+    double                              __interp_threshold,
+    vDSP_Length                         __start_sec,
+    vDSP_Length                         __start_chn,
+    vDSP_Length                         __nsec,
+    vDSP_Length                         __nchn)
+        API_AVAILABLE(macos(13.0), ios(16.0));
+
 /*
     vDSP_biquadm_SetActiveFilters will set the overall active/inactive filter
     state of a valid vDSP_biquadm_Setup object.
@@ -532,6 +592,15 @@ extern void vDSP_biquadm_SetActiveFilters(
     vDSP_biquadm_Setup                  __setup,
     const bool                         *__filter_states)
         API_AVAILABLE(macos(10.11), ios(9.0));
+
+/*
+    vDSP_biquadm_SetActiveFiltersD will set the overall active/inactive filter
+    state of a valid vDSP_biquadm_SetupD object.
+ */
+extern void vDSP_biquadm_SetActiveFiltersD(
+    vDSP_biquadm_SetupD                __setup,
+    const bool                         *__filter_states)
+        API_AVAILABLE(macos(13.0), ios(16.0));
 
 // Convert a complex array to a complex-split array.
 extern void vDSP_ctoz(
@@ -2297,7 +2366,7 @@ extern void vDSP_f5x5D(
             for (r = P/2; r < NR-P/2; ++r)
             for (c = P/2; c < NC-P/2; ++c)
                 C[r][c] = sum(A[r+j][c+k] * F[j+P/2][k+P/2],
-                    -P/2 <= j < P/2, -P/2 <= k < P/2);
+                    -P/2 <= j <= P/2, -P/2 <= k <= P/2);
 
             All other elements of C (a border of P/2 elements around all four
             sides) are set to zero.
@@ -2349,7 +2418,7 @@ extern void vDSP_imgfirD(
             for (r = P/2; r < NR-P/2; ++r)
             for (c = Q/2; c < NC-Q/2; ++c)
                 C[r][c] = sum(A[r+j][c+k] * F[j+P/2][k+Q/2],
-                    -P/2 <= j < P/2, -Q/2 <= k < Q/2);
+                    -P/2 <= j <= P/2, -Q/2 <= k <= Q/2);
 
             All other elements of C (borders of P/2 elements at the top and
             bottom and Q/2 elements at the left and right) are set to zero.
@@ -4866,7 +4935,7 @@ extern void vDSP_venvlpD(
 
             for (n = 0; n < N; ++n)
             {
-                if (D[n] < B[n] || A[n] < D[n]) D[n] = C[n];
+                if (C[n] < B[n] || A[n] < C[n]) D[n] = C[n];
                 else D[n] = 0;
             }
     */

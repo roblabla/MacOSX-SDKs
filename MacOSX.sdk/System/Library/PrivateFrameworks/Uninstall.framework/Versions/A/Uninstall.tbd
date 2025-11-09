@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           23FBB891-BD0A-3ECA-9B03-10B3633A8652
+    value:           B54C0F7B-A3DC-3EA2-9379-DA71C9D4D363
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           702EB74E-EDDC-3F20-B93A-66D0C8808F64
+    value:           46DEE669-DC44-3429-AACB-4CB55FDBA5A1
 install-name:    '/System/Library/PrivateFrameworks/Uninstall.framework/Versions/A/Uninstall'
 current-version: 211
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DaemonStatus, _StatusUpdateDemux, _UNUninstallCantBeAbortedNotification, 
                        _UNUninstallDaemonCrashed, _UNUninstallDidBeginNotification, 
                        _UNUninstallDidFinishNotification, _UNUninstallFailedNotification, 

@@ -22,6 +22,7 @@
 #include <strings.h>
 
 #include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -35,14 +36,14 @@ extern "C" {
 
 enum {
   kMacMemoryMaximumMemoryManagerBlockSize = 0x7FFFFFF0
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 
 // maxSize is a somewhat common name for a variable, and with this defined as an enum in the global scope any other usages would get warnings.
 #if ! defined( MAC_OS_X_VERSION_10_7 ) || ! defined( MAC_OS_X_VERSION_MIN_REQUIRED ) || ( MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_7 )
 enum {
  maxSize = kMacMemoryMaximumMemoryManagerBlockSize /*the largest block possible*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.7));
 #endif
 
 
@@ -58,21 +59,21 @@ enum {
 #if !__MAC_OS_X_MEMORY_MANAGER_CLEAN__
 enum {
   defaultPhysicalEntryCount     = 8
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
                                         /* values returned from the GetPageState function */
   kPageInMemory                 = 0,
   kPageOnDisk                   = 1,
   kNotPaged                     = 2
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
                                         /* masks for Zone->heapType field */
   k32BitHeap                    = 1,    /* valid in all Memory Managers */
   kNewStyleHeap                 = 2,    /* true if new Heap Manager is present */
   kNewDebugHeap                 = 4     /* true if new Heap Manager is running in debug mode on this heap */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 
 #endif  /* !__MAC_OS_X_MEMORY_MANAGER_CLEAN__ */
@@ -82,14 +83,14 @@ enum {
   kHandleIsResourceBit          = 5,
   kHandlePurgeableBit           = 6,
   kHandleLockedBit              = 7
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* masks for use with HGetState/HSetState*/
 enum {
   kHandleIsResourceMask         = 0x20,
   kHandlePurgeableMask          = 0x40,
   kHandleLockedMask             = 0x80
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 #if !__LP64__
 typedef CALLBACK_API( long , GrowZoneProcPtr )(Size cbNeeded);
@@ -138,7 +139,7 @@ typedef short                           PageState;
 typedef short                           StatusRegisterContents;
 enum {
   kVolumeVirtualMemoryInfoVersion1 = 1  /* first version of VolumeVirtualMemoryInfo*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 struct VolumeVirtualMemoryInfo {
   PBVersion           version;                /* Input: Version of the VolumeVirtualMemoryInfo structure*/

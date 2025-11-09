@@ -2,7 +2,7 @@
 //  AVBEthernetInterface.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2010-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -15,7 +15,7 @@
 				AVBEthernetInterface objects should be created for an IEEE 802.3 ethernet based interface on which AVB functionality 
 				is being used.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVBEthernetInterface : AVBInterface
 {
 }

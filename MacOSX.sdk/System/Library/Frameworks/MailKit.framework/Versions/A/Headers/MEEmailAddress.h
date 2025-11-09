@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 /// @brief Contain information about an email address. This can include both valid and invalid email addresses.
 @interface MEEmailAddress : NSObject <NSSecureCoding, NSCopying>
 /// @brief The raw string for the email address.

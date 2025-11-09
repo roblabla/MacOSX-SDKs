@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol SKRequestDelegate;
 
 // Base class used to fetch data from the store.  Should not be used directly.
-SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) @interface SKRequest : NSObject {
+SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) NS_SWIFT_NONSENDABLE @interface SKRequest : NSObject {
 @private
     id _requestInternal;
 }

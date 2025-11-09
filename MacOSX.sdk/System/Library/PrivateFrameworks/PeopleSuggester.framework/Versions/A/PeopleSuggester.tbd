@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BBE13DE9-DDC1-381F-AA33-5CDD523FAD69
+    value:           03EEA8A7-E0D3-3077-B57B-7D2EDCA385A6
   - target:          x86_64-maccatalyst
-    value:           BBE13DE9-DDC1-381F-AA33-5CDD523FAD69
+    value:           03EEA8A7-E0D3-3077-B57B-7D2EDCA385A6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3F595314-7566-37BE-A3C4-49259CEF5808
+    value:           9F62AA5F-4474-3D6D-81E7-4E3003902A9F
   - target:          arm64e-maccatalyst
-    value:           3F595314-7566-37BE-A3C4-49259CEF5808
+    value:           9F62AA5F-4474-3D6D-81E7-4E3003902A9F
 install-name:    '/System/Library/PrivateFrameworks/PeopleSuggester.framework/Versions/A/PeopleSuggester'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _Adaptable, _All, _CAPContactFillerContactEventReadFrom, _CAPContactFillerContactFillerEventForShareReadFrom, 
                        _CAPContactFillerShareEventReadFrom, _CAPContactFillerUserEventReadFrom, 
                        _Classic, _ContactEmbeddingAnalysisPETContactEmbeddingAnalysisEventReadFrom, 
@@ -36,7 +36,7 @@ exports:
                        __PSShareSheetPeopleSuggestionsDisabledKey, __PSShareSheetPeopleSuggestionsDisabledKey_Feedback, 
                        __PSShareSheetSiriSettingsDomain, __PSShareSheetSiriSettingsDomain_Feedback, 
                        __PSShareSheetSuggestionBundleIDMapping, __PSShareSheetSuggestionBundleIDs, 
-                       __PSSuggestionKey, __Z16_PSUnarchiverZipPKvmP5NSURL, _distanceOfNeighborFromReference, 
+                       __PSSuggestionKey, __Z16_PSUnarchiverZipPKvmP5NSURL, _conversationIdentifierPrefix, 
                        _fetchLimit, _kPSBiomeFeedbackSubpath, _kPSCNAutocompleteFeedbackDataVersion, 
                        _kPSCNAutocompleteFeedbackStreamID ]
     objc-classes:    [ CAPContactFillerContactEvent, CAPContactFillerContactFillerEventForShare, 
@@ -65,10 +65,10 @@ exports:
                        _PSContactSuggestion, _PSContactSuggestionHandleAndApp, _PSDBSCAN, 
                        _PSEnsembleModel, _PSFTZKWConfig, _PSFTZKWOrchestrator, _PSFTZKWSuggestionsTransformerFactory, 
                        _PSFTZKWTrialData, _PSFTZKWTrialUpdateGuardedData, _PSFTZKWTrialWrapper, 
-                       _PSFamilyMLModel, _PSFamilyMLPredictionTask, _PSFamilyUtilities, 
-                       _PSFeatureStatistics, _PSFeaturizedBehaviorRule, _PSFeedback, 
-                       _PSFeedbackAction, _PSFeedbackUtils, _PSHandleRanker, _PSHeuristics, 
-                       _PSInteractionAndContactMonitor, _PSInteractionPredictor, 
+                       _PSFamilyMLModel, _PSFamilyMLPredictionTask, _PSFamilyPhotoSuggestions, 
+                       _PSFamilyUtilities, _PSFeatureStatistics, _PSFeaturizedBehaviorRule, 
+                       _PSFeedback, _PSFeedbackAction, _PSFeedbackUtils, _PSHandleRanker, 
+                       _PSHeuristics, _PSInteractionAndContactMonitor, _PSInteractionPredictor, 
                        _PSInteractionStoreUtils, _PSKNNModel, _PSKNNModelConfiguration, 
                        _PSKNNZKWATXDelegateWrapper, _PSKNNeighbor, _PSLogging, _PSMLArrayProvider, 
                        _PSMailUtils, _PSMapsFeedback, _PSMapsFeedbackAction, _PSMapsPredictionContext, 
@@ -85,7 +85,7 @@ exports:
                        _PSSuggestionFromTextPredictorDelegateWrapper, _PSSuggestionProxy, 
                        _PSSuggestionTemplate, _PSZKWFTCalendarEventConfig, _PSZKWFTFallbackInteractionsConfig, 
                        _PSZKWFTPrimaryInteractionsConfig, _PSZKWFTUnstructuredCalendarConfig, 
-                       _PSZKWFTUnstructuredRemindersConfig, _PS_TPSDiscoverabilitySignal, 
+                       _PSZKWFTUnstructuredRemindersConfig, _PSZkwUtils, _PS_TPSDiscoverabilitySignal, 
                        evaluatedRule, scoredModel, scoredRule ]
     objc-ivars:      [ CAPContactFillerContactEvent._averageBehavioralRuleConfidence, 
                        CAPContactFillerContactEvent._averageBehavioralRuleConviction, 

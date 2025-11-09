@@ -9,7 +9,7 @@
 #import <UIKit/UIStoryboardSegue.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIPopoverController;
 
@@ -21,7 +21,7 @@ UIKIT_EXTERN API_DEPRECATED("Access destinationViewController.popoverPresentatio
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIStoryboardPopoverSegue.h>

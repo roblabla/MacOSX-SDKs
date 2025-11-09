@@ -26,7 +26,7 @@ API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, macos, watchos)
 	@abstract   A category on `AVPictureInPictureControllerContentSource` for creating a content source to be used to support active video calls, including camera access, in Picture in Picture.
 	@discussion
 		- This class must only be used when a video call is active. When a video call ends, set `AVPictureInPictureController.contentSource` to `nil` or to another content source.
-		- Use of this class requires an entitlement to use the camera in Picture in Picture. See http://developer.apple.com/contact/request/multitasking-camera-access.
+		- In iOS 16 and later, you can use the camera in Picture in Picture mode by enabling a capture session’s isMultitaskingCameraAccessEnabled property. Use of this class before iOS 16.0 requires an entitlement to use the camera in Picture in Picture. See http://developer.apple.com/contact/request/multitasking-camera-access.
 		- Note that even when Picture in Picture is active, the device may be locked or Picture in Picture may be stashed off screen. In such cases, the camera will be unavailable until the device is unlocked or Picture in Picture is unstashed.
 		- See `AVPictureInPictureController` for functionality common across all Picture in Picture scenarios, such as callbacks to determine when Picture In Picture starts or to indicate a preference for Picture in Picture to start automatically even when not full screen.
  */

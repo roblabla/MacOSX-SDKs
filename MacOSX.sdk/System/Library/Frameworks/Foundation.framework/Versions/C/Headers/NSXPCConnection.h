@@ -18,7 +18,7 @@
 @class NSXPCConnection, NSXPCListener, NSXPCInterface, NSXPCListenerEndpoint;
 @protocol NSXPCListenerDelegate;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // The connection itself and all proxies vended by the connection will conform with this protocol. This allows creation of new proxies from other proxies.
 @protocol NSXPCProxyCreating
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)remoteObjectProxy;
 
 // Returns a proxy object which will invoke the error handling block if an error occurs on the connection. If the message sent to the proxy has a reply handler, then either the error handler or the reply handler will be called exactly once. This proxy object will also conform with the NSXPCProxyCreating protocol.
-- (id)remoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler;
+- (id)remoteObjectProxyWithErrorHandler:(void (NS_SWIFT_SENDABLE ^)(NSError *error))handler;
 
 @optional
 
@@ -86,10 +86,17 @@ API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 @property (nullable, copy) void (^invalidationHandler)(void);
 
 // All connections start suspended. You must resume them before they will start processing received messages or sending messages through the remoteObjectProxy. Note: Calling resume does not immediately launch the XPC service. The service will be started on demand when the first message is sent. However, if the name specified when creating the connection is determined to be invalid, your invalidation handler will be called immediately (and asynchronously) after calling resume.
+// For new code, calling `-activate` is preferred for the initial activation of the connection.
 - (void)resume;
 
 // Suspend the connection. Suspends must be balanced with resumes before the connection may be invalidated.
 - (void)suspend;
+
+// Activates the connection.
+// Connections start in an inactive state. You must call `-activate` on a connection before it will send or receive any messages.
+// Calling `-activate` on an active connection has no effect.
+// For backward compatibility reasons, `-resume` on an inactive and otherwise not suspended NSXPCConnection has the same effect as calling `-activate`. For new code, using `-activate` is preferred.
+- (void)activate API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 
 // Invalidate the connection. All outstanding error handling blocks and invalidation blocks will be called on the message handling queue. The connection must be invalidated before it is deallocated. After a connection is invalidated, no more messages may be sent or received.
 - (void)invalidate;
@@ -101,10 +108,14 @@ API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 @property (readonly) gid_t effectiveGroupIdentifier;
 
 // Get the current connection, in the context of a call to a method on your exported object. Useful for determining 'who called this'.
-+ (nullable NSXPCConnection *)currentConnection API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
++ (nullable NSXPCConnection *)currentConnection API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0)) NS_SWIFT_UNAVAILABLE_FROM_ASYNC("currentConnection cannot be used from async contexts.");
 
 // Add a barrier block to be executed on the connection. This barrier block will run after any outstanding sends have completed. Note: This does not guarantee that messages will be received by the remote process by the time the block is invoked. If you need to ensure receipt of a message by the remote process, waiting for a reply to come back is the best option.
 - (void)scheduleSendBarrierBlock:(void (^)(void))block API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/// Sets the code signing requirement for this connection. If the requirement is malformed, an exception is thrown. If new messages do not match the requirement, the connection is invalidated. It is recommended to set this before calling `resume`, as it is an XPC error to call it more than once.
+/// See https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/RequirementLang/RequirementLang.html for more information on the format.
+- (void)setCodeSigningRequirement:(NSString *)requirement API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos, watchos);
 
 @end
 
@@ -129,13 +140,25 @@ API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 @property (readonly, retain) NSXPCListenerEndpoint *endpoint;
 
 // All listeners start suspended and must be resumed before they will process incoming requests. If called on the serviceListener, this method will never return. Call it as the last step inside your main function in your XPC service after setting up desired initial state and the listener itself. If called on any other NSXPCListener, the connection is resumed and the method returns immediately.
+// For new code, calling `-activate` is preferred for the initial activation of the listener.
 - (void)resume;
 
 // Suspend the listener. Suspends must be balanced with resumes before the listener may be invalidated.
 - (void)suspend;
 
+// Activates the listener.
+// Listeners start in an inactive state. You must call `-activate` on a listener before it will send or receive any messages.
+// Calling `-activate` on an active listener has no effect.
+// For backward compatibility reasons, `-resume` on an inactive and otherwise not suspended NSXPCListener has the same effect as calling `-activate`. For new code, using `-activate` is preferred.
+- (void)activate API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+
 // Invalidate the listener. No more connections will be created. Once a listener is invalidated it may not be resumed or suspended.
 - (void)invalidate;
+
+/// Sets the code signing requirement for new connections. If the requirement is malformed, an exception is thrown. If new peer connections do not match the requirement, the incoming connection is automatically rejected before consulting the delegate.
+/// This method will only work on `anonymousListener` or `initWithMachServiceName` listener instances. Use on other types of listeners will result in an assertion failure.
+/// See https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/RequirementLang/RequirementLang.html for more information on the format.
+- (void)setConnectionCodeSigningRequirement:(NSString *)requirement API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos, watchos);
 
 @end
 
@@ -150,12 +173,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 
 // This object holds all information about the interface of an exported or imported object. This includes: what messages are allowed, what kinds of objects are allowed as arguments, what the signature of any reply blocks are, and any information about additional proxy objects.
 API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
-@interface NSXPCInterface : NSObject {
-@private
-    Protocol *_protocol;
-    void *_reserved2;
-    id _reserved1;
-}
+@interface NSXPCInterface : NSObject
 
 // Factory method to get an NSXPCInterface instance for a given protocol. Most interfaces do not need any further configuration. Interfaces with collection classes or additional proxy objects should be configured using the methods below.
 + (NSXPCInterface *)interfaceWithProtocol:(Protocol *)protocol;
@@ -164,7 +182,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 @property (assign) Protocol *protocol;
 
 // If an argument to a method in your protocol is a collection class (for example, NSArray or NSDictionary), then the interface must be configured with the set of expected classes contained inside of the collection. The classes argument to this method should be an NSSet containing Class objects, like [MyObject class]. The selector argument specifies which method in the protocol is being configured. The argumentIndex parameter specifies which argument of the method the NSSet applies to. If the NSSet is for an argument of the reply block in the method, pass YES for the ofReply: argument. The first argument is index 0 for both the method and the reply block.
-// If the expected classes are all property list types, calling this method is optional (property list types are automatically whitelisted for collection objects). You may use this method to further restrict the set of allowed classes.
+// If the expected classes are all property list types, calling this method is optional (property list types are automatically allowed for collection objects). You may use this method to further restrict the set of allowed classes.
 - (void)setClasses:(NSSet<Class> *)classes forSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply;
 - (NSSet<Class> *)classesForSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply;
 
@@ -183,21 +201,14 @@ API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 
 // An instance of this class is a reference to an NSXPCListener that may be encoded and sent over a connection. The receiver may use the object to create a new connection to the listener that supplied the NSXPCListenerEndpoint object.
 API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
-@interface NSXPCListenerEndpoint : NSObject <NSSecureCoding> {
-@private
-    void *_internal;
-}
+@interface NSXPCListenerEndpoint : NSObject <NSSecureCoding>
 @end
 
 // ----------------------------------
 
 // An NSXPCCoder is used to encode or decode objects sent over an NSXPCConnection. If you want to encode or decode objects differently when sent over an NSXPCConnection, you may use isKindOfClass: to check that the coder is a kind of NSXPCCoder.
 API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
-@interface NSXPCCoder : NSCoder {
-@private
-    id <NSObject> _userInfo;
-    id _reserved1;
-}
+@interface NSXPCCoder : NSCoder
 
 #if __has_include(<xpc/xpc.h>)
 - (void)encodeXPCObject:(xpc_object_t)xpcObject forKey:(NSString *)key;
@@ -213,4 +224,4 @@ API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

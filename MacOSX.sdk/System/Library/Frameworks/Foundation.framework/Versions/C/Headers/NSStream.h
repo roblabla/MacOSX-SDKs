@@ -10,7 +10,7 @@
 
 typedef NSString * NSStreamPropertyKey NS_TYPED_EXTENSIBLE_ENUM;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSUInteger, NSStreamStatus) {
     NSStreamStatusNotOpen = 0,
@@ -183,4 +183,4 @@ FOUNDATION_EXPORT NSStreamNetworkServiceTypeValue const NSStreamNetworkServiceTy
 FOUNDATION_EXPORT NSStreamNetworkServiceTypeValue const NSStreamNetworkServiceTypeVoice	    API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 FOUNDATION_EXPORT NSStreamNetworkServiceTypeValue const NSStreamNetworkServiceTypeCallSignaling    API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

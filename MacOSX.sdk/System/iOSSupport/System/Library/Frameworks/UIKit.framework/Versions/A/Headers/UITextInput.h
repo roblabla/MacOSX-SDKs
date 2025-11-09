@@ -18,7 +18,7 @@
 // Responders that implement the UIKeyInput protocol will be driven by the system-provided keyboard,
 // which will be made available whenever a conforming responder becomes first responder.
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 NS_SWIFT_UI_ACTOR
 @protocol UIKeyInput <UITextInputTraits>
@@ -41,6 +41,7 @@ NS_SWIFT_UI_ACTOR
 
 @protocol UITextInputTokenizer;
 @protocol UITextInputDelegate;
+@protocol UIEditMenuInteractionAnimating;
 
 typedef NS_ENUM(NSInteger, UITextStorageDirection) {
     UITextStorageDirectionForward = 0,
@@ -229,6 +230,20 @@ NS_SWIFT_UI_ACTOR
 - (void)updateFloatingCursorAtPoint:(CGPoint)point API_AVAILABLE(ios(9.0));
 - (void)endFloatingCursor API_AVAILABLE(ios(9.0));
 
+/**
+ * Called when the text input is preparing an edit menu presentation for the specified text range.
+ *
+ * @param textRange                  The text range for which the menu is presented for.
+ * @param suggestedActions  The actions and commands that the system suggests.
+ *
+ * @return Return a UIMenu describing the desired menu hierarchy. Return @c nil to present the default system menu.
+ */
+- (nullable UIMenu *)editMenuForTextRange:(UITextRange *)textRange suggestedActions:(NSArray<UIMenuElement *> *)suggestedActions API_AVAILABLE(ios(16.0));
+
+/* These are optional methods for clients that wish to know the visiblity of text editing menus */
+- (void)willPresentEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)willDismissEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+
 @end
 
 //---------------------------------------------------------------------------------------------------
@@ -326,7 +341,7 @@ static const UITextWritingDirection UITextWritingDirectionNatural API_DEPRECATED
 static const UITextWritingDirection UITextWritingDirectionLeftToRight API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionLeftToRight", ios(3.2, 13.0), tvos(9.0, 13.0)) = NSWritingDirectionLeftToRight;
 static const UITextWritingDirection UITextWritingDirectionRightToLeft API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionRightToLeft", ios(3.2, 13.0), tvos(9.0, 13.0)) = NSWritingDirectionRightToLeft;
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UITextInput.h>

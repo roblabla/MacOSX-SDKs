@@ -4,10 +4,10 @@
 //  Copyright (c) 2017 Apple, Inc. All rights reserved.
 //
 
-#if __METAL_VERSION__
-
 #ifndef CIKERNELMETALLIB_H
 #define CIKERNELMETALLIB_H
+
+#if __METAL_VERSION__
 
 #ifndef __CIKERNEL_METAL_VERSION__ // if not explicitly defined already
     #if !defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && \
@@ -260,6 +260,6 @@ namespace coreimage
 
 namespace ci = coreimage;
 
-#endif /* CIKERNELMETALLIB_H */
-
 #endif /* __METAL_VERSION__ */
+
+#endif /* CIKERNELMETALLIB_H */

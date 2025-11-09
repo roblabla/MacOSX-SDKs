@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D1D8335B-8208-304E-A08D-BF2C5E3902D6
+    value:           E0A23E43-E44C-3F6F-9009-040FA393CE93
   - target:          x86_64-maccatalyst
-    value:           D1D8335B-8208-304E-A08D-BF2C5E3902D6
+    value:           E0A23E43-E44C-3F6F-9009-040FA393CE93
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           128A4979-2909-3922-AE7D-F41B07B40E77
+    value:           3916C08C-C7FE-3396-8841-745FC1AE2233
   - target:          arm64e-maccatalyst
-    value:           128A4979-2909-3922-AE7D-F41B07B40E77
+    value:           3916C08C-C7FE-3396-8841-745FC1AE2233
 install-name:    '/System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication'
-current-version: 64552.29.1
+current-version: 64556.3.1
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _VMUBacktraceIsExcludedMarker, _VMUCreateRootNodeMarkingMap, 
                        _VMUDirectedGraphCompatibilityVersionNumberInGraphKey, _VMUDirectedGraphToolCompatibilityVersionKey, 
                        _VMUEnumerateVMAnnotatedMallocObjectsWithBlock, _VMUGetFlagsForAllVMRegionStatistics, 
@@ -28,14 +28,15 @@ exports:
                        _VMUMarkObject, _VMUMemorySizeString, _VMUOAHRuntimeLocation, 
                        _VMUOptionParserError, _VMUOptionParserRegisterFlag, _VMUOptionParserRegisterFlagInternal, 
                        _VMUPlatformForTask, _VMUPlatformNameForPlatform, _VMUPlatformNameForTask, 
-                       _VMUPurgeableDisplayCharacter, _VMURangeContainsRange, _VMURangeIntersectsOrAbutsRange, 
-                       _VMURangeIntersectsRange, _VMURegionTypeDescriptionForTagShareProtAndPager, 
-                       _VMURegisterNameForIndex, _VMUSanitizePath, _VMUScanTypeKeywordDescription, 
-                       _VMUScanTypeScanDescription, _VMUScanningMaskForAllReferences, 
-                       _VMUScanningMaskForOwningReferences, _VMUSortIndexForLibraryPath, 
+                       _VMUPurgeableDisplayCharacter, _VMURangeContainsRange, _VMURangeDescription, 
+                       _VMURangeIntersectsOrAbutsRange, _VMURangeIntersectsRange, 
+                       _VMURegionTypeDescriptionForTagShareProtAndPager, _VMURegisterNameForIndex, 
+                       _VMUSanitizePath, _VMUScanTypeKeywordDescription, _VMUScanTypeScanDescription, 
+                       _VMUScanningMaskForAllReferences, _VMUScanningMaskForOwningReferences, 
+                       _VMUSimplifyCPlusPlusSymbolName, _VMUSortIndexForLibraryPath, 
                        _VMUUnionRange, _VMUVMRegionShareModeName, _VMUWithRootNodeMarkingMap, 
-                       _VMUmallocMetadataLabel, _VMUmappedFileLabel, _VMUobjcAdditionalDataLabel, 
-                       _VMUunusedSharedLibDataLabel, _VMUunusedSharedLibLabelPrefix, 
+                       _VMUmallocMetadataLabel, _VMUmappedFileLabel, _VMUunusedSharedLibDataLabel, 
+                       _VMUunusedSharedLibLabelOrPathPrefix, _VMUunusedSharedLibLabelPrefix, 
                        _VMUunusedSharedLibTextLabel, __VMUEnumerateMarkedObjects, 
                        _dispositionDescription, _kVMUAutoreleasePoolBoundaryClassName, 
                        _kVMUAutoreleasePoolThreadSpecificDataKeyString, _kVMUPrintArchivingTiming, 
@@ -58,20 +59,22 @@ exports:
                        VMUGroupType, VMUInverseDepthGraphEnumerator, VMULeakDetector, 
                        VMUMutableClassInfo, VMUMutableFieldInfo, VMUNodeGroup, VMUNodeToStringMap, 
                        VMUNonOverlappingRangeArray, VMUObjectGraph, VMUObjectIdentifier, 
-                       VMUOptionParser, VMUProcInfo, VMUProcList, VMUProcessDescription, 
-                       VMUProcessObjectGraph, VMUProgressBar, VMURangeArray, VMURangeToStringMap, 
-                       VMUReverseGraphEnumerator, VMUSampler, VMUScanOverlay, VMUSourceInfo, 
-                       VMUStackLogConsolidator, VMUStackLogReaderBase, VMUSwiftRuntimeInfo, 
-                       VMUSymbol, VMUSymbolOwnerCache, VMUSymbolStore, VMUSymbolicator, 
-                       VMUTaskMemoryCache, VMUTaskMemoryScanner, VMUTaskStackLogReader, 
-                       VMUTaskThreadStates, VMUTerminalColorizer, VMUVMRegion, VMUVMRegionIdentifier, 
-                       VMUVMRegionRangeInfo, VMUVMRegionTracker ]
-    objc-ivars:      [ VMUBacktrace._callstack, VMUBacktrace._flavor, VMUCallTreeNode._address, 
-                       VMUCallTreeNode._children, VMUCallTreeNode._count, VMUCallTreeNode._name, 
-                       VMUCallTreeNode._numBytes, VMUCallTreeNode._numChildren, VMUCallTreeNode._parent, 
-                       VMUNodeToStringMap._nodeToStringIndexMapVoidPtr, VMUNodeToStringMap._stringToIndexMapVoidPtr, 
-                       VMUNodeToStringMap._strings, VMURangeArray._count, VMURangeArray._max, 
-                       VMURangeArray._ranges, VMURangeArray._sorted, VMURangeToStringMap._rangeAndStringVectorVoidPtr, 
+                       VMUObjectIdentifierDriverKitSupport, VMUOptionParser, VMUProcInfo, 
+                       VMUProcList, VMUProcessDescription, VMUProcessObjectGraph, 
+                       VMUProgressBar, VMURangeArray, VMURangeToStringMap, VMUReverseGraphEnumerator, 
+                       VMUSampler, VMUScanOverlay, VMUSourceInfo, VMUStackLogConsolidator, 
+                       VMUStackLogReaderBase, VMUSwiftRuntimeInfo, VMUSymbol, VMUSymbolOwnerCache, 
+                       VMUSymbolStore, VMUSymbolicator, VMUTaskMemoryCache, VMUTaskMemoryScanner, 
+                       VMUTaskStackLogReader, VMUTaskThreadStates, VMUTerminalColorizer, 
+                       VMUVMRegion, VMUVMRegionIdentifier, VMUVMRegionRangeInfo, 
+                       VMUVMRegionTracker ]
+    objc-ivars:      [ VMUBacktrace._asyncCallstack, VMUBacktrace._callstack, VMUBacktrace._flavor, 
+                       VMUBacktrace._timestamp, VMUCallTreeNode._address, VMUCallTreeNode._children, 
+                       VMUCallTreeNode._count, VMUCallTreeNode._name, VMUCallTreeNode._numBytes, 
+                       VMUCallTreeNode._numChildren, VMUCallTreeNode._parent, VMUNodeToStringMap._nodeToStringIndexMapVoidPtr, 
+                       VMUNodeToStringMap._stringToIndexMapVoidPtr, VMUNodeToStringMap._strings, 
+                       VMURangeArray._count, VMURangeArray._max, VMURangeArray._ranges, 
+                       VMURangeArray._sorted, VMURangeToStringMap._rangeAndStringVectorVoidPtr, 
                        VMURangeToStringMap._sorted, VMURangeToStringMap._stringToIndexMapVoidPtr, 
                        VMURangeToStringMap._strings, VMUSourceInfo._fileName, VMUSourceInfo._lineNumber, 
                        VMUSourceInfo._path, VMUStackLogReaderBase._addressToSymbolicationMap, 
@@ -82,12 +85,14 @@ exports:
                        VMUSwiftRuntimeInfo._nativeWeakReferenceMarkerValue, VMUSwiftRuntimeInfo._nativeWeakReferencePointerIsSideTable, 
                        VMUSwiftRuntimeInfo._nativeWeakReferencePointerMask, VMUSwiftRuntimeInfo._refcountIsSideTableMarkerMask, 
                        VMUSwiftRuntimeInfo._refcountIsSideTableMarkerValue, VMUSwiftRuntimeInfo._runtimeHasStableABI, 
-                       VMUSwiftRuntimeInfo._sideTableLayout, VMUSwiftRuntimeInfo._sideTablePointerLeftShift, 
-                       VMUSwiftRuntimeInfo._sideTablePointerMask, VMUSwiftRuntimeInfo._sideTablePointerRightShift, 
-                       VMUSwiftRuntimeInfo._unownedExtraDataLayout, VMUSymbol._name, 
-                       VMUSymbol._sourceInfo, VMUSymbolicator._symbolicator, VMUVMRegion.coalesced_region_count, 
-                       VMUVMRegion.dirty_size, VMUVMRegion.external_pager, VMUVMRegion.is_macho_region, 
-                       VMUVMRegion.is_submap, VMUVMRegion.is_unused_data_page_shared_with_active_content, 
+                       VMUSwiftRuntimeInfo._sideTableLayoutWithScannableOwnerPointer, 
+                       VMUSwiftRuntimeInfo._sideTableLayoutWithUnscannableOwnerPointer, 
+                       VMUSwiftRuntimeInfo._sideTablePointerLeftShift, VMUSwiftRuntimeInfo._sideTablePointerMask, 
+                       VMUSwiftRuntimeInfo._sideTablePointerRightShift, VMUSwiftRuntimeInfo._unownedExtraDataLayout, 
+                       VMUSymbol._name, VMUSymbol._sourceInfo, VMUSymbolicator._symbolicator, 
+                       VMUVMRegion.coalesced_region_count, VMUVMRegion.dirty_size, 
+                       VMUVMRegion.external_pager, VMUVMRegion.is_macho_region, VMUVMRegion.is_submap, 
+                       VMUVMRegion.is_unused_data_page_shared_with_active_content, 
                        VMUVMRegion.is_unused_data_region, VMUVMRegion.is_wired, VMUVMRegion.mallocBlockCount, 
                        VMUVMRegion.mallocTypeFlag, VMUVMRegion.maxProt, VMUVMRegion.nesting_depth, 
                        VMUVMRegion.object_id, VMUVMRegion.offset, VMUVMRegion.pages_dirtied, 

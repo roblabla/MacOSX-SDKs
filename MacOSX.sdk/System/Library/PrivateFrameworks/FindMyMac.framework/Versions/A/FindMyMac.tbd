@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F87A9929-EC66-3CFE-B799-BBB9F31ACB9D
+    value:           428B94C7-6F59-3368-9B03-640A0F8717CF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B13A8997-D21C-3218-A91B-B430DD860324
+    value:           4A3994F8-2DF4-3FC7-B31A-56BB1A858280
 install-name:    '/System/Library/PrivateFrameworks/FindMyMac.framework/Versions/A/FindMyMac'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AtLoginWindow, _CopyDataAndBytesAndLengthFromDictionary, 
                        _CopyNVRAMKeys, _CopyPropertyAsCFString, _CopyPropertyAsData, 
                        _CreateTokenKeyForAccount, _DictionaryCreateFromBytesAndLength, 

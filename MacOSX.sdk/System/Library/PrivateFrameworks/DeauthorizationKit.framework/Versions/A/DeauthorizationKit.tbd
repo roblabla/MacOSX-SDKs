@@ -3,21 +3,22 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           70EFBEB2-3FD8-3F81-96DC-A54B9D5F2D3F
+    value:           64DFA93E-9974-3D2A-B790-72AAECF3574C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           810378D3-2579-3BCF-A1A2-334F6DA86FF6
+    value:           77CC54E4-D655-30C6-BA46-B29ADC03BFF6
 install-name:    '/System/Library/PrivateFrameworks/DeauthorizationKit.framework/Versions/A/DeauthorizationKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _APMechanismSetContextValue, _APMechanismSetResult, _DKEACSAccountOptionAdminUserID, 
                        _DKEACSAccountOptionAdminUserPassword, _DKEACSAdminInitiated, 
                        _DKEACSBootstrapTokenString, _DKEACSConsiderPreliminaryChecksNonFatal, 
-                       _DKEACSPassword, _DKEACSSkipSystemModalBlur, _DKEACSTaskIdentifiersToSkip, 
-                       _DKEACSUID, _DKErrorDomain, _DKHelperDaemonServiceInterface, 
-                       _DKIntegrityCheckErrorDomain, _DKLogObject, _DKNotificationEACSDomain, 
-                       _DKNotificationNameEACSTerminated, _DKPrefEnableFeature, _DKPrefFakeAccountRemoval, 
+                       _DKEACSFactoryInitiated, _DKEACSPassword, _DKEACSSkipSystemModalBlur, 
+                       _DKEACSTaskIdentifiersToSkip, _DKEACSUID, _DKErrorDomain, 
+                       _DKHelperDaemonServiceInterface, _DKIntegrityCheckErrorDomain, 
+                       _DKLogObject, _DKNotificationEACSDomain, _DKNotificationNameEACSTerminated, 
+                       _DKPrefEnableFeature, _DKPrefFakeAccountRemoval, _DKPrefFakeBootPolicyTransactionRetryFailure, 
                        _DKPrefFakeCompromisedSystem, _DKPrefFakeEFIPassword, _DKPrefFakeFullSecurity, 
                        _DKPrefFakeInvalidDiskLayout, _DKPrefFakeNeedsPhotosSync, 
                        _DKPrefFakeNeedsiCloudSync, _DKPrefFakeSealedSystem, _DKPrefFakeSupportedHardware, 

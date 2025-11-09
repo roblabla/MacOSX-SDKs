@@ -12,7 +12,7 @@
 #import <UIKit/UIBarItem.h>
 #import <UIKit/UIAlertController.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @protocol UIAccessibilityIdentification <NSObject>
 @required
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIImage (UIAccessibility) <UIAccessibilityIdentification>
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIAccessibilityIdentification.h>

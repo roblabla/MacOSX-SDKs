@@ -69,6 +69,7 @@
 #include <machine/types.h>      /* user_time_t */
 #include <stdint.h>             /* uint64_t */
 
+
 /*
  * [XSI] The fd_set type shall be defined as described in <sys/select.h>.
  * The timespec structure shall be defined as described in <time.h>
@@ -211,6 +212,7 @@ void    timevalfix(struct timeval *t1);
 __END_DECLS
 
 #endif /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
+
 
 
 #endif /* !_SYS_TIME_H_ */

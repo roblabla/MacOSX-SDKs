@@ -92,7 +92,9 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
  if a match can be found based on email address in the address book
  passed. If we cannot find the participant, nil is returned.
  */
+
 - (nullable ABRecordRef)ABRecordWithAddressBook:(ABAddressBookRef)addressBook API_AVAILABLE(ios(4.0), macCatalyst(14.0)) API_DEPRECATED("Use contactPredicate instead", ios(4.0, 9.0)) CF_RETURNS_NOT_RETAINED;
+
 #endif
 #else
 /*!

@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
     @enum           ITLibExportFeature
     @abstract       These constants describe the features supported by a given iTunes library.
     @constant       ITLibExportFeatureNone
-                        No features are supported
+					No features are supported
 */
 typedef NS_ENUM( NSUInteger, ITLibExportFeature )
 {
@@ -33,11 +33,13 @@ typedef NS_ENUM( NSUInteger, ITLibExportFeature )
 } API_UNAVAILABLE(ios);
 
 /*!
- @enum           ITLibInitOptions
- @abstract       These constants describe the options that can be passed supported by a given iTunes library.
- @constant       ITLibExportFeatureNone
- No features are supported
- */
+	@enum           ITLibInitOptions
+	@abstract       These constants describe the options that can be passed supported by a given iTunes library.
+	@constant       ITLibInitOptionNone
+					Load the library immediately on ITLibrary instance creation.
+	@constant		ITLibInitOptionLazyLoadData
+					Don't load the library until the first request for data.
+*/
 typedef NS_ENUM( NSUInteger, ITLibInitOptions )
 {
 	ITLibInitOptionNone = 0,
@@ -46,6 +48,14 @@ typedef NS_ENUM( NSUInteger, ITLibInitOptions )
 	ITLibInitOptionLazyLoadData = 1
 
 } API_UNAVAILABLE(ios);
+
+/*!
+	@constant		ITLibraryDidChangeNotification
+	@abstract		This notification is sent to NSDistributedNotificationCenter when a change has occurred in the library.
+					The client should call [ITLibrary -reloadData] if it wants a new view of the library contents.
+	@note			This is not a fine-grained notification.  This API does not support per-object change notifications.
+*/
+ITLIB_EXPORT ITLIB_EXTERN NSNotificationName const ITLibraryDidChangeNotification API_AVAILABLE(macos(13.0));
 
 /*! 
 	@abstract A class representing an iTunes library whose metadata is being queried.

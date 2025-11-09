@@ -1,9 +1,14 @@
+#if !__has_include(<PassKitCore/PKIssuerProvisioningExtensionStatus.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKIssuerProvisioningExtensionStatus.h
 //  PassKit
 //
 //  Copyright © 2020 Apple, Inc. All rights reserved.
 //
+
+#ifndef __PKISSUERPROVISIONINGEXTENSIONSTATUS_H
+#define __PKISSUERPROVISIONINGEXTENSIONSTATUS_H
+
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -20,3 +25,8 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos)
 @end
 
 NS_ASSUME_NONNULL_END
+#endif
+
+#else
+#import <PassKitCore/PKIssuerProvisioningExtensionStatus.h>
+#endif

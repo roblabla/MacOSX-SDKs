@@ -7,7 +7,7 @@
 
 @class NSArray<ObjectType>, NSAppleEventDescriptor, NSNumber, NSScriptClassDescription, NSScriptWhoseTest, NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // Error codes for specific problems evaluating specifiers
 NS_ENUM(NSInteger) {
@@ -282,5 +282,5 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 

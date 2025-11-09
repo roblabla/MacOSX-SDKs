@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1A4EB10F-05FE-399E-AB6A-120F20633A4C
+    value:           1F95DA95-F564-357B-B942-FFF5353931BE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D707B0C7-B360-3D90-BC95-658551498103
+    value:           0429DEF7-FDEF-3008-9405-933B9A02120F
 install-name:    '/System/Library/PrivateFrameworks/MediaFoundation.framework/Versions/A/MediaFoundation'
 current-version: 0
 compatibility-version: 0
@@ -17,7 +17,7 @@ allowable-clients:
     clients:         [ AVPlayerTestBench, MediaFoundationTests, MediaPlaybackCore, 
                        XCTest ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s15MediaFoundation11BufferStateO11descriptionSSvg', '_$s15MediaFoundation11BufferStateO11descriptionSSvpMV', 
                        '_$s15MediaFoundation11BufferStateO8rawValueACSgSi_tcfC', 
                        '_$s15MediaFoundation11BufferStateO8rawValueSivg', '_$s15MediaFoundation11BufferStateO8rawValueSivpMV', 
@@ -47,6 +47,8 @@ exports:
                        '_$s15MediaFoundation11DescriptionC20forTimeControlStatusySSAA0efG0OFZTq', 
                        '_$s15MediaFoundation11DescriptionC27forPlaybackTimeChangeReasonySSAA0efgH0OFZTj', 
                        '_$s15MediaFoundation11DescriptionC27forPlaybackTimeChangeReasonySSAA0efgH0OFZTq', 
+                       '_$s15MediaFoundation11DescriptionC27forPlayerItemTransitionTypeySSAA08MFPlayerfgH0OFZTj', 
+                       '_$s15MediaFoundation11DescriptionC27forPlayerItemTransitionTypeySSAA08MFPlayerfgH0OFZTq', 
                        '_$s15MediaFoundation11DescriptionC29forPlayerSpatializationFormatySSAA0efG0OFZTj', 
                        '_$s15MediaFoundation11DescriptionC29forPlayerSpatializationFormatySSAA0efG0OFZTq', 
                        '_$s15MediaFoundation11DescriptionCMa', '_$s15MediaFoundation11DescriptionCMn', 
@@ -160,6 +162,16 @@ exports:
                        '_$s15MediaFoundation25AudioSessionConfigurationCMa', '_$s15MediaFoundation25AudioSessionConfigurationCMn', 
                        '_$s15MediaFoundation25AudioSessionConfigurationCMo', '_$s15MediaFoundation25AudioSessionConfigurationCMu', 
                        '_$s15MediaFoundation25AudioSessionConfigurationCN', '_$s15MediaFoundation25AudioSessionConfigurationCfD', 
+                       '_$s15MediaFoundation26MFPlayerItemTransitionTypeO11descriptionSSvg', 
+                       '_$s15MediaFoundation26MFPlayerItemTransitionTypeO11descriptionSSvpMV', 
+                       '_$s15MediaFoundation26MFPlayerItemTransitionTypeO8rawValueACSgSi_tcfC', 
+                       '_$s15MediaFoundation26MFPlayerItemTransitionTypeO8rawValueSivg', 
+                       '_$s15MediaFoundation26MFPlayerItemTransitionTypeO8rawValueSivpMV', 
+                       '_$s15MediaFoundation26MFPlayerItemTransitionTypeOMa', '_$s15MediaFoundation26MFPlayerItemTransitionTypeOMn', 
+                       '_$s15MediaFoundation26MFPlayerItemTransitionTypeON', '_$s15MediaFoundation26MFPlayerItemTransitionTypeOSHAAMc', 
+                       '_$s15MediaFoundation26MFPlayerItemTransitionTypeOSQAAMc', 
+                       '_$s15MediaFoundation26MFPlayerItemTransitionTypeOSYAAMc', 
+                       '_$s15MediaFoundation26MFPlayerItemTransitionTypeOs23CustomStringConvertibleAAMc', 
                        '_$s15MediaFoundation26PlayerSpatializationFormatO11descriptionSSvg', 
                        '_$s15MediaFoundation26PlayerSpatializationFormatO11descriptionSSvpMV', 
                        '_$s15MediaFoundation26PlayerSpatializationFormatO8rawValueACSgSi_tcfC', 

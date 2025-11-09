@@ -12,7 +12,7 @@
 
 /****************	Immutable Array		****************/
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @interface NSArray<__covariant ObjectType> : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
 
@@ -199,4 +199,4 @@ NS_SWIFT_UNAVAILABLE("NSMutableArray diffing methods are not available in Swift"
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

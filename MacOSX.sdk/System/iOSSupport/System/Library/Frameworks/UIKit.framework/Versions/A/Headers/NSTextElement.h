@@ -7,12 +7,12 @@
 //
 
 
-#import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 
 @class NSTextRange;
 @class NSTextContentManager;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // NSTextElement is an abstract base class for representing the smallest text layout unit typically paragraphs, tables, or attachments. A text element is associated with an NSTextContentManager.
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
@@ -26,6 +26,18 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 
 // Represents the range of the element inside the document.
 @property (nullable, strong) NSTextRange *elementRange;
+
+#pragma mark Child Elements
+// A concrete NSTextElement subclass can be structured in a tree. An element can have zero or more child elements. This section provides interface for supporting such a configuration.
+// Returns an array of children. The array can contain zero or more elements.
+@property (readonly, copy) NSArray<__kindof NSTextElement *> *childElements API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+// Returns the parent element if the receiver is a child.
+@property (nullable, readonly, weak) __kindof NSTextElement *parentElement API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+// Returns YES if it is an element represented in text layout. It is enumerated by NSTextContentManager.
+@property (readonly) BOOL isRepresentedElement API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
 @end
 
 #pragma mark NSTextParagraph
@@ -42,7 +54,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 @property (nullable, strong, readonly) NSTextRange *paragraphContentRange;
 @property (nullable, strong, readonly) NSTextRange *paragraphSeparatorRange;
 @end
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 #else
 #import <UIFoundation/NSTextElement.h>
 #endif

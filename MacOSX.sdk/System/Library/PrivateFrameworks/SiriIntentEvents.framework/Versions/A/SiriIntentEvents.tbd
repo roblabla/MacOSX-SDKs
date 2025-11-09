@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B1518F7B-0B6B-3D6C-8CFC-BD67FE648EA4
+    value:           DAD2515D-EF23-33C0-9F39-1DFB6D498C52
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           482FBFB6-715E-3EAD-ADAE-7D187232EB4B
+    value:           53CFD856-E8E7-345C-9BA2-C416CF55D2A6
 install-name:    '/System/Library/PrivateFrameworks/SiriIntentEvents.framework/Versions/A/SiriIntentEvents'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s16SiriIntentEvents08CompoundB14EventPredicateO13toNSPredicateSo0H0CyKF', 
                        '_$s16SiriIntentEvents08CompoundB14EventPredicateO3andyACSayAA22NSPredicateConvertible_pGcACmFWC', 
                        '_$s16SiriIntentEvents08CompoundB14EventPredicateOAA22NSPredicateConvertibleAAMc', 

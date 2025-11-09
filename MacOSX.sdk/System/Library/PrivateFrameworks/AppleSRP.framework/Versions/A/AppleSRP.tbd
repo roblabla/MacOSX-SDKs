@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           70A87157-B8D9-38DC-BCB9-0F981924D3B0
+    value:           86F36BF4-31E7-3B44-A5C2-132D0D6CBDD5
   - target:          x86_64-maccatalyst
-    value:           70A87157-B8D9-38DC-BCB9-0F981924D3B0
+    value:           86F36BF4-31E7-3B44-A5C2-132D0D6CBDD5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0DC9CA43-3709-39C4-A0D3-66FEC020E8DD
+    value:           DF5162E1-C1B8-381E-9C82-FF49CF48845D
   - target:          arm64e-maccatalyst
-    value:           0DC9CA43-3709-39C4-A0D3-66FEC020E8DD
+    value:           DF5162E1-C1B8-381E-9C82-FF49CF48845D
 install-name:    '/System/Library/PrivateFrameworks/AppleSRP.framework/Versions/A/AppleSRP'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BigIntegerAdd, _BigIntegerAddInt, _BigIntegerBitLen, _BigIntegerCheckPrime, 
                        _BigIntegerCmp, _BigIntegerCmpInt, _BigIntegerDivInt, _BigIntegerFree, 
                        _BigIntegerFromBytes, _BigIntegerFromInt, _BigIntegerLShift, 

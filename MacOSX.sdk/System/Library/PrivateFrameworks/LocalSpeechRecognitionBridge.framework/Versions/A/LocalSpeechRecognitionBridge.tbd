@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B0DA7DCA-FB76-3D57-A7B6-84DFDA8FEAFF
+    value:           A72545BB-67D5-3D3D-9A8A-4284862C03A7
   - target:          x86_64-maccatalyst
-    value:           B0DA7DCA-FB76-3D57-A7B6-84DFDA8FEAFF
+    value:           A72545BB-67D5-3D3D-9A8A-4284862C03A7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A0B71D98-5FB0-3EC3-ADDE-78087335A47C
+    value:           78CBC9A9-AC63-3722-BA48-A40D3973DD8F
   - target:          arm64e-maccatalyst
-    value:           A0B71D98-5FB0-3EC3-ADDE-78087335A47C
+    value:           78CBC9A9-AC63-3722-BA48-A40D3973DD8F
 install-name:    '/System/Library/PrivateFrameworks/LocalSpeechRecognitionBridge.framework/Versions/A/LocalSpeechRecognitionBridge'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _LBErrorDomain, _LBLocalSpeechServiceDelegateGetXPCInterface, 
                        _LBLocalSpeechServiceGetXPCInterface, _LBLocalSpeechServiceName, 
                        _LBLogContextFacilityLocalSRBridge, _LBLogInitIfNeeded, _LBLoggingSubsystem, 

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol HMNetworkConfigurationProfileDelegate;
 
 HM_EXTERN API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMNetworkConfigurationProfile : HMAccessoryProfile
+    @interface HMNetworkConfigurationProfile : HMAccessoryProfile
 
 /*!
  *  @abstract   The delegate of the receiver.
@@ -29,7 +29,8 @@ HM_EXTERN API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0), macCatalyst(14.0)) 
 
 @end
 
-API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
+API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0), macCatalyst(14.0))
+API_UNAVAILABLE(macos)
 @protocol HMNetworkConfigurationProfileDelegate <NSObject>
 
 @optional

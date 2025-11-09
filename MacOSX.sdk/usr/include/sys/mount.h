@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2018 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2021 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -82,6 +82,7 @@
 #include <Availability.h>
 
 #include <sys/_types/_fsid_t.h> /* file system id type */
+#include <sys/_types/_graftdmg_un.h>
 
 /*
  * file system statistics
@@ -402,6 +403,12 @@ struct fhandle {
 	unsigned char   fh_data[NFS_MAX_FH_SIZE];       /* file handle value */
 };
 typedef struct fhandle  fhandle_t;
+
+OS_ENUM(graftdmg_type, uint32_t,
+    GRAFTDMG_CRYPTEX_BOOT = 1,
+    GRAFTDMG_CRYPTEX_PREBOOT = 2,
+    GRAFTDMG_CRYPTEX_DOWNLEVEL = 3);
+
 
 
 

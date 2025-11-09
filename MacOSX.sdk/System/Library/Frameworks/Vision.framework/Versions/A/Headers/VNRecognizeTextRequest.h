@@ -68,6 +68,11 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
  */
 @property (readwrite, nonatomic, assign) BOOL usesLanguageCorrection;
 
+/*!
+ @brief Language detection will try to automatically identify the script/langauge during the detection and use the appropiate model for recognition and language correction. This can be particularly helpful, if the nature of the content is unkown and with this flag being set it will for instance determine if text is latin vs chinese so you don't have to pick the language model in the first case. But as the language correction cannot always guarantee the correct detection, it is advisable to set the languages, if you have domain knowledge of what language to expect. The default value is NO. Also note that this feature is only available since VNRecognizeTextRequestRevision3 and is a no-op before that.
+ */
+@property (readwrite, nonatomic, assign) BOOL automaticallyDetectsLanguage API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));
+
 /*
  @brief Minimum height of the text expected to be recognized, relative to the image height (e.g. for half of the image height, use 0.5). Increasing the size will reduce the memory consumption and speed up the recognition with the trade-off that text smaller than the minimum height may not be recognized properly. If the minimum height is set to 0.0 the image gets processed at the highest possible resolution with no downscaling. With that the processing time will be the longest and the memory usage the highest but the smallest technically readable text will be recognized. The default value for this is 0.0.
  */
@@ -93,6 +98,12 @@ static const NSUInteger VNRecognizeTextRequestRevision1 = 1;
  */
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 static const NSUInteger VNRecognizeTextRequestRevision2 = 2;
+
+/*
+ @brief VNRecognizeTextRequestRevision3 supports all languages from previous revisions plus some new languages in the accurate recognition level. It also improves recognition capbilities for rotation and handwriting as well as support for the automatic language detection property. Best practice is to use supportedRecognitionLanguagesForTextRecognitionLevel to check for supported languages. As the underlying engine has changed from previous revsions, results can differ but are generally more accurate.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
+static const NSUInteger VNRecognizeTextRequestRevision3 = 3;
 
 
 NS_ASSUME_NONNULL_END

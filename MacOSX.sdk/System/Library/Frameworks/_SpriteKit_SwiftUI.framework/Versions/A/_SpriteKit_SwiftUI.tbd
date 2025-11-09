@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           02C39A51-1342-3F18-8564-96EC36E5A4F1
+    value:           2A34C811-B743-3E02-804B-4F1AFBB3C891
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC324F44-6DC7-3E15-AA16-DC7EB088E42F
+    value:           9BA4ABE1-4CFE-3695-9C09-9980BA09982B
 install-name:    '/System/Library/Frameworks/_SpriteKit_SwiftUI.framework/Versions/A/_SpriteKit_SwiftUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s18_SpriteKit_SwiftUI0A4ViewV0cD00E0AAMc', '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV11showsFieldsAEvgZ', 
                        '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV12showsPhysicsAEvgZ', 
                        '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV14showsDrawCountAEvgZ', 

@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3F6B2D2C-C9DD-3D4F-85D9-96A910E616E4
+    value:           EAC31EC2-2F59-3E58-AA9E-3DEAB3D83F06
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ABD2ADF8-2778-3764-A040-4BF9DE975177
+    value:           4D75AE0C-FF4B-348D-961B-CEADF4913197
 install-name:    '/System/Library/PrivateFrameworks/acfs.framework/Versions/A/acfs'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CFXsanErrorDomain, _GetXsanConfigEssentials, _buildSanConfig, 
                        _buildSanConfigC, _buildSanConfigCF, _buildXsanDirs, _changeXsanIPAddr, 
                        _checkSanConfigChange, _checkSanConfigChangeWithServer, _clearXsanVolumeLockout, 

@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4F93DEC9-4FD7-3802-9631-970F2B631486
+    value:           2B5177BF-88D1-3369-8544-8E63B3F4EC47
   - target:          x86_64-maccatalyst
-    value:           4F93DEC9-4FD7-3802-9631-970F2B631486
+    value:           2B5177BF-88D1-3369-8544-8E63B3F4EC47
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           05B9AF76-51D9-3DF8-961A-93591E7C773E
+    value:           67345589-9280-3712-B6E0-78EEF58045AC
   - target:          arm64e-maccatalyst
-    value:           05B9AF76-51D9-3DF8-961A-93591E7C773E
+    value:           67345589-9280-3712-B6E0-78EEF58045AC
 install-name:    '/System/Library/PrivateFrameworks/CoreLocationReplay.framework/Versions/A/CoreLocationReplay'
-current-version: 2667.0.23
+current-version: 2780.0.16
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ _CLLocationPlayer ]
 ...

@@ -4,44 +4,53 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FE7AA2E9-AC36-3C8A-9610-756EA7C60F65
+    value:           9DD967C4-2797-35C4-AE08-C547CDBF30A0
   - target:          x86_64-maccatalyst
-    value:           FE7AA2E9-AC36-3C8A-9610-756EA7C60F65
+    value:           9DD967C4-2797-35C4-AE08-C547CDBF30A0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7F70F457-3937-3063-B980-2E0C24E6723C
+    value:           E01DDB19-9943-373D-9DA3-3DEDA788D505
   - target:          arm64e-maccatalyst
-    value:           7F70F457-3937-3063-B980-2E0C24E6723C
+    value:           E01DDB19-9943-373D-9DA3-3DEDA788D505
 install-name:    '/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/CoreMediaIO'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CMIOAddAtExitListener, _CMIOAnalyticsGetPlugInInfo, _CMIOAnalyticsRegisterDevice, 
                        _CMIOAnalyticsSendStart, _CMIODeviceProcessAVCCommand, _CMIODeviceProcessRS422Command, 
                        _CMIODeviceStartStream, _CMIODeviceStopStream, _CMIOExtensionControlFromProperty, 
                        _CMIOExtensionFeatureControlFromProperty, _CMIOExtensionInfoDictionaryKey, 
                        _CMIOExtensionMachServiceNameKey, _CMIOExtensionPropertyAddressFromProperty, 
-                       _CMIOExtensionPropertyDeviceCanBeDefaultInputDevice, _CMIOExtensionPropertyDeviceCanBeDefaultOutputDevice, 
-                       _CMIOExtensionPropertyDeviceCinematicFramingDualStream, _CMIOExtensionPropertyDeviceIsSuspended, 
+                       _CMIOExtensionPropertyClientObservingSystemPreferredDevice, 
+                       _CMIOExtensionPropertyClientStreamingFromDALDevice, _CMIOExtensionPropertyDeviceCanBeDefaultInputDevice, 
+                       _CMIOExtensionPropertyDeviceCanBeDefaultOutputDevice, _CMIOExtensionPropertyDeviceCinematicFramingDualStream, 
+                       _CMIOExtensionPropertyDeviceCompanionDeskcamDeviceUUID, _CMIOExtensionPropertyDeviceIsSuspended, 
                        _CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID, _CMIOExtensionPropertyDeviceManufacturer, 
                        _CMIOExtensionPropertyDeviceModel, _CMIOExtensionPropertyDeviceNameNonLocalized, 
-                       _CMIOExtensionPropertyDeviceTransportType, _CMIOExtensionPropertyForPropertyAddressInDictionary, 
-                       _CMIOExtensionPropertyForPropertyAddressInSet, _CMIOExtensionPropertyFromControl, 
-                       _CMIOExtensionPropertyFromFeatureControl, _CMIOExtensionPropertyFromPropertyAddress, 
-                       _CMIOExtensionPropertyIs4CCBooleanControlProperty, _CMIOExtensionPropertyIs4CCControlProperty, 
-                       _CMIOExtensionPropertyIs4CCFeatureControlProperty, _CMIOExtensionPropertyIs4CCProperty, 
-                       _CMIOExtensionPropertyIs4CCSelectorControlProperty, _CMIOExtensionPropertyProviderManufacturer, 
-                       _CMIOExtensionPropertyProviderName, _CMIOExtensionPropertyStreamActiveFormatIndex, 
-                       _CMIOExtensionPropertyStreamCinematicFramingActive, _CMIOExtensionPropertyStreamFrameDuration, 
+                       _CMIOExtensionPropertyDeviceSpecialDeviceType, _CMIOExtensionPropertyDeviceTransportType, 
+                       _CMIOExtensionPropertyForPropertyAddressInDictionary, _CMIOExtensionPropertyForPropertyAddressInSet, 
+                       _CMIOExtensionPropertyFromControl, _CMIOExtensionPropertyFromFeatureControl, 
+                       _CMIOExtensionPropertyFromPropertyAddress, _CMIOExtensionPropertyIs4CCBooleanControlProperty, 
+                       _CMIOExtensionPropertyIs4CCControlProperty, _CMIOExtensionPropertyIs4CCFeatureControlProperty, 
+                       _CMIOExtensionPropertyIs4CCProperty, _CMIOExtensionPropertyIs4CCSelectorControlProperty, 
+                       _CMIOExtensionPropertyProviderManufacturer, _CMIOExtensionPropertyProviderName, 
+                       _CMIOExtensionPropertyStreamActiveFormatIndex, _CMIOExtensionPropertyStreamAsyncStillCaptureConfigurations, 
+                       _CMIOExtensionPropertyStreamAsyncStillCaptureEnabled, _CMIOExtensionPropertyStreamCinematicFramingActive, 
+                       _CMIOExtensionPropertyStreamFaceDetectionEnabled, _CMIOExtensionPropertyStreamFlashSupported, 
+                       _CMIOExtensionPropertyStreamFrameDuration, _CMIOExtensionPropertyStreamHumanBodyDetectionEnabled, 
                        _CMIOExtensionPropertyStreamInputBufferQueueSize, _CMIOExtensionPropertyStreamMaxFrameDuration, 
+                       _CMIOExtensionPropertyStreamOverheadCameraMode, _CMIOExtensionPropertyStreamPerFrameExifDataEnabled, 
+                       _CMIOExtensionPropertyStreamPortraitEffectActive, _CMIOExtensionPropertyStreamPortraitEffectEnabled, 
                        _CMIOExtensionPropertyStreamSinkBufferQueueSize, _CMIOExtensionPropertyStreamSinkBufferUnderrunCount, 
                        _CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup, 
-                       _CMIOExtensionPropertyStreamSinkEndOfData, _CMIOFileWritingControlTokenAllVolumesAreOutOfDiskSpace, 
+                       _CMIOExtensionPropertyStreamSinkEndOfData, _CMIOExtensionPropertyStreamStudioLightingActive, 
+                       _CMIOExtensionPropertyStreamStudioLightingEnabled, _CMIOExtensionPropertyStreamZoom, 
+                       _CMIOExtensionPropertyStreamZoomUsingRamp, _CMIOFileWritingControlTokenAllVolumesAreOutOfDiskSpace, 
                        _CMIOFileWritingControlTokenBufferIsIncompatibleWithCurrentFile, 
                        _CMIOFileWritingControlTokenCreate, _CMIOFileWritingControlTokenCreateOutputPathToCapturePathDictionary, 
                        _CMIOFileWritingControlTokenCurrentVolumeIsOutOfDiskSpace, 
@@ -93,15 +102,20 @@ exports:
                        _CMIOSampleBufferCreateForImageBuffer, _CMIOSampleBufferCreateNoDataMarker, 
                        _CMIOSampleBufferGetDiscontinuityFlags, _CMIOSampleBufferGetSequenceNumber, 
                        _CMIOSampleBufferSetDiscontinuityFlags, _CMIOSampleBufferSetSequenceNumber, 
-                       _CMIOStreamClockConvertHostTimeToDeviceTime, _CMIOStreamClockCreate, 
-                       _CMIOStreamClockInvalidate, _CMIOStreamClockPostTimingEvent, 
+                       _CMIOStreamCaptureAsyncStillImage, _CMIOStreamClockConvertHostTimeToDeviceTime, 
+                       _CMIOStreamClockCreate, _CMIOStreamClockInvalidate, _CMIOStreamClockPostTimingEvent, 
                        _CMIOStreamClockPostTimingEventUsingNanos, _CMIOStreamCopyBufferQueue, 
                        _CMIOStreamDeckCueTo, _CMIOStreamDeckJog, _CMIOStreamDeckPlay, 
-                       _CMIOStreamDeckStop, _CMIOUnitCreateFromDescription, _CMIOUnitGetClassID, 
-                       _CMIOUnitGetTypeID, _CMIOUnitRelease, _CMIOUnitRetain, _CMIOUnitUtilityCreateAudioCompressionOptionsDictionary, 
+                       _CMIOStreamDeckStop, _CMIOStreamRegisterAsyncStillCaptureCallback, 
+                       _CMIOUnitCreateFromDescription, _CMIOUnitGetClassID, _CMIOUnitGetTypeID, 
+                       _CMIOUnitRelease, _CMIOUnitRetain, _CMIOUnitUtilityCreateAudioCompressionOptionsDictionary, 
                        _CMIOUnitUtilityCreateAudioCompressionOptionsDictionary2, 
                        _CMIOUnitUtilityGetAudioCompressionOptionsDictionaryFields, 
                        _CMIOUnitUtilityGetAudioCompressionOptionsDictionaryFields2, 
+                       _kCMIOAsyncStillImageConfigurationsKey_MaxPhotoQualityPrioritization, 
+                       _kCMIOAsyncStillImageOptionsKey_CompressedFormat, _kCMIOAsyncStillImageOptionsKey_FlashMode, 
+                       _kCMIOAsyncStillImageOptionsKey_HighResolutionCapture, _kCMIOAsyncStillImageOptionsKey_MaxPhotoDimensionsHeight, 
+                       _kCMIOAsyncStillImageOptionsKey_MaxPhotoDimensionsWidth, _kCMIOAsyncStillImageOptionsKey_PhotoQualityPrioritization, 
                        _kCMIOBlockBufferAttachmentKey_CVPixelBufferReference, _kCMIOFileWritingOptionsKey_AudioChunkBlockSize, 
                        _kCMIOFileWritingOptionsKey_AudioChunkDuration, _kCMIOFileWritingOptionsKey_AudioEnabled, 
                        _kCMIOFileWritingOptionsKey_AudioFileType, _kCMIOFileWritingOptionsKey_AudioID3Metadata, 

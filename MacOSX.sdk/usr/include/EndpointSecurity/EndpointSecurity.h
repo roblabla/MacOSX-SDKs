@@ -9,4 +9,6 @@
 #include <EndpointSecurity/ESMessage.h>
 #include <EndpointSecurity/ESClient.h>
 
+#undef __ENDPOINT_SECURITY_INDIRECT__
+
 #endif /* __ENDPOINT_SECURITY_H */

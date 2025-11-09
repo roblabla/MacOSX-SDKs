@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3D12051D-9FD0-38FC-8D24-C21249860A43
+    value:           927FD1EF-7159-373C-AD3C-0F8EF0EF2659
   - target:          x86_64-maccatalyst
-    value:           3D12051D-9FD0-38FC-8D24-C21249860A43
+    value:           927FD1EF-7159-373C-AD3C-0F8EF0EF2659
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           18087F8F-3A02-31EE-B46E-F8620D9C3866
+    value:           B9C3BDDF-D4F7-3AF3-AFB6-379EF3978623
   - target:          arm64e-maccatalyst
-    value:           18087F8F-3A02-31EE-B46E-F8620D9C3866
+    value:           B9C3BDDF-D4F7-3AF3-AFB6-379EF3978623
 install-name:    '/System/Library/PrivateFrameworks/CVNLP.framework/Versions/A/CVNLP'
 current-version: 119
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CVNLPBeamEndToken, _CVNLPBeamScore, _CVNLPBeamSearchBeamID, 
                        _CVNLPBeamSearchBlacklistRules, _CVNLPBeamSearchCopyTopBeams, 
                        _CVNLPBeamSearchCreate, _CVNLPBeamSearchIncludeLanguageModel, 
@@ -28,7 +28,8 @@ exports:
                        _CVNLPBeamSearchOneStep, _CVNLPBeamSearchOutputVocabFilterList, 
                        _CVNLPBeamSearchOutputVocabMap, _CVNLPBeamSearchOutputVocabPath, 
                        _CVNLPBeamSearchOutputVocabSize, _CVNLPBeamSearchReset, _CVNLPBeamSearchSize, 
-                       _CVNLPBeamTokens, _CVNLPCaptionCopyClassificationResults, 
+                       _CVNLPBeamTokens, _CVNLPCLIPModelEspressoEngine, _CVNLPCLIPModelName, 
+                       _CVNLPCLIPModelNameDefaultValue, _CVNLPCLIPModelURL, _CVNLPCaptionCopyClassificationResults, 
                        _CVNLPCaptionCopyForCVPixelBuffer, _CVNLPCaptionCopyForImage, 
                        _CVNLPCaptionCopyForVideo, _CVNLPCaptionCopyPerformanceMetrics, 
                        _CVNLPCaptionCreateForCVPixelBuffer, _CVNLPCaptionCreateForImage, 
@@ -51,29 +52,34 @@ exports:
                        _CVNLPErrorDomain, _CVNLPGeneratedCaption, _CVNLPGeneratedCaptionConfidenceLow, 
                        _CVNLPGeneratedCaptionScore, _CVNLPImageClassificationIdentifiers, 
                        _CVNLPLanguageModelConditionalProbability, _CVNLPLanguageModelConditionalProbabilityForTokenID, 
-                       _CVNLPLanguageModelCopyConditionalProbabilities, _CVNLPLanguageModelCopyConditionalProbabilitiesForTokenIDs, 
+                       _CVNLPLanguageModelConditionalProbabilityForTokenString, _CVNLPLanguageModelCopyConditionalProbabilities, 
+                       _CVNLPLanguageModelCopyConditionalProbabilitiesForTokenIDs, 
                        _CVNLPLanguageModelCopyIDTokenMap, _CVNLPLanguageModelCopyNextTokenConditionalProbabilitiesOverVocabulary, 
                        _CVNLPLanguageModelCopyNextTokenIDConditionalProbabilitiesOverVocabulary, 
                        _CVNLPLanguageModelCopyPredictions, _CVNLPLanguageModelCopyTokenIDMap, 
                        _CVNLPLanguageModelCreate, _CVNLPLanguageModelLogConditionalProbability, 
-                       _CVNLPLanguageModelLogConditionalProbabilityForTokenID, _CVNLPLanguageModelLogJointProbability, 
-                       _CVNLPLanguageModelSetTemperature, _CVNLPLanguageModelWithStateConditionalProbability, 
-                       _CVNLPLanguageModelWithStateConditionalProbabilityForTokenID, 
+                       _CVNLPLanguageModelLogConditionalProbabilityForTokenID, _CVNLPLanguageModelLogConditionalProbabilityForTokenString, 
+                       _CVNLPLanguageModelLogJointProbability, _CVNLPLanguageModelSetTemperature, 
+                       _CVNLPLanguageModelWithStateConditionalProbability, _CVNLPLanguageModelWithStateConditionalProbabilityForTokenID, 
                        _CVNLPLanguageModelWithStateCopyConditionalProbabilitiesOverVocabulary, 
                        _CVNLPLanguageModelWithStateCreate, _CVNLPLanguageModelWithStateCreateCopy, 
                        _CVNLPLanguageModelWithStateReset, _CVNLPLanguageModelWithStateUpdateWithContext, 
-                       _CVNLPLanguageModelWithStateUpdateWithContextIDs, _kCVNLPLanguageModelArchitectureKey, 
+                       _CVNLPLanguageModelWithStateUpdateWithContextIDs, _CVNLPVideoCaptioningModelBeamSearchBeamWidth, 
+                       _CVNLPVideoCaptioningModelBeamSearchLengthNormalizationAlpha, 
+                       _CVNLPVideoCaptioningModelBeamSearchMaxSteps, _CVNLPVideoCaptioningModelBeamSearchTopK, 
+                       _CVNLPVideoCaptioningModelErrorDomain, _CVNLPVideoCaptioningModelEspressoEngine, 
+                       _CVNLPVideoCaptioningModelURL, _kCVNLPLanguageModelArchitectureKey, 
                        _kCVNLPLanguageModelLocaleKey, _kCVNLPLanguageModelSamplingBeamSizeKey, 
                        _kCVNLPLanguageModelSamplingMaxLengthKey, _kCVNLPLanguageModelSamplingMethodKey, 
                        _kCVNLPLanguageModelSamplingNucleusThresholdKey, _kCVNLPLanguageModelSamplingNumberKey, 
                        _kCVNLPLanguageModelSamplingTopKKey, _kCVNLPLanguageModelTokenTypeKey, 
                        _kCVNLPLanguageModelURLKey ]
-    objc-classes:    [ CVNLPActivationMatrix, CVNLPCTCTextDecoder, CVNLPCommSafetyHandler, 
-                       CVNLPCommSafetyTextClassification, CVNLPCommSafetyTextItem, 
-                       CVNLPCommSafetyTextProvider, CVNLPDecodingLanguageModel, CVNLPDecodingLexicon, 
-                       CVNLPDecodingLexicons, CVNLPInformationStream, CVNLPLanguageResourceBundle, 
-                       CVNLPTextDecoder, CVNLPTextDecodingBeamSearchConfiguration, 
+    objc-classes:    [ CVNLPActivationMatrix, CVNLPCLIPEmbedding, CVNLPCLIPModel, 
+                       CVNLPCTCTextDecoder, CVNLPCommSafetyHandler, CVNLPCommSafetyTextClassification, 
+                       CVNLPCommSafetyTextItem, CVNLPCommSafetyTextProvider, CVNLPDecodingLanguageModel, 
+                       CVNLPDecodingLexicon, CVNLPDecodingLexicons, CVNLPInformationStream, 
+                       CVNLPLanguageResourceBundle, CVNLPTextDecoder, CVNLPTextDecodingBeamSearchConfiguration, 
                        CVNLPTextDecodingConfiguration, CVNLPTextDecodingContext, 
                        CVNLPTextDecodingPath, CVNLPTextDecodingResult, CVNLPTextDecodingResultCandidate, 
-                       CVNLPTextDecodingToken, CVNLPTokenIDConverter ]
+                       CVNLPTextDecodingToken, CVNLPTokenIDConverter, CVNLPVideoCaptioningModel ]
 ...

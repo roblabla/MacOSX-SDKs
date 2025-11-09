@@ -1225,6 +1225,28 @@ VIMAGE_PF vImage_Error vImageOverwriteChannelsWithScalar_Planar16U(    Pixel_16U
                                                                    const vImage_Buffer *dest,      /* A planar buffer */
                                                                    vImage_Flags    flags ) VIMAGE_NON_NULL(2)        API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), tvos(8.0));
 
+/*!
+ @function vImageOverwriteChannelsWithScalar_Planar16F
+ 
+ @abstract Fill the dest buffer with the scalar value.
+ 
+ @param scalar
+ A scalar value to fill the destination buffer.
+ 
+ @param dest
+ A pointer to a valid and initialized vImage_Buffer struct, that points to a buffer containing destination pixels.
+ 
+ @param flags
+ \p kvImageNoFlags          Default operation
+ \p kvImageDoNotTile        Disable internal multithreading.
+ 
+ @return kvImageNoError                     Success
+ @return kvImageRoiLargerThanInputBuffer    The height and width of the destination must be less than or equal to the height and width of the src buffer, respectively.
+ */
+VIMAGE_PF vImage_Error vImageOverwriteChannelsWithScalar_Planar16F(    Pixel_16F     scalar,
+                                                                   const vImage_Buffer *dest,      /* A planar buffer */
+                                                                   vImage_Flags    flags ) VIMAGE_NON_NULL(2)        API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
 
 /*!
  @function vImageExtractChannel_ARGB8888
@@ -1440,6 +1462,26 @@ VIMAGE_PF vImage_Error vImageBufferFill_ARGB16S( const vImage_Buffer *dest, cons
  @return kvImageRoiLargerThanInputBuffer    The height and width of the destination must be less than or equal to the height and width of the src buffer, respectively.
  */
 VIMAGE_PF vImage_Error vImageBufferFill_ARGBFFFF( const vImage_Buffer *dest, const Pixel_FFFF color, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
+
+/*!
+ @function vImageBufferFill_ARGB16F
+ 
+ @abstract Fill the dest buffer with the pixel value.
+ 
+ @param color
+ A pixel value to fill the destination buffer.
+ 
+ @param dest
+ A pointer to a valid and initialized vImage_Buffer struct, that points to a buffer containing destination pixels.
+ 
+ @param flags
+ \p kvImageNoFlags          Default operation
+ \p kvImageDoNotTile        Disable internal multithreading.
+ 
+ @return kvImageNoError                     Success
+ @return kvImageRoiLargerThanInputBuffer    The height and width of the destination must be less than or equal to the height and width of the src buffer, respectively.
+ */
+VIMAGE_PF vImage_Error vImageBufferFill_ARGB16F( const vImage_Buffer *dest, const Pixel_ARGB_16F color, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /*!
  @function vImageBufferFill_CbCr8
@@ -1779,7 +1821,53 @@ VIMAGE_PF vImage_Error vImagePermuteChannels_ARGBFFFF(    const vImage_Buffer *s
                                                       vImage_Flags        flags )    VIMAGE_NON_NULL(1,2,3)
 API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
-
+/*!
+ @function vImagePermuteChannels_ARGB16F
+ 
+ @abstract Reorder color channels within the buffer according to the permute map.
+ 
+ @discussion For each pixel in src, do the following:
+ @code
+ Pixel_ARGB_16F srcPixel, result;
+ for( int i = 0; i < 4; i++ )
+ result[i] = srcPixel[ permuteMap[i] ];
+ @endcode
+ 
+ The src buffer must be at least as large as the dest buffer in each dimension. (src.height >= dest.height && src.width >= dest.width)
+ 
+ This function can work in place provided the following are true:
+ For each buffer "buf" that overlaps with dest, buf->data must be equal to dest->data and buf->rowBytes >= dest->rowBytes
+ If an overlapping buffer has a different rowBytes from dest, kvImageDoNotTile must be also passed in the flags
+ 
+ This function may be used with any 4 channel 16-bit/channel format, such as RGBA16F, BGRA16F or AYUV16F.
+ 
+ @param src
+ A pointer to a valid and initialized vImage_Buffer struct, that points to a buffer containing the source pixels.
+ 
+ @param dest
+ A pointer to a valid and initialized vImage_Buffer struct, that points to a buffer containing destination pixels.
+ 
+ @param permuteMap
+ The map describing the permutation of the 4 color channels.
+ Each value in the map must be 0,1,2, or 3.  A map of 0,1,2,3
+ is a copy from src->dest while a map of 3,2,1,0 is permutes
+ ARGB -> BGRA.  Providing a map value greater than 3 will
+ result in the return of error kvImageInvalidParameter.
+ 
+ @param flags
+ \p kvImageNoFlags                     Default operation
+ \p kvImageDoNotTile                   Disable internal multithreading.
+ 
+ @return kvImageNoError                     Success
+ @return kvImageInvalidParameter            When permuteMap > 3, which is invalid.
+ @return kvImageRoiLargerThanInputBuffer    The height and width of the destination must be less than or equal to the height and width of the src buffer, respectively.
+ */
+VIMAGE_PF vImage_Error vImagePermuteChannels_ARGB16F(const vImage_Buffer *src,
+                                                     const vImage_Buffer *dest,
+                                                     const uint8_t       permuteMap[4],
+                                                     vImage_Flags        flags )
+VIMAGE_NON_NULL(1,2,3)
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /*!
  @function vImagePermuteChannelsWithMaskedInsert_ARGB8888

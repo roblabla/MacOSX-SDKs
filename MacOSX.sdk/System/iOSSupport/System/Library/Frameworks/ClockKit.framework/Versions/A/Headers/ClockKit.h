@@ -23,3 +23,7 @@
 
 #import <ClockKit/CLKComplicationDescriptor.h>
 
+#import <ClockKit/CLKComplicationWidgetMigrator.h>
+#import <ClockKit/CLKComplicationWidgetMigrationConfiguration.h>
+#import <ClockKit/CLKComplicationIntentWidgetMigrationConfiguration.h>
+#import <ClockKit/CLKComplicationStaticWidgetMigrationConfiguration.h>

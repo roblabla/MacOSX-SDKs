@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E64CFDB7-643B-351B-AB15-F1B71710570F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
+    value:           B1B6FAC3-74CF-309C-8168-5D91AE41BDDF
   - target:          arm64e-macos
-    value:           E1B1418C-D17A-3B36-8FEE-1C3C56296604
+    value:           1F28E591-F1AA-37DD-B7C7-1D25C0AF19F4
 install-name:    '/System/Library/Frameworks/_GroupActivities_AppKit.framework/Versions/A/_GroupActivities_AppKit'
 swift-abi-version: 7
 ...

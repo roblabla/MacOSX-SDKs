@@ -6,7 +6,7 @@
 
 @class NSMethodSignature, NSInvocation;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 NS_ROOT_CLASS
 @interface NSProxy <NSObject> {
@@ -32,4 +32,4 @@ NS_ROOT_CLASS
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           14752933-F844-319B-A784-076E2BD70A77
+    value:           E72FB946-6859-3F08-903E-946E69AD72CE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A4AA488D-AEE8-3499-8F31-C8DABDCF8B62
+    value:           2B9600FA-DA2E-3571-8A10-145F390BD92D
 install-name:    '/System/Library/PrivateFrameworks/CoreUtilsUI.framework/Versions/A/CoreUtilsUI'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s11CoreUtilsUI13CUUISwiftTestCMa', '_$s11CoreUtilsUI13CUUISwiftTestCMm', 
                        '_$s11CoreUtilsUI13CUUISwiftTestCMn', '_$s11CoreUtilsUI13CUUISwiftTestCN', 
                        '_$s11CoreUtilsUI13CUUISwiftTestCfD', '_$s11CoreUtilsUI13CUUISwiftTestCfd' ]

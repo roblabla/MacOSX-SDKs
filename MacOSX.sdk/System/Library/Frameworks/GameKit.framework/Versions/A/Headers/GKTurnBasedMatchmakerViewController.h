@@ -14,7 +14,7 @@
 #import <Foundation/Foundation.h>
 #import <GameKit/GKMatchmakerViewController.h>
 
-/// View controller to manage turn-based matches, invite friends and perform auto-matching. Present modally from the top view controller.
+/// View controller to manage turn-based matches, invite friends and perform automatching. Present modally from the top view controller.
 #if TARGET_OS_IPHONE
 
 #import <UIKit/UINavigationController.h> // UINavigationController

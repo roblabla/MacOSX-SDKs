@@ -9,6 +9,7 @@
 #import <FileProvider/NSFileProviderDefines.h>
 #import <FileProvider/NSFileProviderExtension.h>
 #import <FileProvider/NSFileProviderItem.h>
+#import <FileProvider/NSFileProviderManager.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -35,6 +36,17 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  */
 - (nullable NSXPCListenerEndpoint *)makeListenerEndpointAndReturnError:(NSError **)error;
 
+@optional
+
+/**
+ Indicates whether access to the service is restricted.
+
+ A restricted service can only be accessed by processes that can manage the domain the service is attached to. It is only accessible
+ through `-[NSFileProviderManager getServiceWithName:itemIdentifier:completionHandler:]`
+ */
+
+@property (readonly, nonatomic, getter=isRestricted) BOOL restricted FILEPROVIDER_API_AVAILABILITY_V2_V5;
+
 @end
 
 /**
@@ -48,6 +60,21 @@ FILEPROVIDER_API_AVAILABILITY_V2
 @interface NSFileProviderExtension (NSFileProviderService)
 
 - (nullable NSArray <id <NSFileProviderServiceSource>> *)supportedServiceSourcesForItemIdentifier:(NSFileProviderItemIdentifier)itemIdentifier error:(NSError **)error NS_SWIFT_NAME(supportedServiceSources(for:)) FILEPROVIDER_API_AVAILABILITY_V2;
+
+@end
+
+
+FILEPROVIDER_API_AVAILABILITY_V2_V5
+@interface NSFileProviderManager (NSFileProviderService)
+
+/**
+ Retrieve the service with the specified named for the specified item.
+ */
+- (void)getServiceWithName:(NSFileProviderServiceName)serviceName
+            itemIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
+         completionHandler:(void (^)(NSFileProviderService * _Nullable_result, NSError * _Nullable))completionHandler
+    NS_SWIFT_NAME(getService(named:for:completionHandler:))
+    NS_SWIFT_ASYNC_NAME(service(named:for:));
 
 @end
 

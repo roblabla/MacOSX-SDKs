@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, SKProductDiscountType) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-SK_EXTERN_CLASS API_AVAILABLE(ios(11.2), macos(10.13.2)) @interface SKProductDiscount : NSObject {
+SK_EXTERN_CLASS API_AVAILABLE(ios(11.2), macos(10.13.2)) NS_SWIFT_SENDABLE @interface SKProductDiscount : NSObject {
 @private
     id _internal;
 }

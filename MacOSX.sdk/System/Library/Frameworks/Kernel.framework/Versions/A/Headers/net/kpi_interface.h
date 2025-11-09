@@ -77,7 +77,6 @@ struct ifnet_demux_desc;
  *       @constant IFNET_FAMILY_FIREWIRE An IEEE 1394 [Firewire] interface.
  *       @constant IFNET_FAMILY_BOND A virtual bonded interface.
  *       @constant IFNET_FAMILY_CELLULAR A cellular interface.
- *       @constant IFNET_FAMILY_6LOWPAN A 6LoWPAN interface.
  *       @constant IFNET_FAMILY_UTUN A utun interface.
  *       @constant IFNET_FAMILY_IPSEC An IPsec interface.
  */
@@ -98,7 +97,7 @@ enum {
 	IFNET_FAMILY_FIREWIRE           = 13,
 	IFNET_FAMILY_BOND               = 14,
 	IFNET_FAMILY_CELLULAR           = 15,
-	IFNET_FAMILY_6LOWPAN            = 16,
+	IFNET_FAMILY_UNUSED_16          = 16,   /* Un-used */
 	IFNET_FAMILY_UTUN               = 17,
 	IFNET_FAMILY_IPSEC              = 18
 };
@@ -181,6 +180,10 @@ typedef u_int32_t protocol_family_t;
  *               transmission status (pass, fail or other errors) of whether
  *               the packet was successfully transmitted on the link, or the
  *               transmission was aborted, or transmission failed.
+ *       @constant IFNET_HW_TIMESTAMP Driver supports time stamping in hardware.
+ *       @constant IFNET_SW_TIMESTAMP Driver supports time stamping in software.
+ *       @constant IFNET_LRO Driver supports TCP Large Receive Offload.
+ *       @constant IFNET_RX_CSUM Driver supports receive checksum offload.
  *
  */
 
@@ -200,7 +203,9 @@ enum {
 	IFNET_TSO_IPV6          = 0x00400000,
 	IFNET_TX_STATUS         = 0x00800000,
 	IFNET_HW_TIMESTAMP      = 0x01000000,
-	IFNET_SW_TIMESTAMP      = 0x02000000
+	IFNET_SW_TIMESTAMP      = 0x02000000,
+	IFNET_LRO               = 0x10000000,
+	IFNET_RX_CSUM           = 0x20000000,
 };
 /*!
  *       @typedef ifnet_offload_t

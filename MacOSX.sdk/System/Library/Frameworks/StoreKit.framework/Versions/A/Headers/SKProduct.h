@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, SKProductPeriodUnit) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-SK_EXTERN_CLASS API_AVAILABLE(ios(11.2), macos(10.13.2), watchos(6.2)) @interface SKProductSubscriptionPeriod : NSObject {
+SK_EXTERN_CLASS API_AVAILABLE(ios(11.2), macos(10.13.2), watchos(6.2)) NS_SWIFT_SENDABLE @interface SKProductSubscriptionPeriod : NSObject {
 @private
     id _internal;
 }
@@ -30,7 +30,7 @@ SK_EXTERN_CLASS API_AVAILABLE(ios(11.2), macos(10.13.2), watchos(6.2)) @interfac
 
 @end
 
-SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) @interface SKProduct : NSObject {
+SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) NS_SWIFT_SENDABLE @interface SKProduct : NSObject {
 @private
     id _internal;
 }

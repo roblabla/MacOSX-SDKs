@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E246F2F0-B342-3D0A-AECD-C0140BA59A51
+    value:           16404677-F21A-3645-BFC5-101A654F4D77
   - target:          x86_64-maccatalyst
-    value:           E246F2F0-B342-3D0A-AECD-C0140BA59A51
+    value:           16404677-F21A-3645-BFC5-101A654F4D77
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           33DDE7F5-359A-3AFB-9F28-7A75109470CE
+    value:           506E0150-63AD-31F8-894A-158FF08EEEFC
   - target:          arm64e-maccatalyst
-    value:           33DDE7F5-359A-3AFB-9F28-7A75109470CE
+    value:           506E0150-63AD-31F8-894A-158FF08EEEFC
 install-name:    '/System/Library/PrivateFrameworks/ParsecModel.framework/Versions/A/ParsecModel'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11ParsecModel12PMFlushEventMp', '_$s11ParsecModel12PMFlushEventPAA7PMEventTb', 
                        '_$s11ParsecModel12PMFlushEventTL', '_$s11ParsecModel12PMUsageEventMp', 
                        '_$s11ParsecModel12PMUsageEventPAA7PMEventTb', '_$s11ParsecModel12PMUsageEventTL', 

@@ -10,7 +10,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UIMenuControllerArrowDirection) {
     UIMenuControllerArrowDefault, // up or down based on screen location
@@ -18,11 +18,11 @@ typedef NS_ENUM(NSInteger, UIMenuControllerArrowDirection) {
     UIMenuControllerArrowDown API_AVAILABLE(ios(3.2)),
     UIMenuControllerArrowLeft API_AVAILABLE(ios(3.2)),
     UIMenuControllerArrowRight API_AVAILABLE(ios(3.2)),
-} API_UNAVAILABLE(tvos);
+} API_DEPRECATED("UIMenuController is deprecated. Use UIEditMenuInteraction instead.", ios(3.2, 16.0)) API_UNAVAILABLE(tvos);
 
 @class UIView, UIMenuItem;
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("UIMenuController is deprecated. Use UIEditMenuInteraction instead.", ios(3.0, 16.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIMenuController : NSObject
 
 @property(class, nonatomic, readonly) UIMenuController *sharedMenuController;
@@ -48,13 +48,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN NSNotificationName const UIMenuControllerWillShowMenuNotification API_UNAVAILABLE(tvos);
-UIKIT_EXTERN NSNotificationName const UIMenuControllerDidShowMenuNotification API_UNAVAILABLE(tvos);
-UIKIT_EXTERN NSNotificationName const UIMenuControllerWillHideMenuNotification API_UNAVAILABLE(tvos);
-UIKIT_EXTERN NSNotificationName const UIMenuControllerDidHideMenuNotification API_UNAVAILABLE(tvos);
-UIKIT_EXTERN NSNotificationName const UIMenuControllerMenuFrameDidChangeNotification API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSNotificationName const UIMenuControllerWillShowMenuNotification API_DEPRECATED("UIMenuController is deprecated. Use UIEditMenuInteraction instead.", ios(3.0, 16.0)) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSNotificationName const UIMenuControllerDidShowMenuNotification API_DEPRECATED("UIMenuController is deprecated. Use UIEditMenuInteraction instead.", ios(3.0, 16.0)) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSNotificationName const UIMenuControllerWillHideMenuNotification API_DEPRECATED("UIMenuController is deprecated. Use UIEditMenuInteraction instead.", ios(3.0, 16.0)) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSNotificationName const UIMenuControllerDidHideMenuNotification API_DEPRECATED("UIMenuController is deprecated. Use UIEditMenuInteraction instead.", ios(3.0, 16.0)) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSNotificationName const UIMenuControllerMenuFrameDidChangeNotification API_DEPRECATED("UIMenuController is deprecated. Use UIEditMenuInteraction instead.", ios(3.0, 16.0)) API_UNAVAILABLE(tvos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("UIMenuItem is deprecated. Use UIEditMenuInteraction instead.", ios(3.2, 16.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIMenuItem : NSObject 
 
 - (instancetype)initWithTitle:(NSString *)title action:(SEL)action NS_DESIGNATED_INITIALIZER;
@@ -64,7 +64,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIMenuController.h>

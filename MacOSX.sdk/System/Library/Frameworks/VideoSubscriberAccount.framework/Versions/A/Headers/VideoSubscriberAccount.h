@@ -15,3 +15,5 @@
 #import <VideoSubscriberAccount/VSAccountProviderResponse.h>
 #import <VideoSubscriberAccount/VSSubscription.h>
 #import <VideoSubscriberAccount/VSSubscriptionRegistrationCenter.h>
+#import <VideoSubscriberAccount/VSUserAccountManager.h>
+#import <VideoSubscriberAccount/VSUserAccount.h>

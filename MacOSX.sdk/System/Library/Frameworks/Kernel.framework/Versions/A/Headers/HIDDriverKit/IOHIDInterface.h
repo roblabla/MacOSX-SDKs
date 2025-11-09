@@ -1,4 +1,4 @@
-/* iig(DriverKit-192.100.7) generated from IOHIDInterface.iig */
+/* iig(DriverKit-256.40.4) generated from IOHIDInterface.iig */
 
 /* IOHIDInterface.iig:1-46 */
 /*

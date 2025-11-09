@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           84115751-BD83-331D-A0DA-FE760D3CCED0
+    value:           207A9103-4F2B-31EB-9BE0-CDD2CE253DF1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F8DD1C0F-DE1D-3C70-B623-EEBF4CD5A5F9
+    value:           5037B933-4075-31D1-AB32-4CA642E26C1D
 install-name:    '/System/Library/PrivateFrameworks/BrightnessControl.framework/Versions/A/BrightnessControl'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BCAppleBacklightBrtControlGetRegistryID, _BCBrtControlCopyAvailableDisplays, 
                        _BCBrtControlCopyProperty, _BCBrtControlGetCallbackQueue, 
                        _BCBrtControlGetCapabilities, _BCBrtControlGetContainerID, 
@@ -26,7 +26,9 @@ exports:
                        __COREBRIGHTNESS_LOG_DEFAULT, __freeBlockWrapper, __iokitCallback, 
                        __newBlockWrapper, _clamp, _copyNitsToUserMapping, _displays, 
                        _float_equal, _getUserForNits, _init_default_corebrightness_log, 
-                       _main, _scaleForExponent, _setBrightnessOnAllDisplays ]
+                       _linear_interpolation, _mach_time_now_in_milliseconds, _mach_time_now_in_nanoseconds, 
+                       _mach_time_now_in_seconds, _mach_time_to_milliseconds, _mach_time_to_nanoseconds, 
+                       _mach_time_to_seconds, _main, _scaleForExponent, _setBrightnessOnAllDisplays ]
     objc-classes:    [ APToDCPEndpoint, BCAppleBacklightBrtControl, BCBrtControl, 
                        BCBrtMonitor, BCHIDBrtControl, BCVirtualBrtControl, CBAPEndpoint ]
     objc-ivars:      [ BCBrtControl._capabilities, BCBrtControl._cfContainerID, BCBrtControl._containerID, 

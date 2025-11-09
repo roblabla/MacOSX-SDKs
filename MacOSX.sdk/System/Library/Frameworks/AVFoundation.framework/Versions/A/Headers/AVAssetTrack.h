@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2021 Apple Inc. All rights reserved.
+	Copyright 2010-2022 Apple Inc. All rights reserved.
 
 */
 
@@ -59,23 +59,33 @@ AV_INIT_UNAVAILABLE
    each of which indicates the format of media samples referenced by the track;
    a track that presents uniform media, e.g. encoded according to the same encoding settings,
    will provide an array with a count of 1 */
-@property (nonatomic, readonly) NSArray *formatDescriptions;
+@property (nonatomic, readonly) NSArray *formatDescriptions AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.formatDescriptions) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* Indicates whether the receiver is playable in the current environment; if YES, an AVPlayerItemTrack of an AVPlayerItem initialized with the receiver's asset can be enabled for playback.  */
-@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly, getter=isPlayable) BOOL playable
+#if __swift__
+API_DEPRECATED("Use load(.isPlayable) instead", macos(10.8, 13.0), ios(5.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+#endif
 
 /* Indicates whether the receiver is decodable in the current environment; if YES, the track can be decoded even though decoding may be too slow for real time playback.  */
-@property (nonatomic, readonly, getter=isDecodable) BOOL decodable API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property (nonatomic, readonly, getter=isDecodable) BOOL decodable
+#if __swift__
+API_DEPRECATED("Use load(.isDecodable) instead", macos(10.13, 13.0), ios(11.0, 16.0), tvos(11.0, 16.0), watchos(4.0, 9.0));
+#else
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+#endif
 
 /* indicates whether the track is enabled according to state stored in its container or construct;
    note that its presentation state can be changed from this default via AVPlayerItemTrack */
-@property (nonatomic, readonly, getter=isEnabled) BOOL enabled;
+@property (nonatomic, readonly, getter=isEnabled) BOOL enabled AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.isEnabled) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* indicates whether the track references sample data only within its storage container */
-@property (nonatomic, readonly, getter=isSelfContained) BOOL selfContained;
+@property (nonatomic, readonly, getter=isSelfContained) BOOL selfContained AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.isSelfContained) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* indicates the total number of bytes of sample data required by the track */
-@property (nonatomic, readonly) long long totalSampleDataLength;
+@property (nonatomic, readonly) long long totalSampleDataLength AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.totalSampleDataLength) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /*!
 	@method			hasMediaCharacteristic:
@@ -85,7 +95,7 @@ AV_INIT_UNAVAILABLE
 					as defined above.
 	@result			YES if the track references media with the specified characteristic, otherwise NO.
 */
-- (BOOL)hasMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
+- (BOOL)hasMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.mediaCharacteristics) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 @end
 
@@ -94,13 +104,13 @@ AV_INIT_UNAVAILABLE
 
 /* Indicates the timeRange of the track within the overall timeline of the asset;
    a track with CMTIME_COMPARE_INLINE(timeRange.start, >, kCMTimeZero) will initially present an empty interval. */
-@property (nonatomic, readonly) CMTimeRange timeRange;
+@property (nonatomic, readonly) CMTimeRange timeRange AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.timeRange) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /*	indicates a timescale in which time values for the track can be operated upon without extraneous numerical conversion  */
-@property (nonatomic, readonly) CMTimeScale naturalTimeScale;
+@property (nonatomic, readonly) CMTimeScale naturalTimeScale AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.naturalTimeScale) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* indicates the estimated data rate of the media data referenced by the track, in units of bits per second */
-@property (nonatomic, readonly) float estimatedDataRate;
+@property (nonatomic, readonly) float estimatedDataRate AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.estimatedDataRate) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 @end
 
@@ -109,11 +119,11 @@ AV_INIT_UNAVAILABLE
 
 /* indicates the language associated with the track, as an ISO 639-2/T language code;
    may be nil if no language is indicated */
-@property (nonatomic, readonly, nullable) NSString *languageCode;
+@property (nonatomic, readonly, nullable) NSString *languageCode AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.languageCode) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* indicates the language tag associated with the track, as an IETF BCP 47 (RFC 4646) language identifier;
    may be nil if no language tag is indicated */
-@property (nonatomic, readonly, nullable) NSString *extendedLanguageTag;
+@property (nonatomic, readonly, nullable) NSString *extendedLanguageTag AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.extendedLanguageTag) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 @end
 
@@ -121,11 +131,11 @@ AV_INIT_UNAVAILABLE
 @interface AVAssetTrack (AVAssetTrackPropertiesForVisualCharacteristic)
 
 /* indicates the natural dimensions of the media data referenced by the track as a CGSize */
-@property (nonatomic, readonly) CGSize naturalSize;
+@property (nonatomic, readonly) CGSize naturalSize AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.naturalSize) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* indicates the transform specified in the track's storage container as the preferred transformation of the visual media data for display purposes;
    its value is often but not always CGAffineTransformIdentity */
-@property (nonatomic, readonly) CGAffineTransform preferredTransform;
+@property (nonatomic, readonly) CGAffineTransform preferredTransform AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.preferredTransform) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 @end
 
@@ -133,10 +143,15 @@ AV_INIT_UNAVAILABLE
 @interface AVAssetTrack (AVAssetTrackPropertiesForAudibleCharacteristic)
 
 /* indicates the volume specified in the track's storage container as the preferred volume of the audible media data */
-@property (nonatomic, readonly) float preferredVolume;
+@property (nonatomic, readonly) float preferredVolume AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.preferredVolume) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* indicates whether this audio track has dependencies (e.g. kAudioFormatMPEGD_USAC) */
-@property (nonatomic, readonly) BOOL hasAudioSampleDependencies API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+@property (nonatomic, readonly) BOOL hasAudioSampleDependencies
+#if __swift__
+API_DEPRECATED("Use load(.hasAudioSampleDependencies) instead", macos(10.15, 13.0), ios(13.0, 16.0), tvos(13.0, 16.0), watchos(6.0, 9.0));
+#else
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+#endif
 
 @end
 
@@ -148,16 +163,26 @@ AV_INIT_UNAVAILABLE
 	@abstract		For tracks that carry a full frame per media sample, indicates the frame rate of the track in units of frames per second.
 	@discussion		For field-based video tracks that carry one field per media sample, the value of this property is the field rate, not the frame rate.
 */
-@property (nonatomic, readonly) float nominalFrameRate;
+@property (nonatomic, readonly) float nominalFrameRate AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.nominalFrameRate) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* indicates the minimum duration of the track's frames; the value will be kCMTimeInvalid if the minimum frame duration is not known or cannot be calculated */
-@property (nonatomic, readonly) CMTime minFrameDuration API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) CMTime minFrameDuration
+#if __swift__
+API_DEPRECATED("Use load(.minFrameDuration) instead", macos(10.10, 13.0), ios(7.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0));
+#endif
 
 /*!
 	@property       requiresFrameReordering
 	@abstract       Indicates whether samples in the track may have different values for their presentation and decode timestamps.
 */
-@property (nonatomic, readonly) BOOL requiresFrameReordering API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) BOOL requiresFrameReordering
+#if __swift__
+API_DEPRECATED("Use load(.requiresFrameReordering) instead", macos(10.10, 13.0), ios(8.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+#endif
 
 @end
 
@@ -166,7 +191,7 @@ AV_INIT_UNAVAILABLE
 
 /* Provides an array of AVAssetTrackSegments with time mappings from the timeline of the track's media samples to the timeline of the track.
    Empty edits, i.e. timeRanges for which no media data is available to be presented, have a value of AVAssetTrackSegment.empty equal to YES. */
-@property (nonatomic, copy, readonly) NSArray<AVAssetTrackSegment *> *segments;
+@property (nonatomic, copy, readonly) NSArray<AVAssetTrackSegment *> *segments AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.segments) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /*!
 	@method			segmentForTrackTime:
@@ -176,7 +201,12 @@ AV_INIT_UNAVAILABLE
 	@result			An AVAssetTrackSegment.
 	@discussion		If the trackTime does not map to a sample presentation time (e.g. it's outside the track's timeRange), the segment closest in time to the specified trackTime is returned. 
 */
-- (nullable AVAssetTrackSegment *)segmentForTrackTime:(CMTime)trackTime;
+- (nullable AVAssetTrackSegment *)segmentForTrackTime:(CMTime)trackTime
+#if __swift__
+API_DEPRECATED("Use loadSegment(forTrackTime:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadSegmentForTrackTime:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
 	@method			loadSegmentForTrackTime:completionHandler:
@@ -196,7 +226,12 @@ AV_INIT_UNAVAILABLE
 					The trackTime for which a sample presentation time is requested.
 	@result			A CMTime; will be invalid if the trackTime is out of range
 */
-- (CMTime)samplePresentationTimeForTrackTime:(CMTime)trackTime;
+- (CMTime)samplePresentationTimeForTrackTime:(CMTime)trackTime
+#if __swift__
+API_DEPRECATED("Use loadSamplePresentationTime(forTrackTime:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadSamplePresentationTimeForTrackTime:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
 	@method			loadSamplePresentationTimeForTrackTime:completionHandler:
@@ -216,15 +251,20 @@ AV_INIT_UNAVAILABLE
 // high-level access to selected metadata of common interest
 
 /* provides access to an array of AVMetadataItems for each common metadata key for which a value is available */
-@property (nonatomic, readonly) NSArray<AVMetadataItem *> *commonMetadata;
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *commonMetadata AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.commonMetadata) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* Provides access to an array of AVMetadataItems for all metadata identifiers for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 */
-@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata
+#if __swift__
+API_DEPRECATED("Use load(.metadata) instead", macos(10.10, 13.0), ios(8.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+#endif
 
 /* provides an NSArray of NSStrings, each representing a format of metadata that's available for the track (e.g. QuickTime userdata, etc.)
    Metadata formats are defined in AVMetadataItem.h. */
-@property (nonatomic, readonly) NSArray<AVMetadataFormat> *availableMetadataFormats;
+@property (nonatomic, readonly) NSArray<AVMetadataFormat> *availableMetadataFormats AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.availableMetadataFormats) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /*!
 	@method			metadataForFormat:
@@ -234,7 +274,12 @@ AV_INIT_UNAVAILABLE
 	@result			An NSArray containing AVMetadataItems.
 	@discussion		Becomes callable without blocking when the key @"availableMetadataFormats" has been loaded
 */
-- (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format;
+- (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format
+#if __swift__
+API_DEPRECATED("Use loadMetadata(for:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadMetadataForFormat:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
 	@method			loadMetadataForFormat:completionHandler:
@@ -318,8 +363,12 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent A
 
 /* Provides an NSArray of NSStrings, each representing a type of track association that the receiver has with one or more of the other tracks of the asset (e.g. AVTrackAssociationTypeChapterList, AVTrackAssociationTypeTimecode, etc.).
    Track association types are defined immediately above. */
-@property (nonatomic, readonly) NSArray<AVTrackAssociationType> *availableTrackAssociationTypes API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
-
+@property (nonatomic, readonly) NSArray<AVTrackAssociationType> *availableTrackAssociationTypes
+#if __swift__
+API_DEPRECATED("Use load(.availableTrackAssociationTypes) instead", macos(10.9, 13.0), ios(7.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+#endif
 /*!
 	@method			associatedTracksOfType:
 	@abstract		Provides an NSArray of AVAssetTracks, one for each track associated with the receiver with the specified type of track association.
@@ -328,7 +377,12 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent A
 	@result			An NSArray containing AVAssetTracks; may be empty if there is no associated tracks of the specified type.
 	@discussion		Becomes callable without blocking when the key @"availableTrackAssociationTypes" has been loaded.
 */
-- (NSArray<AVAssetTrack *> *)associatedTracksOfType:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+- (NSArray<AVAssetTrack *> *)associatedTracksOfType:(AVTrackAssociationType)trackAssociationType
+#if __swift__
+API_DEPRECATED("Use loadAssociatedTracks(ofType:) instead", macos(10.9, 13.0), ios(7.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadAssociatedTracksOfType:completionHandler:", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
 	@method			loadAssociatedTracksOfType:completionHandler:
@@ -348,7 +402,12 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent A
 @interface AVAssetTrack (AVAssetTrackSampleCursorProvision)
 
 /* Indicates whether the receiver can provide instances of AVSampleCursor for traversing its media samples and discovering information about them. */
-@property (nonatomic, readonly) BOOL canProvideSampleCursors API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+@property (nonatomic, readonly) BOOL canProvideSampleCursors
+#if __swift__
+API_DEPRECATED("Use load(.canProvideSampleCursors) instead", macos(10.10, 13.0)) API_UNAVAILABLE(ios, tvos, watchos);
+#else
+API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0));
+#endif
 
 /*!
 	@method			makeSampleCursorWithPresentationTimeStamp:
@@ -360,7 +419,7 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent A
 					If the receiver's asset has a value of NO for providesPreciseDurationAndTiming, and it is prohibitively expensive to locate the precise sample at the desired timestamp, the sample cursor may be approximately positioned.
  					This method will return nil if there are no samples in the track.
 */
-- (nullable AVSampleCursor *)makeSampleCursorWithPresentationTimeStamp:(CMTime)presentationTimeStamp API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+- (nullable AVSampleCursor *)makeSampleCursorWithPresentationTimeStamp:(CMTime)presentationTimeStamp API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0));
 
 /*!
 	@method			makeSampleCursorAtFirstSampleInDecodeOrder:
@@ -368,7 +427,7 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent A
 	@result			An instance of AVSampleCursor.
 	@discussion		This method will return nil if there are no samples in the track.
 */
-- (nullable AVSampleCursor *)makeSampleCursorAtFirstSampleInDecodeOrder API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+- (nullable AVSampleCursor *)makeSampleCursorAtFirstSampleInDecodeOrder API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0));
 
 /*!
 	@method			makeSampleCursorAtLastSampleInDecodeOrder:
@@ -376,7 +435,7 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent A
 	@result			An instance of AVSampleCursor.
 	@discussion		This method will return nil if there are no samples in the track.
 */
-- (nullable AVSampleCursor *)makeSampleCursorAtLastSampleInDecodeOrder API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+- (nullable AVSampleCursor *)makeSampleCursorAtLastSampleInDecodeOrder API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0));
 
 @end
 

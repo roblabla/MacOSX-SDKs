@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4F75B153-8C39-38DA-B30F-50044F799C33
+    value:           7CA0464B-0AB4-37D9-A3EE-1D2ED0047258
   - target:          x86_64-maccatalyst
-    value:           4F75B153-8C39-38DA-B30F-50044F799C33
+    value:           7CA0464B-0AB4-37D9-A3EE-1D2ED0047258
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E5D1864C-A8C3-3CCF-909D-12DCC5E330E6
+    value:           C27B4A18-0AF7-3024-801D-BD888CEED465
   - target:          arm64e-maccatalyst
-    value:           E5D1864C-A8C3-3CCF-909D-12DCC5E330E6
+    value:           C27B4A18-0AF7-3024-801D-BD888CEED465
 install-name:    '/System/Library/Frameworks/ImageCaptureCore.framework/Versions/A/ImageCaptureCore'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ICADevicesFrameworkPath, _ICAuthorizationStatusAuthorized, 
                        _ICAuthorizationStatusDenied, _ICAuthorizationStatusNotDetermined, 
                        _ICAuthorizationStatusRestricted, _ICButtonTypeCopy, _ICButtonTypeMail, 

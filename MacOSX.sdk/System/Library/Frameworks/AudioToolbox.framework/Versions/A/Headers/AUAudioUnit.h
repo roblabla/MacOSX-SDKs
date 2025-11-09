@@ -12,6 +12,7 @@
 #ifdef __OBJC2__
 
 #import <AudioToolbox/AUParameters.h>
+#import <AudioToolbox/AudioUnitProperties.h>
 #import <Foundation/NSExtensionRequestHandling.h>
 #import <CoreMIDI/MIDIServices.h>
 
@@ -32,20 +33,14 @@ typedef uint8_t MIDIChannelNumber;
 
 @protocol AUAudioUnitFactory;
 
+@protocol AUMessageChannel;
+
 // =================================================================================================
 
 /*!	@typedef	AUAudioUnitStatus
 	@brief		A result code returned from an audio unit's render function.
 */
 typedef OSStatus AUAudioUnitStatus;
-
-/*!	@typedef	AUEventSampleTime
-	@brief		Expresses time as a sample count.
-	@discussion
-		Sample times are normally positive, but hosts can propagate HAL sample times through audio
-		units, and HAL sample times can be small negative numbers.
-*/
-typedef int64_t AUEventSampleTime;
 
 /*!	@var		AUEventSampleTimeImmediate
 	@brief		A special value of AUEventSampleTime indicating "immediately."
@@ -694,7 +689,10 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 		kMIDIProtocol_2_0, incoming events will be translated to MIDI 2.0. If hostMIDIProtocol
 		is not set, events will be delivered as legacy MIDI.
 
-		Note: This block should be preferred over MIDIOutputEventBlock going forward.
+		Note: This block is cross-compatible with Audio Units using MIDIOutputEventBlock and should be
+		preferred over MIDIOutputEventBlock by hosts going forward. The framework will provide the Audio Unit
+		with both a MIDIOutputEventBlock and MIDIOutputEventListBlock, the Audio Unit is free to call either
+		block as all messages will be translated as described above.
  
 		Host should setup in the following order:
 		 - Set hostMIDIProtocol
@@ -1146,6 +1144,21 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 */
 @property (nonatomic, nullable) AUMIDICIProfileChangedBlock profileChangedBlock API_AVAILABLE(macos(10.14), ios(12.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
+/*!	@method		messageChannelFor:
+	@brief		Returns an object for bidirectional communication between an Audio Unit and its host.
+	@discussion
+		Message channels provide a flexible way for custom data exchange between an Audio Unit and its host.
+		An Audio Unit can support multiple message channels which are identified by the `channelName`.
+		The message channel object's lifetime is managed by the host. Message channel objects should be designed
+		in such a way that they could outlive the AU that vended them.
+		For further details see discussion for `AUMessageChannel`.
+	@param	channelName
+		The name of the message channel to be returned by the Audio Unit if supported.
+	@return
+		An object that conforms to the `AUMessageChannel` protocol.
+*/
+- (id<AUMessageChannel>)messageChannelFor:(NSString *)channelName API_AVAILABLE(macos(13.0), ios(16.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+
 @end
 
 // =================================================================================================
@@ -1487,6 +1500,57 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @property (NS_NONATOMIC_IOSONLY, copy) NSString *name;
 
 @end
+
+
+// =================================================================================================
+
+
+/*!	@typedef	CallHostBlock
+	@brief		Block that hosts provide to AU message channels to be called back by the AU.
+	@param	message
+		An NSDictionary with custom data. The allowed classes for key and value types are
+		NSArray, NSDictionary, NSOrderedSet, NSSet, NSString, NSData, NSNull, NSNumber, NSDate
+	@return
+		An NSDictionary with custom data. The allowed classes for key and value types are
+		NSArray, NSDictionary, NSOrderedSet, NSSet, NSString, NSData, NSNull, NSNumber, NSDate
+*/
+typedef NSDictionary * _Nonnull (^CallHostBlock)(NSDictionary *message);
+
+
+/*!	@protocol	AUMessageChannel
+	@brief		The protocol which objects returned from `[AUAudioUnit messageChannelFor:]` have to conform to.
+	@discussion
+		Audio Units and hosts that have special needs of communication, e.g. to exchange musical context required for better audio processing,
+		can implement a communication object to exchange messages in form of NSDictionaries. An Audio Unit would need to implement
+		a class conforming to the AUMessageChannel protocol and return an instance via `[AUAudioUnit messageChannelFor:]`. A host can query
+		the instance via the channel name.
+		The protocol offers a method to send messages to the AU and a block to send messages to the host.
+*/
+API_AVAILABLE(macos(13.0), ios(16.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+@protocol AUMessageChannel
+
+@optional
+
+/*!	@method		callAudioUnit:
+	@brief		Calls the Audio Unit with custom data message.
+	@param	message
+		An NSDictionary with custom data. The allowed classes for key and value types are
+		NSArray, NSDictionary, NSOrderedSet, NSSet, NSString, NSData, NSNull, NSNumber, NSDate
+	@return
+		An NSDictionary with custom data. The allowed classes for key and value types are
+		NSArray, NSDictionary, NSOrderedSet, NSSet, NSString, NSData, NSNull, NSNumber, NSDate
+*/
+- (NSDictionary *)callAudioUnit:(NSDictionary *)message;
+
+/*!	@property	sendMessageToHostBlock
+	@brief		A callback for the AU to send a message to the host.
+	@discussion
+		The host has to set a block on this property.
+*/
+@property (NS_NONATOMIC_IOSONLY, copy, nullable) CallHostBlock callHostBlock;
+
+@end
+
 
 NS_ASSUME_NONNULL_END
 

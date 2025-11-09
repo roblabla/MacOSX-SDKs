@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           05013AC4-A52B-39B8-AF20-0F2C1275D931
+    value:           C71C3E17-E0C8-3DD2-95C6-BDB131AA7F12
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E28B9803-5302-300A-A866-29F0AF794EB5
+    value:           24DB7A93-4710-315E-AC15-97AF933751DC
 install-name:    '/System/Library/PrivateFrameworks/DiskManagement.framework/Versions/A/DiskManagement'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DMDiskManagementToolDiedNotification, _DMLocalizedUserErrorString, 
                        _DMMediaTypeCDROM, _DMMediaTypeDVDROM, _DMMediaTypeGeneric, 
                        _DMMediaTypeIPod, _DMMediaTypeXsanComponent, _DMMediaTypeXsanFilesystem, 

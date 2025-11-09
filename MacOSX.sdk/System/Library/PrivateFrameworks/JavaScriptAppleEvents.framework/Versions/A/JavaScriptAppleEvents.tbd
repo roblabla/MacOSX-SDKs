@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8A63E0D1-D35E-317A-926A-3154B96743A5
+    value:           DA645048-74B6-3C60-9423-67E064291D1E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5DAB42E9-E8ED-3D53-8042-60392EDCEEC3
+    value:           D274C3A4-D796-348F-84C4-E86625D1CCD7
 install-name:    '/System/Library/PrivateFrameworks/JavaScriptAppleEvents.framework/Versions/A/JavaScriptAppleEvents'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AEApplicationSendMessage, _CreateJSAEArray, _CreateJSAEObjectSpecifier, 
                        _JSAEAddHandlerDetails, _JSAEApplicationConstructor, _JSAEComponentInstance, 
                        _JSAEContextCreate, _JSAEContextSetup, _JSAECurrentApplication, 

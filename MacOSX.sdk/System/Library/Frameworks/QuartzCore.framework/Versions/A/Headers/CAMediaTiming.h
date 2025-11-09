@@ -1,6 +1,6 @@
 /* CoreAnimation - CAMediaTiming.h
 
-   Copyright (c) 2006-2021, Apple Inc.
+   Copyright (c) 2006-2022, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>

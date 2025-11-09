@@ -3,16 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F4CDC2B9-02C6-39C7-8016-98D766C3DCBB
+    value:           FB49817D-3578-3AA6-AFD0-C71D5044336C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7338F001-B600-3EED-A624-2CFC156B5105
+    value:           07FF7270-D9D6-3631-A2F1-77E99B7E66EF
 install-name:    '/System/Library/PrivateFrameworks/PackageKit.framework/Versions/A/PackageKit'
 current-version: 434
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _PKArchiveFolderFileType, _PKArchiveOpenOptionValidatedDigest, 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _ChecksumContextForType, _ChecksumDigestForType, _ChecksumUpdateForType, 
+                       _PKArchiveFolderFileType, _PKArchiveOpenOptionValidatedDigest, 
                        _PKArchiveSignatureTypeCMS, _PKArchiveSignatureTypeCodeSign, 
                        _PKArchiveSignatureTypeRSA, _PKArchiveXARFileType, _PKBOMCopierBomSysFree, 
                        _PKBOMCopierBomSysInit, _PKBOMErrorDomain, _PKBundleStorageTypeCFBundle, 
@@ -106,6 +107,7 @@ exports:
                        _PKReceiptPathExtendedAttributes, _PKReceiptPathSHA1Checksums, 
                        _PKReceiptStandardReceiptsPath, _PKReceiptSystemContentReceiptsPath, 
                        _PKReceiptSystemDataContentReceiptsPath, _PKSIPCurrentProcessCanModifySystemIntegrityProtectionFiles, 
+                       _PKSIPFullyProtected, _PKSIPFullyProtectedPath, _PKSIPSystemTrustedFromRootAtPath, 
                        _PKSO_CODERKEY_DestPath, _PKSO_CODERKEY_OptionFlags, _PKSO_CODERKEY_SourcePath, 
                        _PKSecureNetEnabledProductInfoFilename, _PKSignedContainerErrorDomain, 
                        _PKSignedContainerFileSystemCompressionFormatKey, _PKSignedContainerFileSystemCompressionFormatSnowLeopardValue, 
@@ -116,11 +118,11 @@ exports:
                        _PKXARArchiveDigestFormatSHA256, _PKXARArchiveDigestFormatSHA512, 
                        _PackageKitVersionNumber, _PackageKitVersionString, __blockCompressionReadHandler, 
                        __blockCompressionWriteHandler, __chunkNumberForChunkSizeAndResumptionOffset, 
-                       __parallelThreadCount, _gReceiptsCache, _kPKIOMatchingDictionaryKey, 
-                       _kPKPatchCurrentSHA1Hash, _kPKPatchExpectedSHA1Hash, _kPKPatchFormat, 
-                       _kPKPatchRequiredSHA1Hash, _kPKStreamingProductActualChunkHashKey, 
-                       _kPKStreamingProductErrorDomain, _kPKStreamingProductExpectedChunkHashKey, 
-                       _kPackageInfoMaximumSupportedFormatVersion ]
+                       __parallelThreadCount, __systemTrustedAndOnVolumeAtPath, _gReceiptsCache, 
+                       _hexCharToInt, _kPKIOMatchingDictionaryKey, _kPKPatchCurrentSHA1Hash, 
+                       _kPKPatchExpectedSHA1Hash, _kPKPatchFormat, _kPKPatchRequiredSHA1Hash, 
+                       _kPKStreamingProductActualChunkHashKey, _kPKStreamingProductErrorDomain, 
+                       _kPKStreamingProductExpectedChunkHashKey, _kPackageInfoMaximumSupportedFormatVersion ]
     objc-classes:    [ PKAddExtendedAttributesInstallOperation, PKAddRestrictedRootFlagInstallOperation, 
                        PKArchive, PKArchiveDistributionContainer, PKArchiveProduct, 
                        PKArchiveSignature, PKArchiveSigner, PKBOM, PKBOMDirectoryEnumerator, 
@@ -300,11 +302,12 @@ exports:
                        PKInstallRequest._packageExtractorSpeed, PKInstallRequest._packageSpecifiers, 
                        PKInstallRequest._policyMetPackageURLsToDigests, PKInstallRequest._restartAction, 
                        PKInstallRequest._rosettaTranslationMode, PKInstallRequest._scriptTargetVolume, 
-                       PKInstallRequest._spaceRequiredForInstall, PKInstallRequest._translocationFileHandle, 
-                       PKInstallRequest._trustRef, PKInstallRequest._untrustedEnvironment, 
-                       PKInstallRequest._useAFSCByDefault, PKInstallRequest._useForegroundPriorityForStaging, 
-                       PKInstallSandbox._bomPathsByPackageSpecifier, PKInstallSandbox._cleanupPaths, 
-                       PKInstallSandbox._installRequest, PKInstallSandbox._previousPackageIdentifiersSharingGroupsWithSandbox, 
+                       PKInstallRequest._spaceRequiredForInstall, PKInstallRequest._teamIdentifiers, 
+                       PKInstallRequest._translocationFileHandle, PKInstallRequest._trustRef, 
+                       PKInstallRequest._untrustedEnvironment, PKInstallRequest._useAFSCByDefault, 
+                       PKInstallRequest._useForegroundPriorityForStaging, PKInstallSandbox._bomPathsByPackageSpecifier, 
+                       PKInstallSandbox._cleanupPaths, PKInstallSandbox._installRequest, 
+                       PKInstallSandbox._previousPackageIdentifiersSharingGroupsWithSandbox, 
                        PKInstallSandbox._relevance, PKInstallSandbox._safeToReset, 
                        PKInstallSandbox._sandboxPath, PKInstallSandbox._scriptDirsByPackageSpecifier, 
                        PKInstallSandbox._scriptsAttributes, PKInstallSandbox._scriptsPath, 
@@ -354,18 +357,21 @@ exports:
                        PKPatchFilesInstallOperation._useAFSCByDefault, PKPayloadCopier._allowPaths, 
                        PKPayloadCopier._bomCopier, PKPayloadCopier._bomCopierOptions, 
                        PKPayloadCopier._bomSys, PKPayloadCopier._destinationPath, 
-                       PKPayloadCopier._didCancel, PKPayloadCopier._error, PKPayloadCopier._fullCompleteBytes, 
-                       PKPayloadCopier._fullCompleteCount, PKPayloadCopier._isDestinationArchive, 
+                       PKPayloadCopier._didCancel, PKPayloadCopier._error, PKPayloadCopier._expectedArchiveSize, 
+                       PKPayloadCopier._expectedInputChecksum, PKPayloadCopier._expectedInputChecksumType, 
+                       PKPayloadCopier._fullCompleteBytes, PKPayloadCopier._fullCompleteCount, 
+                       PKPayloadCopier._inputArchiveFD, PKPayloadCopier._isDestinationArchive, 
                        PKPayloadCopier._isExecuting, PKPayloadCopier._itemCopiedHandler, 
                        PKPayloadCopier._itemCopiedQueue, PKPayloadCopier._itemWillCopyHandler, 
                        PKPayloadCopier._itemWillCopyQueue, PKPayloadCopier._maskPaths, 
-                       PKPayloadCopier._offset, PKPayloadCopier._partialFileLength, 
-                       PKPayloadCopier._payloadFormat, PKPayloadCopier._payloadLargeAndSegmented, 
-                       PKPayloadCopier._payloadSize, PKPayloadCopier._sourcePath, 
-                       PKPayloadCopier._updateQueue, PKPrepareForCommitInstallOperation._manager, 
-                       PKProduct._allowExpiredCerts, PKProduct._allowExpiredRoots, 
-                       PKProduct._certificateChain, PKProduct._evaluatedTrustLevel, 
-                       PKProduct._minTrustLevel, PKProduct._trustRef, PKProductArchiver._baselineNameMapper, 
+                       PKPayloadCopier._offset, PKPayloadCopier._parallelCompressionChecksum, 
+                       PKPayloadCopier._partialFileLength, PKPayloadCopier._payloadFormat, 
+                       PKPayloadCopier._payloadLargeAndSegmented, PKPayloadCopier._payloadSize, 
+                       PKPayloadCopier._sourcePath, PKPayloadCopier._updateQueue, 
+                       PKPrepareForCommitInstallOperation._manager, PKProduct._allowExpiredCerts, 
+                       PKProduct._allowExpiredRoots, PKProduct._certificateChain, 
+                       PKProduct._evaluatedTrustLevel, PKProduct._minTrustLevel, 
+                       PKProduct._trustRef, PKProductArchiver._baselineNameMapper, 
                        PKProductArchiver._baselineUnarchivedProduct, PKProductArchiver._copyOwnershipFromOriginalBom, 
                        PKProductArchiver._options, PKProductArchiver._overrideDistribution, 
                        PKProductArchiver._productPath, PKProductArchiver._writeActionHandler, 
@@ -394,9 +400,9 @@ exports:
                        PKStreamingXARArchive._underlyingArchiveFileName, PKTrust._allowExpiredCertificates, 
                        PKTrust._allowExpiredRoots, PKTrust._appleRootMode, PKTrust._policyRef, 
                        PKTrust._signingDate, PKTrust._signingDateIsTrusted, PKTrust._trustLevel, 
-                       PKTrust._trustRef, PKTrust._trustResult, PKVerifyMASPayloadInstallOperation._appStoreStage, 
+                       PKTrust._trustRef, PKTrust._trustResult, PKVerifyMASPayloadInstallOperation._appStoreRequest, 
                        PKVerifyMASPayloadInstallOperation._atomicUpdate, PKVerifyMASPayloadInstallOperation._currentPackageSpecifier, 
-                       PKWriteMASReceiptInstallOperation._currentPackageSpecifier, 
+                       PKVerifyMASPayloadInstallOperation._testFlightRequest, PKWriteMASReceiptInstallOperation._currentPackageSpecifier, 
                        PKWriteReceiptsInstallOperation._currentPackageSpecifier, 
                        PKWriteReceiptsInstallOperation._inSandbox, PKXARArchive._archiveHash, 
                        PKXARArchive._archivePath, PKXARArchive._skipsVerify, PKXARArchive._xarPtr, 

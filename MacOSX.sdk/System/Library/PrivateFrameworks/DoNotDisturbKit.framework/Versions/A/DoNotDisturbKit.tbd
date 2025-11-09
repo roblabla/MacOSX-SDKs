@@ -3,21 +3,21 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9197573D-4F3F-3367-B32D-2A1A2F0FB75B
+    value:           12660C52-4788-358D-88C7-3ECB064011B9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0A50C008-8CEB-3689-B042-8CAC8B821425
+    value:           B48EC173-3BB9-30BD-89DE-D4C41A6609FE
 install-name:    '/System/Library/PrivateFrameworks/DoNotDisturbKit.framework/Versions/A/DoNotDisturbKit'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ DoNotDisturbKitTests, DoNotDisturbModule, DoNotDisturbSettings, 
                        Focus, NanoSettings, NanoSettingsGlance, SpringBoard, SpringBoardCore ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DNDEndOfEventAssertionIdentifier, _DNDKitRegisterLogging, 
-                       _DNDLogLocation, _DNDLogNotifications, _DNDLogToggleManager, 
-                       _DNDOneHourLifetimeIdentifier, _DNDStringFromToggleTargetState, 
+                       _DNDLocalizedStringHelper, _DNDLogLocation, _DNDLogNotifications, 
+                       _DNDLogToggleManager, _DNDOneHourLifetimeIdentifier, _DNDStringFromToggleTargetState, 
                        _DNDUntilEveningAssertionIdentifier, _DNDUntilILeaveAssertionIdentifier, 
                        _DNDUntilMorningAssertionIdentifier, _DoNotDisturbKitVersionNumber, 
                        _DoNotDisturbKitVersionString, _kEventSearchTime, _kLOIHighConfidence ]

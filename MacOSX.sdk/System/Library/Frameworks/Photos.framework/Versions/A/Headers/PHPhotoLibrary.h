@@ -13,6 +13,8 @@ API_AVAILABLE_BEGIN(macos(10.13), ios(8), tvos(10))
 
 @class PHChange;
 @class PHPhotoLibrary;
+@class PHPersistentChangeToken;
+@class PHPersistentChangeFetchResult;
 
 typedef NS_ENUM(NSInteger, PHAuthorizationStatus) {
     PHAuthorizationStatusNotDetermined = 0, // User has not yet made a choice with regards to this application
@@ -83,6 +85,12 @@ OS_EXPORT
 
 - (void)registerChangeObserver:(id<PHPhotoLibraryChangeObserver>)observer;
 - (void)unregisterChangeObserver:(id<PHPhotoLibraryChangeObserver>)observer;
+
+#pragma mark - Change History
+
+- (nullable PHPersistentChangeFetchResult *)fetchPersistentChangesSinceToken:(PHPersistentChangeToken *)token error:(NSError **)error API_AVAILABLE(macos(13), ios(16), tvos(16));
+
+@property (nonatomic, readonly) PHPersistentChangeToken *currentChangeToken API_AVAILABLE(macos(13), ios(16), tvos(16));
 
 @end
 

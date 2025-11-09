@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           63382431-3CE9-30CF-AEAE-A7C3F13D534F
+    value:           35B42EEE-7538-3873-BE2D-26E3DEF57D22
   - target:          x86_64-maccatalyst
-    value:           63382431-3CE9-30CF-AEAE-A7C3F13D534F
+    value:           35B42EEE-7538-3873-BE2D-26E3DEF57D22
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           69023775-0AA0-36AA-AC15-F3C2244EA52A
+    value:           5507F995-9FD4-306F-9BEE-FB153F97ED74
   - target:          arm64e-maccatalyst
-    value:           69023775-0AA0-36AA-AC15-F3C2244EA52A
+    value:           5507F995-9FD4-306F-9BEE-FB153F97ED74
 install-name:    '/System/Library/PrivateFrameworks/PreviewsServices.framework/Versions/A/PreviewsServices'
-current-version: 19.30.14
+current-version: 20.10.11
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s16PreviewsServices0A17ServiceConnectionC0C0O11processExityA2EmFWC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC0C0O13crashListeneryA2EmFWC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC0C0O7installyA2EmFWC', 

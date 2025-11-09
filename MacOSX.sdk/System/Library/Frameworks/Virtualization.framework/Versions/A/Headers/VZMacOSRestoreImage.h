@@ -2,7 +2,7 @@
 //  VZMacOSRestoreImage.h
 //  Virtualization
 //
-//  Copyright © 2021 Apple Inc. All rights reserved.
+//  Copyright © 2021-2022 Apple Inc. All rights reserved.
 //
 
 #ifdef __arm64__
@@ -58,6 +58,11 @@ VZ_EXPORT API_AVAILABLE(macos(12.0))
     local file.
  */
 + (void)fetchLatestSupportedWithCompletionHandler:(void (^)(VZMacOSRestoreImage * _Nullable, NSError * _Nullable))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(getter:latestSupported());
+
+/*!
+ @abstract Whether this restore image is supported on the current host.
+ */
+@property (readonly, getter=isSupported) BOOL supported API_AVAILABLE(macos(13.0));
 
 /*!
  @abstract The URL of this restore image.

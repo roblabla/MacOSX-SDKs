@@ -9,7 +9,7 @@
 
 /****************	Immutable Set	****************/
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @interface NSSet<__covariant ObjectType> : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
 
@@ -96,11 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /****************	Counted Set	****************/
 
-@interface NSCountedSet<ObjectType> : NSMutableSet<ObjectType> {
-    @private
-    id _table;
-    void *_reserved;
-}
+@interface NSCountedSet<ObjectType> : NSMutableSet<ObjectType>
 
 - (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
 
@@ -115,4 +111,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

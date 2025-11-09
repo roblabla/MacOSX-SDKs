@@ -34,5 +34,6 @@
 #import <CoreMotion/CMStepCounter.h>
 #import <CoreMotion/CMSensorRecorder.h>
 #import <CoreMotion/CMRecordedPressureData.h>
+#import <CoreMotion/CMWaterSubmersionManager.h>
 
 #endif /* __COREMOTION__ */

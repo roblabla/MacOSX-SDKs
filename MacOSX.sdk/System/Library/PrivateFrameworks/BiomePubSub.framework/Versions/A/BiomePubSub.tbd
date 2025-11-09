@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D3C73ADF-B079-32E9-BBCC-E62C0088E03C
+    value:           76FB2E01-2512-30C5-B031-A0DADFB6B520
   - target:          x86_64-maccatalyst
-    value:           D3C73ADF-B079-32E9-BBCC-E62C0088E03C
+    value:           76FB2E01-2512-30C5-B031-A0DADFB6B520
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D5D62F72-475B-371A-81CA-A0DAAEB65D6B
+    value:           9C7EFAD0-1959-3CC5-B5BB-05FCBAC544FF
   - target:          arm64e-maccatalyst
-    value:           D5D62F72-475B-371A-81CA-A0DAAEB65D6B
+    value:           9C7EFAD0-1959-3CC5-B5BB-05FCBAC544FF
 install-name:    '/System/Library/PrivateFrameworks/BiomePubSub.framework/Versions/A/BiomePubSub'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BPSDemandMax, _BPSDemandNone, _BPSDemandUnlimited, _BPSPBApproxPercentileDigestReadFrom, 
                        _BiomePubSubVersionNumber, _BiomePubSubVersionString ]
     objc-classes:    [ BMBookmarkClasses, BMBookmarkNode, BMBookmarkWrapper, BMBookmarkablePublisher, 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2020 Apple Inc. All rights reserved.
+ * Copyright (c) 2007-2021 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -66,6 +66,7 @@ boolean_t ml_get_interrupts_enabled(void);
 uint64_t ml_pac_safe_interrupts_disable(void);
 void ml_pac_safe_interrupts_restore(uint64_t);
 #endif /* __has_feature(ptrauth_calls) */
+boolean_t ml_set_interrupts_enabled_with_debug(boolean_t enable, boolean_t debug);
 boolean_t ml_set_interrupts_enabled(boolean_t enable);
 boolean_t ml_early_set_interrupts_enabled(boolean_t enable);
 
@@ -193,6 +194,8 @@ void ml_parse_cpu_topology(void);
 unsigned int ml_get_cpu_count(void);
 
 unsigned int ml_get_cpu_number_type(cluster_type_t cluster_type, bool logical, bool available);
+
+unsigned int ml_get_cluster_number_type(cluster_type_t cluster_type);
 
 unsigned int ml_cpu_cache_sharing(unsigned int level, cluster_type_t cluster_type, bool include_all_cpu_types);
 
@@ -328,6 +331,7 @@ typedef struct ml_topology_info {
 	unsigned int                    chip_revision;
 	unsigned int                    cluster_types;
 	unsigned int                    cluster_type_num_cpus[MAX_CPU_TYPES];
+	unsigned int                    cluster_type_num_clusters[MAX_CPU_TYPES];
 } ml_topology_info_t;
 
 /*!
@@ -371,6 +375,7 @@ struct ml_processor_info {
 	uint32_t                        l3_cache_size;
 };
 typedef struct ml_processor_info ml_processor_info_t;
+
 
 
 /*!
@@ -556,6 +561,14 @@ unsigned int ml_get_machine_mem(void);
 extern void     ml_cpu_init_completed(void);
 extern void     ml_cpu_up(void);
 extern void     ml_cpu_down(void);
+/*
+ * The update to CPU counts needs to be separate from other actions
+ * in ml_cpu_up() and ml_cpu_down()
+ * because we don't update the counts when CLPC causes temporary
+ * cluster powerdown events, as these must be transparent to the user.
+ */
+extern void     ml_cpu_up_update_counts(int cpu_id);
+extern void     ml_cpu_down_update_counts(int cpu_id);
 extern void     ml_arm_sleep(void);
 
 extern uint64_t ml_get_wake_timebase(void);
@@ -594,10 +607,10 @@ extern int      be_tracing(void);
 typedef void (*broadcastFunc) (void *);
 unsigned int cpu_broadcast_xcall(uint32_t *, boolean_t, broadcastFunc, void *);
 unsigned int cpu_broadcast_xcall_simple(boolean_t, broadcastFunc, void *);
-kern_return_t cpu_xcall(int, broadcastFunc, void *);
+__result_use_check kern_return_t cpu_xcall(int, broadcastFunc, void *);
 unsigned int cpu_broadcast_immediate_xcall(uint32_t *, boolean_t, broadcastFunc, void *);
 unsigned int cpu_broadcast_immediate_xcall_simple(boolean_t, broadcastFunc, void *);
-kern_return_t cpu_immediate_xcall(int, broadcastFunc, void *);
+__result_use_check kern_return_t cpu_immediate_xcall(int, broadcastFunc, void *);
 
 
 boolean_t machine_timeout_suspended(void);
@@ -617,7 +630,6 @@ extern void wfe_timeout_init(void);
 
 void ml_timer_evaluate(void);
 boolean_t ml_timer_forced_evaluation(void);
-uint64_t ml_energy_stat(thread_t);
 void ml_gpu_stat_update(uint64_t);
 uint64_t ml_gpu_stat(thread_t);
 #endif /* __APPLE_API_PRIVATE */

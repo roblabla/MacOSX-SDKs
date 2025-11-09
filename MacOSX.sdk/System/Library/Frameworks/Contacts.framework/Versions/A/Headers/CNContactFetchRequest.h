@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @discussion Used with [CNContactStore enumerateContactsWithFetchRequest:error:usingBlock:]. Can combine any of these options to create a contact fetch request.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macosx(10.11), ios(9.0), watchos(2.0))
 @interface CNContactFetchRequest : CNFetchRequest <NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;

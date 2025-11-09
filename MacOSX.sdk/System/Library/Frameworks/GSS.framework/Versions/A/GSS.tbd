@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6C52D445-0495-3FA0-A5D9-7584EB98919F
+    value:           1DCAECB6-06A8-3681-86BD-63C95E0EEB3E
   - target:          x86_64-maccatalyst
-    value:           6C52D445-0495-3FA0-A5D9-7584EB98919F
+    value:           1DCAECB6-06A8-3681-86BD-63C95E0EEB3E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           70389C65-8D21-3E79-8489-49CC6FD1D66D
+    value:           7963C23A-BE68-31DB-BC25-6F81D7242144
   - target:          arm64e-maccatalyst
-    value:           70389C65-8D21-3E79-8489-49CC6FD1D66D
+    value:           7963C23A-BE68-31DB-BC25-6F81D7242144
 install-name:    '/System/Library/Frameworks/GSS.framework/Versions/A/GSS'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _GSSCheckNTLMReflection, _GSSCreateCredentialFromUUID, _GSSCreateError, 
                        _GSSCreateName, _GSSCredCopyName, _GSSCredGetLifetime, _GSSCredentialCopyName, 
                        _GSSCredentialCopyUUID, _GSSCredentialGetLifetime, _GSSItemAdd, 

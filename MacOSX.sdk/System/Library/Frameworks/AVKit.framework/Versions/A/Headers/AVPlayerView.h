@@ -3,7 +3,7 @@
 	
 	Framework:  AVKit
 	
-	Copyright © 2013-2017 Apple Inc. All rights reserved.
+	Copyright © 2013-2022 Apple Inc. All rights reserved.
 	
  */
 
@@ -12,6 +12,8 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class AVPlaybackSpeed;
 
 @protocol AVPlayerViewDelegate;
 @protocol AVPlayerViewPictureInPictureDelegate;
@@ -95,6 +97,61 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 	@abstract	The receiver's delegate.
  */
 @property (nonatomic, readwrite, nullable, weak) id<AVPlayerViewDelegate> delegate API_AVAILABLE(macos(12.0));
+
+/**
+ @property		speeds
+ @abstract		A list of user selectable playback speeds to be shown in the playback speed control.
+ @discussion	By default this property will be set to the systemDefaultSpeeds class property. Setting this property to nil will hide the playback speed selection UI.
+	 
+				To set the currently selected playback speed programmatically, either set the defaultRate on the AVPlayer associated with this view controller or use the selectSpeed method on AVPlayerView.
+ */
+@property (copy) NSArray<AVPlaybackSpeed *> *speeds API_AVAILABLE(macos(13.0));
+
+/*!
+ @property		selectedSpeed
+ @abstract		The currently selected playback speed.
+ @discussion	Changes to the associated AVPlayer's defaultRate will be reflected in this property and vice versa. If the associated AVPlayer's defaultRate is set to a value that does not match a speed in the speeds list property, the selected speed will be nil.
+ */
+@property (readonly, nullable) AVPlaybackSpeed *selectedSpeed API_AVAILABLE(macos(13.0));
+
+
+/*!
+ @property		selectSpeed
+ @param			speed
+				The playback speed to select.
+ @abstract		Sets the input AVPlaybackSpeed as the selected speed.
+ @discussion	Calls to selectSpeed with AVPlaybackSpeeds not contained within the speeds property array will be ignored.
+ */
+- (void)selectSpeed:(AVPlaybackSpeed *)speed API_AVAILABLE(macos(13.0));
+
+/*!
+	@property	allowsVideoFrameAnalysis
+	@abstract	When set to YES, the AVPlayerView will try to find objects, text and people while the media is paused. When an object is found, the user will be able to interact with it selecting and right clicking to present a context menu. Default is YES.
+ */
+@property (nonatomic) BOOL allowsVideoFrameAnalysis API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+
+/*!
+	@property	allowsMagnification
+	@abstract	Whether the magnify gesture will change the video's view magnification.
+	@discussion	The default value is NO. This property only effects whether the magnify gesture triggers magnification. A client can still programmatically change magnification even when the value of this is NO. This behavior matches the behavior of NSScrollView.
+ */
+@property (nonatomic, setter = setAllowsMagnification:) BOOL allowsMagnification API_AVAILABLE(macos(13.0));
+
+/*!
+	@property	magnification
+	@abstract	The factor by which the video's view is currently scaled.
+	@discussion	The default value is 1.0. The value cannot be smaller than 1.0 or larger 64.0. Nearest neighbor interpolation will be used once the content has been zoomed past a certain factor.
+ */
+@property (nonatomic, setter = setMagnification:) CGFloat magnification API_AVAILABLE(macos(13.0));
+
+/*!
+	@method		setMagnification:centeredAtPoint:
+	@abstract	Scales the video's view by a specified factor and centers the result on a specified point.
+	@param		magnification The factor by which to scale the video's view.
+	@param		point The point (in view space) on which to center magnification.
+	@discussion	The magnification cannot be smaller than 1.0 or larger 64.0. Nearest neighbor interpolation will be used once the content has been zoomed past a certain factor.
+ */
+- (void)setMagnification:(CGFloat)magnification centeredAtPoint:(CGPoint)point API_AVAILABLE(macos(13.0));
 
 @end
 

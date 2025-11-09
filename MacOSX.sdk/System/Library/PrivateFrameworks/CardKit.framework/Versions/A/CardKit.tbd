@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C8868313-39EC-3B9E-A94B-D0958ABA5DE2
+    value:           65718526-2013-35B5-AC09-BB38658C536B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           460AAB4A-D8EC-3270-8F04-05540CB6A1AA
+    value:           F3C0734B-42E5-3EE6-954F-33341DFE200C
 install-name:    '/System/Library/PrivateFrameworks/CardKit.framework/Versions/A/CardKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CRKIsLargeDevice, _CRKIsRTL, _CardKitVersionNumber, _CardKitVersionString, 
                        __CRKIsRTLWithApp, __CRKSystemRootDirectory ]
     objc-classes:    [ CRKCardPresentation, CRKCardPresentationConfiguration, CRKCardSectionViewConfiguration, 

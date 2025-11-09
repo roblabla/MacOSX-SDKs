@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FEC577DF-B8D6-3037-B510-B8338388B7D6
+    value:           47B59788-9452-3B26-90E4-BF7D0ADF9DB1
   - target:          x86_64-maccatalyst
-    value:           FEC577DF-B8D6-3037-B510-B8338388B7D6
+    value:           47B59788-9452-3B26-90E4-BF7D0ADF9DB1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A6F69AB4-F8A5-3542-84BE-3AB7F1F210A9
+    value:           C7D9763E-2460-3838-89AD-A59EE5468B02
   - target:          arm64e-maccatalyst
-    value:           A6F69AB4-F8A5-3542-84BE-3AB7F1F210A9
+    value:           C7D9763E-2460-3838-89AD-A59EE5468B02
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices'
 current-version: 1141.1
 parent-umbrella:
@@ -26,8 +26,8 @@ allowable-clients:
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Foundation ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AcquireIconRef, _CompositeIconRef, _GetCustomIconsEnabled, 
                        _GetIconRef, _GetIconRefFromComponent, _GetIconRefFromFileInfo, 
                        _GetIconRefFromFolder, _GetIconRefFromIconFamilyPtr, _GetIconRefFromTypeInfo, 
@@ -321,24 +321,28 @@ exports:
                        __kLSOpenOptionAEParamDescKey, __kLSOpenOptionAEParamKeyKey, 
                        __kLSOpenOptionActivateKey, __kLSOpenOptionAddToRecentsKey, 
                        __kLSOpenOptionAllowConflictResolutionUIKey, __kLSOpenOptionAllowErrorUIKey, 
-                       __kLSOpenOptionAllowLoginUIKey, __kLSOpenOptionAlwaysOpenPasteboardContentsKey, 
-                       __kLSOpenOptionArchitectureKey, __kLSOpenOptionArchitectureSubtypeKey, 
-                       __kLSOpenOptionArgumentsKey, __kLSOpenOptionBackgroundLaunchInformationKey, 
-                       __kLSOpenOptionBackgroundLaunchKey, __kLSOpenOptionBackgroundLaunchReasonKey, 
-                       __kLSOpenOptionCaptureDiagnosticsKey, __kLSOpenOptionEnableURLOverridesKey, 
+                       __kLSOpenOptionAllowLoginUIKey, __kLSOpenOptionAllowUnsignedExecutableKey, 
+                       __kLSOpenOptionAlwaysOpenPasteboardContentsKey, __kLSOpenOptionArchitectureKey, 
+                       __kLSOpenOptionArchitectureSubtypeKey, __kLSOpenOptionArgumentsKey, 
+                       __kLSOpenOptionBackgroundLaunchInformationKey, __kLSOpenOptionBackgroundLaunchKey, 
+                       __kLSOpenOptionBackgroundLaunchReasonKey, __kLSOpenOptionCaptureDiagnosticsKey, 
+                       __kLSOpenOptionDoNotAddSandboxAnnotationsKey, __kLSOpenOptionEnableURLOverridesKey, 
                        __kLSOpenOptionEnvironmentVariablesKey, __kLSOpenOptionForegroundLaunchKey, 
                        __kLSOpenOptionHideKey, __kLSOpenOptionHideOthersKey, __kLSOpenOptionInitialAppleEventKey, 
+                       __kLSOpenOptionLaunchIsUserActionKey, __kLSOpenOptionLaunchOutOfProcessKey, 
                        __kLSOpenOptionLaunchSessionIDDKey, __kLSOpenOptionLaunchStdErrPathKey, 
                        __kLSOpenOptionLaunchStdInPathKey, __kLSOpenOptionLaunchStdOutPathKey, 
                        __kLSOpenOptionLaunchUIDKey, __kLSOpenOptionLaunchWhenThisProcessExitsKey, 
-                       __kLSOpenOptionLaunchedByPersistenceKey, __kLSOpenOptionOverrideBackgroundPriorityDomainNameKey, 
-                       __kLSOpenOptionPreferRunningInstanceKey, __kLSOpenOptionPrintDocumentsKey, 
-                       __kLSOpenOptionRequiresUniversalLinksKey, __kLSOpenOptionRolesMaskKey, 
-                       __kLSOpenOptionStopProcessKey, __kLSOpenOptionUIElementLaunchKey, 
-                       __kLSOpenOptionUserInfoKey, __kLSOpenOptionWaitForApplicationToCheckInKey, 
-                       __kLSOriginalExecutablePathDeviceIDKey, __kLSOriginalExecutablePathINodeKey, 
-                       __kLSOriginalExecutablePathKey, __kLSOriginalPIDKey, __kLSPIDKey, 
-                       __kLSPIDsInSessionKey, __kLSPSNToBringForwardAtNextApplicationExitKey, 
+                       __kLSOpenOptionLaunchWithoutRestoringStateKey, __kLSOpenOptionLaunchedByPersistenceKey, 
+                       __kLSOpenOptionNotRelaunchedForTALKey, __kLSOpenOptionOverrideAuditTokenKey, 
+                       __kLSOpenOptionOverrideBackgroundPriorityDomainNameKey, __kLSOpenOptionPreferRunningInstanceKey, 
+                       __kLSOpenOptionPrintDocumentsKey, __kLSOpenOptionProhitLaunchingSelfKey, 
+                       __kLSOpenOptionRequireBundledExecutableKey, __kLSOpenOptionRequiresUniversalLinksKey, 
+                       __kLSOpenOptionRolesMaskKey, __kLSOpenOptionStopProcessKey, 
+                       __kLSOpenOptionUIElementLaunchKey, __kLSOpenOptionUserInfoKey, 
+                       __kLSOpenOptionWaitForApplicationToCheckInKey, __kLSOriginalExecutablePathDeviceIDKey, 
+                       __kLSOriginalExecutablePathINodeKey, __kLSOriginalExecutablePathKey, 
+                       __kLSOriginalPIDKey, __kLSPIDKey, __kLSPIDsInSessionKey, __kLSPSNToBringForwardAtNextApplicationExitKey, 
                        __kLSParentASNKey, __kLSParentASNWasInferredKey, __kLSPermittedFrontASNsArrayKey, 
                        __kLSPersistenceSuppressRelaunchAtLoginKey, __kLSPidThisProcessIsAWrapperForKey, 
                        __kLSPidThisProcessIsWrappingKey, __kLSPluginBundleIdentifierKey, 
@@ -354,34 +358,38 @@ exports:
                        __kLSVisibleApplicationCountKey, __kLSVisibleApplicationListSeedKey, 
                        __kLSWantsToComeForwardAtRegistrationTimeKey, __kUTTypeGlyphNameKey, 
                        __kUTTypeIconNameKey, __kUTTypeIconsKey, __kUTTypePassBundle, 
-                       __kUTTypePassData, _kLSAppleInternalLibraryBundleIdentifier, 
-                       _kLSComputerRootCanonicalName, _kLSCurrentDeviceModelCode, 
-                       _kLSDefaultLocalizedValueKey, _kLSItemContentType, _kLSItemDisplayKind, 
-                       _kLSItemDisplayName, _kLSItemExtension, _kLSItemExtensionIsHidden, 
-                       _kLSItemFileCreator, _kLSItemFileType, _kLSItemIsInvisible, 
-                       _kLSItemQuarantineProperties, _kLSItemRoleHandlerDisplayName, 
-                       _kLSLocalLibraryBundleIdentifier, _kLSMeetingRoomCanonicalName, 
-                       _kLSNetworkLibraryBundleIdentifier, _kLSNetworkRootCanonicalName, 
-                       _kLSNotificationDatabaseSeedingComplete, _kLSNotificationDatabaseSeedingStart, 
-                       _kLSNotificationSystemConfigurationChange, _kLSQuarantineAgentBundleIdentifierKey, 
-                       _kLSQuarantineAgentNameKey, _kLSQuarantineDataURLKey, _kLSQuarantineOriginURLKey, 
-                       _kLSQuarantineTimeStampKey, _kLSQuarantineTypeCalendarEventAttachment, 
-                       _kLSQuarantineTypeEmailAttachment, _kLSQuarantineTypeInstantMessageAttachment, 
-                       _kLSQuarantineTypeKey, _kLSQuarantineTypeOtherAttachment, 
-                       _kLSQuarantineTypeOtherDownload, _kLSQuarantineTypeWebDownload, 
-                       _kLSRemoteDiscRootCanonicalName, _kLSSystemLibraryBundleIdentifier, 
-                       _kLSUserLibraryBundleIdentifier, _kLSVersionNumberNull, _kUTExportedTypeDeclarationsKey, 
-                       _kUTImportedTypeDeclarationsKey, _kUTTagClassDeviceModelCode, 
-                       _kUTTagClassFilenameExtension, _kUTTagClassMIMEType, _kUTTagClassNSPboardType, 
-                       _kUTTagClassOSType, _kUTType3DContent, _kUTTypeAVIMovie, _kUTTypeAliasFile, 
-                       _kUTTypeAliasRecord, _kUTTypeAppCategory, _kUTTypeAppCategoryActionGames, 
-                       _kUTTypeAppCategoryAdventureGames, _kUTTypeAppCategoryArcadeGames, 
-                       _kUTTypeAppCategoryBoardGames, _kUTTypeAppCategoryBusiness, 
-                       _kUTTypeAppCategoryCardGames, _kUTTypeAppCategoryCasinoGames, 
-                       _kUTTypeAppCategoryDeveloperTools, _kUTTypeAppCategoryDiceGames, 
-                       _kUTTypeAppCategoryEducation, _kUTTypeAppCategoryEducationalGames, 
-                       _kUTTypeAppCategoryEntertainment, _kUTTypeAppCategoryFamilyGames, 
-                       _kUTTypeAppCategoryFinance, _kUTTypeAppCategoryGames, _kUTTypeAppCategoryGraphicsDesign, 
+                       __kUTTypePassData, _kLSAllowedToChangeTheseKeysInOtherApplicationsEntitlement, 
+                       _kLSAllowedToLaunchInOtherSessionsEntitlement, _kLSAllowedToLaunchWithArgumentsEntitlement, 
+                       _kLSAllowedToLaunchWithEnvironmentVariablesEntitlement, _kLSAllowedToLaunchWithKnownArgumentsEntitlement, 
+                       _kLSAllowedToLaunchWithSTDIOEntitlement, _kLSAllowedToSetLauncherAuditTokenEntitlement, 
+                       _kLSAppleInternalLibraryBundleIdentifier, _kLSComputerRootCanonicalName, 
+                       _kLSCurrentDeviceModelCode, _kLSDefaultLocalizedValueKey, 
+                       _kLSItemContentType, _kLSItemDisplayKind, _kLSItemDisplayName, 
+                       _kLSItemExtension, _kLSItemExtensionIsHidden, _kLSItemFileCreator, 
+                       _kLSItemFileType, _kLSItemIsInvisible, _kLSItemQuarantineProperties, 
+                       _kLSItemRoleHandlerDisplayName, _kLSLocalLibraryBundleIdentifier, 
+                       _kLSMeetingRoomCanonicalName, _kLSNetworkLibraryBundleIdentifier, 
+                       _kLSNetworkRootCanonicalName, _kLSNotificationDatabaseSeedingComplete, 
+                       _kLSNotificationDatabaseSeedingStart, _kLSNotificationSystemConfigurationChange, 
+                       _kLSQuarantineAgentBundleIdentifierKey, _kLSQuarantineAgentNameKey, 
+                       _kLSQuarantineDataURLKey, _kLSQuarantineOriginURLKey, _kLSQuarantineTimeStampKey, 
+                       _kLSQuarantineTypeCalendarEventAttachment, _kLSQuarantineTypeEmailAttachment, 
+                       _kLSQuarantineTypeInstantMessageAttachment, _kLSQuarantineTypeKey, 
+                       _kLSQuarantineTypeOtherAttachment, _kLSQuarantineTypeOtherDownload, 
+                       _kLSQuarantineTypeWebDownload, _kLSRemoteDiscRootCanonicalName, 
+                       _kLSSystemLibraryBundleIdentifier, _kLSUserLibraryBundleIdentifier, 
+                       _kLSVersionNumberNull, _kUTExportedTypeDeclarationsKey, _kUTImportedTypeDeclarationsKey, 
+                       _kUTTagClassDeviceModelCode, _kUTTagClassFilenameExtension, 
+                       _kUTTagClassMIMEType, _kUTTagClassNSPboardType, _kUTTagClassOSType, 
+                       _kUTType3DContent, _kUTTypeAVIMovie, _kUTTypeAliasFile, _kUTTypeAliasRecord, 
+                       _kUTTypeAppCategory, _kUTTypeAppCategoryActionGames, _kUTTypeAppCategoryAdventureGames, 
+                       _kUTTypeAppCategoryArcadeGames, _kUTTypeAppCategoryBoardGames, 
+                       _kUTTypeAppCategoryBusiness, _kUTTypeAppCategoryCardGames, 
+                       _kUTTypeAppCategoryCasinoGames, _kUTTypeAppCategoryDeveloperTools, 
+                       _kUTTypeAppCategoryDiceGames, _kUTTypeAppCategoryEducation, 
+                       _kUTTypeAppCategoryEducationalGames, _kUTTypeAppCategoryEntertainment, 
+                       _kUTTypeAppCategoryFamilyGames, _kUTTypeAppCategoryFinance, 
+                       _kUTTypeAppCategoryGames, _kUTTypeAppCategoryGraphicsDesign, 
                        _kUTTypeAppCategoryHealthcareFitness, _kUTTypeAppCategoryKidsGames, 
                        _kUTTypeAppCategoryLifestyle, _kUTTypeAppCategoryMedical, 
                        _kUTTypeAppCategoryMusic, _kUTTypeAppCategoryMusicGames, _kUTTypeAppCategoryNews, 
@@ -439,7 +447,8 @@ exports:
                        _kUTTypeXML, _kUTTypeXMLPropertyList, _kUTTypeXPCService, 
                        _kUTTypeZipArchive ]
     objc-classes:    [ LSAppLink, LSAppTranslocationResult, LSApplicationExtensionRecord, 
-                       LSApplicationIdentity, LSApplicationProxy, LSApplicationRecord, 
+                       LSApplicationIdentity, LSApplicationIdentityMigrationResult, 
+                       LSApplicationIdentityMigrator, LSApplicationProxy, LSApplicationRecord, 
                        LSApplicationWorkspace, LSApplicationWorkspaceObserver, LSBundleInfoCachedValues, 
                        LSBundleProxy, LSBundleRecord, LSBundleWrapperCreator, LSBundleWrapperStagingReceipt, 
                        LSBundleWrapperUpdater, LSClaimBinding, LSClaimBindingConfiguration, 
@@ -447,15 +456,16 @@ exports:
                        LSDocumentProxy, LSEnumerator, LSExtensionPoint, LSExtensionPointRecord, 
                        LSIconResource, LSObserver, LSOpenWithMenuConstructor, LSPlugInKitProxy, 
                        LSPlugInQuery, LSPlugInQueryWithIdentifier, LSPlugInQueryWithQueryDictionary, 
-                       LSPlugInQueryWithURL, LSPropertyList, LSRecord, LSRecordPromise, 
-                       LSResourceProxy, LSServiceRecord, LSSpotlightAction, UTTypeRecord, 
-                       _LSApplicationState, _LSDatabase, _LSDefaults, _LSDiskUsage, 
-                       _LSDisplayNameConstructor, _LSExceptions, _LSInternetLocator, 
-                       _LSLazyPropertyList, _LSOpenConfiguration, _LSQuery, _LSQueryContext, 
-                       _LSQueryResult, _LSRecordEnumerator, _LSStringLocalizer, _LSURLOverride ]
+                       LSPlugInQueryWithURL, LSPrecondition, LSPropertyList, LSRecord, 
+                       LSRecordPromise, LSResourceProxy, LSServiceRecord, LSSettingsStore, 
+                       LSSpotlightAction, UTTypeRecord, _LSApplicationState, _LSDatabase, 
+                       _LSDefaults, _LSDiskUsage, _LSDisplayNameConstructor, _LSExceptions, 
+                       _LSInternetLocator, _LSLazyPropertyList, _LSOpenConfiguration, 
+                       _LSQuery, _LSQueryContext, _LSQueryResult, _LSRecordEnumerator, 
+                       _LSStringLocalizer, _LSURLOverride, _UTDeclaredTypeRecord ]
     objc-ivars:      [ _LSDatabase.schema, _LSDatabase.store ]
 reexports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ NSUserActivity ]
 ...

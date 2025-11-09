@@ -25,7 +25,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	extern int mig_strncpy_zerofill(char *dest, const char *src, int len) __attribute__((weak_import));
+#ifndef __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS_CSTRING_ATTR
+#define __MIG_STRNCPY_ZEROFILL_FORWARD_TYPE_DECLS_CSTRING_COUNTEDBY_ATTR(C) __unsafe_indexable
+#endif
+	extern int mig_strncpy_zerofill(char * dest, const char * src, int len) __attribute__((weak_import));
 #ifdef __cplusplus
 }
 #endif
@@ -41,7 +44,7 @@ extern "C" {
 #define FUNCTION_PTR_T
 typedef void (*function_ptr_t)(mach_port_t, char *, mach_msg_type_number_t);
 typedef struct {
-        char            *name;
+        char            * name;
         function_ptr_t  function;
 } function_table_entry;
 typedef function_table_entry   *function_table_t;
@@ -49,7 +52,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_vm_MSG_COUNT
-#define	mach_vm_MSG_COUNT	22
+#define	mach_vm_MSG_COUNT	25
 #endif	/* mach_vm_MSG_COUNT */
 
 #include <Availability.h>
@@ -405,6 +408,44 @@ kern_return_t mach_vm_remap_new
 	vm_prot_t *cur_protection,
 	vm_prot_t *max_protection,
 	vm_inherit_t inheritance
+);
+
+/* Routine mach_vm_deferred_reclamation_buffer_init */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_vm_deferred_reclamation_buffer_init
+(
+	task_t target_task,
+	mach_vm_offset_t address,
+	mach_vm_size_t size,
+	mach_vm_address_t indices
+);
+
+/* Routine mach_vm_deferred_reclamation_buffer_synchronize */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_vm_deferred_reclamation_buffer_synchronize
+(
+	task_t target_task,
+	mach_vm_size_t num_entries_to_reclaim
+);
+
+/* Routine mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes
+(
+	task_t target_task,
+	mach_vm_size_t reclaimable_bytes
 );
 
 __END_DECLS
@@ -765,6 +806,44 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_vm_offset_t address;
+		mach_vm_size_t size;
+		mach_vm_address_t indices;
+	} __Request__mach_vm_deferred_reclamation_buffer_init_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_vm_size_t num_entries_to_reclaim;
+	} __Request__mach_vm_deferred_reclamation_buffer_synchronize_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_vm_size_t reclaimable_bytes;
+	} __Request__mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Request__mach_vm_subsystem__defined */
 
 /* union of all requests */
@@ -794,6 +873,9 @@ union __RequestUnion__mach_vm_subsystem {
 	__Request__mach_vm_page_info_t Request_mach_vm_page_info;
 	__Request__mach_vm_page_range_query_t Request_mach_vm_page_range_query;
 	__Request__mach_vm_remap_new_t Request_mach_vm_remap_new;
+	__Request__mach_vm_deferred_reclamation_buffer_init_t Request_mach_vm_deferred_reclamation_buffer_init;
+	__Request__mach_vm_deferred_reclamation_buffer_synchronize_t Request_mach_vm_deferred_reclamation_buffer_synchronize;
+	__Request__mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes_t Request_mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes;
 };
 #endif /* !__RequestUnion__mach_vm_subsystem__defined */
 /* typedefs for all replies */
@@ -1101,6 +1183,42 @@ union __RequestUnion__mach_vm_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__mach_vm_deferred_reclamation_buffer_init_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__mach_vm_deferred_reclamation_buffer_synchronize_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Reply__mach_vm_subsystem__defined */
 
 /* union of all replies */
@@ -1130,6 +1248,9 @@ union __ReplyUnion__mach_vm_subsystem {
 	__Reply__mach_vm_page_info_t Reply_mach_vm_page_info;
 	__Reply__mach_vm_page_range_query_t Reply_mach_vm_page_range_query;
 	__Reply__mach_vm_remap_new_t Reply_mach_vm_remap_new;
+	__Reply__mach_vm_deferred_reclamation_buffer_init_t Reply_mach_vm_deferred_reclamation_buffer_init;
+	__Reply__mach_vm_deferred_reclamation_buffer_synchronize_t Reply_mach_vm_deferred_reclamation_buffer_synchronize;
+	__Reply__mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes_t Reply_mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes;
 };
 #endif /* !__RequestUnion__mach_vm_subsystem__defined */
 
@@ -1156,7 +1277,10 @@ union __ReplyUnion__mach_vm_subsystem {
     { "mach_vm_purgable_control", 4818 },\
     { "mach_vm_page_info", 4819 },\
     { "mach_vm_page_range_query", 4820 },\
-    { "mach_vm_remap_new", 4821 }
+    { "mach_vm_remap_new", 4821 },\
+    { "mach_vm_deferred_reclamation_buffer_init", 4822 },\
+    { "mach_vm_deferred_reclamation_buffer_synchronize", 4823 },\
+    { "mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes", 4824 }
 #endif
 
 #ifdef __AfterMigUserHeader

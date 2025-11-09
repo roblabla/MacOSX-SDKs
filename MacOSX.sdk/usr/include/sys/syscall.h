@@ -255,7 +255,7 @@
 			/* 215  */
 #define	SYS_open_dprotected_np 216
 #define	SYS_fsgetpath_ext  217
-			/* 218  old lstatv */
+#define	SYS_openat_dprotected_np 218
 			/* 219  old fstatv */
 #define	SYS_getattrlist    220
 #define	SYS_setattrlist    221
@@ -284,7 +284,7 @@
 #define	SYS_posix_spawn    244
 #define	SYS_ffsctl         245
 			/* 246  */
-#define	SYS_nfsclnt        247
+			/* 247  old nfsclnt */
 #define	SYS_fhopen         248
 			/* 249  */
 #define	SYS_minherit       250
@@ -407,8 +407,8 @@
 #define	SYS_workq_open     367
 #define	SYS_workq_kernreturn 368
 #define	SYS_kevent64       369
-#define	SYS___old_semwait_signal 370
-#define	SYS___old_semwait_signal_nocancel 371
+			/* 370  old __semwait_signal */
+			/* 371  old __semwait_signal */
 #define	SYS_thread_selfid  372
 #define	SYS_ledger         373
 #define	SYS_kevent_qos     374
@@ -475,7 +475,7 @@
 #define	SYS_pid_hibernate  435
 #define	SYS_pid_shutdown_sockets 436
 			/* 437  old shared_region_slide_np */
-#define	SYS_shared_region_map_and_slide_np 438
+			/* 438  old shared_region_map_and_slide_np */
 #define	SYS_kas_info       439
 #define	SYS_memorystatus_control 440
 #define	SYS_guarded_open_np 441
@@ -585,11 +585,15 @@
 #define	SYS_proc_info_extended_id 545
 #define	SYS_tracker_action 546
 #define	SYS_debug_syscall_reject 547
-			/* 548  */
-			/* 549  */
-			/* 550  */
+#define	SYS_debug_syscall_reject_config 548
+#define	SYS_graftdmg       549
+#define	SYS_map_with_linking_np 550
 #define	SYS_freadlink      551
-#define	SYS_MAXSYSCALL	552
+#define	SYS_record_system_event 552
+#define	SYS_mkfifoat       553
+#define	SYS_mknodat        554
+#define	SYS_ungraftdmg     555
+#define	SYS_MAXSYSCALL	556
 #define	SYS_invalid	63
 
 #endif /* __APPLE_API_PRIVATE */

@@ -10,7 +10,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
@@ -33,7 +33,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0))
 
 #endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/NSShadow.h>

@@ -35,6 +35,16 @@ NS_SWIFT_NAME(ARConfiguration.VideoFormat)
  */
 @property (nonatomic, readonly) NSInteger framesPerSecond;
 
+/**
+ Indicates if the video format is recommended for capturing high resolution frames.
+ */
+@property (nonatomic, readonly) BOOL isRecommendedForHighResolutionFrameCapturing API_AVAILABLE(ios(16.0));
+
+/**
+ Indicates if the video format supports high dynamic range (HDR) streaming.
+ */
+@property (nonatomic, readonly, getter=isVideoHDRSupported) BOOL videoHDRSupported API_AVAILABLE(ios(16.0));
+
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

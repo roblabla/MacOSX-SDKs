@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UIDeviceOrientation) {
     UIDeviceOrientationUnknown,
@@ -58,7 +58,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 @property(class, nonatomic, readonly) UIDevice *currentDevice;
 
-@property(nonatomic,readonly,strong) NSString    *name;              // e.g. "My iPhone"
+@property(nonatomic,readonly,strong) NSString    *name;              // Synonym for model. Prior to iOS 16, user-assigned device name (e.g. @"My iPhone").
 @property(nonatomic,readonly,strong) NSString    *model;             // e.g. @"iPhone", @"iPod touch"
 @property(nonatomic,readonly,strong) NSString    *localizedModel;    // localized version of model
 @property(nonatomic,readonly,strong) NSString    *systemName;        // e.g. @"iOS"
@@ -96,7 +96,7 @@ NS_SWIFT_UI_ACTOR
 
 /* The UI_USER_INTERFACE_IDIOM() function is provided for use when deploying to a version of the iOS less than 3.2. If the earliest version of iPhone/iOS that you will be deploying for is 3.2 or greater, you may use -[UIDevice userInterfaceIdiom] directly.
  */
-static inline UIUserInterfaceIdiom UI_USER_INTERFACE_IDIOM() API_DEPRECATED("Use -[UIDevice userInterfaceIdiom] directly.", ios(2.0, 13.0), tvos(9.0, 11.0)) {
+static inline UIUserInterfaceIdiom UI_USER_INTERFACE_IDIOM(void) API_DEPRECATED("Use -[UIDevice userInterfaceIdiom] directly.", ios(2.0, 13.0), tvos(9.0, 11.0)) {
     return ([[UIDevice currentDevice] respondsToSelector:@selector(userInterfaceIdiom)] ?
             [[UIDevice currentDevice] userInterfaceIdiom] :
             UIUserInterfaceIdiomPhone);
@@ -107,7 +107,7 @@ UIKIT_EXTERN NSNotificationName const UIDeviceBatteryStateDidChangeNotification 
 UIKIT_EXTERN NSNotificationName const UIDeviceBatteryLevelDidChangeNotification   API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos);
 UIKIT_EXTERN NSNotificationName const UIDeviceProximityStateDidChangeNotification API_AVAILABLE(ios(3.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIDevice.h>

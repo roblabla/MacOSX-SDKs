@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7F4E58F9-A084-3505-897E-3A66ED2B7AE8
+    value:           C163BF5A-AC66-3201-B86F-12EB47C31039
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8778700D-FA87-34A0-92B3-F43171554F37
+    value:           C45E34CD-0C8A-3E5E-B34C-3AA4C02AC844
 install-name:    '/usr/lib/libIASAuthReboot.dylib'
 current-version: 1000
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IARAuthenticatedRestartSupported, _IARCommitLoginCredentials, 
                        _IARCommitLoginCredentialsFinalized, _IARIALibRootSideStashLoginCredentialsWithUserData, 
                        _IARIALibUserSideStashLoginCredentials, _IARIsAutoLoginUser, 

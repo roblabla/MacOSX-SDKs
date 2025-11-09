@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C5214886-9E2D-38AA-9657-02E2DC9183C2
+    value:           D30C9D4F-81B0-30C3-B8F9-A2D9258F0E18
   - target:          x86_64-maccatalyst
-    value:           C5214886-9E2D-38AA-9657-02E2DC9183C2
+    value:           D30C9D4F-81B0-30C3-B8F9-A2D9258F0E18
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DB11BEF0-1032-3C80-B0F0-452558347414
+    value:           40F4F8F8-538D-3C1C-84CB-3F323AD2DFA2
   - target:          arm64e-maccatalyst
-    value:           DB11BEF0-1032-3C80-B0F0-452558347414
+    value:           40F4F8F8-538D-3C1C-84CB-3F323AD2DFA2
 install-name:    '/System/Library/PrivateFrameworks/CoreDuetSync.framework/Versions/A/CoreDuetSync'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ _DKSync3Coordinator, _DKSyncCoordinatorFactory ]
 ...

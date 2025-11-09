@@ -7,7 +7,7 @@
 
 @class NSArray<ObjectType>, NSData, NSDictionary<KeyValue, ObjectValue>, NSMutableDictionary, NSString, NSURL;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// NSGlobalDomain identifies a domain shared between all applications for a given user. NSGlobalDomain is automatically included in all search lists, after the entries for the search list's domain.
 FOUNDATION_EXPORT NSString * const NSGlobalDomain;
@@ -51,7 +51,6 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
     id _kvo_;
     CFStringRef _identifier_;
     CFStringRef _container_;
-    void *_reserved[2];
 }
 
 /*!
@@ -240,4 +239,4 @@ FOUNDATION_EXPORT NSString * const NSPositiveCurrencyFormatString API_DEPRECATED
 FOUNDATION_EXPORT NSString * const NSNegativeCurrencyFormatString API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos ]
+targets:         [ x86_64h-macos ]
 uuids:
-  - target:          x86_64-macos
-    value:           65B4BB50-5CEB-3BA7-88C7-754B025DE535
+  - target:          x86_64h-macos
+    value:           5A2443BA-76AC-3322-A6C4-530213D0AA86
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/3425AMD/libLLVMContainer.dylib'
 exports:
-  - targets:         [ x86_64-macos ]
+  - targets:         [ x86_64h-macos ]
     symbols:         [ _EnableARMEHABIDescriptors, _EnableBasePointer, _ForceStackAlign, 
                        _LLVMABIAlignmentOfType, _LLVMABISizeOfType, _LLVMAddAggressiveDCEPass, 
                        _LLVMAddAlias, _LLVMAddAlwaysInlinerPass, _LLVMAddArgumentPromotionPass, 

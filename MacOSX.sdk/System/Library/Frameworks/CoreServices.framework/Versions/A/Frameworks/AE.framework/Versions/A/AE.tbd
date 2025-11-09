@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C1696D61-282D-368F-B94A-C3D5E5615943
+    value:           4BF2BD12-F6B5-3B8C-8BA6-1F325044A8E7
   - target:          x86_64-maccatalyst
-    value:           C1696D61-282D-368F-B94A-C3D5E5615943
+    value:           4BF2BD12-F6B5-3B8C-8BA6-1F325044A8E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0A3AB363-B23B-3956-8E4C-7C5F72680481
+    value:           AA8D41E3-5EA7-3C16-A0D4-5C2213CB31BA
   - target:          arm64e-maccatalyst
-    value:           0A3AB363-B23B-3956-8E4C-7C5F72680481
+    value:           AA8D41E3-5EA7-3C16-A0D4-5C2213CB31BA
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE'
-current-version: 924
+current-version: 946
 compatibility-version: 0
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -27,8 +27,8 @@ allowable-clients:
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ DesktopServices, Foundation, HIServices, LaunchServices, PrintCore ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AEBuildAppleEvent, _AEBuildDesc, _AEBuildParameters, _AECallObjectAccessor, 
                        _AECheckIsRecord, _AECoerceDesc, _AECoercePtr, _AECoercionHandlersApplyFunction, 
                        _AECompareDesc, _AEConvertFromMsg, _AECountItems, _AECreateAppleEvent, 
@@ -80,7 +80,8 @@ exports:
                        __AppleEventsForwardEntitlements, __AppleEventsForwardEntitlementsWithBlock, 
                        __AppleEventsHintApp, __AppleEventsHintAppWithBlock, __AppleEventsListApplications, 
                        __AppleEventsListApplicationsWithBlock, __AppleEventsLookupApplicationPort, 
-                       __AppleEventsLookupApplicationPortWithBlock, __AppleEventsReleaseProcessAssertion, 
+                       __AppleEventsLookupApplicationPortWithBlock, __AppleEventsNullAction, 
+                       __AppleEventsNullActionWithBlock, __AppleEventsReleaseProcessAssertion, 
                        __AppleEventsReleaseProcessAssertionWithBlock, __AppleEventsRequestProcessAssertion, 
                        __AppleEventsRequestProcessAssertionWithBlock, __AppleEventsSendPortRequiresProcessAssertions, 
                        __kAppleEventsScriptingEntitlementKey, _aeAddFilter, _aeAppendToImplEnd, 

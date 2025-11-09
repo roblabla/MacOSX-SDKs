@@ -14,7 +14,7 @@
 #import <UIKit/UISpringLoadedInteractionSupporting.h>
 #import <UIKit/UIButtonConfiguration.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIImage, UIFont, UIColor, UIImageView, UILabel, UIImageSymbolConfiguration;
 
@@ -104,6 +104,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// An optional menu for the button to display. The button will automatically enable or disable its contextMenuInteraction when a non-nil or nil menu is set. Defaults to nil.
 @property (nonatomic, readwrite, copy, nullable) UIMenu *menu API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
+/// Preferred menu element ordering strategy for menus displayed by this button.
+@property (nonatomic) UIContextMenuConfigurationElementOrder preferredMenuElementOrder API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+
 /// Indicates if the button changes selection as its primary action.
 /// This shows the menu as options for selection if a menu is populated and showsMenuAsPrimaryAction is enabled.
 /// If no menu is provided or it is not the primary action, UIControlStateSelected is toggled on and off for the primary action.
@@ -182,7 +185,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @end
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIButton.h>

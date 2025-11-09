@@ -1,37 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           751A4BFC-C047-364B-A1B7-FF384BF6C610
-  - target:          x86_64-maccatalyst
-    value:           751A4BFC-C047-364B-A1B7-FF384BF6C610
+    value:           2A4AFF16-A193-3310-937A-C955D27DDC65
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D54ED123-4A17-3801-B265-8B461F379764
-  - target:          arm64e-maccatalyst
-    value:           D54ED123-4A17-3801-B265-8B461F379764
+    value:           4AA79B66-3D71-38A3-ACCC-6121FFB74FF8
 install-name:    '/System/Library/PrivateFrameworks/USDKit.framework/Versions/A/USDKit'
-current-version: 51.3
+current-version: 55
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
-    weak-symbols:    [ __ZTIFbvE, __ZTIN3rml16versioned_objectE, __ZTIN3rml3jobE, 
-                       __ZTIN3rml6clientE, __ZTIN3rml6serverE, __ZTINSt3__110__function6__baseIFbPcPmEEE, 
-                       __ZTINSt3__110__function6__baseIFbvEEE, __ZTINSt3__110__function6__baseIFvvEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__120__vector_base_commonILb1EEE, 
-                       __ZTINSt3__121__basic_string_commonILb1EEE, __ZTIPFbvE, __ZTSFbvE, 
-                       __ZTSN3rml16versioned_objectE, __ZTSN3rml3jobE, __ZTSN3rml6clientE, 
-                       __ZTSN3rml6serverE, __ZTSNSt3__110__function6__baseIFbPcPmEEE, 
-                       __ZTSNSt3__110__function6__baseIFbvEEE, __ZTSNSt3__110__function6__baseIFvvEEE, 
-                       __ZTSNSt3__110shared_ptrINS_11basic_regexIcNS_12regex_traitsIcEEEEE27__shared_ptr_default_deleteIS4_S4_EE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__120__vector_base_commonILb1EEE, 
-                       __ZTSNSt3__121__basic_string_commonILb1EEE, __ZTSPFbvE ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos ]
+    weak-symbols:    [ __ZTINSt3__120__vector_base_commonILb1EEE, __ZTINSt3__121__basic_string_commonILb1EEE, 
+                       __ZTSNSt3__120__vector_base_commonILb1EEE, __ZTSNSt3__121__basic_string_commonILb1EEE ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _USDKitAdditionalErrorsKey, _USDKitErrorDomain, _USDKitVersionNumber, 
                        _USDKitVersionString, _USKDataTypeAssetPath, _USKDataTypeBool, 
                        _USKDataTypeBoolArray, _USKDataTypeDouble, _USKDataTypeDouble2, 
@@ -61,20 +44,24 @@ exports:
                        _USKNodeTypeCamera, _USKNodeTypeCapsule, _USKNodeTypeCone, 
                        _USKNodeTypeCube, _USKNodeTypeCylinder, _USKNodeTypeEmpty, 
                        _USKNodeTypeInfinitePlane, _USKNodeTypeMaterial, _USKNodeTypeMesh, 
-                       _USKNodeTypeMeshGroup, _USKNodeTypePhysicsForce, _USKNodeTypePhysicsGravitationalForce, 
-                       _USKNodeTypeScope, _USKNodeTypeShader, _USKNodeTypeSkeletalAnimation, 
-                       _USKNodeTypeSkeleton, _USKNodeTypeSkeletonRoot, _USKNodeTypeSpatialAudio, 
-                       _USKNodeTypeSphere, _USKNodeTypeText, _USKNodeTypeTransform, 
-                       _USKNodeTypeTrigger, _USKNodeTypeUnknown, _USKRoleTypeColor, 
-                       _USKRoleTypeNone, _USKRoleTypeNormal, _USKRoleTypePoint, _USKRoleTypeTextureCoordinate, 
-                       _USKRoleTypeVector, _USKSchemaTypeARAnchoringAPI, _USKSchemaTypeBindingAPI, 
-                       _USKSchemaTypeMaterialBindingAPI, _USKSchemaTypePhysicsColliderAPI, 
-                       _USKSchemaTypePhysicsMaterialAPI, _USKSchemaTypePhysicsRigidBodyAPI, 
-                       _USKSchemaTypeSkelBindingAPI, _USKSchemaTypeUnknown, _USKShaderNodeTypeMeshAttributeReader, 
+                       _USKNodeTypeMeshGroup, _USKNodeTypePhysicsCollisionGroup, 
+                       _USKNodeTypePhysicsForce, _USKNodeTypePhysicsGravitationalForce, 
+                       _USKNodeTypePhysicsScene, _USKNodeTypeScope, _USKNodeTypeShader, 
+                       _USKNodeTypeSkeletalAnimation, _USKNodeTypeSkeleton, _USKNodeTypeSkeletonRoot, 
+                       _USKNodeTypeSpatialAudio, _USKNodeTypeSphere, _USKNodeTypeText, 
+                       _USKNodeTypeTransform, _USKNodeTypeTrigger, _USKNodeTypeUnknown, 
+                       _USKRoleTypeColor, _USKRoleTypeNone, _USKRoleTypeNormal, _USKRoleTypePoint, 
+                       _USKRoleTypeTextureCoordinate, _USKRoleTypeVector, _USKSchemaTypeARAnchoringAPI, 
+                       _USKSchemaTypeBindingAPI, _USKSchemaTypeMaterialBindingAPI, 
+                       _USKSchemaTypePhysicsColliderAPI, _USKSchemaTypePhysicsCollisionAPI, 
+                       _USKSchemaTypePhysicsFilteredPairsAPI, _USKSchemaTypePhysicsMassAPI, 
+                       _USKSchemaTypePhysicsMaterialAPI, _USKSchemaTypePhysicsMeshCollisionAPI, 
+                       _USKSchemaTypePhysicsRigidBodyAPI, _USKSchemaTypePxrPhysicsMaterialAPI, 
+                       _USKSchemaTypePxrPhysicsRigidBodyAPI, _USKSchemaTypeSkelBindingAPI, 
+                       _USKSchemaTypeUnknown, _USKShaderNodeTypeMeshAttributeReader, 
                        _USKShaderNodeTypePreviewSurface, _USKShaderNodeTypeTextureReader, 
                        _USKShaderNodeTypeUVTransformReader, _USKShaderNodeTypeUnknown ]
-    objc-classes:    [ USKData, USKLayerOffset, USKNode, USKNodeSiblingIterator, 
-                       USKNodeSubtreeIterator, USKObject, USKObjectPath, USKProperty, 
-                       USKPropertyIterator, USKResource, USKResourcePath, USKScene, 
-                       USKTimeCode, USKToken, USKUtility ]
+    objc-classes:    [ USKData, USKLayerOffset, USKNode, USKObject, USKObjectPath, 
+                       USKProperty, USKResource, USKResourcePath, USKScene, USKTimeCode, 
+                       USKToken, USKUtility ]
 ...

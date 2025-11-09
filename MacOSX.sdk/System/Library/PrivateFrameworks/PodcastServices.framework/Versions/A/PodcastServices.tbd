@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EE09657F-8675-372A-A766-A14A4EA2F2DF
+    value:           E25B36FF-3802-30D0-B4E2-F6D526666C71
   - target:          x86_64-maccatalyst
-    value:           EE09657F-8675-372A-A766-A14A4EA2F2DF
+    value:           E25B36FF-3802-30D0-B4E2-F6D526666C71
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           50D8418B-F469-34B3-BF33-4D1FA1C1FEBF
+    value:           58A50CC3-764D-3B56-A853-9AAAFE2898B6
   - target:          arm64e-maccatalyst
-    value:           50D8418B-F469-34B3-BF33-4D1FA1C1FEBF
+    value:           58A50CC3-764D-3B56-A853-9AAAFE2898B6
 install-name:    '/System/Library/PrivateFrameworks/PodcastServices.framework/Versions/A/PodcastServices'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _PODContentDomainITunesDatabase, _PODContentDomainSyncToApp, 
                        _PODContentDomainSyncToDevice, _PODContentDomainUnitTest, 
                        _PODContentServiceErrorDomain, _PODContentSourceIdentifierNull, 

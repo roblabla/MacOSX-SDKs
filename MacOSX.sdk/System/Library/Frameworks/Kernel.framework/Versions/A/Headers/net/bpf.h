@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2021 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2022 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -159,6 +159,8 @@ struct bpf_version {
 	u_short bv_major;
 	u_short bv_minor;
 };
+
+
 #if defined(__LP64__)
 #include <sys/_types/_timeval32.h>
 

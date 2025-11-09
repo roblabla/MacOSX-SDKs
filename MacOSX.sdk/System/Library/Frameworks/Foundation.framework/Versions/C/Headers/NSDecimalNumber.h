@@ -8,7 +8,7 @@
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSException.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /***************	Exceptions		***********/
 
@@ -34,7 +34,7 @@ FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberDivideByZeroException;
 @end
 
 /***************	NSDecimalNumber: the class		***********/
-
+NS_SWIFT_SENDABLE // Immutable with no mutable subclasses
 @interface NSDecimalNumber : NSNumber {
 @private
     signed   int _exponent:8;
@@ -108,7 +108,7 @@ FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberDivideByZeroException;
 @end
 
 /***********	A class for defining common behaviors		*******/
-
+NS_SWIFT_SENDABLE // Immutable with no mutable subclasses
 @interface NSDecimalNumberHandler : NSObject <NSDecimalNumberBehaviors, NSCoding> {
   @private
     signed int _scale:16;
@@ -153,4 +153,4 @@ FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberDivideByZeroException;
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

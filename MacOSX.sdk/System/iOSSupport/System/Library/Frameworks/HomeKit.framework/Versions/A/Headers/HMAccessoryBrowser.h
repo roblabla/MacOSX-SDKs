@@ -20,19 +20,19 @@ NS_ASSUME_NONNULL_BEGIN
  *        that have never been paired with and therefore not part of the home.
  */
 HM_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
-@interface HMAccessoryBrowser : NSObject
+    @interface HMAccessoryBrowser : NSObject
 
 /*!
  * @brief Delegate that receives updates on the state of the accessories discovered.
  */
-@property(weak, nonatomic, nullable) id<HMAccessoryBrowserDelegate> delegate;
+@property (weak, nonatomic, nullable) id<HMAccessoryBrowserDelegate> delegate;
 
 /*!
  * @brief This is the array of HMAccessory objects that represents new
  *        accessories that were discovered as part of a search session.
  *        This array is not updated when a search session is not in progress.
  */
-@property(readonly, copy, nonatomic) NSArray<HMAccessory *> *discoveredAccessories;
+@property (readonly, copy, nonatomic) NSArray<HMAccessory *> *discoveredAccessories;
 
 /*!
  * @brief Starts searching for accessories that are not associated to any home.
@@ -66,8 +66,8 @@ HM_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos, macCatal
 /*!
  * @brief This delegate receives updates about new accessories in the home.
  */
-HM_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst) 
-@protocol HMAccessoryBrowserDelegate <NSObject>
+HM_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
+    @protocol HMAccessoryBrowserDelegate<NSObject>
 
 @optional
 

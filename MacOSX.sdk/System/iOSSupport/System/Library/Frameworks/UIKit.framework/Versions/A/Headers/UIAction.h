@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIMenu.h>
+#import <UIKit/UIMenuLeaf.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NSString *UIActionIdentifier NS_SWIFT_NAME(UIAction.Identifier) NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0));
 
@@ -24,7 +25,7 @@ UIKIT_EXTERN const UIActionIdentifier UIActionPasteAndSearch API_AVAILABLE(ios(1
 typedef void (^UIActionHandler)(__kindof UIAction *action);
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
-@interface UIAction : UIMenuElement
+@interface UIAction : UIMenuElement <UIMenuLeaf>
 
 /// Short display title.
 @property (nonatomic, copy) NSString *title;
@@ -32,7 +33,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 /// Image that can appear next to this action.
 @property (nullable, nonatomic, copy) UIImage *image;
 
-/// Elaborated title, if any.
+/// Elaborated title used in keyboard shortcut overlay.
 @property (nullable, nonatomic, copy) NSString *discoverabilityTitle;
 
 /// This action's identifier.
@@ -94,7 +95,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIAction.h>

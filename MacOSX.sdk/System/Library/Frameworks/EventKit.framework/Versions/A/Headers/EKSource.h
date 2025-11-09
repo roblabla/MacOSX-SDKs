@@ -33,6 +33,12 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  */
 - (NSSet<EKCalendar *> *)calendarsForEntityType:(EKEntityType)entityType NS_AVAILABLE(10_8, 6_0);
 
+/*!
+ @property    isDelegate
+ @abstract    Returns YES if this EKSource represents an account delegated by another user.
+ */
+@property (nonatomic, readonly, assign) BOOL isDelegate NS_AVAILABLE(13_0, 16_0);
+
 @end
 
 NS_ASSUME_NONNULL_END

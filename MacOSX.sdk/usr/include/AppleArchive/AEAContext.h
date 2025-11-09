@@ -41,8 +41,8 @@ APPLE_ARCHIVE_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
   or open an encryption stream for append.
   The context must be destroyed after use by calling \p AEAContextDestroy.
 
-  \p read is called on \p encrypted_stream to read the prologue.  \p encrypted_stream is
-  expected to be positionned on the first byte of the archive magic before this call, and will point
+  \p read is called on \p encrypted_stream to read the encrypted prologue and store it in the context.
+  \p encrypted_stream is expected to be positionned on the first byte of the archive magic before this call, and will point
   to the first byte after the prologue after a successful call.
 
   @param encrypted_stream provides encrypted data, only \p read is called, and the entire archive prologue will be read.

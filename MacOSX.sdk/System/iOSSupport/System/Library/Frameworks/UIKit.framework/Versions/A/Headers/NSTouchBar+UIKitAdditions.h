@@ -18,7 +18,7 @@
 
 @class UIResponder, UIViewController;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @interface UIResponder (NSTouchBarProvider) <NSTouchBarProvider>
 /*
@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nullable, strong) id<UIActivityItemsConfigurationReading> activityItemsConfiguration;
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif // TARGET_OS_MACCATALYST || TARGET_OS_OSX
 

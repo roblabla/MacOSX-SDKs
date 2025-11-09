@@ -4,10 +4,24 @@ framework module AppKit [extern_c] [system] {
   export *
   module * { export * }
 
+  explicit module NSNibConnector {
+    header "NSNibConnector.h"
+    export *
+  }
+
+  explicit module NSNibControlConnector {
+    header "NSNibControlConnector.h"
+    export *
+  }
+  
+  explicit module NSNibOutletConnector {
+    header "NSNibOutletConnector.h"
+    export *
+  }
+
+  // Use <Foundation/NSFileWrapper.h>.
   exclude header "NSFileWrapper.h"
-  exclude header "NSNibConnector.h"
-  exclude header "NSNibControlConnector.h"
-  exclude header "NSNibOutletConnector.h"
+  
+  // Use <Foundation/NSSpellServer.h>.
   exclude header "NSSpellServer.h"
 }
-

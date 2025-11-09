@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DAA735E5-A64F-3443-8B24-8C5A77A25EFD
+    value:           136EA7B6-9D44-3363-8949-AF5D21C6D116
   - target:          x86_64-maccatalyst
-    value:           DAA735E5-A64F-3443-8B24-8C5A77A25EFD
+    value:           136EA7B6-9D44-3363-8949-AF5D21C6D116
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B2F4A2F-2C36-3D5D-87F0-9B6BBAE5560C
+    value:           60ADB251-3204-34C0-B826-260AEF261E02
   - target:          arm64e-maccatalyst
-    value:           6B2F4A2F-2C36-3D5D-87F0-9B6BBAE5560C
+    value:           60ADB251-3204-34C0-B826-260AEF261E02
 install-name:    '/usr/lib/system/libsystem_asl.dylib'
-current-version: 392.100.2
+current-version: 395
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ASL_LEVEL_TO_STRING, __asl_evaluate_send, __asl_fork_child, 
                        __asl_lib_log, __asl_log_args_to_xpc, __asl_msg_dump, __asl_mt_shim_fork_child, 
                        __asl_mt_shim_send_message, __asl_server_cancel_direct_watch, 

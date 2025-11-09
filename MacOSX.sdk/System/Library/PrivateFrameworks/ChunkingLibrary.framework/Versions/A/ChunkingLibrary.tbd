@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1C2F4D65-0C5B-3E8C-875C-805BDECC65AB
+    value:           69AFFE42-BCC0-3004-8455-745156A834A7
   - target:          x86_64-maccatalyst
-    value:           1C2F4D65-0C5B-3E8C-875C-805BDECC65AB
+    value:           69AFFE42-BCC0-3004-8455-745156A834A7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4C052A80-56C0-3B79-A2D9-D677BE9A5D4A
+    value:           4679890B-029A-3FD2-9E5F-2C32B359BDA0
   - target:          arm64e-maccatalyst
-    value:           4C052A80-56C0-3B79-A2D9-D677BE9A5D4A
+    value:           4679890B-029A-3FD2-9E5F-2C32B359BDA0
 install-name:    '/System/Library/PrivateFrameworks/ChunkingLibrary.framework/Versions/A/ChunkingLibrary'
-current-version: 1950.13
+current-version: 2000.115
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CK2CalculateFileSignatureWithFlags, _CK2CalculateItemSignatureWithFlags, 
                        _CKCalculateChunkSignatureAndEncryptionKey, _CKCalculateFileSignature, 
                        _CKCheckChunkStoreDB, _CKChunkCoderCreate, _CKChunkCoderFinish, 

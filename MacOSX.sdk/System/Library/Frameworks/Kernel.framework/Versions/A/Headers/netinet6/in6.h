@@ -199,7 +199,6 @@ struct sockaddr_in6 {
 	                    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff }}}
 
 
-
 /*
  * Macros started with IPV6_ADDR is KAME local
  */
@@ -410,8 +409,6 @@ extern const struct in6_addr in6addr_linklocal_allv2routers;
 	((a)->ia6_lifetime.ia6ti_expire != 0 && \
 	(a)->ia6_lifetime.ia6ti_expire < (t))
 
-
-
 /*
  * Options for use with [gs]etsockopt at the IPV6 level.
  * First word of comment is data type; bool is stored in int.
@@ -578,7 +575,6 @@ extern const struct in6_addr in6addr_linklocal_allv2routers;
 
 #define IPV6_BOUND_IF           125 /* int; set/get bound interface */
 
-
 /* to define items, should talk with KAME guys first, for *BSD compatibility */
 
 #define IPV6_RTHDR_LOOSE        0 /* this hop need not be a neighbor. */
@@ -705,9 +701,5 @@ struct ip6_mtuinfo {
 /* to define items, should talk with KAME guys first, for *BSD compatibility */
 #define IPV6CTL_MAXID           51
 
-
-
-
-
-#endif /* PLATFORM_DriverKit */
+#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 #endif /* !_NETINET6_IN6_H_ */

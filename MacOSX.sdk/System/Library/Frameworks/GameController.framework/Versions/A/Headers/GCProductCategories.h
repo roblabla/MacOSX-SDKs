@@ -23,6 +23,7 @@ GAMECONTROLLER_EXTERN NSString *const GCProductCategoryDualSense API_AVAILABLE(m
 GAMECONTROLLER_EXTERN NSString *const GCProductCategoryDualShock4 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 GAMECONTROLLER_EXTERN NSString *const GCProductCategoryMFi API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 GAMECONTROLLER_EXTERN NSString *const GCProductCategoryXboxOne API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXTERN NSString *const GCProductCategoryHID API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));
 
 
 

@@ -24,7 +24,13 @@ typedef NS_OPTIONS(NSUInteger, UIMenuOptions) {
     
 } NS_SWIFT_NAME(UIMenu.Options) API_AVAILABLE(ios(13.0));
 
-NS_ASSUME_NONNULL_BEGIN
+typedef NS_ENUM(NSInteger, UIMenuElementSize) {
+    UIMenuElementSizeSmall = 0,
+    UIMenuElementSizeMedium,
+    UIMenuElementSizeLarge,
+} API_AVAILABLE(ios(16.0));
+
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @interface UIMenu : UIMenuElement
@@ -34,6 +40,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 
 /// Options.
 @property (nonatomic, readonly) UIMenuOptions options;
+
+/// Size of this menu's child elements. This property has no effect on Mac Catalyst.
+@property (nonatomic) UIMenuElementSize preferredElementSize API_AVAILABLE(ios(16.0));
 
 /// The menu's sub-elements and sub-menus. On iOS 14.0, elements of your own menus are mutable, -copying a menu will produce mutable elements, and UIKit will take immutable copies of menus it receives. Prior to iOS 14.0, menus are always fully immutable.
 @property (nonatomic, readonly) NSArray<UIMenuElement *> *children;
@@ -145,6 +154,9 @@ UIKIT_EXTERN const UIMenuIdentifier UIMenuClose API_AVAILABLE(ios(13.0));
 /// Print menu
 UIKIT_EXTERN const UIMenuIdentifier UIMenuPrint API_AVAILABLE(ios(13.0));
 
+/// Document-related menu items: Duplicate, Move, Rename, Export. The `.document` menu is added to Mac Catalyst applications by default. iOS Apps on the Mac will have the `.document` menu inserted when and if `UINavigationItem.titleMenuProvider` is set to a nonnull value, and from launch on subsequent executions.
+UIKIT_EXTERN const UIMenuIdentifier UIMenuDocument API_AVAILABLE(ios(16.0));
+
 /// -- Identifiers for Edit submenus
 
 /// Undo, Redo menu
@@ -241,7 +253,7 @@ UIKIT_EXTERN const UIMenuIdentifier UIMenuBringAllToFront API_AVAILABLE(ios(13.0
 /// Root-level menu
 UIKIT_EXTERN const UIMenuIdentifier UIMenuRoot API_AVAILABLE(ios(13.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIMenu.h>

@@ -15,7 +15,7 @@
  * If you have other DNS resolution needs, switch to <dns_sd.h>.
  */
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_DEPRECATED("Use Network framework instead, see deprecation notice in <Foundation/NSHost.h>", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NSHost : NSObject {
@@ -45,4 +45,4 @@ API_DEPRECATED("Use Network framework instead, see deprecation notice in <Founda
 + (void)flushHostCache API_DEPRECATED("Caching no longer supported", macos(10.0,10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

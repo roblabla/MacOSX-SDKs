@@ -5,7 +5,7 @@
 //  Copyright © 2017 Apple, Inc. All rights reserved.
 //
 
-
+#import <Metal/MTLDefines.h>
 #import <Metal/MTLStageInputOutputDescriptor.h>
 #import <Metal/MTLRenderPipeline.h>
 

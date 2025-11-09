@@ -26,13 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
     AVCaptureFileOutput is an abstract subclass of AVCaptureOutput that provides an interface for writing captured media to files.
  
  @discussion
-    This abstract superclass defines the interface for outputs that record media samples to files. File outputs can start recording to a new file using the startRecordingToOutputFileURL:recordingDelegate: method. On successive invocations of this method on Mac OS X, the output file can by changed dynamically without losing media samples. A file output can stop recording using the stopRecording method. Because files are recorded in the background, applications will need to specify a delegate for each new file so that they can be notified when recorded files are finished.
+    This abstract superclass defines the interface for outputs that record media samples to files. File outputs can start recording to a new file using the startRecordingToOutputFileURL:recordingDelegate: method. On successive invocations of this method on macOS, the output file can by changed dynamically without losing media samples. A file output can stop recording using the stopRecording method. Because files are recorded in the background, applications will need to specify a delegate for each new file so that they can be notified when recorded files are finished.
  
-    On Mac OS X, clients can also set a delegate on the file output itself that can be used to control recording along exact media sample boundaries using the captureOutput:didOutputSampleBuffer:fromConnection: method.
+    On macOS, clients can also set a delegate on the file output itself that can be used to control recording along exact media sample boundaries using the captureOutput:didOutputSampleBuffer:fromConnection: method.
  
     The concrete subclasses of AVCaptureFileOutput are AVCaptureMovieFileOutput, which records media to a QuickTime movie file, and AVCaptureAudioFileOutput, which writes audio media to a variety of audio file formats.
  */
-API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
 @interface AVCaptureFileOutput : AVCaptureOutput
 {
 @private
@@ -72,11 +72,11 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  @discussion
     The method sets the file URL to which the receiver is currently writing output media. If a file at the given URL already exists when capturing starts, recording to the new file will fail.
  
-    Clients need not call stopRecording before calling this method while another recording is in progress. On Mac OS X, if this method is invoked while an existing output file was already being recorded, no media samples will be discarded between the old file and the new file.
+    Clients need not call stopRecording before calling this method while another recording is in progress. On macOS, if this method is invoked while an existing output file was already being recorded, no media samples will be discarded between the old file and the new file.
  
     When recording is stopped either by calling stopRecording, by changing files using this method, or because of an error, the remaining data that needs to be included to the file will be written in the background. Therefore, clients must specify a delegate that will be notified when all data has been written to the file using the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: method. The recording delegate can also optionally implement methods that inform it when data starts being written, when recording is paused and resumed, and when recording is about to be finished.
  
-    On Mac OS X, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the new file are guaranteed to be those contained in the sample buffer passed to that method.
+    On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the new file are guaranteed to be those contained in the sample buffer passed to that method.
  
     Note: AVCaptureAudioFileOutput does not support -startRecordingToOutputFileURL:recordingDelegate:. Use -startRecordingToOutputFileURL:outputFileType:recordingDelegate: instead.
  */
@@ -92,7 +92,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  
     When recording is stopped either by calling this method, by changing files using startRecordingToOutputFileURL:recordingDelegate:, or because of an error, the remaining data that needs to be included to the file will be written in the background. Therefore, before using the file, clients must wait until the delegate that was specified in startRecordingToOutputFileURL:recordingDelegate: is notified when all data has been written to the file using the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: method.
  
-    On Mac OS X, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the last samples written to the current file are guaranteed to be those that were output immediately before those in the sample buffer passed to that method.
+    On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the last samples written to the current file are guaranteed to be those that were output immediately before those in the sample buffer passed to that method.
  */
 - (void)stopRecording;
 
@@ -114,7 +114,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  @discussion
     This property indicates recording to the file returned by outputFileURL has been previously paused using the pauseRecording method. When a recording is paused, captured samples are not written to the output file, but new samples can be written to the same file in the future by calling resumeRecording.
  */
-@property(nonatomic, readonly, getter=isRecordingPaused) BOOL recordingPaused __IOS_PROHIBITED __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property(nonatomic, readonly, getter=isRecordingPaused) BOOL recordingPaused API_UNAVAILABLE(ios, tvos);
 
 /*!
  @method pauseRecording
@@ -124,9 +124,9 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  @discussion
     This method causes the receiver to stop writing captured samples to the current output file returned by outputFileURL, but leaves the file open so that samples can be written to it in the future, when resumeRecording is called. This allows clients to record multiple media segments that are not contiguous in time to a single file.
  
-    On Mac OS X, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the last samples written to the current file are guaranteed to be those that were output immediately before those in the sample buffer passed to that method.
+    On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the last samples written to the current file are guaranteed to be those that were output immediately before those in the sample buffer passed to that method.
  */
-- (void)pauseRecording __IOS_PROHIBITED __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (void)pauseRecording API_UNAVAILABLE(ios, tvos);
 
 /*!
  @method resumeRecording
@@ -136,9 +136,9 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  @discussion
     This method causes the receiver to resume writing captured samples to the current output file returned by outputFileURL, after recording was previously paused using pauseRecording. This allows clients to record multiple media segments that are not contiguous in time to a single file.
  
-    On Mac OS X, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the current file are guaranteed to be those contained in the sample buffer passed to that method.
+    On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the current file are guaranteed to be those contained in the sample buffer passed to that method.
  */
-- (void)resumeRecording __IOS_PROHIBITED __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (void)resumeRecording API_UNAVAILABLE(ios, tvos);
 
 /*!
  @property recordedDuration
@@ -198,7 +198,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  @abstract
     Defines an interface for delegates of AVCaptureFileOutput to respond to events that occur in the process of recording a single file.
  */
-API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
 @protocol AVCaptureFileOutputRecordingDelegate <NSObject>
 
 @optional
@@ -328,7 +328,7 @@ API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, macCatalyst, watchos, tvos)
     The AVCaptureFileOutput instance with which the delegate is associated.
  
  @discussion
-    In apps linked before Mac OS X 10.8, delegates that implement the captureOutput:didOutputSampleBuffer:fromConnection: method can ensure frame accurate start / stop of a recording by calling startRecordingToOutputFileURL:recordingDelegate: from within the callback. Frame accurate start requires the capture output to apply outputSettings when the session starts running, so it is ready to record on any given frame boundary. Compressing all the time while the session is running has power, thermal, and CPU implications. In apps linked on or after Mac OS X 10.8, delegates must implement captureOutputShouldProvideSampleAccurateRecordingStart: to indicate whether frame accurate start/stop recording is required (returning YES) or not (returning NO). The output calls this method as soon as the delegate is added, and never again. If your delegate returns NO, the capture output applies compression settings when startRecordingToOutputFileURL:recordingDelegate: is called, and disables compression settings after the recording is stopped.
+    In apps linked before macOS 10.8, delegates that implement the captureOutput:didOutputSampleBuffer:fromConnection: method can ensure frame accurate start / stop of a recording by calling startRecordingToOutputFileURL:recordingDelegate: from within the callback. Frame accurate start requires the capture output to apply outputSettings when the session starts running, so it is ready to record on any given frame boundary. Compressing all the time while the session is running has power, thermal, and CPU implications. In apps linked on or after macOS 10.8, delegates must implement captureOutputShouldProvideSampleAccurateRecordingStart: to indicate whether frame accurate start/stop recording is required (returning YES) or not (returning NO). The output calls this method as soon as the delegate is added, and never again. If your delegate returns NO, the capture output applies compression settings when startRecordingToOutputFileURL:recordingDelegate: is called, and disables compression settings after the recording is stopped.
  */
 - (BOOL)captureOutputShouldProvideSampleAccurateRecordingStart:(AVCaptureOutput *)output API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
@@ -372,9 +372,9 @@ API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, macCatalyst, watchos, tvos)
     AVCaptureMovieFileOutput is a concrete subclass of AVCaptureFileOutput that writes captured media to QuickTime movie files.
  
  @discussion
-    AVCaptureMovieFileOutput implements the complete file recording interface declared by AVCaptureFileOutput for writing media data to QuickTime movie files. In addition, instances of AVCaptureMovieFileOutput allow clients to configure options specific to the QuickTime file format, including allowing them to write metadata collections to each file, specify media encoding options for each track (Mac OS X), and specify an interval at which movie fragments should be written.
+    AVCaptureMovieFileOutput implements the complete file recording interface declared by AVCaptureFileOutput for writing media data to QuickTime movie files. In addition, instances of AVCaptureMovieFileOutput allow clients to configure options specific to the QuickTime file format, including allowing them to write metadata collections to each file, specify media encoding options for each track (macOS), and specify an interval at which movie fragments should be written.
  */
-API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
 @interface AVCaptureMovieFileOutput : AVCaptureFileOutput
 {
 @private
@@ -456,7 +456,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
     The connection delivering the media to be encoded.
  
  @discussion
-    See AVAudioSettings.h for audio connections or AVVideoSettings.h for video connections for more information on how to construct an output settings dictionary. A value of an empty dictionary (i.e. [NSDictionary dictionary], means that the format of the media from the connection should not be changed before being written to the file. A value of nil means that the output format will be determined by the session preset. In this case, -outputSettingsForConnection: will return a non-nil dictionary reflecting the settings used by the AVCaptureSession's current sessionPreset.
+    See AVAudioSettings.h for audio connections or AVVideoSettings.h for video connections for more information on how to construct an output settings dictionary. A value of an empty dictionary (i.e. +[NSDictionary dictionary]), means that the format of the media from the connection should not be changed before being written to the file. A value of nil means that the output format will be determined by the session preset. In this case, -outputSettingsForConnection: will return a non-nil dictionary reflecting the settings used by the AVCaptureSession's current sessionPreset.
  
     On iOS, your outputSettings dictionary may only contain keys listed in - supportedOutputSettingsKeysForConnection:. If you specify any other key, an NSInvalidArgumentException will be thrown. Further restrictions may be imposed on the AVVideoCodecTypeKey. Its value should be present in the -availableVideoCodecTypes array. If AVVideoCompressionPropertiesKey is specified, you must also specify a valid value for AVVideoCodecKey. On iOS versions prior to 12.0, the only settable key for video connections is AVVideoCodecTypeKey. On iOS 12.0 and later, video connections gain support for AVVideoCompressionPropertiesKey.
  
@@ -597,7 +597,7 @@ API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, macCatalyst, watchos, tvos)
  
     When recording is stopped either by calling stopRecording, by changing files using this method, or because of an error, the remaining data that needs to be included to the file will be written in the background. Therefore, clients must specify a delegate that will be notified when all data has been written to the file using the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: method. The recording delegate can also optionally implement methods that inform it when data starts being written, when recording is paused and resumed, and when recording is about to be finished.
  
-    On Mac OS X, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the new file are guaranteed to be those contained in the sample buffer passed to that method.
+    On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the new file are guaranteed to be those contained in the sample buffer passed to that method.
  */
 - (void)startRecordingToOutputFileURL:(NSURL *)outputFileURL outputFileType:(AVFileType)fileType recordingDelegate:(id<AVCaptureFileOutputRecordingDelegate>)delegate;
 

@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           01A6AF32-C1C9-3FE1-8D21-CB094AFFBA60
+    value:           055A2A8F-CC2D-315C-9F15-C0261D438413
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B0976BD9-32EA-3204-BE10-1858A6879F78
+    value:           750EB4CC-BE90-34C1-8D72-7E4C2017629B
 install-name:    '/System/Library/PrivateFrameworks/IASUtilities.framework/Versions/A/IASUtilities'
 current-version: 119
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/IASUtilitiesCore.framework/Versions/A/IASUtilitiesCore' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IASAttachLoggingToFile, _IASAttachLoggingToFileIgnoringExistingBuffer, 
                        _IASBootTimeInstallManagerAlternateStatusKey, _IASBootTimeInstallManagerErrorDomain, 
                        _IASBootTimeInstallManagerPrimaryStatusKey, _IASBootTimeInstallableItemErrorDomain, 
@@ -24,41 +24,26 @@ exports:
                        _IASDiskImageInstallMediaNotRemovable, _IASInstallMediaErrorDomain, 
                        _IASInstallMediaFormatDomain, _IASLogObject, _IASLoggingDaemonIsActive, 
                        _IASReenableSystemIdleSleep, _IASSetupLogging, _IASTearDownLogging, 
-                       _UAUEnvCurrentOSBuild, _UAUEnvCurrentOSVersion, _UAUEnvIsFLO, 
-                       _UAUEnvOpenDirectoryRecord, _UAUEnvPreviousOSBuild, _UAUEnvPreviousOSVersion, 
-                       _UAULaunchPath, __essentiallyEqual, _attach_listener_to_file, 
-                       _do_log_udp_listen, _do_log_watch, _get_existing_log_buffer, 
-                       _instlog_attachToFile, _instlog_detachFromFile, _instlog_is_active, 
-                       _instlog_is_shared, _instlog_stringValue, _instlogd_attach_to_file, 
-                       _instlogd_client_attach_to_file, _instlogd_client_detach_from_file, 
-                       _instlogd_detach_from_file, _kIASAreaCodeKey, _kIASAreaCodesKey, 
-                       _kIASCallingCodeKey, _kIASCountryCodeKey, _kIASIsContinentKey, 
-                       _kIASMinimumLengthKey, _kIASMinimumPhoneNumberLengthKey, _kIASNameKey, 
+                       __essentiallyEqual, _attach_listener_to_file, _do_log_udp_listen, 
+                       _do_log_watch, _get_existing_log_buffer, _instlog_attachToFile, 
+                       _instlog_detachFromFile, _instlog_is_active, _instlog_is_shared, 
+                       _instlog_stringValue, _instlogd_attach_to_file, _instlogd_client_attach_to_file, 
+                       _instlogd_client_detach_from_file, _instlogd_detach_from_file, 
                        _logdatasource_notify, _process_line, _regExCompare, _saveOSInstallLogWithMountPoint, 
                        _setup_instlog_shmem, _socket_close_handler, _ssleepDisabled, 
                        _start_log_listen_thread, _teardown_instlog_shmem ]
-    objc-classes:    [ IASBezierCurve, IASBlessUtilities, IASBootTimeInstallClient, 
-                       IASBootTimeInstallManager, IASBootTimeInstallableItem, IASBottomMagicPocketView, 
-                       IASCommonViewBasedTableDelegate, IASCountryCodePopUpView, 
-                       IASCountryCodesArray, IASCursiveTextPath, IASCursiveTextView, 
-                       IASCursiveTextWindow, IASDMGUtilities, IASDeviceIconManager, 
-                       IASDeviceStringManager, IASDiskImageInstallMedia, IASFakeLinkButton, 
-                       IASFirstResponderDisablingTextView, IASInstallMedia, IASKeyableWindow, 
-                       IASLeftMagicPocketView, IASLocalSecretPrompt, IASLogDataSource, 
-                       IASLogWindowController, IASMagicPocketClipView, IASMagicPocketScrollView, 
-                       IASMagicPocketView, IASMessageTracing, IASNightInstallSupport, 
-                       IASPathPoint, IASPickerViewController, IASRightMagicPocketView, 
-                       IASServerSupport, IASStandaloneTextView, IASSystemInformation, 
+    objc-classes:    [ IASBlessUtilities, IASBootTimeInstallClient, IASBootTimeInstallManager, 
+                       IASBootTimeInstallableItem, IASBottomMagicPocketView, IASCommonViewBasedTableDelegate, 
+                       IASDMGUtilities, IASDeviceIconManager, IASDeviceStringManager, 
+                       IASDiskImageInstallMedia, IASFakeLinkButton, IASFirstResponderDisablingTextView, 
+                       IASInstallMedia, IASKeyableWindow, IASLeftMagicPocketView, 
+                       IASLocalSecretPrompt, IASLogDataSource, IASLogWindowController, 
+                       IASMagicPocketClipView, IASMagicPocketScrollView, IASMagicPocketView, 
+                       IASMessageTracing, IASNightInstallSupport, IASPickerViewController, 
+                       IASRightMagicPocketView, IASStandaloneTextView, IASSystemInformation, 
                        IASSystemSize, IASTimeRemainingFormatter, IASTopMagicPocketView, 
-                       ILCBaseConnection, ILCConnection, InstlogRemoteLogging, UAULaunch ]
-    objc-ivars:      [ IASCursiveTextPath._boundingBoxOfPath, IASCursiveTextPath._duration, 
-                       IASCursiveTextPath._finalWeight, IASCursiveTextPath._initialWeight, 
-                       IASCursiveTextPath._length, IASCursiveTextPath._pathDefinition, 
-                       IASCursiveTextPath._rampTime, IASCursiveTextPath._resolution, 
-                       IASCursiveTextView.dismissButtonImageView, IASCursiveTextView.dismissButtonLabel, 
-                       IASCursiveTextView.eventMonitor, IASCursiveTextView.textLayer, 
-                       IASCursiveTextView.textPath, IASCursiveTextView.textTransform, 
-                       IASLogDataSource._buf, IASLogDataSource._currentLogFilter, 
+                       ILCBaseConnection, ILCConnection, InstlogRemoteLogging ]
+    objc-ivars:      [ IASLogDataSource._buf, IASLogDataSource._currentLogFilter, 
                        IASLogDataSource._last_seen_offset, IASLogDataSource._lineIndex, 
                        IASLogDataSource._lineNumbers, IASLogDataSource._lnCol, IASLogDataSource._logView, 
                        IASLogDataSource._longestStrlen, IASLogDataSource._msgCol, 
@@ -75,14 +60,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           21ABD6F1-5559-381F-992D-2257BAE1EA7C
+    value:           C36C8A5D-63AA-3573-A42F-78B27846D818
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D4B7E795-2B02-36B7-9333-9125CE6908B2
+    value:           4D48FE70-9CF5-34A2-9A6E-CCF9A5FB04D3
 install-name:    '/System/Library/PrivateFrameworks/IASUtilitiesCore.framework/Versions/A/IASUtilitiesCore'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IASAuthenticationDidFinish, _IASAuthenticationErrorDomain, 
                        _IASAuthenticationWillStartWithUINotification, _IASAuthenticationWillStartWithoutUINotification, 
                        _IASChunklistChunkNotFound, _IASChunklistDefaultChunkSize, 

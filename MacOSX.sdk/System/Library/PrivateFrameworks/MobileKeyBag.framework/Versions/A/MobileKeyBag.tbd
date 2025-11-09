@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D4C1F4B1-40FE-3455-982B-EE95DE601178
+    value:           415422C4-AEC1-3F1C-B8E6-D4A9BC4F14B6
   - target:          x86_64-maccatalyst
-    value:           D4C1F4B1-40FE-3455-982B-EE95DE601178
+    value:           415422C4-AEC1-3F1C-B8E6-D4A9BC4F14B6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           669D0B5F-1AAC-3C00-B34D-BDD088BDE171
+    value:           07E4EC73-B97B-341F-9C51-61CD16E8192A
   - target:          arm64e-maccatalyst
-    value:           669D0B5F-1AAC-3C00-B34D-BDD088BDE171
+    value:           07E4EC73-B97B-341F-9C51-61CD16E8192A
 install-name:    '/System/Library/PrivateFrameworks/MobileKeyBag.framework/Versions/A/MobileKeyBag'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MKBDeviceFormattedForContentProtection, _MKBDeviceGetGracePeriod, 
                        _MKBDeviceLockAssertion, _MKBDeviceLockAssertionConsume, _MKBDeviceLockAssertionPromote, 
                        _MKBDeviceObliterateClassDKey, _MKBDeviceSetGracePeriod, _MKBDeviceSupportsContentProtection, 
@@ -38,18 +38,16 @@ exports:
                        _MKBKeyBagSetUserUUID, _MKBKeyBagUnload, _MKBKeyBagUnlock, 
                        _MKBLockDevice, _MKBLockDeviceNow, _MKBNotifyStateIsSet, _MKBNotifyStateSet, 
                        _MKBPrewarmSPS, _MKBScreenLockEnabled, _MKBSeshatDebug, _MKBSetDeviceConfigurations, 
-                       _MKBSetLogFunction, _MKBUnlockDevice, _MKBUserSessionCreate, 
-                       _MKBUserSessionGenerateVoucherToReplace, _MKBUserSessionListUserSessionIDs, 
-                       _MKBUserSessionLoadWithPasscode, _MKBUserSessionMigrateKeyBag, 
-                       _MKBUserSessionPersonaVoucherReplace, _MKBUserSessionRemove, 
-                       _MKBUserSessionUnload, _MKBUserUnlockedSinceBoot, _MKBVerifyPasswordWithContext, 
-                       _MKBVolumeBagLock, _MKBVolumeBagUnlockWithACM, _kMKBConfigBackOffDelay, 
-                       _kMKBConfigFlags, _kMKBConfigGracePeriod, _kMKBConfigMaxUnlockAttempts, 
-                       _kMKBInfoBackOff, _kMKBInfoBagState, _kMKBInfoFailedAttempts, 
-                       _kMKBInfoLockState, _kMKBInfoPermanentlyBlocked, _kMKBInfoRecoveryCountdown, 
-                       _kMKBInfoShouldWipe, _kMKBPolicyAuditToken, _kMKBPolicyBackOffDelay, 
-                       _kMKBPolicyFailedUnlockAttempts, _kMKBPolicyIndex, _kMKBPolicyMaxUnlockAttempts, 
-                       _kMKBPolicyUID, _kMKBUserSessionCachedLoginEndTimeKey, _kMKBUserSessionCachedLoginStartTimeKey, 
+                       _MKBSetLogFunction, _MKBUnlockDevice, _MKBUserSessionCreatePersonaKeyForUser, 
+                       _MKBUserSessionRemovePersonaKeyForUser, _MKBUserUnlockedSinceBoot, 
+                       _MKBVerifyPasswordWithContext, _MKBVolumeBagLock, _MKBVolumeBagUnlockWithACM, 
+                       _kMKBConfigBackOffDelay, _kMKBConfigFlags, _kMKBConfigGracePeriod, 
+                       _kMKBConfigMaxUnlockAttempts, _kMKBInfoBackOff, _kMKBInfoBagState, 
+                       _kMKBInfoFailedAttempts, _kMKBInfoLockState, _kMKBInfoPermanentlyBlocked, 
+                       _kMKBInfoRecoveryCountdown, _kMKBInfoShouldWipe, _kMKBPolicyAuditToken, 
+                       _kMKBPolicyBackOffDelay, _kMKBPolicyFailedUnlockAttempts, 
+                       _kMKBPolicyIndex, _kMKBPolicyMaxUnlockAttempts, _kMKBPolicyUID, 
+                       _kMKBUserSessionCachedLoginEndTimeKey, _kMKBUserSessionCachedLoginStartTimeKey, 
                        _kMKBUserSessionCreateTimeStampKey, _kMKBUserSessionFirstLoginEndTimeKey, 
                        _kMKBUserSessionFirstLoginStartTimeKey, _kMKBUserSessionForegroundKey, 
                        _kMKBUserSessionGroupIDKey, _kMKBUserSessionHomeDirKey, _kMKBUserSessionIDKey, 

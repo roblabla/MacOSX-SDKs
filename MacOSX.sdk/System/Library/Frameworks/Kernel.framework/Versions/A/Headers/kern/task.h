@@ -164,8 +164,13 @@ extern int task_get_no_footprint_for_debug(
 	task_t task);
 #endif /* DEVELOPMENT || DEBUG */
 
+
+#if CONFIG_ROSETTA
+extern bool task_is_translated(task_t task);
+#endif
+
 #if CONFIG_X86_64_COMPAT
-extern boolean_t task_is_translated(task_t task);
+extern bool task_is_x86_64_compat(task_t task);
 #endif
 
 __END_DECLS

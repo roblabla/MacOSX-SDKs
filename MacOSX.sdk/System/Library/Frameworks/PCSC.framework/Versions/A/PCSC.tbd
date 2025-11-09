@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DE48AA20-C352-3A0C-9DA1-883F6E56A2FC
+    value:           CE4DD9EA-1996-3CBA-A36E-886410CEBFE3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           40238A1D-06C4-3721-8168-4FD4E8A63976
+    value:           7855C520-AFEB-3C7D-BDEA-264E32988DE5
 install-name:    '/System/Library/Frameworks/PCSC.framework/Versions/A/PCSC'
-current-version: 555.100.8
+current-version: 602.40.5
 compatibility-version: 0
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DebugLogCategory, _DebugLogSetCategory, _DebugLogSetLevel, 
                        _DebugLogSetLogType, _MSCBeginTransaction, _MSCCancelEventWait, 
                        _MSCChangePIN, _MSCClearReset, _MSCComputeCrypt, _MSCCreateObject, 

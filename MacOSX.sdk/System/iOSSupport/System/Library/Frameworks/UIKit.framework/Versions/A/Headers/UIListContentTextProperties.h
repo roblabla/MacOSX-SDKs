@@ -11,7 +11,7 @@
 #import <UIKit/UIConfigurationColorTransformer.h>
 #import <UIKit/NSParagraphStyle.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIFont;
 @class UIColor;
@@ -57,13 +57,15 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 @property (nonatomic) BOOL allowsDefaultTighteningForTruncation;
 /// Whether the font is automatically updated when the content size category changes.
 @property (nonatomic) BOOL adjustsFontForContentSizeCategory;
+/// Whether the full text will be shown when a pointer hovers over truncated text.
+@property (nonatomic) BOOL showsExpansionTextWhenTruncated API_AVAILABLE(macCatalyst(16.0));
 
 /// A transform that is applied to the text before it is displayed.
 @property (nonatomic) UIListContentTextTransform transform;
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIListContentTextProperties.h>

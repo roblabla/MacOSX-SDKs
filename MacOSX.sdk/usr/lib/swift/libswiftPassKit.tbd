@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           217EE5CC-8054-349E-A156-AD0A8613475A
+    value:           86814A90-26F3-318F-B2BF-AB48E7CA15D7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           51134BD4-068D-308D-8D78-A7C2F6F8A5AE
+    value:           75A44AE1-77FC-393E-97DA-2C1AAAB664F5
 install-name:    '/usr/lib/swift/libswiftPassKit.dylib'
-current-version: 1504.5.22
+current-version: 1505.2.11
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$sSo16PKPaymentRequestC7PassKitE29paymentCouponCodeExpiredError20localizedDescriptions0I0_pSSSg_tFZ', 
                        '_$sSo16PKPaymentRequestC7PassKitE29paymentCouponCodeInvalidError20localizedDescriptions0I0_pSSSg_tFZ', 
                        '_$sSo24PKStoredValuePassBalanceC0C3KitE2eeoiySbAB_ABtFZ', 

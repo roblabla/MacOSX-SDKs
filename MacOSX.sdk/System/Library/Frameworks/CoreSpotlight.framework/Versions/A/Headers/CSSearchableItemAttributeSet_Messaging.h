@@ -17,6 +17,7 @@ CORESPOTLIGHT_EXPORT NSString * const CSMailboxJunk NS_AVAILABLE(10_11, 9_0);
 CORESPOTLIGHT_EXPORT NSString * const CSMailboxTrash NS_AVAILABLE(10_11, 9_0);
 CORESPOTLIGHT_EXPORT NSString * const CSMailboxArchive NS_AVAILABLE(10_11, 9_0);
 
+CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet (CSMessaging)
 
 //Unique identifier for the account the item is associated with, if any

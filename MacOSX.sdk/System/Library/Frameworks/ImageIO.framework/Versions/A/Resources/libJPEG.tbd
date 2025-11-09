@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E07842DA-BF49-3FF8-81D6-0E4F9FF6EAD1
+    value:           81F3CB02-91AD-3A6A-B113-9E0DEE38C5D5
   - target:          x86_64-maccatalyst
-    value:           E07842DA-BF49-3FF8-81D6-0E4F9FF6EAD1
+    value:           81F3CB02-91AD-3A6A-B113-9E0DEE38C5D5
   - target:          x86_64h-macos
-    value:           9FE2000F-4D14-31DB-B849-B4A740EA83A6
+    value:           EB4B0E0A-1200-3989-BEA5-6D18EECA29C3
   - target:          x86_64h-maccatalyst
-    value:           9FE2000F-4D14-31DB-B849-B4A740EA83A6
+    value:           EB4B0E0A-1200-3989-BEA5-6D18EECA29C3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5DD1E066-EADC-32C6-9044-A341788B0964
+    value:           B5BCEF2A-D411-3790-87D6-956273A4EE60
   - target:          arm64e-maccatalyst
-    value:           5DD1E066-EADC-32C6-9044-A341788B0964
+    value:           B5BCEF2A-D411-3790-87D6-956273A4EE60
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, x86_64h-maccatalyst, x86_64h-macos, 
-                       arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __cg_jcopy_block_row, __cg_jcopy_sample_rows, __cg_jinit_1pass_quantizer, 
                        __cg_jinit_2pass_quantizer, __cg_jinit_c_coef_controller, 
                        __cg_jinit_c_main_controller, __cg_jinit_c_master_control, 
@@ -53,9 +53,9 @@ exports:
                        __cg_jpeg_set_linear_quality, __cg_jpeg_set_marker_processor, 
                        __cg_jpeg_set_quality, __cg_jpeg_simple_progression, __cg_jpeg_start_compress, 
                        __cg_jpeg_start_decompress, __cg_jpeg_start_output, __cg_jpeg_std_error, 
-                       __cg_jpeg_std_message_table, __cg_jpeg_stdio_dest, __cg_jpeg_stdio_src, 
-                       __cg_jpeg_suppress_tables, __cg_jpeg_write_coefficients, __cg_jpeg_write_m_byte, 
-                       __cg_jpeg_write_m_header, __cg_jpeg_write_marker, __cg_jpeg_write_raw_data, 
-                       __cg_jpeg_write_scanlines, __cg_jpeg_write_tables, __cg_jround_up, 
-                       __cg_switch_color_deconverter ]
+                       __cg_jpeg_std_huff_table, __cg_jpeg_std_message_table, __cg_jpeg_stdio_dest, 
+                       __cg_jpeg_stdio_src, __cg_jpeg_suppress_tables, __cg_jpeg_write_coefficients, 
+                       __cg_jpeg_write_m_byte, __cg_jpeg_write_m_header, __cg_jpeg_write_marker, 
+                       __cg_jpeg_write_raw_data, __cg_jpeg_write_scanlines, __cg_jpeg_write_tables, 
+                       __cg_jround_up, __cg_switch_color_deconverter ]
 ...

@@ -4,11 +4,17 @@
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+#import <CoreFoundation/CFCGTypes.h>
+
+#if TARGET_OS_OSX
+#ifndef __swift__
 #import <CoreGraphics/CGAffineTransform.h>
+#endif
+#endif
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef struct {
+typedef struct NS_SWIFT_SENDABLE {
     CGFloat m11, m12, m21, m22;
     CGFloat tX, tY;
 } NSAffineTransformStruct;
@@ -49,4 +55,4 @@ typedef struct {
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

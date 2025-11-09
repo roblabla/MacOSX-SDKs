@@ -18,7 +18,7 @@
 @class NSTextAttachmentViewProvider;
 @protocol NSTextLocation;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // NSTextLayoutFragment represents the layout fragment typically corresponding to a rendering surface such as CALayer or UIView/NSView subclasses.
 
@@ -100,7 +100,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 // Returns the frame in the text layout fragment coordinate system for the attachment at location. It returns CGRectZero if location is not with any attachment or the state is not NSTextLayoutFragmentStateLayoutAvailable.
 - (CGRect)frameForTextAttachmentAtLocation:(id <NSTextLocation>)location;
 @end
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 #else
 #import <UIFoundation/NSTextLayoutFragment.h>
 #endif

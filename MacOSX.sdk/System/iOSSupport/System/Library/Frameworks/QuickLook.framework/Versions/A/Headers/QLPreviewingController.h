@@ -1,3 +1,4 @@
+#if (defined(USE_PUBLIC_QUICKLOOKUICORE_HEADERS) && USE_PUBLIC_QUICKLOOKUICORE_HEADERS) || !__has_include(<QuickLookUICore/QLPreviewingController.h>)
 //
 //  QLPreviewingController.h
 //  Mobile Quick Look
@@ -67,3 +68,7 @@ QL_EXPORT @protocol QLPreviewingController <NSObject>
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <QuickLookUICore/QLPreviewingController.h>
+#endif

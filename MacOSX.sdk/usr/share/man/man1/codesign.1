@@ -94,15 +94,63 @@ writable.
 When verifying, designates a file containing a detached signature to be used
 for verification. Any embedded signature in the code is ignored.
 .It Fl -deep
-When signing a bundle, specifies that nested code content such as helpers, frameworks,
-and plug-ins, should be recursively signed in turn. Beware that all signing options you
-specify will apply, in turn, to such nested content.
+\fB(DEPRECATED for signing as of macOS 13.0)\fR When signing a bundle, specifies that nested code content such as helpers, frameworks,
+and plug-ins, should be recursively signed in turn.
 .br
-When verifying a bundle, specifies that any nested code content will be recursively
+\fBBeware:\fR
+.Bl -bullet -nested
+.It
+All signing options will be applied, in turn, to all nested content. This is almost never what you want.
+.It
+.Ar Nested code content
+is a special term that only applies to macOS style bundles with a Contents folder. Only bare Mach-Os and well structured bundles qualify as
+.Ar nested code content.
+Non-bundle directories in
+.Ar nested code content
+locations will cause an error when signing. The
+.Nm
+tool will only discover
+.Ar nested code content
+in the following directories:
+.Bl -bullet -nested
+.It
+Contents
+.It
+Contents/Frameworks
+.It
+Contents/SharedFrameworks
+.It
+Contents/PlugIns
+.It
+Contents/Plug-ins
+.It
+Contents/XPCServices
+.It
+Contents/Helpers
+.It
+Contents/MacOS
+.It
+Contents/Library/Automator
+.It
+Contents/Library/Spotlight
+.It
+Contents/Library/LoginItems
+.El
+.It
+If any code (Mach-Os, bundles) are located outside the above listed locations they will not be signed by the
+.Fl -deep
+option
+.It
+Using the
+.Fl -deep
+option on an iOS style bundle without a Contents folder will not cause an error but will only sign the main binary of the bundle.
+.El
+.br
+When verifying a bundle, this option specifies that any nested code content will be recursively
 verified as to its full content. By default, verification of nested content is limited
 to a shallow investigation that may not detect changes to the nested code.
 .br
-When displaying a signature, specifies that a list of directly nested code should be
+When displaying a signature, this option specifies that a list of directly nested code should be
 written to the display output. This lists only code directly nested within the subject;
 anything nested indirectly will require recursive application of the
 .Nm

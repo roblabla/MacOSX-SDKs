@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           56D96C60-EDCC-33D6-8489-6685E2692E2F
+    value:           6ED32C80-7C4C-3901-BEDF-AB3F4D2D5C2A
   - target:          x86_64-maccatalyst
-    value:           56D96C60-EDCC-33D6-8489-6685E2692E2F
+    value:           6ED32C80-7C4C-3901-BEDF-AB3F4D2D5C2A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           17BA2D76-B85D-34A8-8699-AB8488CC4B63
+    value:           5E03A48D-7CDA-3451-973C-5B691361ADED
   - target:          arm64e-maccatalyst
-    value:           17BA2D76-B85D-34A8-8699-AB8488CC4B63
+    value:           5E03A48D-7CDA-3451-973C-5B691361ADED
 install-name:    '/System/Library/PrivateFrameworks/CDDataAccessExpress.framework/Versions/A/CDDataAccessExpress'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ASClientAccountDumpStatusNotification, _ASPolicyErrorCodeKey, 
                        _ASPolicyErrorKey, _ASPolicyKey, _ASPolicyKeyChangedNotification, 
                        _BehaviorOptionsAppID, _BehaviorOptionsKey, _DACPLoggingAddCustomLogConfiguration, 

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1415F997-D0E7-3C39-AA9D-B6A99F9AD93A
+    value:           40F9909C-A302-314C-B701-EF4B51688484
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8A913CD3-606A-3CF8-9279-974F68E0CECA
+    value:           5C994E46-93C3-3806-BF23-F3BAE37013A4
 install-name:    '/System/Library/PrivateFrameworks/AssetViewer.framework/Versions/A/AssetViewer'
-current-version: 284.29
+current-version: 284.48
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ASVConnectionInterrupted, _ASVInitLogging, _ASVInlinePreviewErrorDomain, 
                        _ASVInlinePreviewRuntimeCurrentTimeKey, _ASVInlinePreviewRuntimeDurationKey, 
                        _ASVInlinePreviewRuntimeHasAudioKey, _ASVInlinePreviewRuntimeIsPlayingKey, 

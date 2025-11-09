@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           48BD6DAC-8E61-3290-B848-B7B72BAD5CBC
+    value:           496B0B4F-87F8-3B72-85EC-A65F713CF3F8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F197E283-BE95-33EF-82AC-66C3F19EF346
+    value:           3D7E78F3-292D-3DC5-AC47-EE4FA8B1B012
 install-name:    '/System/Library/Frameworks/AGL.framework/Versions/A/AGL'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _aglChoosePixelFormat, _aglChoosePixelFormatCFM, _aglConfigure, 
                        _aglConfigureCFM, _aglCopyContext, _aglCreateContext, _aglCreateContextCFM, 
                        _aglCreatePBuffer, _aglCreatePixelFormat, _aglCreatePixelFormatCFM, 

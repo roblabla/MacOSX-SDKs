@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see `LPLinkMetadata`
  */
-LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos)
+LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), watchos(9.0)) API_UNAVAILABLE(tvos)
 @interface LPMetadataProvider : NSObject
 
 /**

@@ -25,7 +25,7 @@
  @method image
  @abstract Returns an image.
  */
-- (CGImageRef)image;
+@property (NS_NONATOMIC_IOSONLY, readonly) CGImageRef image;
 
 /*! 
  @method setImage:imageProperties:
@@ -46,25 +46,25 @@
  @method imageProperties
  @abstract Returns a dictionary of the image properties associated with the image in the image edit panel.
  */
-- (NSDictionary *)imageProperties;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSDictionary *imageProperties;
 
 /*! 
  @method hasAdjustMode
  @abstract Show the adjust view tab
  */
-- (BOOL)hasAdjustMode;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL hasAdjustMode;
 
 /*! 
  @method hasEffectsMode
  @abstract Show the effects view tab
  */
-- (BOOL)hasEffectsMode;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL hasEffectsMode;
 
 /*! 
  @method hasDetailsMode
  @abstract Show the details view tab
  */
-- (BOOL)hasDetailsMode;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL hasDetailsMode;
 @end
 
 

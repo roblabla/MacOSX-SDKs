@@ -1,15 +1,20 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-ios15.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name UIKit
-// swift-module-flags-ignorable: -user-module-version 5504
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-ios16.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name UIKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 6109.1.408
 @_exported import Accessibility
-import CoreGraphics
+@_exported import CoreGraphics
 import DataDetection
 import Dispatch
 import Foundation
 import Swift
 @_exported import UIKit
 @_exported import _Concurrency
+import _StringProcessing
+extension UIKit.UIApplication {
+  @available(iOS 16.0, *)
+  @_Concurrency.MainActor(unsafe) public static let openNotificationSettingsURLString: Swift.String
+}
 @available(swift 5.1)
 @available(iOS 15, tvOS 15, *)
 public protocol UIViewInvalidating {
@@ -105,6 +110,30 @@ extension UIKit.UIView {
     }
   }
 }
+@available(*, unavailable)
+extension UIKit.UIView.Invalidating : Swift.Sendable {
+}
+@available(*, unavailable)
+extension UIKit.UIView.Invalidations : Swift.Sendable {
+}
+@available(*, unavailable)
+extension UIKit.UIView.Invalidations.Display : Swift.Sendable {
+}
+@available(*, unavailable)
+extension UIKit.UIView.Invalidations.Layout : Swift.Sendable {
+}
+@available(*, unavailable)
+extension UIKit.UIView.Invalidations.Constraints : Swift.Sendable {
+}
+@available(*, unavailable)
+extension UIKit.UIView.Invalidations.IntrinsicContentSize : Swift.Sendable {
+}
+@available(*, unavailable)
+extension UIKit.UIView.Invalidations.Configuration : Swift.Sendable {
+}
+@available(*, unavailable)
+extension UIKit.UIView.Invalidations.Tuple : Swift.Sendable {
+}
 extension UIKit.UIPasteboard {
   @available(iOS 15.0, *)
   public struct DetectedValues {
@@ -148,48 +177,40 @@ extension UIKit.UIPasteboard {
 }
 extension UIKit.UIPasteboard {
   @available(iOS, introduced: 14.0, deprecated: 15.0)
-  open func detectPatterns(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, completionHandler: @escaping (Swift.Result<Swift.Set<UIKit.UIPasteboard.DetectionPattern>, Swift.Error>) -> ())
+  public func detectPatterns(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, completionHandler: @escaping (Swift.Result<Swift.Set<UIKit.UIPasteboard.DetectionPattern>, Swift.Error>) -> ())
   @available(iOS 15.0, *)
-  open func detectPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, completionHandler: @escaping (Swift.Result<Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, Swift.Error>) -> ())
-  
+  public func detectPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, completionHandler: @escaping (Swift.Result<Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, Swift.Error>) -> ())
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, *)
-  open func detectedPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>) async throws -> Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>
+  public func detectedPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>) async throws -> Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>
   #endif
-
   @available(iOS, introduced: 14.0, deprecated: 15.0)
-  open func detectPatterns(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[Swift.Set<UIKit.UIPasteboard.DetectionPattern>], Swift.Error>) -> ())
+  public func detectPatterns(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[Swift.Set<UIKit.UIPasteboard.DetectionPattern>], Swift.Error>) -> ())
   @available(iOS 15.0, *)
-  open func detectPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>], Swift.Error>) -> ())
-  
+  public func detectPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>], Swift.Error>) -> ())
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, *)
-  open func detectedPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?) async throws -> [Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>]
+  public func detectedPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?) async throws -> [Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>]
   #endif
-
   @available(iOS, introduced: 14.0, deprecated: 15.0)
-  open func detectValues(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, completionHandler: @escaping (Swift.Result<[UIKit.UIPasteboard.DetectionPattern : Any], Swift.Error>) -> ())
+  public func detectValues(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, completionHandler: @escaping (Swift.Result<[UIKit.UIPasteboard.DetectionPattern : Any], Swift.Error>) -> ())
   @available(iOS 15.0, *)
-  open func detectValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, completionHandler: @escaping (Swift.Result<UIKit.UIPasteboard.DetectedValues, Swift.Error>) -> ())
-  
+  public func detectValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, completionHandler: @escaping (Swift.Result<UIKit.UIPasteboard.DetectedValues, Swift.Error>) -> ())
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, *)
-  open func detectedValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>) async throws -> UIKit.UIPasteboard.DetectedValues
+  public func detectedValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>) async throws -> UIKit.UIPasteboard.DetectedValues
   #endif
-
   @available(iOS, introduced: 14.0, deprecated: 15.0)
-  open func detectValues(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[[UIKit.UIPasteboard.DetectionPattern : Any]], Swift.Error>) -> ())
+  public func detectValues(for patterns: Swift.Set<UIKit.UIPasteboard.DetectionPattern>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[[UIKit.UIPasteboard.DetectionPattern : Any]], Swift.Error>) -> ())
   @available(iOS 15.0, *)
-  open func detectValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[UIKit.UIPasteboard.DetectedValues], Swift.Error>) -> ())
-  
+  public func detectValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[UIKit.UIPasteboard.DetectedValues], Swift.Error>) -> ())
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, *)
-  open func detectedValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?) async throws -> [UIKit.UIPasteboard.DetectedValues]
+  public func detectedValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIKit.UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?) async throws -> [UIKit.UIPasteboard.DetectedValues]
   #endif
-
 }
 @available(iOS 14.0, tvOS 14.0, *)
-public struct NSDiffableDataSourceSectionSnapshot<ItemIdentifierType> where ItemIdentifierType : Swift.Hashable {
+@preconcurrency public struct NSDiffableDataSourceSectionSnapshot<ItemIdentifierType> : @unchecked Swift.Sendable where ItemIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Sendable {
   public init()
   public init(_ snapshot: UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>)
   public mutating func append(_ items: [ItemIdentifierType], to parent: ItemIdentifierType? = nil)
@@ -223,12 +244,10 @@ public struct NSDiffableDataSourceSectionSnapshot<ItemIdentifierType> where Item
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.UICollectionViewDiffableDataSource {
   nonisolated public func apply(_ snapshot: UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>, to section: SectionIdentifierType, animatingDifferences: Swift.Bool = true, completion: (() -> Swift.Void)? = nil)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, tvOS 15.0, *)
   nonisolated public func apply(_ snapshot: UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>, to section: SectionIdentifierType, animatingDifferences: Swift.Bool = true) async
   #endif
-
   nonisolated public func snapshot(for section: SectionIdentifierType) -> UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>
 }
 @available(iOS 14.0, tvOS 14.0, *)
@@ -274,6 +293,8 @@ extension UIKit.UITableViewHeaderFooterView {
 }
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.UIListContentView : UIKit.UIContentView {
+  @available(iOS 16.0, tvOS 16.0, *)
+  @_Concurrency.MainActor(unsafe) public func supports(_ configuration: UIKit.UIContentConfiguration) -> Swift.Bool
   @available(iOS 14.0, tvOS 14.0, *)
   @_Concurrency.MainActor(unsafe) public var configuration: UIKit.UIContentConfiguration {
     get
@@ -285,6 +306,12 @@ extension UIKit.UIListContentView : UIKit.UIContentView {
 @available(iOS 14.0, tvOS 14.0, *)
 public protocol UIContentView : ObjectiveC.NSObjectProtocol {
   var configuration: UIKit.UIContentConfiguration { get set }
+  @available(iOS 16.0, tvOS 16.0, *)
+  func supports(_ configuration: UIKit.UIContentConfiguration) -> Swift.Bool
+}
+@available(iOS 16.0, tvOS 16.0, *)
+extension UIKit.UIContentView {
+  public func supports(_ configuration: UIKit.UIContentConfiguration) -> Swift.Bool
 }
 @available(iOS 14.0, tvOS 14.0, *)
 public protocol UIContentConfiguration {
@@ -307,15 +334,15 @@ public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.H
       set(tintColorTransformer)
     }
     public func resolvedTintColor(for tintColor: UIKit.UIColor) -> UIKit.UIColor
-    public var cornerRadius: CoreGraphics.CGFloat {
+    public var cornerRadius: CoreFoundation.CGFloat {
       get
       set(cornerRadius)
     }
-    public var maximumSize: CoreGraphics.CGSize {
+    public var maximumSize: CoreFoundation.CGSize {
       get
       set(maximumSize)
     }
-    public var reservedLayoutSize: CoreGraphics.CGSize {
+    public var reservedLayoutSize: CoreFoundation.CGSize {
       get
       set(reservedLayoutSize)
     }
@@ -323,7 +350,7 @@ public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.H
       get
       set(accessibilityIgnoresInvertColors)
     }
-    public static let standardDimension: CoreGraphics.CGFloat
+    public static let standardDimension: CoreFoundation.CGFloat
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: UIKit.UIListContentConfiguration.ImageProperties, b: UIKit.UIListContentConfiguration.ImageProperties) -> Swift.Bool
     public var hashValue: Swift.Int {
@@ -381,7 +408,7 @@ public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.H
       get
       set(adjustsFontSizeToFitWidth)
     }
-    public var minimumScaleFactor: CoreGraphics.CGFloat {
+    public var minimumScaleFactor: CoreFoundation.CGFloat {
       get
       set(minimumScaleFactor)
     }
@@ -392,6 +419,11 @@ public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.H
     public var adjustsFontForContentSizeCategory: Swift.Bool {
       get
       set(adjustsFontForContentSizeCategory)
+    }
+    @available(macCatalyst 16.0, *)
+    public var showsExpansionTextWhenTruncated: Swift.Bool {
+      get
+      set(showsExpansionTextWhenTruncated)
     }
     public var transform: UIKit.UIListContentConfiguration.TextProperties.TextTransform {
       get
@@ -465,15 +497,15 @@ public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.H
     get
     set(prefersSideBySideTextAndSecondaryText)
   }
-  public var imageToTextPadding: CoreGraphics.CGFloat {
+  public var imageToTextPadding: CoreFoundation.CGFloat {
     get
     set(imageToTextPadding)
   }
-  public var textToSecondaryTextHorizontalPadding: CoreGraphics.CGFloat {
+  public var textToSecondaryTextHorizontalPadding: CoreFoundation.CGFloat {
     get
     set(textToSecondaryTextHorizontalPadding)
   }
-  public var textToSecondaryTextVerticalPadding: CoreGraphics.CGFloat {
+  public var textToSecondaryTextVerticalPadding: CoreFoundation.CGFloat {
     get
     set(textToSecondaryTextVerticalPadding)
   }
@@ -519,17 +551,29 @@ extension UIKit.UIListContentConfiguration : Swift.CustomStringConvertible, Swif
     get
   }
 }
+@available(iOS 16.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension UIKit.UIEditMenuConfiguration {
+  @_Concurrency.MainActor(unsafe) public var identifier: Swift.AnyHashable {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) convenience public init(identifier: Swift.AnyHashable?, sourcePoint: CoreFoundation.CGPoint)
+}
 @available(iOS 13.4, *)
 public enum UIPointerShape {
   case path(_: UIKit.UIBezierPath)
-  case roundedRect(_: CoreGraphics.CGRect, radius: CoreGraphics.CGFloat = UIPointerShape.defaultCornerRadius)
-  case verticalBeam(length: CoreGraphics.CGFloat)
-  case horizontalBeam(length: CoreGraphics.CGFloat)
-  public static let defaultCornerRadius: CoreGraphics.CGFloat
+  case roundedRect(_: CoreFoundation.CGRect, radius: CoreFoundation.CGFloat = UIPointerShape.defaultCornerRadius)
+  case verticalBeam(length: CoreFoundation.CGFloat)
+  case horizontalBeam(length: CoreFoundation.CGFloat)
+  public static let defaultCornerRadius: CoreFoundation.CGFloat
+}
+@available(*, unavailable)
+extension UIKit.UIPointerShape : Swift.Sendable {
 }
 @available(iOS 13.4, *)
-public enum UIPointerEffect {
-  public enum TintMode {
+public enum UIPointerEffect : Swift.Sendable {
+  public enum TintMode : Swift.Sendable {
     case none, overlay, underlay
     public static func == (a: UIKit.UIPointerEffect.TintMode, b: UIKit.UIPointerEffect.TintMode) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
@@ -547,11 +591,11 @@ public enum UIPointerEffect {
 }
 @available(iOS 15.0, *)
 extension UIKit.UIPointerAccessory {
-  public struct Position {
-    public static let defaultOffset: CoreGraphics.CGFloat
-    public var offset: CoreGraphics.CGFloat
-    public var angle: CoreGraphics.CGFloat
-    public init(offset: CoreGraphics.CGFloat = Position.defaultOffset, angle: CoreGraphics.CGFloat = 0)
+  public struct Position : Swift.Sendable {
+    public static let defaultOffset: CoreFoundation.CGFloat
+    public var offset: CoreFoundation.CGFloat
+    public var angle: CoreFoundation.CGFloat
+    public init(offset: CoreFoundation.CGFloat = Position.defaultOffset, angle: CoreFoundation.CGFloat = 0)
     public static var top: UIKit.UIPointerAccessory.Position {
       get
     }
@@ -590,7 +634,7 @@ extension UIKit.UIPointerStyle {
 }
 @available(iOS 13.4, *)
 extension UIKit.UIPointerRegion {
-  @_Concurrency.MainActor(unsafe) convenience public init(rect: CoreGraphics.CGRect, identifier: Swift.AnyHashable? = nil)
+  @_Concurrency.MainActor(unsafe) convenience public init(rect: CoreFoundation.CGRect, identifier: Swift.AnyHashable? = nil)
   @_Concurrency.MainActor(unsafe) public var identifier: Swift.AnyHashable? {
     get
   }
@@ -621,7 +665,7 @@ extension UIKit.UIPointerShape : Swift._ObjectiveCBridgeable {
 }
 @available(iOS 15.0, *)
 extension UIKit.UIBandSelectionInteraction {
-  @_Concurrency.MainActor(unsafe) public var selectionRect: CoreGraphics.CGRect? {
+  @_Concurrency.MainActor(unsafe) public var selectionRect: CoreFoundation.CGRect? {
     get
   }
 }
@@ -657,6 +701,9 @@ extension Foundation.AttributeScopes {
     public typealias EncodingConfiguration = Foundation.AttributeScopeCodableConfiguration
   }
 }
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes : Swift.Sendable {
+}
 @available(iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeDynamicLookup {
   @_disfavoredOverload public subscript<T>(dynamicMember keyPath: Swift.KeyPath<Foundation.AttributeScopes.UIKitAttributes, T>) -> T where T : Foundation.AttributedStringKey {
@@ -689,11 +736,11 @@ extension Foundation.AttributeScopes.UIKitAttributes {
     public static let name: Swift.String
   }
   @frozen public enum KernAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreGraphics.CGFloat
+    public typealias Value = CoreFoundation.CGFloat
     public static let name: Swift.String
   }
   @frozen public enum TrackingAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreGraphics.CGFloat
+    public typealias Value = CoreFoundation.CGFloat
     public static let name: Swift.String
   }
   @frozen public enum StrikethroughStyleAttribute : Foundation.CodableAttributedStringKey, Foundation.ObjectiveCConvertibleAttributedStringKey {
@@ -715,7 +762,7 @@ extension Foundation.AttributeScopes.UIKitAttributes {
     public static let name: Swift.String
   }
   @frozen public enum StrokeWidthAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreGraphics.CGFloat
+    public typealias Value = CoreFoundation.CGFloat
     public static let name: Swift.String
   }
   @frozen public enum ShadowAttribute : Foundation.CodableAttributedStringKey {
@@ -734,7 +781,7 @@ extension Foundation.AttributeScopes.UIKitAttributes {
     public static let name: Swift.String
   }
   @frozen public enum BaselineOffsetAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreGraphics.CGFloat
+    public typealias Value = CoreFoundation.CGFloat
     public static let name: Swift.String
   }
   @frozen public enum UnderlineColorAttribute : Foundation.CodableAttributedStringKey {
@@ -746,35 +793,143 @@ extension Foundation.AttributeScopes.UIKitAttributes {
     public static let name: Swift.String
   }
   @frozen public enum ObliquenessAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreGraphics.CGFloat
+    public typealias Value = CoreFoundation.CGFloat
     public static let name: Swift.String
   }
   @frozen public enum ExpansionAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreGraphics.CGFloat
+    public typealias Value = CoreFoundation.CGFloat
     public static let name: Swift.String
   }
 }
-@available(iOS 15.0, *)
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.FontAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.ParagraphStyleAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.ForegroundColorAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.BackgroundColorAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.LigatureAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.KernAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.TrackingAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.StrikethroughStyleAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.UnderlineStyleAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.StrokeColorAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.StrokeWidthAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.ShadowAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.TextEffectAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.AttachmentAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.BaselineOffsetAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.UnderlineColorAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.StrikethroughColorAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.ObliquenessAttribute : Swift.Sendable {
+}
+@available(*, unavailable)
+extension Foundation.AttributeScopes.UIKitAttributes.ExpansionAttribute : Swift.Sendable {
+}
+@available(iOS 16.0, *)
+public struct UITextSearchAggregator<DocumentIdentifier> where DocumentIdentifier : Swift.Hashable {
+  public var allFoundRanges: [UIKit.UITextRange] {
+    get
+  }
+  public func foundRange(_ range: UIKit.UITextRange, searchString: Swift.String, document: DocumentIdentifier)
+  public func invalidateFoundRange(_ range: UIKit.UITextRange, document: DocumentIdentifier)
+  public func invalidate()
+  public func finishedSearching()
+}
+@available(iOS 16.0, *)
+public protocol UITextSearching : ObjectiveC.NSObjectProtocol {
+  associatedtype DocumentIdentifier : Swift.Hashable = Swift.AnyHashable?
+  var selectedTextRange: UIKit.UITextRange? { get }
+  func compare(_ foundRange: UIKit.UITextRange, toRange: UIKit.UITextRange, document: Self.DocumentIdentifier?) -> Foundation.ComparisonResult
+  func performTextSearch(queryString: Swift.String, options: UIKit.UITextSearchOptions, resultAggregator: UIKit.UITextSearchAggregator<Self.DocumentIdentifier>)
+  func decorate(foundTextRange: UIKit.UITextRange, document: Self.DocumentIdentifier?, usingStyle: UIKit.UITextSearchFoundTextStyle)
+  func clearAllDecoratedFoundText()
+  var supportsTextReplacement: Swift.Bool { get }
+  func shouldReplace(foundTextRange: UIKit.UITextRange, document: Self.DocumentIdentifier?, withText: Swift.String) -> Swift.Bool
+  func replace(foundTextRange: UIKit.UITextRange, document: Self.DocumentIdentifier?, withText: Swift.String)
+  func replaceAll(queryString: Swift.String, options: UIKit.UITextSearchOptions, withText: Swift.String)
+  func willHighlight(foundTextRange: UIKit.UITextRange, document: Self.DocumentIdentifier?)
+  func scrollRangeToVisible(_ range: UIKit.UITextRange, inDocument: Self.DocumentIdentifier?)
+  var selectedTextSearchDocument: Self.DocumentIdentifier? { get }
+  func compare(document: Self.DocumentIdentifier, toDocument: Self.DocumentIdentifier) -> Foundation.ComparisonResult
+}
+extension UIKit.UITextSearching {
+  public var supportsTextReplacement: Swift.Bool {
+    get
+  }
+  public func shouldReplace(foundTextRange: UIKit.UITextRange, document: Self.DocumentIdentifier?, withText: Swift.String) -> Swift.Bool
+  public func replace(foundTextRange: UIKit.UITextRange, document: Self.DocumentIdentifier?, withText: Swift.String)
+  public func replaceAll(queryString: Swift.String, options: UIKit.UITextSearchOptions, withText: Swift.String)
+  public func willHighlight(foundTextRange: UIKit.UITextRange, document: Self.DocumentIdentifier?)
+  public func scrollRangeToVisible(_ range: UIKit.UITextRange, inDocument: Self.DocumentIdentifier?)
+  public var selectedTextSearchDocument: Self.DocumentIdentifier? {
+    get
+  }
+  public func compare(document: Self.DocumentIdentifier, toDocument: Self.DocumentIdentifier) -> Foundation.ComparisonResult
+}
+extension UIKit.UITextSearchingFindSession {
+  @_Concurrency.MainActor(unsafe) convenience public init<SearchableObject>(searchableObject: SearchableObject) where SearchableObject : UIKit.UITextSearching
+}
+@available(tvOS, unavailable)
+extension UIKit.UISheetPresentationController.Detent {
+  @available(iOS 16.0, *)
+  @_Concurrency.MainActor(unsafe) public static func custom(identifier: UIKit.UISheetPresentationController.Detent.Identifier? = nil, resolver: @escaping (_ context: UIKit.UISheetPresentationControllerDetentResolutionContext) -> CoreFoundation.CGFloat?) -> UIKit.UISheetPresentationController.Detent
+  @available(iOS 16.0, *)
+  @_Concurrency.MainActor(unsafe) public func resolvedValue(in context: UIKit.UISheetPresentationControllerDetentResolutionContext) -> CoreFoundation.CGFloat?
+}
+@available(tvOS, unavailable)
 extension UIKit.UISheetPresentationController {
   @available(iOS 15.0, *)
-  @_Concurrency.MainActor(unsafe) public var preferredCornerRadius: CoreGraphics.CGFloat? {
+  @_Concurrency.MainActor(unsafe) public var preferredCornerRadius: CoreFoundation.CGFloat? {
     get
     set
   }
 }
-extension UIKit.UIBarButtonItem {
-  @available(iOS 14.0, *)
-  @_Concurrency.MainActor(unsafe) convenience public init(systemItem: UIKit.UIBarButtonItem.SystemItem, primaryAction: UIKit.UIAction? = nil, menu: UIKit.UIMenu? = nil)
-  @available(iOS 14.0, *)
-  @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String? = nil, image: UIKit.UIImage? = nil, primaryAction: UIKit.UIAction? = nil, menu: UIKit.UIMenu? = nil)
-}
 extension UIKit.UIControl {
-  @available(iOS 14.0, *)
+  @available(iOS 14.0, tvOS 14.0, *)
   @_Concurrency.MainActor(unsafe) public func enumerateEventHandlers(_ iterator: (UIKit.UIAction?, (Any?, ObjectiveC.Selector)?, UIKit.UIControl.Event, inout Swift.Bool) -> Swift.Void)
 }
 extension UIKit.UIButton {
-  @available(iOS 14.0, *)
+  @available(iOS 14.0, tvOS 14.0, *)
   @_Concurrency.MainActor(unsafe) convenience public init(type buttonType: UIKit.UIButton.ButtonType = .system, primaryAction: UIKit.UIAction?)
+}
+@available(iOS 16.0, *)
+@available(tvOS, unavailable)
+extension UIKit.UICalendarView.Decoration {
+  @_Concurrency.MainActor(unsafe) public static func `default`(color: UIKit.UIColor? = nil, size: UIKit.UICalendarView.DecorationSize = .medium) -> UIKit.UICalendarView.Decoration
+  @_Concurrency.MainActor(unsafe) public static func image(_ image: UIKit.UIImage?, color: UIKit.UIColor? = nil, size: UIKit.UICalendarView.DecorationSize = .medium) -> UIKit.UICalendarView.Decoration
 }
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.UICollectionViewCell {
@@ -783,6 +938,8 @@ extension UIKit.UICollectionViewCell {
     get
     set(backgroundConfiguration)
   }
+  @available(iOS 16.0, tvOS 16.0, *)
+  @_Concurrency.MainActor(unsafe) public func defaultBackgroundConfiguration() -> UIKit.UIBackgroundConfiguration
 }
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.UITableViewCell {
@@ -791,6 +948,8 @@ extension UIKit.UITableViewCell {
     get
     set(backgroundConfiguration)
   }
+  @available(iOS 16.0, tvOS 16.0, *)
+  @_Concurrency.MainActor(unsafe) public func defaultBackgroundConfiguration() -> UIKit.UIBackgroundConfiguration
 }
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.UITableViewHeaderFooterView {
@@ -799,6 +958,8 @@ extension UIKit.UITableViewHeaderFooterView {
     get
     set(backgroundConfiguration)
   }
+  @available(iOS 16.0, tvOS 16.0, *)
+  @_Concurrency.MainActor(unsafe) public func defaultBackgroundConfiguration() -> UIKit.UIBackgroundConfiguration
 }
 @available(iOS 14.0, tvOS 14.0, *)
 public struct UIConfigurationColorTransformer {
@@ -824,7 +985,7 @@ public struct UIBackgroundConfiguration : Swift.Hashable {
     get
     set(view)
   }
-  public var cornerRadius: CoreGraphics.CGFloat {
+  public var cornerRadius: CoreFoundation.CGFloat {
     get
     set(cornerRadius)
   }
@@ -868,11 +1029,11 @@ public struct UIBackgroundConfiguration : Swift.Hashable {
     set(strokeColorTransformer)
   }
   public func resolvedStrokeColor(for tintColor: UIKit.UIColor) -> UIKit.UIColor
-  public var strokeWidth: CoreGraphics.CGFloat {
+  public var strokeWidth: CoreFoundation.CGFloat {
     get
     set(strokeWidth)
   }
-  public var strokeOutset: CoreGraphics.CGFloat {
+  public var strokeOutset: CoreFoundation.CGFloat {
     get
     set(strokeOutset)
   }
@@ -913,22 +1074,18 @@ extension UIKit.UIBackgroundConfiguration : Swift.CustomStringConvertible, Swift
 @available(iOS 14.0, *)
 public protocol UIIndirectScribbleInteractionDelegate : ObjectiveC.NSObjectProtocol {
   associatedtype ElementIdentifier : Swift.Hashable = Swift.String
-  func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, requestElementsIn rect: CoreGraphics.CGRect, completion: @escaping ([Self.ElementIdentifier]) -> Swift.Void)
-  
+  func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, requestElementsIn rect: CoreFoundation.CGRect, completion: @escaping ([Self.ElementIdentifier]) -> Swift.Void)
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, *)
-  @_Concurrency.MainActor func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, requestElementsIn rect: CoreGraphics.CGRect) async -> [Self.ElementIdentifier]
+  @_Concurrency.MainActor func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, requestElementsIn rect: CoreFoundation.CGRect) async -> [Self.ElementIdentifier]
   #endif
-
   func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, isElementFocused elementIdentifier: Self.ElementIdentifier) -> Swift.Bool
-  func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, frameForElement elementIdentifier: Self.ElementIdentifier) -> CoreGraphics.CGRect
-  func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreGraphics.CGPoint, completion: @escaping ((UIKit.UIResponder & UIKit.UITextInput)?) -> Swift.Void)
-  
+  func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, frameForElement elementIdentifier: Self.ElementIdentifier) -> CoreFoundation.CGRect
+  func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreFoundation.CGPoint, completion: @escaping ((UIKit.UIResponder & UIKit.UITextInput)?) -> Swift.Void)
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, *)
-  @_Concurrency.MainActor func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreGraphics.CGPoint) async -> (UIKit.UIResponder & UIKit.UITextInput)?
+  @_Concurrency.MainActor func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreFoundation.CGPoint) async -> (UIKit.UIResponder & UIKit.UITextInput)?
   #endif
-
   func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, shouldDelayFocusForElement elementIdentifier: Self.ElementIdentifier) -> Swift.Bool
   func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, willBeginWritingInElement elementIdentifier: Self.ElementIdentifier)
   func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, didFinishWritingInElement elementIdentifier: Self.ElementIdentifier)
@@ -941,23 +1098,76 @@ extension UIKit.UIIndirectScribbleInteractionDelegate {
 }
 @available(iOS 15.0, *)
 extension UIKit.UIIndirectScribbleInteractionDelegate {
-  
   #if compiler(>=5.3) && $AsyncAwait
-  @_Concurrency.MainActor public func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, requestElementsIn rect: CoreGraphics.CGRect) async -> [Self.ElementIdentifier]
+  @_Concurrency.MainActor public func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, requestElementsIn rect: CoreFoundation.CGRect) async -> [Self.ElementIdentifier]
   #endif
-
-  
   #if compiler(>=5.3) && $AsyncAwait
-  @_Concurrency.MainActor public func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreGraphics.CGPoint) async -> (UIKit.UIResponder & UIKit.UITextInput)?
+  @_Concurrency.MainActor public func indirectScribbleInteraction(_ interaction: UIKit.UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreFoundation.CGPoint) async -> (UIKit.UIResponder & UIKit.UITextInput)?
   #endif
-
+}
+extension UIKit.NSCollectionLayoutGroup {
+  @available(iOS, introduced: 16.0, deprecated: 16.0, renamed: "horizontal(layoutSize:repeatingSubitem:count:)")
+  @_Concurrency.MainActor(unsafe) public class func horizontalGroup(with size: UIKit.NSCollectionLayoutSize, repeatingSubitem subitem: UIKit.NSCollectionLayoutItem, count: Swift.Int) -> UIKit.NSCollectionLayoutGroup
+  @available(iOS, introduced: 16.0, deprecated: 16.0, renamed: "vertical(layoutSize:repeatingSubitem:count:)")
+  @_Concurrency.MainActor(unsafe) public class func verticalGroup(with size: UIKit.NSCollectionLayoutSize, repeatingSubitem subitem: UIKit.NSCollectionLayoutItem, count: Swift.Int) -> UIKit.NSCollectionLayoutGroup
+}
+@available(iOS 16.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public protocol UINavigationItemRenameDelegate : AnyObject {
+  func navigationItem(_: UIKit.UINavigationItem, didEndRenamingWith title: Swift.String)
+  func navigationItemShouldBeginRenaming(_: UIKit.UINavigationItem) -> Swift.Bool
+  func navigationItem(_: UIKit.UINavigationItem, willBeginRenamingWith suggestedTitle: Swift.String, selectedRange: Swift.Range<Swift.String.Index>) -> (Swift.String, Swift.Range<Swift.String.Index>)
+  func navigationItem(_: UIKit.UINavigationItem, shouldEndRenamingWith title: Swift.String) -> Swift.Bool
+}
+extension UIKit.UINavigationItemRenameDelegate {
+  public func navigationItemShouldBeginRenaming(_ navigationItem: UIKit.UINavigationItem) -> Swift.Bool
+  public func navigationItem(_ navigationItem: UIKit.UINavigationItem, willBeginRenamingWith suggestedTitle: Swift.String, selectedRange: Swift.Range<Swift.String.Index>) -> (Swift.String, Swift.Range<Swift.String.Index>)
+  public func navigationItem(_ navigationItem: UIKit.UINavigationItem, shouldEndRenamingWith title: Swift.String) -> Swift.Bool
+}
+extension UIKit.UINavigationItem {
+  @available(iOS 16.0, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @_Concurrency.MainActor(unsafe) weak public var renameDelegate: UIKit.UINavigationItemRenameDelegate? {
+    get
+    set(renameDelegate)
+  }
+}
+@available(iOS 16.0, *)
+extension UIKit.UIWindowScene.GeometryPreferences.iOS {
+  public var interfaceOrientations: UIKit.UIInterfaceOrientationMask? {
+    get
+    set
+  }
+}
+@available(macCatalyst 16.0, *)
+extension UIKit.UIWindowScene.GeometryPreferences.Mac {
+  public var systemFrame: CoreFoundation.CGRect? {
+    get
+    set
+  }
 }
 @available(iOS 15.0, *)
 @available(tvOS, unavailable)
 extension UIKit.UIToolTipConfiguration {
-  public var sourceRect: CoreGraphics.CGRect? {
+  public var sourceRect: CoreFoundation.CGRect? {
     get
   }
+}
+extension UIKit.UIBarButtonItem {
+  @available(iOS 14.0, tvOS 14.0, *)
+  @_Concurrency.MainActor(unsafe) convenience public init(systemItem: UIKit.UIBarButtonItem.SystemItem, primaryAction: UIKit.UIAction? = nil, menu: UIKit.UIMenu? = nil)
+  @available(iOS 14.0, tvOS 14.0, *)
+  @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String? = nil, image: UIKit.UIImage? = nil, primaryAction: UIKit.UIAction? = nil, menu: UIKit.UIMenu? = nil)
+  @available(iOS 16.0, tvOS 16.0, *)
+  @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String?, image: UIKit.UIImage?, target: Swift.AnyObject?, action: ObjectiveC.Selector?, menu: UIKit.UIMenu? = nil)
+}
+extension UIKit.UIBarButtonItem {
+  @available(iOS 16.0, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @_Concurrency.MainActor(unsafe) public func creatingOptionalGroup(customizationIdentifier: Swift.String, isInDefaultCustomization: Swift.Bool = true) -> UIKit.UIBarButtonItemGroup
 }
 extension UIKit.UIEdgeInsets : Swift.Equatable {
   @_transparent public static func == (lhs: UIKit.UIEdgeInsets, rhs: UIKit.UIEdgeInsets) -> Swift.Bool {
@@ -1025,6 +1235,8 @@ extension UIKit._UIKitNumericRawRepresentable {
 }
 extension UIKit.UIFont.Weight : UIKit._UIKitNumericRawRepresentable {
 }
+extension UIKit.UIFont.Width : UIKit._UIKitNumericRawRepresentable {
+}
 extension UIKit.UILayoutPriority : UIKit._UIKitNumericRawRepresentable {
 }
 extension UIKit.UIWindow.Level : UIKit._UIKitNumericRawRepresentable {
@@ -1039,9 +1251,11 @@ public func UIDeviceOrientationIsValidInterfaceOrientation(_ orientation: UIKit.
 public func UIInterfaceOrientationIsPortrait(_ orientation: UIKit.UIInterfaceOrientation) -> Swift.Bool
 @available(swift, obsoleted: 4.2, renamed: "getter:UIInterfaceOrientation.isLandscape(self:)")
 public func UIInterfaceOrientationIsLandscape(_ orientation: UIKit.UIInterfaceOrientation) -> Swift.Bool
+@available(iOS, introduced: 2.0, deprecated: 8.3, message: "UIActionSheet is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleActionSheet instead")
 extension UIKit.UIActionSheet {
   @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String?, delegate: UIKit.UIActionSheetDelegate?, cancelButtonTitle: Swift.String?, destructiveButtonTitle: Swift.String?, otherButtonTitles firstButtonTitle: Swift.String, _ moreButtonTitles: Swift.String...)
 }
+@available(iOS, introduced: 2.0, deprecated: 9.0, message: "UIAlertView is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleAlert instead")
 extension UIKit.UIAlertView {
   @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String, message: Swift.String, delegate: UIKit.UIAlertViewDelegate?, cancelButtonTitle: Swift.String?, otherButtonTitles firstButtonTitle: Swift.String, _ moreButtonTitles: Swift.String...)
 }
@@ -1153,7 +1367,7 @@ extension UIKit.UITextDirection {
   public static func layout(_ direction: UIKit.UITextLayoutDirection) -> UIKit.UITextDirection
 }
 @available(iOS 13.0, tvOS 13.0, *)
-public struct NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
+@preconcurrency public struct NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> : @unchecked Swift.Sendable where SectionIdentifierType : Swift.Hashable, SectionIdentifierType : Swift.Sendable, ItemIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Sendable {
   public init()
   public var numberOfItems: Swift.Int {
     get
@@ -1211,7 +1425,7 @@ extension UIKit.NSDiffableDataSourceSnapshot : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = UIKit.NSDiffableDataSourceSnapshotReference
 }
 @available(iOS 13.0, tvOS 13.0, *)
-@_Concurrency.MainActor(unsafe) open class UICollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType> : ObjectiveC.NSObject, UIKit.UICollectionViewDataSource where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
+@preconcurrency @_Concurrency.MainActor(unsafe) open class UICollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType> : ObjectiveC.NSObject, UIKit.UICollectionViewDataSource where SectionIdentifierType : Swift.Hashable, SectionIdentifierType : Swift.Sendable, ItemIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Sendable {
   public typealias CellProvider = (_ collectionView: UIKit.UICollectionView, _ indexPath: Foundation.IndexPath, _ itemIdentifier: ItemIdentifierType) -> UIKit.UICollectionViewCell?
   public typealias SupplementaryViewProvider = (_ collectionView: UIKit.UICollectionView, _ elementKind: Swift.String, _ indexPath: Foundation.IndexPath) -> UIKit.UICollectionReusableView?
   @_Concurrency.MainActor(unsafe) public var supplementaryViewProvider: UIKit.UICollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType>.SupplementaryViewProvider? {
@@ -1220,20 +1434,16 @@ extension UIKit.NSDiffableDataSourceSnapshot : Swift._ObjectiveCBridgeable {
   }
   @_Concurrency.MainActor(unsafe) public init(collectionView: UIKit.UICollectionView, cellProvider: @escaping UIKit.UICollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType>.CellProvider)
   nonisolated open func apply(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, animatingDifferences: Swift.Bool = true, completion: (() -> Swift.Void)? = nil)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, tvOS 15.0, *)
   nonisolated open func apply(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, animatingDifferences: Swift.Bool = true) async
   #endif
-
   @available(iOS 15.0, tvOS 15.0, *)
   nonisolated open func applySnapshotUsingReloadData(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, completion: (() -> Swift.Void)? = nil)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, tvOS 15.0, *)
   nonisolated open func applySnapshotUsingReloadData(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>) async
   #endif
-
   nonisolated open func snapshot() -> UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>
   @available(iOS 15.0, tvOS 15.0, *)
   @_Concurrency.MainActor(unsafe) open func sectionIdentifier(for index: Swift.Int) -> SectionIdentifierType?
@@ -1253,24 +1463,20 @@ extension UIKit.NSDiffableDataSourceSnapshot : Swift._ObjectiveCBridgeable {
   @objc deinit
 }
 @available(iOS 13.0, tvOS 13.0, *)
-@_Concurrency.MainActor(unsafe) open class UITableViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType> : ObjectiveC.NSObject, UIKit.UITableViewDataSource where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
+@preconcurrency @_Concurrency.MainActor(unsafe) open class UITableViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType> : ObjectiveC.NSObject, UIKit.UITableViewDataSource where SectionIdentifierType : Swift.Hashable, SectionIdentifierType : Swift.Sendable, ItemIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Sendable {
   public typealias CellProvider = (_ tableView: UIKit.UITableView, _ indexPath: Foundation.IndexPath, _ itemIdentifier: ItemIdentifierType) -> UIKit.UITableViewCell?
   @_Concurrency.MainActor(unsafe) public init(tableView: UIKit.UITableView, cellProvider: @escaping UIKit.UITableViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType>.CellProvider)
   nonisolated open func apply(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, animatingDifferences: Swift.Bool = true, completion: (() -> Swift.Void)? = nil)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, tvOS 15.0, *)
   nonisolated open func apply(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, animatingDifferences: Swift.Bool = true) async
   #endif
-
   @available(iOS 15.0, tvOS 15.0, *)
   nonisolated open func applySnapshotUsingReloadData(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, completion: (() -> Swift.Void)? = nil)
-  
   #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, tvOS 15.0, *)
   nonisolated open func applySnapshotUsingReloadData(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>) async
   #endif
-
   nonisolated open func snapshot() -> UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>
   @available(iOS 15.0, tvOS 15.0, *)
   @_Concurrency.MainActor(unsafe) open func sectionIdentifier(for index: Swift.Int) -> SectionIdentifierType?
@@ -1316,7 +1522,9 @@ extension UIKit.UIAction {
 extension UIKit.UIMenu {
   @_disfavoredOverload @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String = "", image: UIKit.UIImage? = nil, identifier: UIKit.UIMenu.Identifier? = nil, options: UIKit.UIMenu.Options = [], children: [UIKit.UIMenuElement] = [])
   @available(iOS 15.0, tvOS 15.0, *)
-  @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String = "", subtitle: Swift.String? = nil, image: UIKit.UIImage? = nil, identifier: UIKit.UIMenu.Identifier? = nil, options: UIKit.UIMenu.Options = [], children: [UIKit.UIMenuElement] = [])
+  @_disfavoredOverload @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String = "", subtitle: Swift.String? = nil, image: UIKit.UIImage? = nil, identifier: UIKit.UIMenu.Identifier? = nil, options: UIKit.UIMenu.Options = [], children: [UIKit.UIMenuElement] = [])
+  @available(iOS 16.0, tvOS 16.0, *)
+  @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String = "", subtitle: Swift.String? = nil, image: UIKit.UIImage? = nil, identifier: UIKit.UIMenu.Identifier? = nil, options: UIKit.UIMenu.Options = [], preferredElementSize: UIKit.UIMenu.ElementSize = UIMenu.ElementSize.large, children: [UIKit.UIMenuElement] = [])
 }
 @available(iOS 13.0, tvOS 14.0, *)
 extension UIKit.UIMenuBuilder {
@@ -1324,9 +1532,14 @@ extension UIKit.UIMenuBuilder {
 }
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension UIKit.UIImage {
-  public var baselineOffsetFromBottom: CoreGraphics.CGFloat? {
+  public var baselineOffsetFromBottom: CoreFoundation.CGFloat? {
     get
   }
+}
+@available(iOS 16.0, macCatalyst 16.0, tvOS 16.0, watchOS 9.0, *)
+extension UIKit.UIImage {
+  convenience public init?(systemName name: Swift.String, variableValue: Swift.Double, configuration: UIKit.UIImage.Configuration? = nil)
+  convenience public init?(named name: Swift.String, in bundle: Foundation.Bundle? = nil, variableValue: Swift.Double, configuration: UIKit.UIImage.Configuration? = nil)
 }
 @available(iOS 15.0, *)
 extension UIKit.UIWindowScene.ActivationConfiguration {
@@ -1335,6 +1548,14 @@ extension UIKit.UIWindowScene.ActivationConfiguration {
 @available(iOS 15.0, *)
 extension UIKit.UIWindowScene.ActivationAction {
   @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String? = nil, subtitle: Swift.String? = nil, image: UIKit.UIImage? = nil, identifier: UIKit.UIAction.Identifier? = nil, discoverabilityTitle: Swift.String? = nil, attributes: UIKit.UIMenuElement.Attributes = [], alternate: UIKit.UIAction? = nil, _ configuration: @escaping UIKit.UIWindowScene.ActivationAction.ConfigurationProvider)
+}
+@available(iOS 13.0, *)
+extension UIKit.UIContextMenuConfiguration {
+  @_alwaysEmitIntoClient @_Concurrency.MainActor(unsafe) convenience public init(identifier: Foundation.NSCopying? = nil, previewProvider: UIKit.UIContextMenuContentPreviewProvider? = nil, actionProvider: UIKit.UIContextMenuActionProvider? = nil) {
+        self.init(__identifier: identifier,
+                  previewProvider: previewProvider,
+                  actionProvider: actionProvider)
+    }
 }
 @available(iOS 14.5, *)
 @available(tvOS, unavailable)
@@ -1424,6 +1645,12 @@ extension UIKit.UICollectionView {
   @_Concurrency.MainActor(unsafe) public func dequeueConfiguredReusableCell<Cell, Item>(using registration: UIKit.UICollectionView.CellRegistration<Cell, Item>, for indexPath: Foundation.IndexPath, item: Item?) -> Cell where Cell : UIKit.UICollectionViewCell
   @_Concurrency.MainActor(unsafe) public func dequeueConfiguredReusableSupplementary<Supplementary>(using registration: UIKit.UICollectionView.SupplementaryRegistration<Supplementary>, for indexPath: Foundation.IndexPath) -> Supplementary where Supplementary : UIKit.UICollectionReusableView
 }
+@available(*, unavailable)
+extension UIKit.UICollectionView.CellRegistration : Swift.Sendable {
+}
+@available(*, unavailable)
+extension UIKit.UICollectionView.SupplementaryRegistration : Swift.Sendable {
+}
 @available(iOS 15.0, tvOS 15.0, *)
 public struct UIConfigurationTextAttributesTransformer {
   public let transform: (Foundation.AttributeContainer) -> Foundation.AttributeContainer
@@ -1474,6 +1701,17 @@ extension UIKit.UIButton {
       case borderless
       case borderlessTinted
       public static func == (a: UIKit.UIButton.Configuration.MacIdiomStyle, b: UIKit.UIButton.Configuration.MacIdiomStyle) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
+    @available(iOS 16.0, tvOS 16.0, *)
+    public enum Indicator {
+      case automatic
+      case none
+      case popup
+      public static func == (a: UIKit.UIButton.Configuration.Indicator, b: UIKit.UIButton.Configuration.Indicator) -> Swift.Bool
       public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
@@ -1556,6 +1794,16 @@ extension UIKit.UIButton {
       get
       set
     }
+    @available(iOS 16.0, tvOS 16.0, *)
+    public var indicator: UIKit.UIButton.Configuration.Indicator {
+      get
+      set
+    }
+    @available(iOS 16.0, tvOS 16.0, *)
+    public var indicatorColorTransformer: UIKit.UIConfigurationColorTransformer? {
+      get
+      set
+    }
     public var contentInsets: UIKit.NSDirectionalEdgeInsets {
       get
       set
@@ -1565,11 +1813,11 @@ extension UIKit.UIButton {
       get
       set
     }
-    public var imagePadding: CoreGraphics.CGFloat {
+    public var imagePadding: CoreFoundation.CGFloat {
       get
       set
     }
-    public var titlePadding: CoreGraphics.CGFloat {
+    public var titlePadding: CoreFoundation.CGFloat {
       get
       set
     }
@@ -1629,7 +1877,7 @@ public struct UICellAccessory {
   public enum LayoutDimension {
     case actual
     case standard
-    case custom(CoreGraphics.CGFloat)
+    case custom(CoreFoundation.CGFloat)
   }
   public struct DisclosureIndicatorOptions {
     public var isHidden: Swift.Bool
@@ -1704,6 +1952,16 @@ public struct UICellAccessory {
     public init(style: UIKit.UICellAccessory.OutlineDisclosureOptions.Style? = nil, isHidden: Swift.Bool? = nil, reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension? = nil, tintColor: UIKit.UIColor? = nil)
   }
   public static func outlineDisclosure(displayed: UIKit.UICellAccessory.DisplayedState = .always, options: UIKit.UICellAccessory.OutlineDisclosureOptions = OutlineDisclosureOptions(), actionHandler: UIKit.UICellAccessory.ActionHandler? = nil) -> UIKit.UICellAccessory
+  public typealias MenuSelectedElementDidChangeHandler = (UIKit.UIMenu) -> Swift.Void
+  @available(iOS 16.0, *)
+  public struct PopUpMenuOptions {
+    public var isHidden: Swift.Bool
+    public var reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension
+    public var tintColor: UIKit.UIColor?
+    public init(isHidden: Swift.Bool? = nil, reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension? = nil, tintColor: UIKit.UIColor? = nil)
+  }
+  @available(iOS 16.0, *)
+  public static func popUpMenu(_ menu: UIKit.UIMenu, displayed: UIKit.UICellAccessory.DisplayedState = .always, options: UIKit.UICellAccessory.PopUpMenuOptions = PopUpMenuOptions(), selectedElementDidChangeHandler: UIKit.UICellAccessory.MenuSelectedElementDidChangeHandler? = nil) -> UIKit.UICellAccessory
   public struct LabelOptions {
     public var isHidden: Swift.Bool
     public var reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension
@@ -1742,6 +2000,8 @@ public struct UICellAccessory {
     case customView(UIKit.UIView)
     @available(iOS 15.4, tvOS 15.4, *)
     case detail
+    @available(iOS 16.0, *)
+    case popUpMenu
     public static func == (lhs: UIKit.UICellAccessory.AccessoryType, rhs: UIKit.UICellAccessory.AccessoryType) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -1836,7 +2096,7 @@ public struct UICollectionLayoutListConfiguration {
     set(mode)
   }
   @available(iOS 15.0, tvOS 15.0, *)
-  public var headerTopPadding: CoreGraphics.CGFloat? {
+  public var headerTopPadding: CoreFoundation.CGFloat? {
     get
     set
   }
@@ -1848,6 +2108,13 @@ extension UIKit.UICollectionViewCompositionalLayout {
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.NSCollectionLayoutSection {
   @_Concurrency.MainActor(unsafe) public static func list(using configuration: UIKit.UICollectionLayoutListConfiguration, layoutEnvironment: UIKit.NSCollectionLayoutEnvironment) -> UIKit.NSCollectionLayoutSection
+}
+@available(iOS 16.0, *)
+extension UIKit.UIPasteControl.Configuration {
+  @_Concurrency.MainActor(unsafe) public var cornerStyle: UIKit.UIButton.Configuration.CornerStyle {
+    get
+    set
+  }
 }
 extension Foundation.IndexPath {
   public init(row: Swift.Int, section: Swift.Int)
@@ -1866,7 +2133,7 @@ extension Foundation.IndexPath {
   }
 }
 extension Foundation.URLResourceValues {
-  @available(iOS 8.0, *)
+  @available(iOS, introduced: 8.0, deprecated: 15.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
   public var thumbnailDictionary: [Foundation.URLThumbnailDictionaryItem : UIKit.UIImage]? {
     get
   }
@@ -1892,6 +2159,20 @@ extension UIKit.UIOffset : Swift._ObjectiveCBridgeable {
   public static func _conditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout UIKit.UIOffset?) -> Swift.Bool
   public static func _unconditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue?) -> UIKit.UIOffset
   public typealias _ObjectiveCType = Foundation.NSValue
+}
+extension UIKit.UIBarButtonItemGroup {
+  @available(iOS 16.0, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @_Concurrency.MainActor(unsafe) public class func fixedGroup(representativeItem: UIKit.UIBarButtonItem? = nil, items: [UIKit.UIBarButtonItem]) -> UIKit.UIBarButtonItemGroup
+  @available(iOS 16.0, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @_Concurrency.MainActor(unsafe) public class func movableGroup(customizationIdentifier: Swift.String, representativeItem: UIKit.UIBarButtonItem? = nil, items: [UIKit.UIBarButtonItem]) -> UIKit.UIBarButtonItemGroup
+  @available(iOS 16.0, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @_Concurrency.MainActor(unsafe) public class func optionalGroup(customizationIdentifier: Swift.String, isInDefaultCustomization: Swift.Bool = true, representativeItem: UIKit.UIBarButtonItem? = nil, items: [UIKit.UIBarButtonItem]) -> UIKit.UIBarButtonItemGroup
 }
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.UICollectionViewCell {
@@ -2110,7 +2391,7 @@ extension UIKit.UICellConfigurationState : Swift.CustomStringConvertible, Swift.
   }
 }
 @available(iOS 14.0, tvOS 14.0, *)
-public struct NSDiffableDataSourceSectionTransaction<SectionIdentifierType, ItemIdentifierType> where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
+@preconcurrency public struct NSDiffableDataSourceSectionTransaction<SectionIdentifierType, ItemIdentifierType> : @unchecked Swift.Sendable where SectionIdentifierType : Swift.Hashable, SectionIdentifierType : Swift.Sendable, ItemIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Sendable {
   public var sectionIdentifier: SectionIdentifierType {
     get
   }
@@ -2125,7 +2406,7 @@ public struct NSDiffableDataSourceSectionTransaction<SectionIdentifierType, Item
   }
 }
 @available(iOS 14.0, tvOS 14.0, *)
-public struct NSDiffableDataSourceTransaction<SectionIdentifierType, ItemIdentifierType> where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
+@preconcurrency public struct NSDiffableDataSourceTransaction<SectionIdentifierType, ItemIdentifierType> : @unchecked Swift.Sendable where SectionIdentifierType : Swift.Hashable, SectionIdentifierType : Swift.Sendable, ItemIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Sendable {
   public var initialSnapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> {
     get
   }
@@ -2161,9 +2442,12 @@ extension UIKit.UICollectionViewDiffableDataSource {
     set(handlers)
   }
 }
+@available(*, unavailable)
+extension UIKit.UICollectionViewDiffableDataSource.ReorderingHandlers : Swift.Sendable {
+}
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.UICollectionViewDiffableDataSource {
-  public struct SectionSnapshotHandlers<ItemIdentifierType> where ItemIdentifierType : Swift.Hashable {
+  @preconcurrency public struct SectionSnapshotHandlers<ItemIdentifierType> where ItemIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Sendable {
     public var shouldExpandItem: ((ItemIdentifierType) -> Swift.Bool)? {
       get
       set(handler)
@@ -2191,49 +2475,13 @@ extension UIKit.UICollectionViewDiffableDataSource {
     set(handlers)
   }
 }
+@available(*, unavailable)
+extension UIKit.UICollectionViewDiffableDataSource.SectionSnapshotHandlers : Swift.Sendable {
+}
 @available(iOS 13.4, *)
 extension UIKit.UIPointerEffect.TintMode : Swift.Equatable {}
 @available(iOS 13.4, *)
 extension UIKit.UIPointerEffect.TintMode : Swift.Hashable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.FontAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.ParagraphStyleAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.ForegroundColorAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.BackgroundColorAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.LigatureAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.KernAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.TrackingAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.StrikethroughStyleAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.UnderlineStyleAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.StrokeColorAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.StrokeWidthAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.ShadowAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.TextEffectAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, *)
-@available(watchOS, unavailable)
-extension Foundation.AttributeScopes.UIKitAttributes.AttachmentAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.BaselineOffsetAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.UnderlineColorAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.StrikethroughColorAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.ObliquenessAttribute : Swift.Sendable {}
-@available(iOS 15, tvOS 15, watchOS 8, *)
-extension Foundation.AttributeScopes.UIKitAttributes.ExpansionAttribute : Swift.Sendable {}
 @available(iOS 15.0, tvOS 15.0, *)
 extension UIKit.UIButton.Configuration.Size : Swift.Equatable {}
 @available(iOS 15.0, tvOS 15.0, *)
@@ -2250,6 +2498,10 @@ extension UIKit.UIButton.Configuration.CornerStyle : Swift.Hashable {}
 extension UIKit.UIButton.Configuration.MacIdiomStyle : Swift.Equatable {}
 @available(iOS 15.0, tvOS 15.0, *)
 extension UIKit.UIButton.Configuration.MacIdiomStyle : Swift.Hashable {}
+@available(iOS 16.0, tvOS 16.0, *)
+extension UIKit.UIButton.Configuration.Indicator : Swift.Equatable {}
+@available(iOS 16.0, tvOS 16.0, *)
+extension UIKit.UIButton.Configuration.Indicator : Swift.Hashable {}
 @available(iOS 14.0, tvOS 14.0, *)
 extension UIKit.UICellAccessory.DisplayedState : Swift.Equatable {}
 @available(iOS 14.0, tvOS 14.0, *)

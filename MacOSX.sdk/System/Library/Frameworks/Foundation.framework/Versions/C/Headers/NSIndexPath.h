@@ -5,17 +5,9 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-@interface NSIndexPath : NSObject <NSCopying, NSSecureCoding> {
-	@private
-	NSUInteger *_indexes;
-#if !__OBJC2__
-	NSUInteger _hash;
-#endif
-	NSUInteger _length;
-        void *_reserved;
-}
+@interface NSIndexPath : NSObject <NSCopying, NSSecureCoding>
 
 + (instancetype)indexPathWithIndex:(NSUInteger)index;
 + (instancetype)indexPathWithIndexes:(const NSUInteger [_Nullable])indexes length:(NSUInteger)length;
@@ -50,4 +42,4 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getIndexes:(NSUInteger *)indexes API_DEPRECATED_WITH_REPLACEMENT("getIndexes:range:", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)); // use -getIndexes:range: instead
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *          Endpoint state is controlled by IOUSBHostCIMessage structures representing commands and transfer completions, and IOUSBHostCIDoorbell messages.
  *          Only an endpoint in the IOUSBHostCIEndpointStateActive state may inspect transfer structures, read or modify IO buffers, and generate transfer completions.
+ *
+ *          IOUSBHostCIEndpointStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
  */
 @interface IOUSBHostCIEndpointStateMachine : NSObject
 

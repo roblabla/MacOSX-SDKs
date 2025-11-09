@@ -133,7 +133,7 @@ urlOrNil will be nil if the initializing is being done as part of the reopening 
 
 /* The name of the document's format. The set method isn't for _changing_ the document's format, it's just for initially recording the document's format during opening or saving.
 */
-@property (nullable, copy) NSString *fileType;
+@property (nullable, copy) NSString *fileType NS_SWIFT_NONISOLATED;
 
 /* The location of the document's on-disk representation. The set method doesn't actually rename the document, it's just for recording the document's location during initial opening or saving. The default implementation of -setFileURL: just records the URL so that the default implementation of -fileURL can return it. The default implementation of -fileURL returns whatever was stored by a previous invocation of the default implementation of -setFileURL:.
 
@@ -141,15 +141,15 @@ Starting in Mac OS 10.7 the default implementations of these methods are thread 
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of -setFileURL: instead invokes [self setFileName:[url path]] if -setFileName: is overridden and the URL is nil or uses the "file:" scheme. Likewise, the default implementation of -fileURL instead invokes -[self fileName] and returns the result as a URL if -fileName is overridden.
 */
-@property (nullable, copy) NSURL *fileURL;
+@property (nullable, copy) NSURL *fileURL NS_SWIFT_NONISOLATED;
 
 /* The last known modification date of the document's on-disk representation.
 */
-@property (nullable, copy) NSDate *fileModificationDate;
+@property (nullable, copy) NSDate *fileModificationDate NS_SWIFT_NONISOLATED;
 
 /* Whether the document is a draft that the user has not expressed an interest in keeping around. A save panel will be presented when the user closes a draft document. Only documents with non-nil values for [self fileURL] should be considered drafts.
 */
-@property (getter=isDraft) BOOL draft API_AVAILABLE(macos(10.8));
+@property (getter=isDraft) BOOL draft NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.8));
 
 #pragma mark *** UI and File Access Serialization ***
 
@@ -193,7 +193,7 @@ You can invoke this method when work is being done on a non-main thread and part
 
 This method can of course be invoked on any thread.
 */
-- (void)continueAsynchronousWorkOnMainThreadUsingBlock:(void (^)(void))block API_AVAILABLE(macos(10.7));
+- (void)continueAsynchronousWorkOnMainThreadUsingBlock:(void (^)(void))block NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
 
 /* Given a block that will perform file access, wait for any file access scheduled by previous invocations of this method or -performAsynchronousFileAccessUsingBlock: to be complete, and then invoke the block. When the block invocation returns allow the next scheduled file access to to be performed, if any.
 
@@ -206,13 +206,13 @@ In general you should use this method or -performAsynchronousFileAccessUsingBloc
 - -updateChangeCountWithToken:forSaveOperation: and, sometimes, updateChangeCount:, to make using this mechanism when invoking -isDocumentEdited and -hasUnautosavedChanges meaningful.
 - -backupFileURL, since it depends on -fileURL.
  */
-- (void)performSynchronousFileAccessUsingBlock:(void (NS_NOESCAPE ^)(void))block API_AVAILABLE(macos(10.7));
+- (void)performSynchronousFileAccessUsingBlock:(void (NS_NOESCAPE ^)(void))block NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
 
 /* Do the same sort of thing as -performSynchronousFileAccessUsingBlock:, but without ever blocking the main thread, and perhaps not invoking the block until after the method invocation has returned, though still always on the same thread as the method invocation. The block is passed another block, the file access completion handler, which must be invoked when the file access is complete, though it can be invoked from any thread. This method is for use with file access that might begin on one thread but continue on another before it is complete. saveToURL:ofType:forSaveOperation:completionHandler: for for example uses this method instead of -performSynchronousFileAccessUsingBlock: because if it does asynchronous saving then there is no way for it to actually complete all of its file access before returning from the file access block.
 
 The distinction between entire activities and the file accessing part of activities established by having both activity performing methods and file access performing methods is worthwhile because sometimes it is valuable to perform file access without any risk of waiting for the user to dismiss a modal panel. For example, NSDocument's implementation of -[NSFilePresenter relinquishPresentedItemToWriter:] uses -performAsynchronousFileAccessUsingBlock: to ensure that the uses of -performSynchronousFileAccessUsingBlock: described above wait while another process is moving, renaming, or changing the file. Using -performActivityWithSynchronousWaiting:usingBlock: instead would not be appropriate because that would introduce the possibility of the other process' writing being blocked until the user has dismissed a sheet that is being presented as part of a previously scheduled activity.
 */
-- (void)performAsynchronousFileAccessUsingBlock:(void (^)(void (^fileAccessCompletionHandler)(void)))block API_AVAILABLE(macos(10.7));
+- (void)performAsynchronousFileAccessUsingBlock:(void (^)(void (^fileAccessCompletionHandler)(void)))block NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
 
 #pragma mark *** Reverting ***
 
@@ -236,23 +236,23 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self readFromFile:[url path] ofType:typeName] if -readFromFile:ofType: is overridden and the URL uses the "file:" scheme.
 */
-- (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError;
+- (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError NS_SWIFT_NONISOLATED;
 
 /* Set the contents of this document by reading from a file wrapper of a specified type, and return YES if successful. If not successful, return NO after setting *outError to an NSError that encapsulates the reason why the document could not be read. The default implementation of this method invokes [self readFromData:[fileWrapper regularFileContents] ofType:typeName error:outError].
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self loadFileWrapperRepresentation:fileWrapper ofType:typeName] if -loadFileWrapperRepresentation:ofType: is overridden.
 */
-- (BOOL)readFromFileWrapper:(NSFileWrapper *)fileWrapper ofType:(NSString *)typeName error:(NSError **)outError;
+- (BOOL)readFromFileWrapper:(NSFileWrapper *)fileWrapper ofType:(NSString *)typeName error:(NSError **)outError NS_SWIFT_NONISOLATED;
 
 /* Set the contents of this document by reading from data of a specified type, and return YES if successful. If not successful, return NO after setting *outError to an NSError that encapsulates the reason why the document could not be read. The default implementation of this method throws an exception because at least one of these three reading methods, or every method that may invoke -readFromURL:ofType:error: (!), must be overridden. 
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self loadDataRepresentation:data ofType:typeName] if -loadDataRepresentation:ofType: is overridden.
 */
-- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError;
+- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError NS_SWIFT_NONISOLATED;
 
 /* Return YES if the document's entire file is loaded into memory, NO otherwise. The default implementation of this method returns YES. You can override this method to return NO if additional data may need to be read from the file. NSDocument may use this value to do things like prevent volume ejection or warn the user when a partially loaded file disappears from the file system.
  */
-@property (getter=isEntireFileLoaded, readonly) BOOL entireFileLoaded API_AVAILABLE(macos(10.7));
+@property (getter=isEntireFileLoaded, readonly) BOOL entireFileLoaded NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
 
 /* ...and also one of these. */
 
@@ -260,7 +260,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self writeToFile:[url path] ofType:typeName] if -writeToFile:ofType: is overridden and the URL uses the "file:" scheme.
 */
-- (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError;
+- (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError NS_SWIFT_NONISOLATED;
 
 /* Create and return a file wrapper that contains the contents of this document, formatted to a specified type, or return nil after setting *outError to an NSError that encapsulates the reason why the file wrapper could not be created. The default implementation of this method just invokes [self dataOfType:typeName], makes a file wrapper for that data, and returns the file wrapper.
 
@@ -276,7 +276,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 /* If -saveToURL:ofType:forSaveOperation:completionHandler: is writing on a non-main thread because -canAsynchronouslyWriteToURL:ofType:forSaveOperation: has returned YES, but is still blocking the main thread, unblock the main thread. Otherwise, do nothing. For example, the default implementation of -fileWrapperOfType:error: invokes this when it has created the NSFileWrapper to return. Assuming that the NSFileWrapper will not be mutated by subsequent user actions, it is effectively a "snapshot" of the document's contents, and once it is created it is safe to resume handling user events on the main thread, even though some of those user events might change the document's contents before the NSFileWrapper has been safely written. You can invoke this method to make asynchronous saving actually asynchronous if you've overridden -writeSafelyToURL:ofType:forSaveOperation:error:, -writeToURL:forSaveOperation:originalContentsURL:error:, or -writeToURL:ofType:error: in such a way that the invocation of this method done by -writeToURL:ofType:error:'s default implementation won't happen during writing.
 */
-- (void)unblockUserInteraction API_AVAILABLE(macos(10.7));
+- (void)unblockUserInteraction NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
 
 /* Return YES if autosaving is being done right now but nothing bad would happen if it were to be cancelled, NO otherwise. For example, when periodic autosaving is being done just for crash protection, which doesn't really have to be done all of the time, this method returns YES. When autosaving is being done because the document is being closed this method returns NO.
 
@@ -298,13 +298,13 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 This method is responsible for doing document writing in a way that minimizes the danger of leaving the disk to which writing is being done in an inconsistent state in the event of an application crash, system crash, hardware failure, power outage, etc. Because it does several different things, and because the things are likely to change in future releases of Mac OS X, it's probably not a good idea to override this method without invoking super (the same was true of -writeWithBackupToFile:ofType:saveOperation:).
 */
-- (BOOL)writeSafelyToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation error:(NSError **)outError;
+- (BOOL)writeSafelyToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation error:(NSError **)outError NS_SWIFT_NONISOLATED;
 
 /* Write the contents of the document to a file or file package located by a URL, formatted to a specified type, for a particular kind of save operation, and return YES if successful. If not successful, return NO after setting *outError to an NSError that encapsulates the reason why the document could not be written. The default implementation of this method merely invokes [self writeToURL:url ofType:typeName error:outError]. You can override this method instead of one of the methods in the "Simple Reading and Writing" section above if your document writing machinery needs access to the on-disk representation of the document version that is about to be overwritten. url will often not be the same value as [self fileURL]. Other times it will not be the same as the URL for the final save destination. Likewise, absoluteOriginalContentsURL will often not be the same value as [self fileURL], though it will be nil for documents that have never been saved. It will point to nothing if the document's on-disk representation has been deleted.
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self writeToFile:[url path] ofType:typeName originalFile:[absoluteOriginalContentsURL path] saveOperation:aSaveOperation] if -writeToFile:ofType:originalFile:saveOperation: is overridden and both URLs use the "file:" scheme. The save operation used in this case will never be one of the autosaving ones; NSSaveToOperation will be used instead.
 */
-- (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(nullable NSURL *)absoluteOriginalContentsURL error:(NSError **)outError;
+- (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(nullable NSURL *)absoluteOriginalContentsURL error:(NSError **)outError NS_SWIFT_NONISOLATED;
 
 /* Given that a file is being saved, return the attributes that should be written to a file or file package located by a URL, formatted to a specified type, for a particular kind of save operation. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why attributes could not be returned. The set of valid file attributes is a subset of those understood by the NSFileManager class. The default implementation of this method returns an empty dictionary for an NSSaveOperation or NSAutosaveInPlaceOperation, or a dictionary with an appropriate NSFileExtensionHidden entry for any other kind of save operation. You can override this method to customize the attributes that are written to document files.
 
@@ -314,11 +314,11 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 The default implementation of -[NSDocument writeSafelyToURL:ofType:forSaveOperation:error:] automatically copies important attributes like file permissions, creation date, and Finder info from the old on-disk version of a document to the new one during an NSSaveOperation or NSAutosaveInPlaceOperation. This method is meant to be used just for attributes that need to be written for the first time, for NSSaveAsOperations, NSSaveToOperations, and NSAutosaveAsOperations. Actually, url and absoluteOriginalContentsURL are passed in just for completeness; NSDocument's default implementation for instance doesn't even need to use them.
 */
-- (nullable NSDictionary<NSString *, id> *)fileAttributesToWriteToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(nullable NSURL *)absoluteOriginalContentsURL error:(NSError **)outError;
+- (nullable NSDictionary<NSString *, id> *)fileAttributesToWriteToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(nullable NSURL *)absoluteOriginalContentsURL error:(NSError **)outError NS_SWIFT_NONISOLATED;
 
 /* Return YES if the old on-disk version of a document that is being overwritten should be preserved during an NSSaveOperation, NO otherwise. The default implementation of this method returns NO. For applications that return YES from +preservesVersions, this method has no effect.
 */
-@property (readonly) BOOL keepBackupFile;
+@property (readonly) BOOL keepBackupFile NS_SWIFT_NONISOLATED;
 
 /* Return the URL that will be used when preserving a backup file during an NSSaveOperation or NSAutosaveInPlaceOperation, or nil if the backup file can't be created or isn't needed.
 
@@ -328,7 +328,7 @@ Implementations of -writeSafelyToURL:ofType:forSaveOperation:error: must check t
 
 The default implementation of this method returns a non-nil value based off the value of [self fileURL] only if the document's file needs to be preserved prior to saving, or if +preservesVersions returns NO. Otherwise, it returns nil.
 */
-@property (nullable, readonly, copy) NSURL *backupFileURL API_AVAILABLE(macos(10.8));
+@property (nullable, readonly, copy) NSURL *backupFileURL NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.8));
 
 #pragma mark *** Saving ***
 
@@ -376,11 +376,11 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 /* Return YES if a save panel has been presented by this document and the user chose to hide the name extension of the file that was selected in that save panel, NO otherwise.
 */
-@property (readonly) BOOL fileNameExtensionWasHiddenInLastRunSavePanel;
+@property (readonly) BOOL fileNameExtensionWasHiddenInLastRunSavePanel NS_SWIFT_NONISOLATED;
 
 /* If a save panel has been presented by this document, and a choice of file type was presented in that panel, return the name of the file type that the user chose.
 */
-@property (nullable, readonly, copy) NSString *fileTypeFromLastRunSavePanel;
+@property (nullable, readonly, copy) NSString *fileTypeFromLastRunSavePanel NS_SWIFT_NONISOLATED;
 
 /* Save the contents of the document to a file or file package located by a URL, formatted to a specified type, for a particular kind of save operation. When saving is completed, regardless of success or failure, send the message selected by didSaveSelector to the delegate, with the contextInfo as the last argument. The method selected by didSaveSelector must have the same signature as:
 
@@ -470,13 +470,13 @@ AppKit invokes this method at a variety of times. For example, when -updateChang
 
 /* Return the document type that should be used for an autosave operation. The default implementation just returns [self fileType].
 */
-@property (nullable, readonly, copy) NSString *autosavingFileType;
+@property (nullable, readonly, copy) NSString *autosavingFileType NS_SWIFT_NONISOLATED;
 
 /* The location of the most recently autosaved document contents. The default implementation of -setAutosavedContentsFileURL: records the URL and notifies the shared document controller that this document should be autoreopened if the application is quit or crashes before the document is saved. The default implementation of -autosavedContentsFileURL just returns whatever was stored by a previous invocation of the default implementation of -setAutosavedContentsFileURL:.
 
 Starting in Mac OS 10.7 the default implementations of these methods are thread safe enough that -setAutosavedContentsFileURL: being invoked on the main thread while -autosavedContentsFileURL is being invoked on a different thread won't cause a crash. If you override one of these methods you must maintain that thread safety because AppKit itself may invoke -autosavedContentsFileURL on a background thread. (It's still not a good idea to invoke -setAutosavedContentsFileURL: on a non-main thread though.)
 */
-@property (nullable, copy) NSURL *autosavedContentsFileURL;
+@property (nullable, copy) NSURL *autosavedContentsFileURL NS_SWIFT_NONISOLATED;
 
 #pragma mark *** Closing ***
 
@@ -789,13 +789,13 @@ You can override this method to limit the set of writable types when the documen
 
 You can invoke this method when creating a custom save panel accessory view to easily present the same set of types that NSDocument would in its standard file format popup menu.
 */
-- (NSArray<NSString *> *)writableTypesForSaveOperation:(NSSaveOperationType)saveOperation;
+- (NSArray<NSString *> *)writableTypesForSaveOperation:(NSSaveOperationType)saveOperation NS_SWIFT_NONISOLATED;
 
 /* For a specified type, and a particular kind of save operation, return a file name extension that can be appended to a base file name. The default implementation of this method invokes [[NSWorkspace sharedWorkspace] preferredFilenameExtensionForType:typeName] if the type is a UTI or, for backward binary compatibility with Mac OS 10.4 and earlier, invokes [[NSDocumentController sharedDocumentController] fileExtensionsFromType:typeName] and chooses the first file name extension in the returned array if not.
 
 You can override this method to customize the appending of extensions to file names by NSDocument. It's invoked from a variety of places within AppKit itself.
 */
-- (nullable NSString *)fileNameExtensionForType:(NSString *)typeName saveOperation:(NSSaveOperationType)saveOperation API_AVAILABLE(macos(10.5));
+- (nullable NSString *)fileNameExtensionForType:(NSString *)typeName saveOperation:(NSSaveOperationType)saveOperation NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.5));
 
 #pragma mark *** Menu Item Validation ***
 
@@ -807,6 +807,23 @@ You can override this method to customize the appending of extensions to file na
 
 /* Return YES if instances of this class should allow the use of ubiquitous document storage. The default implementation of this method returns YES if the application has a valid ubiquity container entitlement. When this method returns YES, NSDocument may do things like add new menu items and other UI for ubiquitous documents and allow documents to be saved or moved into the default ubiquity container. You can override this method to return NO for document classes that should not include these features. */
 @property (class, readonly) BOOL usesUbiquitousStorage API_AVAILABLE(macos(10.8));
+
+#pragma mark *** NSFilePresenter ***
+
+/* The following are declared by NSFilePresenter and are implemented by NSDocument. They will be invoked on the thread specified by -presentedItemOperationQueue: and their implementations should be thread safe.
+ */
+@property (nullable, readonly, copy) NSURL *presentedItemURL NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
+@property (readonly, strong) NSSet<NSURLResourceKey> *observedPresentedItemUbiquityAttributes NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.13));
+- (void)relinquishPresentedItemToReader:(void (NS_SWIFT_SENDABLE ^)(void (NS_SWIFT_SENDABLE ^ _Nullable reacquirer)(void)))reader NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
+- (void)relinquishPresentedItemToWriter:(void (NS_SWIFT_SENDABLE ^)(void (NS_SWIFT_SENDABLE ^ _Nullable reacquirer)(void)))writer NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
+- (void)savePresentedItemChangesWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSError * _Nullable errorOrNil))completionHandler NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
+- (void)accommodatePresentedItemDeletionWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSError * _Nullable errorOrNil))completionHandler NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
+- (void)presentedItemDidMoveToURL:(NSURL *)newURL NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
+- (void)presentedItemDidChange NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
+- (void)presentedItemDidChangeUbiquityAttributes:(NSSet<NSURLResourceKey> *)attributes NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.13));
+- (void)presentedItemDidGainVersion:(NSFileVersion *)version NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
+- (void)presentedItemDidLoseVersion:(NSFileVersion *)version NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
+- (void)presentedItemDidResolveConflictVersion:(NSFileVersion *)version NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
 
 @end
 

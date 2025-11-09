@@ -7,7 +7,7 @@
 
 @class NSArray<ObjectType>, NSOrthography, NSValue;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* NSLinguisticTagger is a class used to automatically segment natural-language text and tag the tokens with information such as language, script, lemma, and part of speech.  An instance of this class is assigned a string to tag, and clients can then obtain tags and ranges for tokens in that string appropriate to a given tag scheme and unit.
 */
@@ -165,4 +165,4 @@ API_DEPRECATED("All NSLinguisticTagger API should be replaced with NaturalLangua
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

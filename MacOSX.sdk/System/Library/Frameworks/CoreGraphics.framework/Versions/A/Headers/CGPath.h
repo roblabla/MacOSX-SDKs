@@ -15,6 +15,7 @@ typedef const struct CF_BRIDGED_TYPE(id) CGPath *CGPathRef;
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGAffineTransform.h>
 #include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFArray.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -392,6 +393,46 @@ typedef void (^CGPathApplyBlock)(const CGPathElement * element);
 
 CG_EXTERN void CGPathApplyWithBlock(CGPathRef path, CGPathApplyBlock CF_NOESCAPE block)
     CG_AVAILABLE_STARTING(10.13, 11.0);
+
+
+/* Returns a new weakly-simple path without self-intersections and with a normalized orientation. Filling the resulting path using even-odd or non-zero filling is identical. */
+
+CG_EXTERN CGPathRef __nullable CGPathCreateCopyByNormalizing(CGPathRef cg_nullable path, bool evenOddFillRule) CG_AVAILABLE_STARTING(13.0, 16.0);
+
+/* Returns a new path created by unioning `path` and `maskPath`. Any unclosed subpaths in either path are assumed to be closed. The resulting path is suitable for either even-odd or non-zero filling. */
+
+CG_EXTERN CGPathRef __nullable CGPathCreateCopyByUnioningPath(CGPathRef cg_nullable path, CGPathRef cg_nullable maskPath, bool evenOddFillRule) CG_AVAILABLE_STARTING(13.0, 16.0);
+
+/* Returns a new path created by intersecting `path` and `maskPath`. Any unclosed subpaths in either path are assumed to be closed. The resulting path is suitable for either even-odd or non-zero filling. */
+
+CG_EXTERN CGPathRef __nullable CGPathCreateCopyByIntersectingPath(CGPathRef cg_nullable path, CGPathRef cg_nullable maskPath, bool evenOddFillRule) CG_AVAILABLE_STARTING(13.0, 16.0);
+
+/* Returns a new path created by subtracting `maskPath` from `path`. Any unclosed subpaths in either path are assumed to be closed. The resulting path is suitable for either even-odd or non-zero filling. */
+
+CG_EXTERN CGPathRef __nullable CGPathCreateCopyBySubtractingPath(CGPathRef cg_nullable path, CGPathRef cg_nullable maskPath, bool evenOddFillRule) CG_AVAILABLE_STARTING(13.0, 16.0);
+
+/* Returns a new path created by exclusive or-ing `path` and `maskPath`. Any unclosed subpaths in either path are assumed to be closed. The resulting path is suitable for either even-odd or non-zero filling. */
+
+CG_EXTERN CGPathRef __nullable CGPathCreateCopyBySymmetricDifferenceOfPath(CGPathRef cg_nullable path, CGPathRef cg_nullable maskPath, bool evenOddFillRule) CG_AVAILABLE_STARTING(13.0, 16.0);
+
+/* Returns a new path created by subtracting the `maskPath` from the line of `path` with the fill of `maskPath`. This returns a potentially open path. */
+
+CG_EXTERN CGPathRef __nullable CGPathCreateCopyOfLineBySubtractingPath(CGPathRef cg_nullable path, CGPathRef cg_nullable maskPath, bool evenOddFillRule) CG_AVAILABLE_STARTING(13.0, 16.0);
+
+/* Returns a new path created by intersecting the line of `path` and the fill of `maskPath`. This returns a potentially open path. */
+
+CG_EXTERN CGPathRef __nullable CGPathCreateCopyOfLineByIntersectingPath(CGPathRef cg_nullable path, CGPathRef cg_nullable maskPath, bool evenOddFillRule) CG_AVAILABLE_STARTING(13.0, 16.0);
+
+/* Return an array of the visually separated components of a path. */
+
+CG_EXTERN CFArrayRef __nullable CGPathCreateSeparateComponents(CGPathRef cg_nullable path, bool evenOddFillRule) CG_AVAILABLE_STARTING(13.0, 16.0);
+
+/* Returns a new path that is flattened, converting all curved line segments into straight line approximations. The granularity of the approximations is controlled by `flatteningThreshold`  the maximum error tolerance (measured in points) for curves. */
+
+CG_EXTERN CGPathRef __nullable CGPathCreateCopyByFlattening(CGPathRef cg_nullable path, CGFloat flatteningThreshold) CG_AVAILABLE_STARTING(13.0, 16.0);
+
+/* Returns true if path1 and path2 overlap. */
+CG_EXTERN bool CGPathIntersectsPath(CGPathRef cg_nullable path1, CGPathRef cg_nullable path2, bool evenOddFillRule) CG_AVAILABLE_STARTING(13.0, 16.0);
 
 CF_ASSUME_NONNULL_END
 

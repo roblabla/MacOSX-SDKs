@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D6894556-3433-31C9-A3CB-4499E583CDF9
+    value:           518C9A6F-FB59-3FCE-8A93-E8480BCFAA7A
   - target:          x86_64-maccatalyst
-    value:           D6894556-3433-31C9-A3CB-4499E583CDF9
+    value:           518C9A6F-FB59-3FCE-8A93-E8480BCFAA7A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           99443630-5AFE-312C-9A49-30DEAE94AFCD
+    value:           305C98E7-8E59-36A4-9D9E-FF710E4BFD1E
   - target:          arm64e-maccatalyst
-    value:           99443630-5AFE-312C-9A49-30DEAE94AFCD
+    value:           305C98E7-8E59-36A4-9D9E-FF710E4BFD1E
 install-name:    '/System/Library/PrivateFrameworks/ProactiveML.framework/Versions/A/ProactiveML'
-current-version: 1153.16.1
+current-version: 1193.8
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AWDProactiveModelFittingEvalMetricsReadFrom, _AWDProactiveModelFittingEvaluationReadFrom, 
                        _AWDProactiveModelFittingLabelSupportPairReadFrom, _AWDProactiveModelFittingLinRegFeatureMatrixReadFrom, 
                        _AWDProactiveModelFittingLinRegObjectiveFeaturesReadFrom, 
@@ -30,10 +30,11 @@ exports:
                        _AWDProactiveModelFittingQuantizedSparseMatrixReadFrom, _AWDProactiveModelFittingQuantizedSparseVectorReadFrom, 
                        _AWDProactiveModelFittingSessionReadFrom, _AWDProactiveModelFittingSparseFloatMatrixReadFrom, 
                        _AWDProactiveModelFittingSparseFloatVectorReadFrom, _PMLBuildChunkFile, 
-                       _PMLErrorDomain, _PMLReadChunkData, _PMLReadChunkFile, _PMLWriteChunkFile, 
-                       _PML_LogHandle, _PML_PLIST_CLASS_NAME, _ProactiveMLVersionNumber, 
-                       _ProactiveMLVersionString, _kPFLIdentifierContacts, _kPFLIdentifierQuickResponses, 
-                       _kPMLErrorUserInfoNoiseStrategy, _kPMLErrorUserInfoPlanClass ]
+                       _PMLErrorDomain, _PMLReadChunkData, _PMLReadChunkFile, _PMLWordPieceVocabNotFound, 
+                       _PMLWriteChunkFile, _PML_LogHandle, _PML_PLIST_CLASS_NAME, 
+                       _ProactiveMLVersionNumber, _ProactiveMLVersionString, _kPFLIdentifierContacts, 
+                       _kPFLIdentifierQuickResponses, _kPMLErrorUserInfoNoiseStrategy, 
+                       _kPMLErrorUserInfoPlanClass ]
     objc-classes:    [ AWDProactiveModelFittingEvalMetrics, AWDProactiveModelFittingEvaluation, 
                        AWDProactiveModelFittingLabelSupportPair, AWDProactiveModelFittingLinRegFeatureMatrix, 
                        AWDProactiveModelFittingLinRegObjectiveFeatures, AWDProactiveModelFittingLogRegGradient, 
@@ -54,16 +55,17 @@ exports:
                        PMLInMemoryCachedStore, PMLLabelLimitRowId, PMLLaplaceSampler, 
                        PMLLexicon, PMLLogRegEvaluationPlan, PMLLogRegTrainingPlan, 
                        PMLLogisticRegressionModel, PMLMetaTrainingVariables, PMLMockPlan, 
-                       PMLModelRegressor, PMLModelWeights, PMLMultiLabelEspressoClassifier, 
-                       PMLMultiLabelLogisticRegressionModel, PMLMultiLabelRegressionEvaluationPlan, 
-                       PMLMutableDenseVector, PMLNoNoiseStrategy, PMLPassThroughTracker, 
-                       PMLPlanDescriptor, PMLPlanSerialization, PMLPlanSimulator, 
-                       PMLPlanWrapper, PMLPlistClassWrapper, PMLProtoBufTracker, 
-                       PMLSeparatedDPNoiseStrategy, PMLSessionDescriptor, PMLSparseMatrix, 
-                       PMLSparseVector, PMLSpotlightReference, PMLTrackerAWDAdapter, 
+                       PMLModelRegressor, PMLModelWeights, PMLMultiLabelE5Classifier, 
+                       PMLMultiLabelEspressoClassifier, PMLMultiLabelLogisticRegressionModel, 
+                       PMLMultiLabelRegressionEvaluationPlan, PMLMutableDenseVector, 
+                       PMLNoNoiseStrategy, PMLPassThroughTracker, PMLPlanDescriptor, 
+                       PMLPlanSerialization, PMLPlanSimulator, PMLPlanWrapper, PMLPlistClassWrapper, 
+                       PMLProtoBufTracker, PMLSeparatedDPNoiseStrategy, PMLSessionDescriptor, 
+                       PMLSparseMatrix, PMLSparseVector, PMLSpotlightReference, PMLTrackerAWDAdapter, 
                        PMLTrackerMockAdapter, PMLTrackerParsecAdapter, PMLTraining, 
                        PMLTrainingDatabaseMigrations, PMLTrainingLogEntry, PMLTrainingMock, 
-                       PMLTrainingStore, PMLTrainingStoredSessionBatch ]
+                       PMLTrainingStore, PMLTrainingStoredSessionBatch, PMLWordPieceTokenizer, 
+                       PMLWordPieceVocabTrie ]
     objc-ivars:      [ AWDProactiveModelFittingEvalMetrics._f1, AWDProactiveModelFittingEvalMetrics._falseNegatives, 
                        AWDProactiveModelFittingEvalMetrics._falsePositives, AWDProactiveModelFittingEvalMetrics._has, 
                        AWDProactiveModelFittingEvalMetrics._negativeScores, AWDProactiveModelFittingEvalMetrics._positiveScores, 
@@ -131,5 +133,5 @@ exports:
                        AWDProactiveModelFittingSparseFloatMatrix._values, AWDProactiveModelFittingSparseFloatVector._has, 
                        AWDProactiveModelFittingSparseFloatVector._indices, AWDProactiveModelFittingSparseFloatVector._length, 
                        AWDProactiveModelFittingSparseFloatVector._values, PMLDataChunk._backingData, 
-                       PMLDataChunk._superdata, PMLDenseVector._data ]
+                       PMLDataChunk._superdata, PMLDenseVector._data, PMLWordPieceTokenizer._vocab ]
 ...

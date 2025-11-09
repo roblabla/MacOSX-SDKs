@@ -236,12 +236,13 @@ extern vm_size_t        mem_size;               /* 32-bit size of memory - limit
 extern uint64_t         max_mem;                /* 64-bit size of memory - limited by maxmem */
 
 /*
- * The default pager does not handle 64-bit offsets inside its objects,
- * so this limits the size of anonymous memory objects to 4GB minus 1 page.
+ * The VM compressor pager uses 32-bit page numbers, so this limits the size
+ * of anonymous memory objects to 0xffffffff pages.
  * When we need to allocate a chunk of anonymous memory over that size,
  * we have to allocate more than one chunk.
  */
-#define ANON_MAX_SIZE   ((1ULL << 32) - PAGE_SIZE)
+#define ANON_MAX_PAGES   0xFFFFFFFFULL
+#define ANON_MAX_SIZE (ANON_MAX_PAGES << PAGE_SHIFT)
 /*
  * Work-around for <rdar://problem/6626493>
  * Break large anonymous memory areas into 128MB chunks to alleviate

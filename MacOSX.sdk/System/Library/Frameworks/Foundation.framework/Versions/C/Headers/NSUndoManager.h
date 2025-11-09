@@ -16,23 +16,13 @@
 @class NSArray<ObjectType>;
 @class NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // used with NSRunLoop's performSelector:target:argument:order:modes:
 static const NSUInteger NSUndoCloseGroupingRunLoopOrdering = 350000;
 
 API_AVAILABLE(macos(10.0), ios(3.0), watchos(2.0), tvos(9.0))
-@interface NSUndoManager : NSObject {
-    @private
-    id 			_undoStack;
-    id 			_redoStack;
-    NSArray 		*_runLoopModes;
-    uint64_t		_NSUndoManagerPrivate1;
-    id 			_target;
-    id			_proxy;
-    void		*_NSUndoManagerPrivate2;
-    void		*_NSUndoManagerPrivate3;
-}
+@interface NSUndoManager : NSObject
 
         /* Begin/End Grouping */
 
@@ -113,7 +103,7 @@ API_AVAILABLE(macos(10.0), ios(3.0), watchos(2.0), tvos(9.0))
     @discussion
       As with other undo operations, this does not strongly retain target. Care should be taken to avoid introducing retain cycles by other references captured by the block.
  */
-- (void)registerUndoWithTarget:(id)target handler:(void (^)(id target))undoHandler API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) NS_REFINED_FOR_SWIFT;
+- (void)registerUndoWithTarget:(id)target handler:(void (NS_SWIFT_SENDABLE ^)(id target))undoHandler API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) NS_REFINED_FOR_SWIFT;
 
 - (void)setActionIsDiscardable:(BOOL)discardable API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
    // Set the latest undo action to discardable if it may be safely discarded when a document can not be saved for any reason. An example might be an undo action that changes the viewable area of a document. To find out if an undo group contains only discardable actions, look for the NSUndoManagerGroupIsDiscardableKey in the userInfo dictionary of the NSUndoManagerDidCloseUndoGroupNotification.
@@ -171,4 +161,4 @@ FOUNDATION_EXPORT NSNotificationName const NSUndoManagerWillCloseUndoGroupNotifi
 // This notification is sent after an undo group closes. It should be safe to undo at this time.
 FOUNDATION_EXPORT NSNotificationName const NSUndoManagerDidCloseUndoGroupNotification API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

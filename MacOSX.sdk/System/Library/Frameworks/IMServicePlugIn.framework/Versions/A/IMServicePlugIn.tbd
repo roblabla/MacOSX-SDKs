@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C5A42643-AF71-3F63-A41B-0D2E9CB181AD
+    value:           CABC59C0-FFCF-3F6E-A034-D50302DDB5A6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A7A1C485-D870-3C2F-B184-59D1F3523F60
+    value:           7FA83969-3E86-3169-9971-4D520F1C15D3
 install-name:    '/System/Library/Frameworks/IMServicePlugIn.framework/Versions/A/IMServicePlugIn'
 current-version: 1000
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/IMServicePlugIn.framework/Versions/A/Frameworks/IMServicePlugInSupport.framework/Versions/A/IMServicePlugInSupport' ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ IMFileTransferInputStream, IMFileTransferOutputStream, IMServicePlugInFileTransfer, 
                        IMServicePlugInFileTransferSession, IMServicePlugInIncomingFileTransfer, 
                        IMServicePlugInIncomingFileTransferSession, IMServicePlugInMessage, 
@@ -28,15 +28,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AC6FCE81-F081-33FD-AFA9-D19AE720D0D7
+    value:           C2FFE842-BB23-3CEA-8AA6-C3082AB4D80C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E8B7F72F-D188-3A1B-91F3-0572545BBA51
+    value:           6C4B4A78-6B3B-3E75-AF67-0C10E2CDF9E6
 install-name:    '/System/Library/Frameworks/IMServicePlugIn.framework/Versions/A/Frameworks/IMServicePlugInSupport.framework/Versions/A/IMServicePlugInSupport'
 current-version: 1000
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IMAccountSettingLoginHandle, _IMAccountSettingPassword, _IMAccountSettingServerHost, 
                        _IMAccountSettingServerPort, _IMAccountSettingUsesSSL, _IMAttributeBackgroundColor, 
                        _IMAttributeBaseWritingDirection, _IMAttributeBold, _IMAttributeFontFamily, 

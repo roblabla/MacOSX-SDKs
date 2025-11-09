@@ -48,6 +48,12 @@ const CFStringRef kSMErrorDomainLaunchd;
  * @const kSMErrorServiceUnavailable 
  * The service required to perform this operation is unavailable or is no longer
  * accepting requests.
+ *
+ * @const kSMErrorLaunchDeniedByUser
+ * The user declined to allow the job to launch
+ *
+ * @const kSMErrorAlreadyRegistered
+ * The service has already been registered
  */
 enum {
 	kSMErrorInternalFailure = 2,
@@ -59,6 +65,8 @@ enum {
 	kSMErrorJobPlistNotFound,
 	kSMErrorJobMustBeEnabled,
 	kSMErrorInvalidPlist,
+	kSMErrorLaunchDeniedByUser,
+	kSMErrorAlreadyRegistered,
 };
 
 __END_DECLS

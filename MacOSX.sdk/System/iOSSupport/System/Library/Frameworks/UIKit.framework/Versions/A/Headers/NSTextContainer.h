@@ -14,7 +14,7 @@
 @class UIBezierPath;
 @class NSTextLayoutManager;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
@@ -77,7 +77,7 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
 
 #endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/NSTextContainer.h>

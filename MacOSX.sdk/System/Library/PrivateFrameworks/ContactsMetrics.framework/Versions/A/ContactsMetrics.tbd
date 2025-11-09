@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B11ADF36-E9BC-338E-A238-349B54C1B3BD
+    value:           CCF983A9-469F-3A0F-99B7-958D7624A83E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D09CD7A2-B44B-3AAF-B5D4-582F40DA25C8
+    value:           E48EE11F-5226-3197-AAD7-9BBE671E2385
 install-name:    '/System/Library/PrivateFrameworks/ContactsMetrics.framework/Versions/A/ContactsMetrics'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CNMetricsKeyApplication, _CNMetricsKeyAverageProperties, 
                        _CNMetricsKeyCompanyContactFraction, _CNMetricsKeyCompanyDetailsFraction, 
                        _CNMetricsKeyContactsCount, _CNMetricsKeyContactsPerDAVAccount, 

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F1166200-55C1-3FCC-A3E1-39237ECBC619
+    value:           6D78D9FB-8AB9-30DB-84DA-81672783C732
   - target:          x86_64-maccatalyst
-    value:           F1166200-55C1-3FCC-A3E1-39237ECBC619
+    value:           6D78D9FB-8AB9-30DB-84DA-81672783C732
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           07653497-83BA-3463-99D5-E880BA6CC88D
+    value:           7D001CEA-7CC4-3666-BABA-D6B4ADEE0780
   - target:          arm64e-maccatalyst
-    value:           07653497-83BA-3463-99D5-E880BA6CC88D
+    value:           7D001CEA-7CC4-3666-BABA-D6B4ADEE0780
 install-name:    '/usr/lib/swift/libswiftCoreMediaIO.dylib'
-current-version: 5355.16
+current-version: 5427.14
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$sSo25CMIOExtensionStreamFormatC11CoreMediaIOE17formatDescription16maxFrameDuration03minjK005validJ9DurationsABSo08CMFormatH3Refa_So6CMTimeaAKSayAKGSgtcfC', 
                        '_$sSo25CMIOExtensionStreamFormatC11CoreMediaIOE17formatDescription16maxFrameDuration03minjK005validJ9DurationsABSo08CMFormatH3Refa_So6CMTimeaAKSayAKGSgtcfc', 
                        '_$sSo25CMIOExtensionStreamFormatC11CoreMediaIOE19validFrameDurationsSaySo6CMTimeaGSgvg', 

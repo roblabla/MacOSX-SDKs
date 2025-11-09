@@ -20,7 +20,7 @@
 @protocol NSTextContentManagerDelegate;
 @protocol NSTextStorageObserving;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #pragma mark NSTextElementProvider
 typedef NS_OPTIONS(NSUInteger, NSTextContentManagerEnumerationOptions) {
@@ -79,7 +79,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 - (void)synchronizeTextLayoutManagers:(nullable void (^)(NSError * _Nullable error))completionHandler;
 
 #pragma mark Element access
-// Returns an array of NSTextElement intersecting the specified range in sequence. It can return a set of elements not filling the entire range specified if the entire range is not synchronously available. Uses -enumerateTextElementsFromLocation:options:usingBlocK: to fill the array.
+// Returns an array of NSTextElement intersecting the specified range in sequence. It can return a set of elements not filling the entire range specified if the entire range is not synchronously available. Uses -enumerateTextElementsFromLocation:options:usingBlock: to fill the array.
 - (NSArray<NSTextElement *> *)textElementsForRange:(NSTextRange *)range;
 
 #pragma mark Transaction
@@ -150,7 +150,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 // Posted by NSTextContentStorage when a text attribute unsupported by NSTextContentStorage is added to the underlying text storage.
 UIKIT_EXTERN NSNotificationName NSTextContentStorageUnsupportedAttributeAddedNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 #else
 #import <UIFoundation/NSTextContentManager.h>
 #endif

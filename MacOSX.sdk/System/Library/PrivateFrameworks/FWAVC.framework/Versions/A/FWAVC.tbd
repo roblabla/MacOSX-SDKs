@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4C4334C9-74C2-3590-B771-A0C2EF80A836
+    value:           E4F59D17-A1F6-3E48-B5F4-BAC5CCDBF47F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9248208C-93C2-31E2-94BA-3C18D985F27C
+    value:           91C93B60-2140-3BFD-970C-79A7471A6ED0
 install-name:    '/System/Library/PrivateFrameworks/FWAVC.framework/Versions/A/FWAVC'
 current-version: 46
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _FWAVCDVFramerCreate, _FWAVCDVFramerFrameGetClientPrivateData, 
                        _FWAVCDVFramerFrameGetDVMode, _FWAVCDVFramerFrameGetFrameDataBuf, 
                        _FWAVCDVFramerFrameGetFramer, _FWAVCDVFramerFrameGetLen, _FWAVCDVFramerFrameGetSYTTime, 

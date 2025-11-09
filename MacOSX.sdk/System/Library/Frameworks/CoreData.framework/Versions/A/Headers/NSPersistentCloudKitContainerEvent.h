@@ -1,7 +1,7 @@
 /*
     NSPersistentCloudKitContainerEvent.h
     Core Data
-    Copyright (c) 2020-2021, Apple Inc.
+    Copyright (c) 2020-2022, Apple Inc.
     All rights reserved.
 */
 
@@ -10,6 +10,8 @@
 #import <Foundation/NSDate.h>
 #import <Foundation/NSString.h>
 #import <Foundation/NSNotification.h>
+
+#import <CoreData/CoreDataDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

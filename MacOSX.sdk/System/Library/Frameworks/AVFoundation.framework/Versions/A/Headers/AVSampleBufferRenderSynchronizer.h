@@ -214,6 +214,12 @@ AVF_EXPORT NSNotificationName const AVSampleBufferRenderSynchronizerRateDidChang
 		An object returned by a previous call to -addPeriodicTimeObserverForInterval:queue:usingBlock: or -addBoundaryTimeObserverForTimes:queue:usingBlock:.
 	@discussion
 		Upon return, the caller is guaranteed that no new time observer blocks will begin executing.  Depending on the calling thread and the queue used to add the time observer, an in-flight block may continue to execute after this method returns.  You can guarantee synchronous time observer removal by enqueuing the call to -removeTimeObserver: on that queue.  Alternatively, call dispatch_sync(queue, ^{}) after -removeTimeObserver: to wait for any in-flight blocks to finish executing.  -removeTimeObserver: should be used to explicitly cancel each time observer added using -addPeriodicTimeObserverForInterval:queue:usingBlock: and -addBoundaryTimeObserverForTimes:queue:usingBlock:.
+ 
+		This method throws an exception for any of the following reasons:
+			- observer was added by another AVSampleBufferRenderSynchronizer
+			- observer was not returned by either
+				-addPeriodicTimeObserverForInterval:queue:usingBlock:
+				-addBoundaryTimeObserverForTimes:queue:usingBlock:
 */
 - (void)removeTimeObserver:(id)observer;
 

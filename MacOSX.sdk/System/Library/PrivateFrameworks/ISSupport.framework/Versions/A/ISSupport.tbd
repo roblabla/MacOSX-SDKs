@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FA025ABB-92D0-3CF4-ABD8-1EEE1E928840
+    value:           D4E28B79-90AC-3EE5-A358-B100D63C9D17
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3C10A14A-FD56-3C10-A9FA-8235469D0689
+    value:           51DF78DF-7F7D-319F-8BF4-B5A7E03A36BD
 install-name:    '/System/Library/PrivateFrameworks/ISSupport.framework/Versions/A/ISSupport'
 current-version: 58
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ISS_AYAbortError, _ISS_AYErrorDomain, _ISS_AYIOKitErrorDomain, 
                        _ISS_AYIPV4AddressType, _ISS_AYIPV6AddressType, _ISS_AYMarkNotification, 
                        _ISS_AYMarkTagKey, _ISS_AYNetDBErrorDomain, _ISS_AYOperationEndedNotification, 

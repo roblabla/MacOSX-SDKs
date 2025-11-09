@@ -15,7 +15,7 @@
 #import <UIKit/UIBarButtonItem.h>
 #import <UIKit/UIBarCommon.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UISearchBarIcon) {
     UISearchBarIconSearch, // The magnifying glass
@@ -100,6 +100,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
  If the search bar is owned by a UISearchController, then using the setter
  for this property (as well as -setShowsScopeBar:animated:) will implicitly
  set the UISearchController's automaticallyShowsScopeBar property to NO.
+ On iOS 16.0, UISearchController's scopeBarActivation is set to UISearchControllerScopeBarActivationManual
  */
 @property(nonatomic)      BOOL       showsScopeBar            API_AVAILABLE(ios(3.0)); // default is NO. if YES, shows the scope bar. call sizeToFit: to update frame
 - (void)setShowsScopeBar:(BOOL)show animated:(BOOL)animate API_AVAILABLE(ios(13.0));
@@ -181,7 +182,7 @@ NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UISearchBar.h>

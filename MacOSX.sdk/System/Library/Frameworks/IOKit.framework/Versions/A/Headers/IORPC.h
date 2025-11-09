@@ -74,12 +74,14 @@ struct IORPCMessageMach {
 };
 typedef struct IORPCMessageMach IORPCMessageMach;
 
+#pragma pack(push, 4)
 struct IORPCMessage {
 	uint64_t         msgid;
 	uint64_t         flags;
 	uint64_t         objectRefs;
 	OSObjectRef      objects[0];
 };
+#pragma pack(pop)
 typedef struct IORPCMessage IORPCMessage;
 
 #if defined(__cplusplus)

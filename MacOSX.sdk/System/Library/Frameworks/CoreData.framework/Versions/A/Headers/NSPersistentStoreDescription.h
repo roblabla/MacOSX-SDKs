@@ -1,7 +1,7 @@
 /*
     NSPersistentStoreDescription.h
     Core Data
-    Copyright (c) 2016-2021, Apple Inc.
+    Copyright (c) 2016-2022, Apple Inc.
     All rights reserved.
 */
 

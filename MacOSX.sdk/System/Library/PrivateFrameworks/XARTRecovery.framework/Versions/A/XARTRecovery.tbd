@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A288698A-A821-397C-800F-75FE74D1AC67
+    value:           3BB2E774-D409-3DE3-9A00-7FD7708F2D26
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2710A1C4-2C84-32E9-99BB-12ABB2951FF9
+    value:           247A3915-E8BA-3A22-9680-4DE5B8E7D983
 install-name:    '/System/Library/PrivateFrameworks/XARTRecovery.framework/Versions/A/XARTRecovery'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _XARTRecoveryVersionNumber, _XARTRecoveryVersionString, _xart_msg_create, 
                        _xart_msg_create_reply, _xart_msg_get_error_string, _xart_msg_release, 
                        _xart_msg_request_server_start, _xart_msg_send_with_reply, 

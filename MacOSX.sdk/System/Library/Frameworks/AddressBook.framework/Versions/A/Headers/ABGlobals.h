@@ -123,7 +123,7 @@ extern NSString * const kABAddressProperty;                // Street Addresses -
  *    sk = Slovakia
  *    sy = Syrian Arab Republic
  *    tw = Taiwan
- *    tr = Turkey
+ *    tr = Turkiye
  *    ua = Ukraine
  *    uk = United Kingdom
  *    us = United States

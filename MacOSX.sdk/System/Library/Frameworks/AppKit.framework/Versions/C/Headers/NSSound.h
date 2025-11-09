@@ -104,7 +104,7 @@ typedef NSString * NSSoundPlaybackDeviceIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 @protocol NSSoundDelegate <NSObject>
 @optional
 
-- (void)sound:(NSSound *)sound didFinishPlaying:(BOOL)flag;
+- (void)sound:(NSSound *)sound didFinishPlaying:(BOOL)flag NS_SWIFT_UI_ACTOR;
 
 @end
 

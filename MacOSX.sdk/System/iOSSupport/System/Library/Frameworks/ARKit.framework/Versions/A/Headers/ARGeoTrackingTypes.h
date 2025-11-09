@@ -1,4 +1,3 @@
-
 //
 //  ARGeoTrackingTypes.h
 //  ARKit

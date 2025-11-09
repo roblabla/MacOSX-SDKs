@@ -2,7 +2,7 @@
 //  AVB17221AECPMessage.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2011-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 				This class is a abstract class providing the support for the common format shared between the different
 				AECP message types.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVB17221AECPMessage : NSObject <NSCopying>
 
 /*!
@@ -39,12 +39,12 @@ API_AVAILABLE(macos(10.8))
 	@property	targetEntityID
 	@abstract	The target_entity_id field of the AECP message.
  */
-@property (assign) uint64_t targetEntityID API_AVAILABLE(macos(10.9));
+@property (assign) uint64_t targetEntityID API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@property	controllerEntityID
 	@abstract	The controller_entity_id field of the AECP message.
  */
-@property (assign) uint64_t controllerEntityID API_AVAILABLE(macos(10.9));
+@property (assign) uint64_t controllerEntityID API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@property	sequenceID
 	@abstract	The sequence_id field of the AECP message.
@@ -86,7 +86,7 @@ API_AVAILABLE(macos(10.8))
  @discussion	AVB17221AECPAEMMessage encapsulates an IEEE Std 1722.1™-2013 AVDECC Enumeration and Control Protocol (AECP), AVDECC Entity Model (AEM) message.
  This class is a concrete subclass of AVB17221AECPMessage which provides support for the AEM messages.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVB17221AECPAEMMessage : AVB17221AECPMessage
 {
 @private
@@ -107,7 +107,7 @@ API_AVAILABLE(macos(10.8))
  @property	controllerRequest
  @abstract	The cr field of the AECP AEM message.
  */
-@property (assign, getter=isControllerRequest) BOOL controllerRequest API_AVAILABLE(macos(10.9));
+@property (assign, getter=isControllerRequest) BOOL controllerRequest API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 
 /*!
 	@property	commandSpecificData
@@ -142,7 +142,7 @@ API_AVAILABLE(macos(10.8))
 	@discussion	AVB17221AECPAddressAccessMessage encapsulates an IEEE Std 1722.1™-2013 AVDECC Enumeration and Control Protocol (AECP), Address Access message.
 				This class is a concrete subclass of AVB17221AECPMessage which provides support for the Address Access messages.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVB17221AECPAddressAccessMessage : AVB17221AECPMessage
 
 /*!
@@ -177,7 +177,7 @@ API_AVAILABLE(macos(10.8))
 	@abstract	AVB17221AECPAddressAccessTLV encapsulates a TLV from an IEEE Std 1722.1™-2013 AVDECC Enumeration and Control Protocol, Address Access message.
 	@discussion	AVB17221AECPAddressAccessTLV encapsulates a TLV from an IEEE Std 1722.1™-2013 AVDECC Enumeration and Control Protocol (AECP), Address Access message.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVB17221AECPAddressAccessTLV : NSObject
 
 /*!
@@ -209,7 +209,7 @@ API_AVAILABLE(macos(10.8))
 	@discussion	AVB17221AECPAVCMessage encapsulates an IEEE Std 1722.1™-2013 AVDECC Enumeration and Control Protocol (AECP), Legacy AV/C message.
 				This class is a concrete subclass of AVB17221AECPMessage which provides support for the Legacy AV/C messages.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVB17221AECPAVCMessage : AVB17221AECPMessage
 
 /*!
@@ -231,7 +231,7 @@ API_AVAILABLE(macos(10.8))
 	@discussion	AVB17221AECPVendorMessage encapsulates an IEEE Std 1722.1™-2013 AVDECC Enumeration and Control Protocol (AECP), Vendor Unique message.
 				This class is a concrete subclass of AVB17221AECPMessage which provides support for the AEM messages.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVB17221AECPVendorMessage : AVB17221AECPMessage
 
 /*!

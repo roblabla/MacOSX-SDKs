@@ -17,7 +17,7 @@
 typedef NSString * NSHTTPCookiePropertyKey NS_TYPED_EXTENSIBLE_ENUM;
 typedef NSString * NSHTTPCookieStringPolicy NS_TYPED_ENUM;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*!
     @const NSHTTPCookieName
@@ -126,6 +126,7 @@ FOUNDATION_EXPORT NSHTTPCookieStringPolicy const NSHTTPCookieSameSiteStrict API_
     attributes of a cookie.
 */
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSHTTPCookie : NSObject
 {
@@ -287,7 +288,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
     @method cookiesWithResponseHeaderFields:forURL:
     @abstract Return an array of cookies parsed from the specified response header fields and URL.
     @param headerFields The response header fields to check for cookies.
-    @param URL The URL that the cookies came from - relevant to how the cookies are interpeted.
+    @param URL The URL that the cookies came from - relevant to how the cookies are interpreted.
     @result An NSArray of NSHTTPCookie objects
     @discussion This method will ignore irrelevant header fields so
     you can pass a dictionary containing data other than cookie data.
@@ -369,7 +370,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
     secure channels
     @discussion Cookies may be marked secure by a server (or by a javascript).
     Cookies marked as such must only be sent via an encrypted connection to 
-    trusted servers (i.e. via SSL or TLS), and should not be delievered to any
+    trusted servers (i.e. via SSL or TLS), and should not be delivered to any
     javascript applications to prevent cross-site scripting vulnerabilities.
     @result YES if this cookie should be sent only over secure channels,
     NO otherwise.
@@ -435,4 +436,4 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

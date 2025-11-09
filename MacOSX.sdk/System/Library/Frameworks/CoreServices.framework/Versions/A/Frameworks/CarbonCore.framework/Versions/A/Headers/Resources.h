@@ -49,7 +49,7 @@ enum {
   resProtectedBit               = 3,    /*Protected/not protected*/
   resPreloadBit                 = 2,    /*Read in at OpenResource?*/
   resChangedBit                 = 1     /*Existing resource changed since last update*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* Resource Attribute Masks*/
 enum {
@@ -59,27 +59,27 @@ enum {
   resProtected                  = 8,    /*Protected?*/
   resPreload                    = 4,    /*Load in on OpenResFile?*/
   resChanged                    = 2     /*Resource changed?*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* Resource Fork Attribute Bits*/
 enum {
   mapReadOnlyBit                = 7,    /*is this file read-only?*/
   mapCompactBit                 = 6,    /*Is a compact necessary?*/
   mapChangedBit                 = 5     /*Is it necessary to write map?*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* Resource Fork Attribute Masks*/
 enum {
   mapReadOnly                   = 128,  /*Resource file read-only*/
   mapCompact                    = 64,   /*Compact resource file*/
   mapChanged                    = 32    /*Write map out at update*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* Resource File Ref Num constants*/
 enum {
   kResFileNotOpened             = -1,   /*ref num return as error when opening a resource file*/
   kSystemResFile                = 0     /*this is the default ref num to the system file*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 
 typedef CALLBACK_API( void , ResErrProcPtr )(OSErr thErr);
@@ -817,7 +817,7 @@ enum {
   kRsrcChainBelowApplicationMap = 1,    /* Below the application's resource map*/
   kRsrcChainAboveApplicationMap = 2,    /* Above the application's resource map*/
   kRsrcChainAboveAllMaps        = 4     /* Above all resource maps*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /*
    If the file is already in the resource chain, it is removed and re-inserted at the specified location

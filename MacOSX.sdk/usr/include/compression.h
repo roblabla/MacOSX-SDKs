@@ -121,8 +121,9 @@ typedef enum {
     COMPRESSION_LZ4_RAW  = 0x101,       // available starting OS X 10.11, iOS 9.0
     COMPRESSION_BROTLI   = 0xB02,       // available starting OS X 12.0, iOS 15.0
 
-    /* Apple-specific algorithm */
+    /* Apple-specific algorithms */
     COMPRESSION_LZFSE    = 0x801,       // available starting OS X 10.11, iOS 9.0
+    COMPRESSION_LZBITMAP = 0x702,       // buffer API only, available starting OS X 12.0, iOS 15.0
 
 } compression_algorithm;
 

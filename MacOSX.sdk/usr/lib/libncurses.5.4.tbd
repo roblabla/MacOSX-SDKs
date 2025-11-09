@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           833A181E-4354-3EBB-9B2C-597E0FD9407C
+    value:           159AC1E5-1BD1-3172-92BE-D636D944DA85
   - target:          x86_64-maccatalyst
-    value:           833A181E-4354-3EBB-9B2C-597E0FD9407C
+    value:           159AC1E5-1BD1-3172-92BE-D636D944DA85
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1FBE3394-E1A7-3F10-AFF3-9E6B9608B483
+    value:           36E01F34-1B7D-33C5-B8D9-C97EB482572F
   - target:          arm64e-maccatalyst
-    value:           1FBE3394-E1A7-3F10-AFF3-9E6B9608B483
+    value:           36E01F34-1B7D-33C5-B8D9-C97EB482572F
 install-name:    '/usr/lib/libncurses.5.4.dylib'
 current-version: 5.4
 compatibility-version: 5.4
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BC, _COLORS, _COLOR_PAIR, _COLOR_PAIRS, _COLS, _ESCDELAY, 
                        _LINES, _PAIR_NUMBER, _PC, _SP, _TABSIZE, _UP, __nc_access, 
                        __nc_add_to_try, __nc_align_termtype, __nc_basename, __nc_baudrate, 

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B8A86592-899B-3E60-8F45-48866B09DFDE
+    value:           6FAA8C02-5B68-3F0F-8A77-81D3558277C4
   - target:          x86_64-maccatalyst
-    value:           B8A86592-899B-3E60-8F45-48866B09DFDE
+    value:           6FAA8C02-5B68-3F0F-8A77-81D3558277C4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           57A9B7A1-F1A0-35C2-9433-8BF150D1C722
+    value:           ADF5F309-A0C0-3A7C-BA46-DCFF5D309276
   - target:          arm64e-maccatalyst
-    value:           57A9B7A1-F1A0-35C2-9433-8BF150D1C722
+    value:           ADF5F309-A0C0-3A7C-BA46-DCFF5D309276
 install-name:    '/System/Library/PrivateFrameworks/FTAWD.framework/Versions/A/FTAWD'
 current-version: 800
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FTAWDLogCallAcceptReceived, _FTAWDLogCallAcceptSent, _FTAWDLogCallCancelSent, 
                        _FTAWDLogCallConnected, _FTAWDLogCallDeclineSent, _FTAWDLogCallEnded, 
                        _FTAWDLogCallEndedViceroy, _FTAWDLogCallFailed, _FTAWDLogCallInterruptionBegan, 

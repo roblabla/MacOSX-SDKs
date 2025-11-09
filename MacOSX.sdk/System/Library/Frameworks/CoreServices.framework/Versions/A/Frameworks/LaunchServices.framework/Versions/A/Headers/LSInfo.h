@@ -47,9 +47,11 @@ CF_ASSUME_NONNULL_BEGIN
 /* ======================================================================================================== */
 /* LaunchServices Type & Constants                                                                          */
 /* ======================================================================================================== */
+/* -10400 .. -10449 now reserved for LS */
 
 CF_ENUM(OSStatus) {
   kLSNo32BitEnvironmentErr      = -10386, /* i386 is no longer supported*/
+  kLSMalformedLocErr 			= -10400, /* malformed internet locator file */
   kLSAppInTrashErr              = -10660, /* The app cannot be run when inside a Trash folder*/
   kLSExecutableIncorrectFormat  = -10661, /* No compatible executable was found*/
   kLSAttributeNotFoundErr       = -10662, /* An item attribute value could not be found with the specified name*/
@@ -77,6 +79,7 @@ CF_ENUM(OSStatus) {
   kLSNoExecutableErr            = -10827, /* The executable is missing*/
   kLSNoClassicEnvironmentErr    = -10828, /* The Classic environment was required but is not available*/
   kLSMultipleSessionsNotSupportedErr = -10829, /* The app cannot run simultaneously in two different sessions*/
+
 };
 
 typedef CF_OPTIONS(OptionBits, LSRolesMask) {
@@ -410,7 +413,7 @@ LSCopyAllHandlersForURLScheme(CFStringRef inURLScheme)               API_DEPRECA
  *  bundle identifier.
  *
  *	@param	inURLScheme	the url scheme to set a default handler for
- *	@param inHandlerBundeID	the bundle identifier to be set as the default handler for the given scheme
+ *	@param inHandlerBundleID	the bundle identifier to be set as the default handler for the given scheme
  */
 extern OSStatus 
 LSSetDefaultHandlerForURLScheme(

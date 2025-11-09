@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BEA5A54A-EC82-37E7-9D36-E39FDA33F72E
+    value:           5E0A33E4-A95F-3E1E-8204-CE8C8237916C
   - target:          x86_64-maccatalyst
-    value:           BEA5A54A-EC82-37E7-9D36-E39FDA33F72E
+    value:           5E0A33E4-A95F-3E1E-8204-CE8C8237916C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C40BB963-72F2-3B20-A799-213809C93397
+    value:           A23B5271-023F-3290-970F-EF0083000AE0
   - target:          arm64e-maccatalyst
-    value:           C40BB963-72F2-3B20-A799-213809C93397
+    value:           A23B5271-023F-3290-970F-EF0083000AE0
 install-name:    '/System/Library/PrivateFrameworks/AdCore.framework/Versions/A/AdCore'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ADAdConnectionGetStringForValue, _ADAdsOptions, _ADAnalyticsEventReadFrom, 
                        _ADAttributionRequestReadFrom, _ADAttributionResponseReadFrom, 
                        _ADClientSettingsRequestReadFrom, _ADClientSettingsResponseReadFrom, 
@@ -31,11 +31,12 @@ exports:
                        _ADOptOutRequestReadFrom, _ADOptOutResponseReadFrom, _ADParameterReadFrom, 
                        _ADPrivacyDaemonIdentifier, _ADRoutingInfoMessageReadFrom, 
                        _ADSaveToPromotedContentKeychain, _ADSegmentUpdateRequestReadFrom, 
-                       _ADSegmentUpdateResponseReadFrom, _ADSimulateCrash, _ADSimulatedCrashKillCode_InternalWatchdog, 
-                       _ADSponsoredSearchRequestReadFrom, _ADTrackingIDManagerMachServiceName, 
-                       _ADTransparencyDetailsReadFrom, _ADUserTargetingPropertiesReadFrom, 
-                       _ADUserTransparencyRequestReadFrom, _ADUserTransparencyResponseReadFrom, 
-                       _ADWriteDataToKeychain, _ADXPCConnectionOptions, _AMSBagIsSponsoredAdsEnabledForAdTrackingDStringKey, 
+                       _ADSegmentUpdateResponseReadFrom, _ADSettingsReadFrom, _ADSimulateCrash, 
+                       _ADSimulatedCrashKillCode_InternalWatchdog, _ADSponsoredSearchRequestReadFrom, 
+                       _ADTrackingIDManagerMachServiceName, _ADTransparencyDetailsReadFrom, 
+                       _ADUserTargetingPropertiesReadFrom, _ADUserTransparencyRequestReadFrom, 
+                       _ADUserTransparencyResponseReadFrom, _ADWriteDataToKeychain, 
+                       _ADXPCConnectionOptions, _AMSBagIsSponsoredAdsEnabledForAdTrackingDStringKey, 
                        _AMSBagIsSponsoredAdsEnabledStringKey, _APDefaultsBundleID, 
                        _APResourceConnectProxyKey, _APServerConfigurationKey, _AdCoreVersionNumber, 
                        _AdCoreVersionString, _AdSheetIdentifier, _AppStoreDefaultsBundleID, 
@@ -53,9 +54,10 @@ exports:
                        ADKeyedParameterList, ADLogAnalyticsRequest, ADLogAnalyticsResponse, 
                        ADNetworkController, ADOptOutRequest, ADOptOutResponse, ADParameter, 
                        ADRoutingInfoMessage, ADSegmentUpdateRequest, ADSegmentUpdateResponse, 
-                       ADServer, ADSingleton, ADSponsoredSearchRequest, ADTransparencyDetails, 
-                       ADUserTargetingProperties, ADUserTransparencyRequest, ADUserTransparencyResponse, 
-                       ADWatchDog, ADWatchDogManager, DSIDRecord ]
+                       ADServer, ADSettings, ADSingleton, ADSponsoredSearchRequest, 
+                       ADTransparencyDetails, ADUserTargetingProperties, ADUserTransparencyRequest, 
+                       ADUserTransparencyResponse, ADWatchDog, ADWatchDogManager, 
+                       DSIDRecord ]
     objc-ivars:      [ ADAnalyticsEvent._event, ADAnalyticsEvent._timestamp, ADAttributionRequest._adMetadata, 
                        ADAttributionRequest._anonymousDemandiAdID, ADAttributionRequest._attributedByiTunes, 
                        ADAttributionRequest._bundleID, ADAttributionRequest._dPID, 
@@ -95,12 +97,13 @@ exports:
                        ADSegmentUpdateRequest._updateSentTime, ADSegmentUpdateResponse._has, 
                        ADSegmentUpdateResponse._idDebug, ADSegmentUpdateResponse._maxSegmentUpdateIntervalInSeconds, 
                        ADSegmentUpdateResponse._segmentRefreshIntervalInSeconds, 
-                       ADSponsoredSearchRequest._clientExclusive, ADSponsoredSearchRequest._deploymentID, 
-                       ADSponsoredSearchRequest._enableImagesForDupes, ADSponsoredSearchRequest._experimentID, 
-                       ADSponsoredSearchRequest._has, ADSponsoredSearchRequest._inAllocation, 
-                       ADSponsoredSearchRequest._isBaseline, ADSponsoredSearchRequest._isTest, 
-                       ADSponsoredSearchRequest._properties, ADSponsoredSearchRequest._supportedODMLVersion, 
-                       ADSponsoredSearchRequest._treatmentID, ADTransparencyDetails._transparencyDetailsUnavailableMessage, 
+                       ADSettings._name, ADSettings._parameters, ADSponsoredSearchRequest._clientExclusive, 
+                       ADSponsoredSearchRequest._deploymentID, ADSponsoredSearchRequest._enableImagesForDupes, 
+                       ADSponsoredSearchRequest._experimentID, ADSponsoredSearchRequest._has, 
+                       ADSponsoredSearchRequest._inAllocation, ADSponsoredSearchRequest._isBaseline, 
+                       ADSponsoredSearchRequest._isTest, ADSponsoredSearchRequest._properties, 
+                       ADSponsoredSearchRequest._supportedODMLVersion, ADSponsoredSearchRequest._treatmentID, 
+                       ADTransparencyDetails._transparencyDetailsUnavailableMessage, 
                        ADTransparencyDetails._transparencyRendererPayload, ADTransparencyDetails._transparencyRendererURL, 
                        ADUserTargetingProperties._accountStates, ADUserTargetingProperties._accountTypes, 
                        ADUserTargetingProperties._administrativeArea, ADUserTargetingProperties._advertisingIdentifierMonthResetCount, 
@@ -117,8 +120,8 @@ exports:
                        ADUserTargetingProperties._latitude, ADUserTargetingProperties._limitAdTracking, 
                        ADUserTargetingProperties._localeIdentifier, ADUserTargetingProperties._locality, 
                        ADUserTargetingProperties._longitude, ADUserTargetingProperties._osVersionAndBuild, 
-                       ADUserTargetingProperties._postalCode, ADUserTargetingProperties._runState, 
-                       ADUserTargetingProperties._storeFrontLanguageLocaleIdentifier, 
+                       ADUserTargetingProperties._overrideType, ADUserTargetingProperties._postalCode, 
+                       ADUserTargetingProperties._runState, ADUserTargetingProperties._storeFrontLanguageLocaleIdentifier, 
                        ADUserTargetingProperties._subAdministrativeArea, ADUserTargetingProperties._targetings, 
                        ADUserTargetingProperties._timezone, ADUserTargetingProperties._toroIDString, 
                        ADUserTargetingProperties._userKeyboards, ADUserTransparencyRequest._contentiAdID, 

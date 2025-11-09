@@ -6,6 +6,8 @@
  *
  */
 
+#ifdef __OBJC__
+
 #import <Foundation/Foundation.h>
 #import <CoreTelephony/CoreTelephonyDefines.h>
 
@@ -157,3 +159,4 @@ CORETELEPHONY_CLASS_AVAILABLE(4_0)
 
 NS_ASSUME_NONNULL_END
 
+#endif // __OBJC__

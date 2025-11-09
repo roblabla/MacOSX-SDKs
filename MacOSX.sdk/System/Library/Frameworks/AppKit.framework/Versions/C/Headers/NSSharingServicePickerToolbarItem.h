@@ -27,7 +27,7 @@ API_AVAILABLE(macos(10.15), ios(10.13))
 @protocol NSSharingServicePickerToolbarItemDelegate <NSSharingServicePickerDelegate>
 @required
 /* Return the items that represent the objects to be shared. They must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider. (e.g. NSString, NSImage, NSURL, etc.). */
-- (NSArray *)itemsForSharingServicePickerToolbarItem:(NSSharingServicePickerToolbarItem *)pickerToolbarItem;
+- (NSArray *)itemsForSharingServicePickerToolbarItem:(NSSharingServicePickerToolbarItem *)pickerToolbarItem NS_SWIFT_UI_ACTOR;
 
 @end
 #endif

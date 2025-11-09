@@ -103,6 +103,11 @@ typedef NS_OPTIONS(NSUInteger, MTLTextureUsage)
     MTLTextureUsagePixelFormatView = 0x0010,
 } API_AVAILABLE(macos(10.11), ios(9.0));
 
+typedef NS_ENUM(NSInteger, MTLTextureCompressionType)
+{
+    MTLTextureCompressionTypeLossless = 0,
+    MTLTextureCompressionTypeLossy = 1,
+} API_AVAILABLE(macos(12.5), ios(15.0));
 
 MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLTextureDescriptor : NSObject <NSCopying>
@@ -225,6 +230,19 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @discussion Useful for opting-out of GPU-optimization when implicit optimization (e.g. RT writes) is regressing CPU-read-back performance. See the documentation for optimizeContentsForGPUAccess: and optimizeContentsForCPUAccess: APIs.
  */
 @property (readwrite, nonatomic) BOOL allowGPUOptimizedContents API_AVAILABLE(macos(10.14), ios(12.0));
+
+/*!
+ @property compressionType
+ @abstract Controls how the texture contents will be compressed when written to by the GPU. Compression can be used to reduce the bandwidth usage and storage requirements of a texture.
+ @discussion The default compression type is lossless, meaning that no loss of precision will occur when the texture content is modified.
+ Losslessly compressed textures may benefit from reduced bandwidth usage when regions of correlated color values are written, but do not benefit from reduced storage requirements.
+ Enabling lossy compression for textures that can tolerate some precision loss will guarantee both reduced bandwidth usage and reduced storage requirements.
+ The amount of precision loss depends on the color values stored; regions with correlated color values can be represented with limited to no precision loss, whereas regions with unrelated color values suffer more precision loss.
+ Enabling lossy compression requires both storageMode == MTLStorageModePrivate, allowGPUOptimizedContents == YES, and cannot be combined with either MTLTextureUsagePixelFormatView, MTLTextureUsageShaderWrite, MTLTextureType1D(Array) or MTLTextureTypeTextureBuffer.
+ Moreover, not all MTLPixelFormat are supported with lossy compression, verify that the MTLDevice's GPU family supports the lossy compression feature for the pixelFormat requested.
+ Set allowGPUOptimizedContents to NO to opt out of both lossless and lossy compression; such textures do not benefit from either reduced bandwidth usage or reduced storage requirements, but have predictable CPU readback performance.
+ */
+@property (readwrite, nonatomic) MTLTextureCompressionType compressionType API_AVAILABLE(macos(12.5), ios(15.0));
 
 /*!
  @property swizzle
@@ -395,6 +413,20 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @discussion Useful for opting-out of GPU-optimization when implicit optimization (e.g. RT writes) is regressing CPU-read-back performance. See the documentation for optimizeContentsForGPUAccess: and optimizeContentsForCPUAccess: APIs.
  */
 @property (readonly) BOOL allowGPUOptimizedContents API_AVAILABLE(macos(10.14), ios(12.0));
+
+/*!
+ @property compressionType
+ @abstract Returns the compression type of the texture
+ @discussion See the compressionType property on MTLTextureDescriptor
+ */
+@property (readonly) MTLTextureCompressionType compressionType API_AVAILABLE(macos(12.5), ios(15.0));
+
+
+/*!
+ @property gpuResourceID
+ @abstract Handle of the GPU resource suitable for storing in an Argument Buffer
+ */
+@property (readonly) MTLResourceID gpuResourceID API_AVAILABLE(macos(13.0), ios(16.0));
 
 /*!
  @method getBytes:bytesPerRow:bytesPerImage:fromRegion:mipmapLevel:slice:

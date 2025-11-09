@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIUserNotificationCategory;
 @class UIUserNotificationAction;
@@ -134,7 +134,7 @@ UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationAct
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIUserNotificationSettings.h>

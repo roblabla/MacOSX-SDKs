@@ -6,7 +6,7 @@
 
 @class NSString, NSCharacterSet, NSDictionary;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // Some of these API are deprecated in Swift only. They remain available in Objective-C.
 #if defined(__swift__)
@@ -69,4 +69,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -3,19 +3,19 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EC71689C-D6A9-38E1-8442-009CC2178B4F
+    value:           E117D7E5-BD6F-3B19-B69E-7DB28EF31AEC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5001271A-167E-3AB5-A94C-544D68F4CE14
+    value:           F708653E-629D-3CF7-8B39-41806C9018A6
 install-name:    '/System/Library/PrivateFrameworks/BehaviorMiner.framework/Versions/A/BehaviorMiner'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _BMAutomationSuggestionsConfig, _BMCreateShortcutFilter, _BMErrorDomain, 
-                       _BMEventInterval, _BMHourSlotForHourOfDay, _BMIsNotAppExtension, 
-                       _BMItemNormalizedValueFromValue, _BMItemValueFromNormalizedValue, 
-                       _BMLog, _BMMaxPhotoPeople, _BMMaxPhotoScenes, _BMStorageURLForDomain, 
-                       _BMTemporalItemsForDate, _BehaviorMinerVersionNumber, _BehaviorMinerVersionString, 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _BMCreateShortcutFilter, _BMErrorDomain, _BMEventInterval, 
+                       _BMHourSlotForHourOfDay, _BMIsNotAppExtension, _BMItemNormalizedValueFromValue, 
+                       _BMItemValueFromNormalizedValue, _BMLog, _BMMaxPhotoPeople, 
+                       _BMMaxPhotoScenes, _BMStorageURLForDomain, _BMTemporalItemsForDate, 
+                       _BehaviorMinerVersionNumber, _BehaviorMinerVersionString, 
                        _hourOfDaySlotDuration ]
     objc-classes:    [ BMAprioriPatternMiner, BMBasketExtractor, BMBehaviorDatabaseMetadata, 
                        BMBehaviorRetriever, BMBehaviorStorage, BMCoreRoutineProvider, 

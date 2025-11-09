@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D125D91F-3071-3105-8D88-04CB43BFFB61
+    value:           A363F319-4CDA-35D9-8420-378B9C51F220
   - target:          x86_64-maccatalyst
-    value:           D125D91F-3071-3105-8D88-04CB43BFFB61
+    value:           A363F319-4CDA-35D9-8420-378B9C51F220
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CBC6A057-C2A4-3B89-8938-24E0E12AB6C6
+    value:           A267DDA9-D694-399E-A247-0DE7B4F4DDEC
   - target:          arm64e-maccatalyst
-    value:           CBC6A057-C2A4-3B89-8938-24E0E12AB6C6
+    value:           A267DDA9-D694-399E-A247-0DE7B4F4DDEC
 install-name:    '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CFPhoneNumberBundleCopyRulesetFileSystemPath, _CFPhoneNumberBundleCopyRulesetURL, 
                        _CFPhoneNumberBundleGetBundle, _CFPhoneNumberCopyCountryCode, 
                        _CFPhoneNumberCopyFormattedInternationalRepresentation, _CFPhoneNumberCopyFormattedRepresentation, 
@@ -45,9 +45,9 @@ exports:
                        __PNCopyFormattedNumberForDigitsWithCountry, __PNCopyFormattedNumberForDigitsWithCountryByRemovingAtIndex, 
                        __PNCopyFormattedNumberSuggestionForDigitsWithCountry, __PNCopyFullyQualifiedNumberForCountry, 
                        __PNCopyFullyQualifiedNumberForCountryInternal, __PNCopyIndexStringsForAddressBookSearch, 
-                       __PNCopyInternationalCodeForCountry, __PNCopyLastFourDigitsOfLocalNumber, 
-                       __PNCopyNationalDirectDialingPrefixForCountry, __PNCopyNormalized, 
-                       __PNCopyPrefixForCountry, __PNCopySampleNumberForCountry, 
+                       __PNCopyInternationalCodeForCountry, __PNCopyInternationalPrefix, 
+                       __PNCopyLastFourDigitsOfLocalNumber, __PNCopyNationalDirectDialingPrefixForCountry, 
+                       __PNCopyNormalized, __PNCopyPrefixForCountry, __PNCopySampleNumberForCountry, 
                        __PNCopyStrippedNumberWithoutPauses, __PNCreateLocalizedStringWithString, 
                        __PNCreateStringByAddingPauses, __PNCreateStringByStrippingFormattingAndNotVisiblyAllowable, 
                        __PNDecomposeForCountry, __PNFindFormatRuleForDigitsWithCountry, 

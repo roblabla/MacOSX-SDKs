@@ -14,7 +14,7 @@
 #import <UIKit/UIBarButtonItem.h>
 #import <UIKit/UIBarCommon.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIBarButtonItem, UIColor, UIToolbarAppearance;
 @protocol UIToolbarDelegate;
@@ -84,7 +84,7 @@ API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @protocol UIToolbarDelegate <UIBarPositioningDelegate>
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIToolbar.h>

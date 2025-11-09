@@ -249,11 +249,11 @@
 #include <HIToolbox/TextEdit.h>
 #endif
 
+#endif  /* !__LP64__ */
+
 #ifndef __TSMTE__
 #include <HIToolbox/TSMTE.h>
 #endif
-
-#endif  /* !__LP64__ */
 
 
 #endif /* __HITOOLBOX__ */

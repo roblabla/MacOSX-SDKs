@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4D57E3AA-CBDD-352B-857A-B4A46722CFC6
+    value:           6B1175D5-1707-3D1F-BB4E-54FF15CA6EC3
   - target:          x86_64-maccatalyst
-    value:           4D57E3AA-CBDD-352B-857A-B4A46722CFC6
+    value:           6B1175D5-1707-3D1F-BB4E-54FF15CA6EC3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CA22C389-C73C-3322-BF28-723E610E82EE
+    value:           235A2E3B-4093-32BE-89AC-918BE9229622
   - target:          arm64e-maccatalyst
-    value:           CA22C389-C73C-3322-BF28-723E610E82EE
+    value:           235A2E3B-4093-32BE-89AC-918BE9229622
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCVMSPluginSupport.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
     symbols:         [ _cvmAddModularFunctionToCache, _cvmBuildModularFunctionDeferred, 
                        _cvmBuildModularFunctionSync, _cvmCancelFunctionPointerArrayWrite, 
                        _cvmCreateCVMObject, _cvmCreateHashMachine, _cvmCreateModularFunction, 

@@ -21,6 +21,10 @@
 #import <IdentityLookup/ILMessageFilterQueryRequest.h>
 #import <IdentityLookup/ILMessageFilterQueryResponse.h>
 
+#import <IdentityLookup/ILMessageFilterCapabilitiesQueryHandling.h>
+#import <IdentityLookup/ILMessageFilterCapabilitiesQueryRequest.h>
+#import <IdentityLookup/ILMessageFilterCapabilitiesQueryResponse.h>
+
 #import <IdentityLookup/ILCommunication.h>
 #import <IdentityLookup/ILCallCommunication.h>
 #import <IdentityLookup/ILMessageCommunication.h>

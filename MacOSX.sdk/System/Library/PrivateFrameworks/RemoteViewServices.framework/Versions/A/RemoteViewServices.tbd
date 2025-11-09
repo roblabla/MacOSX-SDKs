@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           70C9C0CA-E7E5-39B0-A04F-BB32BA317B9F
+    value:           39FDF9E8-F66F-3880-86D7-621BFD40D34A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5B97E0AB-45EA-3617-82ED-DEE61C15C939
+    value:           D9BD384F-55B8-3B5A-8A3D-82D533913FF3
 install-name:    '/System/Library/PrivateFrameworks/RemoteViewServices.framework/Versions/A/RemoteViewServices'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _GetNSWindowDescriptionString, _NSPBOXSessionMessageSetPresentationOptionsParamKey, 
                        _NSRemotePanelOrderPlaceAndChangeKeyKey, _NSRemotePanelOrderPlaceJustOrderOutKey, 
                        _NSRemotePanelOrderPlaceKey, _NSRemotePanelReplyDelegateErrorCodeKey, 
@@ -45,8 +45,8 @@ exports:
                        _NSRemoteTitlebarRenamingSessionDocumentIconWindowFrameKey, 
                        _NSRemoteTitlebarRenamingSessionEditingModeKey, _NSRemoteTitlebarRenamingSessionEditingRangeKey, 
                        _NSRemoteTitlebarRenamingSessionFileExtensionKey, _NSRemoteTitlebarRenamingSessionFlagsKey, 
-                       _NSRemoteTitlebarRenamingSessionMaxTitleRectKey, _NSRemoteTitlebarRenamingSessionOriginalPathKey, 
-                       _NSRemoteTitlebarRenamingSessionRenameFieldAccessibilityTokenKey, 
+                       _NSRemoteTitlebarRenamingSessionLTRKey, _NSRemoteTitlebarRenamingSessionMaxTitleRectKey, 
+                       _NSRemoteTitlebarRenamingSessionOriginalPathKey, _NSRemoteTitlebarRenamingSessionRenameFieldAccessibilityTokenKey, 
                        _NSRemoteTitlebarRenamingSessionRequestPathKey, _NSRemoteTitlebarRenamingSessionSandboxExtensionTokenKey, 
                        _NSRemoteTitlebarRenamingSessionSelectedRangeEndKey, _NSRemoteTitlebarRenamingSessionSelectedRangeKey, 
                        _NSRemoteTitlebarRenamingSessionSelectedRangeStartKey, _NSRemoteTitlebarRenamingSessionTitleFontKey, 

@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
  * @brief   The object representing the state of a user-mode USB host controller root port
  * @details This class assists with tracking internal state transitions of a user-mode USB host controller root port, and parses IOUSBHostCIMessage command
  *          structures to update state and generate properly formatted command responses.
+ *
+ *          IOUSBHostCIPortStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
  */
 @interface IOUSBHostCIPortStateMachine : NSObject
 

@@ -82,7 +82,9 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
     @abstract   The end date for the event.
     @discussion This will be nil for new events until you set it.
 */
+
 @property(null_unspecified, nonatomic, copy) NSDate *endDate;
+
 
 /*!
     @property   structuredLocation

@@ -2,7 +2,7 @@
 //  VZStorageDeviceConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2019-2020 Apple Inc. All rights reserved.
+//  Copyright © 2019-2022 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
     VZStorageDeviceConfiguration should not be instantiated directly.
     One of its subclasses like VZVirtioBlockDeviceConfiguration should be used instead.
 
+ @see VZUSBMassStorageDeviceConfiguration
  @see VZVirtioBlockDeviceConfiguration
  */
 VZ_EXPORT API_AVAILABLE(macos(11.0))

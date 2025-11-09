@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           79678254-AFCB-3527-9165-6B9E863CC9B5
+    value:           C2DD7AD7-A339-3474-BADA-BC87652FC02A
   - target:          x86_64-maccatalyst
-    value:           79678254-AFCB-3527-9165-6B9E863CC9B5
+    value:           C2DD7AD7-A339-3474-BADA-BC87652FC02A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           37B3B5E1-5687-3541-A6C4-E33DEE48E4D3
+    value:           FDE41460-C59A-3B62-B61E-05F27E2F9B62
   - target:          arm64e-maccatalyst
-    value:           37B3B5E1-5687-3541-A6C4-E33DEE48E4D3
+    value:           FDE41460-C59A-3B62-B61E-05F27E2F9B62
 install-name:    '/System/Library/PrivateFrameworks/CoreCaptureDaemon.framework/Versions/A/CoreCaptureDaemon'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CoreCaptureStart, _CoreCaptureStop, _coreCaptureOsLog, _glog_fd ]
 ...

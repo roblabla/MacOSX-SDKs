@@ -136,8 +136,6 @@ IMAGECAPTURE_EXTERN ICAuthorizationStatus const ICAuthorizationStatusAuthorized 
 IC_AVAILABLE(macos(10.4), ios(13.0))
 @interface ICDeviceBrowser : NSObject
 {
-    @private
-    id _privateData;
 }
 
 /*!
@@ -162,7 +160,7 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
   @property browsedDeviceTypeMask
   @abstract A mask whose set bits indicate the type of device(s) being browsed after the receiver receives the start message. This property can be changed while the browser is browsing for devices. This property can be constructed by OR'd values of ICDeviceTypeMask with values of ICDeviceLocationTypeMask.
  */
-@property (readwrite) ICDeviceTypeMask browsedDeviceTypeMask IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+@property (readwrite) ICDeviceTypeMask browsedDeviceTypeMask IC_AVAILABLE(macos(10.4),ios(15.2));
 
 /*!
   @property devices

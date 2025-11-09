@@ -10,8 +10,10 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIPopoverSupport.h>
 #import <UIKit/UIPopoverBackgroundView.h>
+#import <UIKit/UIBarButtonItem.h>
+#import <UIKit/UIPopoverPresentationControllerSourceItem.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIPopoverPresentationController, UISheetPresentationController;
 
@@ -52,7 +54,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 // When this is set to YES, popovers with more content than available space are allowed to overlap the source view rect in order to accommodate the content.
 @property (nonatomic, assign) BOOL canOverlapSourceViewRect API_AVAILABLE(ios(9.0));
 
-@property (nullable, nonatomic, strong) UIBarButtonItem *barButtonItem;
+// Accepts UIBarButtonItem as well as NSToolbarItem in Catalyst.
+@property (nullable, nonatomic, strong) id<UIPopoverPresentationControllerSourceItem> sourceItem API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos);
+
+@property (nullable, nonatomic, strong) UIBarButtonItem *barButtonItem API_DEPRECATED_WITH_REPLACEMENT("sourceItem", ios(8.0, API_TO_BE_DEPRECATED));
 
 // Returns the direction the arrow is pointing on a presented popover. Before presentation, this returns UIPopoverArrowDirectionUnknown.
 @property (nonatomic, readonly) UIPopoverArrowDirection arrowDirection;
@@ -80,7 +85,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIPopoverPresentationController.h>

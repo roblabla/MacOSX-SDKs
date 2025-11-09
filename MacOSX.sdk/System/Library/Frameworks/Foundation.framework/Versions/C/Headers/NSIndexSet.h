@@ -26,7 +26,7 @@ To enumerate without doing a call per index, you can use the method getIndexes:m
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @interface NSIndexSet : NSObject <NSCopying, NSMutableCopying, NSSecureCoding> {
     @protected   // all instance variables are private
@@ -104,10 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface NSMutableIndexSet : NSIndexSet {
-    @protected
-    void *_reserved;
-}
+@interface NSMutableIndexSet : NSIndexSet
 
 - (void)addIndexes:(NSIndexSet *)indexSet;
 - (void)removeIndexes:(NSIndexSet *)indexSet;
@@ -123,4 +120,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

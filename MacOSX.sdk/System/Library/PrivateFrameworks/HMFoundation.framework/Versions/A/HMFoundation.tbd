@@ -4,37 +4,39 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4EA68777-C765-32EC-BA7A-626F8E71088D
+    value:           414C90AA-F1D6-3CA0-A341-4652312851F1
   - target:          x86_64-maccatalyst
-    value:           4EA68777-C765-32EC-BA7A-626F8E71088D
+    value:           414C90AA-F1D6-3CA0-A341-4652312851F1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           51FF663B-179C-3EB8-970C-C6EF209C30FC
+    value:           EA1628E2-465C-304B-8A4F-B89EFF6D3657
   - target:          arm64e-maccatalyst
-    value:           51FF663B-179C-3EB8-970C-C6EF209C30FC
+    value:           EA1628E2-465C-304B-8A4F-B89EFF6D3657
 install-name:    '/System/Library/PrivateFrameworks/HMFoundation.framework/Versions/A/HMFoundation'
-current-version: 680.5.4
+current-version: 722.2.1
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _HMFAreStringsEqualIgnoringCase, _HMFBooleanToString, _HMFCreateOsLogHandle, 
-                       _HMFCurrentAsyncContext, _HMFDataIsReversed, _HMFDescribeCollection, 
-                       _HMFDetailedErrorsKey, _HMFDigestAlgorithmFromString, _HMFDigestAlgorithmToString, 
-                       _HMFDispatchQueueName, _HMFEnabledStatusToString, _HMFEqualObjects, 
-                       _HMFErrorDomain, _HMFEventDictionaryFromFormat, _HMFEventDictionaryFromFormatWithSession, 
-                       _HMFEventDictionaryFromFormatWithUUID, _HMFEventNameKey, _HMFGetActivityIdentifier, 
-                       _HMFGetDefaultOSLogHandle, _HMFGetLogIdentifier, _HMFGetOsLogHandle, 
-                       _HMFHTTPContentLengthHeaderField, _HMFHTTPContentTypeHeaderField, 
-                       _HMFHTTPDateHeaderField, _HMFHTTPHostHeaderField, _HMFHTTPServerDefaultConnectionIdleTimeout, 
-                       _HMFHTTPTransferEncodingHeaderField, _HMFHardwareAddressMaxLength, 
-                       _HMFHomeKitLoggingSubsystem, _HMFIntrinsicComparator, _HMFKeySizeDefault, 
-                       _HMFKeySizeIRK128, _HMFKeyTypeIRK, _HMFLocationAuthorizationUpdatedNotification, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _HMFAreStringsEqualIgnoringCase, _HMFBooleanToString, _HMFBuildRTCMessage, 
+                       _HMFCreateOsLogHandle, _HMFCurrentAsyncContext, _HMFDataIsReversed, 
+                       _HMFDescribeCollection, _HMFDetailedErrorsKey, _HMFDigestAlgorithmFromString, 
+                       _HMFDigestAlgorithmToString, _HMFDispatchQueueName, _HMFEnabledStatusToString, 
+                       _HMFEqualObjects, _HMFErrorDomain, _HMFEventDictionaryFromFormat, 
+                       _HMFEventDictionaryFromFormatWithSession, _HMFEventDictionaryFromFormatWithUUID, 
+                       _HMFEventNameKey, _HMFGetActivityIdentifier, _HMFGetDefaultOSLogHandle, 
+                       _HMFGetLogIdentifier, _HMFGetOsLogHandle, _HMFHTTPContentLengthHeaderField, 
+                       _HMFHTTPContentTypeHeaderField, _HMFHTTPDateHeaderField, _HMFHTTPHostHeaderField, 
+                       _HMFHTTPServerDefaultConnectionIdleTimeout, _HMFHTTPTransferEncodingHeaderField, 
+                       _HMFHardwareAddressMaxLength, _HMFHomeKitLoggingSubsystem, 
+                       _HMFIntrinsicComparator, _HMFKeySizeDefault, _HMFKeySizeIRK128, 
+                       _HMFKeyTypeIRK, _HMFLocationAuthorizationUpdatedNotification, 
                        _HMFLogCategoryDefault, _HMFLogCategoryDumpState, _HMFLoggingSubsystem, 
                        _HMFMACAddressLength, _HMFMainThreadAsyncContext, _HMFMemoryMonitorProcessMemoryPressureNotification, 
                        _HMFMemoryMonitorSystemMemoryStateDidChangeNotification, _HMFMessageActivityPrefix, 
+                       _HMFMetaEventCorrespondingServiceNameKey, _HMFMetaEventExceededSessionMax, 
                        _HMFMetaEventNameKey, _HMFMetaEventServiceName, _HMFMethodDescription, 
                        _HMFObjectDescription, _HMFOperatingSystemVersionCompare, 
                        _HMFPairingKeyLength, _HMFPowerLogEventTypeKey, _HMFPowerLogHomeKitCameraConfigurationTable, 
@@ -71,18 +73,23 @@ exports:
                        _HMFProductInfoJazzBOSVersion, _HMFProductInfoJazzFOSVersion, 
                        _HMFProductInfoJazzOSVersion, _HMFProductInfoJupiterBOSVersion, 
                        _HMFProductInfoJupiterCOSVersion, _HMFProductInfoJupiterEOSVersion, 
-                       _HMFProductInfoJupiterOSVersion, _HMFProductInfoLibertyBOSVersion, 
-                       _HMFProductInfoLibertyCOSVersion, _HMFProductInfoLibertyGOSVersion, 
-                       _HMFProductInfoLibertyOSVersion, _HMFProductInfoMonarchOSVersion, 
+                       _HMFProductInfoJupiterFOSVersion, _HMFProductInfoJupiterOSVersion, 
+                       _HMFProductInfoKincaidBOSVersion, _HMFProductInfoKincaidOSVersion, 
+                       _HMFProductInfoLibertyBOSVersion, _HMFProductInfoLibertyCOSVersion, 
+                       _HMFProductInfoLibertyGOSVersion, _HMFProductInfoLibertyOSVersion, 
+                       _HMFProductInfoMonarchOSVersion, _HMFProductInfoParisBOSVersion, 
                        _HMFProductInfoParisOSVersion, _HMFProductInfoPeaceBOSVersion, 
                        _HMFProductInfoPeaceCOSVersion, _HMFProductInfoPeaceGOSVersion, 
-                       _HMFProductInfoPeaceOSVersion, _HMFProductInfoSatelliteBOSVersion, 
-                       _HMFProductInfoSatelliteCOSVersion, _HMFProductInfoSatelliteEOSVersion, 
+                       _HMFProductInfoPeaceOSVersion, _HMFProductInfoRomeOSVersion, 
+                       _HMFProductInfoSatelliteBOSVersion, _HMFProductInfoSatelliteCOSVersion, 
+                       _HMFProductInfoSatelliteEOSVersion, _HMFProductInfoSatelliteFOSVersion, 
                        _HMFProductInfoSatelliteOSVersion, _HMFProductInfoSkyBOSVersion, 
                        _HMFProductInfoSkyCOSVersion, _HMFProductInfoSkyEchoOSVersion, 
-                       _HMFProductInfoSkyOSVersion, _HMFProductInfoStarBravoOSVersion, 
-                       _HMFProductInfoStarCOSVersion, _HMFProductInfoStarEOSVersion, 
-                       _HMFProductInfoStarOSVersion, _HMFProductInfoTigrisOSVersion, 
+                       _HMFProductInfoSkyFOSVersion, _HMFProductInfoSkyOSVersion, 
+                       _HMFProductInfoStarBravoOSVersion, _HMFProductInfoStarCOSVersion, 
+                       _HMFProductInfoStarEOSVersion, _HMFProductInfoStarFOSVersion, 
+                       _HMFProductInfoStarOSVersion, _HMFProductInfoSydneyBOSVersion, 
+                       _HMFProductInfoSydneyOSVersion, _HMFProductInfoTigrisOSVersion, 
                        _HMFProductInfoTildenOSVersion, _HMFProductInfoTopazOSVersion, 
                        _HMFProductInfoUnionOSVersion, _HMFProductInfoWhitetailOSVersion, 
                        _HMFProductInfoYagerBOSVersion, _HMFProductInfoYagerFOSVersion, 
@@ -128,22 +135,23 @@ exports:
                        HMFFuture, HMFHTTPClient, HMFHTTPClientConfiguration, HMFHTTPClientConnection, 
                        HMFHTTPRequest, HMFHTTPRequestHandler, HMFHTTPResponse, HMFHTTPServer, 
                        HMFHardwareAddress, HMFKey, HMFKeyValueBlockObserver, HMFLocationAuthorization, 
-                       HMFLogBackendSessionManager, HMFLogEventSession, HMFLogEventSessionFactory, 
+                       HMFLogEventSession, HMFLogEventSessionFactory, HMFLogEventSessionManager, 
                        HMFLogEventSessionVoucher, HMFMACAddress, HMFMemoryAssertion, 
                        HMFMemoryMonitor, HMFMessage, HMFMessageDestination, HMFMessageDispatcher, 
                        HMFMessageFilter, HMFMessageInternal, HMFMessagePolicy, HMFMessageTransport, 
                        HMFMutableHTTPRequest, HMFMutableHTTPResponse, HMFMutableMessage, 
                        HMFMutableNetService, HMFMutableOrderedDictionary, HMFMutableThreadSafeDictionary, 
                        HMFNetAddress, HMFNetManager, HMFNetMonitor, HMFNetService, 
-                       HMFNetServiceBrowser, HMFNotificationCenter, HMFOSTransaction, 
-                       HMFObject, HMFObjectCacheNSString, HMFObjectCacheNSUUID, HMFObjectObserver, 
-                       HMFOperation, HMFOperationBudget, HMFOrderedDictionary, HMFPairingIdentity, 
-                       HMFPairingKey, HMFPowerAssertion, HMFPowerLogger, HMFPowerManager, 
-                       HMFPreference, HMFPreferences, HMFPrivateObjectFormatter, 
-                       HMFProcessInfo, HMFProductInfo, HMFPromise, HMFRingBuffer, 
-                       HMFScheduler, HMFSoftwareVersion, HMFStagedValue, HMFStringIndentation, 
-                       HMFSystemInfo, HMFSystemPreference, HMFTimer, HMFUnfairLock, 
-                       HMFVersion, HMFWeakObject, HMFWiFiManager, HMFWiFiManagerDataSource, 
-                       HMFWiFiNetworkInfo, HMUIndent, _HMFCFHTTPServer, __HMFMessageHandler ]
+                       HMFNetServiceBrowser, HMFNotificationCenter, HMFNullLogEventSession, 
+                       HMFOSTransaction, HMFObject, HMFObjectCacheNSString, HMFObjectCacheNSUUID, 
+                       HMFObjectObserver, HMFOperation, HMFOperationBudget, HMFOrderedDictionary, 
+                       HMFPairingIdentity, HMFPairingKey, HMFPowerAssertion, HMFPowerLogger, 
+                       HMFPowerManager, HMFPreference, HMFPreferences, HMFPrivateObjectFormatter, 
+                       HMFProcessInfo, HMFProductInfo, HMFPromise, HMFQueuingLogBackendSessionManager, 
+                       HMFRTCSessionFactory, HMFRingBuffer, HMFScheduler, HMFSoftwareVersion, 
+                       HMFStagedValue, HMFStringIndentation, HMFSystemInfo, HMFSystemPreference, 
+                       HMFTimer, HMFUnfairLock, HMFVersion, HMFWeakObject, HMFWiFiManager, 
+                       HMFWiFiManagerDataSource, HMFWiFiNetworkInfo, HMUIndent, _HMFCFHTTPServer, 
+                       __HMFMessageHandler ]
     objc-ivars:      [ HMFAssertion._valid ]
 ...

@@ -48,20 +48,20 @@ enum {
   kAppleManufacturer            = 'appl', /* Apple supplied components */
   kComponentResourceType        = 'thng', /* a components resource type */
   kComponentAliasResourceType   = 'thga' /* component alias resource type */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kAnyComponentType             = 0,
   kAnyComponentSubType          = 0,
   kAnyComponentManufacturer     = 0,
   kAnyComponentFlagsMask        = 0
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   cmpThreadSafe                 = 1UL << 28, /* component is thread-safe */
   cmpIsMissing                  = 1UL << 29,
   cmpWantsRegisterMessage       = 1UL << 31
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   kComponentOpenSelect          = -1,   /* ComponentInstance for this open */
@@ -74,7 +74,7 @@ enum {
   kComponentGetMPWorkFunctionSelect = -8, /* some params */
   kComponentExecuteWiredActionSelect = -9, /* QTAtomContainer actionContainer, QTAtom actionAtom, QTCustomActionTargetPtr target, QTEventRecordPtr event */
   kComponentGetPublicResourceSelect = -10 /* OSType resourceType, short resourceId, Handle *resource */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* Component Resource Extension flags */
 enum {
@@ -83,7 +83,7 @@ enum {
   componentAutoVersionIncludeFlags = (1 << 2),
   componentHasMultiplePlatforms = (1 << 3),
   componentLoadResident         = (1 << 4)
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 
 
@@ -95,7 +95,7 @@ enum {
   defaultComponentAnySubType    = 4,
   defaultComponentAnyFlagsAnyManufacturer = (defaultComponentAnyFlags + defaultComponentAnyManufacturer),
   defaultComponentAnyFlagsAnyManufacturerAnySubType = (defaultComponentAnyFlags + defaultComponentAnyManufacturer + defaultComponentAnySubType)
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /* RegisterComponentResource flags */
 enum {
@@ -103,7 +103,7 @@ enum {
   registerComponentNoDuplicates = 2,
   registerComponentAfterExisting = 4,
   registerComponentAliasesOnly  = 8
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 
 struct ComponentDescription {
@@ -211,7 +211,7 @@ enum {
   platformPowerPC64NativeEntryPoint = 7,
   platformX86_64NativeEntryPoint = 8,
   platformArm64NativeEntryPoint = 9
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   platformIRIXmips              = 1000,
@@ -225,7 +225,7 @@ enum {
   platformNeXTsparc             = 1402,
   platformNeXT68k               = 1403,
   platformMacOSx86              = 1500
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   mpWorkFlagDoWork              = (1 << 0),
@@ -234,18 +234,18 @@ enum {
   mpWorkFlagDontBlock           = (1 << 3),
   mpWorkFlagGetProcessorCount   = (1 << 4),
   mpWorkFlagGetIsRunning        = (1 << 6)
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 enum {
   cmpAliasNoFlags               = 0,
   cmpAliasOnlyThisFile          = 1
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 typedef UInt32                          CSComponentsThreadMode;
 enum {
   kCSAcceptAllComponentsMode    = 0,
   kCSAcceptThreadSafeComponentsOnlyMode = 1
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 /*
  *  CSSetComponentsThreadMode()
@@ -1580,7 +1580,7 @@ enum {
     uppCallComponentUnregisterProcInfo         = 0x000000F0,
     uppCallComponentGetMPWorkFunctionProcInfo  = 0x00000FF0,
     uppCallComponentGetPublicResourceProcInfo  = 0x00003BF0
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 
 

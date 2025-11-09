@@ -1,3 +1,4 @@
+#if !__has_include(<PassKitCore/PKPassLibrary.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPassLibrary.h
 //  PassKit
@@ -100,6 +101,7 @@ API_AVAILABLE(ios(6.0), watchos(3.0))
 // Sign a payload using the pass
 - (void)signData:(NSData *)signData withSecureElementPass:(PKSecureElementPass *)secureElementPass completion:(void(^)(NSData * _Nullable signedData, NSData * _Nullable signature, NSError * _Nullable error))completion NS_SWIFT_NAME(sign(_:using:completion:)) API_AVAILABLE(ios(13.4), watchos(6.2));
 
+- (void)encryptedServiceProviderDataForSecureElementPass:(PKSecureElementPass *)secureElementPass completion:(void(^)(NSDictionary * _Nullable encryptedServiceProviderData, NSError* _Nullable error))completion NS_SWIFT_NAME(encryptedServiceProviderData(for:completion:)) API_AVAILABLE(ios(16.0), watchos(9.0));
 // Returns custom data for a given secure element pass, if supported by that pass
 - (void)serviceProviderDataForSecureElementPass:(PKSecureElementPass *)secureElementPass completion:(void(^)(NSData * _Nullable serviceProviderData, NSError* _Nullable error))completion NS_SWIFT_NAME(serviceProviderData(for:completion:)) API_AVAILABLE(ios(15.0), watchos(8.0));
 
@@ -126,3 +128,7 @@ extern PKPassLibraryNotificationKey const PKPassLibrarySerialNumberUserInfoKey A
 extern PKPassLibraryNotificationKey const PKPassLibraryRecoveredPassesUserInfoKey API_AVAILABLE(ios(15.0), watchos(8.0));
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <PassKitCore/PKPassLibrary.h>
+#endif

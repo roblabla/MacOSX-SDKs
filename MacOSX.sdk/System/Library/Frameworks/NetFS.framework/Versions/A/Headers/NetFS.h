@@ -79,6 +79,7 @@ typedef SInt32 netfsError;
 #define kNetFSUserNameKey		CFSTR("UserName")
 #define kNetFSPasswordKey		CFSTR("Password")
 #define kNetFSPathKey			CFSTR("Path")
+#define kNetFSURLOptionsKey		CFSTR("URLOptions")
 
 /*
  * Dictionary keys for the open options passed to OpenSession methods.

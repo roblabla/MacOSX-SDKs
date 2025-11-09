@@ -129,8 +129,7 @@ enum vtagtype   {
 #define ALLOCATECONTIG  0x00000002      /* allocate contigious space */
 #define ALLOCATEALL             0x00000004      /* allocate all requested space */
 /* or no space at all */
-#define FREEREMAINDER   0x00000008      /* deallocate allocated but */
-/* unfilled blocks */
+#define ALLOCATEPERSIST         0x00000008      /* do not deallocate allocated but unfilled blocks at close(2) */
 #define ALLOCATEFROMPEOF        0x00000010      /* allocate from the physical eof */
 #define ALLOCATEFROMVOL         0x00000020      /* allocate from the volume offset */
 
@@ -1173,6 +1172,7 @@ int     vfs_context_is64bit(vfs_context_t ctx);
  */
 vfs_context_t vfs_context_create(vfs_context_t ctx);
 
+
 /*!
  *  @function vfs_context_rele
  *  @abstract Release references on components of a context and deallocate it.
@@ -1329,6 +1329,31 @@ void    vnode_rele(vnode_t vp);
  *  @param refcnt The threshold for saying that a vnode is in use.
  */
 int     vnode_isinuse(vnode_t vp, int refcnt);
+
+/*!
+ *  @function vnode_hold
+ *  @abstract Increase the holdcount on a vnode.
+ *  @discussion the resulting hold must be dropped with vnode_drop().
+ *  This function always succeeds and does not block but it can only be used in a context which already has a iocount or a usecount
+ *  or under a synchronization primitive which can block the reclaim (for example a filesystem hash table lock which is also taken in the
+ *  VNOP_RECLAIM implementation for that filesystem.)
+ *  A holdcount only prevents the vnode from being freed and provides no other guarantees. It allows safe access to vnode pointer
+ *  when the vnode access is no longer protected by an iocount, usecount or other sysnchronization primitive.
+ *  @param vp The vnode whose holdcount has to be incremented.
+ *
+ */
+void     vnode_hold(vnode_t vp);
+
+/*!
+ *  @function vnode_drop
+ *  @abstract decrease the holdcount on vnode.
+ *  @discussion If the holdcount goes to zero and the vnode has been reclaimed, the vnode may also be freed.
+ *  Any access to the vnode after calling vnode_drop is unsafe unless it is a under a iocount or a usecount which has
+ *  been acquired prior to calling vnode_drop.
+ *  @param vp The vnode whose holdcount has to be decremented.
+ *  @return vnode passed and NULLVP if the vnode was freed.
+ */
+vnode_t  vnode_drop(vnode_t vp);
 
 /*!
  *  @function vnode_recycle
@@ -1786,6 +1811,7 @@ errno_t vfs_attr_pack(vnode_t vp, uio_t uio, struct attrlist *alp, uint64_t opti
 errno_t vfs_attr_pack_ext(mount_t mp, vnode_t vp, uio_t uio, struct attrlist *alp, uint64_t options, struct vnode_attr *vap, void *fndesc, vfs_context_t ctx);
 
 
+
 __END_DECLS
 
 
@@ -1818,5 +1844,6 @@ struct iocs_store_buffer_entry {
 	char     path_name[IOCS_SBE_PATH_LEN];
 	struct io_compression_stats iocs;
 };
+
 
 #endif /* !_VNODE_H_ */

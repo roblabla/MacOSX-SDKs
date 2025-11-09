@@ -67,14 +67,18 @@ CF_ENUM(DescType) {
 
 /* Event ID's */
 CF_ENUM(AEEventID) {
-  kAEOpenApplication            = 'oapp',
-  kAEOpenDocuments              = 'odoc',
-  kAEPrintDocuments             = 'pdoc',
-  kAEOpenContents               = 'ocon',
-  kAEQuitApplication            = 'quit', /* may include a property kAEQuitReason indicating what lead to the quit being sent. */
+  kAEOpenApplication            = 'oapp', //!< Event sent as the first AppleEvent to an application which is not launched with a document to open or print or with a URL to open.
+  kAEOpenDocuments              = 'odoc', //!< Event that provides an application with a list of documents to open.
+  kAEPrintDocuments             = 'pdoc', //!< Event that provides an application with a list of documents to print.
+  kAEOpenContents               = 'ocon', //!< Event that provides an application with dragged content, such as text or an image.
+  kAEQuitApplication            = 'quit', //!< Event that causes an application to quit.  May include a property kAEQuitReason indicating what lead to the quit being sent.
   kAEAnswer                     = 'ansr',
-  kAEApplicationDied            = 'obit',
-  kAEShowPreferences            = 'pref' /* sent by Mac OS X when the user chooses the Preferences item */
+  kAEApplicationDied            = 'obit', //!< Event sent by the Process Manager to an application that launched another application when the launched application quits or terminates.
+  kAEShowPreferences            = 'pref' //!< sent by Mac OS X when the user chooses the Preferences item
+};
+
+CF_ENUM(DescType) {
+	keyAERestoreAppState = 'rsto' //!< If present in a kAEOpenApplication or kAEReopenApplication AppleEvent, with the value kAEYes, then any saved application state should be restored; if present and kAENo, then any saved application state should not be restored
 };
 
 /* Constants for recording */
@@ -588,22 +592,20 @@ AERemoteProcessResolverScheduleWithRunLoop(
  */
 extern OSStatus AEDeterminePermissionToAutomateTarget( const AEAddressDesc* target, AEEventClass theAEEventClass, AEEventID theAEEventID, Boolean askUserIfNeeded ) API_AVAILABLE( macos(10.14) ) API_UNAVAILABLE( ios, tvos, watchos );
 
-#if defined(__MAC_10_14) && __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_14
+enum {
+	errAEEventWouldRequireUserConsent API_AVAILABLE(macos(10.14)) = -1744, ///< Determining whether this can be sent would require prompting the user, and the AppleEvent was sent with kAEDoNotPromptForPermission
 
-	enum {
-		errAEEventWouldRequireUserConsent = -1744, ///< Determining whether this can be sent would require prompting the user, and the AppleEvent was sent with kAEDoNotPromptForPermission
-	};
-	
-	/*
-	 *	AESendMode flag
-	 *
-	 *	In AESend(), when sending an AppleEvent, if this is masked into AESendMode and if the AppleEvent would require user consent, then AESend() will return errAEEventWouldRequireUserConsent.
-	 *
-	 */
-	enum {
-		kAEDoNotPromptForUserConsent = 0x00020000, /* If set, and the AppleEvent requires user consent, do not prompt and instead return errAEEventWouldRequireUserConsent */
-	};
-#endif
+};
+
+/**
+ *	AESendMode flag
+ *
+ *	In AESend(), when sending an AppleEvent, if this is masked into AESendMode and if the AppleEvent would require user consent, then AESend() will return errAEEventWouldRequireUserConsent.
+ *
+ */
+enum {
+	kAEDoNotPromptForUserConsent API_AVAILABLE(macos(10.14)) = 0x00020000, ///< If set, and the AppleEvent requires user consent, do not prompt and instead return errAEEventWouldRequireUserConsent
+};
 
 
 #pragma pack(pop)

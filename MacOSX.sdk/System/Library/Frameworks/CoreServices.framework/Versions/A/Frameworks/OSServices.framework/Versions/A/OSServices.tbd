@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           709AA172-1DE4-3C1F-9B63-8FEFFFF8A3BC
+    value:           90D4DAFE-A84A-3DC6-B29A-A18308EC6CED
   - target:          x86_64-maccatalyst
-    value:           709AA172-1DE4-3C1F-9B63-8FEFFFF8A3BC
+    value:           90D4DAFE-A84A-3DC6-B29A-A18308EC6CED
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           46A15C14-9CEB-3F48-BC0A-6A6BFDC3FB89
+    value:           C38B8CFF-1D22-386F-958E-C6CDAF474CBE
   - target:          arm64e-maccatalyst
-    value:           46A15C14-9CEB-3F48-BC0A-6A6BFDC3FB89
+    value:           C38B8CFF-1D22-386F-958E-C6CDAF474CBE
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices'
 current-version: 1141.1
 parent-umbrella:
@@ -22,8 +22,8 @@ parent-umbrella:
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AlertSoundPlay, _AlertSoundPlayCustomSound, _BatteryCount, 
                        _CSGetDefaultIdentityAuthority, _CSGetLocalIdentityAuthority, 
                        _CSGetManagedIdentityAuthority, _CSIdentityAddAlias, _CSIdentityAddMember, 

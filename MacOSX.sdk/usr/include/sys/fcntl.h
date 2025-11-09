@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2022 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -155,6 +155,12 @@
 #define O_NOFOLLOW_ANY  0x20000000      /* no symlinks allowed in path */
 #endif
 
+#if __DARWIN_C_LEVEL >= 200809L
+#define O_EXEC          0x40000000               /* open file for execute only */
+#define O_SEARCH        (O_EXEC | O_DIRECTORY)   /* open directory for search only */
+#endif
+
+
 
 #if __DARWIN_C_LEVEL >= 200809L
 /*
@@ -176,10 +182,14 @@
 #endif
 #endif
 
-/* Data Protection Flags */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+/* Data Protection Flags */
 #define O_DP_GETRAWENCRYPTED    0x0001
 #define O_DP_GETRAWUNENCRYPTED  0x0002
+#define O_DP_AUTHENTICATE       0x0004
+
+/* Descriptor value for openat_authenticated_np() to skip authentication with another fd */
+#define AUTH_OPEN_NOAUTHFD      -1
 #endif
 
 
@@ -309,7 +319,14 @@
 #define F_ADDFILESIGS_INFO      103     /* Add signature from same file, return information */
 #define F_ADDFILESUPPL          104     /* Add supplemental signature from same file with fd reference to original */
 #define F_GETSIGSINFO           105     /* Look up code signature information attached to a file or slice */
-#define F_FSRESERVED            106     /* Placeholder for future usage */
+
+#define F_SETLEASE              106      /* Acquire or release lease */
+#define F_GETLEASE              107      /* Retrieve lease information */
+
+#define F_SETLEASE_ARG(t, oc)   ((t) | ((oc) << 2))
+
+
+#define F_TRANSFEREXTENTS       110      /* Transfer allocated extents beyond leof to a different file */
 
 // FS-specific fcntl()'s numbers begin at 0x00010000 and go up
 #define FCNTL_FS_SPECIFIC_BASE  0x00010000
@@ -346,6 +363,7 @@
 
 #define F_ALLOCATECONTIG  0x00000002    /* allocate contigious space */
 #define F_ALLOCATEALL     0x00000004    /* allocate all requested space or no space at all */
+#define F_ALLOCATEPERSIST 0x00000008    /* do not free space upon close(2) */
 
 /* Position Modes (fst_posmode) for F_PREALLOCATE */
 
@@ -489,14 +507,6 @@ typedef struct fspecread {
 	off_t fsr_length;        /* IN: size of the region */
 } fspecread_t;
 
-/* fbootstraptransfer_t used by F_READBOOTSTRAP and F_WRITEBOOTSTRAP commands */
-
-typedef struct fbootstraptransfer {
-	off_t fbt_offset;       /* IN: offset to start read/write */
-	size_t fbt_length;    /* IN: number of bytes to transfer */
-	void *fbt_buffer;       /* IN: buffer to be read/written */
-} fbootstraptransfer_t;
-
 
 /*
  * For F_LOG2PHYS this information is passed back to user
@@ -576,6 +586,8 @@ int     openx_np(const char *, int, filesec_t);
  *  int open_dprotected_np(user_addr_t path, int flags, int class, int dpflags, int mode)
  */
 int open_dprotected_np( const char *, int, int, int, ...);
+int openat_dprotected_np( int, const char *, int, int, int, ...);
+int openat_authenticated_np(int, const char *, int, int);
 int     flock(int, int);
 filesec_t filesec_init(void);
 filesec_t filesec_dup(filesec_t);

@@ -16,3 +16,4 @@ FOUNDATION_EXPORT const unsigned char IntentsUIVersionString[];
 #import <IntentsUI/INUIAddVoiceShortcutButton.h>
 #import <IntentsUI/INUIAddVoiceShortcutViewController.h>
 #import <IntentsUI/INUIEditVoiceShortcutViewController.h>
+#import <IntentsUI/INImage+IntentsUI.h>

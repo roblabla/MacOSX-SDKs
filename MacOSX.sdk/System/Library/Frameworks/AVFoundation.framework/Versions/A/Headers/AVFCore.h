@@ -23,6 +23,7 @@
 #import <AVFoundation/AVAssetTrackSegment.h>
 #import <AVFoundation/AVAssetWriter.h>
 #import <AVFoundation/AVAssetWriterInput.h>
+#import <AVFoundation/AVAssetPlaybackAssistant.h>
 #import <AVFoundation/AVAsynchronousKeyValueLoading.h>
 #import <AVFoundation/AVAudioMix.h>
 #import <AVFoundation/AVAudioProcessingSettings.h>

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMNumberRange : NSObject
+    @interface HMNumberRange : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -47,12 +47,12 @@ HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) 
 /*!
  * @brief The minimum value of the range.
  */
-@property(nullable, readonly, strong, nonatomic) NSNumber *minValue;
+@property (nullable, readonly, strong, nonatomic) NSNumber *minValue;
 
 /*!
  * @brief The maximum value of the range.
  */
-@property(nullable, readonly, strong, nonatomic) NSNumber *maxValue;
+@property (nullable, readonly, strong, nonatomic) NSNumber *maxValue;
 
 @end
 

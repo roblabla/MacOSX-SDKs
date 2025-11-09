@@ -4,31 +4,32 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EC057D66-E1B3-3AED-9775-D8A7FB064CB9
+    value:           53E2E86D-016F-3D49-8BBD-DA17D60CEEDA
   - target:          x86_64-maccatalyst
-    value:           EC057D66-E1B3-3AED-9775-D8A7FB064CB9
+    value:           53E2E86D-016F-3D49-8BBD-DA17D60CEEDA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0D768E51-F2A4-367D-A8E3-A64A8835F220
+    value:           EDB5F462-5F2B-36DC-8934-D8EBC1D443C6
   - target:          arm64e-maccatalyst
-    value:           0D768E51-F2A4-367D-A8E3-A64A8835F220
+    value:           EDB5F462-5F2B-36DC-8934-D8EBC1D443C6
 install-name:    '/System/Library/PrivateFrameworks/BiomeDSL.framework/Versions/A/BiomeDSL'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BMDSLJSONTransformerNameFromEncodingDescriptor, _BMDSLRegisterJSONTransformerNameFromEncodingDescriptor, 
-                       _BMDSLValidateDictionary, _BiomeDSLVersionNumber, _BiomeDSLVersionString, 
-                       _kBMDSLName, _kBMDSLUpstream, _kBMDSLVersion ]
+                       _BMDSLValidateDictionary, _BMDSLValueForKeyPath, _BiomeDSLVersionNumber, 
+                       _BiomeDSLVersionString, _kBMDSLName, _kBMDSLUpstream, _kBMDSLVersion ]
     objc-classes:    [ BMDSL, BMDSLAggregator, BMDSLArgumentTransform, BMDSLArray, 
                        BMDSLBaseCodable, BMDSLClassTransform, BMDSLClasses, BMDSLCollect, 
-                       BMDSLFilter, BMDSLInstanceTransform, BMDSLJSONAllowedClasses, 
-                       BMDSLJSONArchiver, BMDSLJSONCoder, BMDSLJSONUnarchiver, BMDSLKeyPathSelector, 
-                       BMDSLKeyPathTransform, BMDSLMap, BMDSLMerge, BMDSLMultiKeyPathsTransform, 
-                       BMDSLOrderedMerge, BMDSLState, BMDSLSubscribeOn, BMDSLSubscriber, 
-                       BMDSLTransformInvocation, BMDSLTransformValidator, BMDSLTransforms, 
-                       BMDSLTumblingWindowAssigner, BMDSLWindowAssigner, BMDSLWindower, 
+                       BMDSLFilter, BMDSLGraphValidator, BMDSLInstanceTransform, 
+                       BMDSLJSONAllowedClasses, BMDSLJSONArchiver, BMDSLJSONCoder, 
+                       BMDSLJSONUnarchiver, BMDSLKeyPathSelector, BMDSLKeyPathTransform, 
+                       BMDSLMap, BMDSLMerge, BMDSLMultiKeyPathsTransform, BMDSLOrderedMerge, 
+                       BMDSLState, BMDSLSubscribeOn, BMDSLSubscriber, BMDSLTransformInvocation, 
+                       BMDSLTransforms, BMDSLTumblingWindowAssigner, BMDSLWindowAssigner, 
+                       BMDSLWindower, _BMDSLStatePublisher, _BMDSLStatePublisherInner, 
                        _BPSSubscribeOnInner ]
 ...

@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EFFC37E7-DE0F-3957-930C-C454A3706CE2
+    value:           970E7D61-CA66-3C89-9AC4-637704FB31A5
   - target:          x86_64-maccatalyst
-    value:           EFFC37E7-DE0F-3957-930C-C454A3706CE2
+    value:           970E7D61-CA66-3C89-9AC4-637704FB31A5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           35D5D7F2-8CCC-39C5-A7A4-BAC1F88CAF27
+    value:           C907F02E-2F68-3718-B350-C22DC1788A18
   - target:          arm64e-maccatalyst
-    value:           35D5D7F2-8CCC-39C5-A7A4-BAC1F88CAF27
+    value:           C907F02E-2F68-3718-B350-C22DC1788A18
 install-name:    '/usr/lib/libform.5.4.dylib'
 current-version: 5.4
 compatibility-version: 5.4
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _TYPE_ALNUM, _TYPE_ALPHA, _TYPE_ENUM, _TYPE_INTEGER, _TYPE_IPV4, 
                        _TYPE_NUMERIC, _TYPE_REGEXP, __nc_Copy_Argument, __nc_Copy_Type, 
                        __nc_Default_Field, __nc_Default_FieldType, __nc_Default_Form, 

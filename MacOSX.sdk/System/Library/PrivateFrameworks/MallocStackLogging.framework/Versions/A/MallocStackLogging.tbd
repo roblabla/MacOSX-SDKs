@@ -1,16 +1,25 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           530AC673-F2CB-3EB2-A757-E1D688645EAD
+    value:           9CC01663-4F9C-3A81-8653-7EC58BDD18B6
+  - target:          x86_64-maccatalyst
+    value:           9CC01663-4F9C-3A81-8653-7EC58BDD18B6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2FF1ED3D-E003-3A16-92D1-2792AF2272B1
+    value:           C096CD3A-47F1-3427-AB9B-48D754B92EAA
+  - target:          arm64e-maccatalyst
+    value:           C096CD3A-47F1-3427-AB9B-48D754B92EAA
 install-name:    '/System/Library/PrivateFrameworks/MallocStackLogging.framework/Versions/A/MallocStackLogging'
+current-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _msl_coldest_frame_is_threadid, _msl_copy_disk_stack_logs, 
                        _msl_copy_msl_lite_hooks, _msl_disk_stack_logs_enumerate_from_buffer, 
                        _msl_disk_stack_logs_enumerate_from_task, _msl_disk_stack_logs_enumerate_from_task_with_block, 

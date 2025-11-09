@@ -33,26 +33,26 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
     FOR PERFORMANCE, DO NOT LOAD .NIBS, ETC. HERE!! WAIT UNTIL provideNewView: in NSColorPickingCustom!
 */
 
-- (nullable instancetype)initWithPickerMask:(NSUInteger)mask colorPanel:(NSColorPanel *)owningColorPanel;
+- (nullable instancetype)initWithPickerMask:(NSUInteger)mask colorPanel:(NSColorPanel *)owningColorPanel NS_SWIFT_UI_ACTOR;
 
 /* Allows you to return a new image used in the toolbar. By default, you can simply have a .tiff file with the same name as your custom color picker class in the bundle, and will not need to implement this method. 
 */
-- (NSImage *)provideNewButtonImage;
-- (void)insertNewButtonImage:(NSImage *)newButtonImage in:(NSButtonCell *)buttonCell;
-- (void)viewSizeChanged:(nullable id)sender;
-- (void)alphaControlAddedOrRemoved:(nullable id)sender;
-- (void)attachColorList:(NSColorList *)colorList;
-- (void)detachColorList:(NSColorList *)colorList;
-- (void)setMode:(NSColorPanelMode)mode;   
+- (NSImage *)provideNewButtonImage NS_SWIFT_UI_ACTOR;
+- (void)insertNewButtonImage:(NSImage *)newButtonImage in:(NSButtonCell *)buttonCell NS_SWIFT_UI_ACTOR;
+- (void)viewSizeChanged:(nullable id)sender NS_SWIFT_UI_ACTOR;
+- (void)alphaControlAddedOrRemoved:(nullable id)sender NS_SWIFT_UI_ACTOR;
+- (void)attachColorList:(NSColorList *)colorList NS_SWIFT_UI_ACTOR;
+- (void)detachColorList:(NSColorList *)colorList NS_SWIFT_UI_ACTOR;
+- (void)setMode:(NSColorPanelMode)mode NS_SWIFT_UI_ACTOR;
 
 
 /* The tooltip to be used for the tool bar button.
 */
-- (NSString *)buttonToolTip API_AVAILABLE(macos(10.5));
+- (NSString *)buttonToolTip NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.5));
 
 /* The minimum content size for your picker. The NSColorPanel will not allow resizing smaller than this size. By default, you will not have to do anything if you properly setup the Autosizing attributes in IB for your view. 
 */
-- (NSSize)minContentSize API_AVAILABLE(macos(10.5));
+- (NSSize)minContentSize NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.5));
 
 
 @end
@@ -63,19 +63,19 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 /* Return NO if "mode" not supported. 
 */
-- (BOOL)supportsMode:(NSColorPanelMode)mode;   
+- (BOOL)supportsMode:(NSColorPanelMode)mode NS_SWIFT_UI_ACTOR;
 
 /* Return the current mode that your picker is in.
 */
-- (NSColorPanelMode)currentMode;
+- (NSColorPanelMode)currentMode NS_SWIFT_UI_ACTOR;
 
 /* Provide the view for your picker. initialRequest will be YES on very first call. At this point, you should load your nibs.
 */
-- (NSView *)provideNewView:(BOOL)initialRequest;
+- (NSView *)provideNewView:(BOOL)initialRequest NS_SWIFT_UI_ACTOR;
 
 /* Set your color picker's displayed color to newColor.
 */
-- (void)setColor:(NSColor *)newColor;
+- (void)setColor:(NSColor *)newColor NS_SWIFT_UI_ACTOR;
 @end
 
 API_UNAVAILABLE_END

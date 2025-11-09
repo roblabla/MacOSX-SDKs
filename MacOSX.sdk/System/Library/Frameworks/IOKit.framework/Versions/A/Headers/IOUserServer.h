@@ -32,7 +32,6 @@
 
 #include <IOKit/IORPC.h>
 
-#define kIOUserClassKey        "IOUserClass"
 #define kIOUserServerClassKey  "IOUserServer"
 #define kIOUserServerNameKey   "IOUserServerName"
 #define kIOUserServerTagKey    "IOUserServerTag"
@@ -66,6 +65,7 @@ struct OSObject_Instantiate_Msg_Content {
 	OSObjectRef  __object;
 };
 
+#pragma pack(push, 4)
 struct OSObject_Instantiate_Rpl_Content {
 	IORPCMessage  __hdr;
 	kern_return_t __result;
@@ -74,6 +74,7 @@ struct OSObject_Instantiate_Rpl_Content {
 	char          classname[128];
 	uint64_t      methods[0];
 };
+#pragma pack(pop)
 
 #pragma pack(4)
 struct OSObject_Instantiate_Msg {

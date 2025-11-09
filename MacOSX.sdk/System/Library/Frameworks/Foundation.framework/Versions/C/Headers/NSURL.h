@@ -14,8 +14,9 @@
 
 typedef NSString * NSURLResourceKey NS_TYPED_EXTENSIBLE_ENUM;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
+NS_SWIFT_SENDABLE // Immutable with no mutable subclasses. Internal resource value cache is protected by locks and values must be Sendable
 @interface NSURL: NSObject <NSSecureCoding, NSCopying>
 {
     NSString *_urlString;
@@ -119,7 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, getter=isFileURL) BOOL fileURL; // Whether the scheme is file:; if [myURL isFileURL] is YES, then [myURL path] is suitable for input into NSFileManager or NSPathUtilities.
 
 /* A string constant for the "file" URL scheme. If you are using this to compare to a URL's scheme to see if it is a file URL, you should instead use the NSURL fileURL property -- the fileURL property is much faster. */
-FOUNDATION_EXPORT NSString *NSURLFileScheme;
+FOUNDATION_EXPORT NSString * const NSURLFileScheme;
 
 
 @property (nullable, readonly, copy) NSURL *standardizedURL;
@@ -183,7 +184,7 @@ FOUNDATION_EXPORT NSURLResourceKey const NSURLKeysOfUnsetValuesKey API_AVAILABLE
 
 /* Sets a temporary resource value on the URL object. Temporary resource values are for client use. Temporary resource values exist only in memory and are never written to the resource's backing store. Once set, a temporary resource value can be copied from the URL object with -getResourceValue:forKey:error: or -resourceValuesForKeys:error:. To remove a temporary resource value from the URL object, use -removeCachedResourceValueForKey:. Care should be taken to ensure the key that identifies a temporary resource value is unique and does not conflict with system defined keys (using reverse domain name notation in your temporary resource value keys is recommended). This method is currently applicable only to URLs for file system resources.
  */
-- (void)setTemporaryResourceValue:(nullable id)value forKey:(NSURLResourceKey)key API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+- (void)setTemporaryResourceValue:(/*NS_SWIFT_SENDABLE */nullable id)value forKey:(NSURLResourceKey)key API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /*
  The File System Resource Keys
@@ -469,7 +470,7 @@ typedef NSUInteger NSURLBookmarkFileCreationOptions;
 @interface NSURL (NSItemProvider) <NSItemProviderReading, NSItemProviderWriting>
 @end
 
-
+NS_SWIFT_SENDABLE // Immutable with no mutable subclasses
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 // NSURLQueryItem encapsulates a single query name-value pair. The name and value strings of a query name-value pair are not percent encoded. For use with the NSURLComponents queryItems property.
 @interface NSURLQueryItem : NSObject <NSSecureCoding, NSCopying> {
@@ -526,10 +527,11 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 // Getting these properties retains any percent encoding these components may have. Setting these properties assumes the component string is already correctly percent encoded. Attempting to set an incorrectly percent encoded string will cause an exception. Although ';' is a legal path character, it is recommended that it be percent-encoded for best compatibility with NSURL (-stringByAddingPercentEncodingWithAllowedCharacters: will percent-encode any ';' characters if you pass the URLPathAllowedCharacterSet).
 @property (nullable, copy) NSString *percentEncodedUser;
 @property (nullable, copy) NSString *percentEncodedPassword;
-@property (nullable, copy) NSString *percentEncodedHost;
+@property (nullable, copy) NSString *percentEncodedHost API_DEPRECATED("Use encodedHost instead", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED));
 @property (nullable, copy) NSString *percentEncodedPath;
 @property (nullable, copy) NSString *percentEncodedQuery;
 @property (nullable, copy) NSString *percentEncodedFragment;
+@property (nullable, copy) NSString *encodedHost API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /* These properties return the character range of a component in the URL string returned by -[NSURLComponents string]. If the component does not exist in the NSURLComponents object, {NSNotFound, 0} is returned. Note: Zero length components are legal. For example, the URL string "scheme://:@/?#" has a zero length user, password, host, query and fragment; the URL strings "scheme:" and "" both have a zero length path.
  */
@@ -667,4 +669,4 @@ API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0))
 @end
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

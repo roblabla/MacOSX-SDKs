@@ -1,4 +1,4 @@
-/* iig(DriverKit-192.100.7) generated from IOReporters.iig */
+/* iig(DriverKit-256.40.4) generated from IOReporters.iig */
 
 /* IOReporters.iig:1-113 */
 /*
@@ -464,7 +464,7 @@ IOReporter_DECLARE_IVARS
 /***** 3. IOReporter Subclasses *****/
 /************************************/
 
-/* source class IOSimpleReporter IOReporters.iig:319-388 */
+/* source class IOSimpleReporter IOReporters.iig:319-393 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -498,6 +498,11 @@ public:
 	static OSPtr<IOSimpleReporter> with(IOService *reportingService,
 	    IOReportCategories categories,
 	    IOReportUnit unit);
+
+	bool initWith(IOService *reportingService,
+	    IOReportCategories categories,
+	    IOReportUnit unit);
+
 
 /*! @function   IOSimpleReporter::setValue
  *   @abstract   Thread safely set a channel's value
@@ -544,7 +549,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOSimpleReporter IOReporters.iig:319-388 */
+/* generated class IOSimpleReporter IOReporters.iig:319-393 */
 
 
 #define IOSimpleReporter_Methods \
@@ -553,6 +558,12 @@ public:\
 \
     static OSPtr<IOSimpleReporter>\
     with(\
+        IOService * reportingService,\
+        IOReportCategories categories,\
+        IOReportUnit unit);\
+\
+    bool\
+    initWith(\
         IOService * reportingService,\
         IOReportCategories categories,\
         IOReportUnit unit);\
@@ -655,7 +666,7 @@ IOSimpleReporter_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOReporters.iig:390-399 */
+/* IOReporters.iig:395-404 */
 
 
 enum IOStateReporter_valueSelector {
@@ -666,7 +677,7 @@ enum IOStateReporter_valueSelector {
 
 
 
-/* source class IOStateReporter IOReporters.iig:400-810 */
+/* source class IOStateReporter IOReporters.iig:405-820 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -702,6 +713,11 @@ public:
  *   Locking: SAFE to call concurrently (no static globals), MAY BLOCK
  */
 	static OSPtr<IOStateReporter> with(IOService *reportingService,
+	    IOReportCategories categories,
+	    int nstates,
+	    IOReportUnit unit = kIOReportUnitHWTicks);
+
+	bool initWith(IOService *reportingService,
 	    IOReportCategories categories,
 	    int nstates,
 	    IOReportUnit unit = kIOReportUnitHWTicks);
@@ -1087,7 +1103,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOStateReporter IOReporters.iig:400-810 */
+/* generated class IOStateReporter IOReporters.iig:405-820 */
 
 
 #define IOStateReporter_Methods \
@@ -1096,6 +1112,13 @@ public:\
 \
     static OSPtr<IOStateReporter>\
     with(\
+        IOService * reportingService,\
+        IOReportCategories categories,\
+        int nstates,\
+        IOReportUnit unit = kIOReportUnitHWTicks);\
+\
+    bool\
+    initWith(\
         IOService * reportingService,\
         IOReportCategories categories,\
         int nstates,\
@@ -1260,10 +1283,10 @@ IOStateReporter_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOReporters.iig:812-813 */
+/* IOReporters.iig:822-823 */
 
 
-/* source class IOHistogramReporter IOReporters.iig:814-900 */
+/* source class IOHistogramReporter IOReporters.iig:824-918 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -1301,6 +1324,14 @@ public:
  *
  */
 	static OSPtr<IOHistogramReporter> with(IOService *reportingService,
+	    IOReportCategories categories,
+	    uint64_t channelID,
+	    const char *channelName,
+	    IOReportUnit unit,
+	    int nSegments,
+	    IOHistogramSegmentConfig *config);
+
+	bool initWith(IOService *reportingService,
 	    IOReportCategories categories,
 	    uint64_t channelID,
 	    const char *channelName,
@@ -1360,7 +1391,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOHistogramReporter IOReporters.iig:814-900 */
+/* generated class IOHistogramReporter IOReporters.iig:824-918 */
 
 
 #define IOHistogramReporter_Methods \
@@ -1369,6 +1400,16 @@ public:\
 \
     static OSPtr<IOHistogramReporter>\
     with(\
+        IOService * reportingService,\
+        IOReportCategories categories,\
+        uint64_t channelID,\
+        const char * channelName,\
+        IOReportUnit unit,\
+        int nSegments,\
+        IOHistogramSegmentConfig * config);\
+\
+    bool\
+    initWith(\
         IOService * reportingService,\
         IOReportCategories categories,\
         uint64_t channelID,\
@@ -1478,14 +1519,14 @@ IOHistogramReporter_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOReporters.iig:902-907 */
+/* IOReporters.iig:920-925 */
 
 
 /***********************************/
 /***** 4. IOReportLegend Class *****/
 /***********************************/
 
-/* source class IOReportLegend IOReporters.iig:908-1057 */
+/* source class IOReportLegend IOReporters.iig:926-1075 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -1645,7 +1686,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOReportLegend IOReporters.iig:908-1057 */
+/* generated class IOReportLegend IOReporters.iig:926-1075 */
 
 
 #define IOReportLegend_Methods \
@@ -1767,6 +1808,6 @@ IOReportLegend_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOReporters.iig:1059- */
+/* IOReporters.iig:1077- */
 
 #endif  /* ! _IOKERNEL_REPORTERS_H_ */

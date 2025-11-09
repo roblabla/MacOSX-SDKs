@@ -277,7 +277,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @brief       Return the device descriptor
  * @discussion  This method uses descriptorWithType to retrieve the device descriptor.
- * @return      Pointer to the device descriptor, or nil if the service is terminating.
+ * @return      Pointer to the device descriptor.
  */
 @property(readonly, nullable) const IOUSBDeviceDescriptor* deviceDescriptor;
 

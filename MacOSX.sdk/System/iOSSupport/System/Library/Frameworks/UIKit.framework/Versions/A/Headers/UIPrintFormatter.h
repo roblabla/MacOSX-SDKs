@@ -1,4 +1,4 @@
-#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<UIKitCore/UIPrintFormatter.h>)
+#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<PrintKitUI/UIPrintFormatter.h>)
 //
 //  UIPrintFormatter.h
 //  UIKit
@@ -33,6 +33,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 
 @property(nonatomic)          NSInteger startPage API_UNAVAILABLE(tvos);           // default is NSNotFound
 @property(nonatomic,readonly) NSInteger pageCount API_UNAVAILABLE(tvos);           // calculated
+@property(nonatomic,readonly) BOOL      requiresMainThread API_AVAILABLE(ios(16));      // override point to decide if the drawing and page count calculation for each UIPrintFormatter are required to be called on the main thread; the default value is YES.
 
 - (CGRect)rectForPageAtIndex:(NSInteger)pageIndex API_UNAVAILABLE(tvos);                     // returns empty rect if index out of range
 - (void)drawInRect:(CGRect)rect forPageAtIndex:(NSInteger)pageIndex API_UNAVAILABLE(tvos);   // override point to add custom drawing
@@ -88,5 +89,5 @@ UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 NS_ASSUME_NONNULL_END
 
 #else
-#import <UIKitCore/UIPrintFormatter.h>
+#import <PrintKitUI/UIPrintFormatter.h>
 #endif

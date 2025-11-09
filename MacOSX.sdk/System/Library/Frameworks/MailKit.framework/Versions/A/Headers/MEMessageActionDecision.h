@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 @interface MEMessageActionDecision : NSObject <NSSecureCoding>
 @property (class, readonly) MEMessageActionDecision *invokeAgainWithBody;
 + (instancetype)decisionApplyingAction:(MEMessageAction *)action NS_SWIFT_NAME(action(_:));

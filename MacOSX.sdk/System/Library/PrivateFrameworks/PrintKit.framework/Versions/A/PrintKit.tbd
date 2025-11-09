@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           809ACD9C-DFFD-38AA-B24D-5C3BCF8853B9
+    value:           8CC1DA9A-938E-3DB3-8F24-BD54E4B9E87E
   - target:          x86_64-maccatalyst
-    value:           809ACD9C-DFFD-38AA-B24D-5C3BCF8853B9
+    value:           8CC1DA9A-938E-3DB3-8F24-BD54E4B9E87E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BFE98960-D493-3E09-84E0-B32BEFBEC72B
+    value:           E7511586-0443-3209-B411-ABA8826932ED
   - target:          arm64e-maccatalyst
-    value:           BFE98960-D493-3E09-84E0-B32BEFBEC72B
+    value:           E7511586-0443-3209-B411-ABA8826932ED
 install-name:    '/System/Library/PrivateFrameworks/PrintKit.framework/Versions/A/PrintKit'
-current-version: 264.1
+current-version: 271
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _PKAnnotationsImagedKey, _PKCancelAlert, _PKCancelJobs, _PKCertUISynchronization, 
                        _PKCheckAlert, _PKCopiesKey, _PKCopyLocalizedPrinterStateReasons, 
                        _PKCopyLocalizedString, _PKDisplayAlert, _PKDisplayNotice, 
@@ -31,7 +31,9 @@ exports:
                        _PKFinishingsKey, _PKGetAuthInfo, _PKHostnameKey, _PKInputSlotChoiceKey, 
                        _PKInputSlotKey, _PKInputSlotMediaKey, _PKInputSlotNameKey, 
                        _PKJobAccountIDKey, _PKJobIDKey, _PKJobInfoKey, _PKJobListNotification, 
-                       _PKJobNameKey, _PKJobProgressNotification, _PKLocalNameKey, 
+                       _PKJobNameKey, _PKJobPresetChoiceKey, _PKJobPresetFinishingsKey, 
+                       _PKJobPresetKey, _PKJobPresetMediaSourceKey, _PKJobPresetMediaTypeKey, 
+                       _PKJobPresetOptionKey, _PKJobProgressNotification, _PKLocalNameKey, 
                        _PKLog, _PKMediaColSupportedKey, _PKMediaTypeChoiceKey, _PKMediaTypeKey, 
                        _PKMediaTypeNameKey, _PKNumberOfJobs, _PKOpenNotificationLockfile, 
                        _PKOpenURL, _PKOrientationKey, _PKOrientationLandscape, _PKOrientationPortrait, 

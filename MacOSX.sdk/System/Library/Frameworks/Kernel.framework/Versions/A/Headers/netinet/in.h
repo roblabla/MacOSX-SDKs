@@ -358,7 +358,6 @@ struct in_addr {
 	                 (((u_int32_t)(i) & 0xfff00000) == 0xac100000) || \
 	                 (((u_int32_t)(i) & 0xffff0000) == 0xc0a80000))
 
-
 #define IN_LOCAL_GROUP(i)       (((u_int32_t)(i) & 0xffffff00) == 0xe0000000)
 
 #define IN_ANY_LOCAL(i)         (IN_LINKLOCAL(i) || IN_LOCAL_GROUP(i))
@@ -381,7 +380,6 @@ struct sockaddr_in {
 #define IN_ARE_ADDR_EQUAL(a, b) \
     (bcmp(&(a)->s_addr, &(b)->s_addr, \
 	sizeof (struct in_addr)) == 0)
-
 
 #define INET_ADDRSTRLEN                 16
 
@@ -614,7 +612,6 @@ struct in_pktinfo {
  */
 #define IPPROTO_MAXID   (IPPROTO_AH + 1)        /* don't list to IPPROTO_MAX */
 
-
 /*
  * Names for IP sysctl objects
  */
@@ -645,13 +642,12 @@ struct in_pktinfo {
 #include <netinet6/in6.h>
 #undef __KAME_NETINET_IN_H_INCLUDED_
 
-
-
-
 #define MAX_IPv4_STR_LEN        16
 #define MAX_IPv6_STR_LEN        64
 
 extern int       inet_aton(const char *, struct in_addr *); /* in libkern */
 extern const char *inet_ntop(int, const void *, char *, socklen_t); /* in libkern*/
+
+
 
 #endif /* _NETINET_IN_H_ */

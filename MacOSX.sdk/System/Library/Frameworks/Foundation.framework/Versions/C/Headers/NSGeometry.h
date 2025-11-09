@@ -6,10 +6,17 @@
 #import <Foundation/NSValue.h>
 #import <Foundation/NSCoder.h>
 
+#import <CoreFoundation/CoreFoundation.h>
+#import <CoreFoundation/CFCGTypes.h>
+
+#if TARGET_OS_OSX
+#ifndef __swift__
 #import <CoreGraphics/CGBase.h>
 #import <CoreGraphics/CGGeometry.h>
+#endif
+#endif
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if __LP64__ || TARGET_OS_IPHONE || NS_BUILD_32_LIKE_64
 
@@ -44,7 +51,7 @@ typedef NS_ENUM(NSUInteger, NSRectEdge) {
 
 #else
 
-typedef struct _NSPoint {
+typedef struct NS_SWIFT_SENDABLE _NSPoint {
     CGFloat x;
     CGFloat y;
 } NSPoint;
@@ -52,7 +59,7 @@ typedef struct _NSPoint {
 typedef NSPoint *NSPointPointer;
 typedef NSPoint *NSPointArray;
 
-typedef struct _NSSize {
+typedef struct NS_SWIFT_SENDABLE _NSSize {
     CGFloat width;		/* should never be negative */
     CGFloat height;		/* should never be negative */
 } NSSize;
@@ -60,7 +67,7 @@ typedef struct _NSSize {
 typedef NSSize *NSSizePointer;
 typedef NSSize *NSSizeArray;
 
-typedef struct _NSRect {
+typedef struct NS_SWIFT_SENDABLE _NSRect {
     NSPoint origin;
     NSSize size;
 } NSRect;
@@ -83,7 +90,7 @@ typedef enum {
 #endif
 
 #define NSEDGEINSETS_DEFINED 1
-typedef struct NSEdgeInsets {
+typedef struct NS_SWIFT_SENDABLE NSEdgeInsets {
     CGFloat top;
     CGFloat left;
     CGFloat bottom;
@@ -285,4 +292,4 @@ FOUNDATION_EXPORT NSRect NSRectFromString(NSString *aString);
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

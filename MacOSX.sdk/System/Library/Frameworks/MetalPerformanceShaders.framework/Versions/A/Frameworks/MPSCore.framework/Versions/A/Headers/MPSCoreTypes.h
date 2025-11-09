@@ -433,6 +433,13 @@ extern const MTLRegion  MPSRectNoClip
  */
 typedef NSArray<NSNumber*> MPSShape;
 
+// A utility function to get the size of an MPSDataType.  This implementation
+// relies upon the specific bit pattern used to encode the type.
+static inline size_t MPSSizeofMPSDataType(MPSDataType t)
+{
+    return (t & 0xFFFF) >> 3;
+}
+
 
 #ifdef __cplusplus
 }

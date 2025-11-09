@@ -265,6 +265,4 @@ typedef struct thread_throughput_qos_policy     *thread_throughput_qos_policy_t;
 	    (sizeof (thread_throughput_qos_policy_data_t) / sizeof (integer_t)))
 
 
-
-
 #endif  /* _MACH_THREAD_POLICY_H_ */

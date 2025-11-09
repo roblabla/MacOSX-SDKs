@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D33F868A-3E51-3EFF-9AF8-53486026ECA7
+    value:           D495FF4F-3DAA-3D14-A17C-4DEAA2659C88
   - target:          x86_64-maccatalyst
-    value:           D33F868A-3E51-3EFF-9AF8-53486026ECA7
+    value:           D495FF4F-3DAA-3D14-A17C-4DEAA2659C88
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           53FBD3CA-4AB1-3F9D-99DD-8396D4CAAD0E
+    value:           18A71EAD-1A39-38C3-8103-2BA476EC4C49
   - target:          arm64e-maccatalyst
-    value:           53FBD3CA-4AB1-3F9D-99DD-8396D4CAAD0E
+    value:           18A71EAD-1A39-38C3-8103-2BA476EC4C49
 install-name:    '/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment'
 current-version: 62
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_S1_mP13__va_list_tag, 
                        __ZN27IOPresentmentFailTracerImpl6tracevEPKcS1_S1_mP13__va_list_tag ]
     weak-symbols:    [ __ZTI23IOPresentmentFailTracer, __ZTI35IOPresentmentTransactionDisplayPipe, 
                        __ZTS23IOPresentmentFailTracer, __ZTS35IOPresentmentTransactionDisplayPipe ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _IOPresentmentBegin, _IOPresentmentBindIOAccelSurfaceToResource, 
                        _IOPresentmentBindIOSurfaceToResourcePlane, _IOPresentmentBindIOSurfaceToResourcePlaneWithDirtyRect, 
                        _IOPresentmentCancel, _IOPresentmentCapabilitiesStructureFree, 
@@ -440,7 +440,7 @@ exports:
                        _kIOPresentmentVerticalBlankingExtension, _kIOPresentmentVerticalSyncConfig, 
                        _kIOPresentmentVerticalSyncOffset, _kIOPresentmentVerticalSyncPulseWidth, 
                        _kIOPresentmentWidth, _kIOPresentmentWorstDictionary ]
-  - targets:         [ arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
+  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_S1_mPc, 
                        __ZN27IOPresentmentFailTracerImpl6tracevEPKcS1_S1_mPc ]
 ...

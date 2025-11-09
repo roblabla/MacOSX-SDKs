@@ -16,7 +16,7 @@
 #import <UIKit/UISpringLoadedInteractionSupporting.h>
 
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UISegmentedControlStyle) {
     UISegmentedControlStylePlain,     // large plain
@@ -126,7 +126,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @end
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 
 #else

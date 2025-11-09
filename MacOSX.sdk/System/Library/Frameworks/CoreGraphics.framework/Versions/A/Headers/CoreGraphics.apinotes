@@ -5,64 +5,6 @@ Name: CoreGraphics
 # Global functions
 #
 Functions:
-# The below are inline functions that are irrelevant due to memberwise inits
-- Name: CGPointMake
-  Availability: nonswift
-  SwiftName: CGPoint.init(x:y:)
-- Name: CGSizeMake
-  Availability: nonswift
-  SwiftName: CGSize.init(width:height:)
-- Name: CGVectorMake
-  Availability: nonswift
-  SwiftName: CGVector.init(dx:dy:)
-- Name: CGRectMake
-  Availability: nonswift
-  SwiftName: CGRect.init(x:y:width:height:)
-- Name: CGAffineTransformMake
-  Availability: nonswift
-  SwiftName: CGAffineTransform.init(a:b:c:d:tx:ty:)
-# The below are fixups that inference didnt quite do what we wanted, and are
-# pulled over from what used to be in the overlays
-- Name: CGRectIsNull
-  SwiftName: "getter:CGRect.isNull(self:)"
-- Name: CGRectIsEmpty
-  SwiftName: "getter:CGRect.isEmpty(self:)"
-- Name: CGRectIsInfinite
-  SwiftName: "getter:CGRect.isInfinite(self:)"
-- Name: CGRectStandardize
-  SwiftName: "getter:CGRect.standardized(self:)"
-- Name: CGRectIntegral
-  SwiftName: "getter:CGRect.integral(self:)"
-- Name: CGRectInset
-  SwiftName: "CGRect.insetBy(self:dx:dy:)"
-- Name: CGRectOffset
-  SwiftName: "CGRect.offsetBy(self:dx:dy:)"
-- Name: CGRectUnion
-  SwiftName: "CGRect.union(self:_:)"
-- Name: CGRectIntersection
-  SwiftName: "CGRect.intersection(self:_:)"
-- Name: CGRectContainsRect
-  SwiftName: "CGRect.contains(self:_:)"
-- Name: CGRectContainsPoint
-  SwiftName: "CGRect.contains(self:_:)"
-- Name: CGRectIntersectsRect
-  SwiftName: "CGRect.intersects(self:_:)"
-- Name: CGRectGetMinX
-  SwiftName: getter:CGRect.minX(self:)
-- Name: CGRectGetMidX
-  SwiftName: getter:CGRect.midX(self:)
-- Name: CGRectGetMaxX
-  SwiftName: getter:CGRect.maxX(self:)
-- Name: CGRectGetMinY
-  SwiftName: getter:CGRect.minY(self:)
-- Name: CGRectGetMidY
-  SwiftName: getter:CGRect.midY(self:)
-- Name: CGRectGetMaxY
-  SwiftName: getter:CGRect.maxY(self:)
-- Name: CGRectGetWidth
-  SwiftName: getter:CGRect.width(self:)
-- Name: CGRectGetHeight
-  SwiftName: getter:CGRect.height(self:)
 # The below are not available in Swift
 # FIXME: empty-argument-label pattern is currently failing SILGen
 - Name: CGColorSpaceCreateDeviceGray
@@ -82,36 +24,8 @@ Functions:
   Availability: nonswift
   SwiftName: CGColorConversionInfo.init(fromListWithArgumentsOptions:_:_:_:_:)
 
-# The below are attempts at providing better names than inference
-# CGAffineTransform
-- Name: CGAffineTransformMakeTranslation
-  SwiftName: CGAffineTransform.init(translationX:y:)
-- Name: CGAffineTransformMakeScale
-  SwiftName: CGAffineTransform.init(scaleX:y:)
-- Name: CGAffineTransformMakeRotation
-  SwiftName: CGAffineTransform.init(rotationAngle:)
-- Name: CGAffineTransformIsIdentity
-  SwiftName: getter:CGAffineTransform.isIdentity(self:)
-- Name: CGAffineTransformTranslate
-  SwiftName: CGAffineTransform.translatedBy(self:x:y:)
-- Name: CGAffineTransformScale
-  SwiftName: CGAffineTransform.scaledBy(self:x:y:)
-- Name: CGAffineTransformRotate
-  SwiftName: CGAffineTransform.rotated(self:by:)
-- Name: CGAffineTransformConcat
-  SwiftName: CGAffineTransform.concatenating(self:_:)
-- Name: CGAffineTransformInvert
-  SwiftName: CGAffineTransform.inverted(self:)
-- Name: CGPointApplyAffineTransform
-  SwiftName: CGPoint.applying(self:_:)
-- Name: CGSizeApplyAffineTransform
-  SwiftName: CGSize.applying(self:_:)
-- Name: CGRectApplyAffineTransform
-  SwiftName: CGRect.applying(self:_:)
-# These are hidden so we can improve them further in the SDK overlay
-- Name: CGAffineTransformEqualToTransform
-  # replaced by Equatable / ==
-  SwiftName: CGAffineTransform.__equalTo(self:_:)
+# CGRect
+- Name: CGRectDivide
   SwiftPrivate: true
 
 # CGBitmapContext
@@ -538,37 +452,6 @@ Functions:
 - Name: CGFontCreateCopyWithVariations
   SwiftName: CGFont.copy(self:withVariations:)
 
-# CGGeometry
-- Name: CGPointCreateDictionaryRepresentation
-  SwiftName: getter:CGPoint.dictionaryRepresentation(self:)
-- Name: CGSizeCreateDictionaryRepresentation
-  SwiftName: getter:CGSize.dictionaryRepresentation(self:)
-- Name: CGRectCreateDictionaryRepresentation
-  SwiftName: getter:CGRect.dictionaryRepresentation(self:)
-- Name: CGPointEqualToPoint
-  SwiftName: CGPoint.equalTo(self:_:)
-- Name: CGSizeEqualToSize
-  SwiftName: CGSize.equalTo(self:_:)
-- Name: CGRectEqualToRect
-  SwiftName: CGRect.equalTo(self:_:)
-# These are hidden so we can improve them further in the SDK overlay
-- Name: CGRectDivide
-  # hide the pointer version in favor of the tuple-return version
-  SwiftName: CGRect.__divided(self:slice:remainder:atDistance:from:)
-  SwiftPrivate: true
-- Name: CGPointMakeWithDictionaryRepresentation
-  # hide in favor of an init (cant map to initializer because out-pointer)
-  SwiftName: CGPoint.__setFromDictionaryRepresentation(_:_:)
-  SwiftPrivate: true
-- Name: CGSizeMakeWithDictionaryRepresentation
-  # hide in favor of an init (cant map to initializer because out-pointer)
-  SwiftName: CGSize.__setFromDictionaryRepresentation(_:_:)
-  SwiftPrivate: true
-- Name: CGRectMakeWithDictionaryRepresentation
-  # hide in favor of an init (cant map to initializer because out-pointer)
-  SwiftName: CGRect.__setFromDictionaryRepresentation(_:_:)
-  SwiftPrivate: true
-
 # CGGradient
 - Name: CGGradientCreateWithColorComponents
   SwiftName: CGGradient.init(colorSpace:colorComponents:locations:count:)
@@ -724,6 +607,36 @@ Functions:
 - Name: CGPathEqualToPath
   # replaced in favor of == / Equatable
   SwiftName: CGPath.__equalTo(self:_:)
+  SwiftPrivate: true
+- Name: CGPathCreateCopyByNormalizing
+  SwiftName: CGPath.__normalized(self:eoFill:)
+  SwiftPrivate: true
+- Name: CGPathCreateCopyByUnioningPath
+  SwiftName: CGPath.__union(self:other:eoFill:)
+  SwiftPrivate: true
+- Name: CGPathCreateCopyByIntersectingPath
+  SwiftName: CGPath.__intersection(self:other:eoFill:)
+  SwiftPrivate: true
+- Name: CGPathCreateCopyBySubtractingPath
+  SwiftName: CGPath.__subtracting(self:other:eoFill:)
+  SwiftPrivate: true
+- Name: CGPathCreateCopyBySymmetricDifferenceOfPath
+  SwiftName: CGPath.__symmetricDifference(self:other:eoFill:)
+  SwiftPrivate: true
+- Name: CGPathCreateCopyOfLineBySubtractingPath
+  SwiftName: CGPath.__lineSubtracting(self:other:eoFill:)
+  SwiftPrivate: true
+- Name: CGPathCreateCopyOfLineByIntersectingPath
+  SwiftName: CGPath.__lineIntersection(self:other:eoFill:)
+  SwiftPrivate: true
+- Name: CGPathCreateSeparateComponents
+  SwiftName: CGPath.__componentsSeparated(self:eoFill:)
+  SwiftPrivate: true
+- Name: CGPathCreateCopyByFlattening
+  SwiftName: CGPath.__flattened(self:threshold:)
+  SwiftPrivate: true
+- Name: CGPathIntersectsPath
+  SwiftName: CGPath.__intersects(self:other:eoFill:)
   SwiftPrivate: true
 - Name: CGPathAddRoundedRect
   SwiftName: CGMutablePath.__addRoundedRect(self:transform:rect:cornerWidth:cornerHeight:)
@@ -1168,26 +1081,6 @@ Functions:
 # Global variables
 #
 Globals:
-# The below are globals that are defined as opaque C constants for no good
-# reason.
-- Name: CGPointZero
-  Availability: nonswift
-  SwiftName: CGPoint.zero
-- Name: CGSizeZero
-  Availability: nonswift
-  SwiftName: CGSize.zero
-- Name: CGVectorZero
-  Availability: nonswift
-- Name: CGRectZero
-  Availability: nonswift
-  SwiftName: CGRect.zero
-- Name: CGAffineTransformIdentity
-  Availability: nonswift
-  SwiftName: CGAffineTransform.identity
-- Name: CGRectNull
-  SwiftName: CGRect.null
-- Name: CGRectInfinite
-  SwiftName: CGRect.infinite
 # The below are not available in Swift
 - Name: kCGColorSpaceGenericGray
   Availability: nonswift
@@ -1227,6 +1120,8 @@ Globals:
   SwiftName: CGColorSpace.itur_709
 - Name: kCGColorSpaceITUR_709_PQ
   SwiftName: CGColorSpace.itur_709_PQ
+- Name: kCGColorSpaceITUR_709_HLG
+  SwiftName: CGColorSpace.itur_709_HLG
 - Name: kCGColorSpaceITUR_2020
   SwiftName: CGColorSpace.itur_2020
 - Name: kCGColorSpaceITUR_2020_sRGBGamma
@@ -1344,6 +1239,8 @@ Enumerators:
 # CGContext
 - Name: kCGBlendModeXOR
   SwiftName: CGBlendMode.xor
+- Name: kCGBitmapByteOrderDefault
+  SwiftName: byteOrderDefault
 # CGEventTypes
 - Name: kCGEventMouseSubtypeDefault
   SwiftName: CGEventMouseSubtype.defaultType

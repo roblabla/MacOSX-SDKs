@@ -6,9 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <HomeKit/HMDefines.h>
-#import <HomeKit/HMCameraSource.h>
 #import <HomeKit/HMCameraDefines.h>
+#import <HomeKit/HMCameraSource.h>
+#import <HomeKit/HMDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @abstract Represents a camera stream.
  */
 HM_EXTERN API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMCameraStream : HMCameraSource
+    @interface HMCameraStream : HMCameraSource
 
 /*!
  * @brief Represents the audio setting for the current stream.
@@ -29,7 +29,7 @@ HM_EXTERN API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) 
  * @param audioStreamSetting New audio stream setting.
  *
  */
-- (void)setAudioStreamSetting:(HMCameraAudioStreamSetting)audioStreamSetting  API_DEPRECATED_WITH_REPLACEMENT("updateAudioStreamSetting:completionHandler:", ios(10.0, 10.0), watchos(3.0, 3.0)) API_UNAVAILABLE(tvos);
+- (void)setAudioStreamSetting:(HMCameraAudioStreamSetting)audioStreamSetting API_DEPRECATED_WITH_REPLACEMENT("updateAudioStreamSetting:completionHandler:", ios(10.0, 10.0), watchos(3.0, 3.0))API_UNAVAILABLE(tvos);
 
 /*!
  * @brief Updates the settings of the audio stream.
@@ -40,7 +40,7 @@ HM_EXTERN API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) 
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)updateAudioStreamSetting:(HMCameraAudioStreamSetting)audioStreamSetting completionHandler:(void (^)(NSError * __nullable error))completion API_AVAILABLE(tvos(14.5));
+- (void)updateAudioStreamSetting:(HMCameraAudioStreamSetting)audioStreamSetting completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(tvos(14.5));
 
 @end
 

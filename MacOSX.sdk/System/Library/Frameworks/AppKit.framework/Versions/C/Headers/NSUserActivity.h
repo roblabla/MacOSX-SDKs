@@ -21,7 +21,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @protocol NSUserActivityRestoring <NSObject>
 /* This method exists to be overridden and will be called from the main thread. It will be called on any objects passed to the restorationHandler given to application:continueUserActivity:restorationHandler: below. You should use the state in the userInfo to restore the object. On OS X, activities managed by NSDocument can be restored automatically, if NO is returned from application:continueActivity:restorationHandler: (or it is unimplemented). In this situation, the document will be opened via -[NSDocumentController openDocumentWithContentsOfURL:display:completionHandler:], and will have restoreUserActivityState: called on it. */
-- (void)restoreUserActivityState:(NSUserActivity *)userActivity API_AVAILABLE(macos(10.10));
+- (void)restoreUserActivityState:(NSUserActivity *)userActivity NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.10));
 @end
 
 @interface NSResponder (NSUserActivity) <NSUserActivityRestoring>

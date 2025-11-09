@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2019 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2022 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -74,6 +74,7 @@
 
 #include <sys/types.h>
 #include <sys/cdefs.h>
+#include <sys/constrained_ctypes.h>
 #include <machine/_param.h>
 #include <net/net_kev.h>
 
@@ -129,6 +130,7 @@
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define SO_USELOOPBACK  0x0040          /* bypass hardware when possible */
 #define SO_LINGER       0x0080          /* linger on close if data present (in ticks) */
+#define SO_LINGER_SEC   0x1080          /* linger on close if data present (in seconds) */
 #else
 #define SO_LINGER       0x1080          /* linger on close if data present (in seconds) */
 #endif  /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
@@ -174,7 +176,6 @@
 #define SO_NOTIFYCONFLICT       0x1026  /* APPLE: send notification if there is a bind on a port which is already in use */
 #define SO_UPCALLCLOSEWAIT      0x1027  /* APPLE: block on close until an upcall returns */
 #endif
-#define SO_LINGER_SEC   0x1080          /* linger on close if data present (in seconds) */
 #define SO_RANDOMPORT   0x1082  /* APPLE: request local port randomization */
 #define SO_NP_EXTENSIONS        0x1083  /* To turn off some POSIX behavior */
 #endif
@@ -184,6 +185,9 @@
 
 
 #define SO_NETSVC_MARKING_LEVEL    0x1119  /* Get QoS marking in effect for socket */
+
+
+#define SO_RESOLVER_SIGNATURE      0x1131  /* A signed data blob from the system resolver */
 
 
 /* When adding new socket-options, you need to make sure MPTCP supports these as well! */
@@ -412,7 +416,22 @@ struct so_np_extensions {
 struct sockaddr {
 	__uint8_t       sa_len;         /* total length */
 	sa_family_t     sa_family;      /* [XSI] address family */
-	char            sa_data[14];    /* [XSI] addr value (actually larger) */
+#if __has_ptrcheck
+	char            sa_data[__counted_by(sa_len - 2)];
+#else
+	char            sa_data[14];    /* [XSI] addr value (actually smaller or larger) */
+#endif
+};
+__CCT_DECLARE_CONSTRAINED_PTR_TYPES(struct sockaddr, sockaddr);
+
+/*
+ * Least amount of information that a sockaddr requires.
+ * Sockaddr_header is a compatible prefix structure of
+ * all sockaddr objects.
+ */
+struct __sockaddr_header {
+	__uint8_t           sa_len;
+	sa_family_t         sa_family;
 };
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
@@ -449,6 +468,7 @@ struct sockaddr_storage {
 	__int64_t       __ss_align;     /* force structure storage alignment */
 	char                    __ss_pad2[_SS_PAD2SIZE];
 };
+__CCT_DECLARE_CONSTRAINED_PTR_TYPES(struct sockaddr_storage, sockaddr_storage);
 
 /*
  * Protocol families, same as address families for now.

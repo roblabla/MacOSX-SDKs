@@ -18,11 +18,11 @@
 #include <TargetConditionals.h>
 
 
-#if TARGET_OS_OSX
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #ifndef __ICONSCORE__
 #include <LaunchServices/IconsCore.h>
 #endif
-#endif // TARGET_OS_OSX
+#endif // TARGET_OS_OSX || TARGET_OS_MACCATALYST
 
 #ifndef __LSINFO__
 #include <LaunchServices/LSInfo.h>
@@ -32,11 +32,11 @@
 #include <LaunchServices/LSOpen.h>
 #endif
 
-#if TARGET_OS_OSX
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #ifndef __LSQUARANTINE__
 #include <LaunchServices/LSQuarantine.h>
 #endif
-#endif // TARGET_OS_OSX
+#endif // TARGET_OS_OSX || TARGET_OS_MACCATALYST
 
 
 #ifndef __UTCORETYPES__

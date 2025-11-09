@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           750CAF8D-3442-3B49-94D7-734E0C874B72
+    value:           9C192205-6309-3456-A7E4-B7C00E38A505
   - target:          x86_64-maccatalyst
-    value:           750CAF8D-3442-3B49-94D7-734E0C874B72
+    value:           9C192205-6309-3456-A7E4-B7C00E38A505
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A3125C82-B7B7-3B77-905B-C600BA6A83FF
+    value:           7E76D0E3-70FA-3EA8-B47A-CFEF067E284F
   - target:          arm64e-maccatalyst
-    value:           A3125C82-B7B7-3B77-905B-C600BA6A83FF
+    value:           7E76D0E3-70FA-3EA8-B47A-CFEF067E284F
 install-name:    '/System/Library/PrivateFrameworks/UIKitSystemAppServices.framework/Versions/A/UIKitSystemAppServices'
-current-version: 320
+current-version: 411
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _UIKitSystemAppServicesVersionNumber, _UIKitSystemAppServicesVersionString, 
                        _USSAppManagerLog, _USSErrorDomain ]
     objc-classes:    [ USSBackgroundLaunchRequest, USSEnableApplicationAccessibilityRequest, 

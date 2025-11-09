@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           9CD11A52-E85B-3D12-8161-8BCEDDC732C0
+    value:           4FAFCFD1-508C-351A-B21E-502923BAD3AC
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           C20A3535-2D79-372F-92EC-111EF093D9EF
+    value:           4551BFFD-50C6-3435-B35B-0DBF65BA81C4
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftWebKit.dylib'
-current-version: 613.1.17
+current-version: 614.2.9
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$sSo18WKPDFConfigurationC6WebKitE4rectSo6CGRectVSgvM', '_$sSo18WKPDFConfigurationC6WebKitE4rectSo6CGRectVSgvg', 
                        '_$sSo18WKPDFConfigurationC6WebKitE4rectSo6CGRectVSgvpMV', 
                        '_$sSo18WKPDFConfigurationC6WebKitE4rectSo6CGRectVSgvs', '_$sSo9WKWebViewC6WebKitE06createC11ArchiveData17completionHandleryys6ResultOy10Foundation0G0Vs5Error_pGc_tF', 

@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8A5BE5A7-B73F-37BA-BB33-F56E82A1232F
+    value:           8EAC2343-6028-3841-A718-0BE39BA1D2D5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           43DE0A8E-83BF-35A0-A4E3-F6B1BEBBE5E8
+    value:           95D5D753-AF39-3FE8-A82D-8BCB919DA8DC
 install-name:    '/usr/lib/libCoreStorage.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CoreStorageAddPhysicalVolume, _CoreStorageAddVolumeExtentsForConversion, 
                        _CoreStorageAddVolumeForConversion, _CoreStorageCalcMinResizeDeltaForPhysicalVolume, 
                        _CoreStorageCanRevertVolume, _CoreStorageClearIOErrorForVolume, 

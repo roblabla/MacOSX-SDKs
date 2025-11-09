@@ -32,6 +32,8 @@ UIKIT_EXTERN UIActivityType const UIActivityTypeAirDrop            API_AVAILABLE
 UIKIT_EXTERN UIActivityType const UIActivityTypeOpenInIBooks       API_AVAILABLE(ios(9.0)) __TVOS_PROHIBITED;
 UIKIT_EXTERN UIActivityType const UIActivityTypeMarkupAsPDF        API_AVAILABLE(ios(11.0)) __TVOS_PROHIBITED;
 UIKIT_EXTERN UIActivityType const UIActivityTypeSharePlay          API_AVAILABLE(ios(15.4)) __TVOS_PROHIBITED;
+UIKIT_EXTERN UIActivityType const UIActivityTypeCollaborationInviteWithLink  API_AVAILABLE(ios(16.0)) __TVOS_PROHIBITED;
+UIKIT_EXTERN UIActivityType const UIActivityTypeCollaborationCopyLink  API_AVAILABLE(ios(16.0)) __TVOS_PROHIBITED;
 
 typedef NS_ENUM(NSInteger, UIActivityCategory) {
     UIActivityCategoryAction,

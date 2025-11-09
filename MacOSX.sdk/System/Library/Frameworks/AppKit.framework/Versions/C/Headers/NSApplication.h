@@ -148,7 +148,7 @@ typedef struct _NSModalSession *NSModalSession;
 
 @interface NSApplication : NSResponder <NSUserInterfaceValidations, NSMenuItemValidation, NSAccessibilityElement, NSAccessibility>
 
-APPKIT_EXTERN __kindof NSApplication * _Null_unspecified NSApp;
+APPKIT_EXTERN __kindof NSApplication * _Null_unspecified NSApp NS_SWIFT_UI_ACTOR;
 
 @property (class, readonly, strong) __kindof NSApplication *sharedApplication;
 @property (nullable, weak) id<NSApplicationDelegate> delegate;
@@ -315,28 +315,28 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
         NSTerminateLater - it may be ok to proceed with termination later.  The application must call -replyToApplicationShouldTerminate: with YES or NO once the answer is known
             this return value is for delegates who need to provide document modal alerts (sheets) in order to decide whether to quit.
 */
-- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender NS_SWIFT_UI_ACTOR;
 
 /* This will be called for any URLs your application is asked to open. This includes URL types (CFBundleURLTypes) defined in your Info.plist, and Document types (CFBundleDocumentTypes) that have no associated NSDocument class. Document URLs that have an associated NSDocument class will be opened through NSDocumentController. If this is implemented, application:openFiles: and application:openFile: will not be called.
  */
-- (void)application:(NSApplication *)application openURLs:(NSArray<NSURL *> *)urls API_AVAILABLE(macos(10.13));
+- (void)application:(NSApplication *)application openURLs:(NSArray<NSURL *> *)urls NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.13));
 
-- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename;
-- (void)application:(NSApplication *)sender openFiles:(NSArray<NSString *> *)filenames;
-- (BOOL)application:(NSApplication *)sender openTempFile:(NSString *)filename;
-- (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender;
-- (BOOL)applicationOpenUntitledFile:(NSApplication *)sender;
-- (BOOL)application:(id)sender openFileWithoutUI:(NSString *)filename;
-- (BOOL)application:(NSApplication *)sender printFile:(NSString *)filename;
-- (NSApplicationPrintReply)application:(NSApplication *)application printFiles:(NSArray<NSString *> *)fileNames withSettings:(NSDictionary<NSPrintInfoAttributeKey, id> *)printSettings showPrintPanels:(BOOL)showPrintPanels;
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender;
-- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag;
-- (nullable NSMenu *)applicationDockMenu:(NSApplication *)sender;
-- (NSError *)application:(NSApplication *)application willPresentError:(NSError *)error;
+- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename NS_SWIFT_UI_ACTOR;
+- (void)application:(NSApplication *)sender openFiles:(NSArray<NSString *> *)filenames NS_SWIFT_UI_ACTOR;
+- (BOOL)application:(NSApplication *)sender openTempFile:(NSString *)filename NS_SWIFT_UI_ACTOR;
+- (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender NS_SWIFT_UI_ACTOR;
+- (BOOL)applicationOpenUntitledFile:(NSApplication *)sender NS_SWIFT_UI_ACTOR;
+- (BOOL)application:(id)sender openFileWithoutUI:(NSString *)filename NS_SWIFT_UI_ACTOR;
+- (BOOL)application:(NSApplication *)sender printFile:(NSString *)filename NS_SWIFT_UI_ACTOR;
+- (NSApplicationPrintReply)application:(NSApplication *)application printFiles:(NSArray<NSString *> *)fileNames withSettings:(NSDictionary<NSPrintInfoAttributeKey, id> *)printSettings showPrintPanels:(BOOL)showPrintPanels NS_SWIFT_UI_ACTOR;
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender NS_SWIFT_UI_ACTOR;
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag NS_SWIFT_UI_ACTOR;
+- (nullable NSMenu *)applicationDockMenu:(NSApplication *)sender NS_SWIFT_UI_ACTOR;
+- (NSError *)application:(NSApplication *)application willPresentError:(NSError *)error NS_SWIFT_UI_ACTOR;
 
-- (void)application:(NSApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken API_AVAILABLE(macos(10.7));
-- (void)application:(NSApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error API_AVAILABLE(macos(10.7));
-- (void)application:(NSApplication *)application didReceiveRemoteNotification:(NSDictionary<NSString *, id> *)userInfo API_AVAILABLE(macos(10.7));
+- (void)application:(NSApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.7));
+- (void)application:(NSApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.7));
+- (void)application:(NSApplication *)application didReceiveRemoteNotification:(NSDictionary<NSString *, id> *)userInfo NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.7));
 
 /** Method to opt-in to secure restorable state.
  
@@ -346,20 +346,20 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
  
     This method will be called prior to any state encoding or restoration.
 */
-- (BOOL)applicationSupportsSecureRestorableState:(NSApplication *)app API_AVAILABLE(macos(12.0));
+- (BOOL)applicationSupportsSecureRestorableState:(NSApplication *)app NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(12.0));
 
 /**
  Returns the object capable of handling the specified intent.
  */
-- (nullable id)application:(NSApplication *)application handlerForIntent:(INIntent *)intent API_AVAILABLE(macos(12.0));
+- (nullable id)application:(NSApplication *)application handlerForIntent:(INIntent *)intent NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(12.0));
 
 /* Method called by -[NSApplication encodeRestorableStateWithCoder:] to give the delegate a chance to encode any additional state into the NSCoder. If the restorable state managed by the delegate changes, you must call -[NSApplication invalidateRestorableState] so that it will be re-encoded. See the header NSWindowRestoration.h for more information.
 */
-- (void)application:(NSApplication *)app willEncodeRestorableState:(NSCoder *)coder API_AVAILABLE(macos(10.7));
+- (void)application:(NSApplication *)app willEncodeRestorableState:(NSCoder *)coder NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.7));
 
 /* Method called by -[NSApplication restoreStateWithCoder:] to give the delegate a chance to restore its own state, which it may decode from the NSCoder. See the header NSWindowRestoration.h for more information.
 */
-- (void)application:(NSApplication *)app didDecodeRestorableState:(NSCoder *)coder API_AVAILABLE(macos(10.7));
+- (void)application:(NSApplication *)app didDecodeRestorableState:(NSCoder *)coder NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.7));
 
 /* NSUserActivity support:
  */
@@ -370,7 +370,7 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
  
  For each application:willContinueUserActivityWithType: invocation, you are guaranteed to get exactly one invocation of application:continueUserActivity:restorationHandler: on success, or application:didFailToContinueUserActivityWithType:error: if an error was encountered.
  */
-- (BOOL)application:(NSApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType API_AVAILABLE(macos(10.10));
+- (BOOL)application:(NSApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.10));
 
 /*
  This will be called on the main thread after the NSUserActivity object is available. Use the data you stored in the NSUserActivity object to re-create what the user was doing. Return YES to indicate that the activity was handled. Return NO (or leave it unimplemented) and AppKit will attempt to continue the user activity.
@@ -379,27 +379,27 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
  
  If this user activity was created automatically by having NSUbiquitousDocumentUserActivityType in a CFBundleDocumentTypes entry, AppKit can automatically restore the NSUserActivity on OS X if NO is returned, or this method is unimplemented. It will do so by creating a document of the appropriate type using the URL stored in the userInfo under the NSUserActivityDocumentURLKey. The document will have restoreUserActivity: called on it.
  */
-- (BOOL)application:(NSApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void(^)(NSArray<id<NSUserActivityRestoring>> *restorableObjects))restorationHandler API_AVAILABLE(macos(10.10));
+- (BOOL)application:(NSApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void(^)(NSArray<id<NSUserActivityRestoring>> *restorableObjects))restorationHandler NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.10));
 
 /* There are instances where continuing a NSUserActivity may fail. This will get called on the main thread if it does so. If it is unimplemented, AppKit will present the error. */
-- (void)application:(NSApplication *)application didFailToContinueUserActivityWithType:(NSString *)userActivityType error:(NSError *)error API_AVAILABLE(macos(10.10));
+- (void)application:(NSApplication *)application didFailToContinueUserActivityWithType:(NSString *)userActivityType error:(NSError *)error NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.10));
 
 /* This will be called on the main thread when a user activity managed by AppKit/UIKit has been updated. You should use this as a last chance to add additional data to the userActivity. */
-- (void)application:(NSApplication *)application didUpdateUserActivity:(NSUserActivity *)userActivity API_AVAILABLE(macos(10.10));
+- (void)application:(NSApplication *)application didUpdateUserActivity:(NSUserActivity *)userActivity NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.10));
 
 
 /* This will be called on the main thread after the user indicates they want to accept a CloudKit sharing invitation in your application.
  
  You should use the CKShareMetadata object's shareURL and containerIdentifier to schedule a CKAcceptSharesOperation, then start using the resulting CKShare and its associated record(s), which will appear in the CKContainer's shared database in a zone matching that of the record's owner.
 */
-- (void)application:(NSApplication *)application userDidAcceptCloudKitShareWithMetadata:(CKShareMetadata *)metadata API_AVAILABLE(macos(10.12));
+- (void)application:(NSApplication *)application userDidAcceptCloudKitShareWithMetadata:(CKShareMetadata *)metadata NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12));
 
 /* Key Value Coding support:
  */
 
 /* Return YES if the receiving delegate object can respond to key value coding messages for a specific keyed attribute, to-one relationship, or to-many relationship.  Return NO otherwise.
 */
-- (BOOL)application:(NSApplication *)sender delegateHandlesKey:(NSString *)key;
+- (BOOL)application:(NSApplication *)sender delegateHandlesKey:(NSString *)key NS_SWIFT_UI_ACTOR;
 
 /* NSMenu system-wide keyboard shortcut localization support
  */
@@ -408,27 +408,27 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
  
    Return NO if the receiving delegate object wishes to opt-out of system-wide keyboard shortcut localization for all application-supplied menus. Return YES by default for apps linked against 12.0 and later SDK.
 */
-- (BOOL)applicationShouldAutomaticallyLocalizeKeyEquivalents:(NSApplication *)application API_AVAILABLE(macos(12.0));
+- (BOOL)applicationShouldAutomaticallyLocalizeKeyEquivalents:(NSApplication *)application NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(12.0));
 
 /* Notifications:
  */
-- (void)applicationWillFinishLaunching:(NSNotification *)notification;
-- (void)applicationDidFinishLaunching:(NSNotification *)notification;
-- (void)applicationWillHide:(NSNotification *)notification;
-- (void)applicationDidHide:(NSNotification *)notification;
-- (void)applicationWillUnhide:(NSNotification *)notification;
-- (void)applicationDidUnhide:(NSNotification *)notification;
-- (void)applicationWillBecomeActive:(NSNotification *)notification;
-- (void)applicationDidBecomeActive:(NSNotification *)notification;
-- (void)applicationWillResignActive:(NSNotification *)notification;
-- (void)applicationDidResignActive:(NSNotification *)notification;
-- (void)applicationWillUpdate:(NSNotification *)notification;
-- (void)applicationDidUpdate:(NSNotification *)notification;
-- (void)applicationWillTerminate:(NSNotification *)notification;
-- (void)applicationDidChangeScreenParameters:(NSNotification *)notification;
-- (void)applicationDidChangeOcclusionState:(NSNotification *)notification API_AVAILABLE(macos(10.9));
-- (void)applicationProtectedDataWillBecomeUnavailable:(NSNotification *)notification API_AVAILABLE(macos(12.0));
-- (void)applicationProtectedDataDidBecomeAvailable:(NSNotification *)notification API_AVAILABLE(macos(12.0));
+- (void)applicationWillFinishLaunching:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationDidFinishLaunching:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationWillHide:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationDidHide:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationWillUnhide:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationDidUnhide:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationWillBecomeActive:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationDidBecomeActive:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationWillResignActive:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationDidResignActive:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationWillUpdate:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationDidUpdate:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationWillTerminate:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationDidChangeScreenParameters:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)applicationDidChangeOcclusionState:(NSNotification *)notification NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.9));
+- (void)applicationProtectedDataWillBecomeUnavailable:(NSNotification *)notification NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(12.0));
+- (void)applicationProtectedDataDidBecomeAvailable:(NSNotification *)notification NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(12.0));
 
 @end
 

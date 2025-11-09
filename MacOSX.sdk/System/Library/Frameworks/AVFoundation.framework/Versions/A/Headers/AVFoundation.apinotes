@@ -371,6 +371,9 @@ Classes:
   - Selector: 'insertTimeRange:ofAsset:atTime:error:'
     SwiftName: insertTimeRange(_:of:at:)
     MethodKind: Instance
+  - Selector: 'insertTimeRange:ofAsset:atTime:completionHandler:'
+    SwiftName: insertTimeRange(_:of:at:completionHandler:)
+    MethodKind: Instance
   - Selector: 'insertEmptyTimeRange:'
     SwiftName: insertEmptyTimeRange(_:)
     MethodKind: Instance
@@ -428,6 +431,11 @@ Classes:
     MethodKind: Instance
   - Selector: 'removeMediaDataCollector:'
     SwiftName: remove(_:)
+    MethodKind: Instance
+- Name: AVPlayerLayer
+  Methods:
+  - Selector: 'copyDisplayedPixelBuffer'
+    SwiftName: displayedPixelBuffer()
     MethodKind: Instance
 - Name: AVPlaybackCoordinator
   Methods:
@@ -578,6 +586,9 @@ Classes:
   - Selector: 'valueWithCMTimeMapping:'
     SwiftName: init(timeMapping:)
     MethodKind: Class
+  - Selector: 'valueWithCMVideoDimensions:'
+    SwiftName: init(videoDimensions:)
+    MethodKind: Class
   Properties:
   - Name: CMTimeValue
     SwiftName: timeValue
@@ -585,6 +596,8 @@ Classes:
     SwiftName: timeRangeValue
   - Name: CMTimeMappingValue
     SwiftName: timeMappingValue
+  - Name: CMVideoDimensionsValue
+    SwiftName: videoDimensionsValue
 - Name: NSCoder
   Methods:
   - Selector: 'decodeCMTimeForKey:'

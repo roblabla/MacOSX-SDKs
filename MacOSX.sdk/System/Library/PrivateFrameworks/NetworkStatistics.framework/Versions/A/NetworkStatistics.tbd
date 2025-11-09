@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B26A3F3F-0EAB-3336-AF5C-5FADC88A82A1
+    value:           2F6AE950-85C4-36E8-AD23-CFE3B3A603FB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           38EC8114-6E0E-300B-AAC3-30348693D9B9
+    value:           2888554E-19F6-3501-AEAE-0F4D19268E37
 install-name:    '/System/Library/PrivateFrameworks/NetworkStatistics.framework/Versions/A/NetworkStatistics'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NStatManagerAddAllRoutes, _NStatManagerAddAllRoutesWithFilter, 
                        _NStatManagerAddAllTCP, _NStatManagerAddAllTCPWithFilter, 
                        _NStatManagerAddAllTCPWithOptions, _NStatManagerAddAllUDP, 

@@ -6,14 +6,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AVFAudio/AVFAudio.h>
+#import <AVFoundation/AVFoundation.h>
 #import <ShazamKit/SHSignature.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// @brief @c SHSignatureGenerator provides a way to convert audio data into instances of @c SHSignature
 SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface SHSignatureGenerator : NSObject
+
+/// Create a `SHSignature` from an @c AVAsset.
+/// @param asset An AVAsset that contains audio you would like to convert to a Signature
+/// @discussion The asset can be any type of media that has audio tracks. If the asset has multiple tracks, they
+/// will be mixed into one @c SHSignature
+/// @param completionHandler A block called with the created @c SHSignature or nil and a populated error parameter if a signature could not be created.
++ (void)generateSignatureFromAsset:(AVAsset *)asset completionHandler:(void (^)(SHSignature * __nullable signature, NSError * __nullable error))completionHandler API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) NS_SWIFT_ASYNC_NAME(signature(from:));
 
 /// @brief Add audio to the generator
 /// @discussion Audio passed to the generator should be contiguous, passing non contiguous data will affect the quality of the @c SHSignature
@@ -31,4 +38,4 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

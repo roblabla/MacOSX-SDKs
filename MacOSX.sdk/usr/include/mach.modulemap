@@ -103,11 +103,6 @@ module Darwin.Mach [system] {
     export *
   }
 
-  module lock_set {
-    header "mach/lock_set.h"
-    export *
-  }
-
   module mach_error {
     header "mach/mach_error.h"
     export *

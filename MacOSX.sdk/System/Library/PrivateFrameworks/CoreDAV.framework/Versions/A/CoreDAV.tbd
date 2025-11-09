@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F99FFFCB-8889-39A3-8C0C-DF3A0DFCF597
+    value:           E45E80D3-BDB0-3B96-8002-FC6D16A0999A
   - target:          x86_64-maccatalyst
-    value:           F99FFFCB-8889-39A3-8C0C-DF3A0DFCF597
+    value:           E45E80D3-BDB0-3B96-8002-FC6D16A0999A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C2D8725D-EB7D-35BF-8E04-3F46FD870F3D
+    value:           248ED740-59F8-3C02-A130-65FE8258C78F
   - target:          arm64e-maccatalyst
-    value:           C2D8725D-EB7D-35BF-8E04-3F46FD870F3D
+    value:           248ED740-59F8-3C02-A130-65FE8258C78F
 install-name:    '/System/Library/PrivateFrameworks/CoreDAV.framework/Versions/A/CoreDAV'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CDVAbstractMethod, _CDVAppleClientInfoString, _CDVCleanedStringsFromResponseHeaders, 
                        _CDVDefaultUserAgent, _CDVExtractValuesFromRedirectString, 
                        _CDVHTTPStatusCodeAsStatusString, _CDVHTTPStatusCodeFromStatusLine, 
@@ -27,7 +27,7 @@ exports:
                        _CDVLog, _CDVPLog, _CDVRelativeOrderHeaderString, _CDVRunLoopModesToPerformDelayedSelectorsIn, 
                        _CDVRunLoopModesToPerformDelayedSelectorsInFromRunLoop, _CDVUnimplemented, 
                        _CalDAVHTTPHeader_XAppleDAVPushToken, _CoreDAVErrorDomain, 
-                       _CoreDAVErrorItemKey, _CoreDAVHTTPHeader_Accept, _CoreDAVHTTPHeader_AcceptCharset, 
+                       _CoreDAVHTTPHeader_Accept, _CoreDAVHTTPHeader_AcceptCharset, 
                        _CoreDAVHTTPHeader_AcceptEncoding, _CoreDAVHTTPHeader_AcceptLanguage, 
                        _CoreDAVHTTPHeader_AcceptRanges, _CoreDAVHTTPHeader_Age, _CoreDAVHTTPHeader_Allow, 
                        _CoreDAVHTTPHeader_AppleClientInfo, _CoreDAVHTTPHeader_Authorization, 
@@ -57,13 +57,12 @@ exports:
                        _CoreDAVHTTPHeader_XClientToken, _CoreDAVHTTPHeader_XClientTokenRequest, 
                        _CoreDAVHTTPHeader_XGuardianRestrictedRelaxed, _CoreDAVHTTPHeader_XMobileMeDAVOptions, 
                        _CoreDAVHTTPHeader_XWebLoginRequired, _CoreDAVHTTPHeaders, 
-                       _CoreDAVHTTPStatusErrorDomain, _CoreDAVSRVLookupTask_SRVHostClientCallback, 
-                       __CoreDAVSecCopyIdentityFromPersist, __CoreDAVSecDeleteIdentityByPersistentRef, 
-                       __CoreDAVSecIdentityCopySSLClientAuthenticationChain, __systemVersionDict, 
-                       _cdXMLACE, _cdXMLACL, _cdXMLACLPrincipalPropertySet, _cdXMLAddMember, 
-                       _cdXMLAll, _cdXMLAllProp, _cdXMLAppleBookmarksURI, _cdXMLAppleExtraAttributes, 
-                       _cdXMLApplyToPrincipalCollectionSet, _cdXMLAuthenticated, 
-                       _cdXMLBind, _cdXMLCalDAVAnyOf, _cdXMLCalDAVCalendarFreeBusyReport, 
+                       _CoreDAVHTTPStatusErrorDomain, __CoreDAVSecCopyIdentityFromPersist, 
+                       __CoreDAVSecDeleteIdentityByPersistentRef, __CoreDAVSecIdentityCopySSLClientAuthenticationChain, 
+                       __systemVersionDict, _cdXMLACE, _cdXMLACL, _cdXMLACLPrincipalPropertySet, 
+                       _cdXMLAddMember, _cdXMLAll, _cdXMLAllProp, _cdXMLAppleBookmarksURI, 
+                       _cdXMLAppleExtraAttributes, _cdXMLApplyToPrincipalCollectionSet, 
+                       _cdXMLAuthenticated, _cdXMLBind, _cdXMLCalDAVAnyOf, _cdXMLCalDAVCalendarFreeBusyReport, 
                        _cdXMLCalDAVCalendarHomeSet, _cdXMLCalDAVCalendarMultiGetReport, 
                        _cdXMLCalDAVCalendarQueryReport, _cdXMLCalDAVCalendarSearchReport, 
                        _cdXMLCalDAVInboxURL, _cdXMLCalDAVLimit, _cdXMLCalDAVNResults, 
@@ -118,9 +117,9 @@ exports:
                        _cdXMLMMeMaxImageSize, _cdXMLMMeMultiPut, _cdXMLMMeResource, 
                        _cdXMLMMeXMPPDAVURL, _cdXMLMatch, _cdXMLMaxAttendeesPerInstance, 
                        _cdXMLMaxResources, _cdXMLMkcol, _cdXMLMkcolResponse, _cdXMLMultiGet, 
-                       _cdXMLMultiStatus, _cdXMLName, _cdXMLNameSpace, _cdXMLNotification, 
-                       _cdXMLNumberOfMatchesWithinLimits, _cdXMLOpaque, _cdXMLOwner, 
-                       _cdXMLParamFilter, _cdXMLPrincipal, _cdXMLPrincipalCollectionSet, 
+                       _cdXMLMultiStatus, _cdXMLMute, _cdXMLName, _cdXMLNameSpace, 
+                       _cdXMLNotification, _cdXMLNumberOfMatchesWithinLimits, _cdXMLOpaque, 
+                       _cdXMLOwner, _cdXMLParamFilter, _cdXMLPrincipal, _cdXMLPrincipalCollectionSet, 
                        _cdXMLPrincipalMatch, _cdXMLPrincipalPropertySearch, _cdXMLPrincipalSearchProperty, 
                        _cdXMLPrincipalSearchPropertySet, _cdXMLPrincipalURL, _cdXMLPrivilege, 
                        _cdXMLProp, _cdXMLPropFilter, _cdXMLPropFind, _cdXMLPropName, 
@@ -175,7 +174,8 @@ exports:
                        CoreDAVSRVLookupTask, CoreDAVSRVResourceRecord, CoreDAVSetItem, 
                        CoreDAVSupportedReportItem, CoreDAVSupportedReportSetItem, 
                        CoreDAVSyncReportItem, CoreDAVSyncReportTask, CoreDAVTask, 
-                       CoreDAVTaskGroup, CoreDAVUpdateACLTaskGroup, CoreDAVValidatePrincipalsTaskGroup, 
+                       CoreDAVTaskGroup, CoreDAVURLAuthenticationChallengeProxy, 
+                       CoreDAVUpdateACLTaskGroup, CoreDAVValidatePrincipalsTaskGroup, 
                        CoreDAVXMLData, CoreDAVXMLData_Impl, CoreDAVXMLElementAttribute, 
                        CoreDAVXMLElementGenerator, CoreDAVXMLParser ]
     objc-ivars:      [ CardDAVAddressBookContainer._maxImageSize, CardDAVAddressBookContainer._maxResourceSize, 
@@ -359,10 +359,9 @@ exports:
                        CoreDAVResponseItem._matchResults, CoreDAVResponseItem._propStats, 
                        CoreDAVResponseItem._responseDescription, CoreDAVResponseItem._serverUID, 
                        CoreDAVResponseItem._status, CoreDAVSRVLookupTask._fetchedRecords, 
-                       CoreDAVSRVLookupTask._host, CoreDAVSRVLookupTask._serviceString, 
-                       CoreDAVSRVResourceRecord._port, CoreDAVSRVResourceRecord._priority, 
+                       CoreDAVSRVLookupTask._serviceString, CoreDAVSRVResourceRecord._port, 
                        CoreDAVSRVResourceRecord._serviceString, CoreDAVSRVResourceRecord._target, 
-                       CoreDAVSRVResourceRecord._weight, CoreDAVSetItem._prop, CoreDAVSupportedReportItem._report, 
+                       CoreDAVSetItem._prop, CoreDAVSupportedReportItem._report, 
                        CoreDAVSupportedReportSetItem._supportedReports, CoreDAVSyncReportItem._syncToken, 
                        CoreDAVTask._accountInfoProvider, CoreDAVTask._depth, CoreDAVTask._numDownloadedElements, 
                        CoreDAVTask._taskManager, CoreDAVTaskGroup._accountInfoProvider, 

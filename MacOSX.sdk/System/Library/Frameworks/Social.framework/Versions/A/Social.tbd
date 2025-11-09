@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D9A29F5F-39CC-3C2F-9513-6D7CB939ECFA
+    value:           38DD78A1-30A6-3C50-B47E-6BD095AD733E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7ADC5E3C-0C6C-3D11-A6ED-6F501E7CA56F
+    value:           5BF8B6D1-B161-364E-B5AF-6661A1479354
 install-name:    '/System/Library/Frameworks/Social.framework/Versions/A/Social'
-current-version: 726
+current-version: 753
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CPFileBuildDirectoriesToPath, _SLErrorDomain, _SLFacebookEnvironmentDidChangeNotification, 
                        _SLFacebookGraphAPIShouldUseBetaKey, _SLFacebookIgnoreAccessRequests, 
                        _SLFacebookLikeInfoFriendCountKey, _SLFacebookLikeInfoFriendsKey, 

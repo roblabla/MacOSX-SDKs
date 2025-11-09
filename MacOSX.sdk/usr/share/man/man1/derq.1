@@ -10,6 +10,7 @@
 .Ar query
 .Op Fl -pretty
 .Op Fl -raw
+.Op Fl -xml
 .Op Fl f Ar format
 .Op Fl i Ar input
 .Op Fl o Ar output
@@ -19,14 +20,14 @@
 .Ar csops
 .Op Fl p Ar pid
 .Op Fl o Ar output
-.Op Fl -xml 
+.Op Fl -xml
 .Aq query statements
 .sp
 .Nm
 .Ar macho
 .Op Fl i Ar input
 .Op Fl o Ar output
-.Op Fl -xml 
+.Op Fl -xml
 .Aq query statements
 .Sh DESCRIPTION
 The
@@ -36,7 +37,7 @@ command queries DER encoded entitlements using the CoreEntitlements library.
 It currently supports querying from a Mach-O, file / input stream, as well as directly from a process using
 .Xr csops(2) .
 .sp
-After a succesful execution of the query statements on the 
+After a succesful execution of the query statements on the
 .Ar input
 ,
 .Nm
@@ -49,18 +50,20 @@ A list of flags and their descriptions:
 .It Fl -pretty                 \"-a flag as a list item
 When specified,
 .Nm
-will print the active context in a textual representation to 
+will print the active context in a textual representation to
 .Vt stderr .
 .It Fl -raw
 Signifies that the input might not be a DER encoded entitlements blob. This forces
 .Nm
 to treat the input as a raw DER object. Particularly this means that if a V1 entitlements is passed in, the active context will be set to the outer metadata object, and not the inner entitlements dictionary.
 .It Fl -xml
-Instruct the 
+Instruct the
 .Vt macho
 or
 .Vt csops
-subcommands to query the embedded XML blob instead of the embedded DER blob.
+subcommands to query the embedded XML blob instead of the embedded DER blob. Using this flag on the
+.Vt query
+command will change the the output format to be an XML plist.
 .It Fl i Ar input
 Allows you to specify which file should be used as the input.
 If not specified "-" is assumed, which signfies that the input will follow on 

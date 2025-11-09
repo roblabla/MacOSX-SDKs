@@ -9,7 +9,7 @@
 @class NSMutableDictionary;
 @class NSPredicate;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // Expressions are the core of the predicate implementation. When expressionValueWithObject: is called, the expression is evaluated, and a value returned which can then be handled by an operator. Expressions can be anything from constants to method invocations. Scalars should be wrapped in appropriate NSValue classes.
 
@@ -35,7 +35,10 @@ API_AVAILABLE(macos(10.4), ios(3.0), watchos(2.0), tvos(9.0))
     @package
     struct _expressionFlags {
         unsigned int _evaluationBlocked:1;
-        unsigned int _reservedExpressionFlags:31;
+        unsigned int _usesKVC:1;
+        unsigned int _validatedExpression:1;
+        unsigned int _validatedKeys:1;
+        unsigned int _reservedExpressionFlags:28;
     } _expressionFlags;
 #ifdef __LP64__
     uint32_t reserved;
@@ -134,4 +137,4 @@ API_AVAILABLE(macos(10.4), ios(3.0), watchos(2.0), tvos(9.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -42,7 +42,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 /*!
  @abstract The device identifier is a string identifying the Virtio block device. Empty string by default.
  @discussion
-    The identifier can be retrieved in the guest via a VIRTIO_BLOCK_T_GET_ID request.
+    The identifier can be retrieved in the guest via a VIRTIO_BLK_T_GET_ID request.
 
     The identifier must be encodable as an ASCII string of length at most 20 bytes.
     This property can be checked with +[VZVirtioBlockDeviceConfiguration validateBlockDeviceIdentifier:error:].

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FA7EDAF3-42A1-3ACD-AE55-C7E9D74EEF66
+    value:           DA430EC7-BBF0-3443-87CE-B9A8B2760952
   - target:          x86_64-maccatalyst
-    value:           FA7EDAF3-42A1-3ACD-AE55-C7E9D74EEF66
+    value:           DA430EC7-BBF0-3443-87CE-B9A8B2760952
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2AD0546E-40B4-350E-A024-D4539BDCD68F
+    value:           D11360E9-E08A-3B03-B42A-0D54E09466C9
   - target:          arm64e-maccatalyst
-    value:           2AD0546E-40B4-350E-A024-D4539BDCD68F
+    value:           D11360E9-E08A-3B03-B42A-0D54E09466C9
 install-name:    '/System/Library/PrivateFrameworks/CommonUtilities.framework/Versions/A/CommonUtilities'
 current-version: 800
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CUTAuditTokenTaskHasEntitlement, _CUTCreateDictionaryFromXPCObject, 
                        _CUTCreateXPCObjectFromDictionary, _CUTDataForPropertyList, 
                        _CUTGetMainBundle, _CUTGetMainBundleIdentifier, _CUTGetXPCBoolFromDictionary, 

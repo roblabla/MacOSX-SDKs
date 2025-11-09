@@ -4,21 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A144F964-9A58-3177-92B7-AB1D8B63C525
+    value:           58C1197B-32F1-3888-B1F6-E41583EB259B
   - target:          x86_64-maccatalyst
-    value:           A144F964-9A58-3177-92B7-AB1D8B63C525
+    value:           58C1197B-32F1-3888-B1F6-E41583EB259B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7E9081B4-1C8E-33C5-9E00-D5C67E527BA1
+    value:           36A8FD2B-6531-3F1F-BC4D-3C22EB2C987A
   - target:          arm64e-maccatalyst
-    value:           7E9081B4-1C8E-33C5-9E00-D5C67E527BA1
+    value:           36A8FD2B-6531-3F1F-BC4D-3C22EB2C987A
 install-name:    '/System/Library/PrivateFrameworks/KeyboardServices.framework/KeyboardServices'
+current-version: 153
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _KSCKErrorDomain, _KSCloudKitAccountDidChange, _KSCloudKitAccountDidChangeAccountChangedKey, 
                        _KSCloudKitAccountDidChangeDeviceToDeviceKey, _KSCloudKitAccountDidChangeStatusKey, 
                        _KSCloudKitAccountDidChangeUserChangedKey, _KSCloudKitAccountDidSuccessfullyCreateZone, 

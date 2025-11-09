@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3872413D-44F3-3A42-9C42-F52027B490FF
+    value:           95A9D3BC-BD12-3A65-85F5-95340D95DB9E
   - target:          x86_64-maccatalyst
-    value:           3872413D-44F3-3A42-9C42-F52027B490FF
+    value:           95A9D3BC-BD12-3A65-85F5-95340D95DB9E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           017819BF-9E58-3FCB-B2EC-89DE1CD9445C
+    value:           08D7974E-B78A-3F6E-B1A6-040450BD9328
   - target:          arm64e-maccatalyst
-    value:           017819BF-9E58-3FCB-B2EC-89DE1CD9445C
+    value:           08D7974E-B78A-3F6E-B1A6-040450BD9328
 install-name:    '/System/Library/PrivateFrameworks/SuggestionsSpotlightMetrics.framework/Versions/A/SuggestionsSpotlightMetrics'
-current-version: 1153.16.1
+current-version: 1193.8
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SGSM2ContactOpportunityInSpotlightReadFrom, _SGSM2ContactResultInSpotlightReadFrom, 
                        _SGSM2ContactResultSelectedInSpotlightReadFrom, _SGSM2EventOpportunityInSpotlightReadFrom, 
                        _SGSM2EventResultInSpotlightReadFrom, _SGSM2EventResultSelectedInSpotlightReadFrom, 

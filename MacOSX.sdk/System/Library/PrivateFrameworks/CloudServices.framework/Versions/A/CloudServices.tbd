@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A62127D5-5E30-3EE0-801F-5D957D0935F0
+    value:           9EA2DF22-AC66-3253-9CBA-63CAD9B3DD41
   - target:          x86_64-maccatalyst
-    value:           A62127D5-5E30-3EE0-801F-5D957D0935F0
+    value:           9EA2DF22-AC66-3253-9CBA-63CAD9B3DD41
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C7FADF29-B415-3584-A344-D1577D357470
+    value:           8B3B4576-E327-3B15-B267-457E4DC9B7E6
   - target:          arm64e-maccatalyst
-    value:           C7FADF29-B415-3584-A344-D1577D357470
+    value:           8B3B4576-E327-3B15-B267-457E4DC9B7E6
 install-name:    '/System/Library/PrivateFrameworks/CloudServices.framework/Versions/A/CloudServices'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SecureBackupBackOffDateWithInfo, _SecureBackupDisableWithInfo, 
                        _SecureBackupEnableWithInfo, _SecureBackupEscrowReasonReadFrom, 
                        _SecureBackupGetAccountInfoWithInfo, _SecureBackupKVSState, 

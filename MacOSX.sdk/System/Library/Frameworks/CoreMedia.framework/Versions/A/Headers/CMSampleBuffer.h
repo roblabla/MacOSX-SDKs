@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-	Copyright © 2005-2019 Apple Inc. All rights reserved.
+	Copyright © 2005-2022 Apple Inc. All rights reserved.
  
 */
 
@@ -1878,6 +1878,16 @@ CM_EXPORT const CFStringRef kCMSampleBufferAttachmentKey_ForceKeyFrame
  */
 CM_EXPORT const CFStringRef kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData // CFData
 						API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
+	@constant   kCMSampleAttachmentKey_HDR10PlusPerFrameData
+	@abstract   HDR10+ per frame metadata
+	@discussion
+		The attachment is CFData containing HDR10+ metadata within an User Data Registered ITU-T T-35 SEI message (see ISO/IEC 23008-2-2020 section D.3.6) as little endian in the CFData. This attachment will override any HDR10+ metadata stored within the compressed data. The data shall start with the field itu_t_t35_country_code with the value 0xb5.
+ */
+CM_EXPORT const CFStringRef kCMSampleAttachmentKey_HDR10PlusPerFrameData // CFData
+						API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+
 
 CM_ASSUME_NONNULL_END
 

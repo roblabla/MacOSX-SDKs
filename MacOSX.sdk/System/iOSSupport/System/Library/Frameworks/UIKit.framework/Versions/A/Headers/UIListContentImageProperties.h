@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIConfigurationColorTransformer.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIImage;
 @class UIImageSymbolConfiguration;
@@ -68,7 +68,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 /// even when the image is not a symbol image.
 UIKIT_EXTERN const CGFloat UIListContentImageStandardDimension API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIListContentImageProperties.h>

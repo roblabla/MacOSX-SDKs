@@ -38,6 +38,13 @@ __BEGIN_DECLS
  *
  * @abstract
  * The opaque type of a lock group.
+ *
+ * @discussion
+ * A lock group is used to denote a set of locks that serve
+ * a similar purpose, and hold an equivalent "rank" in the lock hierarchy.
+ *
+ * This structure can then provide some statistics and anchor checks
+ * in development kernels for an entire family of locks.
  */
 typedef struct _lck_grp_        lck_grp_t;
 #define LCK_GRP_NULL            ((lck_grp_t *)NULL)
@@ -47,6 +54,11 @@ typedef struct _lck_grp_        lck_grp_t;
  *
  * @abstract
  * The opaque type for attributes to a group.
+ *
+ * @discussion
+ * A lock group attribute is meant to configure
+ * a group, as a group configuration becomes
+ * immutable once made.
  */
 typedef struct _lck_grp_attr_   lck_grp_attr_t;
 #define LCK_GRP_ATTR_NULL       ((lck_grp_attr_t *)NULL)

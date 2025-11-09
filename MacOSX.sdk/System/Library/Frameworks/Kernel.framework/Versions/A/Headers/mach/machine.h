@@ -121,6 +121,7 @@ typedef integer_t       cpu_threadtype_t;
 /* skip				((cpu_type_t) 20 */
 /* skip				((cpu_type_t) 21 */
 /* skip				((cpu_type_t) 22 */
+/* skip				((cpu_type_t) 23 */
 
 /*
  *	Machine subtypes (these are defined here, instead of in a machine
@@ -394,7 +395,9 @@ typedef integer_t       cpu_threadtype_t;
 #define CPUFAMILY_ARM_LIGHTNING_THUNDER 0x462504d2
 #define CPUFAMILY_ARM_FIRESTORM_ICESTORM 0x1b588bb3
 #define CPUFAMILY_ARM_BLIZZARD_AVALANCHE 0xda33d83d
+#define CPUFAMILY_ARM_EVEREST_SAWTOOTH  0x8765edea
 
+/* Described in rdar://64125549 */
 #define CPUSUBFAMILY_UNKNOWN            0
 #define CPUSUBFAMILY_ARM_HP             1
 #define CPUSUBFAMILY_ARM_HG             2

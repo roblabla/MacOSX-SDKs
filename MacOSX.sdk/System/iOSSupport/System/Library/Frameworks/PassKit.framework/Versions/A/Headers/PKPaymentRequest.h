@@ -1,6 +1,7 @@
+#if !__has_include(<PassKitCore/PKPaymentRequest.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPaymentRequest.h
-//
+//  PassKit
 //  Copyright (c) 2014, Apple Inc. All rights reserved.
 //
 
@@ -10,6 +11,8 @@
 #import <PassKit/PKRecurringPaymentSummaryItem.h>
 #import <PassKit/PKPaymentSummaryItem.h>
 #import <PassKit/PKShippingMethod.h>
+#import <PassKit/PKAutomaticReloadPaymentRequest.h>
+#import <PassKit/PKRecurringPaymentRequest.h>
 
 #if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
 #import <AddressBook/ABRecord.h>
@@ -19,6 +22,7 @@
 #define __PKPAYMENTREQUEST_H__
 
 @class PKContact;
+@class PKPaymentTokenContext;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -156,10 +160,41 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 @property (nonatomic, assign, nullable) ABRecordRef billingAddress __WATCHOS_PROHIBITED API_DEPRECATED("ABRecordRef has been deprecated, and does not support all available address properties. You should migrate to billingContact.", ios(8.0, 9.0));
 #endif
 
+// Array of payment token contexts that indicates multiple payment tokens are requested, one for
+// each context object provided.
+//
+// The sum of all context amounts must be less than or equal to the total amount of the enclosing
+// payment request, as indicated by the last payment summary item.
+//
+// This property cannot be used simultaneously with recurring or automatic reload payment requests.
+//
+// Multiple payment tokens are not supported on watchOS.
+@property (nonatomic, copy) NSArray<PKPaymentTokenContext *> *multiTokenContexts API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos);
 
+// Optional request to set up a recurring payment, typically a subscription. This payment request
+// will receive a merchant-specific payment token if the payment network supports merchant-specific
+// payment tokens.
+//
+// This property cannot be used simultaneously with multi token contexts or automatic reload payment requests.
+//
+// Merchant-specific payment tokens are not supported on watchOS.
+@property (nonatomic, strong, nullable) PKRecurringPaymentRequest *recurringPaymentRequest API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos);
+
+// Optional request to set up an automatic reload, such as a store card top-up. This payment request
+// will receive a merchant-specific payment token if the payment network supports merchant-specific
+// payment tokens.
+//
+// This property cannot be used simultaneously with multi token contexts or recurring payment requests.
+//
+// Merchant-specific payment tokens are not supported on watchOS.
+@property (nonatomic, strong, nullable) PKAutomaticReloadPaymentRequest *automaticReloadPaymentRequest API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos);
 
 @end
 
 NS_ASSUME_NONNULL_END
 
 #endif // __PKPAYMENTREQUEST_H__
+
+#else
+#import <PassKitCore/PKPaymentRequest.h>
+#endif

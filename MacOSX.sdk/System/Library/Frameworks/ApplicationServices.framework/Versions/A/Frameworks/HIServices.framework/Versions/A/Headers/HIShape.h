@@ -3,7 +3,7 @@
  
      Contains:   Generic Abstract Shape API
  
-     Copyright:  © 2001-2012 by Apple Computer, Inc., all rights reserved.
+     Copyright:  Â© 2001-2012 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

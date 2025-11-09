@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CF5EE924-02E1-3DAD-8DC0-B5A27FB684D0
+    value:           B1D5CE9D-17A3-35F9-83A0-2CFBF0AC74B4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1CF32CEF-C6C1-3D72-A150-4C57878C8D0C
+    value:           D95B928C-B232-309B-B051-7096CD670E49
 install-name:    '/System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/DiskImages'
-current-version: 623.100.1
+current-version: 628.40.2
 compatibility-version: 1.0.8
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DIAddPermission, _DIAddRunToBLKX, _DIAttachDrive, _DIAttachImage, 
                        _DIAuthOpen, _DIBackingStoreAllowExpandability, _DIBackingStoreCanEnumerateDirectory, 
                        _DIBackingStoreChangeKey, _DIBackingStoreCloseDataFork, _DIBackingStoreCloseResourceFile, 

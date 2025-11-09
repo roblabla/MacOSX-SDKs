@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// @brief Methods in this class allow the host app to interact with their Mail extension.
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 @interface MEExtensionManager : NSObject
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;

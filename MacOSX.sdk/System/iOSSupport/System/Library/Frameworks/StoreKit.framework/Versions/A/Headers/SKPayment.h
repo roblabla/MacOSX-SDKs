@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) @interface SKPayment : NSObject <NSCopying, NSMutableCopying> {
+SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) NS_SWIFT_NONSENDABLE @interface SKPayment : NSObject <NSCopying, NSMutableCopying> {
 @private
     id _internal;
 }
@@ -43,7 +43,7 @@ SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) @interface SK
 @end
 
 
-SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) @interface SKMutablePayment : SKPayment
+SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) NS_SWIFT_NONSENDABLE @interface SKMutablePayment : SKPayment
 
 @property(nonatomic, copy, readwrite, nullable) NSString *applicationUsername API_AVAILABLE(ios(7.0), macos(10.9), watchos(6.2));
 @property(nonatomic, copy, readwrite, nullable) SKPaymentDiscount *paymentDiscount API_AVAILABLE(ios(12.2), macos(10.14.4), watchos(6.2));

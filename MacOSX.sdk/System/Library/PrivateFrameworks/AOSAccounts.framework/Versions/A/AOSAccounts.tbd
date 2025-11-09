@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1CA649ED-D10B-3689-B3C9-44DCB96D2D12
+    value:           E0F752AD-4009-3DD5-96E6-F98A8DC53D51
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           85E6D2D6-0B73-3FB3-8A18-0AA2796F6A68
+    value:           CF6C5007-25F2-371E-B8D3-839241AEF2AB
 install-name:    '/System/Library/PrivateFrameworks/AOSAccounts.framework/Versions/A/AOSAccounts'
 current-version: 1.9.95
 exports:
@@ -16,7 +16,7 @@ exports:
                        __ZTINSt3__119basic_ostringstreamIwNS_11char_traitsIwEENS_9allocatorIwEEEE, 
                        __ZTSNSt3__115basic_stringbufIwNS_11char_traitsIwEENS_9allocatorIwEEEE, 
                        __ZTSNSt3__119basic_ostringstreamIwNS_11char_traitsIwEENS_9allocatorIwEEEE ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AOSAccountsGetLogLevel, _AOSAccountsSetLogLevel, _AOSDebugUserDictValueForKey, 
                        _AOSLogSafeDictionaryForDictionary, _AuthenticateAccount, 
                        _CopyAOSValue, _CopyAOSValueFromMMDomain, _CopyAccountPrefsForAltDSID, 
@@ -191,13 +191,13 @@ exports:
                        _kMMServiceIDMail, _kMMServiceIDMediaStream, _kMMServiceIDMessages, 
                        _kMMServiceIDNews, _kMMServiceIDNotes, _kMMServiceIDPhotoServiceCloudPhotos, 
                        _kMMServiceIDPhotoServiceMediaStream, _kMMServiceIDPhotoServiceSharedStream, 
-                       _kMMServiceIDPhotos, _kMMServiceIDReminders, _kMMServiceIDSharedStreams, 
-                       _kMMServiceIDSiri, _kMMServiceIDStocks, _kMMServiceListChangedNotification, 
-                       _kMMServiceMobileDocuments, _kMMServicePropertiesChangedNotification, 
-                       _kMMServiceStatusChangedNotification, _kVettingEmailNotification, 
-                       _keychainErrorCodeFromSecureBackupErrorCode, _kiCloudAccountRenewCredentialsComplete, 
-                       _kiCloudAccountRenewCredentialsDSID, _kiCloudAccountTermsContext, 
-                       _renewCredentialsOnACAccount ]
+                       _kMMServiceIDPhotos, _kMMServiceIDReminders, _kMMServiceIDSettingsSync, 
+                       _kMMServiceIDSharedStreams, _kMMServiceIDSiri, _kMMServiceIDStocks, 
+                       _kMMServiceIDWallet, _kMMServiceListChangedNotification, _kMMServiceMobileDocuments, 
+                       _kMMServicePropertiesChangedNotification, _kMMServiceStatusChangedNotification, 
+                       _kVettingEmailNotification, _keychainErrorCodeFromSecureBackupErrorCode, 
+                       _kiCloudAccountRenewCredentialsComplete, _kiCloudAccountRenewCredentialsDSID, 
+                       _kiCloudAccountTermsContext, _renewCredentialsOnACAccount ]
     objc-classes:    [ MMDelegatePluginManager, MMiCloudAccountsMigrator, iCloudAccountMgr, 
                        iCloudRegionInfo, iCloudUserNotification, iCloudUserNotifier ]
     objc-ivars:      [ MMDelegatePluginManager._done, MMDelegatePluginManager._mbSetupPlugins, 

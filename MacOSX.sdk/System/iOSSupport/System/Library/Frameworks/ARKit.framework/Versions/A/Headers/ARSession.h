@@ -203,7 +203,6 @@ NS_SWIFT_NAME(createReferenceObject(transform:center:extent:completionHandler:))
 
 #pragma mark - Geo Tracking
 
-
 /**
  Converts a position in world coordinate system into latitude, longitude and altitude.
  
@@ -217,6 +216,16 @@ NS_SWIFT_NAME(createReferenceObject(transform:center:extent:completionHandler:))
  */
 - (void)getGeoLocationForPoint:(simd_float3)position completionHandler:(void (^)(CLLocationCoordinate2D coordinate, CLLocationDistance altitude, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0));
 
+
+#pragma mark - High Resolution Frame Capturing
+
+/**
+ Requests a single, high resolution frame be captured at that moment in time.
+ @discussion Some video formats do not support a significantly higher resolution than the streaming camera resolution. Use the @c isRecommendedForHighResolutionFrameCapturing method on the video format to check if the format is recommended.
+ @see -[ARVideoFormat isRecommendedForHighResolutionFrameCapturing]
+ @param completion Block being called when the call completes.
+ */
+- (void)captureHighResolutionFrameWithCompletion:(void (^)(ARFrame *_Nullable frame, NSError *_Nullable error))completion API_AVAILABLE(ios(16.0));
 
 @end
 
@@ -305,7 +314,6 @@ API_AVAILABLE(ios(11.0))
  */
 - (void)session:(ARSession *)session didOutputCollaborationData:(ARCollaborationData *)data API_AVAILABLE(ios(13.0));
 
-
 /**
  This is called when geo tracking status changes.
 
@@ -356,6 +364,7 @@ API_AVAILABLE(ios(11.0))
  @param anchors An array of removed anchors.
  */
 - (void)session:(ARSession *)session didRemoveAnchors:(NSArray<__kindof ARAnchor*>*)anchors;
+
 
 
 @end

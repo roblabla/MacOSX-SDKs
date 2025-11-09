@@ -10,7 +10,7 @@
 
 /// LocalAuthentication error domain.
 extern NSString *const __nonnull LAErrorDomain
-API_AVAILABLE(macos(10.11), ios(8.3), watchos(3.0), tvos(10.0));
+API_AVAILABLE(macos(10.11), ios(8.3), watchos(3.0)) API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSInteger, LAError)
 {
@@ -49,19 +49,19 @@ typedef NS_ENUM(NSInteger, LAError)
     LAErrorInvalidContext API_AVAILABLE(macos(10.11), ios(9.0)) = kLAErrorInvalidContext,
 
     /// Authentication could not start because biometry is not available on the device.
-    LAErrorBiometryNotAvailable API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0)) = kLAErrorBiometryNotAvailable,
+    LAErrorBiometryNotAvailable API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(watchos, tvos) = kLAErrorBiometryNotAvailable,
 
     /// Authentication could not start because biometry has no enrolled identities.
-    LAErrorBiometryNotEnrolled API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0)) = kLAErrorBiometryNotEnrolled,
+    LAErrorBiometryNotEnrolled API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(watchos, tvos) = kLAErrorBiometryNotEnrolled,
     
     /// Authentication was not successful because there were too many failed biometry attempts and
     /// biometry is now locked. Passcode is required to unlock biometry, e.g. evaluating
     /// LAPolicyDeviceOwnerAuthenticationWithBiometrics will ask for passcode as a prerequisite.
-    LAErrorBiometryLockout API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0)) = kLAErrorBiometryLockout,
+    LAErrorBiometryLockout API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(watchos, tvos) = kLAErrorBiometryLockout,
     
     /// Authentication failed because it would require showing UI which has been forbidden
     /// by using interactionNotAllowed property.
-    LAErrorNotInteractive API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0), tvos(10.0)) = kLAErrorNotInteractive,
+    LAErrorNotInteractive API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0)) API_UNAVAILABLE(tvos) = kLAErrorNotInteractive,
     
     /// Authentication could not start because there was no paired watch device nearby.
     LAErrorWatchNotAvailable API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos) = kLAErrorWatchNotAvailable,
@@ -76,5 +76,5 @@ typedef NS_ENUM(NSInteger, LAError)
     LAErrorInvalidDimensions
     API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos) = kLAErrorInvalidDimensions,
 
-} API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0), tvos(10.0));
+} API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0)) API_UNAVAILABLE(tvos);
 

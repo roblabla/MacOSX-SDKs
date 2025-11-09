@@ -3,20 +3,21 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           295046E2-F44E-3018-9A31-0807942DBF4F
+    value:           42758DF9-8E56-39B8-8297-F4B15B3688D1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           16DBEFFD-1971-33C5-B95C-6985825AB735
+    value:           12897FF4-A962-3033-B9EE-6B8F08AB239E
 install-name:    '/System/Library/PrivateFrameworks/MailWebProcessSupport.framework/Versions/A/MailWebProcessSupport'
-current-version: 3696.80.82
+current-version: 3731.200.110
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _kBodyFieldSource, _kBodyFieldSourceLength, _kConstantsSource, 
-                       _kConstantsSourceLength, _kDocumentExtrasSource, _kDocumentExtrasSourceLength, 
-                       _kElementExtrasSource, _kElementExtrasSourceLength, _kHTMLDocumentExtrasSource, 
-                       _kHTMLDocumentExtrasSourceLength, _kHTMLElementExtrasSource, 
-                       _kHTMLElementExtrasSourceLength, _kNodeExtrasSource, _kNodeExtrasSourceLength, 
-                       _kRangeExtrasSource, _kRangeExtrasSourceLength ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _kBodyFieldSource, _kBodyFieldSourceLength, _kBodyInputControllerSource, 
+                       _kBodyInputControllerSourceLength, _kConstantsSource, _kConstantsSourceLength, 
+                       _kDocumentExtrasSource, _kDocumentExtrasSourceLength, _kElementExtrasSource, 
+                       _kElementExtrasSourceLength, _kHTMLDocumentExtrasSource, _kHTMLDocumentExtrasSourceLength, 
+                       _kHTMLElementExtrasSource, _kHTMLElementExtrasSourceLength, 
+                       _kNodeExtrasSource, _kNodeExtrasSourceLength, _kRangeExtrasSource, 
+                       _kRangeExtrasSourceLength ]
     objc-classes:    [ MSAttachmentItem, MSComposeBundlePageController, MSPDFAttachmentController ]
 ...

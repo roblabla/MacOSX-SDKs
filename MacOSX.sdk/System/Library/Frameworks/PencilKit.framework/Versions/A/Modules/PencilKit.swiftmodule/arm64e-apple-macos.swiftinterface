@@ -1,10 +1,12 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PencilKit
-// swift-module-flags-ignorable: -user-module-version 319.9
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-macos13.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PencilKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 405.2.1
+import Foundation
 @_exported import PencilKit
 import Swift
 import _Concurrency
+import _StringProcessing
 @available(iOS 14.0, macOS 11.0, *)
 public struct PKStrokePath : Swift.RandomAccessCollection {
   public init()
@@ -12,15 +14,15 @@ public struct PKStrokePath : Swift.RandomAccessCollection {
   public var creationDate: Foundation.Date {
     get
   }
-  public func interpolatedLocation(at parametricValue: CoreGraphics.CGFloat) -> CoreGraphics.CGPoint
-  public func interpolatedPoint(at parametricValue: CoreGraphics.CGFloat) -> PencilKit.PKStrokePoint
-  public func interpolatedPoints(in range: Swift.ClosedRange<CoreGraphics.CGFloat>? = nil, by stride: PencilKit.PKStrokePath.InterpolatedSlice.Stride) -> PencilKit.PKStrokePath.InterpolatedSlice
-  public func parametricValue(_ parametricValue: CoreGraphics.CGFloat, offsetBy step: PencilKit.PKStrokePath.InterpolatedSlice.Stride) -> CoreGraphics.CGFloat
+  public func interpolatedLocation(at parametricValue: CoreFoundation.CGFloat) -> CoreFoundation.CGPoint
+  public func interpolatedPoint(at parametricValue: CoreFoundation.CGFloat) -> PencilKit.PKStrokePoint
+  public func interpolatedPoints(in range: Swift.ClosedRange<CoreFoundation.CGFloat>? = nil, by stride: PencilKit.PKStrokePath.InterpolatedSlice.Stride) -> PencilKit.PKStrokePath.InterpolatedSlice
+  public func parametricValue(_ parametricValue: CoreFoundation.CGFloat, offsetBy step: PencilKit.PKStrokePath.InterpolatedSlice.Stride) -> CoreFoundation.CGFloat
   public struct InterpolatedSlice {
     public enum Stride {
-      case distance(CoreGraphics.CGFloat)
+      case distance(CoreFoundation.CGFloat)
       case time(Foundation.TimeInterval)
-      case parametricStep(CoreGraphics.CGFloat)
+      case parametricStep(CoreFoundation.CGFloat)
     }
   }
   public typealias Element = PencilKit.PKStrokePoint
@@ -69,15 +71,17 @@ extension PencilKit.PKInk : Swift._ObjectiveCBridgeable {
 }
 @available(iOS 13.0, macOS 11.0, *)
 public struct PKInkingTool : PencilKit.PKTool, Swift.Equatable {
-  public init(_ inkType: PencilKit.PKInkingTool.InkType, color: AppKit.NSColor = NSColor.black, width: CoreGraphics.CGFloat? = nil)
+  public init(_ inkType: PencilKit.PKInkingTool.InkType, color: AppKit.NSColor = NSColor.black, width: CoreFoundation.CGFloat? = nil)
   public enum InkType : Swift.String {
     case pen
     case pencil
     case marker
-    public var defaultWidth: CoreGraphics.CGFloat {
+    case monoline
+    case fountainpen
+    public var defaultWidth: CoreFoundation.CGFloat {
       get
     }
-    public var validWidthRange: Swift.ClosedRange<CoreGraphics.CGFloat> {
+    public var validWidthRange: Swift.ClosedRange<CoreFoundation.CGFloat> {
       get
     }
     public init?(rawValue: Swift.String)
@@ -90,7 +94,7 @@ public struct PKInkingTool : PencilKit.PKTool, Swift.Equatable {
     get
     set
   }
-  public var width: CoreGraphics.CGFloat {
+  public var width: CoreFoundation.CGFloat {
     get
     set
   }
@@ -102,7 +106,7 @@ public struct PKInkingTool : PencilKit.PKTool, Swift.Equatable {
 }
 @available(iOS 14.0, macOS 11.0, *)
 extension PencilKit.PKInkingTool {
-  public init(ink: PencilKit.PKInk, width: CoreGraphics.CGFloat)
+  public init(ink: PencilKit.PKInk, width: CoreFoundation.CGFloat)
   public var ink: PencilKit.PKInk {
     get
   }
@@ -117,26 +121,26 @@ extension PencilKit.PKInkingTool : Swift._ObjectiveCBridgeable {
 }
 @available(iOS 14.0, macOS 11.0, *)
 public struct PKStrokePoint {
-  public init(location: CoreGraphics.CGPoint, timeOffset: Foundation.TimeInterval, size: CoreGraphics.CGSize, opacity: CoreGraphics.CGFloat, force: CoreGraphics.CGFloat, azimuth: CoreGraphics.CGFloat, altitude: CoreGraphics.CGFloat)
-  public var location: CoreGraphics.CGPoint {
+  public init(location: CoreFoundation.CGPoint, timeOffset: Foundation.TimeInterval, size: CoreFoundation.CGSize, opacity: CoreFoundation.CGFloat, force: CoreFoundation.CGFloat, azimuth: CoreFoundation.CGFloat, altitude: CoreFoundation.CGFloat)
+  public var location: CoreFoundation.CGPoint {
     get
   }
   public var timeOffset: Foundation.TimeInterval {
     get
   }
-  public var size: CoreGraphics.CGSize {
+  public var size: CoreFoundation.CGSize {
     get
   }
-  public var opacity: CoreGraphics.CGFloat {
+  public var opacity: CoreFoundation.CGFloat {
     get
   }
-  public var azimuth: CoreGraphics.CGFloat {
+  public var azimuth: CoreFoundation.CGFloat {
     get
   }
-  public var force: CoreGraphics.CGFloat {
+  public var force: CoreFoundation.CGFloat {
     get
   }
-  public var altitude: CoreGraphics.CGFloat {
+  public var altitude: CoreFoundation.CGFloat {
     get
   }
 }
@@ -150,12 +154,14 @@ extension PencilKit.PKStrokePoint : Swift._ObjectiveCBridgeable {
 }
 @available(iOS 14.0, macOS 11.0, *)
 public struct PKStroke {
-  public init(ink: PencilKit.PKInk, path: PencilKit.PKStrokePath, transform: CoreGraphics.CGAffineTransform = .identity, mask: AppKit.NSBezierPath? = nil)
+  public init(ink: PencilKit.PKInk, path: PencilKit.PKStrokePath, transform: CoreFoundation.CGAffineTransform = .identity, mask: AppKit.NSBezierPath? = nil)
+  @available(iOS 16.0, macOS 13.0, *)
+  public init(ink: PencilKit.PKInk, path: PencilKit.PKStrokePath, transform: CoreFoundation.CGAffineTransform = .identity, mask: AppKit.NSBezierPath? = nil, randomSeed: Swift.UInt32)
   public var ink: PencilKit.PKInk {
     get
     set
   }
-  public var transform: CoreGraphics.CGAffineTransform {
+  public var transform: CoreFoundation.CGAffineTransform {
     get
     set
   }
@@ -167,10 +173,10 @@ public struct PKStroke {
     get
     set
   }
-  public var renderBounds: CoreGraphics.CGRect {
+  public var renderBounds: CoreFoundation.CGRect {
     get
   }
-  public var maskedPathRanges: [Swift.ClosedRange<CoreGraphics.CGFloat>] {
+  public var maskedPathRanges: [Swift.ClosedRange<CoreFoundation.CGFloat>] {
     get
   }
 }
@@ -235,12 +241,12 @@ public struct PKDrawing {
   public init()
   public init(data: Foundation.Data) throws
   public func dataRepresentation() -> Foundation.Data
-  public var bounds: CoreGraphics.CGRect {
+  public var bounds: CoreFoundation.CGRect {
     get
   }
-  public func image(from rect: CoreGraphics.CGRect, scale: CoreGraphics.CGFloat) -> AppKit.NSImage
-  public mutating func transform(using transform: CoreGraphics.CGAffineTransform)
-  public func transformed(using transform: CoreGraphics.CGAffineTransform) -> PencilKit.PKDrawing
+  public func image(from rect: CoreFoundation.CGRect, scale: CoreFoundation.CGFloat) -> AppKit.NSImage
+  public mutating func transform(using transform: CoreFoundation.CGAffineTransform)
+  public func transformed(using transform: CoreFoundation.CGAffineTransform) -> PencilKit.PKDrawing
   public mutating func append(_ toAppend: PencilKit.PKDrawing)
   public func appending(_ toAppend: PencilKit.PKDrawing) -> PencilKit.PKDrawing
 }

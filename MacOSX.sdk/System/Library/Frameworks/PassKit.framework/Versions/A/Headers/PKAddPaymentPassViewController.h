@@ -5,6 +5,9 @@
 //  Copyright © 2015 Apple, Inc. All rights reserved.
 //
 
+#ifndef __PKADDPAYMENTPASSVIEWCONTROLLER_H
+#define __PKADDPAYMENTPASSVIEWCONTROLLER_H
+
 #import <TargetConditionals.h>
 
 #if TARGET_OS_IPHONE
@@ -54,3 +57,4 @@ API_AVAILABLE(ios(9.0))
 NS_ASSUME_NONNULL_END
 
 #endif // TARGET_OS_IPHONE
+#endif

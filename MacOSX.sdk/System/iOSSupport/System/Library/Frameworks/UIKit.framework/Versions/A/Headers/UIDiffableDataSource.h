@@ -11,7 +11,7 @@
 #import <UIKit/UITableView.h>
 #import <UIKit/NSDiffableDataSourceSectionSnapshot.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
@@ -93,7 +93,7 @@ typedef UICollectionViewCell * _Nullable (^UICollectionViewDiffableDataSourceCel
 typedef UICollectionReusableView * _Nullable (^UICollectionViewDiffableDataSourceSupplementaryViewProvider)(UICollectionView* _Nonnull collectionView, NSString * _Nonnull elementKind, NSIndexPath * _Nonnull indexPath);
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_SENDABLE
 @interface NSDiffableDataSourceSectionTransaction<SectionIdentifierType, ItemIdentifierType> : NSObject
 @property(nonatomic,readonly) SectionIdentifierType sectionIdentifier;
 @property(nonatomic,readonly) NSDiffableDataSourceSectionSnapshot<ItemIdentifierType> *initialSnapshot;
@@ -101,7 +101,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0))
 @property(nonatomic,readonly) NSOrderedCollectionDifference<ItemIdentifierType> *difference;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_SENDABLE
 @interface NSDiffableDataSourceTransaction<SectionIdentifierType, ItemIdentifierType> : NSObject
 @property(nonatomic,readonly) NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> *initialSnapshot;
 @property(nonatomic,readonly) NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> *finalSnapshot;
@@ -245,7 +245,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)) NS_SWIFT_UI_ACTOR
 @end
 
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIDiffableDataSource.h>

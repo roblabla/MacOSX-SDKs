@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0))  API_UNAVAILABLE(macos, tvos, watchos)
+CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), watchos(9.0))  API_UNAVAILABLE(macos, tvos)
 @interface CXCallAction : CXAction
 
 @property (nonatomic, readonly, copy) NSUUID *callUUID;

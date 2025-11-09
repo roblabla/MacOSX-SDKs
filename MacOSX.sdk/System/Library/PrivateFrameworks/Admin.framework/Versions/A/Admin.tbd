@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D253527B-2FBF-3B97-BC87-28220A111EC4
+    value:           16EE4C4B-89F3-350C-8144-B4841445B988
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           88140198-83BB-3B97-ACAD-C75E8CB847C4
+    value:           CA3B0C30-2680-3C84-9DE0-B6429C24B59C
 install-name:    '/System/Library/PrivateFrameworks/Admin.framework/Versions/A/Admin'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NetworkTimeStartedNotification, _NetworkTimeStoppedNotification, 
                        _SafeCFBundleGetFunctionPointerForName, _XMLStringFromObject, 
                        _canOpenAccountsPreferencePane, _collectionFromXMLString, 
@@ -18,11 +18,11 @@ exports:
                        _directorySizeAtPath, _freeSpaceAtPath, _getPIDForProcess, 
                        _isBootVolumeHCSFDE, _isInternalBuild, _isSIPDisabled, _kickMCXDForUID, 
                        _loadAppKit, _setSafariLockedSync, _writeKeyboardType ]
-    objc-classes:    [ ARDConfig, Authenticator, DSAuthenticator, DSNode, DSRecord, 
-                       DynamicDNSConfig, Group, HostConfig, InternetServices, NetworkTimeClient, 
-                       NetworkTimeServer, ParentalControlsConfig, PowerActivityManager, 
-                       PrinterSharingConfig, RemoteAEConfig, RemoteUser, SysKeyChainConfig, 
-                       SystemClock, User, WebServerConfig ]
+    objc-classes:    [ ADMFirewallConfig, ARDConfig, Authenticator, DSAuthenticator, 
+                       DSNode, DSRecord, DynamicDNSConfig, Group, HostConfig, InternetServices, 
+                       NetworkTimeClient, NetworkTimeServer, ParentalControlsConfig, 
+                       PowerActivityManager, PrinterSharingConfig, RemoteAEConfig, 
+                       RemoteUser, SysKeyChainConfig, SystemClock, User, WebServerConfig ]
     objc-ivars:      [ Authenticator._syncWaitDone, Authenticator._wantsClearTextAuthentication, 
                        DSAuthenticator._didClearTextAuthentication, DSNode.mDirectoryService, 
                        DSNode.mNodeName, DSNode.mNodeReference, DSNode.mOpenCloseSemaphore, 

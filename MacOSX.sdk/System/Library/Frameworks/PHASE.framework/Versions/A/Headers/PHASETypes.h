@@ -105,6 +105,7 @@ OS_EXPORT NSErrorDomain const PHASEErrorDomain;
  */
 typedef NS_ERROR_ENUM(PHASEErrorDomain, PHASEError) {
     PHASEErrorInitializeFailed = 'PHEa',
+    PHASEErrorInvalidObject = 'PHEb',
 };
 
 /*!
@@ -232,6 +233,10 @@ NS_SWIFT_NAME(PHASEAsset.AssetType);
     @constant PHASECurveTypeInverseSigmoid
         An inverse sigmoid curve.
         Also known as an inverse s-curve, quick at the ends and slow in the middle.
+    @constant PHASECurveTypeHoldStartValue
+        Holds the start value for the duration of the curve.
+    @constant PHASECurveTypeJumpToEndValue
+        Jumps to the end value and holds it for the duration of the curve.
  */
 typedef NS_ENUM(NSInteger, PHASECurveType) {
     PHASECurveTypeLinear = 'crLn',
@@ -243,6 +248,8 @@ typedef NS_ENUM(NSInteger, PHASECurveType) {
     PHASECurveTypeInverseSine = 'crIS',
     PHASECurveTypeSigmoid = 'crSg',
     PHASECurveTypeInverseSigmoid = 'crIG',
+    PHASECurveTypeHoldStartValue = 'crHS',
+    PHASECurveTypeJumpToEndValue = 'crJE',
 };
 
 /*!

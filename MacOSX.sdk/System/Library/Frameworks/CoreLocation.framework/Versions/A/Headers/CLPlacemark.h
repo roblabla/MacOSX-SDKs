@@ -31,6 +31,9 @@ API_AVAILABLE(macos(10.8), ios(5.0))
     CLPlacemarkInternal *_internal;
 }
 
+- (instancetype)init API_UNAVAILABLE(ios, macos, tvos, watchos);
++ (instancetype)new API_UNAVAILABLE(ios, macos, tvos, watchos);
+
 /*
  * initWithPlacemark:
  *

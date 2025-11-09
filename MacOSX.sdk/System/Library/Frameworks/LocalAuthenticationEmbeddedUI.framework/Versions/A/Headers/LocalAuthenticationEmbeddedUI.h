@@ -3,3 +3,5 @@
 //
 
 #import <LocalAuthenticationEmbeddedUI/LAAuthenticationView.h>
+#import <LocalAuthenticationEmbeddedUI/LAPresentationContext.h>
+#import <LocalAuthenticationEmbeddedUI/LARight+UI.h>

@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           39172E83-2E33-3D5D-8CF6-9E4D1653DFF2
+    value:           D5B2A5FB-2C4C-3CCF-AC34-5875534F004B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1BE7176F-D197-3CA3-B44E-C5105C598B76
+    value:           D907B07B-181D-37F9-9FA1-DF963F3B4B48
 install-name:    '/usr/lib/swift/libswiftMapKit.dylib'
 current-version: 3
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftMapKit.dylib', '$ld$install_name$os10.11$@rpath/libswiftMapKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftMapKit.dylib', '$ld$install_name$os10.13$@rpath/libswiftMapKit.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftMapKit.dylib', '$ld$install_name$os10.9$@rpath/libswiftMapKit.dylib', 

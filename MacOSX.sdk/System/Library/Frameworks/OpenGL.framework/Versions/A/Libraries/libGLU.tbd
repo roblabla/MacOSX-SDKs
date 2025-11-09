@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6EBFD03E-2AE8-3D69-975A-2981A9EE3587
+    value:           9B79684C-10C9-3638-A993-D0ED9F33FAE4
   - target:          x86_64-maccatalyst
-    value:           6EBFD03E-2AE8-3D69-975A-2981A9EE3587
+    value:           9B79684C-10C9-3638-A993-D0ED9F33FAE4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           273DBBA5-5C7E-3F01-8A5B-417BC5C67432
+    value:           0C099C81-3CFE-3EBE-A915-23C8BE5A4816
   - target:          arm64e-maccatalyst
-    value:           273DBBA5-5C7E-3F01-8A5B-417BC5C67432
+    value:           0C099C81-3CFE-3EBE-A915-23C8BE5A4816
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
     symbols:         [ _gluBeginCurve, _gluBeginPolygon, _gluBeginSurface, _gluBeginTrim, 
                        _gluBuild1DMipmapLevels, _gluBuild1DMipmapLevelsCTX, _gluBuild1DMipmaps, 
                        _gluBuild1DMipmapsCTX, _gluBuild2DMipmapLevels, _gluBuild2DMipmapLevelsCTX, 

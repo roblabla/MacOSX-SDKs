@@ -3,22 +3,21 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3716A37A-2421-32E0-BC0D-C899273B9403
+    value:           AEF8B384-3DBC-3845-9D71-C39B805AF964
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           38AB4BCA-444B-3AC5-AF12-5699F2916FE7
+    value:           DA230D9D-6ADA-3D19-ABEC-3BA70EA6526F
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libllvm-flatbuffers.dylib'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __ZN11flatbuffers10CopyInlineERNS_17FlatBufferBuilderERKN10reflection5FieldERKNS_5TableEmm, 
                        __ZN11flatbuffers10Definition21DeserializeAttributesERNS_6ParserEPKNS_6VectorINS_6OffsetIN10reflection8KeyValueEEEEE, 
                        __ZN11flatbuffers10FileExistsEPKc, __ZN11flatbuffers10ServiceDef11DeserializeERNS_6ParserEPKN10reflection7ServiceE, 
-                       __ZN11flatbuffers10kTypeNamesE, __ZN11flatbuffers10kTypeSizesE, 
                        __ZN11flatbuffers11LoadFileRawEPKcbPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
-                       __ZN11flatbuffers11VerifyUnionERNS_8VerifierERKN10reflection6SchemaEhPKhRKNS2_5FieldE, 
+                       __ZN11flatbuffers11VerifyUnionERNS_8VerifierERKN10reflection6SchemaEyPKhRKNS2_5FieldE, 
                        __ZN11flatbuffers12AbsolutePathERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN11flatbuffers12GenerateTextERKNS_6ParserEPKvPNSt3__112basic_stringIcNS5_11char_traitsIcEENS5_9allocatorIcEEEE, 
                        __ZN11flatbuffers12GetAnyValueFEN10reflection8BaseTypeEPKh, 
@@ -33,7 +32,7 @@ exports:
                        __ZN11flatbuffers12VerifyStructERNS_8VerifierERKNS_5TableEtRKN10reflection6ObjectEb, 
                        __ZN11flatbuffers12VerifyVectorERNS_8VerifierERKN10reflection6SchemaERKNS_5TableERKNS2_5FieldE, 
                        __ZN11flatbuffers13AddFlatBufferERNSt3__16vectorIhNS0_9allocatorIhEEEEPKhm, 
-                       __ZN11flatbuffers13ClassicLocale9instance_E, __ZN11flatbuffers13ClassicLocaleC1Ev, 
+                       __ZN11flatbuffers13ClassicLocale3GetEv, __ZN11flatbuffers13ClassicLocaleC1Ev, 
                        __ZN11flatbuffers13ClassicLocaleC2Ev, __ZN11flatbuffers13ClassicLocaleD1Ev, 
                        __ZN11flatbuffers13ClassicLocaleD2Ev, __ZN11flatbuffers13FileExistsRawEPKc, 
                        __ZN11flatbuffers13StripFileNameERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
@@ -42,7 +41,7 @@ exports:
                        __ZN11flatbuffers15EnsureDirExistsERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN11flatbuffers15ResizeAnyVectorERKN10reflection6SchemaEjPKNS_11VectorOfAnyEjjPNSt3__16vectorIhNS7_9allocatorIhEEEEPKNS0_6ObjectE, 
                        __ZN11flatbuffers16GenerateTextFileERKNS_6ParserERKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEESB_, 
-                       __ZN11flatbuffers18ConCatPathFileNameERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEES8_, 
+                       __ZN11flatbuffers17HideAppleInternalEv, __ZN11flatbuffers18ConCatPathFileNameERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEES8_, 
                        __ZN11flatbuffers18MakeScreamingCamelERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN11flatbuffers18RemoveStringQuotesERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN11flatbuffers19FLATBUFFERS_VERSIONEv, __ZN11flatbuffers19SetGlobalTestLocaleEPKcPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
@@ -89,14 +88,15 @@ exports:
                        __ZN11flatbuffers6Parser9ParseEnumEbPPNS_7EnumDefE, __ZN11flatbuffers6Parser9ParseHashERNS_5ValueEPNS_8FieldDefE, 
                        __ZN11flatbuffers6Parser9ParseRootEPKcPS2_S2_, __ZN11flatbuffers6Parser9ParseTypeERNS_4TypeE, 
                        __ZN11flatbuffers6Parser9SerializeEv, __ZN11flatbuffers6Parser9StartEnumERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEbPPNS_7EnumDefE, 
-                       __ZN11flatbuffers6VerifyERKN10reflection6SchemaERKNS0_6ObjectEPKhm, 
+                       __ZN11flatbuffers6SizeOfENS_8BaseTypeE, __ZN11flatbuffers6VerifyERKN10reflection6SchemaERKNS0_6ObjectEPKhm, 
                        __ZN11flatbuffers7EnumDef11DeserializeERNS_6ParserEPKN10reflection4EnumE, 
                        __ZN11flatbuffers7EnumDef11SortByValueEv, __ZN11flatbuffers7EnumDef16RemoveDuplicatesEv, 
-                       __ZN11flatbuffers7EnumVal11DeserializeERKNS_6ParserEPKN10reflection7EnumValE, 
+                       __ZN11flatbuffers7EnumVal11DeserializeERNS_6ParserEPKN10reflection7EnumValE, 
                        __ZN11flatbuffers7RPCCall11DeserializeERNS_6ParserEPKN10reflection7RPCCallE, 
                        __ZN11flatbuffers8FieldDef11DeserializeERNS_6ParserEPKN10reflection5FieldE, 
                        __ZN11flatbuffers8LoadFileEPKcbPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
-                       __ZN11flatbuffers8SaveFileEPKcS1_mb, __ZN11flatbuffers9CopyTableERNS_17FlatBufferBuilderERKN10reflection6SchemaERKNS2_6ObjectERKNS_5TableEb, 
+                       __ZN11flatbuffers8SaveFileEPKcS1_mb, __ZN11flatbuffers8TypeNameENS_8BaseTypeE, 
+                       __ZN11flatbuffers9CopyTableERNS_17FlatBufferBuilderERKN10reflection6SchemaERKNS2_6ObjectERKNS_5TableEb, 
                        __ZN11flatbuffers9DirExistsEPKc, __ZN11flatbuffers9MakeCamelERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEb, 
                        __ZN11flatbuffers9PosixPathEPKc, __ZN11flatbuffers9SetStringERKN10reflection6SchemaERKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEEPKNS_6StringEPNS4_6vectorIhNS8_IhEEEEPKNS0_6ObjectE, 
                        __ZN11flatbuffers9StripPathERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 

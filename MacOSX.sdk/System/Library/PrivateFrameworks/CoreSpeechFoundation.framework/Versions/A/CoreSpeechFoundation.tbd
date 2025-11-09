@@ -4,32 +4,32 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BE921711-3EAA-3E8E-8A5B-6DC15F4BD4E7
+    value:           66AB373E-D234-3643-AEF7-8A4CB7F85A4C
   - target:          x86_64-maccatalyst
-    value:           BE921711-3EAA-3E8E-8A5B-6DC15F4BD4E7
+    value:           66AB373E-D234-3643-AEF7-8A4CB7F85A4C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           09CFDB60-D682-31B3-82C7-CEDA6526003C
+    value:           A370C97E-81D8-37A3-BC47-7463D7C6AAC4
   - target:          arm64e-maccatalyst
-    value:           09CFDB60-D682-31B3-82C7-CEDA6526003C
+    value:           A370C97E-81D8-37A3-BC47-7463D7C6AAC4
 install-name:    '/System/Library/PrivateFrameworks/CoreSpeechFoundation.framework/Versions/A/CoreSpeechFoundation'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CSHasAOP, _CSInternalPreferencesSynchronize, _CSIsASMacWithAOP, 
                        _CSIsAppleSiliconMac, _CSIsBridgeOS, _CSIsCommunalDevice, 
                        _CSIsEmbedded, _CSIsHorseman, _CSIsHorsemanJunior, _CSIsHorsemanLiveOn, 
                        _CSIsIOS, _CSIsIPad, _CSIsIPhone, _CSIsInternalBuild, _CSIsMac, 
-                       _CSIsOSX, _CSIsSimulator, _CSIsTV, _CSIsTorpedo, _CSIsWatch, 
-                       _CSLogContextFacilityCoreSpeech, _CSLogInitIfNeeded, _CSLoggingSubsystem, 
-                       _CSMachAbsoluteTimeAddTimeInterval, _CSMachAbsoluteTimeGetTimeInterval, 
+                       _CSIsOSX, _CSIsSimulator, _CSIsTV, _CSIsTorpedo, _CSIsVirtualMachine, 
+                       _CSIsWatch, _CSLogContextFacilityCoreSpeech, _CSLogInitIfNeeded, 
+                       _CSLoggingSubsystem, _CSMachAbsoluteTimeAddTimeInterval, _CSMachAbsoluteTimeGetTimeInterval, 
                        _CSMachAbsoluteTimeSubtractTimeInterval, _CSMachAbsoluteTimeToMachContinuousTime, 
-                       _CSNotBackedupInternalPreferencesSynchronize, _CSSafeSetOutErrorWithNSError, 
-                       _CSShouldCensorSpeech, _CSSupportsUSBTypeC, _CSSupportsVibrator, 
-                       _CSSystemRootDirectory, _CSUsesExplicitContentAllowedForCensorSetting, 
+                       _CSNotBackedupInternalPreferencesSynchronize, _CSResourcePathInSystemDomainMaskByAppending, 
+                       _CSSafeSetOutErrorWithNSError, _CSShouldCensorSpeech, _CSSupportsUSBTypeC, 
+                       _CSSupportsVibrator, _CSSystemRootDirectory, _CSUsesExplicitContentAllowedForCensorSetting, 
                        _CSUsesMirroredCensorSetting, _CoreSpeechFoundationVersionNumber, 
                        _CoreSpeechFoundationVersionString, _SSRLogContextFacilityCoreSpeech, 
                        _SSRLogInitIfNeeded, _SSRLoggingSubsystem, __CSNotBackedupPreferencesSetValueForKey, 
@@ -69,21 +69,22 @@ exports:
                        _kCSDiagnosticReporterFirstPassFailuresSnapshotTime, _kCSDiagnosticReporterHardwareConfigurationChanged, 
                        _kCSDiagnosticReporterHardwareRemoved, _kCSDiagnosticReporterMixedAudioSessionInterrupted, 
                        _kCSDiagnosticReporterNoHardwareError, _kCSDiagnosticReporterNoRouteAvailable, 
-                       _kCSDiagnosticReporterSiriPowerKey, _kCSDiagnosticReporterSpeechPrepareFailure, 
-                       _kCSDiagnosticReporterSpeechStartFailure, _kCSDiagnosticReporterSpeechStopFailure, 
-                       _kCSDiagnosticReporterTrialAssetFetchFailed, _kCSDiagnosticReporterTrialDownloadFailed, 
-                       _kCSDiagnosticReporterTrialSnapshotTime, _kCSDiagnosticReporterTrialTypeKey, 
-                       _kCSDiagnosticReporterUresRCUnavailable, _kCSDiagnosticReporterUresSnapshotTime, 
-                       _kCSDiagnosticReporterUresTypeKey, _kCSDiagnosticReporterVoiceIdDelayedScores, 
-                       _kCSDiagnosticReporterVoiceIdExplicitUttRejected, _kCSDiagnosticReporterVoiceIdMissingHomeId, 
-                       _kCSDiagnosticReporterVoiceIdRetrainSATVecFailed, _kCSDiagnosticReporterVoiceIdSATInitFailed, 
-                       _kCSDiagnosticReporterVoiceIdSATModelFileFailed, _kCSDiagnosticReporterVoiceIdSATVectorFailed, 
-                       _kCSDiagnosticReporterVoiceIdSnapshotTime, _kCSDiagnosticReporterVoiceIdStaleProfileDetected, 
-                       _kCSDiagnosticReporterVoiceIdTDSRFailed, _kCSDiagnosticReporterVoiceIdTDSRTimeout, 
-                       _kCSDiagnosticReporterVoiceIdTooLessAudioFiles, _kCSDiagnosticReporterVoiceIdTypeKey, 
-                       _kCSDiagnosticReporterVoiceIdUnrecognizedMetaData, _kCSDiagnosticReporterVoiceTriggerAPLeak, 
-                       _kCSDiagnosticReporterVoiceTriggerAPStuckInTransition, _kCSDiagnosticReporterVoiceTriggerLaunchSlow, 
-                       _kCSDiagnosticReporterVoiceTriggerSecondPassCompleteWatchDogFire, 
+                       _kCSDiagnosticReporterRemoteCoreSpeechSubtypeAudioRecordingFailed, 
+                       _kCSDiagnosticReporterRemoteCoreSpeechType, _kCSDiagnosticReporterSiriPowerKey, 
+                       _kCSDiagnosticReporterSpeechPrepareFailure, _kCSDiagnosticReporterSpeechStartFailure, 
+                       _kCSDiagnosticReporterSpeechStopFailure, _kCSDiagnosticReporterTrialAssetFetchFailed, 
+                       _kCSDiagnosticReporterTrialDownloadFailed, _kCSDiagnosticReporterTrialSnapshotTime, 
+                       _kCSDiagnosticReporterTrialTypeKey, _kCSDiagnosticReporterUresRCUnavailable, 
+                       _kCSDiagnosticReporterUresSnapshotTime, _kCSDiagnosticReporterUresTypeKey, 
+                       _kCSDiagnosticReporterVoiceIdDelayedScores, _kCSDiagnosticReporterVoiceIdExplicitUttRejected, 
+                       _kCSDiagnosticReporterVoiceIdMissingHomeId, _kCSDiagnosticReporterVoiceIdRetrainSATVecFailed, 
+                       _kCSDiagnosticReporterVoiceIdSATInitFailed, _kCSDiagnosticReporterVoiceIdSATModelFileFailed, 
+                       _kCSDiagnosticReporterVoiceIdSATVectorFailed, _kCSDiagnosticReporterVoiceIdSnapshotTime, 
+                       _kCSDiagnosticReporterVoiceIdStaleProfileDetected, _kCSDiagnosticReporterVoiceIdTDSRFailed, 
+                       _kCSDiagnosticReporterVoiceIdTDSRTimeout, _kCSDiagnosticReporterVoiceIdTooLessAudioFiles, 
+                       _kCSDiagnosticReporterVoiceIdTypeKey, _kCSDiagnosticReporterVoiceIdUnrecognizedMetaData, 
+                       _kCSDiagnosticReporterVoiceTriggerAPLeak, _kCSDiagnosticReporterVoiceTriggerAPStuckInTransition, 
+                       _kCSDiagnosticReporterVoiceTriggerLaunchSlow, _kCSDiagnosticReporterVoiceTriggerSecondPassCompleteWatchDogFire, 
                        _kCSDiagnosticReporterVoiceTriggerSnapshotTime, _kCSDiagnosticReporterVoiceTriggerTypeKey, 
                        _kCSFSelfLoggingCachedEventsMaxSize, _kCSFSelfLoggingMHUUIDKey, 
                        _kCSFSelfLoggingSecondPassResultKey, _kCSInitialContinousZerosMetricKey, 
@@ -97,12 +98,20 @@ exports:
                        CSAudioCircularBuffer, CSAudioDecoder, CSAudioFileManager, 
                        CSAudioPlayingApp, CSAudioPlayingAppMonitor, CSAudioPowerMeter, 
                        CSAudioRecordContext, CSAudioTimeConverter, CSAudioTimeConverterPool, 
-                       CSAudioZeroFilter, CSBeepCanceller, CSConfig, CSDarwinVoiceTriggerEventInfoProvider, 
-                       CSDiagnosticReporter, CSDispatchGroup, CSFAudioMetricsSelfLogger, 
-                       CSFAudioStreamBasicDescriptionFactory, CSFCircularEventsCacheBuffer, 
-                       CSFLPCMTypeConverter, CSFPreferences, CSFTimeUtils, CSFVoiceTriggerEventInfoSelfLogger, 
+                       CSAudioZeroCounter, CSAudioZeroFilter, CSBeepCanceller, CSConfig, 
+                       CSContinuousVoiceTriggerConfig, CSContinuousVoiceTriggerConfigDecoder, 
+                       CSDarwinVoiceTriggerEventInfoProvider, CSDiagnosticReporter, 
+                       CSDispatchGroup, CSFAudioMetricsSelfLogger, CSFAudioStreamBasicDescriptionFactory, 
+                       CSFCircularEventsCacheBuffer, CSFLPCMTypeConverter, CSFPreferences, 
+                       CSFRangeUtils, CSFTimeUtils, CSFVoiceTriggerEventInfoSelfLogger, 
                        CSFVoiceTriggerEventInfoSelfLoggerDarwin, CSFVoiceTriggerEventInfoSelfLoggerEmbedded, 
-                       CSOSTransaction, CSOSTransactionStat, CSPlainAudioFileWriter, 
-                       CSPolicy, CSPowerAssertionAccessory, CSPowerLogger, CSRemoteAssetManager, 
-                       CSSelectiveChannelAudioFileWriter, CSUtils ]
+                       CSMobileAssetVersions, CSOSTransaction, CSOSTransactionStat, 
+                       CSPlainAudioFileWriter, CSPolicy, CSPowerAssertionAccessory, 
+                       CSPowerLogger, CSRemoteAssetManager, CSReusableBufferBackingStore, 
+                       CSReusableBufferPool, CSReusableBufferPoolConfiguration, CSReusablePrivateMemoryBackingStore, 
+                       CSReusableSharedMemoryBackingStore, CSSelectiveChannelAudioFileWriter, 
+                       CSUtils, CSVTUITrainingSelfLogger, CSVoiceTriggerAirPodWearerDetectionConfig, 
+                       CSVoiceTriggerFirstPassConfig, CSVoiceTriggerFirstPassConfigDecoder, 
+                       CSVoiceTriggerPhraseConfig, CSVoiceTriggerPhraseConfigDecoder, 
+                       CSVoiceTriggerSecondPassConfig, CSVoiceTriggerSecondPassConfigDecoder ]
 ...

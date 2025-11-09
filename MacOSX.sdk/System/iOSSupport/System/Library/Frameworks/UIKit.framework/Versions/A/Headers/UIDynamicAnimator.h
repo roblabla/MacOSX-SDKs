@@ -11,7 +11,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UICollectionViewLayout.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIDynamicBehavior;
 @class UIDynamicAnimator;
@@ -63,7 +63,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIDynamicAnimator: NSObject
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIDynamicAnimator.h>

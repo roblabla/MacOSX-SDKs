@@ -4,33 +4,32 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3146879E-81C8-3A96-885B-BFC1282170AD
+    value:           2EEDD1D3-D5FF-3D73-BF76-83D091864C51
   - target:          x86_64-maccatalyst
-    value:           3146879E-81C8-3A96-885B-BFC1282170AD
+    value:           2EEDD1D3-D5FF-3D73-BF76-83D091864C51
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AA7CBA37-288A-3A80-B9A2-694C09CEB9F0
+    value:           65739BA6-A9FE-3493-A564-FE0B56AAFB78
   - target:          arm64e-maccatalyst
-    value:           AA7CBA37-288A-3A80-B9A2-694C09CEB9F0
+    value:           65739BA6-A9FE-3493-A564-FE0B56AAFB78
 install-name:    '/System/Library/PrivateFrameworks/HomeKitBackingStore.framework/Versions/A/HomeKitBackingStore'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _HMBCKErrorNoRetryDelay, _HMBCloudCredentialsKeychainAvailabilityTimeout, 
                        _HMBCloudDatabaseConfigurationDefaultSourceApplicationBundleIdentifier, 
-                       _HMBCloudDatabaseStartupRetryDelay, _HMBCloudPushHandlerNamedDelegatePort, 
-                       _HMBDefaultCKErrorRetryDelay, _HMBLocalSQLContextIndexSentinelIndex, 
-                       _HMBLocalSQLContextIndexSentinelTable, _HMBLocalZoneQueryResultModelTypeBindVariable, 
-                       _HMBLocalZoneQueryResultZoneRowBindVariable, _HMBSQLQueryStatementSequenceBindVariable, 
-                       _HMBStringFromLoggingVisibility, _HMFBackingStoreLocalErrorExtendedCode, 
-                       _HMFBackingStoreLocalErrorStatement, _HMFBackingStoreLocalErrorText, 
-                       ___execAndSetError, ___execRowAndSetError, _hmbBindDataSQLite3, 
-                       _hmbBindIntNumberSQLite3, _hmbBindIntSQLite3, _hmbBindStringSQLite3, 
-                       _hmbBindUUIDSQLite3, _hmbNSUIntegerWithSQLite3Column, _kCloudVersionKey, 
-                       _kHMBCloudDatabaseModelIDKey, _kHMBCloudDatabaseModelTypeKey, 
+                       _HMBCloudDatabaseStartupRetryDelay, _HMBDefaultCKErrorRetryDelay, 
+                       _HMBLocalSQLContextIndexSentinelIndex, _HMBLocalSQLContextIndexSentinelTable, 
+                       _HMBLocalZoneQueryResultModelTypeBindVariable, _HMBLocalZoneQueryResultZoneRowBindVariable, 
+                       _HMBSQLQueryStatementSequenceBindVariable, _HMBStringFromLoggingVisibility, 
+                       _HMFBackingStoreLocalErrorExtendedCode, _HMFBackingStoreLocalErrorStatement, 
+                       _HMFBackingStoreLocalErrorText, ___execAndSetError, ___execRowAndSetError, 
+                       _hmbBindDataSQLite3, _hmbBindIntNumberSQLite3, _hmbBindIntSQLite3, 
+                       _hmbBindStringSQLite3, _hmbBindUUIDSQLite3, _hmbNSUIntegerWithSQLite3Column, 
+                       _kCloudVersionKey, _kHMBCloudDatabaseModelIDKey, _kHMBCloudDatabaseModelTypeKey, 
                        _kHMBCloudDatabaseParentModelIDKey, _kHMBCloudDatabasePushDeviceKey, 
                        _kHMBCloudDatabasePushEncodingKey, _kHMBModelDataVersionKey, 
                        _kHMBModelDeprecatedDataVersionKey, _kHMBModelDeprecatedTypeKey, 
@@ -66,4 +65,5 @@ exports:
                        HMBSQLQueryStatement, HMBSQLStatement, HMBSQLStatementQueryPlanTuple, 
                        HMBShareInvitation, HMBShareInvitationContext, HMBShareParticipant, 
                        HMBShareUserID, HMBStreamingAsset ]
+    objc-ivars:      [ HMBCloudDatabase._propertyLock, HMBCloudZone._propertyLock ]
 ...

@@ -227,7 +227,7 @@ IMAGEIO_EXTERN CGImageSourceStatus CGImageSourceGetStatusAtIndex(CGImageSourceRe
  */
 IMAGEIO_EXTERN size_t CGImageSourceGetPrimaryImageIndex(CGImageSourceRef _iio_Nonnull isrc)  IMAGEIO_AVAILABLE_STARTING(10.14, 12.0);
 
-/* Depth data support for JPEG, HEIF, and DNG images.
+/* Auxiliary data support for JPEG, HEIF, and DNG images (kCGImageAuxiliaryDataTypeDepth, ...)
  * The returned CFDictionary contains:
  *   - the depth data (CFDataRef) - (kCGImageAuxiliaryDataInfoData),
  *   - the depth data description (CFDictionary) - (kCGImageAuxiliaryDataInfoDataDescription)

@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B4DEA12C-9B02-360F-B5C3-538F9DBC5F9C
+    value:           B6689BEC-237C-3972-A272-9A43B0B0E919
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9B677E81-4A46-3444-BBC8-07B8F6482C86
+    value:           9F71EC5A-BAFA-3BF7-B455-4B1C59D7CD7C
 install-name:    '/System/Library/PrivateFrameworks/ExposureNotificationDaemon.framework/Versions/A/ExposureNotificationDaemon'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ENAdvertisementStoreErrorDomain, _ENBundleIdentifierForURLSessions, 
                        _ENConfigurationManagerErrorDomain, _ENDownloadManagerDownloadsAvailable, 
                        _ENExposureDetectionDaemonSessionErrorDomain, _ENNestedTestResultErrorF, 

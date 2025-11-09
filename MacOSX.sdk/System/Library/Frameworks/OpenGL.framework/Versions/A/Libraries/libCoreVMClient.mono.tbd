@@ -3,12 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           ED9877B7-3786-324C-B2D8-A82BCD8FF0CB
+    value:           76C09F8A-091F-3BAA-8966-3691F54D7A94
   - target:          x86_64-maccatalyst
-    value:           ED9877B7-3786-324C-B2D8-A82BCD8FF0CB
+    value:           76C09F8A-091F-3BAA-8966-3691F54D7A94
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.mono.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __cvmsIsAssert, __cvmsIsMonolithic, _cvms_connection_control, 
                        _cvms_connection_create, _cvms_connection_has_service, _cvms_connection_release, 
                        _cvms_connection_retain, _cvms_content_get_function_pointer, 

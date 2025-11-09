@@ -11,7 +11,7 @@
 @class NSString;
 @class NSArray;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*!
     @enum NSURLCredentialPersistence
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
     @class NSURLCredential
     @discussion This class is an immutable object representing an authentication credential.  The actual type of the credential is determined by the constructor called in the categories declared below.
 */
-
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSURLCredential : NSObject <NSSecureCoding, NSCopying>
 {
@@ -162,4 +162,4 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

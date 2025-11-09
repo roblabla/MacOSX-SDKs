@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0C5CCB42-D15E-302B-A09D-786A3E36FE1D
+    value:           D18D9436-B28B-342F-83DA-007E78CCDB3D
   - target:          x86_64-maccatalyst
-    value:           0C5CCB42-D15E-302B-A09D-786A3E36FE1D
+    value:           D18D9436-B28B-342F-83DA-007E78CCDB3D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           785464FF-D60D-3450-801D-56EC95D61128
+    value:           50ABC2F0-8E72-3148-AC33-531D8CD6D7F4
   - target:          arm64e-maccatalyst
-    value:           785464FF-D60D-3450-801D-56EC95D61128
+    value:           50ABC2F0-8E72-3148-AC33-531D8CD6D7F4
 install-name:    '/usr/lib/libxslt.1.dylib'
 current-version: 3.26
 compatibility-version: 3
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _xslAddCall, _xslDebugStatus, _xslDropCall, _xslHandleDebugger, 
                        _xsltAddKey, _xsltAddStackElemList, _xsltAddTemplate, _xsltAllocateExtra, 
                        _xsltAllocateExtraCtxt, _xsltApplyAttributeSet, _xsltApplyImports, 
@@ -30,10 +30,11 @@ exports:
                        _xsltAttribute, _xsltCalibrateAdjust, _xsltCallTemplate, _xsltCheckExtPrefix, 
                        _xsltCheckExtURI, _xsltCheckRead, _xsltCheckWrite, _xsltChoose, 
                        _xsltCleanupGlobals, _xsltCleanupTemplates, _xsltComment, 
-                       _xsltCompileAttr, _xsltCompilePattern, _xsltComputeSortResult, 
-                       _xsltCopy, _xsltCopyNamespace, _xsltCopyNamespaceList, _xsltCopyOf, 
-                       _xsltCopyTextString, _xsltCreateRVT, _xsltDebug, _xsltDebugDumpExtensions, 
-                       _xsltDebugGetDefaultTrace, _xsltDebugSetDefaultTrace, _xsltDecimalFormatGetByName, 
+                       _xsltCompMatchClearCache, _xsltCompileAttr, _xsltCompilePattern, 
+                       _xsltComputeSortResult, _xsltCopy, _xsltCopyNamespace, _xsltCopyNamespaceList, 
+                       _xsltCopyOf, _xsltCopyTextString, _xsltCreateRVT, _xsltDebug, 
+                       _xsltDebugDumpExtensions, _xsltDebugGetDefaultTrace, _xsltDebugSetDefaultTrace, 
+                       _xsltDecimalFormatGetByName, _xsltDecimalFormatGetByQName, 
                        _xsltDefaultSortFunction, _xsltDoSortFunction, _xsltDocDefaultLoader, 
                        _xsltDocumentComp, _xsltDocumentElem, _xsltDocumentFunction, 
                        _xsltDocumentSortFunction, _xsltElement, _xsltElementAvailableFunction, 
@@ -45,14 +46,14 @@ exports:
                        _xsltExtModuleFunctionLookup, _xsltExtModuleTopLevelLookup, 
                        _xsltExtensionInstructionResultFinalize, _xsltExtensionInstructionResultRegister, 
                        _xsltFindDocument, _xsltFindElemSpaceHandling, _xsltFindTemplate, 
-                       _xsltForEach, _xsltFormatNumberConversion, _xsltFormatNumberFunction, 
-                       _xsltFreeAVTList, _xsltFreeAttributeSetsHashes, _xsltFreeCompMatchList, 
-                       _xsltFreeCtxtExts, _xsltFreeDocumentKeys, _xsltFreeDocuments, 
-                       _xsltFreeExts, _xsltFreeGlobalVariables, _xsltFreeKeys, _xsltFreeLocale, 
-                       _xsltFreeLocales, _xsltFreeNamespaceAliasHashes, _xsltFreeRVTs, 
-                       _xsltFreeSecurityPrefs, _xsltFreeStackElemList, _xsltFreeStyleDocuments, 
-                       _xsltFreeStylePreComps, _xsltFreeStylesheet, _xsltFreeTemplateHashes, 
-                       _xsltFreeTransformContext, _xsltFunctionAvailableFunction, 
+                       _xsltFlagRVTs, _xsltForEach, _xsltFormatNumberConversion, 
+                       _xsltFormatNumberFunction, _xsltFreeAVTList, _xsltFreeAttributeSetsHashes, 
+                       _xsltFreeCompMatchList, _xsltFreeCtxtExts, _xsltFreeDocumentKeys, 
+                       _xsltFreeDocuments, _xsltFreeExts, _xsltFreeGlobalVariables, 
+                       _xsltFreeKeys, _xsltFreeLocale, _xsltFreeLocales, _xsltFreeNamespaceAliasHashes, 
+                       _xsltFreeRVTs, _xsltFreeSecurityPrefs, _xsltFreeStackElemList, 
+                       _xsltFreeStyleDocuments, _xsltFreeStylePreComps, _xsltFreeStylesheet, 
+                       _xsltFreeTemplateHashes, _xsltFreeTransformContext, _xsltFunctionAvailableFunction, 
                        _xsltFunctionNodeSet, _xsltGenerateIdFunction, _xsltGenericDebug, 
                        _xsltGenericDebugContext, _xsltGenericError, _xsltGenericErrorContext, 
                        _xsltGetCNsProp, _xsltGetDebuggerStatus, _xsltGetDefaultSecurityPrefs, 
@@ -74,7 +75,7 @@ exports:
                        _xsltParseStylesheetCallerParam, _xsltParseStylesheetDoc, 
                        _xsltParseStylesheetFile, _xsltParseStylesheetImport, _xsltParseStylesheetImportedDoc, 
                        _xsltParseStylesheetInclude, _xsltParseStylesheetOutput, _xsltParseStylesheetParam, 
-                       _xsltParseStylesheetProcess, _xsltParseStylesheetVariable, 
+                       _xsltParseStylesheetProcess, _xsltParseStylesheetUser, _xsltParseStylesheetVariable, 
                        _xsltParseTemplateContent, _xsltPreComputeExtModuleElement, 
                        _xsltPrintErrorContext, _xsltProcessOneNode, _xsltProcessingInstruction, 
                        _xsltProfileStylesheet, _xsltQuoteOneUserParam, _xsltQuoteUserParams, 

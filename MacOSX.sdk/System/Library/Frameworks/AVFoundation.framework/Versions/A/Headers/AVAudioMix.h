@@ -196,12 +196,14 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 /*  
  @method		setVolumeRampFromStartVolume:toEndVolume:timeRange:
  @abstract		Sets a volume ramp to apply during the specified timeRange.
+ @discussion		This method throws an exception if the time range's start or duration is not numeric.
 */
 - (void)setVolumeRampFromStartVolume:(float)startVolume toEndVolume:(float)endVolume timeRange:(CMTimeRange)timeRange;
 
 /*  
  @method		setVolume:atTime:
  @abstract		Sets the value of the audio volume at a specific time.
+ @discussion		This method throws an exception if the time is not numeric.
 */
 - (void)setVolume:(float)volume atTime:(CMTime)time;
 

@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, MKPinAnnotationColor) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_DEPRECATED_WITH_REPLACEMENT("MKMarkerAnnotationView", macos(10.9, API_TO_BE_DEPRECATED), ios(3.0, API_TO_BE_DEPRECATED), tvos(9.2, API_TO_BE_DEPRECATED))
+API_DEPRECATED_WITH_REPLACEMENT("MKMarkerAnnotationView", macos(10.9, 13.0), ios(3.0, 16.0), tvos(9.2, 16.0))
 API_UNAVAILABLE(watchos)
 @interface MKPinAnnotationView : MKAnnotationView
 

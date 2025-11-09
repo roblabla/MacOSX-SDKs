@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @protocol UIConfigurationState;
 @class UIView;
@@ -34,9 +34,17 @@ API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 /// Returns the current configuration of the view. Setting this property applies the new configuration to the view.
 @property (nonatomic, copy) id<UIContentConfiguration> configuration;
 
+@optional
+
+/// Whether this view is compatible with the provided configuration, meaning the view supports
+/// it being set to the `configuration` property and is capable of updating itself for the
+/// configuration. If not implemented, the view is assumed to be compatible with configuration
+/// classes that match the class of the view's existing configuration.
+- (BOOL)supportsConfiguration:(id<UIContentConfiguration>)configuration API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIContentConfiguration.h>

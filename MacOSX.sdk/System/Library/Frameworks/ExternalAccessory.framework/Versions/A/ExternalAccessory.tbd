@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7CE2E991-38AB-3A13-96C9-D7ADE66A0BE0
+    value:           0A3E053B-535C-3F7E-9024-26A4972201DF
   - target:          x86_64-maccatalyst
-    value:           7CE2E991-38AB-3A13-96C9-D7ADE66A0BE0
+    value:           0A3E053B-535C-3F7E-9024-26A4972201DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5F20CC6B-5260-3C71-B227-51F784992199
+    value:           6431E6B1-CC4D-3073-8D0A-8D7E598131B1
   - target:          arm64e-maccatalyst
-    value:           5F20CC6B-5260-3C71-B227-51F784992199
+    value:           6431E6B1-CC4D-3073-8D0A-8D7E598131B1
 install-name:    '/System/Library/Frameworks/ExternalAccessory.framework/ExternalAccessory'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _EAAccessoryAccessibilityActionKey, _EAAccessoryAccessibilityContextKey, 
                        _EAAccessoryAccessibilityHeightKey, _EAAccessoryAccessibilityItemPropertyKey, 
                        _EAAccessoryAccessibilityPointXKey, _EAAccessoryAccessibilityPointYKey, 

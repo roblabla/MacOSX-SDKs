@@ -21,7 +21,7 @@ typedef NSString *NSFileProviderDomainIdentifier NS_EXTENSIBLE_STRING_ENUM;
  current version of the domain. This object is immutable and can safely be used as
  a key in a dictionary.
  */
-FILEPROVIDER_API_AVAILABILITY_V3_1
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS
 @interface NSFileProviderDomainVersion : NSObject <NSSecureCoding>
 
 /** Build a version that is strictly greater than the receiver.
@@ -44,7 +44,7 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 
 /** Testing modes.
  */
-FILEPROVIDER_API_AVAILABILITY_V3_1
+FILEPROVIDER_API_AVAILABILITY_V3_1_IOS
 typedef NS_OPTIONS(NSUInteger, NSFileProviderDomainTestingModes) {
     /** Enable the domain without any user action required.
      */
@@ -90,7 +90,9 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
 @interface NSFileProviderDomain : NSObject
 
 /**
- Initialize a new NSFileProviderDomain
+ Initialize a new non-replicated NSFileProviderDomain
+
+ The extension will be implementing NSFileProviderExtension.
 
  The file provider extension implementation can pick any @c identifier as it sees
  fit to identify the group of items. The identifier must not contain any characters from this set: [/:]
@@ -104,15 +106,29 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
 - (instancetype)initWithIdentifier:(NSFileProviderDomainIdentifier)identifier displayName:(NSString *)displayName pathRelativeToDocumentStorage:(NSString *)pathRelativeToDocumentStorage FILEPROVIDER_API_AVAILABILITY_V2;
 
 /**
- Initialize a new NSFileProviderDomain
+ Initialize a new replicated NSFileProviderDomain
+
+ The extension will be implementing NSFileProviderReplicatedExtension.
 
  The file provider extension implementation can pick any @c identifier as it sees
  fit to identify the group of items. The identifier must not contain any characters from this set: [/:]
 
+ In order to migrate a non-replicated domain to a replicated one, implementers have to make sure that they do not
+ use the default domain, and then call +[NSFileProviderManager addDomain:completionHandler:] using
+ the NSFileProviderDomain object returned by that init method.
+
+ A domain with a specific identifier can be added multiple times; subsequent adds will update the properties
+ of the existing domain.
+ If a replicated domain is added "on top" of a non-replicated domain, the domain will be migrated to be replicated;
+ existing bookmarks will remain valid, but the (externally visible) location of items will change to reflect the replicated location.
+
+ It is not possible to migrate the default domain in this manner (since the default domain can not be added).
+ It is recommended to migrate usage of the default domain to a domain with an explicit identifier instead.
+
  @param displayName a user visible string representing the group of items the
  file provider extension is using.
  */
-- (instancetype)initWithIdentifier:(NSFileProviderDomainIdentifier)identifier displayName:(NSString *)displayName FILEPROVIDER_API_AVAILABILITY_V3;
+- (instancetype)initWithIdentifier:(NSFileProviderDomainIdentifier)identifier displayName:(NSString *)displayName FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 /**
  The identifier - as provided by the file provider extension.
@@ -141,16 +157,31 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  */
 @property (readonly, getter=isDisconnected) BOOL disconnected FILEPROVIDER_API_AVAILABILITY_V3;
 
-/** If user has disabled this domain from Files.app on iOS or System Preferences on macOS, this will bet set
+/** If user has disabled this domain from Files.app on iOS or System Settings on macOS, this will be set
  to NO.
 */
-@property (readonly) BOOL userEnabled FILEPROVIDER_API_AVAILABILITY_V3;
+@property (readonly) BOOL userEnabled FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 /** If this domain is not user visible.
 
  Typically, this can be used for dry-run migration. The files are still on disk though.
 */
 @property (readwrite, assign, getter=isHidden) BOOL hidden FILEPROVIDER_API_AVAILABILITY_V3;
+
+/** If the domain is a replicated domain.
+
+ If set to YES, it means the domain is replicated. By default, on macOS, the value will always be YES.
+
+ On iOS, it will depend on the way the NSFileProviderDomain object is contructed. Calling
+ -[NSFileProviderDomain initWithIdentifier:displayName:] will initialize a replicated domain.
+ -[NSFileProviderDomain initWithIdentifier:displayName:pathRelativeToDocumentStorage:] will
+ initialize a non-replicated domain.
+
+ To know whether a domain is replicated or not, users are advised to rely on the output of
+ +[NSFileProviderManager getDomainsForProviderIdentifier:completionHandler:]
+
+*/
+@property (readonly, getter=isReplicated) BOOL replicated FILEPROVIDER_API_AVAILABILITY_V5_0_IOS;
 
 /** Testing modes.
 
@@ -161,7 +192,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  A process must have the com.apple.developer.fileprovider.testing-mode entitlement in order to
  configure a domain with non-empty testing modes.
  */
-@property (readwrite, assign) NSFileProviderDomainTestingModes testingModes FILEPROVIDER_API_AVAILABILITY_V3_1;
+@property (readwrite, assign) NSFileProviderDomainTestingModes testingModes FILEPROVIDER_API_AVAILABILITY_V3_1_IOS;
 
 /**
  Identity of the backing store of the domain on the system.
@@ -181,7 +212,20 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  to that domain. As a consequence, the identity of the backing store associated with that domain
  is guaranteed to be stable for the lifetime of the NSFileProviderReplicatedExtension instance.
  */
-@property (nonatomic, readonly, nullable) NSData *backingStoreIdentity FILEPROVIDER_API_AVAILABILITY_V4_0;
+@property (nonatomic, readonly, nullable) NSData *backingStoreIdentity FILEPROVIDER_API_AVAILABILITY_V4_0_IOS;
+
+/** If the domain supports syncing the trash.
+
+ This property only applies for extensions that implement NSFileProviderReplicatedExtension.
+
+ Defaults to YES. Set this to NO to indicate that the domain cannot sync the trash.
+ If this property is set to YES the system will move the trashed item to the domain trash.
+ If this property is set to NO and the trashed item does not have the NSFileProviderItemCapabilitiesAllowsTrashing capability, the system will offer to permanently delete the item.
+ If this property is set to NO and the trashed item does have the NSFileProviderItemCapabilitiesAllowsTrashing capability, then the system will behave differently based on whether the item
+ is recursively materialized. If the item is fully materialized, it will be moved to the user's home trash and the operation will look like a delete to the extension.
+ If the item is not fully materialized, the system will offer to permanently delete the item.
+ */
+@property (readwrite, assign) BOOL supportsSyncingTrash FILEPROVIDER_API_AVAILABILITY_V5_0;
 
 @end
 
@@ -199,7 +243,7 @@ Interested client should then call `+[NSFileProviderManager getDomainsWithComple
  called.
  */
 FOUNDATION_EXPORT NSNotificationName const NSFileProviderDomainDidChange
-FILEPROVIDER_API_AVAILABILITY_V3;
+FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
 NS_ASSUME_NONNULL_END
 

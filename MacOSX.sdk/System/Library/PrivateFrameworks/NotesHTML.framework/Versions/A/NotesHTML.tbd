@@ -3,25 +3,26 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5A041A48-BD5C-344B-A713-EE7F1BC55249
+    value:           8E54C146-787B-34D2-A7B9-FA1D29F17A7D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2A0DB425-649A-3A01-B74A-A3C708B44E51
+    value:           66C19593-E619-3EB6-B3F4-4359A92181F0
 install-name:    '/System/Library/PrivateFrameworks/NotesHTML.framework/Versions/A/NotesHTML'
-current-version: 1992
+current-version: 2163
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AvatarStack.2.preview-thunk, ICLinkPresentationPreviewGenerator, 
                        NoteWidgetView.2.preview-thunk, Notes, NotesAccountNotificationPlugin, 
-                       NotesDebug, NotesFolderWidgetView.2.preview-thunk, NotesIAAccountMigratorPlugin, 
-                       NotesShared, NotesSharedStressTests, NotesSharedUnitTests, 
-                       NotesStressTests, NotesUI, NotesUITests, NotesUIUnitTests, 
-                       NotesUnitTests, WidgetHeader.2.preview-thunk, com.apple.Notes.QuickLookExtension, 
-                       com.apple.Notes.SharingExtension, com.apple.Notes.SpotlightIndexExtension, 
-                       com.apple.NotesImporter, notesexport, notestool, notestoolUnitTests ]
+                       NotesAnalytics, NotesAnalyticsUnitTests, NotesDebug, NotesFolderWidgetView.2.preview-thunk, 
+                       NotesIAAccountMigratorPlugin, NotesPreviewKitUnitTests, NotesShared, 
+                       NotesSharedStressTests, NotesSharedUnitTests, NotesStressTests, 
+                       NotesUI, NotesUITests, NotesUIUnitTests, NotesUnitTests, WidgetHeader.2.preview-thunk, 
+                       com.apple.Notes.QuickLookExtension, com.apple.Notes.SharingExtension, 
+                       com.apple.Notes.SpotlightIndexExtension, com.apple.NotesImporter, 
+                       notesexport, notestool, notestoolUnitTests ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ICHTMLIndexerDataSourceIdentifier, _ICNFMCAccountAccountID, 
                        _ICNFMCAccountAccountIDv2Format, _ICNFMCAccountAccounts, _ICNFMCAccountAuthenticationScheme, 
                        _ICNFMCAccountBecameReachableNotification, _ICNFMCAccountClass, 

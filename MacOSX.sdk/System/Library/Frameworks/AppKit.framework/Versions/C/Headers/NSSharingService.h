@@ -12,7 +12,7 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
 
-@class NSString, NSImage, NSView, NSError, NSWindow;
+@class NSString, NSImage, NSMenuItem, NSView, NSError, NSWindow;
 @class CKShare, CKContainer;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -102,7 +102,7 @@ API_AVAILABLE(macos(10.8))
  Returns a list of NSSharingServices which could share all the provided items together. sharingServicesForItems can be used to build a custom UI, or to populate a contextual NSMenu.
  The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
  */
-+ (NSArray<NSSharingService *> *)sharingServicesForItems:(NSArray *)items;
++ (NSArray<NSSharingService *> *)sharingServicesForItems:(NSArray *)items API_DEPRECATED("Use -[NSSharingServicePicker standardShareMenuItem] instead.", macos(10.8, 13.0));
 
 
 /**
@@ -158,28 +158,28 @@ typedef NS_ENUM(NSInteger, NSSharingContentScope) {
 
 @protocol NSSharingServiceDelegate <NSObject>
 @optional
-- (void)sharingService:(NSSharingService *)sharingService willShareItems:(NSArray *)items;
-- (void)sharingService:(NSSharingService *)sharingService didFailToShareItems:(NSArray *)items error:(NSError *)error;
-- (void)sharingService:(NSSharingService *)sharingService didShareItems:(NSArray *)items;
+- (void)sharingService:(NSSharingService *)sharingService willShareItems:(NSArray *)items NS_SWIFT_UI_ACTOR;
+- (void)sharingService:(NSSharingService *)sharingService didFailToShareItems:(NSArray *)items error:(NSError *)error NS_SWIFT_UI_ACTOR;
+- (void)sharingService:(NSSharingService *)sharingService didShareItems:(NSArray *)items NS_SWIFT_UI_ACTOR;
 
 
 // The following methods are invoked when the service is performed and the sharing window pops up, to present a transition between the original items and the sharing window.
 
-- (NSRect)sharingService:(NSSharingService *)sharingService sourceFrameOnScreenForShareItem:(id)item;
+- (NSRect)sharingService:(NSSharingService *)sharingService sourceFrameOnScreenForShareItem:(id)item NS_SWIFT_UI_ACTOR;
 
 /**
  When non-nil, the image returned would be used for the transitioning animation. When nil, the transitioning animation is disabled.
  */
-- (nullable NSImage *)sharingService:(NSSharingService *)sharingService transitionImageForShareItem:(id)item contentRect:(NSRect *)contentRect;
+- (nullable NSImage *)sharingService:(NSSharingService *)sharingService transitionImageForShareItem:(id)item contentRect:(NSRect *)contentRect NS_SWIFT_UI_ACTOR;
 
-- (nullable NSWindow *)sharingService:(NSSharingService *)sharingService sourceWindowForShareItems:(NSArray *)items sharingContentScope:(NSSharingContentScope *)sharingContentScope;
+- (nullable NSWindow *)sharingService:(NSSharingService *)sharingService sourceWindowForShareItems:(NSArray *)items sharingContentScope:(NSSharingContentScope *)sharingContentScope NS_SWIFT_UI_ACTOR;
 
 /**
  The following method is invoked when the service is performed and wants to display its contents in a popover. The delegate should return the view that will act as the anchor of the popover, along with the target rectangle within the bounds of that view and preferred edge of that rectangle for the popover to appear. The delegate may also return nil, indicating that there is no anchoring view currently available, in which case the service may attempt to display the service via some other means.
  
  The service named NSSharingServiceNameCloudSharing prefers to display itself using a popover anchored to an "Add People" or "Share" button. If no such button is available or visible, return nil.
  */
-- (nullable NSView *)anchoringViewForSharingService:(NSSharingService *)sharingService showRelativeToRect:(NSRect *)positioningRect preferredEdge:(NSRectEdge *)preferredEdge;
+- (nullable NSView *)anchoringViewForSharingService:(NSSharingService *)sharingService showRelativeToRect:(NSRect *)positioningRect preferredEdge:(NSRectEdge *)preferredEdge NS_SWIFT_UI_ACTOR;
 
 @end
 
@@ -269,6 +269,16 @@ API_AVAILABLE(macos(10.8))
  Shows the picker, populated with sharing services related to the instance items. When the user selects one of the sharing services, the sharing service will be performed. Note that this method must be called on mouseDown.
  */
 - (void)showRelativeToRect:(NSRect)rect ofView:(NSView *)view preferredEdge:(NSRectEdge)preferredEdge;
+
+/**
+ * Closes the picker UI. `-[NSSharingServicePickerDelegate sharingServicePicker:didChooseSharingService:]` will be invoked if `delegate` is set, with a `nil` service.
+ */
+- (void)close API_AVAILABLE(macos(13.0));
+
+/**
+ * Returns a menu item suitable to display the picker for the given items.
+ */
+@property (readonly) NSMenuItem *standardShareMenuItem API_AVAILABLE(macos(13.0));
 
 @end
 

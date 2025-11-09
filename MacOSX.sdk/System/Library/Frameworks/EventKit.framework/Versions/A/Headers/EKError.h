@@ -98,6 +98,7 @@ typedef NS_ENUM(NSInteger, EKErrorCode) {
     EKErrorSourceMismatch,
     EKErrorNotificationCollectionMismatch,
     EKErrorNotificationSavedWithoutCollection,
+    EKErrorReminderAlarmContainsEmailOrUrl,
     
     EKErrorLast // used internally
 };

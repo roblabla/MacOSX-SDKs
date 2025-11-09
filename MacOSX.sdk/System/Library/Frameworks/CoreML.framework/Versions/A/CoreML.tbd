@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1033B5E7-5E35-31FC-A50C-64D184B255EB
+    value:           D2837415-6136-32CE-9C8C-75A64879B995
   - target:          x86_64-maccatalyst
-    value:           1033B5E7-5E35-31FC-A50C-64D184B255EB
+    value:           D2837415-6136-32CE-9C8C-75A64879B995
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           45E2E330-F73B-339E-90DE-7F94ACE3ED40
+    value:           049191D5-48F4-30B0-B642-D77166360B71
   - target:          arm64e-maccatalyst
-    value:           45E2E330-F73B-339E-90DE-7F94ACE3ED40
+    value:           049191D5-48F4-30B0-B642-D77166360B71
 install-name:    '/System/Library/Frameworks/CoreML.framework/Versions/A/CoreML'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MLAutomaticOutputBackingModeDisabled, _MLAutomaticOutputBackingModeEnabled, 
                        _MLAutomaticOutputBackingModeForced, _MLDetectionPrintCustomModelName, 
                        _MLDetectionPrintRequestRevisionKey, _MLFeatureValueImageOptionCropAndScale, 
@@ -46,13 +46,13 @@ exports:
                        MLAppleTextClassifier, MLAppleTextClassifierParameters, MLAppleWordEmbedding, 
                        MLAppleWordEmbeddingParameters, MLAppleWordTagger, MLAppleWordTaggerParameters, 
                        MLArchivingUtils, MLArrayBatchProvider, MLArrayDictionaryFeatureProvider, 
-                       MLArrayFeatureExtractor, MLBackgroundPredictionTask, MLBackgroundRunner, 
-                       MLBackgroundTask, MLBatchProviderUtils, MLBayesianProbitRegression, 
-                       MLCategoricalMapping, MLClassifier, MLClassifierResult, MLCloudDeploymentUtils, 
+                       MLArrayFeatureExtractor, MLBackgroundPredictionTask, MLBackgroundTask, 
+                       MLBatchProviderUtils, MLBayesianProbitRegression, MLCategoricalMapping, 
+                       MLClassifier, MLClassifierResult, MLCloudDeploymentUtils, 
                        MLCloudSession, MLCompiler, MLCompilerOptions, MLCompilerResult, 
                        MLComputeBatchDataSource, MLComputeDataSource, MLCustomModelLoader, 
-                       MLDataConversionUtils, MLDefaultCustomLayerFactory, MLDefaultCustomModelFactory, 
-                       MLDictVectorizer, MLDictionaryConstraint, MLDictionaryFeatureProvider, 
+                       MLDataConversionUtils, MLDefaultCustomLayerFactory, MLDictVectorizer, 
+                       MLDictionaryConstraint, MLDictionaryFeatureProvider, MLE5Engine, 
                        MLFairPlayDecryptSession, MLFairPlayDecryptSessionManager, 
                        MLFairPlayKeyLoadingSession, MLFeatureDescription, MLFeatureFlags, 
                        MLFeatureProviderUtils, MLFeatureTypeUtils, MLFeatureValue, 
@@ -60,23 +60,26 @@ exports:
                        MLGLMRegression, MLIdentity, MLImageConstraint, MLImageSize, 
                        MLImageSizeConstraint, MLImputer, MLInternalSettings, MLItemSimilarityRecommender, 
                        MLKNearestNeighborsClassifier, MLKey, MLKeyManager, MLLayerExecutionSchedule, 
-                       MLLayerPath, MLLinkedModel, MLLoader, MLLogging, MLMetricKey, 
-                       MLModel, MLModelAsset, MLModelCollection, MLModelCollectionEntry, 
-                       MLModelConfiguration, MLModelDescription, MLModelEncryptionUtils, 
-                       MLModelErrorUtils, MLModelExecutionSchedule, MLModelIOUtils, 
-                       MLModelMetadata, MLModelVisionFeaturePrintInfo, MLMultiArray, 
-                       MLMultiArrayAsNSArrayWrapper, MLMultiArrayConstraint, MLMultiArrayShapeConstraint, 
-                       MLMultiArrayUtils, MLNNLayerComputeUnitSelectionUtils, MLNearestNeighborsSingleKdTreeIndex, 
-                       MLNeuralNetworkCompiler, MLNeuralNetworkContainer, MLNeuralNetworkEngine, 
-                       MLNeuralNetworkMLComputeLayer, MLNeuralNetworkMLComputeUpdateEngine, 
-                       MLNeuralNetworkUpdateEngine, MLNeuralNetworkV1Container, MLNeuralNetworkV1Engine, 
-                       MLNonMaximumSuppression, MLNonMaximumSuppressionParameters, 
-                       MLNormalizer, MLNumericConstraint, MLObjectBoundingBoxOutputDescription, 
-                       MLOneHotEncoder, MLParameterContainer, MLParameterDescription, 
-                       MLParameterKey, MLParameterUtils, MLPersistentKeyStorage, 
-                       MLPipeline, MLPipelineClassifier, MLPipelineLoader, MLPipelineRegressor, 
-                       MLPipelineUpdateEngine, MLPredictionOptions, MLProbabilityDictionary, 
-                       MLProgramContainer, MLProgramEngine, MLRegressor, MLRegressorResult, 
+                       MLLayerPath, MLLinkedModel, MLLoader, MLLocalOutlierFactor, 
+                       MLLogging, MLMetricKey, MLModel, MLModelAsset, MLModelCollection, 
+                       MLModelCollectionEntry, MLModelConfiguration, MLModelDescription, 
+                       MLModelEncryptionUtils, MLModelErrorUtils, MLModelExecutionSchedule, 
+                       MLModelIOUtils, MLModelMetadata, MLModelVisionFeaturePrintInfo, 
+                       MLMultiArray, MLMultiArrayAsNSArrayWrapper, MLMultiArrayConstraint, 
+                       MLMultiArrayShapeConstraint, MLMultiArrayUtils, MLMultiFunctionProgramContainer, 
+                       MLMultiFunctionProgramEngine, MLNNLayerComputeUnitSelectionUtils, 
+                       MLNearestNeighborsSingleKdTreeIndex, MLNeuralNetworkCompiler, 
+                       MLNeuralNetworkContainer, MLNeuralNetworkEngine, MLNeuralNetworkMLComputeLayer, 
+                       MLNeuralNetworkMLComputeUpdateEngine, MLNeuralNetworkUpdateEngine, 
+                       MLNeuralNetworkV1Container, MLNeuralNetworkV1Engine, MLNonMaximumSuppression, 
+                       MLNonMaximumSuppressionParameters, MLNormalizer, MLNumericConstraint, 
+                       MLObjectBoundingBoxOutputDescription, MLOneHotEncoder, MLParameterContainer, 
+                       MLParameterDescription, MLParameterKey, MLParameterUtils, 
+                       MLPersistentKeyStorage, MLPipeline, MLPipelineClassifier, 
+                       MLPipelineLoader, MLPipelineRegressor, MLPipelineUpdateEngine, 
+                       MLPredictionOptions, MLProgramContainer, MLProgramContext, 
+                       MLProgramEngine, MLProgramEvaluationResult, MLProgramEvaluator, 
+                       MLProgramTrainer, MLProgramTrainingDelta, MLRegressor, MLRegressorResult, 
                        MLSVMEngine, MLSVMLoader, MLSVREngine, MLSVRLoader, MLSaver, 
                        MLScaler, MLSecureModel, MLSecureModelDecryptCredential, MLSequence, 
                        MLSequenceConstraint, MLShufflingBatchProvider, MLStreamingInputDataSource, 

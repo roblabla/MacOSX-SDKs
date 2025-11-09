@@ -13,7 +13,7 @@
 #import <Foundation/NSAttributedString.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #pragma mark NSTextLineFragment
 // NSTextLineFragment represents a single textual layout and rendering unit inside NSTextLayoutFragment.
@@ -54,7 +54,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 - (CGFloat)fractionOfDistanceThroughGlyphForPoint:(CGPoint)point;
 
 @end
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 #endif // !TARGET_OS_IPHONE
 #else
 #import <UIFoundation/NSTextLineFragment.h>

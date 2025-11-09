@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           15F7A105-9D07-3EE4-A317-614CFC52B6F3
+    value:           BC04CA29-0A19-3E23-9424-687D42F4328F
   - target:          x86_64-maccatalyst
-    value:           15F7A105-9D07-3EE4-A317-614CFC52B6F3
+    value:           BC04CA29-0A19-3E23-9424-687D42F4328F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E31782DB-EBC1-392C-B372-74A181991363
+    value:           DABD0B2D-03F1-32D6-B67A-133F93396082
   - target:          arm64e-maccatalyst
-    value:           E31782DB-EBC1-392C-B372-74A181991363
+    value:           DABD0B2D-03F1-32D6-B67A-133F93396082
 install-name:    '/System/Library/PrivateFrameworks/SiriOntologyProtobuf.framework/Versions/A/SiriOntologyProtobuf'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s20SiriOntologyProtobuf01_C10MessageMapVMa', '_$s20SiriOntologyProtobuf01_C10MessageMapVMn', 
                        '_$s20SiriOntologyProtobuf01_C3MapVMa', '_$s20SiriOntologyProtobuf01_C3MapVMn', 
                        '_$s20SiriOntologyProtobuf01_C7EnumMapVMa', '_$s20SiriOntologyProtobuf01_C7EnumMapVMn', 

@@ -8,7 +8,7 @@
 @class NSString, NSDictionary<KeyType, ObjectType>, NSArray<ObjectType>, NSDateComponents, NSDate, NSTimeZone, NSImage, NSAttributedString, NSUserNotificationAction;
 @protocol NSUserNotificationCenterDelegate;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* All NSUserNotifications API are deprecated. Please switch to the UserNotifications.framework for all notifications work. */
 // Used to describe the method in which the user activated the user notification. Alerts can be activated by either clicking on the body of the alert or the action button.
@@ -174,4 +174,4 @@ API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifica
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

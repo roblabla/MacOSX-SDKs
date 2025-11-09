@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-SK_EXTERN_CLASS API_AVAILABLE(ios(7.0), macos(10.9), watchos(6.2)) @interface SKReceiptRefreshRequest : SKRequest {
+SK_EXTERN_CLASS API_AVAILABLE(ios(7.0), macos(10.9), watchos(6.2)) NS_SWIFT_NONSENDABLE @interface SKReceiptRefreshRequest : SKRequest {
 @private
     NSDictionary *_properties;
 }

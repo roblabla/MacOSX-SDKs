@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B22C7DC9-993F-36B7-BCCA-F742006FD26C
+    value:           9A8FAF5C-90BA-38EC-B414-0147397F39B7
   - target:          x86_64-maccatalyst
-    value:           B22C7DC9-993F-36B7-BCCA-F742006FD26C
+    value:           9A8FAF5C-90BA-38EC-B414-0147397F39B7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           69A58A4D-1302-348A-92BB-96D2A8F86AB7
+    value:           C07EFA0A-825F-3BB1-8A0C-AEAE4F09B621
   - target:          arm64e-maccatalyst
-    value:           69A58A4D-1302-348A-92BB-96D2A8F86AB7
+    value:           C07EFA0A-825F-3BB1-8A0C-AEAE4F09B621
 install-name:    '/System/Library/PrivateFrameworks/KeychainCircle.framework/Versions/A/KeychainCircle'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CoreCryptoError, _KCInitialMessageDataReadFrom, _KCJoiningErrorCreate, 
                        _KCPairingIntent_Type_None, _KCPairingIntent_Type_SilentRepair, 
                        _KCPairingIntent_Type_UserDriven, _KeychainCircleVersionNumber, 

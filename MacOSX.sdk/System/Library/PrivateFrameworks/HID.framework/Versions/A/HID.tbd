@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           791FC5FA-4055-3096-B1A2-0F787DE68141
+    value:           CEA0BA0B-D197-3C88-9473-23FED0A3DD7A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E79644E8-DE46-3F75-8788-CFFEABE5E7DF
+    value:           5A4277AF-E8CC-3127-9BA2-83AAB9BE6299
 install-name:    '/System/Library/PrivateFrameworks/HID.framework/Versions/A/HID'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _HIDVersionNumber, _HIDVersionString, _kHIDUserDevicePropertyCreateInactiveKey ]
     objc-classes:    [ HIDEventSystemClient, HIDManager, HIDUserDevice, HIDVirtualEventService ]
 ...

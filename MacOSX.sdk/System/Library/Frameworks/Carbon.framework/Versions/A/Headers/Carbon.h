@@ -48,8 +48,4 @@
 #include <Help/Help.h>
 #endif
 
-#ifndef __IMAGECAPTURE__
-#include <ImageCapture/ImageCapture.h>
-#endif
-
 #endif /* __CARBON__ */

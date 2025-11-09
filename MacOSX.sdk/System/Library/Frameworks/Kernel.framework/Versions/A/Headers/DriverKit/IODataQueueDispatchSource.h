@@ -1,4 +1,4 @@
-/* iig(DriverKit-192.100.7) generated from IODataQueueDispatchSource.iig */
+/* iig(DriverKit-256.40.4) generated from IODataQueueDispatchSource.iig */
 
 /* IODataQueueDispatchSource.iig:1-37 */
 /*
@@ -38,7 +38,7 @@
 typedef void (^IODataQueueClientEnqueueEntryBlock)(void *data, size_t dataSize);
 typedef void (^IODataQueueClientDequeueEntryBlock)(const void *data, size_t dataSize);
 
-/* source class IODataQueueDispatchSource IODataQueueDispatchSource.iig:38-207 */
+/* source class IODataQueueDispatchSource IODataQueueDispatchSource.iig:38-236 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -61,6 +61,14 @@ public:
 		uint64_t queueByteCount,
 	    IODispatchQueue * queue,
 	    IODataQueueDispatchSource ** source);
+
+    /*!
+     * @brief Represents the size of the data queue entry header independent of the actual size of the data in the entry.  This is the overhead of each entry in the queue.
+     * @param       dataQueueEntryHeaderSize  Out parameter for data queue entry header size
+     * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+     */
+    static size_t
+    GetDataQueueEntryHeaderSize() LOCALONLY;
 
 	virtual bool
 	init() override;
@@ -179,6 +187,27 @@ public:
 	EnqueueWithCoalesce(uint32_t dataSize,  bool * sendDataAvailable, IODataQueueClientEnqueueEntryBlock callback) LOCALONLY;
 
     /*!
+     * @brief       As a producer, check if the queue has sufficient free space for a queue entry with the specified size.
+     * @param       dataSize  size of the queue entry to check
+     * @return      kIOReturnSuccess if the queue has enough free space
+     *              kIOReturnOverrun if the queue is full
+     *              kIOReturnError if the queue was corrupt
+     */
+	kern_return_t
+	CanEnqueueData(uint32_t dataSize) LOCALONLY;
+
+    /*!
+     * @brief       As a producer, check if the queue has sufficient free space for queue entries with the specified size.
+     * @param       dataSize   size of the queue entry to check
+     * @param       entryCount number of queue entries to check. Entries are assumed to be the same size.
+     * @return      kIOReturnSuccess if the queue has enough free space
+     *              kIOReturnOverrun if the queue is full
+     *              kIOReturnError if the queue was corrupt
+     */
+	kern_return_t
+	CanEnqueueData(uint32_t dataSize, uint32_t entryCount) LOCALONLY;
+
+    /*!
      * @brief       As a consumer, send the DataServiced notification indicated by DequeueWithCoalesce.
 	 */
 	void
@@ -218,7 +247,7 @@ private:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IODataQueueDispatchSource IODataQueueDispatchSource.iig:38-207 */
+/* generated class IODataQueueDispatchSource IODataQueueDispatchSource.iig:38-236 */
 
 #define IODataQueueDispatchSource_Create_ID            0xe8544306a54d09e0ULL
 #define IODataQueueDispatchSource_SetDataAvailableHandler_ID            0xd2c1d8cc6ec3a591ULL
@@ -282,6 +311,10 @@ public:\
         IODispatchQueue * queue,\
         IODataQueueDispatchSource ** source);\
 \
+    static size_t\
+    GetDataQueueEntryHeaderSize(\
+);\
+\
     kern_return_t\
     SetDataAvailableHandler(\
         OSAction * action,\
@@ -319,6 +352,15 @@ public:\
         uint32_t dataSize,\
         bool * sendDataAvailable,\
         IODataQueueClientEnqueueEntryBlock callback);\
+\
+    kern_return_t\
+    CanEnqueueData(\
+        uint32_t dataSize);\
+\
+    kern_return_t\
+    CanEnqueueData(\
+        uint32_t dataSize,\
+        uint32_t entryCount);\
 \
     void\
     SendDataServiced(\
@@ -503,6 +545,6 @@ IODataQueueDispatchSource_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IODataQueueDispatchSource.iig:209- */
+/* IODataQueueDispatchSource.iig:238- */
 
 #endif /* ! _IOKIT_UIODATAQUEUEDISPATCHSOURCE_H */

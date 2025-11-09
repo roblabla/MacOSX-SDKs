@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(11.0))  API_UNAVAILABLE(watchos, tvos)
+CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(11.0), watchos(9.0))  API_UNAVAILABLE(tvos)
 @interface CXProviderConfiguration : NSObject <NSCopying>
 
 /// Localized name of the provider
@@ -25,14 +25,14 @@ CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(11.0))  API_UNAVAILA
 
 /// Whether this provider's calls should be included in the system's Recents list at the end of each call.
 /// Default: YES
-@property (nonatomic) BOOL includesCallsInRecents API_AVAILABLE(ios(11.0), macCatalyst(13.0), macos(11.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) BOOL includesCallsInRecents API_AVAILABLE(ios(11.0), macCatalyst(13.0), macos(11.0), watchos(9.0));
 
 @property (nonatomic) BOOL supportsVideo; // Default NO
 
 // Numbers are of type CXHandleType
 @property (nonatomic, copy) NSSet<NSNumber *> *supportedHandleTypes;
 
-- (instancetype)init NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(14.0), macCatalyst(14.0), macos(11.0))  API_UNAVAILABLE(watchos, tvos);
+- (instancetype)init NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(14.0), macCatalyst(14.0), macos(11.0), watchos(9.0))  API_UNAVAILABLE(tvos);
 - (instancetype)initWithLocalizedName:(NSString *)localizedName API_DEPRECATED_WITH_REPLACEMENT("init", ios(10.0, 14.0), macCatalyst(13.0, 14.0), macos(11.0, 11.0)) API_UNAVAILABLE(tvos, watchos);
 
 

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D9FD72DE-5366-3268-855D-B2CEE876405D
+    value:           6CE18B4B-DE31-3935-B562-C4DB1C85A05D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F8776AED-2401-3AB3-AF96-31575FE79EE3
+    value:           7BE863AB-69D3-35BC-BAA5-9ED763DBCF68
 install-name:    '/System/Library/PrivateFrameworks/SemanticDocumentManagement.framework/Versions/A/SemanticDocumentManagement'
 current-version: 2.0.5
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CreateCompressedDataWithData, _CreateDecompressedDataWithData, 
                        _ProcessFiles, _SemanticDocumentManagementIsAvailable, _SemanticDocumentManagementVersionNumber, 
                        _SemanticDocumentManagementVersionString, __performIncrementalVacuum, 

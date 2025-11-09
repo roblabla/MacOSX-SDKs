@@ -10,7 +10,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIUserActivity.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UIDocumentChangeKind) {
     UIDocumentChangeDone,
@@ -185,7 +185,7 @@ UIKIT_EXTERN NSString* const NSUserActivityDocumentURLKey API_AVAILABLE(ios(8.0)
 - (void)restoreUserActivityState:(NSUserActivity *)userActivity API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos);
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIDocument.h>

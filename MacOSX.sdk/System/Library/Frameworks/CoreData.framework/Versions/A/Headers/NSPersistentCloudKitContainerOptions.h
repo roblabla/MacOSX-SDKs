@@ -1,7 +1,7 @@
 /*
     NSPersistentCloudKitContainerOptions.h
     Core Data
-    Copyright (c) 2018-2021, Apple Inc.
+    Copyright (c) 2018-2022, Apple Inc.
     All rights reserved.
 */
 

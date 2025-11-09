@@ -14,8 +14,9 @@ typedef NSString * NSLocaleKey NS_TYPED_ENUM;
 
 // Toll-free bridged with CFLocaleRef
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
+NS_SWIFT_SENDABLE // Immutable with no mutable subclasses
 @interface NSLocale : NSObject <NSCopying, NSSecureCoding>
 
 - (nullable id)objectForKey:(NSLocaleKey)key;
@@ -172,4 +173,4 @@ FOUNDATION_EXPORT NSString * const NSPersianCalendar API_DEPRECATED_WITH_REPLACE
 FOUNDATION_EXPORT NSString * const NSIndianCalendar API_DEPRECATED_WITH_REPLACEMENT("NSCalendarIdentifierIndian", macos(10.6, 10.10), ios(4.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
 FOUNDATION_EXPORT NSString * const NSISO8601Calendar API_DEPRECATED_WITH_REPLACEMENT("NSCalendarIdentifierISO8601", macos(10.6, 10.10), ios(4.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

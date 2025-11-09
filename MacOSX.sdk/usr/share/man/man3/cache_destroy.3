@@ -96,10 +96,10 @@ The following example uses pre-existing
 .Xr cache_callbacks 3
 to create a cache with cstring keys and 
 .Xr malloc 3
-allocated values.  The 
+allocated values. 
 .Bd -literal
 #include <cache.h>
-#include <cache_callbcaks.h>
+#include <cache_callbacks.h>
 
 cache_t *im_cache;
 cache_attributes_t attrs = {
@@ -113,6 +113,6 @@ cache_attributes_t attrs = {
 cache_create("com.acme.im_cache", &attrs, &im_cache);
 .Ed
 .Sh SEE ALSO
-.Xr cache 3
+.Xr libcache 3
 .Xr cache_set_and_retain 3
 .Xr cache_callbacks 3

@@ -13,7 +13,7 @@
 @class NSArray<ObjectType>, NSMutableData, NSData, NSString;
 @protocol NSKeyedArchiverDelegate, NSKeyedUnarchiverDelegate;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 FOUNDATION_EXPORT NSExceptionName const NSInvalidArchiveOperationException;
 FOUNDATION_EXPORT NSExceptionName const NSInvalidUnarchiveOperationException;
@@ -292,4 +292,4 @@ Returns \c nil if the given data is not valid or cannot be decoded, and sets the
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

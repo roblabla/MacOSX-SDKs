@@ -816,6 +816,48 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  */
 + (BOOL)deferredLocationUpdatesAvailable API_DEPRECATED("You can remove calls to this method", ios(6.0, 13.0), macos(10.9, 10.15)) API_UNAVAILABLE(watchos, tvos);
 
+/*
+ *  requestHistoricalLocationsWithPurposeKey:sampleCount:completionHandler:
+ *
+ *  Discussion:
+ *      Request asynchronous delivery of historical location information.
+ *
+ *      If the app is currently configured correctly, historical locations are
+ *      available, and this request is approved by the user via prompt,
+ *      then the historical locations will be delivered to the completion handler.
+ *      Otherwise, the completion handler will be invoked with an empty array.
+ *
+ *      Historical location availability is subject to privacy limits and should never
+ *      be assumed available.  If historic location is not available, no prompt will be
+ *      presented to the user, and the empty array will be returned.
+ *
+ *      The sampleCount parameter may be used to limit the number of returned
+ *      locations by decimation.
+ *
+ *      Correct configuration requires the App to:
+ *      - Have effective authorization to receive the user's current location.
+ *      - Carry the required entitlement:
+ *             com.apple.developer.corelocation.wilderness-safety
+ *      - Have a NSLocationWildernessSafetyUsageDescriptionDictionary in its
+ *        info.plist and related localized resources
+ *      - Pass a key identifying a usage description string in that dictionary to be
+ *        included in the prompt to the user if one is shown.
+ *
+ *      The completion handler will receive a non-nil error object in the event of misconfiguration.
+ *
+ *      Requires the com.apple.developer.corelocation.wilderness-safety entitlement.
+ *
+ */
+- (void)requestHistoricalLocationsWithPurposeKey:(NSString *)purposeKey
+									 sampleCount:(NSInteger)sampleCount
+                               completionHandler:(void(^)(NSArray<CLLocation *> *, NSError *_Nullable))handler
+	API_AVAILABLE(watchos(9.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, tvos)
+	NS_SWIFT_NAME(requestHistoricalLocations(purposeKey:sampleCount:completionHandler:))
+#ifdef NS_SWIFT_ASYNC_NAME
+	NS_SWIFT_ASYNC_NAME(historicalLocations(purposeKey:sampleCount:))
+#endif
+	;
+
 @end
 
 NS_ASSUME_NONNULL_END

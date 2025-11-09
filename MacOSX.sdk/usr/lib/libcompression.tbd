@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D8A845AD-B6B1-3F27-8A82-8F034F4B1250
+    value:           14439860-B515-30A7-8289-50FEEC0AD2C7
   - target:          x86_64-maccatalyst
-    value:           D8A845AD-B6B1-3F27-8A82-8F034F4B1250
+    value:           14439860-B515-30A7-8289-50FEEC0AD2C7
   - target:          x86_64h-macos
-    value:           4FF9AB5F-DCEF-3464-87F1-4FB7C3EA425C
+    value:           560886D0-0B93-3D6F-982E-29B52AFD2B95
   - target:          x86_64h-maccatalyst
-    value:           4FF9AB5F-DCEF-3464-87F1-4FB7C3EA425C
+    value:           560886D0-0B93-3D6F-982E-29B52AFD2B95
   - target:          arm64-macos
-    value:           F8DF56CC-1340-3160-9514-67BB8417E91B
+    value:           CE55A0D3-900C-3074-ABB0-598984D8EABF
   - target:          arm64-maccatalyst
-    value:           F8DF56CC-1340-3160-9514-67BB8417E91B
+    value:           CE55A0D3-900C-3074-ABB0-598984D8EABF
   - target:          arm64e-macos
-    value:           976695EB-582D-3C35-9780-897B2E96A5A6
+    value:           ECBF3EED-B7A5-3AEC-AAA6-009A972D3155
   - target:          arm64e-maccatalyst
-    value:           976695EB-582D-3C35-9780-897B2E96A5A6
+    value:           ECBF3EED-B7A5-3AEC-AAA6-009A972D3155
 install-name:    '/usr/lib/libcompression.dylib'
 exports:
-  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
-                       x86_64h-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _compression_decode_buffer, _compression_decode_scratch_buffer_size, 
                        _compression_encode_buffer, _compression_encode_scratch_buffer_size, 
                        _compression_stream_destroy, _compression_stream_get_decode_state_size, 
@@ -37,5 +37,5 @@ exports:
                        _yzip_image_create_with_payload, _yzip_image_decode, _yzip_image_destroy, 
                        _yzip_image_encode, _yzip_image_get_descriptor, _yzip_image_get_max_payload_size, 
                        _yzip_image_get_plane_descriptor, _yzip_image_set_data, _yzip_image_set_identifier, 
-                       _yzip_image_set_plane_data ]
+                       _yzip_image_set_plane_data, _zero_coder_decode, _zero_coder_encode ]
 ...

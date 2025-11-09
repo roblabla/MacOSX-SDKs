@@ -5,10 +5,10 @@
 //  Copyright © 2021 Apple. All rights reserved.
 //
 
+#import <AppKit/AppKit.h>
 #import <Foundation/Foundation.h>
-#import <AppKit/NSView.h>
-#import <AppKit/NSCell.h>
-#import <LocalAuthentication/LAContext.h>
+
+@class LAContext;
 
 NS_ASSUME_NONNULL_BEGIN
 

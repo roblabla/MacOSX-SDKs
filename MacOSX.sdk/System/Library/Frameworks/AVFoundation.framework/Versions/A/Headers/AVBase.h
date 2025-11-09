@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2017 Apple Inc. All rights reserved.
+	Copyright 2010-2021 Apple Inc. All rights reserved.
 
  */
 
@@ -21,6 +21,13 @@
 // Annotation for classes that inherit -init and +new from NSObject but cannot be usefully initialized using -init or +new
 #define AV_INIT_UNAVAILABLE - (instancetype)init NS_UNAVAILABLE; \
                             + (instancetype)new  NS_UNAVAILABLE;
+
+// Some API is deprecated in Swift only. They remain available in Objective-C.
+#if defined(__swift__)
+#define AVF_DEPRECATED_FOR_SWIFT_ONLY(...) API_DEPRECATED(__VA_ARGS__)
+#else
+#define AVF_DEPRECATED_FOR_SWIFT_ONLY(...)
+#endif
 
 #ifndef __has_feature
 	#define __has_feature(FEATURE) 0
@@ -201,6 +208,20 @@
 #endif
 
 
+// Removing Main Actor annotations
+#ifndef AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER
+	#if TARGET_OS_TV
+		#define AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER (__TV_OS_VERSION_MIN_REQUIRED >= 160000)
+	#elif TARGET_OS_WATCH
+		#define AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER (__WATCH_OS_VERSION_MIN_REQUIRED >= 90000)
+	#elif TARGET_OS_IPHONE
+		#define AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER (__IPHONE_OS_VERSION_MIN_REQUIRED >= 160000)
+	#elif TARGET_OS_MAC
+		#define AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER (__MAC_OS_X_VERSION_MIN_REQUIRED >= 130000)
+	#else
+		#define AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER	0
+	#endif
+#endif	// AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER
 
 #else
 #import <AVFCore/AVBase.h>

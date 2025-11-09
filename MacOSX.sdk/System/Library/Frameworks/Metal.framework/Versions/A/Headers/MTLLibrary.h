@@ -77,6 +77,8 @@ typedef NS_ENUM(NSUInteger, MTLFunctionType) {
     MTLFunctionTypeKernel = 3,
     MTLFunctionTypeVisible API_AVAILABLE(macos(11.0), ios(14.0)) = 5,
     MTLFunctionTypeIntersection API_AVAILABLE(macos(11.0), ios(14.0)) = 6,
+    MTLFunctionTypeMesh API_AVAILABLE(macos(13.0), ios(16.0)) = 7,
+    MTLFunctionTypeObject API_AVAILABLE(macos(13.0), ios(16.0)) = 8,
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
 
@@ -179,7 +181,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 @end
 
 typedef NS_ENUM(NSUInteger, MTLLanguageVersion) {
-    MTLLanguageVersion1_0 API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, macCatalyst) = (1 << 16),
+    MTLLanguageVersion1_0 API_DEPRECATED("Use a newer language standard", ios(9.0, 16.0)) API_UNAVAILABLE(macos, macCatalyst) = (1 << 16),
     MTLLanguageVersion1_1 API_AVAILABLE(macos(10.11), ios(9.0)) = (1 << 16) + 1,
     MTLLanguageVersion1_2 API_AVAILABLE(macos(10.12), ios(10.0)) = (1 << 16) + 2,
     MTLLanguageVersion2_0 API_AVAILABLE(macos(10.13), ios(11.0)) = (2 << 16),
@@ -187,12 +189,30 @@ typedef NS_ENUM(NSUInteger, MTLLanguageVersion) {
     MTLLanguageVersion2_2 API_AVAILABLE(macos(10.15), ios(13.0)) = (2 << 16) + 2,
     MTLLanguageVersion2_3 API_AVAILABLE(macos(11.0), ios(14.0)) = (2 << 16) + 3,
     MTLLanguageVersion2_4 API_AVAILABLE(macos(12.0), ios(15.0)) = (2 << 16) + 4,
+    MTLLanguageVersion3_0 API_AVAILABLE(macos(13.0), ios(16.0)) =
+    (3 << 16) + 0,
 } API_AVAILABLE(macos(10.11), ios(9.0));
 
 typedef NS_ENUM(NSInteger, MTLLibraryType) {
     MTLLibraryTypeExecutable = 0,
     MTLLibraryTypeDynamic = 1,
 } API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ @enum MTLLibraryOptimizationLevel
+ @abstract Optimization level for the Metal compiler.
+ 
+ @constant MTLLibraryOptimizationLevelDefault
+ Optimize for program performance.
+ 
+ @constant MTLLibraryOptimizationLevelSize
+ Like default, with extra optimizations to reduce code size.
+ */
+typedef NS_ENUM(NSInteger, MTLLibraryOptimizationLevel)
+{
+    MTLLibraryOptimizationLevelDefault = 0,
+    MTLLibraryOptimizationLevelSize = 1,
+} API_AVAILABLE(macos(13.0), ios(16.0));
 
 MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLCompileOptions : NSObject <NSCopying>
@@ -237,8 +257,8 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  This property should be set such that the dynamic library can be found in the file system at the time a pipeline state is created.
  Specify one of:
  - an absolute path to a file from which the dynamic library can be loaded, or
- - a path relative to @executable_path, where @executable_path is substituted with the directory name from which the MTLLibrary containing the MTLFunction entrypoint used to create the pipeline state is loaded, or
- - a path relative to @loader_path, where @loader_path is substituted with the directory name from which the MTLLibrary with the reference to this installName embedded is loaded.
+ - a path relative to \@executable_path, where \@executable_path is substituted with the directory name from which the MTLLibrary containing the MTLFunction entrypoint used to create the pipeline state is loaded, or
+ - a path relative to \@loader_path, where \@loader_path is substituted with the directory name from which the MTLLibrary with the reference to this installName embedded is loaded.
  The first is appropriate for MTLDynamicLibrary written to the file-system using its serializeToURL:error: method on the current device.
  The others are appropriate when the MTLDynamicLibrary is installed as part of a bundle or app, where the absolute path is not known.
  This property is ignored when the type property is not set to MTLLibraryTypeDynamic.
@@ -260,7 +280,14 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @property preserveInvariance
  @abstract If YES,  set the compiler to compile shaders to preserve invariance.  The default is false.
  */
-@property (readwrite, nonatomic) BOOL preserveInvariance API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+@property (readwrite, nonatomic) BOOL preserveInvariance API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(14.0));
+
+/*!
+ @property optimizationLevel
+ @abstract Sets the compiler optimization level.
+ */
+@property (readwrite, nonatomic) MTLLibraryOptimizationLevel optimizationLevel API_AVAILABLE(macos(13.0), ios(16.0));
+
 @end
 
 /*!

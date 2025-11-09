@@ -13,6 +13,7 @@ extern NSString* const VNErrorDomain API_AVAILABLE(macos(10.13), ios(11.0), tvos
 
 typedef NS_ENUM(NSInteger, VNErrorCode)
 {
+    VNErrorTuriCoreErrorCode = -1,
     VNErrorOK = 0,
     VNErrorRequestCancelled,
     VNErrorInvalidFormat,
@@ -32,5 +33,6 @@ typedef NS_ENUM(NSInteger, VNErrorCode)
     VNErrorUnsupportedRevision API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)),
     VNErrorDataUnavailable  API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)),
     VNErrorTimeStampNotFound  API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)),
-    VNErrorUnsupportedRequest  API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0))
+    VNErrorUnsupportedRequest  API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)),
+    VNErrorTimeout  API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
 };

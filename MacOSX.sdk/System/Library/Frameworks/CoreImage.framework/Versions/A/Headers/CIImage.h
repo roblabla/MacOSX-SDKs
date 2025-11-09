@@ -5,6 +5,11 @@
    All rights reserved.
 */
 
+#ifndef CIIMAGE_H
+#define CIIMAGE_H
+
+#ifdef __OBJC__
+
 #import <Foundation/Foundation.h>
 #import <CoreImage/CoreImageDefines.h>
 #import <CoreVideo/CoreVideo.h>
@@ -138,7 +143,6 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryPortraitEffectsMatte NS_A
 CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliarySemanticSegmentationSkinMatte NS_AVAILABLE(10_15, 13_0);
 CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliarySemanticSegmentationHairMatte NS_AVAILABLE(10_15, 13_0);
 CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliarySemanticSegmentationTeethMatte NS_AVAILABLE(10_15, 13_0);
-
 CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliarySemanticSegmentationGlassesMatte NS_AVAILABLE(11_0, 14_1);
 CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliarySemanticSegmentationSkyMatte NS_AVAILABLE(11_1, 14_3);
 
@@ -483,6 +487,20 @@ CORE_IMAGE_EXPORT CIImageAutoAdjustmentOption const kCIImageAutoAdjustLevel NS_A
 
 @end
 
+@interface CIImage (LabConversion)
+
+/* Converts the receiver from the Core Image RGB working space to La*b* space.
+ * The L channel in the range of 0...100 is stored in the the R channel of the resulting CIImage.
+ * The a*b* channels in the range of -128..128 are stored in the GB channels of the resulting CIImage.
+ * The A channel of the resulting CIImage is the same as the receiver's */
+-(CIImage*) imageByConvertingWorkingSpaceToLab NS_AVAILABLE(13_0,16_0);
+
+/* Converts an image from La*b* to the Core Image RGB working space.
+ * This is the inverse of imageByConvertingWorkingSpaceToLab. */
+-(CIImage*) imageByConvertingLabToWorkingSpace NS_AVAILABLE(13_0,16_0);
+
+@end
+
 @interface CIImage (AVDepthData)
 
 /* Returns a AVDepthData if the CIImage was created with [CIImage imageWithData] or [CIImage imageWithContentsOfURL] and.
@@ -541,3 +559,7 @@ CORE_IMAGE_EXPORT CIImageAutoAdjustmentOption const kCIImageAutoAdjustLevel NS_A
 
 
 NS_ASSUME_NONNULL_END
+
+#endif /* __OBJC__ */
+
+#endif /* CIIMAGE_H */

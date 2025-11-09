@@ -23,7 +23,7 @@
 #import <UIKit/UIGuidedAccess.h>
 #import <UIKit/UIAccessibilityLocationDescriptor.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*
  UIAccessibility
@@ -518,7 +518,7 @@ typedef NS_OPTIONS(NSUInteger, UIAccessibilityHearingDeviceEar) {
 UIKIT_EXTERN UIAccessibilityHearingDeviceEar UIAccessibilityHearingDevicePairedEar(void) API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos);
 UIKIT_EXTERN NSNotificationName const UIAccessibilityHearingDevicePairedEarDidChangeNotification API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIAccessibility.h>

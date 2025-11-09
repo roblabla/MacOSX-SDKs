@@ -15,7 +15,7 @@
 @class NSURL;
 @class NSURLRequestInternal;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*!
     @header NSURLRequest.h
@@ -279,7 +279,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 /*! 
     @abstract Returns the timeout interval of the receiver.
     @discussion The timeout interval specifies the limit on the idle
-    interval alloted to a request in the process of loading. The "idle
+    interval allotted to a request in the process of loading. The "idle
     interval" is defined as the period of time that has passed since the
     last instance of load activity occurred for a request that is in the
     process of loading. Hence, when an instance of load activity occurs
@@ -314,7 +314,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  @abstract returns whether a connection created with this request is allowed to use
  the built in cellular radios (if present).
  @result YES if the receiver is allowed to use the built in cellular radios to
- satify the request, NO otherwise.
+ satisfy the request, NO otherwise.
  */
 @property (readonly) BOOL allowsCellularAccess  API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
@@ -322,7 +322,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  @abstract returns whether a connection created with this request is allowed to use
  network interfaces which have been marked as expensive.
  @result YES if the receiver is allowed to use an interface marked as expensive to
- satify the request, NO otherwise.
+ satisfy the request, NO otherwise.
  */
 @property (readonly) BOOL allowsExpensiveNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
@@ -330,7 +330,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  @abstract returns whether a connection created with this request is allowed to use
  network interfaces which have been marked as constrained.
  @result YES if the receiver is allowed to use an interface marked as constrained to
- satify the request, NO otherwise.
+ satisfy the request, NO otherwise.
  */
 @property (readonly) BOOL allowsConstrainedNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
@@ -349,6 +349,13 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  @result The NSURLRequestAttribution associated with this request.
  */
 @property (readonly) NSURLRequestAttribution attribution API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*!
+ @abstract sets whether a request is required to do DNSSEC validation during DNS lookup.
+ @discussion YES, if the DNS lookup for this request should require DNSSEC validation,
+ No otherwise. Defaults to NO.
+ */
+@property (readonly) BOOL requiresDNSSECValidation API_AVAILABLE(macos(13.0), ios(16.1), watchos(9.1), tvos(16.1));
 
 @end
 
@@ -442,7 +449,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  @abstract sets whether a connection created with this request is allowed to use
  network interfaces which have been marked as expensive.
  @discussion NO if the receiver should not be allowed to use an interface marked as expensive to
- satify the request, YES otherwise.
+ satisfy the request, YES otherwise.
  */
 @property BOOL allowsExpensiveNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
@@ -450,7 +457,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  @abstract sets whether a connection created with this request is allowed to use
  network interfaces which have been marked as constrained.
  @discussion NO if the receiver should not be allowed to use an interface marked as constrained to
- satify the request, YES otherwise.
+ satisfy the request, YES otherwise.
  */
 @property BOOL allowsConstrainedNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
@@ -468,6 +475,13 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  user. Defaults to NSURLRequestAttributionDeveloper.
  */
 @property NSURLRequestAttribution attribution API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*!
+ @abstract sets whether a request is required to do DNSSEC validation during DNS lookup.
+ @discussion YES, if the DNS lookup for this request should require DNSSEC validation,
+ No otherwise. Defaults to NO.
+ */
+@property BOOL requiresDNSSECValidation API_AVAILABLE(macos(13.0), ios(16.1), watchos(9.1), tvos(16.1));
 
 @end
 
@@ -649,4 +663,4 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

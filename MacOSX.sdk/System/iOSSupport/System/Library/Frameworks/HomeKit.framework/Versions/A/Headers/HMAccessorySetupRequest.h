@@ -11,9 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class HMAccessorySetupPayload;
+@class MTRSetupPayload;
 
 HM_EXTERN API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(macos, macCatalyst)
-@interface HMAccessorySetupRequest : NSObject <NSCopying>
+    @interface HMAccessorySetupRequest : NSObject<NSCopying>
 
 /*!
  *  @abstract   The payload to use for accessory setup
@@ -43,6 +44,13 @@ HM_EXTERN API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABL
  *              and not any accessories behind the bridge
  */
 @property (nullable, copy) NSString *suggestedAccessoryName;
+
+/*!
+ *  @abstract   The payload to use for Matter accessory setup
+ *  @note       When this is non-nil, the following entitlement is required:
+ *                  com.apple.developer.matter.allow-setup-payload
+ */
+@property (nullable, strong) MTRSetupPayload *matterPayload;
 
 @end
 

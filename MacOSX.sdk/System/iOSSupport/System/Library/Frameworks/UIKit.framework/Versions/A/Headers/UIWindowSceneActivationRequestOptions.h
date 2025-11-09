@@ -11,7 +11,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UISceneOptions.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(ios(15.0))
 typedef NS_ENUM(NSUInteger, UIWindowScenePresentationStyle) {
@@ -34,7 +34,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIWindowSceneActivationRequestOptions.h>

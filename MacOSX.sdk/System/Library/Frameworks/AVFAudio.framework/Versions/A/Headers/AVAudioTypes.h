@@ -52,6 +52,14 @@ typedef void (^AVAudioNodeCompletionHandler)(void);
 */
 typedef NSUInteger AVAudioNodeBus;
 
+/*!	@typedef AVMusicTimeStamp
+	@abstract The time position in beats of playback and events in the AVAudioSequencer and its components.
+	@discussion
+		AVMusicTimeStamp allows the position and duration of events and actions in the AVAudioSequencer to
+		function independently from the tempo of the sequence being played.  At the default tempo of 120.0,
+		a time stamp of 1.0 represents 0.5 seconds of time.
+*/
+typedef double AVMusicTimeStamp;
 
 
 /*=============================================================================*/

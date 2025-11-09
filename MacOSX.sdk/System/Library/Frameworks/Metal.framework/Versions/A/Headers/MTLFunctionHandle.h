@@ -5,7 +5,6 @@
 //  Copyright © 2020 Apple, Inc. All rights reserved.
 //
 
-
 #import <Foundation/Foundation.h>
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLLibrary.h>

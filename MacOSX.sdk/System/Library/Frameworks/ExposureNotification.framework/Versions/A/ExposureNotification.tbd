@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           14EA1ADB-3585-391B-9584-0B3474E43AFE
+    value:           68915A3E-F4DD-358B-9FB8-1B42E7885C1E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9D791697-B848-3585-AF2F-9E8414D1E963
+    value:           2E1917E0-B7A5-31B5-8815-8266D4273335
 install-name:    '/System/Library/Frameworks/ExposureNotification.framework/Versions/A/ExposureNotification'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ENAEMCrypt, _ENAEMKDerive, _ENCloneFileToTemporaryDirectory, 
                        _ENCompareDiagnosisReportTypes, _ENCopyPublicKeyFromBase64String, 
                        _ENDaemonBundle, _ENDataVaultPath, _ENDataVaultURL, _ENDefaultExpirationDate, 

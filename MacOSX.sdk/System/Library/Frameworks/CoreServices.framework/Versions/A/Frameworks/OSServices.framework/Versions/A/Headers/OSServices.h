@@ -41,37 +41,37 @@
 #include <OSServices/CSIdentityQuery.h>
 #endif
 
-#if TARGET_OS_OSX
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #ifndef __ICONSTORAGE__
 #include <OSServices/IconStorage.h>
 #endif
 #endif
 
-#if TARGET_OS_OSX
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #ifndef __POWER__
 #include <OSServices/Power.h>
 #endif
 #endif
 
-#if TARGET_OS_OSX
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #ifndef __SECURITYCORE__
 #include <OSServices/SecurityCore.h>
 #endif
 #endif
 
-#if TARGET_OS_OSX
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #ifndef __WSMETHODINVOCATION__
 #include <OSServices/WSMethodInvocation.h>
 #endif
 #endif
 
-#if TARGET_OS_OSX
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #ifndef __WSPROTOCOLHANDLER__
 #include <OSServices/WSProtocolHandler.h>
 #endif
 #endif
 
-#if TARGET_OS_OSX
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #ifndef __WSTYPES__
 #include <OSServices/WSTypes.h>
 #endif

@@ -5,8 +5,11 @@
 //  Copyright © 2020 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+
+#if defined(__OBJC__) || defined(__swift__)
+#import <Foundation/Foundation.h>
+#endif
 
 #ifndef AX_EXTERN
     #ifdef __cplusplus

@@ -2,7 +2,7 @@
 //  VZMacGraphicsDeviceConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2021 Apple Inc. All rights reserved.
+//  Copyright © 2021-2022 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZGraphicsDeviceConfiguration.h>
@@ -22,6 +22,8 @@ VZ_EXPORT API_AVAILABLE(macos(12.0))
 
 /*!
  @abstract The displays to be attached to this graphics device.
+ @discussion
+    Maximum of one display is supported.
 */
 @property (copy) NSArray<VZMacGraphicsDisplayConfiguration *> *displays;
 

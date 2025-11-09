@@ -55,6 +55,7 @@ OS_EXPORT
 
 @property (nonatomic, assign, readonly) PHAssetSourceType sourceType API_AVAILABLE(ios(9));
 
+@property (nonatomic, assign, readonly) BOOL hasAdjustments API_AVAILABLE(macos(12), ios(15), tvos(15));
 // only applies to adjusted assets
 @property (nonatomic, assign, readonly, nullable) NSString *adjustmentFormatIdentifier API_AVAILABLE(macos(12), ios(15), tvos(15));
 

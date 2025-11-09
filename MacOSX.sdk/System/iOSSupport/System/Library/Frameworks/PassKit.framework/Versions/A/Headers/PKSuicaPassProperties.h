@@ -1,3 +1,4 @@
+#if !__has_include(<PassKitCore/PKSuicaPassProperties.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKSuicaPassProperties.h
 //  PassKit
@@ -35,3 +36,7 @@ API_AVAILABLE(ios(10.1), watchos(3.1))
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <PassKitCore/PKSuicaPassProperties.h>
+#endif

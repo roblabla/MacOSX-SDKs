@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2021 Apple Inc. All rights reserved.
+	Copyright 2010-2022 Apple Inc. All rights reserved.
 
 */
 
@@ -77,19 +77,19 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 
 /*	Indicates the duration of the asset. If @"providesPreciseDurationAndTiming" is NO, a best-available estimate of the duration is returned. The degree of precision preferred for timing-related properties can be set at initialization time for assets initialized with URLs. See AVURLAssetPreferPreciseDurationAndTimingKey for AVURLAsset below.
 */
-@property (nonatomic, readonly) CMTime duration;
+@property (nonatomic, readonly) CMTime duration AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.duration) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /*	indicates the natural rate at which the asset is to be played; often but not always 1.0
 */
-@property (nonatomic, readonly) float preferredRate;
+@property (nonatomic, readonly) float preferredRate AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.preferredRate) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /*	indicates the preferred volume at which the audible media of an asset is to be played; often but not always 1.0
 */
-@property (nonatomic, readonly) float preferredVolume;
+@property (nonatomic, readonly) float preferredVolume AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.preferredVolume) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /*	indicates the preferred transform to apply to the visual content of the asset for presentation or processing; the value is often but not always the identity transform
 */
-@property (nonatomic, readonly) CGAffineTransform preferredTransform;
+@property (nonatomic, readonly) CGAffineTransform preferredTransform AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.preferredTransform) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /*	The following property is deprecated. Instead, use the naturalSize and preferredTransform, as appropriate, of the receiver's video tracks. See -tracksWithMediaType: below.
 */
@@ -99,14 +99,24 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
  @property	preferredDisplayCriteria
  @abstract	Guides to a display mode that is optimal for playing this particular asset.
  */
-@property (nonatomic, readonly) AVDisplayCriteria *preferredDisplayCriteria API_AVAILABLE(tvos(11.2)) API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, watchos);
+@property (nonatomic, readonly) AVDisplayCriteria *preferredDisplayCriteria
+#if __swift__
+API_DEPRECATED("Use load(.preferredDisplayCriteria) instead", tvos(11.2, 16.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, watchos);
+#else
+API_AVAILABLE(tvos(11.2)) API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, watchos);
+#endif
 
 /*!
  @property		minimumTimeOffsetFromLive
  @abstract		Indicates how close to the latest content in a live stream playback can be sustained.
  @discussion	For non-live assets this value is kCMTimeInvalid.
  */
-@property (nonatomic, readonly) CMTime minimumTimeOffsetFromLive API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+@property (nonatomic, readonly) CMTime minimumTimeOffsetFromLive
+#if __swift__
+API_DEPRECATED("Use load(.minimumTimeOffsetFromLive) instead", macos(10.15, 13.0), ios(13.0, 16.0), tvos(13.0, 16.0), watchos(6.0, 9.0));
+#else
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+#endif
 
 @end
 
@@ -115,7 +125,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 
 /*	Indicates that the asset provides precise timing. See @"duration" above and AVURLAssetPreferPreciseDurationAndTimingKey below.
 */
-@property (nonatomic, readonly) BOOL providesPreciseDurationAndTiming;
+@property (nonatomic, readonly) BOOL providesPreciseDurationAndTiming AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.providesPreciseDurationAndTiming) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /*!
   @method		cancelLoading
@@ -176,7 +186,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @property		tracks
   @abstract		Provides the array of AVAssetTracks contained by the asset
 */
-@property (nonatomic, readonly) NSArray<AVAssetTrack *> *tracks;
+@property (nonatomic, readonly) NSArray<AVAssetTrack *> *tracks AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.tracks) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /*!
   @method		trackWithTrackID:
@@ -186,7 +196,12 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @result		An instance of AVAssetTrack; may be nil if no track of the specified trackID is available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (nullable AVAssetTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
+- (nullable AVAssetTrack *)trackWithTrackID:(CMPersistentTrackID)trackID
+#if __swift__
+API_DEPRECATED("Use loadTrack(withTrackID:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
   @method		loadTrackWithTrackID:completionHandler:
@@ -206,7 +221,12 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @result		An NSArray of AVAssetTracks; may be empty if no tracks of the specified media type are available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVAssetTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
+- (NSArray<AVAssetTrack *> *)tracksWithMediaType:(AVMediaType)mediaType
+#if __swift__
+API_DEPRECATED("Use loadTracks(withMediaType:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
   @method		loadTracksWithMediaType:completionHandler:
@@ -226,7 +246,12 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @result		An NSArray of AVAssetTracks; may be empty if no tracks with the specified characteristic are available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVAssetTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
+- (NSArray<AVAssetTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic
+#if __swift__
+API_DEPRECATED("Use loadTracks(withMediaCharacteristic:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaCharacteristic:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
   @method		loadTracksWithMediaCharacteristic:completionHandler:
@@ -246,7 +271,12 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
  @discussion
 	The value of this property is an NSArray of AVAssetTrackGroups, each representing a different grouping of tracks in the receiver.
  */
-@property (nonatomic, readonly) NSArray<AVAssetTrackGroup *> *trackGroups API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) NSArray<AVAssetTrackGroup *> *trackGroups
+#if __swift__
+API_DEPRECATED("Use load(.trackGroups) instead", macos(10.9, 13.0), ios(7.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+#endif
 
 @end
 
@@ -257,23 +287,33 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 
 /* Indicates the creation date of the asset as an AVMetadataItem. May be nil. If a creation date has been stored by the asset in a form that can be converted to an NSDate, the dateValue property of the AVMetadataItem will provide an instance of NSDate. Otherwise the creation date is available only as a string value, via -[AVMetadataItem stringValue].
 */
-@property (nonatomic, readonly, nullable) AVMetadataItem *creationDate API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly, nullable) AVMetadataItem *creationDate
+#if __swift__
+API_DEPRECATED("Use load(.creationDate) instead", macos(10.8, 13.0), ios(5.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+#endif
 
 /* Provides access to the lyrics of the asset suitable for the current locale.
 */
-@property (nonatomic, readonly, nullable) NSString *lyrics;
+@property (nonatomic, readonly, nullable) NSString *lyrics AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.lyrics) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* Provides access to an array of AVMetadataItems for each common metadata key for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 */
-@property (nonatomic, readonly) NSArray<AVMetadataItem *> *commonMetadata;
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *commonMetadata AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.commonMetadata) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* Provides access to an array of AVMetadataItems for all metadata identifiers for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 */
-@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata
+#if __swift__
+API_DEPRECATED("Use load(.metadata) instead", macos(10.10, 13.0), ios(8.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+#endif
 
 /* Provides an NSArray of NSStrings, each representing a metadata format that's available to the asset (e.g. ID3, iTunes metadata, etc.). Metadata formats are defined in AVMetadataFormat.h.
 */
-@property (nonatomic, readonly) NSArray<AVMetadataFormat> *availableMetadataFormats;
+@property (nonatomic, readonly) NSArray<AVMetadataFormat> *availableMetadataFormats AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.availableMetadataFormats) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /*!
   @method		metadataForFormat:
@@ -283,7 +323,12 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @result		An NSArray containing AVMetadataItems; may be empty if there is no metadata of the specified format.
   @discussion	Becomes callable without blocking when the key @"availableMetadataFormats" has been loaded
 */
-- (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format;
+- (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format
+#if __swift__
+API_DEPRECATED("Use loadMetadata(for:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadMetadataForFormat:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
   @method		loadMetadataForFormat:completionHandler:
@@ -304,7 +349,12 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 
 /* array of NSLocale
 */
-@property (readonly) NSArray<NSLocale *> *availableChapterLocales API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
+@property (readonly) NSArray<NSLocale *> *availableChapterLocales
+#if __swift__
+API_DEPRECATED("Use load(.availableChapterLocales) instead", macos(10.7, 13.0), ios(4.3, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
+#endif
 
 /*!
   @method		chapterMetadataGroupsWithTitleLocale:containingItemsWithCommonKeys:
@@ -322,7 +372,12 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
  
 	Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:].
 */
-- (NSArray<AVTimedMetadataGroup *> *)chapterMetadataGroupsWithTitleLocale:(NSLocale *)locale containingItemsWithCommonKeys:(nullable NSArray<AVMetadataKey> *)commonKeys API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
+- (NSArray<AVTimedMetadataGroup *> *)chapterMetadataGroupsWithTitleLocale:(NSLocale *)locale containingItemsWithCommonKeys:(nullable NSArray<AVMetadataKey> *)commonKeys
+#if __swift__
+API_DEPRECATED("Use loadChapterMetadataGroups(withTitleLocale:containingItemsWithCommonKeys:) instead", macos(10.7, 13.0), ios(4.3, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadChapterMetadataGroupsWithTitleLocale:containingItemsWithCommonKeys:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.3, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
   @method		loadChapterMetadataGroupsWithTitleLocale:containingItemsWithCommonKeys:completionHandler:
@@ -359,7 +414,12 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
  Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:].
 .
 */
-- (NSArray<AVTimedMetadataGroup *> *)chapterMetadataGroupsBestMatchingPreferredLanguages:(NSArray<NSString *> *)preferredLanguages API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
+- (NSArray<AVTimedMetadataGroup *> *)chapterMetadataGroupsBestMatchingPreferredLanguages:(NSArray<NSString *> *)preferredLanguages
+#if __swift__
+API_DEPRECATED("Use loadChapterMetadataGroups(bestMatchingPreferredLanguages:) instead", macos(10.8, 13.0), ios(6.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadChapterMetadataGroupsBestMatchingPreferredLanguages:completionHandler", macos(10.8, API_TO_BE_DEPRECATED), ios(6.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
  @method		loadChapterMetadataGroupsBestMatchingPreferredLanguages:completionHandler:
@@ -386,7 +446,12 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 
 /* Provides an NSArray of NSStrings, each NSString indicating a media characteristic for which a media selection option is available.
 */
-@property (nonatomic, readonly) NSArray<AVMediaCharacteristic> *availableMediaCharacteristicsWithMediaSelectionOptions API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) NSArray<AVMediaCharacteristic> *availableMediaCharacteristicsWithMediaSelectionOptions
+#if __swift__
+API_DEPRECATED("Use load(.availableMediaCharacteristicsWithMediaSelectionOptions) instead", macos(10.8, 13.0), ios(5.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+#endif
 
 /*!
   @method		mediaSelectionGroupForMediaCharacteristic:
@@ -405,7 +470,12 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 	
 	Filtering of the options in the returned AVMediaSelectionGroup according to playability, locale, and additional media characteristics can be accomplished using the category AVMediaSelectionOptionFiltering defined on AVMediaSelectionGroup.
 */
-- (nullable AVMediaSelectionGroup *)mediaSelectionGroupForMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+- (nullable AVMediaSelectionGroup *)mediaSelectionGroupForMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic
+#if __swift__
+API_DEPRECATED("Use loadMediaSelectionGroup(for:) instead", macos(10.8, 13.0), ios(5.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadMediaSelectionGroupForMediaCharacteristic:completionHandler:", macos(10.8, API_TO_BE_DEPRECATED), ios(5.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
   @method		loadMediaSelectionGroupForMediaCharacteristic:completionHandler:
@@ -428,13 +498,23 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @property		preferredMediaSelection
   @abstract		Provides an instance of AVMediaSelection with default selections for each of the receiver's media selection groups.
 */
-@property (nonatomic, readonly) AVMediaSelection *preferredMediaSelection API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
+@property (nonatomic, readonly) AVMediaSelection *preferredMediaSelection
+#if __swift__
+API_DEPRECATED("Use load(.preferredMediaSelection) instead", macos(10.11, 13.0), ios(9.0, 16.0), tvos(9.0, 16.0), watchos(2.0, 9.0));
+#else
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
+#endif
 
 /*!
   @property		allMediaSelections
   @abstract		Provides an array of all permutations of AVMediaSelection for this asset.
 */
-@property (nonatomic, readonly) NSArray <AVMediaSelection *> *allMediaSelections API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property (nonatomic, readonly) NSArray <AVMediaSelection *> *allMediaSelections
+#if __swift__
+API_DEPRECATED("Use load(.allMediaSelections) instead", macos(10.13, 13.0), ios(11.0, 16.0), tvos(11.0, 16.0), watchos(4.0, 9.0));
+#else
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+#endif
 
 @end
 
@@ -446,7 +526,12 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @abstract		Indicates whether or not the asset has protected content.
   @discussion	Assets containing protected content may not be playable without successful authorization, even if the value of the "playable" property is YES.  See the properties in the AVAssetUsability category for details on how such an asset may be used.  On OS X, clients can use the interfaces in AVPlayerItemProtectedContentAdditions.h to request authorization to play the asset.
 */
-@property (nonatomic, readonly) BOOL hasProtectedContent API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) BOOL hasProtectedContent
+#if __swift__
+API_DEPRECATED("Use load(.hasProtectedContent) instead", macos(10.7, 13.0), ios(4.2, 16.0), tvos(9.0, 16.0)) API_UNAVAILABLE(watchos);
+#else
+API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0)) API_UNAVAILABLE(watchos);
+#endif
 
 @end
 
@@ -459,21 +544,36 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @discussion	For QuickTime movie files and MPEG-4 files, the value of canContainFragments is YES if an 'mvex' box is present in the 'moov' box. For those types, the 'mvex' box signals the possible presence of later 'moof' boxes.
 */
 
-@property (nonatomic, readonly) BOOL canContainFragments API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) BOOL canContainFragments
+#if __swift__
+API_DEPRECATED("Use load(.canContainFragments) instead", macos(10.11, 13.0), ios(9.0, 16.0), tvos(9.0, 16.0)) API_UNAVAILABLE(watchos);
+#else
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+#endif
 
 /*!
   @property		containsFragments
   @abstract		Indicates whether the asset is extended by at least one fragment.
   @discussion	For QuickTime movie files and MPEG-4 files, the value of this property is YES if canContainFragments is YES and at least one 'moof' box is present after the 'moov' box.
 */
-@property (nonatomic, readonly) BOOL containsFragments API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) BOOL containsFragments
+#if __swift__
+API_DEPRECATED("Use load(.containsFragments) instead", macos(10.11, 13.0), ios(9.0, 16.0), tvos(9.0, 16.0)) API_UNAVAILABLE(watchos);
+#else
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+#endif
 
 /*!
   @property		overallDurationHint
   @abstract		Indicates the total duration of fragments that either exist now or may be appended in the future in order to extend the duration of the asset.
   @discussion	For QuickTime movie files and MPEG-4 files, the value of this property is obtained from the 'mehd' box of the 'mvex' box, if present. If no total fragment duration hint is available, the value of this property is kCMTimeInvalid.
 */
-@property (nonatomic, readonly) CMTime overallDurationHint API_AVAILABLE(macos(10.12.2), ios(10.2), tvos(10.2), watchos(3.2));
+@property (nonatomic, readonly) CMTime overallDurationHint
+#if __swift__
+API_DEPRECATED("Use load(.overallDurationHint) instead", macos(10.12.2, 13.0), ios(10.2, 16.0), tvos(10.2, 16.0), watchos(3.2, 9.0));
+#else
+API_AVAILABLE(macos(10.12.2), ios(10.2), tvos(10.2), watchos(3.2));
+#endif
 
 @end
 
@@ -485,30 +585,60 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
  @abstract		Indicates whether an AVPlayer can play the contents of the asset in a manner that meets user expectations.
  @discussion	A client can attempt playback when playable is NO, this however may lead to a substandard playback experience.
 */
-@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly, getter=isPlayable) BOOL playable
+#if __swift__
+API_DEPRECATED("Use load(.isPlayable) instead", macos(10.7, 13.0), ios(4.3, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
+#endif
 
 /* indicates whether an AVAssetExportSession can be used with the receiver for export
 */
-@property (nonatomic, readonly, getter=isExportable) BOOL exportable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, getter=isExportable) BOOL exportable
+#if __swift__
+API_DEPRECATED("Use load(.isExportable) instead", macos(10.7, 13.0), ios(4.3, 16.0), tvos(9.0, 16.0)) API_UNAVAILABLE(watchos);
+#else
+API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
+#endif
 
 /* indicates whether an AVAssetReader can be used with the receiver for extracting media data
 */
-@property (nonatomic, readonly, getter=isReadable) BOOL readable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, getter=isReadable) BOOL readable
+#if __swift__
+API_DEPRECATED("Use load(.isReadable) instead", macos(10.7, 13.0), ios(4.3, 16.0), tvos(9.0, 16.0)) API_UNAVAILABLE(watchos);
+#else
+API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
+#endif
 
 /* indicates whether the receiver can be used to build an AVMutableComposition
 */
-@property (nonatomic, readonly, getter=isComposable) BOOL composable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly, getter=isComposable) BOOL composable
+#if __swift__
+API_DEPRECATED("Use load(.isComposable) instead", macos(10.7, 13.0), ios(4.3, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
+#endif
 
 /* indicates whether the receiver can be written to the saved photos album
 */
-@property (nonatomic, readonly, getter=isCompatibleWithSavedPhotosAlbum) BOOL compatibleWithSavedPhotosAlbum API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(macos, watchos);
+@property (nonatomic, readonly, getter=isCompatibleWithSavedPhotosAlbum) BOOL compatibleWithSavedPhotosAlbum
+#if __swift__
+API_DEPRECATED("Use load(.isCompatibleWithSavedPhotosAlbum) instead", ios(5.0, 16.0), tvos(9.0, 16.0)) API_UNAVAILABLE(macos, watchos);
+#else
+API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(macos, watchos);
+#endif
 
 /*!
   @property		compatibleWithAirPlayVideo
   @abstract		Indicates whether the asset is compatible with AirPlay Video.
   @discussion	YES if an AVPlayerItem initialized with the receiver can be played by an external device via AirPlay Video.
  */
-@property (nonatomic, readonly, getter=isCompatibleWithAirPlayVideo) BOOL compatibleWithAirPlayVideo API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, getter=isCompatibleWithAirPlayVideo) BOOL compatibleWithAirPlayVideo
+#if __swift__
+API_DEPRECATED("Use load(.isCompatibleWithAirPlayVideo) instead", macos(10.11, 13.0), ios(9.0, 16.0), tvos(9.0, 16.0)) API_UNAVAILABLE(watchos);
+#else
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+#endif
 
 
 @end
@@ -605,6 +735,25 @@ AVF_EXPORT NSString *const AVURLAssetShouldSupportAliasDataReferencesKey API_AVA
 */
 AVF_EXPORT NSString *const AVURLAssetURLRequestAttributionKey API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
+/*!
+  @constant		AVURLAssetHTTPUserAgentKey
+  @abstract
+	Specifies the value of the User-Agent header to add to HTTP requests made by this asset.
+  @discussion
+	Value is an NSString
+	Default value is the systems's default User-Agent.
+*/
+AVF_EXPORT NSString *const AVURLAssetHTTPUserAgentKey API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+
+/*!
+  @constant		AVURLAssetPrimarySessionIdentifierKey
+  @abstract
+	Specifies a UUID to append as the value of the query parameter "_HLS_primary_id" to selected HTTP requests issued on behalf of the asset. Supported for HLS assets only.
+  @discussion
+	Value is an NSUUID. Its UUID string value will be used as the query parameter.
+	If you create AVURLAssets for the templateItems of AVPlayerInterstitialEvents and you want the instances of AVURLAsset that you create to be used during interstitial playback rather than equivalent AVURLAssets with the same URL, you must provide a value for this key that's equal to the httpSessionIdentifier of the primary AVPlayerItem's asset. See AVPlayerInterstitialEventController.h. This is especially useful if you require the use of a custom AVAssetResourceLoader delegate for interstitial assets.
+*/
+AVF_EXPORT NSString *const AVURLAssetPrimarySessionIdentifierKey API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
 
 /*!
   @class		AVURLAsset
@@ -672,9 +821,22 @@ AV_INIT_UNAVAILABLE
 */
 - (instancetype)initWithURL:(NSURL *)URL options:(nullable NSDictionary<NSString *, id> *)options NS_DESIGNATED_INITIALIZER;
 
-/* indicates the URL with which the instance of AVURLAsset was initialized
+/*!
+ @property URL
+ @abstract
+    Indicates the URL with which the instance of AVURLAsset was initialized.
 */
 @property (nonatomic, readonly, copy) NSURL *URL;
+
+/*!
+ @property httpSessionIdentifier
+ @abstract
+    Provides the identifier that's automatically included in any HTTP request issued on behalf of this asset in the HTTP header field "X-Playback-Session-Id".
+  @discussion
+    The value is an NSUUID from which the UUID string can be obtained.
+    Note that copies of an AVURLAsset vend an equivalent httpSessionIdentifier.
+*/
+@property (nonatomic, readonly) NSUUID *httpSessionIdentifier API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
 
 @end
 
@@ -719,7 +881,12 @@ AV_INIT_UNAVAILABLE
 	Finds a track of the target with content that can be accommodated by the specified composition track.
 	The logical complement of -[AVMutableComposition mutableTrackCompatibleWithTrack:].
 */
-- (nullable AVAssetTrack *)compatibleTrackForCompositionTrack:(AVCompositionTrack *)compositionTrack;
+- (nullable AVAssetTrack *)compatibleTrackForCompositionTrack:(AVCompositionTrack *)compositionTrack
+#if __swift__
+API_DEPRECATED("Use findCompatibleTrack(for:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("findCompatibleTrackForCompositionTrack:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
   @method		findCompatibleTrackForCompositionTrack:completionHandler:
@@ -744,7 +911,12 @@ AV_INIT_UNAVAILABLE
  @abstract		Provides an array of AVAssetVariants contained in the asset
  @discussion	Some variants may not be playable according to the current device configuration.
 */
-@property (nonatomic, readonly) NSArray<AVAssetVariant *> *variants API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+@property (nonatomic, readonly) NSArray<AVAssetVariant *> *variants
+#if __swift__
+API_DEPRECATED("Use load(.variants) instead", macos(10.12, 13.0), ios(15.0, 16.0), tvos(15.0, 16.0), watchos(8.0, 9.0));
+#else
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+#endif
 
 @end
 
@@ -842,7 +1014,7 @@ API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0))
 	@abstract       The tracks in an asset.
 	@discussion     The value of this property is an array of tracks the asset contains; the tracks are of type AVFragmentedAssetTrack.
 */
-@property (nonatomic, readonly) NSArray<AVFragmentedAssetTrack *> *tracks;
+@property (nonatomic, readonly) NSArray<AVFragmentedAssetTrack *> *tracks AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.tracks) instead", macos(10.11, 13.0), ios(12.0, 16.0), tvos(12.0, 16.0), watchos(6.0, 9.0));
 
 @end
 
@@ -856,7 +1028,12 @@ API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0))
   @result		An instance of AVFragmentedAssetTrack; may be nil if no track of the specified trackID is available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (nullable AVFragmentedAssetTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
+- (nullable AVFragmentedAssetTrack *)trackWithTrackID:(CMPersistentTrackID)trackID
+#if __swift__
+API_DEPRECATED("Use loadTrack(withTrackID:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
   @method		loadTrackWithTrackID:completionHandler:
@@ -876,7 +1053,12 @@ API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0))
   @result		An NSArray of AVFragmentedAssetTracks; may be empty if no tracks of the specified media type are available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVFragmentedAssetTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
+- (NSArray<AVFragmentedAssetTrack *> *)tracksWithMediaType:(AVMediaType)mediaType
+#if __swift__
+API_DEPRECATED("Use loadTracks(withMediaType:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
   @method		loadTracksWithMediaType:completionHandler:
@@ -896,7 +1078,12 @@ API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0))
   @result		An NSArray of AVFragmentedAssetTracks; may be empty if no tracks with the specified characteristic are available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVFragmentedAssetTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
+- (NSArray<AVFragmentedAssetTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic
+#if __swift__
+API_DEPRECATED("Use loadTracks(withMediaCharacteristic:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaCharacteristic:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
   @method		loadTracksWithMediaCharacteristic:completionHandler:
@@ -950,6 +1137,7 @@ API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0))
 /*!
 	@property       mindingInterval
 	@abstract       An NSTimeInterval indicating how often a check for additional fragments should be performed. The default interval is 10.0.
+	@discussion     This property throws an excepion if a value is set less than one millisecond (0.001) in duration.
 */
 @property (nonatomic) NSTimeInterval mindingInterval;
 
@@ -964,6 +1152,7 @@ API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0))
 	@abstract		Adds a fragmented asset to the array of assets being minded.
 	@param			asset
 					The fragmented asset to add to the minder.
+	@discussion		This method throws an exception if the asset is not a supported type (AVFragmentedAsset, AVFragmentedMovie), or if the asset is already being minded by another fragment minder.
 */
 - (void)addFragmentedAsset:(AVAsset<AVFragmentMinding> *)asset;
 
@@ -972,12 +1161,12 @@ API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0))
 	@abstract		Removes a fragmented asset from the array of assets being minded.
 	@param			asset
 					The fragmented asset to remove from the minder.
+	@discussion		This method throws an exception if the asset is not a supported type (AVFragmentedAsset, AVFragmentedMovie).
 */
 - (void)removeFragmentedAsset:(AVAsset<AVFragmentMinding> *)asset;
 
 @end
 
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVURLAsset (AVURLAssetContentKeyEligibility) <AVContentKeyRecipient>
 
 /*!

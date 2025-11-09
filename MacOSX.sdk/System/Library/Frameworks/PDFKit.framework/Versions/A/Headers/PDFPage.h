@@ -26,6 +26,8 @@ typedef NS_ENUM(NSInteger, PDFDisplayBox)
     kPDFDisplayBoxArtBox = 4
 };
 
+typedef NSString * PDFPageImageInitializationOption NS_SWIFT_NAME(PDFPage.ImageInitializationOption) NS_TYPED_ENUM;
+
 PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 @interface PDFPage : NSObject <NSCopying>
 {
@@ -39,8 +41,12 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // Note: -[PDFPage init] creates a new empty page with a media box set to (0.0, 0.0), [612.0, 792.0].
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
-// Returns a PDFPage for the passed in image. An easy way to create a PDFPage from an image to add to a PDFDocument.
-- (nullable instancetype)initWithImage:(PDFKitPlatformImage *)image PDFKIT_AVAILABLE(10_5, 11_0) NS_DESIGNATED_INITIALIZER;
+// Returns a PDFPage for the given image, using the given options
+- (nullable instancetype)initWithImage:(PDFKitPlatformImage *)image options:(NSDictionary<PDFPageImageInitializationOption, id>*)options
+    API_AVAILABLE(macos(13.0), ios(16.0)) NS_DESIGNATED_INITIALIZER;
+
+// Returns a PDFPage for the given image. Equivalent to initWithImage:options: with empty options
+- (nullable instancetype)initWithImage:(PDFKitPlatformImage *)image PDFKIT_AVAILABLE(10_5, 11_0);
 
 // -------- accessors
 
@@ -150,7 +156,6 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // NOTE: Versions of PDFKit before SnowLeopard did not return autorelease data for -[dataRepresentation]. You had to 
 // release the data yourself. Beginning with apps compiled on SnowLeopard the data returned is autoreleased.
 @property (nonatomic, readonly, nullable) NSData *dataRepresentation;
-
 @end
 
 #if defined( PDFKIT_PLATFORM_OSX )
@@ -178,5 +183,22 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 
 #endif
 
+// PDFPageImageInitializationOption values.
+
+// Value: CGRect as NSValue. If present, the page will have the given media box. Otherwise, the media box will be [0, 0, imageWidth, imageHeight].
+PDFKIT_EXTERN PDFPageImageInitializationOption const PDFPageImageInitializationOptionMediaBox NS_SWIFT_NAME(mediaBox)
+    API_AVAILABLE(macos(13.0), ios(16.0));
+
+// Value: int as NSNumber. If present, the image will be drawn on the page with the given rotation (in degrees counterclockwise). The value must be a multiple of 90 or an exception will be thrown.
+PDFKIT_EXTERN PDFPageImageInitializationOption const PDFPageImageInitializationOptionRotation NS_SWIFT_NAME(rotation)
+    API_AVAILABLE(macos(13.0), ios(16.0));
+
+// Value: BOOL as NSNumber. If true, and the image is smaller then the media box, the image will be upscaled to fit the media box, while maintaining aspect ratio.
+PDFKIT_EXTERN PDFPageImageInitializationOption const PDFPageImageInitializationOptionUpscaleIfSmaller NS_SWIFT_NAME(upscaleIfSmaller)
+    API_AVAILABLE(macos(13.0), ios(16.0));
+
+// Value double as NSNumber. The value must be in the range 0.0 to 1.0 or an exception will be thrown. A value of 0.0 implies that maximum compression is desired. A value of 1.0 implies that maximum quality is desired.
+PDFKIT_EXTERN PDFPageImageInitializationOption const PDFPageImageInitializationOptionCompressionQuality NS_SWIFT_NAME(compressionQuality)
+    API_AVAILABLE(macos(13.0), ios(16.0));
 
 NS_ASSUME_NONNULL_END

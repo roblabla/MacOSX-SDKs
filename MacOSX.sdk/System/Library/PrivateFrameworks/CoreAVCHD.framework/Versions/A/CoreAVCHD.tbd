@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DDEA9553-4875-3CCE-AD81-1B075A9099F1
+    value:           3135B09D-BE79-3A88-A0A9-C40E73498198
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           966D0666-EC7C-3907-A4DB-813AD8F7F2D3
+    value:           6D50236A-B769-31E6-8AD9-B0D54B35BD39
 install-name:    '/System/Library/PrivateFrameworks/CoreAVCHD.framework/Versions/A/CoreAVCHD'
 current-version: 6000
 compatibility-version: 5600
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CAVCHCreateMediaContainer, _CAVCHDCopyClipInfoDictionary, 
                        _CAVCHDCopyClipLocationTable, _CAVCHDGetClipNumberFromFingerprint, 
                        _CAVCHDGetNumClips, _CAVCHDIsValidMediaContainerURL, _kCAVCHDClipInfoProperty_AVCHDDaylightSavingTimeFlag, 

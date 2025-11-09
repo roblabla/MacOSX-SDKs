@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 //
 // UITextAutocapitalizationType
@@ -233,7 +233,7 @@ UIKIT_EXTERN UITextContentType const UITextContentTypeFlightNumber              
 /// Dates, times, or durations such as "7-3-2021" or "This Saturday", "12:30", and "10-11am", respectively.
 UIKIT_EXTERN UITextContentType const UITextContentTypeDateTime                  API_AVAILABLE(ios(15.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UITextInputTraits.h>

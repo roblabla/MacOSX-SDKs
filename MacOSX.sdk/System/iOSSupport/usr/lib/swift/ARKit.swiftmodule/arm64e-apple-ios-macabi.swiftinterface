@@ -1,10 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-ios15.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftARKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name ARKit
-// swift-module-flags-ignorable: -user-module-version 364.21
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-ios16.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftARKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name ARKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 381.26
 @_exported import ARKit
 import Swift
 import _Concurrency
+import _StringProcessing
 @available(iOS 11.0, *)
 extension ARKit.ARCamera {
   @frozen public enum TrackingState {
@@ -28,11 +29,15 @@ extension ARKit.ARCamera {
     get
   }
   @available(iOS 12.0, *)
-  @nonobjc public func unprojectPoint(_ point: CoreGraphics.CGPoint, ontoPlane planeTransform: simd.simd_float4x4, orientation: UIKit.UIInterfaceOrientation, viewportSize: CoreGraphics.CGSize) -> simd.simd_float3?
+  @nonobjc public func unprojectPoint(_ point: CoreFoundation.CGPoint, ontoPlane planeTransform: simd.simd_float4x4, orientation: UIKit.UIInterfaceOrientation, viewportSize: CoreFoundation.CGSize) -> simd.simd_float3?
+}
+@available(iOS 16.0, *)
+extension ARKit.ARCamera.TrackingState : Swift.Equatable {
+  public static func == (a: ARKit.ARCamera.TrackingState, b: ARKit.ARCamera.TrackingState) -> Swift.Bool
 }
 @available(iOS 12.0, *)
 extension ARKit.ARSCNView {
-  @nonobjc @_Concurrency.MainActor(unsafe) public func unprojectPoint(_ point: CoreGraphics.CGPoint, ontoPlane planeTransform: simd.simd_float4x4) -> simd.simd_float3?
+  @nonobjc @_Concurrency.MainActor(unsafe) public func unprojectPoint(_ point: CoreFoundation.CGPoint, ontoPlane planeTransform: simd.simd_float4x4) -> simd.simd_float3?
 }
 @available(iOS 11.0, *)
 extension ARKit.ARPointCloud {
@@ -95,6 +100,10 @@ extension ARKit.ARPlaneAnchor {
   public var classification: ARKit.ARPlaneAnchor.Classification {
     get
   }
+}
+@available(iOS 16.0, *)
+extension ARKit.ARPlaneAnchor.Classification : Swift.Equatable {
+  public static func == (a: ARKit.ARPlaneAnchor.Classification, b: ARKit.ARPlaneAnchor.Classification) -> Swift.Bool
 }
 @available(iOS 13.0, *)
 extension ARKit.ARSkeletonDefinition {

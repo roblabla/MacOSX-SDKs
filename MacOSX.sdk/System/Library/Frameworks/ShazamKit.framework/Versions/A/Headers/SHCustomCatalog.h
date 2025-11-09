@@ -11,7 +11,7 @@
 #import <ShazamKit/SHMediaItem.h>
 #import <ShazamKit/SHCatalog.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// @brief Configure a custom catalog of @c SHSignature objects to match against
 /// @discussion Use a custom catalog if you intend to search against reference signatures that you have provided yourself. All matches will be performed locally on the device against the signatures added to this Catalog.
@@ -24,14 +24,16 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 /// @param signature The reference to match against
 /// @param mediaItems The metadata associated with the @c SHSignature
 /// @discussion Once the @c SHCatalog had been added to a @c SHSession further calls to this method will be ignored
+/// @return YES if the data was successfully added, NO on failure with a populated error parameter
 - (BOOL)addReferenceSignature:(SHSignature *)signature representingMediaItems:(NSArray<SHMediaItem *> *)mediaItems error:(NSError **)error;
 
-/// Load a pre made Custom catalog from disk
-/// @param customCatalogURL The path to the assets
-/// @param error An error if the bundle could not be loaded
+/// Load a `shazamcatalog` file from a file path URL
+/// @param customCatalogURL The path to the `shazamcatalog` file.
+/// @param error An error if the catalog could not be loaded
+/// @return YES if the data was successfully added, NO on failure with a populated error parameter
 - (BOOL)addCustomCatalogFromURL:(NSURL *)customCatalogURL error:(NSError **)error;
 
-/// Write this Catalog to disk
+/// Write this Catalog to a URL
 /// @discussion A Catalog can safely be shared among devices
 /// @note If the `destinationURL` is a directory, a file named Signatures.shazamcatalog will be created
 /// @param destinationURL The location to write to
@@ -44,5 +46,4 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 
 @end
 
-
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

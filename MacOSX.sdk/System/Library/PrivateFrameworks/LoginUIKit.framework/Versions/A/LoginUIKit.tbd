@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AB67AE2C-DFA4-3156-AD31-A97030CC8769
+    value:           08D88824-0DBF-354B-B1A4-2ABAF10DB9DA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           850A1811-65C0-3CFE-898D-37B2BFCF553C
+    value:           FF8F3121-FA34-3044-BFEB-46B0D2528BFB
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/LoginUIKit'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DelegateInterface, _IsLAServiceEnabled, _IsLAServiceEnabledWithError, 
                        _LAContextClass, _LUI2BackgroundViewOpacityChanged, _LUI2DesktopImageForGUID, 
                        _LUI2DisplaysDidChangeNotification, _LUI2GlyphButtonDefaultHeight, 
@@ -31,31 +31,32 @@ exports:
                        _LUIAvatarInfoBackgroundColorKey, _LUIAvatarInfoCropTransformKey, 
                        _LUIAvatarInfoInitialPoseKey, _LUIAvatarInfoStickerConfigurationKey, 
                        _LUIAvatarInitialPoseDelay, _LUIAvatarInitialPoseDelayKey, 
-                       _LUIAvatarInitialPoseDelayTime, _LUIAvatarQueue, _LUIAvatarSecondsUntilSleep, 
-                       _LUIAvatarSecondsUntilSleepKey, _LUIAvatarSetInitialPoseDelay, 
-                       _LUIAvatarSetSecondsUntilSleep, _LUIAvatarSetShowAnimationName, 
-                       _LUIAvatarShowAnimationName, _LUIAvatarShowAnimationNameKey, 
-                       _LUIAvatarTrackingAreaInset, _LUIBackgroundPressed, _LUIButtonBack, 
-                       _LUIButtonCancel, _LUIButtonCancelKey, _LUIButtonExit, _LUIButtonGo, 
-                       _LUIButtonGuestUser, _LUIButtonHint, _LUIButtonNetworkStatus, 
-                       _LUIButtonNext, _LUIButtonPrevious, _LUIButtonRestart, _LUIButtonRestartToSafari, 
-                       _LUIButtonShiftLeft, _LUIButtonShiftRight, _LUIButtonShutDown, 
-                       _LUIButtonSleep, _LUIButtonSwitchUser, _LUICopyDefaultDesktopPictureForEFILogin, 
+                       _LUIAvatarInitialPoseDelayTime, _LUIAvatarPasswordWatchingTimePad, 
+                       _LUIAvatarQueue, _LUIAvatarSecondsUntilSleep, _LUIAvatarSecondsUntilSleepKey, 
+                       _LUIAvatarSetInitialPoseDelay, _LUIAvatarSetSecondsUntilSleep, 
+                       _LUIAvatarSetShowAnimationName, _LUIAvatarShowAnimationName, 
+                       _LUIAvatarShowAnimationNameKey, _LUIAvatarTrackingAreaInset, 
+                       _LUIBackgroundPressed, _LUIButtonBack, _LUIButtonCancel, _LUIButtonCancelKey, 
+                       _LUIButtonExit, _LUIButtonGo, _LUIButtonGuestUser, _LUIButtonHint, 
+                       _LUIButtonNetworkStatus, _LUIButtonNext, _LUIButtonPrevious, 
+                       _LUIButtonRestart, _LUIButtonRestartToSafari, _LUIButtonShiftLeft, 
+                       _LUIButtonShiftRight, _LUIButtonShutDown, _LUIButtonSleep, 
+                       _LUIButtonSwitchUser, _LUICopyDefaultDesktopPictureForEFILogin, 
                        _LUICopyDefaultDesktopPictureForScreenLock, _LUICopyDesktopPicture, 
                        _LUICopyDesktopPictureForLoginWindowEFI, _LUICopyDesktopPictureForLoginWindowUI, 
                        _LUICopyDesktopPictureForScreenLock, _LUICopyDockDesktopPictureForDisplay, 
                        _LUICopyScreen, _LUICreateCGColorForColor, _LUICreateCGContext, 
                        _LUICreateImageAtIndexFromPath, _LUICreateImageFromPath, _LUICreateImageOfSizeFromCGImage, 
                        _LUICreateSingleWindowShot, _LUIDBLoggingControllerStart, 
-                       _LUIDBLoggingControllerStop, _LUIDebugDidChangeScreenParametersNotification, 
+                       _LUIDBLoggingControllerStop, _LUIDebugInitializeScreenRect, 
                        _LUIFileIsReadable, _LUIMinPointX, _LUIMonitorsArrayKey, _LUIPasswordFieldKeyPressed, 
                        _LUIPasswordPolicyDetailsCreatePopover, _LUIPasswordPolicyDetailsUpdatePopover, 
                        _LUIPasswordPolicyEvaluateStatus, _LUIPasswordPolicyForNewLocalUser, 
                        _LUIPasswordPolicyForUserWithPassword, _LUIPasswordPopoverSummaryCreatePopover, 
                        _LUIPinEntered, _LUISpinnerDictionary, _LUIStipViewHighlightTopBuffer, 
                        _LUITimePressed, _LUIToggleInfo, _LUITransitionDictionaryForDisplay, 
-                       _LUIUserIconPressed, _RemoteProviderInterface, __CanDebug, 
-                       _gMinScreenOrigin, _getLUIAVTViewClass, _kContinuityServiceProvider, 
+                       _LUIUserIconPressed, _RemoteProviderInterface, _TRMPortErrorDomain, 
+                       __CanDebug, _gMinScreenOrigin, _getLUIAVTViewClass, _kContinuityServiceProvider, 
                        _kExtraProgressSpace, _kLUIFlagAuthenticationService, _kLUIFlagBattery, 
                        _kLUIFlagDesktopPicture, _kLUIFlagGeneric, _kLUIFlagInputMethod, 
                        _kLUIFlagPasswordPolicy, _kLUIFlagUsers, _kLUIFlagWindows, 
@@ -102,7 +103,8 @@ exports:
                        LUISimpleViewController, LUIStatusViewController, LUIStripView, 
                        LUITextField, LUITextFieldCell, LUITextFieldView, LUITimeStatusController, 
                        LUIUnmanagedSpace, LUIUnmanagedSpaceManager, LUIViewController, 
-                       LUIWiFiImageView, LUIWiFiStatusController, LUIWindow, LUIWindowController ]
+                       LUIWiFiImageView, LUIWiFiStatusController, LUIWindow, LUIWindowController, 
+                       TRMPort, TRMPortManager ]
     objc-ivars:      [ LUIAppleIDViewController._appleIDLabel, LUIAppleIDViewController._appleIDTextField, 
                        LUIAppleIDViewController._cancelButton, LUIAppleIDViewController._infoTextField, 
                        LUIAppleIDViewController._passwordLabel, LUIAppleIDViewController._passwordSecureTextField, 
@@ -154,14 +156,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4B877DB8-7E87-3631-8C9E-FE814A931212
+    value:           8347C7FB-902D-3835-BAE4-8014ECDED21F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E30E05FF-39DC-3FCE-A874-60AD2DD74841
+    value:           8FC40DD5-E3B2-3D01-B5F0-B249D7580443
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _LUI2CButtonBack, _LUI2CButtonLogin, _LUICAvatarMask, _LUICAvatarOverlay, 
                        _LUICButtonBack, _LUICButtonCancel, _LUICButtonContinue, _LUICButtonContinuePressed, 
                        _LUICButtonExit, _LUICButtonFMMGo, _LUICButtonFMMGoPressed, 

@@ -143,6 +143,9 @@ may be used later to format volumes inside that container.
 .It Fl E
 Enable volume encryption.
 The volume metadata is also encrypted.
+.It Fl D
+Opt in of UUID from role.
+The volume UUID will be a based on volume's role, not a random one (the default behavior).
 .It Fl W
 Empty password flag. Must be placed after
 .Fl E
@@ -155,6 +158,8 @@ This option is unsecure because other non-privileged users (on multi-user system
 (use the prompt instead).
 .It Fl F Ar special
 Format as a Fusion device (with the secondary device specified here).
+.It Fl w
+Wait for the volume to be fully published in I/O Registry before returning.
 .It Fl R Ar role
 Set the OS
 .Qq role

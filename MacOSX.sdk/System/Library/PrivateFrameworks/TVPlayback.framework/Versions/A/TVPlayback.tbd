@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           426BF72F-49DC-312A-830D-05B72362C148
+    value:           CD14583F-1266-3CED-B9E8-0F0785586FCF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CF72A50C-81AF-3E13-8FB7-EA4DB8FFBDCB
+    value:           19839DEA-7650-3174-9E84-10CB83308DA7
 install-name:    '/System/Library/PrivateFrameworks/TVPlayback.framework/Versions/A/TVPlayback'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _TVPAVMetadataItemUndeterminedLanguageTag, _TVPDurationIndefinite, 
                        _TVPDurationUnknown, _TVPElapsedTimeLive, _TVPElapsedTimeStart, 
                        _TVPErrorIsFatalSKDError, _TVPErrorIsSKDError, _TVPMediaItemCellularSettingsDidChange, 
@@ -131,18 +131,19 @@ exports:
                        _TVPPlaybackChangeReasonErrorDidOccur, _TVPPlaybackChangeReasonFastForwardedToEndOfMediaItem, 
                        _TVPPlaybackChangeReasonHitBeginningOfPlaylist, _TVPPlaybackChangeReasonHitEndOfPlaylist, 
                        _TVPPlaybackChangeReasonManuallyChanged, _TVPPlaybackChangeReasonNewPlaylist, 
-                       _TVPPlaybackChangeReasonPlaybackDidStall, _TVPPlaybackChangeReasonPlayedToEndOfMediaItem, 
-                       _TVPPlaybackChangeReasonPlayerInvalidated, _TVPPlaybackChangeReasonWaitingForCoordinatedPlayback, 
-                       _TVPPlaybackCurrentMediaItemChangeDidHitEndOfPlaylistKey, 
+                       _TVPPlaybackChangeReasonPlaybackDidStall, _TVPPlaybackChangeReasonPlaybackDidStartBuffering, 
+                       _TVPPlaybackChangeReasonPlayedToEndOfMediaItem, _TVPPlaybackChangeReasonPlayerInvalidated, 
+                       _TVPPlaybackChangeReasonWaitingForCoordinatedPlayback, _TVPPlaybackCurrentMediaItemChangeDidHitEndOfPlaylistKey, 
                        _TVPPlaybackCurrentMediaItemChangeDirectionKey, _TVPPlaybackCurrentMediaItemChangeDitHitBeginningOfPlaylistKey, 
                        _TVPPlaybackCurrentMediaItemChangeReasonKey, _TVPPlaybackCurrentMediaItemDidChangeNotification, 
-                       _TVPPlaybackCurrentMediaItemWillChangeNotification, _TVPPlaybackDidPlayToEndOfMediaItemNotification, 
-                       _TVPPlaybackDidStallNotification, _TVPPlaybackErrorKey, _TVPPlaybackErrorNotification, 
-                       _TVPPlaybackMediaItemDidBecomePreparedNotification, _TVPPlaybackPlaylistDidFinishNotification, 
-                       _TVPPlaybackRateDidChangeNotification, _TVPPlaybackReportingActionTypeExtras, 
-                       _TVPPlaybackReportingActionTypeLibrary, _TVPPlaybackReportingActionTypeLink, 
-                       _TVPPlaybackReportingActionTypePostPlay, _TVPPlaybackReportingActionTypeProductPage, 
-                       _TVPPlaybackReportingActionTypeUpNext, _TVPPlaybackReportingBufferingDidBecomeLikelyToKeepUpNotification, 
+                       _TVPPlaybackCurrentMediaItemWillChangeNotification, _TVPPlaybackDatePriorToSeekKey, 
+                       _TVPPlaybackDidPlayToEndOfMediaItemNotification, _TVPPlaybackDidStallNotification, 
+                       _TVPPlaybackErrorKey, _TVPPlaybackErrorNotification, _TVPPlaybackMediaItemDidBecomePreparedNotification, 
+                       _TVPPlaybackPlaylistDidFinishNotification, _TVPPlaybackRateDidChangeNotification, 
+                       _TVPPlaybackReportingActionTypeExtras, _TVPPlaybackReportingActionTypeLibrary, 
+                       _TVPPlaybackReportingActionTypeLink, _TVPPlaybackReportingActionTypePostPlay, 
+                       _TVPPlaybackReportingActionTypeProductPage, _TVPPlaybackReportingActionTypeUpNext, 
+                       _TVPPlaybackReportingBufferingDidBecomeLikelyToKeepUpNotification, 
                        _TVPPlaybackReportingBufferingWillStartNotification, _TVPPlaybackReportingEventBookmarkSync, 
                        _TVPPlaybackReportingEventBookmarkSyncPerformed, _TVPPlaybackReportingEventBumperTextDisplay, 
                        _TVPPlaybackReportingEventBumperVideoDisplay, _TVPPlaybackReportingEventBuyProduct, 
@@ -170,16 +171,17 @@ exports:
                        _TVPPlaybackReportingEventTimeSinceLastBookmarkSync, _TVPPlaybackReportingEventTotalStartupSequence, 
                        _TVPPlaybackReportingEventUserPlayToLoadingInitiation, _TVPPlaybackReportingEventValueCancelled, 
                        _TVPPlaybackReportingEventValueError, _TVPPlaybackReportingEventValueSuccess, 
-                       _TVPPlaybackReportingEventWaitingForTimeControlStatus, _TVPPlaybackStateChangeReasonKey, 
-                       _TVPPlaybackStateDidChangeNotification, _TVPPlaybackStateNewRateKey, 
-                       _TVPPlaybackStateNewStateKey, _TVPPlaybackStateOldStateKey, 
-                       _TVPPlaybackStateWillChangeNotification, _TVPPlaybackWillStopDueToErrorKey, 
-                       _TVPPlayerExternalPlaybackTypeDidChangeNotification, _TVPPlayerItemReachedTimeToPauseBufferingNotification, 
-                       _TVPPlayerItemReachedTimeToPausePlaybackNotification, _TVPPlayerReporterMediaIDsExpirationDomain, 
-                       _TVPPlayerReporterMediaIDsExpirationKey, _TVPPlayerStillImageDidChangeNotification, 
-                       _TVPPlayerStillImageKey, _TVPPlayerUnqueueudPlayerItemReadyNotification, 
-                       _TVPPlaylistDidHitBeginningKey, _TVPPlaylistDidHitEndKey, 
-                       _TVPPlaylistDirectionKey, _TVPPlaylistMediaChangeRequestedNotification, 
+                       _TVPPlaybackReportingEventWaitingForTimeControlStatus, _TVPPlaybackSeekTargetTimeKey, 
+                       _TVPPlaybackStateChangeReasonKey, _TVPPlaybackStateDidChangeNotification, 
+                       _TVPPlaybackStateNewRateKey, _TVPPlaybackStateNewStateKey, 
+                       _TVPPlaybackStateOldStateKey, _TVPPlaybackStateWillChangeNotification, 
+                       _TVPPlaybackTimePriorToSeekKey, _TVPPlaybackWillStopDueToErrorKey, 
+                       _TVPPlayerCurrentMediaItemWillSeekNotification, _TVPPlayerExternalPlaybackTypeDidChangeNotification, 
+                       _TVPPlayerItemReachedTimeToPauseBufferingNotification, _TVPPlayerItemReachedTimeToPausePlaybackNotification, 
+                       _TVPPlayerReporterMediaIDsExpirationDomain, _TVPPlayerReporterMediaIDsExpirationKey, 
+                       _TVPPlayerStillImageDidChangeNotification, _TVPPlayerStillImageKey, 
+                       _TVPPlayerUnqueueudPlayerItemReadyNotification, _TVPPlaylistDidHitBeginningKey, 
+                       _TVPPlaylistDidHitEndKey, _TVPPlaylistDirectionKey, _TVPPlaylistMediaChangeRequestedNotification, 
                        _TVPReachabilityMonitorReachabilityDidChange, _TVPReachabilityMonitorWifiDidChange, 
                        _TVPSKDDeviceLimitErrorUserInfoKey, _TVPSKDErrorDomain, _TVPSKDErrorWithCode, 
                        _TVPStateMachineContextKey, _TVPStateMachineNewStateKey, _TVPStateMachineOldStateKey, 

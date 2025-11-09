@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E965D4DD-9CE6-3728-B8C2-2711713E1CDF
+    value:           425D7C6B-F4EA-3C08-B507-097664F5A023
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           680BBDA3-81D0-3453-B65C-E5CE692A63F1
+    value:           61435014-01B5-3DB9-95EC-D84872A08C8F
 install-name:    '/System/Library/PrivateFrameworks/PSNormalizer.framework/Versions/A/Libraries/libAGM.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AGMApplyFunction, _AGMCleanup, _AGMColorSpaceAddRef, _AGMColorSpaceEqual, 
                        _AGMColorSpaceFillRange, _AGMColorSpaceGetBaseCs, _AGMColorSpaceGetComponents, 
                        _AGMColorSpaceGetDeviceN, _AGMColorSpaceGetFamily, _AGMColorSpaceGetICC, 

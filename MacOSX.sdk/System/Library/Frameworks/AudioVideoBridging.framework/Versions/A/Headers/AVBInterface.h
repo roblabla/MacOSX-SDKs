@@ -2,7 +2,7 @@
 //  AVBInterface.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2010-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 				AVBInterface objects should not be directly created as they cannot provide full functionality, instead a concrete
 				subclass should be instantiated.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVBInterface : NSObject
 {
 }

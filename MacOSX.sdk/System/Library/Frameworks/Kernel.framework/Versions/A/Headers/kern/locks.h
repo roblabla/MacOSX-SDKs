@@ -30,18 +30,19 @@
 #define _KERN_LOCKS_H_
 
 #include <sys/cdefs.h>
+#include <sys/appleapiopts.h>
 
+#include <mach/boolean.h>
+#include <machine/locks.h>
+
+#include <kern/kern_types.h>
+#include <kern/lock_attr.h>
+#include <kern/lock_group.h>
+#include <kern/lock_mtx.h>
+#include <kern/lock_rw.h>
+#include <kern/lock_types.h>
 
 __BEGIN_DECLS
-
-#include <sys/appleapiopts.h>
-#include <mach/boolean.h>
-#include <kern/kern_types.h>
-#include <kern/lock_group.h>
-#include <machine/locks.h>
-#include <kern/lock_types.h>
-#include <kern/lock_attr.h>
-#include <kern/lock_rw.h>
 
 #define decl_lck_spin_data(class, name)     class lck_spin_t name
 
@@ -93,69 +94,20 @@ extern wait_result_t    lck_spin_sleep_deadline(
 	uint64_t                deadline);
 
 
-#define decl_lck_mtx_data(class, name)     class lck_mtx_t name
-
-extern lck_mtx_t        *lck_mtx_alloc_init(
-	lck_grp_t               *grp,
-	lck_attr_t              *attr);
-
-extern void             lck_mtx_init(
-	lck_mtx_t               *lck,
-	lck_grp_t               *grp,
-	lck_attr_t              *attr);
-extern void             lck_mtx_lock(
-	lck_mtx_t               *lck);
-
-extern void             lck_mtx_unlock(
-	lck_mtx_t               *lck);
-
-extern void             lck_mtx_destroy(
-	lck_mtx_t               *lck,
-	lck_grp_t               *grp);
-
-extern void             lck_mtx_free(
-	lck_mtx_t               *lck,
-	lck_grp_t               *grp);
-
-extern wait_result_t    lck_mtx_sleep(
-	lck_mtx_t               *lck,
-	lck_sleep_action_t      lck_sleep_action,
-	event_t                 event,
-	wait_interrupt_t        interruptible);
-
-extern wait_result_t    lck_mtx_sleep_deadline(
-	lck_mtx_t               *lck,
-	lck_sleep_action_t      lck_sleep_action,
-	event_t                 event,
-	wait_interrupt_t        interruptible,
-	uint64_t                deadline);
-
-
-extern void             lck_mtx_assert(
-	lck_mtx_t               *lck,
-	unsigned                int    type);
-
 #if MACH_ASSERT
-#define LCK_MTX_ASSERT(lck, type) lck_mtx_assert((lck),(type))
 #define LCK_SPIN_ASSERT(lck, type) lck_spin_assert((lck),(type))
 #else /* MACH_ASSERT */
-#define LCK_MTX_ASSERT(lck, type)
 #define LCK_SPIN_ASSERT(lck, type)
 #endif /* MACH_ASSERT */
 
 #if DEBUG
-#define LCK_MTX_ASSERT_DEBUG(lck, type) lck_mtx_assert((lck),(type))
 #define LCK_SPIN_ASSERT_DEBUG(lck, type) lck_spin_assert((lck),(type))
 #else /* DEBUG */
-#define LCK_MTX_ASSERT_DEBUG(lck, type)
 #define LCK_SPIN_ASSERT_DEBUG(lck, type)
 #endif /* DEBUG */
 
 #define LCK_ASSERT_OWNED                1
 #define LCK_ASSERT_NOTOWNED             2
-
-#define LCK_MTX_ASSERT_OWNED    LCK_ASSERT_OWNED
-#define LCK_MTX_ASSERT_NOTOWNED LCK_ASSERT_NOTOWNED
 
 
 __END_DECLS

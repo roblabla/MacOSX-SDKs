@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2020 Apple Inc. All rights reserved.
+	Copyright 2010-2022 Apple Inc. All rights reserved.
 
 */
 
@@ -93,9 +93,17 @@ AV_INIT_UNAVAILABLE
 /* Specifies the aperture mode for the generated image.  Default is AVAssetImageGeneratorApertureModeCleanAperture. */
 @property (nonatomic, copy, nullable) AVAssetImageGeneratorApertureMode apertureMode;
 
-/* Specifies the video composition to use when extracting images from assets with multiple video tracks.
-   If no videoComposition is specified, only the first enabled video track will be used.
-   If a videoComposition is specified, the value of appliesPreferredTrackTransform is ignored. */
+/*!
+ @property		videoComposition
+ @abstract		Specifies the video composition to use when extracting images from assets with multiple video tracks.
+ @discussion	If no videoComposition is specified, only the first enabled video track will be used.
+				If a videoComposition is specified, the value of appliesPreferredTrackTransform is ignored.
+				This property throws an exception if a video composition is set with any of the following property values:
+					- "renderScale" is not equal to one
+					- "renderSize" width or height is less than zero
+					- "frameDuration" is invalid or less than or equal to zero
+					- "sourceTrackIDForFrameTiming" is less than zero
+ */
 @property (nonatomic, copy, nullable) AVVideoComposition *videoComposition;
 
 /* Indicates the custom video compositor instance used, if any */
@@ -165,7 +173,7 @@ AV_INIT_UNAVAILABLE
  
 		On iOS and tvOS, it is particularly important to avoid blocking.  To preserve responsiveness, a synchronous request that blocks for too long (eg, a request to generate an image from an asset on a slow HTTP server) may lead to media services being reset.
 */
-- (nullable CGImageRef)copyCGImageAtTime:(CMTime)requestedTime actualTime:(nullable CMTime *)actualTime error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED;
+- (nullable CGImageRef)copyCGImageAtTime:(CMTime)requestedTime actualTime:(nullable CMTime *)actualTime error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_DEPRECATED_WITH_REPLACEMENT("generateCGImageAsynchronouslyForTime:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 /* error object indicates the reason for failure if the result is AVAssetImageGeneratorFailed */
 typedef void (^AVAssetImageGeneratorCompletionHandler)(CMTime requestedTime, CGImageRef _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError * _Nullable error);
@@ -183,6 +191,20 @@ typedef void (^AVAssetImageGeneratorCompletionHandler)(CMTime requestedTime, CGI
 					The generated image is not retained.  Clients should retain the image if they wish it to persist after the completion handler returns.
 */
 - (void)generateCGImagesAsynchronouslyForTimes:(NSArray<NSValue *> *)requestedTimes completionHandler:(AVAssetImageGeneratorCompletionHandler)handler NS_SWIFT_DISABLE_ASYNC;
+
+/*!
+	@method			generateCGImageAsynchronouslyForTime:completionHandler:
+	@abstract		Returns a CGImageRef for an asset at or near the specified time.
+	@param			requestedTime
+					A CMTime, specifying the asset time at which an image is requested.
+	@param			handler
+					A block that will be called when the image request is complete.
+	@discussion		The client will receive exactly one handler callback for requestedTime.
+					Changes to generator properties (snap behavior, maximum size, etc...) will not affect outstanding asynchronous image generation requests.
+					The generated image is not retained.  Clients should retain the image if they wish it to persist after the completion handler returns.
+					If image generation succeeds, the `image` parameter to the completion handler will be non-NULL and the `error` parameter will be nil.  If image generation fails or was cancelled, the `image` parameter will be NULL and the `error` parameter will describe what went wrong.  For cancelled images, the returned error will be AVErrorOperationCancelled.
+*/
+- (void)generateCGImageAsynchronouslyForTime:(CMTime)requestedTime completionHandler:(void (^)(CGImageRef _Nullable image, CMTime actualTime, NSError * _Nullable error))handler NS_REFINED_FOR_SWIFT_ASYNC(2) API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method			cancelAllCGImageGeneration

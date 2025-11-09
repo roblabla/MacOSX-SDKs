@@ -95,6 +95,12 @@ PDFKIT_EXTERN PDFDocumentWriteOption const PDFDocumentUserPasswordOption PDFKIT_
                                                                                                                 // Users can have limited access to modify, print, or write the file.
 PDFKIT_EXTERN PDFDocumentWriteOption const PDFDocumentAccessPermissionsOption PDFKIT_AVAILABLE(12_0, 15_0);     // NSNumber containing a PDFAccessPermissions
 
+PDFKIT_EXTERN PDFDocumentWriteOption const PDFDocumentBurnInAnnotationsOption PDFKIT_AVAILABLE(13_0, 16_0);    // @YES to enable, disabled by default
+                                                                                                                // If enabled, annotations will be rendered into the content stream and NOT saved as annotations
+PDFKIT_EXTERN PDFDocumentWriteOption const PDFDocumentSaveTextFromOCROption PDFKIT_AVAILABLE(13_0, 16_0);      // @YES to enable, disabled by default
+                                                                                                                // If enabled, OCR will be performed on all pages on which it has not been done already and saved as invisible, but selectable. text
+
+
 // Some PDF access permissions are non-strict supersets of other permissions. Granting access to a superset
 // permission also grants access to permission(s) it is a superset of. These permissions are as follows:
 //

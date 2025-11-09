@@ -371,7 +371,7 @@ enum
     If the SCSI Protocol Services layer supports link retrain, then the protocol
     services layer should report true.
     */
-    kSCSIProtocolFeature_ProtocolSpecificLinkRetrain        = 17
+    kSCSIProtocolFeature_ProtocolSpecificLinkRetrain        = 17,
 
 };
 

@@ -5,6 +5,11 @@
    All rights reserved.
 */
 
+#ifndef CIVECTOR_H
+#define CIVECTOR_H
+
+#ifdef __OBJC__
+
 #import <CoreImage/CoreImageDefines.h>
 #import <Foundation/Foundation.h>
 
@@ -83,3 +88,7 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif /* __OBJC__ */
+
+#endif /* CIVECTOR_H */

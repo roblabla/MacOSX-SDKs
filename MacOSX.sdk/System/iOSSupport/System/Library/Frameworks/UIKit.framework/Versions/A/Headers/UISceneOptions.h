@@ -11,7 +11,7 @@
 
 @class UIScene, UIOpenURLContext, UNNotificationResponse, UIApplicationShortcutItem, CKShareMetadata, UIEventAttribution;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #pragma mark - UISceneConnectionOptions
 // This object is vended to your application by UIKit when a UIScene connects to a session
@@ -82,9 +82,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 // This object is created by your application and passed with a UISceneSession activation request
 
 typedef NS_ENUM(NSInteger, UISceneCollectionJoinBehavior) {
-    UISceneCollectionJoinBehaviorAutomatic, // The scene follows system preferences for joining collections.
+    UISceneCollectionJoinBehaviorAutomatic, // The scene follows system settings for joining collections.
     UISceneCollectionJoinBehaviorPreferred, // If requestingScene is set, add the new scene to its collection and activate it. Otherwise attempt to join a compatible collection.
-    UISceneCollectionJoinBehaviorDisallowed, // Create a new collection for the scene, ignoring system preferences.
+    UISceneCollectionJoinBehaviorDisallowed, // Create a new collection for the scene, ignoring system settings.
     UISceneCollectionJoinBehaviorPreferredWithoutActivating, // If requestingScene is set, add the new scene without deactivating the requestingScene. Otherwise behaves the same as preferred. For example, in Catalyst this could be used to open a link in a new tab in the background.
 }  API_AVAILABLE(macCatalyst(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
@@ -103,7 +103,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @interface UISceneDestructionRequestOptions : NSObject
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UISceneOptions.h>

@@ -15,17 +15,6 @@ extern NSString * const CalAlarmActionSound NS_DEPRECATED_MAC(10_5, 10_8);
 
 
 @interface CalAlarm : NSObject <NSCopying>
-{
-    @private
-    id _objectID;
-    void *_reserved;
-    NSString *_action;
-    NSString *_sound;
-    NSString *_emailAddress; 
-    NSURL *_url;
-    NSTimeInterval _relativeTrigger;
-    NSDate *_absoluteTrigger;
-}
 
 + (id)alarm NS_DEPRECATED_MAC(10_5, 10_8);
 

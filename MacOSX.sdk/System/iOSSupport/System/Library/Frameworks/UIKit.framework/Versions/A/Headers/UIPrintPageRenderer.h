@@ -1,4 +1,4 @@
-#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<UIKitCore/UIPrintPageRenderer.h>)
+#if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<PrintKitUI/UIPrintPageRenderer.h>)
 //
 //  UIPrintPageRenderer.h
 //  UIKit
@@ -60,5 +60,5 @@ UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 NS_ASSUME_NONNULL_END
 
 #else
-#import <UIKitCore/UIPrintPageRenderer.h>
+#import <PrintKitUI/UIPrintPageRenderer.h>
 #endif

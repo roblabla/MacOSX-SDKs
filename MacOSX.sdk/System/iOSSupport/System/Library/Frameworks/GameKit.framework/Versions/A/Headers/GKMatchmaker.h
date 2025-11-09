@@ -55,11 +55,11 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 /// Will return nil if the player is underage or restricted.
 @property(copy, nullable)   NSString *inviteMessage NS_AVAILABLE(10_8, 6_0);
 
-/// Default number of players to use during matchmaking.  If not set we default to maxPlayers
+/// Default number of players to use during matchmaking. If not set we will default to the number that the player previously set for this game, or maxPlayers.
 @property(assign) NSUInteger defaultNumberOfPlayers NS_AVAILABLE(10_8, 6_0);
 
-/// Whether or not a match will be created only using auto-match.  If YES, then a player will not be able to
-/// invite anyone (including contacts, friends, and nearby players) to the match, but rely on auto-matching to
+/// Whether or not a match will be created only using automatch.  If YES, then a player will not be able to
+/// invite anyone (including contacts, friends, and nearby players) to the match, but rely on automatching to
 /// find players for the match.  Default is NO.
 @property(assign) BOOL restrictToAutomatch API_DEPRECATED("Set the matchmakingMode of GKMatchmakerViewController instead.", ios(13.0, 14.0), tvos(13.0, 14.0), macosx(10.15, 11.0));
 
@@ -111,7 +111,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 @end
 
 
-/// GKMatchmaker is a singleton object to manage match creation from invites and auto-matching.
+/// GKMatchmaker is a singleton object to manage match creation from invites and automatching.
 NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 @interface GKMatchmaker : NSObject
 
@@ -124,7 +124,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 /// 2. Invite cancelled
 - (void)matchForInvite:(GKInvite *)invite completionHandler:(void(^__nullable)(GKMatch * __nullable match, NSError * __nullable error))completionHandler NS_AVAILABLE(10_9, 6_0);
 
-/// Auto-matching or invites to find a peer-to-peer match for the specified request. Error will be nil on success:
+/// Automatching or invites to find a peer-to-peer match for the specified request. Error will be nil on success:
 /// Possible reasons for error:
 /// 1. Communications failure
 /// 2. Unauthenticated player
@@ -132,7 +132,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 /// Note that the players property on the returned GKMatch instance will only contain connected players. It will initially be empty as players are connecting. Implement the GKMatchDelegate method match:player:didChangeConnectionState: to listen for updates to the GKMatch instance's players property.
 - (void)findMatchForRequest:(GKMatchRequest *)request withCompletionHandler:(void(^__nullable)(GKMatch * __nullable match, NSError * __nullable error))completionHandler;
 
-/// Auto-matching or invites for host-client match request. This returns a list of player identifiers to be included in the match. Determination and communication with the host is not part of this API.
+/// Automatching or invites for host-client match request. This returns a list of player identifiers to be included in the match. Determination and communication with the host is not part of this API.
 /// When inviting, no player identifiers will be returned. Player responses will be reported via the inviteeResponseHandler.
 /// Possible reasons for error:
 /// 1. Communications failure
@@ -140,7 +140,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 /// 3. Timeout
 - (void)findPlayersForHostedRequest:(GKMatchRequest *)request withCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable players, NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 8_0);
 
-/// Auto-matching or invites to add additional players to a peer-to-peer match for the specified request. Error will be nil on success:
+/// Automatching or invites to add additional players to a peer-to-peer match for the specified request. Error will be nil on success:
 /// Possible reasons for error:
 /// 1. Communications failure
 /// 2. Timeout

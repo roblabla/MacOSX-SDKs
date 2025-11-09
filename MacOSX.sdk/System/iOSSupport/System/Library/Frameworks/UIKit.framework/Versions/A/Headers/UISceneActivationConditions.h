@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @interface UISceneActivationConditions : NSObject <NSSecureCoding>
@@ -34,7 +34,7 @@ UIKIT_EXTERN @interface NSUserActivity (UISceneActivationConditions)
 @property (nullable, nonatomic, copy) NSString *targetContentIdentifier API_AVAILABLE(ios(13.0)); //  default nil
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UISceneActivationConditions.h>

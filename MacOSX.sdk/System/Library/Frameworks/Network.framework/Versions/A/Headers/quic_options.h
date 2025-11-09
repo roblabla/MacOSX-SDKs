@@ -133,6 +133,40 @@ nw_quic_set_stream_is_unidirectional(nw_protocol_options_t options,
 									 bool is_unidirectional);
 
 /*!
+ * @function nw_quic_get_stream_is_datagram
+ *
+ * @abstract
+ *		Get whether or not the QUIC stream is a QUIC datagram flow.
+ *
+ * @param options
+ *		An nw_protocol_options_t for QUIC.
+ *
+ * @result is_datagram
+ *		True if the QUIC stream is a QUIC datagram flow.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+bool
+nw_quic_get_stream_is_datagram(nw_protocol_options_t options);
+
+/*!
+ * @function nw_quic_set_stream_is_datagram
+ *
+ * @abstract
+ *		Set whether or not the QUIC stream should be a QUIC datagram flow.
+ *		Only one QUIC datagram flow can be created per connection.
+ *
+ * @param options
+ *		An nw_protocol_options_t for QUIC.
+ *
+ * @param is_datagram
+ *		A boolean to indicate whether or not the QUIC stream should be a QUIC datagram flow.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+void
+nw_quic_set_stream_is_datagram(nw_protocol_options_t options,
+							   bool is_datagram);
+
+/*!
  * @function nw_quic_get_initial_max_data
  *
  * @abstract
@@ -420,6 +454,45 @@ void
 nw_quic_set_initial_max_stream_data_unidirectional(nw_protocol_options_t options,
 												   uint64_t initial_max_stream_data_unidirectional);
 
+/*!
+ * @function nw_quic_get_max_datagram_frame_size
+ *
+ * @abstract
+ *		Get the max_datagram_frame_size transport parameter
+ *		on a QUIC connection.
+ *
+ * @param options
+ *		An nw_protocol_options_t for QUIC.
+ *
+ * @result
+ * 		If greater than zero, the max_datagram_frame_size value indicates that
+ * 		DATAGRAM frames are supported, and describes the maximum number
+ * 		of bytes that a single DATAGRAM frame can contain.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+uint16_t
+nw_quic_get_max_datagram_frame_size(nw_protocol_options_t options);
+
+/*!
+ * @function nw_quic_set_max_datagram_frame_size
+ *
+ * @abstract
+ *		Set the max_datagram_frame_size transport parameter
+ *		on a QUIC connection.
+ *
+ * @param options
+ *		An nw_protocol_options_t for QUIC.
+ *
+ * @param max_datagram_frame_size
+ * 		If greater than zero, the max_datagram_frame_size value indicates that
+ * 		DATAGRAM frames are supported, and describes the maximum number
+ * 		of bytes that a single DATAGRAM frame can contain.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+void
+nw_quic_set_max_datagram_frame_size(nw_protocol_options_t options,
+									uint16_t max_datagram_frame_size);
+
 #pragma mark - QUIC Metadata
 
 /**
@@ -502,7 +575,7 @@ nw_quic_get_stream_id(nw_protocol_metadata_t metadata);
  *        Returns the type of the QUIC stream, stored in nw_quic_stream_type_t.
  *        If the type can not be determined, returns nw_quic_stream_type_unknown.
  */
-API_UNAVAILABLE(macos, ios, watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
 uint8_t
 nw_quic_get_stream_type(nw_protocol_metadata_t stream_metadata);
 
@@ -655,6 +728,22 @@ nw_quic_get_remote_max_streams_bidirectional(nw_protocol_metadata_t metadata);
 API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
 uint64_t
 nw_quic_get_remote_max_streams_unidirectional(nw_protocol_metadata_t metadata);
+
+/*!
+ * @function nw_quic_get_stream_usable_datagram_frame_size
+ *
+ * @abstract
+ *		Get the usable size of a datagram frame from a QUIC datagram flow.
+ *
+ * @param metadata
+ *		A nw_protocol_metadata_t for QUIC.
+ *
+ * @result
+ *		Returns the usable datagram frame size.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+uint16_t
+nw_quic_get_stream_usable_datagram_frame_size(nw_protocol_metadata_t metadata);
 
 /*!
  * @function nw_quic_get_application_error

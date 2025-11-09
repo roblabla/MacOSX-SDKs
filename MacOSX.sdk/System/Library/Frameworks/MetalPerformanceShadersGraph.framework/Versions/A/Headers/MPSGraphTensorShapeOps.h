@@ -49,13 +49,19 @@ MPS_SWIFT_NAME( reshape(_:shape:name:) );
 -(MPSGraphTensor *) reshapeTensor:(MPSGraphTensor *) tensor
                   withShapeTensor:(MPSGraphTensor *) shapeTensor
                              name:(NSString * _Nullable) name
-MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 MPS_SWIFT_NAME( reshape(_:shapeTensor:name:) );
 
 -(MPSGraphTensor *) transposeTensor:(MPSGraphTensor *) tensor
                           dimension:(NSUInteger) dimensionIndex
                       withDimension:(NSUInteger) dimensionIndex2
                                name:(NSString * _Nullable) name;
+
+-(MPSGraphTensor *) transposeTensor:(MPSGraphTensor *) tensor
+                        permutation:(NSArray<NSNumber *> *) permutation
+                               name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))
+MPS_SWIFT_NAME( transpose(_:permutation:name:) );
 
 -(MPSGraphTensor *) sliceTensor:(MPSGraphTensor *) tensor
                       dimension:(NSUInteger) dimensionIndex
@@ -239,6 +245,37 @@ MPS_SWIFT_NAME( reshape(_:shapeTensor:name:) );
                                             rightPadding:(MPSShape *) rightPadding
                                                     name:(NSString * _Nullable) name;
 
+/*!
+ *  @abstract   Create space-to-depth2d op and return the result tensor
+ *  @discussion This operation outputs a copy of the `input` tensor, where values from the
+ *              `widthAxis` and `heightAxis` dimensions are moved in spatial blocks of size
+ *              `blockSize` to the `depthAxis` dimension. `usePixelShuffleOrder` can be
+ *              used to control how the data within spatial blocks is ordered in the
+ *              `depthAxis` dimension: with `usePixelShuffleOrder=YES` the values within the
+ *              spatial blocks are stored contiguosly within the `depthAxis` dimension whereas
+ *              otherwise they are stored interleaved with existing values in the `depthAxis`
+ *              dimension.
+ *              This operation is the inverse of `depthToSpace2D`.
+ *
+ *  @param      tensor                                      The input tensor.
+ *  @param      widthAxis                               Axis that defines the fastest running dimension within the block.
+ *  @param      heightAxis                             Axis that defines the 2nd fastest running dimension within the block.
+ *  @param      depthAxis                               Axis that defines the destination dimension, where to copy the blocks.
+ *  @param      blockSize                               Size of the square spatial sub-block.
+ *  @param      usePixelShuffleOrder       Controls layout of the sub-blocks within the depth dimension.
+ *  @param      name                                           The name for the operation.
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *)spaceToDepth2DTensor:(MPSGraphTensor *) tensor
+                              widthAxis:(NSUInteger) widthAxis
+                             heightAxis:(NSUInteger) heightAxis
+                              depthAxis:(NSUInteger) depthAxis
+                              blockSize:(NSUInteger) blockSize
+                   usePixelShuffleOrder:(BOOL)usePixelShuffleOrder
+                                   name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
 -(MPSGraphTensor *)spaceToDepth2DTensor:(MPSGraphTensor *) tensor
                         widthAxisTensor:(MPSGraphTensor *) widthAxisTensor
                        heightAxisTensor:(MPSGraphTensor *) heightAxisTensor
@@ -248,6 +285,37 @@ MPS_SWIFT_NAME( reshape(_:shapeTensor:name:) );
                                    name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
+/*!
+ *  @abstract   Create depth-to-space2d op and return the result tensor
+ *  @discussion This operation outputs a copy of the input tensor, where values from the
+ *              `depthAxis` dimension are moved in spatial blocks of size `blockSize` to the
+ *              `heightAxis` and `widthAxis` dimensions. `usePixelShuffleOrder` can be
+ *              used to control how the data within spatial blocks is ordered in the
+ *              `depthAxis` dimension: with `usePixelShuffleOrder = YES` the values within the
+ *              spatial block are stored contiguosly within the `depthAxis` dimension whereas
+ *              without it they are stored interleaved with existing values in the `depthAxisTensor`
+ *              dimension.
+ *              This operation is the inverse of `spaceToDepth2D`
+ *
+ *  @param      tensor                                      The input tensor.
+ *  @param      widthAxis                               Axis that defines the fastest running dimension within the block.
+ *  @param      heightAxis                             Axis that defines the 2nd fastest running dimension within the block.
+ *  @param      depthAxis                               Axis that defines the source dimension, from which to copy the blocks.
+ *  @param      blockSize                               Size of the square spatial sub-block.
+ *  @param      usePixelShuffleOrder       Controls layout of the sub-blocks within the depth dimension.
+ *  @param      name                                           The name for the operation.
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *)depthToSpace2DTensor:(MPSGraphTensor *) tensor
+                              widthAxis:(NSUInteger) widthAxis
+                             heightAxis:(NSUInteger) heightAxis
+                              depthAxis:(NSUInteger) depthAxis
+                              blockSize:(NSUInteger)blockSize
+                   usePixelShuffleOrder:(BOOL)usePixelShuffleOrder
+                                   name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
 -(MPSGraphTensor *)depthToSpace2DTensor:(MPSGraphTensor *) tensor
                         widthAxisTensor:(MPSGraphTensor *) widthAxisTensor
                        heightAxisTensor:(MPSGraphTensor *) heightAxisTensor
@@ -257,23 +325,87 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
                                    name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
--(MPSGraphTensor *)spaceToDepth2DTensor:(MPSGraphTensor *) tensor
-                              widthAxis:(NSUInteger) widthAxis
-                             heightAxis:(NSUInteger) heightAxis
-                              depthAxis:(NSUInteger) depthAxis
-                              blockSize:(NSUInteger)blockSize
-                   usePixelShuffleOrder:(BOOL)usePixelShuffleOrder
-                                   name:(NSString * _Nullable) name
-MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+/*!
+ *  @abstract   Create space-to-batch op and return the result tensor.
+ *  @discussion This operation outputs a copy of the `input` tensor, where values from the
+ *              `spatialAxes` (for `usePixelShuffleOrder=YES`1,2 or 3 axes supported, otherwise
+ *              limited only by MPSNDArray rank limitations) dimensions are moved in spatial blocks with
+ *              rectangular size defined by `blockDimensions` to the `batchAxis` dimension.
+ *              `usePixelShuffleOrder` can be used to control how the data within spatial blocks is ordered
+ *              in the `batchAxis` dimension: with `usePixelShuffleOrder=YES` the values within the
+ *              spatial blocks are stored contiguosly within the `batchAxis` dimension whereas
+ *              otherwise they are stored interleaved with existing values in the `batchAxis`
+ *              dimension.
+ *              Note: This operation is the inverse of `batchToSpace`.
+ *              Note: This operation is a generalization of `depthToSpace2D`.
+ *
+ *  @param      tensor                                      The input tensor.
+ *  @param      spatialAxes                           Axes that define the dimensions containing the spatial blocks.
+ *  @param      batchAxis                               Axis that defines the destination dimension, where to copy the blocks.
+ *  @param      blockDimensions                  Defines the size of the rectangular spatial sub-block.
+ *  @param      usePixelShuffleOrder       Controls layout of the sub-blocks within the batch dimension.
+ *  @param      name                                           The name for the operation.
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *)spaceToBatchTensor:(MPSGraphTensor *) tensor
+                          spatialAxes:(NSArray<NSNumber *> *) spatialAxes
+                            batchAxis:(NSInteger) batchAxis
+                      blockDimensions:(NSArray<NSNumber *> *) blockDimensions
+                 usePixelShuffleOrder:(BOOL)usePixelShuffleOrder
+                                 name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1))
+MPS_SWIFT_NAME( spaceToBatch(_:spatialAxes:batchAxis:blockDimensions:usePixelShuffleOrder:name:));
 
--(MPSGraphTensor *)depthToSpace2DTensor:(MPSGraphTensor *) tensor
-                              widthAxis:(NSUInteger) widthAxis
-                             heightAxis:(NSUInteger) heightAxis
-                              depthAxis:(NSUInteger) depthAxis
-                              blockSize:(NSUInteger)blockSize
-                   usePixelShuffleOrder:(BOOL)usePixelShuffleOrder
-                                   name:(NSString * _Nullable) name
-MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+-(MPSGraphTensor *)spaceToBatchTensor:(MPSGraphTensor *) tensor
+                    spatialAxesTensor:(MPSGraphTensor *) spatialAxesTensor
+                      batchAxisTensor:(MPSGraphTensor *) batchAxisTensor
+                blockDimensionsTensor:(MPSGraphTensor *) blockDimensionsTensor
+                 usePixelShuffleOrder:(BOOL)usePixelShuffleOrder
+                                 name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1))
+MPS_SWIFT_NAME( spaceToBatch(_:spatialAxesTensor:batchAxisTensor:blockDimensionsTensor:usePixelShuffleOrder:name:));
+
+/*!
+ *  @abstract   Create a batch-to-space3d op and return the result tensor.
+ *  @discussion This operation outputs a copy of the input tensor, where values from the
+ *              `batchAxis` dimension are moved in spatial blocks of size `blockDimensions` to the
+ *              `spatialAxes` dimensions (for `usePixelShuffleOrder=YES`1,2 or 3 axes supported,
+ *              otherwise limited only by MPSNDArray rank limitations). `usePixelShuffleOrder`
+ *              can be used to control how the data within spatial blocks is ordered in the
+ *              `batchAxis` dimension: with `usePixelShuffleOrder = YES` the values within the
+ *              spatial block are stored contiguosly within the `batchAxis` dimension whereas
+ *              without it they are stored interleaved with existing values in the `batchAxis`
+ *              dimension.
+ *              Note: This operation is the inverse of `spaceToBatch`.
+ *              Note: This operation is a generalization of `depthToSpace2D`.
+ *
+ *  @param      tensor                                      The input tensor.
+ *  @param      spatialAxes                           Axes that define the dimensions containing the spatial blocks.
+ *  @param      batchAxis                               Axis that defines the source dimension, from which to copy the blocks.
+ *  @param      blockDimensions                  Defines the size of the rectangular spatial sub-block.
+ *  @param      usePixelShuffleOrder       Controls layout of the sub-blocks within the batch dimension.
+ *  @param      name                                           The name for the operation.
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *)batchToSpaceTensor:(MPSGraphTensor *) tensor
+                          spatialAxes:(NSArray<NSNumber *> *) spatialAxes
+                            batchAxis:(NSInteger) batchAxis
+                      blockDimensions:(NSArray<NSNumber *> *) blockDimensions
+                 usePixelShuffleOrder:(BOOL)usePixelShuffleOrder
+                                 name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1))
+MPS_SWIFT_NAME( batchToSpace(_:spatialAxes:batchAxis:blockDimensions:usePixelShuffleOrder:name:));
+
+-(MPSGraphTensor *)batchToSpaceTensor:(MPSGraphTensor *) tensor
+                    spatialAxesTensor:(MPSGraphTensor *) spatialAxesTensor
+                      batchAxisTensor:(MPSGraphTensor *) batchAxisTensor
+                blockDimensionsTensor:(MPSGraphTensor *) blockDimensionsTensor
+                 usePixelShuffleOrder:(BOOL)usePixelShuffleOrder
+                                 name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1))
+MPS_SWIFT_NAME( batchToSpace(_:spatialAxesTensor:batchAxisTensor:blockDimensionsTensor:usePixelShuffleOrder:name:));
 
 /*!
  *  @abstract   Create reverse op and return the result tensor
@@ -424,7 +556,7 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
  */
 -(MPSGraphTensor *)castTensor:(MPSGraphTensor *)tensor
                        toType:(MPSDataType)type
-                         name:(NSString *)name
+                         name:(NSString * _Nullable)name
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
 /*!

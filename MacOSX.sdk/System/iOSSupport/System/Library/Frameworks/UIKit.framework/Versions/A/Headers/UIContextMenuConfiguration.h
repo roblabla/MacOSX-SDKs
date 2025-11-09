@@ -10,7 +10,14 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIAction.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+typedef NS_ENUM(NSInteger, UIContextMenuConfigurationElementOrder) {
+    UIContextMenuConfigurationElementOrderAutomatic = 0,  /// Allows the system to choose the appropriate ordering strategy for the current context.
+    UIContextMenuConfigurationElementOrderPriority,       /// Order menu elements according to priority. Keeping the first element in the UIMenu closest to user's interaction point.
+    UIContextMenuConfigurationElementOrderFixed,          /// Display menu elements using their order in the UIMenu's children array.
+} NS_SWIFT_NAME(UIContextMenuConfiguration.ElementOrder) API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+
 
 @class UIViewController;
 
@@ -31,7 +38,19 @@ typedef UIViewController * _Nullable (^UIContextMenuContentPreviewProvider)(void
 UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @interface UIContextMenuConfiguration : NSObject
 
+/// This configuration's identifier. When representing multiple items in your app, this identifier
+/// corresponds to the primary item (i.e. the one with which the user interacted when invoking the menu).
 @property (nonatomic, readonly) id<NSCopying> identifier;
+
+/// When this menu acts on multiple items, you may include the identifiers of secondary items to display a multi-item menu.
+@property (nonatomic, copy) NSSet<id<NSCopying>> *secondaryItemIdentifiers API_AVAILABLE(ios(16.0));
+
+/// Number of items on which this menu acts. Used to badge a multi-item menu's preview stack.
+/// When unset, this value is determined automatically by the system. Values lower than 2 hide the badge.
+@property (nonatomic) NSInteger badgeCount API_AVAILABLE(ios(16.0));
+
+/// Preferred menu element ordering strategy for this menu.
+@property (nonatomic) UIContextMenuConfigurationElementOrder preferredMenuElementOrder API_AVAILABLE(ios(16.0));
 
 /*!
  * @abstract Returns a UIContextMenuConfiguration.
@@ -47,7 +66,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIContextMenuConfiguration.h>

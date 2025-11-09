@@ -2,7 +2,7 @@
 //  endpoint.h
 //  Network
 //
-//  Copyright (c) 2014-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2022 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_ENDPOINT_H__
@@ -340,6 +340,46 @@ nw_endpoint_create_url(const char *url);
 API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 const char *
 nw_endpoint_get_url(nw_endpoint_t endpoint);
+
+/*!
+ * @function nw_endpoint_copy_txt_record
+ *
+ * @abstract
+ *		Retrieves the TXT record associated with the endpoint, if present.
+ *		TXT records can be populated during browsing and connection
+ *		establishment.
+ *
+ * @param endpoint
+ *		The endpoint object.
+ *
+ * @result
+ *		Returns a retained nw_txt_record_t object if a TXT record
+ *		is associated with this endpoint, or NULL otherwise.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+NW_RETURNS_RETAINED _Nullable nw_txt_record_t
+nw_endpoint_copy_txt_record(nw_endpoint_t endpoint);
+
+/*!
+ * @function nw_endpoint_get_signature
+ *
+ * @abstract
+ *		Retrieves a signed data blob associated with an endpoint.
+ *
+ * @param endpoint
+ *		The endpoint to modify.
+ *
+ * @param out_signature_length
+ *		A pointer to a size_t that will take the length of the signature.
+ *
+ * @result
+ *		Returns a pointer to a buffer of bytes containing a signature,
+ *		or NULL if the endpoint is not signed.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+const uint8_t * _Nullable
+nw_endpoint_get_signature(nw_endpoint_t endpoint,
+						  size_t *out_signature_length);
 
 __END_DECLS
 

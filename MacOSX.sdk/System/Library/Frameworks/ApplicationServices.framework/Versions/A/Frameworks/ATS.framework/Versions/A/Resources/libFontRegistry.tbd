@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           38ACF123-D39A-3A0E-9764-6DED6E3E2A54
+    value:           CFF4B4FD-6018-3043-B14A-51AF0D26DE84
   - target:          x86_64-maccatalyst
-    value:           38ACF123-D39A-3A0E-9764-6DED6E3E2A54
+    value:           CFF4B4FD-6018-3043-B14A-51AF0D26DE84
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A3F4CEA-C3DB-31A5-8750-7747E07F5AF9
+    value:           76EEB2FC-4770-3103-A4A0-2F6310998DCE
   - target:          arm64e-maccatalyst
-    value:           7A3F4CEA-C3DB-31A5-8750-7747E07F5AF9
+    value:           76EEB2FC-4770-3103-A4A0-2F6310998DCE
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistry.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _XTCopyAutoActivatedFontURLs, _XTCopyAutoActivationSearchDirectories, 
                        _XTCopyAvailableFamilyNames, _XTCopyAvailableFamilyNames2, 
                        _XTCopyAvailableFontNames, _XTCopyAvailableFontNames2, _XTCopyAvailableFontURLs, 
@@ -51,17 +51,19 @@ exports:
                        _XTGetScopeForFont, _XTInstallFonts, _XTInstallFonts2, _XTRegisterDataFont, 
                        _XTRegisterFont, _XTRegisterFont2, _XTRegisterFontDirectory, 
                        _XTRegisterFonts, _XTRegisterFonts2, _XTRemoveFonts, _XTRemovePropertiesForFonts, 
-                       _XTRestoreDefaultFonts, _XTRestoreDefaultFonts2, _XTSetAutoActivationSearchDirectories, 
-                       _XTSetAutoActivationSetting, _XTSetFrameworkFontChangedCallback, 
-                       _XTSetPropertiesForFonts, _XTUnregisterDataFont, _XTUnregisterFont, 
-                       _XTUnregisterFont2, _XTUnregisterFontDirectory, _XTUnregisterFonts, 
-                       _XTUnregisterFonts2, ___crashreporter_info__, _kXTConfigurationDomainGlobalKey, 
+                       _XTReset, _XTRestoreDefaultFonts, _XTRestoreDefaultFonts2, 
+                       _XTSetAutoActivationSearchDirectories, _XTSetAutoActivationSetting, 
+                       _XTSetFrameworkFontChangedCallback, _XTSetPropertiesForFonts, 
+                       _XTUnregisterDataFont, _XTUnregisterFont, _XTUnregisterFont2, 
+                       _XTUnregisterFontDirectory, _XTUnregisterFonts, _XTUnregisterFonts2, 
+                       ___crashreporter_info__, _kXTConfigurationDomainGlobalKey, 
                        _kXTConfigurationDomainLocalKey, _kXTConfigurationModeKey, 
                        _kXTConfigurationRegistrationAllowedKey, _kXTFontAssetType, 
                        _kXTFontPropertyBookmark, _kXTFontPropertyCharacterSet, _kXTFontPropertyCopyrightName, 
                        _kXTFontPropertyDesignLanguages, _kXTFontPropertyDesignerName, 
-                       _kXTFontPropertyDirectory, _kXTFontPropertyDomain, _kXTFontPropertyDuplicateRanking, 
-                       _kXTFontPropertyEnabled, _kXTFontPropertyFamilyName, _kXTFontPropertyFamilyNameAliases, 
+                       _kXTFontPropertyDirectory, _kXTFontPropertyDomain, _kXTFontPropertyDownloadableStub, 
+                       _kXTFontPropertyDuplicateRanking, _kXTFontPropertyEnabled, 
+                       _kXTFontPropertyFamilyName, _kXTFontPropertyFamilyNameAliases, 
                        _kXTFontPropertyFlags, _kXTFontPropertyFontRef, _kXTFontPropertyForFontsLanguageMap, 
                        _kXTFontPropertyFormat, _kXTFontPropertyFullName, _kXTFontPropertyGlyphCount, 
                        _kXTFontPropertyIgnoreScriptAnalysis, _kXTFontPropertyInstallationKind, 
@@ -81,6 +83,6 @@ exports:
                        _kXTReportKeyStandardFontsNotRestored, _kXTVariationAxisDefaultValue, 
                        _kXTVariationAxisFlagsKey, _kXTVariationAxisHiddenKey, _kXTVariationAxisIdentifier, 
                        _kXTVariationAxisMaxValue, _kXTVariationAxisMinValue, _kXTVariationAxisName ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _XTAuthenticateAsAdminFromExternalAuthorization, _XTMoveFontFilesToDisabledFolder ]
 ...

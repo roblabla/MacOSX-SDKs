@@ -21,4 +21,6 @@
 #if __OBJC2__
 #import <CoreAudioKit/CAInterDeviceAudioViewController.h>
 #import <CoreAudioKit/AUViewController.h>
+#import <CoreAudioKit/AUGenericViewController.h>
 #endif
+

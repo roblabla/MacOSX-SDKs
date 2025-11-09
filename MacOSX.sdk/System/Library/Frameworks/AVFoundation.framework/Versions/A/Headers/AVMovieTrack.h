@@ -4,7 +4,7 @@
 
 	Framework:		AVFoundation
  
-	Copyright 2009-2019 Apple Inc. All rights reserved.
+	Copyright 2009-2022 Apple Inc. All rights reserved.
 
 */
 
@@ -331,6 +331,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 					An AVMovieTrack object that is to be associated with the receiver.
 	@param			trackAssociationType
 					The type of track association to add between the receiver and the specified movieTrack (for instance, AVTrackAssociationTypeChapterList).
+	@discussion		This method throws an exception if the movie track belongs to a different movie.
 */
 - (void)addTrackAssociationToTrack:(AVMovieTrack *)movieTrack type:(AVTrackAssociationType)trackAssociationType;
 
@@ -341,6 +342,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 					An AVMovieTrack object that is associated with the receiver.
 	@param			trackAssociationType
 					The type of track association to remove between the receiver and the specified movieTrack (for instance, AVTrackAssociationTypeChapterList).
+	@discussion		This method throws an exception if the movie track belongs to a different movie.
 */
 - (void)removeTrackAssociationToTrack:(AVMovieTrack *)movieTrack type:(AVTrackAssociationType)trackAssociationType;
 
@@ -357,7 +359,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 					A CMFormatDescription to replace the specified format description.
 	@discussion     You can use this method to make surgical changes to a track's format descriptions, such as adding format description extensions to a format description or changing the audio channel layout of an audio track. You should note that a format description can have extensions of type kCMFormatDescriptionExtension_VerbatimSampleDescription and kCMFormatDescriptionExtension_VerbatimISOSampleEntry; if you modify a copy of a format description, you should delete those extensions from the copy or your changes might be ignored.
  
-					An NSInvalidArgumentException will be thrown if the media type of the new format description does not match the media type of the receiver.
+					This method throws an exception if the media type of the new format description does not match the media type of the receiver.
 */
 - (void)replaceFormatDescription:(CMFormatDescriptionRef)formatDescription withFormatDescription:(CMFormatDescriptionRef)newFormatDescription API_AVAILABLE(macos(10.13), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
@@ -396,6 +398,11 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
                     using CMTimeRangeGetEnd on each to calculate the media TimeRange for -insertMediaTimeRange:intoTimeRange:.
 
                     It's safe for multiple threads to call this method on different tracks at once.
+
+                    This method throws an exception for any of the following reasons:
+                        - the sample buffer's media type does not match the track's media type
+                        - the sample buffer contains image buffers (must contain encoded video)
+                        - the sample buffer contains caption groups (must contain encoded media data)
 */
 - (BOOL)appendSampleBuffer:(CMSampleBufferRef)sampleBuffer decodeTime:(nullable CMTime *)outDecodeTime presentationTime:(nullable CMTime *)outPresentationTime error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.12), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
@@ -452,6 +459,42 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @private
 	AVFragmentedMovieTrackInternal	*_fragmentedMovieTrack __attribute__((unused));
 }
+
+@end
+
+/*!
+ @category AVMutableMovieTrack (SynchronousTrackInterface)
+ @abstract Redeclarations of async-only AVAssetTrack interfaces to allow synchronous usage in the synchronous subclass.
+ @discussion
+	See AVAssetTrack's interface for more information about these interfaces.
+ */
+@interface AVMutableMovieTrack (SynchronousTrackInterface)
+
+- (BOOL)hasMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
+- (nullable AVAssetTrackSegment *)segmentForTrackTime:(CMTime)trackTime;
+- (CMTime)samplePresentationTimeForTrackTime:(CMTime)trackTime;
+- (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format;
+- (NSArray<AVAssetTrack *> *)associatedTracksOfType:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+
+#if __swift__
+@property (nonatomic, readonly) NSArray *formatDescriptions;
+@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.8), ios(5.0), watchos(1.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly, getter=isDecodable) BOOL decodable API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly, getter=isSelfContained) BOOL selfContained;
+@property (nonatomic, readonly) long long totalSampleDataLength;
+@property (nonatomic, readonly) CMTimeRange timeRange;
+@property (nonatomic, readonly) CMTimeScale naturalTimeScale;
+@property (nonatomic, readonly) float estimatedDataRate;
+@property (nonatomic, readonly) BOOL hasAudioSampleDependencies API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly) float nominalFrameRate;
+@property (nonatomic, readonly) CMTime minFrameDuration API_AVAILABLE(macos(10.10), ios(7.0), watchos(1.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly) BOOL requiresFrameReordering API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, copy, readonly) NSArray<AVAssetTrackSegment *> *segments;
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *commonMetadata;
+@property (nonatomic, readonly) NSArray<AVMetadataFormat> *availableMetadataFormats;
+@property (nonatomic, readonly) NSArray<AVTrackAssociationType> *availableTrackAssociationTypes API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly) BOOL canProvideSampleCursors API_AVAILABLE(macos(10.10), ios(16.0), watchos(9.0)) API_UNAVAILABLE(tvos);
+#endif // __swift__
 
 @end
 

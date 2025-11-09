@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A0E025F4-FCE2-3AF1-9707-AC803920A6AF
+    value:           B25E2488-6488-3E8D-AE1C-9804CB7ECFF7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D1DDB723-3B10-315B-B94A-FF54B681A5F4
+    value:           8DB0FC7D-6E76-3218-BD74-F0500DDF4454
 install-name:    '/System/Library/PrivateFrameworks/MorphunSwift.framework/Versions/A/MorphunSwift'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s12MorphunSwift0A5ErrorO012tokenizationC0yACSScACmFWC', 
                        '_$s12MorphunSwift0A5ErrorO5erroryACSScACmFWC', '_$s12MorphunSwift0A5ErrorOMa', 
                        '_$s12MorphunSwift0A5ErrorOMn', '_$s12MorphunSwift0A5ErrorON', 
@@ -73,6 +73,7 @@ exports:
                        '_$s12MorphunSwift20ConfigurationFeatureO19RemoveAllDiacriticsyA2CmFWC', 
                        '_$s12MorphunSwift20ConfigurationFeatureO20RemoveAllPunctuationyA2CmFWC', 
                        '_$s12MorphunSwift20ConfigurationFeatureO26TransliterateToLatinScriptyA2CmFWC', 
+                       '_$s12MorphunSwift20ConfigurationFeatureO27TransliterateToNativeScriptyA2CmFWC', 
                        '_$s12MorphunSwift20ConfigurationFeatureO31LowerCaseBeforeNormalizingWordsyA2CmFWC', 
                        '_$s12MorphunSwift20ConfigurationFeatureO8rawValueACSgSi_tcfC', 
                        '_$s12MorphunSwift20ConfigurationFeatureO8rawValueSivg', '_$s12MorphunSwift20ConfigurationFeatureO8rawValueSivpMV', 
@@ -80,6 +81,7 @@ exports:
                        '_$s12MorphunSwift20ConfigurationFeatureOMa', '_$s12MorphunSwift20ConfigurationFeatureOMn', 
                        '_$s12MorphunSwift20ConfigurationFeatureON', '_$s12MorphunSwift20ConfigurationFeatureOSHAAMc', 
                        '_$s12MorphunSwift20ConfigurationFeatureOSQAAMc', '_$s12MorphunSwift20ConfigurationFeatureOSYAAMc', 
+                       '_$s12MorphunSwift20getDataPathForLocale6localeSS10Foundation0G0V_tF', 
                        '_$s12MorphunSwift22DefaultAnalyzerFactoryC03getD06localeAA012ConfigurableD0C10Foundation6LocaleV_tKFTj', 
                        '_$s12MorphunSwift22DefaultAnalyzerFactoryC03getD06localeAA012ConfigurableD0C10Foundation6LocaleV_tKFTq', 
                        '_$s12MorphunSwift22DefaultAnalyzerFactoryC13configOptionsACSayAA20ConfigurationFeatureOG_tKcfC', 
@@ -92,6 +94,7 @@ exports:
                        '_$s12MorphunSwift22DefaultAnalyzerFactoryCMo', '_$s12MorphunSwift22DefaultAnalyzerFactoryCMu', 
                        '_$s12MorphunSwift22DefaultAnalyzerFactoryCN', '_$s12MorphunSwift22DefaultAnalyzerFactoryCfD', 
                        '_$s12MorphunSwift22DefaultAnalyzerFactoryCfd', '_$s12MorphunSwift22getDataPathForLanguage8languageS2S_tF', 
+                       '_$s12MorphunSwift25registerDataPathForLocale6locale4pathy10Foundation0G0V_SStF', 
                        '_$s12MorphunSwift27registerDataPathForLanguage8language4pathySS_SStF', 
                        '_$s12MorphunSwift5TokenV10cleanValueSSvg', '_$s12MorphunSwift5TokenV10cleanValueSSvpMV', 
                        '_$s12MorphunSwift5TokenV11descriptionSSvg', '_$s12MorphunSwift5TokenV11descriptionSSvpMV', 
@@ -103,6 +106,14 @@ exports:
                        '_$s12MorphunSwift5TokenVMa', '_$s12MorphunSwift5TokenVMn', 
                        '_$s12MorphunSwift5TokenVN', '_$s12MorphunSwift5TokenVs23CustomStringConvertibleAAMc', 
                        '_$s12MorphunSwift5TokenVs28CustomDebugStringConvertibleAAMc', 
+                       '_$s12MorphunSwift6AssetsC010setPathForA08language4pathySS_SStFZTj', 
+                       '_$s12MorphunSwift6AssetsC010setPathForA08language4pathySS_SStFZTq', 
+                       '_$s12MorphunSwift6AssetsC011getPathFromA08languageS2S_tFZTj', 
+                       '_$s12MorphunSwift6AssetsC011getPathFromA08languageS2S_tFZTq', 
+                       '_$s12MorphunSwift6AssetsCMa', '_$s12MorphunSwift6AssetsCMm', 
+                       '_$s12MorphunSwift6AssetsCMn', '_$s12MorphunSwift6AssetsCMo', 
+                       '_$s12MorphunSwift6AssetsCMu', '_$s12MorphunSwift6AssetsCN', 
+                       '_$s12MorphunSwift6AssetsCfD', '_$s12MorphunSwift6AssetsCfd', 
                        '_$s12MorphunSwift8LogLevelO4INFOyA2CmFWC', '_$s12MorphunSwift8LogLevelO5DEBUGyA2CmFWC', 
                        '_$s12MorphunSwift8LogLevelO5ERRORyA2CmFWC', '_$s12MorphunSwift8LogLevelO5TRACEyA2CmFWC', 
                        '_$s12MorphunSwift8LogLevelO7DISABLEyA2CmFWC', '_$s12MorphunSwift8LogLevelO7WARNINGyA2CmFWC', 
@@ -126,6 +137,8 @@ exports:
                        '_$s12MorphunSwift9TokenizerC12maxInputSizes5Int32VvpMV', 
                        '_$s12MorphunSwift9TokenizerC12maxInputSizes5Int32VvsTj', 
                        '_$s12MorphunSwift9TokenizerC12maxInputSizes5Int32VvsTq', 
+                       '_$s12MorphunSwift9TokenizerC17tokenizeWithError6stringAA10TokenChainCSS_tKFTj', 
+                       '_$s12MorphunSwift9TokenizerC17tokenizeWithError6stringAA10TokenChainCSS_tKFTq', 
                        '_$s12MorphunSwift9TokenizerC6localeAC10Foundation6LocaleV_tKcfC', 
                        '_$s12MorphunSwift9TokenizerC6localeAC10Foundation6LocaleV_tKcfCTj', 
                        '_$s12MorphunSwift9TokenizerC6localeAC10Foundation6LocaleV_tKcfCTq', 

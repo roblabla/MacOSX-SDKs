@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           70F22B3E-EAC9-3338-81A6-3E6BD8BF8DA6
+    value:           B39E7152-CE0B-35F9-8B4B-67A142361D69
   - target:          x86_64-maccatalyst
-    value:           70F22B3E-EAC9-3338-81A6-3E6BD8BF8DA6
+    value:           B39E7152-CE0B-35F9-8B4B-67A142361D69
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F5C72412-70FB-312B-8A7C-8C7B59E535C6
+    value:           C9C6570C-7D9D-315D-9A3E-45E1277E764B
   - target:          arm64e-maccatalyst
-    value:           F5C72412-70FB-312B-8A7C-8C7B59E535C6
+    value:           C9C6570C-7D9D-315D-9A3E-45E1277E764B
 install-name:    '/System/Library/PrivateFrameworks/login.framework/Versions/A/login'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/login.framework/Versions/A/Frameworks/loginsupport.framework/Versions/A/loginsupport' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CreateSessionOwnerConnection, _JoinAuditSessionIfNeeded, 
                        _LDCFProcessIDKey, _LFCFAFPHomeDirectoryPathKey, _LFCFAuditSessionIDKey, 
                        _LFCFAuditSessionKey, _LFCFAuditTokenKey, _LFCFCanRunKey, 
@@ -123,21 +123,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E1B1E94C-9144-3E2B-921F-D09CD68F7CA2
+    value:           E71CCE46-BD7F-3F43-9EDB-838247493FFB
   - target:          x86_64-maccatalyst
-    value:           E1B1E94C-9144-3E2B-921F-D09CD68F7CA2
+    value:           E71CCE46-BD7F-3F43-9EDB-838247493FFB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           831CD7C2-527C-31D0-85C4-B28FB20E4FBC
+    value:           2FF1B643-976A-39CF-A570-0E77BF5F4A51
   - target:          arm64e-maccatalyst
-    value:           831CD7C2-527C-31D0-85C4-B28FB20E4FBC
+    value:           2FF1B643-976A-39CF-A570-0E77BF5F4A51
 install-name:    '/System/Library/PrivateFrameworks/login.framework/Versions/A/Frameworks/loginsupport.framework/Versions/A/loginsupport'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DBLoggerMaxFlag, _DBLoggerStartFlag, _DBLoggingGetMaskForController, 
                        _DBLoggingLogWithFormat, _DBLoggingSetLogFileForController, 
                        _DBLoggingSetMaskForController, _DBLoggingSetSignalEnabled, 

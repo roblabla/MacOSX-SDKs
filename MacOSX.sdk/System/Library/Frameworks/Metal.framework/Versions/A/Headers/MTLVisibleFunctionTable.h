@@ -7,7 +7,7 @@
 
 #import <Metal/MTLDefines.h>
 
-
+#import <Metal/MTLTypes.h>
 #import <Metal/MTLResource.h>
 #import <Metal/MTLFunctionHandle.h>
 
@@ -30,6 +30,12 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
 
 API_AVAILABLE(macos(11.0), ios(14.0))
 @protocol MTLVisibleFunctionTable <MTLResource>
+
+/*!
+ @property gpuResourceID
+ @abstract Handle of the GPU resource suitable for storing in an Argument Buffer
+ */
+@property (readonly) MTLResourceID gpuResourceID API_AVAILABLE(macos(13.0), ios(16.0));
 
 - (void)setFunction:(nullable id <MTLFunctionHandle>)function atIndex:(NSUInteger)index;
 

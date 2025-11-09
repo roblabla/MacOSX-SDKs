@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2020 Apple Inc. All rights reserved.
+	Copyright 2010-2020,2022 Apple Inc. All rights reserved.
 
 */
 
@@ -127,6 +127,12 @@ AVF_EXPORT NSString *const AVVideoScalingModeKey /* NSString */								API_AVAIL
 		AVVideoTransferFunction_ITU_R_2100_HLG
 		AVVideoYCbCrMatrix_ITU_R_709_2
 
+	If you require HDR Linear colorimetry, you can use:
+
+	 AVVideoColorPrimaries_ITU_R_2020
+	 AVVideoTransferFunction_Linear
+	 AVVideoYCbCrMatrix_ITU_R_2020
+
 	AVFoundation will color match if the source and destination color properties differ according to the following rules:
  
 	If you want to override the tagging of color properties in the video that you will be processing, set a value for AVVideoColorPropertiesKey:
@@ -153,6 +159,7 @@ AVF_EXPORT NSString *const AVVideoColorPropertiesKey /* NSDictionary, all 3 belo
 		AVF_EXPORT NSString *const AVVideoTransferFunction_SMPTE_240M_1995                                   API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, tvos, watchos);
 		AVF_EXPORT NSString *const AVVideoTransferFunction_SMPTE_ST_2084_PQ                                  API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 		AVF_EXPORT NSString *const AVVideoTransferFunction_ITU_R_2100_HLG                                    API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+		AVF_EXPORT NSString *const AVVideoTransferFunction_Linear                                    		 API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 	AVF_EXPORT NSString *const AVVideoYCbCrMatrixKey /* NSString */                                          API_AVAILABLE(macos(10.7), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 		AVF_EXPORT NSString *const AVVideoYCbCrMatrix_ITU_R_709_2                                            API_AVAILABLE(macos(10.7), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 		AVF_EXPORT NSString *const AVVideoYCbCrMatrix_ITU_R_601_4                                            API_AVAILABLE(macos(10.7), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);

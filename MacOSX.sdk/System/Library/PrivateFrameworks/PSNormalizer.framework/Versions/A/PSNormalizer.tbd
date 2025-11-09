@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           229520AB-37F5-3B25-A755-BDD635D474CC
+    value:           3947CC4F-DB9C-3149-A357-6DF02E39AC18
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7ECE3236-CFEC-3404-AC41-958A15A33424
+    value:           CA8F43EB-44D2-36E5-AABF-E5A6DA49CEBE
 install-name:    '/System/Library/PrivateFrameworks/PSNormalizer.framework/Versions/A/PSNormalizer'
-current-version: 30
+current-version: 33
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _PSNormalizeFromClientCallback, _PSNormalizeFromFile ]
 ...

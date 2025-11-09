@@ -1,4 +1,4 @@
-/* iig(DriverKit-192.100.7) generated from IOService.iig */
+/* iig(DriverKit-256.40.4) generated from IOService.iig */
 
 /* IOService.iig:1-71 */
 /*
@@ -69,7 +69,7 @@ enum {
 	kIOServiceHaltStateRestart  = 0x00000002,
 };
 
-/* source class IOService IOService.iig:72-531 */
+/* source class IOService IOService.iig:72-551 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -222,6 +222,15 @@ public:
 	virtual kern_return_t
 	SetProperties(
 		OSDictionary * properties);
+
+    /*!
+     * @brief       Add an IOService created by Create() to the power manangement tree.
+     * @discussion  IOService objects created by matching on a provider are always added to the power management tree.
+     *              Any IOService created with the Create() API is not, but may be added by calling this method.
+     * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+     */
+	virtual kern_return_t
+	JoinPMTree(void);
 
     /*!
      * @brief       Notification of change in power state of a provider.
@@ -461,6 +470,17 @@ public:
 	 */
 	virtual kern_return_t
 	UserSetProperties(OSContainer * properties) LOCAL;
+
+    /*!
+     * @brief       Send the kIOMessageServicePropertyChange message
+     * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+     */
+	virtual kern_return_t
+	SendIOMessageServicePropertyChange();
+
+	const char *
+	StringFromReturn(
+		 IOReturn    retval) LOCALONLY;
 #endif /* PRIVATE_WIFI_ONLY */
 
 	/*! @function RemoveProperty
@@ -534,7 +554,7 @@ private:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOService IOService.iig:72-531 */
+/* generated class IOService IOService.iig:72-551 */
 
 #define IOService_Start_ID            0xab6f76dde6d693f2ULL
 #define IOService_Stop_ID            0x98e715041c459fa5ULL
@@ -546,6 +566,7 @@ private:
 #define IOService_CopyProperties_ID            0x833ec8f92f8b5362ULL
 #define IOService_SearchProperty_ID            0xad751cdb94c8dcc8ULL
 #define IOService_SetProperties_ID            0xd8a753ea156f9162ULL
+#define IOService_JoinPMTree_ID            0xf26c46526735efffULL
 #define IOService_SetPowerState_ID            0xd200fde7d57ecca6ULL
 #define IOService_ChangePowerState_ID            0xdb75cfc3395484a0ULL
 #define IOService_NewUserClient_ID            0xf669efffcb89ed9cULL
@@ -563,6 +584,7 @@ private:
 #define IOService_StringFromReturn_ID            0xf62cec3df59db769ULL
 #define IOService__ClaimSystemWakeEvent_ID            0x845c18dfe6f75305ULL
 #define IOService_UserSetProperties_ID            0xad8461d6bb5e656dULL
+#define IOService_SendIOMessageServicePropertyChange_ID            0xf26f1c63c935e672ULL
 #define IOService_RemoveProperty_ID            0xdadeb06419d321b0ULL
 #define IOService_CopySystemStateNotificationService_ID            0x9165d1fce9b2ca5aULL
 #define IOService_StateNotificationItemCreate_ID            0xb35947bdab354e9eULL
@@ -612,6 +634,9 @@ private:
 
 #define IOService_SetProperties_Args \
         OSDictionary * properties
+
+#define IOService_JoinPMTree_Args \
+
 
 #define IOService_SetPowerState_Args \
         uint32_t powerFlags
@@ -681,6 +706,9 @@ private:
 
 #define IOService_UserSetProperties_Args \
         OSContainer * properties
+
+#define IOService_SendIOMessageServicePropertyChange_Args \
+
 
 #define IOService_RemoveProperty_Args \
         OSString * propertyName
@@ -769,6 +797,10 @@ public:\
     kern_return_t\
     SetProperties(\
         OSDictionary * properties,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    JoinPMTree(\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
@@ -917,6 +949,14 @@ public:\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
+    SendIOMessageServicePropertyChange(\
+        OSDispatchMethod supermethod = NULL);\
+\
+    const char *\
+    StringFromReturn(\
+        IOReturn retval);\
+\
+    kern_return_t\
     RemoveProperty(\
         OSString * propertyName,\
         OSDispatchMethod supermethod = NULL);\
@@ -1058,6 +1098,12 @@ public:\
         OSMetaClassBase * target,\
         SetProperties_Handler func);\
 \
+    typedef kern_return_t (*JoinPMTree_Handler)(OSMetaClassBase * targetIOService_JoinPMTree_Args);\
+    static kern_return_t\
+    JoinPMTree_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        JoinPMTree_Handler func);\
+\
     typedef kern_return_t (*SetPowerState_Handler)(OSMetaClassBase * target, IOService_SetPowerState_Args);\
     static kern_return_t\
     SetPowerState_Invoke(const IORPC rpc,\
@@ -1160,6 +1206,12 @@ public:\
         OSMetaClassBase * target,\
         UserSetProperties_Handler func);\
 \
+    typedef kern_return_t (*SendIOMessageServicePropertyChange_Handler)(OSMetaClassBase * targetIOService_SendIOMessageServicePropertyChange_Args);\
+    static kern_return_t\
+    SendIOMessageServicePropertyChange_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        SendIOMessageServicePropertyChange_Handler func);\
+\
     typedef kern_return_t (*RemoveProperty_Handler)(OSMetaClassBase * target, IOService_RemoveProperty_Args);\
     static kern_return_t\
     RemoveProperty_Invoke(const IORPC rpc,\
@@ -1231,6 +1283,9 @@ protected:\
     SetProperties_Impl(IOService_SetProperties_Args);\
 \
     kern_return_t\
+    JoinPMTree_Impl(IOService_JoinPMTree_Args);\
+\
+    kern_return_t\
     ChangePowerState_Impl(IOService_ChangePowerState_Args);\
 \
     kern_return_t\
@@ -1271,6 +1326,9 @@ protected:\
 \
     kern_return_t\
     _ClaimSystemWakeEvent_Impl(IOService__ClaimSystemWakeEvent_Args);\
+\
+    kern_return_t\
+    SendIOMessageServicePropertyChange_Impl(IOService_SendIOMessageServicePropertyChange_Args);\
 \
     kern_return_t\
     RemoveProperty_Impl(IOService_RemoveProperty_Args);\
@@ -1354,6 +1412,6 @@ IOService_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOService.iig:533- */
+/* IOService.iig:553- */
 
 #endif /* ! _IOKIT_UIOSERVICE_H */

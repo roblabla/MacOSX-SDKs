@@ -44,6 +44,11 @@ API_DEPRECATED("Use appropriate non-Apple SDK corresponding to the type of accou
 
 // The credential for the account. This property can be set and saved during account creation. It is
 // inaccessible once the account has been saved.
+//
+// Unless an error occurs in loading, calling account.credential will always return a non-nil ACAccountCredential object,
+// which will have 0 to n credential items set on it. Setting this property to nil will not unset any credential items saved
+// to this account's credential. See ACAccountCredential.h for details on setting, getting, and clearing credential items.
+//
 // WARNING: Backed by a synchronous xpc call to accountsd, not appropriate to call on a UI Application's main thread
 @property (strong, NS_NONATOMIC_IOSONLY)   ACAccountCredential *credential;
 

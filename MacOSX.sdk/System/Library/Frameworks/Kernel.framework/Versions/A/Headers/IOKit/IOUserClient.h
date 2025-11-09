@@ -152,14 +152,27 @@ struct IOExternalMethodArguments {
 	uint32_t            __reserved[30];
 };
 
+struct IOExternalMethodArgumentsOpaque;
+
 typedef IOReturn (*IOExternalMethodAction)(OSObject * target, void * reference,
     IOExternalMethodArguments * arguments);
+
 struct IOExternalMethodDispatch {
 	IOExternalMethodAction function;
 	uint32_t               checkScalarInputCount;
 	uint32_t               checkStructureInputSize;
 	uint32_t               checkScalarOutputCount;
 	uint32_t               checkStructureOutputSize;
+};
+
+struct IOExternalMethodDispatch2022 {
+	IOExternalMethodAction function;
+	uint32_t               checkScalarInputCount;
+	uint32_t               checkStructureInputSize;
+	uint32_t               checkScalarOutputCount;
+	uint32_t               checkStructureOutputSize;
+	uint8_t                allowAsync;
+	const char*            checkEntitlement;
 };
 
 enum {
@@ -172,7 +185,6 @@ enum {
  *   @class IOUserClient
  *   @abstract   Provides a basis for communication between client applications and I/O Kit objects.
  */
-
 class IOUserClient : public IOService
 {
 	OSDeclareAbstractStructorsWithDispatch(IOUserClient);
@@ -207,7 +219,7 @@ private:
 
 public:
 	MIG_SERVER_ROUTINE virtual IOReturn
-	externalMethod(uint32_t selector, IOExternalMethodArguments *arguments,
+	externalMethod(uint32_t selector, IOExternalMethodArguments * arguments,
 	    IOExternalMethodDispatch *dispatch = NULL,
 	    OSObject *target = NULL, void *reference = NULL);
 
@@ -215,13 +227,8 @@ public:
 		mach_port_t port, UInt32 type, io_user_reference_t refCon);
 
 private:
-#if __LP64__
 	OSMetaClassDeclareReservedUnused(IOUserClient, 0);
 	OSMetaClassDeclareReservedUnused(IOUserClient, 1);
-#else
-	OSMetaClassDeclareReservedUsedX86(IOUserClient, 0);
-	OSMetaClassDeclareReservedUsedX86(IOUserClient, 1);
-#endif
 	OSMetaClassDeclareReservedUnused(IOUserClient, 2);
 	OSMetaClassDeclareReservedUnused(IOUserClient, 3);
 	OSMetaClassDeclareReservedUnused(IOUserClient, 4);
@@ -397,6 +404,7 @@ public:
 	getTargetAndTrapForIndex(
 		LIBKERN_RETURNS_NOT_RETAINED IOService **targetP, UInt32 index );
 };
+
 
 
 #endif /* ! _IOKIT_IOUSERCLIENT_H */

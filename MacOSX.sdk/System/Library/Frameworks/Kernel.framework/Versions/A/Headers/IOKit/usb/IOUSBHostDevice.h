@@ -256,6 +256,8 @@ public:
     
     virtual void stop(IOService* provider);
     
+    virtual IOReturn messageClients(UInt32 type, void* argument = 0, vm_size_t argSize = 0);
+
 protected:
     static const IORegistryPlane* gIOUSBPlane;
 };
@@ -301,6 +303,13 @@ public:
         kPowerStateSuspended,
         kPowerStateOn,
         kPowerStateCount
+    };
+    
+    enum tEnumerationState
+    {
+        kEnumerationStateAddressed = 0,
+        kEnumerationStateIdentifying,
+        kEnumerationStateIdentified
     };
 
     /*

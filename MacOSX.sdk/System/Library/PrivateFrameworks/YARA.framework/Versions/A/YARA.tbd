@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8A619D25-A837-3426-B18C-1116F4DD5138
+    value:           283E7B9A-7C78-3343-8728-10C5FDB68CAB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F200A21C-27C7-35DE-9322-1B23EBC89939
+    value:           D5E9BF3C-36E9-3C91-A7C8-84237DDC8F4A
 install-name:    '/System/Library/PrivateFrameworks/yara.framework/Versions/A/yara'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __yr_atoms_trim, __yr_bswap16, __yr_bswap32, __yr_bswap64, 
                        __yr_compiler_default_include_callback, __yr_compiler_define_variable, 
                        __yr_compiler_pop_file_name, __yr_compiler_push_file_name, 

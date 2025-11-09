@@ -4,24 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           795A40A3-AA0D-3531-8B81-D093D43369E5
+    value:           4B346329-12CC-3ACF-ADFF-47FF45F4D659
   - target:          x86_64-maccatalyst
-    value:           795A40A3-AA0D-3531-8B81-D093D43369E5
+    value:           4B346329-12CC-3ACF-ADFF-47FF45F4D659
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FA007BCE-723E-3C23-BFBE-1F49EB127A50
+    value:           F6BB8BB7-57B7-3376-8A0B-E9872664EA2D
   - target:          arm64e-maccatalyst
-    value:           FA007BCE-723E-3C23-BFBE-1F49EB127A50
+    value:           F6BB8BB7-57B7-3376-8A0B-E9872664EA2D
 install-name:    '/System/Library/Frameworks/_CoreData_CloudKit.framework/Versions/A/_CoreData_CloudKit'
-current-version: 15
+current-version: 25
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
-    symbols:         [ '_$sSo36NSPersistentCloudKitContainerOptionsC010_CoreData_bC0E13databaseScopeSo010CKDatabaseI0VvM', 
-                       '_$sSo36NSPersistentCloudKitContainerOptionsC010_CoreData_bC0E13databaseScopeSo010CKDatabaseI0Vvg', 
-                       '_$sSo36NSPersistentCloudKitContainerOptionsC010_CoreData_bC0E13databaseScopeSo010CKDatabaseI0VvpMV', 
-                       '_$sSo36NSPersistentCloudKitContainerOptionsC010_CoreData_bC0E13databaseScopeSo010CKDatabaseI0Vvs' ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ '_$sSo36NSPersistentCloudKitContainerOptionsC010_CoreData_bC0E13databaseScopeSo010CKDatabaseI0VvpMV', 
+                       '_$sSo36NSPersistentCloudKitContainerOptionsC010_CoreData_bC0E28_databaseScope_compatibilitySo010CKDatabaseI0VvpMV' ]
 ...

@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
+@class UIFocusSystem;
 @protocol UIFocusDebuggerOutput, UIFocusEnvironment, UIFocusItem;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// UIFocusDebugger provides a collection of runtime utilities for debugging issues related to focus interaction.
 UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
@@ -39,9 +40,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
 
 /// Outputs a diagnosis of the focus groups of the specified environment and its children.
 /// Pass a focus system as the environment to get the full focus group tree for this focus system.
-///  - To use in Swift, enter `po UIFocusDebugger.checkFocusGroupTree(for: <environment reference>)` when paused in lldb.
-///  - To use in Objective-C, enter `po [UIFocusDebugger checkFocusGroupTreeForEnvironment:<environment reference>]` when paused in lldb.
-+ (NSString *)checkFocusGroupTreeForEnvironment:(id<UIFocusEnvironment>)environment;
+///  - To use in Swift, enter `po UIFocusDebugger.focusGroups(for: <environment reference>)` when paused in lldb.
+///  - To use in Objective-C, enter `po [UIFocusDebugger focusGroupsForEnvironment:<environment reference>]` when paused in lldb.
++ (id<UIFocusDebuggerOutput>)focusGroupsForEnvironment:(id<UIFocusEnvironment>)environment;
+
+/// Outputs a diagnoses of the preferred focus environments tree.
+/// - To use in Swift, enter `po UIFocusDebugger.preferredFocusEnvironments(for: <environment reference>)` when paused in lldb.
+/// - To use in Objective-C, enter `po [UIFocusDebugger preferredFocusEnvironmentsForEnvironment:<environment reference>]` when paused in lldb.
++ (id<UIFocusDebuggerOutput>)preferredFocusEnvironmentsForEnvironment:(id<UIFocusEnvironment>)environment;
 
 @end
 
@@ -49,7 +55,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
 @protocol UIFocusDebuggerOutput <NSObject>
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIFocusDebugger.h>

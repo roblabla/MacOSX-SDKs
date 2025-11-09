@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9588B392-7628-31C7-B159-476A8B97F350
+    value:           E25A877E-12CB-3CC1-9F57-24FA5F261CF5
   - target:          x86_64-maccatalyst
-    value:           9588B392-7628-31C7-B159-476A8B97F350
+    value:           E25A877E-12CB-3CC1-9F57-24FA5F261CF5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           501D6C38-82DC-389F-880C-8E65C59F88C2
+    value:           28381740-530E-3769-BF8A-5778048AC137
   - target:          arm64e-maccatalyst
-    value:           501D6C38-82DC-389F-880C-8E65C59F88C2
+    value:           28381740-530E-3769-BF8A-5778048AC137
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparse.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ vecLib ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __SparseAMD, __SparseAMDWorkspaceSize, __SparseCGIterate_Double, 
                        __SparseCGIterate_Float, __SparseCGSolve_Double, __SparseCGSolve_Float, 
                        __SparseCOLAMD, __SparseCOLAMDWorkspaceSize, __SparseConvertFromCoordinate_Double, 
@@ -153,6 +153,8 @@ exports:
                        __Z14SparseRefactor19SparseMatrix_DoubleP32SparseOpaqueFactorization_Double26SparseNumericFactorOptions, 
                        __Z14SparseRefactor19SparseMatrix_DoubleP32SparseOpaqueFactorization_Double26SparseNumericFactorOptionsPv, 
                        __Z14SparseRefactor19SparseMatrix_DoubleP32SparseOpaqueFactorization_DoublePv, 
+                       __Z16SparseGetInertia31SparseOpaqueFactorization_FloatPiS0_S0_, 
+                       __Z16SparseGetInertia32SparseOpaqueFactorization_DoublePiS0_S0_, 
                        __Z17SparseMultiplyAdd18SparseMatrix_Float17DenseMatrix_FloatS0_, 
                        __Z17SparseMultiplyAdd18SparseMatrix_Float17DenseVector_FloatS0_, 
                        __Z17SparseMultiplyAdd19SparseMatrix_Double18DenseMatrix_DoubleS0_, 

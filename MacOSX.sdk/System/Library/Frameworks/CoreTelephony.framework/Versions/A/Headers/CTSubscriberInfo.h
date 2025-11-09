@@ -6,6 +6,8 @@
  *
  */
 
+#ifdef __OBJC__
+
 #import <Foundation/Foundation.h>
 #import <CoreTelephony/CoreTelephonyDefines.h>
 
@@ -28,3 +30,5 @@ API_DEPRECATED_WITH_REPLACEMENT("Use subscribers instead", ios(6.0, 12.1))
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // __OBJC__

@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8DA5A363-E50A-3A9B-BA3B-F1A9ECD1F321
+    value:           4896D041-4A26-3EC0-A993-DB0F5BE5FEF7
   - target:          x86_64-maccatalyst
-    value:           8DA5A363-E50A-3A9B-BA3B-F1A9ECD1F321
+    value:           4896D041-4A26-3EC0-A993-DB0F5BE5FEF7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           82C52EF3-DB1A-35A7-9A43-C554311D3871
+    value:           C365C75A-FAD9-3A55-BD2B-54FC5417F2C7
   - target:          arm64e-maccatalyst
-    value:           82C52EF3-DB1A-35A7-9A43-C554311D3871
+    value:           C365C75A-FAD9-3A55-BD2B-54FC5417F2C7
 install-name:    '/usr/lib/swift/libswiftModelIO.dylib'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftModelIO.dylib', '$ld$install_name$os10.11$@rpath/libswiftModelIO.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftModelIO.dylib', '$ld$install_name$os10.13$@rpath/libswiftModelIO.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftModelIO.dylib', '$ld$install_name$os10.9$@rpath/libswiftModelIO.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$sSo16MDLAnimatedValueC7ModelIOE5timesSaySdGvg', '_$sSo16MDLAnimatedValueC7ModelIOE5timesSaySdGvpMV', 
                        '_$sSo17MDLAnimatedScalarC7ModelIOE10floatArraySaySfGvg', 
                        '_$sSo17MDLAnimatedScalarC7ModelIOE10floatArraySaySfGvpMV', 

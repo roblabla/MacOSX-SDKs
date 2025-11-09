@@ -6,8 +6,9 @@
 #import <Foundation/NSDate.h>
 #import <Foundation/NSCoder.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
+NS_SWIFT_SENDABLE // Immutable with no mutable subclasses
 API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 @interface NSDateInterval : NSObject <NSCopying, NSSecureCoding>
 
@@ -61,4 +62,4 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

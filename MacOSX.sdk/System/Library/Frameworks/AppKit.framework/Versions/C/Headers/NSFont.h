@@ -21,7 +21,6 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 */
 APPKIT_EXTERN const CGFloat * NSFontIdentityMatrix;
 
-NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSFont : NSObject <NSCopying, NSSecureCoding>
 
 /********* Factory *********/
@@ -61,6 +60,9 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 */
 + (NSFont *)systemFontOfSize:(CGFloat)fontSize weight:(NSFontWeight)weight API_AVAILABLE(macos(10.11));
 + (NSFont *)monospacedDigitSystemFontOfSize:(CGFloat)fontSize weight:(NSFontWeight)weight API_AVAILABLE(macos(10.11));
+
+/* Returns an instance with the specified weight and width. Width values are declared in NSFontDescriptor.h. */
++ (NSFont *)systemFontOfSize:(CGFloat)fontSize weight:(NSFontWeight)weight width:(NSFontWidth)width API_AVAILABLE(macos(13.0));
 
 /* Returns current default monospaced font for system UI. Clients of this API should be aware that the monospaced system font has a similar coverage of default system UI font, which includes Latin and common symbols used for displaying text like source code. For the characters it does not cover, the subtituted fonts are usually not the same width as the monospaced system font, they can be wider, narrower, or variable. To ensure fixed advances in text layout, clients can consider using string attributes like NSFontFixedAdvanceAttribute. */
 + (NSFont *)monospacedSystemFontOfSize:(CGFloat)fontSize weight:(NSFontWeight)weight API_AVAILABLE(macos(10.15));

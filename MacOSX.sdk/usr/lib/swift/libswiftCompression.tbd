@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E39B40CC-E32E-32D2-9CFE-312DBDDE32B8
+    value:           7DCDA4D1-84E9-3C59-904D-B09D1728D42B
   - target:          x86_64-maccatalyst
-    value:           E39B40CC-E32E-32D2-9CFE-312DBDDE32B8
+    value:           7DCDA4D1-84E9-3C59-904D-B09D1728D42B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EE5C2A60-1E71-3510-8ED9-9A70562EA93E
+    value:           06FAED16-55ED-3BB4-8598-F0BF1E016576
   - target:          arm64e-maccatalyst
-    value:           EE5C2A60-1E71-3510-8ED9-9A70562EA93E
+    value:           06FAED16-55ED-3BB4-8598-F0BF1E016576
 install-name:    '/usr/lib/swift/libswiftCompression.dylib'
-current-version: 2
+current-version: 6
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s11Compression11FilterErrorO11invalidDatayA2CmFWC', '_$s11Compression11FilterErrorO12invalidStateyA2CmFWC', 
                        '_$s11Compression11FilterErrorO2eeoiySbAC_ACtFZ', '_$s11Compression11FilterErrorO4hash4intoys6HasherVz_tF', 
                        '_$s11Compression11FilterErrorO9hashValueSivg', '_$s11Compression11FilterErrorO9hashValueSivpMV', 
@@ -57,7 +57,8 @@ exports:
                        '_$s11Compression15FilterOperationOSQAAMc', '_$s11Compression15FilterOperationOSYAAMc', 
                        '_$s11Compression9AlgorithmO3lz4yA2CmFWC', '_$s11Compression9AlgorithmO4hash4intoys6HasherVz_tF', 
                        '_$s11Compression9AlgorithmO4lzmayA2CmFWC', '_$s11Compression9AlgorithmO4zlibyA2CmFWC', 
-                       '_$s11Compression9AlgorithmO5lzfseyA2CmFWC', '_$s11Compression9AlgorithmO8allCasesSayACGvgZ', 
+                       '_$s11Compression9AlgorithmO5lzfseyA2CmFWC', '_$s11Compression9AlgorithmO6brotliyA2CmFWC', 
+                       '_$s11Compression9AlgorithmO8allCasesSayACGvgZ', '_$s11Compression9AlgorithmO8lzbitmapyA2CmFWC', 
                        '_$s11Compression9AlgorithmO8rawValueACSgSo21compression_algorithma_tcfC', 
                        '_$s11Compression9AlgorithmO8rawValueSo21compression_algorithmavg', 
                        '_$s11Compression9AlgorithmO8rawValueSo21compression_algorithmavpMV', 

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8778DF56-4D85-3E18-BDC2-F15ACFEA252D
+    value:           AAC0AD43-344B-3E10-85FE-3628222DBE0B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5E583A62-029A-3CA8-ABA9-5890A6FAA5D3
+    value:           CCAC9E38-6D3F-3E4F-A2EE-0EC0BE6294F5
 install-name:    '/System/Library/PrivateFrameworks/AvatarKit.framework/Versions/A/AvatarKit'
-current-version: 312.255
+current-version: 325.101
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AVTAnimojiThumbnailCameraKey, _AVTAnimojiThumbnailLargeSizeKey, 
                        _AVTAssetUIDFromPackAndAssetID, _AVTAvatarARModeSpecializationAdditionalGeometries, 
                        _AVTAvatarARModeSpecializationOffset, _AVTAvatarARModeSpecializationScale, 
@@ -62,10 +62,12 @@ exports:
                        _AVTBlendShapeLocationNoseSneerRight, _AVTBlendShapeLocationToARIndex, 
                        _AVTBlendShapeLocationTongueOut, _AVTBodyRegionForComponentType, 
                        _AVTCloneNodesAndMaterials, _AVTColor4WithCGColor, _AVTColorCategoryFromString, 
-                       _AVTColorPalettes, _AVTComponentTypeFromString, _AVTComponentTypeToString, 
-                       _AVTCoordinatorLoadPoseAnimationsAtPaths, _AVTCoordinatorLoadPoseAtPath, 
-                       _AVTCoordinatorLoadPosesAtPaths, _AVTEditorMetadata, _AVTEnumeratePresetCategories, 
-                       _AVTErrorDomain, _AVTEvaluateNameMatchingRules, _AVTFramingModeAudioLeft, 
+                       _AVTColorPalettes, _AVTComponentTypeFromString, _AVTComponentTypeIsOnLeftInPair, 
+                       _AVTComponentTypeIsOnRightInPair, _AVTComponentTypeIsPairable, 
+                       _AVTComponentTypeToString, _AVTCoordinatorLoadPoseAnimationsAtPaths, 
+                       _AVTCoordinatorLoadPoseAtPath, _AVTCoordinatorLoadPosesAtPaths, 
+                       _AVTEditorMetadata, _AVTEnumeratePresetCategories, _AVTErrorDomain, 
+                       _AVTEvaluateNameMatchingRules, _AVTFramingModeAR, _AVTFramingModeAudioLeft, 
                        _AVTFramingModeAudioRight, _AVTFramingModeCamera, _AVTFramingModeCheek, 
                        _AVTFramingModeChin, _AVTFramingModeDefault, _AVTFramingModeEarringsLeft, 
                        _AVTFramingModeEarringsRight, _AVTFramingModeEars, _AVTFramingModeEyes, 
@@ -95,8 +97,8 @@ exports:
                        _AVTPrecompiledLockScreenTimingAnimationRepresentation, _AVTPrecompiledMemojiAssetWithIdentifier, 
                        _AVTPrecompiledMemojiAssetsForComponentType, _AVTPrecompiledMemojiColorPalettes, 
                        _AVTPrecompiledMemojiCompositorPropertyNames, _AVTPrecompiledMemojiEditorMetadata, 
-                       _AVTPrecompiledMemojiPresetPlist, _AVTPresetCategoriesPairs, 
-                       _AVTPresetCategoryFromString, _AVTPresetCategoryIsOnLeftInPair, 
+                       _AVTPrecompiledMemojiPresetPlist, _AVTPrereleaseStickerPackForStickerPack, 
+                       _AVTPresetCategoriesPairs, _AVTPresetCategoryFromString, _AVTPresetCategoryIsOnLeftInPair, 
                        _AVTPresetCategoryIsOnRightInPair, _AVTPresetCategoryIsPairable, 
                        _AVTPresetCategoryPairToString, _AVTPresetCategoryToColorCategoryString, 
                        _AVTPresetCategoryToComponentType, _AVTPresetCategoryToString, 
@@ -108,7 +110,8 @@ exports:
                        _AVTSnapshotMemojiColorPresetSubstitutions, _AVTSnapshotMemojiPresetSubstitutions, 
                        _AVTSnapshotMemojiSecondaryColorPresetSubstitutions, _AVTSnapshotMemojiThirdColorPresetSubstitutions, 
                        _AVTSnapshotPose, _AVTSnapshotPoseAnimation, _AVTSnapshotRateKey, 
-                       _AVTSnapshotSizeKey, _AVTSnapshotUpscaleKey, _AVTStickerConfigurationCameraNameKey, 
+                       _AVTSnapshotShaderCollectorNeverCopyKey, _AVTSnapshotSizeKey, 
+                       _AVTSnapshotUpscaleKey, _AVTStickerConfigurationCameraNameKey, 
                        _AVTStickerConfigurationCameraSceneKey, _AVTStickerGeneratorCameraNodeName, 
                        _AVTStickerGeneratorPropsContainerName, _AVTUpgradeColorPresetIdentifierIfNeeded, 
                        _AVTUpgradePairedPresetCategoriesIfNeeded, _AVTUpgradePresetIdentifierIfNeeded, 
@@ -140,11 +143,15 @@ exports:
                        _kAVTStickerConfigurationShaderModifierKey, _kAVTStickerConfigurationShaderNodeKey, 
                        _kAVTStickerConfigurationShaderPropertiesKey, _kAVTStickerConfigurationShadersKey, 
                        _kAVTStickerConfigurationSizeKey, _kAVTStickerConfigurationSnapshotFrameKey, 
-                       _kAVTStickerPackDefault, _kAVTStickerPackMemojiEditor, _kAVTStickerPackMemojiEditorThumbnails, 
-                       _kAVTStickerPackPoses, _kAVTStickerPackPrerelease, _kAVTStickerPlistDefaultAnimojiName, 
-                       _kAVTStickerPlistKeyConfiguration, _kAVTStickerPlistKeyIdentifier, 
-                       _kAVTStickerPlistMemojiName, _kAVTStickerPlistUnavailableAnimoji, 
-                       _kAVTStickerShaderModifierPrefix, _kAVTStickerShaderModifierSuffix ]
+                       _kAVTStickerPackAllStickers, _kAVTStickerPackDefault, _kAVTStickerPackDefaultPrerelease, 
+                       _kAVTStickerPackMemojiEditor, _kAVTStickerPackMemojiEditorPrerelease, 
+                       _kAVTStickerPackMemojiEditorThumbnails, _kAVTStickerPackMemojiEditor_Poses, 
+                       _kAVTStickerPackMemojiEditor_PosesPrerelease, _kAVTStickerPackPoses, 
+                       _kAVTStickerPackPosesPrerelease, _kAVTStickerPackPrerelease, 
+                       _kAVTStickerPlistDefaultAnimojiName, _kAVTStickerPlistKeyConfigurationPath, 
+                       _kAVTStickerPlistKeyIdentifier, _kAVTStickerPlistMemojiName, 
+                       _kAVTStickerPlistUnavailableAnimoji, _kAVTStickerShaderModifierPrefix, 
+                       _kAVTStickerShaderModifierSuffix ]
     objc-classes:    [ AVTAnimatedImage, AVTAnimoji, AVTAnimojiDescriptor, AVTAsset, 
                        AVTAssetLibrary, AVTAssetResourceCache, AVTAvatar, AVTAvatarBodyPose, 
                        AVTAvatarDescriptor, AVTAvatarEnvironment, AVTAvatarMemoryOptimizer, 
@@ -152,8 +159,8 @@ exports:
                        AVTAvatarPoseAnimation, AVTAvatarPoseAnimationController, 
                        AVTColorPreset, AVTComponent, AVTComponentInstance, AVTCompositor, 
                        AVTCompositorPipeline, AVTCompositorPipelineCache, AVTCompositorTextureProvider, 
-                       AVTCorrectiveMorpherDescriptor, AVTEyeSkinningDescriptor, 
-                       AVTImageUtilities, AVTLockscreenAvatarCoordinator, AVTLockscreenConfiguration, 
+                       AVTEyeSkinningDescriptor, AVTFaceTrackingInfo, AVTImageUtilities, 
+                       AVTLockscreenAvatarCoordinator, AVTLockscreenConfiguration, 
                        AVTLockscreenCoordinator, AVTLockscreenCoordinatorHistory, 
                        AVTMaterial, AVTMemoji, AVTMemojiDescriptor, AVTMorpherDrivenMaterialDescriptor, 
                        AVTPhysicalizedMorpherDescriptor, AVTPhysicalizedSkeletonDescriptor, 
@@ -167,7 +174,7 @@ exports:
                        AVTStickerPoseAdjustment, AVTStickerPresetOverride, AVTStickerProp, 
                        AVTStickerPropAdjustTransformProperty, AVTStickerSceneProp, 
                        AVTStickerShaderModifier, AVTStickerShaderModifierProperty, 
-                       AVTVariantBatchSnapshotter, AVTVaryingColor, AVTView ]
+                       AVTVariantBatchSnapshotter, AVTVaryingColor, AVTView, AVTViewTransitionHelper ]
     objc-ivars:      [ AVTPreset._assetSpecificImageVariantDependencies, AVTPreset._assetSpecificMaterialVariantDependencies, 
                        AVTPreset._assetSpecificMorphVariantDependencies, AVTPreset._assets, 
                        AVTPreset._bodyPoseVariant, AVTPreset._bodyPoseVariantIntensity, 

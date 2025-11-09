@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           13C7FCE9-EA60-3FF8-B6D5-DF89295F3D5C
+    value:           C2A7F2FF-0076-3ACB-8424-916B37E7EAF2
   - target:          x86_64-maccatalyst
-    value:           13C7FCE9-EA60-3FF8-B6D5-DF89295F3D5C
+    value:           C2A7F2FF-0076-3ACB-8424-916B37E7EAF2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1DD8C78C-2645-3B61-8559-8C48BE2BA53E
+    value:           BF5DCA30-A292-399B-8C6E-43B5004C34B8
   - target:          arm64e-maccatalyst
-    value:           1DD8C78C-2645-3B61-8559-8C48BE2BA53E
+    value:           BF5DCA30-A292-399B-8C6E-43B5004C34B8
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNeuralNetwork.framework/Versions/A/MPSNeuralNetwork'
-current-version: 125.4.6
+current-version: 126.0.22
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ MPSImage, MetalPerformanceShaders ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DeadlockedBecauseTheCPUBasedWeightUpdateForThePreviousBatchOccursAtCompletionOfThisCmdBuf_TryGPUUpdateOrNewCmdBufInstead, 
                        _GetMPSCNNNeuronTypeName ]
     objc-classes:    [ MPSCNNAdd, MPSCNNAddGradient, MPSCNNArithmetic, MPSCNNArithmeticGradient, 

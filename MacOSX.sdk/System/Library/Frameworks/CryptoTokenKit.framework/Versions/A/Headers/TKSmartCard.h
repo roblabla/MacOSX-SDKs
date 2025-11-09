@@ -17,7 +17,8 @@ API_AVAILABLE(macos(10.10))
 @interface TKSmartCardSlotManager : NSObject
 
 /// Global pool of SmartCard reader slots.
-/// Note that defaultManager instance is accessible only if the calling application has 'com.apple.security.smartcard' entitlement set to Boolean:YES.  If the calling application does not have this entitlement, defaultManager is always set to nil.
+/// macOS: Note that defaultManager instance is accessible only if the calling application has 'com.apple.security.smartcard' entitlement set to Boolean:YES.  If the calling application does not have this entitlement, defaultManager is always set to nil.
+/// iOS: The defaultManager instance is always accessible.
 @property (class, nullable, readonly) TKSmartCardSlotManager *defaultManager;
 
 /// Array of currently known slots in the system.  Slots are identified by NSString name instances.  Use KVO to be notified about slots arrivals and removals.

@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1245B28F-3DF9-387C-9978-3C8DF042B016
+    value:           78E9C39C-0E5A-3D13-A2DA-29D56ACA19CA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0474057D-3421-3B23-9ACE-E4153B8A7CE3
+    value:           CE4EDBB1-6A01-3A1E-B25C-87AE53BE2E12
 install-name:    '/usr/lib/libMemoryResourceException.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MREBundleStringForUnbundledProcess, _MREErrorDomain, _MREExceptionTypeToString, 
                        _RMECheckEntitlement, _ReportMemoryExceptionFromTask, _kMREOutputFormatterCategoryTotalKey, 
                        _kMREOutputFormatterCleanKey, _kMREOutputFormatterDirtyKey, 
@@ -18,6 +18,6 @@ exports:
                        _kMREOutputFormatterRegionsKey, _kMREOutputFormatterSummaryKey, 
                        _kMREOutputFormatterSwappedKey, _kMREOutputFormatterTotalFootprintKey, 
                        _kMREOutputFormatterWiredKey ]
-    objc-classes:    [ FPFootprint, FPMemoryCategory, FPProcess, MemoryResourceException, 
+    objc-classes:    [ FPFootprint, FPMemoryCategory, FPProcess, FPTime, MemoryResourceException, 
                        RMECacheEnumerator ]
 ...

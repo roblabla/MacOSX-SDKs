@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1D677D31-9B34-313D-849F-E8970EEC8701
+    value:           9B1A45F5-BC87-30FA-A6F9-DA153EF97669
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7B2520BB-79E0-39DD-8C37-D7133B4EEA4A
+    value:           BD727456-5568-3538-A5D2-CA0DCB990684
 install-name:    '/System/Library/Frameworks/GLUT.framework/Versions/A/GLUT'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ ___glutGetFCB, ___glutSetFCB, __gle_gc, _gleCreateGC, _gleExtrusion, 
                        _gleGetJoinStyle, _gleGetNumSlices, _gleHelicoid, _gleLathe, 
                        _glePolyCone, _glePolyCylinder, _gleScrew, _gleSetJoinStyle, 

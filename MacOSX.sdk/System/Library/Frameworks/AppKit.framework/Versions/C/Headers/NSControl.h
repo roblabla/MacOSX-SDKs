@@ -98,19 +98,19 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 @protocol NSControlTextEditingDelegate <NSObject>
 @optional
 
-- (void)controlTextDidBeginEditing:(NSNotification *)obj;
-- (void)controlTextDidEndEditing:(NSNotification *)obj;
-- (void)controlTextDidChange:(NSNotification *)obj;
+- (void)controlTextDidBeginEditing:(NSNotification *)obj NS_SWIFT_UI_ACTOR;
+- (void)controlTextDidEndEditing:(NSNotification *)obj NS_SWIFT_UI_ACTOR;
+- (void)controlTextDidChange:(NSNotification *)obj NS_SWIFT_UI_ACTOR;
 
 // These delegate and notification methods are sent from NSControl subclasses that allow text editing such as NSTextField and NSMatrix.  The classes that need to send these have delegates.  NSControl does not.
-- (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor;
-- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor;
-- (BOOL)control:(NSControl *)control didFailToFormatString:(NSString *)string errorDescription:(nullable NSString *)error;
-- (void)control:(NSControl *)control didFailToValidatePartialString:(NSString *)string errorDescription:(nullable NSString *)error;
-- (BOOL)control:(NSControl *)control isValidObject:(nullable id)obj;
+- (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor NS_SWIFT_UI_ACTOR;
+- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor NS_SWIFT_UI_ACTOR;
+- (BOOL)control:(NSControl *)control didFailToFormatString:(NSString *)string errorDescription:(nullable NSString *)error NS_SWIFT_UI_ACTOR;
+- (void)control:(NSControl *)control didFailToValidatePartialString:(NSString *)string errorDescription:(nullable NSString *)error NS_SWIFT_UI_ACTOR;
+- (BOOL)control:(NSControl *)control isValidObject:(nullable id)obj NS_SWIFT_UI_ACTOR;
 
-- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector;
-- (NSArray<NSString *> *)control:(NSControl *)control textView:(NSTextView *)textView completions:(NSArray<NSString *> *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(NSInteger *)index;
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector NS_SWIFT_UI_ACTOR;
+- (NSArray<NSString *> *)control:(NSControl *)control textView:(NSTextView *)textView completions:(NSArray<NSString *> *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(NSInteger *)index NS_SWIFT_UI_ACTOR;
 @end
 
                                                                     // userInfo keys:

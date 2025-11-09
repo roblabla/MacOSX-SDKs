@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8473B355-9B29-3743-AE52-AA94DAF23D38
+    value:           C37B51F3-512D-38EC-9A1F-359B821B78CF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A24247F7-95A8-3134-BF87-3D198E88EFE2
+    value:           11036B6A-C9B1-3DA1-966D-CB8EC64EBDC2
 install-name:    '/System/Library/PrivateFrameworks/iPodSync.framework/Versions/A/iPodSync'
 current-version: 121.1
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CopySyncEngineDisplayNameForDataClass, _CopySyncEngineImageForDataClass, 
                        _IsiPodRegisteredForSync, _IsiPodRegisteredForSyncWithUID, 
                        __ConvertCFStringToUInt64, __iPodSynchronizeWithSyncUID, _iPodCancelSynchronization, 

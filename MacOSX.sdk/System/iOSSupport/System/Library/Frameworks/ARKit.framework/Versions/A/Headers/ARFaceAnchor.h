@@ -82,28 +82,28 @@ API_AVAILABLE(ios(11.0))
 /**
  The face geometry updated based on the computed blend shapes.
  */
-@property (nonatomic, readonly) ARFaceGeometry *geometry;
+@property (nonatomic, strong, readonly) ARFaceGeometry *geometry;
 
 /**
  The left eye’s rotation and translation relative to the anchor’s origin.
  */
-@property (nonatomic, readonly) simd_float4x4 leftEyeTransform API_AVAILABLE(ios(12.0));
+@property (nonatomic, assign, readonly) simd_float4x4 leftEyeTransform API_AVAILABLE(ios(12.0));
 
 /**
  The right eye’s rotation and translation relative to the anchor’s origin.
  */
-@property (nonatomic, readonly) simd_float4x4 rightEyeTransform API_AVAILABLE(ios(12.0));
+@property (nonatomic, assign, readonly) simd_float4x4 rightEyeTransform API_AVAILABLE(ios(12.0));
 
 /**
  Look-at point relative to the anchor’s origin.
  */
-@property (nonatomic, readonly) simd_float3 lookAtPoint API_AVAILABLE(ios(12.0));
+@property (nonatomic, assign, readonly) simd_float3 lookAtPoint API_AVAILABLE(ios(12.0));
 
 /**
  A dictionary of blend shape coefficients for each blend shape location.
  @discussion Blend shapes coefficients define the amount of displacement of a neutral shape at a specific location on the face.
  */
-@property (nonatomic, readonly) NSDictionary<ARBlendShapeLocation, NSNumber*> *blendShapes;
+@property (nonatomic, strong, readonly) NSDictionary<ARBlendShapeLocation, NSNumber*> *blendShapes;
 
 /** Unavailable */
 - (instancetype)initWithTransform:(simd_float4x4)transform NS_UNAVAILABLE;

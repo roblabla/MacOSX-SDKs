@@ -130,21 +130,13 @@
 #import <UIKit/UIPasteboard.h>
 #import <UIKit/UIPasteConfiguration.h>
 #import <UIKit/UIPasteConfigurationSupporting.h>
+#import <UIKit/UIPasteControl.h>
 #import <UIKit/UIPickerView.h>
 #import <UIKit/UIPinchGestureRecognizer.h>
 #import <UIKit/UIPopoverController.h>
 #import <UIKit/UIPopoverBackgroundView.h>
 #import <UIKit/UIPress.h>
 #import <UIKit/UIPressesEvent.h>
-#import <UIKit/UIPrinter.h>
-#import <UIKit/UIPrinterPickerController.h>
-#import <UIKit/UIPrintError.h>
-#import <UIKit/UIPrintFormatter.h>
-#import <UIKit/UIPrintInfo.h>
-#import <UIKit/UIPrintInteractionController.h>
-#import <UIKit/UIPrintPageRenderer.h>
-#import <UIKit/UIPrintPaper.h>
-#import <UIKit/UIPrintServiceExtension.h>
 #import <UIKit/UIProgressView.h>
 #import <UIKit/UIReferenceLibraryViewController.h>
 #import <UIKit/UIRefreshControl.h>
@@ -221,7 +213,6 @@
 #import <UIKit/UITrackingLayoutGuide.h>
 #import <UIKit/UIStackView.h>
 #import <UIKit/NSLayoutManager.h>
-#import <UIKit/NSTextAttachment.h>
 #import <UIKit/NSTextContainer.h>
 #import <UIKit/NSTextStorage.h>
 #import <UIKit/UIStateRestoration.h>
@@ -230,6 +221,7 @@
 #import <UIKit/UIPresentationController.h>
 #import <UIKit/UIPreviewInteraction.h>
 #import <UIKit/UISheetPresentationController.h>
+#import <UIKit/UIPopoverPresentationControllerSourceItem.h>
 #import <UIKit/UIPopoverPresentationController.h>
 #import <UIKit/UIDynamicAnimator.h>
 #import <UIKit/UIDynamicBehavior.h>
@@ -267,6 +259,7 @@
 #import <UIKit/UIAlert.h>
 #import <UIKit/UIAccessibilityLocationDescriptor.h>
 #import <UIKit/UINavigationItem.h>
+#import <UIKit/UIDocumentProperties.h>
 #import <UIKit/UIAccessibilityAdditions.h>
 #import <UIKit/UITimingParameters.h>
 #import <UIKit/UIBarCommon.h>
@@ -280,6 +273,7 @@
 #import <UIKit/UIGraphicsRendererSubclass.h>
 #import <UIKit/UIFocusMovementHint.h>
 #import <UIKit/UIPencilInteraction.h>
+#import <UIKit/UISceneWindowingBehaviors.h>
 #import <UIKit/UISceneDefinitions.h>
 #import <UIKit/UISceneEnhancedStateRestoration.h>
 #import <UIKit/UISceneOptions.h>
@@ -287,6 +281,10 @@
 #import <UIKit/UIWindowScene.h>
 #import <UIKit/UISceneSession.h>
 #import <UIKit/UISceneActivationConditions.h>
+#import <UIKit/UIWindowSceneGeometry.h>
+#import <UIKit/UIWindowSceneGeometryPreferences.h>
+#import <UIKit/UIWindowSceneGeometryPreferencesMac.h>
+#import <UIKit/UIWindowSceneGeometryPreferencesIOS.h>
 #import <UIKit/UIOpenURLContext.h>
 #import <UIKit/UIStatusBarManager.h>
 #import <UIKit/UIScreenshotService.h>
@@ -295,6 +293,7 @@
 #import <UIKit/UNNotificationResponse+UIKitAdditions.h>
 #import <UIKit/UIAction.h>
 #import <UIKit/UIMenu.h>
+#import <UIKit/UIMenuLeaf.h>
 #import <UIKit/UIMenuBuilder.h>
 #import <UIKit/UIMenuElement.h>
 #import <UIKit/UIDeferredMenuElement.h>
@@ -318,4 +317,13 @@
 #import <UIKit/UIWindowSceneActivationInteraction.h>
 #import <UIKit/UIFocusEffect.h>
 #import <UIKit/UIToolTipInteraction.h>
+#import <UIKit/UICalendarView.h>
+#import <UIKit/UICalendarViewDecoration.h>
+#import <UIKit/UICalendarSelection.h>
+#import <UIKit/UICalendarSelectionSingleDate.h>
+#import <UIKit/UICalendarSelectionMultiDate.h>
+#import <UIKit/UITextSearching.h>
+#import <UIKit/UIFindSession.h>
+#import <UIKit/UIFindInteraction.h>
+#import <UIKit/UIEditMenuInteraction.h>
 #endif

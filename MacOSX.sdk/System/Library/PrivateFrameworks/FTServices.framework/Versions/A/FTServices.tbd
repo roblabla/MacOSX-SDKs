@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E37816C8-CC76-37CA-99EF-07486B06070A
+    value:           8DDECB8F-4BAC-382F-81D3-72B1FE8CB84C
   - target:          x86_64-maccatalyst
-    value:           E37816C8-CC76-37CA-99EF-07486B06070A
+    value:           8DDECB8F-4BAC-382F-81D3-72B1FE8CB84C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BEF09B11-727C-3474-9B3E-DADF696F2D61
+    value:           AB8F894B-77CB-3EF9-BC34-F1E8766D3AEE
   - target:          arm64e-maccatalyst
-    value:           BEF09B11-727C-3474-9B3E-DADF696F2D61
+    value:           AB8F894B-77CB-3EF9-BC34-F1E8766D3AEE
 install-name:    '/System/Library/PrivateFrameworks/FTServices.framework/Versions/A/FTServices'
 current-version: 800
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FTCTRegistrationStatusCanRegisterKey, _FTCTRegistrationStatusChangedNotification, 
                        _FTCTRegistrationStatusIMSIKey, _FTCTRegistrationStatusPLMNKey, 
                        _FTCTRegistrationStatusPhoneNumberKey, _FTEntitlementStatusChangedNotification, 

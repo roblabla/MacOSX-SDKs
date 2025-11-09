@@ -2,7 +2,7 @@
  *  Hypervisor.h
  *  Hypervisor Framework
  *
- *  Copyright (c) 2019-2020 Apple Inc. All rights reserved.
+ *  Copyright (c) 2019-2022 Apple Inc. All rights reserved.
  */
 
 #pragma once
@@ -12,6 +12,7 @@
 #include <Hypervisor/hv_vcpu_config.h>
 #include <Hypervisor/hv_vcpu_types.h>
 #include <Hypervisor/hv_vm.h>
+#include <Hypervisor/hv_vm_config.h>
 #include <Hypervisor/hv_vm_types.h>
 #elif defined(__x86_64__)
 #include <Hypervisor/hv.h>

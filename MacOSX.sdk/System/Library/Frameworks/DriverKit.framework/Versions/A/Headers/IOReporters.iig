@@ -346,6 +346,11 @@ public:
 	    IOReportCategories categories,
 	    IOReportUnit unit);
 
+	bool initWith(IOService *reportingService,
+	    IOReportCategories categories,
+	    IOReportUnit unit);
+
+
 /*! @function   IOSimpleReporter::setValue
  *   @abstract   Thread safely set a channel's value
  *
@@ -428,6 +433,11 @@ public:
  *   Locking: SAFE to call concurrently (no static globals), MAY BLOCK
  */
 	static OSPtr<IOStateReporter> with(IOService *reportingService,
+	    IOReportCategories categories,
+	    int nstates,
+	    IOReportUnit unit = kIOReportUnitHWTicks);
+
+	bool initWith(IOService *reportingService,
 	    IOReportCategories categories,
 	    int nstates,
 	    IOReportUnit unit = kIOReportUnitHWTicks);
@@ -844,6 +854,14 @@ public:
  *
  */
 	static OSPtr<IOHistogramReporter> with(IOService *reportingService,
+	    IOReportCategories categories,
+	    uint64_t channelID,
+	    const char *channelName,
+	    IOReportUnit unit,
+	    int nSegments,
+	    IOHistogramSegmentConfig *config);
+
+	bool initWith(IOService *reportingService,
 	    IOReportCategories categories,
 	    uint64_t channelID,
 	    const char *channelName,

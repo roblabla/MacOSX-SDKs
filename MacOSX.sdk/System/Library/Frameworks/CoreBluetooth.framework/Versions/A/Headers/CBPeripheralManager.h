@@ -140,9 +140,10 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : CBManager
  *                  If <i>nil</i>, the main queue will be used.
  *
  */
-- (instancetype)initWithDelegate:(nullable id<CBPeripheralManagerDelegate>)delegate
-						   queue:(nullable dispatch_queue_t)queue __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
+- (instancetype)initWithDelegate:(nullable id<CBPeripheralManagerDelegate>)delegate
+						   queue:(nullable dispatch_queue_t)queue __TVOS_PROHIBITED __WATCHOS_PROHIBITED 
+;
 /*!
  *  @method initWithDelegate:queue:options:
  *
@@ -157,9 +158,11 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : CBManager
  *	@seealso		CBPeripheralManagerOptionRestoreIdentifierKey
  *
  */
+
 - (instancetype)initWithDelegate:(nullable id<CBPeripheralManagerDelegate>)delegate
-						   queue:(nullable dispatch_queue_t)queue
-						 options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE(10_9, 7_0) NS_DESIGNATED_INITIALIZER __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+                           queue:(nullable dispatch_queue_t)queue
+                         options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE(10_9, 7_0) NS_DESIGNATED_INITIALIZER __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+;
 
 /*!
  *  @method startAdvertising:

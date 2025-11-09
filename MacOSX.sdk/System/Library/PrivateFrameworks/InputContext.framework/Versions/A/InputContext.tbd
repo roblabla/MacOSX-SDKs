@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B60DE6F8-2823-3E8F-AD5E-D299C9039542
+    value:           66E79D92-6056-38D4-82E9-CDA328188D35
   - target:          x86_64-maccatalyst
-    value:           B60DE6F8-2823-3E8F-AD5E-D299C9039542
+    value:           66E79D92-6056-38D4-82E9-CDA328188D35
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7369DB1D-DED2-3F77-89DF-ADFA4B1E4AD0
+    value:           02BD8E85-8B2E-336B-ACD9-580CA3FDD25D
   - target:          arm64e-maccatalyst
-    value:           7369DB1D-DED2-3F77-89DF-ADFA4B1E4AD0
+    value:           02BD8E85-8B2E-336B-ACD9-580CA3FDD25D
 install-name:    '/System/Library/PrivateFrameworks/InputContext.framework/InputContext'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ICLXEntryGetEntities, _ICLXEntryGetTransientLexicon, _InputContextVersionNumber, 
                        _InputContextVersionString, __ICMachTimeToNanoseconds, __ICPersContactOSLogFacility, 
                        __ICPersNamedEntityOSLogFacility, __ICProactiveQuickTypeOSLogFacility, 

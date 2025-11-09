@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7A7CE557-5BBD-364D-A575-24EEE2E6B6FE
+    value:           0C8E525C-CFF9-35D3-ABEC-3AEFB2F7A8AC
   - target:          x86_64-maccatalyst
-    value:           7A7CE557-5BBD-364D-A575-24EEE2E6B6FE
+    value:           0C8E525C-CFF9-35D3-ABEC-3AEFB2F7A8AC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A0C1F59-E608-3339-B6E1-A7893E4DA65B
+    value:           C07858FA-1822-3FB2-96D3-6438BFC19297
   - target:          arm64e-maccatalyst
-    value:           7A0C1F59-E608-3339-B6E1-A7893E4DA65B
+    value:           C07858FA-1822-3FB2-96D3-6438BFC19297
 install-name:    '/System/Library/PrivateFrameworks/AppContainer.framework/Versions/A/AppContainer'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ASBBundleIdPassesSanityCheck, _ASBContainerErrorsIsOtherReportableError, 
                        _ASBContainerErrorsIsPermissionsError, _ASBContainerErrorsRecordPermissionsError, 
                        _ASBContainerErrorsUpdateError, _containerSetError, _kASBContainerErrorDomain, 

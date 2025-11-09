@@ -40,7 +40,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @param child
         The child object
     @param error
-        Returns an error if the child already has a parent different from this object.
+        Returns an error if the child already has a parent.
     @return
         YES for success
 */

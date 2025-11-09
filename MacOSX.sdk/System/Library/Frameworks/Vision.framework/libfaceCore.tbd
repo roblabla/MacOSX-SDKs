@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4B002CBD-5312-3857-AF36-E1E897AC2047
+    value:           E0B9DD68-2D97-3B9C-AD88-4E9D1E1370C9
   - target:          x86_64-maccatalyst
-    value:           4B002CBD-5312-3857-AF36-E1E897AC2047
+    value:           E0B9DD68-2D97-3B9C-AD88-4E9D1E1370C9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7FE54607-7936-3A16-A343-61899254A71B
+    value:           1A1E24CF-52C8-3F34-987D-395013524FFD
   - target:          arm64e-maccatalyst
-    value:           7FE54607-7936-3A16-A343-61899254A71B
+    value:           1A1E24CF-52C8-3F34-987D-395013524FFD
 install-name:    '/System/Library/Frameworks/Vision.framework/libfaceCore.dylib'
-current-version: 5.0.93
+current-version: 6.0.48
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FCRDetectionParamDetectionRegion, _FCRDetectionParamEnhancedEyesAndMouthLocalization, 
                        _FCRDetectionParamInitialAngle, _FCRDetectionParamKalmanFilter, 
                        _FCRExtractionParamEnhancedEyesAndMouthLocalization, _FCRExtractionParamExtractBlink, 

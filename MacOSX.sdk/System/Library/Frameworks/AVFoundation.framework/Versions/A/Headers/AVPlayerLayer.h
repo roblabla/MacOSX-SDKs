@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2017 Apple Inc. All rights reserved.
+	Copyright 2010-2022 Apple Inc. All rights reserved.
 
 */
 
@@ -38,6 +38,7 @@
 
 #import <AVFoundation/AVBase.h>
 #import <AVFoundation/AVAnimation.h>
+#import <CoreVideo/CVPixelBuffer.h>
 
 #if __has_include(<QuartzCore/CoreAnimation.h>)
 #import <QuartzCore/CoreAnimation.h>
@@ -74,16 +75,17 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  					and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default. 
 					See <AVFoundation/AVAnimation.h> for a description of these options.
  */
-@property(copy) AVLayerVideoGravity videoGravity;
+@property (copy) AVLayerVideoGravity videoGravity;
 
 /*!
 	 @property		readyForDisplay
 	 @abstract		Boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer.
 	 @discusssion	Use this property as an indicator of when best to show or animate-in an AVPlayerLayer into view. 
-					An AVPlayerLayer may be displayed, or made visible, while this propoerty is NO, however the layer will not have any user-visible content until the value becomes YES. Note that if an animation is added to an AVPlayerLayer before it becomes readyForDisplay the video image displayed inside might not animate with the receiver.
+					An AVPlayerLayer may be displayed, or made visible, while this property is NO, however the layer will not have any user-visible content until the value becomes YES. Note that if an animation is added to an AVPlayerLayer before it becomes readyForDisplay the video image displayed inside might not animate with the receiver.
 					This property remains NO for an AVPlayer currentItem whose AVAsset contains no enabled video tracks.
+					This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isReadyForDisplay) BOOL readyForDisplay;
+@property (nonatomic, readonly, getter=isReadyForDisplay) BOOL readyForDisplay;
 
 /*!
 	@property		videoRect
@@ -95,8 +97,18 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@property		pixelBufferAttributes
 	@abstract		The client requirements for the visual output displayed in AVPlayerLayer during playback.  	
 	@discussion		Pixel buffer attribute keys are defined in <CoreVideo/CVPixelBuffer.h>
+					This property is key-value observable.
  */
 @property (nonatomic, copy, nullable) NSDictionary<NSString *, id> *pixelBufferAttributes API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+
+/*!
+ 	@method			copyDisplayedPixelBuffer
+ 	@abstract		Returns a retained reference to the pixel buffer currently displayed in this AVPlayerLayer. This will return NULL if the displayed pixel buffer is protected, no image is currently being displayed, if the current player's rate is non-zero or if the image is unavailable.
+ 	@discussion		This will only return the current image while the media is paused, otherwise this will return nil. Clients must release the pixel buffer after use.
+ 			
+ 					Do not write to the returned CVPixelBuffer's attachments or pixel data.
+ */
+- (nullable CVPixelBufferRef)copyDisplayedPixelBuffer CF_RETURNS_RETAINED API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 @end
 

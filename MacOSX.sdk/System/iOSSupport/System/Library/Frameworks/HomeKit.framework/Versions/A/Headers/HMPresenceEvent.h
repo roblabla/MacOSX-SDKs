@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @brief This class is used to represent the presence of users in a home.
  */
 HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMPresenceEvent : HMEvent <NSCopying, NSMutableCopying>
+    @interface HMPresenceEvent : HMEvent<NSCopying, NSMutableCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -32,12 +32,12 @@ HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) 
 /*!
  * @brief presenceEventType The event type that will trigger the event.
  */
-@property(readonly, nonatomic) HMPresenceEventType presenceEventType;
+@property (readonly, nonatomic) HMPresenceEventType presenceEventType;
 
 /*!
  * @brief presenceUserType The user type whose presence will trigger the event.
  */
-@property(readonly, nonatomic) HMPresenceEventUserType presenceUserType;
+@property (readonly, nonatomic) HMPresenceEventUserType presenceUserType;
 
 @end
 
@@ -46,19 +46,19 @@ HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) 
  * @brief This class is used to represent the presence of users in a home.
  */
 HM_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMMutablePresenceEvent : HMPresenceEvent
+    @interface HMMutablePresenceEvent : HMPresenceEvent
 
 - (instancetype)init NS_UNAVAILABLE;
 
 /*!
  * @brief presenceEventType The event type that will trigger the event.
  */
-@property(readwrite, nonatomic) HMPresenceEventType presenceEventType;
+@property (readwrite, nonatomic) HMPresenceEventType presenceEventType;
 
 /*!
  * @brief presenceUserType The user type whose presence will trigger the event.
  */
-@property(readwrite, nonatomic) HMPresenceEventUserType presenceUserType;
+@property (readwrite, nonatomic) HMPresenceEventUserType presenceUserType;
 
 @end
 

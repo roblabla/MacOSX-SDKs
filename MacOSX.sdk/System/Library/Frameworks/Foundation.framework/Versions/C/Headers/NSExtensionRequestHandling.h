@@ -5,7 +5,7 @@
 #import <Foundation/Foundation.h>
 
 #if __OBJC2__
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class NSExtensionContext;
 
@@ -19,5 +19,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 #endif

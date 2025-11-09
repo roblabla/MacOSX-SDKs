@@ -19,37 +19,37 @@ NS_ASSUME_NONNULL_BEGIN
  *             be used to execute one or more action sets when the event fires.
  */
 HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMTrigger : NSObject
+    @interface HMTrigger : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 
 /*!
  * @brief Name of the trigger.
  */
-@property(readonly, copy, nonatomic) NSString *name;
+@property (readonly, copy, nonatomic) NSString *name;
 
 /*!
  * @brief State of the trigger.
  *
  * @discussion TRUE if the trigger is enable, FALSE otherwise.
  */
-@property(readonly, getter=isEnabled, nonatomic) BOOL enabled;
+@property (readonly, getter=isEnabled, nonatomic) BOOL enabled;
 
 /*!
  * @abstract Array of HMActionSet objects that represent all the action sets associated
  *           with this trigger.
  */
-@property(readonly, copy, nonatomic) NSArray<HMActionSet *> *actionSets;
+@property (readonly, copy, nonatomic) NSArray<HMActionSet *> *actionSets;
 
 /*!
  * @brief The date that this trigger was most recently fired.
  */
-@property(readonly, copy, nonatomic, nullable) NSDate *lastFireDate;
+@property (readonly, copy, nonatomic, nullable) NSDate *lastFireDate;
 
 /*!
  * @brief A unique identifier for the trigger.
  */
-@property(readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
+@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief This method is used to change the name of the trigger.
@@ -59,7 +59,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  * @param completion Block that is invoked once the request is processed.
  *                   The NSError provides more information on the status of the request.
  */
-- (void)updateName:(NSString *)name completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)updateName:(NSString *)name completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Registers an action set to be executed when the trigger is fired.
@@ -70,7 +70,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  * @param completion Block that is invoked once the request is processed. 
  *                   The NSError provides more information on the status of the request.
  */
-- (void)addActionSet:(HMActionSet *)actionSet completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)addActionSet:(HMActionSet *)actionSet completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief De-registers an action set from the trigger.
@@ -80,7 +80,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  * @param completion Block that is invoked once the request is processed. 
  *                   The NSError provides more information on the status of the request.
  */
-- (void)removeActionSet:(HMActionSet *)actionSet completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)removeActionSet:(HMActionSet *)actionSet completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Enables or disables the trigger. 
@@ -97,7 +97,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  * @param completion Block that is invoked once the request is processed. 
  *                   The NSError provides more information on the status of the request.
  */
-- (void)enable:(BOOL)enable completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)enable:(BOOL)enable completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 @end
 

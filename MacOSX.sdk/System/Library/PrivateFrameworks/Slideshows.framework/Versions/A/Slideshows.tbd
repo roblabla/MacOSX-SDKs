@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B993D9CE-38FF-3106-93EC-C0C30804C043
+    value:           8AF68FB9-230F-3082-881A-C3820F9D9BB6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E5ECDB68-BF4F-3929-9C75-F121C3BDB0E4
+    value:           562E4F48-8189-3EA4-974A-1B357CABDF70
 install-name:    '/System/Library/PrivateFrameworks/Slideshows.framework/Versions/A/Slideshows'
 current-version: 4.5
 compatibility-version: 4.5
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _Antialias1D, _AppendIntToString, _Bounce, _CGPointFromCAMLString, 
                        _CGRectFromCAMLString, _CenterRectOverPoint, _CenterRectOverRect, 
                        _ComputeAnimationTimeBounds, _ComputeGaussian, _ComputeNumberOfSegments, 

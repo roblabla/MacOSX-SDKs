@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @discussion This class represents a trigger that is based on timers.
  */
 HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMTimerTrigger : HMTrigger
+    @interface HMTimerTrigger : HMTrigger
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -26,6 +26,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  * @param name Name for the trigger.
  *
  * @param fireDate The initial fire date for the timer trigger. The seconds value must be zero.
+ *                 Date should be at least 1 minute ahead for reliable firing.
  *                 HMErrorCodeDateMustBeOnSpecifiedBoundaries will be returned when adding the trigger
  *                 to a home if the fireDate includes a seconds value other than 0.
  *
@@ -58,8 +59,10 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  * @discussion Timer triggers are only set at the top of the minute. When the timer trigger fires,
  *             it will typically fire within 1 minute of the scheduled fire date or calculated
  *             recurrence fire date, depending on how the system is managing its resources.
+ *
+ * @note Should be at least 1 minute ahead for reliable firing.
  */
-@property(readonly, copy, nonatomic) NSDate *fireDate;
+@property (readonly, copy, nonatomic) NSDate *fireDate;
 
 /*!
  * @brief Set the time zone to interpret the fire date in. 
@@ -68,7 +71,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *             fired will be adjusted to account for the time zone change. If this value is
  *             non-nil, the trigger will fire at the specified time in the specific time zone.
  */
-@property(readonly, copy, nonatomic, nullable) NSTimeZone *timeZone;
+@property (readonly, copy, nonatomic, nullable) NSTimeZone *timeZone;
 
 /*!
  * @brief The date components that specify how a trigger is to be repeated. 
@@ -83,12 +86,12 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *             whole minutes. Examples are 5 minutes, 6 minutes, 1 day, 2 weeks.
  *
  */
-@property(readonly, copy, nonatomic, nullable) NSDateComponents *recurrence;
+@property (readonly, copy, nonatomic, nullable) NSDateComponents *recurrence;
 
- /*!
+/*!
   * @brief The calendar corresponding to a recurring timer trigger.
   */
-@property(readonly, copy, nonatomic, nullable) NSCalendar *recurrenceCalendar;
+@property (readonly, copy, nonatomic, nullable) NSCalendar *recurrenceCalendar;
 
 /*!
  * @brief This method is used to change the fire date of a timer trigger.
@@ -100,7 +103,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   error will be nil on success. HMErrorCodeDateMustBeOnSpecifiedBoundaries will
  *                   be returned if the fireDate includes a seconds value other than 0.
  */
-- (void)updateFireDate:(NSDate *)fireDate completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)updateFireDate:(NSDate *)fireDate completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief This method is used to change the time zone of the fire date of a timer trigger.
@@ -112,7 +115,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request,
  *                   error will be nil on success.
  */
-- (void)updateTimeZone:(nullable NSTimeZone *)timeZone completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)updateTimeZone:(nullable NSTimeZone *)timeZone completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief This method is used to change the recurrence interval for a timer trigger.
@@ -132,7 +135,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   greater than 5 weeks. *                   error will be nil on success.
  */
 - (void)updateRecurrence:(nullable NSDateComponents *)recurrence
-       completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+       completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 @end
 

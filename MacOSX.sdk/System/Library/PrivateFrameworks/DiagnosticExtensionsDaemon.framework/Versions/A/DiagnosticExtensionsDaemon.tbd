@@ -3,19 +3,20 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           70E4C337-85C6-33D7-AD06-1EE2A58922CC
+    value:           A40C185A-C37B-37D9-87E4-27829EAF94DB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FDC392B2-7094-3143-9A27-12D8A62F28F6
+    value:           EFF8D337-033F-3668-BCB4-777E054FA786
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticExtensionsDaemon.framework/Versions/A/DiagnosticExtensionsDaemon'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AWDDEDBugSessionCreatedReadFrom, _AWDDEDBugSessionEndedReadFrom, 
                        _AWDDEDDaemonStartedReadFrom, _AWDDEDDeferredCheckInReadFrom, 
                        _AWDDEDExtensionCompletedReadFrom, _AWDDEDExtensionScheduledReadFrom, 
                        _AWDDEDExtensionStartedReadFrom, _AWDDEDFinisherEndedReadFrom, 
-                       _AWDDEDFinisherStartedReadFrom, _DEDBugSessionKeyClientTransportType, 
+                       _AWDDEDFinisherStartedReadFrom, _DEDAddressForIDSDevice, _DEDAnalyticsLoggingSubsystem, 
+                       _DEDBugSessionKeyClientAddress, _DEDBugSessionKeyClientTransportType, 
                        _DEDBugSessionKeyConfiguration, _DEDBugSessionKeyDeviceIdentifier, 
                        _DEDBugSessionKeyFinisher, _DEDBugSessionKeyIdentifier, _DEDBugSessionKeyIdentifierManager, 
                        _DEDBugSessionKeyNotifier, _DEDBugSessionKeyPendingOperations, 
@@ -23,10 +24,11 @@ exports:
                        _DEDBugSessionOpOptions, _DEDBugSessionOpType, _DEDBugSessionOperationCancelIdentifier, 
                        _DEDBugSessionOperationFinishIdentifier, _DEDBugSessionOperationNotifyIdentifier, 
                        _DEDCapabilityClassic, _DEDCapabilityCloudKit, _DEDCapabilityEnhancedExecution, 
-                       _DEDCapabilityMutableBugSession, _DEDCapabilitySessionState, 
-                       _DEDClientEntitlement, _DEDConnectionDebugService, _DEDCurrentDeviceIsHomePod, 
-                       _DEDDeviceHashingKey, _DEDDeviceKeyAddress, _DEDDeviceKeyBuild, 
-                       _DEDDeviceKeyCapabilities, _DEDDeviceKeyColor, _DEDDeviceKeyCompanionDeviceIdentifier, 
+                       _DEDCapabilityEnhancedExecutionV2, _DEDCapabilityMutableBugSession, 
+                       _DEDCapabilitySessionState, _DEDClientEntitlement, _DEDConnectionDebugService, 
+                       _DEDCurrentDeviceIsHomePod, _DEDDeviceHashingKey, _DEDDeviceKeyAddress, 
+                       _DEDDeviceKeyBugSessions, _DEDDeviceKeyBuild, _DEDDeviceKeyCapabilities, 
+                       _DEDDeviceKeyColor, _DEDDeviceKeyCompanionDeviceIdentifier, 
                        _DEDDeviceKeyDeviceClass, _DEDDeviceKeyEnclosureColor, _DEDDeviceKeyHardwareCodename, 
                        _DEDDeviceKeyHomeButtonType, _DEDDeviceKeyHomeKitIdentifier, 
                        _DEDDeviceKeyHomeTheaterSystemIdentifier, _DEDDeviceKeyHomeTheaterSystemName, 
@@ -38,10 +40,16 @@ exports:
                        _DEDDeviceKeyTransport, _DEDDeviceKeyUniformTypeIdentifier, 
                        _DEDDevicePlatform, _DEDDevicePlatformHomePod, _DEDDevicePlatformMac, 
                        _DEDDevicePlatformTV, _DEDDevicePlatformUnspecified, _DEDDevicePlatformWatch, 
-                       _DEDDevicePlatformiOS, _DEDErrorDomain, _DEDFBKFeedbackUploadsKey, 
-                       _DEDFeedbackGroupContainerName, _DEDIDSCommandShouldUseFireAndForget, 
-                       _DEDIDSConnectionLog, _DEDKeyAllowsCellularUpload, _DEDKeyCapabilities, 
-                       _DEDKeyCloudKitContainer, _DEDKeyCloudKitData, _DEDKeyCloudKitUseDevelopmentEnvironment, 
+                       _DEDDevicePlatformiOS, _DEDEncryptorCaseIDKey, _DEDEncryptorChannelKey, 
+                       _DEDEncryptorDefaultChannelValue, _DEDEncryptorDefaultPayloadTypeValue, 
+                       _DEDEncryptorEnvironmentStagingKey, _DEDEncryptorHKCertValue, 
+                       _DEDEncryptorHKStagingCertValue, _DEDEncryptorPayloadTypeKey, 
+                       _DEDEncryptorStudyIDKey, _DEDEncryptorUniqueIDKey, _DEDErrorDomain, 
+                       _DEDFBKFeedbackUploadsKey, _DEDFeedbackGroupContainerName, 
+                       _DEDHealthWrapCertificateFromString, _DEDHealthWrapDERDataFromString, 
+                       _DEDIDSCommandShouldUseFireAndForget, _DEDIDSConnectionLog, 
+                       _DEDKeyAllowsCellularUpload, _DEDKeyCapabilities, _DEDKeyCloudKitContainer, 
+                       _DEDKeyCloudKitData, _DEDKeyCloudKitUseDevelopmentEnvironment, 
                        _DEDKeyFinishingMove, _DEDKeyHostAppIdentifier, _DEDKeyLocalizedNotificationBody, 
                        _DEDKeyLocalizedNotificationTitle, _DEDKeyNotifierConfiguration, 
                        _DEDKeyNotifyingMove, _DEDKeyRadarAuthToken, _DEDKeyRadarProblemID, 
@@ -49,10 +57,11 @@ exports:
                        _DEDKeySeedingHost, _DEDKeySeedingSubmissionID, _DEDKeySeedingSubmissionType, 
                        _DEDKeySendActionLabel, _DEDKeyUNShouldPlaySound, _DEDNotifierUserNotificationActionReview, 
                        _DEDNotifierUserNotificationActionSend, _DEDNotifierUserNotificationCategory, 
-                       _DEDRequestAdvertiserServiceName, _DEDSeedingCientErrorDomain, 
+                       _DEDRequestAdvertiserServiceName, _DEDSeedingClientErrorDomain, 
                        _DEDSeedingFileClerkFilename, _DEDSeedingFilerErrorDomain, 
-                       _DEDSessionCleanupLog, _DEDSessionStartLog, _DiagnosticExtensionsDaemonVersionNumber, 
-                       _DiagnosticExtensionsDaemonVersionString, _ResourceLoaderErrorDomain, 
+                       _DEDSessionCleanupLog, _DEDSessionStartLog, _DEDTimeElapsed, 
+                       _DEDTimeIntervalNotAvailable, _DEDUnknown, _DiagnosticExtensionsDaemonVersionNumber, 
+                       _DiagnosticExtensionsDaemonVersionString, _Log, _ResourceLoaderErrorDomain, 
                        _ResourceLoaderPayloadDataKey, _ResourceLoaderPayloadErrorKey, 
                        _ResourceLoaderPayloadResponseKey, _argumentsList, _isKnownDevice, 
                        _stringIfNil ]
@@ -69,10 +78,10 @@ exports:
                        DEDDataTask, DEDDeferredExtensionInfo, DEDDevice, DEDDiagnosticCollector, 
                        DEDDirectoriesCleanup, DEDEncryptorFactory, DEDExtension, 
                        DEDExtensionIdentifier, DEDExtensionIdentifierManager, DEDFBKFeedbackUpload, 
-                       DEDFollowUpNotifier, DEDHealthLogsEncryptor, DEDHomeKitManager, 
-                       DEDIDSConnection, DEDIDSInbound, DEDIDSOutbound, DEDImageResourceManager, 
-                       DEDLocalTransport, DEDManager, DEDNotifierConfiguration, DEDPersistence, 
-                       DEDRadarAttachment, DEDRadarFinisher, DEDRadarUploadItem, 
+                       DEDFeedbackAnalytics, DEDFollowUpNotifier, DEDHealthLogsEncryptor, 
+                       DEDHomeKitManager, DEDIDSConnection, DEDIDSInbound, DEDIDSOutbound, 
+                       DEDImageResourceManager, DEDLocalTransport, DEDManager, DEDNotifierConfiguration, 
+                       DEDPersistence, DEDRadarAttachment, DEDRadarFinisher, DEDRadarUploadItem, 
                        DEDRapportManager, DEDRequestAdvertiser, DEDRequestRecord, 
                        DEDSeedingClient, DEDSeedingFilerToken, DEDSeedingFinisher, 
                        DEDSeedingUploadItem, DEDSharingConnection, DEDSharingInbound, 

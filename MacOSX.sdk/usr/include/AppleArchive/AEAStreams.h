@@ -14,7 +14,7 @@ _Pragma("clang assume_nonnull begin")
 extern "C" {
 #endif
 
-#pragma mark - Encryption/decryption stream open
+#pragma mark - Encryption stream open
 
 /**
   @abstract Create a new encryption output stream
@@ -87,6 +87,30 @@ APPLE_ARCHIVE_API int AEAEncryptionOutputStreamCloseAndUpdateContext(
 )
 APPLE_ARCHIVE_AVAILABLE(macos(11.3), ios(14.5), watchos(7.4), tvos(14.5));
 
+#pragma mark - Decryption context validation
+
+/**
+  @abstract Validate decryption keys, and collect archive attributes
+
+  @discussion \p context must have been created from an encrypted stream.  If the call is successful,
+  \p context is updated with the decrypted archive attributes (raw size, container size, compression algorithm,
+  block size, etc.)  If the call fails, it indicates the provided credentials do not match the archive
+  prologue stored in `context`, either because the keys are invalid, or the prologue could not be authenticated.
+
+  The same validation and update is done when opening a decryption input stream: it is not necessary to call
+  this function before `AEADecryptionInputStreamOpen` or `AEADecryptionRandomAccessInputStreamOpen`.
+
+  @param context provides archive encrypted prologue and credentials, receives decrypted attributes
+
+  @return 0 on success, a negative error code on failure
+ */
+APPLE_ARCHIVE_API int AEAContextDecryptAttributes(
+  AEAContext context
+)
+APPLE_ARCHIVE_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+#pragma mark - Decryption stream open
+
 /**
   @abstract Create a new sequential decryption input stream
 
@@ -128,7 +152,7 @@ APPLE_ARCHIVE_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
   \p context must have been created from the same \p encrypted_stream.  If the call is successful,
   \p context is updated with the archive attributes.
 
-  @param encrypted_stream provides encrypted data, only \p read is called
+  @param encrypted_stream provides encrypted data, must implement \p pread.
   @param context provides parameters, keys, and associated data
   @param alloc_limit is the requested max memory allocation size
   @param flags stream flags

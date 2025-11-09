@@ -14,30 +14,9 @@ The server just handles all the checking in and IAC and delegates the real work 
 */
 
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-@interface NSSpellServer : NSObject {
-
-  /*All instance variables are private*/
-
-  @private
-    // All instance variables are private and subject to future change.  Do not access them.
-    id _delegate;
-    NSInteger _caseSensitive;
-    id _spellServerConnection;
-    id _dictionaries;
-    NSArray *_learnedDictionaries;
-    
-    struct __ssFlags {
-        unsigned int delegateLearnsWords:1;
-        unsigned int delegateForgetsWords:1;
-        unsigned int busy:1;
-        unsigned int _reserved:29;
-    } _ssFlags;
-
-    id _checker;
-    void *_reservedSpellServer;
-}
+@interface NSSpellServer : NSObject
 
 @property (nullable, assign) id<NSSpellServerDelegate> delegate;
 
@@ -94,5 +73,5 @@ FOUNDATION_EXPORT NSString *const NSGrammarCorrections API_AVAILABLE(macos(10.5)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 

@@ -7,6 +7,7 @@
 
 #import <MediaPlayer/MediaPlayerDefines.h>
 
+#import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVMediaSelectionGroup.h>
 #import <AVFoundation/AVMediaSelection.h>
 #import <AVFoundation/AVMediaFormat.h>

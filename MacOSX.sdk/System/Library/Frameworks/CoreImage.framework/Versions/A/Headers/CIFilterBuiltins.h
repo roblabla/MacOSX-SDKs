@@ -1,3 +1,9 @@
+#ifndef CIFILTERBUILTINS_H
+#define CIFILTERBUILTINS_H
+
+#ifdef __OBJC__
+
+#import <TargetConditionals.h>
 
 #if TARGET_OS_OSX || TARGET_OS_IOS || TARGET_OS_TV
 
@@ -326,6 +332,7 @@ NS_ASSUME_NONNULL_BEGIN
   @property (nonatomic, retain, nullable) CIImage *inputImage;
   @property (nonatomic) float cubeDimension;
   @property (nonatomic, retain) NSData *cubeData;
+  @property (nonatomic) bool extrapolate NS_AVAILABLE(13_0, 16_0);
 @end
 @protocol CIColorCubesMixedWithMask <CIFilter>
   @property (nonatomic, retain, nullable) CIImage *inputImage;
@@ -334,12 +341,14 @@ NS_ASSUME_NONNULL_BEGIN
   @property (nonatomic, retain) NSData *cube0Data;
   @property (nonatomic, retain) NSData *cube1Data;
   @property (nonatomic, nullable) CGColorSpaceRef colorSpace;
+  @property (nonatomic) bool extrapolate NS_AVAILABLE(13_0, 16_0);
 @end
 @protocol CIColorCubeWithColorSpace <CIFilter>
   @property (nonatomic, retain, nullable) CIImage *inputImage;
   @property (nonatomic) float cubeDimension;
   @property (nonatomic, retain) NSData *cubeData;
   @property (nonatomic, nullable) CGColorSpaceRef colorSpace;
+  @property (nonatomic) bool extrapolate NS_AVAILABLE(13_0, 16_0);
 @end
 @protocol CIColorCurves <CIFilter>
   @property (nonatomic, retain, nullable) CIImage *inputImage;
@@ -362,6 +371,10 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol CIColorPosterize <CIFilter>
   @property (nonatomic, retain, nullable) CIImage *inputImage;
   @property (nonatomic) float levels;
+@end
+@protocol CIConvertLab <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) bool normalize;
 @end
 @protocol CIDither <CIFilter>
   @property (nonatomic, retain, nullable) CIImage *inputImage;
@@ -637,6 +650,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol CIAttributedTextImageGenerator <CIFilter>
   @property (nonatomic, retain) NSAttributedString *text;
   @property (nonatomic) float scaleFactor;
+  @property (nonatomic) float padding  NS_AVAILABLE(13_0, 16_0);
 @end
 @protocol CIAztecCodeGenerator <CIFilter>
   @property (nonatomic, retain) NSData *message;
@@ -730,6 +744,7 @@ NS_ASSUME_NONNULL_BEGIN
   @property (nonatomic, retain) NSString *fontName;
   @property (nonatomic) float fontSize;
   @property (nonatomic) float scaleFactor;
+  @property (nonatomic) float padding  NS_AVAILABLE(13_0, 16_0);
 @end
 
 // CICategoryStylize
@@ -938,6 +953,12 @@ NS_ASSUME_NONNULL_BEGIN
   @property (nonatomic) float scale;
   @property (nonatomic) NSInteger count;
 @end
+@protocol CIAreaLogarithmicHistogram <CIAreaReductionFilter>
+  @property (nonatomic) float scale;
+  @property (nonatomic) NSInteger count;
+  @property (nonatomic) float minimumStop;
+  @property (nonatomic) float maximumStop;
+@end
 @protocol CIAreaMaximum <CIAreaReductionFilter>
 @end
 @protocol CIAreaMaximumAlpha <CIAreaReductionFilter>
@@ -1077,6 +1098,8 @@ NS_CLASS_AVAILABLE(10_15, 13_0)
 + (CIFilter<CIColorMap>*) colorMapFilter;
 + (CIFilter<CIColorMonochrome>*) colorMonochromeFilter;
 + (CIFilter<CIColorPosterize>*) colorPosterizeFilter;
++ (CIFilter<CIConvertLab>*) convertLabToRGBFilter NS_AVAILABLE(13_0, 16_0);
++ (CIFilter<CIConvertLab>*) convertRGBtoLabFilter NS_AVAILABLE(13_0, 16_0);
 + (CIFilter<CIDither>*) ditherFilter;
 + (CIFilter<CIDocumentEnhancer>*) documentEnhancerFilter;
 + (CIFilter<CIFalseColor>*) falseColorFilter;
@@ -1210,6 +1233,7 @@ NS_CLASS_AVAILABLE(10_15, 13_0)
 // CICategoryReduction
 + (CIFilter<CIAreaAverage>*) areaAverageFilter NS_AVAILABLE(11_0, 14_0);
 + (CIFilter<CIAreaHistogram>*) areaHistogramFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIAreaLogarithmicHistogram>*) areaLogarithmicHistogramFilter NS_AVAILABLE(13_0, 16_0);
 + (CIFilter<CIAreaMaximum>*) areaMaximumFilter NS_AVAILABLE(11_0, 14_0);
 + (CIFilter<CIAreaMaximumAlpha>*) areaMaximumAlphaFilter NS_AVAILABLE(11_0, 14_0);
 + (CIFilter<CIAreaMinimum>*) areaMinimumFilter NS_AVAILABLE(11_0, 14_0);
@@ -1226,3 +1250,7 @@ NS_CLASS_AVAILABLE(10_15, 13_0)
 NS_ASSUME_NONNULL_END
 
 #endif // TARGET_OS_OSX || TARGET_OS_IOS || TARGET_OS_TV
+
+#endif /* __OBJC__ */
+
+#endif /* CIFILTERBUILTINS_H */

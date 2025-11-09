@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2021 Apple Inc. All rights reserved.
+	Copyright 2010-2022 Apple Inc. All rights reserved.
 
 */
 
@@ -43,7 +43,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
     AVVideoCompositionInternal    *_videoComposition;
 }
 
-/*  
+/*!
  @method		videoCompositionWithPropertiesOfAsset:
  @abstract
    Returns a new instance of AVVideoComposition with values and instructions suitable for presenting the video tracks of the specified asset according to its temporal and geometric properties and those of its tracks.
@@ -61,7 +61,28 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    If the specified asset has no video tracks, this method will return an AVVideoComposition instance with an empty collection of instructions.
  
 */
-+ (AVVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
++ (AVVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithPropertiesOfAsset:completionHandler:", macos(10.9, API_TO_BE_DEPRECATED), ios(6.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
+
+/*!
+ @method		videoCompositionWithPropertiesOfAsset:completionHandler:
+ @abstract
+	Vends a new instance of AVVideoComposition with values and instructions suitable for presenting the video tracks of the specified asset according to its temporal and geometric properties and those of its tracks.
+ @param			asset
+	An instance of AVAsset.
+ @param			completionHandler
+	A block that is invoked when the new video composition has finished being created.  If the `videoComposition` parameter is nil, the `error` parameter describes the failure that occurred.
+ @discussion
+	The new AVVideoComposition will have instructions that respect the spatial properties and timeRanges of the specified asset's video tracks.
+	It will also have the following values for its properties:
+   
+		- If the asset has exactly one video track, the original timing of the source video track will be used. If the asset has more than one video track, and the nominal frame rate of any of video tracks is known, the reciprocal of the greatest known nominalFrameRate will be used as the value of frameDuration. Otherwise, a default framerate of 30fps is used.
+		- If the specified asset is an instance of AVComposition, the renderSize will be set to the naturalSize of the AVComposition; otherwise the renderSize will be set to a value that encompasses all of the asset's video tracks.
+		- A renderScale of 1.0.
+		- A nil animationTool.
+ 
+	If the specified asset has no video tracks, this method will return an AVVideoComposition instance with an empty collection of instructions.
+*/
++ (void)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset completionHandler:(void (^)(AVVideoComposition * _Nullable videoComposition, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 /* indicates a custom compositor class to use. The class must implement the AVVideoCompositing protocol.
    If nil, the default, internal video compositor is used */
@@ -150,8 +171,8 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 @interface AVVideoComposition (AVVideoCompositionFiltering)
 
-/*  
- @method		videoCompositionWithAsset:options:applyingCIFiltersWithHandler:
+/*!
+ @method		videoCompositionWithAsset:applyingCIFiltersWithHandler:
  @abstract
 	Returns a new instance of AVVideoComposition with values and instructions that will apply the specified handler block to video frames represented as instances of CIImage.
  @param			asset		An instance of AVAsset. For best performance, ensure that the duration and tracks properties of the asset are already loaded before invoking this method.
@@ -186,7 +207,53 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 			}];
 */
 + (AVVideoComposition *)videoCompositionWithAsset:(AVAsset *)asset
-			 applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+			 applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
+
+/*!
+ @method		videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:
+ @abstract
+	Vends a new instance of AVVideoComposition with values and instructions that will apply the specified handler block to video frames represented as instances of CIImage.
+ @param			asset
+	An instance of AVAsset.
+ @param			completionHandler
+	A block that is invoked when the new video composition has finished being created.  If the `videoComposition` parameter is nil, the `error` parameter describes the failure that occurred.
+ @discussion
+	The new AVVideoComposition will cause the specified handler block to be called to filter each frame of the asset's first enabled video track. The handler block should use the properties of the provided AVAsynchronousCIImageFilteringRequest and respond using finishWithImage:context: with a "filtered" new CIImage (or the provided source image for no affect). In the event of an error, respond to the request using finishWithError:. The error can be observed via AVPlayerItemFailedToPlayToEndTimeNotification, see AVPlayerItemFailedToPlayToEndTimeErrorKey in notification payload.
+ 
+	NOTE: The returned AVVideoComposition's properties are private and support only CIFilter-based operations. Mutations are not supported, either in the values of properties of the AVVideoComposition itself or in its private instructions. If rotations or other transformations are desired, they must be accomplished via the application of CIFilters during the execution of your specified handler.
+
+	The video composition will also have the following values for its properties:
+
+		- The original timing of the asset's first enabled video track will be used.
+		- A renderSize that encompasses the asset's first enabled video track respecting the track's preferredTransform.
+		- A renderScale of 1.0.
+
+	The default CIContext has the following properties:
+
+		- iOS: Device RGB color space
+		- OS X: sRGB color space
+ 
+	Example usage:
+
+		[AVVideoComposition videoCompositionWithAsset:srcAsset applyingCIFiltersWithHandler:
+			^(AVAsynchronousCIImageFilteringRequest *request)
+			{
+				NSError *err = nil;
+				CIImage *filtered = myRenderer(request, &err);
+				if (filtered)
+					[request finishWithImage:filtered context:nil];
+				else
+					[request finishWithError:err];
+			} completionHandler:
+			^(AVVideoComposition * _Nullable videoComposition, NSError * _Nullable error)
+			{
+				if (videoComposition != nil) {
+					playerItem.videoComposition = videoComposition
+				else {
+					// handle error
+			}];
+ */
++ (void)videoCompositionWithAsset:(AVAsset *)asset applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier completionHandler:(void (^)(AVVideoComposition * _Nullable videoComposition, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -213,7 +280,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 */
 + (AVMutableVideoComposition *)videoComposition;
 
-/*  
+/*!
  @method		videoCompositionWithPropertiesOfAsset:
  @abstract
    Returns a new instance of AVMutableVideoComposition with values and instructions suitable for presenting the video tracks of the specified asset according to its temporal and geometric properties and those of its tracks.
@@ -231,9 +298,31 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    If the specified asset has no video tracks, this method will return an AVMutableVideoComposition instance with an empty collection of instructions.
  
 */
-+ (AVMutableVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
++ (AVMutableVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithPropertiesOfAsset:completionHandler:", macos(10.9, API_TO_BE_DEPRECATED), ios(6.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
-/*
+/*!
+ @method		videoCompositionWithPropertiesOfAsset:completionHandler:
+ @abstract
+	Vends a new instance of AVMutableVideoComposition with values and instructions suitable for presenting the video tracks of the specified asset according to its temporal and geometric properties and those of its tracks.
+ @param			asset
+	An instance of AVAsset.
+ @param			completionHandler
+	A block that is invoked when the new video composition has finished being created.  If the `videoComposition` parameter is nil, the `error` parameter describes the failure that occurred.
+ @discussion
+   The new AVMutableVideoComposition will have instructions that respect the spatial properties and timeRanges of the specified asset's video tracks. The client can set sourceTrackIDForFrameTiming to kCMPersistentTrackID_Invalid and frameDuration to an appropriate value in order to specify the maximum output frame rate independent of the source track timing.
+   It will also have the following values for its properties:
+   
+	- If the asset has exactly one video track, the original timing of the source video track will be used. If the asset has more than one video track, and the nominal frame rate of any of video tracks is known, the reciprocal of the greatest known nominalFrameRate will be used as the value of frameDuration. Otherwise, a default framerate of 30fps is used.
+	- If the specified asset is an instance of AVComposition, the renderSize will be set to the naturalSize of the AVComposition; otherwise the renderSize will be set to a value that encompasses all of the asset's video tracks.
+	- A renderScale of 1.0.
+	- A nil animationTool.
+
+   If the specified asset has no video tracks, this method will return an AVMutableVideoComposition instance with an empty collection of instructions.
+ 
+*/
++ (void)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset completionHandler:(void (^)(AVMutableVideoComposition * _Nullable videoComposition, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
+/*!
  @method		videoCompositionWithPropertiesOfAsset:prototypeInstruction:
  @abstract
     Returns a new instance of AVMutableVideoComposition with values and instructions suitable for presenting the video tracks of the specified asset according to its temporal and geometric properties and those of its tracks, and also overrides default properties with those from a prototypeInstruction.
@@ -249,7 +338,35 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    myVideoComposition = [AVVideoComposition videoCompositionWithPropertiesOfAsset:myAsset prototypeInstruction:myPrototypeInstruction];
  
  */
-+ (AVMutableVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset prototypeInstruction:(AVVideoCompositionInstruction *)prototypeInstruction API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
++ (AVMutableVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset prototypeInstruction:(AVVideoCompositionInstruction *)prototypeInstruction API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithPropertiesOfAsset:prototypeInstruction:completionHandler:", macos(10.15, API_TO_BE_DEPRECATED), ios(13.0, API_TO_BE_DEPRECATED), tvos(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
+
+/*!
+ @method		videoCompositionWithPropertiesOfAsset:prototypeInstruction:completionHandler:
+ @abstract
+	Vends a new instance of AVMutableVideoComposition with values and instructions suitable for presenting the video tracks of the specified asset according to its temporal and geometric properties and those of its tracks, and also overrides default properties with those from a prototypeInstruction.
+ @param			asset
+	An instance of AVAsset.
+ @param			prototypeInstruction
+	Custom instructions that the client can choose to override.
+ @param			completionHandler
+	A block that is invoked when the new video composition has finished being created.  If the `videoComposition` parameter is nil, the `error` parameter describes the failure that occurred.
+ @discussion
+	Also see videoCompositionWithPropertiesOfAsset:completionHandler:.
+	The new AVMutableVideoComposition will have instructions that respect the spatial properties and timeRanges of the specified asset's video tracks. Anything not pertaining to spatial layout and timing, such as background color for their composition or post-processing behaviors, is eligible to be specified via a prototype instruction.
+	Example: To add a background color,
+		myPrototypeInstruction = [[AVMutableVideoCompositionInstruction alloc] init];
+		myPrototypeInstruction.backgroundColor = myCGColorRef; // Do not use constant CGColorRef colors here.
+		myVideoComposition = [AVVideoComposition videoCompositionWithPropertiesOfAsset:myAsset prototypeInstruction:myPrototypeInstruction completionHandler:^(AVMutableVideoComposition * _Nullable myVideoComposition, NSError * _Nullable error) {
+			if (myVideoComposition != nil) {
+				// use myVideoComposition
+			}
+			else {
+				// handle error
+			}
+		}];
+ 
+ */
++ (void)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset prototypeInstruction:(AVVideoCompositionInstruction *)prototypeInstruction completionHandler:(void (^)(AVMutableVideoComposition * _Nullable videoComposition, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 /* indicates the custom compositor class to use. If nil, the default, internal video compositor is used */
 @property (nonatomic, retain, nullable) Class<AVVideoCompositing> customVideoCompositorClass API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
@@ -337,8 +454,8 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 @interface AVMutableVideoComposition (AVMutableVideoCompositionFiltering)
 
-/*  
- @method		videoCompositionWithAsset:options:applyingCIFiltersWithHandler:
+/*!
+ @method		videoCompositionWithAsset:applyingCIFiltersWithHandler:
  @abstract
 	Returns a new instance of AVMutableVideoComposition with values and instructions that will apply the specified handler block to video frames represented as instances of CIImage.
  @param			asset		An instance of AVAsset. For best performance, ensure that the duration and tracks properties of the asset are already loaded before invoking this method.
@@ -371,7 +488,51 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 			}];
 */
 + (AVMutableVideoComposition *)videoCompositionWithAsset:(AVAsset *)asset
-			 applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+			 applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:", watchos(2.0, API_TO_BE_DEPRECATED));
+
+/*!
+ @method		videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:
+ @abstract
+	Vends a new instance of AVMutableVideoComposition with values and instructions that will apply the specified handler block to video frames represented as instances of CIImage.
+ @param			asset
+	An instance of AVAsset.
+ @param			completionHandler
+	A block that is invoked when the new video composition has finished being created.  If the `videoComposition` parameter is nil, the `error` parameter describes the failure that occurred.
+ @discussion
+	The new AVMutableVideoComposition will cause the specified handler block to be called to filter each frame of the asset's first enabled video track. The handler block should use the properties of the provided AVAsynchronousCIImageFilteringRequest and respond using finishWithImage:context: with a "filtered" new CIImage (or the provided source image for no affect). In the event of an error, respond to the request using finishWithError:. The error can be observed via AVPlayerItemFailedToPlayToEndTimeNotification, see AVPlayerItemFailedToPlayToEndTimeErrorKey in notification payload. The client can set sourceTrackIDForFrameTiming to kCMPersistentTrackID_Invalid and frameDuration to an appropriate value in order to specify the maximum output frame rate independent of the source track timing.
+ 
+	The video composition will also have the following values for its properties:
+
+		- The original timing of the asset's first enabled video track will be used.
+		- A renderSize that encompasses the asset's first enabled video track respecting the track's preferredTransform.
+		- A renderScale of 1.0.
+
+	The default CIContext has the following properties:
+
+		- iOS: Device RGB color space
+		- OS X: sRGB color space
+ 
+	Example usage:
+
+		[AVMutableVideoComposition videoCompositionWithAsset:srcAsset applyingCIFiltersWithHandler:
+			^(AVAsynchronousCIImageFilteringRequest *request)
+			{
+				NSError *err = nil;
+				CIImage *filtered = myRenderer(request, &err);
+				if (filtered)
+					[request finishWithImage:filtered context:nil];
+				else
+					[request finishWithError:err];
+			} completionHandler:
+			^(AVMutableVideoComposition * _Nullable videoComposition, NSError * _Nullable error)
+			{
+				if (videoComposition != nil) {
+					playerItem.videoComposition = videoComposition
+				else {
+					// handle error
+			}];
+*/
++ (void)videoCompositionWithAsset:(AVAsset *)asset applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier completionHandler:(void (^)(AVMutableVideoComposition * _Nullable videoComposition, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -592,6 +753,8 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    During a transform ramp, the affine transform is interpolated between the values set at the ramp's start time and end time.
    Before the first specified time for which a transform is set, the affine transform is held constant at the value of CGAffineTransformIdentity;
    after the last time for which a transform is set, the affine transform is held constant at that last value;
+ 
+   This method throws an exception if the time range overlaps the time range of an existing transform ramp or if the time range of a does not have a numeric start time and duration.
 */
 - (void)setTransformRampFromStartTransform:(CGAffineTransform)startTransform toEndTransform:(CGAffineTransform)endTransform timeRange:(CMTimeRange)timeRange;
 
@@ -612,6 +775,8 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    Sets a fixed transform to apply from the specified time until the next time at which a transform is set; this is the same as setting a flat ramp for that time range.
    Before the first specified time for which a transform is set, the affine transform is held constant at the value of CGAffineTransformIdentity;
    after the last time for which a transform is set, the affine transform is held constant at that last value;
+ 
+	This method throws an exception if time is not numeric.
 */
 - (void)setTransform:(CGAffineTransform)transform atTime:(CMTime)time;
 
@@ -626,8 +791,9 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    The timeRange over which the value of the opacity will be interpolated between startOpacity and endOpacity.
  @discussion
    During an opacity ramp, opacity is computed using a linear interpolation.
-   Before the first time for which an opacity is set, the opacity is held constant at 1.0; after the last specified time, the opacity is held constant at the last value.
-*/
+   Before the first time for which an opacity is set, the opacity is held constant at 1.0; after the last specified time, the opacity is held constant at the last value
+   This method throws an exception if the time range of a does not have a numeric start time and duration.
+ */
 - (void)setOpacityRampFromStartOpacity:(float)startOpacity toEndOpacity:(float)endOpacity timeRange:(CMTimeRange)timeRange;
 
 /*  
@@ -640,6 +806,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  @discussion
    Sets a fixed opacity to apply from the specified time until the next time at which an opacity is set; this is the same as setting a flat ramp for that time range.
    Before the first time for which an opacity is set, the opacity is held constant at 1.0; after the last specified time, the opacity is held constant at the last value.
+   This method throws an exception if time is not numeric.
 */
 - (void)setOpacity:(float)opacity atTime:(CMTime)time;
 
@@ -661,6 +828,8 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    When the starting or ending rectangle is empty, interpolations take into account the origin and size of the empty rectangle.
    Before the first specified time for which a crop rectangle is set, the crop rectangle is held constant to CGRectInfinite
    after the last time for which a crop rectangle is set, the crop rectangle is held constant at that last value.
+
+   This method throws an exception if the time range overlaps the time range of an existing crop rectangle ramp, or if the time range does not have a numeric start time and duration.
 */
 - (void)setCropRectangleRampFromStartCropRectangle:(CGRect)startCropRectangle toEndCropRectangle:(CGRect)endCropRectangle timeRange:(CMTimeRange)timeRange API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -679,6 +848,8 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    Sets a fixed crop rectangle to apply from the specified time until the next time at which a crop rectangle is set; this is the same as setting a flat ramp for that time range.
    Before the first specified time for which a crop rectangle is set, the crop rectangle is held constant to CGRectInfinite
    after the last time for which a crop rectangle is set, the crop rectangle is held constant at that last value.
+
+   This method throws an exception if time is not numeric.
 */
 - (void)setCropRectangle:(CGRect)cropRectangle atTime:(CMTime)time API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -758,7 +929,12 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 @interface AVAsset (AVAssetVideoCompositionUtility)
 
-- (CMPersistentTrackID)unusedTrackID;
+- (CMPersistentTrackID)unusedTrackID
+#if __swift__
+API_DEPRECATED("Use findUnusedTrackID() instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_DEPRECATED_WITH_REPLACEMENT("findUnusedTrackIDWithCompletionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+#endif
 
 /*!
  @method	findUnusedTrackIDWithCompletionHandler:
@@ -789,7 +965,25 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    In the course of validation, the receiver will invoke its validationDelegate with reference to any trouble spots in the video composition.
    An exception will be raised if the delegate modifies the receiver's array of instructions or the array of layerInstructions of any AVVideoCompositionInstruction contained therein during validation.
 */
-- (BOOL)isValidForAsset:(nullable AVAsset *)asset timeRange:(CMTimeRange)timeRange validationDelegate:(nullable id<AVVideoCompositionValidationHandling>)validationDelegate API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (BOOL)isValidForAsset:(nullable AVAsset *)asset timeRange:(CMTimeRange)timeRange validationDelegate:(nullable id<AVVideoCompositionValidationHandling>)validationDelegate API_DEPRECATED_WITH_REPLACEMENT("determineValidityForAsset:timeRange:validationDelegate:completionHandler:", macos(10.8, API_TO_BE_DEPRECATED), ios(5.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
+
+/*!
+ @method		determineValidityForAsset:timeRange:validationDelegate:completionHandler:
+ @abstract
+	Determines whether the timeRanges of the receiver's instructions conform to the requirements described for them immediately above (in connection with the instructions property) and also whether all of the layer instructions have a value for trackID that corresponds either to a track of the specified asset or to the receiver's animationTool.
+ @param			asset
+	Pass a reference to an AVAsset if you wish to validate the timeRanges of the instructions against the duration of the asset and the trackIDs of the layer instructions against the asset's tracks. Pass nil to skip that validation.
+ @param			timeRange
+	A CMTimeRange.  Only those instuctions with timeRanges that overlap with the specified timeRange will be validated. To validate all instructions that may be used for playback or other processing, regardless of timeRange, pass CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity).
+ @param			validationDelegate
+	Indicates an object implementing the AVVideoCompositionValidationHandling protocol to receive information about troublesome portions of a video composition during processing of -determineValidityForAsset:. May be nil.
+ @param			completionHandler
+	A block that is invoked when a determination is made about whether the video composition is valid.  If the `isValid` parameter is NO, either the video composition is not valid, in which case the `error` parameter will be nil, or the answer could not be determined, in which case the `error` parameter will be non-nil and describe the failure that occurred.
+@discussion
+   In the course of validation, the receiver will invoke its validationDelegate with reference to any trouble spots in the video composition.
+   An exception will be raised if the delegate modifies the receiver's array of instructions or the array of layerInstructions of any AVVideoCompositionInstruction contained therein during validation.
+*/
+- (void)determineValidityForAsset:(nullable AVAsset *)asset timeRange:(CMTimeRange)timeRange validationDelegate:(nullable id<AVVideoCompositionValidationHandling>)validationDelegate completionHandler:(void (^)(BOOL isValid, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(isValid(for:timeRange:validationDelegate:)) API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 @end
 

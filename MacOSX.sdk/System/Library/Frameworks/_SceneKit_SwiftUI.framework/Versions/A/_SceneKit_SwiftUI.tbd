@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C994BCE7-A97F-3578-A715-0108CB2CE86C
+    value:           71D1054D-E8E7-3902-BD37-9DCDBF04FA5A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A3670137-9008-3430-B4D2-626FC281B1BD
+    value:           0C09A8B5-C1AD-3F47-8696-A6AFC7BC2337
 install-name:    '/System/Library/Frameworks/_SceneKit_SwiftUI.framework/Versions/A/_SceneKit_SwiftUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s17_SceneKit_SwiftUI0A4ViewV0cD00E0AAMc', '_$s17_SceneKit_SwiftUI0A4ViewV4bodyQrvg', 
                        '_$s17_SceneKit_SwiftUI0A4ViewV4bodyQrvpMV', '_$s17_SceneKit_SwiftUI0A4ViewV4bodyQrvpQOMQ', 
                        '_$s17_SceneKit_SwiftUI0A4ViewV5scene07pointOfE07options24preferredFramesPerSecond16antialiasingMode8delegate9techniqueACSo8SCNSceneCSg_So7SCNNodeCSgAC7OptionsVSiSo015SCNAntialiasingO0VSo0R16RendererDelegate_pSgSo12SCNTechniqueCSgtcfC', 

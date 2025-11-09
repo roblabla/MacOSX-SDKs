@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EBFD171A-7505-3B20-A3A1-BE3E51A8A0A8
+    value:           524D670B-6F90-3087-8711-4494C1438D00
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2FE13224-8EBB-38BA-BF86-3DAC44FE01DA
+    value:           40F2FA28-2483-3E93-BE69-1792AC768297
 install-name:    '/System/Library/PrivateFrameworks/PowerlogFullOperators.framework/Versions/A/PowerlogFullOperators'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _kPLPMUAgentSensors, _kPLScheduledWakeAgentEventForwardNameScheduledEvent ]
     objc-classes:    [ PLPMUAgent, PLScheduledWakeAgent ]
 ...

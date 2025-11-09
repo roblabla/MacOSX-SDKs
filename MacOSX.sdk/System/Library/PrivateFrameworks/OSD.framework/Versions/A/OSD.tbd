@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0C92EA63-3102-3EBF-B023-9C742192EAF2
+    value:           CBFA7E28-613A-3BE6-917F-431E98741EFD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1E7C8CC0-8634-3DED-8896-4E800083FE1D
+    value:           239A3146-5E11-33F4-AC56-CD6010732BD9
 install-name:    '/System/Library/PrivateFrameworks/OSD.framework/Versions/A/OSD'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ OSDManager ]
 ...

@@ -3,23 +3,24 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           36D0E6C5-1D4C-3F7B-BB8A-259CDC65B134
+    value:           4093E98B-86EA-3ECE-8BCA-829D2C3908F1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FF73EE39-C07A-3DDC-AD44-B056A2175E7D
+    value:           B8A9FFB4-DD88-38D8-8271-3D5304F4CF7C
 install-name:    '/System/Library/PrivateFrameworks/AppStoreKit.framework/Versions/A/AppStoreKit'
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ ASMessagesProvider, App Store, AppInstallExtension, AppStore, 
-                       AppStoreKitInternal, AppStoreKitTests, AppStoreTests, AppStoreTopShelfExtension, 
-                       AppStoreWidgetsExtension, Arcade, ArcadeTopShelfExtension, 
-                       GameCenterUI, GameCenterUI_Private, MacAppStore, MacAppStoreTests, 
-                       NanoAppStore, NanoAppStoreTests, NanoAppStoreUITests, ProductPageExtension, 
-                       SubscribePageExtension, TVAppStore, TVAppStoreTests ]
+                       AppStoreKitInternal, AppStoreKitInternalTests, AppStoreKitTests, 
+                       AppStoreTests, AppStoreTopShelfExtension, AppStoreWidgetsExtension, 
+                       Arcade, ArcadeTopShelfExtension, GameCenterUI, GameCenterUI_Private, 
+                       MacAppStore, MacAppStoreTests, NanoAppStore, NanoAppStoreTests, 
+                       NanoAppStoreUITests, ProductPageExtension, SubscribePageExtension, 
+                       TVAppStore, TVAppStoreTests ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation12CharacterSetV11AppStoreKitE16excessiveLeadingACvgZ', 
                        '_$s10Foundation12CharacterSetV11AppStoreKitE25legacyExcessiveLineHeightACvgZ', 
                        '_$s11AppStoreKit10ButtonViewC010titleLabelE0AA20DynamicTypeTextFieldCvg', 
@@ -262,6 +263,10 @@ exports:
                        '_$s11AppStoreKit13ArtworkLoaderC20discardInMemoryCacheyyF', 
                        '_$s11AppStoreKit13ArtworkLoaderC24isFetchingOnScreenAssetsSbvg', 
                        '_$s11AppStoreKit13ArtworkLoaderC24isFetchingOnScreenAssetsSbvpMV', 
+                       '_$s11AppStoreKit13ArtworkLoaderC5queue10cacheLimit12renderIntentACSo16NSOperationQueueC_SiSo014ASKImageRenderJ0VtcfC', 
+                       '_$s11AppStoreKit13ArtworkLoaderC5queue10cacheLimit12renderIntentACSo16NSOperationQueueC_SiSo014ASKImageRenderJ0VtcfCTj', 
+                       '_$s11AppStoreKit13ArtworkLoaderC5queue10cacheLimit12renderIntentACSo16NSOperationQueueC_SiSo014ASKImageRenderJ0VtcfCTq', 
+                       '_$s11AppStoreKit13ArtworkLoaderC5queue10cacheLimit12renderIntentACSo16NSOperationQueueC_SiSo014ASKImageRenderJ0Vtcfc', 
                        '_$s11AppStoreKit13ArtworkLoaderC6parentA2C_tcfC', '_$s11AppStoreKit13ArtworkLoaderC6parentA2C_tcfCTj', 
                        '_$s11AppStoreKit13ArtworkLoaderC6parentA2C_tcfCTq', '_$s11AppStoreKit13ArtworkLoaderC6parentA2C_tcfc', 
                        '_$s11AppStoreKit13ArtworkLoaderC8register08resourceE0ySo24ASKLoadResourceOperationCm_tF', 
@@ -331,9 +336,7 @@ exports:
                        '_$s11AppStoreKit13ClickableViewCMa', '_$s11AppStoreKit13ClickableViewCMn', 
                        '_$s11AppStoreKit13ClickableViewCMo', '_$s11AppStoreKit13ClickableViewCMu', 
                        '_$s11AppStoreKit13ClickableViewCN', '_$s11AppStoreKit13ClickableViewCfD', 
-                       '_$s11AppStoreKit13ModelProtocolMp', '_$s11AppStoreKit13ModelProtocolP9JetEngine17ExpressibleByJSONTb', 
-                       '_$s11AppStoreKit13ModelProtocolTL', '_$s11AppStoreKit14CornerStylableMp', 
-                       '_$s11AppStoreKit14CornerStylableP05applyD06radius5styleSb12CoreGraphics7CGFloatV_AA0D5StyleOtFTj', 
+                       '_$s11AppStoreKit14CornerStylableMp', '_$s11AppStoreKit14CornerStylableP05applyD06radius5styleSb12CoreGraphics7CGFloatV_AA0D5StyleOtFTj', 
                        '_$s11AppStoreKit14CornerStylableP05applyD06radius5styleSb12CoreGraphics7CGFloatV_AA0D5StyleOtFTq', 
                        '_$s11AppStoreKit14CornerStylableTL', '_$s11AppStoreKit15ImageButtonViewC03hasD0SbvgTj', 
                        '_$s11AppStoreKit15ImageButtonViewC03hasD0SbvgTq', '_$s11AppStoreKit15ImageButtonViewC03hasD0SbvpMV', 
@@ -757,12 +760,14 @@ exports:
                        '_$s11AppStoreKit7ArtworkC13removingStyleACvpMV', '_$s11AppStoreKit7ArtworkC15backgroundColorSo7NSColorCSgvg', 
                        '_$s11AppStoreKit7ArtworkC15backgroundColorSo7NSColorCSgvpMV', 
                        '_$s11AppStoreKit7ArtworkC15systemImageNameSSSgvgTj', '_$s11AppStoreKit7ArtworkC15systemImageNameSSSgvgTq', 
-                       '_$s11AppStoreKit7ArtworkC15systemImageNameSSSgvpMV', '_$s11AppStoreKit7ArtworkC18shouldUseWideGamut3forSbAC7VariantV_tF', 
-                       '_$s11AppStoreKit7ArtworkC2eeoiySbAC_ACtFZ', '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop8variantsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVSayAC7VariantVGtcfC', 
-                       '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop8variantsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVSayAC7VariantVGtcfCTj', 
-                       '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop8variantsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVSayAC7VariantVGtcfCTq', 
-                       '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop8variantsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVSayAC7VariantVGtcfc', 
-                       '_$s11AppStoreKit7ArtworkC2idSSvg', '_$s11AppStoreKit7ArtworkC2idSSvpMV', 
+                       '_$s11AppStoreKit7ArtworkC15systemImageNameSSSgvpMV', '_$s11AppStoreKit7ArtworkC17impressionMetrics9JetEngine010ImpressionF0VSgvg', 
+                       '_$s11AppStoreKit7ArtworkC17impressionMetrics9JetEngine010ImpressionF0VSgvpMV', 
+                       '_$s11AppStoreKit7ArtworkC18shouldUseWideGamut3forSbAC7VariantV_tF', 
+                       '_$s11AppStoreKit7ArtworkC2eeoiySbAC_ACtFZ', '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop8variants17impressionMetricsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVSayAC7VariantVG9JetEngine010ImpressionN0VSgtcfC', 
+                       '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop8variants17impressionMetricsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVSayAC7VariantVG9JetEngine010ImpressionN0VSgtcfCTj', 
+                       '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop8variants17impressionMetricsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVSayAC7VariantVG9JetEngine010ImpressionN0VSgtcfCTq', 
+                       '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop8variants17impressionMetricsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVSayAC7VariantVG9JetEngine010ImpressionN0VSgtcfc', 
+                       '_$s11AppStoreKit7ArtworkC2ids11AnyHashableVvg', '_$s11AppStoreKit7ArtworkC2ids11AnyHashableVvpMV', 
                        '_$s11AppStoreKit7ArtworkC4CropV012squareCenterE0AEvgZ', '_$s11AppStoreKit7ArtworkC4CropV10sourceSizeAEvgZ', 
                        '_$s11AppStoreKit7ArtworkC4CropV11boundingBoxAEvgZ', '_$s11AppStoreKit7ArtworkC4CropV17specificRectangleAEvgZ', 
                        '_$s11AppStoreKit7ArtworkC4CropV20condensedSearchStoryAEvgZ', 
@@ -794,9 +799,10 @@ exports:
                        '_$s11AppStoreKit7ArtworkC5StyleO9unadornedyA2EmFWC', '_$s11AppStoreKit7ArtworkC5StyleOMa', 
                        '_$s11AppStoreKit7ArtworkC5StyleOMn', '_$s11AppStoreKit7ArtworkC5StyleON', 
                        '_$s11AppStoreKit7ArtworkC5StyleOSHAAMc', '_$s11AppStoreKit7ArtworkC5StyleOSQAAMc', 
-                       '_$s11AppStoreKit7ArtworkC5StyleOSYAAMc', '_$s11AppStoreKit7ArtworkC5styleAC5StyleOvg', 
-                       '_$s11AppStoreKit7ArtworkC5styleAC5StyleOvpMV', '_$s11AppStoreKit7ArtworkC6FormatO14isLayeredImageSbvg', 
-                       '_$s11AppStoreKit7ArtworkC6FormatO14isLayeredImageSbvpMV', 
+                       '_$s11AppStoreKit7ArtworkC5StyleOSYAAMc', '_$s11AppStoreKit7ArtworkC5segue9JetEngine11ActionModel_pSgvg', 
+                       '_$s11AppStoreKit7ArtworkC5segue9JetEngine11ActionModel_pSgvpMV', 
+                       '_$s11AppStoreKit7ArtworkC5styleAC5StyleOvg', '_$s11AppStoreKit7ArtworkC5styleAC5StyleOvpMV', 
+                       '_$s11AppStoreKit7ArtworkC6FormatO14isLayeredImageSbvg', '_$s11AppStoreKit7ArtworkC6FormatO14isLayeredImageSbvpMV', 
                        '_$s11AppStoreKit7ArtworkC6FormatO3lcryA2EmFWC', '_$s11AppStoreKit7ArtworkC6FormatO3pngyA2EmFWC', 
                        '_$s11AppStoreKit7ArtworkC6FormatO4heicyA2EmFWC', '_$s11AppStoreKit7ArtworkC6FormatO4jpegyA2EmFWC', 
                        '_$s11AppStoreKit7ArtworkC6FormatO8rawValueAESgSS_tcfC', '_$s11AppStoreKit7ArtworkC6FormatO8rawValueSSvg', 
@@ -821,18 +827,19 @@ exports:
                        '_$s11AppStoreKit7ArtworkC7VariantVSQAAMc', '_$s11AppStoreKit7ArtworkC8templateAC11URLTemplateVvg', 
                        '_$s11AppStoreKit7ArtworkC8templateAC11URLTemplateVvpMV', 
                        '_$s11AppStoreKit7ArtworkC8variantsSayAC7VariantVGvg', '_$s11AppStoreKit7ArtworkC8variantsSayAC7VariantVGvpMV', 
+                       '_$s11AppStoreKit7ArtworkC9JetEngine14ComponentModelAAMc', 
                        '_$s11AppStoreKit7ArtworkC9JetEngine17ExpressibleByJSONAAMc', 
                        '_$s11AppStoreKit7ArtworkC9JetEngine24CustomJSValueConvertibleAAMc', 
-                       '_$s11AppStoreKit7ArtworkC9hashValueSivgTj', '_$s11AppStoreKit7ArtworkC9hashValueSivgTq', 
-                       '_$s11AppStoreKit7ArtworkC9hashValueSivpMV', '_$s11AppStoreKit7ArtworkC9makeValue2inSo7JSValueCSo9JSContextC_tFTj', 
+                       '_$s11AppStoreKit7ArtworkC9JetEngine9ViewModelAAMc', '_$s11AppStoreKit7ArtworkC9hashValueSivgTj', 
+                       '_$s11AppStoreKit7ArtworkC9hashValueSivgTq', '_$s11AppStoreKit7ArtworkC9hashValueSivpMV', 
+                       '_$s11AppStoreKit7ArtworkC9makeValue2inSo7JSValueCSo9JSContextC_tFTj', 
                        '_$s11AppStoreKit7ArtworkC9makeValue2inSo7JSValueCSo9JSContextC_tFTq', 
-                       '_$s11AppStoreKit7ArtworkCAA13ModelProtocolAAMc', '_$s11AppStoreKit7ArtworkCAA13ModelProtocolAAWP', 
                        '_$s11AppStoreKit7ArtworkCMa', '_$s11AppStoreKit7ArtworkCMm', 
                        '_$s11AppStoreKit7ArtworkCMn', '_$s11AppStoreKit7ArtworkCMo', 
                        '_$s11AppStoreKit7ArtworkCMu', '_$s11AppStoreKit7ArtworkCN', 
                        '_$s11AppStoreKit7ArtworkCSHAAMc', '_$s11AppStoreKit7ArtworkCSQAAMc', 
                        '_$s11AppStoreKit7ArtworkCfD', '_$s11AppStoreKit7ArtworkCfd', 
-                       '_$s11AppStoreKit7ArtworkCs12IdentifiableAAMc', '_$s11AppStoreKit8BaseViewC11borderColorSo7NSColorCSgvMTj', 
+                       '_$s11AppStoreKit8BaseViewC11borderColorSo7NSColorCSgvMTj', 
                        '_$s11AppStoreKit8BaseViewC11borderColorSo7NSColorCSgvMTq', 
                        '_$s11AppStoreKit8BaseViewC11borderColorSo7NSColorCSgvgTj', 
                        '_$s11AppStoreKit8BaseViewC11borderColorSo7NSColorCSgvgTq', 

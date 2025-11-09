@@ -1026,8 +1026,8 @@ private:
 };
 
 #ifndef _LIBCPP_HAS_NO_DEDUCTION_GUIDES
-template<class T>
-    optional(T) -> optional<T>;
+template<class _Tp>
+    optional(_Tp) -> optional<_Tp>;
 #endif
 
 // Comparisons between optionals

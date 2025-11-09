@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A019A3DE-04BA-32A2-A7D1-A219281661F9
+    value:           19EC6BBD-C6E7-3309-B9F2-D84D2851F627
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DFFAD061-C003-33CE-9602-38814075AB61
+    value:           FE270247-AB14-36EC-A4A4-C6374AE0C484
 install-name:    '/System/Library/PrivateFrameworks/WebContentAnalysis.framework/Versions/A/WebContentAnalysis'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ComposeDebugPage, _ComposeDebugPageSimple, _DecodeBase64, 
                        _DecodeBase64WithNewlines, _HolyInquisitionDebugPrint, _HolyInquisitionGetIPv4Proxy, 
                        _HolyInquisitionGetIPv6Proxy, _HolyInquisitionGetManagedUser, 

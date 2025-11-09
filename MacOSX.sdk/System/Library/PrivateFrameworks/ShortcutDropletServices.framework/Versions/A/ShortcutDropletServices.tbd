@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C51C5D08-24EF-308F-ACA4-FB67977707B5
+    value:           E34F1583-ADF0-31CC-921D-03579755EC19
   - target:          arm64-macos
-    value:           83015028-CAEA-3FC0-A957-D03F474FA60D
+    value:           A55C6E63-41DA-3F1E-B56A-77FF442ECCEC
   - target:          arm64e-macos
-    value:           6F7763F5-E019-3ED5-9FCD-AB9CBC8EA244
+    value:           EBDDEF27-7055-3319-B469-8C38606FC17F
 install-name:    '/System/Library/PrivateFrameworks/ShortcutDropletServices.framework/Versions/A/ShortcutDropletServices'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

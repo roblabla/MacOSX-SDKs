@@ -4,32 +4,32 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           648085BB-7E18-349D-B96F-01E13D8204A8
+    value:           55FDCE0C-EF9E-34BF-86BE-154726FA1D65
   - target:          x86_64-maccatalyst
-    value:           648085BB-7E18-349D-B96F-01E13D8204A8
+    value:           55FDCE0C-EF9E-34BF-86BE-154726FA1D65
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C2B9C8A3-787E-3F00-9F65-D461D3F68952
+    value:           6576E2C5-69EF-3CAA-BFFB-019084B97CDE
   - target:          arm64e-maccatalyst
-    value:           C2B9C8A3-787E-3F00-9F65-D461D3F68952
+    value:           6576E2C5-69EF-3CAA-BFFB-019084B97CDE
 install-name:    '/System/Library/PrivateFrameworks/FontServices.framework/libhvf.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFN3HVF13PartTransformEvEEE, 
                        __ZTINSt3__110__function6__baseIFdvEEE, __ZTINSt3__110__function6__baseIFvRKN3HVF13PartTransformEEEE, 
                        __ZTINSt3__110__function6__baseIFvRKdEEE, __ZTINSt3__117bad_function_callE, 
                        __ZTSNSt3__110__function6__baseIFN3HVF13PartTransformEvEEE, 
                        __ZTSNSt3__110__function6__baseIFdvEEE, __ZTSNSt3__110__function6__baseIFvRKN3HVF13PartTransformEEEE, 
                        __ZTSNSt3__110__function6__baseIFvRKdEEE, __ZTSNSt3__117bad_function_callE ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN3HVF13PartTransformD1Ev, __ZN3HVF13PartTransformD2Ev, 
                        __ZN3HVF21PartTransformRenderer10blendShapeERKNS_5ShapeERKNS_16BlendContextViewE, 
                        __ZN3HVF21PartTransformRenderer11renderShapeERKNS_5ShapeERKNS_16BlendContextViewEU13block_pointerF18HVFPartRenderState24HVFPartRenderInstructionPK19HVFPartRenderParamsE, 
-                       __ZN3HVF21PartTransformRenderer14blendCompositeERKNS_9CompositeERKNS_16BlendContextViewE, 
+                       __ZN3HVF21PartTransformRenderer13setRenderPartEm, __ZN3HVF21PartTransformRenderer14blendCompositeERKNS_9CompositeERKNS_16BlendContextViewE, 
                        __ZN3HVF21PartTransformRenderer15blendTransformsERKNS_9CompositeERKNSt3__14spanIN4simd9double3x3ELm18446744073709551615EEE, 
                        __ZN3HVF21PartTransformRenderer15renderCompositeERKNS_9CompositeERKNS_16BlendContextViewEU13block_pointerF18HVFPartRenderState24HVFPartRenderInstructionPK19HVFPartRenderParamsE, 
                        __ZN3HVF21PartTransformRenderer15renderToContextEU13block_pointerF18HVFPartRenderState24HVFPartRenderInstructionPK19HVFPartRenderParamsE, 
@@ -44,7 +44,9 @@ exports:
                        __ZN3HVF21PartTransformRenderer26setSubpartAxisValueAtIndexEmmRKd, 
                        __ZN3HVF21PartTransformRenderer28setSubpartTranslationAtIndexEmRK8CGVector, 
                        __ZN3HVF21PartTransformRenderer6renderEmRKNS_4PartERKNS_16BlendContextViewEU13block_pointerF18HVFPartRenderState24HVFPartRenderInstructionPK19HVFPartRenderParamsEPKc, 
+                       __ZN3HVF21PartTransformRendererC1ENSt3__18functionIFPKNS_4PartEmRNS_9PartCacheEEEEb, 
                        __ZN3HVF21PartTransformRendererC1EmNSt3__18functionIFPKNS_4PartEmRNS_9PartCacheEEEEb, 
+                       __ZN3HVF21PartTransformRendererC2ENSt3__18functionIFPKNS_4PartEmRNS_9PartCacheEEEEb, 
                        __ZN3HVF21PartTransformRendererC2EmNSt3__18functionIFPKNS_4PartEmRNS_9PartCacheEEEEb, 
                        __ZN3HVF21PartTransformRendererD1Ev, __ZN3HVF21PartTransformRendererD2Ev, 
                        __ZN3HVF6Loader13withTableDataEPKvm, __ZN3HVF6LoaderD0Ev, 

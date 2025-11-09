@@ -861,7 +861,8 @@ typedef enum BluetoothHCIVersions
 	kBluetoothHCIVersionCoreSpecification4_2												=	0x08,
 	kBluetoothHCIVersionCoreSpecification5_0												=	0x09,
 	kBluetoothHCIVersionCoreSpecification5_1												=   0x0a,
-	kBluetoothHCIVersionCoreSpecification5_2												=   0x0b
+	kBluetoothHCIVersionCoreSpecification5_2												=   0x0b,
+	kBluetoothHCIVersionCoreSpecification5_3												=   0x0c
 } BluetoothHCIVersions;
 
 

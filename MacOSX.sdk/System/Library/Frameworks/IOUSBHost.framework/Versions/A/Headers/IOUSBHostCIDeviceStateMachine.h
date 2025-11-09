@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
  *          structures to update state and generate properly formatted command responses.  Clients should create an IOUSBHostCIDeviceStateMachine in
  *          response to an IOUSBHostCIMessageTypeDeviceCreate command, and then use the provided interfaces to identify and process commands
  *          for the device.  The IOUSBHostCIDeviceStateMachine should be destroyed in response to an IOUSBHostCIMessageTypeDeviceDestroy command.
+ *
+ *          IOUSBHostCIDeviceStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
  */
 @interface IOUSBHostCIDeviceStateMachine : NSObject
 

@@ -103,7 +103,7 @@ AV_INIT_UNAVAILABLE
 	@abstract
 		A UTI indicating the type of file to be written, to be used when e.g. creating an instance of AVAssetWriter
 	@discussion
-		Use UTTypeCopyPreferredTagWithClass / kUTTagClassFilenameExtension to get a suitable file extension for a given file type.
+		Use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to get a suitable file extension for a given file type.
  */
 @property (nonatomic, readonly) AVFileType outputFileType;
 
@@ -111,6 +111,7 @@ AV_INIT_UNAVAILABLE
 
 
 // Use these properties to give more information about the attributes of your source data, in order to get more informed recommendations
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVOutputSettingsAssistant (AVOutputSettingsAssistant_SourceInformation)
 
 /*!

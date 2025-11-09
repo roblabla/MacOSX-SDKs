@@ -257,7 +257,7 @@ xpc_connection_create_from_endpoint(xpc_endpoint_t endpoint);
  *
  * Despite this seeming inconsistency, the XPC runtime guarantees that, when the
  * target queue is a serial queue, the event handler block will execute
- * synchonously with respect to other blocks submitted to that same queue. When
+ * synchronously with respect to other blocks submitted to that same queue. When
  * the target queue is a concurrent queue, the event handler block may run
  * concurrently with other blocks submitted to that queue, but it will never run
  * concurrently with other invocations of itself for the same connection, as
@@ -521,7 +521,7 @@ xpc_connection_send_barrier(xpc_connection_t connection,
  * @discussion
  * If the given GCD queue is a concurrent queue, XPC cannot guarantee that there
  * will not be multiple reply handlers being invoked concurrently. XPC does not
- * guarantee any ordering for the invocation of reply handers. So if multiple
+ * guarantee any ordering for the invocation of reply handlers. So if multiple
  * messages are waiting for replies and the connection goes invalid, there is no
  * guarantee that the reply handlers will be invoked in FIFO order. Similarly,
  * XPC does not guarantee that reply handlers will not run concurrently with
@@ -779,6 +779,8 @@ xpc_connection_set_finalizer_f(xpc_connection_t connection,
  * the code signing requirement. For a listener connection, requests that do not satisfy the requirement
  * are dropped. When a reply is expected on the connection and the peer does not satisfy the requirement
  * XPC_ERROR_PEER_CODE_SIGNING_REQUIREMENT will be delivered instead of the reply.
+ *
+ * This API is not supported on embedded platforms and will return ENOTSUP. 
  *
  * @see https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/RequirementLang/RequirementLang.html
  */

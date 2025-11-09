@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8C17C62F-C82C-3A4C-A832-70EBEED5B0CA
+    value:           CA62E5A0-80F0-3798-B8B6-71088A61F03C
   - target:          x86_64-maccatalyst
-    value:           8C17C62F-C82C-3A4C-A832-70EBEED5B0CA
+    value:           CA62E5A0-80F0-3798-B8B6-71088A61F03C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           753D2289-1662-3922-8A94-FAC9DED81CD5
+    value:           DE393954-A39B-305C-BF0D-CF7563473762
   - target:          arm64e-maccatalyst
-    value:           753D2289-1662-3922-8A94-FAC9DED81CD5
+    value:           DE393954-A39B-305C-BF0D-CF7563473762
 install-name:    '/usr/lib/system/libsystem_symptoms.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __symptoms_daemon_fallback_initial_disposition, __symptoms_daemon_fallback_subseq_disposition, 
                        __symptoms_is_daemon_fallback_blacklisted, _symptom_framework_init, 
                        _symptom_framework_set_version, _symptom_new, _symptom_send, 

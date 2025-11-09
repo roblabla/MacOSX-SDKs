@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-FILEPROVIDER_API_AVAILABILITY_V3
+FILEPROVIDER_API_AVAILABILITY_V3_IOS
 @interface NSFileProviderRequest : NSObject
 /**
  The request was made by the sync system, e.g. to update a file to its latest version after a remote update was pushed.
@@ -48,7 +48,7 @@ FILEPROVIDER_API_AVAILABILITY_V3
 
  If the extension doesn't implement the NSFileProviderDomainState protocol, this will be nil.
  */
-@property (nonatomic, readonly, nullable) NSFileProviderDomainVersion *domainVersion FILEPROVIDER_API_AVAILABILITY_V3_1;
+@property (nonatomic, readonly, nullable) NSFileProviderDomainVersion *domainVersion FILEPROVIDER_API_AVAILABILITY_V3_1_IOS;
 
 @end
 

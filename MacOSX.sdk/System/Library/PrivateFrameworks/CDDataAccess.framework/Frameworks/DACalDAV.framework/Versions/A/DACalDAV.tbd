@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           23EDEF76-5504-338E-A38F-C0C511DC74EB
+    value:           E35E9581-0C0C-3E17-9954-E85CCDA75A58
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E3781F9A-D257-3AAF-9F8E-4E3720FB506E
+    value:           1F586A0E-381E-32CC-8A79-96DF2DA1528F
 install-name:    '/System/Library/PrivateFrameworks/CDDataAccess.framework/Frameworks/DACalDAV.framework/Versions/A/DACalDAV'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CalDAVPrincipalResultType_Group, _CalDAVPrincipalResultType_Person, 
                        _CalDAVPrincipalResultType_Resource, _CalDAVPrincipalResultType_Room, 
                        _CalDAVPrincipalResultType_Unknown, _RecordCalendarDiagnostics, 

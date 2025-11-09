@@ -48,6 +48,9 @@ Set both \fIdir\fR to `dirname \fIdir_and_subdir\fR` and \fIsubdir\fR to `basena
 .BR \-x
 Do not cross volume boundaries when archiving.
 .TP
+.BR \-p
+Generate destination path automatically based on source path. For example 'aa archive -d foo -p' becomes 'aa archive -d foo -o foo.aar'.
+.TP
 .BR \-a\ \fIalgorithm\fR
 Compression algorithm used when creating archives. One of \fIlzfse\fR, \fIlzma\fR, \fIlz4\fR, \fIzlib\fR, \fIraw\fR. Default is \fIlzfse\fR.
 .TP
@@ -298,5 +301,17 @@ Decrypt and extract archive \fIfoo.aea\fR to directory \fIdst\fR, obtaining the 
 .PP
 .RS
 .B aa extract -o foo.aea -d dst -keychain
+.RE
+.PP
+Archive directory \fIfoo\fR to archive \fIfoo.aar\fR
+.PP
+.RS
+.B aa archive -p -d foo
+.RE
+.PP
+Extract archive \fIfoo.aar\fR to directory \fIfoo\fR
+.PP
+.RS
+.B aa extract -p -i foo.aar
 .RE
 .PP

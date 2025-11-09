@@ -4,21 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A27DF88E-CBCA-393B-B0ED-08BF03E79180
+    value:           93B6FBC0-861A-30F7-8A67-034418CC3D76
   - target:          x86_64-maccatalyst
-    value:           A27DF88E-CBCA-393B-B0ED-08BF03E79180
+    value:           93B6FBC0-861A-30F7-8A67-034418CC3D76
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4C711921-CE43-327B-BDC2-CB67EEAFA146
+    value:           682C7D0B-35AB-332A-B26E-F1344EFD35B9
   - target:          arm64e-maccatalyst
-    value:           4C711921-CE43-327B-BDC2-CB67EEAFA146
+    value:           682C7D0B-35AB-332A-B26E-F1344EFD35B9
 install-name:    '/System/Library/PrivateFrameworks/EmojiFoundation.framework/Versions/A/EmojiFoundation'
+current-version: 119
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _EMFEmojiCategoryActivity, _EMFEmojiCategoryFlags, _EMFEmojiCategoryFoodAndDrink, 
                        _EMFEmojiCategoryNature, _EMFEmojiCategoryObjects, _EMFEmojiCategoryPeople, 
                        _EMFEmojiCategoryPrepopulated, _EMFEmojiCategoryRecents, _EMFEmojiCategorySymbols, 

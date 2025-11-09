@@ -178,6 +178,15 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  */
 - (void)sendMIDISysExEvent:(NSData *)midiData;
 
+#if AVAUDIOUNIT_HAVE_AUDIOUNIT
+/*! @method sendMIDIEventList:eventList:
+ @abstract sends a MIDI event list to the instrument.
+ @param eventList
+	the MIDIEventList
+  */
+- (void)sendMIDIEventList:(const struct MIDIEventList *)eventList API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+#endif
+
 @end
 
 NS_ASSUME_NONNULL_END

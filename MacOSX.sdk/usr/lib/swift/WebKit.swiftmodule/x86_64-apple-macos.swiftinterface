@@ -1,13 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target x86_64-apple-macos12.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftWebKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name WebKit
-// swift-module-flags-ignorable: -user-module-version 7613.1.17.1.6
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target x86_64-apple-macos13.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftWebKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name WebKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 7614.2.9.1.8
 import Swift
 @_exported import WebKit
 import _Concurrency
+import _StringProcessing
 @available(iOS 14.0, macOS 11.0, *)
 extension WebKit.WKPDFConfiguration {
-  public var rect: CoreGraphics.CGRect? {
+  public var rect: CoreFoundation.CGRect? {
     get
     set
   }
@@ -22,24 +23,16 @@ extension WebKit.WKWebView {
 }
 @available(iOS 15.0, macOS 12.0, *)
 extension WebKit.WKWebView {
-  
   #if compiler(>=5.3) && $AsyncAwait
   @_Concurrency.MainActor(unsafe) public func callAsyncJavaScript(_ functionBody: Swift.String, arguments: [Swift.String : Any] = [:], in frame: WebKit.WKFrameInfo? = nil, contentWorld: WebKit.WKContentWorld) async throws -> Any?
   #endif
-
-  
   #if compiler(>=5.3) && $AsyncAwait
   @_Concurrency.MainActor(unsafe) public func pdf(configuration: WebKit.WKPDFConfiguration = .init()) async throws -> Foundation.Data
   #endif
-
-  
   #if compiler(>=5.3) && $AsyncAwait
   @_Concurrency.MainActor(unsafe) public func evaluateJavaScript(_ javaScript: Swift.String, in frame: WebKit.WKFrameInfo? = nil, contentWorld: WebKit.WKContentWorld) async throws -> Any?
   #endif
-
-  
   #if compiler(>=5.3) && $AsyncAwait
   @_Concurrency.MainActor(unsafe) public func find(_ string: Swift.String, configuration: WebKit.WKFindConfiguration = .init()) async throws -> WebKit.WKFindResult
   #endif
-
 }

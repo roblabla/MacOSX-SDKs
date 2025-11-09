@@ -4,30 +4,30 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5B3AEFBF-32E9-3768-86E0-8BB4B05A2FE1
+    value:           253E7900-6C21-30D5-9656-8B1D2CAF68AE
   - target:          x86_64-maccatalyst
-    value:           5B3AEFBF-32E9-3768-86E0-8BB4B05A2FE1
+    value:           253E7900-6C21-30D5-9656-8B1D2CAF68AE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1B95D398-684D-3590-8CBE-3E8C80645B15
+    value:           50615164-BD44-3A6F-B628-A7F1CC0A440B
   - target:          arm64e-maccatalyst
-    value:           1B95D398-684D-3590-8CBE-3E8C80645B15
+    value:           50615164-BD44-3A6F-B628-A7F1CC0A440B
 install-name:    '/usr/lib/swift/libswiftCoreLocation.dylib'
-current-version: 7
+current-version: 9
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCoreLocation.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCoreLocation.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftCoreLocation.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftCoreLocation.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCoreLocation.dylib', 
                        '$ld$install_name$os10.9$@rpath/libswiftCoreLocation.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$sSC7CLErrorLeV12CoreLocationE15alternateRegionSo8CLRegionCSgvg', 
                        '_$sSC7CLErrorLeV12CoreLocationE15alternateRegionSo8CLRegionCSgvpMV', 
                        '_$sSo22CLLocationCoordinate2DV12CoreLocationE19_bridgeToObjectiveCSo7NSValueCyF', 

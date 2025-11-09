@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C0F3CDA7-BDE6-3464-9298-07DB0124FFB8
+    value:           81CDF27C-3924-3B22-BB43-742DF5F6A9B7
   - target:          x86_64-maccatalyst
-    value:           C0F3CDA7-BDE6-3464-9298-07DB0124FFB8
+    value:           81CDF27C-3924-3B22-BB43-742DF5F6A9B7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EC6C6C18-40A5-3846-8FFF-FB234E816AA5
+    value:           5ED82ED2-7C98-3858-A271-D7F8D70E23D4
   - target:          arm64e-maccatalyst
-    value:           EC6C6C18-40A5-3846-8FFF-FB234E816AA5
+    value:           5ED82ED2-7C98-3858-A271-D7F8D70E23D4
 install-name:    '/usr/lib/swift/libswiftCoreML.dylib'
-current-version: 1127.100.41
+current-version: 1436.40.4
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s6CoreML13MLShapedArrayV10startIndexSivg', '_$s6CoreML13MLShapedArrayV10startIndexSivpMV', 
                        '_$s6CoreML13MLShapedArrayV11bytesNoCopy5shape7strides11deallocatorACyxGSV_SaySiGAI10Foundation4DataV11DeallocatorOtcfC', 
                        '_$s6CoreML13MLShapedArrayV11descriptionSSvg', '_$s6CoreML13MLShapedArrayV11descriptionSSvpMV', 
@@ -37,6 +37,8 @@ exports:
                        '_$s6CoreML13MLShapedArrayV8scalarAtxqd___tcSlRd__Si7ElementRtd__luig', 
                        '_$s6CoreML13MLShapedArrayV8scalarAtxqd___tcSlRd__Si7ElementRtd__luipMV', 
                        '_$s6CoreML13MLShapedArrayV8scalarAtxqd___tcSlRd__Si7ElementRtd__luis', 
+                       '_$s6CoreML13MLShapedArrayVAASERzrlE6encode2toys7Encoder_p_tKF', 
+                       '_$s6CoreML13MLShapedArrayVAASeRzrlE4fromACyxGs7Decoder_p_tKcfC', 
                        '_$s6CoreML13MLShapedArrayVMa', '_$s6CoreML13MLShapedArrayVMn', 
                        '_$s6CoreML13MLShapedArrayVyAA0cD5SliceVyxGSiciM', '_$s6CoreML13MLShapedArrayVyAA0cD5SliceVyxGSicig', 
                        '_$s6CoreML13MLShapedArrayVyAA0cD5SliceVyxGSicipMV', '_$s6CoreML13MLShapedArrayVyAA0cD5SliceVyxGSicis', 
@@ -49,8 +51,9 @@ exports:
                        '_$s6CoreML13MLShapedArrayVyAA0cD5SliceVyxGqd__cSlRd__SnySiG7ElementRtd__luipMV', 
                        '_$s6CoreML13MLShapedArrayVyAA0cD5SliceVyxGqd__cSlRd__SnySiG7ElementRtd__luis', 
                        '_$s6CoreML13MLShapedArrayVyxGAA0cD8ProtocolAAMc', '_$s6CoreML13MLShapedArrayVyxGAA0cD8ProtocolAAWP', 
-                       '_$s6CoreML13MLShapedArrayVyxGSKAAMc', '_$s6CoreML13MLShapedArrayVyxGSMAAMc', 
-                       '_$s6CoreML13MLShapedArrayVyxGSTAAMc', '_$s6CoreML13MLShapedArrayVyxGSkAAMc', 
+                       '_$s6CoreML13MLShapedArrayVyxGSEAASERzrlMc', '_$s6CoreML13MLShapedArrayVyxGSKAAMc', 
+                       '_$s6CoreML13MLShapedArrayVyxGSMAAMc', '_$s6CoreML13MLShapedArrayVyxGSTAAMc', 
+                       '_$s6CoreML13MLShapedArrayVyxGSeAASeRzrlMc', '_$s6CoreML13MLShapedArrayVyxGSkAAMc', 
                        '_$s6CoreML13MLShapedArrayVyxGSlAAMc', '_$s6CoreML13MLShapedArrayVyxGs013ExpressibleByD7LiteralAAMc', 
                        '_$s6CoreML13MLShapedArrayVyxGs23CustomStringConvertibleAAMc', 
                        '_$s6CoreML18MLShapedArraySliceV10startIndexSivg', '_$s6CoreML18MLShapedArraySliceV10startIndexSivpMV', 
@@ -68,6 +71,8 @@ exports:
                        '_$s6CoreML18MLShapedArraySliceV8scalarAtxqd___tcSlRd__Si7ElementRtd__luig', 
                        '_$s6CoreML18MLShapedArraySliceV8scalarAtxqd___tcSlRd__Si7ElementRtd__luipMV', 
                        '_$s6CoreML18MLShapedArraySliceV8scalarAtxqd___tcSlRd__Si7ElementRtd__luis', 
+                       '_$s6CoreML18MLShapedArraySliceVAASERzrlE6encode2toys7Encoder_p_tKF', 
+                       '_$s6CoreML18MLShapedArraySliceVAASeRzrlE4fromACyxGs7Decoder_p_tKcfC', 
                        '_$s6CoreML18MLShapedArraySliceVMa', '_$s6CoreML18MLShapedArraySliceVMn', 
                        '_$s6CoreML18MLShapedArraySliceVyACyxGqd__cSlRd__Si7ElementRtd__luiM', 
                        '_$s6CoreML18MLShapedArraySliceVyACyxGqd__cSlRd__Si7ElementRtd__luig', 
@@ -78,8 +83,9 @@ exports:
                        '_$s6CoreML18MLShapedArraySliceVyACyxGqd__cSlRd__SnySiG7ElementRtd__luipMV', 
                        '_$s6CoreML18MLShapedArraySliceVyACyxGqd__cSlRd__SnySiG7ElementRtd__luis', 
                        '_$s6CoreML18MLShapedArraySliceVyxGAA0cD8ProtocolAAMc', '_$s6CoreML18MLShapedArraySliceVyxGAA0cD8ProtocolAAWP', 
-                       '_$s6CoreML18MLShapedArraySliceVyxGSKAAMc', '_$s6CoreML18MLShapedArraySliceVyxGSMAAMc', 
-                       '_$s6CoreML18MLShapedArraySliceVyxGSTAAMc', '_$s6CoreML18MLShapedArraySliceVyxGSkAAMc', 
+                       '_$s6CoreML18MLShapedArraySliceVyxGSEAASERzrlMc', '_$s6CoreML18MLShapedArraySliceVyxGSKAAMc', 
+                       '_$s6CoreML18MLShapedArraySliceVyxGSMAAMc', '_$s6CoreML18MLShapedArraySliceVyxGSTAAMc', 
+                       '_$s6CoreML18MLShapedArraySliceVyxGSeAASeRzrlMc', '_$s6CoreML18MLShapedArraySliceVyxGSkAAMc', 
                        '_$s6CoreML18MLShapedArraySliceVyxGSlAAMc', '_$s6CoreML18MLShapedArraySliceVyxGs013ExpressibleByD7LiteralAAMc', 
                        '_$s6CoreML19MLShapedArrayScalarMp', '_$s6CoreML19MLShapedArrayScalarP05multiD8DataTypeSo07MLMultidgH0VvgZTj', 
                        '_$s6CoreML19MLShapedArrayScalarP05multiD8DataTypeSo07MLMultidgH0VvgZTq', 
@@ -202,6 +208,9 @@ exports:
                        '_$sSo14MLFeatureValueC6CoreMLE11shapedArrayAbC08MLShapedF0VyxG_tcAC0gF6ScalarRzlufc', 
                        '_$sSo17MLModelCollectionC6CoreMLE12endAccessing10identifier17completionHandlerySS_ys6ResultOyyts5Error_pGctFZ', 
                        '_$sSo17MLModelCollectionC6CoreMLE14beginAccessing10identifier17completionHandlerSo10NSProgressCSS_ys6ResultOyABs5Error_pGctFZ', 
+                       '_$sSo7MLModelC6CoreMLE12compileModel2at10Foundation3URLVAH_tYaKFZ', 
+                       '_$sSo7MLModelC6CoreMLE12compileModel2at10Foundation3URLVAH_tYaKFZTu', 
+                       '_$sSo7MLModelC6CoreMLE12compileModel2at17completionHandlery10Foundation3URLV_ys6ResultOyAIs5Error_pGctFZ', 
                        '_$sSo7MLModelC6CoreMLE4load10contentsOf13configuration17completionHandlery10Foundation3URLV_So0A13ConfigurationCys6ResultOyABs5Error_pGctFZ', 
                        '_$sSo7MLModelC6CoreMLE4load10contentsOf13configurationAB10Foundation3URLV_So0A13ConfigurationCtYaKFZ', 
                        '_$sSo7MLModelC6CoreMLE4load10contentsOf13configurationAB10Foundation3URLV_So0A13ConfigurationCtYaKFZTu', 
@@ -216,5 +225,7 @@ exports:
                        '_$ss19PartialRangeThroughVyxG6CoreML013MLShapedArrayB10ExpressionADSiRszrlWP', 
                        '_$ss5Int32V6CoreML19MLShapedArrayScalarACMc', '_$ss5Int32V6CoreML19MLShapedArrayScalarACWP', 
                        '_$ss5Int32V6CoreMLE18multiArrayDataTypeSo07MLMultiefG0VvgZ', 
+                       '_$ss7Float16V6CoreML19MLShapedArrayScalarACMc', '_$ss7Float16V6CoreML19MLShapedArrayScalarACWP', 
+                       '_$ss7Float16V6CoreMLE18multiArrayDataTypeSo07MLMultiefG0VvgZ', 
                        '__swift_FORCE_LOAD_$_swiftCoreML' ]
 ...

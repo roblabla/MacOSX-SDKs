@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A85E75F1-60C3-34CC-B514-8A0D7CC184EA
+    value:           6C5C9163-72C0-3A4C-B0C3-DF56988AC10E
   - target:          x86_64-maccatalyst
-    value:           A85E75F1-60C3-34CC-B514-8A0D7CC184EA
+    value:           6C5C9163-72C0-3A4C-B0C3-DF56988AC10E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B4B9989F-F2DD-380A-BBB5-A53002CE97DE
+    value:           42C621F9-4CD4-35B2-829A-8B65467B1CAC
   - target:          arm64e-maccatalyst
-    value:           B4B9989F-F2DD-380A-BBB5-A53002CE97DE
+    value:           42C621F9-4CD4-35B2-829A-8B65467B1CAC
 install-name:    '/System/Library/PrivateFrameworks/perfdata.framework/Versions/A/perfdata'
-current-version: 82
+current-version: 94
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _json_end_array, _json_end_object, _json_key, _json_member_bool, 
                        _json_member_dbl, _json_member_int, _json_member_start_array, 
                        _json_member_start_object, _json_member_str, _json_member_strf, 

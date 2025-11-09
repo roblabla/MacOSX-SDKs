@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4C1646B7-BCBF-3BCC-9A37-CBF4B19A9109
+    value:           25575D88-5878-3D6F-8984-DCFB79DDBA71
   - target:          x86_64-maccatalyst
-    value:           4C1646B7-BCBF-3BCC-9A37-CBF4B19A9109
+    value:           25575D88-5878-3D6F-8984-DCFB79DDBA71
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3FA444F3-2A6F-3E51-9314-A89D0B108D2F
+    value:           177D6ED0-C66F-31C4-83B6-E9BE5E607B98
   - target:          arm64e-maccatalyst
-    value:           3FA444F3-2A6F-3E51-9314-A89D0B108D2F
+    value:           177D6ED0-C66F-31C4-83B6-E9BE5E607B98
 install-name:    '/System/Library/PrivateFrameworks/ProactiveInputPredictions.framework/Versions/A/ProactiveInputPredictions'
-current-version: 1153.16.1
+current-version: 1193.8
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _PSGErrorDomain, _ProactiveInputPredictionsVersionNumber, 
                        _ProactiveInputPredictionsVersionString, _kPSGContactsAutocompleteSearchFieldKey, 
                        _kPSGContactsAutocompleteSearchTermKey, _kPSGContactsAutocompleteTriggerTypeValue, 

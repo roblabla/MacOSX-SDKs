@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           59EBA373-76BA-3CFE-9A79-E23EF6EAFBAB
+    value:           D59D10E4-43B7-3BDE-BFA8-C365D20BEDD3
   - target:          x86_64-maccatalyst
-    value:           59EBA373-76BA-3CFE-9A79-E23EF6EAFBAB
+    value:           D59D10E4-43B7-3BDE-BFA8-C365D20BEDD3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1FEA763F-5250-3085-8ADF-7B40E277C5A7
+    value:           FB3EDEFD-DE86-3AC3-A91F-3073B9B3039D
   - target:          arm64e-maccatalyst
-    value:           1FEA763F-5250-3085-8ADF-7B40E277C5A7
+    value:           FB3EDEFD-DE86-3AC3-A91F-3073B9B3039D
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/MetalPerformanceShaders'
-current-version: 125.4.6
+current-version: 126.0.22
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -28,8 +28,8 @@ reexported-libraries:
                        '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNeuralNetwork.framework/Versions/A/MPSNeuralNetwork', 
                        '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSRayIntersector.framework/Versions/A/MPSRayIntersector' ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MPSGetPreferredDevice, _MPSHintTemporaryMemoryHighWaterMark, 
                        _MPSSetHeapCacheDuration, _MPSSupportsMTLDevice ]
 --- !tapi-tbd
@@ -38,54 +38,56 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C9E21A57-B82F-36FF-92A1-3EB39D40E46C
+    value:           593D8F5E-5F61-3680-B70D-B6596DD581EC
   - target:          x86_64-maccatalyst
-    value:           C9E21A57-B82F-36FF-92A1-3EB39D40E46C
+    value:           593D8F5E-5F61-3680-B70D-B6596DD581EC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AF194216-0F39-35C0-97BE-CE5263B0B853
+    value:           D77D9270-5EB5-3998-911D-9E4381C95DFD
   - target:          arm64e-maccatalyst
-    value:           AF194216-0F39-35C0-97BE-CE5263B0B853
+    value:           D77D9270-5EB5-3998-911D-9E4381C95DFD
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSCore.framework/Versions/A/MPSCore'
-current-version: 125.4.6
+current-version: 126.0.22
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ MPSImage, MPSMatrix, MPSNDArray, MPSNeuralNetwork, MPSParallelPrimitives, 
                        MPSRayIntersector, MetalPerformanceShaders ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _MPSConvertFloatToHalf, _MPSConvertHalfToFloat, _MPSCopyToFromNetworkByteOrder16, 
-                       _MPSCopyToFromNetworkByteOrder32, _MPSCreateFunctionConstantValues, 
-                       _MPSEncodeCopyTexture, _MPSForcePlugin, _MPSGetCGFunction, 
-                       _MPSGetDataTypeName, _MPSGetEffectiveFeatureChannelsCount, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _IsPluginDisabled, _MPSConvertFloatToHalf, _MPSConvertHalfToFloat, 
+                       _MPSCopyToFromNetworkByteOrder16, _MPSCopyToFromNetworkByteOrder32, 
+                       _MPSCreateFunctionConstantValues, _MPSEncodeCopyTexture, _MPSForceGEMMPlugin, 
+                       _MPSForcePlugin, _MPSGetCGFunction, _MPSGetDataTypeName, _MPSGetEffectiveFeatureChannelsCount, 
                        _MPSGetHeapSizeForCommandBuffer, _MPSGetImageType, _MPSGetLinearTextureSize2D, 
                        _MPSGetOSLogHandle, _MPSGetOriginalMTLBuffer, _MPSGetOriginalMTLCommandBuffer, 
                        _MPSGetOriginalMTLComputeCommandEncoder, _MPSGetOriginalMTLObject, 
-                       _MPSGetTemporaryBufferFromCommandBufferCache, _MPSGetTemporaryTextureFromCommandBufferCache, 
-                       _MPSGetUIntDivisorMagicNumber, _MPSGetUShortDivisorMagicNumber, 
-                       _MPSGetvImageFunction, _MPSGetvecLibFunction, _MPSImageBatchIncrementReadCount, 
-                       _MPSImageBatchIterate, _MPSImageBatchResourceSize, _MPSImageBatchSynchronize, 
-                       _MPSImageFeatureChannelFormatGetName, _MPSIsTextureTwiddled, 
-                       _MPSNewBufferForTexture, _MPSRectNoClip, _MPSReturnGetName, 
-                       _MPSReturnTemporaryBufferToCommandBufferCache, _MPSReturnTemporaryTextureToCommandBufferCache, 
-                       _MPSSeparatePassDimensions, _MPSSetDeviceOptionsSPI, _MPSStateBatchIncrementReadCount, 
+                       _MPSGetProtectionOptionsForCommandBuffer, _MPSGetTemporaryBufferFromCommandBufferCache, 
+                       _MPSGetTemporaryTextureFromCommandBufferCache, _MPSGetUIntDivisorMagicNumber, 
+                       _MPSGetUShortDivisorMagicNumber, _MPSGetvImageFunction, _MPSGetvecLibFunction, 
+                       _MPSImageBatchIncrementReadCount, _MPSImageBatchIterate, _MPSImageBatchResourceSize, 
+                       _MPSImageBatchSynchronize, _MPSImageFeatureChannelFormatGetName, 
+                       _MPSIsTextureTwiddled, _MPSNewBufferForTexture, _MPSRectNoClip, 
+                       _MPSReturnGetName, _MPSReturnTemporaryBufferToCommandBufferCache, 
+                       _MPSReturnTemporaryTextureToCommandBufferCache, _MPSSeparatePassDimensions, 
+                       _MPSSetDeviceOptionsSPI, _MPSStateBatchIncrementReadCount, 
                        _MPSStateBatchResourceSize, _MPSStateBatchSynchronize, __Z16dataTypeToString11MPSDataType, 
                        __Z21MPSDecrementReadCountP17MPSTemporaryImage, __Z21MPSDecrementReadCountP18MPSTemporaryMatrix, 
                        __Z21MPSDecrementReadCountP18MPSTemporaryVector, __Z21MPSDecrementReadCountP19MPSTemporaryNDArray, 
-                       __Z21MPSDecrementReadCountP7NSArrayIP8MPSImageE, __Z21MPSDecrementReadCountP7NSArrayIP8MPSStateE, 
-                       __Z21MPSDecrementReadCountP8MPSImage, __Z21MPSDecrementReadCountP8MPSState, 
-                       __Z24_MPSUseInt64Calculationsv, __Z25MPSGetEffectiveClipRegion7MTLSize9MPSRegion, 
-                       __Z25MPSGetEffectiveClipRegion7MTLSize9MTLRegion, __Z26_MPSNewSpecializedFunctionPU21objcproto10MTLLibrary11objc_objectP8NSStringP25MTLFunctionConstantValuesRK33MPSFunctionConstructorExtraParamsPP7NSError, 
+                       __Z21MPSDecrementReadCountP19MPSTemporaryNDArrayl, __Z21MPSDecrementReadCountP7NSArrayIP8MPSImageE, 
+                       __Z21MPSDecrementReadCountP7NSArrayIP8MPSStateE, __Z21MPSDecrementReadCountP8MPSImage, 
+                       __Z21MPSDecrementReadCountP8MPSState, __Z24_MPSUseInt64Calculationsv, 
+                       __Z25MPSGetEffectiveClipRegion7MTLSize9MPSRegion, __Z25MPSGetEffectiveClipRegion7MTLSize9MTLRegion, 
+                       __Z26_MPSNewSpecializedFunctionPU21objcproto10MTLLibrary11objc_objectP8NSStringP25MTLFunctionConstantValuesRK33MPSFunctionConstructorExtraParamsPP7NSError, 
                        __ZN10BaseTensor14GetNumElementsEv, __ZN10BaseTensor16GetAccessPatternEP7NSArrayIP10MPSNDArrayES4_, 
                        __ZN10BaseTensorC1ERKNSt3__16vectorIlNS0_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN10BaseTensorC2ERKNSt3__16vectorIlNS0_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN10BaseTensorD1Ev, __ZN10BaseTensorD2Ev, __ZN10MPSLibrary12RetainMPSKeyEP11MPSKey_data, 
-                       __ZN10MPSLibrary13MPSKey_CreateEPK17PrivateKernelInfoRK23MPSFunctionConstantListb30MPSThreadGroupSizeMultipleType24MPSDriverCompilerOptionsPFvPS0_EP8NSStringm, 
+                       __ZN10MPSLibrary13MPSKey_CreateEPK17PrivateKernelInfoRK23MPSFunctionConstantListb30MPSThreadGroupSizeMultipleType24MPSDriverCompilerOptionsPFvPS0_EP8NSStringmy, 
                        __ZN10MPSLibrary13ReleaseMPSKeyEP11MPSKey_data, __ZN10MPSLibrary14MPSKey_CompileEP11MPSKey_data, 
                        __ZN10MPSLibrary15GetComputeStateEjRK23MPSFunctionConstantList30MPSThreadGroupSizeMultipleType24MPSDriverCompilerOptionsP8NSStringm, 
                        __ZN10MPSLibrary17GetCacheKeyAtomicEPK17PrivateKernelInfoRK23MPSFunctionConstantListbPNSt3__16atomicIP11MPSKey_dataEE30MPSThreadGroupSizeMultipleType24MPSDriverCompilerOptionsP8NSStringm, 
@@ -121,6 +123,7 @@ exports:
                        __ZN12MPSKernelDAG10isFiniteOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG10lessThanOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG10negativeOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG11bitwiseOROpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG11broadcastOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG11flipCoordOpEP10BaseTensoriRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG11logarithmOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
@@ -128,6 +131,9 @@ exports:
                        __ZN12MPSKernelDAG11texture2DOpERKNSt3__16vectorIlNS0_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG11unaryCoreOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG12addOpToGraphEP14MPSDAGKernelOp, __ZN12MPSKernelDAG12binaryCoreOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG12bitwiseANDOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG12bitwiseNOTOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG12bitwiseXOROpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG12flipCoord4OpEP10BaseTensorDv4_iRKNSt3__16vectorIlNS3_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG12isInfiniteOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG12isNotEqualOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
@@ -140,6 +146,7 @@ exports:
                        __ZN12MPSKernelDAG13intAdditionOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG13nullaryCoreOpERKNSt3__16vectorIlNS0_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG13placeholderOpERKNSt3__16vectorIlNS0_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG13placeholderOpERKNSt3__16vectorIlNS0_9allocatorIlEEEE11MPSDataTypejPKc, 
                        __ZN12MPSKernelDAG13subtractionOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG13ternaryCoreOpEP10BaseTensorS1_S1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG14quartaryCoreOpEP10BaseTensorS1_S1_S1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
@@ -148,10 +155,14 @@ exports:
                        __ZN12MPSKernelDAG16exponentBase10OpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG16logarithmBase2OpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG16multiplicationOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG16spaceToBatch3dOpEP10BaseTensoriiiiiiibbRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG16spaceToDepth2dOpEP10BaseTensoriiiibbRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG17bitwisePopcountOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG17lessThanEqualToOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG17logarithmBase10OpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG18bitwiseLeftShiftOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG18getCoordOfTensorOpEP10BaseTensormRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG19bitwiseRightShiftOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG19reverseSquareRootOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG20greaterThanEqualToOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG21pixelMatrixMultiplyOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKfPKc, 
@@ -228,7 +239,7 @@ exports:
                        __ZN9BaseGraphD0Ev, __ZN9BaseGraphD1Ev, __ZN9BaseGraphD2Ev, 
                        __ZN9MPSDevice10GetLibraryEPK14MPSLibraryInfo, __ZN9MPSDevice10GetSamplerE16MPSImageEdgeMode21MPSFilterSamplingMode23MPSFilterCoordinateMode, 
                        __ZN9MPSDevice11DeleteQueueEPU26objcproto15MTLCommandQueue11objc_object, 
-                       __ZN9MPSDevice12GetHeapBlockEm, __ZN9MPSDevice12GetMPSDeviceEPU19objcproto9MTLDevice11objc_object, 
+                       __ZN9MPSDevice12GetHeapBlockEmy, __ZN9MPSDevice12GetMPSDeviceEPU19objcproto9MTLDevice11objc_object, 
                        __ZN9MPSDevice12GetPixelInfoE14MTLPixelFormat28MPSImageFeatureChannelFormat, 
                        __ZN9MPSDevice15ReturnHeapBlockEP11objc_objecty, __ZN9MPSDevice19ExerciseLibraryListEv, 
                        __ZN9MPSDevice19getKernelDAGLibraryEv, __ZN9MPSDevice22GetMPSLibrary_DoNotUseEPK14MPSLibraryInfo, 
@@ -309,26 +320,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2E8B7F84-B9B8-3050-8E2E-3DEAD555A948
+    value:           494C93B6-2BA0-3EFF-A50D-59F87D03D061
   - target:          x86_64-maccatalyst
-    value:           2E8B7F84-B9B8-3050-8E2E-3DEAD555A948
+    value:           494C93B6-2BA0-3EFF-A50D-59F87D03D061
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CC5E9D49-A2DD-377F-87F3-5C762BFDD685
+    value:           5329F81F-8D0C-3CE2-8779-13A0F545A37D
   - target:          arm64e-maccatalyst
-    value:           CC5E9D49-A2DD-377F-87F3-5C762BFDD685
+    value:           5329F81F-8D0C-3CE2-8779-13A0F545A37D
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSFunctions.framework/Versions/A/MPSFunctions'
-current-version: 125.4.6
+current-version: 126.0.22
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ MPSImage, MetalPerformanceShaders ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ MPSFColorConversion, MPSFunction ]
 --- !tapi-tbd
 tbd-version:     4
@@ -336,26 +347,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8FC72CC2-8E0F-308A-A287-84A951803778
+    value:           1FAB3478-DBB4-3797-A35E-18ADC72596A2
   - target:          x86_64-maccatalyst
-    value:           8FC72CC2-8E0F-308A-A287-84A951803778
+    value:           1FAB3478-DBB4-3797-A35E-18ADC72596A2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3723B225-B34D-3B6D-AE8C-2CF02D004678
+    value:           ECBED0FE-0024-3149-9F4D-39C1DF9AA8A5
   - target:          arm64e-maccatalyst
-    value:           3723B225-B34D-3B6D-AE8C-2CF02D004678
+    value:           ECBED0FE-0024-3149-9F4D-39C1DF9AA8A5
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSImage.framework/Versions/A/MPSImage'
-current-version: 125.4.6
+current-version: 126.0.22
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ MPSImage, MPSNeuralNetwork, MetalPerformanceShaders ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MPSSubTileEncode ]
     objc-classes:    [ MPSBinaryImageKernel, MPSImageAdd, MPSImageAreaMax, MPSImageAreaMin, 
                        MPSImageArithmetic, MPSImageBilinearScale, MPSImageBox, MPSImageBox3D, 
@@ -389,26 +400,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           05E66980-CC70-3C2A-843D-68D2E6BBC0F8
+    value:           93AE4113-9673-3F0E-BAA4-DD4BD4CE461B
   - target:          x86_64-maccatalyst
-    value:           05E66980-CC70-3C2A-843D-68D2E6BBC0F8
+    value:           93AE4113-9673-3F0E-BAA4-DD4BD4CE461B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3BEFD5DB-B6B2-39C7-8505-A049FB9919D8
+    value:           700A448E-2F01-3EF4-A2D9-D28AEF36C7B3
   - target:          arm64e-maccatalyst
-    value:           3BEFD5DB-B6B2-39C7-8505-A049FB9919D8
+    value:           700A448E-2F01-3EF4-A2D9-D28AEF36C7B3
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSMatrix.framework/Versions/A/MPSMatrix'
-current-version: 125.4.6
+current-version: 126.0.22
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ MPSImage, MPSNDArray, MPSNeuralNetwork, MetalPerformanceShaders ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ MPSMatrixBinaryKernel, MPSMatrixCopy, MPSMatrixCopyDescriptor, 
                        MPSMatrixDecompositionCholesky, MPSMatrixDecompositionLU, 
                        MPSMatrixFindTopK, MPSMatrixLogSoftMax, MPSMatrixLogSoftMaxGradient, 
@@ -422,26 +433,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C02A58B7-DA90-338B-A41D-63738E207823
+    value:           D8E67716-C3F7-34B4-A691-0C4714475AD3
   - target:          x86_64-maccatalyst
-    value:           C02A58B7-DA90-338B-A41D-63738E207823
+    value:           D8E67716-C3F7-34B4-A691-0C4714475AD3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           35935C8C-46FC-310D-B2B2-7572902CCBDD
+    value:           319A461C-03BF-3CDB-A165-903CF964572E
   - target:          arm64e-maccatalyst
-    value:           35935C8C-46FC-310D-B2B2-7572902CCBDD
+    value:           319A461C-03BF-3CDB-A165-903CF964572E
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNDArray.framework/Versions/A/MPSNDArray'
-current-version: 125.4.6
+current-version: 126.0.22
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ MPSImage, MetalPerformanceShaders ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MPSSetResourcesOnCommandEncoder ]
     objc-classes:    [ MPSExternalNDArrayBinary, MPSExternalNDArrayBinaryGradient, 
                        MPSNDArrayACos, MPSNDArrayACosGradient, MPSNDArrayACosh, MPSNDArrayACoshGradient, 
@@ -451,16 +462,17 @@ exports:
                        MPSNDArrayATan2SecondaryGradient, MPSNDArrayATanGradient, 
                        MPSNDArrayATanh, MPSNDArrayATanhGradient, MPSNDArrayAbsolute, 
                        MPSNDArrayAbsoluteGradient, MPSNDArrayAddition, MPSNDArrayAdditionPrimaryGradient, 
-                       MPSNDArrayAdditionSecondaryGradient, MPSNDArrayBandPart, MPSNDArrayBinaryKernel, 
-                       MPSNDArrayBinaryPrimaryGradientKernel, MPSNDArrayBinarySecondaryGradientKernel, 
-                       MPSNDArrayCeil, MPSNDArrayCeilGradient, MPSNDArrayClamp, MPSNDArrayClampPrimaryGradient, 
-                       MPSNDArrayClampSecondaryGradient, MPSNDArrayClampTertiaryGradient, 
-                       MPSNDArrayConvolution2D, MPSNDArrayConvolution2DDescriptor, 
-                       MPSNDArrayConvolution2DGradientWithInput, MPSNDArrayConvolution2DGradientWithWeights, 
-                       MPSNDArrayCos, MPSNDArrayCosGradient, MPSNDArrayCosh, MPSNDArrayCoshGradient, 
-                       MPSNDArrayCropResize, MPSNDArrayDepthwiseConvolution2DDescriptor, 
-                       MPSNDArrayDepthwiseConvolutionKernel, MPSNDArrayDivision, 
-                       MPSNDArrayDivisionPrimaryGradient, MPSNDArrayDivisionSecondaryGradient, 
+                       MPSNDArrayAdditionSecondaryGradient, MPSNDArrayArgSort, MPSNDArrayBandPart, 
+                       MPSNDArrayBinaryKernel, MPSNDArrayBinaryPrimaryGradientKernel, 
+                       MPSNDArrayBinarySecondaryGradientKernel, MPSNDArrayCeil, MPSNDArrayCeilGradient, 
+                       MPSNDArrayClamp, MPSNDArrayClampPrimaryGradient, MPSNDArrayClampSecondaryGradient, 
+                       MPSNDArrayClampTertiaryGradient, MPSNDArrayConvolution2D, 
+                       MPSNDArrayConvolution2DDescriptor, MPSNDArrayConvolution2DGradientWithInput, 
+                       MPSNDArrayConvolution2DGradientWithWeights, MPSNDArrayCos, 
+                       MPSNDArrayCosGradient, MPSNDArrayCosh, MPSNDArrayCoshGradient, 
+                       MPSNDArrayCropResize, MPSNDArrayDecompositionLU, MPSNDArrayDecompositionQR, 
+                       MPSNDArrayDepthwiseConvolution2DDescriptor, MPSNDArrayDepthwiseConvolutionKernel, 
+                       MPSNDArrayDivision, MPSNDArrayDivisionPrimaryGradient, MPSNDArrayDivisionSecondaryGradient, 
                        MPSNDArrayEqual, MPSNDArrayEqualPrimaryGradient, MPSNDArrayEqualSecondaryGradient, 
                        MPSNDArrayErf, MPSNDArrayErfGradient, MPSNDArrayExponent, 
                        MPSNDArrayExponentBase10, MPSNDArrayExponentBase10Gradient, 
@@ -471,13 +483,14 @@ exports:
                        MPSNDArrayGreaterThan, MPSNDArrayGreaterThanOrEqualTo, MPSNDArrayGreaterThanOrEqualToPrimaryGradient, 
                        MPSNDArrayGreaterThanOrEqualToSecondaryGradient, MPSNDArrayGreaterThanPrimaryGradient, 
                        MPSNDArrayGreaterThanSecondaryGradient, MPSNDArrayGridSample, 
-                       MPSNDArrayIdentity, MPSNDArrayInitialization, MPSNDArrayInitializationConstant, 
-                       MPSNDArrayInitializationGlorotNormal, MPSNDArrayInitializationGlorotUniform, 
-                       MPSNDArrayInitializationIdentity, MPSNDArrayInitializationRandomNormal, 
-                       MPSNDArrayInitializationRandomUniform, MPSNDArrayInitializationTruncatedNormal, 
-                       MPSNDArrayIsFinite, MPSNDArrayIsFiniteGradient, MPSNDArrayIsInfinite, 
-                       MPSNDArrayIsInfiniteGradient, MPSNDArrayIsNaN, MPSNDArrayIsNaNGradient, 
-                       MPSNDArrayLessThan, MPSNDArrayLessThanOrEqualTo, MPSNDArrayLessThanOrEqualToPrimaryGradient, 
+                       MPSNDArrayHammingDistanceKernel, MPSNDArrayIdentity, MPSNDArrayInitialization, 
+                       MPSNDArrayInitializationConstant, MPSNDArrayInitializationGlorotNormal, 
+                       MPSNDArrayInitializationGlorotUniform, MPSNDArrayInitializationIdentity, 
+                       MPSNDArrayInitializationRandomNormal, MPSNDArrayInitializationRandomUniform, 
+                       MPSNDArrayInitializationTruncatedNormal, MPSNDArrayIsFinite, 
+                       MPSNDArrayIsFiniteGradient, MPSNDArrayIsInfinite, MPSNDArrayIsInfiniteGradient, 
+                       MPSNDArrayIsNaN, MPSNDArrayIsNaNGradient, MPSNDArrayLessThan, 
+                       MPSNDArrayLessThanOrEqualTo, MPSNDArrayLessThanOrEqualToPrimaryGradient, 
                        MPSNDArrayLessThanOrEqualToSecondaryGradient, MPSNDArrayLessThanPrimaryGradient, 
                        MPSNDArrayLessThanSecondaryGradient, MPSNDArrayLocalConvolution, 
                        MPSNDArrayLogSoftMax, MPSNDArrayLogSoftMaxGradient, MPSNDArrayLogarithm, 
@@ -493,9 +506,10 @@ exports:
                        MPSNDArrayMinimum, MPSNDArrayMinimumPrimaryGradient, MPSNDArrayMinimumSecondaryGradient, 
                        MPSNDArrayModulo, MPSNDArrayModuloPrimaryGradient, MPSNDArrayModuloSecondaryGradient, 
                        MPSNDArrayMultiaryBase, MPSNDArrayMultiaryGradientKernel, 
-                       MPSNDArrayMultiaryKernel, MPSNDArrayMultiplication, MPSNDArrayMultiplicationPrimaryGradient, 
-                       MPSNDArrayMultiplicationSecondaryGradient, MPSNDArrayNAND, 
-                       MPSNDArrayNANDPrimaryGradient, MPSNDArrayNANDSecondaryGradient, 
+                       MPSNDArrayMultiaryKernel, MPSNDArrayMultiaryMultiDestinationBase, 
+                       MPSNDArrayMultiaryMultiDestinationKernel, MPSNDArrayMultiplication, 
+                       MPSNDArrayMultiplicationPrimaryGradient, MPSNDArrayMultiplicationSecondaryGradient, 
+                       MPSNDArrayNAND, MPSNDArrayNANDPrimaryGradient, MPSNDArrayNANDSecondaryGradient, 
                        MPSNDArrayNOR, MPSNDArrayNORPrimaryGradient, MPSNDArrayNORSecondaryGradient, 
                        MPSNDArrayNOT, MPSNDArrayNOTGradient, MPSNDArrayNegative, 
                        MPSNDArrayNegativeGradient, MPSNDArrayNeuronGeLU, MPSNDArrayNeuronGeLUGradient, 
@@ -503,30 +517,32 @@ exports:
                        MPSNDArrayNotEqualPrimaryGradient, MPSNDArrayNotEqualSecondaryGradient, 
                        MPSNDArrayOR, MPSNDArrayORPrimaryGradient, MPSNDArrayORSecondaryGradient, 
                        MPSNDArrayPadGradientKernel, MPSNDArrayPadKernel, MPSNDArrayPoolingKernel, 
-                       MPSNDArrayPower, MPSNDArrayPowerPrimaryGradient, MPSNDArrayPowerSecondaryGradient, 
-                       MPSNDArrayPrune, MPSNDArrayQRDecomposition, MPSNDArrayRandom, 
-                       MPSNDArrayRandomNormal, MPSNDArrayRandomState, MPSNDArrayRandomStateDescriptor, 
-                       MPSNDArrayRandomTruncatedNormal, MPSNDArrayRandomUniform, 
-                       MPSNDArrayReciprocal, MPSNDArrayReciprocalGradient, MPSNDArrayReduction, 
-                       MPSNDArrayReductionGradient, MPSNDArrayReductionSum, MPSNDArrayReductionSumGradient, 
-                       MPSNDArrayResample, MPSNDArrayResampleGradient, MPSNDArrayReverseSquareRoot, 
-                       MPSNDArrayReverseSquareRootGradient, MPSNDArrayRint, MPSNDArrayRintGradient, 
-                       MPSNDArrayRound, MPSNDArrayRoundGradient, MPSNDArrayScatter, 
+                       MPSNDArrayPoolingMultiDestinationKernel, MPSNDArrayPower, 
+                       MPSNDArrayPowerPrimaryGradient, MPSNDArrayPowerSecondaryGradient, 
+                       MPSNDArrayPrune, MPSNDArrayRandom, MPSNDArrayRandomNormal, 
+                       MPSNDArrayRandomState, MPSNDArrayRandomStateDescriptor, MPSNDArrayRandomTruncatedNormal, 
+                       MPSNDArrayRandomUniform, MPSNDArrayReciprocal, MPSNDArrayReciprocalGradient, 
+                       MPSNDArrayReduction, MPSNDArrayReductionGradient, MPSNDArrayReductionSum, 
+                       MPSNDArrayReductionSumGradient, MPSNDArrayResample, MPSNDArrayResampleGradient, 
+                       MPSNDArrayReverseSquareRoot, MPSNDArrayReverseSquareRootGradient, 
+                       MPSNDArrayRint, MPSNDArrayRintGradient, MPSNDArrayRound, MPSNDArrayRoundGradient, 
+                       MPSNDArrayScan, MPSNDArrayScanGradient, MPSNDArrayScatter, 
                        MPSNDArrayScatterGradient, MPSNDArraySelect, MPSNDArraySelectPrimaryGradient, 
                        MPSNDArraySelectSecondaryGradient, MPSNDArraySelectTertiaryGradient, 
                        MPSNDArraySign, MPSNDArraySignGradient, MPSNDArraySignbit, 
                        MPSNDArraySignbitGradient, MPSNDArraySin, MPSNDArraySinGradient, 
                        MPSNDArraySinh, MPSNDArraySinhGradient, MPSNDArraySoftMax, 
-                       MPSNDArraySoftMaxGradient, MPSNDArraySquare, MPSNDArraySquareGradient, 
-                       MPSNDArraySquareRoot, MPSNDArraySquareRootGradient, MPSNDArrayStencilKernel, 
-                       MPSNDArrayStridedSlice, MPSNDArrayStridedSliceGradient, MPSNDArraySubtraction, 
-                       MPSNDArraySubtractionPrimaryGradient, MPSNDArraySubtractionSecondaryGradient, 
-                       MPSNDArrayTan, MPSNDArrayTanGradient, MPSNDArrayTanh, MPSNDArrayTanhGradient, 
-                       MPSNDArrayTileGradientKernel, MPSNDArrayTileKernel, MPSNDArrayTopK, 
-                       MPSNDArrayTopKGradient, MPSNDArrayUnaryGradientKernel, MPSNDArrayUnaryKernel, 
-                       MPSNDArrayXNOR, MPSNDArrayXNORPrimaryGradient, MPSNDArrayXNORSecondaryGradient, 
-                       MPSNDArrayXOR, MPSNDArrayXORPrimaryGradient, MPSNDArrayXORSecondaryGradient, 
-                       MPSPluginNDArrayConvolutionDescriptor ]
+                       MPSNDArraySoftMaxGradient, MPSNDArraySolverLU, MPSNDArraySort, 
+                       MPSNDArraySquare, MPSNDArraySquareGradient, MPSNDArraySquareRoot, 
+                       MPSNDArraySquareRootGradient, MPSNDArrayStencilKernel, MPSNDArrayStridedSlice, 
+                       MPSNDArrayStridedSliceGradient, MPSNDArraySubtraction, MPSNDArraySubtractionPrimaryGradient, 
+                       MPSNDArraySubtractionSecondaryGradient, MPSNDArrayTan, MPSNDArrayTanGradient, 
+                       MPSNDArrayTanh, MPSNDArrayTanhGradient, MPSNDArrayTileGradientKernel, 
+                       MPSNDArrayTileKernel, MPSNDArrayTopK, MPSNDArrayTopKGradient, 
+                       MPSNDArrayTopKMultiDestination, MPSNDArrayUnaryGradientKernel, 
+                       MPSNDArrayUnaryKernel, MPSNDArrayXNOR, MPSNDArrayXNORPrimaryGradient, 
+                       MPSNDArrayXNORSecondaryGradient, MPSNDArrayXOR, MPSNDArrayXORPrimaryGradient, 
+                       MPSNDArrayXORSecondaryGradient, MPSPluginNDArrayConvolutionDescriptor ]
     objc-ivars:      [ MPSNDArrayConvolution2D._autoTuningParams, MPSNDArrayConvolution2D._autoTuningTarget, 
                        MPSNDArrayConvolution2DGradientWithInput._autoTuningParams, 
                        MPSNDArrayConvolution2DGradientWithInput._autoTuningTarget, 
@@ -539,26 +555,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           13C7FCE9-EA60-3FF8-B6D5-DF89295F3D5C
+    value:           C2A7F2FF-0076-3ACB-8424-916B37E7EAF2
   - target:          x86_64-maccatalyst
-    value:           13C7FCE9-EA60-3FF8-B6D5-DF89295F3D5C
+    value:           C2A7F2FF-0076-3ACB-8424-916B37E7EAF2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1DD8C78C-2645-3B61-8559-8C48BE2BA53E
+    value:           BF5DCA30-A292-399B-8C6E-43B5004C34B8
   - target:          arm64e-maccatalyst
-    value:           1DD8C78C-2645-3B61-8559-8C48BE2BA53E
+    value:           BF5DCA30-A292-399B-8C6E-43B5004C34B8
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNeuralNetwork.framework/Versions/A/MPSNeuralNetwork'
-current-version: 125.4.6
+current-version: 126.0.22
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ MPSImage, MetalPerformanceShaders ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DeadlockedBecauseTheCPUBasedWeightUpdateForThePreviousBatchOccursAtCompletionOfThisCmdBuf_TryGPUUpdateOrNewCmdBufInstead, 
                        _GetMPSCNNNeuronTypeName ]
     objc-classes:    [ MPSCNNAdd, MPSCNNAddGradient, MPSCNNArithmetic, MPSCNNArithmeticGradient, 
@@ -670,26 +686,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E32AE223-5D09-310F-AA13-8E419F142DE4
+    value:           0EDD2A60-E626-34C1-A7DF-4633DDF24159
   - target:          x86_64-maccatalyst
-    value:           E32AE223-5D09-310F-AA13-8E419F142DE4
+    value:           0EDD2A60-E626-34C1-A7DF-4633DDF24159
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4201EA2A-A50D-3B8B-820C-73246D57EBBB
+    value:           234C8589-B9C1-34B9-A9F0-8850DF751300
   - target:          arm64e-maccatalyst
-    value:           4201EA2A-A50D-3B8B-820C-73246D57EBBB
+    value:           234C8589-B9C1-34B9-A9F0-8850DF751300
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSRayIntersector.framework/Versions/A/MPSRayIntersector'
-current-version: 125.4.6
+current-version: 126.0.22
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ MPSImage, MetalPerformanceShaders ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MPSAccelerationStructureBuilderCPU, _MPSAccelerationStructureBuilderGPU, 
                        _MPSAccelerationStructureGPUBuilderTypeDefault, _MPSAccelerationStructureGPUBuilderTypeFast, 
                        _MPSAccelerationStructureNodeLayoutAOS, _MPSAccelerationStructureNodeLayoutSOA, 

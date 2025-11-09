@@ -11,10 +11,6 @@
 #import <Metal/MTLResource.h>
 
 NS_ASSUME_NONNULL_BEGIN
-/*!
- @header MTLBuffer.h
- @discussion Header file for MTLBuffer
- */
 
 @class MTLTextureDescriptor;
 @protocol MTLTexture;
@@ -94,6 +90,13 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  within the peer group.  The receiver must use MTLStorageModePrivate or be backed by an IOSurface.
  */
 - (nullable id <MTLBuffer>) newRemoteBufferViewForDevice:(id <MTLDevice>)device API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+
+
+/*!
+ @property gpuAddress
+ @abstract Represents the GPU virtual address of a buffer resource
+ */
+@property (readonly) uint64_t gpuAddress API_AVAILABLE(macos(13.0), ios(16.0));
 
 @end
 NS_ASSUME_NONNULL_END

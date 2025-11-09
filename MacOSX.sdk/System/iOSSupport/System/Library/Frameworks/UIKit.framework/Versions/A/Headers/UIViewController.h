@@ -24,7 +24,7 @@
   stuff.
 */
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIView;
 @class UINavigationItem, UIBarButtonItem, UITabBarItem;
@@ -202,6 +202,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// The identifier of the focus group that this view controller belongs to. If this is nil, the view controller inherits the focus group of its parent focus environment.
 @property (nonatomic, readwrite, nullable, copy) NSString *focusGroupIdentifier API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
 
+/// The base name for tracking user interactions as activities hosted by this view controller.
+@property (nonatomic, copy, nullable) NSString *interactionActivityTrackingBaseName API_AVAILABLE(ios(16.0));
+
 /*
   These four methods can be used in a view controller's appearance callbacks to determine if it is being
   presented, dismissed, or added or removed as a child view controller. For example, a view controller can
@@ -313,18 +316,20 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // To make it more convenient for applications to adopt rotation, a view controller may implement the below methods. Your UIWindow's frame should use [UIScreen mainScreen].bounds as its frame.
 @interface UIViewController (UIViewControllerRotation)
 
-// call this method when your return value from shouldAutorotateToInterfaceOrientation: changes
-// if the current interface orientation does not match the current device orientation, a rotation may occur provided all relevant view controllers now return YES from shouldAutorotateToInterfaceOrientation:
-+ (void)attemptRotationToDeviceOrientation API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos);
++ (void)attemptRotationToDeviceOrientation API_DEPRECATED("Please use instance method `setNeedsUpdateOfSupportedInterfaceOrientations`.", ios(5.0, 16.0)) API_UNAVAILABLE(tvos);
 
 // Applications should use supportedInterfaceOrientations and/or shouldAutorotate.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(tvos);
 
 // New Autorotation support.
-@property(nonatomic, readonly) BOOL shouldAutorotate API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic, readonly) BOOL shouldAutorotate API_DEPRECATED("Update supported interface orientations and call setNeedsUpdateOfSupportedInterfaceOrientations to indicate a change.", ios(6.0, 16.0)) API_UNAVAILABLE(tvos);
 @property(nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(tvos);
 // Returns interface orientation masks.
 @property(nonatomic, readonly) UIInterfaceOrientation preferredInterfaceOrientationForPresentation API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(tvos);
+
+/// Notifies the view controller that a change occurred that affects supported interface orientations or the preferred interface orientation for presentation.
+/// By default, this will animate any changes to orientation. To perform a non-animated update, call within `[UIView performWithoutAnimation:]`.
+- (void)setNeedsUpdateOfSupportedInterfaceOrientations API_AVAILABLE(ios(16.0));
 
 // The rotating header and footer views will slide out during the rotation and back in once it has completed.
 - (nullable UIView *)rotatingHeaderView API_DEPRECATED("Header views are animated along with the rest of the view hierarchy", ios(2.0, 8.0)) API_UNAVAILABLE(tvos);     // Must be in the view hierarchy. Default returns nil.
@@ -555,6 +560,9 @@ UIKIT_EXTERN NSExceptionName const UIViewControllerHierarchyInconsistencyExcepti
 @property (nullable, nonatomic, readonly) UISheetPresentationController *sheetPresentationController API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
 @property (nullable, nonatomic, readonly) UIPopoverPresentationController *popoverPresentationController API_AVAILABLE(ios(8.0));
 
+// Gets the presentation controller managing this view controller. If the original presentation controller has adapted, this returns the adaptive presentation controller. If this view controller has not yet been presented, this property returns nil.
+ @property (nullable, nonatomic, readonly) UIPresentationController *activePresentationController API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+
 // modalInPresentation is set on the view controller when you wish to force the presentation hosting the view controller into modal behavior. When this is active, the presentation will prevent interactive dismiss and ignore events outside of the presented view controller's bounds until this is set to NO.
 @property (nonatomic, getter=isModalInPresentation) BOOL modalInPresentation API_AVAILABLE(ios(13.0));
 
@@ -674,7 +682,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_DEPRECATED("Please use UIContextMenuInt
 + (instancetype)actionGroupWithTitle:(NSString *)title style:(UIPreviewActionStyle)style actions:(NSArray<UIPreviewAction *> *)actions;
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIViewController.h>

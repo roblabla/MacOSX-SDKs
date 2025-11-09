@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           032B752E-0351-3987-9BAB-0800C57E6978
+    value:           CE1B92A7-A8F3-3341-A387-E55DAD43C08F
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           3DAF4397-4468-3392-9FE5-9FD1DA69EC40
+    value:           B33D03C0-8DA8-3AB8-B92C-5EBC1BCBE45F
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftCoreNFC.dylib'
-current-version: 2.6
+current-version: 3.0.1
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s7CoreNFC19NFCFeliCaStatusFlagV11statusFlag10G5Flag2ACSi_SitcfC', 
                        '_$s7CoreNFC19NFCFeliCaStatusFlagV11statusFlag1SivM', '_$s7CoreNFC19NFCFeliCaStatusFlagV11statusFlag1Sivg', 
                        '_$s7CoreNFC19NFCFeliCaStatusFlagV11statusFlag1SivpMV', '_$s7CoreNFC19NFCFeliCaStatusFlagV11statusFlag1Sivs', 

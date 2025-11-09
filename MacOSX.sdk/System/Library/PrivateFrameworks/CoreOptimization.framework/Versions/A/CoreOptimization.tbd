@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CFD90ECD-B6AF-3AF5-A53E-5AAC3AE0B4F3
+    value:           C20A8B77-975A-3535-B352-00322C056C2D
   - target:          x86_64-maccatalyst
-    value:           CFD90ECD-B6AF-3AF5-A53E-5AAC3AE0B4F3
+    value:           C20A8B77-975A-3535-B352-00322C056C2D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E75F4937-39A5-3C51-87D8-DE0931FFCD5B
+    value:           4F82E6A3-F95B-3EF7-AA1E-B1B5CB4AF5AB
   - target:          arm64e-maccatalyst
-    value:           E75F4937-39A5-3C51-87D8-DE0931FFCD5B
+    value:           4F82E6A3-F95B-3EF7-AA1E-B1B5CB4AF5AB
 install-name:    '/System/Library/PrivateFrameworks/CoreOptimization.framework/Versions/A/CoreOptimization'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __Z15GradientDescentRNSt3__18valarrayIdEEN16CoreOptimization17ObjectiveFunctionEi, 
                        __Z4normRKN16CoreOptimization10gradient_tE, __ZN16CoreOptimization4BFGS11GetSolutionEv, 
                        __ZN16CoreOptimization4BFGS13UpdateHessianERNS_9hessian_tERKNSt3__18valarrayIdEES7_, 

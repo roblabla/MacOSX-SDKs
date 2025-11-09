@@ -2,7 +2,7 @@
 //  AVB17221ACMPMessage.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2011-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -10,13 +10,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class AVBMACAddress;
+@class AVBIPAddress;
 
 /*!
 	@class		AVB17221ACMPMessage
 	@abstract	AVB17221ACMPMessage encapsulates an IEEE Std 1722.1™-2013 AVDECC Connection Management Protocol message.
 	@discussion	AVB17221ACMPMessage encapsulates an IEEE Std 1722.1™-2013 AVDECC Connection Management Protocol (ACMP) message.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVB17221ACMPMessage : NSObject <NSCopying>
 
 /*!
@@ -38,17 +39,17 @@ API_AVAILABLE(macos(10.8))
 	@property	controllerGUID
 	@abstract	The controller_entity_id field of the ACMP message.
  */
-@property (assign) uint64_t controllerEntityID API_AVAILABLE(macos(10.9));
+@property (assign) uint64_t controllerEntityID API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@property	talkerEntityID
 	@abstract	The talker_entity_id field of the ACMP message.
  */
-@property (assign) uint64_t talkerEntityID API_AVAILABLE(macos(10.9));
+@property (assign) uint64_t talkerEntityID API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@property	listenerEntityID
 	@abstract	The listener_entity_id field of the ACMP message.
  */
-@property (assign) uint64_t listenerEntityID API_AVAILABLE(macos(10.9));
+@property (assign) uint64_t listenerEntityID API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@property	talkerUniqueID
 	@abstract	The talker_unique_id field of the ACMP message.
@@ -84,6 +85,43 @@ API_AVAILABLE(macos(10.8))
 	@abstract	The stream_vlan_id field of the ACMP message.
  */
 @property (assign) uint16_t vlanID;
+
+/*!
+ @property	connectedListenersEntries
+ @abstract	The connected_listeners_entries field of the ACMP message.
+ */
+@property (assign) uint16_t connectedListenersEntries API_AVAILABLE(macos(12)) API_UNAVAILABLE(ios, tvos);
+/*!
+ @property	connectedListenersEntriesValid
+ @abstract	The CL_ENTRIES_VALID flag in the flags field of the ACMP message.
+ */
+@property (assign) bool connectedListenersEntriesValid API_AVAILABLE(macos(12)) API_UNAVAILABLE(ios, tvos);
+
+/*!
+ @property	ipFlags
+ @abstract	The ip_flags field of the ACMP message.
+ */
+@property (assign) AVB17221ACMPIPFlag ipFlags API_AVAILABLE(macos(12)) API_UNAVAILABLE(ios, tvos);
+/*!
+ @property	sourcePort
+ @abstract	The source_port field of the ACMP message.
+ */
+@property (assign) uint16_t sourcePort API_AVAILABLE(macos(12)) API_UNAVAILABLE(ios, tvos);
+/*!
+ @property	destinationPort
+ @abstract	The destination_port field of the ACMP message.
+ */
+@property (assign) uint16_t destinationPort API_AVAILABLE(macos(12)) API_UNAVAILABLE(ios, tvos);
+/*!
+ @property	sourceAddress
+ @abstract	The source_ip_address field of the ACMP message.
+ */
+@property (copy) AVBIPAddress *sourceIPAddress API_AVAILABLE(macos(12)) API_UNAVAILABLE(ios, tvos);
+/*!
+ @property	destinationAddress
+ @abstract	The destination_ip_address field of the ACMP message.
+ */
+@property (copy) AVBIPAddress *destinationIPAddress API_AVAILABLE(macos(12)) API_UNAVAILABLE(ios, tvos);
 
 /*!
 	@property	sourceMAC

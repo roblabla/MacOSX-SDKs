@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FE3CE7F1-B68D-344F-9D27-30E171CFFBA8
+    value:           DD4F6D51-3DD6-3D42-8283-348551106148
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DE7DA4A1-F75B-3EEF-A910-D36D94826195
+    value:           CA705EE0-FEC0-3B20-BC0D-B5A73BA3264D
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -16,7 +16,7 @@ reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$hide$os10.10$_AddPt', '$ld$hide$os10.10$_ClipCGContextToRegion', 
                        '$ld$hide$os10.10$_ConvertARGBToRGBA', '$ld$hide$os10.10$_CreateCGImageRefFromPixMaps', 
                        '$ld$hide$os10.10$_DisposeCalcColorTableUPP', '$ld$hide$os10.10$_DisposeColorComplementUPP', 
@@ -36,7 +36,6 @@ exports:
                        '$ld$hide$os10.10$_DisposeQDTextUPP', '$ld$hide$os10.10$_DisposeQDTxMeasUPP', 
                        '$ld$hide$os10.10$_DisposeRGBA32ImageData', '$ld$hide$os10.10$_DisposeRecordColorsUPP', 
                        '$ld$hide$os10.10$_DisposeRegionToRectsUPP', '$ld$hide$os10.10$_DisposeStyleRunDirectionUPP', 
-                       '$ld$hide$os10.10$_FMFontGetCGFontRefFromFontFamilyInstance', 
                        '$ld$hide$os10.10$_GetCTSeed', '$ld$hide$os10.10$_GetPMBaseAddr', 
                        '$ld$hide$os10.10$_GetPMRowBytes', '$ld$hide$os10.10$_GetPixBaseAddr', 
                        '$ld$hide$os10.10$_HandleToRgn', '$ld$hide$os10.10$_InvokeCalcColorTableUPP', 
@@ -101,7 +100,6 @@ exports:
                        '$ld$hide$os10.11$_DisposeQDTextUPP', '$ld$hide$os10.11$_DisposeQDTxMeasUPP', 
                        '$ld$hide$os10.11$_DisposeRGBA32ImageData', '$ld$hide$os10.11$_DisposeRecordColorsUPP', 
                        '$ld$hide$os10.11$_DisposeRegionToRectsUPP', '$ld$hide$os10.11$_DisposeStyleRunDirectionUPP', 
-                       '$ld$hide$os10.11$_FMFontGetCGFontRefFromFontFamilyInstance', 
                        '$ld$hide$os10.11$_GetCTSeed', '$ld$hide$os10.11$_GetPMBaseAddr', 
                        '$ld$hide$os10.11$_GetPMRowBytes', '$ld$hide$os10.11$_GetPixBaseAddr', 
                        '$ld$hide$os10.11$_HandleToRgn', '$ld$hide$os10.11$_InvokeCalcColorTableUPP', 
@@ -166,7 +164,6 @@ exports:
                        '$ld$hide$os10.12$_DisposeQDTextUPP', '$ld$hide$os10.12$_DisposeQDTxMeasUPP', 
                        '$ld$hide$os10.12$_DisposeRGBA32ImageData', '$ld$hide$os10.12$_DisposeRecordColorsUPP', 
                        '$ld$hide$os10.12$_DisposeRegionToRectsUPP', '$ld$hide$os10.12$_DisposeStyleRunDirectionUPP', 
-                       '$ld$hide$os10.12$_FMFontGetCGFontRefFromFontFamilyInstance', 
                        '$ld$hide$os10.12$_GetCTSeed', '$ld$hide$os10.12$_GetPMBaseAddr', 
                        '$ld$hide$os10.12$_GetPMRowBytes', '$ld$hide$os10.12$_GetPixBaseAddr', 
                        '$ld$hide$os10.12$_HandleToRgn', '$ld$hide$os10.12$_InvokeCalcColorTableUPP', 
@@ -231,7 +228,6 @@ exports:
                        '$ld$hide$os10.13$_DisposeQDTextUPP', '$ld$hide$os10.13$_DisposeQDTxMeasUPP', 
                        '$ld$hide$os10.13$_DisposeRGBA32ImageData', '$ld$hide$os10.13$_DisposeRecordColorsUPP', 
                        '$ld$hide$os10.13$_DisposeRegionToRectsUPP', '$ld$hide$os10.13$_DisposeStyleRunDirectionUPP', 
-                       '$ld$hide$os10.13$_FMFontGetCGFontRefFromFontFamilyInstance', 
                        '$ld$hide$os10.13$_GetCTSeed', '$ld$hide$os10.13$_GetPMBaseAddr', 
                        '$ld$hide$os10.13$_GetPMRowBytes', '$ld$hide$os10.13$_GetPixBaseAddr', 
                        '$ld$hide$os10.13$_HandleToRgn', '$ld$hide$os10.13$_InvokeCalcColorTableUPP', 
@@ -296,7 +292,6 @@ exports:
                        '$ld$hide$os10.9$_DisposeQDTextUPP', '$ld$hide$os10.9$_DisposeQDTxMeasUPP', 
                        '$ld$hide$os10.9$_DisposeRGBA32ImageData', '$ld$hide$os10.9$_DisposeRecordColorsUPP', 
                        '$ld$hide$os10.9$_DisposeRegionToRectsUPP', '$ld$hide$os10.9$_DisposeStyleRunDirectionUPP', 
-                       '$ld$hide$os10.9$_FMFontGetCGFontRefFromFontFamilyInstance', 
                        '$ld$hide$os10.9$_GetCTSeed', '$ld$hide$os10.9$_GetPMBaseAddr', 
                        '$ld$hide$os10.9$_GetPMRowBytes', '$ld$hide$os10.9$_GetPixBaseAddr', 
                        '$ld$hide$os10.9$_HandleToRgn', '$ld$hide$os10.9$_InvokeCalcColorTableUPP', 
@@ -358,13 +353,13 @@ exports:
                        _DisposeQDRgnUPP, _DisposeQDStdGlyphsUPP, _DisposeQDTextUPP, 
                        _DisposeQDTxMeasUPP, _DisposeRGBA32ImageData, _DisposeRecordColorsUPP, 
                        _DisposeRegionToRectsUPP, _DisposeRgn, _DisposeStyleRunDirectionUPP, 
-                       _EmptyRect, _EmptyRgn, _EqualPt, _EqualRect, _EqualRgn, _FMFontGetCGFontRefFromFontFamilyInstance, 
-                       _FMGetATSFontFamilyRefFromFontFamily, _FMGetATSFontRefFromFont, 
-                       _FMGetFontFamilyFromATSFontFamilyRef, _FMGetFontFromATSFontRef, 
-                       _GetCGSConnectionID, _GetCTSeed, _GetCTable, _GetPMBaseAddr, 
-                       _GetPMRowBytes, _GetPixBaseAddr, _GetRegionBounds, _HandleToRgn, 
-                       _HideCursor, _InitCursor, _InsetRect, _InsetRgn, _InvokeCalcColorTableUPP, 
-                       _InvokeColorComplementUPP, _InvokeColorSearchUPP, _InvokeDMComponentListIteratorUPP, 
+                       _EmptyRect, _EmptyRgn, _EqualPt, _EqualRect, _EqualRgn, _FMGetATSFontFamilyRefFromFontFamily, 
+                       _FMGetATSFontRefFromFont, _FMGetFontFamilyFromATSFontFamilyRef, 
+                       _FMGetFontFromATSFontRef, _GetCGSConnectionID, _GetCTSeed, 
+                       _GetCTable, _GetPMBaseAddr, _GetPMRowBytes, _GetPixBaseAddr, 
+                       _GetRegionBounds, _HandleToRgn, _HideCursor, _InitCursor, 
+                       _InsetRect, _InsetRgn, _InvokeCalcColorTableUPP, _InvokeColorComplementUPP, 
+                       _InvokeColorSearchUPP, _InvokeDMComponentListIteratorUPP, 
                        _InvokeDMDisplayListIteratorUPP, _InvokeDMDisplayModeListIteratorUPP, 
                        _InvokeDMExtendedNotificationUPP, _InvokeDMNotificationUPP, 
                        _InvokeDMProfileListIteratorUPP, _InvokeDeviceLoopDrawingUPP, 
@@ -402,17 +397,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1E528D32-6630-3028-8161-FFC7A7EFFC4D
+    value:           4C8AD30F-1178-34B5-AA0A-C2027221A7FE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           56785513-F26C-359C-A711-15CC95A4E794
+    value:           D9DD206E-8AF5-3765-859C-25DB90767A34
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ATSApplyMorph, _ATSClearGlyphVector, _ATSGrowGlyphVector, 
                        _ATSInitializeGlyphVector, _ATSUBatchBreakLines, _ATSUBreakLine, 
                        _ATSUClearAttributes, _ATSUClearFontFeatures, _ATSUClearFontVariations, 

@@ -230,14 +230,6 @@ typedef NSInteger NSToolTipTag;
 */
 @property BOOL wantsRestingTouches API_AVAILABLE(macos(10.6));
 
-- (void)addCursorRect:(NSRect)rect cursor:(NSCursor *)object;
-- (void)removeCursorRect:(NSRect)rect cursor:(NSCursor *)object;
-- (void)discardCursorRects;
-- (void)resetCursorRects;
-
-- (NSTrackingRectTag)addTrackingRect:(NSRect)rect owner:(id)owner userData:(nullable void *)data assumeInside:(BOOL)flag;
-- (void)removeTrackingRect:(NSTrackingRectTag)tag;
-
 - (CALayer *)makeBackingLayer API_AVAILABLE(macos(10.6));
 
 /* Get and set how the layer should redraw when resizing and redisplaying. Prior to 10.8, the default value was always set to NSViewLayerContentsRedrawDuringViewResize when an AppKit managed layer was created. In 10.8 and higher, the value is initialized to the appropriate thing for each individual AppKit view. Generally, the default value is NSViewLayerContentsRedrawOnSetNeedsDisplay if the view responds YES to -wantsUpdateLayer. Otherwise, the value is usually NSViewLayerContentsRedrawDuringViewResize, indicating that the view needs to redraw on each step of an animation via a setFrame: change. On 10.8, the value is not encoded by the view.
@@ -283,16 +275,6 @@ typedef NSInteger NSToolTipTag;
 @property (copy) NSArray<__kindof CIFilter *> *contentFilters API_AVAILABLE(macos(10.5));
 
 @property (nullable, copy) NSShadow *shadow API_AVAILABLE(macos(10.5));
-
-/* The following methods are meant to be invoked, and probably don't need to be overridden
-*/
-- (void)addTrackingArea:(NSTrackingArea *)trackingArea API_AVAILABLE(macos(10.5));
-- (void)removeTrackingArea:(NSTrackingArea *)trackingArea API_AVAILABLE(macos(10.5));
-@property (readonly, copy) NSArray<NSTrackingArea *> *trackingAreas API_AVAILABLE(macos(10.5));
-
-/* updateTrackingAreas should be overridden to remove out of date tracking areas and add recomputed tracking areas, and should call super.
-*/
-- (void)updateTrackingAreas API_AVAILABLE(macos(10.5));
 
 @property BOOL postsBoundsChangedNotifications;
 
@@ -394,7 +376,7 @@ typedef NSInteger NSToolTipTag;
 
 /* This method can be implemented as an optional CALayer delegate method, for handling resolution changes.  When a window changes its backing resolution, AppKit attempts to automatically update the contentsScale and contents of all CALayers in the window to match the new resolution.  View backing layers are updated automatically.  Any layer whose "contents" property is set to an NSImage will also be updated automatically.  (Based on the NSImage's available representations, AppKit will select an appropriate bitmapped representation, or rasterize a resolution-independent representation at the appropriate scale factor.)  For all other layers, AppKit will check whether the layer has a delegate that implements this method.  If so, AppKit will send this message to the layer's delegate to ask whether it should automatically update the contentsScale for that layer to match the backingScaleFactor of the window.  If you return YES for a given layer, AppKit will set the layer's contentsScale as proposed, and you must ensure that the layer's contents and other properties are configured appropriately for that new contentsScale.  (If you expressed the layer's "contents" as a CGImage, you may need to provide a different CGImage that's appropriate for the new contentsScale.)  Note that this method is only invoked when a window's backingScaleFactor changes.  You are responsible for setting the initial contentsScale of your layers.
 */
-- (BOOL)layer:(CALayer *)layer shouldInheritContentsScale:(CGFloat)newScale fromWindow:(NSWindow *)window API_AVAILABLE(macos(10.7)); // added in 10.7.3
+- (BOOL)layer:(CALayer *)layer shouldInheritContentsScale:(CGFloat)newScale fromWindow:(NSWindow *)window NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7)); // added in 10.7.3
 
 @end
 
@@ -405,7 +387,7 @@ typedef NSInteger NSToolTipTag;
 #endif
 
 @protocol NSViewToolTipOwner <NSObject>
-- (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(nullable void *)data;
+- (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(nullable void *)data NS_SWIFT_UI_ACTOR;
 @end
 
 #if __swift__ < 40200
@@ -562,6 +544,28 @@ APPKIT_EXTERN NSDefinitionPresentationType const NSDefinitionPresentationTypeDic
 /* This layout guide provides the recommended amount of padding for content inside a view. */
 @property (readonly, strong) NSLayoutGuide *layoutMarginsGuide API_AVAILABLE(macos(11.0));
 
+@end
+
+@interface NSView(NSTrackingArea)
+/* The following methods are meant to be invoked, and probably don't need to be overridden
+*/
+- (void)addTrackingArea:(NSTrackingArea *)trackingArea API_AVAILABLE(macos(10.5));
+- (void)removeTrackingArea:(NSTrackingArea *)trackingArea API_AVAILABLE(macos(10.5));
+@property (readonly, copy) NSArray<NSTrackingArea *> *trackingAreas API_AVAILABLE(macos(10.5));
+
+/* updateTrackingAreas should be overridden to remove out of date tracking areas and add recomputed tracking areas, and should call super.
+*/
+- (void)updateTrackingAreas API_AVAILABLE(macos(10.5));
+
+/* The following methods are soft deprecated. Use the above NSTrackingArea API instead
+*/
+- (void)addCursorRect:(NSRect)rect cursor:(NSCursor *)object;
+- (void)removeCursorRect:(NSRect)rect cursor:(NSCursor *)object;
+- (void)discardCursorRects;
+- (void)resetCursorRects;
+
+- (NSTrackingRectTag)addTrackingRect:(NSRect)rect owner:(id)owner userData:(nullable void *)data assumeInside:(BOOL)flag;
+- (void)removeTrackingRect:(NSTrackingRectTag)tag;
 @end
 
 @interface NSView(NSDeprecated)

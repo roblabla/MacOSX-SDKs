@@ -7,9 +7,9 @@
 
 @class NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-extern NSString *NSOperationNotSupportedForKeyException;
+extern NSString * const NSOperationNotSupportedForKeyException;
 
 @interface NSObject(NSScriptKeyValueCoding)
 
@@ -41,4 +41,4 @@ extern NSString *NSOperationNotSupportedForKeyException;
     
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           984E6D31-8BDE-3614-9A41-64FB4F8D9A58
+    value:           7B11574A-D4F3-3159-8B7E-F496188BF217
   - target:          x86_64-maccatalyst
-    value:           984E6D31-8BDE-3614-9A41-64FB4F8D9A58
+    value:           7B11574A-D4F3-3159-8B7E-F496188BF217
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EBE9F62A-B573-3915-8CD9-D77E9C8A4FB2
+    value:           9C119A14-1AFC-3B0F-BEF3-ABFBD46D86D4
   - target:          arm64e-maccatalyst
-    value:           EBE9F62A-B573-3915-8CD9-D77E9C8A4FB2
+    value:           9C119A14-1AFC-3B0F-BEF3-ABFBD46D86D4
 install-name:    '/System/Library/PrivateFrameworks/AppSupport.framework/Versions/A/AppSupport'
 current-version: 29
 reexported-libraries:
@@ -22,8 +22,8 @@ reexported-libraries:
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ALCityCountryNameKey, _ALCityCountryOverrideKey, _ALCityDisplayNameIncludingCountryUsesOnlyCountry, 
                        _ALCityIdentifierKey, _ALCityLatitudeKey, _ALCityLocaleCodeKey, 
                        _ALCityLongitudeKey, _ALCityNameKey, _ALCityPropertiesCount, 
@@ -193,28 +193,30 @@ exports:
                        _CPSqliteDatabaseSetProfileCallback, _CPSqliteDatabaseSetProfileCallbackWithContext, 
                        _CPSqliteDatabaseSetPropertiesEnabled, _CPSqliteDatabaseSetSetupHandler, 
                        _CPSqliteDatabaseSetShouldMigrateInProcess, _CPSqliteDatabaseSetShouldRequestUnlock, 
-                       _CPSqliteDatabaseSetShouldYieldWhenRequested, _CPSqliteDatabaseSetStatementCacheLimit, 
-                       _CPSqliteDatabaseSetSupportsReadOnlyConnections, _CPSqliteDatabaseSetThreadSafeEnabled, 
-                       _CPSqliteDatabaseSetUpdateHookCallback, _CPSqliteDatabaseSetVFSModuleName, 
-                       _CPSqliteDatabaseSetValueForProperty, _CPSqliteDatabaseSetVersion, 
-                       _CPSqliteDatabaseStatementForReading, _CPSqliteDatabaseStatementForWriting, 
-                       _CPSqliteDatabaseUnlockRequested, _CPSqliteHasSortKeyPrefix, 
-                       _CPSqlitePhoneNumberContainsAlphaCharacters, _CPSqlitePreparedStatement, 
-                       _CPSqliteRegisterYieldNotifyBlock, _CPSqliteSetDefaultPageCacheSize, 
-                       _CPSqliteSetDefaultSharedCacheModeEnabledState, _CPSqliteSetupLoggingForDatabaseHandle, 
-                       _CPSqliteStatementApplyValuesFromRecord, _CPSqliteStatementApplyValuesFromRecordWithNullValue, 
-                       _CPSqliteStatementBindValuesForColumns, _CPSqliteStatementCopyStringResult, 
-                       _CPSqliteStatementInteger64Result, _CPSqliteStatementIntegerResult, 
-                       _CPSqliteStatementPerform, _CPSqliteStatementReset, _CPSqliteStatementSendResults, 
-                       _CPSqliteUtilitiesGetIntegerQueryResultAtPath, _CPSqliteUtilitiesGetSchemaVersionAtPath, 
-                       _CPStringMethods, _CPSystemRootDirectory, _CPTemporaryFileWithUniqueName, 
-                       _CPTemporaryPath, _CPTimeBlock, _CPWeekdayAbbreviatedDateFormat, 
-                       _CPWeekdayAbbreviatedNoYearDateFormat, _CPWeekdayFormat, _CPWeekdayNoYearDateFormat, 
-                       _CRAppsKey, _CRCopyAppsRank, _CRCopyCountryCode, _CRCopyMoviesRank, 
-                       _CRCopyRestrictionsDictionary, _CRCopyTVShowsRank, _CRCountryCodeKey, 
-                       _CRDefaultCountryCode, _CRDefaultRank, _CRDisableRank, _CRMaxRank, 
-                       _CRMinRank, _CRMoviesKey, _CRTVShowsKey, _ICUSearchContextPattern, 
-                       _Int64SetKeyCallbacks, _RadioPreferencesCallback, _RadiosPreferencesAirplaneModeDidChangeNotification, 
+                       _CPSqliteDatabaseSetShouldUseInhibitorForConnections, _CPSqliteDatabaseSetShouldYieldWhenRequested, 
+                       _CPSqliteDatabaseSetStatementCacheLimit, _CPSqliteDatabaseSetSupportsReadOnlyConnections, 
+                       _CPSqliteDatabaseSetThreadSafeEnabled, _CPSqliteDatabaseSetUpdateHookCallback, 
+                       _CPSqliteDatabaseSetVFSModuleName, _CPSqliteDatabaseSetValueForProperty, 
+                       _CPSqliteDatabaseSetVersion, _CPSqliteDatabaseStatementForReading, 
+                       _CPSqliteDatabaseStatementForWriting, _CPSqliteDatabaseUnlockRequested, 
+                       _CPSqliteHasSortKeyPrefix, _CPSqlitePhoneNumberContainsAlphaCharacters, 
+                       _CPSqlitePreparedStatement, _CPSqliteRegisterYieldNotifyBlock, 
+                       _CPSqliteSetDefaultPageCacheSize, _CPSqliteSetDefaultSharedCacheModeEnabledState, 
+                       _CPSqliteSetupLoggingForDatabaseHandle, _CPSqliteStatementApplyValuesFromRecord, 
+                       _CPSqliteStatementApplyValuesFromRecordWithNullValue, _CPSqliteStatementBindValuesForColumns, 
+                       _CPSqliteStatementCopyStringResult, _CPSqliteStatementInteger64Result, 
+                       _CPSqliteStatementIntegerResult, _CPSqliteStatementPerform, 
+                       _CPSqliteStatementReset, _CPSqliteStatementSendResults, _CPSqliteUtilitiesGetIntegerQueryResultAtPath, 
+                       _CPSqliteUtilitiesGetSchemaVersionAtPath, _CPStartAnInhibitor, 
+                       _CPStopInhibitorWithIdentifier, _CPStringMethods, _CPSystemRootDirectory, 
+                       _CPTemporaryFileWithUniqueName, _CPTemporaryPath, _CPTimeBlock, 
+                       _CPWeekdayAbbreviatedDateFormat, _CPWeekdayAbbreviatedNoYearDateFormat, 
+                       _CPWeekdayFormat, _CPWeekdayNoYearDateFormat, _CRAppsKey, 
+                       _CRCopyAppsRank, _CRCopyCountryCode, _CRCopyMoviesRank, _CRCopyRestrictionsDictionary, 
+                       _CRCopyTVShowsRank, _CRCountryCodeKey, _CRDefaultCountryCode, 
+                       _CRDefaultRank, _CRDisableRank, _CRMaxRank, _CRMinRank, _CRMoviesKey, 
+                       _CRTVShowsKey, _ICUSearchContextPattern, _Int64SetKeyCallbacks, 
+                       _RadioPreferencesCallback, _RadiosPreferencesAirplaneModeDidChangeNotification, 
                        _RadiosSCPrefsID, _TelephonyStateBundleIdentifierKey, _TelephonyStateEnabledKey, 
                        _TelephonyStateKey, __CPCreateUTF8StringFromCFString, __CPDMCPDistributedMessaging_subsystem, 
                        __CPDMMessage, __CPDMNonBlockingMessage, __CPDMTwoWayMessage, 
@@ -259,8 +261,8 @@ exports:
                        CPSearchMatcher, CapturedInvocationTrampoline, DelayedInvocationTrampoline, 
                        InvocationTrampoline, OperationQueueInvocationTrampoline, 
                        PEPServiceConfiguration, RadiosPreferences, ThreadedInvocationTrampoline, 
-                       _CPBundleIdentifierString, _CPPowerAssertion, _CPPowerAssertionThread, 
-                       _ReachabilityRequest ]
+                       _CPBundleIdentifierString, _CPInhibitorManager, _CPPowerAssertion, 
+                       _CPPowerAssertionThread, _ReachabilityRequest ]
     objc-ivars:      [ ALCity._countryName, ALCity._countryOverride, ALCity._identifier, 
                        ALCity._identifierForCPCity, ALCity._latitude, ALCity._localeCode, 
                        ALCity._localizationAttempted, ALCity._longitude, ALCity._name, 
@@ -318,21 +320,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D125D91F-3071-3105-8D88-04CB43BFFB61
+    value:           A363F319-4CDA-35D9-8420-378B9C51F220
   - target:          x86_64-maccatalyst
-    value:           D125D91F-3071-3105-8D88-04CB43BFFB61
+    value:           A363F319-4CDA-35D9-8420-378B9C51F220
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CBC6A057-C2A4-3B89-8938-24E0E12AB6C6
+    value:           A267DDA9-D694-399E-A247-0DE7B4F4DDEC
   - target:          arm64e-maccatalyst
-    value:           CBC6A057-C2A4-3B89-8938-24E0E12AB6C6
+    value:           A267DDA9-D694-399E-A247-0DE7B4F4DDEC
 install-name:    '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CFPhoneNumberBundleCopyRulesetFileSystemPath, _CFPhoneNumberBundleCopyRulesetURL, 
                        _CFPhoneNumberBundleGetBundle, _CFPhoneNumberCopyCountryCode, 
                        _CFPhoneNumberCopyFormattedInternationalRepresentation, _CFPhoneNumberCopyFormattedRepresentation, 
@@ -355,9 +357,9 @@ exports:
                        __PNCopyFormattedNumberForDigitsWithCountry, __PNCopyFormattedNumberForDigitsWithCountryByRemovingAtIndex, 
                        __PNCopyFormattedNumberSuggestionForDigitsWithCountry, __PNCopyFullyQualifiedNumberForCountry, 
                        __PNCopyFullyQualifiedNumberForCountryInternal, __PNCopyIndexStringsForAddressBookSearch, 
-                       __PNCopyInternationalCodeForCountry, __PNCopyLastFourDigitsOfLocalNumber, 
-                       __PNCopyNationalDirectDialingPrefixForCountry, __PNCopyNormalized, 
-                       __PNCopyPrefixForCountry, __PNCopySampleNumberForCountry, 
+                       __PNCopyInternationalCodeForCountry, __PNCopyInternationalPrefix, 
+                       __PNCopyLastFourDigitsOfLocalNumber, __PNCopyNationalDirectDialingPrefixForCountry, 
+                       __PNCopyNormalized, __PNCopyPrefixForCountry, __PNCopySampleNumberForCountry, 
                        __PNCopyStrippedNumberWithoutPauses, __PNCreateLocalizedStringWithString, 
                        __PNCreateStringByAddingPauses, __PNCreateStringByStrippingFormattingAndNotVisiblyAllowable, 
                        __PNFindFormatRuleForDigitsWithCountry, __PNGetITUCountryCode, 

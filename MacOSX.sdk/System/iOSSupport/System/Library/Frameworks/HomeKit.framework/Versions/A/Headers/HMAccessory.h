@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  *             class. An accessory is composed of one or more services.
  */
 HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMAccessory : NSObject
+    @interface HMAccessory : NSObject
 
 /*!
  * @brief The name of the accessory.
@@ -34,29 +34,29 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  * @discussion Returns the accessory's name that is associated with HomeKit. The initial value is the name
  *             provided by the accessory information service of the accessory.
  */
-@property(readonly, copy, nonatomic) NSString *name;
+@property (readonly, copy, nonatomic) NSString *name;
 
 /*!
  * @brief A unique identifier for the accessory.
  *
  * @discussion Use uniqueIdentifier to obtain the identifier for this object.
  */
-@property(readonly, copy, nonatomic) NSUUID *identifier API_DEPRECATED("No longer supported.", ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (readonly, copy, nonatomic) NSUUID *identifier API_DEPRECATED("No longer supported.", ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief A unique identifier for the accessory.
  */
-@property(readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
+@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief Delegate object that receives updates on the state of the accessory.
  */
-@property(weak, nonatomic, nullable) id<HMAccessoryDelegate> delegate;
+@property (weak, nonatomic, nullable) id<HMAccessoryDelegate> delegate;
 
 /*!
  * @brief TRUE if the accessory is currently reachable, FALSE otherwise.
  */
-@property(readonly, getter=isReachable, nonatomic) BOOL reachable;
+@property (readonly, getter=isReachable, nonatomic) BOOL reachable;
 
 /*!
  * @brief This property indicates whether this accessory is behind a bridge. If it is TRUE,
@@ -64,7 +64,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *        this accessory can be removed and removing the bridge will remove this accessory
  *        from the home.
  */
-@property(readonly, getter=isBridged, nonatomic) BOOL bridged;
+@property (readonly, getter=isBridged, nonatomic) BOOL bridged;
 
 /*!
  * @brief If this accessory is a bridge, this property is an array of NSUUID objects that,
@@ -73,7 +73,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  * @discussion Use uniqueIdentifiersForBridgedAccessories to obtain the identifiers for the
  *             bridged accessories.
  */
-@property(readonly, copy, nonatomic, nullable) NSArray<NSUUID *> *identifiersForBridgedAccessories API_DEPRECATED("No longer supported.", ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (readonly, copy, nonatomic, nullable) NSArray<NSUUID *> *identifiersForBridgedAccessories API_DEPRECATED("No longer supported.", ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief If this accessory is a bridge, this property is an array of NSUUID objects that,
@@ -87,33 +87,33 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                  - An accessory behind a bridge would have its 'bridged' property set to TRUE and
  *                    its 'uniqueIdentifiersForBridgedAccessories' property set to nil.
  */
-@property(readonly, copy, nonatomic, nullable) NSArray<NSUUID *> *uniqueIdentifiersForBridgedAccessories API_AVAILABLE(ios(9.0));
+@property (readonly, copy, nonatomic, nullable) NSArray<NSUUID *> *uniqueIdentifiersForBridgedAccessories API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief Category information for the accessory. 
  */
-@property(readonly, strong, nonatomic) HMAccessoryCategory *category API_AVAILABLE(ios(9.0));
+@property (readonly, strong, nonatomic) HMAccessoryCategory *category API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief Room containing the accessory.
  */
-@property(readonly, weak, nonatomic) HMRoom *room;
+@property (readonly, weak, nonatomic) HMRoom *room;
 
 /*!
  * @brief Array of HMService objects that represent all the services provided by the accessory.
  */
-@property(readonly, copy, nonatomic) NSArray<HMService *> *services;
+@property (readonly, copy, nonatomic) NSArray<HMService *> *services;
 
 /*!
  *  @abstract   Accessory profiles of the receiver.
  */
-@property(readonly, copy) NSArray<HMAccessoryProfile *> *profiles API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (readonly, copy) NSArray<HMAccessoryProfile *> *profiles API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
  * @brief TRUE if the accessory is blocked, FALSE otherwise.
  */
 
-@property(readonly, getter=isBlocked, nonatomic) BOOL blocked;
+@property (readonly, getter=isBlocked, nonatomic) BOOL blocked;
 
 /*!
  *  @abstract   Model of the accessory.
@@ -146,7 +146,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)updateName:(NSString *)name completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)updateName:(NSString *)name completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief This method is used to have an accessory identify itself.
@@ -155,7 +155,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)identifyWithCompletionHandler:(void (^)(NSError * __nullable error))completion;
+- (void)identifyWithCompletionHandler:(void (^)(NSError *__nullable error))completion;
 
 @end
 
@@ -165,7 +165,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *        different aspects of an accessory
  */
 HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@protocol HMAccessoryDelegate <NSObject>
+    @protocol HMAccessoryDelegate<NSObject>
 
 @optional
 

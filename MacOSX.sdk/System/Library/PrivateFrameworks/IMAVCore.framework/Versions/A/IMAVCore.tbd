@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DC33F629-F7AD-30F8-B495-5F7A4BE1F5A5
+    value:           60D9BCC0-3CC0-3178-BC92-A5D46198FD6C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5110CE8E-D2C2-322F-8917-DB04F5826497
+    value:           8385C624-1A2E-34D5-A51F-510D3FE5B25E
 install-name:    '/System/Library/PrivateFrameworks/IMAVCore.framework/Versions/A/IMAVCore'
 current-version: 800
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IMAVCallManagerCallStateChangedNotification, _IMAVCallManagerCallStateKey, 
                        _IMAVCallManagerPreviousCallStateKey, _IMAVChatCameraAspectRatioKey, 
                        _IMAVChatCameraContentRectKey, _IMAVChatCameraOrientationKey, 

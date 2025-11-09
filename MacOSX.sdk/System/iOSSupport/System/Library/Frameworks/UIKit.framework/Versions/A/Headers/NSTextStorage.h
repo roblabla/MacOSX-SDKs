@@ -16,7 +16,7 @@
 @protocol NSTextStorageDelegate;
 @protocol NSTextStorageObserving;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
@@ -130,7 +130,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 
 #endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/NSTextStorage.h>

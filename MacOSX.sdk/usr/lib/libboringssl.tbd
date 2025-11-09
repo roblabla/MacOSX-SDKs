@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B451D602-A0DD-315F-B1D9-C993F6957C39
+    value:           4EAA08C0-16BF-38B4-BBDC-60F960D08411
   - target:          x86_64-maccatalyst
-    value:           B451D602-A0DD-315F-B1D9-C993F6957C39
+    value:           4EAA08C0-16BF-38B4-BBDC-60F960D08411
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6AF75346-0EED-38D4-A935-A5F2C57A56A0
+    value:           39E2FB54-4210-34EE-BA2D-0D522C787BCE
   - target:          arm64e-maccatalyst
-    value:           6AF75346-0EED-38D4-A935-A5F2C57A56A0
+    value:           39E2FB54-4210-34EE-BA2D-0D522C787BCE
 install-name:    '/usr/lib/libboringssl.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BIO_find_type, _BIO_flush, _BIO_free, _BIO_free_all, _BIO_get_fd, 
                        _BIO_get_retry_reason, _BIO_hexdump, _BIO_indent, _BIO_method_type, 
                        _BIO_new, _BIO_new_fp, _BIO_new_mem_buf, _BIO_printf, _BIO_puts, 
@@ -99,12 +99,12 @@ exports:
                        _SSL_CTX_set_info_callback, _SSL_CTX_set_max_proto_version, 
                        _SSL_CTX_set_min_proto_version, _SSL_CTX_set_mode, _SSL_CTX_set_msg_callback, 
                        _SSL_CTX_set_next_proto_select_cb, _SSL_CTX_set_next_protos_advertised_cb, 
-                       _SSL_CTX_set_ocsp_response, _SSL_CTX_set_options, _SSL_CTX_set_psk_client_callback, 
-                       _SSL_CTX_set_psk_server_callback, _SSL_CTX_set_session_cache_mode, 
-                       _SSL_CTX_set_tlsext_ticket_keys, _SSL_CTX_use_psk_identity_hint, 
-                       _SSL_SESSION_free, _SSL_SESSION_from_bytes, _SSL_SESSION_get0_cipher, 
-                       _SSL_SESSION_get0_peer_certificates, _SSL_SESSION_get_id, 
-                       _SSL_SESSION_get_master_key, _SSL_SESSION_get_max_early_data, 
+                       _SSL_CTX_set_ocsp_response, _SSL_CTX_set_options, _SSL_CTX_set_psk_client13_ext_callback, 
+                       _SSL_CTX_set_psk_client_callback, _SSL_CTX_set_psk_server_callback, 
+                       _SSL_CTX_set_session_cache_mode, _SSL_CTX_set_tlsext_ticket_keys, 
+                       _SSL_CTX_use_psk_identity_hint, _SSL_SESSION_free, _SSL_SESSION_from_bytes, 
+                       _SSL_SESSION_get0_cipher, _SSL_SESSION_get0_peer_certificates, 
+                       _SSL_SESSION_get_id, _SSL_SESSION_get_master_key, _SSL_SESSION_get_max_early_data, 
                        _SSL_SESSION_get_ticket_lifetime_hint, _SSL_SESSION_get_version, 
                        _SSL_SESSION_has_ticket, _SSL_SESSION_new, _SSL_SESSION_to_bytes, 
                        _SSL_SESSION_to_bytes_for_ticket, _SSL_SESSION_up_ref, _SSL_SESSION_was_renewed, 
@@ -125,14 +125,14 @@ exports:
                        _SSL_set_cipher_list, _SSL_set_connect_state, _SSL_set_custom_verify, 
                        _SSL_set_early_data_enabled, _SSL_set_ex_data, _SSL_set_max_proto_version, 
                        _SSL_set_min_proto_version, _SSL_set_mode, _SSL_set_mtu, _SSL_set_ocsp_response, 
-                       _SSL_set_options, _SSL_set_private_key_method, _SSL_set_psk_client_callback, 
-                       _SSL_set_psk_server_callback, _SSL_set_renegotiate_mode, _SSL_set_session, 
-                       _SSL_set_shutdown, _SSL_set_signed_cert_timestamp_list, _SSL_set_state, 
-                       _SSL_set_strict_cipher_list, _SSL_set_tls13_ciphersuite_aesgcm_enabled, 
-                       _SSL_set_tls13_ciphersuite_chacha20poly1305_enabled, _SSL_set_tlsext_host_name, 
-                       _SSL_shutdown, _SSL_state, _SSL_state_string_long, _SSL_use_psk_identity_hint, 
-                       _SSL_version, _SSL_write, _TLS_with_buffers_method, _X25519, 
-                       _X25519_public_from_private, __ZN4bssl11SSLKeyShare6CreateEt, 
+                       _SSL_set_options, _SSL_set_private_key_method, _SSL_set_psk_client13_ext_callback, 
+                       _SSL_set_psk_client_callback, _SSL_set_psk_server_callback, 
+                       _SSL_set_renegotiate_mode, _SSL_set_session, _SSL_set_shutdown, 
+                       _SSL_set_signed_cert_timestamp_list, _SSL_set_state, _SSL_set_strict_cipher_list, 
+                       _SSL_set_tls13_ciphersuite_aesgcm_enabled, _SSL_set_tls13_ciphersuite_chacha20poly1305_enabled, 
+                       _SSL_set_tlsext_host_name, _SSL_shutdown, _SSL_state, _SSL_state_string_long, 
+                       _SSL_use_psk_identity_hint, _SSL_version, _SSL_write, _TLS_with_buffers_method, 
+                       _X25519, _X25519_public_from_private, __ZN4bssl11SSLKeyShare6CreateEt, 
                        __ZN4bssl13dtls1_min_mtuEv, __ZN4bssl19ssl_nid_to_group_idEPti, 
                        __ZN4bssl20ssl_client_handshakeEPNS_13SSL_HANDSHAKEE, __ZN4bssl20ssl_name_to_group_idEPtPKcm, 
                        __ZN4bssl20ssl_server_handshakeEPNS_13SSL_HANDSHAKEE, __ZN4bssl22dtls_max_seal_overheadEPK6ssl_stNS_17dtls1_use_epoch_tE, 

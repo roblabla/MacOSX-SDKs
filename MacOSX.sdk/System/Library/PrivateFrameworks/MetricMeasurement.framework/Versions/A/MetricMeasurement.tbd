@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           202D1014-E16B-3D9B-A865-D6E8C1C98281
+    value:           FE2A3D92-41C4-3629-A9A1-B33BFA376BC4
   - target:          x86_64-maccatalyst
-    value:           202D1014-E16B-3D9B-A865-D6E8C1C98281
+    value:           FE2A3D92-41C4-3629-A9A1-B33BFA376BC4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5223D44D-2E83-3917-927E-D60C257B0DB4
+    value:           84A293C8-89B6-32DC-887F-51D4DB91D169
   - target:          arm64e-maccatalyst
-    value:           5223D44D-2E83-3917-927E-D60C257B0DB4
+    value:           84A293C8-89B6-32DC-887F-51D4DB91D169
 install-name:    '/System/Library/PrivateFrameworks/MetricMeasurement.framework/Versions/A/MetricMeasurement'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MXMAttributeNameOSSignpostCategory, _MXMAttributeNameOSSignpostIdentifier, 
                        _MXMAttributeNameOSSignpostName, _MXMAttributeNameOSSignpostSubsystem, 
                        _MXMAttributeNameOSSignpostTelemetryNumber1Name, _MXMAttributeNameOSSignpostTelemetryNumber2Name, 

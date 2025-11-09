@@ -1,3 +1,4 @@
+#if !__has_include(<PassKitCore/PKObject.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKObject.h
 //  PassKit
@@ -15,3 +16,7 @@
 @end
 
 #endif // __PKOBJECT_H
+
+#else
+#import <PassKitCore/PKObject.h>
+#endif

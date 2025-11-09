@@ -12,7 +12,7 @@
 
 @class NSLayoutXAxisAnchor, NSLayoutYAxisAnchor, NSLayoutDimension;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UIView;
 /* UILayoutGuides will not show up in the view hierarchy, but may be used as items in
  an NSLayoutConstraint and represent a rectangle in the layout engine.
@@ -55,7 +55,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 @property(nonatomic,readonly,strong) NSLayoutYAxisAnchor *centerYAnchor;
 
 @end
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UILayoutGuide.h>

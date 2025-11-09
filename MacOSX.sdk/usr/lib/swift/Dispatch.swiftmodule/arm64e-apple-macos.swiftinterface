@@ -1,11 +1,12 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Dispatch
-// swift-module-flags-ignorable: -user-module-version 11
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-macos13.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Dispatch
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 17
 import Combine
 @_exported import Dispatch
 import Swift
 import _Concurrency
+import _StringProcessing
 public struct DispatchData : Swift.RandomAccessCollection, Swift._ObjectiveCBridgeable {
   public typealias Iterator = Dispatch.DispatchDataIterator
   public typealias Index = Swift.Int
@@ -599,16 +600,40 @@ extension Dispatch.DispatchGroup {
   public func notify(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], queue: Dispatch.DispatchQueue, execute work: @escaping @convention(block) () -> Swift.Void)
   @available(macOS 10.10, iOS 8.0, *)
   public func notify(queue: Dispatch.DispatchQueue, work: Dispatch.DispatchWorkItem)
+  #if compiler(>=5.3) && $UnavailableFromAsync
+  @_unavailableFromAsync(message: "Use a TaskGroup instead") public func wait()
+  #else
   public func wait()
+  #endif
+  #if compiler(>=5.3) && $UnavailableFromAsync
+  @_unavailableFromAsync(message: "Use a TaskGroup instead") public func wait(timeout: Dispatch.DispatchTime) -> Dispatch.DispatchTimeoutResult
+  #else
   public func wait(timeout: Dispatch.DispatchTime) -> Dispatch.DispatchTimeoutResult
+  #endif
+  #if compiler(>=5.3) && $UnavailableFromAsync
+  @_unavailableFromAsync(message: "Use a TaskGroup instead") public func wait(wallTimeout timeout: Dispatch.DispatchWallTime) -> Dispatch.DispatchTimeoutResult
+  #else
   public func wait(wallTimeout timeout: Dispatch.DispatchWallTime) -> Dispatch.DispatchTimeoutResult
+  #endif
 }
 extension Dispatch.DispatchSemaphore {
   @discardableResult
   public func signal() -> Swift.Int
+  #if compiler(>=5.3) && $UnavailableFromAsync
+  @_unavailableFromAsync(message: "Await a Task handle instead") public func wait()
+  #else
   public func wait()
+  #endif
+  #if compiler(>=5.3) && $UnavailableFromAsync
+  @_unavailableFromAsync(message: "Await a Task handle instead") public func wait(timeout: Dispatch.DispatchTime) -> Dispatch.DispatchTimeoutResult
+  #else
   public func wait(timeout: Dispatch.DispatchTime) -> Dispatch.DispatchTimeoutResult
+  #endif
+  #if compiler(>=5.3) && $UnavailableFromAsync
+  @_unavailableFromAsync(message: "Await a Task handle instead") public func wait(wallTimeout: Dispatch.DispatchWallTime) -> Dispatch.DispatchTimeoutResult
+  #else
   public func wait(wallTimeout: Dispatch.DispatchWallTime) -> Dispatch.DispatchTimeoutResult
+  #endif
 }
 @available(*, unavailable, renamed: "DispatchQueue.init(label:qos:attributes:autoreleaseFrequency:target:)")
 public func dispatch_queue_create(_ label: Swift.UnsafePointer<Swift.Int8>?, _ attr: Dispatch.__OS_dispatch_queue_attr?) -> Dispatch.DispatchQueue

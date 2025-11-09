@@ -5,7 +5,7 @@
 #import <Foundation/NSFormatter.h>
 #import <Foundation/NSMeasurement.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_OPTIONS(NSUInteger, NSByteCountFormatterUnits) {
     // This causes default units appropriate for the platform to be used. Specifying any units explicitly causes just those units to be used in showing the number.
@@ -36,14 +36,7 @@ typedef NS_ENUM(NSInteger, NSByteCountFormatterCountStyle) {
 
 
 API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
-@interface NSByteCountFormatter : NSFormatter {
-    @private
-    unsigned int _allowedUnits;
-    char _countStyle;
-    BOOL _allowsNonnumericFormatting, _includesUnit, _includesCount, _includesActualByteCount, _adaptive, _zeroPadsFractionDigits;
-    int _formattingContext;
-    int _reserved[5];
-}
+@interface NSByteCountFormatter : NSFormatter
 
 /* Shortcut for converting a byte count into a string without creating an NSByteCountFormatter and an NSNumber. If you need to specify options other than countStyle, create an instance of NSByteCountFormatter first.
  */
@@ -108,4 +101,4 @@ API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

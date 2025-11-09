@@ -7,7 +7,7 @@
 
 @class NSAppleEventDescriptor, NSDictionary<KeyType, ObjectType>, NSMutableDictionary, NSScriptObjectSpecifier, NSScriptCommandDescription, NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // Error codes for general command execution problems (not typedef'd to allow subclasses to define their own values)
 NS_ENUM(NSInteger) {
@@ -98,4 +98,4 @@ NS_ENUM(NSInteger) {
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

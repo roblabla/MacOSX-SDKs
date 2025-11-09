@@ -3,39 +3,51 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4BCE1E5A-B9B9-36D2-AF58-62AF6E47B86A
+    value:           5453D9ED-F1E7-35CA-BB1A-F50FAC5AAB31
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           924B32FD-66C6-31BA-9FA3-F5558A27A99D
+    value:           1F183924-52F5-3602-B0AD-EC84A9C3A163
 install-name:    '/System/Library/PrivateFrameworks/ShareKit.framework/Versions/A/ShareKit'
-current-version: 724
+current-version: 841.3
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSSharingPlugInServiceOptionAppIDKey, _NSSharingPlugInServiceOptionAppIsBackgroundOnlyKey, 
                        _NSSharingPlugInServiceOptionAuditSessionKey, _NSSharingPlugInServiceOptionParametersKey, 
                        _NSSharingPlugInServiceOptionServiceDictionaryKey, _NSSharingPlugInServiceOptionServiceSandboxExtensionsKey, 
                        _NSSharingPlugInServiceOptionSharingContentScopeKey, _NSSharingPlugInServiceOptionSourceWindowFrameKey, 
                        _NSSharingPlugInServiceOptionSourceWindowFullscreenKey, _NSSharingPlugInServiceOptionUIDKey, 
-                       _SHK_AlwaysAllowPerformingServices, _SHK_AlwaysAllowQueryingServices, 
-                       _SHK_DeviceSupportsAirDrop, _SHK_GladeEnabled, _SHK_InitialExtensionViewFrameInWindowCoordinatesForAnimationIn, 
+                       _SHKCloudKitContainerSetupInfoKey, _SHKCloudKitShareKey, _SHKCloudSharingCKContainerID, 
+                       _SHKCloudSharingCKShare, _SHKCloudSharingCanEdit, _SHKCloudSharingSourceAppBundleIdentifier, 
+                       _SHKCloudSharingUseAdminRole, _SHKCollaborationCopyRepresentationKey, 
+                       _SHKCollaborationMetadataKey, _SHKCollaborationModeKey, _SHKCollaborationOptionsKey, 
+                       _SHKCollaborationShareOptionsKey, _SHKCollaborationTypeKey, 
+                       _SHKPendingCollaborationKey, _SHKSandboxExtensionsKey, _SHKSharingServiceParametersSessionIDKey, 
+                       _SHKSupportsCollaborationKey, _SHK_AlwaysAllowPerformingServices, 
+                       _SHK_AlwaysAllowQueryingServices, _SHK_DeviceSupportsAirDrop, 
+                       _SHK_DocumentTypeNameFromShareType, _SHK_DocumentTypeNameFromURL, 
+                       _SHK_GladeEnabled, _SHK_InitialExtensionViewFrameInWindowCoordinatesForAnimationIn, 
                        _SHK_MediumScaleSymbolImageWithName, _SHK_RunningInPlugin, 
                        _SHK_SharedItemSourceFrameInWindowCoordinatesForExtensionItem, 
                        _SHK_anyAncestorWindowIsFullscreen, _SHK_anyAncestorWindowIsMovable, 
-                       _SHK_asyncConvertSharingItemsToExtensionItem, _SHK_computeThumbnail, 
-                       _SHK_defaultMailApplicationBundle, _SHK_defaultMailApplicationBundleIdentifier, 
-                       _SHK_defaultMailApplicationIsMailApp, _SHK_defaultMailApplicationSupportsSpecialAppleEvent, 
-                       _SHK_defaultMailApplicationSupportsWebPageMailing, _SHK_defaultMailApplicationURL, 
-                       _SHK_extractParametersFromAttributes, _SHK_internetRegionIsChina, 
-                       _SHK_matchingDictionaryForSHKSharingItems, _SHK_mouseDownEventCaught, 
-                       _SHK_sharingCancelledError, _framework_log, _plugin_log ]
+                       _SHK_appLinksSDKSupportingMessagesAppShare, _SHK_asyncConvertSharingItemsToExtensionItem, 
+                       _SHK_computeThumbnail, _SHK_defaultMailApplicationBundle, 
+                       _SHK_defaultMailApplicationBundleIdentifier, _SHK_defaultMailApplicationIsMailApp, 
+                       _SHK_defaultMailApplicationSupportsSpecialAppleEvent, _SHK_defaultMailApplicationSupportsWebPageMailing, 
+                       _SHK_defaultMailApplicationURL, _SHK_extractParametersFromAttributes, 
+                       _SHK_internetRegionIsChina, _SHK_isGelatoEnabled, _SHK_matchingDictionaryForSHKSharingItems, 
+                       _SHK_messagesAppBundle, _SHK_messagesAppBundleIdentifier, 
+                       _SHK_messagesAppSupportsSpecialAppleEvent, _SHK_messagesAppURL, 
+                       _SHK_mouseDownEventCaught, _SHK_sharingCancelledError, _framework_log, 
+                       _plugin_log ]
     objc-classes:    [ NSSharingAccountConfigurationViewController, NSSharingExtensionContext, 
                        NSSharingItem, NSSharingMachPortWrapper, NSSharingPlugInHelper, 
                        NSSharingServiceDescription, NSSharingUIExtensionContext, 
-                       SHKDurationFormatter, SHKImageViewNoAccessibility, SHKSandbox, 
-                       SHKServiceCompletionInfo, SHKShareBox, SHKShareCounterFieldCell, 
-                       SHKShareImageView, SHKShareSmallTextFieldCell, SHKShareTitleFieldCell, 
-                       SHKShareWindow, SHKShareWindowBackgroundView, SHKSharingService, 
-                       SHKSharingServicePicker, SHKSharingViewService ]
+                       SHKDefaults, SHKDurationFormatter, SHKImageViewNoAccessibility, 
+                       SHKMessagesLaunchEventContext, SHKSandbox, SHKServiceCompletionInfo, 
+                       SHKShareBox, SHKShareCounterFieldCell, SHKShareImageView, 
+                       SHKShareSheetTransport, SHKShareSheetViewModel, SHKShareSmallTextFieldCell, 
+                       SHKShareTitleFieldCell, SHKShareWindow, SHKShareWindowBackgroundView, 
+                       SHKSharingService, SHKSharingServicePicker, SHKSharingViewService ]
     objc-ivars:      [ SHKShareWindow._isClosing ]
 ...

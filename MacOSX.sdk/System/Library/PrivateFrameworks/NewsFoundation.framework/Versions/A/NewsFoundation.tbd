@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           ACD7F447-E8F2-32BC-BE64-8885F9AF20F6
+    value:           A0E8192C-EFD6-3FAC-AE0F-7EA2EDA4EA49
   - target:          x86_64-maccatalyst
-    value:           ACD7F447-E8F2-32BC-BE64-8885F9AF20F6
+    value:           A0E8192C-EFD6-3FAC-AE0F-7EA2EDA4EA49
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7D43BCC2-57F8-31A4-B2BB-F1635CD394FC
+    value:           F605CBF8-B765-3DB6-853C-866F586E2133
   - target:          arm64e-maccatalyst
-    value:           7D43BCC2-57F8-31A4-B2BB-F1635CD394FC
+    value:           F605CBF8-B765-3DB6-853C-866F586E2133
 install-name:    '/System/Library/PrivateFrameworks/NewsFoundation.framework/Versions/A/NewsFoundation'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _NFDeviceHasExtendedColorDisplay, _NFDeviceIsA7, _NFDeviceIsA8, 
                        _NFDeviceModelString, _NFDeviceOSVersion, _NFDevicePlatform, 
                        _NFGeneralDeviceString, _NFInternalBuild, _NFLockSync, _NFPromiseInvokeOnQueue, 

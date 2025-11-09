@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5BD27951-9EBE-3EFA-8EEB-5B1780791EE8
+    value:           017BD0DF-C218-3111-81AD-0D9664A9B61E
   - target:          x86_64-maccatalyst
-    value:           5BD27951-9EBE-3EFA-8EEB-5B1780791EE8
+    value:           017BD0DF-C218-3111-81AD-0D9664A9B61E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D3E3A428-19CB-3E8E-8AE9-7CDC71629FF6
+    value:           AAA3EEC0-B924-3764-B23F-976B2E5E8ECA
   - target:          arm64e-maccatalyst
-    value:           D3E3A428-19CB-3E8E-8AE9-7CDC71629FF6
+    value:           AAA3EEC0-B924-3764-B23F-976B2E5E8ECA
 install-name:    '/System/Library/Frameworks/QuickLookThumbnailing.framework/Versions/A/QuickLookThumbnailing'
 current-version: 0
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _QLCGImageRefPNGRepresentation, _QLCompareVersion, _QLCreateCGImageWithData, 
                        _QLCreateCGImageWithDataAndFormat, _QLCreateColorSpaceForThumbnailExtension, 
                        _QLIconAutoDisplayExtension, _QLImageCreateForDefaultThumbnailGenerationFromData, 
@@ -55,9 +55,9 @@ exports:
                        QLThumbnailAddition._additionURLSandboxToken, QLThumbnailAddition._metadata, 
                        QLThumbnailAddition._thumbnailDataDictionary, QLThumbnailAddition._thumbnailVersion, 
                        QLThumbnailGenerationQueue._queue, QLThumbnailGenerationQueue._queuedURLs, 
-                       QLThumbnailItem._computedContentType, QLThumbnailItem._data, 
-                       QLThumbnailItem._downloadStatus, QLThumbnailItem._fileExtensionHandle, 
-                       QLThumbnailItem._fileExtensionToken, QLThumbnailItem._overriddenContentType, 
+                       QLThumbnailItem._computedContentType, QLThumbnailItem._computedContentTypeIdentifier, 
+                       QLThumbnailItem._data, QLThumbnailItem._downloadStatus, QLThumbnailItem._fileExtensionHandle, 
+                       QLThumbnailItem._fileExtensionToken, QLThumbnailItem._overriddenContentTypeIdentifier, 
                        QLThumbnailItem._url, QLThumbnailItem._urlWrapperForExtension, 
                        QLThumbnailItem._urlWrapperForParentDirectory, QLThumbnailMetadata._baseline, 
                        QLThumbnailMetadata._inlinePreviewMode, QLThumbnailServiceProxy._connection, 

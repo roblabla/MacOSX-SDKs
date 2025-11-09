@@ -562,6 +562,8 @@ Globals:
   SwiftName: "CMImageDescriptionFlavor.isoFamily"
 - Name: kCMImageDescriptionFlavor_3GPFamily
   SwiftName: "CMImageDescriptionFlavor.mobile3GPFamily"
+- Name: kCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions
+  SwiftName: "CMImageDescriptionFlavor.isoFamilyWithAppleExtensions"
 - Name: kCMSoundDescriptionFlavor_QuickTimeMovie
   SwiftName: "CMSoundDescriptionFlavor.quickTimeMovie"
 - Name: kCMSoundDescriptionFlavor_QuickTimeMovieV2

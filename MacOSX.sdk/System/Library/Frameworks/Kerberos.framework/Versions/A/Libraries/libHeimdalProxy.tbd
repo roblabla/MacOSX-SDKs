@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2DA8D697-5651-30C0-A7A7-B40E0093F2BF
+    value:           187F66DA-F494-3B8C-AE04-E210D59BC75E
   - target:          x86_64-maccatalyst
-    value:           2DA8D697-5651-30C0-A7A7-B40E0093F2BF
+    value:           187F66DA-F494-3B8C-AE04-E210D59BC75E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AD9DF673-FCC0-3B6E-ADB0-14D0CDC31E74
+    value:           6FAF04A3-C547-3339-9E75-719259208725
   - target:          arm64e-maccatalyst
-    value:           AD9DF673-FCC0-3B6E-ADB0-14D0CDC31E74
+    value:           6FAF04A3-C547-3339-9E75-719259208725
 install-name:    '/System/Library/Frameworks/Kerberos.framework/Versions/A/Libraries/libHeimdalProxy.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Kerberos ]
 reexports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _heim_com_right, _heim_com_right_r, _heim_gss_import_name, 
                        _heim_gsskrb5_extract_authz_data_from_sec_context, _heim_krb5_appdefault_boolean, 
                        _heim_krb5_appdefault_string, _heim_krb5_auth_con_getlocalsubkey, 

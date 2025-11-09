@@ -7,7 +7,11 @@
 
 #import <Foundation/Foundation.h>
 
+#if TARGET_OS_IPHONE
 #import <UIKit/UIImage.h>
+#elif TARGET_OS_OSX
+@class NSImage;
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE_BEGIN(macos(10.11), ios(8), macCatalyst(14))
@@ -22,7 +26,11 @@ API_AVAILABLE_BEGIN(macos(10.11), ios(8), macCatalyst(14))
 - (BOOL)canHandleAdjustmentData:(PHAdjustmentData *)adjustmentData;
 
 // Provides the input for the editing session. The placeholder image represents the current version of the asset (with adjustments baked in), and can be used as UI placeholder, in case rendering the adjustments from the input cannot be done in a timely fashion.
+#if TARGET_OS_IPHONE
 - (void)startContentEditingWithInput:(PHContentEditingInput *)contentEditingInput placeholderImage:(UIImage *)placeholderImage;
+#elif TARGET_OS_OSX
+- (void)startContentEditingWithInput:(PHContentEditingInput *)contentEditingInput placeholderImage:(NSImage *)placeholderImage;
+#endif
 
 // Called when the user finishes the editing session. The receiver should prevent the user from editing the asset further. Also, it should create the editing output and call the completion handler. The completion handler returns after the output has been consumed, so it is safe to perform clean up after it returns. The completion handler can (and should best) be called on a background queue.
 - (void)finishContentEditingWithCompletionHandler:(void (^)(PHContentEditingOutput * _Nullable))completionHandler;

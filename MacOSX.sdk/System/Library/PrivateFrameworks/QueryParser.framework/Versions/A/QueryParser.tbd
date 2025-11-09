@@ -3,36 +3,38 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           746C25EC-0CE1-3469-8E97-1C8D1073BA27
+    value:           DE5748E5-4B7A-3B63-8EA4-337144C4C82D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D90DD962-F274-3661-8751-0CD1AF649226
+    value:           FDCC6BF5-1835-3F70-B0F1-F300346E6538
 install-name:    '/System/Library/PrivateFrameworks/QueryParser.framework/Versions/A/QueryParser'
-current-version: 23.4
+current-version: 43.4
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _QPParseAttributeDateKey, _QPParseAttributeRecipientKey, _QPParseAttributeSenderKey, 
                        _QPParseAttributeTitleKey, _QPParseAttributeTopicKey, _QPParseAttributeValueDateComponentsKey, 
                        _QPParseAttributeValueDateDisplayKey, _QPParseAttributeValueDateEndComponentsKey, 
                        _QPParseAttributeValueDateFrequencyComponentsKey, _QPParseAttributeValueDateStartComponentsKey, 
                        _QPParseAttributeValueDateTemporalModifierKey, _QPParseAttributeValueDateTypeKey, 
                        _QPQueryParserAvailableForLocale, _QPQueryParserCopyDefaultOptionsForContext, 
-                       _QPQueryParserCopyParses, _QPQueryParserCreate, _QPQueryParserEnumerateParses, 
-                       _QPQueryParserEnumerateParsesForStartAndEndDates, _QPQueryParserGetCalendar, 
+                       _QPQueryParserCopyOptions, _QPQueryParserCopyParses, _QPQueryParserCreate, 
+                       _QPQueryParserEnumerateParses, _QPQueryParserEnumerateParsesForStartAndEndDates, 
+                       _QPQueryParserEnumerateSuggestions, _QPQueryParserGetCalendar, 
                        _QPQueryParserGetCustomResourceDirectory, _QPQueryParserGetLocale, 
                        _QPQueryParserGetPreferredLanguages, _QPQueryParserGetReferenceDate, 
-                       _QPQueryParserIsAvailable, _QPQueryParserOptionContextIdentifierKey, 
-                       _QPQueryParserOptionLocaleKey, _QPQueryParserOptionReferenceDateKey, 
-                       _QPQueryParserSetContext, _QPQueryParserSetCustomResourceDirectory, 
-                       _QPQueryParserSetFormat, _QPQueryParserSetIgnoreAttributedParses, 
-                       _QPQueryParserSetLocale, _QPQueryParserSetOptions, _QPQueryParserSetReferenceDate, 
+                       _QPQueryParserIsAvailable, _QPQueryParserIsParsingAvailable, 
+                       _QPQueryParserOptionContextIdentifierKey, _QPQueryParserOptionLocaleKey, 
+                       _QPQueryParserOptionReferenceDateKey, _QPQueryParserSetContext, 
+                       _QPQueryParserSetCustomResourceDirectory, _QPQueryParserSetFormat, 
+                       _QPQueryParserSetIgnoreAttributedParses, _QPQueryParserSetLocale, 
+                       _QPQueryParserSetOptions, _QPQueryParserSetReferenceDate, 
                        _QPQueryParserSetUseSystemLocale, _QPQueryParserUseKnowledgeSource, 
                        _kQPParseAttributeApplicationKey, _kQPParseAttributeAttachmentKey, 
-                       _kQPParseAttributeCompanyKey, _kQPParseAttributeDateExtensionKey, 
-                       _kQPParseAttributeDateKey, _kQPParseAttributeDescriptionKey, 
-                       _kQPParseAttributeDisplayKey, _kQPParseAttributeKeywordKey, 
-                       _kQPParseAttributeKindKey, _kQPParseAttributeLocationKey, 
+                       _kQPParseAttributeAttachmentKindKey, _kQPParseAttributeCompanyKey, 
+                       _kQPParseAttributeDateExtensionKey, _kQPParseAttributeDateKey, 
+                       _kQPParseAttributeDescriptionKey, _kQPParseAttributeDisplayKey, 
+                       _kQPParseAttributeKeywordKey, _kQPParseAttributeKindKey, _kQPParseAttributeLocationKey, 
                        _kQPParseAttributePersonKey, _kQPParseAttributeRecipientKey, 
                        _kQPParseAttributeSenderKey, _kQPParseAttributeTaggedPersonKey, 
                        _kQPParseAttributeTitleKey, _kQPParseAttributeTopicKey, _kQPParseAttributeValueDateComponentsKey, 
@@ -44,11 +46,15 @@ exports:
                        _kQPParseResultRankCategoriesKey, _kQPParseResultSortModifierKey, 
                        _kQPParseResultSuggestionKey, _kQPParseResultTokenCountKey, 
                        _kQPQueryParserOptionBundleIdentifierKey, _kQPQueryParserOptionContextIdentifierKey, 
-                       _kQPQueryParserOptionCustomResourceDirectoryKey, _kQPQueryParserOptionFormatKey, 
-                       _kQPQueryParserOptionIgnoreAttributedParsesKey, _kQPQueryParserOptionIgnoreFutureDatesKey, 
-                       _kQPQueryParserOptionIgnorePastDatesKey, _kQPQueryParserOptionIncludeRankCategoriesKey, 
+                       _kQPQueryParserOptionCustomFieldSpecifications, _kQPQueryParserOptionCustomResourceDirectoryKey, 
+                       _kQPQueryParserOptionFormatKey, _kQPQueryParserOptionIgnoreAttributedParsesKey, 
+                       _kQPQueryParserOptionIgnoreFutureDatesKey, _kQPQueryParserOptionIgnorePastDatesKey, 
+                       _kQPQueryParserOptionIncludeRankCategoriesKey, _kQPQueryParserOptionInternalBundleIdentifierKey, 
                        _kQPQueryParserOptionLocaleKey, _kQPQueryParserOptionPreferredLanguagesKey, 
-                       _kQPQueryParserOptionReferenceDateKey, _kQPQueryParserOptionReferenceTimezoneKey, 
-                       _kQPQueryParserOptionResolveConcreteDatesKey ]
+                       _kQPQueryParserOptionReferenceCalendarKey, _kQPQueryParserOptionReferenceDateKey, 
+                       _kQPQueryParserOptionReferenceTimezoneKey, _kQPQueryParserOptionResolveConcreteDatesKey, 
+                       _kQPSuggestionResultDescriptionKey, _kQPSuggestionResultRankCategoriesKey, 
+                       _kQPSuggestionResultSuggestionKey, _kQPSuggestionResultTokensKey, 
+                       _kQPSuggestionResultTypeKey ]
     objc-classes:    [ QPQueryParserManager ]
 ...

@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           716ACDF8-CA53-39B6-8290-AAEC46372C8F
+    value:           D9D08951-A61A-366E-A9FA-79D142AFC5DE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C0724819-2592-329B-BD17-8DE668693724
+    value:           36048872-DABD-3115-BC09-1175832C557E
 install-name:    '/System/Library/PrivateFrameworks/PreferencePanesSupport.framework/Versions/A/PreferencePanesSupport'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SetSymbolicHotKeyButtonValue, _SetSymbolicHotKeyEnabled, 
                        _SetSymbolicHotKeyValue, _SetSymbolicHotModifierValue, _closeIOCOnnection, 
                        _copyAlertCautionIconImage, _copyPerHostValueForKey, _copySymbolicHotKeyPreferences, 
@@ -55,10 +55,12 @@ exports:
                        InputDeviceController.mLowBatteryHelpAnchorName, InputDeviceController.mLowBatteryWindow, 
                        InputDeviceNibController.mContentView, InputDeviceNibController.mController, 
                        InputDeviceNibController.mSetupBTBackButton, InputDeviceNibController.mSetupBTButton, 
+                       MTMouseGesturesBackEnd._csManager, MTMouseGesturesBackEnd._shouldSyncChangesToCloud, 
                        MTMouseGesturesBackEnd._updateBSBlock, MTMouseGesturesBackEnd._updateBSCounter, 
                        MTMouseGesturesBackEnd._updateDelay, MTTGestureBackEnd._allowToCoalesce, 
-                       MTTGestureBackEnd._cachedTrackpadType, MTTGestureBackEnd._enableMTLogging, 
-                       MTTGestureBackEnd._mtLogCounter, MTTGestureBackEnd._updateAppKitBlock, 
+                       MTTGestureBackEnd._cachedTrackpadType, MTTGestureBackEnd._csManager, 
+                       MTTGestureBackEnd._enableMTLogging, MTTGestureBackEnd._mtLogCounter, 
+                       MTTGestureBackEnd._shouldSyncChangesToCloud, MTTGestureBackEnd._updateAppKitBlock, 
                        MTTGestureBackEnd._updateAppKitCounter, MTTGestureBackEnd._updateBSBlock, 
                        MTTGestureBackEnd._updateBSCounter, MTTGestureBackEnd._updateDelay, 
                        NSTickLabelsView.fSlider, NSTickLabelsView.fTickLabelFontAttributes, 

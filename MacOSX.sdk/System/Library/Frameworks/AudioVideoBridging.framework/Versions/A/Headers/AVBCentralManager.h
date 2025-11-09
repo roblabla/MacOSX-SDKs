@@ -2,7 +2,7 @@
 //  AVBCentralManager.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2013-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -25,7 +25,7 @@ FOUNDATION_EXTERN const uint64_t AVBNullEUI64;
 				with the Thunderbolt Ethernet Adapter.
  
  */
-API_AVAILABLE(macos(10.10))
+API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos)
 @interface AVBCentralManager : NSObject
 {
 }

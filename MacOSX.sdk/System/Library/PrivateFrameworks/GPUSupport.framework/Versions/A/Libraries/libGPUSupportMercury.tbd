@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A6F41A87-A451-3CE7-9A3A-AB9282D1D1B3
+    value:           7D9C3A7B-8BE1-3221-B85D-A05C3A505598
   - target:          x86_64-maccatalyst
-    value:           A6F41A87-A451-3CE7-9A3A-AB9282D1D1B3
+    value:           7D9C3A7B-8BE1-3221-B85D-A05C3A505598
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A9A72A45-3F59-3837-9BE5-5FB6B1379088
+    value:           F12A7C33-BC55-3EC3-BA8D-BC1E1FC5530A
   - target:          arm64e-maccatalyst
-    value:           A9A72A45-3F59-3837-9BE5-5FB6B1379088
+    value:           F12A7C33-BC55-3EC3-BA8D-BC1E1FC5530A
 install-name:    '/System/Library/PrivateFrameworks/GPUSupport.framework/Versions/A/Libraries/libGPUSupportMercury.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _gldAttachDrawable, _gldBufferSubData, _gldClearFence, _gldCopyBufferSubData, 
                        _gldCopyTexSubImage, _gldCopyTextureData, _gldCreateBuffer, 
                        _gldCreateComputeModule, _gldCreateComputeProgram, _gldCreateContext, 

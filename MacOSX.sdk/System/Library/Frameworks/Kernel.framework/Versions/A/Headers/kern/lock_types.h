@@ -32,6 +32,7 @@
 
 __BEGIN_DECLS
 
+#define LCK_SLEEP_MASK           0x3f     /* Valid actions */
 
 /*!
  * @enum lck_sleep_action_t
@@ -49,12 +50,12 @@ __options_decl(lck_sleep_action_t, unsigned int, {
 	LCK_SLEEP_SPIN_ALWAYS  = 0x20,    /**< Reclaim the lock in spin-always mode (mutex only) */
 });
 
-#define LCK_SLEEP_MASK           0x3f     /* Valid actions */
-
 __options_decl(lck_wake_action_t, unsigned int, {
 	LCK_WAKE_DEFAULT                = 0x00,  /* If waiters are present, transfer their push to the wokenup thread */
 	LCK_WAKE_DO_NOT_TRANSFER_PUSH   = 0x01,  /* Do not transfer waiters push when waking up */
 });
+
+typedef const struct hw_spin_policy *hw_spin_policy_t;
 
 
 __END_DECLS

@@ -107,7 +107,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	Writing will fail if a file already exists at the specified URL.
 	
-	UTIs for container formats that can be written are declared in AVMediaFormat.h.
+	This method throws an exception if the output file type is not declared in AVMediaFormat.h.
  */
 - (nullable instancetype)initWithURL:(NSURL *)outputURL fileType:(AVFileType)outputFileType error:(NSError * _Nullable * _Nullable)outError NS_DESIGNATED_INITIALIZER;
 
@@ -126,7 +126,7 @@ AV_INIT_UNAVAILABLE
 
 	Clients may use +typeWithIdentifier: with a UTI to create an instance of UTType. See <UniformTypeIdentifiers/UTType.h>.
 
-	UTIs for container formats that can be output are declared in AVMediaFormat.h.
+	This method throws an exception if the output content type UTI for container format is not declared in AVMediaFormat.h.
  */
 - (instancetype)initWithContentType:(UTType *)outputContentType NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
@@ -135,7 +135,7 @@ AV_INIT_UNAVAILABLE
  @abstract
 	The location of the file for which the instance of AVAssetWriter was initialized for writing.
  @discussion
-	You may use UTTypeCopyPreferredTagWithClass(outputFileType, kUTTagClassFilenameExtension) to obtain an appropriate path extension for the outputFileType you have specified. For more information about UTTypeCopyPreferredTagWithClass and kUTTagClassFilenameExtension, on iOS see <CoreServices/UTType.h> and on Mac OS X see <LaunchServices/UTType.h>.
+	You may use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to obtain an appropriate path extension for the outputFileType you have specified. For more information, see <UniformTypeIdentifiers/UTType.h>.
  */
 @property (nonatomic, copy, readonly) NSURL *outputURL;
 
@@ -269,6 +269,14 @@ AV_INIT_UNAVAILABLE
 	Inputs are created with a media type and output settings. These both must be compatible with the receiver.
 	
 	Inputs cannot be added after writing has started.
+ 
+	This method throws an exception if any of the following conditions are satisfied:
+		- the input's media type is not allowed for this asset writer
+		- writing uncompressed video in a specific format
+		- passthrough* to files (other than AVFileTypeQuickTimeMovie) is missing a format hint in the AVAssetWriterInput initializer
+		- passthrough* is not supported for this media/file type combination (for example, AVFileTypeWAVE only supports AVMediaTypeAudio)
+
+		*Passthrough is indicated when the input's output settings are nil.
  */
 - (void)addInput:(AVAssetWriterInput *)input;
 
@@ -326,6 +334,8 @@ AV_INIT_UNAVAILABLE
 	It is an error to append samples outside of a sample-writing session.  To append more samples after invoking -endSessionAtSourceTime:, you must first start a new session using -startSessionAtSourceTime:.
 	
 	NOTE: Multiple sample-writing sessions are currently not supported. It is an error to call -startSessionAtSourceTime: a second time after calling -endSessionAtSourceTime:.
+ 
+	This method throws an exception if the session is ended without first starting it.
  */
 - (void)endSessionAtSourceTime:(CMTime)endTime;
 
@@ -380,7 +390,7 @@ AV_INIT_UNAVAILABLE
 
 @end
 
-
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriter (AVAssetWriterFileTypeSpecificProperties)
 
 /*!
@@ -456,6 +466,7 @@ AV_INIT_UNAVAILABLE
 
 @class AVAssetWriterInputGroup;
 
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriter (AVAssetWriterInputGroups)
 
 /*!
@@ -470,6 +481,10 @@ AV_INIT_UNAVAILABLE
 
  @discussion
 	If outputFileType specifies a container format that does not support mutually exclusive relationships among tracks, or if the specified instance of AVAssetWriterInputGroup contains inputs with media types that cannot be related, the group cannot be added to the AVAssetWriter.
+
+	This method throws an exception if any of the following conditions are satisfied:
+		- this writer's output file type does not support mutually exclusive relationships among tracks (allowed types are AVFileTypeQuickTimeMovie, AVFileTypeAppleM4A, AVFileTypeAppleM4V, AVFileType3GPP [iPhone only], AVFileTypeMPEG4)
+		- any AVAssetWriterInput in the input group is also present in an input group already added
  */
 - (BOOL)canAddInputGroup:(AVAssetWriterInputGroup *)inputGroup API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -574,6 +589,7 @@ AV_INIT_UNAVAILABLE
 
 @protocol AVAssetWriterDelegate;
 
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriter (AVAssetWriterSegmentation)
 
 /*!
@@ -634,8 +650,8 @@ AV_INIT_UNAVAILABLE
 	Closes the current segment and outputs it to the -assetWriter:didOutputSegmentData:segmentType:segmentReport: or -assetWriter:didOutputSegmentData:segmentType: delegate method.
 
  @discussion
-	Use this method only when the value of preferredOutputSegmentInterval property is set to kCMTimeIndefinite.
- */
+	This method throws an exception if the delegate method to output segment data is not implemented, or if the value of the preferredOutputSegmentInterval property is not kCMTimeIndefinite.
+  */
 - (void)flushSegment API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 @end

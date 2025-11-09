@@ -46,6 +46,14 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos)
 @property (readonly) BOOL multipleRoutesDetected;
 
 /*!
+ @property	detectsCustomRoutes
+ @abstract	Whether or not route detection will include custom routes. The default value is NO.
+ @discussion
+	Only set this to YES if also using AVCustomRoutingController.
+ */
+@property (nonatomic) BOOL detectsCustomRoutes API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
+/*!
  @constant	AVRouteDetectorMultipleRoutesDetectedDidChangeNotification
  @abstract	Posted when the value of multipleRoutesDetected changes.
  */

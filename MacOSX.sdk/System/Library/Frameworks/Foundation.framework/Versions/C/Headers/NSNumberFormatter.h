@@ -7,7 +7,7 @@
 
 @class NSLocale, NSError, NSMutableDictionary, NSRecursiveLock, NSString, NSCache;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSUInteger, NSNumberFormatterBehavior) {
     NSNumberFormatterBehaviorDefault = 0,
@@ -17,17 +17,8 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterBehavior) {
     NSNumberFormatterBehavior10_4 = 1040,
 };
 
-@interface NSNumberFormatter : NSFormatter {
-@private
-    NSMutableDictionary	*_attributes;
-    CFNumberFormatterRef _formatter;
-    NSUInteger _counter;
-    NSNumberFormatterBehavior _behavior;
-    NSRecursiveLock *_lock;
-    unsigned long _stateBitMask; // this is for NSUnitFormatter
-    NSInteger _cacheGeneration;
-    void *_reserved[8];
-}
+NS_SWIFT_SENDABLE // All mutable state protected by locks, all subclasses must be thread-safe
+@interface NSNumberFormatter : NSFormatter
 
 @property NSFormattingContext formattingContext API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // default is NSFormattingContextUnknown
 
@@ -166,4 +157,4 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterRoundingMode) {
 @end
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

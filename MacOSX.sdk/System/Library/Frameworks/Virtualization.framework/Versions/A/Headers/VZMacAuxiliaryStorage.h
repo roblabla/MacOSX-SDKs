@@ -2,7 +2,7 @@
 //  VZMacAuxiliaryStorage.h
 //  Virtualization
 //
-//  Copyright © 2021 Apple Inc. All rights reserved.
+//  Copyright © 2021-2022 Apple Inc. All rights reserved.
 //
 
 #ifdef __arm64__
@@ -63,7 +63,7 @@ VZ_EXPORT API_AVAILABLE(macos(12.0))
  @param URL The URL of the auxiliary storage on the local file system.
  @discussion To create a new auxiliary storage, use -[VZMacAuxiliaryStorage initCreatingStorageAtURL:hardwareModel:options:error].
  */
-- (instancetype)initWithContentsOfURL:(NSURL *)URL;
+- (instancetype)initWithURL:(NSURL *)URL API_AVAILABLE(macos(13.0));
 
 /*!
  @abstract Write an initialized VZMacAuxiliaryStorage to a URL on a file system.
@@ -79,6 +79,12 @@ VZ_EXPORT API_AVAILABLE(macos(12.0))
  @abstract The URL of the auxiliary storage on the local file system.
  */
 @property (readonly, copy) NSURL *URL;
+
+@end
+
+@interface VZMacAuxiliaryStorage (VZDeprecated)
+
+- (instancetype)initWithContentsOfURL:(NSURL *)URL API_DEPRECATED_WITH_REPLACEMENT("-initWithURL:", macos(12.0, API_TO_BE_DEPRECATED));
 
 @end
 

@@ -37,16 +37,16 @@ API_AVAILABLE(macos(10.12))
 @protocol NSFilePromiseProviderDelegate <NSObject>
 @required
 /* Return the base filename (not a full path) for this promise item. Do not start writing the file yet. */
-- (NSString *)filePromiseProvider:(NSFilePromiseProvider*)filePromiseProvider fileNameForType:(NSString *)fileType;
+- (NSString *)filePromiseProvider:(NSFilePromiseProvider*)filePromiseProvider fileNameForType:(NSString *)fileType NS_SWIFT_UI_ACTOR;
 
 
 /* Write the contents of this promise item to the provided URL and call completionHandler when done. NSFilePromiseReceiver automatically wraps this message with NSFileCoordinator when the promise destination is an NSFilePromiseReceiver. Always use the supplied URL. Note: This request shall occur on the NSOperationQueue supplied by -promiseOperationQueue.
  */
-- (void)filePromiseProvider:(NSFilePromiseProvider*)filePromiseProvider writePromiseToURL:(NSURL *)url completionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler;
+- (void)filePromiseProvider:(NSFilePromiseProvider*)filePromiseProvider writePromiseToURL:(NSURL *)url completionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_SWIFT_NONISOLATED;
 
 @optional
 /* The operation queue that the write request will be issued from. If this method is not implemented, the mainOperationQueue is used. */
-- (NSOperationQueue *)operationQueueForFilePromiseProvider:(NSFilePromiseProvider*)filePromiseProvider;
+- (NSOperationQueue *)operationQueueForFilePromiseProvider:(NSFilePromiseProvider*)filePromiseProvider NS_SWIFT_UI_ACTOR;
 @end
 
 API_UNAVAILABLE_END

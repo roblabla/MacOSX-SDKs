@@ -434,7 +434,7 @@ typedef CF_ENUM(UInt32, AudioDeviceClockAlgorithmSelector)
                         expect between successive time stamps returned from GetZeroTimeStamp(). In
                         other words, if GetZeroTimeStamp() returned a sample time of X, the host can
                         expect that the next valid time stamp that will be returned will be X plus
-                        the value of this property.
+                        the value of this property. The minimum allowed value for this is 10923 sample frames.
     @constant       kAudioDevicePropertyClockAlgorithm
                         A UInt32 whose value indicates to the Host what smoothing algorithm to use
                         for a device's clock. The only legal values for this property are specified

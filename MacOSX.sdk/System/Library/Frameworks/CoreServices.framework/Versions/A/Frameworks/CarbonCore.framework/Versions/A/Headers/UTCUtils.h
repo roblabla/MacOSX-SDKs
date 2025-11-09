@@ -25,6 +25,7 @@
 
 
 #include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -39,7 +40,7 @@ extern "C" {
 /* Options for Set & Get DateTime Routines */
 enum {
   kUTCDefaultOptions            = 0
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 /* 64 Bit Clock Typedefs */
 struct UTCDateTime {

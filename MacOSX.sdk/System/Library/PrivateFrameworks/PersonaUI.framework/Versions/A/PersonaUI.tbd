@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           09B3DC79-AF1A-39C0-AA6E-F5CFF7B4C576
+    value:           ACEA563E-EFFC-323A-B0A7-02D565B58D36
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           089DF75F-CE36-36A8-B9B8-7BD1DDFFE691
+    value:           3727F5BB-B0F8-373B-849C-E7F021FA8EE8
 install-name:    '/System/Library/PrivateFrameworks/PersonaUI.framework/Versions/A/PersonaUI'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CGSizeFromPRLikenessCacheSize, _NSStringFromPRLikenessCacheSize, 
                        _PRImageCreateCircularImageInRect, _PRImageCreateWithImageInRect, 
                        _PRImageForceDecompress, _PRLikenessCacheSizeClosestToSize, 

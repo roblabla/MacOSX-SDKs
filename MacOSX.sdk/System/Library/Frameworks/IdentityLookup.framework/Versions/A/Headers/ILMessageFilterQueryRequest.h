@@ -20,7 +20,11 @@ IL_EXTERN API_AVAILABLE(ios(11.0), macCatalyst(13.0)) API_UNAVAILABLE( tvos) API
 /// The body of the message the receiver relates to.
 @property (nonatomic, readonly, nullable) NSString *messageBody;
 
+/// The ISO Country Code of the receiving phone number, in format specified by the ISO 3166-2 standard
+@property (nonatomic, readonly, nullable) NSString *receiverISOCountryCode API_AVAILABLE(ios(16.0), macCatalyst(16.0)) API_UNAVAILABLE( tvos) API_UNAVAILABLE(macos, watchos);
+
 - (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @end
 

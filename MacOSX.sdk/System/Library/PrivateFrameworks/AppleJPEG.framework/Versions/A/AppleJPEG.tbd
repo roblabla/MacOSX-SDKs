@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7A0134D7-7A9A-3903-91E1-1C8BC17119A8
+    value:           82CCE528-E9ED-3E51-AE30-59B30F247AF9
   - target:          x86_64-maccatalyst
-    value:           7A0134D7-7A9A-3903-91E1-1C8BC17119A8
+    value:           82CCE528-E9ED-3E51-AE30-59B30F247AF9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2A0B58EB-4DEB-359A-B562-DA1B77496455
+    value:           7F02385F-61D8-33DD-825F-E15163E4FADC
   - target:          arm64e-maccatalyst
-    value:           2A0B58EB-4DEB-359A-B562-DA1B77496455
+    value:           7F02385F-61D8-33DD-825F-E15163E4FADC
 install-name:    '/System/Library/PrivateFrameworks/AppleJPEG.framework/Versions/A/AppleJPEG'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AJReducerCloseSource, _AJReducerCreate, _AJReducerDestinationBytesWritten, 
                        _AJReducerGetAPIVersionNumber, _AJReducerIsDataPacked, _AJReducerIsFilePacked, 
                        _AJReducerIsSourcePacked, _AJReducerOpenSourceData, _AJReducerOpenSourceURL, 

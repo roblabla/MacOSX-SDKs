@@ -1,26 +1,27 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name _MapKit_SwiftUI
-// swift-module-flags-ignorable: -user-module-version 2304.24.11.8.8
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-macos13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name _MapKit_SwiftUI
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2365.20.7.23.17
 @_exported import MapKit
 import Swift
 import SwiftUI
 import _Concurrency
+import _StringProcessing
 @available(iOS 14.0, tvOS 14.0, macOS 11.0, watchOS 7.0, *)
 public protocol MapAnnotationProtocol {
   var _annotationData: _MapKit_SwiftUI._MapAnnotationData { get }
 }
 @available(iOS 14.0, tvOS 14.0, macOS 11.0, watchOS 7.0, *)
 public struct MapAnnotation<Content> : _MapKit_SwiftUI.MapAnnotationProtocol where Content : SwiftUI.View {
-  public init(coordinate: CoreLocation.CLLocationCoordinate2D, anchorPoint: CoreGraphics.CGPoint = CGPoint(x: 0.5, y: 0.5), @SwiftUI.ViewBuilder content: () -> Content)
+  public init(coordinate: CoreLocation.CLLocationCoordinate2D, anchorPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 0.5), @SwiftUI.ViewBuilder content: () -> Content)
   public var _annotationData: _MapKit_SwiftUI._MapAnnotationData {
     get
   }
 }
-@available(iOS, introduced: 14.0, deprecated: 100000, message: "Use MapMarker")
-@available(tvOS, introduced: 14.0, deprecated: 100000, message: "Use MapMarker")
-@available(macOS, introduced: 11.0, deprecated: 100000, message: "Use MapMarker")
-@available(watchOS, introduced: 7.0, deprecated: 100000, message: "Use MapMarker")
+@available(iOS, introduced: 14.0, deprecated: 16.0, message: "Use MapMarker")
+@available(tvOS, introduced: 14.0, deprecated: 16.0, message: "Use MapMarker")
+@available(macOS, introduced: 11.0, deprecated: 13.0, message: "Use MapMarker")
+@available(watchOS, introduced: 7.0, deprecated: 9.0, message: "Use MapMarker")
 public struct MapPin : _MapKit_SwiftUI.MapAnnotationProtocol {
   public init(coordinate: CoreLocation.CLLocationCoordinate2D, tint: SwiftUI.Color? = nil)
   public var _annotationData: _MapKit_SwiftUI._MapAnnotationData {

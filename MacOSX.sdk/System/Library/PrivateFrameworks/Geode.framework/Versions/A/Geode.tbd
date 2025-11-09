@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           345ED000-49B0-3C7E-8324-8F164BA9C9B9
+    value:           54FFE0C1-6A3C-3377-A23C-968809DBB805
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2066EFAA-C9D3-314B-9B66-B39E0B771FED
+    value:           E82F636F-03E2-312F-A5E9-1099E412519F
 install-name:    '/System/Library/PrivateFrameworks/Geode.framework/Versions/A/Geode'
-current-version: 441.0.120
+current-version: 511.0.170
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CGPointOffset, _CGPointScale, _CGRectFlipInRect, _CGRectGrowInRect, 
                        _CGRectScale, _CGRectShrinkInRect, _CGSizeScale, _CGVectorOffset, 
                        _CGVectorScale, _CURRENT_DETECTED_EDGE_VERSION, _DGAlmostEqualSizes, 

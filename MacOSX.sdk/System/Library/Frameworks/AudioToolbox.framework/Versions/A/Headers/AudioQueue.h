@@ -135,8 +135,8 @@ typedef struct OpaqueAudioQueueTimeline *   AudioQueueTimelineRef;
     				Access to the required codec is not permitted (possibly due to incompatible
     				AudioSession settings on iOS).
     @constant   kAudioQueueErr_QueueInvalidated
-    				On iOS, the audio server has exited, causing this audio queue to have become
-    				invalid.
+    				On iOS derived platforms (excluding Catalyst), the audio server has exited,
+    				causing this audio queue to have become invalid.
     @constant   kAudioQueueErr_TooManyTaps
     				There can only be one processing tap per audio queue.
     @constant   kAudioQueueErr_InvalidTapContext
@@ -1625,7 +1625,8 @@ AudioQueueDeviceGetCurrentTime(     AudioQueueRef           inAQ,
     @param      inTime
         A pointer to a structure containing the time to be translated.
     @param      outTime
-        A pointer to the the translated time.
+        On entry, mFlags indicate the desired translations. On exit, mFlags indicates which
+        of the requested translated fields were successfully populated.
     @result
         An OSStatus result code.
 */

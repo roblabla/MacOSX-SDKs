@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           ADCDF4C8-43B0-360E-A578-AC544159B8E0
+    value:           6AEC55AD-EC70-33FB-971C-C5650B7ADF6B
   - target:          x86_64-maccatalyst
-    value:           ADCDF4C8-43B0-360E-A578-AC544159B8E0
+    value:           6AEC55AD-EC70-33FB-971C-C5650B7ADF6B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C487DCE5-F5B4-3A73-928C-9612C98814A3
+    value:           6AAAAD8B-A58B-343A-8D02-D9E07067C55B
   - target:          arm64e-maccatalyst
-    value:           C487DCE5-F5B4-3A73-928C-9612C98814A3
+    value:           6AAAAD8B-A58B-343A-8D02-D9E07067C55B
 install-name:    '/System/Library/PrivateFrameworks/RTTUtilities.framework/Versions/A/RTTUtilities'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AXTTYIsTextHeldForRTTCall, _AXTTYMessageKeyCallID, _AXTTYMessageKeyContactID, 
                        _AXTTYMessageKeyContactPathSearchAction, _AXTTYMessageKeyContactSearchAction, 
                        _AXTTYMessageKeyConversation, _AXTTYMessageKeyConversationUpdates, 
                        _AXTTYMessageKeyDeleteAction, _AXTTYMessageKeyIsVisible, _AXTTYMessageKeyMediaActions, 
-                       _AXTTYMessageKeyReadAction, _AXTTYMessageKeyRemoteConversationUpdates, 
+                       _AXTTYMessageKeyMessageType, _AXTTYMessageKeyReadAction, _AXTTYMessageKeyRemoteConversationUpdates, 
                        _AXTTYMessageKeyResult, _AXTTYMessageKeySenderType, _AXTTYMessageKeyServerSettingsUpdateAction, 
                        _AXTTYMessageKeyServiceMessageUpdates, _AXTTYMessageKeySetVisibleServiceUpdate, 
                        _AXTTYMessageKeySettingsKey, _AXTTYMessageKeyUUID, _AXTTYMessageKeyValue, 
@@ -40,6 +40,6 @@ exports:
     objc-classes:    [ AXRTTSettingsListenerHelper, AXTTYSimulatorSubscriptionContext, 
                        RTTCall, RTTController, RTTConversation, RTTDatabaseManager, 
                        RTTDictionaryManager, RTTNanoSettings, RTTRemoteCall, RTTServer, 
-                       RTTServiceUpdate, RTTSettings, RTTTelephonyUtilities, RTTUtterance, 
-                       TTYContactList, TTYHistory ]
+                       RTTServiceUpdate, RTTSettings, RTTTelephonyUtilities, RTTTranscriptionController, 
+                       RTTUtterance, TTYContactList, TTYHistory ]
 ...

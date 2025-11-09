@@ -184,6 +184,8 @@ typedef AudioComponentInstance AudioUnit;
 	@constant		kAudioUnitType_MIDIProcessor
 		Plugins of this type process MIDI input and produce MIDI output. They do not produce audio.
 
+	@constant       kAudioUnitType_SpeechSynthesizer
+		An offline audio unit that produces synthesized speech audio output.
 */
 CF_ENUM(UInt32) {
 	kAudioUnitType_Output					= 'auou',
@@ -195,7 +197,8 @@ CF_ENUM(UInt32) {
 	kAudioUnitType_Panner					= 'aupn',
 	kAudioUnitType_Generator				= 'augn',
 	kAudioUnitType_OfflineEffect			= 'auol',
-	kAudioUnitType_MIDIProcessor			= 'aumi'
+	kAudioUnitType_MIDIProcessor			= 'aumi',
+	kAudioUnitType_SpeechSynthesizer API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0), tvos(16.0))  = 'ausp'
 };
 
 #if AU_SUPPORT_INTERAPP_AUDIO
@@ -453,7 +456,9 @@ CF_ENUM(UInt32) {
 
     @constant       kAudioUnitSubType_Reverb2
                     A lite reverb that can be used to simulate various and different spaces
-
+ 
+	@constant       kAudioUnitSubType_AUSoundIsolation
+					An audio unit that can be used to isolate a specified sound type
 */
 CF_ENUM(UInt32) {
 	kAudioUnitSubType_PeakLimiter			= 'lmtr',
@@ -468,7 +473,8 @@ CF_ENUM(UInt32) {
 	kAudioUnitSubType_Delay					= 'dely',
 	kAudioUnitSubType_SampleDelay			= 'sdly',
 	kAudioUnitSubType_NBandEQ				= 'nbeq',
-    kAudioUnitSubType_Reverb2               = 'rvb2'
+    kAudioUnitSubType_Reverb2               = 'rvb2',
+	kAudioUnitSubType_AUSoundIsolation API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) = 'vois',
 };
 
 #if !TARGET_OS_IPHONE

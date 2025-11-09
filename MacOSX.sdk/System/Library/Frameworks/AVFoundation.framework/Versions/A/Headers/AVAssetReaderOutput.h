@@ -64,6 +64,8 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 	When the value of this property is YES, the AVAssetReaderOutput will always vend a buffer with copied data to the client.  Data in such buffers can be freely modified by the client. When the value of this property is NO, the buffers vended to the client may not be copied.  Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined.  Requesting buffers whose data hasn't been copied when possible can lead to performance improvements.
  
 	The default value is YES.
+ 
+	This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
  */
 @property (nonatomic) BOOL alwaysCopiesSampleData API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -77,6 +79,8 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 
  @discussion
 	The client is responsible for calling CFRelease on the returned CMSampleBuffer object when finished with it. This method will return NULL if there are no more sample buffers available for the receiver within the time range specified by its AVAssetReader's timeRange property, or if there is an error that prevents the AVAssetReader from reading more media data. When this method returns NULL, clients should check the value of the associated AVAssetReader's status property to determine why no more samples could be read.
+ 
+	This method throws an exception if this output is not added to an instance of AVAssetReader (using -addOutput:) and -startReading is not called on that asset reader.
  */
 - (nullable CMSampleBufferRef)copyNextSampleBuffer CF_RETURNS_RETAINED;
 
@@ -95,7 +99,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	The default value is NO, which means that the asset reader output may not be reconfigured once reading has begun.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached.
  
-	This property may not be set after -startReading has been called on the attached asset reader.
+	This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
  */
 @property (nonatomic) BOOL supportsRandomAccess API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -112,11 +116,21 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This method is often used in conjunction with AVAssetWriter multi-pass (see AVAssetWriterInput category AVAssetWriterInputMultiPass).  In this usage, the caller will invoke -copyNextSampleBuffer until that method returns NULL and then ask the AVAssetWriterInput for a set of time ranges from which it thinks media data should be re-encoded.  These time ranges are then given to this method to set up the asset reader output for the next pass.
  
-	The time ranges set here override the time range set on AVAssetReader.timeRange.  Just as with that property, for each time range in the array the intersection of that time range and CMTimeRangeMake(kCMTimeZero, asset.duration) will take effect.  If the start times of each time range in the array are not strictly increasing or if two or more time ranges in the array overlap, an NSInvalidArgumentException will be raised.  It is an error to include a time range with a non-numeric start time or duration (see CMTIME_IS_NUMERIC), unless the duration is kCMTimePositiveInfinity.
+	The time ranges set here override the time range set on AVAssetReader.timeRange.  Just as with that property, for each time range in the array the intersection of that time range and CMTimeRangeMake(kCMTimeZero, asset.duration) will take effect.
  
 	If this method is invoked after the status of the attached AVAssetReader has become AVAssetReaderStatusFailed or AVAssetReaderStatusCancelled, no change in status will occur and the result of the next call to -copyNextSampleBuffer will be NULL.
  
-	If this method is invoked before all media data has been read (i.e. -copyNextSampleBuffer has not yet returned NULL), an exception will be thrown.  This method may not be called before -startReading has been invoked on the attached asset reader.
+	This method throws an exception if the following conditions are not honored:
+		- each item in time ranges must be an NSValue
+ 		- the start of each time range must be numeric - see CMTIME_IS_NUMERIC
+		- the duration of each time range must be nonnegative and numeric, or kCMTimePositiveInfinity
+		- the start of each time range must be greater than or equal to the end of the previous time range
+		- start times must be strictly increasing
+		- time ranges must not overlap
+		- cannot be called before -startReading has been invoked on the attached asset reader
+		- cannot be called until all samples of media data have been read (i.e. copyNextSampleBuffer returns NULL and the asset reader has not entered a failure state)
+		- cannot be called without setting "supportsRandomAccess" to YES
+		- cannot be called after calling -markConfigurationAsFinal
  */
 - (void)resetForReadingTimeRanges:(NSArray<NSValue *> *)timeRanges API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -221,6 +235,12 @@ AV_INIT_UNAVAILABLE
 	ProRes encoded media can contain up to 12bits/ch. If your source is ProRes encoded and you wish to preserve more than 8bits/ch during decompression then use one of the following pixel formats: kCVPixelFormatType_4444AYpCbCr16, kCVPixelFormatType_422YpCbCr16, kCVPixelFormatType_422YpCbCr10, or kCVPixelFormatType_64ARGB.  AVAssetReader does not support scaling with any of these high bit depth pixel formats. If you use them then do not specify kCVPixelBufferWidthKey or kCVPixelBufferHeightKey in your outputSettings dictionary. If you plan to append these sample buffers to an AVAssetWriterInput then note that only the ProRes encoders support these pixel formats.
 
 	ProRes 4444 encoded media can contain a mathematically lossless alpha channel. To preserve the alpha channel during decompression use a pixel format with an alpha component such as kCVPixelFormatType_4444AYpCbCr16 or kCVPixelFormatType_64ARGB.  To test whether your source contains an alpha channel check that the track's format description has kCMFormatDescriptionExtension_Depth and that its value is 32.
+ 
+	This method throws an exception for any of the following reasons:
+		- the output settings dictionary contains an unsupported key mentioned above
+		- the output settings dictionary does not contain any recognized key
+		- output settings are not compatible with track's media type
+		- track output settings would cause the output to yield compressed samples
  */
 - (instancetype)initWithTrack:(AVAssetTrack *)track outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings NS_DESIGNATED_INITIALIZER;
 
@@ -253,6 +273,10 @@ AV_INIT_UNAVAILABLE
 	Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h.  An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file.
  
 	The default value is AVAudioTimePitchAlgorithmSpectral.
+ 
+	This property throws an exception for any of the following reasons:
+		- a value is set value after reading has started
+		- a value is set other than AVAudioTimePitchAlgorithmSpectral, AVAudioTimePitchAlgorithmTimeDomain, or AVAudioTimePitchAlgorithmVarispeed.
  */
 @property (nonatomic, copy) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -316,6 +340,12 @@ AV_INIT_UNAVAILABLE
 	For non-nil values of audioSettings, the audio settings dictionary must contain values for keys in AVAudioSettings.h (linear PCM only). Initialization will fail if the audio settings cannot be used with the specified tracks. AVSampleRateConverterAudioQualityKey is not supported.
 
 	A value of nil for audioSettings configures the output to return samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the specified audio tracks as well as other considerations that may vary according to device capabilities, operating system version, and other factors. Therefore if you wish to perform any processing on the output, you must examine the CMAudioFormatDescription of the CMSampleBuffers that are provided in order to ensure that your processing is appropriately configured for the output format.
+ 
+	This method throws an exception for any of the following reasons:
+		- an audio track does not have media type AVMediaTypeAudio
+		- an audio track belongs to a different AVAsset
+		- the audio settings contains an AVSampleRateConverterAudioQualityKey
+		- the output would be compressed
  */
 - (instancetype)initWithAudioTracks:(NSArray<AVAssetTrack *> *)audioTracks audioSettings:(nullable NSDictionary<NSString *, id> *)audioSettings NS_DESIGNATED_INITIALIZER;
 
@@ -347,7 +377,10 @@ AV_INIT_UNAVAILABLE
  @discussion
 	The value of this property is an AVAudioMix that can be used to specify how the volume of audio samples read from each source track will change over the timeline of the source asset.
  
-	This property cannot be set after reading has started.
+	This property throws an exception for any of the following reasons:
+		- an audio mix is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown)
+		- setting an audio mix containing a track that was not used to create the receiver
+		- an audio mix is set containing an invalid audio time pitch algorithm
  */
 @property (nonatomic, copy, nullable) AVAudioMix *audioMix;
 
@@ -425,11 +458,18 @@ AV_INIT_UNAVAILABLE
  	
 	A value of nil for videoSettings configures the output to return samples in a convenient uncompressed format, with properties determined according to the properties of the specified video tracks.  Initialization will fail if the video settings cannot be used with the specified tracks.
 	
-	AVAssetReaderVideoCompositionOutput can only produce uncompressed output.  This means that the video settings dictionary must follow the rules for uncompressed video output, as laid out in AVVideoSettings.h.  In addition, the following keys are not supported:
+	AVAssetReaderVideoCompositionOutput can only produce uncompressed output.  This means that the video settings dictionary must follow the rules for uncompressed video output, as laid out in AVVideoSettings.h.
  
-		AVVideoCleanApertureKey
-		AVVideoPixelAspectRatioKey
-		AVVideoScalingModeKey
+	This method throws an exception for any of the following reasons:
+		- any video track is not of media type AVMediaTypeVideo
+		- any video track is not part of this asset reader output's AVAsset
+		- track output settings would cause the output to yield compressed samples
+		- video settings does not follow the rules for uncompressed video output (AVVideoSettings.h)
+		- video settings contains any of the following keys:
+			- AVVideoCleanApertureKey
+			- AVVideoPixelAspectRatioKey
+			- AVVideoScalingModeKey
+			- AVVideoDecompressionPropertiesKey
  */
 - (instancetype)initWithVideoTracks:(NSArray<AVAssetTrack *> *)videoTracks videoSettings:(nullable NSDictionary<NSString *, id> *)videoSettings NS_DESIGNATED_INITIALIZER;
 
@@ -461,7 +501,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	The value of this property is an AVVideoComposition that can be used to specify the visual arrangement of video frames read from each source track over the timeline of the source asset.
  
-	This property cannot be set after reading has started.
+	This property throws an exception if a value is set after reading has started.
  */
 @property (nonatomic, copy, nullable) AVVideoComposition *videoComposition;
 
@@ -526,6 +566,8 @@ AV_INIT_UNAVAILABLE
 	It is an error to create a timed metadata group adaptor with an asset reader output that does not vend metadata.  It is also an error to create a timed metadata group adaptor with an asset reader output whose asset reader has already started reading, or an asset reader output that already has been used to initialize another timed metadata group adaptor.
 	
 	Clients should not mix calls to -[AVAssetReaderTrackOutput copyNextSampleBuffer] and -[AVAssetReaderOutputMetadataAdaptor nextTimedMetadataGroup].  Once an AVAssetReaderTrackOutput instance has been used to initialize an AVAssetReaderOutputMetadataAdaptor, calling -copyNextSampleBuffer on that instance will result in an exception being thrown.
+ 
+	This method throws an exception if the track's output was used to initialize another adaptor or if the track output's asset reader has already started reading.
  */
 - (instancetype)initWithAssetReaderTrackOutput:(AVAssetReaderTrackOutput *)trackOutput NS_DESIGNATED_INITIALIZER;
 
@@ -550,6 +592,8 @@ AV_INIT_UNAVAILABLE
 	Unlike -[AVAssetReaderTrackOutput copyNextSampleBuffer], this method returns an autoreleased object.
  
 	Before calling this method, you must ensure that the output which underlies the receiver is attached to an AVAssetReader via a prior call to -addOutput: and that -startReading has been called on the asset reader.
+ 
+	This method throws an exception if track output is not attached to an asset reader and reading has not yet begun.
  */
 - (nullable AVTimedMetadataGroup *)nextTimedMetadataGroup;
 
@@ -610,6 +654,8 @@ AV_INIT_UNAVAILABLE
 	An instance of AVCaption representing the next caption.
  @discussion
 	The method returns the next caption group.
+ 
+	This method throws an exception if the track output is not attached to an asset reader and reading has not yet begun.
  */
 - (nullable AVCaptionGroup *)nextCaptionGroup;
 
@@ -633,6 +679,7 @@ AV_INIT_UNAVAILABLE
  @abstract
 	Category of AVAssetReaderOutputCaptionAdaptor for caption validation handling
  */
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface AVAssetReaderOutputCaptionAdaptor (AVAssetReaderCaptionValidation)
 
 /*!

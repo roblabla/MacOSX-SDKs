@@ -278,11 +278,11 @@ APPKIT_EXTERN NSNotificationName NSBrowserColumnConfigurationDidChangeNotificati
  */
 /* Called by the browser to determine the number of rows in the given column. The delegate will be called with -browser:willDisplayCell:atRow:column: before displaying each cell, giving it a chance to fill in the NSBrowserCell properties.
  */
-- (NSInteger)browser:(NSBrowser *)sender numberOfRowsInColumn:(NSInteger)column;
+- (NSInteger)browser:(NSBrowser *)sender numberOfRowsInColumn:(NSInteger)column NS_SWIFT_UI_ACTOR;
 
 /* Called by the browser to fill in the matrix with populated NSBrowserCells.
  */
-- (void)browser:(NSBrowser *)sender createRowsForColumn:(NSInteger)column inMatrix:(NSMatrix *)matrix;
+- (void)browser:(NSBrowser *)sender createRowsForColumn:(NSInteger)column inMatrix:(NSMatrix *)matrix NS_SWIFT_UI_ACTOR;
 
 #pragma mark -
 
@@ -290,65 +290,65 @@ APPKIT_EXTERN NSNotificationName NSBrowserColumnConfigurationDidChangeNotificati
 */
 
 /* Return the number of children of the given item. */
-- (NSInteger)browser:(NSBrowser *)browser numberOfChildrenOfItem:(nullable id)item API_AVAILABLE(macos(10.6));
+- (NSInteger)browser:(NSBrowser *)browser numberOfChildrenOfItem:(nullable id)item NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 /* Return the indexth child of item. You may expect that index is never equal to or greater to the number of children of item as reported by -browser:numberOfChildrenOfItem:.
  */
-- (id)browser:(NSBrowser *)browser child:(NSInteger)index ofItem:(nullable id)item API_AVAILABLE(macos(10.6));
+- (id)browser:(NSBrowser *)browser child:(NSInteger)index ofItem:(nullable id)item NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 /* Return whether item should be shown as a leaf item; that is, an item that can not be expanded into another column. Returning NO does not prevent you from returning 0 from -browser:numberOfChildrenOfItem:.
  */
-- (BOOL)browser:(NSBrowser *)browser isLeafItem:(nullable id)item API_AVAILABLE(macos(10.6));
+- (BOOL)browser:(NSBrowser *)browser isLeafItem:(nullable id)item NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 /* Return the object value passed to the cell displaying item.
  */
-- (nullable id)browser:(NSBrowser *)browser objectValueForItem:(nullable id)item API_AVAILABLE(macos(10.6));
+- (nullable id)browser:(NSBrowser *)browser objectValueForItem:(nullable id)item NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 /* Optional - Variable Row Heights
     Implement this method to support varying row heights per column.  The height returned by this method should not include intercell spacing and must be greater than zero.  NSBrowser may cache the values this method returns.  So if you would like to change a row's height make sure to invalidate the row height by calling -noteHeightOfRowsWithIndexesChanged:inColumn:.
 */
-- (CGFloat)browser:(NSBrowser *)browser heightOfRow:(NSInteger)row inColumn:(NSInteger)columnIndex API_AVAILABLE(macos(10.6));
+- (CGFloat)browser:(NSBrowser *)browser heightOfRow:(NSInteger)row inColumn:(NSInteger)columnIndex NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 #pragma mark -
 
 /* Optional - Alternate root item. 
  By default, NSBrowser uses 'nil' to identify the root item. It can optionally use a different root item provided by this delegate method. To reload the rootItem that was previously set, call -loadColumnZero, and NSBrowser will call -rootItemForBrowser: again.
  */
-- (nullable id)rootItemForBrowser:(NSBrowser *)browser API_AVAILABLE(macos(10.6));
+- (nullable id)rootItemForBrowser:(NSBrowser *)browser NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 /* Optional - editing support.
  Implement this method to support editing of browser items. The browser will pass back the object value from the cell displaying item.
  */
-- (void)browser:(NSBrowser *)browser setObjectValue:(nullable id)object forItem:(nullable id)item API_AVAILABLE(macos(10.6));
+- (void)browser:(NSBrowser *)browser setObjectValue:(nullable id)object forItem:(nullable id)item NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 /* Optional - editing support.
  Implement this method to control whether the browser may start an editing session for item.
  */
-- (BOOL)browser:(NSBrowser *)browser shouldEditItem:(nullable id)item API_AVAILABLE(macos(10.6));
+- (BOOL)browser:(NSBrowser *)browser shouldEditItem:(nullable id)item NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 #pragma mark -
 
 /* Optional - display support.
  Called by the browser before displaying a cell at the given location.
  */
-- (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell atRow:(NSInteger)row column:(NSInteger)column;
+- (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell atRow:(NSInteger)row column:(NSInteger)column NS_SWIFT_UI_ACTOR;
 
-- (nullable NSString *)browser:(NSBrowser *)sender titleOfColumn:(NSInteger)column;
+- (nullable NSString *)browser:(NSBrowser *)sender titleOfColumn:(NSInteger)column NS_SWIFT_UI_ACTOR;
 
 /* Called by the browser when selecting cells by title, either from -setPath:, or when recomputing the selection after -reloadColumn:. Return NO if a matching cell could not be found.
  */
-- (BOOL)browser:(NSBrowser *)sender selectCellWithString:(NSString *)title inColumn:(NSInteger)column;
+- (BOOL)browser:(NSBrowser *)sender selectCellWithString:(NSString *)title inColumn:(NSInteger)column NS_SWIFT_UI_ACTOR;
 
 /* Called by the browser when selecting a cell using -selectRow:inColumn:. Return NO if a matching cell could not be found.
  */
-- (BOOL)browser:(NSBrowser *)sender selectRow:(NSInteger)row inColumn:(NSInteger)column;
+- (BOOL)browser:(NSBrowser *)sender selectRow:(NSInteger)row inColumn:(NSInteger)column NS_SWIFT_UI_ACTOR;
 
 /* Called by the browser from -validateVisibleColumns to determine whether the currently-displayed columns are valid. Returning NO will prompt the browser to call -reloadColumn:.
  */
-- (BOOL)browser:(NSBrowser *)sender isColumnValid:(NSInteger)column;
+- (BOOL)browser:(NSBrowser *)sender isColumnValid:(NSInteger)column NS_SWIFT_UI_ACTOR;
 
-- (void)browserWillScroll:(NSBrowser *)sender;
-- (void)browserDidScroll:(NSBrowser *)sender;
+- (void)browserWillScroll:(NSBrowser *)sender NS_SWIFT_UI_ACTOR;
+- (void)browserDidScroll:(NSBrowser *)sender NS_SWIFT_UI_ACTOR;
 
 /*
  * Delegate methods used by resizable column browsers.
@@ -357,22 +357,22 @@ APPKIT_EXTERN NSNotificationName NSBrowserColumnConfigurationDidChangeNotificati
 /* Optional for browsers with resize type NSBrowserNoColumnResizing, and NSBrowserUserColumnResizing.
  This method is used for both constraining column resize, and determining a columns initial size.  If 'forUserResize' is NO, this method should return the initial width for a newly added column.  If 'forUserResize' is YES, this method can be used to constrain resizing on a per-column basis.  (Currently per-column constraining is only implemented for single column resize).
  */
-- (CGFloat)browser:(NSBrowser *)browser shouldSizeColumn:(NSInteger)columnIndex forUserResize:(BOOL)forUserResize toWidth:(CGFloat)suggestedWidth;
+- (CGFloat)browser:(NSBrowser *)browser shouldSizeColumn:(NSInteger)columnIndex forUserResize:(BOOL)forUserResize toWidth:(CGFloat)suggestedWidth NS_SWIFT_UI_ACTOR;
 
 /* Optional for browsers with resize type NSBrowserUserColumnResizing only.
  This method returns the "ideal" width for a column.  This method is used when performing a "right-size-each" or "right-size-one" operation.  If columnIndex is -1, the result is used for a "right-size-all-simultaneous" operation.  In this case, you should return a best uniform right size for all column (every column will be set to this size).  You can opt out on a per column basis by returning -1 for that column. It is assumed that the implementation may be expensive, so it will be called only when necessary.  (See documentation for definitions of right-size one/each/all). 
  */
-- (CGFloat)browser:(NSBrowser *)browser sizeToFitWidthOfColumn:(NSInteger)columnIndex;
+- (CGFloat)browser:(NSBrowser *)browser sizeToFitWidthOfColumn:(NSInteger)columnIndex NS_SWIFT_UI_ACTOR;
 
 /* Optional and used for browsers with resize type NSBrowserUserColumnResizing only.
  This method is intended to be used by clients wishing to implement their own column width persistence.  It is called when the width of any browser columns has changed.  User column resizing will cause a single notification to be posted when the user is finished resizing.  (See NSBrowserColumnConfigurationDidChangeNotification for more information.)  
  */
-- (void)browserColumnConfigurationDidChange:(NSNotification *)notification;
+- (void)browserColumnConfigurationDidChange:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
 
 /* Optional - Expansion ToolTip support.
     Implement this method and return NO to prevent an expansion tooltip from appearing for a particular cell at 'row' in 'column'. See NSCell.h for more information on expansion tool tips. 
  */
-- (BOOL)browser:(NSBrowser *)browser shouldShowCellExpansionForRow:(NSInteger)row column:(NSInteger)column API_AVAILABLE(macos(10.5));
+- (BOOL)browser:(NSBrowser *)browser shouldShowCellExpansionForRow:(NSInteger)row column:(NSInteger)column NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.5));
 
 
 #pragma mark -
@@ -382,7 +382,7 @@ APPKIT_EXTERN NSNotificationName NSBrowserColumnConfigurationDidChangeNotificati
 
 /* This method is called after it has been determined that a drag should begin, but before the drag has been started.  To refuse the drag, return NO. To start a drag, declared the pasteboard types that you support with [pasteboard declareTypes:owner:], place your data on the pasteboard, and return YES from the method. The drag image and other drag related information will be set up and provided by the view once this call returns with YES. You need to implement this method for your browser to be a drag source. 
  */
-- (BOOL)browser:(NSBrowser *)browser writeRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column toPasteboard:(NSPasteboard *)pasteboard API_AVAILABLE(macos(10.5));
+- (BOOL)browser:(NSBrowser *)browser writeRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column toPasteboard:(NSPasteboard *)pasteboard NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.5));
 
 /* The delegate can support file promise drags by adding NSFilesPromisePboardType to the pasteboard in browser:writeRowsWithIndexes:inColumn:toPasteboard:. NSBrowser implements -namesOfPromisedFilesDroppedAtDestination: to return the results of this data source method.  This method should returns an array of filenames for the created files (filenames only, not full paths).  The URL represents the drop location.  For more information on file promise dragging, see documentation on the NSDraggingSource protocol and -namesOfPromisedFilesDroppedAtDestination:. You do not need to implement this method for your browser to be a drag source.
  */
@@ -390,11 +390,11 @@ APPKIT_EXTERN NSNotificationName NSBrowserColumnConfigurationDidChangeNotificati
 
 /* The delegate can control if some particular rows can be dragged or not for a particular event. You do not need to implement this method for your browser to be a drag source. 
  */
-- (BOOL)browser:(NSBrowser *)browser canDragRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column withEvent:(NSEvent *)event API_AVAILABLE(macos(10.5));
+- (BOOL)browser:(NSBrowser *)browser canDragRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column withEvent:(NSEvent *)event NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.5));
 
 /* Allows the delegate to compute a dragging image for the particular cells being dragged. 'rowIndexes' are the indexes of the cells being dragged in the matrix in 'column'. 'event' is a reference to the mouse down event that began the drag. 'dragImageOffset' is an in/out parameter. This method will be called with dragImageOffset set to NSZeroPoint, but it can be modified to re-position the returned image.  A dragImageOffset of NSZeroPoint will cause the image to be centered under the mouse. You can safely call [browser dragImageForRowsWithIndexes:inColumn:withEvent:offset:] from inside this method. You do not need to implement this method for your browser to be a drag source. You can safely call the corresponding NSBrowser method.
  */
-- (nullable NSImage *)browser:(NSBrowser *)browser draggingImageForRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column withEvent:(NSEvent *)event offset:(NSPointPointer)dragImageOffset API_AVAILABLE(macos(10.5));
+- (nullable NSImage *)browser:(NSBrowser *)browser draggingImageForRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column withEvent:(NSEvent *)event offset:(NSPointPointer)dragImageOffset NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.5));
 
 #pragma mark ** Dragging Destination Methods **
 
@@ -404,11 +404,11 @@ APPKIT_EXTERN NSNotificationName NSBrowserColumnConfigurationDidChangeNotificati
 
     Note: to receive drag messages, you must first call [NSBrowser registerForDraggedTypes:] for the drag types you want to support (typically this is done in awakeFromNib). You must implement this method for your browser to be a drag destination. 
 */
-- (NSDragOperation)browser:(NSBrowser *)browser validateDrop:(id <NSDraggingInfo>)info proposedRow:(NSInteger *)row column:(NSInteger *)column  dropOperation:(NSBrowserDropOperation *)dropOperation API_AVAILABLE(macos(10.5));
+- (NSDragOperation)browser:(NSBrowser *)browser validateDrop:(id <NSDraggingInfo>)info proposedRow:(NSInteger *)row column:(NSInteger *)column  dropOperation:(NSBrowserDropOperation *)dropOperation NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.5));
 
 /* This method is called when the mouse is released over a browser that previously decided to allow a drop via the above validateDrop method.  The delegate should incorporate the data from the dragging pasteboard at this time. You must implement this method for your browser to be a drag destination.
 */
-- (BOOL)browser:(NSBrowser *)browser acceptDrop:(id <NSDraggingInfo>)info atRow:(NSInteger)row column:(NSInteger)column dropOperation:(NSBrowserDropOperation)dropOperation API_AVAILABLE(macos(10.5));
+- (BOOL)browser:(NSBrowser *)browser acceptDrop:(id <NSDraggingInfo>)info atRow:(NSInteger)row column:(NSInteger)column dropOperation:(NSBrowserDropOperation)dropOperation NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.5));
 
 #pragma mark -
 
@@ -417,37 +417,37 @@ APPKIT_EXTERN NSNotificationName NSBrowserColumnConfigurationDidChangeNotificati
 /* Optional - Type select support
     Implement this method if you want to control the string that is used for type selection. You may want to change what is searched for based on what is displayed, or simply return an empty string for that row and/or column to not be searched. You can also return 'nil' if the cell does not contain any text. By default, all cells with text in them are searched. The default value when this delegate method is not implemented is the stringValue for the cell at that location.
  */
-- (nullable NSString *)browser:(NSBrowser *)browser typeSelectStringForRow:(NSInteger)row inColumn:(NSInteger)column API_AVAILABLE(macos(10.5));
+- (nullable NSString *)browser:(NSBrowser *)browser typeSelectStringForRow:(NSInteger)row inColumn:(NSInteger)column NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.5));
 
 /* Optional - Type select support
     Implement this method if you would like to prevent a type select from happening based on the current event and current search string. Generally, this will be called from keyDown: and the event will be a key event. The search string will be nil if no type select has began. 
  */
-- (BOOL)browser:(NSBrowser *)browser shouldTypeSelectForEvent:(NSEvent *)event withCurrentSearchString:(nullable NSString *)searchString API_AVAILABLE(macos(10.5));
+- (BOOL)browser:(NSBrowser *)browser shouldTypeSelectForEvent:(NSEvent *)event withCurrentSearchString:(nullable NSString *)searchString NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.5));
 
 /* Optional - Type select support
     Implement this method if you want to control how type selection works. Return the first row that matches searchString from within the range of startRow to endRow. It is possible for endRow to be less than startRow if the search will wrap. Return -1 when there is no match. Include startRow as a possible match, but do not include endRow. It is not necessary to implement this method in order to support type select.
  */
-- (NSInteger)browser:(NSBrowser *)browser nextTypeSelectMatchFromRow:(NSInteger)startRow toRow:(NSInteger)endRow inColumn:(NSInteger)column forString:(nullable NSString *)searchString API_AVAILABLE(macos(10.5));
+- (NSInteger)browser:(NSBrowser *)browser nextTypeSelectMatchFromRow:(NSInteger)startRow toRow:(NSInteger)endRow inColumn:(NSInteger)column forString:(nullable NSString *)searchString NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.5));
 
 #pragma mark -
 
 /* Optional - Preview column support
     Implement this method to provide a preview column for leaf items. Return nil to suppress the preview column. The controller's representedObject will be set to the browser's selected leaf item. This method is only called if the delegate implements the item data source methods.
  */
-- (nullable NSViewController *)browser:(NSBrowser *)browser previewViewControllerForLeafItem:(id)item API_AVAILABLE(macos(10.6));
+- (nullable NSViewController *)browser:(NSBrowser *)browser previewViewControllerForLeafItem:(id)item NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 /* Optional - Column header support
     Implement this method to provide a header view for columns. Return nil to omit the header view. The controller's representedObject will be set to the column's item. This method is only called if the delegate implements the item data source methods.
  */
-- (nullable NSViewController *)browser:(NSBrowser *)browser headerViewControllerForItem:(nullable id)item API_AVAILABLE(macos(10.6));
+- (nullable NSViewController *)browser:(NSBrowser *)browser headerViewControllerForItem:(nullable id)item NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 /* Optional - Notification when the lastColumn changes.
  */
-- (void)browser:(NSBrowser *)browser didChangeLastColumn:(NSInteger)oldLastColumn toColumn:(NSInteger)column;
+- (void)browser:(NSBrowser *)browser didChangeLastColumn:(NSInteger)oldLastColumn toColumn:(NSInteger)column NS_SWIFT_UI_ACTOR;
 
 /* Optional - Return a set of new indexes to select when the user changes the selection with the keyboard or mouse. This method may be called multiple times with one new index added to the existing selection to find out if a particular index can be selected when the user is extending the selection with the keyboard or mouse. Note that 'proposedSelectionIndexes' will contain the entire newly suggested selection, and you can return the exsiting selection to avoid changing the selection. This method only works for item-based NSBrowsers.
  */
-- (NSIndexSet *)browser:(NSBrowser *)browser selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes inColumn:(NSInteger)column API_AVAILABLE(macos(10.6));
+- (NSIndexSet *)browser:(NSBrowser *)browser selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes inColumn:(NSInteger)column NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.6));
 
 @end
 

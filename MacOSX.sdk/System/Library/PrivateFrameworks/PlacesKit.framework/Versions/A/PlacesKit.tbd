@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CE663301-601E-32E4-8684-2D8BA150A09C
+    value:           F2118E6C-22DD-35F1-A6DE-60B02D8E9655
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FBF1BFC6-0624-3641-BAC2-BDA913BEDFB4
+    value:           8C37FC6A-BE48-3ACD-93C1-D464E9811BC7
 install-name:    '/System/Library/PrivateFrameworks/PlacesKit.framework/Versions/A/PlacesKit'
-current-version: 441.0.120
+current-version: 511.0.170
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _PKPlacesCoarseLocationMediaInfoKey, _PXMapStoreDefaultCapacityPerNode, 
                        _PXMapStoreMinimumRectWidth, _PXMapStoreStoreItemsInLeafNodesOnly, 
                        _PXQuadTreeNodeCanBeSubdivided, _PXQuadTreeNodeExtendCapacity, 

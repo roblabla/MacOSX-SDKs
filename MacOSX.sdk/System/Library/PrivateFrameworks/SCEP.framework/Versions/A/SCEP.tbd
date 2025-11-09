@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           35C7082E-EE75-3851-9125-F71E8E82B5E6
+    value:           D0FDE185-E799-316A-A0F8-6269729F6357
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B1E1514-8047-3BFD-9F02-3DE4DE71DBA6
+    value:           04D5C129-C16F-3E33-B37C-E3E78A673827
 install-name:    '/System/Library/PrivateFrameworks/SCEP.framework/Versions/A/SCEP'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AddCertToCRL, _BuildChallengePassword, _CFDataToCRL, _CFDataToCSR, 
                        _CRLToCFData, _ConvertIdentityToCertAndKey, _CopyCFDataToBIO, 
                        _CopyChallengeData, _CopyChallengePassword, _CopySecCertRefToX509, 

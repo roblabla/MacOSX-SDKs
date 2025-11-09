@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8288BFBB-7225-3583-89E2-9C92EC89BEC6
+    value:           B511F750-69C1-321B-BFEA-B7E42915198A
   - target:          x86_64-maccatalyst
-    value:           8288BFBB-7225-3583-89E2-9C92EC89BEC6
+    value:           B511F750-69C1-321B-BFEA-B7E42915198A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D2EBEE85-A0FC-39EE-8E8D-5723452B6797
+    value:           3FD54B3D-843B-315D-9799-2ED556F3B0AE
   - target:          arm64e-maccatalyst
-    value:           D2EBEE85-A0FC-39EE-8E8D-5723452B6797
+    value:           3FD54B3D-843B-315D-9799-2ED556F3B0AE
 install-name:    '/usr/lib/libresolv.9.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ ___res_9_p_type_syms, __res_9_h_errno_set, __res_9_ns_flagdata, 
                        _dns_all_server_addrs, _dns_async_cancel, _dns_async_handle_reply, 
                        _dns_async_receive, _dns_async_send, _dns_async_start, _dns_class_number, 

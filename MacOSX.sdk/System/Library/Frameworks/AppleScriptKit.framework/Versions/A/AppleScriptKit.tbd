@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F35FCD8E-4171-3E3B-9208-B1587A71EBAB
+    value:           76372FE0-8F23-3C43-98B0-583A171DAE8E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           33D428FE-5849-3C04-86FB-EA71C4517714
+    value:           AB5120DD-6BEA-341F-B015-64E02BEE2915
 install-name:    '/System/Library/Frameworks/AppleScriptKit.framework/Versions/A/AppleScriptKit'
 current-version: 88
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ASKErrorDomain, _ASKInitialize, _ASKMapTableWithWeakOrRetainedToStrongObjects, 
                        _ASKMethodSwizzle, _NSRightMouseDownNotification, _NSRightMouseDraggedNotification, 
                        _NSRightMouseUpNotification, _NSScrollWheelNotification, __ASKDocumentInitialize, 

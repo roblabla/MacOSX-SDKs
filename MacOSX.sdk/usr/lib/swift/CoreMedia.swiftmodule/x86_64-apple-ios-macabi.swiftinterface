@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target x86_64-apple-ios15.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMedia -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreMedia
-// swift-module-flags-ignorable: -user-module-version 2940.20.4.3
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target x86_64-apple-ios16.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMedia -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreMedia
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 3000.13.1.4.1
 import CoreAudio
 import CoreAudioTypes
 import CoreFoundation
@@ -13,6 +13,7 @@ import Dispatch
 import Foundation
 import Swift
 import _Concurrency
+import _StringProcessing
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public protocol _CMObjectiveCBridgeableWithRawValue : Swift.Hashable, Swift.RawRepresentable, Swift._ObjectiveCBridgeable {
 }
@@ -224,10 +225,18 @@ extension CoreMedia.CMTimebase {
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public func notificationBarrier() throws
 }
+@available(macOS, introduced: 10.8, deprecated: 12.0, renamed: "CMTimebaseSetAnchorTime(_:timebaseTime:immediateSourceTime:)")
+@available(iOS, introduced: 6.0, deprecated: 15.0, renamed: "CMTimebaseSetAnchorTime(_:timebaseTime:immediateSourceTime:)")
+@available(tvOS, introduced: 9.0, deprecated: 15.0, renamed: "CMTimebaseSetAnchorTime(_:timebaseTime:immediateSourceTime:)")
+@available(watchOS, introduced: 6.0, deprecated: 8.0, renamed: "CMTimebaseSetAnchorTime(_:timebaseTime:immediateSourceTime:)")
 @available(*, deprecated, renamed: "CMTimebaseSetAnchorTime(_:timebaseTime:immediateSourceTime:)")
 @_alwaysEmitIntoClient public func CMTimebaseSetAnchorTime(_ timebase: CoreMedia.CMTimebase, timebaseTime: CoreMedia.CMTime, immediateMasterTime: CoreMedia.CMTime) {
   CMTimebaseSetAnchorTime( timebase, timebaseTime:timebaseTime, immediateSourceTime:immediateMasterTime)
 }
+@available(macOS, introduced: 10.8, deprecated: 12.0, renamed: "CMTimebaseSetRateAndAnchorTime(_:rate:anchorTime:immediateSourceTime:)")
+@available(iOS, introduced: 6.0, deprecated: 15.0, renamed: "CMTimebaseSetRateAndAnchorTime(_:rate:anchorTime:immediateSourceTime:)")
+@available(tvOS, introduced: 9.0, deprecated: 15.0, renamed: "CMTimebaseSetRateAndAnchorTime(_:rate:anchorTime:immediateSourceTime:)")
+@available(watchOS, introduced: 6.0, deprecated: 8.0, renamed: "CMTimebaseSetRateAndAnchorTime(_:rate:anchorTime:immediateSourceTime:)")
 @available(*, deprecated, renamed: "CMTimebaseSetRateAndAnchorTime(_:rate:anchorTime:immediateSourceTime:)")
 @_alwaysEmitIntoClient public func CMTimebaseSetRateAndAnchorTime(_ timebase: CoreMedia.CMTimebase, rate: Swift.Double, anchorTime: CoreMedia.CMTime, immediateMasterTime: CoreMedia.CMTime) {
   CMTimebaseSetRateAndAnchorTime( timebase, rate: rate, anchorTime:anchorTime, immediateSourceTime:immediateMasterTime)
@@ -450,6 +459,14 @@ extension CoreMedia.CMTimeRange : Swift.Equatable {
   public static func == (range1: CoreMedia.CMTimeRange, range2: CoreMedia.CMTimeRange) -> Swift.Bool
   @available(watchOS 6.0, *)
   public static func != (range1: CoreMedia.CMTimeRange, range2: CoreMedia.CMTimeRange) -> Swift.Bool
+}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+extension CoreMedia.CMTimeRange : Swift.Hashable {
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public protocol _CMSampleBufferInitTrampoline {
@@ -886,10 +903,10 @@ extension CoreMedia.CMBufferQueue {
   public func testTrigger(_ triggerToken: CoreMedia.CMBufferQueue.TriggerToken) -> Swift.Bool
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public struct Buffers : Swift.Sequence {
-    public typealias Element = CoreMedia.CMBuffer
+    public typealias Element = AnyObject
     public struct Iterator : Swift.IteratorProtocol {
       public mutating func next() -> CoreMedia.CMBuffer?
-      public typealias Element = AnyObject
+      public typealias Element = CoreMedia.CMBuffer
     }
     public func makeIterator() -> CoreMedia.CMBufferQueue.Buffers.Iterator
   }
@@ -1105,8 +1122,8 @@ extension CoreMedia.CMFormatDescription {
         public static let premultipliedAlpha: CoreMedia.CMFormatDescription.Extensions.Value.AlphaChannelMode
       }
       public static func alphaChannelMode(_ alphaChannelMode: CoreMedia.CMFormatDescription.Extensions.Value.AlphaChannelMode) -> CoreMedia.CMFormatDescription.Extensions.Value
-      public static func qtTextColor(red: CoreGraphics.CGFloat, green: CoreGraphics.CGFloat, blue: CoreGraphics.CGFloat, alpha: CoreGraphics.CGFloat) -> CoreMedia.CMFormatDescription.Extensions.Value
-      public static func mobile3GPPTextColor(red: CoreGraphics.CGFloat, green: CoreGraphics.CGFloat, blue: CoreGraphics.CGFloat, alpha: CoreGraphics.CGFloat) -> CoreMedia.CMFormatDescription.Extensions.Value
+      public static func qtTextColor(red: CoreFoundation.CGFloat, green: CoreFoundation.CGFloat, blue: CoreFoundation.CGFloat, alpha: CoreFoundation.CGFloat) -> CoreMedia.CMFormatDescription.Extensions.Value
+      public static func mobile3GPPTextColor(red: CoreFoundation.CGFloat, green: CoreFoundation.CGFloat, blue: CoreFoundation.CGFloat, alpha: CoreFoundation.CGFloat) -> CoreMedia.CMFormatDescription.Extensions.Value
       public static func fontTable(_ fontTable: [Swift.Int : Swift.String]) -> CoreMedia.CMFormatDescription.Extensions.Value
       public struct FontFace : Swift.OptionSet, CoreMedia._CMObjectiveCBridgeableWithRawValue {
         public typealias RawValue = Swift.UInt8
@@ -1291,7 +1308,7 @@ extension CoreMedia.CMFormatDescription {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-public protocol _CMFormatDescriptionFourCCConvertible : CoreMedia._CMObjectiveCBridgeableWithRawValue, Swift.CustomStringConvertible where Self.RawValue == Darwin.FourCharCode, Self._ObjectiveCType == Foundation.NSNumber {
+public protocol _CMFormatDescriptionFourCCConvertible : CoreMedia._CMObjectiveCBridgeableWithRawValue, Swift.CustomStringConvertible where Self.RawValue == Swift.UInt32, Self._ObjectiveCType == Foundation.NSNumber {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension CoreMedia._CMFormatDescriptionFourCCConvertible {
@@ -1550,9 +1567,9 @@ extension CoreMedia.CMFormatDescription {
     get
   }
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-  public func presentationDimensions(usePixelAspectRatio: Swift.Bool = true, useCleanAperture: Swift.Bool = true) -> CoreGraphics.CGSize
+  public func presentationDimensions(usePixelAspectRatio: Swift.Bool = true, useCleanAperture: Swift.Bool = true) -> CoreFoundation.CGSize
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-  public func cleanAperture(originIsAtTopLeft: Swift.Bool) -> CoreGraphics.CGRect
+  public func cleanAperture(originIsAtTopLeft: Swift.Bool) -> CoreFoundation.CGRect
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public static var extensionKeysCommonWithImageBuffers: [CoreMedia.CMFormatDescription.Extensions.Key] {
     get
@@ -1567,9 +1584,9 @@ extension CoreMedia.CMFormatDescription {
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public func justification() throws -> (horizontal: CoreMedia.CMFormatDescription.Extensions.Value.TextJustification, vertical: CoreMedia.CMFormatDescription.Extensions.Value.TextJustification)
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-  public func defaultTextBox(originIsAtTopLeft: Swift.Bool, heightOfTextTrack: CoreGraphics.CGFloat) throws -> CoreGraphics.CGRect
+  public func defaultTextBox(originIsAtTopLeft: Swift.Bool, heightOfTextTrack: CoreFoundation.CGFloat) throws -> CoreFoundation.CGRect
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-  public func defaultStyle() throws -> (localFontID: Swift.Int, bold: Swift.Bool, italic: Swift.Bool, underline: Swift.Bool, fontSize: CoreGraphics.CGFloat, colorComponents: [CoreGraphics.CGFloat])
+  public func defaultStyle() throws -> (localFontID: Swift.Int, bold: Swift.Bool, italic: Swift.Bool, underline: Swift.Bool, fontSize: CoreFoundation.CGFloat, colorComponents: [CoreFoundation.CGFloat])
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public func fontName(localFontID: Swift.Int) throws -> Swift.String
 }
@@ -1686,6 +1703,14 @@ extension CoreMedia.CMTime : Swift.Equatable, Swift.Comparable {
   public static func == (time1: CoreMedia.CMTime, time2: CoreMedia.CMTime) -> Swift.Bool
   @available(watchOS 6.0, *)
   public static func != (time1: CoreMedia.CMTime, time2: CoreMedia.CMTime) -> Swift.Bool
+}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+extension CoreMedia.CMTime : Swift.Hashable {
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public protocol CMBlockBufferProtocol {

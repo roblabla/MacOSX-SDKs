@@ -5,10 +5,10 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           87E674D0-57A4-34D6-A735-B04A9ADF3B99
+    value:           33C7CF5C-57FA-3522-BF8C-246C0F0149B0
 install-name:    '/usr/lib/libUSBCfwflasher.dylib'
 exports:
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ _USBCFlasherCreate, _USBCFlasherExecCmd, _USBCFlasherIsDone, 
                        _USBCFlasherSupported ]
     objc-classes:    [ IECSInterface, IOKitUtilities, flashUpdater, iecsUpdater, 

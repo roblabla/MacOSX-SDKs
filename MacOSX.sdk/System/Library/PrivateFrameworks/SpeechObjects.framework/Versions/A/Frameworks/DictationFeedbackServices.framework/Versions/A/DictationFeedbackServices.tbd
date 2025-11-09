@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A9F1CDBB-DEB7-3B4F-BC9C-27773A2E8148
+    value:           BC030563-0925-3686-BEF2-1E6384BBF951
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FCFF2B0D-CD63-3122-831F-EAE96351B060
+    value:           1BB2B3B5-CAE2-3E79-92D6-EF9F4F8EC194
 install-name:    '/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/Frameworks/DictationFeedbackServices.framework/Versions/A/DictationFeedbackServices'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DFSCreateDeserializedDFRButtonEventDictionary, _DFSCreateDeserializedRecognizedStringDictionary, 
                        _DFSCreateDeserializedRecognizerInformationDictionary, _DFSCreateSerializedDFRButtonEventDictionary, 
                        _DFSCreateSerializedHandleMissingLanguageParametersDictionary, 

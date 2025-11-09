@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2672E474-2965-3B3A-8AEB-6E110AC0CB13
+    value:           74C063FE-76E4-383E-98D7-3D6F4D4ECD9E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3650E4A9-E0A1-31F7-885E-0DC405CD64A4
+    value:           C1330369-232C-30B5-838D-0E85CEE9F4D9
 install-name:    '/System/Library/PrivateFrameworks/SecurityTokend.framework/Versions/A/SecurityTokend'
 current-version: 55113
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SecTokendMain ]
 ...

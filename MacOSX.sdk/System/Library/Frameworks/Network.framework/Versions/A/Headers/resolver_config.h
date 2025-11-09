@@ -1,6 +1,6 @@
 //
 //  resolver_config.h
-//  Network
+//  libnetwork
 //
 //  Copyright (c) 2020 Apple Inc. All rights reserved.
 //
@@ -9,7 +9,7 @@
 #define __NW_RESOLVER_CONFIG_H__
 
 #ifndef __NW_INDIRECT__
-#warning "Please include <Network/Network.h> instead of this file directly."
+#warning "Please include <Network/Network_Private.h> instead of this file directly."
 #endif // __NW_INDIRECT__
 
 #include <Network/nw_object.h>

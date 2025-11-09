@@ -4,24 +4,33 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           052D2BA5-7B30-3B4B-895D-D31197748136
+    value:           04DD9C6F-33A5-3EAE-85BE-DEA28E70E961
   - target:          x86_64-maccatalyst
-    value:           052D2BA5-7B30-3B4B-895D-D31197748136
+    value:           04DD9C6F-33A5-3EAE-85BE-DEA28E70E961
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9B197D0F-85B2-3563-92DC-E2CDF7CDC8D3
+    value:           9A8F6050-56BD-3AAC-8841-74FDB99A5604
   - target:          arm64e-maccatalyst
-    value:           9B197D0F-85B2-3563-92DC-E2CDF7CDC8D3
+    value:           9A8F6050-56BD-3AAC-8841-74FDB99A5604
 install-name:    '/System/Library/PrivateFrameworks/IOMobileFramebuffer.framework/Versions/A/IOMobileFramebuffer'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _IOMobileFrameBufferEnableDebugTracing, _IOMobileFrameBufferEnableVBLTraces, 
-                       _IOMobileFrameBufferGetDebugTraces, _IOMobileFrameBufferGetMirroringCapability, 
-                       _IOMobileFrameBufferPrintDebugTraces, _IOMobileFrameBufferSetLogLevel, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _IOMFBGainEncoderCreate, _IOMFBGainEncoderDestroy, _IOMFBGainEncoderEmitEmptyRows, 
+                       _IOMFBGainEncoderEmitRun, _IOMFBGainEncoderFinishEncoding, 
+                       _IOMFBGainEncoderStartRow, _IOMFBGainMapRelease, _IOMFBGainMapRetain, 
+                       _IOMFBgainencoder_count, _IOMFBgainencoder_emit_empty_rows, 
+                       _IOMFBgainencoder_emit_run, _IOMFBgainencoder_finish, _IOMFBgainencoder_free, 
+                       _IOMFBgainencoder_get_origin, _IOMFBgainencoder_get_size, 
+                       _IOMFBgainencoder_map, _IOMFBgainencoder_map_size, _IOMFBgainencoder_new, 
+                       _IOMFBgainencoder_row_1_coded, _IOMFBgainencoder_set_origin, 
+                       _IOMFBgainencoder_start_row, _IOMobileFrameBufferEnableDebugTracing, 
+                       _IOMobileFrameBufferEnableVBLTraces, _IOMobileFrameBufferGetDebugTraces, 
+                       _IOMobileFrameBufferGetMirroringCapability, _IOMobileFrameBufferPrintDebugTraces, 
+                       _IOMobileFrameBufferSetLogLevel, _IOMobileFrameBufferSwapSetContrastEnhancerStrength, 
                        _IOMobileFrameBufferSwapSetUserLuminanceAdjustment, _IOMobileFrameBufferprintDisplayRegs, 
                        _IOMobileFramebufferChangeFrameInfo, _IOMobileFramebufferCopyLayerDisplayedSurface, 
                        _IOMobileFramebufferCopyProperty, _IOMobileFramebufferCreateDisplayList, 
@@ -73,10 +82,12 @@ exports:
                        _IOMobileFramebufferSwapActiveRegion, _IOMobileFramebufferSwapBegin, 
                        _IOMobileFramebufferSwapCancel, _IOMobileFramebufferSwapCancelAll, 
                        _IOMobileFramebufferSwapDebugInfo, _IOMobileFramebufferSwapDirtyRegion, 
-                       _IOMobileFramebufferSwapEnd, _IOMobileFramebufferSwapSetBackgroundColor, 
+                       _IOMobileFramebufferSwapEnd, _IOMobileFramebufferSwapSetAmbientLux, 
+                       _IOMobileFramebufferSwapSetBackgroundColor, _IOMobileFramebufferSwapSetBlit, 
                        _IOMobileFramebufferSwapSetBrightness, _IOMobileFramebufferSwapSetBrightnessLimit, 
-                       _IOMobileFramebufferSwapSetColorMatrix, _IOMobileFramebufferSwapSetDisplayEdr, 
-                       _IOMobileFramebufferSwapSetDisplayEdrHeadroom, _IOMobileFramebufferSwapSetGammaTable, 
+                       _IOMobileFramebufferSwapSetColorMatrix, _IOMobileFramebufferSwapSetColorRemapMode, 
+                       _IOMobileFramebufferSwapSetDisplayEdr, _IOMobileFramebufferSwapSetDisplayEdrHeadroom, 
+                       _IOMobileFramebufferSwapSetGainMap, _IOMobileFramebufferSwapSetGammaTable, 
                        _IOMobileFramebufferSwapSetICCCurve, _IOMobileFramebufferSwapSetICCMatrix, 
                        _IOMobileFramebufferSwapSetLayer, _IOMobileFramebufferSwapSetParams, 
                        _IOMobileFramebufferSwapSetTimestamp, _IOMobileFramebufferSwapSetTimestamps, 

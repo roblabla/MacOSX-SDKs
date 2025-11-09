@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           25D72ACE-2185-3D61-BDD5-5FA3CCF0F58E
+    value:           6F9370D0-8DCE-3A70-8418-03172E2FDF95
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F2BCC5BA-967D-3C06-8BAF-B2C93EB384DD
+    value:           EC85FB16-F3DF-38C9-B064-BC5DBC98BD6D
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/A/Libraries/libLLVMContainer.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -259,7 +259,7 @@ exports:
                        __ZTSNSt3__120__vector_base_commonILb1EEE, __ZTSNSt3__121__basic_string_commonILb1EEE, 
                        __ZTSNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
                        __ZTSNSt3__16vectorIPKN4llvm8PassInfoENS_9allocatorIS4_EEEE ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ARMCompilationCallback, _ARMCompilationCallbackC, _ConvertUTF16toUTF32, 
                        _ConvertUTF16toUTF8, _ConvertUTF32toUTF16, _ConvertUTF32toUTF8, 
                        _ConvertUTF8toUTF16, _ConvertUTF8toUTF32, _ConvertUTF8toUTF32Partial, 

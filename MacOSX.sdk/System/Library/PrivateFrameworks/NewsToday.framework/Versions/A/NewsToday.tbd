@@ -4,35 +4,35 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A0E04E67-53CD-302A-A26C-567379F8B7C1
+    value:           3808970A-3FD0-3DF6-9DD4-ADFDABFC8298
   - target:          x86_64-maccatalyst
-    value:           A0E04E67-53CD-302A-A26C-567379F8B7C1
+    value:           3808970A-3FD0-3DF6-9DD4-ADFDABFC8298
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3B704BE2-9264-3DF5-A496-443BB9D7C723
+    value:           2A93D046-6227-3372-8E96-565B3F35274F
   - target:          arm64e-maccatalyst
-    value:           3B704BE2-9264-3DF5-A496-443BB9D7C723
+    value:           2A93D046-6227-3372-8E96-565B3F35274F
 install-name:    '/System/Library/PrivateFrameworks/NewsToday.framework/Versions/A/NewsToday'
-current-version: 3032.1.2
+current-version: 3232.1
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Health, HealthArticles, HealthArticlesPlugin, HealthArticlesPluginTests, 
-                       Home, HomeArticles, NanoNews, NewsEngagement, NewsEngagementTests, 
-                       NewsInternalSettings, NewsPersonalization, NewsServices, NewsTag, 
-                       NewsToday, NewsToday2, NewsTodayIntents, NewsTodayTests, NewsTodayUI, 
-                       nanonewscd, nanonewsgd, newsd ]
+                       Home, HomeArticles, NanoNews, NanoNewsHeadlines, NewsEngagement, 
+                       NewsEngagementTests, NewsInternalSettings, NewsPersonalization, 
+                       NewsServices, NewsTag, NewsToday, NewsToday2, NewsTodayIntents, 
+                       NewsTodayTests, NewsTodayUI, nanonewscd, nanonewsgd, newsd ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FCConsumedArticleFilterMethodForReadArticlesFilterMethod, 
                        _FCConsumedArticleFilterMethodForSeenArticlesFilterMethod, 
                        _NNCreateHeadlineSyncableHeadline, _NNHeadlineSyncableResultFromHeadline, 
                        _NNHeadlineSyncableResultFromResult, _NNHeadlineSyncableSectionFromSection, 
-                       _NNSetupCompanionSyncLog, _NTArticleIDsRequestWithArticles, 
+                       _NNNanoSoloLog, _NNSetupCompanionSyncLog, _NTArticleIDsRequestWithArticles, 
                        _NTAssetFileURL, _NTAssetFileURLWithData, _NTAssetFileURLWithFile, 
                        _NTDefaultModuleIdentifier, _NTDeleteOnDiskAssets, _NTDesiredHeadlineFieldAssetOptionsWithAssetSizes, 
                        _NTDesiredHeadlineFieldOptionsWithAssetOptions, _NTErrorDomain, 
@@ -53,21 +53,22 @@ exports:
                        NTFeedTransformationItemFeedTransformation, NTFeedTransformationLimit, 
                        NTFeedTransformationWebEmbedItem, NTForYouSectionFetchDescriptor, 
                        NTHeadline, NTHeadlinePersonalizationMetadata, NTItemAggregationResult, 
-                       NTItemsSectionFetchDescriptor, NTNewsModuleDescriptorsOperation, 
-                       NTNewsModuleDescriptorsOperationPrefetchedContent, NTNewsSourceAvailabilityEntry, 
-                       NTNewsTodayResultOperation, NTNewsTodayResultsContentFillAggregator, 
-                       NTNewsTodayResultsExplicitAllocationAggregator, NTNewsTodayResultsFetchDescriptor, 
-                       NTNewsTodayResultsSourceFetchHelper, NTNewsTodayResultsSourceFetchHelperSectionDescriptor, 
-                       NTNoContentModuleDescriptorsOperation, NTNoContentSourceAvailabilityEntry, 
-                       NTNoContentTodayResultOperation, NTNoContentTodayResultsFetchDescriptor, 
-                       NTParsecModuleDescriptorsOperation, NTPersonalizationFeatureCTRLookupOperation, 
-                       NTPersonalizationFeatureCTRLookupRequest, NTPersonalizedSectionFetchDescriptor, 
-                       NTPersonalizedSectionLimitTransformation, NTPersonalizedSectionSortTransformation, 
-                       NTQueueConfigSectionQueueDescriptor, NTSection, NTSectionConfigSectionDescriptor, 
-                       NTSectionFeedFilterTransformation, NTSectionPlaceholderDescriptor, 
-                       NTSectionPresencePersonalizationAbsoluteRequest, NTSectionPresencePersonalizationOperation, 
-                       NTSectionPresencePersonalizationRelativeRequest, NTSourceAvailabilityManager, 
-                       NTTagSectionFetchDescriptor, NTTodayContext, NTTodayHeadlineProtoitem, 
-                       NTTodayItemOperation, NTTodayModuleDescriptorsOperation, NTTodayResultOperation, 
+                       NTItemsSectionFetchDescriptor, NTLocalNewsPromotionTransformation, 
+                       NTNewsModuleDescriptorsOperation, NTNewsModuleDescriptorsOperationPrefetchedContent, 
+                       NTNewsSourceAvailabilityEntry, NTNewsTodayResultOperation, 
+                       NTNewsTodayResultsContentFillAggregator, NTNewsTodayResultsExplicitAllocationAggregator, 
+                       NTNewsTodayResultsFetchDescriptor, NTNewsTodayResultsSourceFetchHelper, 
+                       NTNewsTodayResultsSourceFetchHelperSectionDescriptor, NTNoContentModuleDescriptorsOperation, 
+                       NTNoContentSourceAvailabilityEntry, NTNoContentTodayResultOperation, 
+                       NTNoContentTodayResultsFetchDescriptor, NTParsecModuleDescriptorsOperation, 
+                       NTPersonalizationFeatureCTRLookupOperation, NTPersonalizationFeatureCTRLookupRequest, 
+                       NTPersonalizedSectionFetchDescriptor, NTPersonalizedSectionLimitTransformation, 
+                       NTPersonalizedSectionSortTransformation, NTQueueConfigSectionQueueDescriptor, 
+                       NTSection, NTSectionConfigSectionDescriptor, NTSectionFeedFilterTransformation, 
+                       NTSectionPlaceholderDescriptor, NTSectionPresencePersonalizationAbsoluteRequest, 
+                       NTSectionPresencePersonalizationOperation, NTSectionPresencePersonalizationRelativeRequest, 
+                       NTSourceAvailabilityManager, NTTagSectionFetchDescriptor, 
+                       NTTodayContext, NTTodayHeadlineProtoitem, NTTodayItemOperation, 
+                       NTTodayModuleDescriptorsOperation, NTTodayResultOperation, 
                        NTTodayResults, NTTodayResultsSource, NTTodayWebEmbedProtoitem ]
 ...

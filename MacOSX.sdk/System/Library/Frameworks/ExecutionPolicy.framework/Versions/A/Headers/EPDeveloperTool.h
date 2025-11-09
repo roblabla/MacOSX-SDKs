@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, EPDeveloperToolStatus) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15), macCatalyst(13.0))
 @interface EPDeveloperTool : NSObject
 
 /*!

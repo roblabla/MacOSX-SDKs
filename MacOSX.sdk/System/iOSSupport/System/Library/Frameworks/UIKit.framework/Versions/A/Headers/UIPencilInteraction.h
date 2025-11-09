@@ -9,7 +9,7 @@
 #import <UIKit/UIInteraction.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* Preferred actions available to the user in Settings.
  */
@@ -26,6 +26,9 @@ typedef NS_ENUM(NSInteger, UIPencilPreferredAction) {
     /* Show and hide the color palette */
     UIPencilPreferredActionShowColorPalette,
     
+    /* Show the ink attributes palette */
+    UIPencilPreferredActionShowInkAttributes API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos),
+
 } API_AVAILABLE(ios(12.1)) API_UNAVAILABLE(watchos, tvos);
 
 
@@ -58,7 +61,7 @@ API_AVAILABLE(ios(12.1)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIPencilInteraction.h>

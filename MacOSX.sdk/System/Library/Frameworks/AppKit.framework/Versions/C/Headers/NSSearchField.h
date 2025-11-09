@@ -18,8 +18,8 @@ typedef NSString * NSSearchFieldRecentsAutosaveName NS_SWIFT_BRIDGED_TYPEDEF;
 
 @protocol NSSearchFieldDelegate <NSTextFieldDelegate>
 @optional
-- (void)searchFieldDidStartSearching:(NSSearchField *)sender API_AVAILABLE(macos(10.11));
-- (void)searchFieldDidEndSearching:(NSSearchField *)sender API_AVAILABLE(macos(10.11));
+- (void)searchFieldDidStartSearching:(NSSearchField *)sender NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.11));
+- (void)searchFieldDidEndSearching:(NSSearchField *)sender NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.11));
 @end
 
 @interface NSSearchField : NSTextField

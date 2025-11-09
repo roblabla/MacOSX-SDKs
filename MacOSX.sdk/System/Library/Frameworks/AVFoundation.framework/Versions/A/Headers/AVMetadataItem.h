@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2017 Apple Inc. All rights reserved.
+	Copyright 2010-2022 Apple Inc. All rights reserved.
 
 */
 
@@ -20,23 +20,19 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class AVMetadataItemFilter;
+@class AVMutableMetadataItem;
 
 /*!
-    @class			AVMetadataItem
-
-    @abstract		AVMetadataItem represents an item of metadata associated with an audiovisual asset or with
-    				one of its tracks.
-    
-	@discussion		AVMetadataItems have keys that accord with the specification of the container format from
-					which they're drawn. Full details of the metadata formats, metadata keys, and metadata keyspaces
-					supported by AVFoundation are available among the defines in AVMetadataFormat.h.
+ @class			AVMetadataItem
+ @abstract		AVMetadataItem represents an item of metadata associated with an audiovisual asset or with one of its tracks.
+ @discussion		'
+	AVMetadataItems have keys that accord with the specification of the container format from which they're drawn. Full details of the metadata formats, metadata keys, and metadata keyspaces supported by AVFoundation are available among the defines in AVMetadataFormat.h.
 	
-					Note that arrays of AVMetadataItems vended by AVAsset and other classes are "lazy", similar
-					to array-based keys that support key-value observing, meaning that you can obtain
-					objects from those arrays without incurring overhead for items you don't ultimately inspect.
-					
-					You can filter arrays of AVMetadataItems by locale or by key and keySpace via the category
-					AVMetadataItemArrayFiltering defined below.
+	Note that arrays of AVMetadataItems vended by AVAsset and other classes are "lazy", similar to array-based keys that support key-value observing, meaning that you can obtain objects from those arrays without incurring overhead for items you don't ultimately inspect.
+ 
+	AVMetadataItem conforms to NSMutableCopying, but for some "lazy" instances of AVMetadataItem, creating a mutable copy can cause properties to load synchronously.  This can cause the calling thread to block while synchronous I/O is performed.  To avoid the possiblity of blocking, which should be avoided on the main thread or when running on one of Swift's concurrency threads, ensure that the `value` and `extraAttributes` properties are loaded prior to making a mutable copy.  This can be done using the methods of AVAsynchronousKeyValueLoading, either to synchronously check whether loading has already occurred or to asynchronously load the property values.
+
+	You can filter arrays of AVMetadataItems by locale or by key and keySpace via the category AVMetadataItemArrayFiltering defined below.
 */
 
 @class AVMetadataItemInternal;
@@ -66,10 +62,10 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @property (nonatomic, readonly, copy, nullable) NSString *dataType API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* provides the value of the metadata item */
-@property (nonatomic, readonly, copy, nullable) id<NSObject, NSCopying> value;
+@property (nonatomic, readonly, copy, nullable) id<NSObject, NSCopying> value AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.value) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* provides a dictionary of the additional attributes */
-@property (nonatomic, readonly, copy, nullable) NSDictionary<AVMetadataExtraAttributeKey, id> *extraAttributes;
+@property (nonatomic, readonly, copy, nullable) NSDictionary<AVMetadataExtraAttributeKey, id> *extraAttributes AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.extraAttributes) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 @end
 
@@ -85,16 +81,16 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMetadataItem (AVMetadataItemTypeCoercion)
 
 /* provides the value of the metadata item as a string; will be nil if the value cannot be represented as a string */
-@property (nonatomic, readonly, nullable) NSString *stringValue;
+@property (nonatomic, readonly, nullable) NSString *stringValue AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.stringValue) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* provides the value of the metadata item as an NSNumber. If the metadata item's value can't be coerced to a number, @"numberValue" will be nil. */
-@property (nonatomic, readonly, nullable) NSNumber *numberValue;
+@property (nonatomic, readonly, nullable) NSNumber *numberValue AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.numberValue) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* provides the value of the metadata item as an NSDate. If the metadata item's value can't be coerced to a date, @"dateValue" will be nil. */
-@property (nonatomic, readonly, nullable) NSDate *dateValue;
+@property (nonatomic, readonly, nullable) NSDate *dateValue AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.dateValue) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 /* provides the raw bytes of the value of the metadata item */
-@property (nonatomic, readonly, nullable) NSData *dataValue;
+@property (nonatomic, readonly, nullable) NSData *dataValue AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.dataValue) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 
 @end
 
@@ -103,9 +99,19 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 
 /* The following two methods of the AVAsynchronousKeyValueLoading protocol are re-declared here so that they can be annotated with availability information. See AVAsynchronousKeyValueLoading.h for documentation. */
 
-- (AVKeyValueStatus)statusOfValueForKey:(NSString *)key error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
+- (AVKeyValueStatus)statusOfValueForKey:(NSString *)key error:(NSError * _Nullable * _Nullable)outError
+#if __swift__
+API_DEPRECATED("Use status(of:) instead", macos(10.7, 13.0), ios(4.2, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
+#endif
 
-- (void)loadValuesAsynchronouslyForKeys:(NSArray<NSString *> *)keys completionHandler:(nullable void (^)(void))handler API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
+- (void)loadValuesAsynchronouslyForKeys:(NSArray<NSString *> *)keys completionHandler:(nullable void (^)(void))handler
+#if __swift__
+API_DEPRECATED("Use load(_:) instead.  For non-deprecated properties that do not have an AVAsyncProperty equivalent, continue to query these properties synchronously", macos(10.7, 13.0), ios(4.2, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+#else
+API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
+#endif
 
 @end
 
@@ -200,7 +206,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 	AVMutableMetadataItemInternal	*_mutablePriv;
 }
 
-/* Indicates the identifier of the metadata item. Publicly defined identifiers are declared in AVMetadataIdentifiers.h. */
+/* Indicates the identifier of the metadata item. Publicly defined identifiers are declared in AVMetadataIdentifiers.h.  This property throws an exception if identifier is not of the form \"<keySpace>/<key>\". */
 @property (nonatomic, readwrite, copy, nullable) AVMetadataIdentifier identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* indicates the IETF BCP 47 (RFC 4646) language identifier of the metadata item; may be nil if no language tag information is available */
@@ -332,6 +338,23 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0))
  @discussion		Instead, use metadataItemsFromArray:filteredByIdentifier:.
  */
 + (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems withKey:(nullable id)key keySpace:(nullable AVMetadataKeySpace)keySpace;
+
+@end
+
+/*!
+ @category AVMutableMetadataItem (SynchronousMetadataItemInterface)
+ @abstract Redeclarations of async-only AVMetadataItem interfaces to allow synchronous usage in the mutable subclass.
+ @discussion
+	See AVMetadataItem's interface for more information about these interfaces.
+ */
+@interface AVMutableMetadataItem (SynchronousMetadataItemInterface)
+
+#if __swift__
+@property (nonatomic, readonly, nullable) NSString *stringValue;
+@property (nonatomic, readonly, nullable) NSNumber *numberValue;
+@property (nonatomic, readonly, nullable) NSDate *dateValue;
+@property (nonatomic, readonly, nullable) NSData *dataValue;
+#endif // __swift__
 
 @end
 

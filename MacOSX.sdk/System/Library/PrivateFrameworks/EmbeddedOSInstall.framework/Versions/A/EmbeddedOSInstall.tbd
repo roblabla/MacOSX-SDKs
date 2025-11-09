@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           74F24B9F-37E0-395A-9E1A-41DABBF544B2
+    value:           6699861F-49D9-31A9-96FB-DBF529A99DBE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           180530AF-062C-316F-8D78-6C5D0965799D
+    value:           0DDA3825-17E7-311C-BD61-81B868ED2EF4
 install-name:    '/System/Library/PrivateFrameworks/EmbeddedOSInstall.framework/Versions/A/EmbeddedOSInstall'
 exports:
   - targets:         [ x86_64-macos ]
@@ -882,7 +882,7 @@ exports:
     objc-ivars:      [ AMSupportURLConnectionDelegate._data, AMSupportURLConnectionDelegate._error, 
                        AMSupportURLConnectionDelegate.options, AMSupportURLConnectionDelegate.requestComplete, 
                        AMSupportURLConnectionDelegate.response ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _EOSErrorDomain, _EOSLogObject, _EOSSerialLogObject, _EmbeddedOSInstallVersionNumber, 
                        _EmbeddedOSInstallVersionString, __reachability_callback, 
                        _standardErrorDateFormatter ]

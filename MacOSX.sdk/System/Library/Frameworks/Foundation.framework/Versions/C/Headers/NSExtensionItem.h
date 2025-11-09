@@ -7,7 +7,7 @@
 
 #if __OBJC2__
 // A NSExtensionItem is an immutable collection of values representing different aspects of an item for the extension to act upon.
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface NSExtensionItem : NSObject<NSCopying, NSSecureCoding>
@@ -31,5 +31,5 @@ FOUNDATION_EXTERN NSString * _Null_unspecified const NSExtensionItemAttributedTi
 FOUNDATION_EXTERN NSString * _Null_unspecified const NSExtensionItemAttributedContentTextKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 FOUNDATION_EXTERN NSString * _Null_unspecified const NSExtensionItemAttachmentsKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 #endif

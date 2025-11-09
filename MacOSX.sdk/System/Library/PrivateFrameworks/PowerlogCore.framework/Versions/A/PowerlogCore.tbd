@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           59F09291-74BC-3248-93A1-E43C10E7A05A
+    value:           722B2AF8-B4C6-3801-A920-A298B7990128
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           72B30C19-B273-3DF8-869F-0021297D17CB
+    value:           5ECCBD2B-738F-36AE-8A04-89609BA563C2
 install-name:    '/System/Library/PrivateFrameworks/PowerlogCore.framework/Versions/A/PowerlogCore'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _PLADClientAddValueForScalarKey, _PLADClientBatchKeys, _PLADClientPushValueForDistributionKey, 
                        _PLADClientSetValueForScalarKey, _PLADMonotonicTimeGetCurrent, 
                        _PLADPushTimeIntervalForDistributionKeySinceStartTime, _PLCFPreferencesAppSynchronize, 
@@ -18,10 +18,11 @@ exports:
                        _PLCFPreferencesCopyValue, _PLCFPreferencesSetAppValue, _PLCFPreferencesSetValue, 
                        _PLD_ManagedPreferencePath, _PLD_NSLogDebugKey, _PLDiagnosticLogSubmissionEnabled, 
                        _PLGetBoardID, _PLGetCPUFamily, _PLIsDeviceOfType, _PLLogCommon, 
-                       _PLLogSubmission, _PLLogThreadStats, _PLOSAMoveFileForSubmissions, 
-                       _PLOSAPreferencesGetValue, _PLOSAPreferencesSetValue, _PLOSAPreferencesSynchronize, 
-                       _PPTLogCommon, _Stage, _eventBlock, _kOSAProblemTypePowerLog, 
-                       _kPLAccountingOperatorAggregateNameQualificationEnergy, _kPLAccountingOperatorAggregateNameQualificationEnergyEnergy, 
+                       _PLLogSQLiteConnection, _PLLogSubmission, _PLLogThreadStats, 
+                       _PLOSAMoveFileForSubmissions, _PLOSAPreferencesGetValue, _PLOSAPreferencesSetValue, 
+                       _PLOSAPreferencesSynchronize, _PPTLogCommon, _Stage, _eventBlock, 
+                       _kOSAProblemTypePowerLog, _kPLAccountingOperatorAggregateNameQualificationEnergy, 
+                       _kPLAccountingOperatorAggregateNameQualificationEnergyEnergy, 
                        _kPLAccountingOperatorAggregateNameQualificationEnergyNodeID, 
                        _kPLAccountingOperatorAggregateNameQualificationEnergyQualificationID, 
                        _kPLAccountingOperatorAggregateNameQualificationEnergyRootNodeID, 
@@ -61,11 +62,12 @@ exports:
                        _kPLAccountingOperatorNameQualificationEventsQualificationID, 
                        _kPLAccountingOperatorNameQualificationEventsStartOffset, 
                        _kPLBB16, _kPLBB17, _kPLBB18, _kPLBB19, _kPLBB19B, _kPLBB20B, 
-                       _kPLBB20C, _kPLCacheSizeForBackupDatabaseConnection, _kPLCanSleepSemaphore, 
-                       _kPLDefaultCacheSize, _kPLDefaultCacheSpillSize, _kPLEDAggregateBucketRetainDuration, 
-                       _kPLEDAggregateBuckets, _kPLEDAggregateFunction, _kPLEDAggregateKeys, 
-                       _kPLEDAggregateWallClockBucket, _kPLEDAllowNilTimestamp, _kPLEDAppIdentifierKeys, 
-                       _kPLEDAppNameKey, _kPLEDArrayKeys, _kPLEDBufferEntries, _kPLEDBufferFlushInterval, 
+                       _kPLBB20C, _kPLBB21B, _kPLCacheSizeForBackupDatabaseConnection, 
+                       _kPLCanSleepSemaphore, _kPLDefaultCacheSize, _kPLDefaultCacheSpillSize, 
+                       _kPLEDAggregateBucketRetainDuration, _kPLEDAggregateBuckets, 
+                       _kPLEDAggregateFunction, _kPLEDAggregateKeys, _kPLEDAggregateWallClockBucket, 
+                       _kPLEDAllowNilTimestamp, _kPLEDAppIdentifierKeys, _kPLEDAppNameKey, 
+                       _kPLEDArrayKeys, _kPLEDBufferEntries, _kPLEDBufferFlushInterval, 
                        _kPLEDBufferSize, _kPLEDBundleIDKey, _kPLEDCacheEntries, _kPLEDCacheSQLPrepareStatements, 
                        _kPLEDCalculatedValueKey, _kPLEDConfigs, _kPLEDDynamicDefinition, 
                        _kPLEDDynamicKeys, _kPLEDFilterEntryLogging, _kPLEDFilterEntryLoggingToleranceChangeBy, 
@@ -146,7 +148,7 @@ exports:
                        _kPLTaskingStartNotification, _kPLThreadStatsDefaultPercent, 
                        _kPLThreadStatsDefaultThreshold, _kPLThreadStatsErrorDomain, 
                        _kPLTimerFiredNotification, _logHandle, _nanoSecondsFromMachTime, 
-                       _sqlLog ]
+                       _pptCoreStorageLog, _sqlLog ]
     objc-classes:    [ OperatorTask, PLAccountingOperator, PLActivity, PLActivityCriterion, 
                        PLActivityCriterionEntry, PLActivityCriterionTime, PLActivityScheduler, 
                        PLAgent, PLAggregateEntry, PLArchiveEntry, PLArchiveJob, PLArchiveManager, 
@@ -155,13 +157,13 @@ exports:
                        PLCoreStorage, PLDarkWakeState, PLDefaults, PLDisplayState, 
                        PLEnhancedTaskingAgent, PLEntry, PLEntryDefinition, PLEntryKey, 
                        PLEntryNotificationOperatorComposition, PLFileStats, PLHIDEventOperatorComposition, 
-                       PLIOHIDOperatorComposition, PLIOKitOperatorComposition, PLKQueue, 
-                       PLModelingUtilities, PLMonotonicTimer, PLMultiKeyEntry, PLNSNotificationOperatorComposition, 
-                       PLNetworkUtilities, PLOperator, PLPlatform, PLPluggedState, 
-                       PLPowerNode, PLProcessInfo, PLQLDuetInMemoryCache, PLSQLStatement, 
-                       PLSQLiteConnection, PLSemaphore, PLService, PLSleepState, 
-                       PLState, PLStateTrackingComposition, PLStorageCache, PLStorageOperator, 
-                       PLSubmissionConfig, PLSubmissionFile, PLSubmissionFileBDC, 
+                       PLIOHIDOperatorComposition, PLIOKitOperatorComposition, PLIOReportStats, 
+                       PLKQueue, PLModelingUtilities, PLMonotonicTimer, PLMultiKeyEntry, 
+                       PLNSNotificationOperatorComposition, PLNetworkUtilities, PLOperator, 
+                       PLPlatform, PLPluggedState, PLPowerNode, PLProcessInfo, PLQLDuetInMemoryCache, 
+                       PLSQLStatement, PLSQLiteConnection, PLSemaphore, PLService, 
+                       PLSleepState, PLState, PLStateTrackingComposition, PLStorageCache, 
+                       PLStorageOperator, PLSubmissionConfig, PLSubmissionFile, PLSubmissionFileBDC, 
                        PLSubmissionFileMSS, PLSubmissionFilePLL, PLSubmissionFileSP, 
                        PLSubmissionRecord, PLSubmissions, PLThreadInfo, PLThreadStats, 
                        PLTimeManager, PLTimeReference, PLTimeReferenceDynamic, PLTimeReferenceKernel, 

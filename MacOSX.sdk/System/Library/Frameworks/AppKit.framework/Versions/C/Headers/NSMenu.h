@@ -162,7 +162,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 @end
 
 @protocol NSMenuItemValidation <NSObject>
-- (BOOL)validateMenuItem:(NSMenuItem *)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem NS_SWIFT_UI_ACTOR;
 @end
 
 #if __swift__ < 40200
@@ -173,25 +173,25 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @protocol NSMenuDelegate <NSObject>
 @optional
-- (void)menuNeedsUpdate:(NSMenu*)menu;
+- (void)menuNeedsUpdate:(NSMenu*)menu NS_SWIFT_UI_ACTOR;
 
-- (NSInteger)numberOfItemsInMenu:(NSMenu*)menu;
-- (BOOL)menu:(NSMenu*)menu updateItem:(NSMenuItem*)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel;
+- (NSInteger)numberOfItemsInMenu:(NSMenu*)menu NS_SWIFT_UI_ACTOR;
+- (BOOL)menu:(NSMenu*)menu updateItem:(NSMenuItem*)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel NS_SWIFT_UI_ACTOR;
     // implement either the first one or the next two to populate the menu
-- (BOOL)menuHasKeyEquivalent:(NSMenu*)menu forEvent:(NSEvent*)event target:(_Nullable id* _Nonnull)target action:(_Nullable SEL* _Nonnull)action;
+- (BOOL)menuHasKeyEquivalent:(NSMenu*)menu forEvent:(NSEvent*)event target:(_Nullable id* _Nonnull)target action:(_Nullable SEL* _Nonnull)action NS_SWIFT_UI_ACTOR;
     // bypasses populating the menu for checking for key equivalents. set target and action on return
 
 /* indicates that the menu is being opened (displayed) or closed (hidden).  Do not modify the structure of the menu or the menu items from within these callbacks. */
-- (void)menuWillOpen:(NSMenu *)menu API_AVAILABLE(macos(10.5));
-- (void)menuDidClose:(NSMenu *)menu API_AVAILABLE(macos(10.5));
+- (void)menuWillOpen:(NSMenu *)menu API_AVAILABLE(macos(10.5)) NS_SWIFT_UI_ACTOR;
+- (void)menuDidClose:(NSMenu *)menu API_AVAILABLE(macos(10.5)) NS_SWIFT_UI_ACTOR;
 
 /* Indicates that menu is about to highlight item.  Only one item per menu can be highlighted at a time.  If item is nil, it means all items in the menu are about to be unhighlighted. */
-- (void)menu:(NSMenu *)menu willHighlightItem:(nullable NSMenuItem *)item API_AVAILABLE(macos(10.5));
+- (void)menu:(NSMenu *)menu willHighlightItem:(nullable NSMenuItem *)item API_AVAILABLE(macos(10.5)) NS_SWIFT_UI_ACTOR;
 
 
 /* Given a menu that is about to be opened on the given screen, return a rect, in screen coordinates, within which the menu will be positioned.  If you return NSZeroRect, or if the delegate does not implement this method, the menu will be confined to the bounds appropriate for the given screen.  The returned rect may not be honored in all cases, such as if it would force the menu to be too small.
 */
-- (NSRect)confinementRectForMenu:(NSMenu *)menu onScreen:(nullable NSScreen *)screen API_AVAILABLE(macos(10.6));
+- (NSRect)confinementRectForMenu:(NSMenu *)menu onScreen:(nullable NSScreen *)screen API_AVAILABLE(macos(10.6)) NS_SWIFT_UI_ACTOR;
 
 @end
 

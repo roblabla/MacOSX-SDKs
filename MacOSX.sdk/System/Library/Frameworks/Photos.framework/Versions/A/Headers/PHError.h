@@ -22,6 +22,7 @@ typedef NS_ERROR_ENUM(PHPhotosErrorDomain, PHPhotosError) {
     PHPhotosErrorRelinquishingLibraryBundleToWriter = 3142, // The photo library became unavailable because the user moved, renamed, or deleted the system photo library (register for PHPhotoLibraryAvailabilityObserver)
     PHPhotosErrorSwitchingSystemPhotoLibrary = 3143, // The photo library became unavailable because the user switched the system photo library (register for PHPhotoLibraryAvailabilityObserver)
     PHPhotosErrorNetworkAccessRequired API_AVAILABLE(macos(11.0), ios(14), tvos(14)) = 3164, // The request for an asset resource failed because network access is required, set networkAccessAllowed = YES to enable network access
+    PHPhotosErrorNetworkError API_AVAILABLE(macos(13), ios(16), tvos(16)) = 3169, // The request for an asset resource failed due to a network connection error
     PHPhotosErrorIdentifierNotFound API_AVAILABLE(macos(12), ios(15), tvos(15)) = 3201, // Identifier was not found
     PHPhotosErrorMultipleIdentifiersFound API_AVAILABLE(macos(12), ios(15), tvos(15)) = 3202, // More than one identifier was found
 
@@ -36,6 +37,9 @@ typedef NS_ERROR_ENUM(PHPhotosErrorDomain, PHPhotosError) {
     PHPhotosErrorAccessUserDenied API_AVAILABLE(macos(12), ios(15), tvos(15)) = 3311, // The user has denied access
 
     PHPhotosErrorLibraryInFileProviderSyncRoot API_AVAILABLE(macos(12.3), ios(15.4), tvos(15.4)) = 5423, // The Photos library bundle is in a File Provider Sync Root directory, which is not supported because it can corrupt the photo library
+    
+    PHPhotosErrorPersistentChangeTokenExpired API_AVAILABLE(macos(13), ios(16), tvos(16)) = 3105,  // The change token refers to a library state that is older than the available history of persistent changes
+    PHPhotosErrorPersistentChangeDetailsUnavailable API_AVAILABLE(macos(13), ios(16), tvos(16)) = 3210,  // Change details are not available for this persistent change, and therefore the current library state cannot be reconstructed from change history
 
     PHPhotosErrorInvalid API_DEPRECATED_WITH_REPLACEMENT("PHPhotosErrorInternalError", macos(10.15, 12), ios(13, 15), tvos(13, 15)) = -1, // DEPRECATED An unknown error occured
 };

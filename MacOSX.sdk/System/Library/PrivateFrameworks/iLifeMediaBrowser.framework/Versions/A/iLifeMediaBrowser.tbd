@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C20B02DB-D148-3579-94D9-1BA95D98E499
+    value:           17A9BAFF-1D6D-3B03-A9F9-436872FCE7D8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           90E36E55-4D94-3CA8-AA93-9A0E0C1492EA
+    value:           A9067DDD-B855-3A92-BC49-8C099F95F87B
 install-name:    '/System/Library/PrivateFrameworks/iLifeMediaBrowser.framework/Versions/A/iLifeMediaBrowser'
-current-version: 797
+current-version: 798
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ASL_LEVEL_ERR_STR, _ASL_LEVEL_INFO_STR, _ILApertureAlbumDotMacWebGalleryTypeIdentifier, 
                        _ILApertureAlbumFacebookTypeIdentifier, _ILApertureAlbumFlickrTypeIdentifier, 
                        _ILApertureAlbumIDKey, _ILApertureAlbumNameKey, _ILApertureAlbumSmugMugTypeIdentifier, 

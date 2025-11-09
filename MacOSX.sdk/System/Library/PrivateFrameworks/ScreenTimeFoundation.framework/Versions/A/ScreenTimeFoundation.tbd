@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F8D97762-73AB-3769-9BB8-511CACC5C5C8
+    value:           15E7C3B9-6817-3267-89D0-3DB26B442FE1
   - target:          x86_64-maccatalyst
-    value:           F8D97762-73AB-3769-9BB8-511CACC5C5C8
+    value:           15E7C3B9-6817-3267-89D0-3DB26B442FE1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6C0C2513-B2F0-3F15-84DC-DB6DE2514EA4
+    value:           DEEFB6B4-5BD6-3B68-B2F5-0FF6B6E5F150
   - target:          arm64e-maccatalyst
-    value:           6C0C2513-B2F0-3F15-84DC-DB6DE2514EA4
+    value:           DEEFB6B4-5BD6-3B68-B2F5-0FF6B6E5F150
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeFoundation.framework/Versions/A/ScreenTimeFoundation'
-current-version: 500.8.2
+current-version: 502.1.8
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s20ScreenTimeFoundation16STFoundationUserC06screenB7EnabledSbvMTj', 
                        '_$s20ScreenTimeFoundation16STFoundationUserC06screenB7EnabledSbvMTq', 
                        '_$s20ScreenTimeFoundation16STFoundationUserC06screenB7EnabledSbvgTj', 
@@ -56,10 +56,10 @@ exports:
                        '_$s20ScreenTimeFoundation16STFoundationUserC10$givenName7Combine9PublishedV9PublisherVySS_GvpMV', 
                        '_$s20ScreenTimeFoundation16STFoundationUserC10$givenName7Combine9PublishedV9PublisherVySS_GvsTj', 
                        '_$s20ScreenTimeFoundation16STFoundationUserC10$givenName7Combine9PublishedV9PublisherVySS_GvsTq', 
-                       '_$s20ScreenTimeFoundation16STFoundationUserC10identifier9givenName11hasPasscode8isParent0k6RemoteE020checkForUnsafePhotos38communicationSafetyNotificationEnabled06screenbU007syncingU016familyMemberType17persistenceSource20authenticationSourceACSS_SSS7bSo08STFamilyyZ0aSo19STPersistenceSource_pSgSo22STAuthenticationSource_pSgtcfC', 
-                       '_$s20ScreenTimeFoundation16STFoundationUserC10identifier9givenName11hasPasscode8isParent0k6RemoteE020checkForUnsafePhotos38communicationSafetyNotificationEnabled06screenbU007syncingU016familyMemberType17persistenceSource20authenticationSourceACSS_SSS7bSo08STFamilyyZ0aSo19STPersistenceSource_pSgSo22STAuthenticationSource_pSgtcfCTj', 
-                       '_$s20ScreenTimeFoundation16STFoundationUserC10identifier9givenName11hasPasscode8isParent0k6RemoteE020checkForUnsafePhotos38communicationSafetyNotificationEnabled06screenbU007syncingU016familyMemberType17persistenceSource20authenticationSourceACSS_SSS7bSo08STFamilyyZ0aSo19STPersistenceSource_pSgSo22STAuthenticationSource_pSgtcfCTq', 
-                       '_$s20ScreenTimeFoundation16STFoundationUserC10identifier9givenName11hasPasscode8isParent0k6RemoteE020checkForUnsafePhotos38communicationSafetyNotificationEnabled06screenbU007syncingU016familyMemberType17persistenceSource20authenticationSourceACSS_SSS7bSo08STFamilyyZ0aSo19STPersistenceSource_pSgSo22STAuthenticationSource_pSgtcfc', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC10identifier9givenName11hasPasscode8isParent0k6RemoteE020checkForUnsafePhotos38communicationSafetyNotificationEnabled0rs9AnalyticsU006screenbU007syncingU016familyMemberType17persistenceSource20authenticationSourceACSS_SSS8bSo08STFamilyZ4TypeaSo19STPersistenceSource_pSgSo22STAuthenticationSource_pSgtcfC', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC10identifier9givenName11hasPasscode8isParent0k6RemoteE020checkForUnsafePhotos38communicationSafetyNotificationEnabled0rs9AnalyticsU006screenbU007syncingU016familyMemberType17persistenceSource20authenticationSourceACSS_SSS8bSo08STFamilyZ4TypeaSo19STPersistenceSource_pSgSo22STAuthenticationSource_pSgtcfCTj', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC10identifier9givenName11hasPasscode8isParent0k6RemoteE020checkForUnsafePhotos38communicationSafetyNotificationEnabled0rs9AnalyticsU006screenbU007syncingU016familyMemberType17persistenceSource20authenticationSourceACSS_SSS8bSo08STFamilyZ4TypeaSo19STPersistenceSource_pSgSo22STAuthenticationSource_pSgtcfCTq', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC10identifier9givenName11hasPasscode8isParent0k6RemoteE020checkForUnsafePhotos38communicationSafetyNotificationEnabled0rs9AnalyticsU006screenbU007syncingU016familyMemberType17persistenceSource20authenticationSourceACSS_SSS8bSo08STFamilyZ4TypeaSo19STPersistenceSource_pSgSo22STAuthenticationSource_pSgtcfc', 
                        '_$s20ScreenTimeFoundation16STFoundationUserC11hasPasscodeSbvMTj', 
                        '_$s20ScreenTimeFoundation16STFoundationUserC11hasPasscodeSbvMTq', 
                        '_$s20ScreenTimeFoundation16STFoundationUserC11hasPasscodeSbvgTj', 
@@ -122,6 +122,20 @@ exports:
                        '_$s20ScreenTimeFoundation16STFoundationUserC21$checkForUnsafePhotos7Combine9PublishedV9PublisherVySb_GvpMV', 
                        '_$s20ScreenTimeFoundation16STFoundationUserC21$checkForUnsafePhotos7Combine9PublishedV9PublisherVySb_GvsTj', 
                        '_$s20ScreenTimeFoundation16STFoundationUserC21$checkForUnsafePhotos7Combine9PublishedV9PublisherVySb_GvsTq', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC35communicationSafetyAnalyticsEnabledSbvMTj', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC35communicationSafetyAnalyticsEnabledSbvMTq', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC35communicationSafetyAnalyticsEnabledSbvgTj', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC35communicationSafetyAnalyticsEnabledSbvgTq', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC35communicationSafetyAnalyticsEnabledSbvpMV', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC35communicationSafetyAnalyticsEnabledSbvsTj', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC35communicationSafetyAnalyticsEnabledSbvsTq', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC36$communicationSafetyAnalyticsEnabled7Combine9PublishedV9PublisherVySb_GvMTj', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC36$communicationSafetyAnalyticsEnabled7Combine9PublishedV9PublisherVySb_GvMTq', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC36$communicationSafetyAnalyticsEnabled7Combine9PublishedV9PublisherVySb_GvgTj', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC36$communicationSafetyAnalyticsEnabled7Combine9PublishedV9PublisherVySb_GvgTq', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC36$communicationSafetyAnalyticsEnabled7Combine9PublishedV9PublisherVySb_GvpMV', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC36$communicationSafetyAnalyticsEnabled7Combine9PublishedV9PublisherVySb_GvsTj', 
+                       '_$s20ScreenTimeFoundation16STFoundationUserC36$communicationSafetyAnalyticsEnabled7Combine9PublishedV9PublisherVySb_GvsTq', 
                        '_$s20ScreenTimeFoundation16STFoundationUserC38communicationSafetyNotificationEnabledSbvMTj', 
                        '_$s20ScreenTimeFoundation16STFoundationUserC38communicationSafetyNotificationEnabledSbvMTq', 
                        '_$s20ScreenTimeFoundation16STFoundationUserC38communicationSafetyNotificationEnabledSbvgTj', 

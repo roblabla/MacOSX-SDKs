@@ -42,9 +42,11 @@
 #import <AVFAudio/AVAudioUnitTimePitch.h>
 #import <AVFAudio/AVAudioUnitVarispeed.h>
 #import <AVFAudio/AVMIDIPlayer.h>
+#import <AVFAudio/AVMusicEvents.h>
 
 #if !0
 #import <AVFAudio/AVSpeechSynthesis.h>
+#import <AVFAudio/AVSpeechSynthesisProvider.h>
 #endif
 
 #if TARGET_OS_IPHONE && !0

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2015, 2018 Apple Inc.
+ * Copyright (c) 2013-2015, 2018, 2022 Apple Inc.
  * All rights reserved.
  */
 
@@ -37,6 +37,13 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 - (instancetype)initWithAddresses:(NSArray<NSString *> *)addresses subnetMasks:(NSArray<NSString *> *)subnetMasks API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
+ * @method settingsWithAutomaticAddressing
+ * @discussion Create a NEIPv4Settings object that will obtain IP addresses and netmasks using DHCP.
+ * @return The initialized object.
+ */
++ (instancetype)settingsWithAutomaticAddressing API_UNAVAILABLE(macos, ios, tvos) __WATCHOS_PROHIBITED;
+
+/*!
  * @property addresses
  * @discussion An array of IPv4 addresses represented as dotted decimal strings. These addresses will be set on the virtual interface used by the VPN tunnel.
  */
@@ -47,6 +54,12 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @discussion An array of IPv4 subnet masks represented as dotted decimal strings. These subnet masks will be set along with their corresponding addresses from the addresses array on the virtual interface used by the VPN tunnel.
  */
 @property (readonly) NSArray<NSString *> *subnetMasks API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+
+/*!
+ * @property router
+ * @discussion The address of the next-hop gateway router represented as a dotted decimal string. This property is ignored for TUN interfaces.
+ */
+@property (copy, nullable) NSString *router API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property includedRoutes

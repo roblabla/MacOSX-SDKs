@@ -502,7 +502,7 @@ BNNS_ENUM(BNNSLossFunction, uint32_t,
  Sum the loss of all samples in the batch and divide by number of samples.
 
  @constant  BNNSLossReductionNonZeroWeightMean
- Sum the loss of all samples in the batch and divide by number of non zero weights.
+ Sum the loss of all samples in the batch and divide by number of nonzero weights.
  0 is returned in case all weights are zero.
 
  */
@@ -716,6 +716,63 @@ BNNS_ENUM(BNNSLossReductionFunction, uint32_t,
  in-place computation is supported for inference only
  arithmetic_function_fields must point to BNNSArithmeticTernary structure
 
+ @constant BNNSArithmeticAbs
+ Arithmetic function absolute
+ element-wise computation of absolute value
+ in-place computation is supported for inference only
+ arithmetic_function_fields must point to BNNSArithmeticUnary structure
+ 
+ @constant BNNSArithmeticSign
+ Arithmetic function sign
+ element-wise computation of the sign (1 for positive, -1 for negative, 0 for zero)
+ in-place computation is supported for forward and gradient
+ arithmetic_function_fields must point to BNNSArithmeticUnary structure
+ 
+ @constant BNNSArithmeticNegate
+ Arithmetic function negate
+ element-wise computation of out = -in1
+ in-place computation is supported for forward and gradient
+ arithmetic_function_fields must point to BNNSArithmeticUnary structure
+ 
+ @constant BNNSArithmeticReciprocal
+ Arithmetic function reciprocal
+ element-wise computation of out = 1/in1
+ in-place computation is supported for inference
+ in-place computation is supported for gradient if activation function is identity
+ arithmetic_function_fields must point to BNNSArithmeticUnary structure
+ 
+ @constant BNNSArithmeticSquare
+ Arithmetic function square
+ element-wise computation of out = in1 * in1
+ in-place computation is supported for inference only
+ arithmetic_function_fields must point to BNNSArithmeticUnary structure
+ 
+ @constant BNNSArithmeticFloorDivide
+ Arithmetic function floor divide (quotient rounds towards negative infinity)
+ element-wise computation of out = floor(in1 / in2)
+ in-place computation is supported for inference
+ no gradient computation is supported
+ arithmetic_function_fields must point to BNNSArithmeticBinary structure
+ 
+ @constant BNNSArithmeticTruncDivide
+ Arithmetic function truncated divide (quotient rounds towards zero)
+ element-wise computation of out = trunc(in1 / in2)
+ in-place computation is supported for inference
+ no gradient computation is supported
+ arithmetic_function_fields must point to BNNSArithmeticBinary structure
+ 
+ @constant BNNSArithmeticTruncRemainder
+ Arithmetic function remainder of truncated division
+ element-wise computation of remainder of (trunc) division
+ in-place computation is supported for inference
+ no gradient computation is supported
+ arithmetic_function_fields must point to BNNSArithmeticBinary structure
+ 
+ @constant BNNSArithmeticErf
+ Arithmetic function erf
+ element-wise computation of error function
+ arithmetic_function_fields must point to BNNSArithmeticUnary structure
+ 
  */
 BNNS_ENUM(BNNSArithmeticFunction, uint32_t,
 
@@ -751,6 +808,15 @@ BNNS_ENUM(BNNSArithmeticFunction, uint32_t,
           BNNSArithmeticMinimum               __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 29,
           BNNSArithmeticMaximum               __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 30,
           BNNSArithmeticSelect                __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 31,
+          BNNSArithmeticAbs                   __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 32,
+          BNNSArithmeticSign                  __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 33,
+          BNNSArithmeticNegate                __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 34,
+          BNNSArithmeticReciprocal            __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 35,
+          BNNSArithmeticSquare                __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 36,
+          BNNSArithmeticFloorDivide           __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 37,
+          BNNSArithmeticTruncDivide           __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 38,
+          BNNSArithmeticTruncRemainder        __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 39,
+          BNNSArithmeticErf                   __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 40,
           );
 
 /*!
@@ -1014,11 +1080,28 @@ BNNS_ENUM(BNNSFilterType, uint32_t,
  @constant BNNSReduceFunctionLogicalAnd
   AllOf(X) = X_0 && X_1 && ... X_n
 
+ @constant BNNSReduceFunctionL2Norm
+ L2Norm(X) = sqrt(sum (X_i * X_i) )
+ i.e. the Euclidean norm
+ 
+ @constant BNNSReduceFunctionLogSumExp
+ LogSumExp(X) = log(sum(exp(X_i)))
+ 
+ @constant BNNSReduceFunctionProduct
+ product(X)
+ 
  @constant BNNSReduceFunctionAny
   Alias of BNNSReduceFunctionLogicalOr
 
  @constant BNNSReduceFunctionAll
   Alias of BNNSReduceFunctionLogicalAnd
+
+ @constant BNNSReduceFunctionNone
+  Just copies input to output.
+  This function is provided for use in operations with an optional reduction operation
+  where it is used to indicate no reduction operation is required. It is not supported
+  in the reduction layer (users should just use BNNSCopy() or a suitable contraction layer
+  if they wish to perform a copy or conversion operation).
  */
 BNNS_ENUM(BNNSReduceFunction, uint32_t,
 
@@ -1034,6 +1117,10 @@ BNNS_ENUM(BNNSReduceFunction, uint32_t,
           BNNSReduceFunctionL1Norm       __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 9,
           BNNSReduceFunctionLogicalOr    __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 10,
           BNNSReduceFunctionLogicalAnd   __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 11,
+          BNNSReduceFunctionL2Norm       __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 12,
+          BNNSReduceFunctionLogSumExp    __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 13,
+          BNNSReduceFunctionProduct      __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 14,
+          BNNSReduceFunctionNone         __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 15,
 
           // Friendly aliases
           BNNSReduceFunctionAny           __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = BNNSReduceFunctionLogicalOr,
@@ -1080,6 +1167,10 @@ BNNS_ENUM(BNNSLayerFlags, uint32_t,
  Two-dimensional matrix. Value (row, col) is at index row * stride[0] + col * stride[1]
  size[0] is the number of rows.
  size[1] is the number of columns.
+
+ @constant BNNSDataLayoutFullyConnectedSparse
+ Two-dimensional array stored in sparse packed format.
+ Use BNNSNDArrayGetSparseParameters() to determine the actual sparse parameters
 
  @constant BNNSDataLayoutImageCHW
  Three-dimensional image stack. Value (x,y,channel) is at index x * stride[0] + y * stride[1] + channel * stride[2]
@@ -1144,6 +1235,12 @@ BNNS_ENUM(BNNSLayerFlags, uint32_t,
  Failing to allocate the minimal weight array size may result in runtime error.
  size and stride structures must match BNNSDataLayoutConvolutionWeightsOIYX layout.
  memory layout must be contiguous, such that stride[0] is either 1 or 0.
+
+ @constant BNNSDataLayoutMHA_DHK
+ Three-dimensional array of multihead-attention weights. Value (k, d, h) is at d * stride[0] + h * stride[1] + k * stride[2]
+ size[0] is d_model/d_key/d_value (depending on weight matrix being specified)
+ size[1] is d_key/d_value (depending on weight matrix being specified)
+ size[2] is the number of heads
 
  @constant BNNSDataLayout2DLastMajor
  Two-dimensional matrix. Value (i, j) is at index i * stride[0] + j * stride[1]
@@ -1284,11 +1381,13 @@ BNNS_ENUM(BNNSDataLayout, uint32_t,
   BNNSDataLayoutColumnMajorMatrix              __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x20001,
   BNNSDataLayout2DLastMajor                    __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x28000,
   BNNSDataLayout2DFirstMajor                   __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x28001,
+  BNNSDataLayoutFullyConnectedSparse           __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 0x21001,
 
   // 3-dimensional layouts
   BNNSDataLayoutImageCHW                       __API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) = 0x30000,
   BNNSDataLayoutSNE                            __API_AVAILABLE(macos(12.0),  ios(15.0), watchos(8.0), tvos(15.0)) = 0x30001,
   BNNSDataLayoutNSE                            __API_AVAILABLE(macos(12.0),  ios(15.0), watchos(8.0), tvos(15.0)) = 0x30002,
+  BNNSDataLayoutMHA_DHK                        __API_AVAILABLE(macos(13.0),  ios(16.0), watchos(9.0), tvos(16.0)) = 0x30003,
   BNNSDataLayout3DLastMajor                    __API_AVAILABLE(macos(11.0),  ios(14.0), watchos(7.0), tvos(14.0)) = 0x38000,
   BNNSDataLayout3DFirstMajor                   __API_AVAILABLE(macos(11.0),  ios(14.0), watchos(7.0), tvos(14.0)) = 0x38001,
 
@@ -1327,6 +1426,45 @@ BNNS_ENUM(BNNSInterpolationMethod, uint32_t,
           BNNSInterpolationMethodNearest  __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0,
           BNNSInterpolationMethodLinear   __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 1,
           );
+
+/*! @abstract Interpolation sampling mode.
+ * This parameter controls how the grid is sampled. If the input grid is [0, Xin-1] (corresponding to an input size of Xin),
+ * and if the output size is Xout, then the grid points are sampled in the following manner
+ *
+ * @constant BNNSLinearSamplingDefault                   - spacing = (Xin - Xin/Xout) / (Xout - 1),
+ *                                          grid_point[i] = min(Xin-1, max(0, i*spacing)), for i=0,1,...,Xout-1
+ * @constant BNNSLinearSamplingAlignCorners         - Same as "STRICT_ALIGN_CORNERS" unless Xout=1,
+ *                                          in which case, grid_point[0] = (Xin-1) / 2, if Xout==1
+ * @constant BNNSLinearSamplingUnalignCorners     - spacing = Xin / Xout, grid_point[i] = min(Xin - 1, max(0, i*spacing + 0.5*spacing - 0.5)), for i=0,1,...,Xout-1
+ * @constant BNNSLinearSamplingStrictAlignCorners - spacing = (Xin - 1) / (Xout - 1), grid_point[i] = min(Xin-1, max(0, i*spacing)), for i=0,1,...,Xout-1
+ * @constant BNNSLinearSamplingOffsetCorners        - delta = max(1, Xin - 1) / Xout, spacing = ((Xout - 1) * delta) / (Xout - 1),
+ *                                          grid_point[i] = min(Xin-1, max(0, 0.5*delta + i*spacing)), for i=0,1,...,Xout-1
+ */
+BNNS_ENUM(BNNSLinearSamplingMode, uint32_t,
+
+          BNNSLinearSamplingDefault             __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 0,
+          BNNSLinearSamplingAlignCorners        __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 1,
+          BNNSLinearSamplingUnalignCorners      __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 2,
+          BNNSLinearSamplingStrictAlignCorners  __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 3,
+          BNNSLinearSamplingOffsetCorners       __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 4,
+          );
+
+/*! @abstract
+ * Specifies the convention for specifying the four bounding box coordinates for an 2D image
+ *
+ *  @constant BNNSCornersHeightFirst      - [h_start, w_start, h_end, w_end]
+ *  @constant BNNSCornersWidthFirst       - [w_start, h_start, w_end, h_end]
+ *  @constant BNNSCenterSizeHeightFirst - [h_center, w_center, box_height, box_width]
+ *  @constant BNNSCenterSizeWidthFirst  - [w_center, h_center, box_width, box_height]
+ */
+BNNS_ENUM(BNNSBoxCoordinateMode, uint32_t,
+
+          BNNSCornersHeightFirst          __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 0,
+          BNNSCornersWidthFirst           __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 1,
+          BNNSCenterSizeHeightFirst       __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 2,
+          BNNSCenterSizeWidthFirst        __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 3,
+          );
+
 
 /*! @abstract padding modes for padding.
  *
@@ -1432,7 +1570,6 @@ BNNS_ENUM(BNNSNDArrayFlags, uint32_t,
  *            based on the number of occurrence of the corresponding index in the input.
  */
 BNNS_ENUM(BNNSEmbeddingFlags, uint32_t,
-
           BNNSEmbeddingFlagScaleGradientByFrequency     __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 1,
           );
 
@@ -1463,6 +1600,44 @@ BNNS_ENUM(BNNSQuantizerFunction, uint32_t,
  */
 BNNS_ENUM(BNNSRandomGeneratorMethod, uint32_t,
           BNNSRandomGeneratorMethodAES_CTR      __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 0,
+);
+
+/*!
+ @constant BNNSSparsityTypeUnstructured - no special pattern in the sparsity
+
+ */
+BNNS_ENUM(BNNSSparsityType, uint32_t,
+          BNNSSparsityTypeUnstructured __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 0x0,
+);
+
+/*! @abstract Target System values for BNNSGetBestDataLayout* functions
+ *  @discussion
+ *  Due to architectural and microarchitectural changes between different types and generations of apple devices, the optimal packing
+ *  of data varies from device to device. In order to determine the optimal repacking for a given device, the user may call the
+ *  BNNSGetBestDataLayout* family of functions. These functions take an argument representing the Target System from the values
+ *  provided by this enumeration.
+ *
+ *  @constant BNNSTargetSystemGeneric         - Provide a single layout that is support and will provide reasonable performance on most devices
+*/
+BNNS_ENUM(BNNSTargetSystem, uint32_t,
+          BNNSTargetSystemGeneric      __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 0,
+);
+
+/*! @abstract Shuffle type for BNNSShuffle function
+ *
+ *  @constant BNNSShuffleTypePixelShuffleNCHW
+ *  pixel shuffle for NCHW format, equivalent to depth-to-space in "CRD" mode, i.e.,
+ *  rearranges elements in a tensor of shape (N,C×rxr,H,W) to a tensor of shape (N,C,H×r,W×r), where r is an upscale factor
+ *
+ *  @constant BNNSShuffleTypePixelUnshuffleNCHW
+ *  pixel unshuffle for NCHW format, reverse of pixel shuffle, i.e.,
+ *  reverses the PixelShuffle operation by rearranging elements in a tensor of shape (N,C,H×r,W×r) to a tensor of shape (N,C×rxr,H,W),
+ *  where r is a downscale factor
+ */
+
+BNNS_ENUM(BNNSShuffleType, uint32_t,
+          BNNSShuffleTypePixelShuffleNCHW     __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 0,
+          BNNSShuffleTypePixelUnshuffleNCHW   __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 1,
 );
 
 #if !__has_include( <Availability.h> )

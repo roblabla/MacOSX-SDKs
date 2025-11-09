@@ -4,32 +4,32 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           210D6B23-9FDE-382F-BBD1-0383A73A8A3B
+    value:           EE89B544-7E34-3AC9-8186-F9D26B7409A3
   - target:          x86_64-maccatalyst
-    value:           210D6B23-9FDE-382F-BBD1-0383A73A8A3B
+    value:           EE89B544-7E34-3AC9-8186-F9D26B7409A3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E1B1BA59-AED7-36E1-9649-3BCC47F2CD83
+    value:           7DE56AC4-A6F6-301C-8E2F-B916401FF97F
   - target:          arm64e-maccatalyst
-    value:           E1B1BA59-AED7-36E1-9649-3BCC47F2CD83
+    value:           7DE56AC4-A6F6-301C-8E2F-B916401FF97F
 install-name:    '/usr/lib/libAudioToolboxUtility.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AudioDiagnostics, AudioToolbox, AudioToolboxCore, CoreAudio, 
-                       CoreAudioInternal, EmbeddedSystemAUs, PerformanceTests, VibeSynthEngine, 
-                       aupbregistrarservice, com.apple.audio.DiagnosticExtension, 
+                       CoreAudioInternal, EmbeddedSystemAUs, PerformanceTests, ValidationCapsule, 
+                       VibeSynthEngine, audiomxd, aupbregistrarservice, com.apple.audio.DiagnosticExtension, 
                        mediaserverd, systemsoundserver-simd, systemsoundserverd ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZNK11PListLogger4vlogEPKcP13__va_list_tag ]
     weak-symbols:    [ __ZTI11CAException, __ZTI12CAXException, __ZTS11CAException, 
                        __ZTS12CAXException ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CASDefaultLog, _CAShowAudioBufferList, _CAShowAudioChannelLayout, 
                        _CAVectorUnit_Examine, _CAVectorUnit_GetByteWidth, _CrashIfClientProvidedBogusAudioBufferList, 
                        _MSHCreateMIGServerSource, _MSHCreateMachServerSource, _MSHGetMachPortFromSource, 
@@ -155,7 +155,9 @@ exports:
                        __ZN12MemoryStreamC1ER7TStreami, __ZN12MemoryStreamC1Ev, __ZN12MemoryStreamC2ENSt3__110shared_ptrI7TStreamEEi, 
                        __ZN12MemoryStreamC2EPK8__CFData, __ZN12MemoryStreamC2ER7TStreami, 
                        __ZN12MemoryStreamC2Ev, __ZN12MemoryStreamD0Ev, __ZN12MemoryStreamD1Ev, 
-                       __ZN12MemoryStreamD2Ev, __ZN13MultiRadixFFT20CplxInPlaceTransformEP15DSPSplitComplexi, 
+                       __ZN12MemoryStreamD2Ev, __ZN13CAVolumeCurve10ResetRangeEv, 
+                       __ZN13CAVolumeCurve19SetTransferFunctionEj, __ZN13CAVolumeCurve8AddRangeEiiff, 
+                       __ZN13CAVolumeCurveC1Ev, __ZN13CAVolumeCurveC2Ev, __ZN13MultiRadixFFT20CplxInPlaceTransformEP15DSPSplitComplexi, 
                        __ZN13MultiRadixFFT21NearestSupportedSizesEj, __ZN13MultiRadixFFT23CplxOutOfPlaceTransformEPK15DSPSplitComplexPS0_i, 
                        __ZN13RamstadKernelC1Eiidb, __ZN13RamstadKernelC2Eiidb, __ZN13XOSTransactor14endTransactionEv, 
                        __ZN13XOSTransactor16beginTransactionEv, __ZN14CABundleLockerC1Ev, 
@@ -268,6 +270,8 @@ exports:
                        __ZN24CAStreamBasicDescription11ResetFormatER27AudioStreamBasicDescription, 
                        __ZN24CAStreamBasicDescription13FillOutFormatER27AudioStreamBasicDescriptionRKS0_, 
                        __ZN24CAStreamBasicDescription23sTextParsingUsageStringE, 
+                       __ZN24CAStreamBasicDescription25VirtualizeLinearPCMFormatER27AudioStreamBasicDescription, 
+                       __ZN24CAStreamBasicDescription25VirtualizeLinearPCMFormatEbR27AudioStreamBasicDescription, 
                        __ZN24CAStreamBasicDescription8FromTextEPKcR27AudioStreamBasicDescription, 
                        __ZN27CACFDistributedNotification11AddObserverEPKvPFvP22__CFNotificationCenterPvPK10__CFStringS1_PK14__CFDictionaryES7_32CFNotificationSuspensionBehavior, 
                        __ZN27CACFDistributedNotification14RemoveObserverEPKvPK10__CFString, 
@@ -335,7 +339,13 @@ exports:
                        __ZNK10RamstadSRC14latencySamplesEv, __ZNK10RamstadSRC14latencySecondsEv, 
                        __ZNK10RamstadSRC28inputSamplesForOutputSamplesEi, __ZNK10RamstadSRC28outputSamplesForInputSamplesEiRi, 
                        __ZNK11PListLogger3logEPKcz, __ZNK12CADeprecated7CAMutex22IsOwnedByCurrentThreadEv, 
-                       __ZNK12CADeprecated7CAMutex6IsFreeEv, __ZNK14CACFDictionary10GetFixed32EPK10__CFStringRf, 
+                       __ZNK12CADeprecated7CAMutex6IsFreeEv, __ZNK13CAVolumeCurve12GetMaximumDBEv, 
+                       __ZNK13CAVolumeCurve12GetMinimumDBEv, __ZNK13CAVolumeCurve13GetMaximumRawEv, 
+                       __ZNK13CAVolumeCurve13GetMinimumRawEv, __ZNK13CAVolumeCurve14ConvertDBToRawEf, 
+                       __ZNK13CAVolumeCurve14ConvertRawToDBEi, __ZNK13CAVolumeCurve17ConvertDBToScalarEf, 
+                       __ZNK13CAVolumeCurve17ConvertScalarToDBEf, __ZNK13CAVolumeCurve18CheckForContinuityEv, 
+                       __ZNK13CAVolumeCurve18ConvertRawToScalarEi, __ZNK13CAVolumeCurve18ConvertScalarToRawEf, 
+                       __ZNK13CAVolumeCurve29GetIsApplyingTransferFunctionEv, __ZNK14CACFDictionary10GetFixed32EPK10__CFStringRf, 
                        __ZNK14CACFDictionary10GetFixed64EPK10__CFStringRd, __ZNK14CACFDictionary10GetFloat32EPK10__CFStringRf, 
                        __ZNK14CACFDictionary10GetFloat64EPK10__CFStringRd, __ZNK14CACFDictionary12GetCACFArrayEPK10__CFStringR9CACFArray, 
                        __ZNK14CACFDictionary13GetCACFStringEPK10__CFStringR10CACFString, 
@@ -419,6 +429,6 @@ exports:
                        __ZN9DFTHandleILb1EEC2Ev, __ZN9DFTHandleILb1EED0Ev, __ZN9DFTHandleILb1EED1Ev, 
                        __ZN9DFTHandleILb1EED2Ev, __ZN9DFTHandleILb1EEaSERKS0_, __ZNK9DFTHandleILb0EE4SizeEv, 
                        __ZNK9DFTHandleILb1EE4SizeEv, __ZTV9DFTHandleILb0EE, __ZTV9DFTHandleILb1EE ]
-  - targets:         [ arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
+  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZNK11PListLogger4vlogEPKcPc ]
 ...

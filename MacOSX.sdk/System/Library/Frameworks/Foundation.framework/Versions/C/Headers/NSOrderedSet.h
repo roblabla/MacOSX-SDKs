@@ -12,7 +12,7 @@
 
 /****************       Immutable Ordered Set   ****************/
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0))
 @interface NSOrderedSet<__covariant ObjectType> : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
@@ -188,4 +188,4 @@ NS_SWIFT_UNAVAILABLE("NSMutableOrderedSet diffing methods are not available in S
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

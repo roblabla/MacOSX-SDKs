@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macosx(10.15), ios(13.0), watchos(6.0))
+API_AVAILABLE(macosx(10.11), ios(9.0), watchos(2.0))
 @interface CNFetchRequest : NSObject
 
 @end

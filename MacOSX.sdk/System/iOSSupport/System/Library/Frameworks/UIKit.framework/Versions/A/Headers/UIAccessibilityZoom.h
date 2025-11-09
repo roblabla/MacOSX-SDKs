@@ -10,7 +10,7 @@
 #import <UIKit/UIView.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* 
  Use to inform system Zoom that focus has changed to a new location. 
@@ -28,7 +28,7 @@ UIKIT_EXTERN void UIAccessibilityZoomFocusChanged(UIAccessibilityZoomType type, 
  */
 UIKIT_EXTERN void UIAccessibilityRegisterGestureConflictWithZoom(void) API_AVAILABLE(ios(5.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIAccessibilityZoom.h>

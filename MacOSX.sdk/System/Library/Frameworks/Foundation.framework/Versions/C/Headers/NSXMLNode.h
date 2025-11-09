@@ -8,7 +8,7 @@
 @class NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSError, NSString, NSURL;
 @class NSXMLElement, NSXMLDocument;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*!
     @typedef NSXMLNodeKind
@@ -346,4 +346,4 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
 - (nullable NSArray *)objectsForXQuery:(NSString *)xquery error:(NSError **)error;
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

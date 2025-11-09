@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B89C3245-DE73-3821-BFCA-69BE29BCFDFD
+    value:           2D6D91E8-BCF4-3772-88DB-7499FA471B56
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EAA4EF95-F456-3554-9BA5-5F79EA394913
+    value:           4EAFAEB9-919B-3D7E-8E53-2A0328BF7BC3
 install-name:    '/System/Library/PrivateFrameworks/HomeKitEventRouter.framework/Versions/A/HomeKitEventRouter'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _HMEErrorDomain, _HMEProtoEventInfoReadFrom, _HMEProtoEventMetadataReadFrom, 
                        _HMEProtoEventReadFrom ]
     objc-classes:    [ HMEDelegatingEventRouter, HMEEvent, HMEEventInfo, HMEEventMetadata, 

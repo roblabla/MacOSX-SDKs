@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8D1C5F12-F889-38DB-87C1-320FF518CE22
+    value:           A3E93F70-5435-3935-80B5-152B13DB4FE3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B3C365BB-90A0-3C81-A0CC-4D5CAF0FF50E
+    value:           79032E83-740A-3B44-A16D-2CC1D5C432D0
 install-name:    '/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/Frameworks/DictationServices.framework/Versions/A/DictationServices'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AdvancedCommandsStateWasModifiedNotification, _ContinueOnMainThreadOrAsyncDispatchToMainQueue, 
                        _SOAudioDeviceInputSourcesChangedNotification, _SOAudioDeviceManagerAlertVolumeChangedNotification, 
                        _SOAudioDeviceManagerClamshellModeChangedNotification, _SOAudioDeviceManagerHardwareChangedNotification, 
@@ -34,6 +34,7 @@ exports:
                        _kSODictationCustomCommandTitleKey, _kSODictationRecognizerModeNoDictationImageName, 
                        _kSODictationRecognizerModeNumberOnlyImageName, _kSODictationRecognizerModeSpellingOnlyImageName, 
                        _kSODictationRecognizerModeTextAreaDoesNotSupportEditingImageName, 
+                       _kSODictationRecognizerModeTextAreaIMKFailureModeImageName, 
                        _kSORecognitionWindowMicLayerObjectName, _kSOVocabularyFileExtensionPropertyList, 
                        _kSOVocabularyFileExtensionText, _kSOVocabularyFileExtensionVCVocabulary, 
                        _sDSRMessageTracerUtilities, _sDSRSiriInstrumentationUtilities, 
@@ -56,18 +57,19 @@ exports:
                        SOCorrectionViewController, SOCyclingContainer, SOCyclingController, 
                        SODictationAdvancedCommandsFileManager, SODictationCommandGroup, 
                        SODictationCommandItem, SODictationCommandItemCell, SODictationCommandManager, 
-                       SODictationCommandNounSpecifier, SODictationHotKey, SODictationHotKeyController, 
+                       SODictationCommandNounSpecifier, SODictationDisableAlert, 
+                       SODictationEnableAlert, SODictationHotKey, SODictationHotKeyController, 
                        SODictationPreferences, SODictationPreferencesViewController, 
                        SODictationRecognizerModeOverlayView, SODictationRecognizerModeOverlayWindow, 
-                       SODictationRecognizerModeOverlayWindowController, SODisambiguationItem, 
-                       SODisambiguationItemCellView, SODisambiguationWindowController, 
+                       SODictationRecognizerModeOverlayWindowController, SODictationSetup, 
+                       SODisambiguationItem, SODisambiguationItemCellView, SODisambiguationWindowController, 
                        SOElementClickFlashOverlayBackgroundView, SOElementClickFlashOverlayController, 
                        SOElementClickFlashOverlayWindow, SOEnableDictationPanelController, 
                        SOExternalClientDownloadAlertController, SOGridElementView, 
                        SOGridView, SOGridWindowBackgroundView, SOGridWindowController, 
-                       SOHotKeyManager, SOHotKeyTextFieldCell, SOLabeledBadgeView, 
-                       SOLabeledBadgeWindow, SOLabeledBadgeWindowController, SOLabeledElement, 
-                       SOMicrophoneLevelMeterController, SOMicrophonePopUpButton, 
+                       SOHotKeyManager, SOHotKeyTextField, SOHotKeyTextFieldCell, 
+                       SOLabeledBadgeView, SOLabeledBadgeWindow, SOLabeledBadgeWindowController, 
+                       SOLabeledElement, SOMicrophoneLevelMeterController, SOMicrophonePopUpButton, 
                        SONamedLabeledBadgeView, SONamedLabeledElementsOverlayController, 
                        SONumberedLabeledBadgeWindow, SONumberedLabeledElementsOverlayController, 
                        SONumberedLabeledElementsWindowController, SORecognitionFeedbackManager, 
@@ -87,16 +89,16 @@ exports:
                        SOAudioDevice._hasBalance, SOAudioDevice._hasLevel, SOAudioDevice._hasMaster, 
                        SOAudioDevice._hasMute, SOAudioDevice._hwLevelLeft, SOAudioDevice._hwLevelRight, 
                        SOAudioDevice._identifier, SOAudioDevice._isActive, SOAudioDevice._isBluetoothAudio, 
-                       SOAudioDevice._isBuiltInAudio, SOAudioDevice._isInput, SOAudioDevice._level, 
-                       SOAudioDevice._manufacturer, SOAudioDevice._name, SOAudioDevice._prevSource, 
-                       SOAudioDevice._showFakeDigitalItem, SOAudioDevice._streamCount, 
-                       SOAudioDeviceManager._inputDev, SOAudioDeviceManager._inputDevices, 
-                       SOAudioDeviceManager._isClamshellModeOn, SOAudioDeviceManager._notificationPort, 
-                       SOAudioDeviceManager._serviceNotification, SOAudioSource._device, 
-                       SOAudioSource._kind, SOAudioSource._name, SOAudioSource._sourceType, 
-                       SOBigMicrophoneView._microphoneFillLayer, SOBigMicrophoneView._microphoneFillRootLayer, 
-                       SOBigMicrophoneView._microphoneRootLayer, SOBigMicrophoneView._stateController, 
-                       SOClassicDictationBackgroundView._drawWithRoomForLanguagePopup, 
+                       SOAudioDevice._isBuiltInAudio, SOAudioDevice._isContinuityAudio, 
+                       SOAudioDevice._isInput, SOAudioDevice._level, SOAudioDevice._manufacturer, 
+                       SOAudioDevice._name, SOAudioDevice._prevSource, SOAudioDevice._showFakeDigitalItem, 
+                       SOAudioDevice._streamCount, SOAudioDeviceManager._inputDev, 
+                       SOAudioDeviceManager._inputDevices, SOAudioDeviceManager._isClamshellModeOn, 
+                       SOAudioDeviceManager._notificationPort, SOAudioDeviceManager._serviceNotification, 
+                       SOAudioSource._device, SOAudioSource._kind, SOAudioSource._name, 
+                       SOAudioSource._sourceType, SOBigMicrophoneView._microphoneFillLayer, 
+                       SOBigMicrophoneView._microphoneFillRootLayer, SOBigMicrophoneView._microphoneRootLayer, 
+                       SOBigMicrophoneView._stateController, SOClassicDictationBackgroundView._drawWithRoomForLanguagePopup, 
                        SOClassicDictationBackgroundView._pointerPosition, SOClassicDictationWindow._backgroundView, 
                        SOClassicDictationWindow._orderInAnimationDuration, SOClassicDictationWindow._orderInAnimationType, 
                        SOClassicDictationWindow._orderOutAnimationDuration, SOCommandCreationManager._activeEditors, 
@@ -219,9 +221,8 @@ exports:
                        SOMicrophoneLevelMeterController._preventDictationModeWhileListening, 
                        SOMicrophoneLevelMeterController._runningPowerLevels, SOMicrophonePopUpButton._cautionaryExplanation, 
                        SOMicrophonePopUpButton._cautionaryImageView, SOMicrophonePopUpButton._containsCautionaryInfo, 
-                       SOMicrophonePopUpButton._currentMicrophoneArray, SOMicrophonePopUpButton._delegate, 
-                       SOMicrophonePopUpButton._hortizontallyCenteredView, SOMicrophonePopUpButton._microphoneLevelController, 
-                       SOMicrophonePopUpButton._microphoneSensingTimer, SOMicrophonePopUpButton._suppressCautionaryInfo, 
+                       SOMicrophonePopUpButton._delegate, SOMicrophonePopUpButton._hortizontallyCenteredView, 
+                       SOMicrophonePopUpButton._microphoneLevelController, SOMicrophonePopUpButton._suppressCautionaryInfo, 
                        SORecognitionFeedbackManager._accumulatedCommandDisplayInfoForAllRecognizers, 
                        SORecognitionFeedbackManager._defaultRecognitionSoundCache, 
                        SORecognitionFeedbackManager._delegate, SORecognitionFeedbackManager._externalClientRequiresFeedback, 

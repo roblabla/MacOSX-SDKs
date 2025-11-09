@@ -89,6 +89,7 @@ CT_EXPORT const CFStringRef kCTKernAttributeName CT_AVAILABLE(macos(10.5), ios(3
 
     @seealso    kCTKernAttributeName
     @seealso    kCTLigatureAttributeName
+    @seealso    CTLineGetTrailingWhitespaceWidth
 */
 
 CT_EXPORT const CFStringRef kCTTrackingAttributeName CT_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));

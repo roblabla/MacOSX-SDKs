@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           BF12490B-9B6D-3D2E-AEFE-001ACC991A3F
+    value:           A22CF9D3-FF72-39FF-ABF9-E3176C46340E
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           4289520F-BE38-3507-BC68-1C29C1F2DFF7
+    value:           F9546AC7-7E7A-3C83-B917-FBEED38A386B
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_GroupActivities_UIKit.framework/Versions/A/_GroupActivities_UIKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s22_GroupActivities_UIKit0A21ActivitySharingResultO2eeoiySbAC_ACtFZ', 
                        '_$s22_GroupActivities_UIKit0A21ActivitySharingResultO4hash4intoys6HasherVz_tF', 
                        '_$s22_GroupActivities_UIKit0A21ActivitySharingResultO7successyA2CmFWC', 
@@ -190,12 +190,21 @@ exports:
                        '_$s22_GroupActivities_UIKit26PeoplePickerViewControllerP8activityScTySo22TUConversationActivityCs5Error_pGvgTj', 
                        '_$s22_GroupActivities_UIKit26PeoplePickerViewControllerP8activityScTySo22TUConversationActivityCs5Error_pGvgTq', 
                        '_$s22_GroupActivities_UIKit26PeoplePickerViewControllerTL', 
-                       '_$s22_GroupActivities_UIKit2ggopySSxSglF', '_$s22_GroupActivities_UIKit3LogV17reliableBroadcast2os6LoggerVvau', 
+                       '_$s22_GroupActivities_UIKit2ggopySSxSglF', '_$s22_GroupActivities_UIKit3LogV07ckShareA15SessionProvider2os6LoggerVvau', 
+                       '_$s22_GroupActivities_UIKit3LogV07ckShareA15SessionProvider2os6LoggerVvgZ', 
+                       '_$s22_GroupActivities_UIKit3LogV07ckShareA15SessionProvider2os6LoggerVvpZ', 
+                       '_$s22_GroupActivities_UIKit3LogV17reliableBroadcast2os6LoggerVvau', 
                        '_$s22_GroupActivities_UIKit3LogV17reliableBroadcast2os6LoggerVvgZ', 
                        '_$s22_GroupActivities_UIKit3LogV17reliableBroadcast2os6LoggerVvpZ', 
                        '_$s22_GroupActivities_UIKit3LogV19extensionController2os6LoggerVvau', 
                        '_$s22_GroupActivities_UIKit3LogV19extensionController2os6LoggerVvgZ', 
                        '_$s22_GroupActivities_UIKit3LogV19extensionController2os6LoggerVvpZ', 
+                       '_$s22_GroupActivities_UIKit3LogV20groupSessionProvider2os6LoggerVvau', 
+                       '_$s22_GroupActivities_UIKit3LogV20groupSessionProvider2os6LoggerVvgZ', 
+                       '_$s22_GroupActivities_UIKit3LogV20groupSessionProvider2os6LoggerVvpZ', 
+                       '_$s22_GroupActivities_UIKit3LogV28groupSessionProviderObserver2os6LoggerVvau', 
+                       '_$s22_GroupActivities_UIKit3LogV28groupSessionProviderObserver2os6LoggerVvgZ', 
+                       '_$s22_GroupActivities_UIKit3LogV28groupSessionProviderObserver2os6LoggerVvpZ', 
                        '_$s22_GroupActivities_UIKit3LogV5topic2os6LoggerVvau', '_$s22_GroupActivities_UIKit3LogV5topic2os6LoggerVvgZ', 
                        '_$s22_GroupActivities_UIKit3LogV5topic2os6LoggerVvpZ', '_$s22_GroupActivities_UIKit3LogV7default2os6LoggerVvau', 
                        '_$s22_GroupActivities_UIKit3LogV7default2os6LoggerVvgZ', 

@@ -42,6 +42,9 @@ CS_TVOS_UNAVAILABLE
                         domainIdentifier:(nullable NSString *)domainIdentifier
                             attributeSet:(CSSearchableItemAttributeSet *)attributeSet;
 
+// For comparison of items ranked by the query
+- (NSComparisonResult)compareByRank:(CSSearchableItem *)other API_AVAILABLE(macos(10.13), ios(16.0)) CS_TVOS_UNAVAILABLE;
+
 // Should be unique to your application group.
 // REQUIRED since this is the way you will refer to the item to update the index / delete it from the index
 // Starts with an UUID for ease of use, but you can replace it with an UID of your own before the item is first indexed if you wish.

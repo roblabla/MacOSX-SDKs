@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5BC7C567-1AF8-3058-BA7F-C02275D10321
+    value:           04A49B7C-3757-359B-9C83-48CFC404F4B7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           247C5F1F-C3F5-3FAE-9B70-D101D5E0FB40
+    value:           813D2ACA-EAC9-3AB2-830E-7F729663C768
 install-name:    '/usr/lib/swift/~libswiftPencilKit.dylib'
 current-version: 7
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s9PencilKit11PKLassoToolV19_bridgeToObjectiveCSoABCyF', 
                        '_$s9PencilKit11PKLassoToolV26_forceBridgeFromObjectiveC_6resultySoABC_ACSgztFZ', 
                        '_$s9PencilKit11PKLassoToolV2eeoiySbAC_ACtFZ', '_$s9PencilKit11PKLassoToolV34_conditionallyBridgeFromObjectiveC_6resultSbSoABC_ACSgztFZ', 

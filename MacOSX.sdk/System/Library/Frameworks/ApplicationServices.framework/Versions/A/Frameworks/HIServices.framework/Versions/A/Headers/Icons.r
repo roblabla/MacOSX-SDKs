@@ -3,7 +3,7 @@
  
      Contains:   Icon Utilities and Icon Services Interfaces.
  
-     Copyright:  © 1990-2012 by Apple Computer, Inc. All rights reserved
+     Copyright:  Â© 1990-2012 by Apple Computer, Inc. All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -139,14 +139,14 @@
 #define kPlotIconRefNoMask 				0x04
 
 
-/*-----------------------------------cicn ¥ Color Icon -------------------------------------------*/
+/*-----------------------------------cicn â€¢ Color Icon -------------------------------------------*/
 /*
    cicn_RezTemplateVersion:
        0 - original 
       1 - auto calculate much of internal data                <-- default
 */
 #ifndef cicn_RezTemplateVersion
- #ifdef oldTemp                          /* grandfather in use of ÒoldTempÓ */
+ #ifdef oldTemp                          /* grandfather in use of â€œoldTempâ€ */
       #define cicn_RezTemplateVersion 0
   #else
       #define cicn_RezTemplateVersion 1
@@ -267,13 +267,13 @@ type 'cicn' {
 };
 
 
-/*----------------------------ICON ¥ Icon-----------------------------------------------*/
+/*----------------------------ICON â€¢ Icon-----------------------------------------------*/
 type 'ICON' {
       hex string[128];                                        /* Icon data            */
 };
 
 
-/*----------------------------ICN# ¥ Icon List------------------------------------------*/
+/*----------------------------ICN# â€¢ Icon List------------------------------------------*/
 type 'ICN#' {
       array {
                 hex string[128];                                /* Icon data            */
@@ -281,7 +281,7 @@ type 'ICN#' {
 };
 
 
-/*----------------------------SICN ¥ Small Icon-----------------------------------------*/
+/*----------------------------SICN â€¢ Small Icon-----------------------------------------*/
 type 'SICN' {
       array {
                 hex string[32];                                 /* SICN data            */
@@ -289,7 +289,7 @@ type 'SICN' {
 };
 
 
-/*--------------------------ics# ¥ small icons with masks-------------------------------*/
+/*--------------------------ics# â€¢ small icons with masks-------------------------------*/
 type 'ics#' {
   array [2] {
         hex string[32];
@@ -297,7 +297,7 @@ type 'ics#' {
 };
 
 
-/*--------------------------icm# ¥ mini icons with masks--------------------------------*/
+/*--------------------------icm# â€¢ mini icons with masks--------------------------------*/
 type 'icm#' {
   array [2] {
         hex string[24];
@@ -305,43 +305,43 @@ type 'icm#' {
 };
 
 
-/*--------------------------icm8 ¥ 8-bit mini icon no mask------------------------------*/
+/*--------------------------icm8 â€¢ 8-bit mini icon no mask------------------------------*/
 type 'icm8' {
   hex string[192];
 };
 
 
-/*--------------------------icm4 ¥ 4-bit mini icon no mask------------------------------*/
+/*--------------------------icm4 â€¢ 4-bit mini icon no mask------------------------------*/
 type 'icm4' {
   hex string[96];
 };
 
 
-/*--------------------------icl8 ¥ 8-bit large icon no mask-----------------------------*/
+/*--------------------------icl8 â€¢ 8-bit large icon no mask-----------------------------*/
 type 'icl8' {
   hex string[1024];
 };
 
 
-/*--------------------------icl4 ¥ 4-bit large icon no mask-----------------------------*/
+/*--------------------------icl4 â€¢ 4-bit large icon no mask-----------------------------*/
 type 'icl4' {
   hex string[512];
 };
 
 
-/*--------------------------ics8 ¥ 8-bit small icon no mask-----------------------------*/
+/*--------------------------ics8 â€¢ 8-bit small icon no mask-----------------------------*/
 type 'ics8' {
   hex string[256];
 };
 
 
-/*--------------------------ics4 ¥ 4-bit small icon no mask-----------------------------*/
+/*--------------------------ics4 â€¢ 4-bit small icon no mask-----------------------------*/
 type 'ics4' {
   hex string[128];
 };
 
 
-/*-------------------------------¥ Keyboard Icons---------------------------------------*/
+/*-------------------------------â€¢ Keyboard Icons---------------------------------------*/
 type 'KCN#' as 'ICN#';                      
 type 'kcs#' as 'ics#';                             /* Keyboard small icon */
 type 'kcl8' as 'icl8';                                /* Keyboard 8-bit color icon */
@@ -350,7 +350,7 @@ type 'kcs8' as 'ics8';                              /* Keyboard 8-bit small colo
 type 'kcs4' as 'ics4';                                /* Keyboard 4-bit small color icon */
 
 
-/*--------------------------icns ¥ icon family-----------------------------*/
+/*--------------------------icns â€¢ icon family-----------------------------*/
 type 'icns' {
 iconFamilyBegin:
   literal longint = 'icns';

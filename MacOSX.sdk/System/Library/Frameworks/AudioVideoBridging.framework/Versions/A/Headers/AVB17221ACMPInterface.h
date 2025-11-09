@@ -2,7 +2,7 @@
 //  AVB17221ACMPInterface.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2011-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -58,7 +58,7 @@ typedef void (^AVB17221ACMPInterfaceCompletion)(NSError * __nullable error, AVB1
 				It provides callbacks per entity EntityID via a handler object implementing the AVB17221ACMPClient protocol. AVB17221ACMPInterface objects
 				are typically not created directly but are created indirectly and accessed via the acmp property of the AVBInterface object.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVB17221ACMPInterface : AVB1722ControlInterface
 {
 }
@@ -92,13 +92,13 @@ API_AVAILABLE(macos(10.8))
 	@param		targetEntityID	The EntityID of the entity the messages are to or from.
 	@result		YES if the handler was added, NO if there is already a handler or if the routing ID couldn't be added.
  */
-- (BOOL)setHandler:(id<AVB17221ACMPClient>)handler forEntityID:(uint64_t)targetEntityID API_AVAILABLE(macos(10.9));
+- (BOOL)setHandler:(id<AVB17221ACMPClient>)handler forEntityID:(uint64_t)targetEntityID API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@method		removeHandlerForEntityID:
 	@abstract	Removed a handler  for messages to or from a specified EntityID.
 	@param		targetEntityID	The EntityID of the entity the messages are to or from.
  */
-- (void)removeHandlerForEntityID:(uint64_t)targetEntityID API_AVAILABLE(macos(10.9));
+- (void)removeHandlerForEntityID:(uint64_t)targetEntityID API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 
 /*!
 	@method		sendACMPResponseMessage:

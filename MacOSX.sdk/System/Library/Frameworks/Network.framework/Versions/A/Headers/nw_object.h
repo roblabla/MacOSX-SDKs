@@ -164,17 +164,25 @@ __END_DECLS
 #ifndef NW_ENUM
 #if __has_attribute(enum_extensibility)
 #define __NW_ENUM_ATTRIBUTES __attribute__((enum_extensibility(open)))
+#define __NW_OPTIONS_ATTRIBUTES __attribute__((flag_enum,enum_extensibility(open)))
 #else // __has_attribute(enum_extensibility)
 #define __NW_ENUM_ATTRIBUTES
+#define __NW_OPTIONS_ATTRIBUTES
 #endif // __has_attribute(enum_extensibility)
 
 #define __NW_ENUM_GET_MACRO(_1, _2, NAME, ...) NAME
 #if (defined(__cplusplus) && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!defined(__cplusplus) && __has_feature(objc_fixed_enum))
 #define __NW_NAMED_ENUM(_type, _name)     enum __NW_ENUM_ATTRIBUTES _name : _type _name; enum _name : _type
 #define __NW_ANON_ENUM(_type)             enum __NW_ENUM_ATTRIBUTES : _type
+#if defined(__cplusplus)
+#define NW_OPTIONS(_type, _name) _type _name; enum __NW_OPTIONS_ATTRIBUTES : _type
+#else // defined(__cplusplus)
+#define NW_OPTIONS(_type, _name) enum __NW_OPTIONS_ATTRIBUTES _name : _type _name; enum _name : _type
+#endif // defined(__cplusplus)
 #else // (defined(__cplusplus) && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!defined(__cplusplus) && __has_feature(objc_fixed_enum))
 #define __NW_NAMED_ENUM(_type, _name) _type _name; enum
 #define __NW_ANON_ENUM(_type) enum
+#define NW_OPTIONS(_type, _name) _type _name; enum
 #endif // (defined(__cplusplus) && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!defined(__cplusplus) && __has_feature(objc_fixed_enum))
 #define NW_ENUM(...) __NW_ENUM_GET_MACRO(__VA_ARGS__, __NW_NAMED_ENUM, __NW_ANON_ENUM, )(__VA_ARGS__)
 #endif // NW_ENUM

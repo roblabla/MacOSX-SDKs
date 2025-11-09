@@ -9,12 +9,13 @@
 #import <UIKit/UIImage.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UITraitCollection;
 @protocol UIImageConfiguration;
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UIImageAsset : NSObject <NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_SENDABLE
+@interface UIImageAsset : NSObject <NSSecureCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -28,7 +29,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UIImageAsset : NSObject <NSSecur
 - (void)unregisterImageWithTraitCollection:(UITraitCollection *)traitCollection; // removes only those images added with registerImage:withTraitCollection:
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 
 #else

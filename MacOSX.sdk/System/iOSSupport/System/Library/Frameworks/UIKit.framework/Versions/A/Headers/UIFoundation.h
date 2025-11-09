@@ -14,3 +14,6 @@
 #import <UIKit/NSTextLayoutFragment.h>
 #import <UIKit/NSTextLayoutManager.h>
 #import <UIKit/NSTextLineFragment.h>
+#import <UIKit/NSTextList.h>
+#import <UIKit/NSTextListElement.h>
+#import <UIKit/NSTextAttachment.h>

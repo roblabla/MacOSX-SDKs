@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7B73E641-8586-359A-A653-1A8574D913BA
+    value:           B8503E96-115A-3557-9579-07B0D7EB9137
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F33FBEA6-B588-3134-9DE5-95D15AF14EEA
+    value:           B151C788-EB8B-318A-AB60-9807F511291D
 install-name:    '/System/Library/PrivateFrameworks/DisplayServices.framework/Versions/A/DisplayServices'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/usr/lib/libobjc.A.dylib' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CreateNotificationKeyFromNameAndDisplayID, _DSDisplayIDKey, 
                        _DSLogClose, _DSNotificationNameKey, _DisplayServicesAmbientLightCompensationEnabled, 
                        _DisplayServicesAmbientLightResetChanged, _DisplayServicesBezelButtonsLocked, 

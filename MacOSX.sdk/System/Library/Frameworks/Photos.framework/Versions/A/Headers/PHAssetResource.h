@@ -21,6 +21,9 @@ OS_EXPORT
 @property (nonatomic, copy, readonly) NSString *uniformTypeIdentifier;
 @property (nonatomic, copy, readonly) NSString *originalFilename;
 
+@property (nonatomic, assign, readonly) NSInteger pixelWidth API_AVAILABLE(macos(13), ios(16), tvos(16));
+@property (nonatomic, assign, readonly) NSInteger pixelHeight API_AVAILABLE(macos(13), ios(16), tvos(16));
+
 #pragma mark - Getting resources
 
 + (NSArray<PHAssetResource *> *)assetResourcesForAsset:(PHAsset *)asset;

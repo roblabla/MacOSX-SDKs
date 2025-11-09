@@ -33,4 +33,6 @@
 #import <MetricKit/MXDiskWriteExceptionDiagnostic.h>
 #import <MetricKit/MXHangDiagnostic.h>
 #import <MetricKit/MXCrashDiagnostic.h>
+#import <MetricKit/MXAppLaunchDiagnostic.h>
 #import <MetricKit/MXAppExitMetric.h>
+#import <MetricKit/MXError.h>

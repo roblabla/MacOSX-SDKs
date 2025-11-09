@@ -7,7 +7,7 @@
 #import <Foundation/NSArray.h>
 #import <Foundation/NSError.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, NSGrammaticalGender) {
     NSGrammaticalGenderNotSet = 0,
@@ -97,4 +97,4 @@ NS_REFINED_FOR_SWIFT
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

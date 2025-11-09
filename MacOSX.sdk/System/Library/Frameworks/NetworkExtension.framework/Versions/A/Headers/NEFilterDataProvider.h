@@ -48,7 +48,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @method handleNewFlow:
  * @discussion This function is called by the framework when a filtering decision needs to be made about a new network data flow. Subclasses must override this method to implement the steps necessary to match the flow against some locally stored rules and return an appropriate verdict.
  * @param flow An NEFilterFlow object containing details about the new flow.
- * @return An NEFilterNewFlowVerdict object containing the veridct for the new flow.
+ * @return An NEFilterNewFlowVerdict object containing the verdict for the new flow.
  */
 - (NEFilterNewFlowVerdict *)handleNewFlow:(NEFilterFlow *)flow API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 

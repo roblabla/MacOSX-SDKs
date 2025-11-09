@@ -4,26 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4DF9B087-E7E6-322B-9E31-9EFBA48236EA
+    value:           D7666812-4CF0-3326-B4E9-1CDE54BA14EE
   - target:          x86_64-maccatalyst
-    value:           4DF9B087-E7E6-322B-9E31-9EFBA48236EA
+    value:           D7666812-4CF0-3326-B4E9-1CDE54BA14EE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E9B80448-F794-300C-822E-53AB096FD67C
+    value:           6FAF2F8F-C423-3B62-99B1-27FA60B334E5
   - target:          arm64e-maccatalyst
-    value:           E9B80448-F794-300C-822E-53AB096FD67C
+    value:           6FAF2F8F-C423-3B62-99B1-27FA60B334E5
 install-name:    '/System/Library/PrivateFrameworks/CryptoKitPrivate.framework/Versions/A/CryptoKitPrivate'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation4DataV16CryptoKitPrivateE11secretShareAcD15CKSecretSharingO012HybridSecretG0V_tKcfC', 
                        '_$s16CryptoKitPrivate0aB5ErrorO014underlyingCoreaD0yACs5Int32V_tcACmFWC', 
                        '_$s16CryptoKitPrivate0aB5ErrorO11wrapFailureyA2CmFWC', '_$s16CryptoKitPrivate0aB5ErrorO13unwrapFailureyA2CmFWC', 
                        '_$s16CryptoKitPrivate0aB5ErrorO16incorrectKeySizeyA2CmFWC', 
+                       '_$s16CryptoKitPrivate0aB5ErrorO16invalidParameteryA2CmFWC', 
                        '_$s16CryptoKitPrivate0aB5ErrorO21authenticationFailureyA2CmFWC', 
                        '_$s16CryptoKitPrivate0aB5ErrorO22incorrectParameterSizeyA2CmFWC', 
                        '_$s16CryptoKitPrivate0aB5ErrorOMa', '_$s16CryptoKitPrivate0aB5ErrorOMn', 
@@ -219,7 +220,17 @@ exports:
                        '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCMa', '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCMn', 
                        '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCMo', '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCMu', 
                        '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCN', '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCfD', 
-                       '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC14publicKeyBytes10Foundation4DataVyFTj', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC10secKeyFrom24compressedRepresentationSo03SecG3RefaSgSo6NSDataC_tFZ', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC14blindPublicKey06publicH04withSo03SecH3RefaAH_AHtKFZ', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC16unblindPublicKey_4withSo03SecH3RefaAG_AGtKFZ', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC23privateScalarFromSecKeyy10Foundation4DataVSgSo0iJ3RefaFZ', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC28compressedRepresentationFrom6secKeySo6NSDataCSgSo03SecJ3Refa_tFZ', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC7isValid9signature3for4withSb10Foundation4DataV_AJSo9SecKeyRefatFZ', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC9blindSign_9blindedBy4withSo6NSDataC10Foundation4DataV_So9SecKeyRefaAMtKFZ', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingCACycfC', '_$s16CryptoKitPrivate18CKPIETFKeyBlindingCACycfc', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingCMa', '_$s16CryptoKitPrivate18CKPIETFKeyBlindingCMn', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingCMo', '_$s16CryptoKitPrivate18CKPIETFKeyBlindingCN', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingCfD', '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC14publicKeyBytes10Foundation4DataVyFTj', 
                        '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC14publicKeyBytes10Foundation4DataVyFTq', 
                        '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC4dataAC10Foundation4DataV_tKcfC', 
                        '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC4dataAC10Foundation4DataV_tKcfCTj', 
@@ -445,9 +456,10 @@ exports:
                        '_$s9PublicKey16CryptoKitPrivate3KEMPTl', _CryptoKitPrivateVersionNumber, 
                        _CryptoKitPrivateVersionString, _ciphersuiteForKeyByteCount, 
                        _cryptokit_scrypt ]
-    objc-classes:    [ RSABSSATokenBlinder, RSABSSATokenIssuer, RSABSSATokenReady, 
-                       RSABSSATokenWaitingActivation, TDMEvaluation, TDMTestServer, 
-                       TDMToken, _TtC16CryptoKitPrivate18AlishaSPAKE2Prover, _TtC16CryptoKitPrivate19RSAPSSSPKI_Bridging, 
+    objc-classes:    [ CKPATKeyBlinding, RSABSSATokenBlinder, RSABSSATokenIssuer, 
+                       RSABSSATokenReady, RSABSSATokenWaitingActivation, TDMEvaluation, 
+                       TDMTestServer, TDMToken, _TtC16CryptoKitPrivate18AlishaSPAKE2Prover, 
+                       _TtC16CryptoKitPrivate18CKPIETFKeyBlinding, _TtC16CryptoKitPrivate19RSAPSSSPKI_Bridging, 
                        _TtC16CryptoKitPrivate19TDMServerEvaluation, _TtC16CryptoKitPrivate27AlishaSPAKE2ProverConfirmed, 
                        _TtC16CryptoKitPrivate6Scrypt, _TtC16CryptoKitPrivate9TDMClient, 
                        _TtC16CryptoKitPrivate9TDMServer ]

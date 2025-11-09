@@ -5,6 +5,11 @@
    All rights reserved.
 */
 
+#ifndef CIIMAGEPROVIDER_H
+#define CIIMAGEPROVIDER_H
+
+#ifdef __OBJC__
+
 #import <CoreImage/CIImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -82,3 +87,7 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageProviderTileSize NS_AVAILABLE(10_4
 CORE_IMAGE_EXPORT CIImageOption const kCIImageProviderUserInfo NS_AVAILABLE(10_4, 9_0);
 
 NS_ASSUME_NONNULL_END
+
+#endif /* __OBJC__ */
+
+#endif /* CIIMAGEPROVIDER_H */

@@ -50,6 +50,12 @@ VZ_EXPORT API_AVAILABLE(macos(12.0))
  */
 @property (nullable, strong) VZDirectoryShare *share;
 
+/*!
+ @abstract The macOS automount tag.
+ @discussion A device configured with this tag will be automatically mounted in a macOS guest.
+ */
+@property (class, readonly) NSString *macOSGuestAutomountTag API_AVAILABLE(macos(13.0));
+
 @end
 
 NS_ASSUME_NONNULL_END

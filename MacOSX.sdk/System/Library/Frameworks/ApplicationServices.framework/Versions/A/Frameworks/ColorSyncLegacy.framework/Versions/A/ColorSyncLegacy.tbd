@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B901DBA6-0300-310C-B306-0F5995C13B48
+    value:           6BEF1B20-8172-37B2-A6BC-7717ED025A8B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1BEE6CFA-0DA4-3DCE-812B-7751F60A9234
+    value:           F3E9D685-959D-33F0-BA75-6A801521466E
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -16,7 +16,7 @@ allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ DMProxy ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CMCloneProfileRef, _CMCloseProfile, _CMConvertDoubleXYZToD50, 
                        _CMConvertRGBFloatBitmap, _CMConvertXYZFloatBitmap, _CMCopyProfile, 
                        _CMCopyProfileDescriptionString, _CMCopyProfileLocalizedString, 
@@ -59,6 +59,6 @@ exports:
                        __CMGetProfileOfSuite, __CMLoadProfileLutsByAVID, __CMProfileGetProperty, 
                        __CMProfileSetProperty, __CWColorWorldGetProperty, __CWColorWorldSetProperty, 
                        _kCMIlluminantD50, _kCMIlluminantD65 ]
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ _ColorSyncLoadLegacyFunction ]
 ...

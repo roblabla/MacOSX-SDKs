@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4FB588DA-C0D9-3947-9C39-1AD15F864A4D
+    value:           AC0781CE-5E90-32B1-B2BC-B6487876386E
   - target:          x86_64-maccatalyst
-    value:           4FB588DA-C0D9-3947-9C39-1AD15F864A4D
+    value:           AC0781CE-5E90-32B1-B2BC-B6487876386E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ABF6D9F2-D780-34CA-8E05-D2CA365DA201
+    value:           DB91A699-6354-3C0C-AD6C-2364EE85EB4B
   - target:          arm64e-maccatalyst
-    value:           ABF6D9F2-D780-34CA-8E05-D2CA365DA201
+    value:           DB91A699-6354-3C0C-AD6C-2364EE85EB4B
 install-name:    '/System/Library/PrivateFrameworks/CloudKitCode.framework/Versions/A/CloudKitCode'
-current-version: 1950.31.1
+current-version: 2020.16
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12CloudKitCode0C10ConnectionC6invoke8function7request10completionySS_xyq_Sg_s5Error_pSgtct21InternalSwiftProtobuf7MessageRzAkLR_r0_lFTj', 
                        '_$s12CloudKitCode0C10ConnectionC6invoke8function7request10completionySS_xyq_Sg_s5Error_pSgtct21InternalSwiftProtobuf7MessageRzAkLR_r0_lFTq', 
                        '_$s12CloudKitCode0C10ConnectionCAA9InvocableAAMc', '_$s12CloudKitCode0C10ConnectionCAA9InvocableAAWP', 
@@ -120,7 +120,15 @@ exports:
                        '_$s12CloudKitCode0C9OperationCACyxq_GycfC', '_$s12CloudKitCode0C9OperationCACyxq_Gycfc', 
                        '_$s12CloudKitCode0C9OperationCMa', '_$s12CloudKitCode0C9OperationCMn', 
                        '_$s12CloudKitCode0C9OperationCMo', '_$s12CloudKitCode0C9OperationCMu', 
-                       '_$s12CloudKitCode0C9OperationCfD', '_$s12CloudKitCode15CKCodeOperationC04codeE11ResultBlockys0G0Oyq_s5Error_pGcSgvMTj', 
+                       '_$s12CloudKitCode0C9OperationCfD', '_$s12CloudKitCode11CKMergeableMp', 
+                       '_$s12CloudKitCode11CKMergeableP15mergeableDeltas3forSaySo0D5DeltaCGSo0dH8MetadataCSg_tKFTj', 
+                       '_$s12CloudKitCode11CKMergeableP15mergeableDeltas3forSaySo0D5DeltaCGSo0dH8MetadataCSg_tKFTq', 
+                       '_$s12CloudKitCode11CKMergeableP5mergeyySaySo0D5DeltaCGKFTj', 
+                       '_$s12CloudKitCode11CKMergeableP5mergeyySaySo0D5DeltaCGKFTq', 
+                       '_$s12CloudKitCode11CKMergeablePAAE5boxedAA05BoxedD0Cvg', 
+                       '_$s12CloudKitCode11CKMergeablePAAE5boxedAA05BoxedD0CvpMV', 
+                       '_$s12CloudKitCode11CKMergeablePAAE5mergeyySo0D11RecordValueCKF', 
+                       '_$s12CloudKitCode11CKMergeableTL', '_$s12CloudKitCode15CKCodeOperationC04codeE11ResultBlockys0G0Oyq_s5Error_pGcSgvMTj', 
                        '_$s12CloudKitCode15CKCodeOperationC04codeE11ResultBlockys0G0Oyq_s5Error_pGcSgvMTq', 
                        '_$s12CloudKitCode15CKCodeOperationC04codeE11ResultBlockys0G0Oyq_s5Error_pGcSgvgTj', 
                        '_$s12CloudKitCode15CKCodeOperationC04codeE11ResultBlockys0G0Oyq_s5Error_pGcSgvgTq', 
@@ -213,6 +221,19 @@ exports:
                        '_$s12CloudKitCode15CKCodeOperationCACyxq_Gycfc', '_$s12CloudKitCode15CKCodeOperationCMa', 
                        '_$s12CloudKitCode15CKCodeOperationCMn', '_$s12CloudKitCode15CKCodeOperationCMo', 
                        '_$s12CloudKitCode15CKCodeOperationCMu', '_$s12CloudKitCode15CKCodeOperationCfD', 
+                       '_$s12CloudKitCode16BoxedCKMergeableC15mergeableDeltas3forSaySo0E5DeltaCGSo0eI8MetadataCSg_tKFTj', 
+                       '_$s12CloudKitCode16BoxedCKMergeableC15mergeableDeltas3forSaySo0E5DeltaCGSo0eI8MetadataCSg_tKFTq', 
+                       '_$s12CloudKitCode16BoxedCKMergeableC5mergeyySaySo0E5DeltaCGKFTj', 
+                       '_$s12CloudKitCode16BoxedCKMergeableC5mergeyySaySo0E5DeltaCGKFTq', 
+                       '_$s12CloudKitCode16BoxedCKMergeableC9mergeableAA0E0_pvgTj', 
+                       '_$s12CloudKitCode16BoxedCKMergeableC9mergeableAA0E0_pvgTq', 
+                       '_$s12CloudKitCode16BoxedCKMergeableC9mergeableAA0E0_pvpMV', 
+                       '_$s12CloudKitCode16BoxedCKMergeableCACycfC', '_$s12CloudKitCode16BoxedCKMergeableCACycfc', 
+                       '_$s12CloudKitCode16BoxedCKMergeableCMa', '_$s12CloudKitCode16BoxedCKMergeableCMn', 
+                       '_$s12CloudKitCode16BoxedCKMergeableCMo', '_$s12CloudKitCode16BoxedCKMergeableCMu', 
+                       '_$s12CloudKitCode16BoxedCKMergeableCN', '_$s12CloudKitCode16BoxedCKMergeableCfD', 
+                       '_$s12CloudKitCode16BoxedCKMergeableCyAcA0E0_pcfC', '_$s12CloudKitCode16BoxedCKMergeableCyAcA0E0_pcfCTj', 
+                       '_$s12CloudKitCode16BoxedCKMergeableCyAcA0E0_pcfCTq', '_$s12CloudKitCode16BoxedCKMergeableCyAcA0E0_pcfc', 
                        '_$s12CloudKitCode16Ckcode_Proto2AnyV10clearValueyyF', '_$s12CloudKitCode16Ckcode_Proto2AnyV10hasTypeURLSbvg', 
                        '_$s12CloudKitCode16Ckcode_Proto2AnyV10hasTypeURLSbvpMV', 
                        '_$s12CloudKitCode16Ckcode_Proto2AnyV12clearTypeURLyyF', '_$s12CloudKitCode16Ckcode_Proto2AnyV13decodeMessage7decoderyxz_tK21InternalSwiftProtobuf7DecoderRzlF', 
@@ -243,7 +264,14 @@ exports:
                        '_$s12CloudKitCode17RemoteMeasurementV4dataACSg10Foundation4DataV_tcfC', 
                        '_$s12CloudKitCode17RemoteMeasurementVMa', '_$s12CloudKitCode17RemoteMeasurementVMn', 
                        '_$s12CloudKitCode17RemoteMeasurementVN', '_$s12CloudKitCode17RemoteMeasurementVyACs5UInt8V_A31EtcfC', 
-                       '_$s12CloudKitCode22Ckcode_RecordTransportV13decodeMessage7decoderyxz_tK21InternalSwiftProtobuf7DecoderRzlF', 
+                       '_$s12CloudKitCode20CKVersionedMergeableMp', '_$s12CloudKitCode20CKVersionedMergeableP11stateVectorSo027CKDistributedTimestampStateG0CvgTj', 
+                       '_$s12CloudKitCode20CKVersionedMergeableP11stateVectorSo027CKDistributedTimestampStateG0CvgTq', 
+                       '_$s12CloudKitCode20CKVersionedMergeableP25deltaDeliveryRequirementsSo016CKMergeableDeltagH0VvgTj', 
+                       '_$s12CloudKitCode20CKVersionedMergeableP25deltaDeliveryRequirementsSo016CKMergeableDeltagH0VvgTq', 
+                       '_$s12CloudKitCode20CKVersionedMergeablePAA11CKMergeableTb', 
+                       '_$s12CloudKitCode20CKVersionedMergeablePAAE25deltaDeliveryRequirementsSo016CKMergeableDeltagH0Vvg', 
+                       '_$s12CloudKitCode20CKVersionedMergeablePAAE25deltaDeliveryRequirementsSo016CKMergeableDeltagH0VvpMV', 
+                       '_$s12CloudKitCode20CKVersionedMergeableTL', '_$s12CloudKitCode22Ckcode_RecordTransportV13decodeMessage7decoderyxz_tK21InternalSwiftProtobuf7DecoderRzlF', 
                        '_$s12CloudKitCode22Ckcode_RecordTransportV13unknownFields21InternalSwiftProtobuf14UnknownStorageVvM', 
                        '_$s12CloudKitCode22Ckcode_RecordTransportV13unknownFields21InternalSwiftProtobuf14UnknownStorageVvg', 
                        '_$s12CloudKitCode22Ckcode_RecordTransportV13unknownFields21InternalSwiftProtobuf14UnknownStorageVvpMV', 
@@ -305,7 +333,6 @@ exports:
                        '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeV21InternalSwiftProtobuf19_ProtoNameProvidingAAMc', 
                        '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeV21InternalSwiftProtobuf26_MessageImplementationBaseAAMc', 
                        '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeV21InternalSwiftProtobuf7MessageAAMc', 
-                       '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeV29_protobuf_generated_isEqualTo5otherSbAC_tF', 
                        '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeV2eeoiySbAC_ACtFZ', 
                        '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeV5value21InternalSwiftProtobuf07Google_J4_AnyVvM', 
                        '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeV5value21InternalSwiftProtobuf07Google_J4_AnyVvg', 
@@ -326,6 +353,19 @@ exports:
                        '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeVMn', '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeVN', 
                        '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeVSHAAMc', '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeVSQAAMc', 
                        '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeVs28CustomDebugStringConvertibleAAMc', 
+                       '_$s12CloudKitCode25BoxedCKVersionedMergeableC11stateVectorSo027CKDistributedTimestampStateH0CyFTj', 
+                       '_$s12CloudKitCode25BoxedCKVersionedMergeableC11stateVectorSo027CKDistributedTimestampStateH0CyFTq', 
+                       '_$s12CloudKitCode25BoxedCKVersionedMergeableC25deltaDeliveryRequirementsSo016CKMergeableDeltahI0VyFTj', 
+                       '_$s12CloudKitCode25BoxedCKVersionedMergeableC25deltaDeliveryRequirementsSo016CKMergeableDeltahI0VyFTq', 
+                       '_$s12CloudKitCode25BoxedCKVersionedMergeableCMa', '_$s12CloudKitCode25BoxedCKVersionedMergeableCMn', 
+                       '_$s12CloudKitCode25BoxedCKVersionedMergeableCMo', '_$s12CloudKitCode25BoxedCKVersionedMergeableCMu', 
+                       '_$s12CloudKitCode25BoxedCKVersionedMergeableCN', '_$s12CloudKitCode25BoxedCKVersionedMergeableCfD', 
+                       '_$s12CloudKitCode25BoxedCKVersionedMergeableCyAcA0eF0_pcfC', 
+                       '_$s12CloudKitCode25BoxedCKVersionedMergeableCyAcA0eF0_pcfCTj', 
+                       '_$s12CloudKitCode25BoxedCKVersionedMergeableCyAcA0eF0_pcfCTq', 
+                       '_$s12CloudKitCode25BoxedCKVersionedMergeableCyAcA0eF0_pcfc', 
+                       '_$s12CloudKitCode25BoxedCKVersionedMergeableCyAcA11CKMergeable_pcfC', 
+                       '_$s12CloudKitCode25BoxedCKVersionedMergeableCyAcA11CKMergeable_pcfc', 
                        '_$s12CloudKitCode30Ckcode_Proto2ProtectedEnvelopeV13decodeMessage7decoderyxz_tK21InternalSwiftProtobuf7DecoderRzlF', 
                        '_$s12CloudKitCode30Ckcode_Proto2ProtectedEnvelopeV13unknownFields21InternalSwiftProtobuf14UnknownStorageVvM', 
                        '_$s12CloudKitCode30Ckcode_Proto2ProtectedEnvelopeV13unknownFields21InternalSwiftProtobuf14UnknownStorageVvg', 
@@ -370,9 +410,50 @@ exports:
                        '_$s12CloudKitCode9InvocableP6invoke8function7request10completionySS_qd__ys5Error_pSgct21InternalSwiftProtobuf7MessageRd__lFTq', 
                        '_$s12CloudKitCode9InvocablePAAE6invoke8function7request10completionySS_qd__ys5Error_pSgct21InternalSwiftProtobuf7MessageRd__lF', 
                        '_$s12CloudKitCode9InvocableTL', '_$s21InternalSwiftProtobuf7MessageP12CloudKitCodeE18substituteMessages16substitutionType13substitutionsxqd__m_Sayqd__GtKAaBRd__lF', 
+                       '_$sSo10CKDatabaseC12CloudKitCodeE11deserialize23serializedModifications17completionHandlery10Foundation4DataV_ys6ResultOySaySo8CKRecordCG13recordsToSave_SaySo0M2IDCG09recordIDsO6Deletets5Error_pGctF', 
                        '_$sSo10CKDatabaseC12CloudKitCodeE14codeConnection9toService5localAC0dF0CSS_SbtF', 
+                       '_$sSo10CKDatabaseC12CloudKitCodeE23serializedModifications13recordsToSave09recordIDsH6Delete10Foundation4DataVSaySo8CKRecordCG_SaySo0O2IDCGtYaKF', 
+                       '_$sSo10CKDatabaseC12CloudKitCodeE23serializedModifications13recordsToSave09recordIDsH6Delete10Foundation4DataVSaySo8CKRecordCG_SaySo0O2IDCGtYaKFTu', 
+                       '_$sSo10CKDatabaseC12CloudKitCodeE25deserializedModifications4fromSaySo8CKRecordCG13recordsToSave_SaySo0H2IDCG09recordIDsJ6Deletet10Foundation4DataV_tYaKF', 
+                       '_$sSo10CKDatabaseC12CloudKitCodeE25deserializedModifications4fromSaySo8CKRecordCG13recordsToSave_SaySo0H2IDCG09recordIDsJ6Deletet10Foundation4DataV_tYaKFTu', 
+                       '_$sSo10CKDatabaseC12CloudKitCodeE9serialize13recordsToSave09recordIDsG6Delete17completionHandlerySaySo8CKRecordCG_SaySo0N2IDCGys6ResultOy10Foundation4DataVs5Error_pGctF', 
+                       '_$sSo11CKMergeableP12CloudKitCodeE5mergeyySo0A11RecordValueCKF', 
                        '_$sSo13CKCodeServiceC12CloudKitCodeE13databaseScopeSo010CKDatabaseG0VSgvg', 
                        '_$sSo13CKCodeServiceC12CloudKitCodeE13databaseScopeSo010CKDatabaseG0VSgvpMV', 
                        '_$sSo13CKCodeServiceC12CloudKitCodeE3addyyAC0A9OperationCyxq_G21InternalSwiftProtobuf7MessageRzAhIR_r0_lF', 
+                       '_$sSo14CKRecordChangeC12CloudKitCodeE0B4TypeO5erroryA2EmFWC', 
+                       '_$sSo14CKRecordChangeC12CloudKitCodeE0B4TypeO5fetchyAESo0A0C_tcAEmFWC', 
+                       '_$sSo14CKRecordChangeC12CloudKitCodeE0B4TypeO6deleteyA2EmFWC', 
+                       '_$sSo14CKRecordChangeC12CloudKitCodeE0B4TypeO6modifyyAESo0A0C_tcAEmFWC', 
+                       '_$sSo14CKRecordChangeC12CloudKitCodeE0B4TypeOMa', '_$sSo14CKRecordChangeC12CloudKitCodeE0B4TypeOMn', 
+                       '_$sSo14CKRecordChangeC12CloudKitCodeE0B4TypeON', '_$sSo14CKRecordChangeC12CloudKitCodeE10changeTypeAbCE0bG0Ovg', 
+                       '_$sSo14CKRecordChangeC12CloudKitCodeE10changeTypeAbCE0bG0OvpMV', 
+                       '_$sSo16CKMergeableDeltaC12CloudKitCodeE4data10Foundation4DataVvg', 
+                       '_$sSo16CKMergeableDeltaC12CloudKitCodeE4data10Foundation4DataVvpMV', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE13RecordChangesV17makeAsyncIteratorAE0J0VyF', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE13RecordChangesV8IteratorV4nextSo0A6ChangeCSgyYaKF', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE13RecordChangesV8IteratorV4nextSo0A6ChangeCSgyYaKFTu', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE13RecordChangesV8IteratorVMa', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE13RecordChangesV8IteratorVMn', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE13RecordChangesV8IteratorVN', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE13RecordChangesV8IteratorVScIACMc', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE13RecordChangesVMa', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE13RecordChangesVMn', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE13RecordChangesVN', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE13RecordChangesVSciACMc', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE13recordChangesAbCE06RecordG0Vvg', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE13recordChangesAbCE06RecordG0VvpMV', 
+                       '_$sSo16CKRecordObserverC12CloudKitCodeE9container10recordTypeABSo11CKContainerC_SSSgtcfC', 
+                       '_$sSo22CKMergeableRecordValueC12CloudKitCodeE15addDeltasToSave4fromyAC0A0_p_tKF', 
+                       '_$sSo39CKSerializeRecordModificationsOperationC12CloudKitCodeE13recordsToSave09recordIDsI6DeleteABSaySo8CKRecordCGSg_SaySo0N2IDCGSgtcfC', 
+                       '_$sSo39CKSerializeRecordModificationsOperationC12CloudKitCodeE20serializeResultBlockys0I0Oy10Foundation4DataVs5Error_pGcSgvM', 
+                       '_$sSo39CKSerializeRecordModificationsOperationC12CloudKitCodeE20serializeResultBlockys0I0Oy10Foundation4DataVs5Error_pGcSgvg', 
+                       '_$sSo39CKSerializeRecordModificationsOperationC12CloudKitCodeE20serializeResultBlockys0I0Oy10Foundation4DataVs5Error_pGcSgvpMV', 
+                       '_$sSo39CKSerializeRecordModificationsOperationC12CloudKitCodeE20serializeResultBlockys0I0Oy10Foundation4DataVs5Error_pGcSgvs', 
+                       '_$sSo41CKDeserializeRecordModificationsOperationC12CloudKitCodeE22deserializeResultBlockys0I0OySaySo8CKRecordCG13recordsToSave_SaySo0K2IDCG09recordIDsM6Deletets5Error_pGcSgvM', 
+                       '_$sSo41CKDeserializeRecordModificationsOperationC12CloudKitCodeE22deserializeResultBlockys0I0OySaySo8CKRecordCG13recordsToSave_SaySo0K2IDCG09recordIDsM6Deletets5Error_pGcSgvg', 
+                       '_$sSo41CKDeserializeRecordModificationsOperationC12CloudKitCodeE22deserializeResultBlockys0I0OySaySo8CKRecordCG13recordsToSave_SaySo0K2IDCG09recordIDsM6Deletets5Error_pGcSgvpMV', 
+                       '_$sSo41CKDeserializeRecordModificationsOperationC12CloudKitCodeE22deserializeResultBlockys0I0OySaySo8CKRecordCG13recordsToSave_SaySo0K2IDCG09recordIDsM6Deletets5Error_pGcSgvs', 
                        '_$sSo8CKRecordC12CloudKitCodeEyABSgAC22Ckcode_RecordTransportVcfC' ]
+    objc-classes:    [ _TtC12CloudKitCode16BoxedCKMergeable, _TtC12CloudKitCode25BoxedCKVersionedMergeable ]
 ...

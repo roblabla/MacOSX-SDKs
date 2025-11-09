@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B8EC08FE-3B1F-3FC1-8803-2DA4B0EBAB29
+    value:           47044C01-DBCE-3E67-AF18-F277DA044CEC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           746D54CF-6485-3E66-B0AA-854755E46C3E
+    value:           3123A20B-AA4A-3FAD-9350-B61A2C2282BC
 install-name:    '/usr/lib/log/liblog_mdns.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DNSComputeDNSKeyTag, _DNSMessageCollapse, _DNSMessageExtractDomainName, 
                        _DNSMessageExtractDomainNameString, _DNSMessageExtractQuestion, 
                        _DNSMessageExtractRecord, _DNSMessageGetAnswerSection, _DNSMessageGetOptRecord, 
@@ -22,5 +22,7 @@ exports:
                        _DomainNameDupEx, _DomainNameEqual, _DomainNameFromString, 
                        _DomainNameLabelCount, _DomainNameLength, _DomainNameToString, 
                        _OSLogCopyFormattedString, __log_mdns_negative_reason_to_string, 
-                       __log_mdns_protocol_to_string, __log_mdns_session_event_to_string ]
+                       __log_mdns_protocol_to_string, __log_mdns_session_event_to_string, 
+                       __log_mdns_termination_reason_to_string, _dnssec_insecure_validation_state_to_description, 
+                       _dnssec_result_to_description ]
 ...

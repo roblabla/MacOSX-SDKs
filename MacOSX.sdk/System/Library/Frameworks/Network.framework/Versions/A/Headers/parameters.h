@@ -199,6 +199,21 @@ nw_parameters_create_quic(nw_parameters_configure_protocol_block_t configure_qui
 #endif // __BLOCKS__
 
 /*!
+ * @function nw_parameters_create_application_service
+ *
+ * @abstract
+ *		Creates default parameters for use with application services.
+ *
+ * @result
+ *		Returns an allocated nw_parameters_t object on success.
+ *		Callers are responsible for deallocating using nw_release(obj) or [obj release].
+ *		These objects support ARC.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+NW_RETURNS_RETAINED nw_parameters_t
+nw_parameters_create_application_service(void);
+
+/*!
  * @function nw_parameters_create
  *
  * @abstract
@@ -1093,6 +1108,58 @@ nw_parameters_set_expired_dns_behavior(nw_parameters_t parameters,
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 nw_parameters_expired_dns_behavior_t
 nw_parameters_get_expired_dns_behavior(nw_parameters_t parameters);
+
+/*!
+ * @function nw_parameters_set_requires_dnssec_validation
+ *
+ * @abstract
+ *		Require to do or not to do DNSSEC validation when resolving the endpoint, before
+ *		making a connection.
+ *
+ * @param parameters
+ *		The parameters object to configure.
+ *
+ * @param requires_dnssec_validation
+ *		A boolean value that indicates if DNSSEC validation should be required
+ *		when doing DNS resolution for the endpoint.
+ *
+ * @discussion
+ *		DNSSEC validation only takes effect if making a connection to an
+ *		endpoint that requires domain name resolution, such as:
+ *		<code>nw_endpoint_type_host</code>
+ *		<code>nw_endpoint_type_url</code>
+ *
+ *		1. If this property is not set or is set to false on the parameters, DNSSEC
+ *		validation will not be required.
+ *
+ *		2. If this property is set to true and no additional DNSSEC
+ *		configuration is set on the parameters, the default behavior will be
+ *		followed: Only DNSSEC secure and DNSSEC insecure resolved result will be
+ *		used to establish a connection.
+ *
+ *		3. If this property is set to true and additional DNSSEC configuration
+ *		is set on the parameters, the behavior specified by that configuration
+ *		will be followed.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+void
+nw_parameters_set_requires_dnssec_validation(nw_parameters_t parameters, bool requires_dnssec_validation);
+
+/*!
+ * @function nw_parameters_requires_dnssec_validation
+ *
+ * @abstract
+ *		Check if DNSSEC validation is required.
+ *
+ * @param parameters
+ *		The parameters object to check.
+ *
+ * @result
+ *		Returns true if DNSSEC validation is required, false otherwise.
+ */
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+bool
+nw_parameters_requires_dnssec_validation(nw_parameters_t parameters);
 
 NW_ASSUME_NONNULL_END
 

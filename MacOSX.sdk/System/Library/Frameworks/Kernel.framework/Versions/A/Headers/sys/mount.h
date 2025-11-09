@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2018 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2021 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -80,6 +80,7 @@
 #include <uuid/uuid.h>
 
 #include <sys/_types/_fsid_t.h> /* file system id type */
+#include <sys/_types/_graftdmg_un.h>
 
 /*
  * file system statistics
@@ -616,10 +617,10 @@ struct vfsops {
 	 *  @param mp Mount for which to get parameters.
 	 *  @param vfa Container for specifying which attributes are desired and which attributes the filesystem
 	 *  supports, as well as for returning results.
-	 *  @param ctx Context to authenticate for getting filesystem attributes.
+	 *  @param context Context to authenticate for getting filesystem attributes.
 	 *  @return 0 for success, else an error code.
 	 */
-	int  (*vfs_getattr)(struct mount *mp, struct vfs_attr *, vfs_context_t context);
+	int  (*vfs_getattr)(struct mount *mp, struct vfs_attr *vfa, vfs_context_t context);
 /*	int  (*vfs_statfs)(struct mount *mp, struct vfsstatfs *sbp, vfs_context_t context);*/
 
 	/*!
@@ -628,7 +629,7 @@ struct vfsops {
 	 *  @discussion vfs_sync will be called as part of the sync() system call and during unmount.
 	 *  @param mp Mountpoint to sync.
 	 *  @param waitfor MNT_WAIT: flush synchronously, waiting for all data to be written before returning. MNT_NOWAIT: start I/O but do not wait for it.
-	 *  @param ctx Context to authenticate for the sync.
+	 *  @param context Context to authenticate for the sync.
 	 *  @return 0 for success, else an error code.
 	 */
 	int  (*vfs_sync)(struct mount *mp, int waitfor, vfs_context_t context);
@@ -655,7 +656,7 @@ struct vfsops {
 	 *  @param fhlen Size of file handle structure, as returned by vfs_vptofh.
 	 *  @param fhp Pointer to handle.
 	 *  @param vpp Destination for vnode.
-	 *  @param ctx Context against which to authenticate the file-handle conversion.
+	 *  @param context Context against which to authenticate the file-handle conversion.
 	 *  @return 0 for success, else an error code.
 	 */
 	int  (*vfs_fhtovp)(struct mount *mp, int fhlen, unsigned char *fhp, struct vnode **vpp,
@@ -664,10 +665,10 @@ struct vfsops {
 	/*!
 	 *  @field vfs_vptofh
 	 *  @abstract Get a persistent handle corresponding to a vnode.
-	 *  @param mp Mount against which to convert the vnode to a handle.
+	 *  @param vp Vnode against which to obtain the file-handle
 	 *  @param fhlen Size of buffer provided for handle; set to size of actual handle returned.
 	 *  @param fhp Pointer to buffer in which to place handle data.
-	 *  @param ctx Context against which to authenticate the file-handle request.
+	 *  @param context Context against which to authenticate the file-handle request.
 	 *  @return 0 for success, else an error code.
 	 */
 	int  (*vfs_vptofh)(struct vnode *vp, int *fhlen, unsigned char *fhp, vfs_context_t context);
@@ -679,12 +680,12 @@ struct vfsops {
 	 *  is mounted; it allows the filesystem to initialize whatever global data structures
 	 *  are shared across all mounts.  If this returns successfully, a filesystem should be ready to have
 	 *  instances mounted.
-	 *  @param vfsconf Configuration information.  Currently, the only useful data are the filesystem name,
+	 *  @param vfsc Configuration information.  Currently, the only useful data are the filesystem name,
 	 *  typenum, and flags.  The flags field will be either 0 or MNT_LOCAL.  Many filesystems ignore this
 	 *  parameter.
 	 *  @return 0 for success, else an error code.
 	 */
-	int  (*vfs_init)(struct vfsconf *);
+	int  (*vfs_init)(struct vfsconf *vfsc);
 
 	/*!
 	 *  @field vfs_sysctl
@@ -708,7 +709,7 @@ struct vfsops {
 	 *  @param context Context against which to authenticate attribute change.
 	 *  @return 0 for success, else an error code.
 	 */
-	int  (*vfs_setattr)(struct mount *mp, struct vfs_attr *, vfs_context_t context);
+	int  (*vfs_setattr)(struct mount *mp, struct vfs_attr *vfa, vfs_context_t context);
 
 	/*!
 	 *  @field vfs_ioctl
@@ -722,7 +723,7 @@ struct vfsops {
 	 *  If it is an address, it is valid and resides in the kernel; callers of
 	 *  VFS_IOCTL() are responsible for copying to and from userland.
 	 *  @param flags Reserved for future use, set to zero
-	 *  @param ctx Context against which to authenticate ioctl request.
+	 *  @param context Context against which to authenticate ioctl request.
 	 *  @return 0 for success, else an error code.
 	 */
 	int  (*vfs_ioctl)(struct mount *mp, u_long command, caddr_t data,
@@ -1273,6 +1274,12 @@ struct fhandle {
 	unsigned char   fh_data[NFS_MAX_FH_SIZE];       /* file handle value */
 };
 typedef struct fhandle  fhandle_t;
+
+OS_ENUM(graftdmg_type, uint32_t,
+    GRAFTDMG_CRYPTEX_BOOT = 1,
+    GRAFTDMG_CRYPTEX_PREBOOT = 2,
+    GRAFTDMG_CRYPTEX_DOWNLEVEL = 3);
+
 
 
 #endif /* !_SYS_MOUNT_H_ */

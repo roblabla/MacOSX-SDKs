@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DDECEEDD-9D9A-3D3D-BA2F-BDFD11302F47
+    value:           D80269B1-EC12-335D-BF98-B9CAAD9C301E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1F1CBC5B-C637-38AE-B099-87BD5E6E41D0
+    value:           4336AAE6-1EA7-33CF-BCA6-E6524E58B647
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/Zoom.framework/Versions/A/Zoom'
 current-version: 68
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ZMCopyProcessInfoItemWithPSN, _ZMCreateARGBBitmapContext, 
                        _ZMCreateImageFromFile, _ZMCreateImageFromResource, _ZMDispatchGetCurrentQueue, 
                        _ZMDisplayFullRect, _ZMDisplayFullSplitScreenArea, _ZMDisplayMainRect, 

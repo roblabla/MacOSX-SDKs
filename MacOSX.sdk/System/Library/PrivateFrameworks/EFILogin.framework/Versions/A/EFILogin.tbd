@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CB4E7E48-47FB-3030-BD83-07DD78A2A393
+    value:           49CE4658-8AE5-3F38-93C5-D806EBBE2758
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           87E765BE-1613-3D97-B4E6-230B8812EE37
+    value:           B78764EB-EF5F-3188-BC80-0C466D4E83F9
 install-name:    '/System/Library/PrivateFrameworks/EFILogin.framework/Versions/A/EFILogin'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _EFILoginCopyGraphics, _EFILoginCopyInterfaceGraphics, _EFILoginCopyNotificationMessageGraphics, 
                        _EFILoginCopyRegistryString, _EFILoginCopyUserGraphics, _EFILoginCopyUserGraphicsForVolume, 
                        _EFILoginCopyUserNamesData, _EFILoginGraphicsIsUpToDate, _kEFILoginDataKey, 

@@ -32,7 +32,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED
 
 SK_EXTERN_CLASS
 SK_CLASS_FINAL
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED NS_SWIFT_NONSENDABLE
 @interface SKOverlay : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -44,10 +44,10 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED
 
 #if !TARGET_OS_OSX
 /// Attempts to present an app overlay in a `UIWindowScene`.
-- (void)presentInScene:(UIWindowScene *)scene API_AVAILABLE(ios(14.0)) NS_EXTENSION_UNAVAILABLE("Overlays are not available in extensions");
+- (void)presentInScene:(UIWindowScene *)scene API_AVAILABLE(ios(14.0)) NS_EXTENSION_UNAVAILABLE("Overlays are not available in extensions") NS_SWIFT_UI_ACTOR;
 
 /// Dismisses an overlay being presented in a `UIWindowScene`.
-+ (void)dismissOverlayInScene:(UIWindowScene *)scene API_AVAILABLE(ios(14.0)) NS_EXTENSION_UNAVAILABLE("Overlays are not available in extensions");
++ (void)dismissOverlayInScene:(UIWindowScene *)scene API_AVAILABLE(ios(14.0)) NS_EXTENSION_UNAVAILABLE("Overlays are not available in extensions") NS_SWIFT_UI_ACTOR;
 #endif
 
 /// A delegate for overlay events.

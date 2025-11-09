@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class AVCustomRoutingController;
 @protocol AVRoutePickerViewDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -59,6 +60,12 @@ typedef NS_ENUM(NSInteger, AVRoutePickerViewButtonStyle) {
  	@abstract	Whether or not the route picker should sort video capable output devices to the top of the list. Setting this to YES will cause the route picker view to show a videocentric icon.
  */
 @property (nonatomic) BOOL prioritizesVideoDevices API_AVAILABLE(ios(13.0), tvos(13.0));
+
+/*!
+	@property	customRoutingController
+	@abstract	A controller which enables connection to 3rd party devices (non-airplay) via the picker.
+ */
+@property (nonatomic, nullable) AVCustomRoutingController *customRoutingController API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos);
 
 @end
 

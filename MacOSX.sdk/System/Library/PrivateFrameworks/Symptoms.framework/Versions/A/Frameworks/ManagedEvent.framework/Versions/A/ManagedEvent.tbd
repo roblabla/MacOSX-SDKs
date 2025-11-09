@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           35D24AD1-399B-3FF9-B248-D9892E072068
+    value:           8DE5C6C5-30A8-3D5C-8D96-658966906C21
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8E75177B-80FF-39A3-B7ED-5E34C0E87F55
+    value:           23FE8459-7475-3B13-9875-873A17310D6C
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/ManagedEvent.framework/Versions/A/ManagedEvent'
-current-version: 1617.101.2
+current-version: 1732
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _kManagedEventKeyBackgroundCombinedFlowProperties, _kManagedEventKeyBackgroundSpecificFlowClassifications, 
                        _kManagedEventKeyForegroundApps, _kManagedEventKeyForegroundCombinedFlowProperties, 
                        _kManagedEventKeyForegroundSpecificFlowClassifications, _kManagedEventKeyHumanReadableBackgroundDurationValues, 

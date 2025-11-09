@@ -13,7 +13,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIGestureRecognizer.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIImage, UIColor, UILabel, UIImageView, UIButton, UITextField, UITableView, UILongPressGestureRecognizer;
 @class UICellConfigurationState;
@@ -120,6 +120,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly, strong, nullable) UILabel *textLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(3.0, API_TO_BE_DEPRECATED)); // default is nil.  label will be created if necessary.
 @property (nonatomic, readonly, strong, nullable) UILabel *detailTextLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(3.0, API_TO_BE_DEPRECATED)); // default is nil.  label will be created if necessary (and the current style supports a detail label).
 
+/// Returns a default background configuration for the cell's style.
+/// This background configuration represents the default appearance that the cell will use.
+- (UIBackgroundConfiguration *)defaultBackgroundConfiguration API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+
 /// Setting a background configuration supersedes the cell's backgroundView, selectedBackgroundView, and multipleSelectionBackgroundView. The default value is nil.
 @property (nonatomic, copy, nullable) UIBackgroundConfiguration *backgroundConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 /// When YES, the cell will automatically call -updatedConfigurationForState: on its `backgroundConfiguration` when the cell's
@@ -207,7 +211,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UITableViewCell.h>

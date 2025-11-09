@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           46CC22E7-C847-3A30-8B81-2E6CEF535451
+    value:           37924254-46CA-3531-9BE4-E9782F4DA626
   - target:          x86_64-maccatalyst
-    value:           46CC22E7-C847-3A30-8B81-2E6CEF535451
+    value:           37924254-46CA-3531-9BE4-E9782F4DA626
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2CE857CF-271D-3196-9087-0875C4D153BD
+    value:           177AEA65-CA0C-38EB-8891-7726D30EC0AB
   - target:          arm64e-maccatalyst
-    value:           2CE857CF-271D-3196-9087-0875C4D153BD
+    value:           177AEA65-CA0C-38EB-8891-7726D30EC0AB
 install-name:    '/usr/lib/system/libsystem_info.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _LI_get_thread_item, _LI_get_thread_list, _LI_ils_create, 
                        _LI_set_thread_item, _LI_set_thread_list, ___dn_skipname, 
                        __authenticate, __ds_running, __gai_nat64_can_v4_address_be_synthesized, 
@@ -101,13 +101,13 @@ exports:
                        _si_item_call, _si_item_is_valid, _si_item_match, _si_item_release, 
                        _si_item_retain, _si_list_add, _si_list_call, _si_list_concat, 
                        _si_list_next, _si_list_release, _si_list_reset, _si_list_retain, 
-                       _si_mac_all, _si_mac_bymac, _si_mac_byname, _si_module_name, 
-                       _si_module_release, _si_module_retain, _si_module_vers, _si_module_with_name, 
-                       _si_nameinfo, _si_netgroup_byname, _si_network_all, _si_network_byaddr, 
-                       _si_network_byname, _si_protocol_all, _si_protocol_byname, 
-                       _si_protocol_bynumber, _si_rpc_all, _si_rpc_byname, _si_rpc_bynumber, 
-                       _si_search, _si_search_module_set_flags, _si_service_all, 
-                       _si_service_byname, _si_service_byport, _si_set_nat64_v4_requires_synthesis, 
+                       _si_mac_all, _si_mac_bymac, _si_mac_byname, _si_module_allows_caching, 
+                       _si_module_name, _si_module_release, _si_module_retain, _si_module_vers, 
+                       _si_module_with_name, _si_nameinfo, _si_netgroup_byname, _si_network_all, 
+                       _si_network_byaddr, _si_network_byname, _si_protocol_all, 
+                       _si_protocol_byname, _si_protocol_bynumber, _si_rpc_all, _si_rpc_byname, 
+                       _si_rpc_bynumber, _si_search, _si_search_module_set_flags, 
+                       _si_service_all, _si_service_byname, _si_service_byport, _si_set_nat64_v4_requires_synthesis, 
                        _si_set_nat64_v4_synthesize, _si_srv_byname, _si_standardize_mac_address, 
                        _si_user_all, _si_user_byname, _si_user_byuid, _si_user_byuuid, 
                        _si_wants_addrinfo, _svc_fdset, _svc_getreq, _svc_getreqset, 

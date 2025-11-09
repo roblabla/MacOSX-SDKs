@@ -3,22 +3,27 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8D159F6E-223B-3A8E-AA0D-977918E2349D
+    value:           A0E920B1-37D5-3CC9-A950-8651F2ED1584
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8D32CD41-62AE-37B7-93C4-947BE67296BE
+    value:           19A6847F-169D-35F4-A8CB-40274D492284
 install-name:    '/System/Library/PrivateFrameworks/WiFiPeerToPeer.framework/Versions/A/WiFiPeerToPeer'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _AWDLTrafficRegistrationServiceAVConference, _AWDLTrafficRegistrationServiceAirPlaySinkMode, 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _AWDLTrafficRegistrationServiceAVConference, _AWDLTrafficRegistrationServiceActiveWiFiCall, 
+                       _AWDLTrafficRegistrationServiceAirDrop, _AWDLTrafficRegistrationServiceAirPlay, 
+                       _AWDLTrafficRegistrationServiceAirPlayConnectivity, _AWDLTrafficRegistrationServiceAirPlaySinkMode, 
                        _AWDLTrafficRegistrationServiceAirdrop, _AWDLTrafficRegistrationServiceAirplay, 
                        _AWDLTrafficRegistrationServiceAirplayConnectivity, _AWDLTrafficRegistrationServiceAssistedDiscovery, 
                        _AWDLTrafficRegistrationServiceCarPlay, _AWDLTrafficRegistrationServiceCentralizedAirTimeSchedulerPolicy, 
                        _AWDLTrafficRegistrationServiceDeviceToDeviceMigration, _AWDLTrafficRegistrationServiceEnsemble, 
+                       _AWDLTrafficRegistrationServiceFaceTime, _AWDLTrafficRegistrationServiceMPRemoteCamera, 
                        _AWDLTrafficRegistrationServiceRangingInitiator, _AWDLTrafficRegistrationServiceRangingResponder, 
-                       _AWDLTrafficRegistrationServiceSidecar, _AWDLTrafficRegistrationServiceTimesync, 
-                       _beginTransaction, _endTransaction ]
+                       _AWDLTrafficRegistrationServiceRealTimeMode, _AWDLTrafficRegistrationServiceRemoteCamera, 
+                       _AWDLTrafficRegistrationServiceSidecar, _AWDLTrafficRegistrationServiceTimeSync, 
+                       _AWDLTrafficRegistrationServiceTimesync, _AWDLTrafficRegistrationServiceUniversalControl, 
+                       _WiFiP2PErrorDomain, _beginTransaction, _endTransaction ]
     objc-classes:    [ AWDLServiceDiscoveryConfiguration, AWDLServiceDiscoveryManager, 
                        AWDLTrafficRegistrationConfiguration, WiFiAwareDataSession, 
                        WiFiAwareDataSessionIssueReport, WiFiAwareDataSessionStatisticsHistogramBin, 
@@ -29,5 +34,7 @@ exports:
                        WiFiAwarePublishDatapathServiceSpecificInfo, WiFiAwarePublishServiceSpecificInfo, 
                        WiFiAwarePublisher, WiFiAwarePublisherDataSessionHandle, WiFiAwareSubscribeConfiguration, 
                        WiFiAwareSubscriber, WiFiChannel, WiFiMACAddress, WiFiP2PAWDLState, 
-                       WiFiP2PAWDLStateMonitor, WiFiP2PSPITransactionRequestor, WiFiP2PXPCConnection ]
+                       WiFiP2PAWDLStateMonitor, WiFiP2PAWDLStateMonitorConfiguration, 
+                       WiFiP2PDNSServiceDiscoveryManager, WiFiP2PSPITransactionRequestor, 
+                       WiFiP2PTrafficRegistrationReservation, WiFiP2PUIAgent, WiFiP2PXPCConnection ]
 ...

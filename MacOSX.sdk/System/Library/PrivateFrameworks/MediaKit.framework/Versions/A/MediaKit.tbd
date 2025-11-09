@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7B2F73A3-78E0-3F1B-AC62-FA48D47BE105
+    value:           328C8116-E0FD-3318-8830-2C9746042146
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F0EE7CA3-919E-335E-BDFC-31C7C505085F
+    value:           89A5ABC9-E84C-313A-834C-3CF74AC56EBC
 install-name:    '/System/Library/PrivateFrameworks/MediaKit.framework/Versions/A/MediaKit'
-current-version: 930
+current-version: 936
 compatibility-version: 302
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ApplyToHFSPlusCatalogRecords, _ApplyToHFSPlusExtentRecords, 
                        _CFArrayDictionarySearch, _CFArrayDictionarySearchWithIndexOptions, 
                        _GPTuuidHuman2Type, _GPTuuidType2Human, _IOEngineDeinitialize, 

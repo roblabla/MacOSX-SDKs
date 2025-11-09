@@ -2,17 +2,29 @@
 	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
+/*
+ An NSAttributedString object manages a string of characters and associated sets of attributes (for example, font, color, kerning) that apply to individual characters or ranges of characters in the string.
+ 
+ While NSAttributedString and its mutable counterpart NSMutableAttributedString are declared in Foundation, higher level UI frameworks (UIKit, AppKit) extend their APIs with functionality and types available in those frameworks.
+ 
+ NSAttributedString and NSMutableAttributedString themselves are abstract, with concrete implementations returned by the various initialization APIs. The APIs and these concrete implementations are optimized for dealing with the contents in terms of ranges of runs of same attributes. If traversing thru an NSAttributedString, it's best to pay attention to the effectiveRange or longestEffectiveRange return values to process the contents in chunks and advance by runs, rather than character at a time.
+
+ NSAttributedString and NSMutableAttributedString are designed to be easily subclassed. To subclass, provide implementations of the "primitive" methods, which are listed in the core class definitions below. For NSAttributedString, these are string and attributesAtIndex:effectiveRange:. For NSMutableAttributedString, additionally override replaceCharactersInRange:withString: and setAttributes:range:. You can also override any other methods, if needed, for performance. For instance if you have a mutableString backing store for the characters, overriding NSMutableAttributedString's mutableString can be useful.
+ 
+ Unless you are providing your own custom storage, using an instance of NSMutableAttributeString as your storage can be a practical way to subclass NSMutableAttributeString. You can have the above methods call directly into that instance, in addition to doing whatever customizations you need for your subclass.
+ */
 
 #import <Foundation/NSString.h>
 #import <Foundation/NSDictionary.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NSString * NSAttributedStringKey NS_TYPED_EXTENSIBLE_ENUM;
 
 API_AVAILABLE(macos(10.0), ios(3.2), watchos(2.0), tvos(9.0))
 @interface NSAttributedString : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
+// Override these two APIs when subclassing NSAttributedString
 @property (readonly, copy) NSString *string;
 - (NSDictionary<NSAttributedStringKey, id> *)attributesAtIndex:(NSUInteger)location effectiveRange:(nullable NSRangePointer)range;
 
@@ -46,6 +58,7 @@ typedef NS_OPTIONS(NSUInteger, NSAttributedStringEnumerationOptions) {
 API_AVAILABLE(macos(10.0), ios(3.2), watchos(2.0), tvos(9.0))
 @interface NSMutableAttributedString : NSAttributedString
 
+// Override these two APIs (in addition to the two for NSAttributedString) when subclassing NSMutableAttributedString
 - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)str;
 - (void)setAttributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attrs range:(NSRange)range;
 
@@ -105,6 +118,10 @@ FOUNDATION_EXTERN const NSAttributedStringKey NSImageURLAttributeName
 FOUNDATION_EXTERN const NSAttributedStringKey NSLanguageIdentifierAttributeName
 API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) NS_SWIFT_NAME(languageIdentifier);
 
+// a NSAttributedStringMarkdownSourcePosition
+FOUNDATION_EXPORT const NSAttributedStringKey NSMarkdownSourcePositionAttributeName
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) NS_SWIFT_NAME(markdownSourcePosition);
+
 
 typedef NS_ENUM(NSInteger, NSAttributedStringMarkdownParsingFailurePolicy) {
     // If parsing fails, return an error from the appropriate constructor.
@@ -126,6 +143,20 @@ typedef NS_ENUM(NSInteger, NSAttributedStringMarkdownInterpretedSyntax) {
     NSAttributedStringMarkdownInterpretedSyntaxInlineOnlyPreservingWhitespace = 2
 } API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) NS_REFINED_FOR_SWIFT;
 
+NS_REFINED_FOR_SWIFT
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
+@interface NSAttributedStringMarkdownSourcePosition : NSObject <NSCopying, NSSecureCoding>
+
+@property (readonly) NSInteger startLine;
+@property (readonly) NSInteger startColumn;
+@property (readonly) NSInteger endLine;
+@property (readonly) NSInteger endColumn;
+
+- (instancetype)initWithStartLine:(NSInteger)startLine startColumn:(NSInteger)startColumn endLine:(NSInteger)endLine endColumn:(NSInteger)endColumn;
+
+- (NSRange)rangeInString:(NSString *)string;
+
+@end
 
 NS_REFINED_FOR_SWIFT
 API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
@@ -147,6 +178,8 @@ API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
 // The BCP-47 language code for this document. If not nil, the NSLanguageAttributeName attribute will be applied to any range in the returned string that doesn't otherwise specify a language attribute.
 // The default is nil, which applies no attributes.
 @property (nullable, copy) NSString *languageCode;
+
+@property BOOL appliesSourcePositionAttributes API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 @end
 
@@ -338,4 +371,4 @@ API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

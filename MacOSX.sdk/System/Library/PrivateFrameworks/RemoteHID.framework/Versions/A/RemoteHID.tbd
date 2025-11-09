@@ -3,15 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9871C6E3-6FAE-32F7-9B56-B3F12C2F8D3F
+    value:           03DCDF42-742F-3CAD-BC32-391511DAD7C3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           50F14801-8EE2-32EB-A80F-6C71F2673914
+    value:           43697DC2-D20A-36E8-B495-82544714485A
 install-name:    '/System/Library/PrivateFrameworks/RemoteHID.framework/Versions/A/RemoteHID'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _RemoteHIDLog, _RemoteHIDLogPackets, _RemoteHIDVersionNumber, 
                        _RemoteHIDVersionString ]
-    objc-classes:    [ HIDRemoteDevice, HIDRemoteDeviceAACPServer, HIDRemoteDeviceServer ]
+    objc-classes:    [ HIDRemoteDevice, HIDRemoteDeviceAACPServer, HIDRemoteDeviceServer, 
+                       HIDRemoteEndpoint ]
 ...

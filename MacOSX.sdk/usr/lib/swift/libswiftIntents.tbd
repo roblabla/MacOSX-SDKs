@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BD25A4F7-7351-379B-B43A-B95153D06F9D
+    value:           B412C165-22AA-3431-BC79-E2718252BC22
   - target:          x86_64-maccatalyst
-    value:           BD25A4F7-7351-379B-B43A-B95153D06F9D
+    value:           B412C165-22AA-3431-BC79-E2718252BC22
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           16B6E633-59A8-3387-9E30-47720294F793
+    value:           62E87E5F-9D46-3D7A-A19C-44C1608755C6
   - target:          arm64e-maccatalyst
-    value:           16B6E633-59A8-3387-9E30-47720294F793
+    value:           62E87E5F-9D46-3D7A-A19C-44C1608755C6
 install-name:    '/usr/lib/swift/libswiftIntents.dylib'
-current-version: 11
+current-version: 12
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.11$@rpath/libswiftIntents.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.13$@rpath/libswiftIntents.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.9$@rpath/libswiftIntents.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s7Intents10INShortcutO10Foundation20ReferenceConvertibleAAMc', 
                        '_$s7Intents10INShortcutO11descriptionSSvg', '_$s7Intents10INShortcutO11descriptionSSvpMV', 
                        '_$s7Intents10INShortcutO12userActivityACSo06NSUserD0C_tcfC', 

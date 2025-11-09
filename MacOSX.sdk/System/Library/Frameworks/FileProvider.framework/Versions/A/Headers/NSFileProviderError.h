@@ -53,16 +53,16 @@ typedef NS_ERROR_ENUM(NSFileProviderErrorDomain, NSFileProviderErrorCode) {
      \note Please use -[NSError (NSFileProviderError) fileProviderErrorForRejectedDeletionOfItem:] to build an error with this code.
      \see -[NSError (NSFileProviderError) fileProviderErrorForRejectedDeletionOfItem:]
      */
-    NSFileProviderErrorDeletionRejected FILEPROVIDER_API_AVAILABILITY_V3 = -1006,
+    NSFileProviderErrorDeletionRejected FILEPROVIDER_API_AVAILABILITY_V3_IOS = -1006,
 
     /** We're trying to non-recursively delete a non-empty directory
      */
-    NSFileProviderErrorDirectoryNotEmpty FILEPROVIDER_API_AVAILABILITY_V3 = -1007,
+    NSFileProviderErrorDirectoryNotEmpty FILEPROVIDER_API_AVAILABILITY_V3_IOS = -1007,
 
     /**
      Returned by NSFileProviderManager if no provider could be found in the application
      */
-    NSFileProviderErrorProviderNotFound FILEPROVIDER_API_AVAILABILITY_V3 = -2001,
+    NSFileProviderErrorProviderNotFound FILEPROVIDER_API_AVAILABILITY_V3_IOS = -2001,
 
     /**
      Returned by NSFileProviderManager if the application's provider has been disabled due to app translocation
@@ -93,7 +93,7 @@ typedef NS_ERROR_ENUM(NSFileProviderErrorDomain, NSFileProviderErrorCode) {
      When a provider returns that error, it means the syncing an item is definitively broken, and cannot be resolved without an update of
      either the provider or the system.
      */
-    NSFileProviderErrorCannotSynchronize FILEPROVIDER_API_AVAILABILITY_V3 = -2005,
+    NSFileProviderErrorCannotSynchronize FILEPROVIDER_API_AVAILABILITY_V3_IOS = -2005,
 
     /**
     Returned by NSFileProviderManager if directory eviction failed because the target contains non-evictable items.
@@ -107,21 +107,21 @@ typedef NS_ERROR_ENUM(NSFileProviderErrorDomain, NSFileProviderErrorCode) {
     + domain: NSPOSIXErrorDomain errorCode: EBUSY - if the item had open file descriptors on it.
     + domain: NSPOSIXErrorDomain errorCode: EMLINK : if the item had several hardlinks.
     */
-    NSFileProviderErrorNonEvictableChildren FILEPROVIDER_API_AVAILABILITY_V3_1 = -2006,
+    NSFileProviderErrorNonEvictableChildren FILEPROVIDER_API_AVAILABILITY_V3_1_IOS = -2006,
 
     /**
      Returned by NSFileProviderManager if item eviction is failing because the item has edits that have not been synced yet
 
      The NSURLErrorKey will be set to with the item URL that has unsynced content.
     */
-    NSFileProviderErrorUnsyncedEdits FILEPROVIDER_API_AVAILABILITY_V3_1 = -2007,
+    NSFileProviderErrorUnsyncedEdits FILEPROVIDER_API_AVAILABILITY_V3_1_IOS = -2007,
 
     /**
      Returned by NSFileProviderManager if item eviction is failing because the item has not been assigned the evictable capability.
 
      The NSURLErrorKey will be set to with the corresponding item URL.
     */
-    NSFileProviderErrorNonEvictable FILEPROVIDER_API_AVAILABILITY_V3_1 = -2008,
+    NSFileProviderErrorNonEvictable FILEPROVIDER_API_AVAILABILITY_V3_1_IOS = -2008,
 
     /**
      Returned by the provider to indicate that the requested version for an item cannot be provided.
@@ -131,12 +131,42 @@ typedef NS_ERROR_ENUM(NSFileProviderErrorDomain, NSFileProviderErrorCode) {
      happened to the item that outdated the requested version.
     */
     NSFileProviderErrorVersionNoLongerAvailable FILEPROVIDER_API_AVAILABILITY_V4_1 = -2009,
+
+    /**
+     Returned by createItemBasedOnTemplate or modifyItem if the provider does not wish to sync the item.
+
+     When a provider returns this error, it causes the item to be excluded from sync. The system will ensure that
+     the item (and any descendents, in case of a directory), are downloaded, and then issue a deleteItem call to the
+     provider for the item.
+
+     The system will call createItemBasedOnTemplate for the item, whenever the item's metadata changes on disk.
+     This ensures that the provider's rules for excluding from sync are re-evaluated whenever the
+     item's properties change.
+
+     Re-evaluating items
+     ------
+
+     If the provider wishes for previously excluded items to be re-sent as createItemBasedOnTemplate calls,
+     the provider may call -[NSFileProviderManager signalErrorResolved:completionHandler:] with this error code.
+
+     If the provider wishes to exclude items which had previously been synced, the provider may call
+     -[NSFileProviderManager requestModificationOfFields:forItemWithIdentifier:options:completionHandler:].
+     This will cause the system to send a new modifyItem call to the provider. At that time, the provider can choose to
+     return this error code.
+    */
+    NSFileProviderErrorExcludedFromSync FILEPROVIDER_API_AVAILABILITY_V2_V5 = -2010,
+
+    /*
+     Returned by the system to indicate that the domain is disabled by the user, and therefore the operation cannot be
+     completed.
+    */
+    NSFileProviderErrorDomainDisabled FILEPROVIDER_API_AVAILABILITY_V5_0_IOS = -2011,
 } FILEPROVIDER_API_AVAILABILITY_V2_V3;
 
 @interface NSError (NSFileProviderError)
 + (instancetype)fileProviderErrorForCollisionWithItem:(NSFileProviderItem)existingItem FILEPROVIDER_API_AVAILABILITY_V2_V3;
 + (instancetype)fileProviderErrorForNonExistentItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier FILEPROVIDER_API_AVAILABILITY_V2_V3;
-+ (instancetype)fileProviderErrorForRejectedDeletionOfItem:(NSFileProviderItem)updatedVersion NS_SWIFT_NAME(fileProviderErrorForRejectedDeletion(of:)) FILEPROVIDER_API_AVAILABILITY_V3;
++ (instancetype)fileProviderErrorForRejectedDeletionOfItem:(NSFileProviderItem)updatedVersion NS_SWIFT_NAME(fileProviderErrorForRejectedDeletion(of:)) FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 @end
 
 NS_ASSUME_NONNULL_END

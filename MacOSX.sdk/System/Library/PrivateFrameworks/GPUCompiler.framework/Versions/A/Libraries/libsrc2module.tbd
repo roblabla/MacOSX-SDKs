@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D6DAE8D6-5088-367C-84C8-14560E04EDF3
+    value:           E07699C7-321D-3422-9697-E4574DA860AE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           05F96299-D2EA-38EB-BBFE-925BD73A3B2E
+    value:           41BB68A1-42FE-3F72-A74C-B6A16DED8789
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/A/Libraries/libsrc2module.dylib'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _cl2module, _metal2module ]
 ...

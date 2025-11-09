@@ -4,44 +4,44 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EDD91057-AB52-3C1C-BC2B-0C2DF1982311
+    value:           6167A2F9-EBD8-38C1-90C9-5DA3495A7C5D
   - target:          x86_64-maccatalyst
-    value:           EDD91057-AB52-3C1C-BC2B-0C2DF1982311
+    value:           6167A2F9-EBD8-38C1-90C9-5DA3495A7C5D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FC83B48B-2ABE-3E88-A535-E4C082EBC5DE
+    value:           D0EA1F98-9AA9-3F55-91F5-7DFEAFA28F24
   - target:          arm64e-maccatalyst
-    value:           FC83B48B-2ABE-3E88-A535-E4C082EBC5DE
+    value:           D0EA1F98-9AA9-3F55-91F5-7DFEAFA28F24
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontWorkerAccess.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTI14TATSFontWorker, __ZTS14TATSFontWorker ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AllowInternalDevFeatures, _BeginSandboxing, _CopyATSPathAppendingPath, 
                        _EnableSandbox, _GetATSAlternatePath, _GetATSPath, _GetAlternateFrameworkPath, 
                        _GetEnvironmentVariable, _GetFontWorkerVT, _IsEnvironmentVariableEnabled, 
                        _LoadATSDylib, _LoadATSDylibFunction, _XTConsumeSandboxExtension, 
-                       _XTConsumeSandboxExtensions, _XTDataStreamAppendBytes, _XTDataStreamAppendCString, 
-                       _XTDataStreamAppendDouble, _XTDataStreamAppendEmptySegments, 
-                       _XTDataStreamAppendEmptyStrings, _XTDataStreamAppendString, 
-                       _XTDataStreamAppendUInt32, _XTDataStreamBytesLeftToRead, _XTDataStreamBytesLeftToReadInCurrentSegment, 
-                       _XTDataStreamClearStream, _XTDataStreamClearToStartOfSegment, 
-                       _XTDataStreamCloseReadSegment, _XTDataStreamCloseWriteSegment, 
-                       _XTDataStreamCreateStream, _XTDataStreamCurrentReadSegment, 
-                       _XTDataStreamCurrentWriteSegment, _XTDataStreamFree, _XTDataStreamNextSegmentID, 
-                       _XTDataStreamOpenReadSegment, _XTDataStreamOpenWriteSegment, 
-                       _XTDataStreamReadBytes, _XTDataStreamReadCString, _XTDataStreamReadDouble, 
-                       _XTDataStreamReadString, _XTDataStreamReadUInt32, _XTDataStreamResetReadSegment, 
-                       _XTDataStreamResetStream, _XTDataStreamShow, _XTDataStreamSkipReadSegment, 
-                       _XTDataStreamWithData, _XTIssueSandboxExtension, _XTIssueSandboxExtensionsForURLs, 
-                       _XTIssueSandboxExtensionsForURLsByPID, __Z18CopyFindAndReplacePK10__CFStringS1_S1_, 
-                       __Z19utf8CopyDescriptionPKv, __Z29TFontWorkerProtocolSetClassesP14NSXPCInterface, 
-                       __Z5MergePK9__CFArrayS1_R14TCFSortedArray, __Z8utf8HashPKv, 
-                       __Z9utf8EqualPKvS0_, __ZN10TCFTypeRef15GetBooleanValueEPKv, 
+                       _XTConsumeSandboxExtensions, _XTCreateDirectory, _XTCreateRemovedFontsFolderName, 
+                       _XTDataStreamAppendBytes, _XTDataStreamAppendCString, _XTDataStreamAppendDouble, 
+                       _XTDataStreamAppendEmptySegments, _XTDataStreamAppendEmptyStrings, 
+                       _XTDataStreamAppendString, _XTDataStreamAppendUInt32, _XTDataStreamBytesLeftToRead, 
+                       _XTDataStreamBytesLeftToReadInCurrentSegment, _XTDataStreamClearStream, 
+                       _XTDataStreamClearToStartOfSegment, _XTDataStreamCloseReadSegment, 
+                       _XTDataStreamCloseWriteSegment, _XTDataStreamCreateStream, 
+                       _XTDataStreamCurrentReadSegment, _XTDataStreamCurrentWriteSegment, 
+                       _XTDataStreamFree, _XTDataStreamNextSegmentID, _XTDataStreamOpenReadSegment, 
+                       _XTDataStreamOpenWriteSegment, _XTDataStreamReadBytes, _XTDataStreamReadCString, 
+                       _XTDataStreamReadDouble, _XTDataStreamReadString, _XTDataStreamReadUInt32, 
+                       _XTDataStreamResetReadSegment, _XTDataStreamResetStream, _XTDataStreamShow, 
+                       _XTDataStreamSkipReadSegment, _XTDataStreamWithData, _XTIssueSandboxExtension, 
+                       _XTIssueSandboxExtensionsForURLs, _XTIssueSandboxExtensionsForURLsByPID, 
+                       __Z18CopyFindAndReplacePK10__CFStringS1_S1_, __Z19utf8CopyDescriptionPKv, 
+                       __Z29TFontWorkerProtocolSetClassesP14NSXPCInterface, __Z5MergePK9__CFArrayS1_R14TCFSortedArray, 
+                       __Z8utf8HashPKv, __Z9utf8EqualPKvS0_, __ZN10TCFTypeRef15GetBooleanValueEPKv, 
                        __ZN11TCFBookmark16InitBookmarkDataEPK7__CFURLPK9__CFArraym, 
                        __ZN11TCFBookmark18sDefaultPropertiesE, __ZN11TCFBookmark20GetDefaultPropertiesEv, 
                        __ZN11TCFBookmark23CreateDefaultPropertiesEv, __ZN11TCFBookmark28CopyPropertyFromBookmarkDataEPK8__CFDataPK10__CFString, 
@@ -154,7 +154,8 @@ exports:
                        _indexOfSegment, _kAdopted, _kEscapeString, _kFWFailureMarker, 
                        _kFWNonExistentMarker, _kFontAssetsPseudoLanguageCodeForCJK, 
                        _kFontAssetsPseudoLanguageCodeForIndic, _kFontAssetsPseudoLanguageCodeForThai, 
-                       _kIsDirectory, _kIsFile, _parentOfSegment, _readStack, _segmentAtPosition, 
-                       _writeSegmentAtPosition, _writeStack ]
+                       _kFontsDirectoryName, _kFontsDisabledDirectoryName, _kIsDirectory, 
+                       _kIsFile, _kStubFontsDirectoryPath, _parentOfSegment, _readStack, 
+                       _segmentAtPosition, _writeSegmentAtPosition, _writeStack ]
     objc-classes:    [ TFontWorkerClient ]
 ...

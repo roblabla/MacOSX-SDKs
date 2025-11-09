@@ -10,6 +10,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIMenuElement.h>
 #import <UIKit/UIMenu.h>
+#import <UIKit/UIMenuLeaf.h>
 
 typedef NS_OPTIONS(NSInteger, UIKeyModifierFlags) {
     UIKeyModifierAlphaShift     = 1 << 16,  // This bit indicates CapsLock
@@ -23,7 +24,7 @@ typedef NS_OPTIONS(NSInteger, UIKeyModifierFlags) {
 @class UICommand;
 @class UIImage;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// Represents an alternate action to take for a command.
 ///
@@ -59,7 +60,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 
 /// Represents an action to take.
 UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
-@interface UICommand : UIMenuElement
+@interface UICommand : UIMenuElement <UIMenuLeaf>
 
 /// Short display title.
 @property (nonatomic, copy) NSString *title;
@@ -67,7 +68,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 /// Image that can appear next to this command
 @property (nullable, nonatomic, copy) UIImage *image;
 
-/// Elaborated title, if any.
+/// Elaborated title used in keyboard shortcut overlay.
 @property (nullable, nonatomic, copy) NSString *discoverabilityTitle;
 
 /// Action to take on choosing this command.
@@ -123,7 +124,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 // UICommand.propertyList value to indicate that a command is a Sharing menu item. Such an item automatically receives a standard Share submenu.
 UIKIT_EXTERN NSString *const UICommandTagShare API_AVAILABLE(ios(13.0));
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UICommand.h>

@@ -87,7 +87,6 @@ struct if_clonereq {
 	char    *ifcr_buffer;           /* buffer for cloner names */
 };
 
-
 #define IFF_UP          0x1             /* interface is up */
 #define IFF_BROADCAST   0x2             /* broadcast address valid */
 #define IFF_DEBUG       0x4             /* turn on debugging */
@@ -105,7 +104,6 @@ struct if_clonereq {
 #define IFF_LINK2       0x4000          /* per link layer defined bit */
 #define IFF_ALTPHYS     IFF_LINK2       /* use alternate physical connection */
 #define IFF_MULTICAST   0x8000          /* supports multicast */
-
 
 
 /*
@@ -152,9 +150,14 @@ struct if_clonereq {
 
 #define IFQ_MAXLEN      128
 #define IFNET_SLOWHZ    1       /* granularity is 1 second */
-#define IFQ_TARGET_DELAY        (10ULL * 1000 * 1000)   /* 10 ms */
-#define IFQ_UPDATE_INTERVAL     (100ULL * 1000 * 1000)  /* 100 ms */
-
+#define IFQ_DEF_C_TARGET_DELAY        (10ULL * 1000 * 1000)   /* 10 ms */
+#define IFQ_DEF_C_UPDATE_INTERVAL     (100ULL * 1000 * 1000)  /* 100 ms */
+#define IFQ_DEF_L4S_TARGET_DELAY        (10ULL * 1000 * 1000)   /* 10 ms */
+#define IFQ_DEF_L4S_UPDATE_INTERVAL     (100ULL * 1000 * 1000)  /* 100 ms */
+#define IFQ_LL_C_TARGET_DELAY     (10ULL * 1000 * 1000)   /* 10 ms */
+#define IFQ_LL_C_UPDATE_INTERVAL  (100ULL * 1000 * 1000)  /* 100 ms */
+#define IFQ_LL_L4S_TARGET_DELAY     (10ULL * 1000 * 1000)   /* 10 ms */
+#define IFQ_LL_L4S_UPDATE_INTERVAL  (100ULL * 1000 * 1000)  /* 100 ms */
 /*
  * Message format for use in obtaining information about interfaces
  * from sysctl and the routing socket
@@ -282,12 +285,16 @@ struct ifkpi {
 
 #pragma pack()
 
+
 /*
  * Interface request structure used for socket
  * ioctl's.  All interface ioctl's must have parameter
  * definitions which begin with ifr_name.  The
  * remainder may be interface specific.
  */
+#ifdef IFREQ_OPAQUE
+struct  ifreq;
+#else
 struct  ifreq {
 	char    ifr_name[IFNAMSIZ];             /* if name, e.g. "en0" */
 	union {
@@ -344,12 +351,19 @@ struct  ifreq {
 	((ifr).ifr_addr.sa_len > sizeof (struct sockaddr) ? \
 	(sizeof (struct ifreq) - sizeof (struct sockaddr) + \
 	(ifr).ifr_addr.sa_len) : sizeof (struct ifreq))
+#endif /* IFREQ_OPAQUE */
 
 struct ifaliasreq {
 	char    ifra_name[IFNAMSIZ];            /* if name, e.g. "en0" */
+#if __has_ptrcheck
+	struct  sockaddr_in ifra_addr;
+	struct  sockaddr_in ifra_broadaddr;
+	struct  sockaddr_in ifra_mask;
+#else
 	struct  sockaddr ifra_addr;
 	struct  sockaddr ifra_broadaddr;
 	struct  sockaddr ifra_mask;
+#endif /* __has_ptrcheck */
 };
 
 struct rslvmulti_req {
@@ -383,7 +397,6 @@ struct ifstat {
 };
 
 
-
 /*
  * DLIL KEV_DL_PROTO_ATTACHED/DETACHED structure
  */
@@ -393,7 +406,6 @@ struct kev_dl_proto_data {
 	u_int32_t                       proto_remaining_count;
 };
 
-
 #ifdef MALLOC_DECLARE
 MALLOC_DECLARE(M_IFADDR);
 #endif
@@ -401,5 +413,6 @@ MALLOC_DECLARE(M_IFADDR);
 
 
 #include <net/kpi_interface.h>
+
 
 #endif /* !_NET_IF_H_ */

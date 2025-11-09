@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D7FB703F-CE98-30C0-9ED0-FE6B76183A13
+    value:           E8A604F3-56EB-31C0-95D0-C9F07C25FADD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E6E28A1B-DF36-35C8-924A-5A83FCB291F0
+    value:           2BE0B13F-225A-3F11-9D3D-A16B38D7E521
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -22,14 +22,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C91F51A3-855E-3C28-8F69-13CC98ABC721
+    value:           99F94CB1-5BE3-346D-8A2A-186A92B387C5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           96BE89B5-0248-309A-B4EE-1091550887FB
+    value:           F41A1BF6-2FC3-3847-B699-F692FF8E1B24
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IKAnimationDelayKey, _IKAnimationDurationKey, _IKAnimationFrameRateKey, 
                        _IKAnimationVelocityCurveKey, _IKBestRepresentationFromNSImageForPhysicalSize, 
                        _IKCGBitmapContextRefFromCGImageRef, _IKCGBitmapContextRefFromData, 
@@ -188,12 +188,12 @@ exports:
                        IKImageCropView._progressIndicator, IKImageCropView._qcBuffer, 
                        IKImageCropView._qcEffect, IKImageCropView._showValidateButton, 
                        IKImageCropView._showZoomMinMax, IKImageCropView._showZoomSlider, 
-                       IKImageCropView._sourceSize, IKImageCropView._trackingRect, 
-                       IKImageCropView._undoManager, IKImageCropView._useOverlayMask, 
-                       IKImageCropView._usesCircularCrop, IKImageCropView._viewAffineTransform, 
-                       IKImageCropView._zoomFactorMaxResolution, IKImageCropView._zoomFactorMinResolution, 
-                       IKImageCropView._zoomMaxButton, IKImageCropView._zoomMinButton, 
-                       IKImageCropView._zoomSlider, IKImageCropView._zoomValue, IKImageFlowCell._aspectRatio, 
+                       IKImageCropView._sourceSize, IKImageCropView._undoManager, 
+                       IKImageCropView._useOverlayMask, IKImageCropView._usesCircularCrop, 
+                       IKImageCropView._viewAffineTransform, IKImageCropView._zoomFactorMaxResolution, 
+                       IKImageCropView._zoomFactorMinResolution, IKImageCropView._zoomMaxButton, 
+                       IKImageCropView._zoomMinButton, IKImageCropView._zoomSlider, 
+                       IKImageCropView._zoomValue, IKImageFlowCell._aspectRatio, 
                        IKImageFlowCell._fog, IKImageFlowCell._hasHighlight, IKImageFlowCell._highlightTested, 
                        IKImageFlowCell._imageCell, IKImageFlowCell._importFactor, 
                        IKImageFlowCell._inlinePreview, IKImageFlowCell._position, 
@@ -243,15 +243,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FE5E0A2A-0FAF-3449-A7C3-FED0EED3F656
+    value:           A3F5EE69-0568-3379-9A33-3AF4993EEA25
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E90D2CE8-3624-3ED5-BDC9-75308A6E9CF1
+    value:           75A6E2B7-9EBD-3E64-A6B8-C5A81ABC6CA3
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzComposer.framework/Versions/A/QuartzComposer'
 current-version: 168
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _GFArrayFromArgumentList, _GFBacktrace, _GFDebug, _GFDebuggingLevel, 
                        _GFException, _GFFilterStringsWithKeywords, _GFGetDebugMessageCallback, 
                        _GFGetLogMessageCallback, _GFKeywordsFromSearchString, _GFLog, 
@@ -378,7 +378,7 @@ exports:
                        QCArray._array, QCArray._count, QCArray._elementSize, QCContext._iterationManager, 
                        QCParameterInfo.size, QCParameterInfo.type, QCPatch._renderingInfo, 
                        QCPatchRenderingInfo._context, QCPatchRenderingInfo.flags ]
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ _C3DAddBaseType, _C3DAnimationChannelCreate, _C3DAnimationChannelCreateCopy, 
                        _C3DAnimationChannelGetAnimation, _C3DAnimationChannelGetSID, 
                        _C3DAnimationChannelGetTarget, _C3DAnimationChannelGetTargetPath, 
@@ -3148,14 +3148,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           614CAA2B-42D1-3190-A0DC-5A1D3B978531
+    value:           4B228CAD-BD65-371A-A768-2033FFC966B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A1534FDB-1B2E-39A1-9C43-0E082430B46E
+    value:           163CF1AC-3F27-372E-AA9F-8910E99B88B9
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzFilters.framework/Versions/A/QuartzFilters'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _QuartzFilterApplyToContext, _QuartzFilterCopyContextDict, 
                        _QuartzFilterCreateHostMatchingFilter, _QuartzFilterCreateImageCoverter, 
                        _QuartzFilterCreateWithOutputIntents, _QuartzFilterCreateWithURL, 

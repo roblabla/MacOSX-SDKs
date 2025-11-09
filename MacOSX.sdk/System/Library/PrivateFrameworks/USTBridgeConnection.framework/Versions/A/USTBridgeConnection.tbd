@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3E6BB89A-D25E-34C0-B174-E8BC06F38A18
+    value:           492778BF-9D95-32DC-89DB-ED84BA0705CF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2E69AD17-8F24-3912-B029-7F818CDEBADA
+    value:           F7A493B4-9AEA-31A8-889B-68C69420BA53
 install-name:    '/System/Library/PrivateFrameworks/USTBridgeConnection.framework/Versions/A/USTBridgeConnection'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s19USTBridgeConnection0aB5ErrorO08USTAgentbC0yA2CmFWC', 
                        '_$s19USTBridgeConnection0aB5ErrorO8rawValueACSgSS_tcfC', 
                        '_$s19USTBridgeConnection0aB5ErrorO8rawValueSSvg', '_$s19USTBridgeConnection0aB5ErrorO8rawValueSSvpMV', 

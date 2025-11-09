@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CD75B2EF-55CD-35BE-AC32-46ACBB97C6F9
+    value:           9199477A-0030-3D64-9DE1-3E7CDA5A57AA
   - target:          x86_64-maccatalyst
-    value:           CD75B2EF-55CD-35BE-AC32-46ACBB97C6F9
+    value:           9199477A-0030-3D64-9DE1-3E7CDA5A57AA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           34BD1651-8EC9-3B45-B62B-1648E80598A5
+    value:           A62E76F3-3350-3128-BF68-749282191857
   - target:          arm64e-maccatalyst
-    value:           34BD1651-8EC9-3B45-B62B-1648E80598A5
+    value:           A62E76F3-3350-3128-BF68-749282191857
 install-name:    '/usr/lib/libipsec.A.dylib'
 current-version: 300
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ ___ipsec_errcode, ___ipsec_set_strerror, ___libipsec_create_buffer, 
                        ___libipsec_delete_buffer, ___libipsec_flex_debug, ___libipsec_flush_buffer, 
                        ___libipsec_scan_buffer, ___libipsec_scan_bytes, ___libipsec_scan_string, 

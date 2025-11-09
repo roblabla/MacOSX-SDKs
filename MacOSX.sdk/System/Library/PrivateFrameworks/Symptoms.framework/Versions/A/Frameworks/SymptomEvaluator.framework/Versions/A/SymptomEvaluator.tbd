@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4B91802E-A7EC-365F-B863-4AF630F7B8A3
+    value:           9D36A260-2E33-3038-845F-2177AD5733BF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D4368A06-B81E-3362-9FA8-47620E2935D5
+    value:           85E285F5-7475-3445-A9A7-7ABC78A86C2E
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomEvaluator.framework/Versions/A/SymptomEvaluator'
-current-version: 1617.101.2
+current-version: 1732
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AlgosPackScore, _AlgosUnpackScore, _CLIPS_BASEBAND_BEDF_MODULE, 
                        _CLIPS_BASEBAND_MAV_MODULE, _CLIPS_BASEBAND_MODULE, _CLIPS_BLUETOOTH_MODULE, 
                        _CLIPS_COMMON_MODULE, _CLIPS_HOMEKIT_MODULE, _CLIPS_MAIN_MODULE, 
@@ -34,9 +34,10 @@ exports:
                        _CTShimSubscriptionPreferredRATSelection, _CTShimSubscriptionRATSelectionIsNR, 
                        _CTShimSubscriptionRATSelectionMask, _CTShimSubscriptionSupports5G, 
                        _CTShimSubscriptions, _activate_symptom_evaluator_handling, 
-                       _boottime_secs, _client_transactions_release, _configure_analytics_launchpad_for_helper, 
-                       _configure_symptom_evaluator_handling, _configure_symptom_logging, 
-                       _dateStringMillisecondsFromReferenceInterval, _dateStringMillisecondsFromTimeInterval, 
+                       _activeTraceTargets, _apparentTime, _boottime_secs, _client_transactions_release, 
+                       _configure_analytics_launchpad_for_helper, _configure_symptom_evaluator_handling, 
+                       _configure_symptom_logging, _dateStringMillisecondsFromReferenceInterval, 
+                       _dateStringMillisecondsFromTimeInterval, _dispatch_with_apparent_delay, 
                        _formattedDateStringForCurrentTime, _formattedDateStringForTimeInterval, 
                        _hexStringForData, _init_analytics_portal_listening, _init_managed_event_listening, 
                        _init_symptom_evaluator_listening, _isDateWithinScope, _kAWDCLIPSTemplateKey, 
@@ -46,6 +47,7 @@ exports:
                        _kNWPVarModelAnalytics, _kNWPVarModelEpsilonGreedyEpsilonDecayRate, 
                        _kNWPVarModelEpsilonGreedyEpsilonDecayedMinimumValue, _kNWPVarModelEpsilonGreedyEpsilonValue, 
                        _kNWPVarModelEpsilonGreedyLastRewardsRetained, _kNWPVarModelEpsilonGreedyResetAtNthPull, 
+                       _kNWPVarModelUpperConfidenceBoundConfidenceValue, _kNWPVarModelUpperConfidenceBoundResetAtNthPull, 
                        _kNetDiagnosticsShim_TaskArchiveBaseDuration, _kNetDiagnosticsShim_TaskArchiveBaseSize, 
                        _kNetDiagnosticsShim_TaskArchiveHVDuration, _kNetDiagnosticsShim_TaskArchiveHVSize, 
                        _kNetDiagnosticsShim_TaskArchiveTTLDuration, _kNetDiagnosticsShim_TaskArchiveTTLSize, 
@@ -154,30 +156,33 @@ exports:
                        _kSymptomAnalyticsServiceTypicalUsageToggle, _kSymptomAnalyticsServiceUsage, 
                        _kSymptomAnalyticsServiceWatchpointKey, _kSymptomAnalyticsServiceWatchpointTarget, 
                        _kSymptomAnalyticsServiceWatchpointValue, _kSymptomAnalyticsTypeBundleIdentifier, 
-                       _kSymptomAnalyticsTypeProcessName, _lowInternetModeScoresDL, 
+                       _kSymptomAnalyticsTypeProcessName, _kSymptomForcePreferCellOverWiFiAutoDisableTimestampKey, 
+                       _kSymptomForcePreferCellOverWiFiEnableKey, _lowInternetModeScoresDL, 
                        _lowInternetModeScoresUL, _machAbsoluteTimeFromNanoseconds, 
                        _machAbsoluteTime_secs, _machContinuousTime_secs, _nanosecondsFromMachAbsoluteTime, 
-                       _secondsFromMachAbsoluteTime, _symptom_evaluator_shutdown, 
-                       _timeIntervalFromMachAbsoluteTime, _timeStringMillisecondsBetweenTimeIntervals, 
-                       _timeStringMillisecondsDuration, _timeStringMillisecondsFromReferenceInterval, 
-                       _timeStringMillisecondsFromTimeInterval, _uptime_secs ]
+                       _secondsFromMachAbsoluteTime, _setApparentTime, _symptom_evaluator_shutdown, 
+                       _timeIntervalFrom1970ToMidnight, _timeIntervalFromMachAbsoluteTime, 
+                       _timeStringMillisecondsBetweenTimeIntervals, _timeStringMillisecondsDuration, 
+                       _timeStringMillisecondsFromReferenceInterval, _timeStringMillisecondsFromTimeInterval, 
+                       _traceCallout, _traceEntry, _traceItem, _uptime_secs ]
     objc-classes:    [ AlgosScoreHandler, AnalyticsEngineCore, AppHistoryScreener, 
-                       AppHistoryScreenerEpisode, CLIPSShim, COSMEventSummary, COSMStateSummary, 
-                       CellFallbackHandler, CellOutrankHandler, CellOutrankHandlerSTM, 
-                       CellularStateRelay, ConfigurationParams, CoreTelephonyShim, 
-                       CountDown, DailyMaintenanceActivity, DateRounder, DecisionDetails, 
-                       Evaluation, EventDescription, ExpertSystemHandlerCore, ExpertSystemStateCore, 
-                       FlowAnalyticsEngine, HourlyMaintenanceActivity, ImpoExpoService, 
-                       JournalTimeStamp, LQMPredictionInternalRecord, LightweightTimer, 
-                       ManagedEventHandler, ManagedEventTransport, MathUtility, NWAppAdvice, 
-                       NWNetworkAdviceUpdate, NWNetworkOfInterest, NWNetworkPredictions, 
-                       NWPVar, NWPVarBandit, NWPVarValueItem, NetDiagnosticsShim, 
-                       NetDomainsHandler, NetworkAnalyticsEngine, NetworkAnalyticsModel, 
-                       NetworkAnalyticsQueueStatistics, NetworkAnalyticsQueueStatisticsSlotEntry, 
+                       AppHistoryScreenerEpisode, ApparentTimeHandler, CLIPSShim, 
+                       COSMEventSummary, COSMStateSummary, CellFallbackHandler, CellOutrankHandler, 
+                       CellOutrankHandlerSTM, CellularStateRelay, ConfigurationParams, 
+                       CoreTelephonyShim, CountDown, DailyMaintenanceActivity, DateRounder, 
+                       DecisionDetails, Evaluation, EventDescription, ExpertSystemHandlerCore, 
+                       ExpertSystemStateCore, FlowAnalyticsEngine, HourlyMaintenanceActivity, 
+                       ImpoExpoService, JournalTimeStamp, LQMPredictionInternalRecord, 
+                       LightweightTimer, ManagedEventHandler, ManagedEventTransport, 
+                       MathUtility, NWAppAdvice, NWNetworkAdviceUpdate, NWNetworkOfInterest, 
+                       NWNetworkPredictions, NWPVar, NWPVarBandit, NWPVarStoreImpoExpo, 
+                       NWPVarValueItem, NetDiagnosticsShim, NetDomainsHandler, NetworkAnalyticsEngine, 
+                       NetworkAnalyticsModel, NetworkAnalyticsQueueStatistics, NetworkAnalyticsQueueStatisticsSlotEntry, 
                        NetworkAnalyticsStateRelay, NetworkDomainsUtility, NoBackhaulHandler, 
                        PeriodicMaintenanceActivity, SFActivityBitmaps, SFActivityFullBitmaps, 
                        SFCache, SFEntitlements, SemiDailyMaintenanceActivity, ServiceImpl, 
                        StateWatcher, StopWatch, SymptomEvaluator, SymptomExpertSystemHandler, 
-                       SystemProperties, SystemSettingsRelay, TCPProgressProbe, WeeklyMaintenanceActivity ]
+                       SystemProperties, SystemSettingsRelay, TCPProgressProbe, TraceRecorder, 
+                       WeeklyMaintenanceActivity ]
     objc-ivars:      [ AnalyticsEngineCore.workspace ]
 ...

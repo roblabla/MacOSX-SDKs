@@ -4,21 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FB6243F2-4917-3B4A-AE43-6CDB8178CF93
+    value:           8A9BA14E-B71E-3FC4-8586-C2DA937E97B2
   - target:          x86_64-maccatalyst
-    value:           FB6243F2-4917-3B4A-AE43-6CDB8178CF93
+    value:           8A9BA14E-B71E-3FC4-8586-C2DA937E97B2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           354A4B52-A304-3236-9144-2ACFCB202C0C
+    value:           BC5A0A54-D4BC-3422-98B3-04EB93E5A154
   - target:          arm64e-maccatalyst
-    value:           354A4B52-A304-3236-9144-2ACFCB202C0C
+    value:           BC5A0A54-D4BC-3422-98B3-04EB93E5A154
 install-name:    '/System/Library/PrivateFrameworks/AvatarPersistence.framework/Versions/A/AvatarPersistence'
+current-version: 305
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AVTAnyTransactionHasAvatarChange, _AVTAnyTransactionHasChangesFromAuthor, 
                        _AVTAnyTransactionHasChangesFromOtherThanAuthor, _AVTAnyTransactionHasChangesFromOtherThanBundleID, 
                        _AVTAvatarRecordAttributeNameAvatarData, _AVTAvatarRecordAttributeNameIdentifier, 
@@ -46,11 +47,14 @@ exports:
                        _AVTUIForceNoMemojiRecentStickersSplashScreen, _AVTUIForceNoMemojiRecentStickersSplashScreen_once, 
                        _AVTUIGlobalPreferencesAdaptativeFrameRate, _AVTUIGlobalPreferencesAlwaysShowPaddleView, 
                        _AVTUIGlobalPreferencesAlwaysShowSplashScreen, _AVTUIGlobalPreferencesAlwaysShowStickerRecentsSplashScreen, 
-                       _AVTUIGlobalPreferencesAvatarPreLoadOnLaunch, _AVTUIGlobalPreferencesDisableDeleteConfirmation, 
-                       _AVTUIGlobalPreferencesDisableEditAfterDuplicate, _AVTUIGlobalPreferencesEditorGroupName, 
-                       _AVTUIGlobalPreferencesEditorShowAssetsName, _AVTUIGlobalPreferencesFlushStickersCache, 
-                       _AVTUIGlobalPreferencesFlushThumbnailCache, _AVTUIGlobalPreferencesForceCameraDisclosures, 
-                       _AVTUIGlobalPreferencesForceNoMemojiStickerRecentsSplashScreen, 
+                       _AVTUIGlobalPreferencesAvatarPreLoadOnLaunch, _AVTUIGlobalPreferencesDefaultShowAssetsWarning, 
+                       _AVTUIGlobalPreferencesDefaultShowMemojiClassicDisclosureWarning, 
+                       _AVTUIGlobalPreferencesDefaultShowMemojiStickerRecentsDisclosureWarning, 
+                       _AVTUIGlobalPreferencesDefaultShowMemojiStickersDisclosureWarning, 
+                       _AVTUIGlobalPreferencesDisableDeleteConfirmation, _AVTUIGlobalPreferencesDisableEditAfterDuplicate, 
+                       _AVTUIGlobalPreferencesEditorGroupName, _AVTUIGlobalPreferencesEditorShowAssetsName, 
+                       _AVTUIGlobalPreferencesFlushStickersCache, _AVTUIGlobalPreferencesFlushThumbnailCache, 
+                       _AVTUIGlobalPreferencesForceCameraDisclosures, _AVTUIGlobalPreferencesForceNoMemojiStickerRecentsSplashScreen, 
                        _AVTUIGlobalPreferencesGroupDialUsesMasking, _AVTUIGlobalPreferencesHasDisplayedAnimojiCameraDisclosureSplashScreen, 
                        _AVTUIGlobalPreferencesHasDisplayedAnimojiSplashScreen, _AVTUIGlobalPreferencesHasDisplayedCameraDisclosureSplashScreen, 
                        _AVTUIGlobalPreferencesHasDisplayedCameraEffectsCameraDisclosureSplashScreen, 

@@ -3,7 +3,7 @@
 
     Framework:  CoreMedia
  
-    Copyright 2012-2015 Apple Inc. All rights reserved.
+    Copyright 2012-2022 Apple Inc. All rights reserved.
 
 */
 
@@ -116,6 +116,17 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_UnderlineStyle API_AVAILABLE(
                 kCMTextMarkupAttribute_GenericFontFamilyName associated with each character.
 */
 CM_EXPORT const CFStringRef kCMTextMarkupAttribute_FontFamilyName API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0));
+
+/*!
+    @const      kCMTextMarkupAttribute_FontFamilyNameList
+    @abstract   The array of font name(s) and if that name is a generic or a platform name.
+ 
+    @discussion Value must be a CFArray holding CFDictionaries that are used to render and/or measure text. Each dictionary entry has a font family name and a font kind value.
+                The font kind value can be either 0 for generic font family or 1 for platform font family corresponding to the font family name.
+                The CFArray value can hold multiple font names as a fallback where the author prefers specific fonts. If the renderer does not support the first font entry, it tries the following.
+                For example, the array includes InexistantFont and Times New Roman font names, it is expected the renderer to select the "Times New Roman" font for drawing caption.
+*/
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_FontFamilyNameList API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
 
 /*!
     @const      kCMTextMarkupAttribute_GenericFontFamilyName

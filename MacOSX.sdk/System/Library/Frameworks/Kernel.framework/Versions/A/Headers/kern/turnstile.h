@@ -33,6 +33,10 @@
 #include <mach/kern_return.h>
 #include <sys/cdefs.h>
 
+__BEGIN_DECLS
 
+
+
+__END_DECLS
 
 #endif /* _TURNSTILE_H_ */

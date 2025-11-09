@@ -20,10 +20,12 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE(ios(13.4))
 @protocol PKAddSecureElementPassViewControllerDelegate <NSObject>
 
+@optional
 - (void)addSecureElementPassViewController:(PKAddSecureElementPassViewController *)controller
           didFinishAddingSecureElementPass:(nullable PKSecureElementPass *)pass
                                      error:(nullable NSError *)error API_DEPRECATED("Use addSecureElementPassViewController:didFinishAddingSecureElementPasses:error: instead", ios(13.4, 14.0));
 
+@required
 - (void)addSecureElementPassViewController:(PKAddSecureElementPassViewController *)controller
         didFinishAddingSecureElementPasses:(nullable NSArray<PKSecureElementPass *> *)passes
                                      error:(nullable NSError *)error;

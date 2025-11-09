@@ -69,13 +69,13 @@ NS_ASSUME_NONNULL_BEGIN
 APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @protocol NSValidatedUserInterfaceItem
-@property (readonly, nullable) SEL action;
-@property (readonly) NSInteger tag;
+@property (readonly, nullable) SEL action NS_SWIFT_UI_ACTOR;
+@property (readonly) NSInteger tag NS_SWIFT_UI_ACTOR;
 @end
 
 /* Protocol implemented by validator objects */
 @protocol NSUserInterfaceValidations
-- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)item;
+- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)item NS_SWIFT_UI_ACTOR;
 @end
 
 API_UNAVAILABLE_END

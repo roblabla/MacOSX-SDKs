@@ -10,12 +10,14 @@
 #import <ShazamKit/SHSignature.h>
 #import <ShazamKit/SHMatchedMediaItem.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// @brief A @c SHMatch indicates that a Signature matched a reference Signature in the target @c SHCatalog
 /// @discussion A @c SHSignature can match many reference Signatures in a catalog and in turn a Signature can map to
 /// many @c SHMediaItem. Therefore a match encapsulates the query signature and all of the various @c SHMediaItem it matched
-SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
+///
+/// @note @c SHMatch is not intended to be subclassed
+SH_EXPORT NS_SWIFT_SENDABLE API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface SHMatch : NSObject <NSSecureCoding>
 
 /// @brief The @c SHMatchedMediaItem belonging to the instance of @c SHSignature that we matched
@@ -33,4 +35,4 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

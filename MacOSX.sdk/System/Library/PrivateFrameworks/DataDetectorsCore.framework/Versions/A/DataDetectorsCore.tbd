@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           84C03954-C41E-3288-9AE6-A0031044860C
+    value:           7EB7D04E-006C-3959-9245-936929351209
   - target:          x86_64-maccatalyst
-    value:           84C03954-C41E-3288-9AE6-A0031044860C
+    value:           7EB7D04E-006C-3959-9245-936929351209
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           950B930E-D92B-3126-AF2B-F125778C0486
+    value:           F172929C-C302-322A-A748-C83569CF86B5
   - target:          arm64e-maccatalyst
-    value:           950B930E-D92B-3126-AF2B-F125778C0486
+    value:           F172929C-C302-322A-A748-C83569CF86B5
 install-name:    '/System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/DataDetectorsCore'
-current-version: 697.2
+current-version: 727
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DDAddressBookAccessAllowed, _DDAddressResultCanBeMergedWith, 
                        _DDApplyOptions, _DDBinderAIMOrEmailKey, _DDBinderAddressBookContactNameKey, 
                        _DDBinderAirlineCodeKey, _DDBinderApproxTimeKey, _DDBinderAuthCodeKey, 
@@ -37,14 +37,15 @@ exports:
                        _DDBinderLabelKey, _DDBinderLocationKey, _DDBinderMailURLKey, 
                        _DDBinderMapsURLKey, _DDBinderMoneyKey, _DDBinderNoResultKey, 
                        _DDBinderPOBoxKey, _DDBinderParsecSourceKey, _DDBinderPhoneNumberKey, 
-                       _DDBinderQuotedShortPhoneNumberKey, _DDBinderSignatureBlockKey, 
-                       _DDBinderSpecialDateTimeKey, _DDBinderStateKey, _DDBinderStreetKey, 
-                       _DDBinderStreetNameKey, _DDBinderStreetNumberKey, _DDBinderSubAdministrativeAreaKey, 
-                       _DDBinderSubLocalityKey, _DDBinderTagKey, _DDBinderTimeDurationKey, 
-                       _DDBinderTimeKey, _DDBinderTimeOffsetKey, _DDBinderTimestampKey, 
-                       _DDBinderTrackingInformationKey, _DDBinderTrackingNumberKey, 
-                       _DDBinderUnquotedShortPhoneNumberKey, _DDBinderValueKey, _DDBinderWebURLKey, 
-                       _DDBinderZipCodeKey, _DDCacheCopyStatsDescription, _DDCacheCreateWithSubTable, 
+                       _DDBinderPhysicalAmountKey, _DDBinderQuotedShortPhoneNumberKey, 
+                       _DDBinderSignatureBlockKey, _DDBinderSpecialDateTimeKey, _DDBinderStateKey, 
+                       _DDBinderStreetKey, _DDBinderStreetNameKey, _DDBinderStreetNumberKey, 
+                       _DDBinderSubAdministrativeAreaKey, _DDBinderSubLocalityKey, 
+                       _DDBinderTagKey, _DDBinderTimeDurationKey, _DDBinderTimeKey, 
+                       _DDBinderTimeOffsetKey, _DDBinderTimestampKey, _DDBinderTrackingInformationKey, 
+                       _DDBinderTrackingNumberKey, _DDBinderUnquotedShortPhoneNumberKey, 
+                       _DDBinderValueKey, _DDBinderWebURLKey, _DDBinderZipCodeKey, 
+                       _DDCacheCopyStatsDescription, _DDCacheCreateWithSubTable, 
                        _DDCacheSetTemporaryDirectory, _DDCacheWriteAtPath, _DDCacheWriteAtPathCompressed, 
                        _DDCacheWriteWithSuffix, _DDCalendarAccessAllowed, _DDCopyPunycodedWebURLString, 
                        _DDCrash, _DDCreateDataFromFileAtPath, _DDCreateDataFromFileAtUrl, 
@@ -74,7 +75,7 @@ exports:
                        _DDResultCreateVerboseXMLDescription, _DDResultCreateVerboseXMLDescriptionFromResults, 
                        _DDResultCreateVerboseXMLRepresentation, _DDResultCreateXMLRepresentation, 
                        _DDResultCurrencyExtraction, _DDResultDateExtractionDependsOnContextTense, 
-                       _DDResultExtractDayAndMonthWithSpecialDayIdentifierInYear, 
+                       _DDResultDisableURLSchemeChecking, _DDResultExtractDayAndMonthWithSpecialDayIdentifierInYear, 
                        _DDResultExtractHourMinuteSecondCopyTimeZone, _DDResultGetCFTypeID, 
                        _DDResultGetCategory, _DDResultGetContextualData, _DDResultGetContextualDataForKey, 
                        _DDResultGetContextualFloat, _DDResultGetCountryCode, _DDResultGetMatchedString, 
@@ -90,14 +91,16 @@ exports:
                        _DDResultHasProperties, _DDResultHasType, _DDResultIsDateRangeOrTimeRange, 
                        _DDResultIsEqualToUnitTestResult, _DDResultIsPartialDateRangeOrTimeRange, 
                        _DDResultIsPastDate, _DDResultIsPastDateWithLocale, _DDResultNeedsMeridianGuess, 
-                       _DDResultOffsetAbsoluteRange, _DDResultProximitySort, _DDResultRemoveSubresultWithType, 
-                       _DDResultSelectBest, _DDResultSetAbsoluteRange, _DDResultSetContent, 
-                       _DDResultSetCurrentDateForExtraction, _DDResultSetLocaleForExtraction, 
-                       _DDResultSetMatchedString, _DDResultSetProperties, _DDResultSetSubResults, 
-                       _DDResultSetTestUrlificationRange, _DDResultSetType, _DDResultTimeIsApprox, 
-                       _DDResultTypesAreEqual, _DDResultValueContains, _DDScanQueryAddLineBreak, 
-                       _DDScanQueryAddSeparator, _DDScanQueryAddTextFragment, _DDScanQueryCopyRange, 
-                       _DDScanQueryCreate, _DDScanQueryCreateFromString, _DDScanQueryGetFragmentMetaData, 
+                       _DDResultOffsetAbsoluteRange, _DDResultPhysicalUnitExtraction, 
+                       _DDResultPhysicalUnitsExtraction, _DDResultProximitySort, 
+                       _DDResultRemoveSubresultWithType, _DDResultSelectBest, _DDResultSetAbsoluteRange, 
+                       _DDResultSetContent, _DDResultSetCurrentDateForExtraction, 
+                       _DDResultSetLocaleForExtraction, _DDResultSetMatchedString, 
+                       _DDResultSetProperties, _DDResultSetSubResults, _DDResultSetTestUrlificationRange, 
+                       _DDResultSetType, _DDResultTimeIsApprox, _DDResultTypesAreEqual, 
+                       _DDResultValueContains, _DDScanQueryAddLineBreak, _DDScanQueryAddSeparator, 
+                       _DDScanQueryAddTextFragment, _DDScanQueryCopyRange, _DDScanQueryCreate, 
+                       _DDScanQueryCreateFromString, _DDScanQueryGetFragmentMetaData, 
                        _DDScanQueryGetFragmentRange, _DDScanQueryGetNumberOfFragments, 
                        _DDScanQueryHasNoLetterBeforeNextLine, _DDScanQuerySetMetadataReleaseCallback, 
                        _DDScannerCancelScanning, _DDScannerCopyResults, _DDScannerCopyResultsCheckOverlap, 

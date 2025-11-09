@@ -7,7 +7,7 @@
 
 @class NSData, NSString, NSError, NSInputStream, NSOutputStream;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_OPTIONS(NSUInteger, NSPropertyListMutabilityOptions) {
     NSPropertyListImmutable = kCFPropertyListImmutable,
@@ -24,9 +24,7 @@ typedef NS_ENUM(NSUInteger, NSPropertyListFormat) {
 typedef NSPropertyListMutabilityOptions NSPropertyListReadOptions;
 typedef NSUInteger NSPropertyListWriteOptions;
 
-@interface NSPropertyListSerialization : NSObject {
-    void *reserved[6];
-}
+@interface NSPropertyListSerialization : NSObject
 
 /* Verify that a specified property list is valid for a given format. Returns YES if the property list is valid.
  */
@@ -59,4 +57,4 @@ typedef NSUInteger NSPropertyListWriteOptions;
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

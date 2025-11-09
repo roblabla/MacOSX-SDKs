@@ -4,45 +4,49 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           454CEB15-2C0D-343B-B459-4A777C960ED8
+    value:           0A6BFB72-3CD7-334D-9064-245C0D6FE9A9
   - target:          x86_64-maccatalyst
-    value:           454CEB15-2C0D-343B-B459-4A777C960ED8
+    value:           0A6BFB72-3CD7-334D-9064-245C0D6FE9A9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D5651151-FF16-39D5-9482-A9DB6DA18FD6
+    value:           593FB14B-FACF-3BC6-9531-759370F82D94
   - target:          arm64e-maccatalyst
-    value:           D5651151-FF16-39D5-9482-A9DB6DA18FD6
+    value:           593FB14B-FACF-3BC6-9531-759370F82D94
 install-name:    '/System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices'
-current-version: 493
+current-version: 552
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/IconFoundation.framework/Versions/A/IconFoundation' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _ISCreateCGImageFromBindingWithSizeScaleAndOptions, __ISCopyCacheContentsDescription, 
-                       __ISCopyCachePath, __ISCopyICNSDataFromBinding, __ISCreateCGImageForTypeAtScaleInternal, 
-                       __ISCreateCGImageFromBindingWithSizeScaleAndOptions, __ISCreateCGImageFromBindingWithSizeScaleAndOptionsAsync, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _ISCreateCGImageFromBindingWithSizeScaleAndOptions, _ISIsResourceKey, 
+                       __ISCopyCacheContentsDescription, __ISCopyCachePath, __ISCopyICNSDataFromBinding, 
+                       __ISCreateCGImageForTypeAtScaleInternal, __ISCreateCGImageFromBindingWithSizeScaleAndOptions, 
+                       __ISCreateCGImageFromBindingWithSizeScaleAndOptionsAsync, 
                        __ISDefaultLog, __ISGDBIconsCGCacheList, __ISGenerateCacheImagesFromBindingWithSizeRangeScaleAndOptions, 
                        __ISGetGlobalIconImagesCacheMaxEntriesAndMaxDataSize, __ISGetIcnsIndex, 
                        __ISGetIconFamilyData, __ISGetIconRefVariant, __ISIcnsIndexGetInfo, 
-                       __ISIcnsIndexNext, __ISIcnsIndexPrev, __ISIconRefContainsCGPoint, 
-                       __ISIconRefIntersectsCGRect, __ISIconRefToHIShape, __ISIconRefToIconFamily, 
-                       __ISIconServicesGetCGImageRefFromIconRef, __ISIconServicesGetCGImageRefFromURL, 
-                       __ISIndexIsValid, __ISIsIconRefMaskEmpty, __ISPlotIconRefInContext, 
-                       __ISPlotInContext, __ISPrepareISIconSignpostLog, __ISProcessIsRoot, 
-                       __ISSetGlobalIconImagesCacheMaxEntriesAndMaxDataSize, __ISSetIconFamilyData, 
-                       __ISTraceLog, __ISURLCacheLog, __kISIconsInvalidatedDarwinNotification, 
+                       __ISIcnsIndexNext, __ISIcnsIndexPrev, __ISIconDataForResourceProxy, 
+                       __ISIconRefContainsCGPoint, __ISIconRefIntersectsCGRect, __ISIconRefToHIShape, 
+                       __ISIconRefToIconFamily, __ISIconServicesGetCGImageRefFromIconRef, 
+                       __ISIconServicesGetCGImageRefFromURL, __ISIndexIsValid, __ISInvalidateCacheEntriesForBundleIdentifier, 
+                       __ISIsIconRefMaskEmpty, __ISPlotIconRefInContext, __ISPlotInContext, 
+                       __ISPrepareISIconSignpostLog, __ISPrimaryIconDataForApplicationProxy, 
+                       __ISProcessIsRoot, __ISSetGlobalIconImagesCacheMaxEntriesAndMaxDataSize, 
+                       __ISSetIconFamilyData, __ISTraceLog, __ISURLCacheLog, __kISAttachedResourceInfo, 
+                       __kISFolderCustomIconFileName, __kISIconsInvalidatedDarwinNotification, 
                        __kISIconsInvalidatedNotification, __kISImageRequestTimeoutForeverKey, 
-                       _kISBackgroundResourceKey, _kISBadgeResourceKey, _kISIcnsDarkVariantName, 
-                       _kISIcnsErrorDomain, _kISIcnsPrimaryVariantName, _kISIcnsSelectedVariantName, 
-                       _kISIcnsTemplateVariantName, _kISIconDecorationAliasType, 
-                       _kISIconDecorationBadgeType, _kISIconDecorationCautionAlertType, 
-                       _kISIconDecorationDropFolderBadgeType, _kISIconDecorationEmbossType, 
+                       _getFocusRingTint, _kISBackgroundResourceKey, _kISBadgeResourceKey, 
+                       _kISIcnsDarkVariantName, _kISIcnsErrorDomain, _kISIcnsPrimaryVariantName, 
+                       _kISIcnsSelectedVariantName, _kISIcnsTemplateVariantName, 
+                       _kISIconDecorationAliasType, _kISIconDecorationBadgeType, 
+                       _kISIconDecorationCautionAlertType, _kISIconDecorationDropFolderBadgeType, 
+                       _kISIconDecorationEmbossType, _kISIconDecorationFolderType, 
                        _kISIconDecorationLockedBadgeType, _kISIconDecorationNewFolderType, 
                        _kISIconDecorationPositionType, _kISIconDecorationPositionTypeCenter, 
                        _kISIconDecorationPositionTypeLeadingBottom, _kISIconDecorationPositionTypeTrailingBottom, 
@@ -53,64 +57,60 @@ exports:
                        _kISImageDescriptorCarNotification, _kISImageDescriptorCustomDocumentCompact, 
                        _kISImageDescriptorCustomDocumentRegular, _kISImageDescriptorCustomDocumentScalableSize, 
                        _kISImageDescriptorCustomDocumentSize, _kISImageDescriptorCustomDocumentTable, 
-                       _kISImageDescriptorHomeScreen, _kISImageDescriptorMessagesExtensionBadge, 
-                       _kISImageDescriptorMessagesExtensionLauncher, _kISImageDescriptorMessagesExtensionStatus, 
-                       _kISImageDescriptorNotification, _kISImageDescriptorSpotlight, 
-                       _kISImageDescriptorTableUIName, _kISPrimaryResourceKey, _kISTextResourceKey, 
-                       _kISTintColorResourceKey, _kIconCompilerImageInfoIsSelectedVariantKey, 
-                       _kIconCompilerImageInfoNameKey, _kIconCompilerImageInfoScaleKey, 
-                       _kIconCompilerImageInfoSizeKey ]
-    objc-classes:    [ ISAssetCatalogResource, ISBundleIcon, ISBundleIdentifierIcon, 
-                       ISCenterEmbossRecipe, ISCompositor, ISCompositorElement, ISConcreteIcon, 
-                       ISContentLayer, ISContinuousRoundedRect, ISCustomIcon, ISDecoratedIcon, 
-                       ISDefaults, ISGenerationRequest, ISGenerationResponse, ISGenericFolderIcon, 
-                       ISGenericRecipe, ISHintedRect, ISIcns, ISIcnsIcon, ISIcon, 
+                       _kISImageDescriptorHomeScreen, _kISImageDescriptorLargeHomeScreen, 
+                       _kISImageDescriptorMessagesExtensionBadge, _kISImageDescriptorMessagesExtensionLauncher, 
+                       _kISImageDescriptorMessagesExtensionStatus, _kISImageDescriptorNotification, 
+                       _kISImageDescriptorSpotlight, _kISImageDescriptorTableUIName, 
+                       _kISPrimaryResourceKey, _kISTextResourceKey, _kISTintColorResourceKey, 
+                       _kIconCompilerImageInfoIsSelectedVariantKey, _kIconCompilerImageInfoNameKey, 
+                       _kIconCompilerImageInfoScaleKey, _kIconCompilerImageInfoSizeKey ]
+    objc-classes:    [ ISAssetCatalogResource, ISCenterBadgeRecipe, ISCenterEmbossRecipe, 
+                       ISClippingRecipe, ISCompositor, ISCompositorElement, ISCompositorResourceProviderKey, 
+                       ISContentLayer, ISDefaults, ISGenerationRequest, ISGenerationResponse, 
+                       ISGenericRecipe, ISGraphicIconConfiguration, ISIcns, ISIcon, 
                        ISIconCache, ISIconCacheConfiguration, ISIconDecoration, ISIconDecorationResource, 
-                       ISIconLayer, ISIconManager, ISIconObserver, ISIconResourceLocator, 
-                       ISIconSpecification, ISIconset, ISImageBag, ISImageBagIcon, 
-                       ISImageCache, ISImageDescriptor, ISImageSpecification, ISImageStyleDescriptor, 
-                       ISLayer, ISLeadingStatusBadgeRecipe, ISMutableIcns, ISMutableStoreIndex, 
-                       ISResourceFile, ISResourceProvider, ISShapeCompositorResource, 
-                       ISStore, ISStoreIndex, ISStoreMapTable, ISStoreUnit, ISSymbol, 
-                       ISSymbolImageDescriptor, ISTagIcon, ISTrailingStatusBadgeRecipe, 
-                       ISTypeIcon, ISURLResourcePropertySpecification, ISVolumeIcon, 
-                       ISiOSAppRecipe, ISiOSMacAppRecipe, ISiosmacDocumentRecipe, 
-                       ISmacosDocumentRecipe ]
-reexports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    objc-classes:    [ ISImage ]
+                       ISIconLayer, ISIconObserver, ISIconResourceLocator, ISIconSpecification, 
+                       ISIconTypeResourceLocator, ISIconset, ISImageBag, ISImageCache, 
+                       ISImageDescriptor, ISImageSpecification, ISLayer, ISLeadingStatusBadgeRecipe, 
+                       ISMessagesAppRecipe, ISMultipleFilesRecipe, ISMutableIcns, 
+                       ISMutableStoreIndex, ISOverlayEmbossRecipe, ISResourceFile, 
+                       ISShapeCompositorResource, ISStore, ISStoreIndex, ISStoreMapTable, 
+                       ISStoreUnit, ISSymbol, ISSymbolImageDescriptor, ISSymbolLayer, 
+                       ISTextLayer, ISTrailingStatusBadgeRecipe, ISURLResourcePropertySpecification, 
+                       ISiOSAppClipRecipe, ISiOSAppRecipe, ISiOSMacAppRecipe, ISiosDocumentRecipe, 
+                       ISiosmacDocumentRecipe, ISmacosDocumentRecipe, ISmacosDocumentRecipe1016, 
+                       ISwatchOSAppRecipe ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           154A21D6-EC13-30C8-8358-99A32D454604
+    value:           35D1EB81-5097-370B-B0A6-EE16936F977F
   - target:          x86_64-maccatalyst
-    value:           154A21D6-EC13-30C8-8358-99A32D454604
+    value:           35D1EB81-5097-370B-B0A6-EE16936F977F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FF109065-92A2-3080-ABE5-2C5EE2A364B4
+    value:           573BCCE8-66E9-33C9-B153-35F92CD1AE9B
   - target:          arm64e-maccatalyst
-    value:           FF109065-92A2-3080-ABE5-2C5EE2A364B4
+    value:           573BCCE8-66E9-33C9-B153-35F92CD1AE9B
 install-name:    '/System/Library/PrivateFrameworks/IconFoundation.framework/Versions/A/IconFoundation'
-current-version: 493
+current-version: 552
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _IFDefaultLog, _IFImageSpecificationTagAll, _IFImageSpecificationTagAppStore, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _IFImageSpecificationTagAll, _IFImageSpecificationTagAppStore, 
                        _IFImageSpecificationTagHomeScreen, _IFImageSpecificationTagInternal, 
                        _IFImageSpecificationTagOptional, _IFImageSpecificationTagPrivate, 
                        _IFImageSpecificationTagRecomended, _IFImageSpecificationTagRequired, 
-                       _IFImageSpecificationTagiPad, _IFImageSpecificationTagiPhone, 
-                       _IconFoundationVersionNumber, _IconFoundationVersionString ]
-    objc-classes:    [ IFBundle, IFCacheImage, IFColor, IFConcreteImage, IFGraphicsContext, 
-                       IFIconSpecification, IFImage, IFImageBag, IFImageSpecification, 
-                       IFPDFDocument, IFPDFPage, IFPlaceholderImage, IFResourceMetadata, 
-                       IFSymbol, IFSymbolImage, IFSymbolImageDescriptor, ISCGImageBlockSet, 
+                       _IFImageSpecificationTagiPad, _IFImageSpecificationTagiPhone ]
+    objc-classes:    [ IFBundle, IFCacheImage, IFColor, IFConcreteImage, IFGraphicSymbolDefaults, 
+                       IFGraphicSymbolDescriptor, IFGraphicsContext, IFIconSpecification, 
+                       IFImage, IFImageBag, IFImageSpecification, IFPDFDocument, 
+                       IFPDFPage, IFPlaceholderImage, IFResourceMetadata, IFSymbol, 
+                       IFSymbolImage, IFSymbolImageDescriptor, ISCGImageBlockSet, 
                        ISImage, ISPlaceholderImage, ISSymbolImage, ISVariantIconSpecification ]
 ...

@@ -7,7 +7,7 @@
 
 @class NSData, NSDictionary<KeyType, ObjectType>, NSError, NSString, NSURL;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_OPTIONS(NSUInteger, NSFileWrapperReadingOptions) {
     
@@ -34,15 +34,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileWrapperWritingOptions) {
 } API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 API_AVAILABLE(macos(10.0), ios(4.0), watchos(2.0), tvos(9.0))
-@interface NSFileWrapper : NSObject<NSSecureCoding> {
-    @private
-    NSDictionary *_fileAttributes;
-    NSString *_preferredFileName;
-    NSString *_fileName;
-    id _contents;
-    id _icon;
-    id _moreVars;
-}
+@interface NSFileWrapper : NSObject<NSSecureCoding>
 
 #pragma mark *** Initialization ***
 
@@ -178,4 +170,4 @@ Some instances of NSFileWrapper may be created without a preferredFilename (e.g.
 
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

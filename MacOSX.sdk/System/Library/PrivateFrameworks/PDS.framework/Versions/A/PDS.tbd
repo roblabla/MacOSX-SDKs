@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F2F2F246-21B7-316E-A785-DE6A650D405F
+    value:           2E442BD8-3659-3A12-8320-6F2A5A97A8C1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6464110C-6731-30C4-88EB-0D17E5C96B81
+    value:           B91F991E-DB0F-3000-9290-12D92A594CD2
 install-name:    '/System/Library/PrivateFrameworks/PDS.framework/Versions/A/PDS'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _PDSCDCacheErrorDomain, _PDSHeartbeatMaintenanceXPCActivityIdentifier, 
                        _PDSInternalClientIDEntitlementKey, _PDSInternalDaemonMachServiceName, 
                        _PDSInternalToolEntitlementKey, _PDSInternalWildcardClientID, 

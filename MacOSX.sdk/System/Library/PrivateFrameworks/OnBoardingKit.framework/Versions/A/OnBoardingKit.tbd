@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           74BD6539-CCDD-34A9-91F7-6F4C909078DC
+    value:           DED90056-1EA9-39E8-A3F7-5742B0DD75E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B5DCD63D-8547-38C7-9C54-AC54B2316451
+    value:           5D7E446C-F6E2-3F25-A36C-10A142BCF883
 install-name:    '/System/Library/PrivateFrameworks/OnBoardingKit.framework/Versions/A/OnBoardingKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _OBPrivacyActivationIdentifier, _OBPrivacyActivityIdentifier, 
                        _OBPrivacyAdvertisingIdentifier, _OBPrivacyAnalyticsAppIdentifier, 
                        _OBPrivacyAnalyticsDeviceIdentifier, _OBPrivacyAnalyticsiCloudIdentifier, 
@@ -50,10 +50,11 @@ exports:
                        _OBProcessNameForPID, __OBLoggingFacility ]
     objc-classes:    [ OBAnalyticsManager, OBAnimationController, OBAnimationState, 
                        OBAnimationView, OBBundle, OBBundleManager, OBCapabilities, 
-                       OBFlow, OBPrivacyCombinedController, OBPrivacyCombinedController_macOS, 
-                       OBPrivacyFlow, OBPrivacyLinkController, OBPrivacyLinkController_macOS, 
-                       OBPrivacyPresenter, OBPrivacySplashController, OBSplashBullet, 
-                       OBSplashContent, OBTemplateContainerViewController, OBTemplatePartBulletList, 
+                       OBFlow, OBPrivacyBundleProvider, OBPrivacyCombinedController, 
+                       OBPrivacyCombinedController_macOS, OBPrivacyFlow, OBPrivacyLinkController, 
+                       OBPrivacyLinkController_macOS, OBPrivacyPresenter, OBPrivacySplashController, 
+                       OBSplashBullet, OBSplashContent, OBTemplateContainerViewController, 
+                       OBTemplatePartBulletExpandableListItem, OBTemplatePartBulletList, 
                        OBTemplatePartBulletListItem, OBTemplatePartDisclosingListView, 
                        OBTemplatePartLinkButton, OBTemplateUIUtilities, OBTemplateView ]
 ...

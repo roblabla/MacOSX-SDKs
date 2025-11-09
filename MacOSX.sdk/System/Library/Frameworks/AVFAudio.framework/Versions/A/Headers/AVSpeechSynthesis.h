@@ -10,7 +10,7 @@
 
 #ifdef __OBJC2__
 
-@class AVAudioSession, AVAudioSessionChannelDescription, AVAudioBuffer;
+@class AVAudioSession, AVAudioSessionChannelDescription, AVAudioBuffer, AVSpeechSynthesisMarker;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +21,8 @@ typedef NS_ENUM(NSInteger, AVSpeechBoundary) {
 
 typedef NS_ENUM(NSInteger, AVSpeechSynthesisVoiceQuality) {
     AVSpeechSynthesisVoiceQualityDefault = 1,
-    AVSpeechSynthesisVoiceQualityEnhanced
+    AVSpeechSynthesisVoiceQualityEnhanced,
+    AVSpeechSynthesisVoiceQualityPremium API_AVAILABLE(ios(16.0), macos(13.0), tvos(16.0), watchos(9.0))
 } NS_ENUM_AVAILABLE(10_14, 9_0);
 
 typedef NS_ENUM(NSInteger, AVSpeechSynthesisVoiceGender) {
@@ -29,6 +30,16 @@ typedef NS_ENUM(NSInteger, AVSpeechSynthesisVoiceGender) {
     AVSpeechSynthesisVoiceGenderMale,
     AVSpeechSynthesisVoiceGenderFemale
 } NS_ENUM_AVAILABLE(10_15, 13_0);
+
+/*! @brief   Markers used in the output event callback. Used for providing metadata on synthesized audio.
+ */
+typedef NS_ENUM(NSInteger, AVSpeechSynthesisMarkerMark) {
+    AVSpeechSynthesisMarkerMarkPhoneme,
+    AVSpeechSynthesisMarkerMarkWord,
+    AVSpeechSynthesisMarkerMarkSentence,
+    AVSpeechSynthesisMarkerMarkParagraph
+} NS_ENUM_AVAILABLE(13_0, 16_0) NS_SWIFT_NAME(AVSpeechSynthesisMarker.Mark);
+
 
 extern const float AVSpeechUtteranceMinimumSpeechRate API_AVAILABLE(ios(7.0), watchos(1.0), tvos(7.0), macos(10.14));
 extern const float AVSpeechUtteranceMaximumSpeechRate API_AVAILABLE(ios(7.0), watchos(1.0), tvos(7.0), macos(10.14));
@@ -42,6 +53,7 @@ extern NSString *const AVSpeechSynthesisVoiceIdentifierAlex API_AVAILABLE(ios(9.
 extern NSString *const AVSpeechSynthesisIPANotationAttribute API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macos(10.14));
 
 typedef void (^AVSpeechSynthesizerBufferCallback)(AVAudioBuffer *buffer) NS_SWIFT_NAME(AVSpeechSynthesizer.BufferCallback);
+typedef void (^AVSpeechSynthesizerMarkerCallback)(NSArray<AVSpeechSynthesisMarker *> *markers) NS_SWIFT_NAME(AVSpeechSynthesizer.MarkerCallback) API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0), tvos(16.0));
 
 
 @protocol AVSpeechSynthesizerDelegate;
@@ -113,8 +125,28 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
 + (instancetype)speechUtteranceWithString:(NSString *)string;
 + (instancetype)speechUtteranceWithAttributedString:(NSAttributedString *)string API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macos(10.14));
 
+/*!
+ A speech utterance that expects markup written using the Speech Synthesis Markup Language (SSML) standard.
+ Returns nil if invalid SSML is passed in.
+ */
++ (nullable instancetype)speechUtteranceWithSSMLRepresentation:(NSString *)string API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0), tvos(16.0));
+
 - (instancetype)initWithString:(NSString *)string;
 - (instancetype)initWithAttributedString:(NSAttributedString *)string API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macos(10.14));
+/*!
+ @abstract
+ A speech utterance that expects markup written using the Speech Synthesis Markup Language (SSML)  standard.
+ 
+ @discussion
+ Uses SSML markup to add attributes. If using SSML to request voices that fall under certain attributes, a single
+ utterance may be split into multiple parts, each sent to the appropriate synthesizer. If no voice matches the properties,
+ the voice in the @c voice property of the utterance will be used. If no @c voice is specified, the system's default
+ will be used. @c AVSpeechUtterance properties that affect the prosidy of a voice such as @c rate,
+ @c pitchMultiplier, @c pitchMultiplier will not apply to an utterance that uses an SSML representation.
+ 
+ Returns nil if invalid SSML is passed in.
+*/
+- (nullable instancetype)initWithSSMLRepresentation:(NSString *)string API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0), tvos(16.0));
 
 /* If no voice is specified, the system's default will be used. */
 @property(nonatomic, retain, nullable) AVSpeechSynthesisVoice *voice;
@@ -161,6 +193,11 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
 // Use this method to receive audio buffers that can be used to store or further process synthesized speech.
 // The dictionary provided by -[AVSpeechSynthesisVoice audioFileSettings] can be used to create an AVAudioFile.
 - (void)writeUtterance:(AVSpeechUtterance *)utterance toBufferCallback:(AVSpeechSynthesizerBufferCallback)bufferCallback API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0), macos(10.15)) ;
+/*!
+ Use this method to receive audio buffers and associated metadata that can be used to store or further process synthesized speech.
+ The dictionary provided by -[AVSpeechSynthesisVoice audioFileSettings] can be used to create an AVAudioFile.
+ */
+- (void)writeUtterance:(AVSpeechUtterance *)utterance toBufferCallback:(AVSpeechSynthesizerBufferCallback)bufferCallback toMarkerCallback:(AVSpeechSynthesizerMarkerCallback)markerCallback API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0), tvos(16.0)) ;
 
 /* These methods will operate on the speech utterance that is speaking. Returns YES if it succeeds, NO for failure. */
 
@@ -203,6 +240,22 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer willSpeakRangeOfSpeechString:(NSRange)characterRange utterance:(AVSpeechUtterance *)utterance API_AVAILABLE(ios(7.0), watchos(1.0), tvos(7.0), macos(10.14));
 @end
 
+#pragma mark - AVSpeechSynthesisMarker
+
+API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0), tvos(16.0)) 
+@interface AVSpeechSynthesisMarker : NSObject <NSSecureCoding, NSCopying>
+
+@property (nonatomic, assign) AVSpeechSynthesisMarkerMark mark;
+
+/// Byte offset into the associated audio buffer
+@property (nonatomic, assign) NSUInteger byteSampleOffset;
+
+/// The location and length of the pertaining speech request's SSML text. This marker applies to the range of characters represented by the NSString.
+@property (nonatomic, assign) NSRange textRange;
+
+- (instancetype)initWithMarkerType:(AVSpeechSynthesisMarkerMark)type forTextRange:(NSRange)range atByteSampleOffset:(NSUInteger)byteSampleOffset;
+
+@end
 
 NS_ASSUME_NONNULL_END
 

@@ -6,7 +6,7 @@
 #import <Foundation/NSDate.h>
 #import <Foundation/NSNotification.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 enum {	/* Constants returned by -operatingSystem */
     NSWindowsNTOperatingSystem = 1,
@@ -18,7 +18,7 @@ enum {	/* Constants returned by -operatingSystem */
     NSOSF1OperatingSystem
 } API_DEPRECATED("Not supported", macos(10.0,10.10), ios(2.0,8.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
-typedef struct {
+typedef struct NS_SWIFT_SENDABLE {
     NSInteger majorVersion;
     NSInteger minorVersion;
     NSInteger patchVersion;
@@ -140,6 +140,13 @@ typedef NS_OPTIONS(uint64_t, NSActivityOptions) {
     // Prevents automatic termination. This is included in NSActivityUserInitiated.
     NSActivityAutomaticTerminationDisabled = (1ULL << 15),
     
+    // Emits an os_signpost begin and end during the activity lifetime, intended to be used to track animation activity
+    NSActivityAnimationTrackingEnabled API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) =
+    (1ULL << 45),
+    
+    // Emits an os_signpost begin and end during the activity lifetime, intended to be used to track general activity
+    NSActivityTrackingEnabled API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = (1ULL << 46),
+    
     // ----
     // Sets of options.
     
@@ -152,6 +159,8 @@ typedef NS_OPTIONS(uint64_t, NSActivityOptions) {
     
     // Used for activities that require the highest amount of timer and I/O precision available. Very few applications should need to use this constant.
     NSActivityLatencyCritical = 0xFF00000000ULL,
+    NSActivityUserInteractive API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) =
+    (NSActivityUserInitiated | NSActivityLatencyCritical),
 } API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 @interface NSProcessInfo (NSProcessInfoActivity)
@@ -173,7 +182,7 @@ typedef NS_OPTIONS(uint64_t, NSActivityOptions) {
 /* 
  * Perform an expiring background task, which obtains an expiring task assertion on iOS. The block contains any work which needs to be completed as a background-priority task. The block will be scheduled on a system-provided concurrent queue. After a system-specified time, the block will be called with the `expired` parameter set to YES. The `expired` parameter will also be YES if the system decides to prematurely terminate a previous non-expiration invocation of the block.
  */
-- (void)performExpiringActivityWithReason:(NSString *)reason usingBlock:(void(^)(BOOL expired))block API_AVAILABLE(ios(8.2), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+- (void)performExpiringActivityWithReason:(NSString *)reason usingBlock:(void(NS_SWIFT_SENDABLE ^)(BOOL expired))block API_AVAILABLE(ios(8.2), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 @end
 
@@ -238,4 +247,4 @@ FOUNDATION_EXTERN NSNotificationName const NSProcessInfoPowerStateDidChangeNotif
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

@@ -6,7 +6,7 @@
 #import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSDate.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* These values are arguments to the completion handler block for the scheduler. */
 typedef NS_ENUM(NSInteger, NSBackgroundActivityResult) {
@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, NSBackgroundActivityResult) {
     NSBackgroundActivityResultDeferred = 2,
 } API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
-typedef void (^NSBackgroundActivityCompletionHandler)(NSBackgroundActivityResult result) API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
+typedef void (NS_SWIFT_SENDABLE ^NSBackgroundActivityCompletionHandler)(NSBackgroundActivityResult result) API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  This class provides a Cocoa-level interface to the XPC Activity API (see xpc/activity.h).
@@ -26,13 +26,7 @@ typedef void (^NSBackgroundActivityCompletionHandler)(NSBackgroundActivityResult
  
  */
 API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos)
-@interface NSBackgroundActivityScheduler : NSObject {
-    @private
-    id _private1;
-    id _private2;
-    id _private3;
-    int64_t _flags;
-}
+@interface NSBackgroundActivityScheduler : NSObject
 
 /* Initialize a new instance of the class. The identifier argument should be a string that remains constant across launches of your application. The system uses the value to keep track of the number of times this activity has run and improve the heuristics for deciding when to run the activity in the future.
    
@@ -74,7 +68,7 @@ API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos)
  
    When invoking the completionHandler, the system will set the schedule the next invocation. If you want to adjust the properties of your scheduler (e.g., the interval or tolerance), do this before invoking the completion block.
  */
-- (void)scheduleWithBlock:(void (^)(NSBackgroundActivityCompletionHandler completionHandler))block NS_SWIFT_DISABLE_ASYNC;
+- (void)scheduleWithBlock:(void (NS_SWIFT_SENDABLE ^)(NSBackgroundActivityCompletionHandler completionHandler))block NS_SWIFT_DISABLE_ASYNC;
 
 /* Stop scheduling the activity. Any currently executing block will still complete.
  */
@@ -88,4 +82,4 @@ API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

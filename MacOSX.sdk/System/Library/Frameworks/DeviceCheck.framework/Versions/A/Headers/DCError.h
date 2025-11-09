@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSErrorDomain const DCErrorDomain API_AVAILABLE(ios(11.0), macos(10.15), tvos(11.0)) API_UNAVAILABLE(watchos);
+extern NSErrorDomain const DCErrorDomain API_AVAILABLE(ios(11.0), macos(10.15), tvos(11.0), watchos(9.0));
 
 typedef NS_ERROR_ENUM(DCErrorDomain, DCError) {
     DCErrorUnknownSystemFailure,
@@ -17,7 +17,7 @@ typedef NS_ERROR_ENUM(DCErrorDomain, DCError) {
     DCErrorInvalidInput,
     DCErrorInvalidKey,
     DCErrorServerUnavailable,
-} API_AVAILABLE(ios(11.0), macos(10.15), tvos(11.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(ios(11.0), macos(10.15), tvos(11.0), watchos(9.0));
 
 NS_ASSUME_NONNULL_END
 

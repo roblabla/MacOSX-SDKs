@@ -1,11 +1,9 @@
 /*
-     File:       QD/ATSUnicode.h
+     File:       ATSUI/ATSUnicode.h
  
      Contains:   Public interfaces for Apple Type Services for Unicode Imaging
- 
-     Version:    Quickdraw-291~1
- 
-     Copyright:  � 1997-2008 by Apple Computer, Inc., all rights reserved.
+
+     Copyright:  (c) 1997-2022 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -15,6 +13,10 @@
 */
 #ifndef __ATSUNICODE__
 #define __ATSUNICODE__
+
+#ifndef __ATS_AVAILIBILITY__
+#include <ATSUI/ATSAvailability.h>
+#endif
 
 #ifndef __ATSUNICODETYPES__
 #include <ATSUI/ATSUnicodeTypes.h>

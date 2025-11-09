@@ -9,7 +9,7 @@
 
 @class NSDictionary <KeyType, ObjectType>, NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // Predicates wrap some combination of expressions and operators and when evaluated return a BOOL.
 
@@ -76,4 +76,4 @@ API_AVAILABLE(macos(10.4), ios(3.0), watchos(2.0), tvos(9.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

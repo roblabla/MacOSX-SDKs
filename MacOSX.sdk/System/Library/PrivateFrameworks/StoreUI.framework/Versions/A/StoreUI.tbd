@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           65067DD1-9DD6-327B-BFE7-F0C13B6C1472
+    value:           334F9879-A157-30EA-8F88-ACB54DAA94A5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1974E647-19A0-3DA3-9FE1-9FE3285E2F32
+    value:           C0C1AB30-BCC6-3CB2-A8C9-76830D325841
 install-name:    '/System/Library/PrivateFrameworks/StoreUI.framework/Versions/A/StoreUI'
 current-version: 379
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _FRBundleAppIsFrontmostChangedEvent, _FRBundleAuthenticateFinishedEvent, 
                        _FRBundleUserChangedEvent, _FRBundleViewDidBecomeVisibleEvent, 
                        _FRBundleViewWillBeHiddenEvent, _FRCachesDirectory, _FRDefaultPagesToolbarItemIdentifier, 

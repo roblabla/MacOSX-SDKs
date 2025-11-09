@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8F5BB1C1-7D8A-3989-96E2-2B3248055FB9
+    value:           64630A84-8D25-371C-A686-41F2AF873A1C
   - target:          x86_64-maccatalyst
-    value:           8F5BB1C1-7D8A-3989-96E2-2B3248055FB9
+    value:           64630A84-8D25-371C-A686-41F2AF873A1C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           797B9B75-67E9-331E-997E-B06800C189E2
+    value:           CD2AD781-234C-3704-9608-559063560D1E
   - target:          arm64e-maccatalyst
-    value:           797B9B75-67E9-331E-997E-B06800C189E2
+    value:           CD2AD781-234C-3704-9608-559063560D1E
 install-name:    '/System/Library/PrivateFrameworks/CoreAppleCVA.framework/Versions/A/CoreAppleCVA'
 current-version: 4
 compatibility-version: 4
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZN3cva10FileTarget7logImplENS_6Logger8SeverityEPKcP13__va_list_tag, 
                        __ZN3cva11OsLogTarget7logImplENS_6Logger8SeverityEPKcP13__va_list_tag, 
                        __ZN3cva13ConsoleTarget7logImplENS_6Logger8SeverityEPKcP13__va_list_tag ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __Z14CVAGetMPSImagePN3cva3mtl11CVAMPSImageE, __Z17CVACreateMPSImageP8MPSImage, 
                        __Z17CVAGetMetalBufferPN3cva3mtl11MetalBufferE, __Z17CVAGetMetalDevicePN3cva3mtl12MetalContextE, 
                        __Z18CVAGetMPSCNNKernelPN3cva3mtl15CVAMPSCNNKernelE, __Z18CVAGetMetalLibraryPN3cva3mtl12MetalContextEPKc, 
@@ -1215,7 +1215,7 @@ exports:
                        __ZTVN3cva12experimental21ResizeStrategyLanczosItLb0EEE, __ZTVN3cva12experimental21ResizeStrategyLanczosItLb1EEE, 
                        __ZTVN3cva6BufferIfEE, __ZTVN3cva6BufferIhEE, __ZTVN3cva6BufferIjEE, 
                        __ZTVN3cva6BufferItEE, __ZZN3cva9Rotation3IdE14ExpAndJacobianERKNS_9MatrixRefIKdLj3ELj1ELb0EEEPNS_6MatrixIdLj3ELj3ELb0EEEE10kThreshold ]
-  - targets:         [ arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
+  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN3cva10FileTarget7logImplENS_6Logger8SeverityEPKcPc, __ZN3cva11OsLogTarget7logImplENS_6Logger8SeverityEPKcPc, 
                        __ZN3cva13ConsoleTarget7logImplENS_6Logger8SeverityEPKcPc ]
 ...

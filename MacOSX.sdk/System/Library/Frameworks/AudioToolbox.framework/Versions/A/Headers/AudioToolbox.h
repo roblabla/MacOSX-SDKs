@@ -15,8 +15,11 @@
 #include <TargetConditionals.h>
 
 #include <AudioToolbox/AudioCodec.h>
+#include <AudioToolbox/AUAudioUnit.h>
+#include <AudioToolbox/AUAudioUnitImplementation.h>
 #include <AudioToolbox/AUComponent.h>
 #include <AudioToolbox/AUGraph.h>
+#include <AudioToolbox/AUParameters.h>
 #include <AudioToolbox/AudioComponent.h>
 #include <AudioToolbox/AudioConverter.h>
 #include <AudioToolbox/AudioFile.h>
@@ -27,6 +30,7 @@
 #include <AudioToolbox/AudioServices.h>
 #include <AudioToolbox/AudioUnitParameters.h>
 #include <AudioToolbox/AudioUnitProperties.h>
+#include <AudioToolbox/AudioUnitUtilities.h>
 #include <AudioToolbox/AudioWorkInterval.h>
 #include <AudioToolbox/CAFFile.h>
 #include <AudioToolbox/CAShow.h>
@@ -37,16 +41,8 @@
 #if !TARGET_OS_IPHONE
 	// macOS only
 	#include <AudioToolbox/AudioFileComponent.h>
-	#include <AudioToolbox/AudioUnitUtilities.h>
 	#include <AudioToolbox/AUMIDIController.h>
 	#include <AudioToolbox/CoreAudioClock.h>
-#endif
-
-#ifdef __OBJC2__
-	// iOS (all architectures), macOS 64-bit only
-	#import <AudioToolbox/AUAudioUnit.h>
-	#import <AudioToolbox/AUAudioUnitImplementation.h>
-	#import <AudioToolbox/AUParameters.h>
 #endif
 
 #if TARGET_OS_OSX || TARGET_OS_IOS

@@ -1151,6 +1151,46 @@ VIMAGE_PF vImage_Error    vImagePremultiplyData_RGBAFFFF( const vImage_Buffer *s
 #define         vImagePremultiplyData_BGRAFFFF( _src, _dest, _flags )           vImagePremultiplyData_RGBAFFFF((_src), (_dest), (_flags))
 
 /*!
+ *  @function vImagePremultiplyData_RGBA16F
+ *  @abstract Multiply a RGBA16F color channel by its corresponding alpha
+ *  @discussion
+ *  This function multiplies color channels by the alpha channel.
+ *  <pre>@textblock
+ *      For each color channel:
+ *
+ *          float destColor = src * alpha;
+ *          float destAlpha = alpha;
+ *
+ *      This function can work in place provided the following are true:
+ *          If src overlaps with dest, src->data must be equal to dest->data
+ *          If src also has a different rowBytes from dest, kvImageDoNotTile must be also passed in the flags
+ *                  (It is not necessary to pass kvImageDoNotTile if src and dest do not overlap.)
+ *  @/textblock </pre>
+ *
+ *      This function will for all 4 channel 16F / channel image formats with alpha first in memory.
+ *      It does not have to be RGBA. Also available as vImagePremultiplyData_BGRA16F().
+ *
+ *  @param src      The color data to multiply with alpha
+ *  @param dest     A preallocated vImage_Buffer where the results are written
+ *  @param flags    The following flags are allowed:
+ *  <pre>@textblock
+ *          kvImageNoFlags                      Default operation
+ *
+ *          kvImageDoNotTile                    Turn off internal multithreading. This might be useful if you are already multithreading
+ *                                              the work in your own tiling engine.
+ *  @/textblock </pre>
+ *  @result         The following result codes may occur:
+ *  <pre>@textblock
+ *          kvImageNoError                      Success.
+ *
+ *          kvImageRoiLargerThanInputBuffer     dest->width and dest->height must be less than or equal to corresponding
+ *                                              dimensions in src and alpha
+ *  @/textblock</pre>
+ */
+VIMAGE_PF vImage_Error    vImagePremultiplyData_RGBA16F( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)   API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+#define         vImagePremultiplyData_BGRA16F( _src, _dest, _flags )           vImagePremultiplyData_RGBA16F((_src), (_dest), (_flags))
+
+/*!
  *  @function vImagePremultiplyData_ARGB16U
  *  @abstract Multiply a unsigned 16-bit ARGB color channel by its corresponding alpha
  *  @discussion
@@ -1530,6 +1570,43 @@ VIMAGE_PF vImage_Error    vImageUnpremultiplyData_ARGBFFFF( const vImage_Buffer 
 VIMAGE_PF vImage_Error    vImageUnpremultiplyData_RGBAFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 #define         vImageUnpremultiplyData_BGRAFFFF( _src, _dest, _flags )             vImageUnpremultiplyData_RGBAFFFF((_src), (_dest), (_flags))
 
+
+/*!
+ *  @function vImageUnpremultiplyData_RGBA16F
+ *  @abstract Divide the alpha channel from the color channels in a RGBA16F image
+ *  @discussion
+ *  This function divides color channels by the alpha channel.
+ *      For each color channel:
+ *      <pre>@textblock
+ *          float destColor = destColor / alpha;
+ *          float destAlpha = alpha;
+ *      @/textblock </pre>
+ *
+ *      The positioning of only the alpha channel is important for interleaved formats for these functions.
+ *      This function will work with other channel orders that have alpha last. It is also available as vImageUnpremultiplyData_BGRA16F().
+ *
+ *      This function can work in place provided the following are true:
+ *          src->data must be equal to dest->data
+ *          src->rowBytes must be equal to dest->rowBytes
+ *
+ *  @param src          The input image
+ *  @param dest         A preallocated 16F destination buffer into which the result will be written.
+ *  @param flags        The following flags are allowed:
+ *      <pre>@textblock
+ *                      kvImageNoFlags          Default operation
+ *
+ *                      kvImageDoNotTile        Disable internal multithreading.
+ *      @/textblock </pre>
+ *
+ *  @result The following error codes may be returned:
+ *      <pre>@textblock
+ *                      kvImageNoError                      Success
+ *
+ *                      kvImageRoiLargerThanInputBuffer     dest->height or width is larger than the corresponding src or alpha dimension
+ *      @/textblock </pre>
+ */
+VIMAGE_PF vImage_Error    vImageUnpremultiplyData_RGBA16F( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+#define         vImageUnpremultiplyData_BGRA16F( _src, _dest, _flags )             vImageUnpremultiplyData_RGBA16F((_src), (_dest), (_flags))
 
 /*!
  *  @function vImageUnpremultiplyData_ARGB16U

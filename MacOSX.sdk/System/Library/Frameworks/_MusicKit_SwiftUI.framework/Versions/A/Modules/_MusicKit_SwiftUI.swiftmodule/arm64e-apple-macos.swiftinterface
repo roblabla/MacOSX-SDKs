@@ -1,18 +1,19 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
-// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name _MusicKit_SwiftUI
-// swift-module-flags-ignorable: -user-module-version 4019.500.27
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
+// swift-module-flags: -target arm64e-apple-macos13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name _MusicKit_SwiftUI
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 4020.230.2
 import CoreGraphics
 import Foundation
 @_exported import MusicKit
 import Swift
 import SwiftUI
 import _Concurrency
+import _StringProcessing
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_Concurrency.MainActor(unsafe) public struct ArtworkImage : SwiftUI.View {
-  @_Concurrency.MainActor(unsafe) public init(_ artwork: MusicKit.Artwork, width: CoreGraphics.CGFloat, height: CoreGraphics.CGFloat)
-  @_Concurrency.MainActor(unsafe) public init(_ artwork: MusicKit.Artwork, width: CoreGraphics.CGFloat)
-  @_Concurrency.MainActor(unsafe) public init(_ artwork: MusicKit.Artwork, height: CoreGraphics.CGFloat)
+  @_Concurrency.MainActor(unsafe) public init(_ artwork: MusicKit.Artwork, width: CoreFoundation.CGFloat, height: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor(unsafe) public init(_ artwork: MusicKit.Artwork, width: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor(unsafe) public init(_ artwork: MusicKit.Artwork, height: CoreFoundation.CGFloat)
   @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
     get
   }
@@ -34,14 +35,14 @@ extension SwiftUI.View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension _MusicKit_SwiftUI.MusicSubscriptionOffer {
-  public struct Action : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
+  public struct Action : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
     public init(_ rawValue: Swift.String)
     public init(rawValue: Swift.String)
     public let rawValue: Swift.String
     public static let subscribe: _MusicKit_SwiftUI.MusicSubscriptionOffer.Action
     public typealias RawValue = Swift.String
   }
-  public struct MessageIdentifier : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
+  public struct MessageIdentifier : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
     public init(_ rawValue: Swift.String)
     public init(rawValue: Swift.String)
     public let rawValue: Swift.String
@@ -50,7 +51,7 @@ extension _MusicKit_SwiftUI.MusicSubscriptionOffer {
     public static let playMusic: _MusicKit_SwiftUI.MusicSubscriptionOffer.MessageIdentifier
     public typealias RawValue = Swift.String
   }
-  public struct Options {
+  public struct Options : Swift.Sendable {
     public var action: _MusicKit_SwiftUI.MusicSubscriptionOffer.Action
     public var messageIdentifier: _MusicKit_SwiftUI.MusicSubscriptionOffer.MessageIdentifier
     public var itemID: MusicKit.MusicItemID?
@@ -64,7 +65,7 @@ extension _MusicKit_SwiftUI.MusicSubscriptionOffer {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension _MusicKit_SwiftUI.MusicSubscriptionOffer.Options : Swift.Equatable {
-  public static func == (left: _MusicKit_SwiftUI.MusicSubscriptionOffer.Options, right: _MusicKit_SwiftUI.MusicSubscriptionOffer.Options) -> Swift.Bool
+  public static func == (a: _MusicKit_SwiftUI.MusicSubscriptionOffer.Options, b: _MusicKit_SwiftUI.MusicSubscriptionOffer.Options) -> Swift.Bool
 }
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)

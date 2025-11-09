@@ -1,5 +1,5 @@
-.\" Copyright (c) 2000-2021 Apple Inc. All rights reserved.
-.Dd April 26, 2021
+.\" Copyright (c) 2000-2022 Apple Inc. All rights reserved.
+.Dd March 15, 2022
 .Dt "leaks" 1
 .Os
 .Sh NAME
@@ -178,7 +178,14 @@ argument should be the last argument, followed
 by -- and the command to launch.
 For example:
 .Bd -literal
-% leaks -quiet -atExit -- /bin/ls -lt /tmp/
+$ leaks -quiet -atExit -- /bin/ls -lt /tmp/
+.Ed
+.Pp
+Using
+.Fl atExit
+will automatically set MallocStackLogging=lite for the specified command so that stack backtraces can be shown for leaked allocations. To use a different setting of that env var, such as YES or NO, you can set the env var prior to running leaks. For example:
+.Bd -literal
+$ MallocStackLogging=YES leaks -quiet -atExit -- /bin/ls -lt /tmp/
 .Ed
 .El
 .Pp

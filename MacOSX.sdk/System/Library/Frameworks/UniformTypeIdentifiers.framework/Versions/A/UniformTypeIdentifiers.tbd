@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1432B696-F92F-3EDD-AD4E-8FFEA498E485
+    value:           4A2696B2-2A8C-3A78-8400-CE1CA30312C8
   - target:          x86_64-maccatalyst
-    value:           1432B696-F92F-3EDD-AD4E-8FFEA498E485
+    value:           4A2696B2-2A8C-3A78-8400-CE1CA30312C8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           46515FEB-0F4B-36D2-8BD2-A2AB5FC2418F
+    value:           06B4FFF1-923D-3C06-A3B2-0AB243C63EFE
   - target:          arm64e-maccatalyst
-    value:           46515FEB-0F4B-36D2-8BD2-A2AB5FC2418F
+    value:           06B4FFF1-923D-3C06-A3B2-0AB243C63EFE
 install-name:    '/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers'
 current-version: 709
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _UTTagClassFilenameExtension, _UTTagClassMIMEType, _UTType3DContent, 
                        _UTTypeAIFF, _UTTypeARReferenceObject, _UTTypeAVI, _UTTypeAliasFile, 
                        _UTTypeAppleArchive, _UTTypeAppleProtectedMPEG4Audio, _UTTypeAppleProtectedMPEG4Video, 

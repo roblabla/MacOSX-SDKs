@@ -9,7 +9,7 @@
 #import <FileProvider/NSFileProviderDefines.h>
 #import <FileProvider/NSFileProviderItem.h>
 
-FILEPROVIDER_API_AVAILABILITY_V3
+FILEPROVIDER_API_AVAILABILITY_V3_IOS
 typedef NSString *NSFileProviderItemDecorationIdentifier NS_TYPED_EXTENSIBLE_ENUM;
 
 /**
@@ -60,7 +60,7 @@ typedef NSString *NSFileProviderItemDecorationIdentifier NS_TYPED_EXTENSIBLE_ENU
 
 */
 
-FILEPROVIDER_API_AVAILABILITY_V3
+FILEPROVIDER_API_AVAILABILITY_V3_IOS
 @protocol NSFileProviderItemDecorating <NSFileProviderItem>
 /**
  Returns an array of decorations for the item.

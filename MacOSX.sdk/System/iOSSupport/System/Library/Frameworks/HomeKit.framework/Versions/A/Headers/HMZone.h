@@ -21,24 +21,24 @@ NS_ASSUME_NONNULL_BEGIN
  *             in the "Downstairs" zone.
  */
 HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMZone : NSObject
+    @interface HMZone : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 
 /*!
  * @brief Name of the zone.
  */
-@property(readonly, copy, nonatomic) NSString *name;
+@property (readonly, copy, nonatomic) NSString *name;
 
 /*!
  * @brief Array of HMRoom objects that correspond to the rooms contained in this zone.
  */
-@property(readonly, copy, nonatomic) NSArray<HMRoom *> *rooms;
+@property (readonly, copy, nonatomic) NSArray<HMRoom *> *rooms;
 
 /*!
  * @brief A unique identifier for the zone.
  */
-@property(readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
+@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief This method is used to change the name of the zone.
@@ -49,7 +49,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)updateName:(NSString *)name completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)updateName:(NSString *)name completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Adds a room to a zone.
@@ -63,7 +63,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addRoom:(HMRoom *)room completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)addRoom:(HMRoom *)room completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Removes a room from the zone.
@@ -74,7 +74,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)removeRoom:(HMRoom *)room completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)removeRoom:(HMRoom *)room completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
 
 @end
 

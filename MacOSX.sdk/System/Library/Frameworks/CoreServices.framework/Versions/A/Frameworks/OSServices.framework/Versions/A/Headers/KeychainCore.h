@@ -19,6 +19,8 @@
 #include <MacTypes.h>
 #endif
 
+#if TARGET_OS_OSX
+
 #ifndef __FILES__
 #include <CarbonCore/Files.h>
 #endif
@@ -1056,6 +1058,8 @@ kcfindgenericpassword(
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* TARGET_OS_OSX */
 
 #endif /* __KEYCHAINCORE__ */
 

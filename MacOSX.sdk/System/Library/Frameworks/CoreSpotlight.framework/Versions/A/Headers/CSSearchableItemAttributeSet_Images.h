@@ -9,6 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet (CSImages)
 
 //The height of the item in pixels (ie Image height or Video frame height)

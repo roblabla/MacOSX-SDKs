@@ -13,7 +13,7 @@ typedef int NSSocketNativeHandle;
 @class NSData;
 @protocol NSPortDelegate, NSMachPortDelegate;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 FOUNDATION_EXPORT NSNotificationName const NSPortDidBecomeInvalidNotification;
 
@@ -79,13 +79,7 @@ FOUNDATION_EXPORT NSNotificationName const NSPortDidBecomeInvalidNotification;
 #if TARGET_OS_OSX || TARGET_OS_IPHONE
 
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE 
-@interface NSMachPort : NSPort {
-    @private
-    id _delegate;
-    NSUInteger _flags;
-    uint32_t _machPort;
-    NSUInteger _reserved;
-}
+@interface NSMachPort : NSPort
 
 + (NSPort *)portWithMachPort:(uint32_t)machPort;
 - (instancetype)initWithMachPort:(uint32_t)machPort NS_DESIGNATED_INITIALIZER;
@@ -139,19 +133,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 // A subclass of NSPort which can be used for remote
 // message sending on all platforms.
 
-@interface NSSocketPort : NSPort {
-    @private
-    void *_receiver;
-    id _connectors;
-    void *_loops;
-    void *_data;
-    id _signature;
-    id _delegate;
-    id _lock;
-    NSUInteger _maxSize;
-    NSUInteger _useCount;
-    NSUInteger _reserved;
-}
+@interface NSSocketPort : NSPort
 
 - (instancetype)init;
 - (nullable instancetype)initWithTCPPort:(unsigned short)port;
@@ -171,4 +153,4 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

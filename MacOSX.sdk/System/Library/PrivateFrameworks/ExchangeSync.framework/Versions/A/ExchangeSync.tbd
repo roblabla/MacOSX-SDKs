@@ -3,29 +3,40 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C492E807-55E5-3C68-B00B-C6FAAEA69316
+    value:           34AB7EE9-EEB0-34BA-A6E5-32531752BEB3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6F6EA689-97C4-3318-839B-B7C08954ADAF
+    value:           8DF7CAF0-B441-31CC-A716-2013246091CC
 install-name:    '/System/Library/PrivateFrameworks/ExchangeSync.framework/Versions/A/ExchangeSync'
-current-version: 2007.0.1
+current-version: 2007
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ExchangeSyncVersionNumber, _ExchangeSyncVersionString, _kEWSFolderClassCalendar, 
                        _kEWSFolderClassContacts, _kEWSFolderClassNote, _kEWSFolderClassTasks, 
-                       _kExchangeAccountUpgraderActivityIdentifier, _kExchangeBasicAccountMigrationLastAttemptDate, 
-                       _kExchangeBasicAccountMigrationRetryInterval, _kExchangeBasicAccountMigrationStatus, 
-                       _kExchangeFirstRunActivityIdentifier, _kExchangeMigrationConfigurationURLString, 
-                       _kExchangeRenewCredentialsShouldTriggerMigrationKey, _kExchangeSyncD_SyncNowNotification ]
-    objc-classes:    [ EXSAccount, EXSAccountAuthUpgrader, EXSAccountManager, EXSAccountMetadata, 
-                       EXSAlarm, EXSAttendee, EXSBaseProperties, EXSCalendarItemProperties, 
+                       _kExchangeAccountUpgraderActivityIdentifier, _kExchangeAuthMigrationCoreAnalyticsEventName, 
+                       _kExchangeBasicAccountMigrationLastAttemptDate, _kExchangeBasicAccountMigrationRetryInterval, 
+                       _kExchangeBasicAccountMigrationStatus, _kExchangeFirstRunActivityIdentifier, 
+                       _kExchangeMigrationConfigurationURLString, _kExchangeRenewCredentialsShouldTriggerMigrationKey, 
+                       _kExchangeSyncD_SyncNowNotification ]
+    objc-classes:    [ EXSAccount, EXSAccountAction, EXSAccountAuthUpgrader, EXSAccountManager, 
+                       EXSAccountMetadata, EXSAlarm, EXSAttachment, EXSAttachmentIDType, 
+                       EXSAttendee, EXSBaseProperties, EXSCalendarItemProperties, 
                        EXSChangeItem, EXSDataConsumerInstance, EXSDataConsumerPlugin, 
-                       EXSDataManager, EXSEWSCreateCalendarItemOperation, EXSEWSCreateFolderOperation, 
+                       EXSDataConsumerProperties, EXSDataManager, EXSEWSAddDelegateOperation, 
+                       EXSEWSAvailabilityRequest, EXSEWSCreateAttachmentOperation, 
+                       EXSEWSCreateCalendarItemOperation, EXSEWSCreateFolderOperation, 
                        EXSEWSCreateResponseOperation, EXSEWSCreateTaskOperation, 
-                       EXSEWSDeleteFolderOperation, EXSEWSDeleteItemOperation, EXSEWSGetMeetingRequestItemsOperation, 
-                       EXSEWSMoveItemOperation, EXSEWSOperation, EXSEWSRemoveMeetingRequestOperation, 
-                       EXSEWSSyncProtocol, EXSEWSSyncUtils, EXSEWSUpdateCalendarItemOperation, 
+                       EXSEWSDeleteAttachmentOperation, EXSEWSDeleteFolderOperation, 
+                       EXSEWSDeleteItemOperation, EXSEWSForwardMeetingOperation, 
+                       EXSEWSGetAttachmentOperation, EXSEWSGetAttachmentRequest, 
+                       EXSEWSGetAttachmentRequestXPCCallbackInfo, EXSEWSGetDelegateFolderPermissionsOperation, 
+                       EXSEWSGetGrantedDelegatesOperation, EXSEWSGetMeetingRequestItemsOperation, 
+                       EXSEWSGetUserAvailabilityOperation, EXSEWSGrantedDelegateRequest, 
+                       EXSEWSMoveItemOperation, EXSEWSOperation, EXSEWSRemoveDelegateOperation, 
+                       EXSEWSRemoveMeetingRequestOperation, EXSEWSSearchDirectoryOperation, 
+                       EXSEWSSearchDirectoryRequest, EXSEWSSyncProtocol, EXSEWSSyncUtils, 
+                       EXSEWSUpdateCalendarItemOperation, EXSEWSUpdateDelegatePermissionsOperation, 
                        EXSEWSUpdateFolderOperation, EXSEWSUpdateTaskOperation, EXSEmailAddress, 
                        EXSFolder, EXSFolderProperties, EXSGlobalDataManager, EXSIDNADecoder, 
                        EXSIDNAEncoder, EXSItem, EXSItemIDType, EXSItemProperties, 

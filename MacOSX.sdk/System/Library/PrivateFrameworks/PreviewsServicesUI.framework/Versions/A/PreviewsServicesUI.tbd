@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F3335DEC-D8B1-31CD-9B4B-73CD9D0B69FB
+    value:           D1C32027-4A16-3E50-8E06-1318F828FA1E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           11A3F6B7-BB20-3100-B140-CBCB879A272F
+    value:           231C9DC0-F59D-3403-B384-30EBF6B0F713
 install-name:    '/System/Library/PrivateFrameworks/PreviewsServicesUI.framework/Versions/A/PreviewsServicesUI'
-current-version: 19.30.14
+current-version: 20.10.11
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s11MessageType18PreviewsServicesUI05SceneA0PTl', '_$s18PreviewsServicesUI12SceneMessageMp', 
                        '_$s18PreviewsServicesUI12SceneMessageP0E4TypeAC_SYTn', '_$s18PreviewsServicesUI12SceneMessageP11fenceHandleSo07UVFenceG0CSgvgTj', 
                        '_$s18PreviewsServicesUI12SceneMessageP11fenceHandleSo07UVFenceG0CSgvgTq', 
@@ -88,7 +88,22 @@ exports:
                        '_$s18PreviewsServicesUI18PreviewPreferencesV7defaultACvgZ', 
                        '_$s18PreviewsServicesUI18PreviewPreferencesVMa', '_$s18PreviewsServicesUI18PreviewPreferencesVMn', 
                        '_$s18PreviewsServicesUI18PreviewPreferencesVN', '_$s18PreviewsServicesUI18PreviewPreferencesVs23CustomStringConvertibleAAMc', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO10fontPickeryA2CmFWC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO10printPanelyA2CmFWC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO10shareSheetyA2CmFWC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO11colorPickeryA2CmFWC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO14documentPickeryA2CmFWC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO15documentBrowseryA2CmFWC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO15sceneActivationyA2CmFWC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO17catalystErrorCodeACSgSi_tcfC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO8rawValueACSgSS_tcfC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO8rawValueSSvg', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO8rawValueSSvpMV', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationOMa', '_$s18PreviewsServicesUI22SuppressedPresentationOMn', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationON', '_$s18PreviewsServicesUI22SuppressedPresentationOSHAAMc', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationOSQAAMc', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationOSYAAMc', 
                        _PreviewsServicesUIVersionNumber, _PreviewsServicesUIVersionString, 
-                       _UVPreviewsInjectionLog, _UVPreviewsServicesError ]
+                       _UVPreviewsInjectionLog, _UVPreviewsServicesError, _UVSuppressedPresentationFromCatalystErrorCode ]
     objc-classes:    [ UVFenceHandle, UVHardwareEvent ]
 ...

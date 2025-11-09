@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           290BFA08-4236-3C0E-8B75-C92CBC6183FF
+    value:           23AA22B7-4C57-39EB-91C1-1B6C9002707A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8A27DE40-E236-3F31-A25D-0ED1F08E809A
+    value:           CC5A5C8E-2114-3EC4-BB62-86E47D586FC3
 install-name:    '/System/Library/Frameworks/IOBluetooth.framework/Versions/A/IOBluetooth'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/CoreBluetooth.framework/Versions/A/CoreBluetooth' ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _A2DPLog, _AVRCPLog, _AppleArchiveCreateUniquelyFromPath, 
                        _AppleArchiveExpandAtPath, _AudioLog, _BCCMD16ToUInt16, _BCCMD16ToUInt8, 
                        _BCCMD32ToUInt32, _BTNSObjectFromXPCObject, _BTXPCObjectFromNSObject, 

@@ -68,30 +68,30 @@ typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
  */
 @protocol NSDraggingInfo <NSObject>
 @required
-@property (nullable, readonly) NSWindow *draggingDestinationWindow;
-@property (readonly) NSDragOperation draggingSourceOperationMask;
-@property (readonly) NSPoint draggingLocation;
+@property (nullable, readonly) NSWindow *draggingDestinationWindow NS_SWIFT_UI_ACTOR;
+@property (readonly) NSDragOperation draggingSourceOperationMask NS_SWIFT_UI_ACTOR;
+@property (readonly) NSPoint draggingLocation NS_SWIFT_UI_ACTOR;
 
 /* Returns the current location of the current composited dragging image’s origin in NSDraggingFormationNone translated to the base coordinate system of the destination object’s window
 */
-@property (readonly) NSPoint draggedImageLocation;
+@property (readonly) NSPoint draggedImageLocation NS_SWIFT_UI_ACTOR;
 @property (nullable, readonly) NSImage *draggedImage API_DEPRECATED("Use NSDraggingItem objects instead", macos(10.0, 11.0));
-@property (readonly) NSPasteboard *draggingPasteboard;
-@property (nullable, readonly) id draggingSource;
-@property (readonly) NSInteger draggingSequenceNumber;
-- (void)slideDraggedImageTo:(NSPoint)screenPoint;
+@property (readonly) NSPasteboard *draggingPasteboard NS_SWIFT_UI_ACTOR;
+@property (nullable, readonly) id draggingSource NS_SWIFT_UI_ACTOR;
+@property (readonly) NSInteger draggingSequenceNumber NS_SWIFT_UI_ACTOR;
+- (void)slideDraggedImageTo:(NSPoint)screenPoint NS_SWIFT_UI_ACTOR;
 - (nullable NSArray<NSString *> *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination API_DEPRECATED("Use NSFilePromiseReceiver objects instead", macos(10.0,10.13));
 
 /* Controls the dragging formation while the drag is over this destination. The default value is the current drag formation. */
-@property NSDraggingFormation draggingFormation API_AVAILABLE(macos(10.7));
+@property NSDraggingFormation draggingFormation NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.7));
 
 /* During the conclusion of an accepted drag, if this property is set to YES, the drag manager will animate each dragging image to their NSDraggingFormationNone locations. Otherwise, the drag images are removed without any animation. Note: This property is inspected between -prepareForDragOperation: and -performDragOperation:. If the final destination frames do not match the current NSDraggingFormationNone frames, then enumerate through the draggingItems during -performDragOperation: to set thier NSDraggingFormationNone frames to the correct destinations.
  */
-@property BOOL animatesToDestination API_AVAILABLE(macos(10.7));
+@property BOOL animatesToDestination NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.7));
 
 /* During draggingEntered: or draggingUpdated:, you are responsible for returning the drag operation. In some cases, you may accept some, but not all items on the dragging pasteboard. (For example, you only accept image files.) If you only accept some of the items, you should set this property so the drag manager can update the drag count badge. When -updateItems: is called, you should set the image of non valid dragging items to nil. If none of the drag items are valid then do not call this method. Simply return NSDragOperationNone from draggingEntered: and/or draggingUpdated: and do not modify any drag item properties.
  */
-@property NSInteger numberOfValidItemsForDrop API_AVAILABLE(macos(10.7));
+@property NSInteger numberOfValidItemsForDrop NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.7));
 
 /* Use the following enumerate method to modify the properties of each dragging item. For example, change the drag image and size.
    Note: All changes made here are only in effect while the drag is over the destination. When the drag exits the destination all properties return to the values last set by the dragging session.
@@ -99,12 +99,12 @@ typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
 
 /* Enumerate through each dragging item. Any changes made to the properties of the draggingItem are reflected in the drag and are automatically removed when the drag exits. Classes in the provided array must implement the NSPasteboardReading protocol. Cocoa classes that implement this protocol include NSImage, NSString, NSURL, NSColor, NSAttributedString, and NSPasteboardItem. For every item on the pasteboard, each class in the provided array will be queried for the types it can read using -readableTypesForPasteboard:. An instance will be created of the first class found in the provided array whose readable types match a conforming type contained in that pasteboard item. If an Instance is created from the pasteboard item data, it is placed into an NSDraggingItem along with the dragging properties of that item such as the dragging image. The NSDraggingItem is then passed as a parameter to the provided block. Additional search options, such as restricting the search to file URLs with particular content types, can be specified with a search options dictionary.  See the comments for the Pasteboard Reading Options keys in NSPasteboard.h for a full description. Note: all coordinate properties in the NSDraggingItem are in the coordinate system of view. If view is nil, the screen coordinate space is used.
 */
-- (void)enumerateDraggingItemsWithOptions:(NSDraggingItemEnumerationOptions)enumOpts forView:(nullable  NSView *)view classes:(NSArray<Class> *)classArray searchOptions:(NSDictionary<NSPasteboardReadingOptionKey, id> *)searchOptions usingBlock:(void (^)(NSDraggingItem *draggingItem, NSInteger idx, BOOL *stop))block API_AVAILABLE(macos(10.7));
+- (void)enumerateDraggingItemsWithOptions:(NSDraggingItemEnumerationOptions)enumOpts forView:(nullable  NSView *)view classes:(NSArray<Class> *)classArray searchOptions:(NSDictionary<NSPasteboardReadingOptionKey, id> *)searchOptions usingBlock:(void (^)(NSDraggingItem *draggingItem, NSInteger idx, BOOL *stop))block NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.7));
 
-@property (readonly) NSSpringLoadingHighlight springLoadingHighlight API_AVAILABLE(macos(10.11));
+@property (readonly) NSSpringLoadingHighlight springLoadingHighlight NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.11));
 
 /* Used when the drag crosses two distinct but valid spring loading regions within the same destination. The hover timer is reset and if the user is currently in a force click, they must release and re-force click to highlight the new region. */
-- (void)resetSpringLoading API_AVAILABLE(macos(10.11));
+- (void)resetSpringLoading NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.11));
 
 @end
 
@@ -115,20 +115,20 @@ typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
  */
 @protocol NSDraggingDestination <NSObject>
 @optional
-- (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender;
-- (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender; /* if the destination responded to draggingEntered: but not to draggingUpdated: the return value from draggingEntered: is used */
-- (void)draggingExited:(nullable id <NSDraggingInfo>)sender;
-- (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender;
-- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender;
-- (void)concludeDragOperation:(nullable id <NSDraggingInfo>)sender;
+- (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender NS_SWIFT_UI_ACTOR;
+- (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender NS_SWIFT_UI_ACTOR; /* if the destination responded to draggingEntered: but not to draggingUpdated: the return value from draggingEntered: is used */
+- (void)draggingExited:(nullable id <NSDraggingInfo>)sender NS_SWIFT_UI_ACTOR;
+- (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender NS_SWIFT_UI_ACTOR;
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender NS_SWIFT_UI_ACTOR;
+- (void)concludeDragOperation:(nullable id <NSDraggingInfo>)sender NS_SWIFT_UI_ACTOR;
 /* draggingEnded: is implemented as of Mac OS 10.5 */
-- (void)draggingEnded:(id<NSDraggingInfo>)sender;
+- (void)draggingEnded:(id<NSDraggingInfo>)sender NS_SWIFT_UI_ACTOR;
 /* the receiver of -wantsPeriodicDraggingUpdates should return NO if it does not require periodic -draggingUpdated messages (eg. not autoscrolling or otherwise dependent on draggingUpdated: sent while mouse is stationary) */
-- (BOOL)wantsPeriodicDraggingUpdates;
+- (BOOL)wantsPeriodicDraggingUpdates NS_SWIFT_UI_ACTOR;
 
 /* While a destination may change the dragging images at any time, it is recommended to wait until this method is called before updating the dragging image. This allows the system to delay changing the dragging images until it is likely that the user will drop on this destination. Otherwise, the dragging images will change too often during the drag which would be distracting to the user. The destination may update the dragging images by calling one of the -enumerateDraggingItems methods on the sender.
 */
-- (void)updateDraggingItemsForDrag:(nullable id <NSDraggingInfo>)sender API_AVAILABLE(macos(10.7));
+- (void)updateDraggingItemsForDrag:(nullable id <NSDraggingInfo>)sender NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.7));
 @end
 
 
@@ -149,14 +149,14 @@ typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
             break;
     }
 */
-- (NSDragOperation)draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context;
+- (NSDragOperation)draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context NS_SWIFT_UI_ACTOR;
 
 @optional
-- (void)draggingSession:(NSDraggingSession *)session willBeginAtPoint:(NSPoint)screenPoint;
-- (void)draggingSession:(NSDraggingSession *)session movedToPoint:(NSPoint)screenPoint;
-- (void)draggingSession:(NSDraggingSession *)session endedAtPoint:(NSPoint)screenPoint operation:(NSDragOperation)operation;
+- (void)draggingSession:(NSDraggingSession *)session willBeginAtPoint:(NSPoint)screenPoint NS_SWIFT_UI_ACTOR;
+- (void)draggingSession:(NSDraggingSession *)session movedToPoint:(NSPoint)screenPoint NS_SWIFT_UI_ACTOR;
+- (void)draggingSession:(NSDraggingSession *)session endedAtPoint:(NSPoint)screenPoint operation:(NSDragOperation)operation NS_SWIFT_UI_ACTOR;
 
-- (BOOL)ignoreModifierKeysForDraggingSession:(NSDraggingSession *)session;
+- (BOOL)ignoreModifierKeysForDraggingSession:(NSDraggingSession *)session NS_SWIFT_UI_ACTOR;
 
 @end
 
@@ -176,25 +176,25 @@ typedef NS_OPTIONS(NSUInteger, NSSpringLoadingOptions) {
 @required
 /* Perform the spring loading action (For example, the button's action, or select the tab). Normally, spring loading is a discrete action that only activates after the user completes the spring loading input. When the NSSpringLoadingContinuousActivation option set, spring loading become a continuous action that activates (YES) when the user starts spring loading and then deactivates (NO) when the user releases spring loading. See NSSpringLoadingContinuousActivation for more information.
  */
-- (void)springLoadingActivated:(BOOL)activated draggingInfo:(id <NSDraggingInfo>)draggingInfo API_AVAILABLE(macos(10.11));
+- (void)springLoadingActivated:(BOOL)activated draggingInfo:(id <NSDraggingInfo>)draggingInfo NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.11));
 
 /* Called when the spring loading highlight changes */
-- (void)springLoadingHighlightChanged:(id <NSDraggingInfo>)draggingInfo API_AVAILABLE(macos(10.11));
+- (void)springLoadingHighlightChanged:(id <NSDraggingInfo>)draggingInfo NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.11));
 
 /* Note: You must also implement either -springLoadingEntered: or -springLoadingUpdated: */
 
 @optional
 /* Called when a drag enters the spring loading destination. Return NSSpringLoadingEnabled to enable spring loading. A view is not considered valid spring loading drag destination if neither this method nor springLoadingUpdated: is implemented */
-- (NSSpringLoadingOptions)springLoadingEntered:(id <NSDraggingInfo>)draggingInfo API_AVAILABLE(macos(10.11));
+- (NSSpringLoadingOptions)springLoadingEntered:(id <NSDraggingInfo>)draggingInfo NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.11));
 
 /* Called when a drag moves or the drag info changes. If this method is not implemented, then the value from -springLoadingEntered: is used. */
-- (NSSpringLoadingOptions)springLoadingUpdated:(id <NSDraggingInfo>)draggingInfo API_AVAILABLE(macos(10.11));
+- (NSSpringLoadingOptions)springLoadingUpdated:(id <NSDraggingInfo>)draggingInfo NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.11));
 
 /* Called when a drag exits the spring loading destination */
-- (void)springLoadingExited:(id <NSDraggingInfo>)draggingInfo API_AVAILABLE(macos(10.11));
+- (void)springLoadingExited:(id <NSDraggingInfo>)draggingInfo NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.11));
 
 /* The drag & drop operation has ended. Un-spring if needed. Note: If this obejct is both an NSSpringLoadingDestination and NSDraggingDestination, draggingEnded: will only be called once. */
-- (void)draggingEnded:(id <NSDraggingInfo>)draggingInfo API_AVAILABLE(macos(10.11));
+- (void)draggingEnded:(id <NSDraggingInfo>)draggingInfo NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.11));
 @end
 
 

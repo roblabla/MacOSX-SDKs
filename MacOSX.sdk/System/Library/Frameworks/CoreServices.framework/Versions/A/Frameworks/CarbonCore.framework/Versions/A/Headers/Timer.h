@@ -105,7 +105,7 @@ Microseconds(UnsignedWide * microTickCount)                   __OSX_AVAILABLE_BU
 enum {
                                         /* high bit of qType is set if task is active */
   kTMTaskActive                 = (1L << 15)
-};
+}  API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 typedef struct TMTask                   TMTask;
 typedef TMTask *                        TMTaskPtr;

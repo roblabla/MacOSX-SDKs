@@ -4,23 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B156120C-8DD7-3BA0-B1BA-276ABF97A506
+    value:           8F0740A4-85B4-3CBB-A3AB-80048D694B2D
   - target:          x86_64-maccatalyst
-    value:           B156120C-8DD7-3BA0-B1BA-276ABF97A506
+    value:           8F0740A4-85B4-3CBB-A3AB-80048D694B2D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A5936E0A-282B-3D68-B374-E46F0E8D9516
+    value:           C145596B-CF7A-3936-9393-DE2B54049197
   - target:          arm64e-maccatalyst
-    value:           A5936E0A-282B-3D68-B374-E46F0E8D9516
+    value:           C145596B-CF7A-3936-9393-DE2B54049197
 install-name:    '/System/Library/Frameworks/CoreMIDI.framework/Versions/A/CoreMIDI'
 current-version: 69
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _MIDICapabilityGetDiscoveryMUID, _MIDICapabilityMUIDCollides, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _MIDIBluetoothDriverActivateAllConnections, _MIDIBluetoothDriverDisconnect, 
+                       _MIDICapabilityGetDiscoveryMUID, _MIDICapabilityMUIDCollides, 
                        _MIDIClientCreate, _MIDIClientCreateWithBlock, _MIDIClientDispose, 
                        _MIDIConfigCheckVirginState, _MIDIConfigDelete, _MIDIConfigDuplicate, 
                        _MIDIConfigExists, _MIDIConfigGetCurrent, _MIDIConfigGetList, 
@@ -63,11 +64,11 @@ exports:
                        __ZN4MIDI11StreamState22update_with_v1_packetsENSt3__14spanIKjLm18446744073709551615EEE, 
                        __ZN4MIDI11StreamState5chaseERNS_10PacketizerE, __ZN4MIDI11StreamState5clearEv, 
                        __ZN4MIDI11StreamState5resetERNS_10PacketizerE, __ZN4MIDI11StreamStateC1Ej, 
-                       __ZN4MIDI11StreamStateC2Ej, __ZN4MIDI16LegacyPacketList4dumpERKS0_, 
+                       __ZN4MIDI11StreamStateC2Ej, __ZN4MIDI16LegacyPacketList4dumpEPKS0_, 
                        __ZN4MIDI16LegacyPacketList6createE14MIDIProtocolIDyNSt3__14spanIKhLm18446744073709551615EEE, 
-                       __ZN4MIDI16LegacyPacketList7destroyEPS0_, __ZN4MIDI9EventList4dumpERKS0_, 
-                       __ZN4MIDI9EventList6createE14MIDIProtocolIDyNSt3__14spanIKjLm18446744073709551615EEE, 
-                       __ZN4MIDI9EventList6createERKS0_, __ZNK4MIDI9EventList4sizeEv, 
+                       __ZN4MIDI23LegacyPacketListDeleterclEPNS_16LegacyPacketListE, 
+                       __ZN4MIDI9EventList4dumpEPKS0_, __ZN4MIDI9EventList6createE14MIDIProtocolIDyNSt3__14spanIKjLm18446744073709551615EEE, 
+                       __ZN4MIDI9EventList6createEPKS0_, __ZNK4MIDI9EventList4sizeEv, 
                        _kMIDIDriverPropertyUsesSerial, _kMIDIPropertyAdvanceScheduleTimeMuSec, 
                        _kMIDIPropertyCanRoute, _kMIDIPropertyConnectionUniqueID, 
                        _kMIDIPropertyDeviceID, _kMIDIPropertyDisplayName, _kMIDIPropertyDriverDeviceEditorApp, 

@@ -311,10 +311,10 @@ typedef struct {
  - if groups > 1:
  - input, output, weights and bias will be used for a set of convolutions.
  - input and output channels must be divisible by groups.
- - weight layout must be BNNSDataLayoutConvolutionWeightsOIHW
+ - weight layout must be BNNSDataLayoutConvolutionWeightsOIHW or BNNSDataLayoutConvolutionWeightsOIHrWr
  - weights descriptor size[2] = in_channels/groups and weights descriptor size[3]=output channels, such that for each consecutive convolutions i and i+1 in the group, convolution i weights and convolution i+1 weights are separated by total_weights_size/groups elements
  - when calling apply forward and backward functions, in_stride, out_stride and gradient strides should be the strides for the entire convolution group.
- - not supported in transposed convolution.
+ - transposed convolution gradient computation is not supported when groups>1
  @field pad left, right, up, down zero padding. used for asymmetric padding.
  - ignored if pad is all 0, or if x_padding>0 or y_padding>0.
  - left,up are adjucent to image position 0,0.
@@ -878,12 +878,18 @@ typedef struct {
  @abstract Normalization layer parameters
  @discussion
  normalize inputs by using mean, variance, beta and gamma.
- beta and gamma are trainable parameters.
+
  input and output descriptor must have the same dimensions. Only BNNSDataLayoutImageCHW and BNNSDataLayoutVector are supported.
  Vector of length L is equivalent to ImageCHW of dimension Lx1x1 (CxHxW).
+ Currently supported data types for input and output are FP32, BF16,  and FP16.
+
+ beta and gamma are trainable parameters. beta and gamma must be the same type i.e. all FP32, BF16,  or FP16.
+ Moving mean and variance must be in FP32 regardless of the input data type.
  Except for layer norm, beta, gamma, moving mean and moving variance width (descriptor size[0]) must be equal to number of input channels (descriptor size[2]).
  For layer norm, beta and gamma currently must have the same dimensions as the input depending on normalization_axis.
+
  momentum is used to update the moving mean and moving variance during training and must be between 0 and 1
+
  epsilon is used in the computation of 1/sqrt(variance + epsilon)
 
  @field i_desc input descriptor
@@ -901,7 +907,7 @@ typedef struct {
  @field momentum momentum.
  -must be between 0 and 1.
  @field epsilon epsilon
- @field activation fused activation layer to follow the batch normalization layer.
+ @field activation fused activation layer to follow the batch normalization layer. Only elementwise activation function is supported. ie. no softmax/logsoftmax.
  @field num_groups Divide the channels into this number of groups over which normalization statistics are computed.
  The number of channels in i_desc must be divisible by the number of groups. This is only used in group norm.
  @field normalization_axis The starting axis over which normalization applies. This is only used in layer norm.
@@ -951,7 +957,7 @@ typedef struct {
  - activation gate for the hidden output
  - dropout value
  - sequence length, number of layers, batch size and bidirectional corresponds to various size fields in the parameters (see details below)
-  it is sufficient to set these values, "0" size in the NDArray descriptors will be treated as these values. non-zero size in the NDArray descriptors that don't match these values will result in BNNS Error
+  it is sufficient to set these values, "0" size in the NDArray descriptors will be treated as these values. nonzero size in the NDArray descriptors that don't match these values will result in BNNS Error
  - to enable peepholes, set weights pointer in the gates descriptor (for example, set input_gate_layer[0].cw_desc.data)
  - to enable bias, set bias pointer in the gates descriptor (for example, set forget_gate_layer[0].bias.data)
  - input_hidden_descriptor will be treated as array's filled with 0 when input_hidden_descriptor.data is null
@@ -1237,6 +1243,25 @@ typedef struct {
   bool align_corners;
 } BNNSLayerParametersResize;
 
+/*! @abstract Crop and Resize Layer Parameters
+ *  @discussion only bilinear interpolation is supported now.
+ *
+ *  @field normalized_coordinates - If true, the bounding box coordinates are normalized to (0, 1)
+ *  @field spatial_scale - Additional spatial scale that multiplies the bounding box coordinates.
+ *  @field extrapolation_value - Value used for extrapolation, when applicable. Default to zero.
+ *  @field sampling_mode - Sampling mode used to select sample points.
+ *  @field box_coordinate_mode - Specifies the convention for specifying the four bounding box coordinates.
+ *  @field method - The interpolation method to use
+ */
+typedef struct {
+  bool normalized_coordinates;
+  float spatial_scale;
+  float extrapolation_value;
+  BNNSLinearSamplingMode sampling_mode;
+  BNNSBoxCoordinateMode box_coordinate_mode;
+  BNNSInterpolationMethod method;
+} BNNSLayerParametersCropResize;
+
 /*! @abstract Broadcast Matrix Multiplication Layer Parameters
  *
  *  @description
@@ -1279,7 +1304,7 @@ typedef struct {
  *         of inputA_delta and inputB_delta if quadratic=false).
  *  @field a_is_weights - if true, the matrix A is treated as weights (i.e. fixed across all matrices in a batch on inference,
  *         accumulates gradients across a batch during training)
- *  @field b_is_weights - if true, the matrix A is treated as weights (i.e. fixed across all matrices in a batch on inference,
+ *  @field b_is_weights - if true, the matrix B is treated as weights (i.e. fixed across all matrices in a batch on inference,
  *         accumulates gradients across a batch during training)
  *  @field iA_desc - descriptor for tensor A
  *  @field iB_desc - descriptor for tensor B
@@ -1403,7 +1428,7 @@ typedef struct {
   }
  }
 
- Mean by Non Zero weights on width example
+ Mean by nonzero weights on width example
  input [3][2][4], output [3][2][1], weights[3][2][4]
  for (size_t c = 0; c < 3; c++)
  {
@@ -1477,9 +1502,9 @@ typedef struct {
  * @field padding_idx - If padding_idx is in the range [0, num_embeddings-1], then dictionary[:, padding_idx] is treated as always
  *        containing a zero tensor (forward apply will ignore the contents if dictionary[:, padding_idx], which may however change if an
  *        optimizer step is applied to them).
- * @field max_norm - If non-zero, then any vector with norm > max_norm will be renormalized to have norm max_norm during forward
+ * @field max_norm - If nonzero, then any vector with norm > max_norm will be renormalized to have norm max_norm during forward
  *        lookups. Type of norm is specified by norm_type.
- * @field norm_type - If max_norm is non-zero, the type of norm to use (specifically the p-norm where p=norm_type). If norm_type=0,
+ * @field norm_type - If max_norm is nonzero, the type of norm to use (specifically the p-norm where p=norm_type). If norm_type=0,
  *        the 2-norm is used.
  */
 typedef struct {
@@ -1525,6 +1550,23 @@ typedef struct {
   BNNSNDArrayDescriptor scale;
   BNNSNDArrayDescriptor bias;
 } BNNSLayerParametersQuantization;
+
+/*!
+ @abstract parameters to describe sparsity attributes
+ @discussion use this data structure as hint for BNNSNDArrayFullyConnectedSparsify
+ for BNNSSparsityTypeUnstructured, sparsity_ratio is numerator / denominator
+ @field flags - bit flags to define different states (currently reserved and should be initialized to zero)
+ @field sparsity_ratio - numerator(sparsity_ratio[0]) and denominator(sparsity_ratio[1])indicating sparsity ratio. numerator must be less than denominator.
+ @field sparsity_type - type of sparsity
+ @field target_system - use this to specify different SoC where the inference will run. 
+ */
+typedef struct {
+  uint64_t flags;
+  uint32_t sparsity_ratio[2]; // numerator(sparsity_ratio[0]) and denominator(sparsity_ratio[1])indicating sparsity ratio. numerator must be less than denominator.
+  BNNSSparsityType sparsity_type;
+  BNNSTargetSystem target_system;
+} BNNSSparsityParameters
+__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 #pragma mark - Deprecated
 

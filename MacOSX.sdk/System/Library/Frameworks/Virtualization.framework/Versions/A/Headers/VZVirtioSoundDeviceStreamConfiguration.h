@@ -2,7 +2,7 @@
 //  VZVirtioSoundDeviceStreamConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2021 Apple Inc. All rights reserved.
+//  Copyright © 2021-2022 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZAudioDeviceConfiguration.h>
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion A PCM stream of audio data.
     VZVirtioSoundDeviceStreamConfiguration should not be instantiated directly.
     One of its subclasses like VZVirtioSoundDeviceInputStreamConfiguration or VZVirtioSoundDeviceOutputStreamConfiguration should be used instead.
- 
+
  @see VZVirtioSoundDeviceInputStreamConfiguration
  @see VZVirtioSoundDeviceOutputStreamConfiguration
  */

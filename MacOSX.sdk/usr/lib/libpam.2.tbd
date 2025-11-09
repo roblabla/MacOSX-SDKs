@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CD475B9A-A234-3F1A-B6A6-93E6847EB32B
+    value:           77F90E39-D476-3CE0-8608-9345D4C148B9
   - target:          x86_64-maccatalyst
-    value:           CD475B9A-A234-3F1A-B6A6-93E6847EB32B
+    value:           77F90E39-D476-3CE0-8608-9345D4C148B9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6EF92B2-65F3-3384-B2D2-FD745CCADB41
+    value:           89F24B8E-0E10-3773-A350-E7FCDD4403F7
   - target:          arm64e-maccatalyst
-    value:           F6EF92B2-65F3-3384-B2D2-FD745CCADB41
+    value:           89F24B8E-0E10-3773-A350-E7FCDD4403F7
 install-name:    '/usr/lib/libpam.2.dylib'
 current-version: 3
 compatibility-version: 3
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __openpam_debug, __openpam_log, __pam_apple_err_name, __pam_control_flag_name, 
                        __pam_err_name, __pam_facility_name, __pam_func_name, __pam_item_name, 
                        __pam_sm_func_name, _misc_conv, _openpam_borrow_cred, _openpam_clear_chains, 

@@ -13,9 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class CLKComplication;
 
-extern NSString * const CLKComplicationServerActiveComplicationsDidChangeNotification API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios);
+extern NSString * const CLKComplicationServerActiveComplicationsDidChangeNotification API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationServer : NSObject
 
 + (instancetype)sharedInstance;

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           436A4A42-EC60-3ADD-853B-B62502C5685C
+    value:           75E51439-DE1D-31C5-9DCD-05A6257CEAD3
   - target:          x86_64-maccatalyst
-    value:           436A4A42-EC60-3ADD-853B-B62502C5685C
+    value:           75E51439-DE1D-31C5-9DCD-05A6257CEAD3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5CE51D4B-C3FE-3BAB-9386-2241A257D8A4
+    value:           BDE3F516-5C51-3150-8342-00BCB07285CC
   - target:          arm64e-maccatalyst
-    value:           5CE51D4B-C3FE-3BAB-9386-2241A257D8A4
+    value:           BDE3F516-5C51-3150-8342-00BCB07285CC
 install-name:    '/usr/lib/swift/libswiftOSLog.dylib'
 current-version: 4
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$sSo10OSLogStoreC0A0E10getEntries4with2at8matchings11AnySequenceVySo0A5EntryCGSo0A17EnumeratorOptionsV_So0A8PositionCSgSo11NSPredicateCSgtKF', 
                        '_$sSo21OSLogMessageComponentC0A0E8ArgumentO4datayAE10Foundation4DataVcAEmFWC', 
                        '_$sSo21OSLogMessageComponentC0A0E8ArgumentO6doubleyAESdcAEmFWC', 

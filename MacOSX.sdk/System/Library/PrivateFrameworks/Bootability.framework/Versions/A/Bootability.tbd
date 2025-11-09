@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4A019C77-402B-3B6B-97BB-B35904B92CC0
+    value:           7E50DA52-0BF4-3DE5-A78F-2246ADB3D8B2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1F56173D-4AC7-36A8-8065-98EF84C74B09
+    value:           63715DF2-508B-3B36-942C-53A9DF72EB8E
 install-name:    '/System/Library/PrivateFrameworks/Bootability.framework/Versions/A/Bootability'
-current-version: 59.100.1
+current-version: 70
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BYAMAuthInstallLogHandler, _BYBless2LogHandler, _BYBootOptionAllowAppleConnectPrompt, 
                        _BYBootOptionAllowLocalAuthenticationPrompt, _BYBootOptionBootabilityBrainPath, 
                        _BYBootOptionBootabilityTrustcachePath, _BYBootOptionForceCreateLocalPolicy, 
@@ -26,7 +26,8 @@ exports:
                        _BYErrorDomain, _BYErrorIsBlessVersionUnsupported, _BYErrorIsLocalAuthenticationRequired, 
                        _BYErrorIsNetworkRequired, _BYErrorIsSFRUpdateRequired, _BYErrorIsSecurityModeNotAllowed, 
                        _BYErrorIsTatsuOtherPersonalization, _BYErrorIsTatsuRefusedPersonalization, 
-                       _BYErrorIsVolumeInvalid, _BYLogObject, _BYShouldLogToInstallLog, 
-                       _BYShouldLogToStderr, _BYStderrDateFormatter, __BYErrorHasHint ]
+                       _BYErrorIsVolumeInvalid, _BYLogObject, _BYRamrodLogHandler, 
+                       _BYShouldLogToInstallLog, _BYShouldLogToStderr, _BYStderrDateFormatter, 
+                       __BYErrorHasHint ]
     objc-classes:    [ BYAuthenticationContext, BYManager ]
 ...

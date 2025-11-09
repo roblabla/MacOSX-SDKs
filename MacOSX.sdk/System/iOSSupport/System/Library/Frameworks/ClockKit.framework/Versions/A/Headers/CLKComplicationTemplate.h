@@ -17,7 +17,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplate : NSObject <NSCopying>
 
 - (instancetype)init API_DEPRECATED("Initializing a template without parameters is deprecated in watchOS 7.0. Use an init with parameters instead.", watchos(2.0, 7.0), ios(9.0, 14.0));
@@ -30,7 +30,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 #pragma mark - Modular Small
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateModularSmallSimpleText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *textProvider;
@@ -41,7 +41,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateModularSmallSimpleImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKImageProvider *imageProvider;
@@ -52,7 +52,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateModularSmallRingText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *textProvider;
@@ -69,7 +69,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateModularSmallRingImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKImageProvider *imageProvider;
@@ -86,7 +86,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateModularSmallStackText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *line1TextProvider;
@@ -102,7 +102,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateModularSmallStackImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKImageProvider *line1ImageProvider;
@@ -118,7 +118,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateModularSmallColumnsText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *row1Column1TextProvider;
@@ -144,7 +144,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 #pragma mark - Modular Large
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateModularLargeStandardBody : CLKComplicationTemplate
 
 @property (nonatomic, copy, nullable) CLKImageProvider *headerImageProvider;
@@ -186,7 +186,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateModularLargeTallBody : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *headerTextProvider;
@@ -200,7 +200,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateModularLargeTable : CLKComplicationTemplate
 
 @property (nonatomic, copy, nullable) CLKImageProvider *headerImageProvider;
@@ -240,7 +240,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateModularLargeColumns : CLKComplicationTemplate
 
 @property (nonatomic, copy, nullable) CLKImageProvider *row1ImageProvider;
@@ -294,7 +294,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 #pragma mark - Utilitarian Small
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateUtilitarianSmallSquare : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKImageProvider *imageProvider;
@@ -306,7 +306,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateUtilitarianSmallRingText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *textProvider;
@@ -323,7 +323,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateUtilitarianSmallRingImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKImageProvider *imageProvider;
@@ -343,7 +343,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 #pragma mark - Utilitarian Small  &  Utilitarian Small Flat
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateUtilitarianSmallFlat : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *textProvider;
@@ -364,7 +364,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 #pragma mark - Utilitarian Large
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateUtilitarianLargeFlat : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *textProvider;
@@ -385,7 +385,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 #pragma mark - Circular Small
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateCircularSmallSimpleText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *textProvider;
@@ -396,7 +396,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateCircularSmallSimpleImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKImageProvider *imageProvider;
@@ -407,7 +407,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateCircularSmallRingText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *textProvider;
@@ -424,7 +424,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateCircularSmallRingImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKImageProvider *imageProvider;
@@ -441,7 +441,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateCircularSmallStackText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *line1TextProvider;
@@ -455,7 +455,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(2.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateCircularSmallStackImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKImageProvider *line1ImageProvider;
@@ -472,7 +472,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 #pragma mark - Extra Large
 
-API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(3.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateExtraLargeSimpleText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *textProvider;
@@ -483,7 +483,7 @@ API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(3.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateExtraLargeSimpleImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKImageProvider *imageProvider;
@@ -494,7 +494,7 @@ API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(3.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateExtraLargeRingText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *textProvider;
@@ -511,7 +511,7 @@ API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(3.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateExtraLargeRingImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKImageProvider *imageProvider;
@@ -528,7 +528,7 @@ API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(3.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateExtraLargeStackText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *line1TextProvider;
@@ -544,7 +544,7 @@ API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(3.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateExtraLargeStackImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKImageProvider *line1ImageProvider;
@@ -560,7 +560,7 @@ API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(3.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateExtraLargeColumnsText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *row1Column1TextProvider;
@@ -586,7 +586,7 @@ API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios)
 
 #pragma mark - Graphic Corner
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCornerGaugeText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKGaugeProvider *gaugeProvider;
@@ -612,7 +612,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCornerGaugeImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKGaugeProvider *gaugeProvider;
@@ -638,7 +638,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCornerTextImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *textProvider; // Supports multi-color text.
@@ -652,7 +652,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCornerStackText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *innerTextProvider; // Supports multi-color text.
@@ -666,7 +666,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCornerCircularImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKFullColorImageProvider *imageProvider;
@@ -680,11 +680,11 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 #pragma mark - Graphic Circular
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCircular : CLKComplicationTemplate
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCircularImage : CLKComplicationTemplateGraphicCircular
 
 @property (nonatomic, copy) CLKFullColorImageProvider *imageProvider;
@@ -695,7 +695,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCircularOpenGaugeRangeText : CLKComplicationTemplateGraphicCircular
 
 @property (nonatomic, copy) CLKGaugeProvider *gaugeProvider;
@@ -715,7 +715,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCircularOpenGaugeSimpleText : CLKComplicationTemplateGraphicCircular
 
 @property (nonatomic, copy) CLKGaugeProvider *gaugeProvider;
@@ -732,7 +732,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCircularOpenGaugeImage : CLKComplicationTemplateGraphicCircular
 
 @property (nonatomic, copy) CLKGaugeProvider *gaugeProvider;
@@ -749,7 +749,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCircularClosedGaugeText : CLKComplicationTemplateGraphicCircular
 
 @property (nonatomic, copy) CLKGaugeProvider *gaugeProvider;
@@ -763,7 +763,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCircularClosedGaugeImage : CLKComplicationTemplateGraphicCircular
 
 @property (nonatomic, copy) CLKGaugeProvider *gaugeProvider;
@@ -777,7 +777,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(6.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(6.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCircularStackText : CLKComplicationTemplateGraphicCircular
 
 @property (nonatomic, copy) CLKTextProvider *line1TextProvider; // Supports multi-color text.
@@ -791,7 +791,7 @@ API_AVAILABLE(watchos(6.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(6.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(6.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicCircularStackImage : CLKComplicationTemplateGraphicCircular
 
 @property (nonatomic, copy) CLKFullColorImageProvider *line1ImageProvider;
@@ -808,7 +808,7 @@ API_AVAILABLE(watchos(6.0)) API_UNAVAILABLE(ios)
 
 #pragma mark - Graphic Bezel
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicBezelCircularText : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKComplicationTemplateGraphicCircular *circularTemplate;
@@ -829,7 +829,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 #pragma mark - Graphic Rectangular
 
-API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicRectangularFullImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKFullColorImageProvider *imageProvider;
@@ -840,7 +840,7 @@ API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicRectangularLargeImage : CLKComplicationTemplate
 
 @property (nonatomic, copy) CLKTextProvider *textProvider; // Supports multi-color text.
@@ -854,7 +854,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicRectangularStandardBody : CLKComplicationTemplate
 
 @property (nonatomic, copy, nullable) CLKFullColorImageProvider *headerImageProvider;
@@ -897,7 +897,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicRectangularTextGauge : CLKComplicationTemplate
 
 @property (nonatomic, copy, nullable) CLKFullColorImageProvider *headerImageProvider;
@@ -928,11 +928,11 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
 
 #pragma mark - Graphic Extra Large Circular
 
-API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicExtraLargeCircular : CLKComplicationTemplate
 @end
 
-API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicExtraLargeCircularImage : CLKComplicationTemplateGraphicExtraLargeCircular
 
 @property (nonatomic, copy) CLKFullColorImageProvider *imageProvider;
@@ -943,7 +943,7 @@ API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicExtraLargeCircularOpenGaugeRangeText : CLKComplicationTemplateGraphicExtraLargeCircular
 
 @property (nonatomic, copy) CLKGaugeProvider *gaugeProvider;
@@ -963,7 +963,7 @@ API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicExtraLargeCircularOpenGaugeSimpleText : CLKComplicationTemplateGraphicExtraLargeCircular
 
 @property (nonatomic, copy) CLKGaugeProvider *gaugeProvider;
@@ -980,7 +980,7 @@ API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicExtraLargeCircularOpenGaugeImage : CLKComplicationTemplateGraphicExtraLargeCircular
 
 @property (nonatomic, copy) CLKGaugeProvider *gaugeProvider;
@@ -997,7 +997,7 @@ API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicExtraLargeCircularClosedGaugeText : CLKComplicationTemplateGraphicExtraLargeCircular
 
 @property (nonatomic, copy) CLKGaugeProvider *gaugeProvider;
@@ -1011,7 +1011,7 @@ API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicExtraLargeCircularClosedGaugeImage : CLKComplicationTemplateGraphicExtraLargeCircular
 
 @property (nonatomic, copy) CLKGaugeProvider *gaugeProvider;
@@ -1025,7 +1025,7 @@ API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicExtraLargeCircularStackText : CLKComplicationTemplateGraphicExtraLargeCircular
 
 @property (nonatomic, copy) CLKTextProvider *line1TextProvider; // Supports multi-color text.
@@ -1039,7 +1039,7 @@ API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
 
 @end
 
-API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
+API_DEPRECATED("On watchOS 9.0 or later, use WidgetKit instead", watchos(7.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios)
 @interface CLKComplicationTemplateGraphicExtraLargeCircularStackImage : CLKComplicationTemplateGraphicExtraLargeCircular
 
 @property (nonatomic, copy) CLKFullColorImageProvider *line1ImageProvider;

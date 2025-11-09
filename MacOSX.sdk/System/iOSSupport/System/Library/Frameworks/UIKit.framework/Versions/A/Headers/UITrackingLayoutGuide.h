@@ -13,7 +13,7 @@
 
 @class NSLayoutConstraint, UILayoutGuide;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @interface UITrackingLayoutGuide : UILayoutGuide
@@ -39,7 +39,7 @@ activeWhenAwayFromEdge:(NSDirectionalRectEdge)edge NS_SWIFT_NAME(setConstraints(
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UITrackingLayoutGuide.h>

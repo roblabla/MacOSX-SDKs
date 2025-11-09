@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2949D64C-87B5-3CF7-8310-F4050C9E369D
+    value:           38AD6097-5B0B-3E35-AF20-1A9F6831A7E8
   - target:          x86_64-maccatalyst
-    value:           2949D64C-87B5-3CF7-8310-F4050C9E369D
+    value:           38AD6097-5B0B-3E35-AF20-1A9F6831A7E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DAD0976F-645F-3449-89BC-7D5338FE0637
+    value:           06C63295-B440-3B40-94FE-69B10D61B8F4
   - target:          arm64e-maccatalyst
-    value:           DAD0976F-645F-3449-89BC-7D5338FE0637
+    value:           06C63295-B440-3B40-94FE-69B10D61B8F4
 install-name:    '/System/Library/PrivateFrameworks/MobileIcons.framework/Versions/A/MobileIcons'
 current-version: 372
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _LIBytesNeededForGhostlyImageOfSize, _LIBytesPerRowForGhostlyImageOfWidth, 
                        _LICopyBestImageForVariantFromBundle, _LICopyBestImageForVariantFromImages, 
                        _LICopyIconPathsFromBundle, _LICopyIconPathsFromBundleForStyles, 

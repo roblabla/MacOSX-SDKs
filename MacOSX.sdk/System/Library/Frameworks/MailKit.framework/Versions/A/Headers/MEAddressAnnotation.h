@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// @brief An instance of this class can be used to change the visual style of recipeint email address token when user in composing a mail message.
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst)
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
 @interface MEAddressAnnotation : NSObject <NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;

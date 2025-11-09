@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ECADF2D7-6253-3D0B-AD67-3C15D90FDF74
+    value:           B0AF8DCA-7989-36D5-AA40-B489758D62B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B5AF9924-BE87-3159-908F-F8D64C71454D
+    value:           B97FC500-CF74-3A2E-A9EE-3F0CA20FD30F
 install-name:    '/System/Library/PrivateFrameworks/AppleShareClientCore.framework/Versions/A/AppleShareClientCore'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AFPCopyPString, _AFPCopyPtoCString, _AFPGetTagFromBuffer, 
                        _AFPHexDump, _AFPLoadModules, _AFPMountURL, _AFPResolveDNS, 
                        _DSCloseSession, _DSCommand, _DSGetParms, _DSGetSessionInfo, 

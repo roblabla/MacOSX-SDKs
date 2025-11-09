@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
  
-    Copyright 2006-2013 Apple Inc. All rights reserved.
+    Copyright 2006-2021 Apple Inc. All rights reserved.
   
 */
 
@@ -40,7 +40,8 @@ enum
 	kVTVideoDecoderMalfunctionErr			= -12911, // c.f. -8960
 	kVTVideoEncoderMalfunctionErr			= -12912,
 	kVTVideoDecoderNotAvailableNowErr		= -12913,
-	kVTImageRotationNotSupportedErr			= -12914,
+	kVTImageRotationNotSupportedErr			= -12914, // deprecated
+	kVTPixelRotationNotSupportedErr			= -12914,
 	kVTVideoEncoderNotAvailableNowErr		= -12915,
 	kVTFormatDescriptionChangeNotSupportedErr	= -12916,
 	kVTInsufficientSourceColorDataErr		= -12917,
@@ -62,6 +63,7 @@ enum
 	kVTVideoEncoderNeedsRosettaErr			= -17693,
 	kVTVideoDecoderReferenceMissingErr		= -17694,
 	kVTVideoDecoderCallbackMessagingErr		= -17695,
+	kVTVideoDecoderUnknownErr				= -17696,
 };
 
 /*!

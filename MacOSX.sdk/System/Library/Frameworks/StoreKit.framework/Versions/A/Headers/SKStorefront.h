@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-SK_EXTERN_CLASS API_AVAILABLE(ios(13.0), macos(10.15), watchos(6.2)) @interface SKStorefront : NSObject
+SK_EXTERN_CLASS API_AVAILABLE(ios(13.0), macos(10.15), watchos(6.2)) NS_SWIFT_SENDABLE @interface SKStorefront : NSObject
 
 /* The three letter country code for the current storefront */
 @property(NS_NONATOMIC_IOSONLY, copy, readonly) NSString *countryCode API_AVAILABLE(ios(13.0), macos(10.15), watchos(6.2));

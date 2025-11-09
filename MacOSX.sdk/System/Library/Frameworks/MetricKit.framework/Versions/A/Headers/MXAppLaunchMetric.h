@@ -43,6 +43,14 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
 */
 @property (readonly, strong, nonnull) MXHistogram<NSUnitDuration *> *histogrammedOptimizedTimeToFirstDraw API_AVAILABLE(ios(15.2)) API_UNAVAILABLE(macos, tvos, watchos);
 
+/*!
+ @property      histogrammedExtendedLaunch
+ @abstract      Histogrammed extended launch data.
+ @discussion    Dimensioned as NSUnitDuration.
+ @discussion    This represents the time when the app has drawn the first frame and finishes all extended launch tasks that assigned by the developer.
+*/
+@property (readonly, strong, nonnull) MXHistogram<NSUnitDuration *> *histogrammedExtendedLaunch API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
 @end
 
 NS_ASSUME_NONNULL_END

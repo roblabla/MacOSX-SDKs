@@ -173,7 +173,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param block Called for each matching contact. Set *stop to YES to stop the enumeration.
  * @return YES if successful, otherwise NO.
  */
-- (BOOL)enumerateContactsWithFetchRequest:(CNContactFetchRequest *)fetchRequest error:(NSError **)error usingBlock:(void (^)(CNContact *contact, BOOL *stop))block;
+- (BOOL)enumerateContactsWithFetchRequest:(CNContactFetchRequest *)fetchRequest error:(NSError **)error usingBlock:(void (NS_NOESCAPE ^)(CNContact *contact, BOOL *stop))block;
 
 /*!
  * @abstract Fetch all groups matching a given predicate.

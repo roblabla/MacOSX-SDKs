@@ -56,6 +56,7 @@ AV_INIT_UNAVAILABLE
  @param         conversionSettings
                 Describes the conversion operation for which the captions are to be validated.
  @result        A new instance of AVCaptionConversionValidator configured to perform the specified validation.
+ @discussion    This method throws an exception if the conversion setting's AVCaptionMediaTypeKey is not equal to AVMediaTypeClosedCaption, or if its AVCaptionMediaSubTypeKey is not equal to kCMClosedCaptionFormatType_CEA608.
 */
 + (instancetype)captionConversionValidatorWithCaptions:(NSArray<AVCaption *> *)captions timeRange:(CMTimeRange)timeRange conversionSettings:(NSDictionary<AVCaptionSettingsKey, id> *)conversionSettings;
 

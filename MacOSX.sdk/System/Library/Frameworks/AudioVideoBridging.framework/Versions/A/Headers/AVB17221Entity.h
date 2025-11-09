@@ -2,7 +2,7 @@
 //  AVB17221Entity.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2010-2020 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 				Changes include an entity being added, removed or rediscovered. Entities register themselves to receive
 				automatic updates when any of the discovery values change.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVB17221Entity : NSObject
 
 
@@ -46,12 +46,12 @@ API_AVAILABLE(macos(10.8))
 	@property	entityID
 	@abstract	The Unique Identifier (entity_id) of the entity.
  */
-@property (assign) uint64_t entityID API_AVAILABLE(macos(10.9));
+@property (assign) uint64_t entityID API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@property	entityModelID
 	@abstract	The Entity Model Unique Identifier (entity_model_id) of the entity.
  */
-@property (assign) uint64_t entityModelID API_AVAILABLE(macos(10.9));
+@property (assign) uint64_t entityModelID API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@property	entityCapabilities
 	@abstract	The entity_capabilities of the entity.
@@ -91,27 +91,32 @@ API_AVAILABLE(macos(10.8))
 	@property	gPTPGrandmasterID
 	@abstract	The clock identifier of the IEEE Std 802.1AS-2011 grandmaster of the entity.
  */
-@property (assign) uint64_t gPTPGrandmasterID API_AVAILABLE(macos(10.9));
+@property (assign) uint64_t gPTPGrandmasterID API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@property	gPTPDomainNumber
 	@abstract	The domain number of the IEEE Std 802.1AS-2011 grandmaster of the entity.
  */
-@property (assign) uint8_t gPTPDomainNumber API_AVAILABLE(macos(10.9));
+@property (assign) uint8_t gPTPDomainNumber API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@property	identifyControlIndex
 	@abstract	The descriptor_index of the CONTROL which implements the IDENTIFY for the entity if supported.
  */
-@property (assign) uint16_t identifyControlIndex API_AVAILABLE(macos(10.9));
+@property (assign) uint16_t identifyControlIndex API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@property	interfaceIndex
 	@abstract	The descriptor_index of the AVB_INTERFACE descriptor which is associated with this entity.
  */
-@property (assign) uint16_t interfaceIndex API_AVAILABLE(macos(10.9));
+@property (assign) uint16_t interfaceIndex API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@property	associationID
 	@abstract	The association_id of the entity.
  */
 @property (assign) uint64_t associationID;
+/*!
+	@property	currentConfigurationIndexIndex
+	@abstract	The descriptor_index of the current CONFIGURATION. This is only valid if entityCapabilities includes AVB17221ADPEntityCapabilitiesAEMConfigurationIndexValid
+ */
+@property (assign) uint16_t currentConfigurationIndex API_AVAILABLE(macos(13)) API_UNAVAILABLE(ios, tvos);
 
 /*!
 	@property	macAddresses

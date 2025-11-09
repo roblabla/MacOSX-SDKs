@@ -11,7 +11,7 @@
 
 @protocol UIIndirectScribbleInteractionDelegate;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*!
     @abstract An interaction that allows using Scribble to enter text by handwriting on a view that is not formally a text input. Use UIIndirectScribbleInteraction if your app has a view that looks to the user as a text input but does not implement UITextInput. It makes the view act as a container of one or more virtual "Text Input Elements", each of which defines an area the user can write into without having to tap first.
@@ -110,7 +110,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT NS_
 @end
 
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIIndirectScribbleInteraction.h>

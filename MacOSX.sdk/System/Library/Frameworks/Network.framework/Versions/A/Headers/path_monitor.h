@@ -75,6 +75,23 @@ NW_RETURNS_RETAINED nw_path_monitor_t
 nw_path_monitor_create_with_type(nw_interface_type_t required_interface_type);
 
 /*!
+ * @function nw_path_monitor_create_for_ethernet_channel
+ *
+ * @abstract
+ *		Create a path monitor that enumerates all interfaces that support
+ *		Ethernet channel.
+ *
+ * @result
+ *		Returns an allocated nw_path_monitor_t object on success.
+ *		Callers are responsible for deallocating using nw_release(obj) or [obj release].
+ *		These objects support ARC.
+ *		Returns NULL on failure.
+ */
+API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
+NW_RETURNS_RETAINED nw_path_monitor_t
+nw_path_monitor_create_for_ethernet_channel(void);
+
+/*!
  * @function nw_path_monitor_prohibit_interface_type
  *
  * @abstract

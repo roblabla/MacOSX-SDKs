@@ -22,21 +22,21 @@ APPKIT_EXTERN NSNotificationName NSComboBoxSelectionIsChangingNotification;
 @protocol NSComboBoxDataSource <NSObject>
 @optional
 /* These two methods are required when not using bindings */
-- (NSInteger)numberOfItemsInComboBox:(NSComboBox *)comboBox;
-- (nullable id)comboBox:(NSComboBox *)comboBox objectValueForItemAtIndex:(NSInteger)index;
+- (NSInteger)numberOfItemsInComboBox:(NSComboBox *)comboBox NS_SWIFT_UI_ACTOR;
+- (nullable id)comboBox:(NSComboBox *)comboBox objectValueForItemAtIndex:(NSInteger)index NS_SWIFT_UI_ACTOR;
 
-- (NSUInteger)comboBox:(NSComboBox *)comboBox indexOfItemWithStringValue:(NSString *)string;
-- (nullable NSString *)comboBox:(NSComboBox *)comboBox completedString:(NSString *)string;
+- (NSUInteger)comboBox:(NSComboBox *)comboBox indexOfItemWithStringValue:(NSString *)string NS_SWIFT_UI_ACTOR;
+- (nullable NSString *)comboBox:(NSComboBox *)comboBox completedString:(NSString *)string NS_SWIFT_UI_ACTOR;
 @end
 
 @protocol NSComboBoxDelegate <NSTextFieldDelegate>
 @optional
 
 /* Notifications */
-- (void)comboBoxWillPopUp:(NSNotification *)notification;
-- (void)comboBoxWillDismiss:(NSNotification *)notification;
-- (void)comboBoxSelectionDidChange:(NSNotification *)notification;
-- (void)comboBoxSelectionIsChanging:(NSNotification *)notification;
+- (void)comboBoxWillPopUp:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)comboBoxWillDismiss:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)comboBoxSelectionDidChange:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
+- (void)comboBoxSelectionIsChanging:(NSNotification *)notification NS_SWIFT_UI_ACTOR;
 
 @end
 

@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1CC369E5-738F-37E6-9288-4B71807121AE
+    value:           6723D9B5-1DA4-3F14-9C87-189EA660C990
   - target:          x86_64-maccatalyst
-    value:           1CC369E5-738F-37E6-9288-4B71807121AE
+    value:           6723D9B5-1DA4-3F14-9C87-189EA660C990
   - target:          x86_64h-macos
-    value:           CE9E249F-2E68-3AF7-9034-087A6F960CDA
+    value:           8B2E9FCA-184E-3117-A7D9-8F7E536AAF74
   - target:          x86_64h-maccatalyst
-    value:           CE9E249F-2E68-3AF7-9034-087A6F960CDA
+    value:           8B2E9FCA-184E-3117-A7D9-8F7E536AAF74
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B80F02DC-291B-3982-8355-E5719BF494FF
+    value:           4A732E6C-857B-3B89-B2CF-E337E2EDD716
   - target:          arm64e-maccatalyst
-    value:           B80F02DC-291B-3982-8355-E5719BF494FF
+    value:           4A732E6C-857B-3B89-B2CF-E337E2EDD716
 install-name:    '/usr/lib/libsqlite3.dylib'
-current-version: 331.5
+current-version: 344
 compatibility-version: 9
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
-                       x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __sqlite3_apple_archive, __sqlite3_apple_archive_type, __sqlite3_apple_unarchive, 
                        __sqlite3_db_clone, __sqlite3_db_copy, __sqlite3_db_copy_compact, 
                        __sqlite3_db_truncate, __sqlite3_integrity_check, __sqlite3_lockstate, 
@@ -62,12 +62,12 @@ exports:
                        _sqlite3_create_window_function, _sqlite3_csv_init, _sqlite3_data_count, 
                        _sqlite3_data_directory, _sqlite3_database_file_object, _sqlite3_db_cacheflush, 
                        _sqlite3_db_config, _sqlite3_db_filename, _sqlite3_db_handle, 
-                       _sqlite3_db_mutex, _sqlite3_db_readonly, _sqlite3_db_release_memory, 
-                       _sqlite3_db_status, _sqlite3_declare_vtab, _sqlite3_deserialize, 
-                       _sqlite3_drop_modules, _sqlite3_enable_shared_cache, _sqlite3_errcode, 
-                       _sqlite3_errmsg, _sqlite3_errmsg16, _sqlite3_errstr, _sqlite3_exec, 
-                       _sqlite3_exec_b, _sqlite3_expanded_sql, _sqlite3_expired, 
-                       _sqlite3_extended_errcode, _sqlite3_extended_result_codes, 
+                       _sqlite3_db_mutex, _sqlite3_db_name, _sqlite3_db_readonly, 
+                       _sqlite3_db_release_memory, _sqlite3_db_status, _sqlite3_declare_vtab, 
+                       _sqlite3_deserialize, _sqlite3_drop_modules, _sqlite3_enable_shared_cache, 
+                       _sqlite3_errcode, _sqlite3_errmsg, _sqlite3_errmsg16, _sqlite3_error_offset, 
+                       _sqlite3_errstr, _sqlite3_exec, _sqlite3_exec_b, _sqlite3_expanded_sql, 
+                       _sqlite3_expired, _sqlite3_extended_errcode, _sqlite3_extended_result_codes, 
                        _sqlite3_file_control, _sqlite3_filename_database, _sqlite3_filename_journal, 
                        _sqlite3_filename_wal, _sqlite3_finalize, _sqlite3_free, _sqlite3_free_filename, 
                        _sqlite3_free_table, _sqlite3_get_autocommit, _sqlite3_get_auxdata, 
@@ -125,12 +125,14 @@ exports:
                        _sqlite3_value_text16be, _sqlite3_value_text16le, _sqlite3_value_type, 
                        _sqlite3_version, _sqlite3_vfs_find, _sqlite3_vfs_register, 
                        _sqlite3_vfs_unregister, _sqlite3_vmprintf, _sqlite3_vsnprintf, 
-                       _sqlite3_vtab_collation, _sqlite3_vtab_config, _sqlite3_vtab_nochange, 
-                       _sqlite3_vtab_on_conflict, _sqlite3_wal_autocheckpoint, _sqlite3_wal_checkpoint, 
-                       _sqlite3_wal_checkpoint_v2, _sqlite3_wal_hook, _sqlite3changegroup_add, 
-                       _sqlite3changegroup_add_strm, _sqlite3changegroup_delete, 
-                       _sqlite3changegroup_new, _sqlite3changegroup_output, _sqlite3changegroup_output_strm, 
-                       _sqlite3changeset_apply, _sqlite3changeset_apply_strm, _sqlite3changeset_apply_v2, 
+                       _sqlite3_vtab_collation, _sqlite3_vtab_config, _sqlite3_vtab_distinct, 
+                       _sqlite3_vtab_in, _sqlite3_vtab_in_first, _sqlite3_vtab_in_next, 
+                       _sqlite3_vtab_nochange, _sqlite3_vtab_on_conflict, _sqlite3_vtab_rhs_value, 
+                       _sqlite3_wal_autocheckpoint, _sqlite3_wal_checkpoint, _sqlite3_wal_checkpoint_v2, 
+                       _sqlite3_wal_hook, _sqlite3changegroup_add, _sqlite3changegroup_add_strm, 
+                       _sqlite3changegroup_delete, _sqlite3changegroup_new, _sqlite3changegroup_output, 
+                       _sqlite3changegroup_output_strm, _sqlite3changeset_apply, 
+                       _sqlite3changeset_apply_strm, _sqlite3changeset_apply_v2, 
                        _sqlite3changeset_apply_v2_strm, _sqlite3changeset_concat, 
                        _sqlite3changeset_concat_strm, _sqlite3changeset_conflict, 
                        _sqlite3changeset_finalize, _sqlite3changeset_fk_conflicts, 

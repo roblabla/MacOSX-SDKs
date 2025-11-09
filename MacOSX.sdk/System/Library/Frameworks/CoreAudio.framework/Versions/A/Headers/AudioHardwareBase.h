@@ -591,23 +591,38 @@ CF_ENUM(AudioClassID)
                         The transport type ID for AudioDevices connected via AVB.
     @constant       kAudioDeviceTransportTypeThunderbolt
                         The transport type ID for AudioDevices connected via Thunderbolt.
+    @constant       kAudioDeviceTransportTypeContinuityCaptureWired
+                        The transport type ID for Continuity Capture AudioDevices connected via a
+                        cable.
+    @constant       kAudioDeviceTransportTypeContinuityCaptureWireless
+                        The transport type ID for Continuity Capture AudioDevices connected
+                        via wireless networking.
+    @constant       kAudioDeviceTransportTypeContinuityCapture
+                        The transport type ID for AudioDevices connected via the Continuity Capture
+                        feature. This constant is deprecated. Please use
+                        kAudioDeviceTransportTypeContinuityCaptureWired and
+                        kAudioDeviceTransportTypeContinuityCaptureWireless to describe Continuity
+                        Capture devices.
 */
 CF_ENUM(UInt32)
 {
-    kAudioDeviceTransportTypeUnknown        = 0,
-    kAudioDeviceTransportTypeBuiltIn        = 'bltn',
-    kAudioDeviceTransportTypeAggregate      = 'grup',
-    kAudioDeviceTransportTypeVirtual        = 'virt',
-    kAudioDeviceTransportTypePCI            = 'pci ',
-    kAudioDeviceTransportTypeUSB            = 'usb ',
-    kAudioDeviceTransportTypeFireWire       = '1394',
-    kAudioDeviceTransportTypeBluetooth      = 'blue',
-    kAudioDeviceTransportTypeBluetoothLE    = 'blea',
-    kAudioDeviceTransportTypeHDMI           = 'hdmi',
-    kAudioDeviceTransportTypeDisplayPort    = 'dprt',
-    kAudioDeviceTransportTypeAirPlay        = 'airp',
-    kAudioDeviceTransportTypeAVB            = 'eavb',
-    kAudioDeviceTransportTypeThunderbolt    = 'thun'
+    kAudioDeviceTransportTypeUnknown                    = 0,
+    kAudioDeviceTransportTypeBuiltIn                    = 'bltn',
+    kAudioDeviceTransportTypeAggregate                  = 'grup',
+    kAudioDeviceTransportTypeVirtual                    = 'virt',
+    kAudioDeviceTransportTypePCI                        = 'pci ',
+    kAudioDeviceTransportTypeUSB                        = 'usb ',
+    kAudioDeviceTransportTypeFireWire                   = '1394',
+    kAudioDeviceTransportTypeBluetooth                  = 'blue',
+    kAudioDeviceTransportTypeBluetoothLE                = 'blea',
+    kAudioDeviceTransportTypeHDMI                       = 'hdmi',
+    kAudioDeviceTransportTypeDisplayPort                = 'dprt',
+    kAudioDeviceTransportTypeAirPlay                    = 'airp',
+    kAudioDeviceTransportTypeAVB                        = 'eavb',
+    kAudioDeviceTransportTypeThunderbolt                = 'thun',
+    kAudioDeviceTransportTypeContinuityCaptureWired     = 'ccwd',
+    kAudioDeviceTransportTypeContinuityCaptureWireless  = 'ccwl',
+    kAudioDeviceTransportTypeContinuityCapture          API_DEPRECATED("Please use kAudioDeviceTransportTypeContinuityCaptureWired and kAudioDeviceTransportTypeContinuityCaptureWireless to describe Continuity Capture devices.", macos(13.0, 13.0), ios(16.0, 16.0)) = 'ccap'
 };
 
 //==================================================================================================

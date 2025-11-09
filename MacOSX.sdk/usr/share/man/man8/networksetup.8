@@ -51,21 +51,12 @@
 .Op Fl create6to4service Ar networkservicename
 .Op Fl set6to4automatic Ar networkservice
 .Op Fl set6to4manual Ar networkservice relayAddress
-.Op Fl getftpproxy Ar networkservice
-.Op Fl setftpproxy Ar networkservice domain portnumber authenticated username password
-.Op Fl setftpproxystate Ar networkservice on | off
 .Op Fl getwebproxy Ar networkservice
 .Op Fl setwebproxy Ar networkservice domain portnumber authenticated username password
 .Op Fl setwebproxystate Ar networkservice on | off
 .Op Fl getsecurewebproxy Ar networkservice
 .Op Fl setsecurewebproxy Ar networkservice domain portnumber authenticated username password
 .Op Fl setsecurewebproxystate Ar networkservice on | off
-.Op Fl getstreamingproxy Ar networkservice
-.Op Fl setstreamingproxy Ar networkservice domain portnumber authenticated username password
-.Op Fl setstreamingproxystate Ar networkservice on | off
-.Op Fl getgopherproxy Ar networkservice
-.Op Fl setgopherproxy Ar networkservice domain portnumber authenticated username password
-.Op Fl setgopherproxystate Ar networkservice on | off
 .Op Fl getsocksfirewallproxy Ar networkservice
 .Op Fl setsocksfirewallproxy Ar networkservice domain portnumber authenticated username password
 .Op Fl setsocksfirewallproxystate Ar networkservice on | off
@@ -73,8 +64,6 @@
 .Op Fl setproxybypassdomains Ar networkservice domain1 [domain2] [...]
 .Op Fl getproxyautodiscovery Ar networkservice
 .Op Fl setproxyautodiscovery Ar networkservice on | off
-.Op Fl getpassiveftp Ar networkservice
-.Op Fl setpassiveftp Ar networkservice on | off
 .Op Fl getairportnetwork Ar device
 .Op Fl setairportnetwork Ar device network [password]
 .Op Fl getairportpower Ar device
@@ -207,15 +196,6 @@ Use this command to set the 6 to 4 service such that it will get the relay addre
 .It Fl set6to4manual <newnetworkservicename> <relayaddress>
 Use this command to set the 6 to 4 service such that it will get the relay address manually.
 Specify the <relayaddress> that you would like to set.
-.It Fl getftpproxy Ar networkservice
-Displays FTP proxy (server, port, enabled value) info for <networkservice>.
-.It Fl setftpproxy Ar networkservice domain portnumber authenticated username password
-Set FTP proxy for <networkservice> with <domain> and <port number>.
-Turns proxy on.
-Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support.
-Specify <username> and <password> if you turn authenticated proxy support on.
-.It Fl setftpproxystate Ar networkservice on | off
-Set FTP proxy on <networkservice> to either <on> or <off>.
 .It Fl getwebproxy Ar networkservice
 Displays Web proxy (server, port, enabled value) info for <networkservice>.
 .It Fl setwebproxy Ar networkservice domain portnumber authenticated username password
@@ -234,24 +214,6 @@ Optionally, specify <on> or <off> for <authenticated> to enable and disable auth
 Specify <username> and <password> if you turn authenticated proxy support on.
 .It Fl setsecurewebproxystate Ar networkservice on | off
 Set SecureWeb proxy on <networkservice> to either <on> or <off>.
-.It Fl getstreamingproxy Ar networkservice
-Displays Streaming proxy (server, port, enabled value) info for <networkservice>.
-.It Fl setstreamingproxy Ar networkservice domain portnumber authenticated username password
-Set Streaming proxy for <networkservice> with <networkservice>.
-Turns proxy on.
-Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support.
-Specify <username> and <password> if you turn authenticated proxy support on.
-.It Fl setstreamingproxystate Ar networkservice on | off
-Set Streamingproxy on <networkservice> to either <on> or <off>.
-.It Fl getgopherproxy Ar networkservice
-Displays Gopher proxy (server, port, enabled value) info for <networkservice>.
-.It Fl setgopherproxy Ar networkservice domain portnumber authenticated username password
-Set Gopher proxy for <networkservice> with <domain> and <port number>.
-Turns proxy on.
-Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support.
-Specify <username> and <password> if you turn authenticated proxy support on.
-.It Fl setgopherproxystate Ar networkservice on | off
-Set Gopher proxy on <networkservice> to either <on> or <off>.
 .It Fl getsocksfirewallproxy Ar networkservice
 Displays SOCKS Firewall proxy (server, port, enabled value) info for <networkservice>.
 .It Fl setsocksfirewallproxy Ar networkservice domain portnumber authenticated username password
@@ -270,10 +232,6 @@ Specify "Empty" for <domain1> to clear all Domain Name entries.
 Displays Proxy Auto Discover for <networkservice>.
 .It Fl setproxyautodiscovery Ar networkservice on | off
 Set Proxy Auto Discover for <networkservice> to either <on> or <off>.
-.It Fl getpassiveftp Ar networkservice
-Displays whether Passive FTP is on or off for <networkservice>.
-.It Fl setpassiveftp Ar networkservice on | off
-Set Passive FTP to either <on> or <off>.
 .It Fl setautoproxyurl Ar networkservice url
 Set proxy auto-config to url for <networkservice> and enable it.
 .It Fl getautoproxyurl Ar networkservice

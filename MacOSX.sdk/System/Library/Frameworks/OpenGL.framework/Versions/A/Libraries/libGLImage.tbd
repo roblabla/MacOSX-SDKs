@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E3C3B645-39F3-3D6D-AC37-BDE6DAFF532D
+    value:           93004AA3-03B7-3DFF-980E-C6E95AFC1376
   - target:          x86_64-maccatalyst
-    value:           E3C3B645-39F3-3D6D-AC37-BDE6DAFF532D
+    value:           93004AA3-03B7-3DFF-980E-C6E95AFC1376
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F88EF401-56C6-3AA8-AA46-5812675DC6C3
+    value:           34F5EACC-A82C-3FDC-8AF4-E948294E6236
   - target:          arm64e-maccatalyst
-    value:           F88EF401-56C6-3AA8-AA46-5812675DC6C3
+    value:           34F5EACC-A82C-3FDC-8AF4-E948294E6236
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLImage.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
     symbols:         [ _glgCompress, _glgConvertPixelHeightToBlocks, _glgConvertPixelWidthToBlocks, 
                        _glgConvertPixels, _glgConvertType, _glgCreateProcessor, _glgDecompress, 
                        _glgDestroyProcessor, _glgGetCompressedBlockBytes, _glgGetCompressedBlockHeight, 

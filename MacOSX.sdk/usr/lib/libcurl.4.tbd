@@ -4,28 +4,28 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           23A6F8A0-1F12-34AE-9B68-911D1C7065AE
+    value:           232922AB-45A2-352D-830B-A8C989E79C3C
   - target:          x86_64-maccatalyst
-    value:           23A6F8A0-1F12-34AE-9B68-911D1C7065AE
+    value:           232922AB-45A2-352D-830B-A8C989E79C3C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6191B09E-D9C4-39A0-BC71-2F63D6F1BB40
+    value:           7BAE0086-D2F2-3E38-9B88-4B34BDF14D5C
   - target:          arm64e-maccatalyst
-    value:           6191B09E-D9C4-39A0-BC71-2F63D6F1BB40
+    value:           7BAE0086-D2F2-3E38-9B88-4B34BDF14D5C
 install-name:    '/usr/lib/libcurl.4.dylib'
 current-version: 9
 compatibility-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _curl_easy_cleanup, _curl_easy_duphandle, _curl_easy_escape, 
-                       _curl_easy_getinfo, _curl_easy_init, _curl_easy_option_by_id, 
-                       _curl_easy_option_by_name, _curl_easy_option_next, _curl_easy_pause, 
-                       _curl_easy_perform, _curl_easy_recv, _curl_easy_reset, _curl_easy_send, 
-                       _curl_easy_setopt, _curl_easy_strerror, _curl_easy_unescape, 
+                       _curl_easy_getinfo, _curl_easy_header, _curl_easy_init, _curl_easy_nextheader, 
+                       _curl_easy_option_by_id, _curl_easy_option_by_name, _curl_easy_option_next, 
+                       _curl_easy_pause, _curl_easy_perform, _curl_easy_recv, _curl_easy_reset, 
+                       _curl_easy_send, _curl_easy_setopt, _curl_easy_strerror, _curl_easy_unescape, 
                        _curl_easy_upkeep, _curl_escape, _curl_formadd, _curl_formfree, 
                        _curl_formget, _curl_free, _curl_getdate, _curl_getenv, _curl_global_cleanup, 
                        _curl_global_init, _curl_global_init_mem, _curl_global_sslset, 
@@ -45,5 +45,5 @@ exports:
                        _curl_share_setopt, _curl_share_strerror, _curl_slist_append, 
                        _curl_slist_free_all, _curl_strequal, _curl_strnequal, _curl_unescape, 
                        _curl_url, _curl_url_cleanup, _curl_url_dup, _curl_url_get, 
-                       _curl_url_set, _curl_version, _curl_version_info ]
+                       _curl_url_set, _curl_url_strerror, _curl_version, _curl_version_info ]
 ...

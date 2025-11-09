@@ -8,7 +8,7 @@
  Use this file instead of importing individual JNF headers.
  */
 
-#import <JavaNativeFoundation/JNFJNI.h> 
+#import <JavaNativeFoundation/JNFJNI.h>
 #import <JavaNativeFoundation/JNFObject.h>
 #import <JavaNativeFoundation/JNFJObjectWrapper.h>
 #import <JavaNativeFoundation/JNFString.h>

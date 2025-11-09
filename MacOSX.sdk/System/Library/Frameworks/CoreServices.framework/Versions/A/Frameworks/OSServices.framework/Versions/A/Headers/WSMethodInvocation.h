@@ -19,6 +19,8 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#if TARGET_OS_OSX
+
 #ifndef __MIXEDMODE__
 #include <CarbonCore/MixedMode.h>
 #endif
@@ -853,6 +855,8 @@ WSMethodInvocationAddDeserializationOverride(
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* TARGET_OS_OSX */
 
 #endif /* __WSMETHODINVOCATION__ */
 

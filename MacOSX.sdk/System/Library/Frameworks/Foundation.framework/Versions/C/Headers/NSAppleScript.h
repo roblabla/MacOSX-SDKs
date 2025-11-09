@@ -8,7 +8,7 @@
 
 @class NSAppleEventDescriptor, NSDictionary<KeyType, ObjectType>, NSString, NSURL;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // If the result of -initWithContentsOfURL:error:, -compileAndReturnError:, -executeAndReturnError:, or -executeAppleEvent:error:, signals failure (nil, NO, nil, or nil, respectively), a pointer to an autoreleased dictionary is put at the location pointed to by the error parameter.  The error info dictionary may contain entries that use any combination of the following keys, including no entries at all.
 FOUNDATION_EXPORT NSString *const NSAppleScriptErrorMessage API_AVAILABLE(macos(10.2)) API_UNAVAILABLE(ios, watchos, tvos); // NSString
@@ -48,4 +48,4 @@ FOUNDATION_EXPORT NSString *const NSAppleScriptErrorRange API_AVAILABLE(macos(10
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

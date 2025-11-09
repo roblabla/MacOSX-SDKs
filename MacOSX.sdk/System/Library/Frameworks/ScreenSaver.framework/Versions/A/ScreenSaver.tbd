@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           02ACF63D-A9E7-3119-A606-9FB5A42F2F82
+    value:           8ED99809-FC8E-3299-B0EA-FCFF51E6A8AE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4026C975-1989-38DC-B820-87AA9221BDDA
+    value:           F96B53EC-84D5-3A5D-B6DC-EDC401F54F49
 install-name:    '/System/Library/Frameworks/ScreenSaver.framework/Versions/A/ScreenSaver'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _OSLogForCategory, _SSCenterRectInRect, _SSDBackground, _SSDBlackSaver, 
                        _SSDEngineDimTime, _SSDEngineLWModulePath, _SSDEngineModuleDict, 
                        _SSDEngineModuleName, _SSDEngineModulePath, _SSDHotCorners, 

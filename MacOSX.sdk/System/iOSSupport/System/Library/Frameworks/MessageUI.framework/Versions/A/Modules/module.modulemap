@@ -1,4 +1,4 @@
-framework module MessageUI {
+framework module MessageUI [system] {
   umbrella header "MessageUI.h"
 
   export *

@@ -35,7 +35,6 @@
 #include <mach/exc_server.h>
 #include <mach/host_priv.h>
 #include <mach/host_security.h>
-#include <mach/lock_set.h>
 #include <mach/mach_exc_server.h>
 #include <mach/mach_host.h>
 #include <mach/mach_port.h>

@@ -1,4 +1,4 @@
-/* iig(DriverKit-192.100.7) generated from IODispatchQueue.iig */
+/* iig(DriverKit-256.40.4) generated from IODispatchQueue.iig */
 
 /* IODispatchQueue.iig:1-54 */
 /*
@@ -55,7 +55,7 @@ enum {
 	kIODispatchQueueWakeupAll              = 0x00000001,
 };
 
-/* source class IODispatchQueue IODispatchQueue.iig:55-212 */
+/* source class IODispatchQueue IODispatchQueue.iig:55-232 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -185,16 +185,36 @@ public:
 	RunAction(IODispatchAction action) LOCALONLY;
 
     /*!
-     * @brief       Put a thread that is currently ruuning the queue to sleep, releasing the queue.
+     * @brief       Put a thread that is currently running the queue to sleep, releasing the queue.
      * @discussion  Put a thread to sleep waiting for an event but release the queue first.
      *              In all cases (signal, timeout or error), the caller resumes running on the queue.
 	 *              The caller must be currently running on the queue to call Sleep().
      * @param       event A unique token matching one later passed to Wakeup().
+     * @param       options Pass one of the kIOTimerClock* options to specify the timebase for the
+     *              deadline, or zero for no timeout.
      * @param       deadline Clock deadline to timeout the sleep.
      * @return 		kIOReturnSuccess  or kIOReturnTimeout
      */
 	kern_return_t
-	Sleep(void * event, uint64_t deadline) LOCALONLY;
+	SleepWithDeadline(void * event, uint64_t options, uint64_t deadline) LOCALONLY;
+
+    /*!
+     * @brief       Put a thread that is currently running the queue to sleep, releasing the queue.
+     * @discussion  Put a thread to sleep waiting for an event but release the queue first.
+     *              In all cases (signal, timeout or error), the caller resumes running on the queue.
+	 *              The caller must be currently running on the queue to call Sleep().
+     * @param       event A unique token matching one later passed to Wakeup().
+     * @param       timeout Clock delay to timeout the sleep.
+     * @return 		kIOReturnSuccess  or kIOReturnTimeout
+     */
+	kern_return_t
+	SleepWithTimeout(void * event, uint64_t timeout) LOCALONLY;
+
+    /*!
+     * @brief       Synonym for SleepWithTimeout()
+     */
+	kern_return_t
+	Sleep(void * event, uint64_t timeout) LOCALONLY;
 
     /*!
      * @brief       Wakes a thread that is blocked in Sleep().
@@ -223,7 +243,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IODispatchQueue IODispatchQueue.iig:55-212 */
+/* generated class IODispatchQueue IODispatchQueue.iig:55-232 */
 
 #define IODispatchQueue_SetPort_ID            0xc437e970b5609767ULL
 #define IODispatchQueue_Create_ID            0xac000428df2a91d0ULL
@@ -308,9 +328,20 @@ public:\
         IODispatchAction action);\
 \
     kern_return_t\
+    SleepWithDeadline(\
+        void * event,\
+        uint64_t options,\
+        uint64_t deadline);\
+\
+    kern_return_t\
+    SleepWithTimeout(\
+        void * event,\
+        uint64_t timeout);\
+\
+    kern_return_t\
     Sleep(\
         void * event,\
-        uint64_t deadline);\
+        uint64_t timeout);\
 \
     kern_return_t\
     Wakeup(\
@@ -423,10 +454,10 @@ IODispatchQueue_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IODispatchQueue.iig:214-215 */
+/* IODispatchQueue.iig:234-235 */
 
 #if DRIVERKIT_PRIVATE
-/* IODispatchQueue.iig:222- */
+/* IODispatchQueue.iig:242- */
 #endif
 
 #endif /* ! _IOKIT_UIODISPATCH_H */

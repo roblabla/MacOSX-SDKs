@@ -2,6 +2,8 @@
 #include <TargetConditionals.h>
 
 #if !TARGET_OS_IPHONE
+#import <AppKit/AppKitDefines.h>
+
 /*
         NSTextAttachment.h
         Copyright (c) 1994-2021, Apple Inc.
@@ -9,10 +11,9 @@
 */
 
 #import <Foundation/NSAttributedString.h>
-#import <AppKit/AppKitDefines.h>
 #import <CoreGraphics/CGGeometry.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 enum {
     NSAttachmentCharacter API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos) = 0xFFFC // Replacement character is used for attachments
@@ -144,9 +145,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 
 @end
 
-
-
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 #endif // !TARGET_OS_IPHONE
 #else
 #import <UIFoundation/NSTextAttachment.h>

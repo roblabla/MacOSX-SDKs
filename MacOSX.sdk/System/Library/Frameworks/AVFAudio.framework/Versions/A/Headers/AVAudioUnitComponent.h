@@ -30,6 +30,10 @@ extern NSString * const AVAudioUnitTypeMIDIProcessor		API_AVAILABLE(macos(10.10)
 // Standard Audio Unit Manufacturers
 extern NSString * const AVAudioUnitManufacturerNameApple	API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
+#if !TARGET_OS_OSX
+@class UIImage;
+#endif
+
 #pragma mark AVAudioUnitComponent
 
 /*!
@@ -129,22 +133,24 @@ API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 */
 @property (nonatomic, readonly, nullable) NSURL		*iconURL API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
-#if TARGET_OS_OSX
 /*! @property icon
 	@abstract An icon representing the component.
-    @discussion
-        For a component originating in an app extension, the returned icon will be that of the
-        application containing the extension.
-        
-        For components loaded from bundles, the icon will be that of the bundle.
-*/
+	@discussion
+		For a component originating in an app extension, the returned icon will be that of the
+		application containing the extension.
+
+		For components loaded from bundles, the icon will be that of the bundle.
+ */
+#if TARGET_OS_OSX
 @property (nonatomic, readonly, nullable) NSImage *icon API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
+#else
+@property (nonatomic, readonly, nullable) UIImage *icon API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
 #endif
 
 /*! @property passesAUVal
 	@abstract YES if the AudioComponent has passed the AU validation tests, otherwise NO
 */
-@property (nonatomic, readonly) BOOL		passesAUVal API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (nonatomic, readonly) BOOL		passesAUVal API_AVAILABLE(macos(10.10), ios(16.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*! @property hasCustomView
 	@abstract YES if the AudioComponent provides custom view, otherwise NO
@@ -155,7 +161,7 @@ API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@abstract A NSDictionary that contains information describing the capabilities of the AudioComponent.
 	The specific information depends on the type and the keys are defined in AudioUnitProperties.h
 */
-@property (nonatomic, readonly) NSDictionary<NSString *, id>		*configurationDictionary API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (nonatomic, readonly) NSDictionary<NSString *, id>		*configurationDictionary API_AVAILABLE(macos(10.10), ios(16.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*! @method supportsNumberInputChannels:outputChannels:
 	@abstract returns YES if the AudioComponent supports the input/output channel configuration

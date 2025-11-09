@@ -30,6 +30,7 @@
 
 
 #include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -67,14 +68,14 @@ typedef NumFormatString                 NumFormatStringRec;
 typedef short                           FormatStatus;
 enum {
   fVNumber                      = 0     /* first version of NumFormatString */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 typedef SInt8                           FormatClass;
 enum {
   fPositive                     = 0,
   fNegative                     = 1,
   fZero                         = 2
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 typedef SInt8                           FormatResultType;
 enum {
@@ -92,7 +93,7 @@ enum {
   fExtraPercent                 = 11,
   fExtraSeparator               = 12,
   fEmptyFormatString            = 13
-};
+}  API_DEPRECATED( "Deprecated", macos(10.0,10.8));
 
 struct FVector {
   short               start;

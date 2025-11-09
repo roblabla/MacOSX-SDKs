@@ -173,6 +173,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@param			pixelBufferAttributes
 					The client requirements for output CVPixelBuffers, expressed using the constants in <CoreVideo/CVPixelBuffer.h>.
 	@result			An instance of AVPlayerItemVideoOutput.
+	@discussion		This method throws an exception if the pixel buffer attributes contain keys that are not pixel buffer attribute keys.
  */
 
 - (instancetype)initWithPixelBufferAttributes:(nullable NSDictionary<NSString *, id> *)pixelBufferAttributes NS_DESIGNATED_INITIALIZER;
@@ -190,6 +191,10 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 					AVVideoAllowWideColorKey
  
 	@result			An instance of AVPlayerItemVideoOutput.
+	@discussion		This method throws an exception for any of the following reasons:
+					- the output settings dictionary is empty
+					- the settings will yield compressed output
+					- the settings do not honor the requirements listed above for outputSettings
  */
 
 - (instancetype)initWithOutputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos) NS_DESIGNATED_INITIALIZER;
@@ -344,7 +349,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 @end
 
-
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerItemLegibleOutput (AVPlayerItemLegibleOutput_NativeRepresentation)
 
 /*!
@@ -357,12 +362,14 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 		Add media subtype FourCC number objects to the subtypes array to elect to receive that type as a CMSampleBuffer instead of an NSAttributedString.  Initializing an AVPlayerItemLegibleOutput using the -init method is equivalent to calling -initWithMediaSubtypesForNativeRepresentation: with an empty array, which means that all legible data, regardless of media subtype, will be delivered using NSAttributedString in a common format.
  
 		If a media subtype for which there is no legible data in the current player item is included in the media subtypes array, no error will occur.  AVPlayerItemLegibleOutput will not vend closed caption data as CMSampleBuffers, so it is an error to include 'c608' in the media subtypes array.
+ 
+		This method throws an exception if any media subtype is kCMClosedCaptionFormatType_CEA608 (native representation is not available for media subtype).
  */	
 - (instancetype)initWithMediaSubtypesForNativeRepresentation:(NSArray<NSNumber *> *)subtypes;
 
 @end
 
-
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerItemLegibleOutput (AVPlayerItemLegibleOutput_TextStylingResolution)
 
 /*!

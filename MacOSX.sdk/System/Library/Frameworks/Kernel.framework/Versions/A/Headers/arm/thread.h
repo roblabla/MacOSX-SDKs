@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2007-2021 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -79,9 +79,6 @@ extern struct arm_saved_state *    get_user_regs(thread_t);
 extern struct arm_saved_state *    find_user_regs(thread_t);
 extern struct arm_saved_state *    find_kern_regs(thread_t);
 extern struct arm_vfpsaved_state * find_user_vfp(thread_t);
-#if defined(__arm__)
-extern arm_debug_state_t *         find_debug_state(thread_t);
-#elif defined(__arm64__)
 extern arm_debug_state32_t *       find_debug_state32(thread_t);
 extern arm_debug_state32_t *       find_or_allocate_debug_state32(thread_t);
 extern arm_debug_state64_t *       find_debug_state64(thread_t);
@@ -89,9 +86,6 @@ extern arm_debug_state64_t *       find_or_allocate_debug_state64(thread_t);
 extern arm_neon_saved_state_t *    get_user_neon_regs(thread_t);
 #if __ARM_VHE__
 extern const arm_saved_state_t *   get_vcpu_user_regs(thread_t);
-#endif
-#else
-#error unknown arch
 #endif
 
 #define FIND_PERFCONTROL_STATE(th) (&th->machine.perfctrl_state)

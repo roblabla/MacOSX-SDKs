@@ -10,7 +10,7 @@
 
 @class NSArray<ObjectType>, NSSet;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #define NSOperationQualityOfService NSQualityOfService
 #define NSOperationQualityOfServiceUserInteractive NSQualityOfServiceUserInteractive
@@ -61,7 +61,7 @@ typedef NS_ENUM(NSInteger, NSOperationQueuePriority) {
 
 @property (nullable, copy) void (^completionBlock)(void) API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
-- (void)waitUntilFinished API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+- (void)waitUntilFinished API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0)) NS_SWIFT_UNAVAILABLE_FROM_ASYNC("Use completionBlock or a dependent Operation instead");
 
 @property double threadPriority API_DEPRECATED("Not supported", macos(10.6,10.10), ios(4.0,8.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
@@ -75,13 +75,6 @@ typedef NS_ENUM(NSInteger, NSOperationQueuePriority) {
 
 API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0))
 @interface NSBlockOperation : NSOperation
-#if !__OBJC2__
-{
-@private
-    id _private2;
-    void *_reserved2;
-}
-#endif
 
 + (instancetype)blockOperationWithBlock:(void (^)(void))block;
 
@@ -94,14 +87,6 @@ API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0))
 API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 NS_SWIFT_UNAVAILABLE("NSInvocation and related APIs not available")
 @interface NSInvocationOperation : NSOperation
-#if !__OBJC2__
-{
-@private
-    id _inv;
-    id _exception;
-    void *_reserved2;
-}
-#endif
 
 - (nullable instancetype)initWithTarget:(id)target selector:(SEL)sel object:(nullable id)arg;
 - (instancetype)initWithInvocation:(NSInvocation *)inv NS_DESIGNATED_INITIALIZER;
@@ -119,13 +104,6 @@ static const NSInteger NSOperationQueueDefaultMaxConcurrentOperationCount = -1;
 
 API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSOperationQueue : NSObject <NSProgressReporting>
-#if !__OBJC2__
-{
-@private
-    id _private;
-    void *_reserved;
-}
-#endif
 
 /// @property progress
 /// @discussion     The `progress` property represents a total progress of the operations executed in the queue. By default NSOperationQueue
@@ -146,7 +124,8 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @property (readonly, strong) NSProgress *progress API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 - (void)addOperation:(NSOperation *)op;
-- (void)addOperations:(NSArray<NSOperation *> *)ops waitUntilFinished:(BOOL)wait API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+
+- (void)addOperations:(NSArray<NSOperation *> *)ops waitUntilFinished:(BOOL)wait API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0)) NS_SWIFT_UNAVAILABLE_FROM_ASYNC("Use addBarrierBlock or a dependent Operations instead");
 - (void)addOperationWithBlock:(void (^)(void))block API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0)) NS_SWIFT_DISABLE_ASYNC;
 
 /// @method addBarrierBlock:
@@ -168,7 +147,7 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 
 - (void)cancelAllOperations;
 
-- (void)waitUntilAllOperationsAreFinished;
+- (void)waitUntilAllOperationsAreFinished NS_SWIFT_UNAVAILABLE_FROM_ASYNC("Use addBarrierBlock or a dependent Operations instead");
 
 @property (class, readonly, strong, nullable) NSOperationQueue *currentQueue API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 @property (class, readonly, strong) NSOperationQueue *mainQueue API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
@@ -185,5 +164,5 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 

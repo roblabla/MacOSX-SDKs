@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           144F0BBF-2163-3F91-B39C-CCDF173DD80B
+    value:           2FE12C69-86CB-3627-900E-E43214C40973
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           424E773F-8CB5-3E47-A9F2-8C39B0DBEFDF
+    value:           9ADF4C59-F0CB-3698-B058-8131864F9D6E
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftQuickLook.dylib'
-current-version: 852
+current-version: 925.2.2
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$sSo14QLPreviewReplyC9QuickLookE11contextSize8isBitmap9drawUsingABSo6CGSizeV_SbySo12CGContextRefa_ABtKctcfC', 
                        '_$sSo14QLPreviewReplyC9QuickLookE11contextSize8isBitmap9drawUsingABSo6CGSizeV_SbySo12CGContextRefa_ABtKctcfc', 
                        '_$sSo14QLPreviewReplyC9QuickLookE14stringEncodingSS10FoundationE0F0VvM', 

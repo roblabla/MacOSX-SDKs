@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0BA43EF2-AFAA-3E89-AD6F-922B80742FB2
+    value:           696171EE-4E16-3DA5-8919-487E10C2DA0E
   - target:          x86_64-maccatalyst
-    value:           0BA43EF2-AFAA-3E89-AD6F-922B80742FB2
+    value:           696171EE-4E16-3DA5-8919-487E10C2DA0E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FAFDC1A3-1BF9-3547-A54D-9352E2941C9D
+    value:           E2BD9682-C54A-3EF3-A4E7-A48F2B0068CF
   - target:          arm64e-maccatalyst
-    value:           FAFDC1A3-1BF9-3547-A54D-9352E2941C9D
+    value:           E2BD9682-C54A-3EF3-A4E7-A48F2B0068CF
 install-name:    '/usr/lib/libcoretls_cfhelpers.dylib'
-current-version: 178
+current-version: 183
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _tls_helper_SSLProtocol_from_version, _tls_helper_create_peer_acceptable_dn_array, 
                        _tls_helper_create_peer_trust, _tls_helper_set_identity_from_array, 
                        _tls_helper_set_peer_pubkey, _tls_helper_version_from_SSLProtocol ]

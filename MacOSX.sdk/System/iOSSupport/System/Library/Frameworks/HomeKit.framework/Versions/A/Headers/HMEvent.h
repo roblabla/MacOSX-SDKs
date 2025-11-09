@@ -16,12 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
  * @brief This class is used to represent a generic HomeKit event.
  */
 HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-@interface HMEvent : NSObject
+    @interface HMEvent : NSObject
 
 /*!
  * @brief A unique identifier for the event.
  */
-@property(readonly, copy, nonatomic) NSUUID *uniqueIdentifier;
+@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier;
 
 /*!
  * @brief Specifies whether the HMEvent can be added to HMEventTrigger on the given home.

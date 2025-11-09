@@ -10,7 +10,7 @@
 #import <UIKit/UIBarButtonItem.h>
 #import <UIKit/UIKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 @interface UIBarButtonItemGroup : NSObject<NSCoding>
@@ -19,6 +19,15 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 - (instancetype)initWithBarButtonItems:(NSArray<UIBarButtonItem *> *)barButtonItems representativeItem:(nullable UIBarButtonItem *)representativeItem NS_DESIGNATED_INITIALIZER;
 
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+
+/// Construct a UIBarButtonItemGroup that cannot be moved or removed under UINavigationBar customization.
++ (UIBarButtonItemGroup *)fixedGroupWithRepresentativeItem:(nullable UIBarButtonItem *)representativeItem items:(NSArray<UIBarButtonItem *> *)items API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
+/// Construct a UIBarButtonItemGroup that can be moved but cannot be removed under UINavigationBar customization.
++ (UIBarButtonItemGroup *)movableGroupWithCustomizationIdentifier:(NSString *)customizationIdentifier representativeItem:(nullable UIBarButtonItem *)representativeItem items:(NSArray<UIBarButtonItem *> *)items API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
+/// Construct a UIBarButtonItemGroup that can be moved or added/removed under UINavigationBar customization.
++ (UIBarButtonItemGroup *)optionalGroupWithCustomizationIdentifier:(NSString *)customizationIdentifier inDefaultCustomization:(BOOL)inDefaultCustomization representativeItem:(nullable UIBarButtonItem *)representativeItem items:(NSArray<UIBarButtonItem *> *)items API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
 /// The bar button items associated with this group. Changing these items will affect the bar displaying these items without needing to re-set the groups that are in that bar. Any UIBarButtonItems that are already in group will be removed from that group.
 @property (nonatomic, readwrite, copy) NSArray<UIBarButtonItem *> *barButtonItems;
@@ -32,6 +41,15 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 /// Returns YES if the representativeItem of this group is currently being displayed, rather than its barButtonItems.
 @property (nonatomic, readonly, assign, getter = isDisplayingRepresentativeItem) BOOL displayingRepresentativeItem;
 
+/// Instructs UIKit to ensure that the functionality in this group is made available to the user regardless of customization status. On iPhone and iPad idioms, UIKit currently places these items in the overflow menu; this property has no effect on macOS idiom.
+@property (nonatomic, readwrite, assign) BOOL alwaysAvailable API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
+/// A UIMenuElement that should substitute for the UIBarButtonItemGroup when displayed in a menu.
+@property (nonatomic, readwrite, copy, nullable) UIMenuElement *menuRepresentation API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
+/// If the group should be hidden from display.
+@property (nonatomic, readwrite, assign, getter = isHidden) BOOL hidden API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+
 @end
 
 @interface UIBarButtonItem (UIBarButtonItemGroup)
@@ -41,7 +59,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIBarButtonItemGroup.h>

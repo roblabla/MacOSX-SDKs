@@ -23,6 +23,12 @@ Classes:
   SwiftName: MKLocalSearch.Request
 - Name: MKLocalSearchResponse
   SwiftName: MKLocalSearch.Response
+- Name: MKLookAroundBadgePosition
+  SwiftName: MKLookAroundViewController.BadgePosition
+- Name: MKLookAroundSnapshot
+  SwiftName: MKLookAroundSnapshotter.Snapshot
+- Name: MKLookAroundSnapshotOptions
+  SwiftName: MKLookAroundSnapshotter.Options
 - Name: MKMapSnapshot
   SwiftName: MKMapSnapshotter.Snapshot
 - Name: MKMapSnapshotOptions
@@ -185,6 +191,14 @@ Tags:
   SwiftName: MKLocalSearchCompleter.ResultType
 - Name: MKLocalSearchResultType
   SwiftName: MKLocalSearch.ResultType
+- Name: MKStandardMapEmphasisStyle
+  SwiftName: MKStandardMapConfiguration.EmphasisStyle
+- Name: MKMapElevationStyle
+  SwiftName: MKMapConfiguration.ElevationStyle
+- Name: MKDirectionsRoutePreference
+  SwiftName: MKDirections.RoutePreference
+- Name: MKMapFeatureType
+  SwiftName: MKMapFeatureAnnotation.FeatureType
 Typedefs:
 - Name: MKDirectionsHandler
   SwiftName: MKDirections.DirectionsHandler

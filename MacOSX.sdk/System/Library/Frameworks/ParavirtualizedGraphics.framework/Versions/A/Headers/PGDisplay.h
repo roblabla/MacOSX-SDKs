@@ -96,7 +96,7 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
 @property(readwrite, nonatomic, nullable, retain) dispatch_queue_t queue API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
 
 /*!
- @property presentModeChangeHandler
+ @property modeChangeHandler
  @abstract The block to invoke to handle display mode change.
  @discussion Handler invocation indicative of display mode change.
  */

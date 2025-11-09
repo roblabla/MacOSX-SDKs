@@ -2,7 +2,7 @@
 //  AVB17221AECPInterface.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2011-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -63,7 +63,7 @@ typedef void (^AVB17221AECPInterfaceCompletion)(NSError * __nullable e, AVB17221
 				It provides callbacks per entity EntityID via a handler object implementing the AVB17221AECPClient protocol. AVB17221AECPInterface objects
 				are typically not created directly but are created indirectly and accessed via the aecp property of the AVBInterface object.
  */
-API_AVAILABLE(macos(10.8))
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 @interface AVB17221AECPInterface : AVB1722ControlInterface
 
 
@@ -89,13 +89,13 @@ API_AVAILABLE(macos(10.8))
 	@param		targetEntityID	The Entity ID of the entity the messages are to.
 	@result		YES if the handler was added, NO if there is already a handler or if the routing ID couldn't be added.
  */
-- (BOOL)setCommandHandler:(id<AVB17221AECPClient>)handler forEntityID:(uint64_t)targetEntityID API_AVAILABLE(macos(10.11));
+- (BOOL)setCommandHandler:(id<AVB17221AECPClient>)handler forEntityID:(uint64_t)targetEntityID API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@method		removeCommandHandlerForEntityID:
 	@abstract	Removed a handler for command messages to or from a specified EntityID.
 	@param		targetEntityID	The EntityID of the entity the messages are to.
  */
-- (void)removeCommandHandlerForEntityID:(uint64_t)targetEntityID API_AVAILABLE(macos(10.11));
+- (void)removeCommandHandlerForEntityID:(uint64_t)targetEntityID API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, tvos);
 
 /*!
 	@method		setResponseHandler:forControllerEntityID:
@@ -104,13 +104,13 @@ API_AVAILABLE(macos(10.8))
 	@param		controllerEntityID	The Entity ID of the controller the messages are for.
 	@result		YES if the handler was added, NO if there is already a handler or if the routing ID couldn't be added.
  */
-- (BOOL)setResponseHandler:(id<AVB17221AECPClient>)handler forControllerEntityID:(uint64_t)controllerEntityID API_AVAILABLE(macos(10.11));
+- (BOOL)setResponseHandler:(id<AVB17221AECPClient>)handler forControllerEntityID:(uint64_t)controllerEntityID API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, tvos);
 /*!
 	@method		removeResponseHandlerForControllerEntityID:
 	@abstract	Removed a handler for response messages to or from a specified EntityID.
 	@param		controllerEntityID	The EntityID of the controller the messages are for.
  */
-- (void)removeResponseHandlerForControllerEntityID:(uint64_t)controllerEntityID API_AVAILABLE(macos(10.11));
+- (void)removeResponseHandlerForControllerEntityID:(uint64_t)controllerEntityID API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, tvos);
 
 /*!
 	@method		sendCommand:toMACAddress:completionHandler:

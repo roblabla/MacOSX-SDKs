@@ -11,6 +11,7 @@
 #import <Metal/MTLBuffer.h>
 #import <Metal/MTLTexture.h>
 #import <Metal/MTLTypes.h>
+#import <Metal/MTLAccelerationStructure.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -61,6 +62,15 @@ MTL_EXPORT API_AVAILABLE(macos(10.13), ios(10.0))
  CPU cache mode is ignored for MTLStorageModePrivate.
  */
 @property (readwrite, nonatomic) MTLCPUCacheMode cpuCacheMode;
+
+
+
+/*!
+ @property sparsePageSize
+ @abstract The sparse page size to use for resources created from the heap.
+ */
+@property (readwrite, nonatomic) MTLSparsePageSize sparsePageSize API_AVAILABLE(macos(13.0), ios(16.0));
+
 
 /*!
  @property hazardTrackingMode
@@ -224,6 +234,48 @@ API_AVAILABLE(macos(10.13), ios(10.0))
  */
 - (nullable id<MTLTexture>)newTextureWithDescriptor:(MTLTextureDescriptor *)descriptor
                                              offset:(NSUInteger)offset API_AVAILABLE(macos(10.15), ios(13.0));
+
+/*!
+ @method newAccelerationStructureWithSize:
+ @abstract Create a new acceleration structure backed by heap memory.
+ @return The acceleration structure or nil if heap is full. Note that the MTLAccelerationStructure merely represents storage for an acceleration structure. It will still need to be populated via a build, copy, refit, etc.
+ */
+- (nullable id <MTLAccelerationStructure>)newAccelerationStructureWithSize:(NSUInteger)size API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method newAccelerationStructureWithDescriptor:
+ @abstract Create a new acceleration structure backed by heap memory.
+ @discussion This is a convenience method which creates the acceleration structure backed by heap memory. The acceleration structure size is inferred based on the descriptor.
+ @return The acceleration structure or nil if heap is full. Note that the MTLAccelerationStructure merely represents storage for an acceleration structure. It will still need to be populated via a build, copy, refit, etc.
+ */
+- (nullable id <MTLAccelerationStructure>)newAccelerationStructureWithDescriptor:(MTLAccelerationStructureDescriptor *)descriptor API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method newAccelerationStructureWithSize:offset:
+ @abstract Create a new acceleration structure backed by heap memory at the specified placement offset.
+ @discussion This method can only be used when heapType is set to MTLHeapTypePlacement.
+ Use "MTLDevice heapAccelerationStructureSizeAndAlignWithSize:" or "MTLDevice heapAccelerationStructureSizeAndAlignWithDescriptor:" to determine requiredSize and requiredAlignment.
+ Any resources that exist in this heap at overlapping half-open range [offset, offset + requiredSize) are implicitly aliased with the new resource.
+ @param size The requested size of the acceleration structure, in bytes.
+ @param offset The requested offset of the acceleration structure inside the heap, in bytes. Behavior is undefined if "offset + requiredSize > heap.size" or "offset % requiredAlignment != 0".
+ @return The acceleration structure, or nil if the heap is not a placement heap
+ */
+- (nullable id <MTLAccelerationStructure>)newAccelerationStructureWithSize:(NSUInteger)size offset:(NSUInteger)offset API_AVAILABLE(macos(13.0), ios(16.0));
+
+/*!
+ @method newAccelerationStructureWithDescriptor:offset:
+ @abstract Create a new acceleration structure backed by heap memory at the specified placement offset.
+ @discussion This is a convenience method which computes the acceleration structure size based on the descriptor.
+ This method can only be used when heapType is set to MTLHeapTypePlacement.
+ Use "MTLDevice heapAccelerationStructureSizeAndAlignWithSize:" or "MTLDevice heapAccelerationStructureSizeAndAlignWithDescriptor:" to determine requiredSize and requiredAlignment.
+ Any resources that exist in this heap at overlapping half-open range [offset, offset + requiredSize) are implicitly aliased with the new resource.
+ @param descriptor The acceleration structure descriptor
+ @param offset The requested offset of the acceleration structure inside the heap, in bytes. Behavior is undefined if "offset + requiredSize > heap.size" or "offset % requiredAlignment != 0".
+ @return The acceleration structure, or nil if the heap is not a placement heap
+ */
+- (nullable id <MTLAccelerationStructure>)newAccelerationStructureWithDescriptor:(MTLAccelerationStructureDescriptor *)descriptor offset:(NSUInteger)offset API_AVAILABLE(macos(13.0), ios(16.0));
+
+
 @end
 
 NS_ASSUME_NONNULL_END

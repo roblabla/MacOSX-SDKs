@@ -7,7 +7,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if !NSLAYOUTANCHOR_H
 #define NSLAYOUTANCHOR_H 1
@@ -125,7 +125,7 @@ NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0)) NS_SWIFT_UI_ACTOR
 - (NSLayoutConstraint *)constraintLessThanOrEqualToSystemSpacingBelowAnchor:(NSLayoutYAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(macos(11.0),ios(11.0),tvos(11.0));
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/NSLayoutAnchor.h>

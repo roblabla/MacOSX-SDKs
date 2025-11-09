@@ -10,7 +10,7 @@
 @class NSInvocation, NSMethodSignature, NSCoder, NSString, NSEnumerator;
 @class Protocol;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /***************	Basic protocols		***************/
 
@@ -124,4 +124,4 @@ NS_INLINE id _Nullable CFBridgingRelease(CFTypeRef CF_CONSUMED _Nullable X) NS_R
 
 #endif
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

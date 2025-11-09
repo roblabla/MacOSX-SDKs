@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A50F51B0-741D-3A2B-8A86-5B61BE109BF7
+    value:           87F5A0B0-46D5-332C-BEA8-D77484DB5D9F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FE1AFC54-B1BE-3D7D-B601-96B254718222
+    value:           957082AC-6813-3C78-8BCC-33FD898E9E3B
 install-name:    '/System/Library/PrivateFrameworks/Install.framework/Frameworks/DistributionKit.framework/Versions/A/DistributionKit'
 current-version: 1000
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IFJS_ChoiceItemClassDefinition, _IFJS_MyEvaluatorMakeGetProperty, 
                        _IFJS_MySearchResultsMakeGetProperty, _IFJS_SystemBootROMFeatureFlagsMakeGetProperty, 
                        _IFJS_SystemBootROMSupportsAPFSMakeGetProperty, _PKDistributionControllerErrorDomain, 

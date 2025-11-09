@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CD83B8A4-F9A0-3C34-ACAF-8A27D969D5CA
+    value:           CD505844-619E-35B8-97A2-DF9B2BBF0A44
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C75ED5CF-8C61-30D5-83E2-B3255AAEDAF5
+    value:           8EFC472A-3A22-3B9F-973F-884BFA452315
 install-name:    '/System/Library/PrivateFrameworks/CoreChart.framework/Versions/A/CoreChart'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CCBaseConfigApple, _CCBaseConfigVega, _CCChartViewBaseConfig, 
                        _CCChartViewCATransactionFromBackgroundThread, _CCChartViewDelegate, 
                        _CCChartViewRendererType, _CCChartViewZoomFactor, _CCRendererTypeCoreAnimation, 

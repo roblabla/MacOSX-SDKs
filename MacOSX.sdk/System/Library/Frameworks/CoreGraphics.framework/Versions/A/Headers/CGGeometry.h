@@ -15,6 +15,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 
 CF_ASSUME_NONNULL_BEGIN
 
+#ifndef CF_DEFINES_CG_TYPES
 /* Points. */
 struct
 CGPoint {
@@ -54,6 +55,8 @@ typedef struct CG_BOXABLE CGRect CGRect;
 typedef CF_CLOSED_ENUM(uint32_t, CGRectEdge) {
     CGRectMinXEdge, CGRectMinYEdge, CGRectMaxXEdge, CGRectMaxYEdge
 };
+
+#endif /* CF_DEFINES_CG_TYPES */
 
 /* The "zero" point -- equivalent to CGPointMake(0, 0). */ 
 
@@ -114,7 +117,7 @@ CG_EXTERN CGFloat CGRectGetMidX(CGRect rect)
 CG_EXTERN CGFloat CGRectGetMaxX(CGRect rect)
     CG_AVAILABLE_STARTING(10.0, 2.0);
 
-/* Return the bottommost y-value of `rect'. */
+/* Return the smallest y-value of `rect'. */
 
 CG_EXTERN CGFloat CGRectGetMinY(CGRect rect)
     CG_AVAILABLE_STARTING(10.0, 2.0);
@@ -124,7 +127,7 @@ CG_EXTERN CGFloat CGRectGetMinY(CGRect rect)
 CG_EXTERN CGFloat CGRectGetMidY(CGRect rect)
     CG_AVAILABLE_STARTING(10.0, 2.0);
 
-/* Return the topmost y-value of `rect'. */
+/* Return the largest y-value of `rect'. */
 
 CG_EXTERN CGFloat CGRectGetMaxY(CGRect rect)
     CG_AVAILABLE_STARTING(10.0, 2.0);

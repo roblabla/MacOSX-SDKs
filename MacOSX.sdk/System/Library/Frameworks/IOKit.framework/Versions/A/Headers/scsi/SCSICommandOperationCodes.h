@@ -232,7 +232,10 @@ enum
     kSCSICmd_XDWRITEREAD_10           		= 0x53,
     kSCSICmd_XPWRITE                        = 0x51,
     
-    kSCSICmdVariableLengthCDB				= 0x7F
+    kSCSICmdVariableLengthCDB				= 0x7F,
+
+    kSCSICmd_VendorSpecific_Start           = 0xC0,
+    kSCSICmd_VendorSpecific_End             = 0xFF,
 };
 
 /* Service Action Definitions for the Variable Length CDB (7Fh) command */

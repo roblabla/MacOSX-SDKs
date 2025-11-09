@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A6ABA59D-438E-3E98-943E-7054DD7F9BA9
+    value:           426B35F6-BF18-3E0A-8C01-39A38F198A93
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F1E756F5-9BB0-3AC2-8381-6CAB6803E8E1
+    value:           518AC3A0-619E-39F2-9589-A551F59E7672
 install-name:    '/usr/lib/libSLAMDynamic.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ SLAMObjC ]
 ...

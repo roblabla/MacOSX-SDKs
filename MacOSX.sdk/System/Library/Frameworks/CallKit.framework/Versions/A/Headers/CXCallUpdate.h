@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Any property that is not set will be ignored
 
-CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0))  API_UNAVAILABLE(macos, tvos, watchos)
+CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), watchos(9.0))  API_UNAVAILABLE(macos, tvos)
 @interface CXCallUpdate : NSObject <NSCopying>
 
 /// Handle for the remote party (for an incoming call, the caller; for an outgoing call, the callee)
